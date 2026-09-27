@@ -27,6 +27,9 @@ import { SAMBA_BOSSA_WORLD } from './sambaBossa';
 import { gospel } from './gospel';
 import { industrial } from './industrial';
 
+import { CLASSICAL_WORLD } from './classical';
+import { NEO_SOUL_WORLD } from './neoSoul';
+
 export const GOSPEL_WORLD: GenreWorld = {
   ...FOLK_WORLD,
   id: 'gospel',
@@ -183,7 +186,7 @@ const SOURCE_WORLDS: Record<string, GenreWorld> = Object.fromEntries([
   REGGAETON_DEMBOW_WORLD, ZOUK_WORLD, KIZOMBA_WORLD, BLUES_WORLD, JAZZ_WORLD, SWING_WORLD,
   FUNK_WORLD, ROCK_WORLD, METAL_WORLD, HIP_HOP_WORLD, ELECTRONIC_WORLD, HOUSE_TECHNO_WORLD, AFROBEATS_WORLD,
   COUNTRY_WORLD, FOLK_WORLD, REGGAE_DUB_WORLD, SKA_WORLD, SAMBA_BOSSA_WORLD,
-  GOSPEL_WORLD, INDUSTRIAL_WORLD,
+  GOSPEL_WORLD, INDUSTRIAL_WORLD, CLASSICAL_WORLD, NEO_SOUL_WORLD,
 ].map(world => [world.id, world]));
 
 function cloneStyleSeeds(source: GenreWorld, genreId: string): GenreWorld['styleDefinitions'] {

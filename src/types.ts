@@ -329,6 +329,55 @@ export interface GenreStyleDefinition {
   sectionProgressions?: Partial<Record<SectionType | string, string[]>>;
 }
 
+export interface PhysicalPlayerState {
+  // Breath / Wind
+  lungCapacity: number; // 1.0 (full) to 0.0 (empty)
+  timeSinceLastBreath: number;
+  
+  // Fatigue / Mechanics
+  stamina: number; // 1.0 to 0.0 (drops during high-speed/high-velocity passages)
+  
+  // Biomechanics & Hand Travel
+  lastHandPositionPitch: number; // Pitch of the last played note
+  actuationSyncErrorMs: number; // Disconnect between Left Hand and Right Hand
+  
+  // Phrasing
+  phraseArcPosition: number; // 0.0 (start of phrase) to 1.0 (end of phrase)
+}
+
+export interface ElectronicSystemState {
+  // DAW / Hardware Physics Tracker
+  lastVoltagePitch: number; // For calculating precise Portamento/Glide times
+  thermalAnalogDrift: number; // Free-running LFO for analog pitch instability
+  globalSidechainDuckAmount: number; // Currently active gain reduction from the Kick Drum
+}
+
+export interface RhythmFeel {
+  syncopation: number;
+  swing: number;
+  pocket?: 'ahead' | 'center' | 'behind' | 'drunk' | 'strict_grid'; // Electronic uses strict_grid
+  pocketDepth?: number; // How many milliseconds off the grid (e.g., 10ms to 40ms)
+  intonationSystem?: 'equal' | 'just_intonation' | 'expressive_melodic';
+  quantizeJitterMs?: number; // MPC/MIDI clock jitter
+}
+
+export interface PerformanceRule {
+  evaluateNote: (phrase: any, index: number, acousticState?: PhysicalPlayerState, electronicState?: ElectronicSystemState) => any[];
+}
+
+export interface DrumRule {
+  evaluateStep: (step: any, stickState?: any) => any[];
+}
+
+export interface SongStyleDefinition {
+  id: string;
+  name: string;
+  tempoRange?: [number, number];
+  rhythmOverride?: RhythmFeel;
+  performanceRules?: Record<string, PerformanceRule>;
+  drumRules?: DrumRule;
+}
+
 export interface GenreWorld {
   id: LensId;
   name: string;
@@ -353,6 +402,10 @@ export interface GenreWorld {
   grooveMechanics?: GrooveMechanics;
   prominentChords?: string[];
   crossLinks?: string[];
+  rhythm?: RhythmFeel;
+  performanceRules?: Record<string, PerformanceRule>;
+  drumRules?: DrumRule;
+  styles?: Record<string, SongStyleDefinition>;
 }
 
 // Backward compatibility alias

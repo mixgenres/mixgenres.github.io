@@ -57,6 +57,8 @@ export interface PerfNote {
   drum?: boolean;
   /** specific string identifier for the technique/articulation applied */
   articulation?: string;
+  /** explicit bellows movement direction for free-reed instruments */
+  bellowsDirection?: 'opening' | 'closing';
 }
 
 export interface PerfCC {
@@ -1557,26 +1559,52 @@ export function compile(sheet: Sheet, _opts: CompileOptions = {}): Performance {
               finalArticulation = 'chicharra';
             }
 
+            // Explicit Bellows Direction for free-reed instruments (bandoneón, accordion, concertina)
+            const isBellows = /bandoneon|accordion|concertina/.test(instLow);
+            let bellowsDirection: 'opening' | 'closing' | undefined = undefined;
+            if (isBellows) {
+              bellowsDirection = (/cerrar|closing|close|push|pushing/i.test(finalArticulation || ''))
+                ? 'closing'
+                : (/abrir|opening|open|pull|pulling/i.test(finalArticulation || ''))
+                ? 'opening'
+                : (a.bar % 2 === 0 ? 'opening' : 'closing');
+            }
+
+            // Section Glue for Salsa/Jazz Horns: per-voice detune (±3–6 cents) and timing offset (5–15ms)
+            let noteTime = n.time;
+            let noteMidi = n.midi;
+            const isHornOrBrass = isWindOrBrass || /trumpet|trombone|sax|brass|horn/.test(instLow);
+            const isLatinOrJazzHorn = isHornOrBrass && (/salsa|mambo|jazz|latin|timba|son|funk/.test(`${resolvedStyle.id} ${resolvedStyle.primaryGenre}`.toLowerCase()));
+            if (isLatinOrJazzHorn) {
+              const hornSeed = seedOf(t.id, a.bar, a.onsetIndex, vi, 'horn_glue');
+              const detuneCents = (rand01(hornSeed) - 0.5) * 8; // ±4 cents
+              noteMidi = n.midi + (detuneCents / 100);
+              const timingJitterSec = (rand01(hornSeed ^ 0x4f3e) - 0.5) * 0.012; // ±6ms
+              noteTime = Math.max(0, n.time + timingJitterSec);
+            }
+
             notes.push({
-              time: n.time,
+              time: noteTime,
               dur: n.durSeconds,
-              midi: n.midi,
+              midi: noteMidi,
               pitchBend: n.pitchBend ?? slideBend ?? (ni === 0 ? idiomBend : undefined),
               vel: finalVel,
               trackId: t.id, bar: a.bar,
               articulation: finalArticulation,
+              bellowsDirection,
             });
 
             // Bandoneón Sub-Bass Coupling (zinc reed growl) (Prompt Tango 1)
             if (t.instrumentId === 'bandoneon' && n.midi < 48) {
               notes.push({
-                time: n.time + 0.003,
+                time: noteTime + 0.003,
                 dur: n.durSeconds,
-                midi: n.midi + 12,
+                midi: noteMidi + 12,
                 pitchBend: n.pitchBend ?? slideBend ?? (ni === 0 ? idiomBend : undefined),
                 vel: Math.max(1, Math.round(finalVel * 0.4)),
                 trackId: t.id, bar: a.bar,
                 articulation: 'sub-bass-coupling',
+                bellowsDirection,
               });
             }
           }

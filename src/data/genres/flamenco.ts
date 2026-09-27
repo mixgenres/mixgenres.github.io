@@ -1,4 +1,5 @@
 import { GenreWorld } from '../../types';
+import { GuitarTimbreControl } from '../../engine/theory/physicsInterfaces';
 
 export const FLAMENCO_WORLD: GenreWorld = {
   "id": "flamenco",
@@ -8,6 +9,60 @@ export const FLAMENCO_WORLD: GenreWorld = {
   "level": "world",
   "description": "Deep Flamenco compás architectures: Soleá and",
   "prominentChords": ['Phrygian Dom', 'Maj (bII)', 'Min 9', 'Andalusian'],
+  rhythm: { syncopation: 0.8, swing: 0.0, pocket: 'ahead', pocketDepth: 10 },
+  styles: {
+    'rumba': {
+      id: 'rumba_flamenca',
+      name: 'Rumba Flamenca',
+      tempoRange: [90, 120],
+      performanceRules: {
+        'spanish_guitar': {
+          evaluateNote: (phrase: any, index: number) => {
+            const note = phrase.notes[index];
+            const isBackbeat = (note.time % 4 === 1) || (note.time % 4 === 3);
+
+            const timbre: GuitarTimbreControl = {
+              pluckPosition: 0.3,
+              fleshToNailRatio: 0.8,
+              pickAngle: 20,
+              palmMuteAmount: 0.0,
+              stringSelection: ((note.pitch ?? 60) % 6) + 1,
+              fretNoiseLevel: 0.4,
+              fretBuzz: 0.2,
+              vibrato: { delayMs: 50, rateHz: 5.0, depthCents: 10, rateRamp: 0.1 },
+              isHarmonic: false,
+              bodyHit: isBackbeat ? 'slap' : 'none',
+              sympatheticResonance: 0.6
+            };
+
+            return [{ ...note, type: 'plucked', articulation: isBackbeat ? 'golpe_slap' : 'rasgueado_loose', timbreControl: timbre }];
+          }
+        },
+        'spanish-guitar': {
+          evaluateNote: (phrase: any, index: number) => {
+            const note = phrase.notes[index];
+            const isBackbeat = (note.time % 4 === 1) || (note.time % 4 === 3);
+
+            const timbre: GuitarTimbreControl = {
+              pluckPosition: 0.3,
+              fleshToNailRatio: 0.8,
+              pickAngle: 20,
+              palmMuteAmount: 0.0,
+              stringSelection: ((note.pitch ?? 60) % 6) + 1,
+              fretNoiseLevel: 0.4,
+              fretBuzz: 0.2,
+              vibrato: { delayMs: 50, rateHz: 5.0, depthCents: 10, rateRamp: 0.1 },
+              isHarmonic: false,
+              bodyHit: isBackbeat ? 'slap' : 'none',
+              sympatheticResonance: 0.6
+            };
+
+            return [{ ...note, type: 'plucked', articulation: isBackbeat ? 'golpe_slap' : 'rasgueado_loose', timbreControl: timbre }];
+          }
+        }
+      }
+    }
+  },
   "styleDefinitions": [
     {
       "id": "flamenco-solea-style",
@@ -5286,3 +5341,5 @@ export const FLAMENCO_WORLD: GenreWorld = {
     "Flamenco ↔ Arabic / Mediterranean"
   ]
 };
+
+export const FlamencoGenre = FLAMENCO_WORLD;

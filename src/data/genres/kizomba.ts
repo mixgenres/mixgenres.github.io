@@ -1,4 +1,5 @@
 import { GenreWorld } from '../../types';
+import { AnalogSynthTimbreControl, SamplerTimbreControl } from '../../engine/theory/physicsInterfaces';
 
 export const KIZOMBA_WORLD: GenreWorld = {
   "id": "kizomba",
@@ -7,6 +8,64 @@ export const KIZOMBA_WORLD: GenreWorld = {
   "color": "#c86d3b",
   "level": "world",
   "description": "The sensual partner dance style of",
+  rhythm: { syncopation: 0.4, swing: 0.1, pocket: 'strict_grid', pocketDepth: 0, intonationSystem: 'equal', quantizeJitterMs: 2 },
+  performanceRules: {
+    'synth_bass': {
+      evaluateNote: (phrase: any, index: number, _acousticState?: any, electronicState?: any) => {
+        const note = phrase.notes[index];
+
+        const timbre: AnalogSynthTimbreControl = {
+          oscillatorPhase: 'free_running',
+          filterEnvelopeDepth: 0.1,
+          distortion: { type: 'none', driveAmount: 0 },
+          subOscillatorLevel: 1.0,
+          sidechainDuckDepth: (electronicState?.globalSidechainDuckAmount ?? 1.0) * 1.0,
+          portamentoTimeMs: 250,
+          intonationOffsetCents: 0,
+          actuationSyncOffsetMs: 0
+        };
+
+        return [{ ...note, type: 'synth', articulation: 'legato_glide', timbreControl: timbre }];
+      }
+    },
+    'sub-bass': {
+      evaluateNote: (phrase: any, index: number, _acousticState?: any, electronicState?: any) => {
+        const note = phrase.notes[index];
+
+        const timbre: AnalogSynthTimbreControl = {
+          oscillatorPhase: 'free_running',
+          filterEnvelopeDepth: 0.1,
+          distortion: { type: 'none', driveAmount: 0 },
+          subOscillatorLevel: 1.0,
+          sidechainDuckDepth: (electronicState?.globalSidechainDuckAmount ?? 1.0) * 1.0,
+          portamentoTimeMs: 250,
+          intonationOffsetCents: 0,
+          actuationSyncOffsetMs: 0
+        };
+
+        return [{ ...note, type: 'synth', articulation: 'legato_glide', timbreControl: timbre }];
+      }
+    }
+  },
+  drumRules: {
+    evaluateStep: (step: any) => {
+      const percussionTimbre: SamplerTimbreControl = {
+        samplePlaybackRate: 0.6,
+        formantShiftAmount: 0,
+        aliasingArtifacts: 0.6,
+        transientShaping: { attackMs: 15, sustainLevel: 0.4 },
+        distortion: { type: 'tape_saturation', driveAmount: 0.3 },
+        intonationOffsetCents: 0,
+        actuationSyncOffsetMs: 0
+      };
+
+      return [
+        ...(step.kick ? [{ type: 'kick_sub', time: step.time, velocity: step.velocity * 0.8, timbreControl: percussionTimbre }] : []),
+        ...(step.snare ? [{ type: 'soft_clap', time: step.time, velocity: step.velocity * 0.7, timbreControl: percussionTimbre }] : []),
+        ...(step.hihat ? [{ type: 'shaker', time: step.time, velocity: step.velocity * 0.6 }] : [])
+      ];
+    }
+  },
   "styleDefinitions": [
     {
       "id": "kizomba-tradicional",

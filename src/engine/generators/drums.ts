@@ -5,6 +5,98 @@ import { INSTRUMENTS_BY_ID, type DrumVoice } from '../../data/instruments';
 import { findKitComponent, type RhythmicIntent } from '../performance/musicSemantics';
 import type { TransitionEvent } from '../sequencing/grid';
 
+export interface RhythmStep {
+  time: number;
+  velocity: number;
+  kick?: boolean;
+  snare?: boolean;
+  hihat?: boolean;
+  isOpen?: boolean;
+  isPedal?: boolean;
+  ghosts?: { time: number; velocity: number }[];
+  [key: string]: any;
+}
+
+export interface RhythmContext {
+  grid: RhythmStep[];
+  genre?: any;
+  instrument?: any;
+  [key: string]: any;
+}
+
+export interface AcousticEvent {
+  type: string;
+  velocity: number;
+  time: number;
+  [key: string]: any;
+}
+
+export class DrumGenerator {
+  public createDrumHit(type: string, velocity: number, time: number): AcousticEvent {
+    return { type, velocity, time };
+  }
+
+  public generateGroove(context: RhythmContext): AcousticEvent[] {
+    const events: AcousticEvent[] = [];
+    const drumRules = context?.songStyle?.drumRules || context?.genre?.drumRules || context?.instrument?.definition?.drumRules;
+
+    const stickState = {
+      lastSnareHitTime: -1,
+      lastKickTime: -1,
+      lastHihatTime: -1,
+    };
+
+    if (drumRules && typeof drumRules.evaluateStep === 'function') {
+      for (const step of context.grid || []) {
+        const evaluated = drumRules.evaluateStep(step, stickState);
+        events.push(...evaluated);
+
+        if (step.snare) stickState.lastSnareHitTime = step.time;
+        if (step.kick) stickState.lastKickTime = step.time;
+        if (step.hihat) stickState.lastHihatTime = step.time;
+        if (step.ghosts && step.ghosts.length > 0) {
+          stickState.lastSnareHitTime = step.ghosts[step.ghosts.length - 1].time;
+        }
+      }
+      return events;
+    }
+
+    for (const step of context.grid || []) {
+      if (step.kick) {
+        events.push(this.createDrumHit('kick', step.velocity, step.time));
+        stickState.lastKickTime = step.time;
+      }
+
+      if (step.snare) {
+        events.push(this.createDrumHit('snare', step.velocity, step.time));
+        if (step.velocity > 90) {
+          events.push(this.createDrumHit('snare_rimshot', step.velocity, step.time));
+        } else if (step.velocity < 50) {
+          events.push(this.createDrumHit('snare_ghost', step.velocity, step.time));
+        }
+        stickState.lastSnareHitTime = step.time;
+      }
+
+      if (step.hihat) {
+        let hatType = 'hihat_closed';
+        if (step.isOpen) hatType = 'hihat_open';
+        else if (step.isPedal) hatType = 'hihat_pedal';
+        else if (step.velocity < 60) hatType = 'hihat_tip';
+        else hatType = 'hihat_shank';
+
+        events.push(this.createDrumHit(hatType, step.velocity, step.time));
+        stickState.lastHihatTime = step.time;
+      }
+
+      if (step.ghosts) {
+        step.ghosts.forEach(g => events.push(this.createDrumHit('snare_ghost', g.velocity, g.time)));
+      }
+    }
+
+    return events;
+  }
+}
+
 export const GM = {
   kick: 36, kickTight: 35,
   snare: 38, snareRim: 37, snareElectric: 40,

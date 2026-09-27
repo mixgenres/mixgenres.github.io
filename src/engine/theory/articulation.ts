@@ -42,6 +42,25 @@ export type Fidelity =
   /** Stands in for the gesture; a listener hears a placeholder. */
   | 'symbolic';
 
+export type ArticulationType =
+  | 'tongued'
+  | 'legato'
+  | 'staccato'
+  | 'basic'
+  | 'lip_slur'
+  | 'fall'
+  | 'marcato'
+  | 'arrastre'
+  | 'legato_squeeze'
+  | 'spiccato'
+  | 'detache'
+  | 'portamento'
+  | 'snare_ghost'
+  | 'snare_rimshot'
+  | 'hihat_tip'
+  | 'hihat_shank'
+  | string;
+
 export type ArticulationFamily =
   | 'duration'
   | 'attack'
@@ -178,6 +197,87 @@ const SPECS: ArticulationSpec[] = [
     fidelity: 'faithful',
     durationScale: 0.78,
     gapFill: 0.7,
+  },
+  {
+    id: 'spiccato',
+    family: 'duration',
+    aliases: ['spiccato', 'saltando', 'bouncing-bow', 'spicc'],
+    uses: ['note-length', 'velocity'],
+    fidelity: 'faithful',
+    durationScale: 0.28,
+    gapFill: 0.25,
+    velocityScale: 1.05,
+    instrumentFamilies: ['bowed'],
+  },
+  {
+    id: 'detache',
+    family: 'duration',
+    aliases: ['detache', 'detaché', 'broad-bow'],
+    uses: ['note-length'],
+    fidelity: 'faithful',
+    durationScale: 0.95,
+    gapFill: 0.9,
+    instrumentFamilies: ['bowed'],
+  },
+  {
+    id: 'legato_squeeze',
+    family: 'duration',
+    aliases: ['legato_squeeze', 'legato-squeeze', 'bellows-squeeze', 'squeeze'],
+    uses: ['note-length', 'velocity'],
+    fidelity: 'faithful',
+    durationScale: 1.25,
+    gapFill: 1.02,
+    velocityScale: 1.05,
+    instrumentFamilies: ['bellows-and-keys'],
+  },
+  {
+    id: 'lip_slur',
+    family: 'pitch-gesture',
+    aliases: ['lip_slur', 'lip-slur', 'slur-lip'],
+    uses: ['note-length', 'pitch-bend'],
+    fidelity: 'faithful',
+    durationScale: 1.15,
+    instrumentFamilies: ['brass'],
+  },
+  {
+    id: 'snare_ghost',
+    family: 'attack',
+    aliases: ['snare_ghost', 'snare-ghost', 'ghost-snare', 'tap-snare'],
+    uses: ['velocity', 'note-length'],
+    fidelity: 'faithful',
+    velocityScale: 0.38,
+    durationScale: 0.3,
+    instrumentFamilies: ['kit', 'metal-and-wood'],
+  },
+  {
+    id: 'snare_rimshot',
+    family: 'attack',
+    aliases: ['snare_rimshot', 'snare-rimshot', 'power-rimshot'],
+    uses: ['velocity', 'note-length'],
+    fidelity: 'faithful',
+    velocityScale: 1.25,
+    durationScale: 0.45,
+    instrumentFamilies: ['kit'],
+  },
+  {
+    id: 'hihat_tip',
+    family: 'timbre',
+    aliases: ['hihat_tip', 'hihat-tip', 'hat-tip', 'tip-hat'],
+    uses: ['velocity'],
+    fidelity: 'faithful',
+    velocityScale: 0.65,
+    durationScale: 0.35,
+    instrumentFamilies: ['kit'],
+  },
+  {
+    id: 'hihat_shank',
+    family: 'timbre',
+    aliases: ['hihat_shank', 'hihat-shank', 'hat-shank', 'shank-hat'],
+    uses: ['velocity'],
+    fidelity: 'faithful',
+    velocityScale: 1.15,
+    durationScale: 0.5,
+    instrumentFamilies: ['kit'],
   },
 
 

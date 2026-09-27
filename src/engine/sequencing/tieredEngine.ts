@@ -708,6 +708,17 @@ export function realizePerformanceCell(params: RealizeCellParams): PerformanceCe
     const durBeats = Math.max(0.25, (a.durationSteps ?? 1) / (a.stepsPerBar ?? 16) * bt.beatsPerBar);
     const durSeconds = durBeats * secPerBeat;
 
+    const isBellows = /bandoneon|accordion|concertina/.test((t.instrumentId || '').toLowerCase());
+    const finalArt = translatedArticulation || a.articulation;
+    let bellowsDirection: 'opening' | 'closing' | undefined = undefined;
+    if (isBellows) {
+      bellowsDirection = (/cerrar|closing|close|push|pushing/i.test(finalArt || ''))
+        ? 'closing'
+        : (/abrir|opening|open|pull|pulling/i.test(finalArt || ''))
+        ? 'opening'
+        : (a.bar % 2 === 0 ? 'opening' : 'closing');
+    }
+
     for (let vi = 0; vi < midiValues.length; vi++) {
       const midi = midiValues[vi];
       const tonicPc = (parsedChord.rootPc ?? 0) as number;
@@ -721,7 +732,8 @@ export function realizePerformanceCell(params: RealizeCellParams): PerformanceCe
         vel,
         trackId: t.id,
         bar: a.bar,
-        articulation: translatedArticulation || a.articulation,
+        articulation: finalArt,
+        bellowsDirection,
       });
 
       // Keyboard pedaling CC64

@@ -8,6 +8,59 @@ export const JAZZ_WORLD: GenreWorld = {
   "level": "world",
   "description": "The monumental Jazz style: Swing and",
   "prominentChords": ['Maj 7', 'Min 7', 'Dom 9', 'Min 7b5', 'Dim 7'],
+  performanceRules: {
+    trumpet: {
+      evaluateNote: (phrase: any, index: number) => {
+        const note = phrase.notes[index];
+        const prev = phrase.notes[index - 1];
+        const next = phrase.notes[index + 1];
+        const noteTime = note.time ?? 0;
+        const noteDur = note.duration ?? note.dur ?? 0.25;
+        const noteVel = note.velocity ?? note.vel ?? 80;
+        const notePitch = note.pitch ?? note.midi ?? 60;
+        const prevTime = prev ? (prev.time ?? 0) : 0;
+        const prevDur = prev ? (prev.duration ?? prev.dur ?? 0.25) : 0;
+        const prevPitch = prev ? (prev.pitch ?? prev.midi ?? 60) : 60;
+
+        let articulation = 'tongued';
+        const isLegato = prev && (noteTime - (prevTime + prevDur) < 0.05);
+
+        if (isLegato) articulation = Math.abs(notePitch - prevPitch) <= 2 ? 'lip_slur' : 'legato';
+        else if (noteVel > 85) articulation = 'marcato';
+
+        if (!next || ((next.time ?? 0) - (noteTime + noteDur) > 0.5)) {
+          if (noteVel > 75) articulation = 'fall';
+        }
+
+        return [{
+          ...note,
+          type: 'continuous',
+          articulation,
+          timbreControl: { breathPressure: noteVel, embouchureTension: notePitch / 127 }
+        }];
+      }
+    }
+  },
+  drumRules: {
+    evaluateStep: (step: any) => {
+      const events = [];
+      if (step.kick) events.push({ type: 'kick', velocity: step.velocity * 0.8, time: step.time });
+      if (step.snare) {
+        events.push({ type: 'snare', velocity: step.velocity, time: step.time });
+        if (step.velocity < 60) events.push({ type: 'snare_ghost', velocity: step.velocity, time: step.time });
+        else if (step.velocity > 95) events.push({ type: 'snare_rimshot', velocity: step.velocity, time: step.time });
+      }
+      if (step.hihat) {
+        let hatType = step.velocity < 60 ? 'hihat_tip' : 'hihat_shank';
+        if (step.isOpen) hatType = 'hihat_open';
+        else if (step.isPedal) hatType = 'hihat_pedal';
+        events.push({ type: hatType, velocity: step.velocity, time: step.time });
+      }
+      if (step.ghosts) step.ghosts.forEach((g: any) => events.push({ type: 'snare_ghost', velocity: g.velocity, time: g.time }));
+
+      return events;
+    }
+  },
   "styleDefinitions": [
     {
       "id": "jazz-bebop",
@@ -3167,3 +3220,5 @@ export const JAZZ_WORLD: GenreWorld = {
     "Jazz ↔ Bossa Nova"
   ]
 };
+
+export const JazzGenre = JAZZ_WORLD;

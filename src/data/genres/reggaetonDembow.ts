@@ -1,4 +1,5 @@
 import { GenreWorld } from '../../types';
+import { AnalogSynthTimbreControl, SamplerTimbreControl } from '../../engine/theory/physicsInterfaces';
 
 export const REGGAETON_DEMBOW_WORLD: GenreWorld = {
   "id": "reggaeton-dembow",
@@ -7,6 +8,74 @@ export const REGGAETON_DEMBOW_WORLD: GenreWorld = {
   "color": "#d14b7a",
   "level": "world",
   "description": "Reggaetón and dembow are represented as",
+  rhythm: { syncopation: 0.5, swing: 0.0, pocket: 'strict_grid', pocketDepth: 0, intonationSystem: 'equal', quantizeJitterMs: 2 },
+  performanceRules: {
+    'synth_bass': {
+      evaluateNote: (phrase: any, index: number, _acousticState?: any, electronicState?: any) => {
+        const note = phrase.notes[index];
+        const isDownbeat = ((note.time ?? 0) % 1) === 0;
+
+        const timbre: AnalogSynthTimbreControl = {
+          oscillatorPhase: 'reset_on_note',
+          filterEnvelopeDepth: 0.8,
+          distortion: { type: 'analog_tube', driveAmount: 0.65, asymmetry: 0.8 },
+          subOscillatorLevel: 1.0,
+          sidechainDuckDepth: isDownbeat ? (electronicState?.globalSidechainDuckAmount ?? 1.0) * 0.9 : 0.0,
+          portamentoTimeMs: (note.duration ?? 0.25) > 0.4 ? 120 : 0,
+          intonationOffsetCents: electronicState?.thermalAnalogDrift ?? 0,
+          actuationSyncOffsetMs: 0
+        };
+
+        return [{ ...note, type: 'synth', articulation: 'plucked_sub', timbreControl: timbre }];
+      }
+    },
+    'sub-bass': {
+      evaluateNote: (phrase: any, index: number, _acousticState?: any, electronicState?: any) => {
+        const note = phrase.notes[index];
+        const isDownbeat = ((note.time ?? 0) % 1) === 0;
+
+        const timbre: AnalogSynthTimbreControl = {
+          oscillatorPhase: 'reset_on_note',
+          filterEnvelopeDepth: 0.8,
+          distortion: { type: 'analog_tube', driveAmount: 0.65, asymmetry: 0.8 },
+          subOscillatorLevel: 1.0,
+          sidechainDuckDepth: isDownbeat ? (electronicState?.globalSidechainDuckAmount ?? 1.0) * 0.9 : 0.0,
+          portamentoTimeMs: (note.duration ?? 0.25) > 0.4 ? 120 : 0,
+          intonationOffsetCents: electronicState?.thermalAnalogDrift ?? 0,
+          actuationSyncOffsetMs: 0
+        };
+
+        return [{ ...note, type: 'synth', articulation: 'plucked_sub', timbreControl: timbre }];
+      }
+    }
+  },
+  drumRules: {
+    evaluateStep: (step: any) => {
+      const kickTimbre: SamplerTimbreControl = {
+        samplePlaybackRate: 1.0,
+        formantShiftAmount: 0,
+        aliasingArtifacts: 0.1,
+        transientShaping: { attackMs: 2, sustainLevel: 0.2 },
+        distortion: { type: 'digital_hard_clip', driveAmount: 0.4 },
+        intonationOffsetCents: 0,
+        actuationSyncOffsetMs: 0
+      };
+      const snareTimbre: SamplerTimbreControl = {
+        samplePlaybackRate: 1.2,
+        formantShiftAmount: -0.2,
+        aliasingArtifacts: 0.5,
+        transientShaping: { attackMs: 0, sustainLevel: 0.8 },
+        distortion: { type: 'tape_saturation', driveAmount: 0.8 },
+        intonationOffsetCents: 0,
+        actuationSyncOffsetMs: 0
+      };
+
+      return [
+        ...(step.kick ? [{ type: 'kick', time: step.time, velocity: step.velocity, timbreControl: kickTimbre }] : []),
+        ...(step.snare ? [{ type: 'snare_rimshot', time: step.time, velocity: step.velocity, timbreControl: snareTimbre }] : [])
+      ];
+    }
+  },
   "styleDefinitions": [
     {
       "id": "reggaeton-dembow-perreo",

@@ -117,7 +117,7 @@ note: number;
 velocity: number;
 gate: number;
 id: string;
-actionType?: 'strike' | 'pluck' | 'bow_drag' | 'abanico' | 'rasgueado' | 'tap' | 'golpe' | 'golpe-caja' | 'chicharra' | 'bellows-slap' | 'strappata' | 'tambor' | 'heel' | 'toe' | 'arrastre' | 'slap' | 'mute' | 'legato' | 'slur' | 'staccato' | 'tongue' | 'accent' | 'pizzicato' | string;
+actionType?: 'strike' | 'pluck' | 'bow_drag' | 'abanico' | 'rasgueado' | 'tap' | 'golpe' | 'golpe-caja' | 'chicharra' | 'bellows-slap' | 'strappata' | 'tambor' | 'heel' | 'toe' | 'arrastre' | 'slap' | 'mute' | 'legato' | 'slur' | 'staccato' | 'tongue' | 'accent' | 'pizzicato' | 'fall' | 'doit' | 'shake' | 'growl' | string;
 technique?: string;
 hitType?: string;
 articulation?: string;
@@ -125,6 +125,7 @@ excitationType?: 'plectrum' | 'nail' | 'fingerpad' | 'hard-pick' | 'hammer' | 's
 contactPoint?: number;
 mass?: number;
 frequencyHz?: number;
+bellowsDirection?: 'opening' | 'closing';
 retriggerId?: number;
 attack?: number;
 decay?: number;
@@ -602,12 +603,52 @@ case 26: {
   break;
 }
 case 3: {
-  const isArco = action === 'bow_drag' || params.bowPressure > 0.6;
-  if (isArco) {
-    const osc = el.blepsaw(freqSignal);
-    const frictionNoise = el.mul(params.bowPressure * 0.25, el.pinknoise());
-    const bowSig = el.add(osc, frictionNoise);
-    rawAudio = el.svf({ mode: 'lowpass' }, Math.min(19000, 220 + b * 2000), 1.4, bowSig);
+  const isChicharra = action === 'chicharra' || /chicharra/i.test(voice.articulation ?? '');
+  const isArco = action === 'bow_drag' || action === 'arco' || isChicharra || params.bowPressure > 0.6;
+  if (isChicharra) {
+    // Tango Chicharra: Harsh cicada bow scrape near the bridge with high bow pressure
+    const chicharraNoise = el.highpass(3000, 1.3, el.noise());
+    const frictionGate = el.adsr(0.002, Math.max(0.08, decayTime * 0.7), 0.4, 0.03, gateSignal);
+    const chicharraScratch = el.mul(
+      el.mul(0.9, chicharraNoise),
+      frictionGate
+    );
+    const bridgeScrape = el.svf({ mode: 'bandpass' }, 1900, 2.5, chicharraScratch);
+    rawAudio = el.add(chicharraScratch, el.mul(0.6, bridgeScrape));
+  } else if (isArco) {
+    // Authentic Double Bass Arco: Helmholtz stick-slip friction with acoustic body and bridge resonance
+    const bowJitter = el.mul(el.const({ value: 0.002 }), el.noise());
+    const jitteredFreq = el.mul(freqSignal, el.add(1.0, bowJitter));
+    const rawSaw = el.blepsaw(jitteredFreq);
+    const subO = el.sin(el.mul(2 * Math.PI, el.syncphasor(jitteredFreq, gateSignal)));
+    const osc = el.add(el.mul(0.55, rawSaw), el.mul(0.45, subO));
+
+    const effectiveBowPressure = Math.max(0.15, params.bowPressure);
+    const frictionAttackGate = el.adsr(0.002, 0.05, 0.35, 0.035, gateSignal);
+    const frictionNoise = el.mul(
+      el.mul(effectiveBowPressure * 0.32, frictionAttackGate),
+      el.highpass(550, 1.0, el.pinknoise())
+    );
+    const rawExcited = el.add(osc, frictionNoise);
+
+    // Asymmetric stick-slip non-linearity
+    const asymmetry = el.mul(0.18, gateSignal);
+    const stickSlip = el.tanh(el.add(asymmetry, el.mul(el.add(1.0, el.mul(effectiveBowPressure * 2.4, gateSignal)), rawExcited)));
+
+    // Double bass body and bridge hill resonances
+    const bowedProf = getBowedResonanceProfile(params.instrumentId ?? 'upright-bass', params.body);
+    const bodyRes = el.svf({ mode: 'bandpass' }, Math.min(19000, bowedProf.bodyFreq || 75), bowedProf.bodyQ || 2.5, stickSlip);
+    const bridgeHill = el.svf({ mode: 'bandpass' }, Math.min(19000, bowedProf.bridgeHillFreq || 1600), bowedProf.bridgeHillQ || 2.2, stickSlip);
+    const shaped = el.add(stickSlip, el.add(el.mul(0.55, bodyRes), el.mul(0.35, bridgeHill)));
+
+    const dynamicCutoff = el.min(
+      el.const({ value: 19000 }),
+      el.max(
+        el.const({ value: 200 }),
+        el.mul(el.const({ value: 380 + b * 2400 }), el.add(0.4, el.mul(effectiveBowPressure * 0.8, gateSignal)))
+      )
+    );
+    rawAudio = el.lowpass(dynamicCutoff, 1.25, shaped);
   } else {
     const idLower = (params.instrumentId ?? '').toLowerCase();
     const isUpright = /upright|acoustic-bass|contrabajo|guitarron/.test(idLower);
@@ -963,16 +1004,37 @@ case 15: {
   const noteSeed = seedOf(trackId, voiceIndex, 2345);
   const breathDev = Math.max(0.85, Math.min(1.15, 1.0 + randNorm(noteSeed) * 0.10));
 
-  const scoopDepth = 0.045 * (0.5 + params.pressure * 0.5);
+  const isFall = action === 'fall' || action === 'drop' || /fall|drop|caida|pitch-env-down/i.test(voice.articulation ?? '');
+  const isDoit = action === 'doit' || action === 'rip' || action === 'rip-up' || /doit|rip|pitch-env-up/i.test(voice.articulation ?? '');
+  const isGrowl = action === 'growl' || /growl|throat-growl/i.test(voice.articulation ?? '');
+  const isShake = action === 'shake' || /shake|lip-trill/i.test(voice.articulation ?? '');
+
+  // Dynamic Pitch Gestures: Scoop, Fall (downward glide on release), Doit (upward glide on release), Shake (lip-trill FM)
+  const scoopDepth = (isFall || isDoit) ? 0 : 0.045 * (0.5 + params.pressure * 0.5);
   const scoopEnv = el.adsr(0.0003, 0.024, 0, 0.006, gateSignal);
-  const dynamicFreqSignal = el.mul(freqSignal, el.sub(1.0, el.mul(scoopDepth, scoopEnv)));
+  const scoopOffset = el.mul(scoopDepth, scoopEnv);
+
+  const fallGlide = isFall ? el.mul(el.const({ value: -0.18 }), el.sub(1.0, gateSignal)) : el.const({ value: 0 });
+  const doitGlide = isDoit ? el.mul(el.const({ value: 0.20 }), el.sub(1.0, gateSignal)) : el.const({ value: 0 });
+  const shakeMod = isShake ? el.mul(el.cycle(7.8), el.mul(el.const({ value: 0.058 }), gateSignal)) : el.const({ value: 0 });
+
+  const pitchMod = el.add(el.sub(1.0, scoopOffset), el.add(fallGlide, el.add(doitGlide, shakeMod)));
+  const dynamicFreqSignal = el.mul(freqSignal, pitchMod);
   const safeDynamicFreqSignal = el.min(el.const({ value: 19000 }), el.max(el.const({ value: 20 }), dynamicFreqSignal));
 
   // Brass buzz is an asymmetric mix of saw and square to eliminate 'car horn' hollowness
-  const lipBuzz = el.add(
+  let lipBuzz: Node = el.add(
     el.mul(0.65, el.blepsaw(safeDynamicFreqSignal)), 
     el.mul(0.35, el.blepsquare(safeDynamicFreqSignal))
   );
+
+  // Growl: Mix a ~35–50Hz AM/FM layer roughened with noise into lip excitation
+  if (isGrowl) {
+    const growlNoise = el.mul(0.25, el.noise());
+    const growlMod = el.mul(el.add(el.cycle(42), growlNoise), el.mul(el.const({ value: 0.45 }), gateSignal));
+    lipBuzz = el.add(lipBuzz, el.mul(lipBuzz, growlMod));
+  }
+
   const breathNoise = el.mul(0.04 * (1 - params.pressure) * breathDev, el.noise());
   const excited = el.add(lipBuzz, breathNoise);
 
@@ -984,10 +1046,9 @@ case 15: {
   const lipAttackBurst = el.svf({ mode: 'bandpass' }, Math.min(19000, profile.tongueFreq), 1.8, el.noise());
   const lipTransient = el.mul(tongueLevel, el.mul(lipAttackBurst, el.adsr(0.0003, 0.008, 0, 0.003, gateSignal)));
 
-  // Dynamic Lowpass + Saturation replaces thin formant stacks
-  // Cutoff sweeps dynamically based on ADSR envelope AND note velocity: cutoff = baseFreq + envelope * velocity * scalar
+  // Dynamic Lowpass + Saturation with live continuous mute sweep
   const hornEnv = el.adsr(0.008, 0.06, 0.75, 0.08, gateSignal);
-  const hornCutoff = el.min(
+  const openHornCutoff = el.min(
     el.const({ value: 18000 }),
     el.max(
       el.const({ value: 250 }),
@@ -995,10 +1056,22 @@ case 15: {
     )
   );
 
-  // Add physical horn body resonances via formant profile
+  // Live continuous mute sweep (reading instrument cutoffFreqHz)
+  const muteDef = instrumentDef?.performanceArticulations?.mute;
+  const muteCutoffHz = muteDef?.cutoffFreqHz ?? 1600;
+  const hornCutoff = el.add(
+    el.mul(el.sub(1.0, params.mute), openHornCutoff),
+    el.mul(params.mute, el.const({ value: Math.min(1800, muteCutoffHz) }))
+  );
+
+  // Add physical horn body resonances via formant profile (including f3)
   const f1 = el.mul(profile.f1.gain, el.svf({ mode: 'bandpass' }, profile.f1.freq, profile.f1.q, excited));
   const f2 = el.mul(profile.f2.gain, el.svf({ mode: 'bandpass' }, profile.f2.freq, profile.f2.q, excited));
-  const bodyResonance = el.mul(params.body, el.add(f1, f2));
+  const f3Freq = profile.f3?.freq ?? Math.min(19000, profile.f2.freq * 1.55);
+  const f3Gain = profile.f3?.gain ?? 0.25;
+  const f3Q = profile.f3?.q ?? 2.8;
+  const f3 = el.mul(f3Gain, el.svf({ mode: 'bandpass' }, Math.min(19000, f3Freq), f3Q, excited));
+  const bodyResonance = el.mul(params.body, el.add(f1, el.add(f2, f3)));
 
   const filteredHorn = el.lowpass(hornCutoff, 1.2, el.add(excited, el.add(lipTransient, bodyResonance)));
   // Soft clipper accurately models acoustic wave-steepening in the brass flare
@@ -1010,16 +1083,37 @@ case 16: {
   const noteSeed = seedOf(trackId, voiceIndex, 6789);
   const breathDev = Math.max(0.85, Math.min(1.15, 1.0 + randNorm(noteSeed) * 0.10));
 
-  const scoopDepth = 0.04 * (0.5 + params.pressure * 0.5);
+  const isFall = action === 'fall' || action === 'drop' || /fall|drop|caida|pitch-env-down/i.test(voice.articulation ?? '');
+  const isDoit = action === 'doit' || action === 'rip' || action === 'rip-up' || /doit|rip|pitch-env-up/i.test(voice.articulation ?? '');
+  const isGrowl = action === 'growl' || /growl|throat-growl/i.test(voice.articulation ?? '');
+  const isShake = action === 'shake' || /shake|lip-trill/i.test(voice.articulation ?? '');
+
+  // Dynamic Pitch Gestures: Scoop, Fall, Doit, Shake
+  const scoopDepth = (isFall || isDoit) ? 0 : 0.04 * (0.5 + params.pressure * 0.5);
   const scoopEnv = el.adsr(0.0003, 0.024, 0, 0.006, gateSignal);
-  const dynamicFreqSignal = el.mul(freqSignal, el.sub(1.0, el.mul(scoopDepth, scoopEnv)));
+  const scoopOffset = el.mul(scoopDepth, scoopEnv);
+
+  const fallGlide = isFall ? el.mul(el.const({ value: -0.18 }), el.sub(1.0, gateSignal)) : el.const({ value: 0 });
+  const doitGlide = isDoit ? el.mul(el.const({ value: 0.20 }), el.sub(1.0, gateSignal)) : el.const({ value: 0 });
+  const shakeMod = isShake ? el.mul(el.cycle(7.8), el.mul(el.const({ value: 0.055 }), gateSignal)) : el.const({ value: 0 });
+
+  const pitchMod = el.add(el.sub(1.0, scoopOffset), el.add(fallGlide, el.add(doitGlide, shakeMod)));
+  const dynamicFreqSignal = el.mul(freqSignal, pitchMod);
   const safeDynamicFreqSignal = el.min(el.const({ value: 19000 }), el.max(el.const({ value: 20 }), dynamicFreqSignal));
 
   // Sax/Reed is a rich saw with a slight hollow square characteristic
-  const reedPulse = el.add(
+  let reedPulse: Node = el.add(
     el.mul(0.85, el.blepsaw(safeDynamicFreqSignal)),
     el.mul(0.15, el.blepsquare(safeDynamicFreqSignal))
   );
+
+  // Growl: Mix a ~35–50Hz AM/FM layer roughened with noise into reed excitation
+  if (isGrowl) {
+    const growlNoise = el.mul(0.25, el.noise());
+    const growlMod = el.mul(el.add(el.cycle(44), growlNoise), el.mul(el.const({ value: 0.45 }), gateSignal));
+    reedPulse = el.add(reedPulse, el.mul(reedPulse, growlMod));
+  }
+
   const breathNoise = el.mul(0.08 * (1 - params.pressure) * breathDev, el.noise());
   const excited = el.add(reedPulse, breathNoise);
 
@@ -1041,10 +1135,14 @@ case 16: {
     )
   );
 
-  // Add physical woody reed body resonances via formant profile
+  // Add physical woody reed body resonances via formant profile (including f3)
   const f1 = el.mul(profile.f1.gain, el.svf({ mode: 'bandpass' }, profile.f1.freq, profile.f1.q, excited));
   const f2 = el.mul(profile.f2.gain, el.svf({ mode: 'bandpass' }, profile.f2.freq, profile.f2.q, excited));
-  const bodyResonance = el.mul(params.body, el.add(f1, f2));
+  const f3Freq = profile.f3?.freq ?? Math.min(19000, profile.f2.freq * 1.55);
+  const f3Gain = profile.f3?.gain ?? 0.22;
+  const f3Q = profile.f3?.q ?? 2.8;
+  const f3 = el.mul(f3Gain, el.svf({ mode: 'bandpass' }, Math.min(19000, f3Freq), f3Q, excited));
+  const bodyResonance = el.mul(params.body, el.add(f1, el.add(f2, f3)));
 
   const filteredReed = el.lowpass(reedCutoff, 1.15, el.add(excited, el.add(tongueTransient, bodyResonance)));
   const drive = el.add(el.const({ value: 1.3 + params.drive * 1.8 }), el.mul(el.const({ value: 1.5 }), velSignal));
@@ -1161,21 +1259,45 @@ case 10: {
   const isBandoneon = idLower === 'bandoneon';
   const isConcertina = idLower === 'concertina';
   const isAccordion = idLower === 'accordion';
+  const noteSeed = seedOf(trackId, voiceIndex, 5150);
+
+  // --- Weeping vibrato (bandoneon.ts: rateHz 5.2, depthCents 28, onsetDelayMs 250) ---
+  // Real players ease vibrato into a held note rather than starting it at attack,
+  // and only apply it on sustained/legato phrasing -- not on marcato chord stabs,
+  // arrastre drags or the golpe/bellows-slap percussive hits, which stay dry.
+  const shortHitArticulations = ['staccato', 'marcato', 'accent', 'bellows-slap', 'golpe-caja', 'tremolo', 'arrastre'];
+  const wantsVibrato = isBandoneon && !shortHitArticulations.includes(action);
+  const vibratoDepthRatio = Math.pow(2, 28 / 1200) - 1; // 28 cents -> ~1.63% frequency swing
+  const vibratoOnsetEnv = el.adsr(0.25, 0.02, 1.0, 0.02, gateSignal); // 250ms ease-in, matches onsetDelayMs
+  const vibLfo = el.cycle(5.2);
+  const vibratoMod = wantsVibrato
+    ? el.add(1, el.mul(vibratoDepthRatio, el.mul(vibLfo, vibratoOnsetEnv)))
+    : el.const({ value: 1 });
+  const reedFreq = el.mul(freqSignal, vibratoMod);
 
   // Free reeds are pressure-driven, not generic subtractive oscillators.
-  // Bandoneón specifically uses dry 8' + 4' banks: no musette detuning.
-  const eightFoot = el.blepsaw(freqSignal);
-  const fourFoot = el.blepsaw(el.mul(freqSignal, 2));
-  const sixteenFoot = el.blepsaw(el.mul(freqSignal, 0.5));
+  // Bandoneón uses dry 8' + 4' banks -- but real reed pairs are two separate
+  // physical reeds, never perfectly phase-locked at an exact 2:1 ratio.
+  // A few cents of natural mistuning on the 4' voice (plus a touch of its own
+  // rounding-off, since the smaller reed plate radiates a purer/quieter tone)
+  // breaks static phase cancellation into an organic beating shimmer.
+  const fourFootDetuneCents = isBandoneon ? 5 + randNorm(noteSeed) * 3 : 0;
+  const fourFootFreq = el.mul(reedFreq, Math.pow(2, fourFootDetuneCents / 1200) * 2);
+  const eightFoot = el.blepsaw(reedFreq);
+  const fourFootRaw = el.blepsaw(fourFootFreq);
+  const fourFoot = isBandoneon
+    ? el.lowpass(el.mul(reedFreq, 6.4), 0.8, fourFootRaw)
+    : fourFootRaw;
+  const sixteenFoot = el.blepsaw(el.mul(reedFreq, 0.5));
   const registerText = `${voice.technique ?? ''} ${voice.hitType ?? ''} ${voice.articulation ?? ''}`.toLowerCase();
   const musetteRegister = isAccordion && registerText.includes('musette');
   const dryRegister = isAccordion && (registerText.includes('dry') || registerText.includes('master') || registerText.includes('clarinet'));
   const reedCore = isBandoneon
-    ? el.add(el.mul(0.72, eightFoot), el.mul(0.28, fourFoot))
+    ? el.add(el.mul(0.78, eightFoot), el.mul(0.22, fourFoot))
     : isConcertina
       ? el.add(el.mul(0.76, eightFoot), el.mul(0.24, fourFoot))
       : isAccordion && musetteRegister
-        ? el.add(el.mul(0.31, el.blepsaw(el.mul(freqSignal, 0.986))), el.mul(0.38, eightFoot), el.mul(0.31, el.blepsaw(el.mul(freqSignal, 1.014))))
+        ? el.add(el.mul(0.31, el.blepsaw(el.mul(reedFreq, 0.986))), el.mul(0.38, eightFoot), el.mul(0.31, el.blepsaw(el.mul(reedFreq, 1.014))))
         : isAccordion && dryRegister
           ? el.add(el.mul(0.20, sixteenFoot), el.mul(0.58, eightFoot), el.mul(0.22, fourFoot))
           : isAccordion
@@ -1184,20 +1306,27 @@ case 10: {
 
   const reservoir = dspProfile?.excitationDynamics.continuousReservoir;
   const bellows = dspProfile?.excitationDynamics.bisonoricAsymmetry;
-  const bellowsClosing = /cerrar|closing|close|push|pushing/.test(`${action} ${(voice.hitType ?? '')}`.toLowerCase());
+  const bellowsClosing = voice.bellowsDirection
+    ? voice.bellowsDirection === 'closing'
+    : /cerrar|closing|close|push|pushing/.test(`${action} ${(voice.hitType ?? '')}`.toLowerCase());
   const pressure = reservoir?.pressure ?? params.pressure;
   const directionBias = bellows
     ? (bellowsClosing ? bellows.closing.pressure : bellows.opening.pressure)
     : 1;
   const directionFormant = bellows ? (bellowsClosing ? 1 + bellows.closing.formantShift : 1 + bellows.opening.formantShift) : 1;
 
-  const reedPressure = el.mul(
+  const reedPressureRaw = el.mul(
     reedCore,
     el.add(el.const({ value: 0.70 + pressure * 0.42 }), el.mul(el.const({ value: 0.18 * directionBias }), velSignal))
   );
+  // Reed-level nonlinearity: the tongue compresses/buzzes harder under
+  // higher bellows pressure before entering the air chamber.
+  const reedPressure = isBandoneon
+    ? el.tanh(el.mul(el.add(1.0, el.mul(0.85, pressure)), reedPressureRaw))
+    : reedPressureRaw;
 
   const chamberFreq = (isBandoneon ? 820 : isAccordion ? 860 : 1050) * directionFormant;
-  const chamberQ = isBandoneon ? 2.2 : 1.7;
+  const chamberQ = isBandoneon ? 2.8 : 1.7;
   const chamber = el.svf({ mode: 'bandpass' }, chamberFreq, chamberQ, reedPressure);
   const secondChamber = el.svf({ mode: 'bandpass' }, chamberFreq * 2.03, 2.0, reedPressure);
 
@@ -1214,10 +1343,12 @@ case 10: {
     bellowsImpact = el.mul((knee?.gain ?? 0.8) * (0.35 + velBoost * 0.7), el.mul(kneeNoise, kneeEnv));
   }
 
+  // Shift weight from the dry reed toward the chamber-shaped resonance so the
+  // wood box does more of the work coloring the tone.
   rawAudio = el.lowpass(
-    Math.min(19000, (isBandoneon ? 5200 : 4200) + b * 5200),
+    Math.min(19000, (isBandoneon ? 4400 : 4200) + b * (isBandoneon ? 4000 : 5200)),
     1.0,
-    el.add(el.mul(0.58, reedPressure), el.add(el.mul(0.42, chamber), el.add(el.mul(0.10, secondChamber), el.add(flowNoise, bellowsImpact))))
+    el.add(el.mul(isBandoneon ? 0.44 : 0.58, reedPressure), el.add(el.mul(isBandoneon ? 0.50 : 0.42, chamber), el.add(el.mul(0.12, secondChamber), el.add(flowNoise, bellowsImpact))))
   );
   break;
 }
