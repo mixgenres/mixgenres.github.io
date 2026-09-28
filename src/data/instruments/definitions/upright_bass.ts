@@ -4,7 +4,6 @@ export const upright_bass: InstrumentDef = {
   id: "upright-bass",
   name: "Upright Double Bass",
   family: "plucked",
-  program: 32,
   voicing: "single",
   bodyConstruction: "wood-box",
   excitationType: "fingerpad",

@@ -4,7 +4,6 @@ export const quena: InstrumentDef = {
   id: "quena",
   name: "Quena",
   family: "winds",
-  program: 75,
   octave: 12,
   voicing: "single",
   elementaryModel: 7,

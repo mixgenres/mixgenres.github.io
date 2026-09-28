@@ -4,7 +4,6 @@ export const dulcimer: InstrumentDef = {
   id: "dulcimer",
   name: "Hammered dulcimer",
   family: "plucked",
-  program: 15,
   voicing: "single",
   courses: 2,
   bodyConstruction: "board",

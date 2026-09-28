@@ -4,7 +4,6 @@ export const ocarina: InstrumentDef = {
   id: "ocarina",
   name: "Ocarina",
   family: "winds",
-  program: 79,
   octave: 12,
   voicing: "single",
   elementaryModel: 7,

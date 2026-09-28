@@ -62,7 +62,7 @@ export function buildVoiceContext(
   const model = params.performanceMode === 'programmed-electronic' ? 9 : Math.round(params.model);
   const instrumentDef = params.instrumentId ? INSTRUMENTS_BY_ID[params.instrumentId] : undefined;
   const dspProfile: InstrumentDSPProfile | undefined = instrumentDef?.dspProfile;
-  const action = voice.actionType ?? (params.bodyTap > 0.5 ? 'golpe' : 'pluck');
+  const action = voice.action ?? (params.bodyTap > 0.5 ? 'golpe' : 'pluck');
   const isMuted = action === 'mute' || params.mute > 0.4;
 
   // Decaying instruments (Karplus-Strong loops, bells, drums) must not be choked by ADSR

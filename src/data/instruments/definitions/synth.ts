@@ -4,7 +4,6 @@ export const synth: InstrumentDef = {
   id: "synth",
   name: "Synth",
   family: "electronic",
-  program: 81,
   voicing: "single",
   elementaryModel: 9,
   makeupGain: 0.548,

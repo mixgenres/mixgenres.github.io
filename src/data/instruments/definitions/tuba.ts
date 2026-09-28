@@ -4,7 +4,6 @@ export const tuba: InstrumentDef = {
   id: "tuba",
   name: "Tuba",
   family: "brass",
-  program: 58,
   octave: -12,
   voicing: "single",
   elementaryModel: 3,

@@ -4,7 +4,6 @@ export const jarana: InstrumentDef = {
   id: "jarana",
   name: "Jarana jarocha",
   family: "plucked",
-  program: 24,
   octave: 12,
   voicing: "chord",
   courses: 2,

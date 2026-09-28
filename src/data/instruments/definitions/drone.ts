@@ -4,7 +4,6 @@ export const drone: InstrumentDef = {
   id: "drone",
   name: "Drone texture",
   family: "electronic",
-  program: 89,
   voicing: "chord",
   elementaryModel: 0,
   makeupGain: 0.438,

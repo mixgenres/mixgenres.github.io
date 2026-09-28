@@ -4,7 +4,6 @@ export const glockenspiel: InstrumentDef = {
   id: "glockenspiel",
   name: "Glockenspiel",
   family: "metal-and-wood",
-  program: 9,
   voicing: "single",
   elementaryModel: 8,
   makeupGain: 1.000,

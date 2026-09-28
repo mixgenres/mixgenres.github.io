@@ -4,7 +4,6 @@ export const tin_whistle: InstrumentDef = {
   id: "tin-whistle",
   name: "Tin whistle",
   family: "winds",
-  program: 78,
   octave: 12,
   voicing: "single",
   elementaryModel: 7,

@@ -4,7 +4,6 @@ export const piccolo: InstrumentDef = {
   id: "piccolo",
   name: "Piccolo",
   family: "winds",
-  program: 72,
   octave: 12,
   voicing: "single",
   elementaryModel: 7,

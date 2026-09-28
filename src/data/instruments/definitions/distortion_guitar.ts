@@ -4,7 +4,6 @@ export const distortion_guitar: InstrumentDef = {
   id: "distortion-guitar",
   name: "Distortion guitar",
   family: "plucked",
-  program: 30,
   voicing: "chord",
   courses: 1,
   bodyConstruction: "solid-electric",

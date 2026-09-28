@@ -4,7 +4,6 @@ export const trombone: InstrumentDef = {
   id: "trombone",
   name: "Trombone",
   family: "brass",
-  program: 57,
   voicing: "single",
   elementaryModel: 15,
   makeupGain: 0.494,

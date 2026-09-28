@@ -4,7 +4,6 @@ export const fiddle: InstrumentDef = {
   id: "fiddle",
   name: "Fiddle",
   family: "bowed",
-  program: 110,
   octave: 12,
   voicing: "single",
   bodyConstruction: "wood-box",

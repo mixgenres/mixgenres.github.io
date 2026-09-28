@@ -4,7 +4,6 @@ export const kora: InstrumentDef = {
   id: "kora",
   name: "Kora",
   family: "plucked",
-  program: 105,
   voicing: "chord",
   courses: 1,
   bodyConstruction: "gourd",

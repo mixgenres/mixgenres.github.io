@@ -42,12 +42,12 @@ export default class PianoModule implements InstrumentModule {
     const isBassRegister = noteNum < 48;
 
     // 1. Tango Technique & Articulation Recognition
-    const isMarcato = action === 'marcato' || /marcato/i.test(voice.articulation ?? '');
-    const isArrastre = action === 'arrastre' || /arrastre/i.test(voice.articulation ?? '');
-    const isYumba = action === 'yumba' || action === 'cluster' || /yumba|cluster/i.test(voice.articulation ?? '');
-    const isChapa = action === 'chapa' || /chapa|muted/i.test(voice.articulation ?? '') || params.mute > 0.4;
-    const isCampana = action === 'campana' || /campana|bell/i.test(voice.articulation ?? '');
-    const isPesada = action === 'pesada' || /pesada/i.test(voice.articulation ?? '');
+    const isMarcato = action === 'marcato' || /marcato/i.test(action ?? '');
+    const isArrastre = action === 'arrastre' || /arrastre/i.test(action ?? '');
+    const isYumba = action === 'yumba' || action === 'cluster' || /yumba|cluster/i.test(action ?? '');
+    const isChapa = action === 'chapa' || /chapa|muted/i.test(action ?? '') || params.mute > 0.4;
+    const isCampana = action === 'campana' || /campana|bell/i.test(action ?? '');
+    const isPesada = action === 'pesada' || /pesada/i.test(action ?? '');
 
     // 2. Arrastre Pre-Beat Pitch Scoop
     let activeFreqSignal = safeFreqSignal;

@@ -8,7 +8,7 @@ import { BandWorkletNode } from './BandWorklet';
 import { previewCulturalRules, culturalPitchSet, shoCluster, celticOpenHarmony } from '../generators/cultural';
 import { parseChord, noteName as theoryNoteName, midiOf } from '../theory/theory';
 import { voiceProfile, foldToRange } from '../theory/instrumentProfile';
-import { INSTRUMENTS_BY_ID, genreTechniquesForInstrument } from '../../data/instruments';
+import { INSTRUMENTS_BY_ID } from '../../data/instruments';
 import { getLuthierModelForInstrument } from './LuthierAPI';
 import type { TransportSink } from '../sequencing/transport';
 import type { Performance } from '../sequencing/perform';
@@ -116,11 +116,12 @@ function voiceId(trackId: string | number, midi: number): string {
 import { resolveDialect } from '../theory/dialects';
 import { resolveTuningSystem } from '../theory/tuning';
 import { getRoleGainLinear } from './mixer';
+import { resolveRenderGesture } from './renderGesture';
 
 export function createSink(): TransportSink {
   return {
     now: () => (ctx ? ctx.currentTime : 0),
-    noteOn(trackId, midi, vel, time, articulation, frequencyHz) {
+    noteOn(trackId, midi, vel, time, gestureCode, frequencyHz, bellowsDirectionCode) {
       if (!bandWorklet) return;
       const instrumentId = trackInstruments.get(String(trackId)) ?? String(trackId);
       let luthier = getLuthierModelForInstrument(instrumentId);
@@ -131,138 +132,29 @@ export function createSink(): TransportSink {
       const freqHz = frequencyHz ?? tuningSystem.getFrequencyHz(midi);
 
       const instDef = INSTRUMENTS_BY_ID[instrumentId];
-      const isBowed = instDef?.family === 'bowed' || /violin|fiddle|cello|viola|erhu/i.test(instrumentId);
-      let actionType = isBowed ? 'bow_drag' : (dialect?.defaultTechnique || 'strike');
-      if (isBowed) {
-        luthier = { ...luthier, category: 'continuous_bowed_friction' };
-      }
-      const authoredArticulation = articulation?.trim();
-      const styleTechnique = !authoredArticulation
-        ? genreTechniquesForInstrument(instrumentId, activeStyleId)[0]
-        : undefined;
-      const effectiveArticulation = authoredArticulation || styleTechnique;
-      if (effectiveArticulation) {
-        const artLow = effectiveArticulation.toLowerCase();
-        if (artLow.includes('ponticello')) {
-          luthier = { ...luthier, harmonicRichness: Math.min(1, luthier.harmonicRichness + 0.12), decayTimeFactor: luthier.decayTimeFactor * 0.94 };
-        } else if (artLow.includes('tasto')) {
-          luthier = { ...luthier, harmonicRichness: Math.max(0, luthier.harmonicRichness - 0.10), decayTimeFactor: luthier.decayTimeFactor * 1.05 };
-        } else if (artLow.includes('mwah-growl')) {
-          luthier = { ...luthier, harmonicRichness: Math.min(1, luthier.harmonicRichness + 0.07) };
-        }
-        if (isBowed) {
-          if (artLow.includes('pizzicato') || artLow.includes('pizz')) {
-            luthier = { ...luthier, category: 'strum_friction_pluck' };
-            actionType = 'pluck';
-          } else {
-            // A generic staccato, spiccato, legato, or chop on a bowed instrument MUST remain a bow stroke,
-            // while specialized articulations (chicharra, tambor, latigo, sul-ponticello, etc.) must be passed as-is.
-            luthier = { ...luthier, category: 'continuous_bowed_friction' };
-            actionType = artLow;
-          }
-        } else {
-          // For non-bowed instruments, preserve exact multi-word technique names (e.g. golpe-caja, bellows-slap,
-          // marcato, staccato, legato, legato_squeeze, arrastre) so instrument DSP modules match them verbatim.
-          actionType = artLow;
-          if (artLow.includes('arco') || artLow.includes('bowed')) {
-            luthier = { ...luthier, category: 'continuous_bowed_friction' };
-            actionType = 'bow_drag';
-          } else if (artLow.includes('pizzicato') || artLow.includes('plucked') || artLow.includes('slap-bass') || artLow.includes('pizz')) {
-            luthier = { ...luthier, category: 'strum_friction_pluck' };
-            if (!artLow.includes('strappata')) actionType = 'pluck';
-          } else if (/conga-heel|macho-thumb|dayan-ti-ke|cajon-tip/.test(artLow)) {
-            actionType = 'tap';
-          } else if (/conga-toe|macho-finger-tap|dayan-na|dayan-tun|bayan-ghe|iya-enu|iya-chacha|itotele-enu|okonkolo-chacha/.test(artLow)) {
-            actionType = 'tap';
-          } else if (artLow.includes('cup-mute') || artLow.includes('stopped') || artLow.includes('palm-mute')) {
-            actionType = 'mute';
-          } else if (artLow.includes('shake')) {
-            actionType = 'tremolo';
-          } else if (artLow.includes('rimshot') || artLow.includes('cascara') || artLow.includes('rim')) {
-            actionType = 'tap';
-          } else if (artLow.includes('conga-open') || artLow.includes('tumba-open')) {
-            actionType = 'strike';
-          } else if (artLow.includes('rasgue') || artLow.includes('abanico') || artLow.includes('strum-roll')) {
-            actionType = 'abanico';
-          } else if (artLow.includes('scratch')) {
-            actionType = 'arrastre';
-          } else if (artLow.includes('fingerstyle') || artLow.includes('flatpick') || artLow.includes('pick') || artLow.includes('plectrum')) {
-            actionType = 'pluck';
-          } else if (artLow.includes('tongue') || artLow.includes('tongued') || artLow.includes('cut') || artLow.includes('martellato')) {
-            actionType = 'tongue';
-          } else if (artLow.includes('brush')) {
-            actionType = 'strike';
-          }
-        }
-      }
-
-      let excitationType = instDef?.excitationType ?? instDef?.luthierPhysics?.excitationType ?? 'fingerpad';
-
-      // Comprehensive physical excitation mappings based on cultural techniques and fusion output
-      const FINGERPAD_ARTS = [
-        'fingerstyle', 'pizzicato', 'thumb-slap', 'thumb-sweep', 'tirando', 'apoyando',
-        'short-decay-pluck', 'tight-env-pluck', 'finger-snap'
-      ];
-      const HARD_PICK_ARTS = [
-        'flatpick', 'pick', 'fast-picking', 'tremolo-picking', 'ricochet', 'heavy-detaché', 
-        'hard-pizzicato', 'bartok-pizzicato', 'fm-bite'
-      ];
-      const NAIL_ARTS = [
-        'rasgueado', 'golpe', 'alzapúa', 'alzapua', 'picado', 'fast-arpeggiato', 'fast-chord-rake',
-        'noise-burst', 'noise-transient', 'cluster-tap'
-      ];
-      const HAMMER_ARTS = [
-        'staccato', 'staccatissimo', 'bass-cluster-staccato', 'accented-staccato-octave',
-        'muted-key-thump', 'trill'
-      ];
-      const BOW_ARTS = [
-        'arco', 'e-bow-sustain', 'tremolo-bow', 'sul-ponticello-heavy', 'glissando-down', 'glissando-up'
-      ];
-      const AIR_ARTS = [
-        'flutter-tongue', 'rip', 'tongue-slap', 'stopped', 'double-tongue', 'fp-crescendo'
-      ];
-
-      const artLow = (effectiveArticulation || actionType || '').toLowerCase();
-
-      // Forward the vastly expanded articulation map to physical model triggers
-      if (FINGERPAD_ARTS.includes(actionType) || FINGERPAD_ARTS.includes(artLow)) {
-        excitationType = 'fingerpad';
-      } else if (HARD_PICK_ARTS.includes(actionType) || HARD_PICK_ARTS.includes(artLow)) {
-        excitationType = 'hard-pick';
-      } else if (NAIL_ARTS.includes(actionType) || NAIL_ARTS.includes(artLow)) {
-        excitationType = 'nail';
-      } else if (HAMMER_ARTS.includes(actionType) || HAMMER_ARTS.includes(artLow)) {
-        excitationType = 'hammer'; // Native mapping for Piano, Dulcimer, Mallets
-      } else if (BOW_ARTS.includes(actionType) || BOW_ARTS.includes(artLow)) {
-        excitationType = 'bow';    // Native mapping for Strings, continuous pads
-      } else if (AIR_ARTS.includes(actionType) || AIR_ARTS.includes(artLow)) {
-        excitationType = 'breath'; // Native mapping for Brass, Woodwinds
+      const rendered = resolveRenderGesture(instrumentId, gestureCode ?? 0);
+      const action = rendered.action;
+      if (rendered.categoryOverride) luthier = { ...luthier, category: rendered.categoryOverride };
+      if (rendered.harmonicRichnessDelta !== 0 || rendered.decayTimeFactorScale !== 1) {
+        luthier = {
+          ...luthier,
+          harmonicRichness: Math.max(0, Math.min(1, luthier.harmonicRichness + rendered.harmonicRichnessDelta)),
+          decayTimeFactor: luthier.decayTimeFactor * rendered.decayTimeFactorScale,
+        };
       }
 
       const role = instDef?.acousticProfile?.role || 'comp';
       const roleGain = getRoleGainLinear(role, activeWorldId || 'default');
-
-      const artForContact = effectiveArticulation?.toLowerCase() ?? '';
-      const rimLike = /rimshot|cascara|side-stick|rim/.test(artForContact);
-      const bellLike = /bell|campana|ride-bell/.test(artForContact);
-      const handStrokeContact = artForContact.includes('heel') ? 0.34
-        : /toe|finger-tap|tip/.test(artForContact) ? 0.68
-        : /thumb|tumba-open|conga-open|macho-open|hembra-open|bayan-ghe|iya-enu/.test(artForContact) ? 0.52
-        : undefined;
-      const baseContact = handStrokeContact ?? (rimLike ? 0.84 : (bellLike ? 0.9 : 0.5));
-      const baseMass = artForContact.includes('heel') ? 0.26
-        : /slap|quinto-slap|macho-slap|tapao/.test(artForContact) ? 0.58
-        : handStrokeContact !== undefined ? 0.34
-        : (rimLike || bellLike ? 0.52 : 0.35);
-      const contactPoint = Math.max(0.05, Math.min(0.95, dialect?.contactPointOverride ?? (baseContact - (vel01 - 0.5) * 0.18 + (Math.random() - 0.5) * 0.08)));
-      const mass = Math.max(0.1, Math.min(0.95, baseMass + vel01 * 0.42 + (Math.random() - 0.5) * 0.08));
+      const deterministicJitter = (((Number(gestureCode ?? 0) * 1103515245 + midi * 12345 + Math.round(time * 1000)) >>> 0) / 0xffffffff) - 0.5;
+      const contactPoint = Math.max(0.05, Math.min(0.95, dialect?.contactPointOverride ?? (rendered.contactPoint - (vel01 - 0.5) * 0.18 + deterministicJitter * 0.08)));
+      const mass = Math.max(0.1, Math.min(0.95, rendered.mass + vel01 * 0.42 + deterministicJitter * 0.08));
 
       bandWorklet.postEvent({
         id: voiceId(trackId, midi),
         cyclePhase: 0,
         luthierObjectId: instrumentId,
         trackId: String(trackId),
-        action: { type: actionType as any, force: vel01, contactPoint, mass, technique: effectiveArticulation },
+        action: { type: action as any, force: vel01, contactPoint, mass },
         tuning: { baseFrequencyHz: freqHz, culturalMicrotoneCents: tuningSystem.getCentsOffset(midi) },
         spatialPosition: { x: 0, y: 0, z: 0 },
         luthier,
@@ -271,9 +163,8 @@ export function createSink(): TransportSink {
         velocity: vel,
         frequencyHz: freqHz,
         duration: 0.5,
-        techniqueModifier: effectiveArticulation,
-        actionType,
-        excitationType,
+        gestureCode,
+        bellowsDirectionCode,
         roleGain,
       } as any, time);
     },
@@ -290,10 +181,6 @@ export function createSink(): TransportSink {
     },
     controlChange(trackId, cc, value, time) {
       if (bandWorklet) bandWorklet.postCC(String(trackId), cc, value, time);
-    },
-    programChange(_trackId, _program, _time, _bank) {
-      // Instrument identity is resolved from the track map, not GM program
-      // numbers — several distinct instruments share a GM program.
     },
     setDrumChannel(_trackId, _isDrum) {
       // Percussive vs. pitched behaviour is carried by the luthier category.
@@ -391,7 +278,6 @@ export function setMasterVolume(value: number) {
 }
 
 import { renderPerformanceToMp3 } from './offlineRender';
-import { compilePhrasePerformance } from '../sequencing/phrase';
 
 export async function renderSongToMp3(
   perf: Performance,
@@ -407,10 +293,8 @@ export async function renderSongToMp3(
   }
 
   // Compile with expressive, phrase-based playback system
-  const phraseCompiledPerf = compilePhrasePerformance(perf);
-
   return renderPerformanceToMp3(
-    phraseCompiledPerf,
+    perf,
     {
       selectedTrackIds: options.selectedTrackIds,
       trackInstruments,

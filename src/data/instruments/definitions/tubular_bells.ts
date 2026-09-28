@@ -4,7 +4,6 @@ export const tubular_bells: InstrumentDef = {
   id: "tubular-bells",
   name: "Tubular bells",
   family: "metal-and-wood",
-  program: 14,
   voicing: "single",
   elementaryModel: 8,
   makeupGain: 0.702,

@@ -4,7 +4,6 @@ export const shamisen: InstrumentDef = {
   id: "shamisen",
   name: "Shamisen",
   family: "plucked",
-  program: 106,
   voicing: "single",
   courses: 1,
   bodyConstruction: "skin-faced",

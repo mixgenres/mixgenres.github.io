@@ -4,7 +4,6 @@ export const xylophone: InstrumentDef = {
   id: "xylophone",
   name: "Xylophone",
   family: "metal-and-wood",
-  program: 13,
   voicing: "single",
   elementaryModel: 8,
   makeupGain: 2.397,

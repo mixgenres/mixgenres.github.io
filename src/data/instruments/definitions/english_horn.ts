@@ -4,7 +4,6 @@ export const english_horn: InstrumentDef = {
   id: "english-horn",
   name: "English horn (Cor anglais)",
   family: "winds",
-  program: 69,
   octave: 12,
   voicing: "single",
   elementaryModel: 15,

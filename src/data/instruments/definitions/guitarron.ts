@@ -4,7 +4,6 @@ export const guitarron: InstrumentDef = {
   id: "guitarron",
   name: "Guitarrón",
   family: "plucked",
-  program: 32,
   voicing: "bass",
   courses: 1,
   bodyConstruction: "wood-box",

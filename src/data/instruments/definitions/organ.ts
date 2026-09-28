@@ -4,7 +4,6 @@ export const organ: InstrumentDef = {
   id: "organ",
   name: "Tonewheel organ",
   family: "bellows-and-keys",
-  program: 16,
   voicing: "chord",
   elementaryModel: 13,
   makeupGain: 0.417,

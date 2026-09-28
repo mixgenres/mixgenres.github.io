@@ -4,7 +4,6 @@ export const halo_pad: InstrumentDef = {
   id: "halo-pad",
   name: "Halo pad",
   family: "electronic",
-  program: 94,
   voicing: "chord",
   elementaryModel: 9,
   makeupGain: 0.548,

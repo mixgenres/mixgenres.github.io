@@ -123,7 +123,7 @@ import { dspOverride as rock_organ } from './rock-organ';
 import { dspOverride as ryuteki } from './ryuteki';
 import { dspOverride as sampler } from './sampler';
 import { dspOverride as saw_lead } from './saw-lead';
-import { dspOverride as sh_ } from './shō';
+import { dspOverride as sh_ } from './sho';
 import { dspOverride as shaker } from './shaker';
 import { dspOverride as shakuhachi } from './shakuhachi';
 import { dspOverride as shamisen } from './shamisen';

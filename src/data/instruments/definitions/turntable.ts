@@ -4,7 +4,6 @@ export const turntable: InstrumentDef = {
   id: "turntable",
   name: "Turntable",
   family: "electronic",
-  program: 95,
   voicing: "single",
   elementaryModel: 9,
   makeupGain: 0.548,

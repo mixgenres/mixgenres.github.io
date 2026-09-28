@@ -4,7 +4,6 @@ export const synth_strings: InstrumentDef = {
   id: "synth-strings",
   name: "Synth strings",
   family: "electronic",
-  program: 50,
   voicing: "chord",
   elementaryModel: 6,
   makeupGain: 0.457,

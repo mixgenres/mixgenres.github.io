@@ -4,7 +4,6 @@ export const shakuhachi: InstrumentDef = {
   id: "shakuhachi",
   name: "Shakuhachi",
   family: "winds",
-  program: 77,
   octave: 12,
   voicing: "single",
   elementaryModel: 7,

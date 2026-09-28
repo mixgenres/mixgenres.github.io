@@ -4,7 +4,6 @@ export const saw_lead: InstrumentDef = {
   id: "saw-lead",
   name: "Saw lead",
   family: "electronic",
-  program: 81,
   octave: 12,
   voicing: "single",
   elementaryModel: 9,

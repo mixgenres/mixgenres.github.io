@@ -4,7 +4,6 @@ export const vihuela: InstrumentDef = {
   id: "vihuela",
   name: "Vihuela",
   family: "plucked",
-  program: 24,
   octave: 12,
   voicing: "chord",
   courses: 1,

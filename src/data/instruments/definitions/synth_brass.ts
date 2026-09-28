@@ -4,7 +4,6 @@ export const synth_brass: InstrumentDef = {
   id: "synth-brass",
   name: "Synth brass",
   family: "electronic",
-  program: 62,
   voicing: "chord",
   elementaryModel: 15,
   makeupGain: 0.551,

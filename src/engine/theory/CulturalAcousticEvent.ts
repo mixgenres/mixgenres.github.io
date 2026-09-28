@@ -38,8 +38,6 @@ export interface PhysicalExcitationAction {
   pressureCurve?: number[];
   /** Mechanical hand/felt damping factor (0.0 free ring to 1.0 full mute) */
   damping?: number;
-  /** String identifier of the specific articulation/technique (e.g. 'arco', 'slap', 'golpe') */
-  technique?: string;
 }
 
 export interface IntonationState {
@@ -89,8 +87,10 @@ export interface CulturalAcousticEvent {
   velocity?: number;
   /** Optional duration in seconds */
   duration?: number;
-  /** Optional technique modifier */
-  techniqueModifier?: string;
+  /** Resolved gesture code from the whole-song compiler. */
+  gestureCode?: number;
+  /** Precompiled bellows direction: 1 opening, 2 closing. */
+  bellowsDirectionCode?: 1 | 2;
   /** Envelope overrides for physical modeling */
   attack?: number;
   decay?: number;
@@ -126,7 +126,7 @@ export function createCulturalAcousticEvent(
   centsOffset: number = 0
 ): CulturalAcousticEvent {
   return {
-    id: `${trackId}_${cyclePhase.toFixed(4)}_${Math.random().toString(36).substring(2, 7)}`,
+    id: `${trackId}_${cyclePhase.toFixed(4)}_${midi}_${actionType}_${Math.round(force * 1000)}`,
     cyclePhase: Math.max(0, Math.min(1, cyclePhase)),
     luthierObjectId,
     trackId,

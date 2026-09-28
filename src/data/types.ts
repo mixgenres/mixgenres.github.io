@@ -1,4 +1,4 @@
-import type { GenreWorld, MusicalPattern, Track, Measure, Region, Relationship, AppliedLens, Song, GuestLens, SectionEnergy, FormIntensity, SpotlightMode, Scope, Role, InstrumentKind, PatternCategory, DrumHitType, VariationType, InteractionRelationship, SectionType, DanceTag, TuningSystemTag, GrooveMechanics, DominanceLevel, UserPatternPreference, PatternVariant, GenreStyleDefinition, GrooveFusionSpec } from '../types';
+import type { GenreWorld, MusicalPattern, Track, Measure, Region, Relationship, AppliedLens, Song, GuestLens, SectionEnergy, FormIntensity, SpotlightMode, Scope, Role, InstrumentKind, PatternCategory, DrumHitType, VariationType, InteractionRelationship, SectionType, DanceTag, TuningSystemTag, GrooveMechanics, DominanceLevel, UserPatternPreference, PatternVariant, GenreStyleDefinition } from '../types';
 
 export interface ExpressiveModulation {
   depth: number;
@@ -77,5 +77,4 @@ export type {
   UserPatternPreference,
   PatternVariant,
   GenreStyleDefinition,
-  GrooveFusionSpec,
 };

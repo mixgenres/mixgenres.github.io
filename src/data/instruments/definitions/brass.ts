@@ -4,7 +4,6 @@ export const brass: InstrumentDef = {
   id: "brass",
   name: "Brass section",
   family: "brass",
-  program: 61,
   voicing: "chord",
   elementaryModel: 15,
   makeupGain: 0.399,

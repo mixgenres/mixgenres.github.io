@@ -4,7 +4,6 @@ export const harpsichord: InstrumentDef = {
   id: "harpsichord",
   name: "Harpsichord",
   family: "bellows-and-keys",
-  program: 6,
   voicing: "chord",
   elementaryModel: 20,
   makeupGain: 0.949,

@@ -28,9 +28,9 @@ export default class ZapateadoModule implements InstrumentModule {
     const jitter = 1.0 + randNorm(hitSeed ^ 0x22) * 0.04;
 
     const noteNum = voice.note ?? 38;
-    const isTacon = noteNum === 36 || action === 'tacon' || action === 'heel' || /tacon|heel/i.test(`${action} ${(voice.hitType ?? '')}`);
-    const isPunta = noteNum === 42 || action === 'punta' || action === 'toe' || /punta|toe/i.test(`${action} ${(voice.hitType ?? '')}`);
-    const isRedoble = action === 'redoble' || action === 'roll' || /redoble|roll/i.test(voice.articulation ?? '');
+    const isTacon = noteNum === 36 || action === 'tacon' || action === 'heel' || /tacon|heel/i.test(`${action} ${(action ?? '')}`);
+    const isPunta = noteNum === 42 || action === 'punta' || action === 'toe' || /punta|toe/i.test(`${action} ${(action ?? '')}`);
+    const isRedoble = action === 'redoble' || action === 'roll' || /redoble|roll/i.test(action ?? '');
 
     if (isRedoble) {
       // 3-hit rapid heel-toe burst

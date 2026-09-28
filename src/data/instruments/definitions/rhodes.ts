@@ -4,7 +4,6 @@ export const rhodes: InstrumentDef = {
   id: "rhodes",
   name: "Rhodes Electric Piano",
   family: "bellows-and-keys",
-  program: 4,
   voicing: "chord",
   bodyConstruction: "solid-electric",
   excitationType: "hammer",

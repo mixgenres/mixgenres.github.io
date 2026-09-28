@@ -4,7 +4,6 @@ export const alto_sax: InstrumentDef = {
   id: "alto-sax",
   name: "Alto Saxophone",
   family: "winds",
-  program: 65,
   voicing: "single",
   elementaryModel: 16,
   makeupGain: 0.411,

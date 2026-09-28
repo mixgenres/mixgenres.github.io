@@ -4,7 +4,6 @@ export const banjo: InstrumentDef = {
   id: "banjo",
   name: "5-String Banjo",
   family: "plucked",
-  program: 105,
   voicing: "chord",
   courses: 1,
   bodyConstruction: "skin-faced",

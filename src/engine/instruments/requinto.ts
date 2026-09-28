@@ -19,7 +19,6 @@ export default class RequintoModule implements InstrumentModule {
     const {
       trackId,
       voiceIndex,
-      voice,
       params,
       pk,
       gateSignal,
@@ -43,8 +42,8 @@ export default class RequintoModule implements InstrumentModule {
     const isAlzapua = action === 'alzapua' || action === 'alzapúa';
     const isPicado = action === 'picado' || action === 'pick' || action === 'apoyando' || action === 'accent';
     const isMuted = action === 'palm-mute' || action === 'apagado' || action === 'mute' || params.mute > 0.35;
-    const isHarmonic = action === 'harmonic' || /harmonic/i.test(voice.articulation ?? '');
-    const isTremolo = action === 'tremolo' || /tremolo|rapid-run/i.test(voice.articulation ?? '');
+    const isHarmonic = action === 'harmonic' || /harmonic/i.test(action ?? '');
+    const isTremolo = action === 'tremolo' || /tremolo|rapid-run/i.test(action ?? '');
     const isLegato = action === 'legato' || action === 'slur' || action === 'hammer-on' || action === 'pull-off';
 
     // 3. Pitch Dynamics & Singing Vibrato

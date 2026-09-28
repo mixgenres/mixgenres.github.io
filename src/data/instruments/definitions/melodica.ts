@@ -4,7 +4,6 @@ export const melodica: InstrumentDef = {
   id: "melodica",
   name: "Melodica",
   family: "winds",
-  program: 21,
   octave: 12,
   voicing: "single",
   elementaryModel: 10,

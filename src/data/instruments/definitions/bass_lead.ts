@@ -4,7 +4,6 @@ export const bass_lead: InstrumentDef = {
   id: "bass-lead",
   name: "Bass lead synth",
   family: "electronic",
-  program: 87,
   voicing: "single",
   elementaryModel: 3,
   makeupGain: 0.685,

@@ -26,7 +26,7 @@ export default class CastanetsModule implements InstrumentModule {
     const hitSeed = seedOf(trackId, voiceIndex, 8811);
     const jitter = 1.0 + randNorm(hitSeed ^ 0x55) * 0.03;
 
-    const isRoll = action === 'roll' || action === 'carretilla' || /roll|carretilla/i.test(voice.articulation ?? '');
+    const isRoll = action === 'roll' || action === 'carretilla' || /roll|carretilla/i.test(action ?? '');
     const isMacho = action === 'macho' || action === 'low' || voice.note === 76;
 
     if (isRoll) {

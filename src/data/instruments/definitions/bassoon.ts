@@ -4,7 +4,6 @@ export const bassoon: InstrumentDef = {
   id: "bassoon",
   name: "Bassoon",
   family: "winds",
-  program: 70,
   voicing: "single",
   elementaryModel: 3,
   makeupGain: 0.685,

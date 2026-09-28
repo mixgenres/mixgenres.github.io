@@ -4,7 +4,6 @@ export const pan_flute: InstrumentDef = {
   id: "pan-flute",
   name: "Pan flute",
   family: "winds",
-  program: 75,
   octave: 12,
   voicing: "single",
   elementaryModel: 7,

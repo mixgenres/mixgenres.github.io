@@ -4,7 +4,6 @@ export const hichiriki: InstrumentDef = {
   id: "hichiriki",
   name: "Hichiriki",
   family: "winds",
-  program: 111,
   octave: 12,
   voicing: "single",
   elementaryModel: 7,

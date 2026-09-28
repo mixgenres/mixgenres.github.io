@@ -4,7 +4,6 @@ export const flute: InstrumentDef = {
   id: "flute",
   name: "Concert Flute",
   family: "winds",
-  program: 73,
   voicing: "single",
   bodyConstruction: "wood-box",
   excitationType: "breath",

@@ -4,7 +4,6 @@ export const rock_organ: InstrumentDef = {
   id: "rock-organ",
   name: "Rock organ",
   family: "bellows-and-keys",
-  program: 18,
   voicing: "chord",
   elementaryModel: 13,
   makeupGain: 0.417,

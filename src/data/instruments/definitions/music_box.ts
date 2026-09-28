@@ -4,7 +4,6 @@ export const music_box: InstrumentDef = {
   id: "music-box",
   name: "Music box",
   family: "metal-and-wood",
-  program: 10,
   voicing: "single",
   elementaryModel: 8,
   makeupGain: 1.273,

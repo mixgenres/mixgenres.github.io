@@ -4,7 +4,6 @@ export const horn_section: InstrumentDef = {
   id: "horn-section",
   name: "Horn section",
   family: "brass",
-  program: 61,
   voicing: "chord",
   elementaryModel: 15,
   makeupGain: 0.399,

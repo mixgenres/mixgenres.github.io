@@ -10,7 +10,6 @@ export default class ViolaModule implements InstrumentModule {
     const {
       trackId,
       voiceIndex,
-      voice,
       params,
       pk,
       gateSignal,
@@ -23,12 +22,12 @@ export default class ViolaModule implements InstrumentModule {
     const noteSeed = seedOf(trackId, voiceIndex, 3003);
     
     // Articulation definitions
-    const isPizz = action === 'pluck' || action === 'pizzicato' || action === 'tambor' || /pizz/i.test(voice.articulation ?? '');
-    const isTremolo = action === 'tremolo' || /tremolo/i.test(voice.articulation ?? '');
+    const isPizz = action === 'pluck' || action === 'pizzicato' || action === 'tambor' || /pizz/i.test(action ?? '');
+    const isTremolo = action === 'tremolo' || /tremolo/i.test(action ?? '');
     const isStaccato = action === 'staccato' || action === 'spiccato' || action === 'accent' || params.articulation > 0.65;
-    const isSulPonticello = action === 'sul-ponticello' || /ponticello/i.test(voice.articulation ?? '');
+    const isSulPonticello = action === 'sul-ponticello' || /ponticello/i.test(action ?? '');
     const isLegato = action === 'legato' || action === 'slur';
-    const isChicharra = action === 'chicharra' || /chicharra/i.test(voice.articulation ?? '');
+    const isChicharra = action === 'chicharra' || /chicharra/i.test(action ?? '');
 
     if (isChicharra) {
       const scrapeNoise = el.svf({ mode: 'bandpass' }, 3800, 5.5, el.pinknoise());

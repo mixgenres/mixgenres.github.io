@@ -4,7 +4,6 @@ export const berimbau: InstrumentDef = {
   id: "berimbau",
   name: "Berimbau",
   family: "plucked",
-  program: 105,
   voicing: "single",
   courses: 1,
   bodyConstruction: "gourd",

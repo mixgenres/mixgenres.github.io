@@ -4,7 +4,6 @@ export const choir: InstrumentDef = {
   id: "choir",
   name: "Full Vocal Choir",
   family: "voice",
-  program: 52,
   voicing: "chord",
   elementaryModel: 12,
   makeupGain: 0.455,

@@ -20,7 +20,6 @@ export default class TrumpetModule implements InstrumentModule {
     const {
       trackId,
       voiceIndex,
-      voice,
       params,
       gateSignal,
       velSignal,
@@ -33,10 +32,10 @@ export default class TrumpetModule implements InstrumentModule {
     const breathDev = Math.max(0.85, Math.min(1.15, 1.0 + randNorm(noteSeed) * 0.10));
 
     // 1. Gesture Recognition (Falls, Doits, Shakes, Growls, Bends)
-    const isFall = action === 'fall' || action === 'drop' || /fall|drop|caida|pitch-env-down/i.test(voice.articulation ?? '');
-    const isDoit = action === 'doit' || action === 'rip' || action === 'rip-up' || /doit|rip|pitch-env-up/i.test(voice.articulation ?? '');
-    const isGrowl = action === 'growl' || /growl|throat-growl/i.test(voice.articulation ?? '');
-    const isShake = action === 'shake' || /shake|lip-trill/i.test(voice.articulation ?? '');
+    const isFall = action === 'fall' || action === 'drop' || /fall|drop|caida|pitch-env-down/i.test(action ?? '');
+    const isDoit = action === 'doit' || action === 'rip' || action === 'rip-up' || /doit|rip|pitch-env-up/i.test(action ?? '');
+    const isGrowl = action === 'growl' || /growl|throat-growl/i.test(action ?? '');
+    const isShake = action === 'shake' || /shake|lip-trill/i.test(action ?? '');
     const isSlur = action === 'legato' || action === 'slur' || action === 'lip_slur' || (params.articulation < 0.25 && action !== 'staccato');
     const isStaccato = action === 'staccato' || action === 'tongue' || action === 'accent' || params.articulation > 0.65;
 

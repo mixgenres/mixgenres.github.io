@@ -17,6 +17,7 @@ import {
 } from '../elementary/elementaryEngine';
 
 import { resolveDialect, performanceModeForContext } from '../theory/dialects';
+import { resolveRenderGesture } from './renderGesture';
 import { contractForGenre } from '../../data/styles/contracts';
 
 export function getPolyphonyForTrack(instrumentId: string, role?: string): number {
@@ -286,7 +287,7 @@ export class BandWorkletNode {
           decayTimeFactor: 2,
           harmonicRichness: 0.7,
         };
-        const model = instDef?.elementaryModel ?? modelForInstrument(instrumentId, instLuthier);
+        const model = instDef?.elementaryModel ?? modelForInstrument(instrumentId);
         const params = defaultTrackParams(instrumentId, instLuthier, model);
         params.performanceMode = performanceModeForContext(this.activeWorldId, this.activeStyleId);
         if (this.activeWorldId) {
@@ -439,7 +440,7 @@ export class BandWorkletNode {
       decayTimeFactor: 2,
       harmonicRichness: 0.7,
     }) as LuthierPhysicalParameters;
-    const model = modelForInstrument(instrumentId, luthier);
+    const model = modelForInstrument(instrumentId);
 
     if (!this.trackParamsMap.has(trackId)) {
       const p = defaultTrackParams(instrumentId, luthier, model);
@@ -465,17 +466,14 @@ export class BandWorkletNode {
     const effectiveModelForGain = isElectronic ? 9 : params.model;
     const baseGain = makeupGainFor(effectiveModelForGain, params.instrumentId);
 
-    const hitType = event.techniqueModifier;
-    let hitGainMultiplier = 1.0;
-    if (hitType === 'accent') hitGainMultiplier = 1.25;
-    else if (hitType === 'ghost') hitGainMultiplier = 0.45;
-    else if (hitType === 'snare' || hitType === 'rim' || hitType === 'slap') hitGainMultiplier = 1.1;
+    const rendered = resolveRenderGesture(instrumentId, event.gestureCode ?? 0);
+    const hitGainMultiplier = rendered.gainMultiplier;
 
     const roleGain = (event as any).roleGain ?? params.roleGain ?? getRoleGainLinear(instDef?.acousticProfile?.role || 'comp', this.activeStyleId || 'default');
     const velScaled = Math.max(0.01, Math.min(1.0, (event.velocity ?? 90) / 127)) * hitGainMultiplier;
     params.volume = Math.max(0.01, Math.min(35, velScaled * baseGain * roleGain));
 
-    const articulationNorm = event.techniqueModifier === 'staccato' ? 0.9 : event.techniqueModifier === 'legato' ? 0.1 : 0.4;
+    const articulationNorm = rendered.articulationNorm;
     params.articulation = articulationNorm;
 
     let voices = this.trackVoicesMap.get(trackId);
@@ -519,9 +517,10 @@ export class BandWorkletNode {
     voice.velocity = velScaled;
     voice.gate = 1;
 
-    voice.actionType = event.action?.type || (event as any).actionType;
-    voice.articulation = event.action?.technique || event.techniqueModifier || (event as any).technique || (event as any).articulation;
-    voice.excitationType = (event as any).excitationType || params.excitationType;
+    voice.action = rendered.action;
+    voice.bellowsDirectionCode = event.bellowsDirectionCode;
+    voice.action = rendered.action;
+    voice.excitationType = rendered.excitationType || params.excitationType;
 
     voice.attack = event.attack;
     voice.decay = event.decay;

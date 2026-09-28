@@ -4,7 +4,6 @@ export const violin: InstrumentDef = {
   id: "violin",
   name: "Acoustic Violin",
   family: "bowed",
-  program: 40,
   octave: 12,
   voicing: "single",
   bodyConstruction: "wood-box",

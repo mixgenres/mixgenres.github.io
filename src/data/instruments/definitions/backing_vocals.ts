@@ -4,7 +4,6 @@ export const backing_vocals: InstrumentDef = {
   id: "backing-vocals",
   name: "Backing vocals",
   family: "voice",
-  program: 54,
   voicing: "chord",
   elementaryModel: 12,
   makeupGain: 0.455,

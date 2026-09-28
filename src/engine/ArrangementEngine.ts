@@ -7,6 +7,6 @@ export function generateTiming(notes: any[], _genre: string = ''): any[] {
     ...note,
     time: note.quantizedTime !== undefined ? note.quantizedTime : (note.time || 0),
     velocity: note.velocity !== undefined ? note.velocity : 1.0,
-    articulation: note.articulation,
+    gestureCode: note.gestureCode,
   }));
 }

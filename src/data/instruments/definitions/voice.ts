@@ -4,7 +4,6 @@ export const voice: InstrumentDef = {
   id: "voice",
   name: "Synth voice",
   family: "voice",
-  program: 54,
   octave: 12,
   voicing: "single",
   elementaryModel: 12,

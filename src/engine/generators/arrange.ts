@@ -9,7 +9,6 @@ import { resolveStyle, StyleRuntime, StyleInfluence, SongStyle, getCanonicalStyl
 import type { ApproachSpec } from '../../data/styles/contracts';
 import { suggestedPaletteForGenre } from '../../data/chordPalette';
 import { clampEnergy, energyForFormIntensity, energyOf, formIntensityForEnergy, shapeScalarOf } from '../metadata/energy';
-import { inferLensFromPattern } from './blend';
 
 export interface Voice extends Track {
   instrumentId: string;
@@ -859,12 +858,7 @@ export function rebuild(sheet: Sheet): Sheet {
         );
 
         const explicitLens = sheet.partLens?.[r.id]?.[track.id];
-        const inferredLens = inferLensFromPattern(p, r.genre ?? sheet.worldId);
-        const lens = explicitLens && explicitLens.weight > 0
-          ? explicitLens
-          : explicitLens
-            ? undefined
-            : inferredLens;
+        const lens = explicitLens && explicitLens.weight > 0 ? explicitLens : undefined;
 
         detailsByBar.push({
           patternId: p.id,

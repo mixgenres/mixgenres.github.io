@@ -25,7 +25,7 @@ export default class AccordionModule implements InstrumentModule {
     const fourFoot = fourFootRaw;
     const sixteenFoot = el.blepsaw(el.mul(reedFreq, 0.5));
 
-    const registerText = `${voice.technique ?? ''} ${voice.hitType ?? ''} ${voice.articulation ?? ''}`.toLowerCase();
+    const registerText = `${action ?? ''} ${action ?? ''} ${action ?? ''}`.toLowerCase();
     const musetteRegister = registerText.includes('musette');
     const dryRegister = registerText.includes('dry') || registerText.includes('master') || registerText.includes('clarinet');
 
@@ -37,9 +37,9 @@ export default class AccordionModule implements InstrumentModule {
 
     const reservoir = dspProfile?.excitationDynamics.continuousReservoir;
     const bellows = dspProfile?.excitationDynamics.bisonoricAsymmetry;
-    const bellowsClosing = voice.bellowsDirection
-      ? voice.bellowsDirection === 'closing'
-      : /cerrar|closing|close|push|pushing/.test(`${action} ${(voice.hitType ?? '')}`.toLowerCase());
+    const bellowsClosing = voice.bellowsDirectionCode !== undefined
+      ? voice.bellowsDirectionCode === 2
+      : false;
     const pressure = reservoir?.pressure ?? params.pressure;
     const directionBias = bellows
       ? (bellowsClosing ? bellows.closing.pressure : bellows.opening.pressure)

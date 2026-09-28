@@ -4,7 +4,6 @@ export const harmonica: InstrumentDef = {
   id: "harmonica",
   name: "10-Hole Diatonic Harmonica (Blues Harp)",
   family: "winds",
-  program: 22,
   voicing: "single",
   bodyConstruction: "wood-box",
   excitationType: "breath",

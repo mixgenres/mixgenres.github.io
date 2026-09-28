@@ -4,7 +4,6 @@ export const bagpipes: InstrumentDef = {
   id: "bagpipes",
   name: "Great Highland Bagpipes",
   family: "winds",
-  program: 109,
   voicing: "single",
   elementaryModel: 16,
   makeupGain: 0.300,

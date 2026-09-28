@@ -4,7 +4,6 @@ export const fm_ep: InstrumentDef = {
   id: "fm-ep",
   name: "FM Electric Piano",
   family: "bellows-and-keys",
-  program: 5,
   voicing: "chord",
   elementaryModel: 14,
   makeupGain: 0.411,

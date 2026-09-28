@@ -4,7 +4,6 @@ export const guitar_harmonics: InstrumentDef = {
   id: "guitar-harmonics",
   name: "Guitar harmonics",
   family: "plucked",
-  program: 31,
   voicing: "single",
   courses: 1,
   bodyConstruction: "wood-box",

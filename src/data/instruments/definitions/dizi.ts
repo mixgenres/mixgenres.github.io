@@ -4,7 +4,6 @@ export const dizi: InstrumentDef = {
   id: "dizi",
   name: "Dizi",
   family: "winds",
-  program: 72,
   voicing: "single",
   elementaryModel: 7,
   makeupGain: 0.466,

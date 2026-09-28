@@ -48,9 +48,9 @@ export default class BandoneonModule implements InstrumentModule {
     }
 
     // 2. Bellows Direction & Bisonoric Asymmetry
-    const isClosing = voice.bellowsDirection
-      ? voice.bellowsDirection === 'closing'
-      : /cerrar|closing|close|push|pushing/.test(`${action} ${(voice.hitType ?? '')} ${(voice.technique ?? '')}`.toLowerCase());
+    const isClosing = voice.bellowsDirectionCode !== undefined
+      ? voice.bellowsDirectionCode === 2
+      : false;
 
     const reservoir = dspProfile?.excitationDynamics.continuousReservoir;
     const bellows = dspProfile?.excitationDynamics.bisonoricAsymmetry;
@@ -63,10 +63,10 @@ export default class BandoneonModule implements InstrumentModule {
       : (isClosing ? 1.08 : 0.95);
 
     // 3. Pitch Dynamics & Tango Arrastre (Pre-beat scooping drag)
-    const isArrastre = action === 'arrastre' || /arrastre|drag/i.test(voice.articulation ?? '');
-    const isMarcato = action === 'marcato' || /marcato|en 4|marcado/i.test(voice.articulation ?? '');
-    const isStaccato = action === 'staccato' || action === 'seco' || /staccato|seco/i.test(voice.articulation ?? '');
-    const isLegato = action === 'legato' || action === 'legato_squeeze' || /legato/i.test(voice.articulation ?? '');
+    const isArrastre = action === 'arrastre' || /arrastre|drag/i.test(action ?? '');
+    const isMarcato = action === 'marcato' || /marcato|en 4|marcado/i.test(action ?? '');
+    const isStaccato = action === 'staccato' || action === 'seco' || /staccato|seco/i.test(action ?? '');
+    const isLegato = action === 'legato' || action === 'legato_squeeze' || /legato/i.test(action ?? '');
 
     // Arrastre starts ~2-3 semitones below and sweeps quickly into the fundamental with rising bellows pressure
     const arrastreEnv = el.adsr(0.001, 0.085, 0, 0.01, gateSignal);

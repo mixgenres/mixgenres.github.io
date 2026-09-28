@@ -4,7 +4,6 @@ export const guitar: InstrumentDef = {
   id: "guitar",
   name: "Acoustic guitar",
   family: "plucked",
-  program: 24,
   voicing: "chord",
   courses: 1,
   bodyConstruction: "wood-box",
@@ -33,7 +32,6 @@ export const guitar: InstrumentDef = {
     courses: 1,
     bodyConstruction: "wood-box",
     excitationType: "fingerpad",
-    faustProfile: "spanish-guitar",
     articulationCapabilities: [
       "pluck",
       "rest-stroke",

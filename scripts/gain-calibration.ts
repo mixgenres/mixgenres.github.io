@@ -109,7 +109,7 @@ async function renderNote(
   forceVolume?: number
 ): Promise<{ lufs: number; linearEnergy: number; peak: number }> {
   const luthier = getLuthierModelForInstrument(instrumentId);
-  const model = modelForInstrument(instrumentId, luthier);
+  const model = modelForInstrument(instrumentId);
   const params = defaultTrackParams(instrumentId, luthier, model);
   if (forceVolume !== undefined) {
     params.volume = forceVolume;
@@ -256,8 +256,7 @@ async function main() {
   const allInstruments = Object.keys(LUTHIER_INSTRUMENT_MAP);
 
   for (const instId of allInstruments) {
-    const luthier = getLuthierModelForInstrument(instId);
-    const model = modelForInstrument(instId, luthier);
+    const model = modelForInstrument(instId);
     const baseModelGain = gainByModel[model] ?? 1.0;
     const pitches = getPitchesForInstrument(instId, model);
     const vels = [0.55, 0.82];
@@ -326,8 +325,7 @@ async function main() {
         const idMatch = content.match(/id:\s*["']([^"']+)["']/);
         if (idMatch) {
           const id = idMatch[1].toLowerCase();
-          const luthier = getLuthierModelForInstrument(id);
-          const model = modelForInstrument(id, luthier);
+          const model = modelForInstrument(id);
           const override = instrumentOverrides[id];
           const gain = override ? override.gainMultiplier : (gainByModel[model] ?? 1.0);
 

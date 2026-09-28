@@ -4,7 +4,6 @@ export const koto: InstrumentDef = {
   id: "koto",
   name: "Koto",
   family: "plucked",
-  program: 107,
   voicing: "single",
   courses: 1,
   bodyConstruction: "board",

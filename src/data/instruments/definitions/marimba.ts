@@ -4,7 +4,6 @@ export const marimba: InstrumentDef = {
   id: "marimba",
   name: "Marimba",
   family: "metal-and-wood",
-  program: 12,
   voicing: "single",
   elementaryModel: 8,
   makeupGain: 1.000,

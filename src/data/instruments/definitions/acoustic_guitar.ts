@@ -4,7 +4,6 @@ export const acoustic_guitar: InstrumentDef = {
   id: "acoustic-guitar",
   name: "Steel-String Acoustic Guitar",
   family: "plucked",
-  program: 25,
   voicing: "chord",
   courses: 1,
   bodyConstruction: "wood-box",

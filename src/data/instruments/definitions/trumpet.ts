@@ -4,7 +4,6 @@ export const trumpet: InstrumentDef = {
   id: "trumpet",
   name: "Bb Trumpet",
   family: "brass",
-  program: 56,
   voicing: "single",
   bodyConstruction: "brass-tube",
   excitationType: "breath",

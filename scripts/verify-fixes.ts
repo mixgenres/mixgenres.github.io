@@ -1,7 +1,7 @@
 import { writeFileSync } from 'fs';
 import { execSync } from 'child_process';
 import { makeSheet } from '../src/engine/generators/arrange';
-import { tieredCompile } from '../src/engine/sequencing/tieredEngine';
+import { compileWholeSong } from '../src/engine/compiler/wholeSongCompiler';
 import { renderPerformanceToMp3 } from '../src/engine/audio/offlineRender';
 
 function volumedetectMeanDb(path: string): number {
@@ -13,7 +13,7 @@ function volumedetectMeanDb(path: string): number {
 async function main() {
   const genreId = process.argv[2] || 'salsa';
   const sheet = makeSheet(genreId);
-  const perf = tieredCompile(sheet);
+  const perf = compileWholeSong(sheet);
   const trackInstruments = new Map(sheet.tracks.map(t => [t.id, t.instrumentId]));
 
   console.log(`[${genreId}] sections: ${sheet.regions.map(r => `${r.kind}(e${r.energy})`).join(' -> ')}`);

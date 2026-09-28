@@ -4,7 +4,6 @@ export const steel_guitar: InstrumentDef = {
   id: "steel-guitar",
   name: "Resonator Steel Guitar",
   family: "plucked",
-  program: 25,
   voicing: "chord",
   courses: 1,
   bodyConstruction: "wood-box",

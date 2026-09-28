@@ -4,7 +4,6 @@ export const vibraphone: InstrumentDef = {
   id: "vibraphone",
   name: "Vibraphone",
   family: "metal-and-wood",
-  program: 11,
   voicing: "chord",
   elementaryModel: 8,
   makeupGain: 0.708,

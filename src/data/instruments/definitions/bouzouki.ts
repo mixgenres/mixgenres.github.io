@@ -4,7 +4,6 @@ export const bouzouki: InstrumentDef = {
   id: "bouzouki",
   name: "Irish / Greek Bouzouki",
   family: "plucked",
-  program: 25,
   voicing: "chord",
   courses: 2,
   bodyConstruction: "wood-box",

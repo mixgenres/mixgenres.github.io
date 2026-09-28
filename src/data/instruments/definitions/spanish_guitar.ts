@@ -4,7 +4,6 @@ export const spanish_guitar: InstrumentDef = {
   id: "spanish-guitar",
   name: "Flamenco Guitar (Guitarra Blanca)",
   family: "plucked",
-  program: 24,
   voicing: "chord",
   courses: 1,
   bodyConstruction: "wood-box",

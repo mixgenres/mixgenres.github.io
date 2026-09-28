@@ -4,7 +4,6 @@ export const overdrive_guitar: InstrumentDef = {
   id: "overdrive-guitar",
   name: "Overdriven guitar",
   family: "plucked",
-  program: 29,
   voicing: "chord",
   courses: 1,
   bodyConstruction: "solid-electric",

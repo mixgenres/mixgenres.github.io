@@ -4,7 +4,6 @@ export const cello: InstrumentDef = {
   id: "cello",
   name: "Cello",
   family: "bowed",
-  program: 42,
   octave: -12,
   voicing: "single",
   bodyConstruction: "wood-box",

@@ -4,7 +4,6 @@ export const cuatro: InstrumentDef = {
   id: "cuatro",
   name: "Cuatro",
   family: "plucked",
-  program: 24,
   octave: 12,
   voicing: "chord",
   courses: 1,

@@ -4,7 +4,6 @@ export const accordion: InstrumentDef = {
   id: "accordion",
   name: "Accordion",
   family: "bellows-and-keys",
-  program: 21,
   voicing: "chord",
   elementaryModel: 10,
   makeupGain: 0.457,

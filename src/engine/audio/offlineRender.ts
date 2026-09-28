@@ -1,4 +1,4 @@
-import { INSTRUMENTS_BY_ID, genreTechniquesForInstrument } from '../../data/instruments';
+import { INSTRUMENTS_BY_ID } from '../../data/instruments';
 import * as lamejsModule from '@breezystack/lamejs';
 import { Mp3Encoder } from '@breezystack/lamejs';
 import OfflineRenderer from '@elemaudio/offline-renderer';
@@ -9,6 +9,7 @@ import { createMasterChain, getRoleGainLinear } from './mixer';
 import { contractForGenre } from '../../data/styles/contracts';
 import { FORM_BLUEPRINTS } from '../../data/genreForms';
 import { processOfflineAudioDSP } from '../dsp/processor';
+import { resolveRenderGesture } from './renderGesture';
 import {
   defaultTrackParams,
   modelForInstrument,
@@ -95,7 +96,7 @@ export function computeTrackStemFingerprint(
   update(`notes_${sortedNotes.length}`);
   for (let i = 0; i < sortedNotes.length; i++) {
     const n = sortedNotes[i];
-    let s = `${n.time.toFixed(4)},${n.dur.toFixed(4)},${n.midi},${n.vel},${n.articulation || ''},${n.frequencyHz ? n.frequencyHz.toFixed(2) : ''}`;
+    let s = `${n.time.toFixed(4)},${n.dur.toFixed(4)},${n.midi},${n.vel},${n.gestureCode},${n.frequencyHz ? n.frequencyHz.toFixed(2) : ''}`;
     if (n.pitchBend && n.pitchBend.length > 0) {
       s += ':' + n.pitchBend.map(p => `${p.offset.toFixed(4)}@${p.value}`).join(';');
     }
@@ -213,7 +214,7 @@ export async function renderPerformanceToMp3(
     const instrumentId = options.trackInstruments.get(trackId) || trackId;
     const instDef = INSTRUMENTS_BY_ID[instrumentId];
     let luthier = instDef?.luthierPhysics ?? getLuthierModelForInstrument(instrumentId);
-    const model = instDef?.elementaryModel ?? modelForInstrument(instrumentId, luthier);
+    const model = instDef?.elementaryModel ?? modelForInstrument(instrumentId);
     const params = defaultTrackParams(instrumentId, luthier, model);
     params.performanceMode = performanceModeForContext(options.worldId ?? '', options.styleId ?? '');
     const dialect = resolveDialect(instrumentId, options.worldId ?? '', options.styleId ?? '');
@@ -385,119 +386,14 @@ export async function renderPerformanceToMp3(
             const effectiveModelForGain = isElectronic ? 9 : params.model;
             const baseGain = instDef?.makeupGain ?? makeupGainFor(effectiveModelForGain, params.instrumentId);
 
-            const authoredArticulation = (event.note.articulation || '').trim();
-            const styleTechnique = !authoredArticulation
-              ? genreTechniquesForInstrument(instrumentId, options.styleId)[0]
-              : undefined;
-            const effectiveArticulation = authoredArticulation || styleTechnique;
-
-            let hitGainMultiplier = 1.0;
-            if (effectiveArticulation === 'accent' || effectiveArticulation === 'sforzando' || effectiveArticulation === 'marcato') hitGainMultiplier = 1.25;
-            else if (effectiveArticulation === 'ghost' || effectiveArticulation === 'heel' || effectiveArticulation === 'toe') hitGainMultiplier = 0.45;
-            else if (effectiveArticulation === 'rimshot' || effectiveArticulation === 'slap' || effectiveArticulation === 'quinto-slap') hitGainMultiplier = 1.1;
-            else if (effectiveArticulation === 'conga-open' || effectiveArticulation === 'tumba-open') hitGainMultiplier = 1.04;
+            const rendered = resolveRenderGesture(instrumentId, event.note.gestureCode);
+            const hitGainMultiplier = rendered.gainMultiplier;
 
             const role = instDef?.acousticProfile?.role || 'comp';
             const roleGain = params.roleGain ?? getRoleGainLinear(role, options.styleId || 'default');
             const velScaled = Math.max(0.01, Math.min(1.0, event.note.vel / 127)) * hitGainMultiplier;
             params.volume = Math.max(0.01, Math.min(35, velScaled * baseGain * roleGain * trackMixVolume));
-
-            const articulationNorm =
-              effectiveArticulation === 'staccato' ? 0.9 : effectiveArticulation === 'legato' ? 0.1 : 0.4;
-            params.articulation = articulationNorm;
-
-            const isBowed = instDef?.family === 'bowed' || /violin|fiddle|cello|viola|erhu/i.test(instrumentId);
-            let actionType = (event.note as any).actionType || (isBowed ? 'bow_drag' : (dialect?.defaultTechnique || 'strike'));
-            let excitationType = (event.note as any).excitationType || instDef?.excitationType || instDef?.luthierPhysics?.excitationType || 'fingerpad';
-
-            if (effectiveArticulation) {
-              const artLow = effectiveArticulation.toLowerCase();
-              if (artLow.includes('ponticello')) {
-                luthier = { ...luthier, harmonicRichness: Math.min(1, luthier.harmonicRichness + 0.12), decayTimeFactor: luthier.decayTimeFactor * 0.94 };
-              } else if (artLow.includes('tasto')) {
-                luthier = { ...luthier, harmonicRichness: Math.max(0, luthier.harmonicRichness - 0.10), decayTimeFactor: luthier.decayTimeFactor * 1.05 };
-              } else if (artLow.includes('mwah-growl')) {
-                luthier = { ...luthier, harmonicRichness: Math.min(1, luthier.harmonicRichness + 0.07) };
-              }
-              if (isBowed) {
-                if (artLow.includes('pizzicato') || artLow.includes('pizz')) {
-                  luthier = { ...luthier, category: 'strum_friction_pluck' };
-                  actionType = 'pluck';
-                } else {
-                  luthier = { ...luthier, category: 'continuous_bowed_friction' };
-                  actionType = artLow;
-                }
-              } else {
-                actionType = artLow;
-                if (artLow.includes('arco') || artLow.includes('bowed')) {
-                  luthier = { ...luthier, category: 'continuous_bowed_friction' };
-                  actionType = 'bow_drag';
-                } else if (artLow.includes('pizzicato') || artLow.includes('plucked') || artLow.includes('slap-bass') || artLow.includes('pizz')) {
-                  luthier = { ...luthier, category: 'strum_friction_pluck' };
-                  if (!artLow.includes('strappata')) actionType = 'pluck';
-                } else if (/conga-heel|macho-thumb|dayan-ti-ke|cajon-tip/.test(artLow)) {
-                  actionType = 'tap';
-                } else if (/conga-toe|macho-finger-tap|dayan-na|dayan-tun|bayan-ghe|iya-enu|iya-chacha|itotele-enu|okonkolo-chacha/.test(artLow)) {
-                  actionType = 'tap';
-                } else if (artLow.includes('cup-mute') || artLow.includes('stopped') || artLow.includes('palm-mute')) {
-                  actionType = 'mute';
-                } else if (artLow.includes('shake')) {
-                  actionType = 'tremolo';
-                } else if (artLow.includes('rimshot') || artLow.includes('cascara') || artLow.includes('rim')) {
-                  actionType = 'tap';
-                } else if (artLow.includes('conga-open') || artLow.includes('tumba-open')) {
-                  actionType = 'strike';
-                } else if (artLow.includes('rasgue') || artLow.includes('abanico') || artLow.includes('strum-roll')) {
-                  actionType = 'abanico';
-                } else if (artLow.includes('scratch')) {
-                  actionType = 'arrastre';
-                } else if (artLow.includes('fingerstyle') || artLow.includes('flatpick') || artLow.includes('pick') || artLow.includes('plectrum')) {
-                  actionType = 'pluck';
-                } else if (artLow.includes('tongue') || artLow.includes('tongued') || artLow.includes('cut') || artLow.includes('martellato')) {
-                  actionType = 'tongue';
-                } else if (artLow.includes('brush')) {
-                  actionType = 'strike';
-                }
-              }
-            }
-
-            const FINGERPAD_ARTS = [
-              'fingerstyle', 'pizzicato', 'thumb-slap', 'thumb-sweep', 'tirando', 'apoyando',
-              'short-decay-pluck', 'tight-env-pluck', 'finger-snap'
-            ];
-            const HARD_PICK_ARTS = [
-              'flatpick', 'pick', 'fast-picking', 'tremolo-picking', 'ricochet', 'heavy-detaché', 
-              'hard-pizzicato', 'bartok-pizzicato', 'fm-bite'
-            ];
-            const NAIL_ARTS = [
-              'rasgueado', 'golpe', 'alzapúa', 'alzapua', 'picado', 'fast-arpeggiato', 'fast-chord-rake',
-              'noise-burst', 'noise-transient', 'cluster-tap'
-            ];
-            const HAMMER_ARTS = [
-              'staccato', 'staccatissimo', 'bass-cluster-staccato', 'accented-staccato-octave',
-              'muted-key-thump', 'trill'
-            ];
-            const BOW_ARTS = [
-              'arco', 'e-bow-sustain', 'tremolo-bow', 'sul-ponticello-heavy', 'glissando-down', 'glissando-up'
-            ];
-            const AIR_ARTS = [
-              'flutter-tongue', 'rip', 'tongue-slap', 'stopped', 'double-tongue', 'fp-crescendo'
-            ];
-
-            const artLow = (effectiveArticulation || actionType || '').toLowerCase();
-            if (FINGERPAD_ARTS.includes(actionType) || FINGERPAD_ARTS.includes(artLow)) {
-              excitationType = 'fingerpad';
-            } else if (HARD_PICK_ARTS.includes(actionType) || HARD_PICK_ARTS.includes(artLow)) {
-              excitationType = 'hard-pick';
-            } else if (NAIL_ARTS.includes(actionType) || NAIL_ARTS.includes(artLow)) {
-              excitationType = 'nail';
-            } else if (HAMMER_ARTS.includes(actionType) || HAMMER_ARTS.includes(artLow)) {
-              excitationType = 'hammer';
-            } else if (BOW_ARTS.includes(actionType) || BOW_ARTS.includes(artLow)) {
-              excitationType = 'bow';
-            } else if (AIR_ARTS.includes(actionType) || AIR_ARTS.includes(artLow)) {
-              excitationType = 'breath';
-            }
+            params.articulation = rendered.articulationNorm;
 
             // Prefer idle voice; if all busy, steal oldest
             const idleVoices = voices.filter(v => v.gate === 0);
@@ -525,9 +421,8 @@ export async function renderPerformanceToMp3(
             voice.velocity = velScaled;
             voice.gate = 1;
 
-            voice.actionType = actionType;
-            voice.articulation = effectiveArticulation;
-            voice.excitationType = excitationType;
+            voice.action = rendered.action;
+            voice.excitationType = rendered.excitationType;
 
             voice.attack = (event.note as any).attack;
             voice.decay = (event.note as any).decay;

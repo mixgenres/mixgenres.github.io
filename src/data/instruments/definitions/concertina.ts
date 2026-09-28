@@ -4,7 +4,6 @@ export const concertina: InstrumentDef = {
   id: "concertina",
   name: "Concertina",
   family: "bellows-and-keys",
-  program: 21,
   voicing: "chord",
   elementaryModel: 10,
   makeupGain: 0.457,

@@ -4,7 +4,6 @@ export const sitar: InstrumentDef = {
   id: "sitar",
   name: "Sitar",
   family: "plucked",
-  program: 104,
   voicing: "single",
   courses: 1,
   bodyConstruction: "gourd",

@@ -12,8 +12,7 @@ export default class ConcertinaModule implements InstrumentModule {
       gateSignal,
       velSignal,
       freqSignal,
-      b,
-      action
+      b
     } = ctx;
 
     const reedFreq = freqSignal;
@@ -27,9 +26,9 @@ export default class ConcertinaModule implements InstrumentModule {
 
     const reservoir = dspProfile?.excitationDynamics.continuousReservoir;
     const bellows = dspProfile?.excitationDynamics.bisonoricAsymmetry;
-    const bellowsClosing = voice.bellowsDirection
-      ? voice.bellowsDirection === 'closing'
-      : /cerrar|closing|close|push|pushing/.test(`${action} ${(voice.hitType ?? '')}`.toLowerCase());
+    const bellowsClosing = voice.bellowsDirectionCode !== undefined
+      ? voice.bellowsDirectionCode === 2
+      : false;
     const pressure = reservoir?.pressure ?? params.pressure;
     const directionBias = bellows
       ? (bellowsClosing ? bellows.closing.pressure : bellows.opening.pressure)

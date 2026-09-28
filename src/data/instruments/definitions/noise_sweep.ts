@@ -4,7 +4,6 @@ export const noise_sweep: InstrumentDef = {
   id: "noise-sweep",
   name: "Noise sweep",
   family: "electronic",
-  program: 95,
   voicing: "single",
   elementaryModel: 9,
   makeupGain: 0.548,

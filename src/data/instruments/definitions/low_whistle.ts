@@ -4,7 +4,6 @@ export const low_whistle: InstrumentDef = {
   id: "low-whistle",
   name: "Low whistle",
   family: "winds",
-  program: 73,
   voicing: "single",
   elementaryModel: 7,
   makeupGain: 0.466,

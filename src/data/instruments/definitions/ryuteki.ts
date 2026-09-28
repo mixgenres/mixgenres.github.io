@@ -4,7 +4,6 @@ export const ryuteki: InstrumentDef = {
   id: "ryuteki",
   name: "Ryuteki",
   family: "winds",
-  program: 73,
   octave: 12,
   voicing: "single",
   elementaryModel: 7,

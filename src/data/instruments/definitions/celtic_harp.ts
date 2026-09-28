@@ -4,7 +4,6 @@ export const celtic_harp: InstrumentDef = {
   id: "celtic-harp",
   name: "Celtic harp",
   family: "plucked",
-  program: 46,
   voicing: "chord",
   courses: 1,
   bodyConstruction: "wood-box",

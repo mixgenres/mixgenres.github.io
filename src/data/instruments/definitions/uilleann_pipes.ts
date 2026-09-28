@@ -4,7 +4,6 @@ export const uilleann_pipes: InstrumentDef = {
   id: "uilleann-pipes",
   name: "Uilleann pipes",
   family: "winds",
-  program: 109,
   voicing: "single",
   elementaryModel: 16,
   makeupGain: 0.411,

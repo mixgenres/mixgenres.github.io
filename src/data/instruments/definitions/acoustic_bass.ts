@@ -4,7 +4,6 @@ export const acoustic_bass: InstrumentDef = {
   id: "acoustic-bass",
   name: "Acoustic bass guitar",
   family: "plucked",
-  program: 32,
   voicing: "bass",
   courses: 1,
   bodyConstruction: "wood-box",
@@ -31,7 +30,6 @@ export const acoustic_bass: InstrumentDef = {
     bodyResonanceVolume: 70,
     decayTimeFactor: 2.9,
     harmonicRichness: 0.55,
-    faustProfile: "double-bass",
     articulationCapabilities: ["pizzicato", "arco", "slap-bass", "palm-mute"],
     genreAdaptable: true
   },

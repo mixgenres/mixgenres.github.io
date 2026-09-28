@@ -4,7 +4,6 @@ export const warm_pad: InstrumentDef = {
   id: "warm-pad",
   name: "Warm pad",
   family: "electronic",
-  program: 89,
   voicing: "chord",
   elementaryModel: 9,
   makeupGain: 0.548,

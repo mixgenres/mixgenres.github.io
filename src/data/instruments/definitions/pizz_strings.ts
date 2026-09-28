@@ -4,7 +4,6 @@ export const pizz_strings: InstrumentDef = {
   id: "pizz-strings",
   name: "Pizzicato strings",
   family: "plucked-string",
-  program: 45,
   voicing: "chord",
   elementaryModel: 6,
   makeupGain: 5.477,

@@ -26,10 +26,10 @@ export default class DrumsModule implements InstrumentModule {
     const construction = params.bodyConstruction ?? 'wood-box';
     const isMetalShell = construction === 'metal-shell' || /timbal|metal|steel|agogo|bell|snare-metal/.test(instId);
     const isWoodBox = construction === 'wood-box' || /cajon|cajón|box|slit-drum/.test(instId);
-    const isHeelToe = action === 'heel' || action === 'toe' || /heel|toe/i.test(voice.hitType ?? '');
+    const isHeelToe = action === 'heel' || action === 'toe' || /heel|toe/i.test(action ?? '');
 
     const isLogDrum = instId.includes('log-drum');
-    const isMeend = action === 'meend' || /meend/i.test(voice.hitType ?? '');
+    const isMeend = action === 'meend' || /meend/i.test(action ?? '');
     const bodyMult = 0.5 + params.body * 2.5;
 
     const pitchEnv = el.adsr(

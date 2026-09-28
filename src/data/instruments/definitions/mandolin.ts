@@ -4,7 +4,6 @@ export const mandolin: InstrumentDef = {
   id: "mandolin",
   name: "Mandolin",
   family: "plucked",
-  program: 25,
   octave: 12,
   voicing: "single",
   courses: 2,

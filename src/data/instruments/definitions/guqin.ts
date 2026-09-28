@@ -4,7 +4,6 @@ export const guqin: InstrumentDef = {
   id: "guqin",
   name: "Guqin",
   family: "plucked",
-  program: 24,
   voicing: "single",
   courses: 1,
   bodyConstruction: "board",

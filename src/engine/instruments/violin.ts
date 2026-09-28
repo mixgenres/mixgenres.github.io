@@ -20,7 +20,6 @@ export default class ViolinModule implements InstrumentModule {
     const {
       trackId,
       voiceIndex,
-      voice,
       params,
       pk,
       gateSignal,
@@ -33,15 +32,15 @@ export default class ViolinModule implements InstrumentModule {
     const noteSeed = seedOf(trackId, voiceIndex, 1001);
     
     // 1. Articulation & Extended Technique Flags
-    const isPizz = action === 'pluck' || action === 'pizzicato' || /pizz/i.test(voice.articulation ?? '');
-    const isTremolo = action === 'tremolo' || /tremolo/i.test(voice.articulation ?? '');
+    const isPizz = action === 'pluck' || action === 'pizzicato' || /pizz/i.test(action ?? '');
+    const isTremolo = action === 'tremolo' || /tremolo/i.test(action ?? '');
     const isStaccato = action === 'staccato' || action === 'spiccato' || action === 'martele' || action === 'accent' || params.articulation > 0.65;
-    const isSulPonticello = action === 'sul-ponticello' || /ponticello/i.test(voice.articulation ?? '');
-    const isSulTasto = action === 'sul-tasto' || /tasto|flautando/i.test(voice.articulation ?? '');
+    const isSulPonticello = action === 'sul-ponticello' || /ponticello/i.test(action ?? '');
+    const isSulTasto = action === 'sul-tasto' || /tasto|flautando/i.test(action ?? '');
     const isLegato = action === 'legato' || action === 'slur';
-    const isChicharra = action === 'chicharra' || /chicharra/i.test(voice.articulation ?? '');
-    const isTambor = action === 'tambor' || /tambor/i.test(voice.articulation ?? '');
-    const isLatigo = action === 'latigo' || /latigo|whip/i.test(voice.articulation ?? '');
+    const isChicharra = action === 'chicharra' || /chicharra/i.test(action ?? '');
+    const isTambor = action === 'tambor' || /tambor/i.test(action ?? '');
+    const isLatigo = action === 'latigo' || /latigo|whip/i.test(action ?? '');
 
     // 2. Special Extended Techniques (Chicharra, Tambor, Látigo)
     if (isChicharra) {

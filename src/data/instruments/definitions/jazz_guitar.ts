@@ -4,7 +4,6 @@ export const jazz_guitar: InstrumentDef = {
   id: "jazz-guitar",
   name: "Jazz guitar",
   family: "plucked",
-  program: 26,
   voicing: "chord",
   courses: 1,
   bodyConstruction: "wood-box",

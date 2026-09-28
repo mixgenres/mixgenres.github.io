@@ -4,7 +4,6 @@ export const requinto: InstrumentDef = {
   id: "requinto",
   name: "Requinto Guitar",
   family: "plucked",
-  program: 25,
   octave: 12,
   voicing: "single",
   courses: 1,

@@ -4,7 +4,6 @@ export const muted_guitar: InstrumentDef = {
   id: "muted-guitar",
   name: "Muted guitar",
   family: "plucked",
-  program: 28,
   voicing: "chord",
   courses: 1,
   bodyConstruction: "solid-electric",

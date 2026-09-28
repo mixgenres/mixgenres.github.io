@@ -4,7 +4,6 @@ export const strings: InstrumentDef = {
   id: "strings",
   name: "Fast string ensemble",
   family: "bowed",
-  program: 48,
   voicing: "chord",
   elementaryModel: 6,
   makeupGain: 0.531,

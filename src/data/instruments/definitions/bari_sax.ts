@@ -4,7 +4,6 @@ export const bari_sax: InstrumentDef = {
   id: "bari-sax",
   name: "Baritone Saxophone",
   family: "winds",
-  program: 67,
   voicing: "bass",
   elementaryModel: 16,
   makeupGain: 0.411,

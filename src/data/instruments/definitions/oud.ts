@@ -4,7 +4,6 @@ export const oud: InstrumentDef = {
   id: "oud",
   name: "Oud",
   family: "plucked",
-  program: 105,
   voicing: "single",
   courses: 2,
   bodyConstruction: "wood-box",

@@ -4,7 +4,6 @@ export const erhu: InstrumentDef = {
   id: "erhu",
   name: "Erhu",
   family: "bowed",
-  program: 110,
   octave: 12,
   voicing: "single",
   bodyConstruction: "skin-faced",

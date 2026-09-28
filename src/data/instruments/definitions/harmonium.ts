@@ -4,7 +4,6 @@ export const harmonium: InstrumentDef = {
   id: "harmonium",
   name: "Harmonium",
   family: "bellows-and-keys",
-  program: 20,
   voicing: "chord",
   elementaryModel: 0,
   makeupGain: 0.344,

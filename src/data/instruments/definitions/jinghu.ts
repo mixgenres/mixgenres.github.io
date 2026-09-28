@@ -4,7 +4,6 @@ export const jinghu: InstrumentDef = {
   id: "jinghu",
   name: "Jinghu",
   family: "bowed",
-  program: 110,
   octave: 12,
   voicing: "single",
   elementaryModel: 6,

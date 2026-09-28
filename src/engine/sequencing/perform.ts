@@ -32,10 +32,16 @@ export interface PerfNote {
   trackId: string;
   bar: number;
   drum?: boolean;
-  /** specific string identifier for the technique/articulation applied */
-  articulation?: string;
-  /** explicit bellows movement direction for free-reed instruments */
-  bellowsDirection?: 'opening' | 'closing';
+  /** Resolved instrument gesture. Numeric so playback cannot make semantic choices. */
+  gestureCode: number;
+  /** Instrument-independent rhythmic intent. */
+  hitFunctionCode: number;
+  /** Resolved accent strength from the song/section groove plan. */
+  accent: number;
+  /** Precompiled bellows movement: 1 opening, 2 closing. */
+  bellowsDirectionCode?: 1 | 2;
+  /** 0 = authored rhythm attack, 1 = compiler-derived phrase fill/ornament. */
+  originCode?: 0 | 1;
 }
 
 export interface PerfCC {
@@ -44,15 +50,6 @@ export interface PerfCC {
   cc: number;
   /** 0..127 */
   value: number;
-}
-
-export interface PerfProgram {
-  time: number;
-  trackId: string;
-  program: number;
-  bankMSB?: number;
-  bankLSB?: number;
-  drum?: boolean;
 }
 
 export interface BarTime {

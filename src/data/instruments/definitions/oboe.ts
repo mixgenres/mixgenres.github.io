@@ -4,7 +4,6 @@ export const oboe: InstrumentDef = {
   id: "oboe",
   name: "Oboe",
   family: "winds",
-  program: 68,
   octave: 12,
   voicing: "single",
   elementaryModel: 16,

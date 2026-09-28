@@ -34,7 +34,6 @@ export const cajon: InstrumentDef = {
     bodyResonanceVolume: 22,
     decayTimeFactor: 0.5,
     harmonicRichness: 0.75,
-    faustProfile: "flamenco-cajon",
     articulationCapabilities: ["bass", "slap", "tip", "side-tap", "brush", "roll", "open", "mute"],
     soundboardResonanceHz: 180,
     airResonanceHz: 65,

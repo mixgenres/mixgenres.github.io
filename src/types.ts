@@ -3,10 +3,7 @@ export type SectionEnergy = 1 | 2 | 3 | 4 | 5;
 export type FormIntensity = 'low' | 'medium' | 'high' | 'peak';
 export type SpotlightMode = 'auto' | 'on' | 'off';
 
-/**
- * A part playing "in the voice of" another world. Set explicitly by the user, or
- * inferred when a part is given a pattern authored by a foreign world.
- */
+/** A part playing "in the voice of" another world. The lens is always explicit. */
 export interface GuestLens {
   /** Foreign genre supplying the playing style. */
   genreId: string;
@@ -14,10 +11,6 @@ export interface GuestLens {
   styleId?: string;
   /** 0..1 — how far the part leans away from the host style. */
   weight: number;
-  /** Set when the engine inferred the lens from a cross-world pattern choice. */
-  inferred?: boolean;
-  /** The pattern that triggered inference, for UI explanation. */
-  viaPatternId?: string;
 }
 
 export type LensId = string;
@@ -423,6 +416,7 @@ export interface Measure {
     durationGrid?: number[];
     hitTypes?: DrumHitType[];
     articulation?: string;
+    articulations?: string[];
     variationType?: string;
     transformationApplied?: string;
   }>;
@@ -468,7 +462,7 @@ export interface Region {
   /**
    * Derived, cached shape band. Written by `rebuild()` from `energy`; never the
    * source of truth. Retained because form templates are authored in this
-   * vocabulary and `SectionShape` reads it.
+   * vocabulary and the section compiler reads it.
    */
   intensity?: FormIntensity;
   /**
@@ -528,21 +522,8 @@ export interface Song {
   styleInfluences?: any[];
   styleOverrides?: Record<string, unknown>;
   phrasePatternCache?: Record<string, string>;
-  grooveFusion?: GrooveFusionSpec;
 }
 
-export interface GrooveFusionSpec {
-  /** The two (or more) genres being fused, with a weight each summing to 1. */
-  members: { genreId: string; styleId?: string; weight: number }[];
-  /** How the two onset grids combine, not just how parameters lerp. */
-  cellStrategy: 'interleave' | 'layer' | 'alternate-by-section' | 'call-and-response';
-  /** Which genre's meter/cycle wins when they conflict (fusion always needs
-   *  one clock — but which parts speak which genre's rhythmic vocabulary is
-   *  now negotiable per role). */
-  clockGenreId: string;
-  /** For call-and-response, how often (in bars) tracks alternate which genre they speak */
-  rotatesEveryBars?: number;
-}
 
 export * from './types/style';
 

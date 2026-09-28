@@ -4,7 +4,6 @@ export const clarinet: InstrumentDef = {
   id: "clarinet",
   name: "Clarinet",
   family: "winds",
-  program: 71,
   voicing: "single",
   elementaryModel: 16,
   makeupGain: 0.411,

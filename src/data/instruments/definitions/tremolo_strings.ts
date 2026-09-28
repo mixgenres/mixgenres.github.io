@@ -4,7 +4,6 @@ export const tremolo_strings: InstrumentDef = {
   id: "tremolo-strings",
   name: "Tremolo strings",
   family: "bowed",
-  program: 44,
   voicing: "chord",
   elementaryModel: 6,
   makeupGain: 0.682,

@@ -4,7 +4,6 @@ export const clavinet: InstrumentDef = {
   id: "clavinet",
   name: "Clavinet",
   family: "bellows-and-keys",
-  program: 7,
   voicing: "chord",
   elementaryModel: 19,
   makeupGain: 30.000,

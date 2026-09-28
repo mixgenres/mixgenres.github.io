@@ -4,7 +4,6 @@ export const viola: InstrumentDef = {
   id: "viola",
   name: "Viola",
   family: "bowed",
-  program: 41,
   voicing: "single",
   bodyConstruction: "wood-box",
   excitationType: "bow",

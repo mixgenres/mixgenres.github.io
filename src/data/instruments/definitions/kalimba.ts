@@ -4,7 +4,6 @@ export const kalimba: InstrumentDef = {
   id: "kalimba",
   name: "Kalimba / Mbira",
   family: "plucked",
-  program: 108,
   voicing: "single",
   courses: 1,
   bodyConstruction: "wood-box",

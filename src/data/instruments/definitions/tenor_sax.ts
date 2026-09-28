@@ -4,7 +4,6 @@ export const tenor_sax: InstrumentDef = {
   id: "tenor-sax",
   name: "Bb Tenor Saxophone",
   family: "winds",
-  program: 66,
   voicing: "single",
   bodyConstruction: "brass-tube",
   excitationType: "breath",

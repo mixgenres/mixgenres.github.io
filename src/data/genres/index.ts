@@ -268,7 +268,20 @@ for (const source of Object.values(SOURCE_WORLDS)) {
   }
 }
 
-export const ALL_PATTERNS: MusicalPattern[] = [...uniquePatterns.values()];
+// Canonical rhythm names are unique. When two genres legitimately use the same
+// surface name, preserve both definitions and qualify them with their authored
+// genre rather than collapsing distinct musical identities.
+const _namedPatternCounts = new Map<string, number>();
+for (const p of uniquePatterns.values()) {
+  const key = p.name.trim().toLowerCase();
+  _namedPatternCounts.set(key, (_namedPatternCounts.get(key) ?? 0) + 1);
+}
+export const ALL_PATTERNS: MusicalPattern[] = [...uniquePatterns.values()].map(p => {
+  const key = p.name.trim().toLowerCase();
+  if ((_namedPatternCounts.get(key) ?? 0) <= 1) return p;
+  const genre = String(p.worldId ?? p.family ?? 'source').replace(/[-_]+/g, ' ');
+  return { ...p, name: `${genre.replace(/\b\w/g, c => c.toUpperCase())} ${p.name} [${p.id}]` };
+});
 export const PATTERNS_BY_ID: Record<string, MusicalPattern> = Object.fromEntries(ALL_PATTERNS.map(p => [p.id, p]));
 
 /** Genre views contain shared pattern objects, never genre-specific clones. */

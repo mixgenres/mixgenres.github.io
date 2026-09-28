@@ -1,4 +1,4 @@
-import type { GuestLens, MusicalPattern } from '../../types';
+import type { GuestLens } from '../../types';
 import type { ResolvedStyle } from '../../data/styles/schema';
 import type { WorldContract, BassDialect, PercussionDialect, ApproachSpec } from '../../data/styles/contracts';
 import { resolveStyle } from '../../data/styles/resolve';
@@ -18,14 +18,9 @@ import { getCanonicalStyle } from '../../data/styles/registry';
  * one weight. It produces a blended `ResolvedStyle` used only for that part's
  * performance, never for the section as a whole.
  *
- * Two ways a lens comes into existence:
- *
- *   1. Explicit. The user sets a part's playing style to another world.
- *   2. Inferred. The user picks a pattern authored by another world. Choosing
- *      the cell *is* choosing the accent, the articulation and the timing that
- *      go with it — so the engine infers a lens rather than playing a foreign
- *      rhythm with host phrasing, which is what made cross-world patterns sound
- *      like transcription errors.
+ * A lens is explicit. Choosing a foreign rhythm transfers its timing/weight;
+ * the user can additionally opt into a guest genre/style lens. This keeps
+ * rhythm transfer and genre adaptation separate and removes hidden inference.
  *
  * ## Host invariants are never negotiable
  *
@@ -314,33 +309,6 @@ function mergeStringListMaps(
     out[k] = w >= 0.6 ? Array.from(new Set([...v, ...(host[k] ?? [])])) : Array.from(new Set([...(host[k] ?? []), ...v]));
   }
   return out;
-}
-
-/**
- * Infer a lens from a pattern choice. Returns undefined when the pattern is
- * native to the section's genre, which is the overwhelmingly common case.
- */
-export function inferLensFromPattern(
-  pattern: MusicalPattern | undefined,
-  sectionGenreId: string,
-): GuestLens | undefined {
-  if (!pattern) return undefined;
-  if (!pattern.worldId || pattern.worldId === sectionGenreId) return undefined;
-  const weight = 0.5;
-  return {
-    genreId: pattern.worldId,
-    styleId: pattern.styleIds?.[0],
-    weight,
-    inferred: true,
-    viaPatternId: pattern.id,
-  };
-}
-
-/** Explicit lens wins over an inferred one; an explicit weight of 0 means "off". */
-export function effectiveLens(explicit: GuestLens | undefined, inferred: GuestLens | undefined): GuestLens | undefined {
-  if (explicit && explicit.weight > 0) return explicit;
-  if (explicit && explicit.weight <= 0) return undefined;
-  return inferred;
 }
 
 export function clearBlendCache(): void {

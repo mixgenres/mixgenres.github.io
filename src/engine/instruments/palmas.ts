@@ -18,7 +18,6 @@ export default class PalmasModule implements InstrumentModule {
     const {
       trackId,
       voiceIndex,
-      voice,
       params,
       gateSignal,
       action
@@ -28,8 +27,8 @@ export default class PalmasModule implements InstrumentModule {
     const timingJitter = 1.0 + randNorm(hitSeed ^ 0x33) * 0.05;
 
     // Detect Sordas vs Claras vs Redoble
-    const isRedoble = action === 'redoble' || action === 'roll' || /redoble|roll/i.test(voice.articulation ?? '');
-    const isSordas = action === 'palmas-sordas' || action === 'ghost' || /sordas|cupped|soft|muted/i.test(`${action} ${(voice.hitType ?? '')}`);
+    const isRedoble = action === 'redoble' || action === 'roll' || /redoble|roll/i.test(action ?? '');
+    const isSordas = action === 'palmas-sordas' || action === 'ghost' || /sordas|cupped|soft|muted/i.test(`${action} ${(action ?? '')}`);
 
     if (isRedoble) {
       // Fast 3-clap triplet burst across ~36ms

@@ -4,7 +4,6 @@ export const dub_echo: InstrumentDef = {
   id: "dub-echo",
   name: "Dub echo throw",
   family: "electronic",
-  program: 120,
   voicing: "single",
   elementaryModel: 9,
   makeupGain: 0.548,

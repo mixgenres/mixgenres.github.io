@@ -4,7 +4,6 @@ export const acid_303: InstrumentDef = {
   id: "acid-303",
   name: "Acid Bassline 303",
   family: "electronic",
-  program: 38,
   octave: 12,
   voicing: "single",
   elementaryModel: 9,

@@ -119,15 +119,12 @@ note: number;
 velocity: number;
 gate: number;
 id: string;
-actionType?: 'strike' | 'pluck' | 'bow_drag' | 'abanico' | 'rasgueado' | 'tap' | 'golpe' | 'golpe-caja' | 'chicharra' | 'bellows-slap' | 'strappata' | 'tambor' | 'heel' | 'toe' | 'arrastre' | 'slap' | 'mute' | 'legato' | 'slur' | 'staccato' | 'tongue' | 'accent' | 'pizzicato' | 'fall' | 'doit' | 'shake' | 'growl' | string;
-technique?: string;
-hitType?: string;
-articulation?: string;
+action?: string;
 excitationType?: 'plectrum' | 'nail' | 'fingerpad' | 'hard-pick' | 'hammer' | 'stick' | 'mallet' | 'breath' | 'bow' | string;
 contactPoint?: number;
 mass?: number;
 frequencyHz?: number;
-bellowsDirection?: 'opening' | 'closing';
+bellowsDirectionCode?: 1 | 2;
 retriggerId?: number;
 attack?: number;
 decay?: number;
@@ -269,16 +266,9 @@ export function getBowedResonanceProfile(instrumentId: string, bodyParam: number
     bridgeHillGain: 0.35,
   };
 }
-export function modelForInstrument(instrumentId: string, luthier?: LuthierPhysicalParameters): number {
+export function modelForInstrument(instrumentId: string): number {
   const def = INSTRUMENTS_BY_ID[instrumentId];
   if (def?.elementaryModel !== undefined) return def.elementaryModel;
-  if (luthier?.faustProfile) {
-    switch (luthier.faustProfile) {
-      case 'spanish-guitar': return 0;
-      case 'tres': return 0;
-      case 'flamenco-cajon': return 4;
-    }
-  }
   return 0;
 }
 export function normalizedParams(instrumentId: string, luthier: LuthierPhysicalParameters, modelNum: number) {
@@ -409,7 +399,7 @@ export function renderVoice(
     const dialectAttack = dialect?.attack ?? 1;
     const dialectBrightness = dialect?.brightness ?? 1;
     const dialectDamping = dialect?.damping ?? 0;
-    const directionText = `${ctx.action} ${(voice.hitType ?? "")}`.toLowerCase();
+    const directionText = ctx.action.toLowerCase();
     const bisonoric = dspProfile?.excitationDynamics.bisonoricAsymmetry;
     const directionPhysicalGain = bisonoric
       ? (/cerrar|closing|close|push|pushing|down/.test(directionText) ? bisonoric.closing.pressure : bisonoric.opening.pressure)
@@ -456,7 +446,7 @@ export function renderVoice(
     const pmSharpness = instDef?.physicalModel?.parameters?.transientSharpness ?? 1;
     const collisionEnv = el.adsr(0.0001, Math.max(0.0015, (0.004 + (1 - x.hardness) * 0.008) * pmSharpness), 0, 0.002, ctx.gateSignal);
 
-    if (x.attackCollision > 0.05 && isCollisionAllowedForAction(exType, family, ctx.action, voice.articulation)) {
+    if (x.attackCollision > 0.05 && isCollisionAllowedForAction(exType, family, ctx.action, ctx.action)) {
       const collision = el.mul(
         x.attackCollision * (0.70 + (physical?.response.contactHardness ?? 0.5) * 0.52) * dialectAttack * directionPhysicalGain * (0.08 + 0.16 * ctx.velBoost),
         el.mul(el.highpass(1200 + x.spectralSpread * 4200, 0.9, el.noise()), collisionEnv)

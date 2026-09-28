@@ -4,7 +4,6 @@ export const cavaquinho: InstrumentDef = {
   id: "cavaquinho",
   name: "Brazilian Cavaquinho",
   family: "plucked",
-  program: 25,
   voicing: "chord",
   courses: 1,
   bodyConstruction: "wood-box",

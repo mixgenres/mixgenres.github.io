@@ -4,7 +4,6 @@ export const slow_strings: InstrumentDef = {
   id: "slow-strings",
   name: "Slow string ensemble",
   family: "bowed",
-  program: 49,
   voicing: "chord",
   elementaryModel: 6,
   makeupGain: 0.564,

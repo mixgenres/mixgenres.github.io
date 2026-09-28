@@ -4,7 +4,6 @@ export const sweep_pad: InstrumentDef = {
   id: "sweep-pad",
   name: "Sweep pad",
   family: "electronic",
-  program: 95,
   voicing: "chord",
   elementaryModel: 9,
   makeupGain: 0.437,

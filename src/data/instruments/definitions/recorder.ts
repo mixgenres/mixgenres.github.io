@@ -4,7 +4,6 @@ export const recorder: InstrumentDef = {
   id: "recorder",
   name: "Recorder",
   family: "winds",
-  program: 74,
   octave: 12,
   voicing: "single",
   elementaryModel: 7,

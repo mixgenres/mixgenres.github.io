@@ -4,7 +4,6 @@ export const crystal: InstrumentDef = {
   id: "crystal",
   name: "Crystal Bell",
   family: "electronic",
-  program: 98,
   voicing: "single",
   elementaryModel: 8,
   makeupGain: 0.685,

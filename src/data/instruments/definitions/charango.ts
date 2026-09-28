@@ -4,7 +4,6 @@ export const charango: InstrumentDef = {
   id: "charango",
   name: "Charango",
   family: "plucked",
-  program: 24,
   octave: 12,
   voicing: "chord",
   courses: 2,

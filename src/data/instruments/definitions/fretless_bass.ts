@@ -4,7 +4,6 @@ export const fretless_bass: InstrumentDef = {
   id: "fretless-bass",
   name: "Fretless bass",
   family: "plucked",
-  program: 35,
   voicing: "bass",
   courses: 1,
   bodyConstruction: "solid-electric",
@@ -31,7 +30,6 @@ export const fretless_bass: InstrumentDef = {
     bodyResonanceVolume: 9,
     decayTimeFactor: 3.8,
     harmonicRichness: 0.65,
-    faustProfile: "electric-bass",
     articulationCapabilities: ["mwah-growl", "fretless-slide", "vibrato", "soft-finger"],
     genreAdaptable: true
   },

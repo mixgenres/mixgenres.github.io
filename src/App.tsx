@@ -27,7 +27,7 @@ import {
   createSink, setTrackInstruments, setActiveWorld,
 } from './engine/audio/audio';
 import { ENERGY_LABELS } from './engine/metadata/energy';
-import { tieredCompile } from './engine/sequencing/tieredEngine';
+import { compileWholeSong } from './engine/compiler/wholeSongCompiler';
 import { Transport } from './engine/sequencing/transport';
 import { PATTERNS_BY_ID, cleanPatternName } from './data/genres';
 
@@ -288,9 +288,7 @@ export default function App() {
      Tier 0 (Structure), Tier 1 (Arrangement), and Tier 2 (Performance)
      cells are cached and only invalidated when their specific inputs change. */
   const perf = useMemo(() => {
-    return tieredCompile(song, {
-      focusedRegionId: focusId,
-    });
+    return compileWholeSong(song, 0);
   }, [song, focusId]);
   const perfRef = useRef(perf);
   perfRef.current = perf;

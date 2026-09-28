@@ -4,7 +4,6 @@ export const i_12_string_guitar: InstrumentDef = {
   id: "12-string-guitar",
   name: "12-string guitar",
   family: "plucked",
-  program: 25,
   voicing: "chord",
   courses: 2,
   bodyConstruction: "wood-box",

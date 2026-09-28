@@ -4,7 +4,6 @@ export const piano: InstrumentDef = {
   id: "piano",
   name: "Acoustic Grand Piano",
   family: "bellows-and-keys",
-  program: 0,
   voicing: "chord",
   bodyConstruction: "wood-box",
   excitationType: "hammer",

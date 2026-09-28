@@ -4,7 +4,6 @@ export const celeste: InstrumentDef = {
   id: "celeste",
   name: "Celesta",
   family: "metal-and-wood",
-  program: 8,
   voicing: "chord",
   elementaryModel: 8,
   makeupGain: 1.000,

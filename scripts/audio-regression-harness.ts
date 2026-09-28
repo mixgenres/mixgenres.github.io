@@ -211,7 +211,7 @@ const REFERENCE_INSTRUMENTS = [
 
 async function renderInstrumentMetric(instrumentId: string, note = 60, vel = 0.8): Promise<MetricBaseline> {
   const luthier = getLuthierModelForInstrument(instrumentId);
-  const model = modelForInstrument(instrumentId, luthier);
+  const model = modelForInstrument(instrumentId);
   const params = defaultTrackParams(instrumentId, luthier, model);
 
   const core = new (OfflineRenderer as any)();
@@ -273,7 +273,7 @@ async function renderMasterChainMetric(): Promise<{ compressedPeak: number; reve
   };
 
   const luthier = getLuthierModelForInstrument('drums');
-  const model = modelForInstrument('drums', luthier);
+  const model = modelForInstrument('drums');
   const params = defaultTrackParams('drums', luthier, model);
 
   const core = new (OfflineRenderer as any)();

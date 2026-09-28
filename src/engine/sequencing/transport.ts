@@ -5,7 +5,6 @@
  */
 
 import type { Performance, PerfNote, PerfCC } from './perform';
-import { compilePhrasePerformance } from './phrase';
 
 const LOOKAHEAD_SEC = 0.40;
 const TICK_MS = 25;
@@ -37,11 +36,10 @@ function createSchedulerWorker(): Worker | null {
 
 export interface TransportSink {
   now(): number;
-  noteOn(trackId: string | number, midi: number, vel: number, time: number, articulation?: string, frequencyHz?: number): void;
+  noteOn(trackId: string | number, midi: number, vel: number, time: number, gestureCode?: number, frequencyHz?: number, bellowsDirectionCode?: 1 | 2): void;
   noteOff(trackId: string | number, midi: number, time: number): void;
   pitchBend(trackId: string | number, value: number, time: number, targetMidi?: number): void;
   controlChange(trackId: string | number, cc: number, value: number, time: number): void;
-  programChange(trackId: string | number, program: number, time: number, bank?: number): void;
   setDrumChannel(trackId: string | number, isDrum: boolean): void;
   allNotesOff(): void;
   softNotesOff?(): void;
@@ -106,7 +104,7 @@ export class Transport {
   setPerformance(perf: Performance) {
     const wasRunning = this.running;
     const pos = wasRunning ? this.position() : this.startOffset;
-    this.perf = compilePhrasePerformance(perf);
+    this.perf = perf;
     if (wasRunning) {
       if (typeof this.sink.softNotesOff === 'function') {
         this.sink.softNotesOff();
@@ -127,7 +125,7 @@ export class Transport {
       return;
     }
     const currentPos = this.position();
-    this.perf = compilePhrasePerformance(perf);
+    this.perf = perf;
     if (typeof this.sink.softNotesOff === 'function') {
       this.sink.softNotesOff();
     } else {
@@ -332,7 +330,7 @@ export class Transport {
         this.sink.pitchBend(n.trackId, point.value, bendAt, midi);
       }
     }
-    this.sink.noteOn(n.trackId, midi, vel, targetOn, n.articulation, n.frequencyHz);
+    this.sink.noteOn(n.trackId, midi, vel, targetOn, n.gestureCode, n.frequencyHz, n.bellowsDirectionCode);
     this.sink.noteOff(n.trackId, midi, targetOff);
     if (n.pitchBend?.length) this.sink.pitchBend(n.trackId, 8192, targetOff, midi);
   }

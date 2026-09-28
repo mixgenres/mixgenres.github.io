@@ -26,7 +26,6 @@ export interface LuthierPhysicsProfile {
   decayTimeFactor: number;
   harmonicRichness: number;
   transientSharpness?: number;
-  faustProfile?: 'spanish-guitar' | 'electric-bass' | 'double-bass' | 'tres' | 'flamenco-cajon';
   articulationCapabilities?: string[];
   genreAdaptable?: boolean;
   decayTimeSec?: number;
@@ -427,13 +426,11 @@ export interface InstrumentDef {
   id: string;
   name: string;
   family: InstrumentFamily;
-  program?: number;
   drum?: DrumVoice;
   kit?: boolean;
   octave?: number;
   voicing: 'single' | 'chord' | 'bass' | 'unpitched';
   note?: string;
-  bank?: number;
   courses?: number;
   bodyConstruction?: 'wood-box' | 'gourd' | 'skin-faced' | 'board' | 'solid-electric' | 'metal-shell' | 'brass-tube';
   excitationType?: 'plectrum' | 'nail' | 'fingerpad' | 'hard-pick' | 'hammer' | 'stick' | 'mallet' | 'breath' | 'bow';

@@ -21,7 +21,6 @@ export default class UprightBassModule implements InstrumentModule {
 
   renderVoice(ctx: VoiceRenderContext): any {
     const {
-      voice,
       params,
       pk,
       gateSignal,
@@ -32,11 +31,11 @@ export default class UprightBassModule implements InstrumentModule {
     } = ctx;
 
     // 1. Technique Recognition
-    const isStrappata = action === 'strappata' || action === 'slap' || /strappata|slap/i.test(voice.articulation ?? '');
-    const isArrastre = action === 'arrastre' || /arrastre/i.test(voice.articulation ?? '');
-    const isLija = action === 'lija' || /lija|sandpaper/i.test(voice.articulation ?? '');
-    const isTambor = action === 'tambor' || action === 'body-tap' || /tambor/i.test(voice.articulation ?? '');
-    const isChicharra = action === 'chicharra' || /chicharra/i.test(voice.articulation ?? '');
+    const isStrappata = action === 'strappata' || action === 'slap' || /strappata|slap/i.test(action ?? '');
+    const isArrastre = action === 'arrastre' || /arrastre/i.test(action ?? '');
+    const isLija = action === 'lija' || /lija|sandpaper/i.test(action ?? '');
+    const isTambor = action === 'tambor' || action === 'body-tap' || /tambor/i.test(action ?? '');
+    const isChicharra = action === 'chicharra' || /chicharra/i.test(action ?? '');
     const isArco = action === 'arco' || action === 'bow_drag' || isLija || params.bowPressure > 0.45;
 
     // 2. Tambor (Wooden lower bout strike)

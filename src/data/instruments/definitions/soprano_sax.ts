@@ -4,7 +4,6 @@ export const soprano_sax: InstrumentDef = {
   id: "soprano-sax",
   name: "Soprano sax",
   family: "winds",
-  program: 64,
   octave: 12,
   voicing: "single",
   elementaryModel: 16,

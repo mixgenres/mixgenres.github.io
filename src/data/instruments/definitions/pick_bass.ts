@@ -4,7 +4,6 @@ export const pick_bass: InstrumentDef = {
   id: "pick-bass",
   name: "Pick bass",
   family: "plucked",
-  program: 34,
   voicing: "bass",
   elementaryModel: 3,
   makeupGain: 0.685,
@@ -27,7 +26,6 @@ export const pick_bass: InstrumentDef = {
     bodyResonanceVolume: 7.5,
     decayTimeFactor: 3.2,
     harmonicRichness: 0.8,
-    faustProfile: "electric-bass",
     articulationCapabilities: ["picked-down", "picked-up", "palm-mute", "chug"],
     genreAdaptable: true
   },

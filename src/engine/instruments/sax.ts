@@ -10,7 +10,6 @@ export default class SaxModule implements InstrumentModule {
     const {
       trackId,
       voiceIndex,
-      voice,
       params,
       gateSignal,
       velSignal,
@@ -22,10 +21,10 @@ export default class SaxModule implements InstrumentModule {
     const noteSeed = seedOf(trackId, voiceIndex, 6789);
     const breathDev = Math.max(0.85, Math.min(1.15, 1.0 + randNorm(noteSeed) * 0.10));
 
-    const isFall = action === 'fall' || action === 'drop' || /fall|drop|caida|pitch-env-down/i.test(voice.articulation ?? '');
-    const isDoit = action === 'doit' || action === 'rip' || action === 'rip-up' || /doit|rip|pitch-env-up/i.test(voice.articulation ?? '');
-    const isGrowl = action === 'growl' || /growl|throat-growl/i.test(voice.articulation ?? '');
-    const isShake = action === 'shake' || /shake|lip-trill/i.test(voice.articulation ?? '');
+    const isFall = action === 'fall' || action === 'drop' || /fall|drop|caida|pitch-env-down/i.test(action ?? '');
+    const isDoit = action === 'doit' || action === 'rip' || action === 'rip-up' || /doit|rip|pitch-env-up/i.test(action ?? '');
+    const isGrowl = action === 'growl' || /growl|throat-growl/i.test(action ?? '');
+    const isShake = action === 'shake' || /shake|lip-trill/i.test(action ?? '');
 
     const scoopDepth = (isFall || isDoit) ? 0 : 0.04 * (0.5 + params.pressure * 0.5);
     const scoopEnv = el.adsr(0.0003, 0.024, 0, 0.006, gateSignal);

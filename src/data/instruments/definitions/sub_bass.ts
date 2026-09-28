@@ -4,7 +4,6 @@ export const sub_bass: InstrumentDef = {
   id: "sub-bass",
   name: "Sub bass",
   family: "electronic",
-  program: 38,
   voicing: "bass",
   elementaryModel: 3,
   makeupGain: 0.685,

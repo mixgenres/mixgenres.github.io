@@ -29,9 +29,9 @@ export default class CajonModule implements InstrumentModule {
 
     // Detect strike zone from MIDI note or action
     const noteNum = voice.note ?? 38;
-    const isBass = noteNum === 36 || action === 'low-tone' || action === 'cajon-grave' || /bass|grave|center/i.test(`${action} ${(voice.hitType ?? '')}`);
-    const isSide = noteNum === 37 || action === 'rim' || /side|rim/i.test(`${action} ${(voice.hitType ?? '')}`);
-    const isTip = noteNum === 42 || action === 'tip' || action === 'ghost' || /tip|ghost/i.test(`${action} ${(voice.hitType ?? '')}`);
+    const isBass = noteNum === 36 || action === 'low-tone' || action === 'cajon-grave' || /bass|grave|center/i.test(`${action} ${(action ?? '')}`);
+    const isSide = noteNum === 37 || action === 'rim' || /side|rim/i.test(`${action} ${(action ?? '')}`);
+    const isTip = noteNum === 42 || action === 'tip' || action === 'ghost' || /tip|ghost/i.test(`${action} ${(action ?? '')}`);
 
     if (isBass) {
       // 1. Grave (Center Palm Bass Thump)

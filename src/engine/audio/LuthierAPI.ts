@@ -32,8 +32,6 @@ export interface LuthierPhysicalParameters {
   decayTimeFactor: number;
   /** Nonlinear saturation or harmonic richness */
   harmonicRichness: number;
-  /** Dedicated standalone Faust profile ID if available */
-  faustProfile?: 'spanish-guitar' | 'electric-bass' | 'double-bass' | 'tres' | 'flamenco-cajon';
   /** Catalog of physically supported articulations */
   articulationCapabilities?: string[];
   /** Whether this physical profile dynamically adapts wood, pickups, and transients by genre/song style */

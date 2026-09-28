@@ -4,7 +4,6 @@ export const pipa: InstrumentDef = {
   id: "pipa",
   name: "Pipa",
   family: "plucked",
-  program: 105,
   voicing: "single",
   courses: 1,
   bodyConstruction: "wood-box",

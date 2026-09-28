@@ -4,7 +4,6 @@ export const orchestral_harp: InstrumentDef = {
   id: "orchestral-harp",
   name: "Orchestral harp",
   family: "plucked",
-  program: 46,
   voicing: "chord",
   courses: 1,
   bodyConstruction: "wood-box",

@@ -4,7 +4,6 @@ export const sho: InstrumentDef = {
   id: "shō",
   name: "Sho",
   family: "free-reed",
-  program: 16,
   voicing: "chord",
   elementaryModel: 10,
   makeupGain: 0.457,

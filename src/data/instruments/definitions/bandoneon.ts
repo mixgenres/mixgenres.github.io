@@ -4,7 +4,6 @@ export const bandoneon: InstrumentDef = {
   id: "bandoneon",
   name: "Bandoneón",
   family: "bellows-and-keys",
-  program: 23,
   voicing: "chord",
   bodyConstruction: "wood-box",
   excitationType: "breath",
