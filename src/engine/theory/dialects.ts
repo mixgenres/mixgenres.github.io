@@ -70,10 +70,10 @@ export const DIALECTS: Record<string, InstrumentDialect> = {
     bodyMultiplier: 0.85,
     decayMultiplier: 0.9,
   },
-  'double-bass:salsa-tumbao': {
-    id: 'double-bass:salsa-tumbao',
-    instrumentId: 'contrabajo',
-    name: 'Double Bass (Salsa Tumbao)',
+  'upright-bass:salsa-tumbao': {
+    id: 'upright-bass:salsa-tumbao',
+    instrumentId: 'upright-bass',
+    name: 'Upright Bass (Salsa Tumbao)',
     family: 'bass',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'pizzicato',
@@ -84,10 +84,10 @@ export const DIALECTS: Record<string, InstrumentDialect> = {
     brightnessMultiplier: 1.15,
     micProximityPreset: 'close-mic',
   },
-  'double-bass:tango-arco': {
-    id: 'double-bass:tango-arco',
-    instrumentId: 'contrabajo',
-    name: 'Double Bass (Tango Arco)',
+  'upright-bass:tango-arco': {
+    id: 'upright-bass:tango-arco',
+    instrumentId: 'upright-bass',
+    name: 'Upright Bass (Tango Arco)',
     family: 'bass',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'arco',
@@ -318,15 +318,15 @@ export function resolveDialect(
           };
         }
 
-        // 2. Alias / substring matches for common instruments
-        const aliases: string[] = [];
-        if (normId.includes('bass') || normId.includes('contrabajo')) aliases.push('contrabajo', 'upright-bass', 'double-bass', 'bass', 'pick-bass');
-        if (normId.includes('guitar') || normId.includes('guitarra')) aliases.push('guitar', 'spanish-guitar', 'acoustic-guitar', 'electric-guitar');
-        if (normId.includes('sax')) aliases.push('tenor-sax', 'alto-sax', 'soprano-sax', 'bari-sax', 'sax');
-        if (normId.includes('drum') || normId.includes('kit')) aliases.push('drums', 'brush-kit');
+        // 2. Family / related instrument matches
+        const related: string[] = [];
+        if (normId.includes('bass')) related.push('upright-bass', 'bass', 'pick-bass');
+        if (normId.includes('guitar')) related.push('guitar', 'spanish-guitar', 'acoustic-guitar', 'electric-guitar');
+        if (normId.includes('sax')) related.push('tenor-sax', 'alto-sax', 'soprano-sax', 'bari-sax');
+        if (normId.includes('drum')) related.push('drums', 'brush-kit');
 
-        for (const alias of aliases) {
-          const matched = contract.instrumentDialects[alias];
+        for (const rel of related) {
+          const matched = contract.instrumentDialects[rel];
           if (matched) {
             return {
               ...DEFAULT_DIALECT_SHAPE,
@@ -366,8 +366,8 @@ export function legacyResolveDialect(
 ): InstrumentDialect | null {
   const token = `${worldId}:${styleId}:${instrumentId}`.toLowerCase();
   
-  if (token.includes('salsa') && /(bass|bajo|contrabajo|upright)/.test(instrumentId)) {
-    return DIALECTS['double-bass:salsa-tumbao'];
+  if (token.includes('salsa') && /(bass|upright)/.test(instrumentId)) {
+    return DIALECTS['upright-bass:salsa-tumbao'];
   }
   if (instrumentId.includes('conga') && (token.includes('salsa') || token.includes('timba') || token.includes('cumbia'))) {
     return DIALECTS['congas:salsa'];
@@ -381,13 +381,13 @@ export function legacyResolveDialect(
   if (instrumentId.includes('trumpet') && token.includes('jazz')) {
     return DIALECTS['trumpet:jazz'];
   }
-  if (token.includes('tango') && /(bass|bajo|contrabajo|upright)/.test(instrumentId)) {
-    return DIALECTS['double-bass:tango-arco'];
+  if (token.includes('tango') && /(bass|upright)/.test(instrumentId)) {
+    return DIALECTS['upright-bass:tango-arco'];
   }
-  if (token.includes('flamenco') && (instrumentId.includes('guitar') || instrumentId.includes('guitarra'))) {
+  if (token.includes('flamenco') && instrumentId.includes('guitar')) {
     return DIALECTS['guitar:flamenco'];
   }
-  if (token.includes('tango') && (instrumentId.includes('guitar') || instrumentId.includes('guitarra'))) {
+  if (token.includes('tango') && instrumentId.includes('guitar')) {
     return DIALECTS['guitar:tango'];
   }
   if (token.includes('blues') && (instrumentId.includes('guitar') || instrumentId.includes('guitarra'))) {

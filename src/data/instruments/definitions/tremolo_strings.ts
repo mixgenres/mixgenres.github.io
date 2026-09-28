@@ -7,7 +7,7 @@ export const tremolo_strings: InstrumentDef = {
   program: 44,
   voicing: "chord",
   elementaryModel: 6,
-  makeupGain: 23.865,
+  makeupGain: 0.682,
   polyphony: 8,
   acousticProfile: {
     sustain: "sustained",

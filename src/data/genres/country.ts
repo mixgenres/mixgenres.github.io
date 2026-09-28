@@ -1,5 +1,4 @@
 import { GenreWorld } from '../../types';
-import { GuitarTimbreControl, BowedStringTimbreControl, BassTimbreControl } from '../../engine/theory/physicsInterfaces';
 
 export const COUNTRY_WORLD: GenreWorld = {
   "id": "country",
@@ -9,74 +8,11 @@ export const COUNTRY_WORLD: GenreWorld = {
   "level": "world",
   "description": "Story-driven American roots music featuring honky-tonk",
   rhythm: { syncopation: 0.3, swing: 0.1, pocket: 'ahead', pocketDepth: 8 },
-  performanceRules: {
-    'fiddle': {
-      evaluateNote: (phrase: any, index: number) => {
-        const note = phrase.notes[index];
-        const vel = note.velocity ?? note.vel ?? 80;
-        const timbre: BowedStringTimbreControl = {
-          bowDirection: index % 2 === 0 ? 'downbow' : 'upbow',
-          bowPressure: vel > 70 ? 0.75 : 0.45,
-          bowSpeed: 0.8,
-          contactPoint: 0.4,
-          rosinGripBite: 0.6,
-          stringSelection: 'I',
-          shiftNoiseLevel: 0.2,
-          vibrato: { delayMs: 100, rateHz: 5.5, depthCents: 12, rateRamp: 0.2 },
-          mute: 'none'
-        };
-        return [{ ...note, type: 'bowed', articulation: 'saw_stroke', timbreControl: timbre }];
-      }
-    },
-    'upright_bass': {
-      evaluateNote: (phrase: any, index: number) => {
-        const note = phrase.notes[index];
-        const isSlap = index % 2 !== 0;
-
-        const timbre: BassTimbreControl = {
-          actuationMethod: isSlap ? 'thumb_slap' : 'finger_flesh',
-          pluckPosition: 0.7,
-          stringSelection: 4,
-          palmMuteAmount: 0.0,
-          fretNoiseLevel: 0.5,
-          fretBuzz: isSlap ? 1.0 : 0.0,
-          vibrato: { delayMs: 0, rateHz: 0, depthCents: 0, rateRamp: 0 },
-          deadNoteAmount: isSlap ? 0.9 : 0.0
-        };
-        return [{ ...note, type: 'plucked', articulation: isSlap ? 'rockabilly_slap' : 'pizzicato', timbreControl: timbre }];
-      }
-    }
-  },
   styles: {
     'bluegrass': {
       id: 'bluegrass',
       name: 'Bluegrass',
-      tempoRange: [120, 160],
-      performanceRules: {
-        'banjo': {
-          evaluateNote: (phrase: any, index: number) => {
-            const note = phrase.notes[index];
-            const isThumb = index % 3 === 0;
-            const pitch = note.pitch ?? note.midi ?? 60;
-
-            const timbre: GuitarTimbreControl = {
-              pluckPosition: 0.1,
-              fleshToNailRatio: 1.0,
-              pickAngle: 0,
-              palmMuteAmount: 0.0,
-              stringSelection: pitch > 60 && isThumb ? 5 : ((pitch % 4) + 1),
-              fretNoiseLevel: 0.1,
-              fretBuzz: 0.1,
-              vibrato: { delayMs: 0, rateHz: 0, depthCents: 0, rateRamp: 0 },
-              isHarmonic: false,
-              bodyHit: 'none',
-              sympatheticResonance: 1.0
-            };
-
-            return [{ ...note, type: 'plucked', articulation: 'scruggs_roll', timbreControl: timbre }];
-          }
-        }
-      }
+      tempoRange: [120, 160]
     }
   },
   "styleDefinitions": [

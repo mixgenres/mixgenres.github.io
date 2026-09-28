@@ -9,7 +9,7 @@ export const slap_bass: InstrumentDef = {
   bodyConstruction: "solid-electric",
   excitationType: "hard-pick",
   elementaryModel: 3,
-  makeupGain: 0.454,
+  makeupGain: 0.685,
   polyphony: 4,
   note: "Funk slap bass technique combining thumb bone strikes against fretboard metal and index finger popping snap",
   acousticProfile: {

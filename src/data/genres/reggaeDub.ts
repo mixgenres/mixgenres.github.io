@@ -554,7 +554,7 @@ export const REGGAE_DUB_WORLD: GenreWorld = {
       "era": "Early 20th Century–Present",
       "description": "Steelpan • Acoustic • Witty\nTrinidadian storytelling",
       "characteristicInstruments": [
-        "steel_drums",
+        "steel-drums",
         "acoustic-guitar",
         "brass",
         "hand-percussion",
@@ -1326,7 +1326,7 @@ export const REGGAE_DUB_WORLD: GenreWorld = {
         "song"
       ],
       "roles": [
-        "drum-kit"
+        "drums"
       ],
 
       "approaches": ["groove"],

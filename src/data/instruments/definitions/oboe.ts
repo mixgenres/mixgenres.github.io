@@ -8,7 +8,7 @@ export const oboe: InstrumentDef = {
   octave: 12,
   voicing: "single",
   elementaryModel: 16,
-  makeupGain: 0.360,
+  makeupGain: 0.411,
   polyphony: 4,
   acousticProfile: {
     sustain: "blown",

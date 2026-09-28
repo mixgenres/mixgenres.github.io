@@ -1,5 +1,5 @@
 import { GenreWorld } from '../../types';
-import { AnalogSynthTimbreControl, SamplerTimbreControl } from '../../engine/theory/physicsInterfaces';
+import { SamplerTimbreControl } from '../../engine/theory/physicsInterfaces';
 
 export const KIZOMBA_WORLD: GenreWorld = {
   "id": "kizomba",
@@ -9,44 +9,6 @@ export const KIZOMBA_WORLD: GenreWorld = {
   "level": "world",
   "description": "The sensual partner dance style of",
   rhythm: { syncopation: 0.4, swing: 0.1, pocket: 'strict_grid', pocketDepth: 0, intonationSystem: 'equal', quantizeJitterMs: 2 },
-  performanceRules: {
-    'synth_bass': {
-      evaluateNote: (phrase: any, index: number, _acousticState?: any, electronicState?: any) => {
-        const note = phrase.notes[index];
-
-        const timbre: AnalogSynthTimbreControl = {
-          oscillatorPhase: 'free_running',
-          filterEnvelopeDepth: 0.1,
-          distortion: { type: 'none', driveAmount: 0 },
-          subOscillatorLevel: 1.0,
-          sidechainDuckDepth: (electronicState?.globalSidechainDuckAmount ?? 1.0) * 1.0,
-          portamentoTimeMs: 250,
-          intonationOffsetCents: 0,
-          actuationSyncOffsetMs: 0
-        };
-
-        return [{ ...note, type: 'synth', articulation: 'legato_glide', timbreControl: timbre }];
-      }
-    },
-    'sub-bass': {
-      evaluateNote: (phrase: any, index: number, _acousticState?: any, electronicState?: any) => {
-        const note = phrase.notes[index];
-
-        const timbre: AnalogSynthTimbreControl = {
-          oscillatorPhase: 'free_running',
-          filterEnvelopeDepth: 0.1,
-          distortion: { type: 'none', driveAmount: 0 },
-          subOscillatorLevel: 1.0,
-          sidechainDuckDepth: (electronicState?.globalSidechainDuckAmount ?? 1.0) * 1.0,
-          portamentoTimeMs: 250,
-          intonationOffsetCents: 0,
-          actuationSyncOffsetMs: 0
-        };
-
-        return [{ ...note, type: 'synth', articulation: 'legato_glide', timbreControl: timbre }];
-      }
-    }
-  },
   drumRules: {
     evaluateStep: (step: any) => {
       const percussionTimbre: SamplerTimbreControl = {
@@ -238,7 +200,7 @@ export const KIZOMBA_WORLD: GenreWorld = {
         "drums",
         "sub-bass",
         "sampler",
-        "drum-machine"
+        "warm-pad"
       ],
       "preferredMeters": [
         "4/4"
@@ -319,7 +281,7 @@ export const KIZOMBA_WORLD: GenreWorld = {
         "drums",
         "synth",
         "sampler",
-        "drum-machine"
+        "warm-pad"
       ],
       "preferredMeters": [
         "4/4"
@@ -373,7 +335,7 @@ export const KIZOMBA_WORLD: GenreWorld = {
         "drums",
         "synth",
         "sampler",
-        "drum-machine"
+        "warm-pad"
       ],
       "preferredMeters": [
         "4/4"
@@ -510,7 +472,7 @@ export const KIZOMBA_WORLD: GenreWorld = {
         "drums",
         "sub-bass",
         "piano",
-        "drum-machine"
+        "warm-pad"
       ],
       "preferredMeters": [
         "4/4"

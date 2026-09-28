@@ -7,7 +7,7 @@ export const brass: InstrumentDef = {
   program: 61,
   voicing: "chord",
   elementaryModel: 15,
-  makeupGain: 0.461,
+  makeupGain: 0.399,
   polyphony: 8,
   note: "Power brass ensemble (trumpets, trombones, French horns) with punchy stabs and soaring fanfare",
   acousticProfile: {

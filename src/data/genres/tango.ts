@@ -8,55 +8,6 @@ export const TANGO_WORLD: GenreWorld = {
   "level": "world",
   "description": "A deep architectural Tango lens: marcato",
   "prominentChords": ['Min', 'Min Maj 7', 'Dim 7', 'Dom 7b9', 'Aug'],
-  performanceRules: {
-    bandoneon: {
-      evaluateNote: (phrase: any, index: number) => {
-        const note = phrase.notes[index];
-        const prev = phrase.notes[index - 1];
-        const noteTime = note.time ?? 0;
-        const noteVel = note.velocity ?? note.vel ?? 80;
-        const prevTime = prev ? (prev.time ?? 0) : 0;
-        const prevDur = prev ? (prev.duration ?? prev.dur ?? 0.25) : 0;
-
-        let articulation = 'staccato';
-        const bellowsDirection = Math.floor(noteTime / 2) % 2 === 0 ? 'open' : 'close';
-
-        if (noteVel > 85) articulation = 'marcato';
-        else if (prev && (noteTime - (prevTime + prevDur) < 0.03)) articulation = 'legato_squeeze';
-        if (note.isAnticipation || note.anticipated) articulation = 'arrastre';
-
-        return [{
-          ...note,
-          type: 'bellows',
-          articulation,
-          bellowsDirection,
-          timbreControl: { bellowsDirection, bellowsPressure: noteVel }
-        }];
-      }
-    },
-    strings: {
-      evaluateNote: (phrase: any, index: number) => {
-        const note = phrase.notes[index];
-        const noteVel = note.velocity ?? note.vel ?? 80;
-        const noteDur = note.duration ?? note.dur ?? 0.25;
-        let articulation = noteVel > 80 ? 'chicharra' : 'marcato';
-        if (noteDur < 0.1) articulation = 'latigo';
-
-        return [{ ...note, type: 'bowed', articulation, timbreControl: { bowPressure: noteVel * 1.2 } }];
-      }
-    },
-    violin: {
-      evaluateNote: (phrase: any, index: number) => {
-        const note = phrase.notes[index];
-        const noteVel = note.velocity ?? note.vel ?? 80;
-        const noteDur = note.duration ?? note.dur ?? 0.25;
-        let articulation = noteVel > 80 ? 'chicharra' : 'marcato';
-        if (noteDur < 0.1) articulation = 'latigo';
-
-        return [{ ...note, type: 'bowed', articulation, timbreControl: { bowPressure: noteVel * 1.2 } }];
-      }
-    }
-  },
   "styleDefinitions": [
     {
       "id": "tango-tango-tradicional",
@@ -70,7 +21,7 @@ export const TANGO_WORLD: GenreWorld = {
         "violin",
         "piano",
         "upright-bass",
-        "double-bass"
+        "cello"
       ],
       "preferredMeters": [
         "4/4",
@@ -281,7 +232,7 @@ export const TANGO_WORLD: GenreWorld = {
         "bandoneon",
         "piano",
         "upright-bass",
-        "double-bass"
+        "cello"
       ],
       "preferredMeters": [
         "3/4"

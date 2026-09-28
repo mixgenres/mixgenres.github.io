@@ -7,7 +7,7 @@ export const low_whistle: InstrumentDef = {
   program: 73,
   voicing: "single",
   elementaryModel: 7,
-  makeupGain: 0.422,
+  makeupGain: 0.466,
   polyphony: 4,
   note: "Large cylindrical fipple flute pitched in D with deep, breathy, haunting Celtic tone",
   acousticProfile: {

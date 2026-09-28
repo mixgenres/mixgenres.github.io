@@ -7,7 +7,7 @@ export const sweep_pad: InstrumentDef = {
   program: 95,
   voicing: "chord",
   elementaryModel: 9,
-  makeupGain: 0.409,
+  makeupGain: 0.437,
   polyphony: 8,
   acousticProfile: {
     sustain: "sustained",

@@ -7,7 +7,7 @@ export const glockenspiel: InstrumentDef = {
   program: 9,
   voicing: "single",
   elementaryModel: 8,
-  makeupGain: 0.950,
+  makeupGain: 1.000,
   polyphony: 4,
   note: "Tuned steel bar bells struck with hard mallets producing pure, bright, piercing high tones",
   acousticProfile: {

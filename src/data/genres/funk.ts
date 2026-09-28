@@ -1,5 +1,4 @@
 import { GenreWorld } from '../../types';
-import { BassTimbreControl, WindBellowsTimbreControl } from '../../engine/theory/physicsInterfaces';
 
 export const FUNK_WORLD: GenreWorld = {
   "id": "funk",
@@ -9,81 +8,6 @@ export const FUNK_WORLD: GenreWorld = {
   "level": "world",
   "description": "The masters of groove: \"The One\"",
   rhythm: { syncopation: 0.9, swing: 0.15, pocket: 'behind', pocketDepth: 12 },
-  performanceRules: {
-    'electric_bass': {
-      evaluateNote: (phrase: any, index: number) => {
-        const note = phrase.notes[index];
-        const isOctaveJump = index > 0 && ((note.pitch ?? 60) - (phrase.notes[index - 1].pitch ?? 60)) >= 12;
-        const isDownbeat = ((note.time ?? 0) % 1) === 0;
-        const isMuted = (note.duration ?? 0.2) < 0.1 && (note.velocity ?? 70) < 60;
-
-        let actuationMethod: 'thumb_slap' | 'index_pop' | 'finger_flesh' = 'thumb_slap';
-        if (isOctaveJump) actuationMethod = 'index_pop';
-        else if (!isDownbeat && (note.duration ?? 0.2) > 0.3) actuationMethod = 'finger_flesh';
-
-        const timbre: BassTimbreControl = {
-          actuationMethod,
-          pluckPosition: actuationMethod === 'thumb_slap' ? 0.9 : 0.4,
-          stringSelection: (note.pitch ?? 60) > 45 ? 1 : 4,
-          palmMuteAmount: 0.0,
-          fretNoiseLevel: 0.2,
-          fretBuzz: actuationMethod === 'thumb_slap' || actuationMethod === 'index_pop' ? 1.0 : 0.1,
-          vibrato: { delayMs: 0, rateHz: 0, depthCents: 0, rateRamp: 0 },
-          deadNoteAmount: isMuted ? 1.0 : 0.0
-        };
-
-        return [{ ...note, type: 'plucked', articulation: isMuted ? 'dead_note' : actuationMethod, timbreControl: timbre }];
-      }
-    },
-    'electric-bass': {
-      evaluateNote: (phrase: any, index: number) => {
-        const note = phrase.notes[index];
-        const isOctaveJump = index > 0 && ((note.pitch ?? 60) - (phrase.notes[index - 1].pitch ?? 60)) >= 12;
-        const isDownbeat = ((note.time ?? 0) % 1) === 0;
-        const isMuted = (note.duration ?? 0.2) < 0.1 && (note.velocity ?? 70) < 60;
-
-        let actuationMethod: 'thumb_slap' | 'index_pop' | 'finger_flesh' = 'thumb_slap';
-        if (isOctaveJump) actuationMethod = 'index_pop';
-        else if (!isDownbeat && (note.duration ?? 0.2) > 0.3) actuationMethod = 'finger_flesh';
-
-        const timbre: BassTimbreControl = {
-          actuationMethod,
-          pluckPosition: actuationMethod === 'thumb_slap' ? 0.9 : 0.4,
-          stringSelection: (note.pitch ?? 60) > 45 ? 1 : 4,
-          palmMuteAmount: 0.0,
-          fretNoiseLevel: 0.2,
-          fretBuzz: actuationMethod === 'thumb_slap' || actuationMethod === 'index_pop' ? 1.0 : 0.1,
-          vibrato: { delayMs: 0, rateHz: 0, depthCents: 0, rateRamp: 0 },
-          deadNoteAmount: isMuted ? 1.0 : 0.0
-        };
-
-        return [{ ...note, type: 'plucked', articulation: isMuted ? 'dead_note' : actuationMethod, timbreControl: timbre }];
-      }
-    },
-    'brass_section': {
-      evaluateNote: (phrase: any, index: number) => {
-        const note = phrase.notes[index];
-        const noteDur = note.duration ?? note.dur ?? 0.25;
-        const isStab = noteDur < 0.2;
-        const next = phrase.notes[index + 1];
-        const isEndPhrase = !next || ((next.time ?? 0) - (note.time ?? 0) > 1.0);
-
-        const timbre: WindBellowsTimbreControl = {
-          pressure: (note.velocity ?? 80) * 1.3,
-          tongueHarshness: isStab ? 1.0 : 0.6,
-          embouchureTension: (note.pitch ?? 60) / 100,
-          spitNoiseLevel: 0.1,
-          keyClickNoise: 0.0,
-          vibrato: { delayMs: 0, rateHz: 0, depthCents: 0, rateRamp: 0 }
-        };
-
-        let articulation = isStab ? 'marcato_stab' : 'legato';
-        if (isEndPhrase && (note.velocity ?? 80) > 80) articulation = 'fall_off';
-
-        return [{ ...note, type: 'continuous', articulation, timbreControl: timbre }];
-      }
-    }
-  },
   drumRules: {
     evaluateStep: (step: any, stickState: any) => {
       const events = [];

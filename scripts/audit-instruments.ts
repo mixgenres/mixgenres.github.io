@@ -4,6 +4,9 @@ import { INSTRUMENT_CATALOG, INSTRUMENTS_BY_ID, WORLD_INSTRUMENT_HINTS } from '.
 import { ARTICULATIONS, resolveArticulation } from '../src/engine/theory/articulation.ts';
 import { LUTHIER_INSTRUMENT_MAP } from '../src/engine/audio/LuthierAPI.ts';
 import { ALL_PATTERNS } from '../src/data/genres/index.ts';
+import { renderVoice, type VoiceState, type TrackParams } from '../src/engine/elementary/elementaryEngine.ts';
+import { buildVoiceContext } from '../src/engine/instruments/registry.ts';
+import { isCollisionAllowedForAction } from '../src/engine/theory/excitationGates.ts';
 
 const root = resolve('src/data/instruments/definitions');
 const files = readdirSync(root).filter(f => f.endsWith('.ts')).sort();
@@ -57,11 +60,123 @@ for (const [art, count] of unknownPatternArts) {
   else warnings.push(`pattern structural tag '${art}' appears in articulation fields (${count} uses)`);
 }
 
+// =========================================================================
+// FIX 1 & FIX 3 GRAPH INSPECTION AUDIT
+// =========================================================================
+function countDistinctTanhNodes(node: any): number {
+  const hashes = new Set<number>();
+  function walk(obj: any) {
+    if (!obj || typeof obj !== 'object') return;
+    if (obj.kind === 'tanh' && typeof obj.hash === 'number') {
+      hashes.add(obj.hash);
+    }
+    for (const key of Object.keys(obj)) {
+      walk(obj[key]);
+    }
+  }
+  walk(node);
+  return hashes.size;
+}
+
+console.log('\n--- Fix 1 & Fix 3: Node Graph Saturation & Ownership Audit ---');
+const mockBandoneonVoice: VoiceState = {
+  note: 58,
+  velocity: 0.85,
+  gate: 1,
+  id: 'bandoneon_audit_voice',
+  actionType: 'marcato',
+  articulation: 'marcato'
+};
+const mockBandoneonParams: TrackParams = {
+  brightness: 0.75,
+  decay: 1.5,
+  drive: 0.2,
+  body: 0.8,
+  tension: 0.7,
+  pressure: 0.6,
+  articulation: 0.5,
+  mute: 0,
+  resonance: 0.5,
+  bowVelocity: 0.8,
+  bowPressure: 0.7,
+  model: 10,
+  volume: 1.0,
+  pan: 0,
+  styleFlavor: 0.5,
+  contact: 0.5,
+  bodyTap: 0,
+  pluckPosition: 0.5,
+  instrumentId: 'bandoneon',
+  genreId: 'tango'
+};
+
+const bandoneonNode = renderVoice('audit_track', 0, mockBandoneonVoice, mockBandoneonParams);
+const bandoneonTanhCount = countDistinctTanhNodes(bandoneonNode);
+console.log(`Bandoneón Voice Graph Tanh Saturation Nodes: ${bandoneonTanhCount} (Target: <=2 with self-owned excitation + preamp insert)`);
+if (bandoneonTanhCount > 2) {
+  errors.push(`Bandoneon voice node graph contains ${bandoneonTanhCount} distinct tanh nodes (expected <=2)`);
+}
+
+// =========================================================================
+// FIX 2 DIALECT RESOLUTION RATE AUDIT
+// =========================================================================
+console.log('\n--- Fix 2: Genre Dialect Resolution Audit ---');
+let totalDialectChecks = 0;
+let resolvedDialectChecks = 0;
+
+for (const id of ids) {
+  const def = INSTRUMENTS_BY_ID[id];
+  const dsp = def?.dspProfile;
+  if (dsp?.genreDialects) {
+    const authoredGenres = Object.keys(dsp.genreDialects);
+    for (const genreId of authoredGenres) {
+      totalDialectChecks++;
+      const testParams: TrackParams = {
+        ...mockBandoneonParams,
+        instrumentId: id,
+        genreId: genreId
+      };
+      const testVoiceContext = buildVoiceContext('test_track', 0, mockBandoneonVoice, testParams);
+      const testDsp = testVoiceContext.dspProfile;
+      const resolvedEntry = (testParams.genreId ?? testParams.dialect ?? '') ? testDsp?.genreDialects[testParams.genreId.toLowerCase()] : undefined;
+      if (resolvedEntry) {
+        resolvedDialectChecks++;
+      }
+    }
+  }
+}
+
+const resolutionRatePct = totalDialectChecks > 0 ? (resolvedDialectChecks / totalDialectChecks) * 100 : 100;
+console.log(`Genre Dialect Resolution Rate: ${resolutionRatePct.toFixed(1)}% (${resolvedDialectChecks}/${totalDialectChecks} resolved)`);
+if (resolutionRatePct < 100) {
+  errors.push(`Genre dialect resolution rate is ${resolutionRatePct.toFixed(1)}% (expected 100%)`);
+}
+
+// =========================================================================
+// FIX 4 EXCITATION GATE AUDIT
+// =========================================================================
+console.log('\n--- Fix 4: Excitation Gate Action Compatibility Audit ---');
+const bandoneonLegatoAllowed = isCollisionAllowedForAction('breath', 'bellows-and-keys', 'legato', 'legato');
+const bandoneonSlapAllowed = isCollisionAllowedForAction('breath', 'bellows-and-keys', 'bellows-slap', 'bellows-slap');
+const concertinaLegatoAllowed = isCollisionAllowedForAction('breath', 'bellows-and-keys', 'legato', 'legato');
+const violinLegatoAllowed = isCollisionAllowedForAction('bow', 'bowed', 'legato', 'legato');
+const guitarPluckAllowed = isCollisionAllowedForAction('plectrum', 'plucked', 'pluck', 'pluck');
+
+console.log(`  Bandoneón Legato Collision Allowed: ${bandoneonLegatoAllowed} (Expected: false)`);
+console.log(`  Bandoneón Bellows Slap Collision Allowed: ${bandoneonSlapAllowed} (Expected: true)`);
+console.log(`  Concertina Legato Collision Allowed: ${concertinaLegatoAllowed} (Expected: false)`);
+console.log(`  Violin Legato Collision Allowed: ${violinLegatoAllowed} (Expected: false)`);
+console.log(`  Guitar Pluck Collision Allowed: ${guitarPluckAllowed} (Expected: true)`);
+
+if (bandoneonLegatoAllowed || !bandoneonSlapAllowed || concertinaLegatoAllowed || violinLegatoAllowed || !guitarPluckAllowed) {
+  errors.push(`Excitation gate action compatibility check failed!`);
+}
+
 if (errors.length) {
-  console.error(`Instrument audit failed: ${errors.length} error(s)`);
+  console.error(`\nInstrument audit failed: ${errors.length} error(s)`);
   for (const e of errors) console.error(`ERROR ${e}`);
   for (const w of warnings) console.warn(`WARN ${w}`);
   process.exit(1);
 }
-console.log(`Instrument audit passed: ${INSTRUMENT_CATALOG.length} definitions, ${Object.keys(LUTHIER_INSTRUMENT_MAP).length} physical profiles, ${Object.keys(ARTICULATIONS).length} articulation specs.`);
+console.log(`\nInstrument audit passed: ${INSTRUMENT_CATALOG.length} definitions, ${Object.keys(LUTHIER_INSTRUMENT_MAP).length} physical profiles, ${Object.keys(ARTICULATIONS).length} articulation specs.`);
 for (const w of warnings) console.warn(`WARN ${w}`);

@@ -43,6 +43,7 @@ import { getCanonicalStyle } from '../../data/styles/registry';
 import { resolveTuningSystem } from '../theory/tuning';
 import { getPerformanceGrammar } from '../performance/performanceGrammar';
 import { interpretPattern } from '../performance/performanceInterpreter';
+import { compilePhrasePerformance } from './phrase';
 import {
   createInitialPhraseMemory,
   advancePhraseDevelopment,
@@ -643,10 +644,21 @@ export function realizePerformanceCell(params: RealizeCellParams): PerformanceCe
 
     if (def.kit || def.drum) {
       const hit = translatedHitType || 'snare';
-      const mVal = hit === 'kick' ? (def.drum?.low ?? 36)
+      let mVal = hit === 'kick' ? (def.drum?.low ?? 36)
         : hit === 'hat' ? (def.drum?.high ?? 42)
         : hit === 'snare' ? (def.drum?.mid ?? 38)
         : (def.drum?.mid ?? 38);
+
+      if (def.kitComponents && def.kitComponents.length > 0) {
+        const search = hit.toLowerCase();
+        const comp = def.kitComponents.find(c =>
+          c.id.toLowerCase() === search ||
+          c.id.toLowerCase().includes(search) ||
+          c.name.toLowerCase().includes(search) ||
+          c.strikeZones?.some(z => search.includes(z))
+        );
+        if (comp) mVal = comp.midi;
+      }
       midiValues = [mVal];
     } else if (isBass) {
       const rootMidi = 36 + ((parsedChord.rootPc ?? 0) % 12);
@@ -945,7 +957,8 @@ export function assembleSong(
   };
 
   const humanScale = 1;
-  return polishPerformance(applyEnsembleInteraction(rawPerf), { timingScale: humanScale, velocityScale: humanScale });
+  const phrasePerf = compilePhrasePerformance(rawPerf);
+  return polishPerformance(applyEnsembleInteraction(phrasePerf), { timingScale: humanScale, velocityScale: humanScale });
 }
 
 // ============================================================================

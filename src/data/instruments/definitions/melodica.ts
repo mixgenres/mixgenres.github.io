@@ -8,7 +8,7 @@ export const melodica: InstrumentDef = {
   octave: 12,
   voicing: "single",
   elementaryModel: 10,
-  makeupGain: 0.511,
+  makeupGain: 0.567,
   polyphony: 4,
   note: "Breathy melodica line",
   acousticProfile: {
@@ -29,6 +29,12 @@ export const melodica: InstrumentDef = {
     bodyResonanceVolume: 1,
     decayTimeFactor: 0.8,
     harmonicRichness: 0.7
+  },
+  formantProfile: {
+    f1: { freq: 1450, q: 2.6, gain: 0.8 },
+    f2: { freq: 3100, q: 2.2, gain: 0.4 },
+    tongueType: "reed-tongue",
+    tongueFreq: 2200
   },
   techniques: {
     articulations: ["accent", "staccato", "legato", "portamento", "vibrato", "breath"],

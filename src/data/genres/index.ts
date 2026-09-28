@@ -42,9 +42,9 @@ export const GOSPEL_WORLD: GenreWorld = {
   concepts: ['Call and response', 'Hammond organ swells', 'Vocal shouting', 'Church pocket swing'],
   roles: {
     lead: ['choir', 'piano', 'organ'],
-    harmony: ['piano', 'hammond-organ', 'organ'],
-    bass: ['bass', 'electric-bass'],
-    rhythm: ['drum-kit', 'drums', 'tambourine'],
+    harmony: ['piano', 'rock-organ', 'organ'],
+    bass: ['bass'],
+    rhythm: ['drums', 'tambourine'],
     percussion: ['tambourine', 'hand-percussion'],
   },
   styleDefinitions: [
@@ -97,11 +97,11 @@ export const INDUSTRIAL_WORLD: GenreWorld = {
   artists: ['Front 242', 'Nitzer Ebb', 'Skinny Puppy', 'Ministry', 'Nine Inch Nails'],
   concepts: ['Sequenced 16th bass', 'Distorted drums', 'Sampled metallic noise', 'Harsh sequencing'],
   roles: {
-    lead: ['synth', 'noise'],
+    lead: ['synth', 'noise-sweep'],
     harmony: ['synth', 'sampler'],
-    bass: ['distorted-bass', 'sub-bass', 'synth'],
-    rhythm: ['drum-machine', 'drums'],
-    percussion: ['sampler', 'noise'],
+    bass: ['bass-lead', 'sub-bass', 'synth'],
+    rhythm: ['drums'],
+    percussion: ['sampler', 'noise-sweep'],
   },
   styleDefinitions: [
     {

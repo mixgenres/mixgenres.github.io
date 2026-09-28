@@ -87,6 +87,19 @@ export function voiceProfile(instrumentId: string, genreId?: string): VoiceProfi
   return merged;
 }
 
+export function resolveTechniqueProfile(instrumentId: string, genreId?: string) {
+  const def = INSTRUMENTS_BY_ID[instrumentId];
+  if (!def?.techniques) return undefined;
+  const methods = def.techniques.techniqueMethods ?? [];
+  const styles = def.techniques.playingStyles ?? [];
+  const genreTechs = genreId ? def.techniques.genreTechniques?.[genreId.toLowerCase()] : undefined;
+  return {
+    methods,
+    styles,
+    genreTechniques: genreTechs ?? def.techniques.articulations
+  };
+}
+
 export function noteLengthBeats(
   p: VoiceProfile,
   authoredBeats: number,

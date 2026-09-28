@@ -7,7 +7,7 @@ export const celeste: InstrumentDef = {
   program: 8,
   voicing: "chord",
   elementaryModel: 8,
-  makeupGain: 0.950,
+  makeupGain: 1.000,
   polyphony: 8,
   note: "Keyboard struck metal-plate idiophone with wooden box resonators sounding delicate bell-like tones",
   acousticProfile: {

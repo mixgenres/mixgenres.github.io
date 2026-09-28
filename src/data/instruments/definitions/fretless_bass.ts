@@ -10,7 +10,7 @@ export const fretless_bass: InstrumentDef = {
   bodyConstruction: "solid-electric",
   excitationType: "fingerpad",
   elementaryModel: 3,
-  makeupGain: 0.565,
+  makeupGain: 0.685,
   polyphony: 4,
   note: "Fretless electric bass producing continuous vocal mwah resonance and singing vibrato",
   acousticProfile: {

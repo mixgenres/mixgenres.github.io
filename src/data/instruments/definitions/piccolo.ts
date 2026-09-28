@@ -8,7 +8,7 @@ export const piccolo: InstrumentDef = {
   octave: 12,
   voicing: "single",
   elementaryModel: 7,
-  makeupGain: 0.422,
+  makeupGain: 0.466,
   polyphony: 4,
   note: "Half-size transverse flute pitched an octave above concert flute with piercing, brilliant, soaring highs",
   acousticProfile: {

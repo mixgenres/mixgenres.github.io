@@ -11,7 +11,7 @@ export const kick: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 4,
-  makeupGain: 1.429,
+  makeupGain: 1.540,
   polyphony: 12,
   note: "Acoustic bass drum struck with foot pedal beater; provides the low-end punch and groove anchor",
   acousticProfile: {

@@ -7,7 +7,7 @@ export const choir: InstrumentDef = {
   program: 52,
   voicing: "chord",
   elementaryModel: 12,
-  makeupGain: 0.382,
+  makeupGain: 0.455,
   polyphony: 8,
   note: "Polyphonic acoustic choral ensemble combining soprano, alto, tenor, and bass vocalists singing sustained vowel sonorities with expansive cathedral acoustic bloom",
   acousticProfile: {

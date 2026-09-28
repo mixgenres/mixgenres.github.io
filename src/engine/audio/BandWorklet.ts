@@ -289,6 +289,9 @@ export class BandWorkletNode {
         const model = instDef?.elementaryModel ?? modelForInstrument(instrumentId, instLuthier);
         const params = defaultTrackParams(instrumentId, instLuthier, model);
         params.performanceMode = performanceModeForContext(this.activeWorldId, this.activeStyleId);
+        if (this.activeWorldId) {
+          params.genreId = this.activeWorldId;
+        }
         const dialect = resolveDialect(instrumentId, this.activeWorldId, this.activeStyleId);
         if (dialect) {
           params.dialect = dialect.id;
@@ -517,6 +520,7 @@ export class BandWorkletNode {
     voice.gate = 1;
 
     voice.actionType = event.action?.type || (event as any).actionType;
+    voice.articulation = event.action?.technique || event.techniqueModifier || (event as any).technique || (event as any).articulation;
     voice.excitationType = (event as any).excitationType || params.excitationType;
 
     voice.attack = event.attack;

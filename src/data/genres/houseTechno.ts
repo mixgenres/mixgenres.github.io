@@ -20,7 +20,7 @@ export const HOUSE_TECHNO_WORLD: GenreWorld = {
         "synth",
         "sub-bass",
         "sampler",
-        "drum-machine"
+        "noise-sweep"
       ],
       "preferredMeters": [
         "4/4"
@@ -95,7 +95,7 @@ export const HOUSE_TECHNO_WORLD: GenreWorld = {
         "sampler",
         "synth",
         "sub-bass",
-        "drum-machine"
+        "warm-pad"
       ],
       "preferredMeters": [
         "4/4"
@@ -292,7 +292,7 @@ export const HOUSE_TECHNO_WORLD: GenreWorld = {
         "drums",
         "sub-bass",
         "sampler",
-        "drum-machine"
+        "acid-303"
       ],
       "preferredMeters": [
         "4/4"
@@ -361,7 +361,7 @@ export const HOUSE_TECHNO_WORLD: GenreWorld = {
         "sub-bass",
         "synth",
         "sampler",
-        "drum-machine"
+        "noise-sweep"
       ],
       "preferredMeters": [
         "4/4"
@@ -509,7 +509,7 @@ export const HOUSE_TECHNO_WORLD: GenreWorld = {
         "drums",
         "sub-bass",
         "sampler",
-        "drum-machine"
+        "saw-lead"
       ],
       "preferredMeters": [
         "4/4"

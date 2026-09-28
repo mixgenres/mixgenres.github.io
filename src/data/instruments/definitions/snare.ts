@@ -11,7 +11,7 @@ export const snare: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 4,
-  makeupGain: 3.899,
+  makeupGain: 3.960,
   polyphony: 12,
   acousticProfile: {
     sustain: "percussive",

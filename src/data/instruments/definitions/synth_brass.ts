@@ -7,7 +7,7 @@ export const synth_brass: InstrumentDef = {
   program: 62,
   voicing: "chord",
   elementaryModel: 15,
-  makeupGain: 0.461,
+  makeupGain: 0.551,
   polyphony: 8,
   acousticProfile: {
     sustain: "sustained",

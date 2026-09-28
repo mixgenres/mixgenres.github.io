@@ -7,7 +7,7 @@ export const fm_ep: InstrumentDef = {
   program: 5,
   voicing: "chord",
   elementaryModel: 14,
-  makeupGain: 0.362,
+  makeupGain: 0.411,
   polyphony: 8,
   note: "Classic 80s FM digital electric piano with glassy metallic chime and crystalline clarity",
   acousticProfile: {

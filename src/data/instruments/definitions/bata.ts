@@ -13,7 +13,7 @@ export const bata: InstrumentDef = {
   bodyConstruction: "skin-faced",
   excitationType: "fingerpad",
   elementaryModel: 4,
-  makeupGain: 0.891,
+  makeupGain: 0.976,
   polyphony: 8,
   note: "Sacred hour-glass shaped double-headed Afro-Cuban drums (Iyá mother drum, Itótele, Okónkolo) with Enú (large head) and Chachá (small head)",
   acousticProfile: {

@@ -260,6 +260,8 @@ export function resolveHybridGrammar(
   };
 
   return {
+    worldId: host.worldId ?? guest?.worldId,
+    styleId: host.styleId ?? guest?.styleId,
     densityByRole: mergedDensityByRole,
     subdivisionVocabulary: host.subdivisionVocabulary ?? guest.subdivisionVocabulary,
     variationVocabulary: mergedVariations,
@@ -312,6 +314,8 @@ export function getPerformanceGrammar(style: any, _role?: string): PerformanceGr
 
   const result: PerformanceGrammar = {
     ...baseGrammar,
+    worldId: style?.worldId || style?.genreId || style?.id,
+    styleId: style?.id,
     articulationVocabulary: mergedArticulations,
     forbiddenInterpretations: mergedForbidden,
     microtiming: microtiming,

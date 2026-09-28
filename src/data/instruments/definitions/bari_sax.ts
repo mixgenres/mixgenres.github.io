@@ -7,7 +7,7 @@ export const bari_sax: InstrumentDef = {
   program: 67,
   voicing: "bass",
   elementaryModel: 16,
-  makeupGain: 0.360,
+  makeupGain: 0.411,
   polyphony: 4,
   note: "Massive E-flat low brass saxophone with coiled neck tube, delivering guttural earth-shaking low A/B-flat fundamentals, snappy funk horn punches, and motoring bass lines",
   acousticProfile: {

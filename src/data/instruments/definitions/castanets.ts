@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../types';
 
 export const castanets: InstrumentDef = {
   id: "castanets",
-  name: "Castanets",
+  name: "Castañuelas (Castanets)",
   family: "metal-and-wood",
   drum: {
     low: 76,
@@ -11,9 +11,9 @@ export const castanets: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 18,
-  makeupGain: 0.281,
+  makeupGain: 16.475,
   polyphony: 8,
-  note: "Pair of concave hardwood shells clapped together by flamenco dancers and orchestral percussionists",
+  note: "Authentic paired Spanish hardwood castañuelas (granadillo/ebony) with hembra (high right hand) for cascading carretilla rolls and macho (low left hand) for single downbeat golpes",
   acousticProfile: {
     sustain: "percussive",
     role: "perc",
@@ -27,24 +27,40 @@ export const castanets: InstrumentDef = {
   },
   luthierPhysics: {
     category: "resonator_struck_metal_wood",
-    materialDensity: 0.6,
-    tension: 0.8,
-    bodyResonanceVolume: 0.15,
+    materialDensity: 0.75,
+    tension: 0.85,
+    bodyResonanceVolume: 0.18,
     decayTimeFactor: 0.12,
-    harmonicRichness: 0.55
+    harmonicRichness: 0.65,
+    soundboardResonanceHz: 880,
+    airResonanceHz: 3400
   },
   techniques: {
-    articulations: ["accent", "staccato", "roll", "flam", "ghost"],
+    articulations: ["accent", "staccato", "roll", "flam", "ghost", "golpe", "open"],
     techniqueMethods: [
-      "carretilla four-finger cascading roll (right hand)",
-      "golpe single accent snap (left hand)",
-      "postizo muffled click",
-      "rhythmic dance accompaniment"
+      "carretilla four-finger cascading roll (hembra right hand)",
+      "golpe single accented downbeat snap (macho left hand)",
+      "postizo thumb-damped muted click",
+      "flamenco dance rhythmic accompaniment"
     ],
     playingStyles: ["flamenco", "classical-spanish", "folklorico", "orchestral"],
     genreTechniques: {
-      flamenco: ["accent", "roll", "staccato", "flam"],
+      flamenco: ["accent", "roll", "staccato", "flam", "golpe"],
       "classical-spanish": ["roll", "accent", "staccato"]
     }
+  },
+  physicalModel: {
+    model: "metal-impact",
+    parameters: {
+      bodyResonance: 0.75,
+      airResonance: 0.85,
+      transientSharpness: 0.98,
+      damping: 0.90
+    },
+    signalChain: ["preamp", "eq", "reverb"],
+    synthesisNotes: [
+      "Granadillo hardwood cups generate sharp <0.5ms impact transients.",
+      "Dual pitch centers model hembra (980Hz) and macho (680Hz) with 3.4kHz wood crack."
+    ]
   }
 };

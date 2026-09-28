@@ -7,7 +7,7 @@ export const dizi: InstrumentDef = {
   program: 72,
   voicing: "single",
   elementaryModel: 7,
-  makeupGain: 0.422,
+  makeupGain: 0.466,
   polyphony: 4,
   note: "Chinese transverse bamboo flute equipped with a mo-kong membrane hole covered by a thin reed tissue (dimo), radiating bright, buzzing, resonant, and soaring lyrical timbre",
   acousticProfile: {

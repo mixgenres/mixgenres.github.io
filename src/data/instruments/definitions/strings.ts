@@ -7,7 +7,7 @@ export const strings: InstrumentDef = {
   program: 48,
   voicing: "chord",
   elementaryModel: 6,
-  makeupGain: 23.865,
+  makeupGain: 0.531,
   polyphony: 8,
   acousticProfile: {
     sustain: "sustained",

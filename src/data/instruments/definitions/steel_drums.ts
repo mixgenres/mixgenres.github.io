@@ -6,7 +6,7 @@ export const steel_drums: InstrumentDef = {
   family: "metal-and-wood",
   voicing: "single",
   elementaryModel: 8,
-  makeupGain: 0.950,
+  makeupGain: 1.000,
   polyphony: 4,
   note: "tuned steel pan; struck convex notes with bright partials",
   acousticProfile: {

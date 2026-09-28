@@ -47,7 +47,7 @@ export function applyEnsembleInteraction(
   for (const note of notes) {
     const role = roleOf(note);
     // Bassist gives the drummer space during drum fills
-    if ((role === 'bass' || /bass|bajo|contrabajo/i.test(instrumentOf(note))) && drumFillTimes.some(t => Math.abs(t - note.time) < 0.4)) {
+    if ((role === 'bass' || /bass|guitarron/i.test(instrumentOf(note))) && drumFillTimes.some(t => Math.abs(t - note.time) < 0.4)) {
       note.vel = Math.max(1, Math.round(note.vel * 0.85));
       if (note.dur < 0.25) {
         note.vel = 1; // Muted / silenced
@@ -61,7 +61,7 @@ export function applyEnsembleInteraction(
 
   // 2. Lock Bass Onsets to Kick Transients
   if (kickTimes.length > 0 && params.rhythmicLockingStrength > 0) {
-    const bassNotes = notes.filter(n => roleOf(n) === 'bass' || /bass|bajo|contrabajo|tuba|sousaphone/i.test(instrumentOf(n)));
+    const bassNotes = notes.filter(n => roleOf(n) === 'bass' || /bass|tuba|guitarron/i.test(instrumentOf(n)));
     for (const bNote of bassNotes) {
       let nearestKickTime = kickTimes[0];
       let minDiff = Math.abs(bNote.time - nearestKickTime);
@@ -129,7 +129,7 @@ export function applyEnsembleInteraction(
     }
     // Salsa Anti-Flaming: Bass tumbao & Conga open tone synchronization
     const congaNotes = notes.filter(n => /conga/i.test(instrumentOf(n)));
-    const sBassNotes = notes.filter(n => roleOf(n) === 'bass' || /bass|bajo|contrabajo/i.test(instrumentOf(n)));
+    const sBassNotes = notes.filter(n => roleOf(n) === 'bass' || /bass|guitarron/i.test(instrumentOf(n)));
     for (const b of sBassNotes) {
       const bpm = perf.bars[b.bar]?.bpm ?? 100;
       const secPerBeat = 60 / bpm;
@@ -183,7 +183,7 @@ export function applyEnsembleInteraction(
   // Tango Dynamic Breathing: duck piano and bass by 30% during lead phraseo sustains
   if (worldId?.includes('tango')) {
     const leads = notes.filter(n => /violin|bandoneon/i.test(instrumentOf(n)) && (roleOf(n) === 'lead' || roleOf(n) === 'melody'));
-    const compingNotes = notes.filter(n => /piano|bass|bajo|contrabajo/i.test(instrumentOf(n)));
+    const compingNotes = notes.filter(n => /piano|bass/i.test(instrumentOf(n)));
     for (const cNote of compingNotes) {
       const bpm = perf.bars[cNote.bar]?.bpm ?? 120;
       const secPerBeat = 60 / bpm;
@@ -396,7 +396,7 @@ export function applyEnsembleInteraction(
     const pianoPerNotes = notes.filter(n =>
       /piano/i.test(instrumentOf(n)) && (n.articulation === 'cluster' || n.articulation === 'chapa')
     );
-    const bassNotes = notes.filter(n => roleOf(n) === 'bass' || /bass|contrabajo|upright/i.test(instrumentOf(n)));
+    const bassNotes = notes.filter(n => roleOf(n) === 'bass' || /bass|upright/i.test(instrumentOf(n)));
     for (const pNote of pianoPerNotes) {
       const nearBass = bassNotes.find(b => Math.abs(b.time - pNote.time) < 0.04);
       if (nearBass) {

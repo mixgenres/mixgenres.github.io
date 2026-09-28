@@ -8,7 +8,7 @@ export const voice: InstrumentDef = {
   octave: 12,
   voicing: "single",
   elementaryModel: 12,
-  makeupGain: 0.382,
+  makeupGain: 0.455,
   polyphony: 4,
   note: "Synth voice tone",
   acousticProfile: {

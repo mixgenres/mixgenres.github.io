@@ -1,5 +1,5 @@
 import { GenreWorld } from '../../types';
-import { AnalogSynthTimbreControl, SamplerTimbreControl } from '../../engine/theory/physicsInterfaces';
+import { SamplerTimbreControl } from '../../engine/theory/physicsInterfaces';
 
 export const REGGAETON_DEMBOW_WORLD: GenreWorld = {
   "id": "reggaeton-dembow",
@@ -9,46 +9,6 @@ export const REGGAETON_DEMBOW_WORLD: GenreWorld = {
   "level": "world",
   "description": "Reggaetón and dembow are represented as",
   rhythm: { syncopation: 0.5, swing: 0.0, pocket: 'strict_grid', pocketDepth: 0, intonationSystem: 'equal', quantizeJitterMs: 2 },
-  performanceRules: {
-    'synth_bass': {
-      evaluateNote: (phrase: any, index: number, _acousticState?: any, electronicState?: any) => {
-        const note = phrase.notes[index];
-        const isDownbeat = ((note.time ?? 0) % 1) === 0;
-
-        const timbre: AnalogSynthTimbreControl = {
-          oscillatorPhase: 'reset_on_note',
-          filterEnvelopeDepth: 0.8,
-          distortion: { type: 'analog_tube', driveAmount: 0.65, asymmetry: 0.8 },
-          subOscillatorLevel: 1.0,
-          sidechainDuckDepth: isDownbeat ? (electronicState?.globalSidechainDuckAmount ?? 1.0) * 0.9 : 0.0,
-          portamentoTimeMs: (note.duration ?? 0.25) > 0.4 ? 120 : 0,
-          intonationOffsetCents: electronicState?.thermalAnalogDrift ?? 0,
-          actuationSyncOffsetMs: 0
-        };
-
-        return [{ ...note, type: 'synth', articulation: 'plucked_sub', timbreControl: timbre }];
-      }
-    },
-    'sub-bass': {
-      evaluateNote: (phrase: any, index: number, _acousticState?: any, electronicState?: any) => {
-        const note = phrase.notes[index];
-        const isDownbeat = ((note.time ?? 0) % 1) === 0;
-
-        const timbre: AnalogSynthTimbreControl = {
-          oscillatorPhase: 'reset_on_note',
-          filterEnvelopeDepth: 0.8,
-          distortion: { type: 'analog_tube', driveAmount: 0.65, asymmetry: 0.8 },
-          subOscillatorLevel: 1.0,
-          sidechainDuckDepth: isDownbeat ? (electronicState?.globalSidechainDuckAmount ?? 1.0) * 0.9 : 0.0,
-          portamentoTimeMs: (note.duration ?? 0.25) > 0.4 ? 120 : 0,
-          intonationOffsetCents: electronicState?.thermalAnalogDrift ?? 0,
-          actuationSyncOffsetMs: 0
-        };
-
-        return [{ ...note, type: 'synth', articulation: 'plucked_sub', timbreControl: timbre }];
-      }
-    }
-  },
   drumRules: {
     evaluateStep: (step: any) => {
       const kickTimbre: SamplerTimbreControl = {
@@ -89,7 +49,7 @@ export const REGGAETON_DEMBOW_WORLD: GenreWorld = {
         "sub-bass",
         "synth",
         "sampler",
-        "drum-machine"
+        "maracas"
       ],
       "preferredMeters": [
         "4/4"
@@ -169,7 +129,7 @@ export const REGGAETON_DEMBOW_WORLD: GenreWorld = {
         "drums",
         "sub-bass",
         "electric-guitar",
-        "drum-machine"
+        "maracas"
       ],
       "preferredMeters": [
         "4/4"
@@ -248,7 +208,7 @@ export const REGGAETON_DEMBOW_WORLD: GenreWorld = {
         "drums",
         "sub-bass",
         "synth",
-        "drum-machine"
+        "noise-sweep"
       ],
       "preferredMeters": [
         "4/4"
@@ -487,7 +447,7 @@ export const REGGAETON_DEMBOW_WORLD: GenreWorld = {
         "drums",
         "synth",
         "sampler",
-        "drum-machine"
+        "electric-guitar"
       ],
       "preferredMeters": [
         "4/4"
@@ -566,7 +526,7 @@ export const REGGAETON_DEMBOW_WORLD: GenreWorld = {
         "drums",
         "synth",
         "turntable",
-        "drum-machine"
+        "sub-bass"
       ],
       "preferredMeters": [
         "4/4"
@@ -2358,6 +2318,112 @@ export const REGGAETON_DEMBOW_WORLD: GenreWorld = {
       "tuningSystem": "12-tet",
       "difficulty": 2,
       "weight": 0.82,
+      "enabled": true
+    },
+    {
+      "id": "rg-16-perreo-synth-hook",
+      "worldId": "reggaeton-dembow",
+      "styleIds": ["reggaeton-dembow-perreo", "reggaeton-modern"],
+      "name": "Perreo Minor Synth Hook",
+      "family": "Melody",
+      "category": "phrasePattern",
+      "description": "Aggressive syncopated 16th minor synth hook driving over the Dembow beat",
+      "tags": ["perreo", "synth", "lead", "minor-hook"],
+      "scopes": ["measure", "phrase", "region", "track", "song"],
+      "roles": ["lead", "melody"],
+      "approaches": ["lead", "melody"],
+      "instruments": ["synth"],
+      "meter": "4/4",
+      "cycleLength": 1,
+      "subdivisions": 16,
+      "onsetGrid": [0, 3, 6, 8, 11, 14],
+      "accentProfile": [1.0, 0.75, 0.85, 0.95, 0.75, 0.85],
+      "velocityProfile": [0.9, 0.8, 0.85, 0.9, 0.8, 0.85],
+      "durationGrid": [2, 2, 2, 2, 2, 2],
+      "syncopationRating": 0.75,
+      "anticipationOffset": 0,
+      "swingPercentage": 50,
+      "articulations": ["staccato", "fm-bite"],
+      "supportedEnergy": [2, 3, 4, 5],
+      "phrasePosition": ["start", "middle", "end"],
+      "sectionUsage": ["intro", "verse", "chorus", "solo"],
+      "variants": [],
+      "provenance": "Authored native Reggaeton lead pattern.",
+      "authenticityTags": ["reggaeton", "perreo", "synth-lead"],
+      "danceTags": ["festival-fusion"],
+      "tuningSystem": "12-tet",
+      "difficulty": 2,
+      "weight": 0.95,
+      "enabled": true
+    },
+    {
+      "id": "rg-17-melodic-pluck-lead",
+      "worldId": "reggaeton-dembow",
+      "styleIds": ["reggaeton-dembow-melodic", "reggaeton-modern"],
+      "name": "Medellín Plucked Synth Lead",
+      "family": "Melody",
+      "category": "phrasePattern",
+      "description": "Smooth Colombia Medellín style plucked synth melody with romantic vocal-style phrasing",
+      "tags": ["medellin", "synth", "pluck", "lead"],
+      "scopes": ["measure", "phrase", "region", "track", "song"],
+      "roles": ["lead", "melody"],
+      "approaches": ["lead", "melody"],
+      "instruments": ["synth"],
+      "meter": "4/4",
+      "cycleLength": 1,
+      "subdivisions": 16,
+      "onsetGrid": [0, 2, 4, 7, 10, 12, 14],
+      "accentProfile": [0.9, 0.7, 0.8, 0.85, 0.9, 0.7, 0.8],
+      "durationGrid": [2, 2, 3, 2, 2, 2, 2],
+      "syncopationRating": 0.6,
+      "anticipationOffset": 0,
+      "swingPercentage": 50,
+      "articulations": ["tight-env-pluck"],
+      "supportedEnergy": [1, 2, 3, 4],
+      "phrasePosition": ["start", "middle", "end"],
+      "sectionUsage": ["intro", "verse", "chorus"],
+      "variants": [],
+      "provenance": "Authored native Reggaeton lead pattern.",
+      "authenticityTags": ["reggaeton", "melodic", "pluck-lead"],
+      "danceTags": ["social-partner"],
+      "tuningSystem": "12-tet",
+      "difficulty": 2,
+      "weight": 0.95,
+      "enabled": true
+    },
+    {
+      "id": "rg-18-dembow-lead-counterline",
+      "worldId": "reggaeton-dembow",
+      "styleIds": ["reggaeton-dembow-perreo", "reggaeton-dembow-melodic"],
+      "name": "Dembow Synth Counterline",
+      "family": "Melody",
+      "category": "ostinato",
+      "description": "Syncopated offbeat synth counterline weaving around the Dembow vocals",
+      "tags": ["reggaeton", "counterline", "synth"],
+      "scopes": ["measure", "phrase", "region", "track", "song"],
+      "roles": ["lead", "melody", "counterline"],
+      "approaches": ["counterline", "groove"],
+      "instruments": ["synth"],
+      "meter": "4/4",
+      "cycleLength": 1,
+      "subdivisions": 16,
+      "onsetGrid": [2, 5, 8, 10, 13],
+      "accentProfile": [0.8, 0.9, 0.85, 0.9, 0.85],
+      "durationGrid": [2, 2, 2, 2, 2],
+      "syncopationRating": 0.8,
+      "anticipationOffset": 0,
+      "swingPercentage": 50,
+      "articulations": ["fm-bite"],
+      "supportedEnergy": [2, 3, 4],
+      "phrasePosition": ["middle", "end"],
+      "sectionUsage": ["verse", "chorus", "solo"],
+      "variants": [],
+      "provenance": "Authored native Reggaeton counterline pattern.",
+      "authenticityTags": ["reggaeton", "counterline"],
+      "danceTags": ["social-partner"],
+      "tuningSystem": "12-tet",
+      "difficulty": 2,
+      "weight": 0.9,
       "enabled": true
     }
   ],

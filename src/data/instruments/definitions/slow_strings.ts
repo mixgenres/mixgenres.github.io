@@ -7,7 +7,7 @@ export const slow_strings: InstrumentDef = {
   program: 49,
   voicing: "chord",
   elementaryModel: 6,
-  makeupGain: 23.865,
+  makeupGain: 0.564,
   polyphony: 8,
   acousticProfile: {
     sustain: "sustained",

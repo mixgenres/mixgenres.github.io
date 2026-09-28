@@ -7,7 +7,7 @@ export const french_horn: InstrumentDef = {
   program: 60,
   voicing: "single",
   elementaryModel: 15,
-  makeupGain: 0.461,
+  makeupGain: 0.399,
   polyphony: 4,
   note: "Coiled brass instrument with wide bell producing noble, heroic fanfare and warm, velvety choir blend",
   acousticProfile: {

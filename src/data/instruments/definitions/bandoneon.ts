@@ -9,42 +9,54 @@ export const bandoneon: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "breath",
   elementaryModel: 10,
-  makeupGain: 0.404,
+  makeupGain: 0.589,
   polyphony: 8,
-  note: "Bisonoric bellows instrument featuring thick zinc reed plates and long cardboard bellows, producing melancholic soul and aggressive marcato",
+  note: "Authentic 142-tone AA (Alfred Arnold) Rheinische Tonlage bisonoric bandoneon with dual zinc reed plates, resonant wooden air chamber, knee-drop marcato, and expressive arrastre drags",
   acousticProfile: {
     sustain: "sustained",
     role: "harmony",
     centre: 58,
-    low: 41,
-    high: 81,
+    low: 36,
+    high: 95,
     pan: -0.1,
     trim: -1,
     space: 0.3,
-    ring: 2
+    ring: 2.2,
+    letRingAcrossSections: true
   },
   luthierPhysics: {
     category: "bellows_free_reed",
-    materialDensity: 0.82,
-    tension: 0.85,
+    materialDensity: 0.85,
+    tension: 0.88,
     bodyResonanceVolume: 18,
     decayTimeFactor: 2.2,
     harmonicRichness: 0.94,
-    transientSharpness: 0.72,
+    transientSharpness: 0.88,
     airResonanceHz: 220,
+    soundboardResonanceHz: 820,
     bodyConstruction: "wood-box",
-    excitationType: "breath"
+    excitationType: "breath",
+    excitationSaturation: "self-owned"
+  },
+  tuningAndMechanics: {
+    tuningName: "142-Tone AA Bisonoric Rheinische Tonlage (71 Buttons)",
+    keyRange: {
+      lowNote: "C2",
+      highNote: "B6",
+      lowMidi: 36,
+      highMidi: 95
+    }
   },
   performanceArticulations: {
     marcato: {
       decayTimeSec: 0.15,
-      transientSharpness: 0.85
+      transientSharpness: 0.92
     },
     arrastre: {
       preBeatOffsetMs: -85,
       pitchDragSemitones: -3,
       pressureRamp: true,
-      velocityGrowth: 2
+      velocityGrowth: 2.2
     },
     bend: {
       maxSemitones: 2,
@@ -68,7 +80,11 @@ export const bandoneon: InstrumentDef = {
       "portato",
       "arrastre",
       "bellows-slap",
-      "golpe-caja"
+      "golpe-caja",
+      "cluster",
+      "chapa",
+      "vibrato",
+      "legato_squeeze"
     ],
     techniqueMethods: [
       "knee drop marcato impact",
@@ -76,29 +92,36 @@ export const bandoneon: InstrumentDef = {
       "fast button articulation with air release",
       "arrastre drag into accented downbeat",
       "percussive bellows slap",
-      "golpe de caja wooden thud"
+      "golpe de caja wooden thud",
+      "cluster chord strike",
+      "chapa metallic damp"
     ],
-    playingStyles: ["tango", "nuevo-tango", "milonga", "chamame", "folk"],
+    playingStyles: ["tango", "nuevo-tango", "milonga", "chamame", "folk", "valses-criollos"],
     genreTechniques: {
-      tango: ["marcato", "accent", "staccato", "tenuto", "arrastre", "bellows-slap", "golpe-caja"],
-      milonga: ["staccato", "accent"],
-      "nuevo-tango": ["legato", "tenuto", "marcato"]
+      tango: ["marcato", "accent", "staccato", "tenuto", "arrastre", "bellows-slap", "golpe-caja", "legato_squeeze"],
+      milonga: ["staccato", "accent", "marcato"],
+      "nuevo-tango": ["legato", "tenuto", "marcato", "cluster", "arrastre"],
+      chamame: ["accent", "staccato", "legato", "tremolo"],
+      folk: ["legato", "staccato", "accent"],
+      "valses-criollos": ["legato", "tenuto", "accent"]
     }
   },
   physicalModel: {
     model: "blown-reed",
     parameters: {
-      reedStiffness: 0.68,
-      airResonance: 0.75,
-      bodyResonance: 0.72,
-      breathNoise: 0.14,
-      transientSharpness: 0.85
+      reedStiffness: 0.72,
+      airResonance: 0.78,
+      bodyResonance: 0.75,
+      breathNoise: 0.12,
+      transientSharpness: 0.88,
+      stiffness: 0.82,
+      nonlinearDrive: 0.65
     },
     signalChain: ["preamp", "eq", "compressor", "reverb"],
     synthesisNotes: [
-      "Bisonoric mechanism produces different pitches when opening versus closing bellows.",
-      "Violent knee-drops deliver sudden sharp explosive marcato transients.",
-      "Slow opening air draw evokes sustained, weeping lyrical vibrato."
+      "Bisonoric zinc reed plates deliver rich inharmonic metallic bite with distinct timbre shifts between pushing (cerrar) and pulling (abrir).",
+      "Violent knee-drops deliver sudden sharp explosive marcato transients with air compression overblown edge.",
+      "Slow opening air draw evokes sustained, weeping lyrical vibrato with authentic air leakage and button click acoustics."
     ]
   }
 };

@@ -7,7 +7,7 @@ export const uilleann_pipes: InstrumentDef = {
   program: 109,
   voicing: "single",
   elementaryModel: 16,
-  makeupGain: 0.360,
+  makeupGain: 0.411,
   polyphony: 4,
   note: "Irish phrase rules over the pipes patch",
   acousticProfile: {

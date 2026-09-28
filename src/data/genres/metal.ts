@@ -1,5 +1,4 @@
 import { GenreWorld } from '../../types';
-import { GuitarTimbreControl } from '../../engine/theory/physicsInterfaces';
 
 export const METAL_WORLD: GenreWorld = {
   "id": "metal",
@@ -9,103 +8,11 @@ export const METAL_WORLD: GenreWorld = {
   "level": "world",
   "description": "The sonic power of Metal: Iron",
   rhythm: { syncopation: 0.2, swing: 0.0, pocket: 'ahead', pocketDepth: 5 },
-  performanceRules: {
-    'electric_guitar': {
-      evaluateNote: (phrase: any, index: number) => {
-        const note = phrase.notes[index];
-        const pitch = note.pitch ?? note.midi ?? 60;
-        const vel = note.velocity ?? note.vel ?? 80;
-        const isChug = pitch <= 40;
-
-        const timbre: GuitarTimbreControl = {
-          pluckPosition: 0.2,
-          fleshToNailRatio: 1.0,
-          pickAngle: 45,
-          palmMuteAmount: isChug ? 0.8 : 0.0,
-          stringSelection: 6,
-          fretNoiseLevel: 0.3,
-          fretBuzz: 0.5,
-          vibrato: { delayMs: 100, rateHz: 5.5, depthCents: 15, rateRamp: 0.0 },
-          isHarmonic: vel > 110,
-          bodyHit: 'none',
-          sympatheticResonance: 0.8
-        };
-
-        const articulation = timbre.isHarmonic ? 'pinch_harmonic' : (isChug ? 'palm_mute' : 'down_pick');
-        return [{ ...note, type: 'plucked', articulation, timbreControl: timbre }];
-      }
-    },
-    'electric-guitar': {
-      evaluateNote: (phrase: any, index: number) => {
-        const note = phrase.notes[index];
-        const pitch = note.pitch ?? note.midi ?? 60;
-        const vel = note.velocity ?? note.vel ?? 80;
-        const isChug = pitch <= 40;
-
-        const timbre: GuitarTimbreControl = {
-          pluckPosition: 0.2,
-          fleshToNailRatio: 1.0,
-          pickAngle: 45,
-          palmMuteAmount: isChug ? 0.8 : 0.0,
-          stringSelection: 6,
-          fretNoiseLevel: 0.3,
-          fretBuzz: 0.5,
-          vibrato: { delayMs: 100, rateHz: 5.5, depthCents: 15, rateRamp: 0.0 },
-          isHarmonic: vel > 110,
-          bodyHit: 'none',
-          sympatheticResonance: 0.8
-        };
-
-        const articulation = timbre.isHarmonic ? 'pinch_harmonic' : (isChug ? 'palm_mute' : 'down_pick');
-        return [{ ...note, type: 'plucked', articulation, timbreControl: timbre }];
-      }
-    }
-  },
   styles: {
     'djent': {
       id: 'djent',
       name: 'Djent / Modern Prog',
-      tempoRange: [100, 160],
-      performanceRules: {
-        'electric_guitar': {
-          evaluateNote: (phrase: any, index: number) => {
-            const note = phrase.notes[index];
-            const timbre: GuitarTimbreControl = {
-              pluckPosition: 0.05,
-              fleshToNailRatio: 1.0,
-              pickAngle: 80,
-              palmMuteAmount: 0.95,
-              stringSelection: 8,
-              fretNoiseLevel: 0.1,
-              fretBuzz: 0.9,
-              vibrato: { delayMs: 0, rateHz: 0, depthCents: 0, rateRamp: 0 },
-              isHarmonic: false,
-              bodyHit: 'none',
-              sympatheticResonance: 0.0
-            };
-            return [{ ...note, type: 'plucked', articulation: 'djent_chug', timbreControl: timbre }];
-          }
-        },
-        'electric-guitar': {
-          evaluateNote: (phrase: any, index: number) => {
-            const note = phrase.notes[index];
-            const timbre: GuitarTimbreControl = {
-              pluckPosition: 0.05,
-              fleshToNailRatio: 1.0,
-              pickAngle: 80,
-              palmMuteAmount: 0.95,
-              stringSelection: 8,
-              fretNoiseLevel: 0.1,
-              fretBuzz: 0.9,
-              vibrato: { delayMs: 0, rateHz: 0, depthCents: 0, rateRamp: 0 },
-              isHarmonic: false,
-              bodyHit: 'none',
-              sympatheticResonance: 0.0
-            };
-            return [{ ...note, type: 'plucked', articulation: 'djent_chug', timbreControl: timbre }];
-          }
-        }
-      }
+      tempoRange: [100, 160]
     }
   },
   "styleDefinitions": [

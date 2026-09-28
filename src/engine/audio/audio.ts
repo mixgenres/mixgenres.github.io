@@ -12,7 +12,7 @@ import { INSTRUMENTS_BY_ID, genreTechniquesForInstrument } from '../../data/inst
 import { getLuthierModelForInstrument } from './LuthierAPI';
 import type { TransportSink } from '../sequencing/transport';
 import type { Performance } from '../sequencing/perform';
-import InstrumentRenderer from '../InstrumentRenderer.js';
+import InstrumentRenderer from '../InstrumentRenderer';
 
 let ctx: AudioContext | null = null;
 let bandWorklet: BandWorkletNode | null = null;
@@ -155,50 +155,43 @@ export function createSink(): TransportSink {
             luthier = { ...luthier, category: 'strum_friction_pluck' };
             actionType = 'pluck';
           } else {
-            // A generic staccato, spiccato, legato, or chop on a bowed instrument MUST remain a bow stroke
+            // A generic staccato, spiccato, legato, or chop on a bowed instrument MUST remain a bow stroke,
+            // while specialized articulations (chicharra, tambor, latigo, sul-ponticello, etc.) must be passed as-is.
             luthier = { ...luthier, category: 'continuous_bowed_friction' };
-            actionType = 'bow_drag';
+            actionType = artLow;
           }
         } else {
-          if (/conga-heel|macho-thumb|dayan-ti-ke|cajon-tip/.test(artLow)) {
+          // For non-bowed instruments, preserve exact multi-word technique names (e.g. golpe-caja, bellows-slap,
+          // marcato, staccato, legato, legato_squeeze, arrastre) so instrument DSP modules match them verbatim.
+          actionType = artLow;
+          if (artLow.includes('arco') || artLow.includes('bowed')) {
+            luthier = { ...luthier, category: 'continuous_bowed_friction' };
+            actionType = 'bow_drag';
+          } else if (artLow.includes('pizzicato') || artLow.includes('plucked') || artLow.includes('slap-bass') || artLow.includes('pizz')) {
+            luthier = { ...luthier, category: 'strum_friction_pluck' };
+            if (!artLow.includes('strappata')) actionType = 'pluck';
+          } else if (/conga-heel|macho-thumb|dayan-ti-ke|cajon-tip/.test(artLow)) {
             actionType = 'tap';
           } else if (/conga-toe|macho-finger-tap|dayan-na|dayan-tun|bayan-ghe|iya-enu|iya-chacha|itotele-enu|okonkolo-chacha/.test(artLow)) {
             actionType = 'tap';
-          } else if (artLow.includes('arco') || artLow.includes('bowed')) {
-            luthier = { ...luthier, category: 'continuous_bowed_friction' };
-            actionType = 'bow_drag';
-          } else if (artLow.includes('cup-mute') || artLow.includes('stopped') || artLow.includes('heel') || artLow.includes('palm-mute')) {
+          } else if (artLow.includes('cup-mute') || artLow.includes('stopped') || artLow.includes('palm-mute')) {
             actionType = 'mute';
           } else if (artLow.includes('shake')) {
             actionType = 'tremolo';
           } else if (artLow.includes('rimshot') || artLow.includes('cascara') || artLow.includes('rim')) {
             actionType = 'tap';
-          } else if (artLow.includes('conga-open') || artLow.includes('tumba-open') || artLow.includes('open')) {
+          } else if (artLow.includes('conga-open') || artLow.includes('tumba-open')) {
             actionType = 'strike';
-          } else if (artLow.includes('heel') || artLow.includes('toe')) {
-            actionType = 'tap';
-          } else if (artLow.includes('pizzicato') || artLow.includes('plucked') || artLow.includes('slap-bass') || artLow.includes('pizz')) {
-            luthier = { ...luthier, category: 'strum_friction_pluck' };
-            actionType = 'pluck';
           } else if (artLow.includes('rasgue') || artLow.includes('abanico') || artLow.includes('strum-roll')) {
             actionType = 'abanico';
-          } else if (artLow.includes('golpe') || artLow.includes('chicharra') || artLow.includes('tap')) {
-            actionType = artLow.includes('tap') ? 'tap' : 'golpe';
           } else if (artLow.includes('scratch')) {
-            // Turntable scratch is represented as a compact bidirectional pitch gesture.
             actionType = 'arrastre';
-          } else if (artLow.includes('arrastre') || artLow.includes('drag')) {
-            actionType = 'arrastre';
-          } else if (artLow.includes('slap') || artLow.includes('pop')) {
-            actionType = 'slap';
-          } else if (artLow.includes('fingerstyle') || artLow.includes('flatpick') || artLow.includes('pick') || artLow.includes('plectrum') || artLow.includes('pluck')) {
+          } else if (artLow.includes('fingerstyle') || artLow.includes('flatpick') || artLow.includes('pick') || artLow.includes('plectrum')) {
             actionType = 'pluck';
           } else if (artLow.includes('tongue') || artLow.includes('tongued') || artLow.includes('cut') || artLow.includes('martellato')) {
             actionType = 'tongue';
           } else if (artLow.includes('brush')) {
             actionType = 'strike';
-          } else if (artLow.includes('mute') || artLow.includes('muff')) {
-            actionType = 'mute';
           }
         }
       }
@@ -398,6 +391,7 @@ export function setMasterVolume(value: number) {
 }
 
 import { renderPerformanceToMp3 } from './offlineRender';
+import { compilePhrasePerformance } from '../sequencing/phrase';
 
 export async function renderSongToMp3(
   perf: Performance,
@@ -412,8 +406,11 @@ export async function renderSongToMp3(
     options = optionsOrProgress;
   }
 
+  // Compile with expressive, phrase-based playback system
+  const phraseCompiledPerf = compilePhrasePerformance(perf);
+
   return renderPerformanceToMp3(
-    perf,
+    phraseCompiledPerf,
     {
       selectedTrackIds: options.selectedTrackIds,
       trackInstruments,

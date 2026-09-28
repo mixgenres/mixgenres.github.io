@@ -8,7 +8,7 @@ export const square_lead: InstrumentDef = {
   octave: 12,
   voicing: "single",
   elementaryModel: 9,
-  makeupGain: 0.505,
+  makeupGain: 0.548,
   polyphony: 4,
   acousticProfile: {
     sustain: "sustained",

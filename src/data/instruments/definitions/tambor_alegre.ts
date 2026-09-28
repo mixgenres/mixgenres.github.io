@@ -11,7 +11,7 @@ export const tambor_alegre: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 4,
-  makeupGain: 1.093,
+  makeupGain: 1.185,
   polyphony: 8,
   note: "Colombian cumbia hand-drum",
   acousticProfile: {

@@ -11,7 +11,7 @@ export const paigu: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 4,
-  makeupGain: 1.429,
+  makeupGain: 1.540,
   polyphony: 8,
   note: "Chinese tuned barrel drums",
   acousticProfile: {

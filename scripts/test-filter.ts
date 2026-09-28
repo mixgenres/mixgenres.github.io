@@ -1,5 +1,5 @@
 import { makeSheet } from '../src/engine/generators/arrange';
-import { compile } from '../src/engine/sequencing/perform';
+import { tieredCompile } from '../src/engine/sequencing/tieredEngine';
 import { GENRE_FORMS } from '../src/data/genreForms';
 
 // Minimal regression check: every genre must build a sheet and compile to a
@@ -10,7 +10,7 @@ let failures = 0;
 for (const genreId of Object.keys(GENRE_FORMS)) {
   try {
     const sheet = makeSheet(genreId);
-    const perf = compile(sheet);
+    const perf = tieredCompile(sheet);
     if (!perf.notes.length) throw new Error('compiled performance has zero notes');
     console.log(`ok    ${genreId.padEnd(20)} ${sheet.tracks.length} tracks, ${perf.notes.length} notes, ${perf.duration.toFixed(1)}s`);
   } catch (err) {

@@ -7,7 +7,7 @@ export const accordion: InstrumentDef = {
   program: 21,
   voicing: "chord",
   elementaryModel: 10,
-  makeupGain: 0.404,
+  makeupGain: 0.457,
   polyphony: 8,
   note: "Free-reed aerophone with hand-pumped bellows driving dual/triple reed banks in resonant wooden tone chambers with musette tremolo tuning",
   acousticProfile: {

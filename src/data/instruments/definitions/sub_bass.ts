@@ -7,7 +7,7 @@ export const sub_bass: InstrumentDef = {
   program: 38,
   voicing: "bass",
   elementaryModel: 3,
-  makeupGain: 0.565,
+  makeupGain: 0.685,
   polyphony: 4,
   note: "Felt more than heard",
   acousticProfile: {

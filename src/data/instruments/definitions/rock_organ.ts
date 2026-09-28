@@ -7,7 +7,7 @@ export const rock_organ: InstrumentDef = {
   program: 18,
   voicing: "chord",
   elementaryModel: 13,
-  makeupGain: 0.368,
+  makeupGain: 0.417,
   polyphony: 8,
   acousticProfile: {
     sustain: "sustained",

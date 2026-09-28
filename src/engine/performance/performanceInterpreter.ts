@@ -8,344 +8,9 @@ import type {
 } from './phraseMemory';
 import { rand01, seedOf } from '../generators/groove';
 import type { ParsedChord } from '../theory/theory';
-import { resolveCrossInstrumentArticulation, applyGenreArticulationInfluence } from '../theory/articulation';
 import { INSTRUMENTS_BY_ID } from '../../data/instruments';
+import { applyGenreArticulationInfluence, resolveCrossInstrumentArticulation } from '../theory/articulation';
 import { resolveInstrumentArticulation, translateRhythmToInstrument } from './musicSemantics';
-import { ArticulationInterpreter } from './articulation';
-import { StrummingInterpreter } from './strumming';
-import { PhraseDynamicsInterpreter } from './phraseDynamics';
-
-export class PerformanceInterpreter {
-  public articulation: ArticulationInterpreter;
-  public strumming: StrummingInterpreter;
-  public phrasing: PhraseDynamicsInterpreter;
-
-  constructor() {
-    this.articulation = new ArticulationInterpreter();
-    this.strumming = new StrummingInterpreter();
-    this.phrasing = new PhraseDynamicsInterpreter();
-  }
-
-  public interpretEventVelocity(event: any, ctx: any): any {
-    let dynamicLevel = event.velocity || 70;
-    const styleData = event.metadata?.genre;
-
-    if (styleData && styleData.culturalHarmony) {
-      const { tensionBoost = 0, dynamicSwell = 0 } = styleData.culturalHarmony;
-      dynamicLevel = Math.min(127, dynamicLevel + tensionBoost * 10 + dynamicSwell);
-    }
-
-    const rngFloat = ctx?.rng?.float ? ctx.rng.float() : Math.random();
-    const dynamicVariation = rngFloat * 10 - 5;
-    event = this.phrasing.applyMacroPhrasing(event, ctx);
-
-    return { ...event, velocity: Math.max(1, Math.min(127, Math.round(dynamicLevel + dynamicVariation))) };
-  }
-
-  public interpretPhrase(phrase: any, context: any): any[] {
-    const inst = context?.instrument || { id: context?.instrumentId, family: context?.family };
-    const genre = context?.genre || context?.style;
-    const style = context?.songStyle;
-    const rhythmFeel = style?.rhythmOverride || genre?.rhythm;
-
-    const events: any[] = [];
-    const notes = phrase?.notes || [];
-
-    const isElectronic = inst?.nature === 'electronic'
-      || inst?.family === 'electronic'
-      || inst?.family === 'synth'
-      || inst?.family === 'sampler'
-      || /synth|808|909|303|lead|pad|sub|sampler|electronic/i.test(inst?.id || '');
-
-    // HUMAN BIOLOGY TRACKER
-    const acousticState: any = {
-      lungCapacity: 1.0,
-      timeSinceLastBreath: 0,
-      stamina: 1.0,
-      phraseArcPosition: 0.0,
-      lastHandPositionPitch: notes[0]?.pitch ?? notes[0]?.midi ?? 60,
-      actuationSyncErrorMs: 0,
-    };
-
-    // DAW / HARDWARE TRACKER
-    const electronicState: any = {
-      lastVoltagePitch: notes[0]?.pitch ?? notes[0]?.midi ?? 60,
-      thermalAnalogDrift: 0,
-      globalSidechainDuckAmount: 0,
-    };
-
-    for (let i = 0; i < notes.length; i++) {
-      const note = notes[i];
-      const prevNote = i > 0 ? notes[i - 1] : null;
-      const noteTime = note.time ?? 0;
-      const noteDur = note.duration ?? note.dur ?? 0.25;
-      const notePitch = note.pitch ?? note.midi ?? 60;
-
-      if (!isElectronic) {
-        // ACOUSTIC BIOLOGY PHYSICS
-        // 1. Phrase Arc Position
-        acousticState.phraseArcPosition = i / Math.max(1, notes.length - 1);
-
-        // 2. Breath & Fatigue Physics
-        if (prevNote) {
-          const prevTime = prevNote.time ?? 0;
-          const prevDur = prevNote.duration ?? prevNote.dur ?? 0.25;
-          const prevVel = prevNote.velocity ?? prevNote.vel ?? 80;
-          const restTime = noteTime - (prevTime + prevDur);
-
-          if (restTime > 0.4) {
-            acousticState.lungCapacity = Math.min(1.0, acousticState.lungCapacity + restTime * 0.8);
-            acousticState.stamina = Math.min(1.0, acousticState.stamina + restTime * 0.5);
-            acousticState.timeSinceLastBreath = 0;
-          } else {
-            acousticState.lungCapacity = Math.max(0.0, acousticState.lungCapacity - prevDur * 0.15);
-            acousticState.stamina = Math.max(0.0, acousticState.stamina - (prevVel / 127) * 0.05);
-            acousticState.timeSinceLastBreath += prevDur;
-          }
-
-          // 3. Biomechanics: Hand Travel Penalty
-          const intervalDistance = Math.abs(notePitch - acousticState.lastHandPositionPitch);
-          const travelTimeNeeded = intervalDistance * 0.002;
-
-          if (travelTimeNeeded > restTime && intervalDistance > 5) {
-            const timeDeficit = travelTimeNeeded - restTime;
-            const lastEvent = events[events.length - 1];
-            if (lastEvent) {
-              lastEvent.duration = Math.max(0.05, (lastEvent.duration ?? 0.25) - timeDeficit);
-            }
-            if (timeDeficit > (lastEvent?.duration ?? 0)) {
-              note.time = noteTime + (timeDeficit - (lastEvent?.duration ?? 0));
-            }
-          }
-
-          // 4. Actuation Sync
-          if (noteDur < 0.2 && acousticState.stamina < 0.5) {
-            acousticState.actuationSyncErrorMs = Math.random() * 15 * (1.0 - acousticState.stamina);
-          } else {
-            acousticState.actuationSyncErrorMs = 0;
-          }
-        }
-        acousticState.lastHandPositionPitch = notePitch;
-
-      } else {
-        // ELECTRONIC HARDWARE PHYSICS
-        electronicState.thermalAnalogDrift = Math.sin(noteTime * 0.5) * 5;
-        const tempo = context?.tempo || 120;
-        const timeSinceBeat = (noteTime % (60 / tempo));
-        electronicState.globalSidechainDuckAmount = Math.max(0, 1.0 - (timeSinceBeat * 4));
-        electronicState.lastVoltagePitch = notePitch;
-      }
-
-      // ABSOLUTE HIERARCHY: Song Style > Genre > Base Instrument
-      const rules = style?.performanceRules?.[inst?.id]
-                 || style?.performanceRules?.[inst?.family]
-                 || genre?.performanceRules?.[inst?.id] 
-                 || genre?.performanceRules?.[inst?.family]
-                 || inst?.definition?.performanceRules;
-
-      let evaluatedEvents: any[] = [];
-      if (rules && typeof rules.evaluateNote === 'function') {
-        evaluatedEvents = rules.evaluateNote(phrase, i, acousticState, electronicState);
-      } else if (inst?.id === 'trumpet') {
-        evaluatedEvents = this.processTrumpet(phrase, i, acousticState);
-      } else if (inst?.id === 'bandoneon') {
-        evaluatedEvents = this.processBandoneon(phrase, i, acousticState);
-      } else if (inst?.id === 'violin' || inst?.id === 'cello' || inst?.family === 'bowed') {
-        evaluatedEvents = this.processBowedStrings(phrase, i, inst?.id, acousticState);
-      } else if (inst?.family === 'guitar' || inst?.family === 'plucked') {
-        evaluatedEvents = this.processGuitar(phrase, i, acousticState);
-      } else if (inst?.family === 'keys' || inst?.family === 'bellows-and-keys') {
-        evaluatedEvents = this.processKeys(phrase, i, acousticState);
-      } else {
-        evaluatedEvents = [this.processGeneric(phrase, i)];
-      }
-
-      // 5. Expressive Intonation (Only for acoustic instruments that support it)
-      if (!isElectronic && rhythmFeel?.intonationSystem === 'expressive_melodic' && prevNote) {
-        const prevPitch = prevNote.pitch ?? prevNote.midi ?? 60;
-        const pitchDelta = notePitch - prevPitch;
-        evaluatedEvents.forEach(e => {
-          if (e.timbreControl && !('hammerVelocity' in e.timbreControl)) {
-            if (pitchDelta === 1 || pitchDelta === 13) e.timbreControl.intonationOffsetCents = 8;
-            else if (pitchDelta === -1 || pitchDelta === -13) e.timbreControl.intonationOffsetCents = -6;
-            else e.timbreControl.intonationOffsetCents = 0;
-          }
-        });
-      }
-
-      if (!isElectronic) {
-        evaluatedEvents.forEach(e => {
-          if (e.timbreControl) e.timbreControl.actuationSyncOffsetMs = acousticState.actuationSyncErrorMs;
-        });
-      }
-
-      // 6. Micro-timing / The Pocket
-      evaluatedEvents = evaluatedEvents.map(e => {
-        let timeShift = 0;
-        if (isElectronic && rhythmFeel?.quantizeJitterMs) {
-          const jitter = rhythmFeel.quantizeJitterMs;
-          timeShift = (Math.random() * jitter - (jitter / 2)) / 1000;
-        } else if (!isElectronic && rhythmFeel?.pocket) {
-          const depthMs = rhythmFeel.pocketDepth ?? 15;
-          if (rhythmFeel.pocket === 'behind') timeShift = depthMs / 1000;
-          else if (rhythmFeel.pocket === 'ahead') timeShift = -(depthMs / 1000);
-          else if (rhythmFeel.pocket === 'drunk') {
-            timeShift = (Math.random() * depthMs) / 1000;
-          }
-        }
-        return { ...e, time: (e.time ?? 0) + timeShift };
-      });
-
-      events.push(...evaluatedEvents);
-    }
-
-    return events;
-  }
-
-  public processTrumpet(phrase: any, index: number, _state?: any): any[] {
-    const note = phrase.notes[index];
-    const prev = phrase.notes[index - 1];
-    const next = phrase.notes[index + 1];
-
-    let articulation = 'tongued';
-    const noteTime = note.time ?? 0;
-    const noteDur = note.duration ?? note.dur ?? 0.25;
-    const noteVel = note.velocity ?? note.vel ?? 80;
-    const notePitch = note.pitch ?? note.midi ?? 60;
-    const prevTime = prev ? (prev.time ?? 0) : 0;
-    const prevDur = prev ? (prev.duration ?? prev.dur ?? 0.25) : 0;
-    const prevPitch = prev ? (prev.pitch ?? prev.midi ?? 60) : 60;
-
-    const isLegato = prev && (noteTime - (prevTime + prevDur) < 0.05);
-
-    if (isLegato) {
-      articulation = Math.abs(notePitch - prevPitch) <= 2 ? 'lip_slur' : 'legato';
-    } else if (noteVel > 85) {
-      articulation = 'marcato';
-    }
-
-    if (!next || ((next.time ?? 0) - (noteTime + noteDur) > 0.5)) {
-      if (noteVel > 75) articulation = 'fall';
-    }
-
-    return [{
-      ...note,
-      type: 'continuous',
-      articulation,
-      timbreControl: { 
-        breathPressure: noteVel, 
-        vibratoAmount: noteDur > 0.3 ? 0.6 : 0.0,
-        embouchureTension: notePitch / 127 
-      }
-    }];
-  }
-
-  public processBandoneon(phrase: any, index: number, _state?: any): any[] {
-    const note = phrase.notes[index];
-    const prev = phrase.notes[index - 1];
-    const noteTime = note.time ?? 0;
-    const noteVel = note.velocity ?? note.vel ?? 80;
-    const prevTime = prev ? (prev.time ?? 0) : 0;
-    const prevDur = prev ? (prev.duration ?? prev.dur ?? 0.25) : 0;
-
-    let articulation = 'staccato';
-    const bellowsDirection = Math.floor(noteTime / 2) % 2 === 0 ? 'opening' : 'closing';
-
-    if (noteVel > 85) {
-      articulation = 'marcato';
-    } else if (prev && (noteTime - (prevTime + prevDur) < 0.03)) {
-      articulation = 'legato_squeeze';
-    }
-
-    if (note.isAnticipation || note.anticipated) {
-      articulation = 'arrastre';
-    }
-
-    return [{
-      ...note,
-      type: 'bellows',
-      articulation,
-      bellowsDirection,
-      timbreControl: { 
-        bellowsDirection, 
-        bellowsPressure: noteVel 
-      }
-    }];
-  }
-
-  public processBowedStrings(phrase: any, index: number, _instrumentId?: string, _state?: any): any[] {
-    const note = phrase.notes[index];
-    const prev = phrase.notes[index - 1];
-    const noteTime = note.time ?? 0;
-    const noteDur = note.duration ?? note.dur ?? 0.25;
-    const noteVel = note.velocity ?? note.vel ?? 80;
-    const notePitch = note.pitch ?? note.midi ?? 60;
-    const prevTime = prev ? (prev.time ?? 0) : 0;
-    const prevDur = prev ? (prev.duration ?? prev.dur ?? 0.25) : 0;
-    const prevPitch = prev ? (prev.pitch ?? prev.midi ?? 60) : 60;
-
-    let bowDirection = index % 2 === 0 ? 'downbow' : 'upbow';
-    let articulation = 'detache';
-
-    if (noteDur < 0.12) {
-      articulation = 'spiccato';
-    } else if (prev && (noteTime - (prevTime + prevDur) < 0.05)) {
-      articulation = 'legato';
-      bowDirection = prev.timbreControl?.bowDirection || bowDirection;
-
-      if (Math.abs(notePitch - prevPitch) > 3 && noteVel > 70) {
-        articulation = 'portamento';
-      }
-    }
-
-    return [{
-      ...note,
-      type: 'bowed',
-      articulation,
-      timbreControl: { 
-        bowDirection, 
-        bowPressure: noteVel, 
-        vibratoAmount: noteDur > 0.4 ? Math.min((noteDur - 0.4) * 1.5, 1.0) : 0 
-      }
-    }];
-  }
-
-  public processGuitar(phrase: any, index: number, _state?: any): any[] {
-    const note = phrase.notes[index];
-    const noteVel = note.velocity ?? note.vel ?? 80;
-    const noteDur = note.duration ?? note.dur ?? 0.25;
-    const articulation = noteVel > 95 ? 'accent' : (noteDur < 0.15 ? 'staccato' : 'pluck');
-    return [{
-      ...note,
-      type: 'plucked',
-      articulation,
-      timbreControl: { pluckVelocity: noteVel }
-    }];
-  }
-
-  public processKeys(phrase: any, index: number, _state?: any): any[] {
-    const note = phrase.notes[index];
-    const noteVel = note.velocity ?? note.vel ?? 80;
-    const noteDur = note.duration ?? note.dur ?? 0.25;
-    const articulation = noteVel > 95 ? 'marcato' : (noteDur < 0.15 ? 'staccato' : 'tenuto');
-    return [{
-      ...note,
-      type: 'struck',
-      articulation,
-      timbreControl: { hammerVelocity: noteVel }
-    }];
-  }
-
-  public processGeneric(phrase: any, index: number): any {
-    const note = phrase.notes[index];
-    return {
-      ...note,
-      type: 'standard',
-      articulation: note.articulation || 'standard',
-      timbreControl: {}
-    };
-  }
-}
 
 export function applyArticulationDynamics(_baseVelocity: number, articulation: string): number {
   switch (articulation) {
@@ -374,7 +39,7 @@ function getTargetInstrumentFamily(instrumentId?: string, role?: string): string
   if (def) {
     if (def.family === 'hand-drums' || def.family === 'metal-and-wood' || def.family === 'body-percussion' || def.family === 'kit') return 'percussion';
     if (def.family === 'electronic') return 'synth';
-    if (def.family === 'plucked' || def.family === 'plucked-string') return /bass|bajo|contrabajo|guitarron/i.test(inst) || r === 'bass' ? 'bass' : 'guitar';
+    if (def.family === 'plucked' || def.family === 'plucked-string') return /bass|guitarron/i.test(inst) || r === 'bass' ? 'bass' : 'guitar';
     if (def.family === 'bowed') return 'strings';
     if (def.family === 'brass') return 'brass';
     if (def.family === 'winds' || def.family === 'free-reed') return 'winds';
@@ -453,6 +118,8 @@ export interface InterpretPatternOptions {
   seed: number;
   ensembleContext?: EnsembleContext;
   interactions?: InteractionDirective[];
+  genreId?: string;
+  styleId?: string;
 }
 
 export interface InterpretationResult {
@@ -485,7 +152,7 @@ function contextualArticulation(
 
   // Culturally Grounded Articulations
   // 1. Tango Bass: On strong downbeats, upgrade accent to strappata (prob 0.15); otherwise arrastre on non-structural or cadence
-  if ((inst.includes('upright') || inst.includes('contrabajo') || role === 'bass') && (vocab.includes('strappata') || vocab.includes('arrastre') || isTango)) {
+  if ((inst === 'upright-bass' || inst === 'bass' || role === 'bass') && (vocab.includes('strappata') || vocab.includes('arrastre') || isTango)) {
     if (isTango && isStructural) {
       const roll = seed !== undefined ? rand01(seed ^ 0x7a91) : 0;
       if (roll < 0.15) return 'strappata';
@@ -789,7 +456,7 @@ export function interpretPattern(options: InterpretPatternOptions): Interpretati
     const calculatedVelocity = Math.max(20, Math.min(127, Math.round(o.accent * 100 * velocityMultiplier)));
 
     const targetFamily = getTargetInstrumentFamily(instrumentId, role);
-    const genreContext = grammar.styleId || (grammar as any).genre || (options as any).genre || 'default';
+    const genreContext = options.styleId || options.genreId || grammar.styleId || grammar.worldId || pattern.worldId || 'default';
     const rawArticulation = contextualArticulation(
       activeVariant?.articulation,
       isCadenceBar,

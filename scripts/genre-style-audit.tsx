@@ -9,7 +9,7 @@
 //   npx tsx scripts/genre-style-audit.ts all --out /tmp/full-audit.json
 import { writeFileSync } from 'fs';
 import { makeSheet } from '../src/engine/generators/arrange';
-import { compile } from '../src/engine/sequencing/perform';
+import { tieredCompile } from '../src/engine/sequencing/tieredEngine';
 import { renderPerformanceToMp3 } from '../src/engine/audio/offlineRender';
 import { getStylesForGenre } from '../src/data/styles/registry';
 import { GENRE_NAMES } from '../src/data/genres';
@@ -66,7 +66,7 @@ function analyzeStyle(genreId: string, styleId: string, _doRender: boolean): Sty
   try {
     const sheet = makeSheet({ genreId, styleId });
     const styleObj = getStylesForGenre(genreId).find(s => s.id === styleId);
-    const perf = compile(sheet);
+    const perf = tieredCompile(sheet);
 
     const byTrack = new Map<string, TrackStat>();
     for (const t of sheet.tracks) {
@@ -180,7 +180,7 @@ async function analyzeStyleWithRender(genreId: string, styleId: string, doRender
   const report = analyzeStyle(genreId, styleId, false);
   if (doRender && !report.compileError) {
     const sheet = makeSheet({ genreId, styleId });
-    const perf = compile(sheet);
+    const perf = tieredCompile(sheet);
     const trackInstrumentsMap = new Map(sheet.tracks.map(t => [t.id, t.instrumentId]));
     const start = Date.now();
     try {

@@ -1,215 +1,179 @@
 import type { InstrumentDSPOverride } from '../physicalDspProfile';
 
-/** Deep physical profile override for Bb Trumpet. Generated from this instrument's luthierPhysics, techniques, playingStyles and acoustic role; not a generic family alias. */
+/** Deep physical profile override for Bb Trumpet. Modeled with acoustic impedance and nonlinear brass shock-wave physics. */
 export const dspOverride: InstrumentDSPOverride = {
   "instrumentCharacter": {
-    "energySource": "brass-lip",
-    "energyPath": "lips/mouthpiece/bore/bell",
-    "bodyArchitecture": "brass-bore",
-    "primaryCollision": "lip-to-bore standing-wave excitation",
+    "energySource": "brass-lip-oscillator",
+    "energyPath": "lips/cup-mouthpiece/leadpipe/tuning-slide/valves/bell",
+    "bodyArchitecture": "brass-tube",
+    "primaryCollision": "lip valve pressure-gated standing-wave collision",
     "asymmetries": [
-      "courses",
-      "mute",
-      "pitch-bend"
+      "lip-closure-cycle",
+      "shockwave-blare",
+      "mute-cavity"
     ],
     "couplingPaths": [
-      "courses",
-      "shell"
+      "mouthpiece-to-bore",
+      "bore-to-bell-radiation",
+      "hand-to-mute"
     ],
     "techniqueBindings": [
-      "lip buzzing lip-trills",
-      "half-valve pitch bends",
-      "plunger mute wah-wah",
-      "double tonguing"
+      "double-tonguing percussive transient impact",
+      "lip-buzzing harmonic excitation with nonlinear shockwave steepening",
+      "lip-trill shakes between adjacent valve overtones",
+      "half-valve glissando and expressive falls/doits",
+      "throat/flutter growl modulation",
+      "harmon and cup mute acoustic filtering"
     ]
   },
   "excitationDynamics": {
-    "hardness": 0.63,
-    "pressureSensitivity": 0.925,
-    "nonlinearDrive": 0.153,
-    "attackCollision": 0.695,
-    "spectralSpread": 0.774,
-    "directionalAsymmetry": 0.12,
+    "hardness": 0.78,
+    "pressureSensitivity": 0.94,
+    "nonlinearDrive": 0.38,
+    "attackCollision": 0.82,
+    "spectralSpread": 0.86,
+    "directionalAsymmetry": 0.28,
     "lipTensionResistance": {
-      "resistance": 0.88,
-      "pressureToBrightness": 1.34,
-      "standingWavePushback": 0.76,
-      "nonlinearBlare": 0.94
+      "resistance": 0.90,
+      "pressureToBrightness": 1.48,
+      "standingWavePushback": 0.82,
+      "nonlinearBlare": 1.15
     }
   },
   "coupledResonators": {
     "bodyModes": [
-      {
-        "ratio": 1.0,
-        "q": 2.7,
-        "gain": 0.163
-      },
-      {
-        "ratio": 1.002,
-        "q": 3.15,
-        "gain": 0.122
-      },
-      {
-        "ratio": 2.0,
-        "q": 3.6,
-        "gain": 0.108
-      },
-      {
-        "ratio": 3.0,
-        "q": 4.05,
-        "gain": 0.101
-      }
+      { "ratio": 1.0,  "q": 3.6, "gain": 0.18 }, // Fundamental bore impedance
+      { "ratio": 2.0,  "q": 4.2, "gain": 0.16 }, // 2nd harmonic overtone slot
+      { "ratio": 3.0,  "q": 4.8, "gain": 0.14 }, // 3rd harmonic
+      { "ratio": 4.0,  "q": 5.2, "gain": 0.12 }  // High bell reinforcement
+    ],
+    "airModes": [
+      { "ratio": 2.53, "q": 2.2, "gain": 0.15 }  // Mouthpiece cup acoustic resonance
     ]
   },
   "mechanicalArtifacts": {
-  "airHiss": 0.1,
-  "keyThud": 0,
-  "valveClick": 0.14,
-  "fretBuzz": 0,
-  "stringSqueak": 0,
-  "pickZing": 0,
-  "handContact": 0.04,
-  "bodyKnock": 0,
-  "rimImpact": 0,
-  "bellowsNoise": 0,
-  "damperNoise": 0,
-  "palletClick": 0,
-  "slideNoise": 0,
-  "reedChatter": 0,
-  "bellowsFold": 0,
-  "bowRosin": 0,
-  "hammerClick": 0,
-  "pedalNoise": 0,
-  "membraneFingerNoise": 0,
-  "seedRattle": 0,
-  "fippleNoise": 0,
-  "muteContact": 0,
-  "breathBurst": 0.08,
-  "keyworkClick": 0
-},
+    "airHiss": 0.08,
+    "keyThud": 0,
+    "valveClick": 0.16,
+    "fretBuzz": 0,
+    "stringSqueak": 0,
+    "pickZing": 0,
+    "handContact": 0.06,
+    "bodyKnock": 0,
+    "rimImpact": 0,
+    "bellowsNoise": 0,
+    "damperNoise": 0,
+    "palletClick": 0,
+    "slideNoise": 0.12,
+    "reedChatter": 0,
+    "bellowsFold": 0,
+    "bowRosin": 0,
+    "hammerClick": 0,
+    "pedalNoise": 0,
+    "membraneFingerNoise": 0,
+    "seedRattle": 0,
+    "fippleNoise": 0,
+    "muteContact": 0.14,
+    "breathBurst": 0.14,
+    "keyworkClick": 0.12
+  },
   "articulationPhysics": {
     "strikeZoneLocation": "none",
     "fleshVsNail": 0,
     "handDamping": 0,
-    "attackToPitchCoupling": 0.228,
-    "releaseCoupling": 0.43,
+    "attackToPitchCoupling": 0.26,
+    "releaseCoupling": 0.44,
     "continuousSustain": true,
-    "noteTransition": "legato"
+    "noteTransition": "lip-slur"
   },
   "genreDialects": {
     "salsa": {
-      "excitationBias": 0.04,
-      "brightness": 1.04,
-      "damping": -0.03,
-      "attack": 1.06,
-      "articulation": [
-        "lip buzzing lip-trills",
-        "half-valve pitch bends",
-        "plunger mute wah-wah",
-        "double tonguing"
-      ]
+      "excitationBias": 0.12,
+      "brightness": 1.12,
+      "damping": -0.04,
+      "attack": 1.20,
+      "body": 1.05,
+      "articulation": ["accent", "staccato", "fall", "shake", "doit"]
+    },
+    "mambo": {
+      "excitationBias": 0.14,
+      "brightness": 1.15,
+      "damping": -0.05,
+      "attack": 1.22,
+      "body": 1.08,
+      "articulation": ["accent", "staccato", "shake", "fall"]
     },
     "jazz": {
       "excitationBias": 0,
-      "brightness": 0.97,
+      "brightness": 0.98,
       "damping": 0.04,
-      "attack": 1.0,
-      "articulation": [
-        "lip buzzing lip-trills",
-        "half-valve pitch bends",
-        "plunger mute wah-wah",
-        "double tonguing"
-      ]
-    },
-    "mambo": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "lip buzzing lip-trills",
-        "half-valve pitch bends",
-        "plunger mute wah-wah",
-        "double tonguing"
-      ]
+      "attack": 1.00,
+      "body": 1.12,
+      "articulation": ["legato", "staccato", "bend", "vibrato", "cup-mute"]
     },
     "mariachi": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "lip buzzing lip-trills",
-        "half-valve pitch bends",
-        "plunger mute wah-wah",
-        "double tonguing"
-      ]
+      "excitationBias": 0.08,
+      "brightness": 1.06,
+      "damping": -0.02,
+      "attack": 1.10,
+      "body": 1.15,
+      "articulation": ["accent", "vibrato", "legato"]
     },
     "funk": {
-      "excitationBias": 0.04,
-      "brightness": 1.04,
-      "damping": -0.03,
-      "attack": 1.06,
-      "articulation": [
-        "lip buzzing lip-trills",
-        "half-valve pitch bends",
-        "plunger mute wah-wah",
-        "double tonguing"
-      ]
+      "excitationBias": 0.12,
+      "brightness": 1.14,
+      "damping": -0.04,
+      "attack": 1.25,
+      "body": 1.00,
+      "articulation": ["accent", "staccato", "shake"]
     },
     "ska": {
-      "excitationBias": 0,
-      "brightness": 1.04,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "lip buzzing lip-trills",
-        "half-valve pitch bends",
-        "plunger mute wah-wah",
-        "double tonguing"
-      ]
+      "excitationBias": 0.10,
+      "brightness": 1.10,
+      "damping": -0.02,
+      "attack": 1.18,
+      "body": 0.98,
+      "articulation": ["staccato", "accent", "fall"]
     }
   },
   "instrumentSpecific": {
     "trumpet": {
-      "embouchureTension": 0.88,
-      "pressureToBrightnessCurve": 1.34,
-      "muteDamping": 0.18,
-      "muteCombResonance": 0.06
+      "embouchureTension": 0.92,
+      "pressureToBrightnessCurve": 1.48,
+      "muteDamping": 0.24,
+      "muteCombResonance": 0.18
     }
   },
   "physicalDetails": {
-  "system": "lip-reed-brass-bore",
-  "construction": "metal tube with cup/funnel mouthpiece and bell",
-  "exciter": "lip valve/embouchure oscillator",
-  "asymmetries": [
-    "lip pressure",
-    "air pressure",
-    "bore/register",
-    "mute if present"
-  ],
-  "coupling": [
-    "lips-mouthpiece",
-    "mouthpiece-bore",
-    "bore-bell",
-    "hand/mute cavity"
-  ],
-  "artifactSources": [
-    "valve click where applicable",
-    "breath/air turbulence",
-    "hand/mute contact"
-  ],
-  "detail": [
-    "pressure nonlinearly increases upper partials",
-    "standing-wave impedance feeds back to lips",
-    "bell radiation changes with register"
-  ],
-  "response": {
-    "contactHardness": 0.637,
-    "resonatorQ": 0.679,
-    "nonlinearTransfer": 0.295,
-    "inharmonicity": 0.091,
-    "bodyCoupling": 0.599
+    "system": "lip-reed-brass-bore",
+    "construction": "seamless drawn yellow brass with cup mouthpiece, piston valves, and exponential bell",
+    "exciter": "human lips acting as inward/outward striking pressure valve into acoustic impedance tube",
+    "asymmetries": [
+      "Lip closure cycle asymmetry",
+      "Nonlinear shockwave steepening along bore",
+      "Mute insertion cavity reflection"
+    ],
+    "coupling": [
+      "Lips to cup mouthpiece acoustic feedback",
+      "Cylindrical tubing to bell radiation transfer",
+      "Standing-wave bore impedance peaks"
+    ],
+    "artifactSources": [
+      "Piston valve click and spring bounce",
+      "Tonguing burst and breath turbulence",
+      "Mute cork and hand resonance"
+    ],
+    "detail": [
+      "Velocity nonlinearly drives harmonic steepening (brass blare)",
+      "High frequency cutoff expands exponentially with blowing pressure",
+      "Bell radiation filters low frequencies and projects directional upper partials"
+    ],
+    "response": {
+      "contactHardness": 0.78,
+      "resonatorQ": 0.85,
+      "nonlinearTransfer": 0.42,
+      "inharmonicity": 0.04,
+      "bodyCoupling": 0.72
+    }
   }
-}
 } as InstrumentDSPOverride;

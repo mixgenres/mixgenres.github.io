@@ -5,6 +5,7 @@
  */
 
 import type { Performance, PerfNote, PerfCC } from './perform';
+import { compilePhrasePerformance } from './phrase';
 
 const LOOKAHEAD_SEC = 0.40;
 const TICK_MS = 25;
@@ -105,7 +106,7 @@ export class Transport {
   setPerformance(perf: Performance) {
     const wasRunning = this.running;
     const pos = wasRunning ? this.position() : this.startOffset;
-    this.perf = perf;
+    this.perf = compilePhrasePerformance(perf);
     if (wasRunning) {
       if (typeof this.sink.softNotesOff === 'function') {
         this.sink.softNotesOff();
@@ -126,7 +127,7 @@ export class Transport {
       return;
     }
     const currentPos = this.position();
-    this.perf = perf;
+    this.perf = compilePhrasePerformance(perf);
     if (typeof this.sink.softNotesOff === 'function') {
       this.sink.softNotesOff();
     } else {

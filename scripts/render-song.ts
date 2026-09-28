@@ -3,7 +3,7 @@
 // the browser. Usage: npx tsx scripts/render-song.ts [genreId] [out.mp3]
 import { writeFileSync } from 'fs';
 import { makeSheet } from '../src/engine/generators/arrange';
-import { compile } from '../src/engine/sequencing/perform';
+import { tieredCompile } from '../src/engine/sequencing/tieredEngine';
 import { renderPerformanceToMp3 } from '../src/engine/audio/offlineRender';
 
 async function main() {
@@ -14,7 +14,7 @@ async function main() {
   console.error(`[${genreId}] tracks:`, sheet.tracks.map(t => `${t.id}:${t.instrumentId}`).join(', '));
   console.error(`[${genreId}] sections:`, sheet.regions.map(r => `${r.kind}(e${r.energy})`).join(' -> '));
 
-  const perf = compile(sheet);
+  const perf = tieredCompile(sheet);
   console.error(`[${genreId}] notes: ${perf.notes.length}, duration: ${perf.duration.toFixed(1)}s`);
 
   const trackInstruments = new Map(sheet.tracks.map(t => [t.id, t.instrumentId]));

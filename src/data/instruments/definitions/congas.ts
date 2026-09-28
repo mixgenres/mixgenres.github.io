@@ -13,7 +13,7 @@ export const congas: InstrumentDef = {
   bodyConstruction: "skin-faced",
   excitationType: "fingerpad",
   elementaryModel: 4,
-  makeupGain: 1.429,
+  makeupGain: 1.540,
   polyphony: 12,
   note: "Afro-Cuban paired staved wooden barrel hand drums (Quinto, Conga, Tumba) with thick mule or steer skin heads, driving the complex marcha tumbao",
   acousticProfile: {

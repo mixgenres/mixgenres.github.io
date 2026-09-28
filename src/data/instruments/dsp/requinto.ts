@@ -1,158 +1,150 @@
 import type { InstrumentDSPOverride } from '../physicalDspProfile';
 
-/** Deep physical profile override for Requinto. Generated from this instrument's luthierPhysics, techniques, playingStyles and acoustic role; not a generic family alias. */
+/** Deep physical profile override for Requinto (Bachata & Bolero lead guitar). Tuned a 4th higher with hard plectrum bite. */
 export const dspOverride: InstrumentDSPOverride = {
   "instrumentCharacter": {
-    "energySource": "requinto-course",
-    "energyPath": "string/bridge/body",
+    "energySource": "hard-plectrum-high-tension-nylon",
+    "energyPath": "hard-pick/high-tension-nylon-carbon-string/bone-saddle/spruce-top/530mm-box",
     "bodyArchitecture": "wood-body",
-    "primaryCollision": "finger or plectrum collision",
+    "primaryCollision": "rigid plectrum snap close to bridge (cerca del puente)",
     "asymmetries": [
-      "mute"
+      "plectrum-angle",
+      "palm-mute-damping",
+      "treble-register-energy"
     ],
-    "couplingPaths": [],
+    "couplingPaths": [
+      "high-tension-string-to-saddle",
+      "soundboard-golpeador",
+      "small-air-cavity-projection"
+    ],
     "techniqueBindings": [
-      "fingerstyle",
-      "pick",
-      "muting",
-      "alternating attack"
+      "hard plectrum snap near the bridge (cerca del puente) for piercing treble bite",
+      "rapid staccato mambo scale runs with palm muting",
+      "chocheo arpeggiated tremolo picking",
+      "expressive sliding into melody notes with slight fret zing",
+      "percussive soundboard golpe tap on the tap plate",
+      "fast wrist vibrato on sustained notes"
     ]
   },
   "excitationDynamics": {
-    "hardness": 0.69,
-    "pressureSensitivity": 0.585,
-    "nonlinearDrive": 0.164,
-    "attackCollision": 0.485,
-    "spectralSpread": 0.553,
-    "directionalAsymmetry": 0.12
+    "hardness": 0.88,
+    "pressureSensitivity": 0.72,
+    "nonlinearDrive": 0.28,
+    "attackCollision": 0.84,
+    "spectralSpread": 0.85,
+    "directionalAsymmetry": 0.22
   },
   "coupledResonators": {
     "bodyModes": [
-      {
-        "ratio": 0.65,
-        "q": 2.0,
-        "gain": 0.138
-      },
-      {
-        "ratio": 1.0,
-        "q": 2.45,
-        "gain": 0.109
-      },
-      {
-        "ratio": 1.73,
-        "q": 2.9,
-        "gain": 0.099
-      },
-      {
-        "ratio": 2.91,
-        "q": 3.35,
-        "gain": 0.095
-      }
-    ]
+      { "ratio": 0.55, "q": 3.5, "gain": 0.16 }, // Small soundbox Helmholtz mode (165 Hz)
+      { "ratio": 1.0,  "q": 3.0, "gain": 0.18 }, // Spruce top plate fundamental (360 Hz)
+      { "ratio": 1.78, "q": 2.8, "gain": 0.14 }, // Soundboard lateral cross-dipole (640 Hz)
+      { "ratio": 3.85, "q": 2.5, "gain": 0.20 }  // Plectrum saddle bite & treble presence (2400 Hz)
+    ],
+    "bridge": {
+      "stiffness": 0.85,
+      "buzz": 0.14,
+      "settlingMs": 45
+    },
+    "soundboard": {
+      "thudHz": 165,
+      "thudGain": 0.15,
+      "topModes": [165, 360, 640, 2400],
+      "coupling": 0.75
+    }
   },
   "mechanicalArtifacts": {
-  "airHiss": 0,
-  "keyThud": 0,
-  "valveClick": 0,
-  "fretBuzz": 0,
-  "stringSqueak": 0.11,
-  "pickZing": 0.2,
-  "handContact": 0.1,
-  "bodyKnock": 0.07,
-  "rimImpact": 0,
-  "bellowsNoise": 0,
-  "damperNoise": 0.03,
-  "palletClick": 0,
-  "slideNoise": 0,
-  "reedChatter": 0,
-  "bellowsFold": 0,
-  "bowRosin": 0,
-  "hammerClick": 0,
-  "pedalNoise": 0,
-  "membraneFingerNoise": 0,
-  "seedRattle": 0,
-  "fippleNoise": 0,
-  "muteContact": 0,
-  "breathBurst": 0,
-  "keyworkClick": 0
-},
+    "airHiss": 0,
+    "keyThud": 0,
+    "valveClick": 0,
+    "fretBuzz": 0.14,
+    "stringSqueak": 0.16,
+    "pickZing": 0.32,
+    "handContact": 0.12,
+    "bodyKnock": 0.18,
+    "rimImpact": 0,
+    "bellowsNoise": 0,
+    "damperNoise": 0.08,
+    "palletClick": 0,
+    "slideNoise": 0.15,
+    "reedChatter": 0,
+    "bellowsFold": 0,
+    "bowRosin": 0,
+    "hammerClick": 0,
+    "pedalNoise": 0,
+    "membraneFingerNoise": 0,
+    "seedRattle": 0,
+    "fippleNoise": 0,
+    "muteContact": 0.18,
+    "breathBurst": 0,
+    "keyworkClick": 0
+  },
   "articulationPhysics": {
-    "strikeZoneLocation": "mixed",
-    "fleshVsNail": 0,
-    "handDamping": 0,
-    "attackToPitchCoupling": 0.228,
-    "releaseCoupling": 0.18,
+    "strikeZoneLocation": "bridge", // Picked close to bridge for maximum attack sharpness
+    "fleshVsNail": 0.05,
+    "handDamping": 0.14,
+    "attackToPitchCoupling": 0.28,
+    "releaseCoupling": 0.22,
     "continuousSustain": false,
     "noteTransition": "retrigger"
   },
   "genreDialects": {
+    "bachata": {
+      "excitationBias": 0.15,
+      "brightness": 1.18,
+      "damping": -0.05,
+      "attack": 1.30,
+      "body": 0.95,
+      "articulation": ["accent", "staccato", "palm-mute", "bend", "vibrato", "tremolo"]
+    },
+    "bolero": {
+      "excitationBias": 0.05,
+      "brightness": 1.05,
+      "damping": 0.02,
+      "attack": 1.10,
+      "body": 1.10,
+      "articulation": ["accent", "legato", "vibrato", "golpe", "bend"]
+    },
     "folk": {
-      "excitationBias": 0,
-      "brightness": 1.0,
+      "excitationBias": 0.08,
+      "brightness": 1.04,
       "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "fingerstyle",
-        "pick",
-        "muting",
-        "alternating attack"
-      ]
-    },
-    "pop": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "fingerstyle",
-        "pick",
-        "muting",
-        "alternating attack"
-      ]
-    },
-    "world": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "fingerstyle",
-        "pick",
-        "muting",
-        "alternating attack"
-      ]
+      "attack": 1.12,
+      "body": 1.00,
+      "articulation": ["accent", "staccato", "legato", "palm-mute"]
     }
   },
   "physicalDetails": {
-  "system": "plucked-string",
-  "construction": "instrument-specific string body",
-  "exciter": "instrument-specific pick/finger/nail",
-  "asymmetries": [
-    "pick/finger direction",
-    "stopping position",
-    "string gauge/register"
-  ],
-  "coupling": [
-    "string-bridge",
-    "bridge-body",
-    "body-air"
-  ],
-  "artifactSources": [
-    "contact click",
-    "string scrape",
-    "finger/pick noise"
-  ],
-  "detail": [
-    "requinto string/bridge transfer is distinct from generic guitar",
-    "register-dependent decay",
-    "technique-dependent contact noise"
-  ],
-  "response": {
-    "contactHardness": 0.682,
-    "resonatorQ": 0.678,
-    "nonlinearTransfer": 0.256,
-    "inharmonicity": 0.077,
-    "bodyCoupling": 0.583
+    "system": "plucked-string",
+    "construction": "short-scale 530mm classical guitar body with solid cedar/spruce top, mahogany back and sides, and bone nut/saddle",
+    "exciter": "heavy tortoise/plastic plectrum striking high-tension carbon or nylon strings close to the bridge",
+    "asymmetries": [
+      "Rigid pick attack transient with two-stage release",
+      "Palm-heel dampening on bridge saddle for staccato mambos",
+      "Fourth-higher tuning shifting primary acoustic energy up to 1.5 - 6 kHz"
+    ],
+    "coupling": [
+      "High-tension string to tie-block bridge",
+      "Thin resonant soundboard with fan bracing",
+      "Transparent golpeador tap plate"
+    ],
+    "artifactSources": [
+      "High-frequency plectrum click and scrape",
+      "Fret buzz on aggressive pull-offs and slides",
+      "Palm muting damper contact",
+      "Nail/finger tap on golpeador"
+    ],
+    "detail": [
+      "Scale length is approximately 530mm vs standard 650mm, increasing treble harmonic clarity",
+      "Virtually no low-end boominess below 150 Hz, perfectly clearing sonic space for bass and bongo",
+      "Fast decay on palm-muted staccato notes produces the signature Dominican mambo groove"
+    ],
+    "response": {
+      "contactHardness": 0.88,
+      "resonatorQ": 0.84,
+      "nonlinearTransfer": 0.32,
+      "inharmonicity": 0.05,
+      "bodyCoupling": 0.76
+    }
   }
-}
 } as InstrumentDSPOverride;

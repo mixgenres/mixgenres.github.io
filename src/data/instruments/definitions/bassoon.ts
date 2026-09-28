@@ -7,7 +7,7 @@ export const bassoon: InstrumentDef = {
   program: 70,
   voicing: "single",
   elementaryModel: 3,
-  makeupGain: 0.565,
+  makeupGain: 0.685,
   polyphony: 4,
   note: "Double-reed bass woodwind with rich woody buzz, reedy warmth, and agile staccato articulation",
   acousticProfile: {

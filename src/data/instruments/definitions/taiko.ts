@@ -11,7 +11,7 @@ export const taiko: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 4,
-  makeupGain: 0.475,
+  makeupGain: 0.524,
   polyphony: 8,
   acousticProfile: {
     sustain: "percussive",

@@ -1,4 +1,4 @@
 export const gospel = {
   id: 'gospel',
-  characteristicInstruments: ['hammond-organ', 'piano', 'choir', 'drum-kit', 'tambourine']
+  characteristicInstruments: ['organ', 'piano', 'choir', 'drums', 'tambourine']
 };

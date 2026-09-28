@@ -12,7 +12,7 @@ export const brush_kit: InstrumentDef = {
   kit: true,
   voicing: "unpitched",
   elementaryModel: 4,
-  makeupGain: 1.429,
+  makeupGain: 1.540,
   polyphony: 8,
   note: "Vintage acoustic drum set with coated white drum heads played with retractable wire brushes, producing swirling circular snare friction, feathered bass drum, and delicate cymbal whispers",
   acousticProfile: {

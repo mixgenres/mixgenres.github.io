@@ -400,7 +400,7 @@ const brass = (d: InstrumentDef): InstrumentDSPProfile => {
 
 const freeReed = (d: InstrumentDef): InstrumentDSPProfile => {
   const id = d.id.toLowerCase();
-  const sho = id === 'shō' || id === 'sho';
+  const sho = id === 'shō';
   const harmonica = id === 'harmonica';
   const melodica = id === 'melodica';
   return {
@@ -577,7 +577,7 @@ export function buildInstrumentDSPProfile(def: InstrumentDef): InstrumentDSPProf
     profile = brass(def);
   } else if (def.family === 'winds' || def.family === 'free-reed') {
     if (def.id === 'bagpipes' || def.id === 'uilleann-pipes') profile = reservoir(def);
-    else if (def.id === 'shō' || def.id === 'sho' || def.id === 'harmonica' || def.id === 'melodica') profile = freeReed(def);
+    else if (def.id === 'shō' || def.id === 'harmonica' || def.id === 'melodica') profile = freeReed(def);
     else profile = wind(def);
   } else if (def.excitationType === 'hammer' || def.excitationType === 'mallet' || def.family === 'metal-and-wood') {
     profile = struck(def);

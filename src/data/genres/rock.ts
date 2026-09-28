@@ -19,7 +19,7 @@ export const ROCK_WORLD: GenreWorld = {
         "electric-guitar",
         "bass",
         "drums",
-        "electric-bass",
+        "overdrive-guitar",
         "hand-percussion"
       ],
       "preferredMeters": [
@@ -105,7 +105,7 @@ export const ROCK_WORLD: GenreWorld = {
         "electric-guitar",
         "bass",
         "drums",
-        "electric-bass",
+        "distortion-guitar",
         "hand-percussion"
       ],
       "preferredMeters": [
@@ -269,7 +269,7 @@ export const ROCK_WORLD: GenreWorld = {
         "electric-guitar",
         "bass",
         "drums",
-        "electric-bass",
+        "distortion-guitar",
         "hand-percussion"
       ],
       "preferredMeters": [
@@ -349,7 +349,7 @@ export const ROCK_WORLD: GenreWorld = {
         "electric-guitar",
         "bass",
         "drums",
-        "electric-bass",
+        "overdrive-guitar",
         "hand-percussion"
       ],
       "preferredMeters": [
@@ -430,7 +430,7 @@ export const ROCK_WORLD: GenreWorld = {
         "organ",
         "bass",
         "drums",
-        "electric-bass"
+        "tape-echo"
       ],
       "preferredMeters": [
         "4/4",
@@ -592,7 +592,7 @@ export const ROCK_WORLD: GenreWorld = {
         "bass",
         "drums",
         "synth",
-        "electric-bass"
+        "distortion-guitar"
       ],
       "preferredMeters": [
         "4/4"

@@ -11,7 +11,7 @@ export const cumbia_drum: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 4,
-  makeupGain: 0.828,
+  makeupGain: 0.838,
   polyphony: 8,
   note: "Colombian single-headed llamador drum maintaining the relentless, hypnotic offbeat pulse of authentic cumbia",
   acousticProfile: {

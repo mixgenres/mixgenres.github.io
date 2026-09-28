@@ -9,7 +9,7 @@ export const rhodes: InstrumentDef = {
   bodyConstruction: "solid-electric",
   excitationType: "hammer",
   elementaryModel: 14,
-  makeupGain: 0.362,
+  makeupGain: 0.322,
   polyphony: 8,
   note: "Electro-mechanical tine piano with neoprene hammers striking asymmetric tuning forks, producing warm chime-like purr and overdriven bark",
   acousticProfile: {

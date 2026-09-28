@@ -104,7 +104,7 @@ function semanticFamily(instrumentId: string): string {
   if (def.family === 'winds') return 'winds';
   if (def.family === 'brass') return 'brass';
   if (def.family === 'plucked' || def.family === 'plucked-string') {
-    if (/bass|bajo|contrabajo|guitarron|double-bass/i.test(instrumentId)) return 'bass';
+    if (/bass|guitarron/i.test(instrumentId)) return 'bass';
     return 'guitar';
   }
   if (def.family === 'bowed') return 'strings';

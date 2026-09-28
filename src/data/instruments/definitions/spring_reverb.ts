@@ -6,7 +6,7 @@ export const spring_reverb: InstrumentDef = {
   family: "electronic",
   voicing: "unpitched",
   elementaryModel: 0,
-  makeupGain: 30.000,
+  makeupGain: 0.458,
   polyphony: 8,
   note: "spring tank reverb; boingy metallic decay",
   acousticProfile: {

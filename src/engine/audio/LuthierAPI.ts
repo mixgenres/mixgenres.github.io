@@ -78,13 +78,6 @@ for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
     LUTHIER_INSTRUMENT_MAP[id] = def.luthierPhysics;
   }
 }
-// Legacy aliases for backward compatibility
-if (INSTRUMENTS_BY_ID['bass']?.luthierPhysics) {
-  LUTHIER_INSTRUMENT_MAP['electric-bass'] = INSTRUMENTS_BY_ID['bass'].luthierPhysics;
-}
-if (INSTRUMENTS_BY_ID['upright-bass']?.luthierPhysics) {
-  LUTHIER_INSTRUMENT_MAP['double-bass'] = INSTRUMENTS_BY_ID['upright-bass'].luthierPhysics;
-}
 
 /**
  * Resolves physical Luthier model parameters for any given instrument ID.

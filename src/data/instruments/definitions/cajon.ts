@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../types';
 
 export const cajon: InstrumentDef = {
   id: "cajon",
-  name: "Cajón",
+  name: "Cajón Flamenco",
   family: "hand-drums",
   drum: {
     low: 36,
@@ -13,9 +13,9 @@ export const cajon: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "fingerpad",
   elementaryModel: 4,
-  makeupGain: 0.942,
+  makeupGain: 2.299,
   polyphony: 12,
-  note: "Wooden box drum with internal guitar string snares or wire tension, played with hands for deep bass thump and high snare slap",
+  note: "Authentic Flamenco/Peruvian wooden box drum with thin resonant birch tapa, internal guitar string snare wires, deep 65Hz cavity bass thump (grave), crisp corner snare slap (agudo), open tones, and fingertip ghost taps",
   acousticProfile: {
     sustain: "percussive",
     role: "percussion",
@@ -29,54 +29,55 @@ export const cajon: InstrumentDef = {
   },
   luthierPhysics: {
     category: "membrane_tension_2d",
-    materialDensity: 0.6,
-    tension: 0.7,
-    bodyResonanceVolume: 20,
+    materialDensity: 0.65,
+    tension: 0.72,
+    bodyResonanceVolume: 22,
     decayTimeFactor: 0.5,
-    harmonicRichness: 0.6,
+    harmonicRichness: 0.75,
     faustProfile: "flamenco-cajon",
-    articulationCapabilities: ["bass", "slap", "tip", "side-tap", "brush", "roll"],
-    genreAdaptable: true,
+    articulationCapabilities: ["bass", "slap", "tip", "side-tap", "brush", "roll", "open", "mute"],
+    soundboardResonanceHz: 180,
+    airResonanceHz: 65,
     bodyConstruction: "wood-box",
     excitationType: "fingerpad"
   },
   kitComponents: [
     {
       id: "cajon-bass",
-      name: "Cajón Center Bass Thump",
+      name: "Cajón Grave (Center Bass Thump)",
       midi: 36,
       physicalType: "wood",
       tuningHz: 65,
-      decayTimeSec: 0.4,
+      decayTimeSec: 0.38,
       damping: 0.45,
-      shellResonance: 0.9,
+      shellResonance: 0.92,
       strikeZones: ["bass", "center"],
       defaultPan: 0.1,
       gainTrimDb: 1.5,
-      synthesisNotes: "Full palm strike in center of wooden front plate driving internal air cavity resonance"
+      synthesisNotes: "Full palm strike in center of wooden front plate driving 65Hz internal air cavity resonance"
     },
     {
       id: "cajon-slap",
-      name: "Cajón High Snare Slap",
+      name: "Cajón Agudo (Corner Snare Slap)",
       midi: 38,
       physicalType: "wood",
-      tuningHz: 220,
+      tuningHz: 240,
       decayTimeSec: 0.08,
       damping: 0.85,
-      shellResonance: 0.5,
+      shellResonance: 0.55,
       strikeZones: ["slap", "edge"],
       defaultPan: 0.1,
       gainTrimDb: 0.5,
-      synthesisNotes: "Relaxed finger slap on upper corner exciting internal guitar snare wire buzz"
+      synthesisNotes: "Relaxed finger slap on upper corner exciting internal guitar snare wire buzz at 3.5kHz"
     },
     {
       id: "cajon-tip",
-      name: "Cajón Fingertip Tap",
+      name: "Cajón Tip (Fingertip Ghost Tap)",
       midi: 42,
       physicalType: "wood",
-      tuningHz: 350,
-      decayTimeSec: 0.08,
-      damping: 0.85,
+      tuningHz: 360,
+      decayTimeSec: 0.06,
+      damping: 0.90,
       strikeZones: ["tip"],
       defaultPan: 0.1,
       gainTrimDb: -4,
@@ -84,42 +85,59 @@ export const cajon: InstrumentDef = {
     },
     {
       id: "cajon-side",
-      name: "Cajón Side Wood Tap",
+      name: "Cajón Side (Hardwood Rim Knock)",
       midi: 37,
       physicalType: "wood",
       tuningHz: 480,
       decayTimeSec: 0.1,
-      damping: 0.9,
+      damping: 0.92,
       strikeZones: ["rim"],
       defaultPan: 0.1,
-      gainTrimDb: -2
+      gainTrimDb: -2,
+      synthesisNotes: "Knuckle tap against outer solid birch side panel"
     }
   ],
   performanceArticulations: {
     slap: {
-      transientSharpness: 0.9,
-      dampingFactor: 0.6
+      transientSharpness: 0.94,
+      dampingFactor: 0.65
     },
     golpe: {
-      bodyTapPitchHz: 190,
+      bodyTapPitchHz: 180,
       transientDecayMs: 35,
       gainDb: 2
     }
   },
   techniques: {
-    articulations: ["accent", "low-tone", "slap", "ghost", "golpe", "brushed", "roll", "tip", "staccato"],
+    articulations: ["accent", "low-tone", "slap", "ghost", "golpe", "brushed", "roll", "tip", "staccato", "open", "palm-mute"],
     techniqueMethods: [
-      "center palm bass thump",
-      "corner finger snare slap",
-      "fingertip ghost taps",
-      "side wood knock",
-      "flamenco bulería accenting"
+      "center palm grave bass thump",
+      "upper corner agudo snare slap",
+      "fingertip ghost subdivision taps",
+      "side wood panel rim tap",
+      "flamenco bulería & rumba accentuation",
+      "muffled palm apagado"
     ],
-    playingStyles: ["flamenco", "afro-peruvian", "rumba", "acoustic-pop", "folk"],
+    playingStyles: ["flamenco", "rumba", "afro-peruvian", "acoustic-pop", "folk", "latin-jazz"],
     genreTechniques: {
-      flamenco: ["slap", "accent", "golpe", "staccato"],
-      "afro-peruvian": ["slap", "accent", "ghost"],
-      rumba: ["slap", "accent", "staccato"]
+      flamenco: ["slap", "accent", "golpe", "staccato", "low-tone", "ghost"],
+      rumba: ["slap", "accent", "staccato", "low-tone"],
+      "afro-peruvian": ["slap", "accent", "ghost", "open"]
     }
+  },
+  physicalModel: {
+    model: "membrane",
+    parameters: {
+      airResonance: 0.88,
+      bodyResonance: 0.75,
+      transientSharpness: 0.92,
+      damping: 0.65
+    },
+    signalChain: ["preamp", "eq", "compressor", "reverb"],
+    synthesisNotes: [
+      "Internal air chamber (65Hz) provides resonant bass thump when struck in the center.",
+      "Upper corner slaps excite internal snare wire tension generating bright crisp sizzle.",
+      "Delicate fingertip ghost notes maintain continuous compás subdivision."
+    ]
   }
 };

@@ -1,5 +1,4 @@
 import { GenreWorld } from '../../types';
-import { GuitarTimbreControl } from '../../engine/theory/physicsInterfaces';
 
 export const FLAMENCO_WORLD: GenreWorld = {
   "id": "flamenco",
@@ -14,53 +13,7 @@ export const FLAMENCO_WORLD: GenreWorld = {
     'rumba': {
       id: 'rumba_flamenca',
       name: 'Rumba Flamenca',
-      tempoRange: [90, 120],
-      performanceRules: {
-        'spanish_guitar': {
-          evaluateNote: (phrase: any, index: number) => {
-            const note = phrase.notes[index];
-            const isBackbeat = (note.time % 4 === 1) || (note.time % 4 === 3);
-
-            const timbre: GuitarTimbreControl = {
-              pluckPosition: 0.3,
-              fleshToNailRatio: 0.8,
-              pickAngle: 20,
-              palmMuteAmount: 0.0,
-              stringSelection: ((note.pitch ?? 60) % 6) + 1,
-              fretNoiseLevel: 0.4,
-              fretBuzz: 0.2,
-              vibrato: { delayMs: 50, rateHz: 5.0, depthCents: 10, rateRamp: 0.1 },
-              isHarmonic: false,
-              bodyHit: isBackbeat ? 'slap' : 'none',
-              sympatheticResonance: 0.6
-            };
-
-            return [{ ...note, type: 'plucked', articulation: isBackbeat ? 'golpe_slap' : 'rasgueado_loose', timbreControl: timbre }];
-          }
-        },
-        'spanish-guitar': {
-          evaluateNote: (phrase: any, index: number) => {
-            const note = phrase.notes[index];
-            const isBackbeat = (note.time % 4 === 1) || (note.time % 4 === 3);
-
-            const timbre: GuitarTimbreControl = {
-              pluckPosition: 0.3,
-              fleshToNailRatio: 0.8,
-              pickAngle: 20,
-              palmMuteAmount: 0.0,
-              stringSelection: ((note.pitch ?? 60) % 6) + 1,
-              fretNoiseLevel: 0.4,
-              fretBuzz: 0.2,
-              vibrato: { delayMs: 50, rateHz: 5.0, depthCents: 10, rateRamp: 0.1 },
-              isHarmonic: false,
-              bodyHit: isBackbeat ? 'slap' : 'none',
-              sympatheticResonance: 0.6
-            };
-
-            return [{ ...note, type: 'plucked', articulation: isBackbeat ? 'golpe_slap' : 'rasgueado_loose', timbreControl: timbre }];
-          }
-        }
-      }
+      tempoRange: [90, 120]
     }
   },
   "styleDefinitions": [
@@ -614,30 +567,50 @@ export const FLAMENCO_WORLD: GenreWorld = {
   ],
   "roles": {
     "harmony": [
+      "spanish-guitar",
       "abanico rasgueado",
       "compás accompaniment",
       "arpeggios",
       "golpe on top plate"
     ],
     "melody": [
+      "spanish-guitar",
+      "flute",
       "falseta development",
       "picado runs",
       "flamenco tremolo",
       "expressive cante lead"
     ],
     "percussion": [
+      "palmas",
+      "cajon",
+      "hand-percussion",
       "cajón grave/agudo",
       "palmas base y contratiempo",
       "golpes",
       "taconeo"
     ],
+    "drums": [
+      "palmas",
+      "cajon",
+      "hand-percussion"
+    ],
+    "rhythm": [
+      "palmas",
+      "cajon",
+      "hand-percussion"
+    ],
     "bass": [
+      "spanish-guitar",
       "compás root support",
       "alzapúa doubling",
       "rumba bassline",
       "modal pedal"
     ],
     "lead": [
+      "spanish-guitar",
+      "flute",
+      "voice",
       "falseta dialogue",
       "sax/flute cante phrases",
       "virtuoso picado"

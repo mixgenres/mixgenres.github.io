@@ -11,7 +11,7 @@ export const bombo_andino: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 4,
-  makeupGain: 0.630,
+  makeupGain: 0.671,
   polyphony: 8,
   note: "Andean ceremonial fur-headed bass drum with deep, thundering mountain pulse and wooden rim clack",
   acousticProfile: {

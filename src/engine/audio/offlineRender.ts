@@ -1,4 +1,4 @@
-import { INSTRUMENTS_BY_ID } from '../../data/instruments';
+import { INSTRUMENTS_BY_ID, genreTechniquesForInstrument } from '../../data/instruments';
 import * as lamejsModule from '@breezystack/lamejs';
 import { Mp3Encoder } from '@breezystack/lamejs';
 import OfflineRenderer from '@elemaudio/offline-renderer';
@@ -212,11 +212,14 @@ export async function renderPerformanceToMp3(
 
     const instrumentId = options.trackInstruments.get(trackId) || trackId;
     const instDef = INSTRUMENTS_BY_ID[instrumentId];
-    const luthier = instDef?.luthierPhysics ?? getLuthierModelForInstrument(instrumentId);
+    let luthier = instDef?.luthierPhysics ?? getLuthierModelForInstrument(instrumentId);
     const model = instDef?.elementaryModel ?? modelForInstrument(instrumentId, luthier);
     const params = defaultTrackParams(instrumentId, luthier, model);
     params.performanceMode = performanceModeForContext(options.worldId ?? '', options.styleId ?? '');
     const dialect = resolveDialect(instrumentId, options.worldId ?? '', options.styleId ?? '');
+    if (options.worldId) {
+      params.genreId = options.worldId;
+    }
     if (dialect) {
       params.dialect = dialect.id;
       params.performanceMode = dialect.performanceMode;
@@ -382,12 +385,17 @@ export async function renderPerformanceToMp3(
             const effectiveModelForGain = isElectronic ? 9 : params.model;
             const baseGain = instDef?.makeupGain ?? makeupGainFor(effectiveModelForGain, params.instrumentId);
 
-            const hitType = event.note.articulation;
+            const authoredArticulation = (event.note.articulation || '').trim();
+            const styleTechnique = !authoredArticulation
+              ? genreTechniquesForInstrument(instrumentId, options.styleId)[0]
+              : undefined;
+            const effectiveArticulation = authoredArticulation || styleTechnique;
+
             let hitGainMultiplier = 1.0;
-            if (hitType === 'accent' || hitType === 'sforzando' || hitType === 'marcato') hitGainMultiplier = 1.25;
-            else if (hitType === 'ghost' || hitType === 'heel' || hitType === 'toe') hitGainMultiplier = 0.45;
-            else if (hitType === 'rimshot' || hitType === 'slap' || hitType === 'quinto-slap') hitGainMultiplier = 1.1;
-            else if (hitType === 'conga-open' || hitType === 'tumba-open') hitGainMultiplier = 1.04;
+            if (effectiveArticulation === 'accent' || effectiveArticulation === 'sforzando' || effectiveArticulation === 'marcato') hitGainMultiplier = 1.25;
+            else if (effectiveArticulation === 'ghost' || effectiveArticulation === 'heel' || effectiveArticulation === 'toe') hitGainMultiplier = 0.45;
+            else if (effectiveArticulation === 'rimshot' || effectiveArticulation === 'slap' || effectiveArticulation === 'quinto-slap') hitGainMultiplier = 1.1;
+            else if (effectiveArticulation === 'conga-open' || effectiveArticulation === 'tumba-open') hitGainMultiplier = 1.04;
 
             const role = instDef?.acousticProfile?.role || 'comp';
             const roleGain = params.roleGain ?? getRoleGainLinear(role, options.styleId || 'default');
@@ -395,12 +403,63 @@ export async function renderPerformanceToMp3(
             params.volume = Math.max(0.01, Math.min(35, velScaled * baseGain * roleGain * trackMixVolume));
 
             const articulationNorm =
-              event.note.articulation === 'staccato' ? 0.9 : event.note.articulation === 'legato' ? 0.1 : 0.4;
+              effectiveArticulation === 'staccato' ? 0.9 : effectiveArticulation === 'legato' ? 0.1 : 0.4;
             params.articulation = articulationNorm;
 
-            // FIX: Apply actionType and excitationType for offline rendering parity
-            const actionType = (event.note as any).actionType || event.note.articulation;
+            const isBowed = instDef?.family === 'bowed' || /violin|fiddle|cello|viola|erhu/i.test(instrumentId);
+            let actionType = (event.note as any).actionType || (isBowed ? 'bow_drag' : (dialect?.defaultTechnique || 'strike'));
             let excitationType = (event.note as any).excitationType || instDef?.excitationType || instDef?.luthierPhysics?.excitationType || 'fingerpad';
+
+            if (effectiveArticulation) {
+              const artLow = effectiveArticulation.toLowerCase();
+              if (artLow.includes('ponticello')) {
+                luthier = { ...luthier, harmonicRichness: Math.min(1, luthier.harmonicRichness + 0.12), decayTimeFactor: luthier.decayTimeFactor * 0.94 };
+              } else if (artLow.includes('tasto')) {
+                luthier = { ...luthier, harmonicRichness: Math.max(0, luthier.harmonicRichness - 0.10), decayTimeFactor: luthier.decayTimeFactor * 1.05 };
+              } else if (artLow.includes('mwah-growl')) {
+                luthier = { ...luthier, harmonicRichness: Math.min(1, luthier.harmonicRichness + 0.07) };
+              }
+              if (isBowed) {
+                if (artLow.includes('pizzicato') || artLow.includes('pizz')) {
+                  luthier = { ...luthier, category: 'strum_friction_pluck' };
+                  actionType = 'pluck';
+                } else {
+                  luthier = { ...luthier, category: 'continuous_bowed_friction' };
+                  actionType = artLow;
+                }
+              } else {
+                actionType = artLow;
+                if (artLow.includes('arco') || artLow.includes('bowed')) {
+                  luthier = { ...luthier, category: 'continuous_bowed_friction' };
+                  actionType = 'bow_drag';
+                } else if (artLow.includes('pizzicato') || artLow.includes('plucked') || artLow.includes('slap-bass') || artLow.includes('pizz')) {
+                  luthier = { ...luthier, category: 'strum_friction_pluck' };
+                  if (!artLow.includes('strappata')) actionType = 'pluck';
+                } else if (/conga-heel|macho-thumb|dayan-ti-ke|cajon-tip/.test(artLow)) {
+                  actionType = 'tap';
+                } else if (/conga-toe|macho-finger-tap|dayan-na|dayan-tun|bayan-ghe|iya-enu|iya-chacha|itotele-enu|okonkolo-chacha/.test(artLow)) {
+                  actionType = 'tap';
+                } else if (artLow.includes('cup-mute') || artLow.includes('stopped') || artLow.includes('palm-mute')) {
+                  actionType = 'mute';
+                } else if (artLow.includes('shake')) {
+                  actionType = 'tremolo';
+                } else if (artLow.includes('rimshot') || artLow.includes('cascara') || artLow.includes('rim')) {
+                  actionType = 'tap';
+                } else if (artLow.includes('conga-open') || artLow.includes('tumba-open')) {
+                  actionType = 'strike';
+                } else if (artLow.includes('rasgue') || artLow.includes('abanico') || artLow.includes('strum-roll')) {
+                  actionType = 'abanico';
+                } else if (artLow.includes('scratch')) {
+                  actionType = 'arrastre';
+                } else if (artLow.includes('fingerstyle') || artLow.includes('flatpick') || artLow.includes('pick') || artLow.includes('plectrum')) {
+                  actionType = 'pluck';
+                } else if (artLow.includes('tongue') || artLow.includes('tongued') || artLow.includes('cut') || artLow.includes('martellato')) {
+                  actionType = 'tongue';
+                } else if (artLow.includes('brush')) {
+                  actionType = 'strike';
+                }
+              }
+            }
 
             const FINGERPAD_ARTS = [
               'fingerstyle', 'pizzicato', 'thumb-slap', 'thumb-sweep', 'tirando', 'apoyando',
@@ -425,7 +484,7 @@ export async function renderPerformanceToMp3(
               'flutter-tongue', 'rip', 'tongue-slap', 'stopped', 'double-tongue', 'fp-crescendo'
             ];
 
-            const artLow = (event.note.articulation || actionType || '').toLowerCase();
+            const artLow = (effectiveArticulation || actionType || '').toLowerCase();
             if (FINGERPAD_ARTS.includes(actionType) || FINGERPAD_ARTS.includes(artLow)) {
               excitationType = 'fingerpad';
             } else if (HARD_PICK_ARTS.includes(actionType) || HARD_PICK_ARTS.includes(artLow)) {
@@ -467,6 +526,7 @@ export async function renderPerformanceToMp3(
             voice.gate = 1;
 
             voice.actionType = actionType;
+            voice.articulation = effectiveArticulation;
             voice.excitationType = excitationType;
 
             voice.attack = (event.note as any).attack;

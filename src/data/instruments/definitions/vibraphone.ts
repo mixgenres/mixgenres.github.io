@@ -7,7 +7,7 @@ export const vibraphone: InstrumentDef = {
   program: 11,
   voicing: "chord",
   elementaryModel: 8,
-  makeupGain: 0.681,
+  makeupGain: 0.708,
   polyphony: 8,
   note: "Useful for jazz, city pop and soft color",
   acousticProfile: {

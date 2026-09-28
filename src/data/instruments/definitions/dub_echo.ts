@@ -7,7 +7,7 @@ export const dub_echo: InstrumentDef = {
   program: 120,
   voicing: "single",
   elementaryModel: 9,
-  makeupGain: 0.505,
+  makeupGain: 0.548,
   polyphony: 4,
   note: "Single transient audio throw fed into high-feedback tape delay with resonant filter sweeps",
   acousticProfile: {

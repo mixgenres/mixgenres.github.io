@@ -7,7 +7,7 @@ export const crystal: InstrumentDef = {
   program: 98,
   voicing: "single",
   elementaryModel: 8,
-  makeupGain: 0.715,
+  makeupGain: 0.685,
   polyphony: 4,
   note: "Synthesized crystal mallet idiophone with shimmering high-frequency partials and glass resonance",
   acousticProfile: {

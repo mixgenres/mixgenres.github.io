@@ -7,7 +7,7 @@ export const bagpipes: InstrumentDef = {
   program: 109,
   voicing: "single",
   elementaryModel: 16,
-  makeupGain: 0.263,
+  makeupGain: 0.300,
   polyphony: 4,
   note: "Iconic Scottish Highland bagpipes with mouth-blown airtight bag, three continuous bass and tenor drones, and a piercing conical double-reed chanter built for thunderous outdoor projection",
   acousticProfile: {

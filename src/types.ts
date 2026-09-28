@@ -361,10 +361,6 @@ export interface RhythmFeel {
   quantizeJitterMs?: number; // MPC/MIDI clock jitter
 }
 
-export interface PerformanceRule {
-  evaluateNote: (phrase: any, index: number, acousticState?: PhysicalPlayerState, electronicState?: ElectronicSystemState) => any[];
-}
-
 export interface DrumRule {
   evaluateStep: (step: any, stickState?: any) => any[];
 }
@@ -374,7 +370,6 @@ export interface SongStyleDefinition {
   name: string;
   tempoRange?: [number, number];
   rhythmOverride?: RhythmFeel;
-  performanceRules?: Record<string, PerformanceRule>;
   drumRules?: DrumRule;
 }
 
@@ -403,7 +398,6 @@ export interface GenreWorld {
   prominentChords?: string[];
   crossLinks?: string[];
   rhythm?: RhythmFeel;
-  performanceRules?: Record<string, PerformanceRule>;
   drumRules?: DrumRule;
   styles?: Record<string, SongStyleDefinition>;
 }

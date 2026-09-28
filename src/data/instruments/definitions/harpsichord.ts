@@ -7,7 +7,7 @@ export const harpsichord: InstrumentDef = {
   program: 6,
   voicing: "chord",
   elementaryModel: 20,
-  makeupGain: 1.000,
+  makeupGain: 0.949,
   polyphony: 8,
   note: "Quill-plucked string keyboard with bright, overtone-rich attack and crisp contrapuntal articulation",
   acousticProfile: {

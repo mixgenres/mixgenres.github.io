@@ -7,7 +7,7 @@ export const marimba: InstrumentDef = {
   program: 12,
   voicing: "single",
   elementaryModel: 8,
-  makeupGain: 0.950,
+  makeupGain: 1.000,
   polyphony: 4,
   acousticProfile: {
     sustain: "decaying",

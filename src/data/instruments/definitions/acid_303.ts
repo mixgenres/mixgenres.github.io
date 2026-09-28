@@ -8,7 +8,7 @@ export const acid_303: InstrumentDef = {
   octave: 12,
   voicing: "single",
   elementaryModel: 9,
-  makeupGain: 0.505,
+  makeupGain: 0.548,
   polyphony: 4,
   note: "Iconic Roland TB-303 bass synthesizer with aggressive resonant diode ladder filter and accent snaps",
   acousticProfile: {

@@ -10,7 +10,7 @@ export const erhu: InstrumentDef = {
   bodyConstruction: "skin-faced",
   excitationType: "bow",
   elementaryModel: 6,
-  makeupGain: 17.944,
+  makeupGain: 16.256,
   polyphony: 4,
   note: "Chinese two-string fiddle",
   acousticProfile: {

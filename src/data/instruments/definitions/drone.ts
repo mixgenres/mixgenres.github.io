@@ -7,7 +7,7 @@ export const drone: InstrumentDef = {
   program: 89,
   voicing: "chord",
   elementaryModel: 0,
-  makeupGain: 30.000,
+  makeupGain: 0.438,
   polyphony: 8,
   note: "Sustained harmonic root and fifth acoustic/electronic bed with slow organic filter movement",
   acousticProfile: {

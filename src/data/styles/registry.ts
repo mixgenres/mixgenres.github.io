@@ -38,9 +38,7 @@ function styleFromSeed(worldId: string, seed: any, index: number): SongStyle {
   const rhythm = GENRE_RHYTHM[worldId] ?? { bpm: 110, range:[80,140] as [number,number], meter:contract.meter, feel:contract.groove.name, swing:contract.groove.swing * 100 };
   // The ensemble is authored by the style seed. Never synthesize a genre-level
   // starter ensemble: a song style must inherit only its own musical personnel.
-  const canonicalAliases: Record<string, string> = { 'nylon-guitar': 'guitar', 'bongo': 'bongos', 'batá': 'bata' };
   const instruments = Array.from(new Set((seed.characteristicInstruments ?? ['piano','bass','drums','guitar','tenor-sax'])
-    .map((id: string) => canonicalAliases[id] ?? id)
     .filter((id: string) => INSTRUMENTS_BY_ID[id]))).slice(0, 5);
   const formSteps = contract.form.map((name, i) => ({
     key: `${name.toLowerCase().replace(/[^a-z0-9]+/g,'-')}-${i}`,

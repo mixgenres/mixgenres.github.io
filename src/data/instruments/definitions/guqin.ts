@@ -10,7 +10,7 @@ export const guqin: InstrumentDef = {
   bodyConstruction: "board",
   excitationType: "fingerpad",
   elementaryModel: 0,
-  makeupGain: 7.324,
+  makeupGain: 6.768,
   polyphony: 4,
   note: "Plucked Chinese zither",
   acousticProfile: {

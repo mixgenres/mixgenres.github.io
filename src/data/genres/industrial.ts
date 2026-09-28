@@ -1,4 +1,4 @@
 export const industrial = {
   id: 'industrial',
-  characteristicInstruments: ['synth', 'drum-machine', 'sampler', 'distorted-bass', 'noise']
+  characteristicInstruments: ['synth', 'drums', 'sampler', 'bass-lead', 'noise-sweep']
 };

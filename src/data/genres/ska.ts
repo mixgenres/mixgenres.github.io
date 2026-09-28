@@ -1176,7 +1176,7 @@ export const SKA_WORLD: GenreWorld = {
         "song"
       ],
       "roles": [
-        "drum-kit"
+        "drums"
       ],
 
       "approaches": ["groove"],

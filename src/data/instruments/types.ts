@@ -40,6 +40,7 @@ export interface LuthierPhysicsProfile {
   excitationType?: 'plectrum' | 'nail' | 'fingerpad' | 'hard-pick' | 'hammer' | 'stick' | 'mallet' | 'breath' | 'bow';
   sympatheticStrings?: boolean;
   damping?: number;
+  excitationSaturation?: 'self-owned' | 'generic' | 'none';
 }
 
 export interface AcousticProfile {
