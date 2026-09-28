@@ -66,6 +66,7 @@ export interface CulturalAcousticEvent {
   luthierObjectId: string;
   /** Track / Voice ID in the arrangement */
   trackId: string;
+  noteInstanceId?: string;
   /** Physical excitation parameters */
   action: PhysicalExcitationAction;
   /** Frequency and microtonal intonation spec */
@@ -91,6 +92,12 @@ export interface CulturalAcousticEvent {
   gestureCode?: number;
   /** Precompiled bellows direction: 1 opening, 2 closing. */
   bellowsDirectionCode?: 1 | 2;
+  /** Physical Rheinische 142 bandoneon button selected by the compiler. */
+  bandoneonButtonId?: string;
+  /** Stable 0..70 physical button index. */
+  bandoneonButtonIndex?: number;
+  /** 1 = right/treble manual, 2 = left/bass manual. */
+  bandoneonSideCode?: 1 | 2;
   /** Envelope overrides for physical modeling */
   attack?: number;
   decay?: number;

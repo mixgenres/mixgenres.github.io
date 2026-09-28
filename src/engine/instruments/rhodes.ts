@@ -10,8 +10,31 @@ export default class RhodesModule implements InstrumentModule {
       velSignal,
       safeFreqSignal,
       b,
-      decayTime
+      decayTime,
+      params,
+      action
     } = ctx;
+    const isKizomba = /kizomba|tarraxo|urbankiz|ghetto-zouk/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const gd = ctx.genreDialect;
+    const genre = gd.id;
+    if (isKizomba) {
+      const p = el.syncphasor(safeFreqSignal, gateSignal);
+      const fundamental = el.sin(el.mul(2 * Math.PI, p));
+      const tine = el.sin(el.mul(4 * Math.PI, p));
+      const key = el.mul(el.highpass(1800, 1.0, el.noise()), el.adsr(0.0002, 0.004, 0, 0.002, gateSignal));
+      const env = el.adsr(0.001, 0.085 + decayTime * 0.06, 0.48, 0.045, gateSignal);
+      const syncopatedBark = el.mul(0.12 + (action === 'marcato' ? 0.08 : 0), key);
+      return el.lowpass(6200 + b * 5000, 1.0, el.mul(env, el.add(el.mul(0.78, fundamental), el.add(el.mul(0.16, tine), syncopatedBark))));
+    }
+
+    if (!isKizomba && /soul|rnb|gospel|jazz|funk|disco|house/.test(genre)) {
+      const p = el.syncphasor(safeFreqSignal, gateSignal);
+      const fundamental = el.sin(el.mul(2 * Math.PI, p));
+      const tine = el.sin(el.mul(4 * Math.PI, p));
+      const bark = el.mul((/funk|disco|house/.test(genre) ? 0.13 : 0.08) * gd.transient, el.mul(el.highpass(1700, 1.0, el.noise()), el.adsr(0.00025, 0.006, 0, 0.002, gateSignal)));
+      const env = el.adsr(0.001, 0.075 + decayTime * 0.07 * gd.decay, /jazz|soul|gospel/.test(genre) ? 0.58 : 0.44, 0.045, gateSignal);
+      return el.lowpass(5800 + b * 5200 * gd.brightness, 1.0, el.mul(env, el.add(el.mul(0.80, fundamental), el.add(el.mul(0.14, tine), bark))));
+    }
 
     const phasor = el.syncphasor(safeFreqSignal, gateSignal);
     const mod = el.sin(el.mul(2 * Math.PI * 3.5, phasor));

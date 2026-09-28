@@ -44,11 +44,18 @@ export function resolveRenderGesture(instrumentId: string, gestureCode: number):
   const def = INSTRUMENTS_BY_ID[instrumentId];
   const name = GESTURE_NAMES[gestureCode] ?? 'tone';
   const g = normalizedGesture(name);
-  const isBowed = def?.family === 'bowed' || /violin|fiddle|cello|viola|erhu/i.test(instrumentId);
-  const isPluck = FINGERPAD.has(g) || HARD_PICK.has(g) || /pizz|pick|pluck|fingerstyle|flatpick/.test(g);
+  const isBowed = def?.family === 'bowed' || /violin|fiddle|cello|viola|erhu|jinghu/i.test(instrumentId);
+  // A bowed instrument may use a plucked path only for an explicitly authored
+  // pizzicato gesture. Generic pick/fingerstyle aliases must never override its
+  // bow excitation simply because the gesture vocabulary overlaps.
+  const explicitPizz = g === 'pizzicato' || /pizz/.test(g);
+  const isPluck = isBowed
+    ? explicitPizz
+    : FINGERPAD.has(g) || HARD_PICK.has(g) || /pizz|pick|pluck|fingerstyle|flatpick/.test(g);
 
   let action = g;
-  if (isBowed && (g === 'pizzicato' || /pizz/.test(g))) action = 'pluck';
+  if (isBowed && explicitPizz) action = 'pluck';
+  else if (isBowed && (/fingerstyle|flatpick|pick|plectrum|pluck/.test(g))) action = 'arco';
   else if (g === 'arco') action = 'arco';
   else if (/fingerstyle|flatpick|pick|plectrum/.test(g)) action = 'pluck';
   else if (/rasgue|abanico/.test(g)) action = g.includes('abanico') ? 'abanico' : 'rasgueado';

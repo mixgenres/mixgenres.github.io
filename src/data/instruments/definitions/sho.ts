@@ -1,7 +1,7 @@
 import type { InstrumentDef } from '../types';
 
 export const sho: InstrumentDef = {
-  id: "shō",
+  id: "sho",
   name: "Sho",
   family: "free-reed",
   voicing: "chord",

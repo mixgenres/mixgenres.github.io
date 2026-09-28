@@ -106,12 +106,12 @@ export const dspOverride: InstrumentDSPOverride = {
       "articulation": ["arco", "legato", "tenuto", "pizzicato", "portato", "vibrato"]
     },
     "tango": {
-      "excitationBias": 0.12,
-      "brightness": 1.06,
-      "damping": 0.02,
-      "attack": 1.25,
-      "body": 1.15,
-      "articulation": ["arrastre", "staccato", "accent", "arco", "pizzicato"]
+      "excitationBias": 0.15,
+      "brightness": 1.04,
+      "damping": 0.015,
+      "attack": 1.26,
+      "body": 1.18,
+      "articulation": ["arrastre", "marcato", "staccato", "arco", "pizzicato", "yumba", "chicharra"]
     },
     "cinematic": {
       "excitationBias": 0.02,

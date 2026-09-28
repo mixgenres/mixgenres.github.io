@@ -4,7 +4,7 @@ import { INSTRUMENTS_BY_ID } from '../../data/instruments';
  * THE PLUGGABLE LUTHIER API
  * =========================
  * Maps instruments to physical wave, mesh, friction, and waveguide models.
- * Replaces static SoundFont samples with parametric acoustic physical models.
+ * Provides deterministic physical instrument models for the shared renderer.
  */
 
 export type LuthierModelCategory =
@@ -82,18 +82,11 @@ for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
  */
 export function getLuthierModelForInstrument(instrumentId: string): LuthierPhysicalParameters {
   const def = INSTRUMENTS_BY_ID[instrumentId];
-  if (def?.luthierPhysics) {
-    return def.luthierPhysics;
-  }
-  if (LUTHIER_INSTRUMENT_MAP[instrumentId]) {
-    return LUTHIER_INSTRUMENT_MAP[instrumentId];
-  }
-  // Fallback default physical model based on string matching
-  if (instrumentId.includes('drum') || instrumentId.includes('perc')) {
-    return { category: 'membrane_tension_2d', materialDensity: 0.8, tension: 0.7, bodyResonanceVolume: 15.0, decayTimeFactor: 0.8, harmonicRichness: 0.6 };
-  }
-  if (instrumentId.includes('guitar') || instrumentId.includes('bass') || instrumentId.includes('string')) {
-    return { category: 'strum_friction_pluck', materialDensity: 0.7, tension: 0.7, bodyResonanceVolume: 10.0, decayTimeFactor: 2.5, harmonicRichness: 0.65 };
-  }
-  return { category: 'electro_acoustic_algorithmic', materialDensity: 0.5, tension: 0.5, bodyResonanceVolume: 10.0, decayTimeFactor: 2.0, harmonicRichness: 0.7 };
+  const profile = def?.luthierPhysics ?? LUTHIER_INSTRUMENT_MAP[instrumentId];
+  if (profile) return profile;
+
+  throw new Error(
+    `UNRESOLVED_MUSICAL_IDENTITY_ERROR: no physical Luthier profile for instrument "${instrumentId}". ` +
+    `Author a catalog definition and physical model before rendering.`
+  );
 }

@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../types';
 
 export const guitarron: InstrumentDef = {
   id: "guitarron",
-  name: "Guitarrón",
+  name: "Guitarron",
   family: "plucked",
   voicing: "bass",
   courses: 1,

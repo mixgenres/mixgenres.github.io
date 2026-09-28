@@ -5,7 +5,7 @@ import { PLATES, plateFor } from './worlds';
 import { INSTRUMENT_CATALOG, FAMILY_LABELS, FAMILY_ORDER, instrument } from '../data/instruments';
 import { ALL_PATTERNS, GENRE_WORLDS_BY_ID, cleanPatternName, FEEL_ORDER, FEEL_LABELS, feelsForPattern, PatternFeel } from '../data/genres';
 import { Voice, toBar, BAR_CHOICES, FEELS, getGenreForm } from '../engine/generators/arrange';
-import { Region } from '../types';
+import type { Region } from '../types';
 import { CHORD_PALETTE, CHORD_MOODS, CHORD_MOOD_ORDER, ChordMood, JAZZ_CHORD_LIBRARY, suggestedPaletteForStyle } from '../data/chordPalette';
 import { parseChord } from '../engine/theory/theory';
 import { formSummary } from '../data/genreForms';

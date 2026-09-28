@@ -6,7 +6,7 @@ export const slow_strings: InstrumentDef = {
   family: "bowed",
   voicing: "chord",
   elementaryModel: 6,
-  makeupGain: 0.564,
+  makeupGain: 0.37,
   polyphony: 8,
   acousticProfile: {
     sustain: "sustained",

@@ -1,3 +1,4 @@
+import { StereoFieldManager } from './engine/audio/panning';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Dices, Trash2, Pencil, Sparkles } from 'lucide-react';
 import './index.css';
@@ -143,7 +144,7 @@ export default function App() {
           styleId: songRef.current.styleId,
           mixState: {
             volume: Object.fromEntries(songRef.current.tracks.map(t => [t.id, (t as any).volume ?? 1])),
-            pan: Object.fromEntries(songRef.current.tracks.map(t => [t.id, (t as any).pan ?? 0.5])),
+            pan: Object.fromEntries(songRef.current.tracks.map(t => [t.id, (t as any).pan ?? stereoField.resolveInstrumentPanNormalized(t.instrumentId ?? t.instrument)])),
             muted: Object.fromEntries(songRef.current.tracks.map(t => [t.id, !!t.muted])),
             solo: Object.fromEntries(songRef.current.tracks.map(t => [t.id, !!(t as any).solo])),
             spotlight: Object.fromEntries(songRef.current.tracks.map(t => [t.id, (t as any).spotlight ?? 'off'])),
@@ -157,12 +158,25 @@ export default function App() {
       if (lastExportUrlRef.current) {
         URL.revokeObjectURL(lastExportUrlRef.current);
       }
+      if (blob.size < 1024 || blob.type !== 'audio/mpeg') {
+        throw new Error('MP3 encoder returned an invalid audio blob');
+      }
       const url = URL.createObjectURL(blob);
       lastExportUrlRef.current = url;
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${(songRef.current.title || 'song').toLowerCase().replace(/\s+/g, '-')}.mp3`;
+      a.download = `${(songRef.current.title || 'song').toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9_-]+/g, '') || 'song'}.mp3`;
+      a.rel = 'noopener';
+      a.style.display = 'none';
+      document.body.appendChild(a);
       a.click();
+      a.remove();
+      // Keep the URL alive long enough for browsers that defer the download
+      // navigation, then release it instead of accumulating Blob URLs.
+      window.setTimeout(() => {
+        if (lastExportUrlRef.current === url) lastExportUrlRef.current = null;
+        URL.revokeObjectURL(url);
+      }, 60_000);
       showToast('MP3 exported');
     } catch (err) {
       console.error('MP3 render failed:', err);
@@ -287,9 +301,11 @@ export default function App() {
      Cost scales with the scope of the edit, not song length.
      Tier 0 (Structure), Tier 1 (Arrangement), and Tier 2 (Performance)
      cells are cached and only invalidated when their specific inputs change. */
+  const stereoField = useMemo(() => new StereoFieldManager(), []);
+
   const perf = useMemo(() => {
     return compileWholeSong(song, 0);
-  }, [song, focusId]);
+  }, [song]);
   const perfRef = useRef(perf);
   perfRef.current = perf;
 
@@ -412,7 +428,7 @@ export default function App() {
             if (t) {
               transportRef.current.setTrackVolume(t.id, (t as any).volume ?? 0.85);
               transportRef.current.setTrackMute(t.id, !!t.muted);
-              transportRef.current.setTrackPan(t.id, (t as any).pan ?? 0.5);
+              transportRef.current.setTrackPan(t.id, (t as any).pan ?? stereoField.resolveInstrumentPanNormalized(t.instrumentId ?? t.instrument));
               transportRef.current.setTrackSolo(t.id, !!(t as any).solo);
               transportRef.current.setTrackSpotlight(t.id, (t as any).spotlight ?? 'auto');
             }

@@ -10,6 +10,8 @@ export interface DspMode {
   q: number;
   gain: number;
   decayScale?: number;
+  /** Optional fixed acoustic resonance frequency, used for absolute air/body modes. */
+  frequencyHz?: number;
 }
 
 export interface InstrumentPhysicalDetails {
@@ -400,7 +402,7 @@ const brass = (d: InstrumentDef): InstrumentDSPProfile => {
 
 const freeReed = (d: InstrumentDef): InstrumentDSPProfile => {
   const id = d.id.toLowerCase();
-  const sho = id === 'shō';
+  const sho = id === 'sho';
   const harmonica = id === 'harmonica';
   const melodica = id === 'melodica';
   return {
@@ -522,17 +524,15 @@ const voice = (_d: InstrumentDef): InstrumentDSPProfile => ({
   },
 });
 
-const generic = (d: InstrumentDef): InstrumentDSPProfile => ({
-  familyModel: d.family === 'voice' ? 'voice' : d.family === 'electronic' ? 'electronic' : 'impact',
-  excitationDynamics: { hardness: 0.5, pressureSensitivity: 0.5, nonlinearDrive: 0.06, attackCollision: 0.4, spectralSpread: 0.4, directionalAsymmetry: 0.2 },
-  coupledResonators: { bodyModes: [{ ratio: 1, q: 2, gain: 0.10 }, { ratio: 2, q: 1.5, gain: 0.05 }] },
-  mechanicalArtifacts: { airHiss: 0.03, keyThud: 0.02, valveClick: 0, fretBuzz: 0, stringSqueak: 0, pickZing: 0, handContact: 0.02, bodyKnock: 0.02, rimImpact: 0.02, bellowsNoise: 0, damperNoise: 0.02 },
-  articulationPhysics: { strikeZoneLocation: 'mixed', fleshVsNail: 0.2, handDamping: 0.08, attackToPitchCoupling: 0.2, releaseCoupling: 0.2, continuousSustain: false, noteTransition: 'mixed' },
-  genreDialects: {},
-});
+const generic = (d: InstrumentDef): InstrumentDSPProfile => {
+  throw new Error(
+    `UNRESOLVED_MUSICAL_IDENTITY_ERROR: instrument "${d.id}" reached the generic DSP path. ` +
+    `Author an instrument-specific physical model instead of synthesizing a placeholder.`
+  );
+};
 
 const EXACT: Record<string, Partial<InstrumentDSPProfile>> = {
-  bandoneon: bellows({ id: 'bandoneon', name: 'Bandoneón', family: 'bellows-and-keys', voicing: 'single', techniques: { articulations: [], techniqueMethods: [], playingStyles: [] } }),
+  bandoneon: bellows({ id: 'bandoneon', name: 'Bandoneon', family: 'bellows-and-keys', voicing: 'single', techniques: { articulations: [], techniqueMethods: [], playingStyles: [] } }),
   bagpipes: reservoir({ id: 'bagpipes', name: 'Great Highland Bagpipes', family: 'free-reed', voicing: 'single', techniques: { articulations: [], techniqueMethods: [], playingStyles: [] } }),
   'uilleann-pipes': reservoir({ id: 'uilleann-pipes', name: 'Uilleann pipes', family: 'free-reed', voicing: 'single', techniques: { articulations: [], techniqueMethods: [], playingStyles: [] } }),
   banjo: plucked({ id: 'banjo', name: '5-String Banjo', family: 'plucked', voicing: 'chord', bodyConstruction: 'skin-faced', excitationType: 'hard-pick', courses: 1, techniques: { articulations: [], techniqueMethods: [], playingStyles: [] } }),
@@ -577,7 +577,7 @@ export function buildInstrumentDSPProfile(def: InstrumentDef): InstrumentDSPProf
     profile = brass(def);
   } else if (def.family === 'winds' || def.family === 'free-reed') {
     if (def.id === 'bagpipes' || def.id === 'uilleann-pipes') profile = reservoir(def);
-    else if (def.id === 'shō' || def.id === 'harmonica' || def.id === 'melodica') profile = freeReed(def);
+    else if (def.id === 'sho' || def.id === 'harmonica' || def.id === 'melodica') profile = freeReed(def);
     else profile = wind(def);
   } else if (def.excitationType === 'hammer' || def.excitationType === 'mallet' || def.family === 'metal-and-wood') {
     profile = struck(def);
@@ -599,7 +599,7 @@ export function buildInstrumentDSPProfile(def: InstrumentDef): InstrumentDSPProf
   // Every declared playing style gets a physical dialect, even when the instrument did not
   // have a hand-authored override. These are deliberately small deltas: the style changes
   // how the instrument is played, not what instrument it is.
-  if (id === 'bandoneon') profile.instrumentSpecific = { bisonoric: { opening: 'Abrir: softer attack, slight negative pressure drift, lower chamber formant', closing: 'Cerrar: harder attack, positive pressure drift, brighter chamber formant', kneeDropImpact: true, dryReedBanks: '8-foot + 4-foot, no musette beating' } };
+  if (id === 'bandoneon') profile.instrumentSpecific = { bisonoric: { opening: 'Abrir: softer attack, slight negative pressure drift, lower chamber formant', closing: 'Cerrar: harder attack, positive pressure drift, brighter chamber formant', kneeDropImpact: true, dryReedBanks: 'two-chörig octave register (16-foot + 8-foot relative to written pitch), no musette beating' } };
   if (id === 'bagpipes' || id === 'uilleann-pipes') profile.instrumentSpecific = { reservoir: { pressureLoss: profile.excitationDynamics.continuousReservoir?.pressureLoss ?? 0.1, dronePhaseAlignment: profile.excitationDynamics.continuousReservoir?.dronePhaseLock ?? 0.9, articulation: 'grace-note interruption of continuous flow', scale: id === 'bagpipes' ? 'non-tempered Highland chanter / Mixolydian-derived' : 'instrument-specific chanter tuning' } };
   if (id === 'banjo') {
     profile.coupledResonators.membrane2D = { radial: 0.94, circular: 0.78, tension: 0.90, damping: 0.72, strikeZoneSensitivity: 0.98 };
@@ -624,6 +624,68 @@ export function buildInstrumentDSPProfile(def: InstrumentDef): InstrumentDSPProf
   const override = instrumentDSPOverrides[id];
   if (override) {
     profile = deepMergeDSP(profile, override);
+  }
+
+  // Normalize the physical energy-source contract after generated/hand-authored
+  // overrides. This prevents a copied transition flag from changing the
+  // instrument's excitation family (for example, a banjo becoming a
+  // continuous reservoir instrument).
+  if (def.family === 'plucked' || def.family === 'plucked-string') {
+    profile.articulationPhysics.continuousSustain = false;
+    const slideLike = id === 'slide-guitar' || id === 'fretless-bass';
+    profile.articulationPhysics.noteTransition = slideLike ? 'slide' : 'retrigger';
+  } else if (def.family === 'bowed') {
+    profile.articulationPhysics.continuousSustain = true;
+    profile.articulationPhysics.noteTransition = id === 'erhu' || id === 'jinghu' ? 'slide' : 'legato';
+  } else if (def.family === 'hand-drums' || def.family === 'metal-and-wood' || def.family === 'kit' || def.family === 'body-percussion') {
+    profile.articulationPhysics.continuousSustain = false;
+    profile.articulationPhysics.noteTransition = 'retrigger';
+  } else if (def.family === 'winds') {
+    profile.articulationPhysics.continuousSustain = true;
+    profile.articulationPhysics.noteTransition = 'legato';
+  } else if (def.family === 'brass') {
+    profile.articulationPhysics.continuousSustain = true;
+    profile.articulationPhysics.noteTransition = id === 'trombone' ? 'slide' : 'lip-slur';
+  } else if (def.family === 'free-reed') {
+    profile.articulationPhysics.continuousSustain = true;
+    profile.articulationPhysics.noteTransition = 'legato';
+  } else if (def.family === 'bellows-and-keys' && /accordion|bandoneon|concertina|harmonium/.test(id)) {
+    profile.articulationPhysics.continuousSustain = true;
+    profile.articulationPhysics.noteTransition = 'bellows-flow';
+  } else if (def.family === 'voice') {
+    profile.articulationPhysics.continuousSustain = true;
+    profile.articulationPhysics.noteTransition = 'legato';
+  }
+
+  // Bring authored luthier measurements into the actual resonator graph rather
+  // than leaving them as descriptive metadata.
+  if (def.luthierPhysics) {
+    const lp = def.luthierPhysics;
+    const densityGain = 0.90 + (1 - Math.max(0, Math.min(1, lp.materialDensity))) * 0.12;
+    const densityQ = 0.86 + Math.max(0, Math.min(1, lp.materialDensity)) * 0.28;
+    profile.coupledResonators.bodyModes = profile.coupledResonators.bodyModes.map(m => ({
+      ...m,
+      gain: m.gain * densityGain,
+      q: m.q * densityQ,
+    }));
+    if (profile.coupledResonators.soundboard && lp.soundboardResonanceHz) {
+      profile.coupledResonators.soundboard = {
+        ...profile.coupledResonators.soundboard,
+        thudHz: lp.soundboardResonanceHz,
+      };
+    }
+    if (lp.airResonanceHz) {
+      const existingAirModes = profile.coupledResonators.airModes ?? [];
+      profile.coupledResonators.airModes = existingAirModes.length
+        ? existingAirModes.map((m, i) => i === 0 ? { ...m, frequencyHz: lp.airResonanceHz } : m)
+        : [{ frequencyHz: lp.airResonanceHz, ratio: 1, q: 3.5, gain: 0.12 }];
+    }
+    if (lp.fretBuzzAmount !== undefined) {
+      profile.mechanicalArtifacts.fretBuzz = Math.max(
+        profile.mechanicalArtifacts.fretBuzz,
+        Math.max(0, Math.min(1, lp.fretBuzzAmount)),
+      );
+    }
   }
 
   // Do not let a generated family profile make every genre look like the same player.

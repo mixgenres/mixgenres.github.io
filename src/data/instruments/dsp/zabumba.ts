@@ -5,10 +5,10 @@ export const dspOverride: InstrumentDSPOverride = {
   "instrumentCharacter": {
     "energySource": "membrane",
     "energyPath": "head/shell/air",
-    "bodyArchitecture": "instrument-specific chamber",
-    "primaryCollision": "flesh/edge collision",
-    "asymmetries": [],
-    "couplingPaths": [],
+    "bodyArchitecture": "double-headed Brazilian bass drum",
+    "primaryCollision": "beater membrane impact with opposite-head hand mute",
+    "asymmetries": ["beater head", "hand head", "two-head coupling"],
+    "couplingPaths": ["head-head", "head-shell", "shell-air"],
     "techniqueBindings": [
       "open tone",
       "bass tone",

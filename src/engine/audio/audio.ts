@@ -109,8 +109,8 @@ export function stopAudio() {
 /** Stable id shared by noteOn/noteOff for the same physical voice, so a
  *  RELEASE message can actually find and stop the sustained voice it started
  *  (bowed strings, reed instruments, winds, held synth/pad notes). */
-function voiceId(trackId: string | number, midi: number): string {
-  return `${trackId}_${midi}`;
+function voiceId(trackId: string | number, midi: number, noteInstanceId?: string): string {
+  return noteInstanceId ? `${trackId}_${noteInstanceId}` : `${trackId}_${midi}`;
 }
 
 import { resolveDialect } from '../theory/dialects';
@@ -121,7 +121,7 @@ import { resolveRenderGesture } from './renderGesture';
 export function createSink(): TransportSink {
   return {
     now: () => (ctx ? ctx.currentTime : 0),
-    noteOn(trackId, midi, vel, time, gestureCode, frequencyHz, bellowsDirectionCode) {
+    noteOn(trackId, midi, vel, time, gestureCode, frequencyHz, bellowsDirectionCode, bandoneonButtonId, bandoneonButtonIndex, bandoneonSideCode, noteInstanceId) {
       if (!bandWorklet) return;
       const instrumentId = trackInstruments.get(String(trackId)) ?? String(trackId);
       let luthier = getLuthierModelForInstrument(instrumentId);
@@ -144,13 +144,14 @@ export function createSink(): TransportSink {
       }
 
       const role = instDef?.acousticProfile?.role || 'comp';
-      const roleGain = getRoleGainLinear(role, activeWorldId || 'default');
+      const roleGain = getRoleGainLinear(role, activeWorldId || 'default', instrumentId);
       const deterministicJitter = (((Number(gestureCode ?? 0) * 1103515245 + midi * 12345 + Math.round(time * 1000)) >>> 0) / 0xffffffff) - 0.5;
       const contactPoint = Math.max(0.05, Math.min(0.95, dialect?.contactPointOverride ?? (rendered.contactPoint - (vel01 - 0.5) * 0.18 + deterministicJitter * 0.08)));
       const mass = Math.max(0.1, Math.min(0.95, rendered.mass + vel01 * 0.42 + deterministicJitter * 0.08));
 
       bandWorklet.postEvent({
-        id: voiceId(trackId, midi),
+        id: voiceId(trackId, midi, noteInstanceId),
+        noteInstanceId,
         cyclePhase: 0,
         luthierObjectId: instrumentId,
         trackId: String(trackId),
@@ -165,13 +166,16 @@ export function createSink(): TransportSink {
         duration: 0.5,
         gestureCode,
         bellowsDirectionCode,
+        bandoneonButtonId,
+        bandoneonButtonIndex,
+        bandoneonSideCode,
         roleGain,
       } as any, time);
     },
-    noteOff(trackId, midi, time) {
+    noteOff(trackId, midi, time, noteInstanceId) {
       // Releases sustain-capable voices (bowed/reed/wind/held synth); a
       // no-op for decaying/percussive voices, which just ring out.
-      if (bandWorklet) bandWorklet.postRelease(String(trackId), midi, time);
+      if (bandWorklet) bandWorklet.postRelease(String(trackId), midi, time, noteInstanceId);
       const instId = trackInstruments.get(String(trackId)) || 'guitar';
       const renderer = new InstrumentRenderer(instId, ctx);
       renderer.scheduleNoteOffNoise({ pitch: midi, velocity: 0.8 }, time, renderer.getAcousticProfile(instId), ctx);
@@ -245,7 +249,7 @@ export function getVoiceFeedSummary(instrumentId: string, chord: string) {
     const pcs = culturalPitchSet(culture, parsed.rootPc);
     const midis = culture.sourceModel === 'modal-drone' && def.voicing === 'chord'
       ? celticOpenHarmony(parsed.rootPc, prof, 0.84, 17)
-      : instrumentId === 'shō'
+      : instrumentId === 'sho'
         ? shoCluster(parsed.rootPc, prof, 0.84)
         : [foldToRange(midiOf(pcs[0], 4), prof)];
     return {

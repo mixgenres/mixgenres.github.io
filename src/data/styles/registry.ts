@@ -1,4 +1,4 @@
-import { SongStyle } from './schema';
+import type { SongStyle } from './schema';
 import { GENRE_WORLDS, GENRE_NAMES } from '../genres';
 import { buildCuratedStyles, assembleStylePatterns } from './catalog';
 import { applyStyleDialect } from './styleDialect';
@@ -39,7 +39,7 @@ function styleFromSeed(worldId: string, seed: any, index: number): SongStyle {
   // The ensemble is authored by the style seed. Never synthesize a genre-level
   // starter ensemble: a song style must inherit only its own musical personnel.
   const instruments = Array.from(new Set((seed.characteristicInstruments ?? ['piano','bass','drums','guitar','tenor-sax'])
-    .filter((id: string) => INSTRUMENTS_BY_ID[id]))).slice(0, 5);
+    .filter((id: string) => INSTRUMENTS_BY_ID[id])));
   const formSteps = contract.form.map((name, i) => ({
     key: `${name.toLowerCase().replace(/[^a-z0-9]+/g,'-')}-${i}`,
     label: name,

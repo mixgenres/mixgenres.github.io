@@ -19,7 +19,22 @@ export default class GuitarModule implements InstrumentModule {
     } = ctx;
 
     const instId = (params.instrumentId ?? '').toLowerCase();
-    
+    const isTango = /tango|milonga|vals/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isKizomba = /kizomba|tarraxo|urbankiz|ghetto-zouk/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isReggaeton = /reggaeton|reggaetón|dembow|perreo|neoperreo/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isTangoAcoustic = isTango && /acoustic-guitar|guitar/.test(instId);
+    const isUrbanAcoustic = (isKizomba || isReggaeton) && /guitar|acoustic-guitar|spanish-guitar/.test(instId);
+    const isMarcato = action === 'marcato' || /marcato/i.test(action ?? '');
+    const isArrastre = action === 'arrastre' || /arrastre|drag/i.test(action ?? '');
+    const gd = ctx.genreDialect;
+    const genre = gd.id;
+    const isBachata = genre === 'bachata';
+    const isBrazilian = genre === 'brazilian';
+    const isReggae = genre === 'reggae';
+    const isSka = genre === 'ska';
+    const isFunk = genre === 'funk';
+    const isCountry = genre === 'country';
+
     if (action === 'golpe' || action === 'tap' || action === 'golpe-caja') {
       const bodyPunch = el.mul(el.cycle(110), el.adsr(0.0005, 0.02, 0, 0.01, gateSignal));
       const woodClick = el.mul(el.highpass(1400, 1.2, el.noise()), el.adsr(0.0002, 0.008, 0, 0.004, gateSignal));
@@ -27,7 +42,7 @@ export default class GuitarModule implements InstrumentModule {
     }
 
     const B = 0.00015;
-    const isRasgueado = action === 'abanico' || action === 'rasgueado' || params.articulation > 0.6;
+    const isRasgueado = !isTangoAcoustic && !isUrbanAcoustic && !isBachata && !isBrazilian && !isReggae && !isSka && !isFunk && (action === 'abanico' || action === 'rasgueado' || ctx.articulation > 0.6);
     const excitation = voice.excitationType ?? params.excitationType ?? 'fingerpad';
     const construction = params.bodyConstruction ?? 'wood-box';
     const numCourses = params.courses ?? 1;
@@ -36,7 +51,34 @@ export default class GuitarModule implements InstrumentModule {
     const broadbandPluck = el.lowpass(el.mul(safeFreqSignal, 4.0), 0.9, el.pinknoise());
 
     let impulse: any;
-    if (isRasgueado) {
+    if (isBachata || isBrazilian || isReggae || isSka || isFunk || isCountry) {
+      const short = isBachata || isReggae || isSka || isFunk;
+      const env = el.adsr(0.00025, short ? 0.009 : 0.015, 0, 0.003, gateSignal);
+      const noiseFreq = isCountry ? 2900 : isBachata ? 2050 : isSka ? 2500 : isFunk ? 1800 : 1450;
+      const pluck = el.add(el.mul(isCountry ? 0.70 : 0.64, broadbandPluck), el.mul(0.16, el.svf({ mode: 'bandpass' }, noiseFreq, 1.4, el.noise())));
+      const bodyFreq = isBrazilian ? 115 : isBachata ? 135 : isCountry ? 155 : 105;
+      const body = el.mul((isBrazilian ? 0.16 : 0.10) * gd.body, el.cycle(bodyFreq));
+      impulse = el.add(el.mul(pluck, env), el.mul(body, el.adsr(0.0003, 0.035, 0, 0.010, gateSignal)));
+    } else 
+    if (isUrbanAcoustic) {
+      // Kizomba guitar: short, muted syncopated chord/finger attack with very
+      // little flamenco rasgueado noise. Reggaetón uses an even drier pluck.
+      const env = el.adsr(0.00025, isKizomba ? 0.012 : 0.008, 0, 0.003, gateSignal);
+      const pick = el.add(el.mul(0.72, broadbandPluck), el.mul(isKizomba ? 0.12 : 0.20, el.svf({ mode: 'bandpass' }, isKizomba ? 1750 : 2350, 1.5, el.noise())));
+      const body = el.mul(isKizomba ? 0.10 : 0.06, el.cycle(isKizomba ? 105 : 120));
+      impulse = el.add(el.mul(pick, env), el.mul(body, el.adsr(0.0003, 0.035, 0, 0.009, gateSignal)));
+    } else if (isTangoAcoustic && (isMarcato || isArrastre)) {
+      // Tango guitar is a dry, percussive harmonic accompanist rather than a
+      // flamenco rasgueado engine: short chord attacks, restrained nail noise,
+      // and a small wooden body pulse.
+      const chordEnv = el.adsr(0.00025, isArrastre ? 0.010 : 0.006, 0, 0.003, gateSignal);
+      const chordAttack = el.add(
+        el.mul(0.76, broadbandPluck),
+        el.mul(0.24, el.svf({ mode: 'bandpass' }, 1600, 1.8, el.noise()))
+      );
+      const bodyPulse = el.mul(el.cycle(108), el.adsr(0.0003, 0.028, 0, 0.009, gateSignal));
+      impulse = el.add(el.mul(chordAttack, chordEnv), el.mul(0.13, bodyPulse));
+    } else if (isRasgueado) {
       const burstCount = 5;
       const bursts = Array.from({ length: burstCount }, (_, i) =>
         el.adsr(0.0003 + i * 0.003, 0.0055, 0, 0.0025, gateSignal)
@@ -77,7 +119,17 @@ export default class GuitarModule implements InstrumentModule {
       : (3.2 + b * 6.0);
     const stringCutoff = el.min(el.const({ value: 19000 }), el.max(el.const({ value: 1200 }), el.mul(safeFreqSignal, el.const({ value: cutoffMult }))));
 
-    const targetDecaySeconds = 0.35 + decayTime * (0.6 + b * 1.5);
+    const targetDecaySeconds = (isBachata || isReggae || isSka || isFunk)
+      ? 0.16 + decayTime * 0.42
+      : isBrazilian
+      ? 0.32 + decayTime * 0.60
+      : isCountry
+      ? 0.42 + decayTime * 0.85
+      : isUrbanAcoustic
+      ? (isKizomba ? 0.28 + decayTime * 0.55 : 0.20 + decayTime * 0.45)
+      : isTangoAcoustic
+      ? 0.22 + decayTime * (0.45 + b * 0.85)
+      : 0.35 + decayTime * (0.6 + b * 1.5);
     const d1 = fbGainForDecay(safeFreqSignal, targetDecaySeconds);
 
     if (numCourses > 1) {
@@ -168,8 +220,11 @@ export default class GuitarModule implements InstrumentModule {
         const skinRing = el.svf({ mode: 'bandpass' }, 520, 4.2, stringSignal);
         bodyOut = el.add(bodyOut, el.mul(0.18, skinRing));
       } else if (sys === 'fretted-lute-with-sympathetics') {
-        const jawari = el.svf({ mode: 'bandpass' }, el.min(9000, el.mul(safeFreqSignal, 3.8)), 8.0, stringSignal);
-        bodyOut = el.add(bodyOut, el.mul(r.nonlinearTransfer * 0.28, jawari));
+        // Sitar jawari is a deliberately bright, buzzy bridge interaction. Do not
+        // let the generic lute low-mid body dominate the mizrab/jawari spectrum.
+        const jawari = el.svf({ mode: 'bandpass' }, el.min(11000, el.mul(safeFreqSignal, 3.8)), 7.0, stringSignal);
+        const jawariAir = el.mul(0.28 + r.nonlinearTransfer * 0.16, el.highpass(3600, 0.9, stringSignal));
+        bodyOut = el.add(bodyOut, el.mul(0.34 + r.nonlinearTransfer * 0.16, jawari), jawariAir);
       } else if (sys === 'five-string-plucked-membrane-resonator') {
         const head = el.svf({ mode: 'bandpass' }, 900, 5.5, stringSignal);
         const rim = el.svf({ mode: 'bandpass' }, 1850, 2.6, stringSignal);
@@ -191,9 +246,16 @@ export default class GuitarModule implements InstrumentModule {
       finalAcoustic = el.add(bodyOut, el.mul(0.85, sumTarab));
     }
 
-    const filterCutoff = Math.min(19000, construction === 'board'
-      ? 700 + b * 4500
-      : (construction === 'skin-faced' ? 1200 + b * 7500 : 900 + b * 6800));
+    const filterCutoff = Math.min(19000,
+      isTangoAcoustic ? 6200 + b * 4200
+      : physical?.system === 'fretted-lute-with-sympathetics' ? 8500 + b * 6500
+      : physical?.system === 'long-zither' ? 8200 + b * 7000
+      : physical?.system === 'multi-string-bridge-zither' ? 8800 + b * 6200
+      : physical?.system === 'bridge-less-long-zither' ? 6500 + b * 5200
+      : physical?.system === 'unfretted-skin-lute' ? 6200 + b * 6500
+      : construction === 'board' ? 700 + b * 4500
+      : (construction === 'skin-faced' ? 1200 + b * 7500 : 900 + b * 6800)
+    );
     return el.lowpass(filterCutoff, 1.0, finalAcoustic);
   }
 }

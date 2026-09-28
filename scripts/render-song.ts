@@ -9,13 +9,17 @@ import { renderPerformanceToMp3 } from '../src/engine/audio/offlineRender';
 async function main() {
   const genreId = process.argv[2] || 'salsa';
   const outPath = process.argv[3] || `/tmp/${genreId}.mp3`;
+  const maxSeconds = Math.max(0, Number(process.argv[4] || 0));
 
   const sheet = makeSheet(genreId);
   console.error(`[${genreId}] tracks:`, sheet.tracks.map(t => `${t.id}:${t.instrumentId}`).join(', '));
   console.error(`[${genreId}] sections:`, sheet.regions.map(r => `${r.kind}(e${r.energy})`).join(' -> '));
 
-  const perf = compileWholeSong(sheet);
-  console.error(`[${genreId}] notes: ${perf.notes.length}, duration: ${perf.duration.toFixed(1)}s`);
+  let perf = compileWholeSong(sheet);
+  if (maxSeconds > 0 && perf.duration > maxSeconds) {
+    perf = { ...perf, notes: perf.notes.filter(n => n.time < maxSeconds), duration: maxSeconds };
+  }
+  console.error(`[${genreId}] notes: ${perf.notes.length}, duration: ${perf.duration.toFixed(1)}s${maxSeconds ? ' (excerpt)' : ''}`);
 
   const trackInstruments = new Map(sheet.tracks.map(t => [t.id, t.instrumentId]));
 

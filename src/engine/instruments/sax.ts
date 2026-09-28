@@ -52,8 +52,8 @@ export default class SaxModule implements InstrumentModule {
     const breathNoise = el.mul(0.08 * (1 - params.pressure) * breathDev, el.noise());
     const excited = el.add(reedPulse, breathNoise);
 
-    const isSlur = action === 'legato' || action === 'slur' || action === 'bow_drag' || (params.articulation < 0.25 && action !== 'staccato');
-    const isStaccato = action === 'staccato' || action === 'tongue' || action === 'accent' || params.articulation > 0.65;
+    const isSlur = action === 'legato' || action === 'slur' || action === 'bow_drag' || (ctx.articulation < 0.25 && action !== 'staccato');
+    const isStaccato = action === 'staccato' || action === 'tongue' || action === 'accent' || ctx.articulation > 0.65;
     const tongueLevel = isSlur ? 0.03 : (isStaccato ? 0.65 : 0.30);
 
     const profile = getFormantProfileForInstrument(params.instrumentId ?? '', 16);

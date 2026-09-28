@@ -7,6 +7,7 @@ import { getLuthierModelForInstrument } from './LuthierAPI';
 import { resolveDialect, performanceModeForContext } from '../theory/dialects';
 import { createMasterChain, getRoleGainLinear } from './mixer';
 import { contractForGenre } from '../../data/styles/contracts';
+import { resolveStyle } from '../../data/styles';
 import { FORM_BLUEPRINTS } from '../../data/genreForms';
 import { processOfflineAudioDSP } from '../dsp/processor';
 import { resolveRenderGesture } from './renderGesture';
@@ -110,6 +111,11 @@ export function computeTrackStemFingerprint(
     const c = sortedCCs[i];
     update(`${c.time.toFixed(4)},${c.cc},${c.value}`);
   }
+  // Physical bandoneon fingering is part of the render identity; changing the
+  // selected button/side must invalidate a cached stem even when MIDI is equal.
+  for (const n of trackNotes.slice().sort((a, b) => a.time - b.time || a.midi - b.midi)) {
+    update(`bn_${n.bandoneonButtonId ?? ''},${n.bandoneonButtonIndex ?? -1},${n.bandoneonSideCode ?? 0},${n.bellowsDirectionCode ?? 0}`);
+  }
 
   return (h1 >>> 0).toString(16).padStart(8, '0') + (h2 >>> 0).toString(16).padStart(8, '0');
 }
@@ -186,11 +192,26 @@ export async function renderPerformanceToMp3(
   if (onProgress) onProgress(0.02);
 
   let mixCharacter: import('../../data/styles/contracts').MixCharacter | undefined;
+  let styleMaster = { pocket: 0.5, lift: 0.5 };
   if (options.worldId) {
     try {
       mixCharacter = contractForGenre(options.worldId)?.timbreSpace?.mixCharacter;
+      if (options.styleId) {
+        const resolved = resolveStyle({ genreId: options.worldId, styleId: options.styleId });
+        styleMaster = {
+          pocket: resolved.sound.masterProfile?.pocket ?? 0.5,
+          lift: resolved.sound.masterProfile?.lift ?? 0.5,
+        };
+        if (mixCharacter) {
+          mixCharacter = {
+            ...mixCharacter,
+            dryness: Math.max(0, Math.min(1, mixCharacter.dryness + (styleMaster.pocket - 0.5) * 0.18)),
+            transientSnap: Math.max(0, Math.min(1, mixCharacter.transientSnap + (styleMaster.lift - 0.5) * 0.18)),
+          };
+        }
+      }
     } catch {
-      /* ignore */
+      mixCharacter = undefined;
     }
   }
 
@@ -234,7 +255,7 @@ export async function renderPerformanceToMp3(
     }
 
     const role = instDef?.acousticProfile?.role || 'comp';
-    const roleGain = getRoleGainLinear(role, options.styleId || 'default');
+    const roleGain = getRoleGainLinear(role, options.worldId || 'default', instrumentId);
     params.roleGain = roleGain;
 
     let trackMixVolume = 1.0;
@@ -390,10 +411,11 @@ export async function renderPerformanceToMp3(
             const hitGainMultiplier = rendered.gainMultiplier;
 
             const role = instDef?.acousticProfile?.role || 'comp';
-            const roleGain = params.roleGain ?? getRoleGainLinear(role, options.styleId || 'default');
-            const velScaled = Math.max(0.01, Math.min(1.0, event.note.vel / 127)) * hitGainMultiplier;
-            params.volume = Math.max(0.01, Math.min(35, velScaled * baseGain * roleGain * trackMixVolume));
-            params.articulation = rendered.articulationNorm;
+            const roleGain = params.roleGain ?? getRoleGainLinear(role, options.worldId || 'default', instrumentId);
+            // Track gain is static. Per-note dynamics belong to the voice, not the
+            // whole track; changing params.volume here used to pump every sounding
+            // voice whenever a new note arrived.
+            params.volume = Math.max(0.01, Math.min(35, baseGain * roleGain * trackMixVolume));
 
             // Prefer idle voice; if all busy, steal oldest
             const idleVoices = voices.filter(v => v.gate === 0);
@@ -418,7 +440,12 @@ export async function renderPerformanceToMp3(
             voice.frequencyHz = targetFreq;
             (voice as any).baseFrequencyHz = targetFreq;
             (voice as any).triggerSeq = ++eventSeq;
-            voice.velocity = velScaled;
+            voice.velocity = Math.max(0.01, Math.min(1.0, event.note.vel / 127)) * hitGainMultiplier;
+            voice.articulation = rendered.articulationNorm;
+            voice.bellowsDirectionCode = event.note.bellowsDirectionCode;
+            voice.bandoneonButtonId = event.note.bandoneonButtonId;
+            voice.bandoneonButtonIndex = event.note.bandoneonButtonIndex;
+            voice.bandoneonSideCode = event.note.bandoneonSideCode;
             voice.gate = 1;
 
             voice.action = rendered.action;
@@ -534,7 +561,8 @@ export async function renderPerformanceToMp3(
   }
 
   // Headroom trim across summed stems to maintain clean dynamic headroom
-  const headroomTrim = Math.min(1.0, 1.8 / Math.sqrt(Math.max(1, activeTrackIds.length)));
+  const styleLift = 0.94 + styleMaster.lift * 0.12;
+  const headroomTrim = Math.min(1.0, (1.8 / Math.sqrt(Math.max(1, activeTrackIds.length))) * styleLift);
   if (headroomTrim < 1.0) {
     for (let i = 0; i < totalSamples; i++) {
       drumBusL[i] *= headroomTrim;
@@ -631,31 +659,9 @@ export async function renderPerformanceToMp3(
     rightInt16[i] = Math.max(-32768, Math.min(32767, Math.round(rSample * 32767)));
   }
 
-  let EncoderCtor = Mp3EncoderClass;
+  const EncoderCtor = Mp3EncoderClass;
   if (typeof EncoderCtor !== 'function') {
-    try {
-      if (typeof process !== 'undefined' && typeof process.cwd === 'function') {
-        const fs = await import('fs');
-        const path = await import('path');
-        const candidatePaths = [
-          path.resolve('node_modules/@breezystack/lamejs/dist/lamejs.iife.js'),
-          path.resolve(process.cwd(), 'node_modules/@breezystack/lamejs/dist/lamejs.iife.js'),
-        ];
-        for (const p of candidatePaths) {
-          if (fs.existsSync(p)) {
-            const code = fs.readFileSync(p, 'utf8');
-            const fn = new Function(code + '; return (typeof lamejs !== "undefined" ? lamejs : this.lamejs);');
-            const res = fn();
-            if (res?.Mp3Encoder) {
-              EncoderCtor = res.Mp3Encoder;
-              break;
-            }
-          }
-        }
-      }
-    } catch {
-      /* ignore */
-    }
+    throw new Error('MP3 encoder is unavailable; @breezystack/lamejs did not expose Mp3Encoder');
   }
 
   const encoder = new EncoderCtor(2, sampleRate, 192);

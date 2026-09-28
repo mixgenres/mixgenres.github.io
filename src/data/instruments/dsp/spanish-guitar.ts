@@ -111,16 +111,12 @@ export const dspOverride: InstrumentDSPOverride = {
       ]
     },
     "tango": {
-      "excitationBias": 0,
-      "brightness": 0.97,
-      "damping": 0.04,
-      "attack": 1.0,
-      "articulation": [
-        "picado",
-        "ligado",
-        "pulgar-apoyando",
-        "rasgueado"
-      ]
+      "excitationBias": 0.05,
+      "brightness": 0.96,
+      "damping": 0.06,
+      "attack": 1.10,
+      "body": 1.05,
+      "articulation": ["marcato", "arrastre", "sincopa", "bordoneo", "picado", "golpe"]
     },
     "bossa-nova": {
       "excitationBias": 0,

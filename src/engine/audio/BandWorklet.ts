@@ -306,7 +306,7 @@ export class BandWorkletNode {
           if (dialect.bendGlideMs !== undefined) params.bendGlideMs = dialect.bendGlideMs;
         }
         const role = instDef?.acousticProfile?.role || 'comp';
-        params.roleGain = getRoleGainLinear(role, this.activeStyleId || 'default');
+        params.roleGain = getRoleGainLinear(role, this.activeWorldId || 'default', instrumentId);
         this.trackParamsMap.set(trackId, params);
 
         const voiceCount = getPolyphonyForTrack(instrumentId);
@@ -469,12 +469,16 @@ export class BandWorkletNode {
     const rendered = resolveRenderGesture(instrumentId, event.gestureCode ?? 0);
     const hitGainMultiplier = rendered.gainMultiplier;
 
-    const roleGain = (event as any).roleGain ?? params.roleGain ?? getRoleGainLinear(instDef?.acousticProfile?.role || 'comp', this.activeStyleId || 'default');
-    const velScaled = Math.max(0.01, Math.min(1.0, (event.velocity ?? 90) / 127)) * hitGainMultiplier;
-    params.volume = Math.max(0.01, Math.min(35, velScaled * baseGain * roleGain));
+    // Normalize event performance controls once per note. Keep velocity in the
+    // renderer's canonical 0..1 range and fold gesture gain into the note-local
+    // excitation rather than changing the track's static volume.
+    const velRaw = Number.isFinite(event.velocity) ? event.velocity! : 102;
+    const velScaled = Math.max(0, Math.min(1, (velRaw / 127) * hitGainMultiplier));
+    const articulationNorm = Math.max(0, Math.min(1, rendered.articulationNorm));
 
-    const articulationNorm = rendered.articulationNorm;
-    params.articulation = articulationNorm;
+    const roleGain = (event as any).roleGain ?? params.roleGain ?? getRoleGainLinear(instDef?.acousticProfile?.role || 'comp', this.activeWorldId || 'default', instrumentId);
+    // Keep track gain stable; note velocity/articulation are voice-local.
+    params.volume = Math.max(0.01, Math.min(35, baseGain * roleGain));
 
     let voices = this.trackVoicesMap.get(trackId);
     if (!voices) {
@@ -510,6 +514,8 @@ export class BandWorkletNode {
 
     const voice = voices[bestVIdx];
     voice.note = noteMidi;
+    (voice as any).noteInstanceId = (event as any).noteInstanceId;
+    (voice as any).noteInstanceId = (event as any).noteInstanceId;
     const targetFreq = Math.max(20, event.frequencyHz ?? midiToFreq(noteMidi));
     voice.frequencyHz = targetFreq;
     (voice as any).baseFrequencyHz = targetFreq;
@@ -518,7 +524,11 @@ export class BandWorkletNode {
     voice.gate = 1;
 
     voice.action = rendered.action;
+    voice.articulation = rendered.articulationNorm;
     voice.bellowsDirectionCode = event.bellowsDirectionCode;
+    voice.bandoneonButtonId = (event as any).bandoneonButtonId;
+    voice.bandoneonButtonIndex = (event as any).bandoneonButtonIndex;
+    voice.bandoneonSideCode = (event as any).bandoneonSideCode;
     voice.action = rendered.action;
     voice.excitationType = rendered.excitationType || params.excitationType;
 
@@ -550,20 +560,21 @@ export class BandWorkletNode {
     this.queueParamUpdate(`track_${trackId}_vol`, params.volume);
   }
 
-  postRelease(trackId: string, midi: number, atTime?: number) {
+  postRelease(trackId: string, midi: number, atTime?: number, noteInstanceId?: string) {
     this.schedule(() => {
-      this.executeNoteOff(trackId, midi);
+      this.executeNoteOff(trackId, midi, noteInstanceId);
     }, atTime);
   }
 
-  private executeNoteOff(trackId: string, midi: number) {
+  private executeNoteOff(trackId: string, midi: number, noteInstanceId?: string) {
     const voices = this.trackVoicesMap.get(trackId);
     if (!voices) return;
 
     const roundedMidi = Math.round(midi);
     for (let vIdx = 0; vIdx < voices.length; vIdx++) {
       const v = voices[vIdx];
-      if ((v.note === midi || Math.round(v.note) === roundedMidi) && v.gate === 1) {
+      const idMatches = noteInstanceId ? String((v as any).noteInstanceId ?? '') === noteInstanceId : true;
+      if (idMatches && (v.note === midi || Math.round(v.note) === roundedMidi) && v.gate === 1) {
         v.gate = 0;
         if ((v as any).baseFrequencyHz) {
           v.frequencyHz = (v as any).baseFrequencyHz;

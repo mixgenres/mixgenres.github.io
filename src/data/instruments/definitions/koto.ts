@@ -11,7 +11,7 @@ export const koto: InstrumentDef = {
   elementaryModel: 0,
   makeupGain: 24.021,
   polyphony: 4,
-  note: "Standard Koto timbre (GM Program 107)",
+  note: "Standard concert koto voicing",
   acousticProfile: {
     sustain: "decaying",
     role: "lead",

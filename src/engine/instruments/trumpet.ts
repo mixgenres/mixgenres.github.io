@@ -36,8 +36,8 @@ export default class TrumpetModule implements InstrumentModule {
     const isDoit = action === 'doit' || action === 'rip' || action === 'rip-up' || /doit|rip|pitch-env-up/i.test(action ?? '');
     const isGrowl = action === 'growl' || /growl|throat-growl/i.test(action ?? '');
     const isShake = action === 'shake' || /shake|lip-trill/i.test(action ?? '');
-    const isSlur = action === 'legato' || action === 'slur' || action === 'lip_slur' || (params.articulation < 0.25 && action !== 'staccato');
-    const isStaccato = action === 'staccato' || action === 'tongue' || action === 'accent' || params.articulation > 0.65;
+    const isSlur = action === 'legato' || action === 'slur' || action === 'lip_slur' || (ctx.articulation < 0.25 && action !== 'staccato');
+    const isStaccato = action === 'staccato' || action === 'tongue' || action === 'accent' || ctx.articulation > 0.65;
 
     // 2. Pitch Dynamics & Gesture Shaping
     // Attack scoop on unslurred notes

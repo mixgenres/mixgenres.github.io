@@ -1,4 +1,4 @@
-import { Song, Region, Track, Measure, SectionType, PatternVariant, MusicalPattern, SpotlightMode, SectionEnergy, GuestLens } from '../../types';
+import type { Song, Region, Track, Measure, SectionType, PatternVariant, MusicalPattern, SpotlightMode, SectionEnergy, GuestLens } from '../../types';
 import { GENRE_WORLDS_BY_ID, ALL_PATTERNS, PATTERNS_BY_ID, PATTERNS_BY_WORLD } from '../../data/genres';
 import { INSTRUMENTS_BY_ID, INSTRUMENT_CATALOG, instrument, instrumentPatternKinds } from '../../data/instruments';
 import { sliceBarNative } from '../sequencing/grid';
@@ -6,7 +6,7 @@ import { progressionForSection, buildArrangementContext, ArrangementContext } fr
 import { inferKey, parseChord, assertValidChordProgression, SHARP_NAMES } from '../theory/theory';
 import { voiceProfile } from '../theory/instrumentProfile';
 import { resolveStyle, StyleRuntime, StyleInfluence, SongStyle, getCanonicalStyle, getStyle } from '../../data/styles';
-import type { ApproachSpec } from '../../data/styles/contracts';
+import { contractForGenre, type ApproachSpec } from '../../data/styles/contracts';
 import { suggestedPaletteForGenre } from '../../data/chordPalette';
 import { clampEnergy, energyForFormIntensity, energyOf, formIntensityForEnergy, shapeScalarOf } from '../metadata/energy';
 
@@ -244,9 +244,6 @@ export function roleForInstrument(instrumentId: string): string {
   if (def.voicing === 'bass' || /tuba|sousaphone|bassoon|baritone-sax|bass-clarinet|contrabass/i.test(instrumentId)) return 'bass';
   if (def.voicing === 'unpitched') return 'percussion';
   // Keep the composition role vocabulary aligned with instrumentProfile.
-  // The old implementation called every pitched single-line instrument
-  // "melody", which meant styles asking for a `lead` spotlight never found
-  // their saxophone/trumpet/flute/solo-string player.
   if (/voice|choir|coro/i.test(instrumentId) || /voice|choir/i.test(def.family ?? '')) return 'voice';
   if (def.voicing === 'single') {
     const role = voiceProfile(instrumentId).role;
@@ -254,6 +251,23 @@ export function roleForInstrument(instrumentId: string): string {
   }
   return 'harmony';
 }
+
+function calibratedTrackVolume(genreId: string, instrumentId: string, role: string): number {
+  const forward = contractForGenre(genreId).timbreSpace.mixCharacter?.bassForward ?? 0.5;
+  const acoustic = !/electronic|house|disco|drum-and-bass|industrial|uk-bass|reggaeton/.test(genreId);
+  if (role === 'bass') {
+    if (acoustic) return forward < 0.5 ? 0.62 : forward < 0.68 ? 0.68 : forward < 0.78 ? 0.76 : 0.84;
+    return forward < 0.78 ? 0.82 : 0.92;
+  }
+  if (instrumentId === 'piano') return 0.76;
+  if (instrumentId === 'bandoneon') return 0.82;
+  if (instrumentId === 'cello') return 0.78;
+  if (instrumentId === 'violin') return 0.86;
+  if (role === 'percussion') return 0.80;
+  if (role === 'lead' || role === 'melody' || role === 'voice') return 0.90;
+  return 0.82;
+}
+
 
 /**
  * How well a pattern belongs to a style.
@@ -357,11 +371,9 @@ export function affinity(
   const daring = Math.max(0, Math.min(1, adventure));
   let score = p.worldId === worldId ? 50 : -30 + daring * 50;
 
-  const behavioralFit = approachFit(p, approachForVoice(voice, worldId, styleId));
   if (vocalMismatch) score -= 50;
-  if (explicitMismatch && !p.canCrossRole && behavioralFit < 12) score -= 40;
+  if (explicitMismatch) score -= p.canCrossRole ? 85 : 140;
   if (instrumentMatch) score += 30;
-  else if (explicitMismatch) score -= 25;
   if (roleMatch) score += 14;
   else if (p.roles.length) score -= 10;
 
@@ -614,7 +626,7 @@ export function suggestPattern(
         else if (p.supportedEnergy?.length) n -= 6;
       } else if (want && p.supportedEnergy?.includes(want)) n += 2;
       if (sectionKind && ['verse', 'pre-chorus', 'bridge'].includes(sectionKind) && ['fill', 'cadence', 'sectionPattern'].includes(p.category)) n -= 12;
-      if (taken?.has(p.id)) n -= 6;
+      if (taken?.has(p.id)) n -= 75;
       return { id: p.id, n: n + hash(`${p.id}:${sectionKind ?? 'body'}`, salt) * 3 };
     })
     .sort((a, b) => b.n - a.n);
@@ -1925,7 +1937,11 @@ export function makeSheet(
   const sectionProgressions = (resolved.harmony?.sectionProgressions as Record<string, string[]>) ?? {};
   const regions: Region[] = form.map((f, i) => {
     const fallback = chordCells[i % Math.max(1, chordCells.length)] ?? chords;
-    const picked = progressionForSection(sectionProgressions, f.key, f.kind, fallback, resolved.contract);
+    const pickedRaw = progressionForSection(sectionProgressions, f.key, f.kind, fallback, resolved.contract);
+    // Section templates describe harmonic function, not an automatic key change.
+    // Keep the whole song in the first section's tonic unless the user explicitly
+    // changes the song key elsewhere.
+    const picked = chordTemplateInKey(pickedRaw, chords[0]);
     const energy = energyForFormIntensity(f.intensity);
     return {
       id: `r${i}`, name: f.label, kind: f.kind, formKey: f.key, formLabel: f.label,
@@ -1942,15 +1958,14 @@ export function makeSheet(
   const stylePalette = runtime.getInstrumentPalette();
   const ensembleIds = (resolved.arrangement?.ensemble ?? [])
     .flatMap(e => e.instrumentIds ?? []);
-  // The style's instrument palette is the authored band. Do not pad a five-piece
-  // cumbia, kizomba or reggaeton into an eight-piece generic jam merely because
-  // the engine has eight track slots. Ensemble entries are additions only when
-  // the palette is genuinely short. This keeps the generated personnel musical
-  // and leaves unused voices available to the user rather than pretending they
-  // belong in the arrangement.
+  // The style's instrument palette is the authored band. The default song
+  // constructor below intentionally starts with a compact five-piece ensemble;
+  // this is only a starter-song presentation choice. The engine itself has no
+  // maximum instrument count, and user-added voices are preserved everywhere
+  // after construction.
   const candidates = [...stylePalette, ...ensembleIds]
     .filter((id, i, arr) => INSTRUMENTS_BY_ID[id] && arr.indexOf(id) === i);
-  const targetCount = Math.min(8, Math.max(4, stylePalette.length || candidates.length));
+  const targetCount = Math.min(5, Math.max(4, stylePalette.length || candidates.length));
   const hints = candidates.slice(0, targetCount);
 
   const tracks: Voice[] = hints.map((instrumentId, i) => {
@@ -1958,7 +1973,7 @@ export function makeSheet(
     return {
       id: `v${i}`, instrumentId, name: def.name, instrument: def.name,
       role: roleForInstrument(instrumentId), kind: instrumentId as any,
-      muted: false, volume: 0.85, lensIds: [], spotlight: 'auto',
+      muted: false, volume: calibratedTrackVolume(genreId, instrumentId, roleForInstrument(instrumentId)), lensIds: [], spotlight: 'auto',
     };
   });
 

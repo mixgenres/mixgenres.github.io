@@ -1,6 +1,6 @@
 import type { WorldContract } from '../../data/styles/contracts';
 
-import { Region } from '../../types';
+import type { Region } from '../../types';
 import { Voice } from './arrange';
 import { VoiceProfile } from '../theory/instrumentProfile';
 import type { SectionEnergy, SpotlightMode } from '../../types';

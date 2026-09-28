@@ -1,4 +1,5 @@
 export class StereoFieldManager {
+  /** Returns a conventional Web Audio StereoPanner value (-1..1). */
   public resolveInstrumentPan(instrument: string): number {
     const panMap: Record<string, number> = {
       bass: 0.0,
@@ -20,5 +21,10 @@ export class StereoFieldManager {
       if (key.includes(k)) return v;
     }
     return panMap[instrument] || 0.0;
+  }
+
+  /** Returns the engine's normalized pan convention (0 = left, 0.5 = center, 1 = right). */
+  public resolveInstrumentPanNormalized(instrument: string): number {
+    return Math.max(0, Math.min(1, (this.resolveInstrumentPan(instrument) + 1) * 0.5));
   }
 }

@@ -32,7 +32,7 @@ export default class OrganModule implements InstrumentModule {
     const amMod = el.add(el.const({ value: 0.82 }), el.mul(el.const({ value: 0.18 }), rotaryLfo));
     const leslieTone = el.mul(amMod, dopplerDelay);
 
-    const isBubble = action === 'bubble' || action === 'staccato' || params.articulation > 0.7;
+    const isBubble = action === 'bubble' || action === 'staccato' || ctx.articulation > 0.7;
     const organEnv = el.adsr(0.003, isBubble ? 0.08 : 0.02, isBubble ? 0.0 : 0.95, isBubble ? 0.06 : 0.04, gateSignal);
     
     return el.mul(organEnv, el.lowpass(Math.min(19000, (isBubble ? 2800 : 4800) + b * 5500), 0.9, leslieTone));

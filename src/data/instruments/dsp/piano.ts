@@ -180,16 +180,12 @@ export const dspOverride: InstrumentDSPOverride = {
       ]
     },
     "tango": {
-      "excitationBias": 0,
-      "brightness": 0.97,
-      "damping": 0.04,
-      "attack": 1.0,
-      "articulation": [
-        "sustain pedal resonance",
-        "octave octave bass coupling",
-        "syncopated salsa montuno two-hand interlocking",
-        "golpe de cluster palm slap"
-      ]
+      "excitationBias": 0.06,
+      "brightness": 1.00,
+      "damping": 0.015,
+      "attack": 1.14,
+      "body": 1.12,
+      "articulation": ["marcato", "arrastre", "yumba", "chapa", "campanitas", "sincopa", "bordoneo"]
     }
   },
   "physicalDetails": {

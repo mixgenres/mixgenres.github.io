@@ -12,7 +12,7 @@ export const sitar: InstrumentDef = {
   elementaryModel: 0,
   makeupGain: 5.760,
   polyphony: 4,
-  note: "Standard Sitar timbre (GM Program 104)",
+  note: "Standard concert sitar voicing",
   acousticProfile: {
     sustain: "decaying",
     role: "lead",

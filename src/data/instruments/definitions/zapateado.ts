@@ -42,7 +42,7 @@ export const zapateado: InstrumentDef = {
   kitComponents: [
     {
       id: "zapateado-tacon",
-      name: "Tacón (Heel Drop)",
+      name: "Tacon (Heel Drop)",
       midi: 36,
       physicalType: "wood",
       tuningHz: 110,

@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../types';
 
 export const cabasa: InstrumentDef = {
   id: "cabasa",
-  name: "Cabasa / Afoxé",
+  name: "Cabasa / Afoxe",
   family: "metal-and-wood",
   drum: {
     low: 69,

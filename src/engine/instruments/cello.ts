@@ -33,12 +33,15 @@ export default class CelloModule implements InstrumentModule {
     // 1. Articulation & Extended Technique Flags
     const isPizz = action === 'pluck' || action === 'pizzicato' || /pizz/i.test(action ?? '');
     const isTremolo = action === 'tremolo' || /tremolo/i.test(action ?? '');
-    const isStaccato = action === 'staccato' || action === 'spiccato' || action === 'martele' || action === 'accent' || params.articulation > 0.65;
+    const isStaccato = action === 'staccato' || action === 'spiccato' || action === 'martele' || action === 'accent' || ctx.articulation > 0.65;
     const isSulPonticello = action === 'sul-ponticello' || /ponticello/i.test(action ?? '');
     const isSulTasto = action === 'sul-tasto' || /tasto|flautando/i.test(action ?? '');
     const isLegato = action === 'legato' || action === 'slur';
     const isArrastre = action === 'arrastre' || /arrastre|drag/i.test(action ?? '');
     const isChicharra = action === 'chicharra' || /chicharra/i.test(action ?? '');
+    const isTango = /tango|milonga|vals/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isYumba = action === 'yumba' || /yumba/i.test(action ?? '');
+    const isMarcato = action === 'marcato' || /marcato|marked/i.test(action ?? '');
 
     // 2. Special Extended Techniques (Chicharra Scrape)
     if (isChicharra) {
@@ -59,7 +62,7 @@ export default class CelloModule implements InstrumentModule {
     // Arrastre drag scoop
     const arrastreEnv = el.adsr(0.001, 0.090, 0, 0.01, gateSignal);
     const arrastrePitchMod = isArrastre
-      ? el.sub(1.0, el.mul(el.const({ value: 0.14 }), arrastreEnv))
+      ? el.sub(1.0, el.mul(el.const({ value: isTango ? 0.17 : 0.14 }), arrastreEnv))
       : el.const({ value: 1.0 });
 
     const settledFreq = el.mul(safeFreqSignal, el.mul(el.add(1.0, intonationOffset), arrastrePitchMod));
@@ -71,7 +74,7 @@ export default class CelloModule implements InstrumentModule {
     const vibratoLfo = el.cycle(dynamicVibSpeed);
     
     const wantsVib = !isPizz && !isStaccato && !isArrastre;
-    const vibratoOnset = el.adsr(isLegato ? 0.15 : 0.32, 0.12, 1.0, 0.08, gateSignal);
+    const vibratoOnset = el.adsr(isLegato ? 0.15 : (isTango ? 0.40 : 0.32), 0.12, 1.0, 0.08, gateSignal);
     const vibratoDepth = wantsVib
       ? el.mul(el.const({ value: 0.018 * (params.resonance + 0.35) }), vibratoOnset)
       : el.const({ value: 0 });
@@ -139,11 +142,21 @@ export default class CelloModule implements InstrumentModule {
     // Attack bow-catch heavy "crunch" transient
     const bowCatchEnv = el.adsr(0.0004, 0.016, 0, 0.005, gateSignal);
     const bowCatch = el.mul(
-      el.mul(el.const({ value: 0.20 * (isStaccato ? 1.8 : 1.0) }), bowCatchEnv),
+      el.mul(el.const({ value: 0.20 * (isStaccato ? 1.8 : 1.0) * (isTango ? 1.14 : 1.0) }), bowCatchEnv),
       el.highpass(1200, 1.4, el.noise())
     );
 
-    const excited = el.add(coreOsc, el.add(frictionNoise, el.add(sympatheticSum, bowCatch)));
+    // Tango cello supplies the lower-register drag/weight of the ensemble.
+    // Yumba uses a short low-register bow-pressure burst rather than a generic
+    // sustained pad, so it locks to the piano/bass rhythmic punctuation.
+    const tangoWeight = isTango
+      ? el.mul(0.10, el.svf({ mode: 'bandpass' }, 110, 2.8, coreOsc))
+      : el.const({ value: 0 });
+    const yumbaPulse = (isTango && (isYumba || isMarcato))
+      ? el.mul(0.18, el.mul(el.cycle(82), el.adsr(0.001, 0.055, 0, 0.012, gateSignal)))
+      : el.const({ value: 0 });
+
+    const excited = el.add(coreOsc, el.add(tangoWeight, el.add(frictionNoise, el.add(sympatheticSum, el.add(bowCatch, yumbaPulse)))));
     
     // Non-linear slip-stick saturation
     const stickSlip = el.tanh(el.mul(el.add(1.0, el.mul(bowForce, 2.5)), excited));

@@ -45,6 +45,9 @@ export default class SpanishGuitarModule implements InstrumentModule {
     const isTremolo = action === 'tremolo' || /tremolo/i.test(action ?? '');
     const isHarmonic = action === 'harmonic' || /harmonic/i.test(action ?? '');
     const isLegato = action === 'legato' || action === 'slur' || action === 'hammer-on' || action === 'pull-off';
+    const isTango = /tango|milonga|vals/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isMarcato = action === 'marcato' || /marcato|marked/i.test(action ?? '');
+    const isArrastre = action === 'arrastre' || /arrastre|drag/i.test(action ?? '');
 
     // 3. Vibrato Dynamics
     const baseVibSpeed = 5.8 + randNorm(noteSeed ^ 0x33) * 0.15;
@@ -55,14 +58,26 @@ export default class SpanishGuitarModule implements InstrumentModule {
       : el.const({ value: 0 });
     
     const pitchRatio = isHarmonic ? 2.0 : 1.0;
+    const arrastreEnv = el.adsr(0.001, 0.055, 0, 0.008, gateSignal);
+    const arrastreRatio = isArrastre ? el.sub(1.0, el.mul(0.075, arrastreEnv)) : el.const({ value: 1.0 });
     const baseFreq = el.mul(safeFreqSignal, el.const({ value: pitchRatio }));
-    const vibratingFreq = el.mul(baseFreq, el.add(1.0, el.mul(vibratoDepth, vibLfo)));
+    const vibratingFreq = el.mul(baseFreq, el.mul(arrastreRatio, el.add(1.0, el.mul(vibratoDepth, vibLfo))));
 
     // 4. Nail & Multi-Finger Excitation Impulse Generator
     const broadbandPluck = el.lowpass(el.mul(vibratingFreq, 4.2), 0.9, el.pinknoise());
     let impulse: any;
 
-    if (isRasgueado) {
+    if (isTango && (isMarcato || isArrastre) && !isRasgueado) {
+      // Tango guitar accompaniment is tighter and more percussive than flamenco
+      // rasgueado: a short chord attack with a small downbeat body thump.
+      const chordEnv = el.adsr(0.00025, isArrastre ? 0.010 : 0.006, 0, 0.003, gateSignal);
+      const chordNoise = el.add(
+        el.mul(0.72, broadbandPluck),
+        el.mul(0.28, el.svf({ mode: 'bandpass' }, 1700, 1.8, el.noise()))
+      );
+      const bodyPulse = el.mul(el.cycle(110), el.adsr(0.0004, 0.025, 0, 0.008, gateSignal));
+      impulse = el.add(el.mul(chordNoise, chordEnv), el.mul(0.16, bodyPulse));
+    } else if (isRasgueado) {
       // 5-stroke fan burst (little, ring, middle, index, thumb) spread across ~32ms
       const bursts = Array.from({ length: 5 }, (_, i) =>
         el.adsr(0.0002 + i * 0.0035, 0.005, 0, 0.002, gateSignal)
@@ -110,7 +125,7 @@ export default class SpanishGuitarModule implements InstrumentModule {
     );
 
     // Shorter, crisper decay typical of flamenco cypress guitars
-    const targetDecaySeconds = isMuted ? 0.09 : (isHarmonic ? 1.9 : (0.32 + decayTime * (0.55 + b * 1.3)));
+    const targetDecaySeconds = isMuted ? 0.09 : (isHarmonic ? 1.9 : (isTango ? 0.24 + decayTime * (0.48 + b * 0.9) : (0.32 + decayTime * (0.55 + b * 1.3))));
     const d1 = fbGainForDecay(vibratingFreq, targetDecaySeconds);
 
     // Nylon string inharmonicity
@@ -142,7 +157,7 @@ export default class SpanishGuitarModule implements InstrumentModule {
     const fretBuzz = el.mul(0.06, el.mul(el.highpass(2800, 1.2, el.noise()), fretEnv));
 
     const finalAcoustic = el.add(bodyOut, fretBuzz);
-    const filterCutoff = Math.min(19000, isMuted ? 1300 : (1000 + b * 6800));
+    const filterCutoff = Math.min(19000, isMuted ? 1300 : (isTango ? 5200 + b * 5200 : (1000 + b * 6800)));
     return el.lowpass(filterCutoff, 1.05, finalAcoustic);
   }
 }

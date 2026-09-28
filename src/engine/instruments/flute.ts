@@ -37,8 +37,8 @@ export default class FluteModule implements InstrumentModule {
     );
     const jetInput = el.add(el.mul(exciterEnv, coreTone), breath);
 
-    const isSlur = action === 'legato' || action === 'slur' || action === 'bow_drag' || (params.articulation < 0.25 && action !== 'staccato');
-    const isStaccato = action === 'staccato' || action === 'tongue' || action === 'accent' || params.articulation > 0.65;
+    const isSlur = action === 'legato' || action === 'slur' || action === 'bow_drag' || (ctx.articulation < 0.25 && action !== 'staccato');
+    const isStaccato = action === 'staccato' || action === 'tongue' || action === 'accent' || ctx.articulation > 0.65;
     const tongueLevel = isSlur ? 0.03 : (isStaccato ? 0.55 : 0.25);
 
     const profile = getFormantProfileForInstrument(params.instrumentId ?? '', 7);

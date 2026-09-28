@@ -1,4 +1,4 @@
-import { GenreWorld } from '../../types';
+import type { GenreWorld } from '../../types';
 
 /* transitionType: "drop-out" is handled by the contract seam grammar */
 export const ELECTRONIC_WORLD: GenreWorld = {

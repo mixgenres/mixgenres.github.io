@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../types';
 
 export const bombo_leguero: InstrumentDef = {
   id: "bombo-leguero",
-  name: "Bombo legüero",
+  name: "Bombo leguero",
   family: "hand-drums",
   drum: {
     low: 35,

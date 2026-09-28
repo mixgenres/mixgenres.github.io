@@ -92,6 +92,14 @@ export const dspOverride: InstrumentDSPOverride = {
     "noteTransition": "slide"
   },
   "genreDialects": {
+    "nuevo-tango": {
+      "excitationBias": 0.06, "brightness": 0.98, "damping": 0.025, "attack": 1.10, "body": 1.08,
+      "articulation": ["marcato", "arrastre", "slide", "legato", "clean-chord"]
+    },
+    "tango": {
+      "excitationBias": 0.03, "brightness": 0.98, "damping": 0.02, "attack": 1.06, "body": 1.04,
+      "articulation": ["marcato", "arrastre", "slide", "clean-chord"]
+    },
     "rock": {
       "excitationBias": 0.04,
       "brightness": 1.04,

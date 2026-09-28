@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../types';
 
 export const agogo: InstrumentDef = {
   id: "agogo",
-  name: "Agogô bells",
+  name: "Agogo bells",
   family: "metal-and-wood",
   drum: {
     low: 68,

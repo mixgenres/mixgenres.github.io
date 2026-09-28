@@ -173,7 +173,7 @@ export const dspOverride: InstrumentDSPOverride = {
       "opening": "Abrir: singing, lower pressure gradient, softer onset, slight chamber warmth (-2.4 cents sag on forte)",
       "closing": "Cerrar: sharp attack, compressed chamber, bright high-order harmonics (+2.1 cents push)",
       "kneeDropImpact": true,
-      "dryReedBanks": "8-foot fundamental + 4-foot octave; dry tuning without musette detuning"
+      "dryReedBanks": "two-chörig octave register (16-foot + 8-foot relative to written pitch); dry tuning without musette beating"
     }
   },
   "physicalDetails": {
@@ -186,7 +186,7 @@ export const dspOverride: InstrumentDSPOverride = {
       "Knee-drop marcato transient surge"
     ],
     "coupling": [
-      "8-foot and 4-foot inter-reed acoustic coupling",
+      "16-foot and 8-foot inter-reed acoustic coupling",
       "Reed-plate to hardwood block resonance transfer",
       "Bellows air reservoir compliance",
       "Acoustic wooden case radiation"
@@ -198,7 +198,7 @@ export const dspOverride: InstrumentDSPOverride = {
       "Knee-drop transient pulse"
     ],
     "detail": [
-      "Dry 8' and 4' paired reed voices provide characteristic biting Argentine tango color",
+      "Dry 16' and 8' octave-paired reed voices provide characteristic biting Argentine tango color",
       "Zero musette beating gives pure harmonic punch",
       "Nonlinear pressure curve produces soaring harmonic brilliance under fortissimo"
     ],

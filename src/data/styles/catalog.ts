@@ -1,5 +1,5 @@
-import { SongStyle } from './schema';
-import { MusicalPattern } from '../../types';
+import type { SongStyle } from './schema';
+import type { MusicalPattern } from '../../types';
 import { GENRE_NAMES, GENRE_SOURCE_MAP } from '../genres';
 
 /** Exactly the supported public genre leaves. */
@@ -80,7 +80,7 @@ function shortText(value: string): string {
   return String(value ?? '').replace(/\s+/g, ' ').trim().split(' ').slice(0, 6).join(' ');
 }
 
-function cloneStyle(base: SongStyle, genreId: string, name: string, id: string): SongStyle {
+function materializeStyle(base: SongStyle, genreId: string, name: string, id: string): SongStyle {
   const style: SongStyle = JSON.parse(JSON.stringify(base));
   style.id = id;
   style.name = name;
@@ -92,7 +92,6 @@ function cloneStyle(base: SongStyle, genreId: string, name: string, id: string):
   style.aliases = [];
   style.summary = base.summary || shortText(`${name} ${GENRE_NAMES[genreId]}`);
   style.signatureTraits = Array.from(new Set([...(base.signatureTraits ?? []), name, GENRE_NAMES[genreId]])).slice(0, 8);
-  style.authoringNotes = 'Genre contract plus style-specific dialect; not a cloned runtime world.';
 
   // Style names are musical sub-worlds, not UI labels. Apply a small, explicit
   // semantic dialect layer so sibling styles do not collapse to identical
@@ -214,7 +213,7 @@ export function buildCuratedStyles(baseStyles: SongStyle[], _patterns: MusicalPa
       const requestedSourceName = SOURCE_STYLE_OVERRIDES[genreId]?.[name];
       const base = candidates.find(s => s.name.toLowerCase() === String(requestedSourceName ?? name).toLowerCase())
         ?? candidates[index % candidates.length];
-      const style = cloneStyle(base, genreId, name, `${genreId}-${slug(name)}`);
+      const style = materializeStyle(base, genreId, name, `${genreId}-${slug(name)}`);
       style.canonical = index === 0;
       style.summary = base.summary || shortText(`${name} ${GENRE_NAMES[genreId]}`);
       result.push(style);

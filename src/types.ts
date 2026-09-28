@@ -256,7 +256,7 @@ export interface MusicalPattern {
   category: PatternCategory;
   description: string;
   tags: string[];
-  /** Optional explicit behavioral vocabulary; tags remain the legacy fallback. */
+  /** Optional explicit behavioral vocabulary; tags remain the compatibility fallback. */
   approaches?: string[];
   scopes: Scope[];
   

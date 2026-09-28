@@ -1,163 +1,124 @@
 import type { InstrumentDSPOverride } from '../physicalDspProfile';
 
-/** Deep physical profile override for Halo pad. Generated from this instrument's luthierPhysics, techniques, playingStyles and acoustic role; not a generic family alias. */
+/** Authentic halo-pad physical DSP override. */
 export const dspOverride: InstrumentDSPOverride = {
   "instrumentCharacter": {
-    "energySource": "electronic",
-    "energyPath": "oscillator/filter/body",
-    "bodyArchitecture": "instrument-specific chamber",
-    "primaryCollision": "circuit/switch/filter edge",
-    "asymmetries": [],
-    "couplingPaths": [],
+    "energySource": "spectral oscillator cloud",
+    "energyPath": "partial bank/filter/reverb",
+    "bodyArchitecture": "diffuse electronic pad",
+    "primaryCollision": "soft spectral onset",
+    "asymmetries": [
+      "partial detune",
+      "long release"
+    ],
+    "couplingPaths": [
+      "partial bank-filter"
+    ],
     "techniqueBindings": [
-      "pitch-shifted shimmer reverb send",
-      "additive upper partials",
-      "slow envelope dynamic breathing",
-      "diffuse stereo spread"
+      "swell",
+      "sustain",
+      "fade"
     ]
   },
   "excitationDynamics": {
-    "hardness": 0.16,
-    "pressureSensitivity": 0.54,
-    "nonlinearDrive": 0.069,
-    "attackCollision": 0.48,
-    "spectralSpread": 0.55,
-    "directionalAsymmetry": 0.12
+    "hardness": 0.1,
+    "pressureSensitivity": 0.16,
+    "nonlinearDrive": 0.03,
+    "attackCollision": 0.05,
+    "spectralSpread": 0.52,
+    "directionalAsymmetry": 0.28
   },
   "coupledResonators": {
     "bodyModes": [
       {
-        "ratio": 1.0,
+        "ratio": 1,
+        "q": 2.2,
+        "gain": 0.1
+      },
+      {
+        "ratio": 1.41,
         "q": 2.0,
-        "gain": 0.138
+        "gain": 0.06
       },
       {
-        "ratio": 2.0,
-        "q": 2.45,
-        "gain": 0.109
-      },
-      {
-        "ratio": 3.0,
-        "q": 2.9,
-        "gain": 0.099
+        "ratio": 2.37,
+        "q": 1.8,
+        "gain": 0.04
       }
     ]
   },
   "mechanicalArtifacts": {
-  "airHiss": 0,
-  "keyThud": 0,
-  "valveClick": 0,
-  "fretBuzz": 0,
-  "stringSqueak": 0,
-  "pickZing": 0,
-  "handContact": 0,
-  "bodyKnock": 0,
-  "rimImpact": 0,
-  "bellowsNoise": 0,
-  "damperNoise": 0.02,
-  "palletClick": 0,
-  "slideNoise": 0,
-  "reedChatter": 0,
-  "bellowsFold": 0,
-  "bowRosin": 0,
-  "hammerClick": 0,
-  "pedalNoise": 0,
-  "membraneFingerNoise": 0,
-  "seedRattle": 0,
-  "fippleNoise": 0,
-  "muteContact": 0,
-  "breathBurst": 0,
-  "keyworkClick": 0
-},
+    "airHiss": 0,
+    "keyThud": 0,
+    "valveClick": 0,
+    "fretBuzz": 0,
+    "stringSqueak": 0,
+    "pickZing": 0,
+    "handContact": 0,
+    "bodyKnock": 0,
+    "rimImpact": 0,
+    "bellowsNoise": 0,
+    "damperNoise": 0,
+    "palletClick": 0,
+    "slideNoise": 0,
+    "reedChatter": 0,
+    "bellowsFold": 0,
+    "bowRosin": 0,
+    "hammerClick": 0,
+    "pedalNoise": 0,
+    "membraneFingerNoise": 0,
+    "seedRattle": 0,
+    "fippleNoise": 0,
+    "muteContact": 0,
+    "breathBurst": 0,
+    "keyworkClick": 0
+  },
   "articulationPhysics": {
     "strikeZoneLocation": "none",
     "fleshVsNail": 0,
     "handDamping": 0,
-    "attackToPitchCoupling": 0.228,
-    "releaseCoupling": 0.18,
-    "continuousSustain": false,
-    "noteTransition": "retrigger"
+    "attackToPitchCoupling": 0.2,
+    "releaseCoupling": 0.3,
+    "continuousSustain": true,
+    "noteTransition": "legato"
   },
   "genreDialects": {
-    "ambient": {
+    "electronic": {
       "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
+      "brightness": 0.82,
+      "damping": 0.1,
+      "attack": 0.48,
       "articulation": [
-        "pitch-shifted shimmer reverb send",
-        "additive upper partials",
-        "slow envelope dynamic breathing",
-        "diffuse stereo spread"
-      ]
-    },
-    "cinematic": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "pitch-shifted shimmer reverb send",
-        "additive upper partials",
-        "slow envelope dynamic breathing",
-        "diffuse stereo spread"
-      ]
-    },
-    "new-age": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "pitch-shifted shimmer reverb send",
-        "additive upper partials",
-        "slow envelope dynamic breathing",
-        "diffuse stereo spread"
-      ]
-    },
-    "soundtrack": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "pitch-shifted shimmer reverb send",
-        "additive upper partials",
-        "slow envelope dynamic breathing",
-        "diffuse stereo spread"
+        "swell",
+        "sustain",
+        "fade"
       ]
     }
   },
   "physicalDetails": {
-  "system": "electronic-signal-chain",
-  "construction": "electronic oscillator/filter/effect path",
-  "exciter": "electronic source",
-  "asymmetries": [
-    "filter trajectory",
-    "envelope/gate",
-    "drive state",
-    "effect feedback"
-  ],
-  "coupling": [
-    "oscillator-filter",
-    "filter-feedback",
-    "effect loop"
-  ],
-  "artifactSources": [
-    "switch/drive transients",
-    "quantization/aliasing where intentional"
-  ],
-  "detail": [
-    "electronic identity should not be forced into acoustic physics",
-    "timbral motion comes from signal-path state",
-    "effects are part of the instrument definition"
-  ],
-  "response": {
-    "contactHardness": 0.408,
-    "resonatorQ": 0.98,
-    "nonlinearTransfer": 0.294,
-    "inharmonicity": 0.055,
-    "bodyCoupling": 0.98
+    "system": "spectral-pad",
+    "construction": "layered partial bank with diffuse filtering",
+    "exciter": "detuned partial oscillators",
+    "asymmetries": [
+      "partial spacing",
+      "release length"
+    ],
+    "coupling": [
+      "partial bank",
+      "filter"
+    ],
+    "artifactSources": [
+      "slow beating"
+    ],
+    "detail": [
+      "upper partials are intentionally sparse"
+    ],
+    "response": {
+      "contactHardness": 0.1,
+      "resonatorQ": 0.34,
+      "nonlinearTransfer": 0.03,
+      "inharmonicity": 0.02,
+      "bodyCoupling": 0.02
+    }
   }
-}
-} as InstrumentDSPOverride;
+};

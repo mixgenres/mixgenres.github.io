@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../types';
 
 export const bata: InstrumentDef = {
   id: "bata",
-  name: "Afro-Cuban Batá Drum Trio",
+  name: "Afro-Cuban Bata Drum Trio",
   family: "hand-drums",
   drum: {
     low: 60,
@@ -39,7 +39,7 @@ export const bata: InstrumentDef = {
   kitComponents: [
     {
       id: "iya-enu",
-      name: "Iyá Enú (Large Bass Head)",
+      name: "Iya Enu (Large Bass Head)",
       midi: 60,
       physicalType: "membrane",
       tuningHz: 115,
@@ -52,7 +52,7 @@ export const bata: InstrumentDef = {
     },
     {
       id: "iya-chacha",
-      name: "Iyá Chachá (Small Treble Head)",
+      name: "Iya Chacha (Small Treble Head)",
       midi: 64,
       physicalType: "membrane",
       tuningHz: 310,
@@ -64,7 +64,7 @@ export const bata: InstrumentDef = {
     },
     {
       id: "itotele-enu",
-      name: "Itótele Enú (Mid Drum Bass Head)",
+      name: "Itotele Enu (Mid Drum Bass Head)",
       midi: 62,
       physicalType: "membrane",
       tuningHz: 160,
@@ -75,7 +75,7 @@ export const bata: InstrumentDef = {
     },
     {
       id: "okonkolo-chacha",
-      name: "Okónkolo Chachá (High Ostinato Head)",
+      name: "Okonkolo Chacha (High Ostinato Head)",
       midi: 65,
       physicalType: "membrane",
       tuningHz: 420,

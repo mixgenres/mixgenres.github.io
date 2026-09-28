@@ -1,4 +1,4 @@
-import { ResolvedStyle } from '../../data/styles/schema';
+import type { ResolvedStyle } from '../../data/styles/schema';
 import { contractForGenre } from '../../data/styles/contracts';
 export type SwingUnit = 8 | 16;
 

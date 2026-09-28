@@ -1,5 +1,6 @@
 import type { VoiceState, TrackParams } from '../elementary/elementaryEngine';
 import type { InstrumentDSPProfile } from '../../data/instruments/physicalDspProfile';
+import type { GenreDialect } from './genreDialect';
 
 export interface VoiceRenderContext {
   trackId: string;
@@ -7,6 +8,7 @@ export interface VoiceRenderContext {
   voice: VoiceState;
   params: TrackParams;
   dspProfile?: InstrumentDSPProfile;
+  genreDialect: GenreDialect;
   pk: string;
   freq: number;
   gateSignal: any;
@@ -18,6 +20,7 @@ export interface VoiceRenderContext {
   decayTime: number;
   model: number;
   action: string;
+  articulation: number;
   isMuted: boolean;
   env: any;
   isDecayingInstrument: boolean;

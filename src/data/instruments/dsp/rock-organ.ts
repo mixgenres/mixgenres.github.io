@@ -1,152 +1,134 @@
 import type { InstrumentDSPOverride } from '../physicalDspProfile';
 
-/** Deep physical profile override for Rock organ. Generated from this instrument's luthierPhysics, techniques, playingStyles and acoustic role; not a generic family alias. */
+/** Authentic electromechanical rock-organ profile. */
 export const dspOverride: InstrumentDSPOverride = {
   "instrumentCharacter": {
-    "energySource": "hammer",
-    "energyPath": "key/reed/string",
-    "bodyArchitecture": "instrument-specific chamber",
-    "primaryCollision": "mechanical key/hammer",
-    "asymmetries": [],
-    "couplingPaths": [],
+    "energySource": "electromagnetic tonewheel",
+    "energyPath": "tonewheel/pickup/keying/speaker",
+    "bodyArchitecture": "tonewheel organ through rotary speaker",
+    "primaryCollision": "keying click and rotary onset",
+    "asymmetries": [
+      "drawbar registration",
+      "rotor acceleration",
+      "speaker breakup"
+    ],
+    "couplingPaths": [
+      "tonewheel-pickup",
+      "amp-speaker",
+      "rotor-air"
+    ],
     "techniqueBindings": [
-      "velocity-shaped attack",
-      "fingered chord voicing",
-      "register coupling"
+      "percussive key click",
+      "drawbar registration",
+      "rotary swell",
+      "palm smear"
     ]
   },
   "excitationDynamics": {
-    "hardness": 0.64,
-    "pressureSensitivity": 0.69,
-    "nonlinearDrive": 0.155,
-    "attackCollision": 0.71,
-    "spectralSpread": 0.661,
-    "directionalAsymmetry": 0.12
+    "hardness": 0.34,
+    "pressureSensitivity": 0.22,
+    "nonlinearDrive": 0.28,
+    "attackCollision": 0.18,
+    "spectralSpread": 0.72,
+    "directionalAsymmetry": 0.34
   },
   "coupledResonators": {
     "bodyModes": [
       {
-        "ratio": 0.68,
-        "q": 2.0,
-        "gain": 0.165
+        "ratio": 1,
+        "q": 2.6,
+        "gain": 0.14
       },
       {
-        "ratio": 1.0,
-        "q": 2.45,
-        "gain": 0.123
+        "ratio": 2,
+        "q": 2.1,
+        "gain": 0.08
       },
       {
-        "ratio": 1.73,
-        "q": 2.9,
-        "gain": 0.108
-      },
-      {
-        "ratio": 2.91,
-        "q": 3.35,
-        "gain": 0.101
+        "ratio": 3,
+        "q": 1.8,
+        "gain": 0.05
       }
     ]
   },
   "mechanicalArtifacts": {
-  "airHiss": 0.05,
-  "keyThud": 0,
-  "valveClick": 0,
-  "fretBuzz": 0,
-  "stringSqueak": 0,
-  "pickZing": 0,
-  "handContact": 0,
-  "bodyKnock": 0,
-  "rimImpact": 0,
-  "bellowsNoise": 0,
-  "damperNoise": 0,
-  "palletClick": 0,
-  "slideNoise": 0,
-  "reedChatter": 0,
-  "bellowsFold": 0,
-  "bowRosin": 0,
-  "hammerClick": 0,
-  "pedalNoise": 0.06,
-  "membraneFingerNoise": 0,
-  "seedRattle": 0,
-  "fippleNoise": 0,
-  "muteContact": 0,
-  "breathBurst": 0,
-  "keyworkClick": 0.1
-},
+    "airHiss": 0,
+    "keyThud": 0,
+    "valveClick": 0,
+    "fretBuzz": 0,
+    "stringSqueak": 0,
+    "pickZing": 0,
+    "handContact": 0,
+    "bodyKnock": 0,
+    "rimImpact": 0,
+    "bellowsNoise": 0,
+    "damperNoise": 0,
+    "palletClick": 0,
+    "slideNoise": 0,
+    "reedChatter": 0,
+    "bellowsFold": 0,
+    "bowRosin": 0,
+    "hammerClick": 0,
+    "pedalNoise": 0,
+    "membraneFingerNoise": 0,
+    "seedRattle": 0,
+    "fippleNoise": 0,
+    "muteContact": 0,
+    "breathBurst": 0,
+    "keyworkClick": 0
+  },
   "articulationPhysics": {
     "strikeZoneLocation": "none",
     "fleshVsNail": 0,
     "handDamping": 0,
-    "attackToPitchCoupling": 0.228,
-    "releaseCoupling": 0.18,
-    "continuousSustain": false,
-    "noteTransition": "retrigger"
+    "attackToPitchCoupling": 0.2,
+    "releaseCoupling": 0.3,
+    "continuousSustain": true,
+    "noteTransition": "legato"
   },
   "genreDialects": {
-    "folk": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
+    "rock": {
+      "excitationBias": 0.08,
+      "brightness": 1.08,
+      "damping": -0.01,
+      "attack": 1.1,
       "articulation": [
-        "velocity-shaped attack",
-        "fingered chord voicing",
-        "register coupling"
-      ]
-    },
-    "pop": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "velocity-shaped attack",
-        "fingered chord voicing",
-        "register coupling"
-      ]
-    },
-    "world": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "velocity-shaped attack",
-        "fingered chord voicing",
-        "register coupling"
+        "percussive key click",
+        "drawbar registration",
+        "rotary swell",
+        "palm smear"
       ]
     }
   },
   "physicalDetails": {
-  "system": "continuous-air-reed-pipe-bank",
-  "construction": "air reservoir/wind chamber feeding resonant pipes or reeds",
-  "exciter": "continuous air pressure",
-  "asymmetries": [
-    "pressure",
-    "register drawbars/stops",
-    "key/pallet opening"
-  ],
-  "coupling": [
-    "common wind pressure",
-    "multiple resonators",
-    "cabinet"
-  ],
-  "artifactSources": [
-    "key/pallet click",
-    "wind noise",
-    "valve leakage"
-  ],
-  "detail": [
-    "sustained source is wind pressure",
-    "registers alter pipe/reed populations",
-    "note onset is valve/pallet plus resonator settling"
-  ],
-  "response": {
-    "contactHardness": 0.478,
-    "resonatorQ": 0.98,
-    "nonlinearTransfer": 0.243,
-    "inharmonicity": 0.073,
-    "bodyCoupling": 0.98
+    "system": "electromechanical-tonewheel",
+    "construction": "tonewheel generator, magnetic pickup, amplifier and rotary speaker",
+    "exciter": "electromagnetic tonewheel",
+    "asymmetries": [
+      "drawbar harmonic mix",
+      "rotor speed",
+      "speaker breakup"
+    ],
+    "coupling": [
+      "tonewheel-pickup",
+      "amp-speaker",
+      "rotor"
+    ],
+    "artifactSources": [
+      "key click",
+      "rotor modulation",
+      "speaker grit"
+    ],
+    "detail": [
+      "rotary speed changes amplitude and phase",
+      "drawbars select harmonic partials"
+    ],
+    "response": {
+      "contactHardness": 0.34,
+      "resonatorQ": 0.42,
+      "nonlinearTransfer": 0.28,
+      "inharmonicity": 0.0,
+      "bodyCoupling": 0.35
+    }
   }
-}
-} as InstrumentDSPOverride;
+};

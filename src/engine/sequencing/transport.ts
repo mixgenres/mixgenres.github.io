@@ -12,23 +12,12 @@ const TICK_MS = 25;
 function createSchedulerWorker(): Worker | null {
   try {
     if (typeof window === 'undefined' || typeof Worker === 'undefined') return null;
-    const code = `
-      let timer = null;
-      self.onmessage = function(e) {
-        if (e.data === 'start') {
-          if (!timer) {
-            timer = setInterval(() => self.postMessage('tick'), 25);
-          }
-        } else if (e.data === 'stop') {
-          if (timer) {
-            clearInterval(timer);
-            timer = null;
-          }
-        }
-      };
-    `;
-    const blob = new Blob([code], { type: 'application/javascript' });
-    return new Worker(URL.createObjectURL(blob));
+
+    // Use a Vite-managed module worker instead of a Blob URL. Blob workers are
+    // commonly rejected by CSP in hosted environments (including AI Studio).
+    return new Worker(new URL('./schedulerWorker.ts', import.meta.url), {
+      type: 'module',
+    });
   } catch {
     return null;
   }
@@ -36,8 +25,8 @@ function createSchedulerWorker(): Worker | null {
 
 export interface TransportSink {
   now(): number;
-  noteOn(trackId: string | number, midi: number, vel: number, time: number, gestureCode?: number, frequencyHz?: number, bellowsDirectionCode?: 1 | 2): void;
-  noteOff(trackId: string | number, midi: number, time: number): void;
+  noteOn(trackId: string | number, midi: number, vel: number, time: number, gestureCode?: number, frequencyHz?: number, bellowsDirectionCode?: 1 | 2, bandoneonButtonId?: string, bandoneonButtonIndex?: number, bandoneonSideCode?: 1 | 2, noteInstanceId?: string): void;
+  noteOff(trackId: string | number, midi: number, time: number, noteInstanceId?: string): void;
   pitchBend(trackId: string | number, value: number, time: number, targetMidi?: number): void;
   controlChange(trackId: string | number, cc: number, value: number, time: number): void;
   setDrumChannel(trackId: string | number, isDrum: boolean): void;
@@ -93,6 +82,17 @@ export class Transport {
       this.worker.onmessage = () => {
         this.workerTicked = true;
         if (this.running) this.tick();
+      };
+      this.worker.onerror = () => {
+        // A worker can be constructed successfully but fail when the browser
+        // attempts to load/execute its module (CSP, MIME, deployment path,
+        // cross-origin hosting, etc.). Fall back immediately rather than
+        // waiting for the liveness timeout.
+        this.worker?.terminate();
+        this.worker = null;
+        if (this.running && this.fallbackTimer === null) {
+          this.fallbackTimer = window.setInterval(() => this.tick(), TICK_MS);
+        }
       };
     }
   }
@@ -330,8 +330,9 @@ export class Transport {
         this.sink.pitchBend(n.trackId, point.value, bendAt, midi);
       }
     }
-    this.sink.noteOn(n.trackId, midi, vel, targetOn, n.gestureCode, n.frequencyHz, n.bellowsDirectionCode);
-    this.sink.noteOff(n.trackId, midi, targetOff);
+    const noteInstanceId = `${String(n.trackId)}:${this.noteCursor}:${Math.round(at * 1000)}`;
+    this.sink.noteOn(n.trackId, midi, vel, targetOn, n.gestureCode, n.frequencyHz, n.bellowsDirectionCode, n.bandoneonButtonId, n.bandoneonButtonIndex, n.bandoneonSideCode, noteInstanceId);
+    this.sink.noteOff(n.trackId, midi, targetOff, noteInstanceId);
     if (n.pitchBend?.length) this.sink.pitchBend(n.trackId, 8192, targetOff, midi);
   }
 }

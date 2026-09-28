@@ -1,5 +1,5 @@
 import { Sheet } from '../generators/arrange';
-import { Region } from '../../types';
+import type { Region } from '../../types';
 import { PATTERNS_BY_ID } from '../../data/genres';
 import { VoiceProfile } from '../theory/instrumentProfile';
 import { beatsPerBarOf, culturalCyclePosition, type TransitionEvent } from './grid';
@@ -40,6 +40,12 @@ export interface PerfNote {
   accent: number;
   /** Precompiled bellows movement: 1 opening, 2 closing. */
   bellowsDirectionCode?: 1 | 2;
+  /** Physical Rheinische 142 button selected by the compiler (e.g. 1/1, 0/0, *). */
+  bandoneonButtonId?: string;
+  /** Stable 0..70 physical button index in the compiled Rheinische map. */
+  bandoneonButtonIndex?: number;
+  /** 1 = right/treble manual, 2 = left/bass manual. */
+  bandoneonSideCode?: 1 | 2;
   /** 0 = authored rhythm attack, 1 = compiler-derived phrase fill/ornament. */
   originCode?: 0 | 1;
 }

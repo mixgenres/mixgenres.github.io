@@ -1,5 +1,5 @@
-import { GenreWorld } from '../../types';
-import { SamplerTimbreControl } from '../../engine/theory/physicsInterfaces';
+import type { GenreWorld } from '../../types';
+import type { SamplerTimbreControl } from '../../engine/theory/physicsInterfaces';
 
 export const REGGAETON_DEMBOW_WORLD: GenreWorld = {
   "id": "reggaeton-dembow",

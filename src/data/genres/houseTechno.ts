@@ -1,4 +1,4 @@
-import { GenreWorld } from '../../types';
+import type { GenreWorld } from '../../types';
 
 export const HOUSE_TECHNO_WORLD: GenreWorld = {
   "id": "house-techno",

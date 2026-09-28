@@ -3,6 +3,7 @@ import type { VoiceState, TrackParams } from '../elementary/elementaryEngine';
 import { midiToFreq } from '../elementary/elementaryEngine';
 import { INSTRUMENTS_BY_ID } from '../../data/instruments';
 import type { InstrumentDSPProfile } from '../../data/instruments/physicalDspProfile';
+import { getGenreDialect } from './genreDialect';
 import type { VoiceRenderContext, InstrumentModule } from './types';
 import AccordionModule from './accordion';
 import BandoneonModule from './bandoneon';
@@ -17,6 +18,7 @@ import SlowStringsModule from './slow-strings';
 import TremoloStringsModule from './tremolo-strings';
 import PizzStringsModule from './pizz-strings';
 import GuitarModule from './guitar';
+import BanjoModule from './banjo';
 import ElectricGuitarModule from './electric-guitar';
 import ClavinetModule from './clavinet';
 import HarpsichordModule from './harpsichord';
@@ -29,9 +31,11 @@ import CastanetsModule from './castanets';
 import DrumsModule from './drums';
 import ShakerModule from './shaker';
 import CowbellModule from './cowbell';
-import FluteModule from './flute';
-import TrumpetModule from './trumpet';
 import SaxModule from './sax';
+import WindModule from './wind';
+import BrassModule from './brass';
+import FreeReedModule from './free-reed';
+import PipesModule from './pipes';
 import PianoModule from './piano';
 import RhodesModule from './rhodes';
 import OrganModule from './organ';
@@ -55,14 +59,29 @@ export function buildVoiceContext(
   const freqSignal = el.smooth(el.tau2pole(glideSec), el.const({ key: `${pk}_freq`, value: freq }));
   const safeFreqSignal = el.max(el.const({ value: 20 }), freqSignal);
   const velBoost = 0.55 + 0.6 * Math.max(0, Math.min(1, voice.velocity ?? 0));
-  const b = Math.max(0, Math.min(1, params.brightness * velBoost));
-  const rawDecayTime = Math.max(0.05, params.decay);
+  const genreDialect = getGenreDialect(params);
+  const b = Math.max(0, Math.min(1, params.brightness * velBoost * genreDialect.brightness));
+  const rawDecayTime = Math.max(0.05, params.decay * genreDialect.decay);
   const muteDamping = Math.max(0.08, 1 - 0.88 * params.mute);
   const decayTime = rawDecayTime * muteDamping;
   const model = params.performanceMode === 'programmed-electronic' ? 9 : Math.round(params.model);
   const instrumentDef = params.instrumentId ? INSTRUMENTS_BY_ID[params.instrumentId] : undefined;
   const dspProfile: InstrumentDSPProfile | undefined = instrumentDef?.dspProfile;
-  const action = voice.action ?? (params.bodyTap > 0.5 ? 'golpe' : 'pluck');
+  // A missing gesture must follow the instrument's energy source. Falling back to
+  // `pluck` made bowed voices (especially direct/offline renders) enter their
+  // pizzicato path even though their authored default excitation is bowing.
+  const family = instrumentDef?.family;
+  const defaultAction =
+    params.bodyTap > 0.5 ? 'golpe'
+      : family === 'bowed' ? 'arco'
+      : family === 'bellows-and-keys' && /accordion|bandoneon|concertina|harmonium|organ/i.test(params.instrumentId ?? '') ? 'legato'
+      : family === 'winds' || family === 'brass' || family === 'free-reed' ? 'legato'
+      : family === 'voice' ? 'legato'
+      : family === 'plucked' || family === 'plucked-string' ? 'pluck'
+      : family === 'hand-drums' || family === 'kit' || family === 'metal-and-wood' || family === 'body-percussion' ? 'tone'
+      : 'tone';
+  const action = voice.action ?? defaultAction;
+  const articulation = voice.articulation ?? params.articulation;
   const isMuted = action === 'mute' || params.mute > 0.4;
 
   // Decaying instruments (Karplus-Strong loops, bells, drums) must not be choked by ADSR
@@ -70,9 +89,9 @@ export function buildVoiceContext(
     model === 5 || model === 8 || model === 11 || model === 17 || model === 18 || model === 19 ||
     model === 20 || (model >= 21 && model <= 26);
 
-  const attack = voice.attack !== undefined ? voice.attack : (isDecayingInstrument ? 0.0004 : (0.0008 + (1 - b) * 0.01));
-  const release = voice.release !== undefined ? voice.release : (isMuted ? 0.012 : (isDecayingInstrument ? 0.045 : 0.06 + decayTime * 0.15));
-  const sustain = voice.sustain !== undefined ? voice.sustain : (isDecayingInstrument ? 1.0 : (isMuted ? 0.05 : 0.75 + 0.15 * params.body));
+  const attack = voice.attack !== undefined ? voice.attack : (isDecayingInstrument ? 0.0004 * genreDialect.attack : (0.0008 + (1 - b) * 0.01) * genreDialect.attack);
+  const release = voice.release !== undefined ? voice.release : (isMuted ? 0.012 : (isDecayingInstrument ? 0.045 * genreDialect.decay : (0.06 + decayTime * 0.15) * genreDialect.decay));
+  const sustain = voice.sustain !== undefined ? voice.sustain : (isDecayingInstrument ? 1.0 : (isMuted ? 0.05 : 0.75 + 0.15 * params.body * genreDialect.body));
   const envDecay = voice.decay !== undefined ? voice.decay : (isDecayingInstrument ? 12.0 : (decayTime * (isMuted ? 0.1 : 0.4)));
 
   const attackSignal = el.const({ key: `${pk}_attack`, value: attack });
@@ -90,6 +109,7 @@ export function buildVoiceContext(
     voice,
     params,
     dspProfile,
+    genreDialect,
     pk,
     freq,
     gateSignal,
@@ -101,6 +121,7 @@ export function buildVoiceContext(
     decayTime,
     model,
     action,
+    articulation,
     isMuted,
     env,
     isDecayingInstrument,
@@ -128,11 +149,14 @@ const tremoloStringsModule = new TremoloStringsModule();
 const pizzStringsModule = new PizzStringsModule();
 const bassModule = new UprightBassModule();
 const guitarModule = new GuitarModule();
+const banjoModule = new BanjoModule();
 const electricGuitarModule = new ElectricGuitarModule();
 const drumsModule = new DrumsModule();
-const fluteModule = new FluteModule();
-const trumpetModule = new TrumpetModule();
 const saxModule = new SaxModule();
+const windModule = new WindModule();
+const brassModule = new BrassModule();
+const freeReedModule = new FreeReedModule();
+const pipesModule = new PipesModule();
 const pianoModule = new PianoModule();
 const rhodesModule = new RhodesModule();
 const organModule = new OrganModule();
@@ -160,10 +184,10 @@ const registry: Record<string, InstrumentModule> = {
   'accordion': accordionModule,
   'bandoneon': bandoneonModule,
   'concertina': concertinaModule,
-  'harmonica': bellowsModule,
+  'harmonica': freeReedModule,
+  'melodica': freeReedModule,
+  'sho': freeReedModule,
   'harmonium': bellowsModule,
-  'melodica': bellowsModule,
-  'shō': bellowsModule,
 
   // Bowed Strings
   'violin': violinModule,
@@ -187,8 +211,6 @@ const registry: Record<string, InstrumentModule> = {
   'sub-bass': bassModule,
   'bass-lead': bassModule,
   'guitarron': bassModule,
-  'tuba': bassModule,
-  'bassoon': bassModule,
 
   // Plucked & Strung
   'guitar': guitarModule,
@@ -207,7 +229,7 @@ const registry: Record<string, InstrumentModule> = {
   'harp': guitarModule,
   'celtic-harp': guitarModule,
   'orchestral-harp': guitarModule,
-  'banjo': guitarModule,
+  'banjo': banjoModule,
   'mandolin': guitarModule,
   'shamisen': guitarModule,
   'kora': guitarModule,
@@ -244,36 +266,38 @@ const registry: Record<string, InstrumentModule> = {
   'backing-vocals': voiceModule,
 
   // Winds
-  'flute': fluteModule,
-  'piccolo': fluteModule,
-  'tin-whistle': fluteModule,
-  'low-whistle': fluteModule,
-  'quena': fluteModule,
-  'pan-flute': fluteModule,
-  'shakuhachi': fluteModule,
-  'xiao': fluteModule,
-  'dizi': fluteModule,
-  'ryuteki': fluteModule,
-  'hichiriki': fluteModule,
-  'recorder': fluteModule,
-  'ocarina': fluteModule,
   'soprano-sax': saxModule,
   'alto-sax': saxModule,
   'tenor-sax': saxModule,
   'bari-sax': saxModule,
-  'oboe': saxModule,
-  'english-horn': saxModule,
-  'clarinet': saxModule,
-  'bagpipes': saxModule,
-  'uilleann-pipes': saxModule,
+  'oboe': windModule,
+  'english-horn': windModule,
+  'clarinet': windModule,
+  'bassoon': windModule,
+  'flute': windModule,
+  'piccolo': windModule,
+  'tin-whistle': windModule,
+  'low-whistle': windModule,
+  'quena': windModule,
+  'pan-flute': windModule,
+  'shakuhachi': windModule,
+  'xiao': windModule,
+  'dizi': windModule,
+  'ryuteki': windModule,
+  'hichiriki': windModule,
+  'recorder': windModule,
+  'ocarina': windModule,
+  'bagpipes': pipesModule,
+  'uilleann-pipes': pipesModule,
 
   // Brass
-  'trumpet': trumpetModule,
-  'muted-trumpet': trumpetModule,
-  'trombone': trumpetModule,
-  'horn-section': trumpetModule,
-  'brass': trumpetModule,
-  'french-horn': trumpetModule,
+  'trumpet': brassModule,
+  'muted-trumpet': brassModule,
+  'trombone': brassModule,
+  'horn-section': brassModule,
+  'brass': brassModule,
+  'french-horn': brassModule,
+  'tuba': brassModule,
 
   // Percussion - Shakers & Scrapers
   'shaker': shakerModule,
@@ -368,5 +392,7 @@ const registry: Record<string, InstrumentModule> = {
  * Returns the physical instrument module for a registered catalog instrument ID.
  */
 export function getInstrumentModule(instrumentId: string): InstrumentModule {
-  return registry[instrumentId] ?? synthModule;
+  const module = registry[instrumentId];
+  if (!module) throw new Error(`No physical instrument module registered for ${instrumentId}`);
+  return module;
 }

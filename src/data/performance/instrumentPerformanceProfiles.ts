@@ -59,6 +59,12 @@ export interface InstrumentPerformanceProfile {
   gestures: Record<string, GestureSpec>;
   genreProfiles: Record<string, GenrePerformanceProfile>;
   adaptationOrder: string[];
+  scope: {
+    roles: string[];
+    primaryGenres: string[];
+    authoredTechniqueCount: number;
+    hasPhysicalModel: boolean;
+  };
   evidence: {
     physical: EvidenceLevel;
     range: EvidenceLevel;
@@ -97,6 +103,13 @@ function roleOf(d: InstrumentDef): string {
 function rangeOf(d: InstrumentDef) {
   const r = d.tuningAndMechanics?.keyRange;
   if (r) return [r.lowMidi, r.highMidi] as const;
+  // AcousticProfile is authoritative when an instrument does not expose a
+  // mechanical/tuning keyRange. Do not invent a ±30-semitone range around
+  // centre: bass instruments in particular may legitimately live far below it.
+  const acoustic = d.acousticProfile;
+  if (acoustic && Number.isFinite(acoustic.low) && Number.isFinite(acoustic.high)) {
+    return [Math.max(0, acoustic.low), Math.min(127, acoustic.high)] as const;
+  }
   if (d.drum?.low !== undefined) return [Math.max(0,d.drum.low-12), Math.min(127,d.drum.high+12)] as const;
   const center = Math.round((d.acousticProfile?.centre ?? 60));
   const low = Math.max(0, center - (d.family === 'winds' || d.family === 'brass' ? 24 : 30));
@@ -323,6 +336,12 @@ export const INSTRUMENT_PERFORMANCE_PROFILES: Record<string, InstrumentPerforman
       gestures,
       genreProfiles: genres,
       adaptationOrder,
+      scope: {
+        roles: Array.from(new Set(Object.values(genres).flatMap(g => g.roles))),
+        primaryGenres: primaries,
+        authoredTechniqueCount: d.techniques.articulations.length,
+        hasPhysicalModel: Boolean(d.dspProfile || d.physicalModel || d.luthierPhysics),
+      },
       evidence: {
         physical: d.dspProfile || d.physicalModel || d.luthierPhysics ? 'authored' : 'missing',
         range: d.tuningAndMechanics?.keyRange || (d.acousticProfile?.low !== undefined && d.acousticProfile?.high !== undefined) ? 'authored' : 'derived',

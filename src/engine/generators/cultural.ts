@@ -38,7 +38,7 @@ export function culturalRules(style: ResolvedStyle, _instrumentId?: string): Cul
 
 export function previewCulturalRules(instrumentId: string): CulturalRules | undefined {
   const modal = ['guqin','guzheng','pipa','erhu','dizi','xiao','jinghu','bagpipes','uilleann-pipes','tin-whistle','low-whistle','celtic-harp','fiddle','concertina','bodhran','bones'].includes(instrumentId);
-  const fixed = ['shō','ryuteki','hichiriki'].includes(instrumentId);
+  const fixed = ['sho','ryuteki','hichiriki'].includes(instrumentId);
   if (!modal && !fixed) return undefined;
   return {
     styleId: `preview-${instrumentId}`,
@@ -91,7 +91,6 @@ export function culturalPitchSet(rules: CulturalRules, tonicPc: number): number[
 }
 
 /**
- * Approximate the fixed shō sonority without asking the Western chord voicer for a triad/seventh chord.
  * This is intentionally a close cluster, not a claim that 12-TET reproduces an actual aitake tuning.
  */
 export function shoCluster(tonicPc: number, profile: VoiceProfile, intensity: number): number[] {

@@ -35,6 +35,8 @@ export interface NativeSlice {
   stepsPerBar: number;
   /** fractional percentage (0..1) of the bar where each onset occurs */
   fractionalPositions: number[];
+  /** Whether durations came from authored pattern data rather than the default one-step fill. */
+  durationsAuthored: boolean;
 }
 
 export function sliceBarNative(
@@ -69,7 +71,7 @@ export function sliceBarNative(
     keepH.push(hitTypes?.[i] ?? '');
   });
 
-  return { onsets: keepO, accents: keepA, durations: keepD, microtiming: keepM, hitTypes: keepH, stepsPerBar, fractionalPositions: keepF };
+  return { onsets: keepO, accents: keepA, durations: keepD, microtiming: keepM, hitTypes: keepH, stepsPerBar, fractionalPositions: keepF, durationsAuthored: durations !== undefined };
 }
 
 /** Quarter-note beats in one bar of the given time signature. */

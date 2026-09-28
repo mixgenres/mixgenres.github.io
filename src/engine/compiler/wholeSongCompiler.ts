@@ -3,6 +3,7 @@ import type { Sheet, Voice } from '../generators/arrange';
 import { PATTERNS_BY_ID } from '../../data/genres';
 import { INSTRUMENTS_BY_ID } from '../../data/instruments';
 import { getInstrumentPerformanceProfile, resolveGenreProfile } from '../../data/performance/instrumentPerformanceProfiles';
+import { getGenreTheory, styleTheoryFor, blendGenreTheory } from '../../data/musicTheory/genreTheory';
 import { getResolvedSectionStyle } from '../generators/arrange';
 import { parseChord } from '../theory/theory';
 import { foldToRange, noteLengthBeats, voiceProfile } from '../theory/instrumentProfile';
@@ -18,6 +19,8 @@ import {
   type PhraseState,
 } from '../performance/phrasePerformance';
 import { GESTURE_NAMES, GESTURE_CODES } from './gestureCodes';
+import { bandoneonCandidates, bandoneonPlayable, BANDONEON_142_BUTTONS } from '../../data/instruments/bandoneonKeyboard';
+import { optimizePerformanceByPhraseAndSong } from '../performance/phraseSongOptimizer';
 
 export { GESTURE_NAMES, GESTURE_CODES };
 
@@ -38,6 +41,8 @@ export interface RhythmOnset {
   sourceHit?: string;
   microtiming?: number;
   sourceGenre: string;
+  /** True when the pattern explicitly authored this onset duration. */
+  durationAuthored?: boolean;
 }
 
 export interface RhythmIdea {
@@ -131,13 +136,20 @@ function rhythmIdeaFromMeasure(detail: Measure['patternDetailsByTrack'][string] 
   if (!detail) return fallback;
   const p = PATTERNS_BY_ID[detail.patternId] ?? fallback.pattern;
   const steps = Math.max(1, Number((detail as any).perf?.stepsPerBar ?? p.subdivisions ?? fallback.subdivisions));
-  const onsets = (detail.onsetGrid ?? []).map((position: number, i: number) => ({
-    position: position / steps,
-    accent: clamp(Number(detail.accentProfile?.[i] ?? 0.72)),
-    duration: clamp(Number(detail.durationGrid?.[i] ?? 1) / steps * 4, 0.05, 2),
-    hit: hitFrom(p, i, (detail.hitTypes as any)?.[i]),
-    sourceHit: (detail.hitTypes as any)?.[i] ?? p.hitGrid?.[i],
-    microtiming: Number((detail as any).perf?.microtiming?.[i] ?? 0),
+  const perf = (detail as any).perf;
+  const nativeOnsets = Array.isArray(perf?.onsets) ? perf.onsets : [];
+  const nativeAccents = Array.isArray(perf?.accents) ? perf.accents : [];
+  const nativeDurations = Array.isArray(perf?.durations) ? perf.durations : [];
+  const nativeHitTypes = Array.isArray(perf?.hitTypes) ? perf.hitTypes : [];
+  const nativeSteps = Math.max(1, Number(perf?.stepsPerBar ?? p.subdivisions ?? fallback.subdivisions));
+  const onsets = nativeOnsets.map((position: number, i: number) => ({
+    position: position / nativeSteps,
+    accent: clamp(Number(nativeAccents[i] ?? detail.accentProfile?.[i] ?? 0.72)),
+    duration: clamp(Number(nativeDurations[i] ?? detail.durationGrid?.[i] ?? 1) / nativeSteps * 4, 0.05, 2),
+    durationAuthored: Boolean(perf?.durationsAuthored) || Array.isArray(detail.durationGrid),
+    hit: hitFrom(p, i, nativeHitTypes[i] ?? (detail.hitTypes as any)?.[i]),
+    sourceHit: nativeHitTypes[i] ?? (detail.hitTypes as any)?.[i] ?? p.hitGrid?.[i],
+    microtiming: Number(perf?.microtiming?.[i] ?? 0),
     sourceGenre: p.worldId ?? fallback.sourceGenre,
   }));
   return {
@@ -166,27 +178,30 @@ function buildSongPlan(sheet: Sheet, bars: BarTime[]): SongPlan {
     const r = sheet.regions.find(x => x.id === b.regionId)!;
     const style = getResolvedSectionStyle(sheet, styleRegion(r));
     const strict = Boolean(style?.contract?.groove?.name && /strict|quant/i.test(style.contract.groove.name));
-    const phrasePos = i % 4;
+    const cycle = Math.max(1, Number(style?.contract?.cycleLength ?? 1));
+    const phraseBars = Math.max(cycle, Number(style?.melody?.phraseLengthsBars?.find((x: number) => x % cycle === 0) ?? cycle));
+    const phrasePos = i % phraseBars;
     const phraseCurve = strict ? 0 : (phrasePos === 3 ? -0.025 : phrasePos === 0 ? 0.01 : 0);
     return { bar: i, bpm: Math.round(b.bpm * (1 + phraseCurve) * 1000) / 1000, reason: strict ? 'style-strict' : 'phrase-feel' };
   });
   const phraseBoundaries = Array.from(new Set([0, ...sheet.regions.flatMap(r => {
     const xs: number[] = [r.end];
-    for (let b = r.start + 4; b < r.end; b += 4) xs.push(b);
+    const style = getResolvedSectionStyle(sheet, styleRegion(r));
+    const cycle = Math.max(1, Number(style?.contract?.cycleLength ?? 1));
+    const phraseBars = Math.max(cycle, Number(style?.melody?.phraseLengthsBars?.find((x: number) => x % cycle === 0) ?? cycle));
+    for (let b = r.start + phraseBars; b < r.end; b += phraseBars) xs.push(b);
     return xs;
   })])).sort((a, b) => a - b);
   return { bars, phraseBoundaries, tempoMap, energy, sections };
 }
 
-function resolveLens(sheet: Sheet, region: Region, track: Voice, pattern: any): LensStack {
+function resolveLens(sheet: Sheet, region: Region, track: Voice): LensStack {
   const host = region.genre ?? sheet.worldId;
   const explicit: GuestLens | undefined = sheet.partLens?.[region.id]?.[track.id];
-  const inferredGenre = pattern?.worldId && pattern.worldId !== host ? pattern.worldId : host;
-  const source = explicit?.genreId ?? inferredGenre;
-  const weight = explicit ? clamp(explicit.weight) : source !== host ? 0.72 : 0;
+  const source = explicit?.genreId ?? host;
+  const weight = explicit ? clamp(explicit.weight) : 0;
   const provenance: string[] = [`host:${host}`];
   if (explicit) provenance.push(`part-lens:${source}:${weight.toFixed(3)}`);
-  if (!explicit && source !== host) provenance.push(`pattern-source:${pattern.id}`);
   return { hostGenre: host, sourceGenre: source, weight, provenance };
 }
 
@@ -197,13 +212,30 @@ function ownership(track: Voice, role: string, energy: number): BandPlan['lanes'
   return energy > 0.8 ? 'background' : 'answer';
 }
 
-function chooseRhythm(sheet: Sheet, region: Region, track: Voice): RhythmIdea {
+function chooseRhythm(sheet: Sheet, region: Region, track: Voice, style?: any): RhythmIdea {
   const measure = sheet.measures.find(x => x.regionId === region.id && (x.patternByTrack?.[track.id] || x.patternDetailsByTrack?.[track.id]));
   const pid = measure?.patternByTrack?.[track.id] ?? measure?.patternDetailsByTrack?.[track.id]?.patternId;
   if (pid && PATTERNS_BY_ID[pid]) return rhythmIdeaFromPattern(PATTERNS_BY_ID[pid], region.genre ?? sheet.worldId);
   const g = region.genre ?? sheet.worldId;
-  const candidates = Object.values(PATTERNS_BY_ID).filter(p => p.worldId === g && (!p.roles?.length || p.roles.includes(track.role) || p.roles.includes(voiceProfile(track.instrumentId).role)));
-  const p = candidates[0] ?? Object.values(PATTERNS_BY_ID)[0];
+  const role = voiceProfile(track.instrumentId).role;
+  const styleText = `${style?.id ?? ''} ${style?.name ?? ''} ${(style?.signatureCell ?? '')} ${(style?.rhythmicGrammar ?? []).join(' ')}`.toLowerCase();
+  const candidates = Object.values(PATTERNS_BY_ID).filter(p =>
+    p.worldId === g &&
+    (!p.roles?.length || p.roles.includes(track.role) || p.roles.includes(role) || p.canCrossRole)
+  );
+  const theory = getGenreTheory(g);
+  const score = (p: any) => {
+    const text = `${p.id ?? ''} ${p.name ?? ''} ${p.family ?? ''} ${(p.tags ?? []).join(' ')} ${(p.approaches ?? []).join(' ')} ${(p.authenticityTags ?? []).join(' ')}`.toLowerCase();
+    let v = 0;
+    if (p.worldId === g) v += 8;
+    if (p.styleIds?.some((id: string) => styleText.includes(id.toLowerCase()) || id.toLowerCase().includes(String(style?.id ?? '').toLowerCase()))) v += 7;
+    if (p.roles?.includes(track.role) || p.roles?.includes(role)) v += 6;
+    for (const sig of theory.rhythm.signature) if (text.includes(sig.toLowerCase().replace(/[^a-z0-9]+/g, ' '))) v += 2;
+    for (const tag of [theory.bass.style, theory.rhythm.subdivision + 'ths', ...theory.rhythm.signature]) if (text.includes(String(tag).toLowerCase())) v += 1;
+    if (styleText && styleText.split(/\s+/).some((w:string) => w.length > 4 && text.includes(w))) v += 1.5;
+    return v;
+  };
+  const p = candidates.sort((a,b) => score(b) - score(a) || a.id.localeCompare(b.id))[0] ?? Object.values(PATTERNS_BY_ID).sort((a,b)=>a.id.localeCompare(b.id))[0];
   if (!p) throw new Error('No rhythm definitions available');
   return rhythmIdeaFromPattern(p, g);
 }
@@ -309,12 +341,15 @@ function applyPhraseBandInteraction(
   style: any,
 ): void {
   const model = style?.contract?.interactionModel ?? 'interlock';
+  const theory = styleTheoryFor(style?.id, region.genre ?? sheet.worldId);
   const roles = new Map((sheet.tracks as Voice[]).map(t => [t.id, String(t.role ?? 'harmony').toLowerCase()]));
   const regionNotes = notes.filter(n => n.bar >= region.start && n.bar < region.end);
   if (!regionNotes.length) return;
 
-  for (let phraseStart = region.start; phraseStart < region.end; phraseStart += 4) {
-    const phraseEnd = Math.min(region.end, phraseStart + 4);
+  const cycle = Math.max(1, Number(style?.contract?.cycleLength ?? 1));
+  const phraseBars = Math.max(cycle, Number(style?.melody?.phraseLengthsBars?.find((x: number) => x % cycle === 0) ?? cycle));
+  for (let phraseStart = region.start; phraseStart < region.end; phraseStart += phraseBars) {
+    const phraseEnd = Math.min(region.end, phraseStart + phraseBars);
     const phrase = regionNotes.filter(n => n.bar >= phraseStart && n.bar < phraseEnd);
     if (!phrase.length) continue;
     const leads = phrase.filter(n => /lead|melody|voice/.test(roles.get(n.trackId) ?? ''));
@@ -324,20 +359,22 @@ function applyPhraseBandInteraction(
 
     for (const n of phrase) {
       const role = roles.get(n.trackId) ?? 'harmony';
+      const mixKey = /lead|melody|voice/.test(role) ? 'lead' : /bass/.test(role) ? 'bass' : /perc|drum/.test(role) ? 'percussion' : /pad/.test(role) ? 'pad' : /comp|harmony|piano|guitar/.test(role) ? 'harmony' : role;
+      const feature = theory.mixFocus[mixKey] ?? theory.mixFocus.melody ?? .5;
+      const featureGain = 0.93 + Math.max(0, Math.min(1, feature)) * 0.14;
       const leadOverlap = leads.some(x => near(n, x));
       const pulseOverlap = pulse.some(x => near(n, x));
       const harmonyOverlap = harmony.some(x => near(n, x));
 
+      n.vel = Math.max(1, Math.min(127, Math.round(n.vel * featureGain)));
       if (model === 'homophonic') {
         if (/harmony|comp|keyboard|guitar/.test(role) && leadOverlap) {
           n.vel = Math.max(1, Math.round(n.vel * 0.90));
-          n.dur *= 0.94;
         }
         if (/lead|melody|voice/.test(role) && harmonyOverlap) n.vel = Math.min(127, Math.round(n.vel * 1.025));
       } else if (model === 'interlock') {
         if (/harmony|comp|piano|guitar/.test(role) && pulseOverlap) {
           n.vel = Math.max(1, Math.round(n.vel * 0.92));
-          n.dur *= 0.90;
         }
         if (/bass|percussion|drum|pulse/.test(role) && harmonyOverlap) n.vel = Math.min(127, Math.round(n.vel * 1.025));
         if (/lead|melody|voice/.test(role) && pulseOverlap) n.vel = Math.min(127, Math.round(n.vel * 1.035));
@@ -347,7 +384,6 @@ function applyPhraseBandInteraction(
       } else if (model === 'counterpoint') {
         if (/lead|melody|voice/.test(role) && pulseOverlap) {
           n.vel = Math.min(127, Math.round(n.vel * 1.02));
-          n.dur *= 0.96;
         }
         if (/bass/.test(role) && leadOverlap) n.vel = Math.min(127, Math.round(n.vel * 1.015));
       }
@@ -372,8 +408,9 @@ export function compileWholeSong(sheet: Sheet, _seed = 0): Performance {
   for (const region of sheet.regions) {
     for (const track of sheet.tracks as Voice[]) {
       if (track.muted) continue;
-      const rhythm = chooseRhythm(sheet, region, track);
-      const lens = resolveLens(sheet, region, track, rhythm.pattern);
+      const preliminaryStyle = getResolvedSectionStyle(sheet, styleRegion(region));
+      const rhythm = chooseRhythm(sheet, region, track, preliminaryStyle);
+      const lens = resolveLens(sheet, region, track);
       const role = voiceProfile(track.instrumentId).role;
       const host = resolveGenreProfile(track.instrumentId, lens.hostGenre);
       const source = resolveGenreProfile(track.instrumentId, lens.sourceGenre);
@@ -405,8 +442,10 @@ export function compileWholeSong(sheet: Sheet, _seed = 0): Performance {
       const lane = band.lanes[region.id]?.find(x => x.trackId === track.id);
       if (!lane) continue;
       const profile = getInstrumentPerformanceProfile(track.instrumentId);
-      for (let phraseStart = region.start, phraseIndex = 0; phraseStart < region.end; phraseStart += 4, phraseIndex++) {
-        const phraseEnd = Math.min(region.end, phraseStart + 4);
+      const cycle = Math.max(1, Number(regionStyle?.contract?.cycleLength ?? 1));
+      const phraseBars = Math.max(cycle, Number(regionStyle?.melody?.phraseLengthsBars?.find((x: number) => x % cycle === 0) ?? cycle));
+      for (let phraseStart = region.start, phraseIndex = 0; phraseStart < region.end; phraseStart += phraseBars, phraseIndex++) {
+        const phraseEnd = Math.min(region.end, phraseStart + phraseBars);
         const state = createPhraseState(phraseIndex);
         const phraseNotes: PerfNote[] = [];
         for (let bar = phraseStart; bar < phraseEnd; bar++) {
@@ -423,6 +462,9 @@ export function compileWholeSong(sheet: Sheet, _seed = 0): Performance {
           const grammarBundle = buildHybridGrammar(regionStyle.id, lane.lens.sourceGenre, regionStyle, lane.lens.weight);
           const sharedHostProfile = resolveGenreProfile(track.instrumentId, lane.lens.hostGenre);
           const sharedSourceProfile = resolveGenreProfile(track.instrumentId, lane.lens.sourceGenre);
+          const hostTheory = styleTheoryFor(regionStyle.id, lane.lens.hostGenre);
+          const sourceTheory = getGenreTheory(lane.lens.sourceGenre);
+          const hybridTheory = blendGenreTheory(hostTheory, sourceTheory, lane.lens.weight);
           const barNotes: PerfNote[] = [];
 
           for (let i = 0; i < rhythm.onsets.length; i++) {
@@ -447,10 +489,15 @@ export function compileWholeSong(sheet: Sheet, _seed = 0): Performance {
               phrasePosition,
               phraseIndex,
               onsetIndex: i,
+              onsetPosition: onset.position,
               hit: onset.hit,
               chord,
               nextChord,
               energy,
+              bassStyle: hybridTheory.bass.style,
+              hostTheory,
+              sourceTheory,
+              hybridTheory,
             };
             const authoredGesture = detail?.articulations?.length ? detail.articulations[i % detail.articulations.length] : detail?.articulation;
             const gestureName = effectiveGesture(profile, ctx, onset, authoredGesture);
@@ -465,13 +512,22 @@ export function compileWholeSong(sheet: Sheet, _seed = 0): Performance {
             const midis = kitMidis.length ? kitMidis : realizeMidi(ctx, i, rhythm.onsets.length, state);
             const gestureCode = GESTURE_CODES[gestureName] ?? codeForGesture(gestureName);
             const hitFunctionCode = Math.max(0, HIT_FUNCTIONS.indexOf(onset.hit));
-            const accent = clamp(onset.accent * (0.82 + energy * 0.28) * developmentAccentScale);
-            const vel = Math.round(clamp(0.32 + accent * 0.52 * sharedHostProfile.density.accentContrast, 0.07, 1) * 127);
+            const accent = clamp(onset.accent * (0.72 + energy * 0.34) * developmentAccentScale);
+            // Give section energy a real dynamic span while retaining accent contrast.
+            // Energy 1 lives roughly in the quiet/mid range; energy 5 can reach the
+            // normal forte ceiling without forcing every note above 100.
+            const energyFloor = 0.28 + (energy - 1) * 0.105;
+            const energyCeiling = 0.52 + (energy - 1) * 0.115;
+            const velNorm = clamp(energyFloor + accent * (energyCeiling - energyFloor) * sharedHostProfile.density.accentContrast, 0.18, 0.94);
+            const vel = Math.round(velNorm * 127);
             const time = Math.max(0, grooveTime(bt, onset, i, lane.groove));
-            const authoredBeats = Math.max(0.04, onset.duration);
             const pv = voiceProfile(track.instrumentId);
             const nextPosition = rhythm.onsets[i + 1]?.position ?? (onset.position + Math.max(onset.duration, 1 / Math.max(1, rhythm.subdivisions)));
             const localGapBeats = Math.max(0.08, (nextPosition - onset.position) * bt.beatsPerBar);
+            const defaultStepBeats = bt.beatsPerBar / Math.max(1, rhythm.subdivisions);
+            const authoredIsDefaultStep = onset.durationAuthored !== true || Math.abs(onset.duration - defaultStepBeats) < 0.0001;
+            const sustainEligible = pv.sustain === 'sustained' || pv.sustain === 'blown' || pv.sustain === 'decaying';
+            const authoredBeats = Math.max(0.04, sustainEligible && authoredIsDefaultStep ? localGapBeats : onset.duration);
             const gapBeats = Math.max(localGapBeats, onset.hit === 'sustain' ? 1.0 : 0.18);
             const durBeats = noteLengthBeats(pv, authoredBeats, gapBeats * (onset.hit === 'sustain' ? 3.5 : 1.7), gestureName);
             const dur = Math.max(0.028, durBeats * (60 / Math.max(20, bt.bpm)) * (0.82 + ctx.hostProfile.phrase.sustain * 0.32));
@@ -479,7 +535,14 @@ export function compileWholeSong(sheet: Sheet, _seed = 0): Performance {
 
             for (let mi = 0; mi < midis.length; mi++) {
               const midi = midis[mi];
-              const stagger = (/fingerstyle|arpegg/.test(gestureName.toLowerCase()) && midis.length > 1) ? mi * 0.014 : 0;
+              // Banjo harmony is voiced as a chord for harmonic access, but its
+              // attack is a roll rather than a piano-style block chord. Stagger
+              // the picked strings inside a few milliseconds while keeping the
+              // underlying chord tones intact.
+              const banjoRoll = track.instrumentId === 'banjo' && midis.length > 1;
+              const stagger = (banjoRoll || (/fingerstyle|arpegg/.test(gestureName.toLowerCase()) && midis.length > 1))
+                ? mi * (banjoRoll ? 0.011 : 0.014)
+                : 0;
               const note: PerfNote = {
                 time: Math.max(0, time + stagger),
                 dur: Math.max(0.028, dur - stagger * 0.35),
@@ -559,7 +622,10 @@ export function compileWholeSong(sheet: Sheet, _seed = 0): Performance {
     const arr = (byTrack.get(track.id) ?? []).sort((a, b) => a.time - b.time || a.midi - b.midi);
     const kept: PerfNote[] = [];
     for (const n of arr) {
-      n.midi = Math.max(p.capabilities.lowMidi, Math.min(p.capabilities.highMidi, n.midi));
+      // Preserve pitch class when an authored/generated note falls outside the
+      // instrument's playable range. Clamping to an endpoint can turn a root
+      // into a different pitch class; octave-folding cannot.
+      n.midi = foldToRange(n.midi, voiceProfile(track.instrumentId));
       if (kept.length) {
         const prev = kept[kept.length - 1];
         const minGap = p.capabilities.polyphony <= 1 ? 0.004 : 0.001;
@@ -578,9 +644,16 @@ export function compileWholeSong(sheet: Sheet, _seed = 0): Performance {
   for (const track of sheet.tracks as Voice[]) {
     const p = getInstrumentPerformanceProfile(track.instrumentId);
     if (p.family !== 'bellows') continue;
+    const trackNotes = resolved.filter(x => x.trackId === track.id).sort((a, b) => a.time - b.time);
+
+    if (track.instrumentId === 'bandoneon') {
+      resolveBandoneonPhysicalFingering(track, trackNotes);
+      continue;
+    }
+
     let reservoir = 0.5;
     let dir: 1 | 2 = 1;
-    for (const n of resolved.filter(x => x.trackId === track.id).sort((a, b) => a.time - b.time)) {
+    for (const n of trackNotes) {
       const need = 0.08 + n.accent * 0.18;
       if (reservoir < need || (n.gestureCode === GESTURE_CODES['accent'] && reservoir > 0.35)) {
         dir = dir === 1 ? 2 : 1;
@@ -593,7 +666,7 @@ export function compileWholeSong(sheet: Sheet, _seed = 0): Performance {
 
   resolved.sort((a, b) => a.time - b.time || a.trackId.localeCompare(b.trackId) || a.midi - b.midi);
   const duration = bars[bars.length - 1]?.end ?? 0;
-  return {
+  const basePerformance: Performance = {
     notes: resolved,
     ccs,
     bars,
@@ -610,6 +683,91 @@ export function compileWholeSong(sheet: Sheet, _seed = 0): Performance {
     worldId: sheet.worldId,
     trackInfo: Object.fromEntries((sheet.tracks as Voice[]).map(t => [t.id, { instrumentId: t.instrumentId, role: t.role }])),
   };
+  return optimizePerformanceByPhraseAndSong(sheet, basePerformance).performance;
+}
+
+
+/**
+ * Resolve the actual physical button/direction for the 142-tone Rheinische
+ * bandoneón. This is deliberately separate from generic bellows logic: on a
+ * bisonoric instrument the direction is part of the fingering, not merely a
+ * timbral parameter.
+ */
+function resolveBandoneonPhysicalFingering(track: Voice, notes: PerfNote[]): void {
+  let previousDirection: 1 | 2 = 1;
+  let previousButton: string | undefined;
+  const role = String(track.role ?? '').toLowerCase();
+  const preferredSide: 1 | 2 = /bass|low|accompan|comp/.test(role) ? 2 : 1;
+  const sorted = notes.slice().sort((a, b) => a.time - b.time || a.midi - b.midi);
+
+  // A bisonoric bandoneón is not a collection of independent monophonic
+  // switches. A chord is a physical event: its buttons must be playable under
+  // one bellows direction. Resolve simultaneous attacks as a phrase-level
+  // fingering problem before assigning individual buttons.
+  for (let i = 0; i < sorted.length;) {
+    const group: PerfNote[] = [sorted[i]];
+    let j = i + 1;
+    while (j < sorted.length && Math.abs(sorted[j].time - sorted[i].time) <= 0.014) {
+      group.push(sorted[j++]);
+    }
+
+    const candidatesFor = (n: PerfNote, direction: 1 | 2) => {
+      let targetMidi = Math.round(n.midi);
+      let candidates = bandoneonCandidates(targetMidi, direction === 1 ? 'open' : 'close');
+      if (!candidates.length) {
+        const alternatives = [targetMidi - 12, targetMidi + 12]
+          .filter(m => m >= 36 && m <= 95 && bandoneonPlayable(m))
+          .sort((a, b) => Math.abs(a - targetMidi) - Math.abs(b - targetMidi));
+        if (alternatives.length) {
+          targetMidi = alternatives[0];
+          candidates = bandoneonCandidates(targetMidi, direction === 1 ? 'open' : 'close');
+        }
+      }
+      return { targetMidi, candidates };
+    };
+
+    const openScore = group.reduce((n, note) => n + (candidatesFor(note, 1).candidates.length ? 1 : 0), 0);
+    const closeScore = group.reduce((n, note) => n + (candidatesFor(note, 2).candidates.length ? 1 : 0), 0);
+    const direction: 1 | 2 = openScore === closeScore
+      ? previousDirection
+      : openScore > closeScore ? 1 : 2;
+
+    for (const n of group) {
+      let targetMidi = Math.round(n.midi);
+      let chosenCandidates = candidatesFor(n, direction).candidates;
+      if (!chosenCandidates.length) {
+        const other: 1 | 2 = direction === 1 ? 2 : 1;
+        chosenCandidates = candidatesFor(n, other).candidates;
+        if (!chosenCandidates.length) {
+          const octaveAlternatives = [targetMidi - 12, targetMidi + 12]
+            .filter(m => m >= 36 && m <= 95 && bandoneonPlayable(m))
+            .sort((a, b) => Math.abs(a - targetMidi) - Math.abs(b - targetMidi));
+          if (octaveAlternatives.length) {
+            targetMidi = octaveAlternatives[0];
+            n.midi = targetMidi;
+            n.frequencyHz = undefined;
+            chosenCandidates = bandoneonCandidates(targetMidi, direction === 1 ? 'open' : 'close');
+          }
+        }
+      }
+      if (!chosenCandidates.length) continue;
+      const chosen = chosenCandidates.slice().sort((a, b) => {
+        const aSide = a.side === (preferredSide === 1 ? 'right' : 'left') ? 0 : 1;
+        const bSide = b.side === (preferredSide === 1 ? 'right' : 'left') ? 0 : 1;
+        const aRepeat = previousButton && a.id === previousButton ? -1 : 0;
+        const bRepeat = previousButton && b.id === previousButton ? -1 : 0;
+        return aRepeat - bRepeat || aSide - bSide || a.id.localeCompare(b.id);
+      })[0];
+      if (!chosen) continue;
+      previousDirection = direction;
+      previousButton = chosen.id;
+      n.bellowsDirectionCode = direction;
+      n.bandoneonButtonId = chosen.id;
+      n.bandoneonButtonIndex = BANDONEON_142_BUTTONS.indexOf(chosen);
+      n.bandoneonSideCode = chosen.side === 'right' ? 1 : 2;
+    }
+    i = j;
+  }
 }
 
 // Numeric gesture registry lives at the compiler boundary so the renderers

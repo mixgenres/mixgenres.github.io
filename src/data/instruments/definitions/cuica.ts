@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../types';
 
 export const cuica: InstrumentDef = {
   id: "cuica",
-  name: "Cuíca",
+  name: "Cuica",
   family: "hand-drums",
   drum: {
     low: 53,

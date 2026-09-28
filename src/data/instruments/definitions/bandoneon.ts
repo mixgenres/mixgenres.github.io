@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../types';
 
 export const bandoneon: InstrumentDef = {
   id: "bandoneon",
-  name: "Bandoneón",
+  name: "Bandoneon",
   family: "bellows-and-keys",
   voicing: "chord",
   bodyConstruction: "wood-box",
@@ -10,7 +10,7 @@ export const bandoneon: InstrumentDef = {
   elementaryModel: 10,
   makeupGain: 0.589,
   polyphony: 8,
-  note: "Authentic 142-tone AA (Alfred Arnold) Rheinische Tonlage bisonoric bandoneon with dual zinc reed plates, resonant wooden air chamber, knee-drop marcato, and expressive arrastre drags",
+  note: "Authentic 142-tone AA (Alfred Arnold) Rheinische Tonlage bisonoric bandoneon: 38 right + 33 left buttons, each with separate Zug/Druck pitches, physical button mapping compiled at phrase level, dual zinc octave reed banks, resonant wooden air chamber, knee-drop marcato, and expressive arrastre drags",
   acousticProfile: {
     sustain: "sustained",
     role: "harmony",
@@ -118,9 +118,10 @@ export const bandoneon: InstrumentDef = {
     },
     signalChain: ["preamp", "eq", "compressor", "reverb"],
     synthesisNotes: [
-      "Bisonoric zinc reed plates deliver rich inharmonic metallic bite with distinct timbre shifts between pushing (cerrar) and pulling (abrir).",
+      "Bisonoric zinc octave reed pairs deliver the characteristic dry bandoneon spectrum, with distinct timbre shifts between pushing (cerrar) and pulling (abrir).",
+      "The 142-tone Rheinische keyboard is physically mapped as 71 buttons x 2 bellows directions; the compiler must select a valid button/direction pair rather than treating direction as a free timbral control.",
       "Violent knee-drops deliver sudden sharp explosive marcato transients with air compression overblown edge.",
-      "Slow opening air draw evokes sustained, weeping lyrical vibrato with authentic air leakage and button click acoustics."
+      "Slow opening air draw evokes sustained, weeping lyrical phrasing with controlled bellows pressure and restrained pallet/air noise."
     ]
   }
 };

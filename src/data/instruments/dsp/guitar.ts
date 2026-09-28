@@ -86,6 +86,14 @@ export const dspOverride: InstrumentDSPOverride = {
     "noteTransition": "retrigger"
   },
   "genreDialects": {
+    "tango": {
+      "excitationBias": 0.05, "brightness": 0.96, "damping": 0.06, "attack": 1.08, "body": 1.05,
+      "articulation": ["marcato", "arrastre", "sincopa", "bordoneo", "muted-strum"]
+    },
+    "tango-electronico": {
+      "excitationBias": 0.02, "brightness": 0.98, "damping": 0.08, "attack": 1.04, "body": 1.00,
+      "articulation": ["short-chord", "sincopa", "muted-strum", "arrastre"]
+    },
     "folk": {
       "excitationBias": 0,
       "brightness": 1.0,

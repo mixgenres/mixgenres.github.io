@@ -8,7 +8,7 @@ export const viola: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "bow",
   elementaryModel: 6,
-  makeupGain: 32.935,
+  makeupGain: 0.26,
   polyphony: 4,
   acousticProfile: {
     sustain: "sustained",

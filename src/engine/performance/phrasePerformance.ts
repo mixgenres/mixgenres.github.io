@@ -1,7 +1,8 @@
 import type { MusicalPattern, Measure } from '../../types';
 import type { HitFunction } from '../compiler/wholeSongCompiler';
 import type { InstrumentPerformanceProfile, GenrePerformanceProfile } from '../../data/performance/instrumentPerformanceProfiles';
-import { parseChord } from '../theory/theory';
+import { parseChord, scalePcsForMode, type ChordQuality } from '../theory/theory';
+import { type GenreTheoryProfile } from '../../data/musicTheory/genreTheory';
 import { voiceProfile } from '../theory/instrumentProfile';
 import { resolveStyle } from '../../data/styles/resolve';
 import { getCanonicalStyle } from '../../data/styles/registry';
@@ -39,12 +40,16 @@ export interface PhraseContext {
   phrasePosition: number;
   phraseIndex: number;
   onsetIndex: number;
+  onsetPosition: number;
   hit: HitFunction;
   gesture?: string;
   chord: string;
   nextChord?: string;
   energy: number;
   bassStyle?: string;
+  hostTheory: GenreTheoryProfile;
+  sourceTheory: GenreTheoryProfile;
+  hybridTheory: GenreTheoryProfile;
 }
 
 export function createPhraseState(phraseIndex = 0): PhraseState {
@@ -57,7 +62,33 @@ function stableHash(text: string): number {
   return (h >>> 0) / 4294967296;
 }
 
-function chordTonePcs(chord: string): number[] {
+function rootPc(chord: string): number { return parseChord(chord).rootPc ?? 0; }
+
+function chordScaleKey(quality: ChordQuality): keyof GenreTheoryProfile['chordScales'] | undefined {
+  if (quality === 'halfDiminished') return 'half-diminished';
+  if (quality === 'suspended') return 'sus';
+  if (quality === 'major' || quality === 'minor' || quality === 'dominant') return quality;
+  return undefined;
+}
+
+function degreePc(chord: string, degree: number, theory: GenreTheoryProfile): number {
+  const parsed = parseChord(chord);
+  const key = chordScaleKey(parsed.quality as ChordQuality);
+  const mode = (key ? theory.chordScales[key] : undefined) ?? theory.defaultScale;
+  const pcs = scalePcsForMode(mode, parsed.rootPc);
+  const idx = Math.max(0, Math.min(6, Math.round(degree) - 1));
+  return pcs[idx] ?? parsed.rootPc;
+}
+
+function chordScalePcs(chord: string, theory: GenreTheoryProfile): number[] {
+  const parsed = parseChord(chord);
+  const quality = parsed.quality as ChordQuality;
+  const key = chordScaleKey(quality);
+  const mode = (key ? theory.chordScales[key] : undefined) ?? theory.defaultScale;
+  return scalePcsForMode(mode, parsed.rootPc);
+}
+
+function chordTonePcsWithQuality(chord: string): number[] {
   const c = parseChord(chord);
   const root = c.rootPc ?? 0;
   const intervals = c.intervals?.length ? c.intervals : [0, 4, 7];
@@ -76,96 +107,155 @@ function nearestMidi(pc: number, target: number, low: number, high: number): num
   return best;
 }
 
-function rootPc(chord: string): number { return parseChord(chord).rootPc ?? 0; }
-function fifthPc(chord: string): number { return (rootPc(chord) + 7) % 12; }
-function thirdPc(chord: string): number { return chordTonePcs(chord)[1] ?? ((rootPc(chord) + 4) % 12); }
+function approachPc(targetPc: number, currentPc: number, chromatic: boolean): number {
+  if (chromatic) {
+    const up = (targetPc + 11) % 12;
+    const down = (targetPc + 1) % 12;
+    const du = Math.min((currentPc - up + 12) % 12, (up - currentPc + 12) % 12);
+    const dd = Math.min((currentPc - down + 12) % 12, (down - currentPc + 12) % 12);
+    return du <= dd ? up : down;
+  }
+  return (targetPc + 11) % 12;
+}
 
 function bassMidi(ctx: PhraseContext, index: number, total: number): number {
   const low = ctx.profile.capabilities.lowMidi;
   const high = ctx.profile.capabilities.highMidi;
   const center = ctx.profile.capabilities.comfortableLowMidi + 5;
-  const b = ctx.bassStyle ?? 'riff';
+  const b = ctx.bassStyle ?? ctx.hybridTheory.bass.style ?? 'riff';
   const root = rootPc(ctx.chord);
   const nextRoot = ctx.nextChord ? rootPc(ctx.nextChord) : root;
+  const nextTarget = ctx.nextChord ? degreePc(ctx.nextChord, index % 2 === 0 ? 3 : 1, ctx.hybridTheory) : nextRoot;
   const r = nearestMidi(root, center, low, high);
-  const f = nearestMidi(fifthPc(ctx.chord), center + 5, low, high);
-  const third = nearestMidi(thirdPc(ctx.chord), center + 2, low, high);
+  const f = nearestMidi(degreePc(ctx.chord, 5, ctx.hybridTheory), center + 5, low, high);
+  const third = nearestMidi(degreePc(ctx.chord, 3, ctx.hybridTheory), center + 2, low, high);
+  const seventh = nearestMidi(degreePc(ctx.chord, 7, ctx.hybridTheory), center + 6, low, high);
 
   if (b === 'walking') {
-    const tones = [r, third, f, nearestMidi((root + 10) % 12, center + 7, low, high)];
-    const grid = [0, 1, 2, 1];
-    const targetPc = tones[grid[index % grid.length]] % 12;
-    const prior = nearestMidi(targetPc, ctx.statePreviousMidi ?? center, low, high);
+    const targets = [r, third, f, seventh];
+    const target = targets[index % targets.length];
+    const prior = stateTarget(ctx, target, center, low, high);
     if (index === total - 1 && ctx.nextChord) {
-      const approachPc = ((nextRoot + (nextRoot - root + 12) % 12 > root + 7) ? 1 : 11);
-      const approach = nearestMidi((nextRoot + approachPc) % 12, prior, low, high);
+      const approach = nearestMidi(approachPc(nextTarget, prior % 12, ctx.hybridTheory.bass.chromaticApproach), prior, low, high);
       if (Math.abs(approach - prior) <= 7) return approach;
     }
-    const dir = ctx.statePreviousMidi === undefined ? 0 : Math.sign(prior - ctx.statePreviousMidi);
-    const stepPc = dir === 0 ? targetPc : ((ctx.statePreviousMidi + (dir * (index % 2 ? 2 : 1))) % 12 + 12) % 12;
-    const step = nearestMidi(stepPc, prior, low, high);
-    return Math.abs(step - (ctx.statePreviousMidi ?? prior)) <= 5 ? step : prior;
+    const scale = chordScalePcs(ctx.chord, ctx.hybridTheory);
+    const direction = ctx.statePreviousMidi === undefined ? Math.sign(target - prior) || 1 : Math.sign(target - ctx.statePreviousMidi) || 1;
+    const priorPc = prior % 12;
+    const exactIndex = scale.findIndex(pc => pc === priorPc);
+    const fallbackIndex = scale.reduce((best, pc, i) => {
+      const bestDist = Math.min((scale[best] - priorPc + 12) % 12, (priorPc - scale[best] + 12) % 12);
+      const dist = Math.min((pc - priorPc + 12) % 12, (priorPc - pc + 12) % 12);
+      return dist < bestDist ? i : best;
+    }, 0);
+    const baseIndex = exactIndex >= 0 ? exactIndex : fallbackIndex;
+    const candidatePc = scale[(baseIndex + direction + scale.length) % scale.length] ?? scale[0];
+    const step = nearestMidi(candidatePc, prior + direction * 2, low, high);
+    if (ctx.statePreviousMidi !== undefined && Math.abs(step - ctx.statePreviousMidi) <= 5) return step;
+    return prior;
   }
   if (b === 'tumbao' || ctx.hostGenre === 'salsa' || ctx.hostGenre === 'timba') {
-    const offbeat = index % 3 !== 0;
-    if (offbeat) return f;
-    if (ctx.phrasePosition > 0.74 && ctx.nextChord) {
-      const approach = nearestMidi((nextRoot + 11) % 12, r, low, high);
-      return approach;
-    }
-    return r;
+    const anti = ctx.hybridTheory.bass.anticipationBeats;
+    const isAnticipation = anti.some(v => Math.abs(v - ctx.onsetPosition) < 0.35);
+    if (isAnticipation && ctx.nextChord) return nearestMidi(nextTarget, f, low, high);
+    return index % 3 === 1 ? f : r;
   }
-  if (b === 'rootFifth' || b === 'samba' || b === 'cumbia' || b === 'reggae') {
-    return index % 2 === 0 ? r : f;
-  }
-  if (b === 'octave') return r + (index % 2 === 0 ? 0 : 12 <= high - r ? 12 : 0);
+  if (b === 'rootFifth' || b === 'samba' || b === 'cumbia' || b === 'reggae') return index % 2 === 0 ? r : f;
+  if (b === 'octave') return r + (index % 2 === 0 ? 0 : (12 <= high - r ? 12 : 0));
   if (b === 'sub') return r;
   if (b === 'dembow') return index % 2 ? f : r;
-  if (b === 'riff') {
-    if (ctx.phrasePosition > 0.72 && ctx.nextChord) return nearestMidi((nextRoot + 11) % 12, r, low, high);
-    return [r, f, r, third][index % 4];
+  if (b === 'house') {
+    const target = index % 4 === 3 && ctx.nextChord ? nextTarget : root;
+    return nearestMidi(target, center, low, high);
   }
-  // A safe theory-derived fallback that still develops toward the next chord.
-  if (total > 1 && index === total - 1 && ctx.nextChord) return nearestMidi((nextRoot + 11) % 12, r, low, high);
-  return r;
+  if (b === 'riff') {
+    const scale = chordScalePcs(ctx.chord, ctx.hybridTheory);
+    const degree = ctx.hybridTheory.bass.targetDegrees[index % ctx.hybridTheory.bass.targetDegrees.length] ?? 1;
+    const pc = scale[Math.max(0, Math.min(scale.length - 1, degree - 1))] ?? root;
+    if (ctx.phrasePosition > 0.72 && ctx.nextChord) {
+      return nearestMidi(approachPc(nextTarget, r % 12, ctx.hybridTheory.bass.chromaticApproach), r, low, high);
+    }
+    return nearestMidi(pc, center + (index % 2 ? 4 : 0), low, high);
+  }
+  return ctx.nextChord && index === total - 1
+    ? nearestMidi(approachPc(nextTarget, r % 12, ctx.hybridTheory.bass.chromaticApproach), r, low, high)
+    : r;
 }
 
-function chordVoicing(ctx: PhraseContext, index: number): number[] {
-  const tones = chordTonePcs(ctx.chord);
-  const spread = Math.max(0, Math.min(3, tones.length));
-  const rotation = (index + ctx.barIndex + ctx.phraseIndex) % Math.max(1, tones.length);
-  const pcs = tones.slice(rotation).concat(tones.slice(0, rotation));
+function stateTarget(ctx: PhraseContext, target: number, center: number, low: number, high: number): number {
+  return nearestMidi(target % 12, ctx.statePreviousMidi ?? center, low, high);
+}
+
+function chordVoicing(ctx: PhraseContext, _index: number): number[] {
+  const parsed = parseChord(ctx.chord);
+  const tones = chordTonePcsWithQuality(ctx.chord);
+  const guide = parsed.guideTones?.map(x => (parsed.rootPc + x) % 12) ?? [];
+  const tension = parsed.tensions?.map(x => (parsed.rootPc + x) % 12) ?? [];
+  const voicing = ctx.hybridTheory.harmony.voicing;
+  const poly = Math.max(1, Math.min(ctx.profile.capabilities.polyphony, 4));
+  const base = Math.max(ctx.profile.capabilities.lowMidi, Math.min(ctx.profile.capabilities.highMidi, ctx.profile.capabilities.comfortableLowMidi + (voicing === 'power' ? 4 : 10)));
+  let pcs: number[];
+  if (voicing === 'power') pcs = [parsed.rootPc, (parsed.rootPc + 7) % 12, parsed.rootPc];
+  else if (voicing === 'guide-tone' || voicing === 'shell') pcs = [...guide, ...tension, ...tones];
+  else if (voicing === 'montuno' || voicing === 'yumba') pcs = [...tones.filter(pc => pc !== parsed.rootPc), ...guide, ...tension];
+  else if (voicing === 'drop-two') pcs = [...tones, ...guide];
+  else pcs = [...tones, ...tension, ...guide];
+  pcs = Array.from(new Set(pcs));
+  // inversion on every attack, creating rapid register churn and excessive
+  // low-note collisions. Voice leading is handled by nearestMidi/nextChord.
+  pcs = pcs.slice();
   const out: number[] = [];
-  const base = Math.max(ctx.profile.capabilities.lowMidi, Math.min(ctx.profile.capabilities.highMidi, ctx.profile.capabilities.comfortableLowMidi + 7));
-  for (let i = 0; i < Math.min(ctx.profile.capabilities.polyphony, Math.max(2, spread)); i++) {
-    out.push(nearestMidi(pcs[i], base + i * 4, ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi));
+  const spacing = voicing === 'open' || voicing === 'drop-two' ? 7 : 4;
+  for (let i = 0; i < Math.min(poly, pcs.length); i++) {
+    const target = base + i * spacing + (voicing === 'montuno' || voicing === 'yumba' ? 7 : 0);
+    out.push(nearestMidi(pcs[i], target, ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi));
   }
-  // Keep voicings clustered but voice-led toward the next chord by moving the
-  // highest tone toward the next root when a phrase/cadence is approaching.
-  if (ctx.nextChord && ctx.phrasePosition > 0.7 && out.length) {
-    const target = nearestMidi(rootPc(ctx.nextChord), out[out.length - 1], ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi);
-    if (Math.abs(target - out[out.length - 1]) <= 7) out[out.length - 1] = target;
+  if (ctx.nextChord && ctx.phrasePosition > 0.72 && out.length) {
+    const nextParsed = parseChord(ctx.nextChord);
+    const targetPc = nextParsed.guideTones?.length ? (nextParsed.rootPc + nextParsed.guideTones[0]) % 12 : nextParsed.rootPc;
+    const top = out[out.length - 1];
+    const target = nearestMidi(targetPc, top, ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi);
+    if (Math.abs(target - top) <= 7) out[out.length - 1] = target;
   }
   return Array.from(new Set(out));
 }
 
 export function realizeMidi(ctx: PhraseContext, index: number, total: number, state: PhraseState): number[] {
   const d = ctx.profile.instrumentId.toLowerCase();
-  if (ctx.profile.family === 'membrane' || ctx.profile.family === 'kit' || ctx.profile.family === 'metal-wood-percussion' || ctx.profile.family === 'body-percussion' || voiceProfile(ctx.profile.instrumentId).role === 'perc') {
-    return [60];
+  if (ctx.profile.family === 'membrane' || ctx.profile.family === 'kit' || ctx.profile.family === 'metal-wood-percussion' || ctx.profile.family === 'body-percussion' || voiceProfile(ctx.profile.instrumentId).role === 'perc') return [60];
+  if (voiceProfile(ctx.profile.instrumentId).role === 'bass' || d.includes('bass') || d === 'upright-bass' || d.includes('tuba')) return [bassMidi(ctx, index, total)];
+  if (ctx.profile.family === 'keyboard' || ctx.profile.family === 'plucked-string' && ctx.profile.capabilities.polyphony > 1 || ctx.pattern.roles.includes('harmony') || /piano|organ|rhodes|guitar|bandoneon|accordion/.test(d)) return chordVoicing(ctx, index);
+
+  const scale = chordScalePcs(ctx.chord, ctx.hybridTheory);
+  const chordTones = chordTonePcsWithQuality(ctx.chord);
+  const idiomaticDegrees = /country/i.test(ctx.hostGenre) && /fiddle/i.test(d)
+    ? [1, 3, 5, 6, 5, 3, 2, 1]
+    : /tango|milonga/i.test(ctx.hostGenre) && /violin/i.test(d)
+      ? [1, 3, 5, 7, 6, 5, 3, 2]
+      : undefined;
+  const targetDegree = idiomaticDegrees
+    ? idiomaticDegrees[(ctx.barIndex * 2 + index) % idiomaticDegrees.length]
+    : (ctx.hybridTheory.melody.targetDegrees[index % ctx.hybridTheory.melody.targetDegrees.length] ?? 1);
+  const targetPc = degreePc(ctx.chord, targetDegree, ctx.hybridTheory);
+  const strong = ctx.onsetIndex === 0 || ctx.onsetIndex === total - 1 || ctx.hit === 'downbeat' || ctx.hit === 'punctuation' || ctx.phrasePosition > 0.82;
+  let pc = targetPc;
+  if (!strong) {
+    const prevPc = state.previousMidi !== undefined ? state.previousMidi % 12 : targetPc;
+    const idx = scale.indexOf(prevPc);
+    const contour = ctx.hybridTheory.melody.contour[(ctx.phraseIndex + ctx.barIndex + index) % Math.max(1, ctx.hybridTheory.melody.contour.length)] ?? 'motif';
+    const step = contour.includes('descending') || contour.includes('space') ? -1 : 1;
+    pc = scale[(idx >= 0 ? idx + step : index + step + scale.length) % scale.length] ?? scale[index % scale.length];
+    if (chordTones.includes(pc) === false && ctx.hybridTheory.melody.approachDegrees.length) {
+      const approachDegree = ctx.hybridTheory.melody.approachDegrees[index % ctx.hybridTheory.melody.approachDegrees.length];
+      pc = degreePc(ctx.chord, approachDegree, ctx.hybridTheory);
+    }
   }
-  if (voiceProfile(ctx.profile.instrumentId).role === 'bass' || d.includes('bass') || d === 'upright-bass' || d.includes('tuba')) {
-    return [bassMidi(ctx, index, total)];
+  if (ctx.nextChord && ctx.phrasePosition > 0.8 && ctx.hybridTheory.bass.chromaticApproach) {
+    const nextParsed = parseChord(ctx.nextChord);
+    pc = nextParsed.rootPc;
   }
-  if (ctx.profile.family === 'keyboard' || ctx.profile.family === 'plucked-string' && ctx.profile.capabilities.polyphony > 1 || ctx.pattern.roles.includes('harmony') || /piano|organ|rhodes|guitar|bandoneon|accordion/.test(d)) {
-    return chordVoicing(ctx, index);
-  }
-  const tones = chordTonePcs(ctx.chord);
-  const scale = Array.from(new Set([...tones, (rootPc(ctx.chord)+2)%12, (rootPc(ctx.chord)+5)%12, (rootPc(ctx.chord)+9)%12]));
   const target = state.previousMidi ?? (ctx.profile.capabilities.comfortableLowMidi + ctx.hostProfile.register.highBias * 18);
-  const pc = scale[(index + ctx.phraseIndex + Math.round(ctx.phrasePosition * 3)) % scale.length];
-  const midi = nearestMidi(pc, target + (ctx.phrasePosition > 0.72 ? 5 : 0), ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi);
-  return [midi];
+  return [nearestMidi(pc, target + (ctx.phrasePosition > 0.72 ? 4 : 0), ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi)];
 }
 
 export function shouldDevelopPhrase(ctx: PhraseContext): 'repeat' | 'variation' | 'answer' | 'fill' | 'rest' | 'cadence' {
@@ -229,9 +319,18 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
     else if (/milonga/.test(text)) add('staccato','campana','accent');
   }
 
+  const roleBucket: keyof PhraseContext['hybridTheory']['techniques'] = /bass/.test(ctx.role) ? 'bass'
+    : /perc|drum/.test(ctx.role) ? 'percussion'
+    : /bellows|accordion|bandoneon/.test(ctx.profile.family) ? 'bellows'
+    : /bowed/.test(ctx.profile.family) ? 'bowed'
+    : /wind|brass/.test(ctx.profile.family) ? (ctx.profile.family === 'brass' ? 'winds' : 'winds')
+    : /voice|choir/.test(ctx.role) ? 'voice'
+    : /harmony|comp|piano|keyboard/.test(ctx.role) ? 'harmony' : 'melody';
+  const theoryHints = ctx.hybridTheory.techniques[roleBucket] ?? [];
   const candidates = Array.from(new Set([
     desired ?? '',
     ...contextual,
+    ...theoryHints,
     ...ctx.hostProfile.preferredGestures,
     ...ctx.sourceProfile.preferredGestures,
     ...ctx.hostProfile.gestureIds,
@@ -239,12 +338,31 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
     ...ctx.profile.adaptationOrder.flatMap(g => ctx.profile.genreProfiles[g]?.preferredGestures ?? []),
   ].filter((g): g is string => Boolean(g) && allowed(g))));
   const hitWord = hit.toLowerCase();
+  const hintAliases: Record<string, RegExp> = {
+    marcato: /marcato|accent|staccato|attack|punch|strappata/i,
+    syncopated: /sync|anticip|staccato|accent|chop|arrastre/i,
+    fingerstyle: /finger|pluck|pizz/i,
+    flatpick: /flatpick|pick|downpick/i,
+    slap: /slap|pop|tapao|thump/i,
+    ghost: /ghost|heel|toe|dead|mute|muffled/i,
+    legato: /legato|tenuto|sustain|portato|arco/i,
+    rasgueado: /rasgueado|strum|roll/i,
+    golpe: /golpe|tap|percuss/i,
+    arrastre: /arrastre|slide|gliss|drag/i,
+    guajeo: /guajeo|montuno|staccato|chop/i,
+    tumbao: /tumbao|bass|pizz|staccato|accent/i,
+    one_drop: /one.?drop|skank|ghost|offbeat/i,
+    dembow: /dembow|staccato|short|accent/i,
+    vibrato: /vibrato|shake|ornament/i,
+    fall: /fall|doit|scoop|bend/i,
+  };
   const contextualSet = new Set(contextual);
   const scored = candidates.map(g => {
     const gl = g.toLowerCase();
     let score = 0;
     if (desired && gl === desired.toLowerCase()) score += 20;
     if (contextualSet.has(g)) score += 7;
+    if (theoryHints.some(h => hintAliases[h.toLowerCase().replace(/[^a-z0-9]+/g,'_')]?.test(gl) || gl.includes(h.toLowerCase()))) score += 6;
     if (hostPreferred.has(g)) score += 5;
     if (sourcePreferred.has(g)) score += 4;
     if (hitWord === 'ghost' && /ghost|heel|toe|tap|mute|dead/.test(gl)) score += 6;

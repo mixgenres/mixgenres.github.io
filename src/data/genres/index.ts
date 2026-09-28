@@ -1,4 +1,4 @@
-import { GenreWorld, MusicalPattern } from '../../types';
+import type { GenreWorld, MusicalPattern } from '../../types';
 
 import { TANGO_WORLD } from './tango';
 import { FLAMENCO_WORLD } from './flamenco';
@@ -28,6 +28,7 @@ import { gospel } from './gospel';
 import { industrial } from './industrial';
 
 import { CLASSICAL_WORLD } from './classical';
+import { CANONICAL_GENRE_PATTERNS } from './canonicalPatterns';
 import { NEO_SOUL_WORLD } from './neoSoul';
 
 export const GOSPEL_WORLD: GenreWorld = {
@@ -189,7 +190,7 @@ const SOURCE_WORLDS: Record<string, GenreWorld> = Object.fromEntries([
   GOSPEL_WORLD, INDUSTRIAL_WORLD, CLASSICAL_WORLD, NEO_SOUL_WORLD,
 ].map(world => [world.id, world]));
 
-function cloneStyleSeeds(source: GenreWorld, genreId: string): GenreWorld['styleDefinitions'] {
+function deriveStyleSeeds(source: GenreWorld, genreId: string): GenreWorld['styleDefinitions'] {
   return (source.styleDefinitions ?? []).map((seed, index) => ({
     ...seed,
     id: `${genreId}-${seed.name.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || index}`,
@@ -214,13 +215,17 @@ function makeGenreWorld(genreId: string): GenreWorld {
     family: source.family,
     level: 'world',
     parentId: undefined,
-    styleDefinitions: cloneStyleSeeds(source, genreId),
-    // Patterns are intentionally shared source objects. No genre clones.
-    patterns: source.patterns,
+    styleDefinitions: deriveStyleSeeds(source, genreId),
+    // A promoted leaf keeps deliberate reusable source patterns, plus native
+    // definitions authored specifically for the public genre.
+    patterns: [...source.patterns, ...CANONICAL_GENRE_PATTERNS.filter(p => p.worldId === genreId)],
   };
 }
 
-export const GENRE_WORLDS: GenreWorld[] = Object.keys(GENRE_NAMES).map(makeGenreWorld);
+export const GENRE_WORLDS: GenreWorld[] = Object.keys(GENRE_NAMES).map(makeGenreWorld).map(world => {
+  const native = CANONICAL_GENRE_PATTERNS.filter(p => p.worldId === world.id);
+  return native.length ? { ...world, patterns: [...(world.patterns ?? []), ...native] } : world;
+});
 export const GENRE_WORLDS_BY_ID: Record<string, GenreWorld> = Object.fromEntries(
   GENRE_WORLDS.map(world => [world.id, world])
 );
@@ -246,12 +251,22 @@ function normalizePattern(p: MusicalPattern): MusicalPattern {
   };
 }
 
+
+function isSyntheticPattern(p: MusicalPattern): boolean {
+  const id = String(p.id ?? '').toLowerCase();
+  const name = String(p.name ?? '').toLowerCase();
+  return /-(phrase|call|anchor|comp|intro|verse)-\d+$/.test(id)
+    || /--phrasing$/.test(id)
+    || /\b(comping comping|roster-)$/.test(name.trim());
+}
+
 // Preserve one definition per authored pattern. Shared source patterns are
 // reused by multiple canonical genres through the style contract.
 const uniquePatterns = new Map<string, MusicalPattern>();
 for (const source of Object.values(SOURCE_WORLDS)) {
   for (const raw of source.patterns) {
     const p = normalizePattern(raw);
+    if (isSyntheticPattern(p)) continue;
     // Rhythmic onset similarity is not sufficient to call two authored patterns
     // duplicates. A ska break, a final shout, and a samba break can share a grid
     // while serving completely different musical functions. Deduplicate only when
@@ -266,6 +281,10 @@ for (const source of Object.values(SOURCE_WORLDS)) {
     ].join('|');
     if (!uniquePatterns.has(signature)) uniquePatterns.set(signature, p);
   }
+}
+for (const raw of CANONICAL_GENRE_PATTERNS) {
+  const p = normalizePattern(raw);
+  uniquePatterns.set(`${p.worldId}:${p.id}`, p);
 }
 
 // Canonical rhythm names are unique. When two genres legitimately use the same
@@ -292,7 +311,7 @@ export const PATTERNS_BY_WORLD: Record<string, MusicalPattern[]> = Object.fromEn
     // within a musical world. It must never make the pattern globally visible
     // to unrelated genres. Cross-genre material is admitted explicitly by the
     // adventure/blend layer, where the originating world is retained.
-    ALL_PATTERNS.filter(p => p.worldId === (GENRE_SOURCE_MAP[world.id] || world.id)),
+    ALL_PATTERNS.filter(p => p.worldId === world.id || p.worldId === (GENRE_SOURCE_MAP[world.id] || world.id)),
   ])
 );
 export const PATTERNS_BY_GENRE = PATTERNS_BY_WORLD;

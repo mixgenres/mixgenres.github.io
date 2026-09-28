@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../types';
 
 export const castanets: InstrumentDef = {
   id: "castanets",
-  name: "Castañuelas (Castanets)",
+  name: "Castanuelas (Castanets)",
   family: "metal-and-wood",
   drum: {
     low: 76,

@@ -106,12 +106,12 @@ export const dspOverride: InstrumentDSPOverride = {
       "articulation": ["legato", "tremolo", "vibrato", "portato", "pizzicato"]
     },
     "tango": {
-      "excitationBias": 0.10,
-      "brightness": 1.06,
-      "damping": 0.02,
-      "attack": 1.20,
-      "body": 1.10,
-      "articulation": ["staccato", "accent", "pizzicato", "chicharra", "tambor", "latigo"]
+      "excitationBias": 0.14,
+      "brightness": 1.04,
+      "damping": 0.015,
+      "attack": 1.22,
+      "body": 1.12,
+      "articulation": ["marcato", "staccato", "arrastre", "pizzicato", "chicharra", "tambor", "latigo", "cantando"]
     },
     "folk": {
       "excitationBias": 0.06,

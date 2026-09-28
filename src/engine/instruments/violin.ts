@@ -34,13 +34,16 @@ export default class ViolinModule implements InstrumentModule {
     // 1. Articulation & Extended Technique Flags
     const isPizz = action === 'pluck' || action === 'pizzicato' || /pizz/i.test(action ?? '');
     const isTremolo = action === 'tremolo' || /tremolo/i.test(action ?? '');
-    const isStaccato = action === 'staccato' || action === 'spiccato' || action === 'martele' || action === 'accent' || params.articulation > 0.65;
+    const isStaccato = action === 'staccato' || action === 'spiccato' || action === 'martele' || action === 'accent' || ctx.articulation > 0.65;
     const isSulPonticello = action === 'sul-ponticello' || /ponticello/i.test(action ?? '');
     const isSulTasto = action === 'sul-tasto' || /tasto|flautando/i.test(action ?? '');
     const isLegato = action === 'legato' || action === 'slur';
     const isChicharra = action === 'chicharra' || /chicharra/i.test(action ?? '');
     const isTambor = action === 'tambor' || /tambor/i.test(action ?? '');
     const isLatigo = action === 'latigo' || /latigo|whip/i.test(action ?? '');
+    const isTango = /tango|milonga|vals/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isArrastre = action === 'arrastre' || /arrastre|drag/i.test(action ?? '');
+    const isTangoObligato = isTango && (ctx.voice.note ?? 60) <= 62 && !isPizz;
 
     // 2. Special Extended Techniques (Chicharra, Tambor, Látigo)
     if (isChicharra) {
@@ -65,11 +68,19 @@ export default class ViolinModule implements InstrumentModule {
     const intonationJitter = randNorm(noteSeed ^ 0x12) * (isStaccato ? 0.022 : 0.008);
     const intonationOffset = el.mul(el.const({ value: intonationJitter }), settleEnv);
 
+    // Tango arrastre: a short portamento-like scoop into the target pitch.
+    // It is deliberately shallower than the bandoneón/bass scoop because the
+    // violin's expressive slide is primarily a left-hand/bow inflection.
+    const arrastreEnv = el.adsr(0.001, 0.070, 0, 0.008, gateSignal);
+    const arrastrePitch = isArrastre
+      ? el.sub(1.0, el.mul(el.const({ value: 0.095 }), arrastreEnv))
+      : el.const({ value: 1.0 });
+
     // Látigo whip: Rapid upward glissando spike
     const latigoEnv = el.adsr(0.01, 0.12, 0, 0.01, gateSignal);
     const latigoGliss = isLatigo ? el.mul(el.const({ value: 1.0 }), latigoEnv) : el.const({ value: 0 });
 
-    const settledFreq = el.mul(safeFreqSignal, el.add(el.add(1.0, intonationOffset), latigoGliss));
+    const settledFreq = el.mul(safeFreqSignal, el.mul(el.add(el.add(1.0, intonationOffset), latigoGliss), arrastrePitch));
 
     // 4. Natural Organic Vibrato (Onset delay, speed/amplitude fluctuation jitter)
     const baseVibSpeed = 5.8 + randNorm(noteSeed ^ 0x33) * 0.18;
@@ -78,8 +89,8 @@ export default class ViolinModule implements InstrumentModule {
     const vibratoLfo = el.cycle(dynamicVibSpeed);
     
     // Vibrato swells naturally into sustained notes
-    const wantsVib = !isPizz && !isStaccato && !isLatigo;
-    const vibratoOnset = el.adsr(isLegato ? 0.12 : 0.28, 0.10, 1.0, 0.08, gateSignal);
+    const wantsVib = !isPizz && !isStaccato && !isLatigo && !isArrastre;
+    const vibratoOnset = el.adsr(isLegato ? 0.12 : (isTango ? 0.38 : 0.28), 0.10, 1.0, 0.08, gateSignal);
     const vibratoDepth = wantsVib
       ? el.mul(el.const({ value: 0.016 * (params.resonance + 0.3) }), vibratoOnset)
       : el.const({ value: 0 });
@@ -135,7 +146,14 @@ export default class ViolinModule implements InstrumentModule {
 
     const bowSpeed = el.mul(el.const({ value: params.bowVelocity }), tremoloMod);
     const bowForce = el.const({ value: params.bowPressure });
-    
+
+    // Tango obligato often lives lower on the instrument, especially in the
+    // traditional style. Give the low register a warmer fourth-string-like
+    // response while retaining enough bridge bite to cut through bandoneón.
+    const obligatoWarmth = isTangoObligato
+      ? el.mul(0.16, el.svf({ mode: 'bandpass' }, 275, 2.2, coreOsc))
+      : el.const({ value: 0 });
+
     // Sul Ponticello shifts spectrum to brilliant glassy rasp; Sul Tasto warms and softens
     const rosinCutoff = isSulPonticello ? 3800 : (isSulTasto ? 900 : 1500);
     const rosinGrit = isSulPonticello ? 1.65 : (isSulTasto ? 0.45 : 1.0);
@@ -148,12 +166,18 @@ export default class ViolinModule implements InstrumentModule {
     // Attack bow-catch "crunch" transient
     const bowCatchEnv = el.adsr(0.0002, 0.012, 0, 0.004, gateSignal);
     const bowCatch = el.mul(
-      el.mul(el.const({ value: 0.16 * (isStaccato ? 1.8 : 1.0) }), bowCatchEnv),
+      el.mul(el.const({ value: 0.16 * (isStaccato ? 1.8 : 1.0) * (isTango ? 1.12 : 1.0) }), bowCatchEnv),
       el.highpass(1800, 1.3, el.noise())
     );
 
+    // A small tango "bite" transient on marcato/accented attacks, distinct from
+    // the dedicated chicharra/tambor effects.
+    const tangoBite = isTango && isStaccato
+      ? el.mul(0.075, el.mul(el.svf({ mode: 'bandpass' }, 2600, 2.8, el.noise()), el.adsr(0.0002, 0.010, 0, 0.003, gateSignal)))
+      : el.const({ value: 0 });
+
     // Combine core sawtooth with slip friction noise, sympathetic resonance, and bow-catch crunch
-    const excited = el.add(coreOsc, el.add(frictionNoise, el.add(sympatheticSum, bowCatch)));
+    const excited = el.add(coreOsc, el.add(obligatoWarmth, el.add(frictionNoise, el.add(sympatheticSum, el.add(bowCatch, tangoBite)))));
     
     // Non-linear slip-stick velocity saturation
     const stickSlip = el.tanh(el.mul(el.add(1.0, el.mul(bowForce, 2.2)), excited));

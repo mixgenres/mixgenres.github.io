@@ -1,4 +1,4 @@
-import { Role, SectionType, TuningSystemTag, GrooveMechanics, SectionEnergy } from '../../types';
+import type { Role, SectionType, TuningSystemTag, GrooveMechanics, SectionEnergy } from '../../types';
 import type { WorldContract } from './contracts';
 
 export type Aspect = 'form' | 'harmony' | 'rhythm' | 'melody' | 'arrangement' | 'sound' | 'gestures';
@@ -131,22 +131,9 @@ export interface ArrangementGrammar {
   solos?: string[];
 }
 
-export interface SoundFxPreset {
-  highPass?: number;
-  lowShelf?: number;
-  presence?: number;
-  air?: number;
-  glue?: number;
-  warmth?: number;
-  width?: number;
-  space?: number;
-}
-
 export interface SoundProfile {
   instrumentPalette: Weighted<string>[];
   articulations?: Record<string, string>;
-  fxChains?: Record<string, SoundFxPreset>;
-  reverbDelay?: { decay?: number; wet?: number };
   masterProfile: { pocket?: number; lift?: number };
 }
 
@@ -177,8 +164,6 @@ export interface SongStyle {
   region?: string;
   summary: string;
   signatureTraits: string[];  // shown in UI
-  confidence?: 'high' | 'medium' | 'low';
-  authoringNotes?: string;
 
   form?: Partial<FormGrammar>;             // section vocab, order templates (weighted), bar-length distributions, intros/outros/breaks, pickups, endings
   harmony?: Partial<HarmonyGrammar>;       // mode/key policy, progression templates (functional/roman), cadences, chord vocabulary + extensions, harmonic rhythm, voicing style, bass-motion rules
@@ -187,7 +172,6 @@ export interface SongStyle {
   arrangement?: Partial<ArrangementGrammar>; // ensemble template by role, entrance/exit schedule per section, energy mapping, register allocation, doubling, stabs/hits, solos
   sound?: Partial<SoundProfile>;           // instrument palette (weighted), patch picks, articulation, FX chains, reverb/delay character, saturation/compression, stereo image, master profile
   patterns?: { require?: string[]; preferred?: string[]; allowed?: string[]; avoid?: string[] };
-  performance?: Partial<PerformanceGrammar>; // expressive pitch/timing idioms (arrastre, yumba, dembow fill, riser...) with per-context probabilities; 0 = style refrains from it
   rules?: { require?: RuleRef[]; forbid?: RuleRef[] };
   gestures?: Record<string, GestureRule>;
 }

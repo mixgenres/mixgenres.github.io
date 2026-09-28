@@ -1,4 +1,4 @@
-import {
+import type {
   SongStyle,
   ResolvedStyle,
   StyleInfluence,
@@ -6,7 +6,6 @@ import {
   DecisionTraceItem,
   Weighted,
   Range,
-  SoundFxPreset,
   FormGrammar,
   HarmonyGrammar,
   RhythmGrammar,
@@ -98,20 +97,6 @@ function blendWeighted<T>(baseList: Weighted<T>[], influenceList: Weighted<T>[],
     results.push({ ...item, w: item.w * infScale });
   }
   return results;
-}
-
-function blendFx(base: SoundFxPreset = {}, inf: SoundFxPreset = {}, w: number): SoundFxPreset {
-  const t = Math.max(0, Math.min(1, w));
-  const res: SoundFxPreset = { ...base };
-  if (inf.highPass !== undefined) res.highPass = Math.round(lerp(base.highPass ?? 30, inf.highPass, t));
-  if (inf.lowShelf !== undefined) res.lowShelf = Math.round(lerp(base.lowShelf ?? 0, inf.lowShelf, t) * 10) / 10;
-  if (inf.presence !== undefined) res.presence = Math.round(lerp(base.presence ?? 0, inf.presence, t) * 10) / 10;
-  if (inf.air !== undefined) res.air = Math.round(lerp(base.air ?? 0, inf.air, t) * 10) / 10;
-  if (inf.glue !== undefined) res.glue = Math.round(lerp(base.glue ?? 0.5, inf.glue, t) * 100) / 100;
-  if (inf.warmth !== undefined) res.warmth = Math.round(lerp(base.warmth ?? 0.3, inf.warmth, t) * 100) / 100;
-  if (inf.width !== undefined) res.width = Math.round(lerp(base.width ?? 0.6, inf.width, t) * 100) / 100;
-  if (inf.space !== undefined) res.space = Math.round(lerp(base.space ?? 1.0, inf.space, t) * 100) / 100;
-  return res;
 }
 
 /**
@@ -258,7 +243,6 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
         ...merged.sound,
         ...child.sound,
         instrumentPalette: child.sound.instrumentPalette?.length ? child.sound.instrumentPalette : merged.sound.instrumentPalette,
-        fxChains: { ...(merged.sound.fxChains ?? {}), ...(child.sound.fxChains ?? {}) },
         masterProfile: { ...merged.sound.masterProfile, ...child.sound.masterProfile },
       };
       recordDecision('sound', merged.sound, srcType, child.id);
@@ -382,13 +366,6 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
               infStyle.sound.instrumentPalette ?? [],
               w
             );
-            if (infStyle.sound.fxChains) {
-              const mergedFx: Record<string, SoundFxPreset> = { ...merged.sound.fxChains };
-              for (const [k, v] of Object.entries(infStyle.sound.fxChains)) {
-                mergedFx[k] = blendFx(mergedFx[k], v, w);
-              }
-              merged.sound.fxChains = mergedFx;
-            }
             if (w >= 0.5 && infStyle.sound.masterProfile) {
               merged.sound.masterProfile = {
                 pocket: lerp(merged.sound.masterProfile.pocket ?? 0.5, infStyle.sound.masterProfile.pocket ?? 0.5, w),

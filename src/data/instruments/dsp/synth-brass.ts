@@ -1,149 +1,129 @@
 import type { InstrumentDSPOverride } from '../physicalDspProfile';
 
-/** Deep physical profile override for Synth brass. Generated from this instrument's luthierPhysics, techniques, playingStyles and acoustic role; not a generic family alias. */
+/** Authentic synth-brass physical DSP override. */
 export const dspOverride: InstrumentDSPOverride = {
   "instrumentCharacter": {
-    "energySource": "electronic",
-    "energyPath": "oscillator/filter/body",
-    "bodyArchitecture": "instrument-specific chamber",
-    "primaryCollision": "circuit/switch/filter edge",
+    "energySource": "layered oscillators",
+    "energyPath": "saw/pulse/filter/envelope",
+    "bodyArchitecture": "analog-style subtractive voice",
+    "primaryCollision": "brass-like filter attack",
     "asymmetries": [
-      "slide"
+      "filter envelope",
+      "pitch drift",
+      "detune"
     ],
-    "couplingPaths": [],
+    "couplingPaths": [
+      "oscillator detune",
+      "filter-envelope"
+    ],
     "techniqueBindings": [
-      "velocity programming",
-      "filter motion",
-      "pitch slide"
+      "brass stab",
+      "legato",
+      "pitch bend"
     ]
   },
   "excitationDynamics": {
-    "hardness": 0.23,
-    "pressureSensitivity": 0.505,
-    "nonlinearDrive": 0.081,
-    "attackCollision": 0.515,
-    "spectralSpread": 0.567,
-    "directionalAsymmetry": 0.54
+    "hardness": 0.52,
+    "pressureSensitivity": 0.4,
+    "nonlinearDrive": 0.22,
+    "attackCollision": 0.52,
+    "spectralSpread": 0.68,
+    "directionalAsymmetry": 0.12
   },
   "coupledResonators": {
     "bodyModes": [
       {
-        "ratio": 1.0,
-        "q": 2.0,
-        "gain": 0.142
+        "ratio": 1,
+        "q": 4.5,
+        "gain": 0.12
       },
       {
-        "ratio": 2.0,
-        "q": 2.45,
-        "gain": 0.111
+        "ratio": 2,
+        "q": 3,
+        "gain": 0.055
       },
       {
-        "ratio": 3.0,
-        "q": 2.9,
-        "gain": 0.101
+        "ratio": 3,
+        "q": 2.3,
+        "gain": 0.028
       }
     ]
   },
   "mechanicalArtifacts": {
-  "airHiss": 0,
-  "keyThud": 0,
-  "valveClick": 0,
-  "fretBuzz": 0,
-  "stringSqueak": 0,
-  "pickZing": 0,
-  "handContact": 0,
-  "bodyKnock": 0,
-  "rimImpact": 0,
-  "bellowsNoise": 0,
-  "damperNoise": 0.02,
-  "palletClick": 0,
-  "slideNoise": 0,
-  "reedChatter": 0,
-  "bellowsFold": 0,
-  "bowRosin": 0,
-  "hammerClick": 0,
-  "pedalNoise": 0,
-  "membraneFingerNoise": 0,
-  "seedRattle": 0,
-  "fippleNoise": 0,
-  "muteContact": 0,
-  "breathBurst": 0,
-  "keyworkClick": 0
-},
+    "airHiss": 0,
+    "keyThud": 0,
+    "valveClick": 0,
+    "fretBuzz": 0,
+    "stringSqueak": 0,
+    "pickZing": 0,
+    "handContact": 0,
+    "bodyKnock": 0,
+    "rimImpact": 0,
+    "bellowsNoise": 0,
+    "damperNoise": 0,
+    "palletClick": 0,
+    "slideNoise": 0,
+    "reedChatter": 0,
+    "bellowsFold": 0,
+    "bowRosin": 0,
+    "hammerClick": 0,
+    "pedalNoise": 0,
+    "membraneFingerNoise": 0,
+    "seedRattle": 0,
+    "fippleNoise": 0,
+    "muteContact": 0,
+    "breathBurst": 0,
+    "keyworkClick": 0
+  },
   "articulationPhysics": {
     "strikeZoneLocation": "none",
     "fleshVsNail": 0,
     "handDamping": 0,
-    "attackToPitchCoupling": 0.396,
-    "releaseCoupling": 0.18,
-    "continuousSustain": false,
-    "noteTransition": "slide"
+    "attackToPitchCoupling": 0.2,
+    "releaseCoupling": 0.3,
+    "continuousSustain": true,
+    "noteTransition": "legato"
   },
   "genreDialects": {
     "electronic": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
+      "excitationBias": 0.04,
+      "brightness": 1.04,
+      "damping": 0.01,
+      "attack": 1.08,
       "articulation": [
-        "velocity programming",
-        "filter motion",
-        "pitch slide"
-      ]
-    },
-    "pop": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "velocity programming",
-        "filter motion",
-        "pitch slide"
-      ]
-    },
-    "dance": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "velocity programming",
-        "filter motion",
-        "pitch slide"
+        "brass stab",
+        "legato",
+        "pitch bend"
       ]
     }
   },
   "physicalDetails": {
-  "system": "electronic-signal-chain",
-  "construction": "electronic oscillator/filter/effect path",
-  "exciter": "electronic source",
-  "asymmetries": [
-    "filter trajectory",
-    "envelope/gate",
-    "drive state",
-    "effect feedback"
-  ],
-  "coupling": [
-    "oscillator-filter",
-    "filter-feedback",
-    "effect loop"
-  ],
-  "artifactSources": [
-    "switch/drive transients",
-    "quantization/aliasing where intentional"
-  ],
-  "detail": [
-    "electronic identity should not be forced into acoustic physics",
-    "timbral motion comes from signal-path state",
-    "effects are part of the instrument definition"
-  ],
-  "response": {
-    "contactHardness": 0.55,
-    "resonatorQ": 0.719,
-    "nonlinearTransfer": 0.358,
-    "inharmonicity": 0.068,
-    "bodyCoupling": 0.593
+    "system": "subtractive-brass-synth",
+    "construction": "detuned saw/pulse oscillators with envelope-controlled filter",
+    "exciter": "detuned oscillators",
+    "asymmetries": [
+      "detune spread",
+      "filter attack",
+      "pitch envelope"
+    ],
+    "coupling": [
+      "oscillators-filter",
+      "envelope-VCA"
+    ],
+    "artifactSources": [
+      "oscillator onset",
+      "filter resonance"
+    ],
+    "detail": [
+      "fast filter attack produces brass-like bite",
+      "slow release preserves pad tail"
+    ],
+    "response": {
+      "contactHardness": 0.42,
+      "resonatorQ": 0.64,
+      "nonlinearTransfer": 0.22,
+      "inharmonicity": 0.0,
+      "bodyCoupling": 0.06
+    }
   }
-}
-} as InstrumentDSPOverride;
+};

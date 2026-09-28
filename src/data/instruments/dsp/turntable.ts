@@ -1,149 +1,134 @@
 import type { InstrumentDSPOverride } from '../physicalDspProfile';
 
-/** Deep physical profile override for Turntable. Generated from this instrument's luthierPhysics, techniques, playingStyles and acoustic role; not a generic family alias. */
+/** Authentic turntable physical DSP override. */
 export const dspOverride: InstrumentDSPOverride = {
   "instrumentCharacter": {
-    "energySource": "electronic",
-    "energyPath": "oscillator/filter/body",
-    "bodyArchitecture": "instrument-specific chamber",
-    "primaryCollision": "circuit/switch/filter edge",
+    "energySource": "mechanical-disc-contact",
+    "energyPath": "stylus/record/cartridge/air",
+    "bodyArchitecture": "direct-drive turntable and vinyl disc",
+    "primaryCollision": "stylus-groove friction",
     "asymmetries": [
-      "slide"
+      "record eccentricity",
+      "crossfader cuts",
+      "hand braking"
     ],
-    "couplingPaths": [],
+    "couplingPaths": [
+      "stylus-cartridge",
+      "disc-platter"
+    ],
     "techniqueBindings": [
-      "velocity programming",
-      "filter motion",
-      "pitch slide"
+      "baby scratch",
+      "transformer cut",
+      "backspin",
+      "brake"
     ]
   },
   "excitationDynamics": {
-    "hardness": 0.26,
-    "pressureSensitivity": 0.49,
-    "nonlinearDrive": 0.087,
-    "attackCollision": 0.53,
-    "spectralSpread": 0.574,
-    "directionalAsymmetry": 0.54
+    "hardness": 0.72,
+    "pressureSensitivity": 0.18,
+    "nonlinearDrive": 0.22,
+    "attackCollision": 0.76,
+    "spectralSpread": 0.86,
+    "directionalAsymmetry": 0.64
   },
   "coupledResonators": {
     "bodyModes": [
       {
-        "ratio": 1.0,
-        "q": 2.0,
-        "gain": 0.144
+        "ratio": 1,
+        "q": 6,
+        "gain": 0.08
       },
       {
-        "ratio": 2.0,
-        "q": 2.45,
-        "gain": 0.112
+        "ratio": 2.01,
+        "q": 3.5,
+        "gain": 0.04
       },
       {
-        "ratio": 3.0,
-        "q": 2.9,
-        "gain": 0.101
+        "ratio": 3.07,
+        "q": 2.8,
+        "gain": 0.025
       }
     ]
   },
   "mechanicalArtifacts": {
-  "airHiss": 0,
-  "keyThud": 0,
-  "valveClick": 0,
-  "fretBuzz": 0,
-  "stringSqueak": 0,
-  "pickZing": 0,
-  "handContact": 0,
-  "bodyKnock": 0,
-  "rimImpact": 0,
-  "bellowsNoise": 0,
-  "damperNoise": 0.02,
-  "palletClick": 0,
-  "slideNoise": 0,
-  "reedChatter": 0,
-  "bellowsFold": 0,
-  "bowRosin": 0,
-  "hammerClick": 0,
-  "pedalNoise": 0,
-  "membraneFingerNoise": 0,
-  "seedRattle": 0,
-  "fippleNoise": 0,
-  "muteContact": 0,
-  "breathBurst": 0,
-  "keyworkClick": 0
-},
+    "airHiss": 0.05,
+    "keyThud": 0,
+    "valveClick": 0,
+    "fretBuzz": 0,
+    "stringSqueak": 0,
+    "pickZing": 0,
+    "handContact": 0,
+    "bodyKnock": 0.03,
+    "rimImpact": 0,
+    "bellowsNoise": 0,
+    "damperNoise": 0,
+    "palletClick": 0,
+    "slideNoise": 0,
+    "reedChatter": 0,
+    "bellowsFold": 0,
+    "bowRosin": 0,
+    "hammerClick": 0,
+    "pedalNoise": 0,
+    "membraneFingerNoise": 0,
+    "seedRattle": 0,
+    "fippleNoise": 0,
+    "muteContact": 0,
+    "breathBurst": 0,
+    "keyworkClick": 0
+  },
   "articulationPhysics": {
     "strikeZoneLocation": "none",
     "fleshVsNail": 0,
     "handDamping": 0,
-    "attackToPitchCoupling": 0.396,
-    "releaseCoupling": 0.18,
-    "continuousSustain": false,
-    "noteTransition": "slide"
+    "attackToPitchCoupling": 0.2,
+    "releaseCoupling": 0.3,
+    "continuousSustain": true,
+    "noteTransition": "legato"
   },
   "genreDialects": {
     "electronic": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
+      "excitationBias": 0.08,
+      "brightness": 1.1,
+      "damping": 0.0,
+      "attack": 1.1,
       "articulation": [
-        "velocity programming",
-        "filter motion",
-        "pitch slide"
-      ]
-    },
-    "pop": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "velocity programming",
-        "filter motion",
-        "pitch slide"
-      ]
-    },
-    "dance": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "velocity programming",
-        "filter motion",
-        "pitch slide"
+        "scratch",
+        "backspin",
+        "transformer",
+        "brake"
       ]
     }
   },
   "physicalDetails": {
-  "system": "electronic-signal-chain",
-  "construction": "electronic oscillator/filter/effect path",
-  "exciter": "electronic source",
-  "asymmetries": [
-    "filter trajectory",
-    "envelope/gate",
-    "drive state",
-    "effect feedback"
-  ],
-  "coupling": [
-    "oscillator-filter",
-    "filter-feedback",
-    "effect loop"
-  ],
-  "artifactSources": [
-    "switch/drive transients",
-    "quantization/aliasing where intentional"
-  ],
-  "detail": [
-    "electronic identity should not be forced into acoustic physics",
-    "timbral motion comes from signal-path state",
-    "effects are part of the instrument definition"
-  ],
-  "response": {
-    "contactHardness": 0.4,
-    "resonatorQ": 0.606,
-    "nonlinearTransfer": 0.342,
-    "inharmonicity": 0.057,
-    "bodyCoupling": 0.455
+    "system": "electro-mechanical-disc",
+    "construction": "vinyl disc on direct-drive platter with magnetic cartridge",
+    "exciter": "stylus/groove friction",
+    "asymmetries": [
+      "groove velocity",
+      "stylus pressure",
+      "crossfader gating"
+    ],
+    "coupling": [
+      "stylus-cartridge",
+      "platter-bearing",
+      "record-groove"
+    ],
+    "artifactSources": [
+      "needle scratch",
+      "vinyl crackle",
+      "motor rumble"
+    ],
+    "detail": [
+      "pitch changes by platter speed",
+      "scratch reverses groove velocity",
+      "cuts are amplitude-gated at the mixer"
+    ],
+    "response": {
+      "contactHardness": 0.82,
+      "resonatorQ": 0.42,
+      "nonlinearTransfer": 0.24,
+      "inharmonicity": 0.08,
+      "bodyCoupling": 0.22
+    }
   }
-}
-} as InstrumentDSPOverride;
+};

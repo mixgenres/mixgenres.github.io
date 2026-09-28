@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../types';
 
 export const bodhran: InstrumentDef = {
   id: "bodhran",
-  name: "Bodhrán",
+  name: "Bodhran",
   family: "hand-drums",
   drum: {
     low: 41,

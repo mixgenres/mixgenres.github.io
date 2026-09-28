@@ -1,149 +1,120 @@
 import type { InstrumentDSPOverride } from '../physicalDspProfile';
 
-/** Deep physical profile override for Noise sweep. Generated from this instrument's luthierPhysics, techniques, playingStyles and acoustic role; not a generic family alias. */
+/** Authentic noise-sweep physical DSP override. */
 export const dspOverride: InstrumentDSPOverride = {
   "instrumentCharacter": {
-    "energySource": "electronic",
-    "energyPath": "oscillator/filter/body",
-    "bodyArchitecture": "instrument-specific chamber",
-    "primaryCollision": "circuit/switch/filter edge",
+    "energySource": "noise source",
+    "energyPath": "noise/filter/envelope",
+    "bodyArchitecture": "filtered-noise synthesizer",
+    "primaryCollision": "noise gate onset",
     "asymmetries": [
-      "slide"
+      "filter slope",
+      "sweep direction"
     ],
-    "couplingPaths": [],
+    "couplingPaths": [
+      "noise-filter",
+      "envelope-filter"
+    ],
     "techniqueBindings": [
-      "velocity programming",
-      "filter motion",
-      "pitch slide"
+      "riser",
+      "down-sweep",
+      "noise hit"
     ]
   },
   "excitationDynamics": {
-    "hardness": 0.19,
-    "pressureSensitivity": 0.525,
-    "nonlinearDrive": 0.074,
-    "attackCollision": 0.495,
-    "spectralSpread": 0.558,
-    "directionalAsymmetry": 0.54
+    "hardness": 0.48,
+    "pressureSensitivity": 0.18,
+    "nonlinearDrive": 0.02,
+    "attackCollision": 0.62,
+    "spectralSpread": 0.98,
+    "directionalAsymmetry": 0.44
   },
   "coupledResonators": {
     "bodyModes": [
       {
-        "ratio": 1.0,
+        "ratio": 1,
         "q": 2.0,
-        "gain": 0.139
+        "gain": 0.08
       },
       {
-        "ratio": 2.0,
-        "q": 2.45,
-        "gain": 0.11
-      },
-      {
-        "ratio": 3.0,
-        "q": 2.9,
-        "gain": 0.1
+        "ratio": 2.4,
+        "q": 1.8,
+        "gain": 0.04
       }
     ]
   },
   "mechanicalArtifacts": {
-  "airHiss": 0,
-  "keyThud": 0,
-  "valveClick": 0,
-  "fretBuzz": 0,
-  "stringSqueak": 0,
-  "pickZing": 0,
-  "handContact": 0,
-  "bodyKnock": 0,
-  "rimImpact": 0,
-  "bellowsNoise": 0,
-  "damperNoise": 0.02,
-  "palletClick": 0,
-  "slideNoise": 0,
-  "reedChatter": 0,
-  "bellowsFold": 0,
-  "bowRosin": 0,
-  "hammerClick": 0,
-  "pedalNoise": 0,
-  "membraneFingerNoise": 0,
-  "seedRattle": 0,
-  "fippleNoise": 0,
-  "muteContact": 0,
-  "breathBurst": 0,
-  "keyworkClick": 0
-},
+    "airHiss": 0,
+    "keyThud": 0,
+    "valveClick": 0,
+    "fretBuzz": 0,
+    "stringSqueak": 0,
+    "pickZing": 0,
+    "handContact": 0,
+    "bodyKnock": 0,
+    "rimImpact": 0,
+    "bellowsNoise": 0,
+    "damperNoise": 0,
+    "palletClick": 0,
+    "slideNoise": 0,
+    "reedChatter": 0,
+    "bellowsFold": 0,
+    "bowRosin": 0,
+    "hammerClick": 0,
+    "pedalNoise": 0,
+    "membraneFingerNoise": 0,
+    "seedRattle": 0,
+    "fippleNoise": 0,
+    "muteContact": 0,
+    "breathBurst": 0,
+    "keyworkClick": 0
+  },
   "articulationPhysics": {
     "strikeZoneLocation": "none",
     "fleshVsNail": 0,
     "handDamping": 0,
-    "attackToPitchCoupling": 0.396,
-    "releaseCoupling": 0.18,
-    "continuousSustain": false,
-    "noteTransition": "slide"
+    "attackToPitchCoupling": 0.2,
+    "releaseCoupling": 0.3,
+    "continuousSustain": true,
+    "noteTransition": "legato"
   },
   "genreDialects": {
     "electronic": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
+      "excitationBias": 0.03,
+      "brightness": 1.12,
+      "damping": -0.02,
+      "attack": 1.12,
       "articulation": [
-        "velocity programming",
-        "filter motion",
-        "pitch slide"
-      ]
-    },
-    "pop": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "velocity programming",
-        "filter motion",
-        "pitch slide"
-      ]
-    },
-    "dance": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "velocity programming",
-        "filter motion",
-        "pitch slide"
+        "riser",
+        "down-sweep",
+        "noise hit"
       ]
     }
   },
   "physicalDetails": {
-  "system": "electronic-signal-chain",
-  "construction": "electronic oscillator/filter/effect path",
-  "exciter": "electronic source",
-  "asymmetries": [
-    "filter trajectory",
-    "envelope/gate",
-    "drive state",
-    "effect feedback"
-  ],
-  "coupling": [
-    "oscillator-filter",
-    "filter-feedback",
-    "effect loop"
-  ],
-  "artifactSources": [
-    "switch/drive transients",
-    "quantization/aliasing where intentional"
-  ],
-  "detail": [
-    "electronic identity should not be forced into acoustic physics",
-    "timbral motion comes from signal-path state",
-    "effects are part of the instrument definition"
-  ],
-  "response": {
-    "contactHardness": 0.38,
-    "resonatorQ": 0.908,
-    "nonlinearTransfer": 0.338,
-    "inharmonicity": 0.055,
-    "bodyCoupling": 0.752
+    "system": "filtered-noise-sweep",
+    "construction": "broadband noise through automated filter and envelope",
+    "exciter": "noise generator",
+    "asymmetries": [
+      "sweep direction",
+      "filter resonance"
+    ],
+    "coupling": [
+      "noise-filter"
+    ],
+    "artifactSources": [
+      "noise floor",
+      "filter resonance"
+    ],
+    "detail": [
+      "no pitched oscillator is required"
+    ],
+    "response": {
+      "contactHardness": 0.5,
+      "resonatorQ": 0.3,
+      "nonlinearTransfer": 0.02,
+      "inharmonicity": 1.0,
+      "bodyCoupling": 0.01
+    }
   }
-}
-} as InstrumentDSPOverride;
+};

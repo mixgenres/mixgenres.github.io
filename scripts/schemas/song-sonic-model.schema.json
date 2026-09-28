@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mixgenres.local/schema/song-sonic-model.schema.json",
+  "title": "MixGenres Song Sonic Model",
+  "type": "object",
+  "required": ["genre", "styleId", "durationSec", "tracks", "sections", "phrasePlan", "mixPlan"],
+  "properties": {
+    "genre": {"type":"string"},
+    "styleId": {"type":"string"},
+    "durationSec": {"type":"number","minimum":0},
+    "tempoBpm": {"type":"number","minimum":1},
+    "tracks": {"type":"array","items":{"$ref":"#/$defs/track"}},
+    "sections": {"type":"array","items":{"type":"object","required":["id","kind","startBar","endBar","chords"],"properties":{"id":{"type":"string"},"kind":{"type":"string"},"startBar":{"type":"integer"},"endBar":{"type":"integer"},"chords":{"type":"array","items":{"type":"string"}}}}},
+    "phrasePlan": {"type":"array","items":{"type":"object","required":["startBar","endBar","energy"],"properties":{"startBar":{"type":"integer"},"endBar":{"type":"integer"},"energy":{"type":"number"},"cadence":{"type":"boolean"},"development":{"type":"string"}}}},
+    "mixPlan": {"type":"object","additionalProperties":{"type":"object","properties":{"role":{"type":"string"},"volume":{"type":"number"},"pan":{"type":"number"},"bassTrimDb":{"type":"number"}}}},
+    "diagnostics": {"type":"array","items":{"type":"string"}}
+  },
+  "$defs": {
+    "track": {"type":"object","required":["trackId","instrumentId","role","noteCount","meanVelocity","gestureDiversity"],"properties":{"trackId":{"type":"string"},"instrumentId":{"type":"string"},"role":{"type":"string"},"noteCount":{"type":"integer"},"meanVelocity":{"type":"number"},"gestureDiversity":{"type":"integer"},"rootRatio":{"type":"number"},"lowRegisterRatio":{"type":"number"},"articulations":{"type":"array","items":{"type":"string"}}}}
+  }
+}

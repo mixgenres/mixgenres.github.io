@@ -6,6 +6,8 @@ import { calculateSidechainDepth, calculateDrumKnock } from '../audio/mixer';
 import { buildVoiceContext, getInstrumentModule } from '../instruments/registry';
 import { isCollisionAllowedForAction } from '../theory/excitationGates';
 import { applyInstrumentEffectsChain } from '../audio/instrumentEffectsChain';
+import { StereoFieldManager } from '../audio/panning';
+import { applyGenreInstrumentTreatment } from '../instruments/genreInstrumentTreatment';
 
 type Node = any;
 /**
@@ -125,11 +127,15 @@ contactPoint?: number;
 mass?: number;
 frequencyHz?: number;
 bellowsDirectionCode?: 1 | 2;
+bandoneonButtonId?: string;
+bandoneonButtonIndex?: number;
+bandoneonSideCode?: 1 | 2;
 retriggerId?: number;
 attack?: number;
 decay?: number;
 sustain?: number;
 release?: number;
+articulation?: number;
 }
 export interface TrackParams {
 brightness: number;
@@ -203,38 +209,9 @@ export function getFormantProfileForInstrument(instrumentId: string, model: numb
   const idLower = instrumentId.toLowerCase().replace(/_/g, '-');
   const def = INSTRUMENTS_BY_ID[instrumentId] || INSTRUMENTS_BY_ID[idLower];
   if (def?.formantProfile) return def.formantProfile;
-  const exact = WIND_BRASS_REED_FORMANTS[idLower];
-  if (exact) return exact;
-
-  // Mid-tier fallback keyed by instrument name patterns
-  if (/pipe|reed|sax|oboe|clarinet|bassoon|harmonica|hichiriki|duduk|shenai|zurna|bagpipe/.test(idLower)) {
-    if (typeof process !== 'undefined' && process.env?.NODE_ENV !== 'production') {
-      console.warn(`[ElementaryEngine] Mid-tier fallback (reed) for instrument "${instrumentId}" (model ${model})`);
-    }
-    return WIND_BRASS_REED_FORMANTS['alto-sax'];
-  }
-  if (/brass|trumpet|trombone|horn|tuba|cornet|euphonium|bugle/.test(idLower)) {
-    if (typeof process !== 'undefined' && process.env?.NODE_ENV !== 'production') {
-      console.warn(`[ElementaryEngine] Mid-tier fallback (brass) for instrument "${instrumentId}" (model ${model})`);
-    }
-    return WIND_BRASS_REED_FORMANTS['brass'];
-  }
-  if (/flute|whistle|piccolo|quena|ocarina|shakuhachi|xiao|dizi|recorder/.test(idLower)) {
-    if (typeof process !== 'undefined' && process.env?.NODE_ENV !== 'production') {
-      console.warn(`[ElementaryEngine] Mid-tier fallback (flute) for instrument "${instrumentId}" (model ${model})`);
-    }
-    return WIND_BRASS_REED_FORMANTS['flute'];
-  }
-
-  // Model-based fallback
-  if (model === 7) return WIND_BRASS_REED_FORMANTS['flute'];
-  if (model === 15) return WIND_BRASS_REED_FORMANTS['brass'];
-  if (model === 16) return WIND_BRASS_REED_FORMANTS['alto-sax'];
-
-  if (typeof process !== 'undefined' && process.env?.NODE_ENV !== 'production') {
-    console.warn(`[ElementaryEngine] Default formant fallback (flute) for unknown instrument "${instrumentId}" (model ${model})`);
-  }
-  return WIND_BRASS_REED_FORMANTS['flute'];
+  throw new Error(
+    `UNRESOLVED_MUSICAL_IDENTITY_ERROR: instrument "${instrumentId}" has no authored acoustic formant profile (model ${model}).`
+  );
 }
 export interface BowedResonanceProfile {
 bodyFreq: number;
@@ -250,26 +227,15 @@ for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
     BOWED_RESONANCES[id] = def.bowedResonance;
   }
 }
-export function getBowedResonanceProfile(instrumentId: string, bodyParam: number): BowedResonanceProfile {
+export function getBowedResonanceProfile(instrumentId: string, _bodyParam: number): BowedResonanceProfile {
   const def = INSTRUMENTS_BY_ID[instrumentId];
   if (def?.bowedResonance) return def.bowedResonance;
-  const exact = BOWED_RESONANCES[instrumentId];
-  if (exact) return exact;
-  const bodyFreq = 100 + (1 - bodyParam) * 450;
-  const bridgeHillFreq = 900 + (1 - bodyParam) * 2200;
-  return {
-    bodyFreq,
-    bodyQ: 2.2,
-    bodyGain: 0.45,
-    bridgeHillFreq,
-    bridgeHillQ: 2.5,
-    bridgeHillGain: 0.35,
-  };
+  throw new Error(`UNRESOLVED_MUSICAL_IDENTITY_ERROR: bowed instrument "${instrumentId}" has no authored resonance profile.`);
 }
 export function modelForInstrument(instrumentId: string): number {
   const def = INSTRUMENTS_BY_ID[instrumentId];
   if (def?.elementaryModel !== undefined) return def.elementaryModel;
-  return 0;
+  throw new Error(`UNRESOLVED_MUSICAL_IDENTITY_ERROR: instrument "${instrumentId}" has no elementary model.`);
 }
 export function normalizedParams(instrumentId: string, luthier: LuthierPhysicalParameters, modelNum: number) {
 const electric = /electric|distortion|synth|acid|clavinet|sub-bass|rhodes|fm-ep/.test(instrumentId.toLowerCase());
@@ -350,7 +316,7 @@ brightness: norm.brightness,
 decay: norm.decay,
 drive: norm.drive,
 body: norm.body,
-tension: Math.max(0, Math.min(1, l.tension)),
+tension: Math.max(0, Math.min(1, l.stringTension ?? l.tension)),
 styleFlavor: 0.5,
 articulation: 0,
 contact: 0.5,
@@ -363,7 +329,7 @@ pressure: 0.55,
 resonance: 0.5,
 model: modelNum,
 volume,
-pan: 0.5,
+pan: new StereoFieldManager().resolveInstrumentPanNormalized(instrumentId),
 performanceMode: isElectronic ? 'programmed-electronic' : 'acoustic-ensemble',
 bendGlideMs: 15,
 instrumentId,
@@ -382,6 +348,7 @@ export function renderVoice(
   const ctx = buildVoiceContext(trackId, voiceIndex, voice, params);
   const mod = getInstrumentModule(params.instrumentId);
   let rawAudio: Node = mod.renderVoice(ctx);
+  rawAudio = applyGenreInstrumentTreatment(rawAudio, ctx, INSTRUMENTS_BY_ID[params.instrumentId ?? '']?.family);
 
   const instId = params.instrumentId || '';
   const instDef = INSTRUMENTS_BY_ID[instId] || INSTRUMENTS_BY_ID[instId.toLowerCase()];
@@ -394,11 +361,29 @@ export function renderVoice(
     const a = dspProfile.mechanicalArtifacts;
     const ap = dspProfile.articulationPhysics;
     const genreKey = (params.genreId ?? params.dialect ?? '').toLowerCase();
-    const dialect = genreKey ? dspProfile.genreDialects[genreKey] : undefined;
+    const authoredDialect = genreKey ? dspProfile.genreDialects[genreKey] : undefined;
+    const dialect = authoredDialect ?? {
+      brightness: ctx.genreDialect.brightness,
+      damping: Math.max(0, 0.055 * (1 - ctx.genreDialect.decay)),
+      attack: ctx.genreDialect.attack,
+      body: ctx.genreDialect.body,
+      articulation: [],
+    };
     const physical = dspProfile.physicalDetails;
-    const dialectAttack = dialect?.attack ?? 1;
-    const dialectBrightness = dialect?.brightness ?? 1;
-    const dialectDamping = dialect?.damping ?? 0;
+    const family = instDef?.family;
+    const dialectAttack = dialect.attack ?? 1;
+    // Mechanical/air noise is detail, not the instrument's primary tone.
+    // notes were active. Keep the authored artifacts, but put them behind a
+    // family-dependent acoustic-detail ceiling.
+    const familyNoiseScale = /hand-drums|kit|metal-and-wood/.test(String(family)) ? 0.62
+      : /bowed|strings/.test(String(family)) ? 0.30
+      : /plucked/.test(String(family)) ? 0.34
+      : /winds|brass/.test(String(family)) ? 0.28
+      : /bellows/.test(String(family)) ? 0.26
+      : /key/.test(String(family)) ? 0.24
+      : 0.30;
+    const dialectBrightness = dialect.brightness ?? ctx.genreDialect.brightness;
+    const dialectDamping = dialect.damping ?? 0;
     const directionText = ctx.action.toLowerCase();
     const bisonoric = dspProfile?.excitationDynamics.bisonoricAsymmetry;
     const directionPhysicalGain = bisonoric
@@ -411,7 +396,7 @@ export function renderVoice(
       for (let i = 0; i < Math.min(4, c.bodyModes.length); i++) {
         const m = c.bodyModes[i];
         modeSignals.push(el.mul(
-          m.gain * (0.72 + (physical?.response.bodyCoupling ?? 0.5) * 0.48),
+          m.gain * (0.72 + (physical?.response.bodyCoupling ?? 0.5) * 0.48) * (dialect.body ?? ctx.genreDialect.body),
           el.svf({ mode: "bandpass" }, Math.min(19000, Math.max(30, ctx.freq * m.ratio * (1 + (physical?.response.inharmonicity ?? 0) * i * 0.006))), Math.max(0.6, m.q * (0.72 + (physical?.response.resonatorQ ?? 0.5) * 0.42)), rawAudio)
         ));
       }
@@ -420,6 +405,18 @@ export function renderVoice(
         const thudEnv = el.adsr(0.0003, 0.018 + sb.coupling * 0.03, 0, 0.012, ctx.gateSignal);
         const thud = el.mul(sb.thudGain * (0.5 + params.body), el.mul(el.svf({ mode: "bandpass" }, sb.thudHz, 1.7, el.pinknoise()), thudEnv));
         modeSignals.push(thud);
+      }
+      if (c.airModes?.length) {
+        for (let i = 0; i < Math.min(3, c.airModes.length); i++) {
+          const m = c.airModes[i];
+          const resonanceHz = m.frequencyHz ?? (ctx.freq * m.ratio);
+          modeSignals.push(
+            el.mul(
+              m.gain * (0.55 + params.body * 0.65),
+              el.svf({ mode: "bandpass" }, Math.min(19000, Math.max(30, resonanceHz)), Math.max(0.6, m.q), rawAudio)
+            )
+          );
+        }
       }
       if (c.membrane2D) {
         const m = c.membrane2D;
@@ -442,13 +439,12 @@ export function renderVoice(
 
     // Gate collision transient by excitation type & action
     const exType = params.excitationType ?? instDef?.luthierPhysics?.excitationType ?? instDef?.excitationType;
-    const family = instDef?.family;
     const pmSharpness = instDef?.physicalModel?.parameters?.transientSharpness ?? 1;
     const collisionEnv = el.adsr(0.0001, Math.max(0.0015, (0.004 + (1 - x.hardness) * 0.008) * pmSharpness), 0, 0.002, ctx.gateSignal);
 
     if (x.attackCollision > 0.05 && isCollisionAllowedForAction(exType, family, ctx.action, ctx.action)) {
       const collision = el.mul(
-        x.attackCollision * (0.70 + (physical?.response.contactHardness ?? 0.5) * 0.52) * dialectAttack * directionPhysicalGain * (0.08 + 0.16 * ctx.velBoost),
+        familyNoiseScale * x.attackCollision * (0.70 + (physical?.response.contactHardness ?? 0.5) * 0.52) * dialectAttack * directionPhysicalGain * (0.08 + 0.16 * ctx.velBoost),
         el.mul(el.highpass(1200 + x.spectralSpread * 4200, 0.9, el.noise()), collisionEnv)
       );
       modeSignals.push(collision);
@@ -459,71 +455,71 @@ export function renderVoice(
       const pmNoise = instDef?.physicalModel?.parameters?.breathNoise ?? 0;
       if (a.airHiss > 0.02 || pmNoise > 0.02) {
         const hissLevel = Math.max(a.airHiss, pmNoise * 0.15);
-        const hiss = el.mul(hissLevel * (0.03 + 0.10 * params.pressure), el.mul(el.highpass(3000, 0.8, el.noise()), el.mul(ctx.gateSignal, 0.65)));
+        const hiss = el.mul(familyNoiseScale * hissLevel * (0.03 + 0.10 * params.pressure), el.mul(el.highpass(3000, 0.8, el.noise()), el.mul(ctx.gateSignal, 0.65)));
         modeSignals.push(hiss);
       }
       if (a.pickZing > 0.02) {
-        const zing = el.mul(a.pickZing * 0.10, el.mul(el.svf({ mode: "bandpass" }, 4800 + ctx.b * 2600, 3.2, el.noise()), collisionEnv));
+        const zing = el.mul(familyNoiseScale * a.pickZing * 0.10, el.mul(el.svf({ mode: "bandpass" }, 4800 + ctx.b * 2600, 3.2, el.noise()), collisionEnv));
         modeSignals.push(zing);
       }
       if (a.stringSqueak > 0.02 && (ctx.action === "slide" || ctx.action === "legato" || ctx.action === "slur")) {
-        modeSignals.push(el.mul(a.stringSqueak * 0.12, el.mul(el.highpass(2500, 1.0, el.noise()), collisionEnv)));
+        modeSignals.push(el.mul(familyNoiseScale * a.stringSqueak * 0.12, el.mul(el.highpass(2500, 1.0, el.noise()), collisionEnv)));
       }
       if (a.keyThud > 0.02 || a.valveClick > 0.02 || (a.keyworkClick ?? 0) > 0.02 || (a.palletClick ?? 0) > 0.02) {
-        const mechanical = el.mul((a.keyThud + a.valveClick + (a.keyworkClick ?? 0) + (a.palletClick ?? 0)) * 0.10, el.mul(el.svf({ mode: "bandpass" }, 1100 + ctx.b * 900, 2.4, el.noise()), collisionEnv));
+        const mechanical = el.mul(familyNoiseScale * (a.keyThud + a.valveClick + (a.keyworkClick ?? 0) + (a.palletClick ?? 0)) * 0.10, el.mul(el.svf({ mode: "bandpass" }, 1100 + ctx.b * 900, 2.4, el.noise()), collisionEnv));
         modeSignals.push(mechanical);
       }
       if ((a.slideNoise ?? 0) > 0.02) {
-        const slide = el.mul((a.slideNoise ?? 0) * 0.08, el.mul(el.highpass(1800, 1.0, el.pinknoise()), collisionEnv));
+        const slide = el.mul(familyNoiseScale * (a.slideNoise ?? 0) * 0.08, el.mul(el.highpass(1800, 1.0, el.pinknoise()), collisionEnv));
         modeSignals.push(slide);
       }
       if ((a.reedChatter ?? 0) > 0.02) {
-        const reed = el.mul((a.reedChatter ?? 0) * 0.06, el.mul(el.highpass(2400, 1.0, el.noise()), collisionEnv));
+        const reed = el.mul(familyNoiseScale * (a.reedChatter ?? 0) * 0.06, el.mul(el.highpass(2400, 1.0, el.noise()), collisionEnv));
         modeSignals.push(reed);
       }
       if ((a.bellowsFold ?? 0) > 0.02) {
-        const fold = el.mul((a.bellowsFold ?? 0) * 0.05, el.mul(el.lowpass(1800, 0.9, el.pinknoise()), el.mul(ctx.gateSignal, 0.7)));
+        const fold = el.mul(familyNoiseScale * (a.bellowsFold ?? 0) * 0.05, el.mul(el.lowpass(1800, 0.9, el.pinknoise()), el.mul(ctx.gateSignal, 0.7)));
         modeSignals.push(fold);
       }
       if ((a.bowRosin ?? 0) > 0.02 && (ctx.action === "bow_drag" || ctx.action === "legato" || ctx.action === "slur")) {
-        const rosin = el.mul((a.bowRosin ?? 0) * 0.06, el.mul(el.highpass(1500, 1.1, el.pinknoise()), collisionEnv));
+        const rosin = el.mul(familyNoiseScale * (a.bowRosin ?? 0) * 0.06, el.mul(el.highpass(1500, 1.1, el.pinknoise()), collisionEnv));
         modeSignals.push(rosin);
       }
       if ((a.hammerClick ?? 0) > 0.02) {
-        const click = el.mul((a.hammerClick ?? 0) * 0.08, el.mul(el.highpass(2800, 1.0, el.noise()), collisionEnv));
+        const click = el.mul(familyNoiseScale * (a.hammerClick ?? 0) * 0.08, el.mul(el.highpass(2800, 1.0, el.noise()), collisionEnv));
         modeSignals.push(click);
       }
       if ((a.membraneFingerNoise ?? 0) > 0.02 && (ctx.action === "tap" || ctx.action === "slap" || ctx.action === "strike" || ctx.action === "staccato")) {
-        const finger = el.mul((a.membraneFingerNoise ?? 0) * 0.07, el.mul(el.highpass(2200, 1.0, el.noise()), collisionEnv));
+        const finger = el.mul(familyNoiseScale * (a.membraneFingerNoise ?? 0) * 0.07, el.mul(el.highpass(2200, 1.0, el.noise()), collisionEnv));
         modeSignals.push(finger);
       }
       if ((a.seedRattle ?? 0) > 0.02) {
-        const rattle = el.mul((a.seedRattle ?? 0) * 0.06, el.mul(el.highpass(1800, 0.8, el.noise()), el.mul(ctx.gateSignal, 0.8)));
+        const rattle = el.mul(familyNoiseScale * (a.seedRattle ?? 0) * 0.06, el.mul(el.highpass(1800, 0.8, el.noise()), el.mul(ctx.gateSignal, 0.8)));
         modeSignals.push(rattle);
       }
       if ((a.fippleNoise ?? 0) > 0.02) {
-        const fipple = el.mul((a.fippleNoise ?? 0) * 0.06, el.mul(el.highpass(2600, 0.9, el.noise()), collisionEnv));
+        const fipple = el.mul(familyNoiseScale * (a.fippleNoise ?? 0) * 0.06, el.mul(el.highpass(2600, 0.9, el.noise()), collisionEnv));
         modeSignals.push(fipple);
       }
       if ((a.muteContact ?? 0) > 0.02) {
-        const muteContact = el.mul((a.muteContact ?? 0) * 0.06, el.mul(el.lowpass(1400, 0.9, el.noise()), collisionEnv));
+        const muteContact = el.mul(familyNoiseScale * (a.muteContact ?? 0) * 0.06, el.mul(el.lowpass(1400, 0.9, el.noise()), collisionEnv));
         modeSignals.push(muteContact);
       }
       if (a.bodyKnock > 0.02 || a.handContact > 0.02) {
-        const knock = el.mul((a.bodyKnock + a.handContact) * 0.08, el.mul(el.svf({ mode: "bandpass" }, c.soundboard?.thudHz ?? 120, 1.4, el.pinknoise()), collisionEnv));
+        const knock = el.mul(familyNoiseScale * (a.bodyKnock + a.handContact) * 0.08, el.mul(el.svf({ mode: "bandpass" }, c.soundboard?.thudHz ?? 120, 1.4, el.pinknoise()), collisionEnv));
         modeSignals.push(knock);
       }
       if (a.rimImpact > 0.02) {
-        const rim = el.mul(a.rimImpact * (0.05 + 0.08 * ctx.velBoost), el.mul(el.highpass(1700 + x.spectralSpread * 1800, 1.2, el.noise()), collisionEnv));
+        const rim = el.mul(familyNoiseScale * a.rimImpact * (0.05 + 0.08 * ctx.velBoost), el.mul(el.highpass(1700 + x.spectralSpread * 1800, 1.2, el.noise()), collisionEnv));
         modeSignals.push(rim);
       }
       if (a.damperNoise > 0.02 && (ctx.action === "mute" || ctx.action === "staccato" || ctx.action === "release")) {
-        const damper = el.mul(a.damperNoise * 0.07, el.mul(el.lowpass(2200, 1.0, el.noise()), collisionEnv));
+        const damper = el.mul(familyNoiseScale * a.damperNoise * 0.07, el.mul(el.lowpass(2200, 1.0, el.noise()), collisionEnv));
         modeSignals.push(damper);
       }
       if (c.bridge?.buzz > 0.25) {
         const bridgeEnv = el.adsr(0.001, Math.max(0.02, c.bridge.settlingMs / 1000), 0.10, 0.04, ctx.gateSignal);
-        const buzz = el.mul(c.bridge.buzz * 0.12, el.mul(el.highpass(2600, 2.2, el.noise()), bridgeEnv));
+        const buzz = el.mul(familyNoiseScale * c.bridge.buzz * 0.12, el.mul(el.highpass(2600, 2.2, el.noise()), bridgeEnv));
         modeSignals.push(buzz);
       }
     }
@@ -548,6 +544,19 @@ export function renderVoice(
       const dampingCutoff = Math.min(19000, Math.max(700, 12000 * (1 - dialectDamping)));
       rawAudio = el.lowpass(dampingCutoff, 1.0, rawAudio);
     }
+
+    // Fallback genre dialect for instruments whose physical profile has not yet
+    // authored a dedicated genre entry. This keeps the existing DSP model but
+    // prevents every un-authored genre from sounding like the neutral patch.
+    if (!authoredDialect) {
+      const transient = Math.max(0.75, Math.min(1.30, ctx.genreDialect.transient));
+      const dialectDrive = Math.max(0.92, Math.min(1.22, ctx.genreDialect.drive));
+      rawAudio = el.tanh(el.mul(dialectDrive, rawAudio));
+      if (ctx.genreDialect.electronic) {
+        const snap = el.mul((transient - 0.8) * 0.035, el.mul(el.highpass(2600, 0.9, el.noise()), el.adsr(0.00015, 0.004, 0, 0.0015, ctx.gateSignal)));
+        rawAudio = el.add(rawAudio, snap);
+      }
+    }
   }
 
   // Apply declared per-instrument physicalModel insert effects chain if authored
@@ -561,7 +570,11 @@ export function renderVoice(
     : 0;
   const roomBloom = el.const({ value: 0 });
   const finalRawAudio = el.add(rawAudio, el.add(damperThump, roomBloom));
-  const gain = el.mul(ctx.velSignal, ctx.env);
+  // Decaying physical instruments own their release in the resonator. A short
+  // global ADSR release here would choke plucked/struck tails at note-off.
+  const gain = ctx.isDecayingInstrument
+    ? ctx.velSignal
+    : el.mul(ctx.velSignal, ctx.env);
   return el.mul(gain, finalRawAudio);
 }
 
@@ -612,8 +625,14 @@ export function determineBusCategory(
   const r = (role || '').toLowerCase();
   const inst = (instrumentId || '').toLowerCase();
 
-  if (r === 'bass' || /bass|tuba|sub-bass|log-drum|guitarron/i.test(inst)) {
+  // Acoustic/electric bass instruments need their full harmonic body in the mix.
+  // Reserve the sub bus for genuinely sub-oriented instruments; the master chain
+  // may add a controlled low-end enhancement without throwing away upper harmonics.
+  if (/sub-bass|808|909|log-drum|subwoofer/i.test(inst)) {
     return 'sub';
+  }
+  if (r === 'bass' || /bass|tuba|guitarron|bassoon/i.test(inst)) {
+    return 'inst';
   }
   if (
     r === 'drums' ||

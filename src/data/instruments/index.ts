@@ -46,7 +46,7 @@ import { sitar } from './definitions/sitar';
 import { shamisen } from './definitions/shamisen';
 import { kora } from './definitions/kora';
 import { berimbau } from './definitions/berimbau';
-import { sho } from './definitions/sh_';
+import { sho } from './definitions/sho';
 import { guqin } from './definitions/guqin';
 import { pipa } from './definitions/pipa';
 import { guzheng } from './definitions/guzheng';
@@ -375,7 +375,7 @@ function enrichInstrumentPhysics(d: InstrumentDef): InstrumentDef {
   const isString = d.family === 'plucked' || d.family === 'bowed';
   const isPerc = d.family === 'hand-drums' || d.family === 'metal-and-wood' || d.family === 'kit';
   const isWind = d.family === 'winds' || d.family === 'brass';
-  const isFreeReed = ['accordion', 'bandoneon', 'concertina', 'harmonium', 'melodica', 'shō', 'harmonica'].includes(id);
+  const isFreeReed = ['accordion', 'bandoneon', 'concertina', 'harmonium', 'melodica', 'sho', 'harmonica'].includes(id);
   const isWoodwindReed = id.includes('sax') || id.includes('clarinet') || id.includes('oboe') || id.includes('bassoon');
   const isLipReed = id.includes('trumpet') || id.includes('trombone') || id.includes('horn') || id === 'tuba';
   const isStruckAcousticString = id === 'piano' || id === 'dulcimer' || id === 'celeste';
@@ -491,7 +491,14 @@ export const FAMILY_ORDER: InstrumentFamily[] = [
 ];
 
 export function instrument(id: string): InstrumentDef {
-  return INSTRUMENTS_BY_ID[id] ?? INSTRUMENT_CATALOG[0];
+  const def = INSTRUMENTS_BY_ID[id];
+  if (!def) {
+    throw new Error(
+      `UNRESOLVED_MUSICAL_IDENTITY_ERROR: unknown instrument "${id}". ` +
+      `No catalog fallback is permitted.`
+    );
+  }
+  return def;
 }
 
 /** Pattern vocabulary aliases. Genre pattern data uses musical roles/kinds
@@ -609,7 +616,11 @@ export const WORLD_INSTRUMENT_HINTS: Record<string, string[]> = {
 
 /** Return the authored technique profile for an instrument, with a safe fallback. */
 export function techniqueProfile(id: string): InstrumentTechniqueProfile {
-  return INSTRUMENTS_BY_ID[id]?.techniques ?? { articulations: [], techniqueMethods: [], playingStyles: [] };
+  const def = INSTRUMENTS_BY_ID[id];
+  if (!def) {
+    throw new Error(`UNRESOLVED_MUSICAL_IDENTITY_ERROR: unknown instrument "${id}" has no technique profile.`);
+  }
+  return def.techniques;
 }
 
 /** Pick style-specific idiomatic articulations without inventing unsupported gestures. */

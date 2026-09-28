@@ -148,14 +148,20 @@ export const GENRE_MIX_OFFSETS: Record<string, Record<string, number>> = {
   orchestral: { pad: 2.0, lead: 0.0, comp: 0.0, bass: 0.0 },
 };
 
-export function getRoleGainLinear(role: string, genre: string = 'default'): number {
+export function getRoleGainLinear(role: string, genre: string = 'default', instrumentId?: string): number {
   const r = (role || '').toLowerCase();
   const baseDb = ROLE_DB_PROFILES[r] ?? -3.0;
   const genreOffsets = GENRE_MIX_OFFSETS[genre.toLowerCase()] || {};
   const offsetDb = genreOffsets[r] ?? 0.0;
-  
-  // Combine structural role profile with stylistic genre mix offset
-  return Math.pow(10, (baseDb + offsetDb) / 20);
+  const id = (instrumentId ?? '').toLowerCase();
+  let instrumentTrimDb = 0;
+  if (id === 'upright-bass') instrumentTrimDb = /electronic|house|disco|drum-and-bass|uk-bass|reggaeton/.test(genre.toLowerCase()) ? 0 : -2.5;
+  else if (id === 'bass') instrumentTrimDb = /electronic|house|disco|drum-and-bass|uk-bass|reggaeton/.test(genre.toLowerCase()) ? 0 : -1.5;
+  else if (id === 'slap-bass') instrumentTrimDb = -1.0;
+  else if (id === 'piano') instrumentTrimDb = -0.8;
+  else if (id === 'bandoneon') instrumentTrimDb = -0.5;
+  // Combine structural role, genre mix, and instrument-specific gain staging.
+  return Math.pow(10, (baseDb + offsetDb + instrumentTrimDb) / 20);
 }
 
 export function roleProfileForGenre(role: string, mixCharacter?: MixCharacter): MixRoleProfile {
@@ -258,70 +264,148 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   drumShaper.curve = saturationCurve(initialKnock, initialSatType);
   drumShaper.oversample = '2x';
 
-  // 3. Clean Sub Bus Filter (Sub-Harmonic Exciter removed for pure, weighty low-end)
+  // 3. Low-end handling: keep the sub bus full-range so acoustic bass instruments
+  // retain pluck, body and harmonics. A small parallel sub enhancement is used only
+  // for genuinely sub-oriented tracks.
   const subFilter = ctx.createBiquadFilter();
   subFilter.type = 'lowpass';
-  subFilter.frequency.value = 80;
+  subFilter.frequency.value = 90;
+  subFilter.Q.value = 0.7;
 
-  // 4. Sidechain Ducking
+  const subEnhanceGain = ctx.createGain();
+  subEnhanceGain.gain.value = 0.16;
+
+  // 4. Real kick -> low-end ducking.  Web Audio has no sidechain input on
+  // DynamicsCompressorNode, so build a small audio-rate envelope detector:
+  // kick low-pass -> absolute-value waveshaper -> smoothing -> inverse depth
+  // curve -> AudioParam.  This is a true control signal, not an audio-route
+  // concrete signal route, and therefore works identically in live and OfflineAudioContext.
   const kickFilter = ctx.createBiquadFilter();
   kickFilter.type = 'lowpass';
-  kickFilter.frequency.value = 110;
-  kickFilter.Q.value = 1.0;
+  kickFilter.frequency.value = 105;
+  kickFilter.Q.value = 0.9;
+
+  const kickAbs = ctx.createWaveShaper();
+  const absCurve = new Float32Array(1025);
+  for (let i = 0; i < absCurve.length; i++) {
+    const x = (i / (absCurve.length - 1)) * 2 - 1;
+    absCurve[i] = Math.abs(x);
+  }
+  kickAbs.curve = absCurve;
+  kickAbs.oversample = '2x';
+
+  const kickEnvelope = ctx.createBiquadFilter();
+  kickEnvelope.type = 'lowpass';
+  kickEnvelope.frequency.value = 42;
+  kickEnvelope.Q.value = 0.5;
+
+  const kickDuckCurve = ctx.createWaveShaper();
+  const duckDepth = /electronic|electrotango|tango-electronico|house|techno|edm/i.test(genreId || '')
+    ? 0.34
+    : /tango|milonga|vals/i.test(genreId || '')
+      ? 0.16
+      : Math.max(0.08, (initialMixCharacter?.sidechainDucking ?? 0.12) * 0.45);
+  const duckCurve = new Float32Array(1025);
+  for (let i = 0; i < duckCurve.length; i++) {
+    const x = (i / (duckCurve.length - 1)) * 2 - 1;
+    const level = Math.max(0, Math.min(1, x));
+    // Never duck below 55% of the low-end signal.  The curve is deliberately
+    // gentle for acoustic tango, stronger for electrotango/electronic styles.
+    duckCurve[i] = 1 - duckDepth * level;
+  }
+  kickDuckCurve.curve = duckCurve;
+  kickDuckCurve.oversample = '2x';
+
+  drumBus.connect(kickFilter);
+  kickFilter.connect(kickAbs);
+  kickAbs.connect(kickEnvelope);
+  kickEnvelope.connect(kickDuckCurve);
+
+  // The low band of the instrument/sub mix is ducked; the mid/high band is
+  // untouched.  This keeps kick clarity without pumping piano/bandoneon
+  // transients or removing an acoustic bass's harmonic identity.
+  const instLow = ctx.createBiquadFilter();
+  instLow.type = 'lowpass';
+  instLow.frequency.value = 145;
+  instLow.Q.value = 0.65;
+  const instHigh = ctx.createBiquadFilter();
+  instHigh.type = 'highpass';
+  instHigh.frequency.value = 115;
+  instHigh.Q.value = 0.65;
+  const lowDuckGain = ctx.createGain();
+  lowDuckGain.gain.value = 1.0;
+  const lowDuckWet = ctx.createGain();
+  lowDuckWet.gain.value = 1.0;
+  kickDuckCurve.connect(lowDuckGain.gain);
+  instBus.connect(instLow);
+  instBus.connect(instHigh);
+  instLow.connect(lowDuckGain);
+  lowDuckGain.connect(lowDuckWet);
 
   const subDuckingGain = ctx.createGain();
   subDuckingGain.gain.value = 1.0;
+  kickDuckCurve.connect(subDuckingGain.gain);
+  subBus.connect(subDuckingGain);
 
+  subBus.connect(subEnhanceGain);
   subBus.connect(subFilter);
-  subFilter.connect(subDuckingGain);
+  subFilter.connect(subEnhanceGain);
 
-  // 5. Lush Room Reverb (FDN Network for Live Playback)
-  const initialRoomDepth = isSalsa ? 0.04 : (initialMixCharacter ? (1.0 - initialMixCharacter.dryness) * 0.45 : 0.25);
+  // 5. Stereo room: several short, decorrelated feedback lines replace the old
+  // four-delay series ring. This remains a small Web Audio graph but produces a
+  // substantially denser late field with asymmetric stereo reflections.
+  const initialRoomDepth = isSalsa ? 0.07 : (initialMixCharacter ? (1.0 - initialMixCharacter.dryness) * 0.55 : 0.30);
+  const roomInput = ctx.createGain();
+  const roomPreDelay = ctx.createDelay(0.25);
+  roomPreDelay.delayTime.value = 0.012;
+  roomInput.connect(roomPreDelay);
 
-  const rev1 = ctx.createDelay(0.5); rev1.delayTime.value = 0.037;
-  const rev2 = ctx.createDelay(0.5); rev2.delayTime.value = 0.043;
-  const rev3 = ctx.createDelay(0.5); rev3.delayTime.value = 0.053;
-  const rev4 = ctx.createDelay(0.5); rev4.delayTime.value = 0.067;
+  const roomSum = ctx.createGain();
+  const roomDelays = [0.013, 0.019, 0.029, 0.037, 0.053, 0.071].map((time, i) => {
+    const delay = ctx.createDelay(0.5);
+    delay.delayTime.value = time;
+    const feedback = ctx.createGain();
+    feedback.gain.value = [0.34, 0.31, 0.36, 0.29, 0.33, 0.27][i];
+    const damping = ctx.createBiquadFilter();
+    damping.type = 'lowpass';
+    damping.frequency.value = 3200 - i * 180;
+    const wet = ctx.createGain();
+    wet.gain.value = 0.55;
+    const panner = ctx.createStereoPanner();
+    panner.pan.value = [-0.78, 0.62, -0.46, 0.74, -0.24, 0.36][i];
 
-  const revFb1 = ctx.createGain(); revFb1.gain.value = 0.45;
-  const revFb2 = ctx.createGain(); revFb2.gain.value = 0.45;
-  const revFb3 = ctx.createGain(); revFb3.gain.value = 0.45;
-  const revFb4 = ctx.createGain(); revFb4.gain.value = 0.45;
+    roomPreDelay.connect(delay);
+    delay.connect(damping);
+    damping.connect(feedback);
+    feedback.connect(delay);
+    damping.connect(wet);
+    wet.connect(panner);
+    panner.connect(roomSum);
+    return { delay, feedback, damping, wet, panner };
+  });
 
-  rev1.connect(revFb1); revFb1.connect(rev2);
-  rev2.connect(revFb2); revFb2.connect(rev3);
-  rev3.connect(revFb3); revFb3.connect(rev4);
-  rev4.connect(revFb4); revFb4.connect(rev1);
-
-  const revMixL = ctx.createGain(); revMixL.gain.value = initialRoomDepth;
-  const revMixR = ctx.createGain(); revMixR.gain.value = initialRoomDepth;
-
-  const revFilterL = ctx.createBiquadFilter(); revFilterL.type = 'lowpass'; revFilterL.frequency.value = 3500;
-  const revFilterR = ctx.createBiquadFilter(); revFilterR.type = 'lowpass'; revFilterR.frequency.value = 3500;
-
-  rev1.connect(revFilterL); revFilterL.connect(revMixL);
-  rev2.connect(revFilterR); revFilterR.connect(revMixR);
-
-  const revMerger = ctx.createChannelMerger(2);
-  revMixL.connect(revMerger, 0, 0);
-  revMixR.connect(revMerger, 0, 1);
-
+  const revMix = ctx.createGain();
+  revMix.gain.value = initialRoomDepth;
+  roomSum.connect(revMix);
   // 6. Master Summing
   const masterSum = ctx.createGain();
   masterSum.gain.value = 1.0;
 
   drumBus.connect(drumShaper);
-  drumBus.connect(kickFilter);
   drumShaper.connect(masterSum);
 
+  // Preserve the full-range sub bus and add only a small controlled low-end enhancement.
+  // The direct sub bus is ducked by the kick envelope; the enhancement is also
+  // derived from the same signal so both live and export share the same behavior.
   subDuckingGain.connect(masterSum);
-  instBus.connect(masterSum);
+  subEnhanceGain.connect(masterSum);
+  lowDuckWet.connect(masterSum);
+  instHigh.connect(masterSum);
 
-  // Feed reverb
-  instBus.connect(rev1);
-  instBus.connect(rev3);
-  drumBus.connect(rev2);
-  revMerger.connect(masterSum);
+  // Feed the shared stereo room from instruments and drums.
+  instBus.connect(roomInput);
+  drumBus.connect(roomInput);
+  revMix.connect(masterSum);
 
   // 7. Subsonic Filter & Master EQ
   const hp = ctx.createBiquadFilter();
@@ -377,17 +461,6 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
     glue.release.value = 0.12;
   }
 
-  // 9. Mid-Side Processing Matrix (Stereo spatialization with mono sub-bass < 300Hz)
-  // Split L/R -> Mid (L+R)*0.707 and Side (L-R)*0.707
-  const sideHighPass = ctx.createBiquadFilter();
-  sideHighPass.type = 'highpass';
-  sideHighPass.frequency.value = 300; // Sub-bass < 300Hz is strictly mono
-  sideHighPass.Q.value = 0.707;
-
-  const sideGain = ctx.createGain();
-  const initWidth = initialMixCharacter?.width ?? 0.5;
-  sideGain.gain.value = Math.max(0.0, Math.min(1.8, initWidth * 1.2));
-
   // 9. Transparent Limiter & Output
   const limiter = ctx.createDynamicsCompressor();
   limiter.threshold.value = -0.2;
@@ -406,7 +479,58 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   output.gain.value = 0.95;
 
   // Signal routing (clean, linear, phase-coherent chain)
-  masterSum.connect(hp);
+  // Apply the width control in an actual mid/side reconstruction.
+  const msSplitter = ctx.createChannelSplitter(2);
+  const midL = ctx.createGain();
+  const midR = ctx.createGain();
+  const sideL = ctx.createGain();
+  const sideR = ctx.createGain();
+  const midSum = ctx.createGain();
+  const sideSum = ctx.createGain();
+  const sideHighPass = ctx.createBiquadFilter();
+  const sideGain = ctx.createGain();
+  const leftFromMid = ctx.createGain();
+  const rightFromMid = ctx.createGain();
+  const leftFromSide = ctx.createGain();
+  const rightFromSide = ctx.createGain();
+  const widthMerger = ctx.createChannelMerger(2);
+  const sqrtHalf = Math.SQRT1_2;
+
+  midL.gain.value = sqrtHalf;
+  midR.gain.value = sqrtHalf;
+  sideL.gain.value = sqrtHalf;
+  sideR.gain.value = -sqrtHalf;
+  leftFromMid.gain.value = sqrtHalf;
+  rightFromMid.gain.value = sqrtHalf;
+  leftFromSide.gain.value = sqrtHalf;
+  rightFromSide.gain.value = -sqrtHalf;
+  sideHighPass.type = 'highpass';
+  sideHighPass.frequency.value = 300;
+  sideHighPass.Q.value = 0.707;
+  const initWidth = initialMixCharacter?.width ?? 0.5;
+  sideGain.gain.value = Math.max(0.0, Math.min(1.8, 0.2 + initWidth * 1.6));
+
+  masterSum.connect(msSplitter);
+  msSplitter.connect(midL, 0);
+  msSplitter.connect(midR, 1);
+  msSplitter.connect(sideL, 0);
+  msSplitter.connect(sideR, 1);
+  midL.connect(midSum);
+  midR.connect(midSum);
+  sideL.connect(sideSum);
+  sideR.connect(sideSum);
+  sideSum.connect(sideHighPass);
+  sideHighPass.connect(sideGain);
+
+  midSum.connect(leftFromMid);
+  midSum.connect(rightFromMid);
+  sideGain.connect(leftFromSide);
+  sideGain.connect(rightFromSide);
+  leftFromMid.connect(widthMerger, 0, 0);
+  leftFromSide.connect(widthMerger, 0, 0);
+  rightFromMid.connect(widthMerger, 0, 1);
+  rightFromSide.connect(widthMerger, 0, 1);
+  widthMerger.connect(hp);
   hp.connect(low);
   low.connect(pres);
   pres.connect(air);
@@ -467,8 +591,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
 
       // Room Depth (Reverb)
       const rDepth = isSalsaActive ? 0.05 : (1.0 - char.dryness) * 0.45;
-      revMixL.gain.setTargetAtTime(rDepth, now, 0.05);
-      revMixR.gain.setTargetAtTime(rDepth, now, 0.05);
+      revMix.gain.setTargetAtTime(rDepth, now, 0.05);
 
       // Drum Bus Saturation & Saturation Type
       const knock = calculateDrumKnock(char);
@@ -476,7 +599,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
       drumShaper.curve = saturationCurve(knock, satType);
 
       // Mid-Side Width
-      sideGain.gain.setTargetAtTime(Math.max(0.0, Math.min(1.8, char.width * 1.2)), now, 0.05);
+      sideGain.gain.setTargetAtTime(Math.max(0.0, Math.min(1.8, 0.2 + char.width * 1.6)), now, 0.05);
     },
     dispose() {
       try {
@@ -487,28 +610,40 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
         drumShaper.disconnect();
         subFilter.disconnect();
         kickFilter.disconnect();
+        kickAbs.disconnect();
+        kickEnvelope.disconnect();
+        kickDuckCurve.disconnect();
+        instLow.disconnect();
+        instHigh.disconnect();
+        lowDuckGain.disconnect();
+        lowDuckWet.disconnect();
         subDuckingGain.disconnect();
         masterSum.disconnect();
-        rev1.disconnect();
-        rev2.disconnect();
-        rev3.disconnect();
-        rev4.disconnect();
-        revFb1.disconnect();
-        revFb2.disconnect();
-        revFb3.disconnect();
-        revFb4.disconnect();
-        revFilterL.disconnect();
-        revFilterR.disconnect();
-        revMixL.disconnect();
-        revMixR.disconnect();
-        revMerger.disconnect();
+        roomInput.disconnect();
+        roomPreDelay.disconnect();
+        roomSum.disconnect();
+        for (const r of roomDelays) {
+          r.delay.disconnect();
+          r.feedback.disconnect();
+          r.damping.disconnect();
+          r.wet.disconnect();
+          r.panner.disconnect();
+        }
+        revMix.disconnect();
+        msSplitter.disconnect();
+        midSum.disconnect();
+        sideHighPass.disconnect();
+        sideGain.disconnect();
+        leftFromMid.disconnect();
+        rightFromMid.disconnect();
+        leftFromSide.disconnect();
+        rightFromSide.disconnect();
+        widthMerger.disconnect();
         hp.disconnect();
         low.disconnect();
         pres.disconnect();
         air.disconnect();
         glue.disconnect();
-        sideHighPass.disconnect();
-        sideGain.disconnect();
         makeup.disconnect();
         limiter.disconnect();
         tap.disconnect();

@@ -356,10 +356,10 @@ export function resolveDialect(
     }
   }
 
-  return legacyResolveDialect(instrumentId, worldId, styleId);
+  return fallbackDialectForSparseContracts(instrumentId, worldId, styleId);
 }
 
-export function legacyResolveDialect(
+export function fallbackDialectForSparseContracts(
   instrumentId: string,
   worldId = '',
   styleId = ''

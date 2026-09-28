@@ -6,7 +6,7 @@ export const tremolo_strings: InstrumentDef = {
   family: "bowed",
   voicing: "chord",
   elementaryModel: 6,
-  makeupGain: 0.682,
+  makeupGain: 0.48,
   polyphony: 8,
   acousticProfile: {
     sustain: "sustained",

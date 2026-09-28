@@ -28,7 +28,7 @@ export const banjo: InstrumentDef = {
     materialDensity: 0.85,
     tension: 0.85,
     bodyResonanceVolume: 6,
-    decayTimeFactor: 1.6,
+    decayTimeFactor: 0.42,
     harmonicRichness: 0.9,
     courses: 1,
     bodyConstruction: "skin-faced",

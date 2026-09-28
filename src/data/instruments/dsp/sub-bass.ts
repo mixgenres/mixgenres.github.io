@@ -80,6 +80,14 @@ export const dspOverride: InstrumentDSPOverride = {
     "noteTransition": "slide"
   },
   "genreDialects": {
+    "tango-electronico": {
+      "excitationBias": 0.02,
+      "brightness": 0.94,
+      "damping": 0.10,
+      "attack": 0.98,
+      "body": 1.05,
+      "articulation": ["short-pulse", "kick-locked", "glide", "sub-rest"]
+    },
     "electronic": {
       "excitationBias": 0,
       "brightness": 1.0,

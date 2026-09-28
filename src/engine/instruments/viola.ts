@@ -24,7 +24,7 @@ export default class ViolaModule implements InstrumentModule {
     // Articulation definitions
     const isPizz = action === 'pluck' || action === 'pizzicato' || action === 'tambor' || /pizz/i.test(action ?? '');
     const isTremolo = action === 'tremolo' || /tremolo/i.test(action ?? '');
-    const isStaccato = action === 'staccato' || action === 'spiccato' || action === 'accent' || params.articulation > 0.65;
+    const isStaccato = action === 'staccato' || action === 'spiccato' || action === 'accent' || ctx.articulation > 0.65;
     const isSulPonticello = action === 'sul-ponticello' || /ponticello/i.test(action ?? '');
     const isLegato = action === 'legato' || action === 'slur';
     const isChicharra = action === 'chicharra' || /chicharra/i.test(action ?? '');

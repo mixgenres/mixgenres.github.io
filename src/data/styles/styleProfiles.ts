@@ -1,4 +1,4 @@
-import { SongStyle } from './schema';
+import type { SongStyle } from './schema';
 
 /**
  * Musical song-type profiles. These are deliberately structural: a profile

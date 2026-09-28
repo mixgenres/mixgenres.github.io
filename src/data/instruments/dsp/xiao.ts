@@ -1,159 +1,135 @@
 import type { InstrumentDSPOverride } from '../physicalDspProfile';
 
-/** Deep physical profile override for Xiao. Generated from this instrument's luthierPhysics, techniques, playingStyles and acoustic role; not a generic family alias. */
+/** Xiao end-blown Chinese bamboo flute */
 export const dspOverride: InstrumentDSPOverride = {
   "instrumentCharacter": {
-    "energySource": "air",
-    "energyPath": "air-column/body",
-    "bodyArchitecture": "instrument-specific chamber",
-    "primaryCollision": "jet/reed/lip excitation",
+    "energySource": "air jet",
+    "energyPath": "mouth/edge/air-column/body",
+    "bodyArchitecture": "instrument-specific flute bore",
+    "primaryCollision": "air jet to edge interaction",
     "asymmetries": [
-      "vibrato"
+      "hole venting",
+      "breath pressure",
+      "register overblow"
     ],
-    "couplingPaths": [],
+    "couplingPaths": [
+      "jet-edge",
+      "air-column",
+      "tone holes"
+    ],
     "techniqueBindings": [
-      "tongued attack",
-      "legato air",
+      "end-blown breath",
       "breath phrasing",
-      "vibrato"
+      "finger-hole transitions",
+      "register overblow"
     ]
   },
   "excitationDynamics": {
-    "hardness": 0.32,
-    "pressureSensitivity": 0.81,
-    "nonlinearDrive": 0.098,
-    "attackCollision": 0.43,
-    "spectralSpread": 0.526,
-    "directionalAsymmetry": 0.12
+    "hardness": 0.34,
+    "pressureSensitivity": 0.82,
+    "nonlinearDrive": 0.08,
+    "attackCollision": 0.28,
+    "spectralSpread": 0.54,
+    "directionalAsymmetry": 0.34
   },
   "coupledResonators": {
     "bodyModes": [
       {
-        "ratio": 0.92,
-        "q": 2.0,
-        "gain": 0.132
+        "ratio": 0.99,
+        "q": 4.5,
+        "gain": 0.18
       },
       {
-        "ratio": 1.0,
-        "q": 2.45,
-        "gain": 0.106
+        "ratio": 1.99,
+        "q": 3.2,
+        "gain": 0.09
       },
       {
-        "ratio": 1.48,
-        "q": 2.9,
-        "gain": 0.097
-      },
-      {
-        "ratio": 2.02,
-        "q": 3.35,
-        "gain": 0.093
+        "ratio": 3.02,
+        "q": 2.4,
+        "gain": 0.05
       }
     ]
   },
   "mechanicalArtifacts": {
-  "airHiss": 0.24,
-  "keyThud": 0,
-  "valveClick": 0,
-  "fretBuzz": 0,
-  "stringSqueak": 0,
-  "pickZing": 0,
-  "handContact": 0.025,
-  "bodyKnock": 0,
-  "rimImpact": 0,
-  "bellowsNoise": 0,
-  "damperNoise": 0,
-  "palletClick": 0,
-  "slideNoise": 0,
-  "reedChatter": 0,
-  "bellowsFold": 0,
-  "bowRosin": 0,
-  "hammerClick": 0,
-  "pedalNoise": 0,
-  "membraneFingerNoise": 0,
-  "seedRattle": 0,
-  "fippleNoise": 0.08,
-  "muteContact": 0,
-  "breathBurst": 0.1,
-  "keyworkClick": 0
-},
+    "airHiss": 0,
+    "keyThud": 0,
+    "valveClick": 0,
+    "fretBuzz": 0,
+    "stringSqueak": 0,
+    "pickZing": 0,
+    "handContact": 0,
+    "bodyKnock": 0,
+    "rimImpact": 0,
+    "bellowsNoise": 0,
+    "damperNoise": 0,
+    "palletClick": 0,
+    "slideNoise": 0,
+    "reedChatter": 0,
+    "bellowsFold": 0,
+    "bowRosin": 0,
+    "hammerClick": 0,
+    "pedalNoise": 0,
+    "membraneFingerNoise": 0,
+    "seedRattle": 0,
+    "fippleNoise": 0,
+    "muteContact": 0,
+    "breathBurst": 0,
+    "keyworkClick": 0
+  },
   "articulationPhysics": {
     "strikeZoneLocation": "none",
     "fleshVsNail": 0,
     "handDamping": 0,
-    "attackToPitchCoupling": 0.228,
-    "releaseCoupling": 0.43,
+    "attackToPitchCoupling": 0.2,
+    "releaseCoupling": 0.3,
     "continuousSustain": true,
     "noteTransition": "legato"
   },
   "genreDialects": {
     "folk": {
-      "excitationBias": 0,
+      "excitationBias": 0.02,
       "brightness": 1.0,
-      "damping": 0,
+      "damping": 0.01,
       "attack": 1.0,
       "articulation": [
-        "tongued attack",
-        "legato air",
         "breath phrasing",
-        "vibrato"
-      ]
-    },
-    "jazz": {
-      "excitationBias": 0,
-      "brightness": 0.97,
-      "damping": 0.04,
-      "attack": 1.0,
-      "articulation": [
-        "tongued attack",
-        "legato air",
-        "breath phrasing",
-        "vibrato"
-      ]
-    },
-    "world": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "tongued attack",
-        "legato air",
-        "breath phrasing",
-        "vibrato"
+        "finger-hole transitions",
+        "register overblow"
       ]
     }
   },
   "physicalDetails": {
-  "system": "air-jet-aerophone",
-  "construction": "air-column with edge/voicing system",
-  "exciter": "air jet / fipple / end-blown edge depending instrument",
-  "asymmetries": [
-    "jet angle",
-    "breath pressure",
-    "hole venting",
-    "register overblow"
-  ],
-  "coupling": [
-    "jet-edge",
-    "air-column modes",
-    "tone holes"
-  ],
-  "artifactSources": [
-    "chiff",
-    "air hiss",
-    "finger-hole noise"
-  ],
-  "detail": [
-    "air-column impedance controls pitch",
-    "attack includes jet noise and transient overblow",
-    "register changes alter mode family rather than only brightness"
-  ],
-  "response": {
-    "contactHardness": 0.466,
-    "resonatorQ": 0.494,
-    "nonlinearTransfer": 0.152,
-    "inharmonicity": 0.065,
-    "bodyCoupling": 0.402
+    "system": "aerophone-edge-tone",
+    "construction": "instrument-specific flute bore",
+    "exciter": "end-blown breath",
+    "asymmetries": [
+      "hole venting",
+      "breath pressure",
+      "register overblow"
+    ],
+    "coupling": [
+      "jet-edge",
+      "air-column",
+      "tone holes"
+    ],
+    "artifactSources": [
+      "breath hiss",
+      "finger-hole noise",
+      "edge turbulence"
+    ],
+    "detail": [
+      "end-blown breath",
+      "breath phrasing",
+      "finger-hole transitions",
+      "register overblow"
+    ],
+    "response": {
+      "contactHardness": 0.34,
+      "resonatorQ": 0.68,
+      "nonlinearTransfer": 0.08,
+      "inharmonicity": 0.05,
+      "bodyCoupling": 0.54
+    }
   }
-}
-} as InstrumentDSPOverride;
+};

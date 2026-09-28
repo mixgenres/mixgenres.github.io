@@ -1,6 +1,7 @@
-import { MusicalPattern, Role } from '../../types';
-import { SongStyle } from './schema';
+import type { MusicalPattern, Role } from '../../types';
+import type { SongStyle } from './schema';
 import { profileForStyle } from './styleProfiles';
+import { styleTheoryFor } from '../musicTheory/genreTheory';
 
 
 
@@ -142,6 +143,7 @@ function fallbackProgressions(genreId: string, index: number, styleName: string)
 /** Apply the authored style dialect without introducing generic replacement patterns. */
 export function applyStyleDialect(style: SongStyle, index: number): SongStyle {
   const profile = profileForStyle(style.primaryGenre, style.name, index);
+  const theory = styleTheoryFor(style.id, style.primaryGenre);
   const fallback = fallbackProgressions(style.primaryGenre, index, style.name);
   if (!profile && !fallback.length) return style;
   const base = profile ?? {
@@ -167,8 +169,14 @@ export function applyStyleDialect(style: SongStyle, index: number): SongStyle {
 
   style.rhythm = rhythm;
   style.summary = `${style.name}: ${base.signatureCell}`;
-  style.signatureTraits = [base.signatureCell, ...base.contours, ...(base.arrangement ?? [])].filter(Boolean).slice(0, 8);
-  style.authoringNotes = 'Explicit song-type dialect: groove, form, harmony, bass, ensemble, patterns and production are structural—not a renamed source style.';
+  style.signatureTraits = [
+    base.signatureCell,
+    `${theory.meter} ${theory.harmonicModel}`,
+    ...theory.rhythm.signature,
+    `bass:${theory.bass.style}`,
+    ...base.contours,
+    ...(base.arrangement ?? []),
+  ].filter(Boolean).slice(0, 14);
   style.form = {
     ...(style.form ?? {}),
     sectionVocab: base.form,
@@ -181,17 +189,22 @@ export function applyStyleDialect(style: SongStyle, index: number): SongStyle {
   };
   style.harmony = {
     ...(style.harmony ?? {}),
-    model: (base.harmonyModel ?? style.harmony?.model ?? 'functional') as any,
-    modePolicy: (base.modePolicy ?? style.harmony?.modePolicy ?? 'major') as any,
-    progressionTemplates: base.progressions.map(value => ({w:1,value})),
-    harmonicRhythm: base.harmonicRhythm ?? style.harmony?.harmonicRhythm,
-    bassMotion: base.bassMotion as any ?? style.harmony?.bassMotion,
-  };
+    model: (theory.harmonicModel ?? base.harmonyModel ?? style.harmony?.model ?? 'functional') as any,
+    modePolicy: (theory.defaultScale ?? base.modePolicy ?? style.harmony?.modePolicy ?? 'major') as any,
+    progressionTemplates: (base.progressions.length ? base.progressions : theory.progressions).map(value => ({w:1,value})),
+    harmonicRhythm: theory.harmonicRhythm ?? base.harmonicRhythm ?? style.harmony?.harmonicRhythm,
+    bassMotion: theory.bass.style as any ?? base.bassMotion as any ?? style.harmony?.bassMotion,
+    theoryCadences: theory.cadences,
+    theoryChordScales: theory.chordScales,
+  } as any;
   style.melody = {
     ...(style.melody ?? {}),
-    contourArchetypes: base.contours,
-    phraseLengthsBars: [4,8],
-  };
+    contourArchetypes: Array.from(new Set([...theory.melody.contour, ...base.contours])),
+    phraseLengthsBars: theory.melody.phraseBars.length ? theory.melody.phraseBars : [4,8],
+    targetDegrees: theory.melody.targetDegrees,
+    approachDegrees: theory.melody.approachDegrees,
+    scaleVocabulary: theory.melody.scale,
+  } as any;
   style.arrangement = {
     ...(style.arrangement ?? {}),
     doublingRules: base.arrangement,
@@ -205,7 +218,7 @@ export function applyStyleDialect(style: SongStyle, index: number): SongStyle {
 }
 
 export function dialectPatternsForStyle(style: SongStyle, _index: number): MusicalPattern[] {
-  const instruments = (style.sound?.instrumentPalette ?? []).map(x => x.value).filter(Boolean).slice(0,5);
+  const instruments = (style.sound?.instrumentPalette ?? []).map(x => x.value).filter(Boolean);
   const cells = styleCellsFor(style);
   // Create one fixed style cell per representative instrument. Other material
   // comes from the authored pattern catalog.

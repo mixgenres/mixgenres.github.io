@@ -39,7 +39,7 @@ export const tabla: InstrumentDef = {
   kitComponents: [
     {
       id: "dayan-na",
-      name: "Dāyāñ Na / Tīn (Rim Ringing Tone)",
+      name: "Dayan Na / Tin (Rim Ringing Tone)",
       midi: 64,
       physicalType: "membrane",
       tuningHz: 261.63,
@@ -52,7 +52,7 @@ export const tabla: InstrumentDef = {
     },
     {
       id: "dayan-tun",
-      name: "Dāyāñ Tuñ (Center Open Resonant)",
+      name: "Dayan Tun (Center Open Resonant)",
       midi: 62,
       physicalType: "membrane",
       tuningHz: 261.63,
@@ -64,7 +64,7 @@ export const tabla: InstrumentDef = {
     },
     {
       id: "dayan-ti-ke",
-      name: "Dāyāñ Ṭi / Ke (Syāhī Center Muted Tap)",
+      name: "Dayan Ti / Ke (Syahi Center Muted Tap)",
       midi: 63,
       physicalType: "membrane",
       tuningHz: 320,
@@ -77,7 +77,7 @@ export const tabla: InstrumentDef = {
     },
     {
       id: "bayan-ghe",
-      name: "Bāyāñ Ge / Ghe (Bass Resonance)",
+      name: "Bayan Ge / Ghe (Bass Resonance)",
       midi: 60,
       physicalType: "membrane",
       tuningHz: 110,
@@ -90,7 +90,7 @@ export const tabla: InstrumentDef = {
     },
     {
       id: "bayan-meend",
-      name: "Bāyāñ Meend (Wrist Pressure Pitch Bend)",
+      name: "Bayan Meend (Wrist Pressure Pitch Bend)",
       midi: 61,
       physicalType: "membrane",
       tuningHz: 130,

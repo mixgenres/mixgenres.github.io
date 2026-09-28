@@ -48,6 +48,12 @@ export default class PianoModule implements InstrumentModule {
     const isChapa = action === 'chapa' || /chapa|muted/i.test(action ?? '') || params.mute > 0.4;
     const isCampana = action === 'campana' || /campana|bell/i.test(action ?? '');
     const isPesada = action === 'pesada' || /pesada/i.test(action ?? '');
+    const isTango = /tango|milonga|vals/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isCampanitas = action === 'campanitas' || /campanitas/i.test(action ?? '');
+    const gd = ctx.genreDialect;
+    const genre = gd.id;
+    const isJazzFamily = /jazz|blues|swing|soul|gospel/.test(genre);
+    const isDance = /house|disco|funk|electronic|hip-hop|rnb/.test(genre);
 
     // 2. Arrastre Pre-Beat Pitch Scoop
     let activeFreqSignal = safeFreqSignal;
@@ -60,7 +66,7 @@ export default class PianoModule implements InstrumentModule {
 
     // 3. Dynamic Felt Hammer Non-linear Excitation
     // Felt gets dramatically stiffer as velocity increases, injecting high frequencies
-    const hammerStiffness = isMarcato || isYumba ? 0.95 : (0.35 + b * 0.65);
+    const hammerStiffness = isMarcato || isYumba ? 0.95 : isDance ? 0.48 + b * 0.46 * gd.transient : isJazzFamily ? 0.34 + b * 0.48 : (isTango ? 0.42 + b * 0.52 : (0.35 + b * 0.65));
     const hammerCutoff = el.min(
       el.const({ value: 19000 }),
       el.max(
@@ -86,11 +92,26 @@ export default class PianoModule implements InstrumentModule {
 
     // Yumba cluster slam: Adds lower sub-cluster burst
     if (isYumba) {
+      // Pugliese yumba: accented chord attack followed by a low cluster that
+      // blooms briefly under the damper/pedal rather than a generic sub hit.
       const clusterThump = el.mul(
         el.cycle(58),
-        el.adsr(0.0005, 0.12, 0, 0.03, gateSignal)
+        el.adsr(0.0005, 0.12, 0.0, 0.055, gateSignal)
       );
-      hammerImpulse = el.add(hammerImpulse, el.mul(0.65, clusterThump));
+      const clusterBody = el.add(
+        el.svf({ mode: 'bandpass' }, 58, 2.2, clusterThump),
+        el.svf({ mode: 'bandpass' }, 116, 2.8, clusterThump)
+      );
+      hammerImpulse = el.add(hammerImpulse, el.mul(0.62, clusterBody));
+    }
+
+    if (isCampanitas) {
+      const bellEnv = el.adsr(0.0002, 0.018, 0, 0.025, gateSignal);
+      const bell = el.add(
+        el.mul(0.18, el.cycle(el.mul(activeFreqSignal, 2))),
+        el.mul(0.10, el.cycle(el.mul(activeFreqSignal, 3)))
+      );
+      hammerImpulse = el.add(hammerImpulse, el.mul(bellEnv, bell));
     }
 
     // 4. Physical String Waveguide with Triple Unison & Inharmonicity
@@ -111,7 +132,7 @@ export default class PianoModule implements InstrumentModule {
     const len3 = el.min(el.const({ value: 4000 }), el.max(el.const({ value: 2 }), el.div(el.sr(), f3)));
 
     // Piano String Decay Times
-    const baseDecay = isChapa ? 0.12 : (isMarcato ? 0.65 : (isCampana ? 3.8 : (0.85 + decayTime * (1.5 + b * 2.2))));
+    const baseDecay = isChapa ? 0.12 : (isMarcato ? (isTango ? 0.48 : 0.65) : (isCampana || isCampanitas ? 3.8 : (0.85 + decayTime * (1.5 + b * 2.2) * gd.decay))); 
     const d1 = fbGainForDecay(f1, baseDecay);
     const d2 = fbGainForDecay(f2, baseDecay * 0.94);
     const d3 = fbGainForDecay(f3, baseDecay * 0.91);
@@ -144,8 +165,8 @@ export default class PianoModule implements InstrumentModule {
     const soundboardBloom = el.add(
       stringsSum,
       el.add(
-        el.mul(0.32, soundboardMain),
-        el.add(el.mul(0.24, soundboardCross), el.mul(isCampana ? 0.45 : 0.12, duplexScale))
+        el.mul((isTango ? 0.38 : 0.32) * gd.body, soundboardMain),
+        el.add(el.mul((isTango ? 0.28 : 0.24) * gd.body, soundboardCross), el.mul(isCampana || isCampanitas ? 0.45 : (isTango ? 0.15 : 0.12), duplexScale))
       )
     );
 

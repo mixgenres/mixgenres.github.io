@@ -1,0 +1,278 @@
+export type ScaleName =
+  | 'ionian' | 'dorian' | 'phrygian' | 'lydian' | 'mixolydian'
+  | 'aeolian' | 'harmonic-minor' | 'melodic-minor' | 'major-pentatonic'
+  | 'minor-pentatonic' | 'blues' | 'whole-tone' | 'chromatic' | 'phrygian-dominant' | 'locrian';
+
+export interface GenreTheoryProfile {
+  genreId: string;
+  meter: string;
+  cycleBars: number;
+  harmonicModel: 'functional' | 'modal-vamp' | 'blues-form' | 'phrygian-cadence' | 'power-riff' | 'fixed-grid';
+  defaultScale: ScaleName;
+  chordScales: Partial<Record<'major' | 'minor' | 'dominant' | 'half-diminished' | 'sus', ScaleName>>;
+  progressions: string[][];
+  cadences: string[][];
+  harmonicRhythm: 'beat' | 'half-bar' | 'bar' | 'two-bar' | 'static' | 'phrase';
+  bass: {
+    style: string;
+    targetDegrees: number[];
+    chromaticApproach: boolean;
+    passingProbability: number;
+    phraseFillProbability: number;
+    anticipationBeats: number[];
+    silenceProbability: number;
+  };
+  harmony: {
+    voicing: 'open' | 'close' | 'guide-tone' | 'montuno' | 'yumba' | 'power' | 'shell' | 'drop-two';
+    guideTonePriority: boolean;
+    upperStructure: boolean;
+    maxLowDensity: number;
+  };
+  melody: {
+    scale: ScaleName[];
+    targetDegrees: number[];
+    approachDegrees: number[];
+    phraseBars: number[];
+    contour: string[];
+    callResponse: boolean;
+    ornamentCap: number;
+  };
+  rhythm: {
+    subdivision: 8 | 12 | 16 | 24 | 32;
+    swing: number;
+    accent: number[];
+    signature: string[];
+    fillBars: number[];
+    ghostShare: number;
+  };
+  techniques: {
+    bass: string[];
+    harmony: string[];
+    melody: string[];
+    percussion: string[];
+    bowed: string[];
+    winds: string[];
+    bellows: string[];
+    voice: string[];
+  };
+  mixFocus: Record<string, number>;
+  forbidden: string[];
+}
+
+type TheoryOverrides = Partial<Pick<GenreTheoryProfile,
+  'genreId' | 'meter' | 'cycleBars' | 'harmonicModel' | 'defaultScale' |
+  'chordScales' | 'progressions' | 'cadences' | 'harmonicRhythm' | 'forbidden'
+>> & {
+  bass?: Partial<GenreTheoryProfile['bass']>;
+  harmony?: Partial<GenreTheoryProfile['harmony']>;
+  melody?: Partial<GenreTheoryProfile['melody']>;
+  rhythm?: Partial<GenreTheoryProfile['rhythm']>;
+  techniques?: Partial<GenreTheoryProfile['techniques']>;
+  mixFocus?: Partial<Record<string, number>>;
+};
+
+const P = (x: TheoryOverrides): GenreTheoryProfile => ({
+  genreId: x.genreId ?? 'unknown',
+  meter: x.meter ?? '4/4',
+  cycleBars: x.cycleBars ?? 4,
+  harmonicModel: x.harmonicModel ?? 'functional',
+  defaultScale: x.defaultScale ?? 'ionian',
+  chordScales: x.chordScales ?? {},
+  progressions: x.progressions ?? [],
+  cadences: x.cadences ?? [],
+  harmonicRhythm: x.harmonicRhythm ?? 'bar',
+  forbidden: x.forbidden ?? [],
+  bass: { style: 'riff', targetDegrees: [1,5,3,7], chromaticApproach: false, passingProbability: .12, phraseFillProbability: .12, anticipationBeats: [], silenceProbability: .06, ...x.bass },
+  harmony: { voicing: 'close', guideTonePriority: false, upperStructure: false, maxLowDensity: .35, ...x.harmony },
+  melody: { scale: [x.defaultScale ?? 'ionian'], targetDegrees: [1,3,5], approachDegrees: [2,4,6], phraseBars: [4,8], contour: ['motif','response','cadence'], callResponse: false, ornamentCap: .14, ...x.melody },
+  rhythm: { subdivision: 16, swing: .5, accent: [1,0.65,0.82,0.58], signature: [], fillBars: [3], ghostShare: .08, ...x.rhythm },
+  techniques: {
+    bass: ['pizzicato','staccato','accent'], harmony: ['staccato','accent','legato'], melody: ['legato','staccato','accent'],
+    percussion: ['tone','open','ghost','accent'], bowed: ['detache','staccato','legato'], winds: ['staccato','legato','accent'],
+    bellows: ['staccato','accent','legato'], voice: ['legato','accent'], ...x.techniques,
+  },
+  mixFocus: { bass: .5, drums: .5, percussion: .5, harmony: .4, lead: .75, melody: .75, comp: .35, pad: .2, ...x.mixFocus },
+});
+
+export const GENRE_THEORY: Record<string, GenreTheoryProfile> = {
+  afrobeats: P({genreId:'afrobeats', meter:'4/4', cycleBars:2, harmonicModel:'modal-vamp', defaultScale:'mixolydian', chordScales:{major:'ionian',minor:'dorian',dominant:'mixolydian'}, progressions:[['Am7','Fmaj7','Cmaj7','G6'],['Dm7','G7','Cmaj7','Am7'],['Am7','Dm7','Am7','E7']], cadences:[['Dm7','G7','Cmaj7'],['Am7','E7','Am7']], harmonicRhythm:'bar', bass:{style:'riff',targetDegrees:[1,3,5,7],chromaticApproach:true,passingProbability:.28,phraseFillProbability:.18,anticipationBeats:[3.5],silenceProbability:.04}, harmony:{voicing:'shell',guideTonePriority:true,upperStructure:true,maxLowDensity:.25}, melody:{scale:['mixolydian','major-pentatonic'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[4,8],contour:['short-hook','call-response','cyclic'],callResponse:true,ornamentCap:.12}, rhythm:{subdivision:16,swing:.5,accent:[1,.6,.8,.5],signature:['interlocking-16ths','3+3+2-cell'],fillBars:[3],ghostShare:.08}, mixFocus:{bass:.72,percussion:.68,lead:.82,harmony:.34,comp:.3,drums:.55}, forbidden:['generic dembow as primary groove'] }),
+  bachata: P({genreId:'bachata',meter:'4/4',cycleBars:2,harmonicModel:'functional',defaultScale:'aeolian',chordScales:{major:'ionian',minor:'aeolian',dominant:'mixolydian'},progressions:[['Am','F','C','G'],['Am','Dm','E7','Am'],['Dm','G','C','A7']],cadences:[['Dm','E7','Am']],bass:{style:'riff',targetDegrees:[1,5,1,3],chromaticApproach:true,passingProbability:.18,phraseFillProbability:.2,anticipationBeats:[3.5],silenceProbability:.05},harmony:{voicing:'open',guideTonePriority:false,upperStructure:false,maxLowDensity:.3},melody:{scale:['aeolian','major-pentatonic'],targetDegrees:[1,3,5],approachDegrees:[2,7],phraseBars:[4,8],contour:['requinto-response','melisma','cadence'],callResponse:true,ornamentCap:.18},rhythm:{subdivision:16,swing:.5,accent:[1,.55,.85,.62],signature:['derecho','majao','martillo','requinto-response'],fillBars:[3],ghostShare:.1},techniques:{bass:['pizzicato','staccato','accent'],harmony:['fingerstyle','staccato','accent'],melody:['fingerstyle','legato','hammer-on','pull-off'],percussion:['open','slap','ghost','accent']},mixFocus:{bass:.62,percussion:.63,lead:.84,harmony:.48,comp:.35},forbidden:['four-on-floor backbeat'] }),
+  blues: P({genreId:'blues',meter:'4/4',cycleBars:12,harmonicModel:'blues-form',defaultScale:'blues',chordScales:{major:'mixolydian',minor:'blues',dominant:'mixolydian','half-diminished':'locrian'},progressions:[['C7','F7','C7','C7','F7','F7','C7','C7','G7','F7','C7','G7'],['A7','D7','A7','E7','D7','D7','A7','A7','E7','D7','A7','E7']],cadences:[['G7','F7','C7','G7']],harmonicRhythm:'bar',bass:{style:'walking',targetDegrees:[1,3,5,7],chromaticApproach:true,passingProbability:.36,phraseFillProbability:.25,anticipationBeats:[3.5],silenceProbability:.08},harmony:{voicing:'shell',guideTonePriority:true,upperStructure:false,maxLowDensity:.28},melody:{scale:['blues','minor-pentatonic','mixolydian'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[4,12],contour:['AAB','call-response','space'],callResponse:true,ornamentCap:.24},rhythm:{subdivision:12,swing:.66,accent:[1,.6,.78,.64],signature:['shuffle','12/8-triplet-subdivision','turnaround'],fillBars:[11],ghostShare:.12},techniques:{bass:['pizzicato','ghost','legato','accent'],harmony:['staccato','accent','legato','mute'],melody:['bend','vibrato','grace','slide'],winds:['bend','fall','scoop','vibrato'],percussion:['ghost','accent','brush']},mixFocus:{lead:.88,bass:.7,drums:.62,harmony:.34,comp:.32},forbidden:['generic EDM grid'] }),
+  brazilian: P({genreId:'brazilian',meter:'2/4',cycleBars:2,harmonicModel:'functional',defaultScale:'ionian',chordScales:{major:'ionian',minor:'dorian',dominant:'mixolydian'},progressions:[['C6','A7','Dm7','G7'],['Fmaj7','Fm6','Cmaj7','D7'],['Dm7','G7','Cmaj7','A7b9']],cadences:[['Dm7','G7','Cmaj7'],['Fmaj7','Fm6','Cmaj7']],harmonicRhythm:'half-bar',bass:{style:'samba',targetDegrees:[1,3,5,7],chromaticApproach:true,passingProbability:.28,phraseFillProbability:.2,anticipationBeats:[1.5,3.5],silenceProbability:.05},harmony:{voicing:'open',guideTonePriority:true,upperStructure:true,maxLowDensity:.22},melody:{scale:['ionian','major-pentatonic','dorian'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[4,8],contour:['syncopated-lyric','response','chromatic-inner-voice'],callResponse:true,ornamentCap:.16},rhythm:{subdivision:16,swing:.5,accent:[1,.58,.72,.52],signature:['samba-2/4','bossa-baiao-variants','syncopated-violao'],fillBars:[3],ghostShare:.1},techniques:{bass:['pizzicato','staccato','accent'],harmony:['fingerstyle','legato','staccato','rasgueado'],melody:['legato','accent','grace'],percussion:['open','slap','ghost','accent']},mixFocus:{percussion:.76,bass:.6,lead:.78,harmony:.46,comp:.38},forbidden:['generic four-on-floor as sole identity'] }),
+  country: P({genreId:'country',meter:'4/4',cycleBars:4,harmonicModel:'functional',defaultScale:'mixolydian',chordScales:{major:'ionian',minor:'aeolian',dominant:'mixolydian'},progressions:[['G','C','G','D7'],['G','Em','C','D'],['A','D','A','E']],cadences:[['C','D7','G']],harmonicRhythm:'bar',bass:{style:'rootFifth',targetDegrees:[1,5,6,4],chromaticApproach:false,passingProbability:.14,phraseFillProbability:.12,anticipationBeats:[3.5],silenceProbability:.03},harmony:{voicing:'open',guideTonePriority:false,upperStructure:false,maxLowDensity:.26},melody:{scale:['mixolydian','major-pentatonic','blues'],targetDegrees:[1,3,5,6],approachDegrees:[2,4,5],phraseBars:[4,8],contour:['fiddle-answer','double-stop','break'],callResponse:true,ornamentCap:.16},rhythm:{subdivision:16,swing:.56,accent:[1,.65,.82,.68],signature:['boom-chick','train','bluegrass-drive','mandolin-chop'],fillBars:[3],ghostShare:.06},techniques:{bass:['pizzicato','accent','staccato'],harmony:['flatpick','fingerstyle','strum','staccato'],melody:['flatpick','fingerstyle','hammer-on','pull-off','slide'],bowed:['détaché','shuffle','double-stop','accent'],percussion:['brush','accent']},mixFocus:{lead:.82,bass:.64,harmony:.45,comp:.3,drums:.48},forbidden:['quantized EDM hats'] }),
+  cumbia: P({genreId:'cumbia',meter:'2/4',cycleBars:2,harmonicModel:'modal-vamp',defaultScale:'aeolian',chordScales:{major:'ionian',minor:'aeolian',dominant:'phrygian-dominant'},progressions:[['Am','G','F','E7'],['Am','F','G','Am'],['C','G','Am','Am']],cadences:[['F','E7','Am']],harmonicRhythm:'bar',bass:{style:'cumbia',targetDegrees:[1,5,1,7],chromaticApproach:true,passingProbability:.12,phraseFillProbability:.1,anticipationBeats:[1.5,3.5],silenceProbability:.02},harmony:{voicing:'open',guideTonePriority:false,upperStructure:false,maxLowDensity:.25},melody:{scale:['aeolian','phrygian','major-pentatonic'],targetDegrees:[1,3,5],approachDegrees:[2,7],phraseBars:[4,8],contour:['gaita-call','accordion-hook','organ-answer'],callResponse:true,ornamentCap:.14},rhythm:{subdivision:16,swing:.52,accent:[1,.5,.78,.6],signature:['cumbia-cycle','guacharaca','tambor-conversation'],fillBars:[3],ghostShare:.08},techniques:{bass:['pizzicato','staccato','accent'],harmony:['staccato','fingerstyle','strum'],melody:['legato','staccato','trill'],percussion:['open','slap','ghost','edge']},mixFocus:{percussion:.74,bass:.72,lead:.8,harmony:.42,comp:.32},forbidden:['straight rock backbeat as primary groove'] }),
+  disco: P({genreId:'disco',meter:'4/4',cycleBars:4,harmonicModel:'modal-vamp',defaultScale:'dorian',chordScales:{major:'ionian',minor:'dorian',dominant:'mixolydian'},progressions:[['Am7','Dm7','G7','Cmaj7'],['Fm7','Bb7','Ebmaj7','C7'],['Em7','A7','Dm7','G7']],cadences:[['Dm7','G7','Cmaj7']],harmonicRhythm:'bar',bass:{style:'octave',targetDegrees:[1,5,3,7],chromaticApproach:true,passingProbability:.22,phraseFillProbability:.12,anticipationBeats:[2.5,4],silenceProbability:.01},harmony:{voicing:'close',guideTonePriority:true,upperStructure:true,maxLowDensity:.2},melody:{scale:['dorian','mixolydian','major-pentatonic'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[4,8],contour:['string-hook','octave-bass-response','vamp'],callResponse:false,ornamentCap:.1},rhythm:{subdivision:16,swing:.5,accent:[1,.65,.58,.72],signature:['four-on-floor','offbeat-hat','string-hit','octave-bass'],fillBars:[4],ghostShare:.04},techniques:{bass:['fingerstyle','slap','mute','staccato'],harmony:['staccato','chord-stab'],melody:['legato','staccato'],percussion:['accent','open','ghost']},mixFocus:{bass:.78,drums:.72,harmony:.55,lead:.72,comp:.3,pad:.42},forbidden:['swing shuffle as default'] }),
+  electronic: P({genreId:'electronic',meter:'4/4',cycleBars:4,harmonicModel:'modal-vamp',defaultScale:'aeolian',chordScales:{major:'ionian',minor:'aeolian',dominant:'mixolydian'},progressions:[['Am','F','C','G'],['Em','D','C','Em'],['Am7','G','Fmaj7','G']],cadences:[['F','G','Am']],harmonicRhythm:'bar',bass:{style:'sub',targetDegrees:[1,5,7],chromaticApproach:false,passingProbability:.08,phraseFillProbability:.15,anticipationBeats:[4],silenceProbability:.02},harmony:{voicing:'close',guideTonePriority:false,upperStructure:true,maxLowDensity:.18},melody:{scale:['aeolian','dorian','minor-pentatonic'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[4,8],contour:['loop','build','drop'],callResponse:false,ornamentCap:.08},rhythm:{subdivision:16,swing:.5,accent:[1,.62,.55,.7],signature:['four-on-floor','breakbeat','sidechain-space'],fillBars:[4],ghostShare:.03},techniques:{bass:['mute','staccato','glissando'],harmony:['staccato','sustain'],melody:['legato','portamento'],percussion:['accent','noise']},mixFocus:{bass:.85,drums:.8,pad:.5,harmony:.2,lead:.65},forbidden:['swing pocket except explicitly coded style'] }),
+  folk: P({genreId:'folk',meter:'4/4',cycleBars:4,harmonicModel:'functional',defaultScale:'major-pentatonic',chordScales:{major:'ionian',minor:'aeolian',dominant:'mixolydian'},progressions:[['G','C','G','D'],['C','G/B','Am','F'],['Dm','C','G','G']],cadences:[['C','D','G']],harmonicRhythm:'bar',bass:{style:'rootFifth',targetDegrees:[1,5,3],chromaticApproach:false,passingProbability:.12,phraseFillProbability:.14,anticipationBeats:[3.5],silenceProbability:.05},harmony:{voicing:'open',guideTonePriority:false,upperStructure:false,maxLowDensity:.3},melody:{scale:['major-pentatonic','mixolydian'],targetDegrees:[1,3,5],approachDegrees:[2,4,6],phraseBars:[4,8],contour:['story','repeat-variation','answer'],callResponse:true,ornamentCap:.1},rhythm:{subdivision:16,swing:.52,accent:[1,.7,.65,.55],signature:['fingerstyle','flatpick','old-time-drive'],fillBars:[3],ghostShare:.05},techniques:{bass:['pizzicato','accent'],harmony:['fingerstyle','flatpick','strum'],melody:['fingerstyle','flatpick','hammer-on','pull-off'],bowed:['détaché','double-stop','shuffle']},mixFocus:{lead:.8,bass:.58,harmony:.5,comp:.35},forbidden:['generic synth arpeggio as defining rhythm'] }),
+  funk: P({genreId:'funk',meter:'4/4',cycleBars:2,harmonicModel:'modal-vamp',defaultScale:'dorian',chordScales:{major:'mixolydian',minor:'dorian',dominant:'mixolydian'},progressions:[['Dm7','C','Bb','C'],['E9','A9','E9','A9'],['Am7','D7','G7','C7']],cadences:[['A7','D7','G7','C7']],harmonicRhythm:'bar',bass:{style:'riff',targetDegrees:[1,3,5,7,9],chromaticApproach:true,passingProbability:.34,phraseFillProbability:.26,anticipationBeats:[1.5,2.5,3.5],silenceProbability:.08},harmony:{voicing:'close',guideTonePriority:true,upperStructure:true,maxLowDensity:.2},melody:{scale:['dorian','mixolydian','minor-pentatonic'],targetDegrees:[1,3,5,7,9],approachDegrees:[2,4,6],phraseBars:[2,4],contour:['riff','call-response','space'],callResponse:true,ornamentCap:.14},rhythm:{subdivision:16,swing:.5,accent:[1,.8,.58,.78],signature:['one','chicken-scratch','ghost-pocket','clav'],fillBars:[2],ghostShare:.22},techniques:{bass:['fingerstyle','slap','pop','ghost','mute'],harmony:['chicken-scratch','staccato','mute','accent'],melody:['staccato','bend','fall'],percussion:['ghost','accent','open']},mixFocus:{bass:.82,drums:.74,percussion:.58,lead:.76,harmony:.38,comp:.34},forbidden:['constant-note 16th machinegun'] }),
+  gospel: P({genreId:'gospel',meter:'4/4',cycleBars:4,harmonicModel:'functional',defaultScale:'ionian',chordScales:{major:'ionian',minor:'dorian',dominant:'mixolydian','half-diminished':'locrian'},progressions:[['C','F','G','Am'],['Cmaj7','Am7','Dm7','G7'],['Ab','Bb','C','C']],cadences:[['Ab','Bb','C'],['Dm7','G7','C']],harmonicRhythm:'half-bar',bass:{style:'rootFifth',targetDegrees:[1,3,5,6,4],chromaticApproach:true,passingProbability:.24,phraseFillProbability:.22,anticipationBeats:[3.5],silenceProbability:.04},harmony:{voicing:'guide-tone',guideTonePriority:true,upperStructure:true,maxLowDensity:.22},melody:{scale:['ionian','dorian','blues'],targetDegrees:[1,3,5,6,7],approachDegrees:[2,4,6],phraseBars:[4,8],contour:['call-response','rise','shout'],callResponse:true,ornamentCap:.22},rhythm:{subdivision:16,swing:.53,accent:[1,.58,.82,.62],signature:['church-backbeat','shout-vamp','organ-response'],fillBars:[3],ghostShare:.1},techniques:{bass:['pizzicato','accent','staccato'],harmony:['organ-swell','staccato','cluster','glissando'],melody:['melisma','legato','grace','bend'],voice:['melisma','grace','vibrato'],percussion:['accent','ghost']},mixFocus:{lead:.86,harmony:.62,bass:.58,drums:.55,comp:.45,pad:.38},forbidden:['anonymous pop pad as sole harmonic identity'] }),
+  'hip-hop': P({genreId:'hip-hop',meter:'4/4',cycleBars:4,harmonicModel:'modal-vamp',defaultScale:'aeolian',chordScales:{major:'ionian',minor:'aeolian',dominant:'mixolydian'},progressions:[['Dm7','Bb','F','C'],['Fm7','Bbm7','Fm7','C7'],['Am7','Fmaj7','Cmaj7','G6']],cadences:[['G7','Am7']],harmonicRhythm:'phrase',bass:{style:'sub',targetDegrees:[1,5,7,3],chromaticApproach:true,passingProbability:.12,phraseFillProbability:.2,anticipationBeats:[3.5],silenceProbability:.12},harmony:{voicing:'shell',guideTonePriority:true,upperStructure:false,maxLowDensity:.18},melody:{scale:['aeolian','minor-pentatonic','blues'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[2,4,8],contour:['loop','call-response','drop-space'],callResponse:true,ornamentCap:.16},rhythm:{subdivision:16,swing:.54,accent:[1,.52,.75,.5],signature:['boom-bap','trap-grid','laid-back-pocket'],fillBars:[4],ghostShare:.18},techniques:{bass:['sub','mute','glissando','staccato'],harmony:['staccato','sample-chop'],melody:['slide','bend','staccato'],percussion:['ghost','accent','roll']},mixFocus:{bass:.84,drums:.8,lead:.7,harmony:.25,pad:.32},forbidden:['full-band harmonic clutter'] }),
+  house: P({genreId:'house',meter:'4/4',cycleBars:4,harmonicModel:'modal-vamp',defaultScale:'dorian',chordScales:{major:'ionian',minor:'dorian',dominant:'mixolydian'},progressions:[['Fmaj7','Em7','Dm7','Cmaj7'],['Am7','Dm7','G7','Cmaj7'],['Cm7','Fm7','Bb7','Ebmaj7']],cadences:[['Dm7','G7','Cmaj7']],harmonicRhythm:'bar',bass:{style:'house',targetDegrees:[1,5,7,3],chromaticApproach:true,passingProbability:.16,phraseFillProbability:.1,anticipationBeats:[2.5,4],silenceProbability:.02},harmony:{voicing:'close',guideTonePriority:true,upperStructure:true,maxLowDensity:.18},melody:{scale:['dorian','mixolydian','major-pentatonic'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[4,8],contour:['loop','filter-rise','hook'],callResponse:false,ornamentCap:.1},rhythm:{subdivision:16,swing:.5,accent:[1,.55,.8,.58],signature:['four-on-floor','offbeat-hat','organ-stab','2-step-variant'],fillBars:[4],ghostShare:.03},techniques:{bass:['fingerstyle','mute','staccato'],harmony:['organ-stab','staccato','sustain'],melody:['legato','portamento'],percussion:['accent','open','closed']},mixFocus:{bass:.82,drums:.82,harmony:.35,pad:.55,lead:.58},forbidden:['diminished triad as default club harmony'] }),
+  jazz: P({genreId:'jazz',meter:'4/4',cycleBars:4,harmonicModel:'functional',defaultScale:'dorian',chordScales:{major:'ionian',minor:'dorian',dominant:'mixolydian','half-diminished':'locrian'},progressions:[['Dm7','G7','Cmaj7','Am7'],['Em7','A7','Dm7','G7'],['Bm7b5','E7','Am7','A7']],cadences:[['Bm7b5','E7','Am7'],['Dm7','G7','Cmaj7']],harmonicRhythm:'half-bar',bass:{style:'walking',targetDegrees:[1,3,5,7],chromaticApproach:true,passingProbability:.48,phraseFillProbability:.3,anticipationBeats:[3.5],silenceProbability:.05},harmony:{voicing:'guide-tone',guideTonePriority:true,upperStructure:true,maxLowDensity:.22},melody:{scale:['dorian','mixolydian','melodic-minor','blues'],targetDegrees:[1,3,5,7,9],approachDegrees:[2,4,6,7],phraseBars:[4,8],contour:['motivic','sequence','enclosure','cadence'],callResponse:true,ornamentCap:.22},rhythm:{subdivision:16,swing:.64,accent:[1,.62,.8,.58],signature:['ride-spang-a-lang','comping','ii-V-I','walking'],fillBars:[3],ghostShare:.12},techniques:{bass:['pizzicato','legato','ghost','accent'],harmony:['staccato','tenuto','accent','legato'],melody:['legato','bend','vibrato','fall','doit','enclosure'],winds:['legato','fall','doit','scoop','vibrato'],percussion:['brush','ride','ghost','accent']},mixFocus:{lead:.9,bass:.7,drums:.64,harmony:.38,comp:.3,pad:.18},forbidden:['constant four-on-floor'] }),
+  kizomba: P({genreId:'kizomba',meter:'4/4',cycleBars:2,harmonicModel:'modal-vamp',defaultScale:'aeolian',chordScales:{major:'ionian',minor:'dorian',dominant:'mixolydian'},progressions:[['Dm7','Gm7','C','F'],['Am7','Fmaj7','Cmaj7','G7']],cadences:[['Gm7','A7','Dm7']],harmonicRhythm:'bar',bass:{style:'sub',targetDegrees:[1,5,7,3],chromaticApproach:true,passingProbability:.16,phraseFillProbability:.12,anticipationBeats:[3.5],silenceProbability:.09},harmony:{voicing:'open',guideTonePriority:true,upperStructure:false,maxLowDensity:.18},melody:{scale:['aeolian','dorian'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[4,8],contour:['long-arc','answer','drop'],callResponse:true,ornamentCap:.12},rhythm:{subdivision:16,swing:.54,accent:[1,.5,.78,.55],signature:['batida','linear-step','tarraxinha-space'],fillBars:[3],ghostShare:.06},techniques:{bass:['legato','staccato','mute'],harmony:['fingerstyle','staccato'],melody:['legato','portamento'],percussion:['accent','ghost','open']},mixFocus:{bass:.84,drums:.55,lead:.72,harmony:.3,pad:.52},forbidden:['busy syncopated percussion'] }),
+  tango: P({genreId:'tango',meter:'2/4',cycleBars:4,harmonicModel:'functional',defaultScale:'harmonic-minor',chordScales:{major:'ionian',minor:'harmonic-minor',dominant:'phrygian-dominant'},progressions:[['Am','E7','Am','Dm'],['Dm','G7','C','E7'],['Am7','Dm7','F#dim7','E7b9']],cadences:[['Dm','E7','Am'],['F#dim7','E7','Am']],harmonicRhythm:'half-bar',bass:{style:'tango',targetDegrees:[1,5,1,7,3],chromaticApproach:true,passingProbability:.3,phraseFillProbability:.22,anticipationBeats:[1.5,3.5],silenceProbability:.08},harmony:{voicing:'yumba',guideTonePriority:true,upperStructure:true,maxLowDensity:.32},melody:{scale:['harmonic-minor','dorian','phrygian-dominant'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6,7],phraseBars:[4,8],contour:['rubato-lyric','staccato-punctuation','counterline'],callResponse:true,ornamentCap:.24},rhythm:{subdivision:16,swing:.5,accent:[1,.92,.6,.85],signature:['marcato','sincopa','bordoneo','milonga','arrastre'],fillBars:[3],ghostShare:.1},techniques:{bass:['arrastre','strappata','lija','tambor','chicharra','pizzicato','staccato'],harmony:['marcato','yumba','chapa','accent','staccato'],melody:['detache','pizzicato','portamento','vibrato','accent'],bowed:['detache','pizzicato','spiccato','legato'],bellows:['marcato','arrastre','staccato','legato'],percussion:['accent','ghost']},mixFocus:{lead:.86,bass:.8,harmony:.6,comp:.45,drums:.35,percussion:.4},forbidden:['generic pop backbeat','constant swing'] }),
+  flamenco: P({genreId:'flamenco',meter:'12/8',cycleBars:1,harmonicModel:'phrygian-cadence',defaultScale:'phrygian',chordScales:{major:'ionian',minor:'phrygian',dominant:'phrygian-dominant'},progressions:[['Am','G','F','E7'],['Am','Bb','E7','Am'],['Dm','C','Bb','A7']],cadences:[['Am','Bb','E7','Am']],harmonicRhythm:'half-bar',bass:{style:'riff',targetDegrees:[1,5,1,7],chromaticApproach:true,passingProbability:.18,phraseFillProbability:.12,anticipationBeats:[4,8,10],silenceProbability:.06},harmony:{voicing:'open',guideTonePriority:false,upperStructure:false,maxLowDensity:.3},melody:{scale:['phrygian','phrygian-dominant','harmonic-minor'],targetDegrees:[1,2,3,5,7],approachDegrees:[1,2,7],phraseBars:[1,2,4],contour:['compas','call-response','remate'],callResponse:true,ornamentCap:.22},rhythm:{subdivision:24,swing:.5,accent:[1,.6,.9,.65],signature:['12-beat-compas','rasgueado','golpe','jaleo'],fillBars:[1],ghostShare:.08},techniques:{bass:['pizzicato','accent','rasgueado'],harmony:['rasgueado','golpe','alzapua','staccato'],melody:['vibrato','slide','grace','portamento'],percussion:['slap','accent','ghost']},mixFocus:{lead:.86,harmony:.72,bass:.46,percussion:.55,comp:.5},forbidden:['straight 4/4 rock meter'] }),
+  metal: P({genreId:'metal',meter:'4/4',cycleBars:4,harmonicModel:'power-riff',defaultScale:'aeolian',chordScales:{major:'ionian',minor:'aeolian',dominant:'mixolydian'},progressions:[['E5','C5','D5','B5'],['Em','G','D','Em'],['E5','F5','G5','E5']],cadences:[['C5','D5','E5']],harmonicRhythm:'bar',bass:{style:'riff',targetDegrees:[1,5,1,7],chromaticApproach:true,passingProbability:.12,phraseFillProbability:.1,anticipationBeats:[3.5],silenceProbability:.03},harmony:{voicing:'power',guideTonePriority:false,upperStructure:false,maxLowDensity:.2},melody:{scale:['aeolian','phrygian','minor-pentatonic'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[4,8],contour:['riff','sequence','breakdown'],callResponse:false,ornamentCap:.16},rhythm:{subdivision:16,swing:.5,accent:[1,.8,.65,.8],signature:['palm-mute','double-kick','breakdown'],fillBars:[4],ghostShare:.04},techniques:{bass:['pick','mute','staccato','accent'],harmony:['palm-mute','downpick','staccato','harmonic'],melody:['bend','slide','tremolo','vibrato'],percussion:['accent','double-kick','fill']},mixFocus:{drums:.8,bass:.68,harmony:.6,lead:.8,comp:.35},forbidden:['smooth swing'] }),
+  'r-and-b': P({genreId:'r-and-b',meter:'4/4',cycleBars:4,harmonicModel:'functional',defaultScale:'dorian',chordScales:{major:'ionian',minor:'dorian',dominant:'mixolydian','half-diminished':'locrian'},progressions:[['Dm9','G13','Cmaj9','Am9'],['Fmaj9','Em7','Dm9','G13'],['Cmaj9','A7','Dm9','G13']],cadences:[['Dm9','G13','Cmaj9']],harmonicRhythm:'bar',bass:{style:'riff',targetDegrees:[1,3,5,7,9],chromaticApproach:true,passingProbability:.34,phraseFillProbability:.24,anticipationBeats:[2.5,4],silenceProbability:.08},harmony:{voicing:'drop-two',guideTonePriority:true,upperStructure:true,maxLowDensity:.2},melody:{scale:['dorian','minor-pentatonic','blues'],targetDegrees:[1,3,5,7,9],approachDegrees:[2,4,6,7],phraseBars:[4,8],contour:['melisma','motif','answer','space'],callResponse:true,ornamentCap:.24},rhythm:{subdivision:16,swing:.54,accent:[1,.55,.8,.52],signature:['laid-back-16ths','ghost-pocket','new-jack-swing'],fillBars:[4],ghostShare:.2},techniques:{bass:['fingerstyle','slap','ghost','mute'],harmony:['staccato','legato','chord-stab'],melody:['legato','slide','vibrato','melisma'],percussion:['ghost','accent','rim']},mixFocus:{lead:.84,bass:.76,drums:.62,harmony:.5,comp:.36,pad:.35},forbidden:['generic pop triad wash'] }),
+  reggae: P({genreId:'reggae',meter:'4/4',cycleBars:2,harmonicModel:'modal-vamp',defaultScale:'major-pentatonic',chordScales:{major:'ionian',minor:'aeolian',dominant:'mixolydian'},progressions:[['G','C','G','D'],['C','G','Am','F'],['Am','G','F','G']],cadences:[['C','D','G']],harmonicRhythm:'bar',bass:{style:'reggae',targetDegrees:[1,5,7],chromaticApproach:false,passingProbability:.1,phraseFillProbability:.06,anticipationBeats:[3.5],silenceProbability:.1},harmony:{voicing:'shell',guideTonePriority:false,upperStructure:false,maxLowDensity:.18},melody:{scale:['major-pentatonic','mixolydian','dorian'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[4,8],contour:['vocal-hook','answer','dub-space'],callResponse:true,ornamentCap:.12},rhythm:{subdivision:16,swing:.5,accent:[.6,1,.6,1],signature:['one-drop','skank','rockers'],fillBars:[4],ghostShare:.08},techniques:{bass:['fingerstyle','legato','staccato'],harmony:['skank','staccato','mute'],melody:['legato','vibrato','slide'],percussion:['rim','ghost','accent']},mixFocus:{bass:.86,drums:.65,harmony:.42,lead:.72,comp:.36},forbidden:['straight kick on all four as defining groove'] }),
+  reggaeton: P({genreId:'reggaeton',meter:'4/4',cycleBars:2,harmonicModel:'modal-vamp',defaultScale:'aeolian',chordScales:{major:'ionian',minor:'aeolian',dominant:'phrygian-dominant'},progressions:[['Am','F','C','G'],['Am','F','Dm','E7'],['Cm','Ab','Eb','Bb']],cadences:[['Dm','E7','Am']],harmonicRhythm:'bar',bass:{style:'dembow',targetDegrees:[1,5,7,3],chromaticApproach:true,passingProbability:.12,phraseFillProbability:.16,anticipationBeats:[2.5,4],silenceProbability:.04},harmony:{voicing:'close',guideTonePriority:false,upperStructure:false,maxLowDensity:.15},melody:{scale:['aeolian','minor-pentatonic'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[2,4],contour:['hook','pickup','drop'],callResponse:true,ornamentCap:.1},rhythm:{subdivision:16,swing:.5,accent:[1,.55,.9,.5],signature:['dembow','perreo-break','vocal-pickup'],fillBars:[4],ghostShare:.1},techniques:{bass:['sub','mute','staccato'],harmony:['staccato','chop'],melody:['portamento','slide','staccato'],percussion:['ghost','accent','rim']},mixFocus:{bass:.9,drums:.84,lead:.72,harmony:.22,pad:.35},forbidden:['generic four-on-floor'] }),
+  rock: P({genreId:'rock',meter:'4/4',cycleBars:4,harmonicModel:'functional',defaultScale:'mixolydian',chordScales:{major:'ionian',minor:'aeolian',dominant:'mixolydian'},progressions:[['E5','C5','D5','B5'],['E','A','D','A'],['Em','C','G','D']],cadences:[['A','B7','E']],harmonicRhythm:'bar',bass:{style:'riff',targetDegrees:[1,5,3,7],chromaticApproach:true,passingProbability:.12,phraseFillProbability:.1,anticipationBeats:[3.5],silenceProbability:.03},harmony:{voicing:'power',guideTonePriority:false,upperStructure:false,maxLowDensity:.22},melody:{scale:['mixolydian','minor-pentatonic','aeolian'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[4,8],contour:['riff','hook','solo'],callResponse:true,ornamentCap:.14},rhythm:{subdivision:16,swing:.5,accent:[1,.78,.62,.78],signature:['straight-eighths','riff-lock','half-time'],fillBars:[4],ghostShare:.04},techniques:{bass:['pick','staccato','mute','accent'],harmony:['downpick','palm-mute','staccato'],melody:['bend','slide','vibrato'],percussion:['accent','fill','crash']},mixFocus:{drums:.75,bass:.64,harmony:.62,lead:.82,comp:.4},forbidden:['constant jazz swing'] }),
+  salsa: P({genreId:'salsa',meter:'4/4',cycleBars:2,harmonicModel:'functional',defaultScale:'ionian',chordScales:{major:'ionian',minor:'dorian',dominant:'mixolydian','half-diminished':'locrian'},progressions:[['Cmaj7','Fmaj7','G7','Cmaj7'],['Am7','Dm7','G7','Cmaj7'],['Dm7','G7','Cmaj7','A7']],cadences:[['Dm7','G7','Cmaj7'],['F#m7b5','B7','Em7']],harmonicRhythm:'half-bar',bass:{style:'tumbao',targetDegrees:[1,5,3,7],chromaticApproach:true,passingProbability:.22,phraseFillProbability:.18,anticipationBeats:[3.5,4],silenceProbability:.04},harmony:{voicing:'montuno',guideTonePriority:true,upperStructure:true,maxLowDensity:.22},melody:{scale:['ionian','dorian','mixolydian'],targetDegrees:[1,3,5,7,9],approachDegrees:[2,4,6,7],phraseBars:[2,4],contour:['montuno','mambo-punctuation','call-response'],callResponse:true,ornamentCap:.2},rhythm:{subdivision:16,swing:.5,accent:[1,.54,.9,.62],signature:['2-3-son-clave','3-2-son-clave','tumbao','montuno','cascara','mambo'],fillBars:[2,4],ghostShare:.12},techniques:{bass:['pizzicato','staccato','ghost','accent'],harmony:['montuno','staccato','marcato','chapa'],melody:['staccato','legato','fall','doit','shake'],percussion:['heel','toe','slap','open','ghost','edge']},mixFocus:{percussion:.78,bass:.82,lead:.82,harmony:.56,comp:.4,drums:.48},forbidden:['generic straight backbeat'] }),
+  ska: P({genreId:'ska',meter:'4/4',cycleBars:2,harmonicModel:'functional',defaultScale:'major-pentatonic',chordScales:{major:'ionian',minor:'dorian',dominant:'mixolydian'},progressions:[['C','Dm','F','G'],['C','G','Am','F'],['F','C','G','C']],cadences:[['F','G','C']],harmonicRhythm:'half-bar',bass:{style:'rootFifth',targetDegrees:[1,5,3,7],chromaticApproach:false,passingProbability:.14,phraseFillProbability:.12,anticipationBeats:[2.5,4],silenceProbability:.03},harmony:{voicing:'open',guideTonePriority:false,upperStructure:false,maxLowDensity:.2},melody:{scale:['major-pentatonic','mixolydian'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[2,4],contour:['skank-hook','horn-answer'],callResponse:true,ornamentCap:.1},rhythm:{subdivision:16,swing:.5,accent:[.58,1,.58,1],signature:['offbeat-skank','walking-bass','rocksteady'],fillBars:[2,4],ghostShare:.05},techniques:{bass:['pizzicato','staccato','accent'],harmony:['skank','staccato','chop'],melody:['staccato','fall','shake'],percussion:['accent','rim','ghost']},mixFocus:{bass:.68,drums:.65,harmony:.4,lead:.8,comp:.32},forbidden:['heavy swing'] }),
+  soul: P({genreId:'soul',meter:'4/4',cycleBars:4,harmonicModel:'functional',defaultScale:'major-pentatonic',chordScales:{major:'ionian',minor:'dorian',dominant:'mixolydian'},progressions:[['Cmaj7','Am7','Dm7','G7'],['C','E7','F','G'],['Ebmaj7','Cm7','Fm7','Bb7']],cadences:[['Dm7','G7','Cmaj7']],harmonicRhythm:'bar',bass:{style:'riff',targetDegrees:[1,3,5,6,7],chromaticApproach:true,passingProbability:.28,phraseFillProbability:.2,anticipationBeats:[3.5],silenceProbability:.06},harmony:{voicing:'shell',guideTonePriority:true,upperStructure:true,maxLowDensity:.24},melody:{scale:['major-pentatonic','blues','dorian'],targetDegrees:[1,3,5,6,7],approachDegrees:[2,4,6],phraseBars:[4,8],contour:['vocal-melisma','horn-answer','riff'],callResponse:true,ornamentCap:.18},rhythm:{subdivision:16,swing:.54,accent:[1,.68,.82,.62],signature:['backbeat','Motown-bass','horn-response'],fillBars:[4],ghostShare:.12},techniques:{bass:['fingerstyle','ghost','staccato','accent'],harmony:['organ-swell','staccato','tenuto'],melody:['vibrato','grace','bend','legato'],percussion:['ghost','accent','rim']},mixFocus:{lead:.86,bass:.72,drums:.62,harmony:.48,comp:.34},forbidden:['lifeless loop repetition'] }),
+  swing: P({genreId:'swing',meter:'4/4',cycleBars:4,harmonicModel:'functional',defaultScale:'major-pentatonic',chordScales:{major:'ionian',minor:'dorian',dominant:'mixolydian'},progressions:[['C6','A7','Dm7','G7'],['Dm7','G7','C6','A7'],['F6','D7','Gm7','C7']],cadences:[['Dm7','G7','C6']],harmonicRhythm:'half-bar',bass:{style:'walking',targetDegrees:[1,3,5,7],chromaticApproach:true,passingProbability:.5,phraseFillProbability:.28,anticipationBeats:[3.5],silenceProbability:.05},harmony:{voicing:'drop-two',guideTonePriority:true,upperStructure:true,maxLowDensity:.25},melody:{scale:['major-pentatonic','mixolydian','blues'],targetDegrees:[1,3,5,7,9],approachDegrees:[2,4,6,7],phraseBars:[4,8],contour:['spang-a-lang','motif','shout'],callResponse:true,ornamentCap:.18},rhythm:{subdivision:16,swing:.66,accent:[1,.62,.8,.58],signature:['spang-a-lang','charleston','walking','shout'],fillBars:[4],ghostShare:.1},techniques:{bass:['pizzicato','accent','ghost'],harmony:['staccato','tenuto','accent'],melody:['legato','fall','doit','vibrato'],winds:['fall','doit','shake','vibrato'],percussion:['ride','brush','ghost']},mixFocus:{lead:.9,bass:.72,drums:.68,harmony:.4,comp:.34},forbidden:['straight 16th grid'] }),
+  timba: P({genreId:'timba',meter:'4/4',cycleBars:4,harmonicModel:'functional',defaultScale:'dorian',chordScales:{major:'ionian',minor:'dorian',dominant:'mixolydian'},progressions:[['Am7','Dm7','E7','Am7'],['Dm7','G7','Cmaj7','A7'],['Cm7','Fm7','G7','Cm7']],cadences:[['Dm7','G7','C7','A7']],harmonicRhythm:'half-bar',bass:{style:'tumbao',targetDegrees:[1,3,5,7,9],chromaticApproach:true,passingProbability:.3,phraseFillProbability:.3,anticipationBeats:[2.5,3.5,4],silenceProbability:.05},harmony:{voicing:'montuno',guideTonePriority:true,upperStructure:true,maxLowDensity:.18},melody:{scale:['dorian','mixolydian','minor-pentatonic'],targetDegrees:[1,3,5,7,9],approachDegrees:[2,4,6,7],phraseBars:[2,4],contour:['moña','gear-shift','call-response','coro-mambo'],callResponse:true,ornamentCap:.22},rhythm:{subdivision:16,swing:.52,accent:[1,.5,.92,.6],signature:['clave','songo','gear-change','despelote','marcha-arriba'],fillBars:[2,4],ghostShare:.15},techniques:{bass:['slap','ghost','pizzicato','accent','mute'],harmony:['montuno','staccato','chapa','cluster'],melody:['staccato','fall','doit','shake','bend'],percussion:['heel','toe','slap','open','ghost','edge']},mixFocus:{bass:.86,percussion:.8,drums:.66,lead:.84,harmony:.54,comp:.38},forbidden:['salsa-only loop repetition'] }),
+  zouk: P({genreId:'zouk',meter:'4/4',cycleBars:4,harmonicModel:'modal-vamp',defaultScale:'ionian',chordScales:{major:'ionian',minor:'dorian',dominant:'mixolydian'},progressions:[['Fmaj7','Bbmaj7','Am7','Dm7'],['Dm9','G13','Cmaj9','Am7'],['Cmaj7','G/B','Am7','Fmaj7']],cadences:[['G13','Cmaj9','Am7']],harmonicRhythm:'bar',bass:{style:'sub',targetDegrees:[1,5,7,3],chromaticApproach:true,passingProbability:.18,phraseFillProbability:.14,anticipationBeats:[3.5],silenceProbability:.04},harmony:{voicing:'open',guideTonePriority:true,upperStructure:true,maxLowDensity:.18},melody:{scale:['ionian','dorian'],targetDegrees:[1,3,5,7,9],approachDegrees:[2,4,6],phraseBars:[4,8],contour:['legato-arc','hook','answer'],callResponse:true,ornamentCap:.1},rhythm:{subdivision:16,swing:.52,accent:[1,.5,.75,.58],signature:['rolling-offbeat','ti-bwa','chawa','bass-flow'],fillBars:[4],ghostShare:.05},techniques:{bass:['legato','staccato','mute'],harmony:['staccato','sustain'],melody:['legato','portamento','vibrato'],percussion:['open','ghost','accent']},mixFocus:{bass:.82,lead:.72,pad:.52,harmony:.38,drums:.5,comp:.3},forbidden:['busy latin montuno'] }),
+  'drum-and-bass': P({genreId:'drum-and-bass',meter:'4/4',cycleBars:2,harmonicModel:'modal-vamp',defaultScale:'aeolian',chordScales:{major:'ionian',minor:'aeolian',dominant:'mixolydian'},progressions:[['Em7','Cmaj7','G','D'],['Am7','G','Fmaj7','G'],['Dm7','Bbmaj7','F','C']],cadences:[['Cmaj7','D','Em7']],harmonicRhythm:'phrase',bass:{style:'sub',targetDegrees:[1,5,7,3],chromaticApproach:false,passingProbability:.08,phraseFillProbability:.18,anticipationBeats:[3.5],silenceProbability:.08},harmony:{voicing:'close',guideTonePriority:false,upperStructure:true,maxLowDensity:.16},melody:{scale:['aeolian','dorian','minor-pentatonic'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[2,4,8],contour:['breakbeat','liquid-hook','drop'],callResponse:false,ornamentCap:.08},rhythm:{subdivision:32,swing:.5,accent:[1,.45,.8,.42],signature:['chopped-break','two-step-sub','half-time-drop'],fillBars:[2,4],ghostShare:.1},techniques:{bass:['sub','glissando','mute','staccato'],harmony:['staccato','sustain'],melody:['portamento','glissando'],percussion:['ghost','accent','roll']},mixFocus:{bass:.9,drums:.86,lead:.62,pad:.46,harmony:.2},forbidden:['straight four-on-floor'] }),
+  industrial: P({genreId:'industrial',meter:'4/4',cycleBars:4,harmonicModel:'power-riff',defaultScale:'chromatic',chordScales:{major:'mixolydian',minor:'phrygian',dominant:'phrygian-dominant'},progressions:[['E5','F5','E5','E5'],['E5','Bb5','F5','E5'],['C5','Db5','C5','F#5']],cadences:[['Bb5','E5']],harmonicRhythm:'bar',bass:{style:'riff',targetDegrees:[1,1,5,7],chromaticApproach:true,passingProbability:.08,phraseFillProbability:.05,anticipationBeats:[4],silenceProbability:.01},harmony:{voicing:'power',guideTonePriority:false,upperStructure:false,maxLowDensity:.12},melody:{scale:['chromatic','phrygian'],targetDegrees:[1,2,5,6],approachDegrees:[1,2,6],phraseBars:[4,8],contour:['mechanical-riff','noise-rise','drop'],callResponse:false,ornamentCap:.04},rhythm:{subdivision:16,swing:.5,accent:[1,.9,.55,.85],signature:['EBM-pulse','industrial-four','mechanical-stop'],fillBars:[4],ghostShare:.02},techniques:{bass:['mute','staccato','accent'],harmony:['palm-mute','mute','staccato'],melody:['noise','glissando','staccato'],percussion:['accent','rim','noise']},mixFocus:{bass:.84,drums:.88,harmony:.42,lead:.6,pad:.16},forbidden:['swing','soft acoustic sway'] }),
+  'punk-hardcore': P({genreId:'punk-hardcore',meter:'4/4',cycleBars:4,harmonicModel:'power-riff',defaultScale:'mixolydian',chordScales:{major:'ionian',minor:'aeolian',dominant:'mixolydian'},progressions:[['E5','G5','A5','B5'],['A5','C5','D5','E5'],['E5','F#5','G5','E5']],cadences:[['D5','E5']],harmonicRhythm:'bar',bass:{style:'riff',targetDegrees:[1,5,3,7],chromaticApproach:true,passingProbability:.06,phraseFillProbability:.08,anticipationBeats:[4],silenceProbability:.01},harmony:{voicing:'power',guideTonePriority:false,upperStructure:false,maxLowDensity:.12},melody:{scale:['mixolydian','minor-pentatonic'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[2,4,8],contour:['riff','shout','breakdown'],callResponse:false,ornamentCap:.06},rhythm:{subdivision:16,swing:.5,accent:[1,.85,.62,.82],signature:['downpick-8ths','D-beat','hardcore-breakdown'],fillBars:[4],ghostShare:.02},techniques:{bass:['pick','staccato','mute','accent'],harmony:['downpick','palm-mute','staccato'],melody:['bend','slide','harmonic'],percussion:['accent','fill','crash']},mixFocus:{drums:.84,bass:.68,harmony:.62,lead:.78,comp:.32},forbidden:['laid-back swing'] }),
+  'uk-bass': P({genreId:'uk-bass',meter:'4/4',cycleBars:2,harmonicModel:'modal-vamp',defaultScale:'aeolian',chordScales:{major:'ionian',minor:'dorian',dominant:'mixolydian'},progressions:[['Am7','G','F','G'],['Dm7','C','Bb','C'],['Em7','D','C','D']],cadences:[['G','Am7']],harmonicRhythm:'phrase',bass:{style:'sub',targetDegrees:[1,5,7,3],chromaticApproach:true,passingProbability:.1,phraseFillProbability:.18,anticipationBeats:[2.5,4],silenceProbability:.06},harmony:{voicing:'close',guideTonePriority:false,upperStructure:true,maxLowDensity:.14},melody:{scale:['aeolian','dorian','minor-pentatonic'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[2,4],contour:['2-step','grime-hook','drop'],callResponse:false,ornamentCap:.08},rhythm:{subdivision:16,swing:.5,accent:[1,.45,.82,.45],signature:['2-step','grime','half-step','bassline'],fillBars:[2],ghostShare:.07},techniques:{bass:['sub','glissando','mute','staccato'],harmony:['staccato','chop'],melody:['portamento','slide','glissando'],percussion:['ghost','accent','rim']},mixFocus:{bass:.92,drums:.75,lead:.6,harmony:.18,pad:.3},forbidden:['rock backbeat as default'] }),
+};
+
+
+export function getGenreTheory(genreId: string): GenreTheoryProfile {
+  return GENRE_THEORY[genreId] ?? GENRE_THEORY.rock;
+}
+
+export function blendGenreTheory(host: GenreTheoryProfile, guest: GenreTheoryProfile, weight: number): GenreTheoryProfile {
+  const w = Math.max(0, Math.min(1, weight));
+  if (w <= 0.001 || host.genreId === guest.genreId) return host;
+  const choose = <T>(a:T,b:T) => w > 0.55 ? b : a;
+  return {
+    ...host,
+    progressions: host.progressions,
+    cadences: host.cadences,
+    defaultScale: choose(host.defaultScale, guest.defaultScale),
+    chordScales: {...host.chordScales, ...(w > .65 ? guest.chordScales : {})},
+    bass: {
+      ...host.bass,
+      style: w > .7 ? guest.bass.style : host.bass.style,
+      targetDegrees: Array.from(new Set([...host.bass.targetDegrees, ...(w > .45 ? guest.bass.targetDegrees : [])])),
+      chromaticApproach: host.bass.chromaticApproach || (w > .55 && guest.bass.chromaticApproach),
+      passingProbability: host.bass.passingProbability * (1-w) + guest.bass.passingProbability*w,
+      phraseFillProbability: host.bass.phraseFillProbability * (1-w) + guest.bass.phraseFillProbability*w,
+      anticipationBeats: Array.from(new Set([...host.bass.anticipationBeats, ...(w > .45 ? guest.bass.anticipationBeats : [])])),
+      silenceProbability: host.bass.silenceProbability * (1-w) + guest.bass.silenceProbability*w,
+    },
+    harmony: host.harmony,
+    melody: {
+      ...host.melody,
+      scale: Array.from(new Set([...host.melody.scale, ...(w > .4 ? guest.melody.scale : [])])),
+      targetDegrees: Array.from(new Set([...host.melody.targetDegrees, ...(w > .4 ? guest.melody.targetDegrees : [])])),
+      callResponse: host.melody.callResponse || (w > .6 && guest.melody.callResponse),
+    },
+    rhythm: host.rhythm,
+    techniques: {
+      bass:Array.from(new Set([...host.techniques.bass,...(w>.35?guest.techniques.bass:[])])),
+      harmony:Array.from(new Set([...host.techniques.harmony,...(w>.35?guest.techniques.harmony:[])])),
+      melody:Array.from(new Set([...host.techniques.melody,...(w>.35?guest.techniques.melody:[])])),
+      percussion:Array.from(new Set([...host.techniques.percussion,...(w>.35?guest.techniques.percussion:[])])),
+      bowed:Array.from(new Set([...host.techniques.bowed,...(w>.35?guest.techniques.bowed:[])])),
+      winds:Array.from(new Set([...host.techniques.winds,...(w>.35?guest.techniques.winds:[])])),
+      bellows:Array.from(new Set([...host.techniques.bellows,...(w>.35?guest.techniques.bellows:[])])),
+      voice:Array.from(new Set([...host.techniques.voice,...(w>.35?guest.techniques.voice:[])])),
+    },
+    mixFocus:Object.fromEntries(Object.keys(host.mixFocus).map(k=>[k,(host.mixFocus[k]??.5)*(1-w)+(guest.mixFocus[k]??host.mixFocus[k]??.5)*w])),
+    forbidden: Array.from(new Set([...host.forbidden])),
+  };
+}
+
+export function styleTheoryFor(styleId: string | undefined, genreId: string): GenreTheoryProfile {
+  const base = getGenreTheory(genreId);
+  const id = String(styleId ?? '').toLowerCase();
+  if (!id) return base;
+  const out: GenreTheoryProfile = JSON.parse(JSON.stringify(base));
+  const has = (s:string) => id.includes(s);
+  if (has('tango-tradicional') || has('guardia-vieja')) {
+    out.rhythm.signature.push('marcato-en-4','marcato-en-2','habanera-bass','arrastre');
+    out.bass.style='tango';
+    out.bass.passingProbability=.12;
+    out.techniques.bass.push('staccato','pizzicato','arrastre');
+    out.techniques.bellows.push('marcato','staccato','arrastre');
+    out.harmony.voicing='yumba';
+  }
+  if (has('pugliese')) {
+    out.rhythm.accent=[1,.96,.58,.9];
+    out.rhythm.signature.push('yumba','marcato-1-and-3','arrastre');
+    out.bass.style='tango';
+    out.bass.anticipationBeats=[1.5];
+    out.bass.phraseFillProbability=.24;
+    out.harmony.voicing='yumba';
+    out.melody.contour.push('long-crescendo','dramatic-silence');
+    out.techniques.bass.push('bow','pizzicato','arrastre');
+    out.techniques.bellows.push('marcato','accent','arrastre');
+    out.mixFocus.bass=.84;
+  }
+  if (has('troilo')) {
+    out.melody.contour.push('lyric-breath','barline-overlap');
+    out.bass.style='tango';
+    out.techniques.bass.push('legato','arco','pizzicato');
+    out.techniques.bellows.push('arrastre','legato');
+    out.mixFocus.melody=.84;
+  }
+  if (has('piazzolla') || has('nuevo')) { out.harmonicModel='functional'; out.defaultScale='melodic-minor'; out.harmony.upperStructure=true; out.melody.scale.push('melodic-minor'); out.rhythm.signature.push('3+3+2-ostinato'); }
+  if (has('milonga')) { out.meter='2/4'; out.rhythm.signature.push('traspie','3+3+2'); out.bass.style='tango'; out.bass.passingProbability=.2; }
+  if (has('vals')) { out.meter='3/4'; out.rhythm.subdivision=16; out.rhythm.signature.push('waltz-three'); }
+  if (has('chacarera')) { out.meter='6/8'; out.rhythm.subdivision=24; out.rhythm.signature.push('6/8-3/4-cross'); }
+  if (has('salsa-dura')) { out.rhythm.signature.push('mambo-break','cascara'); out.mixFocus.percussion=.84; }
+  if (has('cha-cha') || has('charanga')) { out.rhythm.signature.push('cha-cha-chá','charanga'); out.bass.style='rootFifth'; out.mixFocus.lead=.86; }
+  if (has('pachanga')) { out.rhythm.signature.push('pachanga'); out.bass.passingProbability=.16; }
+  if (has('descarga')) { out.melody.callResponse=true; out.melody.contour.push('trading-solos'); out.bass.phraseFillProbability=.28; out.mixFocus.lead=.92; }
+  if (has('cimafunk') || has('timba-funk')) { out.bass.style='riff'; out.bass.passingProbability=.38; out.bass.phraseFillProbability=.34; out.rhythm.signature.push('funk-pocket','horn-blocks'); out.techniques.bass.push('slap','ghost'); out.mixFocus.bass=.9; }
+  if (has('despelote')) { out.rhythm.signature.push('break-block','gear-drop'); out.mixFocus.percussion=.86; }
+  if (has('rumbeada')) out.rhythm.signature.push('rumba-conversation');
+  if (has('bebop') || has('hard-bop')) { out.melody.scale.push('melodic-minor'); out.bass.passingProbability=.55; out.melody.ornamentCap=.26; }
+  if (has('cool')) { out.bass.passingProbability=.34; out.rhythm.swing=.61; out.mixFocus.lead=.78; }
+  if (has('gypsy')) { out.rhythm.signature.push('la-pompe'); out.harmony.voicing='drop-two'; out.bass.style='walking'; }
+  if (has('free')) { out.melody.scale=['chromatic','dorian']; out.melody.ornamentCap=.3; out.bass.silenceProbability=.18; }
+  if (has('bluegrass')) { out.rhythm.signature.push('boom-chick','banjo-roll','mandolin-chop','fiddle-break'); out.bass.style='rootFifth'; out.mixFocus.lead=.9; }
+  if (has('honky-tonk') || has('outlaw')) { out.rhythm.signature.push('boom-chick','shuffle'); out.techniques.bass.push('walk-up','walk-down'); }
+  if (has('bossa')) { out.meter='4/4'; out.rhythm.signature.push('bossa-clave','violao-syncopation'); out.bass.style='samba'; out.bass.passingProbability=.3; out.harmony.voicing='drop-two'; }
+  if (has('samba')) { out.meter='2/4'; out.rhythm.signature.push('surdo','tamborim','pandeiro'); out.mixFocus.percussion=.86; }
+  if (has('pagode')) { out.rhythm.signature.push('pandeiro','tantan','cavaquinho'); }
+  if (has('choro')) { out.meter='2/4'; out.rhythm.signature.push('choro-syncopation'); out.bass.style='walking'; out.bass.passingProbability=.38; }
+  if (has('forró')) { out.meter='2/4'; out.rhythm.signature.push('baião','zabumba','triangulo'); out.bass.style='rootFifth'; }
+  if (has('deep-house')) { out.rhythm.signature.push('offbeat-hats','organ-stab'); out.harmony.voicing='close'; }
+  if (has('soulful-house')) { out.harmonicModel='functional'; out.harmony.guideTonePriority=true; out.melody.scale.push('blues'); }
+  if (has('tech-house')) { out.bass.style='house'; out.harmony.voicing='close'; out.harmony.maxLowDensity=.12; }
+  if (has('garage-house')) { out.rhythm.signature.push('2-step-variant'); out.rhythm.accent=[1,.5,.9,.45]; }
+  if (has('acid-house')) { out.rhythm.signature.push('16th-acid-bass'); out.bass.style='sub'; }
+  if (has('french-house')) { out.rhythm.signature.push('filtered-disco-loop','four-on-floor'); out.mixFocus.harmony=.58; }
+  if (has('neo-soul')) { out.harmony.voicing='drop-two'; out.melody.scale.push('dorian'); out.melody.ornamentCap=.26; }
+  if (has('quiet-storm')) { out.bass.silenceProbability=.16; out.rhythm.signature.push('space','slow-pocket'); out.mixFocus.pad=.6; }
+  if (has('new-jack')) { out.rhythm.signature.push('swinging-programmed-backbeat'); out.rhythm.swing=.56; }
+  if (has('funk-r&b')) { out.bass.passingProbability=.36; out.techniques.bass.push('slap','ghost'); }
+  if (has('motown')) { out.rhythm.signature.push('motorik-bass','tambourine'); out.bass.style='riff'; }
+  if (has('deep-soul') || has('southern')) { out.rhythm.signature.push('three-part-vocal-response'); out.mixFocus.lead=.88; }
+  if (has('psychedelic-soul')) out.rhythm.signature.push('extended-vamp','bridge-texture');
+  if (has('roots-reggae')) { out.rhythm.signature.push('one-drop','skank'); out.bass.silenceProbability=.12; }
+  if (has('dub')) { out.rhythm.signature.push('dropout','echo-space'); out.bass.silenceProbability=.18; out.mixFocus.bass=.9; }
+  if (has('dancehall') || has('ragga')) { out.rhythm.signature.push('dancehall-kick','digital-skank'); out.bass.style='sub'; }
+  if (has('rocksteady')) { out.rhythm.signature.push('rocksteady-walk'); out.bass.style='riff'; }
+  if (has('jungle')) { out.rhythm.subdivision=32; out.rhythm.signature.push('amen-chop','break-roll'); }
+  if (has('liquid')) { out.harmonicModel='functional'; out.harmony.guideTonePriority=true; out.melody.scale.push('dorian'); out.mixFocus.harmony=.42; }
+  if (has('jump-up')) { out.bass.style='sub'; out.rhythm.signature.push('jump-up-bass-stab'); }
+  if (has('neuro')) { out.rhythm.signature.push('micro-edit','resampled-bass'); out.bass.style='sub'; }
+  if (has('dancefloor')) { out.melody.contour.push('anthem-hook'); out.mixFocus.lead=.8; }
+  if (has('minimal dnb')) { out.rhythm.signature.push('negative-space'); out.bass.silenceProbability=.16; }
+  if (has('punk')) { out.rhythm.signature.push('downpick-8ths'); out.bass.passingProbability=.05; }
+  if (has('hardcore')) { out.rhythm.signature.push('D-beat','half-time-breakdown'); out.meter='4/4'; }
+  if (has('post-hardcore')) out.rhythm.signature.push('dynamic-stop-start');
+  if (has('skate')) out.rhythm.signature.push('fast-8ths','melodic-hook');
+  if (has('crust')) out.rhythm.signature.push('d-beat','half-time');
+  if (has('melodic')) out.melody.scale.push('major-pentatonic');
+  if (has('pop punk')) out.harmonicModel='functional';
+  if (has('uk garage') || has('2-step')) { out.rhythm.signature.push('2-step','skippy-snare'); out.bass.style='sub'; }
+  if (has('grime')) { out.rhythm.signature.push('sparse-snare','square-lead'); out.bass.silenceProbability=.12; }
+  if (has('dubstep')) { out.rhythm.signature.push('half-time','bass-drop'); out.bass.style='sub'; }
+  if (has('future garage')) { out.rhythm.signature.push('shuffled-ghost','vocal-chop'); out.rhythm.swing=.56; }
+  if (has('bassline')) { out.rhythm.signature.push('bassline-syncopation'); out.bass.passingProbability=.18; }
+  if (has('breaks')) { out.rhythm.signature.push('broken-beat'); }
+  if (has('ebm')) { out.rhythm.signature.push('four-on-floor','sequenced-bass'); out.mixFocus.drums=.9; }
+  if (has('industrial metal') || has('metal')) { out.rhythm.signature.push('double-kick','palm-mute'); }
+  if (has('noise')) { out.melody.scale=['chromatic']; out.harmonicModel='power-riff'; }
+  if (has('shoegaze')) { out.harmony.voicing='open'; out.mixFocus.pad=.7; out.mixFocus.lead=.72; }
+  if (has('grunge')) { out.rhythm.signature.push('dynamic-verse-chorus'); }
+  if (has('prog')) { out.meter='7/8'; out.cycleBars=2; out.rhythm.signature.push('odd-meter','metric-displacement'); }
+  return out;
+}

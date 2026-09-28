@@ -1,4 +1,4 @@
-import { GenreWorld } from '../../types';
+import type { GenreWorld } from '../../types';
 import { FOLK_WORLD } from './folk';
 
 export const CLASSICAL_WORLD: GenreWorld = {

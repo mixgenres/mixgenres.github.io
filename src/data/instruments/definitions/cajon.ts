@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../types';
 
 export const cajon: InstrumentDef = {
   id: "cajon",
-  name: "Cajón Flamenco",
+  name: "Cajon Flamenco",
   family: "hand-drums",
   drum: {
     low: 36,
@@ -43,7 +43,7 @@ export const cajon: InstrumentDef = {
   kitComponents: [
     {
       id: "cajon-bass",
-      name: "Cajón Grave (Center Bass Thump)",
+      name: "Cajon Grave (Center Bass Thump)",
       midi: 36,
       physicalType: "wood",
       tuningHz: 65,
@@ -57,7 +57,7 @@ export const cajon: InstrumentDef = {
     },
     {
       id: "cajon-slap",
-      name: "Cajón Agudo (Corner Snare Slap)",
+      name: "Cajon Agudo (Corner Snare Slap)",
       midi: 38,
       physicalType: "wood",
       tuningHz: 240,
@@ -71,7 +71,7 @@ export const cajon: InstrumentDef = {
     },
     {
       id: "cajon-tip",
-      name: "Cajón Tip (Fingertip Ghost Tap)",
+      name: "Cajon Tip (Fingertip Ghost Tap)",
       midi: 42,
       physicalType: "wood",
       tuningHz: 360,
@@ -84,7 +84,7 @@ export const cajon: InstrumentDef = {
     },
     {
       id: "cajon-side",
-      name: "Cajón Side (Hardwood Rim Knock)",
+      name: "Cajon Side (Hardwood Rim Knock)",
       midi: 37,
       physicalType: "wood",
       tuningHz: 480,

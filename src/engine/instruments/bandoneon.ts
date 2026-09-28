@@ -6,7 +6,7 @@ import type { VoiceRenderContext, InstrumentModule } from './types';
  * BandoneonModule
  * 
  * Physical synthesis module modeling an authentic 142-tone Alfred Arnold (AA) bisonoric bandoneon:
- * - Dual zinc reed plates (8' fundamental + subtle dry-detuned unison/octave) delivering characteristic metallic bite
+ * - Dual zinc reed plates (dry 8' register + octave-lower 16' companion) delivering characteristic metallic bite
  * - True bisonoric asymmetry between bellows opening (abrir/pull) and closing (cerrar/push)
  * - Knee-drop ("golpe de rodilla") impact transients on aggressive marcato downbeats
  * - Tango arrastre pitch & pressure scooping dynamics
@@ -30,6 +30,18 @@ export default class BandoneonModule implements InstrumentModule {
       b,
       action
     } = ctx;
+
+    // The compiler's physical button selection is now carried all the way into
+    // synthesis. Button/side do not change the intended pitch (the map already
+    // resolved that), but they shape the small mechanical/contact component: the
+    // two manuals have different case coupling and each button has a stable
+    // deterministic contact variance. This makes the physical map audible in the
+    // same restrained way a real player's button mechanics are audible.
+    const buttonIndex = voice.bandoneonButtonIndex ?? 0;
+    const sideCode = voice.bandoneonSideCode ?? 1;
+    const buttonVariation = ((buttonIndex * 37 + sideCode * 17) % 101) / 100;
+    const manualCoupling = sideCode === 1 ? 1.0 : 0.88;
+    const buttonContact = 0.82 + buttonVariation * 0.18;
 
     const noteSeed = seedOf(trackId, voiceIndex, 5150);
 
@@ -84,22 +96,28 @@ export default class BandoneonModule implements InstrumentModule {
       ? el.add(1.0, el.mul(vibratoDepthRatio, el.mul(vibLfo, vibratoOnsetEnv)))
       : el.const({ value: 1.0 });
 
-    const reedFreq = el.mul(freqSignal, el.mul(arrastrePitchMod, vibratoMod));
+    const directionPitchCents = bellows
+      ? (isClosing ? bellows.closing.pitchDriftCents : bellows.opening.pitchDriftCents)
+      : (isClosing ? 1.5 : -1.5);
+    const directionPitchRatio = Math.pow(2, directionPitchCents / 1200);
+    const reedFreq = el.mul(
+      freqSignal,
+      el.mul(arrastrePitchMod, el.mul(vibratoMod, directionPitchRatio))
+    );
     const safeReedFreq = el.min(el.const({ value: 18000 }), el.max(el.const({ value: 20 }), reedFreq));
 
-    // 4. Dual Zinc Reed Generation (8' Fundamental + 8'/4' Register Detuned Partial)
-    const zincDetuneCents = 4.2 + randNorm(noteSeed ^ 0x99) * 1.8;
-    const secondReedFreq = el.mul(safeReedFreq, Math.pow(2, zincDetuneCents / 1200));
+    // 4. Dual zinc reed generation. A 142-tone Rheinische/Doble-A bandoneon is
+    // two-chörig in octave tuning: the characteristic register is a middle reed
+    // plus its octave-lower companion, not an accordion-like 8'/4' combination.
+    // Keep the pair dry and beat-free; the octave relationship is a major part of
+    // the instrument's recognizable compact, transparent spectrum.
+    const octaveLowerFreq = el.mul(safeReedFreq, 0.5);
+    const reed8 = el.blepsaw(safeReedFreq);
+    const reed16 = el.blepsaw(octaveLowerFreq);
 
-    // Thick zinc reeds generate sharp asymmetric pulse-saw waves
-    const reed1 = el.blepsaw(safeReedFreq);
-    const reed2 = el.blepsaw(secondReedFreq);
-    const octHigh = el.lowpass(el.mul(safeReedFreq, 6.0), 0.8, el.blepsaw(el.mul(safeReedFreq, 2.001)));
-
-    // Combined dual-reed acoustic core
     const reedCore = el.add(
-      el.mul(0.68, reed1),
-      el.add(el.mul(0.24, reed2), el.mul(0.12, octHigh))
+      el.mul(0.64, reed8),
+      el.mul(0.36, reed16)
     );
 
     // 5. Non-linear Zinc Reed Pressure Waveshaping (Self-Owned Excitation Saturation)
@@ -131,19 +149,25 @@ export default class BandoneonModule implements InstrumentModule {
     }
 
     // 7. Mechanical Bellows Air Rush & Knee-Drop Impact (Owned excitationDynamics.kneeDropImpact)
+    // Bellows leakage is a continuous acoustic detail, but it should sit well below
+    // the reed core rather than behaving like broadband percussion.
     const flowNoise = el.mul(
       el.lowpass(3800 + b * 2600, 0.85, el.pinknoise()),
-      el.mul(0.042 + (dspProfile?.mechanicalArtifacts.bellowsNoise ?? 0.05) * 0.15, gateSignal)
+      el.mul((0.024 + (dspProfile?.mechanicalArtifacts.bellowsNoise ?? 0.05) * 0.09) * manualCoupling, gateSignal)
     );
 
+    // The famous knee/leg marcato is an intentional physical accent, not a noise
+    // component on every note. Applying it to every onset makes sustained or lyrical
+    // bandoneon lines sound like a stream of mechanical impacts.
     const kneeData = dspProfile?.excitationDynamics?.kneeDropImpact;
-    const kneeDecayMs = kneeData?.decayMs ?? (isMarcato ? 22 : 14);
-    const kneeGain = (kneeData?.gain ?? (isMarcato ? 1.25 : 0.45)) * (kneeData?.saturation ?? 1.0);
+    const kneeDecayMs = kneeData?.decayMs ?? 18;
+    const kneeBaseGain = (kneeData?.gain ?? 0.9) * (kneeData?.saturation ?? 1.0);
+    const kneeAccentScale = isMarcato ? 1.0 : action === 'accent' ? 0.22 : 0;
     const kneeEnv = el.adsr(0.0002, kneeDecayMs / 1000, 0, 0.004, gateSignal);
     const kneeThump = el.mul(el.cycle(68), kneeEnv);
     const kneeNoise = el.mul(el.highpass(1600 + b * 2000, 0.9, el.noise()), kneeEnv);
     const kneeImpact = el.mul(
-      el.const({ value: kneeGain * (0.35 + velBoost * 0.65) }),
+      el.const({ value: kneeBaseGain * kneeAccentScale * (0.35 + velBoost * 0.65) * buttonContact }),
       el.add(el.mul(0.6, kneeThump), el.mul(0.4, kneeNoise))
     );
 

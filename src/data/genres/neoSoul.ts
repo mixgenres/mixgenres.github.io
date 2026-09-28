@@ -1,4 +1,4 @@
-import { GenreWorld } from '../../types';
+import type { GenreWorld } from '../../types';
 import { HIP_HOP_WORLD } from './hipHop';
 
 export const NEO_SOUL_WORLD: GenreWorld = {

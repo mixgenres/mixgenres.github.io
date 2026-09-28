@@ -21,9 +21,17 @@ export default class FiddleModule implements InstrumentModule {
 
     const noteSeed = seedOf(trackId, voiceIndex, 4004);
     
-    const isPizz = action === 'pluck' || action === 'pizzicato' || action === 'tambor' || /pizz/i.test(action ?? '');
+    const isPizz = action === 'pluck' || action === 'pizzicato' || /pizz/i.test(action ?? '');
+    const isTambor = action === 'tambor' || /tambor/i.test(action ?? '');
     const isTremolo = action === 'tremolo' || /tremolo/i.test(action ?? '');
-    const isStaccato = action === 'staccato' || action === 'spiccato' || action === 'accent' || params.articulation > 0.50; // Fiddle players play short rhythmic strokes
+    const isStaccato = action === 'staccato' || action === 'spiccato' || action === 'accent' || ctx.articulation > 0.50; // Fiddle players play short rhythmic strokes
+
+    if (isTambor) {
+      // Fingerboard/string snap: a percussive fiddle articulation, not pizzicato.
+      const body = el.mul(el.cycle(145), el.adsr(0.0003, 0.024, 0, 0.008, gateSignal));
+      const snap = el.mul(el.highpass(1700, 1.2, el.noise()), el.adsr(0.0002, 0.008, 0, 0.004, gateSignal));
+      return el.add(el.mul(0.68, body), el.mul(0.32, snap));
+    }
 
     // Fiddle Vibrato is usually faster, shallower, and starts earlier than classical violin
     const vibratoSpeed = 6.4 + randNorm(noteSeed ^ 0x66) * 0.25;

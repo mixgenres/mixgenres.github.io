@@ -9,15 +9,19 @@ export default class StringsModule implements InstrumentModule {
       gateSignal,
       safeFreqSignal,
       b,
-      pk
+      pk,
+      params,
+      action
     } = ctx;
+    const isTango = /tango|milonga|vals/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isStaccato = action === 'staccato' || action === 'marcato' || /marcato|staccato/i.test(action ?? '');
 
     // Create 3 detuned and asynchronously vibrato-modulated voices for natural chorus ensemble depth
     const renderSectionVoice = (idx: number, detuneCents: number, panSide: number, vibSpeed: number, delayMs: number) => {
       // Intonation drift + vibrato
       const vibLfo = el.cycle(vibSpeed);
-      const vibOnset = el.adsr(0.35 + idx * 0.1, 0.15, 1.0, 0.12, gateSignal);
-      const vibDepth = el.mul(el.const({ value: 0.007 }), vibOnset);
+      const vibOnset = el.adsr((isTango ? 0.48 : 0.35) + idx * (isTango ? 0.08 : 0.1), 0.15, 1.0, 0.12, gateSignal);
+      const vibDepth = el.mul(el.const({ value: isTango ? 0.0048 : 0.007 }), vibOnset);
       const intonationDetune = Math.pow(2, detuneCents / 1200);
       
       const modulatedFreq = el.mul(
@@ -32,7 +36,9 @@ export default class StringsModule implements InstrumentModule {
       const coreOsc = el.blepsaw(playerFreq);
 
       // Rosin scraping noise
-      const frictionAttackGate = el.adsr(0.04 + idx * 0.015, 0.15, 0.82, 0.08, gateSignal);
+      const frictionAttackGate = isStaccato
+        ? el.adsr(0.0006, 0.018, 0.12, 0.008, gateSignal)
+        : el.adsr((isTango ? 0.055 : 0.04) + idx * 0.015, 0.15, 0.82, 0.08, gateSignal);
       const rosinCutoff = 1000 + idx * 250;
       const frictionNoise = el.mul(
         el.mul(el.const({ value: 0.08 }), frictionAttackGate),
@@ -65,11 +71,11 @@ export default class StringsModule implements InstrumentModule {
 
     // Stacking 3 distinct string players:
     // Player 1: Centered, dry, LFO 5.2Hz
-    const p1 = renderSectionVoice(0, -3.2, 0, 5.2, 0);
-    // Player 2: Left stage, +12 cents sharp, delayed 18ms, LFO 5.9Hz
-    const p2 = renderSectionVoice(1, 11.8, -1.0, 5.9, 18);
-    // Player 3: Right stage, -13 cents flat, delayed 26ms, LFO 4.6Hz
-    const p3 = renderSectionVoice(2, -12.5, 1.0, 4.6, 26);
+    const p1 = renderSectionVoice(0, isTango ? -1.2 : -3.2, 0, 5.2, 0);
+    // Tango sections are intentionally tighter than a generic cinematic pad:
+    // the players must sound like an orquesta típica string line, not a chorus.
+    const p2 = renderSectionVoice(1, isTango ? 1.0 : 11.8, -1.0, 5.9, isTango ? 7 : 18);
+    const p3 = renderSectionVoice(2, isTango ? -1.1 : -12.5, 1.0, 4.6, isTango ? 11 : 26);
 
     // Return stereo pair (the framework/mixer is designed for mono-to-stereo routing,
     // so we can sum them or return leftSum. In elementary, our track signals sum.

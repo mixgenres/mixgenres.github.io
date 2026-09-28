@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../types';
 
 export const guiro: InstrumentDef = {
   id: "guiro",
-  name: "Güiro",
+  name: "Guiro",
   family: "metal-and-wood",
   drum: {
     low: 73,

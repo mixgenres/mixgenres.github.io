@@ -110,16 +110,12 @@ export const dspOverride: InstrumentDSPOverride = {
       ]
     },
     "tango": {
-      "excitationBias": 0,
-      "brightness": 0.97,
-      "damping": 0.04,
-      "attack": 1.0,
-      "articulation": [
-        "pizzicato",
-        "arco",
-        "walking",
-        "one-finger pull"
-      ]
+      "excitationBias": 0.10,
+      "brightness": 1.00,
+      "damping": 0.025,
+      "attack": 1.14,
+      "body": 1.20,
+      "articulation": ["pizzicato", "arco", "marcato", "arrastre", "strappata", "yumba"]
     },
     "folk": {
       "excitationBias": 0,
