@@ -1,237 +1,60 @@
-import type { GenreWorld, MusicalPattern } from '../../types';
+import type { GenreWorld, MusicalPattern } from '../schema';
 
+import { AFROBEATS_WORLD } from './afrobeats';
+import { BACHATA_WORLD } from './bachata';
+import { BLUES_WORLD } from './blues';
+import { BRAZILIAN_WORLD } from './brazilian';
+import { COUNTRY_WORLD } from './country';
+import { CUMBIA_WORLD } from './cumbia';
+import { DISCO_WORLD } from './disco';
+import { ELECTRONIC_WORLD } from './electronic';
+import { FOLK_WORLD } from './folk';
+import { FUNK_WORLD } from './funk';
+import { GOSPEL_WORLD } from './gospel';
+import { HIP_HOP_WORLD } from './hip-hop';
+import { HOUSE_WORLD } from './house';
+import { JAZZ_WORLD } from './jazz';
+import { KIZOMBA_WORLD } from './kizomba';
 import { TANGO_WORLD } from './tango';
 import { FLAMENCO_WORLD } from './flamenco';
-import { SALSA_WORLD } from './salsa';
-import { TIMBA_WORLD } from './timba';
-import { BACHATA_WORLD } from './bachata';
-import { CUMBIA_WORLD } from './cumbia';
-import { REGGAETON_DEMBOW_WORLD } from './reggaetonDembow';
-import { ZOUK_WORLD } from './zouk';
-import { KIZOMBA_WORLD } from './kizomba';
-import { BLUES_WORLD } from './blues';
-import { JAZZ_WORLD } from './jazz';
-import { SWING_WORLD } from './swing';
-import { FUNK_WORLD } from './funk';
-import { ROCK_WORLD } from './rock';
 import { METAL_WORLD } from './metal';
-import { HIP_HOP_WORLD } from './hipHop';
-import { ELECTRONIC_WORLD } from './electronic';
-import { HOUSE_TECHNO_WORLD } from './houseTechno';
-import { AFROBEATS_WORLD } from './afrobeats';
-import { COUNTRY_WORLD } from './country';
-import { FOLK_WORLD } from './folk';
-import { REGGAE_DUB_WORLD } from './reggaeDub';
+import { R_AND_B_WORLD } from './r-and-b';
+import { REGGAE_WORLD } from './reggae';
+import { REGGAETON_WORLD } from './reggaeton';
+import { ROCK_WORLD } from './rock';
+import { SALSA_WORLD } from './salsa';
 import { SKA_WORLD } from './ska';
-import { SAMBA_BOSSA_WORLD } from './sambaBossa';
-import { gospel } from './gospel';
-import { industrial } from './industrial';
-
-import { CLASSICAL_WORLD } from './classical';
+import { SOUL_WORLD } from './soul';
+import { SWING_WORLD } from './swing';
+import { TIMBA_WORLD } from './timba';
+import { ZOUK_WORLD } from './zouk';
+import { DRUM_AND_BASS_WORLD } from './drum-and-bass';
+import { INDUSTRIAL_WORLD } from './industrial';
+import { PUNK_HARDCORE_WORLD } from './punk-hardcore';
+import { UK_BASS_WORLD } from './uk-bass';
 import { CANONICAL_GENRE_PATTERNS } from './canonicalPatterns';
-import { NEO_SOUL_WORLD } from './neoSoul';
 
-export const GOSPEL_WORLD: GenreWorld = {
-  ...FOLK_WORLD,
-  id: 'gospel',
-  name: 'Gospel',
-  family: 'Vocal / Church / Soul',
-  color: '#c29b38',
-  description: 'Devotional spirit, church pocket, call-and-response choirs, and Hammond organ swells.',
-  substyles: ['Traditional Gospel', 'Contemporary Gospel', 'Southern Gospel', 'Choir Gospel'],
-  artists: ['Mahalia Jackson', 'Aretha Franklin', 'Andraé Crouch', 'The Edwin Hawkins Singers'],
-  concepts: ['Call and response', 'Hammond organ swells', 'Vocal shouting', 'Church pocket swing'],
-  roles: {
-    lead: ['choir', 'piano', 'organ'],
-    harmony: ['piano', 'rock-organ', 'organ'],
-    bass: ['bass'],
-    rhythm: ['drums', 'tambourine'],
-    percussion: ['tambourine', 'hand-percussion'],
-  },
-  styleDefinitions: [
-    {
-      id: 'gospel-traditional',
-      worldId: 'gospel',
-      name: 'Traditional Gospel',
-      origin: 'Chicago / Deep South',
-      era: '1930s–1950s',
-      description: 'Handclaps, foot-stomps, and soaring vocal passion.',
-      characteristicInstruments: gospel.characteristicInstruments,
-      preferredMeters: ['4/4'],
-      tempoRange: [80, 120],
-      keySubstyles: ['Traditional Gospel', 'Choir Gospel'],
-      coreConcepts: ['Call and response', 'Hammond organ swells', 'Vocal shouting'],
-      rhythmicGrammar: ['4/4 swing church pocket'],
-      danceTags: ['spiritual'],
-      tuningSystem: '12-tet',
-      signatureCell: 'Gospel shuffle with tambourine on 2 and 4',
-      grooveMechanics: { swingPercentage: 54, anticipationOffsetSteps: 0, microtimingFeel: 'laid-back' },
-    },
-  ],
-  patterns: [
-    {
-      id: 'gospel-church-pocket',
-      worldId: 'gospel',
-      name: 'Gospel Church Pocket',
-      meter: '4/4',
-      cycleLength: 16,
-      subdivisions: 16,
-      category: 'groove',
-      family: 'gospel',
-      description: 'Dynamic church swing with tambourine and organ swell',
-      onsetGrid: [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
-      instruments: gospel.characteristicInstruments,
-      roles: ['rhythm', 'percussion'],
-      tags: ['pocket', 'swing', 'church'],
-      scopes: ['region'],
-      variants: [],
-    },
-  ],
-};
-
-export const INDUSTRIAL_WORLD: GenreWorld = {
-  ...METAL_WORLD,
-  id: 'industrial',
-  name: 'Industrial',
-  family: 'Electronic / Mechanical / Noise',
-  color: '#4f5459',
-  description: 'Mechanical rhythms, distorted synthesizers, harsh noise sampling, and relentless electronic drive.',
-  substyles: ['EBM', 'Industrial Techno', 'Noise Industrial', 'Dark Industrial'],
-  artists: ['Front 242', 'Nitzer Ebb', 'Skinny Puppy', 'Ministry', 'Nine Inch Nails'],
-  concepts: ['Sequenced 16th bass', 'Distorted drums', 'Sampled metallic noise', 'Harsh sequencing'],
-  roles: {
-    lead: ['synth', 'noise-sweep'],
-    harmony: ['synth', 'sampler'],
-    bass: ['bass-lead', 'sub-bass', 'synth'],
-    rhythm: ['drums'],
-    percussion: ['sampler', 'noise-sweep'],
-  },
-  styleDefinitions: [
-    {
-      id: 'industrial-ebm',
-      worldId: 'industrial',
-      name: 'EBM',
-      origin: 'Belgium / Germany',
-      era: '1980s–1990s',
-      description: 'Electronic Body Music: sequencing, harsh beats, and aggressive synth bass.',
-      characteristicInstruments: industrial.characteristicInstruments,
-      preferredMeters: ['4/4'],
-      tempoRange: [115, 132],
-      keySubstyles: ['EBM', 'Industrial Techno', 'Noise Industrial', 'Dark Industrial'],
-      coreConcepts: ['Sequenced 16th-note basslines', 'Aggressive drum machines', 'Sampled metallic noise'],
-      rhythmicGrammar: ['Driving four-on-the-floor mechanical pulse'],
-      danceTags: ['club-dark'],
-      tuningSystem: '12-tet',
-      signatureCell: 'Mechanical 16th bass with cold industrial beat',
-      grooveMechanics: { swingPercentage: 50, anticipationOffsetSteps: 0, microtimingFeel: 'straight' },
-    },
-  ],
-  patterns: [
-    {
-      id: 'industrial-mechanical-pulse',
-      worldId: 'industrial',
-      name: 'Industrial Mechanical Pulse',
-      meter: '4/4',
-      cycleLength: 16,
-      subdivisions: 16,
-      category: 'groove',
-      family: 'industrial',
-      description: 'Relentless sequenced electronic kick and distorted synth pulse',
-      onsetGrid: [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-      instruments: industrial.characteristicInstruments,
-      roles: ['rhythm', 'bass'],
-      tags: ['mechanical', 'driving', 'electronic'],
-      scopes: ['region'],
-      variants: [],
-    },
-  ],
-};
-
-/**
- * Canonical public genre hierarchy.  Missing leaves deliberately borrow an
- * existing source world; musical definitions stay shared instead of cloned.
- */
-export const GENRE_SOURCE_MAP: Record<string, string> = {
-  afrobeats: 'afrobeats', bachata: 'bachata', blues: 'blues', brazilian: 'samba-bossa',
-  country: 'country', cumbia: 'cumbia', disco: 'funk', electronic: 'electronic',
-  folk: 'folk', funk: 'funk', 'hip-hop': 'hip-hop', house: 'house-techno',
-  jazz: 'jazz', kizomba: 'kizomba', tango: 'tango',
-  flamenco: 'flamenco', metal: 'metal', 'r-and-b': 'funk', reggae: 'reggae-dub',
-  reggaeton: 'reggaeton-dembow', rock: 'rock', salsa: 'salsa', ska: 'ska', soul: 'funk',
-  swing: 'swing', timba: 'timba', zouk: 'zouk', 'drum-and-bass': 'electronic',
-  'punk-hardcore': 'rock', 'uk-bass': 'electronic',
-};
-
-export const GENRE_NAMES: Record<string, string> = {
-  afrobeats: 'Afrobeats', bachata: 'Bachata', blues: 'Blues', brazilian: 'Brazilian',
-  country: 'Country', cumbia: 'Cumbia', disco: 'Disco', electronic: 'Electronic',
-  folk: 'Folk', funk: 'Funk', gospel: 'Gospel', 'hip-hop': 'Hip Hop', house: 'House',
-  jazz: 'Jazz', kizomba: 'Kizomba', tango: 'Tango', flamenco: 'Flamenco',
-  metal: 'Metal', 'r-and-b': 'R&B', reggae: 'Reggae', reggaeton: 'Reggaeton', rock: 'Rock',
-  salsa: 'Salsa', ska: 'Ska', soul: 'Soul', swing: 'Swing', timba: 'Timba', zouk: 'Zouk',
-  'drum-and-bass': 'Drum & Bass', industrial: 'Industrial', 'punk-hardcore': 'Punk / Hardcore',
-  'uk-bass': 'UK Bass',
-};
-
-const GENRE_KINDS: Record<string, 'world'|'family'|'fusion'> = {
-  brazilian:'family', electronic:'family', folk:'family', gospel:'family', reggae:'family', 'uk-bass':'family',
-};
-const GENRE_STRICTNESS: Record<string, 'strict'|'flexible'|'open'> = {
-  tango:'strict', flamenco:'strict', salsa:'strict', timba:'strict', cumbia:'strict', bachata:'strict',
-  brazilian:'flexible', electronic:'open', folk:'flexible', gospel:'flexible', reggae:'strict', reggaeton:'strict',
-  jazz:'flexible', blues:'flexible', funk:'strict', house:'strict', disco:'strict',
-  metal:'strict', 'punk-hardcore':'strict', rock:'flexible', 'drum-and-bass':'strict', industrial:'strict', 'uk-bass':'strict',
-};
-const PROMOTED_FROM: Record<string,string> = {
-  disco:'funk', timba:'salsa', ska:'reggae', 'drum-and-bass':'electronic',
-};
-
-const SOURCE_WORLDS: Record<string, GenreWorld> = Object.fromEntries([
-  TANGO_WORLD, FLAMENCO_WORLD, SALSA_WORLD, TIMBA_WORLD, BACHATA_WORLD, CUMBIA_WORLD,
-  REGGAETON_DEMBOW_WORLD, ZOUK_WORLD, KIZOMBA_WORLD, BLUES_WORLD, JAZZ_WORLD, SWING_WORLD,
-  FUNK_WORLD, ROCK_WORLD, METAL_WORLD, HIP_HOP_WORLD, ELECTRONIC_WORLD, HOUSE_TECHNO_WORLD, AFROBEATS_WORLD,
-  COUNTRY_WORLD, FOLK_WORLD, REGGAE_DUB_WORLD, SKA_WORLD, SAMBA_BOSSA_WORLD,
-  GOSPEL_WORLD, INDUSTRIAL_WORLD, CLASSICAL_WORLD, NEO_SOUL_WORLD,
-].map(world => [world.id, world]));
-
-function deriveStyleSeeds(source: GenreWorld, genreId: string): GenreWorld['styleDefinitions'] {
-  return (source.styleDefinitions ?? []).map((seed, index) => ({
-    ...seed,
-    id: `${genreId}-${seed.name.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || index}`,
-    worldId: genreId,
-  }));
-}
-
-function makeGenreWorld(genreId: string): GenreWorld {
-  const source = SOURCE_WORLDS[genreId] || (GENRE_SOURCE_MAP[genreId] ? SOURCE_WORLDS[GENRE_SOURCE_MAP[genreId]] : undefined);
-  if (!source) throw new Error(`Missing source world for ${genreId}`);
-  if (source.id === genreId) {
-    return source;
-  }
-  return {
-    ...source,
-    id: genreId,
-    name: GENRE_NAMES[genreId],
-    kind: GENRE_KINDS[genreId] ?? 'world',
-    promotedFrom: PROMOTED_FROM[genreId],
-    strictness: GENRE_STRICTNESS[genreId] ?? 'flexible',
-    homeStyleId: undefined,
-    family: source.family,
-    level: 'world',
-    parentId: undefined,
-    styleDefinitions: deriveStyleSeeds(source, genreId),
-    // A promoted leaf keeps deliberate reusable source patterns, plus native
-    // definitions authored specifically for the public genre.
-    patterns: [...source.patterns, ...CANONICAL_GENRE_PATTERNS.filter(p => p.worldId === genreId)],
-  };
-}
-
-export const GENRE_WORLDS: GenreWorld[] = Object.keys(GENRE_NAMES).map(makeGenreWorld).map(world => {
-  const native = CANONICAL_GENRE_PATTERNS.filter(p => p.worldId === world.id);
-  return native.length ? { ...world, patterns: [...(world.patterns ?? []), ...native] } : world;
+/** Every public genre is defined by its own folder and world definition. */
+export const GENRE_WORLDS: GenreWorld[] = [
+  AFROBEATS_WORLD, BACHATA_WORLD, BLUES_WORLD, BRAZILIAN_WORLD, COUNTRY_WORLD, CUMBIA_WORLD,
+  DISCO_WORLD, ELECTRONIC_WORLD, FOLK_WORLD, FUNK_WORLD, GOSPEL_WORLD, HIP_HOP_WORLD,
+  HOUSE_WORLD, JAZZ_WORLD, KIZOMBA_WORLD, TANGO_WORLD, FLAMENCO_WORLD, METAL_WORLD,
+  R_AND_B_WORLD, REGGAE_WORLD, REGGAETON_WORLD, ROCK_WORLD, SALSA_WORLD, SKA_WORLD,
+  SOUL_WORLD, SWING_WORLD, TIMBA_WORLD, ZOUK_WORLD, DRUM_AND_BASS_WORLD, INDUSTRIAL_WORLD,
+  PUNK_HARDCORE_WORLD, UK_BASS_WORLD,
+].map(world => {
+  const native = CANONICAL_GENRE_PATTERNS.filter(pattern => pattern.worldId === world.id);
+  const patterns = new Map((world.patterns ?? []).map(pattern => [pattern.id, pattern]));
+  for (const pattern of native) patterns.set(pattern.id, pattern);
+  return native.length ? { ...world, patterns: [...patterns.values()] } : world;
 });
+
 export const GENRE_WORLDS_BY_ID: Record<string, GenreWorld> = Object.fromEntries(
   GENRE_WORLDS.map(world => [world.id, world])
+);
+
+export const GENRE_NAMES: Record<string, string> = Object.fromEntries(
+  GENRE_WORLDS.map(world => [world.id, world.name])
 );
 
 function shortDescription(value: string): string {
@@ -246,76 +69,54 @@ export function cleanGenreName(id: string, name?: string): string {
   return GENRE_NAMES[id] ?? name ?? id;
 }
 
-function normalizePattern(p: MusicalPattern): MusicalPattern {
+function normalizePattern(pattern: MusicalPattern): MusicalPattern {
   return {
-    ...p,
-    name: cleanPatternName(p.name, p.shortName),
-    description: shortDescription(p.description),
-    variants: (p.variants ?? []).map(v => ({ ...v, description: v.description ? shortDescription(v.description) : v.description })),
+    ...pattern,
+    name: cleanPatternName(pattern.name, pattern.shortName),
+    description: shortDescription(pattern.description),
+    variants: (pattern.variants ?? []).map(variant => ({
+      ...variant,
+      description: variant.description ? shortDescription(variant.description) : variant.description,
+    })),
   };
 }
 
-
-function isSyntheticPattern(p: MusicalPattern): boolean {
-  const id = String(p.id ?? '').toLowerCase();
-  const name = String(p.name ?? '').toLowerCase();
+function isSyntheticPattern(pattern: MusicalPattern): boolean {
+  const id = String(pattern.id ?? '').toLowerCase();
+  const name = String(pattern.name ?? '').toLowerCase();
   return /-(phrase|call|anchor|comp|intro|verse)-\d+$/.test(id)
     || /--phrasing$/.test(id)
     || /\b(comping comping|roster-)$/.test(name.trim());
 }
 
-// Preserve one definition per authored pattern. Shared source patterns are
-// reused by multiple canonical genres through the style contract.
 const uniquePatterns = new Map<string, MusicalPattern>();
-for (const source of Object.values(SOURCE_WORLDS)) {
-  for (const raw of source.patterns) {
-    const p = normalizePattern(raw);
-    if (isSyntheticPattern(p)) continue;
-    // Rhythmic onset similarity is not sufficient to call two authored patterns
-    // duplicates. A ska break, a final shout, and a samba break can share a grid
-    // while serving completely different musical functions. Deduplicate only when
-    // the musical identity is effectively identical.
-    const signature = [
-      p.meter, p.cycleLength, p.subdivisions, p.category, p.family,
-      cleanPatternName(p.name).toLowerCase(),
-      (p.onsetGrid ?? []).join(','),
-      (p.roles ?? []).slice().sort().join(','),
-      (p.instruments ?? []).slice().sort().join(','),
-      (p.tags ?? []).slice().sort().join(',')
-    ].join('|');
-    if (!uniquePatterns.has(signature)) uniquePatterns.set(signature, p);
+for (const world of GENRE_WORLDS) {
+  for (const raw of world.patterns ?? []) {
+    const pattern = normalizePattern(raw);
+    if (!isSyntheticPattern(pattern)) uniquePatterns.set(pattern.id, pattern);
   }
 }
-for (const raw of CANONICAL_GENRE_PATTERNS) {
-  const p = normalizePattern(raw);
-  uniquePatterns.set(`${p.worldId}:${p.id}`, p);
+
+const namedPatternCounts = new Map<string, number>();
+for (const pattern of uniquePatterns.values()) {
+  const key = pattern.name.trim().toLowerCase();
+  namedPatternCounts.set(key, (namedPatternCounts.get(key) ?? 0) + 1);
 }
 
-// Canonical rhythm names are unique. When two genres legitimately use the same
-// surface name, preserve both definitions and qualify them with their authored
-// genre rather than collapsing distinct musical identities.
-const _namedPatternCounts = new Map<string, number>();
-for (const p of uniquePatterns.values()) {
-  const key = p.name.trim().toLowerCase();
-  _namedPatternCounts.set(key, (_namedPatternCounts.get(key) ?? 0) + 1);
-}
-export const ALL_PATTERNS: MusicalPattern[] = [...uniquePatterns.values()].map(p => {
-  const key = p.name.trim().toLowerCase();
-  if ((_namedPatternCounts.get(key) ?? 0) <= 1) return p;
-  const genre = String(p.worldId ?? p.family ?? 'source').replace(/[-_]+/g, ' ');
-  return { ...p, name: `${genre.replace(/\b\w/g, c => c.toUpperCase())} ${p.name} [${p.id}]` };
+export const ALL_PATTERNS: MusicalPattern[] = [...uniquePatterns.values()].map(pattern => {
+  const key = pattern.name.trim().toLowerCase();
+  if ((namedPatternCounts.get(key) ?? 0) <= 1) return pattern;
+  const genre = String(pattern.worldId ?? pattern.family ?? 'source').replace(/[-_]+/g, ' ');
+  return { ...pattern, name: `${genre.replace(/\b\w/g, letter => letter.toUpperCase())} ${pattern.name} [${pattern.id}]` };
 });
-export const PATTERNS_BY_ID: Record<string, MusicalPattern> = Object.fromEntries(ALL_PATTERNS.map(p => [p.id, p]));
 
-/** Genre views contain shared pattern objects, never genre-specific clones. */
+export const PATTERNS_BY_ID: Record<string, MusicalPattern> = Object.fromEntries(
+  ALL_PATTERNS.map(pattern => [pattern.id, pattern])
+);
+
 export const PATTERNS_BY_WORLD: Record<string, MusicalPattern[]> = Object.fromEntries(
-  GENRE_WORLDS.map(world => [
-    world.id,
-    // A pattern's `canCrossRole` flag permits use on another instrument role
-    // within a musical world. It must never make the pattern globally visible
-    // to unrelated genres. Cross-genre material is admitted explicitly by the
-    // adventure/blend layer, where the originating world is retained.
-    ALL_PATTERNS.filter(p => p.worldId === world.id || p.worldId === (GENRE_SOURCE_MAP[world.id] || world.id)),
+  GENRE_WORLDS.map(world => [world.id,
+    (world.patterns ?? []).map(pattern => PATTERNS_BY_ID[pattern.id]).filter((pattern): pattern is MusicalPattern => !!pattern),
   ])
 );
 export const PATTERNS_BY_GENRE = PATTERNS_BY_WORLD;
@@ -329,8 +130,19 @@ export const FEEL_LABELS: Record<PatternFeel, string> = {
   'laid-back': 'Laid-back', bouncy: 'Bouncy', rolling: 'Rolling', hypnotic: 'Hypnotic', cinematic: 'Cinematic',
 };
 export const FEEL_ORDER: PatternFeel[] = ['laid-back', 'bouncy', 'rolling', 'hypnotic', 'cinematic'];
-const PATTERN_FEELS: Record<string, PatternFeel[]> = {
-  'sb-bossa-bass': ['laid-back'], 'rd-one-drop': ['laid-back'], 'kizomba-batida-groove': ['laid-back'],
-  'jazz-walking-bass': ['hypnotic'], 'elec-offbeat-hats': ['hypnotic'], 'hiphop-trap-hats': ['rolling'],
-};
-export function feelsForPattern(id: string): PatternFeel[] { return PATTERN_FEELS[id] ?? []; }
+const PATTERN_FEELS: Record<string, PatternFeel[]> = {};
+
+export function feelsForPattern(patternId: string): PatternFeel[] {
+  const pattern = PATTERNS_BY_ID[patternId];
+  if (!pattern) return [];
+  const explicit = PATTERN_FEELS[pattern.id];
+  if (explicit) return explicit;
+  const vocabulary = `${pattern.name} ${pattern.family} ${(pattern.tags ?? []).join(' ')} ${pattern.description}`.toLowerCase();
+  const feels: PatternFeel[] = [];
+  if (/laid.?back|relaxed|soft|slow|sparse|ballad|behind/.test(vocabulary)) feels.push('laid-back');
+  if (/bounce|bouncy|shuffle|swing|dance|skip|skank/.test(vocabulary)) feels.push('bouncy');
+  if (/roll|rolling|triplet|flow|drum.?and.?bass|breakbeat/.test(vocabulary)) feels.push('rolling');
+  if (/hypnotic|loop|ostinato|drone|minimal|motorik|repetitive/.test(vocabulary)) feels.push('hypnotic');
+  if (/cinematic|dramatic|epic|orchestral|build|transition|breakdown/.test(vocabulary)) feels.push('cinematic');
+  return feels.length ? feels : ['bouncy'];
+}

@@ -146,21 +146,3 @@ export const JAZZ_CHORD_LIBRARY = [
   'C6','C6/9','C9sus4','Cadd9',
 ] as const;
 
-export function chordsForMood(mood: ChordMood): ChordOption[] { return CHORD_PALETTE.filter(c => c.mood === mood); }
-export function suggestedPaletteForGenre(genreId: string): ChordOption[] {
-  const exact = CHORD_PALETTE.filter(c => c.genres.includes(genreId));
-  return exact.length ? exact.slice(0, 8) : CHORD_PALETTE.slice(0, 4);
-}
-export function suggestedPaletteForStyle(styleId?: string, genreId?: string): ChordOption[] {
-  const g = genreId ?? 'rock';
-  const base = suggestedPaletteForGenre(g);
-  if (!styleId) return base;
-  const n = styleId.toLowerCase();
-  if (/jazz|fusion|bebop|cool|hard-bop|spiritual/.test(n)) {
-    return [...CHORD_PALETTE.filter(c => c.tier === 'jazz'), ...base].slice(0, 8);
-  }
-  return base;
-}
-export function chordPaletteCategoryCounts(): Record<ChordMood, number> {
-  return CHORD_MOOD_ORDER_RAW.reduce((out, mood) => { out[mood] = CHORD_PALETTE.filter(c => c.mood === mood).length; return out; }, {} as Record<ChordMood, number>);
-}

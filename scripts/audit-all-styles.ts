@@ -1,7 +1,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
-import { ALL_STYLES } from '../src/data/styles';
-import { makeSheet } from '../src/engine/generators/arrange';
-import { compileWholeSong } from '../src/engine/compiler/wholeSongCompiler';
+import { ALL_STYLES } from '../src/engine/style';
+import { makeSheet } from '../src/engine/sheet/sheet.ts';
+import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
 
 mkdirSync('audit',{recursive:true}); const rows: Array<Record<string, unknown>>=[]; const failures: Array<Record<string, unknown>>=[];
 for(const style of ALL_STYLES){

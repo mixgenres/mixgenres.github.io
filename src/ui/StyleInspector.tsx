@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Sheet as SongSheet } from '../engine/generators/arrange';
-import { resolveStyle } from '../data/styles/resolve';
+import { Sheet as SongSheet } from '../engine/sheet/index.ts';
+import { resolveStyle } from '../engine/style/resolve';
+import { getCanonicalStyle } from '../engine/style/registry';
 import { Copy, Check, X, Terminal } from 'lucide-react';
 
 interface StyleInspectorProps {
@@ -14,7 +15,7 @@ export function StyleInspector({ song, onClose }: StyleInspectorProps) {
 
   const resolved = resolveStyle({
     genreId: song.worldId,
-    styleId: song.styleId,
+    styleId: song.styleId ?? getCanonicalStyle(song.worldId).id,
     influences: (song as any).styleInfluences,
     userOverrides: (song as any).styleOverrides,
   });

@@ -2,9 +2,9 @@
 // -> renderPerformanceToMp3), so it can be sanity-checked/listened to outside
 // the browser. Usage: npx tsx scripts/render-song.ts [genreId] [out.mp3]
 import { writeFileSync } from 'fs';
-import { makeSheet } from '../src/engine/generators/arrange';
-import { compileWholeSong } from '../src/engine/compiler/wholeSongCompiler';
-import { renderPerformanceToMp3 } from '../src/engine/audio/offlineRender';
+import { makeSheet } from '../src/engine/sheet/sheet.ts';
+import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
+import { renderPerformanceToMp3 } from '../src/engine/playback/mp3Export.ts';
 
 async function main() {
   const genreId = process.argv[2] || 'salsa';

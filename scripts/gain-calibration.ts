@@ -1,8 +1,8 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { GENRE_NAMES } from '../src/data/genres';
-import { makeSheet } from '../src/engine/generators/arrange';
-import { compileWholeSong } from '../src/engine/compiler/wholeSongCompiler';
-import { contractForGenre } from '../src/data/styles/contracts';
+import { makeSheet } from '../src/engine/sheet/sheet.ts';
+import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
+import { contractForGenre } from '../src/engine/style/contracts';
 
 mkdirSync('audit', {recursive:true});
 const rows: Array<Record<string, unknown>>=[];

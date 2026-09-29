@@ -1,11 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { INSTRUMENTS_BY_ID } from '../src/data/instruments';
-import { getInstrumentModule } from '../src/engine/instruments/registry';
-import { ALL_STYLES } from '../src/data/styles/registry';
-import { makeSheet } from '../src/engine/generators/arrange';
-import { compileWholeSong } from '../src/engine/compiler/wholeSongCompiler';
-import { styleCalibrationTarget } from '../src/data/performance/styleCalibrationTargets';
+import { getInstrumentModule } from '../src/engine/playback/instrumentRegistry.ts';
+import { ALL_STYLES } from '../src/engine/style/registry';
+import { makeSheet } from '../src/engine/sheet/sheet.ts';
+import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
+import { styleCalibrationTarget } from '../src/engine/style/performance-schema';
 
 const root = process.cwd();
 const sourceFiles: string[] = [];

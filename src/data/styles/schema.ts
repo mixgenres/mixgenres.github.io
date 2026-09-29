@@ -1,4 +1,4 @@
-import type { Role, SectionType, TuningSystemTag, GrooveMechanics, SectionEnergy } from '../../types';
+import type { Role, SectionType, TuningSystemTag, GrooveMechanics, SectionEnergy } from '../schema';
 import type { WorldContract } from './contracts';
 
 export type Aspect = 'form' | 'harmony' | 'rhythm' | 'melody' | 'arrangement' | 'sound' | 'gestures';
@@ -81,17 +81,9 @@ export interface RhythmGrammar {
   grooveMechanics?: GrooveMechanics;
 }
 
-import type {
-  PerformanceGrammar,
-  PhraseDevelopmentProbabilities,
-  MicrotimingPolicy,
-} from '../../engine/performance/performanceGrammar';
-
-export type {
-  PerformanceGrammar,
-  PhraseDevelopmentProbabilities,
-  MicrotimingPolicy,
-};
+export interface PhraseDevelopmentProbabilities { repeatProbability: number; variationProbability: number; answerProbability: number; fillProbability: number; restProbability: number; cadenceProbability: number; }
+export interface MicrotimingPolicy { amount: number; tendency?: 'straight' | 'laid-back' | 'pushed' | 'swung' | 'rubato' | string; }
+export interface PerformanceGrammar { worldId?: string; styleId?: string; densityByRole?: Record<string, { min: number; max: number }>; subdivisionVocabulary?: Record<string, number[]>; variationVocabulary?: Record<string, string[]>; articulationVocabulary?: Record<string, string[]>; phraseDevelopment?: PhraseDevelopmentProbabilities; interactionVocabulary?: Record<string, string[]>; preserveAuthoredRhythm: number; allowDerivedAttacks: number; allowDerivedPitch: number; allowCrossStyleSubdivision: number; forbiddenInterpretations?: string[]; microtiming?: MicrotimingPolicy; }
 
 export interface MelodyGrammar {
   scaleMode: string;

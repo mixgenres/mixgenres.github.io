@@ -1,10 +1,10 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { GENRE_NAMES } from '../src/data/genres';
-import { makeSheet } from '../src/engine/generators/arrange';
-import { compileWholeSong } from '../src/engine/compiler/wholeSongCompiler';
-import { genreDialectTarget } from '../src/data/performance/genreDialectTargets';
-import { getInstrumentPerformanceProfile } from '../src/data/performance/instrumentPerformanceProfiles';
-import { parseChord } from '../src/engine/theory/theory';
+import { makeSheet } from '../src/engine/sheet/sheet.ts';
+import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
+import { genreDialectTarget } from '../src/engine/lookup/performance';
+import { getInstrumentPerformanceProfile } from '../src/engine/lookup/performance';
+import { parseChord } from '../src/engine/sheet/musicTheory.ts';
 
 mkdirSync('audit', { recursive: true });
 const rows: Array<Record<string, unknown>> = [];

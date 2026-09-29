@@ -1,21 +1,25 @@
-import { ALL_STYLES } from '../src/data/styles';
-import { resolveStyle } from '../src/data/styles';
-import { makeSheet, getResolvedSectionStyle } from '../src/engine/generators/arrange';
-import { compileWholeSong } from '../src/engine/compiler/wholeSongCompiler';
-import { styleTechniqueExpectation } from '../src/data/performance/stylePerformanceSchema';
-import { getInstrumentPerformanceProfile } from '../src/data/performance/instrumentPerformanceProfiles';
-import { GESTURE_NAMES } from '../src/engine/compiler/gestureCodes';
+import { ALL_STYLES } from '../src/engine/style';
+import { resolveStyle } from '../src/engine/style';
+import { makeSheet, getResolvedSectionStyle } from '../src/engine/sheet/sheet.ts';
+import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
+import { styleTechniqueExpectation } from '../src/engine/style/performance-expectations';
+import { getInstrumentPerformanceProfile } from '../src/engine/lookup/performance';
+import { GESTURE_NAMES } from '../src/engine/band/gestures.ts';
 
 let schemaFailures = 0;
 let runtimeFailures = 0;
 let missingTechniqueUse = 0;
 let emptyPatterns = 0;
+const emptyPatternStyleIds: string[] = [];
 
 for (const styleDef of ALL_STYLES) {
   try {
     const style = resolveStyle({ genreId: styleDef.primaryGenre, styleId: styleDef.id });
     if (!style.rhythm?.meter || !style.harmony?.model || !style.melody?.scaleMode) schemaFailures++;
-    if (!style.patterns?.allowed?.length) emptyPatterns++;
+    if (!style.patterns?.allowed?.length) {
+      emptyPatterns++;
+      emptyPatternStyleIds.push(style.id);
+    }
 
     const sheet = makeSheet({ genreId: style.primaryGenre, styleId: style.id });
     const perf = compileWholeSong(sheet);
@@ -38,5 +42,5 @@ for (const styleDef of ALL_STYLES) {
   }
 }
 
-console.log(`styles=${ALL_STYLES.length} schemaFailures=${schemaFailures} emptyPatterns=${emptyPatterns} runtimeFailures=${runtimeFailures} techniqueUseGaps=${missingTechniqueUse}`);
+console.log(JSON.stringify({ styles: ALL_STYLES.length, schemaFailures, emptyPatterns, emptyPatternStyleIds, runtimeFailures, techniqueUseGaps: missingTechniqueUse }, null, 2));
 process.exitCode = schemaFailures || emptyPatterns || runtimeFailures || missingTechniqueUse ? 1 : 0;

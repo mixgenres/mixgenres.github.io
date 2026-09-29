@@ -1,10 +1,10 @@
 import { writeFileSync } from 'node:fs';
-import { makeSheet, getResolvedSectionStyle } from '../src/engine/generators/arrange';
-import { compileWholeSong } from '../src/engine/compiler/wholeSongCompiler';
+import { makeSheet, getResolvedSectionStyle } from '../src/engine/sheet/sheet.ts';
+import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
 import { GENRE_NAMES } from '../src/data/genres';
-import { GESTURE_NAMES } from '../src/engine/compiler/gestureCodes';
-import { contractForGenre } from '../src/data/styles/contracts';
-import { parseChord } from '../src/engine/theory/theory';
+import { GESTURE_NAMES } from '../src/engine/band/gestures.ts';
+import { contractForGenre } from '../src/engine/style/contracts';
+import { parseChord } from '../src/engine/sheet/musicTheory.ts';
 
 const genre=process.argv[2]||'tango';
 if(!GENRE_NAMES[genre]) throw new Error(`Unknown genre ${genre}`);

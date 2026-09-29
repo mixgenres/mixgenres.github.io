@@ -1,4 +1,4 @@
-import { StereoFieldManager } from './engine/audio/panning';
+import { StereoFieldManager } from './engine/studio/index.ts';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Dices, Trash2, Pencil, Sparkles } from 'lucide-react';
 import './index.css';
@@ -10,9 +10,9 @@ import { WorldSheet, InstrumentSheet, PatternSheet, SectionSheet, SectionGenreSh
 import { StyleSheetModal } from './ui/StyleSheet';
 import { StyleInspector } from './ui/StyleInspector';
 import { plateFor, applyPlate } from './ui/worlds';
-import { resolveStyle, getCanonicalStyle } from './data/styles';
+import { resolveStyle, getCanonicalStyle } from './engine/style';
 import {
-  Sheet as SongSheet, Voice, makeSheet, switchLensOnly, switchSectionWorld,
+  Sheet as SongSheet, Voice, createSheet, switchLensOnly, switchSectionWorld,
   setBars, setKind, setSectionTitle, moveSection, setSectionChords, getSectionGenre,
   randomizeInstruments, addRandomInstrument, removeAllInstruments, randomizePatternsForSection, randomizePatternsForSong,
   randomizeChordsForSection, randomizeChordsForSong, randomizeEverythingForSong, randomizeEverythingForSection,
@@ -21,19 +21,18 @@ import {
   unsilenceVoiceInSection, unsilenceVoiceInAll, toggleVoiceInSection,
   silenceAllVoicesInSection, unsilenceAllVoicesInSection,
   setTrackSpotlight, getResolvedSectionStyle,
-  FEELS, getEffectiveBpm, setSectionTempoShift, setSongTempoShift, setSongBpm, setSectionBpm, setSectionEnergy,
-} from './engine/generators/arrange';
+  FEELS, ENERGY_LABELS, getEffectiveBpm, setSectionTempoShift, setSongTempoShift, setSongBpm, setSectionBpm, setSectionEnergy,
+} from './engine/sheet/index.ts';
 import {
   startAudio, stopAudio, setMasterVolume, renderSongToMp3,
   createSink, setTrackInstruments, setActiveWorld,
-} from './engine/audio/audio';
-import { ENERGY_LABELS } from './engine/metadata/energy';
-import { compileWholeSong } from './engine/compiler/wholeSongCompiler';
-import { Transport } from './engine/sequencing/transport';
+  Transport,
+} from './engine/playback/index.ts';
+import { arrangeBand } from './engine/band/index.ts';
 import { PATTERNS_BY_ID, cleanPatternName } from './data/genres';
 
 function loadInitialSong(): { song: SongSheet; isNew: boolean } {
-  return { song: makeSheet('tango'), isNew: true };
+  return { song: createSheet('tango'), isNew: true };
 }
 
 export default function App() {
@@ -83,7 +82,7 @@ export default function App() {
   const currentResolvedStyle = useMemo(() => {
     return resolveStyle({
       genreId: song.worldId,
-      styleId: song.styleId,
+      styleId: song.styleId ?? getCanonicalStyle(song.worldId).id,
       influences: (song as any).styleInfluences,
       userOverrides: (song as any).styleOverrides,
     });
@@ -92,7 +91,7 @@ export default function App() {
   const handleStartOver = (worldId: string, styleId?: string) => {
     const canonical = getCanonicalStyle(worldId);
     const targetStyleId = styleId ?? canonical.id;
-    const fresh = makeSheet(worldId, targetStyleId);
+    const fresh = createSheet(worldId, targetStyleId);
     setSong(fresh);
     setPickedRegion(null);
     setBar(0);
@@ -105,7 +104,7 @@ export default function App() {
   };
 
   const handleSelectStyle = (styleId: string) => {
-    const next = makeSheet(song.worldId, styleId);
+    const next = createSheet(song.worldId, styleId);
     if (song.title && song.title !== 'Untitled') {
       next.title = song.title;
     }
@@ -304,7 +303,7 @@ export default function App() {
   const stereoField = useMemo(() => new StereoFieldManager(), []);
 
   const perf = useMemo(() => {
-    return compileWholeSong(song, 0);
+    return arrangeBand(song, 0);
   }, [song]);
   const perfRef = useRef(perf);
   perfRef.current = perf;

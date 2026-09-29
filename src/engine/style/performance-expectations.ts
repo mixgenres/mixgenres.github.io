@@ -1,0 +1,220 @@
+import type { ResolvedStyle } from '../../data/styles/schema';
+import { getInstrumentPerformanceProfile, type InstrumentPerformanceProfile } from '../../engine/lookup/performance';
+
+export type TechniqueExpectation = {
+  required: string[];
+  preferred: string[];
+  forbidden: string[];
+};
+
+export type StyleReferenceExpectation = {
+  representativeWorks: string[];
+  rhythm: string[];
+  articulation: string[];
+  techniques: string[];
+  roleExpectations: Record<string, string[]>;
+};
+
+export type StylePerformanceSchema = {
+  styleId: string;
+  genreId: string;
+  meter: string;
+  tempo: number;
+  subdivision: number;
+  signatureCell?: string;
+  feel: string;
+  harmonicRhythm?: string;
+  bassMotion?: string;
+  melodyContour: string[];
+  requiredPatterns: string[];
+  forbiddenPatterns: string[];
+  reference: StyleReferenceExpectation;
+  instruments: Record<string, TechniqueExpectation>;
+};
+
+const REFERENCE_EXPECTATIONS: Record<string, StyleReferenceExpectation> = {
+
+  afrobeats: { representativeWorks: ['Ye', 'Anybody', 'Love Nwantiti'], rhythm: ['syncopated African-derived groove', 'polyrhythmic interlock'], articulation: ['ghost', 'staccato', 'accent'], techniques: ['offbeat guitar', 'percussion interlock'], roleExpectations: { bass: ['syncopation'], comp: ['staccato'], drums: ['ghost', 'accent'] } },
+  bachata: { representativeWorks: ['Obsesion', 'Bachata en Fukuoka'], rhythm: ['syncopated guitar pattern', 'anticipation', 'steady dance pulse'], articulation: ['staccato', 'pluck', 'accent', 'mute'], techniques: ['requinto lead', 'guira/bongo interlock'], roleExpectations: { comp: ['staccato', 'pluck'], lead: ['pluck', 'accent'], bass: ['anticipation'] } },
+  cumbia: { representativeWorks: ['La Pollera Colora', 'Cumbia Sampuesana'], rhythm: ['cumbia pulse', 'offbeat accompaniment', 'percussion interlock'], articulation: ['staccato', 'accent', 'ghost'], techniques: ['cumbia bass', 'offbeat guitar/keys'], roleExpectations: { bass: ['accent', 'staccato'], comp: ['staccato'], drums: ['ghost', 'accent'] } },
+  disco: { representativeWorks: ['Good Times', 'Le Freak', 'I Feel Love'], rhythm: ['four-on-the-floor', 'syncopated bass/guitar', 'section lifts'], articulation: ['staccato', 'accent', 'mute'], techniques: ['octave bass', 'rhythmic guitar', 'string/keyboard stabs'], roleExpectations: { bass: ['staccato', 'accent'], comp: ['mute', 'staccato'], drums: ['accent'] } },
+  electronic: { representativeWorks: ['Strings of Life', 'Windowlicker', 'Around the World'], rhythm: ['machine-grid subdivision', 'repetition with controlled variation'], articulation: ['accent', 'staccato', 'mute'], techniques: ['sequenced ostinato', 'filter movement'], roleExpectations: { bass: ['staccato'], comp: ['staccato'], drums: ['accent'] } },
+  gospel: { representativeWorks: ['Take Me to the King', 'Total Praise'], rhythm: ['pocket', 'call and response', 'dynamic builds'], articulation: ['legato', 'accent', 'tenuto', 'cluster'], techniques: ['gospel voicing', 'passing chords', 'dynamic response'], roleExpectations: { comp: ['tenuto', 'cluster'], bass: ['legato', 'accent'], lead: ['legato', 'ornament'] } },
+  'hip-hop': { representativeWorks: ['Nuthin but a G Thang', 'Juicy', 'C.R.E.A.M.'], rhythm: ['backbeat pocket', 'sample-like repetition', 'microtiming swing'], articulation: ['staccato', 'ghost', 'accent'], techniques: ['laid-back pocket', 'loop variation'], roleExpectations: { bass: ['staccato', 'ghost'], comp: ['staccato'], drums: ['ghost', 'accent'] } },
+  house: { representativeWorks: ['Your Love', 'Show Me Love'], rhythm: ['four-on-the-floor', 'offbeat syncopation', 'loop variation'], articulation: ['staccato', 'accent', 'mute'], techniques: ['four-on-the-floor', 'bass ostinato'], roleExpectations: { bass: ['staccato'], comp: ['staccato'], drums: ['accent'] } },
+  kizomba: { representativeWorks: ['Pata Pata', 'Atchu Tchu Tcha'], rhythm: ['syncopated slow groove', 'offbeat bass/guitar interaction'], articulation: ['staccato', 'legato', 'accent'], techniques: ['bass anticipation', 'percussive guitar'], roleExpectations: { bass: ['staccato', 'accent'], comp: ['staccato'], drums: ['accent'] } },
+  reggaeton: { representativeWorks: ['Gasolina', 'Dile', 'Despacito'], rhythm: ['dembow', 'syncopated kick/snare pattern'], articulation: ['staccato', 'accent', 'mute'], techniques: ['dembow', 'percussive fills'], roleExpectations: { bass: ['staccato'], comp: ['mute'], drums: ['accent'] } },
+  ska: { representativeWorks: ['A Message to You Rudy', 'The Impression That I Get'], rhythm: ['offbeat skank', 'walking/rocksteady bass', 'upbeat emphasis'], articulation: ['staccato', 'accent', 'mute'], techniques: ['skank', 'upstroke', 'walking bass'], roleExpectations: { comp: ['staccato', 'mute'], bass: ['walking-bass', 'accent'] } },
+  timba: { representativeWorks: ['La Formula', 'Que Le Llegue la Mano'], rhythm: ['clave', 'songo/timba interlock', 'section breaks'], articulation: ['staccato', 'accent', 'chapa', 'ghost'], techniques: ['timba bass', 'montuno', 'breaks'], roleExpectations: { comp: ['chapa', 'staccato'], bass: ['accent', 'ghost'], drums: ['accent', 'ghost'] } },
+  zouk: { representativeWorks: ['Zouk la Se Sel Medikaman Nou Ni', 'Mwen Ole'], rhythm: ['syncopated Caribbean pulse', 'bass/guitar interlock'], articulation: ['staccato', 'legato', 'accent'], techniques: ['zouk bass', 'syncopated guitar'], roleExpectations: { bass: ['legato', 'accent'], comp: ['staccato'], lead: ['legato'] } },
+  'drum-and-bass': { representativeWorks: ['Inner City Life', 'Brown Paper Bag'], rhythm: ['breakbeat subdivision', 'syncopated bass'], articulation: ['staccato', 'accent', 'mute'], techniques: ['breakbeat interlock', 'sub-bass movement'], roleExpectations: { bass: ['staccato', 'accent'], drums: ['accent', 'ghost'] } },
+  industrial: { representativeWorks: ['Head Like a Hole', 'Du Hast'], rhythm: ['mechanical pulse', 'repetitive riff', 'hard stops'], articulation: ['mute', 'staccato', 'accent'], techniques: ['machine-like repetition', 'distorted riffing'], roleExpectations: { comp: ['mute', 'accent'], bass: ['mute', 'staccato'] } },
+  'punk-hardcore': { representativeWorks: ['Blitzkrieg Bop', 'Rise Above', 'Holiday in Cambodia'], rhythm: ['driving backbeat', 'fast subdivision', 'hard stops'], articulation: ['staccato', 'accent', 'mute'], techniques: ['downstroke', 'power-chord attack'], roleExpectations: { comp: ['mute', 'accent'], bass: ['staccato', 'accent'] } },
+  'uk-bass': { representativeWorks: ['Re-Rewind', 'I Luv U'], rhythm: ['two-step/garage subdivision', 'syncopated bass', 'space'], articulation: ['staccato', 'accent', 'mute'], techniques: ['two-step', 'sub-bass movement'], roleExpectations: { bass: ['staccato', 'accent'], drums: ['ghost', 'accent'] } },
+  folk: { representativeWorks: ['The House of the Rising Sun', 'Blackbird'], rhythm: ['human pulse', 'repeating picking/strum cells'], articulation: ['fingerstyle', 'pluck', 'accent', 'legato'], techniques: ['fingerstyle', 'strumming', 'melodic ornament'], roleExpectations: { comp: ['fingerstyle', 'pluck'], lead: ['legato', 'ornament'], bass: ['pluck'] } },
+  jazz: {
+    representativeWorks: ['So What', 'All Blues', 'Take the A Train'],
+    rhythm: ['swing or style-declared straight feel', 'interactive comping', 'phrase-level space'],
+    articulation: ['accent', 'staccato', 'legato', 'ghost'],
+    techniques: ['walking bass', 'guide-tone voice leading', 'comping variation', 'call and response'],
+    roleExpectations: { bass: ['walking-bass', 'approach-notes'], comp: ['comping', 'space'], lead: ['phrase-development'] },
+  },
+  blues: {
+    representativeWorks: ['The Thrill Is Gone', 'Sweet Home Chicago', 'Stormy Monday'],
+    rhythm: ['12-bar form', 'shuffle or straight blues pocket', 'turnarounds'],
+    articulation: ['accent', 'staccato', 'legato', 'ghost', 'bend'],
+    techniques: ['turnaround', 'call and response', 'chord-tone targeting'],
+    roleExpectations: { bass: ['root-fifth', 'turnaround'], lead: ['bend', 'call-response'], comp: ['stabs', 'space'] },
+  },
+  flamenco: {
+    representativeWorks: ['Entre Dos Aguas', 'Almoraima', 'Rio Ancho'],
+    rhythm: ['compas', 'accent-cycle', 'syncopated rasgueado support'],
+    articulation: ['rasgueado', 'golpe', 'picado', 'tremolo', 'alzapua', 'arrastre'],
+    techniques: ['compas', 'rasgueado', 'golpe', 'picado'],
+    roleExpectations: { comp: ['rasgueado', 'golpe'], lead: ['picado', 'tremolo'], bass: ['accent'] },
+  },
+  metal: {
+    representativeWorks: ['Master of Puppets', 'Holy Wars... The Punishment Due', 'Paranoid'],
+    rhythm: ['tight subdivision', 'riff repetition with development', 'hard stops'],
+    articulation: ['mute', 'staccato', 'accent', 'hammer', 'pluck'],
+    techniques: ['palm-mute', 'downstroke', 'alternate-pick', 'gallop', 'riff articulation'],
+    roleExpectations: { comp: ['mute', 'accent'], lead: ['hammer', 'pluck'], bass: ['mute', 'accent'] },
+  },
+  rock: {
+    representativeWorks: ['Back in Black', 'Whole Lotta Love', 'Seven Nation Army'],
+    rhythm: ['backbeat', 'riff/ostinato', 'section contrast'],
+    articulation: ['accent', 'mute', 'staccato', 'pluck', 'legato'],
+    techniques: ['riffing', 'power-chord articulation', 'backbeat interaction'],
+    roleExpectations: { comp: ['accent', 'mute'], bass: ['pluck', 'accent'], lead: ['bend', 'legato'] },
+  },
+  country: {
+    representativeWorks: ['Folsom Prison Blues', 'Jolene', 'Blue Moon of Kentucky'],
+    rhythm: ['two-step or country backbeat', 'shuffle where style declares it', 'turnaround'],
+    articulation: ['flatpick', 'fingerstyle', 'bend', 'staccato', 'pluck'],
+    techniques: ['chicken-pickin', 'double-stops', 'walking bass', 'fiddle shuffle'],
+    roleExpectations: { lead: ['bend', 'flatpick'], comp: ['pluck', 'staccato'], bass: ['root-fifth', 'walk-up'] },
+  },
+  funk: {
+    representativeWorks: ['Superstition', 'Cissy Strut', 'I Want You Back'],
+    rhythm: ['syncopation', 'one-drop/one', 'interlocking subdivisions'],
+    articulation: ['ghost', 'mute', 'slap', 'pop', 'staccato', 'accent'],
+    techniques: ['ghost notes', 'muting', 'slap/pop', 'space'],
+    roleExpectations: { bass: ['ghost', 'slap', 'pop'], comp: ['mute', 'staccato'], drums: ['ghost', 'accent'] },
+  },
+  salsa: {
+    representativeWorks: ['Anacaona', 'Pedro Navaja', 'Quimbombo'],
+    rhythm: ['clave-aligned syncopation', 'montuno', 'tumbao', 'section breaks'],
+    articulation: ['staccato', 'accent', 'chapa', 'marcato', 'ghost'],
+    techniques: ['montuno', 'tumbao', 'clave', 'mambo figures'],
+    roleExpectations: { comp: ['montuno', 'chapa'], bass: ['tumbao-bass'], lead: ['mambo', 'accent'] },
+  },
+  brazilian: {
+    representativeWorks: ['Chega de Saudade', 'Mas Que Nada', 'Desafinado'],
+    rhythm: ['syncopated guitar/piano', 'clave-independent Brazilian pulse', 'subtle push-pull'],
+    articulation: ['fingerstyle', 'staccato', 'legato', 'accent'],
+    techniques: ['bossa comping', 'choro articulation', 'samba syncopation'],
+    roleExpectations: { comp: ['fingerstyle', 'staccato'], bass: ['syncopation'], lead: ['legato', 'ornament'] },
+  },
+  reggae: {
+    representativeWorks: ['Stir It Up', 'One Love', 'The Harder They Come'],
+    rhythm: ['one-drop', 'offbeat skank', 'laid-back pocket'],
+    articulation: ['staccato', 'mute', 'accent', 'ghost'],
+    techniques: ['skank', 'one-drop', 'bass space'],
+    roleExpectations: { comp: ['staccato', 'mute'], bass: ['legato', 'space'], drums: ['accent', 'ghost'] },
+  },
+  tango: {
+    representativeWorks: ['La Cumparsita', 'Adios Nonino', 'Libertango'],
+    rhythm: ['marcato', 'sincopa', 'cortes'],
+    articulation: ['marcato', 'arrastre', 'staccato', 'accent', 'arco', 'pizzicato'],
+    techniques: ['marcato', 'arrastre', 'corte', 'yumba'],
+    roleExpectations: { comp: ['marcato', 'staccato'], bass: ['arrastre', 'accent'], lead: ['legato', 'accent'] },
+  },
+  swing: {
+    representativeWorks: ['Sing Sing Sing', 'It Dont Mean a Thing', 'In the Mood'],
+    rhythm: ['swing eighths', 'four-to-the-bar walking', 'big-band accents'],
+    articulation: ['accent', 'staccato', 'legato', 'ghost'],
+    techniques: ['walking bass', 'swing phrasing', 'section hits'],
+    roleExpectations: { bass: ['walking-bass'], comp: ['comping'], lead: ['swing-phrasing'] },
+  },
+  soul: {
+    representativeWorks: ['(Sittin On) The Dock of the Bay', 'Ain’t No Mountain High Enough', 'Let’s Stay Together'],
+    rhythm: ['pocket', 'call and response', 'section dynamics'],
+    articulation: ['legato', 'ghost', 'accent', 'staccato'],
+    techniques: ['space', 'motivic repetition', 'dynamic pocket'],
+    roleExpectations: { bass: ['groove', 'ghost'], comp: ['space', 'accent'], lead: ['call-response'] },
+  },
+  'r-and-b': {
+    representativeWorks: ['Untitled (How Does It Feel)', 'Adorn', 'Ascension'],
+    rhythm: ['syncopated pocket', 'behind-the-beat feel', 'ornamented phrase endings'],
+    articulation: ['legato', 'ghost', 'accent', 'staccato'],
+    techniques: ['melisma', 'space', 'dynamic pocket'],
+    roleExpectations: { bass: ['ghost', 'space'], comp: ['extended voicing', 'space'], lead: ['ornament', 'legato'] },
+  },
+};
+
+function referenceFor(style: ResolvedStyle): StyleReferenceExpectation {
+  const id = style.primaryGenre === 'r-and-b' ? 'r-and-b' : style.primaryGenre;
+  const base = REFERENCE_EXPECTATIONS[id] ?? REFERENCE_EXPECTATIONS.rock;
+  const name = style.name.toLowerCase();
+  const techniques = [...base.techniques];
+  const articulation = [...base.articulation];
+  if (/fingerstyle|classical|choro/.test(name)) techniques.push('fingerstyle', 'independent bass and melody');
+  if (/flamenco|solea|buleria|alegria|seguiriya|rumba/.test(name)) techniques.push('rasgueado', 'golpe', 'picado');
+  if (/metal|thrash|death|black|doom|sludge/.test(name)) techniques.push('palm-mute', 'tight riff articulation');
+  if (/jazz|bebop|hard bop|swing|gypsy/.test(name)) techniques.push('voice leading', 'phrase development');
+  if (/salsa|timba|son|mambo|charanga/.test(name)) techniques.push('clave', 'montuno/tumbao interaction');
+  if (/bluegrass|honky|country|western/.test(name)) techniques.push('flatpick/fiddle articulation', 'double-stops');
+  return { ...base, techniques: Array.from(new Set(techniques)), articulation: Array.from(new Set(articulation)) };
+}
+
+function normalizeRole(role: string): string {
+  const r = role.toLowerCase();
+  if (/bass/.test(r)) return 'bass';
+  if (/drum|perc/.test(r)) return 'drums';
+  if (/lead|melody|voice/.test(r)) return 'lead';
+  return 'comp';
+}
+
+export function styleTechniqueExpectation(style: ResolvedStyle, profile: InstrumentPerformanceProfile, role: string): TechniqueExpectation {
+  const ref = referenceFor(style);
+  const styleArt = style.sound?.articulations?.[profile.instrumentId] ?? '';
+  const roleRef = ref.roleExpectations[normalizeRole(role)] ?? [];
+  const preferred = Array.from(new Set([
+    ...ref.articulation,
+    ...roleRef,
+    ...(profile.genreProfiles[style.primaryGenre]?.preferredGestures ?? []),
+    ...String(styleArt).split(/[ ,|/]+/).filter(Boolean),
+  ]));
+  const available = new Set(Object.keys(profile.gestures));
+  const required = preferred.filter(x => available.has(x));
+  const forbidden = Array.from(new Set([
+    ...(profile.genreProfiles[style.primaryGenre]?.forbiddenGestures ?? []),
+    ...(style.rules?.forbid ?? []).map(x => x.tag),
+  ]));
+  return { required: required.slice(0, 5), preferred, forbidden };
+}
+
+export function buildStylePerformanceSchema(style: ResolvedStyle, instruments: string[]): StylePerformanceSchema {
+  const reference = referenceFor(style);
+  const out: Record<string, TechniqueExpectation> = {};
+  for (const instrumentId of instruments) {
+    const profile = getInstrumentPerformanceProfile(instrumentId);
+    out[instrumentId] = styleTechniqueExpectation(style, profile, profile.genreProfiles[style.primaryGenre]?.roles?.[0] ?? 'comp');
+  }
+  return {
+    styleId: style.id,
+    genreId: style.primaryGenre,
+    meter: style.rhythm.meter,
+    tempo: style.rhythm.defaultBpm,
+    subdivision: style.contract.subdivision,
+    signatureCell: style.rhythm.signatureCell,
+    feel: style.rhythm.microtimingFeel,
+    harmonicRhythm: style.harmony.harmonicRhythm,
+    bassMotion: style.harmony.bassMotion,
+    melodyContour: style.melody.contourArchetypes ?? [],
+    requiredPatterns: style.patterns?.require ?? [],
+    forbiddenPatterns: style.patterns?.avoid ?? [],
+    reference,
+    instruments: out,
+  };
+}

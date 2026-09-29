@@ -1,5 +1,3 @@
-import React from 'react';
-
 /**
  * A rhythm drawn the way Molly Bang draws a feeling: taller means harder,
  * position means when. No labels. Once you have looked at four of these you

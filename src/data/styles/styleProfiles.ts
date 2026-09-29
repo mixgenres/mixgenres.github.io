@@ -107,7 +107,7 @@ export const STYLE_PROFILE_LIBRARY: Record<string, StyleSongProfile[]> = {
 /** High-specificity starter profiles for styles whose identity is defined by
  * orchestration, phrasing, dance vocabulary, or historical performance practice.
  * These override generic family profiles rather than merely changing tempo. */
-const STYLE_PROFILE_OVERRIDES: Record<string, StyleSongProfile> = {
+export const STYLE_PROFILE_OVERRIDES: Record<string, StyleSongProfile> = {
   'tango:guardia vieja': P({bpm:118,tempoRange:[108,128],meter:'2/4',feel:'old tango habanera / marcato',swing:50,pulseModel:'additive',form:['intro','tema','tema variation','trio','cierre'],progressions:[['Am','E7','Am','Dm','E7','Am'],['Am','C','E7','Am']],signatureCell:'2/4 habanera bass with staccato bandoneon and early tango guitar',instruments:['bandoneon','acoustic-guitar','violin','upright-bass','piano'],contours:['short tango motif','portamento answer'],arrangement:['guitar/bass establishes old-style pulse','bandoneon answers','violin enters for expressive lift'],production:'dry small ensemble, acoustic early-tango attack'}),
   'tango:troilo': P({bpm:120,tempoRange:[108,132],meter:'4/4',feel:'elastic lyrical marcato with rubato',swing:50,pulseModel:'elastic-marcato',form:['intro','tema','variation','tema','rubato bridge','coda'],progressions:[['Am','Dm','E7','Am','C','F','E7','Am'],['Dm','Gm','A7','Dm','Bb','E7','Am','Am']],signatureCell:'Troilo-style lyrical rubato against a firm marcato floor',instruments:['bandoneon','violin','piano','upright-bass','cello'],contours:['long bandoneon phrase','violin portamento','rubato pickup'],arrangement:['piano and bass anchor','bandoneon breathes across barlines','violin answers in long arcs'],production:'warm orchestral room, strong dynamic breathing'}),
   'tango:pugliese': P({bpm:112,tempoRange:[100,124],meter:'4/4',feel:'yumba heavy-beat elasticity',swing:50,pulseModel:'yumba',form:['intro','tema','yumba variation','tema','dramatic break','coda'],progressions:[['Am','E7','Am','Dm','E7','Am','F','E7'],['Dm','Gm','A7','Dm','E7','Am','E7','Am']],signatureCell:'yumba bass weight, displaced accents, dramatic silences and long crescendos',instruments:['bandoneon','piano','violin','upright-bass','cello'],contours:['angular motif','crescendo phrase','dramatic held note'],arrangement:['bass/piano create yumba weight','bandoneon accents displaced beats','strings swell through long phrases'],production:'large dramatic room, pronounced dynamics'}),
@@ -151,26 +151,3 @@ const STYLE_PROFILE_OVERRIDES: Record<string, StyleSongProfile> = {
   'zouk:brazilian zouk': P({bpm:95,tempoRange:[88,104],meter:'4/4',feel:'elastic Brazilian zouk flow',swing:52,pulseModel:'elastic-flow',form:['intro','verse','chorus','instrumental','chorus','outro'],progressions:[['Dm9','G13','Cmaj9','Am7'],['Fmaj7','Em7','Dm9','G13']],signatureCell:'elastic bass/guitar movement with continuous phrasing and spacious accents',instruments:['acoustic-guitar','bass','drums','synth','warm-pad'],contours:['legato melody','elastic guitar line','accent response'],arrangement:['bass/guitar create continuous curves','drums avoid rigid grid','synth fills harmonic space'],production:'wide smooth modern mix'}),
 }
 
-export function profileForStyle(genreId: string, styleName: string, index: number): StyleSongProfile | undefined {
-  const exact = STYLE_PROFILE_OVERRIDES[`${genreId}:${styleName.toLowerCase()}`];
-  if (exact) return exact;
-  const list = STYLE_PROFILE_LIBRARY[genreId];
-  if (!list?.length) return undefined;
-  const n = styleName.toLowerCase();
-  const keywordIndex: Record<string, number> = {
-    'afro-pop':0,'afrobeat':1,'amapiano':2,
-    tradicional:0,urbana:1,sensual:2,'moderna':1,'bolero':2,
-    chicago:0,delta:2,texas:1,piedmont:2,jump:1,
-    samba:0,'bossa':1,pagode:0,choro:2,'forró':2,
-    honky:1,bluegrass:2,'train':1,neotraditional:0,
-    'studio disco':0,euro:1,'hi-nrg':1,'disco-funk':2,'nu-disco':0,
-    techno:0,ambient:2,downtempo:1,breakbeat:2,electro:0,
-    'deep house':0,'classic house':1,'soulful house':0,'tech house':2,'acid house':2,
-    bebop:0,'cool jazz':1,'hard bop':2,'free jazz':1,'gypsy jazz':2,
-    'roots reggae':0,dub:1,dancehall:2,rocksteady:0,
-    perreo:0,playero:1,neoperreo:2,
-    'heavy metal':0,thrash:1,'doom metal':2,
-  };
-  for (const [k, i] of Object.entries(keywordIndex)) if (n.includes(k)) return list[i % list.length];
-  return list[index % list.length];
-}

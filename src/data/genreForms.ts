@@ -1,5 +1,5 @@
-import type { SectionEnergy, FormIntensity } from '../types';
-import type { StyleDSPProfile } from '../types/style';
+import type { SectionEnergy, FormIntensity } from './schema';
+import type { StyleDSPProfile } from './sound/schema/style-dsp';
 
 export type { FormIntensity };
 export interface FormStep {

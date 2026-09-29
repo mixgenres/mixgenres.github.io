@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Sheet, NoteCard } from './Sheet';
-import { getStylesForGenre } from '../data/styles/registry';
+import { getStylesForGenre } from '../engine/style/registry';
 import type { SongStyle } from '../data/styles/schema';
 import { plateFor } from './worlds';
 

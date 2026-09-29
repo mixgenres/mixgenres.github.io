@@ -2,15 +2,13 @@ import React, { useMemo, useState, useEffect } from 'react';
 import { Sheet, Chip } from './Sheet';
 import { Glyph } from './Glyph';
 import { PLATES, plateFor } from './worlds';
-import { INSTRUMENT_CATALOG, FAMILY_LABELS, FAMILY_ORDER, instrument } from '../data/instruments';
+import { INSTRUMENT_CATALOG, FAMILY_LABELS, FAMILY_ORDER, instrument } from '../engine/lookup/instruments';
 import { ALL_PATTERNS, GENRE_WORLDS_BY_ID, cleanPatternName, FEEL_ORDER, FEEL_LABELS, feelsForPattern, PatternFeel } from '../data/genres';
-import { Voice, toBar, BAR_CHOICES, FEELS, getGenreForm } from '../engine/generators/arrange';
+import { Voice, toBar, BAR_CHOICES, FEELS, getGenreForm, parseChord, ENERGY_LABELS } from '../engine/sheet/index.ts';
 import type { Region } from '../types';
-import { CHORD_PALETTE, CHORD_MOODS, CHORD_MOOD_ORDER, ChordMood, JAZZ_CHORD_LIBRARY, suggestedPaletteForStyle } from '../data/chordPalette';
-import { parseChord } from '../engine/theory/theory';
-import { formSummary } from '../data/genreForms';
+import { CHORD_PALETTE, CHORD_MOODS, CHORD_MOOD_ORDER, ChordMood, JAZZ_CHORD_LIBRARY, suggestedPaletteForStyle } from '../engine/lookup/theory';
+import { formSummary } from '../engine/lookup/forms';
 import type { SectionEnergy } from '../types';
-import { ENERGY_LABELS } from '../engine/metadata/energy';
 
 
 /* ========================================================================== */
@@ -1638,5 +1636,4 @@ export function RandomizeSheet({
     </Sheet>
   );
 }
-
 

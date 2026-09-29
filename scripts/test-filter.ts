@@ -1,5 +1,5 @@
-import { makeSheet } from '../src/engine/generators/arrange';
-import { compileWholeSong } from '../src/engine/compiler/wholeSongCompiler';
+import { makeSheet } from '../src/engine/sheet/sheet.ts';
+import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
 import { GENRE_FORMS } from '../src/data/genreForms';
 
 // Minimal regression check: every genre must build a sheet and compile to a

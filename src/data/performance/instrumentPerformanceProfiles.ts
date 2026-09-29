@@ -356,13 +356,3 @@ export const INSTRUMENT_PERFORMANCE_PROFILES: Record<string, InstrumentPerforman
   })
 );
 
-export function getInstrumentPerformanceProfile(id: string): InstrumentPerformanceProfile {
-  const p = INSTRUMENT_PERFORMANCE_PROFILES[id];
-  if (!p) throw new Error(`No performance profile for instrument "${id}"`);
-  return p;
-}
-
-export function resolveGenreProfile(id: string, genre: string): GenrePerformanceProfile {
-  const p = getInstrumentPerformanceProfile(id);
-  return p.genreProfiles[genre] ?? p.genreProfiles[p.primaryGenres[0] ?? 'jazz'];
-}

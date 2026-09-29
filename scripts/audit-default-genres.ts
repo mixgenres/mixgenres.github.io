@@ -1,13 +1,13 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { GENRE_NAMES } from '../src/data/genres';
-import { getCanonicalStyle } from '../src/data/styles';
-import { getResolvedSectionStyle } from '../src/engine/generators/arrange';
-import { makeSheet } from '../src/engine/generators/arrange';
-import { compileWholeSong } from '../src/engine/compiler/wholeSongCompiler';
-import { getInstrumentPerformanceProfile } from '../src/data/performance/instrumentPerformanceProfiles';
-import { contractForGenre } from '../src/data/styles/contracts';
-import { parseChord } from '../src/engine/theory/theory';
-import type { Sheet } from '../src/engine/generators/arrange';
+import { getCanonicalStyle } from '../src/engine/style';
+import { getResolvedSectionStyle } from '../src/engine/sheet/sheet.ts';
+import { makeSheet } from '../src/engine/sheet/sheet.ts';
+import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
+import { getInstrumentPerformanceProfile } from '../src/engine/lookup/performance';
+import { contractForGenre } from '../src/engine/style/contracts';
+import { parseChord } from '../src/engine/sheet/musicTheory.ts';
+import type { Sheet } from '../src/engine/sheet/sheet.ts';
 import type { Region } from '../src/types';
 
 const REFERENCES: Record<string, string> = {

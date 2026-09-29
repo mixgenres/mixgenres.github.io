@@ -14,7 +14,7 @@
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
-    "check": "tsc --noEmit",
+    "check": "tsc --noEmit && npm run audit:data-boundary",
     "test": "npm run check && tsx scripts/test-filter.ts && tsx scripts/engine-integrity-audit.ts",
     "render-song": "tsx scripts/render-song.ts",
     "gain-calibration": "tsx scripts/gain-calibration.ts",
@@ -22,10 +22,17 @@
     "test:audio": "tsx scripts/audio-regression-harness.ts",
     "test:all": "npm run test && npm run test:audio && npm run build:static",
     "audit:mp3": "tsx scripts/audio-regression-harness.ts",
+    "audit:instruments": "tsx scripts/audit-instrument-authenticity.ts",
+    "audit:instrument-render": "tsx scripts/audit-instrument-render.ts",
+    "render:instrument": "tsx scripts/render-instrument.ts",
     "test:integrity": "tsx scripts/engine-integrity-audit.ts",
     "audit:styles": "tsx scripts/audit-all-styles.ts",
     "audit:performance": "tsx scripts/audit-style-performance.ts",
-    "render:all-styles": "tsx scripts/render-all-styles.ts"
+    "render:all-styles": "tsx scripts/render-all-styles.ts",
+    "audit:paths": "tsx scripts/audit-instrument-paths.ts",
+    "schema:render": "tsx scripts/pre-render-schema.ts",
+    "audit:rigorous": "npm run check && npm run audit:paths && npm run audit:instruments && npm run audit:instrument-render && npm run test:audio",
+    "audit:data-boundary": "node scripts/audit-data-boundary.mjs"
   },
   "dependencies": {
     "@breezystack/lamejs": "^1.2.7",
@@ -42,6 +49,8 @@
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "gh-pages": "^6.3.0",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.23.13",

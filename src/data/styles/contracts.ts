@@ -1,4 +1,30 @@
-import type { SongStyle, ImprovisationGrammar } from './schema';
+import type { ImprovisationGrammar } from './schema';
+export type PerformanceMode = 'acoustic-ensemble' | 'programmed-electronic' | 'hybrid';
+
+export interface InstrumentDialect {
+  id: string;
+  instrumentId: string;
+  name: string;
+  family: string;
+  performanceMode: PerformanceMode;
+  defaultTechnique: string;
+  allowedTechniques: string[];
+  pluckPositionOverride?: number;
+  bowPressureOverride?: number;
+  contactPointOverride?: number;
+  decayMultiplier?: number;
+  brightnessMultiplier?: number;
+  bodyMultiplier?: number;
+  tuningSystemId?: string;
+  micProximityPreset?: 'close-mic' | 'room-ambient' | 'direct-box' | 'hall-stage';
+  bendGlideMs?: number;
+  courses?: number;
+  bodyConstruction?: 'wood-box' | 'gourd' | 'skin-faced' | 'board' | 'solid-electric';
+  excitationType?: 'plectrum' | 'nail' | 'fingerpad' | 'hard-pick' | 'hammer';
+  sympatheticStrings?: boolean;
+}
+
+
 
 export type InteractionModel = 'homophonic' | 'interlock' | 'unison' | 'counterpoint';
 
@@ -115,7 +141,7 @@ export interface WorldContract {
   improvisationGrammar: ImprovisationGrammar;
   ensemble: Record<string, string>;
   timbreSpace: { palette: string[]; production: string; mixCharacter?: MixCharacter };
-  instrumentDialects?: Record<string, Partial<import('../../engine/theory/dialects').InstrumentDialect>>;
+  instrumentDialects?: Record<string, Partial<InstrumentDialect>>;
   performanceGrammar?: import('./schema').PerformanceGrammar;
   performanceMode?: 'acoustic-ensemble' | 'programmed-electronic' | 'hybrid';
   forbidden: string[];
@@ -459,63 +485,7 @@ for (const [id, override] of Object.entries(CULTURAL_OVERRIDES)) {
 
 export const GENRE_CONTRACTS: Record<string, WorldContract> = G;
 
-const STYLE_PATCHES: Record<string, Partial<WorldContract>> = {
+export const STYLE_PATCHES: Record<string, Partial<WorldContract>> = {
   'reggae-dancehall': { timbreSpace: { palette: ['synth', 'sub-bass', 'drums', 'congas'], production: 'dembow skank, hard clip', mixCharacter: { dryness: 0.7, bassForward: 0.88, width: 0.65, brightness: 0.65, saturationType: 'hard-clip', compressionRatio: 5.0, subHarmonics: 0.8, transientSnap: 0.8 } } },
 };
 
-function cloneDeep<T>(v: T): T {
-  return JSON.parse(JSON.stringify(v));
-}
-
-export function contractForGenre(genreId: string, style?: SongStyle): WorldContract {
-  const baseContract = GENRE_CONTRACTS[genreId];
-  if (!baseContract) throw new Error(`No Genre Contract for ${genreId}`);
-  let out = cloneDeep(baseContract);
-  const patch = style ? STYLE_PATCHES[style.id] : undefined;
-  if (patch) out = mergeContract(out, patch);
-
-  if (style?.rhythm) {
-    const r = style.rhythm;
-    const meter = r.meter ?? out.meter;
-    const subdivision = /12\/8/.test(meter) ? 12 : /3\/4|6\/8/.test(meter) ? 12 : /2\/4/.test(meter) ? 8 : 16;
-    out.meter = meter;
-    out.subdivision = subdivision;
-    out.groove = {
-      ...out.groove,
-      swing: (r.swingPercentage ?? out.groove.swing * 100) / 100,
-      humanizeMs: r.humanizeJitterMs ?? out.groove.humanizeMs,
-    };
-    if (r.microtimingFeel === 'laid-back' || r.microtimingFeel === 'atrasado') out.groove.lean = Math.max(out.groove.lean, 4);
-    if (r.microtimingFeel === 'pushed') out.groove.lean = Math.min(out.groove.lean, -3);
-    if (r.microtimingFeel === 'rubato') out.microtiming.byRole.lead = [Math.max(8, out.groove.roleLean.lead ?? 8)];
-    if (r.timelineClave) {
-      out.timeline = r.timelineClave;
-      out.timelineRequired = true;
-    }
-  }
-  if (style?.harmony) {
-    out.harmonyModel = style.harmony.model ?? out.harmonyModel;
-    out.tuningSystem = style.harmony.tuningSystem ?? out.tuningSystem;
-    if (style.harmony.bassMotion) out.bass.style = style.harmony.bassMotion as BassDialect['style'];
-    out.harmonyVocabulary = Array.from(new Set([...out.harmonyVocabulary, ...(style.harmony.chordVocabulary ?? [])]));
-  }
-  return out;
-}
-
-function mergeContract(baseContract: WorldContract, patch: Partial<WorldContract>): WorldContract {
-  const out = { ...baseContract, ...patch } as WorldContract;
-  out.groove = { ...baseContract.groove, ...(patch.groove ?? {}), roleLean:{...baseContract.groove.roleLean,...(patch.groove?.roleLean ?? {})} };
-  out.bass = { ...baseContract.bass, ...(patch.bass ?? {}) };
-  out.microtiming = { ...baseContract.microtiming, ...(patch.microtiming ?? {}), byRole:{...baseContract.microtiming.byRole,...(patch.microtiming?.byRole ?? {})} };
-  out.timbreSpace = {
-    ...baseContract.timbreSpace,
-    ...(patch.timbreSpace ?? {}),
-    mixCharacter: {
-      ...(baseContract.timbreSpace.mixCharacter ?? { dryness: 0.6, bassForward: 0.5, width: 0.5, brightness: 0.5 }),
-      ...(patch.timbreSpace?.mixCharacter ?? {}),
-    },
-  };
-  out.percussion = { ...baseContract.percussion, ...(patch.percussion ?? {}) };
-  out.instrumentDialects = { ...baseContract.instrumentDialects, ...(patch.instrumentDialects ?? {}) };
-  return out;
-}
