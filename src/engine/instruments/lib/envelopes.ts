@@ -1,6 +1,6 @@
 import { el } from '@elemaudio/core';
 
-type Node = any;
+type Node = ReturnType<typeof el.const>;
 
 /**
  * Standard ADSR envelope helper.

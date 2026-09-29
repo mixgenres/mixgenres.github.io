@@ -1,4 +1,4 @@
-import type { GenreWorld } from '../../types';
+import type { GenreWorld, DrumRuleStep } from '../../types';
 import type { SamplerTimbreControl } from '../../engine/theory/physicsInterfaces';
 
 export const REGGAETON_DEMBOW_WORLD: GenreWorld = {
@@ -10,7 +10,7 @@ export const REGGAETON_DEMBOW_WORLD: GenreWorld = {
   "description": "Reggaetón and dembow are represented as",
   rhythm: { syncopation: 0.5, swing: 0.0, pocket: 'strict_grid', pocketDepth: 0, intonationSystem: 'equal', quantizeJitterMs: 2 },
   drumRules: {
-    evaluateStep: (step: any) => {
+    evaluateStep: (step: DrumRuleStep) => {
       const kickTimbre: SamplerTimbreControl = {
         samplePlaybackRate: 1.0,
         formantShiftAmount: 0,

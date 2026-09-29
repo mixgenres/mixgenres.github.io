@@ -152,7 +152,7 @@ function base(
   forbidden: string[],
   groove: WorldContract['groove'],
   percussion: PercussionDialect,
-  opts: Partial<Pick<WorldContract,'cycleLength'|'subdivision'|'timelineRequired'|'harmonicRhythm'|'harmonyVocabulary'|'accentGrammar'|'articulationGrammar'|'microtiming'|'interactionModel' | 'energyMappings' | 'transitionGrammar' | 'approaches' | 'performanceIdioms' | 'instrumentDialects'>> & { mixCharacter?: MixCharacter } = {},
+  opts: Partial<Pick<WorldContract,'cycleLength'|'subdivision'|'timelineRequired'|'harmonicRhythm'|'harmonyVocabulary'|'accentGrammar'|'articulationGrammar'|'microtiming'|'interactionModel' | 'energyMappings' | 'transitionGrammar' | 'approaches' | 'performanceIdioms' | 'improvisationGrammar' | 'instrumentDialects'>> & { mixCharacter?: MixCharacter } = {},
 ): WorldContract {
   const pm = pitchModel.toLowerCase();
   const pitchIntervals = pm.includes('pentatonic') ? [0,2,4,7,9]
@@ -204,7 +204,7 @@ function base(
       bluesRockLeadMinorThirdBend: false,
       dropPortamento: false,
       spotlightLeadRubato: false,
-      ...(opts as any).performanceIdioms,
+      ...(opts.performanceIdioms ?? {}),
     },
     improvisationGrammar: {
       scaleMode: pm.includes('minor') ? 'minor-pentatonic' : 'major',
@@ -213,7 +213,7 @@ function base(
       transposeDegrees: 2,
       phraseBars: 4,
       rapidRunOrnaments: ['rapid-run'],
-      ...(opts as any).improvisationGrammar,
+      ...(opts.improvisationGrammar ?? {}),
     },
     transitionGrammar,
     defaultSpotlights: { intro: ['pulse'], verse: ['harmony'], chorus: ['lead'], solo: ['lead'], outro: ['pulse'] },

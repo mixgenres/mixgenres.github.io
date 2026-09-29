@@ -69,6 +69,8 @@ export interface CulturalAcousticEvent {
   noteInstanceId?: string;
   /** Physical excitation parameters */
   action: PhysicalExcitationAction;
+  /** Resolved structural gain for the instrument role. */
+  roleGain?: number;
   /** Frequency and microtonal intonation spec */
   tuning: IntonationState;
   /** 3D Spatial coordinates for Ambisonic spatial ray-tracing */

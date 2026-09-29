@@ -1,3 +1,5 @@
+import type { ResolvedStyle } from '../../data/styles/schema';
+
 export type PerformanceAspect =
   | 'timeline'
   | 'cycle'
@@ -277,32 +279,45 @@ export function resolveHybridGrammar(
   };
 }
 
+type PerformanceGrammarSource = Pick<import('../../data/styles/contracts').WorldContract,
+  'performanceGrammar' | 'pulseModel' | 'harmonyModel' | 'forbidden' | 'groove'
+> & {
+  worldId?: string;
+  styleId?: string;
+};
+
 /**
  * Extracts or constructs a PerformanceGrammar from a style specification.
  */
-export function getPerformanceGrammar(style: any, _role?: string): PerformanceGrammar {
+export function getPerformanceGrammar(style: ResolvedStyle | PerformanceGrammarSource, _role?: string): PerformanceGrammar {
   if (!style) return DEFAULT_PERFORMANCE_GRAMMAR;
+  const isResolvedStyle = 'contract' in style;
+  const source = isResolvedStyle ? style.contract : style;
+  const rhythm = isResolvedStyle ? style.rhythm : undefined;
+  const articulationGrammar = isResolvedStyle ? style.contract.articulationGrammar : undefined;
+  const worldId = isResolvedStyle ? style.primaryGenre : ('worldId' in source ? source.worldId : undefined);
+  const styleId = isResolvedStyle ? style.id : ('styleId' in source ? source.styleId : undefined);
 
-  const baseGrammar: PerformanceGrammar = style.performanceGrammar ?? {
+  const baseGrammar: PerformanceGrammar = source.performanceGrammar ?? {
     ...DEFAULT_PERFORMANCE_GRAMMAR,
-    preserveAuthoredRhythm: style.pulseModel === 'timeline-cycle' ? 0.95 : 0.85,
-    allowDerivedAttacks: style.pulseModel === 'machine-grid' ? 0.15 : 0.35,
-    allowDerivedPitch: style.harmonyModel === 'blues-form' ? 0.45 : 0.25,
+    preserveAuthoredRhythm: source.pulseModel === 'timeline-cycle' ? 0.95 : 0.85,
+    allowDerivedAttacks: source.pulseModel === 'machine-grid' ? 0.15 : 0.35,
+    allowDerivedPitch: source.harmonyModel === 'blues-form' ? 0.45 : 0.25,
     allowCrossStyleSubdivision: 0.15,
   };
 
-  const forbidden = Array.isArray(style.forbidden) ? style.forbidden : [];
+  const forbidden = Array.isArray(source.forbidden) ? source.forbidden : [];
   const mergedForbidden = Array.from(new Set([...(baseGrammar.forbiddenInterpretations ?? []), ...forbidden]));
 
   // Microtiming
-  const microTendency = style.rhythm?.microtimingFeel ?? style.groove?.name?.toLowerCase() ?? 'straight';
+  const microTendency = rhythm?.microtimingFeel ?? source.groove?.name?.toLowerCase() ?? 'straight';
   const microtiming = {
-    amount: (style.rhythm?.humanizeJitterMs ?? style.groove?.humanizeMs ?? 7) / 1000,
+    amount: (rhythm?.humanizeJitterMs ?? source.groove?.humanizeMs ?? 7) / 1000,
     tendency: microTendency,
   };
 
   // Articulations from style if available
-  const styleArt = style.articulationGrammar ?? {};
+  const styleArt = articulationGrammar ?? {};
   const mergedArticulations: Record<string, string[]> = {
     ...(baseGrammar.articulationVocabulary ?? {}),
   };
@@ -314,8 +329,8 @@ export function getPerformanceGrammar(style: any, _role?: string): PerformanceGr
 
   const result: PerformanceGrammar = {
     ...baseGrammar,
-    worldId: style?.worldId || style?.genreId || style?.id,
-    styleId: style?.id,
+    worldId,
+    styleId,
     articulationVocabulary: mergedArticulations,
     forbiddenInterpretations: mergedForbidden,
     microtiming: microtiming,

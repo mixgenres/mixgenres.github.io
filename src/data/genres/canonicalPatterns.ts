@@ -14,13 +14,13 @@ function P(
 ): MusicalPattern {
   return {
     id, worldId, name, shortName: name, family: worldId, category: 'groove', description,
-    tags, approaches: tags, scopes: ['song','section','measure'] as any,
+    tags, approaches: tags, scopes: ['song','region','measure'],
     roles, meter: '4/4', cycleLength: 1, subdivisions: 16,
     onsetGrid, accentProfile: onsetGrid.map((_, i) => i % 4 === 0 ? 1 : i % 2 ? .5 : .78),
     instruments, styleIds,
     durationGrid: onsetGrid.map(() => 1), articulations, variants: [],
     sourceLevel: 'native-genre', canCrossRole: true, authenticityTags: tags,
-  } as MusicalPattern;
+  };
 }
 
 export const CANONICAL_GENRE_PATTERNS: MusicalPattern[] = [

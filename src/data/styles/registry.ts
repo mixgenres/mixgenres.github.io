@@ -1,4 +1,5 @@
 import type { SongStyle } from './schema';
+import type { GenreStyleDefinition } from '../../types';
 import { GENRE_WORLDS, GENRE_NAMES } from '../genres';
 import { buildCuratedStyles, assembleStylePatterns } from './catalog';
 import { applyStyleDialect } from './styleDialect';
@@ -33,7 +34,7 @@ function shortText(value: string): string {
 }
 
 
-function styleFromSeed(worldId: string, seed: any, index: number): SongStyle {
+function styleFromSeed(worldId: string, seed: GenreStyleDefinition, index: number): SongStyle {
   const contract = contractForGenre(worldId);
   const rhythm = GENRE_RHYTHM[worldId] ?? { bpm: 110, range:[80,140] as [number,number], meter:contract.meter, feel:contract.groove.name, swing:contract.groove.swing * 100 };
   // The ensemble is authored by the style seed. Never synthesize a genre-level
@@ -52,7 +53,7 @@ function styleFromSeed(worldId: string, seed: any, index: number): SongStyle {
     const role = def?.voicing === 'bass' ? 'bass'
       : def?.voicing === 'unpitched' ? 'percussion'
       : def?.voicing === 'single' ? 'melody' : 'harmony';
-    return { role: role as any, instrumentIds:[instrumentId], priority:10-i };
+    return { role, instrumentIds:[instrumentId], priority:10-i };
   });
   return {
     id: seed.id,
@@ -78,11 +79,11 @@ function styleFromSeed(worldId: string, seed: any, index: number): SongStyle {
       model:contract.harmonyModel,
       modePolicy: contract.pitchModel.toLowerCase().includes('minor') ? 'minor' : 'major',
       progressionTemplates:[],
-      chordVocabulary:Array.from(new Set([...contract.harmonyVocabulary, ...(Object.values(seed.sectionProgressions ?? {}).flatMap((x:any) => x).map(String))])),
+      chordVocabulary:Array.from(new Set([...contract.harmonyVocabulary, ...(Object.values(seed.sectionProgressions ?? {}).flatMap(x => x).map(String))])),
       harmonicRhythm:contract.harmonicRhythm,
       bassMotion:contract.bass.style,
       sectionProgressions: seed.sectionProgressions ?? {},
-      tuningSystem:(seed.tuningSystem ?? contract.tuningSystem) as any,
+      tuningSystem: seed.tuningSystem ?? contract.tuningSystem,
     },
     rhythm:{
       meter:contract.meter,
@@ -91,7 +92,7 @@ function styleFromSeed(worldId: string, seed: any, index: number): SongStyle {
       feel:seed.grooveMechanics?.microtimingFeel ?? contract.groove.name,
       swingPercentage:seed.grooveMechanics?.swingPercentage ?? contract.groove.swing * 100,
       anticipationOffsetSteps:0,
-      microtimingFeel: seed.grooveMechanics?.microtimingFeel ?? (contract.groove.swing > .57 ? 'swung' : 'straight'),
+      microtimingFeel: seed.grooveMechanics?.microtimingFeel === 'quantized' ? 'straight' : (seed.grooveMechanics?.microtimingFeel ?? (contract.groove.swing > .57 ? 'swung' : 'straight')),
       humanizeJitterMs:contract.groove.humanizeMs,
       timelineClave:contract.timeline === 'none' ? undefined : contract.timeline,
       signatureCell:seed.signatureCell ?? contract.timeline,

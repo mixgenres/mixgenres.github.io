@@ -1,10 +1,10 @@
 import { el } from '@elemaudio/core';
-import type { VoiceRenderContext, InstrumentModule } from './types';
+import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './types';
 
 export default class MarimbaModule implements InstrumentModule {
   id = 'marimba';
 
-  renderVoice(ctx: VoiceRenderContext): any {
+  renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
       gateSignal,
       freqSignal,

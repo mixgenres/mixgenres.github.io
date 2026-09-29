@@ -1,4 +1,4 @@
-import type { GenreWorld } from '../../types';
+import type { GenreWorld, DrumRuleStep } from '../../types';
 
 export const JAZZ_WORLD: GenreWorld = {
   "id": "jazz",
@@ -9,7 +9,7 @@ export const JAZZ_WORLD: GenreWorld = {
   "description": "The monumental Jazz style: Swing and",
   "prominentChords": ['Maj 7', 'Min 7', 'Dom 9', 'Min 7b5', 'Dim 7'],
   drumRules: {
-    evaluateStep: (step: any) => {
+    evaluateStep: (step: DrumRuleStep) => {
       const events = [];
       if (step.kick) events.push({ type: 'kick', velocity: step.velocity * 0.8, time: step.time });
       if (step.snare) {
@@ -23,7 +23,7 @@ export const JAZZ_WORLD: GenreWorld = {
         else if (step.isPedal) hatType = 'hihat_pedal';
         events.push({ type: hatType, velocity: step.velocity, time: step.time });
       }
-      if (step.ghosts) step.ghosts.forEach((g: any) => events.push({ type: 'snare_ghost', velocity: g.velocity, time: g.time }));
+      if (step.ghosts) step.ghosts.forEach((g: { velocity: number; time: number }) => events.push({ type: 'snare_ghost', velocity: g.velocity, time: g.time }));
 
       return events;
     }

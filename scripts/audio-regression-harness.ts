@@ -13,7 +13,7 @@ const cases = [
 async function main() {
   const outDir = '/tmp/mixgenres-audio-regression';
   mkdirSync(outDir, { recursive: true });
-  const results: any[] = [];
+  const results: Array<Record<string, unknown>> = [];
   for (const [genre, file] of cases) {
     const sheet = makeSheet(genre);
     // Default starter songs intentionally begin as five-piece arrangements.
@@ -22,7 +22,7 @@ async function main() {
     let perf = compileWholeSong(sheet);
     const excerptSeconds = Math.min(4, perf.duration);
     perf = { ...perf, notes: perf.notes.filter(n => n.time < excerptSeconds), duration: excerptSeconds };
-    const blob = await renderPerformanceToMp3(perf, { trackInstruments: new Map(sheet.tracks.map(t => [t.id, t.instrumentId])), worldId: sheet.worldId, styleId: sheet.styleId });
+    const blob = await renderPerformanceToMp3(perf, { trackInstruments: new Map(sheet.tracks.flatMap(t => t.instrumentId ? [[t.id, t.instrumentId] as const] : [])), worldId: sheet.worldId, styleId: sheet.styleId });
     const target = `${outDir}/${file}.mp3`;
     writeFileSync(target, Buffer.from(await blob.arrayBuffer()));
     const probe = execFileSync('ffprobe', ['-v','error','-show_entries','stream=codec_name,sample_rate,channels,duration','-of','json',target], { encoding: 'utf8' });

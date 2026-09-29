@@ -1,4 +1,4 @@
-import type { GenreWorld } from '../../types';
+import type { GenreWorld, DrumRuleStep } from '../../types';
 import type { SamplerTimbreControl } from '../../engine/theory/physicsInterfaces';
 
 export const KIZOMBA_WORLD: GenreWorld = {
@@ -10,7 +10,7 @@ export const KIZOMBA_WORLD: GenreWorld = {
   "description": "The sensual partner dance style of",
   rhythm: { syncopation: 0.4, swing: 0.1, pocket: 'strict_grid', pocketDepth: 0, intonationSystem: 'equal', quantizeJitterMs: 2 },
   drumRules: {
-    evaluateStep: (step: any) => {
+    evaluateStep: (step: DrumRuleStep) => {
       const percussionTimbre: SamplerTimbreControl = {
         samplePlaybackRate: 0.6,
         formantShiftAmount: 0,

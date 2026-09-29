@@ -1,7 +1,7 @@
 import { el } from '@elemaudio/core';
 import type { VoiceRenderContext } from '../instruments/types';
 
-type Node = any;
+type Node = ReturnType<typeof el.const>;
 
 /**
  * Custom Insert-Effects Chain Constructor

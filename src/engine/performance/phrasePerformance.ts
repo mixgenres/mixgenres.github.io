@@ -33,7 +33,7 @@ export interface PhraseContext {
   hybridGrammar: PerformanceGrammar;
   statePreviousMidi?: number;
   pattern: MusicalPattern;
-  measureDetails?: Measure['patternDetailsByTrack'][string];
+  measureDetails?: NonNullable<Measure['patternDetailsByTrack']>[string];
   barIndex: number;
   phraseStart: number;
   phraseEnd: number;
@@ -275,7 +275,7 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
   const hostPreferred = new Set(ctx.hostProfile.preferredGestures);
   const sourcePreferred = new Set(ctx.sourceProfile.preferredGestures);
   const text = `${ctx.pattern?.id ?? ''} ${ctx.pattern?.name ?? ''} ${ctx.regionStyleId ?? ''}`.toLowerCase();
-  const sourceHit = String((ctx.measureDetails as any)?.hitTypes?.[ctx.onsetIndex] ?? '').toLowerCase();
+  const sourceHit = String(ctx.measureDetails?.hitTypes?.[ctx.onsetIndex] ?? '').toLowerCase();
 
   // Instrument-specific gesture candidates are derived only from the authored
   // gesture vocabulary already present in the instrument definition. Rhythm
@@ -381,7 +381,7 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
   return scored[0]?.g ?? fallback;
 }
 
-export function buildHybridGrammar(_hostStyleId: string | undefined, sourceGenre: string, hostStyle: any, lensWeight = 0.5): { host: PerformanceGrammar; source: PerformanceGrammar; hybrid: PerformanceGrammar } {
+export function buildHybridGrammar(_hostStyleId: string | undefined, sourceGenre: string, hostStyle: import('../../data/styles/schema').ResolvedStyle, lensWeight = 0.5): { host: PerformanceGrammar; source: PerformanceGrammar; hybrid: PerformanceGrammar } {
   const host = getPerformanceGrammar(hostStyle ?? {});
   let source = host;
   try {

@@ -1,11 +1,11 @@
 import { el } from '@elemaudio/core';
 import { getFormantProfileForInstrument } from '../elementary/elementaryEngine';
-import type { VoiceRenderContext, InstrumentModule } from './types';
+import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './types';
 
 export default class BrassModule implements InstrumentModule {
   id = 'brass';
 
-  renderVoice(ctx: VoiceRenderContext): any {
+  renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const { params, gateSignal, freqSignal, action, dspProfile } = ctx;
     const id = (params.instrumentId ?? '').toLowerCase();
     const profile = getFormantProfileForInstrument(params.instrumentId ?? '', 15);

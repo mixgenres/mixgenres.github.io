@@ -1,8 +1,10 @@
-import type { GuestLens, Measure, Region } from '../../types';
+import type { GuestLens, Measure, Region, MusicalPattern, Role } from '../../types';
 import type { Sheet, Voice } from '../generators/arrange';
+import type { InstrumentDef } from '../../data/instruments/types';
+import type { ResolvedStyle } from '../../data/styles/schema';
 import { PATTERNS_BY_ID } from '../../data/genres';
 import { INSTRUMENTS_BY_ID } from '../../data/instruments';
-import { getInstrumentPerformanceProfile, resolveGenreProfile } from '../../data/performance/instrumentPerformanceProfiles';
+import { getInstrumentPerformanceProfile, resolveGenreProfile, type InstrumentPerformanceProfile } from '../../data/performance/instrumentPerformanceProfiles';
 import { getGenreTheory, styleTheoryFor, blendGenreTheory } from '../../data/musicTheory/genreTheory';
 import { getResolvedSectionStyle } from '../generators/arrange';
 import { parseChord } from '../theory/theory';
@@ -55,7 +57,7 @@ export interface RhythmIdea {
   cycleLength: number;
   onsets: RhythmOnset[];
   roleTendencies: string[];
-  pattern: any;
+  pattern: MusicalPattern;
 }
 
 export interface LensStack {
@@ -89,7 +91,7 @@ export interface BandPlan {
 
 function clamp(v: number, a = 0, b = 1): number { return Math.max(a, Math.min(b, v)); }
 
-function hitFrom(pattern: any, i: number, rawHit?: string): HitFunction {
+function hitFrom(pattern: MusicalPattern, i: number, rawHit?: string): HitFunction {
   const raw = String(rawHit ?? pattern.hitGrid?.[i] ?? '').toLowerCase();
   if (/kick|downbeat|bombo|bass-drum|grave/.test(raw)) return 'downbeat';
   if (/ghost|heel|toe|tap|tip|brush/.test(raw)) return 'ghost';
@@ -108,7 +110,7 @@ function hitFrom(pattern: any, i: number, rawHit?: string): HitFunction {
   return 'tone';
 }
 
-function rhythmIdeaFromPattern(p: any, sourceGenre: string): RhythmIdea {
+function rhythmIdeaFromPattern(p: MusicalPattern, sourceGenre: string): RhythmIdea {
   const sub = Math.max(1, p.subdivisions ?? 16);
   const onsets = (p.onsetGrid ?? []).map((position: number, i: number) => ({
     position: position / sub,
@@ -132,11 +134,30 @@ function rhythmIdeaFromPattern(p: any, sourceGenre: string): RhythmIdea {
   };
 }
 
-function rhythmIdeaFromMeasure(detail: Measure['patternDetailsByTrack'][string] | undefined, fallback: RhythmIdea): RhythmIdea {
+interface PatternPerformanceDetails {
+  stepsPerBar?: number;
+  onsets?: number[];
+  accents?: number[];
+  durations?: number[];
+  hitTypes?: string[];
+  microtiming?: number[];
+  durationsAuthored?: boolean;
+}
+
+type RuntimePatternDetails = NonNullable<Measure['patternDetailsByTrack']>[string] & {
+  perf?: PatternPerformanceDetails;
+};
+
+function isPatternPerformanceDetails(value: unknown): value is PatternPerformanceDetails {
+  return typeof value === 'object' && value !== null;
+}
+
+function rhythmIdeaFromMeasure(detail: NonNullable<Measure['patternDetailsByTrack']>[string] | undefined, fallback: RhythmIdea): RhythmIdea {
   if (!detail) return fallback;
   const p = PATTERNS_BY_ID[detail.patternId] ?? fallback.pattern;
-  const steps = Math.max(1, Number((detail as any).perf?.stepsPerBar ?? p.subdivisions ?? fallback.subdivisions));
-  const perf = (detail as any).perf;
+  const runtimeDetail = detail as RuntimePatternDetails;
+  const perf = isPatternPerformanceDetails(runtimeDetail.perf) ? runtimeDetail.perf : undefined;
+  const steps = Math.max(1, Number(perf?.stepsPerBar ?? p.subdivisions ?? fallback.subdivisions));
   const nativeOnsets = Array.isArray(perf?.onsets) ? perf.onsets : [];
   const nativeAccents = Array.isArray(perf?.accents) ? perf.accents : [];
   const nativeDurations = Array.isArray(perf?.durations) ? perf.durations : [];
@@ -147,8 +168,8 @@ function rhythmIdeaFromMeasure(detail: Measure['patternDetailsByTrack'][string] 
     accent: clamp(Number(nativeAccents[i] ?? detail.accentProfile?.[i] ?? 0.72)),
     duration: clamp(Number(nativeDurations[i] ?? detail.durationGrid?.[i] ?? 1) / nativeSteps * 4, 0.05, 2),
     durationAuthored: Boolean(perf?.durationsAuthored) || Array.isArray(detail.durationGrid),
-    hit: hitFrom(p, i, nativeHitTypes[i] ?? (detail.hitTypes as any)?.[i]),
-    sourceHit: nativeHitTypes[i] ?? (detail.hitTypes as any)?.[i] ?? p.hitGrid?.[i],
+    hit: hitFrom(p, i, nativeHitTypes[i] ?? detail.hitTypes?.[i]),
+    sourceHit: nativeHitTypes[i] ?? detail.hitTypes?.[i] ?? p.hitGrid?.[i],
     microtiming: Number(perf?.microtiming?.[i] ?? 0),
     sourceGenre: p.worldId ?? fallback.sourceGenre,
   }));
@@ -212,19 +233,19 @@ function ownership(track: Voice, role: string, energy: number): BandPlan['lanes'
   return energy > 0.8 ? 'background' : 'answer';
 }
 
-function chooseRhythm(sheet: Sheet, region: Region, track: Voice, style?: any): RhythmIdea {
+function chooseRhythm(sheet: Sheet, region: Region, track: Voice, style?: ResolvedStyle): RhythmIdea {
   const measure = sheet.measures.find(x => x.regionId === region.id && (x.patternByTrack?.[track.id] || x.patternDetailsByTrack?.[track.id]));
   const pid = measure?.patternByTrack?.[track.id] ?? measure?.patternDetailsByTrack?.[track.id]?.patternId;
   if (pid && PATTERNS_BY_ID[pid]) return rhythmIdeaFromPattern(PATTERNS_BY_ID[pid], region.genre ?? sheet.worldId);
   const g = region.genre ?? sheet.worldId;
   const role = voiceProfile(track.instrumentId).role;
-  const styleText = `${style?.id ?? ''} ${style?.name ?? ''} ${(style?.signatureCell ?? '')} ${(style?.rhythmicGrammar ?? []).join(' ')}`.toLowerCase();
+  const styleText = `${style?.id ?? ''} ${style?.name ?? ''} ${(style?.rhythm?.signatureCell ?? '')} ${(style?.signatureTraits ?? []).join(' ')}`.toLowerCase();
   const candidates = Object.values(PATTERNS_BY_ID).filter(p =>
     p.worldId === g &&
-    (!p.roles?.length || p.roles.includes(track.role) || p.roles.includes(role) || p.canCrossRole)
+    (!p.roles?.length || p.roles.includes(track.role) || p.roles.includes(role as Role) || p.canCrossRole)
   );
   const theory = getGenreTheory(g);
-  const score = (p: any) => {
+  const score = (p: MusicalPattern) => {
     const text = `${p.id ?? ''} ${p.name ?? ''} ${p.family ?? ''} ${(p.tags ?? []).join(' ')} ${(p.approaches ?? []).join(' ')} ${(p.authenticityTags ?? []).join(' ')}`.toLowerCase();
     let v = 0;
     if (p.worldId === g) v += 8;
@@ -240,7 +261,7 @@ function chooseRhythm(sheet: Sheet, region: Region, track: Voice, style?: any): 
   return rhythmIdeaFromPattern(p, g);
 }
 
-function patternGestureHint(pattern: any, instrumentId: string, styleId: string | undefined): string | undefined {
+function patternGestureHint(pattern: MusicalPattern, instrumentId: string, styleId: string | undefined): string | undefined {
   const text = `${pattern?.id ?? ''} ${pattern?.name ?? ''} ${pattern?.family ?? ''} ${(pattern?.tags ?? []).join(' ')} ${(pattern?.approaches ?? []).join(' ')} ${styleId ?? ''}`.toLowerCase();
   const exists = (x: string) => Boolean(getInstrumentPerformanceProfile(instrumentId).gestures[x]);
   if (/milonga/.test(text)) {
@@ -264,7 +285,7 @@ function patternGestureHint(pattern: any, instrumentId: string, styleId: string 
   return undefined;
 }
 
-function kitMidiFor(def: any, sourceHit: string | undefined, hit: HitFunction, index: number): number {
+function kitMidiFor(def: InstrumentDef, sourceHit: string | undefined, hit: HitFunction, index: number): number {
   const comps = def?.kitComponents ?? [];
   if (!comps.length) return def?.drum?.mid ?? 60;
   const raw = String(sourceHit ?? '').toLowerCase();
@@ -280,13 +301,13 @@ function kitMidiFor(def: any, sourceHit: string | undefined, hit: HitFunction, i
   if (hit === 'muffled') patterns.push(/mute|tapao|cross-stick|closed/i);
   if (hit === 'ghost') patterns.push(/ghost|tip|toe|heel/i);
   for (const rx of patterns) {
-    const found = comps.find((c: any) => rx.test(`${c.id} ${c.name}`));
+    const found = comps.find(c => rx.test(`${c.id} ${c.name}`));
     if (found) return found.midi;
   }
   return comps[index % comps.length].midi;
 }
 
-function baseMidiForPattern(def: any, onset: RhythmOnset, index: number): number[] {
+function baseMidiForPattern(def: InstrumentDef, onset: RhythmOnset, index: number): number[] {
   if (def?.voicing === 'unpitched' || def?.kit || def?.drum) {
     return [kitMidiFor(def, onset.sourceHit, onset.hit, index)];
   }
@@ -314,7 +335,7 @@ function derivePassingMidi(state: PhraseState, current: number, ctx: PhraseConte
   return foldToRange(candidate, voiceProfile(ctx.profile.instrumentId));
 }
 
-function effectiveGesture(profile: any, ctx: PhraseContext, onset: RhythmOnset, authored?: string): string {
+function effectiveGesture(profile: InstrumentPerformanceProfile, ctx: PhraseContext, onset: RhythmOnset, authored?: string): string {
   const hint = patternGestureHint(ctx.pattern, profile.instrumentId, ctx.regionStyleId);
   return preferredGesture(ctx, onset.hit, authored ?? hint);
 }
@@ -338,7 +359,7 @@ function applyPhraseBandInteraction(
   notes: PerfNote[],
   sheet: Sheet,
   region: Region,
-  style: any,
+  style: ResolvedStyle,
 ): void {
   const model = style?.contract?.interactionModel ?? 'interlock';
   const theory = styleTheoryFor(style?.id, region.genre ?? sheet.worldId);
@@ -452,7 +473,7 @@ export function compileWholeSong(sheet: Sheet, _seed = 0): Performance {
           const bt = bars[bar];
           const measure = sheet.measures[bar];
           if (!bt || !measure) continue;
-          const detail = measure.patternDetailsByTrack?.[track.id] as any;
+          const detail = measure.patternDetailsByTrack?.[track.id];
           const rhythm = rhythmIdeaFromMeasure(detail, lane.rhythm);
           if (!rhythm.onsets.length) continue;
           const chord = measure.chord || 'C';

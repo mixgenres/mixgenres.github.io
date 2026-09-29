@@ -1,14 +1,22 @@
-export default class InstrumentRenderer {
-  constructor(_instrumentId: string, _ctx: any) {}
+export interface AcousticProfile {
+  id: string;
+  profile: 'standard';
+}
 
-  getAcousticProfile(instId: string) {
+export default class InstrumentRenderer {
+  constructor(_instrumentId: string, _ctx: AudioContext | null) {}
+
+  getAcousticProfile(instId: string): AcousticProfile {
     return {
       id: instId,
       profile: 'standard',
     };
   }
 
-  scheduleNoteOffNoise(_note: { pitch: number; velocity: number }, _time: number, _profile: any, _ctx: any) {
-    // Safely schedules key release/string damp/valve click acoustic noise transient if Web Audio API is active
-  }
+  scheduleNoteOffNoise(
+    _note: { pitch: number; velocity: number },
+    _time: number,
+    _profile: AcousticProfile,
+    _ctx: AudioContext | null,
+  ): void {}
 }

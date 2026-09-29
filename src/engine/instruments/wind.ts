@@ -1,7 +1,7 @@
 import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../generators/groove';
 import { getFormantProfileForInstrument } from '../elementary/elementaryEngine';
-import type { VoiceRenderContext, InstrumentModule } from './types';
+import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './types';
 
 /** Aerophone renderer for single-reed, double-reed, and edge-tone winds.
  * Identity is supplied by the catalog's measured formant/physical profile;
@@ -10,7 +10,7 @@ import type { VoiceRenderContext, InstrumentModule } from './types';
 export default class WindModule implements InstrumentModule {
   id = 'wind';
 
-  renderVoice(ctx: VoiceRenderContext): any {
+  renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const { trackId, voiceIndex, params, gateSignal, freqSignal, action, dspProfile } = ctx;
     const id = (params.instrumentId ?? '').toLowerCase();
     const profile = getFormantProfileForInstrument(params.instrumentId ?? '', ctx.model);

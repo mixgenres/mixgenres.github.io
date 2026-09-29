@@ -13,19 +13,29 @@
     "moduleResolution": "bundler",
     "isolatedModules": true,
     "moduleDetection": "force",
-    "allowJs": true,
     "jsx": "react-jsx",
     "paths": {
       "@/*": [
         "./*"
       ]
     },
-    "types": ["vite/client"],
+    "types": [
+      "vite/client"
+    ],
     "allowImportingTsExtensions": true,
     "noEmit": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "strict": true
   },
-  "include": ["src", "scripts", "vite.config.ts"],
-  "exclude": ["old", "node_modules", "dist"]
+  "include": [
+    "src",
+    "scripts",
+    "vite.config.ts"
+  ],
+  "exclude": [
+    "old",
+    "node_modules",
+    "dist"
+  ]
 }

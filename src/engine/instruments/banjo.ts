@@ -1,5 +1,5 @@
 import { el } from '@elemaudio/core';
-import type { VoiceRenderContext, InstrumentModule } from './types';
+import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './types';
 import { createDampedStringLoop, fbGainForDecay } from './lib/stringLoop';
 
 /**
@@ -11,7 +11,7 @@ import { createDampedStringLoop, fbGainForDecay } from './lib/stringLoop';
 export default class BanjoModule implements InstrumentModule {
   id = 'banjo';
 
-  renderVoice(ctx: VoiceRenderContext): any {
+  renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
       params, dspProfile, pk, gateSignal, safeFreqSignal, b, decayTime, action,
     } = ctx;

@@ -1,11 +1,11 @@
 import { el } from '@elemaudio/core';
-import type { VoiceRenderContext, InstrumentModule } from './types';
+import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './types';
 import { createDampedStringLoop, fbGainForDecay } from './lib/stringLoop';
 
 export default class GuitarModule implements InstrumentModule {
   id = 'guitar';
 
-  renderVoice(ctx: VoiceRenderContext): any {
+  renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
       voice,
       params,
@@ -50,7 +50,7 @@ export default class GuitarModule implements InstrumentModule {
 
     const broadbandPluck = el.lowpass(el.mul(safeFreqSignal, 4.0), 0.9, el.pinknoise());
 
-    let impulse: any;
+    let impulse: AudioSignal;
     if (isBachata || isBrazilian || isReggae || isSka || isFunk || isCountry) {
       const short = isBachata || isReggae || isSka || isFunk;
       const env = el.adsr(0.00025, short ? 0.009 : 0.015, 0, 0.003, gateSignal);
@@ -110,7 +110,7 @@ export default class GuitarModule implements InstrumentModule {
     const plectrumChoke = el.mul(-0.25, el.mul(el.svf({ mode: 'bandpass' }, 1200, 1.4, el.noise()), el.adsr(0.0001, 0.002, 0, 0.001, gateSignal)));
     impulse = el.add(impulse, plectrumChoke);
 
-    let stringSignal: any;
+    let stringSignal: AudioSignal;
     const baseDelaySignal = el.min(el.const({ value: 4000 }), el.max(el.const({ value: 2 }), el.div(el.sr(), safeFreqSignal)));
     const cutoffMult = construction === 'board'
       ? (2.8 + b * 4.5)
@@ -166,7 +166,7 @@ export default class GuitarModule implements InstrumentModule {
       stringSignal = el.add(el.mul(0.5, stringSignal), el.mul(0.5, folded));
     }
 
-    let bodyOut: any;
+    let bodyOut: AudioSignal;
     if (construction === 'gourd') {
       const highPassed = el.highpass(140, 0.9, stringSignal);
       const m1 = el.svf({ mode: 'bandpass' }, 280, 3.8, highPassed);

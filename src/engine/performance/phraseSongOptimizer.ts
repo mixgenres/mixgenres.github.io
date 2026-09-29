@@ -1,4 +1,5 @@
 import type { Sheet, Voice } from '../generators/arrange';
+import type { ResolvedStyle } from '../../data/styles/schema';
 import type { Performance, PerfNote } from '../sequencing/perform';
 import { getResolvedSectionStyle, phraseSpanBars } from '../generators/arrange';
 import { contractForGenre } from '../../data/styles/contracts';
@@ -29,7 +30,7 @@ export interface PhraseOptimizationReport {
 function clamp(v: number, lo = 0, hi = 1) { return Math.max(lo, Math.min(hi, v)); }
 function dbToLinear(db: number) { return Math.pow(10, db / 20); }
 
-function phraseLengthFor(style: any, genre: string): number {
+function phraseLengthFor(style: ResolvedStyle, genre: string): number {
   const contract = contractForGenre(genre, style);
   const cycle = Math.max(1, Number(contract.cycleLength ?? 1));
   const authored = (style?.melody?.phraseLengthsBars ?? []).map((x: number) => Math.round(Number(x))).filter((x: number) => Number.isFinite(x) && x > 0);
@@ -76,7 +77,7 @@ function phraseTechniqueBudget(role: string, family: string, genre: string, note
   return 0.18;
 }
 
-function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: InstrumentPerformanceProfile, genre: string, style: any, target: StyleCalibrationTarget, phraseStart: number, phraseEnd: number) {
+function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: InstrumentPerformanceProfile, genre: string, style: ResolvedStyle, target: StyleCalibrationTarget, phraseStart: number, phraseEnd: number) {
   if (!notes.length) return { rootHeavy: false, beforeGestures: new Set<string>(), afterGestures: new Set<string>() };
   const beforeGestures = new Set(notes.map(n => GESTURE_NAMES[n.gestureCode] ?? String(n.gestureCode)));
   const role = String(track.role ?? profile.genreProfiles[genre]?.roles?.[0] ?? 'harmony').toLowerCase();
@@ -135,7 +136,7 @@ export function optimizePerformanceByPhraseAndSong(sheet: Sheet, perf: Performan
   for (const region of sheet.regions) {
     const style = getResolvedSectionStyle(sheet, region);
     const genre = region.genre ?? sheet.worldId;
-    const target = styleCalibrationTarget(genre, style?.id, style as any);
+    const target = styleCalibrationTarget(genre, style?.id, style);
     const phraseBars = phraseLengthFor(style, genre);
     const regionNotes = notes.filter(n => n.bar >= region.start && n.bar < region.end);
     for (const track of sheet.tracks as Voice[]) {

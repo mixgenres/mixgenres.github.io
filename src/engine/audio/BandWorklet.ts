@@ -19,6 +19,24 @@ import {
 import { resolveDialect, performanceModeForContext } from '../theory/dialects';
 import { resolveRenderGesture } from './renderGesture';
 import { contractForGenre } from '../../data/styles/contracts';
+import type { AudioSignal } from '../instruments/types';
+
+interface RendererNodeEntry {
+  props: Record<string, unknown>;
+}
+
+interface RendererDelegate {
+  clear(): void;
+  nodeMap: Map<number, RendererNodeEntry>;
+  setProperty(hash: number, property: string, value: number): void;
+  commitUpdates(): void;
+  getPackedInstructions(): { length: number };
+}
+
+interface RendererInternals {
+  _delegate?: RendererDelegate;
+  _sendMessage(instructions: unknown): void;
+}
 
 export function getPolyphonyForTrack(instrumentId: string, role?: string): number {
   const idLower = (instrumentId || '').toLowerCase();
@@ -63,7 +81,7 @@ export class BandWorkletNode {
   private trackSoloMap = new Map<string, boolean>();
   private trackVolumes = new Map<string, number>();
   private trackPans = new Map<string, number>();
-  private trackSignalsCache = new Map<string, { fingerprint: string; signal: { left: any; right: any } }>();
+  private trackSignalsCache = new Map<string, { fingerprint: string; signal: { left: AudioSignal; right: AudioSignal } }>();
   private dirtyTracks = new Set<string>();
 
   // Real-time parameter updates without dynamic graph reconstruction
@@ -72,12 +90,12 @@ export class BandWorkletNode {
   private paramFlushScheduled = false;
 
   private getHashForKey(key: string): number {
-    let h = this.paramHashes.get(key);
-    if (h === undefined) {
-      h = el.const({ key, value: 0 }).hash;
-      this.paramHashes.set(key, h);
-    }
-    return h;
+    const existing = this.paramHashes.get(key);
+    if (existing !== undefined) return existing;
+    const hash = el.const({ key, value: 0 }).hash;
+    if (hash === undefined) throw new Error(`Unable to allocate parameter hash for ${key}`);
+    this.paramHashes.set(key, hash);
+    return hash;
   }
 
   public updateMap(updates: Record<string, number>) {
@@ -111,7 +129,7 @@ export class BandWorkletNode {
   }
 
   private applyParamUpdates(updates: Record<string, number>) {
-    const renderer = (this.core as any)?._renderer;
+    const renderer = (this.core as unknown as { _renderer?: RendererInternals })._renderer;
     if (!renderer || !renderer._delegate) return;
     const delegate = renderer._delegate;
 
@@ -122,6 +140,7 @@ export class BandWorkletNode {
       const hash = this.getHashForKey(key);
       if (delegate.nodeMap.has(hash)) {
         const entry = delegate.nodeMap.get(hash);
+        if (!entry) continue;
         delegate.setProperty(hash, 'value', value);
         entry.props['value'] = value;
         hasUpdates = true;
@@ -360,8 +379,8 @@ export class BandWorkletNode {
     }
 
     const trackSignals: {
-      left: any;
-      right: any;
+      left: AudioSignal;
+      right: AudioSignal;
       trackId?: string;
       instrumentId?: string;
     }[] = [];
@@ -394,7 +413,7 @@ export class BandWorkletNode {
       genreId: this.activeWorldId,
       bpm: 120,
     });
-    this.core.render(masterSig.left, masterSig.right).catch(err => {
+    this.core.render(masterSig.left, masterSig.right).catch((err: unknown) => {
       console.warn('[Elementary] Render error:', err);
     });
 
@@ -476,7 +495,7 @@ export class BandWorkletNode {
     const velScaled = Math.max(0, Math.min(1, (velRaw / 127) * hitGainMultiplier));
     const articulationNorm = Math.max(0, Math.min(1, rendered.articulationNorm));
 
-    const roleGain = (event as any).roleGain ?? params.roleGain ?? getRoleGainLinear(instDef?.acousticProfile?.role || 'comp', this.activeWorldId || 'default', instrumentId);
+    const roleGain = event.roleGain ?? params.roleGain ?? getRoleGainLinear(instDef?.acousticProfile?.role || 'comp', this.activeWorldId || 'default', instrumentId);
     // Keep track gain stable; note velocity/articulation are voice-local.
     params.volume = Math.max(0.01, Math.min(35, baseGain * roleGain));
 
@@ -505,7 +524,7 @@ export class BandWorkletNode {
         bestVIdx = i;
         break;
       }
-      const seq = (v as any).triggerSeq ?? 0;
+      const seq = v.triggerSeq ?? 0;
       if (seq < oldestSeq) {
         oldestSeq = seq;
         bestVIdx = i;
@@ -514,21 +533,20 @@ export class BandWorkletNode {
 
     const voice = voices[bestVIdx];
     voice.note = noteMidi;
-    (voice as any).noteInstanceId = (event as any).noteInstanceId;
-    (voice as any).noteInstanceId = (event as any).noteInstanceId;
+    voice.noteInstanceId = event.noteInstanceId;
     const targetFreq = Math.max(20, event.frequencyHz ?? midiToFreq(noteMidi));
     voice.frequencyHz = targetFreq;
-    (voice as any).baseFrequencyHz = targetFreq;
-    (voice as any).triggerSeq = ++this.voiceSeq;
+    voice.baseFrequencyHz = targetFreq;
+    voice.triggerSeq = ++this.voiceSeq;
     voice.velocity = velScaled;
     voice.gate = 1;
 
     voice.action = rendered.action;
     voice.articulation = rendered.articulationNorm;
     voice.bellowsDirectionCode = event.bellowsDirectionCode;
-    voice.bandoneonButtonId = (event as any).bandoneonButtonId;
-    voice.bandoneonButtonIndex = (event as any).bandoneonButtonIndex;
-    voice.bandoneonSideCode = (event as any).bandoneonSideCode;
+    voice.bandoneonButtonId = event.bandoneonButtonId;
+    voice.bandoneonButtonIndex = event.bandoneonButtonIndex;
+    voice.bandoneonSideCode = event.bandoneonSideCode;
     voice.action = rendered.action;
     voice.excitationType = rendered.excitationType || params.excitationType;
 
@@ -573,11 +591,11 @@ export class BandWorkletNode {
     const roundedMidi = Math.round(midi);
     for (let vIdx = 0; vIdx < voices.length; vIdx++) {
       const v = voices[vIdx];
-      const idMatches = noteInstanceId ? String((v as any).noteInstanceId ?? '') === noteInstanceId : true;
+      const idMatches = noteInstanceId ? String(v.noteInstanceId ?? '') === noteInstanceId : true;
       if (idMatches && (v.note === midi || Math.round(v.note) === roundedMidi) && v.gate === 1) {
         v.gate = 0;
-        if ((v as any).baseFrequencyHz) {
-          v.frequencyHz = (v as any).baseFrequencyHz;
+        if (v.baseFrequencyHz) {
+          v.frequencyHz = v.baseFrequencyHz;
         }
         const pk = `track_${trackId}_voice_${vIdx}`;
         this.queueParamUpdate(`${pk}_gate`, 0);
@@ -651,8 +669,8 @@ export class BandWorkletNode {
 
     const semitones = ((value - 8192) / 8192) * 2;
     const bendRatio = Math.pow(2, semitones / 12);
-    const base = (target.voice as any).baseFrequencyHz ?? target.voice.frequencyHz ?? midiToFreq(target.voice.note);
-    (target.voice as any).baseFrequencyHz = base;
+    const base = target.voice.baseFrequencyHz ?? target.voice.frequencyHz ?? midiToFreq(target.voice.note);
+    target.voice.baseFrequencyHz = base;
     const targetFreq = base * bendRatio;
     target.voice.frequencyHz = targetFreq;
 

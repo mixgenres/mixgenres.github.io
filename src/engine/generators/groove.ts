@@ -1,4 +1,6 @@
 import type { ResolvedStyle } from '../../data/styles/schema';
+import { resolveStyle } from '../../data/styles/resolve';
+import { getCanonicalStyle } from '../../data/styles/registry';
 import { contractForGenre } from '../../data/styles/contracts';
 export type SwingUnit = 8 | 16;
 
@@ -255,12 +257,7 @@ export function grooveSummary(worldId: string): { name: string; description: str
 }
 
 export function grooveFor(worldId: string): GrooveProfile {
-  const contract = contractForGenre(worldId);
-  return grooveForStyle({
-    id: worldId,
-    name: contract.groove.name,
-    contract,
-  } as any);
+  return grooveForStyle(resolveStyle({ genreId: worldId, styleId: getCanonicalStyle(worldId).id }));
 }
 
 export const GROOVE_PROFILES: Record<string, GrooveProfile> = new Proxy({}, {

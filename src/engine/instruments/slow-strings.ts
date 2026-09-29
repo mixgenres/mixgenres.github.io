@@ -1,10 +1,10 @@
 import { el } from '@elemaudio/core';
-import type { VoiceRenderContext, InstrumentModule } from './types';
+import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './types';
 
 export default class SlowStringsModule implements InstrumentModule {
   id = 'slow-strings';
 
-  renderVoice(ctx: VoiceRenderContext): any {
+  renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
       gateSignal,
       safeFreqSignal,

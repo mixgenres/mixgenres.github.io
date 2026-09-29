@@ -1,12 +1,15 @@
-export function compileTracks(trackGroups: any[], _worldId?: string): any[] {
+import type { PerfNote } from './sequencing/perform';
+
+export type TrackGroup = Record<string, unknown>;
+
+export function compileTracks(trackGroups: TrackGroup[], _worldId?: string): TrackGroup[] {
   return trackGroups;
 }
 
-export function generateTiming(notes: any[], _genre: string = ''): any[] {
+export function generateTiming(notes: PerfNote[], _genre: string = ''): Array<PerfNote & { time: number }> {
   return notes.map(note => ({
     ...note,
-    time: note.quantizedTime !== undefined ? note.quantizedTime : (note.time || 0),
-    velocity: note.velocity !== undefined ? note.velocity : 1.0,
-    gestureCode: note.gestureCode,
+    time: note.time,
+    velocity: note.vel,
   }));
 }

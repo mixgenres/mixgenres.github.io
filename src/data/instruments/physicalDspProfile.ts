@@ -544,14 +544,23 @@ const EXACT: Record<string, Partial<InstrumentDSPProfile>> = {
   tabla: membrane({ id: 'tabla', name: 'Indian Tabla Pair', family: 'hand-drums', voicing: 'unpitched', bodyConstruction: 'skin-faced', excitationType: 'fingerpad', techniques: { articulations: [], techniqueMethods: [], playingStyles: [] } }),
 };
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
 function deepMergeDSP<T>(base: T, patch: Partial<T>): T {
-  if (!patch || typeof patch !== 'object') return patch as T;
-  const out: any = Array.isArray(base) ? [...(base as any)] : { ...(base as any) };
-  for (const [key, value] of Object.entries(patch as any)) {
+  if (!isRecord(patch)) return patch;
+  const out: Record<string, unknown> = isRecord(base) ? { ...base } : {};
+  for (const [key, value] of Object.entries(patch)) {
     if (value === undefined) continue;
-    if (Array.isArray(value)) out[key] = value;
-    else if (value && typeof value === 'object' && out[key] && typeof out[key] === 'object' && !Array.isArray(out[key])) out[key] = deepMergeDSP(out[key], value);
-    else out[key] = value;
+    const current = out[key];
+    if (Array.isArray(value)) {
+      out[key] = value;
+    } else if (isRecord(value) && isRecord(current)) {
+      out[key] = deepMergeDSP(current, value);
+    } else {
+      out[key] = value;
+    }
   }
   return out as T;
 }

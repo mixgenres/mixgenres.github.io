@@ -1,6 +1,6 @@
 import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../generators/groove';
-import type { VoiceRenderContext, InstrumentModule } from './types';
+import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './types';
 
 /**
  * ZapateadoModule
@@ -15,7 +15,7 @@ import type { VoiceRenderContext, InstrumentModule } from './types';
 export default class ZapateadoModule implements InstrumentModule {
   id = 'zapateado';
 
-  renderVoice(ctx: VoiceRenderContext): any {
+  renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
       trackId,
       voiceIndex,

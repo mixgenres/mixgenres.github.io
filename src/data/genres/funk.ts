@@ -1,4 +1,4 @@
-import type { GenreWorld } from '../../types';
+import type { GenreWorld, DrumRuleStep, DrumRuleStickState } from '../../types';
 
 export const FUNK_WORLD: GenreWorld = {
   "id": "funk",
@@ -9,7 +9,7 @@ export const FUNK_WORLD: GenreWorld = {
   "description": "The masters of groove: \"The One\"",
   rhythm: { syncopation: 0.9, swing: 0.15, pocket: 'behind', pocketDepth: 12 },
   drumRules: {
-    evaluateStep: (step: any, stickState: any) => {
+    evaluateStep: (step: DrumRuleStep, stickState?: DrumRuleStickState) => {
       const events = [];
       if (step.kick) events.push({ type: 'kick', time: step.time, velocity: step.velocity });
 

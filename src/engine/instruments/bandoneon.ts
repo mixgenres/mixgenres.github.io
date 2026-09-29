@@ -1,6 +1,6 @@
 import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../generators/groove';
-import type { VoiceRenderContext, InstrumentModule } from './types';
+import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './types';
 
 /**
  * BandoneonModule
@@ -16,7 +16,7 @@ export default class BandoneonModule implements InstrumentModule {
   id = 'bandoneon';
   ownedDspSections = ['coupledResonators', 'excitationDynamics.kneeDropImpact'];
 
-  renderVoice(ctx: VoiceRenderContext): any {
+  renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
       trackId,
       voiceIndex,
@@ -130,10 +130,10 @@ export default class BandoneonModule implements InstrumentModule {
     const reedPressure = el.tanh(el.mul(el.add(1.0, el.mul(0.85, basePressure)), reedPressureRaw));
 
     // 6. Resonant Wooden Air Chamber & Bisonoric Formants (Owned coupledResonators)
-    let chamberAudio: any;
+    let chamberAudio: AudioSignal;
     const modes = dspProfile?.coupledResonators?.bodyModes;
     if (modes && modes.length > 0) {
-      const modeSignals: any[] = [];
+      const modeSignals: AudioSignal[] = [];
       for (let i = 0; i < Math.min(4, modes.length); i++) {
         const m = modes[i];
         const modeFreq = Math.min(19000, Math.max(30, ctx.freq * m.ratio * directionFormant));

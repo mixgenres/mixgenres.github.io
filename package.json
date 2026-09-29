@@ -36,10 +36,8 @@
     "@vitejs/plugin-react": "^5.0.4",
     "lucide-react": "^0.546.0",
     "motion": "^12.23.24",
-    "node-web-audio-api": "^2.2.0",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
-    "tone": "^15.1.22",
     "vite": "^6.2.3"
   },
   "devDependencies": {

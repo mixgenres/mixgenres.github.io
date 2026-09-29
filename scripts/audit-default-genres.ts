@@ -7,6 +7,8 @@ import { compileWholeSong } from '../src/engine/compiler/wholeSongCompiler';
 import { getInstrumentPerformanceProfile } from '../src/data/performance/instrumentPerformanceProfiles';
 import { contractForGenre } from '../src/data/styles/contracts';
 import { parseChord } from '../src/engine/theory/theory';
+import type { Sheet } from '../src/engine/generators/arrange';
+import type { Region } from '../src/types';
 
 const REFERENCES: Record<string, string> = {
   afrobeats:'Essence — Wizkid feat. Tems', bachata:'Obsesión — Aventura', blues:'Sweet Home Chicago — Robert Johnson / Blues standard',
@@ -22,7 +24,7 @@ const REFERENCES: Record<string, string> = {
 };
 
 function mean(xs:number[]){return xs.length?xs.reduce((a,b)=>a+b,0)/xs.length:0;}
-function phraseBars(sheet:any, region:any){
+function phraseBars(sheet: Sheet, region: Region){
   const style=getResolvedSectionStyle(sheet,region); const cycle=Math.max(1,Number(style.contract?.cycleLength??1));
   const candidates=(style.melody?.phraseLengthsBars??[]).filter((x:number)=>x%cycle===0);
   return Math.max(cycle,Number(candidates[0]??cycle));
@@ -30,11 +32,11 @@ function phraseBars(sheet:any, region:any){
 
 mkdirSync('audit', {recursive:true});
 const genres=Object.keys(GENRE_NAMES);
-const report:any={generatedAt:new Date().toISOString(), referenceMethod:'structural/sonic proxy targets; no reference audio is embedded', genres:[]};
+const report: { generatedAt: string; referenceMethod: string; genres: Array<Record<string, unknown>> }={generatedAt:new Date().toISOString(), referenceMethod:'structural/sonic proxy targets; no reference audio is embedded', genres:[]};
 for(const genre of genres){
   const sheet=makeSheet(genre); const perf=compileWholeSong(sheet); const style=getCanonicalStyle(genre); const contract=contractForGenre(genre,style);
-  const tracks=sheet.tracks.map((t:any)=>{
-    const p=getInstrumentPerformanceProfile(t.instrumentId); const ns=perf.notes.filter(n=>n.trackId===t.id); const role=String(t.role??'');
+  const tracks=sheet.tracks.map(t=>{
+    const p=getInstrumentPerformanceProfile(t.instrumentId ?? t.instrument); const ns=perf.notes.filter(n=>n.trackId===t.id); const role=String(t.role??'');
     const rootRatio=role==='bass' ? mean(ns.map(n=>{const c=sheet.measures[n.bar]?.chord; return c && n.midi%12===(parseChord(c).rootPc??0)?1:0})) : undefined;
     const gestures=new Set(ns.map(n=>String(n.gestureCode)));
     const lowRatio=role==='bass'?mean(ns.map(n=>n.midi<43?1:0)):undefined;
@@ -46,7 +48,7 @@ for(const genre of genres){
     if(role && p.genreProfiles[genre] && !p.genreProfiles[genre].idiomatic) warnings.push('instrument genre profile marked non-idiomatic');
     return {trackId:t.id,instrumentId:t.instrumentId,role,noteCount:ns.length,meanVelocity:Number(mean(ns.map(n=>n.vel)).toFixed(2)),rootRatio:rootRatio===undefined?undefined:Number(rootRatio.toFixed(3)),lowRegisterRatio:lowRatio===undefined?undefined:Number(lowRatio.toFixed(3)),gestureDiversity:gestures.size,evidence:p.evidence,warnings};
   });
-  report.genres.push({genre,name:GENRE_NAMES[genre],defaultStyleId:style.id,reference:REFERENCES[genre]??null,bpm:perf.bars[0]?.bpm,durationSec:Number(perf.duration.toFixed(2)),notes:perf.notes.length,tracks,phraseBars:Math.max(...sheet.regions.map(r=>phraseBars(sheet,r))),cycleLength:contract.cycleLength,bassForward:contract.timbreSpace.mixCharacter?.bassForward,warnings:tracks.flatMap((t:any)=>t.warnings.map((w:string)=>`${t.instrumentId}: ${w}`))});
+  report.genres.push({genre,name:GENRE_NAMES[genre],defaultStyleId:style.id,reference:REFERENCES[genre]??null,bpm:perf.bars[0]?.bpm,durationSec:Number(perf.duration.toFixed(2)),notes:perf.notes.length,tracks,phraseBars:Math.max(...sheet.regions.map(r=>phraseBars(sheet,r))),cycleLength:contract.cycleLength,bassForward:contract.timbreSpace.mixCharacter?.bassForward,warnings:tracks.flatMap((t: { warnings: string[]; instrumentId: string | undefined })=>t.warnings.map((w:string)=>`${t.instrumentId}: ${w}`))});
 }
 writeFileSync('audit/all-default-genres-audit.json',JSON.stringify(report,null,2));
 console.log(`audited ${report.genres.length} default genres`);

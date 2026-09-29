@@ -1,10 +1,10 @@
 import { el } from '@elemaudio/core';
-import type { VoiceRenderContext, InstrumentModule } from './types';
+import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './types';
 
 export default class FreeReedModule implements InstrumentModule {
   id = 'free-reed';
 
-  renderVoice(ctx: VoiceRenderContext): any {
+  renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const { params, gateSignal, freqSignal, action, dspProfile } = ctx;
     const id = (params.instrumentId ?? '').toLowerCase();
     const harmonica = id === 'harmonica';

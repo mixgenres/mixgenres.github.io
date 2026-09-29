@@ -130,16 +130,20 @@ function intentOf(a: string): GestureSpec['intent'] {
 }
 
 function gestureSpec(d: InstrumentDef, id: string): GestureSpec {
-  const p = d.performanceArticulations as any;
+  const p = d.performanceArticulations;
   const s = id.toLowerCase();
   const family = familyOf(d);
   const intent = intentOf(id);
-  const explicit = p?.[id] ?? p?.[s.replace(/-/g,'')] ?? undefined;
+  const key = id as keyof NonNullable<InstrumentDef['performanceArticulations']>;
+  const normalizedKey = s.replace(/-/g, '') as keyof NonNullable<InstrumentDef['performanceArticulations']>;
+  const explicit = p?.[key] ?? p?.[normalizedKey] ?? undefined;
+  const explicitTransientSharpness = explicit && 'transientSharpness' in explicit ? explicit.transientSharpness : undefined;
+  const explicitDampingFactor = explicit && 'dampingFactor' in explicit ? explicit.dampingFactor : undefined;
   const attack =
-    explicit?.transientSharpness ??
+    explicitTransientSharpness ??
     (d.dspProfile?.excitationDynamics.attackCollision ?? d.physicalModel?.parameters?.transientSharpness ?? 0.5);
   const damping =
-    explicit?.dampingFactor ??
+    explicitDampingFactor ??
     (d.acousticProfile?.ring ? Math.max(0, Math.min(1, 1 - d.acousticProfile.ring / 5)) : 0.35);
   const pressure = d.dspProfile?.excitationDynamics.pressureSensitivity ?? d.physicalModel?.parameters?.bowPressure ?? 0.5;
   const pitchMotion = /arrastre|slide|bend|fall|doit|scoop|gliss|portamento/i.test(s) ? 1 : 0;

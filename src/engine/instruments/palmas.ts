@@ -1,6 +1,6 @@
 import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../generators/groove';
-import type { VoiceRenderContext, InstrumentModule } from './types';
+import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './types';
 
 /**
  * PalmasModule
@@ -14,7 +14,7 @@ import type { VoiceRenderContext, InstrumentModule } from './types';
 export default class PalmasModule implements InstrumentModule {
   id = 'palmas';
 
-  renderVoice(ctx: VoiceRenderContext): any {
+  renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
       trackId,
       voiceIndex,

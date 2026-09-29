@@ -5,14 +5,20 @@ export interface SequenceEvent {
   instrument?: string;
   pitch?: number;
   midi?: number;
-  metadata?: any;
-  [key: string]: any;
+  metadata?: Record<string, unknown>;
+  [key: string]: unknown;
+}
+
+export interface GenreTimingProfile {
+  microTiming?: {
+    instrumentRoles?: Record<string, 'laid_back' | 'pushed' | 'rubato' | 'strict'>;
+  };
 }
 
 export interface SequencerContext {
   bpmToSeconds: number;
   rng: { float(): number };
-  genre?: any;
+  genre?: GenreTimingProfile;
 }
 
 export class TimingCalculator {

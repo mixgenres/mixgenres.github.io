@@ -15,7 +15,7 @@ for (const style of ALL_STYLES) {
     const sheet = makeSheet({ genreId: style.primaryGenre, styleId: style.id });
     const performance = compileWholeSong(sheet);
     const blob = await renderPerformanceToMp3(performance, {
-      trackInstruments: new Map(sheet.tracks.map(t => [t.id, t.instrumentId])),
+      trackInstruments: new Map(sheet.tracks.flatMap(t => t.instrumentId ? [[t.id, t.instrumentId] as const] : [])),
       worldId: sheet.worldId,
       styleId: sheet.styleId,
     });

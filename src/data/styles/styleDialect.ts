@@ -56,9 +56,9 @@ function makeStylePattern(style: SongStyle, instrumentId: string, index: number,
     worldId: style.primaryGenre, styleIds: [style.id], name: `${style.name} ${instrumentId} cell`,
     family: 'style-dialect', category: 'groove', description: `Generated ${style.name} role dialect`,
     tags: [style.primaryGenre, 'style-dialect'], approaches: [role === 'bass' ? 'walking' : role === 'percussion' ? 'groove' : role === 'harmony' ? 'comping' : 'phrase'],
-    scopes: ['world'] as any, roles: [role], meter: style.rhythm?.meter ?? '4/4', cycleLength: 1,
+    scopes: ['region'], roles: [role], meter: style.rhythm?.meter ?? '4/4', cycleLength: 1,
     subdivisions: 16, onsetGrid: cell, variants: [], supportedEnergy: [1,2,3,4,5], enabled: true,
-  } as MusicalPattern;
+  };
 }
 
 function instrumentRole(instrumentId: string): Role | string {
@@ -189,22 +189,17 @@ export function applyStyleDialect(style: SongStyle, index: number): SongStyle {
   };
   style.harmony = {
     ...(style.harmony ?? {}),
-    model: (theory.harmonicModel ?? base.harmonyModel ?? style.harmony?.model ?? 'functional') as any,
-    modePolicy: (theory.defaultScale ?? base.modePolicy ?? style.harmony?.modePolicy ?? 'major') as any,
+    model: theory.harmonicModel ?? base.harmonyModel ?? style.harmony?.model ?? 'functional',
+    modePolicy: theory.defaultScale ?? base.modePolicy ?? style.harmony?.modePolicy ?? 'major',
     progressionTemplates: (base.progressions.length ? base.progressions : theory.progressions).map(value => ({w:1,value})),
     harmonicRhythm: theory.harmonicRhythm ?? base.harmonicRhythm ?? style.harmony?.harmonicRhythm,
-    bassMotion: theory.bass.style as any ?? base.bassMotion as any ?? style.harmony?.bassMotion,
-    theoryCadences: theory.cadences,
-    theoryChordScales: theory.chordScales,
-  } as any;
+    bassMotion: theory.bass.style ?? base.bassMotion ?? style.harmony?.bassMotion,
+  };
   style.melody = {
     ...(style.melody ?? {}),
     contourArchetypes: Array.from(new Set([...theory.melody.contour, ...base.contours])),
     phraseLengthsBars: theory.melody.phraseBars.length ? theory.melody.phraseBars : [4,8],
-    targetDegrees: theory.melody.targetDegrees,
-    approachDegrees: theory.melody.approachDegrees,
-    scaleVocabulary: theory.melody.scale,
-  } as any;
+  };
   style.arrangement = {
     ...(style.arrangement ?? {}),
     doublingRules: base.arrangement,

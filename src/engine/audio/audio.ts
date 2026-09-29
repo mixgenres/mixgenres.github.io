@@ -56,7 +56,7 @@ export async function ensureSynth(): Promise<BandWorkletNode> {
   initPromise = (async () => {
     try {
       if (!ctx) {
-        const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+        const AudioCtx = window.AudioContext;
         ctx = new AudioCtx();
       }
       if (ctx.state === 'suspended') {
@@ -85,7 +85,7 @@ export async function ensureSynth(): Promise<BandWorkletNode> {
 export async function startAudio(): Promise<AudioContext | null> {
   try {
     if (!ctx) {
-      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      const AudioCtx = window.AudioContext;
       ctx = new AudioCtx();
     }
     if (ctx.state === 'suspended') {
@@ -155,7 +155,7 @@ export function createSink(): TransportSink {
         cyclePhase: 0,
         luthierObjectId: instrumentId,
         trackId: String(trackId),
-        action: { type: action as any, force: vel01, contactPoint, mass },
+        action: { type: action as import('./../theory/CulturalAcousticEvent').ExcitationActionType, force: vel01, contactPoint, mass },
         tuning: { baseFrequencyHz: freqHz, culturalMicrotoneCents: tuningSystem.getCentsOffset(midi) },
         spatialPosition: { x: 0, y: 0, z: 0 },
         luthier,
@@ -170,7 +170,7 @@ export function createSink(): TransportSink {
         bandoneonButtonIndex,
         bandoneonSideCode,
         roleGain,
-      } as any, time);
+      }, time);
     },
     noteOff(trackId, midi, time, noteInstanceId) {
       // Releases sustain-capable voices (bowed/reed/wind/held synth); a
@@ -281,14 +281,14 @@ export function setMasterVolume(value: number) {
   void bandWorklet?.setVolume(value);
 }
 
-import { renderPerformanceToMp3 } from './offlineRender';
+import { renderPerformanceToMp3, type Mp3RenderOptions } from './offlineRender';
 
 export async function renderSongToMp3(
   perf: Performance,
-  optionsOrProgress?: any,
+  optionsOrProgress?: Omit<Mp3RenderOptions, 'trackInstruments'> | ((frac: number) => void),
   onProgress?: (frac: number) => void,
 ): Promise<Blob> {
-  let options: any = {};
+  let options: Omit<Mp3RenderOptions, 'trackInstruments'> = {};
   let progressCb = onProgress;
   if (typeof optionsOrProgress === 'function') {
     progressCb = optionsOrProgress;

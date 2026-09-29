@@ -1,6 +1,6 @@
 import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../generators/groove';
-import type { VoiceRenderContext, InstrumentModule } from './types';
+import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './types';
 import { createDampedStringLoop, fbGainForDecay } from './lib/stringLoop';
 
 /**
@@ -15,7 +15,7 @@ import { createDampedStringLoop, fbGainForDecay } from './lib/stringLoop';
 export default class RequintoModule implements InstrumentModule {
   id = 'requinto';
 
-  renderVoice(ctx: VoiceRenderContext): any {
+  renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
       trackId,
       voiceIndex,
@@ -63,7 +63,7 @@ export default class RequintoModule implements InstrumentModule {
     // 4. Púa (Pick) & Excitation Impulse Modeling
     // High-tension nylon produces a bright, sharp attack transient
     const broadbandPluck = el.lowpass(el.mul(vibratingFreq, 4.5), 0.9, el.pinknoise());
-    let impulse: any;
+    let impulse: AudioSignal;
 
     if (isRasgueado) {
       // 5-finger rapid strum fan

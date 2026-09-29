@@ -1,6 +1,6 @@
 import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../generators/groove';
-import type { VoiceRenderContext, InstrumentModule } from './types';
+import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './types';
 import { getFormantProfileForInstrument } from '../elementary/elementaryEngine';
 import { INSTRUMENTS_BY_ID } from '../../data/instruments';
 
@@ -16,7 +16,7 @@ import { INSTRUMENTS_BY_ID } from '../../data/instruments';
 export default class TrumpetModule implements InstrumentModule {
   id = 'trumpet';
 
-  renderVoice(ctx: VoiceRenderContext): any {
+  renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
       trackId,
       voiceIndex,
@@ -68,7 +68,7 @@ export default class TrumpetModule implements InstrumentModule {
 
     // 3. Lip-Reed Excitation with Shockwave Steepening
     // Lip oscillation generates a rich harmonic spectrum
-    let lipBuzz: any = el.add(
+    let lipBuzz: AudioSignal = el.add(
       el.mul(0.62, el.blepsaw(safeDynamicFreqSignal)), 
       el.mul(0.38, el.blepsquare(safeDynamicFreqSignal))
     );

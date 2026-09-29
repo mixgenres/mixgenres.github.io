@@ -157,7 +157,7 @@ export function getFormStep(stepKey: string, worldId: string): FormStep | undefi
   return form.steps.find(s => s.key === stepKey || s.kind === stepKey);
 }
 
-export const SECTION_KINDS: SectionType[] = Array.from(new Set(Object.values(GENRE_FORMS).flatMap((f: any) => f.steps.map((s: any) => s.kind)))) as SectionType[];
+export const SECTION_KINDS: SectionType[] = Array.from(new Set(Object.values(GENRE_FORMS).flatMap(f => f.steps.map(s => s.kind)))) as SectionType[];
 
 const BAR_CHOICES = [2, 4, 8, 12, 16, 24, 32];
 export { BAR_CHOICES };
@@ -365,8 +365,8 @@ export function affinity(
   const explicitTargets = new Set([...(p.instruments ?? []).map(String), ...(p.compatibleInstruments ?? []).map(String)]);
   const instrumentMatch = [...explicitTargets].some(k => kinds.has(k));
   const explicitMismatch = explicitTargets.size > 0 && !instrumentMatch;
-  const roleMatch = p.roles.some(r => r === voice.role || p.compatibleRoles?.includes(voice.role as any) || kinds.has(r));
-  const vocalMismatch = kinds.has('voice') && !p.roles.includes('voice' as any) && !p.canCrossRole;
+  const roleMatch = p.roles.some(r => r === voice.role || p.compatibleRoles?.includes(voice.role) || kinds.has(r));
+  const vocalMismatch = kinds.has('voice') && !p.roles.includes('voice') && !p.canCrossRole;
 
   const daring = Math.max(0, Math.min(1, adventure));
   let score = p.worldId === worldId ? 50 : -30 + daring * 50;
@@ -442,7 +442,7 @@ function synthesizeBoundaryVariant(
 
   // Dembow fill gesture
   if (phraseRole === 'cadence' && gestures['dembow-fill']?.probability) {
-    const isDrums = p.roles.includes('drums' as any) || p.roles.includes('percussion' as any);
+    const isDrums = p.roles.includes('drums') || p.roles.includes('percussion');
     if (isDrums) {
       return {
         id: `${p.id}-dembow-fill`, parentPatternId: p.id,
@@ -457,7 +457,7 @@ function synthesizeBoundaryVariant(
 
   // Tango arrastre gesture (pickup anticipation on step 14 or 15)
   if (phraseRole === 'cadence' && gestures['arrastre']?.probability && gestures['arrastre']?.probability !== 0) {
-    const isBassOrPiano = p.roles.includes('bass' as any)
+    const isBassOrPiano = p.roles.includes('bass')
       || (p.instruments ?? []).some(id => /piano|bandoneon/i.test(String(id)))
       || (p.compatibleInstruments ?? []).some(id => /piano|bandoneon/i.test(String(id)));
     if (isBassOrPiano) {
@@ -652,9 +652,11 @@ function mergeArticulations(p: MusicalPattern, v?: PatternVariant): string[] {
 }
 
 // Tier 1 Arrangement Cell Cache
+type PatternDetails = NonNullable<Measure['patternDetailsByTrack']>[string];
+
 interface CachedArrangementCell {
   fingerprint: string;
-  detailsByBar: (Measure['patternDetailsByTrack'][string] | undefined)[];
+  detailsByBar: (PatternDetails | undefined)[];
 }
 
 const arrangementCellDetailsCache = new Map<string, CachedArrangementCell>();
@@ -746,7 +748,7 @@ export function rebuild(sheet: Sheet): Sheet {
     const interaction = arrangementContext[r.id];
 
     // Compute or retrieve cached pattern details for each track in this region
-    const trackBarDetails = new Map<string, (Measure['patternDetailsByTrack'][string] | undefined)[]>();
+    const trackBarDetails = new Map<string, (PatternDetails | undefined)[]>();
 
     for (const track of sheet.tracks) {
       const basePatternId = byTrack[track.id];
@@ -774,7 +776,7 @@ export function rebuild(sheet: Sheet): Sheet {
       }
 
       // Compute fresh bar details for this cell
-      const detailsByBar: (Measure['patternDetailsByTrack'][string] | undefined)[] = [];
+      const detailsByBar: (PatternDetails | undefined)[] = [];
       const isRhythm = ['bass', 'drums', 'comp'].includes(track.role);
 
       for (let i = 0; i < bars; i++) {
@@ -807,7 +809,7 @@ export function rebuild(sheet: Sheet): Sheet {
                 else score += 14;
                 if (base && p.family === base.family) score += 12;
                 if (base && p.category === base.category) score += 6;
-                if (p.sectionUsage?.includes(r.kind as any)) score += 5;
+                if (p.sectionUsage?.includes(r.kind)) score += 5;
                 if (p.phrasePosition?.includes((i % phraseSpanBars(getResolvedSectionStyle(sheet, r).contract.cycleLength)) === 0 ? 'start' : 'middle')) score += 2;
                 return { p, score: score + hash(`${basePatternId}:${p.id}:${r.id}`, phrase) * 3 };
               })
@@ -859,7 +861,7 @@ export function rebuild(sheet: Sheet): Sheet {
         const rawAccents = v?.accentProfile ?? p.accentProfile;
         const rawDurations = v?.durationGrid ?? p.durationGrid;
         const rawMicro = v?.microtimingOffset;
-        const candidateHitTypes = (v as any)?.hitGrid ?? p.hitGrid;
+        const candidateHitTypes = v?.hitGrid ?? p.hitGrid;
         const rawHitTypes = candidateHitTypes && candidateHitTypes.length === rawOnsets.length
           ? candidateHitTypes
           : undefined;
@@ -885,7 +887,7 @@ export function rebuild(sheet: Sheet): Sheet {
           lens,
           partEnergy,
           perf,
-        } as any);
+        });
       }
 
       arrangementCellDetailsCache.set(cellKey, {
@@ -952,7 +954,7 @@ export function setKind(sheet: Sheet, regionId: string, formKey: string): Sheet 
     ...sheet,
     regions: sheet.regions.map(r => (r.id === regionId ? {
       ...r,
-      kind: step.kind as any,
+      kind: step.kind,
       formKey: step.key,
       formLabel: step.label,
       intensity: step.intensity,
@@ -1155,7 +1157,7 @@ export function setInstrument(sheet: Sheet, trackId: string, instrumentId: strin
   const def = instrument(instrumentId);
   const newVoice = {
     ...(sheet.tracks.find(t => t.id === trackId) as Voice),
-    instrumentId, instrument: def.name, name: def.name, kind: instrumentId as any, role: roleForInstrument(instrumentId)
+    instrumentId, instrument: def.name, name: def.name, kind: instrumentId, role: roleForInstrument(instrumentId)
   };
   
   const tracks = sheet.tracks.map(t => t.id === trackId ? newVoice : t) as Voice[];
@@ -1212,7 +1214,7 @@ function rankInstrumentsForWorld(worldId: string, targetRole?: string, styleId?:
     .map(def => {
       const fakeVoice = {
         id: 'candidate', instrumentId: def.id, name: def.name, instrument: def.name,
-        role: roleForInstrument(def.id), kind: def.id as any,
+        role: roleForInstrument(def.id), kind: def.id,
         muted: false, volume: 0.85, lensIds: [], spotlight: 'auto',
       } as Voice;
       const best = (PATTERNS_BY_WORLD[worldId] || [])
@@ -1261,7 +1263,7 @@ function patternCandidatesForVoice(
       const behavioralFit = approachFit(p, approach);
       if (approach && behavioralFit > 0) n += behavioralFit;
       if (!Number.isFinite(n)) return { p, score: -999 };
-      if (p.sectionUsage?.includes(sectionKind as any)) n += 11;
+      if (p.sectionUsage?.includes(sectionKind)) n += 11;
       if (allowedIds) {
         if (allowedIds.has(p.id)) n += 20;
         else n -= 15;
@@ -1307,7 +1309,7 @@ export function randomizeInstruments(sheet: Sheet, repickPatterns = true): Sheet
   const tracks = sheet.tracks.map((t, i) => {
     const id = selected[i] ?? t.instrumentId;
     const def = instrument(id);
-    return { ...t, instrumentId: id, instrument: def.name, name: def.name, kind: id as any, role: roleForInstrument(id) };
+    return { ...t, instrumentId: id, instrument: def.name, name: def.name, kind: id, role: roleForInstrument(id) };
   }) as Voice[];
 
   // Re-pick patterns after an instrument swap: a new instrument deserves its
@@ -1643,7 +1645,7 @@ export function unsilenceVoiceInSection(sheet: Sheet, trackId: string, regionId:
     const region = sheet.regions.find(r => r.id === regionId);
     const taken = new Set(Object.values(sheet.arrangement[regionId] ?? {}));
     pId = suggestPattern(voice, region?.genre ?? sheet.worldId, sheet.tracks.length * 17 + 5, String(region?.kind ?? 'verse'), taken, sheet.energies?.[regionId]?.[voice.id], region ? getSectionStyleId(sheet, region) : undefined)
-      ?? ALL_PATTERNS.find(p => p.roles.includes(voice.role as any))?.id
+      ?? ALL_PATTERNS.find(p => p.roles.includes(voice.role))?.id
       ?? ALL_PATTERNS[0]?.id;
   }
   const arrangement = { ...sheet.arrangement };
@@ -1664,7 +1666,7 @@ export function unsilenceVoiceInAll(sheet: Sheet, trackId: string): Sheet {
     if (!pId) {
       const taken = new Set(Object.values(arrangement[r.id] ?? {}));
       pId = suggestPattern(voice, r.genre ?? sheet.worldId, ri * 31 + sheet.tracks.length * 13 + 7, String(r.kind), taken, sheet.energies?.[r.id]?.[voice.id], getSectionStyleId(sheet, r))
-        ?? ALL_PATTERNS.find(p => p.roles.includes(voice.role as any))?.id
+        ?? ALL_PATTERNS.find(p => p.roles.includes(voice.role))?.id
         ?? ALL_PATTERNS[0]?.id;
     }
     arrangement[r.id] = { ...(arrangement[r.id] ?? {}), [trackId]: pId };
@@ -1806,7 +1808,7 @@ export function addVoice(
   while (sheet.tracks.some(t => t.id === id)) id = `v${sheet.tracks.length + 1}`;
   const voice: Voice = {
     id, instrumentId, name: def.name, instrument: def.name,
-    role: roleForInstrument(instrumentId), kind: instrumentId as any,
+    role: roleForInstrument(instrumentId), kind: instrumentId,
     muted: false, volume: 0.85, lensIds: [], spotlight: 'auto',
   };
   const arrangement = { ...sheet.arrangement };
@@ -1972,7 +1974,7 @@ export function makeSheet(
     const def = instrument(instrumentId);
     return {
       id: `v${i}`, instrumentId, name: def.name, instrument: def.name,
-      role: roleForInstrument(instrumentId), kind: instrumentId as any,
+      role: roleForInstrument(instrumentId), kind: instrumentId,
       muted: false, volume: calibratedTrackVolume(genreId, instrumentId, roleForInstrument(instrumentId)), lensIds: [], spotlight: 'auto',
     };
   });

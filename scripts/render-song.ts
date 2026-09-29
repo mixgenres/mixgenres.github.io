@@ -21,7 +21,7 @@ async function main() {
   }
   console.error(`[${genreId}] notes: ${perf.notes.length}, duration: ${perf.duration.toFixed(1)}s${maxSeconds ? ' (excerpt)' : ''}`);
 
-  const trackInstruments = new Map(sheet.tracks.map(t => [t.id, t.instrumentId]));
+  const trackInstruments = new Map(sheet.tracks.flatMap(t => t.instrumentId ? [[t.id, t.instrumentId] as const] : []));
 
   const blob = await renderPerformanceToMp3(
     perf,

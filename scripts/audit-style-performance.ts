@@ -24,6 +24,7 @@ for (const styleDef of ALL_STYLES) {
     for (const track of sheet.tracks) {
       const notes = perf.notes.filter(n => n.trackId === track.id);
       if (!notes.length) continue;
+      if (!track.instrumentId) continue;
       const profile = getInstrumentPerformanceProfile(track.instrumentId);
       const regionStyle = styleByRegion.get(sheet.regions[0]?.id) ?? style;
       const expectation = styleTechniqueExpectation(regionStyle, profile, String(track.role ?? 'comp'));

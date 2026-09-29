@@ -1,5 +1,5 @@
 import { el } from '@elemaudio/core';
-import type { VoiceRenderContext } from './types';
+import type { VoiceRenderContext, AudioSignal } from './types';
 
 /**
  * Small, genre-aware finishing stage for the existing instrument modules.
@@ -7,7 +7,7 @@ import type { VoiceRenderContext } from './types';
  * attack/body/brightness/low-end behavior so an authored instrument does not
  * collapse to the neutral patch when a genre lacks a bespoke DSP override.
  */
-export function applyGenreInstrumentTreatment(audio: any, ctx: VoiceRenderContext, family?: string): any {
+export function applyGenreInstrumentTreatment(audio: AudioSignal, ctx: VoiceRenderContext, family?: string): AudioSignal {
   const g = ctx.genreDialect;
   const inst = (ctx.params.instrumentId ?? '').toLowerCase();
   const fam = String(family ?? '').toLowerCase();

@@ -1,4 +1,5 @@
 import { Sheet } from '../generators/arrange';
+import type { MusicalPattern, Role } from '../../types';
 import type { Region } from '../../types';
 import { PATTERNS_BY_ID } from '../../data/genres';
 import { VoiceProfile } from '../theory/instrumentProfile';
@@ -145,13 +146,13 @@ function energyForRegion(region: Region): 1 | 2 | 3 | 4 | 5 {
   return energyOf(region);
 }
 
-function authoredTransitionPattern(style: any, worldId: string, role: string): any | undefined {
+function authoredTransitionPattern(style: import('../../data/styles/schema').ResolvedStyle, worldId: string, role: string): MusicalPattern | undefined {
   if (!style?.contract?.transitionGrammar?.authoredPriority) return undefined;
-  const candidates = Object.values(PATTERNS_BY_ID) as any[];
+  const candidates = Object.values(PATTERNS_BY_ID);
   return candidates
     .filter(p => p.worldId === worldId)
     .filter(p => p.category === 'fill' || p.category === 'transition' || p.tags?.some((t: string) => /fill|transition/i.test(t)))
-    .filter(p => !p.roles?.length || p.roles.includes(role) || (role === 'percussion' && p.roles.includes('drums')))
+    .filter(p => !p.roles?.length || p.roles.includes(role as Role) || (role === 'percussion' && p.roles.includes('drums')))
     .filter(p => !style.patterns?.allowed?.length || style.patterns.allowed.includes(p.id))
     .sort((a, b) => {
       const af = a.category === 'fill' || a.tags?.some((t: string) => /fill/i.test(t)) ? 1 : 0;

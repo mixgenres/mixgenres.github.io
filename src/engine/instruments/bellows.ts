@@ -1,11 +1,11 @@
 import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../generators/groove';
-import type { VoiceRenderContext, InstrumentModule } from './types';
+import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './types';
 
 export default class BellowsModule implements InstrumentModule {
   id = 'bellows';
 
-  renderVoice(ctx: VoiceRenderContext): any {
+  renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
       trackId,
       voiceIndex,
@@ -95,7 +95,7 @@ export default class BellowsModule implements InstrumentModule {
       el.mul(0.045 + (dspProfile?.mechanicalArtifacts.bellowsNoise ?? 0) * 0.16, gateSignal)
     );
 
-    let bellowsImpact: any = el.const({ value: 0 });
+    let bellowsImpact: AudioSignal = el.const({ value: 0 });
     if (isBandoneon) {
       const knee = dspProfile?.excitationDynamics.kneeDropImpact;
       const kneeEnv = el.adsr(0.0002, (knee?.decayMs ?? 18) / 1000, 0, 0.004, gateSignal);

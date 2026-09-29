@@ -1,4 +1,4 @@
-import type { AcousticSpace, ExtendedGenreWorld, GenreWorld } from '../../data/types';
+import type { AcousticSpace, ExtendedGenreWorld } from '../../data/types';
 
 export const defaultSpace: AcousticSpace = {
   roomSize: 0.6,
@@ -43,7 +43,7 @@ export class SpatialProcessor {
     },
   };
 
-  public configureAcousticSpace(genre: Partial<ExtendedGenreWorld | GenreWorld> | any) {
+  public configureAcousticSpace(genre: Partial<ExtendedGenreWorld>) {
     const space: AcousticSpace = genre?.acousticSpace || defaultSpace;
     this.reverb.roomSize = space.roomSize ?? 0.6;
     this.reverb.damping = space.hfDamping ?? 4000;

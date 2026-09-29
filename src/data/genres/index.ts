@@ -66,7 +66,7 @@ export const GOSPEL_WORLD: GenreWorld = {
       tuningSystem: '12-tet',
       signatureCell: 'Gospel shuffle with tambourine on 2 and 4',
       grooveMechanics: { swingPercentage: 54, anticipationOffsetSteps: 0, microtimingFeel: 'laid-back' },
-    } as any,
+    },
   ],
   patterns: [
     {
@@ -83,7 +83,9 @@ export const GOSPEL_WORLD: GenreWorld = {
       instruments: gospel.characteristicInstruments,
       roles: ['rhythm', 'percussion'],
       tags: ['pocket', 'swing', 'church'],
-    } as any,
+      scopes: ['region'],
+      variants: [],
+    },
   ],
 };
 
@@ -121,8 +123,8 @@ export const INDUSTRIAL_WORLD: GenreWorld = {
       danceTags: ['club-dark'],
       tuningSystem: '12-tet',
       signatureCell: 'Mechanical 16th bass with cold industrial beat',
-      grooveMechanics: { swingPercentage: 50, anticipationOffsetSteps: 0, microtimingFeel: 'quantized' },
-    } as any,
+      grooveMechanics: { swingPercentage: 50, anticipationOffsetSteps: 0, microtimingFeel: 'straight' },
+    },
   ],
   patterns: [
     {
@@ -139,7 +141,9 @@ export const INDUSTRIAL_WORLD: GenreWorld = {
       instruments: industrial.characteristicInstruments,
       roles: ['rhythm', 'bass'],
       tags: ['mechanical', 'driving', 'electronic'],
-    } as any,
+      scopes: ['region'],
+      variants: [],
+    },
   ],
 };
 

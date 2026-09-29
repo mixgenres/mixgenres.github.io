@@ -1,6 +1,6 @@
 import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../generators/groove';
-import type { VoiceRenderContext, InstrumentModule } from './types';
+import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './types';
 import { createDampedStringLoop, fbGainForDecay } from './lib/stringLoop';
 
 /**
@@ -15,7 +15,7 @@ import { createDampedStringLoop, fbGainForDecay } from './lib/stringLoop';
 export default class SpanishGuitarModule implements InstrumentModule {
   id = 'spanish-guitar';
 
-  renderVoice(ctx: VoiceRenderContext): any {
+  renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
       trackId,
       voiceIndex,
@@ -65,7 +65,7 @@ export default class SpanishGuitarModule implements InstrumentModule {
 
     // 4. Nail & Multi-Finger Excitation Impulse Generator
     const broadbandPluck = el.lowpass(el.mul(vibratingFreq, 4.2), 0.9, el.pinknoise());
-    let impulse: any;
+    let impulse: AudioSignal;
 
     if (isTango && (isMarcato || isArrastre) && !isRasgueado) {
       // Tango guitar accompaniment is tighter and more percussive than flamenco

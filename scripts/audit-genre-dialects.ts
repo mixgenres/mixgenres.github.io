@@ -7,15 +7,15 @@ import { getInstrumentPerformanceProfile } from '../src/data/performance/instrum
 import { parseChord } from '../src/engine/theory/theory';
 
 mkdirSync('audit', { recursive: true });
-const rows: any[] = [];
+const rows: Array<Record<string, unknown>> = [];
 for (const genre of Object.keys(GENRE_NAMES)) {
   const target = genreDialectTarget(genre);
   const sheet = makeSheet(genre);
   const perf = compileWholeSong(sheet);
-  for (const track of sheet.tracks as any[]) {
+  for (const track of sheet.tracks) {
     const notes = perf.notes.filter(n => n.trackId === track.id);
     if (!notes.length) continue;
-    const profile = getInstrumentPerformanceProfile(track.instrumentId);
+    const profile = getInstrumentPerformanceProfile(track.instrumentId ?? track.instrument);
     const roots = notes.filter(n => {
       const chord = sheet.measures[n.bar]?.chord;
       return Boolean(chord) && n.midi % 12 === (parseChord(chord!).rootPc ?? -99);

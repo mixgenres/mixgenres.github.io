@@ -17,6 +17,7 @@ export type LensId = string;
 export type Scope = 'measure' | 'phrase' | 'repetition' | 'region' | 'track' | 'relationship' | 'song';
 export type Role = 
   | 'pulse'
+  | 'rhythm'
   | 'harmony'
   | 'bass'
   | 'melody'
@@ -213,7 +214,7 @@ export type TuningSystemTag =
 export interface GrooveMechanics {
   swingPercentage?: number;
   anticipationOffsetSteps?: number;
-  microtimingFeel?: 'straight' | 'swung' | 'laid-back' | 'pushed' | 'rubato' | 'atrasado' | 'drunk';
+  microtimingFeel?: 'straight' | 'swung' | 'laid-back' | 'pushed' | 'rubato' | 'atrasado' | 'drunk' | 'quantized';
   humanizeJitterMs?: number;
 }
 
@@ -354,8 +355,30 @@ export interface RhythmFeel {
   quantizeJitterMs?: number; // MPC/MIDI clock jitter
 }
 
+export interface DrumRuleStep {
+  kick?: boolean;
+  snare?: boolean;
+  hihat?: boolean;
+  isOpen?: boolean;
+  isPedal?: boolean;
+  ghosts?: Array<{ velocity: number; time: number }>;
+  velocity: number;
+  time: number;
+}
+
+export interface DrumRuleStickState {
+  lastSnareHitTime?: number;
+}
+
+export interface DrumRuleEvent {
+  type: string;
+  velocity: number;
+  time: number;
+  timbreControl?: unknown;
+}
+
 export interface DrumRule {
-  evaluateStep: (step: any, stickState?: any) => any[];
+  evaluateStep: (step: DrumRuleStep, stickState?: DrumRuleStickState) => DrumRuleEvent[];
 }
 
 export interface SongStyleDefinition {
@@ -399,6 +422,17 @@ export interface GenreWorld {
 export type LensDef = GenreWorld;
 export type PatternDef = MusicalPattern;
 
+export interface PatternPerformanceDetails {
+  stepsPerBar: number;
+  onsets: number[];
+  accents: number[];
+  durations: number[];
+  hitTypes: string[];
+  microtiming: number[];
+  fractionalPositions: number[];
+  durationsAuthored: boolean;
+}
+
 export interface Measure {
   id: string;
   index: number;
@@ -419,6 +453,9 @@ export interface Measure {
     articulations?: string[];
     variationType?: string;
     transformationApplied?: string;
+    lens?: GuestLens;
+    partEnergy?: SectionEnergy;
+    perf?: PatternPerformanceDetails;
   }>;
   lensIds?: string[];
   variation?: string;
@@ -519,7 +556,7 @@ export interface Song {
   preferences?: UserPatternPreference[];
   generationSeed?: number;
   styleId?: string;
-  styleInfluences?: any[];
+  styleInfluences?: unknown[];
   styleOverrides?: Record<string, unknown>;
   phrasePatternCache?: Record<string, string>;
 }

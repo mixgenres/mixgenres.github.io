@@ -23,6 +23,16 @@ export class NoteImpl implements NoteLike {
   }
 }
 
+export type ChordNote = number | NoteLike;
+
+export interface VoicingContext {
+  genre?: {
+    culturalHarmony?: {
+      voicingRule?: string;
+    };
+  };
+}
+
 export class VoicingGenerator {
   public getStandardIntervals(quality: ChordQuality | string): number[] {
     switch (quality) {
@@ -45,10 +55,10 @@ export class VoicingGenerator {
     }
   }
 
-  public buildChord(root: any, quality: ChordQuality | string, ctx?: any): any[] {
+  public buildChord(root: ChordNote, quality: ChordQuality | string, ctx?: VoicingContext): ChordNote[] {
     const intervals = this.getStandardIntervals(quality);
-    const transpose = (n: any, semitones: number) => {
-      if (n && typeof n.transpose === 'function') return n.transpose(semitones);
+    const transpose = (n: ChordNote, semitones: number): ChordNote => {
+      if (typeof n !== 'number' && typeof n.transpose === 'function') return n.transpose(semitones);
       if (typeof n === 'number') return n + semitones;
       if (n && typeof n.midiValue === 'number') return { ...n, midiValue: n.midiValue + semitones, pitch: (n.pitch ?? n.midiValue) + semitones };
       return semitones;
@@ -84,8 +94,8 @@ export class VoicingGenerator {
     }
 
     return rawNotes.sort((a, b) => {
-      const vA = a?.midiValue ?? (typeof a === 'number' ? a : 0);
-      const vB = b?.midiValue ?? (typeof b === 'number' ? b : 0);
+      const vA = typeof a === 'number' ? a : a.midiValue;
+      const vB = typeof b === 'number' ? b : b.midiValue;
       return vA - vB;
     });
   }

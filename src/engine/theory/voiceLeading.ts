@@ -1,5 +1,7 @@
+import type { ChordNote } from './voicings';
+
 export class VoiceLeadingResolver {
-  public applySmoothVoiceLeading(currentChord: any[], previousChord: any[] | null): any[] {
+  public applySmoothVoiceLeading(currentChord: ChordNote[], previousChord: ChordNote[] | null): ChordNote[] {
     if (!previousChord || previousChord.length === 0 || !currentChord || currentChord.length === 0) {
       return currentChord;
     }
@@ -20,55 +22,53 @@ export class VoiceLeadingResolver {
         bestInversion = inversion;
       }
     }
-    return [currentChord[0], ...bestInversion.slice(1)].sort((a, b) => {
-      const pA = a.pitch ?? a.midiValue ?? (typeof a === 'number' ? a : 0);
-      const pB = b.pitch ?? b.midiValue ?? (typeof b === 'number' ? b : 0);
-      return pA - pB;
-    });
+
+    return [currentChord[0], ...bestInversion.slice(1)].sort((a, b) => this.pitchOf(a) - this.pitchOf(b));
   }
 
-  private calculateVoiceDistance(chordA: any[], chordB: any[]): number {
+  private pitchOf(note: ChordNote): number {
+    if (typeof note === 'number') return note;
+    return note.pitch ?? note.midiValue;
+  }
+
+  private calculateVoiceDistance(chordA: ChordNote[], chordB: ChordNote[]): number {
     const length = Math.min(chordA.length, chordB.length);
-    return chordA.slice(0, length).reduce((sum, _, i) => {
-      const pA = chordA[i]?.pitch ?? chordA[i]?.midiValue ?? (typeof chordA[i] === 'number' ? chordA[i] : 0);
-      const pB = chordB[i]?.pitch ?? chordB[i]?.midiValue ?? (typeof chordB[i] === 'number' ? chordB[i] : 0);
-      return sum + Math.abs(pA - pB);
+    return chordA.slice(0, length).reduce<number>((sum, _, i) => {
+      const a = chordA[i];
+      const b = chordB[i];
+      return a !== undefined && b !== undefined
+        ? sum + Math.abs(this.pitchOf(a) - this.pitchOf(b))
+        : sum;
     }, 0);
   }
 
-  private invertUp(chord: any[], amt: number): any[] {
-    if (!chord || chord.length === 0) return chord;
+  private invertUp(chord: ChordNote[], amount: number): ChordNote[] {
+    if (!chord.length) return chord;
     const copy = [...chord];
-    for (let i = 0; i < Math.min(amt, copy.length); i++) {
-      const el = copy.shift();
-      if (el) {
-        if (typeof el === 'object') {
-          const pitch = (el.pitch ?? el.midiValue ?? 60) + 12;
-          copy.push({ ...el, pitch, midiValue: pitch });
-        } else if (typeof el === 'number') {
-          copy.push(el + 12);
-        } else {
-          copy.push(el);
-        }
+    for (let i = 0; i < Math.min(amount, copy.length); i++) {
+      const note = copy.shift();
+      if (note === undefined) continue;
+      if (typeof note === 'number') {
+        copy.push(note + 12);
+      } else {
+        const pitch = this.pitchOf(note) + 12;
+        copy.push({ ...note, pitch, midiValue: pitch });
       }
     }
     return copy;
   }
 
-  private invertDown(chord: any[], amt: number): any[] {
-    if (!chord || chord.length === 0) return chord;
+  private invertDown(chord: ChordNote[], amount: number): ChordNote[] {
+    if (!chord.length) return chord;
     const copy = [...chord];
-    for (let i = 0; i < Math.min(amt, copy.length); i++) {
-      const el = copy.pop();
-      if (el) {
-        if (typeof el === 'object') {
-          const pitch = (el.pitch ?? el.midiValue ?? 60) - 12;
-          copy.unshift({ ...el, pitch, midiValue: pitch });
-        } else if (typeof el === 'number') {
-          copy.unshift(el - 12);
-        } else {
-          copy.unshift(el);
-        }
+    for (let i = 0; i < Math.min(amount, copy.length); i++) {
+      const note = copy.pop();
+      if (note === undefined) continue;
+      if (typeof note === 'number') {
+        copy.unshift(note - 12);
+      } else {
+        const pitch = this.pitchOf(note) - 12;
+        copy.unshift({ ...note, pitch, midiValue: pitch });
       }
     }
     return copy;

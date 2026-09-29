@@ -9,7 +9,7 @@ import { applyInstrumentEffectsChain } from '../audio/instrumentEffectsChain';
 import { StereoFieldManager } from '../audio/panning';
 import { applyGenreInstrumentTreatment } from '../instruments/genreInstrumentTreatment';
 
-type Node = any;
+type Node = ReturnType<typeof el.const>;
 /**
 Physical Karplus-Strong waveguide string loop.
 Uses sample-accurate internal delay feedback to ensure perfect pitch mapping,
@@ -136,6 +136,9 @@ decay?: number;
 sustain?: number;
 release?: number;
 articulation?: number;
+baseFrequencyHz?: number;
+triggerSeq?: number;
+noteInstanceId?: string;
 }
 export interface TrackParams {
 brightness: number;
@@ -346,7 +349,7 @@ export function renderVoice(
   params: TrackParams
 ): Node {
   const ctx = buildVoiceContext(trackId, voiceIndex, voice, params);
-  const mod = getInstrumentModule(params.instrumentId);
+  const mod = getInstrumentModule(params.instrumentId ?? '');
   let rawAudio: Node = mod.renderVoice(ctx);
   rawAudio = applyGenreInstrumentTreatment(rawAudio, ctx, INSTRUMENTS_BY_ID[params.instrumentId ?? '']?.family);
 
@@ -517,9 +520,10 @@ export function renderVoice(
         const damper = el.mul(familyNoiseScale * a.damperNoise * 0.07, el.mul(el.lowpass(2200, 1.0, el.noise()), collisionEnv));
         modeSignals.push(damper);
       }
-      if (c.bridge?.buzz > 0.25) {
-        const bridgeEnv = el.adsr(0.001, Math.max(0.02, c.bridge.settlingMs / 1000), 0.10, 0.04, ctx.gateSignal);
-        const buzz = el.mul(familyNoiseScale * c.bridge.buzz * 0.12, el.mul(el.highpass(2600, 2.2, el.noise()), bridgeEnv));
+      const bridge = c.bridge;
+      if (bridge?.buzz !== undefined && bridge.buzz > 0.25) {
+        const bridgeEnv = el.adsr(0.001, Math.max(0.02, bridge.settlingMs / 1000), 0.10, 0.04, ctx.gateSignal);
+        const buzz = el.mul(familyNoiseScale * bridge.buzz * 0.12, el.mul(el.highpass(2600, 2.2, el.noise()), bridgeEnv));
         modeSignals.push(buzz);
       }
     }

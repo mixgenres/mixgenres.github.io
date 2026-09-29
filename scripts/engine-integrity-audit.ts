@@ -32,7 +32,7 @@ for (const id of Object.keys(INSTRUMENTS_BY_ID)) {
 }
 
 const styleFailures: string[] = [];
-const styleReports: any[] = [];
+const styleReports: Array<Record<string, unknown>> = [];
 for (const style of ALL_STYLES) {
   try {
     const target = styleCalibrationTarget(style.primaryGenre, style.id, style);
@@ -41,7 +41,7 @@ for (const style of ALL_STYLES) {
     // check belongs here only as a UX regression test. It must never be used
     // as an engine-wide ceiling: users can add unlimited tracks afterward.
     if (sheet.tracks.length > 5) styleFailures.push(`${style.id}: default starter has ${sheet.tracks.length} tracks`);
-    for (const t of sheet.tracks) getInstrumentModule(t.instrumentId);
+    for (const t of sheet.tracks) { if (t.instrumentId) getInstrumentModule(t.instrumentId); }
     const perf = compileWholeSong(sheet, 0);
     if (!perf.notes.length) styleFailures.push(`${style.id}: zero notes`);
     styleReports.push({

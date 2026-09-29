@@ -1,11 +1,11 @@
 import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../generators/groove';
-import type { VoiceRenderContext, InstrumentModule } from './types';
+import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './types';
 
 export default class DrumsModule implements InstrumentModule {
   id = 'drums';
 
-  renderVoice(ctx: VoiceRenderContext): any {
+  renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
       trackId,
       voiceIndex,
@@ -122,7 +122,7 @@ export default class DrumsModule implements InstrumentModule {
       el.mul(el.highpass(noiseTilt, 1.2, el.noise()), el.adsr(0.0002, isHeelToe ? 0.005 : 0.012, 0, 0.004, gateSignal))
     );
 
-    let metalRing: any = el.const({ value: 0 });
+    let metalRing: AudioSignal = el.const({ value: 0 });
     if (isMetalShell && !isHeelToe) {
       const ringDecay = shellDecay * 0.7;
       metalRing = el.mul(

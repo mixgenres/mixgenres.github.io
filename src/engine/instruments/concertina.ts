@@ -1,10 +1,10 @@
 import { el } from '@elemaudio/core';
-import type { VoiceRenderContext, InstrumentModule } from './types';
+import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './types';
 
 export default class ConcertinaModule implements InstrumentModule {
   id = 'concertina';
 
-  renderVoice(ctx: VoiceRenderContext): any {
+  renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
       voice,
       params,
@@ -51,7 +51,7 @@ export default class ConcertinaModule implements InstrumentModule {
       el.mul(0.045 + (dspProfile?.mechanicalArtifacts.bellowsNoise ?? 0) * 0.16, gateSignal)
     );
 
-    const bellowsImpact: any = el.const({ value: 0 });
+    const bellowsImpact: AudioSignal = el.const({ value: 0 });
 
     return el.lowpass(
       Math.min(19000, 4200 + b * 5200),

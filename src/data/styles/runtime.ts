@@ -8,6 +8,10 @@ import type {
 } from './schema';
 import { rand01 } from '../../engine/generators/groove';
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null;
+}
+
 export class StyleRuntime {
   public readonly resolved: ResolvedStyle;
   public readonly trace: DecisionTrace;
@@ -103,10 +107,10 @@ export class StyleRuntime {
    */
   public getByPath<T>(path: string): T {
     const parts = path.split('.');
-    let curr: any = this.resolved;
-    for (const p of parts) {
-      if (curr == null) return undefined as unknown as T;
-      curr = curr[p];
+    let curr: unknown = this.resolved;
+    for (const part of parts) {
+      if (!isRecord(curr)) return undefined as unknown as T;
+      curr = curr[part];
     }
     return curr as T;
   }

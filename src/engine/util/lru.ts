@@ -13,7 +13,7 @@ export class LRUMap<K, V> {
    * @static
    * Registers a cache in the engine's global dev registry.
    */
-  public static register(cache: LRUMap<any, any>): void {
+  public static register(cache: LRUMap<unknown, unknown>): void {
     registerCache(cache);
   }
 
@@ -85,14 +85,14 @@ export class LRUMap<K, V> {
 }
 
 // Registry for global dev telemetry
-const REGISTERED_CACHES = new Set<LRUMap<any, any>>();
+const REGISTERED_CACHES = new Set<LRUMap<unknown, unknown>>();
 
-export function registerCache(cache: LRUMap<any, any>): void {
+export function registerCache(cache: LRUMap<unknown, unknown>): void {
   REGISTERED_CACHES.add(cache);
 }
 
-export function cacheStats(): Record<string, ReturnType<LRUMap<any, any>['getStats']>> {
-  const result: Record<string, ReturnType<LRUMap<any, any>['getStats']>> = {};
+export function cacheStats(): Record<string, ReturnType<LRUMap<unknown, unknown>['getStats']>> {
+  const result: Record<string, ReturnType<LRUMap<unknown, unknown>['getStats']>> = {};
   for (const c of REGISTERED_CACHES) {
     result[c.name] = c.getStats();
   }

@@ -1,6 +1,9 @@
 import type { VoiceState, TrackParams } from '../elementary/elementaryEngine';
 import type { InstrumentDSPProfile } from '../../data/instruments/physicalDspProfile';
 import type { GenreDialect } from './genreDialect';
+import { el } from '@elemaudio/core';
+
+export type AudioSignal = ReturnType<typeof el.const>;
 
 export interface VoiceRenderContext {
   trackId: string;
@@ -11,10 +14,10 @@ export interface VoiceRenderContext {
   genreDialect: GenreDialect;
   pk: string;
   freq: number;
-  gateSignal: any;
-  velSignal: any;
-  freqSignal: any;
-  safeFreqSignal: any;
+  gateSignal: AudioSignal;
+  velSignal: AudioSignal;
+  freqSignal: AudioSignal;
+  safeFreqSignal: AudioSignal;
   velBoost: number;
   b: number;
   decayTime: number;
@@ -22,20 +25,20 @@ export interface VoiceRenderContext {
   action: string;
   articulation: number;
   isMuted: boolean;
-  env: any;
+  env: AudioSignal;
   isDecayingInstrument: boolean;
   attack: number;
   release: number;
   sustain: number;
   envDecay: number;
-  attackSignal: any;
-  decaySignal: any;
-  sustainSignal: any;
-  releaseSignal: any;
+  attackSignal: AudioSignal;
+  decaySignal: AudioSignal;
+  sustainSignal: AudioSignal;
+  releaseSignal: AudioSignal;
 }
 
 export interface InstrumentModule {
   id: string;
   ownedDspSections?: Array<'coupledResonators' | 'excitationDynamics.kneeDropImpact' | 'articulationPhysics' | 'mechanicalArtifacts' | string>;
-  renderVoice(ctx: VoiceRenderContext): any;
+  renderVoice(ctx: VoiceRenderContext): AudioSignal;
 }

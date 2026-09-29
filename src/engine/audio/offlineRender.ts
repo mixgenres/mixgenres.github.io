@@ -1,5 +1,4 @@
 import { INSTRUMENTS_BY_ID } from '../../data/instruments';
-import * as lamejsModule from '@breezystack/lamejs';
 import { Mp3Encoder } from '@breezystack/lamejs';
 import OfflineRenderer from '@elemaudio/offline-renderer';
 import type { Performance, PerfNote, PerfCC } from '../sequencing/perform';
@@ -22,11 +21,19 @@ import {
   type VoiceState,
 } from '../elementary/elementaryEngine';
 
-const Mp3EncoderClass: any =
-  Mp3Encoder ||
-  (lamejsModule as any).Mp3Encoder ||
-  (lamejsModule as any).default?.Mp3Encoder ||
-  (lamejsModule as any).default;
+export interface Mp3RenderOptions {
+  selectedTrackIds?: string[];
+  trackInstruments: Map<string, string>;
+  worldId?: string;
+  styleId?: string;
+  mixState?: {
+    volume?: Record<string, number>;
+    pan?: Record<string, number>;
+    muted?: Record<string, boolean>;
+    solo?: Record<string, boolean>;
+    spotlight?: Record<string, string>;
+  };
+}
 
 export interface StemCacheEntry {
   left: Float32Array;
@@ -130,7 +137,7 @@ function applyCCToParams(
   params: TrackParams,
   cc: number,
   value: number,
-  instDef: any,
+  instDef: import('../../data/instruments/types').InstrumentDef | undefined,
   trackMixVolume: number,
 ) {
   const norm = value / 127;
@@ -159,19 +166,7 @@ function applyCCToParams(
 
 export async function renderPerformanceToMp3(
   perf: Performance,
-  options: {
-    selectedTrackIds?: string[];
-    trackInstruments: Map<string, string>;
-    worldId?: string;
-    styleId?: string;
-    mixState?: {
-      volume?: Record<string, number>;
-      pan?: Record<string, number>;
-      muted?: Record<string, boolean>;
-      solo?: Record<string, boolean>;
-      spotlight?: Record<string, string>;
-    };
-  },
+  options: Mp3RenderOptions,
   onProgress?: (frac: number) => void,
 ): Promise<Blob> {
   const sampleRate = 44100;
@@ -206,7 +201,7 @@ export async function renderPerformanceToMp3(
           mixCharacter = {
             ...mixCharacter,
             dryness: Math.max(0, Math.min(1, mixCharacter.dryness + (styleMaster.pocket - 0.5) * 0.18)),
-            transientSnap: Math.max(0, Math.min(1, mixCharacter.transientSnap + (styleMaster.lift - 0.5) * 0.18)),
+            transientSnap: Math.max(0, Math.min(1, (mixCharacter.transientSnap ?? 0.3) + (styleMaster.lift - 0.5) * 0.18)),
           };
         }
       }
@@ -422,14 +417,14 @@ export async function renderPerformanceToMp3(
             let voice: VoiceState;
             if (idleVoices.length > 0) {
               voice = idleVoices.reduce((oldest, current) => {
-                const oSeq = (oldest as any).triggerSeq ?? 0;
-                const cSeq = (current as any).triggerSeq ?? 0;
+                const oSeq = oldest.triggerSeq ?? 0;
+                const cSeq = current.triggerSeq ?? 0;
                 return cSeq < oSeq ? current : oldest;
               }, idleVoices[0]);
             } else {
               voice = voices.reduce((oldest, current) => {
-                const oSeq = (oldest as any).triggerSeq ?? 0;
-                const cSeq = (current as any).triggerSeq ?? 0;
+                const oSeq = oldest.triggerSeq ?? 0;
+                const cSeq = current.triggerSeq ?? 0;
                 return cSeq < oSeq ? current : oldest;
               }, voices[0]);
               voice.retriggerId = (voice.retriggerId || 0) + 1;
@@ -438,8 +433,8 @@ export async function renderPerformanceToMp3(
             voice.note = noteMidi;
             const targetFreq = Math.max(20, event.note.frequencyHz ?? midiToFreq(noteMidi));
             voice.frequencyHz = targetFreq;
-            (voice as any).baseFrequencyHz = targetFreq;
-            (voice as any).triggerSeq = ++eventSeq;
+            voice.baseFrequencyHz = targetFreq;
+            voice.triggerSeq = ++eventSeq;
             voice.velocity = Math.max(0.01, Math.min(1.0, event.note.vel / 127)) * hitGainMultiplier;
             voice.articulation = rendered.articulationNorm;
             voice.bellowsDirectionCode = event.note.bellowsDirectionCode;
@@ -451,10 +446,6 @@ export async function renderPerformanceToMp3(
             voice.action = rendered.action;
             voice.excitationType = rendered.excitationType;
 
-            voice.attack = (event.note as any).attack;
-            voice.decay = (event.note as any).decay;
-            voice.sustain = (event.note as any).sustain;
-            voice.release = (event.note as any).release;
 
             graphDirty = true;
           } else if (event.kind === 'off') {
@@ -464,8 +455,8 @@ export async function renderPerformanceToMp3(
             );
             for (const voice of activeVoices) {
               voice.gate = 0;
-              if ((voice as any).baseFrequencyHz) {
-                voice.frequencyHz = (voice as any).baseFrequencyHz;
+              if (voice.baseFrequencyHz) {
+                voice.frequencyHz = voice.baseFrequencyHz;
               }
               graphDirty = true;
             }
@@ -479,14 +470,14 @@ export async function renderPerformanceToMp3(
                   ? activeVoices.find(v => Math.round(v.note) === Math.round(event.targetMidi!))
                   : undefined) ??
                 activeVoices.reduce((latest, current) => {
-                  const tSeq = (current as any).triggerSeq ?? 0;
-                  const lSeq = (latest as any).triggerSeq ?? 0;
+                  const tSeq = current.triggerSeq ?? 0;
+                  const lSeq = latest.triggerSeq ?? 0;
                   return tSeq >= lSeq ? current : latest;
                 }, activeVoices[0]);
 
               const base =
-                (targetVoice as any).baseFrequencyHz ?? targetVoice.frequencyHz ?? midiToFreq(targetVoice.note);
-              (targetVoice as any).baseFrequencyHz = base;
+                targetVoice.baseFrequencyHz ?? targetVoice.frequencyHz ?? midiToFreq(targetVoice.note);
+              targetVoice.baseFrequencyHz = base;
               targetVoice.frequencyHz = base * bendRatio;
               graphDirty = true;
             }
@@ -577,17 +568,7 @@ export async function renderPerformanceToMp3(
   if (onProgress) onProgress(0.75);
 
   // Master Processing via Web Audio OfflineAudioContext
-  let CtxClass: typeof OfflineAudioContext;
-  if (typeof OfflineAudioContext !== 'undefined') {
-    CtxClass = OfflineAudioContext;
-  } else if (typeof (globalThis as any).webkitOfflineAudioContext !== 'undefined') {
-    CtxClass = (globalThis as any).webkitOfflineAudioContext;
-  } else {
-    const pkg = 'node-web-audio-api';
-    const nodeWebAudio = await import(/* @vite-ignore */ pkg);
-    CtxClass = nodeWebAudio.OfflineAudioContext as unknown as typeof OfflineAudioContext;
-  }
-  const offlineCtx: OfflineAudioContext = new CtxClass(2, totalSamples, sampleRate);
+  const offlineCtx = new OfflineAudioContext(2, totalSamples, sampleRate);
   const offlineChain = createMasterChain(offlineCtx, mixCharacter, options.worldId);
 
   // Route Drums Stem to drumBus (waveshaper knock, kick filter)
@@ -659,12 +640,7 @@ export async function renderPerformanceToMp3(
     rightInt16[i] = Math.max(-32768, Math.min(32767, Math.round(rSample * 32767)));
   }
 
-  const EncoderCtor = Mp3EncoderClass;
-  if (typeof EncoderCtor !== 'function') {
-    throw new Error('MP3 encoder is unavailable; @breezystack/lamejs did not expose Mp3Encoder');
-  }
-
-  const encoder = new EncoderCtor(2, sampleRate, 192);
+  const encoder = new Mp3Encoder(2, sampleRate, 192);
   const mp3Data: Uint8Array[] = [];
   const chunkSize = 1152;
 

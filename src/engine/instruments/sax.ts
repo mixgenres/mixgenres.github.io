@@ -1,12 +1,12 @@
 import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../generators/groove';
-import type { VoiceRenderContext, InstrumentModule } from './types';
+import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './types';
 import { getFormantProfileForInstrument } from '../elementary/elementaryEngine';
 
 export default class SaxModule implements InstrumentModule {
   id = 'sax';
 
-  renderVoice(ctx: VoiceRenderContext): any {
+  renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
       trackId,
       voiceIndex,
@@ -38,7 +38,7 @@ export default class SaxModule implements InstrumentModule {
     const dynamicFreqSignal = el.mul(freqSignal, pitchMod);
     const safeDynamicFreqSignal = el.min(el.const({ value: 19000 }), el.max(el.const({ value: 20 }), dynamicFreqSignal));
 
-    let reedPulse: any = el.add(
+    let reedPulse: AudioSignal = el.add(
       el.mul(0.85, el.blepsaw(safeDynamicFreqSignal)),
       el.mul(0.15, el.blepsquare(safeDynamicFreqSignal))
     );
