@@ -536,7 +536,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "flam-solea-guitar-compas",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-solea-style", "flamenco-solea-style"],
+          "styleIds": ["flamenco-solea-style"],
           "name": "Soleá Guitar Compás",
           "family": "12-beat compás",
           "category": "ostinato",
@@ -658,7 +658,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "flam-alegrias-compas",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-alegrias-style", "flamenco-alegrias-style"],
+          "styleIds": ["flamenco-alegrias-style"],
           "name": "Alegrías / Cantiñas Bright Compás",
           "family": "Cantiñas Compás",
           "category": "ostinato",
@@ -743,7 +743,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "flam-tangos-guitar",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-tangos-style", "flamenco-tangos-style"],
+          "styleIds": ["flamenco-tangos-style"],
           "name": "Tangos Flamencos Guitar Compás",
           "family": "Binary Compás",
           "category": "ostinato",
@@ -835,7 +835,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "flam-tientos-compas",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-tientos-style", "flamenco-tientos-style"],
+          "styleIds": ["flamenco-tientos-style"],
           "name": "Tientos Slow Binary Compás",
           "family": "Tientos Compás",
           "category": "ostinato",
@@ -922,7 +922,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "flam-fandango-3",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-fandango-style", "flamenco-fandango-style"],
+          "styleIds": ["flamenco-fandango-style"],
           "name": "Fandango 3/4 Guitar Cycle",
           "family": "Fandango Ternary",
           "category": "ostinato",

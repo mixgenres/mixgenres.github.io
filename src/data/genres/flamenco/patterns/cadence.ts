@@ -185,7 +185,7 @@ export const FLAMENCO_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
   {
           "id": "flam-remate-12",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-buleria-style", "flamenco-buleria-style"],
+          "styleIds": ["flamenco-buleria-style"],
           "name": "12-Beat Remate",
           "family": "Cadential Punctuation",
           "category": "cadence",

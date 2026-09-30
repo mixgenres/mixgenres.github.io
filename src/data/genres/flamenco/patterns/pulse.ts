@@ -4,7 +4,7 @@ export const FLAMENCO_WORLD_PATTERNS_PULSE: MusicalPattern[] = [
   {
           "id": "flam-escobilla-12",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-alegrias-style", "flamenco-alegrias-style"],
+          "styleIds": ["flamenco-alegrias-style"],
           "name": "Escobilla Footwork Pulse",
           "family": "Dance Footwork",
           "category": "pulse",

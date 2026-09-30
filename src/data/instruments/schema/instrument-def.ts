@@ -128,6 +128,16 @@ export interface TuningAndMechanics {
   keyRange?: { lowNote: string; highNote: string; lowMidi: number; highMidi: number };
 }
 
+export interface MidiRange { lowMidi: number; highMidi: number; }
+
+/** Human playability, separated from the instrument's strongest acoustic register. */
+export interface InstrumentPlayability {
+  absoluteRange?: MidiRange;
+  practicalRange?: MidiRange;
+  comfortableRange?: MidiRange;
+  characteristicRegister?: { lowMidi: number; centreMidi: number; highMidi: number };
+}
+
 /**
  * Finite Exciters & Respiration parameters for continuous physical motion.
  */
@@ -413,7 +423,11 @@ export interface InstrumentDef {
   luthierPhysics?: LuthierPhysicsProfile;
   elementaryModel?: number;
   makeupGain?: number;
+  /** Renderer voice allocation; distinct from how many pitches a player can sound. */
   polyphony?: number;
+  /** Maximum concurrent musical pitches for generated performance. */
+  maxSimultaneousPitches?: number;
+  playability?: InstrumentPlayability;
   formantProfile?: AcousticFormantProfile;
   bowedResonance?: BowedResonanceProfile;
   tuningAndMechanics?: TuningAndMechanics;

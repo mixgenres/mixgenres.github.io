@@ -547,7 +547,7 @@ export const FLAMENCO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
   {
           "id": "flam-seguiriya-compas",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-seguiriya-style", "flamenco-seguiriya-style"],
+          "styleIds": ["flamenco-seguiriya-style"],
           "name": "Seguiriya 2+2+3+3+2",
           "family": "Seguiriya Compás",
           "category": "phrasePattern",

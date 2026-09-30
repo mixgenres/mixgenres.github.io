@@ -10,6 +10,7 @@ export const viola: InstrumentDef = {
   elementaryModel: 6,
   makeupGain: 0.26,
   polyphony: 4,
+  maxSimultaneousPitches: 2,
   acousticProfile: {
     sustain: "sustained",
     role: "lead",

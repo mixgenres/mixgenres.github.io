@@ -11,6 +11,7 @@ export const cello: InstrumentDef = {
   elementaryModel: 6,
   makeupGain: 0.25,
   polyphony: 4,
+  maxSimultaneousPitches: 2,
   note: "Acoustic violoncello with resonant spruce body, deep wound steel string inertia, 110Hz Helmholtz air bloom, 180Hz corpus wood mode, 1.55kHz bridge hill, expressive arrastre, and rich cantabile phrasing",
   acousticProfile: {
     sustain: "sustained",

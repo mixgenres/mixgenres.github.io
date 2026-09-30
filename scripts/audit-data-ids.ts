@@ -21,6 +21,25 @@ const patternDefinitions = new Map<string, string>();
 const variantDefinitions = new Map<string, string>();
 const count = { genres: GENRE_WORLDS.length, styles: ALL_STYLES.length, patterns: ALL_PATTERNS.length, instruments: INSTRUMENT_CATALOG.length, starters: starterSongs.length, filteredSyntheticPatterns: 0 };
 
+function validateRhythmicGrid(label: string, pattern: { meter: string; cycleLength: number; subdivisions: number; onsetGrid: number[]; durationGrid?: number[]; accentProfile?: number[]; velocityProfile?: number[]; microtimingOffset?: number[] }) {
+  const meter = /^(\d+)\/(\d+)$/.exec(pattern.meter);
+  if (!meter || Number(meter[1]) < 1 || Number(meter[1]) > 32 || ![1, 2, 4, 8, 16, 32].includes(Number(meter[2]))) errors.push(`${label}: invalid meter ${pattern.meter}`);
+  if (!Number.isInteger(pattern.cycleLength) || pattern.cycleLength < 1 || pattern.cycleLength > 32) errors.push(`${label}: cycleLength must be an integer from 1 to 32`);
+  if (!Number.isInteger(pattern.subdivisions) || pattern.subdivisions < 1 || pattern.subdivisions > 256) errors.push(`${label}: subdivisions must be an integer from 1 to 256`);
+  // Fractional steps encode intentional swing/tuplets, and some legacy patterns
+  // use extended grids across multiple bars. Reject only values the engine
+  // cannot meaningfully schedule.
+  if (!Array.isArray(pattern.onsetGrid) || pattern.onsetGrid.some(step => !Number.isFinite(step) || step < 0 || step > 4096)) errors.push(`${label}: onsetGrid contains a non-finite, negative, or excessive step`);
+  for (const [name, values] of [['durationGrid', pattern.durationGrid], ['accentProfile', pattern.accentProfile], ['velocityProfile', pattern.velocityProfile], ['microtimingOffset', pattern.microtimingOffset]] as const) {
+    if (values && values.length !== pattern.onsetGrid.length) warnings.push(`${label}: ${name} length ${values.length} differs from onset count ${pattern.onsetGrid.length}; engine fallback fills missing values and ignores extras`);
+    if (values?.some(value => !Number.isFinite(value))) errors.push(`${label}: ${name} contains a non-finite value`);
+  }
+  for (const [name, values] of [['accentProfile', pattern.accentProfile], ['velocityProfile', pattern.velocityProfile]] as const) {
+    if (values?.some(value => value < 0 || value > 1)) errors.push(`${label}: ${name} values must be between 0 and 1`);
+  }
+  if (pattern.durationGrid?.some(value => value <= 0)) errors.push(`${label}: durationGrid values must be positive`);
+}
+
 for (const world of GENRE_WORLDS) {
   for (const style of world.styleDefinitions ?? []) {
     if (style.worldId !== world.id) errors.push(`style ${style.id}: worldId ${style.worldId} does not match ${world.id}`);
@@ -38,9 +57,13 @@ for (const world of GENRE_WORLDS) {
       || /--phrasing$/.test(pattern.id.toLowerCase())
       || /\b(comping comping|roster-)$/.test(pattern.name.toLowerCase().trim());
     if (synthetic) { count.filteredSyntheticPatterns++; continue; }
+    validateRhythmicGrid(`pattern ${pattern.id}`, pattern);
     if (!patternIds.has(pattern.id)) errors.push(`${world.id}: pattern ${pattern.id} absent from global pattern catalog`);
     if (pattern.worldId !== world.id) errors.push(`pattern ${pattern.id}: worldId ${pattern.worldId} does not match containing world ${world.id}`);
     for (const styleId of pattern.styleIds ?? []) if (!styleIds.has(styleId)) errors.push(`pattern ${pattern.id}: missing style ${styleId}`);
+    if (new Set(pattern.styleIds ?? []).size !== (pattern.styleIds ?? []).length) errors.push(`pattern ${pattern.id}: duplicate style references`);
+    if (new Set(pattern.onsetGrid ?? []).size !== (pattern.onsetGrid ?? []).length) errors.push(`pattern ${pattern.id}: duplicate onset positions are discarded by bar mapping`);
+    if (pattern.hitGrid && pattern.hitGrid.length !== pattern.onsetGrid.length) warnings.push(`pattern ${pattern.id}: hitGrid length ${pattern.hitGrid.length} differs from onset count ${pattern.onsetGrid.length}; engine ignores the hitGrid`);
     for (const kind of [...(pattern.instruments ?? []), ...(pattern.compatibleInstruments ?? [])]) {
       if (!instrumentIds.has(kind) && !patternKinds.has(kind)) errors.push(`pattern ${pattern.id}: unknown instrument/pattern kind ${kind}`);
     }
@@ -49,7 +72,12 @@ for (const world of GENRE_WORLDS) {
     if (previous && previous !== signature) errors.push(`pattern id ${pattern.id} has conflicting definitions`);
     else patternDefinitions.set(pattern.id, signature);
     for (const variant of pattern.variants ?? []) {
+      if (!variant.id?.trim()) errors.push(`pattern ${pattern.id}: variant id must be non-empty`);
       if (variant.parentPatternId !== pattern.id) errors.push(`variant ${variant.id}: parent ${variant.parentPatternId} does not match ${pattern.id}`);
+      if (!Number.isFinite(variant.probability) || variant.probability < 0 || variant.probability > 1) errors.push(`variant ${variant.id}: probability must be between 0 and 1`);
+      if (new Set(variant.onsetGrid ?? []).size !== (variant.onsetGrid ?? []).length) warnings.push(`variant ${variant.id}: duplicate onset positions may create simultaneous duplicate attacks`);
+      validateRhythmicGrid(`variant ${variant.id}`, { ...pattern, ...variant });
+      if (variant.hitGrid && variant.hitGrid.length !== variant.onsetGrid.length) errors.push(`variant ${variant.id}: hitGrid length does not match onset count`);
       const variantSignature = JSON.stringify(variant);
       const previousVariant = variantDefinitions.get(variant.id);
       if (previousVariant && previousVariant !== variantSignature) errors.push(`variant id ${variant.id} has conflicting definitions`);

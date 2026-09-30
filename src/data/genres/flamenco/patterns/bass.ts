@@ -4,7 +4,7 @@ export const FLAMENCO_WORLD_PATTERNS_BASS: MusicalPattern[] = [
   {
           "id": "flam-rumba-bass",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-rumba", "flamenco-rumba"],
+          "styleIds": ["flamenco-rumba"],
           "name": "Rumba Flamenca Bass Propulsion",
           "family": "Rumba Groove",
           "category": "bass",

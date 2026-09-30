@@ -164,7 +164,7 @@ export function optimizePerformanceByPhraseAndSong(sheet: Sheet, perf: Performan
       if (track.role && !profile.genreProfiles[genre]?.roles?.some(r => r === track.role || r === role)) scopeWarnings.push('track role is outside instrument genre scope');
       const outOfRange = trackNotes.filter(n => n.midi < profile.capabilities.lowMidi || n.midi > profile.capabilities.highMidi).length;
       if (outOfRange) scopeWarnings.push(`${outOfRange} notes outside authored instrument range`);
-      if (profile.capabilities.polyphony < 2 && trackNotes.some(n => n.dur > 0.15)) scopeWarnings.push('monophonic physical model is receiving sustained overlap candidates');
+      if (profile.capabilities.maxSimultaneousPitches < 2 && trackNotes.some(n => n.dur > 0.15)) scopeWarnings.push('monophonic physical model is receiving sustained overlap candidates');
       if (scopeWarnings.length) warnings.push(`${target.styleId}:${track.instrumentId}: ${scopeWarnings.join('; ')}`);
       let bassTrimDb: number | undefined;
       if (/bass/.test(role)) {

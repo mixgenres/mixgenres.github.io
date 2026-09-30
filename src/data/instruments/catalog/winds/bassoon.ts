@@ -20,6 +20,12 @@ export const bassoon: InstrumentDef = {
     space: 0.34,
     ring: 3
   },
+  playability: {
+    absoluteRange: { lowMidi: 34, highMidi: 79 }, // Bb1–G5
+    practicalRange: { lowMidi: 34, highMidi: 75 }, // Bb1–Eb5
+    comfortableRange: { lowMidi: 41, highMidi: 69 }, // F2–A4
+    characteristicRegister: { lowMidi: 43, centreMidi: 57, highMidi: 67 }
+  },
   luthierPhysics: {
     category: "aerophone_lip_tension",
     materialDensity: 0.8,

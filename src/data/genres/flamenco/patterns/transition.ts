@@ -4,7 +4,7 @@ export const FLAMENCO_WORLD_PATTERNS_TRANSITION: MusicalPattern[] = [
   {
           "id": "flam-llamada-12",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-solea-style", "flamenco-solea-style"],
+          "styleIds": ["flamenco-solea-style"],
           "name": "Llamada into Cante",
           "family": "Cante/Guitar Interaction",
           "category": "transition",

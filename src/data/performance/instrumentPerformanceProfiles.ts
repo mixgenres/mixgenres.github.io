@@ -49,7 +49,7 @@ export interface InstrumentPerformanceProfile {
     highMidi: number;
     comfortableLowMidi: number;
     comfortableHighMidi: number;
-    polyphony: number;
+    maxSimultaneousPitches: number;
     sustained: boolean;
     continuous: boolean;
     finiteExciter: boolean;
@@ -101,20 +101,29 @@ function roleOf(d: InstrumentDef): string {
 }
 
 function rangeOf(d: InstrumentDef) {
+  const playable = d.playability?.practicalRange;
+  if (playable) {
+    return {
+      low: playable.lowMidi,
+      high: playable.highMidi,
+      comfortableLow: d.playability?.comfortableRange?.lowMidi,
+      comfortableHigh: d.playability?.comfortableRange?.highMidi,
+    };
+  }
   const r = d.tuningAndMechanics?.keyRange;
-  if (r) return [r.lowMidi, r.highMidi] as const;
+  if (r) return { low: r.lowMidi, high: r.highMidi };
   // AcousticProfile is authoritative when an instrument does not expose a
   // mechanical/tuning keyRange. Do not invent a ±30-semitone range around
   // centre: bass instruments in particular may legitimately live far below it.
   const acoustic = d.acousticProfile;
   if (acoustic && Number.isFinite(acoustic.low) && Number.isFinite(acoustic.high)) {
-    return [Math.max(0, acoustic.low), Math.min(127, acoustic.high)] as const;
+    return { low: Math.max(0, acoustic.low), high: Math.min(127, acoustic.high) };
   }
-  if (d.drum?.low !== undefined) return [Math.max(0,d.drum.low-12), Math.min(127,d.drum.high+12)] as const;
+  if (d.drum?.low !== undefined) return { low: Math.max(0,d.drum.low-12), high: Math.min(127,d.drum.high+12) };
   const center = Math.round((d.acousticProfile?.centre ?? 60));
   const low = Math.max(0, center - (d.family === 'winds' || d.family === 'brass' ? 24 : 30));
   const high = Math.min(127, center + (d.family === 'winds' || d.family === 'brass' ? 24 : 30));
-  return [low, high] as const;
+  return { low, high };
 }
 
 function intentOf(a: string): GestureSpec['intent'] {
@@ -300,9 +309,10 @@ function profileFor(d: InstrumentDef, genre: string, authored: boolean): GenrePe
 
 export const INSTRUMENT_PERFORMANCE_PROFILES: Record<string, InstrumentPerformanceProfile> = Object.fromEntries(
   INSTRUMENT_CATALOG.map(d => {
-    const [low, high] = rangeOf(d);
-    const comfortableLow = Math.max(low, Math.round(low + (high-low)*0.08));
-    const comfortableHigh = Math.min(high, Math.round(high - (high-low)*0.10));
+    const range = rangeOf(d);
+    const { low, high } = range;
+    const comfortableLow = Math.max(low, range.comfortableLow ?? Math.round(low + (high-low)*0.08));
+    const comfortableHigh = Math.min(high, range.comfortableHigh ?? Math.round(high - (high-low)*0.10));
     const family = familyOf(d);
     const authoredGenres = Array.from(new Set([
       ...Object.keys(d.techniques.genreTechniques ?? {}).filter(g => GENRES.includes(g)),
@@ -330,7 +340,13 @@ export const INSTRUMENT_PERFORMANCE_PROFILES: Record<string, InstrumentPerforman
         highMidi: high,
         comfortableLowMidi: comfortableLow,
         comfortableHighMidi: comfortableHigh,
-        polyphony: Math.max(1, d.polyphony ?? (d.voicing === 'chord' ? 6 : 1)),
+        maxSimultaneousPitches: Math.max(1, d.maxSimultaneousPitches ?? (
+          d.voicing === 'single' || d.voicing === 'bass'
+            ? 1
+            : d.voicing === 'chord'
+              ? d.tuningAndMechanics?.openStrings?.length ?? Math.min(d.polyphony ?? 6, 6)
+              : d.polyphony ?? 8
+        )),
         sustained: d.acousticProfile?.sustain === 'sustained' || d.acousticProfile?.sustain === 'blown',
         continuous: !!d.continuousExciter || family === 'bowed-string' || family === 'wind' || family === 'brass' || family === 'bellows',
         finiteExciter: !!d.biomechanicsAndKinematics?.finiteExciters,
@@ -355,4 +371,3 @@ export const INSTRUMENT_PERFORMANCE_PROFILES: Record<string, InstrumentPerforman
     } satisfies InstrumentPerformanceProfile];
   })
 );
-

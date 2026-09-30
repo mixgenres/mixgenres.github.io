@@ -195,7 +195,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
   {
           "id": "flam-solea-palmas",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-solea-style", "flamenco-solea-style"],
+          "styleIds": ["flamenco-solea-style"],
           "name": "Soleá Palmas Contratiempo",
           "family": "Palmas",
           "category": "rolePattern",
@@ -285,7 +285,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
   {
           "id": "flam-buleria-palmas",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-buleria-style", "flamenco-buleria-style"],
+          "styleIds": ["flamenco-buleria-style"],
           "name": "Bulería Palmas Contratiempo",
           "family": "Bulería Palmas",
           "category": "rolePattern",
@@ -322,8 +322,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
             5,
             7,
             8,
-            9,
-            11
+            9
           ],
           "accentProfile": [
             0.5,
@@ -380,7 +379,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
   {
           "id": "flam-alzapua-12",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-buleria-style", "flamenco-buleria-style"],
+          "styleIds": ["flamenco-buleria-style"],
           "name": "Alzapúa over 12-Beat Compás",
           "family": "Thumb Technique",
           "category": "rolePattern",
@@ -418,8 +417,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
             5,
             7,
             8,
-            9,
-            11
+            9
           ],
           "accentProfile": [
             1,
@@ -429,8 +427,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
             0.7,
             0.95,
             0.5,
-            0.9,
-            1
+            0.9
           ],
           "velocityProfile": [
             0.98,
@@ -440,8 +437,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
             0.92,
             0.97,
             0.88,
-            0.96,
-            0.98
+            0.96
           ],
           "syncopationRating": 0.56,
           "articulations": [
@@ -476,7 +472,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
   {
           "id": "flam-alegrias-palmas",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-alegrias-style", "flamenco-alegrias-style"],
+          "styleIds": ["flamenco-alegrias-style"],
           "name": "Alegrías Palmas",
           "family": "Cantiñas Palmas",
           "category": "rolePattern",
@@ -566,7 +562,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
   {
           "id": "flam-seguiriya-palmas",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-seguiriya-style", "flamenco-seguiriya-style"],
+          "styleIds": ["flamenco-seguiriya-style"],
           "name": "Seguiriya Sparse Palmas",
           "family": "Seguiriya Palmas",
           "category": "rolePattern",
@@ -648,7 +644,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
   {
           "id": "flam-tientos-palmas",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-tientos-style", "flamenco-tientos-style"],
+          "styleIds": ["flamenco-tientos-style"],
           "name": "Tientos Sparse Palmas",
           "family": "Tientos Palmas",
           "category": "rolePattern",

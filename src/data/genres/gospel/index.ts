@@ -384,22 +384,10 @@ export const GOSPEL_WORLD: GenreWorld = {
       "family": "gospel",
       "description": "Dynamic church swing with tambourine and organ swell",
       "onsetGrid": [
-        1,
         0,
-        0,
-        0,
-        1,
-        0,
-        0,
-        0,
-        1,
-        0,
-        0,
-        0,
-        1,
-        0,
-        0,
-        0
+        4,
+        8,
+        12
       ],
       "instruments": [
         "organ",

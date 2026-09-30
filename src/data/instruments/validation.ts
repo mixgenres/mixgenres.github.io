@@ -35,12 +35,48 @@ export function validateInstrumentDef(instrument: InstrumentDef): string[] {
     else if (!ROLES_BY_FAMILY[instrument.family]?.has(role)) fail(`role ${role} is incompatible with family ${instrument.family}`);
   }
   if (instrument.polyphony !== undefined && (!Number.isInteger(instrument.polyphony) || instrument.polyphony < 1)) fail(`polyphony must be a positive integer (${String(instrument.polyphony)})`);
+  if (instrument.maxSimultaneousPitches !== undefined && (!Number.isInteger(instrument.maxSimultaneousPitches) || instrument.maxSimultaneousPitches < 1)) fail(`maxSimultaneousPitches must be a positive integer (${String(instrument.maxSimultaneousPitches)})`);
+
+  const { playability } = instrument;
+  if (playability) {
+    const validRange = (label: string, range: { lowMidi: number; highMidi: number } | undefined) => {
+      if (!range) return;
+      if (![range.lowMidi, range.highMidi].every(value => Number.isInteger(value) && value >= 0 && value <= 127) || range.lowMidi > range.highMidi) fail(`${label} must be an ordered MIDI range within 0..127`);
+    };
+    validRange('absoluteRange', playability.absoluteRange);
+    validRange('practicalRange', playability.practicalRange);
+    validRange('comfortableRange', playability.comfortableRange);
+    validRange('characteristicRegister', playability.characteristicRegister && { lowMidi: playability.characteristicRegister.lowMidi, highMidi: playability.characteristicRegister.highMidi });
+    if (playability.characteristicRegister && (playability.characteristicRegister.centreMidi < playability.characteristicRegister.lowMidi || playability.characteristicRegister.centreMidi > playability.characteristicRegister.highMidi)) fail('characteristicRegister centre must lie within its range');
+    const within = (inner: { lowMidi: number; highMidi: number } | undefined, outer: { lowMidi: number; highMidi: number } | undefined) => !inner || !outer || (inner.lowMidi >= outer.lowMidi && inner.highMidi <= outer.highMidi);
+    if (!within(playability.practicalRange, playability.absoluteRange)) fail('practicalRange must be within absoluteRange');
+    if (!within(playability.comfortableRange, playability.practicalRange)) fail('comfortableRange must be within practicalRange');
+  }
 
   const mechanics = instrument.tuningAndMechanics;
   if (mechanics) {
     if (mechanics.frets !== undefined && (!Number.isInteger(mechanics.frets) || mechanics.frets < 0)) fail(`frets must be a non-negative integer (${mechanics.frets})`);
     if (mechanics.maxFretStretch !== undefined && (!Number.isFinite(mechanics.maxFretStretch) || mechanics.maxFretStretch <= 0)) fail(`maxFretStretch must be positive (${mechanics.maxFretStretch})`);
-    for (const string of mechanics.openStrings ?? []) if (!Number.isInteger(string.midi) || string.midi < 0 || string.midi > 127) fail(`open string ${string.name} has invalid MIDI pitch ${string.midi}`);
+    const midiForNote = (note: string): number | undefined => {
+      const match = /^([A-Ga-g])([#b]?)(-?\d+)$/.exec(note.trim());
+      if (!match) return undefined;
+      const pitchClass = ({ C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 } as Record<string, number>)[match[1].toUpperCase()];
+      const accidental = match[2] === '#' ? 1 : match[2] === 'b' ? -1 : 0;
+      return (Number(match[3]) + 1) * 12 + pitchClass + accidental;
+    };
+    const keyRange = mechanics.keyRange;
+    if (keyRange) {
+      if (midiForNote(keyRange.lowNote) !== keyRange.lowMidi) fail(`keyRange lowNote ${keyRange.lowNote} does not match MIDI ${keyRange.lowMidi}`);
+      if (midiForNote(keyRange.highNote) !== keyRange.highMidi) fail(`keyRange highNote ${keyRange.highNote} does not match MIDI ${keyRange.highMidi}`);
+      if (keyRange.lowMidi > keyRange.highMidi) fail('keyRange MIDI bounds are inverted');
+    }
+    for (const string of mechanics.openStrings ?? []) {
+      if (!Number.isInteger(string.midi) || string.midi < 0 || string.midi > 127) fail(`open string ${string.name} has invalid MIDI pitch ${string.midi}`);
+      const statedNotes = string.note.split('/').map(midiForNote);
+      if (!statedNotes.includes(string.midi)) fail(`open string ${string.note} does not include MIDI ${string.midi}`);
+      const expectedHz = 440 * Math.pow(2, (string.midi - 69) / 12);
+      if (!Number.isFinite(string.frequencyHz) || Math.abs(string.frequencyHz - expectedHz) > Math.max(0.1, expectedHz * 0.001)) fail(`open string ${string.note} frequency ${string.frequencyHz}Hz does not match MIDI ${string.midi}`);
+    }
   }
   return errors;
 }

@@ -16,7 +16,7 @@ export const tenor_sax: InstrumentDef = {
     role: "melody",
     centre: 62,
     low: 44,
-    high: 80,
+    high: 76,
     pan: -0.26,
     trim: -1,
     space: 0.32,
@@ -57,7 +57,7 @@ export const tenor_sax: InstrumentDef = {
       lowNote: "Ab2",
       highNote: "E5",
       lowMidi: 44,
-      highMidi: 80
+      highMidi: 76
     }
   },
   performanceArticulations: {

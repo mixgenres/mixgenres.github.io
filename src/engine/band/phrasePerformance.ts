@@ -202,7 +202,7 @@ function chordVoicing(ctx: PhraseContext, _index: number): number[] {
   const guide = parsed.guideTones?.map(x => (parsed.rootPc + x) % 12) ?? [];
   const tension = parsed.tensions?.map(x => (parsed.rootPc + x) % 12) ?? [];
   const voicing = ctx.hybridTheory.harmony.voicing;
-  const poly = Math.max(1, Math.min(ctx.profile.capabilities.polyphony, 4));
+  const poly = Math.max(1, Math.min(ctx.profile.capabilities.maxSimultaneousPitches, 4));
   const base = Math.max(ctx.profile.capabilities.lowMidi, Math.min(ctx.profile.capabilities.highMidi, ctx.profile.capabilities.comfortableLowMidi + (voicing === 'power' ? 4 : 10)));
   let pcs: number[];
   if (voicing === 'power') pcs = [parsed.rootPc, (parsed.rootPc + 7) % 12, parsed.rootPc];
@@ -235,7 +235,7 @@ export function realizeMidi(ctx: PhraseContext, index: number, total: number, st
   const d = ctx.profile.instrumentId.toLowerCase();
   if (ctx.profile.family === 'membrane' || ctx.profile.family === 'kit' || ctx.profile.family === 'metal-wood-percussion' || ctx.profile.family === 'body-percussion' || voiceProfile(ctx.profile.instrumentId).role === 'perc') return [60];
   if (voiceProfile(ctx.profile.instrumentId).role === 'bass' || d.includes('bass') || d === 'upright-bass' || d.includes('tuba')) return [bassMidi(ctx, index, total)];
-  if (ctx.profile.family === 'keyboard' || ctx.profile.family === 'plucked-string' && ctx.profile.capabilities.polyphony > 1 || ctx.pattern.roles.includes('harmony') || /piano|organ|rhodes|guitar|bandoneon|accordion/.test(d)) return chordVoicing(ctx, index);
+  if (ctx.profile.family === 'keyboard' || ctx.profile.family === 'plucked-string' && ctx.profile.capabilities.maxSimultaneousPitches > 1 || ctx.pattern.roles.includes('harmony') || /piano|organ|rhodes|guitar|bandoneon|accordion/.test(d)) return chordVoicing(ctx, index);
 
   const scale = ctx.soloist && ctx.soloGrammar?.scaleMode
     ? scalePcsForMode(ctx.soloGrammar.scaleMode, rootPc(ctx.chord))

@@ -479,7 +479,7 @@ export const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "flam-buleria-compas",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-buleria-style", "flamenco-buleria-style"],
+          "styleIds": ["flamenco-buleria-style"],
           "name": "Bulería Compás / Jerez Drive",
           "family": "Bulería Compás",
           "category": "groove",

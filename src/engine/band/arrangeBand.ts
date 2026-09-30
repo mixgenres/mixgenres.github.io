@@ -620,7 +620,7 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
             // motion, fill the larger spaces between authored attacks with a
             // theory-derived passing tone aimed at the next played degree.
             if (state.previousMidi !== undefined && state.previousTime !== undefined &&
-                (profile.capabilities.polyphony <= 1 || voiceProfile(track.instrumentId).role === 'bass') && grammarBundle.hybrid.allowDerivedAttacks > 0.28 &&
+                (profile.capabilities.maxSimultaneousPitches <= 1 || voiceProfile(track.instrumentId).role === 'bass') && grammarBundle.hybrid.allowDerivedAttacks > 0.28 &&
                 grammarBundle.hybrid.allowDerivedPitch > 0.2 && /bass/.test(String(ctx.role)) &&
                 grammarBundle.hybrid.subdivisionVocabulary?.bass?.includes(2)) {
               const current = midis[0];
@@ -685,14 +685,14 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
       n.midi = foldToRange(n.midi, voiceProfile(track.instrumentId));
       if (kept.length) {
         const prev = kept[kept.length - 1];
-        const minGap = p.capabilities.polyphony <= 1 ? 0.004 : 0.001;
-        if (n.time < prev.time + minGap && p.capabilities.polyphony <= 1) {
+        const minGap = p.capabilities.maxSimultaneousPitches <= 1 ? 0.004 : 0.001;
+        if (n.time < prev.time + minGap && p.capabilities.maxSimultaneousPitches <= 1) {
           if (n.vel <= prev.vel) continue;
           prev.dur = Math.max(0.008, n.time - prev.time - minGap);
         }
       }
       const active = kept.filter(x => x.time <= n.time && x.time + x.dur > n.time);
-      if (active.length >= p.capabilities.polyphony) continue;
+      if (active.length >= p.capabilities.maxSimultaneousPitches) continue;
       kept.push(n);
     }
     resolved.push(...kept);
