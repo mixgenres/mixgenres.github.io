@@ -5,6 +5,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "worldId": "flamenco",
         "name": "Bulerías",
         "origin": "Jerez de la Frontera & Triana",
+        "era": "Late 19th century–present",
         "description": "Fast • 12-beat • Contratiempo\nPlayful, explosive,",
         "characteristicInstruments": [
           "spanish-guitar",

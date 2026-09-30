@@ -5,6 +5,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "worldId": "flamenco",
         "name": "Tientos",
         "origin": "Andalusia",
+        "era": "19th century–present",
         "description": "Slow • 4-beat • Modal\nTangos stretched",
         "characteristicInstruments": [
           "spanish-guitar",
@@ -46,5 +47,37 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
           "swingPercentage": 50,
           "anticipationOffsetSteps": 0,
           "microtimingFeel": "straight"
+        },
+        "sectionProgressions": {
+          "intro": [
+            "Am",
+            "G",
+            "F",
+            "E"
+          ],
+          "verse": [
+            "Am",
+            "G",
+            "F",
+            "E"
+          ],
+          "chorus": [
+            "Dm",
+            "G",
+            "C",
+            "E"
+          ],
+          "solo": [
+            "Am",
+            "G",
+            "F",
+            "E"
+          ],
+          "coda": [
+            "Am",
+            "E",
+            "Am",
+            "E"
+          ]
         }
       };

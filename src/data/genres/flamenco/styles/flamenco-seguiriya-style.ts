@@ -5,6 +5,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "worldId": "flamenco",
         "name": "Seguiriya",
         "origin": "Andalusia",
+        "era": "Early 19th century–present",
         "description": "Dark • Asymmetric • Cante jondo\nRaw,",
         "characteristicInstruments": [
           "spanish-guitar",
@@ -47,5 +48,37 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
           "swingPercentage": 50,
           "anticipationOffsetSteps": 0,
           "microtimingFeel": "rubato"
+        },
+        "sectionProgressions": {
+          "intro": [
+            "Am",
+            "G",
+            "F",
+            "E"
+          ],
+          "verse": [
+            "Am",
+            "Dm",
+            "E",
+            "Am"
+          ],
+          "chorus": [
+            "F",
+            "E",
+            "Am",
+            "E"
+          ],
+          "solo": [
+            "Am",
+            "G",
+            "F",
+            "E"
+          ],
+          "coda": [
+            "F",
+            "E",
+            "E",
+            "E"
+          ]
         }
       };

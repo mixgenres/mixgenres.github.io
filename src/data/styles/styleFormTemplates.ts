@@ -3404,6 +3404,166 @@ export const STYLE_FORM_TEMPLATES: Record<string, FormStepTemplate[]> = {
       "intensity": "low"
     }
   ],
+  "gospel-contemporary": [
+    {
+      "key": "intro-0",
+      "label": "Intro",
+      "kind": "intro",
+      "bars": 4,
+      "intensity": "low"
+    },
+    {
+      "key": "verse-1",
+      "label": "Verse",
+      "kind": "verse",
+      "bars": 8,
+      "intensity": "medium"
+    },
+    {
+      "key": "pre-chorus-2",
+      "label": "Pre-Chorus",
+      "kind": "pre-chorus",
+      "bars": 4,
+      "intensity": "medium"
+    },
+    {
+      "key": "chorus-3",
+      "label": "Chorus",
+      "kind": "chorus",
+      "bars": 8,
+      "intensity": "high"
+    },
+    {
+      "key": "verse-4",
+      "label": "Verse",
+      "kind": "verse",
+      "bars": 8,
+      "intensity": "medium"
+    },
+    {
+      "key": "chorus-5",
+      "label": "Chorus",
+      "kind": "chorus",
+      "bars": 8,
+      "intensity": "high"
+    },
+    {
+      "key": "bridge-6",
+      "label": "Bridge",
+      "kind": "bridge",
+      "bars": 8,
+      "intensity": "medium"
+    },
+    {
+      "key": "vamp-7",
+      "label": "Vamp",
+      "kind": "vamp",
+      "bars": 8,
+      "intensity": "peak"
+    },
+    {
+      "key": "outro-8",
+      "label": "Outro",
+      "kind": "outro",
+      "bars": 4,
+      "intensity": "low"
+    }
+  ],
+  "gospel-southern": [
+    {
+      "key": "intro-0",
+      "label": "Intro",
+      "kind": "intro",
+      "bars": 4,
+      "intensity": "low"
+    },
+    {
+      "key": "verse-1",
+      "label": "Verse",
+      "kind": "verse",
+      "bars": 8,
+      "intensity": "medium"
+    },
+    {
+      "key": "chorus-2",
+      "label": "Chorus",
+      "kind": "chorus",
+      "bars": 8,
+      "intensity": "high"
+    },
+    {
+      "key": "verse-3",
+      "label": "Verse",
+      "kind": "verse",
+      "bars": 8,
+      "intensity": "medium"
+    },
+    {
+      "key": "chorus-4",
+      "label": "Chorus",
+      "kind": "chorus",
+      "bars": 8,
+      "intensity": "high"
+    },
+    {
+      "key": "tag-5",
+      "label": "Tag",
+      "kind": "tag",
+      "bars": 4,
+      "intensity": "high"
+    },
+    {
+      "key": "coda-6",
+      "label": "Coda",
+      "kind": "coda",
+      "bars": 4,
+      "intensity": "low"
+    }
+  ],
+  "gospel-choir": [
+    {
+      "key": "intro-0",
+      "label": "Intro",
+      "kind": "intro",
+      "bars": 4,
+      "intensity": "low"
+    },
+    {
+      "key": "verse-1",
+      "label": "Verse",
+      "kind": "verse",
+      "bars": 8,
+      "intensity": "medium"
+    },
+    {
+      "key": "build-2",
+      "label": "Build",
+      "kind": "build",
+      "bars": 8,
+      "intensity": "medium"
+    },
+    {
+      "key": "vamp-3",
+      "label": "Vamp",
+      "kind": "vamp",
+      "bars": 16,
+      "intensity": "high"
+    },
+    {
+      "key": "shout-4",
+      "label": "Shout",
+      "kind": "shout",
+      "bars": 8,
+      "intensity": "peak"
+    },
+    {
+      "key": "coda-5",
+      "label": "Coda",
+      "kind": "coda",
+      "bars": 4,
+      "intensity": "low"
+    }
+  ],
   "hip-hop-boom-bap": [
     {
       "key": "intro-0",
@@ -8858,6 +9018,145 @@ export const STYLE_FORM_TEMPLATES: Record<string, FormStepTemplate[]> = {
     },
     {
       "key": "outro-5",
+      "label": "Outro",
+      "kind": "outro",
+      "bars": 4,
+      "intensity": "low"
+    }
+  ],
+  "industrial-techno": [
+    {
+      "key": "intro-0",
+      "label": "Intro",
+      "kind": "intro",
+      "bars": 8,
+      "intensity": "low"
+    },
+    {
+      "key": "groove-1",
+      "label": "Groove",
+      "kind": "groove",
+      "bars": 16,
+      "intensity": "medium"
+    },
+    {
+      "key": "breakdown-2",
+      "label": "Breakdown",
+      "kind": "breakdown",
+      "bars": 8,
+      "intensity": "low"
+    },
+    {
+      "key": "drop-3",
+      "label": "Drop",
+      "kind": "drop",
+      "bars": 16,
+      "intensity": "peak"
+    },
+    {
+      "key": "groove-4",
+      "label": "Groove",
+      "kind": "groove",
+      "bars": 16,
+      "intensity": "high"
+    },
+    {
+      "key": "outro-5",
+      "label": "Outro",
+      "kind": "outro",
+      "bars": 8,
+      "intensity": "low"
+    }
+  ],
+  "industrial-noise": [
+    {
+      "key": "intro-0",
+      "label": "Intro",
+      "kind": "intro",
+      "bars": 4,
+      "intensity": "low"
+    },
+    {
+      "key": "machine-1",
+      "label": "Machine",
+      "kind": "machine",
+      "bars": 8,
+      "intensity": "medium"
+    },
+    {
+      "key": "break-2",
+      "label": "Break",
+      "kind": "break",
+      "bars": 4,
+      "intensity": "low"
+    },
+    {
+      "key": "machine-3",
+      "label": "Machine",
+      "kind": "machine",
+      "bars": 8,
+      "intensity": "high"
+    },
+    {
+      "key": "outro-4",
+      "label": "Outro",
+      "kind": "outro",
+      "bars": 4,
+      "intensity": "low"
+    }
+  ],
+  "industrial-dark": [
+    {
+      "key": "intro-0",
+      "label": "Intro",
+      "kind": "intro",
+      "bars": 4,
+      "intensity": "low"
+    },
+    {
+      "key": "verse-1",
+      "label": "Verse",
+      "kind": "verse",
+      "bars": 8,
+      "intensity": "medium"
+    },
+    {
+      "key": "chorus-2",
+      "label": "Chorus",
+      "kind": "chorus",
+      "bars": 8,
+      "intensity": "high"
+    },
+    {
+      "key": "verse-3",
+      "label": "Verse",
+      "kind": "verse",
+      "bars": 8,
+      "intensity": "medium"
+    },
+    {
+      "key": "chorus-4",
+      "label": "Chorus",
+      "kind": "chorus",
+      "bars": 8,
+      "intensity": "high"
+    },
+    {
+      "key": "break-5",
+      "label": "Break",
+      "kind": "break",
+      "bars": 4,
+      "intensity": "low"
+    },
+    {
+      "key": "chorus-6",
+      "label": "Chorus",
+      "kind": "chorus",
+      "bars": 8,
+      "intensity": "peak"
+    },
+    {
+      "key": "outro-7",
       "label": "Outro",
       "kind": "outro",
       "bars": 4,

@@ -112,6 +112,260 @@ export const INDUSTRIAL_WORLD: GenreWorld = {
         "swingPercentage": 50,
         "anticipationOffsetSteps": 0,
         "microtimingFeel": "straight"
+      },
+      "sectionProgressions": {
+        "intro": [
+          "Em",
+          "Em",
+          "Em",
+          "Em"
+        ],
+        "verse": [
+          "Em",
+          "Em",
+          "C",
+          "D"
+        ],
+        "chorus": [
+          "C",
+          "D",
+          "Em",
+          "Em"
+        ],
+        "coda": [
+          "Em",
+          "Em",
+          "Em",
+          "Em"
+        ]
+      }
+    },
+    {
+      "id": "industrial-techno",
+      "worldId": "industrial",
+      "name": "Industrial Techno",
+      "origin": "Germany / United Kingdom / Netherlands",
+      "era": "1990s–present",
+      "description": "Pounding distorted kicks and metallic percussion at club-hard tempos.",
+      "characteristicInstruments": [
+        "synth",
+        "drums",
+        "sampler",
+        "bass-lead",
+        "noise-sweep"
+      ],
+      "preferredMeters": [
+        "4/4"
+      ],
+      "tempoRange": [
+        128,
+        150
+      ],
+      "keySubstyles": [
+        "Industrial Techno",
+        "Hard Techno"
+      ],
+      "coreConcepts": [
+        "Distorted kick as bass",
+        "Metallic hat and clang percussion",
+        "Long filtered risers"
+      ],
+      "rhythmicGrammar": [
+        "Driving four-on-the-floor with offbeat rumble and clanging accents"
+      ],
+      "danceTags": [
+        "club-dark"
+      ],
+      "tuningSystem": "12-tet",
+      "signatureCell": "Overdriven four-on-the-floor kick with offbeat rumble bass and metal hits",
+      "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+      },
+      "sectionProgressions": {
+        "intro": [
+          "Dm",
+          "Dm",
+          "Dm",
+          "Dm"
+        ],
+        "buildup": [
+          "Dm",
+          "Dm",
+          "Bb",
+          "C"
+        ],
+        "drop": [
+          "Dm",
+          "Dm",
+          "Dm",
+          "Dm",
+          "Dm",
+          "Dm",
+          "Bb",
+          "C"
+        ],
+        "coda": [
+          "Dm",
+          "Dm",
+          "Dm",
+          "Dm"
+        ]
+      }
+    },
+    {
+      "id": "industrial-noise",
+      "worldId": "industrial",
+      "name": "Noise Industrial",
+      "origin": "United Kingdom / United States / Japan",
+      "era": "1970s–present",
+      "description": "Harsh textural sound design with sparse, unstable rhythm and heavy distortion.",
+      "characteristicInstruments": [
+        "noise-sweep",
+        "sampler",
+        "synth",
+        "drums",
+        "bass-lead"
+      ],
+      "preferredMeters": [
+        "4/4"
+      ],
+      "tempoRange": [
+        60,
+        110
+      ],
+      "keySubstyles": [
+        "Noise Industrial",
+        "Power Electronics"
+      ],
+      "coreConcepts": [
+        "Feedback and distortion as texture",
+        "Found-sound sampling",
+        "Irregular pulse"
+      ],
+      "rhythmicGrammar": [
+        "Loose or free pulse with irregular metallic hits over drone"
+      ],
+      "danceTags": [
+        "solo-listening",
+        "listening"
+      ],
+      "tuningSystem": "12-tet",
+      "signatureCell": "Irregular metallic impacts over a distorted drone and feedback swells",
+      "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "drunk"
+      },
+      "sectionProgressions": {
+        "intro": [
+          "E",
+          "E",
+          "E",
+          "E"
+        ],
+        "verse": [
+          "E",
+          "E",
+          "F",
+          "E"
+        ],
+        "chorus": [
+          "E",
+          "F",
+          "E",
+          "F"
+        ],
+        "solo": [
+          "E",
+          "E",
+          "E",
+          "E"
+        ],
+        "coda": [
+          "E",
+          "E",
+          "E",
+          "E"
+        ]
+      }
+    },
+    {
+      "id": "industrial-dark",
+      "worldId": "industrial",
+      "name": "Dark Industrial",
+      "origin": "Canada / United States / Germany",
+      "era": "1990s–present",
+      "description": "Brooding, cinematic industrial with minor-key synths and heavy mid-tempo beats.",
+      "characteristicInstruments": [
+        "synth",
+        "drums",
+        "sampler",
+        "bass-lead",
+        "noise-sweep"
+      ],
+      "preferredMeters": [
+        "4/4"
+      ],
+      "tempoRange": [
+        80,
+        120
+      ],
+      "keySubstyles": [
+        "Dark Industrial",
+        "Industrial Rock"
+      ],
+      "coreConcepts": [
+        "Minor-key synth hooks",
+        "Heavy mid-tempo beat",
+        "Dark atmospheric samples"
+      ],
+      "rhythmicGrammar": [
+        "4/4 heavy mid-tempo backbeat over sequenced 16th bass"
+      ],
+      "danceTags": [
+        "club-dark",
+        "solo-listening"
+      ],
+      "tuningSystem": "12-tet",
+      "signatureCell": "Heavy half-time backbeat with distorted sequenced bass and cold synth pads",
+      "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "pushed"
+      },
+      "sectionProgressions": {
+        "intro": [
+          "Em",
+          "Em",
+          "C",
+          "D"
+        ],
+        "verse": [
+          "Em",
+          "Em",
+          "C",
+          "D"
+        ],
+        "chorus": [
+          "C",
+          "D",
+          "Em",
+          "Em"
+        ],
+        "solo": [
+          "Em",
+          "C",
+          "D",
+          "Em"
+        ],
+        "coda": [
+          "Em",
+          "Em",
+          "Em",
+          "Em"
+        ]
       }
     }
   ],

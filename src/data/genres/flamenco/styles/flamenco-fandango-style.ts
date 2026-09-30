@@ -5,6 +5,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "worldId": "flamenco",
         "name": "Fandangos",
         "origin": "Huelva, Andalusia",
+        "era": "18th century–present",
         "description": "Folk-rooted • 3-beat • Expressive\nCoplas, melody",
         "characteristicInstruments": [
           "spanish-guitar",
@@ -45,5 +46,37 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
           "swingPercentage": 50,
           "anticipationOffsetSteps": 0,
           "microtimingFeel": "straight"
+        },
+        "sectionProgressions": {
+          "intro": [
+            "Am",
+            "G",
+            "F",
+            "E"
+          ],
+          "verse": [
+            "Am",
+            "Dm",
+            "E",
+            "Am"
+          ],
+          "chorus": [
+            "C",
+            "G",
+            "Am",
+            "E"
+          ],
+          "solo": [
+            "Am",
+            "G",
+            "F",
+            "E"
+          ],
+          "coda": [
+            "E",
+            "E",
+            "Am",
+            "Am"
+          ]
         }
       };

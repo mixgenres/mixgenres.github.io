@@ -5,6 +5,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "worldId": "flamenco",
         "name": "Rumba",
         "origin": "Catalonia, Andalusia & Caribbean crossover",
+        "era": "1950s–present",
         "description": "Driving • 4-beat • Crossover\nFlamenco guitar",
         "characteristicInstruments": [
           "spanish-guitar",

@@ -104,6 +104,271 @@ export const GOSPEL_WORLD: GenreWorld = {
         "swingPercentage": 54,
         "anticipationOffsetSteps": 0,
         "microtimingFeel": "laid-back"
+      },
+      "sectionProgressions": {
+        "intro": [
+          "C",
+          "F",
+          "C",
+          "G"
+        ],
+        "verse": [
+          "C",
+          "F",
+          "C",
+          "G"
+        ],
+        "chorus": [
+          "F",
+          "C",
+          "G",
+          "C"
+        ],
+        "solo": [
+          "C",
+          "Am",
+          "F",
+          "G"
+        ],
+        "coda": [
+          "F",
+          "C",
+          "F",
+          "C"
+        ]
+      }
+    },
+    {
+      "id": "gospel-contemporary",
+      "worldId": "gospel",
+      "name": "Contemporary Gospel",
+      "origin": "United States (Chicago, Detroit, Atlanta)",
+      "era": "1980s–present",
+      "description": "Polished praise-and-worship grooves with modern keys and tight rhythm section.",
+      "characteristicInstruments": [
+        "piano",
+        "organ",
+        "choir",
+        "bass",
+        "drums"
+      ],
+      "preferredMeters": [
+        "4/4"
+      ],
+      "tempoRange": [
+        76,
+        112
+      ],
+      "keySubstyles": [
+        "Contemporary Gospel",
+        "Praise & Worship"
+      ],
+      "coreConcepts": [
+        "Lead vocal with choir stacks",
+        "Pop-soul harmony",
+        "Build to modulating chorus"
+      ],
+      "rhythmicGrammar": [
+        "4/4 straight-16th praise pocket with pushed backbeat"
+      ],
+      "danceTags": [
+        "listening",
+        "solo-listening"
+      ],
+      "tuningSystem": "12-tet",
+      "signatureCell": "Straight-16th praise pocket with piano pad and choir swell on the chorus",
+      "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 1,
+        "microtimingFeel": "pushed"
+      },
+      "sectionProgressions": {
+        "intro": [
+          "C",
+          "Am",
+          "F",
+          "G"
+        ],
+        "verse": [
+          "C",
+          "G/B",
+          "Am",
+          "F"
+        ],
+        "chorus": [
+          "F",
+          "G",
+          "C",
+          "Am"
+        ],
+        "solo": [
+          "C",
+          "G",
+          "Am",
+          "F"
+        ],
+        "coda": [
+          "F",
+          "G",
+          "C",
+          "C"
+        ]
+      }
+    },
+    {
+      "id": "gospel-southern",
+      "worldId": "gospel",
+      "name": "Southern Gospel",
+      "origin": "Southern United States (Tennessee, Georgia, Texas)",
+      "era": "1910s–1960s",
+      "description": "Close-harmony quartet singing over upright piano and a bouncing bass.",
+      "characteristicInstruments": [
+        "piano",
+        "bass",
+        "choir",
+        "drums",
+        "hand-percussion"
+      ],
+      "preferredMeters": [
+        "4/4",
+        "3/4"
+      ],
+      "tempoRange": [
+        84,
+        132
+      ],
+      "keySubstyles": [
+        "Southern Gospel",
+        "Gospel Quartet"
+      ],
+      "coreConcepts": [
+        "Four-part close harmony",
+        "Bass-vocal walk-ups",
+        "Shape-note hymn heritage"
+      ],
+      "rhythmicGrammar": [
+        "4/4 boom-chick with walking bass and off-beat piano fills"
+      ],
+      "danceTags": [
+        "listening",
+        "social-partner"
+      ],
+      "tuningSystem": "12-tet",
+      "signatureCell": "Boom-chick piano left hand with quartet bass walk-ups into the cadence",
+      "grooveMechanics": {
+        "swingPercentage": 54,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "laid-back"
+      },
+      "sectionProgressions": {
+        "intro": [
+          "G",
+          "D",
+          "G",
+          "D"
+        ],
+        "verse": [
+          "G",
+          "C",
+          "G",
+          "D"
+        ],
+        "chorus": [
+          "C",
+          "G",
+          "D",
+          "G"
+        ],
+        "solo": [
+          "G",
+          "Em",
+          "C",
+          "D"
+        ],
+        "coda": [
+          "C",
+          "G",
+          "D",
+          "G"
+        ]
+      }
+    },
+    {
+      "id": "gospel-choir",
+      "worldId": "gospel",
+      "name": "Choir Gospel",
+      "origin": "African American church tradition (Chicago, Los Angeles)",
+      "era": "1960s–present",
+      "description": "Massed choir call-and-response driven by organ swells and building vamps.",
+      "characteristicInstruments": [
+        "organ",
+        "choir",
+        "piano",
+        "drums",
+        "tambourine"
+      ],
+      "preferredMeters": [
+        "4/4",
+        "6/8"
+      ],
+      "tempoRange": [
+        72,
+        120
+      ],
+      "keySubstyles": [
+        "Choir Gospel",
+        "Mass Choir"
+      ],
+      "coreConcepts": [
+        "Section call and response",
+        "Shout vamp",
+        "Organ swell dynamics"
+      ],
+      "rhythmicGrammar": [
+        "4/4 or 6/8 church shuffle with vamp intensification"
+      ],
+      "danceTags": [
+        "listening",
+        "spiritual"
+      ],
+      "tuningSystem": "12-tet",
+      "signatureCell": "Slow-building choir vamp with organ swells and handclap backbeat",
+      "grooveMechanics": {
+        "swingPercentage": 56,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "laid-back"
+      },
+      "sectionProgressions": {
+        "intro": [
+          "C",
+          "F",
+          "C",
+          "G"
+        ],
+        "verse": [
+          "C",
+          "F",
+          "C",
+          "G"
+        ],
+        "chorus": [
+          "F",
+          "C",
+          "G",
+          "C"
+        ],
+        "solo": [
+          "C",
+          "F",
+          "G",
+          "F"
+        ],
+        "coda": [
+          "F",
+          "C",
+          "F",
+          "C"
+        ]
       }
     }
   ],

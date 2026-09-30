@@ -5,6 +5,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "worldId": "flamenco",
         "name": "Alegrías",
         "origin": "Cádiz, western Andalusia",
+        "era": "Mid-19th century–present",
         "description": "Bright • 12-beat • Major\nCadiz sparkle,",
         "characteristicInstruments": [
           "spanish-guitar",
@@ -48,5 +49,37 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
           "swingPercentage": 50,
           "anticipationOffsetSteps": 0,
           "microtimingFeel": "straight"
+        },
+        "sectionProgressions": {
+          "intro": [
+            "C",
+            "F",
+            "G7",
+            "C"
+          ],
+          "verse": [
+            "C",
+            "G7",
+            "C",
+            "F"
+          ],
+          "chorus": [
+            "F",
+            "G7",
+            "C",
+            "C"
+          ],
+          "solo": [
+            "C",
+            "F",
+            "G7",
+            "C"
+          ],
+          "coda": [
+            "G7",
+            "C",
+            "G7",
+            "C"
+          ]
         }
       };

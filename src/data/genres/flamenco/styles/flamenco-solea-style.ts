@@ -5,6 +5,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "worldId": "flamenco",
         "name": "Soleá",
         "origin": "Andalusia (Seville, Cádiz, Jerez)",
+        "era": "Mid-19th century–present",
         "description": "Deep • 12-beat • Phrygian\nThe foundation",
         "characteristicInstruments": [
           "spanish-guitar",

@@ -5,6 +5,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "worldId": "flamenco",
         "name": "Tangos",
         "origin": "Cádiz, Triana, Granada",
+        "era": "19th century–present",
         "description": "Grounded • 4-beat • Phrygian\nHeavy pulse,",
         "characteristicInstruments": [
           "spanish-guitar",
