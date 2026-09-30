@@ -40,7 +40,10 @@ function loadInitialSong(): { song: SongSheet; isNew: boolean } {
 export default function App() {
   const [initialData] = useState(() => loadInitialSong());
   const [song, setSong] = useState<SongSheet>(initialData.song);
-  const [playing, setPlaying] = useState(false);
+  const [playbackStatus, setPlaybackStatus] = useState<'idle' | 'buffering' | 'playing' | 'paused' | 'error'>('idle');
+  const playing = playbackStatus === 'playing';
+  const audioLoading = playbackStatus === 'buffering';
+  const playbackActive = playbackStatus === 'buffering' || playbackStatus === 'playing';
   const [isBouncing, setIsBouncing] = useState(false);
   const [bounceProgress, setBounceProgress] = useState<number | null>(null);
   const [step, setStep] = useState(0);
@@ -60,7 +63,9 @@ export default function App() {
       return false;
     }
   });
-  const [audioLoading, setAudioLoading] = useState(false);
+  const togglePlayback = () => setPlaybackStatus(status =>
+    status === 'playing' || status === 'buffering' ? 'paused' : 'buffering'
+  );
 
   const [pickedRegion, setPickedRegion] = useState<string | null>(null);
 
@@ -271,7 +276,7 @@ export default function App() {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
       if (e.code === 'Space') {
         e.preventDefault();
-        setPlaying(p => !p);
+        togglePlayback();
       } else if (e.code === 'ArrowLeft') {
         e.preventDefault();
         seekTo(bar - 1, 0);
@@ -334,11 +339,13 @@ export default function App() {
 
     (async () => {
       try {
-        setAudioLoading(true);
         const ctx = await startAudio();
-        if (!ctx || !alive) return;
-        setAudioLoading(false);
         if (!alive) return;
+        if (!ctx) {
+          setPlaybackStatus('error');
+          showToast("Couldn't start audio. Please try again.");
+          return;
+        }
         setMasterVolume(0.85);
 
         if (!transportRef.current) {
@@ -364,10 +371,11 @@ export default function App() {
         tr.setPerformance(perfRef.current);
         tr.setLooping(true);
         tr.start(seekSecondsRef.current);
+        if (alive) setPlaybackStatus('playing');
       } catch (err) {
         console.error('Audio playback error:', err);
-        setAudioLoading(false);
-        setPlaying(false);
+        if (!alive) return;
+        setPlaybackStatus('error');
         showToast("Couldn't start audio. Please try again.");
       }
     })();
@@ -377,7 +385,7 @@ export default function App() {
       transportRef.current?.stop();
       stopAudio();
     };
-  }, [playing]);
+  }, [playbackActive]);
 
   // Accepts a plain Track: the sheet's tracks always carry an instrumentId at
   // runtime, but the stored type keeps it optional for older saved songs.
@@ -561,9 +569,9 @@ export default function App() {
         <div className="flex items-stretch gap-2.5 select-none mb-5">
           {/* Play/Pause button */}
           <button
-            onClick={() => setPlaying(p => !p)}
-            disabled={audioLoading}
-            aria-label={playing ? 'Pause' : 'Play'}
+            onClick={togglePlayback}
+            aria-label={audioLoading ? 'Cancel audio loading' : playbackStatus === 'error' ? 'Retry audio' : playing ? 'Pause' : 'Play'}
+            aria-busy={audioLoading}
             className="flex items-center justify-center transition-transform active:scale-95 rounded shrink-0 self-stretch cursor-pointer relative"
             style={{
               width: 52,
@@ -574,6 +582,8 @@ export default function App() {
             title={
               audioLoading
                 ? 'Loading sounds…'
+                : playbackStatus === 'error'
+                ? 'Audio failed to start. Retry (Space)'
                 : playing
                 ? 'Pause (Space)'
                 : 'Play (Space)'

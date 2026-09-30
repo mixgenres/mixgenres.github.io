@@ -80,21 +80,35 @@ export class Transport {
     this.cb = cb;
     this.worker = createSchedulerWorker();
     if (this.worker) {
-      this.worker.onmessage = () => {
+      this.worker.onmessage = event => {
+        if (event.data !== 'tick') return;
         this.workerTicked = true;
+        if (this.livenessTimeout !== null) {
+          window.clearTimeout(this.livenessTimeout);
+          this.livenessTimeout = null;
+        }
+        // If the startup liveness check already enabled the timer fallback,
+        // stop it as soon as the worker proves healthy to avoid double ticks.
+        if (this.fallbackTimer !== null) {
+          window.clearInterval(this.fallbackTimer);
+          this.fallbackTimer = null;
+        }
         if (this.running) this.tick();
       };
-      this.worker.onerror = () => {
-        // A worker can be constructed successfully but fail when the browser
-        // attempts to load/execute its module (CSP, MIME, deployment path,
-        // cross-origin hosting, etc.). Fall back immediately rather than
-        // waiting for the liveness timeout.
-        this.worker?.terminate();
-        this.worker = null;
-        if (this.running && this.fallbackTimer === null) {
-          this.fallbackTimer = window.setInterval(() => this.tick(), TICK_MS);
-        }
-      };
+      this.worker.onerror = () => this.disableWorker();
+      this.worker.onmessageerror = () => this.disableWorker();
+    }
+  }
+
+  private disableWorker() {
+    this.worker?.terminate();
+    this.worker = null;
+    if (this.livenessTimeout !== null) {
+      window.clearTimeout(this.livenessTimeout);
+      this.livenessTimeout = null;
+    }
+    if (this.running && this.fallbackTimer === null) {
+      this.fallbackTimer = window.setInterval(() => this.tick(), TICK_MS);
     }
   }
 
@@ -180,14 +194,19 @@ export class Transport {
 
     // Start background lookahead scheduler
     if (this.worker) {
-      this.worker.postMessage('start');
+      try {
+        this.worker.postMessage('start');
+      } catch {
+        this.disableWorker();
+      }
 
       // Liveness check: if worker doesn't tick within 100ms, fall back to setInterval
-      if (this.livenessTimeout !== null) {
+      if (this.worker && this.livenessTimeout !== null) {
         window.clearTimeout(this.livenessTimeout);
       }
-      this.livenessTimeout = window.setTimeout(() => {
-        if (this.running && !this.workerTicked && this.fallbackTimer === null) {
+      if (this.worker) this.livenessTimeout = window.setTimeout(() => {
+        this.livenessTimeout = null;
+        if (this.running && this.worker && !this.workerTicked && this.fallbackTimer === null) {
           console.warn("[Transport] Web Worker is blocked or inactive. Falling back to main-thread setInterval.");
           this.fallbackTimer = window.setInterval(() => this.tick(), TICK_MS);
         }
@@ -207,7 +226,12 @@ export class Transport {
     this.running = false;
     this.sink.setPlaybackEnabled?.(false);
     if (this.worker) {
-      this.worker.postMessage('stop');
+      try {
+        this.worker.postMessage('stop');
+      } catch {
+        this.worker.terminate();
+        this.worker = null;
+      }
     }
     if (this.livenessTimeout !== null) {
       window.clearTimeout(this.livenessTimeout);
