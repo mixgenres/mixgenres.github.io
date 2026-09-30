@@ -21,8 +21,10 @@ import {
   unsilenceVoiceInSection, unsilenceVoiceInAll, toggleVoiceInSection,
   silenceAllVoicesInSection, unsilenceAllVoicesInSection,
   setTrackSpotlight, getResolvedSectionStyle,
-  FEELS, ENERGY_LABELS, getEffectiveBpm, setSectionTempoShift, setSongTempoShift, setSongBpm, setSectionBpm, setSectionEnergy,
+  getEffectiveBpm, setSectionTempoShift, setSongTempoShift, setSongBpm, setSectionBpm, setSectionEnergy,
 } from './engine/sheet/index.ts';
+import { FEELS } from './data/tempoFeels';
+import { ENERGY_LABELS } from './data/performance/energy';
 import {
   startAudio, stopAudio, setMasterVolume, renderSongToMp3,
   createSink, setTrackInstruments, setActiveWorld,

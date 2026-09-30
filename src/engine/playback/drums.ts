@@ -1,3 +1,7 @@
+import { TANGO_ELECTRONIC_DRUM_RESPONSE, URBAN_LATIN_DRUM_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
+import { DRUM_COMPONENT_PATTERNS, METAL_SHELL_INSTRUMENT_PATTERN, WOOD_BOX_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
+import { DRUM_HEAVY_ROCK_PATTERN, DRUM_KICK_GENRE_TUNING, DRUM_LATIN_PATTERN, DRUM_REGGAE_SKA_PATTERN, DRUM_ROCK_PATTERN, DRUM_URBAN_PATTERN } from '../../data/sound/dsp/genrePlaybackProfiles';
+import { HOUSE_DISCO_PATTERN, KIZOMBA_PATTERN, REGGAETON_PATTERN, TANGO_ELECTRONICO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
 import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../sheet/random.ts';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
@@ -26,9 +30,9 @@ export default class DrumsModule implements InstrumentModule {
     const f0 = el.mul(freqSignal, Math.pow(2, detuneSemitones / 12));
 
     const instId = (params.instrumentId ?? '').toLowerCase();
-    const isTangoElectronico = /tango-electronico|electrotango/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isKizomba = /kizomba|tarraxo|urbankiz|ghetto-zouk/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isReggaeton = /reggaeton|reggaetón|dembow|perreo|neoperreo/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isTangoElectronico = TANGO_ELECTRONICO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const gd = ctx.genreDialect;
     const genre = gd.id;
     const component = resolveInstrumentKitComponent(instId, voice.note, `${action} ${voice.action ?? ''}`);
@@ -48,7 +52,7 @@ export default class DrumsModule implements InstrumentModule {
         const isSnare = id.startsWith('snare-');
         const isHat = id.startsWith('hihat-');
         const isTom = id.startsWith('tom-');
-        const isCymbal = /crash|ride|splash|china/.test(id);
+        const isCymbal = DRUM_COMPONENT_PATTERNS.cymbal.test(id);
 
         if (isKick) {
           const sweep = el.add(1, el.mul(-0.22, el.adsr(0.0002, 0.025, 0, 0.004, gateSignal)));
@@ -59,7 +63,7 @@ export default class DrumsModule implements InstrumentModule {
         }
 
         if (isSnare) {
-          const rim = id === 'snare-rimshot' || /rimshot/.test(action);
+          const rim = id === 'snare-rimshot' || DRUM_COMPONENT_PATTERNS.rimshot.test(action);
           const cross = id === 'snare-cross-stick';
           const ghost = id === 'snare-ghost';
           const body = el.mul(cross ? 0.16 : ghost ? 0.34 : 0.58, el.mul(el.add(el.cycle(f), el.mul(0.32, el.cycle(f * 1.9))), componentEnv));
@@ -102,7 +106,7 @@ export default class DrumsModule implements InstrumentModule {
       const id = component.id.toLowerCase();
       const isBayan = id.startsWith('bayan-');
       const isMeend = id === 'bayan-meend' || action === 'meend';
-      const isMuted = component.strikeZones?.includes('closed') || /ti-ke|mute|slap/.test(id) || action === 'mute';
+      const isMuted = component.strikeZones?.includes('closed') || DRUM_COMPONENT_PATTERNS.muted.test(id) || action === 'mute';
       const fundamental = Math.max(35, component.tuningHz ?? (isBayan ? 110 : 240));
       const decay = Math.max(0.025, component.decayTimeSec ?? (isMuted ? 0.08 : 0.8));
       const envelope = el.adsr(0.0002, decay, 0, Math.min(0.06, Math.max(0.006, decay * 0.12)), gateSignal);
@@ -118,7 +122,7 @@ export default class DrumsModule implements InstrumentModule {
 
     if (component && instId === 'bata') {
       const id = component.id.toLowerCase();
-      const isSmallHead = /chacha/.test(id);
+      const isSmallHead = DRUM_COMPONENT_PATTERNS.smallHead.test(id);
       const fundamental = Math.max(45, component.tuningHz ?? 150);
       const decay = Math.max(0.025, component.decayTimeSec ?? 0.3);
       const envelope = el.adsr(0.00025, decay, 0, Math.min(0.05, Math.max(0.006, decay * 0.12)), gateSignal);
@@ -135,9 +139,9 @@ export default class DrumsModule implements InstrumentModule {
     // conga, bongo and timbale have materially different membrane/body behavior.
     if (instId === 'congas') {
       const componentId = component?.id.toLowerCase() ?? '';
-      const open = /conga-open|tumba-open/.test(componentId) || action === 'conga-open' || action === 'open' || action === 'tumba-open' || action === 'tone';
-      const slap = /quinto-slap|slap-tapao/.test(componentId) || action === 'quinto-slap' || action === 'slap' || action === 'slap-tapao';
-      const muted = /heel|toe|tapao/.test(componentId) || action === 'mute' || action === 'muted';
+      const open = DRUM_COMPONENT_PATTERNS.open.test(componentId) || action === 'conga-open' || action === 'open' || action === 'tumba-open' || action === 'tone';
+      const slap = DRUM_COMPONENT_PATTERNS.slap.test(componentId) || action === 'quinto-slap' || action === 'slap' || action === 'slap-tapao';
+      const muted = DRUM_COMPONENT_PATTERNS.mutedTouch.test(componentId) || action === 'mute' || action === 'muted';
       const fundamental = component?.tuningHz ?? el.max(el.const({ value: 95 }), f0);
       const componentDecay = component?.decayTimeSec ?? (open ? 0.55 : 0.15);
       const componentDamping = component?.damping ?? (muted ? 0.82 : 0.25);
@@ -180,7 +184,7 @@ export default class DrumsModule implements InstrumentModule {
 
     if (instId === 'timbales') {
       const componentId = component?.id.toLowerCase() ?? '';
-      const isBell = /bell/.test(componentId);
+      const isBell = DRUM_COMPONENT_PATTERNS.bell.test(componentId);
       const rim = componentId === 'cascara' || action === 'rim' || action === 'chapa' || action === 'strappata';
       const f = component?.tuningHz ?? el.max(el.const({ value: 180 }), f0);
       const decay = component?.decayTimeSec ?? (rim ? 0.08 : 0.45);
@@ -205,12 +209,13 @@ export default class DrumsModule implements InstrumentModule {
       return applyComponentGain(el.tanh(el.mul(1.18 + params.drive * 0.3, el.add(head, el.add(shell, rimClick)))));
     }
     if (instId === 'kick' && !isKizomba && !isReggaeton && !isTangoElectronico) {
-      const urban = /house|disco|electronic|drum-and-bass|uk-bass|hip-hop|industrial/.test(genre);
-      const rock = /rock|metal|punk-hardcore/.test(genre);
-      const latin = /salsa|timba|cumbia|bachata|afrobeats|brazilian|reggae|ska/.test(genre);
+      const urban = DRUM_URBAN_PATTERN.test(genre);
+      const rock = DRUM_ROCK_PATTERN.test(genre);
+      const latin = DRUM_LATIN_PATTERN.test(genre);
       if (urban || rock || latin) {
-        const f = urban ? (genre === 'drum-and-bass' || genre === 'uk-bass' ? 58 : 52) : rock ? 66 : 62;
-        const tail = urban ? (genre === 'drum-and-bass' ? 0.095 : 0.125) : rock ? 0.105 : 0.14;
+        const kickTuning = DRUM_KICK_GENRE_TUNING[genre];
+        const f = urban ? (kickTuning ? kickTuning.frequency : 52) : rock ? 66 : 62;
+        const tail = urban ? (kickTuning?.tail ?? 0.125) : rock ? 0.105 : 0.14;
         const pitchEnv = el.adsr(0.0002, urban ? 0.022 : 0.035, 0, 0.006, gateSignal);
         const sweep = el.add(1.0, el.mul(urban ? -0.28 : -0.18, pitchEnv));
         const body = el.mul(el.cycle(f), el.mul(el.adsr(0.00025, tail, 0, 0.018, gateSignal), sweep));
@@ -222,52 +227,55 @@ export default class DrumsModule implements InstrumentModule {
     if (instId === 'kick' && (isKizomba || isReggaeton)) {
       // Genre-specific low drum: Kizomba stays rounded and pocketed; Reggaetón
       // uses the short, forward Dembow kick with a controlled pitch fall.
-      const fast = isReggaeton ? 0.028 : 0.045;
-      const tail = isReggaeton ? 0.115 : 0.16;
+      const kickResponse = isReggaeton ? URBAN_LATIN_DRUM_RESPONSE.kick.reggaeton : URBAN_LATIN_DRUM_RESPONSE.kick.kizomba;
+      const fast = kickResponse.fast;
+      const tail = kickResponse.tail;
       const pitchEnv = el.adsr(0.0003, fast, 0, 0.008, gateSignal);
-      const ratio = el.add(1.0, el.mul(isReggaeton ? -0.58 : -0.38, pitchEnv));
+      const ratio = el.add(1.0, el.mul(kickResponse.pitchFall, pitchEnv));
       const body = el.mul(el.cycle(el.mul(f0, ratio)), el.adsr(0.00025, tail, 0, 0.025, gateSignal));
-      const thump = el.mul(isKizomba ? 0.22 : 0.16, el.cycle(el.mul(f0, 0.5)), el.adsr(0.0005, 0.09, 0, 0.025, gateSignal));
-      const click = el.mul(isReggaeton ? 0.18 : 0.10, el.mul(el.highpass(isReggaeton ? 2200 : 1500, 1.0, el.noise()), el.adsr(0.0001, 0.006, 0, 0.002, gateSignal)));
+      const thump = el.mul(isKizomba ? URBAN_LATIN_DRUM_RESPONSE.kick.thumpKizomba : URBAN_LATIN_DRUM_RESPONSE.kick.thumpDefault, el.cycle(el.mul(f0, 0.5)), el.adsr(0.0005, 0.09, 0, 0.025, gateSignal));
+      const click = el.mul(kickResponse.click, el.mul(el.highpass(kickResponse.clickCutoff, 1.0, el.noise()), el.adsr(0.0001, 0.006, 0, 0.002, gateSignal)));
       return el.tanh(el.mul(1.25 + params.drive * 0.55, el.add(body, el.add(thump, click))));
     }
     if ((instId === 'snare' || instId === 'clap') && !isKizomba && !isReggaeton) {
-      if (/house|disco/.test(genre)) {
+      if (HOUSE_DISCO_PATTERN.test(genre)) {
         const body = el.mul(el.cycle(190), el.adsr(0.0002, 0.075, 0, 0.014, gateSignal));
         const noise = el.mul(0.46, el.mul(el.highpass(3000, 1.0, el.noise()), el.adsr(0.0001, 0.018, 0, 0.005, gateSignal)));
         return el.tanh(el.add(body, noise));
       }
-      if (/reggae|ska/.test(genre)) {
+      if (DRUM_REGGAE_SKA_PATTERN.test(genre)) {
         const body = el.mul(el.cycle(175), el.adsr(0.0003, 0.11, 0, 0.02, gateSignal));
         const noise = el.mul(0.30, el.mul(el.highpass(2500, 1.0, el.noise()), el.adsr(0.0002, 0.025, 0, 0.008, gateSignal)));
         return el.add(body, noise);
       }
-      if (/metal|rock|punk-hardcore/.test(genre)) {
+      if (DRUM_HEAVY_ROCK_PATTERN.test(genre)) {
         const body = el.mul(el.cycle(205), el.adsr(0.00015, 0.055, 0, 0.012, gateSignal));
         const crack = el.mul(0.62, el.mul(el.highpass(3600, 1.1, el.noise()), el.adsr(0.0001, 0.018, 0, 0.005, gateSignal)));
         return el.tanh(el.mul(1.15, el.add(body, crack)));
       }
     }
     if ((instId === 'snare' || instId === 'drums') && (isKizomba || isReggaeton)) {
-      const bodyFreq = isReggaeton ? 185 : 210;
-      const body = el.mul(el.cycle(f0), el.adsr(0.0003, isReggaeton ? 0.065 : 0.09, 0, 0.018, gateSignal));
-      const crack = el.mul(isReggaeton ? 0.55 : 0.38, el.mul(el.highpass(bodyFreq * 5, 1.0, el.noise()), el.adsr(0.0001, isReggaeton ? 0.022 : 0.03, 0, 0.009, gateSignal)));
-      const ring = el.mul(isKizomba ? 0.12 : 0.08, el.mul(el.cycle(bodyFreq * 2.2), el.adsr(0.0002, 0.11, 0, 0.025, gateSignal)));
+      const snareResponse = isReggaeton ? URBAN_LATIN_DRUM_RESPONSE.snare.reggaeton : URBAN_LATIN_DRUM_RESPONSE.snare.kizomba;
+      const bodyFreq = snareResponse.bodyFrequency;
+      const body = el.mul(el.cycle(f0), el.adsr(0.0003, snareResponse.decay, 0, 0.018, gateSignal));
+      const crack = el.mul(snareResponse.crack, el.mul(el.highpass(bodyFreq * 5, 1.0, el.noise()), el.adsr(0.0001, snareResponse.crackDecay, 0, 0.009, gateSignal)));
+      const ring = el.mul(isKizomba ? URBAN_LATIN_DRUM_RESPONSE.snare.ringKizomba : URBAN_LATIN_DRUM_RESPONSE.snare.ringDefault, el.mul(el.cycle(bodyFreq * 2.2), el.adsr(0.0002, 0.11, 0, 0.025, gateSignal)));
       return el.tanh(el.mul(1.1 + params.drive * 0.4, el.add(body, el.add(crack, ring))));
     }
     if (instId === 'kick' && isTangoElectronico) {
       // Electrotango kick: short, deep acoustic-style thump with a controlled
       // downward pitch sweep. It is deliberately tighter than an EDM 808 kick
       // so the bandoneón/piano articulation remains audible.
-      const pitchEnv = el.adsr(0.0004, 0.055, 0, 0.006, gateSignal);
-      const sweep = el.add(1.0, el.mul(-0.46, pitchEnv));
-      const body = el.mul(0.90, el.mul(el.cycle(el.mul(f0, sweep)), el.adsr(0.0003, 0.14, 0, 0.028, gateSignal)));
-      const click = el.mul(0.13, el.mul(el.highpass(1800, 1.1, el.noise()), el.adsr(0.0001, 0.006, 0, 0.002, gateSignal)));
-      return el.tanh(el.mul(1.25 + params.drive * 0.8, el.add(body, click)));
+      const response = TANGO_ELECTRONIC_DRUM_RESPONSE;
+      const pitchEnv = el.adsr(0.0004, response.pitchAttack, 0, 0.006, gateSignal);
+      const sweep = el.add(1.0, el.mul(response.pitchFall, pitchEnv));
+      const body = el.mul(response.bodyGain, el.mul(el.cycle(el.mul(f0, sweep)), el.adsr(0.0003, response.bodyDecay, 0, 0.028, gateSignal)));
+      const click = el.mul(response.clickGain, el.mul(el.highpass(response.clickFrequency, 1.1, el.noise()), el.adsr(0.0001, 0.006, 0, 0.002, gateSignal)));
+      return el.tanh(el.mul(response.drive + params.drive * response.driveMultiplier, el.add(body, click)));
     }
     const construction = params.bodyConstruction ?? 'wood-box';
-    const isMetalShell = construction === 'metal-shell' || /timbal|metal|steel|agogo|bell|snare-metal/.test(instId);
-    const isWoodBox = construction === 'wood-box' || /cajon|cajón|box|slit-drum/.test(instId);
+    const isMetalShell = construction === 'metal-shell' || METAL_SHELL_INSTRUMENT_PATTERN.test(instId);
+    const isWoodBox = construction === 'wood-box' || WOOD_BOX_INSTRUMENT_PATTERN.test(instId);
     const isHeelToe = action === 'heel' || action === 'toe' || /heel|toe/i.test(action ?? '');
 
     const isLogDrum = instId.includes('log-drum');

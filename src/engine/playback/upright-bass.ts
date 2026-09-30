@@ -1,3 +1,6 @@
+import { TANGO_INSTRUMENT_RESPONSE, URBAN_BASS_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
+import { UPRIGHT_BASS_CUTOFF_RULES, UPRIGHT_BASS_DECAY_RULES } from '../../data/sound/dsp/genrePlaybackProfiles';
+import { KIZOMBA_PATTERN, REGGAETON_PATTERN, TANGO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
 import { el } from '@elemaudio/core';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { createDampedStringLoop, fbGainForDecay } from './instrumentLib_stringLoop.ts';
@@ -36,10 +39,11 @@ export default class UprightBassModule implements InstrumentModule {
     const isLija = action === 'lija' || /lija|sandpaper/i.test(action ?? '');
     const isTambor = action === 'tambor' || action === 'body-tap' || /tambor/i.test(action ?? '');
     const isChicharra = action === 'chicharra' || /chicharra/i.test(action ?? '');
-    const isTango = /tango|milonga|vals/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const tangoResponse = TANGO_INSTRUMENT_RESPONSE.uprightBass;
     const isMarcato = action === 'marcato' || /marcato|marked/i.test(action ?? '');
-    const isKizomba = /kizomba|tarraxo|urbankiz|ghetto-zouk/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isReggaeton = /reggaeton|reggaetón|dembow|perreo|neoperreo/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const isSubBass = /^(sub-bass|bass-lead)$/i.test(params.instrumentId ?? '');
     const gd = ctx.genreDialect;
     const genre = gd.id;
@@ -51,12 +55,13 @@ export default class UprightBassModule implements InstrumentModule {
       const p = el.syncphasor(safeFreqSignal, gateSignal);
       const sine = el.sin(el.mul(2 * Math.PI, p));
       const fifth = el.sin(el.mul(2 * Math.PI, el.syncphasor(el.mul(safeFreqSignal, 2), gateSignal)));
-      const attack = el.adsr(0.001, isReggaeton ? 0.055 : 0.075, 0.68, 0.035, gateSignal);
+      const urbanBass = isReggaeton ? URBAN_BASS_RESPONSE.reggaeton : URBAN_BASS_RESPONSE.default;
+      const attack = el.adsr(0.001, urbanBass.attack, 0.68, 0.035, gateSignal);
       const click = el.mul(0.045, el.mul(el.highpass(900, 1.0, el.noise()), el.adsr(0.0002, 0.008, 0, 0.002, gateSignal)));
-      const harmonic = el.mul(isReggaeton ? 0.13 : 0.09, fifth);
+      const harmonic = el.mul(urbanBass.harmonic, fifth);
       const tone = el.add(el.mul(0.82, sine), el.add(harmonic, click));
-      const cutoff = isReggaeton ? 1150 + b * 900 : 900 + b * 700;
-      return el.lowpass(cutoff, 1.0, el.tanh(el.mul(isReggaeton ? 1.15 : 1.05, el.mul(attack, tone))));
+      const cutoff = urbanBass.cutoffBase + b * urbanBass.cutoffBrightness;
+      return el.lowpass(cutoff, 1.0, el.tanh(el.mul(urbanBass.drive, el.mul(attack, tone))));
     }
     const isYumba = action === 'yumba' || /yumba/i.test(action ?? '');
     const isArco = action === 'arco' || action === 'bow_drag' || isLija || params.bowPressure > 0.45;
@@ -170,12 +175,9 @@ export default class UprightBassModule implements InstrumentModule {
       el.adsr(0.0015, 0.022, 0, 0.008, gateSignal)
     );
 
-    const genreDecayBase = /funk|disco|ska|reggaeton|house|drum-and-bass|uk-bass/.test(genre) ? 0.28
-      : /jazz|blues|swing|gospel|soul/.test(genre) ? 0.62
-      : /reggae|afrobeats|zouk|kizomba/.test(genre) ? 0.50
-      : 0.55;
+    const genreDecayBase = UPRIGHT_BASS_DECAY_RULES.find(rule => rule.pattern.test(genre))?.value ?? 0.55;
     const targetDecaySeconds = isTango
-      ? 0.34 + decayTime * (0.72 + b * 0.95)
+      ? tangoResponse.decayBase + decayTime * (tangoResponse.decayTimeMultiplier + b * tangoResponse.brightnessMultiplier)
       : genreDecayBase + decayTime * (1.05 + b * 1.25) * gd.decay;
     const damping = fbGainForDecay(activeFreq, targetDecaySeconds);
     const bassCutoff = el.min(
@@ -191,23 +193,21 @@ export default class UprightBassModule implements InstrumentModule {
     const back = el.svf({ mode: 'bandpass' }, 110, 2.2, stringLoop);
     const acousticBody = el.add(
       stringLoop,
-      el.add(el.mul((isTango ? 0.52 : 0.45) * gd.body, air), el.add(el.mul((isTango ? 0.42 : 0.35) * gd.body, wood), el.mul((isTango ? 0.24 : 0.20) * gd.body, back)))
+      el.add(el.mul((isTango ? tangoResponse.airGain : tangoResponse.airGainDefault) * gd.body, air), el.add(el.mul((isTango ? tangoResponse.woodGain : tangoResponse.woodGainDefault) * gd.body, wood), el.mul((isTango ? tangoResponse.backGain : tangoResponse.backGainDefault) * gd.body, back)))
     );
 
     // Tango needs the woody attack and fifth/upper harmonics of a real double
     // sine component made the instrument read as synth bass in an MP3 export.
     const subPhasor = el.syncphasor(activeFreq, gateSignal);
-    const subSine = el.mul(isTango ? 0.13 : 0.22, el.sin(el.mul(2 * Math.PI, subPhasor)));
+    const subSine = el.mul(isTango ? tangoResponse.subGain : tangoResponse.subGainDefault, el.sin(el.mul(2 * Math.PI, subPhasor)));
     const marcatoThud = (isTango && (isMarcato || isYumba))
-      ? el.mul(0.16, el.mul(el.cycle(72), el.adsr(0.0003, 0.050, 0, 0.014, gateSignal)))
+      ? el.mul(tangoResponse.marcatoThudGain, el.mul(el.cycle(72), el.adsr(0.0003, 0.050, 0, 0.014, gateSignal)))
       : el.const({ value: 0 });
     const mixed = el.add(acousticBody, el.add(subSine, marcatoThud));
 
-    const genreCutoff = /jazz|blues|swing|country/.test(genre) ? 5200 + b * 4200
-      : /funk|rock|ska|disco/.test(genre) ? 4300 + b * 3900
-      : /reggae|zouk|kizomba|afrobeats/.test(genre) ? 3600 + b * 3200
-      : 3000 + b * 3000;
-    const tangoCutoff = isTango ? 4200 + b * 3600 : genreCutoff * gd.brightness;
+    const cutoffRule = UPRIGHT_BASS_CUTOFF_RULES.find(rule => rule.pattern.test(genre));
+    const genreCutoff = cutoffRule ? cutoffRule.base + b * cutoffRule.brightness : 3000 + b * 3000;
+    const tangoCutoff = isTango ? tangoResponse.cutoffBase + b * tangoResponse.cutoffBrightness : genreCutoff * gd.brightness;
     return el.lowpass(Math.min(19000, tangoCutoff), 1.1, mixed);
   }
 }

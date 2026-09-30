@@ -1,3 +1,4 @@
+import { TIMING_OFFSETS_BY_FEEL } from '../../data/performance/timingOffsets';
 export interface SequenceEvent {
   beat: number;
   duration?: number;
@@ -9,11 +10,7 @@ export interface SequenceEvent {
   [key: string]: unknown;
 }
 
-export interface GenreTimingProfile {
-  microTiming?: {
-    instrumentRoles?: Record<string, 'laid_back' | 'pushed' | 'rubato' | 'strict'>;
-  };
-}
+import type { GenreTimingProfile } from '../../data/performance/schema/genre-timing';
 
 export interface SequencerContext {
   bpmToSeconds: number;
@@ -29,13 +26,13 @@ export class TimingCalculator {
 
     switch (instrumentFeel) {
       case 'laid_back':
-        timingOffset = 0.045 + ctx.rng.float() * 0.015;
+        timingOffset = TIMING_OFFSETS_BY_FEEL.laid_back.offset + ctx.rng.float() * TIMING_OFFSETS_BY_FEEL.laid_back.jitter;
         break;
       case 'pushed':
-        timingOffset = -0.035 - ctx.rng.float() * 0.01;
+        timingOffset = TIMING_OFFSETS_BY_FEEL.pushed.offset - ctx.rng.float() * TIMING_OFFSETS_BY_FEEL.pushed.jitter;
         break;
       case 'rubato':
-        timingOffset = Math.sin(((event.beat % 4) / 4) * Math.PI) * 0.08 - 0.04;
+        timingOffset = Math.sin(((event.beat % 4) / 4) * Math.PI) * TIMING_OFFSETS_BY_FEEL.rubato.amplitude + TIMING_OFFSETS_BY_FEEL.rubato.center;
         break;
     }
 

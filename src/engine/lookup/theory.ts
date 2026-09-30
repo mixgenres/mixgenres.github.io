@@ -56,10 +56,18 @@ export function blendGenreTheory(host: GenreTheoryProfile, guest: GenreTheoryPro
 
 export function styleTheoryFor(styleId: string | undefined, genreId: string): GenreTheoryProfile {
   const base = getGenreTheory(genreId);
-  const id = String(styleId ?? '').toLowerCase();
+  const slug = (value: string) => value.toLowerCase().normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '').replace(/&/g, '-and-')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const fullId = slug(String(styleId ?? ''));
+  const genrePrefix = `${slug(genreId)}-`;
+  const id = fullId.startsWith(genrePrefix) ? fullId.slice(genrePrefix.length) : fullId;
   if (!id) return base;
   const out: GenreTheoryProfile = JSON.parse(JSON.stringify(base));
-  const has = (s:string) => id.includes(s);
+  const has = (s:string) => {
+    const term = slug(s);
+    return id === term || id.startsWith(`${term}-`) || id.endsWith(`-${term}`) || id.includes(`-${term}-`);
+  };
   if (has('tango-tradicional') || has('guardia-vieja')) {
     out.rhythm.signature.push('marcato-en-4','marcato-en-2','habanera-bass','arrastre');
     out.bass.style='tango';
@@ -108,7 +116,7 @@ export function styleTheoryFor(styleId: string | undefined, genreId: string): Ge
   if (has('samba')) { out.meter='2/4'; out.rhythm.signature.push('surdo','tamborim','pandeiro'); out.mixFocus.percussion=.86; }
   if (has('pagode')) { out.rhythm.signature.push('pandeiro','tantan','cavaquinho'); }
   if (has('choro')) { out.meter='2/4'; out.rhythm.signature.push('choro-syncopation'); out.bass.style='walking'; out.bass.passingProbability=.38; }
-  if (has('forró')) { out.meter='2/4'; out.rhythm.signature.push('baião','zabumba','triangulo'); out.bass.style='rootFifth'; }
+  if (has('forro')) { out.meter='2/4'; out.rhythm.signature.push('baião','zabumba','triangulo'); out.bass.style='rootFifth'; }
   if (has('deep-house')) { out.rhythm.signature.push('offbeat-hats','organ-stab'); out.harmony.voicing='close'; }
   if (has('soulful-house')) { out.harmonicModel='functional'; out.harmony.guideTonePriority=true; out.melody.scale.push('blues'); }
   if (has('tech-house')) { out.bass.style='house'; out.harmony.voicing='close'; out.harmony.maxLowDensity=.12; }
@@ -118,7 +126,7 @@ export function styleTheoryFor(styleId: string | undefined, genreId: string): Ge
   if (has('neo-soul')) { out.harmony.voicing='drop-two'; out.melody.scale.push('dorian'); out.melody.ornamentCap=.26; }
   if (has('quiet-storm')) { out.bass.silenceProbability=.16; out.rhythm.signature.push('space','slow-pocket'); out.mixFocus.pad=.6; }
   if (has('new-jack')) { out.rhythm.signature.push('swinging-programmed-backbeat'); out.rhythm.swing=.56; }
-  if (has('funk-r&b')) { out.bass.passingProbability=.36; out.techniques.bass.push('slap','ghost'); }
+  if (has('funk-r-and-b')) { out.bass.passingProbability=.36; out.techniques.bass.push('slap','ghost'); }
   if (has('motown')) { out.rhythm.signature.push('motorik-bass','tambourine'); out.bass.style='riff'; }
   if (has('deep-soul') || has('southern')) { out.rhythm.signature.push('three-part-vocal-response'); out.mixFocus.lead=.88; }
   if (has('psychedelic-soul')) out.rhythm.signature.push('extended-vamp','bridge-texture');
@@ -131,18 +139,18 @@ export function styleTheoryFor(styleId: string | undefined, genreId: string): Ge
   if (has('jump-up')) { out.bass.style='sub'; out.rhythm.signature.push('jump-up-bass-stab'); }
   if (has('neuro')) { out.rhythm.signature.push('micro-edit','resampled-bass'); out.bass.style='sub'; }
   if (has('dancefloor')) { out.melody.contour.push('anthem-hook'); out.mixFocus.lead=.8; }
-  if (has('minimal dnb')) { out.rhythm.signature.push('negative-space'); out.bass.silenceProbability=.16; }
+  if (has('minimal-dnb')) { out.rhythm.signature.push('negative-space'); out.bass.silenceProbability=.16; }
   if (has('punk')) { out.rhythm.signature.push('downpick-8ths'); out.bass.passingProbability=.05; }
   if (has('hardcore')) { out.rhythm.signature.push('D-beat','half-time-breakdown'); out.meter='4/4'; }
   if (has('post-hardcore')) out.rhythm.signature.push('dynamic-stop-start');
   if (has('skate')) out.rhythm.signature.push('fast-8ths','melodic-hook');
   if (has('crust')) out.rhythm.signature.push('d-beat','half-time');
   if (has('melodic')) out.melody.scale.push('major-pentatonic');
-  if (has('pop punk')) out.harmonicModel='functional';
-  if (has('uk garage') || has('2-step')) { out.rhythm.signature.push('2-step','skippy-snare'); out.bass.style='sub'; }
+  if (has('pop-punk')) out.harmonicModel='functional';
+  if (has('uk-garage') || has('2-step')) { out.rhythm.signature.push('2-step','skippy-snare'); out.bass.style='sub'; }
   if (has('grime')) { out.rhythm.signature.push('sparse-snare','square-lead'); out.bass.silenceProbability=.12; }
   if (has('dubstep')) { out.rhythm.signature.push('half-time','bass-drop'); out.bass.style='sub'; }
-  if (has('future garage')) { out.rhythm.signature.push('shuffled-ghost','vocal-chop'); out.rhythm.swing=.56; }
+  if (has('future-garage')) { out.rhythm.signature.push('shuffled-ghost','vocal-chop'); out.rhythm.swing=.56; }
   if (has('bassline')) { out.rhythm.signature.push('bassline-syncopation'); out.bass.passingProbability=.18; }
   if (has('breaks')) { out.rhythm.signature.push('broken-beat'); }
   if (has('ebm')) { out.rhythm.signature.push('four-on-floor','sequenced-bass'); out.mixFocus.drums=.9; }

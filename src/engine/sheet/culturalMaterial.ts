@@ -1,23 +1,8 @@
-import { VoiceProfile, foldToRange } from '../sheet/instrumentRoles.ts';
+import { foldToRange } from '../sheet/instrumentRoles.ts';
+import type { VoiceProfile } from '../../data/instruments/schema/voice-profile';
 import type { ResolvedStyle } from '../../data/styles/schema';
-
-export type CulturalHarmonyModel = 'functional' | 'modal-drone' | 'heterophonic' | 'fixed-cluster';
-
-export interface CulturalRules {
-  styleId: string;
-  sourceModel: string;
-  harmonyModel: CulturalHarmonyModel;
-  /** Pitch intervals above the style's tonal center, in 12-TET approximation. */
-  pitchIntervals: number[];
-  /** Do not snap melody notes to Western chord tones. */
-  snapToChord: boolean;
-  /** Preserve pattern-authored timing instead of imposing a generic groove template. */
-  authoredTimingOnly: boolean;
-  /** Whether melodic layers should shadow a shared phrase with ornament/density changes. */
-  heterophonic: boolean;
-  /** Keep the default output sparse enough for the style to speak. */
-  avoidBassFoundation: boolean;
-}
+import { PREVIEW_MODAL_INSTRUMENTS, PREVIEW_FIXED_INSTRUMENTS, FIXED_CULTURAL_PITCH_INTERVALS, MODAL_CULTURAL_PITCH_INTERVALS, CELTIC_OPEN_HARMONY_INTERVALS, CELTIC_COLOR_INTERVALS, SHO_HIGH_INTENSITY_INTERVALS, SHO_LOW_INTENSITY_INTERVALS } from '../../data/musicTheory/culturalPitchSets';
+import type { CulturalRules, CulturalHarmonyModel } from '../../data/musicTheory/culturalPitchSets';
 
 export function culturalRules(style: ResolvedStyle, _instrumentId?: string): CulturalRules | undefined {
   const model = style.contract.harmonyModel;
@@ -37,14 +22,14 @@ export function culturalRules(style: ResolvedStyle, _instrumentId?: string): Cul
 }
 
 export function previewCulturalRules(instrumentId: string): CulturalRules | undefined {
-  const modal = ['guqin','guzheng','pipa','erhu','dizi','xiao','jinghu','bagpipes','uilleann-pipes','tin-whistle','low-whistle','celtic-harp','fiddle','concertina','bodhran','bones'].includes(instrumentId);
-  const fixed = ['sho','ryuteki','hichiriki'].includes(instrumentId);
+  const modal = PREVIEW_MODAL_INSTRUMENTS.includes(instrumentId);
+  const fixed = PREVIEW_FIXED_INSTRUMENTS.includes(instrumentId);
   if (!modal && !fixed) return undefined;
   return {
     styleId: `preview-${instrumentId}`,
     sourceModel: fixed ? 'fixed-cluster' : 'modal-drone',
     harmonyModel: fixed ? 'fixed-cluster' : 'modal-drone',
-    pitchIntervals: fixed ? [0,2,4,7,9] : [0,2,4,5,7,9,10],
+    pitchIntervals: fixed ? FIXED_CULTURAL_PITCH_INTERVALS : MODAL_CULTURAL_PITCH_INTERVALS,
     snapToChord: false,
     authoredTimingOnly: modal,
     heterophonic: modal,
@@ -74,10 +59,8 @@ export function celticOpenHarmony(
   seed: number,
 ): number[] {
   const centre = Math.round(profile.centre);
-  const fifthPc = (rootPc + 7) % 12;
-  const octave = (rootPc + 12) % 12;
-  const candidates = [rootPc, fifthPc, octave];
-  if (intensity > 0.68) candidates.push((rootPc + (seed & 1 ? 9 : 2)) % 12);
+  const candidates = CELTIC_OPEN_HARMONY_INTERVALS.map(interval => (rootPc + interval) % 12);
+  if (intensity > 0.68) candidates.push((rootPc + CELTIC_COLOR_INTERVALS[seed & 1]) % 12);
   const out = candidates.map((pc, i) => foldToRange(pc + 12 * Math.round((centre + (i === 0 ? -7 : i === 1 ? 0 : 7) - pc) / 12), profile));
   return [...new Set(out)].sort((a,b) => a-b);
 }
@@ -95,7 +78,7 @@ export function culturalPitchSet(rules: CulturalRules, tonicPc: number): number[
  */
 export function shoCluster(tonicPc: number, profile: VoiceProfile, intensity: number): number[] {
   const centre = Math.round(profile.centre);
-  const chosenIntervals = intensity > 0.72 ? [0, 2, 4, 7, 9] : [0, 2, 5, 7];
+  const chosenIntervals = intensity > 0.72 ? SHO_HIGH_INTENSITY_INTERVALS : SHO_LOW_INTENSITY_INTERVALS;
   const out = chosenIntervals.map(iv => {
     const pc = (tonicPc + iv) % 12;
     return pc + 12 * Math.round((centre + (iv >= 7 ? 5 : 0) - pc) / 12);

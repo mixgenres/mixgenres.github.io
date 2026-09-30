@@ -1,6 +1,7 @@
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { GESTURE_NAMES } from '../band/gestures.ts';
-import type { LuthierModelCategory } from './luthier.ts';
+import type { LuthierModelCategory } from '../../data/instruments/schema/luthier';
+import { FINGERPAD_GESTURES, HARD_PICK_GESTURES, NAIL_GESTURES, HAMMER_GESTURES, BOW_GESTURES, AIR_GESTURES, BOWED_RENDER_INSTRUMENT_PATTERN } from '../../data/performance/gestureExcitations';
 
 export type RenderExcitationType = 'plectrum' | 'nail' | 'fingerpad' | 'hard-pick' | 'hammer' | 'stick' | 'mallet' | 'breath' | 'bow';
 
@@ -17,25 +18,6 @@ export interface ResolvedRenderGesture {
   decayTimeFactorScale: number;
 }
 
-const FINGERPAD = new Set([
-  'fingerstyle', 'pizzicato', 'thumb-slap', 'thumb-sweep', 'tirando', 'apoyando',
-  'short-decay-pluck', 'tight-env-pluck', 'finger-snap',
-]);
-const HARD_PICK = new Set([
-  'flatpick', 'pick', 'fast-picking', 'tremolo-picking', 'ricochet', 'heavy-detache',
-  'hard-pizzicato', 'bartok-pizzicato', 'fm-bite',
-]);
-const NAIL = new Set([
-  'rasgueado', 'golpe', 'alzapua', 'picado', 'fast-arpeggiato', 'fast-chord-rake',
-  'noise-burst', 'noise-transient', 'cluster-tap',
-]);
-const HAMMER = new Set([
-  'staccato', 'staccatissimo', 'bass-cluster-staccato', 'accented-staccato-octave',
-  'muted-key-thump', 'trill',
-]);
-const BOW = new Set(['arco', 'e-bow-sustain', 'tremolo-bow', 'sul-ponticello-heavy', 'glissando-down', 'glissando-up']);
-const AIR = new Set(['flutter-tongue', 'rip', 'tongue-slap', 'stopped', 'double-tongue', 'fp-crescendo']);
-
 function normalizedGesture(name: string): string {
   return name.toLowerCase().replace(/é/g, 'e').replace(/á/g, 'a');
 }
@@ -44,14 +26,14 @@ export function resolveRenderGesture(instrumentId: string, gestureCode: number):
   const def = INSTRUMENTS_BY_ID[instrumentId];
   const name = GESTURE_NAMES[gestureCode] ?? 'tone';
   const g = normalizedGesture(name);
-  const isBowed = def?.family === 'bowed' || /violin|fiddle|cello|viola|erhu|jinghu/i.test(instrumentId);
+  const isBowed = def?.family === 'bowed' || BOWED_RENDER_INSTRUMENT_PATTERN.test(instrumentId);
   // A bowed instrument may use a plucked path only for an explicitly authored
   // pizzicato gesture. Generic pick/fingerstyle aliases must never override its
   // bow excitation simply because the gesture vocabulary overlaps.
   const explicitPizz = g === 'pizzicato' || /pizz/.test(g);
   const isPluck = isBowed
     ? explicitPizz
-    : FINGERPAD.has(g) || HARD_PICK.has(g) || /pizz|pick|pluck|fingerstyle|flatpick/.test(g);
+    : FINGERPAD_GESTURES.has(g) || HARD_PICK_GESTURES.has(g) || /pizz|pick|pluck|fingerstyle|flatpick/.test(g);
 
   let action = g;
   if (isBowed && explicitPizz) action = 'pluck';
@@ -63,12 +45,12 @@ export function resolveRenderGesture(instrumentId: string, gestureCode: number):
   else if (g === 'brush') action = 'strike';
 
   let excitationType: RenderExcitationType | string = def?.excitationType ?? def?.luthierPhysics?.excitationType ?? 'fingerpad';
-  if (FINGERPAD.has(g)) excitationType = 'fingerpad';
-  else if (HARD_PICK.has(g)) excitationType = 'hard-pick';
-  else if (NAIL.has(g)) excitationType = 'nail';
-  else if (HAMMER.has(g)) excitationType = 'hammer';
-  else if (BOW.has(g)) excitationType = 'bow';
-  else if (AIR.has(g)) excitationType = 'breath';
+  if (FINGERPAD_GESTURES.has(g)) excitationType = 'fingerpad';
+  else if (HARD_PICK_GESTURES.has(g)) excitationType = 'hard-pick';
+  else if (NAIL_GESTURES.has(g)) excitationType = 'nail';
+  else if (HAMMER_GESTURES.has(g)) excitationType = 'hammer';
+  else if (BOW_GESTURES.has(g)) excitationType = 'bow';
+  else if (AIR_GESTURES.has(g)) excitationType = 'breath';
 
   const categoryOverride = isBowed && isPluck
     ? 'strum_friction_pluck' as const

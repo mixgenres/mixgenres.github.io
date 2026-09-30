@@ -1,5 +1,5 @@
-import { buildInstrumentDSPProfile } from './instrument';
-import type { InstrumentDef, TransitionMechanics, EnvironmentalReactivity, SpatialRadiation } from '../../data/instruments/schema/instrument-def';
+import { buildInstrumentDSPProfile } from '../../sound/dsp/profileBuilders';
+import type { InstrumentDef, TransitionMechanics, EnvironmentalReactivity, SpatialRadiation } from '../schema/instrument-def';
 
 export function enrichInstrumentPhysics(d: InstrumentDef): InstrumentDef {
   const id = d.id;
@@ -94,4 +94,3 @@ export function enrichInstrumentPhysics(d: InstrumentDef): InstrumentDef {
     }))
   };
 }
-

@@ -1,0 +1,61 @@
+export type InstrumentPatternKindRule = {
+  voicing?: string;
+  family?: string;
+  ids?: readonly string[];
+  includes?: string;
+  includesAny?: readonly string[];
+  aliases: readonly string[];
+};
+
+export const INSTRUMENT_PATTERN_KIND_RULES: readonly InstrumentPatternKindRule[] = [
+  { voicing: 'bass', aliases: ['bass'] },
+  { voicing: 'unpitched', aliases: ['percussion'] },
+  { voicing: 'single', aliases: ['melody', 'lead'] },
+  { voicing: 'chord', aliases: ['harmony'] },
+  { family: 'kit', aliases: ['drums', 'percussion', 'pulse'] },
+  { family: 'plucked', aliases: ['guitar', 'plucked'] },
+  { family: 'bowed', aliases: ['strings'] },
+  { ids: ['violin', 'fiddle'], aliases: ['violin'] },
+  { ids: ['cello'], aliases: ['cello'] },
+  { family: 'winds', ids: ['soprano-sax', 'alto-sax', 'tenor-sax', 'bari-sax'], aliases: ['sax'] },
+  { ids: ['flute', 'dizi', 'xiao', 'tin-whistle', 'low-whistle', 'quena'], aliases: ['flute', 'lead'] },
+  { family: 'brass', aliases: ['brass'] },
+  { family: 'voice', aliases: ['voice', 'coro'] },
+  { ids: ['backing-vocals', 'choir'], aliases: ['coro'] },
+  { family: 'bellows-and-keys', aliases: ['keys'] },
+  { family: 'bellows-and-keys', includesAny: ['accordion', 'concertina'], aliases: ['accordion'] },
+  { family: 'electronic', aliases: ['synth', 'texture'] },
+  { ids: ['piano'], aliases: ['piano', 'keys'] },
+  { ids: ['rhodes'], aliases: ['piano', 'keys'] },
+  { ids: ['organ'], aliases: ['organ', 'keys'] },
+  { includes: 'guitar', aliases: ['electric-guitar'] },
+  { ids: ['congas'], aliases: ['congas'] },
+  { ids: ['bongos'], aliases: ['bongos'] },
+  { ids: ['timbales'], aliases: ['timbales'] },
+  { ids: ['guiro', 'guacharaca'], aliases: ['guiro', 'guacharaca'] },
+  { ids: ['pandeiro', 'tamborim'], aliases: ['hand-percussion', 'pandeiro'] },
+  { ids: ['bodhran'], aliases: ['bodhran', 'percussion'] },
+  { ids: ['cajon'], aliases: ['cajon', 'percussion'] },
+  { ids: ['palmas', 'zapateado'], aliases: ['palmas', 'percussion'] },
+  { ids: ['tambora'], aliases: ['tambora', 'percussion'] },
+  { ids: ['taiko', 'kane', 'paigu'], aliases: ['percussion'] },
+  { ids: ['tabla'], aliases: ['tabla', 'percussion'] },
+  { ids: ['shaker'], aliases: ['shaker', 'percussion'] },
+  { ids: ['log-drum'], aliases: ['log-drum', 'percussion', 'bass'] },
+  { ids: ['uilleann-pipes', 'bagpipes'], aliases: ['uilleann-pipes', 'bagpipes', 'lead'] },
+  { ids: ['celtic-harp', 'harp'], aliases: ['celtic-harp', 'harp', 'harmony'] },
+  { ids: ['tres'], aliases: ['tres', 'guitar'] },
+  { ids: ['charango'], aliases: ['charango', 'guitar'] },
+  { ids: ['requinto'], aliases: ['requinto', 'guitar'] },
+  { ids: ['guitarron'], aliases: ['guitarron', 'bass'] },
+  { ids: ['erhu'], aliases: ['erhu', 'strings', 'lead'] },
+  { ids: ['pipa'], aliases: ['pipa', 'plucked', 'lead'] },
+  { ids: ['guzheng', 'guqin'], aliases: ['guzheng', 'plucked', 'harmony'] },
+  { ids: ['koto'], aliases: ['koto', 'plucked', 'harmony'] },
+  { ids: ['shamisen'], aliases: ['shamisen', 'plucked', 'lead'] },
+  { ids: ['shakuhachi'], aliases: ['shakuhachi', 'flute', 'lead'] },
+  { ids: ['steel-drums'], aliases: ['steel-drums', 'percussion', 'melody'] },
+  { ids: ['slide-guitar'], aliases: ['slide-guitar', 'guitar', 'lead'] },
+  { ids: ['harmonium'], aliases: ['harmonium', 'keys', 'drone'] },
+  { ids: ['drone'], aliases: ['drone', 'pad', 'texture'] },
+];

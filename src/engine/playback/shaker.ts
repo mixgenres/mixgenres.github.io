@@ -1,3 +1,6 @@
+import { SCRAPER_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
+import { URBAN_LATIN_INSTRUMENT_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
+import { KIZOMBA_PATTERN, REGGAETON_PATTERN } from '../../data/sound/dsp/genreClassifiers';
 import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../sheet/random.ts';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
@@ -22,9 +25,10 @@ export default class ShakerModule implements InstrumentModule {
     const baseBurst = el.mul(el.noise(), el.adsr(0.001, (0.02 + decayTime * 0.06) * durDev, 0, 0.03 + decayTime * 0.08, gateSignal));
     
     const instId = (params.instrumentId ?? '').toLowerCase();
-    const isScraper = /guiro|guacharaca|dikanza|cabasa/.test(instId);
-    const isKizomba = /kizomba|tarraxo|urbankiz|ghetto-zouk/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isReggaeton = /reggaeton|reggaetón|dembow|perreo|neoperreo/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isScraper = SCRAPER_INSTRUMENT_PATTERN.test(instId);
+    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const urbanResponse = isKizomba ? URBAN_LATIN_INSTRUMENT_RESPONSE.shaker.kizomba : isReggaeton ? URBAN_LATIN_INSTRUMENT_RESPONSE.shaker.reggaeton : URBAN_LATIN_INSTRUMENT_RESPONSE.shaker.default;
     let burst = baseBurst;
     if (isScraper) {
       const strokeDur = Math.max(0.03, Math.min(0.8, decayTime * 0.25));
@@ -36,12 +40,10 @@ export default class ShakerModule implements InstrumentModule {
     }
 
     const bodyPeak = isKizomba
-      ? (instId === 'dikanza' ? 1700 + params.body * 1800 + freqDev : 1200 + params.body * 2200 + freqDev)
-      : isReggaeton
-      ? 1900 + params.body * 3000 + freqDev
-      : 1100 + params.body * 2800 + freqDev;
+      ? (instId === 'dikanza' ? 1700 + params.body * 1800 + freqDev : urbanResponse.peakBase + params.body * urbanResponse.peakBody + freqDev)
+      : urbanResponse.peakBase + params.body * urbanResponse.peakBody + freqDev;
     const shell = el.svf({ mode: 'bandpass' }, bodyPeak, 2.0, burst);
-    const brightNoise = el.mul((isKizomba ? 0.36 : isReggaeton ? 0.58 : 0.5) + b * (isKizomba ? 0.34 : 0.5), el.highpass((isKizomba ? 3000 : isReggaeton ? 3600 : 2400) + b * 4200 + freqDev, 0.9, burst));
+    const brightNoise = el.mul(urbanResponse.noiseGain + b * urbanResponse.bodyNoiseGain, el.highpass(urbanResponse.highpass + b * 4200 + freqDev, 0.9, burst));
     
     return el.add(el.mul(0.55, shell), el.mul(0.65, brightNoise));
   }

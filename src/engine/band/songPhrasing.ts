@@ -6,6 +6,7 @@ import { contractForGenre } from '../../engine/style/contracts';
 import { getInstrumentPerformanceProfile, type InstrumentPerformanceProfile } from '../../engine/lookup/performance';
 import { GESTURE_CODES, GESTURE_NAMES } from './gestures.ts';
 import { parseChord } from '../sheet/musicTheory.ts';
+import { PHRASE_TECHNIQUE_MIN_NOTES, PERCUSSION_ROLE_PATTERN, PERCUSSION_PHRASE_TECHNIQUE_BUDGET, BASS_ROLE_PATTERN, LEAD_ROLE_PATTERN, BASS_PHRASE_BUDGET_BY_GENRE, IDIOMATIC_BASS_GENRE_PATTERN, LONG_TONE_FAMILY_PATTERN, LONG_TONE_FAMILY_IDS, LONG_TONE_FAMILY_BUDGETS, LEAD_PHRASE_TECHNIQUE_BUDGET, DEFAULT_PHRASE_TECHNIQUE_BUDGET } from '../../data/performance/phraseTechniqueBudgets';
 import { styleCalibrationTarget, type StyleCalibrationTarget } from '../../engine/style/performance-schema';
 import { styleTechniqueExpectation } from '../../engine/style/performance-expectations';
 
@@ -69,12 +70,12 @@ function nearestNonRootChordTone(midi: number, pcs: number[], rootPc: number): n
 }
 
 function phraseTechniqueBudget(role: string, family: string, genre: string, notes: PerfNote[]): number {
-  if (notes.length < 5) return 0;
-  if (/percussion|drum/.test(role)) return 0.22;
-  if (/bass/.test(role)) return /tango|flamenco|jazz|blues|salsa|timba/.test(genre) ? 0.16 : 0.10;
-  if (family === 'bellows' || family === 'bowed-string') return /tango|jazz|folk|flamenco|salsa/.test(genre) ? 0.28 : 0.16;
-  if (/lead|melody|voice/.test(role)) return 0.24;
-  return 0.18;
+  if (notes.length < PHRASE_TECHNIQUE_MIN_NOTES) return 0;
+  if (PERCUSSION_ROLE_PATTERN.test(role)) return PERCUSSION_PHRASE_TECHNIQUE_BUDGET;
+  if (BASS_ROLE_PATTERN.test(role)) return BASS_PHRASE_BUDGET_BY_GENRE[IDIOMATIC_BASS_GENRE_PATTERN.test(genre) ? 'idiomatic' : 'default'];
+  if (LONG_TONE_FAMILY_IDS.includes(family)) return LONG_TONE_FAMILY_BUDGETS[LONG_TONE_FAMILY_PATTERN.test(genre) ? 'idiomatic' : 'default'];
+  if (LEAD_ROLE_PATTERN.test(role)) return LEAD_PHRASE_TECHNIQUE_BUDGET;
+  return DEFAULT_PHRASE_TECHNIQUE_BUDGET;
 }
 
 function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: InstrumentPerformanceProfile, genre: string, style: ResolvedStyle, target: StyleCalibrationTarget, phraseStart: number, phraseEnd: number) {

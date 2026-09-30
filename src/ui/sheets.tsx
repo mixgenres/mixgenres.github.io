@@ -4,7 +4,10 @@ import { Glyph } from './Glyph';
 import { PLATES, plateFor } from './worlds';
 import { INSTRUMENT_CATALOG, FAMILY_LABELS, FAMILY_ORDER, instrument } from '../engine/lookup/instruments';
 import { ALL_PATTERNS, GENRE_WORLDS_BY_ID, cleanPatternName, FEEL_ORDER, FEEL_LABELS, feelsForPattern, PatternFeel } from '../data/genres';
-import { Voice, toBar, BAR_CHOICES, FEELS, getGenreForm, parseChord, ENERGY_LABELS } from '../engine/sheet/index.ts';
+import { Voice, toBar, getGenreForm, parseChord } from '../engine/sheet/index.ts';
+import { BAR_CHOICES } from '../data/barChoices';
+import { FEELS } from '../data/tempoFeels';
+import { ENERGY_LABELS } from '../data/performance/energy';
 import type { Region } from '../types';
 import { CHORD_PALETTE, CHORD_MOODS, CHORD_MOOD_ORDER, ChordMood, JAZZ_CHORD_LIBRARY, suggestedPaletteForStyle } from '../engine/lookup/theory';
 import { formSummary } from '../engine/lookup/forms';
@@ -1636,4 +1639,3 @@ export function RandomizeSheet({
     </Sheet>
   );
 }
-

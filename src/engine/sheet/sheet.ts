@@ -3,12 +3,17 @@ import { GENRE_WORLDS_BY_ID, ALL_PATTERNS, PATTERNS_BY_ID, PATTERNS_BY_WORLD } f
 import { INSTRUMENTS_BY_ID, INSTRUMENT_CATALOG, instrument, instrumentPatternKinds } from '../../engine/lookup/instruments';
 import { sliceBarNative } from './grid.ts';
 import { progressionForSection, buildArrangementContext, ArrangementContext } from './arrangementContext.ts';
-import { inferKey, parseChord, assertValidChordProgression, SHARP_NAMES } from './musicTheory.ts';
+import { inferKey, parseChord, assertValidChordProgression } from './musicTheory.ts';
+import { SHARP_NAMES } from '../../data/musicTheory/pitchClasses';
 import { voiceProfile } from '../sheet/instrumentRoles.ts';
 import { resolveStyle, StyleRuntime, StyleInfluence, SongStyle, getCanonicalStyle, getStyle } from '../../engine/style';
 import { contractForGenre, type ApproachSpec } from '../../engine/style/contracts';
 import { suggestedPaletteForGenre } from '../../engine/lookup/theory';
 import { clampEnergy, energyForFormIntensity, energyOf, formIntensityForEnergy, shapeScalarOf } from './sectionEnergy.ts';
+import { FEELS, type TempoFeel } from '../../data/tempoFeels';
+import { SECTION_ENERGY_DEFAULT } from '../../data/performance/sectionEnergyDefaults';
+import { BASS_INSTRUMENT_ROLE_PATTERN, VOICE_INSTRUMENT_ROLE_PATTERN, VOICE_FAMILY_ROLE_PATTERN } from '../../data/instruments/roleAssignmentPatterns';
+import { ELECTRONIC_TRACK_GENRE_PATTERN, ACOUSTIC_BASS_TRACK_VOLUME_STEPS, ELECTRONIC_BASS_TRACK_VOLUME_STEPS, FIXED_INSTRUMENT_TRACK_VOLUME, TRACK_VOLUME_BY_ROLE, DEFAULT_TRACK_VOLUME } from '../../data/sound/mix/trackVolume';
 
 export interface Voice extends Track {
   instrumentId: string;
@@ -70,21 +75,6 @@ export interface Sheet extends Song {
   /** Per-section interaction state propagated by rebuild into performance compilation. */
   arrangementContext?: Record<string, ArrangementContext>;
 }
-
-export interface TempoFeel {
-  id: string;
-  name: string;
-  mult: number;
-  description: string;
-}
-
-export const FEELS: TempoFeel[] = [
-  { id: 'held-back', name: 'Held back', mult: 0.82, description: 'Laid back' },
-  { id: 'walking', name: 'Walking', mult: 0.93, description: 'Relaxed stride' },
-  { id: 'as-written', name: 'As written', mult: 1.0, description: 'Default tempo' },
-  { id: 'pushed', name: 'Pushed', mult: 1.08, description: 'Leaning forward' },
-  { id: 'lit', name: 'Lit', mult: 1.15, description: 'High energy' },
-];
 
 export function getEffectiveBpm(
   sheet: Sheet,
@@ -157,10 +147,6 @@ export function getFormStep(stepKey: string, worldId: string): FormStep | undefi
   return form.steps.find(s => s.key === stepKey || s.kind === stepKey);
 }
 
-export const SECTION_KINDS: SectionType[] = Array.from(new Set(Object.values(GENRE_FORMS).flatMap(f => f.steps.map(s => s.kind)))) as SectionType[];
-
-const BAR_CHOICES = [2, 4, 8, 12, 16, 24, 32];
-export { BAR_CHOICES };
 
 /* --- deterministic wobble so a repeat is never a photocopy ---------------- */
 function hash(s: string, n: number) {
@@ -241,10 +227,10 @@ export function guestWorldIdsFor(worldId: string): string[] {
 export function roleForInstrument(instrumentId: string): string {
   const def = INSTRUMENTS_BY_ID[instrumentId];
   if (!def) return 'harmony';
-  if (def.voicing === 'bass' || /tuba|sousaphone|bassoon|baritone-sax|bass-clarinet|contrabass/i.test(instrumentId)) return 'bass';
+  if (def.voicing === 'bass' || BASS_INSTRUMENT_ROLE_PATTERN.test(instrumentId)) return 'bass';
   if (def.voicing === 'unpitched') return 'percussion';
   // Keep the composition role vocabulary aligned with instrumentProfile.
-  if (/voice|choir|coro/i.test(instrumentId) || /voice|choir/i.test(def.family ?? '')) return 'voice';
+  if (VOICE_INSTRUMENT_ROLE_PATTERN.test(instrumentId) || VOICE_FAMILY_ROLE_PATTERN.test(def.family ?? '')) return 'voice';
   if (def.voicing === 'single') {
     const role = voiceProfile(instrumentId).role;
     return role === 'perc' ? 'percussion' : role;
@@ -254,18 +240,14 @@ export function roleForInstrument(instrumentId: string): string {
 
 function calibratedTrackVolume(genreId: string, instrumentId: string, role: string): number {
   const forward = contractForGenre(genreId).timbreSpace.mixCharacter?.bassForward ?? 0.5;
-  const acoustic = !/electronic|house|disco|drum-and-bass|industrial|uk-bass|reggaeton/.test(genreId);
+  const acoustic = !ELECTRONIC_TRACK_GENRE_PATTERN.test(genreId);
   if (role === 'bass') {
-    if (acoustic) return forward < 0.5 ? 0.62 : forward < 0.68 ? 0.68 : forward < 0.78 ? 0.76 : 0.84;
-    return forward < 0.78 ? 0.82 : 0.92;
+    const steps = acoustic ? ACOUSTIC_BASS_TRACK_VOLUME_STEPS : ELECTRONIC_BASS_TRACK_VOLUME_STEPS;
+    return steps.find(step => forward < step.upperBound)?.level ?? steps[steps.length - 1].level;
   }
-  if (instrumentId === 'piano') return 0.76;
-  if (instrumentId === 'bandoneon') return 0.82;
-  if (instrumentId === 'cello') return 0.78;
-  if (instrumentId === 'violin') return 0.86;
-  if (role === 'percussion') return 0.80;
-  if (role === 'lead' || role === 'melody' || role === 'voice') return 0.90;
-  return 0.82;
+  if (Object.hasOwn(FIXED_INSTRUMENT_TRACK_VOLUME, instrumentId)) return FIXED_INSTRUMENT_TRACK_VOLUME[instrumentId];
+  if (Object.hasOwn(TRACK_VOLUME_BY_ROLE, role)) return TRACK_VOLUME_BY_ROLE[role];
+  return DEFAULT_TRACK_VOLUME;
 }
 
 
@@ -319,6 +301,7 @@ export function patternStyleFit(
   // rather than a "sibling style" mismatch which would veto the pattern.
   const ids = new Set((pattern.styleIds ?? []).filter(id => !!getStyle(id)));
   if (ids.has(styleId)) return 100 + penalty;
+  if (stylePatternIds.inferred?.includes(pattern.id)) return 50 + penalty;
   if (stylePatternIds.require?.includes(pattern.id)) return 90 + penalty;
   if (stylePatternIds.preferred?.includes(pattern.id)) return 70 + penalty;
 
@@ -394,12 +377,6 @@ export function affinity(
  * A default, not a rule: the style's own `arrangement.energyMappings` and the
  * user's section dial both override it.
  */
-const SECTION_ENERGY_DEFAULT: Record<string, SectionEnergy> = {
-  intro: 1, breakdown: 1, interlude: 1, coda: 1, ending: 1, outro: 1,
-  verse: 3, bridge: 3, 'pre-chorus': 3, letra: 3, A: 3,
-  chorus: 5, montuno: 5, mambo: 5, solo: 5, shout: 5, drop: 5,
-};
-
 /**
  * Roughly two thirds of the catalog's patterns have no authored
  * cadence/fill/phraseEnd or transition/phraseStart variant at all (some
@@ -700,22 +677,12 @@ export function rebuild(sheet: Sheet): Sheet {
       energies[r.id] = {};
       migrated = true;
     }
-    const byTrack = sheet.arrangement[r.id] ?? {};
     for (const track of sheet.tracks) {
       if (!energies[r.id][track.id]) {
         migrated = true;
-        const pId = byTrack[track.id];
-        const p = pId && pId !== 'silent' ? PATTERNS_BY_ID[pId] : undefined;
-        // A part with no stated weight inherits the section's, nudged by what
-        // the chosen cell can actually support.
-        const sectionEnergy = energyOf(r);
-        let partEnergy: SectionEnergy = sectionEnergy;
-        if (p?.supportedEnergy?.length && !p.supportedEnergy.includes(sectionEnergy)) {
-          partEnergy = p.supportedEnergy
-            .slice()
-            .sort((a, b) => Math.abs(a - sectionEnergy) - Math.abs(b - sectionEnergy))[0] ?? sectionEnergy;
-        }
-        energies[r.id][track.id] = clampEnergy(partEnergy);
+        // Unset parts inherit section energy uniformly. Pattern capabilities
+        // may guide cell selection, but must never silently rewrite energy.
+        energies[r.id][track.id] = clampEnergy(energyOf(r));
       }
     }
   }
@@ -729,9 +696,8 @@ export function rebuild(sheet: Sheet): Sheet {
     arrangementContext[r.id] = buildArrangementContext(
       sheet.tracks as Voice[],
       resolved.contract,
-      resolved,
-      String(r.formKey ?? r.kind),
       shapeScalarOf(r),
+      energies[r.id],
     );
   }
 
@@ -757,14 +723,7 @@ export function rebuild(sheet: Sheet): Sheet {
         continue;
       }
 
-      const contextualEnergy = interaction?.energyByTrack[track.id];
-      const useContextualEnergy = !!interaction?.spotlightedTrackIds.length &&
-        (interaction.interactionModel === 'homophonic' || interaction.interactionModel === 'interlock' ||
-          interaction.interactionModel === 'unison' || interaction.interactionModel === 'counterpoint');
-      const energy = useContextualEnergy ? contextualEnergy : undefined;
-      const partEnergy: SectionEnergy = energy === undefined
-        ? clampEnergy(energies[r.id]?.[track.id] ?? energyOf(r))
-        : clampEnergy(energy);
+      const partEnergy: SectionEnergy = clampEnergy(energies[r.id]?.[track.id] ?? energyOf(r));
 
       const cellKey = `${r.id}:${track.id}`;
       const cellFp = `${r.id}:${track.id}:${track.instrumentId}:${r.genre ?? sheet.worldId}:${getSectionStyleId(sheet, r)}:${bars}:${r.kind}:${r.formKey}:${chords.join(',')}:${basePatternId}:${partEnergy}:${sheet.generationSeed ?? 0}:${JSON.stringify(sheet.partLens?.[r.id]?.[track.id] ?? '')}:${interaction?.spotlightedTrackIds?.includes(track.id)}:${interaction?.energyByTrack?.[track.id] ?? ''}`;
@@ -859,6 +818,7 @@ export function rebuild(sheet: Sheet): Sheet {
         const sub = p.subdivisions || 16;
         const patternCycleBars = Math.max(1, p.cycleLength || Math.ceil(sub / 16));
         const rawAccents = v?.accentProfile ?? p.accentProfile;
+        const rawVelocities = v?.velocityProfile ?? p.velocityProfile;
         const rawDurations = v?.durationGrid ?? p.durationGrid;
         const rawMicro = v?.microtimingOffset;
         const candidateHitTypes = v?.hitGrid ?? p.hitGrid;
@@ -868,7 +828,7 @@ export function rebuild(sheet: Sheet): Sheet {
 
         const bar = toBar(rawOnsets, rawAccents, rawDurations, sub, i % patternCycleBars);
         const perf = sliceBarNative(
-          rawOnsets, rawAccents, rawDurations, rawMicro, rawHitTypes, sub, patternCycleBars, i % patternCycleBars,
+          rawOnsets, rawAccents, rawVelocities, rawDurations, rawMicro, rawHitTypes, sub, patternCycleBars, i % patternCycleBars,
         );
 
         const explicitLens = sheet.partLens?.[r.id]?.[track.id];
@@ -1988,19 +1948,9 @@ export function makeSheet(
     
     // Weight is part of the selected SongStyle's arrangement grammar.
     const styleEnergy = resolved.arrangement?.energyMappings?.[r.formKey ?? ''] ?? resolved.arrangement?.energyMappings?.[r.kind];
-    const sectionEnergies: Record<string, SectionEnergy> = {};
-    for (const [key, value] of Object.entries(resolved.arrangement?.energyMappings ?? {})) {
-      sectionEnergies[key] = value as SectionEnergy;
-    }
-
     const taken = new Set<string>();
     for (const [i, v] of tracks.entries()) {
-      const d: SectionEnergy = clampEnergy(
-        sectionEnergies[v.instrumentId]
-          ?? sectionEnergies[v.role]
-          ?? styleEnergy
-          ?? energyOf(r),
-      );
+      const d: SectionEnergy = clampEnergy(styleEnergy ?? energyOf(r));
       energies[r.id][v.id] = d;
 
       const p = suggestPattern(v, genreId, ri * 31 + i * 13 + 7, String(r.kind), taken, d, resolved.id);
@@ -2184,4 +2134,3 @@ export const setSectionDensity = setPartDensity;
 
 /** The first engine phase: interpret musical definitions into an editable sheet. */
 export const createSheet = makeSheet;
-

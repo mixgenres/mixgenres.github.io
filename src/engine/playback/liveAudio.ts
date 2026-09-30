@@ -217,13 +217,11 @@ export function createSink(): TransportSink {
   };
 }
 
+import { NOTE_NAME_TO_PC } from '../../data/musicTheory/noteNameToPc';
+
 export function chordRootMidi(chord: string): number {
-  const NOTE: Record<string, number> = {
-    C: 48, 'C#': 49, Db: 49, D: 50, 'D#': 51, Eb: 51, E: 52, F: 53,
-    'F#': 54, Gb: 54, G: 55, 'G#': 56, Ab: 56, A: 57, 'A#': 58, Bb: 58, B: 59,
-  };
   const m = chord.match(/^([A-G](?:#|b)?)/);
-  return m ? (NOTE[m[1]] ?? 57) : 57;
+  return m ? (NOTE_NAME_TO_PC[m[1]] ?? 57) : 57;
 }
 
 export function midiToNoteName(midi: number): string {

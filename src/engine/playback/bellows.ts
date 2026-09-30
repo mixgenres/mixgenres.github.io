@@ -1,6 +1,7 @@
 import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../sheet/random.ts';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
+import { SHORT_HIT_ARTICULATIONS } from '../../data/performance/excitationCompatibility';
 
 export default class BellowsModule implements InstrumentModule {
   id = 'bellows';
@@ -32,8 +33,7 @@ export default class BellowsModule implements InstrumentModule {
       return el.mul(snapEnv, airBurst);
     }
 
-    const shortHitArticulations = ['staccato', 'marcato', 'accent', 'bellows-slap', 'golpe-caja', 'tremolo', 'arrastre'];
-    const wantsVibrato = isBandoneon && !shortHitArticulations.includes(action);
+    const wantsVibrato = isBandoneon && !SHORT_HIT_ARTICULATIONS.includes(action);
     const vibratoDepthRatio = Math.pow(2, 28 / 1200) - 1;
     const vibratoOnsetEnv = el.adsr(0.25, 0.02, 1.0, 0.02, gateSignal);
     const vibLfo = el.cycle(5.2);

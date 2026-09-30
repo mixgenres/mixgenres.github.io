@@ -1,6 +1,12 @@
+import { TANGO_PATTERN, SALSA_GENRE_PATTERN, ELECTRONIC_MIX_PATTERN } from '../../data/sound/dsp/genreClassifiers';
+import { ELECTRONIC_MASTER_SIDECHAIN_DEPTH, SALSA_MASTER_ROOM_DEPTH, TANGO_MASTER_SIDECHAIN_DEPTH } from '../../data/sound/dsp/genrePlaybackProfiles';
 /* --- Master Signal Chain & Ensemble Balance --- */
 
 import type { MixCharacter } from '../../engine/style/contracts';
+import { DEFAULT_ROLE_PROFILES, ROLE_DB_PROFILES } from '../../data/sound/mix/roleProfiles';
+import { GENRE_MIX_OFFSETS } from '../../data/sound/mix/genreMixOffsets';
+import type { MixRoleProfile } from '../../data/sound/schema/mix';
+import { ELECTRONIC_MIX_GENRE_PATTERN, INSTRUMENT_MIX_TRIMS } from '../../data/sound/mix/instrumentTrims';
 
 /** User-authored studio automation and routing for the existing instrument tracks. */
 export interface StudioMixState {
@@ -11,46 +17,9 @@ export interface StudioMixState {
   spotlight?: Record<string, string>;
 }
 
-export interface MixRoleProfile {
-  level: number;
-  pan: number;
-  width: number;
-  densityLimit: number;
-}
-
-export const DEFAULT_ROLE_PROFILES: Record<string, MixRoleProfile> = {
-  bass: { level: 0.85, pan: 0.0, width: 0.0, densityLimit: 8 },
-  drums: { level: 0.88, pan: 0.0, width: 0.3, densityLimit: 16 },
-  comp: { level: 0.72, pan: -0.2, width: 0.4, densityLimit: 8 },
-  harmony: { level: 0.70, pan: 0.2, width: 0.4, densityLimit: 8 },
-  lead: { level: 0.90, pan: 0.0, width: 0.2, densityLimit: 12 },
-  melody: { level: 0.90, pan: 0.0, width: 0.2, densityLimit: 12 },
-  pad: { level: 0.65, pan: 0.1, width: 0.6, densityLimit: 4 },
-  percussion: { level: 0.75, pan: 0.25, width: 0.4, densityLimit: 16 },
-};
-
-export const ROLE_DB_PROFILES: Record<string, number> = {
-  bass: -3.0,
-  lead: -1.5,
-  melody: -1.5,
-  pad: -4.0,
-  comp: -3.5,
-  harmony: -3.5,
-  drums: -2.0,
-  percussion: -2.5,
-};
-
 // Genre-specific mixing rules to properly balance out-of-genre instruments.
 // Ensures a synth dropped into Flamenco sits correctly in the acoustic space,
 // or an orchestral string in Electronic EDM doesn't get buried.
-export const GENRE_MIX_OFFSETS: Record<string, Record<string, number>> = {
-  flamenco: { lead: 1.5, comp: 2.0, bass: -2.5, pad: -4.0 },
-  electronic: { bass: 3.0, lead: 0.0, comp: -1.5, pad: 1.0 },
-  jazz: { lead: 1.0, bass: 1.0, comp: -0.5, pad: -3.0 },
-  rock: { comp: 2.0, bass: 1.5, lead: 1.0, pad: -2.0 },
-  orchestral: { pad: 2.0, lead: 0.0, comp: 0.0, bass: 0.0 },
-};
-
 export function getRoleGainLinear(role: string, genre: string = 'default', instrumentId?: string): number {
   const r = (role || '').toLowerCase();
   const baseDb = ROLE_DB_PROFILES[r] ?? -3.0;
@@ -58,11 +27,9 @@ export function getRoleGainLinear(role: string, genre: string = 'default', instr
   const offsetDb = genreOffsets[r] ?? 0.0;
   const id = (instrumentId ?? '').toLowerCase();
   let instrumentTrimDb = 0;
-  if (id === 'upright-bass') instrumentTrimDb = /electronic|house|disco|drum-and-bass|uk-bass|reggaeton/.test(genre.toLowerCase()) ? 0 : -2.5;
-  else if (id === 'bass') instrumentTrimDb = /electronic|house|disco|drum-and-bass|uk-bass|reggaeton/.test(genre.toLowerCase()) ? 0 : -1.5;
-  else if (id === 'slap-bass') instrumentTrimDb = -1.0;
-  else if (id === 'piano') instrumentTrimDb = -0.8;
-  else if (id === 'bandoneon') instrumentTrimDb = -0.5;
+  const instrumentTrim = INSTRUMENT_MIX_TRIMS[id];
+  if (instrumentTrim?.electronic !== undefined) instrumentTrimDb = ELECTRONIC_MIX_GENRE_PATTERN.test(genre.toLowerCase()) ? instrumentTrim.electronic : instrumentTrim.acoustic ?? 0;
+  else if (instrumentTrim?.acoustic !== undefined) instrumentTrimDb = instrumentTrim.acoustic;
   // Combine structural role, genre mix, and instrument-specific gain staging.
   return Math.pow(10, (baseDb + offsetDb + instrumentTrimDb) / 20);
 }
@@ -159,7 +126,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   input.gain.value = 1.0;
   input.connect(instBus);
 
-  const isSalsa = /salsa/i.test(genreId || '');
+  const isSalsa = SALSA_GENRE_PATTERN.test(genreId || '');
 
   // 2. Drum Bus Saturation ("Knock") with Saturation Type
   const drumShaper = ctx.createWaveShaper();
@@ -219,10 +186,10 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   kickEnvelope.Q.value = 0.5;
 
   const kickDuckCurve = ctx.createWaveShaper();
-  const duckDepth = /electronic|electrotango|tango-electronico|house|techno|edm/i.test(genreId || '')
-    ? 0.34
-    : /tango|milonga|vals/i.test(genreId || '')
-      ? 0.16
+  const duckDepth = ELECTRONIC_MIX_PATTERN.test(genreId || '')
+    ? ELECTRONIC_MASTER_SIDECHAIN_DEPTH
+    : TANGO_PATTERN.test(genreId || '')
+      ? TANGO_MASTER_SIDECHAIN_DEPTH
       : Math.max(0.08, (initialMixCharacter?.sidechainDucking ?? 0.12) * 0.45);
   const duckCurve = new Float32Array(1025);
   for (let i = 0; i < duckCurve.length; i++) {
@@ -273,7 +240,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   // 5. Stereo room: several short, decorrelated feedback lines replace the old
   // four-delay series ring. This remains a small Web Audio graph but produces a
   // substantially denser late field with asymmetric stereo reflections.
-  const initialRoomDepth = isSalsa ? 0.07 : (initialMixCharacter ? (1.0 - initialMixCharacter.dryness) * 0.55 : 0.30);
+  const initialRoomDepth = isSalsa ? SALSA_MASTER_ROOM_DEPTH : (initialMixCharacter ? (1.0 - initialMixCharacter.dryness) * 0.55 : 0.30);
   const roomInput = ctx.createGain();
   const roomPreDelay = ctx.createDelay(0.25);
   roomPreDelay.delayTime.value = 0.012;

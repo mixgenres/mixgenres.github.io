@@ -14,6 +14,7 @@ import type {
   SoundProfile,
   GestureRule,
   RuleRef,
+  Aspect,
 } from '../../data/styles/schema';
 import { getCanonicalStyle, getStyle } from '../../engine/style/registry';
 import { contractForGenre } from '../../engine/style/contracts';
@@ -162,6 +163,31 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
   // 2. Merge hierarchy (base parent -> child style)
   let merged: CompleteStyle = completeStyle(JSON.parse(JSON.stringify(hierarchy[0])));
   recordDecision('id', merged.id, 'style', merged.id);
+
+  // Coverage must include defaults inserted by completeStyle. Trace required
+  // leaves against the authored base before the defaults make them look real.
+  const authoredBase = hierarchy[0] as Partial<CompleteStyle>;
+  const requiredLeaves: Array<[Aspect, string[]]> = [
+    ['form', ['sectionVocab', 'templates', 'preferredMeters', 'defaultSpotlights']],
+    ['harmony', ['model', 'modePolicy', 'progressionTemplates', 'chordVocabulary']],
+    ['rhythm', ['meter', 'tempoRange', 'defaultBpm', 'feel', 'swingPercentage', 'anticipationOffsetSteps', 'microtimingFeel', 'humanizeJitterMs']],
+    ['melody', ['scaleMode']],
+    ['arrangement', ['ensemble']],
+    ['sound', ['instrumentPalette', 'masterProfile.pocket', 'masterProfile.lift']],
+  ];
+  for (const [aspect, paths] of requiredLeaves) {
+    for (const path of paths) {
+      const authored = path.split('.').reduce<unknown>((value, key) =>
+        value && typeof value === 'object' ? (value as Record<string, unknown>)[key] : undefined,
+        (authoredBase as Record<string, unknown>)[aspect]);
+      const value = path.split('.').reduce<unknown>((v, key) =>
+        v && typeof v === 'object' ? (v as Record<string, unknown>)[key] : undefined,
+        (merged as unknown as Record<string, unknown>)[aspect]);
+      const declaredSource = hierarchy[0].sourceProvenance?.[`${aspect}.${path}`];
+      const source = declaredSource ?? (authored === undefined ? 'hardcoded' : 'style');
+      recordDecision(`${aspect}.${path}`, value, source, source === 'hardcoded' ? 'completeStyle' : hierarchy[0].id);
+    }
+  }
 
   for (let i = 1; i < hierarchy.length; i++) {
     const child = hierarchy[i];

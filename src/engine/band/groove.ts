@@ -3,9 +3,8 @@ import { resolveStyle } from '../../engine/style/resolve';
 import { getCanonicalStyle } from '../../engine/style/registry';
 import { contractForGenre } from '../../engine/style/contracts';
 import { rand01, seedOf } from '../sheet/random.ts';
-import type { GrooveRole } from '../sheet/instrumentRoles.ts';
+import type { GrooveRole } from '../../data/instruments/schema/voice-profile';
 export { rand01, randNorm, seedOf } from '../sheet/random.ts';
-export type { GrooveRole } from '../sheet/instrumentRoles.ts';
 export type SwingUnit = 8 | 16;
 
 /** Coarse instrument job, used to decide who leans which way. */

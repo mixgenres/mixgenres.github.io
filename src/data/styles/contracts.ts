@@ -22,6 +22,10 @@ export interface InstrumentDialect {
   bodyConstruction?: 'wood-box' | 'gourd' | 'skin-faced' | 'board' | 'solid-electric';
   excitationType?: 'plectrum' | 'nail' | 'fingerpad' | 'hard-pick' | 'hammer';
   sympatheticStrings?: boolean;
+  /** Optional role-specific overrides for the same instrument/style pairing. */
+  roleVariants?: Record<string, Partial<InstrumentDialect>>;
+  /** Optional coarse energy-specific physical-model adjustments (1..5). */
+  energyTweaks?: Partial<Record<1 | 2 | 3 | 4 | 5, Partial<InstrumentDialect>>>;
 }
 
 
@@ -242,7 +246,7 @@ function base(
       ...(opts.improvisationGrammar ?? {}),
     },
     transitionGrammar,
-    defaultSpotlights: { intro: ['pulse'], verse: ['harmony'], chorus: ['lead'], solo: ['lead'], outro: ['pulse'] },
+    defaultSpotlights: {},
     ensemble,
     timbreSpace: {
       palette,
@@ -488,4 +492,3 @@ export const GENRE_CONTRACTS: Record<string, WorldContract> = G;
 export const STYLE_PATCHES: Record<string, Partial<WorldContract>> = {
   'reggae-dancehall': { timbreSpace: { palette: ['synth', 'sub-bass', 'drums', 'congas'], production: 'dembow skank, hard clip', mixCharacter: { dryness: 0.7, bassForward: 0.88, width: 0.65, brightness: 0.65, saturationType: 'hard-clip', compressionRatio: 5.0, subHarmonics: 0.8, transientSnap: 0.8 } } },
 };
-

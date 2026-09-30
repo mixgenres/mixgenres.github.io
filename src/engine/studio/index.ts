@@ -3,7 +3,6 @@ export {
   createMasterChain,
   getRoleGainLinear,
   type StudioMixState,
-  type MixRoleProfile,
   type MasterChain,
 } from './mixer.ts';
 export { StereoFieldManager } from './panning.ts';

@@ -41,7 +41,7 @@ export interface Track {
   kind: InstrumentKind;
   muted: boolean;
   solo?: boolean;
-  /** Auto follows the current style's form.defaultSpotlights for this track role. */
+  /** Manual foreground hint. Automatic presence and dynamics come from Section Energy. */
   spotlight?: SpotlightMode;
   volume: number;
   pan?: number;
@@ -129,7 +129,6 @@ export interface Song {
   styleOverrides?: Record<string, unknown>;
   phrasePatternCache?: Record<string, string>;
 }
-
 
 
 

@@ -1,3 +1,5 @@
+import { RHODES_GENRE_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
+import { KIZOMBA_PATTERN, RHODES_SOUL_GENRE_PATTERN, RHODES_SUSTAIN_GENRE_PATTERN, RHODES_TRANSIENT_GENRE_PATTERN } from '../../data/sound/dsp/genreClassifiers';
 import { el } from '@elemaudio/core';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 
@@ -14,7 +16,7 @@ export default class RhodesModule implements InstrumentModule {
       params,
       action
     } = ctx;
-    const isKizomba = /kizomba|tarraxo|urbankiz|ghetto-zouk/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const gd = ctx.genreDialect;
     const genre = gd.id;
     if (isKizomba) {
@@ -27,12 +29,12 @@ export default class RhodesModule implements InstrumentModule {
       return el.lowpass(6200 + b * 5000, 1.0, el.mul(env, el.add(el.mul(0.78, fundamental), el.add(el.mul(0.16, tine), syncopatedBark))));
     }
 
-    if (!isKizomba && /soul|rnb|gospel|jazz|funk|disco|house/.test(genre)) {
+    if (!isKizomba && RHODES_SOUL_GENRE_PATTERN.test(genre)) {
       const p = el.syncphasor(safeFreqSignal, gateSignal);
       const fundamental = el.sin(el.mul(2 * Math.PI, p));
       const tine = el.sin(el.mul(4 * Math.PI, p));
-      const bark = el.mul((/funk|disco|house/.test(genre) ? 0.13 : 0.08) * gd.transient, el.mul(el.highpass(1700, 1.0, el.noise()), el.adsr(0.00025, 0.006, 0, 0.002, gateSignal)));
-      const env = el.adsr(0.001, 0.075 + decayTime * 0.07 * gd.decay, /jazz|soul|gospel/.test(genre) ? 0.58 : 0.44, 0.045, gateSignal);
+      const bark = el.mul((RHODES_TRANSIENT_GENRE_PATTERN.test(genre) ? RHODES_GENRE_RESPONSE.funkDiscoHouseTransient : RHODES_GENRE_RESPONSE.defaultTransient) * gd.transient, el.mul(el.highpass(1700, 1.0, el.noise()), el.adsr(0.00025, 0.006, 0, 0.002, gateSignal)));
+      const env = el.adsr(0.001, 0.075 + decayTime * 0.07 * gd.decay, RHODES_SUSTAIN_GENRE_PATTERN.test(genre) ? RHODES_GENRE_RESPONSE.jazzSoulGospelSustain : RHODES_GENRE_RESPONSE.defaultSustain, 0.045, gateSignal);
       return el.lowpass(5800 + b * 5200 * gd.brightness, 1.0, el.mul(env, el.add(el.mul(0.80, fundamental), el.add(el.mul(0.14, tine), bark))));
     }
 

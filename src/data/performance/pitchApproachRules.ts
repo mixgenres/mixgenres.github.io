@@ -1,0 +1,20 @@
+/** Ordered genre and harmonic-vocabulary classifiers used for pitch approach selection. */
+export const PITCH_APPROACH_CLASSIFIERS = {
+  ragaText: /raga|hindustani|carnatic|indian/,
+  ragaModel: /raga|indian/,
+  modalText: /maqam|arabic|middle-east|rast|bayati|segah/,
+  modalModel: /maqam|arabic/,
+  droneHarmony: /modal-drone|heterophonic/,
+  bassRootMotion: /root|root-fifth|drone/,
+  bassMotif: /walking|tumbao|riff|syncopated|dembow|sub/,
+  tonalLead: /tonal/,
+  flamenco: /flamenco/,
+  jazz: /bebop|hard-bop|post-bop|jazz|swing|blues/,
+  chromaticModel: /blue-note|chromatic/,
+  tango: /tango/,
+  folk: /celtic|irish|scottish|folk|traditional/,
+  latin: /salsa|son|timba|mambo|bachata|cumbia|reggaeton|samba|afrobeat|highlife|african/,
+  popular: /funk|soul|gospel|rnb|rock|pop|indie|metal/,
+  electronic: /house|techno|electronic|edm|club|uk-bass|garage|dubstep/,
+  modalModelFinal: /modal|pentatonic|minor|dorian|mixolydian/,
+} as const;

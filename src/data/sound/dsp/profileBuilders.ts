@@ -1,6 +1,6 @@
-import type { InstrumentDef } from '../../data/instruments/schema/instrument-def';
-import { instrumentDSPOverrides } from '../../data/sound/dsp';
-import type { DspMode, InstrumentDSPProfile } from '../../data/sound/schema/dsp-profile';
+import type { InstrumentDef } from '../../instruments/schema/instrument-def';
+import { instrumentDSPOverrides } from './index';
+import type { DspMode, InstrumentDSPProfile } from '../schema/dsp-profile';
 
 const woodModes = (ratios: number[], gain = 0.16, q = 2.2): DspMode[] =>
   ratios.map((ratio, i) => ({ ratio, q: q - i * 0.15, gain: gain * (1 - i * 0.18) }));

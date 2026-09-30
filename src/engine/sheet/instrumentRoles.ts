@@ -1,65 +1,12 @@
 import { InstrumentDef, INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
-export type GrooveRole =
-  | 'kick' | 'snare' | 'hat' | 'ride' | 'perc'
-  | 'bass' | 'comp' | 'pad' | 'lead' | 'stab';
-
-export type SustainClass =
-  /** struck and left to ring: piano, mallets, plucked strings */
-  | 'decaying'
-  /** held as long as the player holds it: strings, pads, organ, voice */
-  | 'sustained'
-  /** held, but needs breath: winds and brass */
-  | 'blown'
-  /** short by nature: staccato plucks, muted guitar, clav */
-  | 'short'
-  /** unpitched */
-  | 'percussive';
-
-export interface VoiceProfile {
-  id?: string;
-  sustain: SustainClass;
-  role: GrooveRole;
-  /** the midi note this instrument likes to centre its part around */
-  centre: number;
-  /** playable range, used to fold parts into a sensible octave */
-  low: number;
-  high: number;
-  /** default stereo position, -1..1 */
-  pan: number;
-  /** trim in dB relative to nominal, to get gain staging roughly right */
-  trim: number;
-  /** how wet this instrument wants to be, 0..1 */
-  space: number;
-  /** maximum ring-out in beats for decaying instruments */
-  ring: number;
-  /** optional micro-voice timing smear in ms for ensemble instruments */
-  ensembleSmearMs?: number;
-  /** allows note decay & reverberation tails to cross section boundaries naturally */
-  letRingAcrossSections?: boolean;
-}
-
-const FAMILY_DEFAULTS: Record<string, Partial<VoiceProfile>> = {
-  'bellows-and-keys': { sustain: 'sustained', centre: 60, low: 41, high: 84, pan: -0.12, trim: -1, space: 0.28, ring: 2, letRingAcrossSections: true },
-  plucked:            { sustain: 'decaying',  centre: 57, low: 40, high: 84, pan: 0.18,  trim: 0,  space: 0.24, ring: 2.5 },
-  bowed:              { sustain: 'sustained', centre: 64, low: 48, high: 88, pan: -0.24, trim: -2, space: 0.42, ring: 4, letRingAcrossSections: true },
-  winds:              { sustain: 'blown',     centre: 69, low: 55, high: 92, pan: 0.26,  trim: -2, space: 0.34, ring: 3 },
-  brass:              { sustain: 'blown',     centre: 67, low: 52, high: 88, pan: 0.3,   trim: -1, space: 0.3,  ring: 2.5 },
-  voice:              { sustain: 'sustained', centre: 64, low: 50, high: 81, pan: 0,     trim: -3, space: 0.4,  ring: 4, letRingAcrossSections: true },
-  'hand-drums':       { sustain: 'percussive', centre: 60, low: 0, high: 127, pan: 0.3,  trim: -1, space: 0.18, ring: 0.5 },
-  'metal-and-wood':   { sustain: 'percussive', centre: 60, low: 0, high: 127, pan: -0.34, trim: -3, space: 0.22, ring: 0.5 },
-  kit:                { sustain: 'percussive', centre: 60, low: 0, high: 127, pan: 0,    trim: 0,  space: 0.14, ring: 0.5 },
-  electronic:         { sustain: 'sustained', centre: 60, low: 36, high: 90, pan: 0,     trim: -2, space: 0.3,  ring: 4 },
-};
+import type { VoiceProfile } from '../../data/instruments/schema/voice-profile';
+import { DEFAULT_VOICE_PROFILE, FAMILY_DEFAULTS } from '../../data/instruments/familyVoiceDefaults';
+import { DROP_TUNING_GENRE_PATTERN, GUITAR_INSTRUMENT_PATTERN, DROP_TUNING_LOW_MIDI } from '../../data/instruments/genreRangeRules';
 
 /** Per-instrument overrides (now authored directly inside definitions/<instrument>.ts). */
 const OVERRIDES: Record<string, Partial<VoiceProfile>> = {};
 
 import { LRUMap, registerCache } from '../cache/lru.ts';
-
-const BASE: VoiceProfile = {
-  sustain: 'decaying', role: 'comp', centre: 60, low: 36, high: 88,
-  pan: 0, trim: -2, space: 0.28, ring: 2,
-};
 
 const cache = new LRUMap<string, VoiceProfile>(500, 'voiceProfileCache');
 registerCache(cache);
@@ -73,11 +20,11 @@ export function voiceProfile(instrumentId: string, genreId?: string): VoiceProfi
   const fam = def ? FAMILY_DEFAULTS[def.family] ?? {} : {};
   const over = OVERRIDES[instrumentId] ?? {};
   const embedded = def?.acousticProfile ? def.acousticProfile : {};
-  const merged: VoiceProfile = { ...BASE, ...fam, ...over, ...embedded, id: instrumentId };
+  const merged: VoiceProfile = { ...DEFAULT_VOICE_PROFILE, ...fam, ...over, ...embedded, id: instrumentId };
 
-  if (genreId && /metal|grunge/i.test(genreId) && /guitar/i.test(instrumentId)) {
+  if (genreId && DROP_TUNING_GENRE_PATTERN.test(genreId) && GUITAR_INSTRUMENT_PATTERN.test(instrumentId)) {
     // Drop-D tuning: adjust lowest allowable pitch to D2 (MIDI 38)
-    merged.low = 38;
+    merged.low = DROP_TUNING_LOW_MIDI;
   }
 
   if (def) {

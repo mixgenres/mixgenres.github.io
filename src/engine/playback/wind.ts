@@ -1,3 +1,4 @@
+import { BRASS_REED_INSTRUMENT_PATTERNS } from '../../data/instruments/idClassifiers';
 import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../sheet/random.ts';
 import { getFormantProfileForInstrument } from './elementaryEngine.ts';
@@ -16,10 +17,10 @@ export default class WindModule implements InstrumentModule {
     const profile = getFormantProfileForInstrument(params.instrumentId ?? '', ctx.model);
     const seed = seedOf(trackId, voiceIndex, 0x51a7);
     const breathVariance = 1 + randNorm(seed) * 0.035;
-    const reed = /clarinet|oboe|bassoon|sax|hichiriki|english-horn/i.test(id);
-    const doubleReed = /oboe|bassoon|english-horn|hichiriki/i.test(id);
-    const fipple = /recorder|tin-whistle|low-whistle/i.test(id);
-    const endBlown = /quena|shakuhachi|xiao|dizi|ryuteki|pan-flute|ocarina/i.test(id);
+    const reed = BRASS_REED_INSTRUMENT_PATTERNS.reed.test(id);
+    const doubleReed = BRASS_REED_INSTRUMENT_PATTERNS.doubleReed.test(id);
+    const fipple = BRASS_REED_INSTRUMENT_PATTERNS.fipple.test(id);
+    const endBlown = BRASS_REED_INSTRUMENT_PATTERNS.endBlown.test(id);
     const bright = fipple ? 1.12 : endBlown ? 0.92 : doubleReed ? 1.08 : 1;
 
     const pressure = Math.max(0.05, Math.min(1, params.pressure));

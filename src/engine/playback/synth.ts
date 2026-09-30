@@ -1,3 +1,5 @@
+import { SYNTH_GENRE_RESPONSE, URBAN_LATIN_INSTRUMENT_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
+import { DNB_UKBASS_PATTERN, HOUSE_DISCO_PATTERN, INDUSTRIAL_DNB_PATTERN, KIZOMBA_PATTERN, REGGAETON_PATTERN, SYNTH_ELECTRONIC_GENRE_PATTERN, SYNTH_LOW_CUTOFF_GENRE_PATTERN, TANGO_ELECTRONICO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
 import { el } from '@elemaudio/core';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 
@@ -13,30 +15,31 @@ export default class SynthModule implements InstrumentModule {
     } = ctx;
 
     const instId = (params.instrumentId ?? '').toLowerCase();
-    const isTangoSampler = instId === 'sampler' && /tango-electronico|electrotango/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isKizomba = /kizomba|tarraxo|urbankiz|ghetto-zouk/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isReggaeton = /reggaeton|reggaetón|dembow|perreo|neoperreo/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isTangoSampler = instId === 'sampler' && TANGO_ELECTRONICO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const urbanSynthResponse = isKizomba ? URBAN_LATIN_INSTRUMENT_RESPONSE.synth.kizomba : URBAN_LATIN_INSTRUMENT_RESPONSE.synth.reggaeton;
+    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const gd = ctx.genreDialect;
     const genre = gd.id;
     if (isKizomba || isReggaeton) {
       const p1 = el.syncphasor(freqSignal, gateSignal);
-      const p2 = el.syncphasor(el.mul(freqSignal, isKizomba ? 1.003 : 1.0015), gateSignal);
+      const p2 = el.syncphasor(el.mul(freqSignal, urbanSynthResponse.detune), gateSignal);
       const sine = el.sin(el.mul(2 * Math.PI, p1));
-      const softSaw = el.tanh(el.mul(isKizomba ? 2.4 : 3.2, el.sub(el.mul(2, p2), 1)));
+      const softSaw = el.tanh(el.mul(urbanSynthResponse.drive, el.sub(el.mul(2, p2), 1)));
       const sub = el.sin(el.mul(2 * Math.PI, el.syncphasor(el.mul(freqSignal, 0.5), gateSignal)));
-      const attack = el.adsr(0.002, isKizomba ? 0.10 : 0.065, isKizomba ? 0.62 : 0.48, 0.045, gateSignal);
-      const cutoff = isKizomba ? 1100 + b * 5200 : 700 + b * 4300;
-      const body = el.add(el.mul(isKizomba ? 0.56 : 0.45, sine), el.add(el.mul(isKizomba ? 0.25 : 0.34, softSaw), el.mul(isKizomba ? 0.19 : 0.21, sub)));
+      const attack = el.adsr(0.002, urbanSynthResponse.attack, urbanSynthResponse.sustain, 0.045, gateSignal);
+      const cutoff = urbanSynthResponse.cutoffBase + b * urbanSynthResponse.cutoffBrightness;
+      const body = el.add(el.mul(urbanSynthResponse.sine, sine), el.add(el.mul(urbanSynthResponse.saw, softSaw), el.mul(urbanSynthResponse.sub, sub)));
       const filtered = el.svf({ mode: 'lowpass' }, cutoff, 1.2 + params.resonance * 2.0, body);
-      const air = el.mul(isKizomba ? 0.025 : 0.045, el.mul(el.highpass(isKizomba ? 4200 : 5200, 0.8, el.noise()), el.adsr(0.001, 0.012, 0, 0.004, gateSignal)));
+      const air = el.mul(urbanSynthResponse.air, el.mul(el.highpass(urbanSynthResponse.airHighpass, 0.8, el.noise()), el.adsr(0.001, 0.012, 0, 0.004, gateSignal)));
       return el.mul(attack, el.add(filtered, air));
     }
-    if (!isKizomba && !isReggaeton && /house|electronic|drum-and-bass|uk-bass|hip-hop|industrial|disco/.test(genre)) {
+    if (!isKizomba && !isReggaeton && SYNTH_ELECTRONIC_GENRE_PATTERN.test(genre)) {
       const p = el.syncphasor(freqSignal, gateSignal);
       const sub = el.sin(el.mul(2 * Math.PI, el.syncphasor(el.mul(freqSignal, 0.5), gateSignal)));
-      const saw = el.tanh(el.mul(/industrial|drum-and-bass/.test(genre) ? 4.8 : 3.0, el.sub(el.mul(2, p), 1)));
-      const env = el.adsr(0.001, /drum-and-bass|uk-bass/.test(genre) ? 0.05 : 0.08, /house|disco/.test(genre) ? 0.60 : 0.48, 0.03, gateSignal);
-      const cut = (/industrial|drum-and-bass|uk-bass/.test(genre) ? 950 : 1250) + b * 5000 * gd.brightness;
+      const saw = el.tanh(el.mul(INDUSTRIAL_DNB_PATTERN.test(genre) ? SYNTH_GENRE_RESPONSE.industrialDrive : SYNTH_GENRE_RESPONSE.defaultDrive, el.sub(el.mul(2, p), 1)));
+      const env = el.adsr(0.001, DNB_UKBASS_PATTERN.test(genre) ? SYNTH_GENRE_RESPONSE.drumAndBassAttack : SYNTH_GENRE_RESPONSE.defaultAttack, HOUSE_DISCO_PATTERN.test(genre) ? SYNTH_GENRE_RESPONSE.houseDiscoSustain : SYNTH_GENRE_RESPONSE.defaultSustain, 0.03, gateSignal);
+      const cut = (SYNTH_LOW_CUTOFF_GENRE_PATTERN.test(genre) ? SYNTH_GENRE_RESPONSE.lowCutoff : SYNTH_GENRE_RESPONSE.defaultCutoff) + b * SYNTH_GENRE_RESPONSE.brightnessScale * gd.brightness;
       const body = el.add(el.mul(0.52, saw), el.mul(0.48 * gd.lowEnd, sub));
       return el.mul(env, el.svf({ mode: 'lowpass' }, cut, 1.1 + params.resonance * 2.4, body));
     }

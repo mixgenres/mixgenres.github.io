@@ -1,3 +1,5 @@
+import { TANGO_INSTRUMENT_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
+import { TANGO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
 import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../sheet/random.ts';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
@@ -41,7 +43,8 @@ export default class ViolinModule implements InstrumentModule {
     const isChicharra = action === 'chicharra' || /chicharra/i.test(action ?? '');
     const isTambor = action === 'tambor' || /tambor/i.test(action ?? '');
     const isLatigo = action === 'latigo' || /latigo|whip/i.test(action ?? '');
-    const isTango = /tango|milonga|vals/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const tangoResponse = TANGO_INSTRUMENT_RESPONSE.violin;
     const isArrastre = action === 'arrastre' || /arrastre|drag/i.test(action ?? '');
     const isTangoObligato = isTango && (ctx.voice.note ?? 60) <= 62 && !isPizz;
 
@@ -90,7 +93,7 @@ export default class ViolinModule implements InstrumentModule {
     
     // Vibrato swells naturally into sustained notes
     const wantsVib = !isPizz && !isStaccato && !isLatigo && !isArrastre;
-    const vibratoOnset = el.adsr(isLegato ? 0.12 : (isTango ? 0.38 : 0.28), 0.10, 1.0, 0.08, gateSignal);
+    const vibratoOnset = el.adsr(isLegato ? 0.12 : (isTango ? tangoResponse.vibratoOnset : tangoResponse.vibratoOnsetDefault), 0.10, 1.0, 0.08, gateSignal);
     const vibratoDepth = wantsVib
       ? el.mul(el.const({ value: 0.016 * (params.resonance + 0.3) }), vibratoOnset)
       : el.const({ value: 0 });
@@ -151,7 +154,7 @@ export default class ViolinModule implements InstrumentModule {
     // traditional style. Give the low register a warmer fourth-string-like
     // response while retaining enough bridge bite to cut through bandoneón.
     const obligatoWarmth = isTangoObligato
-      ? el.mul(0.16, el.svf({ mode: 'bandpass' }, 275, 2.2, coreOsc))
+      ? el.mul(tangoResponse.obligatoWarmthGain, el.svf({ mode: 'bandpass' }, 275, 2.2, coreOsc))
       : el.const({ value: 0 });
 
     // Sul Ponticello shifts spectrum to brilliant glassy rasp; Sul Tasto warms and softens
@@ -166,14 +169,14 @@ export default class ViolinModule implements InstrumentModule {
     // Attack bow-catch "crunch" transient
     const bowCatchEnv = el.adsr(0.0002, 0.012, 0, 0.004, gateSignal);
     const bowCatch = el.mul(
-      el.mul(el.const({ value: 0.16 * (isStaccato ? 1.8 : 1.0) * (isTango ? 1.12 : 1.0) }), bowCatchEnv),
+      el.mul(el.const({ value: tangoResponse.bowCatchGain * (isStaccato ? 1.8 : 1.0) * (isTango ? tangoResponse.bowCatchDefaultMultiplier : 1.0) }), bowCatchEnv),
       el.highpass(1800, 1.3, el.noise())
     );
 
     // A small tango "bite" transient on marcato/accented attacks, distinct from
     // the dedicated chicharra/tambor effects.
     const tangoBite = isTango && isStaccato
-      ? el.mul(0.075, el.mul(el.svf({ mode: 'bandpass' }, 2600, 2.8, el.noise()), el.adsr(0.0002, 0.010, 0, 0.003, gateSignal)))
+      ? el.mul(tangoResponse.tangoBiteGain, el.mul(el.svf({ mode: 'bandpass' }, 2600, 2.8, el.noise()), el.adsr(0.0002, 0.010, 0, 0.003, gateSignal)))
       : el.const({ value: 0 });
 
     // Combine core sawtooth with slip friction noise, sympathetic resonance, and bow-catch crunch

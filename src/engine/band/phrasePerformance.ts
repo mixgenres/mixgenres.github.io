@@ -1,12 +1,18 @@
+import { ANTICIPATED_BASS_GENRES, IDIOMATIC_DEGREE_RULES } from '../../data/performance/genreInstrumentBehaviors';
+import { GENRE_GESTURE_HINT_RULES } from '../../data/performance/genreGestureRules';
+import { GESTURE_HINT_ALIASES } from '../../data/performance/gestureHintAliases';
 import type { MusicalPattern, Measure } from '../../types';
-import type { HitFunction } from './arrangeBand.ts';
+import type { HitFunction } from '../../data/performance/hitFunctions';
 import type { InstrumentPerformanceProfile, GenrePerformanceProfile } from '../../engine/lookup/performance';
-import { parseChord, scalePcsForMode, type ChordQuality } from '../sheet/musicTheory.ts';
+import { parseChord, scalePcsForMode } from '../sheet/musicTheory.ts';
+import type { ChordQuality } from '../../data/musicTheory/schema/chord-quality';
 import { type GenreTheoryProfile } from '../../engine/lookup/theory';
 import { voiceProfile } from '../sheet/instrumentRoles.ts';
 import { resolveStyle } from '../../engine/style/resolve';
 import { getCanonicalStyle } from '../../engine/style/registry';
-import { getPerformanceGrammar, resolveHybridGrammar, type PerformanceGrammar } from './performanceGrammar.ts';
+import { getPerformanceGrammar, resolveHybridGrammar } from './performanceGrammar.ts';
+import type { PerformanceGrammar } from '../../data/performance/schema/performance-grammar';
+import type { ImprovisationGrammar } from '../../data/styles/schema';
 
 export interface PhraseState {
   previousMidi?: number;
@@ -50,6 +56,8 @@ export interface PhraseContext {
   hostTheory: GenreTheoryProfile;
   sourceTheory: GenreTheoryProfile;
   hybridTheory: GenreTheoryProfile;
+  soloGrammar?: ImprovisationGrammar;
+  soloist?: boolean;
 }
 
 export function createPhraseState(phraseIndex = 0): PhraseState {
@@ -154,7 +162,7 @@ function bassMidi(ctx: PhraseContext, index: number, total: number): number {
     if (ctx.statePreviousMidi !== undefined && Math.abs(step - ctx.statePreviousMidi) <= 5) return step;
     return prior;
   }
-  if (b === 'tumbao' || ctx.hostGenre === 'salsa' || ctx.hostGenre === 'timba') {
+  if (b === 'tumbao' || ANTICIPATED_BASS_GENRES.includes(ctx.hostGenre)) {
     const anti = ctx.hybridTheory.bass.anticipationBeats;
     const isAnticipation = anti.some(v => Math.abs(v - ctx.onsetPosition) < 0.35);
     if (isAnticipation && ctx.nextChord) return nearestMidi(nextTarget, f, low, high);
@@ -226,20 +234,36 @@ export function realizeMidi(ctx: PhraseContext, index: number, total: number, st
   if (voiceProfile(ctx.profile.instrumentId).role === 'bass' || d.includes('bass') || d === 'upright-bass' || d.includes('tuba')) return [bassMidi(ctx, index, total)];
   if (ctx.profile.family === 'keyboard' || ctx.profile.family === 'plucked-string' && ctx.profile.capabilities.polyphony > 1 || ctx.pattern.roles.includes('harmony') || /piano|organ|rhodes|guitar|bandoneon|accordion/.test(d)) return chordVoicing(ctx, index);
 
-  const scale = chordScalePcs(ctx.chord, ctx.hybridTheory);
+  const scale = ctx.soloist && ctx.soloGrammar?.scaleMode
+    ? scalePcsForMode(ctx.soloGrammar.scaleMode, rootPc(ctx.chord))
+    : chordScalePcs(ctx.chord, ctx.hybridTheory);
   const chordTones = chordTonePcsWithQuality(ctx.chord);
-  const idiomaticDegrees = /country/i.test(ctx.hostGenre) && /fiddle/i.test(d)
-    ? [1, 3, 5, 6, 5, 3, 2, 1]
-    : /tango|milonga/i.test(ctx.hostGenre) && /violin/i.test(d)
-      ? [1, 3, 5, 7, 6, 5, 3, 2]
-      : undefined;
-  const targetDegree = idiomaticDegrees
+  const idiomaticDegrees = IDIOMATIC_DEGREE_RULES.find(rule => rule.genrePattern.test(ctx.hostGenre) && rule.instrumentPattern.test(d))?.degrees;
+  const stage = ctx.soloist && ctx.soloGrammar?.phraseStages?.length
+    ? ctx.soloGrammar.phraseStages[ctx.phraseIndex % ctx.soloGrammar.phraseStages.length]
+    : undefined;
+  const targetStrategy = ctx.soloGrammar?.targetToneStrategy?.toLowerCase() ?? '';
+  const grammarDegree = targetStrategy.includes('root-or-fifth')
+    ? ((ctx.barIndex + index) % 2 ? 5 : 1)
+    : targetStrategy.includes('root') ? 1 : undefined;
+  const targetDegree = grammarDegree ?? (idiomaticDegrees
     ? idiomaticDegrees[(ctx.barIndex * 2 + index) % idiomaticDegrees.length]
-    : (ctx.hybridTheory.melody.targetDegrees[index % ctx.hybridTheory.melody.targetDegrees.length] ?? 1);
-  const targetPc = degreePc(ctx.chord, targetDegree, ctx.hybridTheory);
+    : (ctx.hybridTheory.melody.targetDegrees[index % ctx.hybridTheory.melody.targetDegrees.length] ?? 1));
+  const targetPc = ctx.soloist && scale.length
+    ? scale[(targetDegree - 1 + scale.length * 2) % scale.length]
+    : degreePc(ctx.chord, targetDegree, ctx.hybridTheory);
   const strong = ctx.onsetIndex === 0 || ctx.onsetIndex === total - 1 || ctx.hit === 'downbeat' || ctx.hit === 'punctuation' || ctx.phrasePosition > 0.82;
   let pc = targetPc;
-  if (!strong) {
+  if (ctx.soloist && stage === 'repeat-transpose' && state.previousMidi !== undefined) {
+    const previousPc = state.previousMidi % 12;
+    const at = scale.indexOf(previousPc);
+    const degreeStep = (ctx.soloGrammar?.transposeDegrees ?? 2) * (ctx.phraseIndex % 2 ? -1 : 1);
+    pc = at >= 0 ? scale[(at + degreeStep + scale.length * 2) % scale.length] : targetPc;
+  } else if (ctx.soloist && stage === 'rapid-run' && scale.length) {
+    const prevPc = state.previousMidi !== undefined ? state.previousMidi % 12 : targetPc;
+    const at = Math.max(0, scale.indexOf(prevPc));
+    pc = scale[(at + (index % 5 < 3 ? 1 : -1) + scale.length) % scale.length] ?? targetPc;
+  } else if (!strong) {
     const prevPc = state.previousMidi !== undefined ? state.previousMidi % 12 : targetPc;
     const idx = scale.indexOf(prevPc);
     const contour = ctx.hybridTheory.melody.contour[(ctx.phraseIndex + ctx.barIndex + index) % Math.max(1, ctx.hybridTheory.melody.contour.length)] ?? 'motif';
@@ -293,30 +317,15 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
   if (family === 'membrane' && /tapao|mute|closed/.test(sourceHit)) add('slap-tapao','ghost','muffled');
   if (family === 'membrane' && /open|tone|tumba/.test(sourceHit)) add('tumba-open','conga-open','open','tone');
 
-  if (ctx.profile.instrumentId === 'bandoneon' && /marcato|yumba/.test(text)) add('marcato','staccato','accent','bellows-slap');
-  if (ctx.profile.instrumentId === 'bandoneon' && /sincopa|syncop|anticip/.test(text)) add('staccato','accent','portato','arrastre');
-  if (ctx.profile.instrumentId === 'bandoneon' && /bordoneo/.test(text)) add('staccato','accent','tenuto','chapa');
-  if (ctx.profile.instrumentId === 'bandoneon' && /milonga/.test(text)) add('staccato','accent','marcato');
-
-  if (ctx.profile.instrumentId === 'upright-bass' && /tango/.test(text)) {
-    if (/marcato/.test(text)) add('arrastre','strappata','pizzicato','staccato','accent');
-    else if (/sincopa|syncop/.test(text)) add('arrastre','pizzicato','staccato','accent');
-    else if (/bordoneo/.test(text)) add('pizzicato','staccato','accent','chicharra');
-    else if (/milonga/.test(text)) add('pizzicato','staccato','accent');
+  if (ctx.profile.instrumentId === 'bandoneon') {
+    for (const rule of GENRE_GESTURE_HINT_RULES.bandoneon) if (rule.pattern.test(text)) add(...rule.gestures);
   }
-
-  if (ctx.profile.instrumentId === 'violin' && /tango|milonga/.test(text)) {
-    if (/marcato/.test(text)) add('staccato','accent','detache','pizzicato');
-    else if (/sincopa|syncop/.test(text)) add('staccato','pizzicato','chicharra','accent');
-    else if (/bordoneo/.test(text)) add('pizzicato','staccato','accent');
-    else if (/milonga/.test(text)) add('staccato','pizzicato','accent');
-  }
-
-  if (ctx.profile.instrumentId === 'piano' && /tango|milonga/.test(text)) {
-    if (/marcato/.test(text)) add('marcato','yumba','chapa','accent');
-    else if (/sincopa|syncop/.test(text)) add('staccato','arrastre','accent');
-    else if (/bordoneo/.test(text)) add('staccato','pesada','accent','arrastre');
-    else if (/milonga/.test(text)) add('staccato','campana','accent');
+  const instrumentRules = ctx.profile.instrumentId === 'upright-bass' ? GENRE_GESTURE_HINT_RULES.uprightBass
+    : ctx.profile.instrumentId === 'violin' ? GENRE_GESTURE_HINT_RULES.violin
+    : ctx.profile.instrumentId === 'piano' ? GENRE_GESTURE_HINT_RULES.piano : undefined;
+  if (instrumentRules?.genrePattern.test(text)) {
+    const rule = instrumentRules.rules.find(candidate => candidate.pattern.test(text));
+    if (rule) add(...rule.gestures);
   }
 
   const roleBucket: keyof PhraseContext['hybridTheory']['techniques'] = /bass/.test(ctx.role) ? 'bass'
@@ -338,31 +347,13 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
     ...ctx.profile.adaptationOrder.flatMap(g => ctx.profile.genreProfiles[g]?.preferredGestures ?? []),
   ].filter((g): g is string => Boolean(g) && allowed(g))));
   const hitWord = hit.toLowerCase();
-  const hintAliases: Record<string, RegExp> = {
-    marcato: /marcato|accent|staccato|attack|punch|strappata/i,
-    syncopated: /sync|anticip|staccato|accent|chop|arrastre/i,
-    fingerstyle: /finger|pluck|pizz/i,
-    flatpick: /flatpick|pick|downpick/i,
-    slap: /slap|pop|tapao|thump/i,
-    ghost: /ghost|heel|toe|dead|mute|muffled/i,
-    legato: /legato|tenuto|sustain|portato|arco/i,
-    rasgueado: /rasgueado|strum|roll/i,
-    golpe: /golpe|tap|percuss/i,
-    arrastre: /arrastre|slide|gliss|drag/i,
-    guajeo: /guajeo|montuno|staccato|chop/i,
-    tumbao: /tumbao|bass|pizz|staccato|accent/i,
-    one_drop: /one.?drop|skank|ghost|offbeat/i,
-    dembow: /dembow|staccato|short|accent/i,
-    vibrato: /vibrato|shake|ornament/i,
-    fall: /fall|doit|scoop|bend/i,
-  };
   const contextualSet = new Set(contextual);
   const scored = candidates.map(g => {
     const gl = g.toLowerCase();
     let score = 0;
     if (desired && gl === desired.toLowerCase()) score += 20;
     if (contextualSet.has(g)) score += 7;
-    if (theoryHints.some(h => hintAliases[h.toLowerCase().replace(/[^a-z0-9]+/g,'_')]?.test(gl) || gl.includes(h.toLowerCase()))) score += 6;
+    if (theoryHints.some(h => GESTURE_HINT_ALIASES[h.toLowerCase().replace(/[^a-z0-9]+/g,'_')]?.test(gl) || gl.includes(h.toLowerCase()))) score += 6;
     if (hostPreferred.has(g)) score += 5;
     if (sourcePreferred.has(g)) score += 4;
     if (hitWord === 'ghost' && /ghost|heel|toe|tap|mute|dead/.test(gl)) score += 6;

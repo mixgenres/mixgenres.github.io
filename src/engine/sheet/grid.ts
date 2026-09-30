@@ -28,6 +28,7 @@ export interface NativeSlice {
   /** step indices within this bar, on the pattern's own grid */
   onsets: number[];
   accents: number[];
+  velocities: number[];
   durations: number[];
   microtiming: number[];
   hitTypes: string[];
@@ -42,6 +43,7 @@ export interface NativeSlice {
 export function sliceBarNative(
   onsets: number[],
   accents: number[] | undefined,
+  velocities: number[] | undefined,
   durations: number[] | undefined,
   micro: number[] | undefined,
   hitTypes: string[] | undefined,
@@ -58,7 +60,7 @@ export function sliceBarNative(
   const stepsPerBar = Math.max(1, Math.round(total / cycleBars));
 
   const from = (barInCycle % cycleBars) * stepsPerBar;
-  const keepO: number[] = [], keepA: number[] = [], keepD: number[] = [], keepM: number[] = [], keepH: string[] = [], keepF: number[] = [];
+  const keepO: number[] = [], keepA: number[] = [], keepV: number[] = [], keepD: number[] = [], keepM: number[] = [], keepH: string[] = [], keepF: number[] = [];
 
   onsets.forEach((o, i) => {
     if (o < from || o >= from + stepsPerBar) return;
@@ -66,12 +68,13 @@ export function sliceBarNative(
     keepO.push(barStep);
     keepF.push(barStep / stepsPerBar);
     keepA.push(accents?.[i] ?? 0.78);
+    keepV.push(velocities?.[i] ?? 0.78);
     keepD.push(durations?.[i] ?? 1);
     keepM.push(micro?.[i] ?? 0);
     keepH.push(hitTypes?.[i] ?? '');
   });
 
-  return { onsets: keepO, accents: keepA, durations: keepD, microtiming: keepM, hitTypes: keepH, stepsPerBar, fractionalPositions: keepF, durationsAuthored: durations !== undefined };
+  return { onsets: keepO, accents: keepA, velocities: keepV, durations: keepD, microtiming: keepM, hitTypes: keepH, stepsPerBar, fractionalPositions: keepF, durationsAuthored: durations !== undefined };
 }
 
 /** Quarter-note beats in one bar of the given time signature. */

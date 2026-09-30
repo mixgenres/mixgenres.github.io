@@ -36,7 +36,7 @@ function collectIds(root, ids) {
   for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
     const full = path.join(root, entry.name);
     if (entry.isDirectory()) collectIds(full, ids);
-    else if (entry.name.endsWith('.ts') && entry.name !== 'index.ts') ids.add(path.basename(entry.name, '.ts'));
+    else if (entry.name.endsWith('.ts') && entry.name !== 'index.ts' && entry.name !== 'profileBuilders.ts' && entry.name !== 'genreClassifiers.ts' && entry.name !== 'genrePlaybackProfiles.ts' && entry.name !== 'genreInstrumentProfiles.ts') ids.add(path.basename(entry.name, '.ts'));
   }
 }
 collectIds(catalogRoot, catalogIds);

@@ -1,0 +1,18 @@
+export const GESTURE_HINT_ALIASES: Record<string, RegExp> = {
+  marcato: /marcato|accent|staccato|attack|punch|strappata/i,
+  syncopated: /sync|anticip|staccato|accent|chop|arrastre/i,
+  fingerstyle: /finger|pluck|pizz/i,
+  flatpick: /flatpick|pick|downpick/i,
+  slap: /slap|pop|tapao|thump/i,
+  ghost: /ghost|heel|toe|dead|mute|muffled/i,
+  legato: /legato|tenuto|sustain|portato|arco/i,
+  rasgueado: /rasgueado|strum|roll/i,
+  golpe: /golpe|tap|percuss/i,
+  arrastre: /arrastre|slide|gliss|drag/i,
+  guajeo: /guajeo|montuno|staccato|chop/i,
+  tumbao: /tumbao|bass|pizz|staccato|accent/i,
+  one_drop: /one.?drop|skank|ghost|offbeat/i,
+  dembow: /dembow|staccato|short|accent/i,
+  vibrato: /vibrato|shake|ornament/i,
+  fall: /fall|doit|scoop|bend/i,
+};

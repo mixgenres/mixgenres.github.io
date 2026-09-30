@@ -1,3 +1,4 @@
+import { GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS } from '../../data/instruments/idClassifiers';
 import { el } from '@elemaudio/core';
 import type { VoiceRenderContext, AudioSignal } from './instrumentTypes.ts';
 
@@ -11,12 +12,12 @@ export function applyGenreInstrumentTreatment(audio: AudioSignal, ctx: VoiceRend
   const g = ctx.genreDialect;
   const inst = (ctx.params.instrumentId ?? '').toLowerCase();
   const fam = String(family ?? '').toLowerCase();
-  const isBass = /bass|tuba|bassoon|guitarron|sub/.test(inst) || /bass/.test(fam);
-  const isDrum = /drum|percussion|membrane|hand-drum/.test(fam) || /kick|snare|clap|tom|conga|bongo|timbale|cowbell|shaker|tambourine|guiro/.test(inst);
-  const isPlucked = /pluck|guitar|string/.test(fam) || /guitar|oud|banjo|mandolin|koto|sitar|charango|tres|cuatro|cavaquinho|harp|kora|pipa|guzheng|shamisen|requinto/.test(inst);
-  const isKeys = /key/.test(fam) || /piano|rhodes|organ|clavinet|harpsichord/.test(inst);
-  const isBowed = /bowed|string/.test(fam) || /violin|viola|cello|fiddle|string/.test(inst);
-  const isWind = /wind|brass|reed/.test(fam) || /sax|trumpet|trombone|horn|flute|clarinet|oboe|bassoon|tuba|whistle/.test(inst);
+  const isBass = GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.bassInstrument.test(inst) || GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.bassFamily.test(fam);
+  const isDrum = GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.drumFamily.test(fam) || GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.drumInstrument.test(inst);
+  const isPlucked = GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.pluckedFamily.test(fam) || GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.pluckedInstrument.test(inst);
+  const isKeys = GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.keysFamily.test(fam) || GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.keysInstrument.test(inst);
+  const isBowed = GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.bowedFamily.test(fam) || GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.bowedInstrument.test(inst);
+  const isWind = GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.windFamily.test(fam) || GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.windInstrument.test(inst);
 
   let out = audio;
 

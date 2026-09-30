@@ -5,18 +5,7 @@ export type InstrumentFamily =
 
 export interface DrumVoice { low: number; mid: number; high: number; }
 
-export type LuthierModelCategory =
-  | 'membrane_tension_2d'
-  | 'strum_friction_pluck'
-  | 'continuous_bowed_friction'
-  | 'bellows_free_reed'
-  | 'aerophone_lip_tension'
-  | 'resonator_struck_metal_wood'
-  | 'electro_acoustic_algorithmic'
-  | 'breath_free_reed'
-  | 'plucked_resonance'
-  | 'body_impact'
-  | 'scraped_friction';
+import type { LuthierModelCategory } from './luthier';
 
 export interface LuthierPhysicsProfile {
   category: LuthierModelCategory;
@@ -56,28 +45,10 @@ export interface AcousticProfile {
   letRingAcrossSections?: boolean;
 }
 
-export interface FormantBand {
-  freq: number;
-  q: number;
-  gain: number;
-}
-
-export interface AcousticFormantProfile {
-  f1: FormantBand;
-  f2: FormantBand;
-  f3?: FormantBand;
-  tongueType: 'chiff' | 'reed-tongue' | 'lip-slap' | 'soft-puff';
-  tongueFreq: number;
-}
-
-export interface BowedResonanceProfile {
-  bodyFreq: number;
-  bodyQ: number;
-  bodyGain: number;
-  bridgeHillFreq: number;
-  bridgeHillQ: number;
-  bridgeHillGain: number;
-}
+import type { AcousticFormantProfile } from './formant-profile';
+import type { BowedResonanceProfile } from './bowed-resonance';
+export type { FormantBand, AcousticFormantProfile } from './formant-profile';
+export type { BowedResonanceProfile } from './bowed-resonance';
 
 export interface InstrumentKitComponent {
   id: string;

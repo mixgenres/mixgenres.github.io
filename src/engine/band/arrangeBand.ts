@@ -1,3 +1,7 @@
+import { GENRE_ID_ALIASES } from '../../data/performance/genreAliases';
+import { KIT_COMPONENT_MIDI_ALIASES } from '../../data/instruments/kitComponentAliases';
+import { KIT_HIT_INTENT_FALLBACK, KIT_HIT_INTENT_RULES, KIT_HIT_OPEN_PATTERN } from '../../data/performance/kitHitRules';
+import { PATTERN_GESTURE_HINT_RULES } from '../../data/performance/patternGestureRules';
 import type { GuestLens, Measure, Region, MusicalPattern, Role } from '../../types';
 import type { Sheet, Voice } from '../sheet/sheet.ts';
 import type { InstrumentDef } from '../../data/instruments/schema/instrument-def';
@@ -10,7 +14,7 @@ import { getResolvedSectionStyle } from '../sheet/sheet.ts';
 import { parseChord } from '../sheet/musicTheory.ts';
 import { foldToRange, noteLengthBeats, voiceProfile } from '../sheet/instrumentRoles.ts';
 import { resolveTuningSystem } from '../sheet/tuning.ts';
-import { buildBarTimes, type BarTime, type Performance, type PerfNote, type PerfCC } from '../band/performanceData.ts';
+import { buildBarTimes, thinForSustain, type BarTime, type Performance, type PerfNote, type PerfCC } from '../band/performanceData.ts';
 import {
   buildHybridGrammar,
   createPhraseState,
@@ -22,23 +26,23 @@ import {
 } from './phrasePerformance.ts';
 import { GESTURE_NAMES, GESTURE_CODES, codeForGesture } from './gestures.ts';
 import { bandoneonCandidates, bandoneonPlayable, BANDONEON_142_BUTTONS } from '../../engine/band/fingering/bandoneon';
-import { findKitComponent, type RhythmicIntent } from './rhythmicIntent.ts';
+import { findKitComponent } from './rhythmicIntent.ts';
+import type { RhythmicIntent } from '../../data/performance/schema/rhythmic-intent';
 import { optimizePerformanceByPhraseAndSong } from './songPhrasing.ts';
+import { decide } from '../sheet/arrangementContext.ts';
+import { activityFor } from '../sheet/sectionEnergy.ts';
+import { velocityForEnergy } from './velocity.ts';
+import { resolveDialect } from './genreDialect.ts';
 
 export { GESTURE_NAMES, GESTURE_CODES };
 
-export type HitFunction =
-  | 'downbeat' | 'tone' | 'open' | 'slap' | 'muffled' | 'ghost'
-  | 'bass-tone' | 'edge' | 'offbeat-chop' | 'sustain' | 'fill' | 'punctuation';
-
-export const HIT_FUNCTIONS: HitFunction[] = [
-  'downbeat', 'tone', 'open', 'slap', 'muffled', 'ghost', 'bass-tone',
-  'edge', 'offbeat-chop', 'sustain', 'fill', 'punctuation'
-];
+import { HIT_FUNCTIONS, type HitFunction } from '../../data/performance/hitFunctions';
 
 export interface RhythmOnset {
   position: number;
   accent: number;
+  velocity: number;
+  anticipationOffsetSteps?: number;
   duration: number;
   hit: HitFunction;
   sourceHit?: string;
@@ -85,12 +89,14 @@ export interface BandPlan {
     sectionId: string;
     lens: LensStack;
     rhythm: RhythmIdea;
-    groove: { offsetMs: number; swing: number; subdivision: number };
-    ownership: 'foreground' | 'background' | 'pulse' | 'answer' | 'tacet';
+    groove: { offsetMs: number; swing: number; subdivision: number; anticipationOffsetSteps?: number };
   }[]>;
 }
 
 function clamp(v: number, a = 0, b = 1): number { return Math.max(a, Math.min(b, v)); }
+
+/** Map normalized section energy (0.2..1) and a pattern velocity to MIDI velocity. */
+export { velocityForEnergy } from './velocity.ts';
 
 function hitFrom(pattern: MusicalPattern, i: number, rawHit?: string): HitFunction {
   const raw = String(rawHit ?? pattern.hitGrid?.[i] ?? '').toLowerCase();
@@ -107,15 +113,17 @@ function hitFrom(pattern: MusicalPattern, i: number, rawHit?: string): HitFuncti
   if (a <= 0.42) return 'ghost';
   const pos = Number(pattern.onsetGrid?.[i] ?? 0);
   const sub = Math.max(1, Number(pattern.subdivisions ?? 16));
-  if (pos % sub > sub * 0.7) return 'offbeat-chop';
+  const stepsPerQuarter = Math.max(1, Math.round(sub / 4));
+  if (pos % stepsPerQuarter !== 0) return 'offbeat-chop';
   return 'tone';
 }
 
 function rhythmIdeaFromPattern(p: MusicalPattern, sourceGenre: string): RhythmIdea {
   const sub = Math.max(1, p.subdivisions ?? 16);
   const onsets = (p.onsetGrid ?? []).map((position: number, i: number) => ({
-    position: position / sub,
+    position: (position + Number(p.anticipationOffset ?? 0)) / sub,
     accent: clamp(Number(p.accentProfile?.[i] ?? 0.72)),
+    velocity: clamp(Number(p.velocityProfile?.[i] ?? p.accentProfile?.[i] ?? 0.72)),
     duration: clamp(Number(p.durationGrid?.[i] ?? 1) / sub * 4, 0.05, 2),
     hit: hitFrom(p, i),
     sourceHit: p.hitGrid?.[i] ?? (p.instruments?.includes('drums') || p.family?.toLowerCase().includes('drum') ? `${p.id} ${p.name}` : undefined),
@@ -139,6 +147,7 @@ interface PatternPerformanceDetails {
   stepsPerBar?: number;
   onsets?: number[];
   accents?: number[];
+  velocities?: number[];
   durations?: number[];
   hitTypes?: string[];
   microtiming?: number[];
@@ -161,12 +170,14 @@ function rhythmIdeaFromMeasure(detail: NonNullable<Measure['patternDetailsByTrac
   const steps = Math.max(1, Number(perf?.stepsPerBar ?? p.subdivisions ?? fallback.subdivisions));
   const nativeOnsets = Array.isArray(perf?.onsets) ? perf.onsets : [];
   const nativeAccents = Array.isArray(perf?.accents) ? perf.accents : [];
+  const nativeVelocities = Array.isArray(perf?.velocities) ? perf.velocities : [];
   const nativeDurations = Array.isArray(perf?.durations) ? perf.durations : [];
   const nativeHitTypes = Array.isArray(perf?.hitTypes) ? perf.hitTypes : [];
   const nativeSteps = Math.max(1, Number(perf?.stepsPerBar ?? p.subdivisions ?? fallback.subdivisions));
   const onsets = nativeOnsets.map((position: number, i: number) => ({
-    position: position / nativeSteps,
+    position: (position + Number(p.anticipationOffset ?? 0)) / nativeSteps,
     accent: clamp(Number(nativeAccents[i] ?? detail.accentProfile?.[i] ?? 0.72)),
+    velocity: clamp(Number(nativeVelocities[i] ?? p.velocityProfile?.[i] ?? nativeAccents[i] ?? detail.accentProfile?.[i] ?? 0.72)),
     duration: clamp(Number(nativeDurations[i] ?? detail.durationGrid?.[i] ?? 1) / nativeSteps * 4, 0.05, 2),
     durationAuthored: Boolean(perf?.durationsAuthored) || Array.isArray(detail.durationGrid),
     hit: hitFrom(p, i, nativeHitTypes[i] ?? detail.hitTypes?.[i]),
@@ -190,7 +201,7 @@ function rhythmIdeaFromMeasure(detail: NonNullable<Measure['patternDetailsByTrac
 }
 
 function styleRegion(region: Region): Region {
-  return region.genre === 'milonga' ? { ...region, genre: 'tango', styleId: region.styleId } : region;
+  return region.genre && Object.hasOwn(GENRE_ID_ALIASES, region.genre) ? { ...region, genre: GENRE_ID_ALIASES[region.genre], styleId: region.styleId } : region;
 }
 
 function buildSongPlan(sheet: Sheet, bars: BarTime[]): SongPlan {
@@ -227,13 +238,6 @@ function resolveLens(sheet: Sheet, region: Region, track: Voice): LensStack {
   return { hostGenre: host, sourceGenre: source, weight, provenance };
 }
 
-function ownership(track: Voice, role: string, energy: number): BandPlan['lanes'][string][number]['ownership'] {
-  if (track.muted) return 'tacet';
-  if (role === 'bass' || role === 'percussion' || role === 'pulse') return 'pulse';
-  if (role === 'lead' || role === 'melody' || role === 'voice') return energy > 0.65 ? 'foreground' : 'answer';
-  return energy > 0.8 ? 'background' : 'answer';
-}
-
 function chooseRhythm(sheet: Sheet, region: Region, track: Voice, style?: ResolvedStyle): RhythmIdea {
   const measure = sheet.measures.find(x => x.regionId === region.id && (x.patternByTrack?.[track.id] || x.patternDetailsByTrack?.[track.id]));
   const pid = measure?.patternByTrack?.[track.id] ?? measure?.patternDetailsByTrack?.[track.id]?.patternId;
@@ -265,62 +269,25 @@ function chooseRhythm(sheet: Sheet, region: Region, track: Voice, style?: Resolv
 function patternGestureHint(pattern: MusicalPattern, instrumentId: string, styleId: string | undefined): string | undefined {
   const text = `${pattern?.id ?? ''} ${pattern?.name ?? ''} ${pattern?.family ?? ''} ${(pattern?.tags ?? []).join(' ')} ${(pattern?.approaches ?? []).join(' ')} ${styleId ?? ''}`.toLowerCase();
   const exists = (x: string) => Boolean(getInstrumentPerformanceProfile(instrumentId).gestures[x]);
-  if (/milonga/.test(text)) {
-    for (const g of ['staccato', 'marcato', 'accent', 'pizzicato']) if (exists(g)) return g;
-  }
-  if (/marcato|yumba/.test(text)) {
-    for (const g of ['marcato', 'accent', 'staccato', 'chapa', 'cluster']) if (exists(g)) return g;
-  }
-  if (/sincopa|syncop|anticipat/.test(text)) {
-    for (const g of ['staccato', 'marcato', 'accent', 'pizzicato', 'fingerstyle']) if (exists(g)) return g;
-  }
-  if (/bordoneo/.test(text)) {
-    for (const g of ['pizzicato', 'fingerstyle', 'staccato', 'accent', 'legato']) if (exists(g)) return g;
-  }
-  if (/tumbao/.test(text)) {
-    for (const g of ['open', 'heel', 'toe', 'slap', 'pizzicato', 'staccato']) if (exists(g)) return g;
-  }
-  if (/fingerstyle|flatpick|bluegrass/.test(text)) {
-    for (const g of ['fingerstyle', 'flatpick', 'accent', 'staccato']) if (exists(g)) return g;
+  for (const rule of PATTERN_GESTURE_HINT_RULES) {
+    if (!rule.pattern.test(text)) continue;
+    for (const gesture of rule.gestures) if (exists(gesture)) return gesture;
   }
   return undefined;
 }
 
 function rhythmicIntentForKit(sourceHit: string | undefined, hit: HitFunction): RhythmicIntent {
   const raw = String(sourceHit ?? '').toLowerCase();
-  if (/kick|bass-drum|bombo|grave/.test(raw) || hit === 'downbeat' || hit === 'bass-tone') return 'low';
-  if (/ride.*bell|bell/.test(raw)) return 'bell';
-  if (/crash/.test(raw)) return 'accent';
-  if (/ride|hat|hihat|hi-hat|cymbal/.test(raw)) return /open/.test(raw) ? 'open' : 'offbeat';
-  if (/rim|side-stick|cross-stick|cascara|edge/.test(raw) || hit === 'edge') return 'rim';
-  if (/ghost|heel|toe|tip|brush/.test(raw) || hit === 'ghost') return 'ghost';
-  if (/slap|rimshot|quinto/.test(raw) || hit === 'slap') return 'slap';
-  if (/mute|tapao|dead|chapa|closed|pedal/.test(raw) || hit === 'muffled') return 'mute';
-  if (/open|tone|tumba/.test(raw) || hit === 'open') return 'open';
-  if (/fill|roll/.test(raw) || hit === 'fill') return 'roll';
-  return 'backbeat';
+  const rule = KIT_HIT_INTENT_RULES.find(candidate => candidate.pattern.test(raw) || candidate.hits?.includes(hit));
+  if (!rule) return KIT_HIT_INTENT_FALLBACK;
+  return rule.dynamicOpen && KIT_HIT_OPEN_PATTERN.test(raw) ? 'open' : rule.intent;
 }
 
 function kitComponentMidi(def: InstrumentDef, sourceHit: string | undefined, hit: HitFunction, index: number): number {
   const comps = def?.kitComponents ?? [];
   if (!comps.length) return def?.drum?.mid ?? 60;
   const raw = String(sourceHit ?? '').trim().toLowerCase();
-  const exactAliases: Array<[RegExp, string[]]> = [
-    [/kick|bass.?drum|\bbd\b|bombo|grave/, ['kick']],
-    [/snare|\bsd\b|backbeat/, ['snare-center', 'snare']],
-    [/rimshot/, ['snare-rimshot']],
-    [/cross.?stick|side.?stick|rim.?click/, ['snare-cross-stick']],
-    [/ghost/, ['snare-ghost', 'snare-center']],
-    [/closed.?hat|\bhat\b|hi.?hat.*closed|hihat.*closed/, ['hihat-closed']],
-    [/open.?hat|hi.?hat.*open|hihat.*open/, ['hihat-open']],
-    [/pedal.?hat|hat.?pedal|foot.?chick/, ['hihat-pedal']],
-    [/high.?tom|tom.?high|high.?tom/, ['tom-high']],
-    [/mid.?tom|tom.?mid/, ['tom-mid']],
-    [/low.?tom|floor.?tom|tom.?low/, ['tom-low']],
-    [/crash/, ['crash-1']],
-    [/ride.?bell|bell/, ['ride-bell']],
-    [/ride/, ['ride-bow']],
-  ];
+  const exactAliases = KIT_COMPONENT_MIDI_ALIASES;
   for (const [rx, ids] of exactAliases) {
     if (rx.test(raw)) {
       for (const id of ids) {
@@ -374,10 +341,11 @@ function grooveTime(
 ): number {
   const beatSec = 60 / Math.max(20, bt.bpm);
   const beat = onset.position * bt.beatsPerBar;
+  const anticipation = (Number(onset.anticipationOffsetSteps ?? 0) + Number(groove.anticipationOffsetSteps ?? 0)) * (beatSec * bt.beatsPerBar / 16);
   const swingDelta = onsetIndex % 2 === 1 ? (groove.swing - 0.5) * beatSec * 0.5 : 0;
   const authoredMicro = onset.microtiming ?? 0;
   const microSec = Math.abs(authoredMicro) > 0.5 ? authoredMicro / 1000 : authoredMicro * beatSec / Math.max(1, groove.subdivision);
-  return bt.start + beat * beatSec + groove.offsetMs / 1000 + swingDelta + microSec;
+  return bt.start + beat * beatSec + groove.offsetMs / 1000 + anticipation + swingDelta + microSec;
 }
 
 
@@ -473,8 +441,8 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
           offsetMs: host.timing.offsetMs * (1 - lens.weight) + source.timing.offsetMs * lens.weight,
           swing: host.timing.swing * (1 - lens.weight) + source.timing.swing * lens.weight,
           subdivision: rhythm.subdivisions,
+          anticipationOffsetSteps: Number(preliminaryStyle.rhythm?.anticipationOffsetSteps ?? 0),
         },
-        ownership: ownership(track, role, song.energy[region.start] ?? 0.6),
       });
     }
   }
@@ -485,13 +453,29 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
 
   for (const region of sheet.regions) {
     const regionStyle = getResolvedSectionStyle(sheet, styleRegion(region));
+    const context = sheet.arrangementContext?.[region.id];
+    const sectionDecisions = new Map<string, ReturnType<typeof decide>>();
+    for (const voice of sheet.tracks as Voice[]) {
+      const decision = decide(voice.id, context);
+      sectionDecisions.set(voice.id, decision);
+    }
     for (const track of sheet.tracks as Voice[]) {
+      const decision = sectionDecisions.get(track.id)!;
+      if (!decision.plays) continue;
       const lane = band.lanes[region.id]?.find(x => x.trackId === track.id);
       if (!lane) continue;
       const profile = getInstrumentPerformanceProfile(track.instrumentId);
+      const dialect = resolveDialect(track.instrumentId, region.genre ?? sheet.worldId, regionStyle.id, track.role, region.energy ?? 3);
       const cycle = Math.max(1, Number(regionStyle?.contract?.cycleLength ?? 1));
-      const phraseBars = Math.max(cycle, Number(regionStyle?.melody?.phraseLengthsBars?.find((x: number) => x % cycle === 0) ?? cycle));
+      const soloSection = /solo|trading|falseta|variaci|descarga|mambo|improvisation/i.test(`${region.kind} ${region.formKey ?? ''}`);
+      const tradingSection = /trading/i.test(`${region.kind} ${region.formKey ?? ''}`);
+      const soloCandidates = context?.spotlightedTrackIds ?? [];
+      const soloGrammar = soloSection ? regionStyle.contract.improvisationGrammar : undefined;
+      const authoredPhraseBars = soloCandidates.includes(track.id) ? soloGrammar?.phraseBars : undefined;
+      const preferredPhraseBars = authoredPhraseBars ?? regionStyle?.melody?.phraseLengthsBars?.find((x: number) => x % cycle === 0) ?? cycle;
+      const phraseBars = Math.max(cycle, Math.ceil(Number(preferredPhraseBars) / cycle) * cycle);
       for (let phraseStart = region.start, phraseIndex = 0; phraseStart < region.end; phraseStart += phraseBars, phraseIndex++) {
+        const soloist = soloCandidates.includes(track.id) && (!tradingSection || soloCandidates[phraseIndex % Math.max(1, soloCandidates.length)] === track.id);
         const phraseEnd = Math.min(region.end, phraseStart + phraseBars);
         const state = createPhraseState(phraseIndex);
         const phraseNotes: PerfNote[] = [];
@@ -504,8 +488,15 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
           if (!rhythm.onsets.length) continue;
           const chord = measure.chord || 'C';
           const nextChord = sheet.measures[bar + 1]?.chord;
-          const energy = song.energy[bar] ?? 0.6;
+          const energy = activityFor(regionStyle.contract, decision.sectionEnergy);
+          const voiceShape = voiceProfile(track.instrumentId);
+          const keepAttack = thinForSustain(voiceShape,
+            rhythm.onsets.map(o => ({ beatInBar: o.position * bt.beatsPerBar, accent: o.accent })),
+            bt.beatsPerBar, energy);
           const phrasePosition = ((bar - phraseStart) + 0.5) / Math.max(1, phraseEnd - phraseStart);
+          const phraseStage = soloGrammar?.phraseStages?.length
+            ? soloGrammar.phraseStages[phraseIndex % soloGrammar.phraseStages.length]
+            : undefined;
           const grammarBundle = buildHybridGrammar(regionStyle.id, lane.lens.sourceGenre, regionStyle, lane.lens.weight);
           const sharedHostProfile = resolveGenreProfile(track.instrumentId, lane.lens.hostGenre);
           const sharedSourceProfile = resolveGenreProfile(track.instrumentId, lane.lens.sourceGenre);
@@ -515,8 +506,10 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
           const barNotes: PerfNote[] = [];
 
           for (let i = 0; i < rhythm.onsets.length; i++) {
+            if (!keepAttack[i]) continue;
+            if (soloist && phraseStage === 'rest' && phrasePosition >= 0.38 && phrasePosition <= 0.62) continue;
             const onset = rhythm.onsets[i];
-            const ctx: PhraseContext = {
+          const ctx: PhraseContext = {
               sheetWorldId: sheet.worldId,
               hostGenre: lane.lens.hostGenre,
               sourceGenre: lane.lens.sourceGenre,
@@ -545,9 +538,20 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
               hostTheory,
               sourceTheory,
               hybridTheory,
+              soloGrammar,
+              soloist,
             };
             const authoredGesture = detail?.articulations?.length ? detail.articulations[i % detail.articulations.length] : detail?.articulation;
-            const gestureName = effectiveGesture(profile, ctx, onset, authoredGesture);
+            const authoredHint = authoredGesture ?? patternGestureHint(ctx.pattern, profile.instrumentId, regionStyle.id);
+            const dialectTechnique = dialect?.defaultTechnique;
+            let gestureName = !authoredHint && dialectTechnique && profile.gestures[dialectTechnique]
+              ? dialectTechnique
+              : effectiveGesture(profile, ctx, onset, authoredGesture);
+            if (soloist && phraseStage === 'rapid-run') {
+              const ornaments = [...(soloGrammar?.rapidRunOrnaments ?? []), ...(regionStyle.melody?.ornamentVocabulary ?? [])]
+                .filter(name => profile.gestures[name]);
+              if (ornaments.length) gestureName = ornaments[(i + phraseIndex) % ornaments.length];
+            }
             ctx.gesture = gestureName;
             const authoredVariation = String(detail?.variationType ?? '').toLowerCase();
             const development = authoredVariation.includes('cadence') ? 'cadence'
@@ -563,10 +567,8 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
             // Give section energy a real dynamic span while retaining accent contrast.
             // Energy 1 lives roughly in the quiet/mid range; energy 5 can reach the
             // normal forte ceiling without forcing every note above 100.
-            const energyFloor = 0.28 + (energy - 1) * 0.105;
-            const energyCeiling = 0.52 + (energy - 1) * 0.115;
-            const velNorm = clamp(energyFloor + accent * (energyCeiling - energyFloor) * sharedHostProfile.density.accentContrast, 0.18, 0.94);
-            const vel = Math.round(velNorm * 127);
+            const brightnessLift = 0.88 + Math.max(0, Math.min(127, decision.brightness)) / 127 * 0.24;
+            const vel = Math.max(1, Math.min(127, Math.round(velocityForEnergy(energy, onset.velocity, sharedHostProfile.density.accentContrast) * decision.drive * brightnessLift)));
             const time = Math.max(0, grooveTime(bt, onset, i, lane.groove));
             const pv = voiceProfile(track.instrumentId);
             const nextPosition = rhythm.onsets[i + 1]?.position ?? (onset.position + Math.max(onset.duration, 1 / Math.max(1, rhythm.subdivisions)));
@@ -581,7 +583,7 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
             const tuning = resolveTuningSystem(regionStyle.harmony?.tuningSystem ?? '12-tet');
 
             for (let mi = 0; mi < midis.length; mi++) {
-              const midi = midis[mi];
+              const midi = midis[mi] + decision.register;
               // Banjo harmony is voiced as a chord for harmonic access, but its
               // attack is a roll rather than a piano-style block chord. Stagger
               // the picked strings inside a few milliseconds while keeping the

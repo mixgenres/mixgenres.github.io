@@ -1,5 +1,6 @@
 import type { FormIntensity, Region, SectionEnergy } from '../../types';
 import type { WorldContract, EnergyMapping } from '../../engine/style/contracts';
+import { FORM_INTENSITY_TO_ENERGY, ENERGY_TO_FORM_INTENSITY, ENERGY_LABELS } from '../../data/performance/energy';
 
 /**
  * ENERGY — the one weight dial.
@@ -24,21 +25,6 @@ import type { WorldContract, EnergyMapping } from '../../engine/style/contracts'
  * templates, because that is how a musician writes a song map ("the bridge is
  * high"). It is converted here, at the boundary, and never read as truth.
  */
-
-const FORM_INTENSITY_TO_ENERGY: Record<FormIntensity, SectionEnergy> = {
-  low: 1,
-  medium: 3,
-  high: 4,
-  peak: 5,
-};
-
-const ENERGY_TO_FORM_INTENSITY: Record<SectionEnergy, FormIntensity> = {
-  1: 'low',
-  2: 'low',
-  3: 'medium',
-  4: 'high',
-  5: 'peak',
-};
 
 export function energyForFormIntensity(intensity: FormIntensity | undefined): SectionEnergy {
   return FORM_INTENSITY_TO_ENERGY[intensity ?? 'medium'] ?? 3;
@@ -98,13 +84,6 @@ export function energyForActivity(contract: WorldContract, activity: number): Se
     )[0] ?? 3;
 }
 
-export const ENERGY_LABELS: Record<SectionEnergy, string> = {
-  1: 'Bare',
-  2: 'Held back',
-  3: 'Steady',
-  4: 'Driving',
-  5: 'Full',
-};
 
 /**
  * A world may rename the five steps so the dial speaks the genre's language.

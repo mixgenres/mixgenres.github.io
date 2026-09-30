@@ -1,3 +1,6 @@
+import { TANGO_INSTRUMENT_RESPONSE, URBAN_ELECTRIC_GUITAR_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
+import { ELECTRIC_GUITAR_DECAY_RULES, ELECTRIC_GUITAR_GENRE_DRIVE_RULES } from '../../data/sound/dsp/genrePlaybackProfiles';
+import { KIZOMBA_PATTERN, REGGAETON_PATTERN, TANGO_NUEVO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
 import { el } from '@elemaudio/core';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { createDampedStringLoop, fbGainForDecay } from './instrumentLib_stringLoop.ts';
@@ -21,9 +24,10 @@ export default class ElectricGuitarModule implements InstrumentModule {
     const isDistortion = model === 24;
     const isOverdrive = model === 25;
     const isHarmonics = model === 26;
-    const isTangoNuevo = /nuevo|tango/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isKizomba = /kizomba|tarraxo|urbankiz|ghetto-zouk/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isReggaeton = /reggaeton|reggaetón|dembow|perreo|neoperreo/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isTangoNuevo = TANGO_NUEVO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const tangoResponse = TANGO_INSTRUMENT_RESPONSE.electricGuitar;
+    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const isUrbanLatin = isKizomba || isReggaeton;
     const isArrastre = ctx.action === 'arrastre' || /arrastre|slide/i.test(ctx.action ?? '');
     const isMarcato = ctx.action === 'marcato' || /marcato/i.test(ctx.action ?? '');
@@ -32,12 +36,11 @@ export default class ElectricGuitarModule implements InstrumentModule {
 
     const delayTimeSignal = el.min(el.const({ value: 4000 }), el.max(el.const({ value: 2 }), el.div(el.sr(), safeFreqSignal)));
 
-    const targetDecaySeconds = /funk|ska|reggae|bachata/.test(genre)
-      ? 0.10 + decayTime * 0.35
-      : /country|blues|jazz/.test(genre)
-      ? 0.42 + decayTime * 0.95
+    const genreDecayRule = ELECTRIC_GUITAR_DECAY_RULES.find(rule => rule.pattern.test(genre));
+    const targetDecaySeconds = genreDecayRule
+      ? genreDecayRule.base + decayTime * genreDecayRule.decay
       : isUrbanLatin
-      ? (isKizomba ? 0.19 + decayTime * 0.55 : 0.16 + decayTime * 0.42)
+      ? (isKizomba ? URBAN_ELECTRIC_GUITAR_RESPONSE.kizombaDecayBase + decayTime * URBAN_ELECTRIC_GUITAR_RESPONSE.kizombaDecayTime : URBAN_ELECTRIC_GUITAR_RESPONSE.reggaetonDecayBase + decayTime * URBAN_ELECTRIC_GUITAR_RESPONSE.reggaetonDecayTime)
       : isMutedGuitar
       ? (0.08 + decayTime * 0.25)
       : isTangoNuevo
@@ -51,7 +54,7 @@ export default class ElectricGuitarModule implements InstrumentModule {
     let activeFreq = safeFreqSignal;
     if (isArrastre) {
       const slideEnv = el.adsr(0.001, 0.065, 0, 0.008, gateSignal);
-      activeFreq = el.mul(safeFreqSignal, el.sub(1.0, el.mul(isTangoNuevo ? 0.095 : 0.06, slideEnv)));
+      activeFreq = el.mul(safeFreqSignal, el.sub(1.0, el.mul(isTangoNuevo ? tangoResponse.arrastrePitchDrop : tangoResponse.arrastrePitchDropDefault, slideEnv)));
     }
 
     const exciteFilter = el.lowpass(el.mul(activeFreq, 4.0), 0.9, el.pinknoise());
@@ -60,25 +63,25 @@ export default class ElectricGuitarModule implements InstrumentModule {
       el.adsr(attackTime, isMutedGuitar ? 0.004 : 0.008, 0, 0.003, gateSignal)
     );
 
-    const mult = isUrbanLatin ? (isKizomba ? 3.2 + b * 4.0 : 2.7 + b * 3.5) : isJazz ? (2.5 + b * 3.5) : isMutedGuitar ? (2.0 + b * 2.5) : (3.5 + b * 6.5);
+    const mult = isUrbanLatin ? (isKizomba ? URBAN_ELECTRIC_GUITAR_RESPONSE.urbanKizombaMult + b * URBAN_ELECTRIC_GUITAR_RESPONSE.urbanKizombaBrightness : URBAN_ELECTRIC_GUITAR_RESPONSE.urbanReggaetonMult + b * URBAN_ELECTRIC_GUITAR_RESPONSE.urbanReggaetonBrightness) : isJazz ? (2.5 + b * 3.5) : isMutedGuitar ? (2.0 + b * 2.5) : (3.5 + b * 6.5);
     const loopCutoff = el.min(el.const({ value: 19000 }), el.max(el.const({ value: 1200 }), el.mul(safeFreqSignal, el.const({ value: mult }))));
     
     const stringLoop = createDampedStringLoop(`${pk}:egf`, delayTimeSignal, damping, loopCutoff, impulse);
 
-    const genreDrive = /metal|industrial/.test(genre) ? 1.30 : /rock|punk-hardcore|blues/.test(genre) ? 1.15 : /jazz|country|reggae|ska/.test(genre) ? 0.88 : 1.0;
-    const driveAmount = isDistortion ? 7.5 : isOverdrive ? 4.0 : isHarmonics ? 1.6 : isTangoNuevo ? 1.05 + params.drive * 1.25 : (1.2 + params.drive * 2.0) * genreDrive;
+    const genreDrive = ELECTRIC_GUITAR_GENRE_DRIVE_RULES.find(rule => rule.pattern.test(genre))?.value ?? 1.0;
+    const driveAmount = isDistortion ? 7.5 : isOverdrive ? 4.0 : isHarmonics ? 1.6 : isTangoNuevo ? tangoResponse.driveBase + params.drive * tangoResponse.driveParamMultiplier : (1.2 + params.drive * 2.0) * genreDrive;
     const driven = el.tanh(el.mul(el.const({ value: driveAmount }), stringLoop));
 
-    const cabHP = el.highpass(isTangoNuevo ? 82 : (isUrbanLatin ? 90 : 100), 0.8, driven);
-    const conePresence = el.svf({ mode: 'bandpass' }, isTangoNuevo ? 1850 : 2200, 1.4, cabHP);
+    const cabHP = el.highpass(isTangoNuevo ? tangoResponse.highPass : (isUrbanLatin ? tangoResponse.highPassUrban : tangoResponse.highPassDefault), 0.8, driven);
+    const conePresence = el.svf({ mode: 'bandpass' }, isTangoNuevo ? tangoResponse.presence : tangoResponse.presenceDefault, 1.4, cabHP);
     const cabWithCone = el.add(cabHP, el.mul(0.35, conePresence));
-    const cabCutoff = Math.min(19000, isTangoNuevo ? 5200 + b * 900 : (isKizomba ? 5600 + b * 1100 : (isReggaeton ? 5000 + b * 900 : (isJazz ? 4200 : 4800 + b * 700))));
+    const cabCutoff = Math.min(19000, isTangoNuevo ? tangoResponse.cutoffBase + b * tangoResponse.cutoffBrightness : (isKizomba ? tangoResponse.kizombaCutoffBase + b * tangoResponse.kizombaCutoffBrightness : (isReggaeton ? tangoResponse.reggaetonCutoffBase + b * tangoResponse.reggaetonCutoffBrightness : (isJazz ? tangoResponse.jazzCutoff : tangoResponse.defaultCutoffBase + b * tangoResponse.defaultCutoffBrightness))));
     const cabOut = el.lowpass(cabCutoff, 1.2, cabWithCone);
 
     const harmonic = isHarmonics ? el.mul(0.65, el.cycle(el.mul(safeFreqSignal, 2.0))) : 0;
     const mutedBody = isMutedGuitar ? el.mul(0.5, el.highpass(500, 1.0, cabOut)) : cabOut;
     const urbanPluck = isUrbanLatin
-      ? el.mul(isKizomba ? 0.09 : 0.13, el.mul(el.highpass(isReggaeton ? 2500 : 1900, 1.3, el.noise()), el.adsr(0.00015, 0.006, 0, 0.0025, gateSignal)))
+      ? el.mul(isKizomba ? tangoResponse.kizombaNoiseGain : tangoResponse.noiseGainDefault, el.mul(el.highpass(isReggaeton ? tangoResponse.reggaetonNoiseCutoff : tangoResponse.noiseCutoffDefault, 1.3, el.noise()), el.adsr(0.00015, 0.006, 0, 0.0025, gateSignal)))
       : el.const({ value: 0 });
     const tangoMarcatoClick = isTangoNuevo && isMarcato
       ? el.mul(0.10, el.mul(el.svf({ mode: 'bandpass' }, 1450, 2.0, el.noise()), el.adsr(0.0002, 0.009, 0, 0.003, gateSignal)))

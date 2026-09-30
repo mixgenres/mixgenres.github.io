@@ -5,35 +5,7 @@
  * instrument excitation type and performance action/articulation.
  */
 
-const PERCUSSIVE_ACTIONS = new Set([
-  'bellows-slap',
-  'golpe-caja',
-  'golpe',
-  'knee-drop',
-  'pizzicato',
-  'spiccato',
-  'martelé',
-  'chicharra',
-  'tambor',
-  'staccato',
-  'accent',
-  'pluck',
-  'hit',
-  'tap',
-  'slap',
-  'strike',
-  'pop',
-  'choke',
-  'rim',
-  'heel',
-  'toe',
-  'pick',
-  'picado',
-  'alzapua',
-  'alzapúa',
-  'rasgueado',
-  'abanico'
-]);
+import { PERCUSSIVE_ACTIONS } from '../../data/performance/excitationCompatibility';
 
 export function isCollisionAllowedForAction(
   excitationType?: string,

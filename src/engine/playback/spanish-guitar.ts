@@ -1,3 +1,5 @@
+import { TANGO_INSTRUMENT_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
+import { TANGO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
 import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../sheet/random.ts';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
@@ -45,7 +47,8 @@ export default class SpanishGuitarModule implements InstrumentModule {
     const isTremolo = action === 'tremolo' || /tremolo/i.test(action ?? '');
     const isHarmonic = action === 'harmonic' || /harmonic/i.test(action ?? '');
     const isLegato = action === 'legato' || action === 'slur' || action === 'hammer-on' || action === 'pull-off';
-    const isTango = /tango|milonga|vals/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const tangoResponse = TANGO_INSTRUMENT_RESPONSE.spanishGuitar;
     const isMarcato = action === 'marcato' || /marcato|marked/i.test(action ?? '');
     const isArrastre = action === 'arrastre' || /arrastre|drag/i.test(action ?? '');
 
@@ -125,7 +128,7 @@ export default class SpanishGuitarModule implements InstrumentModule {
     );
 
     // Shorter, crisper decay typical of flamenco cypress guitars
-    const targetDecaySeconds = isMuted ? 0.09 : (isHarmonic ? 1.9 : (isTango ? 0.24 + decayTime * (0.48 + b * 0.9) : (0.32 + decayTime * (0.55 + b * 1.3))));
+    const targetDecaySeconds = isMuted ? 0.09 : (isHarmonic ? 1.9 : (isTango ? tangoResponse.decayBase + decayTime * (tangoResponse.decayTimeBase + b * tangoResponse.decayBrightness) : (tangoResponse.decayBaseDefault + decayTime * (tangoResponse.decayTimeBaseDefault + b * tangoResponse.decayBrightnessDefault))));
     const d1 = fbGainForDecay(vibratingFreq, targetDecaySeconds);
 
     // Nylon string inharmonicity
@@ -157,7 +160,7 @@ export default class SpanishGuitarModule implements InstrumentModule {
     const fretBuzz = el.mul(0.06, el.mul(el.highpass(2800, 1.2, el.noise()), fretEnv));
 
     const finalAcoustic = el.add(bodyOut, fretBuzz);
-    const filterCutoff = Math.min(19000, isMuted ? 1300 : (isTango ? 5200 + b * 5200 : (1000 + b * 6800)));
+    const filterCutoff = Math.min(19000, isMuted ? 1300 : (isTango ? tangoResponse.cutoffBase + b * tangoResponse.cutoffBrightness : (1000 + b * 6800)));
     return el.lowpass(filterCutoff, 1.05, finalAcoustic);
   }
 }

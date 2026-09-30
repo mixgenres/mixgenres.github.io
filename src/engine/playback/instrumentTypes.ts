@@ -1,6 +1,6 @@
 import type { VoiceState, TrackParams } from './elementaryEngine.ts';
 import type { InstrumentDSPProfile } from '../../data/sound/schema/dsp-profile';
-import type { GenreDialect } from '../band/instrumentGenreDialect.ts';
+import type { GenreDialect } from '../../data/performance/schema/genre-dialect';
 import { el } from '@elemaudio/core';
 
 export type AudioSignal = ReturnType<typeof el.const>;

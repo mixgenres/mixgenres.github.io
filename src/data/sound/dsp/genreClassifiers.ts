@@ -1,0 +1,24 @@
+/** Ordered genre and dialect classifiers shared by playback DSP modules. */
+export const TANGO_PATTERN = /tango|milonga|vals/i;
+export const TANGO_ELECTRONICO_PATTERN = /tango-electronico|electrotango/i;
+export const TANGO_NUEVO_PATTERN = /nuevo|tango/i;
+export const KIZOMBA_PATTERN = /kizomba|tarraxo|urbankiz|ghetto-zouk/i;
+export const REGGAETON_PATTERN = /reggaeton|reggaetón|dembow|perreo|neoperreo/i;
+export const INDUSTRIAL_DNB_PATTERN = /industrial|drum-and-bass/;
+export const DNB_UKBASS_PATTERN = /drum-and-bass|uk-bass/;
+export const HOUSE_DISCO_PATTERN = /house|disco/;
+export const ELECTRONIC_MIX_PATTERN = /electronic|electrotango|tango-electronico|house|techno|edm/i;
+export const TANGO_MILONGA_VALS_PATTERN = /tango|milonga|vals/i;
+export const ELECTRONIC_GENRE_PATTERN = /house|techno|dnb|bass|dubstep|garage|edm|electro|afrobeats|club/i;
+export const RHODES_TRANSIENT_GENRE_PATTERN = /funk|disco|house/;
+export const RHODES_SUSTAIN_GENRE_PATTERN = /jazz|soul|gospel/;
+export const PIANO_JAZZ_FAMILY_PATTERN = /jazz|blues|swing|soul|gospel/;
+export const PIANO_DANCE_PATTERN = /house|disco|funk|electronic|hip-hop|rnb/;
+export const ELECTRIC_GUITAR_HIGH_DRIVE_PATTERN = /metal|industrial/;
+export const ELECTRIC_GUITAR_MEDIUM_DRIVE_PATTERN = /rock|punk-hardcore|blues/;
+export const ELECTRIC_GUITAR_LOW_DRIVE_PATTERN = /jazz|country|reggae|ska/;
+export const SALSA_GENRE_PATTERN = /salsa/i;
+export const ELECTRONIC_SIDECHAIN_GENRE_PATTERN = /electronic|electrotango|tango-electronico|house|techno|edm/i;
+export const SYNTH_ELECTRONIC_GENRE_PATTERN = /house|electronic|drum-and-bass|uk-bass|hip-hop|industrial|disco/;
+export const SYNTH_LOW_CUTOFF_GENRE_PATTERN = /industrial|drum-and-bass|uk-bass/;
+export const RHODES_SOUL_GENRE_PATTERN = /soul|rnb|gospel|jazz|funk|disco|house/;

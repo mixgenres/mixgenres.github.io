@@ -165,6 +165,8 @@ export interface MusicalPattern {
   compatibleInstruments?: InstrumentKind[];
   sourceLevel?: string;
   canCrossRole?: boolean;
+  /** Engine must keep this pattern's part when thinning an arrangement. */
+  essential?: boolean;
 
   meter: string; // e.g. '4/4', '3/4', '6/8', '12/8'
   cycleLength: number; // in measures (usually 1 or 2)
@@ -276,7 +278,7 @@ export interface DrumRuleEvent {
 }
 
 export interface DrumRule {
-  evaluateStep: (step: DrumRuleStep, stickState?: DrumRuleStickState) => DrumRuleEvent[];
+  evaluateStep?: (step: DrumRuleStep, stickState?: DrumRuleStickState) => DrumRuleEvent[];
 }
 
 export interface SongStyleDefinition {
@@ -322,6 +324,7 @@ export interface PatternPerformanceDetails {
   stepsPerBar: number;
   onsets: number[];
   accents: number[];
+  velocities: number[];
   durations: number[];
   hitTypes: string[];
   microtiming: number[];

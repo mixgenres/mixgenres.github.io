@@ -1,3 +1,4 @@
+import { BELLOWS_LEGATO_INSTRUMENT_PATTERN, DEFAULT_ACTION_BY_FAMILY } from '../../data/performance/defaultInstrumentActions';
 import { el } from '@elemaudio/core';
 import type { VoiceState, TrackParams } from './elementaryEngine.ts';
 import { midiToFreq } from './elementaryEngine.ts';
@@ -74,13 +75,8 @@ export function buildVoiceContext(
   const family = instrumentDef?.family;
   const defaultAction =
     params.bodyTap > 0.5 ? 'golpe'
-      : family === 'bowed' ? 'arco'
-      : family === 'bellows-and-keys' && /accordion|bandoneon|concertina|harmonium|organ/i.test(params.instrumentId ?? '') ? 'legato'
-      : family === 'winds' || family === 'brass' || family === 'free-reed' ? 'legato'
-      : family === 'voice' ? 'legato'
-      : family === 'plucked' || family === 'plucked-string' ? 'pluck'
-      : family === 'hand-drums' || family === 'kit' || family === 'metal-and-wood' || family === 'body-percussion' ? 'tone'
-      : 'tone';
+      : family === 'bellows-and-keys' && BELLOWS_LEGATO_INSTRUMENT_PATTERN.test(params.instrumentId ?? '') ? 'legato'
+      : DEFAULT_ACTION_BY_FAMILY[family ?? ''] ?? 'tone';
   const action = voice.action ?? defaultAction;
   const articulation = voice.articulation ?? params.articulation;
   const isMuted = action === 'mute' || params.mute > 0.4;

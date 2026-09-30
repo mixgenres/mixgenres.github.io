@@ -1,6 +1,12 @@
-import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
+import { BASS_INSTRUMENT_PATTERN, DRUM_BUS_INSTRUMENT_PATTERN, ELECTRIC_INSTRUMENT_PATTERN, ELECTRONIC_GAIN_INSTRUMENT_PATTERN, FAMILY_NOISE_SCALE_RULES, SUB_BUS_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
+import { ELECTRONIC_GENRE_PATTERN } from '../../data/sound/dsp/genreClassifiers';
+import { INSTRUMENTS_BY_ID, EXACT_PLUCKED_PRESETS, GAIN_BY_INSTRUMENT } from '../../engine/lookup/instruments';
 import { el } from '@elemaudio/core';
-import { getLuthierModelForInstrument, type LuthierPhysicalParameters } from './luthier.ts';
+import { getLuthierModelForInstrument } from './luthier.ts';
+import type { LuthierPhysicalParameters } from '../../data/instruments/schema/luthier';
+import type { AcousticFormantProfile } from '../../data/instruments/schema/formant-profile';
+import type { BowedResonanceProfile } from '../../data/instruments/schema/bowed-resonance';
+import { GAIN_BY_MODEL } from '../../data/sound/makeupGainByModel';
 import type { MixCharacter } from '../../engine/style/contracts';
 import { calculateSidechainDepth, calculateDrumKnock } from '../studio/mixer.ts';
 import { buildVoiceContext, getInstrumentModule } from './instrumentRegistry.ts';
@@ -9,8 +15,7 @@ import { applyInstrumentEffectsChain } from './instrumentEffects.ts';
 import { StereoFieldManager } from '../studio/panning.ts';
 import { applyGenreInstrumentTreatment } from './genreInstrumentTreatment.ts';
 import { resolveInstrumentKitComponent } from '../../engine/lookup/instrument-components';
-import type { PerformanceMode } from '../band/genreDialect.ts';
-export type { PerformanceMode } from '../band/genreDialect.ts';
+import type { PerformanceMode } from '../../data/styles/contracts';
 
 type Node = ReturnType<typeof el.const>;
 /**
@@ -172,44 +177,6 @@ excitationType?: 'plectrum' | 'nail' | 'fingerpad' | 'hard-pick' | 'hammer' | 's
 sympatheticStrings?: boolean;
 roleGain?: number;
 }
-export interface PluckedPreset {
-courses: number;
-bodyConstruction: 'wood-box' | 'gourd' | 'skin-faced' | 'board' | 'solid-electric' | 'metal-shell' | 'brass-tube';
-excitationType: 'plectrum' | 'nail' | 'fingerpad' | 'hard-pick' | 'hammer' | 'stick' | 'mallet' | 'breath' | 'bow';
-sympatheticStrings?: boolean;
-}
-export const EXACT_PLUCKED_PRESETS: Record<string, PluckedPreset> = {};
-for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
-  if (def.family === 'plucked' || def.courses || def.bodyConstruction || def.excitationType) {
-    EXACT_PLUCKED_PRESETS[id] = {
-      courses: def.courses ?? def.luthierPhysics?.courses ?? 1,
-      bodyConstruction: def.bodyConstruction ?? def.luthierPhysics?.bodyConstruction ?? 'wood-box',
-      excitationType: def.excitationType ?? def.luthierPhysics?.excitationType ?? 'fingerpad',
-      sympatheticStrings: def.sympatheticStrings ?? def.luthierPhysics?.sympatheticStrings ?? false,
-    };
-  }
-}
-if (EXACT_PLUCKED_PRESETS['12-string-guitar']) {
-  EXACT_PLUCKED_PRESETS['12-string'] = EXACT_PLUCKED_PRESETS['12-string-guitar'];
-};
-export interface FormantBand {
-freq: number;
-q: number;
-gain: number;
-}
-export interface AcousticFormantProfile {
-f1: FormantBand;
-f2: FormantBand;
-f3?: FormantBand;
-tongueType: 'chiff' | 'reed-tongue' | 'lip-slap' | 'soft-puff';
-tongueFreq: number;
-}
-export const WIND_BRASS_REED_FORMANTS: Record<string, AcousticFormantProfile> = {};
-for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
-  if (def.formantProfile) {
-    WIND_BRASS_REED_FORMANTS[id] = def.formantProfile;
-  }
-};
 export function getFormantProfileForInstrument(instrumentId: string, model: number): AcousticFormantProfile {
   const idLower = instrumentId.toLowerCase().replace(/_/g, '-');
   const def = INSTRUMENTS_BY_ID[instrumentId] || INSTRUMENTS_BY_ID[idLower];
@@ -217,20 +184,6 @@ export function getFormantProfileForInstrument(instrumentId: string, model: numb
   throw new Error(
     `UNRESOLVED_MUSICAL_IDENTITY_ERROR: instrument "${instrumentId}" has no authored acoustic formant profile (model ${model}).`
   );
-}
-export interface BowedResonanceProfile {
-bodyFreq: number;
-bodyQ: number;
-bodyGain: number;
-bridgeHillFreq: number;
-bridgeHillQ: number;
-bridgeHillGain: number;
-}
-export const BOWED_RESONANCES: Record<string, BowedResonanceProfile> = {};
-for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
-  if (def.bowedResonance) {
-    BOWED_RESONANCES[id] = def.bowedResonance;
-  }
 }
 export function getBowedResonanceProfile(instrumentId: string, _bodyParam: number): BowedResonanceProfile {
   const def = INSTRUMENTS_BY_ID[instrumentId];
@@ -243,7 +196,7 @@ export function modelForInstrument(instrumentId: string): number {
   throw new Error(`UNRESOLVED_MUSICAL_IDENTITY_ERROR: instrument "${instrumentId}" has no elementary model.`);
 }
 export function normalizedParams(instrumentId: string, luthier: LuthierPhysicalParameters, modelNum: number) {
-const electric = /electric|distortion|synth|acid|clavinet|sub-bass|rhodes|fm-ep/.test(instrumentId.toLowerCase());
+const electric = ELECTRIC_INSTRUMENT_PATTERN.test(instrumentId.toLowerCase());
 const b = Math.max(0, Math.min(1, 0.42 + luthier.harmonicRichness * 0.48 + (electric ? 0.1 : 0)));
 const d = Math.max(0.1, Math.min(8, luthier.decayTimeSec ?? luthier.decayTimeFactor));
 const dr = Math.max(0, Math.min(1, electric ? 0.15 + luthier.harmonicRichness * 0.55 : luthier.harmonicRichness * 0.08));
@@ -256,39 +209,6 @@ drive: dr,
 body: bo,
 model: modelNum,
 };
-}
-export const GAIN_BY_MODEL: Record<number, number> = {
-  0: 30.000,
-  2: 13.580,
-  3: 0.685,
-  4: 1.540,
-  6: 5.477,
-  7: 0.466,
-  8: 1.000,
-  9: 0.548,
-  10: 0.457,
-  11: 6.626,
-  12: 0.455,
-  13: 0.417,
-  14: 0.322,
-  15: 0.399,
-  16: 0.411,
-  17: 9.031,
-  18: 0.285,
-  19: 30.000,
-  20: 0.949,
-  21: 13.580,
-  22: 30.000,
-  23: 30.000,
-  24: 2.994,
-  25: 6.443,
-  26: 0.378,
-};
-export const GAIN_BY_INSTRUMENT: Partial<Record<string, number>> = {};
-for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
-  if (typeof def.makeupGain === 'number') {
-    GAIN_BY_INSTRUMENT[id] = def.makeupGain;
-  }
 }
 export function makeupGainFor(modelNum: number, instrumentId?: string): number {
   if (instrumentId) {
@@ -306,7 +226,7 @@ export function makeupGainFor(modelNum: number, instrumentId?: string): number {
 export function defaultTrackParams(instrumentId = '', luthier?: LuthierPhysicalParameters, modelNum = 0): TrackParams {
 const l = luthier ?? getLuthierModelForInstrument(instrumentId);
 const norm = normalizedParams(instrumentId, l, modelNum);
-const isElectronic = /synth|808|909|acid|sub-bass|kizomba|tarraxo|trap|house/.test(instrumentId.toLowerCase());
+const isElectronic = ELECTRONIC_GAIN_INSTRUMENT_PATTERN.test(instrumentId.toLowerCase());
 const effectiveModelForGain = isElectronic ? 9 : modelNum;
 // Volume un-clamped from upper boundaries to support massive hybrid textures
 const volume = Math.max(0.01, 0.8 * makeupGainFor(effectiveModelForGain, instrumentId));
@@ -380,13 +300,7 @@ export function renderVoice(
     // Mechanical/air noise is detail, not the instrument's primary tone.
     // notes were active. Keep the authored artifacts, but put them behind a
     // family-dependent acoustic-detail ceiling.
-    const familyNoiseScale = /hand-drums|kit|metal-and-wood/.test(String(family)) ? 0.62
-      : /bowed|strings/.test(String(family)) ? 0.30
-      : /plucked/.test(String(family)) ? 0.34
-      : /winds|brass/.test(String(family)) ? 0.28
-      : /bellows/.test(String(family)) ? 0.26
-      : /key/.test(String(family)) ? 0.24
-      : 0.30;
+    const familyNoiseScale = FAMILY_NOISE_SCALE_RULES.find(rule => rule.pattern.test(String(family)))?.scale ?? 0.30;
     const dialectBrightness = dialect.brightness ?? ctx.genreDialect.brightness;
     const dialectDamping = dialect.damping ?? 0;
     const directionText = ctx.action.toLowerCase();
@@ -632,18 +546,16 @@ export function determineBusCategory(
   // Acoustic/electric bass instruments need their full harmonic body in the mix.
   // Reserve the sub bus for genuinely sub-oriented instruments; the master chain
   // may add a controlled low-end enhancement without throwing away upper harmonics.
-  if (/sub-bass|808|909|log-drum|subwoofer/i.test(inst)) {
+  if (SUB_BUS_INSTRUMENT_PATTERN.test(inst)) {
     return 'sub';
   }
-  if (r === 'bass' || /bass|tuba|guitarron|bassoon/i.test(inst)) {
+  if (r === 'bass' || BASS_INSTRUMENT_PATTERN.test(inst)) {
     return 'inst';
   }
   if (
     r === 'drums' ||
     r === 'percussion' ||
-    /drum|kick|snare|hats|cajon|conga|bongo|timbal|pandeiro|shaker|guiro|cabasa|maracas|surdo|bodhran|taiko|paigu|tam-tam|percussion|perc/i.test(
-      inst
-    )
+    DRUM_BUS_INSTRUMENT_PATTERN.test(inst)
   ) {
     return 'drums';
   }
@@ -716,7 +628,7 @@ export function renderMaster(
   const kickEnv = el.env(0.005, releaseSec, kickMono);
 
   const genreId = params.genreId ?? '';
-  const isElectronic = /house|techno|dnb|bass|dubstep|garage|edm|electro|afrobeats|club/i.test(genreId);
+  const isElectronic = ELECTRONIC_GENRE_PATTERN.test(genreId);
 
   // Clean, phase-coherent sub ducking: avoids destructive biquad phase splitting
   const effectiveDuckDepth = isElectronic ? sidechainDepth * 0.95 : 0.22;

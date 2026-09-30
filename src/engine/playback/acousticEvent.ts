@@ -5,7 +5,7 @@
  * physical excitation events anchored to circular cultural phases.
  */
 
-import type { LuthierPhysicalParameters } from './luthier.ts';
+import type { LuthierPhysicalParameters } from '../../data/instruments/schema/luthier';
 
 export type ExcitationActionType =
   | 'strike'

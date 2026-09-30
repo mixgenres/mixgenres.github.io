@@ -1,7 +1,9 @@
+import { ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
+import { POLYPHONY_FALLBACK_RULES } from '../../data/sound/polyphony';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import WebRenderer from '@elemaudio/web-renderer';
 import { el } from '@elemaudio/core';
-import type { LuthierPhysicalParameters } from './luthier.ts';
+import type { LuthierPhysicalParameters } from '../../data/instruments/schema/luthier';
 import type { MasterChain } from '../studio/mixer.ts';
 import { createMasterChain, getRoleGainLinear } from '../studio/mixer.ts';
 import { CulturalAcousticEvent } from './acousticEvent.ts';
@@ -20,6 +22,7 @@ import { resolveDialect, performanceModeForContext } from '../band/genreDialect.
 import { resolveRenderGesture } from './renderGesture.ts';
 import { contractForGenre } from '../../engine/style/contracts';
 import type { AudioSignal } from './instrumentTypes.ts';
+import { spotlightGain } from '../band/spotlight.ts';
 
 interface RendererNodeEntry {
   props: Record<string, unknown>;
@@ -44,10 +47,9 @@ export function getPolyphonyForTrack(instrumentId: string, role?: string): numbe
   if (typeof def?.polyphony === 'number') return def.polyphony;
   const r = (role || '').toLowerCase();
   const inst = idLower;
-  if (r === 'bass' || /bass|tuba|sousaphone/i.test(inst)) return 4;
-  if (r === 'lead' || r === 'voice' || r === 'melody' || /sax|flute|trumpet|violin|whistle|oboe|clarinet/i.test(inst)) return 4;
-  if (r === 'drums' || /drums|kick|snare|hats|cajon|timbales|conga|bongo/i.test(inst)) return 12;
-  if (r === 'comp' || r === 'pad' || /piano|rhodes|clav|guitar|harp|strings|organ|synth/i.test(inst)) return 8;
+  for (const rule of POLYPHONY_FALLBACK_RULES) {
+    if (rule.roles?.includes(r) || rule.instrumentPattern?.test(inst)) return rule.voices;
+  }
   return 8;
 }
 
@@ -79,6 +81,7 @@ export class BandWorkletNode {
   // Tier 4: Live mix state and per-track signal caching
   private trackMutedMap = new Map<string, boolean>();
   private trackSoloMap = new Map<string, boolean>();
+  private trackSpotlightMap = new Map<string, string>();
   private trackVolumes = new Map<string, number>();
   private trackPans = new Map<string, number>();
   private trackSignalsCache = new Map<string, { fingerprint: string; signal: { left: AudioSignal; right: AudioSignal } }>();
@@ -222,12 +225,7 @@ export class BandWorkletNode {
       if (params) {
         params.volume = volume;
       }
-      const isMuted = !!this.trackMutedMap.get(trackId);
-      const hasAnySolo = Array.from(this.trackSoloMap.values()).some(Boolean);
-      const isSoloed = !!this.trackSoloMap.get(trackId);
-      const effectiveVol = (isMuted || (hasAnySolo && !isSoloed)) ? 0 : volume;
-      this.queueParamUpdate(`track_${trackId}_vol`, effectiveVol);
-      this.flushParamUpdates();
+      this.updateTrackMuteSoloLevels();
     }, atTime);
   }
 
@@ -247,11 +245,13 @@ export class BandWorkletNode {
 
   private updateTrackMuteSoloLevels() {
     const hasAnySolo = Array.from(this.trackSoloMap.values()).some(Boolean);
+    const hasSpotlight = Array.from(this.trackSpotlightMap.values()).some(mode => mode === 'on');
     for (const [trackId, params] of this.trackParamsMap.entries()) {
       const isMuted = !!this.trackMutedMap.get(trackId);
       const isSoloed = !!this.trackSoloMap.get(trackId);
       const isSilenced = isMuted || (hasAnySolo && !isSoloed);
-      const effectiveVol = isSilenced ? 0 : (params.volume ?? 1);
+      const gain = spotlightGain(this.trackSpotlightMap.get(trackId), hasSpotlight);
+      const effectiveVol = isSilenced ? 0 : (params.volume ?? 1) * gain;
       this.queueParamUpdate(`track_${trackId}_vol`, effectiveVol);
     }
     this.flushParamUpdates();
@@ -271,8 +271,9 @@ export class BandWorkletNode {
     }, atTime);
   }
 
-  setTrackSpotlight(_trackId: string, _mode: string, atTime?: number) {
+  setTrackSpotlight(trackId: string, mode: string, atTime?: number) {
     this.schedule(() => {
+      this.trackSpotlightMap.set(trackId, mode);
       this.updateTrackMuteSoloLevels();
     }, atTime);
   }
@@ -352,6 +353,7 @@ export class BandWorkletNode {
     if (graphDirty) {
       this.syncGraph();
     }
+    this.updateTrackMuteSoloLevels();
   }
 
   /**
@@ -488,7 +490,7 @@ export class BandWorkletNode {
 
     const params = this.trackParamsMap.get(trackId)!;
     const noteMidi = event.midi ?? 60;
-    const isElectronic = /synth|808|909|acid|sub-bass|kizomba|tarraxo|trap|house/.test((params.instrumentId || '').toLowerCase());
+    const isElectronic = ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN.test((params.instrumentId || '').toLowerCase());
     const effectiveModelForGain = isElectronic ? 9 : params.model;
     const baseGain = makeupGainFor(effectiveModelForGain, params.instrumentId);
 
@@ -622,7 +624,7 @@ export class BandWorkletNode {
 
     const norm = value / 127;
     if (cc === 7 || cc === 11) {
-      const isElectronic = /synth|808|909|acid|sub-bass|kizomba|tarraxo|trap|house/.test((params.instrumentId || '').toLowerCase());
+      const isElectronic = ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN.test((params.instrumentId || '').toLowerCase());
       const effectiveModelForGain = isElectronic ? 9 : params.model;
       const baseGain = makeupGainFor(effectiveModelForGain, params.instrumentId);
       params.volume = Math.max(0.01, Math.min(35, norm * baseGain));

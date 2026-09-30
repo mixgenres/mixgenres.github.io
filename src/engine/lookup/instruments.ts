@@ -1,7 +1,10 @@
 export { FAMILY_LABELS, FAMILY_ORDER, WORLD_INSTRUMENT_HINTS } from '../../data/instruments/families';
-import { enrichInstrumentPhysics } from '../overrides/enrich';
-import type { InstrumentDef, InstrumentTechniqueProfile } from '../../data/instruments/schema/instrument-def';
+import { enrichInstrumentPhysics } from '../../data/instruments/enrichment/physics';
+import type { InstrumentDef, InstrumentTechniqueProfile, AcousticFormantProfile, BowedResonanceProfile } from '../../data/instruments/schema/instrument-def';
+import type { LuthierPhysicalParameters } from '../../data/instruments/schema/luthier';
+import type { PluckedPreset } from '../../data/instruments/schema/plucked-preset';
 import { INSTRUMENT_CATALOG } from '../../data/instruments';
+import { INSTRUMENT_PATTERN_KIND_RULES } from '../../data/instruments/patternKinds';
 export { INSTRUMENT_CATALOG } from '../../data/instruments';
 export type { InstrumentDef, InstrumentFamily, DrumVoice, InstrumentTechniqueProfile } from '../../data/instruments/schema/instrument-def';
 /** Engine-side physics enrichment and runtime instrument queries. */
@@ -12,6 +15,49 @@ export type { InstrumentDef, InstrumentFamily, DrumVoice, InstrumentTechniquePro
 export const ENRICHED_INSTRUMENT_CATALOG = INSTRUMENT_CATALOG.map(enrichInstrumentPhysics);
 
 export const INSTRUMENTS_BY_ID: Record<string, InstrumentDef> = Object.fromEntries(ENRICHED_INSTRUMENT_CATALOG.map(i => [i.id, i]));
+
+export const EXACT_PLUCKED_PRESETS: Record<string, PluckedPreset> = {};
+for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
+  if (def.family === 'plucked' || def.courses || def.bodyConstruction || def.excitationType) {
+    EXACT_PLUCKED_PRESETS[id] = {
+      courses: def.courses ?? def.luthierPhysics?.courses ?? 1,
+      bodyConstruction: def.bodyConstruction ?? def.luthierPhysics?.bodyConstruction ?? 'wood-box',
+      excitationType: def.excitationType ?? def.luthierPhysics?.excitationType ?? 'fingerpad',
+      sympatheticStrings: def.sympatheticStrings ?? def.luthierPhysics?.sympatheticStrings ?? false,
+    };
+  }
+}
+if (EXACT_PLUCKED_PRESETS['12-string-guitar']) {
+  EXACT_PLUCKED_PRESETS['12-string'] = EXACT_PLUCKED_PRESETS['12-string-guitar'];
+}
+
+export const WIND_BRASS_REED_FORMANTS: Record<string, AcousticFormantProfile> = {};
+for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
+  if (def.formantProfile) {
+    WIND_BRASS_REED_FORMANTS[id] = def.formantProfile;
+  }
+}
+
+export const BOWED_RESONANCES: Record<string, BowedResonanceProfile> = {};
+for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
+  if (def.bowedResonance) {
+    BOWED_RESONANCES[id] = def.bowedResonance;
+  }
+}
+
+export const GAIN_BY_INSTRUMENT: Partial<Record<string, number>> = {};
+for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
+  if (typeof def.makeupGain === 'number') {
+    GAIN_BY_INSTRUMENT[id] = def.makeupGain;
+  }
+}
+
+export const LUTHIER_INSTRUMENT_MAP: Record<string, LuthierPhysicalParameters> = {};
+for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
+  if (def.luthierPhysics) {
+    LUTHIER_INSTRUMENT_MAP[id] = def.luthierPhysics;
+  }
+}
 
 export function instrument(id: string): InstrumentDef {
   const def = INSTRUMENTS_BY_ID[id];
@@ -31,53 +77,21 @@ export function instrumentPatternKinds(id: string): string[] {
   const d = INSTRUMENTS_BY_ID[id];
   if (!d) return [];
   const out = new Set<string>([id]);
-  if (d.voicing === 'bass') out.add('bass');
-  if (d.voicing === 'unpitched') out.add('percussion');
-  if (d.voicing === 'single') { out.add('melody'); out.add('lead'); }
-  if (d.voicing === 'chord') out.add('harmony');
-  if (d.family === 'kit') { out.add('drums'); out.add('percussion'); out.add('pulse'); }
-  if (d.family === 'plucked') { out.add('guitar'); out.add('plucked'); }
-  if (d.family === 'bowed') { out.add('strings'); if (id === 'violin' || id === 'fiddle') out.add('violin'); if (id === 'cello') out.add('cello'); }
-  if (d.family === 'winds' && ['soprano-sax', 'alto-sax', 'tenor-sax', 'bari-sax'].includes(id)) out.add('sax');
-  if (id === 'flute' || id === 'dizi' || id === 'xiao' || id === 'tin-whistle' || id === 'low-whistle' || id === 'quena') { out.add('flute'); out.add('lead'); }
-  if (d.family === 'brass') out.add('brass');
-  if (d.family === 'voice') { out.add('voice'); out.add('coro'); }
-  if (id === 'backing-vocals' || id === 'choir') out.add('coro');
-  if (d.family === 'bellows-and-keys') { out.add('keys'); if (id.includes('accordion') || id.includes('concertina')) out.add('accordion'); }
-  if (d.family === 'electronic') { out.add('synth'); out.add('texture'); }
-  if (id === 'piano') { out.add('piano'); out.add('keys'); }
-  if (id === 'rhodes') { out.add('piano'); out.add('keys'); }
-  if (id === 'organ') { out.add('organ'); out.add('keys'); }
-  if (id === 'electric-guitar' || id.includes('guitar')) out.add('electric-guitar');
-  if (id === 'congas') out.add('congas');
-  if (id === 'bongos') out.add('bongos');
-  if (id === 'timbales') out.add('timbales');
-  if (id === 'guiro' || id === 'guacharaca') { out.add('guiro'); out.add('guacharaca'); }
-  if (id === 'pandeiro' || id === 'tamborim') { out.add('hand-percussion'); out.add('pandeiro'); }
-  if (id === 'bodhran') { out.add('bodhran'); out.add('percussion'); }
-  if (id === 'cajon') { out.add('cajon'); out.add('percussion'); }
-  if (id === 'palmas' || id === 'zapateado') { out.add('palmas'); out.add('percussion'); }
-  if (id === 'tambora') { out.add('tambora'); out.add('percussion'); }
-  if (id === 'taiko' || id === 'kane' || id === 'paigu') { out.add('percussion'); }
-  if (id === 'tabla') { out.add('tabla'); out.add('percussion'); }
-  if (id === 'shaker') { out.add('shaker'); out.add('percussion'); }
-  if (id === 'log-drum') { out.add('log-drum'); out.add('percussion'); out.add('bass'); }
-  if (id === 'uilleann-pipes' || id === 'bagpipes') { out.add('uilleann-pipes'); out.add('bagpipes'); out.add('lead'); }
-  if (id === 'celtic-harp' || id === 'harp') { out.add('celtic-harp'); out.add('harp'); out.add('harmony'); }
-  if (id === 'tres') { out.add('tres'); out.add('guitar'); }
-  if (id === 'charango') { out.add('charango'); out.add('guitar'); }
-  if (id === 'requinto') { out.add('requinto'); out.add('guitar'); }
-  if (id === 'guitarron') { out.add('guitarron'); out.add('bass'); }
-  if (id === 'erhu') { out.add('erhu'); out.add('strings'); out.add('lead'); }
-  if (id === 'pipa') { out.add('pipa'); out.add('plucked'); out.add('lead'); }
-  if (id === 'guzheng' || id === 'guqin') { out.add('guzheng'); out.add('plucked'); out.add('harmony'); }
-  if (id === 'koto') { out.add('koto'); out.add('plucked'); out.add('harmony'); }
-  if (id === 'shamisen') { out.add('shamisen'); out.add('plucked'); out.add('lead'); }
-  if (id === 'shakuhachi') { out.add('shakuhachi'); out.add('flute'); out.add('lead'); }
-  if (id === 'steel-drums') { out.add('steel-drums'); out.add('percussion'); out.add('melody'); }
-  if (id === 'slide-guitar') { out.add('slide-guitar'); out.add('guitar'); out.add('lead'); }
-  if (id === 'harmonium') { out.add('harmonium'); out.add('keys'); out.add('drone'); }
-  if (id === 'drone') { out.add('drone'); out.add('pad'); out.add('texture'); }
+  for (const rule of INSTRUMENT_PATTERN_KIND_RULES) {
+    const matchesVoicing = rule.voicing !== undefined && d.voicing === rule.voicing;
+    const matchesFamily = rule.family !== undefined && d.family === rule.family;
+    const matchesId = rule.ids?.includes(id) ?? false;
+    const matchesSubstring = rule.includes !== undefined && id.includes(rule.includes);
+    const matchesAnySubstring = rule.includesAny?.some(value => id.includes(value)) ?? false;
+    if ((matchesVoicing || matchesFamily || matchesId || matchesSubstring || matchesAnySubstring)
+      && (!rule.family || d.family === rule.family)
+      && (!rule.voicing || d.voicing === rule.voicing)
+      && (!rule.ids || rule.ids.includes(id))
+      && (!rule.includes || id.includes(rule.includes))
+      && (!rule.includesAny || rule.includesAny.some(value => id.includes(value)))) {
+      for (const alias of rule.aliases) out.add(alias);
+    }
+  }
   return [...out];
 }
 

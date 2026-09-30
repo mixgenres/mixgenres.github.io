@@ -1,3 +1,4 @@
+import { ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { computeTrackStemFingerprint, stemCache } from '../cache/stemCache.ts';
 import OfflineRenderer from '@elemaudio/offline-renderer';
@@ -9,6 +10,7 @@ import { contractForGenre } from '../../engine/style/contracts';
 import { resolveStyle } from '../../engine/style';
 import { FORM_BLUEPRINTS } from '../../data/genreForms';
 import { processOfflineAudioDSP } from '../studio/effects.ts';
+import { spotlightGain } from '../band/spotlight.ts';
 import { resolveRenderGesture } from './renderGesture.ts';
 import {
   defaultTrackParams,
@@ -52,7 +54,7 @@ function applyCCToParams(
     const isElectronic =
       instDef?.family === 'electronic' ||
       instDef?.elementaryModel === 9 ||
-      /synth|808|909|acid|sub-bass|kizomba|tarraxo|trap|house/.test((params.instrumentId || '').toLowerCase());
+      ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN.test((params.instrumentId || '').toLowerCase());
     const baseGain = instDef?.makeupGain ?? makeupGainFor(isElectronic ? 9 : params.model, params.instrumentId);
     params.volume = Math.max(0, Math.min(35, baseGain * roleGain * trackMixVolume * controllerGain.volume * controllerGain.expression));
   } else if (cc === 10) params.pan = norm;
@@ -78,6 +80,7 @@ export async function renderPerformanceToMp3(
   const totalSamples = Math.ceil(duration * sampleRate);
   const selected = options.selectedTrackIds?.length ? new Set(options.selectedTrackIds) : null;
   const hasSolo = options.mixState?.solo && Object.values(options.mixState.solo).some(Boolean);
+  const hasSpotlight = Object.values(options.mixState?.spotlight ?? {}).some(mode => mode === 'on');
 
   const activeTrackIds = [...new Set(perf.notes.map(n => n.trackId))].filter(id => {
     if (selected && !selected.has(id)) return false;
@@ -163,6 +166,7 @@ export async function renderPerformanceToMp3(
       if (options.mixState.volume?.[trackId] !== undefined) {
         trackMixVolume = options.mixState.volume[trackId];
       }
+      trackMixVolume *= spotlightGain(options.mixState.spotlight?.[trackId], hasSpotlight);
       if (options.mixState.pan?.[trackId] !== undefined) {
         params.pan = options.mixState.pan[trackId];
       }
@@ -303,7 +307,7 @@ export async function renderPerformanceToMp3(
             const isElectronic =
               instDef?.family === 'electronic' ||
               instDef?.elementaryModel === 9 ||
-              /synth|808|909|acid|sub-bass|kizomba|tarraxo|trap|house/.test(
+              ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN.test(
                 (params.instrumentId || '').toLowerCase(),
               );
             const effectiveModelForGain = isElectronic ? 9 : params.model;

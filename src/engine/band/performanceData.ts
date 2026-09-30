@@ -2,12 +2,13 @@ import { Sheet } from '../sheet/sheet.ts';
 import type { MusicalPattern, Role } from '../../types';
 import type { Region } from '../../types';
 import { PATTERNS_BY_ID } from '../../data/genres';
-import { VoiceProfile } from '../sheet/instrumentRoles.ts';
+import type { VoiceProfile } from '../../data/instruments/schema/voice-profile';
 import { beatsPerBarOf, culturalCyclePosition, type TransitionEvent } from '../sheet/grid.ts';
 import { getEffectiveBpm } from '../sheet/sheet.ts';
 import { getResolvedSectionStyle } from '../sheet/sheet.ts';
 import { energyOf } from '../sheet/sectionEnergy.ts';
 import { BlendReport } from './styleBlend.ts';
+import { INTENSITY_LEVEL } from '../../data/performance/intensityLevels';
 
 /* --- event model ---------------------------------------------------------- */
 
@@ -104,10 +105,6 @@ export function buildBarTimes(sheet: Sheet): BarTime[] {
 }
 
 /* --- section intensity ---------------------------------------------------- */
-
-const INTENSITY_LEVEL: Record<string, number> = {
-  low: 0.3, medium: 0.55, high: 0.78, peak: 1.0,
-};
 
 export function intensityOf(region: Region | undefined): number {
   return INTENSITY_LEVEL[String(region?.intensity ?? 'medium')] ?? 0.55;

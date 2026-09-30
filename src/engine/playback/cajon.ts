@@ -81,10 +81,13 @@ export default class CajonModule implements InstrumentModule {
 
     // 4. Agudo (Upper Corner Snare Slap)
     // Front tapa corner wood snap + internal snare wire sizzle burst
-    const tapaPitchEnv = el.adsr(0.0002, 0.018, 0, 0.006, gateSignal);
+    // The tapa slap is a noisy wood resonance, not a pitched tone. A sustained
+    // 240 Hz oscillator on every MIDI 38 hit reads as a sequence of beeps in
+    // fast compás patterns, so excite the authored resonance with a short
+    // filtered-noise transient instead.
     const tapaTone = el.mul(
-      el.adsr(0.0003, 0.09, 0, 0.015, gateSignal),
-      el.cycle(el.mul(el.const({ value: (component?.tuningHz ?? 240) * jitter }), el.add(1.0, el.mul(0.8, tapaPitchEnv))))
+      el.svf({ mode: 'bandpass' }, (component?.tuningHz ?? 240) * jitter, 2.2, el.pinknoise()),
+      el.adsr(0.0002, 0.025, 0, 0.008, gateSignal)
     );
 
     // Internal guitar snare wire buzz (3.6kHz highpass resonant noise)
@@ -100,7 +103,7 @@ export default class CajonModule implements InstrumentModule {
     );
 
     const slapSum = el.add(
-      el.mul(0.55, tapaTone),
+      el.mul(0.42, tapaTone),
       el.add(el.mul(0.65, snareWireNoise), el.mul(0.40, cornerCrack))
     );
 

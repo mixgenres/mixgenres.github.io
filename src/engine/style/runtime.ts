@@ -192,10 +192,12 @@ export class StyleRuntime {
     hardcodedDecisions: number;
     coveragePct: number;
     byAspect: Record<Aspect, { style: number; influence: number; hardcoded: number }>;
+    fallbackPaths: string[];
   } {
     let style = 0;
     let influence = 0;
     let hardcoded = 0;
+    const fallbackPaths: string[] = [];
     const byAspect: Record<Aspect, { style: number; influence: number; hardcoded: number }> = {
       form: { style: 0, influence: 0, hardcoded: 0 },
       harmony: { style: 0, influence: 0, hardcoded: 0 },
@@ -208,7 +210,7 @@ export class StyleRuntime {
 
     for (const item of this.trace) {
       const aspect = (item.path.split('.')[0] as Aspect) || 'rhythm';
-      if (item.source === 'style' || item.source === 'extends') {
+      if (item.source === 'style' || item.source === 'extends' || item.source === 'genre') {
         style++;
         if (byAspect[aspect]) byAspect[aspect].style++;
       } else if (item.source === 'influence') {
@@ -216,6 +218,7 @@ export class StyleRuntime {
         if (byAspect[aspect]) byAspect[aspect].influence++;
       } else {
         hardcoded++;
+        fallbackPaths.push(item.path);
         if (byAspect[aspect]) byAspect[aspect].hardcoded++;
       }
     }
@@ -230,6 +233,7 @@ export class StyleRuntime {
       hardcodedDecisions: hardcoded,
       coveragePct,
       byAspect,
+      fallbackPaths: Array.from(new Set(fallbackPaths)),
     };
   }
 }

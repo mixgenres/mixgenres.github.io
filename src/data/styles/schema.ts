@@ -144,6 +144,8 @@ export interface RuleRef {
 
 export interface SongStyle {
   id: string;
+  /** Per-field source metadata for values materialized from genre contracts/defaults. */
+  sourceProvenance?: Record<string, 'style' | 'genre' | 'hardcoded'>;
   name: string;
   aliases?: string[];
   genres: string[];
@@ -163,9 +165,11 @@ export interface SongStyle {
   melody?: Partial<MelodyGrammar>;         // scale/mode, range per section, contour archetypes, phrase lengths, motif-development ops, ornament vocabulary, chord-tone targeting, call/response
   arrangement?: Partial<ArrangementGrammar>; // ensemble template by role, entrance/exit schedule per section, energy mapping, register allocation, doubling, stabs/hits, solos
   sound?: Partial<SoundProfile>;           // instrument palette (weighted), patch picks, articulation, FX chains, reverb/delay character, saturation/compression, stereo image, master profile
-  patterns?: { require?: string[]; preferred?: string[]; allowed?: string[]; avoid?: string[] };
+  patterns?: { require?: string[]; preferred?: string[]; allowed?: string[]; avoid?: string[]; inferred?: string[] };
   rules?: { require?: RuleRef[]; forbid?: RuleRef[] };
   gestures?: Record<string, GestureRule>;
+  /** Optional per-style playing-technique overrides resolved before genre dialects. */
+  instrumentDialects?: Record<string, Record<string, unknown>>;
 }
 
 export interface DecisionTraceItem {
@@ -186,7 +190,7 @@ export interface ResolvedStyle extends SongStyle {
   melody: MelodyGrammar;
   arrangement: ArrangementGrammar;
   sound: SoundProfile;
-  patterns?: { require?: string[]; preferred?: string[]; allowed?: string[]; avoid?: string[] };
+  patterns?: { require?: string[]; preferred?: string[]; allowed?: string[]; avoid?: string[]; inferred?: string[] };
   gestures: Record<string, GestureRule>;
   rules: { require: RuleRef[]; forbid: RuleRef[] };
   resolvedFrom: {

@@ -1,0 +1,15 @@
+export const TUNING_CONSTRAINTS = {
+  fixedPitchInstrumentPattern: /piano|rhodes|vibraphone|harpsichord|vibes|fm-ep|clav/i,
+  werckmeisterMarker: 'werckmeister',
+  bowedOrVoicePattern: /string|violin|viola|cello|fiddle|strings|choir|voice|vocal/i,
+  bowedChordOffsetsCents: { 4: -13.7, 10: -31.0 },
+  classicalJazzGenrePattern: /classical|jazz|swing|chamber|orchestra/i,
+  leadingTonePitchClass: 11,
+  leadingToneOffsetCents: 8.0,
+  bluesRockGenrePattern: /blues|rock|grunge|metal/i,
+  blueNotePitchClass: 3,
+  blueNoteOffsetCents: 35.0,
+  frettedInstrumentPattern: /guitar|bass|ukulele|banjo|tres|cavaquinho/i,
+  slidingArticulationPattern: /slide|bend|gliss|portamento/i,
+  frettedSnapCents: 50,
+};

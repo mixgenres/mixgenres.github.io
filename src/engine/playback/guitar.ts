@@ -1,3 +1,8 @@
+import { GUITAR_GENRE_RESPONSE, TANGO_ACOUSTIC_GUITAR_RESPONSE, URBAN_ACOUSTIC_GUITAR_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
+import { GUITAR_INSTRUMENT_PATTERNS } from '../../data/instruments/idClassifiers';
+import { TARAB_SYMPATHETIC_RATIOS } from '../../data/musicTheory/tarabSympatheticRatios';
+import { GUITAR_EXACT_GENRE_IDS } from '../../data/sound/dsp/genrePlaybackProfiles';
+import { KIZOMBA_PATTERN, REGGAETON_PATTERN, TANGO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
 import { el } from '@elemaudio/core';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { createDampedStringLoop, fbGainForDecay } from './instrumentLib_stringLoop.ts';
@@ -19,21 +24,22 @@ export default class GuitarModule implements InstrumentModule {
     } = ctx;
 
     const instId = (params.instrumentId ?? '').toLowerCase();
-    const isTango = /tango|milonga|vals/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isKizomba = /kizomba|tarraxo|urbankiz|ghetto-zouk/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isReggaeton = /reggaeton|reggaetón|dembow|perreo|neoperreo/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isTangoAcoustic = isTango && /acoustic-guitar|guitar/.test(instId);
-    const isUrbanAcoustic = (isKizomba || isReggaeton) && /guitar|acoustic-guitar|spanish-guitar/.test(instId);
+    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isTangoAcoustic = isTango && GUITAR_INSTRUMENT_PATTERNS.acousticTango.test(instId);
+    const isUrbanAcoustic = (isKizomba || isReggaeton) && GUITAR_INSTRUMENT_PATTERNS.urbanAcoustic.test(instId);
     const isMarcato = action === 'marcato' || /marcato/i.test(action ?? '');
     const isArrastre = action === 'arrastre' || /arrastre|drag/i.test(action ?? '');
     const gd = ctx.genreDialect;
     const genre = gd.id;
-    const isBachata = genre === 'bachata';
-    const isBrazilian = genre === 'brazilian';
-    const isReggae = genre === 'reggae';
-    const isSka = genre === 'ska';
-    const isFunk = genre === 'funk';
-    const isCountry = genre === 'country';
+    const isBachata = genre === GUITAR_EXACT_GENRE_IDS[0];
+    const isBrazilian = genre === GUITAR_EXACT_GENRE_IDS[1];
+    const isReggae = genre === GUITAR_EXACT_GENRE_IDS[2];
+    const isSka = genre === GUITAR_EXACT_GENRE_IDS[3];
+    const isFunk = genre === GUITAR_EXACT_GENRE_IDS[4];
+    const isCountry = genre === GUITAR_EXACT_GENRE_IDS[5];
+    const genreGuitarResponse = GUITAR_GENRE_RESPONSE[genre];
 
     if (action === 'golpe' || action === 'tap' || action === 'golpe-caja') {
       const bodyPunch = el.mul(el.cycle(110), el.adsr(0.0005, 0.02, 0, 0.01, gateSignal));
@@ -52,20 +58,18 @@ export default class GuitarModule implements InstrumentModule {
 
     let impulse: AudioSignal;
     if (isBachata || isBrazilian || isReggae || isSka || isFunk || isCountry) {
-      const short = isBachata || isReggae || isSka || isFunk;
-      const env = el.adsr(0.00025, short ? 0.009 : 0.015, 0, 0.003, gateSignal);
-      const noiseFreq = isCountry ? 2900 : isBachata ? 2050 : isSka ? 2500 : isFunk ? 1800 : 1450;
-      const pluck = el.add(el.mul(isCountry ? 0.70 : 0.64, broadbandPluck), el.mul(0.16, el.svf({ mode: 'bandpass' }, noiseFreq, 1.4, el.noise())));
-      const bodyFreq = isBrazilian ? 115 : isBachata ? 135 : isCountry ? 155 : 105;
-      const body = el.mul((isBrazilian ? 0.16 : 0.10) * gd.body, el.cycle(bodyFreq));
+      const env = el.adsr(0.00025, genreGuitarResponse.decay, 0, 0.003, gateSignal);
+      const pluck = el.add(el.mul(genreGuitarResponse.pluckGain, broadbandPluck), el.mul(0.16, el.svf({ mode: 'bandpass' }, genreGuitarResponse.noiseFrequency, 1.4, el.noise())));
+      const body = el.mul(genreGuitarResponse.bodyGain * gd.body, el.cycle(genreGuitarResponse.bodyFrequency));
       impulse = el.add(el.mul(pluck, env), el.mul(body, el.adsr(0.0003, 0.035, 0, 0.010, gateSignal)));
     } else 
     if (isUrbanAcoustic) {
       // Kizomba guitar: short, muted syncopated chord/finger attack with very
       // little flamenco rasgueado noise. Reggaetón uses an even drier pluck.
-      const env = el.adsr(0.00025, isKizomba ? 0.012 : 0.008, 0, 0.003, gateSignal);
-      const pick = el.add(el.mul(0.72, broadbandPluck), el.mul(isKizomba ? 0.12 : 0.20, el.svf({ mode: 'bandpass' }, isKizomba ? 1750 : 2350, 1.5, el.noise())));
-      const body = el.mul(isKizomba ? 0.10 : 0.06, el.cycle(isKizomba ? 105 : 120));
+      const urbanGuitar = isKizomba ? URBAN_ACOUSTIC_GUITAR_RESPONSE.kizomba : URBAN_ACOUSTIC_GUITAR_RESPONSE.default;
+      const env = el.adsr(0.00025, urbanGuitar.decayBase, 0, 0.003, gateSignal);
+      const pick = el.add(el.mul(0.72, broadbandPluck), el.mul(urbanGuitar.pickNoise, el.svf({ mode: 'bandpass' }, urbanGuitar.noiseCutoff, 1.5, el.noise())));
+      const body = el.mul(urbanGuitar.bodyGain, el.cycle(urbanGuitar.bodyFrequency));
       impulse = el.add(el.mul(pick, env), el.mul(body, el.adsr(0.0003, 0.035, 0, 0.009, gateSignal)));
     } else if (isTangoAcoustic && (isMarcato || isArrastre)) {
       // Tango guitar is a dry, percussive harmonic accompanist rather than a
@@ -119,16 +123,12 @@ export default class GuitarModule implements InstrumentModule {
       : (3.2 + b * 6.0);
     const stringCutoff = el.min(el.const({ value: 19000 }), el.max(el.const({ value: 1200 }), el.mul(safeFreqSignal, el.const({ value: cutoffMult }))));
 
-    const targetDecaySeconds = (isBachata || isReggae || isSka || isFunk)
-      ? 0.16 + decayTime * 0.42
-      : isBrazilian
-      ? 0.32 + decayTime * 0.60
-      : isCountry
-      ? 0.42 + decayTime * 0.85
+    const targetDecaySeconds = genreGuitarResponse
+      ? genreGuitarResponse.targetDecayBase + decayTime * genreGuitarResponse.targetDecayTime
       : isUrbanAcoustic
-      ? (isKizomba ? 0.28 + decayTime * 0.55 : 0.20 + decayTime * 0.45)
+      ? (isKizomba ? URBAN_ACOUSTIC_GUITAR_RESPONSE.kizombaDecayBase + decayTime * URBAN_ACOUSTIC_GUITAR_RESPONSE.kizombaDecayTime : URBAN_ACOUSTIC_GUITAR_RESPONSE.reggaetonDecayBase + decayTime * URBAN_ACOUSTIC_GUITAR_RESPONSE.reggaetonDecayTime)
       : isTangoAcoustic
-      ? 0.22 + decayTime * (0.45 + b * 0.85)
+      ? TANGO_ACOUSTIC_GUITAR_RESPONSE.targetDecayBase + decayTime * (TANGO_ACOUSTIC_GUITAR_RESPONSE.targetDecayTime + b * TANGO_ACOUSTIC_GUITAR_RESPONSE.targetDecayBrightness)
       : 0.35 + decayTime * (0.6 + b * 1.5);
     const d1 = fbGainForDecay(safeFreqSignal, targetDecaySeconds);
 
@@ -158,7 +158,7 @@ export default class GuitarModule implements InstrumentModule {
       stringSignal = el.add(loop1, el.mul(0.25, loop2));
     }
 
-    const hasJawari = /sitar|shamisen|tambura/.test(instId);
+    const hasJawari = GUITAR_INSTRUMENT_PATTERNS.jawari.test(instId);
     if (hasJawari) {
       const jawariEnv = el.adsr(0.001, 0.18 + decayTime * 0.30, 0.15, 0.08, gateSignal);
       const buzzAmount = el.add(el.const({ value: 1.0 }), el.mul(el.const({ value: 8.5 }), jawariEnv));
@@ -239,9 +239,8 @@ export default class GuitarModule implements InstrumentModule {
     let finalAcoustic = bodyOut;
     if (hasSympathetic) {
       const droneBase = 146.83;
-      const tarabRatios = [1.0, 1.125, 1.25, 1.333, 1.5, 1.667, 1.875, 2.0, 2.25, 2.5];
       const sympatheticTap = el.mul(0.14, stringSignal);
-      const tarabNodes = tarabRatios.map(r => el.svf({ mode: 'bandpass' }, droneBase * r, 24.0, sympatheticTap));
+      const tarabNodes = TARAB_SYMPATHETIC_RATIOS.map(r => el.svf({ mode: 'bandpass' }, droneBase * r, 24.0, sympatheticTap));
       const sumTarab = tarabNodes.reduce((acc, curr) => el.add(acc, curr));
       finalAcoustic = el.add(bodyOut, el.mul(0.85, sumTarab));
     }

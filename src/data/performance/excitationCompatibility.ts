@@ -1,0 +1,31 @@
+export const PERCUSSIVE_ACTIONS = new Set([
+  'bellows-slap',
+  'golpe-caja',
+  'golpe',
+  'knee-drop',
+  'pizzicato',
+  'spiccato',
+  'martelé',
+  'chicharra',
+  'tambor',
+  'staccato',
+  'accent',
+  'pluck',
+  'hit',
+  'tap',
+  'slap',
+  'strike',
+  'pop',
+  'choke',
+  'rim',
+  'heel',
+  'toe',
+  'pick',
+  'picado',
+  'alzapua',
+  'alzapúa',
+  'rasgueado',
+  'abanico'
+]);
+
+export const SHORT_HIT_ARTICULATIONS: readonly string[] = ['staccato', 'marcato', 'accent', 'bellows-slap', 'golpe-caja', 'tremolo', 'arrastre'];

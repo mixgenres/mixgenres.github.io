@@ -1,3 +1,5 @@
+import { TANGO_INSTRUMENT_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
+import { TANGO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
 import { el } from '@elemaudio/core';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 
@@ -13,15 +15,16 @@ export default class StringsModule implements InstrumentModule {
       params,
       action
     } = ctx;
-    const isTango = /tango|milonga|vals/i.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const tangoResponse = TANGO_INSTRUMENT_RESPONSE.strings;
     const isStaccato = action === 'staccato' || action === 'marcato' || /marcato|staccato/i.test(action ?? '');
 
     // Create 3 detuned and asynchronously vibrato-modulated voices for natural chorus ensemble depth
     const renderSectionVoice = (idx: number, detuneCents: number, panSide: number, vibSpeed: number, delayMs: number) => {
       // Intonation drift + vibrato
       const vibLfo = el.cycle(vibSpeed);
-      const vibOnset = el.adsr((isTango ? 0.48 : 0.35) + idx * (isTango ? 0.08 : 0.1), 0.15, 1.0, 0.12, gateSignal);
-      const vibDepth = el.mul(el.const({ value: isTango ? 0.0048 : 0.007 }), vibOnset);
+      const vibOnset = el.adsr((isTango ? tangoResponse.vibratoOnset : tangoResponse.vibratoOnsetDefault) + idx * (isTango ? tangoResponse.vibratoIncrement : tangoResponse.vibratoIncrementDefault), 0.15, 1.0, 0.12, gateSignal);
+      const vibDepth = el.mul(el.const({ value: isTango ? tangoResponse.vibratoDepth : tangoResponse.vibratoDepthDefault }), vibOnset);
       const intonationDetune = Math.pow(2, detuneCents / 1200);
       
       const modulatedFreq = el.mul(
@@ -38,7 +41,7 @@ export default class StringsModule implements InstrumentModule {
       // Rosin scraping noise
       const frictionAttackGate = isStaccato
         ? el.adsr(0.0006, 0.018, 0.12, 0.008, gateSignal)
-        : el.adsr((isTango ? 0.055 : 0.04) + idx * 0.015, 0.15, 0.82, 0.08, gateSignal);
+        : el.adsr((isTango ? tangoResponse.attack : tangoResponse.attackDefault) + idx * 0.015, 0.15, 0.82, 0.08, gateSignal);
       const rosinCutoff = 1000 + idx * 250;
       const frictionNoise = el.mul(
         el.mul(el.const({ value: 0.08 }), frictionAttackGate),
@@ -71,11 +74,11 @@ export default class StringsModule implements InstrumentModule {
 
     // Stacking 3 distinct string players:
     // Player 1: Centered, dry, LFO 5.2Hz
-    const p1 = renderSectionVoice(0, isTango ? -1.2 : -3.2, 0, 5.2, 0);
+    const p1 = renderSectionVoice(0, isTango ? tangoResponse.voiceGain[0] : tangoResponse.voiceGainDefault[0], 0, 5.2, 0);
     // Tango sections are intentionally tighter than a generic cinematic pad:
     // the players must sound like an orquesta típica string line, not a chorus.
-    const p2 = renderSectionVoice(1, isTango ? 1.0 : 11.8, -1.0, 5.9, isTango ? 7 : 18);
-    const p3 = renderSectionVoice(2, isTango ? -1.1 : -12.5, 1.0, 4.6, isTango ? 11 : 26);
+    const p2 = renderSectionVoice(1, isTango ? tangoResponse.voiceGain[1] : tangoResponse.voiceGainDefault[1], -1.0, 5.9, isTango ? tangoResponse.delayMs[1] : tangoResponse.delayMsDefault[1]);
+    const p3 = renderSectionVoice(2, isTango ? tangoResponse.voiceGain[2] : tangoResponse.voiceGainDefault[2], 1.0, 4.6, isTango ? tangoResponse.delayMs[2] : tangoResponse.delayMsDefault[2]);
 
     // Return stereo pair (the framework/mixer is designed for mono-to-stereo routing,
     // so we can sum them or return leftSum. In elementary, our track signals sum.

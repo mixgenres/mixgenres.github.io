@@ -1,6 +1,10 @@
+import { VOICING_CLASSIFIERS } from '../../data/musicTheory/voicingClassifiers';
+import { STANDARD_GUITAR_OPEN_STRING_MIDI } from '../../data/instruments/openStringMidi';
 import type { ResolvedStyle } from '../../data/styles/schema';
+import { OPEN_MAJOR_SHAPES, OPEN_MINOR_SHAPES, CAGED_OPEN_SHAPE_ROOTS } from '../../data/musicTheory/openVoicingShapes';
 import { ParsedChord, nearestPc, pcOf } from './musicTheory.ts';
-import { VoiceProfile, foldToRange } from '../sheet/instrumentRoles.ts';
+import { foldToRange } from '../sheet/instrumentRoles.ts';
+import type { VoiceProfile } from '../../data/instruments/schema/voice-profile';
 import { rand01 } from './random.ts';
 import type { RhythmicContext } from './grid.ts';
 
@@ -87,7 +91,7 @@ export function voiceChord(req: VoicingRequest): number[] {
   const approach = req.approach;
 
   const styleStr = `${req.genreId || ''} ${req.styleId || ''} ${req.approach || ''}`.toLowerCase();
-  const isJazzFunkNeo = /jazz|funk|neo-soul|neo_soul|soul|swing|fusion/i.test(styleStr);
+  const isJazzFunkNeo = VOICING_CLASSIFIERS.jazzFunkNeo.test(styleStr);
 
   if (approach === 'unison' || approach === 'melodic') {
     const root = nearestPc(chord.rootPc, previous[0] ?? profile.centre);
@@ -100,7 +104,7 @@ export function voiceChord(req: VoicingRequest): number[] {
   }
 
   // Salsa Guajeo Piano Voice Leading (Salsa & Cumbia)
-  const isSalsa = /salsa/i.test(styleStr);
+  const isSalsa = VOICING_CLASSIFIERS.salsa.test(styleStr);
   const isPiano = /piano/i.test(profile.id || '');
   if (isSalsa && isPiano && previous.length > 0) {
     const prevSorted = [...previous].sort((a, b) => a - b);
@@ -139,7 +143,7 @@ export function voiceChord(req: VoicingRequest): number[] {
   }
 
   // Strict 4-Part SATB Divisi for Choirs & Vocal Sections (Prompt 22)
-  const isChoir = /choir|vocals|vocal_ensemble/i.test(profile.id || '') && !/lead/i.test(profile.id || '');
+  const isChoir = VOICING_CLASSIFIERS.choir.test(profile.id || '') && !/lead/i.test(profile.id || '');
   if (isChoir) {
     const wanted = priorityIntervals(chord, req.bassCovered, intensity, isJazzFunkNeo);
     // Ensure we have exactly 4 notes (Bass, Tenor, Alto, Soprano)
@@ -186,8 +190,8 @@ export function voiceChord(req: VoicingRequest): number[] {
   }
 
   // Drop-D Tuning for Metal and Grunge (Prompt 10)
-  const isGuitar = /guitar|requinto|cavaquinho/i.test(profile.id || '');
-  const isMetalOrGrunge = /metal|grunge|industrial/i.test(styleStr);
+  const isGuitar = VOICING_CLASSIFIERS.guitarCue.test(profile.id || '');
+  const isMetalOrGrunge = VOICING_CLASSIFIERS.metalOrGrunge.test(styleStr);
   if (isMetalOrGrunge && isGuitar) {
     const effectiveLow = 38; // D2 lowest pitch
     const root = nearestPc(chord.rootPc, Math.max(effectiveLow, previous[0] ?? (effectiveLow + 5)));
@@ -195,16 +199,16 @@ export function voiceChord(req: VoicingRequest): number[] {
   }
 
   const instId = (profile.id || '').toLowerCase();
-  const isElectricGuitar = /electric.*guitar|guitar.*electric|clean-electric|distortion|overdrive|tele|strat|jazz-guitar/i.test(instId) ||
-    (/guitar/i.test(instId) && !/acoustic|nylon|classical|folk|12-string|steel-string/i.test(instId));
-  const isAcousticGuitar = /acoustic.*guitar|guitar.*acoustic|steel-string|nylon|12-string|classical.*guitar/i.test(instId) ||
-    (instId === 'guitar' && /folk|country|bluegrass|americana/i.test(styleStr)) ||
-    (/guitar/i.test(instId) && !/electric|clean-electric|distortion|overdrive/i.test(instId));
-  const isPianoOrKeys = /piano|rhodes|organ|keys|keyboard|wurlitzer|clav|fm-ep/i.test(instId);
+  const isElectricGuitar = VOICING_CLASSIFIERS.electricGuitar.test(instId) ||
+    (VOICING_CLASSIFIERS.guitarId.test(instId) && !VOICING_CLASSIFIERS.notAcousticGuitar.test(instId));
+  const isAcousticGuitar = VOICING_CLASSIFIERS.acousticGuitar.test(instId) ||
+    (instId === 'guitar' && VOICING_CLASSIFIERS.folkCountryBluegrass.test(styleStr)) ||
+    (VOICING_CLASSIFIERS.guitarId.test(instId) && !VOICING_CLASSIFIERS.notElectricGuitar.test(instId));
+  const isPianoOrKeys = VOICING_CLASSIFIERS.pianoOrKeys.test(instId);
 
   // 1. Reggae & Ska "Skank" Voicings
   // Check if styleStr includes 'reggae', 'dub', or 'ska'
-  const isReggaeOrSka = /reggae|dub|ska/i.test(styleStr);
+  const isReggaeOrSka = VOICING_CLASSIFIERS.reggaeOrSka.test(styleStr);
   const isSkankRole = profile.role === 'comp' || (profile.role as string) === 'harmony';
   if (isReggaeOrSka && isSkankRole) {
     // Force skipRoot = true; use 3 notes maximum (triads or 3-note 7th shells)
@@ -239,7 +243,7 @@ export function voiceChord(req: VoicingRequest): number[] {
 
   // 2. Funk Guitar "Top-String" Chops
   // Check if styleStr includes 'funk' or 'disco' AND instrument is an electric guitar
-  const isFunkOrDisco = /funk|disco/i.test(styleStr);
+  const isFunkOrDisco = VOICING_CLASSIFIERS.funkOrDisco.test(styleStr);
   if (isFunkOrDisco && isElectricGuitar) {
     const allIntervals = [...chord.tensions, ...chord.intervals];
     let highestTensionIv: number | undefined;
@@ -303,7 +307,7 @@ export function voiceChord(req: VoicingRequest): number[] {
 
   // 3. Modal Jazz "Quartal" Voicings (Stacked Fourths)
   // Check if styleStr includes 'modal', 'spiritual', 'hard-bop', 'cool', or 'post-bop' AND instrument is piano/keys
-  const isModalJazz = /modal|spiritual|hard-bop|hard_bop|cool|post-bop|post_bop/i.test(styleStr);
+  const isModalJazz = VOICING_CLASSIFIERS.modalJazz.test(styleStr);
   const isMinor7 = chord.quality === 'minor' && (chord.intervals.includes(10) || chord.intervals.includes(11) || chord.intervals.includes(9) || chord.symbol.includes('7') || chord.symbol.includes('m') || chord.symbol.includes('min'));
   const isDom7 = chord.quality === 'dominant' || chord.symbol.includes('7');
   const isSus = chord.quality === 'suspended' || /sus/i.test(chord.symbol);
@@ -344,28 +348,12 @@ export function voiceChord(req: VoicingRequest): number[] {
 
   // 4. Folk & Country "CAGED" Cowboy Chords
   // Check if styleStr includes 'folk', 'country', 'bluegrass', or 'americana' AND instrument is an acoustic guitar
-  const isFolkCountry = /folk|country|bluegrass|americana/i.test(styleStr);
+  const isFolkCountry = VOICING_CLASSIFIERS.folkCountryBluegrass.test(styleStr);
   const hasExtensions = chord.tensions.length > 0 || chord.intervals.some(iv => iv === 10 || iv === 11 || iv === 9 || iv === 14 || iv === 13);
   const isBasicTriad = (chord.quality === 'major' || chord.quality === 'minor') && !hasExtensions && !chord.isPower;
 
   if (isFolkCountry && isAcousticGuitar && isBasicTriad) {
     // Absolute MIDI standard open guitar chord voicings:
-    const OPEN_MAJOR_SHAPES: Record<number, number[]> = {
-      4: [40, 47, 52, 56, 59, 64], // E Major
-      7: [43, 47, 50, 55, 59, 67], // G Major
-      0: [48, 52, 55, 60, 64],     // C Major
-      2: [50, 57, 62, 66],         // D Major
-      9: [45, 52, 57, 61, 64],     // A Major
-    };
-
-    const OPEN_MINOR_SHAPES: Record<number, number[]> = {
-      4: [40, 47, 52, 55, 59, 64], // E Minor
-      9: [45, 52, 57, 60, 64],     // A Minor
-      2: [50, 57, 62, 65],         // D Minor
-      7: [43, 46, 50, 55, 58, 67], // G Minor
-      0: [48, 51, 55, 60, 63],     // C Minor
-    };
-
     const isMinor = chord.quality === 'minor';
     const shapeMap = isMinor ? OPEN_MINOR_SHAPES : OPEN_MAJOR_SHAPES;
     const root = chord.rootPc;
@@ -376,7 +364,7 @@ export function voiceChord(req: VoicingRequest): number[] {
     }
 
     // Transpose fixed shapes up the neck using a virtual capo
-    const basePcs = [0, 2, 4, 7, 9]; // C, D, E, G, A
+    const basePcs = CAGED_OPEN_SHAPE_ROOTS; // C, D, E, G, A
     let bestCapo = Infinity;
     let bestShape: number[] = [];
 
@@ -396,7 +384,7 @@ export function voiceChord(req: VoicingRequest): number[] {
 
   // 5. Neo-Soul / Gospel Top-Down Voicing
   // Check if styleStr includes 'neo-soul', 'gospel', or 'r-and-b' AND instrument is piano/rhodes/organ
-  const isNeoSoulOrGospel = /neo-soul|neo_soul|gospel|r-and-b|r_and_b|rnb/i.test(styleStr);
+  const isNeoSoulOrGospel = VOICING_CLASSIFIERS.neoSoulOrGospel.test(styleStr);
   const isNeoKeys = /piano|rhodes|organ|keys|keyboard|wurlitzer/i.test(profile.id || '');
 
   if (isNeoSoulOrGospel && isNeoKeys) {
@@ -452,7 +440,7 @@ export function voiceChord(req: VoicingRequest): number[] {
   }
 
   // Dynamic Voicing Expansion for Keyboards (Prompt 9)
-  const isKeyboard = /piano|rhodes|fm-ep|clav|organ|synth/i.test(profile.id || '');
+  const isKeyboard = VOICING_CLASSIFIERS.piano.test(profile.id || '');
   if (isKeyboard && intensity > 0.8) {
     // Split chord: Root and 5th in LH (low octave), 3rd, 7th, and tensions in RH
     const rootLh = nearestPc(chord.rootPc, profile.centre - 16);
@@ -471,7 +459,7 @@ export function voiceChord(req: VoicingRequest): number[] {
   const phaseSize = cycleLength > 1 && phase === cycleLength - 1 ? 0 : 0;
   let requestedSize = Math.max(2, Math.min(12, req.size + energySize + phaseSize));
 
-  const isGospelOrSoul = /gospel|soul/i.test(styleStr);
+  const isGospelOrSoul = VOICING_CLASSIFIERS.gospelOrSoul.test(styleStr);
   if (isGospelOrSoul && isKeyboard && intensity > 0.5) {
     requestedSize = Math.max(5, requestedSize);
   }
@@ -492,8 +480,7 @@ export function voiceChord(req: VoicingRequest): number[] {
     const remainingPcs = [...pcs];
     const assignments: number[] = [];
 
-    const openStrings = [40, 45, 50, 55, 59, 64];
-    const isFolkOrCountry = /folk|country/i.test(styleStr);
+    const isFolkOrCountry = VOICING_CLASSIFIERS.folkOrCountry.test(styleStr);
 
     for (const anchor of sortedAnchors) {
       let bestPcIdx = -1;
@@ -504,7 +491,7 @@ export function voiceChord(req: VoicingRequest): number[] {
         
         // Open String Preference for Folk/Country (Prompt 10)
         if (isFolkOrCountry) {
-          const matchingOpen = openStrings.find(o => o % 12 === remainingPcs[j] && o >= profile.low && o <= profile.high);
+          const matchingOpen = STANDARD_GUITAR_OPEN_STRING_MIDI.find(o => o % 12 === remainingPcs[j] && o >= profile.low && o <= profile.high);
           if (matchingOpen !== undefined) {
             cand = matchingOpen;
           }
@@ -617,8 +604,7 @@ export function voiceChord(req: VoicingRequest): number[] {
 
   // CAGED System Validation for Guitars (Prompt 10)
   if (isGuitar && notes.length >= 2) {
-    const openStrings = [40, 45, 50, 55, 59, 64];
-    const usesOpen = notes.some(n => openStrings.includes(n));
+    const usesOpen = notes.some(n => STANDARD_GUITAR_OPEN_STRING_MIDI.includes(n));
     if (!usesOpen) {
       const minNote = notes[0];
       const maxNote = notes[notes.length - 1];
@@ -698,25 +684,25 @@ export function styleFor(
   if (chord.isPower) return { style: 'power', size: 3 };
 
   const id = instrumentId;
-  if (profile.role === 'pad' || /pad|strings|choir|halo|sweep/.test(id)) {
+  if (profile.role === 'pad' || VOICING_CLASSIFIERS.pad.test(id)) {
     return { style: 'spread', size: intensity > 0.6 ? 5 : 4 };
   }
-  if (/organ|accordion|bandoneon/.test(id)) {
+  if (VOICING_CLASSIFIERS.organ.test(id)) {
     return { style: 'close', size: intensity > 0.6 ? 4 : 3 };
   }
-  if (/distortion|overdrive/.test(id)) {
+  if (VOICING_CLASSIFIERS.powerAmp.test(id)) {
     return { style: 'power', size: 3 };
   }
-  if (/guitar|tres|cavaquinho|charango|banjo|mandolin|harp|koto/.test(id)) {
+  if (VOICING_CLASSIFIERS.guitarFamily.test(id)) {
     return { style: intensity > 0.55 ? 'close' : 'shell', size: intensity > 0.55 ? 4 : 3 };
   }
-  if (/piano|rhodes|fm-ep|clav|vibraphone|harpsichord|celeste/.test(id)) {
-    const jazzy = resolved.contract.harmonyModel === 'functional' && /jazz|blues|swing|funk|fusion/i.test(resolved.name + ' ' + resolved.contract.harmonyVocabulary.join(' '));
+  if (VOICING_CLASSIFIERS.pianoInstrument.test(id)) {
+    const jazzy = resolved.contract.harmonyModel === 'functional' && VOICING_CLASSIFIERS.salsaFunk.test(resolved.name + ' ' + resolved.contract.harmonyVocabulary.join(' '));
     if (jazzy && intensity < 0.55) return { style: 'shell', size: 3 };
     if (jazzy && intensity > 0.82) return { style: 'spread', size: 8 };
     return { style: 'drop2', size: jazzy ? 5 : (intensity > 0.7 ? 4 : 3) };
   }
-  if (/horn|brass|choir|backing/.test(id)) {
+  if (VOICING_CLASSIFIERS.horn.test(id)) {
     return { style: 'close', size: intensity > 0.6 ? 4 : 3 };
   }
   return { style: 'close', size: 3 };
