@@ -132,7 +132,7 @@ export const CUMBIA_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
   {
           "id": "cu-11-cumbia-organ-hook",
           "worldId": "cumbia",
-          "styleIds": ["cumbia-electric"],
+          "styleIds": ["cumbia-sonora", "cumbia-digitale"],
           "name": "Cumbia Organ Hook",
           "family": "Electric Cumbia",
           "category": "rolePattern",

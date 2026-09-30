@@ -20,7 +20,7 @@ let bandWorklet: BandWorkletNode | null = null;
  *  even though the transport only ever hands it a bare trackId. Populated by
  *  the UI layer (App.tsx) from the current song's tracks whenever they change. */
 const trackInstruments = new Map<string, string>();
-let activeWorldId = 'flamenco';
+let activeWorldId = '';
 let activeStyleId = '';
 
 export function setActiveWorld(worldId: string, styleId?: string) {

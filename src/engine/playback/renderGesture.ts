@@ -2,6 +2,7 @@ import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { GESTURE_NAMES } from '../band/gestures.ts';
 import type { LuthierModelCategory } from '../../data/instruments/schema/luthier';
 import { FINGERPAD_GESTURES, HARD_PICK_GESTURES, NAIL_GESTURES, HAMMER_GESTURES, BOW_GESTURES, AIR_GESTURES, BOWED_RENDER_INSTRUMENT_PATTERN } from '../../data/performance/gestureExcitations';
+import { matchesGestureConcept } from '../../data/performance/gestureLexicon';
 
 export type RenderExcitationType = 'plectrum' | 'nail' | 'fingerpad' | 'hard-pick' | 'hammer' | 'stick' | 'mallet' | 'breath' | 'bow';
 
@@ -61,15 +62,15 @@ export function resolveRenderGesture(instrumentId: string, gestureCode: number):
         : undefined;
 
   const handStroke = g.includes('heel') ? 0.34
-    : /toe|finger-tap|tip/.test(g) ? 0.68
-    : /thumb|tumba-open|conga-open|macho-open|hembra-open|bayan-ghe|iya-enu/.test(g) ? 0.52
+    : matchesGestureConcept(g, 'toe') ? 0.68
+    : matchesGestureConcept(g, 'thumb') ? 0.52
     : undefined;
-  const rimLike = /rimshot|cascara|side-stick|rim/.test(g);
-  const bellLike = /bell|campana|ride-bell/.test(g);
+  const rimLike = matchesGestureConcept(g, 'rimLike');
+  const bellLike = matchesGestureConcept(g, 'bellLike');
   const contactPoint = Math.max(0.05, Math.min(0.95, handStroke ?? (rimLike ? 0.84 : bellLike ? 0.9 : 0.5)));
   const mass = Math.max(0.1, Math.min(0.95,
     g.includes('heel') ? 0.26
-      : /slap|quinto-slap|macho-slap|tapao/.test(g) ? 0.58
+      : matchesGestureConcept(g, 'struckSlap') ? 0.58
       : handStroke !== undefined ? 0.34
       : (rimLike || bellLike ? 0.52 : 0.35)
   ));

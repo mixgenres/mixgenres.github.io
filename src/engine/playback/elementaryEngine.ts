@@ -168,6 +168,7 @@ volume: number;
 pan: number;
 dialect?: string;
 genreId?: string;
+styleId?: string;
 performanceMode?: PerformanceMode;
 bendGlideMs?: number;
 instrumentId?: string;
@@ -285,8 +286,10 @@ export function renderVoice(
     const c = dspProfile.coupledResonators;
     const a = dspProfile.mechanicalArtifacts;
     const ap = dspProfile.articulationPhysics;
+    const styleKey = (params.styleId ?? '').toLowerCase();
     const genreKey = (params.genreId ?? params.dialect ?? '').toLowerCase();
-    const authoredDialect = genreKey ? dspProfile.genreDialects[genreKey] : undefined;
+    const authoredDialect = (styleKey ? dspProfile.genreDialects[styleKey] : undefined)
+      ?? (genreKey ? dspProfile.genreDialects[genreKey] : undefined);
     const dialect = authoredDialect ?? {
       brightness: ctx.genreDialect.brightness,
       damping: Math.max(0, 0.055 * (1 - ctx.genreDialect.decay)),
@@ -372,8 +375,9 @@ export function renderVoice(
     // Apply mechanical artifacts if not owned by bespoke module
     if (!ownedSections.includes('mechanicalArtifacts')) {
       const pmNoise = instDef?.physicalModel?.parameters?.breathNoise ?? 0;
-      if (a.airHiss > 0.02 || pmNoise > 0.02) {
-        const hissLevel = Math.max(a.airHiss, pmNoise * 0.15);
+      const breathBurst = a.breathBurst ?? 0;
+      if (a.airHiss > 0.02 || pmNoise > 0.02 || breathBurst > 0.02) {
+        const hissLevel = Math.max(a.airHiss, pmNoise * 0.15, breathBurst);
         const hiss = el.mul(familyNoiseScale * hissLevel * (0.03 + 0.10 * params.pressure), el.mul(el.highpass(3000, 0.8, el.noise()), el.mul(ctx.gateSignal, 0.65)));
         modeSignals.push(hiss);
       }
@@ -391,6 +395,10 @@ export function renderVoice(
       if ((a.slideNoise ?? 0) > 0.02) {
         const slide = el.mul(familyNoiseScale * (a.slideNoise ?? 0) * 0.08, el.mul(el.highpass(1800, 1.0, el.pinknoise()), collisionEnv));
         modeSignals.push(slide);
+      }
+      if ((a.pedalNoise ?? 0) > 0.02) {
+        const pedal = el.mul(familyNoiseScale * (a.pedalNoise ?? 0) * 0.08, el.mul(el.lowpass(900, 1.1, el.pinknoise()), collisionEnv));
+        modeSignals.push(pedal);
       }
       if ((a.reedChatter ?? 0) > 0.02) {
         const reed = el.mul(familyNoiseScale * (a.reedChatter ?? 0) * 0.06, el.mul(el.highpass(2400, 1.0, el.noise()), collisionEnv));

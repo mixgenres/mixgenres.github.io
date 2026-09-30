@@ -2,6 +2,7 @@ import { PATTERN_CATEGORY_FALLBACK, PATTERN_CATEGORY_RULES } from '../../data/st
 import type { SongStyle } from '../../data/styles/schema';
 import type { MusicalPattern } from '../../data/schema';
 import { GENRE_WORLDS_BY_ID } from '../../data/genres';
+import { STALE_PATTERN_STYLE_ALIASES } from '../../data/styles/stalePatternStyleAliases';
 
 function shortText(value: string): string {
   return String(value ?? '').replace(/\s+/g, ' ').trim().split(' ').slice(0, 6).join(' ');
@@ -76,10 +77,12 @@ export function assembleStylePatterns(styles: SongStyle[], patterns: MusicalPatt
     add(style.id);
   }
 
-  const resolveStaleId = (id: string): string => {
+  const resolveStaleId = (id: string, genreId: string): string => {
     const cleanId = String(id).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '');
     // Exact match first
     if (styleIdBySlug.has(cleanId)) return styleIdBySlug.get(cleanId)!;
+    const migrated = STALE_PATTERN_STYLE_ALIASES[genreId]?.[cleanId];
+    if (migrated && styleIdBySlug.has(migrated)) return migrated;
     // Substring matching can bind a stale ID to a different genre's style
     // (for example, an Afro-Cuban pattern to a Salsa style with the same suffix).
     return id;
@@ -87,7 +90,7 @@ export function assembleStylePatterns(styles: SongStyle[], patterns: MusicalPatt
 
   for (const p of patterns) {
     p.styleIds = Array.from(new Set((p.styleIds ?? [])
-      .map(id => resolveStaleId(id))
+      .map(id => resolveStaleId(id, p.worldId))
       .filter(id => styles.some(style => style.id === id))));
   }
 
@@ -100,6 +103,12 @@ export function assembleStylePatterns(styles: SongStyle[], patterns: MusicalPatt
     const chosen = selectSharedPatterns(style, candidates, Math.min(8, Math.max(4, candidates.length)));
     const authored = chosen.filter(p => p.styleIds?.includes(style.id));
     const inferred = chosen.filter(p => !p.styleIds?.includes(style.id));
+    // Persist genre-scoped semantic ownership for legacy patterns that had no
+    // valid owner. This makes their selected style relationship visible to all
+    // runtime consumers and prevents it being lost after load-time cleanup.
+    for (const pattern of inferred) {
+      pattern.styleIds = Array.from(new Set([...(pattern.styleIds ?? []), style.id]));
+    }
     style.patterns = {
       require: authored.slice(0, 3).map(p => p.id),
       preferred: [...authored.slice(3), ...inferred].map(p => p.id),

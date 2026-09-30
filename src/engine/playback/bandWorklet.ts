@@ -9,6 +9,7 @@ import { createMasterChain, getRoleGainLinear } from '../studio/mixer.ts';
 import { CulturalAcousticEvent } from './acousticEvent.ts';
 import {
   defaultTrackParams,
+  styleFlavorForGenre,
   modelForInstrument,
   makeupGainFor,
   renderTrack,
@@ -71,7 +72,7 @@ export class BandWorkletNode {
 
   private timerIds = new Set<number>();
 
-  public activeWorldId = 'flamenco';
+  public activeWorldId = '';
   public activeStyleId = '';
 
   private masterVolume = 1.0;
@@ -162,6 +163,8 @@ export class BandWorkletNode {
   setWorldAndStyle(worldId: string, styleId?: string) {
     this.activeWorldId = worldId;
     this.activeStyleId = styleId || '';
+    this.trackParamsMap.clear();
+    this.dirtyTracks.add('*');
     if (worldId && this.masterChain) {
       try {
         const contract = contractForGenre(worldId);
@@ -318,6 +321,8 @@ export class BandWorkletNode {
         if (this.activeWorldId) {
           params.genreId = this.activeWorldId;
         }
+        if (this.activeStyleId) params.styleId = this.activeStyleId;
+        params.styleFlavor = styleFlavorForGenre(this.activeWorldId, this.activeStyleId);
         const dialect = resolveDialect(instrumentId, this.activeWorldId, this.activeStyleId);
         if (dialect) {
           params.dialect = dialect.id;
@@ -472,6 +477,9 @@ export class BandWorkletNode {
 
     if (!this.trackParamsMap.has(trackId)) {
       const p = defaultTrackParams(instrumentId, luthier, model);
+      if (this.activeWorldId) p.genreId = this.activeWorldId;
+      if (this.activeStyleId) p.styleId = this.activeStyleId;
+      p.styleFlavor = styleFlavorForGenre(this.activeWorldId, this.activeStyleId);
       p.performanceMode = performanceModeForContext(this.activeWorldId, this.activeStyleId);
       const dialect = resolveDialect(instrumentId, this.activeWorldId, this.activeStyleId);
       if (dialect) {

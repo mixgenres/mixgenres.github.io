@@ -1,6 +1,7 @@
 import { ANTICIPATED_BASS_GENRES, IDIOMATIC_DEGREE_RULES } from '../../data/performance/genreInstrumentBehaviors';
 import { GENRE_GESTURE_HINT_RULES } from '../../data/performance/genreGestureRules';
 import { GESTURE_HINT_ALIASES } from '../../data/performance/gestureHintAliases';
+import { matchesGestureConcept } from '../../data/performance/gestureLexicon';
 import type { MusicalPattern, Measure } from '../../types';
 import type { HitFunction } from '../../data/performance/hitFunctions';
 import type { InstrumentPerformanceProfile, GenrePerformanceProfile } from '../../engine/lookup/performance';
@@ -306,16 +307,16 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
   // transfers the timing/weight; it never transfers another instrument's name.
   const contextual: string[] = [];
   const add = (...xs: string[]) => contextual.push(...xs.filter(allowed));
-  if (/heel/.test(String(desired ?? ''))) add('heel','toe','ghost');
-  if (/slap|quinto/.test(String(desired ?? ''))) add('slap','quinto-slap','accent','slap-tapao');
-  if (/tapao|mute|closed/.test(String(desired ?? ''))) add('slap-tapao','ghost','muffled');
-  if (/open|abierto|tone|tumba/.test(String(desired ?? ''))) add('tumba-open','conga-open','open','tone');
+  if (matchesGestureConcept(String(desired ?? ''), 'heel')) add('heel','toe','ghost');
+  if (matchesGestureConcept(String(desired ?? ''), 'slap')) add('slap','quinto-slap','accent','slap-tapao');
+  if (matchesGestureConcept(String(desired ?? ''), 'muffled')) add('slap-tapao','ghost','muffled');
+  if (matchesGestureConcept(String(desired ?? ''), 'open')) add('tumba-open','conga-open','open','tone');
   const family = ctx.profile.family;
-  if (family === 'membrane' && /heel/.test(sourceHit)) add('heel','toe','ghost');
-  if (family === 'membrane' && /toe|tip/.test(sourceHit)) add('toe','heel','ghost');
-  if (family === 'membrane' && /slap|quinto/.test(sourceHit)) add('slap','quinto-slap','accent');
-  if (family === 'membrane' && /tapao|mute|closed/.test(sourceHit)) add('slap-tapao','ghost','muffled');
-  if (family === 'membrane' && /open|tone|tumba/.test(sourceHit)) add('tumba-open','conga-open','open','tone');
+  if (family === 'membrane' && matchesGestureConcept(sourceHit, 'heel')) add('heel','toe','ghost');
+  if (family === 'membrane' && matchesGestureConcept(sourceHit, 'toe')) add('toe','heel','ghost');
+  if (family === 'membrane' && matchesGestureConcept(sourceHit, 'slap')) add('slap','quinto-slap','accent');
+  if (family === 'membrane' && matchesGestureConcept(sourceHit, 'muffled')) add('slap-tapao','ghost','muffled');
+  if (family === 'membrane' && matchesGestureConcept(sourceHit, 'open')) add('tumba-open','conga-open','open','tone');
 
   if (ctx.profile.instrumentId === 'bandoneon') {
     for (const rule of GENRE_GESTURE_HINT_RULES.bandoneon) if (rule.pattern.test(text)) add(...rule.gestures);
@@ -356,11 +357,11 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
     if (theoryHints.some(h => GESTURE_HINT_ALIASES[h.toLowerCase().replace(/[^a-z0-9]+/g,'_')]?.test(gl) || gl.includes(h.toLowerCase()))) score += 6;
     if (hostPreferred.has(g)) score += 5;
     if (sourcePreferred.has(g)) score += 4;
-    if (hitWord === 'ghost' && /ghost|heel|toe|tap|mute|dead/.test(gl)) score += 6;
-    if (hitWord === 'slap' && /slap|strappata|golpe|marcato|accent/.test(gl)) score += 6;
-    if (hitWord === 'open' && /open|ring|legato|tone|tumba/.test(gl)) score += 5;
-    if (hitWord === 'muffled' && /mute|chapa|tapao|stacc|palm/.test(gl)) score += 6;
-    if (hitWord === 'fill' && /roll|fill|tremolo|ornament|shake|triplet/.test(gl)) score += 5;
+    if (hitWord === 'ghost' && matchesGestureConcept(gl, 'ghostHit')) score += 6;
+    if (hitWord === 'slap' && (matchesGestureConcept(gl, 'slap') || /marcato|accent/.test(gl))) score += 6;
+    if (hitWord === 'open' && matchesGestureConcept(gl, 'openHit')) score += 5;
+    if (hitWord === 'muffled' && matchesGestureConcept(gl, 'muffledHit')) score += 6;
+    if (hitWord === 'fill' && matchesGestureConcept(gl, 'fillHit')) score += 5;
     if (ctx.phrasePosition > 0.75 && /arrastre|fall|doit|turn|cadence|accent|marcato|staccato/.test(gl)) score += 2;
     if (ctx.phrasePosition < 0.2 && /accent|marcato|staccato/.test(gl)) score += 1;
     // Keep the vocabulary varied inside a phrase, but deterministically.

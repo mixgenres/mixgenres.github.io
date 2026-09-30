@@ -1,5 +1,6 @@
 import type { GenreDialect } from '../../data/performance/schema/genre-dialect';
 import { PROFILES } from '../../data/performance/genreDialectProfiles';
+import { GENRE_ALIASES } from '../../data/performance/genreAliases';
 
 export interface GenreDialectContext {
   genreId?: string;
@@ -10,11 +11,7 @@ export interface GenreDialectContext {
 
 function canonical(raw: string): string {
   const s = raw.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[_\s]+/g, '-');
-  if (s === 'r-and-b' || s === 'rnb') return 'rnb';
-  if (s === 'hiphop') return 'hip-hop';
-  if (s === 'drum&bass' || s === 'drum-n-bass') return 'drum-and-bass';
-  if (s === 'punk') return 'punk-hardcore';
-  return s;
+  return GENRE_ALIASES[s] ?? s;
 }
 
 export function getGenreDialect(params: GenreDialectContext): GenreDialect {

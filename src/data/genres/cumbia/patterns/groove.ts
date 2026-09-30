@@ -4,7 +4,7 @@ export const CUMBIA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "cu-cumbia-drum",
           "worldId": "cumbia",
-          "styleIds": ["cumbia-colombian"],
+          "styleIds": ["cumbia-colombiana"],
           "name": "Tambora / alegre conversation",
           "family": "Cumbia Drums",
           "category": "groove",
@@ -136,7 +136,7 @@ export const CUMBIA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "cu-07-tambor-alegre-reply",
           "worldId": "cumbia",
-          "styleIds": ["cumbia-electric"],
+          "styleIds": ["cumbia-colombiana"],
           "name": "Tambor Alegre Reply",
           "family": "Colombian Cumbia",
           "category": "groove",

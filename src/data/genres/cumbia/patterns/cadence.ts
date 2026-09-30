@@ -4,7 +4,7 @@ export const CUMBIA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
   {
           "id": "cu-15-cumbia-final-tag",
           "worldId": "cumbia",
-          "styleIds": ["cumbia-electric"],
+          "styleIds": ["cumbia-colombiana", "cumbia-sonora", "cumbia-porro"],
           "name": "Cumbia Final Tag",
           "family": "Cadence",
           "category": "cadence",

@@ -158,6 +158,7 @@ export interface SongStyle {
   region?: string;
   summary: string;
   signatureTraits: string[];  // shown in UI
+  danceTags?: import('../primitives').DanceTag[];
 
   form?: Partial<FormGrammar>;             // section vocab, order templates (weighted), bar-length distributions, intros/outros/breaks, pickups, endings
   harmony?: Partial<HarmonyGrammar>;       // mode/key policy, progression templates (functional/roman), cadences, chord vocabulary + extensions, harmonic rhythm, voicing style, bass-motion rules

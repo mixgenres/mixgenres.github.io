@@ -4,7 +4,7 @@ export const CUMBIA_WORLD_PATTERNS_BASS: MusicalPattern[] = [
   {
           "id": "cu-06-cumbia-bass-tumbao",
           "worldId": "cumbia",
-          "styleIds": ["cumbia-colombian"],
+          "styleIds": ["cumbia-colombiana"],
           "name": "Cumbia tumbao bass",
           "family": "Colombian Cumbia",
           "category": "bass",

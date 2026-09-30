@@ -4,7 +4,7 @@ export const CUMBIA_WORLD_PATTERNS_CELL: MusicalPattern[] = [
   {
           "id": "cu-09-cumbia-guitar-offbeat",
           "worldId": "cumbia",
-          "styleIds": ["cumbia-electric"],
+          "styleIds": ["cumbia-chicha", "cumbia-santafesina"],
           "name": "Cumbia guitar anticipations",
           "family": "Cumbia Guitar",
           "category": "cell",

@@ -4,7 +4,7 @@ export const CUMBIA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
   {
           "id": "cu-13-cumbia-call-and-response",
           "worldId": "cumbia",
-          "styleIds": ["cumbia-electric"],
+          "styleIds": ["cumbia-colombiana", "cumbia-sonora"],
           "name": "Cumbia Call-and-Response",
           "family": "Melody",
           "category": "interactionPattern",

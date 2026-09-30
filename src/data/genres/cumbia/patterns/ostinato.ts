@@ -4,7 +4,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "cu-cumbia-bass",
           "worldId": "cumbia",
-          "styleIds": ["cumbia-colombian"],
+          "styleIds": ["cumbia-colombiana"],
           "name": "Cumbia bass anticipation",
           "family": "Cumbia Bass",
           "category": "ostinato",
@@ -132,7 +132,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "cu-guacharaca",
           "worldId": "cumbia",
-          "styleIds": ["cumbia-colombian"],
+          "styleIds": ["cumbia-colombiana"],
           "name": "Guacharaca scraper pulse",
           "family": "Cumbia Scrapers",
           "category": "ostinato",
@@ -431,7 +431,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "cu-08-guacharaca-scrape",
           "worldId": "cumbia",
-          "styleIds": ["cumbia-electric"],
+          "styleIds": ["cumbia-colombiana"],
           "name": "Guacharaca reverse accent cycle",
           "family": "Colombian Cumbia",
           "category": "ostinato",
@@ -517,7 +517,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "cu-10-chicha-tremolo-figure",
           "worldId": "cumbia",
-          "styleIds": ["cumbia-electric"],
+          "styleIds": ["cumbia-chicha"],
           "name": "Chicha Tremolo Figure",
           "family": "Peruvian Cumbia / Chicha",
           "category": "ostinato",
@@ -608,7 +608,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "cu-12-cumbia-maraca-layer",
           "worldId": "cumbia",
-          "styleIds": ["cumbia-electric"],
+          "styleIds": ["cumbia-colombiana", "cumbia-sonora"],
           "name": "Maraca offbeat shimmer",
           "family": "Percussion",
           "category": "ostinato",

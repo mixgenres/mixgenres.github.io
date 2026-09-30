@@ -55,20 +55,31 @@ export function buildVoiceContext(
   const pk = `track_${trackId}_voice_${voiceIndex}`;
   const rawFreq = (voice as VoiceState & { frequencyHz?: number }).frequencyHz ?? midiToFreq(voice.note || 60);
   const freq = Math.max(20, isNaN(rawFreq) ? 440 : rawFreq);
-  const gateSignal = el.const({ key: `${pk}_gate`, value: voice.gate ?? 0 });
-  const velSignal = el.const({ key: `${pk}_vel`, value: (voice.velocity ?? 0) * (1 - 0.58 * params.mute) });
-  const glideSec = Math.max(0.005, Math.min(0.2, (params.bendGlideMs ?? 15) / 1000));
-  const freqSignal = el.smooth(el.tau2pole(glideSec), el.const({ key: `${pk}_freq`, value: freq }));
-  const safeFreqSignal = el.max(el.const({ value: 20 }), freqSignal);
-  const velBoost = 0.55 + 0.6 * Math.max(0, Math.min(1, voice.velocity ?? 0));
-  const genreDialect = getGenreDialect(params);
-  const b = Math.max(0, Math.min(1, params.brightness * velBoost * genreDialect.brightness));
-  const rawDecayTime = Math.max(0.05, params.decay * genreDialect.decay);
-  const muteDamping = Math.max(0.08, 1 - 0.88 * params.mute);
-  const decayTime = rawDecayTime * muteDamping;
-  const model = params.performanceMode === 'programmed-electronic' ? 9 : Math.round(params.model);
   const instrumentDef = params.instrumentId ? INSTRUMENTS_BY_ID[params.instrumentId] : undefined;
   const dspProfile: InstrumentDSPProfile | undefined = instrumentDef?.dspProfile;
+  const physics = dspProfile?.articulationPhysics;
+  const transition = instrumentDef?.transitionMechanics;
+  const transitionScale = physics?.noteTransition === 'retrigger' ? 0.55
+    : physics?.noteTransition === 'legato' || physics?.noteTransition === 'lip-slur' ? 1.25
+    : physics?.noteTransition === 'slide' || physics?.noteTransition === 'bellows-flow' || physics?.noteTransition === 'reservoir-flow' ? 1.5
+    : transition?.portamentoCurve === 'stepped-chromatic' ? 0.72
+    : transition?.portamentoCurve === 'continuous-exponential' ? 1.28 : 1;
+  const gateSignal = el.const({ key: `${pk}_gate`, value: voice.gate ?? 0 });
+  const velSignal = el.const({ key: `${pk}_vel`, value: (voice.velocity ?? 0) * (1 - 0.58 * params.mute) });
+  const glideSec = Math.max(0.005, Math.min(0.2, (params.bendGlideMs ?? 15) * transitionScale / 1000));
+  const freqSignal = el.smooth(el.tau2pole(glideSec), el.const({ key: `${pk}_freq`, value: freq }));
+  const safeFreqSignal = el.max(el.const({ value: 20 }), freqSignal);
+  const pressureSensitivity = dspProfile?.excitationDynamics.pressureSensitivity ?? 0.5;
+  const velBoost = 0.55 + 0.6 * Math.max(0, Math.min(1, voice.velocity ?? 0)) * (0.8 + pressureSensitivity * 0.4);
+  const genreDialect = getGenreDialect(params);
+  const nailBrightness = physics ? (physics.fleshVsNail - 0.5) * 0.08 : 0;
+  const b = Math.max(0, Math.min(1, params.brightness * velBoost * genreDialect.brightness + nailBrightness));
+  const rawDecayTime = Math.max(0.05, params.decay * genreDialect.decay);
+  const muteDamping = Math.max(0.08, 1 - 0.88 * params.mute);
+  const handDamping = physics ? 1 - physics.handDamping * 0.35 : 1;
+  const sustainFactor = physics?.continuousSustain ? 1.08 : 1;
+  const decayTime = rawDecayTime * muteDamping * handDamping * sustainFactor;
+  const model = params.performanceMode === 'programmed-electronic' ? 9 : Math.round(params.model);
   // A missing gesture must follow the instrument's energy source. Falling back to
   // `pluck` made bowed voices (especially direct/offline renders) enter their
   // pizzicato path even though their authored default excitation is bowing.
@@ -90,8 +101,10 @@ export function buildVoiceContext(
       model === 5 || model === 8 || model === 11 || model === 17 || model === 18 || model === 19 ||
       model === 20 || (model >= 21 && model <= 26);
 
-  const attack = voice.attack !== undefined ? voice.attack : (isDecayingInstrument ? 0.0004 * genreDialect.attack : (0.0008 + (1 - b) * 0.01) * genreDialect.attack);
-  const release = voice.release !== undefined ? voice.release : (isMuted ? 0.012 : (isDecayingInstrument ? 0.045 * genreDialect.decay : (0.06 + decayTime * 0.15) * genreDialect.decay));
+  const attackCoupling = physics ? 0.75 + physics.attackToPitchCoupling * 0.5 : 1;
+  const releaseCoupling = physics ? 0.75 + physics.releaseCoupling * 0.5 : 1;
+  const attack = voice.attack !== undefined ? voice.attack : (isDecayingInstrument ? 0.0004 * genreDialect.attack : (0.0008 + (1 - b) * 0.01) * genreDialect.attack) * attackCoupling;
+  const release = voice.release !== undefined ? voice.release : (isMuted ? 0.012 : (isDecayingInstrument ? 0.045 * genreDialect.decay : (0.06 + decayTime * 0.15) * genreDialect.decay)) * releaseCoupling;
   const sustain = voice.sustain !== undefined ? voice.sustain : (isDecayingInstrument ? 1.0 : (isMuted ? 0.05 : 0.75 + 0.15 * params.body * genreDialect.body));
   const envDecay = voice.decay !== undefined ? voice.decay : (isDecayingInstrument ? 12.0 : (decayTime * (isMuted ? 0.1 : 0.4)));
 

@@ -14,6 +14,7 @@ import { spotlightGain } from '../band/spotlight.ts';
 import { resolveRenderGesture } from './renderGesture.ts';
 import {
   defaultTrackParams,
+  styleFlavorForGenre,
   modelForInstrument,
   makeupGainFor,
   renderTrack,
@@ -139,6 +140,8 @@ export async function renderPerformanceToMp3(
     let luthier = instDef?.luthierPhysics ?? getLuthierModelForInstrument(instrumentId);
     const model = instDef?.elementaryModel ?? modelForInstrument(instrumentId);
     const params = defaultTrackParams(instrumentId, luthier, model);
+    params.styleId = options.styleId;
+    params.styleFlavor = styleFlavorForGenre(options.worldId ?? '', options.styleId ?? '');
     params.performanceMode = performanceModeForContext(options.worldId ?? '', options.styleId ?? '');
     const dialect = resolveDialect(instrumentId, options.worldId ?? '', options.styleId ?? '');
     if (options.worldId) {

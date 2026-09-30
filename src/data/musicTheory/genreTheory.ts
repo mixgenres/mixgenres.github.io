@@ -59,6 +59,15 @@ export interface GenreTheoryProfile {
   forbidden: string[];
 }
 
+export type GenreTheoryDelta = Omit<Partial<GenreTheoryProfile>, 'bass' | 'harmony' | 'melody' | 'rhythm' | 'techniques' | 'mixFocus'> & {
+  bass?: Partial<GenreTheoryProfile['bass']>;
+  harmony?: Partial<GenreTheoryProfile['harmony']>;
+  melody?: Partial<GenreTheoryProfile['melody']>;
+  rhythm?: Partial<GenreTheoryProfile['rhythm']>;
+  techniques?: Partial<GenreTheoryProfile['techniques']>;
+  mixFocus?: Partial<GenreTheoryProfile['mixFocus']>;
+};
+
 type TheoryOverrides = Partial<Pick<GenreTheoryProfile,
   'genreId' | 'meter' | 'cycleBars' | 'harmonicModel' | 'defaultScale' |
   'chordScales' | 'progressions' | 'cadences' | 'harmonicRhythm' | 'forbidden'
@@ -128,5 +137,4 @@ export const GENRE_THEORY: Record<string, GenreTheoryProfile> = {
   'punk-hardcore': P({genreId:'punk-hardcore',meter:'4/4',cycleBars:4,harmonicModel:'power-riff',defaultScale:'mixolydian',chordScales:{major:'ionian',minor:'aeolian',dominant:'mixolydian'},progressions:[['E5','G5','A5','B5'],['A5','C5','D5','E5'],['E5','F#5','G5','E5']],cadences:[['D5','E5']],harmonicRhythm:'bar',bass:{style:'riff',targetDegrees:[1,5,3,7],chromaticApproach:true,passingProbability:.06,phraseFillProbability:.08,anticipationBeats:[4],silenceProbability:.01},harmony:{voicing:'power',guideTonePriority:false,upperStructure:false,maxLowDensity:.12},melody:{scale:['mixolydian','minor-pentatonic'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[2,4,8],contour:['riff','shout','breakdown'],callResponse:false,ornamentCap:.06},rhythm:{subdivision:16,swing:.5,accent:[1,.85,.62,.82],signature:['straight-power-chord-pulse','backbeat'],fillBars:[4],ghostShare:.02},techniques:{bass:['pick','staccato','mute','accent'],harmony:['downpick','palm-mute','staccato'],melody:['bend','slide','harmonic'],percussion:['accent','fill','crash']},mixFocus:{drums:.84,bass:.68,harmony:.62,lead:.78,comp:.32},forbidden:['laid-back swing'] }),
   'uk-bass': P({genreId:'uk-bass',meter:'4/4',cycleBars:2,harmonicModel:'modal-vamp',defaultScale:'aeolian',chordScales:{major:'ionian',minor:'dorian',dominant:'mixolydian'},progressions:[['Am7','G','F','G'],['Dm7','C','Bb','C'],['Em7','D','C','D']],cadences:[['G','Am7']],harmonicRhythm:'phrase',bass:{style:'sub',targetDegrees:[1,5,7,3],chromaticApproach:true,passingProbability:.1,phraseFillProbability:.18,anticipationBeats:[2.5,4],silenceProbability:.06},harmony:{voicing:'close',guideTonePriority:false,upperStructure:true,maxLowDensity:.14},melody:{scale:['aeolian','dorian','minor-pentatonic'],targetDegrees:[1,3,5,7],approachDegrees:[2,4,6],phraseBars:[2,4],contour:['2-step','grime-hook','drop'],callResponse:false,ornamentCap:.08},rhythm:{subdivision:16,swing:.5,accent:[1,.45,.82,.45],signature:['bass-forward-broken-club-groove'],fillBars:[2],ghostShare:.07},techniques:{bass:['sub','glissando','mute','staccato'],harmony:['staccato','chop'],melody:['portamento','slide','glissando'],percussion:['ghost','accent','rim']},mixFocus:{bass:.92,drums:.75,lead:.6,harmony:.18,pad:.3},forbidden:['rock backbeat as default'] }),
 };
-
 

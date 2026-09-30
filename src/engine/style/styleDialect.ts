@@ -31,16 +31,9 @@ export function applyStyleDialect(style: SongStyle, _index?: number): SongStyle 
     ...base.contours,
     ...(base.arrangement ?? []),
   ].filter(Boolean).slice(0, 14);
-  style.form = {
-    ...(style.form ?? {}),
-    sectionVocab: base.form,
-    templates: [{w:1, value: base.form.map((label, i) => ({
-      key: `${label.toLowerCase().replace(/[^a-z0-9]+/g,'-')}-${i}`,
-      label, kind: label, bars: label === 'intro' || label === 'outro' || label === 'coda' || label === 'cierre' ? 4 : 8,
-      intensity: i === base.form.length - 1 ? 'low' : i >= base.form.length - 2 ? 'high' : 'medium'
-    }))}],
-    preferredMeters: [rhythm.meter ?? '4/4'],
-  };
+  // Form templates are authored per style in STYLE_FORM_TEMPLATES and are not
+  // overwritten by a broad sonic profile.
+  style.form = { ...(style.form ?? {}), preferredMeters: [rhythm.meter ?? '4/4'] };
   style.harmony = {
     ...(style.harmony ?? {}),
     model: theory.harmonicModel ?? base.harmonyModel ?? style.harmony?.model ?? 'functional',

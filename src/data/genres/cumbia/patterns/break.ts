@@ -4,7 +4,7 @@ export const CUMBIA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
   {
           "id": "cu-14-cumbia-stop-break",
           "worldId": "cumbia",
-          "styleIds": ["cumbia-electric"],
+          "styleIds": ["cumbia-colombiana", "cumbia-sonora", "cumbia-porro"],
           "name": "Cumbia Stop Break",
           "family": "Break",
           "category": "break",

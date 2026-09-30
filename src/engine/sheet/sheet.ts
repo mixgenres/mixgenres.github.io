@@ -291,6 +291,9 @@ export function patternStyleFit(
   const daring = Math.max(0, Math.min(1, adventure));
 
   let penalty = 0;
+  const styleDanceTags = new Set(resolved.danceTags ?? []);
+  const matchingDanceTag = (pattern.danceTags ?? []).some(tag => styleDanceTags.has(tag));
+  if (matchingDanceTag) penalty += 14;
   if (stylePatternIds.avoid?.includes(pattern.id)) penalty -= 80;
   if (pattern.tags?.some(tag => resolved.rules?.forbid?.some(r => r.tag === tag || r.tag === `tag:${tag}`))) {
     penalty -= 80;
@@ -366,6 +369,10 @@ export function affinity(
 
   // Pattern weight is a tie-breaker among otherwise compatible cells.
   if (typeof p.weight === 'number') score += (p.weight - 0.5) * 10;
+  if (typeof p.difficulty === 'number') score += (daring - p.difficulty) * 12;
+  if (typeof p.syncopationRating === 'number') score += (p.syncopationRating - 0.5) * (daring * 8);
+  if (p.transitionType && /section|cadence|break/i.test(`${p.category} ${p.family}`)) score += 3;
+  if (p.scopes?.includes('region') && /section|cadence|break/i.test(`${p.category} ${p.family}`)) score += 2;
   if (kinds.has('coro') && p.roles.includes('voice')) score += 8;
   if (kinds.has('drums') && p.roles.includes('drums')) score += 8;
   return score;
@@ -1888,9 +1895,10 @@ export function makeSheet(
   const runtime = new StyleRuntime(resolved);
 
   const formTemplates = runtime.getFormTemplate(42);
-  const form = formTemplates && formTemplates.length > 0
-    ? formTemplates
-    : [{ key: 'verse', label: 'Verse', kind: 'verse', bars: 8, intensity: 'medium' as const }];
+  if (!formTemplates.length) {
+    throw new Error(`Style ${resolved.id} has no usable form template; refusing to create a one-section fallback song.`);
+  }
+  const form = formTemplates;
   const styleChordCells = (resolved.harmony?.progressionTemplates ?? []).map(x => x.value as string[]);
   const paletteChordCells = suggestedPaletteForGenre(genreId).map(cell => cell.chords as string[]);
   const chordCells = styleChordCells.length ? styleChordCells : paletteChordCells;

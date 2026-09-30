@@ -1,5 +1,6 @@
 import { GENRE_ID_ALIASES } from '../../data/performance/genreAliases';
 import { KIT_COMPONENT_MIDI_ALIASES } from '../../data/instruments/kitComponentAliases';
+import { matchesGestureConcept } from '../../data/performance/gestureLexicon';
 import { KIT_HIT_INTENT_FALLBACK, KIT_HIT_INTENT_RULES, KIT_HIT_OPEN_PATTERN } from '../../data/performance/kitHitRules';
 import { PATTERN_GESTURE_HINT_RULES } from '../../data/performance/patternGestureRules';
 import type { GuestLens, Measure, Region, MusicalPattern, Role } from '../../types';
@@ -100,14 +101,14 @@ export { velocityForEnergy } from './velocity.ts';
 
 function hitFrom(pattern: MusicalPattern, i: number, rawHit?: string): HitFunction {
   const raw = String(rawHit ?? pattern.hitGrid?.[i] ?? '').toLowerCase();
-  if (/kick|downbeat|bombo|bass-drum|grave/.test(raw)) return 'downbeat';
-  if (/ghost|heel|toe|tap|tip|brush/.test(raw)) return 'ghost';
-  if (/slap|quinto|strappata|golpe/.test(raw)) return 'slap';
-  if (/mute|tapao|dead|chapa/.test(raw)) return 'muffled';
-  if (/open|tumba|tone|tono/.test(raw)) return 'open';
-  if (/rim|edge|cascara|campana|bell/.test(raw)) return 'edge';
-  if (/fill|roll|tremolo/.test(raw)) return 'fill';
-  if (/bell|punct|hit|chique|accent/.test(raw)) return 'punctuation';
+  if (matchesGestureConcept(raw, 'downbeat')) return 'downbeat';
+  if (matchesGestureConcept(raw, 'ghost')) return 'ghost';
+  if (matchesGestureConcept(raw, 'slap')) return 'slap';
+  if (matchesGestureConcept(raw, 'muffled')) return 'muffled';
+  if (matchesGestureConcept(raw, 'open')) return 'open';
+  if (matchesGestureConcept(raw, 'edge')) return 'edge';
+  if (matchesGestureConcept(raw, 'fill')) return 'fill';
+  if (matchesGestureConcept(raw, 'punctuation')) return 'punctuation';
   const a = Number(pattern.accentProfile?.[i] ?? 0.7);
   if (a >= 0.92) return 'downbeat';
   if (a <= 0.42) return 'ghost';
