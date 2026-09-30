@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Urbana",
         "origin": "Bronx, New York / Dominican Republic",
         "era": "1999–Present",
-        "description": "Smooth • 4/4 • Guitar-driven\nPop and",
+        "description": "Smooth, guitar-driven 4/4 pop with bachata rhythm.",
         "characteristicInstruments": [
           "acoustic-guitar",
           "bass",

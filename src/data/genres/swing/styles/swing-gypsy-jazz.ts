@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Gypsy Jazz (Manouche)",
         "origin": "Paris, France",
         "era": "1930s–1950s",
-        "description": "La Pompe • Selmer Guitars •",
+        "description": "La pompe rhythm guitar played on Selmer-style guitars.",
         "characteristicInstruments": [
           "acoustic-guitar",
           "violin",

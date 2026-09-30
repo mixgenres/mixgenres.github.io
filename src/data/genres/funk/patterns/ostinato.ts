@@ -112,7 +112,7 @@ export const FUNK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "\"The One\" 16th-Note Syncopated Bass — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -177,7 +177,7 @@ export const FUNK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Chicken-Scratch 9th Chords (Muted 16th Strum)",
           "family": "Funk Guitar",
           "category": "ostinato",
-          "description": "Rapid 16th-note muted rhythmic scratches with",
+          "description": "Rapid 16th-note muted rhythmic scratches add a crisp, percussive guitar layer.",
           "tags": [
             "guitar",
             "funk",
@@ -297,7 +297,7 @@ export const FUNK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Chicken-Scratch 9th Chords (Muted 16th Strum) — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,
@@ -394,7 +394,7 @@ export const FUNK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Pocket Anchor",
           "family": "Pocket",
           "category": "ostinato",
-          "description": "A repeating anchor that locks the",
+          "description": "A repeating anchor that locks the bass line to the harmonic cycle.",
           "tags": [
             "funk",
             "pocket",
@@ -475,7 +475,7 @@ export const FUNK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Pocket Anchor — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 5,
@@ -511,7 +511,7 @@ export const FUNK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Pocket Anchor — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 2,

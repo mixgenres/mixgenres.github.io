@@ -80,7 +80,7 @@ export const CUMBIA_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
               "name": "Keyboard Hook — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 0,
                 6,
@@ -98,7 +98,7 @@ export const CUMBIA_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
               "name": "Keyboard Hook — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -136,7 +136,7 @@ export const CUMBIA_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "name": "Cumbia Organ Hook",
           "family": "Electric Cumbia",
           "category": "rolePattern",
-          "description": "Short organ riff repeating over the",
+          "description": "A short organ riff repeats over the chord cycle.",
           "tags": [
             "organ",
             "hook"

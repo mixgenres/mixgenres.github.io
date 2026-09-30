@@ -57,7 +57,7 @@ export const SWING_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
               "name": "2-Feel Bass — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 0,
                 2
@@ -81,7 +81,7 @@ export const SWING_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
               "name": "2-Feel Bass — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 0,
                 2

@@ -210,7 +210,7 @@ export const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Marcato en 2 (Troilo / Di Sarli)",
           "family": "Marcato Accompaniment",
           "category": "ostinato",
-          "description": "Heavier two-beat pulse on 1 and",
+          "description": "A heavier two-beat pulse emphasizes beats 1 and 3.",
           "tags": [
             "pulse",
             "tango",
@@ -293,7 +293,7 @@ export const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Marcato en 2 (Troilo / Di Sarli) — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 0,
                 8
@@ -473,7 +473,7 @@ export const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Arrastre Anchor",
           "family": "Arrastre",
           "category": "ostinato",
-          "description": "A repeating anchor that locks the",
+          "description": "A repeating anchor that locks the bass line to the harmonic cycle.",
           "tags": [
             "tango",
             "arrastre",
@@ -553,7 +553,7 @@ export const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Arrastre Anchor — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 5,
@@ -589,7 +589,7 @@ export const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Arrastre Anchor — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 2,

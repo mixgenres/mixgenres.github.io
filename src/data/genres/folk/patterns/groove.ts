@@ -57,7 +57,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Waltz Strum — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4
@@ -81,7 +81,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Waltz Strum — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -186,7 +186,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Waltz Fingerpick — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 2,
@@ -218,7 +218,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Waltz Fingerpick — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,
@@ -335,7 +335,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "6/8 Arpeggio — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 2,
@@ -367,7 +367,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "6/8 Arpeggio — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,
@@ -477,7 +477,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Fast Bluegrass Drive — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 2,
@@ -505,7 +505,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Fast Bluegrass Drive — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,
@@ -619,7 +619,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Driving 8ths — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 2,
@@ -655,7 +655,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Driving 8ths — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,
@@ -721,7 +721,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Fingerpick Comping",
           "family": "Fingerpick",
           "category": "groove",
-          "description": "A genre-shaped accompaniment cell that supports",
+          "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "folk",
             "fingerpick",
@@ -786,7 +786,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Fingerpick Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4
@@ -810,7 +810,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Fingerpick Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -854,7 +854,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Banjo Roll Verse Variation",
           "family": "Banjo Roll",
           "category": "groove",
-          "description": "A restrained verse variation with intentional",
+          "description": "A restrained verse variation uses intentional space to keep the arrangement uncluttered.",
           "tags": [
             "folk",
             "banjo-roll",
@@ -941,7 +941,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Banjo Roll Verse Variation — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 5,
@@ -977,7 +977,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Banjo Roll Verse Variation — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 2,

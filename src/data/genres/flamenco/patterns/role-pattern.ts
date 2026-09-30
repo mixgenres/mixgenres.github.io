@@ -8,7 +8,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "name": "Alzapúa Thumb Technique (Bass Driver)",
           "family": "Thumb Virtuosity",
           "category": "rolePattern",
-          "description": "Iconic three-stroke thumb mechanic: down-stroke on",
+          "description": "The iconic three-stroke thumb pattern begins with a downstroke on the beat.",
           "tags": [
             "alzapua",
             "thumb",
@@ -110,7 +110,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
                 0.9,
                 0.85
               ],
-              "description": "Polyrhythmic thumb grouping cutting across the"
+              "description": "A polyrhythmic thumb grouping cuts across the main compás."
             },
             {
               "id": "flam-alzapua-bass-v-02",
@@ -118,7 +118,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
               "name": "Alzapúa Thumb Technique (Bass Driver) — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -289,7 +289,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "name": "Bulería Palmas Contratiempo",
           "family": "Bulería Palmas",
           "category": "rolePattern",
-          "description": "Fast clear/contratiempo palmas that articulate the",
+          "description": "Fast, clear contratiempo palmas articulate the compás.",
           "tags": [
             "buleria",
             "palmas",
@@ -384,7 +384,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "name": "Alzapúa over 12-Beat Compás",
           "family": "Thumb Technique",
           "category": "rolePattern",
-          "description": "Thumb-driven bass/brush engine used as a",
+          "description": "A thumb-driven bass-and-brush pattern provides a light rhythmic engine.",
           "tags": [
             "buleria",
             "alzapua",

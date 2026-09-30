@@ -61,7 +61,7 @@ export const FOLK_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Carter Scratch",
               "variationType": "instrumentSpecific",
               "probability": 0.18,
-              "description": "Melody on bass notes followed by",
+              "description": "A melody built from bass notes is followed by a short phrase response.",
               "onsetGrid": [
                 0,
                 2,
@@ -91,7 +91,7 @@ export const FOLK_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Basic Strum — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,

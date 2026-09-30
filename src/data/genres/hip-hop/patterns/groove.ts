@@ -8,7 +8,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Sampled Keys Loop",
           "family": "Sample Loop",
           "category": "groove",
-          "description": "Looped melodic/harmonic sample role underneath the",
+          "description": "A looped melodic or harmonic sample provides a foundation beneath the lead.",
           "tags": [
             "hip-hop",
             "beat",
@@ -64,7 +64,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Lo-Fi Swing — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 12,
@@ -92,7 +92,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Lo-Fi Swing — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 6,
@@ -220,7 +220,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "G-Funk — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -256,7 +256,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "G-Funk — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -378,7 +378,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Drill Beat — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 11,
@@ -406,7 +406,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Drill Beat — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 7,
@@ -520,7 +520,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Old School Break — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -556,7 +556,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Old School Break — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -621,7 +621,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Bounce Beat",
           "family": "Beat",
           "category": "groove",
-          "description": "New Orleans style bounce rhythm and",
+          "description": "New Orleans-style bounce adds a rolling rhythmic feel.",
           "tags": [
             "hip-hop",
             "beat"
@@ -679,7 +679,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Bounce Beat — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -711,7 +711,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Bounce Beat — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -827,7 +827,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "West Coast — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 7,
@@ -855,7 +855,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "West Coast — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 4,
@@ -964,7 +964,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Neo-Soul Hip Hop — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 8,
@@ -992,7 +992,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Neo-Soul Hip Hop — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 5,
@@ -1096,7 +1096,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Minimal 808 — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 14
@@ -1120,7 +1120,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Minimal 808 — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 10,
@@ -1242,7 +1242,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Classic Dembow Riddim — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -1278,7 +1278,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Classic Dembow Riddim — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,

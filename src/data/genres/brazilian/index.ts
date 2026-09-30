@@ -66,7 +66,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "name": "Bossa Nova",
       "origin": "Rio de Janeiro (Ipanema / Copacabana)",
       "era": "Late 1950s–1960s",
-      "description": "Nylon Guitar • Whispering Vocals •",
+      "description": "Nylon-string guitar and intimate vocals.",
       "characteristicInstruments": [
         "acoustic-guitar",
         "piano",
@@ -304,7 +304,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "name": "Samba-Reggae",
       "origin": "Salvador da Bahia (Pelourinho / Olodum)",
       "era": "1980s–Present",
-      "description": "Afro-Bahian Drums • Slow Swing •",
+      "description": "Afro-Bahian percussion and a relaxed, swinging groove.",
       "characteristicInstruments": [
         "surdo",
         "timbales",
@@ -454,7 +454,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
           "name": "Surdo Two-Beat Foundation — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             0,
             6
@@ -470,7 +470,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
           "name": "Surdo Two-Beat Foundation — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             0,
             4,
@@ -504,7 +504,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "name": "Pandeiro Syncopation",
       "family": "Samba Hand Percussion",
       "category": "groove",
-      "description": "Thumb/finger-like alternating attacks translated to a",
+      "description": "Alternating thumb and finger attacks create a syncopated accompaniment pattern.",
       "tags": [
         "pandeiro",
         "samba",
@@ -582,7 +582,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
           "name": "Pandeiro Syncopation — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             0,
             3,
@@ -600,7 +600,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
           "name": "Pandeiro Syncopation — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             0,
             2,
@@ -710,7 +710,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
           "name": "Cavaquinho Comp — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             1,
             5
@@ -726,7 +726,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
           "name": "Cavaquinho Comp — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             1,
             3,
@@ -846,7 +846,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
           "name": "Bossa Nova Guitar Cell — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             0,
             5,
@@ -866,7 +866,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
           "name": "Bossa Nova Guitar Cell — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             0,
             2,
@@ -910,7 +910,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "name": "Bossa bass anchor / anticipation",
       "family": "Bossa Bass",
       "category": "ostinato",
-      "description": "Root/approach bass contour that supports the",
+      "description": "A root-and-approach bass contour supports the harmonic changes.",
       "tags": [
         "bossa",
         "bass",
@@ -988,7 +988,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
           "name": "Bossa Nova Bass — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             0,
             6,
@@ -1006,7 +1006,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
           "name": "Bossa Nova Bass — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             0,
             3,
@@ -1576,7 +1576,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "name": "Samba Call Response",
       "family": "Samba",
       "category": "interactionPattern",
-      "description": "Percussion group answers a vocal or",
+      "description": "The percussion group answers the vocal or lead phrase.",
       "tags": [
         "call-response"
       ],
@@ -1651,7 +1651,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "family": "Samba",
       "category": "break",
       "transitionType": "fill",
-      "description": "Brief reduction to surdo and a",
+      "description": "A brief reduction to surdo and one supporting percussion part creates space.",
       "tags": [
         "batucada",
         "break"
@@ -1724,7 +1724,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "family": "Bossa Nova",
       "category": "cadence",
       "transitionType": "fill",
-      "description": "Short harmonic cadence figure for a",
+      "description": "A short harmonic cadence figure marks the end of a phrase.",
       "tags": [
         "extended harmony",
         "release"

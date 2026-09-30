@@ -8,7 +8,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           "name": "Skank Guitar",
           "family": "Roots Reggae",
           "category": "cell",
-          "description": "Short clipped guitar chord on the",
+          "description": "Short, clipped guitar chords mark the offbeats.",
           "tags": [
             "skank"
           ],

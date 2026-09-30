@@ -5,5 +5,5 @@ export const REGGAE_DUB_WORLD_WORLD: Partial<GenreWorld> = {
   "family": "Jamaican / sound-system",
   "color": "#4f8f6f",
   "level": "world",
-  "description": "Reggae and dub are represented as"
+  "description": "Reggae and dub pair offbeat Jamaican grooves with deep bass and spacious production."
 };

@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Punk Rock",
         "origin": "New York / London",
         "era": "Mid 1970s",
-        "description": "Fast Downstrokes • 3 Chords •",
+        "description": "Fast downstrokes and three-chord punk progressions.",
         "characteristicInstruments": [
           "electric-guitar",
           "bass",

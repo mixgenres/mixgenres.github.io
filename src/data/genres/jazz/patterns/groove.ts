@@ -60,7 +60,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Broken Ride — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -88,7 +88,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Broken Ride — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -192,7 +192,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Pedal Point — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -220,7 +220,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Pedal Point — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -318,7 +318,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Syncopated Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 7
@@ -342,7 +342,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Syncopated Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 4,
@@ -434,7 +434,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Snare Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 10
@@ -458,7 +458,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Snare Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 7,
@@ -559,7 +559,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Jazz Waltz Ride — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 3,
@@ -591,7 +591,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Jazz Waltz Ride — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -646,10 +646,10 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "id": "jazz-comp-16",
           "worldId": "jazz",
           "styleIds": ["jazz-swing-bebop"],
-          "name": "Comping Comping",
+          "name": "Piano Comping Cell",
           "family": "Comping",
           "category": "groove",
-          "description": "A genre-shaped accompaniment cell that supports",
+          "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "jazz",
             "comping",
@@ -717,10 +717,10 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "jazz-comp-16-v-01",
               "parentPatternId": "jazz-comp-16",
-              "name": "Comping Comping — sparse variation",
+              "name": "Piano Comping Cell — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 5,
                 10,
@@ -745,10 +745,10 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "jazz-comp-16-v-02",
               "parentPatternId": "jazz-comp-16",
-              "name": "Comping Comping — accent shift",
+              "name": "Piano Comping Cell — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 5,
                 8,

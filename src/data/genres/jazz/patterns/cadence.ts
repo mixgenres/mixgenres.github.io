@@ -54,7 +54,7 @@ export const JAZZ_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
               "name": "Hi-Hat 2 & 4 — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 1,
                 3
@@ -78,7 +78,7 @@ export const JAZZ_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
               "name": "Hi-Hat 2 & 4 — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 1,
                 3

@@ -9,7 +9,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           "family": "Arrangement",
           "category": "break",
           "transitionType": "fill",
-          "description": "Remove kick and bass for a",
+          "description": "Removes kick and bass for a brief breakdown.",
           "tags": [
             "breakdown",
             "tension"

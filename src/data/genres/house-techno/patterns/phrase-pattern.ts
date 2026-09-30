@@ -88,7 +88,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
               "name": "Acid 16-Step Sequence — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 0,
                 5,
@@ -108,7 +108,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
               "name": "Acid 16-Step Sequence — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 0,
                 3,

@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Dancehall",
         "origin": "Kingston, Jamaica",
         "era": "1980s–Present",
-        "description": "Digital Riddim • Deejay Toasting •",
+        "description": "Digital riddims and deejay toasting.",
         "characteristicInstruments": [
           "sampler",
           "drums",

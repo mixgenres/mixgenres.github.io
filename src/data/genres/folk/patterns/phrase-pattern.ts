@@ -102,7 +102,7 @@ export const FOLK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
               "name": "Travis Picking — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 4,

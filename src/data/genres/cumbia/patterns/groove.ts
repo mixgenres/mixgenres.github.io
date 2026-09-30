@@ -8,7 +8,7 @@ export const CUMBIA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Tambora / alegre conversation",
           "family": "Cumbia Drums",
           "category": "groove",
-          "description": "Abstracted low/high hand-drum conversation for a",
+          "description": "A low-and-high hand-drum conversation creates a layered cumbia pulse.",
           "tags": [
             "cumbia",
             "tambora",
@@ -82,7 +82,7 @@ export const CUMBIA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Tambora / Alegre Interlock — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 0,
                 6,
@@ -100,7 +100,7 @@ export const CUMBIA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Tambora / Alegre Interlock — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 0,
                 3,

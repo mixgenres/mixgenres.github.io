@@ -74,7 +74,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Surdo Two-Beat Foundation — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 0,
                 6
@@ -90,7 +90,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Surdo Two-Beat Foundation — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 0,
                 4,
@@ -124,7 +124,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Pandeiro Syncopation",
           "family": "Samba Hand Percussion",
           "category": "groove",
-          "description": "Thumb/finger-like alternating attacks translated to a",
+          "description": "Alternating thumb and finger attacks create a syncopated accompaniment pattern.",
           "tags": [
             "pandeiro",
             "samba",
@@ -200,7 +200,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Pandeiro Syncopation — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 0,
                 3,
@@ -218,7 +218,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Pandeiro Syncopation — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -340,7 +340,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Bossa Nova Guitar Cell — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 0,
                 5,
@@ -360,7 +360,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Bossa Nova Guitar Cell — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 0,
                 2,

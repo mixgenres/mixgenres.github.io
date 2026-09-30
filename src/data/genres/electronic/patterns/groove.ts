@@ -8,7 +8,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Trance Bass 16ths",
           "family": "Bass",
           "category": "groove",
-          "description": "Driving 16th note arpeggiated bass with",
+          "description": "Driving 16th-note arpeggiated bass adds motion beneath the breakbeat.",
           "tags": [
             "electronic",
             "trance"
@@ -98,7 +98,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Trance Bass 16ths — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 2,
@@ -158,7 +158,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Trance Bass 16ths — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,
@@ -306,7 +306,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Dubstep Half-Time — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 0,
                 8
@@ -330,7 +330,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Dubstep Half-Time — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 0,
                 8
@@ -434,7 +434,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "DnB Break — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 7,
@@ -466,7 +466,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "DnB Break — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 4,
@@ -593,7 +593,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Chicago Footwork / Juke — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -629,7 +629,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Chicago Footwork / Juke — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -757,7 +757,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "UK Garage Swung — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 7,
@@ -789,7 +789,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "UK Garage Swung — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 4,
@@ -909,7 +909,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Electro 808 — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 7,
@@ -941,7 +941,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Electro 808 — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 4,
@@ -1050,7 +1050,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Ambient Pulse — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 0,
                 2
@@ -1074,7 +1074,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Ambient Pulse — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 0,
                 2
@@ -1185,7 +1185,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Synthwave 8ths — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 2,
@@ -1221,7 +1221,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Synthwave 8ths — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,
@@ -1290,7 +1290,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Drop Comping",
           "family": "Drop",
           "category": "groove",
-          "description": "A genre-shaped accompaniment cell that supports",
+          "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "electronic",
             "drop",
@@ -1370,7 +1370,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Drop Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -1406,7 +1406,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Drop Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,

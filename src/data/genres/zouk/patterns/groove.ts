@@ -8,7 +8,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Ti-Bwa Woodblock Ostinato",
           "family": "Percussion",
           "category": "groove",
-          "description": "Traditional Martinique/Guadeloupe ti-bwa stick pattern on",
+          "description": "Traditional Martinique and Guadeloupe ti-bwa stick patterns mark the pulse.",
           "tags": [
             "zouk",
             "ti-bwa",
@@ -73,7 +73,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Ti-Bwa Woodblock Ostinato — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -109,7 +109,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Ti-Bwa Woodblock Ostinato — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -231,7 +231,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Zouk DX7 Synth Stabs — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 3,
                 10,
@@ -259,7 +259,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Zouk DX7 Synth Stabs — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 3,
                 6,
@@ -360,7 +360,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Zouk Snare Rimshot — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 4,
                 12
@@ -384,7 +384,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Zouk Snare Rimshot — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 4,
                 12
@@ -488,7 +488,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Kassav Horn Section Stabs — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 3,
                 11,
@@ -516,7 +516,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Kassav Horn Section Stabs — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 3,
                 6,
@@ -568,7 +568,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Zouk Love Comping",
           "family": "Zouk Love",
           "category": "groove",
-          "description": "A genre-shaped accompaniment cell that supports",
+          "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "zouk",
             "zouk-love",
@@ -647,7 +647,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Zouk Love Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 8,
@@ -679,7 +679,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Zouk Love Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 5,
@@ -735,7 +735,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Hook Verse Variation",
           "family": "Hook",
           "category": "groove",
-          "description": "A restrained verse variation with intentional",
+          "description": "A restrained verse variation uses intentional space to keep the arrangement uncluttered.",
           "tags": [
             "zouk",
             "hook",
@@ -822,7 +822,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Hook Verse Variation — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 3,
@@ -858,7 +858,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Hook Verse Variation — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,

@@ -8,7 +8,7 @@ export const HIP_HOP_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "name": "Rap Cadence & Hook",
           "family": "Vocal Phrasing",
           "category": "phrasePattern",
-          "description": "Rap cadence and hook placement with",
+          "description": "Rap cadence and hook placement shape the vocal phrase.",
           "tags": [
             "hip-hop",
             "synth",

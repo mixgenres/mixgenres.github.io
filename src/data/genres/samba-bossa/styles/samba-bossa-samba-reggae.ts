@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Samba-Reggae",
         "origin": "Salvador da Bahia (Pelourinho / Olodum)",
         "era": "1980s–Present",
-        "description": "Afro-Bahian Drums • Slow Swing •",
+        "description": "Afro-Bahian percussion and a relaxed, swinging groove.",
         "characteristicInstruments": [
           "surdo",
           "timbales",

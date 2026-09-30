@@ -9,7 +9,7 @@ export const ELECTRONIC_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           "family": "Beat",
           "category": "cadence",
           "transitionType": "fill",
-          "description": "Driving 16th note bass/kick interaction and",
+          "description": "Driving 16th-note bass and kick interaction creates a tightly interlocked low-end groove.",
           "tags": [
             "electronic",
             "techno"
@@ -89,7 +89,7 @@ export const ELECTRONIC_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
               "name": "Techno Rumble — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 3,
@@ -137,7 +137,7 @@ export const ELECTRONIC_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
               "name": "Techno Rumble — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,

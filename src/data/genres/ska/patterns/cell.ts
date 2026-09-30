@@ -80,7 +80,7 @@ export const SKA_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           "name": "Piano bubble response",
           "family": "First-Wave Ska",
           "category": "cell",
-          "description": "Offbeat piano bubble used as a",
+          "description": "An offbeat piano bubble provides a light harmonic pulse.",
           "tags": [
             "piano bubble"
           ],
@@ -151,7 +151,7 @@ export const SKA_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           "name": "Horn offbeat punctuations",
           "family": "Horn Section",
           "category": "cell",
-          "description": "Short horn punctuation displaced from the",
+          "description": "Short horn punctuation answers just after the main beat.",
           "tags": [
             "horn stab"
           ],

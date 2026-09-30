@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Neotraditional",
         "origin": "Nashville / Texas",
         "era": "1980s–Present",
-        "description": "Fiddle & Steel • 4/4 •",
+        "description": "Fiddle and steel guitar in a 4/4 country groove.",
         "characteristicInstruments": [
           "steel-guitar",
           "fiddle",

@@ -8,7 +8,7 @@ export const COUNTRY_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Chicken Pickin Anchor",
           "family": "Chicken Pickin",
           "category": "ostinato",
-          "description": "A repeating anchor that locks the",
+          "description": "A repeating anchor that locks the bass line to the harmonic cycle.",
           "tags": [
             "country",
             "chicken-pickin",
@@ -89,7 +89,7 @@ export const COUNTRY_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Chicken Pickin Anchor — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 4,
@@ -125,7 +125,7 @@ export const COUNTRY_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Chicken Pickin Anchor — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 2,

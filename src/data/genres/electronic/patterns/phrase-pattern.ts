@@ -8,7 +8,7 @@ export const ELECTRONIC_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "name": "Pluck Phrase",
           "family": "Pluck",
           "category": "phrasePattern",
-          "description": "A phrase-level rhythmic template that leaves",
+          "description": "A phrase-level rhythmic template that leaves space for the lead while shaping the phrase arc.",
           "tags": [
             "electronic",
             "pluck",
@@ -88,7 +88,7 @@ export const ELECTRONIC_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
               "name": "Pluck Phrase — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 5,
@@ -124,7 +124,7 @@ export const ELECTRONIC_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
               "name": "Pluck Phrase — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,

@@ -8,7 +8,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Offbeat Hat",
           "family": "House Hats",
           "category": "ostinato",
-          "description": "Open or closed hat on the",
+          "description": "Open or closed hi-hat marks the subdivision.",
           "tags": [
             "house",
             "hat",
@@ -77,7 +77,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Offbeat Hat — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 2,
                 10
@@ -93,7 +93,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Offbeat Hat — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 2,
                 6,
@@ -204,7 +204,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "House Syncopated Bass — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 0,
                 6,
@@ -222,7 +222,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "House Syncopated Bass — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -342,7 +342,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Detroit 16th Sequence — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 0,
                 3,
@@ -362,7 +362,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Detroit 16th Sequence — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 0,
                 2,

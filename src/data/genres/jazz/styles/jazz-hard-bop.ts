@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Hard Bop",
         "origin": "New York / Philadelphia / Detroit",
         "era": "1950s–1960s",
-        "description": "Soulful • Blues-infused • Driving\nGospel and",
+        "description": "Soulful, blues-inflected hard bop with driving gospel influence.",
         "characteristicInstruments": [
           "tenor-sax",
           "trumpet",

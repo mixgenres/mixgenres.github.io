@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Zouk Béton",
         "origin": "Guadeloupe & Martinique",
         "era": "1980s",
-        "description": "Carnival Horns • Fast 4/4 •",
+        "description": "Carnival horns over a fast 4/4 groove.",
         "characteristicInstruments": [
           "brass",
           "drums",

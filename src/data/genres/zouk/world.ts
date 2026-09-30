@@ -5,5 +5,5 @@ export const ZOUK_WORLD_WORLD: Partial<GenreWorld> = {
   "family": "French Caribbean / Antillean",
   "color": "#55a6a1",
   "level": "world",
-  "description": "The revolutionary sound of Guadeloupe and"
+  "description": "Zouk emerged in Guadeloupe and Martinique, combining Caribbean rhythms with modern band arrangements."
 };

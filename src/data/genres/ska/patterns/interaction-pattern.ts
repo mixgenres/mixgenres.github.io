@@ -83,7 +83,7 @@ export const SKA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
               "name": "Horn Section Answer — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 16,
                 22,
@@ -101,7 +101,7 @@ export const SKA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
               "name": "Horn Section Answer — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 16,
                 20,

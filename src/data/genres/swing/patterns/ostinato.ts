@@ -8,7 +8,7 @@ export const SWING_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Shout Anchor",
           "family": "Shout",
           "category": "ostinato",
-          "description": "A repeating anchor that locks the",
+          "description": "A repeating anchor that locks the bass line to the harmonic cycle.",
           "tags": [
             "swing",
             "shout",
@@ -86,7 +86,7 @@ export const SWING_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Shout Anchor — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 6,
@@ -122,7 +122,7 @@ export const SWING_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Shout Anchor — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 5,

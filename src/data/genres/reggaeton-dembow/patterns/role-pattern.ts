@@ -74,7 +74,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
               "name": "Percussive Ghost Layer — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 2,
                 6,
@@ -92,7 +92,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
               "name": "Percussive Ghost Layer — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 2,
                 4,
@@ -131,7 +131,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "name": "Reggaeton Sub Answer",
           "family": "Bass",
           "category": "rolePattern",
-          "description": "Short sub-bass answer lands around the",
+          "description": "A short sub-bass answer lands around the kick pattern.",
           "tags": [
             "sub-bass",
             "syncopation"

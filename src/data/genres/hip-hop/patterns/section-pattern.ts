@@ -8,7 +8,7 @@ export const HIP_HOP_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           "name": "Boom Bap Basic",
           "family": "Beat",
           "category": "sectionPattern",
-          "description": "Classic 90s boom bap beat with",
+          "description": "A classic 1990s boom-bap beat pairs a firm kick with a swung snare.",
           "tags": [
             "hip-hop",
             "beat"
@@ -64,7 +64,7 @@ export const HIP_HOP_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Boom Bap Basic — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 8,
@@ -92,7 +92,7 @@ export const HIP_HOP_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Boom Bap Basic — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 4,

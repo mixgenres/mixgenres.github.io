@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Hard Rock",
         "origin": "London / Los Angeles",
         "era": "Late 1960s–1980s",
-        "description": "Heavy Riffs • Marshall Stacks •",
+        "description": "Heavy riffs and Marshall-style stacks.",
         "characteristicInstruments": [
           "electric-guitar",
           "bass",

@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Mambo",
         "origin": "Havana / New York",
         "era": "1940s–1950s",
-        "description": "Big Band • Clave 2-3 •",
+        "description": "Big-band arrangement with a 2-3 clave.",
         "characteristicInstruments": [
           "brass",
           "timbales",

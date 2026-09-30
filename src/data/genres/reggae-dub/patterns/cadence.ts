@@ -9,7 +9,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           "family": "Dub",
           "category": "cadence",
           "transitionType": "fill",
-          "description": "A short bass-and-drum tag announces a",
+          "description": "A short bass-and-drum tag announces the transition into the next section.",
           "tags": [
             "version",
             "tag"

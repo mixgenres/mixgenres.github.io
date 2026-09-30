@@ -337,6 +337,10 @@ export class BandWorkletNode {
         }
         const role = instDef?.acousticProfile?.role || 'comp';
         params.roleGain = getRoleGainLinear(role, this.activeWorldId || 'default', instrumentId);
+        params.volume *= params.roleGain;
+        // Preserve live mixer controls when static track parameters are rebuilt.
+        if (this.trackVolumes.has(trackId)) params.volume = this.trackVolumes.get(trackId)!;
+        if (this.trackPans.has(trackId)) params.pan = this.trackPans.get(trackId)!;
         this.trackParamsMap.set(trackId, params);
 
         const voiceCount = getPolyphonyForTrack(instrumentId);
@@ -366,7 +370,29 @@ export class BandWorkletNode {
    * Completely ignores voice states (gate, note, velocity, frequency).
    */
   private computeTrackFingerprint(trackId: string, params: TrackParams): string {
-    return `${trackId}:${params.instrumentId}:${params.model}:${params.dialect || ''}:${params.performanceMode || ''}:${(params.brightness * 100).toFixed(0)}:${(params.decay * 10).toFixed(0)}:${(params.drive * 100).toFixed(0)}:${(params.body * 100).toFixed(0)}:${(params.tension * 100).toFixed(0)}`;
+    // Every field used to build the static Elementary graph must participate.
+    // World/style values affect treatment even when the resolved dialect happens
+    // to remain the same, so hashing only broad macros can reuse stale audio.
+    return JSON.stringify([
+      trackId,
+      params.instrumentId,
+      params.model,
+      params.genreId ?? '',
+      params.styleId ?? '',
+      params.styleFlavor,
+      params.dialect ?? '',
+      params.performanceMode ?? '',
+      params.brightness,
+      params.decay,
+      params.drive,
+      params.body,
+      params.tension,
+      params.excitationType,
+      params.courses,
+      params.bodyConstruction,
+      params.sympatheticStrings,
+      params.bendGlideMs,
+    ]);
   }
 
   private syncGraph() {
@@ -464,19 +490,23 @@ export class BandWorkletNode {
   private executeNoteOn(event: CulturalAcousticEvent) {
     const trackId = event.trackId;
     const instrumentId = event.luthierObjectId || trackId;
-    const instDef = INSTRUMENTS_BY_ID[instrumentId];
-    const luthier = (event.luthier ?? instDef?.luthierPhysics ?? {
-      category: 'electro_acoustic_algorithmic',
-      materialDensity: 0.5,
-      tension: 0.5,
-      bodyResonanceVolume: 10,
-      decayTimeFactor: 2,
-      harmonicRichness: 0.7,
-    }) as LuthierPhysicalParameters;
-    const model = modelForInstrument(instrumentId);
-
     if (!this.trackParamsMap.has(trackId)) {
+      const instDef = INSTRUMENTS_BY_ID[instrumentId];
+      const luthier = (event.luthier ?? instDef?.luthierPhysics ?? {
+        category: 'electro_acoustic_algorithmic',
+        materialDensity: 0.5,
+        tension: 0.5,
+        bodyResonanceVolume: 10,
+        decayTimeFactor: 2,
+        harmonicRichness: 0.7,
+      }) as LuthierPhysicalParameters;
+      const model = modelForInstrument(instrumentId);
       const p = defaultTrackParams(instrumentId, luthier, model);
+      const role = instDef?.acousticProfile?.role || 'comp';
+      p.roleGain = getRoleGainLinear(role, this.activeWorldId || 'default', instrumentId);
+      p.volume *= p.roleGain;
+      if (this.trackVolumes.has(trackId)) p.volume = this.trackVolumes.get(trackId)!;
+      if (this.trackPans.has(trackId)) p.pan = this.trackPans.get(trackId)!;
       if (this.activeWorldId) p.genreId = this.activeWorldId;
       if (this.activeStyleId) p.styleId = this.activeStyleId;
       p.styleFlavor = styleFlavorForGenre(this.activeWorldId, this.activeStyleId);
@@ -498,10 +528,6 @@ export class BandWorkletNode {
 
     const params = this.trackParamsMap.get(trackId)!;
     const noteMidi = event.midi ?? 60;
-    const isElectronic = ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN.test((params.instrumentId || '').toLowerCase());
-    const effectiveModelForGain = isElectronic ? 9 : params.model;
-    const baseGain = makeupGainFor(effectiveModelForGain, params.instrumentId);
-
     const rendered = resolveRenderGesture(instrumentId, event.gestureCode ?? 0);
     const hitGainMultiplier = rendered.gainMultiplier;
 
@@ -512,9 +538,7 @@ export class BandWorkletNode {
     const velScaled = Math.max(0, Math.min(1, (velRaw / 127) * hitGainMultiplier));
     const articulationNorm = Math.max(0, Math.min(1, rendered.articulationNorm));
 
-    const roleGain = event.roleGain ?? params.roleGain ?? getRoleGainLinear(instDef?.acousticProfile?.role || 'comp', this.activeWorldId || 'default', instrumentId);
-    // Keep track gain stable; note velocity/articulation are voice-local.
-    params.volume = Math.max(0.01, Math.min(35, baseGain * roleGain));
+    // Track volume is controlled by mixer/CC updates, never by note-on.
 
     let voices = this.trackVoicesMap.get(trackId);
     if (!voices) {
@@ -635,7 +659,7 @@ export class BandWorkletNode {
       const isElectronic = ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN.test((params.instrumentId || '').toLowerCase());
       const effectiveModelForGain = isElectronic ? 9 : params.model;
       const baseGain = makeupGainFor(effectiveModelForGain, params.instrumentId);
-      params.volume = Math.max(0.01, Math.min(35, norm * baseGain));
+      params.volume = Math.max(0.01, Math.min(35, norm * baseGain * (params.roleGain ?? 1)));
       this.queueParamUpdate(`track_${trackId}_vol`, params.volume);
     } else if (cc === 10) {
       params.pan = norm;

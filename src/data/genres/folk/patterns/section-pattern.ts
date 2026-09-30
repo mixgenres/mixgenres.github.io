@@ -8,7 +8,7 @@ export const FOLK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           "name": "Flatpick Intro",
           "family": "Flatpick",
           "category": "sectionPattern",
-          "description": "A reduced entrance used to establish",
+          "description": "A reduced entrance used to establish the groove before the full ensemble enters.",
           "tags": [
             "folk",
             "flatpick",
@@ -89,7 +89,7 @@ export const FOLK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Flatpick Intro — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -125,7 +125,7 @@ export const FOLK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Flatpick Intro — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,
@@ -173,7 +173,7 @@ export const FOLK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Flatpick Intro — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 0,
                 1,

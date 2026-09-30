@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Dub",
         "origin": "Kingston, Jamaica",
         "era": "1970s",
-        "description": "Space Echo • Bass Drops •",
+        "description": "Space echo and deep bass drops.",
         "characteristicInstruments": [
           "bass",
           "drums",

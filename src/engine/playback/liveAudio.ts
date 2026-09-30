@@ -20,19 +20,30 @@ let bandWorklet: BandWorkletNode | null = null;
  *  even though the transport only ever hands it a bare trackId. Populated by
  *  the UI layer (App.tsx) from the current song's tracks whenever they change. */
 const trackInstruments = new Map<string, string>();
+interface TrackRenderContext {
+  instrumentId: string;
+  luthier: ReturnType<typeof getLuthierModelForInstrument>;
+  dialect: ReturnType<typeof resolveDialect>;
+  tuningSystem: ReturnType<typeof resolveTuningSystem>;
+  roleGain: number;
+}
+const trackRenderContexts = new Map<string, TrackRenderContext>();
 let activeWorldId = '';
 let activeStyleId = '';
 
 export function setActiveWorld(worldId: string, styleId?: string) {
   activeWorldId = worldId;
   if (styleId !== undefined) activeStyleId = styleId;
+  trackRenderContexts.clear();
   if (bandWorklet) {
     bandWorklet.setWorldAndStyle(worldId, styleId);
+    void bandWorklet.prepareTracks(trackInstruments);
   }
 }
 
 export function setTrackInstruments(map: Record<string, string | undefined>) {
   trackInstruments.clear();
+  trackRenderContexts.clear();
   for (const key of Object.keys(map)) {
     const v = map[key];
     if (v) trackInstruments.set(key, v);
@@ -123,14 +134,26 @@ export function createSink(): TransportSink {
     noteOn(trackId, midi, vel, time, gestureCode, frequencyHz, bellowsDirectionCode, bandoneonButtonId, bandoneonButtonIndex, bandoneonSideCode, noteInstanceId) {
       if (!bandWorklet) return;
       const instrumentId = trackInstruments.get(String(trackId)) ?? String(trackId);
-      let luthier = getLuthierModelForInstrument(instrumentId);
       const vel01 = Math.max(0, Math.min(1, vel / 127));
-
-      const dialect = resolveDialect(instrumentId, activeWorldId, activeStyleId);
-      const tuningSystem = resolveTuningSystem(dialect?.tuningSystemId || (activeWorldId.includes('maqam') || activeWorldId.includes('middle_east') ? 'maqam-bayati' : activeWorldId.includes('blues') ? 'blues-continuum' : '12-tet'));
+      let renderContext = trackRenderContexts.get(String(trackId));
+      if (!renderContext || renderContext.instrumentId !== instrumentId) {
+        const dialect = resolveDialect(instrumentId, activeWorldId, activeStyleId);
+        const tuningSystem = resolveTuningSystem(dialect?.tuningSystemId || (activeWorldId.includes('maqam') || activeWorldId.includes('middle_east') ? 'maqam-bayati' : activeWorldId.includes('blues') ? 'blues-continuum' : '12-tet'));
+        const instDef = INSTRUMENTS_BY_ID[instrumentId];
+        const role = instDef?.acousticProfile?.role || 'comp';
+        renderContext = {
+          instrumentId,
+          luthier: getLuthierModelForInstrument(instrumentId),
+          dialect,
+          tuningSystem,
+          roleGain: getRoleGainLinear(role, activeWorldId || 'default', instrumentId),
+        };
+        trackRenderContexts.set(String(trackId), renderContext);
+      }
+      let luthier = renderContext.luthier;
+      const dialect = renderContext.dialect;
+      const tuningSystem = renderContext.tuningSystem;
       const freqHz = frequencyHz ?? tuningSystem.getFrequencyHz(midi);
-
-      const instDef = INSTRUMENTS_BY_ID[instrumentId];
       const rendered = resolveRenderGesture(instrumentId, gestureCode ?? 0);
       const action = rendered.action;
       if (rendered.categoryOverride) luthier = { ...luthier, category: rendered.categoryOverride };
@@ -142,8 +165,7 @@ export function createSink(): TransportSink {
         };
       }
 
-      const role = instDef?.acousticProfile?.role || 'comp';
-      const roleGain = getRoleGainLinear(role, activeWorldId || 'default', instrumentId);
+      const roleGain = renderContext.roleGain;
       const deterministicJitter = (((Number(gestureCode ?? 0) * 1103515245 + midi * 12345 + Math.round(time * 1000)) >>> 0) / 0xffffffff) - 0.5;
       const contactPoint = Math.max(0.05, Math.min(0.95, dialect?.contactPointOverride ?? (rendered.contactPoint - (vel01 - 0.5) * 0.18 + deterministicJitter * 0.08)));
       const mass = Math.max(0.1, Math.min(0.95, rendered.mass + vel01 * 0.42 + deterministicJitter * 0.08));
@@ -176,8 +198,8 @@ export function createSink(): TransportSink {
       // no-op for decaying/percussive voices, which just ring out.
       if (bandWorklet) bandWorklet.postRelease(String(trackId), midi, time, noteInstanceId);
     },
-    pitchBend(trackId, value, time) {
-      if (bandWorklet) bandWorklet.postBend(String(trackId), value, time);
+    pitchBend(trackId, value, time, targetMidi) {
+      if (bandWorklet) bandWorklet.postBend(String(trackId), value, targetMidi, time);
     },
     controlChange(trackId, cc, value, time) {
       if (bandWorklet) bandWorklet.postCC(String(trackId), cc, value, time);

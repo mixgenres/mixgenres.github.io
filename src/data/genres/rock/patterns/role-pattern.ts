@@ -8,7 +8,7 @@ export const ROCK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "name": "Rock  part",
           "family": "Build",
           "category": "rolePattern",
-          "description": "A default-roster coverage pattern that gives",
+          "description": "A default-roster coverage pattern gives each ensemble role a playable part.",
           "tags": [
             "rock",
             "build",
@@ -84,7 +84,7 @@ export const ROCK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
               "name": "Build Texture — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 8,
@@ -112,7 +112,7 @@ export const ROCK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
               "name": "Build Texture — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 4,

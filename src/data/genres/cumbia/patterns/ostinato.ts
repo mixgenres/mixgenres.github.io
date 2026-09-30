@@ -8,7 +8,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Cumbia bass anticipation",
           "family": "Cumbia Bass",
           "category": "ostinato",
-          "description": "Short-long bass anticipation that leaves the",
+          "description": "A short-long bass anticipation leaves the downbeat open.",
           "tags": [
             "cumbia",
             "bass",
@@ -84,7 +84,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Cumbia Bass Pulse — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 0,
                 8
@@ -100,7 +100,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Cumbia Bass Pulse — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 0,
                 4,
@@ -226,7 +226,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Guacharaca Scrape — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 0,
                 4,
@@ -246,7 +246,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Guacharaca Scrape — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -371,7 +371,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Chicha Tremolo Guitar — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 0,
                 4,
@@ -391,7 +391,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Chicha Tremolo Guitar — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 0,
                 2,

@@ -79,7 +79,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Four-on-the-Floor Foundation — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 0,
                 8
@@ -95,7 +95,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Four-on-the-Floor Foundation — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 0,
                 4,
@@ -131,7 +131,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Four-floor kick with bar accent",
           "family": "House",
           "category": "groove",
-          "description": "Stable four-on-the-floor foundation; kept as a",
+          "description": "A stable four-on-the-floor foundation supports the arrangement.",
           "tags": [
             "four-on-floor"
           ],

@@ -54,7 +54,7 @@ export const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Pizzicato Bass — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6
@@ -78,7 +78,7 @@ export const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Pizzicato Bass — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -127,7 +127,7 @@ export const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Yumba Comping",
           "family": "Yumba",
           "category": "groove",
-          "description": "A genre-shaped accompaniment cell that supports",
+          "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "tango",
             "yumba",
@@ -208,7 +208,7 @@ export const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Yumba Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -244,7 +244,7 @@ export const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Yumba Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -303,7 +303,7 @@ export const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Síncopa Verse Variation",
           "family": "Síncopa",
           "category": "groove",
-          "description": "A restrained verse variation with intentional",
+          "description": "A restrained verse variation uses intentional space to keep the arrangement uncluttered.",
           "tags": [
             "tango",
             "sincopa",
@@ -386,7 +386,7 @@ export const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Síncopa Verse Variation — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 3,
                 7,
@@ -418,7 +418,7 @@ export const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Síncopa Verse Variation — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 3,
                 6,

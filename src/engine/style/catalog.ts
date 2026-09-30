@@ -5,7 +5,7 @@ import { GENRE_WORLDS_BY_ID } from '../../data/genres';
 import { STALE_PATTERN_STYLE_ALIASES } from '../../data/styles/stalePatternStyleAliases';
 
 function shortText(value: string): string {
-  return String(value ?? '').replace(/\s+/g, ' ').trim().split(' ').slice(0, 6).join(' ');
+  return String(value ?? '').replace(/\s+/g, ' ').trim();
 }
 
 function patternCategory(p: MusicalPattern): string {

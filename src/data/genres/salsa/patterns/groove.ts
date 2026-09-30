@@ -60,7 +60,7 @@ export const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "3-2 Son Clave — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -88,7 +88,7 @@ export const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "3-2 Son Clave — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -145,7 +145,7 @@ export const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Timbal Mambo Bell",
           "family": "Bell",
           "category": "groove",
-          "description": "Timbalero mambo cowbell pattern riding the",
+          "description": "A timbalero mambo cowbell pattern rides over the clave.",
           "tags": [],
           "scopes": [
             "measure"
@@ -206,7 +206,7 @@ export const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Timbal Mambo Bell — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -242,7 +242,7 @@ export const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Timbal Mambo Bell — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -311,7 +311,7 @@ export const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Son Clave Comping",
           "family": "Son Clave",
           "category": "groove",
-          "description": "A genre-shaped accompaniment cell that supports",
+          "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "salsa",
             "son-clave",
@@ -390,7 +390,7 @@ export const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Son Clave Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -422,7 +422,7 @@ export const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Son Clave Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,

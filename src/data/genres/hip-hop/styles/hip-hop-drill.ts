@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Drill",
         "origin": "Chicago / London / Brooklyn",
         "era": "2010s–Present",
-        "description": "Sliding 808s • Syncopated Snare •",
+        "description": "Sliding 808 bass and syncopated snare.",
         "characteristicInstruments": [
           "sub-bass",
           "drums",

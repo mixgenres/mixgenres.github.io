@@ -151,7 +151,7 @@ export const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Bongo Martillo & Güira Repique",
               "variationType": "instrumentSpecific",
               "probability": 0.18,
-              "description": "Bongo alternating between low thumb and",
+              "description": "Bongo alternates low thumb tones with sharper finger strikes.",
               "onsetGrid": [
                 0,
                 2,
@@ -193,7 +193,7 @@ export const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Bachata Mambo Solo",
               "variationType": "instrumentSpecific",
               "probability": 0.18,
-              "description": "Fast virtuosic arpeggiated requinto lines for",
+              "description": "Fast, virtuosic requinto arpeggios fill the gaps between vocal phrases.",
               "onsetGrid": [
                 0,
                 2,
@@ -252,7 +252,7 @@ export const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Cumbia Syncopated Bassline",
           "family": "Cumbia Bass",
           "category": "ostinato",
-          "description": "Hypnotic syncopated cumbia bass hitting on",
+          "description": "Hypnotic, syncopated cumbia bass emphasizes the offbeats.",
           "tags": [
             "cumbia",
             "bass",
@@ -339,7 +339,7 @@ export const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Cumbia Syncopated Bassline — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 6,
@@ -393,7 +393,7 @@ export const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Mambo Anchor",
           "family": "Mambo",
           "category": "ostinato",
-          "description": "A repeating anchor that locks the",
+          "description": "A repeating anchor that locks the bass line to the harmonic cycle.",
           "tags": [
             "bachata",
             "mambo",
@@ -474,7 +474,7 @@ export const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Mambo Anchor — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -510,7 +510,7 @@ export const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Mambo Anchor — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,

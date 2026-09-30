@@ -315,7 +315,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Tangos de Triana (Binary Compás) — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 4,
                 8,
@@ -364,7 +364,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Rasgueado Anchor",
           "family": "Rasgueado",
           "category": "ostinato",
-          "description": "A repeating anchor that locks the",
+          "description": "A repeating anchor that locks the bass line to the harmonic cycle.",
           "tags": [
             "flamenco",
             "rasgueado",
@@ -444,7 +444,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Rasgueado Anchor — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 4,
@@ -480,7 +480,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Rasgueado Anchor — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 2,
@@ -839,7 +839,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Tientos Slow Binary Compás",
           "family": "Tientos Compás",
           "category": "ostinato",
-          "description": "Slower, heavier binary accompaniment related to",
+          "description": "A slower, heavier binary accompaniment draws on related folk forms.",
           "tags": [
             "tientos",
             "slow",

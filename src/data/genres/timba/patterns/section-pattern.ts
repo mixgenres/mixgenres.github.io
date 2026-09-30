@@ -110,7 +110,7 @@ export const TIMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
                 0.85,
                 0.95
               ],
-              "description": "Drop to raw sub-bass slap and"
+              "description": "Drops to raw sub-bass and slap accents for a stripped-back break."
             },
             {
               "id": "timba-gear-presion",
@@ -154,7 +154,7 @@ export const TIMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
                 1,
                 1
               ],
-              "description": "Maximum density and cowbell acceleration for"
+              "description": "Maximum density and accelerating cowbell raise the energy into the next section."
             },
             {
               "id": "timba-gear-marcha-v-03",
@@ -162,7 +162,7 @@ export const TIMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Gear Change: Marcha (Standard Drive) — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 0,
                 4,
@@ -252,7 +252,7 @@ export const TIMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           "name": "Marcha Intro",
           "family": "Marcha",
           "category": "sectionPattern",
-          "description": "A reduced entrance used to establish",
+          "description": "A reduced entrance used to establish the groove before the full ensemble enters.",
           "tags": [
             "timba",
             "marcha",
@@ -330,7 +330,7 @@ export const TIMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Marcha Intro — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 6,
@@ -362,7 +362,7 @@ export const TIMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Marcha Intro — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 4,
@@ -402,7 +402,7 @@ export const TIMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Marcha Intro — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 1,
                 4,

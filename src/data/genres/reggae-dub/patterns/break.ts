@@ -77,7 +77,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Dub Dropout & Echo Fragment — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 2,
                 14
@@ -93,7 +93,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Dub Dropout & Echo Fragment — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 2,
                 8,

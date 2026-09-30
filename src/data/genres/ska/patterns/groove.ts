@@ -8,7 +8,7 @@ export const SKA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Two-tone upstroke drive",
           "family": "2 Tone Rhythm",
           "category": "groove",
-          "description": "Tighter revival-era offbeat guitar with a",
+          "description": "Tighter revival-era offbeat guitar gives the groove a crisp, compact feel.",
           "tags": [
             "2tone",
             "ska",
@@ -77,7 +77,7 @@ export const SKA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "2 Tone Drive — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 2,
                 10
@@ -93,7 +93,7 @@ export const SKA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "2 Tone Drive — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 2,
                 6,
@@ -129,7 +129,7 @@ export const SKA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Ska Drum Drive",
           "family": "First-Wave Ska",
           "category": "groove",
-          "description": "Up-tempo drum pattern that keeps the",
+          "description": "An up-tempo drum pattern keeps the dance pulse moving.",
           "tags": [
             "drive"
           ],

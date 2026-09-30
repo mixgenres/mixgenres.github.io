@@ -8,7 +8,7 @@ export const FOLK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           "name": "Fiddle Break Response",
           "family": "Fiddle Break",
           "category": "interactionPattern",
-          "description": "A call-and-response shape that leaves the",
+          "description": "A call-and-response shape that gives the lead and accompaniment distinct roles.",
           "tags": [
             "folk",
             "fiddle-break",
@@ -80,7 +80,7 @@ export const FOLK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
               "name": "Fiddle Break Response — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 7,
@@ -108,7 +108,7 @@ export const FOLK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
               "name": "Fiddle Break Response — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 4,
@@ -144,7 +144,7 @@ export const FOLK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
               "name": "Fiddle Break Response — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 1,
                 4,

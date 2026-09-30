@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Bossa Nova",
         "origin": "Rio de Janeiro (Ipanema / Copacabana)",
         "era": "Late 1950s–1960s",
-        "description": "Nylon Guitar • Whispering Vocals •",
+        "description": "Nylon-string guitar and intimate vocals.",
         "characteristicInstruments": [
           "acoustic-guitar",
           "piano",

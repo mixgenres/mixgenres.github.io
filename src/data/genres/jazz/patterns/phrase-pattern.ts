@@ -8,7 +8,7 @@ export const JAZZ_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "name": "Solo Phrase",
           "family": "Solo",
           "category": "phrasePattern",
-          "description": "A phrase-level rhythmic template that leaves",
+          "description": "A phrase-level rhythmic template that leaves space for the lead while shaping the phrase arc.",
           "tags": [
             "jazz",
             "solo",
@@ -79,7 +79,7 @@ export const JAZZ_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
               "name": "Solo Phrase — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 6,
@@ -107,7 +107,7 @@ export const JAZZ_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
               "name": "Solo Phrase — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 4,

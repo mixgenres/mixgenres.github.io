@@ -5,5 +5,5 @@ export const KIZOMBA_WORLD_WORLD: Partial<GenreWorld> = {
   "family": "African / Angolan",
   "color": "#c86d3b",
   "level": "world",
-  "description": "The sensual partner dance style of"
+  "description": "Kizomba is an Angolan partner-dance style shaped by semba roots and close, flowing movement."
 };

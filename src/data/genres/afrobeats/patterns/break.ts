@@ -9,7 +9,7 @@ export const AFROBEATS_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           "family": "Afrobeat",
           "category": "break",
           "transitionType": "fill",
-          "description": "A deliberate drop in density for",
+          "description": "A deliberate drop in density creates contrast before the next section.",
           "tags": [
             "afrobeats",
             "afrobeat",
@@ -92,7 +92,7 @@ export const AFROBEATS_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Afrobeat Break — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 7,
@@ -124,7 +124,7 @@ export const AFROBEATS_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Afrobeat Break — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 5,
@@ -164,7 +164,7 @@ export const AFROBEATS_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Afrobeat Break — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 1,
                 5,

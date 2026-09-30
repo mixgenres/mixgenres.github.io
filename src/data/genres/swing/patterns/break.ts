@@ -91,7 +91,7 @@ export const SWING_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Walking Bass — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,

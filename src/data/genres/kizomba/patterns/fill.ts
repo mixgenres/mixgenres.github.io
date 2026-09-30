@@ -84,7 +84,7 @@ export const KIZOMBA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
               "name": "Call Fill — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 8,
@@ -112,7 +112,7 @@ export const KIZOMBA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
               "name": "Call Fill — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 4,
@@ -144,7 +144,7 @@ export const KIZOMBA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
               "name": "Call Fill — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 0,
                 4,

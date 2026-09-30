@@ -9,7 +9,7 @@ export const SWING_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           "family": "Ride",
           "category": "fill",
           "transitionType": "fill",
-          "description": "Classic swing ride cymbal pattern with",
+          "description": "A classic swing ride-cymbal pattern maintains the triplet pulse.",
           "tags": [
             "swing",
             "ride"
@@ -67,7 +67,7 @@ export const SWING_WORLD_PATTERNS_FILL: MusicalPattern[] = [
               "name": "Spang-a-lang — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -99,7 +99,7 @@ export const SWING_WORLD_PATTERNS_FILL: MusicalPattern[] = [
               "name": "Spang-a-lang — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,

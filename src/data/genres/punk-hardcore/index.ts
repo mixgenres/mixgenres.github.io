@@ -84,7 +84,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "name": "Hard Rock",
       "origin": "London / Los Angeles",
       "era": "Late 1960s–1980s",
-      "description": "Heavy Riffs • Marshall Stacks •",
+      "description": "Heavy riffs and Marshall-style stacks.",
       "characteristicInstruments": [
         "electric-guitar",
         "bass",
@@ -334,7 +334,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "name": "Punk Rock",
       "origin": "New York / London",
       "era": "Mid 1970s",
-      "description": "Fast Downstrokes • 3 Chords •",
+      "description": "Fast downstrokes and three-chord punk progressions.",
       "characteristicInstruments": [
         "electric-guitar",
         "bass",
@@ -412,9 +412,9 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "id": "punk-hardcore-garage-rock",
       "worldId": "punk-hardcore",
       "name": "Garage Rock",
-      "origin": "Detroit / Detroit / NYC",
+      "origin": "Detroit / New York City",
       "era": "1960s / 2000s Revival",
-      "description": "Lo-Fi Fuzz • Catchy Riffs •",
+      "description": "Lo-fi fuzz and catchy guitar riffs.",
       "characteristicInstruments": [
         "electric-guitar",
         "bass",
@@ -739,7 +739,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "name": "Riff + Bass Lock",
       "family": "Riff",
       "category": "ostinato",
-      "description": "Electric guitar and bass share a",
+      "description": "Electric guitar and bass share a tightly locked rhythmic figure.",
       "tags": [
         "rock",
         "riff",
@@ -835,7 +835,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Riff + Bass Lock — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Keeps the rhythm intact but moves",
+          "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
           "onsetGrid": [
             0,
             3,
@@ -978,7 +978,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Straight-Eighth Drive — sparse variation",
           "variationType": "sparse",
           "probability": 0.22,
-          "description": "Drops selected interior attacks so the",
+          "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
           "onsetGrid": [
             0,
             4,
@@ -1014,7 +1014,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Straight-Eighth Drive — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Keeps the rhythm intact but moves",
+          "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
           "onsetGrid": [
             0,
             2,
@@ -1152,7 +1152,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Open Verse → Full Chorus — sparse variation",
           "variationType": "sparse",
           "probability": 0.22,
-          "description": "Drops selected interior attacks so the",
+          "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
           "onsetGrid": [
             0,
             8,
@@ -1180,7 +1180,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Open Verse → Full Chorus — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Keeps the rhythm intact but moves",
+          "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
           "onsetGrid": [
             0,
             4,
@@ -1212,7 +1212,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Open Verse → Full Chorus — transition variation",
           "variationType": "transition",
           "probability": 0.16,
-          "description": "Adds a final pickup/closure gesture for",
+          "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
           "onsetGrid": [
             0,
             4,
@@ -1270,7 +1270,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "name": "7/8 Accent Group",
       "family": "Odd Meter",
       "category": "ostinato",
-      "description": "A seven-eighth-note cycle grouped 2+2+3, with",
+      "description": "A seven-eighth-note cycle grouped 2+2+3 creates an uneven, driving pulse.",
       "tags": [
         "rock",
         "progressive",
@@ -1338,7 +1338,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "7/8 Accent Group — sparse variation",
           "variationType": "sparse",
           "probability": 0.22,
-          "description": "Drops selected interior attacks so the",
+          "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
           "onsetGrid": [
             0,
             8,
@@ -1366,7 +1366,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "7/8 Accent Group — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Keeps the rhythm intact but moves",
+          "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
           "onsetGrid": [
             0,
             4,
@@ -1483,7 +1483,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Power Chords — sparse variation",
           "variationType": "sparse",
           "probability": 0.22,
-          "description": "Drops selected interior attacks so the",
+          "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
           "onsetGrid": [
             0,
             2,
@@ -1519,7 +1519,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Power Chords — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Keeps the rhythm intact but moves",
+          "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
           "onsetGrid": [
             0,
             1,
@@ -1634,7 +1634,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Half-Time Groove — played variation",
           "variationType": "accentShift",
           "probability": 0.18,
-          "description": "A light played variation for sparse",
+          "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
           "onsetGrid": [
             0,
             4
@@ -1658,7 +1658,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Half-Time Groove — played variation",
           "variationType": "accentShift",
           "probability": 0.18,
-          "description": "A light played variation for sparse",
+          "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
           "onsetGrid": [
             0,
             4
@@ -1769,7 +1769,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Tom Groove — sparse variation",
           "variationType": "sparse",
           "probability": 0.22,
-          "description": "Drops selected interior attacks so the",
+          "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
           "onsetGrid": [
             0,
             4,
@@ -1805,7 +1805,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Tom Groove — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Keeps the rhythm intact but moves",
+          "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
           "onsetGrid": [
             0,
             3,
@@ -1929,7 +1929,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Hammond Organ Sustain — sparse variation",
           "variationType": "sparse",
           "probability": 0.22,
-          "description": "Drops selected interior attacks so the",
+          "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
           "onsetGrid": [
             0,
             8,
@@ -1957,7 +1957,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Hammond Organ Sustain — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Keeps the rhythm intact but moves",
+          "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
           "onsetGrid": [
             0,
             7,
@@ -2061,7 +2061,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "7/8 Riff — sparse variation",
           "variationType": "sparse",
           "probability": 0.22,
-          "description": "Drops selected interior attacks so the",
+          "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
           "onsetGrid": [
             0,
             4,
@@ -2089,7 +2089,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "7/8 Riff — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Keeps the rhythm intact but moves",
+          "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
           "onsetGrid": [
             0,
             2,
@@ -2231,7 +2231,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Prog Synth Arp — sparse variation",
           "variationType": "sparse",
           "probability": 0.22,
-          "description": "Drops selected interior attacks so the",
+          "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
           "onsetGrid": [
             0,
             2,
@@ -2291,7 +2291,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Prog Synth Arp — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Keeps the rhythm intact but moves",
+          "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
           "onsetGrid": [
             0,
             1,
@@ -2449,7 +2449,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Acoustic Strum — sparse variation",
           "variationType": "sparse",
           "probability": 0.22,
-          "description": "Drops selected interior attacks so the",
+          "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
           "onsetGrid": [
             0,
             4,
@@ -2481,7 +2481,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Acoustic Strum — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Keeps the rhythm intact but moves",
+          "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
           "onsetGrid": [
             0,
             2,
@@ -2587,7 +2587,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Lead Guitar Bend — played variation",
           "variationType": "accentShift",
           "probability": 0.18,
-          "description": "A light played variation for sparse",
+          "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
           "onsetGrid": [
             2,
             6
@@ -2611,7 +2611,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Lead Guitar Bend — played variation",
           "variationType": "accentShift",
           "probability": 0.18,
-          "description": "A light played variation for sparse",
+          "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
           "onsetGrid": [
             2,
             6
@@ -2653,7 +2653,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "name": "Rock  part",
       "family": "Build",
       "category": "rolePattern",
-      "description": "A default-roster coverage pattern that gives",
+      "description": "A default-roster coverage pattern gives each ensemble role a playable part.",
       "tags": [
         "rock",
         "build",
@@ -2732,7 +2732,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Build Texture — sparse variation",
           "variationType": "sparse",
           "probability": 0.22,
-          "description": "Drops selected interior attacks so the",
+          "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
           "onsetGrid": [
             0,
             8,
@@ -2760,7 +2760,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Build Texture — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Keeps the rhythm intact but moves",
+          "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
           "onsetGrid": [
             0,
             4,
@@ -2808,7 +2808,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "name": "Break Response",
       "family": "Break",
       "category": "interactionPattern",
-      "description": "A call-and-response shape that leaves the",
+      "description": "A call-and-response shape that gives the lead and accompaniment distinct roles.",
       "tags": [
         "rock",
         "break",
@@ -2882,7 +2882,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Break Response — sparse variation",
           "variationType": "sparse",
           "probability": 0.22,
-          "description": "Drops selected interior attacks so the",
+          "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
           "onsetGrid": [
             1,
             9,
@@ -2910,7 +2910,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Break Response — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Keeps the rhythm intact but moves",
+          "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
           "onsetGrid": [
             1,
             5,
@@ -2942,7 +2942,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Break Response — transition variation",
           "variationType": "transition",
           "probability": 0.16,
-          "description": "Adds a final pickup/closure gesture for",
+          "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
           "onsetGrid": [
             1,
             5,
@@ -2998,7 +2998,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "name": "Power Chord Anchor",
       "family": "Power Chord",
       "category": "ostinato",
-      "description": "A repeating anchor that locks the",
+      "description": "A repeating anchor that locks the bass line to the harmonic cycle.",
       "tags": [
         "rock",
         "power-chord",
@@ -3072,7 +3072,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Power Chord Anchor — sparse variation",
           "variationType": "sparse",
           "probability": 0.22,
-          "description": "Drops selected interior attacks so the",
+          "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
           "onsetGrid": [
             2,
             10,
@@ -3100,7 +3100,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Power Chord Anchor — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Keeps the rhythm intact but moves",
+          "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
           "onsetGrid": [
             2,
             6,
@@ -3148,7 +3148,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "name": "Backbeat Comping",
       "family": "Backbeat",
       "category": "groove",
-      "description": "A genre-shaped accompaniment cell that supports",
+      "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
       "tags": [
         "rock",
         "backbeat",
@@ -3223,7 +3223,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Backbeat Comping — sparse variation",
           "variationType": "sparse",
           "probability": 0.22,
-          "description": "Drops selected interior attacks so the",
+          "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
           "onsetGrid": [
             3,
             11,
@@ -3251,7 +3251,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Backbeat Comping — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Keeps the rhythm intact but moves",
+          "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
           "onsetGrid": [
             3,
             7,
@@ -3299,7 +3299,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "name": "Solo Verse Variation",
       "family": "Solo",
       "category": "groove",
-      "description": "A restrained verse variation with intentional",
+      "description": "A restrained verse variation uses intentional space to keep the arrangement uncluttered.",
       "tags": [
         "rock",
         "solo",
@@ -3391,7 +3391,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Solo Verse Variation — sparse variation",
           "variationType": "sparse",
           "probability": 0.22,
-          "description": "Drops selected interior attacks so the",
+          "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
           "onsetGrid": [
             1,
             5,
@@ -3427,7 +3427,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           "name": "Solo Verse Variation — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Keeps the rhythm intact but moves",
+          "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
           "onsetGrid": [
             1,
             3,

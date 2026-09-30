@@ -72,7 +72,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Outlaw 8ths — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 2,
@@ -108,7 +108,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Outlaw 8ths — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,
@@ -226,7 +226,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Country Waltz — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4
@@ -250,7 +250,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Country Waltz — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -351,7 +351,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Western Swing — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -379,7 +379,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Western Swing — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -485,7 +485,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Nashville Smooth — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 8,
@@ -513,7 +513,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Nashville Smooth — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 4,
@@ -567,7 +567,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Chicken Pickin",
           "family": "Guitar",
           "category": "groove",
-          "description": "Syncopated muted telecaster lead licks and",
+          "description": "Syncopated, muted Telecaster licks add a sharp lead response.",
           "tags": [
             "country",
             "guitar"
@@ -631,7 +631,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Chicken Pickin — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -667,7 +667,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Chicken Pickin — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -781,7 +781,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Slow Ballad 6/8 — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 0,
                 3
@@ -805,7 +805,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Slow Ballad 6/8 — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 0,
                 3
@@ -847,7 +847,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Steel Comping",
           "family": "Steel",
           "category": "groove",
-          "description": "A genre-shaped accompaniment cell that supports",
+          "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "country",
             "steel",
@@ -927,7 +927,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Steel Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -963,7 +963,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Steel Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -1027,7 +1027,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Train Verse Variation",
           "family": "Train",
           "category": "groove",
-          "description": "A restrained verse variation with intentional",
+          "description": "A restrained verse variation uses intentional space to keep the arrangement uncluttered.",
           "tags": [
             "country",
             "train",
@@ -1111,7 +1111,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Train Verse Variation — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 6,
@@ -1147,7 +1147,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Train Verse Variation — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 4,

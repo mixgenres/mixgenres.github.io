@@ -6,13 +6,13 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Tradicional",
         "origin": "Luanda, Angola",
         "era": "1980s–1990s",
-        "description": "Grounded • 4/4 Zouk Beat •",
+        "description": "Grounded 4/4 groove with zouk influence.",
         "characteristicInstruments": [
           "bass",
           "drums",
           "acoustic-guitar",
           "synth",
-          "hand-percussion"
+          "dikanza"
         ],
         "preferredMeters": [
           "4/4"
@@ -32,7 +32,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
           "sweet Portuguese/Kimbundu vocal melodies"
         ],
         "rhythmicGrammar": [
-          "kick on 1, 1-and, 3-and with crisp snare on 3 and soft rolling hi-hat"
+          "syncopated batida kick with a light snare or clap, soft rolling high percussion and a continuous dikanza scraper pattern"
         ],
         "danceTags": [
           "social-partner"

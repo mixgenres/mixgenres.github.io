@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Songo",
         "origin": "Havana, Cuba (Los Van Van)",
         "era": "1970s–1980s",
-        "description": "Changuito Drum Groove • Cowbell •",
+        "description": "Changuito-inspired drum groove with cowbell.",
         "characteristicInstruments": [
           "drums",
           "congas",

@@ -28,9 +28,9 @@ export const INDUSTRIAL_WORLD: GenreWorld = {
     "Harsh sequencing"
   ],
   "crossLinks": [
-    "Metal ↔ Rock",
-    "Metal ↔ Classical / Symphonic",
-    "Metal ↔ Math Rock"
+    "EBM ↔ Electronic Dance Music",
+    "Industrial Rock ↔ Rock",
+    "Industrial ↔ Noise / Experimental Music"
   ],
   "roles": {
     "lead": [
@@ -61,7 +61,7 @@ export const INDUSTRIAL_WORLD: GenreWorld = {
     "pocketDepth": 5
   },
   "tuningSystem": "12-tet",
-  "signatureCell": "High-speed palm-muted galloping guitar chug locked with double-kick drum and crushing breakdown",
+  "signatureCell": "Rigid machine pulse, sequenced distorted bass and metallic noise accents with abrupt stops",
   "grooveMechanics": {
     "swingPercentage": 50,
     "anticipationOffsetSteps": 0,

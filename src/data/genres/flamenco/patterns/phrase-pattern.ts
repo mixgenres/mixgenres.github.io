@@ -94,7 +94,7 @@ export const FLAMENCO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
                 0.95,
                 1
               ],
-              "description": "Decisive closing golpe and silence on"
+              "description": "A decisive closing golpe lands before the silence."
             },
             {
               "id": "flam-solea-12beat-v-02",
@@ -102,7 +102,7 @@ export const FLAMENCO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
               "name": "Soleá 12-Beat Compás Framework — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 5,
@@ -295,7 +295,7 @@ export const FLAMENCO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
               "name": "Falseta Melodic Development — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -376,7 +376,7 @@ export const FLAMENCO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "name": "Llamada Phrase",
           "family": "Llamada",
           "category": "phrasePattern",
-          "description": "A phrase-level rhythmic template that leaves",
+          "description": "A phrase-level rhythmic template that leaves space for the lead while shaping the phrase arc.",
           "tags": [
             "flamenco",
             "llamada",
@@ -455,7 +455,7 @@ export const FLAMENCO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
               "name": "Llamada Phrase — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -491,7 +491,7 @@ export const FLAMENCO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
               "name": "Llamada Phrase — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,

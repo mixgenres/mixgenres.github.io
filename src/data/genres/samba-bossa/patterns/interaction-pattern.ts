@@ -8,7 +8,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           "name": "Samba Call Response",
           "family": "Samba",
           "category": "interactionPattern",
-          "description": "Percussion group answers a vocal or",
+          "description": "The percussion group answers the vocal or lead phrase.",
           "tags": [
             "call-response"
           ],

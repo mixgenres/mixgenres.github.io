@@ -71,7 +71,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Texas Shuffle — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 3,
@@ -107,7 +107,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Texas Shuffle — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -177,7 +177,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Soul Blues Beat",
           "family": "Drums",
           "category": "groove",
-          "description": "Straight 8ths Memphis style beat with",
+          "description": "A straight-eighth-note Memphis beat gives the groove a firm backbeat.",
           "tags": [],
           "scopes": [
             "measure"
@@ -226,7 +226,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Soul Blues Beat — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -254,7 +254,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Soul Blues Beat — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -308,7 +308,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Walking Blues Bass",
           "family": "Bass",
           "category": "groove",
-          "description": "Quarter note walking bass leading through",
+          "description": "Quarter-note walking bass leads through each chord change.",
           "tags": [],
           "scopes": [
             "measure"
@@ -357,7 +357,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Walking Blues Bass — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 2,
@@ -385,7 +385,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Walking Blues Bass — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,
@@ -513,7 +513,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Piano Triplets — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 2,
@@ -561,7 +561,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Piano Triplets — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,
@@ -693,7 +693,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Horn Stabs — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 2,
                 6
@@ -717,7 +717,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Horn Stabs — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 2,
                 6
@@ -816,7 +816,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Slide Guitar Lick — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 8,
@@ -844,7 +844,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Slide Guitar Lick — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 4,
@@ -956,7 +956,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Blues Rhumba — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -988,7 +988,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Blues Rhumba — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -1094,7 +1094,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Organ Swell — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 0,
                 2
@@ -1118,7 +1118,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Organ Swell — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 0,
                 2
@@ -1163,7 +1163,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Turnaround Comping",
           "family": "Turnaround",
           "category": "groove",
-          "description": "A genre-shaped accompaniment cell that supports",
+          "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "blues",
             "turnaround",
@@ -1245,7 +1245,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Turnaround Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 4,
                 7,
@@ -1281,7 +1281,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Turnaround Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 4,
                 6,

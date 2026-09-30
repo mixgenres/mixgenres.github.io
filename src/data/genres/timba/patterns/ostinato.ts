@@ -94,7 +94,7 @@ export const TIMBA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Displaced Funk / Timba Bassline — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -156,7 +156,7 @@ export const TIMBA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Moña Anchor",
           "family": "Moña",
           "category": "ostinato",
-          "description": "A repeating anchor that locks the",
+          "description": "A repeating anchor that locks the bass line to the harmonic cycle.",
           "tags": [
             "timba",
             "mona",
@@ -237,7 +237,7 @@ export const TIMBA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Moña Anchor — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 4,
@@ -273,7 +273,7 @@ export const TIMBA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Moña Anchor — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 2,

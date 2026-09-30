@@ -8,7 +8,7 @@ export const TIMBA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "name": "Gear Change Phrase",
           "family": "Gear Change",
           "category": "phrasePattern",
-          "description": "A phrase-level rhythmic template that leaves",
+          "description": "A phrase-level rhythmic template that leaves space for the lead while shaping the phrase arc.",
           "tags": [
             "timba",
             "gear-change",
@@ -88,7 +88,7 @@ export const TIMBA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
               "name": "Gear Change Phrase — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -124,7 +124,7 @@ export const TIMBA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
               "name": "Gear Change Phrase — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -264,7 +264,7 @@ export const TIMBA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
               "name": "Timba Vocal Phrasing — alternate phrasing",
               "variationType": "phraseStart",
               "probability": 0.2,
-              "description": "Alternate vocal entry placement for a",
+              "description": "An alternate vocal entry shifts the placement of a phrase for subtle rhythmic variation.",
               "onsetGrid": [
                 0,
                 3,

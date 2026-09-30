@@ -9,7 +9,7 @@ export const CUMBIA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           "family": "Cadence",
           "category": "cadence",
           "transitionType": "fill",
-          "description": "Compact percussion and bass tag to",
+          "description": "A compact percussion-and-bass tag closes the phrase.",
           "tags": [
             "tag",
             "cadence"

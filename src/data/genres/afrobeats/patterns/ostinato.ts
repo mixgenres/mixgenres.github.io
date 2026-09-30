@@ -75,7 +75,7 @@ export const AFROBEATS_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Highlife Fingerstyle Clean Guitar — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 7,
@@ -111,7 +111,7 @@ export const AFROBEATS_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Highlife Fingerstyle Clean Guitar — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 4,
@@ -177,7 +177,7 @@ export const AFROBEATS_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Hook Anchor",
           "family": "Hook",
           "category": "ostinato",
-          "description": "A repeating anchor that locks the",
+          "description": "A repeating anchor that locks the bass line to the harmonic cycle.",
           "tags": [
             "afrobeats",
             "hook",
@@ -255,7 +255,7 @@ export const AFROBEATS_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Hook Anchor — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 5,
@@ -287,7 +287,7 @@ export const AFROBEATS_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Hook Anchor — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,

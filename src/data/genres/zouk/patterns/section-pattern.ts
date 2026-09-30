@@ -8,7 +8,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           "name": "Drop Intro",
           "family": "Drop",
           "category": "sectionPattern",
-          "description": "A reduced entrance used to establish",
+          "description": "A reduced entrance used to establish the groove before the full ensemble enters.",
           "tags": [
             "zouk",
             "drop",
@@ -91,7 +91,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Drop Intro — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 5,
@@ -127,7 +127,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Drop Intro — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -171,7 +171,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Drop Intro — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 0,
                 2,
@@ -235,7 +235,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           "name": "Tarraxinha Chorus Lift",
           "family": "Tarraxinha",
           "category": "sectionPattern",
-          "description": "A higher-energy chorus layer that increases",
+          "description": "A higher-energy chorus layer increases rhythmic density while keeping the underlying pulse clear.",
           "tags": [
             "zouk",
             "tarraxinha",
@@ -323,7 +323,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Tarraxinha Chorus Lift — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 4,
@@ -359,7 +359,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Tarraxinha Chorus Lift — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 2,
@@ -403,7 +403,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Tarraxinha Chorus Lift — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 1,
                 2,
@@ -467,7 +467,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           "name": "Chawa Bridge",
           "family": "Chawa",
           "category": "sectionPattern",
-          "description": "A contrasting bridge texture designed to",
+          "description": "A contrasting bridge texture creates a clear change in energy before the main section returns.",
           "tags": [
             "zouk",
             "chawa",
@@ -551,7 +551,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Chawa Bridge — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -587,7 +587,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Chawa Bridge — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -631,7 +631,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Chawa Bridge — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 0,
                 3,

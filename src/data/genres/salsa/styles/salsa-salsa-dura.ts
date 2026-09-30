@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Salsa Dura",
         "origin": "New York City (Fania Records)",
         "era": "1970s",
-        "description": "Trombone Heavy • Clave Driven •",
+        "description": "Trombone-heavy arrangement driven by clave.",
         "characteristicInstruments": [
           "brass",
           "congas",

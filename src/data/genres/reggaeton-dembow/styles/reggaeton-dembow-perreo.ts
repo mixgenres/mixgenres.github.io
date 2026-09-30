@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Perreo",
         "origin": "San Juan, Puerto Rico",
         "era": "2000s",
-        "description": "Heavy Dembow • 4/4 3-3-2 •",
+        "description": "Heavy dembow in a 4/4 3-3-2 pattern.",
         "characteristicInstruments": [
           "drums",
           "sub-bass",

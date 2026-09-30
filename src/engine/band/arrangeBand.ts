@@ -39,6 +39,9 @@ export { GESTURE_NAMES, GESTURE_CODES };
 
 import { HIT_FUNCTIONS, type HitFunction } from '../../data/performance/hitFunctions';
 
+// Sheets are immutable; reusing the result for the same identity is safe.
+const performanceCache = new WeakMap<Sheet, Performance>();
+
 export interface RhythmOnset {
   position: number;
   accent: number;
@@ -417,6 +420,9 @@ function applyPhraseBandInteraction(
 }
 
 export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
+  const cached = performanceCache.get(sheet);
+  if (cached) return cached;
+
   const bars = buildBarTimes(sheet);
   const song = buildSongPlan(sheet, bars);
   const lanes: BandPlan['lanes'] = {};
@@ -467,6 +473,15 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
       if (!lane) continue;
       const profile = getInstrumentPerformanceProfile(track.instrumentId);
       const dialect = resolveDialect(track.instrumentId, region.genre ?? sheet.worldId, regionStyle.id, track.role, region.energy ?? 3);
+      const grammarBundle = buildHybridGrammar(regionStyle.id, lane.lens.sourceGenre, regionStyle, lane.lens.weight);
+      const sharedHostProfile = resolveGenreProfile(track.instrumentId, lane.lens.hostGenre);
+      const sharedSourceProfile = resolveGenreProfile(track.instrumentId, lane.lens.sourceGenre);
+      const hostTheory = styleTheoryFor(regionStyle.id, lane.lens.hostGenre);
+      const sourceTheory = getGenreTheory(lane.lens.sourceGenre);
+      const hybridTheory = blendGenreTheory(hostTheory, sourceTheory, lane.lens.weight);
+      const voiceShape = voiceProfile(track.instrumentId);
+      const tuning = resolveTuningSystem(regionStyle.harmony?.tuningSystem ?? '12-tet');
+      const sectionEnergy = activityFor(regionStyle.contract, decision.sectionEnergy);
       const cycle = Math.max(1, Number(regionStyle?.contract?.cycleLength ?? 1));
       const soloSection = /solo|trading|falseta|variaci|descarga|mambo|improvisation/i.test(`${region.kind} ${region.formKey ?? ''}`);
       const tradingSection = /trading/i.test(`${region.kind} ${region.formKey ?? ''}`);
@@ -489,8 +504,7 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
           if (!rhythm.onsets.length) continue;
           const chord = measure.chord || 'C';
           const nextChord = sheet.measures[bar + 1]?.chord;
-          const energy = activityFor(regionStyle.contract, decision.sectionEnergy);
-          const voiceShape = voiceProfile(track.instrumentId);
+          const energy = sectionEnergy;
           const keepAttack = thinForSustain(voiceShape,
             rhythm.onsets.map(o => ({ beatInBar: o.position * bt.beatsPerBar, accent: o.accent })),
             bt.beatsPerBar, energy);
@@ -498,12 +512,6 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
           const phraseStage = soloGrammar?.phraseStages?.length
             ? soloGrammar.phraseStages[phraseIndex % soloGrammar.phraseStages.length]
             : undefined;
-          const grammarBundle = buildHybridGrammar(regionStyle.id, lane.lens.sourceGenre, regionStyle, lane.lens.weight);
-          const sharedHostProfile = resolveGenreProfile(track.instrumentId, lane.lens.hostGenre);
-          const sharedSourceProfile = resolveGenreProfile(track.instrumentId, lane.lens.sourceGenre);
-          const hostTheory = styleTheoryFor(regionStyle.id, lane.lens.hostGenre);
-          const sourceTheory = getGenreTheory(lane.lens.sourceGenre);
-          const hybridTheory = blendGenreTheory(hostTheory, sourceTheory, lane.lens.weight);
           const barNotes: PerfNote[] = [];
 
           for (let i = 0; i < rhythm.onsets.length; i++) {
@@ -581,7 +589,6 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
             const gapBeats = Math.max(localGapBeats, onset.hit === 'sustain' ? 1.0 : 0.18);
             const durBeats = noteLengthBeats(pv, authoredBeats, gapBeats * (onset.hit === 'sustain' ? 3.5 : 1.7), gestureName);
             const dur = Math.max(0.028, durBeats * (60 / Math.max(20, bt.bpm)) * (0.82 + ctx.hostProfile.phrase.sustain * 0.32));
-            const tuning = resolveTuningSystem(regionStyle.harmony?.tuningSystem ?? '12-tet');
 
             for (let mi = 0; mi < midis.length; mi++) {
               const midi = midis[mi] + decision.register;
@@ -733,7 +740,9 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
     worldId: sheet.worldId,
     trackInfo: Object.fromEntries((sheet.tracks as Voice[]).map(t => [t.id, { instrumentId: t.instrumentId, role: t.role }])),
   };
-  return optimizePerformanceByPhraseAndSong(sheet, basePerformance).performance;
+  const performance = optimizePerformanceByPhraseAndSong(sheet, basePerformance).performance;
+  performanceCache.set(sheet, performance);
+  return performance;
 }
 
 /** Compatibility alias for existing callers. New orchestration should say arrangeBand. */

@@ -214,7 +214,7 @@ export const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
                 0.6,
                 0.8
               ],
-              "description": "Gentle circular wire brush sweeps on"
+              "description": "Gentle circular wire-brush sweeps provide a soft, continuous texture."
             },
             {
               "id": "jazz-ride-spangalang-v-02",
@@ -222,7 +222,7 @@ export const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Jazz Ride Cymbal (Spang-a-Lang) — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 4,
@@ -369,7 +369,7 @@ export const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Syncopated Piano Comping (Charleston & Red Garland Pluck) — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 6,
@@ -479,7 +479,7 @@ export const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Latin Jazz Montuno Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 7,
@@ -511,7 +511,7 @@ export const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Latin Jazz Montuno Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 4,
@@ -570,7 +570,7 @@ export const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Head Anchor",
           "family": "Head",
           "category": "ostinato",
-          "description": "A repeating anchor that locks the",
+          "description": "A repeating anchor that locks the bass line to the harmonic cycle.",
           "tags": [
             "jazz",
             "head",
@@ -642,7 +642,7 @@ export const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Head Anchor — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 3,
                 8,
@@ -670,7 +670,7 @@ export const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Head Anchor — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 3,
                 6,

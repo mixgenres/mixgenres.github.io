@@ -713,7 +713,7 @@ export const HOUSE_WORLD: GenreWorld = {
           "name": "Four-on-the-Floor Foundation — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             0,
             8
@@ -729,7 +729,7 @@ export const HOUSE_WORLD: GenreWorld = {
           "name": "Four-on-the-Floor Foundation — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             0,
             4,
@@ -765,7 +765,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "name": "Offbeat Hat",
       "family": "House Hats",
       "category": "ostinato",
-      "description": "Open or closed hat on the",
+      "description": "Open or closed hi-hat marks the subdivision.",
       "tags": [
         "house",
         "hat",
@@ -835,7 +835,7 @@ export const HOUSE_WORLD: GenreWorld = {
           "name": "Offbeat Hat — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             2,
             10
@@ -851,7 +851,7 @@ export const HOUSE_WORLD: GenreWorld = {
           "name": "Offbeat Hat — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             2,
             6,
@@ -964,7 +964,7 @@ export const HOUSE_WORLD: GenreWorld = {
           "name": "House Syncopated Bass — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             0,
             6,
@@ -982,7 +982,7 @@ export const HOUSE_WORLD: GenreWorld = {
           "name": "House Syncopated Bass — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             0,
             3,
@@ -1106,7 +1106,7 @@ export const HOUSE_WORLD: GenreWorld = {
           "name": "Detroit 16th Sequence — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             0,
             3,
@@ -1126,7 +1126,7 @@ export const HOUSE_WORLD: GenreWorld = {
           "name": "Detroit 16th Sequence — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             0,
             2,
@@ -1254,7 +1254,7 @@ export const HOUSE_WORLD: GenreWorld = {
           "name": "Acid 16-Step Sequence — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             0,
             5,
@@ -1274,7 +1274,7 @@ export const HOUSE_WORLD: GenreWorld = {
           "name": "Acid 16-Step Sequence — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             0,
             3,
@@ -1318,7 +1318,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "name": "Four-floor kick with bar accent",
       "family": "House",
       "category": "groove",
-      "description": "Stable four-on-the-floor foundation; kept as a",
+      "description": "A stable four-on-the-floor foundation supports the arrangement.",
       "tags": [
         "four-on-floor"
       ],
@@ -1865,7 +1865,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "name": "Riser Build",
       "family": "Arrangement",
       "category": "sectionPattern",
-      "description": "Production-style build cue represented as a",
+      "description": "A production-style build cue raises energy before the next section.",
       "tags": [
         "build",
         "automation"
@@ -1950,7 +1950,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "family": "Arrangement",
       "category": "break",
       "transitionType": "fill",
-      "description": "Remove kick and bass for a",
+      "description": "Removes kick and bass for a brief breakdown.",
       "tags": [
         "breakdown",
         "tension"

@@ -57,7 +57,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "7/8 Riff — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -85,7 +85,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "7/8 Riff — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -222,7 +222,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Prog Synth Arp — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 2,
@@ -282,7 +282,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Prog Synth Arp — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,
@@ -435,7 +435,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Acoustic Strum — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -467,7 +467,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Acoustic Strum — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -569,7 +569,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Lead Guitar Bend — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 2,
                 6
@@ -593,7 +593,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Lead Guitar Bend — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 2,
                 6
@@ -635,7 +635,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Backbeat Comping",
           "family": "Backbeat",
           "category": "groove",
-          "description": "A genre-shaped accompaniment cell that supports",
+          "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "rock",
             "backbeat",
@@ -707,7 +707,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Backbeat Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 3,
                 11,
@@ -735,7 +735,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Backbeat Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 3,
                 7,
@@ -783,7 +783,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Solo Verse Variation",
           "family": "Solo",
           "category": "groove",
-          "description": "A restrained verse variation with intentional",
+          "description": "A restrained verse variation uses intentional space to keep the arrangement uncluttered.",
           "tags": [
             "rock",
             "solo",
@@ -872,7 +872,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Solo Verse Variation — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 5,
@@ -908,7 +908,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Solo Verse Variation — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 3,

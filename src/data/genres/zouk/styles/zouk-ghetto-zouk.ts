@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Ghetto Zouk",
         "origin": "Lisbon / Rotterdam / Paris",
         "era": "2000s–Present",
-        "description": "R&B Chords • Modern Beat •",
+        "description": "R&B chords over a modern beat.",
         "characteristicInstruments": [
           "synth",
           "drums",

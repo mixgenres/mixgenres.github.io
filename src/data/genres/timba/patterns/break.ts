@@ -9,7 +9,7 @@ export const TIMBA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           "family": "Conga",
           "category": "break",
           "transitionType": "fill",
-          "description": "Dense modern timba conga pattern with",
+          "description": "A dense modern timba conga pattern drives the groove.",
           "tags": [],
           "scopes": [
             "measure"
@@ -70,7 +70,7 @@ export const TIMBA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Timba Conga Gear — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -106,7 +106,7 @@ export const TIMBA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Timba Conga Gear — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,

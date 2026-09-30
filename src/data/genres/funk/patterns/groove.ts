@@ -69,7 +69,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Ghost Snares — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 6,
@@ -105,7 +105,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Ghost Snares — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 3,
@@ -226,7 +226,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Clavinet Sync — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 7,
@@ -254,7 +254,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Clavinet Sync — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 4,
@@ -358,7 +358,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Horn Section Hits — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 12
@@ -382,7 +382,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Horn Section Hits — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 6,
@@ -483,7 +483,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Motown Bass — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 7,
@@ -515,7 +515,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Motown Bass — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 4,
@@ -622,7 +622,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Open Hi-Hat — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 5,
@@ -650,7 +650,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Open Hi-Hat — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 3,
@@ -749,7 +749,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Neo-Soul Drag — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 8,
@@ -777,7 +777,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Neo-Soul Drag — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 5,
@@ -827,7 +827,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Wah-Wah Guitar",
           "family": "Guitar",
           "category": "groove",
-          "description": "Expressive wah pedal rhythm sweeping through",
+          "description": "Expressive wah-pedal rhythm sweeps through the chord changes.",
           "tags": [],
           "scopes": [
             "measure"
@@ -888,7 +888,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Wah-Wah Guitar — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -924,7 +924,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Wah-Wah Guitar — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -990,7 +990,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Clav Comping",
           "family": "Clav",
           "category": "groove",
-          "description": "A genre-shaped accompaniment cell that supports",
+          "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "funk",
             "clav",
@@ -1064,7 +1064,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Clav Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 6,
@@ -1096,7 +1096,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Clav Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 4,

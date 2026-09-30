@@ -117,7 +117,7 @@ export const FUNK_WORLD_PATTERNS_FILL: MusicalPattern[] = [
               "name": "Clyde Stubblefield \"Funky Drummer\" Breakbeat — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,

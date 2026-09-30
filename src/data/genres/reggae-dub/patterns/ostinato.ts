@@ -8,7 +8,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Offbeat Skank",
           "family": "Reggae Skank",
           "category": "ostinato",
-          "description": "Short guitar/organ chord attacks on the",
+          "description": "Short guitar or organ chord attacks land on the offbeats.",
           "tags": [
             "skank",
             "reggae",
@@ -78,7 +78,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Offbeat Skank — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 2,
                 10
@@ -94,7 +94,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Offbeat Skank — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 2,
                 6,
@@ -130,7 +130,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Melodic Reggae Bass",
           "family": "Reggae Bass",
           "category": "ostinato",
-          "description": "Long, syncopated bass notes occupy the",
+          "description": "Long, syncopated bass notes occupy the spaces between drum accents.",
           "tags": [
             "reggae",
             "bass",
@@ -206,7 +206,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Melodic Reggae Bass — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 0,
                 6,
@@ -224,7 +224,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Melodic Reggae Bass — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 0,
                 3,

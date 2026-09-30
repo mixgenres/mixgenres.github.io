@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Tango Electrónico",
         "origin": "Paris / Buenos Aires",
         "era": "2000s–Present",
-        "description": "Trip-Hop Beats • Bandoneón Sample •",
+        "description": "Trip-hop beats with bandoneón samples.",
         "characteristicInstruments": [
           "bandoneon",
           "sub-bass",

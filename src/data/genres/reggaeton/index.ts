@@ -7,7 +7,7 @@ export const REGGAETON_WORLD: GenreWorld = {
   "family": "Caribbean / Latin urban",
   "color": "#d14b7a",
   "level": "world",
-  "description": "Reggaetón and dembow are represented as",
+  "description": "Reggaetón and dembow are related Caribbean and Latin urban styles built around the dembow rhythm.",
   "substyles": [
     "Perreo",
     "Melodic",
@@ -85,7 +85,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "name": "Perreo",
       "origin": "San Juan, Puerto Rico",
       "era": "2000s",
-      "description": "Heavy Dembow • 4/4 3-3-2 •",
+      "description": "Heavy dembow in a 4/4 3-3-2 pattern.",
       "characteristicInstruments": [
         "drums",
         "sub-bass",
@@ -842,7 +842,7 @@ export const REGGAETON_WORLD: GenreWorld = {
           "name": "Dembow Core Timeline — sparse",
           "variationType": "sparse",
           "probability": 0.05,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             0,
             8,
@@ -868,7 +868,7 @@ export const REGGAETON_WORLD: GenreWorld = {
           "name": "Dembow Core Timeline — accent shift",
           "variationType": "accentShift",
           "probability": 0.12,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             0,
             3,
@@ -1031,7 +1031,7 @@ export const REGGAETON_WORLD: GenreWorld = {
           "name": "Dembow Syncopated Bass — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             0,
             8,
@@ -1051,7 +1051,7 @@ export const REGGAETON_WORLD: GenreWorld = {
           "name": "Dembow Syncopated Bass — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             0,
             5,
@@ -1164,7 +1164,7 @@ export const REGGAETON_WORLD: GenreWorld = {
           "name": "Percussive Ghost Layer — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             2,
             6,
@@ -1182,7 +1182,7 @@ export const REGGAETON_WORLD: GenreWorld = {
           "name": "Percussive Ghost Layer — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             2,
             4,
@@ -1291,7 +1291,7 @@ export const REGGAETON_WORLD: GenreWorld = {
           "name": "Offbeat Synth Stab — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             2,
             10
@@ -1307,7 +1307,7 @@ export const REGGAETON_WORLD: GenreWorld = {
           "name": "Offbeat Synth Stab — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             2,
             6,
@@ -1344,7 +1344,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "family": "Breaks",
       "category": "break",
       "transitionType": "fill",
-      "description": "Drops the main kick for a",
+      "description": "Drops the main kick for a brief break in the groove.",
       "tags": [
         "break",
         "pickup",
@@ -1425,7 +1425,7 @@ export const REGGAETON_WORLD: GenreWorld = {
           "name": "Dembow Break & Pickup — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             0,
             8,
@@ -1443,7 +1443,7 @@ export const REGGAETON_WORLD: GenreWorld = {
           "name": "Dembow Break & Pickup — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             0,
             4,
@@ -1683,7 +1683,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "name": "Reggaeton Sub Answer",
       "family": "Bass",
       "category": "rolePattern",
-      "description": "Short sub-bass answer lands around the",
+      "description": "A short sub-bass answer lands around the kick pattern.",
       "tags": [
         "sub-bass",
         "syncopation"
@@ -1765,7 +1765,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "name": "Reggaetón piano offbeat stab",
       "family": "Harmony",
       "category": "cell",
-      "description": "Short piano/synth anticipations that leave the",
+      "description": "Short piano or synth anticipations leave the downbeat open.",
       "tags": [
         "stabs",
         "offbeat"

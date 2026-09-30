@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Gypsy Jazz",
         "origin": "Paris, France (Manouche GenreStyleDefinition)",
         "era": "1930s–1940s",
-        "description": "La Pompe • Acoustic Guitar •",
+        "description": "La pompe rhythm guitar and acoustic strings.",
         "characteristicInstruments": [
           "acoustic-guitar",
           "violin",

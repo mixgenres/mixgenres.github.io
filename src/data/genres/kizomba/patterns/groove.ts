@@ -8,7 +8,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Semba Guitar Arpeggio",
           "family": "Guitar",
           "category": "groove",
-          "description": "Fast intricate African guitar lines and",
+          "description": "Fast, intricate African guitar lines add a bright counter-rhythm.",
           "tags": [
             "kizomba",
             "semba",
@@ -71,7 +71,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Semba Guitar Arpeggio — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -103,7 +103,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Semba Guitar Arpeggio — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -218,7 +218,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Tarraxinha Sub-Bass — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 12
@@ -242,7 +242,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Tarraxinha Sub-Bass — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 6,
@@ -346,7 +346,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Kizomba Kick Batida — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 10,
@@ -374,7 +374,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Kizomba Kick Batida — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 6,
@@ -493,7 +493,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Kizomba Hi-Hats — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -529,7 +529,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Kizomba Hi-Hats — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -658,7 +658,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Urban Kiz Synth Pulse — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 8,
@@ -686,7 +686,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Urban Kiz Synth Pulse — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 5,
@@ -797,7 +797,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Kizomba Vocal Phrase Response — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 4,
                 12,
@@ -825,7 +825,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Kizomba Vocal Phrase Response — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 4,
                 7,
@@ -878,7 +878,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Call Comping",
           "family": "Call",
           "category": "groove",
-          "description": "A genre-shaped accompaniment cell that supports",
+          "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "kizomba",
             "call",
@@ -960,7 +960,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Call Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 5,
@@ -996,7 +996,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Call Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 3,
@@ -1056,7 +1056,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Hook Verse Variation",
           "family": "Hook",
           "category": "groove",
-          "description": "A restrained verse variation with intentional",
+          "description": "A restrained verse variation uses intentional space to keep the arrangement uncluttered.",
           "tags": [
             "kizomba",
             "hook",
@@ -1146,7 +1146,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Hook Verse Variation — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 3,
@@ -1182,7 +1182,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Hook Verse Variation — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,

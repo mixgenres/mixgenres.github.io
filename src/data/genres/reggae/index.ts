@@ -7,7 +7,7 @@ export const REGGAE_WORLD: GenreWorld = {
   "family": "Jamaican / sound-system",
   "color": "#4f8f6f",
   "level": "world",
-  "description": "Reggae and dub are represented as",
+  "description": "Reggae and dub pair offbeat Jamaican grooves with deep bass and spacious production.",
   "substyles": [
     "Roots Reggae",
     "Dub",
@@ -161,7 +161,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "name": "Dub",
       "origin": "Kingston, Jamaica",
       "era": "1970s",
-      "description": "Space Echo • Bass Drops •",
+      "description": "Space echo and deep bass drops.",
       "characteristicInstruments": [
         "bass",
         "drums",
@@ -231,7 +231,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "name": "Dancehall",
       "origin": "Kingston, Jamaica",
       "era": "1980s–Present",
-      "description": "Digital Riddim • Deejay Toasting •",
+      "description": "Digital riddims and deejay toasting.",
       "characteristicInstruments": [
         "sampler",
         "drums",
@@ -779,7 +779,7 @@ export const REGGAE_WORLD: GenreWorld = {
           "name": "One-Drop Foundation — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             0,
             8,
@@ -797,7 +797,7 @@ export const REGGAE_WORLD: GenreWorld = {
           "name": "One-Drop Foundation — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             0,
             6,
@@ -835,7 +835,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "name": "Offbeat Skank",
       "family": "Reggae Skank",
       "category": "ostinato",
-      "description": "Short guitar/organ chord attacks on the",
+      "description": "Short guitar or organ chord attacks land on the offbeats.",
       "tags": [
         "skank",
         "reggae",
@@ -906,7 +906,7 @@ export const REGGAE_WORLD: GenreWorld = {
           "name": "Offbeat Skank — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             2,
             10
@@ -922,7 +922,7 @@ export const REGGAE_WORLD: GenreWorld = {
           "name": "Offbeat Skank — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             2,
             6,
@@ -958,7 +958,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "name": "Melodic Reggae Bass",
       "family": "Reggae Bass",
       "category": "ostinato",
-      "description": "Long, syncopated bass notes occupy the",
+      "description": "Long, syncopated bass notes occupy the spaces between drum accents.",
       "tags": [
         "reggae",
         "bass",
@@ -1036,7 +1036,7 @@ export const REGGAE_WORLD: GenreWorld = {
           "name": "Melodic Reggae Bass — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             0,
             6,
@@ -1054,7 +1054,7 @@ export const REGGAE_WORLD: GenreWorld = {
           "name": "Melodic Reggae Bass — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             0,
             3,
@@ -1164,7 +1164,7 @@ export const REGGAE_WORLD: GenreWorld = {
           "name": "Dub Dropout & Echo Fragment — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             2,
             14
@@ -1180,7 +1180,7 @@ export const REGGAE_WORLD: GenreWorld = {
           "name": "Dub Dropout & Echo Fragment — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             2,
             8,
@@ -1283,7 +1283,7 @@ export const REGGAE_WORLD: GenreWorld = {
           "name": "Steppers Foundation — sparse",
           "variationType": "sparse",
           "probability": 0.35,
-          "description": "Leaves selected attacks open for a",
+          "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
           "onsetGrid": [
             0,
             8
@@ -1299,7 +1299,7 @@ export const REGGAE_WORLD: GenreWorld = {
           "name": "Steppers Foundation — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
-          "description": "Retains the cell while moving emphasis",
+          "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
           "onsetGrid": [
             0,
             4,
@@ -1407,7 +1407,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "name": "Skank Guitar",
       "family": "Roots Reggae",
       "category": "cell",
-      "description": "Short clipped guitar chord on the",
+      "description": "Short, clipped guitar chords mark the offbeats.",
       "tags": [
         "skank"
       ],
@@ -2007,7 +2007,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "family": "Dub",
       "category": "cadence",
       "transitionType": "fill",
-      "description": "A short bass-and-drum tag announces a",
+      "description": "A short bass-and-drum tag announces the transition into the next section.",
       "tags": [
         "version",
         "tag"

@@ -9,7 +9,7 @@ export const BLUES_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           "family": "Shuffle",
           "category": "fill",
           "transitionType": "fill",
-          "description": "A repeating triplet-derived blues pulse with",
+          "description": "A repeating triplet-derived blues pulse supports the phrase.",
           "tags": [
             "blues",
             "shuffle",
@@ -103,7 +103,7 @@ export const BLUES_WORLD_PATTERNS_FILL: MusicalPattern[] = [
               "name": "Chicago Shuffle — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,

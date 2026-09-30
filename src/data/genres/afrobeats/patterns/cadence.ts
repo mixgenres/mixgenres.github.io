@@ -69,7 +69,7 @@ export const AFROBEATS_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
               "name": "Fela Afrobeat Horn Section Stabs — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 3,
                 11,
@@ -97,7 +97,7 @@ export const AFROBEATS_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
               "name": "Fela Afrobeat Horn Section Stabs — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 3,
                 7,
@@ -129,7 +129,7 @@ export const AFROBEATS_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
               "name": "Fela Afrobeat Horn Section Stabs — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 3,
                 7,
@@ -186,7 +186,7 @@ export const AFROBEATS_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           "family": "Log Drum",
           "category": "cadence",
           "transitionType": "fill",
-          "description": "A phrase-ending cadence that gives the",
+          "description": "A phrase-ending cadence gives the melody a clear point of arrival.",
           "tags": [
             "afrobeats",
             "log-drum",
@@ -270,7 +270,7 @@ export const AFROBEATS_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
               "name": "Log Drum Cadence — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -302,7 +302,7 @@ export const AFROBEATS_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
               "name": "Log Drum Cadence — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -342,7 +342,7 @@ export const AFROBEATS_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
               "name": "Log Drum Cadence — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 0,
                 2,

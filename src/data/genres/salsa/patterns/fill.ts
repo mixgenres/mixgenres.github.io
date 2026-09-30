@@ -9,7 +9,7 @@ export const SALSA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           "family": "Bell",
           "category": "fill",
           "transitionType": "fill",
-          "description": "Driving hand-held bongo bell pattern with",
+          "description": "A driving hand-held bongo bell pattern adds a bright rhythmic layer.",
           "tags": [],
           "scopes": [
             "measure"
@@ -68,7 +68,7 @@ export const SALSA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
               "name": "Campana (Bongo Bell) — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -104,7 +104,7 @@ export const SALSA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
               "name": "Campana (Bongo Bell) — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 4,

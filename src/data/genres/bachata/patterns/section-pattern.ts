@@ -8,7 +8,7 @@ export const BACHATA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           "name": "Requinto Intro",
           "family": "Requinto",
           "category": "sectionPattern",
-          "description": "A reduced entrance used to establish",
+          "description": "A reduced entrance used to establish the groove before the full ensemble enters.",
           "tags": [
             "bachata",
             "requinto",
@@ -89,7 +89,7 @@ export const BACHATA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Requinto Intro — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 6,
@@ -125,7 +125,7 @@ export const BACHATA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Requinto Intro — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 3,
@@ -169,7 +169,7 @@ export const BACHATA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Requinto Intro — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 1,
                 3,
@@ -233,7 +233,7 @@ export const BACHATA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           "name": "Majao Chorus Lift",
           "family": "Majao",
           "category": "sectionPattern",
-          "description": "A higher-energy chorus layer that increases",
+          "description": "A higher-energy chorus layer increases rhythmic density while keeping the underlying pulse clear.",
           "tags": [
             "bachata",
             "majao",
@@ -321,7 +321,7 @@ export const BACHATA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Majao Chorus Lift — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 5,
@@ -357,7 +357,7 @@ export const BACHATA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Majao Chorus Lift — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 3,
@@ -401,7 +401,7 @@ export const BACHATA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Majao Chorus Lift — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 1,
                 3,

@@ -59,7 +59,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Synth Bass Tumbao — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 10,
@@ -87,7 +87,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Synth Bass Tumbao — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 6,
@@ -198,7 +198,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Piano Guajeo — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -230,7 +230,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Piano Guajeo — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -334,7 +334,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Kick Bombo — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 6,
                 14
@@ -358,7 +358,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Kick Bombo — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 6,
                 14
@@ -403,7 +403,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Horn Moña",
           "family": "Horns",
           "category": "groove",
-          "description": "Interlocking brass riffs cutting through the",
+          "description": "Interlocking brass riffs cut through the rhythm section.",
           "tags": [],
           "scopes": [
             "measure"
@@ -457,7 +457,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Horn Moña — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 7,
@@ -485,7 +485,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Horn Moña — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 4,
@@ -594,7 +594,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "2-3 Rumba Clave — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 8,
@@ -622,7 +622,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "2-3 Rumba Clave — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 4,
@@ -733,7 +733,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Anticipated Presión Pedal — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 3,
                 11,
@@ -761,7 +761,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Anticipated Presión Pedal — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 3,
                 7,
@@ -814,7 +814,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Presión Comping",
           "family": "Presión",
           "category": "groove",
-          "description": "A genre-shaped accompaniment cell that supports",
+          "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "timba",
             "presion",
@@ -894,7 +894,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Presión Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -930,7 +930,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Presión Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,

@@ -8,7 +8,7 @@ export const COUNTRY_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           "name": "Boom-Chuck Intro",
           "family": "Boom-Chuck",
           "category": "sectionPattern",
-          "description": "A reduced entrance used to establish",
+          "description": "A reduced entrance used to establish the groove before the full ensemble enters.",
           "tags": [
             "country",
             "boom-chuck",
@@ -80,7 +80,7 @@ export const COUNTRY_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Boom-Chuck Intro — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 4,
@@ -108,7 +108,7 @@ export const COUNTRY_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Boom-Chuck Intro — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 2,
@@ -144,7 +144,7 @@ export const COUNTRY_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Boom-Chuck Intro — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 1,
                 2,

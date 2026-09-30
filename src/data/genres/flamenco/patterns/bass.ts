@@ -8,7 +8,7 @@ export const FLAMENCO_WORLD_PATTERNS_BASS: MusicalPattern[] = [
           "name": "Rumba Flamenca Bass Propulsion",
           "family": "Rumba Groove",
           "category": "bass",
-          "description": "Rumba flamenca bass motion follows the",
+          "description": "Rumba flamenca bass motion follows the guitar compás.",
           "tags": [
             "rumba",
             "bass",

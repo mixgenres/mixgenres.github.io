@@ -69,7 +69,7 @@ export const METAL_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Breakdown Chug — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -105,7 +105,7 @@ export const METAL_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Breakdown Chug — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,

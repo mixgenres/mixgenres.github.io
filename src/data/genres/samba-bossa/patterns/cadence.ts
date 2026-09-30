@@ -9,7 +9,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           "family": "Bossa Nova",
           "category": "cadence",
           "transitionType": "fill",
-          "description": "Short harmonic cadence figure for a",
+          "description": "A short harmonic cadence figure marks the end of a phrase.",
           "tags": [
             "extended harmony",
             "release"

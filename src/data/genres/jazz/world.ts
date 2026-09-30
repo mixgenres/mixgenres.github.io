@@ -5,5 +5,5 @@ export const JAZZ_WORLD_WORLD: Partial<GenreWorld> = {
   "family": "Improvisation / Harmony",
   "color": "#5f83bb",
   "level": "world",
-  "description": "The monumental Jazz style: Swing and"
+  "description": "Jazz encompasses swing, improvisation, and a wide range of ensemble traditions."
 };

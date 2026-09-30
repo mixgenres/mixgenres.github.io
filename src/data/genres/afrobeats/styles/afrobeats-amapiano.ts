@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Amapiano",
         "origin": "South Africa",
         "era": "2018–Present",
-        "description": "Driving • 4/4 Log Drum •",
+        "description": "Driving 4/4 groove with a prominent log drum.",
         "characteristicInstruments": [
           "drums",
           "bass",

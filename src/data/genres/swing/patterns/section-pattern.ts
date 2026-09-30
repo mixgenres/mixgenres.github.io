@@ -72,7 +72,7 @@ export const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Shout Chorus Ensemble Hits — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -104,7 +104,7 @@ export const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Shout Chorus Ensemble Hits — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -144,7 +144,7 @@ export const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Shout Chorus Ensemble Hits — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 0,
                 3,
@@ -210,7 +210,7 @@ export const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           "name": "Turnaround Intro",
           "family": "Turnaround",
           "category": "sectionPattern",
-          "description": "A reduced entrance used to establish",
+          "description": "A reduced entrance used to establish the groove before the full ensemble enters.",
           "tags": [
             "swing",
             "turnaround",
@@ -288,7 +288,7 @@ export const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Turnaround Intro — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 3,
@@ -324,7 +324,7 @@ export const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Turnaround Intro — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -368,7 +368,7 @@ export const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Turnaround Intro — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 0,
                 2,
@@ -435,7 +435,7 @@ export const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           "name": "La Pompe Chorus Lift",
           "family": "La Pompe",
           "category": "sectionPattern",
-          "description": "A higher-energy chorus layer that increases",
+          "description": "A higher-energy chorus layer increases rhythmic density while keeping the underlying pulse clear.",
           "tags": [
             "swing",
             "la-pompe",
@@ -520,7 +520,7 @@ export const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "La Pompe Chorus Lift — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 5,
@@ -556,7 +556,7 @@ export const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "La Pompe Chorus Lift — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 4,
@@ -600,7 +600,7 @@ export const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "La Pompe Chorus Lift — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 2,
                 4,

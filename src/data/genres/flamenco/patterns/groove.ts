@@ -8,7 +8,7 @@ export const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Cajon Rumba",
           "family": "Cajon",
           "category": "groove",
-          "description": "Cajón rhythm for rumba flamenca with",
+          "description": "A cajón rhythm for rumba flamenca combines bass tones and sharp slaps.",
           "tags": [],
           "scopes": [
             "measure"
@@ -65,7 +65,7 @@ export const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Cajon Rumba — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -97,7 +97,7 @@ export const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Cajon Rumba — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -159,7 +159,7 @@ export const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Falseta Comping",
           "family": "Falseta",
           "category": "groove",
-          "description": "A genre-shaped accompaniment cell that supports",
+          "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "flamenco",
             "falseta",
@@ -232,7 +232,7 @@ export const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Falseta Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 3,
@@ -260,7 +260,7 @@ export const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Falseta Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -312,7 +312,7 @@ export const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Llamada Verse Variation",
           "family": "Llamada",
           "category": "groove",
-          "description": "A restrained verse variation with intentional",
+          "description": "A restrained verse variation uses intentional space to keep the arrangement uncluttered.",
           "tags": [
             "flamenco",
             "llamada",
@@ -395,7 +395,7 @@ export const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Llamada Verse Variation — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 7,
@@ -427,7 +427,7 @@ export const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Llamada Verse Variation — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 5,

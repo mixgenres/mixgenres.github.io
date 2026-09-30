@@ -8,7 +8,7 @@ export const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           "name": "Drop Intro",
           "family": "Drop",
           "category": "sectionPattern",
-          "description": "A reduced entrance used to establish",
+          "description": "A reduced entrance used to establish the groove before the full ensemble enters.",
           "tags": [
             "kizomba",
             "drop",
@@ -94,7 +94,7 @@ export const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Drop Intro — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -130,7 +130,7 @@ export const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Drop Intro — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -178,7 +178,7 @@ export const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Drop Intro — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 0,
                 2,
@@ -242,7 +242,7 @@ export const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           "name": "Kizomba Bass Chorus Lift",
           "family": "Kizomba Bass",
           "category": "sectionPattern",
-          "description": "A higher-energy chorus layer that increases",
+          "description": "A higher-energy chorus layer increases rhythmic density while keeping the underlying pulse clear.",
           "tags": [
             "kizomba",
             "kizomba-bass",
@@ -333,7 +333,7 @@ export const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Kizomba Bass Chorus Lift — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 2,
@@ -369,7 +369,7 @@ export const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Kizomba Bass Chorus Lift — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,
@@ -417,7 +417,7 @@ export const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Kizomba Bass Chorus Lift — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 0,
                 1,
@@ -485,7 +485,7 @@ export const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           "name": "Semba Bridge",
           "family": "Semba",
           "category": "sectionPattern",
-          "description": "A contrasting bridge texture designed to",
+          "description": "A contrasting bridge texture creates a clear change in energy before the main section returns.",
           "tags": [
             "kizomba",
             "semba",
@@ -572,7 +572,7 @@ export const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Semba Bridge — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 3,
@@ -608,7 +608,7 @@ export const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Semba Bridge — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -656,7 +656,7 @@ export const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
               "name": "Semba Bridge — transition variation",
               "variationType": "transition",
               "probability": 0.16,
-              "description": "Adds a final pickup/closure gesture for",
+              "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
               "onsetGrid": [
                 0,
                 2,

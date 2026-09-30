@@ -6,7 +6,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "name": "Cha-Cha-Chá",
         "origin": "Havana, Cuba",
         "era": "1950s",
-        "description": "Güiro • Flute & Violins •",
+        "description": "Güiro, flute, and violins.",
         "characteristicInstruments": [
           "flute",
           "violin",

@@ -67,7 +67,7 @@ export const FOLK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Old-Time Fiddle Drone & Shuffle Bow — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -99,7 +99,7 @@ export const FOLK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Old-Time Fiddle Drone & Shuffle Bow — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -157,7 +157,7 @@ export const FOLK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Vocal Harmony Anchor",
           "family": "Vocal Harmony",
           "category": "ostinato",
-          "description": "A repeating anchor that locks the",
+          "description": "A repeating anchor that locks the bass line to the harmonic cycle.",
           "tags": [
             "folk",
             "vocal-harmony",
@@ -229,7 +229,7 @@ export const FOLK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Vocal Harmony Anchor — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 8,
@@ -257,7 +257,7 @@ export const FOLK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Vocal Harmony Anchor — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 5,

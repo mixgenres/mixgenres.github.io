@@ -9,7 +9,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           "family": "Breaks",
           "category": "break",
           "transitionType": "fill",
-          "description": "Drops the main kick for a",
+          "description": "Drops the main kick for a brief break in the groove.",
           "tags": [
             "break",
             "pickup",
@@ -87,7 +87,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Dembow Break & Pickup — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 0,
                 8,
@@ -105,7 +105,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Dembow Break & Pickup — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 0,
                 4,

@@ -56,7 +56,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Charleston Comping — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 0,
                 3
@@ -80,7 +80,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Charleston Comping — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 0,
                 3
@@ -229,7 +229,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Shuffle Swing — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -357,7 +357,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Bebop Ride — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -393,7 +393,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Bebop Ride — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -508,7 +508,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Brushes Ballad — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -610,7 +610,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Ensemble Hits — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 6
@@ -634,7 +634,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Ensemble Hits — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 4,
@@ -678,10 +678,10 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "id": "swing-comp-13",
           "worldId": "swing",
           "styleIds": ["swing-big-band"],
-          "name": "Comping Comping",
+          "name": "Piano Comping Cell",
           "family": "Comping",
           "category": "groove",
-          "description": "A genre-shaped accompaniment cell that supports",
+          "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "swing",
             "comping",
@@ -755,10 +755,10 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "swing-comp-13-v-01",
               "parentPatternId": "swing-comp-13",
-              "name": "Comping Comping — sparse variation",
+              "name": "Piano Comping Cell — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 4,
                 8,
@@ -791,10 +791,10 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "swing-comp-13-v-02",
               "parentPatternId": "swing-comp-13",
-              "name": "Comping Comping — accent shift",
+              "name": "Piano Comping Cell — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 4,
                 7,
@@ -853,7 +853,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Spang-a-Lang Verse Variation",
           "family": "Spang-a-Lang",
           "category": "groove",
-          "description": "A restrained verse variation with intentional",
+          "description": "A restrained verse variation uses intentional space to keep the arrangement uncluttered.",
           "tags": [
             "swing",
             "spang-a-lang",
@@ -934,7 +934,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Spang-a-Lang Verse Variation — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 3,
@@ -966,7 +966,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Spang-a-Lang Verse Variation — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 2,

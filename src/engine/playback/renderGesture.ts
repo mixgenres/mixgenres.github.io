@@ -3,6 +3,7 @@ import { GESTURE_NAMES } from '../band/gestures.ts';
 import type { LuthierModelCategory } from '../../data/instruments/schema/luthier';
 import { FINGERPAD_GESTURES, HARD_PICK_GESTURES, NAIL_GESTURES, HAMMER_GESTURES, BOW_GESTURES, AIR_GESTURES, BOWED_RENDER_INSTRUMENT_PATTERN } from '../../data/performance/gestureExcitations';
 import { matchesGestureConcept } from '../../data/performance/gestureLexicon';
+import { LRUMap, registerCache } from '../cache/lru.ts';
 
 export type RenderExcitationType = 'plectrum' | 'nail' | 'fingerpad' | 'hard-pick' | 'hammer' | 'stick' | 'mallet' | 'breath' | 'bow';
 
@@ -19,11 +20,18 @@ export interface ResolvedRenderGesture {
   decayTimeFactorScale: number;
 }
 
+const renderGestureCache = new LRUMap<string, ResolvedRenderGesture>(512, 'renderGestureCache');
+registerCache(renderGestureCache);
+
 function normalizedGesture(name: string): string {
   return name.toLowerCase().replace(/é/g, 'e').replace(/á/g, 'a');
 }
 
 export function resolveRenderGesture(instrumentId: string, gestureCode: number): ResolvedRenderGesture {
+  const key = `${instrumentId}:${gestureCode}`;
+  const cached = renderGestureCache.get(key);
+  if (cached) return cached;
+
   const def = INSTRUMENTS_BY_ID[instrumentId];
   const name = GESTURE_NAMES[gestureCode] ?? 'tone';
   const g = normalizedGesture(name);
@@ -83,5 +91,7 @@ export function resolveRenderGesture(instrumentId: string, gestureCode: number):
   const harmonicRichnessDelta = g.includes('ponticello') ? 0.12 : g.includes('tasto') ? -0.10 : g.includes('mwah-growl') ? 0.07 : 0;
   const decayTimeFactorScale = g.includes('ponticello') ? 0.94 : g.includes('tasto') ? 1.05 : 1;
 
-  return { name, action, excitationType, categoryOverride, contactPoint, mass, gainMultiplier, articulationNorm, harmonicRichnessDelta, decayTimeFactorScale };
+  const resolved = { name, action, excitationType, categoryOverride, contactPoint, mass, gainMultiplier, articulationNorm, harmonicRichnessDelta, decayTimeFactorScale };
+  renderGestureCache.set(key, resolved);
+  return resolved;
 }

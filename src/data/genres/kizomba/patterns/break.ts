@@ -87,7 +87,7 @@ export const KIZOMBA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
                 0.92,
                 0.86
               ],
-              "description": "Stripped-down heavy electronic sub-bass kick for"
+              "description": "A stripped-down electronic sub-bass kick anchors the break."
             },
             {
               "id": "kizomba-batida-groove-v-02",
@@ -95,7 +95,7 @@ export const KIZOMBA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Kizomba Batida & Sub-Kick Beat — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 6,

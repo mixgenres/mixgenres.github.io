@@ -131,7 +131,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Dembow Core Timeline — sparse",
               "variationType": "sparse",
               "probability": 0.05,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 0,
                 8,
@@ -157,7 +157,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Dembow Core Timeline — accent shift",
               "variationType": "accentShift",
               "probability": 0.12,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 0,
                 3,

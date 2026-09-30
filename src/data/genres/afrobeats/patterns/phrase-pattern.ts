@@ -87,7 +87,7 @@ export const AFROBEATS_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
               "name": "Afrobeats Vocal Phrasing — alternate phrasing",
               "variationType": "phraseStart",
               "probability": 0.2,
-              "description": "Alternate vocal entry placement for a",
+              "description": "An alternate vocal entry shifts the placement of a phrase for subtle rhythmic variation.",
               "onsetGrid": [
                 0,
                 3,

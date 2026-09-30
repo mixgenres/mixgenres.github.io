@@ -9,7 +9,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           "family": "Samba",
           "category": "break",
           "transitionType": "fill",
-          "description": "Brief reduction to surdo and a",
+          "description": "A brief reduction to surdo and one supporting percussion part creates space.",
           "tags": [
             "batucada",
             "break"

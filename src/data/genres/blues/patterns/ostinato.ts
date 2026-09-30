@@ -105,7 +105,7 @@ export const BLUES_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
                 0.8,
                 1
               ],
-              "description": "A rising sixth/chromatic approach used to"
+              "description": "A rising sixth or chromatic approach leads into the target note."
             },
             {
               "id": "blues-boogie-bass-v-02",
@@ -113,7 +113,7 @@ export const BLUES_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Boogie Root–Fifth Bass — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -183,7 +183,7 @@ export const BLUES_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Call & Response Anchor",
           "family": "Call & Response",
           "category": "ostinato",
-          "description": "A repeating anchor that locks the",
+          "description": "A repeating anchor that locks the bass line to the harmonic cycle.",
           "tags": [
             "blues",
             "call-response",
@@ -264,7 +264,7 @@ export const BLUES_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Call & Response Anchor — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 5,
@@ -300,7 +300,7 @@ export const BLUES_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Call & Response Anchor — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 4,

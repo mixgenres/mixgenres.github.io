@@ -58,7 +58,7 @@ export const GENRE_NAMES: Record<string, string> = Object.fromEntries(
 );
 
 function shortDescription(value: string): string {
-  return String(value ?? '').replace(/\s+/g, ' ').trim().split(' ').slice(0, 6).join(' ');
+  return String(value ?? '').replace(/\s+/g, ' ').trim();
 }
 
 export function cleanPatternName(name: string, shortName?: string): string {

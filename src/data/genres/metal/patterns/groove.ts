@@ -71,7 +71,7 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Clean Arpeggio — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -107,7 +107,7 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Clean Arpeggio — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -247,7 +247,7 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Bass Gallop — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 3,
@@ -295,7 +295,7 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Bass Gallop — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -430,7 +430,7 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "5/8 Riff — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -458,7 +458,7 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "5/8 Riff — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -574,7 +574,7 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Groove Metal Riff — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 3,
@@ -610,7 +610,7 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Groove Metal Riff — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -676,7 +676,7 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Blast Comping",
           "family": "Blast",
           "category": "groove",
-          "description": "A genre-shaped accompaniment cell that supports",
+          "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "metal",
             "blast",
@@ -752,7 +752,7 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Blast Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -784,7 +784,7 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Blast Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -840,7 +840,7 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Breakdown Verse Variation",
           "family": "Breakdown",
           "category": "groove",
-          "description": "A restrained verse variation with intentional",
+          "description": "A restrained verse variation uses intentional space to keep the arrangement uncluttered.",
           "tags": [
             "metal",
             "breakdown",
@@ -929,7 +929,7 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Breakdown Verse Variation — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 1,
                 5,
@@ -965,7 +965,7 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Breakdown Verse Variation — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 1,
                 2,

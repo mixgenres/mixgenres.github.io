@@ -61,7 +61,7 @@ export const ELECTRONIC_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Offbeat Hats — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 10,
@@ -89,7 +89,7 @@ export const ELECTRONIC_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Offbeat Hats — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 6,

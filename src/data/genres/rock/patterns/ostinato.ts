@@ -8,7 +8,7 @@ export const ROCK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Riff + Bass Lock",
           "family": "Riff",
           "category": "ostinato",
-          "description": "Electric guitar and bass share a",
+          "description": "Electric guitar and bass share a tightly locked rhythmic figure.",
           "tags": [
             "rock",
             "riff",
@@ -98,7 +98,7 @@ export const ROCK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Riff + Bass Lock — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -161,7 +161,7 @@ export const ROCK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "7/8 Accent Group",
           "family": "Odd Meter",
           "category": "ostinato",
-          "description": "A seven-eighth-note cycle grouped 2+2+3, with",
+          "description": "A seven-eighth-note cycle grouped 2+2+3 creates an uneven, driving pulse.",
           "tags": [
             "rock",
             "progressive",
@@ -223,7 +223,7 @@ export const ROCK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "7/8 Accent Group — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 8,
@@ -251,7 +251,7 @@ export const ROCK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "7/8 Accent Group — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 4,
@@ -301,7 +301,7 @@ export const ROCK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Power Chord Anchor",
           "family": "Power Chord",
           "category": "ostinato",
-          "description": "A repeating anchor that locks the",
+          "description": "A repeating anchor that locks the bass line to the harmonic cycle.",
           "tags": [
             "rock",
             "power-chord",
@@ -372,7 +372,7 @@ export const ROCK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Power Chord Anchor — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 10,
@@ -400,7 +400,7 @@ export const ROCK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Power Chord Anchor — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 6,

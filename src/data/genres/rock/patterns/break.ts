@@ -52,7 +52,7 @@ export const ROCK_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Half-Time Groove — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 0,
                 4
@@ -76,7 +76,7 @@ export const ROCK_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
               "name": "Half-Time Groove — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 0,
                 4

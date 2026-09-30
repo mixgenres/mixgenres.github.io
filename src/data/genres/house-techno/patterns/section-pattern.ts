@@ -8,7 +8,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           "name": "Riser Build",
           "family": "Arrangement",
           "category": "sectionPattern",
-          "description": "Production-style build cue represented as a",
+          "description": "A production-style build cue raises energy before the next section.",
           "tags": [
             "build",
             "automation"

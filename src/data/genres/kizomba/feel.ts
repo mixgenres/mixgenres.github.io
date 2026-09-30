@@ -1,6 +1,6 @@
 import type { GenreWorld, DrumRuleStep, SamplerTimbreControl } from '../../schema';
 export const KIZOMBA_WORLD_FEEL: Partial<GenreWorld> = {
-  rhythm: { syncopation: 0.4, swing: 0.1, pocket: 'strict_grid', pocketDepth: 0, intonationSystem: 'equal', quantizeJitterMs: 2 },
+  rhythm: { syncopation: 0.4, swing: 0.08, pocket: 'center', pocketDepth: 0, intonationSystem: 'equal', quantizeJitterMs: 2 },
   drumRules: {
       evaluateStep: (step: DrumRuleStep) => {
         const percussionTimbre: SamplerTimbreControl = {

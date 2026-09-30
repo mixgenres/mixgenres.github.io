@@ -8,7 +8,7 @@ export const COUNTRY_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           "name": "Pedal Steel Volume Swell",
           "family": "Texture",
           "category": "cell",
-          "description": "Crying pedal-steel volume-pedal swells fading in",
+          "description": "Crying pedal-steel swells fade into the phrase.",
           "tags": [
             "country",
             "pedal-steel",
@@ -56,7 +56,7 @@ export const COUNTRY_WORLD_PATTERNS_CELL: MusicalPattern[] = [
               "name": "Pedal Steel Volume Swell — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 0,
                 5
@@ -80,7 +80,7 @@ export const COUNTRY_WORLD_PATTERNS_CELL: MusicalPattern[] = [
               "name": "Pedal Steel Volume Swell — played variation",
               "variationType": "accentShift",
               "probability": 0.18,
-              "description": "A light played variation for sparse",
+              "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
               "onsetGrid": [
                 0,
                 5

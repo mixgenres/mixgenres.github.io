@@ -94,7 +94,7 @@ export const ZOUK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
                 0.8,
                 0.95
               ],
-              "description": "Slower, heavier sub-bass pattern ideal for"
+              "description": "A slower, heavier sub-bass pattern suits breakdowns and sparse passages."
             },
             {
               "id": "zouk-bass-movement-v-02",
@@ -102,7 +102,7 @@ export const ZOUK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Zouk Syncopated Bass Movement — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -255,7 +255,7 @@ export const ZOUK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Chawa Guitar Skank — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 6,
@@ -304,7 +304,7 @@ export const ZOUK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Chawa Anchor",
           "family": "Chawa",
           "category": "ostinato",
-          "description": "A repeating anchor that locks the",
+          "description": "A repeating anchor that locks the bass line to the harmonic cycle.",
           "tags": [
             "zouk",
             "chawa",
@@ -382,7 +382,7 @@ export const ZOUK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Chawa Anchor — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -414,7 +414,7 @@ export const ZOUK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Chawa Anchor — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,

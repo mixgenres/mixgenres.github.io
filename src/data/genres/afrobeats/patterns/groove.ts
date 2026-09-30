@@ -77,7 +77,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Pitched Log Drum Bass Groove — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 6,
@@ -109,7 +109,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Pitched Log Drum Bass Groove — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -171,7 +171,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Modern Afropop Kick & Rim Pocket",
           "family": "Afrobeats Drums",
           "category": "groove",
-          "description": "Signature Afrobeats syncopated kick placement with",
+          "description": "Signature Afrobeats syncopated kick placement anchors the groove.",
           "tags": [
             "afrobeats",
             "drums",
@@ -235,7 +235,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Modern Afropop Kick & Rim Pocket — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 10,
@@ -263,7 +263,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Modern Afropop Kick & Rim Pocket — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 6,
@@ -321,7 +321,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Shekere & Gourd Shaker Engine",
           "family": "Afro Percussion",
           "category": "groove",
-          "description": "Continuous 16th-note gourd shaker rattle with",
+          "description": "A continuous 16th-note gourd-shaker rattle adds a fine-grained pulse.",
           "tags": [
             "afrobeat",
             "percussion",
@@ -415,7 +415,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Shekere & Gourd Shaker Engine — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 2,
@@ -475,7 +475,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Shekere & Gourd Shaker Engine — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,
@@ -632,7 +632,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Airy Rhodes & Synth Pad Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 14
@@ -656,7 +656,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Airy Rhodes & Synth Pad Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 8,
@@ -706,7 +706,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Horn Comping",
           "family": "Horn",
           "category": "groove",
-          "description": "A genre-shaped accompaniment cell that supports",
+          "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "afrobeats",
             "horn",
@@ -783,7 +783,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Horn Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 7,
@@ -815,7 +815,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Horn Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 4,
@@ -871,7 +871,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Log Drum Verse Variation",
           "family": "Log Drum",
           "category": "groove",
-          "description": "A restrained verse variation with intentional",
+          "description": "A restrained verse variation uses intentional space to keep the arrangement uncluttered.",
           "tags": [
             "afrobeats",
             "log-drum",
@@ -961,7 +961,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Log Drum Verse Variation — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 5,
@@ -997,7 +997,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Log Drum Verse Variation — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 4,

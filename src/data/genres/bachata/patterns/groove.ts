@@ -92,7 +92,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Bongo Majao — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 4,
@@ -236,7 +236,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Güira Majao — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 2,
@@ -296,7 +296,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Güira Majao — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 1,
@@ -453,7 +453,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Segunda Guitar — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 10,
@@ -481,7 +481,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Segunda Guitar — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 6,
@@ -594,7 +594,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Cumbia Güiro — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 6,
@@ -626,7 +626,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Cumbia Güiro — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 4,
@@ -687,7 +687,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Coro Comping",
           "family": "Coro / backing vocals",
           "category": "groove",
-          "description": "A genre-shaped accompaniment cell that supports",
+          "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "bachata",
             "coro",
@@ -767,7 +767,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Coro Comping — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 2,
                 6,
@@ -803,7 +803,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Coro Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 2,
                 4,
@@ -863,7 +863,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "name": "Derecho Verse Variation",
           "family": "Derecho",
           "category": "groove",
-          "description": "A restrained verse variation with intentional",
+          "description": "A restrained verse variation uses intentional space to keep the arrangement uncluttered.",
           "tags": [
             "bachata",
             "derecho",
@@ -950,7 +950,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Derecho Verse Variation — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 4,
@@ -986,7 +986,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
               "name": "Derecho Verse Variation — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,

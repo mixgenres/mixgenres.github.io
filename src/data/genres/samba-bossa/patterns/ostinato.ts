@@ -77,7 +77,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Cavaquinho Comp — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 1,
                 5
@@ -93,7 +93,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Cavaquinho Comp — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 1,
                 3,
@@ -129,7 +129,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Bossa bass anchor / anticipation",
           "family": "Bossa Bass",
           "category": "ostinato",
-          "description": "Root/approach bass contour that supports the",
+          "description": "A root-and-approach bass contour supports the harmonic changes.",
           "tags": [
             "bossa",
             "bass",
@@ -205,7 +205,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Bossa Nova Bass — sparse",
               "variationType": "sparse",
               "probability": 0.35,
-              "description": "Leaves selected attacks open for a",
+              "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
               "onsetGrid": [
                 0,
                 6,
@@ -223,7 +223,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Bossa Nova Bass — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Retains the cell while moving emphasis",
+              "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
               "onsetGrid": [
                 0,
                 3,

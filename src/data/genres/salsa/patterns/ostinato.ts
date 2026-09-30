@@ -145,7 +145,7 @@ export const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Bass Tumbao (Anticipated Harmony)",
           "family": "Tumbao Basslines",
           "category": "ostinato",
-          "description": "Classic bass tumbao hitting on the",
+          "description": "Classic bass tumbao emphasizes the anticipated beat.",
           "tags": [
             "bass",
             "tumbao",
@@ -218,7 +218,7 @@ export const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
                 0.85,
                 1
               ],
-              "description": "Tumbao incorporating a light downbeat on"
+              "description": "Tumbao incorporates a light downbeat before the anticipated bass note."
             },
             {
               "id": "afro-bass-tumbao-salsa-walk",
@@ -238,7 +238,7 @@ export const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
                 0.95,
                 0.8
               ],
-              "description": "Leading bass walk setting up the"
+              "description": "A leading bass walk sets up the next chord."
             }
           ],
     
@@ -397,7 +397,7 @@ export const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Piano Montuno / Guajeo (Interlocking Arpeggios) — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 3,
@@ -613,7 +613,7 @@ export const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Timbal Cáscara Pattern (Side-Shell Stick) — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 2,
@@ -827,7 +827,7 @@ export const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Bongo Martillo",
               "variationType": "instrumentSpecific",
               "probability": 0.18,
-              "description": "Steady martillo rhythm with slap on",
+              "description": "A steady martillo rhythm adds a slap accent on the offbeat.",
               "onsetGrid": [
                 0,
                 2,
@@ -886,7 +886,7 @@ export const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "name": "Tumbao Anchor",
           "family": "Tumbao",
           "category": "ostinato",
-          "description": "A repeating anchor that locks the",
+          "description": "A repeating anchor that locks the bass line to the harmonic cycle.",
           "tags": [
             "salsa",
             "tumbao",
@@ -964,7 +964,7 @@ export const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Tumbao Anchor — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
-              "description": "Drops selected interior attacks so the",
+              "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
               "onsetGrid": [
                 0,
                 7,
@@ -996,7 +996,7 @@ export const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
               "name": "Tumbao Anchor — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
-              "description": "Keeps the rhythm intact but moves",
+              "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
               "onsetGrid": [
                 0,
                 4,

@@ -4,9 +4,9 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
         "id": "rock-garage-rock",
         "worldId": "rock",
         "name": "Garage Rock",
-        "origin": "Detroit / Detroit / NYC",
+        "origin": "Detroit / New York City",
         "era": "1960s / 2000s Revival",
-        "description": "Lo-Fi Fuzz • Catchy Riffs •",
+        "description": "Lo-fi fuzz and catchy guitar riffs.",
         "characteristicInstruments": [
           "electric-guitar",
           "bass",

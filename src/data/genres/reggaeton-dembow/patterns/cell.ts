@@ -8,7 +8,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           "name": "Reggaetón piano offbeat stab",
           "family": "Harmony",
           "category": "cell",
-          "description": "Short piano/synth anticipations that leave the",
+          "description": "Short piano or synth anticipations leave the downbeat open.",
           "tags": [
             "stabs",
             "offbeat"
