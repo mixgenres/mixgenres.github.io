@@ -2,7 +2,7 @@
 
 ## Scope
 
-- Supported genres are the 33 canonical leaves in `data/genres/index.ts`.
+- Supported genres are the canonical leaves in `data/genres/index.ts`.
 - Unsupported legacy genres must not appear in the public catalog.
 - The instrument catalog is authoritative and must remain unchanged.
 
@@ -10,7 +10,7 @@
 
 - Use one canonical genre ID per public genre.
 - Default style is the first listed style.
-- Keep 6–8 styles per genre.
+- Include each significant, musically distinct substyle as a style definition with a resolvable form template. Do not pad a genre with invented styles to hit a count.
 - Style names describe reusable musical identities.
 - Do not clone individual artist or song styles.
 
@@ -38,7 +38,7 @@
 
 ## Starter songs
 
-- Starter songs use exactly five instruments.
+- Starter songs compile to exactly eight distinct playable instruments.
 - Instrument choices should reflect genre identity.
 - Do not modify the instrument catalog to satisfy this rule.
 - Song structures must use existing engine section kinds.
@@ -55,3 +55,4 @@
 - Keep source musical definitions only when reachable from supported genres.
 - Prefer shared references over cloned catalog entries.
 - Validate TypeScript before shipping catalog changes.
+- `npm run schema:catalog` must resolve every listed substyle, style form, instrument and starter pattern before writing schemas.

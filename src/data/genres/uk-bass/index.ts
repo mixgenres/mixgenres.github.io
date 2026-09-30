@@ -2,13 +2,31 @@ import type { GenreWorld, GenreStyleDefinition } from '../../schema';
 
 const styles: GenreStyleDefinition[] = [
   {
-    id: 'uk-bass-garage', worldId: 'uk-bass', name: 'UK Garage / 2-Step', origin: 'London, United Kingdom', era: '1990s–Present',
+    id: 'uk-bass-garage', worldId: 'uk-bass', name: 'UK Garage', origin: 'London, United Kingdom', era: '1990s–Present',
     description: 'Swinging, syncopated 2-step drums, deep bass, clipped chords and vocal chops.',
     characteristicInstruments: ['drums', 'sub-bass', 'synth', 'sampler', 'voice'], preferredMeters: ['4/4'], tempoRange: [128, 138],
-    keySubstyles: ['2-Step Garage', 'Speed Garage'], coreConcepts: ['syncopated kick', 'snare on 2 and 4', 'swung hats', 'vocal chops', 'sub-bass'],
+    keySubstyles: ['UK Garage'], coreConcepts: ['syncopated kick', 'snare on 2 and 4', 'swung hats', 'vocal chops', 'sub-bass'],
     rhythmicGrammar: ['two-step kick displacement with a firm backbeat, shuffled or swung subdivisions and bass syncopation'], tuningSystem: '12-tet',
     signatureCell: 'Skipped two-step kick, crisp backbeat and swung high percussion', grooveMechanics: { swingPercentage: 56, anticipationOffsetSteps: 0, microtimingFeel: 'swung' },
     sectionProgressions: { verse: ['Am7', 'Fmaj7', 'C', 'G'], chorus: ['Fmaj7', 'G', 'Am7', 'Am7'] },
+  },
+  {
+    id: 'uk-bass-2-step', worldId: 'uk-bass', name: '2-Step', origin: 'London, United Kingdom', era: 'Late 1990s–Present',
+    description: 'UK garage rhythm with a broken, syncopated kick pattern, crisp backbeat, shuffled percussion and bass-led movement.',
+    characteristicInstruments: ['drums', 'sub-bass', 'synth', 'sampler', 'voice'], preferredMeters: ['4/4'], tempoRange: [128, 138],
+    keySubstyles: ['2-Step'], coreConcepts: ['broken kick pattern', 'snare on 2 and 4', 'swung subdivisions', 'bass syncopation'],
+    rhythmicGrammar: ['kick displacements around a firm backbeat with swung high percussion and syncopated bass'], tuningSystem: '12-tet',
+    signatureCell: 'Skipped kick, crisp backbeat and swung percussion around a vocal chop', grooveMechanics: { swingPercentage: 57, anticipationOffsetSteps: 0, microtimingFeel: 'swung' },
+    sectionProgressions: { verse: ['Am7', 'Fmaj7', 'C', 'G'], chorus: ['Fmaj7', 'G', 'Am7', 'Am7'] },
+  },
+  {
+    id: 'uk-bass-speed-garage', worldId: 'uk-bass', name: 'Speed Garage', origin: 'United Kingdom', era: 'Late 1990s–Present',
+    description: 'High-energy garage with a four-to-the-floor pulse, swung percussion, weighty bass and chopped vocal phrases.',
+    characteristicInstruments: ['drums', 'sub-bass', 'synth', 'sampler', 'voice'], preferredMeters: ['4/4'], tempoRange: [130, 140],
+    keySubstyles: ['Speed Garage'], coreConcepts: ['four-to-the-floor kick', 'swung percussion', 'heavy bassline', 'vocal chops'],
+    rhythmicGrammar: ['steady four-beat kick with shuffled hats, syncopated bass and short vocal replies'], tuningSystem: '12-tet',
+    signatureCell: 'Four-beat kick under swung percussion and a syncopated bass response', grooveMechanics: { swingPercentage: 55, anticipationOffsetSteps: 0, microtimingFeel: 'swung' },
+    sectionProgressions: { verse: ['Am', 'F', 'C', 'G'], chorus: ['F', 'G', 'Am', 'Am'] },
   },
   {
     id: 'uk-bass-dubstep', worldId: 'uk-bass', name: 'Dubstep', origin: 'South London, United Kingdom', era: '2000s–Present',
@@ -20,7 +38,7 @@ const styles: GenreStyleDefinition[] = [
     sectionProgressions: { verse: ['Dm', 'Bb', 'Gm', 'A'], chorus: ['Dm', 'C', 'Bb', 'A'] },
   },
   {
-    id: 'uk-bass-downtempo', worldId: 'uk-bass', name: 'UK Funky', origin: 'London, United Kingdom', era: '2000s–Present',
+    id: 'uk-bass-funky', worldId: 'uk-bass', name: 'UK Funky', origin: 'London, United Kingdom', era: '2000s–Present',
     description: 'Percussive house and garage hybrid with syncopated drums, bass and Afro-Caribbean percussion.',
     characteristicInstruments: ['drums', 'sub-bass', 'hand-percussion', 'synth', 'voice'], preferredMeters: ['4/4'], tempoRange: [125, 132],
     keySubstyles: ['UK Funky', 'Tribal House'], coreConcepts: ['rolling percussion', 'syncopated house kick', 'bass-led groove', 'vocal calls'],
@@ -29,13 +47,31 @@ const styles: GenreStyleDefinition[] = [
     sectionProgressions: { verse: ['Am', 'G', 'F', 'G'], chorus: ['F', 'G', 'Am', 'Am'] },
   },
   {
-    id: 'uk-bass-ambient', worldId: 'uk-bass', name: 'Future Garage', origin: 'United Kingdom', era: '2000s–Present',
+    id: 'uk-bass-future-garage', worldId: 'uk-bass', name: 'Future Garage', origin: 'United Kingdom', era: '2000s–Present',
     description: 'Sparse, shuffled garage rhythms with deep sub, atmospheric harmony and fragmented vocal samples.',
     characteristicInstruments: ['drums', 'sub-bass', 'synth', 'sampler', 'voice'], preferredMeters: ['4/4'], tempoRange: [125, 135],
     keySubstyles: ['Future Garage', 'Bass Music'], coreConcepts: ['sparse 2-step', 'shuffled percussion', 'atmospheric pads', 'chopped vocal texture'],
     rhythmicGrammar: ['broken 2-step beat with irregular kick placement and loose shuffled high percussion'], tuningSystem: '12-tet',
     signatureCell: 'Sparse swung garage break under a long atmospheric chord', grooveMechanics: { swingPercentage: 57, anticipationOffsetSteps: 0, microtimingFeel: 'laid-back' },
     sectionProgressions: { verse: ['Em7', 'Cmaj7', 'G', 'D'], chorus: ['Cmaj7', 'D', 'Em7', 'Em7'] },
+  },
+  {
+    id: 'uk-bass-bassline', worldId: 'uk-bass', name: 'Bassline', origin: 'Sheffield, United Kingdom', era: '2000s–Present',
+    description: 'Fast UK club music with a four-to-the-floor pulse, elastic bass and pitched vocal hooks.',
+    characteristicInstruments: ['drums', 'sub-bass', 'synth', 'voice', 'sampler'], preferredMeters: ['4/4'], tempoRange: [130, 140],
+    keySubstyles: ['Bassline'], coreConcepts: ['four-to-the-floor kick', 'wobbly bass hook', 'pitched vocal sample', 'club drop'],
+    rhythmicGrammar: ['steady four-beat kick with syncopated bass and clipped vocal or synth replies'], tuningSystem: '12-tet',
+    signatureCell: 'Four-to-the-floor kick beneath a syncopated elastic bassline', grooveMechanics: { swingPercentage: 52, anticipationOffsetSteps: 0, microtimingFeel: 'straight' },
+    sectionProgressions: { verse: ['Am', 'F', 'C', 'G'], chorus: ['F', 'G', 'Am', 'Am'] },
+  },
+  {
+    id: 'uk-bass-grime', worldId: 'uk-bass', name: 'Grime', origin: 'East London, United Kingdom', era: '2000s–Present',
+    description: 'MC-led UK electronic music with sparse syncopated drums, dark synth motifs and sharp bass.',
+    characteristicInstruments: ['drums', 'sub-bass', 'synth', 'sampler', 'voice'], preferredMeters: ['4/4'], tempoRange: [135, 145],
+    keySubstyles: ['Eski', 'Instrumental Grime'], coreConcepts: ['MC cadence', 'sparse syncopated beat', 'dark synth motif', 'sub-bass'],
+    rhythmicGrammar: ['broken syncopated kick and snare leaves rhythmic space for rapid MC phrasing'], tuningSystem: '12-tet',
+    signatureCell: 'Sparse broken beat and dark synth hook under an MC cadence', grooveMechanics: { swingPercentage: 50, anticipationOffsetSteps: 0, microtimingFeel: 'straight' },
+    sectionProgressions: { verse: ['Em', 'Em', 'C', 'D'], chorus: ['Em', 'C', 'D', 'Em'] },
   },
 ];
 

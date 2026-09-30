@@ -16,7 +16,7 @@ const CONCURRENCY = 1;
 async function renderCase(genre: string, file: string) {
   const outDir = '/tmp/mixgenres-audio-regression';
   const sheet = makeSheet(genre);
-  if (sheet.tracks.length > 5) throw new Error(`${genre}: default starter has more than five tracks`);
+  if (sheet.tracks.length !== 8) throw new Error(`${genre}: default starter has ${sheet.tracks.length} tracks; expected eight`);
   let perf = compileWholeSong(sheet);
   mkdirSync('audit/pre-render-schemas/genres', { recursive: true });
   writeFileSync(`audit/pre-render-schemas/genres/${genre}.json`, JSON.stringify({

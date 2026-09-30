@@ -1,6 +1,6 @@
 import type { Song, Region, Track, Measure, SectionType, PatternVariant, MusicalPattern, SpotlightMode, SectionEnergy, GuestLens } from '../../types';
 import { GENRE_WORLDS_BY_ID, ALL_PATTERNS, PATTERNS_BY_ID, PATTERNS_BY_WORLD } from '../../data/genres';
-import { INSTRUMENTS_BY_ID, INSTRUMENT_CATALOG, instrument, instrumentPatternKinds } from '../../engine/lookup/instruments';
+import { INSTRUMENTS_BY_ID, INSTRUMENT_CATALOG, WORLD_INSTRUMENT_HINTS, instrument, instrumentPatternKinds } from '../../engine/lookup/instruments';
 import { sliceBarNative } from './grid.ts';
 import { progressionForSection, buildArrangementContext, ArrangementContext } from './arrangementContext.ts';
 import { inferKey, parseChord, assertValidChordProgression } from './musicTheory.ts';
@@ -1928,14 +1928,15 @@ export function makeSheet(
   const stylePalette = runtime.getInstrumentPalette();
   const ensembleIds = (resolved.arrangement?.ensemble ?? [])
     .flatMap(e => e.instrumentIds ?? []);
-  // The style's instrument palette is the authored band. The default song
-  // constructor below intentionally starts with a compact five-piece ensemble;
-  // this is only a starter-song presentation choice. The engine itself has no
-  // maximum instrument count, and user-added voices are preserved everywhere
-  // after construction.
+  // The style's personnel is the authored base ensemble. Genre-specific hints
+  // supply additional idiomatic colors until the starter reaches eight parts.
   const candidates = [...stylePalette, ...ensembleIds]
+    .concat(WORLD_INSTRUMENT_HINTS[genreId] ?? [])
     .filter((id, i, arr) => INSTRUMENTS_BY_ID[id] && arr.indexOf(id) === i);
-  const targetCount = Math.min(5, Math.max(4, stylePalette.length || candidates.length));
+  const targetCount = 8;
+  if (candidates.length < targetCount) {
+    throw new Error(`Genre ${genreId} / style ${resolved.id} provides only ${candidates.length} distinct playable starter instruments; expected ${targetCount}.`);
+  }
   const hints = candidates.slice(0, targetCount);
 
   const tracks: Voice[] = hints.map((instrumentId, i) => {

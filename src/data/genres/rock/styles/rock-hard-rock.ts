@@ -12,7 +12,7 @@ export const STYLE_DEFINITION: GenreStyleDefinition = {
           "bass",
           "drums",
           "overdrive-guitar",
-          "hand-percussion"
+          "voice"
         ],
         "preferredMeters": [
           "4/4"

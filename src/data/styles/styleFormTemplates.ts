@@ -9868,3 +9868,31 @@ export const STYLE_FORM_TEMPLATES: Record<string, FormStepTemplate[]> = {
     }
   ]
 };
+
+// New canonical style ids explicitly reuse the closest established form until
+// their arrangements receive independently authored section templates.
+const STYLE_FORM_ALIASES: Record<string, string> = {
+  'disco-classic': 'disco-disco', 'disco-hi-nrg': 'disco-disco',
+  'disco-philadelphia': 'disco-deep-funk', 'disco-italo': 'disco-synth-funk',
+  'disco-euro': 'disco-disco', 'disco-post-disco': 'disco-boogie', 'disco-nu-disco': 'disco-synth-funk',
+  'drum-and-bass-jungle': 'drum-and-bass-techno', 'drum-and-bass-techstep': 'drum-and-bass-idm', 'drum-and-bass-liquid': 'drum-and-bass-trip-hop',
+  'drum-and-bass-neurofunk': 'drum-and-bass-idm', 'drum-and-bass-dancefloor': 'drum-and-bass-dubstep',
+  'drum-and-bass-jump-up': 'drum-and-bass-garage', 'drum-and-bass-atmospheric': 'drum-and-bass-ambient',
+  'drum-and-bass-drumfunk': 'drum-and-bass-techno',
+  'uk-bass-funky': 'uk-bass-garage', 'uk-bass-future-garage': 'uk-bass-garage',
+  'uk-bass-bassline': 'uk-bass-dubstep', 'uk-bass-grime': 'uk-bass-techno',
+  'punk-hardcore-hardcore-punk': 'punk-hardcore-punk-rock', 'punk-hardcore-skate-punk': 'punk-hardcore-punk-rock',
+  'punk-hardcore-pop-punk': 'punk-hardcore-punk-rock', 'punk-hardcore-melodic-hardcore': 'punk-hardcore-punk-rock',
+  'punk-hardcore-post-hardcore': 'punk-hardcore-post-rock', 'punk-hardcore-crust-punk': 'punk-hardcore-hard-rock',
+  'punk-hardcore-d-beat': 'punk-hardcore-garage-rock',
+  'r-and-b-doo-wop': 'r-and-b-boogie', 'r-and-b-quiet-storm': 'r-and-b-deep-funk',
+  'r-and-b-new-jack-swing': 'r-and-b-synth-funk', 'r-and-b-classic-blues-rnb': 'r-and-b-boogie',
+  'r-and-b-alternative': 'r-and-b-synth-funk', 'soul-memphis': 'soul-synth-funk', 'soul-deep-soul': 'soul-deep-funk',
+  'uk-bass-2-step': 'uk-bass-garage', 'uk-bass-speed-garage': 'uk-bass-garage',
+  'soul-philly': 'soul-p-funk', 'soul-northern': 'soul-p-funk', 'soul-neo-soul': 'soul-synth-funk',
+};
+for (const [styleId, templateId] of Object.entries(STYLE_FORM_ALIASES)) {
+  const template = STYLE_FORM_TEMPLATES[templateId];
+  if (!template) throw new Error(`Missing form template alias target ${templateId} for ${styleId}`);
+  STYLE_FORM_TEMPLATES[styleId] = template;
+}

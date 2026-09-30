@@ -17,7 +17,11 @@ const rows = required.map(instrumentId => {
   };
 });
 
-const failures = rows.filter(r => !r.bespokeModule || !r.hasDspProfile);
+// Several instruments have dedicated physical voice paths instead of a
+// generic preset profile. Require authored model evidence and an instrument
+// specific render path; a `dspProfile` field alone is not the definition of
+// physical specialization.
+const failures = rows.filter(r => !r.bespokeModule || !r.hasAuthoredPhysicalModelData);
 mkdirSync('audit', { recursive: true });
 writeFileSync('audit/instrument-authenticity.json', JSON.stringify({
   generatedAt: new Date().toISOString(),

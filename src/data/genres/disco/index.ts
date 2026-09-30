@@ -2,7 +2,7 @@ import type { GenreWorld, GenreStyleDefinition } from '../../schema';
 
 const styles: GenreStyleDefinition[] = [
   {
-    id: 'disco-disco', worldId: 'disco', name: 'Classic Disco', origin: 'United States', era: '1970s–Present',
+    id: 'disco-classic', worldId: 'disco', name: 'Classic Disco', origin: 'United States', era: '1970s–Present',
     description: 'Four-on-the-floor dance music with octave bass, bright strings, clipped rhythm guitar and vocal hooks.',
     characteristicInstruments: ['drums', 'bass', 'strings', 'piano', 'voice'], preferredMeters: ['4/4'], tempoRange: [110, 130],
     keySubstyles: ['Philadelphia Soul', 'Orchestral Disco'], coreConcepts: ['four-on-the-floor kick', 'octave bass', 'string arrangements', 'rhythm guitar', 'vocal hook'],
@@ -20,7 +20,7 @@ const styles: GenreStyleDefinition[] = [
     sectionProgressions: { verse: ['Em7', 'A7', 'Dmaj7', 'B7'], chorus: ['Gmaj7', 'A7', 'F#m7', 'B7'] },
   },
   {
-    id: 'disco-afrobeat', worldId: 'disco', name: 'Hi-NRG Disco', origin: 'United States / Europe', era: 'Late 1970s–1980s',
+    id: 'disco-hi-nrg', worldId: 'disco', name: 'Hi-NRG', origin: 'United States / Europe', era: 'Late 1970s–1980s',
     description: 'Fast, propulsive disco with sequenced bass, bright synths and emphatic vocal choruses.',
     characteristicInstruments: ['drums', 'synth', 'bass', 'strings', 'voice'], preferredMeters: ['4/4'], tempoRange: [125, 140],
     keySubstyles: ['Hi-NRG', 'Italo Disco'], coreConcepts: ['fast four-on-floor', 'sequenced bass', 'synth hook', 'dramatic chorus'],
@@ -28,12 +28,57 @@ const styles: GenreStyleDefinition[] = [
     signatureCell: 'Fast four-on-floor and sequenced bass under a high synth hook', grooveMechanics: { swingPercentage: 50, anticipationOffsetSteps: 0, microtimingFeel: 'straight' },
     sectionProgressions: { verse: ['Am', 'F', 'C', 'G'], chorus: ['F', 'G', 'Am', 'Am'] },
   },
+  {
+    id: 'disco-philadelphia', worldId: 'disco', name: 'Philadelphia Disco', origin: 'Philadelphia, United States', era: '1970s',
+    description: 'Orchestral disco with lush strings, horn punches, soulful vocals and a steady dance pulse.',
+    characteristicInstruments: ['drums', 'bass', 'strings', 'brass', 'voice'], preferredMeters: ['4/4'], tempoRange: [105, 125],
+    keySubstyles: ['Philly Soul', 'Orchestral Disco'], coreConcepts: ['string section', 'horn punctuation', 'soulful lead vocal', 'steady kick'],
+    rhythmicGrammar: ['four-on-the-floor kick with syncopated bass and arranged string and horn responses'], tuningSystem: '12-tet',
+    signatureCell: 'Orchestral string lift over a steady kick and soulful vocal', grooveMechanics: { swingPercentage: 50, anticipationOffsetSteps: 0, microtimingFeel: 'straight' },
+    sectionProgressions: { verse: ['Am7', 'Dm7', 'G7', 'Cmaj7'], chorus: ['Fmaj7', 'G7', 'Em7', 'Am7'] },
+  },
+  {
+    id: 'disco-italo', worldId: 'disco', name: 'Italo Disco', origin: 'Italy', era: 'Late 1970s–1980s',
+    description: 'European synth-led disco with sequenced bass, bright electronic hooks and romantic vocals.',
+    characteristicInstruments: ['drums', 'synth', 'bass', 'voice', 'strings'], preferredMeters: ['4/4'], tempoRange: [110, 130],
+    keySubstyles: ['Italo Disco', 'Space Disco'], coreConcepts: ['sequenced bass', 'synth arpeggio', 'romantic vocal', 'electronic production'],
+    rhythmicGrammar: ['straight dance kick with sequenced bass and eighth-note synth ostinato'], tuningSystem: '12-tet',
+    signatureCell: 'Sequenced synth bass beneath a bright repeating hook', grooveMechanics: { swingPercentage: 50, anticipationOffsetSteps: 0, microtimingFeel: 'straight' },
+    sectionProgressions: { verse: ['Am', 'F', 'C', 'G'], chorus: ['F', 'G', 'Am', 'Am'] },
+  },
+  {
+    id: 'disco-euro', worldId: 'disco', name: 'Euro Disco', origin: 'Europe', era: '1970s–1980s',
+    description: 'Melodic continental disco with orchestral or electronic arrangement and prominent vocal refrains.',
+    characteristicInstruments: ['drums', 'bass', 'strings', 'synth', 'voice'], preferredMeters: ['4/4'], tempoRange: [105, 125],
+    keySubstyles: ['Euro Disco', 'Orchestral Pop Disco'], coreConcepts: ['long melodic refrain', 'string arrangement', 'dance pulse', 'vocal harmonies'],
+    rhythmicGrammar: ['even four-beat dance pulse with bass movement and sustained chorus harmony'], tuningSystem: '12-tet',
+    signatureCell: 'Sustained vocal refrain over an even dance pulse and strings', grooveMechanics: { swingPercentage: 50, anticipationOffsetSteps: 0, microtimingFeel: 'straight' },
+    sectionProgressions: { verse: ['Dm', 'Bb', 'F', 'C'], chorus: ['Bb', 'C', 'Dm', 'Dm'] },
+  },
+  {
+    id: 'disco-post-disco', worldId: 'disco', name: 'Post-Disco', origin: 'United States', era: 'Late 1970s–1980s',
+    description: 'A stripped, rhythm-section-led transition from disco toward boogie and early electronic dance music.',
+    characteristicInstruments: ['drums', 'bass', 'electric-guitar', 'clavinet', 'voice'], preferredMeters: ['4/4'], tempoRange: [105, 125],
+    keySubstyles: ['Post-Disco', 'Boogie'], coreConcepts: ['lean arrangement', 'syncopated bass', 'clipped guitar', 'repeating groove'],
+    rhythmicGrammar: ['steady dance kick with tighter syncopated bass and short guitar or keyboard chops'], tuningSystem: '12-tet',
+    signatureCell: 'Lean dance groove with syncopated bass and clipped guitar', grooveMechanics: { swingPercentage: 50, anticipationOffsetSteps: 0, microtimingFeel: 'straight' },
+    sectionProgressions: { verse: ['Em7', 'A7', 'Dmaj7', 'B7'], chorus: ['Gmaj7', 'A7', 'F#m7', 'B7'] },
+  },
+  {
+    id: 'disco-nu-disco', worldId: 'disco', name: 'Nu-Disco', origin: 'International', era: '1990s–Present',
+    description: 'Modern dance music reworking disco bass, guitar and string language through electronic production.',
+    characteristicInstruments: ['drums', 'bass', 'synth', 'electric-guitar', 'strings'], preferredMeters: ['4/4'], tempoRange: [115, 128],
+    keySubstyles: ['Nu-Disco', 'Disco House'], coreConcepts: ['disco-derived bass', 'electronic drum production', 'filtered strings', 'loop-based arrangement'],
+    rhythmicGrammar: ['four-on-the-floor kick with syncopated bass, clipped guitar and filtered loop layers'], tuningSystem: '12-tet',
+    signatureCell: 'Disco bass and guitar loop over a modern four-beat kick', grooveMechanics: { swingPercentage: 50, anticipationOffsetSteps: 0, microtimingFeel: 'straight' },
+    sectionProgressions: { verse: ['Am7', 'Fmaj7', 'C', 'G'], chorus: ['Fmaj7', 'G', 'Am7', 'Am7'] },
+  },
 ];
 
 export const DISCO_WORLD: GenreWorld = {
   id: 'disco', name: 'Disco', family: 'Dance / Soul', color: '#E28743', level: 'world', kind: 'world', strictness: 'strict',
   description: 'Dance music centered on a steady four-on-the-floor pulse, syncopated bass, bright ensemble arrangements and vocal choruses.',
-  substyles: ['Classic Disco', 'Philadelphia Soul', 'Orchestral Disco', 'Boogie', 'Post-Disco', 'Hi-NRG', 'Italo Disco', 'Euro Disco'],
+  substyles: ['Classic Disco', 'Philadelphia Disco', 'Boogie', 'Post-Disco', 'Hi-NRG', 'Italo Disco', 'Euro Disco', 'Nu-Disco'],
   artists: ['Chic', 'Donna Summer', 'Bee Gees', 'Diana Ross', 'The Trammps', 'Sylvester', 'Giorgio Moroder', 'Sister Sledge', 'KC and the Sunshine Band', 'Earth, Wind & Fire'],
   concepts: ['four-on-the-floor kick', 'offbeat open hi-hat', 'syncopated bass', 'string and horn hits', 'clipped rhythm guitar', 'vocal chorus'],
   crossLinks: ['Disco ↔ Soul', 'Disco ↔ House', 'Disco ↔ Funk'],

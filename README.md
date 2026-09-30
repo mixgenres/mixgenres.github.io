@@ -42,7 +42,9 @@ The data includes representative repertoire references and authored genre/style 
 
 ## Genre data
 
-Each genre has its own style definitions, playable instrument palette, performance contract, and patterns. For example, Drum & Bass uses fast breakbeat and sub-bass roles; UK Bass styles cover 2-step, half-time and related UK club grooves; Disco centers its ensemble on dance pulse, bass, strings/keys and vocal hooks; Soul and R&B have distinct vocal-led ensembles and groove descriptions. These are authored rules, not guarantees that every generated song will reproduce a specific subgenre or recording.
+Each genre has style definitions, playable instruments, performance rules, patterns, and a compiled eight-part starter. Style coverage follows the genre's distinct traditions; a genre with fewer well-established substyles is not padded with invented categories. Drum & Bass distinguishes Jungle, Liquid, Dancefloor, Jump-Up, Techstep, Neurofunk, Atmospheric and Drumfunk; UK Bass distinguishes UK Garage, 2-Step, Speed Garage, Bassline, Dubstep, UK Funky, Future Garage and Grime. Soul and R&B have separate style records and ensembles. These rules guide new compositions; they do not promise note-for-note reproduction of a specific recording.
+
+The generated catalog schemas in `audit/catalog-schemas/genres/` and `audit/catalog-schemas/starters/` capture genre/style references and each compiled starter's tracks, patterns, gestures, and event counts. Regenerate them with `npm run schema:catalog`.
 
 ## Validation and rendering
 
@@ -51,6 +53,8 @@ The available commands cover different checks:
 - `npm run check` type-checks the project and runs the data-boundary audit.
 - `npm test` runs `check`, the filter test, and the engine-integrity audit.
 - `npm run audit:performance` compiles songs for every catalog style and checks style fields, pattern availability, and whether expected gestures appear in compiled notes. It does not render audio.
+- `npm run audit:styles` compiles every style and checks decision provenance and runtime fallbacks.
+- `npm run schema:catalog` validates catalog references and regenerates the per-genre and per-starter JSON schemas.
 - `npm run test:audio` compiles every public genre and renders a short MP3 excerpt to check the export path and encoded audio metadata. In Node, it does not run the browser master chain.
 - `npm run build:static` builds the browser app.
 

@@ -25,10 +25,24 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, index: numbe
   if (!formSteps?.length) {
     throw new Error(`Style ${seed.id} has no authored form template.`);
   }
+  const ensemble = instruments.map(instrumentId => ({
+    role: INSTRUMENTS_BY_ID[instrumentId]?.acousticProfile?.role ?? 'support',
+    instrumentIds: [instrumentId],
+    priority: Math.max(1, instruments.length - instruments.indexOf(instrumentId)),
+  }));
+  const spotlightRoles = Array.from(new Set(ensemble.map(part => String(part.role))));
+  const defaultSpotlights = Object.fromEntries(formSteps.map(step => [
+    step.kind,
+    step.intensity === 'peak' || step.intensity === 'high'
+      ? spotlightRoles
+      : spotlightRoles.filter(role => /lead|melody|voice|drum|percussion|bass/i.test(role)),
+  ]));
+  const pocket = Math.max(0, Math.min(1, 0.5 + contract.groove.lean / 100));
+  const lift = Math.max(0, Math.min(1, 0.5 + (contract.groove.dynamicRange - 1) / 2));
   return {
     id: seed.id,
     sourceProvenance: {
-      'form.sectionVocab':'style', 'form.templates':'style', 'form.defaultSpotlights':'hardcoded',
+      'form.sectionVocab':'style', 'form.templates':'style', 'form.defaultSpotlights':'style',
       'form.preferredMeters': seed.preferredMeters?.length ? 'style' : 'genre',
       'harmony.model':'genre', 'harmony.modePolicy':'genre', 'harmony.progressionTemplates': Object.keys(seed.sectionProgressions ?? {}).length ? 'style' : 'hardcoded',
       'harmony.chordVocabulary':'genre', 'harmony.harmonicRhythm':'genre', 'harmony.bassMotion':'genre',
@@ -41,7 +55,8 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, index: numbe
       'rhythm.microtimingFeel': seed.grooveMechanics?.microtimingFeel ? 'style' : 'genre',
       'rhythm.humanizeJitterMs':'genre', 'melody.scaleMode':'genre',
       'sound.instrumentPalette':'style',
-      'sound.masterProfile.pocket':'hardcoded', 'sound.masterProfile.lift':'hardcoded',
+      'arrangement.ensemble':'style',
+      'sound.masterProfile.pocket':'genre', 'sound.masterProfile.lift':'genre',
     },
     name: seed.name,
     genres:[worldId], primaryGenre:worldId,
@@ -54,7 +69,7 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, index: numbe
     form:{
       sectionVocab:formSteps.map(step => step.kind),
       templates:[{w:1, value:formSteps}],
-      defaultSpotlights:{},
+      defaultSpotlights,
       preferredMeters:[seed.preferredMeters?.[0] ?? contract.meter],
     },
     harmony:{
@@ -94,11 +109,13 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, index: numbe
       ornamentVocabulary:Object.values(contract.articulationGrammar).flat(),
     },
     arrangement:{
+      ensemble,
       energyMappings:Object.fromEntries(formSteps.map(step => [step.key, energyForFormIntensity(step.intensity)])) as Partial<Record<string, SectionEnergy>>,
       doublingRules:[contract.ensemble.motor ?? '', contract.ensemble.answer ?? ''].filter(Boolean),
     },
     sound:{
       instrumentPalette:instruments.map(value => ({value: String(value), w: 1})),
+      masterProfile:{ pocket, lift },
     },
     patterns:{require:[],preferred:[],allowed:[],avoid:[]}, gestures:{}, rules:{
       require:contract.timelineRequired ? [{tag:'timeline-lock',description:contract.timeline}] : [],

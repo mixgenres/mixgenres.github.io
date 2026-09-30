@@ -53,8 +53,12 @@ export function applyStyleDialect(style: SongStyle, _index?: number): SongStyle 
   };
   style.sound = {
     ...(style.sound ?? {}),
-    instrumentPalette: base.instruments.map(value => ({value,w:1})),
-    masterProfile: { ...(style.sound?.masterProfile ?? {}), pocket: .5, lift: .5 },
+    // Personnel belongs to the selected GenreStyleDefinition. The broader
+    // style profile may describe alternate orchestration, but replacing the
+    // authored palette here caused unrelated instruments to leak into starter
+    // ensembles (for example a scraper part disappearing from Kizomba).
+    instrumentPalette: style.sound?.instrumentPalette ?? base.instruments.map(value => ({value,w:1})),
+    masterProfile: { pocket: style.sound?.masterProfile?.pocket ?? .5, lift: style.sound?.masterProfile?.lift ?? .5 },
   };
   return style;
 }
