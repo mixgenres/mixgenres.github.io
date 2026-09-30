@@ -363,6 +363,21 @@ G['uk-bass'] = simple('uk-bass','4/4','machine-grid','broken UK club groove',.5,
 
 // Explicit Cultural Overrides for Mastering & Spatialization
 const CULTURAL_OVERRIDES: Record<string, Partial<WorldContract>> = {
+  // Acoustic Latin / African styles: close-miked, dry, top end rolled back.  They were
+  // previously falling through to the generic default (dryness 0.6, brightness 0.5),
+  // which put a roomy, bright mix on genres whose records are typically intimate and warm.
+  tango: {
+    timbreSpace: { mixCharacter: { dryness: 0.8, bassForward: 0.45, width: 0.5, brightness: 0.3, saturationType: 'tape', compressionRatio: 1.8, transientSnap: 0.25 } } as WorldContract['timbreSpace'],
+  },
+  flamenco: {
+    timbreSpace: { mixCharacter: { dryness: 0.85, bassForward: 0.4, width: 0.45, brightness: 0.35, saturationType: 'tape', compressionRatio: 1.6, transientSnap: 0.3 } } as WorldContract['timbreSpace'],
+  },
+  bachata: {
+    timbreSpace: { mixCharacter: { dryness: 0.78, bassForward: 0.5, width: 0.5, brightness: 0.35, saturationType: 'tape', compressionRatio: 2.0, transientSnap: 0.3 } } as WorldContract['timbreSpace'],
+  },
+  afrobeats: {
+    timbreSpace: { mixCharacter: { dryness: 0.75, bassForward: 0.6, width: 0.6, brightness: 0.4, saturationType: 'tape', compressionRatio: 2.5, transientSnap: 0.4 } } as WorldContract['timbreSpace'],
+  },
   reggaeton: {
     performanceIdioms: { dropPortamento: true },
     timbreSpace: {

@@ -57,9 +57,12 @@ export function applyInstrumentEffectsChain(
         break;
       }
       case 'reverb': {
-        // Early reflection room bloom
-        const room = el.mul(0.15, el.svf({ mode: 'lowpass' }, 3200, 0.8, el.delay({ size: 44100 }, el.const({ value: 2200 }), el.const({ value: 0.3 }), out)));
-        out = el.add(out, room);
+        // Tiny, non-recirculating early reflection (~7 ms). The old version was a
+        // 50 ms feedback delay on EVERY instrument, which is a slap echo / comb
+        // filter; real room ambience is handled once by the shared room on the
+        // master chain, so this stage only adds a touch of body.
+        const early = el.mul(0.05, el.lowpass(4500, 0.7, el.delay({ size: 4410 }, el.const({ value: 340 }), el.const({ value: 0 }), out)));
+        out = el.add(out, early);
         break;
       }
       case 'cabinet': {

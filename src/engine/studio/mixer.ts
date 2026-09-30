@@ -111,6 +111,49 @@ export function calculateAcousticCrosstalk(char?: MixCharacter): number {
   return 0.005;
 }
 
+/** Room settings derived from the genre's MixCharacter.  Drier genres get a shorter, quieter room. */
+function roomParams(char?: MixCharacter, genreId?: string) {
+  const dryness = char?.dryness ?? 0.6;
+  const isSalsa = SALSA_GENRE_PATTERN.test(genreId || '');
+  return {
+    depth: isSalsa ? SALSA_MASTER_ROOM_DEPTH : (1.0 - dryness) * 0.4,
+    rt60: 0.3 + (1.0 - dryness) * 0.9,      // seconds
+    dampHz: 2800 + (char?.brightness ?? 0.5) * 3200,
+  };
+}
+
+/**
+ * Synthetic stereo room impulse response: decaying noise whose high end dies away
+ * faster than its low end (like a real room).  Seeded so live playback and MP3
+ * export render the identical room.  This replaces the old bank of short
+ * feedback delays, which behaved like a comb filter ("metallic echo") rather than
+ * a diffuse room.
+ */
+function buildRoomImpulse(ctx: BaseAudioContext, rt60: number, dampHz: number): AudioBuffer {
+  const sr = ctx.sampleRate;
+  const len = Math.max(1, Math.floor(sr * Math.max(0.2, rt60)));
+  const buf = ctx.createBuffer(2, len, sr);
+  for (let ch = 0; ch < 2; ch++) {
+    const data = buf.getChannelData(ch);
+    let seed = 0x9e3779b9 ^ (ch * 0x85ebca6b);
+    let lp = 0;
+    for (let i = 0; i < len; i++) {
+      seed ^= seed << 13; seed ^= seed >>> 17; seed ^= seed << 5;
+      const white = ((seed >>> 0) / 4294967295) * 2 - 1;
+      const t = i / sr;
+      const env = Math.exp((-6.9078 * t) / rt60);           // -60 dB at rt60
+      // One-pole low-pass that closes over time (HF decays faster).
+      const cutoff = Math.max(900, dampHz * Math.exp(-2.2 * t / rt60));
+      const a = 1 - Math.exp((-2 * Math.PI * cutoff) / sr);
+      lp += a * (white - lp);
+      // Soft fade-in over ~4 ms so there is no click at the start of the tail.
+      const fade = Math.min(1, i / (0.004 * sr));
+      data[i] = lp * env * fade;
+    }
+  }
+  return buf;
+}
+
 export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: MixCharacter, genreId?: string): MasterChain {
   // 1. Bus inputs
   const drumBus = ctx.createGain();
@@ -237,43 +280,33 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   subBus.connect(subFilter);
   subFilter.connect(subEnhanceGain);
 
-  // 5. Stereo room: several short, decorrelated feedback lines replace the old
-  // four-delay series ring. This remains a small Web Audio graph but produces a
-  // substantially denser late field with asymmetric stereo reflections.
-  const initialRoomDepth = isSalsa ? SALSA_MASTER_ROOM_DEPTH : (initialMixCharacter ? (1.0 - initialMixCharacter.dryness) * 0.55 : 0.30);
+  // 5. Shared stereo room (one diffuse convolution room for the whole band).
+  // Send is high-passed and low-passed so the tail adds space, not mud or fizz.
+  const initialRoom = roomParams(initialMixCharacter, genreId);
+  const initialRoomDepth = initialRoom.depth;
   const roomInput = ctx.createGain();
   const roomPreDelay = ctx.createDelay(0.25);
-  roomPreDelay.delayTime.value = 0.012;
+  roomPreDelay.delayTime.value = 0.015;
+  const roomHP = ctx.createBiquadFilter();
+  roomHP.type = 'highpass';
+  roomHP.frequency.value = 250;
+  roomHP.Q.value = 0.707;
+  const roomConvolver = ctx.createConvolver();
+  roomConvolver.normalize = true;
+  roomConvolver.buffer = buildRoomImpulse(ctx, initialRoom.rt60, initialRoom.dampHz);
+  const roomLP = ctx.createBiquadFilter();
+  roomLP.type = 'lowpass';
+  roomLP.frequency.value = 4500;
+  roomLP.Q.value = 0.707;
   roomInput.connect(roomPreDelay);
-
-  const roomSum = ctx.createGain();
-  const roomDelays = [0.013, 0.019, 0.029, 0.037, 0.053, 0.071].map((time, i) => {
-    const delay = ctx.createDelay(0.5);
-    delay.delayTime.value = time;
-    const feedback = ctx.createGain();
-    feedback.gain.value = [0.34, 0.31, 0.36, 0.29, 0.33, 0.27][i];
-    const damping = ctx.createBiquadFilter();
-    damping.type = 'lowpass';
-    damping.frequency.value = 3200 - i * 180;
-    const wet = ctx.createGain();
-    wet.gain.value = 0.55;
-    const panner = ctx.createStereoPanner();
-    panner.pan.value = [-0.78, 0.62, -0.46, 0.74, -0.24, 0.36][i];
-
-    roomPreDelay.connect(delay);
-    delay.connect(damping);
-    damping.connect(feedback);
-    feedback.connect(delay);
-    damping.connect(wet);
-    wet.connect(panner);
-    panner.connect(roomSum);
-    return { delay, feedback, damping, wet, panner };
-  });
+  roomPreDelay.connect(roomHP);
+  roomHP.connect(roomConvolver);
+  roomConvolver.connect(roomLP);
 
   const revMix = ctx.createGain();
   revMix.gain.value = initialRoomDepth;
   let roomDepth = initialRoomDepth;
-  roomSum.connect(revMix);
+  roomLP.connect(revMix);
   // 6. Master Summing
   const masterSum = ctx.createGain();
   masterSum.gain.value = 1.0;
@@ -303,7 +336,9 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
 
   const lowGainInit = initialMixCharacter ? (initialMixCharacter.bassForward - 0.5) * 4.0 : 0.5;
   const presGainInit = initialMixCharacter ? (initialMixCharacter.dryness - 0.5) * 3.0 : 0.8;
-  const airGainInit = initialMixCharacter ? (initialMixCharacter.brightness - 0.5) * 5.0 : 1.0;
+  // Tilt: neutral brightness (0.5) now trims the top end slightly (-2 dB); the old
+  // shelf sat at 11 kHz with only +-2.5 dB range, which could not tame harsh synth highs.
+  const airGainInit = initialMixCharacter ? (initialMixCharacter.brightness - 0.5) * 8.0 - 2.0 : -1.0;
 
   const low = ctx.createBiquadFilter();
   low.type = 'lowshelf';
@@ -318,8 +353,14 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
 
   const air = ctx.createBiquadFilter();
   air.type = 'highshelf';
-  air.frequency.value = 11000;
+  air.frequency.value = 6500;
   air.gain.value = airGainInit;
+
+  // Gentle ceiling: removes the digital fizz above the audible "air" band.
+  const ceiling = ctx.createBiquadFilter();
+  ceiling.type = 'lowpass';
+  ceiling.frequency.value = 15000;
+  ceiling.Q.value = 0.5;
 
   // 8. Dynamic Compressor Profiles (Glue Compressor)
   const glue = ctx.createDynamicsCompressor();
@@ -424,7 +465,8 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   hp.connect(low);
   low.connect(pres);
   pres.connect(air);
-  air.connect(glue);
+  air.connect(ceiling);
+  ceiling.connect(glue);
   glue.connect(makeup);
   makeup.connect(limiter);
   limiter.connect(tap);
@@ -454,19 +496,13 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
       playbackGate.gain.cancelScheduledValues(now);
       revMix.gain.cancelScheduledValues(now);
       roomInput.gain.cancelScheduledValues(now);
-      for (const r of roomDelays) r.feedback.gain.cancelScheduledValues(now);
       if (!enabled) {
         playbackGate.gain.setValueAtTime(0, now);
         revMix.gain.setValueAtTime(0, now);
         roomInput.gain.setValueAtTime(0, now);
-        for (const r of roomDelays) r.feedback.gain.setValueAtTime(0, now);
       } else {
         playbackGate.gain.setValueAtTime(1, now);
         roomInput.gain.setValueAtTime(1, now);
-        roomDelays.forEach((r, i) => {
-          r.feedback.gain.setValueAtTime(0, now);
-          r.feedback.gain.setValueAtTime([0.34, 0.31, 0.36, 0.29, 0.33, 0.27][i], now + 0.09);
-        });
         revMix.gain.setValueAtTime(0, now);
         revMix.gain.setValueAtTime(roomDepth, now + 0.09);
       }
@@ -476,7 +512,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
       const now = ctx.currentTime;
       const lowTarget = (char.bassForward - 0.5) * 4.0;
       const presTarget = (char.dryness - 0.5) * 3.0;
-      const airTarget = (char.brightness - 0.5) * 5.0;
+      const airTarget = (char.brightness - 0.5) * 8.0 - 2.0;
 
       low.gain.setTargetAtTime(lowTarget, now, 0.05);
       pres.gain.setTargetAtTime(presTarget, now, 0.05);
@@ -502,10 +538,11 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
         glue.attack.setTargetAtTime(Math.max(0.003, 0.03 * (1 - snap)), now, 0.05);
       }
 
-      // Room Depth (Reverb)
-      const rDepth = isSalsaActive ? 0.05 : (1.0 - char.dryness) * 0.45;
-      roomDepth = rDepth;
-      revMix.gain.setTargetAtTime(rDepth, now, 0.05);
+      // Room depth + tail length from the genre's dryness
+      const room = roomParams(char, gId);
+      roomDepth = room.depth;
+      revMix.gain.setTargetAtTime(room.depth, now, 0.05);
+      roomConvolver.buffer = buildRoomImpulse(ctx, room.rt60, room.dampHz);
 
       // Drum Bus Saturation & Saturation Type
       const knock = calculateDrumKnock(char);
@@ -536,14 +573,9 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
         roomInput.disconnect();
         playbackGate.disconnect();
         roomPreDelay.disconnect();
-        roomSum.disconnect();
-        for (const r of roomDelays) {
-          r.delay.disconnect();
-          r.feedback.disconnect();
-          r.damping.disconnect();
-          r.wet.disconnect();
-          r.panner.disconnect();
-        }
+        roomHP.disconnect();
+        roomConvolver.disconnect();
+        roomLP.disconnect();
         revMix.disconnect();
         msSplitter.disconnect();
         midSum.disconnect();
@@ -558,6 +590,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
         low.disconnect();
         pres.disconnect();
         air.disconnect();
+        ceiling.disconnect();
         glue.disconnect();
         makeup.disconnect();
         limiter.disconnect();
