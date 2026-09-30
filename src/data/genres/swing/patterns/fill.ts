@@ -4,7 +4,7 @@ export const SWING_WORLD_PATTERNS_FILL: MusicalPattern[] = [
   {
           "id": "swing-spang",
           "worldId": "swing",
-          "styleIds": ["swing-big-band"],
+          "styleIds": ["swing-big-band-swing"],
           "name": "Spang-a-lang",
           "family": "Ride",
           "category": "fill",

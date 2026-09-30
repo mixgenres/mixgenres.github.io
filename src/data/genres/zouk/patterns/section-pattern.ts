@@ -4,7 +4,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
   {
           "id": "zouk-intro-13",
           "worldId": "zouk",
-          "styleIds": ["zouk-beton"],
+          "styleIds": ["zouk-zouk-beton"],
           "name": "Drop Intro",
           "family": "Drop",
           "category": "sectionPattern",
@@ -231,7 +231,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
   {
           "id": "zouk-chorus-15",
           "worldId": "zouk",
-          "styleIds": ["zouk-beton"],
+          "styleIds": ["zouk-zouk-beton"],
           "name": "Tarraxinha Chorus Lift",
           "family": "Tarraxinha",
           "category": "sectionPattern",
@@ -463,7 +463,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
   {
           "id": "zouk-bridge-16",
           "worldId": "zouk",
-          "styleIds": ["zouk-beton"],
+          "styleIds": ["zouk-zouk-beton"],
           "name": "Chawa Bridge",
           "family": "Chawa",
           "category": "sectionPattern",

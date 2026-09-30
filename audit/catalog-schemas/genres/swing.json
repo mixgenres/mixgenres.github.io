@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "id": "swing",
+  "name": "Swing",
+  "family": "Jazz / Big Band",
+  "description": "Big Band and Small Group Swing",
+  "substyles": [
+    "Big Band Swing",
+    "Gypsy Jazz (Manouche)",
+    "Jump Blues"
+  ],
+  "styleIds": [
+    "swing-big-band-swing",
+    "swing-gypsy-jazz",
+    "swing-jump-blues"
+  ],
+  "patternIds": [
+    "swing-spang",
+    "swing-walking-bass",
+    "swing-2-feel",
+    "swing-charleston",
+    "swing-shuffle",
+    "swing-bebop-ride",
+    "swing-brushes",
+    "swing-ensemble",
+    "swing-shout-chorus",
+    "swing-phrase-10",
+    "swing-call-11",
+    "swing-anchor-12",
+    "swing-comp-13",
+    "swing-intro-14",
+    "swing-verse-15",
+    "swing-chorus-16",
+    "swing--phrasing"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "swing-big-band-swing",
+      "name": "Big Band Swing",
+      "keySubstyles": [
+        "Kansas City Swing",
+        "Harlem Big Band"
+      ],
+      "characteristicInstruments": [
+        "brass",
+        "clarinet",
+        "piano",
+        "upright-bass",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "swing-gypsy-jazz",
+      "name": "Gypsy Jazz (Manouche)",
+      "keySubstyles": [
+        "Jazz Manouche",
+        "Swing Parisien"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "violin",
+        "upright-bass",
+        "clarinet",
+        "alto-sax"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "swing-jump-blues",
+      "name": "Jump Blues",
+      "keySubstyles": [
+        "Proto-Rock and Roll",
+        "Jumpin' Swing"
+      ],
+      "characteristicInstruments": [
+        "tenor-sax",
+        "brass",
+        "piano",
+        "upright-bass",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "swing-starter"
+}

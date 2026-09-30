@@ -4,7 +4,7 @@ export const SWING_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
   {
           "id": "swing-walking-bass",
           "worldId": "swing",
-          "styleIds": ["swing-big-band"],
+          "styleIds": ["swing-big-band-swing"],
           "name": "Walking Bass",
           "family": "Bass",
           "category": "break",

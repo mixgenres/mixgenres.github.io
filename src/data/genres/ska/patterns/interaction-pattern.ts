@@ -4,7 +4,7 @@ export const SKA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
   {
           "id": "sk-horn-answer",
           "worldId": "ska",
-          "styleIds": ["ska-first-wave"],
+          "styleIds": ["ska-trad-ska"],
           "name": "Horn Section Answer",
           "family": "Ska Horns",
           "category": "interactionPattern",

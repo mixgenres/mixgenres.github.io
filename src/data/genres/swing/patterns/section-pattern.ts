@@ -4,7 +4,7 @@ export const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
   {
           "id": "swing-shout-chorus",
           "worldId": "swing",
-          "styleIds": ["swing-big-band"],
+          "styleIds": ["swing-big-band-swing"],
           "name": "Shout Chorus Ensemble Hits",
           "family": "Ensemble",
           "category": "sectionPattern",
@@ -206,7 +206,7 @@ export const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
   {
           "id": "swing-intro-14",
           "worldId": "swing",
-          "styleIds": ["swing-big-band"],
+          "styleIds": ["swing-big-band-swing"],
           "name": "Turnaround Intro",
           "family": "Turnaround",
           "category": "sectionPattern",
@@ -431,7 +431,7 @@ export const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
   {
           "id": "swing-chorus-16",
           "worldId": "swing",
-          "styleIds": ["swing-big-band"],
+          "styleIds": ["swing-big-band-swing"],
           "name": "La Pompe Chorus Lift",
           "family": "La Pompe",
           "category": "sectionPattern",

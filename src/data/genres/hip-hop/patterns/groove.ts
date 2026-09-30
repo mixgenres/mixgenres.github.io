@@ -60,7 +60,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "variants": [
             {
               "id": "hiphop-lofi-v-01",
-              "parentPatternId": "hiphop-lofi",
+              "parentPatternId": "hip-hop-sampled-keys",
               "name": "Lo-Fi Swing — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
@@ -88,7 +88,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             },
             {
               "id": "hiphop-lofi-v-02",
-              "parentPatternId": "hiphop-lofi",
+              "parentPatternId": "hip-hop-sampled-keys",
               "name": "Lo-Fi Swing — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,

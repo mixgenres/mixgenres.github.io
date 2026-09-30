@@ -1,0 +1,348 @@
+{
+  "schemaVersion": 1,
+  "id": "folk-starter",
+  "genreId": "folk",
+  "genreName": "Folk",
+  "styleId": "folk-indie-folk",
+  "styleName": "Indie Folk",
+  "styleDescription": "Acoustic • 4/4 • Warm Harmonies",
+  "bpm": 94,
+  "meter": "4/4",
+  "regions": [
+    {
+      "id": "r0",
+      "name": "Intro",
+      "type": "intro",
+      "genreId": "folk",
+      "styleId": "folk-indie-folk",
+      "chords": [
+        "C",
+        "G",
+        "Am",
+        "F"
+      ]
+    },
+    {
+      "id": "r1",
+      "name": "Verse",
+      "type": "verse",
+      "genreId": "folk",
+      "styleId": "folk-indie-folk",
+      "chords": [
+        "C",
+        "G",
+        "Am",
+        "F"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "Refrain",
+      "type": "refrain",
+      "genreId": "folk",
+      "styleId": "folk-indie-folk",
+      "chords": [
+        "C",
+        "G",
+        "Am",
+        "F"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "Instrumental",
+      "type": "instrumental",
+      "genreId": "folk",
+      "styleId": "folk-indie-folk",
+      "chords": [
+        "C",
+        "G",
+        "Am",
+        "F"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Verse",
+      "type": "verse",
+      "genreId": "folk",
+      "styleId": "folk-indie-folk",
+      "chords": [
+        "C",
+        "G",
+        "Am",
+        "F"
+      ]
+    },
+    {
+      "id": "r5",
+      "name": "Coda",
+      "type": "coda",
+      "genreId": "folk",
+      "styleId": "folk-indie-folk",
+      "chords": [
+        "F",
+        "G",
+        "C",
+        "C"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "v0",
+      "instrumentId": "acoustic-guitar",
+      "instrumentName": "Steel-String Acoustic Guitar",
+      "role": "harmony",
+      "patternIds": [
+        "folk-waltz-pick",
+        "folk-travis",
+        "folk-strum-basic",
+        "folk-waltz"
+      ],
+      "noteCount": 638,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "mute",
+        "bend"
+      ],
+      "gestureCounts": {
+        "4607": 230,
+        "6655": 65,
+        "8118": 343
+      }
+    },
+    {
+      "id": "v1",
+      "instrumentId": "banjo",
+      "instrumentName": "5-String Banjo",
+      "role": "harmony",
+      "patternIds": [
+        "folk-travis-sync",
+        "folk-strum-basic",
+        "folk-strum-sync",
+        "folk-68-arpeggio",
+        "folk-travis"
+      ],
+      "noteCount": 770,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 66,
+        "6655": 63,
+        "8118": 411,
+        "9742": 141,
+        "12200": 77,
+        "44655": 12
+      }
+    },
+    {
+      "id": "v2",
+      "instrumentId": "upright-bass",
+      "instrumentName": "Upright Double Bass",
+      "role": "bass",
+      "patternIds": [
+        "folk-travis",
+        "folk-waltz",
+        "folk-waltz-pick",
+        "folk-strum-sync",
+        "folk-68-arpeggio"
+      ],
+      "noteCount": 271,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "arrastre",
+        "pizzicato",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 188,
+        "6655": 49,
+        "8118": 11,
+        "12200": 9,
+        "38280": 2,
+        "44655": 12
+      }
+    },
+    {
+      "id": "v3",
+      "instrumentId": "piano",
+      "instrumentName": "Acoustic Grand Piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "folk-roster-",
+        "reggaeton--rg-09-reggaeton-piano-stab",
+        "jazz-latin-montuno-comp",
+        "jazz-comping-sync"
+      ],
+      "noteCount": 645,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "marcato",
+        "arrastre",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 57,
+        "6655": 53,
+        "8118": 330,
+        "8526": 12,
+        "19949": 12,
+        "21063": 169,
+        "44655": 12
+      }
+    },
+    {
+      "id": "v4",
+      "instrumentId": "drums",
+      "instrumentName": "Standard Drum Kit",
+      "role": "percussion",
+      "patternIds": [
+        "house--ht-four-floor",
+        "swing-brushes",
+        "folk-fiddle-drone",
+        "jazz-ride-spangalang",
+        "folk-waltz-pick",
+        "rock-open-close"
+      ],
+      "noteCount": 231,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "choke",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4337": 12,
+        "4607": 18,
+        "12200": 189,
+        "44655": 12
+      }
+    },
+    {
+      "id": "v5",
+      "instrumentId": "voice",
+      "instrumentName": "Synth voice",
+      "role": "voice",
+      "patternIds": [
+        "folk-roster-bass",
+        "folk-roster-"
+      ],
+      "noteCount": 64,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 21,
+        "6655": 39,
+        "44655": 4
+      }
+    },
+    {
+      "id": "v6",
+      "instrumentId": "fiddle",
+      "instrumentName": "Fiddle",
+      "role": "lead",
+      "patternIds": [
+        "folk-fiddle-drone"
+      ],
+      "noteCount": 64,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 8,
+        "6655": 37,
+        "44655": 19
+      }
+    },
+    {
+      "id": "v7",
+      "instrumentId": "mandolin",
+      "instrumentName": "Mandolin",
+      "role": "lead",
+      "patternIds": [
+        "folk-waltz",
+        "folk-travis-sync",
+        "folk-68-arpeggio"
+      ],
+      "noteCount": 508,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 54,
+        "6655": 287,
+        "42219": 12,
+        "44655": 155
+      }
+    }
+  ],
+  "usedPatternIds": [
+    "folk-waltz-pick",
+    "folk-travis",
+    "folk-strum-basic",
+    "folk-waltz",
+    "folk-travis-sync",
+    "folk-strum-sync",
+    "folk-68-arpeggio",
+    "afro-amapiano-pad",
+    "folk-roster-",
+    "reggaeton--rg-09-reggaeton-piano-stab",
+    "jazz-latin-montuno-comp",
+    "jazz-comping-sync",
+    "house--ht-four-floor",
+    "swing-brushes",
+    "folk-fiddle-drone",
+    "jazz-ride-spangalang",
+    "rock-open-close",
+    "folk-roster-bass"
+  ],
+  "performance": {
+    "durationSeconds": 122.55319148936184,
+    "noteCount": 3191,
+    "trackCount": 8,
+    "tracksWithNoNotes": []
+  }
+}

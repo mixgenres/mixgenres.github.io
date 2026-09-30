@@ -4,7 +4,7 @@ export const TIMBA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
   {
           "id": "timba-bata-fusion",
           "worldId": "timba",
-          "styleIds": ["timba-havana-modern"],
+          "styleIds": ["timba-timba-habanera"],
           "name": "Bata Fusion",
           "family": "Percussion",
           "category": "cadence",

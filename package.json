@@ -14,7 +14,7 @@
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
-    "check": "tsc --noEmit && npm run audit:data-boundary",
+    "check": "tsc --noEmit && npm run audit:data-boundary && npm run audit:ids",
     "test": "npm run check && node --import tsx scripts/test-filter.ts && node --import tsx scripts/engine-integrity-audit.ts",
     "render-song": "tsx scripts/render-song.ts",
     "gain-calibration": "tsx scripts/gain-calibration.ts",
@@ -33,7 +33,8 @@
     "schema:render": "tsx scripts/pre-render-schema.ts",
     "schema:catalog": "node --import tsx scripts/generate-catalog-schemas.ts",
     "audit:rigorous": "npm run check && npm run audit:paths && npm run audit:instruments && npm run audit:instrument-render && npm run test:audio",
-    "audit:data-boundary": "node scripts/audit-data-boundary.mjs"
+    "audit:data-boundary": "node scripts/audit-data-boundary.mjs",
+    "audit:ids": "node --import tsx scripts/audit-data-ids.ts"
   },
   "dependencies": {
     "@breezystack/lamejs": "^1.2.7",

@@ -4,7 +4,7 @@ export const FUNK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
   {
           "id": "funk-call-14",
           "worldId": "funk",
-          "styleIds": ["funk-pfunk-neworleans"],
+          "styleIds": ["funk-p-funk"],
           "name": "Break Response",
           "family": "Break",
           "category": "interactionPattern",

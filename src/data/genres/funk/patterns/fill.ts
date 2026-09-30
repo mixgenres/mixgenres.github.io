@@ -4,7 +4,7 @@ export const FUNK_WORLD_PATTERNS_FILL: MusicalPattern[] = [
   {
           "id": "funk-drum-breakbeat",
           "worldId": "funk",
-          "styleIds": ["funk-pfunk-neworleans"],
+          "styleIds": ["funk-p-funk"],
           "name": "Clyde Stubblefield \"Funky Drummer\" Breakbeat",
           "family": "Funk Drumming",
           "category": "fill",

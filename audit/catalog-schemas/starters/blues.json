@@ -1,0 +1,314 @@
+{
+  "schemaVersion": 1,
+  "id": "blues-starter",
+  "genreId": "blues",
+  "genreName": "Blues",
+  "styleId": "blues-chicago",
+  "styleName": "Chicago Blues",
+  "styleDescription": "Electric • 12-bar • Driving Amplified",
+  "bpm": 98,
+  "meter": "4/4",
+  "regions": [
+    {
+      "id": "r0",
+      "name": "12-Bar Head",
+      "type": "12-bar head",
+      "genreId": "blues",
+      "styleId": "blues-chicago",
+      "chords": [
+        "E7",
+        "E7",
+        "E7",
+        "E7"
+      ]
+    },
+    {
+      "id": "r1",
+      "name": "Harmonica/Guitar Answer",
+      "type": "harmonica/guitar answer",
+      "genreId": "blues",
+      "styleId": "blues-chicago",
+      "chords": [
+        "E7",
+        "E7",
+        "E7",
+        "E7"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "Solo",
+      "type": "solo",
+      "genreId": "blues",
+      "styleId": "blues-chicago",
+      "chords": [
+        "E7",
+        "E7",
+        "E7",
+        "E7"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "Turnaround",
+      "type": "turnaround",
+      "genreId": "blues",
+      "styleId": "blues-chicago",
+      "chords": [
+        "E7",
+        "E7",
+        "E7",
+        "E7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "v0",
+      "instrumentId": "electric-guitar",
+      "instrumentName": "Electric Guitar",
+      "role": "harmony",
+      "patternIds": [
+        "blues-texas-shuffle",
+        "blues-delta-slide"
+      ],
+      "noteCount": 735,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 70,
+        "6655": 268,
+        "29346": 2,
+        "44655": 391,
+        "48234": 4
+      }
+    },
+    {
+      "id": "v1",
+      "instrumentId": "harmonica",
+      "instrumentName": "10-Hole Diatonic Harmonica (Blues Harp)",
+      "role": "melody",
+      "patternIds": [
+        "blues-rhumba",
+        "blues-shuffle",
+        "blues-slow-12-8",
+        "blues-bass-walk"
+      ],
+      "noteCount": 151,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 3,
+        "6655": 5,
+        "12200": 3,
+        "29346": 50,
+        "44655": 3,
+        "48234": 87
+      }
+    },
+    {
+      "id": "v2",
+      "instrumentId": "piano",
+      "instrumentName": "Acoustic Grand Piano",
+      "role": "harmony",
+      "patternIds": [
+        "blues-piano-triplets"
+      ],
+      "noteCount": 1616,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "marcato",
+        "arrastre",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 149,
+        "6655": 8,
+        "8118": 462,
+        "44655": 997
+      }
+    },
+    {
+      "id": "v3",
+      "instrumentId": "bass",
+      "instrumentName": "Electric Bass Guitar",
+      "role": "bass",
+      "patternIds": [
+        "blues-bass-walk",
+        "blues-boogie-bass"
+      ],
+      "noteCount": 273,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4607": 119,
+        "5227": 4,
+        "6655": 115,
+        "12200": 32,
+        "44655": 3
+      }
+    },
+    {
+      "id": "v4",
+      "instrumentId": "drums",
+      "instrumentName": "Standard Drum Kit",
+      "role": "percussion",
+      "patternIds": [
+        "blues-shuffle",
+        "blues-rhumba"
+      ],
+      "noteCount": 213,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "choke",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4337": 2,
+        "4607": 108,
+        "12200": 102,
+        "44655": 1
+      }
+    },
+    {
+      "id": "v5",
+      "instrumentId": "voice",
+      "instrumentName": "Synth voice",
+      "role": "voice",
+      "patternIds": [
+        "rnb-vocal-answer",
+        "disco-string-hits",
+        "gospel-choir-response",
+        "gospel--gospel-shout-vamp"
+      ],
+      "noteCount": 174,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 97,
+        "6655": 65,
+        "44655": 2,
+        "45724": 3,
+        "48234": 4,
+        "50696": 3
+      }
+    },
+    {
+      "id": "v6",
+      "instrumentId": "organ",
+      "instrumentName": "Tonewheel organ",
+      "role": "harmony",
+      "patternIds": [
+        "blues-piano-triplets"
+      ],
+      "noteCount": 576,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 66,
+        "6655": 40,
+        "8118": 156,
+        "44655": 314
+      }
+    },
+    {
+      "id": "v7",
+      "instrumentId": "trumpet",
+      "instrumentName": "Bb Trumpet",
+      "role": "lead",
+      "patternIds": [
+        "zouk-horn-stabs",
+        "afro-mambo-horn-hits"
+      ],
+      "noteCount": 114,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "vibrato",
+        "mute"
+      ],
+      "gestureCounts": {
+        "4607": 3,
+        "6655": 55,
+        "12241": 39,
+        "29346": 3,
+        "44655": 3,
+        "50696": 11
+      }
+    }
+  ],
+  "usedPatternIds": [
+    "blues-texas-shuffle",
+    "blues-delta-slide",
+    "blues-rhumba",
+    "blues-shuffle",
+    "blues-slow-12-8",
+    "blues-bass-walk",
+    "blues-piano-triplets",
+    "blues-boogie-bass",
+    "rnb-vocal-answer",
+    "disco-string-hits",
+    "gospel-choir-response",
+    "gospel--gospel-shout-vamp",
+    "zouk-horn-stabs",
+    "afro-mambo-horn-hits"
+  ],
+  "performance": {
+    "durationSeconds": 88.1632653061224,
+    "noteCount": 3852,
+    "trackCount": 8,
+    "tracksWithNoNotes": []
+  }
+}

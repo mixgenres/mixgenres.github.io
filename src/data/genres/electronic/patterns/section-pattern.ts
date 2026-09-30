@@ -4,7 +4,7 @@ export const ELECTRONIC_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
   {
           "id": "electronic-intro-17",
           "worldId": "electronic",
-          "styleIds": ["electronic-house", "electronic-synthwave"],
+          "styleIds": ["electronic-techno", "electronic-synthwave"],
           "name": "Arp Intro",
           "family": "Arp",
           "category": "sectionPattern",

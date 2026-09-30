@@ -4,7 +4,7 @@ export const FUNK_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
   {
           "id": "funk-16th-strum",
           "worldId": "funk",
-          "styleIds": ["soul-motown-neosoul"],
+          "styleIds": ["soul-neo-soul"],
           "name": "16th Note Strum",
           "family": "Guitar",
           "category": "break",

@@ -4,7 +4,7 @@ export const FOLK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
   {
           "id": "folk-travis",
           "worldId": "folk",
-          "styleIds": ["folk-singer-songwriter"],
+          "styleIds": ["folk-indie-folk"],
           "name": "Travis Picking",
           "family": "Fingerpicking",
           "category": "phrasePattern",

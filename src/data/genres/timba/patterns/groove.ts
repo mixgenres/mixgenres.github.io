@@ -4,7 +4,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "timba-synth-bass",
           "worldId": "timba",
-          "styleIds": ["timba-havana-modern"],
+          "styleIds": ["timba-timba-habanera"],
           "name": "Synth Bass Tumbao",
           "family": "Bass",
           "category": "groove",
@@ -137,7 +137,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "timba-piano-guajeo",
           "worldId": "timba",
-          "styleIds": ["timba-havana-modern"],
+          "styleIds": ["timba-timba-habanera"],
           "name": "Piano Guajeo",
           "family": "Piano",
           "category": "groove",
@@ -287,7 +287,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "timba-kick-bomobo",
           "worldId": "timba",
-          "styleIds": ["timba-havana-modern"],
+          "styleIds": ["timba-timba-habanera"],
           "name": "Kick Bombo",
           "family": "Drum Kit",
           "category": "groove",
@@ -399,7 +399,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "timba-horn-moña",
           "worldId": "timba",
-          "styleIds": ["timba-havana-modern"],
+          "styleIds": ["timba-timba-habanera"],
           "name": "Horn Moña",
           "family": "Horns",
           "category": "groove",
@@ -538,7 +538,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "timba-clave-rumba",
           "worldId": "timba",
-          "styleIds": ["timba-havana-modern"],
+          "styleIds": ["timba-timba-habanera"],
           "name": "2-3 Rumba Clave",
           "family": "Clave",
           "category": "groove",
@@ -675,7 +675,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "timba-anticipated-pedal",
           "worldId": "timba",
-          "styleIds": ["timba-havana-modern"],
+          "styleIds": ["timba-timba-habanera"],
           "name": "Anticipated Presión Pedal",
           "family": "Bass",
           "category": "groove",
@@ -810,7 +810,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "timba-comp-15",
           "worldId": "timba",
-          "styleIds": ["timba-havana-modern"],
+          "styleIds": ["timba-timba-habanera"],
           "name": "Presión Comping",
           "family": "Presión",
           "category": "groove",

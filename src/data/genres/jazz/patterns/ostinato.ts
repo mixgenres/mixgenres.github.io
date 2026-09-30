@@ -4,7 +4,7 @@ export const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "jazz-walking-bass",
           "worldId": "jazz",
-          "styleIds": ["jazz-swing-bebop", "jazz-hard-bop"],
+          "styleIds": ["jazz-bebop", "jazz-hard-bop"],
           "name": "Walking Bass (Continuous Harmonic Navigation)",
           "family": "Walking Basslines",
           "category": "ostinato",
@@ -127,7 +127,7 @@ export const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "jazz-ride-spangalang",
           "worldId": "jazz",
-          "styleIds": ["jazz-swing-bebop", "jazz-hard-bop"],
+          "styleIds": ["jazz-bebop", "jazz-hard-bop"],
           "name": "Jazz Ride Cymbal (Spang-a-Lang)",
           "family": "Jazz Drumming",
           "category": "ostinato",
@@ -277,7 +277,7 @@ export const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "jazz-piano-comping",
           "worldId": "jazz",
-          "styleIds": ["jazz-swing-bebop", "jazz-hard-bop"],
+          "styleIds": ["jazz-bebop", "jazz-hard-bop"],
           "name": "Syncopated Piano Comping (Charleston & Red Garland Pluck)",
           "family": "Piano Comping",
           "category": "ostinato",
@@ -412,7 +412,7 @@ export const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "jazz-latin-montuno-comp",
           "worldId": "jazz",
-          "styleIds": ["jazz-modal-contemporary"],
+          "styleIds": ["jazz-fusion"],
           "name": "Latin Jazz Montuno Comping",
           "family": "Piano Comping",
           "category": "ostinato",
@@ -566,7 +566,7 @@ export const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "jazz-anchor-15",
           "worldId": "jazz",
-          "styleIds": ["jazz-swing-bebop", "jazz-hard-bop"],
+          "styleIds": ["jazz-bebop", "jazz-hard-bop"],
           "name": "Head Anchor",
           "family": "Head",
           "category": "ostinato",

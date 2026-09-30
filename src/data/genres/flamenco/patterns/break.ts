@@ -4,7 +4,7 @@ export const FLAMENCO_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
   {
           "id": "flamenco-bulerias-palmas",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-bulerias"],
+          "styleIds": ["flamenco-buleria-style"],
           "name": "Bulerias Palmas",
           "family": "Palmas",
           "category": "break",

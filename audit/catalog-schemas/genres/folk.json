@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 1,
+  "id": "folk",
+  "name": "Folk",
+  "family": "Acoustic / Traditional",
+  "description": "Acoustic-driven music centered around storytelling, fingerpicking,",
+  "substyles": [
+    "Indie Folk",
+    "Old-Time",
+    "Protest",
+    "Psychedelic Folk",
+    "Anti-Folk",
+    "Bluegrass",
+    "Neo-Traditional",
+    "Chamber Folk"
+  ],
+  "styleIds": [
+    "folk-indie-folk",
+    "folk-old-time",
+    "folk-protest",
+    "folk-psychedelic-folk",
+    "folk-anti-folk",
+    "folk-bluegrass",
+    "folk-neo-traditional",
+    "folk-chamber-folk"
+  ],
+  "patternIds": [
+    "folk-travis",
+    "folk-travis-sync",
+    "folk-strum-basic",
+    "folk-strum-sync",
+    "folk-waltz",
+    "folk-waltz-pick",
+    "folk-68-arpeggio",
+    "folk-fiddle-drone",
+    "folk-fast-bluegrass",
+    "folk-driving-8ths",
+    "folk-roster-bass",
+    "folk-roster-",
+    "folk-call-13",
+    "folk-anchor-14",
+    "folk-comp-15",
+    "folk-intro-16",
+    "folk-verse-17"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "folk-indie-folk",
+      "name": "Indie Folk",
+      "keySubstyles": [
+        "Chamber Indie Folk",
+        "Freak Folk"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "banjo",
+        "upright-bass",
+        "piano",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-old-time",
+      "name": "Old-Time",
+      "keySubstyles": [
+        "Appalachian Old-Time",
+        "Clawhammer Banjo Tune"
+      ],
+      "characteristicInstruments": [
+        "banjo",
+        "fiddle",
+        "acoustic-guitar",
+        "upright-bass",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-protest",
+      "name": "Protest",
+      "keySubstyles": [
+        "Topical Song Movement",
+        "60s Folk Revival"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "harmonica",
+        "upright-bass",
+        "hand-percussion",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-psychedelic-folk",
+      "name": "Psychedelic Folk",
+      "keySubstyles": [
+        "Acid Folk",
+        "Freak Folk",
+        "Pagan Folk"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "sitar",
+        "flute",
+        "hand-percussion",
+        "synth"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-anti-folk",
+      "name": "Anti-Folk",
+      "keySubstyles": [
+        "NYC Anti-Folk",
+        "Lo-Fi Folk Punk"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "piano",
+        "upright-bass",
+        "drums",
+        "bass"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-bluegrass",
+      "name": "Bluegrass",
+      "keySubstyles": [
+        "Progressive Bluegrass",
+        "Traditional Bluegrass"
+      ],
+      "characteristicInstruments": [
+        "banjo",
+        "mandolin",
+        "acoustic-guitar",
+        "fiddle",
+        "upright-bass"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-neo-traditional",
+      "name": "Neo-Traditional",
+      "keySubstyles": [
+        "British Folk Revival",
+        "Traditional Balladry"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "upright-bass",
+        "fiddle",
+        "harmonium",
+        "flute"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-chamber-folk",
+      "name": "Chamber Folk",
+      "keySubstyles": [
+        "Orchestral Folk",
+        "Baroque Pop Folk"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "strings",
+        "violin",
+        "flute",
+        "piano"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "folk-starter"
+}

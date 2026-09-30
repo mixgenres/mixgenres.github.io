@@ -4,7 +4,7 @@ export const KIZOMBA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
   {
           "id": "kizomba-call-10",
           "worldId": "kizomba",
-          "styleIds": ["kizomba-semba"],
+          "styleIds": ["kizomba-semba-playful"],
           "name": "Kizomba Bass Response",
           "family": "Kizomba Bass",
           "category": "interactionPattern",

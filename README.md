@@ -50,7 +50,7 @@ The generated catalog schemas in `audit/catalog-schemas/genres/` and `audit/cata
 
 The available commands cover different checks:
 
-- `npm run check` type-checks the project and runs the data-boundary audit.
+- `npm run check` type-checks the project, checks the data boundary, and validates genre, style, pattern, variant, instrument, starter, and form-template IDs (`npm run audit:ids`).
 - `npm test` runs `check`, the filter test, and the engine-integrity audit.
 - `npm run audit:performance` compiles songs for every catalog style and checks style fields, pattern availability, and whether expected gestures appear in compiled notes. It does not render audio.
 - `npm run audit:styles` compiles every style and checks decision provenance and runtime fallbacks.

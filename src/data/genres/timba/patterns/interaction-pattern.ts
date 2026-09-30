@@ -4,7 +4,7 @@ export const TIMBA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
   {
           "id": "timba-call-13",
           "worldId": "timba",
-          "styleIds": ["timba-havana-modern"],
+          "styleIds": ["timba-timba-habanera"],
           "name": "Coro Response",
           "family": "Coro / backing vocals",
           "category": "interactionPattern",

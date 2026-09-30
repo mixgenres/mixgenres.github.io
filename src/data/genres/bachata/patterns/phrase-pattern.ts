@@ -4,7 +4,7 @@ export const BACHATA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
   {
           "id": "bachata--phrasing",
           "worldId": "bachata",
-          "styleIds": ["latin-bachata"],
+          "styleIds": ["bachata-tradicional"],
           "name": "Bachata Vocal Phrasing",
           "family": "Vocal Phrasing",
           "category": "phrasePattern",

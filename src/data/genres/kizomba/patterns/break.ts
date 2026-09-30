@@ -4,7 +4,7 @@ export const KIZOMBA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
   {
           "id": "kizomba-batida-groove",
           "worldId": "kizomba",
-          "styleIds": ["kizomba-semba"],
+          "styleIds": ["kizomba-semba-playful"],
           "name": "Kizomba Batida & Sub-Kick Beat",
           "family": "Kizomba Drumming",
           "category": "break",

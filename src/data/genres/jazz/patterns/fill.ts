@@ -4,7 +4,7 @@ export const JAZZ_WORLD_PATTERNS_FILL: MusicalPattern[] = [
   {
           "id": "jazz-brushes-swing",
           "worldId": "jazz",
-          "styleIds": ["jazz-swing-bebop"],
+          "styleIds": ["jazz-bebop"],
           "name": "Brushes Swing",
           "family": "Drums",
           "category": "fill",

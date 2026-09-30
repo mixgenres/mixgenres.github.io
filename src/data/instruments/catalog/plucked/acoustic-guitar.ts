@@ -39,6 +39,7 @@ export const acoustic_guitar: InstrumentDef = {
     tuningName: "E Standard Steel-String Acoustic",
     courses: 1,
     frets: 20,
+    maxFretStretch: 4,
     openStrings: [
       {
         name: "E2",

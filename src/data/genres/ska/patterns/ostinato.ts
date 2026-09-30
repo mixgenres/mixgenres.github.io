@@ -4,7 +4,7 @@ export const SKA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "sk-offbeat-chop",
           "worldId": "ska",
-          "styleIds": ["ska-first-wave"],
+          "styleIds": ["ska-trad-ska"],
           "name": "Ska Offbeat Chop",
           "family": "Ska Skank",
           "category": "ostinato",
@@ -125,7 +125,7 @@ export const SKA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "sk-rocksteady-bass",
           "worldId": "ska",
-          "styleIds": ["ska-rocksteady-bridge"],
+          "styleIds": ["ska-two-tone"],
           "name": "Rocksteady Bass Hold",
           "family": "Rocksteady Bass",
           "category": "ostinato",

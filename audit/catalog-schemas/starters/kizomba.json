@@ -1,0 +1,326 @@
+{
+  "schemaVersion": 1,
+  "id": "kizomba-starter",
+  "genreId": "kizomba",
+  "genreName": "Kizomba",
+  "styleId": "kizomba-tradicional",
+  "styleName": "Tradicional",
+  "styleDescription": "Tradicional: grounded kick pattern with melodic bass and soft guitar/synth",
+  "bpm": 92,
+  "meter": "4/4",
+  "regions": [
+    {
+      "id": "r0",
+      "name": "Intro",
+      "type": "intro",
+      "genreId": "kizomba",
+      "styleId": "kizomba-tradicional",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r1",
+      "name": "Verse",
+      "type": "verse",
+      "genreId": "kizomba",
+      "styleId": "kizomba-tradicional",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "Chorus",
+      "type": "chorus",
+      "genreId": "kizomba",
+      "styleId": "kizomba-tradicional",
+      "chords": [
+        "Gm",
+        "C",
+        "F",
+        "Dm"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "Verse",
+      "type": "verse",
+      "genreId": "kizomba",
+      "styleId": "kizomba-tradicional",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Instrumental",
+      "type": "instrumental",
+      "genreId": "kizomba",
+      "styleId": "kizomba-tradicional",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r5",
+      "name": "Chorus",
+      "type": "chorus",
+      "genreId": "kizomba",
+      "styleId": "kizomba-tradicional",
+      "chords": [
+        "Gm",
+        "C",
+        "F",
+        "Dm"
+      ]
+    },
+    {
+      "id": "r6",
+      "name": "Coda",
+      "type": "coda",
+      "genreId": "kizomba",
+      "styleId": "kizomba-tradicional",
+      "chords": [
+        "Gm",
+        "A7",
+        "Dm",
+        "Dm"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "v0",
+      "instrumentId": "bass",
+      "instrumentName": "Electric Bass Guitar",
+      "role": "bass",
+      "patternIds": [
+        "kizomba-tarraxinha-sub",
+        "kizomba-semba-guitar"
+      ],
+      "noteCount": 242,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4607": 14,
+        "5227": 2,
+        "6655": 89,
+        "12200": 14,
+        "44655": 118,
+        "49857": 5
+      }
+    },
+    {
+      "id": "v1",
+      "instrumentId": "drums",
+      "instrumentName": "Standard Drum Kit",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-chorus-15",
+        "kizomba-kick-batida",
+        "kizomba-batida-groove"
+      ],
+      "noteCount": 267,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "choke",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4337": 14,
+        "4607": 127,
+        "12200": 126
+      }
+    },
+    {
+      "id": "v2",
+      "instrumentId": "acoustic-guitar",
+      "instrumentName": "Steel-String Acoustic Guitar",
+      "role": "harmony",
+      "patternIds": [
+        "kizomba-semba-guitar",
+        "kizomba-chorus-15"
+      ],
+      "noteCount": 1251,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "mute",
+        "bend"
+      ],
+      "gestureCounts": {
+        "4607": 14,
+        "8118": 14,
+        "9742": 14,
+        "12200": 14,
+        "44655": 1181,
+        "49857": 14
+      }
+    },
+    {
+      "id": "v3",
+      "instrumentId": "synth",
+      "instrumentName": "Synth",
+      "role": "lead",
+      "patternIds": [
+        "kizomba-vocal-comping"
+      ],
+      "noteCount": 88,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 8,
+        "6655": 66,
+        "27646": 14
+      }
+    },
+    {
+      "id": "v4",
+      "instrumentId": "dikanza",
+      "instrumentName": "Dikanza",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-batida-groove",
+        "kizomba-fill-17"
+      ],
+      "noteCount": 247,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 136,
+        "12200": 97,
+        "44655": 14
+      }
+    },
+    {
+      "id": "v5",
+      "instrumentId": "voice",
+      "instrumentName": "Synth voice",
+      "role": "voice",
+      "patternIds": [
+        "kizomba-fill-17",
+        "kizomba-chorus-15"
+      ],
+      "noteCount": 216,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 130,
+        "6655": 62,
+        "45724": 8,
+        "48234": 8,
+        "50696": 8
+      }
+    },
+    {
+      "id": "v6",
+      "instrumentId": "sub-bass",
+      "instrumentName": "Sub bass",
+      "role": "bass",
+      "patternIds": [
+        "kizomba-urban-synth-pulse",
+        "kizomba-tarraxinha-sub"
+      ],
+      "noteCount": 185,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 14,
+        "6655": 83,
+        "44655": 88
+      }
+    },
+    {
+      "id": "v7",
+      "instrumentId": "rhodes",
+      "instrumentName": "Rhodes Electric Piano",
+      "role": "harmony",
+      "patternIds": [
+        "kizomba-urban-synth-pulse"
+      ],
+      "noteCount": 465,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 56,
+        "6655": 20,
+        "8118": 121,
+        "12200": 14,
+        "42219": 14,
+        "44655": 227,
+        "45724": 13
+      }
+    }
+  ],
+  "usedPatternIds": [
+    "kizomba-tarraxinha-sub",
+    "kizomba-semba-guitar",
+    "kizomba-chorus-15",
+    "kizomba-kick-batida",
+    "kizomba-batida-groove",
+    "kizomba-vocal-comping",
+    "kizomba-fill-17",
+    "kizomba-urban-synth-pulse"
+  ],
+  "performance": {
+    "durationSeconds": 146.08695652173895,
+    "noteCount": 2961,
+    "trackCount": 8,
+    "tracksWithNoNotes": []
+  }
+}

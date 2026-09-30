@@ -4,7 +4,7 @@ export const FOLK_WORLD_PATTERNS_FILL: MusicalPattern[] = [
   {
           "id": "folk-travis-sync",
           "worldId": "folk",
-          "styleIds": ["folk-singer-songwriter"],
+          "styleIds": ["folk-indie-folk"],
           "name": "Syncopated Travis",
           "family": "Fingerpicking",
           "category": "fill",

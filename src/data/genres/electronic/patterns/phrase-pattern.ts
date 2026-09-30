@@ -4,7 +4,7 @@ export const ELECTRONIC_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
   {
           "id": "electronic-phrase-13",
           "worldId": "electronic",
-          "styleIds": ["electronic-house", "electronic-synthwave"],
+          "styleIds": ["electronic-techno", "electronic-synthwave"],
           "name": "Pluck Phrase",
           "family": "Pluck",
           "category": "phrasePattern",

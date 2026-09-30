@@ -4,7 +4,7 @@ export const TIMBA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
   {
           "id": "timba-songo-groove",
           "worldId": "timba",
-          "styleIds": ["timba-havana-modern"],
+          "styleIds": ["timba-timba-habanera"],
           "name": "Songo Drum Kit & Cowbell Groove (Changuito / Los Van Van)",
           "family": "Songo Drumming",
           "category": "fill",

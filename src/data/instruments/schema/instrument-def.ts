@@ -122,6 +122,8 @@ export interface TuningAndMechanics {
   openStrings?: Array<{ name: string; note: string; midi: number; frequencyHz: number }>;
   courses?: number;
   frets?: number;
+  /** Maximum span between fretted positions in a playable chord shape. */
+  maxFretStretch?: number;
   tuningName?: string;
   keyRange?: { lowNote: string; highNote: string; lowMidi: number; highMidi: number };
 }

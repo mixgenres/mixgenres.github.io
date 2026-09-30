@@ -4,7 +4,7 @@ export const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "tango-bass-pizzicato",
           "worldId": "tango",
-          "styleIds": ["tango-nuevo"],
+          "styleIds": ["tango-tango-nuevo"],
           "name": "Pizzicato Bass",
           "family": "Bass",
           "category": "groove",

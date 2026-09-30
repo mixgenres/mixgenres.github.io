@@ -4,7 +4,7 @@ export const FUNK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
   {
           "id": "funk-phrase-13",
           "worldId": "funk",
-          "styleIds": ["funk-pfunk-neworleans"],
+          "styleIds": ["funk-p-funk"],
           "name": "Vamp Phrase",
           "family": "Vamp",
           "category": "phrasePattern",
@@ -187,7 +187,7 @@ export const FUNK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
   {
           "id": "funk--phrasing",
           "worldId": "funk",
-          "styleIds": ["funk-pfunk-neworleans"],
+          "styleIds": ["funk-p-funk"],
           "name": "Funk Vocal Phrasing",
           "family": "Vocal Phrasing",
           "category": "phrasePattern",

@@ -4,7 +4,7 @@ export const FOLK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
   {
           "id": "folk-intro-16",
           "worldId": "folk",
-          "styleIds": ["folk-singer-songwriter"],
+          "styleIds": ["folk-indie-folk"],
           "name": "Flatpick Intro",
           "family": "Flatpick",
           "category": "sectionPattern",

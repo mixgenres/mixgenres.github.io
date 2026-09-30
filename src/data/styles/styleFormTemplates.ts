@@ -9896,3 +9896,15 @@ for (const [styleId, templateId] of Object.entries(STYLE_FORM_ALIASES)) {
   if (!template) throw new Error(`Missing form template alias target ${templateId} for ${styleId}`);
   STYLE_FORM_TEMPLATES[styleId] = template;
 }
+
+// Remove copied templates whose style IDs no longer exist in the catalog.
+// Active styles above already received explicit aliases before these are pruned.
+const RETIRED_STYLE_FORM_IDS = [
+  'disco-p-funk', 'disco-deep-funk', 'disco-synth-funk', 'disco-disco', 'disco-go-go', 'disco-afrobeat', 'disco-funk-carioca',
+  'r-and-b-p-funk', 'r-and-b-disco', 'r-and-b-go-go', 'r-and-b-afrobeat', 'r-and-b-funk-carioca',
+  'soul-disco', 'soul-go-go', 'soul-boogie', 'soul-afrobeat', 'soul-funk-carioca',
+  'drum-and-bass-downtempo', 'drum-and-bass-trip-hop', 'drum-and-bass-idm', 'drum-and-bass-dubstep', 'drum-and-bass-garage', 'drum-and-bass-synthwave', 'drum-and-bass-ambient', 'drum-and-bass-techno',
+  'punk-hardcore-hard-rock', 'punk-hardcore-grunge', 'punk-hardcore-progressive-rock', 'punk-hardcore-garage-rock', 'punk-hardcore-psychedelic', 'punk-hardcore-post-rock', 'punk-hardcore-shoegaze',
+  'uk-bass-downtempo', 'uk-bass-trip-hop', 'uk-bass-idm', 'uk-bass-synthwave', 'uk-bass-ambient', 'uk-bass-techno',
+];
+for (const id of RETIRED_STYLE_FORM_IDS) delete STYLE_FORM_TEMPLATES[id];

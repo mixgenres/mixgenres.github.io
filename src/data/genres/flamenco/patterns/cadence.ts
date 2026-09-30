@@ -4,7 +4,7 @@ export const FLAMENCO_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
   {
           "id": "flamenco-picado",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-tangos-tientos"],
+          "styleIds": ["flamenco-tangos-style"],
           "name": "Picado Scale",
           "family": "Guitar",
           "category": "cadence",
@@ -185,7 +185,7 @@ export const FLAMENCO_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
   {
           "id": "flam-remate-12",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-remate", "flamenco-remate"],
+          "styleIds": ["flamenco-buleria-style", "flamenco-buleria-style"],
           "name": "12-Beat Remate",
           "family": "Cadential Punctuation",
           "category": "cadence",
@@ -258,7 +258,7 @@ export const FLAMENCO_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           "provenance": "Flamenco genre patch: authored from palo-specific compás and accompaniment grammar.",
           "authenticityTags": [
             "flamenco",
-            "flamenco-remate"
+            "flamenco-buleria-style"
           ],
           "danceTags": [
             "listening"

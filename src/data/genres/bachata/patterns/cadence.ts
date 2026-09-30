@@ -4,7 +4,7 @@ export const BACHATA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
   {
           "id": "bachata-bongo-derecho",
           "worldId": "bachata",
-          "styleIds": ["latin-bachata"],
+          "styleIds": ["bachata-tradicional"],
           "name": "Bongo Derecho",
           "family": "Bongo",
           "category": "cadence",

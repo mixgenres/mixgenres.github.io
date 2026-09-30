@@ -4,7 +4,7 @@ export const ELECTRONIC_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "elec-acid-303",
           "worldId": "electronic",
-          "styleIds": ["electronic-house"],
+          "styleIds": ["electronic-techno"],
           "name": "Acid House 303 Bassline",
           "family": "Acid Bass",
           "category": "ostinato",
@@ -169,7 +169,7 @@ export const ELECTRONIC_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "electronic-anchor-15",
           "worldId": "electronic",
-          "styleIds": ["electronic-house", "electronic-synthwave"],
+          "styleIds": ["electronic-techno", "electronic-synthwave"],
           "name": "Build Anchor",
           "family": "Build",
           "category": "ostinato",

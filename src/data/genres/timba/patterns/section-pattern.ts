@@ -4,7 +4,7 @@ export const TIMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
   {
           "id": "timba-gear-marcha",
           "worldId": "timba",
-          "styleIds": ["timba-havana-modern"],
+          "styleIds": ["timba-timba-habanera"],
           "name": "Gear Change: Marcha (Standard Drive)",
           "family": "Timba Gear System",
           "category": "sectionPattern",
@@ -248,7 +248,7 @@ export const TIMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
   {
           "id": "timba-intro-16",
           "worldId": "timba",
-          "styleIds": ["timba-havana-modern"],
+          "styleIds": ["timba-timba-habanera"],
           "name": "Marcha Intro",
           "family": "Marcha",
           "category": "sectionPattern",

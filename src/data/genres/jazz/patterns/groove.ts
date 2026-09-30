@@ -4,7 +4,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "jazz-ride-broken",
           "worldId": "jazz",
-          "styleIds": ["jazz-modal-contemporary"],
+          "styleIds": ["jazz-fusion"],
           "name": "Broken Ride",
           "family": "Drums",
           "category": "groove",
@@ -139,7 +139,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "jazz-bass-pedal",
           "worldId": "jazz",
-          "styleIds": ["jazz-modal-contemporary"],
+          "styleIds": ["jazz-fusion"],
           "name": "Pedal Point",
           "family": "Bass",
           "category": "groove",
@@ -266,7 +266,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "jazz-comping-sync",
           "worldId": "jazz",
-          "styleIds": ["jazz-modal-contemporary", "jazz-hard-bop"],
+          "styleIds": ["jazz-fusion", "jazz-hard-bop"],
           "name": "Syncopated Comping",
           "family": "Piano",
           "category": "groove",
@@ -384,7 +384,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "jazz-snare-comp",
           "worldId": "jazz",
-          "styleIds": ["jazz-swing-bebop", "jazz-hard-bop"],
+          "styleIds": ["jazz-bebop", "jazz-hard-bop"],
           "name": "Snare Comping",
           "family": "Drums",
           "category": "groove",
@@ -500,7 +500,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "jazz-waltz-ride",
           "worldId": "jazz",
-          "styleIds": ["jazz-modal-contemporary"],
+          "styleIds": ["jazz-fusion"],
           "name": "Jazz Waltz Ride",
           "family": "Drums",
           "category": "groove",
@@ -645,7 +645,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "jazz-comp-16",
           "worldId": "jazz",
-          "styleIds": ["jazz-swing-bebop"],
+          "styleIds": ["jazz-bebop"],
           "name": "Piano Comping Cell",
           "family": "Comping",
           "category": "groove",

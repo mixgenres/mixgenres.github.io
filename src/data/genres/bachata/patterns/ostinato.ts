@@ -4,7 +4,7 @@ export const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "bachata-requinto-derecho",
           "worldId": "bachata",
-          "styleIds": ["latin-bachata"],
+          "styleIds": ["bachata-tradicional"],
           "name": "Requinto Derecho (Verse Picking)",
           "family": "Bachata Requinto",
           "category": "ostinato",
@@ -248,7 +248,7 @@ export const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "cumbia-bass-groove",
           "worldId": "bachata",
-          "styleIds": ["latin-cumbia"],
+          "styleIds": ["cumbia-colombiana"],
           "name": "Cumbia Syncopated Bassline",
           "family": "Cumbia Bass",
           "category": "ostinato",
@@ -389,7 +389,7 @@ export const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "bachata-anchor-12",
           "worldId": "bachata",
-          "styleIds": ["latin-bachata"],
+          "styleIds": ["bachata-tradicional"],
           "name": "Mambo Anchor",
           "family": "Mambo",
           "category": "ostinato",

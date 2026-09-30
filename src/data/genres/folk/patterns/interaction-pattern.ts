@@ -4,7 +4,7 @@ export const FOLK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
   {
           "id": "folk-call-13",
           "worldId": "folk",
-          "styleIds": ["folk-singer-songwriter"],
+          "styleIds": ["folk-indie-folk"],
           "name": "Fiddle Break Response",
           "family": "Fiddle Break",
           "category": "interactionPattern",

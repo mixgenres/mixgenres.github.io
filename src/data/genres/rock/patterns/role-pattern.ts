@@ -80,7 +80,7 @@ export const ROCK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "variants": [
             {
               "id": "rock-roster-13-v-01",
-              "parentPatternId": "rock-roster-13",
+              "parentPatternId": "rock-roster-",
               "name": "Build Texture — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
@@ -108,7 +108,7 @@ export const ROCK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
             },
             {
               "id": "rock-roster-13-v-02",
-              "parentPatternId": "rock-roster-13",
+              "parentPatternId": "rock-roster-",
               "name": "Build Texture — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,

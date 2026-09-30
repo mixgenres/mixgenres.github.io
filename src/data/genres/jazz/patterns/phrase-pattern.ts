@@ -4,7 +4,7 @@ export const JAZZ_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
   {
           "id": "jazz-phrase-13",
           "worldId": "jazz",
-          "styleIds": ["jazz-swing-bebop"],
+          "styleIds": ["jazz-bebop"],
           "name": "Solo Phrase",
           "family": "Solo",
           "category": "phrasePattern",

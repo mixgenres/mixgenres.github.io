@@ -11,6 +11,7 @@ import { type GenreTheoryProfile } from '../../engine/lookup/theory';
 import { voiceProfile } from '../sheet/instrumentRoles.ts';
 import { resolveStyle } from '../../engine/style/resolve';
 import { getCanonicalStyle } from '../../engine/style/registry';
+import { constrainToFretboard } from './fretboard';
 import { getPerformanceGrammar, resolveHybridGrammar } from './performanceGrammar.ts';
 import type { PerformanceGrammar } from '../../data/performance/schema/performance-grammar';
 import type { ImprovisationGrammar } from '../../data/styles/schema';
@@ -226,7 +227,8 @@ function chordVoicing(ctx: PhraseContext, _index: number): number[] {
     const target = nearestMidi(targetPc, top, ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi);
     if (Math.abs(target - top) <= 7) out[out.length - 1] = target;
   }
-  return Array.from(new Set(out));
+  const unique = Array.from(new Set(out));
+  return constrainToFretboard(unique, ctx.profile.instrumentId, ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi);
 }
 
 export function realizeMidi(ctx: PhraseContext, index: number, total: number, state: PhraseState): number[] {

@@ -4,7 +4,7 @@ export const JAZZ_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
   {
           "id": "jazz-intro-17",
           "worldId": "jazz",
-          "styleIds": ["jazz-swing-bebop", "jazz-hard-bop"],
+          "styleIds": ["jazz-bebop", "jazz-hard-bop"],
           "name": "Shout Horn Answer",
           "family": "Turnaround",
           "category": "sectionPattern",

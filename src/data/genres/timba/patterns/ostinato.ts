@@ -4,7 +4,7 @@ export const TIMBA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "timba-displaced-bass",
           "worldId": "timba",
-          "styleIds": ["timba-havana-modern"],
+          "styleIds": ["timba-timba-habanera"],
           "name": "Displaced Funk / Timba Bassline",
           "family": "Timba Bass Systems",
           "category": "ostinato",
@@ -152,7 +152,7 @@ export const TIMBA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "timba-anchor-14",
           "worldId": "timba",
-          "styleIds": ["timba-havana-modern"],
+          "styleIds": ["timba-timba-habanera"],
           "name": "Moña Anchor",
           "family": "Moña",
           "category": "ostinato",

@@ -4,7 +4,7 @@ export const BACHATA_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
   {
           "id": "bachata-roster-drums",
           "worldId": "bachata",
-          "styleIds": ["latin-bachata"],
+          "styleIds": ["bachata-tradicional"],
           "name": "Bachata drums part",
           "family": "Derecho",
           "category": "rolePattern",
@@ -86,7 +86,7 @@ export const BACHATA_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "variants": [
             {
               "id": "bachata-roster-10-v-01",
-              "parentPatternId": "bachata-roster-10",
+              "parentPatternId": "bachata-roster-drums",
               "name": "Derecho Texture — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
@@ -122,7 +122,7 @@ export const BACHATA_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
             },
             {
               "id": "bachata-roster-10-v-02",
-              "parentPatternId": "bachata-roster-10",
+              "parentPatternId": "bachata-roster-drums",
               "name": "Derecho Texture — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,

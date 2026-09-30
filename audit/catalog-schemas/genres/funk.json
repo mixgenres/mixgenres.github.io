@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "id": "funk",
+  "name": "Funk",
+  "family": "African American Groove",
+  "description": "The masters of groove: \"The One\"",
+  "substyles": [
+    "P-Funk",
+    "Deep Funk",
+    "Synth Funk",
+    "Disco",
+    "Go-Go",
+    "Boogie",
+    "Afrobeat",
+    "Funk Carioca"
+  ],
+  "styleIds": [
+    "funk-p-funk",
+    "funk-deep-funk",
+    "funk-synth-funk",
+    "funk-disco",
+    "funk-go-go",
+    "funk-boogie",
+    "funk-afrobeat",
+    "funk-carioca"
+  ],
+  "patternIds": [
+    "funk-the-one-bass",
+    "funk-chicken-scratch-guitar",
+    "funk-drum-breakbeat",
+    "funk-16th-strum",
+    "funk-slap-bass",
+    "funk-ghost-snares",
+    "funk-clavinet",
+    "funk-horn-section",
+    "funk-soul-bass",
+    "funk-hihat-open",
+    "funk-neo-soul-beat",
+    "funk-wah-guitar",
+    "funk-phrase-13",
+    "funk-call-14",
+    "funk-anchor-15",
+    "funk-comp-16",
+    "funk--phrasing"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "funk-p-funk",
+      "name": "P-Funk",
+      "keySubstyles": [
+        "Parliament Funk",
+        "Space Funk",
+        "Psychedelic Funk Rock"
+      ],
+      "characteristicInstruments": [
+        "bass",
+        "drums",
+        "electric-guitar",
+        "synth",
+        "brass"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "funk-deep-funk",
+      "name": "Deep Funk",
+      "keySubstyles": [
+        "New Orleans Second Line Funk",
+        "Sister Funk"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "bass",
+        "electric-guitar",
+        "organ",
+        "brass"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "funk-synth-funk",
+      "name": "Synth Funk",
+      "keySubstyles": [
+        "Minneapolis Sound",
+        "Electro Funk"
+      ],
+      "characteristicInstruments": [
+        "synth",
+        "drums",
+        "bass",
+        "electric-guitar",
+        "brass"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "funk-disco",
+      "name": "Disco",
+      "keySubstyles": [
+        "Philly Disco",
+        "Chic Organization Sound",
+        "Euro Disco"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "bass",
+        "electric-guitar",
+        "strings",
+        "brass"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "funk-go-go",
+      "name": "Go-Go",
+      "keySubstyles": [
+        "D.C. Go-Go",
+        "Heavy Go-Go Funk"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "cowbell",
+        "timbales",
+        "bass",
+        "brass"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "funk-boogie",
+      "name": "Boogie",
+      "keySubstyles": [
+        "Post-Disco Boogie",
+        "Electro Boogie"
+      ],
+      "characteristicInstruments": [
+        "synth",
+        "bass",
+        "drums",
+        "electric-guitar",
+        "piano"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "funk-afrobeat",
+      "name": "Afrobeat",
+      "keySubstyles": [
+        "Classic Afrobeat",
+        "Afrobeat Big Band"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "bass",
+        "electric-guitar",
+        "brass",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "funk-carioca",
+      "name": "Funk Carioca",
+      "keySubstyles": [
+        "Baile Funk",
+        "Funk 150 BPM",
+        "Funk Melody"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "sub-bass",
+        "sampler",
+        "tenor-sax",
+        "synth"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "funk-starter"
+}

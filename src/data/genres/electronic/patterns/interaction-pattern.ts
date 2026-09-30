@@ -4,7 +4,7 @@ export const ELECTRONIC_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
   {
           "id": "electronic-call-14",
           "worldId": "electronic",
-          "styleIds": ["electronic-house"],
+          "styleIds": ["electronic-techno"],
           "name": "Breakbeat Response",
           "family": "Breakbeat",
           "category": "interactionPattern",

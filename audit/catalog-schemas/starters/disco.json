@@ -1,0 +1,373 @@
+{
+  "schemaVersion": 1,
+  "id": "disco-starter",
+  "genreId": "disco",
+  "genreName": "Disco",
+  "styleId": "disco-classic",
+  "styleName": "Classic Disco",
+  "styleDescription": "Four-on-the-floor dance music with octave bass,",
+  "bpm": 120,
+  "meter": "4/4",
+  "regions": [
+    {
+      "id": "r0",
+      "name": "Intro",
+      "type": "intro",
+      "genreId": "disco",
+      "styleId": "disco-classic",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r1",
+      "name": "Groove",
+      "type": "groove",
+      "genreId": "disco",
+      "styleId": "disco-classic",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "Verse",
+      "type": "verse",
+      "genreId": "disco",
+      "styleId": "disco-classic",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "Chorus",
+      "type": "chorus",
+      "genreId": "disco",
+      "styleId": "disco-classic",
+      "chords": [
+        "Fmaj7",
+        "G",
+        "Em7",
+        "Am7"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Groove",
+      "type": "groove",
+      "genreId": "disco",
+      "styleId": "disco-classic",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r5",
+      "name": "Chorus",
+      "type": "chorus",
+      "genreId": "disco",
+      "styleId": "disco-classic",
+      "chords": [
+        "Fmaj7",
+        "G",
+        "Em7",
+        "Am7"
+      ]
+    },
+    {
+      "id": "r6",
+      "name": "Breakdown",
+      "type": "breakdown",
+      "genreId": "disco",
+      "styleId": "disco-classic",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r7",
+      "name": "Chorus",
+      "type": "chorus",
+      "genreId": "disco",
+      "styleId": "disco-classic",
+      "chords": [
+        "Fmaj7",
+        "G",
+        "Em7",
+        "Am7"
+      ]
+    },
+    {
+      "id": "r8",
+      "name": "Outro",
+      "type": "outro",
+      "genreId": "disco",
+      "styleId": "disco-classic",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "v0",
+      "instrumentId": "drums",
+      "instrumentName": "Standard Drum Kit",
+      "role": "percussion",
+      "patternIds": [
+        "disco-offbeat-hat",
+        "disco-four-floor",
+        "disco-octave-bass"
+      ],
+      "noteCount": 385,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "choke",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4337": 19,
+        "4607": 29,
+        "12200": 337
+      }
+    },
+    {
+      "id": "v1",
+      "instrumentId": "bass",
+      "instrumentName": "Electric Bass Guitar",
+      "role": "bass",
+      "patternIds": [
+        "disco-octave-bass",
+        "disco-four-floor",
+        "disco-offbeat-hat"
+      ],
+      "noteCount": 491,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "slap"
+      ],
+      "gestureCounts": {
+        "5227": 39,
+        "6655": 19,
+        "12200": 12,
+        "44655": 80,
+        "49857": 341
+      }
+    },
+    {
+      "id": "v2",
+      "instrumentId": "strings",
+      "instrumentName": "Fast string ensemble",
+      "role": "harmony",
+      "patternIds": [
+        "disco-string-hits",
+        "disco-four-floor",
+        "disco-offbeat-hat"
+      ],
+      "noteCount": 180,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 2,
+        "6655": 104,
+        "38280": 2,
+        "42219": 5,
+        "45724": 67
+      }
+    },
+    {
+      "id": "v3",
+      "instrumentId": "piano",
+      "instrumentName": "Acoustic Grand Piano",
+      "role": "harmony",
+      "patternIds": [
+        "disco-four-floor",
+        "disco-string-hits"
+      ],
+      "noteCount": 1702,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "marcato",
+        "arrastre",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 143,
+        "6655": 171,
+        "8118": 889,
+        "8526": 19,
+        "19949": 19,
+        "21063": 461
+      }
+    },
+    {
+      "id": "v4",
+      "instrumentId": "voice",
+      "instrumentName": "Synth voice",
+      "role": "voice",
+      "patternIds": [
+        "disco-four-floor",
+        "disco-octave-bass",
+        "disco-string-hits"
+      ],
+      "noteCount": 202,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 69,
+        "6655": 118,
+        "45724": 6,
+        "48234": 6,
+        "50696": 3
+      }
+    },
+    {
+      "id": "v5",
+      "instrumentId": "electric-guitar",
+      "instrumentName": "Electric Guitar",
+      "role": "harmony",
+      "patternIds": [
+        "disco-four-floor",
+        "brazilian--sb-15-bossa-ending-turn",
+        "disco-octave-bass",
+        "disco-offbeat-hat",
+        "tango-marcato-4"
+      ],
+      "noteCount": 1240,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "6655": 19,
+        "29346": 19,
+        "44655": 1164,
+        "48234": 19,
+        "49857": 19
+      }
+    },
+    {
+      "id": "v6",
+      "instrumentId": "horn-section",
+      "instrumentName": "Horn section",
+      "role": "harmony",
+      "patternIds": [
+        "disco-octave-bass",
+        "disco-offbeat-hat",
+        "disco-string-hits",
+        "disco-four-floor"
+      ],
+      "noteCount": 650,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 45,
+        "8118": 321,
+        "8526": 19,
+        "12200": 19,
+        "12241": 6,
+        "44655": 232,
+        "50696": 8
+      }
+    },
+    {
+      "id": "v7",
+      "instrumentId": "synth",
+      "instrumentName": "Synth",
+      "role": "lead",
+      "patternIds": [
+        "disco-string-hits",
+        "disco-octave-bass",
+        "disco-four-floor",
+        "disco-offbeat-hat"
+      ],
+      "noteCount": 204,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "6655": 136,
+        "29346": 2,
+        "44655": 59,
+        "48234": 7
+      }
+    }
+  ],
+  "usedPatternIds": [
+    "disco-offbeat-hat",
+    "disco-four-floor",
+    "disco-octave-bass",
+    "disco-string-hits",
+    "brazilian--sb-15-bossa-ending-turn",
+    "tango-marcato-4"
+  ],
+  "performance": {
+    "durationSeconds": 152,
+    "noteCount": 5054,
+    "trackCount": 8,
+    "tracksWithNoNotes": []
+  }
+}

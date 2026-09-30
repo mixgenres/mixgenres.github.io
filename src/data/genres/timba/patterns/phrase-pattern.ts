@@ -4,7 +4,7 @@ export const TIMBA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
   {
           "id": "timba-phrase-12",
           "worldId": "timba",
-          "styleIds": ["timba-havana-modern"],
+          "styleIds": ["timba-timba-habanera"],
           "name": "Gear Change Phrase",
           "family": "Gear Change",
           "category": "phrasePattern",
@@ -180,7 +180,7 @@ export const TIMBA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
   {
           "id": "timba--phrasing",
           "worldId": "timba",
-          "styleIds": ["timba-havana-modern"],
+          "styleIds": ["timba-timba-habanera"],
           "name": "Timba Vocal Phrasing",
           "family": "Vocal Phrasing",
           "category": "phrasePattern",

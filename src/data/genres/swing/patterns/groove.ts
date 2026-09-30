@@ -4,7 +4,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "swing-charleston",
           "worldId": "swing",
-          "styleIds": ["swing-big-band"],
+          "styleIds": ["swing-big-band-swing"],
           "name": "Charleston Comping",
           "family": "Comping",
           "category": "groove",
@@ -119,7 +119,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "swing-shuffle",
           "worldId": "swing",
-          "styleIds": ["swing-big-band"],
+          "styleIds": ["swing-big-band-swing"],
           "name": "Shuffle Swing",
           "family": "Beat",
           "category": "groove",
@@ -292,7 +292,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "swing-bebop-ride",
           "worldId": "swing",
-          "styleIds": ["swing-small-group"],
+          "styleIds": ["swing-gypsy-jazz"],
           "name": "Bebop Ride",
           "family": "Ride",
           "category": "groove",
@@ -452,7 +452,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "swing-brushes",
           "worldId": "swing",
-          "styleIds": ["swing-small-group"],
+          "styleIds": ["swing-gypsy-jazz"],
           "name": "Brushes Ballad",
           "family": "Beat",
           "category": "groove",
@@ -555,7 +555,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "swing-ensemble",
           "worldId": "swing",
-          "styleIds": ["swing-big-band"],
+          "styleIds": ["swing-big-band-swing"],
           "name": "Ensemble Hits",
           "family": "Comping",
           "category": "groove",
@@ -677,7 +677,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "swing-comp-13",
           "worldId": "swing",
-          "styleIds": ["swing-big-band"],
+          "styleIds": ["swing-big-band-swing"],
           "name": "Piano Comping Cell",
           "family": "Comping",
           "category": "groove",
@@ -849,7 +849,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "swing-verse-15",
           "worldId": "swing",
-          "styleIds": ["swing-big-band"],
+          "styleIds": ["swing-big-band-swing"],
           "name": "Spang-a-Lang Verse Variation",
           "family": "Spang-a-Lang",
           "category": "groove",

@@ -4,7 +4,7 @@ export const TIMBA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
   {
           "id": "timba-conga-gear",
           "worldId": "timba",
-          "styleIds": ["timba-havana-modern"],
+          "styleIds": ["timba-timba-habanera"],
           "name": "Timba Conga Gear",
           "family": "Conga",
           "category": "break",

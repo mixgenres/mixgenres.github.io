@@ -4,7 +4,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "bachata-bongo-majao",
           "worldId": "bachata",
-          "styleIds": ["latin-bachata"],
+          "styleIds": ["bachata-tradicional"],
           "name": "Bongo Majao",
           "family": "Bongo",
           "category": "groove",
@@ -142,7 +142,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "bachata-guira-majao",
           "worldId": "bachata",
-          "styleIds": ["latin-bachata"],
+          "styleIds": ["bachata-tradicional"],
           "name": "Güira Majao",
           "family": "Guira",
           "category": "groove",
@@ -394,7 +394,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "bachata-segunda-derecho",
           "worldId": "bachata",
-          "styleIds": ["latin-bachata"],
+          "styleIds": ["bachata-tradicional"],
           "name": "Segunda Guitar",
           "family": "Guitar",
           "category": "groove",
@@ -531,7 +531,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "cumbia-guiro",
           "worldId": "bachata",
-          "styleIds": ["latin-cumbia"],
+          "styleIds": ["cumbia-colombiana"],
           "name": "Cumbia Güiro",
           "family": "Guiro",
           "category": "groove",
@@ -683,7 +683,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "bachata-comp-13",
           "worldId": "bachata",
-          "styleIds": ["latin-bachata"],
+          "styleIds": ["bachata-tradicional"],
           "name": "Coro Comping",
           "family": "Coro / backing vocals",
           "category": "groove",
@@ -859,7 +859,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "bachata-verse-15",
           "worldId": "bachata",
-          "styleIds": ["latin-bachata"],
+          "styleIds": ["bachata-tradicional"],
           "name": "Derecho Verse Variation",
           "family": "Derecho",
           "category": "groove",

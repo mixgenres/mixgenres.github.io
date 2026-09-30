@@ -4,7 +4,7 @@ export const JAZZ_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
   {
           "id": "jazz-hihat-2-4",
           "worldId": "jazz",
-          "styleIds": ["jazz-swing-bebop"],
+          "styleIds": ["jazz-bebop"],
           "name": "Hi-Hat 2 & 4",
           "family": "Drums",
           "category": "cadence",

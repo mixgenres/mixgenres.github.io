@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "count": {
+    "genres": 32,
+    "styles": 218,
+    "patterns": 419,
+    "instruments": 179,
+    "starters": 32,
+    "filteredSyntheticPatterns": 102
+  },
+  "errors": [],
+  "warnings": []
+}

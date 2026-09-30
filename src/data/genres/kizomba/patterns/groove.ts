@@ -4,7 +4,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "kizomba-semba-guitar",
           "worldId": "kizomba",
-          "styleIds": ["kizomba-semba"],
+          "styleIds": ["kizomba-semba-playful"],
           "name": "Semba Guitar Arpeggio",
           "family": "Guitar",
           "category": "groove",
@@ -288,7 +288,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "kizomba-kick-batida",
           "worldId": "kizomba",
-          "styleIds": ["kizomba-semba"],
+          "styleIds": ["kizomba-semba-playful"],
           "name": "Kizomba Kick Batida",
           "family": "Beat",
           "category": "groove",
@@ -424,7 +424,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "kizomba-hats",
           "worldId": "kizomba",
-          "styleIds": ["kizomba-semba"],
+          "styleIds": ["kizomba-semba-playful"],
           "name": "Kizomba Hi-Hats",
           "family": "Beat",
           "category": "groove",
@@ -595,7 +595,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "kizomba-urban-synth-pulse",
           "worldId": "kizomba",
-          "styleIds": ["kizomba-urban-kiz"],
+          "styleIds": ["kizomba-urbankiz"],
           "name": "Urban Kiz Synth Pulse",
           "family": "Synth",
           "category": "groove",
@@ -740,7 +740,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "kizomba-vocal-comping",
           "worldId": "kizomba",
-          "styleIds": ["kizomba-semba"],
+          "styleIds": ["kizomba-semba-playful"],
           "name": "Kizomba Vocal Phrase Response",
           "family": "synth",
           "category": "groove",
@@ -874,7 +874,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "kizomba-comp-12",
           "worldId": "kizomba",
-          "styleIds": ["kizomba-semba"],
+          "styleIds": ["kizomba-semba-playful"],
           "name": "Call Comping",
           "family": "Call",
           "category": "groove",
@@ -1052,7 +1052,7 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "kizomba-verse-14",
           "worldId": "kizomba",
-          "styleIds": ["kizomba-semba"],
+          "styleIds": ["kizomba-semba-playful"],
           "name": "Hook Verse Variation",
           "family": "Hook",
           "category": "groove",

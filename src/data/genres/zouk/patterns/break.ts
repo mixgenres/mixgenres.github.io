@@ -4,7 +4,7 @@ export const ZOUK_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
   {
           "id": "zouk-french-bass",
           "worldId": "zouk",
-          "styleIds": ["zouk-beton"],
+          "styleIds": ["zouk-zouk-beton"],
           "name": "French Antillean Zouk Bass",
           "family": "Bass",
           "category": "break",

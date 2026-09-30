@@ -1,0 +1,305 @@
+{
+  "schemaVersion": 1,
+  "id": "bachata-starter",
+  "genreId": "bachata",
+  "genreName": "Bachata",
+  "styleId": "bachata-urbana",
+  "styleName": "Urbana",
+  "styleDescription": "Smooth, guitar-driven 4/4 pop with bachata",
+  "bpm": 130,
+  "meter": "4/4",
+  "regions": [
+    {
+      "id": "r0",
+      "name": "Intro",
+      "type": "intro",
+      "genreId": "bachata",
+      "styleId": "bachata-urbana",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "name": "Verso",
+      "type": "verso",
+      "genreId": "bachata",
+      "styleId": "bachata-urbana",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "Coro",
+      "type": "coro",
+      "genreId": "bachata",
+      "styleId": "bachata-urbana",
+      "chords": [
+        "Dm",
+        "G",
+        "C",
+        "Am"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "Mambo",
+      "type": "mambo",
+      "genreId": "bachata",
+      "styleId": "bachata-urbana",
+      "chords": [
+        "F",
+        "G",
+        "Em",
+        "Am"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Coda",
+      "type": "coda",
+      "genreId": "bachata",
+      "styleId": "bachata-urbana",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "v0",
+      "instrumentId": "acoustic-guitar",
+      "instrumentName": "Steel-String Acoustic Guitar",
+      "role": "harmony",
+      "patternIds": [
+        "bachata-chorus-16",
+        "bachata-segunda-derecho"
+      ],
+      "noteCount": 603,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "mute",
+        "bend"
+      ],
+      "gestureCounts": {
+        "4607": 52,
+        "6655": 8,
+        "8118": 8,
+        "12200": 8,
+        "44655": 527
+      }
+    },
+    {
+      "id": "v1",
+      "instrumentId": "bass",
+      "instrumentName": "Electric Bass Guitar",
+      "role": "bass",
+      "patternIds": [
+        "bachata-bass-majao",
+        "cumbia-bass-groove"
+      ],
+      "noteCount": 187,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4607": 8,
+        "5227": 5,
+        "6655": 51,
+        "12200": 23,
+        "44655": 100
+      }
+    },
+    {
+      "id": "v2",
+      "instrumentId": "bongos",
+      "instrumentName": "Bongos",
+      "role": "percussion",
+      "patternIds": [
+        "bachata-bongo-derecho",
+        "bachata-bongo-majao"
+      ],
+      "noteCount": 172,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "slap"
+      ],
+      "gestureCounts": {
+        "4337": 47,
+        "4607": 3,
+        "5227": 114,
+        "44655": 8
+      }
+    },
+    {
+      "id": "v3",
+      "instrumentId": "guiro",
+      "instrumentName": "Guiro",
+      "role": "percussion",
+      "patternIds": [
+        "bachata-bongo-majao",
+        "bachata-chorus-16"
+      ],
+      "noteCount": 154,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4337": 8,
+        "4607": 14,
+        "12200": 130,
+        "44655": 2
+      }
+    },
+    {
+      "id": "v4",
+      "instrumentId": "requinto",
+      "instrumentName": "Requinto Guitar",
+      "role": "lead",
+      "patternIds": [
+        "bachata-requinto-derecho"
+      ],
+      "noteCount": 490,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "vibrato",
+        "pizzicato"
+      ],
+      "gestureCounts": {
+        "6655": 482,
+        "42219": 8
+      }
+    },
+    {
+      "id": "v5",
+      "instrumentId": "voice",
+      "instrumentName": "Synth voice",
+      "role": "voice",
+      "patternIds": [
+        "bachata-chorus-16",
+        "bachata-bass-majao"
+      ],
+      "noteCount": 112,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 33,
+        "6655": 69,
+        "45724": 6,
+        "48234": 2,
+        "50696": 2
+      }
+    },
+    {
+      "id": "v6",
+      "instrumentId": "piano",
+      "instrumentName": "Acoustic Grand Piano",
+      "role": "harmony",
+      "patternIds": [
+        "cumbia-bass-groove"
+      ],
+      "noteCount": 414,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "marcato",
+        "arrastre",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 33,
+        "6655": 41,
+        "8118": 205,
+        "8526": 8,
+        "19949": 8,
+        "21063": 119
+      }
+    },
+    {
+      "id": "v7",
+      "instrumentId": "maracas",
+      "instrumentName": "Maracas",
+      "role": "percussion",
+      "patternIds": [
+        "bachata-chorus-16",
+        "bachata-bongo-majao"
+      ],
+      "noteCount": 157,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 15,
+        "12200": 134,
+        "44655": 8
+      }
+    }
+  ],
+  "usedPatternIds": [
+    "bachata-chorus-16",
+    "bachata-segunda-derecho",
+    "bachata-bass-majao",
+    "cumbia-bass-groove",
+    "bachata-bongo-derecho",
+    "bachata-bongo-majao",
+    "bachata-requinto-derecho"
+  ],
+  "performance": {
+    "durationSeconds": 59.07692307692309,
+    "noteCount": 2289,
+    "trackCount": 8,
+    "tracksWithNoNotes": []
+  }
+}

@@ -4,7 +4,7 @@ export const KIZOMBA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "kizomba-anchor-11",
           "worldId": "kizomba",
-          "styleIds": ["kizomba-semba"],
+          "styleIds": ["kizomba-semba-playful"],
           "name": "Semba Anchor",
           "family": "Semba",
           "category": "ostinato",

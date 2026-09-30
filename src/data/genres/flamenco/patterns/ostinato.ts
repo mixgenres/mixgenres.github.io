@@ -218,7 +218,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "flam-tangos-compas",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-tangos-tientos"],
+          "styleIds": ["flamenco-tangos-style"],
           "name": "Tangos de Triana (Binary Compás)",
           "family": "Tangos Rhythm",
           "category": "ostinato",

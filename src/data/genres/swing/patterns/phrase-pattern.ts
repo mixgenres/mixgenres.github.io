@@ -4,7 +4,7 @@ export const SWING_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
   {
           "id": "swing-phrase-10",
           "worldId": "swing",
-          "styleIds": ["swing-big-band"],
+          "styleIds": ["swing-big-band-swing"],
           "name": "Spang-a-Lang Phrase",
           "family": "Spang-a-Lang",
           "category": "phrasePattern",
@@ -176,7 +176,7 @@ export const SWING_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
   {
           "id": "swing--phrasing",
           "worldId": "swing",
-          "styleIds": ["swing-big-band"],
+          "styleIds": ["swing-big-band-swing"],
           "name": "Swing Vocal Phrasing",
           "family": "Vocal Phrasing",
           "category": "phrasePattern",

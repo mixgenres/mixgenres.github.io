@@ -153,7 +153,7 @@ export const FOLK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "folk-anchor-14",
           "worldId": "folk",
-          "styleIds": ["folk-singer-songwriter"],
+          "styleIds": ["folk-indie-folk"],
           "name": "Vocal Harmony Anchor",
           "family": "Vocal Harmony",
           "category": "ostinato",

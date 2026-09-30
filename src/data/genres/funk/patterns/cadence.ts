@@ -4,7 +4,7 @@ export const FUNK_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
   {
           "id": "funk-slap-bass",
           "worldId": "funk",
-          "styleIds": ["funk-pfunk-neworleans"],
+          "styleIds": ["funk-p-funk"],
           "name": "Slap Bass",
           "family": "Bass",
           "category": "cadence",

@@ -4,7 +4,7 @@ export const KIZOMBA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
   {
           "id": "kizomba-fill-17",
           "worldId": "kizomba",
-          "styleIds": ["kizomba-semba"],
+          "styleIds": ["kizomba-semba-playful"],
           "name": "Call Fill",
           "family": "Call",
           "category": "fill",

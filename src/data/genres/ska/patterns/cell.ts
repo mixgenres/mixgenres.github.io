@@ -4,7 +4,7 @@ export const SKA_WORLD_PATTERNS_CELL: MusicalPattern[] = [
   {
           "id": "sk-06-first-wave-offbeat-chop",
           "worldId": "ska",
-          "styleIds": ["ska-first-wave"],
+          "styleIds": ["ska-trad-ska"],
           "name": "First-Wave Offbeat Chop",
           "family": "First-Wave Ska",
           "category": "cell",

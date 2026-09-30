@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "id": "zouk",
+  "name": "Zouk",
+  "family": "French Caribbean / Antillean",
+  "description": "Zouk emerged in Guadeloupe and Martinique, combining Caribbean rhythms with modern band arrangements.",
+  "substyles": [
+    "Zouk Béton",
+    "Zouk Love",
+    "Ghetto Zouk",
+    "Neo-Zouk"
+  ],
+  "styleIds": [
+    "zouk-zouk-beton",
+    "zouk-zouk-love",
+    "zouk-ghetto-zouk",
+    "zouk-neo-zouk"
+  ],
+  "patternIds": [
+    "zouk-bass-movement",
+    "zouk-guitar-skank-chawa",
+    "zouk-french-bass",
+    "zouk-shaker",
+    "zouk-ti-bwa",
+    "zouk-synth-chords",
+    "zouk-snare",
+    "zouk-horn-stabs",
+    "zouk-phrase-9",
+    "zouk-call-10",
+    "zouk-anchor-11",
+    "zouk-comp-12",
+    "zouk-intro-13",
+    "zouk-verse-14",
+    "zouk-chorus-15",
+    "zouk-bridge-16",
+    "zouk--phrasing"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "zouk-zouk-beton",
+      "name": "Zouk Béton",
+      "keySubstyles": [
+        "Classic Kassav' Sound",
+        "Carnival Zouk"
+      ],
+      "characteristicInstruments": [
+        "brass",
+        "drums",
+        "bass",
+        "synth",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "zouk-zouk-love",
+      "name": "Zouk Love",
+      "keySubstyles": [
+        "Antillean Slow Zouk",
+        "Romantic Zouk"
+      ],
+      "characteristicInstruments": [
+        "synth",
+        "bass",
+        "drums",
+        "electric-guitar",
+        "rhodes"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "zouk-ghetto-zouk",
+      "name": "Ghetto Zouk",
+      "keySubstyles": [
+        "Afro-European Zouk",
+        "Zouk-R&B"
+      ],
+      "characteristicInstruments": [
+        "synth",
+        "drums",
+        "sub-bass",
+        "piano",
+        "warm-pad"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "zouk-neo-zouk",
+      "name": "Neo-Zouk",
+      "keySubstyles": [
+        "Brazilian Zouk Neo",
+        "Flow Zouk"
+      ],
+      "characteristicInstruments": [
+        "synth",
+        "sub-bass",
+        "drums",
+        "sampler",
+        "warm-pad"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "zouk-starter"
+}

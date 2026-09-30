@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "id": "timba",
+  "name": "Timba",
+  "family": "Cuban Popular Music",
+  "description": "High-energy modern Cuban popular music: dynamic",
+  "substyles": [
+    "Timba Habanera",
+    "Songo"
+  ],
+  "styleIds": [
+    "timba-timba-habanera",
+    "timba-songo"
+  ],
+  "patternIds": [
+    "timba-gear-marcha",
+    "timba-songo-groove",
+    "timba-displaced-bass",
+    "timba-conga-gear",
+    "timba-bata-fusion",
+    "timba-synth-bass",
+    "timba-piano-guajeo",
+    "timba-kick-bomobo",
+    "timba-horn-moña",
+    "timba-clave-rumba",
+    "timba-anticipated-pedal",
+    "timba-phrase-12",
+    "timba-call-13",
+    "timba-anchor-14",
+    "timba-comp-15",
+    "timba-intro-16",
+    "timba--phrasing"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "timba-timba-habanera",
+      "name": "Timba Habanera",
+      "keySubstyles": [
+        "Classic 90s Timba",
+        "Songo-Timba"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "timbales",
+        "congas",
+        "bass",
+        "piano"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "timba-songo",
+      "name": "Songo",
+      "keySubstyles": [
+        "Classic Van Van Songo",
+        "Afro-Funk Cuban"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "congas",
+        "bass",
+        "piano",
+        "flute"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "timba-starter"
+}

@@ -4,7 +4,7 @@ export const ZOUK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
   {
           "id": "zouk-phrase-9",
           "worldId": "zouk",
-          "styleIds": ["zouk-beton"],
+          "styleIds": ["zouk-zouk-beton"],
           "name": "Hook Phrase",
           "family": "Hook",
           "category": "phrasePattern",
@@ -169,7 +169,7 @@ export const ZOUK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
   {
           "id": "zouk--phrasing",
           "worldId": "zouk",
-          "styleIds": ["zouk-beton"],
+          "styleIds": ["zouk-zouk-beton"],
           "name": "Zouk Vocal Phrasing",
           "family": "Vocal Phrasing",
           "category": "phrasePattern",

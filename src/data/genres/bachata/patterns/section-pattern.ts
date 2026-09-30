@@ -4,7 +4,7 @@ export const BACHATA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
   {
           "id": "bachata-intro-14",
           "worldId": "bachata",
-          "styleIds": ["latin-bachata"],
+          "styleIds": ["bachata-tradicional"],
           "name": "Requinto Intro",
           "family": "Requinto",
           "category": "sectionPattern",
@@ -229,7 +229,7 @@ export const BACHATA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
   {
           "id": "bachata-chorus-16",
           "worldId": "bachata",
-          "styleIds": ["latin-bachata"],
+          "styleIds": ["bachata-tradicional"],
           "name": "Majao Chorus Lift",
           "family": "Majao",
           "category": "sectionPattern",

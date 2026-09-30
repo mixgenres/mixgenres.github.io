@@ -4,7 +4,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
   {
           "id": "flam-alzapua-bass",
           "worldId": "flamenco",
-          "styleIds": ["flamenco-bulerias"],
+          "styleIds": ["flamenco-buleria-style"],
           "name": "Alzapúa Thumb Technique (Bass Driver)",
           "family": "Thumb Virtuosity",
           "category": "rolePattern",

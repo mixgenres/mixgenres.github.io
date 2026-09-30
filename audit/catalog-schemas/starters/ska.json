@@ -1,0 +1,331 @@
+{
+  "schemaVersion": 1,
+  "id": "ska-starter",
+  "genreId": "ska",
+  "genreName": "Ska",
+  "styleId": "ska-trad-ska",
+  "styleName": "Traditional Ska",
+  "styleDescription": "Upbeat Chop • Big Band Horns",
+  "bpm": 130,
+  "meter": "4/4",
+  "regions": [
+    {
+      "id": "r0",
+      "name": "Intro",
+      "type": "intro",
+      "genreId": "ska",
+      "styleId": "ska-trad-ska",
+      "chords": [
+        "A#",
+        "D#",
+        "F",
+        "A#"
+      ]
+    },
+    {
+      "id": "r1",
+      "name": "Verse",
+      "type": "verse",
+      "genreId": "ska",
+      "styleId": "ska-trad-ska",
+      "chords": [
+        "A#",
+        "D#",
+        "F",
+        "A#"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "Chorus",
+      "type": "chorus",
+      "genreId": "ska",
+      "styleId": "ska-trad-ska",
+      "chords": [
+        "A#",
+        "A#",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "Instrumental",
+      "type": "instrumental",
+      "genreId": "ska",
+      "styleId": "ska-trad-ska",
+      "chords": [
+        "D#",
+        "F",
+        "A#",
+        "A#"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Verse",
+      "type": "verse",
+      "genreId": "ska",
+      "styleId": "ska-trad-ska",
+      "chords": [
+        "A#",
+        "D#",
+        "F",
+        "A#"
+      ]
+    },
+    {
+      "id": "r5",
+      "name": "Outro",
+      "type": "outro",
+      "genreId": "ska",
+      "styleId": "ska-trad-ska",
+      "chords": [
+        "A#",
+        "D#",
+        "F",
+        "A#"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "v0",
+      "instrumentId": "brass",
+      "instrumentName": "Brass section",
+      "role": "harmony",
+      "patternIds": [
+        "ska-offbeat-guitar",
+        "ska-walking-bass"
+      ],
+      "noteCount": 461,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 36,
+        "6655": 54,
+        "8118": 229,
+        "8526": 12,
+        "12241": 12,
+        "44655": 106,
+        "50696": 12
+      }
+    },
+    {
+      "id": "v1",
+      "instrumentId": "electric-guitar",
+      "instrumentName": "Electric Guitar",
+      "role": "harmony",
+      "patternIds": [
+        "sk-offbeat-chop"
+      ],
+      "noteCount": 510,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "6655": 12,
+        "29346": 12,
+        "44655": 462,
+        "48234": 12,
+        "49857": 12
+      }
+    },
+    {
+      "id": "v2",
+      "instrumentId": "piano",
+      "instrumentName": "Acoustic Grand Piano",
+      "role": "harmony",
+      "patternIds": [
+        "sk-offbeat-chop",
+        "sk-06-first-wave-offbeat-chop"
+      ],
+      "noteCount": 576,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "marcato",
+        "arrastre",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 49,
+        "6655": 54,
+        "8118": 294,
+        "8526": 12,
+        "19949": 12,
+        "21063": 155
+      }
+    },
+    {
+      "id": "v3",
+      "instrumentId": "upright-bass",
+      "instrumentName": "Upright Double Bass",
+      "role": "bass",
+      "patternIds": [
+        "sk-walking-bass"
+      ],
+      "noteCount": 364,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "arrastre",
+        "pizzicato",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 25,
+        "6655": 32,
+        "8118": 12,
+        "9742": 12,
+        "12200": 12,
+        "38280": 12,
+        "44655": 259
+      }
+    },
+    {
+      "id": "v4",
+      "instrumentId": "drums",
+      "instrumentName": "Standard Drum Kit",
+      "role": "percussion",
+      "patternIds": [
+        "ska-walking-bass",
+        "sk-09-ska-drum-drive",
+        "ska-offbeat-guitar"
+      ],
+      "noteCount": 296,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "choke",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4337": 12,
+        "4607": 24,
+        "9363": 177,
+        "12200": 83
+      }
+    },
+    {
+      "id": "v5",
+      "instrumentId": "voice",
+      "instrumentName": "Synth voice",
+      "role": "voice",
+      "patternIds": [
+        "ska-offbeat-guitar",
+        "ska-walking-bass"
+      ],
+      "noteCount": 184,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 55,
+        "6655": 110,
+        "45724": 9,
+        "48234": 5,
+        "50696": 5
+      }
+    },
+    {
+      "id": "v6",
+      "instrumentId": "tenor-sax",
+      "instrumentName": "Bb Tenor Saxophone",
+      "role": "melody",
+      "patternIds": [
+        "ska-offbeat-guitar",
+        "sk-07-walking-ska-bass"
+      ],
+      "noteCount": 343,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 27,
+        "6655": 33,
+        "8118": 174,
+        "29346": 10,
+        "44655": 99
+      }
+    },
+    {
+      "id": "v7",
+      "instrumentId": "trombone",
+      "instrumentName": "Trombone",
+      "role": "lead",
+      "patternIds": [
+        "sk-horn-answer"
+      ],
+      "noteCount": 129,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 1,
+        "6655": 19,
+        "44655": 109
+      }
+    }
+  ],
+  "usedPatternIds": [
+    "ska-offbeat-guitar",
+    "ska-walking-bass",
+    "sk-offbeat-chop",
+    "sk-06-first-wave-offbeat-chop",
+    "sk-walking-bass",
+    "sk-09-ska-drum-drive",
+    "sk-07-walking-ska-bass",
+    "sk-horn-answer"
+  ],
+  "performance": {
+    "durationSeconds": 88.61538461538454,
+    "noteCount": 2863,
+    "trackCount": 8,
+    "tracksWithNoNotes": []
+  }
+}

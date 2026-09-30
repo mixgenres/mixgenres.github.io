@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "id": "drum-and-bass",
+  "name": "Drum & Bass",
+  "family": "Electronic / Dance",
+  "description": "UK sound-system music built around fast breakbeats, deep bass and contrasting melodic or MC-led sections.",
+  "substyles": [
+    "Jungle",
+    "Liquid Drum & Bass",
+    "Dancefloor Drum & Bass",
+    "Jump-Up",
+    "Techstep",
+    "Neurofunk",
+    "Atmospheric Drum & Bass",
+    "Drumfunk"
+  ],
+  "styleIds": [
+    "drum-and-bass-jungle",
+    "drum-and-bass-liquid",
+    "drum-and-bass-techstep",
+    "drum-and-bass-neurofunk",
+    "drum-and-bass-dancefloor",
+    "drum-and-bass-jump-up",
+    "drum-and-bass-atmospheric",
+    "drum-and-bass-drumfunk"
+  ],
+  "patternIds": [
+    "dnb-break-core",
+    "dnb-sub-phrase",
+    "dnb-two-step",
+    "dnb-drop-fill"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "drum-and-bass-jungle",
+      "name": "Jungle",
+      "keySubstyles": [
+        "Jungle",
+        "Ragga Jungle"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "sub-bass",
+        "sampler",
+        "synth",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "drum-and-bass-liquid",
+      "name": "Liquid Drum & Bass",
+      "keySubstyles": [
+        "Liquid",
+        "Soulful DnB"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "sub-bass",
+        "piano",
+        "synth",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "drum-and-bass-techstep",
+      "name": "Techstep",
+      "keySubstyles": [
+        "Techstep"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "sampler"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "drum-and-bass-neurofunk",
+      "name": "Neurofunk",
+      "keySubstyles": [
+        "Neurofunk"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "sampler"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "drum-and-bass-dancefloor",
+      "name": "Dancefloor Drum & Bass",
+      "keySubstyles": [
+        "Dancefloor Drum & Bass"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "brass",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "drum-and-bass-jump-up",
+      "name": "Jump-Up",
+      "keySubstyles": [
+        "Jump-Up"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "voice",
+        "sampler"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "drum-and-bass-atmospheric",
+      "name": "Atmospheric Drum & Bass",
+      "keySubstyles": [
+        "Intelligent DnB",
+        "Atmospheric Jungle"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "piano",
+        "flute"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "drum-and-bass-drumfunk",
+      "name": "Drumfunk",
+      "keySubstyles": [
+        "Drumfunk"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "sampler",
+        "sub-bass",
+        "synth",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "drum-and-bass-starter"
+}

@@ -4,7 +4,7 @@ export const BACHATA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
   {
           "id": "bachata-bass-derecho",
           "worldId": "bachata",
-          "styleIds": ["latin-bachata"],
+          "styleIds": ["bachata-tradicional"],
           "name": "Bass Derecho",
           "family": "Bass",
           "category": "fill",

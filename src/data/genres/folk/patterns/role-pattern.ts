@@ -4,7 +4,7 @@ export const FOLK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
   {
           "id": "folk-roster-bass",
           "worldId": "folk",
-          "styleIds": ["folk-singer-songwriter"],
+          "styleIds": ["folk-indie-folk"],
           "name": "Folk bass part",
           "family": "Flatpick",
           "category": "rolePattern",
@@ -75,7 +75,7 @@ export const FOLK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "variants": [
             {
               "id": "folk-roster-11-v-01",
-              "parentPatternId": "folk-roster-11",
+              "parentPatternId": "folk-roster-bass",
               "name": "Flatpick Texture — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
@@ -103,7 +103,7 @@ export const FOLK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
             },
             {
               "id": "folk-roster-11-v-02",
-              "parentPatternId": "folk-roster-11",
+              "parentPatternId": "folk-roster-bass",
               "name": "Flatpick Texture — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
@@ -155,7 +155,7 @@ export const FOLK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
   {
           "id": "folk-roster-",
           "worldId": "folk",
-          "styleIds": ["folk-singer-songwriter"],
+          "styleIds": ["folk-indie-folk"],
           "name": "Folk  part",
           "family": "Banjo Roll",
           "category": "rolePattern",
@@ -226,7 +226,7 @@ export const FOLK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "variants": [
             {
               "id": "folk-roster-12-v-01",
-              "parentPatternId": "folk-roster-12",
+              "parentPatternId": "folk-roster-",
               "name": "Banjo Roll Texture — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
@@ -254,7 +254,7 @@ export const FOLK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
             },
             {
               "id": "folk-roster-12-v-02",
-              "parentPatternId": "folk-roster-12",
+              "parentPatternId": "folk-roster-",
               "name": "Banjo Roll Texture — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,

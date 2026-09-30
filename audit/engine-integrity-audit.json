@@ -1,0 +1,4243 @@
+{
+  "generatedAt": "2026-09-30T14:49:21.951Z",
+  "styles": 218,
+  "styleFailures": [],
+  "instruments": 179,
+  "missingInstrumentModules": [],
+  "staticLegacyMarkers": [],
+  "styleReports": [
+    {
+      "styleId": "afrobeats-afro-pop",
+      "genre": "afrobeats",
+      "referenceSong": "African Queen — 2Baba",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "acoustic-guitar",
+        "synth",
+        "hand-percussion",
+        "voice",
+        "sub-bass",
+        "log-drum"
+      ],
+      "notes": 2240,
+      "duration": 80.74766355140189,
+      "progression": []
+    },
+    {
+      "styleId": "afrobeats-afrobeat",
+      "genre": "afrobeats",
+      "referenceSong": "Anybody — Burna Boy",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "electric-guitar",
+        "brass",
+        "hand-percussion",
+        "voice",
+        "sub-bass",
+        "log-drum"
+      ],
+      "notes": 2721,
+      "duration": 72,
+      "progression": []
+    },
+    {
+      "styleId": "afrobeats-amapiano",
+      "genre": "afrobeats",
+      "referenceSong": "African Queen — 2Baba",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "piano",
+        "synth",
+        "shaker",
+        "voice",
+        "sub-bass",
+        "log-drum"
+      ],
+      "notes": 2160,
+      "duration": 75.78947368421058,
+      "progression": []
+    },
+    {
+      "styleId": "afrobeats-gqom",
+      "genre": "afrobeats",
+      "referenceSong": "Essence — Wizkid feat. Tems",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "hand-percussion",
+        "sampler",
+        "voice",
+        "log-drum",
+        "electric-guitar"
+      ],
+      "notes": 2262,
+      "duration": 69.12000000000005,
+      "progression": []
+    },
+    {
+      "styleId": "afrobeats-afro-house",
+      "genre": "afrobeats",
+      "referenceSong": "Last Last — Burna Boy",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "synth",
+        "hand-percussion",
+        "piano",
+        "voice",
+        "sub-bass",
+        "log-drum"
+      ],
+      "notes": 2202,
+      "duration": 70.24390243902444,
+      "progression": []
+    },
+    {
+      "styleId": "afrobeats-highlife",
+      "genre": "afrobeats",
+      "referenceSong": "African Queen — 2Baba",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "bass",
+        "drums",
+        "brass",
+        "hand-percussion",
+        "voice",
+        "sub-bass",
+        "log-drum"
+      ],
+      "notes": 2055,
+      "duration": 76.46017699115045,
+      "progression": []
+    },
+    {
+      "styleId": "afrobeats-palm-wine",
+      "genre": "afrobeats",
+      "referenceSong": "Anybody — Burna Boy",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "hand-percussion",
+        "bass",
+        "synth",
+        "drums",
+        "voice",
+        "sub-bass",
+        "log-drum"
+      ],
+      "notes": 2560,
+      "duration": 92.90322580645157,
+      "progression": []
+    },
+    {
+      "styleId": "afrobeats-alte",
+      "genre": "afrobeats",
+      "referenceSong": "Ye — Burna Boy",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "bass",
+        "drums",
+        "acoustic-guitar",
+        "voice",
+        "sub-bass",
+        "log-drum",
+        "electric-guitar"
+      ],
+      "notes": 3281,
+      "duration": 90,
+      "progression": []
+    },
+    {
+      "styleId": "bachata-urbana",
+      "genre": "bachata",
+      "referenceSong": "Obsesión — Aventura",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "bass",
+        "bongos",
+        "guiro",
+        "requinto",
+        "voice",
+        "piano",
+        "maracas"
+      ],
+      "notes": 2289,
+      "duration": 59.07692307692309,
+      "progression": []
+    },
+    {
+      "styleId": "bachata-tradicional",
+      "genre": "bachata",
+      "referenceSong": "Te Extraño — Xtreme",
+      "referenceTone": "sparse / intimate / high separation",
+      "instruments": [
+        "acoustic-guitar",
+        "bass",
+        "bongos",
+        "guiro",
+        "requinto",
+        "voice",
+        "piano",
+        "maracas"
+      ],
+      "notes": 3884,
+      "duration": 91.42857142857133,
+      "progression": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "styleId": "bachata-sensual",
+      "genre": "bachata",
+      "referenceSong": "Te Extraño — Xtreme",
+      "referenceTone": "sparse / intimate / high separation",
+      "instruments": [
+        "acoustic-guitar",
+        "bass",
+        "synth",
+        "bongos",
+        "guiro",
+        "voice",
+        "piano",
+        "maracas"
+      ],
+      "notes": 2857,
+      "duration": 89.49152542372887,
+      "progression": [
+        "Bm7",
+        "Gmaj7",
+        "Dmaj7",
+        "A"
+      ]
+    },
+    {
+      "styleId": "bachata-moderna",
+      "genre": "bachata",
+      "referenceSong": "Obsesión — Aventura",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "bass",
+        "bongos",
+        "guiro",
+        "synth",
+        "voice",
+        "piano",
+        "maracas"
+      ],
+      "notes": 2141,
+      "duration": 60,
+      "progression": []
+    },
+    {
+      "styleId": "bachata-bolero",
+      "genre": "bachata",
+      "referenceSong": "Te Extraño — Xtreme",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "upright-bass",
+        "bongos",
+        "maracas",
+        "requinto",
+        "voice",
+        "piano",
+        "guiro"
+      ],
+      "notes": 2278,
+      "duration": 73.14285714285714,
+      "progression": []
+    },
+    {
+      "styleId": "bachata-bachatango",
+      "genre": "bachata",
+      "referenceSong": "Stand by Me — Prince Royce",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "bandoneon",
+        "violin",
+        "acoustic-guitar",
+        "bass",
+        "bongos",
+        "voice",
+        "piano",
+        "maracas"
+      ],
+      "notes": 2244,
+      "duration": 61.935483870967786,
+      "progression": []
+    },
+    {
+      "styleId": "bachata-campestre",
+      "genre": "bachata",
+      "referenceSong": "Bachata en Fukuoka — Juan Luis Guerra",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "bass",
+        "bongos",
+        "guiro",
+        "requinto",
+        "voice",
+        "piano",
+        "maracas"
+      ],
+      "notes": 2450,
+      "duration": 57.31343283582095,
+      "progression": []
+    },
+    {
+      "styleId": "bachata-merengue-de-guitarra",
+      "genre": "bachata",
+      "referenceSong": "Te Extraño — Xtreme",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "bass",
+        "drums",
+        "guiro",
+        "requinto",
+        "voice",
+        "piano",
+        "maracas"
+      ],
+      "notes": 2233,
+      "duration": 25.09803921568629,
+      "progression": []
+    },
+    {
+      "styleId": "blues-chicago",
+      "genre": "blues",
+      "referenceSong": "Pride and Joy — Stevie Ray Vaughan",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "harmonica",
+        "piano",
+        "bass",
+        "drums",
+        "voice",
+        "organ",
+        "trumpet"
+      ],
+      "notes": 3852,
+      "duration": 88.1632653061224,
+      "progression": []
+    },
+    {
+      "styleId": "blues-delta",
+      "genre": "blues",
+      "referenceSong": "Sweet Home Chicago — Robert Johnson",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "harmonica",
+        "piano",
+        "foot-stomp",
+        "slide-guitar",
+        "electric-guitar",
+        "bass",
+        "drums"
+      ],
+      "notes": 4827,
+      "duration": 101.64705882352943,
+      "progression": []
+    },
+    {
+      "styleId": "blues-texas",
+      "genre": "blues",
+      "referenceSong": "Pride and Joy — Stevie Ray Vaughan",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "piano",
+        "harmonica",
+        "voice",
+        "organ",
+        "trumpet"
+      ],
+      "notes": 3498,
+      "duration": 66.46153846153847,
+      "progression": []
+    },
+    {
+      "styleId": "blues-piedmont",
+      "genre": "blues",
+      "referenceSong": "The Thrill Is Gone — B.B. King",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "harmonica",
+        "washboard",
+        "piano",
+        "upright-bass",
+        "electric-guitar",
+        "bass",
+        "drums"
+      ],
+      "notes": 3420,
+      "duration": 80.00000000000003,
+      "progression": []
+    },
+    {
+      "styleId": "blues-jump",
+      "genre": "blues",
+      "referenceSong": "Pride and Joy — Stevie Ray Vaughan",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "brass",
+        "piano",
+        "electric-guitar",
+        "upright-bass",
+        "drums",
+        "bass",
+        "harmonica",
+        "voice"
+      ],
+      "notes": 3286,
+      "duration": 55.74193548387094,
+      "progression": []
+    },
+    {
+      "styleId": "blues-hill-country",
+      "genre": "blues",
+      "referenceSong": "The Thrill Is Gone — B.B. King",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "drums",
+        "bass",
+        "harmonica",
+        "hand-percussion",
+        "piano",
+        "voice",
+        "organ"
+      ],
+      "notes": 3583,
+      "duration": 83.07692307692305,
+      "progression": []
+    },
+    {
+      "styleId": "blues-swamp",
+      "genre": "blues",
+      "referenceSong": "Pride and Joy — Stevie Ray Vaughan",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "harmonica",
+        "bass",
+        "drums",
+        "piano",
+        "voice",
+        "organ",
+        "trumpet"
+      ],
+      "notes": 2552,
+      "duration": 99.31034482758626,
+      "progression": []
+    },
+    {
+      "styleId": "blues-soul",
+      "genre": "blues",
+      "referenceSong": "The Thrill Is Gone — B.B. King",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "brass",
+        "organ",
+        "bass",
+        "drums",
+        "piano",
+        "harmonica",
+        "voice"
+      ],
+      "notes": 1850,
+      "duration": 102.85714285714288,
+      "progression": []
+    },
+    {
+      "styleId": "brazilian-bossa-nova",
+      "genre": "brazilian",
+      "referenceSong": "Carinhoso — Pixinguinha",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "piano",
+        "flute",
+        "upright-bass",
+        "drums",
+        "voice",
+        "shaker",
+        "tenor-sax"
+      ],
+      "notes": 3906,
+      "duration": 36.0902255639098,
+      "progression": []
+    },
+    {
+      "styleId": "brazilian-samba-de-enredo",
+      "genre": "brazilian",
+      "referenceSong": "Mas Que Nada — Jorge Ben Jor",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "surdo",
+        "tamborim",
+        "cavaquinho",
+        "cuica",
+        "brass",
+        "acoustic-guitar",
+        "upright-bass",
+        "piano"
+      ],
+      "notes": 2434,
+      "duration": 33.56643356643359,
+      "progression": []
+    },
+    {
+      "styleId": "brazilian-pagode",
+      "genre": "brazilian",
+      "referenceSong": "Carinhoso — Pixinguinha",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "cavaquinho",
+        "pandeiro",
+        "tantan",
+        "repinique",
+        "synth",
+        "acoustic-guitar",
+        "upright-bass",
+        "piano"
+      ],
+      "notes": 2874,
+      "duration": 46.601941747572845,
+      "progression": []
+    },
+    {
+      "styleId": "brazilian-samba-reggae",
+      "genre": "brazilian",
+      "referenceSong": "Chega de Saudade — João Gilberto",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "surdo",
+        "timbales",
+        "repinique",
+        "brass",
+        "synth",
+        "acoustic-guitar",
+        "upright-bass",
+        "piano"
+      ],
+      "notes": 2813,
+      "duration": 96.00000000000006,
+      "progression": []
+    },
+    {
+      "styleId": "country-neotraditional",
+      "genre": "country",
+      "referenceSong": "Friends in Low Places — Garth Brooks",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "steel-guitar",
+        "fiddle",
+        "acoustic-guitar",
+        "electric-guitar",
+        "bass",
+        "voice",
+        "piano",
+        "mandolin"
+      ],
+      "notes": 3036,
+      "duration": 104.72727272727278,
+      "progression": []
+    },
+    {
+      "styleId": "country-outlaw",
+      "genre": "country",
+      "referenceSong": "On the Road Again — Willie Nelson",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "acoustic-guitar",
+        "bass",
+        "drums",
+        "harmonica",
+        "voice",
+        "piano",
+        "mandolin"
+      ],
+      "notes": 4304,
+      "duration": 98.46153846153834,
+      "progression": []
+    },
+    {
+      "styleId": "country-bluegrass",
+      "genre": "country",
+      "referenceSong": "Blue Moon of Kentucky — Bill Monroe",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "banjo",
+        "mandolin",
+        "fiddle",
+        "acoustic-guitar",
+        "upright-bass",
+        "voice",
+        "piano",
+        "steel-guitar"
+      ],
+      "notes": 3782,
+      "duration": 42.1621621621622,
+      "progression": []
+    },
+    {
+      "styleId": "country-honky-tonk",
+      "genre": "country",
+      "referenceSong": "On the Road Again — Willie Nelson",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "fiddle",
+        "steel-guitar",
+        "acoustic-guitar",
+        "upright-bass",
+        "piano",
+        "voice",
+        "mandolin",
+        "brush-kit"
+      ],
+      "notes": 3373,
+      "duration": 101.94690265486726,
+      "progression": []
+    },
+    {
+      "styleId": "country-bakersfield",
+      "genre": "country",
+      "referenceSong": "Blue Moon of Kentucky — Bill Monroe",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "steel-guitar",
+        "bass",
+        "drums",
+        "fiddle",
+        "voice",
+        "piano",
+        "mandolin"
+      ],
+      "notes": 2930,
+      "duration": 90,
+      "progression": []
+    },
+    {
+      "styleId": "country-americana",
+      "genre": "country",
+      "referenceSong": "Friends in Low Places — Garth Brooks",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "fiddle",
+        "banjo",
+        "bass",
+        "drums",
+        "voice",
+        "piano",
+        "mandolin"
+      ],
+      "notes": 3200,
+      "duration": 122.55319148936184,
+      "progression": []
+    },
+    {
+      "styleId": "country-nashville-sound",
+      "genre": "country",
+      "referenceSong": "Jolene — Dolly Parton",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "strings",
+        "piano",
+        "steel-guitar",
+        "upright-bass",
+        "drums",
+        "voice",
+        "mandolin",
+        "brush-kit"
+      ],
+      "notes": 3772,
+      "duration": 137.1428571428572,
+      "progression": []
+    },
+    {
+      "styleId": "country-western-swing",
+      "genre": "country",
+      "referenceSong": "Jolene — Dolly Parton",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "fiddle",
+        "steel-guitar",
+        "electric-guitar",
+        "upright-bass",
+        "drums",
+        "voice",
+        "piano",
+        "mandolin"
+      ],
+      "notes": 3067,
+      "duration": 83.47826086956523,
+      "progression": []
+    },
+    {
+      "styleId": "cumbia-colombiana",
+      "genre": "cumbia",
+      "referenceSong": "El Africano — Wilfrido Vargas",
+      "referenceTone": "live-room / ensemble-forward",
+      "instruments": [
+        "accordion",
+        "drums",
+        "hand-percussion",
+        "bass",
+        "flute",
+        "voice",
+        "guacharaca",
+        "tambora"
+      ],
+      "notes": 1667,
+      "duration": 50,
+      "progression": [
+        "Am",
+        "E7",
+        "Am",
+        "Dm",
+        "E7",
+        "Am"
+      ]
+    },
+    {
+      "styleId": "cumbia-villera",
+      "genre": "cumbia",
+      "referenceSong": "Cumbia Sobre el Río — Celso Piña",
+      "referenceTone": "dry / close / transient-forward",
+      "instruments": [
+        "synth",
+        "drums",
+        "bass",
+        "guiro",
+        "sampler",
+        "voice",
+        "guacharaca",
+        "tambora"
+      ],
+      "notes": 1432,
+      "duration": 43.20000000000002,
+      "progression": [
+        "Am",
+        "F",
+        "G",
+        "Am"
+      ]
+    },
+    {
+      "styleId": "cumbia-chicha",
+      "genre": "cumbia",
+      "referenceSong": "Cumbia Sobre el Río — Celso Piña",
+      "referenceTone": "sparse / intimate / high separation",
+      "instruments": [
+        "electric-guitar",
+        "synth",
+        "bass",
+        "timbales",
+        "guiro",
+        "voice",
+        "guacharaca",
+        "tambora"
+      ],
+      "notes": 3000,
+      "duration": 115.2000000000001,
+      "progression": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "styleId": "cumbia-sonora",
+      "genre": "cumbia",
+      "referenceSong": "Cumbia Sampuesana — Aniceto Molina",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "trumpet",
+        "brass",
+        "piano",
+        "bass",
+        "timbales",
+        "voice",
+        "guacharaca",
+        "tambora"
+      ],
+      "notes": 2314,
+      "duration": 51.26213592233014,
+      "progression": []
+    },
+    {
+      "styleId": "cumbia-rebajada",
+      "genre": "cumbia",
+      "referenceSong": "El Africano — Wilfrido Vargas",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "accordion",
+        "bass",
+        "guiro",
+        "drums",
+        "synth",
+        "voice",
+        "guacharaca",
+        "tambora"
+      ],
+      "notes": 2445,
+      "duration": 88.42105263157902,
+      "progression": []
+    },
+    {
+      "styleId": "cumbia-digitale",
+      "genre": "cumbia",
+      "referenceSong": "El Africano — Wilfrido Vargas",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "sampler",
+        "sub-bass",
+        "guiro",
+        "flute",
+        "voice",
+        "guacharaca",
+        "tambora"
+      ],
+      "notes": 1336,
+      "duration": 45.47368421052632,
+      "progression": []
+    },
+    {
+      "styleId": "cumbia-santafesina",
+      "genre": "cumbia",
+      "referenceSong": "El Africano — Wilfrido Vargas",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "accordion",
+        "acoustic-guitar",
+        "bass",
+        "timbales",
+        "guiro",
+        "voice",
+        "guacharaca",
+        "tambora"
+      ],
+      "notes": 2003,
+      "duration": 42.3529411764706,
+      "progression": []
+    },
+    {
+      "styleId": "cumbia-porro",
+      "genre": "cumbia",
+      "referenceSong": "La Pollera Colorá — Wilson Choperena / Juan Madera",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "brass",
+        "trumpet",
+        "clarinet",
+        "drums",
+        "hand-percussion",
+        "voice",
+        "guacharaca",
+        "tambora"
+      ],
+      "notes": 985,
+      "duration": 39.633027522935784,
+      "progression": []
+    },
+    {
+      "styleId": "disco-classic",
+      "genre": "disco",
+      "referenceSong": "September — Earth, Wind & Fire",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "strings",
+        "piano",
+        "voice",
+        "electric-guitar",
+        "horn-section",
+        "synth"
+      ],
+      "notes": 5054,
+      "duration": 152,
+      "progression": []
+    },
+    {
+      "styleId": "disco-boogie",
+      "genre": "disco",
+      "referenceSong": "Good Times — Chic",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "synth",
+        "bass",
+        "clavinet",
+        "voice",
+        "electric-guitar",
+        "piano",
+        "horn-section"
+      ],
+      "notes": 5828,
+      "duration": 161.41592920353983,
+      "progression": []
+    },
+    {
+      "styleId": "disco-hi-nrg",
+      "genre": "disco",
+      "referenceSong": "Le Freak — Chic",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "synth",
+        "bass",
+        "strings",
+        "voice",
+        "electric-guitar",
+        "piano",
+        "horn-section"
+      ],
+      "notes": 4072,
+      "duration": 137.14285714285728,
+      "progression": []
+    },
+    {
+      "styleId": "disco-philadelphia",
+      "genre": "disco",
+      "referenceSong": "September — Earth, Wind & Fire",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "strings",
+        "brass",
+        "voice",
+        "electric-guitar",
+        "piano",
+        "horn-section"
+      ],
+      "notes": 5783,
+      "duration": 158.6086956521737,
+      "progression": []
+    },
+    {
+      "styleId": "disco-italo",
+      "genre": "disco",
+      "referenceSong": "Le Freak — Chic",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "synth",
+        "bass",
+        "voice",
+        "strings",
+        "electric-guitar",
+        "piano",
+        "horn-section"
+      ],
+      "notes": 4127,
+      "duration": 152,
+      "progression": []
+    },
+    {
+      "styleId": "disco-euro",
+      "genre": "disco",
+      "referenceSong": "Good Times — Chic",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "strings",
+        "synth",
+        "voice",
+        "electric-guitar",
+        "piano",
+        "horn-section"
+      ],
+      "notes": 4152,
+      "duration": 158.6086956521737,
+      "progression": []
+    },
+    {
+      "styleId": "disco-post-disco",
+      "genre": "disco",
+      "referenceSong": "Good Times — Chic",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "electric-guitar",
+        "clavinet",
+        "voice",
+        "piano",
+        "horn-section",
+        "strings"
+      ],
+      "notes": 6146,
+      "duration": 158.6086956521737,
+      "progression": []
+    },
+    {
+      "styleId": "disco-nu-disco",
+      "genre": "disco",
+      "referenceSong": "Stayin' Alive — Bee Gees",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "synth",
+        "electric-guitar",
+        "strings",
+        "piano",
+        "horn-section",
+        "voice"
+      ],
+      "notes": 4895,
+      "duration": 149.50819672131146,
+      "progression": []
+    },
+    {
+      "styleId": "electronic-downtempo",
+      "genre": "electronic",
+      "referenceSong": "Windowlicker — Aphex Twin",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "drums",
+        "bass",
+        "sampler",
+        "acoustic-guitar",
+        "bass-lead",
+        "warm-pad",
+        "saw-lead"
+      ],
+      "notes": 1521,
+      "duration": 96.00000000000003,
+      "progression": []
+    },
+    {
+      "styleId": "electronic-trip-hop",
+      "genre": "electronic",
+      "referenceSong": "Breathe — The Prodigy",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "sampler",
+        "synth",
+        "strings",
+        "bass-lead",
+        "warm-pad",
+        "saw-lead"
+      ],
+      "notes": 1145,
+      "duration": 105.36585365853654,
+      "progression": []
+    },
+    {
+      "styleId": "electronic-idm",
+      "genre": "electronic",
+      "referenceSong": "Windowlicker — Aphex Twin",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "sampler",
+        "synth",
+        "drums",
+        "sub-bass",
+        "polysynth",
+        "bass-lead",
+        "warm-pad",
+        "saw-lead"
+      ],
+      "notes": 778,
+      "duration": 64.00000000000001,
+      "progression": []
+    },
+    {
+      "styleId": "electronic-dubstep",
+      "genre": "electronic",
+      "referenceSong": "Around the World — Daft Punk",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "sub-bass",
+        "drums",
+        "synth",
+        "sampler",
+        "dub-echo",
+        "bass-lead",
+        "warm-pad",
+        "saw-lead"
+      ],
+      "notes": 1052,
+      "duration": 61.27659574468081,
+      "progression": []
+    },
+    {
+      "styleId": "electronic-garage",
+      "genre": "electronic",
+      "referenceSong": "Windowlicker — Aphex Twin",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "synth",
+        "sampler",
+        "piano",
+        "bass-lead",
+        "warm-pad",
+        "saw-lead"
+      ],
+      "notes": 1139,
+      "duration": 64.47761194029857,
+      "progression": []
+    },
+    {
+      "styleId": "electronic-synthwave",
+      "genre": "electronic",
+      "referenceSong": "Windowlicker — Aphex Twin",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "drums",
+        "bass",
+        "electric-guitar",
+        "warm-pad",
+        "bass-lead",
+        "saw-lead",
+        "polysynth"
+      ],
+      "notes": 1422,
+      "duration": 75.78947368421058,
+      "progression": []
+    },
+    {
+      "styleId": "electronic-ambient",
+      "genre": "electronic",
+      "referenceSong": "Windowlicker — Aphex Twin",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "sampler",
+        "drone",
+        "strings",
+        "piano",
+        "drums",
+        "bass-lead",
+        "warm-pad"
+      ],
+      "notes": 805,
+      "duration": 153.60000000000002,
+      "progression": []
+    },
+    {
+      "styleId": "electronic-techno",
+      "genre": "electronic",
+      "referenceSong": "Around the World — Daft Punk",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "synth",
+        "sub-bass",
+        "sampler",
+        "noise-sweep",
+        "bass-lead",
+        "warm-pad",
+        "saw-lead"
+      ],
+      "notes": 830,
+      "duration": 64.47761194029857,
+      "progression": []
+    },
+    {
+      "styleId": "folk-indie-folk",
+      "genre": "folk",
+      "referenceSong": "House of the Rising Sun — traditional",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "banjo",
+        "upright-bass",
+        "piano",
+        "drums",
+        "voice",
+        "fiddle",
+        "mandolin"
+      ],
+      "notes": 3191,
+      "duration": 122.55319148936184,
+      "progression": []
+    },
+    {
+      "styleId": "folk-old-time",
+      "genre": "folk",
+      "referenceSong": "Scarborough Fair — traditional",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "banjo",
+        "fiddle",
+        "acoustic-guitar",
+        "upright-bass",
+        "hand-percussion",
+        "voice",
+        "mandolin",
+        "guitar"
+      ],
+      "notes": 3289,
+      "duration": 46.82926829268296,
+      "progression": []
+    },
+    {
+      "styleId": "folk-protest",
+      "genre": "folk",
+      "referenceSong": "The Boxer — Simon & Garfunkel",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "harmonica",
+        "upright-bass",
+        "hand-percussion",
+        "drums",
+        "voice",
+        "fiddle",
+        "mandolin"
+      ],
+      "notes": 2120,
+      "duration": 115.2000000000001,
+      "progression": []
+    },
+    {
+      "styleId": "folk-psychedelic-folk",
+      "genre": "folk",
+      "referenceSong": "Suzanne — Leonard Cohen",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "sitar",
+        "flute",
+        "hand-percussion",
+        "synth",
+        "voice",
+        "fiddle",
+        "mandolin"
+      ],
+      "notes": 2178,
+      "duration": 128.00000000000009,
+      "progression": []
+    },
+    {
+      "styleId": "folk-anti-folk",
+      "genre": "folk",
+      "referenceSong": "Suzanne — Leonard Cohen",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "piano",
+        "upright-bass",
+        "drums",
+        "bass",
+        "voice",
+        "fiddle",
+        "mandolin"
+      ],
+      "notes": 2729,
+      "duration": 97.62711864406786,
+      "progression": []
+    },
+    {
+      "styleId": "folk-bluegrass",
+      "genre": "folk",
+      "referenceSong": "Scarborough Fair — traditional",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "banjo",
+        "mandolin",
+        "acoustic-guitar",
+        "fiddle",
+        "upright-bass",
+        "voice",
+        "guitar",
+        "bodhran"
+      ],
+      "notes": 3083,
+      "duration": 38.91891891891894,
+      "progression": []
+    },
+    {
+      "styleId": "folk-neo-traditional",
+      "genre": "folk",
+      "referenceSong": "The Boxer — Simon & Garfunkel",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "upright-bass",
+        "fiddle",
+        "harmonium",
+        "flute",
+        "voice",
+        "mandolin",
+        "guitar"
+      ],
+      "notes": 3129,
+      "duration": 135.5294117647059,
+      "progression": []
+    },
+    {
+      "styleId": "folk-chamber-folk",
+      "genre": "folk",
+      "referenceSong": "Scarborough Fair — traditional",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "strings",
+        "violin",
+        "flute",
+        "piano",
+        "voice",
+        "fiddle",
+        "mandolin"
+      ],
+      "notes": 2539,
+      "duration": 120,
+      "progression": []
+    },
+    {
+      "styleId": "funk-p-funk",
+      "genre": "funk",
+      "referenceSong": "Cissy Strut — The Meters",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "bass",
+        "drums",
+        "electric-guitar",
+        "synth",
+        "brass",
+        "voice",
+        "clavinet",
+        "organ"
+      ],
+      "notes": 3061,
+      "duration": 81.50943396226417,
+      "progression": []
+    },
+    {
+      "styleId": "funk-deep-funk",
+      "genre": "funk",
+      "referenceSong": "Chameleon — Herbie Hancock",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "electric-guitar",
+        "organ",
+        "brass",
+        "voice",
+        "clavinet",
+        "congas"
+      ],
+      "notes": 3321,
+      "duration": 88.1632653061224,
+      "progression": []
+    },
+    {
+      "styleId": "funk-synth-funk",
+      "genre": "funk",
+      "referenceSong": "Chameleon — Herbie Hancock",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "drums",
+        "bass",
+        "electric-guitar",
+        "brass",
+        "voice",
+        "clavinet",
+        "organ"
+      ],
+      "notes": 2333,
+      "duration": 74.4827586206897,
+      "progression": []
+    },
+    {
+      "styleId": "funk-disco",
+      "genre": "funk",
+      "referenceSong": "Chameleon — Herbie Hancock",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "electric-guitar",
+        "strings",
+        "brass",
+        "voice",
+        "clavinet",
+        "organ"
+      ],
+      "notes": 3240,
+      "duration": 70.81967213114751,
+      "progression": []
+    },
+    {
+      "styleId": "funk-go-go",
+      "genre": "funk",
+      "referenceSong": "Chameleon — Herbie Hancock",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "cowbell",
+        "timbales",
+        "bass",
+        "brass",
+        "voice",
+        "clavinet",
+        "organ"
+      ],
+      "notes": 2013,
+      "duration": 86.40000000000003,
+      "progression": []
+    },
+    {
+      "styleId": "funk-boogie",
+      "genre": "funk",
+      "referenceSong": "Chameleon — Herbie Hancock",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "bass",
+        "drums",
+        "electric-guitar",
+        "piano",
+        "voice",
+        "clavinet",
+        "organ"
+      ],
+      "notes": 3316,
+      "duration": 77.14285714285715,
+      "progression": []
+    },
+    {
+      "styleId": "funk-afrobeat",
+      "genre": "funk",
+      "referenceSong": "Give Up the Funk — Parliament",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "electric-guitar",
+        "brass",
+        "hand-percussion",
+        "voice",
+        "clavinet",
+        "organ"
+      ],
+      "notes": 3151,
+      "duration": 72.60504201680669,
+      "progression": []
+    },
+    {
+      "styleId": "funk-carioca",
+      "genre": "funk",
+      "referenceSong": "Superstition — Stevie Wonder",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "sampler",
+        "tenor-sax",
+        "synth",
+        "voice",
+        "clavinet",
+        "organ"
+      ],
+      "notes": 1235,
+      "duration": 65.45454545454547,
+      "progression": []
+    },
+    {
+      "styleId": "gospel-traditional",
+      "genre": "gospel",
+      "referenceSong": "Oh Happy Day — Edwin Hawkins Singers",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "organ",
+        "piano",
+        "choir",
+        "drums",
+        "tambourine",
+        "bass",
+        "electric-guitar",
+        "voice"
+      ],
+      "notes": 2137,
+      "duration": 96.00000000000006,
+      "progression": []
+    },
+    {
+      "styleId": "gospel-contemporary",
+      "genre": "gospel",
+      "referenceSong": "Soon and Very Soon — Andraé Crouch",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "piano",
+        "organ",
+        "choir",
+        "bass",
+        "drums",
+        "electric-guitar",
+        "tambourine",
+        "voice"
+      ],
+      "notes": 3313,
+      "duration": 153.1914893617022,
+      "progression": []
+    },
+    {
+      "styleId": "gospel-southern",
+      "genre": "gospel",
+      "referenceSong": "Total Praise — Richard Smallwood",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "piano",
+        "bass",
+        "choir",
+        "drums",
+        "hand-percussion",
+        "organ",
+        "electric-guitar",
+        "tambourine"
+      ],
+      "notes": 2541,
+      "duration": 97.77777777777786,
+      "progression": []
+    },
+    {
+      "styleId": "gospel-choir",
+      "genre": "gospel",
+      "referenceSong": "This Little Light of Mine — traditional",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "organ",
+        "choir",
+        "piano",
+        "drums",
+        "tambourine",
+        "bass",
+        "electric-guitar",
+        "voice"
+      ],
+      "notes": 2863,
+      "duration": 120,
+      "progression": []
+    },
+    {
+      "styleId": "hip-hop-boom-bap",
+      "genre": "hip-hop",
+      "referenceSong": "Nuthin’ but a G Thang — Dr. Dre",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "sampler",
+        "drums",
+        "bass",
+        "turntable",
+        "piano",
+        "sub-bass",
+        "warm-pad",
+        "voice"
+      ],
+      "notes": 1463,
+      "duration": 105.49450549450555,
+      "progression": []
+    },
+    {
+      "styleId": "hip-hop-trap",
+      "genre": "hip-hop",
+      "referenceSong": "Electric Relaxation — A Tribe Called Quest",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "sub-bass",
+        "drums",
+        "synth",
+        "sampler",
+        "piano",
+        "turntable",
+        "warm-pad",
+        "voice"
+      ],
+      "notes": 1086,
+      "duration": 66.20689655172414,
+      "progression": []
+    },
+    {
+      "styleId": "hip-hop-lo-fi",
+      "genre": "hip-hop",
+      "referenceSong": "Nuthin’ but a G Thang — Dr. Dre",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "sampler",
+        "piano",
+        "drums",
+        "bass",
+        "acoustic-guitar",
+        "sub-bass",
+        "turntable",
+        "warm-pad"
+      ],
+      "notes": 2072,
+      "duration": 118.51851851851849,
+      "progression": []
+    },
+    {
+      "styleId": "hip-hop-drill",
+      "genre": "hip-hop",
+      "referenceSong": "Nuthin’ but a G Thang — Dr. Dre",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "sub-bass",
+        "drums",
+        "synth",
+        "piano",
+        "sampler",
+        "turntable",
+        "warm-pad",
+        "voice"
+      ],
+      "notes": 1194,
+      "duration": 67.60563380281693,
+      "progression": []
+    },
+    {
+      "styleId": "hip-hop-g-funk",
+      "genre": "hip-hop",
+      "referenceSong": "C.R.E.A.M. — Wu-Tang Clan",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "bass",
+        "drums",
+        "electric-guitar",
+        "sampler",
+        "sub-bass",
+        "piano",
+        "turntable"
+      ],
+      "notes": 1782,
+      "duration": 103.22580645161285,
+      "progression": []
+    },
+    {
+      "styleId": "hip-hop-experimental",
+      "genre": "hip-hop",
+      "referenceSong": "Electric Relaxation — A Tribe Called Quest",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "sampler",
+        "drums",
+        "sub-bass",
+        "synth",
+        "distortion-guitar",
+        "piano",
+        "turntable",
+        "warm-pad"
+      ],
+      "notes": 1398,
+      "duration": 71.1111111111111,
+      "progression": []
+    },
+    {
+      "styleId": "hip-hop-cloud-rap",
+      "genre": "hip-hop",
+      "referenceSong": "The Message — Grandmaster Flash and the Furious Five",
+      "referenceTone": "dense / aggressive / controlled sustain",
+      "instruments": [
+        "synth",
+        "sampler",
+        "sub-bass",
+        "drums",
+        "piano",
+        "turntable",
+        "warm-pad",
+        "voice"
+      ],
+      "notes": 1244,
+      "duration": 73.84615384615383,
+      "progression": []
+    },
+    {
+      "styleId": "hip-hop-jazz-rap",
+      "genre": "hip-hop",
+      "referenceSong": "Juicy — The Notorious B.I.G.",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "upright-bass",
+        "brass",
+        "drums",
+        "piano",
+        "sampler",
+        "sub-bass",
+        "turntable",
+        "warm-pad"
+      ],
+      "notes": 1496,
+      "duration": 102.12765957446817,
+      "progression": []
+    },
+    {
+      "styleId": "house-peak-time",
+      "genre": "house",
+      "referenceSong": "Finally — CeCe Peniston",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "synth",
+        "sub-bass",
+        "sampler",
+        "noise-sweep",
+        "voice",
+        "bass",
+        "piano"
+      ],
+      "notes": 1046,
+      "duration": 64.96240601503763,
+      "progression": []
+    },
+    {
+      "styleId": "house-minimal",
+      "genre": "house",
+      "referenceSong": "Gypsy Woman — Crystal Waters",
+      "referenceTone": "sparse / intimate / high separation",
+      "instruments": [
+        "drums",
+        "sampler",
+        "synth",
+        "sub-bass",
+        "warm-pad",
+        "voice",
+        "bass",
+        "piano"
+      ],
+      "notes": 1153,
+      "duration": 69.12000000000005,
+      "progression": []
+    },
+    {
+      "styleId": "house-dub-techno",
+      "genre": "house",
+      "referenceSong": "Your Love — Frankie Knuckles",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "sub-bass",
+        "drums",
+        "tape-echo",
+        "sampler",
+        "voice",
+        "bass",
+        "piano"
+      ],
+      "notes": 1312,
+      "duration": 72,
+      "progression": []
+    },
+    {
+      "styleId": "house-detroit-techno",
+      "genre": "house",
+      "referenceSong": "Finally — CeCe Peniston",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "drums",
+        "strings",
+        "bass",
+        "sampler",
+        "voice",
+        "piano",
+        "sub-bass"
+      ],
+      "notes": 1120,
+      "duration": 66.46153846153847,
+      "progression": []
+    },
+    {
+      "styleId": "house-acid-techno",
+      "genre": "house",
+      "referenceSong": "Show Me Love — Robin S.",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "drums",
+        "sub-bass",
+        "sampler",
+        "acid-303",
+        "voice",
+        "bass",
+        "piano"
+      ],
+      "notes": 1341,
+      "duration": 77.64705882352943,
+      "progression": []
+    },
+    {
+      "styleId": "house-hard-techno",
+      "genre": "house",
+      "referenceSong": "Gypsy Woman — Crystal Waters",
+      "referenceTone": "dense / aggressive / controlled sustain",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "sampler",
+        "noise-sweep",
+        "voice",
+        "bass",
+        "piano"
+      ],
+      "notes": 1102,
+      "duration": 57.9865771812081,
+      "progression": []
+    },
+    {
+      "styleId": "house-melodic-techno",
+      "genre": "house",
+      "referenceSong": "Show Me Love — Robin S.",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "drums",
+        "bass",
+        "strings",
+        "piano",
+        "voice",
+        "sub-bass",
+        "rhodes"
+      ],
+      "notes": 1502,
+      "duration": 69.12000000000005,
+      "progression": []
+    },
+    {
+      "styleId": "house-ebm",
+      "genre": "house",
+      "referenceSong": "Your Love — Frankie Knuckles",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "drums",
+        "sub-bass",
+        "sampler",
+        "saw-lead",
+        "voice",
+        "bass",
+        "piano"
+      ],
+      "notes": 1155,
+      "duration": 66.97674418604657,
+      "progression": []
+    },
+    {
+      "styleId": "jazz-bebop",
+      "genre": "jazz",
+      "referenceSong": "Take the A Train — Duke Ellington",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "alto-sax",
+        "trumpet",
+        "piano",
+        "upright-bass",
+        "drums",
+        "ride",
+        "tenor-sax",
+        "vibraphone"
+      ],
+      "notes": 3333,
+      "duration": 74.18181818181826,
+      "progression": []
+    },
+    {
+      "styleId": "jazz-cool-jazz",
+      "genre": "jazz",
+      "referenceSong": "Take the A Train — Duke Ellington",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "trumpet",
+        "alto-sax",
+        "piano",
+        "upright-bass",
+        "drums",
+        "ride",
+        "tenor-sax",
+        "vibraphone"
+      ],
+      "notes": 4034,
+      "duration": 144.42477876106196,
+      "progression": []
+    },
+    {
+      "styleId": "jazz-hard-bop",
+      "genre": "jazz",
+      "referenceSong": "Giant Steps — John Coltrane",
+      "referenceTone": "dense / aggressive / controlled sustain",
+      "instruments": [
+        "tenor-sax",
+        "trumpet",
+        "piano",
+        "upright-bass",
+        "drums",
+        "ride",
+        "alto-sax",
+        "vibraphone"
+      ],
+      "notes": 3798,
+      "duration": 116.57142857142841,
+      "progression": []
+    },
+    {
+      "styleId": "jazz-free-jazz",
+      "genre": "jazz",
+      "referenceSong": "Giant Steps — John Coltrane",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "tenor-sax",
+        "alto-sax",
+        "trumpet",
+        "upright-bass",
+        "drums",
+        "ride",
+        "piano",
+        "vibraphone"
+      ],
+      "notes": 3470,
+      "duration": 102,
+      "progression": []
+    },
+    {
+      "styleId": "jazz-gypsy-jazz",
+      "genre": "jazz",
+      "referenceSong": "So What — Miles Davis",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "violin",
+        "upright-bass",
+        "clarinet",
+        "tenor-sax",
+        "ride",
+        "piano",
+        "trumpet"
+      ],
+      "notes": 4541,
+      "duration": 85.89473684210516,
+      "progression": []
+    },
+    {
+      "styleId": "jazz-fusion",
+      "genre": "jazz",
+      "referenceSong": "Take the A Train — Duke Ellington",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "electric-guitar",
+        "bass",
+        "drums",
+        "tenor-sax",
+        "upright-bass",
+        "ride",
+        "piano"
+      ],
+      "notes": 4443,
+      "duration": 127.5,
+      "progression": []
+    },
+    {
+      "styleId": "jazz-spiritual-jazz",
+      "genre": "jazz",
+      "referenceSong": "So What — Miles Davis",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "tenor-sax",
+        "harp",
+        "piano",
+        "upright-bass",
+        "drums",
+        "ride",
+        "trumpet",
+        "alto-sax"
+      ],
+      "notes": 4596,
+      "duration": 166.53061224489804,
+      "progression": []
+    },
+    {
+      "styleId": "jazz-ragtime",
+      "genre": "jazz",
+      "referenceSong": "Take the A Train — Duke Ellington",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "piano",
+        "banjo",
+        "brass",
+        "upright-bass",
+        "drums",
+        "ride",
+        "trumpet",
+        "tenor-sax"
+      ],
+      "notes": 2791,
+      "duration": 73.04347826086948,
+      "progression": []
+    },
+    {
+      "styleId": "kizomba-tradicional",
+      "genre": "kizomba",
+      "referenceSong": "Atrevimento — Nelson Freitas",
+      "referenceTone": "sparse / intimate / high separation",
+      "instruments": [
+        "bass",
+        "drums",
+        "acoustic-guitar",
+        "synth",
+        "dikanza",
+        "voice",
+        "sub-bass",
+        "rhodes"
+      ],
+      "notes": 2961,
+      "duration": 146.08695652173895,
+      "progression": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "styleId": "kizomba-semba-playful",
+      "genre": "kizomba",
+      "referenceSong": "Atrevimento — Nelson Freitas",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "congas",
+        "synth",
+        "voice",
+        "dikanza",
+        "sub-bass"
+      ],
+      "notes": 2962,
+      "duration": 130.90909090909102,
+      "progression": []
+    },
+    {
+      "styleId": "kizomba-urbankiz",
+      "genre": "kizomba",
+      "referenceSong": "Amor — Kaysha",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "drums",
+        "sub-bass",
+        "sampler",
+        "warm-pad",
+        "voice",
+        "dikanza",
+        "rhodes"
+      ],
+      "notes": 2050,
+      "duration": 142.97872340425542,
+      "progression": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G7"
+      ]
+    },
+    {
+      "styleId": "kizomba-tarraxinha",
+      "genre": "kizomba",
+      "referenceSong": "Saudade — Kizomba repertoire",
+      "referenceTone": "sparse / intimate / high separation",
+      "instruments": [
+        "sub-bass",
+        "drums",
+        "synth",
+        "sampler",
+        "warm-pad",
+        "voice",
+        "dikanza",
+        "rhodes"
+      ],
+      "notes": 1704,
+      "duration": 141.81818181818193,
+      "progression": [
+        "Dm9",
+        "Gm7",
+        "A7",
+        "Dm9"
+      ]
+    },
+    {
+      "styleId": "kizomba-tarraxo",
+      "genre": "kizomba",
+      "referenceSong": "Saudade — Kizomba repertoire",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "sub-bass",
+        "drums",
+        "synth",
+        "sampler",
+        "warm-pad",
+        "voice",
+        "dikanza",
+        "rhodes"
+      ],
+      "notes": 1771,
+      "duration": 167.44186046511624,
+      "progression": []
+    },
+    {
+      "styleId": "kizomba-passada",
+      "genre": "kizomba",
+      "referenceSong": "Amor — Kaysha",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "bass",
+        "drums",
+        "piano",
+        "synth",
+        "voice",
+        "dikanza",
+        "sub-bass"
+      ],
+      "notes": 4121,
+      "duration": 150,
+      "progression": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G7"
+      ]
+    },
+    {
+      "styleId": "kizomba-ghetto-zouk",
+      "genre": "kizomba",
+      "referenceSong": "Atrevimento — Nelson Freitas",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "drums",
+        "sub-bass",
+        "piano",
+        "warm-pad",
+        "voice",
+        "dikanza",
+        "rhodes"
+      ],
+      "notes": 2418,
+      "duration": 156.52173913043458,
+      "progression": []
+    },
+    {
+      "styleId": "kizomba-semba-lento",
+      "genre": "kizomba",
+      "referenceSong": "Bo Tem Mel — C4 Pedro",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "acoustic-bass",
+        "dikanza",
+        "hand-percussion",
+        "synth",
+        "voice",
+        "sub-bass",
+        "rhodes"
+      ],
+      "notes": 3146,
+      "duration": 165.51724137931043,
+      "progression": []
+    },
+    {
+      "styleId": "tango-tango-tradicional",
+      "genre": "tango",
+      "referenceSong": "Por una Cabeza — Carlos Gardel",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "bandoneon",
+        "violin",
+        "piano",
+        "upright-bass",
+        "cello",
+        "flute",
+        "clarinet",
+        "acoustic-guitar"
+      ],
+      "notes": 1654,
+      "duration": 75,
+      "progression": []
+    },
+    {
+      "styleId": "tango-tango-nuevo",
+      "genre": "tango",
+      "referenceSong": "El Choclo — Ángel Villoldo",
+      "referenceTone": "live-room / ensemble-forward",
+      "instruments": [
+        "bandoneon",
+        "violin",
+        "electric-guitar",
+        "piano",
+        "upright-bass",
+        "cello",
+        "flute",
+        "clarinet"
+      ],
+      "notes": 2404,
+      "duration": 75,
+      "progression": [
+        "Am7",
+        "Dm7",
+        "F#dim7",
+        "E7b9"
+      ]
+    },
+    {
+      "styleId": "tango-milonga",
+      "genre": "tango",
+      "referenceSong": "El Choclo — Ángel Villoldo",
+      "referenceTone": "dry / close / transient-forward",
+      "instruments": [
+        "bandoneon",
+        "violin",
+        "piano",
+        "upright-bass",
+        "spanish-guitar",
+        "cello",
+        "flute",
+        "clarinet"
+      ],
+      "notes": 1750,
+      "duration": 35.29411764705883,
+      "progression": [
+        "Am",
+        "E7",
+        "Am",
+        "G7",
+        "C",
+        "E7"
+      ]
+    },
+    {
+      "styleId": "tango-tango-vals",
+      "genre": "tango",
+      "referenceSong": "Por una Cabeza — Carlos Gardel",
+      "referenceTone": "lush / warm / sustained",
+      "instruments": [
+        "violin",
+        "bandoneon",
+        "piano",
+        "upright-bass",
+        "cello",
+        "flute",
+        "clarinet",
+        "acoustic-guitar"
+      ],
+      "notes": 1607,
+      "duration": 41.37931034482761,
+      "progression": [
+        "Am",
+        "E7",
+        "Am",
+        "Dm",
+        "E7",
+        "Am"
+      ]
+    },
+    {
+      "styleId": "tango-tango-electronico",
+      "genre": "tango",
+      "referenceSong": "El Choclo — Ángel Villoldo",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "bandoneon",
+        "sub-bass",
+        "drums",
+        "sampler",
+        "acoustic-guitar",
+        "piano",
+        "upright-bass",
+        "violin"
+      ],
+      "notes": 1535,
+      "duration": 93.20388349514569,
+      "progression": []
+    },
+    {
+      "styleId": "flamenco-solea-style",
+      "genre": "flamenco",
+      "referenceSong": "Almoraima — Paco de Lucía",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "spanish-guitar",
+        "flute",
+        "palmas",
+        "cajon",
+        "hand-percussion",
+        "zapateado",
+        "voice",
+        "castanets"
+      ],
+      "notes": 2110,
+      "duration": 190.843373493976,
+      "progression": []
+    },
+    {
+      "styleId": "flamenco-buleria-style",
+      "genre": "flamenco",
+      "referenceSong": "Entre Dos Aguas — Paco de Lucía",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "spanish-guitar",
+        "flute",
+        "palmas",
+        "cajon",
+        "hand-percussion",
+        "zapateado",
+        "voice",
+        "castanets"
+      ],
+      "notes": 2792,
+      "duration": 82.28571428571425,
+      "progression": []
+    },
+    {
+      "styleId": "flamenco-alegrias-style",
+      "genre": "flamenco",
+      "referenceSong": "Mediterranean Sundance — Paco de Lucía / Al Di Meola",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "spanish-guitar",
+        "flute",
+        "palmas",
+        "cajon",
+        "hand-percussion",
+        "zapateado",
+        "voice",
+        "castanets"
+      ],
+      "notes": 3314,
+      "duration": 164.5714285714287,
+      "progression": []
+    },
+    {
+      "styleId": "flamenco-tangos-style",
+      "genre": "flamenco",
+      "referenceSong": "Almoraima — Paco de Lucía",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "spanish-guitar",
+        "flute",
+        "palmas",
+        "cajon",
+        "bass",
+        "zapateado",
+        "voice",
+        "castanets"
+      ],
+      "notes": 1858,
+      "duration": 66.46153846153847,
+      "progression": []
+    },
+    {
+      "styleId": "flamenco-seguiriya-style",
+      "genre": "flamenco",
+      "referenceSong": "Asturias — flamenco guitar repertoire",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "spanish-guitar",
+        "flute",
+        "palmas",
+        "hand-percussion",
+        "drums",
+        "cajon",
+        "zapateado",
+        "voice"
+      ],
+      "notes": 1678,
+      "duration": 112.69565217391315,
+      "progression": []
+    },
+    {
+      "styleId": "flamenco-tientos-style",
+      "genre": "flamenco",
+      "referenceSong": "Río Ancho — Paco de Lucía",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "spanish-guitar",
+        "flute",
+        "palmas",
+        "cajon",
+        "hand-percussion",
+        "zapateado",
+        "voice",
+        "castanets"
+      ],
+      "notes": 1683,
+      "duration": 123.42857142857147,
+      "progression": []
+    },
+    {
+      "styleId": "flamenco-fandango-style",
+      "genre": "flamenco",
+      "referenceSong": "Entre Dos Aguas — Paco de Lucía",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "spanish-guitar",
+        "flute",
+        "palmas",
+        "hand-percussion",
+        "drums",
+        "cajon",
+        "zapateado",
+        "voice"
+      ],
+      "notes": 1906,
+      "duration": 46.28571428571427,
+      "progression": []
+    },
+    {
+      "styleId": "flamenco-rumba",
+      "genre": "flamenco",
+      "referenceSong": "Río Ancho — Paco de Lucía",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "spanish-guitar",
+        "cajon",
+        "palmas",
+        "bass",
+        "flute",
+        "zapateado",
+        "voice",
+        "castanets"
+      ],
+      "notes": 2198,
+      "duration": 73.2203389830509,
+      "progression": []
+    },
+    {
+      "styleId": "metal-heavy-metal",
+      "genre": "metal",
+      "referenceSong": "Holy Wars… The Punishment Due — Megadeth",
+      "referenceTone": "dense / aggressive / controlled sustain",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "overdrive-guitar",
+        "voice",
+        "synth",
+        "strings",
+        "guitar-harmonics"
+      ],
+      "notes": 3062,
+      "duration": 104,
+      "progression": []
+    },
+    {
+      "styleId": "metal-thrash",
+      "genre": "metal",
+      "referenceSong": "Paranoid — Black Sabbath",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "overdrive-guitar",
+        "hand-percussion",
+        "synth",
+        "strings",
+        "guitar-harmonics"
+      ],
+      "notes": 3535,
+      "duration": 65.6842105263158,
+      "progression": []
+    },
+    {
+      "styleId": "metal-death-metal",
+      "genre": "metal",
+      "referenceSong": "Ace of Spades — Motörhead",
+      "referenceTone": "dense / aggressive / controlled sustain",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "overdrive-guitar",
+        "hand-percussion",
+        "synth",
+        "strings",
+        "guitar-harmonics"
+      ],
+      "notes": 3290,
+      "duration": 58.046511627907,
+      "progression": []
+    },
+    {
+      "styleId": "metal-black-metal",
+      "genre": "metal",
+      "referenceSong": "Ace of Spades — Motörhead",
+      "referenceTone": "dense / aggressive / controlled sustain",
+      "instruments": [
+        "electric-guitar",
+        "drums",
+        "bass",
+        "overdrive-guitar",
+        "synth",
+        "strings",
+        "guitar-harmonics",
+        "voice"
+      ],
+      "notes": 3095,
+      "duration": 71.31428571428573,
+      "progression": []
+    },
+    {
+      "styleId": "metal-power-metal",
+      "genre": "metal",
+      "referenceSong": "Paranoid — Black Sabbath",
+      "referenceTone": "dense / aggressive / controlled sustain",
+      "instruments": [
+        "electric-guitar",
+        "drums",
+        "bass",
+        "synth",
+        "overdrive-guitar",
+        "strings",
+        "guitar-harmonics",
+        "voice"
+      ],
+      "notes": 3071,
+      "duration": 67.45945945945948,
+      "progression": []
+    },
+    {
+      "styleId": "metal-doom-metal",
+      "genre": "metal",
+      "referenceSong": "Paranoid — Black Sabbath",
+      "referenceTone": "dense / aggressive / controlled sustain",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "overdrive-guitar",
+        "hand-percussion",
+        "synth",
+        "strings",
+        "guitar-harmonics"
+      ],
+      "notes": 3372,
+      "duration": 198.09523809523785,
+      "progression": []
+    },
+    {
+      "styleId": "metal-sludge",
+      "genre": "metal",
+      "referenceSong": "Ace of Spades — Motörhead",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "overdrive-guitar",
+        "hand-percussion",
+        "synth",
+        "strings",
+        "guitar-harmonics"
+      ],
+      "notes": 3298,
+      "duration": 183.52941176470594,
+      "progression": []
+    },
+    {
+      "styleId": "metal-progressive-metal",
+      "genre": "metal",
+      "referenceSong": "Ace of Spades — Motörhead",
+      "referenceTone": "dense / aggressive / controlled sustain",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "synth",
+        "overdrive-guitar",
+        "strings",
+        "guitar-harmonics",
+        "voice"
+      ],
+      "notes": 2921,
+      "duration": 82.1052631578948,
+      "progression": []
+    },
+    {
+      "styleId": "r-and-b-deep-funk",
+      "genre": "r-and-b",
+      "referenceSong": "Adorn — Miguel",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "synth",
+        "piano",
+        "voice",
+        "electric-guitar",
+        "rhodes",
+        "warm-pad"
+      ],
+      "notes": 2873,
+      "duration": 112.94117647058827,
+      "progression": []
+    },
+    {
+      "styleId": "r-and-b-synth-funk",
+      "genre": "r-and-b",
+      "referenceSong": "Untitled (How Does It Feel) — D’Angelo",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "piano",
+        "electric-guitar",
+        "voice",
+        "rhodes",
+        "warm-pad",
+        "synth"
+      ],
+      "notes": 2991,
+      "duration": 115.66265060240953,
+      "progression": []
+    },
+    {
+      "styleId": "r-and-b-boogie",
+      "genre": "r-and-b",
+      "referenceSong": "No Diggity — Blackstreet",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "voice",
+        "piano",
+        "bass",
+        "drums",
+        "brass",
+        "electric-guitar",
+        "rhodes",
+        "warm-pad"
+      ],
+      "notes": 2616,
+      "duration": 106.66666666666671,
+      "progression": []
+    },
+    {
+      "styleId": "r-and-b-doo-wop",
+      "genre": "r-and-b",
+      "referenceSong": "The Sweetest Taboo — Sade",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "voice",
+        "piano",
+        "upright-bass",
+        "drums",
+        "tenor-sax",
+        "bass",
+        "electric-guitar",
+        "rhodes"
+      ],
+      "notes": 2861,
+      "duration": 91.42857142857147,
+      "progression": []
+    },
+    {
+      "styleId": "r-and-b-quiet-storm",
+      "genre": "r-and-b",
+      "referenceSong": "No Diggity — Blackstreet",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "voice",
+        "rhodes",
+        "bass",
+        "drums",
+        "tenor-sax",
+        "electric-guitar",
+        "warm-pad",
+        "synth"
+      ],
+      "notes": 2341,
+      "duration": 128.00000000000006,
+      "progression": []
+    },
+    {
+      "styleId": "r-and-b-new-jack-swing",
+      "genre": "r-and-b",
+      "referenceSong": "Adorn — Miguel",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "synth",
+        "bass",
+        "voice",
+        "sampler",
+        "electric-guitar",
+        "rhodes",
+        "warm-pad"
+      ],
+      "notes": 2136,
+      "duration": 87.27272727272728,
+      "progression": []
+    },
+    {
+      "styleId": "r-and-b-classic-blues-rnb",
+      "genre": "r-and-b",
+      "referenceSong": "Untitled (How Does It Feel) — D’Angelo",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "voice",
+        "piano",
+        "tenor-sax",
+        "upright-bass",
+        "drums",
+        "bass",
+        "electric-guitar",
+        "rhodes"
+      ],
+      "notes": 3451,
+      "duration": 91.42857142857147,
+      "progression": []
+    },
+    {
+      "styleId": "r-and-b-alternative",
+      "genre": "r-and-b",
+      "referenceSong": "The Sweetest Taboo — Sade",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "voice",
+        "synth",
+        "drums",
+        "bass",
+        "sampler",
+        "electric-guitar",
+        "rhodes",
+        "warm-pad"
+      ],
+      "notes": 1943,
+      "duration": 112.94117647058827,
+      "progression": []
+    },
+    {
+      "styleId": "reggae-roots-reggae",
+      "genre": "reggae",
+      "referenceSong": "Stir It Up — Bob Marley & The Wailers",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "electric-guitar",
+        "organ",
+        "brass",
+        "voice",
+        "sub-bass",
+        "horn-section"
+      ],
+      "notes": 1691,
+      "duration": 113.68421052631584,
+      "progression": []
+    },
+    {
+      "styleId": "reggae-dub",
+      "genre": "reggae",
+      "referenceSong": "54-46 That’s My Number — Toots & The Maytals",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "bass",
+        "drums",
+        "tape-echo",
+        "spring-reverb",
+        "organ",
+        "voice",
+        "sub-bass",
+        "electric-guitar"
+      ],
+      "notes": 1259,
+      "duration": 118.35616438356173,
+      "progression": []
+    },
+    {
+      "styleId": "reggae-dancehall",
+      "genre": "reggae",
+      "referenceSong": "Stir It Up — Bob Marley & The Wailers",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "sampler",
+        "drums",
+        "sub-bass",
+        "synth",
+        "horn-section",
+        "voice",
+        "organ",
+        "electric-guitar"
+      ],
+      "notes": 1705,
+      "duration": 86.40000000000003,
+      "progression": []
+    },
+    {
+      "styleId": "reggae-lovers-rock",
+      "genre": "reggae",
+      "referenceSong": "Stir It Up — Bob Marley & The Wailers",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "piano",
+        "strings",
+        "voice",
+        "sub-bass",
+        "organ"
+      ],
+      "notes": 2386,
+      "duration": 109.367088607595,
+      "progression": []
+    },
+    {
+      "styleId": "reggae-rocksteady",
+      "genre": "reggae",
+      "referenceSong": "Three Little Birds — Bob Marley & The Wailers",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "bass",
+        "electric-guitar",
+        "drums",
+        "brass",
+        "piano",
+        "voice",
+        "sub-bass",
+        "organ"
+      ],
+      "notes": 2169,
+      "duration": 102.85714285714288,
+      "progression": []
+    },
+    {
+      "styleId": "reggae-ragga",
+      "genre": "reggae",
+      "referenceSong": "Police and Thieves — Junior Murvin",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "sampler",
+        "drums",
+        "sub-bass",
+        "synth",
+        "horn-section",
+        "voice",
+        "organ",
+        "electric-guitar"
+      ],
+      "notes": 1310,
+      "duration": 83.07692307692305,
+      "progression": []
+    },
+    {
+      "styleId": "reggae-ska",
+      "genre": "reggae",
+      "referenceSong": "Police and Thieves — Junior Murvin",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "brass",
+        "electric-guitar",
+        "upright-bass",
+        "drums",
+        "piano",
+        "voice",
+        "sub-bass",
+        "organ"
+      ],
+      "notes": 2188,
+      "duration": 64.96240601503763,
+      "progression": []
+    },
+    {
+      "styleId": "reggae-calypso",
+      "genre": "reggae",
+      "referenceSong": "54-46 That’s My Number — Toots & The Maytals",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "steel-drums",
+        "acoustic-guitar",
+        "brass",
+        "hand-percussion",
+        "bass",
+        "voice",
+        "sub-bass",
+        "organ"
+      ],
+      "notes": 1437,
+      "duration": 38.230088495575224,
+      "progression": []
+    },
+    {
+      "styleId": "reggaeton-perreo",
+      "genre": "reggaeton",
+      "referenceSong": "Yo Voy — Zion & Lennox",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "sampler",
+        "maracas",
+        "voice",
+        "congas",
+        "electric-guitar"
+      ],
+      "notes": 1425,
+      "duration": 101.05263157894738,
+      "progression": []
+    },
+    {
+      "styleId": "reggaeton-melodic",
+      "genre": "reggaeton",
+      "referenceSong": "Dile — Don Omar",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "drums",
+        "sub-bass",
+        "electric-guitar",
+        "maracas",
+        "voice",
+        "congas",
+        "sampler"
+      ],
+      "notes": 1676,
+      "duration": 104.34782608695645,
+      "progression": []
+    },
+    {
+      "styleId": "reggaeton-neoperreo",
+      "genre": "reggaeton",
+      "referenceSong": "Gasolina — Daddy Yankee",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "sampler",
+        "drums",
+        "sub-bass",
+        "synth",
+        "noise-sweep",
+        "voice",
+        "congas",
+        "electric-guitar"
+      ],
+      "notes": 1384,
+      "duration": 93.20388349514569,
+      "progression": []
+    },
+    {
+      "styleId": "reggaeton-dancehall",
+      "genre": "reggaeton",
+      "referenceSong": "Safaera — Bad Bunny",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "bass",
+        "sampler",
+        "organ",
+        "synth",
+        "voice",
+        "congas",
+        "sub-bass"
+      ],
+      "notes": 1337,
+      "duration": 97.95918367346933,
+      "progression": []
+    },
+    {
+      "styleId": "reggaeton-pop-reggaeton",
+      "genre": "reggaeton",
+      "referenceSong": "Yo Voy — Zion & Lennox",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "synth",
+        "drums",
+        "sub-bass",
+        "piano",
+        "voice",
+        "congas",
+        "electric-guitar"
+      ],
+      "notes": 2609,
+      "duration": 104.34782608695645,
+      "progression": []
+    },
+    {
+      "styleId": "reggaeton-trap",
+      "genre": "reggaeton",
+      "referenceSong": "Yo Voy — Zion & Lennox",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "sub-bass",
+        "drums",
+        "synth",
+        "sampler",
+        "electric-guitar",
+        "voice",
+        "congas",
+        "maracas"
+      ],
+      "notes": 1533,
+      "duration": 71.1111111111111,
+      "progression": []
+    },
+    {
+      "styleId": "reggaeton-playero",
+      "genre": "reggaeton",
+      "referenceSong": "Yo Voy — Zion & Lennox",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "sampler",
+        "drums",
+        "synth",
+        "turntable",
+        "sub-bass",
+        "voice",
+        "congas",
+        "electric-guitar"
+      ],
+      "notes": 1367,
+      "duration": 97.95918367346933,
+      "progression": []
+    },
+    {
+      "styleId": "reggaeton-bachata",
+      "genre": "reggaeton",
+      "referenceSong": "Dile — Don Omar",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "requinto",
+        "bongos",
+        "sub-bass",
+        "drums",
+        "guiro",
+        "voice",
+        "congas",
+        "synth"
+      ],
+      "notes": 1834,
+      "duration": 78.04878048780493,
+      "progression": []
+    },
+    {
+      "styleId": "rock-hard-rock",
+      "genre": "rock",
+      "referenceSong": "Smells Like Teen Spirit — Nirvana",
+      "referenceTone": "dense / aggressive / controlled sustain",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "overdrive-guitar",
+        "voice",
+        "piano",
+        "organ",
+        "synth"
+      ],
+      "notes": 2042,
+      "duration": 90,
+      "progression": []
+    },
+    {
+      "styleId": "rock-grunge",
+      "genre": "rock",
+      "referenceSong": "Paint It, Black — The Rolling Stones",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "distortion-guitar",
+        "hand-percussion",
+        "voice",
+        "piano",
+        "overdrive-guitar"
+      ],
+      "notes": 2187,
+      "duration": 106.66666666666677,
+      "progression": []
+    },
+    {
+      "styleId": "rock-progressive-rock",
+      "genre": "rock",
+      "referenceSong": "Seven Nation Army — The White Stripes",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "strings",
+        "bass",
+        "drums",
+        "organ",
+        "voice",
+        "piano",
+        "overdrive-guitar"
+      ],
+      "notes": 2590,
+      "duration": 104,
+      "progression": []
+    },
+    {
+      "styleId": "rock-punk-rock",
+      "genre": "rock",
+      "referenceSong": "Seven Nation Army — The White Stripes",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "distortion-guitar",
+        "hand-percussion",
+        "voice",
+        "piano",
+        "overdrive-guitar"
+      ],
+      "notes": 2036,
+      "duration": 62.27027027027031,
+      "progression": []
+    },
+    {
+      "styleId": "rock-garage-rock",
+      "genre": "rock",
+      "referenceSong": "Sweet Child o’ Mine — Guns N’ Roses",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "overdrive-guitar",
+        "hand-percussion",
+        "voice",
+        "piano",
+        "organ"
+      ],
+      "notes": 2085,
+      "duration": 85.33333333333327,
+      "progression": []
+    },
+    {
+      "styleId": "rock-psychedelic",
+      "genre": "rock",
+      "referenceSong": "Sweet Child o’ Mine — Guns N’ Roses",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "organ",
+        "bass",
+        "drums",
+        "tape-echo",
+        "voice",
+        "piano",
+        "overdrive-guitar"
+      ],
+      "notes": 2350,
+      "duration": 102.85714285714282,
+      "progression": []
+    },
+    {
+      "styleId": "rock-post-rock",
+      "genre": "rock",
+      "referenceSong": "Seven Nation Army — The White Stripes",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "strings",
+        "glockenspiel",
+        "voice",
+        "piano",
+        "overdrive-guitar"
+      ],
+      "notes": 2870,
+      "duration": 181.33333333333323,
+      "progression": []
+    },
+    {
+      "styleId": "rock-shoegaze",
+      "genre": "rock",
+      "referenceSong": "Paint It, Black — The Rolling Stones",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "synth",
+        "distortion-guitar",
+        "voice",
+        "piano",
+        "overdrive-guitar"
+      ],
+      "notes": 4089,
+      "duration": 106.66666666666677,
+      "progression": []
+    },
+    {
+      "styleId": "salsa-mambo",
+      "genre": "salsa",
+      "referenceSong": "Anacaona — Cheo Feliciano",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "brass",
+        "timbales",
+        "congas",
+        "piano",
+        "bass",
+        "voice",
+        "bongos",
+        "claves"
+      ],
+      "notes": 1991,
+      "duration": 57.60000000000005,
+      "progression": []
+    },
+    {
+      "styleId": "salsa-salsa-dura",
+      "genre": "salsa",
+      "referenceSong": "Aguanilé — Héctor Lavoe",
+      "referenceTone": "live-room / ensemble-forward",
+      "instruments": [
+        "brass",
+        "congas",
+        "timbales",
+        "bongos",
+        "piano",
+        "voice",
+        "claves",
+        "bass"
+      ],
+      "notes": 2176,
+      "duration": 115.2000000000001,
+      "progression": [
+        "Dm7",
+        "G7",
+        "Cmaj7",
+        "A7"
+      ]
+    },
+    {
+      "styleId": "salsa-son-montuno",
+      "genre": "salsa",
+      "referenceSong": "Aguanilé — Héctor Lavoe",
+      "referenceTone": "dry / close / transient-forward",
+      "instruments": [
+        "tres",
+        "bongos",
+        "claves",
+        "acoustic-bass",
+        "trumpet",
+        "voice",
+        "piano",
+        "congas"
+      ],
+      "notes": 2507,
+      "duration": 110,
+      "progression": [
+        "C",
+        "G7",
+        "C",
+        "C7",
+        "F",
+        "G7",
+        "C",
+        "G7"
+      ]
+    },
+    {
+      "styleId": "salsa-cha-cha-cha",
+      "genre": "salsa",
+      "referenceSong": "Sonora Ponceña — salsa repertoire",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "flute",
+        "violin",
+        "guiro",
+        "congas",
+        "piano",
+        "voice",
+        "bongos",
+        "claves"
+      ],
+      "notes": 2005,
+      "duration": 102.85714285714282,
+      "progression": [
+        "C6",
+        "Am7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "styleId": "salsa-salsa-romantica",
+      "genre": "salsa",
+      "referenceSong": "Anacaona — Cheo Feliciano",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "brass",
+        "piano",
+        "synth",
+        "congas",
+        "timbales",
+        "voice",
+        "bongos",
+        "claves"
+      ],
+      "notes": 1488,
+      "duration": 100,
+      "progression": []
+    },
+    {
+      "styleId": "ska-trad-ska",
+      "genre": "ska",
+      "referenceSong": "Ghost Town — The Specials",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "brass",
+        "electric-guitar",
+        "piano",
+        "upright-bass",
+        "drums",
+        "voice",
+        "tenor-sax",
+        "trombone"
+      ],
+      "notes": 2863,
+      "duration": 88.61538461538454,
+      "progression": []
+    },
+    {
+      "styleId": "ska-two-tone",
+      "genre": "ska",
+      "referenceSong": "Ghost Town — The Specials",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "organ",
+        "brass",
+        "bass",
+        "drums",
+        "voice",
+        "tenor-sax",
+        "trombone"
+      ],
+      "notes": 3099,
+      "duration": 75.29411764705883,
+      "progression": []
+    },
+    {
+      "styleId": "ska-ska-punk",
+      "genre": "ska",
+      "referenceSong": "The Impression That I Get — The Mighty Mighty Bosstones",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "brass",
+        "bass",
+        "drums",
+        "synth",
+        "voice",
+        "tenor-sax",
+        "trombone"
+      ],
+      "notes": 2722,
+      "duration": 64.00000000000004,
+      "progression": []
+    },
+    {
+      "styleId": "soul-deep-funk",
+      "genre": "soul",
+      "referenceSong": "Try a Little Tenderness — Otis Redding",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "voice",
+        "bass",
+        "drums",
+        "piano",
+        "brass",
+        "electric-guitar",
+        "organ",
+        "horn-section"
+      ],
+      "notes": 3948,
+      "duration": 123.87096774193542,
+      "progression": []
+    },
+    {
+      "styleId": "soul-p-funk",
+      "genre": "soul",
+      "referenceSong": "I Heard It Through the Grapevine — Marvin Gaye",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "voice",
+        "bass",
+        "drums",
+        "strings",
+        "tambourine",
+        "electric-guitar",
+        "organ",
+        "horn-section"
+      ],
+      "notes": 2699,
+      "duration": 104.72727272727278,
+      "progression": []
+    },
+    {
+      "styleId": "soul-synth-funk",
+      "genre": "soul",
+      "referenceSong": "Ain't No Sunshine — Bill Withers",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "voice",
+        "organ",
+        "bass",
+        "drums",
+        "brass",
+        "electric-guitar",
+        "horn-section",
+        "piano"
+      ],
+      "notes": 3450,
+      "duration": 135.5294117647059,
+      "progression": []
+    },
+    {
+      "styleId": "soul-philly",
+      "genre": "soul",
+      "referenceSong": "I Heard It Through the Grapevine — Marvin Gaye",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "voice",
+        "strings",
+        "bass",
+        "drums",
+        "piano",
+        "electric-guitar",
+        "organ",
+        "horn-section"
+      ],
+      "notes": 3783,
+      "duration": 109.71428571428581,
+      "progression": []
+    },
+    {
+      "styleId": "soul-northern",
+      "genre": "soul",
+      "referenceSong": "People Get Ready — Curtis Mayfield",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "voice",
+        "bass",
+        "drums",
+        "piano",
+        "brass",
+        "electric-guitar",
+        "organ",
+        "horn-section"
+      ],
+      "notes": 3129,
+      "duration": 79.44827586206902,
+      "progression": []
+    },
+    {
+      "styleId": "soul-neo-soul",
+      "genre": "soul",
+      "referenceSong": "What’s Going On — Marvin Gaye",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "voice",
+        "bass",
+        "drums",
+        "rhodes",
+        "electric-guitar",
+        "organ",
+        "horn-section",
+        "piano"
+      ],
+      "notes": 4043,
+      "duration": 142.2222222222222,
+      "progression": []
+    },
+    {
+      "styleId": "soul-memphis",
+      "genre": "soul",
+      "referenceSong": "People Get Ready — Curtis Mayfield",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "voice",
+        "bass",
+        "drums",
+        "organ",
+        "brass",
+        "electric-guitar",
+        "horn-section",
+        "piano"
+      ],
+      "notes": 3875,
+      "duration": 128.00000000000009,
+      "progression": []
+    },
+    {
+      "styleId": "soul-deep-soul",
+      "genre": "soul",
+      "referenceSong": "What’s Going On — Marvin Gaye",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "voice",
+        "piano",
+        "bass",
+        "drums",
+        "organ",
+        "electric-guitar",
+        "horn-section",
+        "tambourine"
+      ],
+      "notes": 2978,
+      "duration": 144,
+      "progression": []
+    },
+    {
+      "styleId": "swing-big-band-swing",
+      "genre": "swing",
+      "referenceSong": "Jumpin’ at the Woodside — Count Basie",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "brass",
+        "clarinet",
+        "piano",
+        "upright-bass",
+        "drums",
+        "tenor-sax",
+        "jazz-guitar",
+        "trumpet"
+      ],
+      "notes": 3532,
+      "duration": 76.56441717791407,
+      "progression": []
+    },
+    {
+      "styleId": "swing-gypsy-jazz",
+      "genre": "swing",
+      "referenceSong": "Sing, Sing, Sing — Benny Goodman",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "acoustic-guitar",
+        "violin",
+        "upright-bass",
+        "clarinet",
+        "alto-sax",
+        "drums",
+        "piano",
+        "tenor-sax"
+      ],
+      "notes": 3565,
+      "duration": 62.40000000000006,
+      "progression": []
+    },
+    {
+      "styleId": "swing-jump-blues",
+      "genre": "swing",
+      "referenceSong": "Jumpin’ at the Woodside — Count Basie",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "tenor-sax",
+        "brass",
+        "piano",
+        "upright-bass",
+        "drums",
+        "jazz-guitar",
+        "trumpet",
+        "trombone"
+      ],
+      "notes": 3199,
+      "duration": 80.51612903225802,
+      "progression": []
+    },
+    {
+      "styleId": "timba-timba-habanera",
+      "genre": "timba",
+      "referenceSong": "La Fórmula — Los Van Van",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "timbales",
+        "congas",
+        "bass",
+        "piano",
+        "trombone",
+        "voice",
+        "bongos"
+      ],
+      "notes": 3078,
+      "duration": 134.40000000000015,
+      "progression": []
+    },
+    {
+      "styleId": "timba-songo",
+      "genre": "timba",
+      "referenceSong": "Me Mantengo — Havana D’Primera",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "congas",
+        "bass",
+        "piano",
+        "flute",
+        "timbales",
+        "trombone",
+        "voice"
+      ],
+      "notes": 2768,
+      "duration": 100.57142857142864,
+      "progression": []
+    },
+    {
+      "styleId": "zouk-zouk-beton",
+      "genre": "zouk",
+      "referenceSong": "Vini Pou — Zouk repertoire",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "brass",
+        "drums",
+        "bass",
+        "synth",
+        "hand-percussion",
+        "voice",
+        "sub-bass",
+        "rhodes"
+      ],
+      "notes": 1480,
+      "duration": 66.97674418604657,
+      "progression": []
+    },
+    {
+      "styleId": "zouk-zouk-love",
+      "genre": "zouk",
+      "referenceSong": "Vini Pou — Zouk repertoire",
+      "referenceTone": "sparse / intimate / high separation",
+      "instruments": [
+        "synth",
+        "bass",
+        "drums",
+        "electric-guitar",
+        "rhodes",
+        "voice",
+        "sub-bass",
+        "warm-pad"
+      ],
+      "notes": 2664,
+      "duration": 146.08695652173895,
+      "progression": [
+        "Dm9",
+        "Gm7",
+        "C13",
+        "Fmaj7"
+      ]
+    },
+    {
+      "styleId": "zouk-ghetto-zouk",
+      "genre": "zouk",
+      "referenceSong": "Syé Bwa — Kassav’",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "drums",
+        "sub-bass",
+        "piano",
+        "warm-pad",
+        "voice",
+        "rhodes",
+        "electric-guitar"
+      ],
+      "notes": 1884,
+      "duration": 92.90322580645157,
+      "progression": []
+    },
+    {
+      "styleId": "zouk-neo-zouk",
+      "genre": "zouk",
+      "referenceSong": "Zouk la sé sèl médikaman nou ni — Kassav’",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "sub-bass",
+        "drums",
+        "sampler",
+        "warm-pad",
+        "voice",
+        "rhodes",
+        "electric-guitar"
+      ],
+      "notes": 1648,
+      "duration": 98.18181818181826,
+      "progression": []
+    },
+    {
+      "styleId": "drum-and-bass-jungle",
+      "genre": "drum-and-bass",
+      "referenceSong": "Brown Paper Bag — Roni Size / Reprazent",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "sampler",
+        "synth",
+        "voice",
+        "warm-pad",
+        "saw-lead",
+        "piano"
+      ],
+      "notes": 1384,
+      "duration": 50.82352941176472,
+      "progression": []
+    },
+    {
+      "styleId": "drum-and-bass-liquid",
+      "genre": "drum-and-bass",
+      "referenceSong": "Tarantula — Pendulum",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "piano",
+        "synth",
+        "voice",
+        "warm-pad",
+        "saw-lead",
+        "sampler"
+      ],
+      "notes": 1549,
+      "duration": 49.942196531791915,
+      "progression": []
+    },
+    {
+      "styleId": "drum-and-bass-techstep",
+      "genre": "drum-and-bass",
+      "referenceSong": "Circles — Adam F",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "sampler",
+        "warm-pad",
+        "saw-lead",
+        "voice",
+        "piano"
+      ],
+      "notes": 1482,
+      "duration": 49.942196531791915,
+      "progression": []
+    },
+    {
+      "styleId": "drum-and-bass-neurofunk",
+      "genre": "drum-and-bass",
+      "referenceSong": "Inner City Life — Goldie",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "sampler",
+        "warm-pad",
+        "saw-lead",
+        "voice",
+        "piano"
+      ],
+      "notes": 1482,
+      "duration": 49.37142857142859,
+      "progression": []
+    },
+    {
+      "styleId": "drum-and-bass-dancefloor",
+      "genre": "drum-and-bass",
+      "referenceSong": "Brown Paper Bag — Roni Size / Reprazent",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "brass",
+        "voice",
+        "warm-pad",
+        "saw-lead",
+        "sampler"
+      ],
+      "notes": 813,
+      "duration": 49.65517241379313,
+      "progression": []
+    },
+    {
+      "styleId": "drum-and-bass-jump-up",
+      "genre": "drum-and-bass",
+      "referenceSong": "Inner City Life — Goldie",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "voice",
+        "sampler",
+        "warm-pad",
+        "saw-lead",
+        "piano"
+      ],
+      "notes": 1392,
+      "duration": 49.65517241379313,
+      "progression": []
+    },
+    {
+      "styleId": "drum-and-bass-atmospheric",
+      "genre": "drum-and-bass",
+      "referenceSong": "Brown Paper Bag — Roni Size / Reprazent",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "piano",
+        "flute",
+        "warm-pad",
+        "saw-lead",
+        "sampler"
+      ],
+      "notes": 1453,
+      "duration": 51.736526946107766,
+      "progression": []
+    },
+    {
+      "styleId": "drum-and-bass-drumfunk",
+      "genre": "drum-and-bass",
+      "referenceSong": "Brown Paper Bag — Roni Size / Reprazent",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sampler",
+        "sub-bass",
+        "synth",
+        "hand-percussion",
+        "warm-pad",
+        "saw-lead",
+        "voice"
+      ],
+      "notes": 880,
+      "duration": 51.42857142857144,
+      "progression": []
+    },
+    {
+      "styleId": "industrial-ebm",
+      "genre": "industrial",
+      "referenceSong": "Head Like a Hole — Nine Inch Nails",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "drums",
+        "sampler",
+        "bass-lead",
+        "noise-sweep",
+        "voice",
+        "distortion-guitar",
+        "sub-bass"
+      ],
+      "notes": 788,
+      "duration": 69.67741935483876,
+      "progression": []
+    },
+    {
+      "styleId": "industrial-techno",
+      "genre": "industrial",
+      "referenceSong": "Head Like a Hole — Nine Inch Nails",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "drums",
+        "sampler",
+        "bass-lead",
+        "noise-sweep",
+        "voice",
+        "distortion-guitar",
+        "sub-bass"
+      ],
+      "notes": 1931,
+      "duration": 124.31654676259011,
+      "progression": []
+    },
+    {
+      "styleId": "industrial-noise",
+      "genre": "industrial",
+      "referenceSong": "Assimilate — Skinny Puppy",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "noise-sweep",
+        "sampler",
+        "synth",
+        "drums",
+        "bass-lead",
+        "voice",
+        "distortion-guitar",
+        "sub-bass"
+      ],
+      "notes": 746,
+      "duration": 79.05882352941175,
+      "progression": []
+    },
+    {
+      "styleId": "industrial-dark",
+      "genre": "industrial",
+      "referenceSong": "Assimilate — Skinny Puppy",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "synth",
+        "drums",
+        "sampler",
+        "bass-lead",
+        "noise-sweep",
+        "voice",
+        "distortion-guitar",
+        "sub-bass"
+      ],
+      "notes": 1400,
+      "duration": 124.80000000000013,
+      "progression": []
+    },
+    {
+      "styleId": "punk-hardcore-punk-rock",
+      "genre": "punk-hardcore",
+      "referenceSong": "Linoleum — NOFX",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "voice",
+        "overdrive-guitar",
+        "distortion-guitar",
+        "organ",
+        "backing-vocals"
+      ],
+      "notes": 2034,
+      "duration": 48.000000000000014,
+      "progression": []
+    },
+    {
+      "styleId": "punk-hardcore-hardcore-punk",
+      "genre": "punk-hardcore",
+      "referenceSong": "London Calling — The Clash",
+      "referenceTone": "dense / aggressive / controlled sustain",
+      "instruments": [
+        "distortion-guitar",
+        "bass",
+        "drums",
+        "voice",
+        "overdrive-guitar",
+        "electric-guitar",
+        "organ",
+        "backing-vocals"
+      ],
+      "notes": 1859,
+      "duration": 42.14634146341465,
+      "progression": []
+    },
+    {
+      "styleId": "punk-hardcore-skate-punk",
+      "genre": "punk-hardcore",
+      "referenceSong": "Linoleum — NOFX",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "voice",
+        "backing-vocals",
+        "overdrive-guitar",
+        "distortion-guitar",
+        "organ"
+      ],
+      "notes": 2012,
+      "duration": 45.47368421052632,
+      "progression": []
+    },
+    {
+      "styleId": "punk-hardcore-pop-punk",
+      "genre": "punk-hardcore",
+      "referenceSong": "Minor Threat — Minor Threat",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "voice",
+        "backing-vocals",
+        "overdrive-guitar",
+        "distortion-guitar",
+        "organ"
+      ],
+      "notes": 2012,
+      "duration": 59.58620689655172,
+      "progression": []
+    },
+    {
+      "styleId": "punk-hardcore-melodic-hardcore",
+      "genre": "punk-hardcore",
+      "referenceSong": "Blitzkrieg Bop — Ramones",
+      "referenceTone": "dense / aggressive / controlled sustain",
+      "instruments": [
+        "distortion-guitar",
+        "bass",
+        "drums",
+        "voice",
+        "backing-vocals",
+        "overdrive-guitar",
+        "electric-guitar",
+        "organ"
+      ],
+      "notes": 1701,
+      "duration": 46.70270270270273,
+      "progression": []
+    },
+    {
+      "styleId": "punk-hardcore-post-hardcore",
+      "genre": "punk-hardcore",
+      "referenceSong": "Basket Case — Green Day",
+      "referenceTone": "dense / aggressive / controlled sustain",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "voice",
+        "synth",
+        "overdrive-guitar",
+        "distortion-guitar",
+        "organ"
+      ],
+      "notes": 2012,
+      "duration": 61.71428571428574,
+      "progression": []
+    },
+    {
+      "styleId": "punk-hardcore-crust-punk",
+      "genre": "punk-hardcore",
+      "referenceSong": "London Calling — The Clash",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "distortion-guitar",
+        "bass",
+        "drums",
+        "voice",
+        "overdrive-guitar",
+        "electric-guitar",
+        "organ",
+        "backing-vocals"
+      ],
+      "notes": 1859,
+      "duration": 49.37142857142859,
+      "progression": []
+    },
+    {
+      "styleId": "punk-hardcore-d-beat",
+      "genre": "punk-hardcore",
+      "referenceSong": "Blitzkrieg Bop — Ramones",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "voice",
+        "distortion-guitar",
+        "overdrive-guitar",
+        "organ",
+        "backing-vocals"
+      ],
+      "notes": 1978,
+      "duration": 45.47368421052632,
+      "progression": []
+    },
+    {
+      "styleId": "uk-bass-garage",
+      "genre": "uk-bass",
+      "referenceSong": "Flowers — Sweet Female Attitude",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "sampler",
+        "voice",
+        "acid-303",
+        "warm-pad",
+        "piano"
+      ],
+      "notes": 1409,
+      "duration": 64.96240601503763,
+      "progression": []
+    },
+    {
+      "styleId": "uk-bass-2-step",
+      "genre": "uk-bass",
+      "referenceSong": "Re-Rewind — Artful Dodger feat. Craig David",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "sampler",
+        "voice",
+        "acid-303",
+        "warm-pad",
+        "piano"
+      ],
+      "notes": 1409,
+      "duration": 64.96240601503763,
+      "progression": []
+    },
+    {
+      "styleId": "uk-bass-speed-garage",
+      "genre": "uk-bass",
+      "referenceSong": "Re-Rewind — Artful Dodger feat. Craig David",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "sampler",
+        "voice",
+        "acid-303",
+        "warm-pad",
+        "piano"
+      ],
+      "notes": 1277,
+      "duration": 64.00000000000001,
+      "progression": []
+    },
+    {
+      "styleId": "uk-bass-dubstep",
+      "genre": "uk-bass",
+      "referenceSong": "Flowers — Sweet Female Attitude",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "sampler",
+        "acid-303",
+        "warm-pad",
+        "voice",
+        "piano"
+      ],
+      "notes": 1301,
+      "duration": 61.71428571428574,
+      "progression": []
+    },
+    {
+      "styleId": "uk-bass-funky",
+      "genre": "uk-bass",
+      "referenceSong": "Go — Dubfire",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "hand-percussion",
+        "synth",
+        "voice",
+        "acid-303",
+        "warm-pad",
+        "sampler"
+      ],
+      "notes": 868,
+      "duration": 66.97674418604657,
+      "progression": []
+    },
+    {
+      "styleId": "uk-bass-future-garage",
+      "genre": "uk-bass",
+      "referenceSong": "Gabriel — Roy Davis Jr. feat. Peven Everett",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "sampler",
+        "voice",
+        "acid-303",
+        "warm-pad",
+        "piano"
+      ],
+      "notes": 1409,
+      "duration": 66.46153846153847,
+      "progression": []
+    },
+    {
+      "styleId": "uk-bass-bassline",
+      "genre": "uk-bass",
+      "referenceSong": "Gabriel — Roy Davis Jr. feat. Peven Everett",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "voice",
+        "sampler",
+        "acid-303",
+        "warm-pad",
+        "piano"
+      ],
+      "notes": 1277,
+      "duration": 64.00000000000001,
+      "progression": []
+    },
+    {
+      "styleId": "uk-bass-grime",
+      "genre": "uk-bass",
+      "referenceSong": "Gabriel — Roy Davis Jr. feat. Peven Everett",
+      "referenceTone": "balanced / style-forward / phrase-led",
+      "instruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "sampler",
+        "voice",
+        "acid-303",
+        "warm-pad",
+        "piano"
+      ],
+      "notes": 1277,
+      "duration": 61.71428571428574,
+      "progression": []
+    }
+  ],
+  "status": "PASS"
+}

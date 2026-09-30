@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "id": "afrobeats",
+  "name": "Afrobeats",
+  "family": "West African Pop / Global Groove",
+  "description": "Vibrant West African dance music continuum:",
+  "substyles": [
+    "Afro-Pop",
+    "Afrobeat",
+    "Amapiano",
+    "Gqom",
+    "Afro-House",
+    "Highlife",
+    "Palm-Wine",
+    "Alté"
+  ],
+  "styleIds": [
+    "afrobeats-afro-pop",
+    "afrobeats-afrobeat",
+    "afrobeats-amapiano",
+    "afrobeats-gqom",
+    "afrobeats-afro-house",
+    "afrobeats-highlife",
+    "afrobeats-palm-wine",
+    "afrobeats-alte"
+  ],
+  "patternIds": [
+    "afro-log-drum-bass",
+    "afro-syncopated-kit",
+    "afro-highlife-guitar",
+    "afro-shekere-shaker",
+    "afro-horn-stabs",
+    "afro-amapiano-pad",
+    "afrobeats-call-7",
+    "afrobeats-anchor-8",
+    "afrobeats-comp-9",
+    "afrobeats-intro-10",
+    "afrobeats-verse-11",
+    "afrobeats-chorus-12",
+    "afrobeats-bridge-13",
+    "afrobeats-fill-14",
+    "afrobeats-break-15",
+    "afrobeats-cadence-16",
+    "afrobeats--phrasing",
+    "afro-interlocking-16ths",
+    "afro-logdrum-call"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "afrobeats-afro-pop",
+      "name": "Afro-Pop",
+      "keySubstyles": [
+        "Naija Pop",
+        "Afro-Fusion",
+        "Global Afropop"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "bass",
+        "acoustic-guitar",
+        "synth",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "afrobeats-afrobeat",
+      "name": "Afrobeat",
+      "keySubstyles": [
+        "Classic Afrobeat",
+        "Afrobeat Big Band"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "bass",
+        "electric-guitar",
+        "brass",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "afrobeats-amapiano",
+      "name": "Amapiano",
+      "keySubstyles": [
+        "Amapiano",
+        "Private School Amapiano"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "bass",
+        "piano",
+        "synth",
+        "shaker"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "afrobeats-gqom",
+      "name": "Gqom",
+      "keySubstyles": [
+        "Durban Gqom",
+        "Minimal Gqom"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "hand-percussion",
+        "sampler"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "afrobeats-afro-house",
+      "name": "Afro-House",
+      "keySubstyles": [
+        "Deep Afro House",
+        "Ancestral Soul"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "bass",
+        "synth",
+        "hand-percussion",
+        "piano"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "afrobeats-highlife",
+      "name": "Highlife",
+      "keySubstyles": [
+        "Guitar-Band Highlife",
+        "Classic Dance-Band Highlife"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "bass",
+        "drums",
+        "brass",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "afrobeats-palm-wine",
+      "name": "Palm-Wine",
+      "keySubstyles": [
+        "Acoustic Palm-Wine",
+        "Maringa"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "hand-percussion",
+        "bass",
+        "synth",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "afrobeats-alte",
+      "name": "Alté",
+      "keySubstyles": [
+        "Alté R&B",
+        "Lo-Fi Afro-Fusion"
+      ],
+      "characteristicInstruments": [
+        "synth",
+        "bass",
+        "drums",
+        "acoustic-guitar",
+        "synth"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "afrobeats-starter"
+}

@@ -4,7 +4,7 @@ export const ELECTRONIC_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
   {
           "id": "elec-offbeat-hats",
           "worldId": "electronic",
-          "styleIds": ["electronic-house"],
+          "styleIds": ["electronic-techno"],
           "name": "Offbeat Hats",
           "family": "Beat",
           "category": "break",

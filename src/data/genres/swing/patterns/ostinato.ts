@@ -4,7 +4,7 @@ export const SWING_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "swing-anchor-12",
           "worldId": "swing",
-          "styleIds": ["swing-big-band"],
+          "styleIds": ["swing-big-band-swing"],
           "name": "Shout Anchor",
           "family": "Shout",
           "category": "ostinato",

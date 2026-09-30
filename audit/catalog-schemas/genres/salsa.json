@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "id": "salsa",
+  "name": "Salsa",
+  "family": "Caribbean / Cuban",
+  "description": "The monumental Afro-Cuban & Salsa universe:",
+  "substyles": [
+    "Mambo",
+    "Salsa Dura",
+    "Son Montuno",
+    "Cha-Cha-Chá",
+    "Salsa Romántica"
+  ],
+  "styleIds": [
+    "salsa-mambo",
+    "salsa-salsa-dura",
+    "salsa-son-montuno",
+    "salsa-cha-cha-cha",
+    "salsa-salsa-romantica"
+  ],
+  "patternIds": [
+    "afro-clave-son-23",
+    "afro-bass-tumbao",
+    "afro-piano-montuno",
+    "afro-timbal-cascara",
+    "afro-conga-tumbao",
+    "afro-mambo-horn-hits",
+    "salsa-campana",
+    "salsa-guiro",
+    "salsa-maracas",
+    "salsa-clave-32",
+    "salsa-timbal-bell",
+    "salsa-phrase-12",
+    "salsa-call-13",
+    "salsa-anchor-14",
+    "salsa-comp-15",
+    "salsa-intro-16",
+    "salsa--phrasing"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "salsa-mambo",
+      "name": "Mambo",
+      "keySubstyles": [
+        "Palladium Mambo",
+        "Afro-Cuban Mambo"
+      ],
+      "characteristicInstruments": [
+        "brass",
+        "timbales",
+        "congas",
+        "piano",
+        "bass"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "salsa-salsa-dura",
+      "name": "Salsa Dura",
+      "keySubstyles": [
+        "Fania Sound",
+        "Barrio Salsa"
+      ],
+      "characteristicInstruments": [
+        "brass",
+        "congas",
+        "timbales",
+        "bongos",
+        "piano"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "salsa-son-montuno",
+      "name": "Son Montuno",
+      "keySubstyles": [
+        "Arsenio Style",
+        "Son Tradicional"
+      ],
+      "characteristicInstruments": [
+        "tres",
+        "bongos",
+        "claves",
+        "acoustic-bass",
+        "trumpet"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "salsa-cha-cha-cha",
+      "name": "Cha-Cha-Chá",
+      "keySubstyles": [
+        "Charanga Cha-Cha-Chá",
+        "Big Band Cha-Cha"
+      ],
+      "characteristicInstruments": [
+        "flute",
+        "violin",
+        "guiro",
+        "congas",
+        "piano"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "salsa-salsa-romantica",
+      "name": "Salsa Romántica",
+      "keySubstyles": [
+        "Salsa Sensual",
+        "Salsa de Alcoba"
+      ],
+      "characteristicInstruments": [
+        "brass",
+        "piano",
+        "synth",
+        "congas",
+        "timbales"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "salsa-starter"
+}

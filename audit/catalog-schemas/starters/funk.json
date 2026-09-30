@@ -1,0 +1,317 @@
+{
+  "schemaVersion": 1,
+  "id": "funk-starter",
+  "genreId": "funk",
+  "genreName": "Funk",
+  "styleId": "funk-p-funk",
+  "styleName": "P-Funk",
+  "styleDescription": "Heavy On The One • Space",
+  "bpm": 106,
+  "meter": "4/4",
+  "regions": [
+    {
+      "id": "r0",
+      "name": "Intro",
+      "type": "intro",
+      "genreId": "funk",
+      "styleId": "funk-p-funk",
+      "chords": [
+        "E7#9",
+        "E7#9",
+        "E7#9",
+        "E7#9"
+      ]
+    },
+    {
+      "id": "r1",
+      "name": "Groove",
+      "type": "groove",
+      "genreId": "funk",
+      "styleId": "funk-p-funk",
+      "chords": [
+        "E7#9",
+        "E7#9",
+        "A7",
+        "E7#9"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "Verse",
+      "type": "verse",
+      "genreId": "funk",
+      "styleId": "funk-p-funk",
+      "chords": [
+        "E7",
+        "E7",
+        "B7#9",
+        "B7#9"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "Breakdown",
+      "type": "breakdown",
+      "genreId": "funk",
+      "styleId": "funk-p-funk",
+      "chords": [
+        "E7#9",
+        "E7#9",
+        "E7#9",
+        "E7#9"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Groove",
+      "type": "groove",
+      "genreId": "funk",
+      "styleId": "funk-p-funk",
+      "chords": [
+        "E7#9",
+        "E7#9",
+        "A7",
+        "E7#9"
+      ]
+    },
+    {
+      "id": "r5",
+      "name": "Tag",
+      "type": "tag",
+      "genreId": "funk",
+      "styleId": "funk-p-funk",
+      "chords": [
+        "E7",
+        "E7",
+        "B7#9",
+        "B7#9"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "v0",
+      "instrumentId": "bass",
+      "instrumentName": "Electric Bass Guitar",
+      "role": "bass",
+      "patternIds": [
+        "funk-slap-bass",
+        "funk-the-one-bass"
+      ],
+      "noteCount": 359,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4607": 9,
+        "5227": 180,
+        "6655": 81,
+        "12200": 71,
+        "44655": 18
+      }
+    },
+    {
+      "id": "v1",
+      "instrumentId": "drums",
+      "instrumentName": "Standard Drum Kit",
+      "role": "percussion",
+      "patternIds": [
+        "funk-drum-breakbeat",
+        "funk-hihat-open",
+        "funk-ghost-snares"
+      ],
+      "noteCount": 182,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "choke",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4607": 24,
+        "12200": 150,
+        "44655": 8
+      }
+    },
+    {
+      "id": "v2",
+      "instrumentId": "electric-guitar",
+      "instrumentName": "Electric Guitar",
+      "role": "harmony",
+      "patternIds": [
+        "funk-chicken-scratch-guitar",
+        "funk-16th-strum"
+      ],
+      "noteCount": 1680,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 1389,
+        "44655": 95,
+        "49857": 196
+      }
+    },
+    {
+      "id": "v3",
+      "instrumentId": "synth",
+      "instrumentName": "Synth",
+      "role": "lead",
+      "patternIds": [
+        "funk-clavinet"
+      ],
+      "noteCount": 36,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "6655": 9,
+        "29346": 22,
+        "44655": 5
+      }
+    },
+    {
+      "id": "v4",
+      "instrumentId": "brass",
+      "instrumentName": "Brass section",
+      "role": "harmony",
+      "patternIds": [
+        "funk-horn-section"
+      ],
+      "noteCount": 101,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 5,
+        "8526": 9,
+        "44655": 78,
+        "50696": 9
+      }
+    },
+    {
+      "id": "v5",
+      "instrumentId": "voice",
+      "instrumentName": "Synth voice",
+      "role": "voice",
+      "patternIds": [
+        "ska-horn-stabs",
+        "elec-breakbeat-response",
+        "gospel-choir-response",
+        "rnb-vocal-answer",
+        "disco-string-hits"
+      ],
+      "noteCount": 108,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 32,
+        "6655": 64,
+        "45724": 6,
+        "48234": 6
+      }
+    },
+    {
+      "id": "v6",
+      "instrumentId": "clavinet",
+      "instrumentName": "Clavinet",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "funk-clavinet"
+      ],
+      "noteCount": 195,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 33,
+        "12200": 17,
+        "44655": 145
+      }
+    },
+    {
+      "id": "v7",
+      "instrumentId": "organ",
+      "instrumentName": "Tonewheel organ",
+      "role": "harmony",
+      "patternIds": [
+        "funk-clavinet"
+      ],
+      "noteCount": 400,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 37,
+        "6655": 45,
+        "8118": 201,
+        "44655": 108,
+        "48871": 9
+      }
+    }
+  ],
+  "usedPatternIds": [
+    "funk-slap-bass",
+    "funk-the-one-bass",
+    "funk-drum-breakbeat",
+    "funk-hihat-open",
+    "funk-ghost-snares",
+    "funk-chicken-scratch-guitar",
+    "funk-16th-strum",
+    "funk-clavinet",
+    "funk-horn-section",
+    "ska-horn-stabs",
+    "elec-breakbeat-response",
+    "gospel-choir-response",
+    "rnb-vocal-answer",
+    "disco-string-hits",
+    "afro-amapiano-pad"
+  ],
+  "performance": {
+    "durationSeconds": 81.50943396226417,
+    "noteCount": 3061,
+    "trackCount": 8,
+    "tracksWithNoNotes": []
+  }
+}

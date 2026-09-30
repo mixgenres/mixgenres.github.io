@@ -330,7 +330,7 @@ export const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "tango-332-piazzolla",
           "worldId": "tango",
-          "styleIds": ["tango-nuevo"],
+          "styleIds": ["tango-tango-nuevo"],
           "name": "3+3+2 Nuevo Tango Pulse (Piazzolla)",
           "family": "Additive Rhythms",
           "category": "ostinato",

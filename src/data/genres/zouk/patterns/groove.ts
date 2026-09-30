@@ -4,7 +4,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "zouk-ti-bwa",
           "worldId": "zouk",
-          "styleIds": ["zouk-beton"],
+          "styleIds": ["zouk-zouk-beton"],
           "name": "Ti-Bwa Woodblock Ostinato",
           "family": "Percussion",
           "category": "groove",
@@ -171,7 +171,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "zouk-synth-chords",
           "worldId": "zouk",
-          "styleIds": ["zouk-love"],
+          "styleIds": ["zouk-zouk-love"],
           "name": "Zouk DX7 Synth Stabs",
           "family": "Synth",
           "category": "groove",
@@ -309,7 +309,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "zouk-snare",
           "worldId": "zouk",
-          "styleIds": ["zouk-beton"],
+          "styleIds": ["zouk-zouk-beton"],
           "name": "Zouk Snare Rimshot",
           "family": "Beat",
           "category": "groove",
@@ -426,7 +426,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "zouk-horn-stabs",
           "worldId": "zouk",
-          "styleIds": ["zouk-beton"],
+          "styleIds": ["zouk-zouk-beton"],
           "name": "Kassav Horn Section Stabs",
           "family": "Brass",
           "category": "groove",
@@ -564,14 +564,14 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "zouk-comp-12",
           "worldId": "zouk",
-          "styleIds": ["zouk-beton"],
+          "styleIds": ["zouk-zouk-beton"],
           "name": "Zouk Love Comping",
           "family": "Zouk Love",
           "category": "groove",
           "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
           "tags": [
             "zouk",
-            "zouk-love",
+            "zouk-zouk-love",
             "comp",
             "catalog-v2"
           ],
@@ -717,7 +717,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "provenance": "GenreDAW catalog rebuild from existing Zouk world data; generated to cover missing musical functions without runtime AI.",
           "authenticityTags": [
             "zouk",
-            "zouk-love"
+            "zouk-zouk-love"
           ],
           "danceTags": [
             "listening",
@@ -731,7 +731,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "zouk-verse-14",
           "worldId": "zouk",
-          "styleIds": ["zouk-beton"],
+          "styleIds": ["zouk-zouk-beton"],
           "name": "Hook Verse Variation",
           "family": "Hook",
           "category": "groove",

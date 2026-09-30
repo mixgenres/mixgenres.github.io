@@ -4,7 +4,7 @@ export const KIZOMBA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
   {
           "id": "kizomba-dikanza-scraper",
           "worldId": "kizomba",
-          "styleIds": ["kizomba-semba"],
+          "styleIds": ["kizomba-semba-playful"],
           "name": "Dikanza Scraper",
           "family": "Percussion",
           "category": "cadence",

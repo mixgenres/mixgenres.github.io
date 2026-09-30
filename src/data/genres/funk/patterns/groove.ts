@@ -4,7 +4,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "funk-ghost-snares",
           "worldId": "funk",
-          "styleIds": ["funk-pfunk-neworleans"],
+          "styleIds": ["funk-p-funk"],
           "name": "Ghost Snares",
           "family": "Drums",
           "category": "groove",
@@ -168,7 +168,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "funk-clavinet",
           "worldId": "funk",
-          "styleIds": ["funk-pfunk-neworleans"],
+          "styleIds": ["funk-p-funk"],
           "name": "Clavinet Sync",
           "family": "Keys",
           "category": "groove",
@@ -304,7 +304,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "funk-horn-section",
           "worldId": "funk",
-          "styleIds": ["funk-pfunk-neworleans"],
+          "styleIds": ["funk-p-funk"],
           "name": "Horn Section Hits",
           "family": "Brass",
           "category": "groove",
@@ -424,7 +424,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "funk-soul-bass",
           "worldId": "funk",
-          "styleIds": ["soul-motown-neosoul"],
+          "styleIds": ["soul-neo-soul"],
           "name": "Motown Bass",
           "family": "Bass",
           "category": "groove",
@@ -569,7 +569,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "funk-hihat-open",
           "worldId": "funk",
-          "styleIds": ["funk-pfunk-neworleans"],
+          "styleIds": ["funk-p-funk"],
           "name": "Open Hi-Hat",
           "family": "Drums",
           "category": "groove",
@@ -696,7 +696,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "funk-neo-soul-beat",
           "worldId": "funk",
-          "styleIds": ["soul-motown-neosoul"],
+          "styleIds": ["soul-neo-soul"],
           "name": "Neo-Soul Drag",
           "family": "Drums",
           "category": "groove",
@@ -823,7 +823,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "funk-wah-guitar",
           "worldId": "funk",
-          "styleIds": ["funk-pfunk-neworleans"],
+          "styleIds": ["funk-p-funk"],
           "name": "Wah-Wah Guitar",
           "family": "Guitar",
           "category": "groove",
@@ -986,7 +986,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "funk-comp-16",
           "worldId": "funk",
-          "styleIds": ["funk-pfunk-neworleans"],
+          "styleIds": ["funk-p-funk"],
           "name": "Clav Comping",
           "family": "Clav",
           "category": "groove",

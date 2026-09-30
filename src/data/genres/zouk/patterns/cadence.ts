@@ -4,7 +4,7 @@ export const ZOUK_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
   {
           "id": "zouk-shaker",
           "worldId": "zouk",
-          "styleIds": ["zouk-love"],
+          "styleIds": ["zouk-zouk-love"],
           "name": "Zouk Shaker",
           "family": "Percussion",
           "category": "cadence",

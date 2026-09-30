@@ -39,6 +39,7 @@ export const electric_guitar: InstrumentDef = {
     tuningName: "E Standard Electric",
     courses: 1,
     frets: 22,
+    maxFretStretch: 4,
     openStrings: [
       {
         name: "E2",

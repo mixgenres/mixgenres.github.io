@@ -4,7 +4,7 @@ export const SWING_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
   {
           "id": "swing-call-11",
           "worldId": "swing",
-          "styleIds": ["swing-big-band"],
+          "styleIds": ["swing-big-band-swing"],
           "name": "La Pompe Response",
           "family": "La Pompe",
           "category": "interactionPattern",

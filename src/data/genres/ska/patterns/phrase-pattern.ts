@@ -4,7 +4,7 @@ export const SKA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
   {
           "id": "sk-walking-bass",
           "worldId": "ska",
-          "styleIds": ["ska-first-wave"],
+          "styleIds": ["ska-trad-ska"],
           "name": "Ska Walking Bass",
           "family": "Ska Bass",
           "category": "phrasePattern",

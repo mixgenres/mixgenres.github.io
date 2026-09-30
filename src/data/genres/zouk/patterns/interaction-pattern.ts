@@ -4,7 +4,7 @@ export const ZOUK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
   {
           "id": "zouk-call-10",
           "worldId": "zouk",
-          "styleIds": ["zouk-beton"],
+          "styleIds": ["zouk-zouk-beton"],
           "name": "Tarraxinha Response",
           "family": "Tarraxinha",
           "category": "interactionPattern",

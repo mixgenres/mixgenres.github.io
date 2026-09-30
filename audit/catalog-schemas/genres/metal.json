@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "id": "metal",
+  "name": "Metal",
+  "family": "Heavy / Amplified",
+  "description": "The sonic power of Metal: Iron",
+  "substyles": [
+    "Heavy Metal",
+    "Thrash",
+    "Death Metal",
+    "Black Metal",
+    "Power Metal",
+    "Doom Metal",
+    "Sludge",
+    "Progressive Metal"
+  ],
+  "styleIds": [
+    "metal-heavy-metal",
+    "metal-thrash",
+    "metal-death-metal",
+    "metal-black-metal",
+    "metal-power-metal",
+    "metal-doom-metal",
+    "metal-sludge",
+    "metal-progressive-metal"
+  ],
+  "patternIds": [
+    "metal-gallop-riff",
+    "metal-djent-chug",
+    "metal-blast-beat",
+    "metal-breakdown",
+    "metal-djent-sync",
+    "metal-clean-arp",
+    "metal-bass-gallop",
+    "metal-prog-odd-meter",
+    "metal-groove-metal",
+    "metal-phrase-10",
+    "metal-call-11",
+    "metal-anchor-12",
+    "metal-comp-13",
+    "metal-intro-14",
+    "metal-verse-15",
+    "metal-chorus-16",
+    "metal--phrasing"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "metal-heavy-metal",
+      "name": "Heavy Metal",
+      "keySubstyles": [
+        "Traditional Heavy Metal",
+        "NWOBHM"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "overdrive-guitar",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "metal-thrash",
+      "name": "Thrash",
+      "keySubstyles": [
+        "Bay Area Thrash",
+        "Teutonic Thrash"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "overdrive-guitar",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "metal-death-metal",
+      "name": "Death Metal",
+      "keySubstyles": [
+        "Florida Death Metal",
+        "Stockholm Sound (HM-2)",
+        "Technical Death Metal"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "overdrive-guitar",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "metal-black-metal",
+      "name": "Black Metal",
+      "keySubstyles": [
+        "Second Wave Norwegian Black Metal",
+        "Atmospheric Black Metal"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "drums",
+        "bass",
+        "overdrive-guitar",
+        "synth"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "metal-power-metal",
+      "name": "Power Metal",
+      "keySubstyles": [
+        "European Power Metal",
+        "Symphonic Power Metal"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "drums",
+        "bass",
+        "synth",
+        "overdrive-guitar"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "metal-doom-metal",
+      "name": "Doom Metal",
+      "keySubstyles": [
+        "Epic Doom Metal",
+        "Stoner Doom"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "overdrive-guitar",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "metal-sludge",
+      "name": "Sludge",
+      "keySubstyles": [
+        "NOLA Sludge Metal",
+        "Southern Sludge"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "overdrive-guitar",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "metal-progressive-metal",
+      "name": "Progressive Metal",
+      "keySubstyles": [
+        "Djent",
+        "Symphonic Prog Metal",
+        "Technical Prog"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "synth",
+        "overdrive-guitar"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "metal-starter"
+}

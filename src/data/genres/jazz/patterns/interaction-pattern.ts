@@ -4,7 +4,7 @@ export const JAZZ_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
   {
           "id": "jazz-call-14",
           "worldId": "jazz",
-          "styleIds": ["jazz-swing-bebop"],
+          "styleIds": ["jazz-bebop"],
           "name": "Horn Head & Solo Phrase",
           "family": "Horn Head",
           "category": "interactionPattern",

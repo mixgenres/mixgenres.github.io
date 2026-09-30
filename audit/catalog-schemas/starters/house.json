@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 1,
+  "id": "house-starter",
+  "genreId": "house",
+  "genreName": "House",
+  "styleId": "house-peak-time",
+  "styleName": "Peak Time",
+  "styleDescription": "Pounding 909 • Big Room Drop",
+  "bpm": 133,
+  "meter": "4/4",
+  "regions": [
+    {
+      "id": "r0",
+      "name": "Intro",
+      "type": "intro",
+      "genreId": "house",
+      "styleId": "house-peak-time",
+      "chords": [
+        "Fm",
+        "Fm",
+        "Fm",
+        "Fm"
+      ]
+    },
+    {
+      "id": "r1",
+      "name": "Groove",
+      "type": "groove",
+      "genreId": "house",
+      "styleId": "house-peak-time",
+      "chords": [
+        "Fm",
+        "Fm",
+        "C#",
+        "C7"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "Breakdown",
+      "type": "breakdown",
+      "genreId": "house",
+      "styleId": "house-peak-time",
+      "chords": [
+        "Fm",
+        "Fm",
+        "Fm",
+        "Fm"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "Drop",
+      "type": "drop",
+      "genreId": "house",
+      "styleId": "house-peak-time",
+      "chords": [
+        "Fm",
+        "Fm",
+        "Fm",
+        "Fm"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Groove",
+      "type": "groove",
+      "genreId": "house",
+      "styleId": "house-peak-time",
+      "chords": [
+        "Fm",
+        "Fm",
+        "C#",
+        "C7"
+      ]
+    },
+    {
+      "id": "r5",
+      "name": "Outro",
+      "type": "outro",
+      "genreId": "house",
+      "styleId": "house-peak-time",
+      "chords": [
+        "Fm",
+        "Fm",
+        "Fm",
+        "Fm"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "v0",
+      "instrumentId": "drums",
+      "instrumentName": "Standard Drum Kit",
+      "role": "percussion",
+      "patternIds": [
+        "house--ht-four-floor",
+        "house--ht-12-techno-clap-backbeat",
+        "house--ht-06-four-on-the-floor-kick"
+      ],
+      "noteCount": 132,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "choke",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4337": 7,
+        "4607": 116,
+        "12200": 9
+      }
+    },
+    {
+      "id": "v1",
+      "instrumentId": "synth",
+      "instrumentName": "Synth",
+      "role": "lead",
+      "patternIds": [
+        "house--house-four-floor",
+        "house--house-offbeat-hat"
+      ],
+      "noteCount": 44,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "6655": 38,
+        "27646": 6
+      }
+    },
+    {
+      "id": "v2",
+      "instrumentId": "sub-bass",
+      "instrumentName": "Sub bass",
+      "role": "bass",
+      "patternIds": [
+        "house--ht-acid-303",
+        "house--house-four-floor",
+        "house--house-offbeat-hat"
+      ],
+      "noteCount": 140,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 42,
+        "6655": 9,
+        "44655": 89
+      }
+    },
+    {
+      "id": "v3",
+      "instrumentId": "sampler",
+      "instrumentName": "Sampler",
+      "role": "lead",
+      "patternIds": [
+        "house--house-offbeat-hat",
+        "house--ht-10-detroit-sequence",
+        "house--ht-techno-sequence",
+        "house--house-four-floor"
+      ],
+      "noteCount": 44,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 8,
+        "6655": 36
+      }
+    },
+    {
+      "id": "v4",
+      "instrumentId": "noise-sweep",
+      "instrumentName": "Noise sweep",
+      "role": "effect",
+      "patternIds": [
+        "house--house-offbeat-hat",
+        "house--house-four-floor",
+        "house--ht-13-riser-build"
+      ],
+      "noteCount": 43,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "6655": 41,
+        "49055": 2
+      }
+    },
+    {
+      "id": "v5",
+      "instrumentId": "voice",
+      "instrumentName": "Synth voice",
+      "role": "voice",
+      "patternIds": [
+        "house--house-four-floor",
+        "house--house-offbeat-hat"
+      ],
+      "noteCount": 44,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 15,
+        "6655": 29
+      }
+    },
+    {
+      "id": "v6",
+      "instrumentId": "bass",
+      "instrumentName": "Electric Bass Guitar",
+      "role": "bass",
+      "patternIds": [
+        "house--house-offbeat-hat",
+        "house--house-four-floor"
+      ],
+      "noteCount": 148,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "slap"
+      ],
+      "gestureCounts": {
+        "6655": 9,
+        "44655": 37,
+        "49857": 102
+      }
+    },
+    {
+      "id": "v7",
+      "instrumentId": "piano",
+      "instrumentName": "Acoustic Grand Piano",
+      "role": "harmony",
+      "patternIds": [
+        "tango-arrastre",
+        "house--ht-09-house-chord-stab",
+        "house--house-four-floor",
+        "house--house-offbeat-hat"
+      ],
+      "noteCount": 451,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "marcato",
+        "arrastre",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 36,
+        "6655": 51,
+        "8118": 229,
+        "8526": 9,
+        "19949": 9,
+        "21063": 117
+      }
+    }
+  ],
+  "usedPatternIds": [
+    "house--ht-four-floor",
+    "house--ht-12-techno-clap-backbeat",
+    "house--ht-06-four-on-the-floor-kick",
+    "house--house-four-floor",
+    "house--house-offbeat-hat",
+    "house--ht-acid-303",
+    "house--ht-10-detroit-sequence",
+    "house--ht-techno-sequence",
+    "house--ht-13-riser-build",
+    "tango-arrastre",
+    "house--ht-09-house-chord-stab"
+  ],
+  "performance": {
+    "durationSeconds": 64.96240601503763,
+    "noteCount": 1046,
+    "trackCount": 8,
+    "tracksWithNoNotes": []
+  }
+}

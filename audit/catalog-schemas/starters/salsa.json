@@ -1,0 +1,361 @@
+{
+  "schemaVersion": 1,
+  "id": "salsa-starter",
+  "genreId": "salsa",
+  "genreName": "Salsa",
+  "styleId": "salsa-mambo",
+  "styleName": "Mambo",
+  "styleDescription": "Big-band arrangement with a 2-3 clave.",
+  "bpm": 200,
+  "meter": "4/4",
+  "regions": [
+    {
+      "id": "r0",
+      "name": "Intro",
+      "type": "intro",
+      "genreId": "salsa",
+      "styleId": "salsa-mambo",
+      "chords": [
+        "Gm",
+        "D7",
+        "Gm",
+        "D7"
+      ]
+    },
+    {
+      "id": "r1",
+      "name": "Son",
+      "type": "son",
+      "genreId": "salsa",
+      "styleId": "salsa-mambo",
+      "chords": [
+        "Gm",
+        "Cm",
+        "D7",
+        "Gm",
+        "Gm",
+        "Cm",
+        "D7",
+        "Gm"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "Coro",
+      "type": "coro",
+      "genreId": "salsa",
+      "styleId": "salsa-mambo",
+      "chords": [
+        "D7",
+        "D7",
+        "Gm",
+        "Gm"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "Mambo",
+      "type": "mambo",
+      "genreId": "salsa",
+      "styleId": "salsa-mambo",
+      "chords": [
+        "Gm",
+        "Cm",
+        "D7",
+        "Gm",
+        "Gm",
+        "Cm",
+        "D7",
+        "Gm"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Solo",
+      "type": "solo",
+      "genreId": "salsa",
+      "styleId": "salsa-mambo",
+      "chords": [
+        "Gm",
+        "Cm",
+        "D7",
+        "Gm",
+        "Gm",
+        "Cm",
+        "D7",
+        "Gm"
+      ]
+    },
+    {
+      "id": "r5",
+      "name": "Mambo",
+      "type": "mambo",
+      "genreId": "salsa",
+      "styleId": "salsa-mambo",
+      "chords": [
+        "Gm",
+        "Cm",
+        "D7",
+        "Gm",
+        "Gm",
+        "Cm",
+        "D7",
+        "Gm"
+      ]
+    },
+    {
+      "id": "r6",
+      "name": "Cierre",
+      "type": "cierre",
+      "genreId": "salsa",
+      "styleId": "salsa-mambo",
+      "chords": [
+        "Gm",
+        "D7",
+        "Gm",
+        "D7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "v0",
+      "instrumentId": "brass",
+      "instrumentName": "Brass section",
+      "role": "harmony",
+      "patternIds": [
+        "afro-conga-tumbao",
+        "afro-mambo-horn-hits"
+      ],
+      "noteCount": 155,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 20,
+        "8526": 13,
+        "44655": 110,
+        "50696": 12
+      }
+    },
+    {
+      "id": "v1",
+      "instrumentId": "timbales",
+      "instrumentName": "Timbales",
+      "role": "percussion",
+      "patternIds": [
+        "afro-timbal-cascara",
+        "salsa-campana",
+        "afro-conga-tumbao"
+      ],
+      "noteCount": 353,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "choke",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4337": 290,
+        "4607": 39,
+        "9363": 12,
+        "44655": 12
+      }
+    },
+    {
+      "id": "v2",
+      "instrumentId": "congas",
+      "instrumentName": "Congas (Tumbadoras)",
+      "role": "percussion",
+      "patternIds": [
+        "afro-clave-son-23",
+        "salsa-clave-32",
+        "salsa-timbal-bell",
+        "afro-timbal-cascara",
+        "afro-conga-tumbao"
+      ],
+      "noteCount": 306,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "slap",
+        "mute"
+      ],
+      "gestureCounts": {
+        "4337": 12,
+        "5227": 48,
+        "11239": 15,
+        "12200": 29,
+        "25283": 100,
+        "26267": 60,
+        "36622": 23,
+        "45567": 19
+      }
+    },
+    {
+      "id": "v3",
+      "instrumentId": "piano",
+      "instrumentName": "Acoustic Grand Piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-bass-tumbao"
+      ],
+      "noteCount": 270,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "marcato",
+        "arrastre",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 16,
+        "8526": 12,
+        "15957": 12,
+        "32577": 12,
+        "41706": 12,
+        "44655": 206
+      }
+    },
+    {
+      "id": "v4",
+      "instrumentId": "bass",
+      "instrumentName": "Electric Bass Guitar",
+      "role": "bass",
+      "patternIds": [
+        "afro-bass-tumbao"
+      ],
+      "noteCount": 181,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4607": 6,
+        "5227": 8,
+        "6655": 56,
+        "12200": 41,
+        "49857": 70
+      }
+    },
+    {
+      "id": "v5",
+      "instrumentId": "voice",
+      "instrumentName": "Synth voice",
+      "role": "voice",
+      "patternIds": [
+        "afro-mambo-horn-hits",
+        "gospel--gospel-shout-vamp"
+      ],
+      "noteCount": 79,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 24,
+        "6655": 49,
+        "45724": 6
+      }
+    },
+    {
+      "id": "v6",
+      "instrumentId": "bongos",
+      "instrumentName": "Bongos",
+      "role": "percussion",
+      "patternIds": [
+        "salsa-clave-32",
+        "afro-conga-tumbao",
+        "salsa-campana"
+      ],
+      "noteCount": 298,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "slap"
+      ],
+      "gestureCounts": {
+        "4337": 78,
+        "4607": 12,
+        "5227": 171,
+        "12200": 25,
+        "44655": 12
+      }
+    },
+    {
+      "id": "v7",
+      "instrumentId": "claves",
+      "instrumentName": "Claves",
+      "role": "percussion",
+      "patternIds": [
+        "salsa-campana",
+        "salsa-timbal-bell",
+        "afro-conga-tumbao",
+        "afro-clave-son-23",
+        "afro-timbal-cascara"
+      ],
+      "noteCount": 349,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4337": 276,
+        "4607": 50,
+        "44655": 23
+      }
+    }
+  ],
+  "usedPatternIds": [
+    "afro-conga-tumbao",
+    "afro-mambo-horn-hits",
+    "afro-timbal-cascara",
+    "salsa-campana",
+    "afro-clave-son-23",
+    "salsa-clave-32",
+    "salsa-timbal-bell",
+    "afro-bass-tumbao",
+    "gospel--gospel-shout-vamp"
+  ],
+  "performance": {
+    "durationSeconds": 57.60000000000005,
+    "noteCount": 1991,
+    "trackCount": 8,
+    "tracksWithNoNotes": []
+  }
+}

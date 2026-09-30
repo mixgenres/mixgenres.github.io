@@ -4,7 +4,7 @@ export const FOLK_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
   {
           "id": "folk-strum-sync",
           "worldId": "folk",
-          "styleIds": ["folk-singer-songwriter"],
+          "styleIds": ["folk-indie-folk"],
           "name": "Syncopated Strum",
           "family": "Strumming",
           "category": "cadence",

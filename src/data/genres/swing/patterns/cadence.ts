@@ -4,7 +4,7 @@ export const SWING_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
   {
           "id": "swing-2-feel",
           "worldId": "swing",
-          "styleIds": ["swing-big-band"],
+          "styleIds": ["swing-big-band-swing"],
           "name": "2-Feel Bass",
           "family": "Bass",
           "category": "cadence",

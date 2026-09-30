@@ -1,0 +1,353 @@
+{
+  "schemaVersion": 1,
+  "id": "cumbia-starter",
+  "genreId": "cumbia",
+  "genreName": "Cumbia",
+  "styleId": "cumbia-colombiana",
+  "styleName": "Cumbia Colombiana",
+  "styleDescription": "Cumbia Colombiana: guache/guacharaca motor, llamador pulse, alegre repiques and melodic gaita/accordion",
+  "bpm": 96,
+  "meter": "2/4",
+  "regions": [
+    {
+      "id": "r0",
+      "name": "Introducción",
+      "type": "introducción",
+      "genreId": "cumbia",
+      "styleId": "cumbia-colombiana",
+      "chords": [
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Am"
+      ]
+    },
+    {
+      "id": "r1",
+      "name": "Tema",
+      "type": "tema",
+      "genreId": "cumbia",
+      "styleId": "cumbia-colombiana",
+      "chords": [
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Am"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "Pregón",
+      "type": "pregón",
+      "genreId": "cumbia",
+      "styleId": "cumbia-colombiana",
+      "chords": [
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Am"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "Tema",
+      "type": "tema",
+      "genreId": "cumbia",
+      "styleId": "cumbia-colombiana",
+      "chords": [
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Am"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Mambo",
+      "type": "mambo",
+      "genreId": "cumbia",
+      "styleId": "cumbia-colombiana",
+      "chords": [
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Am"
+      ]
+    },
+    {
+      "id": "r5",
+      "name": "Cierre",
+      "type": "cierre",
+      "genreId": "cumbia",
+      "styleId": "cumbia-colombiana",
+      "chords": [
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Am"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "v0",
+      "instrumentId": "accordion",
+      "instrumentName": "Accordion",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "hip-hop-sampled-keys",
+        "tango-piano-chumba",
+        "zouk-bridge-16",
+        "cu-15-cumbia-final-tag"
+      ],
+      "noteCount": 235,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 17,
+        "6655": 123,
+        "44655": 95
+      }
+    },
+    {
+      "id": "v1",
+      "instrumentId": "drums",
+      "instrumentName": "Standard Drum Kit",
+      "role": "percussion",
+      "patternIds": [
+        "cu-14-cumbia-stop-break",
+        "cumbia-guiro"
+      ],
+      "noteCount": 116,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "choke",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4337": 11,
+        "12200": 105
+      }
+    },
+    {
+      "id": "v2",
+      "instrumentId": "hand-percussion",
+      "instrumentName": "Hand percussion",
+      "role": "percussion",
+      "patternIds": [
+        "cumbia-guiro"
+      ],
+      "noteCount": 226,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4337": 27,
+        "12200": 193,
+        "44655": 6
+      }
+    },
+    {
+      "id": "v3",
+      "instrumentId": "bass",
+      "instrumentName": "Electric Bass Guitar",
+      "role": "bass",
+      "patternIds": [
+        "cu-09-cumbia-guitar-offbeat",
+        "cu-06-cumbia-bass-tumbao",
+        "cu-cumbia-bass"
+      ],
+      "noteCount": 204,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4607": 17,
+        "5227": 4,
+        "6655": 10,
+        "12200": 10,
+        "44655": 163
+      }
+    },
+    {
+      "id": "v4",
+      "instrumentId": "flute",
+      "instrumentName": "Concert Flute",
+      "role": "melody",
+      "patternIds": [
+        "flam-solea-12beat",
+        "cu-cumbia-bass",
+        "cu-08-guacharaca-scrape",
+        "cu-13-cumbia-call-and-response"
+      ],
+      "noteCount": 141,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "vibrato",
+        "bend"
+      ],
+      "gestureCounts": {
+        "4607": 8,
+        "6655": 12,
+        "8118": 47,
+        "44655": 66,
+        "48234": 8
+      }
+    },
+    {
+      "id": "v5",
+      "instrumentId": "voice",
+      "instrumentName": "Synth voice",
+      "role": "voice",
+      "patternIds": [
+        "ska-horn-stabs",
+        "cu-cumbia-drum",
+        "gospel-choir-response",
+        "gospel-shout-vamp",
+        "tango-yumba",
+        "elec-breakbeat-response"
+      ],
+      "noteCount": 121,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 75,
+        "6655": 33,
+        "45724": 7,
+        "48234": 4,
+        "50696": 2
+      }
+    },
+    {
+      "id": "v6",
+      "instrumentId": "guacharaca",
+      "instrumentName": "Guacharaca",
+      "role": "percussion",
+      "patternIds": [
+        "cu-guacharaca",
+        "cu-08-guacharaca-scrape"
+      ],
+      "noteCount": 381,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4337": 40,
+        "4607": 10,
+        "12200": 321,
+        "44655": 10
+      }
+    },
+    {
+      "id": "v7",
+      "instrumentId": "tambora",
+      "instrumentName": "Tambora",
+      "role": "percussion",
+      "patternIds": [
+        "cumbia-guiro",
+        "cu-12-cumbia-maraca-layer"
+      ],
+      "noteCount": 243,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 9,
+        "12200": 234
+      }
+    }
+  ],
+  "usedPatternIds": [
+    "afro-amapiano-pad",
+    "hip-hop-sampled-keys",
+    "tango-piano-chumba",
+    "zouk-bridge-16",
+    "cu-15-cumbia-final-tag",
+    "cu-14-cumbia-stop-break",
+    "cumbia-guiro",
+    "cu-09-cumbia-guitar-offbeat",
+    "cu-06-cumbia-bass-tumbao",
+    "cu-cumbia-bass",
+    "flam-solea-12beat",
+    "cu-08-guacharaca-scrape",
+    "cu-13-cumbia-call-and-response",
+    "ska-horn-stabs",
+    "cu-cumbia-drum",
+    "gospel-choir-response",
+    "gospel-shout-vamp",
+    "tango-yumba",
+    "elec-breakbeat-response",
+    "cu-guacharaca",
+    "cu-12-cumbia-maraca-layer"
+  ],
+  "performance": {
+    "durationSeconds": 50,
+    "noteCount": 1667,
+    "trackCount": 8,
+    "tracksWithNoNotes": []
+  }
+}

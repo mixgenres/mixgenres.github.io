@@ -4,7 +4,7 @@ export const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
   {
           "id": "kizomba-intro-13",
           "worldId": "kizomba",
-          "styleIds": ["kizomba-semba"],
+          "styleIds": ["kizomba-semba-playful"],
           "name": "Drop Intro",
           "family": "Drop",
           "category": "sectionPattern",
@@ -238,7 +238,7 @@ export const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
   {
           "id": "kizomba-chorus-15",
           "worldId": "kizomba",
-          "styleIds": ["kizomba-semba"],
+          "styleIds": ["kizomba-semba-playful"],
           "name": "Kizomba Bass Chorus Lift",
           "family": "Kizomba Bass",
           "category": "sectionPattern",
@@ -481,7 +481,7 @@ export const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
   {
           "id": "kizomba-bridge-16",
           "worldId": "kizomba",
-          "styleIds": ["kizomba-semba"],
+          "styleIds": ["kizomba-semba-playful"],
           "name": "Semba Bridge",
           "family": "Semba",
           "category": "sectionPattern",

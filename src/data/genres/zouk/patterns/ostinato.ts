@@ -4,7 +4,7 @@ export const ZOUK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "zouk-bass-movement",
           "worldId": "zouk",
-          "styleIds": ["zouk-beton"],
+          "styleIds": ["zouk-zouk-beton"],
           "name": "Zouk Syncopated Bass Movement",
           "family": "Zouk Basslines",
           "category": "ostinato",
@@ -155,7 +155,7 @@ export const ZOUK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "zouk-guitar-skank-chawa",
           "worldId": "zouk",
-          "styleIds": ["zouk-love"],
+          "styleIds": ["zouk-zouk-love"],
           "name": "Chawa Guitar Skank",
           "family": "Zouk Guitar Chawa",
           "category": "ostinato",
@@ -300,7 +300,7 @@ export const ZOUK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "zouk-anchor-11",
           "worldId": "zouk",
-          "styleIds": ["zouk-beton"],
+          "styleIds": ["zouk-zouk-beton"],
           "name": "Chawa Anchor",
           "family": "Chawa",
           "category": "ostinato",

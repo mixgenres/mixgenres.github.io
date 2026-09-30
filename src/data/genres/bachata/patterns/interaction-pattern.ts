@@ -4,7 +4,7 @@ export const BACHATA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
   {
           "id": "bachata-call-11",
           "worldId": "bachata",
-          "styleIds": ["latin-bachata"],
+          "styleIds": ["bachata-tradicional"],
           "name": "Majao Response",
           "family": "Majao",
           "category": "interactionPattern",

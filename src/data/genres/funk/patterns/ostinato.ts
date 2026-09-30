@@ -4,7 +4,7 @@ export const FUNK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "funk-the-one-bass",
           "worldId": "funk",
-          "styleIds": ["funk-pfunk-neworleans"],
+          "styleIds": ["funk-p-funk"],
           "name": "\"The One\" 16th-Note Syncopated Bass",
           "family": "Funk Basslines",
           "category": "ostinato",
@@ -173,7 +173,7 @@ export const FUNK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "funk-chicken-scratch-guitar",
           "worldId": "funk",
-          "styleIds": ["funk-pfunk-neworleans"],
+          "styleIds": ["funk-p-funk"],
           "name": "Chicken-Scratch 9th Chords (Muted 16th Strum)",
           "family": "Funk Guitar",
           "category": "ostinato",
@@ -390,7 +390,7 @@ export const FUNK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "funk-anchor-15",
           "worldId": "funk",
-          "styleIds": ["funk-pfunk-neworleans"],
+          "styleIds": ["funk-p-funk"],
           "name": "Pocket Anchor",
           "family": "Pocket",
           "category": "ostinato",

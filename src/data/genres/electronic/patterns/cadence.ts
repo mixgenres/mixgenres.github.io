@@ -4,7 +4,7 @@ export const ELECTRONIC_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
   {
           "id": "elec-techno-rumble",
           "worldId": "electronic",
-          "styleIds": ["electronic-house"],
+          "styleIds": ["electronic-techno"],
           "name": "Techno Rumble",
           "family": "Beat",
           "category": "cadence",

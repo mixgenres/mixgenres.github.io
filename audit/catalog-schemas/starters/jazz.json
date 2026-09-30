@@ -1,0 +1,318 @@
+{
+  "schemaVersion": 1,
+  "id": "jazz-starter",
+  "genreId": "jazz",
+  "genreName": "Jazz",
+  "styleId": "jazz-bebop",
+  "styleName": "Bebop",
+  "styleDescription": "Fast • Chromatic • Virtuosic Rapid",
+  "bpm": 220,
+  "meter": "4/4",
+  "regions": [
+    {
+      "id": "r0",
+      "name": "Head",
+      "type": "head",
+      "genreId": "jazz",
+      "styleId": "jazz-bebop",
+      "chords": [
+        "Fm7",
+        "A#7",
+        "D#maj7",
+        "C7b9"
+      ]
+    },
+    {
+      "id": "r1",
+      "name": "Solo",
+      "type": "solo",
+      "genreId": "jazz",
+      "styleId": "jazz-bebop",
+      "chords": [
+        "Fm7",
+        "A#7",
+        "D#maj7",
+        "C7b9"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "Trading",
+      "type": "trading",
+      "genreId": "jazz",
+      "styleId": "jazz-bebop",
+      "chords": [
+        "Gm7",
+        "C7",
+        "Fmaj7",
+        "Fmaj7"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "Solo",
+      "type": "solo",
+      "genreId": "jazz",
+      "styleId": "jazz-bebop",
+      "chords": [
+        "Gm7",
+        "C7",
+        "Fmaj7",
+        "Fmaj7"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Head",
+      "type": "head",
+      "genreId": "jazz",
+      "styleId": "jazz-bebop",
+      "chords": [
+        "Fm7",
+        "A#7",
+        "D#maj7",
+        "C7b9"
+      ]
+    },
+    {
+      "id": "r5",
+      "name": "Tag",
+      "type": "tag",
+      "genreId": "jazz",
+      "styleId": "jazz-bebop",
+      "chords": [
+        "Fm7",
+        "A#7",
+        "D#maj7",
+        "C7b9"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "v0",
+      "instrumentId": "alto-sax",
+      "instrumentName": "Alto Saxophone",
+      "role": "lead",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 382,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "6655": 44,
+        "8118": 73,
+        "8526": 15,
+        "12200": 17,
+        "29346": 41,
+        "48234": 192
+      }
+    },
+    {
+      "id": "v1",
+      "instrumentId": "trumpet",
+      "instrumentName": "Bb Trumpet",
+      "role": "lead",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 396,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "vibrato",
+        "mute"
+      ],
+      "gestureCounts": {
+        "6655": 39,
+        "12241": 146,
+        "29346": 35,
+        "50141": 102,
+        "50696": 74
+      }
+    },
+    {
+      "id": "v2",
+      "instrumentId": "piano",
+      "instrumentName": "Acoustic Grand Piano",
+      "role": "harmony",
+      "patternIds": [
+        "jazz-piano-red-garland",
+        "jazz-piano-comping"
+      ],
+      "noteCount": 917,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "marcato",
+        "arrastre",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 94,
+        "6655": 75,
+        "8118": 261,
+        "44655": 487
+      }
+    },
+    {
+      "id": "v3",
+      "instrumentId": "upright-bass",
+      "instrumentName": "Upright Double Bass",
+      "role": "bass",
+      "patternIds": [
+        "jazz-piano-comping",
+        "jazz-walking-bass"
+      ],
+      "noteCount": 401,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "arrastre",
+        "pizzicato",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 123,
+        "6655": 199,
+        "12200": 47,
+        "38280": 17,
+        "44655": 15
+      }
+    },
+    {
+      "id": "v4",
+      "instrumentId": "drums",
+      "instrumentName": "Standard Drum Kit",
+      "role": "percussion",
+      "patternIds": [
+        "jazz-ride-spangalang",
+        "jazz-snare-comp",
+        "jazz-hihat-2-4",
+        "jazz-ride-broken"
+      ],
+      "noteCount": 265,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "choke",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4337": 17,
+        "4607": 117,
+        "12200": 131
+      }
+    },
+    {
+      "id": "v5",
+      "instrumentId": "ride",
+      "instrumentName": "Ride cymbal",
+      "role": "percussion",
+      "patternIds": [
+        "jazz-ride-spangalang"
+      ],
+      "noteCount": 363,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 346,
+        "44655": 17
+      }
+    },
+    {
+      "id": "v6",
+      "instrumentId": "tenor-sax",
+      "instrumentName": "Bb Tenor Saxophone",
+      "role": "melody",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 371,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 14,
+        "6655": 104,
+        "29346": 44,
+        "48234": 209
+      }
+    },
+    {
+      "id": "v7",
+      "instrumentId": "vibraphone",
+      "instrumentName": "Vibraphone",
+      "role": "harmony",
+      "patternIds": [
+        "jazz-piano-comping"
+      ],
+      "noteCount": 238,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 39,
+        "6655": 83,
+        "44655": 116
+      }
+    }
+  ],
+  "usedPatternIds": [
+    "jazz-horn-swing-phrase",
+    "jazz-piano-red-garland",
+    "jazz-piano-comping",
+    "jazz-walking-bass",
+    "jazz-ride-spangalang",
+    "jazz-snare-comp",
+    "jazz-hihat-2-4",
+    "jazz-ride-broken"
+  ],
+  "performance": {
+    "durationSeconds": 74.18181818181826,
+    "noteCount": 3333,
+    "trackCount": 8,
+    "tracksWithNoNotes": []
+  }
+}

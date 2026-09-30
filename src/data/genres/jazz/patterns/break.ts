@@ -4,7 +4,7 @@ export const JAZZ_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
   {
           "id": "jazz-piano-red-garland",
           "worldId": "jazz",
-          "styleIds": ["jazz-swing-bebop"],
+          "styleIds": ["jazz-bebop"],
           "name": "Block Chords",
           "family": "Piano",
           "category": "break",

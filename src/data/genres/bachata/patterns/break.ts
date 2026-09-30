@@ -4,7 +4,7 @@ export const BACHATA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
   {
           "id": "bachata-bass-majao",
           "worldId": "bachata",
-          "styleIds": ["latin-bachata"],
+          "styleIds": ["bachata-tradicional"],
           "name": "Bass Majao",
           "family": "Bass",
           "category": "break",
