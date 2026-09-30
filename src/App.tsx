@@ -330,7 +330,7 @@ export default function App() {
   }, [song.tracks, song.worldId, song.styleId]);
 
   useEffect(() => {
-    if (!playing) {
+    if (!playbackActive) {
       transportRef.current?.stop();
       stopAudio();
       return;
