@@ -4,7 +4,7 @@ export const COUNTRY_WORLD_PATTERNS_FILL: MusicalPattern[] = [
   {
           "id": "country-boom-chuck",
           "worldId": "country",
-          "styleIds": ["country-honky-tonk"],
+          "styleIds": ["country-honky-tonk", "country-neotraditional"],
           "name": "Boom-Chuck",
           "family": "Rhythm",
           "category": "fill",

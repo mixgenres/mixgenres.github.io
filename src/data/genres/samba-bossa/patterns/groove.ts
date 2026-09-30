@@ -538,5 +538,82 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "difficulty": 2,
           "weight": 0.82,
           "enabled": true
+        },
+  {
+          "id": "sb-bossa-flute-obbligato",
+          "worldId": "samba-bossa",
+          "styleIds": ["samba-bossa-bossa-nova"],
+          "name": "Bossa Flute Obbligato",
+          "family": "Flute",
+          "category": "groove",
+          "description": "Soft, breathy flute countermelody that answers the guitar in the gaps of the bossa clave.",
+          "tags": [
+            "samba-bossa",
+            "bossa-nova",
+            "flute",
+            "obbligato"
+          ],
+          "scopes": [
+            "measure"
+          ],
+          "roles": [
+            "flute"
+          ],
+
+          "approaches": ["melody"],
+          "instruments": [
+            "flute"
+          ],
+          "meter": "4/4",
+          "cycleLength": 1,
+          "subdivisions": 16,
+          "onsetGrid": [
+            0,
+            3,
+            6,
+            10,
+            13
+          ],
+          "accentProfile": [
+            0.85,
+            0.6,
+            0.75,
+            0.7,
+            0.6
+          ],
+          "velocityProfile": [
+            0.8,
+            0.55,
+            0.7,
+            0.65,
+            0.55
+          ],
+          "supportedEnergy": [1, 2, 3],
+          "phrasePosition": [
+            "middle"
+          ],
+          "sectionUsage": [
+            "verse",
+            "chorus"
+          ],
+          "variants": [
+            {
+              "id": "sb-bossa-flute-obbligato-v-sparse",
+              "parentPatternId": "sb-bossa-flute-obbligato",
+              "name": "Bossa Flute Obbligato — sparse variation",
+              "variationType": "sparse",
+              "probability": 0.22,
+              "description": "Keeps only the anchor and the anticipated third-beat entry for a minimal countermelody.",
+              "onsetGrid": [
+            0,
+            6,
+            10
+          ]
+            }
+          ],
+          "tuningSystem": "12-tet",
+          "swingPercentage": 50,
+          "anticipationOffset": 0,
+          "articulations": ["legato"]
         }
 ];

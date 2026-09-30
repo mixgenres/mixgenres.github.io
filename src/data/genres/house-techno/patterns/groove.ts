@@ -4,7 +4,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "ht-four-floor",
           "worldId": "house-techno",
-          "styleIds": ["house-deep"],
+          "styleIds": ["house-deep", "house-techno-melodic-techno"],
           "name": "Four-on-the-Floor Foundation",
           "family": "House Kick",
           "category": "groove",

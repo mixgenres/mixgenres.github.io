@@ -4,7 +4,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_CELL: MusicalPattern[] = [
   {
           "id": "ht-09-house-chord-stab",
           "worldId": "house-techno",
-          "styleIds": ["techno-detroit"],
+          "styleIds": ["techno-detroit", "house-techno-melodic-techno"],
           "name": "House Chord Stab",
           "family": "House",
           "category": "cell",

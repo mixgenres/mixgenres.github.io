@@ -4,7 +4,7 @@ export const FOLK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "folk-fiddle-drone",
           "worldId": "folk",
-          "styleIds": ["folk-bluegrass"],
+          "styleIds": ["folk-bluegrass", "folk-old-time"],
           "name": "Old-Time Fiddle Drone & Shuffle Bow",
           "family": "Fiddle",
           "category": "ostinato",

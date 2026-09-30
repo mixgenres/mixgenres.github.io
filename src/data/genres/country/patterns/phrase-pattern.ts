@@ -4,7 +4,7 @@ export const COUNTRY_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
   {
           "id": "country-phrase-11",
           "worldId": "country",
-          "styleIds": ["country-honky-tonk"],
+          "styleIds": ["country-honky-tonk", "country-neotraditional"],
           "name": "Train Phrase",
           "family": "Train",
           "category": "phrasePattern",

@@ -4,7 +4,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "rd-skank",
           "worldId": "reggae-dub",
-          "styleIds": ["reggae-roots"],
+          "styleIds": ["reggae-roots", "reggae-dub-lovers-rock"],
           "name": "Offbeat Skank",
           "family": "Reggae Skank",
           "category": "ostinato",
@@ -126,7 +126,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "rd-reggae-bass",
           "worldId": "reggae-dub",
-          "styleIds": ["reggae-roots"],
+          "styleIds": ["reggae-roots", "reggae-dub-lovers-rock"],
           "name": "Melodic Reggae Bass",
           "family": "Reggae Bass",
           "category": "ostinato",
@@ -331,5 +331,79 @@ export const REGGAE_DUB_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "difficulty": 2,
           "weight": 0.82,
           "enabled": true
+        },
+  {
+          "id": "rd-lovers-rock-piano-skank",
+          "worldId": "reggae-dub",
+          "styleIds": ["reggae-dub-lovers-rock"],
+          "name": "Lovers Rock Piano Skank",
+          "family": "Piano",
+          "category": "ostinato",
+          "description": "Soft offbeat piano chops that double the guitar skank and add sweetness under a lovers rock vocal.",
+          "tags": [
+            "reggae",
+            "lovers-rock",
+            "piano",
+            "skank"
+          ],
+          "scopes": [
+            "measure"
+          ],
+          "roles": [
+            "keys"
+          ],
+
+          "approaches": ["comping"],
+          "instruments": [
+            "piano",
+            "keys"
+          ],
+          "meter": "4/4",
+          "cycleLength": 1,
+          "subdivisions": 16,
+          "onsetGrid": [
+            2,
+            6,
+            10,
+            14
+          ],
+          "accentProfile": [
+            0.8,
+            0.85,
+            0.8,
+            0.9
+          ],
+          "velocityProfile": [
+            0.7,
+            0.75,
+            0.7,
+            0.8
+          ],
+          "supportedEnergy": [1, 2, 3],
+          "phrasePosition": [
+            "start"
+          ],
+          "sectionUsage": [
+            "verse",
+            "chorus"
+          ],
+          "variants": [
+            {
+              "id": "rd-lovers-rock-piano-skank-v-sparse",
+              "parentPatternId": "rd-lovers-rock-piano-skank",
+              "name": "Lovers Rock Piano Skank — sparse variation",
+              "variationType": "sparse",
+              "probability": 0.22,
+              "description": "Plays only the second and fourth offbeat chops for a lighter comp.",
+              "onsetGrid": [
+            6,
+            14
+          ]
+            }
+          ],
+          "tuningSystem": "12-tet",
+          "swingPercentage": 56,
+          "anticipationOffset": 0,
+          "articulations": ["staccato"]
         }
 ];

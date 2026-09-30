@@ -551,7 +551,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "folk-driving-8ths",
           "worldId": "folk",
-          "styleIds": ["folk-singer-songwriter"],
+          "styleIds": ["folk-singer-songwriter", "folk-old-time"],
           "name": "Driving 8ths",
           "family": "Strumming",
           "category": "groove",
@@ -717,7 +717,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "folk-comp-15",
           "worldId": "folk",
-          "styleIds": ["folk-singer-songwriter"],
+          "styleIds": ["folk-singer-songwriter", "folk-old-time"],
           "name": "Fingerpick Comping",
           "family": "Fingerpick",
           "category": "groove",
@@ -850,7 +850,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "folk-verse-17",
           "worldId": "folk",
-          "styleIds": ["folk-singer-songwriter"],
+          "styleIds": ["folk-singer-songwriter", "folk-old-time"],
           "name": "Banjo Roll Verse Variation",
           "family": "Banjo Roll",
           "category": "groove",

@@ -4,7 +4,7 @@ export const FOLK_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
   {
           "id": "folk-strum-basic",
           "worldId": "folk",
-          "styleIds": ["folk-singer-songwriter"],
+          "styleIds": ["folk-singer-songwriter", "folk-old-time"],
           "name": "Basic Strum",
           "family": "Strumming",
           "category": "break",

@@ -4,7 +4,7 @@ export const HIP_HOP_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
   {
           "id": "hip-hop-call-15",
           "worldId": "hip-hop",
-          "styleIds": ["hip-hop-boom-bap"],
+          "styleIds": ["hip-hop-boom-bap", "hip-hop-lo-fi"],
           "name": "Boom Bap Response",
           "family": "Boom Bap",
           "category": "interactionPattern",

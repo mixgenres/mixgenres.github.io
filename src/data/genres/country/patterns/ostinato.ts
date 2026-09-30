@@ -4,7 +4,7 @@ export const COUNTRY_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "country-anchor-13",
           "worldId": "country",
-          "styleIds": ["country-honky-tonk"],
+          "styleIds": ["country-honky-tonk", "country-neotraditional"],
           "name": "Chicken Pickin Anchor",
           "family": "Chicken Pickin",
           "category": "ostinato",

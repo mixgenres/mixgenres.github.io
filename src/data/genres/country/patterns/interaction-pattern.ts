@@ -4,7 +4,7 @@ export const COUNTRY_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
   {
           "id": "country-call-12",
           "worldId": "country",
-          "styleIds": ["country-honky-tonk"],
+          "styleIds": ["country-honky-tonk", "country-neotraditional"],
           "name": "Nashville Response",
           "family": "Nashville",
           "category": "interactionPattern",

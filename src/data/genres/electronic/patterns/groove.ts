@@ -847,7 +847,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "elec-electro",
           "worldId": "electronic",
-          "styleIds": ["electronic-house"],
+          "styleIds": ["electronic-house", "electronic-synthwave"],
           "name": "Electro 808",
           "family": "Beat",
           "category": "groove",
@@ -998,7 +998,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "elec-ambient",
           "worldId": "electronic",
-          "styleIds": ["electronic-house"],
+          "styleIds": ["electronic-house", "electronic-synthwave"],
           "name": "Ambient Pulse",
           "family": "Synth",
           "category": "groove",
@@ -1115,7 +1115,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "elec-synthwave",
           "worldId": "electronic",
-          "styleIds": ["electronic-house"],
+          "styleIds": ["electronic-house", "electronic-synthwave"],
           "name": "Synthwave 8ths",
           "family": "Bass",
           "category": "groove",
@@ -1286,7 +1286,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "electronic-comp-16",
           "worldId": "electronic",
-          "styleIds": ["electronic-house"],
+          "styleIds": ["electronic-house", "electronic-synthwave"],
           "name": "Drop Comping",
           "family": "Drop",
           "category": "groove",

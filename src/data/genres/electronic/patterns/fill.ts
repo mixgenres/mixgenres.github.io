@@ -4,7 +4,7 @@ export const ELECTRONIC_WORLD_PATTERNS_FILL: MusicalPattern[] = [
   {
           "id": "elec-4onfloor",
           "worldId": "electronic",
-          "styleIds": ["electronic-house"],
+          "styleIds": ["electronic-house", "electronic-synthwave"],
           "name": "Four on the Floor",
           "family": "Beat",
           "category": "fill",

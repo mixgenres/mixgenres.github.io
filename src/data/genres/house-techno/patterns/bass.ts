@@ -4,7 +4,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_BASS: MusicalPattern[] = [
   {
           "id": "ht-08-house-bass-lock",
           "worldId": "house-techno",
-          "styleIds": ["techno-detroit"],
+          "styleIds": ["techno-detroit", "house-techno-melodic-techno"],
           "name": "House Bass Lock",
           "family": "House",
           "category": "bass",

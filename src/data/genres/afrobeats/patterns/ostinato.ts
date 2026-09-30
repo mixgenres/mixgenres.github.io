@@ -4,7 +4,7 @@ export const AFROBEATS_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "afro-highlife-guitar",
           "worldId": "afrobeats",
-          "styleIds": ["afrobeats-afro-pop"],
+          "styleIds": ["afrobeats-afro-pop", "afrobeats-afrobeat"],
           "name": "Highlife Fingerstyle Clean Guitar",
           "family": "Highlife Guitar",
           "category": "ostinato",
@@ -173,7 +173,7 @@ export const AFROBEATS_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "afrobeats-anchor-8",
           "worldId": "afrobeats",
-          "styleIds": ["afrobeats-afro-pop"],
+          "styleIds": ["afrobeats-afro-pop", "afrobeats-afrobeat"],
           "name": "Hook Anchor",
           "family": "Hook",
           "category": "ostinato",

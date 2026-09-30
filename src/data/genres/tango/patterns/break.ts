@@ -4,7 +4,7 @@ export const TANGO_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
   {
           "id": "tango-violin-melody",
           "worldId": "tango",
-          "styleIds": ["tango-tango-tradicional"],
+          "styleIds": ["tango-tango-tradicional", "tango-tango-nuevo"],
           "name": "Violin Legato",
           "family": "Strings",
           "category": "break",

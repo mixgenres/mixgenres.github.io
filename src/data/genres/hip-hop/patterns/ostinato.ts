@@ -136,7 +136,7 @@ export const HIP_HOP_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "hip-hop-anchor-16",
           "worldId": "hip-hop",
-          "styleIds": ["hip-hop-boom-bap"],
+          "styleIds": ["hip-hop-boom-bap", "hip-hop-lo-fi"],
           "name": "Sample Chop Anchor",
           "family": "Sample Chop",
           "category": "ostinato",

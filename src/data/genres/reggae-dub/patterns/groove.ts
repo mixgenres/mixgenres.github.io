@@ -4,7 +4,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "rd-one-drop",
           "worldId": "reggae-dub",
-          "styleIds": ["reggae-roots"],
+          "styleIds": ["reggae-roots", "reggae-dub-lovers-rock"],
           "name": "One-Drop Foundation",
           "family": "Reggae Drums",
           "category": "groove",

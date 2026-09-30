@@ -4,7 +4,7 @@ export const COUNTRY_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
   {
           "id": "country-train",
           "worldId": "country",
-          "styleIds": ["country-honky-tonk"],
+          "styleIds": ["country-honky-tonk", "country-neotraditional"],
           "name": "Train Beat",
           "family": "Beat",
           "category": "break",

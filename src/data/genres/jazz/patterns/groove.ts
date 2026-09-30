@@ -266,7 +266,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "jazz-comping-sync",
           "worldId": "jazz",
-          "styleIds": ["jazz-modal-contemporary"],
+          "styleIds": ["jazz-modal-contemporary", "jazz-hard-bop"],
           "name": "Syncopated Comping",
           "family": "Piano",
           "category": "groove",
@@ -384,7 +384,7 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "jazz-snare-comp",
           "worldId": "jazz",
-          "styleIds": ["jazz-swing-bebop"],
+          "styleIds": ["jazz-swing-bebop", "jazz-hard-bop"],
           "name": "Snare Comping",
           "family": "Drums",
           "category": "groove",

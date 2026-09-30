@@ -153,5 +153,92 @@ export const FOLK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
     
     
           "articulations": ["accented"]
+        },
+  {
+          "id": "folk-flute-reel-lead",
+          "worldId": "folk",
+          "styleIds": ["folk-old-time"],
+          "name": "Flute Reel Lead",
+          "family": "Flute",
+          "category": "phrasePattern",
+          "description": "Driving eighth-note reel line with accented downbeats, as played on flute or whistle over old-time and Celtic rhythm sections.",
+          "tags": [
+            "folk",
+            "celtic",
+            "reel",
+            "flute"
+          ],
+          "scopes": [
+            "measure"
+          ],
+          "roles": [
+            "flute"
+          ],
+
+          "approaches": ["groove"],
+          "instruments": [
+            "flute"
+          ],
+          "meter": "4/4",
+          "cycleLength": 1,
+          "subdivisions": 16,
+          "onsetGrid": [
+            0,
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14
+          ],
+          "accentProfile": [
+            1,
+            0.55,
+            0.8,
+            0.55,
+            0.9,
+            0.55,
+            0.8,
+            0.6
+          ],
+          "velocityProfile": [
+            0.95,
+            0.5,
+            0.75,
+            0.5,
+            0.85,
+            0.5,
+            0.75,
+            0.55
+          ],
+          "supportedEnergy": [2, 3, 4],
+          "phrasePosition": [
+            "start"
+          ],
+          "sectionUsage": [
+            "verse",
+            "chorus"
+          ],
+          "variants": [
+            {
+              "id": "folk-flute-reel-lead-v-sparse",
+              "parentPatternId": "folk-flute-reel-lead",
+              "name": "Flute Reel Lead — sparse variation",
+              "variationType": "sparse",
+              "probability": 0.22,
+              "description": "Drops the offbeat eighths to leave space while keeping the reel pulse.",
+              "onsetGrid": [
+            0,
+            4,
+            8,
+            12
+          ]
+            }
+          ],
+          "tuningSystem": "12-tet",
+          "swingPercentage": 54,
+          "anticipationOffset": 0,
+          "articulations": ["legato"]
         }
 ];

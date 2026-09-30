@@ -4,7 +4,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "country-outlaw",
           "worldId": "country",
-          "styleIds": ["country-honky-tonk"],
+          "styleIds": ["country-honky-tonk", "country-neotraditional"],
           "name": "Outlaw 8ths",
           "family": "Bass",
           "category": "groove",
@@ -426,7 +426,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "country-nashville",
           "worldId": "country",
-          "styleIds": ["country-americana"],
+          "styleIds": ["country-americana", "country-neotraditional"],
           "name": "Nashville Smooth",
           "family": "Beat",
           "category": "groove",
@@ -843,7 +843,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
   {
           "id": "country-comp-14",
           "worldId": "country",
-          "styleIds": ["country-honky-tonk"],
+          "styleIds": ["country-honky-tonk", "country-neotraditional"],
           "name": "Steel Comping",
           "family": "Steel",
           "category": "groove",

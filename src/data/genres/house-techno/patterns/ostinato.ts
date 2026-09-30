@@ -4,7 +4,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "ht-offbeat-hat",
           "worldId": "house-techno",
-          "styleIds": ["house-deep"],
+          "styleIds": ["house-deep", "house-techno-melodic-techno"],
           "name": "Offbeat Hat",
           "family": "House Hats",
           "category": "ostinato",
@@ -125,7 +125,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "ht-house-bass",
           "worldId": "house-techno",
-          "styleIds": ["house-deep"],
+          "styleIds": ["house-deep", "house-techno-melodic-techno"],
           "name": "House Syncopated Bass",
           "family": "House Bass",
           "category": "ostinato",

@@ -4,7 +4,7 @@ export const HIP_HOP_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
   {
           "id": "hiphop-boom-basic",
           "worldId": "hip-hop",
-          "styleIds": ["hip-hop-boom-bap"],
+          "styleIds": ["hip-hop-boom-bap", "hip-hop-lo-fi"],
           "name": "Boom Bap Basic",
           "family": "Beat",
           "category": "sectionPattern",

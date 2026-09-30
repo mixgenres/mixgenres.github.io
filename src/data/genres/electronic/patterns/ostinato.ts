@@ -169,7 +169,7 @@ export const ELECTRONIC_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
   {
           "id": "electronic-anchor-15",
           "worldId": "electronic",
-          "styleIds": ["electronic-house"],
+          "styleIds": ["electronic-house", "electronic-synthwave"],
           "name": "Build Anchor",
           "family": "Build",
           "category": "ostinato",
