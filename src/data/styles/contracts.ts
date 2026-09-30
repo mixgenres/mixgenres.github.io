@@ -479,6 +479,21 @@ const CULTURAL_OVERRIDES: Record<string, Partial<WorldContract>> = {
       mixCharacter: { dryness: 0.55, bassForward: 0.85, width: 0.75, brightness: 0.65, saturationType: 'hard-clip', compressionRatio: 4.5, subHarmonics: 0.75, transientSnap: 0.8 },
     },
   },
+  brazilian: { timbreSpace: { palette: G.brazilian.timbreSpace.palette, production: G.brazilian.timbreSpace.production, mixCharacter: { dryness: 0.72, bassForward: 0.48, width: 0.42, brightness: 0.42, saturationType: 'tape', compressionRatio: 1.6, subHarmonics: 0, transientSnap: 0.25 } } },
+  country: { timbreSpace: { palette: G.country.timbreSpace.palette, production: G.country.timbreSpace.production, mixCharacter: { dryness: 0.78, bassForward: 0.48, width: 0.5, brightness: 0.46, saturationType: 'tape', compressionRatio: 1.8, subHarmonics: 0, transientSnap: 0.3 } } },
+  cumbia: { timbreSpace: { palette: G.cumbia.timbreSpace.palette, production: G.cumbia.timbreSpace.production, mixCharacter: { dryness: 0.72, bassForward: 0.56, width: 0.48, brightness: 0.44, saturationType: 'tape', compressionRatio: 2.2, subHarmonics: 0.05, transientSnap: 0.38 } } },
+  disco: { timbreSpace: { palette: G.disco.timbreSpace.palette, production: G.disco.timbreSpace.production, mixCharacter: { dryness: 0.82, bassForward: 0.62, width: 0.68, brightness: 0.52, saturationType: 'tape', compressionRatio: 3.5, subHarmonics: 0.1, transientSnap: 0.62 } } },
+  'drum-and-bass': { timbreSpace: { palette: G['drum-and-bass'].timbreSpace.palette, production: G['drum-and-bass'].timbreSpace.production, mixCharacter: { dryness: 0.84, bassForward: 0.82, width: 0.68, brightness: 0.56, saturationType: 'tape', compressionRatio: 4.2, subHarmonics: 0.5, transientSnap: 0.68 } } },
+  electronic: { timbreSpace: { palette: G.electronic.timbreSpace.palette, production: G.electronic.timbreSpace.production, mixCharacter: { dryness: 0.72, bassForward: 0.64, width: 0.62, brightness: 0.48, saturationType: 'tape', compressionRatio: 3.0, subHarmonics: 0.3, transientSnap: 0.5 } } },
+  funk: { timbreSpace: { palette: G.funk.timbreSpace.palette, production: G.funk.timbreSpace.production, mixCharacter: { dryness: 0.8, bassForward: 0.62, width: 0.5, brightness: 0.48, saturationType: 'tape', compressionRatio: 2.5, subHarmonics: 0.05, transientSnap: 0.45 } } },
+  gospel: { timbreSpace: { palette: G.gospel.timbreSpace.palette, production: G.gospel.timbreSpace.production, mixCharacter: { dryness: 0.58, bassForward: 0.55, width: 0.52, brightness: 0.46, saturationType: 'tape', compressionRatio: 2.0, subHarmonics: 0, transientSnap: 0.3 } } },
+  kizomba: { timbreSpace: { palette: G.kizomba.timbreSpace.palette, production: G.kizomba.timbreSpace.production, mixCharacter: { dryness: 0.78, bassForward: 0.68, width: 0.5, brightness: 0.4, saturationType: 'tape', compressionRatio: 1.8, subHarmonics: 0.05, transientSnap: 0.25 } } },
+  'r-and-b': { timbreSpace: { palette: G['r-and-b'].timbreSpace.palette, production: G['r-and-b'].timbreSpace.production, mixCharacter: { dryness: 0.68, bassForward: 0.58, width: 0.56, brightness: 0.44, saturationType: 'tape', compressionRatio: 2.4, subHarmonics: 0.05, transientSnap: 0.38 } } },
+  reggae: { timbreSpace: { palette: G.reggae.timbreSpace.palette, production: G.reggae.timbreSpace.production, mixCharacter: { dryness: 0.76, bassForward: 0.62, width: 0.5, brightness: 0.42, saturationType: 'tape', compressionRatio: 1.8, subHarmonics: 0.05, transientSnap: 0.28 } } },
+  ska: { timbreSpace: { palette: G.ska.timbreSpace.palette, production: G.ska.timbreSpace.production, mixCharacter: { dryness: 0.78, bassForward: 0.52, width: 0.55, brightness: 0.5, saturationType: 'tape', compressionRatio: 2.0, subHarmonics: 0, transientSnap: 0.36 } } },
+  soul: { timbreSpace: { palette: G.soul.timbreSpace.palette, production: G.soul.timbreSpace.production, mixCharacter: { dryness: 0.66, bassForward: 0.55, width: 0.52, brightness: 0.44, saturationType: 'tape', compressionRatio: 2.0, subHarmonics: 0, transientSnap: 0.3 } } },
+  timba: { timbreSpace: { palette: G.timba.timbreSpace.palette, production: G.timba.timbreSpace.production, mixCharacter: { dryness: 0.72, bassForward: 0.64, width: 0.56, brightness: 0.48, saturationType: 'tape', compressionRatio: 2.5, subHarmonics: 0.08, transientSnap: 0.45 } } },
+  zouk: { timbreSpace: { palette: G.zouk.timbreSpace.palette, production: G.zouk.timbreSpace.production, mixCharacter: { dryness: 0.62, bassForward: 0.62, width: 0.68, brightness: 0.44, saturationType: 'tape', compressionRatio: 1.8, subHarmonics: 0.08, transientSnap: 0.28 } } },
 };
 
 for (const [id, override] of Object.entries(CULTURAL_OVERRIDES)) {
@@ -504,6 +519,46 @@ for (const [id, override] of Object.entries(CULTURAL_OVERRIDES)) {
 
 export const GENRE_CONTRACTS: Record<string, WorldContract> = G;
 
+const tone = (dryness: number, bassForward: number, width: number, brightness: number, compressionRatio = 1.8, transientSnap = 0.3) => ({
+  dryness, bassForward, width, brightness, saturationType: 'tape' as const,
+  compressionRatio, subHarmonics: 0, transientSnap,
+});
+
+const styleTone = (genreId: string, mixCharacter: ReturnType<typeof tone>): Partial<WorldContract> => ({
+  timbreSpace: { ...G[genreId].timbreSpace, mixCharacter },
+});
+
 export const STYLE_PATCHES: Record<string, Partial<WorldContract>> = {
   'reggae-dancehall': { timbreSpace: { palette: ['synth', 'sub-bass', 'drums', 'congas'], production: 'dembow skank, hard clip', mixCharacter: { dryness: 0.7, bassForward: 0.88, width: 0.65, brightness: 0.65, saturationType: 'hard-clip', compressionRatio: 5.0, subHarmonics: 0.8, transientSnap: 0.8 } } },
+  // Style-owned production targets. Traditional acoustic styles stay close and
+  // transient-clear; electronic hybrids gain controlled width and low end.
+  'tango-tango-tradicional': styleTone('tango', tone(0.9, 0.45, 0.42, 0.32)),
+  'tango-tango-nuevo': styleTone('tango', tone(0.82, 0.48, 0.52, 0.38, 2.0, 0.35)),
+  'tango-milonga': styleTone('tango', tone(0.9, 0.47, 0.44, 0.38)),
+  'tango-tango-vals': styleTone('tango', tone(0.84, 0.44, 0.5, 0.34)),
+  'tango-tango-electronico': styleTone('tango', tone(0.74, 0.56, 0.62, 0.42, 2.2, 0.4)),
+  'afrobeats-afro-pop': styleTone('afrobeats', tone(0.82, 0.6, 0.52, 0.42, 2.2, 0.4)),
+  'afrobeats-afrobeat': styleTone('afrobeats', tone(0.66, 0.58, 0.58, 0.46, 2.0, 0.35)),
+  'afrobeats-amapiano': styleTone('afrobeats', tone(0.74, 0.68, 0.62, 0.4, 2.8, 0.45)),
+  'afrobeats-gqom': styleTone('afrobeats', tone(0.8, 0.66, 0.5, 0.42, 3.0, 0.5)),
+  'afrobeats-afro-house': styleTone('afrobeats', tone(0.74, 0.62, 0.6, 0.45, 2.8, 0.45)),
+  'afrobeats-highlife': styleTone('afrobeats', tone(0.7, 0.5, 0.5, 0.44, 1.8, 0.28)),
+  'afrobeats-palm-wine': styleTone('afrobeats', tone(0.84, 0.46, 0.44, 0.38, 1.6, 0.22)),
+  'afrobeats-alte': styleTone('afrobeats', tone(0.76, 0.58, 0.58, 0.38, 2.0, 0.35)),
+  'bachata-urbana': styleTone('bachata', tone(0.84, 0.5, 0.45, 0.36, 1.9, 0.3)),
+  'bachata-tradicional': styleTone('bachata', tone(0.9, 0.48, 0.4, 0.38, 1.7, 0.26)),
+  'bachata-sensual': styleTone('bachata', tone(0.72, 0.5, 0.58, 0.4, 1.8, 0.28)),
+  'bachata-moderna': styleTone('bachata', tone(0.78, 0.54, 0.52, 0.42, 2.2, 0.38)),
+  'bachata-bolero': styleTone('bachata', tone(0.88, 0.44, 0.46, 0.32, 1.5, 0.2)),
+  'bachata-bachatango': styleTone('bachata', tone(0.8, 0.5, 0.48, 0.36, 1.9, 0.3)),
+  'bachata-campestre': styleTone('bachata', tone(0.9, 0.46, 0.4, 0.38, 1.7, 0.25)),
+  'bachata-merengue-de-guitarra': styleTone('bachata', tone(0.82, 0.54, 0.48, 0.44, 2.0, 0.34)),
+  'flamenco-solea-style': styleTone('flamenco', tone(0.92, 0.4, 0.38, 0.3, 1.5, 0.22)),
+  'flamenco-buleria-style': styleTone('flamenco', tone(0.9, 0.48, 0.44, 0.42, 1.8, 0.34)),
+  'flamenco-alegrias-style': styleTone('flamenco', tone(0.88, 0.48, 0.48, 0.42, 1.8, 0.34)),
+  'flamenco-tangos-style': styleTone('flamenco', tone(0.9, 0.46, 0.42, 0.4, 1.7, 0.3)),
+  'flamenco-seguiriya-style': styleTone('flamenco', tone(0.94, 0.4, 0.36, 0.28, 1.4, 0.2)),
+  'flamenco-tientos-style': styleTone('flamenco', tone(0.92, 0.42, 0.4, 0.3, 1.5, 0.22)),
+  'flamenco-fandango-style': styleTone('flamenco', tone(0.86, 0.46, 0.48, 0.4, 1.8, 0.3)),
+  'flamenco-rumba': styleTone('flamenco', tone(0.8, 0.52, 0.56, 0.44, 2.0, 0.36)),
 };

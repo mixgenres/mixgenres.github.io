@@ -112,13 +112,32 @@ export function calculateAcousticCrosstalk(char?: MixCharacter): number {
 }
 
 /** Room settings derived from the genre's MixCharacter.  Drier genres get a shorter, quieter room. */
-function roomParams(char?: MixCharacter, genreId?: string) {
+export interface MasterToneSettings {
+  roomDepth: number;
+  roomRt60: number;
+  roomDampingHz: number;
+  lowGainDb: number;
+  presenceGainDb: number;
+  airGainDb: number;
+  widthGain: number;
+}
+
+/** Resolve the measurable master tone used by both live playback and exports. */
+export function masterToneSettings(char?: MixCharacter, genreId?: string): MasterToneSettings {
   const dryness = char?.dryness ?? 0.6;
+  const brightness = char?.brightness ?? 0.5;
   const isSalsa = SALSA_GENRE_PATTERN.test(genreId || '');
   return {
-    depth: isSalsa ? SALSA_MASTER_ROOM_DEPTH : (1.0 - dryness) * 0.4,
-    rt60: 0.3 + (1.0 - dryness) * 0.9,      // seconds
-    dampHz: 2800 + (char?.brightness ?? 0.5) * 3200,
+    // Keep the shared room restrained. The former 0.4 send and ~1.0s tails
+    // made every close-miked part feed a conspicuous wash, especially on
+    // acoustic tango, bachata, and flamenco ensembles.
+    roomDepth: isSalsa ? SALSA_MASTER_ROOM_DEPTH : Math.max(0.015, Math.min(0.08, (1.0 - dryness) * 0.16)),
+    roomRt60: 0.24 + (1.0 - dryness) * 0.55,    // seconds
+    roomDampingHz: 2800 + brightness * 3200,
+    lowGainDb: ((char?.bassForward ?? 0.5) - 0.5) * 4.0,
+    presenceGainDb: (brightness - 0.5) * 2.0,
+    airGainDb: (brightness - 0.5) * 4.0,
+    widthGain: Math.max(0, Math.min(1.2, 0.2 + (char?.width ?? 0.5) * 1.2)),
   };
 }
 
@@ -282,8 +301,8 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
 
   // 5. Shared stereo room (one diffuse convolution room for the whole band).
   // Send is high-passed and low-passed so the tail adds space, not mud or fizz.
-  const initialRoom = roomParams(initialMixCharacter, genreId);
-  const initialRoomDepth = initialRoom.depth;
+  const initialTone = masterToneSettings(initialMixCharacter, genreId);
+  const initialRoomDepth = initialTone.roomDepth;
   const roomInput = ctx.createGain();
   const roomPreDelay = ctx.createDelay(0.25);
   roomPreDelay.delayTime.value = 0.015;
@@ -293,7 +312,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   roomHP.Q.value = 0.707;
   const roomConvolver = ctx.createConvolver();
   roomConvolver.normalize = true;
-  roomConvolver.buffer = buildRoomImpulse(ctx, initialRoom.rt60, initialRoom.dampHz);
+  roomConvolver.buffer = buildRoomImpulse(ctx, initialTone.roomRt60, initialTone.roomDampingHz);
   const roomLP = ctx.createBiquadFilter();
   roomLP.type = 'lowpass';
   roomLP.frequency.value = 4500;
@@ -334,11 +353,11 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   hp.frequency.value = 28;
   hp.Q.value = 0.6;
 
-  const lowGainInit = initialMixCharacter ? (initialMixCharacter.bassForward - 0.5) * 4.0 : 0.5;
-  const presGainInit = initialMixCharacter ? (initialMixCharacter.dryness - 0.5) * 3.0 : 0.8;
-  // Tilt: neutral brightness (0.5) now trims the top end slightly (-2 dB); the old
-  // shelf sat at 11 kHz with only +-2.5 dB range, which could not tame harsh synth highs.
-  const airGainInit = initialMixCharacter ? (initialMixCharacter.brightness - 0.5) * 8.0 - 2.0 : -1.0;
+  const lowGainInit = initialTone.lowGainDb;
+  // Dryness controls room send only. It must not add presence: conflating the
+  // two made dry acoustic styles brighter in the 3.2 kHz band by up to 1.5 dB.
+  const presGainInit = initialTone.presenceGainDb;
+  const airGainInit = initialTone.airGainDb;
 
   const low = ctx.createBiquadFilter();
   low.type = 'lowshelf';
@@ -438,8 +457,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   sideHighPass.type = 'highpass';
   sideHighPass.frequency.value = 300;
   sideHighPass.Q.value = 0.707;
-  const initWidth = initialMixCharacter?.width ?? 0.5;
-  sideGain.gain.value = Math.max(0.0, Math.min(1.8, 0.2 + initWidth * 1.6));
+  sideGain.gain.value = initialTone.widthGain;
 
   masterSum.connect(msSplitter);
   msSplitter.connect(midL, 0);
@@ -510,9 +528,10 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
     setMixCharacter(char: MixCharacter, genId?: string) {
       const gId = genId || genreId;
       const now = ctx.currentTime;
-      const lowTarget = (char.bassForward - 0.5) * 4.0;
-      const presTarget = (char.dryness - 0.5) * 3.0;
-      const airTarget = (char.brightness - 0.5) * 8.0 - 2.0;
+      const tone = masterToneSettings(char, gId);
+      const lowTarget = tone.lowGainDb;
+      const presTarget = tone.presenceGainDb;
+      const airTarget = tone.airGainDb;
 
       low.gain.setTargetAtTime(lowTarget, now, 0.05);
       pres.gain.setTargetAtTime(presTarget, now, 0.05);
@@ -539,10 +558,9 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
       }
 
       // Room depth + tail length from the genre's dryness
-      const room = roomParams(char, gId);
-      roomDepth = room.depth;
-      revMix.gain.setTargetAtTime(room.depth, now, 0.05);
-      roomConvolver.buffer = buildRoomImpulse(ctx, room.rt60, room.dampHz);
+      roomDepth = tone.roomDepth;
+      revMix.gain.setTargetAtTime(tone.roomDepth, now, 0.05);
+      roomConvolver.buffer = buildRoomImpulse(ctx, tone.roomRt60, tone.roomDampingHz);
 
       // Drum Bus Saturation & Saturation Type
       const knock = calculateDrumKnock(char);
@@ -550,7 +568,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
       drumShaper.curve = saturationCurve(knock, satType);
 
       // Mid-Side Width
-      sideGain.gain.setTargetAtTime(Math.max(0.0, Math.min(1.8, 0.2 + char.width * 1.6)), now, 0.05);
+      sideGain.gain.setTargetAtTime(tone.widthGain, now, 0.05);
     },
     dispose() {
       try {

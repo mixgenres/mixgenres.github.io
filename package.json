@@ -28,6 +28,7 @@
     "test:integrity": "tsx scripts/engine-integrity-audit.ts",
     "audit:styles": "tsx scripts/audit-all-styles.ts",
     "audit:performance": "tsx scripts/audit-style-performance.ts",
+    "audit:tone": "node --import tsx scripts/audit-style-tone.ts",
     "render:all-styles": "tsx scripts/render-all-styles.ts",
     "audit:paths": "tsx scripts/audit-instrument-paths.ts",
     "schema:render": "tsx scripts/pre-render-schema.ts",

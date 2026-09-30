@@ -98,9 +98,12 @@ export async function renderPerformanceToMp3(
   let styleMaster = { pocket: 0.5, lift: 0.5 };
   if (options.worldId) {
     try {
-      mixCharacter = contractForGenre(options.worldId)?.timbreSpace?.mixCharacter;
+      const resolvedStyle = options.styleId
+        ? resolveStyle({ genreId: options.worldId, styleId: options.styleId })
+        : undefined;
+      mixCharacter = contractForGenre(options.worldId, resolvedStyle)?.timbreSpace?.mixCharacter;
       if (options.styleId) {
-        const resolved = resolveStyle({ genreId: options.worldId, styleId: options.styleId });
+        const resolved = resolvedStyle!;
         styleMaster = {
           pocket: resolved.sound.masterProfile?.pocket ?? 0.5,
           lift: resolved.sound.masterProfile?.lift ?? 0.5,
@@ -108,7 +111,6 @@ export async function renderPerformanceToMp3(
         if (mixCharacter) {
           mixCharacter = {
             ...mixCharacter,
-            dryness: Math.max(0, Math.min(1, mixCharacter.dryness + (styleMaster.pocket - 0.5) * 0.18)),
             transientSnap: Math.max(0, Math.min(1, (mixCharacter.transientSnap ?? 0.3) + (styleMaster.lift - 0.5) * 0.18)),
           };
         }

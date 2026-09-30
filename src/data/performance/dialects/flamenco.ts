@@ -9,7 +9,9 @@ export const ENTRY_6: [string, InstrumentDialect] = ["guitar:flamenco", {
     defaultTechnique: 'punteado',
     allowedTechniques: ['punteado', 'rasgueado', 'abanico', 'golpe', 'arrastre', 'palm-mute'],
     pluckPositionOverride: 0.22,
-    brightnessMultiplier: 1.25,
+    // Preserve the characteristic nail attack while leaving headroom for the
+    // instrument's own resonances and the master tone profile.
+    brightnessMultiplier: 1.08,
     decayMultiplier: 0.85,
     micProximityPreset: 'close-mic',
   }];

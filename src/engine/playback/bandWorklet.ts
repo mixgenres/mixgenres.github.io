@@ -22,6 +22,7 @@ import {
 import { resolveDialect, performanceModeForContext } from '../band/genreDialect.ts';
 import { resolveRenderGesture } from './renderGesture.ts';
 import { contractForGenre } from '../../engine/style/contracts';
+import { resolveStyle } from '../../engine/style';
 import type { AudioSignal } from './instrumentTypes.ts';
 import { spotlightGain } from '../band/spotlight.ts';
 
@@ -167,7 +168,8 @@ export class BandWorkletNode {
     this.dirtyTracks.add('*');
     if (worldId && this.masterChain) {
       try {
-        const contract = contractForGenre(worldId);
+        const style = styleId ? resolveStyle({ genreId: worldId, styleId }) : undefined;
+        const contract = contractForGenre(worldId, style);
         if (contract?.timbreSpace?.mixCharacter) {
           this.masterChain.setMixCharacter(contract.timbreSpace.mixCharacter, worldId);
         }
@@ -197,7 +199,8 @@ export class BandWorkletNode {
     let initialMixChar: import('../../engine/style/contracts').MixCharacter | undefined;
     if (this.activeWorldId) {
       try {
-        initialMixChar = contractForGenre(this.activeWorldId)?.timbreSpace?.mixCharacter;
+        const style = this.activeStyleId ? resolveStyle({ genreId: this.activeWorldId, styleId: this.activeStyleId }) : undefined;
+        initialMixChar = contractForGenre(this.activeWorldId, style)?.timbreSpace?.mixCharacter;
       } catch {}
     }
     this.masterChain = createMasterChain(context, initialMixChar, this.activeWorldId);
@@ -440,7 +443,10 @@ export class BandWorkletNode {
     let mixCharacter: import('../../engine/style/contracts').MixCharacter | undefined;
     if (this.activeWorldId) {
       try {
-        mixCharacter = contractForGenre(this.activeWorldId)?.timbreSpace?.mixCharacter;
+        const style = this.activeStyleId
+          ? resolveStyle({ genreId: this.activeWorldId, styleId: this.activeStyleId })
+          : undefined;
+        mixCharacter = contractForGenre(this.activeWorldId, style)?.timbreSpace?.mixCharacter;
       } catch {
         /* ignore missing contract */
       }
