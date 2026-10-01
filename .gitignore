@@ -8,6 +8,7 @@ dist/
 .AppleDouble
 .LSOverride
 ._*
+bun.lock
 *.zip
 Thumbs.db
 npm-debug.log*
