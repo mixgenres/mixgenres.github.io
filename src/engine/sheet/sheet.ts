@@ -599,6 +599,15 @@ export function suggestPattern(
     : rawCandidates;
   const scored = candidatePool
     .map(p => {
+      const kinds = new Set(instrumentPatternKinds(voice.instrumentId));
+      const explicitTargets = new Set([...(p.instruments ?? []).map(String), ...(p.compatibleInstruments ?? []).map(String)]);
+      const instrumentMatch = [...explicitTargets].some(k => kinds.has(k));
+      const roleMatch = p.roles.some(r => r === voice.role || p.compatibleRoles?.includes(voice.role) || kinds.has(r));
+      // Explicit instrument targets are a compatibility contract, not merely a
+      // ranking hint. A role match can widen that contract; otherwise do not
+      // assign a guitar/palmas/drum cell to an unrelated voice just because it
+      // scored well on style or section affinity.
+      if (explicitTargets.size > 0 && !instrumentMatch && !roleMatch) return null;
       let n = affinity(p.id, voice, worldId, styleId);
       const behavioralFit = approachFit(p, approach);
       if (approach && behavioralFit > 0) n += behavioralFit;
@@ -625,10 +634,11 @@ export function suggestPattern(
       if (taken?.has(p.id)) n -= 75;
       return { id: p.id, n: n + hash(`${p.id}:${sectionKind ?? 'body'}`, salt) * 3 };
     })
+    .filter((x): x is { id: string; n: number } => !!x)
     .sort((a, b) => b.n - a.n);
 
   const viable = scored.filter(x => x.n > -150);
-  if (!viable.length) return scored[0]?.id;
+  if (!viable.length) return undefined;
   const best = viable[0].n;
   const window = viable.filter(x => x.n >= best - 25).slice(0, 10);
   return window[Math.floor(hash(`pick:${worldId}:${voice.instrumentId}:${sectionKind ?? 'body'}`, salt) * window.length)]?.id
@@ -1238,6 +1248,15 @@ function patternCandidatesForVoice(
   return pool
     .filter(p => p.enabled !== false)
     .map(p => {
+      const kinds = new Set(instrumentPatternKinds(voice.instrumentId));
+      const explicitTargets = new Set([...(p.instruments ?? []).map(String), ...(p.compatibleInstruments ?? []).map(String)]);
+      const instrumentMatch = [...explicitTargets].some(k => kinds.has(k));
+      const roleMatch = p.roles.some(r => r === voice.role || p.compatibleRoles?.includes(voice.role) || kinds.has(r));
+      // Explicit instrument targets are a compatibility contract, not merely a
+      // ranking hint. A role match can widen that contract; otherwise do not
+      // assign a guitar/palmas/drum cell to an unrelated voice just because it
+      // scored well on style or section affinity.
+      if (explicitTargets.size > 0 && !instrumentMatch && !roleMatch) return null;
       let n = affinity(p.id, voice, worldId, styleId);
       const behavioralFit = approachFit(p, approach);
       if (approach && behavioralFit > 0) n += behavioralFit;
@@ -1919,7 +1938,7 @@ export function makeSheet(
   const sectionProgressions = (resolved.harmony?.sectionProgressions as Record<string, string[]>) ?? {};
   const regions: Region[] = form.map((f, i) => {
     const fallback = chords;
-    const pickedRaw = progressionForSection(sectionProgressions, f.key, f.kind, fallback, resolved.contract, resolved.primaryGenre === 'tango');
+    const pickedRaw = progressionForSection(sectionProgressions, f.key, f.kind, fallback, resolved.contract, resolved.primaryGenre === 'tango' || resolved.primaryGenre === 'flamenco');
     // Section templates describe harmonic function, not an automatic key change.
     // Keep the whole song in the first section's tonic unless the user explicitly
     // changes the song key elsewhere.

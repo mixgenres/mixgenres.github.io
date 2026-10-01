@@ -7,7 +7,7 @@ const STYLE_0: GenreStyleDefinition = {
         "name": "Soleá",
         "origin": "Andalusia (Seville, Cádiz, Jerez)",
         "era": "Mid-19th century–present",
-        "description": "Deep • 12-beat • Phrygian\nThe foundation",
+        "description": "Deep • 12-beat • Phrygian\nThe foundation of the soleá compás and its Andalusian cadence.",
         "characteristicInstruments": [
           "spanish-guitar",
           "flute",
@@ -52,31 +52,37 @@ const STYLE_0: GenreStyleDefinition = {
           "microtimingFeel": "rubato"
         },
         "sectionProgressions": {
-          "intro": [
+          "salida": [
             "Am",
             "G",
             "F",
             "E"
           ],
-          "verse": [
-            "Am",
-            "G",
-            "F",
-            "E"
-          ],
-          "chorus": [
+          "llamada": [
             "C",
             "F",
             "G",
             "E"
           ],
-          "solo": [
+          "letra": [
             "Am",
             "G",
             "F",
             "E"
           ],
-          "coda": [
+          "falseta": [
+            "Am",
+            "G",
+            "F",
+            "E"
+          ],
+          "remate": [
+            "C",
+            "F",
+            "G",
+            "E"
+          ],
+          "cierre": [
             "E",
             "E",
             "E",
@@ -92,7 +98,7 @@ const STYLE_1: GenreStyleDefinition = {
         "name": "Bulerías",
         "origin": "Jerez de la Frontera & Triana",
         "era": "Late 19th century–present",
-        "description": "Fast • 12-beat • Contratiempo\nPlayful, explosive,",
+        "description": "Fast • 12-beat • Contratiempo\nPlayful, explosive compás with rapid palmas and remates.",
         "characteristicInstruments": [
           "spanish-guitar",
           "flute",
@@ -137,31 +143,37 @@ const STYLE_1: GenreStyleDefinition = {
           "microtimingFeel": "pushed"
         },
         "sectionProgressions": {
-          "intro": [
+          "salida": [
             "Bb",
             "F",
             "Bb",
             "A"
           ],
-          "verse": [
+          "letra": [
             "Dm",
             "C",
             "Bb",
             "A"
           ],
-          "chorus": [
+          "escobilla": [
+            "Dm",
+            "C",
+            "Bb",
+            "A"
+          ],
+          "jaleo": [
             "Gm",
             "A",
             "Gm",
             "A"
           ],
-          "solo": [
-            "Dm",
-            "C",
-            "Bb",
+          "remate": [
+            "Gm",
+            "A",
+            "Gm",
             "A"
           ],
-          "coda": [
+          "cierre": [
             "A",
             "A",
             "A",
@@ -177,7 +189,7 @@ const STYLE_2: GenreStyleDefinition = {
         "name": "Alegrías",
         "origin": "Cádiz, western Andalusia",
         "era": "Mid-19th century–present",
-        "description": "Bright • 12-beat • Major\nCadiz sparkle,",
+        "description": "Bright • 12-beat • Major\nCadiz sparkle, clean guitar compás and festive escobilla.",
         "characteristicInstruments": [
           "spanish-guitar",
           "flute",
@@ -222,31 +234,37 @@ const STYLE_2: GenreStyleDefinition = {
           "microtimingFeel": "straight"
         },
         "sectionProgressions": {
-          "intro": [
+          "salida": [
             "C",
             "F",
             "G7",
             "C"
           ],
-          "verse": [
+          "letra": [
             "C",
             "G7",
             "C",
             "F"
           ],
-          "chorus": [
-            "F",
-            "G7",
-            "C",
-            "C"
-          ],
-          "solo": [
+          "silencio": [
             "C",
             "F",
             "G7",
             "C"
           ],
-          "coda": [
+          "escobilla": [
+            "C",
+            "F",
+            "G7",
+            "C"
+          ],
+          "canti\u00f1a": [
+            "F",
+            "G7",
+            "C",
+            "C"
+          ],
+          "cierre": [
             "G7",
             "C",
             "G7",
@@ -262,7 +280,7 @@ const STYLE_3: GenreStyleDefinition = {
         "name": "Tangos",
         "origin": "Cádiz, Triana, Granada",
         "era": "19th century–present",
-        "description": "Grounded • 4-beat • Phrygian\nHeavy pulse,",
+        "description": "Grounded • 4-beat • Phrygian\nHeavy pulse, restrained space and a path toward Tangos.",
         "characteristicInstruments": [
           "spanish-guitar",
           "flute",
@@ -307,25 +325,37 @@ const STYLE_3: GenreStyleDefinition = {
           "microtimingFeel": "straight"
         },
         "sectionProgressions": {
-          "intro": [
+          "salida": [
             "Bb",
             "A",
             "Bb",
             "A"
           ],
-          "verse": [
+          "llamada": [
+            "Bb",
+            "A",
+            "Bb",
+            "A"
+          ],
+          "letra": [
             "Dm",
             "C",
             "Bb",
             "A"
           ],
-          "chorus": [
+          "falseta": [
             "F",
             "Bb",
             "A",
             "A"
           ],
-          "coda": [
+          "remate": [
+            "F",
+            "Bb",
+            "A",
+            "A"
+          ],
+          "cierre": [
             "A",
             "A",
             "A",
@@ -341,7 +371,7 @@ const STYLE_4: GenreStyleDefinition = {
         "name": "Seguiriya",
         "origin": "Andalusia",
         "era": "Early 19th century–present",
-        "description": "Dark • Asymmetric • Cante jondo\nRaw,",
+        "description": "Dark • Asymmetric • Cante jondo\nRaw, elastic phrasing with severe remates and dramatic space.",
         "characteristicInstruments": [
           "spanish-guitar",
           "flute",
@@ -385,31 +415,37 @@ const STYLE_4: GenreStyleDefinition = {
           "microtimingFeel": "rubato"
         },
         "sectionProgressions": {
-          "intro": [
+          "salida": [
             "Am",
             "G",
             "F",
             "E"
           ],
-          "verse": [
+          "llamada": [
+            "F",
+            "E",
+            "Am",
+            "E"
+          ],
+          "letra": [
             "Am",
             "Dm",
             "E",
             "Am"
           ],
-          "chorus": [
-            "F",
-            "E",
-            "Am",
-            "E"
-          ],
-          "solo": [
+          "falseta": [
             "Am",
             "G",
             "F",
             "E"
           ],
-          "coda": [
+          "remate": [
+            "F",
+            "E",
+            "Am",
+            "E"
+          ],
+          "cierre": [
             "F",
             "E",
             "E",
@@ -425,7 +461,7 @@ const STYLE_5: GenreStyleDefinition = {
         "name": "Tientos",
         "origin": "Andalusia",
         "era": "19th century–present",
-        "description": "Slow • 4-beat • Modal\nTangos stretched",
+        "description": "Slow • 4-beat • Modal\nTangos stretched into a deliberate, weighty compás.",
         "characteristicInstruments": [
           "spanish-guitar",
           "flute",
@@ -468,31 +504,37 @@ const STYLE_5: GenreStyleDefinition = {
           "microtimingFeel": "straight"
         },
         "sectionProgressions": {
-          "intro": [
+          "salida": [
             "Am",
             "G",
             "F",
             "E"
           ],
-          "verse": [
-            "Am",
-            "G",
-            "F",
-            "E"
-          ],
-          "chorus": [
+          "llamada": [
             "Dm",
             "G",
             "C",
             "E"
           ],
-          "solo": [
+          "letra": [
             "Am",
             "G",
             "F",
             "E"
           ],
-          "coda": [
+          "falseta": [
+            "Am",
+            "G",
+            "F",
+            "E"
+          ],
+          "remate": [
+            "Dm",
+            "G",
+            "C",
+            "E"
+          ],
+          "cierre": [
             "Am",
             "E",
             "Am",
@@ -550,31 +592,37 @@ const STYLE_6: GenreStyleDefinition = {
           "microtimingFeel": "straight"
         },
         "sectionProgressions": {
-          "intro": [
+          "salida": [
             "Am",
             "G",
             "F",
             "E"
           ],
-          "verse": [
-            "Am",
-            "Dm",
-            "E",
-            "Am"
-          ],
-          "chorus": [
+          "llamada": [
             "C",
             "G",
             "Am",
             "E"
           ],
-          "solo": [
+          "letra": [
+            "Am",
+            "Dm",
+            "E",
+            "Am"
+          ],
+          "falseta": [
             "Am",
             "G",
             "F",
             "E"
           ],
-          "coda": [
+          "remate": [
+            "C",
+            "G",
+            "Am",
+            "E"
+          ],
+          "cierre": [
             "E",
             "E",
             "Am",
@@ -630,31 +678,37 @@ const STYLE_7: GenreStyleDefinition = {
           "microtimingFeel": "straight"
         },
         "sectionProgressions": {
-          "intro": [
+          "salida": [
             "Am",
             "G",
             "F",
             "E"
           ],
-          "verse": [
-            "Am",
-            "Dm",
-            "G",
-            "C"
-          ],
-          "chorus": [
+          "llamada": [
             "F",
             "E7",
             "Am",
             "E7"
           ],
-          "solo": [
+          "letra": [
+            "Am",
+            "Dm",
+            "G",
+            "C"
+          ],
+          "falseta": [
             "Am",
             "G",
             "F",
             "E"
           ],
-          "coda": [
+          "remate": [
+            "F",
+            "E7",
+            "Am",
+            "E7"
+          ],
+          "cierre": [
             "E",
             "E",
             "Am",
@@ -722,33 +776,27 @@ const EXPANSION_STYLE_0: GenreStyleDefinition = {
     ],
     "verse": [
       "Am",
+      "Dm",
       "G",
-      "F",
-      "E7"
-    ],
-    "chorus": [
-      "Am",
-      "G",
-      "F",
-      "E7"
-    ],
-    "bridge": [
-      "Am",
-      "G",
-      "F",
-      "E7"
+      "C"
     ],
     "solo": [
       "Am",
-      "G",
-      "F",
-      "E7"
+      "Bb",
+      "E7",
+      "Am"
+    ],
+    "chorus": [
+      "Dm",
+      "C",
+      "Bb",
+      "A7"
     ],
     "coda": [
+      "E7",
       "Am",
-      "G",
-      "F",
-      "E7"
+      "E7",
+      "Am"
     ]
   },
   "referenceArtists": [
@@ -819,40 +867,34 @@ const EXPANSION_STYLE_1: GenreStyleDefinition = {
   ],
   "sectionProgressions": {
     "intro": [
-      "Am",
-      "G",
-      "F",
-      "E7"
+      "Am9",
+      "Dm7",
+      "G7",
+      "Cmaj7"
     ],
     "verse": [
-      "Am",
-      "G",
-      "F",
-      "E7"
-    ],
-    "chorus": [
-      "Am",
-      "G",
-      "F",
-      "E7"
-    ],
-    "bridge": [
-      "Am",
-      "G",
-      "F",
-      "E7"
+      "Am7",
+      "Fmaj7",
+      "Dm7",
+      "E7alt"
     ],
     "solo": [
-      "Am",
-      "G",
-      "F",
-      "E7"
+      "Dm9",
+      "G7",
+      "Cmaj7",
+      "A7alt"
+    ],
+    "chorus": [
+      "Fmaj7",
+      "E7",
+      "Am7",
+      "D7"
     ],
     "coda": [
       "Am",
-      "G",
-      "F",
-      "E7"
+      "Fmaj7",
+      "E7",
+      "Am"
     ]
   },
   "referenceArtists": [
@@ -920,40 +962,34 @@ const EXPANSION_STYLE_2: GenreStyleDefinition = {
   ],
   "sectionProgressions": {
     "intro": [
-      "Am",
-      "G",
-      "F",
-      "E7"
+      "Am7",
+      "Dm7",
+      "F#dim7",
+      "E7b9"
     ],
     "verse": [
-      "Am",
-      "G",
-      "F",
-      "E7"
-    ],
-    "chorus": [
-      "Am",
-      "G",
-      "F",
-      "E7"
-    ],
-    "bridge": [
-      "Am",
-      "G",
-      "F",
-      "E7"
+      "Am7",
+      "Cmaj7",
+      "Fmaj7#11",
+      "E7alt"
     ],
     "solo": [
-      "Am",
-      "G",
-      "F",
-      "E7"
+      "Dm9",
+      "G7b9",
+      "Cmaj7#11",
+      "A7alt"
+    ],
+    "chorus": [
+      "Fmaj7",
+      "Em7",
+      "Dm9",
+      "E7b9"
     ],
     "coda": [
       "Am",
-      "G",
-      "F",
-      "E7"
+      "Bb7",
+      "E7b9",
+      "Am"
     ]
   },
   "referenceArtists": [
@@ -1025,33 +1061,27 @@ const EXPANSION_STYLE_3: GenreStyleDefinition = {
     ],
     "verse": [
       "Am",
-      "G",
+      "Dm",
+      "E",
+      "Am"
+    ],
+    "solo": [
       "F",
+      "E",
+      "Am",
       "E7"
     ],
     "chorus": [
-      "Am",
-      "G",
-      "F",
-      "E7"
-    ],
-    "bridge": [
-      "Am",
-      "G",
-      "F",
-      "E7"
-    ],
-    "solo": [
-      "Am",
-      "G",
-      "F",
-      "E7"
+      "Dm",
+      "C",
+      "Bb",
+      "A7"
     ],
     "coda": [
+      "E7",
       "Am",
-      "G",
-      "F",
-      "E7"
+      "E7",
+      "Am"
     ]
   },
   "referenceArtists": [
