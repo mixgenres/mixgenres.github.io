@@ -1,11 +1,11 @@
 import type { GenreWorld } from '../../schema';
-import { TANGO_WORLD_WORLD } from './world';
-import { TANGO_WORLD_CULTURE } from './culture';
-import { TANGO_WORLD_ROLES } from './roles';
-import { TANGO_WORLD_FEEL } from './feel';
-import { TANGO_WORLD_HARMONY } from './harmony';
-import { TANGO_WORLD_STYLES } from './styles/index';
-import { TANGO_WORLD_PATTERNS } from './patterns/index';
+import { TANGO_WORLD_WORLD } from './meta';
+import { TANGO_WORLD_CULTURE } from './meta';
+import { TANGO_WORLD_ROLES } from './meta';
+import { TANGO_WORLD_FEEL } from './meta';
+import { TANGO_WORLD_HARMONY } from './meta';
+import { TANGO_WORLD_STYLES } from './styles';
+import { TANGO_WORLD_PATTERNS } from './patterns';
 
 export const TANGO_WORLD: GenreWorld = {
   ...TANGO_WORLD_WORLD,

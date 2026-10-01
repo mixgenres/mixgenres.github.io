@@ -44,16 +44,20 @@ pattern_ids = set(re.findall(r'["\']id["\']\s*:\s*["\']((?:tech|style)-[^"\']+)[
 if len(pattern_ids) != 487:
     fail(f"expected 487 expansion pattern IDs, found {len(pattern_ids)}")
 
-# Check every expansion style's source placement. Resolve by exact filename first;
-# flat legacy worlds are allowed to keep definitions inline in their existing index.
+# Check every expansion style's source placement. Accept the pre-migration
+# per-style files and the consolidated styles.ts module. Flat legacy worlds may
+# keep definitions inline in their root index.
+consolidated_styles = [p for p in GENRES.glob("*/styles.ts")]
 for sid in sorted(expansion_ids):
     matches = list(GENRES.rglob(f"{sid}.ts"))
     if matches:
         if all("/styles/" not in str(p).replace("\\\\", "/") for p in matches):
             fail(f"style file {sid}.ts is not inside an existing styles directory")
         continue
+    if any(re.search(rf'["\']id["\']\s*:\s*["\']{re.escape(sid)}["\']', p.read_text(errors="ignore")) for p in consolidated_styles):
+        continue
     if not any(sid in p.read_text(errors="ignore") for p in GENRES.glob("*/index.ts")):
-        fail(f"missing authored style definition for {sid}")
+        fail(f"missing authored style definition in styles.ts or legacy index for {sid}")
 
 # Validate expansion pattern grids directly from source objects. New pattern IDs are
 # only emitted in genre-local pattern files or legacy flat genre indexes.

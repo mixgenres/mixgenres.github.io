@@ -1,10 +1,10 @@
 import type { GenreWorld } from '../../schema';
-import { SALSA_WORLD_WORLD } from './world';
-import { SALSA_WORLD_CULTURE } from './culture';
-import { SALSA_WORLD_ROLES } from './roles';
-import { SALSA_WORLD_FEEL } from './feel';
-import { SALSA_WORLD_STYLES } from './styles/index';
-import { SALSA_WORLD_PATTERNS } from './patterns/index';
+import { SALSA_WORLD_WORLD } from './meta';
+import { SALSA_WORLD_CULTURE } from './meta';
+import { SALSA_WORLD_ROLES } from './meta';
+import { SALSA_WORLD_FEEL } from './meta';
+import { SALSA_WORLD_STYLES } from './styles';
+import { SALSA_WORLD_PATTERNS } from './patterns';
 
 export const SALSA_WORLD: GenreWorld = {
   ...SALSA_WORLD_WORLD,

@@ -1,10 +1,10 @@
 import type { GenreWorld } from '../../schema';
-import { KIZOMBA_WORLD_WORLD } from './world';
-import { KIZOMBA_WORLD_CULTURE } from './culture';
-import { KIZOMBA_WORLD_ROLES } from './roles';
-import { KIZOMBA_WORLD_FEEL } from './feel';
-import { KIZOMBA_WORLD_STYLES } from './styles/index';
-import { KIZOMBA_WORLD_PATTERNS } from './patterns/index';
+import { KIZOMBA_WORLD_WORLD } from './meta';
+import { KIZOMBA_WORLD_CULTURE } from './meta';
+import { KIZOMBA_WORLD_ROLES } from './meta';
+import { KIZOMBA_WORLD_FEEL } from './meta';
+import { KIZOMBA_WORLD_STYLES } from './styles';
+import { KIZOMBA_WORLD_PATTERNS } from './patterns';
 
 export const KIZOMBA_WORLD: GenreWorld = {
   ...KIZOMBA_WORLD_WORLD,

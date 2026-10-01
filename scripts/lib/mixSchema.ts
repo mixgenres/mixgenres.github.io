@@ -14,7 +14,9 @@ import { makeupGainFor, modelForInstrument, determineBusCategory } from '../../s
 import { resolveRenderGesture } from '../../src/engine/playback/renderGesture.ts';
 import { resolveInstrumentKitComponent } from '../../src/engine/lookup/instrument-components.ts';
 import { resolveStyle } from '../../src/engine/style/index.ts';
-import { contractForGenre } from '../../src/engine/style/contracts.ts';
+import { contractForGenre, type MixCharacter } from '../../src/engine/style/contracts.ts';
+import type { Sheet } from '../../src/engine/sheet/sheet.ts';
+import type { Performance, PerfNote } from '../../src/engine/band/performanceData.ts';
 
 /** Thresholds used only for the `flags` field; every raw value is reported regardless. */
 export const MIX_FLAG_THRESHOLDS = {
@@ -30,6 +32,16 @@ const round = (n: number, d = 4) => Number.isFinite(n) ? Number(n.toFixed(d)) : 
 const db = (lin: number) => lin > 0 ? 20 * Math.log10(lin) : -Infinity;
 const clamp01 = (n: number) => Math.max(0, Math.min(1, n));
 
+
+interface MixTrack {
+  id:string; instrumentId:string; sheetRole:string; instrumentRole:string; busCategory:string;
+  pan:{panMapKey:string|null;panMapValue:number;trackOverride:number|null;normalized:number;kitComponentPans:Array<{id:string;midi:number;defaultPan:number}>;effectiveMin:number|null;effectiveMax:number|null;effectiveMean:number|null;meanLeftGain:number;meanRightGain:number};
+  gain:{elementaryModel:number;effectiveModelForGain:number;isElectronic:boolean;makeupGain:number;roleBaseDb:number;genreOffsetDb:number;instrumentTrimDb:number;roleGainLinear:number;trackVolume:number;effectiveGainLinear:number;effectiveGainDb:number;meanHitGainMultiplier:number};
+  referenceLevel:{rmsDb:number|null};
+  performance:{noteCount:number;notesPerSecond:number;velocityMean:number;velocityP95:number|null;velocityMax:number|null;maxConcurrentNotes:number;instrumentPolyphony:number|null};
+}
+interface MixDescription { mixSchemaVersion:number; worldId:string; styleId:string; mixCharacter:MixCharacter|null; masterProfile:{pocket:number;lift:number}; tracks:MixTrack[]; summary:{panLayout:{left:string[];center:string[];right:string[];netPanOffset:number};flags:string[];thresholds:typeof MIX_FLAG_THRESHOLDS}; }
+
 /** Mirrors StereoFieldManager.resolveInstrumentPan but also reports which PAN_MAP key matched. */
 function panMatch(instrumentId: string): { key: string | null; pan: number } {
   const lower = (instrumentId || '').toLowerCase();
@@ -37,16 +49,16 @@ function panMatch(instrumentId: string): { key: string | null; pan: number } {
   return { key: null, pan: PAN_MAP[instrumentId] || 0 };
 }
 
-export function describeMix(sheet: any, perf: any) {
+export function describeMix(sheet: Sheet, perf: Performance): MixDescription {
   const worldId: string = sheet.worldId;
   const genre = worldId || 'default';
   const resolvedStyle = sheet.styleId ? resolveStyle({ genreId: worldId, styleId: sheet.styleId }) : undefined;
   const mixCharacter = contractForGenre(worldId, resolvedStyle)?.timbreSpace?.mixCharacter;
 
-  const tracks = sheet.tracks.map((track: any) => {
+  const tracks = sheet.tracks.map((track: Sheet['tracks'][number]) => {
     const instrumentId: string = track.instrumentId ?? track.id;
     const def = INSTRUMENTS_BY_ID[instrumentId];
-    const notes = perf.notes.filter((n: any) => n.trackId === track.id);
+    const notes = perf.notes.filter((n: PerfNote) => n.trackId === track.id);
 
     // --- pan (matches elementaryEngine.defaultTrackParams + renderTrack) ---
     const matched = panMatch(instrumentId);
@@ -85,8 +97,8 @@ export function describeMix(sheet: any, perf: any) {
     const ref = INSTRUMENT_LEVELS[instrumentId];
 
     // --- performance statistics ---
-    const vels = notes.map((x: any) => x.vel).sort((a: number, b: number) => a - b);
-    const hitGain = notes.length ? notes.reduce((s: number, x: any) => s + resolveRenderGesture(instrumentId, x.gestureCode).gainMultiplier, 0) / notes.length : 0;
+    const vels = notes.map(x => x.vel).sort((a: number, b: number) => a - b);
+    const hitGain = notes.length ? notes.reduce((s: number, x) => s + resolveRenderGesture(instrumentId, x.gestureCode).gainMultiplier, 0) / notes.length : 0;
     const edges: Array<[number, number]> = [];
     for (const x of notes) { edges.push([x.time, 1]); edges.push([x.time + x.dur, -1]); }
     edges.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
@@ -104,7 +116,7 @@ export function describeMix(sheet: any, perf: any) {
         panMapValue: round(matched.pan),
         trackOverride: track.pan ?? null,
         normalized: round(basePanNorm),
-        kitComponentPans: (def?.kitComponents ?? []).filter((c: any) => c.defaultPan).map((c: any) => ({ id: c.id, midi: c.midi, defaultPan: c.defaultPan })),
+        kitComponentPans: (def?.kitComponents ?? []).filter((c) => c.defaultPan).map(c => ({ id: c.id, midi: c.midi, defaultPan: c.defaultPan ?? 0 })),
         effectiveMin: notes.length ? round(minPan) : null,
         effectiveMax: notes.length ? round(maxPan) : null,
         effectiveMean: notes.length ? round(panSum / n) : null,
@@ -140,12 +152,12 @@ export function describeMix(sheet: any, perf: any) {
   });
 
   // Pan layout from authored values only (exact, gain-independent).
-  const withNotes = tracks.filter((t: any) => t.performance.noteCount > 0);
-  const netPanOffset = withNotes.reduce((a: number, t: any) => a + (t.pan.normalized - 0.5), 0);
+  const withNotes = tracks.filter(t => t.performance.noteCount > 0);
+  const netPanOffset = withNotes.reduce((a: number, t) => a + (t.pan.normalized - 0.5), 0);
   const panLayout = {
-    left: withNotes.filter((t: any) => t.pan.normalized < 0.45).map((t: any) => t.instrumentId),
-    center: withNotes.filter((t: any) => t.pan.normalized >= 0.45 && t.pan.normalized <= 0.55).map((t: any) => t.instrumentId),
-    right: withNotes.filter((t: any) => t.pan.normalized > 0.55).map((t: any) => t.instrumentId),
+    left: withNotes.filter(t => t.pan.normalized < 0.45).map(t => t.instrumentId),
+    center: withNotes.filter(t => t.pan.normalized >= 0.45 && t.pan.normalized <= 0.55).map(t => t.instrumentId),
+    right: withNotes.filter(t => t.pan.normalized > 0.55).map(t => t.instrumentId),
     netPanOffset: round(netPanOffset, 3),
   };
 
@@ -158,7 +170,7 @@ export function describeMix(sheet: any, perf: any) {
 
   return {
     mixSchemaVersion: 1,
-    worldId, styleId: sheet.styleId,
+    worldId, styleId: sheet.styleId ?? '',
     mixCharacter: mixCharacter ?? null,
     masterProfile: { pocket: resolvedStyle?.sound.masterProfile?.pocket ?? 0.5, lift: resolvedStyle?.sound.masterProfile?.lift ?? 0.5 },
     tracks,

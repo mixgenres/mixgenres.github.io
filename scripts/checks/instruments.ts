@@ -14,11 +14,12 @@ import { codeForGesture } from '../../src/engine/band/gestures.ts';
 import { determineBusCategory } from '../../src/engine/playback/elementaryEngine.ts';
 import { resolveInstrumentKitComponent } from '../../src/engine/lookup/instrument-components';
 import { writeReport } from '../lib/io.ts';
+import type { InstrumentDef } from '../../src/data/instruments/schema/instrument-def';
 
 /** Instruments whose identity depends on a dedicated physical voice path, not a generic family preset. */
 const REQUIRE_BESPOKE = ['trumpet', 'muted-trumpet', 'bandoneon', 'congas', 'bongos', 'timbales', 'cajon'];
 
-const rows = Object.values(INSTRUMENTS_BY_ID).map((def: any) => {
+const rows = Object.values(INSTRUMENTS_BY_ID).map((def: InstrumentDef) => {
   let module: ReturnType<typeof getInstrumentModule> | undefined;
   let registryError: string | undefined;
   try { module = getInstrumentModule(def.id); } catch (error) { registryError = String(error); }
@@ -27,7 +28,7 @@ const rows = Object.values(INSTRUMENTS_BY_ID).map((def: any) => {
   const kitMidi = new Map<number, string[]>();
   for (const c of def.kitComponents ?? []) kitMidi.set(c.midi, [...(kitMidi.get(c.midi) ?? []), c.id]);
   const duplicateKitMidi = [...kitMidi.entries()].filter(([, ids]) => ids.length > 1);
-  const kitComponentMappings = (def.kitComponents ?? []).map((c: any) => ({ id: c.id, resolvedId: resolveInstrumentKitComponent(def.id, c.midi, c.id)?.id ?? null }));
+  const kitComponentMappings = (def.kitComponents ?? []).map(c => ({ id: c.id, resolvedId: resolveInstrumentKitComponent(def.id, c.midi, c.id)?.id ?? null }));
   const dedicated = Boolean(module) && (module!.id === def.id || module!.specializedInstrumentIds?.includes(def.id) === true || (def.id === 'muted-trumpet' && module!.id === 'trumpet'));
   return {
     instrumentId: def.id, family: def.family,
@@ -45,7 +46,7 @@ const failures = rows.flatMap(r => [
   ...(r.moduleId ? [] : [`${r.instrumentId}: ${r.registryError ?? 'missing registry module'}`]),
   ...(r.hasPhysicalSource ? [] : [`${r.instrumentId}: no physical source metadata`]),
   ...(r.acousticRole === 'percussion' && r.busCategory !== 'drums' ? [`${r.instrumentId}: percussion role routed to ${r.busCategory}`] : []),
-  ...r.kitComponentMappings.flatMap((m: any) => (m.resolvedId === m.id ? [] : [`${r.instrumentId}: kit component ${m.id} resolves as ${m.resolvedId}`])),
+  ...r.kitComponentMappings.flatMap(m => (m.resolvedId === m.id ? [] : [`${r.instrumentId}: kit component ${m.id} resolves as ${m.resolvedId}`])),
   ...r.articulationMappings.flatMap(m => (m.resolved.name === m.articulation ? [] : [`${r.instrumentId}: ${m.articulation} decodes as ${m.resolved.name}`])),
 ]);
 for (const id of REQUIRE_BESPOKE) {

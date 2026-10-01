@@ -1,10 +1,10 @@
 import type { GenreWorld } from '../../schema';
-import { METAL_WORLD_WORLD } from './world';
-import { METAL_WORLD_CULTURE } from './culture';
-import { METAL_WORLD_ROLES } from './roles';
-import { METAL_WORLD_FEEL } from './feel';
-import { METAL_WORLD_STYLES } from './styles/index';
-import { METAL_WORLD_PATTERNS } from './patterns/index';
+import { METAL_WORLD_WORLD } from './meta';
+import { METAL_WORLD_CULTURE } from './meta';
+import { METAL_WORLD_ROLES } from './meta';
+import { METAL_WORLD_FEEL } from './meta';
+import { METAL_WORLD_STYLES } from './styles';
+import { METAL_WORLD_PATTERNS } from './patterns';
 
 export const METAL_WORLD: GenreWorld = {
   ...METAL_WORLD_WORLD,

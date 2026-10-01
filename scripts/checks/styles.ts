@@ -23,6 +23,7 @@ import { getInstrumentModule } from '../../src/engine/playback/instrumentRegistr
 import { getInstrumentPerformanceProfile } from '../../src/engine/lookup/performance';
 import { GESTURE_NAMES } from '../../src/engine/band/gestures.ts';
 import { flag, round, writeReport } from '../lib/io.ts';
+import type { PerfNote } from '../../src/engine/band/performanceData.ts';
 
 const GROUPS = ['compile', 'schema', 'tone', 'provenance'] as const;
 type Group = (typeof GROUPS)[number];
@@ -43,14 +44,14 @@ const EXPECTED_PROVENANCE = [
   'arrangement.ensemble', 'sound.instrumentPalette', 'sound.masterProfile.pocket', 'sound.masterProfile.lift',
 ];
 
-for (const def of ALL_STYLES as any[]) {
+for (const def of ALL_STYLES) {
   const id: string = def.id;
   const genre: string = def.primaryGenre;
   try {
-    const style: any = resolveStyle({ genreId: genre, styleId: id });
-    const sheet: any = makeSheet({ genreId: genre, styleId: id } as any);
-    const perf: any = compileWholeSong(sheet, 0);
-    const row: Record<string, unknown> = { styleId: id, genre, name: def.name, notes: perf.notes.length, durationSec: round(perf.duration), tracks: sheet.tracks.map((t: any) => ({ instrumentId: t.instrumentId, role: t.role, volume: t.volume })) };
+    const style: ReturnType<typeof resolveStyle> = resolveStyle({ genreId: genre, styleId: id });
+    const sheet = makeSheet({ genreId: genre, styleId: id });
+    const perf = compileWholeSong(sheet, 0);
+    const row: Record<string, unknown> = { styleId: id, genre, name: def.name, notes: perf.notes.length, durationSec: round(perf.duration), tracks: sheet.tracks.map(t => ({ instrumentId: t.instrumentId, role: t.role, volume: t.volume })) };
 
     if (selected.has('compile')) {
       // makeSheet() is the default-song constructor: starters have exactly eight playable parts.
@@ -67,10 +68,10 @@ for (const def of ALL_STYLES as any[]) {
       if (!style.patterns?.allowed?.length) fail('schema', id, 'no allowed patterns');
       const firstRegionStyle = getResolvedSectionStyle(sheet, sheet.regions[0]) ?? style;
       for (const t of sheet.tracks) {
-        const notes = perf.notes.filter((n: any) => n.trackId === t.id);
+        const notes = perf.notes.filter((n: PerfNote) => n.trackId === t.id);
         if (!notes.length || !t.instrumentId) continue;
         const expectation = styleTechniqueExpectation(firstRegionStyle, getInstrumentPerformanceProfile(t.instrumentId), String(t.role ?? 'comp'));
-        const used = new Set(notes.map((n: any) => GESTURE_NAMES[n.gestureCode]).filter(Boolean));
+        const used = new Set(notes.map((n: PerfNote) => GESTURE_NAMES[n.gestureCode]).filter(Boolean));
         if (expectation.required.length && notes.length >= 6 && !expectation.required.some((x: string) => used.has(x))) {
           fail('schema', id, `${t.instrumentId} never plays any required technique (${expectation.required.join('/')})`);
         }
@@ -87,7 +88,7 @@ for (const def of ALL_STYLES as any[]) {
         const tone = masterToneSettings(mix, genre);
         for (const [k, v] of Object.entries(tone)) if (!Number.isFinite(v as number)) fail('tone', id, `non-finite resolved ${k}`);
         if (tone.roomDepth < 0 || tone.roomDepth > 0.08 || tone.roomRt60 < 0.2 || tone.roomRt60 > 0.8) fail('tone', id, `room send/tail outside safe range (${tone.roomDepth}/${tone.roomRt60})`);
-        row.tone = { roomDepth: tone.roomDepth, roomRt60: tone.roomRt60, presenceGainDb: tone.presenceGainDb, airGainDb: tone.airGainDb, widthGain: tone.widthGain, hasStyleOverride: Boolean((STYLE_PATCHES as any)[id]?.timbreSpace?.mixCharacter) };
+        row.tone = { roomDepth: tone.roomDepth, roomRt60: tone.roomRt60, presenceGainDb: tone.presenceGainDb, airGainDb: tone.airGainDb, widthGain: tone.widthGain, hasStyleOverride: Boolean(STYLE_PATCHES[id]?.timbreSpace?.mixCharacter) };
       }
     }
 
@@ -103,7 +104,7 @@ for (const def of ALL_STYLES as any[]) {
 }
 
 if (selected.has('tone')) {
-  const known = new Set((ALL_STYLES as any[]).map(s => s.id));
+  const known = new Set(ALL_STYLES.map(s => s.id));
   for (const pid of Object.keys(STYLE_PATCHES)) if (!known.has(pid)) fail('tone', pid, 'style patch references an unknown style');
 }
 if (selected.has('provenance') && hardcodedDecisions) failures.provenance.push(`hardcoded decisions remain: ${hardcodedDecisions} (replace with authored style/genre values)`);

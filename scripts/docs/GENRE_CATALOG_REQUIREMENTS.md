@@ -55,4 +55,4 @@
 - Keep source musical definitions only when reachable from supported genres.
 - Prefer shared references over cloned catalog entries.
 - Validate TypeScript before shipping catalog changes.
-- `npm run schema:catalog` must resolve every listed substyle, style form, instrument and starter pattern before writing schemas.
+- `npm run generate:catalog` must resolve every listed substyle, style form, instrument and starter pattern before writing schemas.

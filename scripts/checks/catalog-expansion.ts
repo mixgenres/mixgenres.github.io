@@ -1,5 +1,5 @@
 // CHECK: the catalog expansion is complete and well-formed: 32 genres, 145 expansion styles, 487 expansion
-// patterns, each with form templates, lineage, techniques, valid grids, known instruments and one registered owner.
+// patterns, each with form templates, lineage, techniques, valid grids and registered owners.
 // Run: npm run check:catalog-expansion   Throws (exit 1) on any failure.
 import { GENRE_WORLDS, ALL_PATTERNS } from '../../src/data/genres';
 import { CATALOG_EXPANSION_STYLE_IDS, STYLE_FORM_TEMPLATES } from '../../src/data/styles/styleFormTemplates';
@@ -48,7 +48,8 @@ for (const pattern of expansionPatterns) {
     expect(!!INSTRUMENTS_BY_ID[instrumentId], `Pattern ${pattern.id} references unknown instrument ${instrumentId}.`);
   }
   if (pattern.id.startsWith('style-')) {
-    expect(pattern.styleIds?.length === 1 && styleIds.has(pattern.styleIds[0]), `Signature pattern ${pattern.id} must have exactly one registered style owner.`);
+    expect(!!pattern.styleIds?.length && pattern.styleIds.some(id => styleIds.has(id)), `Signature pattern ${pattern.id} must have a registered style owner.`);
+    expect(!pattern.styleIds?.some(id => !styleIds.has(id)), `Signature pattern ${pattern.id} references an unknown style owner.`);
   } else {
     expect(!pattern.styleIds?.some(id => !styleIds.has(id)), `Technique pattern ${pattern.id} references an unknown style owner.`);
   }

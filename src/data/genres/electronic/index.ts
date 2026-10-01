@@ -1,10 +1,10 @@
 import type { GenreWorld } from '../../schema';
-import { ELECTRONIC_WORLD_WORLD } from './world';
-import { ELECTRONIC_WORLD_CULTURE } from './culture';
-import { ELECTRONIC_WORLD_ROLES } from './roles';
-import { ELECTRONIC_WORLD_FEEL } from './feel';
-import { ELECTRONIC_WORLD_STYLES } from './styles/index';
-import { ELECTRONIC_WORLD_PATTERNS } from './patterns/index';
+import { ELECTRONIC_WORLD_WORLD } from './meta';
+import { ELECTRONIC_WORLD_CULTURE } from './meta';
+import { ELECTRONIC_WORLD_ROLES } from './meta';
+import { ELECTRONIC_WORLD_FEEL } from './meta';
+import { ELECTRONIC_WORLD_STYLES } from './styles';
+import { ELECTRONIC_WORLD_PATTERNS } from './patterns';
 
 export const ELECTRONIC_WORLD: GenreWorld = {
   ...ELECTRONIC_WORLD_WORLD,

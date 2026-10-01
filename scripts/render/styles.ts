@@ -21,7 +21,7 @@ const only = typeof flag('style') === 'string' ? new Set(String(flag('style')).s
 mkdirSync(out, { recursive: true });
 
 const expansionIds = new Set<string>(CATALOG_EXPANSION_STYLE_IDS);
-const styles = (ALL_STYLES as any[]).filter(s => (!expansion || expansionIds.has(s.id)) && (!only || only.has(s.id)));
+const styles = ALL_STYLES.filter(s => (!expansion || expansionIds.has(s.id)) && (!only || only.has(s.id)));
 const failures: string[] = [];
 let rendered = 0;
 

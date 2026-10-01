@@ -1,10 +1,10 @@
 import type { GenreWorld } from '../../schema';
-import { SKA_WORLD_WORLD } from './world';
-import { SKA_WORLD_CULTURE } from './culture';
-import { SKA_WORLD_ROLES } from './roles';
-import { SKA_WORLD_FEEL } from './feel';
-import { SKA_WORLD_STYLES } from './styles/index';
-import { SKA_WORLD_PATTERNS } from './patterns/index';
+import { SKA_WORLD_WORLD } from './meta';
+import { SKA_WORLD_CULTURE } from './meta';
+import { SKA_WORLD_ROLES } from './meta';
+import { SKA_WORLD_FEEL } from './meta';
+import { SKA_WORLD_STYLES } from './styles';
+import { SKA_WORLD_PATTERNS } from './patterns';
 
 export const SKA_WORLD: GenreWorld = {
   ...SKA_WORLD_WORLD,

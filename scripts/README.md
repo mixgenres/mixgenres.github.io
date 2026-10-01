@@ -15,6 +15,16 @@ The folder name tells you what a script is allowed to do:
 > **Audio caveat.** Everything in `render/` uses the Node offline engine. It does **not** run the browser master chain
 > (bus routing, EQ, compression, room). Never judge final loudness or tone from those MP3s — use `report:levels`.
 
+## audit/ — integrity analysis
+
+| npm script | File | What it does |
+|---|---|---|
+| `audit:run` | `audit/run.ts` | Tiered audit orchestrator: type/data gates, sharded style audit, optional audio audit, optional browser-master gate. |
+| `audit:style` | `audit/style-audit.ts` | Per-style compile/reach/provenance/symbolic coverage audit used by `audit:run`. |
+| `audit:diff` | `audit/diff.ts` | Ratchet comparison between two audit JSON reports. |
+| `card:diff` | `audit/card-diff.ts` | Semantic song-card comparison. |
+| `audit:browser` | `audit/browser-master.mjs` | Browser-master placeholder/gate; requires the nightly Playwright environment when enabled. |
+
 ## checks/ — gates
 
 | npm script | File | What it verifies |
@@ -25,6 +35,9 @@ The folder name tells you what a script is allowed to do:
 | `check:catalog-expansion` | `checks/catalog-expansion.ts` | Expansion is complete: 32 genres, 145 styles, 487 patterns, each well-formed with exactly one owner. |
 | `check:catalog-static` | `checks/catalog-static.py` | Same expansion, scanned from source only (no engine), in the genre-local file layout. |
 | `check:smoke` | `checks/smoke-compile.ts` | Every genre builds a sheet and compiles to a non-empty performance. |
+| `check:data-reach` | `checks/data-reach.ts` | T1 runtime reach/provenance coverage audit, shardable with `--start/--end`. |
+| `check:symbolic` | `checks/symbolic-audit.ts` | T1 symbolic performance invariants and playability audit, shardable with `--start/--end`. |
+| `check:audio` | `checks/audio-audit.ts` | T2 section-aware audio fingerprint audit, shardable by genre. |
 | `check:styles` | `checks/styles.ts` | **One pass over all 363 styles, four groups** (`--only=compile,schema,tone,provenance`): `compile` = 8 starter tracks, modules exist, notes > 0; `schema` = required fields, non-empty patterns, technique actually played; `tone` = mix character 0..1, room send/RT60 in range, no orphan patches; `provenance` = source provenance + no hardcoded decisions. |
 | `test:integrity` | `checks/styles.ts --only=compile` | The fast subset used by `npm test`. |
 | `check:instruments` | `checks/instruments.ts` | Every instrument resolves to a render module, has physical-model metadata, decodes articulations, maps kit components, routes percussion to the drum bus; high-value instruments (trumpet, bandoneon, congas, …) have a dedicated module. |
@@ -34,6 +47,19 @@ The folder name tells you what a script is allowed to do:
 | `check:rigorous` | composite | `check` + instruments + instrument-render + render regression. |
 
 `npm test` = `check` + `check:smoke` + `test:integrity`. `npm run test:all` adds the render regression and a static build.
+
+## audit/ — canonical integrity analysis
+
+| npm script | File | What it does |
+|---|---|---|
+| `audit:run` | `audit/run.ts` | Canonical tiered orchestrator: type/data gates, sharded style audits, optional audio audits, and the browser master tier. |
+| `audit:browser` | `audit/browser-master.mjs` | Browser-master-chain audit used by tier 3. |
+| `audit:style` | `audit/style-audit.ts` | Per-style compile, reachability, provenance, symbolic and performance integrity audit; shardable. |
+| `audit:diff` | `audit/diff.ts` | Ratchet comparison between two style-audit JSON reports. |
+| `card:diff` | `audit/card-diff.ts` | Semantic song-card comparison between two JSON reports. |
+| `check:data-reach` | `checks/data-reach.ts` | Standalone data reachability audit. |
+| `check:symbolic` | `checks/symbolic-audit.ts` | Standalone symbolic-performance audit. |
+| `check:audio` | `checks/audio-audit.ts` | Standalone per-genre offline audio audit. |
 
 ## reports/ — measurements
 
@@ -60,4 +86,11 @@ The folder name tells you what a script is allowed to do:
 | `render:expansion` | `render/styles.ts --set=expansion` | The 145 expansion styles, 12 s each, with manifest. |
 | `render:instrument <id> [genre] [out]` | `render/instrument.ts` | One instrument lane in isolation. |
 | `render:regression` | `render/regression.ts` | 1.5 s per genre + ffprobe validation (`AUDIO_START`/`AUDIO_END` shard). |
-| `render:stems <genre> [style]` | `render/stems.ts` (+ `stems-analyze.py`) | FULL + solo stems + per-section note stats; analyse per-section RMS. |
+| `render:stems <genre> [style]` | `render/stems.ts` | FULL + solo stems + per-section note stats. |
+| `render:stems-analyze <outDir>` | `render/stems-analyze.py` | Analyse per-section RMS for an existing stems render. |
+
+## migrations/ — one-off data migrations
+
+| npm script | File | Use |
+|---|---|---|
+| `migrate:consolidate-genres` | `migrations/consolidate-genre-files.py` | Consolidate legacy genre-local style/pattern files while retaining barrels; refuses ambiguous exports/imports or duplicate declarations. |

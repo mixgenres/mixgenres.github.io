@@ -1,10 +1,10 @@
 import type { GenreWorld } from '../../schema';
-import { AFROBEATS_WORLD_WORLD } from './world';
-import { AFROBEATS_WORLD_CULTURE } from './culture';
-import { AFROBEATS_WORLD_ROLES } from './roles';
-import { AFROBEATS_WORLD_FEEL } from './feel';
-import { AFROBEATS_WORLD_STYLES } from './styles/index';
-import { AFROBEATS_WORLD_PATTERNS } from './patterns/index';
+import { AFROBEATS_WORLD_WORLD } from './meta';
+import { AFROBEATS_WORLD_CULTURE } from './meta';
+import { AFROBEATS_WORLD_ROLES } from './meta';
+import { AFROBEATS_WORLD_FEEL } from './meta';
+import { AFROBEATS_WORLD_STYLES } from './styles';
+import { AFROBEATS_WORLD_PATTERNS } from './patterns';
 
 export const AFROBEATS_WORLD: GenreWorld = {
   ...AFROBEATS_WORLD_WORLD,
