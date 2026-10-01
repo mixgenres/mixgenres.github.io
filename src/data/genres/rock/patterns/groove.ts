@@ -965,4 +965,742 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 1,
           "enabled": true
         }
+,
+  {
+    "id": "tech-rock-rock-backbeat",
+    "worldId": "rock",
+    "styleIds": [
+      "rock-rock-roll",
+      "rock-southern-rock",
+      "rock-math-rock"
+    ],
+    "name": "rock backbeat",
+    "shortName": "rock backbeat",
+    "family": "rock",
+    "category": "groove",
+    "description": "Technique: rock backbeat",
+    "tags": [
+      "rock",
+      "rock backbeat"
+    ],
+    "approaches": [
+      "rock backbeat"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "rock",
+      "rock backbeat"
+    ],
+    "techniques": [
+      "rock backbeat"
+    ]
+  },
+  {
+    "id": "tech-rock-motorik-beat",
+    "worldId": "rock",
+    "styleIds": [
+      "rock-british-invasion",
+      "rock-krautrock"
+    ],
+    "name": "motorik beat",
+    "shortName": "motorik beat",
+    "family": "rock",
+    "category": "groove",
+    "description": "Technique: motorik beat",
+    "tags": [
+      "rock",
+      "motorik beat"
+    ],
+    "approaches": [
+      "motorik beat"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "rock",
+      "motorik beat"
+    ],
+    "techniques": [
+      "motorik beat"
+    ]
+  },
+  {
+    "id": "tech-rock-odd-meter-riff",
+    "worldId": "rock",
+    "styleIds": [
+      "rock-rock-roll",
+      "rock-math-rock"
+    ],
+    "name": "odd-meter riff",
+    "shortName": "odd-meter riff",
+    "family": "rock",
+    "category": "groove",
+    "description": "Technique: odd-meter riff",
+    "tags": [
+      "rock",
+      "odd-meter riff"
+    ],
+    "approaches": [
+      "odd-meter riff"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "rock",
+      "odd-meter riff"
+    ],
+    "techniques": [
+      "odd-meter riff"
+    ]
+  },
+  {
+    "id": "tech-rock-arpeggiated-shoegaze-wall",
+    "worldId": "rock",
+    "styleIds": [
+      "rock-dream-pop"
+    ],
+    "name": "arpeggiated shoegaze wall",
+    "shortName": "arpeggiated shoegaze wall",
+    "family": "rock",
+    "category": "groove",
+    "description": "Technique: arpeggiated shoegaze wall",
+    "tags": [
+      "rock",
+      "arpeggiated shoegaze wall"
+    ],
+    "approaches": [
+      "arpeggiated shoegaze wall"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "rock",
+      "arpeggiated shoegaze wall"
+    ],
+    "techniques": [
+      "arpeggiated shoegaze wall"
+    ]
+  },
+  {
+    "id": "style-rock-rock-roll-signature",
+    "worldId": "rock",
+    "styleIds": [
+      "rock-rock-roll"
+    ],
+    "name": "Rock & Roll Signature Cell",
+    "shortName": "Rock & Roll Cell",
+    "family": "rock",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "rock",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "piano",
+      "bass",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "rock",
+      "signature"
+    ],
+    "techniques": [
+      "boogie riff",
+      "rock backbeat",
+      "dual-guitar harmony",
+      "guitar octave",
+      "odd-meter riff"
+    ]
+  },
+  {
+    "id": "style-rock-british-invasion-signature",
+    "worldId": "rock",
+    "styleIds": [
+      "rock-british-invasion"
+    ],
+    "name": "British Invasion Signature Cell",
+    "shortName": "British Invasion Cell",
+    "family": "rock",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "rock",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "piano"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "rock",
+      "signature"
+    ],
+    "techniques": [
+      "dual-guitar harmony",
+      "guitar octave",
+      "motorik beat"
+    ]
+  },
+  {
+    "id": "style-rock-southern-rock-signature",
+    "worldId": "rock",
+    "styleIds": [
+      "rock-southern-rock"
+    ],
+    "name": "Southern Rock Signature Cell",
+    "shortName": "Southern Rock Cell",
+    "family": "rock",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "rock",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "steel-guitar"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "rock",
+      "signature"
+    ],
+    "techniques": [
+      "dual-guitar harmony",
+      "guitar octave",
+      "rock backbeat"
+    ]
+  },
+  {
+    "id": "style-rock-krautrock-signature",
+    "worldId": "rock",
+    "styleIds": [
+      "rock-krautrock"
+    ],
+    "name": "Krautrock Signature Cell",
+    "shortName": "Krautrock Cell",
+    "family": "rock",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "rock",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "synth"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "rock",
+      "signature"
+    ],
+    "techniques": [
+      "motorik beat"
+    ]
+  },
+  {
+    "id": "style-rock-math-rock-signature",
+    "worldId": "rock",
+    "styleIds": [
+      "rock-math-rock"
+    ],
+    "name": "Math Rock Signature Cell",
+    "shortName": "Math Rock Cell",
+    "family": "rock",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "rock",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "bass",
+      "drums"
+    ],
+    "meter": "5/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "rock",
+      "signature"
+    ],
+    "techniques": [
+      "odd-meter riff",
+      "boogie riff",
+      "dual-guitar harmony",
+      "guitar octave",
+      "rock backbeat"
+    ]
+  },
+  {
+    "id": "style-rock-dream-pop-signature",
+    "worldId": "rock",
+    "styleIds": [
+      "rock-dream-pop"
+    ],
+    "name": "Dream Pop Signature Cell",
+    "shortName": "Dream Pop Cell",
+    "family": "rock",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "rock",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "synth",
+      "bass",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "rock",
+      "signature"
+    ],
+    "techniques": [
+      "dual-guitar harmony",
+      "arpeggiated shoegaze wall",
+      "guitar octave"
+    ]
+  }
 ];

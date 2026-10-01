@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 2,
+  "preRender": true,
+  "genre": "tango",
+  "styleId": "tango-tango-tradicional",
+  "worldId": "tango",
+  "tracks": [
+    {
+      "id": "v0",
+      "role": "harmony",
+      "instrumentId": "bandoneon",
+      "moduleId": "bandoneon",
+      "family": "bellows-and-keys",
+      "articulations": [
+        "accent",
+        "staccato",
+        "legato",
+        "tenuto",
+        "marcato",
+        "tremolo",
+        "portato",
+        "arrastre",
+        "bellows-slap",
+        "golpe-caja",
+        "cluster",
+        "chapa",
+        "vibrato",
+        "legato_squeeze"
+      ],
+      "kitComponents": []
+    },
+    {
+      "id": "v1",
+      "role": "melody",
+      "instrumentId": "violin",
+      "moduleId": "violin",
+      "family": "bowed",
+      "articulations": [
+        "accent",
+        "staccato",
+        "legato",
+        "portato",
+        "tremolo",
+        "pizzicato",
+        "vibrato",
+        "spiccato",
+        "chicharra",
+        "tambor",
+        "latigo",
+        "arco",
+        "detache"
+      ],
+      "kitComponents": []
+    },
+    {
+      "id": "v2",
+      "role": "harmony",
+      "instrumentId": "piano",
+      "moduleId": "piano",
+      "family": "bellows-and-keys",
+      "articulations": [
+        "accent",
+        "staccato",
+        "legato",
+        "tenuto",
+        "sostenuto",
+        "marcato",
+        "arrastre",
+        "yumba",
+        "cluster",
+        "chapa",
+        "campana",
+        "pesada",
+        "montuno",
+        "octave-stabs"
+      ],
+      "kitComponents": []
+    },
+    {
+      "id": "v3",
+      "role": "bass",
+      "instrumentId": "upright-bass",
+      "moduleId": "upright-bass",
+      "family": "plucked",
+      "articulations": [
+        "accent",
+        "staccato",
+        "legato",
+        "tenuto",
+        "ghost",
+        "pizzicato",
+        "harmonic",
+        "arco",
+        "arrastre",
+        "strappata",
+        "lija",
+        "tambor",
+        "chicharra",
+        "slap"
+      ],
+      "kitComponents": []
+    },
+    {
+      "id": "v4",
+      "role": "lead",
+      "instrumentId": "cello",
+      "moduleId": "cello",
+      "family": "bowed",
+      "articulations": [
+        "arco",
+        "pizzicato",
+        "legato",
+        "staccato",
+        "tenuto",
+        "tremolo",
+        "arrastre",
+        "portato",
+        "vibrato",
+        "accent",
+        "spiccato",
+        "chicharra",
+        "detache"
+      ],
+      "kitComponents": []
+    },
+    {
+      "id": "v5",
+      "role": "melody",
+      "instrumentId": "flute",
+      "moduleId": "wind",
+      "family": "winds",
+      "articulations": [
+        "accent",
+        "staccato",
+        "legato",
+        "tenuto",
+        "vibrato",
+        "flutter-tongue",
+        "glissando"
+      ],
+      "kitComponents": []
+    },
+    {
+      "id": "v6",
+      "role": "lead",
+      "instrumentId": "clarinet",
+      "moduleId": "wind",
+      "family": "winds",
+      "articulations": [
+        "accent",
+        "staccato",
+        "legato",
+        "tenuto",
+        "vibrato",
+        "bend",
+        "trill",
+        "portato"
+      ],
+      "kitComponents": []
+    },
+    {
+      "id": "v7",
+      "role": "harmony",
+      "instrumentId": "acoustic-guitar",
+      "moduleId": "guitar",
+      "family": "plucked",
+      "articulations": [
+        "accent",
+        "staccato",
+        "legato",
+        "palm-mute",
+        "tenuto",
+        "ghost",
+        "harmonic",
+        "slide"
+      ],
+      "kitComponents": []
+    }
+  ],
+  "compiledNoteCount": 1454
+}

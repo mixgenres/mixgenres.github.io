@@ -983,4 +983,751 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 1,
           "enabled": true
         }
+,
+  {
+    "id": "tech-timba-songo",
+    "worldId": "timba",
+    "styleIds": [
+      "timba-los-van-van-songo"
+    ],
+    "name": "songo",
+    "shortName": "songo",
+    "family": "timba",
+    "category": "groove",
+    "description": "Technique: songo",
+    "tags": [
+      "timba",
+      "songo"
+    ],
+    "approaches": [
+      "songo"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "timba",
+      "songo"
+    ],
+    "techniques": [
+      "songo"
+    ]
+  },
+  {
+    "id": "tech-timba-bomba-break",
+    "worldId": "timba",
+    "styleIds": [
+      "timba-timba-aggression"
+    ],
+    "name": "bomba break",
+    "shortName": "bomba break",
+    "family": "timba",
+    "category": "groove",
+    "description": "Technique: bomba break",
+    "tags": [
+      "timba",
+      "bomba break"
+    ],
+    "approaches": [
+      "bomba break"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "timba",
+      "bomba break"
+    ],
+    "techniques": [
+      "bomba break"
+    ]
+  },
+  {
+    "id": "tech-timba-masacote",
+    "worldId": "timba",
+    "styleIds": [
+      "timba-timba-aggression"
+    ],
+    "name": "masacote",
+    "shortName": "masacote",
+    "family": "timba",
+    "category": "groove",
+    "description": "Technique: masacote",
+    "tags": [
+      "timba",
+      "masacote"
+    ],
+    "approaches": [
+      "masacote"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "timba",
+      "masacote"
+    ],
+    "techniques": [
+      "masacote"
+    ]
+  },
+  {
+    "id": "tech-timba-percussion-cascade",
+    "worldId": "timba",
+    "styleIds": [
+      "timba-los-van-van-songo",
+      "timba-timba-aggression"
+    ],
+    "name": "percussion cascade",
+    "shortName": "percussion cascade",
+    "family": "timba",
+    "category": "groove",
+    "description": "Technique: percussion cascade",
+    "tags": [
+      "timba",
+      "percussion cascade"
+    ],
+    "approaches": [
+      "percussion cascade"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "timba",
+      "percussion cascade"
+    ],
+    "techniques": [
+      "percussion cascade"
+    ]
+  },
+  {
+    "id": "tech-timba-clave-displacement",
+    "worldId": "timba",
+    "styleIds": [
+      "timba-son-montuno-timba",
+      "timba-timba-piano-tumbao"
+    ],
+    "name": "clave displacement",
+    "shortName": "clave displacement",
+    "family": "timba",
+    "category": "groove",
+    "description": "Technique: clave displacement",
+    "tags": [
+      "timba",
+      "clave displacement"
+    ],
+    "approaches": [
+      "clave displacement"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "timba",
+      "clave displacement"
+    ],
+    "techniques": [
+      "clave displacement"
+    ]
+  },
+  {
+    "id": "tech-timba-rhythmic-gear-change",
+    "worldId": "timba",
+    "styleIds": [
+      "timba-timba-aggression"
+    ],
+    "name": "rhythmic gear change",
+    "shortName": "rhythmic gear change",
+    "family": "timba",
+    "category": "groove",
+    "description": "Technique: rhythmic gear change",
+    "tags": [
+      "timba",
+      "rhythmic gear change"
+    ],
+    "approaches": [
+      "rhythmic gear change"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "timba",
+      "rhythmic gear change"
+    ],
+    "techniques": [
+      "rhythmic gear change"
+    ]
+  },
+  {
+    "id": "style-timba-son-montuno-timba-signature",
+    "worldId": "timba",
+    "styleIds": [
+      "timba-son-montuno-timba"
+    ],
+    "name": "Son-Montuno Timba Signature Cell",
+    "shortName": "Son-Montuno Timba Cell",
+    "family": "timba",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "timba",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "piano",
+      "bass",
+      "congas",
+      "timbales"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "timba",
+      "signature"
+    ],
+    "techniques": [
+      "clave displacement",
+      "horn block",
+      "coro/pregón",
+      "timba bass anticipation",
+      "timba piano tumbao"
+    ]
+  },
+  {
+    "id": "style-timba-los-van-van-songo-signature",
+    "worldId": "timba",
+    "styleIds": [
+      "timba-los-van-van-songo"
+    ],
+    "name": "Los Van Van Songo Signature Cell",
+    "shortName": "Los Van Van Songo Cell",
+    "family": "timba",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "timba",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "bass",
+      "drums",
+      "piano",
+      "congas"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "timba",
+      "signature"
+    ],
+    "techniques": [
+      "songo",
+      "percussion cascade",
+      "timba bass anticipation",
+      "timba piano tumbao"
+    ]
+  },
+  {
+    "id": "style-timba-timba-aggression-signature",
+    "worldId": "timba",
+    "styleIds": [
+      "timba-timba-aggression"
+    ],
+    "name": "Timba Aggression Signature Cell",
+    "shortName": "Timba Aggression Cell",
+    "family": "timba",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "timba",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "bass",
+      "piano",
+      "congas",
+      "timbales"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7,
+      1,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "timba",
+      "signature"
+    ],
+    "techniques": [
+      "density switch",
+      "percussion cascade",
+      "masacote",
+      "rhythmic gear change",
+      "bomba break",
+      "timba bass anticipation"
+    ]
+  },
+  {
+    "id": "style-timba-timba-piano-tumbao-signature",
+    "worldId": "timba",
+    "styleIds": [
+      "timba-timba-piano-tumbao"
+    ],
+    "name": "Timba Piano-Tumbao Signature Cell",
+    "shortName": "Timba Piano-Tumbao Cell",
+    "family": "timba",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "timba",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "piano",
+      "bass",
+      "congas",
+      "timbales"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "timba",
+      "signature"
+    ],
+    "techniques": [
+      "timba piano tumbao",
+      "clave displacement",
+      "timba bass anticipation"
+    ]
+  }
 ];

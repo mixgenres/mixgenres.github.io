@@ -73,7 +73,403 @@ const styles: GenreStyleDefinition[] = [
     signatureCell: 'A rising, gospel-shaped vocal phrase over sustained keys and a spacious backbeat', grooveMechanics: { swingPercentage: 56, anticipationOffsetSteps: 0, microtimingFeel: 'laid-back' },
     prominentChords: ['I7', 'IV7', 'V7', 'm7'], sectionProgressions: { verse: ['C', 'Am', 'F', 'G'], chorus: ['F', 'G', 'C', 'Am'] },
   },
-];
+  {
+  "id": "soul-stax-soul",
+  "worldId": "soul",
+  "name": "Stax Soul",
+  "origin": "Memphis / United States",
+  "era": "1960s–1970s",
+  "description": "Raw rhythm-section sound with Hammond, guitar interplay and tight horn arrangements.",
+  "characteristicInstruments": [
+    "organ",
+    "electric-guitar",
+    "bass",
+    "drums",
+    "brass",
+    "voice"
+  ],
+  "preferredMeters": [
+    "4/4"
+  ],
+  "tempoRange": [
+    80,
+    110
+  ],
+  "keySubstyles": [
+    "Stax Soul"
+  ],
+  "coreConcepts": [
+    "soul backbeat",
+    "Hammond swell",
+    "horn response"
+  ],
+  "rhythmicGrammar": [
+    "Raw pocket with Hammond and horn"
+  ],
+  "danceTags": [
+    "listening"
+  ],
+  "tuningSystem": "12-tet",
+  "signatureCell": "Raw pocket with Hammond and horn",
+  "grooveMechanics": {
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0,
+    "microtimingFeel": "straight"
+  },
+  "prominentChords": [
+    "Am7",
+    "Dm7",
+    "G7",
+    "Cmaj7"
+  ],
+  "sectionProgressions": {
+    "intro": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "verse": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "chorus": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "bridge": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "solo": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "coda": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ]
+  },
+  "referenceArtists": [
+    "Booker T. & the M.G.'s",
+    "Otis Redding"
+  ],
+  "referenceTracks": [],
+  "techniques": [
+    "Hammond swell",
+    "horn response",
+    "soul backbeat",
+    "call-and-response",
+    "string swell"
+  ]
+},
+{
+  "id": "soul-muscle-shoals-soul",
+  "worldId": "soul",
+  "name": "Muscle Shoals Soul",
+  "origin": "Alabama / United States",
+  "era": "1960s–1970s",
+  "description": "Deep pocket, melodic bass, gospel vocals and understated expressive rhythm guitar.",
+  "characteristicInstruments": [
+    "electric-guitar",
+    "bass",
+    "drums",
+    "organ",
+    "voice"
+  ],
+  "preferredMeters": [
+    "4/4"
+  ],
+  "tempoRange": [
+    70,
+    110
+  ],
+  "keySubstyles": [
+    "Muscle Shoals Soul"
+  ],
+  "coreConcepts": [
+    "melodic bass",
+    "gospel vocal run",
+    "restrained guitar"
+  ],
+  "rhythmicGrammar": [
+    "Deep pocket with melodic bass"
+  ],
+  "danceTags": [
+    "listening"
+  ],
+  "tuningSystem": "12-tet",
+  "signatureCell": "Deep pocket with melodic bass",
+  "grooveMechanics": {
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0,
+    "microtimingFeel": "straight"
+  },
+  "prominentChords": [
+    "Am7",
+    "Dm7",
+    "G7",
+    "Cmaj7"
+  ],
+  "sectionProgressions": {
+    "intro": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "verse": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "chorus": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "bridge": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "solo": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "coda": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ]
+  },
+  "referenceArtists": [
+    "Aretha Franklin",
+    "Wilson Pickett"
+  ],
+  "referenceTracks": [],
+  "techniques": [
+    "gospel vocal run",
+    "melodic bass",
+    "soul backbeat",
+    "vocal harmony stack"
+  ]
+},
+{
+  "id": "soul-psychedelic-soul",
+  "worldId": "soul",
+  "name": "Psychedelic Soul",
+  "origin": "United States",
+  "era": "1960s–1970s",
+  "description": "Soul harmony combined with funk bass, studio effects, extended grooves and experimental arrangements.",
+  "characteristicInstruments": [
+    "electric-guitar",
+    "bass",
+    "drums",
+    "synth",
+    "strings",
+    "voice"
+  ],
+  "preferredMeters": [
+    "4/4"
+  ],
+  "tempoRange": [
+    75,
+    110
+  ],
+  "keySubstyles": [
+    "Psychedelic Soul"
+  ],
+  "coreConcepts": [
+    "studio effect",
+    "extended groove",
+    "funk bass",
+    "vocal layering"
+  ],
+  "rhythmicGrammar": [
+    "Extended soul groove with psychedelic texture"
+  ],
+  "danceTags": [
+    "listening"
+  ],
+  "tuningSystem": "12-tet",
+  "signatureCell": "Extended soul groove with psychedelic texture",
+  "grooveMechanics": {
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0,
+    "microtimingFeel": "straight"
+  },
+  "prominentChords": [
+    "Am7",
+    "Dm7",
+    "G7",
+    "Cmaj7"
+  ],
+  "sectionProgressions": {
+    "intro": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "verse": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "chorus": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "bridge": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "solo": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "coda": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ]
+  },
+  "referenceArtists": [
+    "Curtis Mayfield",
+    "Sly Stone"
+  ],
+  "referenceTracks": [],
+  "techniques": [
+    "gospel vocal run",
+    "melodic bass",
+    "soul backbeat",
+    "vocal harmony stack"
+  ]
+},
+{
+  "id": "soul-quiet-funk-boogie-soul",
+  "worldId": "soul",
+  "name": "Quiet Funk / Boogie Soul",
+  "origin": "United States",
+  "era": "1970s–1980s",
+  "description": "Polished electric bass, Rhodes and synth textures with sophisticated harmony and danceable grooves.",
+  "characteristicInstruments": [
+    "bass",
+    "rhodes",
+    "synth",
+    "drums",
+    "voice"
+  ],
+  "preferredMeters": [
+    "4/4"
+  ],
+  "tempoRange": [
+    95,
+    120
+  ],
+  "keySubstyles": [
+    "Quiet Funk / Boogie Soul"
+  ],
+  "coreConcepts": [
+    "Rhodes voicing",
+    "octave bass",
+    "extended harmony",
+    "dance groove"
+  ],
+  "rhythmicGrammar": [
+    "Rhodes harmony over polished boogie pocket"
+  ],
+  "danceTags": [
+    "social-partner"
+  ],
+  "tuningSystem": "12-tet",
+  "signatureCell": "Rhodes harmony over polished boogie pocket",
+  "grooveMechanics": {
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0,
+    "microtimingFeel": "straight"
+  },
+  "prominentChords": [
+    "Am7",
+    "Dm7",
+    "G7",
+    "Cmaj7"
+  ],
+  "sectionProgressions": {
+    "intro": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "verse": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "chorus": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "bridge": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "solo": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ],
+    "coda": [
+      "Am7",
+      "Dm7",
+      "G7",
+      "Cmaj7"
+    ]
+  },
+  "referenceArtists": [
+    "Leon Ware",
+    "Patrice Rushen"
+  ],
+  "referenceTracks": [],
+  "techniques": [
+    "Rhodes voicing",
+    "melodic bass",
+    "soul backbeat",
+    "vocal harmony stack"
+  ]
+}];
 
 export const SOUL_WORLD: GenreWorld = {
   id: 'soul', name: 'Soul', family: 'African American Popular Music', color: '#C76C46', level: 'world', kind: 'world', strictness: 'flexible',
@@ -84,5 +480,1009 @@ export const SOUL_WORLD: GenreWorld = {
   crossLinks: ['Soul ↔ Gospel', 'Soul ↔ R&B', 'Soul ↔ Funk'],
   roles: { voice: ['lead vocal', 'backing-vocal response', 'ad-libs'], drums: ['deep backbeat', 'shuffle or straight pocket'], bass: ['melodic bass line', 'root and fifth motion'], harmony: ['organ and piano support', 'string or horn punctuation'], percussion: ['tambourine on backbeat', 'handclap accents'] },
   tuningSystem: '12-tet', signatureCell: 'Lead vocal call and backing response over melodic bass and a grounded backbeat',
-  grooveMechanics: { swingPercentage: 53, anticipationOffsetSteps: 0, microtimingFeel: 'laid-back' }, styleDefinitions: styles, patterns: [],
+  grooveMechanics: { swingPercentage: 53, anticipationOffsetSteps: 0, microtimingFeel: 'laid-back' }, styleDefinitions: styles, patterns: [
+  {
+  "id": "tech-soul-soul-backbeat",
+  "worldId": "soul",
+  "styleIds": [
+    "soul-stax-soul",
+    "soul-muscle-shoals-soul",
+    "soul-psychedelic-soul",
+    "soul-quiet-funk-boogie-soul"
+  ],
+  "name": "soul backbeat",
+  "shortName": "soul backbeat",
+  "family": "soul",
+  "category": "groove",
+  "description": "Technique: soul backbeat",
+  "tags": [
+    "soul",
+    "soul backbeat"
+  ],
+  "approaches": [
+    "soul backbeat"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "soul",
+    "soul backbeat"
+  ],
+  "techniques": [
+    "soul backbeat"
+  ]
+},
+{
+  "id": "tech-soul-gospel-vocal-run",
+  "worldId": "soul",
+  "styleIds": [
+    "soul-muscle-shoals-soul",
+    "soul-psychedelic-soul"
+  ],
+  "name": "gospel vocal run",
+  "shortName": "gospel vocal run",
+  "family": "soul",
+  "category": "lead",
+  "description": "Technique: gospel vocal run",
+  "tags": [
+    "soul",
+    "gospel vocal run"
+  ],
+  "approaches": [
+    "gospel vocal run"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "voice",
+    "lead"
+  ],
+  "instruments": [
+    "voice"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "soul",
+    "gospel vocal run"
+  ],
+  "techniques": [
+    "gospel vocal run"
+  ]
+},
+{
+  "id": "tech-soul-hammond-swell",
+  "worldId": "soul",
+  "styleIds": [
+    "soul-stax-soul"
+  ],
+  "name": "Hammond swell",
+  "shortName": "Hammond swell",
+  "family": "soul",
+  "category": "comping",
+  "description": "Technique: Hammond swell",
+  "tags": [
+    "soul",
+    "Hammond swell"
+  ],
+  "approaches": [
+    "Hammond swell"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "harmony",
+    "piano"
+  ],
+  "instruments": [
+    "organ"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "soul",
+    "Hammond swell"
+  ],
+  "techniques": [
+    "Hammond swell"
+  ]
+},
+{
+  "id": "tech-soul-horn-response",
+  "worldId": "soul",
+  "styleIds": [
+    "soul-stax-soul"
+  ],
+  "name": "horn response",
+  "shortName": "horn response",
+  "family": "soul",
+  "category": "lead",
+  "description": "Technique: horn response",
+  "tags": [
+    "soul",
+    "horn response"
+  ],
+  "approaches": [
+    "horn response"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "horn-section",
+    "lead"
+  ],
+  "instruments": [
+    "brass"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "soul",
+    "horn response"
+  ],
+  "techniques": [
+    "horn response"
+  ]
+},
+{
+  "id": "tech-soul-motown-tambourine",
+  "worldId": "soul",
+  "styleIds": [],
+  "name": "Motown tambourine",
+  "shortName": "Motown tambourine",
+  "family": "soul",
+  "category": "groove",
+  "description": "Technique: Motown tambourine",
+  "tags": [
+    "soul",
+    "Motown tambourine"
+  ],
+  "approaches": [
+    "Motown tambourine"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "hand-percussion"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "soul",
+    "Motown tambourine"
+  ],
+  "techniques": [
+    "Motown tambourine"
+  ]
+},
+{
+  "id": "tech-soul-melodic-bass",
+  "worldId": "soul",
+  "styleIds": [
+    "soul-muscle-shoals-soul",
+    "soul-psychedelic-soul",
+    "soul-quiet-funk-boogie-soul"
+  ],
+  "name": "melodic bass",
+  "shortName": "melodic bass",
+  "family": "soul",
+  "category": "bass",
+  "description": "Technique: melodic bass",
+  "tags": [
+    "soul",
+    "melodic bass"
+  ],
+  "approaches": [
+    "melodic bass"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "bass"
+  ],
+  "instruments": [
+    "bass"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "soul",
+    "melodic bass"
+  ],
+  "techniques": [
+    "melodic bass"
+  ]
+},
+{
+  "id": "tech-soul-rhodes-voicing",
+  "worldId": "soul",
+  "styleIds": [
+    "soul-quiet-funk-boogie-soul"
+  ],
+  "name": "Rhodes voicing",
+  "shortName": "Rhodes voicing",
+  "family": "soul",
+  "category": "comping",
+  "description": "Technique: Rhodes voicing",
+  "tags": [
+    "soul",
+    "Rhodes voicing"
+  ],
+  "approaches": [
+    "Rhodes voicing"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "harmony",
+    "lead"
+  ],
+  "instruments": [
+    "piano"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "soul",
+    "Rhodes voicing"
+  ],
+  "techniques": [
+    "Rhodes voicing"
+  ]
+},
+{
+  "id": "tech-soul-string-swell",
+  "worldId": "soul",
+  "styleIds": [
+    "soul-stax-soul"
+  ],
+  "name": "string swell",
+  "shortName": "string swell",
+  "family": "soul",
+  "category": "texture",
+  "description": "Technique: string swell",
+  "tags": [
+    "soul",
+    "string swell"
+  ],
+  "approaches": [
+    "string swell"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "texture",
+    "harmony"
+  ],
+  "instruments": [
+    "strings"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "soul",
+    "string swell"
+  ],
+  "techniques": [
+    "string swell"
+  ]
+},
+{
+  "id": "tech-soul-call-and-response",
+  "worldId": "soul",
+  "styleIds": [
+    "soul-stax-soul"
+  ],
+  "name": "call-and-response",
+  "shortName": "call-and-response",
+  "family": "soul",
+  "category": "lead",
+  "description": "Technique: call-and-response",
+  "tags": [
+    "soul",
+    "call-and-response"
+  ],
+  "approaches": [
+    "call-and-response"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "voice",
+    "lead"
+  ],
+  "instruments": [
+    "voice"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "soul",
+    "call-and-response"
+  ],
+  "techniques": [
+    "call-and-response"
+  ]
+},
+{
+  "id": "tech-soul-vocal-harmony-stack",
+  "worldId": "soul",
+  "styleIds": [
+    "soul-muscle-shoals-soul",
+    "soul-psychedelic-soul",
+    "soul-quiet-funk-boogie-soul"
+  ],
+  "name": "vocal harmony stack",
+  "shortName": "vocal harmony stack",
+  "family": "soul",
+  "category": "comping",
+  "description": "Technique: vocal harmony stack",
+  "tags": [
+    "soul",
+    "vocal harmony stack"
+  ],
+  "approaches": [
+    "vocal harmony stack"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "harmony",
+    "lead"
+  ],
+  "instruments": [
+    "piano"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "soul",
+    "vocal harmony stack"
+  ],
+  "techniques": [
+    "vocal harmony stack"
+  ]
+},
+{
+  "id": "style-soul-stax-soul-signature",
+  "worldId": "soul",
+  "styleIds": [
+    "soul-stax-soul"
+  ],
+  "name": "Stax Soul Signature Cell",
+  "shortName": "Stax Soul Cell",
+  "family": "soul",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "soul",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "organ",
+    "electric-guitar",
+    "bass",
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "soul",
+    "signature"
+  ],
+  "techniques": [
+    "Hammond swell",
+    "horn response",
+    "soul backbeat",
+    "call-and-response",
+    "string swell"
+  ]
+},
+{
+  "id": "style-soul-muscle-shoals-soul-signature",
+  "worldId": "soul",
+  "styleIds": [
+    "soul-muscle-shoals-soul"
+  ],
+  "name": "Muscle Shoals Soul Signature Cell",
+  "shortName": "Muscle Shoals Soul Cell",
+  "family": "soul",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "soul",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "electric-guitar",
+    "bass",
+    "drums",
+    "organ"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "soul",
+    "signature"
+  ],
+  "techniques": [
+    "gospel vocal run",
+    "melodic bass",
+    "soul backbeat",
+    "vocal harmony stack"
+  ]
+},
+{
+  "id": "style-soul-psychedelic-soul-signature",
+  "worldId": "soul",
+  "styleIds": [
+    "soul-psychedelic-soul"
+  ],
+  "name": "Psychedelic Soul Signature Cell",
+  "shortName": "Psychedelic Soul Cell",
+  "family": "soul",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "soul",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "electric-guitar",
+    "bass",
+    "drums",
+    "synth"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "soul",
+    "signature"
+  ],
+  "techniques": [
+    "gospel vocal run",
+    "melodic bass",
+    "soul backbeat",
+    "vocal harmony stack"
+  ]
+},
+{
+  "id": "style-soul-quiet-funk-boogie-soul-signature",
+  "worldId": "soul",
+  "styleIds": [
+    "soul-quiet-funk-boogie-soul"
+  ],
+  "name": "Quiet Funk / Boogie Soul Signature Cell",
+  "shortName": "Quiet Funk / Boogie Soul Cell",
+  "family": "soul",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "soul",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "bass",
+    "rhodes",
+    "synth",
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "soul",
+    "signature"
+  ],
+  "techniques": [
+    "Rhodes voicing",
+    "melodic bass",
+    "soul backbeat",
+    "vocal harmony stack"
+  ]
+}],
 };

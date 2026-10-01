@@ -271,4 +271,465 @@ export const SKA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 0.82,
           "enabled": true
         }
+,
+  {
+    "id": "tech-ska-jamaican-shuffle",
+    "worldId": "ska",
+    "styleIds": [
+      "ska-jamaican-first-wave-ska",
+      "ska-jamaican-ska-jazz"
+    ],
+    "name": "Jamaican shuffle",
+    "shortName": "Jamaican shuffle",
+    "family": "ska",
+    "category": "groove",
+    "description": "Technique: Jamaican shuffle",
+    "tags": [
+      "ska",
+      "Jamaican shuffle"
+    ],
+    "approaches": [
+      "Jamaican shuffle"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      3,
+      6,
+      8,
+      11,
+      14
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "ska",
+      "Jamaican shuffle"
+    ],
+    "techniques": [
+      "Jamaican shuffle"
+    ]
+  },
+  {
+    "id": "tech-ska-ska-punk-double-time",
+    "worldId": "ska",
+    "styleIds": [
+      "ska-third-wave-ska"
+    ],
+    "name": "ska-punk double-time",
+    "shortName": "ska-punk double-time",
+    "family": "ska",
+    "category": "groove",
+    "description": "Technique: ska-punk double-time",
+    "tags": [
+      "ska",
+      "ska-punk double-time"
+    ],
+    "approaches": [
+      "ska-punk double-time"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "ska",
+      "ska-punk double-time"
+    ],
+    "techniques": [
+      "ska-punk double-time"
+    ]
+  },
+  {
+    "id": "style-ska-jamaican-first-wave-ska-signature",
+    "worldId": "ska",
+    "styleIds": [
+      "ska-jamaican-first-wave-ska"
+    ],
+    "name": "Jamaican First-Wave Ska Signature Cell",
+    "shortName": "Jamaican First-Wave Ska Cell",
+    "family": "ska",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "ska",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "brass"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      2,
+      6,
+      10,
+      14
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "ska",
+      "signature"
+    ],
+    "techniques": [
+      "jazz horn solo",
+      "walking ska bass",
+      "skank guitar",
+      "horn/guitar call-response",
+      "Jamaican shuffle",
+      "horn stab"
+    ]
+  },
+  {
+    "id": "style-ska-rocksteady-signature",
+    "worldId": "ska",
+    "styleIds": [
+      "ska-rocksteady"
+    ],
+    "name": "Rocksteady Signature Cell",
+    "shortName": "Rocksteady Cell",
+    "family": "ska",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "ska",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "bass",
+      "electric-guitar",
+      "drums",
+      "voice"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      2,
+      6,
+      10,
+      14
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "ska",
+      "signature"
+    ],
+    "techniques": [
+      "rocksteady bass",
+      "skank guitar",
+      "horn/guitar call-response",
+      "walking ska bass"
+    ]
+  },
+  {
+    "id": "style-ska-jamaican-ska-jazz-signature",
+    "worldId": "ska",
+    "styleIds": [
+      "ska-jamaican-ska-jazz"
+    ],
+    "name": "Jamaican Ska Jazz Signature Cell",
+    "shortName": "Jamaican Ska Jazz Cell",
+    "family": "ska",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "ska",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "trumpet",
+      "trombone",
+      "bass",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "ska",
+      "signature"
+    ],
+    "techniques": [
+      "jazz horn solo",
+      "skank guitar",
+      "walking ska bass",
+      "horn/guitar call-response",
+      "Jamaican shuffle",
+      "horn stab"
+    ]
+  },
+  {
+    "id": "style-ska-third-wave-ska-signature",
+    "worldId": "ska",
+    "styleIds": [
+      "ska-third-wave-ska"
+    ],
+    "name": "Third-Wave Ska Signature Cell",
+    "shortName": "Third-Wave Ska Cell",
+    "family": "ska",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "ska",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "brass"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "ska",
+      "signature"
+    ],
+    "techniques": [
+      "horn stab",
+      "ska-punk double-time",
+      "horn/guitar call-response",
+      "jazz horn solo",
+      "walking ska bass"
+    ]
+  }
 ];

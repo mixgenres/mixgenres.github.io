@@ -706,7 +706,401 @@ export const REGGAETON_WORLD: GenreWorld = {
         ]
       }
     }
-  ],
+  ,
+    {
+    "id": "reggaeton-early-puerto-rican-reggaeton",
+    "worldId": "reggaeton",
+    "name": "Early Puerto Rican Reggaeton",
+    "origin": "Puerto Rico",
+    "era": "1990s–2000s",
+    "description": "Dembow-derived programming, DJ-playero sampling, Spanish rap and dancehall influence.",
+    "characteristicInstruments": [
+        "drums",
+        "sub-bass",
+        "sampler",
+        "voice",
+        "turntable"
+    ],
+    "preferredMeters": [
+        "4/4"
+    ],
+    "tempoRange": [
+        88,
+        105
+    ],
+    "keySubstyles": [
+        "Early Puerto Rican Reggaeton"
+    ],
+    "coreConcepts": [
+        "classic dembow",
+        "reggaeton kick/bass lock",
+        "dancehall sample"
+    ],
+    "rhythmicGrammar": [
+        "Classic dembow with sampled vocal"
+    ],
+    "danceTags": [
+        "social-partner"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Classic dembow with sampled vocal",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Am",
+        "G",
+        "F",
+        "G"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "verse": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "chorus": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "bridge": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "solo": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "coda": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ]
+    },
+    "referenceArtists": [
+        "Daddy Yankee",
+        "Tego Calderón",
+        "Don Omar"
+    ],
+    "referenceTracks": [],
+    "techniques": [
+        "classic dembow",
+        "reggaeton kick/bass lock",
+        "dancehall-derived riddim",
+        "dembow fill",
+        "reverse dembow",
+        "trap/reggaeton hybrid switch"
+    ]
+},
+{
+    "id": "reggaeton-underground-playero",
+    "worldId": "reggaeton",
+    "name": "Underground Playero",
+    "origin": "Puerto Rico",
+    "era": "1990s",
+    "description": "Raw loop-based riddims, sampled dancehall fragments and repetitive vocal sections.",
+    "characteristicInstruments": [
+        "drums",
+        "sampler",
+        "sub-bass",
+        "voice"
+    ],
+    "preferredMeters": [
+        "4/4"
+    ],
+    "tempoRange": [
+        88,
+        105
+    ],
+    "keySubstyles": [
+        "Underground Playero"
+    ],
+    "coreConcepts": [
+        "looped riddim",
+        "sampled dancehall fragment",
+        "vocal chant"
+    ],
+    "rhythmicGrammar": [
+        "Raw looped riddim with vocal chant"
+    ],
+    "danceTags": [
+        "social-partner"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Raw looped riddim with vocal chant",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Am",
+        "G",
+        "F",
+        "G"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "verse": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "chorus": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "bridge": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "solo": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "coda": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ]
+    },
+    "referenceArtists": [
+        "DJ Playero",
+        "DJ Nelson"
+    ],
+    "referenceTracks": [],
+    "techniques": [
+        "dancehall-derived riddim",
+        "vocal chant loop"
+    ]
+},
+{
+    "id": "reggaeton-dembow-dominicano",
+    "worldId": "reggaeton",
+    "name": "Dembow Dominicano",
+    "origin": "Dominican Republic",
+    "era": "2000s–Present",
+    "description": "Faster, denser and more aggressive rhythmic interpretation of the dembow family.",
+    "characteristicInstruments": [
+        "drums",
+        "sub-bass",
+        "voice",
+        "sampler"
+    ],
+    "preferredMeters": [
+        "4/4"
+    ],
+    "tempoRange": [
+        100,
+        130
+    ],
+    "keySubstyles": [
+        "Dembow Dominicano"
+    ],
+    "coreConcepts": [
+        "dense dembow",
+        "snare displacement",
+        "dembow fill"
+    ],
+    "rhythmicGrammar": [
+        "Dense dembow with aggressive fills"
+    ],
+    "danceTags": [
+        "social-partner"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Dense dembow with aggressive fills",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Am",
+        "G",
+        "F",
+        "G"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "verse": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "chorus": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "bridge": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "solo": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "coda": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ]
+    },
+    "referenceArtists": [
+        "El Alfa"
+    ],
+    "referenceTracks": [],
+    "techniques": [
+        "dembow fill",
+        "snare/clap displacement",
+        "classic dembow",
+        "reverse dembow"
+    ]
+},
+{
+    "id": "reggaeton-experimental-neoperreo",
+    "worldId": "reggaeton",
+    "name": "Experimental Neoperreo",
+    "origin": "Latin America / Global",
+    "era": "2010s–Present",
+    "description": "Reggaeton rhythm destabilized with hyperpop, industrial, trap, distorted bass and unusual vocals.",
+    "characteristicInstruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "noise-sweep",
+        "voice"
+    ],
+    "preferredMeters": [
+        "4/4"
+    ],
+    "tempoRange": [
+        80,
+        130
+    ],
+    "keySubstyles": [
+        "Experimental Neoperreo"
+    ],
+    "coreConcepts": [
+        "reverse dembow",
+        "distorted bass",
+        "trap/reggaeton switch",
+        "perreo breakdown"
+    ],
+    "rhythmicGrammar": [
+        "Destabilized dembow with distorted bass"
+    ],
+    "danceTags": [
+        "social-partner"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Destabilized dembow with distorted bass",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Am",
+        "G",
+        "F",
+        "G"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "verse": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "chorus": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "bridge": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "solo": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "coda": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ]
+    },
+    "referenceArtists": [
+        "Rosalía",
+        "Tokischa",
+        "Arca"
+    ],
+    "referenceTracks": [],
+    "techniques": [
+        "perreo breakdown",
+        "reverse dembow",
+        "trap/reggaeton hybrid switch",
+        "reggaeton kick/bass lock",
+        "classic dembow",
+        "dembow fill"
+    ]
+}],
   "patterns": [
     {
       "id": "reggaeton--rg-dembow-core",
@@ -2901,7 +3295,1075 @@ export const REGGAETON_WORLD: GenreWorld = {
         "reggaeton"
       ]
     }
+  ,
+  {
+  "id": "tech-reggaeton-classic-dembow",
+  "worldId": "reggaeton",
+  "styleIds": [
+    "reggaeton-early-puerto-rican-reggaeton",
+    "reggaeton-dembow-dominicano",
+    "reggaeton-experimental-neoperreo"
   ],
+  "name": "classic dembow",
+  "shortName": "classic dembow",
+  "family": "reggaeton",
+  "category": "groove",
+  "description": "Technique: classic dembow",
+  "tags": [
+    "reggaeton",
+    "classic dembow"
+  ],
+  "approaches": [
+    "classic dembow"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums",
+    "hand-percussion"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    3,
+    6,
+    8,
+    11,
+    14
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65,
+    1,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92,
+    0.72,
+    0.72
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggaeton",
+    "classic dembow"
+  ],
+  "techniques": [
+    "classic dembow"
+  ]
+},
+{
+  "id": "tech-reggaeton-reverse-dembow",
+  "worldId": "reggaeton",
+  "styleIds": [
+    "reggaeton-early-puerto-rican-reggaeton",
+    "reggaeton-dembow-dominicano",
+    "reggaeton-experimental-neoperreo"
+  ],
+  "name": "reverse dembow",
+  "shortName": "reverse dembow",
+  "family": "reggaeton",
+  "category": "groove",
+  "description": "Technique: reverse dembow",
+  "tags": [
+    "reggaeton",
+    "reverse dembow"
+  ],
+  "approaches": [
+    "reverse dembow"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums",
+    "hand-percussion"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    3,
+    6,
+    8,
+    11,
+    14
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65,
+    1,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92,
+    0.72,
+    0.72
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggaeton",
+    "reverse dembow"
+  ],
+  "techniques": [
+    "reverse dembow"
+  ]
+},
+{
+  "id": "tech-reggaeton-reggaeton-kick-bass-lock",
+  "worldId": "reggaeton",
+  "styleIds": [
+    "reggaeton-early-puerto-rican-reggaeton",
+    "reggaeton-experimental-neoperreo"
+  ],
+  "name": "reggaeton kick/bass lock",
+  "shortName": "reggaeton kick/bass lock",
+  "family": "reggaeton",
+  "category": "groove",
+  "description": "Technique: reggaeton kick/bass lock",
+  "tags": [
+    "reggaeton",
+    "reggaeton kick/bass lock"
+  ],
+  "approaches": [
+    "reggaeton kick/bass lock"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggaeton",
+    "reggaeton kick/bass lock"
+  ],
+  "techniques": [
+    "reggaeton kick/bass lock"
+  ]
+},
+{
+  "id": "tech-reggaeton-snare-clap-displacement",
+  "worldId": "reggaeton",
+  "styleIds": [
+    "reggaeton-dembow-dominicano"
+  ],
+  "name": "snare/clap displacement",
+  "shortName": "snare/clap displacement",
+  "family": "reggaeton",
+  "category": "groove",
+  "description": "Technique: snare/clap displacement",
+  "tags": [
+    "reggaeton",
+    "snare/clap displacement"
+  ],
+  "approaches": [
+    "snare/clap displacement"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums",
+    "hand-percussion"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggaeton",
+    "snare/clap displacement"
+  ],
+  "techniques": [
+    "snare/clap displacement"
+  ]
+},
+{
+  "id": "tech-reggaeton-perreo-breakdown",
+  "worldId": "reggaeton",
+  "styleIds": [
+    "reggaeton-experimental-neoperreo"
+  ],
+  "name": "perreo breakdown",
+  "shortName": "perreo breakdown",
+  "family": "reggaeton",
+  "category": "groove",
+  "description": "Technique: perreo breakdown",
+  "tags": [
+    "reggaeton",
+    "perreo breakdown"
+  ],
+  "approaches": [
+    "perreo breakdown"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums",
+    "hand-percussion"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65,
+    1,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92,
+    0.72,
+    0.72
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggaeton",
+    "perreo breakdown"
+  ],
+  "techniques": [
+    "perreo breakdown"
+  ]
+},
+{
+  "id": "tech-reggaeton-vocal-chant-loop",
+  "worldId": "reggaeton",
+  "styleIds": [
+    "reggaeton-underground-playero"
+  ],
+  "name": "vocal chant loop",
+  "shortName": "vocal chant loop",
+  "family": "reggaeton",
+  "category": "lead",
+  "description": "Technique: vocal chant loop",
+  "tags": [
+    "reggaeton",
+    "vocal chant loop"
+  ],
+  "approaches": [
+    "vocal chant loop"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "voice",
+    "lead"
+  ],
+  "instruments": [
+    "voice"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggaeton",
+    "vocal chant loop"
+  ],
+  "techniques": [
+    "vocal chant loop"
+  ]
+},
+{
+  "id": "tech-reggaeton-dembow-fill",
+  "worldId": "reggaeton",
+  "styleIds": [
+    "reggaeton-early-puerto-rican-reggaeton",
+    "reggaeton-dembow-dominicano",
+    "reggaeton-experimental-neoperreo"
+  ],
+  "name": "dembow fill",
+  "shortName": "dembow fill",
+  "family": "reggaeton",
+  "category": "groove",
+  "description": "Technique: dembow fill",
+  "tags": [
+    "reggaeton",
+    "dembow fill"
+  ],
+  "approaches": [
+    "dembow fill"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums",
+    "hand-percussion"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    3,
+    6,
+    8,
+    11,
+    14
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65,
+    1,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92,
+    0.72,
+    0.72
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggaeton",
+    "dembow fill"
+  ],
+  "techniques": [
+    "dembow fill"
+  ]
+},
+{
+  "id": "tech-reggaeton-sparse-verse-beat",
+  "worldId": "reggaeton",
+  "styleIds": [],
+  "name": "sparse verse beat",
+  "shortName": "sparse verse beat",
+  "family": "reggaeton",
+  "category": "groove",
+  "description": "Technique: sparse verse beat",
+  "tags": [
+    "reggaeton",
+    "sparse verse beat"
+  ],
+  "approaches": [
+    "sparse verse beat"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggaeton",
+    "sparse verse beat"
+  ],
+  "techniques": [
+    "sparse verse beat"
+  ]
+},
+{
+  "id": "tech-reggaeton-dancehall-derived-riddim",
+  "worldId": "reggaeton",
+  "styleIds": [
+    "reggaeton-early-puerto-rican-reggaeton",
+    "reggaeton-underground-playero"
+  ],
+  "name": "dancehall-derived riddim",
+  "shortName": "dancehall-derived riddim",
+  "family": "reggaeton",
+  "category": "groove",
+  "description": "Technique: dancehall-derived riddim",
+  "tags": [
+    "reggaeton",
+    "dancehall-derived riddim"
+  ],
+  "approaches": [
+    "dancehall-derived riddim"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "lead"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggaeton",
+    "dancehall-derived riddim"
+  ],
+  "techniques": [
+    "dancehall-derived riddim"
+  ]
+},
+{
+  "id": "tech-reggaeton-trap-reggaeton-hybrid-switch",
+  "worldId": "reggaeton",
+  "styleIds": [
+    "reggaeton-early-puerto-rican-reggaeton",
+    "reggaeton-experimental-neoperreo"
+  ],
+  "name": "trap/reggaeton hybrid switch",
+  "shortName": "trap/reggaeton hybrid switch",
+  "family": "reggaeton",
+  "category": "groove",
+  "description": "Technique: trap/reggaeton hybrid switch",
+  "tags": [
+    "reggaeton",
+    "trap/reggaeton hybrid switch"
+  ],
+  "approaches": [
+    "trap/reggaeton hybrid switch"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "lead"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggaeton",
+    "trap/reggaeton hybrid switch"
+  ],
+  "techniques": [
+    "trap/reggaeton hybrid switch"
+  ]
+},
+{
+  "id": "style-reggaeton-early-puerto-rican-reggaeton-signature",
+  "worldId": "reggaeton",
+  "styleIds": [
+    "reggaeton-early-puerto-rican-reggaeton"
+  ],
+  "name": "Early Puerto Rican Reggaeton Signature Cell",
+  "shortName": "Early Puerto Rican Reggaeton Cell",
+  "family": "reggaeton",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "reggaeton",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "drums",
+    "sub-bass",
+    "sampler",
+    "voice"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    3,
+    6,
+    8,
+    11,
+    14
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7,
+    1,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "reggaeton",
+    "signature"
+  ],
+  "techniques": [
+    "classic dembow",
+    "reggaeton kick/bass lock",
+    "dancehall-derived riddim",
+    "dembow fill",
+    "reverse dembow",
+    "trap/reggaeton hybrid switch"
+  ]
+},
+{
+  "id": "style-reggaeton-underground-playero-signature",
+  "worldId": "reggaeton",
+  "styleIds": [
+    "reggaeton-underground-playero"
+  ],
+  "name": "Underground Playero Signature Cell",
+  "shortName": "Underground Playero Cell",
+  "family": "reggaeton",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "reggaeton",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "drums",
+    "sampler",
+    "sub-bass",
+    "voice"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "reggaeton",
+    "signature"
+  ],
+  "techniques": [
+    "dancehall-derived riddim",
+    "vocal chant loop"
+  ]
+},
+{
+  "id": "style-reggaeton-dembow-dominicano-signature",
+  "worldId": "reggaeton",
+  "styleIds": [
+    "reggaeton-dembow-dominicano"
+  ],
+  "name": "Dembow Dominicano Signature Cell",
+  "shortName": "Dembow Dominicano Cell",
+  "family": "reggaeton",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "reggaeton",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "drums",
+    "sub-bass",
+    "voice",
+    "sampler"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    3,
+    6,
+    8,
+    11,
+    14
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7,
+    1,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "reggaeton",
+    "signature"
+  ],
+  "techniques": [
+    "dembow fill",
+    "snare/clap displacement",
+    "classic dembow",
+    "reverse dembow"
+  ]
+},
+{
+  "id": "style-reggaeton-experimental-neoperreo-signature",
+  "worldId": "reggaeton",
+  "styleIds": [
+    "reggaeton-experimental-neoperreo"
+  ],
+  "name": "Experimental Neoperreo Signature Cell",
+  "shortName": "Experimental Neoperreo Cell",
+  "family": "reggaeton",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "reggaeton",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "drums",
+    "sub-bass",
+    "synth",
+    "noise-sweep"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    3,
+    6,
+    8,
+    11,
+    14
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7,
+    1,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "reggaeton",
+    "signature"
+  ],
+  "techniques": [
+    "perreo breakdown",
+    "reverse dembow",
+    "trap/reggaeton hybrid switch",
+    "reggaeton kick/bass lock",
+    "classic dembow",
+    "dembow fill"
+  ]
+}],
   "kind": "world",
   "strictness": "strict"
 };

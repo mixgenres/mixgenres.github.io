@@ -1340,4 +1340,849 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             "ghost-aware"
           ]
         }
+,
+  {
+    "id": "tech-hip-hop-chopped-break",
+    "worldId": "hip-hop",
+    "styleIds": [
+      "hip-hop-old-school-breakbeat",
+      "hip-hop-golden-age-sample-collage",
+      "hip-hop-memphis-southern-rap",
+      "hip-hop-jersey-club-rap"
+    ],
+    "name": "chopped break",
+    "shortName": "chopped break",
+    "family": "hip-hop",
+    "category": "groove",
+    "description": "Technique: chopped break",
+    "tags": [
+      "hip-hop",
+      "chopped break"
+    ],
+    "approaches": [
+      "chopped break"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "hip-hop",
+      "chopped break"
+    ],
+    "techniques": [
+      "chopped break"
+    ]
+  },
+  {
+    "id": "tech-hip-hop-mpc-swing",
+    "worldId": "hip-hop",
+    "styleIds": [
+      "hip-hop-golden-age-sample-collage"
+    ],
+    "name": "MPC swing",
+    "shortName": "MPC swing",
+    "family": "hip-hop",
+    "category": "groove",
+    "description": "Technique: MPC swing",
+    "tags": [
+      "hip-hop",
+      "MPC swing"
+    ],
+    "approaches": [
+      "MPC swing"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "hip-hop",
+      "MPC swing"
+    ],
+    "techniques": [
+      "MPC swing"
+    ]
+  },
+  {
+    "id": "tech-hip-hop-boom-bap-kick-snare",
+    "worldId": "hip-hop",
+    "styleIds": [
+      "hip-hop-jersey-club-rap"
+    ],
+    "name": "boom-bap kick/snare",
+    "shortName": "boom-bap kick/snare",
+    "family": "hip-hop",
+    "category": "groove",
+    "description": "Technique: boom-bap kick/snare",
+    "tags": [
+      "hip-hop",
+      "boom-bap kick/snare"
+    ],
+    "approaches": [
+      "boom-bap kick/snare"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "hip-hop",
+      "boom-bap kick/snare"
+    ],
+    "techniques": [
+      "boom-bap kick/snare"
+    ]
+  },
+  {
+    "id": "tech-hip-hop-trap-hi-hat-rolls",
+    "worldId": "hip-hop",
+    "styleIds": [],
+    "name": "trap hi-hat rolls",
+    "shortName": "trap hi-hat rolls",
+    "family": "hip-hop",
+    "category": "groove",
+    "description": "Technique: trap hi-hat rolls",
+    "tags": [
+      "hip-hop",
+      "trap hi-hat rolls"
+    ],
+    "approaches": [
+      "trap hi-hat rolls"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "hip-hop",
+      "trap hi-hat rolls"
+    ],
+    "techniques": [
+      "trap hi-hat rolls"
+    ]
+  },
+  {
+    "id": "tech-hip-hop-triplet-hi-hats",
+    "worldId": "hip-hop",
+    "styleIds": [
+      "hip-hop-memphis-southern-rap"
+    ],
+    "name": "triplet hi-hats",
+    "shortName": "triplet hi-hats",
+    "family": "hip-hop",
+    "category": "groove",
+    "description": "Technique: triplet hi-hats",
+    "tags": [
+      "hip-hop",
+      "triplet hi-hats"
+    ],
+    "approaches": [
+      "triplet hi-hats"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      3,
+      6,
+      8,
+      11,
+      14
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "hip-hop",
+      "triplet hi-hats"
+    ],
+    "techniques": [
+      "triplet hi-hats"
+    ]
+  },
+  {
+    "id": "tech-hip-hop-beat-switch",
+    "worldId": "hip-hop",
+    "styleIds": [
+      "hip-hop-golden-age-sample-collage",
+      "hip-hop-west-coast-g-funk-expansion"
+    ],
+    "name": "beat switch",
+    "shortName": "beat switch",
+    "family": "hip-hop",
+    "category": "groove",
+    "description": "Technique: beat switch",
+    "tags": [
+      "hip-hop",
+      "beat switch"
+    ],
+    "approaches": [
+      "beat switch"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "hip-hop",
+      "beat switch"
+    ],
+    "techniques": [
+      "beat switch"
+    ]
+  },
+  {
+    "id": "style-hip-hop-old-school-breakbeat-signature",
+    "worldId": "hip-hop",
+    "styleIds": [
+      "hip-hop-old-school-breakbeat"
+    ],
+    "name": "Old-School Breakbeat Signature Cell",
+    "shortName": "Old-School Breakbeat Cell",
+    "family": "hip-hop",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "hip-hop",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "drums",
+      "turntable",
+      "bass",
+      "voice"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7,
+      1,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "hip-hop",
+      "signature"
+    ],
+    "techniques": [
+      "vinyl texture",
+      "DJ scratch",
+      "chopped break"
+    ]
+  },
+  {
+    "id": "style-hip-hop-golden-age-sample-collage-signature",
+    "worldId": "hip-hop",
+    "styleIds": [
+      "hip-hop-golden-age-sample-collage"
+    ],
+    "name": "Golden-Age Sample Collage Signature Cell",
+    "shortName": "Golden-Age Sample Collage Cell",
+    "family": "hip-hop",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "hip-hop",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "drums",
+      "sampler",
+      "turntable",
+      "bass"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "hip-hop",
+      "signature"
+    ],
+    "techniques": [
+      "MPC swing",
+      "beat switch",
+      "sample chop",
+      "vinyl texture",
+      "chopped break",
+      "vocal chop"
+    ]
+  },
+  {
+    "id": "style-hip-hop-west-coast-g-funk-expansion-signature",
+    "worldId": "hip-hop",
+    "styleIds": [
+      "hip-hop-west-coast-g-funk-expansion"
+    ],
+    "name": "West Coast G-Funk Expansion Signature Cell",
+    "shortName": "West Coast G-Funk Expansion Cell",
+    "family": "hip-hop",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "hip-hop",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "drums",
+      "bass",
+      "synth",
+      "synth"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "hip-hop",
+      "signature"
+    ],
+    "techniques": [
+      "beat switch",
+      "vinyl texture"
+    ]
+  },
+  {
+    "id": "style-hip-hop-memphis-southern-rap-signature",
+    "worldId": "hip-hop",
+    "styleIds": [
+      "hip-hop-memphis-southern-rap"
+    ],
+    "name": "Memphis / Southern Rap Signature Cell",
+    "shortName": "Memphis / Southern Rap Cell",
+    "family": "hip-hop",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "hip-hop",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "drums",
+      "sub-bass",
+      "sampler",
+      "voice"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      3,
+      6,
+      8,
+      11,
+      14
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7,
+      1,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "hip-hop",
+      "signature"
+    ],
+    "techniques": [
+      "808 glide",
+      "triplet hi-hats",
+      "chopped break",
+      "sample chop",
+      "vocal chop"
+    ]
+  },
+  {
+    "id": "style-hip-hop-jersey-club-rap-signature",
+    "worldId": "hip-hop",
+    "styleIds": [
+      "hip-hop-jersey-club-rap"
+    ],
+    "name": "Jersey / Club Rap Signature Cell",
+    "shortName": "Jersey / Club Rap Cell",
+    "family": "hip-hop",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "hip-hop",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "drums",
+      "sampler",
+      "sub-bass",
+      "voice"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "hip-hop",
+      "signature"
+    ],
+    "techniques": [
+      "vocal chop",
+      "boom-bap kick/snare",
+      "chopped break",
+      "sample chop"
+    ]
+  }
 ];

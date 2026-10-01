@@ -1200,4 +1200,606 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 1,
           "enabled": true
         }
+,
+  {
+    "id": "tech-country-boom-chicka-rhythm",
+    "worldId": "country",
+    "styleIds": [],
+    "name": "boom-chicka rhythm",
+    "shortName": "boom-chicka rhythm",
+    "family": "country",
+    "category": "groove",
+    "description": "Technique: boom-chicka rhythm",
+    "tags": [
+      "country",
+      "boom-chicka rhythm"
+    ],
+    "approaches": [
+      "boom-chicka rhythm"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "country",
+      "boom-chicka rhythm"
+    ],
+    "techniques": [
+      "boom-chicka rhythm"
+    ]
+  },
+  {
+    "id": "tech-country-train-beat",
+    "worldId": "country",
+    "styleIds": [],
+    "name": "train beat",
+    "shortName": "train beat",
+    "family": "country",
+    "category": "groove",
+    "description": "Technique: train beat",
+    "tags": [
+      "country",
+      "train beat"
+    ],
+    "approaches": [
+      "train beat"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "country",
+      "train beat"
+    ],
+    "techniques": [
+      "train beat"
+    ]
+  },
+  {
+    "id": "tech-country-country-shuffle",
+    "worldId": "country",
+    "styleIds": [
+      "country-nashville-country-pop",
+      "country-country-rock",
+      "country-alt-country-roots-rock",
+      "country-country-gospel"
+    ],
+    "name": "country shuffle",
+    "shortName": "country shuffle",
+    "family": "country",
+    "category": "groove",
+    "description": "Technique: country shuffle",
+    "tags": [
+      "country",
+      "country shuffle"
+    ],
+    "approaches": [
+      "country shuffle"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      3,
+      6,
+      8,
+      11,
+      14
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "country",
+      "country shuffle"
+    ],
+    "techniques": [
+      "country shuffle"
+    ]
+  },
+  {
+    "id": "style-country-appalachian-old-time-signature",
+    "worldId": "country",
+    "styleIds": [
+      "country-appalachian-old-time"
+    ],
+    "name": "Appalachian Old-Time Signature Cell",
+    "shortName": "Appalachian Old-Time Cell",
+    "family": "country",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "country",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "banjo",
+      "fiddle",
+      "acoustic-guitar",
+      "upright-bass"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      8
+    ],
+    "accentProfile": [
+      1,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "country",
+      "signature"
+    ],
+    "techniques": [
+      "banjo roll",
+      "fiddle drone",
+      "Carter-style alternating bass"
+    ]
+  },
+  {
+    "id": "style-country-nashville-country-pop-signature",
+    "worldId": "country",
+    "styleIds": [
+      "country-nashville-country-pop"
+    ],
+    "name": "Nashville Country-Pop Signature Cell",
+    "shortName": "Nashville Country-Pop Cell",
+    "family": "country",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "country",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "acoustic-guitar",
+      "steel-guitar",
+      "strings",
+      "bass"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "country",
+      "signature"
+    ],
+    "techniques": [
+      "pedal-steel fills",
+      "vocal harmony thirds/sixths",
+      "Nashville number-style progression",
+      "country shuffle"
+    ]
+  },
+  {
+    "id": "style-country-country-rock-signature",
+    "worldId": "country",
+    "styleIds": [
+      "country-country-rock"
+    ],
+    "name": "Country Rock Signature Cell",
+    "shortName": "Country Rock Cell",
+    "family": "country",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "country",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "acoustic-guitar",
+      "bass",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "country",
+      "signature"
+    ],
+    "techniques": [
+      "country shuffle",
+      "pedal-steel fills",
+      "vocal harmony thirds/sixths"
+    ]
+  },
+  {
+    "id": "style-country-alt-country-roots-rock-signature",
+    "worldId": "country",
+    "styleIds": [
+      "country-alt-country-roots-rock"
+    ],
+    "name": "Alt-Country / Roots Rock Signature Cell",
+    "shortName": "Alt-Country / Roots Rock Cell",
+    "family": "country",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "country",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "acoustic-guitar",
+      "electric-guitar",
+      "bass",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "country",
+      "signature"
+    ],
+    "techniques": [
+      "country shuffle",
+      "pedal-steel fills"
+    ]
+  },
+  {
+    "id": "style-country-country-gospel-signature",
+    "worldId": "country",
+    "styleIds": [
+      "country-country-gospel"
+    ],
+    "name": "Country Gospel Signature Cell",
+    "shortName": "Country Gospel Cell",
+    "family": "country",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "country",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "acoustic-guitar",
+      "piano",
+      "bass",
+      "fiddle"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "country",
+      "signature"
+    ],
+    "techniques": [
+      "vocal harmony thirds/sixths",
+      "country shuffle"
+    ]
+  }
 ];

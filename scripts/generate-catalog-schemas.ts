@@ -10,8 +10,12 @@ import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
 const root = 'audit/catalog-schemas';
 const genresDir = `${root}/genres`;
 const startersDir = `${root}/starters`;
+const stylesDir = `${root}/styles`;
+const styleInstancesDir = `${root}/style-instances`;
 mkdirSync(genresDir, { recursive: true });
 mkdirSync(startersDir, { recursive: true });
+mkdirSync(stylesDir, { recursive: true });
+mkdirSync(styleInstancesDir, { recursive: true });
 const errors: string[] = [];
 const styleIds = new Set(ALL_STYLES.map(s => s.id));
 const starterCatalog: Array<Record<string, unknown>> = [];
@@ -114,6 +118,85 @@ for (const world of GENRE_WORLDS) {
   writeFileSync(`${startersDir}/${world.id}.json`, `${JSON.stringify(starter, null, 2)}\n`);
   console.log(`${world.id}: ${styles.length} styles; 8 tracks; ${usedPatterns.length} patterns; ${performance.notes.length} notes`);
 }
+for (const style of ALL_STYLES) {
+  try {
+    const sheet = makeSheet({ genreId: style.primaryGenre, styleId: style.id });
+    const performance = compileWholeSong(sheet);
+    const trackSchemas = sheet.tracks.map(track => {
+      const notes = performance.notes.filter(note => note.trackId === track.id);
+      const patternIds = [...new Set(sheet.regions.map(region => sheet.arrangement[region.id]?.[track.id]).filter((id): id is string => Boolean(id)))];
+      return {
+        trackId: track.id,
+        instrumentId: track.instrumentId ?? '',
+        role: track.role,
+        patternIds,
+        noteCount: notes.length,
+      };
+    });
+    const usedPatternIds = [...new Set(trackSchemas.flatMap(track => track.patternIds))];
+    const song = {
+      schemaVersion: 2,
+      genre: sheet.worldId,
+      styleId: style.id,
+      styleName: style.name,
+      durationSec: performance.duration,
+      tempoBpm: sheet.bpm,
+      meter: sheet.timeSignature,
+      sections: sheet.regions.map(region => ({
+        id: region.id, key: region.formKey ?? region.id, kind: region.kind, label: region.name,
+        bars: region.bars, intensity: region.intensity, chords: region.chords ?? [],
+      })),
+      tracks: trackSchemas,
+      patterns: usedPatternIds.map(id => {
+        const pattern = ALL_PATTERNS.find(candidate => candidate.id === id);
+        return {
+          id, name: pattern?.name ?? id, worldId: pattern?.worldId ?? sheet.worldId,
+          meter: pattern?.meter, subdivisions: pattern?.subdivisions, onsetGrid: pattern?.onsetGrid ?? [],
+          techniques: pattern?.techniques ?? [],
+        };
+      }),
+      sonicFeatures: {
+        characteristicInstruments: style.sound?.instrumentPalette?.map(item => item.value) ?? [],
+        techniques: style.techniques ?? [],
+        signatureCell: style.rhythm?.signatureCell ?? '',
+        tempoRange: style.rhythm?.tempoRange ?? [],
+        preferredMeters: style.form?.preferredMeters ?? [],
+        microtimingFeel: style.rhythm?.microtimingFeel ?? 'straight',
+        swingPercentage: style.rhythm?.swingPercentage ?? 0,
+        anticipationOffsetSteps: style.rhythm?.anticipationOffsetSteps ?? 0,
+      },
+      references: { artists: style.referenceArtists ?? [], tracks: style.referenceTracks ?? [] },
+      render: { status: 'compiled', renderer: 'MixGenres compileWholeSong', sourceStyleId: style.id },
+      performance: { noteCount: performance.notes.length, trackCount: sheet.tracks.length, usedPatternIds },
+    };
+    const schema = {
+      $schema: 'https://json-schema.org/draft/2020-12/schema',
+      $id: `https://mixgenres.local/schema/catalog-style/${style.id}.schema.json`,
+      title: `MixGenres ${style.name} Song Schema`,
+      type: 'object', additionalProperties: false,
+      required: ['schemaVersion','genre','styleId','styleName','durationSec','tempoBpm','meter','sections','tracks','patterns','sonicFeatures','references','render','performance'],
+      properties: {
+        schemaVersion: { const: 2 }, genre: { const: sheet.worldId }, styleId: { const: style.id }, styleName: { const: style.name },
+        durationSec: { type: 'number', exclusiveMinimum: 0 }, tempoBpm: { type: 'number', exclusiveMinimum: 0 }, meter: { type: 'string' },
+        sections: { type: 'array', minItems: 1, items: { type: 'object', additionalProperties: false, required: ['id','key','kind','label','bars','intensity','chords'], properties: { id:{type:'string'}, key:{type:'string'}, kind:{type:'string'}, label:{type:'string'}, bars:{type:'integer',minimum:1}, intensity:{enum:['low','medium','high','peak']}, chords:{type:'array',items:{type:'string'}} } } },
+        tracks: { type: 'array', minItems: 8, items: { type:'object', additionalProperties:false, required:['trackId','instrumentId','role','patternIds','noteCount'], properties:{ trackId:{type:'string'}, instrumentId:{type:'string'}, role:{type:'string'}, patternIds:{type:'array',items:{type:'string'}}, noteCount:{type:'integer',minimum:0} } } },
+        patterns: { type:'array', items:{ type:'object', additionalProperties:false, required:['id','name','worldId','meter','subdivisions','onsetGrid','techniques'], properties:{ id:{type:'string'}, name:{type:'string'}, worldId:{type:'string'}, meter:{type:'string'}, subdivisions:{type:'integer',minimum:1}, onsetGrid:{type:'array',items:{type:'number',minimum:0}}, techniques:{type:'array',items:{type:'string'}} } } },
+        sonicFeatures: { type:'object', additionalProperties:false, required:['characteristicInstruments','techniques','signatureCell','tempoRange','preferredMeters','microtimingFeel','swingPercentage','anticipationOffsetSteps'], properties:{ characteristicInstruments:{type:'array',items:{type:'string'}}, techniques:{type:'array',items:{type:'string'}}, signatureCell:{type:'string'}, tempoRange:{type:'array'}, preferredMeters:{type:'array',items:{type:'string'}}, microtimingFeel:{type:'string'}, swingPercentage:{type:'number'}, anticipationOffsetSteps:{type:'number'} } },
+        references: { type:'object', additionalProperties:false, required:['artists','tracks'], properties:{ artists:{type:'array',items:{type:'string'}}, tracks:{type:'array',items:{type:'string'}} } },
+        render: { type:'object', additionalProperties:false, required:['status','renderer','sourceStyleId'], properties:{ status:{type:'string'}, renderer:{type:'string'}, sourceStyleId:{const:style.id} } },
+        performance: { type:'object', additionalProperties:false, required:['noteCount','trackCount','usedPatternIds'], properties:{ noteCount:{type:'integer',minimum:1}, trackCount:{const:8}, usedPatternIds:{type:'array',items:{type:'string'}} } },
+      },
+    };
+    writeFileSync(`${stylesDir}/${style.id}.schema.json`, `${JSON.stringify(schema, null, 2)}\n`);
+    writeFileSync(`${styleInstancesDir}/${style.id}.json`, `${JSON.stringify(song, null, 2)}\n`);
+    if (sheet.tracks.length !== 8) errors.push(`${style.id}: runtime starter has ${sheet.tracks.length} tracks`);
+    if (!performance.notes.length) errors.push(`${style.id}: compiled style produced zero notes`);
+    for (const patternId of usedPatternIds) if (!ALL_PATTERNS.some(pattern => pattern.id === patternId)) errors.push(`${style.id}: unknown runtime pattern ${patternId}`);
+  } catch (error) {
+    errors.push(`${style.id}: failed to compile schema: ${error instanceof Error ? error.message : String(error)}`);
+  }
+}
+
 if (errors.length) {
   console.error(errors.join('\n'));
   process.exitCode = 1;

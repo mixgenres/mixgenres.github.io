@@ -792,4 +792,763 @@ export const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 1,
           "enabled": true
         }
+,
+  {
+    "id": "tech-jazz-ride-cymbal-swing",
+    "worldId": "jazz",
+    "styleIds": [
+      "jazz-swing-era"
+    ],
+    "name": "ride cymbal swing",
+    "shortName": "ride cymbal swing",
+    "family": "jazz",
+    "category": "groove",
+    "description": "Technique: ride cymbal swing",
+    "tags": [
+      "jazz",
+      "ride cymbal swing"
+    ],
+    "approaches": [
+      "ride cymbal swing"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "jazz",
+      "ride cymbal swing"
+    ],
+    "techniques": [
+      "ride cymbal swing"
+    ]
+  },
+  {
+    "id": "tech-jazz-comping-anticipation",
+    "worldId": "jazz",
+    "styleIds": [
+      "jazz-modal-jazz",
+      "jazz-jazz-funk"
+    ],
+    "name": "comping anticipation",
+    "shortName": "comping anticipation",
+    "family": "jazz",
+    "category": "groove",
+    "description": "Technique: comping anticipation",
+    "tags": [
+      "jazz",
+      "comping anticipation"
+    ],
+    "approaches": [
+      "comping anticipation"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "jazz",
+      "comping anticipation"
+    ],
+    "techniques": [
+      "comping anticipation"
+    ]
+  },
+  {
+    "id": "tech-jazz-jazz-triplet",
+    "worldId": "jazz",
+    "styleIds": [
+      "jazz-modal-jazz",
+      "jazz-jazz-funk",
+      "jazz-brazilian-jazz"
+    ],
+    "name": "jazz triplet",
+    "shortName": "jazz triplet",
+    "family": "jazz",
+    "category": "groove",
+    "description": "Technique: jazz triplet",
+    "tags": [
+      "jazz",
+      "jazz triplet"
+    ],
+    "approaches": [
+      "jazz triplet"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      3,
+      6,
+      8,
+      11,
+      14
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "jazz",
+      "jazz triplet"
+    ],
+    "techniques": [
+      "jazz triplet"
+    ]
+  },
+  {
+    "id": "tech-jazz-trading-fours",
+    "worldId": "jazz",
+    "styleIds": [
+      "jazz-post-bop"
+    ],
+    "name": "trading fours",
+    "shortName": "trading fours",
+    "family": "jazz",
+    "category": "groove",
+    "description": "Technique: trading fours",
+    "tags": [
+      "jazz",
+      "trading fours"
+    ],
+    "approaches": [
+      "trading fours"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "jazz",
+      "trading fours"
+    ],
+    "techniques": [
+      "trading fours"
+    ]
+  },
+  {
+    "id": "style-jazz-swing-era-signature",
+    "worldId": "jazz",
+    "styleIds": [
+      "jazz-swing-era"
+    ],
+    "name": "Swing Era Signature Cell",
+    "shortName": "Swing Era Cell",
+    "family": "jazz",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "jazz",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "drums",
+      "upright-bass",
+      "piano",
+      "brass"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7,
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7,
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "jazz",
+      "signature"
+    ],
+    "techniques": [
+      "walking bass",
+      "big-band shout chorus",
+      "ride cymbal swing"
+    ]
+  },
+  {
+    "id": "style-jazz-modal-jazz-signature",
+    "worldId": "jazz",
+    "styleIds": [
+      "jazz-modal-jazz"
+    ],
+    "name": "Modal Jazz Signature Cell",
+    "shortName": "Modal Jazz Cell",
+    "family": "jazz",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "jazz",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "upright-bass",
+      "drums",
+      "piano",
+      "tenor-sax"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "jazz",
+      "signature"
+    ],
+    "techniques": [
+      "modal vamp",
+      "quartal voicing",
+      "comping anticipation",
+      "jazz triplet"
+    ]
+  },
+  {
+    "id": "style-jazz-post-bop-signature",
+    "worldId": "jazz",
+    "styleIds": [
+      "jazz-post-bop"
+    ],
+    "name": "Post-Bop Signature Cell",
+    "shortName": "Post-Bop Cell",
+    "family": "jazz",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "jazz",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "upright-bass",
+      "drums",
+      "piano",
+      "tenor-sax"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "jazz",
+      "signature"
+    ],
+    "techniques": [
+      "guide-tone line",
+      "collective improvisation",
+      "trading fours"
+    ]
+  },
+  {
+    "id": "style-jazz-jazz-funk-signature",
+    "worldId": "jazz",
+    "styleIds": [
+      "jazz-jazz-funk"
+    ],
+    "name": "Jazz-Funk Signature Cell",
+    "shortName": "Jazz-Funk Cell",
+    "family": "jazz",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "jazz",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "bass",
+      "drums",
+      "rhodes",
+      "clavinet"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "jazz",
+      "signature"
+    ],
+    "techniques": [
+      "collective improvisation",
+      "comping anticipation",
+      "jazz triplet",
+      "modal vamp"
+    ]
+  },
+  {
+    "id": "style-jazz-avant-garde-free-improvisation-signature",
+    "worldId": "jazz",
+    "styleIds": [
+      "jazz-avant-garde-free-improvisation"
+    ],
+    "name": "Avant-Garde / Free Improvisation Signature Cell",
+    "shortName": "Avant-Garde / Free Improvisation Cell",
+    "family": "jazz",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "jazz",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "piano",
+      "upright-bass",
+      "drums",
+      "alto-sax"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "jazz",
+      "signature"
+    ],
+    "techniques": [
+      "collective improvisation",
+      "non-grid phrasing"
+    ]
+  },
+  {
+    "id": "style-jazz-brazilian-jazz-signature",
+    "worldId": "jazz",
+    "styleIds": [
+      "jazz-brazilian-jazz"
+    ],
+    "name": "Brazilian Jazz Signature Cell",
+    "shortName": "Brazilian Jazz Cell",
+    "family": "jazz",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "jazz",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "acoustic-guitar",
+      "piano",
+      "upright-bass",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "jazz",
+      "signature"
+    ],
+    "techniques": [
+      "jazz triplet"
+    ]
+  }
 ];

@@ -268,4 +268,72 @@ export const FLAMENCO_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           "weight": 0.99,
           "enabled": true
         }
+,
+  {
+    "id": "tech-flamenco-andalusian-cadence",
+    "worldId": "flamenco",
+    "styleIds": [],
+    "name": "Andalusian cadence",
+    "shortName": "Andalusian cadence",
+    "family": "flamenco",
+    "category": "cadence",
+    "description": "Technique: Andalusian cadence",
+    "tags": [
+      "flamenco",
+      "Andalusian cadence"
+    ],
+    "approaches": [
+      "Andalusian cadence"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "harmony",
+      "guitar"
+    ],
+    "instruments": [
+      "spanish-guitar"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "flamenco",
+      "Andalusian cadence"
+    ],
+    "techniques": [
+      "Andalusian cadence"
+    ]
+  }
 ];

@@ -611,4 +611,859 @@ export const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 0.99,
           "enabled": true
         }
+,
+  {
+    "id": "tech-flamenco-12-beat-compas",
+    "worldId": "flamenco",
+    "styleIds": [
+      "flamenco-solea-por-medio",
+      "flamenco-flamenco-fusion",
+      "flamenco-cante-jondo"
+    ],
+    "name": "12-beat compás",
+    "shortName": "12-beat compás",
+    "family": "flamenco",
+    "category": "groove",
+    "description": "Technique: 12-beat compás",
+    "tags": [
+      "flamenco",
+      "12-beat compás"
+    ],
+    "approaches": [
+      "12-beat compás"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "12/8",
+    "cycleLength": 1,
+    "subdivisions": 12,
+    "onsetGrid": [
+      0,
+      3,
+      6,
+      8,
+      10
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "flamenco",
+      "12-beat compás"
+    ],
+    "techniques": [
+      "12-beat compás"
+    ]
+  },
+  {
+    "id": "tech-flamenco-palmas-sordas",
+    "worldId": "flamenco",
+    "styleIds": [],
+    "name": "palmas sordas",
+    "shortName": "palmas sordas",
+    "family": "flamenco",
+    "category": "groove",
+    "description": "Technique: palmas sordas",
+    "tags": [
+      "flamenco",
+      "palmas sordas"
+    ],
+    "approaches": [
+      "palmas sordas"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "percussion",
+      "rhythm"
+    ],
+    "instruments": [
+      "palmas"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "flamenco",
+      "palmas sordas"
+    ],
+    "techniques": [
+      "palmas sordas"
+    ]
+  },
+  {
+    "id": "tech-flamenco-palmas-abiertas",
+    "worldId": "flamenco",
+    "styleIds": [],
+    "name": "palmas abiertas",
+    "shortName": "palmas abiertas",
+    "family": "flamenco",
+    "category": "groove",
+    "description": "Technique: palmas abiertas",
+    "tags": [
+      "flamenco",
+      "palmas abiertas"
+    ],
+    "approaches": [
+      "palmas abiertas"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "percussion",
+      "rhythm"
+    ],
+    "instruments": [
+      "palmas"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "flamenco",
+      "palmas abiertas"
+    ],
+    "techniques": [
+      "palmas abiertas"
+    ]
+  },
+  {
+    "id": "tech-flamenco-tremolo",
+    "worldId": "flamenco",
+    "styleIds": [],
+    "name": "tremolo",
+    "shortName": "tremolo",
+    "family": "flamenco",
+    "category": "groove",
+    "description": "Technique: tremolo",
+    "tags": [
+      "flamenco",
+      "tremolo"
+    ],
+    "approaches": [
+      "tremolo"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "flamenco",
+      "tremolo"
+    ],
+    "techniques": [
+      "tremolo"
+    ]
+  },
+  {
+    "id": "tech-flamenco-golpe",
+    "worldId": "flamenco",
+    "styleIds": [],
+    "name": "golpe",
+    "shortName": "golpe",
+    "family": "flamenco",
+    "category": "groove",
+    "description": "Technique: golpe",
+    "tags": [
+      "flamenco",
+      "golpe"
+    ],
+    "approaches": [
+      "golpe"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "flamenco",
+      "golpe"
+    ],
+    "techniques": [
+      "golpe"
+    ]
+  },
+  {
+    "id": "tech-flamenco-remate",
+    "worldId": "flamenco",
+    "styleIds": [
+      "flamenco-solea-por-medio"
+    ],
+    "name": "remate",
+    "shortName": "remate",
+    "family": "flamenco",
+    "category": "groove",
+    "description": "Technique: remate",
+    "tags": [
+      "flamenco",
+      "remate"
+    ],
+    "approaches": [
+      "remate"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "flamenco",
+      "remate"
+    ],
+    "techniques": [
+      "remate"
+    ]
+  },
+  {
+    "id": "tech-flamenco-llamada",
+    "worldId": "flamenco",
+    "styleIds": [
+      "flamenco-solea-por-medio"
+    ],
+    "name": "llamada",
+    "shortName": "llamada",
+    "family": "flamenco",
+    "category": "groove",
+    "description": "Technique: llamada",
+    "tags": [
+      "flamenco",
+      "llamada"
+    ],
+    "approaches": [
+      "llamada"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "flamenco",
+      "llamada"
+    ],
+    "techniques": [
+      "llamada"
+    ]
+  },
+  {
+    "id": "tech-flamenco-rubato-entrance",
+    "worldId": "flamenco",
+    "styleIds": [
+      "flamenco-cante-jondo"
+    ],
+    "name": "rubato entrance",
+    "shortName": "rubato entrance",
+    "family": "flamenco",
+    "category": "groove",
+    "description": "Technique: rubato entrance",
+    "tags": [
+      "flamenco",
+      "rubato entrance"
+    ],
+    "approaches": [
+      "rubato entrance"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      8
+    ],
+    "accentProfile": [
+      1,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "flamenco",
+      "rubato entrance"
+    ],
+    "techniques": [
+      "rubato entrance"
+    ]
+  },
+  {
+    "id": "style-flamenco-solea-por-medio-signature",
+    "worldId": "flamenco",
+    "styleIds": [
+      "flamenco-solea-por-medio"
+    ],
+    "name": "Soleá por Medio Signature Cell",
+    "shortName": "Soleá por Medio Cell",
+    "family": "flamenco",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "flamenco",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "spanish-guitar",
+      "palmas",
+      "cajon",
+      "voice"
+    ],
+    "meter": "12/8",
+    "cycleLength": 1,
+    "subdivisions": 12,
+    "onsetGrid": [
+      0,
+      3,
+      6,
+      8,
+      10
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7,
+      1
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7,
+      0.9
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "flamenco",
+      "signature"
+    ],
+    "techniques": [
+      "falseta",
+      "llamada",
+      "rasgueado",
+      "remate",
+      "12-beat compás"
+    ]
+  },
+  {
+    "id": "style-flamenco-flamenco-fusion-signature",
+    "worldId": "flamenco",
+    "styleIds": [
+      "flamenco-flamenco-fusion"
+    ],
+    "name": "Flamenco Fusion Signature Cell",
+    "shortName": "Flamenco Fusion Cell",
+    "family": "flamenco",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "flamenco",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "spanish-guitar",
+      "electric-guitar",
+      "bass",
+      "bongos"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "flamenco",
+      "signature"
+    ],
+    "techniques": [
+      "12-beat compás"
+    ]
+  },
+  {
+    "id": "style-flamenco-nuevo-flamenco-signature",
+    "worldId": "flamenco",
+    "styleIds": [
+      "flamenco-nuevo-flamenco"
+    ],
+    "name": "Nuevo Flamenco Signature Cell",
+    "shortName": "Nuevo Flamenco Cell",
+    "family": "flamenco",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "flamenco",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "spanish-guitar",
+      "cajon",
+      "bass",
+      "strings"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "flamenco",
+      "signature"
+    ],
+    "techniques": [
+      "falseta"
+    ]
+  },
+  {
+    "id": "style-flamenco-cante-jondo-signature",
+    "worldId": "flamenco",
+    "styleIds": [
+      "flamenco-cante-jondo"
+    ],
+    "name": "Cante Jondo Signature Cell",
+    "shortName": "Cante Jondo Cell",
+    "family": "flamenco",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "flamenco",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "voice",
+      "spanish-guitar",
+      "palmas",
+      "cajon"
+    ],
+    "meter": "12/8",
+    "cycleLength": 1,
+    "subdivisions": 12,
+    "onsetGrid": [
+      0,
+      3,
+      6,
+      8,
+      10
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7,
+      1
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7,
+      0.9
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "flamenco",
+      "signature"
+    ],
+    "techniques": [
+      "dramatic pause",
+      "rubato entrance",
+      "jaleo",
+      "melisma",
+      "12-beat compás"
+    ]
+  }
 ];

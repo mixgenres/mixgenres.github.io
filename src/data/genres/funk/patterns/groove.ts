@@ -1145,4 +1145,591 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 1,
           "enabled": true
         }
+,
+  {
+    "id": "tech-funk-james-brown-one",
+    "worldId": "funk",
+    "styleIds": [
+      "funk-one-pocket-funk-james-brown"
+    ],
+    "name": "James Brown “one”",
+    "shortName": "James Brown “one”",
+    "family": "funk",
+    "category": "groove",
+    "description": "Technique: James Brown “one”",
+    "tags": [
+      "funk",
+      "James Brown “one”"
+    ],
+    "approaches": [
+      "James Brown “one”"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "funk",
+      "James Brown “one”"
+    ],
+    "techniques": [
+      "James Brown “one”"
+    ]
+  },
+  {
+    "id": "tech-funk-vamp-extension",
+    "worldId": "funk",
+    "styleIds": [
+      "funk-jazz-funk",
+      "funk-p-funk-cosmic"
+    ],
+    "name": "vamp extension",
+    "shortName": "vamp extension",
+    "family": "funk",
+    "category": "groove",
+    "description": "Technique: vamp extension",
+    "tags": [
+      "funk",
+      "vamp extension"
+    ],
+    "approaches": [
+      "vamp extension"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "funk",
+      "vamp extension"
+    ],
+    "techniques": [
+      "vamp extension"
+    ]
+  },
+  {
+    "id": "tech-funk-rhythmic-stop",
+    "worldId": "funk",
+    "styleIds": [
+      "funk-one-pocket-funk-james-brown",
+      "funk-p-funk-cosmic"
+    ],
+    "name": "rhythmic stop",
+    "shortName": "rhythmic stop",
+    "family": "funk",
+    "category": "groove",
+    "description": "Technique: rhythmic stop",
+    "tags": [
+      "funk",
+      "rhythmic stop"
+    ],
+    "approaches": [
+      "rhythmic stop"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "funk",
+      "rhythmic stop"
+    ],
+    "techniques": [
+      "rhythmic stop"
+    ]
+  },
+  {
+    "id": "tech-funk-pocket-displacement",
+    "worldId": "funk",
+    "styleIds": [],
+    "name": "pocket displacement",
+    "shortName": "pocket displacement",
+    "family": "funk",
+    "category": "groove",
+    "description": "Technique: pocket displacement",
+    "tags": [
+      "funk",
+      "pocket displacement"
+    ],
+    "approaches": [
+      "pocket displacement"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "funk",
+      "pocket displacement"
+    ],
+    "techniques": [
+      "pocket displacement"
+    ]
+  },
+  {
+    "id": "style-funk-one-pocket-funk-james-brown-signature",
+    "worldId": "funk",
+    "styleIds": [
+      "funk-one-pocket-funk-james-brown"
+    ],
+    "name": "One-Pocket Funk — James Brown Signature Cell",
+    "shortName": "One-Pocket Funk — James Brown Cell",
+    "family": "funk",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "funk",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "brass"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "funk",
+      "signature"
+    ],
+    "techniques": [
+      "rhythmic stop",
+      "16th-note guitar scratch",
+      "James Brown “one”",
+      "ghost-note bass",
+      "funk horn stab",
+      "muted guitar"
+    ]
+  },
+  {
+    "id": "style-funk-minneapolis-funk-signature",
+    "worldId": "funk",
+    "styleIds": [
+      "funk-minneapolis-funk"
+    ],
+    "name": "Minneapolis Funk Signature Cell",
+    "shortName": "Minneapolis Funk Cell",
+    "family": "funk",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "funk",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "synth"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "funk",
+      "signature"
+    ],
+    "techniques": [
+      "syncopated bass octave",
+      "clavinet riff",
+      "muted guitar",
+      "16th-note guitar scratch",
+      "funk horn stab",
+      "ghost-note bass"
+    ]
+  },
+  {
+    "id": "style-funk-jazz-funk-signature",
+    "worldId": "funk",
+    "styleIds": [
+      "funk-jazz-funk"
+    ],
+    "name": "Jazz-Funk Signature Cell",
+    "shortName": "Jazz-Funk Cell",
+    "family": "funk",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "funk",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "rhodes",
+      "clavinet",
+      "bass",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "funk",
+      "signature"
+    ],
+    "techniques": [
+      "clavinet riff",
+      "funk horn stab",
+      "vamp extension"
+    ]
+  },
+  {
+    "id": "style-funk-p-funk-cosmic-signature",
+    "worldId": "funk",
+    "styleIds": [
+      "funk-p-funk-cosmic"
+    ],
+    "name": "P-Funk Cosmic Signature Cell",
+    "shortName": "P-Funk Cosmic Cell",
+    "family": "funk",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "funk",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "bass",
+      "drums",
+      "electric-guitar",
+      "synth"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "funk",
+      "signature"
+    ],
+    "techniques": [
+      "funk horn stab",
+      "rhythmic stop",
+      "vamp extension"
+    ]
+  }
 ];

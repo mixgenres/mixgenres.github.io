@@ -1239,4 +1239,748 @@ export const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 1,
           "enabled": true
         }
+,
+  {
+    "id": "tech-kizomba-delayed-kick",
+    "worldId": "kizomba",
+    "styleIds": [
+      "kizomba-classic-angolan-kizomba"
+    ],
+    "name": "delayed kick",
+    "shortName": "delayed kick",
+    "family": "kizomba",
+    "category": "groove",
+    "description": "Technique: delayed kick",
+    "tags": [
+      "kizomba",
+      "delayed kick"
+    ],
+    "approaches": [
+      "delayed kick"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "kizomba",
+      "delayed kick"
+    ],
+    "techniques": [
+      "delayed kick"
+    ]
+  },
+  {
+    "id": "tech-kizomba-soft-shaker-subdivision",
+    "worldId": "kizomba",
+    "styleIds": [
+      "kizomba-semba-to-kizomba-transition"
+    ],
+    "name": "soft shaker subdivision",
+    "shortName": "soft shaker subdivision",
+    "family": "kizomba",
+    "category": "groove",
+    "description": "Technique: soft shaker subdivision",
+    "tags": [
+      "kizomba",
+      "soft shaker subdivision"
+    ],
+    "approaches": [
+      "soft shaker subdivision"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "kizomba",
+      "soft shaker subdivision"
+    ],
+    "techniques": [
+      "soft shaker subdivision"
+    ]
+  },
+  {
+    "id": "tech-kizomba-sparse-percussion",
+    "worldId": "kizomba",
+    "styleIds": [
+      "kizomba-semba-to-kizomba-transition",
+      "kizomba-cape-verdean-ghetto-zouk",
+      "kizomba-minimal-tarraxinha",
+      "kizomba-tarraxo-club"
+    ],
+    "name": "sparse percussion",
+    "shortName": "sparse percussion",
+    "family": "kizomba",
+    "category": "groove",
+    "description": "Technique: sparse percussion",
+    "tags": [
+      "kizomba",
+      "sparse percussion"
+    ],
+    "approaches": [
+      "sparse percussion"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "kizomba",
+      "sparse percussion"
+    ],
+    "techniques": [
+      "sparse percussion"
+    ]
+  },
+  {
+    "id": "tech-kizomba-tarraxinha-bass-pulse",
+    "worldId": "kizomba",
+    "styleIds": [
+      "kizomba-classic-angolan-kizomba",
+      "kizomba-semba-to-kizomba-transition",
+      "kizomba-cape-verdean-ghetto-zouk",
+      "kizomba-minimal-tarraxinha",
+      "kizomba-tarraxo-club"
+    ],
+    "name": "tarraxinha bass pulse",
+    "shortName": "tarraxinha bass pulse",
+    "family": "kizomba",
+    "category": "groove",
+    "description": "Technique: tarraxinha bass pulse",
+    "tags": [
+      "kizomba",
+      "tarraxinha bass pulse"
+    ],
+    "approaches": [
+      "tarraxinha bass pulse"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "kizomba",
+      "tarraxinha bass pulse"
+    ],
+    "techniques": [
+      "tarraxinha bass pulse"
+    ]
+  },
+  {
+    "id": "tech-kizomba-tarraxo-stop",
+    "worldId": "kizomba",
+    "styleIds": [
+      "kizomba-tarraxo-club"
+    ],
+    "name": "tarraxo stop",
+    "shortName": "tarraxo stop",
+    "family": "kizomba",
+    "category": "groove",
+    "description": "Technique: tarraxo stop",
+    "tags": [
+      "kizomba",
+      "tarraxo stop"
+    ],
+    "approaches": [
+      "tarraxo stop"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "kizomba",
+      "tarraxo stop"
+    ],
+    "techniques": [
+      "tarraxo stop"
+    ]
+  },
+  {
+    "id": "style-kizomba-classic-angolan-kizomba-signature",
+    "worldId": "kizomba",
+    "styleIds": [
+      "kizomba-classic-angolan-kizomba"
+    ],
+    "name": "Classic Angolan Kizomba Signature Cell",
+    "shortName": "Classic Angolan Kizomba Cell",
+    "family": "kizomba",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "kizomba",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "shaker"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "kizomba",
+      "signature"
+    ],
+    "techniques": [
+      "kizomba bass ostinato",
+      "delayed kick",
+      "semba guitar",
+      "ghetto-zouk sub-bass",
+      "tarraxinha bass pulse"
+    ]
+  },
+  {
+    "id": "style-kizomba-semba-to-kizomba-transition-signature",
+    "worldId": "kizomba",
+    "styleIds": [
+      "kizomba-semba-to-kizomba-transition"
+    ],
+    "name": "Semba-to-Kizomba Transition Signature Cell",
+    "shortName": "Semba-to-Kizomba Transition Cell",
+    "family": "kizomba",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "kizomba",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "bass",
+      "hand-percussion",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "kizomba",
+      "signature"
+    ],
+    "techniques": [
+      "semba guitar",
+      "kizomba bass ostinato",
+      "soft shaker subdivision",
+      "sparse percussion",
+      "tarraxinha bass pulse"
+    ]
+  },
+  {
+    "id": "style-kizomba-cape-verdean-ghetto-zouk-signature",
+    "worldId": "kizomba",
+    "styleIds": [
+      "kizomba-cape-verdean-ghetto-zouk"
+    ],
+    "name": "Cape Verdean Ghetto Zouk Signature Cell",
+    "shortName": "Cape Verdean Ghetto Zouk Cell",
+    "family": "kizomba",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "kizomba",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "synth",
+      "sub-bass",
+      "drums",
+      "electric-guitar"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "kizomba",
+      "signature"
+    ],
+    "techniques": [
+      "sparse percussion",
+      "ghetto-zouk sub-bass",
+      "long R&B chord voicing",
+      "kizomba bass ostinato",
+      "tarraxinha bass pulse"
+    ]
+  },
+  {
+    "id": "style-kizomba-minimal-tarraxinha-signature",
+    "worldId": "kizomba",
+    "styleIds": [
+      "kizomba-minimal-tarraxinha"
+    ],
+    "name": "Minimal Tarraxinha Signature Cell",
+    "shortName": "Minimal Tarraxinha Cell",
+    "family": "kizomba",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "kizomba",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "sub-bass",
+      "drums",
+      "synth",
+      "voice"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "kizomba",
+      "signature"
+    ],
+    "techniques": [
+      "tarraxinha bass pulse",
+      "vocal-space arrangement",
+      "ghetto-zouk sub-bass",
+      "kizomba bass ostinato",
+      "sparse percussion"
+    ]
+  },
+  {
+    "id": "style-kizomba-tarraxo-club-signature",
+    "worldId": "kizomba",
+    "styleIds": [
+      "kizomba-tarraxo-club"
+    ],
+    "name": "Tarraxo Club Signature Cell",
+    "shortName": "Tarraxo Club Cell",
+    "family": "kizomba",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "kizomba",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "sub-bass",
+      "drums",
+      "synth",
+      "noise-sweep"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "kizomba",
+      "signature"
+    ],
+    "techniques": [
+      "tarraxo stop",
+      "ghetto-zouk sub-bass",
+      "kizomba bass ostinato",
+      "sparse percussion",
+      "tarraxinha bass pulse"
+    ]
+  }
 ];

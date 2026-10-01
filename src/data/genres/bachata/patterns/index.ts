@@ -8,6 +8,9 @@ import { BACHATA_WORLD_PATTERNS_ROLEPATTERN } from './role-pattern';
 import { BACHATA_WORLD_PATTERNS_INTERACTIONPATTERN } from './interaction-pattern';
 import { BACHATA_WORLD_PATTERNS_SECTIONPATTERN } from './section-pattern';
 import { BACHATA_WORLD_PATTERNS_PHRASEPATTERN } from './phrase-pattern';
+import { BACHATA_WORLD_PATTERNS_BASS } from './bass';
+import { BACHATA_WORLD_PATTERNS_COMPING } from './comping';
+import { BACHATA_WORLD_PATTERNS_LEAD } from './lead';
 
 const PATTERN_GROUPS: Record<string, MusicalPattern[]> = {
   "ostinato": BACHATA_WORLD_PATTERNS_OSTINATO,
@@ -19,8 +22,11 @@ const PATTERN_GROUPS: Record<string, MusicalPattern[]> = {
   "interactionPattern": BACHATA_WORLD_PATTERNS_INTERACTIONPATTERN,
   "sectionPattern": BACHATA_WORLD_PATTERNS_SECTIONPATTERN,
   "phrasePattern": BACHATA_WORLD_PATTERNS_PHRASEPATTERN,
+  "bass": BACHATA_WORLD_PATTERNS_BASS,
+  "comping": BACHATA_WORLD_PATTERNS_COMPING,
+  "lead": BACHATA_WORLD_PATTERNS_LEAD,
 };
-const PATTERN_ORDER: { category: string; index: number }[] = [{"category":"ostinato","index":0},{"category":"ostinato","index":1},{"category":"fill","index":0},{"category":"break","index":0},{"category":"cadence","index":0},{"category":"groove","index":0},{"category":"groove","index":1},{"category":"groove","index":2},{"category":"groove","index":3},{"category":"rolePattern","index":0},{"category":"interactionPattern","index":0},{"category":"ostinato","index":2},{"category":"groove","index":4},{"category":"sectionPattern","index":0},{"category":"groove","index":5},{"category":"sectionPattern","index":1},{"category":"phrasePattern","index":0}];
+const PATTERN_ORDER: { category: string; index: number }[] = [{"category":"ostinato","index":0},{"category":"ostinato","index":1},{"category":"fill","index":0},{"category":"break","index":0},{"category":"cadence","index":0},{"category":"groove","index":0},{"category":"groove","index":1},{"category":"groove","index":2},{"category":"groove","index":3},{"category":"rolePattern","index":0},{"category":"interactionPattern","index":0},{"category":"ostinato","index":2},{"category":"groove","index":4},{"category":"sectionPattern","index":0},{"category":"groove","index":5},{"category":"sectionPattern","index":1},{"category":"phrasePattern","index":0},{"category":"bass","index":0},{"category":"bass","index":1},{"category":"comping","index":0},{"category":"comping","index":1},{"category":"comping","index":2},{"category":"groove","index":6},{"category":"groove","index":7},{"category":"groove","index":8},{"category":"groove","index":9},{"category":"groove","index":10},{"category":"groove","index":11},{"category":"lead","index":0},{"category":"lead","index":1},{"category":"lead","index":2}];
 
 export const BACHATA_WORLD_PATTERNS: Partial<GenreWorld> = {
   patterns: PATTERN_ORDER.map(({ category, index }) => PATTERN_GROUPS[category][index]),

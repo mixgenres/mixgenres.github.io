@@ -1039,4 +1039,461 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 1,
           "enabled": true
         }
+,
+  {
+    "id": "tech-bachata-guira-continuous-subdivision",
+    "worldId": "bachata",
+    "styleIds": [
+      "bachata-dominican-guitar-tradition"
+    ],
+    "name": "güira continuous subdivision",
+    "shortName": "güira continuous subdivision",
+    "family": "bachata",
+    "category": "groove",
+    "description": "Technique: güira continuous subdivision",
+    "tags": [
+      "bachata",
+      "güira continuous subdivision"
+    ],
+    "approaches": [
+      "güira continuous subdivision"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "bachata",
+      "güira continuous subdivision"
+    ],
+    "techniques": [
+      "güira continuous subdivision"
+    ]
+  },
+  {
+    "id": "tech-bachata-bongo-martillo",
+    "worldId": "bachata",
+    "styleIds": [
+      "bachata-dominican-guitar-tradition"
+    ],
+    "name": "bongó martillo",
+    "shortName": "bongó martillo",
+    "family": "bachata",
+    "category": "groove",
+    "description": "Technique: bongó martillo",
+    "tags": [
+      "bachata",
+      "bongó martillo"
+    ],
+    "approaches": [
+      "bongó martillo"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "bachata",
+      "bongó martillo"
+    ],
+    "techniques": [
+      "bongó martillo"
+    ]
+  },
+  {
+    "id": "style-bachata-dominican-guitar-tradition-signature",
+    "worldId": "bachata",
+    "styleIds": [
+      "bachata-dominican-guitar-tradition"
+    ],
+    "name": "Dominican Guitar Tradition Signature Cell",
+    "shortName": "Dominican Guitar Tradition Cell",
+    "family": "bachata",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "bachata",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "acoustic-guitar",
+      "requinto",
+      "bass",
+      "bongos"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "bachata",
+      "signature"
+    ],
+    "techniques": [
+      "bachata bass anticipation",
+      "requinto lead fills",
+      "güira continuous subdivision",
+      "bongó martillo",
+      "descending bachata bass",
+      "guitar arpeggio ostinato"
+    ]
+  },
+  {
+    "id": "style-bachata-romantic-requinto-signature",
+    "worldId": "bachata",
+    "styleIds": [
+      "bachata-romantic-requinto"
+    ],
+    "name": "Romantic Requinto Signature Cell",
+    "shortName": "Romantic Requinto Cell",
+    "family": "bachata",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "bachata",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "requinto",
+      "acoustic-guitar",
+      "bass",
+      "bongos"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "bachata",
+      "signature"
+    ],
+    "techniques": [
+      "requinto answer phrase",
+      "vocal/guitar call-response",
+      "guitar arpeggio ostinato",
+      "bachata bass anticipation",
+      "descending bachata bass",
+      "guitar pickup into chorus"
+    ]
+  },
+  {
+    "id": "style-bachata-modern-urban-bachata-signature",
+    "worldId": "bachata",
+    "styleIds": [
+      "bachata-modern-urban-bachata"
+    ],
+    "name": "Modern Urban Bachata Signature Cell",
+    "shortName": "Modern Urban Bachata Cell",
+    "family": "bachata",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "bachata",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "requinto",
+      "acoustic-guitar",
+      "bass",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "bachata",
+      "signature"
+    ],
+    "techniques": [
+      "muted guitar chord stab",
+      "bachata bass anticipation",
+      "descending bachata bass",
+      "guitar arpeggio ostinato",
+      "guitar pickup into chorus",
+      "vocal/guitar call-response"
+    ]
+  },
+  {
+    "id": "style-bachata-dominican-haitian-caribbean-bachata-fusion-signature",
+    "worldId": "bachata",
+    "styleIds": [
+      "bachata-dominican-haitian-caribbean-bachata-fusion"
+    ],
+    "name": "Dominican-Haitian / Caribbean Bachata Fusion Signature Cell",
+    "shortName": "Dominican-Haitian / Caribbean Bachata Fusion Cell",
+    "family": "bachata",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "bachata",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "requinto",
+      "acoustic-guitar",
+      "bass",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "bachata",
+      "signature"
+    ],
+    "techniques": [
+      "vocal/guitar call-response",
+      "bachata bass anticipation",
+      "descending bachata bass",
+      "guitar arpeggio ostinato",
+      "guitar pickup into chorus",
+      "muted guitar chord stab"
+    ]
+  }
 ];

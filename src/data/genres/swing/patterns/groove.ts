@@ -1014,4 +1014,602 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 1,
           "enabled": true
         }
+,
+  {
+    "id": "tech-swing-ride-swing",
+    "worldId": "swing",
+    "styleIds": [
+      "swing-new-orleans-trad-jazz",
+      "swing-kansas-city-swing",
+      "swing-chicago-swing",
+      "swing-vocal-swing"
+    ],
+    "name": "ride swing",
+    "shortName": "ride swing",
+    "family": "swing",
+    "category": "groove",
+    "description": "Technique: ride swing",
+    "tags": [
+      "swing",
+      "ride swing"
+    ],
+    "approaches": [
+      "ride swing"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "swing",
+      "ride swing"
+    ],
+    "techniques": [
+      "ride swing"
+    ]
+  },
+  {
+    "id": "tech-swing-charleston",
+    "worldId": "swing",
+    "styleIds": [
+      "swing-chicago-swing"
+    ],
+    "name": "Charleston",
+    "shortName": "Charleston",
+    "family": "swing",
+    "category": "groove",
+    "description": "Technique: Charleston",
+    "tags": [
+      "swing",
+      "Charleston"
+    ],
+    "approaches": [
+      "Charleston"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "swing",
+      "Charleston"
+    ],
+    "techniques": [
+      "Charleston"
+    ]
+  },
+  {
+    "id": "tech-swing-swing-triplets",
+    "worldId": "swing",
+    "styleIds": [
+      "swing-new-orleans-trad-jazz",
+      "swing-kansas-city-swing",
+      "swing-chicago-swing",
+      "swing-vocal-swing"
+    ],
+    "name": "swing triplets",
+    "shortName": "swing triplets",
+    "family": "swing",
+    "category": "groove",
+    "description": "Technique: swing triplets",
+    "tags": [
+      "swing",
+      "swing triplets"
+    ],
+    "approaches": [
+      "swing triplets"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      3,
+      6,
+      8,
+      11,
+      14
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "swing",
+      "swing triplets"
+    ],
+    "techniques": [
+      "swing triplets"
+    ]
+  },
+  {
+    "id": "tech-swing-big-band-riff",
+    "worldId": "swing",
+    "styleIds": [
+      "swing-kansas-city-swing"
+    ],
+    "name": "big-band riff",
+    "shortName": "big-band riff",
+    "family": "swing",
+    "category": "groove",
+    "description": "Technique: big-band riff",
+    "tags": [
+      "swing",
+      "big-band riff"
+    ],
+    "approaches": [
+      "big-band riff"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "swing",
+      "big-band riff"
+    ],
+    "techniques": [
+      "big-band riff"
+    ]
+  },
+  {
+    "id": "style-swing-new-orleans-trad-jazz-signature",
+    "worldId": "swing",
+    "styleIds": [
+      "swing-new-orleans-trad-jazz"
+    ],
+    "name": "New Orleans Trad Jazz Signature Cell",
+    "shortName": "New Orleans Trad Jazz Cell",
+    "family": "swing",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "swing",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "clarinet",
+      "trumpet",
+      "trombone",
+      "piano"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "swing",
+      "signature"
+    ],
+    "techniques": [
+      "ride swing",
+      "stride piano",
+      "swing triplets"
+    ]
+  },
+  {
+    "id": "style-swing-kansas-city-swing-signature",
+    "worldId": "swing",
+    "styleIds": [
+      "swing-kansas-city-swing"
+    ],
+    "name": "Kansas City Swing Signature Cell",
+    "shortName": "Kansas City Swing Cell",
+    "family": "swing",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "swing",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "piano",
+      "upright-bass",
+      "drums",
+      "tenor-sax"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "swing",
+      "signature"
+    ],
+    "techniques": [
+      "ride swing",
+      "shout chorus",
+      "walking bass",
+      "big-band riff",
+      "swing triplets"
+    ]
+  },
+  {
+    "id": "style-swing-chicago-swing-signature",
+    "worldId": "swing",
+    "styleIds": [
+      "swing-chicago-swing"
+    ],
+    "name": "Chicago Swing Signature Cell",
+    "shortName": "Chicago Swing Cell",
+    "family": "swing",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "swing",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "clarinet",
+      "piano",
+      "upright-bass",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "swing",
+      "signature"
+    ],
+    "techniques": [
+      "walking bass",
+      "Charleston",
+      "ride swing",
+      "swing triplets"
+    ]
+  },
+  {
+    "id": "style-swing-vocal-swing-signature",
+    "worldId": "swing",
+    "styleIds": [
+      "swing-vocal-swing"
+    ],
+    "name": "Vocal Swing Signature Cell",
+    "shortName": "Vocal Swing Cell",
+    "family": "swing",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "swing",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "voice",
+      "piano",
+      "upright-bass",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "swing",
+      "signature"
+    ],
+    "techniques": [
+      "scat syllables",
+      "swing triplets",
+      "ride swing"
+    ]
+  }
 ];

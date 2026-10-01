@@ -911,4 +911,392 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 1,
           "enabled": true
         }
+,
+  {
+    "id": "tech-zouk-caribbean-percussion-layer",
+    "worldId": "zouk",
+    "styleIds": [
+      "zouk-kassav-zouk-beton",
+      "zouk-zouk-kizomba-bridge"
+    ],
+    "name": "Caribbean percussion layer",
+    "shortName": "Caribbean percussion layer",
+    "family": "zouk",
+    "category": "groove",
+    "description": "Technique: Caribbean percussion layer",
+    "tags": [
+      "zouk",
+      "Caribbean percussion layer"
+    ],
+    "approaches": [
+      "Caribbean percussion layer"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "zouk",
+      "Caribbean percussion layer"
+    ],
+    "techniques": [
+      "Caribbean percussion layer"
+    ]
+  },
+  {
+    "id": "style-zouk-kassav-zouk-beton-signature",
+    "worldId": "zouk",
+    "styleIds": [
+      "zouk-kassav-zouk-beton"
+    ],
+    "name": "Kassav' / Zouk Béton Signature Cell",
+    "shortName": "Kassav' / Zouk Béton Cell",
+    "family": "zouk",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "zouk",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "zouk",
+      "signature"
+    ],
+    "techniques": [
+      "zouk guitar syncopation",
+      "zouk béton bass",
+      "Caribbean percussion layer",
+      "ghetto-zouk sub-bass",
+      "kizomba/zouk hybrid bass",
+      "sparse electronic percussion"
+    ]
+  },
+  {
+    "id": "style-zouk-antillean-big-band-zouk-signature",
+    "worldId": "zouk",
+    "styleIds": [
+      "zouk-antillean-big-band-zouk"
+    ],
+    "name": "Antillean Big-Band Zouk Signature Cell",
+    "shortName": "Antillean Big-Band Zouk Cell",
+    "family": "zouk",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "zouk",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "brass",
+      "strings",
+      "rhodes",
+      "bass"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "zouk",
+      "signature"
+    ],
+    "techniques": [
+      "zouk horn stab",
+      "keyboard ostinato",
+      "ghetto-zouk sub-bass",
+      "kizomba/zouk hybrid bass",
+      "zouk béton bass",
+      "zouk guitar syncopation"
+    ]
+  },
+  {
+    "id": "style-zouk-cabo-zouk-signature",
+    "worldId": "zouk",
+    "styleIds": [
+      "zouk-cabo-zouk"
+    ],
+    "name": "Cabo Zouk Signature Cell",
+    "shortName": "Cabo Zouk Cell",
+    "family": "zouk",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "zouk",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "bass",
+      "synth",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "zouk",
+      "signature"
+    ],
+    "techniques": [
+      "ghetto-zouk sub-bass",
+      "R&B chord extensions",
+      "kizomba/zouk hybrid bass",
+      "zouk béton bass",
+      "zouk guitar syncopation",
+      "zouk horn stab"
+    ]
+  },
+  {
+    "id": "style-zouk-zouk-kizomba-bridge-signature",
+    "worldId": "zouk",
+    "styleIds": [
+      "zouk-zouk-kizomba-bridge"
+    ],
+    "name": "Zouk–Kizomba Bridge Signature Cell",
+    "shortName": "Zouk–Kizomba Bridge Cell",
+    "family": "zouk",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "zouk",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "sub-bass",
+      "synth",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "zouk",
+      "signature"
+    ],
+    "techniques": [
+      "kizomba/zouk hybrid bass",
+      "R&B chord extensions",
+      "ghetto-zouk sub-bass",
+      "zouk béton bass",
+      "Caribbean percussion layer",
+      "sparse electronic percussion"
+    ]
+  }
 ];

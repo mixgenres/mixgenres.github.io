@@ -471,4 +471,902 @@ export const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 1,
           "enabled": true
         }
+,
+  {
+    "id": "tech-salsa-2-3-clave",
+    "worldId": "salsa",
+    "styleIds": [
+      "salsa-son-cubano-foundation",
+      "salsa-salsa-jazz-fusion"
+    ],
+    "name": "2-3 clave",
+    "shortName": "2-3 clave",
+    "family": "salsa",
+    "category": "groove",
+    "description": "Technique: 2-3 clave",
+    "tags": [
+      "salsa",
+      "2-3 clave"
+    ],
+    "approaches": [
+      "2-3 clave"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      2,
+      5,
+      8,
+      10,
+      12,
+      14
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "salsa",
+      "2-3 clave"
+    ],
+    "techniques": [
+      "2-3 clave"
+    ]
+  },
+  {
+    "id": "tech-salsa-3-2-clave",
+    "worldId": "salsa",
+    "styleIds": [
+      "salsa-son-cubano-foundation",
+      "salsa-salsa-jazz-fusion"
+    ],
+    "name": "3-2 clave",
+    "shortName": "3-2 clave",
+    "family": "salsa",
+    "category": "groove",
+    "description": "Technique: 3-2 clave",
+    "tags": [
+      "salsa",
+      "3-2 clave"
+    ],
+    "approaches": [
+      "3-2 clave"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      3,
+      6,
+      8,
+      11,
+      14
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "salsa",
+      "3-2 clave"
+    ],
+    "techniques": [
+      "3-2 clave"
+    ]
+  },
+  {
+    "id": "tech-salsa-cascara",
+    "worldId": "salsa",
+    "styleIds": [],
+    "name": "cascara",
+    "shortName": "cascara",
+    "family": "salsa",
+    "category": "groove",
+    "description": "Technique: cascara",
+    "tags": [
+      "salsa",
+      "cascara"
+    ],
+    "approaches": [
+      "cascara"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "salsa",
+      "cascara"
+    ],
+    "techniques": [
+      "cascara"
+    ]
+  },
+  {
+    "id": "tech-salsa-bongo-martillo",
+    "worldId": "salsa",
+    "styleIds": [
+      "salsa-son-cubano-foundation"
+    ],
+    "name": "bongó martillo",
+    "shortName": "bongó martillo",
+    "family": "salsa",
+    "category": "groove",
+    "description": "Technique: bongó martillo",
+    "tags": [
+      "salsa",
+      "bongó martillo"
+    ],
+    "approaches": [
+      "bongó martillo"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "salsa",
+      "bongó martillo"
+    ],
+    "techniques": [
+      "bongó martillo"
+    ]
+  },
+  {
+    "id": "tech-salsa-campana",
+    "worldId": "salsa",
+    "styleIds": [
+      "salsa-salsa-brava-1970s-new-york",
+      "salsa-salsa-conjunto"
+    ],
+    "name": "campana",
+    "shortName": "campana",
+    "family": "salsa",
+    "category": "groove",
+    "description": "Technique: campana",
+    "tags": [
+      "salsa",
+      "campana"
+    ],
+    "approaches": [
+      "campana"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "salsa",
+      "campana"
+    ],
+    "techniques": [
+      "campana"
+    ]
+  },
+  {
+    "id": "tech-salsa-mambo-break",
+    "worldId": "salsa",
+    "styleIds": [
+      "salsa-salsa-brava-1970s-new-york"
+    ],
+    "name": "mambo break",
+    "shortName": "mambo break",
+    "family": "salsa",
+    "category": "groove",
+    "description": "Technique: mambo break",
+    "tags": [
+      "salsa",
+      "mambo break"
+    ],
+    "approaches": [
+      "mambo break"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "salsa",
+      "mambo break"
+    ],
+    "techniques": [
+      "mambo break"
+    ]
+  },
+  {
+    "id": "tech-salsa-percussion-coda",
+    "worldId": "salsa",
+    "styleIds": [],
+    "name": "percussion coda",
+    "shortName": "percussion coda",
+    "family": "salsa",
+    "category": "groove",
+    "description": "Technique: percussion coda",
+    "tags": [
+      "salsa",
+      "percussion coda"
+    ],
+    "approaches": [
+      "percussion coda"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "salsa",
+      "percussion coda"
+    ],
+    "techniques": [
+      "percussion coda"
+    ]
+  },
+  {
+    "id": "style-salsa-son-cubano-foundation-signature",
+    "worldId": "salsa",
+    "styleIds": [
+      "salsa-son-cubano-foundation"
+    ],
+    "name": "Son Cubano Foundation Signature Cell",
+    "shortName": "Son Cubano Foundation Cell",
+    "family": "salsa",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "salsa",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "tres",
+      "bongos",
+      "bass",
+      "claves"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "salsa",
+      "signature"
+    ],
+    "techniques": [
+      "bongó martillo",
+      "2-3 clave",
+      "3-2 clave"
+    ]
+  },
+  {
+    "id": "style-salsa-salsa-brava-1970s-new-york-signature",
+    "worldId": "salsa",
+    "styleIds": [
+      "salsa-salsa-brava-1970s-new-york"
+    ],
+    "name": "Salsa Brava / 1970s New York Signature Cell",
+    "shortName": "Salsa Brava / 1970s New York Cell",
+    "family": "salsa",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "salsa",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "trombone",
+      "piano",
+      "bass",
+      "congas"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "salsa",
+      "signature"
+    ],
+    "techniques": [
+      "campana",
+      "montuno",
+      "coro/pregón",
+      "mambo horn section",
+      "mambo break"
+    ]
+  },
+  {
+    "id": "style-salsa-salsa-conjunto-signature",
+    "worldId": "salsa",
+    "styleIds": [
+      "salsa-salsa-conjunto"
+    ],
+    "name": "Salsa Conjunto Signature Cell",
+    "shortName": "Salsa Conjunto Cell",
+    "family": "salsa",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "salsa",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "trumpet",
+      "piano",
+      "bass",
+      "congas"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "salsa",
+      "signature"
+    ],
+    "techniques": [
+      "campana",
+      "montuno",
+      "tumbao",
+      "coro/pregón"
+    ]
+  },
+  {
+    "id": "style-salsa-salsa-jazz-fusion-signature",
+    "worldId": "salsa",
+    "styleIds": [
+      "salsa-salsa-jazz-fusion"
+    ],
+    "name": "Salsa Jazz Fusion Signature Cell",
+    "shortName": "Salsa Jazz Fusion Cell",
+    "family": "salsa",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "salsa",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "piano",
+      "bass",
+      "congas",
+      "timbales"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "salsa",
+      "signature"
+    ],
+    "techniques": [
+      "montuno",
+      "2-3 clave",
+      "3-2 clave",
+      "mambo horn section"
+    ]
+  },
+  {
+    "id": "style-salsa-boogaloo-latin-soul-signature",
+    "worldId": "salsa",
+    "styleIds": [
+      "salsa-boogaloo-latin-soul"
+    ],
+    "name": "Boogaloo / Latin Soul Signature Cell",
+    "shortName": "Boogaloo / Latin Soul Cell",
+    "family": "salsa",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "salsa",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "piano",
+      "bass",
+      "congas",
+      "brass"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "salsa",
+      "signature"
+    ],
+    "techniques": [
+      "mambo horn section"
+    ]
+  }
 ];

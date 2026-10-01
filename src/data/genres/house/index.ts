@@ -632,7 +632,397 @@ export const HOUSE_WORLD: GenreWorld = {
         ]
       }
     }
-  ],
+  ,
+    {
+    "id": "house-chicago-house",
+    "worldId": "house",
+    "name": "Chicago House",
+    "origin": "Chicago / United States",
+    "era": "1980s–Present",
+    "description": "Soulful vocals, four-on-floor kick, piano/chord stabs, bass groove and disco percussion.",
+    "characteristicInstruments": [
+        "drums",
+        "piano",
+        "bass",
+        "synth",
+        "voice"
+    ],
+    "preferredMeters": [
+        "4/4"
+    ],
+    "tempoRange": [
+        118,
+        128
+    ],
+    "keySubstyles": [
+        "Chicago House"
+    ],
+    "coreConcepts": [
+        "four-on-floor",
+        "house piano stab",
+        "offbeat open hat",
+        "disco percussion"
+    ],
+    "rhythmicGrammar": [
+        "Four-on-floor with piano stabs and bass"
+    ],
+    "danceTags": [
+        "social-partner"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Four-on-floor with piano stabs and bass",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Am7",
+        "Dm7",
+        "G7",
+        "Cmaj7"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "verse": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "chorus": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "bridge": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "solo": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "coda": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ]
+    },
+    "referenceArtists": [
+        "Frankie Knuckles",
+        "Marshall Jefferson"
+    ],
+    "referenceTracks": [],
+    "techniques": [
+        "offbeat open hat",
+        "piano house stab",
+        "four-on-floor",
+        "house clap"
+    ]
+},
+{
+    "id": "house-deep-house",
+    "worldId": "house",
+    "name": "Deep House",
+    "origin": "Chicago / United States",
+    "era": "1980s–Present",
+    "description": "Warm extended chords, restrained drums, melodic bass and long-form groove development.",
+    "characteristicInstruments": [
+        "drums",
+        "rhodes",
+        "bass",
+        "synth",
+        "warm-pad"
+    ],
+    "preferredMeters": [
+        "4/4"
+    ],
+    "tempoRange": [
+        115,
+        125
+    ],
+    "keySubstyles": [
+        "Deep House"
+    ],
+    "coreConcepts": [
+        "extended chord voicing",
+        "restrained percussion",
+        "melodic bass"
+    ],
+    "rhythmicGrammar": [
+        "Warm extended chords over deep pocket"
+    ],
+    "danceTags": [
+        "social-partner"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Warm extended chords over deep pocket",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Am7",
+        "Dm7",
+        "G7",
+        "Cmaj7"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "verse": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "chorus": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "bridge": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "solo": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "coda": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ]
+    },
+    "referenceArtists": [
+        "Larry Heard",
+        "Kerri Chandler"
+    ],
+    "referenceTracks": [],
+    "techniques": [
+        "house clap",
+        "piano house stab"
+    ]
+},
+{
+    "id": "house-acid-house",
+    "worldId": "house",
+    "name": "Acid House",
+    "origin": "Chicago / United States",
+    "era": "1980s–Present",
+    "description": "TB-303 sequences with resonance/filter modulation, minimal harmony and hypnotic repetition.",
+    "characteristicInstruments": [
+        "acid-303",
+        "drums",
+        "bass-lead"
+    ],
+    "preferredMeters": [
+        "4/4"
+    ],
+    "tempoRange": [
+        120,
+        130
+    ],
+    "keySubstyles": [
+        "Acid House"
+    ],
+    "coreConcepts": [
+        "303 acid sequence",
+        "filter automation",
+        "slide/accent"
+    ],
+    "rhythmicGrammar": [
+        "Repeating acid sequence with filter movement"
+    ],
+    "danceTags": [
+        "social-partner"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Repeating acid sequence with filter movement",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Am7",
+        "Dm7",
+        "G7",
+        "Cmaj7"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "verse": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "chorus": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "bridge": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "solo": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "coda": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ]
+    },
+    "referenceArtists": [
+        "Phuture",
+        "DJ Pierre"
+    ],
+    "referenceTracks": [
+        "Acid Tracks"
+    ],
+    "techniques": [
+        "303 acid sequence",
+        "filter automation",
+        "Detroit synth sequence",
+        "house clap",
+        "piano house stab"
+    ]
+},
+{
+    "id": "house-minimal-techno",
+    "worldId": "house",
+    "name": "Minimal Techno",
+    "origin": "Detroit / Berlin",
+    "era": "1990s–Present",
+    "description": "Tiny rhythmic cells, subtle automation and micro-variation replace large melodic changes.",
+    "characteristicInstruments": [
+        "drums",
+        "synth",
+        "bass-lead",
+        "noise-sweep"
+    ],
+    "preferredMeters": [
+        "4/4"
+    ],
+    "tempoRange": [
+        120,
+        135
+    ],
+    "keySubstyles": [
+        "Minimal Techno"
+    ],
+    "coreConcepts": [
+        "microvariation",
+        "filter automation",
+        "tom groove"
+    ],
+    "rhythmicGrammar": [
+        "Minimal pulse with micro-variation"
+    ],
+    "danceTags": [
+        "social-partner"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Minimal pulse with micro-variation",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Am7",
+        "Dm7",
+        "G7",
+        "Cmaj7"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "verse": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "chorus": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "bridge": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "solo": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ],
+        "coda": [
+            "Am7",
+            "Dm7",
+            "G7",
+            "Cmaj7"
+        ]
+    },
+    "referenceArtists": [
+        "Robert Hood",
+        "Richie Hawtin"
+    ],
+    "referenceTracks": [],
+    "techniques": [
+        "filter automation",
+        "tom-based techno groove",
+        "minimal microvariation"
+    ]
+}],
   "patterns": [
     {
       "id": "house--ht-four-floor",
@@ -2332,7 +2722,1007 @@ export const HOUSE_WORLD: GenreWorld = {
         "lock"
       ]
     }
+  ,
+  {
+  "id": "tech-house-four-on-floor",
+  "worldId": "house",
+  "styleIds": [
+    "house-chicago-house"
   ],
+  "name": "four-on-floor",
+  "shortName": "four-on-floor",
+  "family": "house",
+  "category": "groove",
+  "description": "Technique: four-on-floor",
+  "tags": [
+    "house",
+    "four-on-floor"
+  ],
+  "approaches": [
+    "four-on-floor"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "house",
+    "four-on-floor"
+  ],
+  "techniques": [
+    "four-on-floor"
+  ]
+},
+{
+  "id": "tech-house-offbeat-open-hat",
+  "worldId": "house",
+  "styleIds": [
+    "house-chicago-house"
+  ],
+  "name": "offbeat open hat",
+  "shortName": "offbeat open hat",
+  "family": "house",
+  "category": "groove",
+  "description": "Technique: offbeat open hat",
+  "tags": [
+    "house",
+    "offbeat open hat"
+  ],
+  "approaches": [
+    "offbeat open hat"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    2,
+    6,
+    10,
+    14
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "house",
+    "offbeat open hat"
+  ],
+  "techniques": [
+    "offbeat open hat"
+  ]
+},
+{
+  "id": "tech-house-house-clap",
+  "worldId": "house",
+  "styleIds": [
+    "house-chicago-house",
+    "house-deep-house",
+    "house-acid-house"
+  ],
+  "name": "house clap",
+  "shortName": "house clap",
+  "family": "house",
+  "category": "groove",
+  "description": "Technique: house clap",
+  "tags": [
+    "house",
+    "house clap"
+  ],
+  "approaches": [
+    "house clap"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums",
+    "hand-percussion"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "house",
+    "house clap"
+  ],
+  "techniques": [
+    "house clap"
+  ]
+},
+{
+  "id": "tech-house-piano-house-stab",
+  "worldId": "house",
+  "styleIds": [
+    "house-chicago-house",
+    "house-deep-house",
+    "house-acid-house"
+  ],
+  "name": "piano house stab",
+  "shortName": "piano house stab",
+  "family": "house",
+  "category": "comping",
+  "description": "Technique: piano house stab",
+  "tags": [
+    "house",
+    "piano house stab"
+  ],
+  "approaches": [
+    "piano house stab"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "harmony",
+    "piano"
+  ],
+  "instruments": [
+    "piano"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "house",
+    "piano house stab"
+  ],
+  "techniques": [
+    "piano house stab"
+  ]
+},
+{
+  "id": "tech-house-303-acid-sequence",
+  "worldId": "house",
+  "styleIds": [
+    "house-acid-house"
+  ],
+  "name": "303 acid sequence",
+  "shortName": "303 acid sequence",
+  "family": "house",
+  "category": "bass",
+  "description": "Technique: 303 acid sequence",
+  "tags": [
+    "house",
+    "303 acid sequence"
+  ],
+  "approaches": [
+    "303 acid sequence"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "bass",
+    "texture"
+  ],
+  "instruments": [
+    "acid-303"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [
+    "filter-motion"
+  ],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "house",
+    "303 acid sequence"
+  ],
+  "techniques": [
+    "303 acid sequence"
+  ]
+},
+{
+  "id": "tech-house-detroit-synth-sequence",
+  "worldId": "house",
+  "styleIds": [
+    "house-acid-house"
+  ],
+  "name": "Detroit synth sequence",
+  "shortName": "Detroit synth sequence",
+  "family": "house",
+  "category": "texture",
+  "description": "Technique: Detroit synth sequence",
+  "tags": [
+    "house",
+    "Detroit synth sequence"
+  ],
+  "approaches": [
+    "Detroit synth sequence"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "texture",
+    "lead"
+  ],
+  "instruments": [
+    "synth"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "house",
+    "Detroit synth sequence"
+  ],
+  "techniques": [
+    "Detroit synth sequence"
+  ]
+},
+{
+  "id": "tech-house-tom-based-techno-groove",
+  "worldId": "house",
+  "styleIds": [
+    "house-minimal-techno"
+  ],
+  "name": "tom-based techno groove",
+  "shortName": "tom-based techno groove",
+  "family": "house",
+  "category": "groove",
+  "description": "Technique: tom-based techno groove",
+  "tags": [
+    "house",
+    "tom-based techno groove"
+  ],
+  "approaches": [
+    "tom-based techno groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "house",
+    "tom-based techno groove"
+  ],
+  "techniques": [
+    "tom-based techno groove"
+  ]
+},
+{
+  "id": "tech-house-minimal-microvariation",
+  "worldId": "house",
+  "styleIds": [
+    "house-minimal-techno"
+  ],
+  "name": "minimal microvariation",
+  "shortName": "minimal microvariation",
+  "family": "house",
+  "category": "groove",
+  "description": "Technique: minimal microvariation",
+  "tags": [
+    "house",
+    "minimal microvariation"
+  ],
+  "approaches": [
+    "minimal microvariation"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "lead"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "house",
+    "minimal microvariation"
+  ],
+  "techniques": [
+    "minimal microvariation"
+  ]
+},
+{
+  "id": "tech-house-filter-automation",
+  "worldId": "house",
+  "styleIds": [
+    "house-acid-house",
+    "house-minimal-techno"
+  ],
+  "name": "filter automation",
+  "shortName": "filter automation",
+  "family": "house",
+  "category": "texture",
+  "description": "Technique: filter automation",
+  "tags": [
+    "house",
+    "filter automation"
+  ],
+  "approaches": [
+    "filter automation"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "texture"
+  ],
+  "instruments": [
+    "synth"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "house",
+    "filter automation"
+  ],
+  "techniques": [
+    "filter automation"
+  ]
+},
+{
+  "id": "tech-house-8-16-bar-club-phrasing",
+  "worldId": "house",
+  "styleIds": [],
+  "name": "8/16-bar club phrasing",
+  "shortName": "8/16-bar club phrasing",
+  "family": "house",
+  "category": "groove",
+  "description": "Technique: 8/16-bar club phrasing",
+  "tags": [
+    "house",
+    "8/16-bar club phrasing"
+  ],
+  "approaches": [
+    "8/16-bar club phrasing"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "lead"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "house",
+    "8/16-bar club phrasing"
+  ],
+  "techniques": [
+    "8/16-bar club phrasing"
+  ]
+},
+{
+  "id": "style-house-chicago-house-signature",
+  "worldId": "house",
+  "styleIds": [
+    "house-chicago-house"
+  ],
+  "name": "Chicago House Signature Cell",
+  "shortName": "Chicago House Cell",
+  "family": "house",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "house",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "drums",
+    "piano",
+    "bass",
+    "synth"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "house",
+    "signature"
+  ],
+  "techniques": [
+    "offbeat open hat",
+    "piano house stab",
+    "four-on-floor",
+    "house clap"
+  ]
+},
+{
+  "id": "style-house-deep-house-signature",
+  "worldId": "house",
+  "styleIds": [
+    "house-deep-house"
+  ],
+  "name": "Deep House Signature Cell",
+  "shortName": "Deep House Cell",
+  "family": "house",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "house",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "drums",
+    "rhodes",
+    "bass",
+    "synth"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "house",
+    "signature"
+  ],
+  "techniques": [
+    "house clap",
+    "piano house stab"
+  ]
+},
+{
+  "id": "style-house-acid-house-signature",
+  "worldId": "house",
+  "styleIds": [
+    "house-acid-house"
+  ],
+  "name": "Acid House Signature Cell",
+  "shortName": "Acid House Cell",
+  "family": "house",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "house",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "acid-303",
+    "drums",
+    "bass-lead"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "house",
+    "signature"
+  ],
+  "techniques": [
+    "303 acid sequence",
+    "filter automation",
+    "Detroit synth sequence",
+    "house clap",
+    "piano house stab"
+  ]
+},
+{
+  "id": "style-house-minimal-techno-signature",
+  "worldId": "house",
+  "styleIds": [
+    "house-minimal-techno"
+  ],
+  "name": "Minimal Techno Signature Cell",
+  "shortName": "Minimal Techno Cell",
+  "family": "house",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "house",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "drums",
+    "synth",
+    "bass-lead",
+    "noise-sweep"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "house",
+    "signature"
+  ],
+  "techniques": [
+    "filter automation",
+    "tom-based techno groove",
+    "minimal microvariation"
+  ]
+}],
   "kind": "world",
   "strictness": "strict"
 };

@@ -378,7 +378,508 @@ export const BRAZILIAN_WORLD: GenreWorld = {
         ]
       }
     }
-  ],
+  ,
+    {
+    "id": "brazilian-choro-brazilian-chamber-groove",
+    "worldId": "brazilian",
+    "name": "Choro / Brazilian Chamber Groove",
+    "origin": "Brazil",
+    "era": "1900s–Present",
+    "description": "Virtuosic melodic counterpoint over pandeiro and cavaquinho with moving seven-string bass.",
+    "characteristicInstruments": [
+        "cavaquinho",
+        "acoustic-guitar",
+        "pandeiro",
+        "mandolin",
+        "upright-bass",
+        "flute"
+    ],
+    "preferredMeters": [
+        "2/4",
+        "4/4"
+    ],
+    "tempoRange": [
+        90,
+        150
+    ],
+    "keySubstyles": [
+        "Choro / Brazilian Chamber Groove"
+    ],
+    "coreConcepts": [
+        "choro counterpoint",
+        "7-string baixaria",
+        "pandeiro subdivision"
+    ],
+    "rhythmicGrammar": [
+        "Choro counterpoint over syncopated pandeiro"
+    ],
+    "danceTags": [
+        "social-partner"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Choro counterpoint over syncopated pandeiro",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Dm7",
+        "G7",
+        "Cmaj7",
+        "A7"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "verse": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "chorus": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "bridge": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "solo": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "coda": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ]
+    },
+    "referenceArtists": [
+        "Pixinguinha",
+        "Jacob do Bandolim"
+    ],
+    "referenceTracks": [
+        "Carinhoso"
+    ],
+    "techniques": [
+        "choro counterpoint",
+        "pandeiro subdivision",
+        "7-string baixaria",
+        "Brazilian guitar syncopation"
+    ]
+},
+{
+    "id": "brazilian-baiao-northeastern-brazilian",
+    "worldId": "brazilian",
+    "name": "Baião / Northeastern Brazilian",
+    "origin": "Northeast Brazil",
+    "era": "1940s–Present",
+    "description": "Accordion, zabumba and triangle establish the characteristic Northeastern pulse and syncopation.",
+    "characteristicInstruments": [
+        "accordion",
+        "zabumba",
+        "triangle",
+        "acoustic-guitar",
+        "bass",
+        "voice"
+    ],
+    "preferredMeters": [
+        "2/4",
+        "4/4"
+    ],
+    "tempoRange": [
+        90,
+        130
+    ],
+    "keySubstyles": [
+        "Baião / Northeastern Brazilian"
+    ],
+    "coreConcepts": [
+        "zabumba bass/stroke",
+        "triangle 16ths",
+        "6/8 ambiguity"
+    ],
+    "rhythmicGrammar": [
+        "Zabumba pulse with triangle subdivision"
+    ],
+    "danceTags": [
+        "social-partner"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Zabumba pulse with triangle subdivision",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Dm7",
+        "G7",
+        "Cmaj7",
+        "A7"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "verse": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "chorus": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "bridge": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "solo": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "coda": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ]
+    },
+    "referenceArtists": [
+        "Luiz Gonzaga"
+    ],
+    "referenceTracks": [
+        "Asa Branca"
+    ],
+    "techniques": [
+        "triangle 16ths",
+        "zabumba bass/stroke relationship",
+        "baião 6/8 ambiguity",
+        "Brazilian guitar syncopation",
+        "pandeiro subdivision"
+    ]
+},
+{
+    "id": "brazilian-forro",
+    "worldId": "brazilian",
+    "name": "Forró",
+    "origin": "Northeast Brazil",
+    "era": "1940s–Present",
+    "description": "Dance-oriented accordion music driven by zabumba, triangle and repetitive melodic hooks.",
+    "characteristicInstruments": [
+        "accordion",
+        "zabumba",
+        "triangle",
+        "bass",
+        "acoustic-guitar",
+        "voice"
+    ],
+    "preferredMeters": [
+        "2/4",
+        "4/4"
+    ],
+    "tempoRange": [
+        95,
+        145
+    ],
+    "keySubstyles": [
+        "Forró"
+    ],
+    "coreConcepts": [
+        "zabumba interaction",
+        "triangle subdivision",
+        "repetitive accordion hook"
+    ],
+    "rhythmicGrammar": [
+        "Accordion hook over zabumba/triangle groove"
+    ],
+    "danceTags": [
+        "social-partner"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Accordion hook over zabumba/triangle groove",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Dm7",
+        "G7",
+        "Cmaj7",
+        "A7"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "verse": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "chorus": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "bridge": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "solo": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "coda": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ]
+    },
+    "referenceArtists": [
+        "Dominguinhos",
+        "Luiz Gonzaga"
+    ],
+    "referenceTracks": [],
+    "techniques": [
+        "pandeiro subdivision",
+        "triangle 16ths",
+        "zabumba bass/stroke relationship"
+    ]
+},
+{
+    "id": "brazilian-tropicalia",
+    "worldId": "brazilian",
+    "name": "Tropicalia",
+    "origin": "Brazil",
+    "era": "1960s–1970s",
+    "description": "Brazilian rhythmic language fused with rock, psychedelia, orchestral color and studio experimentation.",
+    "characteristicInstruments": [
+        "electric-guitar",
+        "acoustic-guitar",
+        "bass",
+        "drums",
+        "strings",
+        "voice"
+    ],
+    "preferredMeters": [
+        "4/4"
+    ],
+    "tempoRange": [
+        80,
+        125
+    ],
+    "keySubstyles": [
+        "Tropicalia"
+    ],
+    "coreConcepts": [
+        "psychedelic studio texture",
+        "Brazilian guitar syncopation",
+        "orchestral color"
+    ],
+    "rhythmicGrammar": [
+        "Brazilian rhythm under psychedelic rock texture"
+    ],
+    "danceTags": [
+        "listening"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Brazilian rhythm under psychedelic rock texture",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 1,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Dm7",
+        "G7",
+        "Cmaj7",
+        "A7"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "verse": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "chorus": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "bridge": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "solo": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "coda": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ]
+    },
+    "referenceArtists": [
+        "Caetano Veloso",
+        "Gilberto Gil",
+        "Os Mutantes"
+    ],
+    "referenceTracks": [],
+    "techniques": [
+        "Brazilian guitar syncopation",
+        "cavaquinho syncopation",
+        "partido-alto rhythm"
+    ]
+},
+{
+    "id": "brazilian-mpb",
+    "worldId": "brazilian",
+    "name": "MPB",
+    "origin": "Brazil",
+    "era": "1960s–Present",
+    "description": "Song-centered Brazilian writing combining samba, bossa, jazz harmony and flexible arrangements.",
+    "characteristicInstruments": [
+        "acoustic-guitar",
+        "piano",
+        "bass",
+        "drums",
+        "flute",
+        "voice"
+    ],
+    "preferredMeters": [
+        "4/4",
+        "3/4"
+    ],
+    "tempoRange": [
+        70,
+        120
+    ],
+    "keySubstyles": [
+        "MPB"
+    ],
+    "coreConcepts": [
+        "extended harmony",
+        "Brazilian guitar syncopation",
+        "flexible vocal phrasing"
+    ],
+    "rhythmicGrammar": [
+        "Syncopated Brazilian guitar with extended harmony"
+    ],
+    "danceTags": [
+        "listening"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Syncopated Brazilian guitar with extended harmony",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 1,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Dm7",
+        "G7",
+        "Cmaj7",
+        "A7"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "verse": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "chorus": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "bridge": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "solo": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ],
+        "coda": [
+            "Dm7",
+            "G7",
+            "Cmaj7",
+            "A7"
+        ]
+    },
+    "referenceArtists": [
+        "Milton Nascimento",
+        "Elis Regina",
+        "Chico Buarque"
+    ],
+    "referenceTracks": [],
+    "techniques": [
+        "Brazilian guitar syncopation",
+        "cavaquinho syncopation"
+    ]
+}],
   "patterns": [
     {
       "id": "brazilian--sb-surdo-foundation",
@@ -2069,7 +2570,1088 @@ export const BRAZILIAN_WORLD: GenreWorld = {
         "forro"
       ]
     }
+  ,
+  {
+  "id": "tech-brazilian-pandeiro-subdivision",
+  "worldId": "brazilian",
+  "styleIds": [
+    "brazilian-choro-brazilian-chamber-groove",
+    "brazilian-baiao-northeastern-brazilian",
+    "brazilian-forro"
   ],
+  "name": "pandeiro subdivision",
+  "shortName": "pandeiro subdivision",
+  "family": "brazilian",
+  "category": "groove",
+  "description": "Technique: pandeiro subdivision",
+  "tags": [
+    "brazilian",
+    "pandeiro subdivision"
+  ],
+  "approaches": [
+    "pandeiro subdivision"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums",
+    "hand-percussion"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "brazilian",
+    "pandeiro subdivision"
+  ],
+  "techniques": [
+    "pandeiro subdivision"
+  ]
+},
+{
+  "id": "tech-brazilian-7-string-baixaria",
+  "worldId": "brazilian",
+  "styleIds": [
+    "brazilian-choro-brazilian-chamber-groove"
+  ],
+  "name": "7-string baixaria",
+  "shortName": "7-string baixaria",
+  "family": "brazilian",
+  "category": "texture",
+  "description": "Technique: 7-string baixaria",
+  "tags": [
+    "brazilian",
+    "7-string baixaria"
+  ],
+  "approaches": [
+    "7-string baixaria"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "texture",
+    "harmony"
+  ],
+  "instruments": [
+    "strings"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "brazilian",
+    "7-string baixaria"
+  ],
+  "techniques": [
+    "7-string baixaria"
+  ]
+},
+{
+  "id": "tech-brazilian-cavaquinho-syncopation",
+  "worldId": "brazilian",
+  "styleIds": [
+    "brazilian-tropicalia",
+    "brazilian-mpb"
+  ],
+  "name": "cavaquinho syncopation",
+  "shortName": "cavaquinho syncopation",
+  "family": "brazilian",
+  "category": "comping",
+  "description": "Technique: cavaquinho syncopation",
+  "tags": [
+    "brazilian",
+    "cavaquinho syncopation"
+  ],
+  "approaches": [
+    "cavaquinho syncopation"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "harmony",
+    "rhythm"
+  ],
+  "instruments": [
+    "cavaquinho"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "brazilian",
+    "cavaquinho syncopation"
+  ],
+  "techniques": [
+    "cavaquinho syncopation"
+  ]
+},
+{
+  "id": "tech-brazilian-choro-counterpoint",
+  "worldId": "brazilian",
+  "styleIds": [
+    "brazilian-choro-brazilian-chamber-groove"
+  ],
+  "name": "choro counterpoint",
+  "shortName": "choro counterpoint",
+  "family": "brazilian",
+  "category": "comping",
+  "description": "Technique: choro counterpoint",
+  "tags": [
+    "brazilian",
+    "choro counterpoint"
+  ],
+  "approaches": [
+    "choro counterpoint"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "harmony",
+    "lead"
+  ],
+  "instruments": [
+    "piano"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "brazilian",
+    "choro counterpoint"
+  ],
+  "techniques": [
+    "choro counterpoint"
+  ]
+},
+{
+  "id": "tech-brazilian-zabumba-bass-stroke-relationship",
+  "worldId": "brazilian",
+  "styleIds": [
+    "brazilian-baiao-northeastern-brazilian",
+    "brazilian-forro"
+  ],
+  "name": "zabumba bass/stroke relationship",
+  "shortName": "zabumba bass/stroke relationship",
+  "family": "brazilian",
+  "category": "bass",
+  "description": "Technique: zabumba bass/stroke relationship",
+  "tags": [
+    "brazilian",
+    "zabumba bass/stroke relationship"
+  ],
+  "approaches": [
+    "zabumba bass/stroke relationship"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "bass"
+  ],
+  "instruments": [
+    "bass"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "brazilian",
+    "zabumba bass/stroke relationship"
+  ],
+  "techniques": [
+    "zabumba bass/stroke relationship"
+  ]
+},
+{
+  "id": "tech-brazilian-triangle-16ths",
+  "worldId": "brazilian",
+  "styleIds": [
+    "brazilian-baiao-northeastern-brazilian",
+    "brazilian-forro"
+  ],
+  "name": "triangle 16ths",
+  "shortName": "triangle 16ths",
+  "family": "brazilian",
+  "category": "groove",
+  "description": "Technique: triangle 16ths",
+  "tags": [
+    "brazilian",
+    "triangle 16ths"
+  ],
+  "approaches": [
+    "triangle 16ths"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums",
+    "hand-percussion"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "brazilian",
+    "triangle 16ths"
+  ],
+  "techniques": [
+    "triangle 16ths"
+  ]
+},
+{
+  "id": "tech-brazilian-baiao-6-8-ambiguity",
+  "worldId": "brazilian",
+  "styleIds": [
+    "brazilian-baiao-northeastern-brazilian"
+  ],
+  "name": "baião 6/8 ambiguity",
+  "shortName": "baião 6/8 ambiguity",
+  "family": "brazilian",
+  "category": "groove",
+  "description": "Technique: baião 6/8 ambiguity",
+  "tags": [
+    "brazilian",
+    "baião 6/8 ambiguity"
+  ],
+  "approaches": [
+    "baião 6/8 ambiguity"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "lead"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "6/8",
+  "cycleLength": 1,
+  "subdivisions": 12,
+  "onsetGrid": [
+    0,
+    3,
+    6,
+    9
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "brazilian",
+    "baião 6/8 ambiguity"
+  ],
+  "techniques": [
+    "baião 6/8 ambiguity"
+  ]
+},
+{
+  "id": "tech-brazilian-partido-alto-rhythm",
+  "worldId": "brazilian",
+  "styleIds": [
+    "brazilian-tropicalia"
+  ],
+  "name": "partido-alto rhythm",
+  "shortName": "partido-alto rhythm",
+  "family": "brazilian",
+  "category": "groove",
+  "description": "Technique: partido-alto rhythm",
+  "tags": [
+    "brazilian",
+    "partido-alto rhythm"
+  ],
+  "approaches": [
+    "partido-alto rhythm"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "hand-percussion"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "brazilian",
+    "partido-alto rhythm"
+  ],
+  "techniques": [
+    "partido-alto rhythm"
+  ]
+},
+{
+  "id": "tech-brazilian-samba-tamborim-phrases",
+  "worldId": "brazilian",
+  "styleIds": [],
+  "name": "samba tamborim phrases",
+  "shortName": "samba tamborim phrases",
+  "family": "brazilian",
+  "category": "groove",
+  "description": "Technique: samba tamborim phrases",
+  "tags": [
+    "brazilian",
+    "samba tamborim phrases"
+  ],
+  "approaches": [
+    "samba tamborim phrases"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums",
+    "hand-percussion"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "brazilian",
+    "samba tamborim phrases"
+  ],
+  "techniques": [
+    "samba tamborim phrases"
+  ]
+},
+{
+  "id": "tech-brazilian-brazilian-guitar-syncopation",
+  "worldId": "brazilian",
+  "styleIds": [
+    "brazilian-choro-brazilian-chamber-groove",
+    "brazilian-baiao-northeastern-brazilian",
+    "brazilian-tropicalia",
+    "brazilian-mpb"
+  ],
+  "name": "Brazilian guitar syncopation",
+  "shortName": "Brazilian guitar syncopation",
+  "family": "brazilian",
+  "category": "comping",
+  "description": "Technique: Brazilian guitar syncopation",
+  "tags": [
+    "brazilian",
+    "Brazilian guitar syncopation"
+  ],
+  "approaches": [
+    "Brazilian guitar syncopation"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "guitar",
+    "lead",
+    "comp"
+  ],
+  "instruments": [
+    "electric-guitar"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "brazilian",
+    "Brazilian guitar syncopation"
+  ],
+  "techniques": [
+    "Brazilian guitar syncopation"
+  ]
+},
+{
+  "id": "style-brazilian-choro-brazilian-chamber-groove-signature",
+  "worldId": "brazilian",
+  "styleIds": [
+    "brazilian-choro-brazilian-chamber-groove"
+  ],
+  "name": "Choro / Brazilian Chamber Groove Signature Cell",
+  "shortName": "Choro / Brazilian Chamber Groove Cell",
+  "family": "brazilian",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "brazilian",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "cavaquinho",
+    "acoustic-guitar",
+    "pandeiro",
+    "mandolin"
+  ],
+  "meter": "2/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "brazilian",
+    "signature"
+  ],
+  "techniques": [
+    "choro counterpoint",
+    "pandeiro subdivision",
+    "7-string baixaria",
+    "Brazilian guitar syncopation"
+  ]
+},
+{
+  "id": "style-brazilian-baiao-northeastern-brazilian-signature",
+  "worldId": "brazilian",
+  "styleIds": [
+    "brazilian-baiao-northeastern-brazilian"
+  ],
+  "name": "Baião / Northeastern Brazilian Signature Cell",
+  "shortName": "Baião / Northeastern Brazilian Cell",
+  "family": "brazilian",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "brazilian",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "accordion",
+    "zabumba",
+    "triangle",
+    "acoustic-guitar"
+  ],
+  "meter": "2/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "brazilian",
+    "signature"
+  ],
+  "techniques": [
+    "triangle 16ths",
+    "zabumba bass/stroke relationship",
+    "baião 6/8 ambiguity",
+    "Brazilian guitar syncopation",
+    "pandeiro subdivision"
+  ]
+},
+{
+  "id": "style-brazilian-forro-signature",
+  "worldId": "brazilian",
+  "styleIds": [
+    "brazilian-forro"
+  ],
+  "name": "Forró Signature Cell",
+  "shortName": "Forró Cell",
+  "family": "brazilian",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "brazilian",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "accordion",
+    "zabumba",
+    "triangle",
+    "bass"
+  ],
+  "meter": "2/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "brazilian",
+    "signature"
+  ],
+  "techniques": [
+    "pandeiro subdivision",
+    "triangle 16ths",
+    "zabumba bass/stroke relationship"
+  ]
+},
+{
+  "id": "style-brazilian-tropicalia-signature",
+  "worldId": "brazilian",
+  "styleIds": [
+    "brazilian-tropicalia"
+  ],
+  "name": "Tropicalia Signature Cell",
+  "shortName": "Tropicalia Cell",
+  "family": "brazilian",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "brazilian",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "electric-guitar",
+    "acoustic-guitar",
+    "bass",
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "brazilian",
+    "signature"
+  ],
+  "techniques": [
+    "Brazilian guitar syncopation",
+    "cavaquinho syncopation",
+    "partido-alto rhythm"
+  ]
+},
+{
+  "id": "style-brazilian-mpb-signature",
+  "worldId": "brazilian",
+  "styleIds": [
+    "brazilian-mpb"
+  ],
+  "name": "MPB Signature Cell",
+  "shortName": "MPB Cell",
+  "family": "brazilian",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "brazilian",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "acoustic-guitar",
+    "piano",
+    "bass",
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "brazilian",
+    "signature"
+  ],
+  "techniques": [
+    "Brazilian guitar syncopation",
+    "cavaquinho syncopation"
+  ]
+}],
   "kind": "family",
   "strictness": "flexible"
 };

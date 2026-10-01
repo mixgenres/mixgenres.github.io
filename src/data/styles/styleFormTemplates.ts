@@ -9867,6 +9867,6275 @@ export const STYLE_FORM_TEMPLATES: Record<string, FormStepTemplate[]> = {
       "intensity": "low"
     }
   ]
+,
+  "afrobeats-west-african-highlife-guitar": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "afrobeats-afro-fusion-burna-boy": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "afrobeats-afropop-guitar-groove": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "afrobeats-afrobeats-percussive-minimalism": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "bachata-dominican-guitar-tradition": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "bachata-romantic-requinto": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "bachata-modern-urban-bachata": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "bachata-dominican-haitian-caribbean-bachata-fusion": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "blues-memphis-electric-blues": [
+  {
+    "key": "intro-0",
+    "label": "Head",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 12,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Answer",
+    "kind": "chorus",
+    "bars": 12,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-3",
+    "label": "Solo",
+    "kind": "solo",
+    "bars": 12,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-4",
+    "label": "Turnaround",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "blues-west-coast-jump-blues": [
+  {
+    "key": "intro-0",
+    "label": "Head",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 12,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Answer",
+    "kind": "chorus",
+    "bars": 12,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-3",
+    "label": "Solo",
+    "kind": "solo",
+    "bars": 12,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-4",
+    "label": "Turnaround",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "blues-new-orleans-blues": [
+  {
+    "key": "intro-0",
+    "label": "Head",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 12,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Answer",
+    "kind": "chorus",
+    "bars": 12,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-3",
+    "label": "Solo",
+    "kind": "solo",
+    "bars": 12,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-4",
+    "label": "Turnaround",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "blues-british-blues-revival": [
+  {
+    "key": "intro-0",
+    "label": "Head",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 12,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Answer",
+    "kind": "chorus",
+    "bars": 12,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-3",
+    "label": "Solo",
+    "kind": "solo",
+    "bars": 12,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-4",
+    "label": "Turnaround",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "brazilian-choro-brazilian-chamber-groove": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "brazilian-baiao-northeastern-brazilian": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "brazilian-forro": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "brazilian-tropicalia": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "brazilian-mpb": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "country-appalachian-old-time": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "country-nashville-country-pop": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "country-country-rock": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "country-alt-country-roots-rock": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "country-country-gospel": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "cumbia-traditional-coastal-cumbia": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "cumbia-cumbia-orchestral": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "cumbia-cumbia-peruana": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "cumbia-cumbia-digital-global-bass": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "disco-salsoul-latin-disco": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "disco-cosmic-disco": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "disco-studio-54-orchestral-disco": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "disco-italo-hi-energy": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "drum-and-bass-ragga-jungle": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "drum-and-bass-darkstep": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "drum-and-bass-minimal-autonomic": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "drum-and-bass-jazzstep": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "electronic-electro": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "electronic-detroit-techno": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "electronic-chicago-acid-house": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "electronic-ambient-techno": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "electronic-breakbeat-hardcore": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "flamenco-solea-por-medio": [
+  {
+    "key": "intro-0",
+    "label": "Salida",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Letra",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "solo-2",
+    "label": "Falseta",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-3",
+    "label": "Letra / Jaleo",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-4",
+    "label": "Remate / Cierre",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "flamenco-flamenco-fusion": [
+  {
+    "key": "intro-0",
+    "label": "Salida",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Letra",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "solo-2",
+    "label": "Falseta",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-3",
+    "label": "Letra / Jaleo",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-4",
+    "label": "Remate / Cierre",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "flamenco-nuevo-flamenco": [
+  {
+    "key": "intro-0",
+    "label": "Salida",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Letra",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "solo-2",
+    "label": "Falseta",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-3",
+    "label": "Letra / Jaleo",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-4",
+    "label": "Remate / Cierre",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "flamenco-cante-jondo": [
+  {
+    "key": "intro-0",
+    "label": "Salida",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Letra",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "solo-2",
+    "label": "Falseta",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-3",
+    "label": "Letra / Jaleo",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-4",
+    "label": "Remate / Cierre",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "folk-celtic-traditional": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "folk-british-ballad-tradition": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "folk-appalachian-string-band": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "folk-nordic-folk": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "folk-eastern-european-balkan-folk": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "funk-one-pocket-funk-james-brown": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "funk-minneapolis-funk": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "funk-jazz-funk": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "funk-p-funk-cosmic": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "gospel-black-gospel-quartet": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Response",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Vamp",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "solo-4",
+    "label": "Shout / Solo",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "gospel-gospel-soul": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Response",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Vamp",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "solo-4",
+    "label": "Shout / Solo",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "gospel-gospel-choir-massed-voices": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Response",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Vamp",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "solo-4",
+    "label": "Shout / Solo",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "gospel-modern-gospel-r-b": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Response",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Vamp",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "solo-4",
+    "label": "Shout / Solo",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "hip-hop-old-school-breakbeat": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "hip-hop-golden-age-sample-collage": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "hip-hop-west-coast-g-funk-expansion": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "hip-hop-memphis-southern-rap": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "hip-hop-jersey-club-rap": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "house-chicago-house": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "house-deep-house": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "house-acid-house": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "house-minimal-techno": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "industrial-industrial-rock": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "industrial-industrial-metal": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "industrial-power-electronics": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "industrial-industrial-ambient": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "jazz-swing-era": [
+  {
+    "key": "intro-0",
+    "label": "Head",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Head / A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-2",
+    "label": "Solo",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Trading / Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-4",
+    "label": "Head Return",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "jazz-modal-jazz": [
+  {
+    "key": "intro-0",
+    "label": "Head",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Head / A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-2",
+    "label": "Solo",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Trading / Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-4",
+    "label": "Head Return",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "jazz-post-bop": [
+  {
+    "key": "intro-0",
+    "label": "Head",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Head / A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-2",
+    "label": "Solo",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Trading / Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-4",
+    "label": "Head Return",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "jazz-jazz-funk": [
+  {
+    "key": "intro-0",
+    "label": "Head",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Head / A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-2",
+    "label": "Solo",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Trading / Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-4",
+    "label": "Head Return",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "jazz-avant-garde-free-improvisation": [
+  {
+    "key": "intro-0",
+    "label": "Head",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Head / A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-2",
+    "label": "Solo",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Trading / Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-4",
+    "label": "Head Return",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "jazz-brazilian-jazz": [
+  {
+    "key": "intro-0",
+    "label": "Head",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Head / A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-2",
+    "label": "Solo",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Trading / Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-4",
+    "label": "Head Return",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "kizomba-classic-angolan-kizomba": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "kizomba-semba-to-kizomba-transition": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "kizomba-cape-verdean-ghetto-zouk": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "kizomba-minimal-tarraxinha": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "kizomba-tarraxo-club": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "metal-nwobhm": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "metal-groove-metal": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "metal-metalcore": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "metal-deathcore": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "metal-blackgaze": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "punk-hardcore-proto-punk-garage-punk": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "punk-hardcore-anarcho-punk": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "punk-hardcore-oi": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "punk-hardcore-screamo": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "r-and-b-motown-r-b": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "r-and-b-memphis-r-b": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "r-and-b-90s-contemporary-r-b": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "r-and-b-uk-neo-r-b": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "reggae-one-drop-roots": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "reggae-nyabinghi-rastafari-percussion": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "reggae-digital-dancehall": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "reggae-dubwise-reggae": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "reggaeton-early-puerto-rican-reggaeton": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "reggaeton-underground-playero": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "reggaeton-dembow-dominicano": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "reggaeton-experimental-neoperreo": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "rock-rock-roll": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "rock-british-invasion": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "rock-southern-rock": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "rock-krautrock": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "rock-math-rock": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "rock-dream-pop": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "salsa-son-cubano-foundation": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verso",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Coro",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Mambo / Gear",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "solo-4",
+    "label": "Montuno",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Cierre",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "salsa-salsa-brava-1970s-new-york": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verso",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Coro",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Mambo / Gear",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "solo-4",
+    "label": "Montuno",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Cierre",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "salsa-salsa-conjunto": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verso",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Coro",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Mambo / Gear",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "solo-4",
+    "label": "Montuno",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Cierre",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "salsa-salsa-jazz-fusion": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verso",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Coro",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Mambo / Gear",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "solo-4",
+    "label": "Montuno",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Cierre",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "salsa-boogaloo-latin-soul": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verso",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Coro",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Mambo / Gear",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "solo-4",
+    "label": "Montuno",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Cierre",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "ska-jamaican-first-wave-ska": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "ska-rocksteady": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "ska-jamaican-ska-jazz": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "ska-third-wave-ska": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "soul-stax-soul": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "soul-muscle-shoals-soul": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "soul-psychedelic-soul": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "soul-quiet-funk-boogie-soul": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "swing-new-orleans-trad-jazz": [
+  {
+    "key": "intro-0",
+    "label": "Head",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Head / A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-2",
+    "label": "Solo",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Trading / Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-4",
+    "label": "Head Return",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "swing-kansas-city-swing": [
+  {
+    "key": "intro-0",
+    "label": "Head",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Head / A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-2",
+    "label": "Solo",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Trading / Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-4",
+    "label": "Head Return",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "swing-chicago-swing": [
+  {
+    "key": "intro-0",
+    "label": "Head",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Head / A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-2",
+    "label": "Solo",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Trading / Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-4",
+    "label": "Head Return",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "swing-vocal-swing": [
+  {
+    "key": "intro-0",
+    "label": "Head",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "medium"
+  },
+  {
+    "key": "verse-1",
+    "label": "Head / A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-2",
+    "label": "Solo",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Trading / Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "chorus-4",
+    "label": "Head Return",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "tango-song-centered-tango": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "B",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-3",
+    "label": "Variación",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-4",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "tango-guardia-nueva-modernism": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "B",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-3",
+    "label": "Variación",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-4",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "tango-rhythmic-drive-tango": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "B",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-3",
+    "label": "Variación",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-4",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "tango-elegant-cantabile-tango": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "B",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-3",
+    "label": "Variación",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-4",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "tango-elastic-golden-age-tango": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "B",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-3",
+    "label": "Variación",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-4",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "tango-dramatic-yumba-tango": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "B",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-3",
+    "label": "Variación",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-4",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "tango-harmonic-modernism-tango": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "B",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-3",
+    "label": "Variación",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-4",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "tango-rio-de-la-plata-fusion": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "A",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "B",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-3",
+    "label": "Variación",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-4",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "timba-son-montuno-timba": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verso",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Coro",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Mambo / Gear",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "solo-4",
+    "label": "Montuno",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Cierre",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "timba-los-van-van-songo": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verso",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Coro",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Mambo / Gear",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "solo-4",
+    "label": "Montuno",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Cierre",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "timba-timba-aggression": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verso",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Coro",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Mambo / Gear",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "solo-4",
+    "label": "Montuno",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Cierre",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "timba-timba-piano-tumbao": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verso",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Coro",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Mambo / Gear",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "solo-4",
+    "label": "Montuno",
+    "kind": "solo",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Cierre",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "uk-bass-jungle-hardcore-continuum": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "uk-bass-dark-garage": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "uk-bass-breakstep": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "uk-bass-uk-funky": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "uk-bass-grime-instrumental": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Groove",
+    "kind": "verse",
+    "bars": 16,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Main Groove",
+    "kind": "chorus",
+    "bars": 16,
+    "intensity": "high"
+  },
+  {
+    "key": "breakdown-3",
+    "label": "Breakdown",
+    "kind": "breakdown",
+    "bars": 8,
+    "intensity": "low"
+  },
+  {
+    "key": "bridge-4",
+    "label": "Return",
+    "kind": "bridge",
+    "bars": 16,
+    "intensity": "peak"
+  },
+  {
+    "key": "outro-5",
+    "label": "Outro",
+    "kind": "outro",
+    "bars": 8,
+    "intensity": "low"
+  }
+],
+  "zouk-kassav-zouk-beton": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "zouk-antillean-big-band-zouk": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "zouk-cabo-zouk": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
+  "zouk-zouk-kizomba-bridge": [
+  {
+    "key": "intro-0",
+    "label": "Intro",
+    "kind": "intro",
+    "bars": 4,
+    "intensity": "low"
+  },
+  {
+    "key": "verse-1",
+    "label": "Verse",
+    "kind": "verse",
+    "bars": 8,
+    "intensity": "medium"
+  },
+  {
+    "key": "chorus-2",
+    "label": "Chorus",
+    "kind": "chorus",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "bridge-3",
+    "label": "Bridge",
+    "kind": "bridge",
+    "bars": 8,
+    "intensity": "high"
+  },
+  {
+    "key": "solo-4",
+    "label": "Instrumental",
+    "kind": "solo",
+    "bars": 8,
+    "intensity": "peak"
+  },
+  {
+    "key": "coda-5",
+    "label": "Coda",
+    "kind": "coda",
+    "bars": 4,
+    "intensity": "low"
+  }
+],
 };
 
 // New canonical style ids explicitly reuse the closest established form until
@@ -9908,3 +16177,151 @@ const RETIRED_STYLE_FORM_IDS = [
   'uk-bass-downtempo', 'uk-bass-trip-hop', 'uk-bass-idm', 'uk-bass-synthwave', 'uk-bass-ambient', 'uk-bass-techno',
 ];
 for (const id of RETIRED_STYLE_FORM_IDS) delete STYLE_FORM_TEMPLATES[id];
+
+export const CATALOG_EXPANSION_STYLE_IDS = [
+  "afrobeats-west-african-highlife-guitar",
+  "afrobeats-afro-fusion-burna-boy",
+  "afrobeats-afropop-guitar-groove",
+  "afrobeats-afrobeats-percussive-minimalism",
+  "bachata-dominican-guitar-tradition",
+  "bachata-romantic-requinto",
+  "bachata-modern-urban-bachata",
+  "bachata-dominican-haitian-caribbean-bachata-fusion",
+  "blues-memphis-electric-blues",
+  "blues-west-coast-jump-blues",
+  "blues-new-orleans-blues",
+  "blues-british-blues-revival",
+  "brazilian-choro-brazilian-chamber-groove",
+  "brazilian-baiao-northeastern-brazilian",
+  "brazilian-forro",
+  "brazilian-tropicalia",
+  "brazilian-mpb",
+  "country-appalachian-old-time",
+  "country-nashville-country-pop",
+  "country-country-rock",
+  "country-alt-country-roots-rock",
+  "country-country-gospel",
+  "cumbia-traditional-coastal-cumbia",
+  "cumbia-cumbia-orchestral",
+  "cumbia-cumbia-peruana",
+  "cumbia-cumbia-digital-global-bass",
+  "disco-salsoul-latin-disco",
+  "disco-cosmic-disco",
+  "disco-studio-54-orchestral-disco",
+  "disco-italo-hi-energy",
+  "drum-and-bass-ragga-jungle",
+  "drum-and-bass-darkstep",
+  "drum-and-bass-minimal-autonomic",
+  "drum-and-bass-jazzstep",
+  "electronic-electro",
+  "electronic-detroit-techno",
+  "electronic-chicago-acid-house",
+  "electronic-ambient-techno",
+  "electronic-breakbeat-hardcore",
+  "flamenco-solea-por-medio",
+  "flamenco-flamenco-fusion",
+  "flamenco-nuevo-flamenco",
+  "flamenco-cante-jondo",
+  "folk-celtic-traditional",
+  "folk-british-ballad-tradition",
+  "folk-appalachian-string-band",
+  "folk-nordic-folk",
+  "folk-eastern-european-balkan-folk",
+  "funk-one-pocket-funk-james-brown",
+  "funk-minneapolis-funk",
+  "funk-jazz-funk",
+  "funk-p-funk-cosmic",
+  "gospel-black-gospel-quartet",
+  "gospel-gospel-soul",
+  "gospel-gospel-choir-massed-voices",
+  "gospel-modern-gospel-r-b",
+  "hip-hop-old-school-breakbeat",
+  "hip-hop-golden-age-sample-collage",
+  "hip-hop-west-coast-g-funk-expansion",
+  "hip-hop-memphis-southern-rap",
+  "hip-hop-jersey-club-rap",
+  "house-chicago-house",
+  "house-deep-house",
+  "house-acid-house",
+  "house-minimal-techno",
+  "industrial-industrial-rock",
+  "industrial-industrial-metal",
+  "industrial-power-electronics",
+  "industrial-industrial-ambient",
+  "jazz-swing-era",
+  "jazz-modal-jazz",
+  "jazz-post-bop",
+  "jazz-jazz-funk",
+  "jazz-avant-garde-free-improvisation",
+  "jazz-brazilian-jazz",
+  "kizomba-classic-angolan-kizomba",
+  "kizomba-semba-to-kizomba-transition",
+  "kizomba-cape-verdean-ghetto-zouk",
+  "kizomba-minimal-tarraxinha",
+  "kizomba-tarraxo-club",
+  "metal-nwobhm",
+  "metal-groove-metal",
+  "metal-metalcore",
+  "metal-deathcore",
+  "metal-blackgaze",
+  "punk-hardcore-proto-punk-garage-punk",
+  "punk-hardcore-anarcho-punk",
+  "punk-hardcore-oi",
+  "punk-hardcore-screamo",
+  "r-and-b-motown-r-b",
+  "r-and-b-memphis-r-b",
+  "r-and-b-90s-contemporary-r-b",
+  "r-and-b-uk-neo-r-b",
+  "reggae-one-drop-roots",
+  "reggae-nyabinghi-rastafari-percussion",
+  "reggae-digital-dancehall",
+  "reggae-dubwise-reggae",
+  "reggaeton-early-puerto-rican-reggaeton",
+  "reggaeton-underground-playero",
+  "reggaeton-dembow-dominicano",
+  "reggaeton-experimental-neoperreo",
+  "rock-rock-roll",
+  "rock-british-invasion",
+  "rock-southern-rock",
+  "rock-krautrock",
+  "rock-math-rock",
+  "rock-dream-pop",
+  "salsa-son-cubano-foundation",
+  "salsa-salsa-brava-1970s-new-york",
+  "salsa-salsa-conjunto",
+  "salsa-salsa-jazz-fusion",
+  "salsa-boogaloo-latin-soul",
+  "ska-jamaican-first-wave-ska",
+  "ska-rocksteady",
+  "ska-jamaican-ska-jazz",
+  "ska-third-wave-ska",
+  "soul-stax-soul",
+  "soul-muscle-shoals-soul",
+  "soul-psychedelic-soul",
+  "soul-quiet-funk-boogie-soul",
+  "swing-new-orleans-trad-jazz",
+  "swing-kansas-city-swing",
+  "swing-chicago-swing",
+  "swing-vocal-swing",
+  "tango-song-centered-tango",
+  "tango-guardia-nueva-modernism",
+  "tango-rhythmic-drive-tango",
+  "tango-elegant-cantabile-tango",
+  "tango-elastic-golden-age-tango",
+  "tango-dramatic-yumba-tango",
+  "tango-harmonic-modernism-tango",
+  "tango-rio-de-la-plata-fusion",
+  "timba-son-montuno-timba",
+  "timba-los-van-van-songo",
+  "timba-timba-aggression",
+  "timba-timba-piano-tumbao",
+  "uk-bass-jungle-hardcore-continuum",
+  "uk-bass-dark-garage",
+  "uk-bass-breakstep",
+  "uk-bass-uk-funky",
+  "uk-bass-grime-instrumental",
+  "zouk-kassav-zouk-beton",
+  "zouk-antillean-big-band-zouk",
+  "zouk-cabo-zouk",
+  "zouk-zouk-kizomba-bridge"
+] as const;

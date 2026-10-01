@@ -694,7 +694,394 @@ export const REGGAE_WORLD: GenreWorld = {
         ]
       }
     }
-  ],
+  ,
+    {
+    "id": "reggae-one-drop-roots",
+    "worldId": "reggae",
+    "name": "One-Drop Roots",
+    "origin": "Jamaica",
+    "era": "1970s–Present",
+    "description": "Kick emphasis on beat three, sparse skank and melodic bass as the harmonic center.",
+    "characteristicInstruments": [
+        "bass",
+        "drums",
+        "electric-guitar",
+        "organ",
+        "voice"
+    ],
+    "preferredMeters": [
+        "4/4"
+    ],
+    "tempoRange": [
+        70,
+        90
+    ],
+    "keySubstyles": [
+        "One-Drop Roots"
+    ],
+    "coreConcepts": [
+        "one-drop",
+        "guitar skank",
+        "melodic reggae bass"
+    ],
+    "rhythmicGrammar": [
+        "One-drop pulse with melodic bass"
+    ],
+    "danceTags": [
+        "social-partner"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "One-drop pulse with melodic bass",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Am",
+        "G",
+        "F",
+        "G"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "verse": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "chorus": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "bridge": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "solo": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "coda": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ]
+    },
+    "referenceArtists": [
+        "Bob Marley",
+        "The Abyssinians"
+    ],
+    "referenceTracks": [],
+    "techniques": [
+        "guitar skank",
+        "one-drop",
+        "reggae bassline"
+    ]
+},
+{
+    "id": "reggae-nyabinghi-rastafari-percussion",
+    "worldId": "reggae",
+    "name": "Nyabinghi / Rastafari Percussion",
+    "origin": "Jamaica",
+    "era": "20th century–Present",
+    "description": "Hand drums and polyrhythmic ceremonial percussion forming a rhythmic ancestor to roots reggae.",
+    "characteristicInstruments": [
+        "hand-percussion",
+        "bombo",
+        "drums",
+        "voice"
+    ],
+    "preferredMeters": [
+        "4/4",
+        "6/8"
+    ],
+    "tempoRange": [
+        70,
+        110
+    ],
+    "keySubstyles": [
+        "Nyabinghi / Rastafari Percussion"
+    ],
+    "coreConcepts": [
+        "nyabinghi drums",
+        "polyrhythmic hand drums",
+        "ceremonial pulse"
+    ],
+    "rhythmicGrammar": [
+        "Polyrhythmic hand-drum cycle with space"
+    ],
+    "danceTags": [
+        "spiritual"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Polyrhythmic hand-drum cycle with space",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Am",
+        "G",
+        "F",
+        "G"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "verse": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "chorus": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "bridge": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "solo": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "coda": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ]
+    },
+    "referenceArtists": [
+        "Count Ossie"
+    ],
+    "referenceTracks": [],
+    "techniques": [
+        "nyabinghi drums"
+    ]
+},
+{
+    "id": "reggae-digital-dancehall",
+    "worldId": "reggae",
+    "name": "Digital Dancehall",
+    "origin": "Jamaica",
+    "era": "1980s–Present",
+    "description": "Programmed riddims, synthetic bass, minimal harmony and deejay/toasting performance.",
+    "characteristicInstruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "voice"
+    ],
+    "preferredMeters": [
+        "4/4"
+    ],
+    "tempoRange": [
+        90,
+        115
+    ],
+    "keySubstyles": [
+        "Digital Dancehall"
+    ],
+    "coreConcepts": [
+        "digital riddim",
+        "synthetic bass",
+        "deejay toast"
+    ],
+    "rhythmicGrammar": [
+        "Programmed riddim with synthetic bass"
+    ],
+    "danceTags": [
+        "social-partner"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Programmed riddim with synthetic bass",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Am",
+        "G",
+        "F",
+        "G"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "verse": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "chorus": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "bridge": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "solo": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "coda": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ]
+    },
+    "referenceArtists": [
+        "Wayne Smith"
+    ],
+    "referenceTracks": [
+        "Under Mi Sleng Teng"
+    ],
+    "techniques": [
+        "toast/vocal deejay",
+        "riddim loop"
+    ]
+},
+{
+    "id": "reggae-dubwise-reggae",
+    "worldId": "reggae",
+    "name": "Dubwise Reggae",
+    "origin": "Jamaica / Global",
+    "era": "1970s–Present",
+    "description": "Selective instrument removal and delay, reverb, filtering and bass manipulation as remix language.",
+    "characteristicInstruments": [
+        "bass",
+        "drums",
+        "organ",
+        "dub-echo",
+        "spring-reverb"
+    ],
+    "preferredMeters": [
+        "4/4"
+    ],
+    "tempoRange": [
+        65,
+        90
+    ],
+    "keySubstyles": [
+        "Dubwise Reggae"
+    ],
+    "coreConcepts": [
+        "dub delay throw",
+        "spring reverb",
+        "filter drop",
+        "instrumental dropout"
+    ],
+    "rhythmicGrammar": [
+        "Sparse riddim with dub space"
+    ],
+    "danceTags": [
+        "listening"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Sparse riddim with dub space",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Am",
+        "G",
+        "F",
+        "G"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "verse": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "chorus": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "bridge": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "solo": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ],
+        "coda": [
+            "Am",
+            "G",
+            "F",
+            "G"
+        ]
+    },
+    "referenceArtists": [
+        "King Tubby",
+        "Lee Scratch Perry"
+    ],
+    "referenceTracks": [],
+    "techniques": [
+        "dub delay throw",
+        "spring reverb",
+        "one-drop",
+        "reggae bassline",
+        "riddim loop"
+    ]
+}],
   "patterns": [
     {
       "id": "reggae--rd-one-drop",
@@ -2309,7 +2696,980 @@ export const REGGAE_WORLD: GenreWorld = {
         "four-kick"
       ]
     }
+  ,
+  {
+  "id": "tech-reggae-one-drop",
+  "worldId": "reggae",
+  "styleIds": [
+    "reggae-one-drop-roots",
+    "reggae-dubwise-reggae"
   ],
+  "name": "one-drop",
+  "shortName": "one-drop",
+  "family": "reggae",
+  "category": "groove",
+  "description": "Technique: one-drop",
+  "tags": [
+    "reggae",
+    "one-drop"
+  ],
+  "approaches": [
+    "one-drop"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums",
+    "hand-percussion"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    4,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72
+  ],
+  "durationGrid": [
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggae",
+    "one-drop"
+  ],
+  "techniques": [
+    "one-drop"
+  ]
+},
+{
+  "id": "tech-reggae-rockers-beat",
+  "worldId": "reggae",
+  "styleIds": [],
+  "name": "rockers beat",
+  "shortName": "rockers beat",
+  "family": "reggae",
+  "category": "groove",
+  "description": "Technique: rockers beat",
+  "tags": [
+    "reggae",
+    "rockers beat"
+  ],
+  "approaches": [
+    "rockers beat"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggae",
+    "rockers beat"
+  ],
+  "techniques": [
+    "rockers beat"
+  ]
+},
+{
+  "id": "tech-reggae-steppers",
+  "worldId": "reggae",
+  "styleIds": [],
+  "name": "steppers",
+  "shortName": "steppers",
+  "family": "reggae",
+  "category": "groove",
+  "description": "Technique: steppers",
+  "tags": [
+    "reggae",
+    "steppers"
+  ],
+  "approaches": [
+    "steppers"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggae",
+    "steppers"
+  ],
+  "techniques": [
+    "steppers"
+  ]
+},
+{
+  "id": "tech-reggae-guitar-skank",
+  "worldId": "reggae",
+  "styleIds": [
+    "reggae-one-drop-roots"
+  ],
+  "name": "guitar skank",
+  "shortName": "guitar skank",
+  "family": "reggae",
+  "category": "comping",
+  "description": "Technique: guitar skank",
+  "tags": [
+    "reggae",
+    "guitar skank"
+  ],
+  "approaches": [
+    "guitar skank"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "guitar",
+    "lead",
+    "comp"
+  ],
+  "instruments": [
+    "electric-guitar"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    2,
+    6,
+    10,
+    14
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggae",
+    "guitar skank"
+  ],
+  "techniques": [
+    "guitar skank"
+  ]
+},
+{
+  "id": "tech-reggae-organ-bubble",
+  "worldId": "reggae",
+  "styleIds": [],
+  "name": "organ bubble",
+  "shortName": "organ bubble",
+  "family": "reggae",
+  "category": "comping",
+  "description": "Technique: organ bubble",
+  "tags": [
+    "reggae",
+    "organ bubble"
+  ],
+  "approaches": [
+    "organ bubble"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "harmony",
+    "piano"
+  ],
+  "instruments": [
+    "organ"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggae",
+    "organ bubble"
+  ],
+  "techniques": [
+    "organ bubble"
+  ]
+},
+{
+  "id": "tech-reggae-reggae-bassline",
+  "worldId": "reggae",
+  "styleIds": [
+    "reggae-one-drop-roots",
+    "reggae-dubwise-reggae"
+  ],
+  "name": "reggae bassline",
+  "shortName": "reggae bassline",
+  "family": "reggae",
+  "category": "bass",
+  "description": "Technique: reggae bassline",
+  "tags": [
+    "reggae",
+    "reggae bassline"
+  ],
+  "approaches": [
+    "reggae bassline"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "bass"
+  ],
+  "instruments": [
+    "bass"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggae",
+    "reggae bassline"
+  ],
+  "techniques": [
+    "reggae bassline"
+  ]
+},
+{
+  "id": "tech-reggae-dub-delay-throw",
+  "worldId": "reggae",
+  "styleIds": [
+    "reggae-dubwise-reggae"
+  ],
+  "name": "dub delay throw",
+  "shortName": "dub delay throw",
+  "family": "reggae",
+  "category": "texture",
+  "description": "Technique: dub delay throw",
+  "tags": [
+    "reggae",
+    "dub delay throw"
+  ],
+  "approaches": [
+    "dub delay throw"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "texture"
+  ],
+  "instruments": [
+    "synth"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggae",
+    "dub delay throw"
+  ],
+  "techniques": [
+    "dub delay throw"
+  ]
+},
+{
+  "id": "tech-reggae-spring-reverb",
+  "worldId": "reggae",
+  "styleIds": [
+    "reggae-dubwise-reggae"
+  ],
+  "name": "spring reverb",
+  "shortName": "spring reverb",
+  "family": "reggae",
+  "category": "texture",
+  "description": "Technique: spring reverb",
+  "tags": [
+    "reggae",
+    "spring reverb"
+  ],
+  "approaches": [
+    "spring reverb"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "texture"
+  ],
+  "instruments": [
+    "synth"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggae",
+    "spring reverb"
+  ],
+  "techniques": [
+    "spring reverb"
+  ]
+},
+{
+  "id": "tech-reggae-riddim-loop",
+  "worldId": "reggae",
+  "styleIds": [
+    "reggae-digital-dancehall",
+    "reggae-dubwise-reggae"
+  ],
+  "name": "riddim loop",
+  "shortName": "riddim loop",
+  "family": "reggae",
+  "category": "groove",
+  "description": "Technique: riddim loop",
+  "tags": [
+    "reggae",
+    "riddim loop"
+  ],
+  "approaches": [
+    "riddim loop"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "lead"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggae",
+    "riddim loop"
+  ],
+  "techniques": [
+    "riddim loop"
+  ]
+},
+{
+  "id": "tech-reggae-toast-vocal-deejay",
+  "worldId": "reggae",
+  "styleIds": [
+    "reggae-digital-dancehall"
+  ],
+  "name": "toast/vocal deejay",
+  "shortName": "toast/vocal deejay",
+  "family": "reggae",
+  "category": "lead",
+  "description": "Technique: toast/vocal deejay",
+  "tags": [
+    "reggae",
+    "toast/vocal deejay"
+  ],
+  "approaches": [
+    "toast/vocal deejay"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "voice",
+    "lead"
+  ],
+  "instruments": [
+    "voice"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "reggae",
+    "toast/vocal deejay"
+  ],
+  "techniques": [
+    "toast/vocal deejay"
+  ]
+},
+{
+  "id": "style-reggae-one-drop-roots-signature",
+  "worldId": "reggae",
+  "styleIds": [
+    "reggae-one-drop-roots"
+  ],
+  "name": "One-Drop Roots Signature Cell",
+  "shortName": "One-Drop Roots Cell",
+  "family": "reggae",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "reggae",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "bass",
+    "drums",
+    "electric-guitar",
+    "organ"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    4,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "reggae",
+    "signature"
+  ],
+  "techniques": [
+    "guitar skank",
+    "one-drop",
+    "reggae bassline"
+  ]
+},
+{
+  "id": "style-reggae-nyabinghi-rastafari-percussion-signature",
+  "worldId": "reggae",
+  "styleIds": [
+    "reggae-nyabinghi-rastafari-percussion"
+  ],
+  "name": "Nyabinghi / Rastafari Percussion Signature Cell",
+  "shortName": "Nyabinghi / Rastafari Percussion Cell",
+  "family": "reggae",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "reggae",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "hand-percussion",
+    "bombo",
+    "drums",
+    "voice"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "reggae",
+    "signature"
+  ],
+  "techniques": [
+    "nyabinghi drums"
+  ]
+},
+{
+  "id": "style-reggae-digital-dancehall-signature",
+  "worldId": "reggae",
+  "styleIds": [
+    "reggae-digital-dancehall"
+  ],
+  "name": "Digital Dancehall Signature Cell",
+  "shortName": "Digital Dancehall Cell",
+  "family": "reggae",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "reggae",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "drums",
+    "sub-bass",
+    "synth",
+    "voice"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "reggae",
+    "signature"
+  ],
+  "techniques": [
+    "toast/vocal deejay",
+    "riddim loop"
+  ]
+},
+{
+  "id": "style-reggae-dubwise-reggae-signature",
+  "worldId": "reggae",
+  "styleIds": [
+    "reggae-dubwise-reggae"
+  ],
+  "name": "Dubwise Reggae Signature Cell",
+  "shortName": "Dubwise Reggae Cell",
+  "family": "reggae",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "reggae",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "bass",
+    "drums",
+    "organ",
+    "dub-echo"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "reggae",
+    "signature"
+  ],
+  "techniques": [
+    "dub delay throw",
+    "spring reverb",
+    "one-drop",
+    "reggae bassline",
+    "riddim loop"
+  ]
+}],
   "kind": "family",
   "strictness": "strict"
 };

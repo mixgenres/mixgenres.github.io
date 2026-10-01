@@ -215,4 +215,663 @@ export const CUMBIA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 0.82,
           "enabled": true
         }
+,
+  {
+    "id": "tech-cumbia-tambora-pattern",
+    "worldId": "cumbia",
+    "styleIds": [
+      "cumbia-traditional-coastal-cumbia"
+    ],
+    "name": "tambora pattern",
+    "shortName": "tambora pattern",
+    "family": "cumbia",
+    "category": "groove",
+    "description": "Technique: tambora pattern",
+    "tags": [
+      "cumbia",
+      "tambora pattern"
+    ],
+    "approaches": [
+      "tambora pattern"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "cumbia",
+      "tambora pattern"
+    ],
+    "techniques": [
+      "tambora pattern"
+    ]
+  },
+  {
+    "id": "tech-cumbia-alegre-improvisation",
+    "worldId": "cumbia",
+    "styleIds": [
+      "cumbia-traditional-coastal-cumbia"
+    ],
+    "name": "alegre improvisation",
+    "shortName": "alegre improvisation",
+    "family": "cumbia",
+    "category": "groove",
+    "description": "Technique: alegre improvisation",
+    "tags": [
+      "cumbia",
+      "alegre improvisation"
+    ],
+    "approaches": [
+      "alegre improvisation"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "cumbia",
+      "alegre improvisation"
+    ],
+    "techniques": [
+      "alegre improvisation"
+    ]
+  },
+  {
+    "id": "tech-cumbia-llamador-pulse",
+    "worldId": "cumbia",
+    "styleIds": [
+      "cumbia-traditional-coastal-cumbia",
+      "cumbia-cumbia-digital-global-bass"
+    ],
+    "name": "llamador pulse",
+    "shortName": "llamador pulse",
+    "family": "cumbia",
+    "category": "groove",
+    "description": "Technique: llamador pulse",
+    "tags": [
+      "cumbia",
+      "llamador pulse"
+    ],
+    "approaches": [
+      "llamador pulse"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "cumbia",
+      "llamador pulse"
+    ],
+    "techniques": [
+      "llamador pulse"
+    ]
+  },
+  {
+    "id": "tech-cumbia-guacharaca-scrape",
+    "worldId": "cumbia",
+    "styleIds": [
+      "cumbia-traditional-coastal-cumbia"
+    ],
+    "name": "guacharaca scrape",
+    "shortName": "guacharaca scrape",
+    "family": "cumbia",
+    "category": "groove",
+    "description": "Technique: guacharaca scrape",
+    "tags": [
+      "cumbia",
+      "guacharaca scrape"
+    ],
+    "approaches": [
+      "guacharaca scrape"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "cumbia",
+      "guacharaca scrape"
+    ],
+    "techniques": [
+      "guacharaca scrape"
+    ]
+  },
+  {
+    "id": "tech-cumbia-rebajada-half-speed-feel",
+    "worldId": "cumbia",
+    "styleIds": [],
+    "name": "rebajada half-speed feel",
+    "shortName": "rebajada half-speed feel",
+    "family": "cumbia",
+    "category": "groove",
+    "description": "Technique: rebajada half-speed feel",
+    "tags": [
+      "cumbia",
+      "rebajada half-speed feel"
+    ],
+    "approaches": [
+      "rebajada half-speed feel"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "cumbia",
+      "rebajada half-speed feel"
+    ],
+    "techniques": [
+      "rebajada half-speed feel"
+    ]
+  },
+  {
+    "id": "style-cumbia-traditional-coastal-cumbia-signature",
+    "worldId": "cumbia",
+    "styleIds": [
+      "cumbia-traditional-coastal-cumbia"
+    ],
+    "name": "Traditional Coastal Cumbia Signature Cell",
+    "shortName": "Traditional Coastal Cumbia Cell",
+    "family": "cumbia",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "cumbia",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "tambora",
+      "bombo",
+      "hand-percussion",
+      "guacharaca"
+    ],
+    "meter": "2/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "cumbia",
+      "signature"
+    ],
+    "techniques": [
+      "alegre improvisation",
+      "guacharaca scrape",
+      "llamador pulse",
+      "tambora pattern",
+      "cumbia bass ostinato",
+      "cumbia turnaround"
+    ]
+  },
+  {
+    "id": "style-cumbia-cumbia-orchestral-signature",
+    "worldId": "cumbia",
+    "styleIds": [
+      "cumbia-cumbia-orchestral"
+    ],
+    "name": "Cumbia Orchestral Signature Cell",
+    "shortName": "Cumbia Orchestral Cell",
+    "family": "cumbia",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "cumbia",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "clarinet",
+      "trumpet",
+      "trombone",
+      "bass"
+    ],
+    "meter": "2/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "cumbia",
+      "signature"
+    ],
+    "techniques": [
+      "cumbia turnaround",
+      "cumbia bass ostinato",
+      "digital cumbia sub-bass",
+      "electric-guitar cumbia riff",
+      "gaita melody"
+    ]
+  },
+  {
+    "id": "style-cumbia-cumbia-peruana-signature",
+    "worldId": "cumbia",
+    "styleIds": [
+      "cumbia-cumbia-peruana"
+    ],
+    "name": "Cumbia Peruana Signature Cell",
+    "shortName": "Cumbia Peruana Cell",
+    "family": "cumbia",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "cumbia",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "cumbia",
+      "signature"
+    ],
+    "techniques": [
+      "cumbia bass ostinato",
+      "electric-guitar cumbia riff",
+      "digital cumbia sub-bass",
+      "cumbia turnaround"
+    ]
+  },
+  {
+    "id": "style-cumbia-cumbia-digital-global-bass-signature",
+    "worldId": "cumbia",
+    "styleIds": [
+      "cumbia-cumbia-digital-global-bass"
+    ],
+    "name": "Cumbia Digital / Global Bass Signature Cell",
+    "shortName": "Cumbia Digital / Global Bass Cell",
+    "family": "cumbia",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "cumbia",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "sampler",
+      "sub-bass",
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "cumbia",
+      "signature"
+    ],
+    "techniques": [
+      "digital cumbia sub-bass",
+      "cumbia bass ostinato",
+      "cumbia turnaround",
+      "electric-guitar cumbia riff",
+      "llamador pulse"
+    ]
+  }
 ];

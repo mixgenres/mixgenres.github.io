@@ -1034,4 +1034,678 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 1,
           "enabled": true
         }
+,
+  {
+    "id": "tech-folk-jig-6-8",
+    "worldId": "folk",
+    "styleIds": [
+      "folk-celtic-traditional"
+    ],
+    "name": "jig 6/8",
+    "shortName": "jig 6/8",
+    "family": "folk",
+    "category": "groove",
+    "description": "Technique: jig 6/8",
+    "tags": [
+      "folk",
+      "jig 6/8"
+    ],
+    "approaches": [
+      "jig 6/8"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "6/8",
+    "cycleLength": 1,
+    "subdivisions": 12,
+    "onsetGrid": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "folk",
+      "jig 6/8"
+    ],
+    "techniques": [
+      "jig 6/8"
+    ]
+  },
+  {
+    "id": "tech-folk-reel-4-4",
+    "worldId": "folk",
+    "styleIds": [
+      "folk-celtic-traditional"
+    ],
+    "name": "reel 4/4",
+    "shortName": "reel 4/4",
+    "family": "folk",
+    "category": "groove",
+    "description": "Technique: reel 4/4",
+    "tags": [
+      "folk",
+      "reel 4/4"
+    ],
+    "approaches": [
+      "reel 4/4"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "folk",
+      "reel 4/4"
+    ],
+    "techniques": [
+      "reel 4/4"
+    ]
+  },
+  {
+    "id": "tech-folk-balkan-7-8",
+    "worldId": "folk",
+    "styleIds": [
+      "folk-eastern-european-balkan-folk"
+    ],
+    "name": "Balkan 7/8",
+    "shortName": "Balkan 7/8",
+    "family": "folk",
+    "category": "groove",
+    "description": "Technique: Balkan 7/8",
+    "tags": [
+      "folk",
+      "Balkan 7/8"
+    ],
+    "approaches": [
+      "Balkan 7/8"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "7/8",
+    "cycleLength": 1,
+    "subdivisions": 14,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      10,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "folk",
+      "Balkan 7/8"
+    ],
+    "techniques": [
+      "Balkan 7/8"
+    ]
+  },
+  {
+    "id": "tech-folk-balkan-9-8",
+    "worldId": "folk",
+    "styleIds": [
+      "folk-eastern-european-balkan-folk"
+    ],
+    "name": "Balkan 9/8",
+    "shortName": "Balkan 9/8",
+    "family": "folk",
+    "category": "groove",
+    "description": "Technique: Balkan 9/8",
+    "tags": [
+      "folk",
+      "Balkan 9/8"
+    ],
+    "approaches": [
+      "Balkan 9/8"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "9/8",
+    "cycleLength": 1,
+    "subdivisions": 18,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12,
+      14,
+      16
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "folk",
+      "Balkan 9/8"
+    ],
+    "techniques": [
+      "Balkan 9/8"
+    ]
+  },
+  {
+    "id": "style-folk-celtic-traditional-signature",
+    "worldId": "folk",
+    "styleIds": [
+      "folk-celtic-traditional"
+    ],
+    "name": "Celtic Traditional Signature Cell",
+    "shortName": "Celtic Traditional Cell",
+    "family": "folk",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "folk",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "fiddle",
+      "tin-whistle",
+      "acoustic-guitar",
+      "celtic-harp"
+    ],
+    "meter": "6/8",
+    "cycleLength": 1,
+    "subdivisions": 12,
+    "onsetGrid": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "folk",
+      "signature"
+    ],
+    "techniques": [
+      "Celtic ornament",
+      "drone",
+      "jig 6/8",
+      "modal cadence",
+      "reel 4/4"
+    ]
+  },
+  {
+    "id": "style-folk-british-ballad-tradition-signature",
+    "worldId": "folk",
+    "styleIds": [
+      "folk-british-ballad-tradition"
+    ],
+    "name": "British Ballad Tradition Signature Cell",
+    "shortName": "British Ballad Tradition Cell",
+    "family": "folk",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "folk",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "voice",
+      "acoustic-guitar",
+      "fiddle",
+      "cello"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "folk",
+      "signature"
+    ],
+    "techniques": [
+      "modal cadence",
+      "drone",
+      "call-and-response verse"
+    ]
+  },
+  {
+    "id": "style-folk-appalachian-string-band-signature",
+    "worldId": "folk",
+    "styleIds": [
+      "folk-appalachian-string-band"
+    ],
+    "name": "Appalachian String Band Signature Cell",
+    "shortName": "Appalachian String Band Cell",
+    "family": "folk",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "folk",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "banjo",
+      "fiddle",
+      "acoustic-guitar",
+      "upright-bass"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7,
+      1,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "folk",
+      "signature"
+    ],
+    "techniques": [
+      "banjo roll",
+      "clawhammer banjo",
+      "drone",
+      "fiddle double-stop"
+    ]
+  },
+  {
+    "id": "style-folk-nordic-folk-signature",
+    "worldId": "folk",
+    "styleIds": [
+      "folk-nordic-folk"
+    ],
+    "name": "Nordic Folk Signature Cell",
+    "shortName": "Nordic Folk Cell",
+    "family": "folk",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "folk",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "fiddle",
+      "acoustic-guitar",
+      "drums",
+      "cello"
+    ],
+    "meter": "3/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      8
+    ],
+    "accentProfile": [
+      1,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "folk",
+      "signature"
+    ],
+    "techniques": [
+      "drone",
+      "Celtic ornament",
+      "fiddle double-stop",
+      "modal cadence"
+    ]
+  },
+  {
+    "id": "style-folk-eastern-european-balkan-folk-signature",
+    "worldId": "folk",
+    "styleIds": [
+      "folk-eastern-european-balkan-folk"
+    ],
+    "name": "Eastern European / Balkan Folk Signature Cell",
+    "shortName": "Eastern European / Balkan Folk Cell",
+    "family": "folk",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "folk",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "violin",
+      "accordion",
+      "clarinet",
+      "trombone"
+    ],
+    "meter": "7/8",
+    "cycleLength": 1,
+    "subdivisions": 14,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "folk",
+      "signature"
+    ],
+    "techniques": [
+      "Balkan 7/8",
+      "Balkan 9/8"
+    ]
+  }
 ];

@@ -1458,4 +1458,747 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 1,
           "enabled": true
         }
+,
+  {
+    "id": "tech-electronic-808-909-programming",
+    "worldId": "electronic",
+    "styleIds": [],
+    "name": "808/909 programming",
+    "shortName": "808/909 programming",
+    "family": "electronic",
+    "category": "groove",
+    "description": "Technique: 808/909 programming",
+    "tags": [
+      "electronic",
+      "808/909 programming"
+    ],
+    "approaches": [
+      "808/909 programming"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "electronic",
+      "808/909 programming"
+    ],
+    "techniques": [
+      "808/909 programming"
+    ]
+  },
+  {
+    "id": "tech-electronic-electro-syncopated-kick",
+    "worldId": "electronic",
+    "styleIds": [
+      "electronic-electro",
+      "electronic-detroit-techno"
+    ],
+    "name": "electro syncopated kick",
+    "shortName": "electro syncopated kick",
+    "family": "electronic",
+    "category": "groove",
+    "description": "Technique: electro syncopated kick",
+    "tags": [
+      "electronic",
+      "electro syncopated kick"
+    ],
+    "approaches": [
+      "electro syncopated kick"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "electronic",
+      "electro syncopated kick"
+    ],
+    "techniques": [
+      "electro syncopated kick"
+    ]
+  },
+  {
+    "id": "tech-electronic-breakbeat-chopping",
+    "worldId": "electronic",
+    "styleIds": [
+      "electronic-breakbeat-hardcore"
+    ],
+    "name": "breakbeat chopping",
+    "shortName": "breakbeat chopping",
+    "family": "electronic",
+    "category": "groove",
+    "description": "Technique: breakbeat chopping",
+    "tags": [
+      "electronic",
+      "breakbeat chopping"
+    ],
+    "approaches": [
+      "breakbeat chopping"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "electronic",
+      "breakbeat chopping"
+    ],
+    "techniques": [
+      "breakbeat chopping"
+    ]
+  },
+  {
+    "id": "tech-electronic-four-on-floor-groove",
+    "worldId": "electronic",
+    "styleIds": [
+      "electronic-detroit-techno"
+    ],
+    "name": "four-on-floor groove",
+    "shortName": "four-on-floor groove",
+    "family": "electronic",
+    "category": "groove",
+    "description": "Technique: four-on-floor groove",
+    "tags": [
+      "electronic",
+      "four-on-floor groove"
+    ],
+    "approaches": [
+      "four-on-floor groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "electronic",
+      "four-on-floor groove"
+    ],
+    "techniques": [
+      "four-on-floor groove"
+    ]
+  },
+  {
+    "id": "tech-electronic-techno-percussion-loop",
+    "worldId": "electronic",
+    "styleIds": [
+      "electronic-detroit-techno",
+      "electronic-ambient-techno"
+    ],
+    "name": "techno percussion loop",
+    "shortName": "techno percussion loop",
+    "family": "electronic",
+    "category": "groove",
+    "description": "Technique: techno percussion loop",
+    "tags": [
+      "electronic",
+      "techno percussion loop"
+    ],
+    "approaches": [
+      "techno percussion loop"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "electronic",
+      "techno percussion loop"
+    ],
+    "techniques": [
+      "techno percussion loop"
+    ]
+  },
+  {
+    "id": "style-electronic-electro-signature",
+    "worldId": "electronic",
+    "styleIds": [
+      "electronic-electro"
+    ],
+    "name": "Electro Signature Cell",
+    "shortName": "Electro Cell",
+    "family": "electronic",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "electronic",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "drums",
+      "synth",
+      "bass-lead",
+      "snare"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "electronic",
+      "signature"
+    ],
+    "techniques": [
+      "electro syncopated kick",
+      "filter-envelope bass"
+    ]
+  },
+  {
+    "id": "style-electronic-detroit-techno-signature",
+    "worldId": "electronic",
+    "styleIds": [
+      "electronic-detroit-techno"
+    ],
+    "name": "Detroit Techno Signature Cell",
+    "shortName": "Detroit Techno Cell",
+    "family": "electronic",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "electronic",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "drums",
+      "synth",
+      "polysynth",
+      "bass-lead"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "electronic",
+      "signature"
+    ],
+    "techniques": [
+      "four-on-floor groove",
+      "gated synth sequence",
+      "techno percussion loop",
+      "303 acid sequence",
+      "electro syncopated kick"
+    ]
+  },
+  {
+    "id": "style-electronic-chicago-acid-house-signature",
+    "worldId": "electronic",
+    "styleIds": [
+      "electronic-chicago-acid-house"
+    ],
+    "name": "Chicago Acid House Signature Cell",
+    "shortName": "Chicago Acid House Cell",
+    "family": "electronic",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "electronic",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "acid-303",
+      "drums",
+      "bass-lead",
+      "synth"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "electronic",
+      "signature"
+    ],
+    "techniques": [
+      "303 acid sequence",
+      "filter-envelope bass",
+      "gated synth sequence"
+    ]
+  },
+  {
+    "id": "style-electronic-ambient-techno-signature",
+    "worldId": "electronic",
+    "styleIds": [
+      "electronic-ambient-techno"
+    ],
+    "name": "Ambient Techno Signature Cell",
+    "shortName": "Ambient Techno Cell",
+    "family": "electronic",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "electronic",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "drums",
+      "warm-pad",
+      "halo-pad",
+      "bass-lead"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "electronic",
+      "signature"
+    ],
+    "techniques": [
+      "evolving ambient pad",
+      "techno percussion loop"
+    ]
+  },
+  {
+    "id": "style-electronic-breakbeat-hardcore-signature",
+    "worldId": "electronic",
+    "styleIds": [
+      "electronic-breakbeat-hardcore"
+    ],
+    "name": "Breakbeat Hardcore Signature Cell",
+    "shortName": "Breakbeat Hardcore Cell",
+    "family": "electronic",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "electronic",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "drums",
+      "synth",
+      "sampler",
+      "bass-lead"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7,
+      1,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "electronic",
+      "signature"
+    ],
+    "techniques": [
+      "breakbeat chopping",
+      "rave stab",
+      "filter-envelope bass"
+    ]
+  }
 ];

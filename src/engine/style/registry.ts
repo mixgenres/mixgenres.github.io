@@ -64,7 +64,11 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, index: numbe
     summary:shortText(seed.description || `${seed.name} ${GENRE_NAMES[worldId]}`),
     aliases: seed.keySubstyles,
     danceTags: seed.danceTags,
-    signatureTraits:Array.from(new Set([...(seed.coreConcepts ?? []), ...(seed.keySubstyles ?? []), ...(seed.rhythmicGrammar ?? [seed.name])])).slice(0, 8),
+    referenceArtists: seed.referenceArtists,
+    referenceTracks: seed.referenceTracks,
+    techniques: seed.techniques,
+
+    signatureTraits:Array.from(new Set([...(seed.coreConcepts ?? []), ...(seed.techniques ?? []), ...(seed.keySubstyles ?? []), ...(seed.rhythmicGrammar ?? [seed.name])])).slice(0, 8),
     era:seed.era, region:seed.origin,
     form:{
       sectionVocab:formSteps.map(step => step.kind),

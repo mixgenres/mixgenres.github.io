@@ -35,7 +35,9 @@
     "schema:catalog": "node --import tsx scripts/generate-catalog-schemas.ts",
     "audit:rigorous": "npm run check && npm run audit:paths && npm run audit:instruments && npm run audit:instrument-render && npm run test:audio",
     "audit:data-boundary": "node scripts/audit-data-boundary.mjs",
-    "audit:ids": "node --import tsx scripts/audit-data-ids.ts"
+    "audit:ids": "node --import tsx scripts/audit-data-ids.ts",
+    "audit:catalog-expansion": "tsx scripts/audit-catalog-expansion.ts",
+    "render:catalog-expansion": "tsx scripts/render-catalog-expansion.ts"
   },
   "dependencies": {
     "@breezystack/lamejs": "^1.2.7",

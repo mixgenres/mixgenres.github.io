@@ -157,6 +157,8 @@ export interface MusicalPattern {
   tags: string[];
   /** Optional explicit behavioral vocabulary; tags remain the compatibility fallback. */
   approaches?: string[];
+  /** Authored playing techniques represented by this reusable primitive. */
+  techniques?: string[];
   scopes: Scope[];
   
   roles: Role[];
@@ -221,6 +223,11 @@ export interface GenreStyleDefinition {
   grooveMechanics?: GrooveMechanics;
   prominentChords?: string[];
   sectionProgressions?: Partial<Record<SectionType | string, string[]>>;
+  /** Reference lineage used for research/provenance; never treated as an artist style clone. */
+  referenceArtists?: string[];
+  referenceTracks?: string[];
+  /** Reusable performance vocabulary surfaced to the style/runtime layer. */
+  techniques?: string[];
 }
 
 export interface PhysicalPlayerState {

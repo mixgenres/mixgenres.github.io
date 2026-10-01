@@ -196,4 +196,151 @@ export const JAZZ_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           "weight": 0.7,
           "enabled": true
         }
+,
+  {
+    "id": "tech-jazz-non-grid-phrasing",
+    "worldId": "jazz",
+    "styleIds": [
+      "jazz-avant-garde-free-improvisation"
+    ],
+    "name": "non-grid phrasing",
+    "shortName": "non-grid phrasing",
+    "family": "jazz",
+    "category": "interactionPattern",
+    "description": "Technique: non-grid phrasing",
+    "tags": [
+      "jazz",
+      "non-grid phrasing"
+    ],
+    "approaches": [
+      "non-grid phrasing"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "lead",
+      "harmony",
+      "rhythm"
+    ],
+    "instruments": [
+      "piano",
+      "upright-bass",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "jazz",
+      "non-grid phrasing"
+    ],
+    "techniques": [
+      "non-grid phrasing"
+    ]
+  },
+  {
+    "id": "tech-jazz-collective-improvisation",
+    "worldId": "jazz",
+    "styleIds": [
+      "jazz-post-bop",
+      "jazz-jazz-funk",
+      "jazz-avant-garde-free-improvisation"
+    ],
+    "name": "collective improvisation",
+    "shortName": "collective improvisation",
+    "family": "jazz",
+    "category": "interactionPattern",
+    "description": "Technique: collective improvisation",
+    "tags": [
+      "jazz",
+      "collective improvisation"
+    ],
+    "approaches": [
+      "collective improvisation"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "lead",
+      "harmony",
+      "rhythm"
+    ],
+    "instruments": [
+      "piano",
+      "upright-bass",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "jazz",
+      "collective improvisation"
+    ],
+    "techniques": [
+      "collective improvisation"
+    ]
+  }
 ];

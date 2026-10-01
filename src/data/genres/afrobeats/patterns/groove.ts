@@ -1054,4 +1054,734 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 1,
           "enabled": true
         }
+,
+  {
+    "id": "tech-afrobeats-west-african-bell-timeline",
+    "worldId": "afrobeats",
+    "styleIds": [
+      "afrobeats-west-african-highlife-guitar"
+    ],
+    "name": "West African bell timeline",
+    "shortName": "West African bell timeline",
+    "family": "afrobeats",
+    "category": "groove",
+    "description": "Technique: West African bell timeline",
+    "tags": [
+      "afrobeats",
+      "West African bell timeline"
+    ],
+    "approaches": [
+      "West African bell timeline"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "afrobeats",
+      "West African bell timeline"
+    ],
+    "techniques": [
+      "West African bell timeline"
+    ]
+  },
+  {
+    "id": "tech-afrobeats-12-8-bell-derived-patterns",
+    "worldId": "afrobeats",
+    "styleIds": [
+      "afrobeats-west-african-highlife-guitar"
+    ],
+    "name": "12/8 bell-derived patterns",
+    "shortName": "12/8 bell-derived patterns",
+    "family": "afrobeats",
+    "category": "groove",
+    "description": "Technique: 12/8 bell-derived patterns",
+    "tags": [
+      "afrobeats",
+      "12/8 bell-derived patterns"
+    ],
+    "approaches": [
+      "12/8 bell-derived patterns"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "afrobeats",
+      "12/8 bell-derived patterns"
+    ],
+    "techniques": [
+      "12/8 bell-derived patterns"
+    ]
+  },
+  {
+    "id": "tech-afrobeats-shaker-16ths-with-displaced-accents",
+    "worldId": "afrobeats",
+    "styleIds": [
+      "afrobeats-afropop-guitar-groove"
+    ],
+    "name": "shaker 16ths with displaced accents",
+    "shortName": "shaker 16ths with displaced accents",
+    "family": "afrobeats",
+    "category": "groove",
+    "description": "Technique: shaker 16ths with displaced",
+    "tags": [
+      "afrobeats",
+      "shaker 16ths with displaced accents"
+    ],
+    "approaches": [
+      "shaker 16ths with displaced accents"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "afrobeats",
+      "shaker 16ths with displaced accents"
+    ],
+    "techniques": [
+      "shaker 16ths with displaced accents"
+    ]
+  },
+  {
+    "id": "tech-afrobeats-syncopated-afrobeats-kick",
+    "worldId": "afrobeats",
+    "styleIds": [
+      "afrobeats-afro-fusion-burna-boy",
+      "afrobeats-afrobeats-percussive-minimalism"
+    ],
+    "name": "syncopated Afrobeats kick",
+    "shortName": "syncopated Afrobeats kick",
+    "family": "afrobeats",
+    "category": "groove",
+    "description": "Technique: syncopated Afrobeats kick",
+    "tags": [
+      "afrobeats",
+      "syncopated Afrobeats kick"
+    ],
+    "approaches": [
+      "syncopated Afrobeats kick"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "afrobeats",
+      "syncopated Afrobeats kick"
+    ],
+    "techniques": [
+      "syncopated Afrobeats kick"
+    ]
+  },
+  {
+    "id": "tech-afrobeats-percussion-dropouts",
+    "worldId": "afrobeats",
+    "styleIds": [
+      "afrobeats-afrobeats-percussive-minimalism"
+    ],
+    "name": "percussion dropouts",
+    "shortName": "percussion dropouts",
+    "family": "afrobeats",
+    "category": "groove",
+    "description": "Technique: percussion dropouts",
+    "tags": [
+      "afrobeats",
+      "percussion dropouts"
+    ],
+    "approaches": [
+      "percussion dropouts"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "afrobeats",
+      "percussion dropouts"
+    ],
+    "techniques": [
+      "percussion dropouts"
+    ]
+  },
+  {
+    "id": "tech-afrobeats-three-layer-percussion-conversation",
+    "worldId": "afrobeats",
+    "styleIds": [
+      "afrobeats-afrobeats-percussive-minimalism"
+    ],
+    "name": "three-layer percussion conversation",
+    "shortName": "three-layer percussion conversation",
+    "family": "afrobeats",
+    "category": "groove",
+    "description": "Technique: three-layer percussion conversation",
+    "tags": [
+      "afrobeats",
+      "three-layer percussion conversation"
+    ],
+    "approaches": [
+      "three-layer percussion conversation"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "afrobeats",
+      "three-layer percussion conversation"
+    ],
+    "techniques": [
+      "three-layer percussion conversation"
+    ]
+  },
+  {
+    "id": "style-afrobeats-west-african-highlife-guitar-signature",
+    "worldId": "afrobeats",
+    "styleIds": [
+      "afrobeats-west-african-highlife-guitar"
+    ],
+    "name": "West African Highlife Guitar Signature Cell",
+    "shortName": "West African Highlife Guitar Cell",
+    "family": "afrobeats",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "afrobeats",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "acoustic-guitar",
+      "electric-guitar",
+      "bass",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      3,
+      6,
+      8
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "afrobeats",
+      "signature"
+    ],
+    "techniques": [
+      "West African bell timeline",
+      "interlocking guitar ostinati",
+      "call-and-response vocal fragments",
+      "12/8 bell-derived patterns",
+      "sparse sub-bass anticipation"
+    ]
+  },
+  {
+    "id": "style-afrobeats-afro-fusion-burna-boy-signature",
+    "worldId": "afrobeats",
+    "styleIds": [
+      "afrobeats-afro-fusion-burna-boy"
+    ],
+    "name": "Afro-Fusion — Burna Boy Signature Cell",
+    "shortName": "Afro-Fusion — Burna Boy Cell",
+    "family": "afrobeats",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "afrobeats",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "afrobeats",
+      "signature"
+    ],
+    "techniques": [
+      "call-and-response vocal fragments",
+      "sparse sub-bass anticipation",
+      "syncopated Afrobeats kick",
+      "vocal-as-rhythm phrasing"
+    ]
+  },
+  {
+    "id": "style-afrobeats-afropop-guitar-groove-signature",
+    "worldId": "afrobeats",
+    "styleIds": [
+      "afrobeats-afropop-guitar-groove"
+    ],
+    "name": "Afropop Guitar Groove Signature Cell",
+    "shortName": "Afropop Guitar Groove Cell",
+    "family": "afrobeats",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "afrobeats",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "shaker"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "afrobeats",
+      "signature"
+    ],
+    "techniques": [
+      "shaker 16ths with displaced accents",
+      "interlocking guitar ostinati",
+      "sparse sub-bass anticipation"
+    ]
+  },
+  {
+    "id": "style-afrobeats-afrobeats-percussive-minimalism-signature",
+    "worldId": "afrobeats",
+    "styleIds": [
+      "afrobeats-afrobeats-percussive-minimalism"
+    ],
+    "name": "Afrobeats Percussive Minimalism Signature Cell",
+    "shortName": "Afrobeats Percussive Minimalism Cell",
+    "family": "afrobeats",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "afrobeats",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "sub-bass",
+      "drums",
+      "shaker",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "afrobeats",
+      "signature"
+    ],
+    "techniques": [
+      "percussion dropouts",
+      "sparse sub-bass anticipation",
+      "vocal-as-rhythm phrasing",
+      "call-and-response vocal fragments",
+      "syncopated Afrobeats kick",
+      "three-layer percussion conversation"
+    ]
+  }
 ];

@@ -1022,4 +1022,971 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 1,
           "enabled": true
         }
+,
+  {
+    "id": "tech-metal-gallop",
+    "worldId": "metal",
+    "styleIds": [
+      "metal-nwobhm"
+    ],
+    "name": "gallop",
+    "shortName": "gallop",
+    "family": "metal",
+    "category": "groove",
+    "description": "Technique: gallop",
+    "tags": [
+      "metal",
+      "gallop"
+    ],
+    "approaches": [
+      "gallop"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "metal",
+      "gallop"
+    ],
+    "techniques": [
+      "gallop"
+    ]
+  },
+  {
+    "id": "tech-metal-palm-muted-chug",
+    "worldId": "metal",
+    "styleIds": [
+      "metal-groove-metal"
+    ],
+    "name": "palm-muted chug",
+    "shortName": "palm-muted chug",
+    "family": "metal",
+    "category": "groove",
+    "description": "Technique: palm-muted chug",
+    "tags": [
+      "metal",
+      "palm-muted chug"
+    ],
+    "approaches": [
+      "palm-muted chug"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "metal",
+      "palm-muted chug"
+    ],
+    "techniques": [
+      "palm-muted chug"
+    ]
+  },
+  {
+    "id": "tech-metal-tremolo-picking",
+    "worldId": "metal",
+    "styleIds": [
+      "metal-blackgaze"
+    ],
+    "name": "tremolo picking",
+    "shortName": "tremolo picking",
+    "family": "metal",
+    "category": "groove",
+    "description": "Technique: tremolo picking",
+    "tags": [
+      "metal",
+      "tremolo picking"
+    ],
+    "approaches": [
+      "tremolo picking"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "metal",
+      "tremolo picking"
+    ],
+    "techniques": [
+      "tremolo picking"
+    ]
+  },
+  {
+    "id": "tech-metal-blast-beat",
+    "worldId": "metal",
+    "styleIds": [
+      "metal-deathcore",
+      "metal-blackgaze"
+    ],
+    "name": "blast beat",
+    "shortName": "blast beat",
+    "family": "metal",
+    "category": "groove",
+    "description": "Technique: blast beat",
+    "tags": [
+      "metal",
+      "blast beat"
+    ],
+    "approaches": [
+      "blast beat"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "metal",
+      "blast beat"
+    ],
+    "techniques": [
+      "blast beat"
+    ]
+  },
+  {
+    "id": "tech-metal-double-kick",
+    "worldId": "metal",
+    "styleIds": [
+      "metal-groove-metal"
+    ],
+    "name": "double-kick",
+    "shortName": "double-kick",
+    "family": "metal",
+    "category": "groove",
+    "description": "Technique: double-kick",
+    "tags": [
+      "metal",
+      "double-kick"
+    ],
+    "approaches": [
+      "double-kick"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "metal",
+      "double-kick"
+    ],
+    "techniques": [
+      "double-kick"
+    ]
+  },
+  {
+    "id": "tech-metal-breakdown",
+    "worldId": "metal",
+    "styleIds": [
+      "metal-metalcore",
+      "metal-deathcore"
+    ],
+    "name": "breakdown",
+    "shortName": "breakdown",
+    "family": "metal",
+    "category": "groove",
+    "description": "Technique: breakdown",
+    "tags": [
+      "metal",
+      "breakdown"
+    ],
+    "approaches": [
+      "breakdown"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums",
+      "hand-percussion"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "metal",
+      "breakdown"
+    ],
+    "techniques": [
+      "breakdown"
+    ]
+  },
+  {
+    "id": "tech-metal-half-time-breakdown",
+    "worldId": "metal",
+    "styleIds": [
+      "metal-metalcore",
+      "metal-deathcore"
+    ],
+    "name": "half-time breakdown",
+    "shortName": "half-time breakdown",
+    "family": "metal",
+    "category": "groove",
+    "description": "Technique: half-time breakdown",
+    "tags": [
+      "metal",
+      "half-time breakdown"
+    ],
+    "approaches": [
+      "half-time breakdown"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "metal",
+      "half-time breakdown"
+    ],
+    "techniques": [
+      "half-time breakdown"
+    ]
+  },
+  {
+    "id": "tech-metal-polyrhythmic-meter-shifts",
+    "worldId": "metal",
+    "styleIds": [],
+    "name": "polyrhythmic meter shifts",
+    "shortName": "polyrhythmic meter shifts",
+    "family": "metal",
+    "category": "groove",
+    "description": "Technique: polyrhythmic meter shifts",
+    "tags": [
+      "metal",
+      "polyrhythmic meter shifts"
+    ],
+    "approaches": [
+      "polyrhythmic meter shifts"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "metal",
+      "polyrhythmic meter shifts"
+    ],
+    "techniques": [
+      "polyrhythmic meter shifts"
+    ]
+  },
+  {
+    "id": "style-metal-nwobhm-signature",
+    "worldId": "metal",
+    "styleIds": [
+      "metal-nwobhm"
+    ],
+    "name": "NWOBHM Signature Cell",
+    "shortName": "NWOBHM Cell",
+    "family": "metal",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "metal",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "distortion-guitar",
+      "bass",
+      "drums",
+      "voice"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "metal",
+      "signature"
+    ],
+    "techniques": [
+      "gallop",
+      "twin-guitar harmony"
+    ]
+  },
+  {
+    "id": "style-metal-groove-metal-signature",
+    "worldId": "metal",
+    "styleIds": [
+      "metal-groove-metal"
+    ],
+    "name": "Groove Metal Signature Cell",
+    "shortName": "Groove Metal Cell",
+    "family": "metal",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "metal",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "distortion-guitar",
+      "bass",
+      "drums",
+      "voice"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "metal",
+      "signature"
+    ],
+    "techniques": [
+      "palm-muted chug",
+      "chromatic low-string riff",
+      "double-kick",
+      "twin-guitar harmony"
+    ]
+  },
+  {
+    "id": "style-metal-metalcore-signature",
+    "worldId": "metal",
+    "styleIds": [
+      "metal-metalcore"
+    ],
+    "name": "Metalcore Signature Cell",
+    "shortName": "Metalcore Cell",
+    "family": "metal",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "metal",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "distortion-guitar",
+      "bass",
+      "drums",
+      "voice"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7,
+      1,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "metal",
+      "signature"
+    ],
+    "techniques": [
+      "breakdown",
+      "half-time breakdown"
+    ]
+  },
+  {
+    "id": "style-metal-deathcore-signature",
+    "worldId": "metal",
+    "styleIds": [
+      "metal-deathcore"
+    ],
+    "name": "Deathcore Signature Cell",
+    "shortName": "Deathcore Cell",
+    "family": "metal",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "metal",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "distortion-guitar",
+      "bass",
+      "drums",
+      "voice"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7,
+      1,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "metal",
+      "signature"
+    ],
+    "techniques": [
+      "blast beat",
+      "breakdown",
+      "chromatic low-string riff",
+      "half-time breakdown"
+    ]
+  },
+  {
+    "id": "style-metal-blackgaze-signature",
+    "worldId": "metal",
+    "styleIds": [
+      "metal-blackgaze"
+    ],
+    "name": "Blackgaze Signature Cell",
+    "shortName": "Blackgaze Cell",
+    "family": "metal",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "metal",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "distortion-guitar",
+      "bass",
+      "drums",
+      "strings"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "metal",
+      "signature"
+    ],
+    "techniques": [
+      "blast beat",
+      "tremolo picking",
+      "tremolo/drone layer"
+    ]
+  }
 ];

@@ -159,6 +159,11 @@ export interface SongStyle {
   summary: string;
   signatureTraits: string[];  // shown in UI
   danceTags?: import('../primitives').DanceTag[];
+  /** Research/reference lineage; not an artist-style identity. */
+  referenceArtists?: string[];
+  referenceTracks?: string[];
+  /** Authored technique vocabulary used by pattern/gesture selection. */
+  techniques?: string[];
 
   form?: Partial<FormGrammar>;             // section vocab, order templates (weighted), bar-length distributions, intros/outros/breaks, pickups, endings
   harmony?: Partial<HarmonyGrammar>;       // mode/key policy, progression templates (functional/roman), cadences, chord vocabulary + extensions, harmonic rhythm, voicing style, bass-motion rules

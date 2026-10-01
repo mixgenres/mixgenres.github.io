@@ -368,7 +368,399 @@ export const INDUSTRIAL_WORLD: GenreWorld = {
         ]
       }
     }
-  ],
+  ,
+    {
+    "id": "industrial-industrial-rock",
+    "worldId": "industrial",
+    "name": "Industrial Rock",
+    "origin": "United States / United Kingdom",
+    "era": "1980s–Present",
+    "description": "Rock song structures combined with programmed percussion, distorted guitar and industrial loops.",
+    "characteristicInstruments": [
+        "distortion-guitar",
+        "bass",
+        "drums",
+        "sampler",
+        "voice"
+    ],
+    "preferredMeters": [
+        "4/4"
+    ],
+    "tempoRange": [
+        90,
+        130
+    ],
+    "keySubstyles": [
+        "Industrial Rock"
+    ],
+    "coreConcepts": [
+        "distorted loop",
+        "machine kick",
+        "guitar/kick synchronization"
+    ],
+    "rhythmicGrammar": [
+        "Rock song form with machine percussion"
+    ],
+    "danceTags": [
+        "listening"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Rock song form with machine percussion",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "verse": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "chorus": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "bridge": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "solo": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "coda": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ]
+    },
+    "referenceArtists": [
+        "Nine Inch Nails",
+        "Ministry"
+    ],
+    "referenceTracks": [],
+    "techniques": [
+        "distorted loop",
+        "machine kick",
+        "synchronized guitar/kick",
+        "industrial noise layer",
+        "metallic percussion"
+    ]
+},
+{
+    "id": "industrial-industrial-metal",
+    "worldId": "industrial",
+    "name": "Industrial Metal",
+    "origin": "United Kingdom / United States",
+    "era": "1990s–Present",
+    "description": "Machine-like guitar riffs with synchronized kick attacks and controlled rhythmic repetition.",
+    "characteristicInstruments": [
+        "distortion-guitar",
+        "bass",
+        "drums",
+        "noise-sweep"
+    ],
+    "preferredMeters": [
+        "4/4"
+    ],
+    "tempoRange": [
+        80,
+        135
+    ],
+    "keySubstyles": [
+        "Industrial Metal"
+    ],
+    "coreConcepts": [
+        "synchronized guitar/kick",
+        "mechanical ostinato",
+        "palm-muted chug"
+    ],
+    "rhythmicGrammar": [
+        "Mechanical guitar riff locked to kick"
+    ],
+    "danceTags": [
+        "listening"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Mechanical guitar riff locked to kick",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "verse": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "chorus": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "bridge": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "solo": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "coda": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ]
+    },
+    "referenceArtists": [
+        "Godflesh",
+        "Fear Factory"
+    ],
+    "referenceTracks": [],
+    "techniques": [
+        "mechanical ostinato",
+        "synchronized guitar/kick",
+        "industrial noise layer",
+        "machine kick"
+    ]
+},
+{
+    "id": "industrial-power-electronics",
+    "worldId": "industrial",
+    "name": "Power Electronics",
+    "origin": "United Kingdom / Japan",
+    "era": "1980s–Present",
+    "description": "Noise, feedback, extreme frequency content and nontraditional rhythmic organization used as texture.",
+    "characteristicInstruments": [
+        "noise-sweep",
+        "sampler",
+        "drums",
+        "voice"
+    ],
+    "preferredMeters": [
+        "4/4",
+        "free"
+    ],
+    "tempoRange": [
+        50,
+        140
+    ],
+    "keySubstyles": [
+        "Power Electronics"
+    ],
+    "coreConcepts": [
+        "feedback swell",
+        "noise layer",
+        "density build"
+    ],
+    "rhythmicGrammar": [
+        "Noise texture with non-grid density"
+    ],
+    "danceTags": [
+        "listening"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Noise texture with non-grid density",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "verse": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "chorus": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "bridge": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "solo": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "coda": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ]
+    },
+    "referenceArtists": [
+        "Whitehouse",
+        "Merzbow"
+    ],
+    "referenceTracks": [],
+    "techniques": [
+        "feedback swell",
+        "frequency-density build",
+        "industrial noise layer",
+        "gated noise"
+    ]
+},
+{
+    "id": "industrial-industrial-ambient",
+    "worldId": "industrial",
+    "name": "Industrial Ambient",
+    "origin": "United Kingdom / Europe",
+    "era": "1990s–Present",
+    "description": "Dark drones, metallic textures, field recordings and slow spectral development.",
+    "characteristicInstruments": [
+        "drone",
+        "noise-sweep",
+        "sampler",
+        "warm-pad"
+    ],
+    "preferredMeters": [
+        "4/4",
+        "free"
+    ],
+    "tempoRange": [
+        40,
+        100
+    ],
+    "keySubstyles": [
+        "Industrial Ambient"
+    ],
+    "coreConcepts": [
+        "dark drone",
+        "metallic texture",
+        "slow spectral build"
+    ],
+    "rhythmicGrammar": [
+        "Dark drone with metallic texture"
+    ],
+    "danceTags": [
+        "listening"
+    ],
+    "tuningSystem": "12-tet",
+    "signatureCell": "Dark drone with metallic texture",
+    "grooveMechanics": {
+        "swingPercentage": 50,
+        "anticipationOffsetSteps": 0,
+        "microtimingFeel": "straight"
+    },
+    "prominentChords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+    ],
+    "sectionProgressions": {
+        "intro": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "verse": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "chorus": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "bridge": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "solo": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ],
+        "coda": [
+            "Em",
+            "C",
+            "D",
+            "B7"
+        ]
+    },
+    "referenceArtists": [
+        "Lustmord",
+        "Coil"
+    ],
+    "referenceTracks": [],
+    "techniques": [
+        "drone",
+        "frequency-density build",
+        "industrial noise layer",
+        "metallic percussion"
+    ]
+}],
   "patterns": [
     {
       "id": "industrial--industrial-mechanical-pulse",
@@ -925,5 +1317,991 @@ export const INDUSTRIAL_WORLD: GenreWorld = {
         "metal-hit"
       ]
     }
+  ,
+  {
+  "id": "tech-industrial-machine-kick",
+  "worldId": "industrial",
+  "styleIds": [
+    "industrial-industrial-rock",
+    "industrial-industrial-metal"
+  ],
+  "name": "machine kick",
+  "shortName": "machine kick",
+  "family": "industrial",
+  "category": "groove",
+  "description": "Technique: machine kick",
+  "tags": [
+    "industrial",
+    "machine kick"
+  ],
+  "approaches": [
+    "machine kick"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "industrial",
+    "machine kick"
+  ],
+  "techniques": [
+    "machine kick"
   ]
+},
+{
+  "id": "tech-industrial-metallic-percussion",
+  "worldId": "industrial",
+  "styleIds": [
+    "industrial-industrial-rock",
+    "industrial-industrial-ambient"
+  ],
+  "name": "metallic percussion",
+  "shortName": "metallic percussion",
+  "family": "industrial",
+  "category": "groove",
+  "description": "Technique: metallic percussion",
+  "tags": [
+    "industrial",
+    "metallic percussion"
+  ],
+  "approaches": [
+    "metallic percussion"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums",
+    "hand-percussion"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "industrial",
+    "metallic percussion"
+  ],
+  "techniques": [
+    "metallic percussion"
+  ]
+},
+{
+  "id": "tech-industrial-distorted-loop",
+  "worldId": "industrial",
+  "styleIds": [
+    "industrial-industrial-rock"
+  ],
+  "name": "distorted loop",
+  "shortName": "distorted loop",
+  "family": "industrial",
+  "category": "groove",
+  "description": "Technique: distorted loop",
+  "tags": [
+    "industrial",
+    "distorted loop"
+  ],
+  "approaches": [
+    "distorted loop"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "lead"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "industrial",
+    "distorted loop"
+  ],
+  "techniques": [
+    "distorted loop"
+  ]
+},
+{
+  "id": "tech-industrial-industrial-noise-layer",
+  "worldId": "industrial",
+  "styleIds": [
+    "industrial-industrial-rock",
+    "industrial-industrial-metal",
+    "industrial-power-electronics",
+    "industrial-industrial-ambient"
+  ],
+  "name": "industrial noise layer",
+  "shortName": "industrial noise layer",
+  "family": "industrial",
+  "category": "texture",
+  "description": "Technique: industrial noise layer",
+  "tags": [
+    "industrial",
+    "industrial noise layer"
+  ],
+  "approaches": [
+    "industrial noise layer"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "texture"
+  ],
+  "instruments": [
+    "synth"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "industrial",
+    "industrial noise layer"
+  ],
+  "techniques": [
+    "industrial noise layer"
+  ]
+},
+{
+  "id": "tech-industrial-synchronized-guitar-kick",
+  "worldId": "industrial",
+  "styleIds": [
+    "industrial-industrial-rock",
+    "industrial-industrial-metal"
+  ],
+  "name": "synchronized guitar/kick",
+  "shortName": "synchronized guitar/kick",
+  "family": "industrial",
+  "category": "groove",
+  "description": "Technique: synchronized guitar/kick",
+  "tags": [
+    "industrial",
+    "synchronized guitar/kick"
+  ],
+  "approaches": [
+    "synchronized guitar/kick"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "percussion"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "industrial",
+    "synchronized guitar/kick"
+  ],
+  "techniques": [
+    "synchronized guitar/kick"
+  ]
+},
+{
+  "id": "tech-industrial-gated-noise",
+  "worldId": "industrial",
+  "styleIds": [
+    "industrial-power-electronics"
+  ],
+  "name": "gated noise",
+  "shortName": "gated noise",
+  "family": "industrial",
+  "category": "texture",
+  "description": "Technique: gated noise",
+  "tags": [
+    "industrial",
+    "gated noise"
+  ],
+  "approaches": [
+    "gated noise"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "texture"
+  ],
+  "instruments": [
+    "synth"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "industrial",
+    "gated noise"
+  ],
+  "techniques": [
+    "gated noise"
+  ]
+},
+{
+  "id": "tech-industrial-feedback-swell",
+  "worldId": "industrial",
+  "styleIds": [
+    "industrial-power-electronics"
+  ],
+  "name": "feedback swell",
+  "shortName": "feedback swell",
+  "family": "industrial",
+  "category": "texture",
+  "description": "Technique: feedback swell",
+  "tags": [
+    "industrial",
+    "feedback swell"
+  ],
+  "approaches": [
+    "feedback swell"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "texture"
+  ],
+  "instruments": [
+    "synth"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "industrial",
+    "feedback swell"
+  ],
+  "techniques": [
+    "feedback swell"
+  ]
+},
+{
+  "id": "tech-industrial-drone",
+  "worldId": "industrial",
+  "styleIds": [
+    "industrial-industrial-ambient"
+  ],
+  "name": "drone",
+  "shortName": "drone",
+  "family": "industrial",
+  "category": "texture",
+  "description": "Technique: drone",
+  "tags": [
+    "industrial",
+    "drone"
+  ],
+  "approaches": [
+    "drone"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "texture"
+  ],
+  "instruments": [
+    "synth"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    8
+  ],
+  "accentProfile": [
+    1,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72
+  ],
+  "durationGrid": [
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "industrial",
+    "drone"
+  ],
+  "techniques": [
+    "drone"
+  ]
+},
+{
+  "id": "tech-industrial-mechanical-ostinato",
+  "worldId": "industrial",
+  "styleIds": [
+    "industrial-industrial-metal"
+  ],
+  "name": "mechanical ostinato",
+  "shortName": "mechanical ostinato",
+  "family": "industrial",
+  "category": "groove",
+  "description": "Technique: mechanical ostinato",
+  "tags": [
+    "industrial",
+    "mechanical ostinato"
+  ],
+  "approaches": [
+    "mechanical ostinato"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "lead"
+  ],
+  "instruments": [
+    "drums"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "industrial",
+    "mechanical ostinato"
+  ],
+  "techniques": [
+    "mechanical ostinato"
+  ]
+},
+{
+  "id": "tech-industrial-frequency-density-build",
+  "worldId": "industrial",
+  "styleIds": [
+    "industrial-power-electronics",
+    "industrial-industrial-ambient"
+  ],
+  "name": "frequency-density build",
+  "shortName": "frequency-density build",
+  "family": "industrial",
+  "category": "texture",
+  "description": "Technique: frequency-density build",
+  "tags": [
+    "industrial",
+    "frequency-density build"
+  ],
+  "approaches": [
+    "frequency-density build"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "texture"
+  ],
+  "instruments": [
+    "synth"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.65,
+    0.65,
+    0.65
+  ],
+  "velocityProfile": [
+    0.92,
+    0.72,
+    0.72,
+    0.92
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-genre",
+  "canCrossRole": true,
+  "authenticityTags": [
+    "industrial",
+    "frequency-density build"
+  ],
+  "techniques": [
+    "frequency-density build"
+  ]
+},
+{
+  "id": "style-industrial-industrial-rock-signature",
+  "worldId": "industrial",
+  "styleIds": [
+    "industrial-industrial-rock"
+  ],
+  "name": "Industrial Rock Signature Cell",
+  "shortName": "Industrial Rock Cell",
+  "family": "industrial",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "industrial",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "distortion-guitar",
+    "bass",
+    "drums",
+    "sampler"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "industrial",
+    "signature"
+  ],
+  "techniques": [
+    "distorted loop",
+    "machine kick",
+    "synchronized guitar/kick",
+    "industrial noise layer",
+    "metallic percussion"
+  ]
+},
+{
+  "id": "style-industrial-industrial-metal-signature",
+  "worldId": "industrial",
+  "styleIds": [
+    "industrial-industrial-metal"
+  ],
+  "name": "Industrial Metal Signature Cell",
+  "shortName": "Industrial Metal Cell",
+  "family": "industrial",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "industrial",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "distortion-guitar",
+    "bass",
+    "drums",
+    "noise-sweep"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "industrial",
+    "signature"
+  ],
+  "techniques": [
+    "mechanical ostinato",
+    "synchronized guitar/kick",
+    "industrial noise layer",
+    "machine kick"
+  ]
+},
+{
+  "id": "style-industrial-power-electronics-signature",
+  "worldId": "industrial",
+  "styleIds": [
+    "industrial-power-electronics"
+  ],
+  "name": "Power Electronics Signature Cell",
+  "shortName": "Power Electronics Cell",
+  "family": "industrial",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "industrial",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "noise-sweep",
+    "sampler",
+    "drums",
+    "voice"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "accentProfile": [
+    1,
+    0.7,
+    0.7,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7,
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "industrial",
+    "signature"
+  ],
+  "techniques": [
+    "feedback swell",
+    "frequency-density build",
+    "industrial noise layer",
+    "gated noise"
+  ]
+},
+{
+  "id": "style-industrial-industrial-ambient-signature",
+  "worldId": "industrial",
+  "styleIds": [
+    "industrial-industrial-ambient"
+  ],
+  "name": "Industrial Ambient Signature Cell",
+  "shortName": "Industrial Ambient Cell",
+  "family": "industrial",
+  "category": "groove",
+  "description": "Style signature groove cue",
+  "tags": [
+    "industrial",
+    "signature"
+  ],
+  "approaches": [
+    "signature",
+    "groove"
+  ],
+  "scopes": [
+    "song",
+    "region",
+    "measure"
+  ],
+  "roles": [
+    "rhythm",
+    "bass",
+    "harmony"
+  ],
+  "instruments": [
+    "drone",
+    "noise-sweep",
+    "sampler",
+    "warm-pad"
+  ],
+  "meter": "4/4",
+  "cycleLength": 1,
+  "subdivisions": 16,
+  "onsetGrid": [
+    0,
+    8
+  ],
+  "accentProfile": [
+    1,
+    0.7
+  ],
+  "velocityProfile": [
+    0.9,
+    0.7
+  ],
+  "durationGrid": [
+    1,
+    1
+  ],
+  "articulations": [],
+  "variants": [],
+  "sourceLevel": "native-style",
+  "canCrossRole": false,
+  "authenticityTags": [
+    "industrial",
+    "signature"
+  ],
+  "techniques": [
+    "drone",
+    "frequency-density build",
+    "industrial noise layer",
+    "metallic percussion"
+  ]
+}]
 };

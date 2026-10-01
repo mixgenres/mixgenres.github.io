@@ -1334,4 +1334,554 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "weight": 1,
           "enabled": true
         }
+,
+  {
+    "id": "tech-blues-stop-time-blues",
+    "worldId": "blues",
+    "styleIds": [
+      "blues-memphis-electric-blues",
+      "blues-new-orleans-blues",
+      "blues-british-blues-revival"
+    ],
+    "name": "stop-time blues",
+    "shortName": "stop-time blues",
+    "family": "blues",
+    "category": "groove",
+    "description": "Technique: stop-time blues",
+    "tags": [
+      "blues",
+      "stop-time blues"
+    ],
+    "approaches": [
+      "stop-time blues"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "blues",
+      "stop-time blues"
+    ],
+    "techniques": [
+      "stop-time blues"
+    ]
+  },
+  {
+    "id": "tech-blues-shuffle-triplet-pocket",
+    "worldId": "blues",
+    "styleIds": [
+      "blues-west-coast-jump-blues",
+      "blues-new-orleans-blues"
+    ],
+    "name": "shuffle triplet pocket",
+    "shortName": "shuffle triplet pocket",
+    "family": "blues",
+    "category": "groove",
+    "description": "Technique: shuffle triplet pocket",
+    "tags": [
+      "blues",
+      "shuffle triplet pocket"
+    ],
+    "approaches": [
+      "shuffle triplet pocket"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "percussion"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      3,
+      6,
+      8,
+      11,
+      14
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65,
+      1,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92,
+      0.72,
+      0.72
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "blues",
+      "shuffle triplet pocket"
+    ],
+    "techniques": [
+      "shuffle triplet pocket"
+    ]
+  },
+  {
+    "id": "tech-blues-new-orleans-second-line-accents",
+    "worldId": "blues",
+    "styleIds": [
+      "blues-new-orleans-blues"
+    ],
+    "name": "New Orleans second-line accents",
+    "shortName": "New Orleans second-line accents",
+    "family": "blues",
+    "category": "groove",
+    "description": "Technique: New Orleans second-line accents",
+    "tags": [
+      "blues",
+      "New Orleans second-line accents"
+    ],
+    "approaches": [
+      "New Orleans second-line accents"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "lead"
+    ],
+    "instruments": [
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.65,
+      0.65,
+      0.65
+    ],
+    "velocityProfile": [
+      0.92,
+      0.72,
+      0.72,
+      0.92
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-genre",
+    "canCrossRole": true,
+    "authenticityTags": [
+      "blues",
+      "New Orleans second-line accents"
+    ],
+    "techniques": [
+      "New Orleans second-line accents"
+    ]
+  },
+  {
+    "id": "style-blues-memphis-electric-blues-signature",
+    "worldId": "blues",
+    "styleIds": [
+      "blues-memphis-electric-blues"
+    ],
+    "name": "Memphis Electric Blues Signature Cell",
+    "shortName": "Memphis Electric Blues Cell",
+    "family": "blues",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "blues",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "organ"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      8
+    ],
+    "accentProfile": [
+      1,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "blues",
+      "signature"
+    ],
+    "techniques": [
+      "guitar bend/vibrato phrasing",
+      "call-and-response guitar/vocal",
+      "blues scale enclosure",
+      "stop-time blues",
+      "walking-blues bass"
+    ]
+  },
+  {
+    "id": "style-blues-west-coast-jump-blues-signature",
+    "worldId": "blues",
+    "styleIds": [
+      "blues-west-coast-jump-blues"
+    ],
+    "name": "West Coast Jump Blues Signature Cell",
+    "shortName": "West Coast Jump Blues Cell",
+    "family": "blues",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "blues",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "piano",
+      "upright-bass",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7,
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7,
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "blues",
+      "signature"
+    ],
+    "techniques": [
+      "call-and-response guitar/vocal",
+      "walking-blues bass",
+      "blues scale enclosure",
+      "boogie bass",
+      "guitar bend/vibrato phrasing",
+      "shuffle triplet pocket"
+    ]
+  },
+  {
+    "id": "style-blues-new-orleans-blues-signature",
+    "worldId": "blues",
+    "styleIds": [
+      "blues-new-orleans-blues"
+    ],
+    "name": "New Orleans Blues Signature Cell",
+    "shortName": "New Orleans Blues Cell",
+    "family": "blues",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "blues",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "piano",
+      "electric-guitar",
+      "bass",
+      "drums"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7,
+      1,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "blues",
+      "signature"
+    ],
+    "techniques": [
+      "New Orleans second-line accents",
+      "walking-blues bass",
+      "blues scale enclosure",
+      "boogie bass",
+      "shuffle triplet pocket",
+      "stop-time blues"
+    ]
+  },
+  {
+    "id": "style-blues-british-blues-revival-signature",
+    "worldId": "blues",
+    "styleIds": [
+      "blues-british-blues-revival"
+    ],
+    "name": "British Blues Revival Signature Cell",
+    "shortName": "British Blues Revival Cell",
+    "family": "blues",
+    "category": "groove",
+    "description": "Style signature groove cue",
+    "tags": [
+      "blues",
+      "signature"
+    ],
+    "approaches": [
+      "signature",
+      "groove"
+    ],
+    "scopes": [
+      "song",
+      "region",
+      "measure"
+    ],
+    "roles": [
+      "rhythm",
+      "bass",
+      "harmony"
+    ],
+    "instruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "organ"
+    ],
+    "meter": "4/4",
+    "cycleLength": 1,
+    "subdivisions": 16,
+    "onsetGrid": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "accentProfile": [
+      1,
+      0.7,
+      0.7,
+      0.7
+    ],
+    "velocityProfile": [
+      0.9,
+      0.7,
+      0.9,
+      0.7
+    ],
+    "durationGrid": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "articulations": [],
+    "variants": [],
+    "sourceLevel": "native-style",
+    "canCrossRole": false,
+    "authenticityTags": [
+      "blues",
+      "signature"
+    ],
+    "techniques": [
+      "dominant 7th riff",
+      "guitar bend/vibrato phrasing",
+      "blues scale enclosure",
+      "call-and-response guitar/vocal",
+      "stop-time blues",
+      "walking-blues bass"
+    ]
+  }
 ];
