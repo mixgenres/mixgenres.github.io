@@ -1,6 +1,6 @@
 import { StereoFieldManager } from './engine/studio/index.ts';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Dices, Trash2, Pencil, Sparkles } from 'lucide-react';
+import { Dices, Trash2, Pencil, Sparkles, Volume2, Volume1, VolumeX } from 'lucide-react';
 import './index.css';
 
 import { Glyph, PlayIcon, PauseIcon } from './ui/Glyph';
@@ -18,7 +18,7 @@ import {
   randomizeChordsForSection, randomizeChordsForSong, randomizeEverythingForSong, randomizeEverythingForSection,
   duplicateSection, addSensibleSectionAfter, removeSection, setInstrument, setPattern, addVoice, removeVoice,
   isVoiceSilentInSection, isVoiceSilentInAll, silenceVoiceInSection, silenceVoiceInAll,
-  unsilenceVoiceInSection, unsilenceVoiceInAll, toggleVoiceInSection,
+  unsilenceVoiceInSection, unsilenceVoiceInAll,
   silenceAllVoicesInSection, unsilenceAllVoicesInSection,
   setTrackSpotlight, getResolvedSectionStyle,
   getEffectiveBpm, setSectionTempoShift, setSongTempoShift, setSongBpm, setSectionBpm, setSectionEnergy,
@@ -63,9 +63,15 @@ export default function App() {
       return false;
     }
   });
-  const togglePlayback = () => setPlaybackStatus(status =>
-    status === 'playing' || status === 'buffering' ? 'paused' : 'buffering'
-  );
+  const togglePlayback = () => {
+    const isStopping = playbackStatus === 'playing' || playbackStatus === 'buffering';
+    if (!isStopping) {
+      void startAudio();
+    }
+    setPlaybackStatus(status =>
+      status === 'playing' || status === 'buffering' ? 'paused' : 'buffering'
+    );
+  };
 
   const [pickedRegion, setPickedRegion] = useState<string | null>(null);
 
@@ -931,71 +937,173 @@ export default function App() {
             const sounding = (playing || isScrubbing) && live && !t.muted && !isSilentHere;
             const isNoteActive = sounding && (shape?.onsetGrid ?? []).includes(step);
 
+            const handleCycleSilence = (trackId: string, shiftKey = false) => {
+              if (shiftKey) {
+                edit(s => isSilentInAll ? unsilenceVoiceInAll(s, trackId) : silenceVoiceInAll(s, trackId));
+                showToast(isSilentInAll ? `Playing ${v.name} in song` : `Silenced ${v.name} in all parts`);
+                return;
+              }
+              if (isSilentInAll) {
+                edit(s => unsilenceVoiceInAll(s, trackId));
+                showToast(`Playing ${v.name} in song`);
+              } else if (isSilentHere) {
+                edit(s => {
+                  const un = unsilenceVoiceInSection(s, trackId, region.id);
+                  return silenceVoiceInAll(un, trackId);
+                });
+                showToast(`Silenced ${v.name} in all parts`);
+              } else {
+                edit(s => silenceVoiceInSection(s, trackId, region.id));
+                showToast(`Silenced ${v.name} in ${partName}`);
+              }
+            };
+
+            const isSpotlightActive = spotlightIsActive(t);
+            const isSpotlightExplicitOn = t.spotlight === 'on';
+            const isSpotlightExplicitOff = t.spotlight === 'off';
+
             return (
               <div
                 key={t.id}
-                className="py-2.5 flex flex-col justify-center"
+                className="py-2.5 flex items-start gap-2.5"
                 style={{
                   borderTop: '1px solid color-mix(in srgb, var(--ink) 14%, transparent)',
                   opacity: t.muted ? 0.35 : isSilentHere ? 0.65 : 1,
                 }}
               >
-                {/* Row Header Line: Checkbox + Name + Tags on left, Pattern + Action on right */}
-                <div className="flex items-center justify-between gap-2">
-                  {/* Left Column: Silence Checkbox + Instrument Name + Silence Tag */}
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="relative shrink-0 flex items-center justify-center" style={{ width: 13, height: 13 }}>
-                      <button
-                        onClick={(e) => {
-                          if (e.shiftKey || e.altKey) {
-                            edit(s => isSilentInAll ? unsilenceVoiceInAll(s, t.id) : silenceVoiceInAll(s, t.id));
-                          } else {
-                            edit(s => toggleVoiceInSection(s, t.id, region.id));
-                          }
-                        }}
-                        aria-label={
-                          isSilentInAll
-                            ? `Play ${t.name} (silent in all parts)`
-                            : isSilentHere
-                            ? `Play ${t.name} in ${partName}`
-                            : `Silence ${t.name} in ${partName}`
-                        }
-                        title={
-                          isSilentInAll
-                            ? `Silent in all parts (click to play in ${partName} · Shift-click to play in all)`
-                            : isSilentHere
-                            ? `Silent in ${partName} (click to play here · Shift-click to silence in all)`
-                            : `Playing in ${partName} (click to silence here · Shift-click to silence in all)`
-                        }
-                        className="transition-transform active:scale-95 cursor-pointer flex items-center justify-center"
+                {/* Side Icon Column: Square (activity) -> Sound (silence) -> Spotlight */}
+                <div className="flex flex-col items-center gap-1.5 shrink-0 pt-0.5" style={{ width: 16 }}>
+                  {/* Square: Activity indicator showing note pulse */}
+                  <div
+                    className="relative shrink-0 flex items-center justify-center select-none"
+                    style={{
+                      width: 13,
+                      height: 13,
+                      background: isSilentHere ? 'transparent' : 'var(--ink)',
+                      boxShadow: 'inset 0 0 0 1.5px var(--ink)',
+                      borderRadius: 2,
+                    }}
+                    title={isSilentHere ? `${t.name} (silent)` : `${t.name} activity`}
+                    aria-hidden="true"
+                  >
+                    {isNoteActive && (
+                      <span
+                        className="w-1.5 h-1.5 rounded-full"
                         style={{
-                          width: 13,
-                          height: 13,
-                          background: isSilentHere ? 'transparent' : 'var(--ink)',
-                          boxShadow: 'inset 0 0 0 1.5px var(--ink)',
-                          borderRadius: 2,
+                          background: plate.signal,
+                        }}
+                      />
+                    )}
+                    {isNoteActive && (
+                      <span
+                        className="absolute inset-0 rounded-full animate-ping pointer-events-none"
+                        style={{
+                          background: plate.signal,
+                          opacity: 0.7,
+                        }}
+                      />
+                    )}
+                  </div>
+
+                  {/* Sound Icon: iterates between part | song | silent */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleCycleSilence(t.id, e.shiftKey || e.altKey);
+                    }}
+                    className="relative w-4 h-4 flex items-center justify-center cursor-pointer transition-transform active:scale-95 rounded-[2px]"
+                    style={{
+                      color: 'var(--ink)',
+                      opacity: isSilentInAll ? 0.35 : isSilentHere ? 0.65 : 0.95,
+                    }}
+                    title={
+                      isSilentInAll
+                        ? `Silent in all parts (click to play in song · Shift-click to toggle all)`
+                        : isSilentHere
+                        ? `Silent in ${partName} only (click to silence in all parts)`
+                        : `Playing in song (click to silence in ${partName})`
+                    }
+                    aria-label={
+                      isSilentInAll
+                        ? `Sound for ${v.name}: Silent in all parts`
+                        : isSilentHere
+                        ? `Sound for ${v.name}: Silent in ${partName}`
+                        : `Sound for ${v.name}: Playing in song`
+                    }
+                  >
+                    {isSilentInAll ? (
+                      <VolumeX size={13} strokeWidth={2} />
+                    ) : isSilentHere ? (
+                      <Volume1 size={13} strokeWidth={2} />
+                    ) : (
+                      <Volume2 size={13} strokeWidth={2} />
+                    )}
+                    {(isSilentHere || isSilentInAll) && (
+                      <span
+                        className="absolute -top-1 -right-1 font-mono font-bold leading-none select-none rounded-[1px]"
+                        style={{
+                          fontSize: '7px',
+                          padding: '1px 1.5px',
+                          background: 'var(--tone)',
+                          color: 'var(--ink)',
+                          boxShadow: '0 0 0 1px var(--ground)',
                         }}
                       >
-                        {isNoteActive && (
-                          <span
-                            className="w-1.5 h-1.5 rounded-full"
-                            style={{
-                              background: plate.signal,
-                            }}
-                          />
-                        )}
-                      </button>
-                      {isNoteActive && (
-                        <span
-                          className="absolute inset-0 rounded-full animate-ping pointer-events-none"
-                          style={{
-                            background: plate.signal,
-                            opacity: 0.7,
-                          }}
-                        />
-                      )}
-                    </div>
+                        {isSilentInAll ? 's' : 'p'}
+                      </span>
+                    )}
+                  </button>
 
+                  {/* Spotlight Icon: click on and off */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const next = isSpotlightExplicitOn ? 'off' : 'on';
+                      edit(s => setTrackSpotlight(s, t.id, next));
+                      showToast(`Spotlight ${next === 'on' ? 'on' : 'off'} for ${v.name}`);
+                    }}
+                    className="relative w-4 h-4 flex items-center justify-center cursor-pointer transition-transform active:scale-95 rounded-[2px]"
+                    style={{
+                      opacity: isSpotlightExplicitOff ? 0.3 : isSpotlightActive ? 1 : 0.45,
+                      color: isSpotlightExplicitOn ? 'var(--signal)' : 'var(--ink)',
+                    }}
+                    title={
+                      isSpotlightExplicitOn
+                        ? `Spotlight: On (click to turn off)`
+                        : isSpotlightExplicitOff
+                        ? `Spotlight: Off (click to turn on)`
+                        : `Spotlight: Auto (${isSpotlightActive ? 'active' : 'inactive'} in style). Click to turn on`
+                    }
+                    aria-label={`Spotlight ${t.name}: ${t.spotlight ?? 'auto'}`}
+                  >
+                    <Sparkles
+                      size={11.5}
+                      fill={isSpotlightExplicitOn ? 'currentColor' : isSpotlightActive ? 'currentColor' : 'none'}
+                      strokeWidth={1.75}
+                    />
+                    {(t.spotlight === 'auto' || !t.spotlight) && (
+                      <span
+                        className="absolute -top-1 -right-1 font-mono font-bold leading-none select-none rounded-[1px]"
+                        style={{
+                          fontSize: '7px',
+                          padding: '1px 1.5px',
+                          background: 'var(--tone)',
+                          color: 'var(--ink)',
+                          boxShadow: '0 0 0 1px var(--ground)',
+                        }}
+                      >
+                        a
+                      </span>
+                    )}
+                  </button>
+                </div>
+
+                {/* Main Track Info + Rhythm line */}
+                <div className="flex-1 min-w-0 flex flex-col justify-center">
+                  {/* Row Header Line: Instrument Name on left, Pattern + Action on right */}
+                  <div className="flex items-center justify-between gap-2">
                     <button
                       onClick={() => setInstrFor(t.id)}
                       className="font-semibold text-left transition-all hover:opacity-100 cursor-pointer flex items-center gap-1 shrink-0 pb-[1px]"
@@ -1008,212 +1116,93 @@ export default function App() {
                       }}
                       title={`Change instrument (${v.name})`}
                     >
-                      <span className="truncate max-w-[120px] sm:max-w-[160px]">{v.name}</span>
+                      <span className="truncate max-w-[140px] sm:max-w-[200px]">{v.name}</span>
                       <Pencil size={10} strokeWidth={2} style={{ opacity: 0.45, flexShrink: 0 }} />
                     </button>
 
-                    {/* Silence selection: silent in [ part ] [ song ] | [ on for song ] */}
-                    {(isSilentHere || isSilentInAll) && (
-                      <div className="flex items-center gap-1 shrink-0 text-xs">
-                        <span className="opacity-60 text-[11px] mr-0.5">silent in</span>
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (isSilentInAll) {
-                              edit(s => {
-                                const un = unsilenceVoiceInAll(s, t.id);
-                                return silenceVoiceInSection(un, t.id, region.id);
-                              });
-                            } else {
-                              edit(s => unsilenceVoiceInSection(s, t.id, region.id));
-                            }
-                          }}
-                          className="cursor-pointer text-xs transition-colors"
-                          style={{
-                            padding: '2px 7px',
-                            background: !isSilentInAll && isSilentHere ? 'var(--ink)' : 'transparent',
-                            color: !isSilentInAll && isSilentHere ? 'var(--ground)' : 'var(--ink)',
-                            boxShadow: !isSilentInAll && isSilentHere ? 'none' : 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 25%, transparent)',
-                            whiteSpace: 'nowrap',
-                          }}
-                          title={!isSilentInAll && isSilentHere ? 'Click to play in this part' : 'Silence in this part only'}
-                        >
-                          part
-                        </button>
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (isSilentInAll) {
-                              edit(s => unsilenceVoiceInAll(s, t.id));
-                            } else {
-                              edit(s => silenceVoiceInAll(s, t.id));
-                            }
-                          }}
-                          className="cursor-pointer text-xs transition-colors"
-                          style={{
-                            padding: '2px 7px',
-                            background: isSilentInAll ? 'var(--ink)' : 'transparent',
-                            color: isSilentInAll ? 'var(--ground)' : 'var(--ink)',
-                            boxShadow: isSilentInAll ? 'none' : 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 25%, transparent)',
-                            whiteSpace: 'nowrap',
-                          }}
-                          title={isSilentInAll ? 'Click to play in the whole song' : 'Silence in the whole song'}
-                        >
-                          song
-                        </button>
-                        <span className="mx-0.5 opacity-35 select-none text-xs">|</span>
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            edit(s => unsilenceVoiceInAll(s, t.id));
-                            showToast(`Turned on ${v.name} for the whole song`);
-                          }}
-                          className="cursor-pointer text-xs transition-colors opacity-75 hover:opacity-100"
-                          style={{
-                            padding: '2px 7px',
-                            background: 'transparent',
-                            color: 'var(--ink)',
-                            boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 25%, transparent)',
-                            whiteSpace: 'nowrap',
-                          }}
-                          title="Turn on for the whole song"
-                        >
-                          on for song
-                        </button>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Right Column: Spotlight + Pattern Name & Actions */}
-                  <div className="flex items-center justify-end gap-1.5 shrink-0">
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        const current = t.spotlight ?? 'auto';
-                        const next = current === 'auto' ? 'on' : current === 'on' ? 'off' : 'auto';
-                        edit(s => setTrackSpotlight(s, t.id, next));
-                      }}
-                      className="w-6 h-6 transition-all cursor-pointer flex items-center justify-center shrink-0 relative rounded-[2px]"
-                      style={{
-                        opacity: t.spotlight === 'off' ? 0.35 : spotlightIsActive(t) ? 1 : 0.5,
-                        background: t.spotlight === 'on' ? 'var(--ink)' : 'transparent',
-                        color: t.spotlight === 'on' ? 'var(--ground)' : 'var(--ink)',
-                        boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 20%, transparent)',
-                      }}
-                      title={
-                        t.spotlight === 'on'
-                          ? `Spotlight: On (Click to set Off)`
-                          : t.spotlight === 'off'
-                          ? `Spotlight: Off (Click to set Auto)`
-                          : `Spotlight: Auto (${spotlightIsActive(t) ? 'active' : 'inactive'} in ${sectionStyle?.name ?? 'style'}). Click to set On`
-                      }
-                      aria-label={`Spotlight ${t.name}: ${t.spotlight ?? 'auto'}`}
-                    >
-                      <Sparkles
-                        size={12.5}
-                        fill={t.spotlight === 'on' ? 'currentColor' : spotlightIsActive(t) ? 'currentColor' : 'none'}
-                        strokeWidth={1.75}
-                      />
-                      {(t.spotlight === 'auto' || !t.spotlight) && (
-                        <span
-                          className="absolute -top-1 -right-1 font-mono font-bold leading-none select-none rounded-[1px]"
-                          style={{
-                            fontSize: '7px',
-                            padding: '1px 1.5px',
-                            background: 'var(--tone)',
-                            color: 'var(--ink)',
-                            boxShadow: '0 0 0 1px var(--ground)',
-                          }}
-                        >
-                          a
-                        </span>
-                      )}
-                    </button>
-                    <button
-                      onClick={() => setPatternFor(t.id)}
-                      className="text-right transition-all hover:opacity-100 font-mono cursor-pointer flex items-center gap-1 shrink-0 pb-[1px]"
-                      style={{
-                        fontSize: 11.5,
-                        border: 'none',
-                        borderBottom: '1px dotted color-mix(in srgb, var(--ink) 40%, transparent)',
-                        borderRadius: 0,
-                        opacity: isSilentHere ? 0.6 : 0.85,
-                        lineHeight: 1.2,
-                      }}
-                      title={
-                        isSilentInAll
-                          ? 'Pick a rhythm to play in the whole song'
-                          : isSilentHere
-                          ? `Pick a rhythm to play in ${partName}`
-                          : `Change rhythm for ${partName}`
-                      }
-                    >
-                      <span className="truncate max-w-[140px] sm:max-w-[200px]">
-                        {isSilentInAll ? 'silent in all' : isSilentHere ? '+ pick rhythm' : p ? cleanPatternName(p.name) : 'silent'}
-                      </span>
-                      <Pencil size={10} strokeWidth={2} style={{ opacity: 0.45, flexShrink: 0 }} />
-                    </button>
-
-                    {p && !isSilentHere && (
-                      <NoteMark onClick={() => setNote({
-                        title: cleanPatternName(p.name),
-                        body: p.description,
-                        tags: noteTags(p),
-                      })} />
-                    )}
-
-                    {/* Delete instrument button with consistent hit-box */}
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        edit(s => removeVoice(s, t.id));
-                        showToast(`Deleted ${v.name}`);
-                      }}
-                      className="w-6 h-6 opacity-35 hover:opacity-100 hover:text-red-500 transition-all cursor-pointer flex items-center justify-center shrink-0 ml-0.5"
-                      style={{
-                        boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 15%, transparent)',
-                      }}
-                      title={`Delete ${v.name} from song`}
-                      aria-label={`Delete ${v.name}`}
-                    >
-                      <Trash2 size={13.5} />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Rhythm glyph or rest indicator aligned to instrument baseline */}
-                <div style={{ marginLeft: 23, marginTop: 5 }}>
-                  {isSilentHere ? (
-                    <div
-                      onClick={() => edit(s => isSilentInAll ? unsilenceVoiceInAll(s, t.id) : unsilenceVoiceInSection(s, t.id, region.id))}
-                      className="relative flex items-center justify-center cursor-pointer transition-opacity hover:opacity-80"
-                      style={{ height: 22 }}
-                      title={isSilentInAll ? 'Click to play in all parts' : `Click to play in ${partName}`}
-                    >
-                      <div className="w-full opacity-20">
-                        <Glyph onsets={[]} dim steps={16} height={22} />
-                      </div>
-                      <span
-                        className="absolute text-[10px] micro tracking-wider opacity-50 select-none"
-                        style={{ color: 'var(--ink)' }}
+                    <div className="flex items-center justify-end gap-1.5 shrink-0">
+                      <button
+                        onClick={() => setPatternFor(t.id)}
+                        className="text-right transition-all hover:opacity-100 font-mono cursor-pointer flex items-center gap-1 shrink-0 pb-[1px]"
+                        style={{
+                          fontSize: 11.5,
+                          border: 'none',
+                          borderBottom: '1px dotted color-mix(in srgb, var(--ink) 40%, transparent)',
+                          borderRadius: 0,
+                          opacity: isSilentHere ? 0.6 : 0.85,
+                          lineHeight: 1.2,
+                        }}
+                        title={
+                          isSilentInAll
+                            ? 'Pick a rhythm to play in the whole song'
+                            : isSilentHere
+                            ? `Pick a rhythm to play in ${partName}`
+                            : `Change rhythm for ${partName}`
+                        }
                       >
-                        {isSilentInAll ? '— silent in all parts —' : `— silent in ${partName} —`}
-                      </span>
+                        <span className="truncate max-w-[140px] sm:max-w-[200px]">
+                          {isSilentInAll ? 'silent in all' : isSilentHere ? '+ pick rhythm' : p ? cleanPatternName(p.name) : 'silent'}
+                        </span>
+                        <Pencil size={10} strokeWidth={2} style={{ opacity: 0.45, flexShrink: 0 }} />
+                      </button>
+
+                      {p && !isSilentHere && (
+                        <NoteMark onClick={() => setNote({
+                          title: cleanPatternName(p.name),
+                          body: p.description,
+                          tags: noteTags(p),
+                        })} />
+                      )}
+
+                      {/* Delete instrument button */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          edit(s => removeVoice(s, t.id));
+                          showToast(`Deleted ${v.name}`);
+                        }}
+                        className="w-6 h-6 opacity-35 hover:opacity-100 hover:text-red-500 transition-all cursor-pointer flex items-center justify-center shrink-0 ml-0.5"
+                        style={{
+                          boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 15%, transparent)',
+                        }}
+                        title={`Delete ${v.name} from song`}
+                        aria-label={`Delete ${v.name}`}
+                      >
+                        <Trash2 size={13.5} />
+                      </button>
                     </div>
-                  ) : (
-                    <Glyph
-                      onsets={shape?.onsetGrid}
-                      accents={shape?.accentProfile}
-                      playhead={sounding ? step : null}
-                      dim={t.muted}
-                      height={22}
-                    />
-                  )}
+                  </div>
+
+                  {/* Rhythm glyph or rest indicator */}
+                  <div style={{ marginTop: 5 }}>
+                    {isSilentHere ? (
+                      <div
+                        onClick={() => handleCycleSilence(t.id, false)}
+                        className="relative flex items-center justify-center cursor-pointer transition-opacity hover:opacity-80"
+                        style={{ height: 22 }}
+                        title={isSilentInAll ? 'Click to play in all parts' : `Click to play in ${partName}`}
+                      >
+                        <div className="w-full opacity-20">
+                          <Glyph onsets={[]} dim steps={16} height={22} />
+                        </div>
+                        <span
+                          className="absolute text-[10px] micro tracking-wider opacity-50 select-none"
+                          style={{ color: 'var(--ink)' }}
+                        >
+                          {isSilentInAll ? '— silent in all parts —' : `— silent in ${partName} —`}
+                        </span>
+                      </div>
+                    ) : (
+                      <Glyph
+                        onsets={shape?.onsetGrid}
+                        accents={shape?.accentProfile}
+                        playhead={sounding ? step : null}
+                        dim={t.muted}
+                        height={22}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
             );

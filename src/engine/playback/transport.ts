@@ -9,12 +9,60 @@ import type { Performance, PerfNote, PerfCC } from '../band/performanceData.ts';
 const LOOKAHEAD_SEC = 0.40;
 const TICK_MS = 25;
 
-function createSchedulerWorker(): Worker | null {
-  try {
-    if (typeof window === 'undefined' || typeof Worker === 'undefined') return null;
+let sharedWorkerBlobUrl: string | null = null;
 
-    // Use a Vite-managed module worker instead of a Blob URL. Blob workers are
-    // commonly rejected by CSP in hosted environments (including AI Studio).
+function getSharedWorkerBlobUrl(): string | null {
+  if (sharedWorkerBlobUrl) return sharedWorkerBlobUrl;
+  if (typeof window === 'undefined' || typeof Blob === 'undefined' || typeof URL === 'undefined') return null;
+  try {
+    const inlineWorkerScript = `
+      var timer = null;
+      self.onmessage = function(e) {
+        if (e.data === 'ping') {
+          self.postMessage('pong');
+          return;
+        }
+        if (e.data === 'start') {
+          self.postMessage('tick');
+          if (timer === null) {
+            timer = setInterval(function() {
+              self.postMessage('tick');
+            }, 25);
+          }
+          return;
+        }
+        if (e.data === 'stop') {
+          if (timer !== null) {
+            clearInterval(timer);
+            timer = null;
+          }
+        }
+      };
+    `;
+    const blob = new Blob([inlineWorkerScript], { type: 'application/javascript' });
+    sharedWorkerBlobUrl = URL.createObjectURL(blob);
+    return sharedWorkerBlobUrl;
+  } catch {
+    return null;
+  }
+}
+
+function createSchedulerWorker(): Worker | null {
+  if (typeof window === 'undefined' || typeof Worker === 'undefined') return null;
+
+  // 1. Try Blob worker first with persistent URL:
+  // Instantaneous parse, zero network round-trip, no CORS or module loading delays in Chrome.
+  const blobUrl = getSharedWorkerBlobUrl();
+  if (blobUrl) {
+    try {
+      return new Worker(blobUrl);
+    } catch {
+      // Fall back if Blob workers are restricted
+    }
+  }
+
+  // 2. Fall back to Vite module worker URL
+  try {
     return new Worker(new URL('./schedulerWorker.ts', import.meta.url), {
       type: 'module',
     });
@@ -55,8 +103,6 @@ export class Transport {
 
   private worker: Worker | null = null;
   private fallbackTimer: number | null = null;
-  private livenessTimeout: number | null = null;
-  private workerTicked = false;
   private rafId: number | null = null;
 
   private origin = 0;
@@ -78,35 +124,35 @@ export class Transport {
   constructor(sink: TransportSink, cb: TransportCallbacks = {}) {
     this.sink = sink;
     this.cb = cb;
+    this.initWorker();
+  }
+
+  private initWorker() {
+    if (this.worker) {
+      try {
+        this.worker.terminate();
+      } catch {}
+      this.worker = null;
+    }
     this.worker = createSchedulerWorker();
     if (this.worker) {
       this.worker.onmessage = event => {
         if (event.data !== 'tick') return;
-        this.workerTicked = true;
-        if (this.livenessTimeout !== null) {
-          window.clearTimeout(this.livenessTimeout);
-          this.livenessTimeout = null;
-        }
-        // If the startup liveness check already enabled the timer fallback,
-        // stop it as soon as the worker proves healthy to avoid double ticks.
-        if (this.fallbackTimer !== null) {
-          window.clearInterval(this.fallbackTimer);
-          this.fallbackTimer = null;
-        }
         if (this.running) this.tick();
       };
       this.worker.onerror = () => this.disableWorker();
       this.worker.onmessageerror = () => this.disableWorker();
+      try {
+        this.worker.postMessage('ping');
+      } catch {
+        this.disableWorker();
+      }
     }
   }
 
   private disableWorker() {
     this.worker?.terminate();
     this.worker = null;
-    if (this.livenessTimeout !== null) {
-      window.clearTimeout(this.livenessTimeout);
-      this.livenessTimeout = null;
-    }
     if (this.running && this.fallbackTimer === null) {
       this.fallbackTimer = window.setInterval(() => this.tick(), TICK_MS);
     }
@@ -192,27 +238,22 @@ export class Transport {
     this.endFired = false;
     this.workerTicked = false;
 
-    // Start background lookahead scheduler
+    if (!this.worker) {
+      this.initWorker();
+    }
+
+    // Always run high-precision lookahead timer immediately so playback never stalls
+    if (this.fallbackTimer === null) {
+      this.fallbackTimer = window.setInterval(() => this.tick(), TICK_MS);
+    }
+
+    // Start background lookahead scheduler worker for tab-switch resilience
     if (this.worker) {
       try {
         this.worker.postMessage('start');
       } catch {
         this.disableWorker();
       }
-
-      // Liveness check: if worker doesn't tick within 100ms, fall back to setInterval
-      if (this.worker && this.livenessTimeout !== null) {
-        window.clearTimeout(this.livenessTimeout);
-      }
-      if (this.worker) this.livenessTimeout = window.setTimeout(() => {
-        this.livenessTimeout = null;
-        if (this.running && this.worker && !this.workerTicked && this.fallbackTimer === null) {
-          console.warn("[Transport] Web Worker is blocked or inactive. Falling back to main-thread setInterval.");
-          this.fallbackTimer = window.setInterval(() => this.tick(), TICK_MS);
-        }
-      }, 100);
-    } else if (this.fallbackTimer === null) {
-      this.fallbackTimer = window.setInterval(() => this.tick(), TICK_MS);
     }
 
     // Decoupled visual loop using requestAnimationFrame

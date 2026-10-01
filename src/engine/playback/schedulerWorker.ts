@@ -7,8 +7,15 @@
  */
 let timer: ReturnType<typeof setInterval> | null = null;
 
-self.onmessage = (event: MessageEvent<'start' | 'stop'>) => {
+self.onmessage = (event: MessageEvent<'start' | 'stop' | 'ping'>) => {
+  if (event.data === 'ping') {
+    self.postMessage('pong');
+    return;
+  }
+
   if (event.data === 'start') {
+    // Immediately fire an initial tick so liveness checks succeed instantly
+    self.postMessage('tick');
     if (timer === null) {
       timer = setInterval(() => self.postMessage('tick'), 25);
     }
@@ -22,3 +29,4 @@ self.onmessage = (event: MessageEvent<'start' | 'stop'>) => {
     }
   }
 };
+

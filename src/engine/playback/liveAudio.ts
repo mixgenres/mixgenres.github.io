@@ -16,6 +16,27 @@ import type { Performance } from '../band/performanceData.ts';
 let ctx: AudioContext | null = null;
 let bandWorklet: BandWorkletNode | null = null;
 
+// Synchronous user activation unlock for Chrome/Chromium autoplay policy
+if (typeof window !== 'undefined') {
+  const unlockAudio = () => {
+    try {
+      if (!ctx) {
+        const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+        if (AudioCtx) ctx = new AudioCtx();
+      }
+      if (ctx && ctx.state === 'suspended') {
+        void ctx.resume();
+      }
+    } catch {
+      // Ignore initial touch errors
+    }
+  };
+  window.addEventListener('pointerdown', unlockAudio, { capture: true, passive: true });
+  window.addEventListener('click', unlockAudio, { capture: true, passive: true });
+  window.addEventListener('touchstart', unlockAudio, { capture: true, passive: true });
+  window.addEventListener('keydown', unlockAudio, { capture: true, passive: true });
+}
+
 /** trackId -> instrumentId, so the sink can resolve a physical model per note
  *  even though the transport only ever hands it a bare trackId. Populated by
  *  the UI layer (App.tsx) from the current song's tracks whenever they change. */
