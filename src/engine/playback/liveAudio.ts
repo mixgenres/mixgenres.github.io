@@ -16,25 +16,35 @@ import type { Performance } from '../band/performanceData.ts';
 let ctx: AudioContext | null = null;
 let bandWorklet: BandWorkletNode | null = null;
 
-// Synchronous user activation unlock for Chrome/Chromium autoplay policy
+function getAudioContextCtor(): typeof AudioContext | undefined {
+  if (typeof window === 'undefined') return undefined;
+  return window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+}
+
+/** resume() can stay pending forever in Chrome when there has been no user
+ *  activation, so never await it without a timeout. */
+async function resumeWithTimeout(c: AudioContext, ms = 2000): Promise<void> {
+  if (c.state === 'running') return;
+  await Promise.race([
+    c.resume().catch(() => { /* needs a user gesture */ }),
+    new Promise<void>(resolve => setTimeout(resolve, ms)),
+  ]);
+}
+
+// NOTE: the AudioContext is intentionally NOT created at module load or on the
+// first touch/click of the page. An earlier version registered global
+// pointerdown/touchstart/click listeners that created the context before the
+// user pressed Play. In Chrome a context created without user activation starts
+// "suspended" (WebView relaxes that policy, which is why it "worked" there).
+// The context is now created only inside the Play click (startAudio below), the
+// same lifecycle as the known-good build.
 if (typeof window !== 'undefined') {
-  const unlockAudio = () => {
-    try {
-      if (!ctx) {
-        const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-        if (AudioCtx) ctx = new AudioCtx();
-      }
-      if (ctx && ctx.state === 'suspended') {
-        void ctx.resume();
-      }
-    } catch {
-      // Ignore initial touch errors
+  // Recover from 'interrupted'/'suspended' when the tab comes back to the foreground.
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && ctx && ctx.state !== 'running') {
+      ctx.resume().catch(() => { /* needs a gesture */ });
     }
-  };
-  window.addEventListener('pointerdown', unlockAudio, { capture: true, passive: true });
-  window.addEventListener('click', unlockAudio, { capture: true, passive: true });
-  window.addEventListener('touchstart', unlockAudio, { capture: true, passive: true });
-  window.addEventListener('keydown', unlockAudio, { capture: true, passive: true });
+  });
 }
 
 /** trackId -> instrumentId, so the sink can resolve a physical model per note
@@ -87,16 +97,14 @@ export async function ensureSynth(): Promise<BandWorkletNode> {
   initPromise = (async () => {
     try {
       if (!ctx) {
-        const AudioCtx = window.AudioContext;
+        const AudioCtx = getAudioContextCtor();
+        if (!AudioCtx) throw new Error('Web Audio is not supported in this browser');
         ctx = new AudioCtx();
       }
-      if (ctx.state === 'suspended') {
-        try {
-          await ctx.resume();
-        } catch {
-          // Resume on user action
-        }
-      }
+      await resumeWithTimeout(ctx);
+      console.info(
+        `[audio] state=${ctx.state} sampleRate=${ctx.sampleRate} secureContext=${window.isSecureContext} audioWorklet=${!!ctx.audioWorklet}`,
+      );
 
       const node = new BandWorkletNode();
       await node.initialize(ctx, 1);
@@ -116,13 +124,18 @@ export async function ensureSynth(): Promise<BandWorkletNode> {
 export async function startAudio(): Promise<AudioContext | null> {
   try {
     if (!ctx) {
-      const AudioCtx = window.AudioContext;
+      const AudioCtx = getAudioContextCtor();
+      if (!AudioCtx) throw new Error('Web Audio is not supported in this browser');
       ctx = new AudioCtx();
     }
-    if (ctx.state === 'suspended') {
-      await ctx.resume();
-    }
+    await resumeWithTimeout(ctx);
     await ensureSynth();
+    await resumeWithTimeout(ctx);
+    // Don't report "playing" while the browser is still blocking output:
+    // that is exactly the "it plays but there is no sound" symptom.
+    if (ctx.state !== 'running') {
+      throw new Error(`AudioContext is "${ctx.state}" - the browser is blocking audio until the next tap/click`);
+    }
     return ctx;
   } catch (err) {
     console.error('Failed to start audio engine:', err);

@@ -104,6 +104,7 @@ export class Transport {
   private worker: Worker | null = null;
   private fallbackTimer: number | null = null;
   private rafId: number | null = null;
+  private livenessTimeout: number | null = null;
 
   private origin = 0;
   private startOffset = 0;
@@ -236,7 +237,6 @@ export class Transport {
     this.sink.setPlaybackEnabled?.(true);
     this.running = true;
     this.endFired = false;
-    this.workerTicked = false;
 
     if (!this.worker) {
       this.initWorker();

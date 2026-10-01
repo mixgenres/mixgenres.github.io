@@ -66,7 +66,9 @@ export default function App() {
   const togglePlayback = () => {
     const isStopping = playbackStatus === 'playing' || playbackStatus === 'buffering';
     if (!isStopping) {
-      void startAudio();
+      // Warm up inside the click so the browser sees the user activation;
+      // failures are surfaced by the playback effect below.
+      startAudio().catch(() => { /* handled in the playback effect */ });
     }
     setPlaybackStatus(status =>
       status === 'playing' || status === 'buffering' ? 'paused' : 'buffering'

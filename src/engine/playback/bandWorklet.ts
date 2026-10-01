@@ -204,7 +204,8 @@ export class BandWorkletNode {
       } catch {}
     }
     this.masterChain = createMasterChain(context, initialMixChar, this.activeWorldId);
-    this.masterChain.setPlaybackEnabled(false);
+    // Gate stays OPEN until the transport explicitly closes it (stop/pause), so a
+    // missed 'enable' call can never leave the engine permanently muted.
     this.masterChain.setVolume(volume);
     this.audioNode.connect(this.masterChain.input);
 
