@@ -1,11 +1,15 @@
+// CHECK: every instrument renders through the offline Elementary engine - finite output, produces sound, and its
+// tail dies after note-off. Also records the raw accent-note PEAK per instrument (pre-mix; no makeup/role gain),
+// which reports/level-targets-diff.py reuses as the intrinsic loudness table.
+// Writes audit/instrument-render-audit.json.   Run: npm run check:instrument-render   Exit 1 on failures.
 import { mkdirSync, writeFileSync } from 'node:fs';
 import OfflineRenderer from '@elemaudio/offline-renderer';
-import { INSTRUMENTS_BY_ID } from '../src/data/instruments';
-import { getInstrumentModule } from '../src/engine/playback/instrumentRegistry.ts';
-import { defaultTrackParams, midiToFreq, modelForInstrument, renderTrack } from '../src/engine/playback/elementaryEngine.ts';
-import { getLuthierModelForInstrument } from '../src/engine/playback/luthier.ts';
-import { resolveRenderGesture } from '../src/engine/playback/renderGesture.ts';
-import { codeForGesture } from '../src/engine/band/gestures.ts';
+import { INSTRUMENTS_BY_ID } from '../../src/data/instruments';
+import { getInstrumentModule } from '../../src/engine/playback/instrumentRegistry.ts';
+import { defaultTrackParams, midiToFreq, modelForInstrument, renderTrack } from '../../src/engine/playback/elementaryEngine.ts';
+import { getLuthierModelForInstrument } from '../../src/engine/playback/luthier.ts';
+import { resolveRenderGesture } from '../../src/engine/playback/renderGesture.ts';
+import { codeForGesture } from '../../src/engine/band/gestures.ts';
 
 const sampleRate = 44100;
 const blockSize = 256;

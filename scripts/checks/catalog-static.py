@@ -1,8 +1,11 @@
+# CHECK (no engine, pure source scan): the catalog expansion exists in the genre-local layout - no legacy monolithic
+# module, 145 style ids / 487 pattern ids present, style files in real directories, pattern grids consistent.
+# Run: python3 scripts/checks/catalog-static.py   Exit 1 on failure.
 from __future__ import annotations
 from pathlib import Path
 import re, json
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 SRC = ROOT / "src"
 GENRES = SRC / "data/genres"
 FORMS = SRC / "data/styles/styleFormTemplates.ts"

@@ -1,21 +1,20 @@
-// Static mix schema: resolves every mix value the renderer applies, straight
-// from the same data modules and functions the engine uses, without rendering
-// audio. Used by generate-catalog-schemas.ts (default starters) and
-// generate-mix-schemas.ts (every style).
+// Static mix schema: resolves every mix value the renderer applies (pan, makeup gain, role/genre/instrument dB,
+// track volume -> effective gain), straight from the same data modules and functions the engine uses, WITHOUT
+// rendering audio. Used by reports/style-levels.ts. Optional input: audit/mix-schemas/instrument-levels.json.
 import { existsSync, readFileSync } from 'node:fs';
-import { INSTRUMENTS_BY_ID } from '../src/data/instruments/index.ts';
-import { ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN } from '../src/data/instruments/idClassifiers.ts';
-import { PAN_MAP } from '../src/data/sound/mix/panMap.ts';
-import { ROLE_DB_PROFILES } from '../src/data/sound/mix/roleProfiles.ts';
-import { GENRE_MIX_OFFSETS } from '../src/data/sound/mix/genreMixOffsets.ts';
-import { INSTRUMENT_MIX_TRIMS, ELECTRONIC_MIX_GENRE_PATTERN } from '../src/data/sound/mix/instrumentTrims.ts';
-import { StereoFieldManager } from '../src/engine/studio/panning.ts';
-import { getRoleGainLinear } from '../src/engine/studio/mixer.ts';
-import { makeupGainFor, modelForInstrument, determineBusCategory } from '../src/engine/playback/elementaryEngine.ts';
-import { resolveRenderGesture } from '../src/engine/playback/renderGesture.ts';
-import { resolveInstrumentKitComponent } from '../src/engine/lookup/instrument-components.ts';
-import { resolveStyle } from '../src/engine/style/index.ts';
-import { contractForGenre } from '../src/engine/style/contracts.ts';
+import { INSTRUMENTS_BY_ID } from '../../src/data/instruments/index.ts';
+import { ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN } from '../../src/data/instruments/idClassifiers.ts';
+import { PAN_MAP } from '../../src/data/sound/mix/panMap.ts';
+import { ROLE_DB_PROFILES } from '../../src/data/sound/mix/roleProfiles.ts';
+import { GENRE_MIX_OFFSETS } from '../../src/data/sound/mix/genreMixOffsets.ts';
+import { INSTRUMENT_MIX_TRIMS, ELECTRONIC_MIX_GENRE_PATTERN } from '../../src/data/sound/mix/instrumentTrims.ts';
+import { StereoFieldManager } from '../../src/engine/studio/panning.ts';
+import { getRoleGainLinear } from '../../src/engine/studio/mixer.ts';
+import { makeupGainFor, modelForInstrument, determineBusCategory } from '../../src/engine/playback/elementaryEngine.ts';
+import { resolveRenderGesture } from '../../src/engine/playback/renderGesture.ts';
+import { resolveInstrumentKitComponent } from '../../src/engine/lookup/instrument-components.ts';
+import { resolveStyle } from '../../src/engine/style/index.ts';
+import { contractForGenre } from '../../src/engine/style/contracts.ts';
 
 /** Thresholds used only for the `flags` field; every raw value is reported regardless. */
 export const MIX_FLAG_THRESHOLDS = {

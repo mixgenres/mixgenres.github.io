@@ -1,10 +1,13 @@
+// REPORT: pre-render schema for ONE instrument (physical model, DSP profile, techniques, runtime module path,
+// compiled note/gesture stats in a genre). Was pre-render-schema.ts.
+// Usage: tsx scripts/reports/instrument-schema.ts <instrumentId> [genre]   -> audit/pre-render-schemas/<id>[-genre].json
 import { writeFileSync, mkdirSync } from 'node:fs';
-import { INSTRUMENTS_BY_ID } from '../src/data/instruments';
-import { GENRE_NAMES } from '../src/data/genres';
-import { getInstrumentModule } from '../src/engine/playback/instrumentRegistry.ts';
-import { BANDONEON_142_BUTTONS } from '../src/engine/band/fingering/bandoneon';
-import { makeSheet } from '../src/engine/sheet/sheet.ts';
-import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
+import { INSTRUMENTS_BY_ID } from '../../src/data/instruments';
+import { GENRE_NAMES } from '../../src/data/genres';
+import { getInstrumentModule } from '../../src/engine/playback/instrumentRegistry.ts';
+import { BANDONEON_142_BUTTONS } from '../../src/engine/band/fingering/bandoneon';
+import { makeSheet } from '../../src/engine/sheet/sheet.ts';
+import { compileWholeSong } from '../../src/engine/band/arrangeBand.ts';
 
 const instrumentId = process.argv[2];
 const genre = process.argv[3];

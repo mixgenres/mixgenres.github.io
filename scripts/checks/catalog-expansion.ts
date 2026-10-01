@@ -1,7 +1,10 @@
-import { GENRE_WORLDS, ALL_PATTERNS } from '../src/data/genres';
-import { CATALOG_EXPANSION_STYLE_IDS, STYLE_FORM_TEMPLATES } from '../src/data/styles/styleFormTemplates';
-import { ALL_STYLES } from '../src/engine/style/registry';
-import { INSTRUMENTS_BY_ID } from '../src/engine/lookup/instruments';
+// CHECK: the catalog expansion is complete and well-formed: 32 genres, 145 expansion styles, 487 expansion
+// patterns, each with form templates, lineage, techniques, valid grids, known instruments and one registered owner.
+// Run: npm run check:catalog-expansion   Throws (exit 1) on any failure.
+import { GENRE_WORLDS, ALL_PATTERNS } from '../../src/data/genres';
+import { CATALOG_EXPANSION_STYLE_IDS, STYLE_FORM_TEMPLATES } from '../../src/data/styles/styleFormTemplates';
+import { ALL_STYLES } from '../../src/engine/style/registry';
+import { INSTRUMENTS_BY_ID } from '../../src/engine/lookup/instruments';
 
 const failures: string[] = [];
 const expect = (condition: unknown, message: string) => { if (!condition) failures.push(message); };

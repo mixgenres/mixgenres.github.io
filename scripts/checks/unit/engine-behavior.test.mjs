@@ -1,7 +1,8 @@
+// UNIT (node:test): velocity-for-energy span/clamps and spotlight gain rules.   Run: npm run test:unit
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { velocityForEnergy } from '../src/engine/band/velocity.ts';
-import { spotlightGain } from '../src/engine/band/spotlight.ts';
+import { velocityForEnergy } from '../../../src/engine/band/velocity.ts';
+import { spotlightGain } from '../../../src/engine/band/spotlight.ts';
 
 test('energy 1 to 5 has a strong dynamic span and clamps', () => {
   const table = [1, 2, 3, 4, 5].map(level => velocityForEnergy(level / 5, 1, 1.18));

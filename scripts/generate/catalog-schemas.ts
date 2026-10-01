@@ -1,11 +1,14 @@
+// GENERATOR (writes into src/!): validates every genre/style reference, writes per-genre / per-style / per-starter
+// JSON schemas into audit/catalog-schemas/, then REGENERATES src/data/songs/starters.ts from the canonical starters.
+// Run: npm run generate:catalog   Review the git diff of src/data/songs/starters.ts afterwards.
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { GENRE_WORLDS } from '../src/data/genres/index.ts';
-import { INSTRUMENTS_BY_ID } from '../src/data/instruments/index.ts';
-import { getCanonicalStyle, resolveStyle, ALL_STYLES } from '../src/engine/style/index.ts';
-import { STYLE_FORM_TEMPLATES } from '../src/data/styles/styleFormTemplates.ts';
-import { ALL_PATTERNS } from '../src/data/genres/index.ts';
-import { makeSheet } from '../src/engine/sheet/sheet.ts';
-import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
+import { GENRE_WORLDS } from '../../src/data/genres/index.ts';
+import { INSTRUMENTS_BY_ID } from '../../src/data/instruments/index.ts';
+import { getCanonicalStyle, resolveStyle, ALL_STYLES } from '../../src/engine/style/index.ts';
+import { STYLE_FORM_TEMPLATES } from '../../src/data/styles/styleFormTemplates.ts';
+import { ALL_PATTERNS } from '../../src/data/genres/index.ts';
+import { makeSheet } from '../../src/engine/sheet/sheet.ts';
+import { compileWholeSong } from '../../src/engine/band/arrangeBand.ts';
 
 const root = 'audit/catalog-schemas';
 const genresDir = `${root}/genres`;

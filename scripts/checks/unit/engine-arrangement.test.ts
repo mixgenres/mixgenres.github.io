@@ -1,6 +1,7 @@
+// UNIT: arrangement context / track decision behavior (buildArrangementContext, decide, realizeMidi).   Run: npm run test:unit
 import assert from 'node:assert/strict';
-import { buildArrangementContext, decide } from '../src/engine/sheet/arrangementContext.ts';
-import { realizeMidi } from '../src/engine/band/phrasePerformance.ts';
+import { buildArrangementContext, decide } from '../../../src/engine/sheet/arrangementContext.ts';
+import { realizeMidi } from '../../../src/engine/band/phrasePerformance.ts';
 
 const contract = {
   interactionModel: 'homophonic',

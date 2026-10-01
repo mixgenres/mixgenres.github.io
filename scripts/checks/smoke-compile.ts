@@ -1,6 +1,8 @@
-import { makeSheet } from '../src/engine/sheet/sheet.ts';
-import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
-import { GENRE_FORMS } from '../src/data/genreForms';
+// CHECK (smoke): every genre builds a default sheet and compiles to a non-empty performance without throwing.
+// Run: npm run check:smoke   (part of `npm test`)   Exit 1 if any genre fails.
+import { makeSheet } from '../../src/engine/sheet/sheet.ts';
+import { compileWholeSong } from '../../src/engine/band/arrangeBand.ts';
+import { GENRE_FORMS } from '../../src/data/genreForms';
 
 // Minimal regression check: every genre must build a sheet and compile to a
 // non-empty performance without throwing. This replaced package.json's

@@ -1,11 +1,15 @@
+// RENDER (smoke): 1.5s excerpt of every genre's default song -> MP3 via the Node offline engine, validated with
+// ffprobe (mp3, stereo, 44.1kHz, >0s). Also writes audit/pre-render-schemas/genres/<genre>.json and
+// audit/audio-regression[-start-end].json. Browser master chain is NOT executed.
+// Env: AUDIO_START / AUDIO_END shard the 32 genres.   Run: npm run render:regression
 import { writeFileSync, readFileSync, mkdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
-import { makeSheet } from '../src/engine/sheet/sheet.ts';
-import { GENRE_NAMES } from '../src/data/genres';
-import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
-import { renderPerformanceToMp3 } from '../src/engine/playback/mp3Export.ts';
-import { getInstrumentModule } from '../src/engine/playback/instrumentRegistry.ts';
-import { INSTRUMENTS_BY_ID } from '../src/data/instruments';
+import { makeSheet } from '../../src/engine/sheet/sheet.ts';
+import { GENRE_NAMES } from '../../src/data/genres';
+import { compileWholeSong } from '../../src/engine/band/arrangeBand.ts';
+import { renderPerformanceToMp3 } from '../../src/engine/playback/mp3Export.ts';
+import { getInstrumentModule } from '../../src/engine/playback/instrumentRegistry.ts';
+import { INSTRUMENTS_BY_ID } from '../../src/data/instruments';
 
 const allCases = Object.keys(GENRE_NAMES).map(genre => [genre, genre] as const);
 const start = Number(process.env.AUDIO_START ?? 0);

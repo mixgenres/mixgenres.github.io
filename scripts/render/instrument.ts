@@ -1,12 +1,12 @@
 // Renders one instrument lane in isolation through the exact offline engine used
-// by the application. Usage: npx tsx scripts/render-instrument.ts <instrumentId> [genre] [out.mp3]
+// by the application. Usage: npx tsx scripts/render/instrument.ts <instrumentId> [genre] [out.mp3]
 import { writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
-import { GENRE_NAMES } from '../src/data/genres';
-import { makeSheet } from '../src/engine/sheet/sheet.ts';
-import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
-import { renderPerformanceToMp3 } from '../src/engine/playback/mp3Export.ts';
-import { INSTRUMENTS_BY_ID } from '../src/data/instruments';
+import { GENRE_NAMES } from '../../src/data/genres';
+import { makeSheet } from '../../src/engine/sheet/sheet.ts';
+import { compileWholeSong } from '../../src/engine/band/arrangeBand.ts';
+import { renderPerformanceToMp3 } from '../../src/engine/playback/mp3Export.ts';
+import { INSTRUMENTS_BY_ID } from '../../src/data/instruments';
 import { spawnSync } from 'node:child_process';
 
 const instrumentId = process.argv[2] || 'trumpet';

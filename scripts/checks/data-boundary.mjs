@@ -1,3 +1,6 @@
+// CHECK: src/data is pure data. No file under src/data may import an external package or anything outside src/data,
+// and every instrument in the catalog must have a DSP definition (and vice versa).
+// Run: npm run check:data-boundary   (part of `npm run check`)   Exit 1 on violations.
 import fs from 'node:fs';
 import path from 'node:path';
 

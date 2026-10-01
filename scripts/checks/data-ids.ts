@@ -1,13 +1,16 @@
+// CHECK: id integrity across the data catalog - patterns (meter/cycle/grid/profile ranges, unique ids, present in the
+// global catalog), styles (world match, registered, form template, known instruments) and instrument references.
+// Writes audit/data-id-audit.json.   Run: npm run check:ids   (part of `npm run check`)   Exit 1 on errors.
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { GENRE_WORLDS, ALL_PATTERNS } from '../src/data/genres/index.ts';
-import { INSTRUMENT_CATALOG, INSTRUMENTS_BY_ID } from '../src/data/instruments/index.ts';
-import { ALL_STYLES, ALL_STYLES_BY_ID } from '../src/engine/style/registry.ts';
-import { STYLE_FORM_TEMPLATES } from '../src/data/styles/styleFormTemplates.ts';
-import { INSTRUMENT_PATTERN_KIND_RULES } from '../src/data/instruments/patternKinds.ts';
-import { starterSongs } from '../src/data/songs/starters.ts';
-import { getInstrumentModule } from '../src/engine/playback/instrumentRegistry.ts';
-import { validateSongStyle } from '../src/data/styles/validation.ts';
-import { validateInstrumentDef } from '../src/data/instruments/validation.ts';
+import { GENRE_WORLDS, ALL_PATTERNS } from '../../src/data/genres/index.ts';
+import { INSTRUMENT_CATALOG, INSTRUMENTS_BY_ID } from '../../src/data/instruments/index.ts';
+import { ALL_STYLES, ALL_STYLES_BY_ID } from '../../src/engine/style/registry.ts';
+import { STYLE_FORM_TEMPLATES } from '../../src/data/styles/styleFormTemplates.ts';
+import { INSTRUMENT_PATTERN_KIND_RULES } from '../../src/data/instruments/patternKinds.ts';
+import { starterSongs } from '../../src/data/songs/starters.ts';
+import { getInstrumentModule } from '../../src/engine/playback/instrumentRegistry.ts';
+import { validateSongStyle } from '../../src/data/styles/validation.ts';
+import { validateInstrumentDef } from '../../src/data/instruments/validation.ts';
 
 const errors: string[] = [];
 const warnings: string[] = [];
