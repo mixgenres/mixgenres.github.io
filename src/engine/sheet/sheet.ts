@@ -638,7 +638,27 @@ export function suggestPattern(
     .sort((a, b) => b.n - a.n);
 
   const viable = scored.filter(x => x.n > -150);
-  if (!viable.length) return undefined;
+  if (!viable.length) {
+    // A playable instrument must not become silent merely because the style's
+    // affinity/avoid rules rejected every preferred cell. Do one final hard
+    // compatibility search without style scoring. This is especially important
+    // when the user reduces the ensemble to a single instrument.
+    const fallback = rawCandidates
+      .filter(p => {
+        const targets = new Set([...(p.instruments ?? []).map(String), ...(p.compatibleInstruments ?? []).map(String)]);
+        const instrumentMatch = [...targets].some(k => instrumentKinds.has(k));
+        const roleMatch = p.roles.some(r => r === voice.role || p.compatibleRoles?.includes(voice.role) || instrumentKinds.has(r));
+        return targets.size === 0 || instrumentMatch || roleMatch;
+      })
+      .sort((a, b) => {
+        const aw = a.worldId === worldId ? 1 : 0;
+        const bw = b.worldId === worldId ? 1 : 0;
+        const ar = a.roles.includes(voice.role) ? 1 : 0;
+        const br = b.roles.includes(voice.role) ? 1 : 0;
+        return bw - aw || br - ar || a.id.localeCompare(b.id);
+      })[0];
+    return fallback?.id;
+  }
   const best = viable[0].n;
   const window = viable.filter(x => x.n >= best - 25).slice(0, 10);
   return window[Math.floor(hash(`pick:${worldId}:${voice.instrumentId}:${sectionKind ?? 'body'}`, salt) * window.length)]?.id

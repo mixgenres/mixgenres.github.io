@@ -166,7 +166,7 @@ const STYLE_2: GenreStyleDefinition = {
         "name": "Lo-Fi",
         "origin": "Tokyo / Internet / Global",
         "era": "2010s–Present",
-        "description": "Warm • Vinyl Noise • Relaxed\nJazzy,",
+        "description": "Warm • Vinyl Noise • Relaxed\nJazzy, dusty and sample-driven with laid-back pocket.",
         "characteristicInstruments": [
           "sampler",
           "piano",

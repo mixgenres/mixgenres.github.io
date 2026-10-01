@@ -253,7 +253,7 @@ const STYLE_3: GenreStyleDefinition = {
         "name": "Tarraxinha",
         "origin": "Luanda, Angola",
         "era": "Late 1990s–Present",
-        "description": "Sensual • Deep Bass • Micro-movement\nSlow,",
+        "description": "Sensual • Deep Bass • Micro-movement\nSlow, intimate tarraxinha pulse with restrained syncopation.",
         "characteristicInstruments": [
           "sub-bass",
           "drums",

@@ -762,6 +762,18 @@ function resolveBandoneonPhysicalFingering(track: Voice, notes: PerfNote[]): voi
   const preferredSide: 1 | 2 = /bass|low|accompan|comp/.test(role) ? 2 : 1;
   const sorted = notes.slice().sort((a, b) => a.time - b.time || a.midi - b.midi);
 
+  const nearestPlayable = (midi: number) => {
+    let best: { midi: number; distance: number } | undefined;
+    for (let candidate = 36; candidate <= 95; candidate++) {
+      if (!bandoneonPlayable(candidate)) continue;
+      const distance = Math.abs(candidate - midi);
+      if (!best || distance < best.distance || (distance === best.distance && candidate < best.midi)) {
+        best = { midi: candidate, distance };
+      }
+    }
+    return best?.midi;
+  };
+
   // A bisonoric bandoneón is not a collection of independent monophonic
   // switches. A chord is a physical event: its buttons must be playable under
   // one bellows direction. Resolve simultaneous attacks as a phrase-level
@@ -829,5 +841,32 @@ function resolveBandoneonPhysicalFingering(track: Voice, notes: PerfNote[]): voi
       n.bandoneonSideCode = chosen.side === 'right' ? 1 : 2;
     }
     i = j;
+  }
+
+  // Never let an unresolved bisonoric note reach the renderer. If neither
+  // bellows direction contains the requested pitch, fold to the nearest actual
+  // button pitch and assign its physical button/direction. The old path could
+  // silently continue here, leaving a single-bandoneon performance with no
+  // renderable notes.
+  for (const n of sorted) {
+    if (n.bandoneonButtonId) continue;
+    const playable = nearestPlayable(Math.round(n.midi));
+    if (playable === undefined) continue;
+    n.midi = playable;
+    n.frequencyHz = undefined;
+    const open = bandoneonCandidates(playable, 'open');
+    const close = bandoneonCandidates(playable, 'close');
+    const candidates = open.length ? open : close;
+    const direction: 1 | 2 = open.length ? 1 : 2;
+    const chosen = candidates.slice().sort((a, b) => {
+      const aSide = a.side === (preferredSide === 1 ? 'right' : 'left') ? 0 : 1;
+      const bSide = b.side === (preferredSide === 1 ? 'right' : 'left') ? 0 : 1;
+      return aSide - bSide || a.id.localeCompare(b.id);
+    })[0];
+    if (!chosen) continue;
+    n.bellowsDirectionCode = direction;
+    n.bandoneonButtonId = chosen.id;
+    n.bandoneonButtonIndex = BANDONEON_142_BUTTONS.indexOf(chosen);
+    n.bandoneonSideCode = chosen.side === 'right' ? 1 : 2;
   }
 }

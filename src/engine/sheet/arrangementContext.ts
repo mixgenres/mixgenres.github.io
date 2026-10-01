@@ -167,6 +167,26 @@ function normalizeSectionKey(value: string): string {
     .toLowerCase().replace(/[^a-z0-9]+/g, '');
 }
 
+/**
+ * Semantic aliases are deliberately narrower than the old universal `verse`
+ * fallback. They let a catalog use its own cultural vocabulary (coro/chorus,
+ * verso/verse, falseta/solo, cierre/coda, etc.) without ever rotating a named
+ * section into an unrelated authored cell. A semantic alias is used only when
+ * the section has exactly one authored candidate in that class.
+ */
+function sectionSemanticClass(value: string): string | undefined {
+  const k = normalizeSectionKey(value);
+  if (!k) return undefined;
+  if (/^(intro|introduccion|salida|opening|quietintro|introtexture)$/.test(k)) return 'intro';
+  if (/^(verse|verso|letra|tema|canto|pregon|parta|partb|strain[abcd]|statement)$/.test(k)) return 'verse';
+  if (/^(chorus|coro|refrain|hook|shoutchorus|montuno|remate)$/.test(k)) return 'chorus';
+  if (/^(bridge|puente|break|breakdown|drop|gearshift|machine|texturebloom|build|buildup)$/.test(k)) return 'bridge';
+  if (/^(solo|trading|instrumental|falseta|variacion|descarga|mambo|development|opensolo|collectiveimprovisation|guitarsolo)$/.test(k)) return 'solo';
+  if (/^(coda|cierre|outro|ending|tag|release|decay)$/.test(k)) return 'ending';
+  if (/^(head|theme|strain|groove|loop|vamp)$/.test(k)) return 'head';
+  return undefined;
+}
+
 export function progressionForSection(
   sectionProgressions: Record<string, string[]> | undefined,
   formKey: string,
@@ -186,6 +206,26 @@ export function progressionForSection(
   if (strictNamedSection) {
     throw new Error(`Missing authored section progression for formKey="${formKey}" kind="${kind}"; refusing positional harmony fallback.`);
   }
+
+  // If the catalog uses a cultural synonym, reuse it only when the synonym is
+  // unambiguous. This is intentionally not a nearest-string or positional
+  // match: a named B section must never inherit an arbitrary A/verse cell.
+  const semantic = sectionSemanticClass(`${kind} ${formKey}`);
+  if (semantic) {
+    const semanticEntries = Object.entries(sectionProgressions).filter(([key, value]) =>
+      value?.length && sectionSemanticClass(key) === semantic
+    );
+    if (semanticEntries.length === 1) return compactDefaultChordLoop(semanticEntries[0][1], contract);
+  }
+
+  // A one-cell authored style is an intentional vamp often used by electronic,
+  // funk and loop-based catalogs. Preserve that authored cell instead of
+  // silently replacing it with the genre's generic first progression.
+  const authoredEntries = Object.values(sectionProgressions).filter(value => value?.length);
+  if (authoredEntries.length === 1) return compactDefaultChordLoop(authoredEntries[0], contract);
+
+  // Multiple authored cells with no matching identity are ambiguous. Use the
+  // caller's explicit fallback rather than borrowing another named section.
   return compactDefaultChordLoop(fallback, contract);
 }
 

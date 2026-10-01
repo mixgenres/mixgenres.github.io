@@ -24,8 +24,8 @@ export default class ShakerModule implements InstrumentModule {
 
     const instId = (params.instrumentId ?? '').toLowerCase();
     const isScraper = instrumentHasKey(instId, ENGINE_INSTRUMENT_KEYS.scraper);
-    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''}`);
+    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''}`);
 
     if (isScraper) {
       return this.renderScrape(ctx, hitSeed, isKizomba && instId === 'dikanza');

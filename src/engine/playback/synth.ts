@@ -15,10 +15,10 @@ export default class SynthModule implements InstrumentModule {
     } = ctx;
 
     const instId = (params.instrumentId ?? '').toLowerCase();
-    const isTangoSampler = instId === 'sampler' && TANGO_ELECTRONICO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isTangoSampler = instId === 'sampler' && TANGO_ELECTRONICO_PATTERN.test(`${params.genreId ?? ''}`);
+    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''}`);
     const urbanSynthResponse = isKizomba ? URBAN_LATIN_INSTRUMENT_RESPONSE.synth.kizomba : URBAN_LATIN_INSTRUMENT_RESPONSE.synth.reggaeton;
-    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''}`);
     const gd = ctx.genreDialect;
     const genre = gd.id;
     if (isKizomba || isReggaeton) {

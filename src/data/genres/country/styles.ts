@@ -177,7 +177,7 @@ const STYLE_2: GenreStyleDefinition = {
         "name": "Bluegrass",
         "origin": "Kentucky / Appalachia",
         "era": "1940s–Present",
-        "description": "Acoustic • High-Speed • Virtuosic\nFast banjo,",
+        "description": "Acoustic • High-Speed • Virtuosic\nFast banjo, fiddle and mandolin interplay with tight bluegrass drive.",
         "characteristicInstruments": [
           "banjo",
           "mandolin",

@@ -346,7 +346,7 @@ export class BandWorkletNode {
         const dialect = resolveDialect(instrumentId, this.activeWorldId, this.activeStyleId);
         if (dialect) {
           params.instrumentDialectId = dialect.id;
-      params.dialect = dialect.id;
+      params.dialect = params.genreId;
           params.performanceMode = dialect.performanceMode;
           if (dialect.pluckPositionOverride !== undefined) params.pluckPosition = dialect.pluckPositionOverride;
           if (dialect.bowPressureOverride !== undefined) params.bowPressure = dialect.bowPressureOverride;
@@ -562,7 +562,7 @@ export class BandWorkletNode {
       const dialect = resolveDialect(instrumentId, this.activeWorldId, this.activeStyleId);
       if (dialect) {
         p.instrumentDialectId = dialect.id;
-        p.dialect = dialect.id;
+        p.dialect = p.genreId;
         p.performanceMode = dialect.performanceMode;
         if (dialect.pluckPositionOverride !== undefined) p.pluckPosition = dialect.pluckPositionOverride;
         if (dialect.bowPressureOverride !== undefined) p.bowPressure = dialect.bowPressureOverride;

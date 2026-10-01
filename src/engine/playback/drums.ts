@@ -31,9 +31,9 @@ export default class DrumsModule implements InstrumentModule {
     const f0 = el.mul(freqSignal, Math.pow(2, detuneSemitones / 12));
 
     const instId = (params.instrumentId ?? '').toLowerCase();
-    const isTangoElectronico = TANGO_ELECTRONICO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isTangoElectronico = TANGO_ELECTRONICO_PATTERN.test(`${params.genreId ?? ''}`);
+    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''}`);
+    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''}`);
     const gd = ctx.genreDialect;
     const genre = gd.id;
     const component = resolveInstrumentKitComponent(instId, voice.note, `${action} ${voice.action ?? ''}`);

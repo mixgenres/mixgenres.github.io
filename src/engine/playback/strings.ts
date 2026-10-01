@@ -15,7 +15,7 @@ export default class StringsModule implements InstrumentModule {
       params,
       action
     } = ctx;
-    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''}`);
     const tangoResponse = TANGO_INSTRUMENT_RESPONSE.strings;
     const isStaccato = action === 'staccato' || action === 'marcato' || /marcato|staccato/i.test(action ?? '');
 

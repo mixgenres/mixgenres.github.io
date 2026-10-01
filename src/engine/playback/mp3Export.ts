@@ -161,7 +161,7 @@ export async function renderPerformanceToMp3(
     }
     if (dialect) {
       params.instrumentDialectId = dialect.id;
-      params.dialect = dialect.id;
+      params.dialect = params.genreId;
       params.performanceMode = dialect.performanceMode;
       if (dialect.pluckPositionOverride !== undefined) params.pluckPosition = dialect.pluckPositionOverride;
       if (dialect.bowPressureOverride !== undefined) params.bowPressure = dialect.bowPressureOverride;

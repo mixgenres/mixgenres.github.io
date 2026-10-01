@@ -24,10 +24,10 @@ export default class ElectricGuitarModule implements InstrumentModule {
     const isDistortion = model === 24;
     const isOverdrive = model === 25;
     const isHarmonics = model === 26;
-    const isTangoNuevo = TANGO_NUEVO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isTangoNuevo = TANGO_NUEVO_PATTERN.test(`${params.genreId ?? ''}`);
     const tangoResponse = TANGO_INSTRUMENT_RESPONSE.electricGuitar;
-    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''}`);
+    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''}`);
     const isUrbanLatin = isKizomba || isReggaeton;
     const isArrastre = ctx.action === 'arrastre' || /arrastre|slide/i.test(ctx.action ?? '');
     const isMarcato = ctx.action === 'marcato' || /marcato/i.test(ctx.action ?? '');

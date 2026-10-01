@@ -16,7 +16,7 @@ export default class RhodesModule implements InstrumentModule {
       params,
       action
     } = ctx;
-    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''}`);
     const gd = ctx.genreDialect;
     const genre = gd.id;
     if (isKizomba) {

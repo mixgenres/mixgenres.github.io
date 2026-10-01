@@ -40,11 +40,11 @@ export default class UprightBassModule implements InstrumentModule {
     const isLija = action === 'lija' || /lija|sandpaper/i.test(action ?? '');
     const isTambor = action === 'tambor' || action === 'body-tap' || /tambor/i.test(action ?? '');
     const isChicharra = action === 'chicharra' || /chicharra/i.test(action ?? '');
-    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''}`);
     const tangoResponse = TANGO_INSTRUMENT_RESPONSE.uprightBass;
     const isMarcato = action === 'marcato' || /marcato|marked/i.test(action ?? '');
-    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''}`);
+    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''}`);
     const isSubBass = instrumentHasKey(params.instrumentId ?? '', ENGINE_INSTRUMENT_KEYS.subBass);
     const gd = ctx.genreDialect;
     const genre = gd.id;

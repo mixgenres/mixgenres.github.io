@@ -47,7 +47,7 @@ export default class SpanishGuitarModule implements InstrumentModule {
     const isTremolo = action === 'tremolo' || /tremolo/i.test(action ?? '');
     const isHarmonic = action === 'harmonic' || /harmonic/i.test(action ?? '');
     const isLegato = action === 'legato' || action === 'slur' || action === 'hammer-on' || action === 'pull-off';
-    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''}`);
     const tangoResponse = TANGO_INSTRUMENT_RESPONSE.spanishGuitar;
     const isMarcato = action === 'marcato' || /marcato|marked/i.test(action ?? '');
     const isArrastre = action === 'arrastre' || /arrastre|drag/i.test(action ?? '');

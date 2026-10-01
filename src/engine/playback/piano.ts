@@ -50,7 +50,7 @@ export default class PianoModule implements InstrumentModule {
     const isChapa = action === 'chapa' || /chapa|muted/i.test(action ?? '') || params.mute > 0.4;
     const isCampana = action === 'campana' || /campana|bell/i.test(action ?? '');
     const isPesada = action === 'pesada' || /pesada/i.test(action ?? '');
-    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''}`);
     const tangoResponse = TANGO_INSTRUMENT_RESPONSE.piano;
     const isCampanitas = action === 'campanitas' || /campanitas/i.test(action ?? '');
     const gd = ctx.genreDialect;
