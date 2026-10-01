@@ -61,8 +61,45 @@ function shortDescription(value: string): string {
   return String(value ?? '').replace(/\s+/g, ' ').trim();
 }
 
-export function cleanPatternName(name: string, shortName?: string): string {
-  return shortName || String(name ?? '').replace(/\s*\([^)]*\)/g, '').replace(/\s*\/\s*/g, '/').trim();
+const DISPLAY_GENRE_NAMES: Record<string, string[]> = {
+  'afrobeats': ['Afrobeats'], 'bachata': ['Bachata'], 'blues': ['Blues'], 'country': ['Country'],
+  'cumbia': ['Cumbia'], 'electronic': ['Electronic'], 'flamenco': ['Flamenco'], 'funk': ['Funk'],
+  'hip-hop': ['Hip Hop'], 'jazz': ['Jazz'], 'kizomba': ['Kizomba'], 'metal': ['Metal'],
+  'rock': ['Rock'], 'salsa': ['Salsa'], 'ska': ['Ska'], 'tango': ['Tango'], 'timba': ['Timba'],
+  'zouk': ['Zouk'], 'swing': ['Swing'], 'folk': ['Folk'], 'disco': ['Disco'], 'house': ['House'],
+  'reggae': ['Reggae'], 'reggaeton': ['Reggaeton'], 'soul': ['Soul'], 'r-and-b': ['R&B'],
+  'drum-and-bass': ['Drum & Bass'], 'industrial': ['Industrial'], 'punk-hardcore': ['Punk'],
+  'uk-bass': ['UK Bass'], 'gospel': ['Gospel'], 'brazilian': ['Brazilian'],
+};
+
+/** User-facing pattern names are concise musical names; IDs remain the stable identity. */
+export function cleanPatternName(name: string, shortName?: string, worldId?: string): string {
+  let value = String(shortName || name || '')
+    .replace(/\s*\([^)]*\)/g, '')
+    .replace(/\s*\/\s*/g, '/')
+    .replace(/\s+Signature Cell\b/gi, '')
+    .replace(/\s+Cell\b/gi, '')
+    .replace(/\bPattern\b/gi, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+
+  const genreNames = DISPLAY_GENRE_NAMES[String(worldId ?? '')] ?? [];
+  for (const genre of genreNames) {
+    const escaped = genre.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    value = value.replace(new RegExp(`^${escaped}\\s+`, 'i'), '');
+  }
+
+  // In Flamenco, these are descriptive redundancies rather than names musicians
+  // need to see in a pattern picker; the palo/technique name carries the identity.
+  if (worldId === 'flamenco') {
+    value = value.replace(/\bFlamenco\s+(?=(Tremolo|Fusion)\b)/gi, '');
+    value = value.replace(/\bTangos\s+Flamencos\s+/gi, 'Tangos ');
+    value = value.replace(/\b4-Note\s+/gi, '4-note ');
+  }
+
+  value = value.replace(/\s+—\s+(alternate phrasing|sparse variation|accent shift|transition variation|played variation)$/i,
+    (_, variant: string) => ` — ${variant.replace(/ variation$/i, '').replace(/^alternate phrasing$/i, 'alternate')}`);
+  return value.replace(/\s{2,}/g, ' ').trim();
 }
 
 export function cleanGenreName(id: string, name?: string): string {
@@ -72,7 +109,7 @@ export function cleanGenreName(id: string, name?: string): string {
 function normalizePattern(pattern: MusicalPattern): MusicalPattern {
   return {
     ...pattern,
-    name: cleanPatternName(pattern.name, pattern.shortName),
+    name: cleanPatternName(pattern.name, pattern.shortName, pattern.worldId),
     description: shortDescription(pattern.description),
     variants: (pattern.variants ?? []).map(variant => ({
       ...variant,
@@ -97,18 +134,7 @@ for (const world of GENRE_WORLDS) {
   }
 }
 
-const namedPatternCounts = new Map<string, number>();
-for (const pattern of uniquePatterns.values()) {
-  const key = pattern.name.trim().toLowerCase();
-  namedPatternCounts.set(key, (namedPatternCounts.get(key) ?? 0) + 1);
-}
-
-export const ALL_PATTERNS: MusicalPattern[] = [...uniquePatterns.values()].map(pattern => {
-  const key = pattern.name.trim().toLowerCase();
-  if ((namedPatternCounts.get(key) ?? 0) <= 1) return pattern;
-  const genre = String(pattern.worldId ?? pattern.family ?? 'source').replace(/[-_]+/g, ' ');
-  return { ...pattern, name: `${genre.replace(/\b\w/g, letter => letter.toUpperCase())} ${pattern.name} [${pattern.id}]` };
-});
+export const ALL_PATTERNS: MusicalPattern[] = [...uniquePatterns.values()];
 
 export const PATTERNS_BY_ID: Record<string, MusicalPattern> = Object.fromEntries(
   ALL_PATTERNS.map(pattern => [pattern.id, pattern])

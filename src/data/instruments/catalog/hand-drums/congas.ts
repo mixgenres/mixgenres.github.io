@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../../schema/instrument-def';
 
 export const congas: InstrumentDef = {
   id: "congas",
-  name: "Congas (Tumbadoras)",
+  name: "Congas",
   family: "hand-drums",
   drum: {
     low: 64,

@@ -175,7 +175,7 @@ const FUNK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "funk-chicken-scratch-guitar",
           "worldId": "funk",
           "styleIds": ["funk-p-funk"],
-          "name": "Chicken-Scratch 9th Chords (Muted 16th Strum)",
+          "name": "Chicken-Scratch 9th Chords",
           "family": "Funk Guitar",
           "category": "ostinato",
           "description": "Rapid 16th-note muted rhythmic scratches add a crisp, percussive guitar layer.",
@@ -295,7 +295,7 @@ const FUNK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "funk-chicken-scratch-guitar-v-02",
               "parentPatternId": "funk-chicken-scratch-guitar",
-              "name": "Chicken-Scratch 9th Chords (Muted 16th Strum) — accent shift",
+              "name": "Chicken-Scratch 9th Chords — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -473,7 +473,7 @@ const FUNK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "funk-anchor-15-v-01",
               "parentPatternId": "funk-anchor-15",
-              "name": "Pocket Anchor — sparse variation",
+              "name": "Pocket Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -829,7 +829,7 @@ const FUNK_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "funk-16th-strum-v-01",
               "parentPatternId": "funk-16th-strum",
-              "name": "16th Note Strum — sparse variation",
+              "name": "16th Note Strum — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1007,7 +1007,7 @@ const FUNK_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "funk-slap-bass-v-01",
               "parentPatternId": "funk-slap-bass",
-              "name": "Slap Bass — sparse variation",
+              "name": "Slap Bass — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1174,7 +1174,7 @@ const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "funk-ghost-snares-v-01",
               "parentPatternId": "funk-ghost-snares",
-              "name": "Ghost Snares — sparse variation",
+              "name": "Ghost Snares — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1331,7 +1331,7 @@ const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "funk-clavinet-v-01",
               "parentPatternId": "funk-clavinet",
-              "name": "Clavinet Sync — sparse variation",
+              "name": "Clavinet Sync — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1463,7 +1463,7 @@ const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "funk-horn-section-v-01",
               "parentPatternId": "funk-horn-section",
-              "name": "Horn Section Hits — sparse variation",
+              "name": "Horn Section Hits — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1588,7 +1588,7 @@ const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "funk-soul-bass-v-01",
               "parentPatternId": "funk-soul-bass",
-              "name": "Motown Bass — sparse variation",
+              "name": "Motown Bass — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1727,7 +1727,7 @@ const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "funk-hihat-open-v-01",
               "parentPatternId": "funk-hihat-open",
-              "name": "Open Hi-Hat — sparse variation",
+              "name": "Open Hi-Hat — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1854,7 +1854,7 @@ const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "funk-neo-soul-beat-v-01",
               "parentPatternId": "funk-neo-soul-beat",
-              "name": "Neo-Soul Drag — sparse variation",
+              "name": "Neo-Soul Drag — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1993,7 +1993,7 @@ const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "funk-wah-guitar-v-01",
               "parentPatternId": "funk-wah-guitar",
-              "name": "Wah-Wah Guitar — sparse variation",
+              "name": "Wah-Wah Guitar — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2169,7 +2169,7 @@ const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "funk-comp-16-v-01",
               "parentPatternId": "funk-comp-16",
-              "name": "Clav Comping — sparse variation",
+              "name": "Clav Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2536,8 +2536,8 @@ const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "funk-one-pocket-funk-james-brown"
     ],
-    "name": "One-Pocket Funk — James Brown Signature Cell",
-    "shortName": "One-Pocket Funk — James Brown Cell",
+    "name": "One-Pocket Funk — James Brown",
+    "shortName": "One-Pocket Funk — James Brown",
     "family": "funk",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2615,8 +2615,8 @@ const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "funk-minneapolis-funk"
     ],
-    "name": "Minneapolis Funk Signature Cell",
-    "shortName": "Minneapolis Funk Cell",
+    "name": "Minneapolis Funk",
+    "shortName": "Minneapolis Funk",
     "family": "funk",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2694,8 +2694,8 @@ const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "funk-jazz-funk"
     ],
-    "name": "Jazz-Funk Signature Cell",
-    "shortName": "Jazz-Funk Cell",
+    "name": "Jazz-Funk",
+    "shortName": "Jazz-Funk",
     "family": "funk",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2770,8 +2770,8 @@ const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "funk-p-funk-cosmic"
     ],
-    "name": "P-Funk Cosmic Signature Cell",
-    "shortName": "P-Funk Cosmic Cell",
+    "name": "P-Funk Cosmic",
+    "shortName": "P-Funk Cosmic",
     "family": "funk",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2931,7 +2931,7 @@ const FUNK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "funk-phrase-13-v-01",
               "parentPatternId": "funk-phrase-13",
-              "name": "Vamp Phrase — sparse variation",
+              "name": "Vamp Phrase — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3031,7 +3031,7 @@ const FUNK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "id": "funk--phrasing",
           "worldId": "funk",
           "styleIds": ["funk-p-funk"],
-          "name": "Funk Vocal Phrasing",
+          "name": "Vocal Phrasing",
           "family": "Vocal Phrasing",
           "category": "phrasePattern",
           "description": "Rhythmic vocal hook template that uses",
@@ -3110,7 +3110,7 @@ const FUNK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "funk--phrasing-v--alt",
               "parentPatternId": "funk--phrasing",
-              "name": "Funk Vocal Phrasing — alternate phrasing",
+              "name": "Vocal Phrasing — alternate",
               "variationType": "phraseStart",
               "probability": 0.2,
               "description": "An alternate vocal entry shifts the placement of a phrase for subtle rhythmic variation.",
@@ -3150,7 +3150,7 @@ const FUNK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "funk--phrasing-v-final-accent",
               "parentPatternId": "funk--phrasing",
-              "name": "Funk Vocal Phrasing — accent shift",
+              "name": "Vocal Phrasing — accent shift",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "Same rhythmic shape with shifted emphasis",
@@ -3293,7 +3293,7 @@ const FUNK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "funk-call-14-v-01",
               "parentPatternId": "funk-call-14",
-              "name": "Break Response — sparse variation",
+              "name": "Break Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3377,7 +3377,7 @@ const FUNK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "funk-call-14-v-03",
               "parentPatternId": "funk-call-14",
-              "name": "Break Response — transition variation",
+              "name": "Break Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3815,8 +3815,8 @@ const FUNK_WORLD_PATTERNS_LEAD: MusicalPattern[] = [
       "funk-jazz-funk",
       "funk-p-funk-cosmic"
     ],
-    "name": "funk horn stab",
-    "shortName": "funk horn stab",
+    "name": "horn stab",
+    "shortName": "horn stab",
     "family": "funk",
     "category": "lead",
     "description": "Technique: funk horn stab",

@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../../schema/instrument-def';
 
 export const english_horn: InstrumentDef = {
   id: "english-horn",
-  name: "English horn (Cor anglais)",
+  name: "English Horn",
   family: "winds",
   octave: 12,
   voicing: "single",

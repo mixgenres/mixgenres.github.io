@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../../schema/instrument-def';
 
 export const kick: InstrumentDef = {
   id: "kick",
-  name: "Bass drum (Kick)",
+  name: "Kick Drum",
   family: "kit",
   drum: {
     low: 36,

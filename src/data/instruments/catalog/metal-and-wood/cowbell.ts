@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../../schema/instrument-def';
 
 export const cowbell: InstrumentDef = {
   id: "cowbell",
-  name: "Cowbell (Cencerro)",
+  name: "Cencerro",
   family: "metal-and-wood",
   drum: {
     low: 56,

@@ -6,7 +6,7 @@ const SKA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "sk-offbeat-chop",
           "worldId": "ska",
           "styleIds": ["ska-trad-ska"],
-          "name": "Ska Offbeat Chop",
+          "name": "Offbeat Chop",
           "family": "Ska Skank",
           "category": "ostinato",
           "description": "Short guitar/piano attacks on every offbeat,",
@@ -75,7 +75,7 @@ const SKA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "sk-offbeat-chop-v-sparse",
               "parentPatternId": "sk-offbeat-chop",
-              "name": "Ska Offbeat Chop — sparse",
+              "name": "Offbeat Chop — sparse",
               "variationType": "sparse",
               "probability": 0.35,
               "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
@@ -91,7 +91,7 @@ const SKA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "sk-offbeat-chop-v-shift",
               "parentPatternId": "sk-offbeat-chop",
-              "name": "Ska Offbeat Chop — accent shift",
+              "name": "Offbeat Chop — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
@@ -253,7 +253,7 @@ const SKA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "id": "sk-walking-bass",
           "worldId": "ska",
           "styleIds": ["ska-trad-ska"],
-          "name": "Ska Walking Bass",
+          "name": "Walking Bass",
           "family": "Ska Bass",
           "category": "phrasePattern",
           "description": "Walking bass connects chord roots with passing notes.",
@@ -335,7 +335,7 @@ const SKA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "sk-walking-bass-v-sparse",
               "parentPatternId": "sk-walking-bass",
-              "name": "Ska Walking Bass — sparse",
+              "name": "Walking Bass — sparse",
               "variationType": "sparse",
               "probability": 0.35,
               "description": "Leaves selected attacks open to create a more spacious, dub-influenced pocket.",
@@ -355,7 +355,7 @@ const SKA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "sk-walking-bass-v-shift",
               "parentPatternId": "sk-walking-bass",
-              "name": "Ska Walking Bass — accent shift",
+              "name": "Walking Bass — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Retains the core cell while shifting its emphasis for a subtle variation.",
@@ -738,7 +738,7 @@ const SKA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "id": "sk-09-ska-drum-drive",
           "worldId": "ska",
           "styleIds": ["ska-two-tone"],
-          "name": "Ska Drum Drive",
+          "name": "Drum Drive",
           "family": "First-Wave Ska",
           "category": "groove",
           "description": "An up-tempo drum pattern keeps the dance pulse moving.",
@@ -1037,8 +1037,8 @@ const SKA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "ska-jamaican-first-wave-ska"
     ],
-    "name": "Jamaican First-Wave Ska Signature Cell",
-    "shortName": "Jamaican First-Wave Ska Cell",
+    "name": "Jamaican First-Wave Ska",
+    "shortName": "Jamaican First-Wave Ska",
     "family": "ska",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -1116,8 +1116,8 @@ const SKA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "ska-rocksteady"
     ],
-    "name": "Rocksteady Signature Cell",
-    "shortName": "Rocksteady Cell",
+    "name": "Rocksteady",
+    "shortName": "Rocksteady",
     "family": "ska",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -1193,8 +1193,8 @@ const SKA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "ska-jamaican-ska-jazz"
     ],
-    "name": "Jamaican Ska Jazz Signature Cell",
-    "shortName": "Jamaican Ska Jazz Cell",
+    "name": "Jamaican Ska Jazz",
+    "shortName": "Jamaican Ska Jazz",
     "family": "ska",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -1272,8 +1272,8 @@ const SKA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "ska-third-wave-ska"
     ],
-    "name": "Third-Wave Ska Signature Cell",
-    "shortName": "Third-Wave Ska Cell",
+    "name": "Third-Wave Ska",
+    "shortName": "Third-Wave Ska",
     "family": "ska",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -1571,7 +1571,7 @@ const SKA_WORLD_PATTERNS_BASS: MusicalPattern[] = [
           "id": "sk-07-walking-ska-bass",
           "worldId": "ska",
           "styleIds": ["ska-two-tone"],
-          "name": "Ska walking bass contour",
+          "name": "walking bass contour",
           "family": "First-Wave Ska",
           "category": "bass",
           "description": "Walking bass contour with an approach",
@@ -1887,7 +1887,7 @@ const SKA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           "id": "sk-14-ska-break-call",
           "worldId": "ska",
           "styleIds": ["ska-two-tone"],
-          "name": "Ska Break Call",
+          "name": "Break Call",
           "family": "Break",
           "category": "break",
           "transitionType": "fill",
@@ -1965,7 +1965,7 @@ const SKA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           "id": "sk-15-ska-final-shout",
           "worldId": "ska",
           "styleIds": ["ska-two-tone"],
-          "name": "Ska Final Shout",
+          "name": "Final Shout",
           "family": "Cadence",
           "category": "cadence",
           "transitionType": "fill",

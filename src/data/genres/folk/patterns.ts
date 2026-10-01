@@ -225,7 +225,7 @@ const FOLK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "folk-flute-reel-lead-v-sparse",
               "parentPatternId": "folk-flute-reel-lead",
-              "name": "Flute Reel Lead — sparse variation",
+              "name": "Flute Reel Lead — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops the offbeat eighths to leave space while keeping the reel pulse.",
@@ -309,7 +309,7 @@ const FOLK_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "folk-travis-sync-v-01",
               "parentPatternId": "folk-travis-sync",
-              "name": "Syncopated Travis — sparse variation",
+              "name": "Syncopated Travis — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -598,7 +598,7 @@ const FOLK_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "folk-strum-sync-v-01",
               "parentPatternId": "folk-strum-sync",
-              "name": "Syncopated Strum — sparse variation",
+              "name": "Syncopated Strum — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -733,7 +733,7 @@ const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "folk-waltz-v-01",
               "parentPatternId": "folk-waltz",
-              "name": "Waltz Strum — sparse variation",
+              "name": "Waltz Strum — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -862,7 +862,7 @@ const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "folk-waltz-pick-v-01",
               "parentPatternId": "folk-waltz-pick",
-              "name": "Waltz Fingerpick — sparse variation",
+              "name": "Waltz Fingerpick — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1011,7 +1011,7 @@ const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "folk-68-arpeggio-v-01",
               "parentPatternId": "folk-68-arpeggio",
-              "name": "6/8 Arpeggio — sparse variation",
+              "name": "6/8 Arpeggio — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1153,7 +1153,7 @@ const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "folk-fast-bluegrass-v-01",
               "parentPatternId": "folk-fast-bluegrass",
-              "name": "Fast Bluegrass Drive — sparse variation",
+              "name": "Fast Bluegrass Drive — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1295,7 +1295,7 @@ const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "folk-driving-8ths-v-01",
               "parentPatternId": "folk-driving-8ths",
-              "name": "Driving 8ths — sparse variation",
+              "name": "Driving 8ths — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1462,7 +1462,7 @@ const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "folk-comp-15-v-01",
               "parentPatternId": "folk-comp-15",
-              "name": "Fingerpick Comping — sparse variation",
+              "name": "Fingerpick Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1617,7 +1617,7 @@ const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "folk-verse-17-v-01",
               "parentPatternId": "folk-verse-17",
-              "name": "Banjo Roll Verse Variation — sparse variation",
+              "name": "Banjo Roll Verse Variation — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2010,8 +2010,8 @@ const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "folk-celtic-traditional"
     ],
-    "name": "Celtic Traditional Signature Cell",
-    "shortName": "Celtic Traditional Cell",
+    "name": "Celtic Traditional",
+    "shortName": "Celtic Traditional",
     "family": "folk",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2088,8 +2088,8 @@ const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "folk-british-ballad-tradition"
     ],
-    "name": "British Ballad Tradition Signature Cell",
-    "shortName": "British Ballad Tradition Cell",
+    "name": "British Ballad Tradition",
+    "shortName": "British Ballad Tradition",
     "family": "folk",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2164,8 +2164,8 @@ const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "folk-appalachian-string-band"
     ],
-    "name": "Appalachian String Band Signature Cell",
-    "shortName": "Appalachian String Band Cell",
+    "name": "Appalachian String Band",
+    "shortName": "Appalachian String Band",
     "family": "folk",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2249,8 +2249,8 @@ const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "folk-nordic-folk"
     ],
-    "name": "Nordic Folk Signature Cell",
-    "shortName": "Nordic Folk Cell",
+    "name": "Nordic Folk",
+    "shortName": "Nordic Folk",
     "family": "folk",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2318,8 +2318,8 @@ const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "folk-eastern-european-balkan-folk"
     ],
-    "name": "Eastern European / Balkan Folk Signature Cell",
-    "shortName": "Eastern European / Balkan Folk Cell",
+    "name": "Eastern European/Balkan Folk",
+    "shortName": "Eastern European/Balkan Folk",
     "family": "folk",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2454,7 +2454,7 @@ const FOLK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "folk-fiddle-drone-v-01",
               "parentPatternId": "folk-fiddle-drone",
-              "name": "Old-Time Fiddle Drone & Shuffle Bow — sparse variation",
+              "name": "Old-Time Fiddle Drone & Shuffle Bow — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2616,7 +2616,7 @@ const FOLK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "folk-anchor-14-v-01",
               "parentPatternId": "folk-anchor-14",
-              "name": "Vocal Harmony Anchor — sparse variation",
+              "name": "Vocal Harmony Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2700,7 +2700,7 @@ const FOLK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "id": "folk-roster-bass",
           "worldId": "folk",
           "styleIds": ["folk-indie-folk"],
-          "name": "Folk bass part",
+          "name": "bass part",
           "family": "Flatpick",
           "category": "rolePattern",
           "description": "A default-roster coverage pattern gives each ensemble role a playable part.",
@@ -2771,7 +2771,7 @@ const FOLK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
             {
               "id": "folk-roster-11-v-01",
               "parentPatternId": "folk-roster-bass",
-              "name": "Flatpick Texture — sparse variation",
+              "name": "Flatpick Texture — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2851,7 +2851,7 @@ const FOLK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "id": "folk-roster-",
           "worldId": "folk",
           "styleIds": ["folk-indie-folk"],
-          "name": "Folk  part",
+          "name": "part",
           "family": "Banjo Roll",
           "category": "rolePattern",
           "description": "A default-roster coverage pattern gives each ensemble role a playable part.",
@@ -2922,7 +2922,7 @@ const FOLK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
             {
               "id": "folk-roster-12-v-01",
               "parentPatternId": "folk-roster-",
-              "name": "Banjo Roll Texture — sparse variation",
+              "name": "Banjo Roll Texture — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3078,7 +3078,7 @@ const FOLK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "folk-call-13-v-01",
               "parentPatternId": "folk-call-13",
-              "name": "Fiddle Break Response — sparse variation",
+              "name": "Fiddle Break Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3142,7 +3142,7 @@ const FOLK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "folk-call-13-v-03",
               "parentPatternId": "folk-call-13",
-              "name": "Fiddle Break Response — transition variation",
+              "name": "Fiddle Break Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3287,7 +3287,7 @@ const FOLK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "folk-intro-16-v-01",
               "parentPatternId": "folk-intro-16",
-              "name": "Flatpick Intro — sparse variation",
+              "name": "Flatpick Intro — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3371,7 +3371,7 @@ const FOLK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "folk-intro-16-v-03",
               "parentPatternId": "folk-intro-16",
-              "name": "Flatpick Intro — transition variation",
+              "name": "Flatpick Intro — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",

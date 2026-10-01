@@ -62,7 +62,7 @@ const HIP_HOP_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "hiphop-boom-basic-v-01",
               "parentPatternId": "hiphop-boom-basic",
-              "name": "Boom Bap Basic — sparse variation",
+              "name": "Boom Bap Basic — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -211,7 +211,7 @@ const HIP_HOP_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "hiphop-boom-sync-v-01",
               "parentPatternId": "hiphop-boom-sync",
-              "name": "Syncopated Kick — sparse variation",
+              "name": "Syncopated Kick — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -360,7 +360,7 @@ const HIP_HOP_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "hiphop-trap-basic-v-01",
               "parentPatternId": "hiphop-trap-basic",
-              "name": "Trap Half-Time — sparse variation",
+              "name": "Trap Half-Time — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -531,7 +531,7 @@ const HIP_HOP_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "hiphop-trap-hats-v-01",
               "parentPatternId": "hiphop-trap-hats",
-              "name": "Trap Hi-Hats — sparse variation",
+              "name": "Trap Hi-Hats — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -756,7 +756,7 @@ const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "hiphop-lofi-v-01",
               "parentPatternId": "hip-hop-sampled-keys",
-              "name": "Lo-Fi Swing — sparse variation",
+              "name": "Lo-Fi Swing — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -912,7 +912,7 @@ const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "hiphop-gfunk-v-01",
               "parentPatternId": "hiphop-gfunk",
-              "name": "G-Funk — sparse variation",
+              "name": "G-Funk — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1070,7 +1070,7 @@ const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "hiphop-drill-v-01",
               "parentPatternId": "hiphop-drill",
-              "name": "Drill Beat — sparse variation",
+              "name": "Drill Beat — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1212,7 +1212,7 @@ const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "hiphop-breakbeat-v-01",
               "parentPatternId": "hiphop-breakbeat",
-              "name": "Old School Break — sparse variation",
+              "name": "Old School Break — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1371,7 +1371,7 @@ const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "hiphop-bounce-v-01",
               "parentPatternId": "hiphop-bounce",
-              "name": "Bounce Beat — sparse variation",
+              "name": "Bounce Beat — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1519,7 +1519,7 @@ const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "hiphop-westcoast-v-01",
               "parentPatternId": "hiphop-westcoast",
-              "name": "West Coast — sparse variation",
+              "name": "West Coast — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1656,7 +1656,7 @@ const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "hiphop-neosoul-v-01",
               "parentPatternId": "hiphop-neosoul",
-              "name": "Neo-Soul Hip Hop — sparse variation",
+              "name": "Neo-Soul Hip Hop — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1788,7 +1788,7 @@ const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "hiphop-minimal808-v-01",
               "parentPatternId": "hiphop-minimal808",
-              "name": "Minimal 808 — sparse variation",
+              "name": "Minimal 808 — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1934,7 +1934,7 @@ const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "hiphop-dembow-riddim-v-01",
               "parentPatternId": "hiphop-dembow-riddim",
-              "name": "Classic Dembow Riddim — sparse variation",
+              "name": "Classic Dembow Riddim — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2485,8 +2485,8 @@ const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "hip-hop-old-school-breakbeat"
     ],
-    "name": "Old-School Breakbeat Signature Cell",
-    "shortName": "Old-School Breakbeat Cell",
+    "name": "Old-School Breakbeat",
+    "shortName": "Old-School Breakbeat",
     "family": "hip-hop",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2569,8 +2569,8 @@ const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "hip-hop-golden-age-sample-collage"
     ],
-    "name": "Golden-Age Sample Collage Signature Cell",
-    "shortName": "Golden-Age Sample Collage Cell",
+    "name": "Golden-Age Sample Collage",
+    "shortName": "Golden-Age Sample Collage",
     "family": "hip-hop",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2648,8 +2648,8 @@ const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "hip-hop-west-coast-g-funk-expansion"
     ],
-    "name": "West Coast G-Funk Expansion Signature Cell",
-    "shortName": "West Coast G-Funk Expansion Cell",
+    "name": "West Coast G-Funk Expansion",
+    "shortName": "West Coast G-Funk Expansion",
     "family": "hip-hop",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2723,8 +2723,8 @@ const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "hip-hop-memphis-southern-rap"
     ],
-    "name": "Memphis / Southern Rap Signature Cell",
-    "shortName": "Memphis / Southern Rap Cell",
+    "name": "Memphis/Southern Rap",
+    "shortName": "Memphis/Southern Rap",
     "family": "hip-hop",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2809,8 +2809,8 @@ const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "hip-hop-jersey-club-rap"
     ],
-    "name": "Jersey / Club Rap Signature Cell",
-    "shortName": "Jersey / Club Rap Cell",
+    "name": "Jersey/Club Rap",
+    "shortName": "Jersey/Club Rap",
     "family": "hip-hop",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2947,7 +2947,7 @@ const HIP_HOP_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "hiphop-808-glide-bass-v-01",
               "parentPatternId": "hiphop-808-glide-bass",
-              "name": "808 Glide & Sub Slide Bass — sparse variation",
+              "name": "808 Glide & Sub Slide Bass — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3098,7 +3098,7 @@ const HIP_HOP_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "hip-hop-anchor-16-v-01",
               "parentPatternId": "hip-hop-anchor-16",
-              "name": "Sample Chop Anchor — sparse variation",
+              "name": "Sample Chop Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3268,7 +3268,7 @@ const HIP_HOP_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "hip-hop-call-15-v-01",
               "parentPatternId": "hip-hop-call-15",
-              "name": "Boom Bap Response — sparse variation",
+              "name": "Boom Bap Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3340,7 +3340,7 @@ const HIP_HOP_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "hip-hop-call-15-v-03",
               "parentPatternId": "hip-hop-call-15",
-              "name": "Boom Bap Response — transition variation",
+              "name": "Boom Bap Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",

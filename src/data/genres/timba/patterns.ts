@@ -6,7 +6,7 @@ const TIMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           "id": "timba-gear-marcha",
           "worldId": "timba",
           "styleIds": ["timba-timba-habanera"],
-          "name": "Gear Change: Marcha (Standard Drive)",
+          "name": "Gear Change: Marcha",
           "family": "Timba Gear System",
           "category": "sectionPattern",
           "description": "Base gear featuring full driving groove",
@@ -92,7 +92,7 @@ const TIMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "timba-gear-bomba",
               "parentPatternId": "timba-gear-marcha",
-              "name": "Gear Change: Bomba (Bass Slap & Kick Breakdown)",
+              "name": "Gear Change: Bomba",
               "variationType": "breakdown",
               "probability": 0.6,
               "onsetGrid": [
@@ -116,7 +116,7 @@ const TIMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "timba-gear-presion",
               "parentPatternId": "timba-gear-marcha",
-              "name": "Gear Change: Presión (High Tension Climax)",
+              "name": "Gear Change: Presión",
               "variationType": "dense",
               "probability": 0.5,
               "onsetGrid": [
@@ -160,7 +160,7 @@ const TIMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "timba-gear-marcha-v-03",
               "parentPatternId": "timba-gear-marcha",
-              "name": "Gear Change: Marcha (Standard Drive) — transition variation",
+              "name": "Gear Change: Marcha — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -328,7 +328,7 @@ const TIMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "timba-intro-16-v-01",
               "parentPatternId": "timba-intro-16",
-              "name": "Marcha Intro — sparse variation",
+              "name": "Marcha Intro — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -400,7 +400,7 @@ const TIMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "timba-intro-16-v-03",
               "parentPatternId": "timba-intro-16",
-              "name": "Marcha Intro — transition variation",
+              "name": "Marcha Intro — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -464,7 +464,7 @@ const TIMBA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           "id": "timba-songo-groove",
           "worldId": "timba",
           "styleIds": ["timba-timba-habanera"],
-          "name": "Songo Drum Kit & Cowbell Groove (Changuito / Los Van Van)",
+          "name": "Songo Drum Kit & Cowbell Groove",
           "family": "Songo Drumming",
           "category": "fill",
           "transitionType": "fill",
@@ -641,7 +641,7 @@ const TIMBA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "timba-displaced-bass",
           "worldId": "timba",
           "styleIds": ["timba-timba-habanera"],
-          "name": "Displaced Funk / Timba Bassline",
+          "name": "Displaced Funk/Timba Bassline",
           "family": "Timba Bass Systems",
           "category": "ostinato",
           "description": "Syncopated bass utilizing slap thumb pops,",
@@ -709,7 +709,7 @@ const TIMBA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "timba-bass-pedal-riff",
               "parentPatternId": "timba-displaced-bass",
-              "name": "Timba Pedal Bass (Root Anchor)",
+              "name": "Pedal Bass",
               "variationType": "sparse",
               "probability": 0.45,
               "onsetGrid": [
@@ -727,7 +727,7 @@ const TIMBA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "timba-displaced-bass-v-02",
               "parentPatternId": "timba-displaced-bass",
-              "name": "Displaced Funk / Timba Bassline — accent shift",
+              "name": "Displaced Funk/Timba Bassline — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -870,7 +870,7 @@ const TIMBA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "timba-anchor-14-v-01",
               "parentPatternId": "timba-anchor-14",
-              "name": "Moña Anchor — sparse variation",
+              "name": "Moña Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -970,7 +970,7 @@ const TIMBA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           "id": "timba-conga-gear",
           "worldId": "timba",
           "styleIds": ["timba-timba-habanera"],
-          "name": "Timba Conga Gear",
+          "name": "Conga Gear",
           "family": "Conga",
           "category": "break",
           "transitionType": "fill",
@@ -1032,7 +1032,7 @@ const TIMBA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "timba-conga-gear-v-01",
               "parentPatternId": "timba-conga-gear",
-              "name": "Timba Conga Gear — sparse variation",
+              "name": "Conga Gear — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1068,7 +1068,7 @@ const TIMBA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "timba-conga-gear-v-02",
               "parentPatternId": "timba-conga-gear",
-              "name": "Timba Conga Gear — accent shift",
+              "name": "Conga Gear — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -1196,7 +1196,7 @@ const TIMBA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "timba-bata-fusion-v-01",
               "parentPatternId": "timba-bata-fusion",
-              "name": "Bata Fusion — sparse variation",
+              "name": "Bata Fusion — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1336,7 +1336,7 @@ const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "timba-synth-bass-v-01",
               "parentPatternId": "timba-synth-bass",
-              "name": "Synth Bass Tumbao — sparse variation",
+              "name": "Synth Bass Tumbao — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1475,7 +1475,7 @@ const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "timba-piano-guajeo-v-01",
               "parentPatternId": "timba-piano-guajeo",
-              "name": "Piano Guajeo — sparse variation",
+              "name": "Piano Guajeo — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1611,7 +1611,7 @@ const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "timba-kick-bomobo-v-01-safe",
               "parentPatternId": "timba-kick-bomobo",
-              "name": "Kick Bombo — played variation",
+              "name": "Kick Bombo — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1635,7 +1635,7 @@ const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "timba-kick-bomobo-v-02-safe",
               "parentPatternId": "timba-kick-bomobo",
-              "name": "Kick Bombo — played variation",
+              "name": "Kick Bombo — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1734,7 +1734,7 @@ const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "timba-horn-moña-v-01",
               "parentPatternId": "timba-horn-moña",
-              "name": "Horn Moña — sparse variation",
+              "name": "Horn Moña — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1871,7 +1871,7 @@ const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "timba-clave-rumba-v-01",
               "parentPatternId": "timba-clave-rumba",
-              "name": "2-3 Rumba Clave — sparse variation",
+              "name": "2-3 Rumba Clave — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2010,7 +2010,7 @@ const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "timba-anticipated-pedal-v-01",
               "parentPatternId": "timba-anticipated-pedal",
-              "name": "Anticipated Presión Pedal — sparse variation",
+              "name": "Anticipated Presión Pedal — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2171,7 +2171,7 @@ const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "timba-comp-15-v-01",
               "parentPatternId": "timba-comp-15",
-              "name": "Presión Comping — sparse variation",
+              "name": "Presión Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2698,8 +2698,8 @@ const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "timba-son-montuno-timba"
     ],
-    "name": "Son-Montuno Timba Signature Cell",
-    "shortName": "Son-Montuno Timba Cell",
+    "name": "Son-Montuno Timba",
+    "shortName": "Son-Montuno Timba",
     "family": "timba",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2776,8 +2776,8 @@ const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "timba-los-van-van-songo"
     ],
-    "name": "Los Van Van Songo Signature Cell",
-    "shortName": "Los Van Van Songo Cell",
+    "name": "Los Van Van Songo",
+    "shortName": "Los Van Van Songo",
     "family": "timba",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2853,8 +2853,8 @@ const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "timba-timba-aggression"
     ],
-    "name": "Timba Aggression Signature Cell",
-    "shortName": "Timba Aggression Cell",
+    "name": "Aggression",
+    "shortName": "Aggression",
     "family": "timba",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2940,8 +2940,8 @@ const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "timba-timba-piano-tumbao"
     ],
-    "name": "Timba Piano-Tumbao Signature Cell",
-    "shortName": "Timba Piano-Tumbao Cell",
+    "name": "Piano-Tumbao",
+    "shortName": "Piano-Tumbao",
     "family": "timba",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -3098,7 +3098,7 @@ const TIMBA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "timba-phrase-12-v-01",
               "parentPatternId": "timba-phrase-12",
-              "name": "Gear Change Phrase — sparse variation",
+              "name": "Gear Change Phrase — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3194,7 +3194,7 @@ const TIMBA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "id": "timba--phrasing",
           "worldId": "timba",
           "styleIds": ["timba-timba-habanera"],
-          "name": "Timba Vocal Phrasing",
+          "name": "Vocal Phrasing",
           "family": "Vocal Phrasing",
           "category": "phrasePattern",
           "description": "Coro and sonero phrasing template shaped",
@@ -3274,7 +3274,7 @@ const TIMBA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "timba--phrasing-v--alt",
               "parentPatternId": "timba--phrasing",
-              "name": "Timba Vocal Phrasing — alternate phrasing",
+              "name": "Vocal Phrasing — alternate",
               "variationType": "phraseStart",
               "probability": 0.2,
               "description": "An alternate vocal entry shifts the placement of a phrase for subtle rhythmic variation.",
@@ -3314,7 +3314,7 @@ const TIMBA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "timba--phrasing-v-final-accent",
               "parentPatternId": "timba--phrasing",
-              "name": "Timba Vocal Phrasing — accent shift",
+              "name": "Vocal Phrasing — accent shift",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "Same rhythmic shape with shifted emphasis",
@@ -3454,7 +3454,7 @@ const TIMBA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "timba-call-13-v-01",
               "parentPatternId": "timba-call-13",
-              "name": "Coro Response — sparse variation",
+              "name": "Coro Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3534,7 +3534,7 @@ const TIMBA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "timba-call-13-v-03",
               "parentPatternId": "timba-call-13",
-              "name": "Coro Response — transition variation",
+              "name": "Coro Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3611,8 +3611,8 @@ const TIMBA_WORLD_PATTERNS_BASS: MusicalPattern[] = [
       "timba-timba-aggression",
       "timba-timba-piano-tumbao"
     ],
-    "name": "timba bass anticipation",
-    "shortName": "timba bass anticipation",
+    "name": "bass anticipation",
+    "shortName": "bass anticipation",
     "family": "timba",
     "category": "bass",
     "description": "Technique: timba bass anticipation",
@@ -3685,8 +3685,8 @@ const TIMBA_WORLD_PATTERNS_COMPING: MusicalPattern[] = [
       "timba-los-van-van-songo",
       "timba-timba-piano-tumbao"
     ],
-    "name": "timba piano tumbao",
-    "shortName": "timba piano tumbao",
+    "name": "piano tumbao",
+    "shortName": "piano tumbao",
     "family": "timba",
     "category": "comping",
     "description": "Technique: timba piano tumbao",

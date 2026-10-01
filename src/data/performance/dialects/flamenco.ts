@@ -3,7 +3,7 @@ import type { InstrumentDialect } from '../../styles/contracts';
 export const ENTRY_6: [string, InstrumentDialect] = ["guitar:flamenco", {
     id: 'guitar:flamenco',
     instrumentId: 'guitarra_flamenca',
-    name: 'Flamenco Guitar (Spanish Nylon)',
+    name: 'Flamenco Guitar',
     family: 'guitar',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'punteado',
@@ -19,7 +19,7 @@ export const ENTRY_6: [string, InstrumentDialect] = ["guitar:flamenco", {
 export const ENTRY_9: [string, InstrumentDialect] = ["cajon:flamenco", {
     id: 'cajon:flamenco',
     instrumentId: 'cajon_flamenco',
-    name: 'Flamenco Cajón (Peru/Spain Mesh)',
+    name: 'Cajón',
     family: 'percussion',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'center-bass',

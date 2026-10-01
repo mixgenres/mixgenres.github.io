@@ -91,7 +91,7 @@ const COUNTRY_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "country-boom-chuck-variant-country-pop-rock",
               "parentPatternId": "country-boom-chuck",
-              "name": "Country Pop Rock",
+              "name": "Pop Rock",
               "variationType": "instrumentSpecific",
               "probability": 0.18,
               "description": "Straight 8ths rock backbeat for contemporary",
@@ -232,7 +232,7 @@ const COUNTRY_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "country-train-v-01",
               "parentPatternId": "country-train",
-              "name": "Train Beat — sparse variation",
+              "name": "Train Beat — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -462,7 +462,7 @@ const COUNTRY_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "country-trap-hats-v-01",
               "parentPatternId": "country-trap-hats",
-              "name": "Hick-Hop Trap Hi-Hats — sparse variation",
+              "name": "Hick-Hop Trap Hi-Hats — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -632,7 +632,7 @@ const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "country-outlaw-v-01",
               "parentPatternId": "country-outlaw",
-              "name": "Outlaw 8ths — sparse variation",
+              "name": "Outlaw 8ths — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -735,7 +735,7 @@ const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "id": "country-waltz",
           "worldId": "country",
           "styleIds": ["country-honky-tonk"],
-          "name": "Country Waltz",
+          "name": "Waltz",
           "family": "Beat",
           "category": "groove",
           "description": "Classic 3/4 country waltz with accented",
@@ -786,7 +786,7 @@ const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "country-waltz-v-01",
               "parentPatternId": "country-waltz",
-              "name": "Country Waltz — sparse variation",
+              "name": "Waltz — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -810,7 +810,7 @@ const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "country-waltz-v-02",
               "parentPatternId": "country-waltz",
-              "name": "Country Waltz — accent shift",
+              "name": "Waltz — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -911,7 +911,7 @@ const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "country-western-swing-v-01",
               "parentPatternId": "country-western-swing",
-              "name": "Western Swing — sparse variation",
+              "name": "Western Swing — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1045,7 +1045,7 @@ const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "country-nashville-v-01",
               "parentPatternId": "country-nashville",
-              "name": "Nashville Smooth — sparse variation",
+              "name": "Nashville Smooth — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1191,7 +1191,7 @@ const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "country-chicken-v-01",
               "parentPatternId": "country-chicken",
-              "name": "Chicken Pickin — sparse variation",
+              "name": "Chicken Pickin — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1341,7 +1341,7 @@ const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "country-ballad-v-01-safe",
               "parentPatternId": "country-ballad",
-              "name": "Slow Ballad 6/8 — played variation",
+              "name": "Slow Ballad 6/8 — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1365,7 +1365,7 @@ const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "country-ballad-v-02-safe",
               "parentPatternId": "country-ballad",
-              "name": "Slow Ballad 6/8 — played variation",
+              "name": "Slow Ballad 6/8 — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1487,7 +1487,7 @@ const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "country-comp-14-v-01",
               "parentPatternId": "country-comp-14",
-              "name": "Steel Comping — sparse variation",
+              "name": "Steel Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1671,7 +1671,7 @@ const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "country-verse-16-v-01",
               "parentPatternId": "country-verse-16",
-              "name": "Train Verse Variation — sparse variation",
+              "name": "Train Verse Variation — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1923,8 +1923,8 @@ const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
       "country-alt-country-roots-rock",
       "country-country-gospel"
     ],
-    "name": "country shuffle",
-    "shortName": "country shuffle",
+    "name": "shuffle",
+    "shortName": "shuffle",
     "family": "country",
     "category": "groove",
     "description": "Technique: country shuffle",
@@ -2000,8 +2000,8 @@ const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "country-appalachian-old-time"
     ],
-    "name": "Appalachian Old-Time Signature Cell",
-    "shortName": "Appalachian Old-Time Cell",
+    "name": "Appalachian Old-Time",
+    "shortName": "Appalachian Old-Time",
     "family": "country",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2068,8 +2068,8 @@ const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "country-nashville-country-pop"
     ],
-    "name": "Nashville Country-Pop Signature Cell",
-    "shortName": "Nashville Country-Pop Cell",
+    "name": "Nashville Country-Pop",
+    "shortName": "Nashville Country-Pop",
     "family": "country",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2145,8 +2145,8 @@ const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "country-country-rock"
     ],
-    "name": "Country Rock Signature Cell",
-    "shortName": "Country Rock Cell",
+    "name": "Rock",
+    "shortName": "Rock",
     "family": "country",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2221,8 +2221,8 @@ const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "country-alt-country-roots-rock"
     ],
-    "name": "Alt-Country / Roots Rock Signature Cell",
-    "shortName": "Alt-Country / Roots Rock Cell",
+    "name": "Alt-Country/Roots Rock",
+    "shortName": "Alt-Country/Roots Rock",
     "family": "country",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2296,8 +2296,8 @@ const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "country-country-gospel"
     ],
-    "name": "Country Gospel Signature Cell",
-    "shortName": "Country Gospel Cell",
+    "name": "Gospel",
+    "shortName": "Gospel",
     "family": "country",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2421,7 +2421,7 @@ const COUNTRY_WORLD_PATTERNS_CELL: MusicalPattern[] = [
             {
               "id": "country-pedal-steel-swell-v-01-safe",
               "parentPatternId": "country-pedal-steel-swell",
-              "name": "Pedal Steel Volume Swell — played variation",
+              "name": "Pedal Steel Volume Swell — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -2445,7 +2445,7 @@ const COUNTRY_WORLD_PATTERNS_CELL: MusicalPattern[] = [
             {
               "id": "country-pedal-steel-swell-v-02-safe",
               "parentPatternId": "country-pedal-steel-swell",
-              "name": "Pedal Steel Volume Swell — played variation",
+              "name": "Pedal Steel Volume Swell — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -2571,7 +2571,7 @@ const COUNTRY_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "country-phrase-11-v-01",
               "parentPatternId": "country-phrase-11",
-              "name": "Train Phrase — sparse variation",
+              "name": "Train Phrase — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2671,7 +2671,7 @@ const COUNTRY_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "id": "country--phrasing",
           "worldId": "country",
           "styleIds": ["country-honky-tonk"],
-          "name": "Country Vocal Phrasing",
+          "name": "Vocal Phrasing",
           "family": "Vocal Phrasing",
           "category": "phrasePattern",
           "description": "Storytelling verse vocal placement with room",
@@ -2747,7 +2747,7 @@ const COUNTRY_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "country--phrasing-v--alt",
               "parentPatternId": "country--phrasing",
-              "name": "Country Vocal Phrasing — alternate phrasing",
+              "name": "Vocal Phrasing — alternate",
               "variationType": "phraseStart",
               "probability": 0.2,
               "description": "An alternate vocal entry shifts the placement of a phrase for subtle rhythmic variation.",
@@ -2787,7 +2787,7 @@ const COUNTRY_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "country--phrasing-v-final-accent",
               "parentPatternId": "country--phrasing",
-              "name": "Country Vocal Phrasing — accent shift",
+              "name": "Vocal Phrasing — accent shift",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "Same rhythmic shape with shifted emphasis",
@@ -2927,7 +2927,7 @@ const COUNTRY_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "country-call-12-v-01",
               "parentPatternId": "country-call-12",
-              "name": "Nashville Response — sparse variation",
+              "name": "Nashville Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3011,7 +3011,7 @@ const COUNTRY_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "country-call-12-v-03",
               "parentPatternId": "country-call-12",
-              "name": "Nashville Response — transition variation",
+              "name": "Nashville Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3168,7 +3168,7 @@ const COUNTRY_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "country-anchor-13-v-01",
               "parentPatternId": "country-anchor-13",
-              "name": "Chicken Pickin Anchor — sparse variation",
+              "name": "Chicken Pickin Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3344,7 +3344,7 @@ const COUNTRY_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "country-intro-15-v-01",
               "parentPatternId": "country-intro-15",
-              "name": "Boom-Chuck Intro — sparse variation",
+              "name": "Boom-Chuck Intro — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3408,7 +3408,7 @@ const COUNTRY_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "country-intro-15-v-03",
               "parentPatternId": "country-intro-15",
-              "name": "Boom-Chuck Intro — transition variation",
+              "name": "Boom-Chuck Intro — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",

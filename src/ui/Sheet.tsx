@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Pencil } from 'lucide-react';
 
@@ -15,22 +15,42 @@ export function Sheet({
   children: React.ReactNode;
 }) {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const sheetRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!open) setIsEditingTitle(false);
-  }, [open]);
+    if (!open) {
+      setIsEditingTitle(false);
+      return;
+    }
+
+    // The old backdrop was a full-screen button. That meant a click on an
+    // underlying control (notably Play) was consumed by the backdrop: the
+    // sheet closed, but the control never received the click. Keep the
+    // backdrop visual-only and dismiss from document-level outside detection
+    // instead. This lets the original pointer event continue to the control
+    // underneath, so clicking Play can both dismiss the sheet and start audio.
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (!sheetRef.current?.contains(target)) onClose();
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    return () => document.removeEventListener('pointerdown', handlePointerDown);
+  }, [open, onClose]);
 
   return (
     <AnimatePresence>
       {open && (
         <>
-          <motion.button
+          <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            onClick={onClose} aria-label="Close"
-            className="fixed inset-0 z-40"
+            aria-hidden="true"
+            className="fixed inset-0 z-40 pointer-events-none"
             style={{ background: 'color-mix(in srgb, var(--ink) 35%, transparent)' }}
           />
           <motion.div
+            ref={sheetRef}
             initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
             transition={{ type: 'spring', stiffness: 420, damping: 38 }}
             className="fixed inset-x-0 bottom-0 z-50 flex flex-col mx-auto max-w-[580px] w-full"

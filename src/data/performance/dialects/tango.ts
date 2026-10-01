@@ -3,7 +3,7 @@ import type { InstrumentDialect } from '../../styles/contracts';
 export const ENTRY_5: [string, InstrumentDialect] = ["upright-bass:tango-arco", {
     id: 'upright-bass:tango-arco',
     instrumentId: 'upright-bass',
-    name: 'Upright Bass (Tango Arco)',
+    name: 'Upright Bass',
     family: 'bass',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'arco',
@@ -18,7 +18,7 @@ export const ENTRY_5: [string, InstrumentDialect] = ["upright-bass:tango-arco", 
 export const ENTRY_7: [string, InstrumentDialect] = ["guitar:tango", {
     id: 'guitar:tango',
     instrumentId: 'guitarra_tango',
-    name: 'Tango Guitar (Steel/Nylon Muted Chording)',
+    name: 'Tango Guitar',
     family: 'guitar',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'punteado',
@@ -32,7 +32,7 @@ export const ENTRY_7: [string, InstrumentDialect] = ["guitar:tango", {
 export const ENTRY_10: [string, InstrumentDialect] = ["bandoneon:tango", {
     id: 'bandoneon:tango',
     instrumentId: 'bandoneon',
-    name: 'Tango Bandoneón (Double Reed Free Air)',
+    name: 'Bandoneón',
     family: 'bellows',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'bellows-press',

@@ -6,7 +6,7 @@ const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "tango-marcato-4",
           "worldId": "tango",
           "styleIds": ["tango-tango-tradicional"],
-          "name": "Marcato en 4 (Orquesta Típica)",
+          "name": "Marcato en 4",
           "family": "Marcato Accompaniment",
           "category": "ostinato",
           "description": "Strict four-beat staccato accompaniment providing rhythmic",
@@ -127,7 +127,7 @@ const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "tango-marcato-4-variant-yumba-osvaldo-pugliese",
               "parentPatternId": "tango-marcato-4",
-              "name": "Yumba (Osvaldo Pugliese)",
+              "name": "Yumba",
               "variationType": "instrumentSpecific",
               "probability": 0.18,
               "description": "Pugliese’s celebrated deep on-beat \"Yum\" (beats",
@@ -208,7 +208,7 @@ const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "tango-marcato-2",
           "worldId": "tango",
           "styleIds": ["tango-tango-tradicional"],
-          "name": "Marcato en 2 (Troilo / Di Sarli)",
+          "name": "Marcato en 2",
           "family": "Marcato Accompaniment",
           "category": "ostinato",
           "description": "A heavier two-beat pulse emphasizes beats 1 and 3.",
@@ -291,7 +291,7 @@ const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "tango-marcato-2-v-02-safe",
               "parentPatternId": "tango-marcato-2",
-              "name": "Marcato en 2 (Troilo / Di Sarli) — played variation",
+              "name": "Marcato en 2 — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -332,7 +332,7 @@ const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "tango-332-piazzolla",
           "worldId": "tango",
           "styleIds": ["tango-tango-nuevo"],
-          "name": "3+3+2 Nuevo Tango Pulse (Piazzolla)",
+          "name": "3+3+2 Nuevo Tango Pulse",
           "family": "Additive Rhythms",
           "category": "ostinato",
           "description": "Piazzolla’s definitive 3+3+2 eighth-note syncopation across",
@@ -430,7 +430,7 @@ const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "tango-332-chiche-slap",
               "parentPatternId": "tango-332-piazzolla",
-              "name": "3+3+2 with Chiche / Percussive Hit",
+              "name": "3+3+2 with Chiche/Percussive Hit",
               "variationType": "ornamented",
               "probability": 0.4,
               "onsetGrid": [
@@ -551,7 +551,7 @@ const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "tango-anchor-14-v-01",
               "parentPatternId": "tango-anchor-14",
-              "name": "Arrastre Anchor — sparse variation",
+              "name": "Arrastre Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -650,7 +650,7 @@ const TANGO_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           "id": "tango-sincopa",
           "worldId": "tango",
           "styleIds": ["tango-tango-tradicional"],
-          "name": "Síncopa a Tierra (Standard Syncopation)",
+          "name": "Síncopa a Tierra",
           "family": "Syncopated Figures",
           "category": "cell",
           "description": "Off-beat accent landing on the \"and\"",
@@ -743,7 +743,7 @@ const TANGO_WORLD_PATTERNS_CELL: MusicalPattern[] = [
             {
               "id": "tango-sincopa-v-02",
               "parentPatternId": "tango-sincopa",
-              "name": "Síncopa a Tierra (Standard Syncopation) — accent shift",
+              "name": "Síncopa a Tierra — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -775,7 +775,7 @@ const TANGO_WORLD_PATTERNS_CELL: MusicalPattern[] = [
             {
               "id": "tango-sincopa-percussiva",
               "parentPatternId": "tango-sincopa",
-              "name": "Síncopa Percussiva (Chicharra y Golpe)",
+              "name": "Síncopa Percussiva",
               "variationType": "syncopated",
               "probability": 0.45,
               "description": "Percussive syncopation with violin chicharra scrape on weak offbeat and bass golpe on strong syncopation",
@@ -826,7 +826,7 @@ const TANGO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "id": "tango-arrastre",
           "worldId": "tango",
           "styleIds": ["tango-tango-tradicional"],
-          "name": "Arrastre (Chromatic Drag Lead-in)",
+          "name": "Arrastre",
           "family": "Ornamental Transitions",
           "category": "phrasePattern",
           "description": "Upbeat glissando / drag that scoops",
@@ -917,7 +917,7 @@ const TANGO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "tango-arrastre-v-02",
               "parentPatternId": "tango-arrastre",
-              "name": "Arrastre (Chromatic Drag Lead-in) — accent shift",
+              "name": "Arrastre — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -966,7 +966,7 @@ const TANGO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "id": "tango-fraseo-bandoneon",
           "worldId": "tango",
           "styleIds": ["tango-tango-tradicional"],
-          "name": "Fraseo y Rubato (Bandoneón Lead)",
+          "name": "Fraseo y Rubato",
           "family": "Lyrical Lead Phrases",
           "category": "phrasePattern",
           "description": "Expressive lyrical phrasing with flexible rubato,",
@@ -1051,7 +1051,7 @@ const TANGO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "tango-fraseo-dramatic-cut",
               "parentPatternId": "tango-fraseo-bandoneon",
-              "name": "Fraseo with Corte (Sudden Stop)",
+              "name": "Fraseo with Corte",
               "variationType": "cadence",
               "probability": 0.45,
               "onsetGrid": [
@@ -1079,7 +1079,7 @@ const TANGO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "tango-fraseo-bandoneon-v-02",
               "parentPatternId": "tango-fraseo-bandoneon",
-              "name": "Fraseo y Rubato (Bandoneón Lead) — accent shift",
+              "name": "Fraseo y Rubato — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -1227,7 +1227,7 @@ const TANGO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "tango-phrase-12-v-01",
               "parentPatternId": "tango-phrase-12",
-              "name": "Marcato Phrase — sparse variation",
+              "name": "Marcato Phrase — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1326,7 +1326,7 @@ const TANGO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "id": "tango-bordoneo",
           "worldId": "tango",
           "styleIds": ["tango-milonga"],
-          "name": "Bordoneo Criollo (Guitar Bass Movement)",
+          "name": "Bordoneo Criollo",
           "family": "Guitar Bordoneos",
           "category": "rolePattern",
           "description": "Melodic low-string counterlines and turns typical",
@@ -1424,7 +1424,7 @@ const TANGO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
             {
               "id": "tango-bordoneo-v-02",
               "parentPatternId": "tango-bordoneo",
-              "name": "Bordoneo Criollo (Guitar Bass Movement) — accent shift",
+              "name": "Bordoneo Criollo — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -1541,7 +1541,7 @@ const TANGO_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "tango-bandoneon-chords-v-01",
               "parentPatternId": "tango-bandoneon-chords",
-              "name": "Bandoneon Chords — sparse variation",
+              "name": "Bandoneon Chords — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1672,7 +1672,7 @@ const TANGO_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "tango-violin-melody-v-01-safe",
               "parentPatternId": "tango-violin-melody",
-              "name": "Violin Legato — played variation",
+              "name": "Violin Legato — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1696,7 +1696,7 @@ const TANGO_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "tango-violin-melody-v-02-safe",
               "parentPatternId": "tango-violin-melody",
-              "name": "Violin Legato — played variation",
+              "name": "Violin Legato — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1799,7 +1799,7 @@ const TANGO_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "tango-piano-chumba-v-01",
               "parentPatternId": "tango-piano-chumba",
-              "name": "Piano Chumba — sparse variation",
+              "name": "Piano Chumba — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1930,7 +1930,7 @@ const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "tango-bass-pizzicato-v-01",
               "parentPatternId": "tango-bass-pizzicato",
-              "name": "Pizzicato Bass — sparse variation",
+              "name": "Pizzicato Bass — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2084,7 +2084,7 @@ const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "tango-comp-15-v-01",
               "parentPatternId": "tango-comp-15",
-              "name": "Yumba Comping — sparse variation",
+              "name": "Yumba Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2262,7 +2262,7 @@ const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "tango-verse-17-v-01",
               "parentPatternId": "tango-verse-17",
-              "name": "Síncopa Verse Variation — sparse variation",
+              "name": "Síncopa Verse Variation — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2617,8 +2617,8 @@ const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "tango-song-centered-tango"
     ],
-    "name": "Song-Centered Tango Signature Cell",
-    "shortName": "Song-Centered Tango Cell",
+    "name": "Song-Centered Tango",
+    "shortName": "Song-Centered Tango",
     "family": "tango",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2693,8 +2693,8 @@ const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "tango-guardia-nueva-modernism"
     ],
-    "name": "Guardia Nueva Modernism Signature Cell",
-    "shortName": "Guardia Nueva Modernism Cell",
+    "name": "Guardia Nueva Modernism",
+    "shortName": "Guardia Nueva Modernism",
     "family": "tango",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2771,8 +2771,8 @@ const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "tango-rhythmic-drive-tango"
     ],
-    "name": "Rhythmic Drive Tango Signature Cell",
-    "shortName": "Rhythmic Drive Tango Cell",
+    "name": "Rhythmic Drive Tango",
+    "shortName": "Rhythmic Drive Tango",
     "family": "tango",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2848,8 +2848,8 @@ const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "tango-elegant-cantabile-tango"
     ],
-    "name": "Elegant Cantabile Tango Signature Cell",
-    "shortName": "Elegant Cantabile Tango Cell",
+    "name": "Elegant Cantabile Tango",
+    "shortName": "Elegant Cantabile Tango",
     "family": "tango",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2926,8 +2926,8 @@ const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "tango-elastic-golden-age-tango"
     ],
-    "name": "Elastic Golden-Age Tango Signature Cell",
-    "shortName": "Elastic Golden-Age Tango Cell",
+    "name": "Elastic Golden-Age Tango",
+    "shortName": "Elastic Golden-Age Tango",
     "family": "tango",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2997,8 +2997,8 @@ const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "tango-dramatic-yumba-tango"
     ],
-    "name": "Dramatic Yumba Tango Signature Cell",
-    "shortName": "Dramatic Yumba Tango Cell",
+    "name": "Dramatic Yumba Tango",
+    "shortName": "Dramatic Yumba Tango",
     "family": "tango",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -3076,8 +3076,8 @@ const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "tango-harmonic-modernism-tango"
     ],
-    "name": "Harmonic Modernism Tango Signature Cell",
-    "shortName": "Harmonic Modernism Tango Cell",
+    "name": "Harmonic Modernism Tango",
+    "shortName": "Harmonic Modernism Tango",
     "family": "tango",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -3152,8 +3152,8 @@ const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "tango-rio-de-la-plata-fusion"
     ],
-    "name": "Río de la Plata Fusion Signature Cell",
-    "shortName": "Río de la Plata Fusion Cell",
+    "name": "Río de la Plata Fusion",
+    "shortName": "Río de la Plata Fusion",
     "family": "tango",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -3316,7 +3316,7 @@ const TANGO_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "tango-call-13-v-01",
               "parentPatternId": "tango-call-13",
-              "name": "Síncopa Response — sparse variation",
+              "name": "Síncopa Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3396,7 +3396,7 @@ const TANGO_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "tango-call-13-v-03",
               "parentPatternId": "tango-call-13",
-              "name": "Síncopa Response — transition variation",
+              "name": "Síncopa Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3546,7 +3546,7 @@ const TANGO_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "tango-intro-16-v-01",
               "parentPatternId": "tango-intro-16",
-              "name": "Marcato Intro — sparse variation",
+              "name": "Marcato Intro — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3618,7 +3618,7 @@ const TANGO_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "tango-intro-16-v-03",
               "parentPatternId": "tango-intro-16",
-              "name": "Marcato Intro — transition variation",
+              "name": "Marcato Intro — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -4108,8 +4108,8 @@ const TANGO_WORLD_PATTERNS_MOTIF: MusicalPattern[] = [
       "tango-harmonic-modernism-tango",
       "tango-rio-de-la-plata-fusion"
     ],
-    "name": "tango vals bass",
-    "shortName": "tango vals bass",
+    "name": "vals bass",
+    "shortName": "vals bass",
     "family": "tango",
     "category": "motif",
     "description": "Technique: tango vals bass",

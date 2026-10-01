@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../../schema/instrument-def';
 
 export const zapateado: InstrumentDef = {
   id: "zapateado",
-  name: "Zapateado (Flamenco Footwork)",
+  name: "Zapateado",
   family: "body-percussion",
   drum: {
     low: 36,

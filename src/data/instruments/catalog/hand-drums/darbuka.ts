@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../../schema/instrument-def';
 
 export const darbuka: InstrumentDef = {
   id: "darbuka",
-  name: "Darbuka (Doumbek)",
+  name: "Darbuka",
   family: "hand-drums",
   drum: {
     low: 60,

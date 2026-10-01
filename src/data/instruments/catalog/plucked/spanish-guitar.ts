@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../../schema/instrument-def';
 
 export const spanish_guitar: InstrumentDef = {
   id: "spanish-guitar",
-  name: "Flamenco Guitar (Guitarra Blanca)",
+  name: "Flamenco Guitar",
   family: "plucked",
   voicing: "chord",
   courses: 1,

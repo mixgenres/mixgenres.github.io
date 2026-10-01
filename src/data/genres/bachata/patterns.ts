@@ -6,7 +6,7 @@ const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "bachata-requinto-derecho",
           "worldId": "bachata",
           "styleIds": ["bachata-tradicional"],
-          "name": "Requinto Derecho (Verse Picking)",
+          "name": "Requinto Derecho",
           "family": "Bachata Requinto",
           "category": "ostinato",
           "description": "Crisp lead guitar arpeggiation with muted",
@@ -85,7 +85,7 @@ const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "bachata-requinto-majao-sync",
               "parentPatternId": "bachata-requinto-derecho",
-              "name": "Requinto Majao (Chorus Drive)",
+              "name": "Requinto Majao",
               "variationType": "syncopated",
               "probability": 0.6,
               "onsetGrid": [
@@ -109,7 +109,7 @@ const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "bachata-requinto-mambo-solo",
               "parentPatternId": "bachata-requinto-derecho",
-              "name": "Requinto Mambo (Virtuosic Solo Breakdown)",
+              "name": "Requinto Mambo",
               "variationType": "dense",
               "probability": 0.5,
               "onsetGrid": [
@@ -191,7 +191,7 @@ const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "bachata-requinto-derecho-variant-bachata-mambo-solo",
               "parentPatternId": "bachata-requinto-derecho",
-              "name": "Bachata Mambo Solo",
+              "name": "Mambo Solo",
               "variationType": "instrumentSpecific",
               "probability": 0.18,
               "description": "Fast, virtuosic requinto arpeggios fill the gaps between vocal phrases.",
@@ -472,7 +472,7 @@ const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "bachata-anchor-12-v-01",
               "parentPatternId": "bachata-anchor-12",
-              "name": "Mambo Anchor — sparse variation",
+              "name": "Mambo Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -626,7 +626,7 @@ const BACHATA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "bachata-bass-derecho-v-01",
               "parentPatternId": "bachata-bass-derecho",
-              "name": "Bass Derecho — sparse variation",
+              "name": "Bass Derecho — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -686,7 +686,7 @@ const BACHATA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "bachata-bass-derecho-v-03",
               "parentPatternId": "bachata-bass-derecho",
-              "name": "Bass Derecho — transition variation",
+              "name": "Bass Derecho — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -803,7 +803,7 @@ const BACHATA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "bachata-bass-majao-v-01",
               "parentPatternId": "bachata-bass-majao",
-              "name": "Bass Majao — sparse variation",
+              "name": "Bass Majao — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -855,7 +855,7 @@ const BACHATA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "bachata-bass-majao-v-03",
               "parentPatternId": "bachata-bass-majao",
-              "name": "Bass Majao — transition variation",
+              "name": "Bass Majao — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -984,7 +984,7 @@ const BACHATA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "bachata-bongo-derecho-v-01",
               "parentPatternId": "bachata-bongo-derecho",
-              "name": "Bongo Derecho — sparse variation",
+              "name": "Bongo Derecho — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1068,7 +1068,7 @@ const BACHATA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "bachata-bongo-derecho-v-03",
               "parentPatternId": "bachata-bongo-derecho",
-              "name": "Bongo Derecho — transition variation",
+              "name": "Bongo Derecho — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -1373,7 +1373,7 @@ const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "bachata-guira-majao-v-01",
               "parentPatternId": "bachata-guira-majao",
-              "name": "Güira Majao — sparse variation",
+              "name": "Güira Majao — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1590,7 +1590,7 @@ const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "bachata-segunda-derecho-v-01",
               "parentPatternId": "bachata-segunda-derecho",
-              "name": "Segunda Guitar — sparse variation",
+              "name": "Segunda Guitar — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1731,7 +1731,7 @@ const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "cumbia-guiro-v-01",
               "parentPatternId": "cumbia-guiro",
-              "name": "Cumbia Güiro — sparse variation",
+              "name": "Cumbia Güiro — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1904,7 +1904,7 @@ const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "bachata-comp-13-v-01",
               "parentPatternId": "bachata-comp-13",
-              "name": "Coro Comping — sparse variation",
+              "name": "Coro Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2087,7 +2087,7 @@ const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "bachata-verse-15-v-01",
               "parentPatternId": "bachata-verse-15",
-              "name": "Derecho Verse Variation — sparse variation",
+              "name": "Derecho Verse Variation — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2326,8 +2326,8 @@ const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "bachata-dominican-guitar-tradition"
     ],
-    "name": "Dominican Guitar Tradition Signature Cell",
-    "shortName": "Dominican Guitar Tradition Cell",
+    "name": "Dominican Guitar Tradition",
+    "shortName": "Dominican Guitar Tradition",
     "family": "bachata",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2405,8 +2405,8 @@ const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "bachata-romantic-requinto"
     ],
-    "name": "Romantic Requinto Signature Cell",
-    "shortName": "Romantic Requinto Cell",
+    "name": "Romantic Requinto",
+    "shortName": "Romantic Requinto",
     "family": "bachata",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2484,8 +2484,8 @@ const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "bachata-modern-urban-bachata"
     ],
-    "name": "Modern Urban Bachata Signature Cell",
-    "shortName": "Modern Urban Bachata Cell",
+    "name": "Modern Urban Bachata",
+    "shortName": "Modern Urban Bachata",
     "family": "bachata",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2563,8 +2563,8 @@ const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "bachata-dominican-haitian-caribbean-bachata-fusion"
     ],
-    "name": "Dominican-Haitian / Caribbean Bachata Fusion Signature Cell",
-    "shortName": "Dominican-Haitian / Caribbean Bachata Fusion Cell",
+    "name": "Dominican-Haitian/Caribbean Bachata Fusion",
+    "shortName": "Dominican-Haitian/Caribbean Bachata Fusion",
     "family": "bachata",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2644,7 +2644,7 @@ const BACHATA_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "id": "bachata-roster-drums",
           "worldId": "bachata",
           "styleIds": ["bachata-tradicional"],
-          "name": "Bachata drums part",
+          "name": "drums part",
           "family": "Derecho",
           "category": "rolePattern",
           "description": "A default-roster coverage pattern gives each ensemble role a playable part.",
@@ -2726,7 +2726,7 @@ const BACHATA_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
             {
               "id": "bachata-roster-10-v-01",
               "parentPatternId": "bachata-roster-drums",
-              "name": "Derecho Texture — sparse variation",
+              "name": "Derecho Texture — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2907,7 +2907,7 @@ const BACHATA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "bachata-call-11-v-01",
               "parentPatternId": "bachata-call-11",
-              "name": "Majao Response — sparse variation",
+              "name": "Majao Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2987,7 +2987,7 @@ const BACHATA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "bachata-call-11-v-03",
               "parentPatternId": "bachata-call-11",
-              "name": "Majao Response — transition variation",
+              "name": "Majao Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3136,7 +3136,7 @@ const BACHATA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "bachata-intro-14-v-01",
               "parentPatternId": "bachata-intro-14",
-              "name": "Requinto Intro — sparse variation",
+              "name": "Requinto Intro — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3216,7 +3216,7 @@ const BACHATA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "bachata-intro-14-v-03",
               "parentPatternId": "bachata-intro-14",
-              "name": "Requinto Intro — transition variation",
+              "name": "Requinto Intro — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3368,7 +3368,7 @@ const BACHATA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "bachata-chorus-16-v-01",
               "parentPatternId": "bachata-chorus-16",
-              "name": "Majao Chorus Lift — sparse variation",
+              "name": "Majao Chorus Lift — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3448,7 +3448,7 @@ const BACHATA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "bachata-chorus-16-v-03",
               "parentPatternId": "bachata-chorus-16",
-              "name": "Majao Chorus Lift — transition variation",
+              "name": "Majao Chorus Lift — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3516,7 +3516,7 @@ const BACHATA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "id": "bachata--phrasing",
           "worldId": "bachata",
           "styleIds": ["bachata-tradicional"],
-          "name": "Bachata Vocal Phrasing",
+          "name": "Vocal Phrasing",
           "family": "Vocal Phrasing",
           "category": "phrasePattern",
           "description": "Romantic verse/coro phrase placement that leaves",
@@ -3595,7 +3595,7 @@ const BACHATA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "bachata--phrasing-v--alt",
               "parentPatternId": "bachata--phrasing",
-              "name": "Bachata Vocal Phrasing — alternate phrasing",
+              "name": "Vocal Phrasing — alternate",
               "variationType": "phraseStart",
               "probability": 0.2,
               "description": "An alternate vocal entry shifts the placement of a phrase for subtle rhythmic variation.",
@@ -3635,7 +3635,7 @@ const BACHATA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "bachata--phrasing-v-final-accent",
               "parentPatternId": "bachata--phrasing",
-              "name": "Bachata Vocal Phrasing — accent shift",
+              "name": "Vocal Phrasing — accent shift",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "Same rhythmic shape with shifted emphasis",
@@ -3699,8 +3699,8 @@ const BACHATA_WORLD_PATTERNS_BASS: MusicalPattern[] = [
       "bachata-modern-urban-bachata",
       "bachata-dominican-haitian-caribbean-bachata-fusion"
     ],
-    "name": "bachata bass anticipation",
-    "shortName": "bachata bass anticipation",
+    "name": "bass anticipation",
+    "shortName": "bass anticipation",
     "family": "bachata",
     "category": "bass",
     "description": "Technique: bachata bass anticipation",

@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../../schema/instrument-def';
 
 export const harmonica: InstrumentDef = {
   id: "harmonica",
-  name: "10-Hole Diatonic Harmonica (Blues Harp)",
+  name: "Blues Harp",
   family: "winds",
   voicing: "single",
   bodyConstruction: "wood-box",

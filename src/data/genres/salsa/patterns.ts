@@ -82,7 +82,7 @@ const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "afro-clave-son-32",
               "parentPatternId": "afro-clave-son-23",
-              "name": "Son Clave 3–2 (Reverse Polarity)",
+              "name": "Son Clave 3–2",
               "variationType": "syncopated",
               "probability": 0.5,
               "onsetGrid": [
@@ -104,7 +104,7 @@ const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "afro-clave-rumba-23",
               "parentPatternId": "afro-clave-son-23",
-              "name": "Rumba Clave 2–3 (Delayed 8th Hit)",
+              "name": "Rumba Clave 2–3",
               "variationType": "syncopated",
               "probability": 0.45,
               "onsetGrid": [
@@ -143,7 +143,7 @@ const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "afro-bass-tumbao",
           "worldId": "salsa",
           "styleIds": ["salsa-son-montuno"],
-          "name": "Bass Tumbao (Anticipated Harmony)",
+          "name": "Bass Tumbao",
           "family": "Tumbao Basslines",
           "category": "ostinato",
           "description": "Classic bass tumbao emphasizes the anticipated beat.",
@@ -261,7 +261,7 @@ const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "afro-piano-montuno",
           "worldId": "salsa",
           "styleIds": ["salsa-son-montuno"],
-          "name": "Piano Montuno / Guajeo (Interlocking Arpeggios)",
+          "name": "Piano Montuno/Guajeo",
           "family": "Montuno Interlocking Figures",
           "category": "ostinato",
           "description": "Two-bar syncopated piano ostinato that weaves",
@@ -395,7 +395,7 @@ const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "afro-piano-montuno-v-02",
               "parentPatternId": "afro-piano-montuno",
-              "name": "Piano Montuno / Guajeo (Interlocking Arpeggios) — accent shift",
+              "name": "Piano Montuno/Guajeo — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -476,7 +476,7 @@ const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "afro-timbal-cascara",
           "worldId": "salsa",
           "styleIds": ["salsa-salsa-dura"],
-          "name": "Timbal Cáscara Pattern (Side-Shell Stick)",
+          "name": "Timbal Cáscara",
           "family": "Percussion Timelines",
           "category": "ostinato",
           "description": "Crisp wooden/metal click on the side",
@@ -611,7 +611,7 @@ const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "afro-timbal-cascara-v-02",
               "parentPatternId": "afro-timbal-cascara",
-              "name": "Timbal Cáscara Pattern (Side-Shell Stick) — accent shift",
+              "name": "Timbal Cáscara — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -708,7 +708,7 @@ const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "afro-conga-tumbao",
           "worldId": "salsa",
           "styleIds": ["salsa-son-montuno"],
-          "name": "Conga Marcha (Slap & Open Tones)",
+          "name": "Conga Marcha",
           "family": "Conga Tumbaos",
           "category": "ostinato",
           "description": "Heel-toe hand technique on beats 1",
@@ -962,7 +962,7 @@ const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "salsa-anchor-14-v-01",
               "parentPatternId": "salsa-anchor-14",
-              "name": "Tumbao Anchor — sparse variation",
+              "name": "Tumbao Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1131,7 +1131,7 @@ const SALSA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "afro-mambo-unison-break",
               "parentPatternId": "afro-mambo-horn-hits",
-              "name": "Ensemble Tutti Bloque / Break",
+              "name": "Ensemble Tutti Bloque/Break",
               "variationType": "breakdown",
               "probability": 0.5,
               "onsetGrid": [
@@ -1289,7 +1289,7 @@ const SALSA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "salsa-phrase-12-v-01",
               "parentPatternId": "salsa-phrase-12",
-              "name": "Coro Phrase — sparse variation",
+              "name": "Coro Phrase — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1377,7 +1377,7 @@ const SALSA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "id": "salsa--phrasing",
           "worldId": "salsa",
           "styleIds": ["salsa-son-montuno"],
-          "name": "Salsa Vocal Phrasing",
+          "name": "Vocal Phrasing",
           "family": "Vocal Phrasing",
           "category": "phrasePattern",
           "description": "Coro response phrasing sits between clave-driven",
@@ -1457,7 +1457,7 @@ const SALSA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "salsa--phrasing-v--alt",
               "parentPatternId": "salsa--phrasing",
-              "name": "Salsa Vocal Phrasing — alternate phrasing",
+              "name": "Vocal Phrasing — alternate",
               "variationType": "phraseStart",
               "probability": 0.2,
               "description": "An alternate vocal entry shifts the placement of a phrase for subtle rhythmic variation.",
@@ -1497,7 +1497,7 @@ const SALSA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "salsa--phrasing-v-final-accent",
               "parentPatternId": "salsa--phrasing",
-              "name": "Salsa Vocal Phrasing — accent shift",
+              "name": "Vocal Phrasing — accent shift",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "Same rhythmic shape with shifted emphasis",
@@ -1556,7 +1556,7 @@ const SALSA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           "id": "salsa-campana",
           "worldId": "salsa",
           "styleIds": ["salsa-salsa-dura"],
-          "name": "Campana (Bongo Bell)",
+          "name": "Campana",
           "family": "Bell",
           "category": "fill",
           "transitionType": "fill",
@@ -1616,7 +1616,7 @@ const SALSA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "salsa-campana-v-01",
               "parentPatternId": "salsa-campana",
-              "name": "Campana (Bongo Bell) — sparse variation",
+              "name": "Campana — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1652,7 +1652,7 @@ const SALSA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "salsa-campana-v-02",
               "parentPatternId": "salsa-campana",
-              "name": "Campana (Bongo Bell) — accent shift",
+              "name": "Campana — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -1721,7 +1721,7 @@ const SALSA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           "id": "salsa-guiro",
           "worldId": "salsa",
           "styleIds": ["salsa-salsa-dura"],
-          "name": "Guiro Pattern",
+          "name": "Guiro",
           "family": "Guiro",
           "category": "break",
           "transitionType": "fill",
@@ -1795,7 +1795,7 @@ const SALSA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "salsa-guiro-v-01",
               "parentPatternId": "salsa-guiro",
-              "name": "Guiro Pattern — sparse variation",
+              "name": "Guiro — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1843,7 +1843,7 @@ const SALSA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "salsa-guiro-v-02",
               "parentPatternId": "salsa-guiro",
-              "name": "Guiro Pattern — accent shift",
+              "name": "Guiro — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -1996,7 +1996,7 @@ const SALSA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "salsa-maracas-v-01",
               "parentPatternId": "salsa-maracas",
-              "name": "Maracas — sparse variation",
+              "name": "Maracas — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2157,7 +2157,7 @@ const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "salsa-clave-32-v-01",
               "parentPatternId": "salsa-clave-32",
-              "name": "3-2 Son Clave — sparse variation",
+              "name": "3-2 Son Clave — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2303,7 +2303,7 @@ const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "salsa-timbal-bell-v-01",
               "parentPatternId": "salsa-timbal-bell",
-              "name": "Timbal Mambo Bell — sparse variation",
+              "name": "Timbal Mambo Bell — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2487,7 +2487,7 @@ const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "salsa-comp-15-v-01",
               "parentPatternId": "salsa-comp-15",
-              "name": "Son Clave Comping — sparse variation",
+              "name": "Son Clave Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3093,8 +3093,8 @@ const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "salsa-son-cubano-foundation"
     ],
-    "name": "Son Cubano Foundation Signature Cell",
-    "shortName": "Son Cubano Foundation Cell",
+    "name": "Son Cubano Foundation",
+    "shortName": "Son Cubano Foundation",
     "family": "salsa",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -3169,8 +3169,8 @@ const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "salsa-salsa-brava-1970s-new-york"
     ],
-    "name": "Salsa Brava / 1970s New York Signature Cell",
-    "shortName": "Salsa Brava / 1970s New York Cell",
+    "name": "Brava/1970s New York",
+    "shortName": "Brava/1970s New York",
     "family": "salsa",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -3247,8 +3247,8 @@ const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "salsa-salsa-conjunto"
     ],
-    "name": "Salsa Conjunto Signature Cell",
-    "shortName": "Salsa Conjunto Cell",
+    "name": "Conjunto",
+    "shortName": "Conjunto",
     "family": "salsa",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -3324,8 +3324,8 @@ const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "salsa-salsa-jazz-fusion"
     ],
-    "name": "Salsa Jazz Fusion Signature Cell",
-    "shortName": "Salsa Jazz Fusion Cell",
+    "name": "Jazz Fusion",
+    "shortName": "Jazz Fusion",
     "family": "salsa",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -3401,8 +3401,8 @@ const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "salsa-boogaloo-latin-soul"
     ],
-    "name": "Boogaloo / Latin Soul Signature Cell",
-    "shortName": "Boogaloo / Latin Soul Cell",
+    "name": "Boogaloo/Latin Soul",
+    "shortName": "Boogaloo/Latin Soul",
     "family": "salsa",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -3555,7 +3555,7 @@ const SALSA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "salsa-call-13-v-01",
               "parentPatternId": "salsa-call-13",
-              "name": "Mambo Response — sparse variation",
+              "name": "Mambo Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3627,7 +3627,7 @@ const SALSA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "salsa-call-13-v-03",
               "parentPatternId": "salsa-call-13",
-              "name": "Mambo Response — transition variation",
+              "name": "Mambo Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3777,7 +3777,7 @@ const SALSA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "salsa-intro-16-v-01",
               "parentPatternId": "salsa-intro-16",
-              "name": "Montuno Intro — sparse variation",
+              "name": "Montuno Intro — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3861,7 +3861,7 @@ const SALSA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "salsa-intro-16-v-03",
               "parentPatternId": "salsa-intro-16",
-              "name": "Montuno Intro — transition variation",
+              "name": "Montuno Intro — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",

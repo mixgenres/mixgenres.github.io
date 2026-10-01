@@ -6,7 +6,7 @@ const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "jazz-walking-bass",
           "worldId": "jazz",
           "styleIds": ["jazz-bebop", "jazz-hard-bop"],
-          "name": "Walking Bass (Continuous Harmonic Navigation)",
+          "name": "Walking Bass",
           "family": "Walking Basslines",
           "category": "ostinato",
           "description": "Continuous four-to-the-bar walking bass connecting roots,",
@@ -74,7 +74,7 @@ const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "jazz-two-feel-bass",
               "parentPatternId": "jazz-walking-bass",
-              "name": "Two-Feel Bass (Head Statement)",
+              "name": "Two-Feel Bass",
               "variationType": "sparse",
               "probability": 0.5,
               "onsetGrid": [
@@ -129,7 +129,7 @@ const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "jazz-ride-spangalang",
           "worldId": "jazz",
           "styleIds": ["jazz-bebop", "jazz-hard-bop"],
-          "name": "Jazz Ride Cymbal (Spang-a-Lang)",
+          "name": "Ride Cymbal",
           "family": "Jazz Drumming",
           "category": "ostinato",
           "description": "The definitive jazz swing ride pattern",
@@ -200,7 +200,7 @@ const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "jazz-brushes-ballad",
               "parentPatternId": "jazz-ride-spangalang",
-              "name": "Ballad Snare Brushes (Circular Sweep)",
+              "name": "Ballad Snare Brushes",
               "variationType": "sparse",
               "probability": 0.5,
               "onsetGrid": [
@@ -220,7 +220,7 @@ const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "jazz-ride-spangalang-v-02",
               "parentPatternId": "jazz-ride-spangalang",
-              "name": "Jazz Ride Cymbal (Spang-a-Lang) — accent shift",
+              "name": "Ride Cymbal — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -279,7 +279,7 @@ const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "jazz-piano-comping",
           "worldId": "jazz",
           "styleIds": ["jazz-bebop", "jazz-hard-bop"],
-          "name": "Syncopated Piano Comping (Charleston & Red Garland Pluck)",
+          "name": "Syncopated Piano Comping",
           "family": "Piano Comping",
           "category": "ostinato",
           "description": "Sparse, syncopated chord voicings placed around",
@@ -367,7 +367,7 @@ const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "jazz-piano-comping-v-02",
               "parentPatternId": "jazz-piano-comping",
-              "name": "Syncopated Piano Comping (Charleston & Red Garland Pluck) — accent shift",
+              "name": "Syncopated Piano Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -477,7 +477,7 @@ const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "jazz-latin-montuno-comp-v-01",
               "parentPatternId": "jazz-latin-montuno-comp",
-              "name": "Latin Jazz Montuno Comping — sparse variation",
+              "name": "Latin Jazz Montuno Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -640,7 +640,7 @@ const JAZZ_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "jazz-anchor-15-v-01",
               "parentPatternId": "jazz-anchor-15",
-              "name": "Head Anchor — sparse variation",
+              "name": "Head Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -785,7 +785,7 @@ const JAZZ_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "jazz-brushes-swing-v-01",
               "parentPatternId": "jazz-brushes-swing",
-              "name": "Brushes Swing — sparse variation",
+              "name": "Brushes Swing — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -940,7 +940,7 @@ const JAZZ_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "jazz-piano-red-garland-v-01",
               "parentPatternId": "jazz-piano-red-garland",
-              "name": "Block Chords — sparse variation",
+              "name": "Block Chords — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1060,7 +1060,7 @@ const JAZZ_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "jazz-hihat-2-4-v-01-safe",
               "parentPatternId": "jazz-hihat-2-4",
-              "name": "Hi-Hat 2 & 4 — played variation",
+              "name": "Hi-Hat 2 & 4 — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1084,7 +1084,7 @@ const JAZZ_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "jazz-hihat-2-4-v-02-safe",
               "parentPatternId": "jazz-hihat-2-4",
-              "name": "Hi-Hat 2 & 4 — played variation",
+              "name": "Hi-Hat 2 & 4 — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1182,7 +1182,7 @@ const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "jazz-ride-broken-v-01",
               "parentPatternId": "jazz-ride-broken",
-              "name": "Broken Ride — sparse variation",
+              "name": "Broken Ride — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1314,7 +1314,7 @@ const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "jazz-bass-pedal-v-01",
               "parentPatternId": "jazz-bass-pedal",
-              "name": "Pedal Point — sparse variation",
+              "name": "Pedal Point — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1440,7 +1440,7 @@ const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "jazz-comping-sync-v-01",
               "parentPatternId": "jazz-comping-sync",
-              "name": "Syncopated Comping — sparse variation",
+              "name": "Syncopated Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1556,7 +1556,7 @@ const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "jazz-snare-comp-v-01",
               "parentPatternId": "jazz-snare-comp",
-              "name": "Snare Comping — sparse variation",
+              "name": "Snare Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1626,7 +1626,7 @@ const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "id": "jazz-waltz-ride",
           "worldId": "jazz",
           "styleIds": ["jazz-fusion"],
-          "name": "Jazz Waltz Ride",
+          "name": "Waltz Ride",
           "family": "Drums",
           "category": "groove",
           "description": "Swinging triplet ride pattern in 3/4",
@@ -1681,7 +1681,7 @@ const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "jazz-waltz-ride-v-01",
               "parentPatternId": "jazz-waltz-ride",
-              "name": "Jazz Waltz Ride — sparse variation",
+              "name": "Waltz Ride — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1713,7 +1713,7 @@ const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "jazz-waltz-ride-v-02",
               "parentPatternId": "jazz-waltz-ride",
-              "name": "Jazz Waltz Ride — accent shift",
+              "name": "Waltz Ride — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -1771,7 +1771,7 @@ const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "id": "jazz-comp-16",
           "worldId": "jazz",
           "styleIds": ["jazz-bebop"],
-          "name": "Piano Comping Cell",
+          "name": "Piano Comping",
           "family": "Comping",
           "category": "groove",
           "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
@@ -1842,7 +1842,7 @@ const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "jazz-comp-16-v-01",
               "parentPatternId": "jazz-comp-16",
-              "name": "Piano Comping Cell — sparse variation",
+              "name": "Piano Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1870,7 +1870,7 @@ const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "jazz-comp-16-v-02",
               "parentPatternId": "jazz-comp-16",
-              "name": "Piano Comping Cell — accent shift",
+              "name": "Piano Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -2065,8 +2065,8 @@ const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
       "jazz-jazz-funk",
       "jazz-brazilian-jazz"
     ],
-    "name": "jazz triplet",
-    "shortName": "jazz triplet",
+    "name": "triplet",
+    "shortName": "triplet",
     "family": "jazz",
     "category": "groove",
     "description": "Technique: jazz triplet",
@@ -2211,8 +2211,8 @@ const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "jazz-swing-era"
     ],
-    "name": "Swing Era Signature Cell",
-    "shortName": "Swing Era Cell",
+    "name": "Swing Era",
+    "shortName": "Swing Era",
     "family": "jazz",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2303,8 +2303,8 @@ const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "jazz-modal-jazz"
     ],
-    "name": "Modal Jazz Signature Cell",
-    "shortName": "Modal Jazz Cell",
+    "name": "Modal Jazz",
+    "shortName": "Modal Jazz",
     "family": "jazz",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2380,8 +2380,8 @@ const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "jazz-post-bop"
     ],
-    "name": "Post-Bop Signature Cell",
-    "shortName": "Post-Bop Cell",
+    "name": "Post-Bop",
+    "shortName": "Post-Bop",
     "family": "jazz",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2456,8 +2456,8 @@ const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "jazz-jazz-funk"
     ],
-    "name": "Jazz-Funk Signature Cell",
-    "shortName": "Jazz-Funk Cell",
+    "name": "Jazz-Funk",
+    "shortName": "Jazz-Funk",
     "family": "jazz",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2533,8 +2533,8 @@ const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "jazz-avant-garde-free-improvisation"
     ],
-    "name": "Avant-Garde / Free Improvisation Signature Cell",
-    "shortName": "Avant-Garde / Free Improvisation Cell",
+    "name": "Avant-Garde/Free Improvisation",
+    "shortName": "Avant-Garde/Free Improvisation",
     "family": "jazz",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2608,8 +2608,8 @@ const JAZZ_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "jazz-brazilian-jazz"
     ],
-    "name": "Brazilian Jazz Signature Cell",
-    "shortName": "Brazilian Jazz Cell",
+    "name": "Brazilian Jazz",
+    "shortName": "Brazilian Jazz",
     "family": "jazz",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2755,7 +2755,7 @@ const JAZZ_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "jazz-phrase-13-v-01",
               "parentPatternId": "jazz-phrase-13",
-              "name": "Solo Phrase — sparse variation",
+              "name": "Solo Phrase — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2910,7 +2910,7 @@ const JAZZ_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "jazz-call-14-v-01",
               "parentPatternId": "jazz-call-14",
-              "name": "Shout Response — sparse variation",
+              "name": "Shout Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2974,7 +2974,7 @@ const JAZZ_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "jazz-call-14-v-03",
               "parentPatternId": "jazz-call-14",
-              "name": "Shout Response — transition variation",
+              "name": "Shout Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3261,7 +3261,7 @@ const JAZZ_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "jazz-intro-17-v-01",
               "parentPatternId": "jazz-intro-17",
-              "name": "Turnaround Intro — sparse variation",
+              "name": "Turnaround Intro — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3333,7 +3333,7 @@ const JAZZ_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "jazz-intro-17-v-03",
               "parentPatternId": "jazz-intro-17",
-              "name": "Turnaround Intro — transition variation",
+              "name": "Turnaround Intro — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",

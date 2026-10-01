@@ -59,7 +59,7 @@ const ELECTRONIC_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "elec-4onfloor-v-01",
               "parentPatternId": "elec-4onfloor",
-              "name": "Four on the Floor — sparse variation",
+              "name": "Four on the Floor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -197,7 +197,7 @@ const ELECTRONIC_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "elec-offbeat-hats-v-01",
               "parentPatternId": "elec-offbeat-hats",
-              "name": "Offbeat Hats — sparse variation",
+              "name": "Offbeat Hats — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -363,7 +363,7 @@ const ELECTRONIC_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "elec-techno-rumble-v-01",
               "parentPatternId": "elec-techno-rumble",
-              "name": "Techno Rumble — sparse variation",
+              "name": "Techno Rumble — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -590,7 +590,7 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "elec-trance-16ths-v-01",
               "parentPatternId": "elec-trance-16ths",
-              "name": "Trance Bass 16ths — sparse variation",
+              "name": "Trance Bass 16ths — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -798,7 +798,7 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "elec-dubstep-half-v-01-safe",
               "parentPatternId": "elec-dubstep-half",
-              "name": "Dubstep Half-Time — played variation",
+              "name": "Dubstep Half-Time — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -822,7 +822,7 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "elec-dubstep-half-v-02-safe",
               "parentPatternId": "elec-dubstep-half",
-              "name": "Dubstep Half-Time — played variation",
+              "name": "Dubstep Half-Time — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -926,7 +926,7 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "elec-dnb-amen-v-01",
               "parentPatternId": "elec-dnb-amen",
-              "name": "DnB Break — sparse variation",
+              "name": "DnB Break — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1020,7 +1020,7 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "id": "elec-footwork",
           "worldId": "electronic",
           "styleIds": ["electronic-dubstep"],
-          "name": "Chicago Footwork / Juke",
+          "name": "Chicago Footwork/Juke",
           "family": "Footwork",
           "category": "groove",
           "description": "Rapid, chopped kick pattern with triplet-displaced",
@@ -1085,7 +1085,7 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "elec-footwork-v-01",
               "parentPatternId": "elec-footwork",
-              "name": "Chicago Footwork / Juke — sparse variation",
+              "name": "Chicago Footwork/Juke — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1121,7 +1121,7 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "elec-footwork-v-02",
               "parentPatternId": "elec-footwork",
-              "name": "Chicago Footwork / Juke — accent shift",
+              "name": "Chicago Footwork/Juke — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -1249,7 +1249,7 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "elec-ukg-v-01",
               "parentPatternId": "elec-ukg",
-              "name": "UK Garage Swung — sparse variation",
+              "name": "UK Garage Swung — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1401,7 +1401,7 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "elec-electro-v-01",
               "parentPatternId": "elec-electro",
-              "name": "Electro 808 — sparse variation",
+              "name": "Electro 808 — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1542,7 +1542,7 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "elec-ambient-v-01-safe",
               "parentPatternId": "elec-ambient",
-              "name": "Ambient Pulse — played variation",
+              "name": "Ambient Pulse — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1566,7 +1566,7 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "elec-ambient-v-02-safe",
               "parentPatternId": "elec-ambient",
-              "name": "Ambient Pulse — played variation",
+              "name": "Ambient Pulse — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1677,7 +1677,7 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "elec-synthwave-v-01",
               "parentPatternId": "elec-synthwave",
-              "name": "Synthwave 8ths — sparse variation",
+              "name": "Synthwave 8ths — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1862,7 +1862,7 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "electronic-comp-16-v-01",
               "parentPatternId": "electronic-comp-16",
-              "name": "Drop Comping — sparse variation",
+              "name": "Drop Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2314,8 +2314,8 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "electronic-electro"
     ],
-    "name": "Electro Signature Cell",
-    "shortName": "Electro Cell",
+    "name": "Electro",
+    "shortName": "Electro",
     "family": "electronic",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2389,8 +2389,8 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "electronic-detroit-techno"
     ],
-    "name": "Detroit Techno Signature Cell",
-    "shortName": "Detroit Techno Cell",
+    "name": "Detroit Techno",
+    "shortName": "Detroit Techno",
     "family": "electronic",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2467,8 +2467,8 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "electronic-chicago-acid-house"
     ],
-    "name": "Chicago Acid House Signature Cell",
-    "shortName": "Chicago Acid House Cell",
+    "name": "Chicago Acid House",
+    "shortName": "Chicago Acid House",
     "family": "electronic",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2543,8 +2543,8 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "electronic-ambient-techno"
     ],
-    "name": "Ambient Techno Signature Cell",
-    "shortName": "Ambient Techno Cell",
+    "name": "Ambient Techno",
+    "shortName": "Ambient Techno",
     "family": "electronic",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2618,8 +2618,8 @@ const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "electronic-breakbeat-hardcore"
     ],
-    "name": "Breakbeat Hardcore Signature Cell",
-    "shortName": "Breakbeat Hardcore Cell",
+    "name": "Breakbeat Hardcore",
+    "shortName": "Breakbeat Hardcore",
     "family": "electronic",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2768,7 +2768,7 @@ const ELECTRONIC_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "elec-acid-303-v-01",
               "parentPatternId": "elec-acid-303",
-              "name": "Acid House 303 Bassline — sparse variation",
+              "name": "Acid House 303 Bassline — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2950,7 +2950,7 @@ const ELECTRONIC_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "electronic-anchor-15-v-01",
               "parentPatternId": "electronic-anchor-15",
-              "name": "Build Anchor — sparse variation",
+              "name": "Build Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3129,7 +3129,7 @@ const ELECTRONIC_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "electronic-phrase-13-v-01",
               "parentPatternId": "electronic-phrase-13",
-              "name": "Pluck Phrase — sparse variation",
+              "name": "Pluck Phrase — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3313,7 +3313,7 @@ const ELECTRONIC_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "electronic-call-14-v-01",
               "parentPatternId": "electronic-call-14",
-              "name": "Breakbeat Response — sparse variation",
+              "name": "Breakbeat Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3393,7 +3393,7 @@ const ELECTRONIC_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "electronic-call-14-v-03",
               "parentPatternId": "electronic-call-14",
-              "name": "Breakbeat Response — transition variation",
+              "name": "Breakbeat Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3542,7 +3542,7 @@ const ELECTRONIC_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "electronic-intro-17-v-01",
               "parentPatternId": "electronic-intro-17",
-              "name": "Arp Intro — sparse variation",
+              "name": "Arp Intro — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3614,7 +3614,7 @@ const ELECTRONIC_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "electronic-intro-17-v-03",
               "parentPatternId": "electronic-intro-17",
-              "name": "Arp Intro — transition variation",
+              "name": "Arp Intro — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",

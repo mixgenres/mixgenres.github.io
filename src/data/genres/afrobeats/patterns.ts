@@ -75,7 +75,7 @@ const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "afro-log-drum-bass-v-01",
               "parentPatternId": "afro-log-drum-bass",
-              "name": "Pitched Log Drum Bass Groove — sparse variation",
+              "name": "Pitched Log Drum Bass Groove — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -233,7 +233,7 @@ const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "afro-syncopated-kit-v-01",
               "parentPatternId": "afro-syncopated-kit",
-              "name": "Modern Afropop Kick & Rim Pocket — sparse variation",
+              "name": "Modern Afropop Kick & Rim Pocket — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -413,7 +413,7 @@ const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "afro-shekere-shaker-v-01",
               "parentPatternId": "afro-shekere-shaker",
-              "name": "Shekere & Gourd Shaker Engine — sparse variation",
+              "name": "Shekere & Gourd Shaker Engine — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -630,7 +630,7 @@ const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "afro-amapiano-pad-v-01",
               "parentPatternId": "afro-amapiano-pad",
-              "name": "Airy Rhodes & Synth Pad Comping — sparse variation",
+              "name": "Airy Rhodes & Synth Pad Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -781,7 +781,7 @@ const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "afrobeats-comp-9-v-01",
               "parentPatternId": "afrobeats-comp-9",
-              "name": "Horn Comping — sparse variation",
+              "name": "Horn Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -959,7 +959,7 @@ const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "afrobeats-verse-11-v-01",
               "parentPatternId": "afrobeats-verse-11",
-              "name": "Log Drum Verse Variation — sparse variation",
+              "name": "Log Drum Verse Variation — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1481,8 +1481,8 @@ const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "afrobeats-west-african-highlife-guitar"
     ],
-    "name": "West African Highlife Guitar Signature Cell",
-    "shortName": "West African Highlife Guitar Cell",
+    "name": "West African Highlife Guitar",
+    "shortName": "West African Highlife Guitar",
     "family": "afrobeats",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -1559,8 +1559,8 @@ const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "afrobeats-afro-fusion-burna-boy"
     ],
-    "name": "Afro-Fusion — Burna Boy Signature Cell",
-    "shortName": "Afro-Fusion — Burna Boy Cell",
+    "name": "Afro-Fusion — Burna Boy",
+    "shortName": "Afro-Fusion — Burna Boy",
     "family": "afrobeats",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -1636,8 +1636,8 @@ const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "afrobeats-afropop-guitar-groove"
     ],
-    "name": "Afropop Guitar Groove Signature Cell",
-    "shortName": "Afropop Guitar Groove Cell",
+    "name": "Afropop Guitar Groove",
+    "shortName": "Afropop Guitar Groove",
     "family": "afrobeats",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -1712,8 +1712,8 @@ const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "afrobeats-afrobeats-percussive-minimalism"
     ],
-    "name": "Afrobeats Percussive Minimalism Signature Cell",
-    "shortName": "Afrobeats Percussive Minimalism Cell",
+    "name": "Percussive Minimalism",
+    "shortName": "Percussive Minimalism",
     "family": "afrobeats",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -1860,7 +1860,7 @@ const AFROBEATS_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "afro-highlife-guitar-v-01",
               "parentPatternId": "afro-highlife-guitar",
-              "name": "Highlife Fingerstyle Clean Guitar — sparse variation",
+              "name": "Highlife Fingerstyle Clean Guitar — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2040,7 +2040,7 @@ const AFROBEATS_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "afrobeats-anchor-8-v-01",
               "parentPatternId": "afrobeats-anchor-8",
-              "name": "Hook Anchor — sparse variation",
+              "name": "Hook Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2193,7 +2193,7 @@ const AFROBEATS_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "afro-horn-stabs-v-01",
               "parentPatternId": "afro-horn-stabs",
-              "name": "Fela Afrobeat Horn Section Stabs — sparse variation",
+              "name": "Fela Afrobeat Horn Section Stabs — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2253,7 +2253,7 @@ const AFROBEATS_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "afro-horn-stabs-v-03",
               "parentPatternId": "afro-horn-stabs",
-              "name": "Fela Afrobeat Horn Section Stabs — transition variation",
+              "name": "Fela Afrobeat Horn Section Stabs — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -2394,7 +2394,7 @@ const AFROBEATS_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "afrobeats-cadence-16-v-01",
               "parentPatternId": "afrobeats-cadence-16",
-              "name": "Log Drum Cadence — sparse variation",
+              "name": "Log Drum Cadence — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2466,7 +2466,7 @@ const AFROBEATS_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "afrobeats-cadence-16-v-03",
               "parentPatternId": "afrobeats-cadence-16",
-              "name": "Log Drum Cadence — transition variation",
+              "name": "Log Drum Cadence — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -2608,7 +2608,7 @@ const AFROBEATS_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "afrobeats-call-7-v-01",
               "parentPatternId": "afrobeats-call-7",
-              "name": "Shekere Response — sparse variation",
+              "name": "Shekere Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2680,7 +2680,7 @@ const AFROBEATS_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "afrobeats-call-7-v-03",
               "parentPatternId": "afrobeats-call-7",
-              "name": "Shekere Response — transition variation",
+              "name": "Shekere Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -2828,7 +2828,7 @@ const AFROBEATS_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "afrobeats-intro-10-v-01",
               "parentPatternId": "afrobeats-intro-10",
-              "name": "Afrobeat Intro — sparse variation",
+              "name": "Afrobeat Intro — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2912,7 +2912,7 @@ const AFROBEATS_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "afrobeats-intro-10-v-03",
               "parentPatternId": "afrobeats-intro-10",
-              "name": "Afrobeat Intro — transition variation",
+              "name": "Afrobeat Intro — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3071,7 +3071,7 @@ const AFROBEATS_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "afrobeats-chorus-12-v-01",
               "parentPatternId": "afrobeats-chorus-12",
-              "name": "Shekere Chorus Lift — sparse variation",
+              "name": "Shekere Chorus Lift — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3155,7 +3155,7 @@ const AFROBEATS_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "afrobeats-chorus-12-v-03",
               "parentPatternId": "afrobeats-chorus-12",
-              "name": "Shekere Chorus Lift — transition variation",
+              "name": "Shekere Chorus Lift — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3308,7 +3308,7 @@ const AFROBEATS_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "afrobeats-bridge-13-v-01",
               "parentPatternId": "afrobeats-bridge-13",
-              "name": "Hook Bridge — sparse variation",
+              "name": "Hook Bridge — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3392,7 +3392,7 @@ const AFROBEATS_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "afrobeats-bridge-13-v-03",
               "parentPatternId": "afrobeats-bridge-13",
-              "name": "Hook Bridge — transition variation",
+              "name": "Hook Bridge — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3544,7 +3544,7 @@ const AFROBEATS_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "afrobeats-fill-14-v-01",
               "parentPatternId": "afrobeats-fill-14",
-              "name": "Horn Fill — sparse variation",
+              "name": "Horn Fill — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3616,7 +3616,7 @@ const AFROBEATS_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "afrobeats-fill-14-v-03",
               "parentPatternId": "afrobeats-fill-14",
-              "name": "Horn Fill — transition variation",
+              "name": "Horn Fill — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3764,7 +3764,7 @@ const AFROBEATS_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "afrobeats-break-15-v-01",
               "parentPatternId": "afrobeats-break-15",
-              "name": "Afrobeat Break — sparse variation",
+              "name": "Afrobeat Break — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3836,7 +3836,7 @@ const AFROBEATS_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "afrobeats-break-15-v-03",
               "parentPatternId": "afrobeats-break-15",
-              "name": "Afrobeat Break — transition variation",
+              "name": "Afrobeat Break — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3900,7 +3900,7 @@ const AFROBEATS_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "id": "afrobeats--phrasing",
           "worldId": "afrobeats",
           "styleIds": ["afrobeats-afro-pop"],
-          "name": "Afrobeats Vocal Phrasing",
+          "name": "Vocal Phrasing",
           "family": "Vocal Phrasing",
           "category": "phrasePattern",
           "description": "Hook-driven vocal placement designed around syncopated",
@@ -3979,7 +3979,7 @@ const AFROBEATS_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "afrobeats--phrasing-v--alt",
               "parentPatternId": "afrobeats--phrasing",
-              "name": "Afrobeats Vocal Phrasing — alternate phrasing",
+              "name": "Vocal Phrasing — alternate",
               "variationType": "phraseStart",
               "probability": 0.2,
               "description": "An alternate vocal entry shifts the placement of a phrase for subtle rhythmic variation.",
@@ -4019,7 +4019,7 @@ const AFROBEATS_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "afrobeats--phrasing-v-final-accent",
               "parentPatternId": "afrobeats--phrasing",
-              "name": "Afrobeats Vocal Phrasing — accent shift",
+              "name": "Vocal Phrasing — accent shift",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "Same rhythmic shape with shifted emphasis",

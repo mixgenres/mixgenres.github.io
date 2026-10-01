@@ -422,7 +422,7 @@ const BLUES_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "blues-anchor-15-v-01",
               "parentPatternId": "blues-anchor-15",
-              "name": "Call & Response Anchor — sparse variation",
+              "name": "Call & Response Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -595,7 +595,7 @@ const BLUES_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "blues-turnaround-v-01",
               "parentPatternId": "blues-turnaround",
-              "name": "12-Bar Turnaround — sparse variation",
+              "name": "12-Bar Turnaround — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -679,7 +679,7 @@ const BLUES_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "blues-turnaround-v-03",
               "parentPatternId": "blues-turnaround",
-              "name": "12-Bar Turnaround — transition variation",
+              "name": "12-Bar Turnaround — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -802,7 +802,7 @@ const BLUES_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "blues-slow-12-8-v-01",
               "parentPatternId": "blues-slow-12-8",
-              "name": "Slow 12/8 Groove — sparse variation",
+              "name": "Slow 12/8 Groove — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -950,7 +950,7 @@ const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "blues-texas-shuffle-v-01",
               "parentPatternId": "blues-texas-shuffle",
-              "name": "Texas Shuffle — sparse variation",
+              "name": "Texas Shuffle — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1105,7 +1105,7 @@ const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "blues-soul-groove-v-01",
               "parentPatternId": "blues-soul-groove",
-              "name": "Soul Blues Beat — sparse variation",
+              "name": "Soul Blues Beat — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1236,7 +1236,7 @@ const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "blues-bass-walk-v-01",
               "parentPatternId": "blues-bass-walk",
-              "name": "Walking Blues Bass — sparse variation",
+              "name": "Walking Blues Bass — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1392,7 +1392,7 @@ const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "blues-piano-triplets-v-01",
               "parentPatternId": "blues-piano-triplets",
-              "name": "Piano Triplets — sparse variation",
+              "name": "Piano Triplets — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1572,7 +1572,7 @@ const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "blues-horn-stabs-v-01-safe",
               "parentPatternId": "blues-horn-stabs",
-              "name": "Horn Stabs — played variation",
+              "name": "Horn Stabs — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1596,7 +1596,7 @@ const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "blues-horn-stabs-v-02-safe",
               "parentPatternId": "blues-horn-stabs",
-              "name": "Horn Stabs — played variation",
+              "name": "Horn Stabs — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1695,7 +1695,7 @@ const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "blues-delta-slide-v-01",
               "parentPatternId": "blues-delta-slide",
-              "name": "Slide Guitar Lick — sparse variation",
+              "name": "Slide Guitar Lick — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1780,7 +1780,7 @@ const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "id": "blues-rhumba",
           "worldId": "blues",
           "styleIds": ["blues-chicago"],
-          "name": "Blues Rhumba",
+          "name": "Rhumba",
           "family": "Drums",
           "category": "groove",
           "description": "Cross-stick and tom rhumba beat popularized",
@@ -1835,7 +1835,7 @@ const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "blues-rhumba-v-01",
               "parentPatternId": "blues-rhumba",
-              "name": "Blues Rhumba — sparse variation",
+              "name": "Rhumba — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1867,7 +1867,7 @@ const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "blues-rhumba-v-02",
               "parentPatternId": "blues-rhumba",
-              "name": "Blues Rhumba — accent shift",
+              "name": "Rhumba — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -1973,7 +1973,7 @@ const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "blues-organ-swell-v-01-safe",
               "parentPatternId": "blues-organ-swell",
-              "name": "Organ Swell — played variation",
+              "name": "Organ Swell — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1997,7 +1997,7 @@ const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "blues-organ-swell-v-02-safe",
               "parentPatternId": "blues-organ-swell",
-              "name": "Organ Swell — played variation",
+              "name": "Organ Swell — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -2124,7 +2124,7 @@ const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "blues-comp-16-v-01",
               "parentPatternId": "blues-comp-16",
-              "name": "Turnaround Comping — sparse variation",
+              "name": "Turnaround Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2441,8 +2441,8 @@ const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "blues-memphis-electric-blues"
     ],
-    "name": "Memphis Electric Blues Signature Cell",
-    "shortName": "Memphis Electric Blues Cell",
+    "name": "Memphis Electric Blues",
+    "shortName": "Memphis Electric Blues",
     "family": "blues",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2511,8 +2511,8 @@ const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "blues-west-coast-jump-blues"
     ],
-    "name": "West Coast Jump Blues Signature Cell",
-    "shortName": "West Coast Jump Blues Cell",
+    "name": "West Coast Jump Blues",
+    "shortName": "West Coast Jump Blues",
     "family": "blues",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2606,8 +2606,8 @@ const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "blues-new-orleans-blues"
     ],
-    "name": "New Orleans Blues Signature Cell",
-    "shortName": "New Orleans Blues Cell",
+    "name": "New Orleans Blues",
+    "shortName": "New Orleans Blues",
     "family": "blues",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2693,8 +2693,8 @@ const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "blues-british-blues-revival"
     ],
-    "name": "British Blues Revival Signature Cell",
-    "shortName": "British Blues Revival Cell",
+    "name": "British Blues Revival",
+    "shortName": "British Blues Revival",
     "family": "blues",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2854,7 +2854,7 @@ const BLUES_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "blues-phrase-13-v-01",
               "parentPatternId": "blues-phrase-13",
-              "name": "12-Bar Phrase — sparse variation",
+              "name": "12-Bar Phrase — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2950,7 +2950,7 @@ const BLUES_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "id": "blues--phrasing",
           "worldId": "blues",
           "styleIds": ["blues-delta"],
-          "name": "Blues Vocal Phrasing",
+          "name": "Vocal Phrasing",
           "family": "Vocal Phrasing",
           "category": "phrasePattern",
           "description": "12-bar vocal phrase placement with call-and-response",
@@ -3030,7 +3030,7 @@ const BLUES_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "blues--phrasing-v--alt",
               "parentPatternId": "blues--phrasing",
-              "name": "Blues Vocal Phrasing — alternate phrasing",
+              "name": "Vocal Phrasing — alternate",
               "variationType": "phraseStart",
               "probability": 0.2,
               "description": "An alternate vocal entry shifts the placement of a phrase for subtle rhythmic variation.",
@@ -3070,7 +3070,7 @@ const BLUES_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "blues--phrasing-v-final-accent",
               "parentPatternId": "blues--phrasing",
-              "name": "Blues Vocal Phrasing — accent shift",
+              "name": "Vocal Phrasing — accent shift",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "Same rhythmic shape with shifted emphasis",
@@ -3210,7 +3210,7 @@ const BLUES_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "blues-call-14-v-01",
               "parentPatternId": "blues-call-14",
-              "name": "Rake Response — sparse variation",
+              "name": "Rake Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3290,7 +3290,7 @@ const BLUES_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "blues-call-14-v-03",
               "parentPatternId": "blues-call-14",
-              "name": "Rake Response — transition variation",
+              "name": "Rake Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3739,8 +3739,8 @@ const BLUES_WORLD_PATTERNS_LEAD: MusicalPattern[] = [
       "blues-new-orleans-blues",
       "blues-british-blues-revival"
     ],
-    "name": "blues scale enclosure",
-    "shortName": "blues scale enclosure",
+    "name": "scale enclosure",
+    "shortName": "scale enclosure",
     "family": "blues",
     "category": "lead",
     "description": "Technique: blues scale enclosure",

@@ -6,7 +6,7 @@ const METAL_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "metal-gallop-riff",
           "worldId": "metal",
           "styleIds": ["metal-heavy-metal"],
-          "name": "The Gallop Rhythm (Iron Maiden / Steve Harris)",
+          "name": "The Gallop Rhythm",
           "family": "Metal Gallop",
           "category": "ostinato",
           "description": "Classic 16th-16th-8th galloping chug on palm-muted",
@@ -145,7 +145,7 @@ const METAL_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "metal-gallop-riff-v-02",
               "parentPatternId": "metal-gallop-riff",
-              "name": "The Gallop Rhythm (Iron Maiden / Steve Harris) — accent shift",
+              "name": "The Gallop Rhythm — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -455,7 +455,7 @@ const METAL_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "metal-anchor-12-v-01",
               "parentPatternId": "metal-anchor-12",
-              "name": "Tremolo Anchor — sparse variation",
+              "name": "Tremolo Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -914,7 +914,7 @@ const METAL_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "metal-breakdown-v-01",
               "parentPatternId": "metal-breakdown",
-              "name": "Breakdown Chug — sparse variation",
+              "name": "Breakdown Chug — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1074,7 +1074,7 @@ const METAL_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "metal-djent-sync-v-01",
               "parentPatternId": "metal-djent-sync",
-              "name": "Djent Syncopation — sparse variation",
+              "name": "Djent Syncopation — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1231,7 +1231,7 @@ const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "metal-clean-arp-v-01",
               "parentPatternId": "metal-clean-arp",
-              "name": "Clean Arpeggio — sparse variation",
+              "name": "Clean Arpeggio — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1407,7 +1407,7 @@ const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "metal-bass-gallop-v-01",
               "parentPatternId": "metal-bass-gallop",
-              "name": "Bass Gallop — sparse variation",
+              "name": "Bass Gallop — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1590,7 +1590,7 @@ const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "metal-prog-odd-meter-v-01",
               "parentPatternId": "metal-prog-odd-meter",
-              "name": "5/8 Riff — sparse variation",
+              "name": "5/8 Riff — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1734,7 +1734,7 @@ const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "metal-groove-metal-v-01",
               "parentPatternId": "metal-groove-metal",
-              "name": "Groove Metal Riff — sparse variation",
+              "name": "Groove Metal Riff — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1912,7 +1912,7 @@ const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "metal-comp-13-v-01",
               "parentPatternId": "metal-comp-13",
-              "name": "Blast Comping — sparse variation",
+              "name": "Blast Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2089,7 +2089,7 @@ const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "metal-verse-15-v-01",
               "parentPatternId": "metal-verse-15",
-              "name": "Breakdown Verse Variation — sparse variation",
+              "name": "Breakdown Verse Variation — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2762,8 +2762,8 @@ const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "metal-nwobhm"
     ],
-    "name": "NWOBHM Signature Cell",
-    "shortName": "NWOBHM Cell",
+    "name": "NWOBHM",
+    "shortName": "NWOBHM",
     "family": "metal",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2837,8 +2837,8 @@ const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "metal-groove-metal"
     ],
-    "name": "Groove Metal Signature Cell",
-    "shortName": "Groove Metal Cell",
+    "name": "Groove Metal",
+    "shortName": "Groove Metal",
     "family": "metal",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2914,8 +2914,8 @@ const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "metal-metalcore"
     ],
-    "name": "Metalcore Signature Cell",
-    "shortName": "Metalcore Cell",
+    "name": "Metalcore",
+    "shortName": "Metalcore",
     "family": "metal",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2997,8 +2997,8 @@ const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "metal-deathcore"
     ],
-    "name": "Deathcore Signature Cell",
-    "shortName": "Deathcore Cell",
+    "name": "Deathcore",
+    "shortName": "Deathcore",
     "family": "metal",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -3082,8 +3082,8 @@ const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "metal-blackgaze"
     ],
-    "name": "Blackgaze Signature Cell",
-    "shortName": "Blackgaze Cell",
+    "name": "Blackgaze",
+    "shortName": "Blackgaze",
     "family": "metal",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -3236,7 +3236,7 @@ const METAL_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "metal-phrase-10-v-01",
               "parentPatternId": "metal-phrase-10",
-              "name": "Breakdown Phrase — sparse variation",
+              "name": "Breakdown Phrase — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3324,7 +3324,7 @@ const METAL_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "id": "metal--phrasing",
           "worldId": "metal",
           "styleIds": ["metal-heavy-metal"],
-          "name": "Metal Vocal Phrasing",
+          "name": "Vocal Phrasing",
           "family": "Vocal Phrasing",
           "category": "phrasePattern",
           "description": "Screamed/clean vocal onset template with accented",
@@ -3400,7 +3400,7 @@ const METAL_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "metal--phrasing-v--alt",
               "parentPatternId": "metal--phrasing",
-              "name": "Metal Vocal Phrasing — alternate phrasing",
+              "name": "Vocal Phrasing — alternate",
               "variationType": "phraseStart",
               "probability": 0.2,
               "description": "An alternate vocal entry shifts the placement of a phrase for subtle rhythmic variation.",
@@ -3440,7 +3440,7 @@ const METAL_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "metal--phrasing-v-final-accent",
               "parentPatternId": "metal--phrasing",
-              "name": "Metal Vocal Phrasing — accent shift",
+              "name": "Vocal Phrasing — accent shift",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "Same rhythmic shape with shifted emphasis",
@@ -3576,7 +3576,7 @@ const METAL_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "metal-call-11-v-01",
               "parentPatternId": "metal-call-11",
-              "name": "Gallop Response — sparse variation",
+              "name": "Gallop Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3648,7 +3648,7 @@ const METAL_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "metal-call-11-v-03",
               "parentPatternId": "metal-call-11",
-              "name": "Gallop Response — transition variation",
+              "name": "Gallop Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3795,7 +3795,7 @@ const METAL_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "metal-intro-14-v-01",
               "parentPatternId": "metal-intro-14",
-              "name": "Lead Intro — sparse variation",
+              "name": "Lead Intro — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3879,7 +3879,7 @@ const METAL_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "metal-intro-14-v-03",
               "parentPatternId": "metal-intro-14",
-              "name": "Lead Intro — transition variation",
+              "name": "Lead Intro — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -4041,7 +4041,7 @@ const METAL_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "metal-chorus-16-v-01",
               "parentPatternId": "metal-chorus-16",
-              "name": "Gallop Chorus Lift — sparse variation",
+              "name": "Gallop Chorus Lift — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -4125,7 +4125,7 @@ const METAL_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "metal-chorus-16-v-03",
               "parentPatternId": "metal-chorus-16",
-              "name": "Gallop Chorus Lift — transition variation",
+              "name": "Gallop Chorus Lift — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",

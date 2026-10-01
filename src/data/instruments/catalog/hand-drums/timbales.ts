@@ -40,7 +40,7 @@ export const timbales: InstrumentDef = {
   kitComponents: [
     {
       id: "cascara",
-      name: "Cascara (Metal Shell Stick Tapping)",
+      name: "Cáscara",
       midi: 68,
       physicalType: "metal",
       tuningHz: 950,

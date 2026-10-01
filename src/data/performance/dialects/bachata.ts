@@ -3,7 +3,7 @@ import type { InstrumentDialect } from '../../styles/contracts';
 export const ENTRY_19: [string, InstrumentDialect] = ["requinto:bachata", {
     id: 'requinto:bachata',
     instrumentId: 'requinto',
-    name: 'Requinto (Bachata/Latin)',
+    name: 'Requinto',
     family: 'guitar',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'pluck',

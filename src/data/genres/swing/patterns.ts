@@ -65,7 +65,7 @@ const SWING_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "swing-spang-v-01",
               "parentPatternId": "swing-spang",
-              "name": "Spang-a-lang — sparse variation",
+              "name": "Spang-a-lang — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -345,7 +345,7 @@ const SWING_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "swing-2-feel-v-01-safe",
               "parentPatternId": "swing-2-feel",
-              "name": "2-Feel Bass — played variation",
+              "name": "2-Feel Bass — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -369,7 +369,7 @@ const SWING_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "swing-2-feel-v-02-safe",
               "parentPatternId": "swing-2-feel",
-              "name": "2-Feel Bass — played variation",
+              "name": "2-Feel Bass — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -463,7 +463,7 @@ const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "swing-charleston-v-01-safe",
               "parentPatternId": "swing-charleston",
-              "name": "Charleston Comping — played variation",
+              "name": "Charleston Comping — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -487,7 +487,7 @@ const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "swing-charleston-v-02-safe",
               "parentPatternId": "swing-charleston",
-              "name": "Charleston Comping — played variation",
+              "name": "Charleston Comping — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -764,7 +764,7 @@ const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "swing-bebop-ride-v-01",
               "parentPatternId": "swing-bebop-ride",
-              "name": "Bebop Ride — sparse variation",
+              "name": "Bebop Ride — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1017,7 +1017,7 @@ const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "swing-ensemble-v-01",
               "parentPatternId": "swing-ensemble",
-              "name": "Ensemble Hits — sparse variation",
+              "name": "Ensemble Hits — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1088,7 +1088,7 @@ const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "id": "swing-comp-13",
           "worldId": "swing",
           "styleIds": ["swing-big-band-swing"],
-          "name": "Piano Comping Cell",
+          "name": "Piano Comping",
           "family": "Comping",
           "category": "groove",
           "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
@@ -1165,7 +1165,7 @@ const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "swing-comp-13-v-01",
               "parentPatternId": "swing-comp-13",
-              "name": "Piano Comping Cell — sparse variation",
+              "name": "Piano Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1201,7 +1201,7 @@ const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "swing-comp-13-v-02",
               "parentPatternId": "swing-comp-13",
-              "name": "Piano Comping Cell — accent shift",
+              "name": "Piano Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -1341,7 +1341,7 @@ const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "swing-verse-15-v-01",
               "parentPatternId": "swing-verse-15",
-              "name": "Spang-a-Lang Verse Variation — sparse variation",
+              "name": "Spang-a-Lang Verse Variation — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1575,8 +1575,8 @@ const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
       "swing-chicago-swing",
       "swing-vocal-swing"
     ],
-    "name": "swing triplets",
-    "shortName": "swing triplets",
+    "name": "triplets",
+    "shortName": "triplets",
     "family": "swing",
     "category": "groove",
     "description": "Technique: swing triplets",
@@ -1721,8 +1721,8 @@ const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "swing-new-orleans-trad-jazz"
     ],
-    "name": "New Orleans Trad Jazz Signature Cell",
-    "shortName": "New Orleans Trad Jazz Cell",
+    "name": "New Orleans Trad Jazz",
+    "shortName": "New Orleans Trad Jazz",
     "family": "swing",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -1797,8 +1797,8 @@ const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "swing-kansas-city-swing"
     ],
-    "name": "Kansas City Swing Signature Cell",
-    "shortName": "Kansas City Swing Cell",
+    "name": "Kansas City Swing",
+    "shortName": "Kansas City Swing",
     "family": "swing",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -1875,8 +1875,8 @@ const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "swing-chicago-swing"
     ],
-    "name": "Chicago Swing Signature Cell",
-    "shortName": "Chicago Swing Cell",
+    "name": "Chicago Swing",
+    "shortName": "Chicago Swing",
     "family": "swing",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -1952,8 +1952,8 @@ const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "swing-vocal-swing"
     ],
-    "name": "Vocal Swing Signature Cell",
-    "shortName": "Vocal Swing Cell",
+    "name": "Vocal Swing",
+    "shortName": "Vocal Swing",
     "family": "swing",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2094,7 +2094,7 @@ const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "swing-shout-chorus-v-01",
               "parentPatternId": "swing-shout-chorus",
-              "name": "Shout Chorus Ensemble Hits — sparse variation",
+              "name": "Shout Chorus Ensemble Hits — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2166,7 +2166,7 @@ const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "swing-shout-chorus-v-03",
               "parentPatternId": "swing-shout-chorus",
-              "name": "Shout Chorus Ensemble Hits — transition variation",
+              "name": "Shout Chorus Ensemble Hits — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -2310,7 +2310,7 @@ const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "swing-intro-14-v-01",
               "parentPatternId": "swing-intro-14",
-              "name": "Turnaround Intro — sparse variation",
+              "name": "Turnaround Intro — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2390,7 +2390,7 @@ const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "swing-intro-14-v-03",
               "parentPatternId": "swing-intro-14",
-              "name": "Turnaround Intro — transition variation",
+              "name": "Turnaround Intro — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -2542,7 +2542,7 @@ const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "swing-chorus-16-v-01",
               "parentPatternId": "swing-chorus-16",
-              "name": "La Pompe Chorus Lift — sparse variation",
+              "name": "La Pompe Chorus Lift — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2622,7 +2622,7 @@ const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "swing-chorus-16-v-03",
               "parentPatternId": "swing-chorus-16",
-              "name": "La Pompe Chorus Lift — transition variation",
+              "name": "La Pompe Chorus Lift — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -2770,7 +2770,7 @@ const SWING_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "swing-phrase-10-v-01",
               "parentPatternId": "swing-phrase-10",
-              "name": "Spang-a-Lang Phrase — sparse variation",
+              "name": "Spang-a-Lang Phrase — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2865,7 +2865,7 @@ const SWING_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "id": "swing--phrasing",
           "worldId": "swing",
           "styleIds": ["swing-big-band-swing"],
-          "name": "Swing Vocal Phrasing",
+          "name": "Vocal Phrasing",
           "family": "Vocal Phrasing",
           "category": "phrasePattern",
           "description": "Dedicated vocal phrasing space for Swing,",
@@ -2941,7 +2941,7 @@ const SWING_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "swing--phrasing-v1",
               "parentPatternId": "swing--phrasing",
-              "name": "Swing Vocal Phrasing — sparse",
+              "name": "Vocal Phrasing — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Sparse answer-friendly repeat.",
@@ -2967,7 +2967,7 @@ const SWING_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "swing--phrasing-v2",
               "parentPatternId": "swing--phrasing",
-              "name": "Swing Vocal Phrasing — accent shift",
+              "name": "Vocal Phrasing — accent shift",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "Shifted vocal emphasis for repeat variation.",
@@ -3102,7 +3102,7 @@ const SWING_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "swing-call-11-v-01",
               "parentPatternId": "swing-call-11",
-              "name": "La Pompe Response — sparse variation",
+              "name": "La Pompe Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3182,7 +3182,7 @@ const SWING_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "swing-call-11-v-03",
               "parentPatternId": "swing-call-11",
-              "name": "La Pompe Response — transition variation",
+              "name": "La Pompe Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3331,7 +3331,7 @@ const SWING_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "swing-anchor-12-v-01",
               "parentPatternId": "swing-anchor-12",
-              "name": "Shout Anchor — sparse variation",
+              "name": "Shout Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",

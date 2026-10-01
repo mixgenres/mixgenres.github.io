@@ -6,7 +6,7 @@ const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "flam-abanico-strum",
           "worldId": "flamenco",
           "styleIds": ["flamenco-rumba"],
-          "name": "Abanico Fan Strum (Rumba)",
+          "name": "Abanico Fan Strum",
           "family": "Rasgueado Strumming",
           "category": "ostinato",
           "description": "Continuous triplets and fan strums utilizing",
@@ -220,7 +220,7 @@ const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "flam-tangos-compas",
           "worldId": "flamenco",
           "styleIds": ["flamenco-tangos-style"],
-          "name": "Tangos de Triana (Binary Compás)",
+          "name": "Tangos de Triana",
           "family": "Tangos Rhythm",
           "category": "ostinato",
           "description": "Iconic 4/4 flamenco pulse where beat",
@@ -313,7 +313,7 @@ const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "flam-tangos-compas-v-02",
               "parentPatternId": "flam-tangos-compas",
-              "name": "Tangos de Triana (Binary Compás) — accent shift",
+              "name": "Tangos de Triana — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -442,7 +442,7 @@ const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "flamenco-anchor-12-v-01",
               "parentPatternId": "flamenco-anchor-12",
-              "name": "Rasgueado Anchor — sparse variation",
+              "name": "Rasgueado Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -660,7 +660,7 @@ const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "flam-alegrias-compas",
           "worldId": "flamenco",
           "styleIds": ["flamenco-alegrias-style"],
-          "name": "Alegrías / Cantiñas Bright Compás",
+          "name": "Alegrías/Cantiñas Bright Compás",
           "family": "Cantiñas Compás",
           "category": "ostinato",
           "description": "Bright 12-beat cantiñas framework: the soleá-family",
@@ -745,7 +745,7 @@ const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "flam-tangos-guitar",
           "worldId": "flamenco",
           "styleIds": ["flamenco-tangos-style"],
-          "name": "Tangos Flamencos Guitar Compás",
+          "name": "Tangos Guitar Compás",
           "family": "Binary Compás",
           "category": "ostinato",
           "description": "Flamenco tangos guitar pulse: beat 1",
@@ -1078,7 +1078,7 @@ const FLAMENCO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "flam-solea-cierre",
               "parentPatternId": "flam-solea-12beat",
-              "name": "Soleá Cierre (Formal Cadence on 10)",
+              "name": "Soleá Cierre",
               "variationType": "cadence",
               "probability": 0.6,
               "onsetGrid": [
@@ -1249,7 +1249,7 @@ const FLAMENCO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "flam-falseta-tremolo-swell",
               "parentPatternId": "flam-falseta-melodic",
-              "name": "4-Note Flamenco Tremolo Swell",
+              "name": "4-note Tremolo Swell",
               "variationType": "dense",
               "probability": 0.5,
               "onsetGrid": [
@@ -1453,7 +1453,7 @@ const FLAMENCO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "flamenco-phrase-10-v-01",
               "parentPatternId": "flamenco-phrase-10",
-              "name": "Llamada Phrase — sparse variation",
+              "name": "Llamada Phrase — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1673,7 +1673,7 @@ const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "id": "flam-alzapua-bass",
           "worldId": "flamenco",
           "styleIds": ["flamenco-buleria-style"],
-          "name": "Alzapúa Thumb Technique (Bass Driver)",
+          "name": "Alzapúa Thumb Technique",
           "family": "Thumb Virtuosity",
           "category": "rolePattern",
           "description": "The iconic three-stroke thumb pattern begins with a downstroke on the beat.",
@@ -1783,7 +1783,7 @@ const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
             {
               "id": "flam-alzapua-bass-v-02",
               "parentPatternId": "flam-alzapua-bass",
-              "name": "Alzapúa Thumb Technique (Bass Driver) — accent shift",
+              "name": "Alzapúa Thumb Technique — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -2398,7 +2398,7 @@ const FLAMENCO_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           "id": "flamenco-golpe",
           "worldId": "flamenco",
           "styleIds": ["flamenco-solea-style"],
-          "name": "Golpe (Tap)",
+          "name": "Golpe",
           "family": "Percussion",
           "category": "fill",
           "transitionType": "fill",
@@ -2450,7 +2450,7 @@ const FLAMENCO_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "flamenco-golpe-v-01",
               "parentPatternId": "flamenco-golpe",
-              "name": "Golpe (Tap) — sparse variation",
+              "name": "Golpe — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2478,7 +2478,7 @@ const FLAMENCO_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "flamenco-golpe-v-02",
               "parentPatternId": "flamenco-golpe",
-              "name": "Golpe (Tap) — accent shift",
+              "name": "Golpe — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -2588,7 +2588,7 @@ const FLAMENCO_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "flamenco-bulerias-palmas-v-01",
               "parentPatternId": "flamenco-bulerias-palmas",
-              "name": "Bulerias Palmas — sparse variation",
+              "name": "Bulerias Palmas — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2741,7 +2741,7 @@ const FLAMENCO_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "flamenco-picado-variant-flamenco-tremolo",
               "parentPatternId": "flamenco-picado",
-              "name": "Flamenco Tremolo",
+              "name": "Tremolo",
               "variationType": "instrumentSpecific",
               "probability": 0.18,
               "description": "5-note tremolo pattern (p-i-a-m-i) with thumb",
@@ -3073,7 +3073,7 @@ const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "flamenco-cajon-rumba-v-01",
               "parentPatternId": "flamenco-cajon-rumba",
-              "name": "Cajon Rumba — sparse variation",
+              "name": "Cajon Rumba — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3240,7 +3240,7 @@ const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "flamenco-comp-13-v-01",
               "parentPatternId": "flamenco-comp-13",
-              "name": "Falseta Comping — sparse variation",
+              "name": "Falseta Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3403,7 +3403,7 @@ const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "flamenco-verse-15-v-01",
               "parentPatternId": "flamenco-verse-15",
-              "name": "Llamada Verse Variation — sparse variation",
+              "name": "Llamada Verse Variation — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3491,7 +3491,7 @@ const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "id": "flam-buleria-compas",
           "worldId": "flamenco",
           "styleIds": ["flamenco-buleria-style"],
-          "name": "Bulería Compás / Jerez Drive",
+          "name": "Bulería Compás/Jerez Drive",
           "family": "Bulería Compás",
           "category": "groove",
           "description": "Fast 12-beat bulería framework with elastic",
@@ -3582,7 +3582,7 @@ const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "flam-buleria-compas-corte",
               "parentPatternId": "flam-buleria-compas",
-              "name": "Bulería Corte / Stop",
+              "name": "Bulería Corte/Stop",
               "variationType": "cadence",
               "probability": 0.35,
               "description": "Quick corte before the next respuesta.",
@@ -4171,8 +4171,8 @@ const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "flamenco-solea-por-medio"
     ],
-    "name": "Soleá por Medio Signature Cell",
-    "shortName": "Soleá por Medio Cell",
+    "name": "Soleá por Medio",
+    "shortName": "Soleá por Medio",
     "family": "flamenco",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -4253,8 +4253,8 @@ const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "flamenco-flamenco-fusion"
     ],
-    "name": "Flamenco Fusion Signature Cell",
-    "shortName": "Flamenco Fusion Cell",
+    "name": "Fusion",
+    "shortName": "Fusion",
     "family": "flamenco",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -4327,8 +4327,8 @@ const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "flamenco-nuevo-flamenco"
     ],
-    "name": "Nuevo Flamenco Signature Cell",
-    "shortName": "Nuevo Flamenco Cell",
+    "name": "Nuevo Flamenco",
+    "shortName": "Nuevo Flamenco",
     "family": "flamenco",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -4401,8 +4401,8 @@ const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "flamenco-cante-jondo"
     ],
-    "name": "Cante Jondo Signature Cell",
-    "shortName": "Cante Jondo Cell",
+    "name": "Cante Jondo",
+    "shortName": "Cante Jondo",
     "family": "flamenco",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -4565,7 +4565,7 @@ const FLAMENCO_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "flamenco-call-11-v-01",
               "parentPatternId": "flamenco-call-11",
-              "name": "Remate Response — sparse variation",
+              "name": "Remate Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -4645,7 +4645,7 @@ const FLAMENCO_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "flamenco-call-11-v-03",
               "parentPatternId": "flamenco-call-11",
-              "name": "Remate Response — transition variation",
+              "name": "Remate Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -4794,7 +4794,7 @@ const FLAMENCO_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "flamenco-intro-14-v-01",
               "parentPatternId": "flamenco-intro-14",
-              "name": "Compás Intro — sparse variation",
+              "name": "Compás Intro — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -4866,7 +4866,7 @@ const FLAMENCO_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "flamenco-intro-14-v-03",
               "parentPatternId": "flamenco-intro-14",
-              "name": "Compás Intro — transition variation",
+              "name": "Compás Intro — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -5010,7 +5010,7 @@ const FLAMENCO_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "flamenco-chorus-16-v-01",
               "parentPatternId": "flamenco-chorus-16",
-              "name": "Remate Chorus Lift — sparse variation",
+              "name": "Remate Chorus Lift — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -5082,7 +5082,7 @@ const FLAMENCO_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "flamenco-chorus-16-v-03",
               "parentPatternId": "flamenco-chorus-16",
-              "name": "Remate Chorus Lift — transition variation",
+              "name": "Remate Chorus Lift — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -5221,7 +5221,7 @@ const FLAMENCO_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "flamenco-bridge-17-v-01",
               "parentPatternId": "flamenco-bridge-17",
-              "name": "Rasgueado Bridge — sparse variation",
+              "name": "Rasgueado Bridge — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -5281,7 +5281,7 @@ const FLAMENCO_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "flamenco-bridge-17-v-03",
               "parentPatternId": "flamenco-bridge-17",
-              "name": "Rasgueado Bridge — transition variation",
+              "name": "Rasgueado Bridge — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",

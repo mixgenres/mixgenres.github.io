@@ -39,7 +39,7 @@ export const palmas: InstrumentDef = {
   kitComponents: [
     {
       id: "palmas-sordas",
-      name: "Palmas Sordas (Cupped Muted Clap)",
+      name: "Palmas Sordas",
       midi: 39,
       physicalType: "membrane",
       tuningHz: 380,
@@ -52,7 +52,7 @@ export const palmas: InstrumentDef = {
     },
     {
       id: "palmas-claras",
-      name: "Palmas Claras / Fuertes (Open Sharp Clap)",
+      name: "Palmas Claras / Fuertes",
       midi: 40,
       physicalType: "metal",
       tuningHz: 2800,

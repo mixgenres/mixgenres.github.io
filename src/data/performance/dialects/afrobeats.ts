@@ -3,7 +3,7 @@ import type { InstrumentDialect } from '../../styles/contracts';
 export const ENTRY_18: [string, InstrumentDialect] = ["log-drum:afrobeats", {
     id: 'log-drum:afrobeats',
     instrumentId: 'log-drum',
-    name: 'Log Drum (Afrobeats/Amapiano)',
+    name: 'Log Drum',
     family: 'percussion',
     performanceMode: 'programmed-electronic',
     defaultTechnique: 'open',

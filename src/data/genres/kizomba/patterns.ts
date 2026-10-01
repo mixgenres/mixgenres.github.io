@@ -6,7 +6,7 @@ const KIZOMBA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           "id": "kizomba-batida-groove",
           "worldId": "kizomba",
           "styleIds": ["kizomba-semba-playful"],
-          "name": "Kizomba Batida & Sub-Kick Beat",
+          "name": "Batida & Sub-Kick Beat",
           "family": "Kizomba Drumming",
           "category": "break",
           "transitionType": "fill",
@@ -93,7 +93,7 @@ const KIZOMBA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "kizomba-batida-groove-v-02",
               "parentPatternId": "kizomba-batida-groove",
-              "name": "Kizomba Batida & Sub-Kick Beat — accent shift",
+              "name": "Batida & Sub-Kick Beat — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -216,7 +216,7 @@ const KIZOMBA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "kizomba-dikanza-scraper-v-01",
               "parentPatternId": "kizomba-dikanza-scraper",
-              "name": "Dikanza Scraper — sparse variation",
+              "name": "Dikanza Scraper — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -376,7 +376,7 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "kizomba-semba-guitar-v-01",
               "parentPatternId": "kizomba-semba-guitar",
-              "name": "Semba Guitar Arpeggio — sparse variation",
+              "name": "Semba Guitar Arpeggio — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -523,7 +523,7 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "kizomba-tarraxinha-sub-v-01",
               "parentPatternId": "kizomba-tarraxinha-sub",
-              "name": "Tarraxinha Sub-Bass — sparse variation",
+              "name": "Tarraxinha Sub-Bass — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -597,7 +597,7 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "id": "kizomba-kick-batida",
           "worldId": "kizomba",
           "styleIds": ["kizomba-semba-playful"],
-          "name": "Kizomba Kick Batida",
+          "name": "Kick Batida",
           "family": "Beat",
           "category": "groove",
           "description": "Classic syncopated kizomba batida kick pattern",
@@ -651,7 +651,7 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "kizomba-kick-batida-v-01",
               "parentPatternId": "kizomba-kick-batida",
-              "name": "Kizomba Kick Batida — sparse variation",
+              "name": "Kick Batida — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -679,7 +679,7 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "kizomba-kick-batida-v-02",
               "parentPatternId": "kizomba-kick-batida",
-              "name": "Kizomba Kick Batida — accent shift",
+              "name": "Kick Batida — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -733,7 +733,7 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "id": "kizomba-hats",
           "worldId": "kizomba",
           "styleIds": ["kizomba-semba-playful"],
-          "name": "Kizomba Hi-Hats",
+          "name": "Hi-Hats",
           "family": "Beat",
           "category": "groove",
           "description": "16th note hi-hats with subtle swing",
@@ -798,7 +798,7 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "kizomba-hats-v-01",
               "parentPatternId": "kizomba-hats",
-              "name": "Kizomba Hi-Hats — sparse variation",
+              "name": "Hi-Hats — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -834,7 +834,7 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "kizomba-hats-v-02",
               "parentPatternId": "kizomba-hats",
-              "name": "Kizomba Hi-Hats — accent shift",
+              "name": "Hi-Hats — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -963,7 +963,7 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "kizomba-urban-synth-pulse-v-01",
               "parentPatternId": "kizomba-urban-synth-pulse",
-              "name": "Urban Kiz Synth Pulse — sparse variation",
+              "name": "Urban Kiz Synth Pulse — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1049,7 +1049,7 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "id": "kizomba-vocal-comping",
           "worldId": "kizomba",
           "styleIds": ["kizomba-semba-playful"],
-          "name": "Kizomba Vocal Phrase Response",
+          "name": "Vocal Phrase Response",
           "family": "synth",
           "category": "groove",
           "description": "Sensual vocal phrase answers and smooth",
@@ -1102,7 +1102,7 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "kizomba-vocal-comping-v-01",
               "parentPatternId": "kizomba-vocal-comping",
-              "name": "Kizomba Vocal Phrase Response — sparse variation",
+              "name": "Vocal Phrase Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1130,7 +1130,7 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "kizomba-vocal-comping-v-02",
               "parentPatternId": "kizomba-vocal-comping",
-              "name": "Kizomba Vocal Phrase Response — accent shift",
+              "name": "Vocal Phrase Response — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -1265,7 +1265,7 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "kizomba-comp-12-v-01",
               "parentPatternId": "kizomba-comp-12",
-              "name": "Call Comping — sparse variation",
+              "name": "Call Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1451,7 +1451,7 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "kizomba-verse-14-v-01",
               "parentPatternId": "kizomba-verse-14",
-              "name": "Hook Verse Variation — sparse variation",
+              "name": "Hook Verse Variation — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1907,8 +1907,8 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "kizomba-classic-angolan-kizomba"
     ],
-    "name": "Classic Angolan Kizomba Signature Cell",
-    "shortName": "Classic Angolan Kizomba Cell",
+    "name": "Classic Angolan Kizomba",
+    "shortName": "Classic Angolan Kizomba",
     "family": "kizomba",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -1985,8 +1985,8 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "kizomba-semba-to-kizomba-transition"
     ],
-    "name": "Semba-to-Kizomba Transition Signature Cell",
-    "shortName": "Semba-to-Kizomba Transition Cell",
+    "name": "Semba-to-Kizomba Transition",
+    "shortName": "Semba-to-Kizomba Transition",
     "family": "kizomba",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2063,8 +2063,8 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "kizomba-cape-verdean-ghetto-zouk"
     ],
-    "name": "Cape Verdean Ghetto Zouk Signature Cell",
-    "shortName": "Cape Verdean Ghetto Zouk Cell",
+    "name": "Cape Verdean Ghetto Zouk",
+    "shortName": "Cape Verdean Ghetto Zouk",
     "family": "kizomba",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2141,8 +2141,8 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "kizomba-minimal-tarraxinha"
     ],
-    "name": "Minimal Tarraxinha Signature Cell",
-    "shortName": "Minimal Tarraxinha Cell",
+    "name": "Minimal Tarraxinha",
+    "shortName": "Minimal Tarraxinha",
     "family": "kizomba",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2219,8 +2219,8 @@ const KIZOMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "kizomba-tarraxo-club"
     ],
-    "name": "Tarraxo Club Signature Cell",
-    "shortName": "Tarraxo Club Cell",
+    "name": "Tarraxo Club",
+    "shortName": "Tarraxo Club",
     "family": "kizomba",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2379,7 +2379,7 @@ const KIZOMBA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "kizomba-phrase-9-v-01",
               "parentPatternId": "kizomba-phrase-9",
-              "name": "Hook Phrase — sparse variation",
+              "name": "Hook Phrase — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2479,7 +2479,7 @@ const KIZOMBA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           "id": "kizomba-call-10",
           "worldId": "kizomba",
           "styleIds": ["kizomba-semba-playful"],
-          "name": "Kizomba Bass Response",
+          "name": "Bass Response",
           "family": "Kizomba Bass",
           "category": "interactionPattern",
           "description": "A call-and-response shape that gives the lead and accompaniment distinct roles.",
@@ -2560,7 +2560,7 @@ const KIZOMBA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "kizomba-call-10-v-01",
               "parentPatternId": "kizomba-call-10",
-              "name": "Kizomba Bass Response — sparse variation",
+              "name": "Bass Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2596,7 +2596,7 @@ const KIZOMBA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "kizomba-call-10-v-02",
               "parentPatternId": "kizomba-call-10",
-              "name": "Kizomba Bass Response — accent shift",
+              "name": "Bass Response — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -2640,7 +2640,7 @@ const KIZOMBA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "kizomba-call-10-v-03",
               "parentPatternId": "kizomba-call-10",
-              "name": "Kizomba Bass Response — transition variation",
+              "name": "Bass Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -2789,7 +2789,7 @@ const KIZOMBA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "kizomba-anchor-11-v-01",
               "parentPatternId": "kizomba-anchor-11",
-              "name": "Semba Anchor — sparse variation",
+              "name": "Semba Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2975,7 +2975,7 @@ const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "kizomba-intro-13-v-01",
               "parentPatternId": "kizomba-intro-13",
-              "name": "Drop Intro — sparse variation",
+              "name": "Drop Intro — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3059,7 +3059,7 @@ const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "kizomba-intro-13-v-03",
               "parentPatternId": "kizomba-intro-13",
-              "name": "Drop Intro — transition variation",
+              "name": "Drop Intro — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3123,7 +3123,7 @@ const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           "id": "kizomba-chorus-15",
           "worldId": "kizomba",
           "styleIds": ["kizomba-semba-playful"],
-          "name": "Kizomba Bass Chorus Lift",
+          "name": "Bass Chorus Lift",
           "family": "Kizomba Bass",
           "category": "sectionPattern",
           "description": "A higher-energy chorus layer increases rhythmic density while keeping the underlying pulse clear.",
@@ -3214,7 +3214,7 @@ const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "kizomba-chorus-15-v-01",
               "parentPatternId": "kizomba-chorus-15",
-              "name": "Kizomba Bass Chorus Lift — sparse variation",
+              "name": "Bass Chorus Lift — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3250,7 +3250,7 @@ const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "kizomba-chorus-15-v-02",
               "parentPatternId": "kizomba-chorus-15",
-              "name": "Kizomba Bass Chorus Lift — accent shift",
+              "name": "Bass Chorus Lift — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -3298,7 +3298,7 @@ const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "kizomba-chorus-15-v-03",
               "parentPatternId": "kizomba-chorus-15",
-              "name": "Kizomba Bass Chorus Lift — transition variation",
+              "name": "Bass Chorus Lift — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3453,7 +3453,7 @@ const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "kizomba-bridge-16-v-01",
               "parentPatternId": "kizomba-bridge-16",
-              "name": "Semba Bridge — sparse variation",
+              "name": "Semba Bridge — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3537,7 +3537,7 @@ const KIZOMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "kizomba-bridge-16-v-03",
               "parentPatternId": "kizomba-bridge-16",
-              "name": "Semba Bridge — transition variation",
+              "name": "Semba Bridge — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3685,7 +3685,7 @@ const KIZOMBA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "kizomba-fill-17-v-01",
               "parentPatternId": "kizomba-fill-17",
-              "name": "Call Fill — sparse variation",
+              "name": "Call Fill — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3745,7 +3745,7 @@ const KIZOMBA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "kizomba-fill-17-v-03",
               "parentPatternId": "kizomba-fill-17",
-              "name": "Call Fill — transition variation",
+              "name": "Call Fill — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3811,8 +3811,8 @@ const KIZOMBA_WORLD_PATTERNS_BASS: MusicalPattern[] = [
       "kizomba-minimal-tarraxinha",
       "kizomba-tarraxo-club"
     ],
-    "name": "kizomba bass ostinato",
-    "shortName": "kizomba bass ostinato",
+    "name": "bass ostinato",
+    "shortName": "bass ostinato",
     "family": "kizomba",
     "category": "bass",
     "description": "Technique: kizomba bass ostinato",

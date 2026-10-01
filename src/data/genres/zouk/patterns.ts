@@ -6,7 +6,7 @@ const ZOUK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "id": "zouk-bass-movement",
           "worldId": "zouk",
           "styleIds": ["zouk-zouk-beton"],
-          "name": "Zouk Syncopated Bass Movement",
+          "name": "Syncopated Bass Movement",
           "family": "Zouk Basslines",
           "category": "ostinato",
           "description": "Warm, round bass with syncopated 16th",
@@ -80,7 +80,7 @@ const ZOUK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "zouk-bass-sub-pulse",
               "parentPatternId": "zouk-bass-movement",
-              "name": "Zouk Love Deep Sub-Bass Glide",
+              "name": "Love Deep Sub-Bass Glide",
               "variationType": "sparse",
               "probability": 0.5,
               "onsetGrid": [
@@ -100,7 +100,7 @@ const ZOUK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "zouk-bass-movement-v-02",
               "parentPatternId": "zouk-bass-movement",
-              "name": "Zouk Syncopated Bass Movement — accent shift",
+              "name": "Syncopated Bass Movement — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -380,7 +380,7 @@ const ZOUK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "zouk-anchor-11-v-01",
               "parentPatternId": "zouk-anchor-11",
-              "name": "Chawa Anchor — sparse variation",
+              "name": "Chawa Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -529,7 +529,7 @@ const ZOUK_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "zouk-french-bass-v-01",
               "parentPatternId": "zouk-french-bass",
-              "name": "French Antillean Zouk Bass — sparse variation",
+              "name": "French Antillean Zouk Bass — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -618,7 +618,7 @@ const ZOUK_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           "id": "zouk-shaker",
           "worldId": "zouk",
           "styleIds": ["zouk-zouk-love"],
-          "name": "Zouk Shaker",
+          "name": "Shaker",
           "family": "Percussion",
           "category": "cadence",
           "transitionType": "fill",
@@ -710,7 +710,7 @@ const ZOUK_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "zouk-shaker-v-01",
               "parentPatternId": "zouk-shaker",
-              "name": "Zouk Shaker — sparse variation",
+              "name": "Shaker — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -770,7 +770,7 @@ const ZOUK_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "zouk-shaker-v-02",
               "parentPatternId": "zouk-shaker",
-              "name": "Zouk Shaker — accent shift",
+              "name": "Shaker — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -940,7 +940,7 @@ const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "zouk-ti-bwa-v-01",
               "parentPatternId": "zouk-ti-bwa",
-              "name": "Ti-Bwa Woodblock Ostinato — sparse variation",
+              "name": "Ti-Bwa Woodblock Ostinato — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1042,7 +1042,7 @@ const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "id": "zouk-synth-chords",
           "worldId": "zouk",
           "styleIds": ["zouk-zouk-love"],
-          "name": "Zouk DX7 Synth Stabs",
+          "name": "DX7 Synth Stabs",
           "family": "Synth",
           "category": "groove",
           "description": "Syncopated DX7 electric piano and FM",
@@ -1098,7 +1098,7 @@ const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "zouk-synth-chords-v-01",
               "parentPatternId": "zouk-synth-chords",
-              "name": "Zouk DX7 Synth Stabs — sparse variation",
+              "name": "DX7 Synth Stabs — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1126,7 +1126,7 @@ const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "zouk-synth-chords-v-02",
               "parentPatternId": "zouk-synth-chords",
-              "name": "Zouk DX7 Synth Stabs — accent shift",
+              "name": "DX7 Synth Stabs — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -1180,7 +1180,7 @@ const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "id": "zouk-snare",
           "worldId": "zouk",
           "styleIds": ["zouk-zouk-beton"],
-          "name": "Zouk Snare Rimshot",
+          "name": "Snare Rimshot",
           "family": "Beat",
           "category": "groove",
           "description": "Snare rimshot on the backbeat locking",
@@ -1227,7 +1227,7 @@ const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "zouk-snare-v-01-safe",
               "parentPatternId": "zouk-snare",
-              "name": "Zouk Snare Rimshot — played variation",
+              "name": "Snare Rimshot — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1251,7 +1251,7 @@ const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "zouk-snare-v-02-safe",
               "parentPatternId": "zouk-snare",
-              "name": "Zouk Snare Rimshot — played variation",
+              "name": "Snare Rimshot — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1355,7 +1355,7 @@ const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "zouk-horn-stabs-v-01",
               "parentPatternId": "zouk-horn-stabs",
-              "name": "Kassav Horn Section Stabs — sparse variation",
+              "name": "Kassav Horn Section Stabs — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1435,7 +1435,7 @@ const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "id": "zouk-comp-12",
           "worldId": "zouk",
           "styleIds": ["zouk-zouk-beton"],
-          "name": "Zouk Love Comping",
+          "name": "Love Comping",
           "family": "Zouk Love",
           "category": "groove",
           "description": "A genre-shaped accompaniment cell that supports the groove while leaving room for the lead.",
@@ -1514,7 +1514,7 @@ const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "zouk-comp-12-v-01",
               "parentPatternId": "zouk-comp-12",
-              "name": "Zouk Love Comping — sparse variation",
+              "name": "Love Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1546,7 +1546,7 @@ const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "zouk-comp-12-v-02",
               "parentPatternId": "zouk-comp-12",
-              "name": "Zouk Love Comping — accent shift",
+              "name": "Love Comping — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
               "description": "Keeps the core rhythm intact while shifting accents to create a fresh variation.",
@@ -1689,7 +1689,7 @@ const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "zouk-verse-14-v-01",
               "parentPatternId": "zouk-verse-14",
-              "name": "Hook Verse Variation — sparse variation",
+              "name": "Hook Verse Variation — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1859,8 +1859,8 @@ const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "zouk-kassav-zouk-beton"
     ],
-    "name": "Kassav' / Zouk Béton Signature Cell",
-    "shortName": "Kassav' / Zouk Béton Cell",
+    "name": "Kassav'/Zouk Béton",
+    "shortName": "Kassav'/Zouk Béton",
     "family": "zouk",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -1938,8 +1938,8 @@ const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "zouk-antillean-big-band-zouk"
     ],
-    "name": "Antillean Big-Band Zouk Signature Cell",
-    "shortName": "Antillean Big-Band Zouk Cell",
+    "name": "Antillean Big-Band Zouk",
+    "shortName": "Antillean Big-Band Zouk",
     "family": "zouk",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2017,8 +2017,8 @@ const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "zouk-cabo-zouk"
     ],
-    "name": "Cabo Zouk Signature Cell",
-    "shortName": "Cabo Zouk Cell",
+    "name": "Cabo Zouk",
+    "shortName": "Cabo Zouk",
     "family": "zouk",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2096,8 +2096,8 @@ const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "zouk-zouk-kizomba-bridge"
     ],
-    "name": "Zouk–Kizomba Bridge Signature Cell",
-    "shortName": "Zouk–Kizomba Bridge Cell",
+    "name": "Zouk–Kizomba Bridge",
+    "shortName": "Zouk–Kizomba Bridge",
     "family": "zouk",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2254,7 +2254,7 @@ const ZOUK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "zouk-phrase-9-v-01",
               "parentPatternId": "zouk-phrase-9",
-              "name": "Hook Phrase — sparse variation",
+              "name": "Hook Phrase — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2342,7 +2342,7 @@ const ZOUK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "id": "zouk--phrasing",
           "worldId": "zouk",
           "styleIds": ["zouk-zouk-beton"],
-          "name": "Zouk Vocal Phrasing",
+          "name": "Vocal Phrasing",
           "family": "Vocal Phrasing",
           "category": "phrasePattern",
           "description": "Breathy lead-vocal placement that leaves space",
@@ -2421,7 +2421,7 @@ const ZOUK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "zouk--phrasing-v--alt",
               "parentPatternId": "zouk--phrasing",
-              "name": "Zouk Vocal Phrasing — alternate phrasing",
+              "name": "Vocal Phrasing — alternate",
               "variationType": "phraseStart",
               "probability": 0.2,
               "description": "An alternate vocal entry shifts the placement of a phrase for subtle rhythmic variation.",
@@ -2461,7 +2461,7 @@ const ZOUK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "zouk--phrasing-v-final-accent",
               "parentPatternId": "zouk--phrasing",
-              "name": "Zouk Vocal Phrasing — accent shift",
+              "name": "Vocal Phrasing — accent shift",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "Same rhythmic shape with shifted emphasis",
@@ -2598,7 +2598,7 @@ const ZOUK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "zouk-call-10-v-01",
               "parentPatternId": "zouk-call-10",
-              "name": "Tarraxinha Response — sparse variation",
+              "name": "Tarraxinha Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2670,7 +2670,7 @@ const ZOUK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "zouk-call-10-v-03",
               "parentPatternId": "zouk-call-10",
-              "name": "Tarraxinha Response — transition variation",
+              "name": "Tarraxinha Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -2817,7 +2817,7 @@ const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "zouk-intro-13-v-01",
               "parentPatternId": "zouk-intro-13",
-              "name": "Drop Intro — sparse variation",
+              "name": "Drop Intro — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2897,7 +2897,7 @@ const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "zouk-intro-13-v-03",
               "parentPatternId": "zouk-intro-13",
-              "name": "Drop Intro — transition variation",
+              "name": "Drop Intro — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3049,7 +3049,7 @@ const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "zouk-chorus-15-v-01",
               "parentPatternId": "zouk-chorus-15",
-              "name": "Tarraxinha Chorus Lift — sparse variation",
+              "name": "Tarraxinha Chorus Lift — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3129,7 +3129,7 @@ const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "zouk-chorus-15-v-03",
               "parentPatternId": "zouk-chorus-15",
-              "name": "Tarraxinha Chorus Lift — transition variation",
+              "name": "Tarraxinha Chorus Lift — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3277,7 +3277,7 @@ const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "zouk-bridge-16-v-01",
               "parentPatternId": "zouk-bridge-16",
-              "name": "Chawa Bridge — sparse variation",
+              "name": "Chawa Bridge — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3357,7 +3357,7 @@ const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "zouk-bridge-16-v-03",
               "parentPatternId": "zouk-bridge-16",
-              "name": "Chawa Bridge — transition variation",
+              "name": "Chawa Bridge — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -3430,8 +3430,8 @@ const ZOUK_WORLD_PATTERNS_BASS: MusicalPattern[] = [
       "zouk-cabo-zouk",
       "zouk-zouk-kizomba-bridge"
     ],
-    "name": "zouk béton bass",
-    "shortName": "zouk béton bass",
+    "name": "béton bass",
+    "shortName": "béton bass",
     "family": "zouk",
     "category": "bass",
     "description": "Technique: zouk béton bass",
@@ -3646,8 +3646,8 @@ const ZOUK_WORLD_PATTERNS_COMPING: MusicalPattern[] = [
       "zouk-antillean-big-band-zouk",
       "zouk-cabo-zouk"
     ],
-    "name": "zouk guitar syncopation",
-    "shortName": "zouk guitar syncopation",
+    "name": "guitar syncopation",
+    "shortName": "guitar syncopation",
     "family": "zouk",
     "category": "comping",
     "description": "Technique: zouk guitar syncopation",
@@ -3860,8 +3860,8 @@ const ZOUK_WORLD_PATTERNS_LEAD: MusicalPattern[] = [
       "zouk-antillean-big-band-zouk",
       "zouk-cabo-zouk"
     ],
-    "name": "zouk horn stab",
-    "shortName": "zouk horn stab",
+    "name": "horn stab",
+    "shortName": "horn stab",
     "family": "zouk",
     "category": "lead",
     "description": "Technique: zouk horn stab",

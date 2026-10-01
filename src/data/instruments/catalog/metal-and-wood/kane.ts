@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../../schema/instrument-def';
 
 export const kane: InstrumentDef = {
   id: "kane",
-  name: "Kane (Atarigane)",
+  name: "Atarigane",
   family: "metal-and-wood",
   drum: {
     low: 76,

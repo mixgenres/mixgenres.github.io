@@ -221,7 +221,7 @@ const ROCK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "rock-odd-meter-v-01",
               "parentPatternId": "rock-odd-meter",
-              "name": "7/8 Accent Group — sparse variation",
+              "name": "7/8 Accent Group — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -370,7 +370,7 @@ const ROCK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             {
               "id": "rock-anchor-15-v-01",
               "parentPatternId": "rock-anchor-15",
-              "name": "Power Chord Anchor — sparse variation",
+              "name": "Power Chord Anchor — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -526,7 +526,7 @@ const ROCK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             {
               "id": "rock-straight-drive-v-01",
               "parentPatternId": "rock-straight-drive",
-              "name": "Straight-Eighth Drive — sparse variation",
+              "name": "Straight-Eighth Drive — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -697,7 +697,7 @@ const ROCK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "rock-open-close-v-01",
               "parentPatternId": "rock-open-close",
-              "name": "Open Verse → Full Chorus — sparse variation",
+              "name": "Open Verse → Full Chorus — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -757,7 +757,7 @@ const ROCK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
             {
               "id": "rock-open-close-v-03",
               "parentPatternId": "rock-open-close",
-              "name": "Open Verse → Full Chorus — transition variation",
+              "name": "Open Verse → Full Chorus — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
@@ -882,7 +882,7 @@ const ROCK_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             {
               "id": "rock-power-chords-v-01",
               "parentPatternId": "rock-power-chords",
-              "name": "Power Chords — sparse variation",
+              "name": "Power Chords — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1032,7 +1032,7 @@ const ROCK_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "rock-halftime-groove-v-01-safe",
               "parentPatternId": "rock-halftime-groove",
-              "name": "Half-Time Groove — played variation",
+              "name": "Half-Time Groove — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1056,7 +1056,7 @@ const ROCK_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             {
               "id": "rock-halftime-groove-v-02-safe",
               "parentPatternId": "rock-halftime-groove",
-              "name": "Half-Time Groove — played variation",
+              "name": "Half-Time Groove — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1166,7 +1166,7 @@ const ROCK_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             {
               "id": "rock-tom-beat-v-01",
               "parentPatternId": "rock-tom-beat",
-              "name": "Tom Groove — sparse variation",
+              "name": "Tom Groove — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1326,7 +1326,7 @@ const ROCK_WORLD_PATTERNS_CELL: MusicalPattern[] = [
             {
               "id": "rock-organ-sustain-v-01",
               "parentPatternId": "rock-organ-sustain",
-              "name": "Hammond Organ Sustain — sparse variation",
+              "name": "Hammond Organ Sustain — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1457,7 +1457,7 @@ const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "rock-prog-7-8-v-01",
               "parentPatternId": "rock-prog-7-8",
-              "name": "7/8 Riff — sparse variation",
+              "name": "7/8 Riff — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1622,7 +1622,7 @@ const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "rock-prog-synth-v-01",
               "parentPatternId": "rock-prog-synth",
-              "name": "Prog Synth Arp — sparse variation",
+              "name": "Prog Synth Arp — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1835,7 +1835,7 @@ const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "rock-acoustic-strum-v-01",
               "parentPatternId": "rock-acoustic-strum",
-              "name": "Acoustic Strum — sparse variation",
+              "name": "Acoustic Strum — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -1969,7 +1969,7 @@ const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "rock-lead-bend-v-01-safe",
               "parentPatternId": "rock-lead-bend",
-              "name": "Lead Guitar Bend — played variation",
+              "name": "Lead Guitar Bend — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -1993,7 +1993,7 @@ const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "rock-lead-bend-v-02-safe",
               "parentPatternId": "rock-lead-bend",
-              "name": "Lead Guitar Bend — played variation",
+              "name": "Lead Guitar Bend — played",
               "variationType": "accentShift",
               "probability": 0.18,
               "description": "A lightly played variation for sparse sections keeps the groove present without adding density.",
@@ -2107,7 +2107,7 @@ const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "rock-comp-16-v-01",
               "parentPatternId": "rock-comp-16",
-              "name": "Backbeat Comping — sparse variation",
+              "name": "Backbeat Comping — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2272,7 +2272,7 @@ const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             {
               "id": "rock-verse-17-v-01",
               "parentPatternId": "rock-verse-17",
-              "name": "Solo Verse Variation — sparse variation",
+              "name": "Solo Verse Variation — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -2377,8 +2377,8 @@ const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
       "rock-southern-rock",
       "rock-math-rock"
     ],
-    "name": "rock backbeat",
-    "shortName": "rock backbeat",
+    "name": "backbeat",
+    "shortName": "backbeat",
     "family": "rock",
     "category": "groove",
     "description": "Technique: rock backbeat",
@@ -2655,8 +2655,8 @@ const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "rock-rock-roll"
     ],
-    "name": "Rock & Roll Signature Cell",
-    "shortName": "Rock & Roll Cell",
+    "name": "& Roll",
+    "shortName": "& Roll",
     "family": "rock",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2733,8 +2733,8 @@ const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "rock-british-invasion"
     ],
-    "name": "British Invasion Signature Cell",
-    "shortName": "British Invasion Cell",
+    "name": "British Invasion",
+    "shortName": "British Invasion",
     "family": "rock",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2809,8 +2809,8 @@ const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "rock-southern-rock"
     ],
-    "name": "Southern Rock Signature Cell",
-    "shortName": "Southern Rock Cell",
+    "name": "Southern Rock",
+    "shortName": "Southern Rock",
     "family": "rock",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2885,8 +2885,8 @@ const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "rock-krautrock"
     ],
-    "name": "Krautrock Signature Cell",
-    "shortName": "Krautrock Cell",
+    "name": "Krautrock",
+    "shortName": "Krautrock",
     "family": "rock",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -2959,8 +2959,8 @@ const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "rock-math-rock"
     ],
-    "name": "Math Rock Signature Cell",
-    "shortName": "Math Rock Cell",
+    "name": "Math Rock",
+    "shortName": "Math Rock",
     "family": "rock",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -3036,8 +3036,8 @@ const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
     "styleIds": [
       "rock-dream-pop"
     ],
-    "name": "Dream Pop Signature Cell",
-    "shortName": "Dream Pop Cell",
+    "name": "Dream Pop",
+    "shortName": "Dream Pop",
     "family": "rock",
     "category": "groove",
     "description": "Style signature groove cue",
@@ -3114,7 +3114,7 @@ const ROCK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "id": "rock-roster-",
           "worldId": "rock",
           "styleIds": ["rock-hard-rock"],
-          "name": "Rock  part",
+          "name": "part",
           "family": "Build",
           "category": "rolePattern",
           "description": "A default-roster coverage pattern gives each ensemble role a playable part.",
@@ -3190,7 +3190,7 @@ const ROCK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
             {
               "id": "rock-roster-13-v-01",
               "parentPatternId": "rock-roster-",
-              "name": "Build Texture — sparse variation",
+              "name": "Build Texture — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3341,7 +3341,7 @@ const ROCK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "rock-call-14-v-01",
               "parentPatternId": "rock-call-14",
-              "name": "Break Response — sparse variation",
+              "name": "Break Response — sparse",
               "variationType": "sparse",
               "probability": 0.22,
               "description": "Drops selected interior attacks to make room in the groove while preserving its main pulse.",
@@ -3401,7 +3401,7 @@ const ROCK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             {
               "id": "rock-call-14-v-03",
               "parentPatternId": "rock-call-14",
-              "name": "Break Response — transition variation",
+              "name": "Break Response — transition",
               "variationType": "transition",
               "probability": 0.16,
               "description": "Adds a final pickup or closing gesture to give the phrase a more decisive ending.",
