@@ -1,7 +1,8 @@
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
+import { ENGINE_INSTRUMENT_KEYS, instrumentHasKey } from '../../engine/lookup/instrumentKeys.ts';
 import { GESTURE_NAMES } from '../band/gestures.ts';
 import type { LuthierModelCategory } from '../../data/instruments/schema/luthier';
-import { FINGERPAD_GESTURES, HARD_PICK_GESTURES, NAIL_GESTURES, HAMMER_GESTURES, BOW_GESTURES, AIR_GESTURES, BOWED_RENDER_INSTRUMENT_PATTERN } from '../../data/performance/gestureExcitations';
+import { FINGERPAD_GESTURES, HARD_PICK_GESTURES, NAIL_GESTURES, HAMMER_GESTURES, BOW_GESTURES, AIR_GESTURES } from '../../data/performance/gestureExcitations';
 import { matchesGestureConcept } from '../../data/performance/gestureLexicon';
 import { LRUMap, registerCache } from '../cache/lru.ts';
 
@@ -35,7 +36,7 @@ export function resolveRenderGesture(instrumentId: string, gestureCode: number):
   const def = INSTRUMENTS_BY_ID[instrumentId];
   const name = GESTURE_NAMES[gestureCode] ?? 'tone';
   const g = normalizedGesture(name);
-  const isBowed = def?.family === 'bowed' || BOWED_RENDER_INSTRUMENT_PATTERN.test(instrumentId);
+  const isBowed = def?.family === 'bowed' || instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.bowed);
   // A bowed instrument may use a plucked path only for an explicitly authored
   // pizzicato gesture. Generic pick/fingerstyle aliases must never override its
   // bow excitation simply because the gesture vocabulary overlaps.

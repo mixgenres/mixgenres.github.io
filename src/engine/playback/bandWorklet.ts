@@ -1,7 +1,7 @@
-import { ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
+import { instrumentHasKey, ENGINE_INSTRUMENT_KEYS } from '../../engine/lookup/instrumentKeys.ts';
 import { POLYPHONY_FALLBACK_RULES } from '../../data/sound/polyphony';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
-import OfflineRenderer from '@elemaudio/offline-renderer';
+import WebRenderer from '@elemaudio/web-renderer';
 import { el } from '@elemaudio/core';
 import type { LuthierPhysicalParameters } from '../../data/instruments/schema/luthier';
 import type { MasterChain } from '../studio/mixer.ts';
@@ -49,6 +49,11 @@ export function getPolyphonyForTrack(instrumentId: string, role?: string): numbe
   if (typeof def?.polyphony === 'number') return def.polyphony;
   const r = (role || '').toLowerCase();
   const inst = idLower;
+  if (instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.kit)) return 12;
+  if (instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.percussion)) return 10;
+  if (instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.bass)) return 4;
+  if (instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.winds) || instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.brass) || instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.bowed)) return 4;
+  if (instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.keys) || instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.guitar) || instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.strings) || instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.electronic)) return 8;
   for (const rule of POLYPHONY_FALLBACK_RULES) {
     if (rule.roles?.includes(r) || rule.instrumentPattern?.test(inst)) return rule.voices;
   }
@@ -66,12 +71,16 @@ export class BandWorkletNode {
   public static readonly MAX_POLYPHONY = 32;
 
   private ctx!: AudioContext;
-  private core!: InstanceType<typeof OfflineRenderer>;
+  private core!: WebRenderer;
   private audioNode!: AudioNode;
   private voiceSeq = 0;
   private masterChain?: MasterChain;
 
-  private timerIds = new Set<number>();
+  // Min-heap ordered by audio time/sequence. Transport feeds a 400 ms lookahead;
+  // sorting that queue on every note was an avoidable main-thread hotspot in dense arrangements.
+  private scheduledEvents: Array<{ atTime: number; seq: number; fn: () => void }> = [];
+  private schedulerTimer: number | null = null;
+  private schedulerSeq = 0;
 
   public activeWorldId = '';
   public activeStyleId = '';
@@ -116,11 +125,6 @@ export class BandWorkletNode {
           this.paramFlushScheduled = false;
           this.flushParamUpdates();
         });
-      } else {
-        setTimeout(() => {
-          this.paramFlushScheduled = false;
-          this.flushParamUpdates();
-        }, 0);
       }
     }
   }
@@ -190,36 +194,18 @@ export class BandWorkletNode {
       await this.ctx.resume().catch(() => { });
     }
 
-    const offlineCore = new OfflineRenderer();
-    const blockSize = 512;
-    await offlineCore.initialize({
-      numInputChannels: 0,
-      numOutputChannels: 2,
-      sampleRate: context.sampleRate || 44100,
-      blockSize,
-    });
-    this.core = offlineCore;
-
-    const bufferSize = 1024;
-    const scriptNode = context.createScriptProcessor(bufferSize, 0, 2);
-    const tempL = new Float32Array(bufferSize);
-    const tempR = new Float32Array(bufferSize);
-
-    scriptNode.onaudioprocess = (e: AudioProcessingEvent) => {
-      const outL = e.outputBuffer.getChannelData(0);
-      const outR = e.outputBuffer.getChannelData(1);
-      const numBlocks = bufferSize / blockSize;
-      for (let b = 0; b < numBlocks; b++) {
-        const offset = b * blockSize;
-        const subL = tempL.subarray(offset, offset + blockSize);
-        const subR = tempR.subarray(offset, offset + blockSize);
-        offlineCore.process([], [subL, subR]);
-        outL.set(subL, offset);
-        outR.set(subR, offset);
-      }
-    };
-
-    this.audioNode = scriptNode;
+    // The live renderer must run inside an AudioWorklet. The previous implementation
+    // drove OfflineRenderer through ScriptProcessorNode on the main thread, which made
+    // 512/1024-sample callback stalls audible as chopped attacks, especially in dense
+    // tango/flamenco arrangements. WebRenderer uses Elementary's native WASM processor
+    // with the browser's fixed 128-sample render quantum.
+    const webCore = new WebRenderer();
+    this.audioNode = await webCore.initialize(context, {
+      numberOfInputs: 0,
+      numberOfOutputs: 1,
+      outputChannelCount: [2],
+    }, 8);
+    this.core = webCore;
 
     if (this.masterChain) {
       this.masterChain.dispose();
@@ -497,17 +483,79 @@ export class BandWorkletNode {
     this.dirtyTracks.clear();
   }
 
+  /**
+   * One lookahead scheduler for all live control events.
+   *
+   * The old implementation created one setTimeout per note-on/note-off/CC/bend.
+   * A dense tango or flamenco phrase can queue thousands of browser timers inside
+   * the 400 ms transport horizon. Keep the event clock here, but service it with
+   * one timer and let the AudioWorklet own the actual audio rendering.
+   */
   private schedule(fn: () => void, atTime?: number) {
     const now = this.ctx?.currentTime ?? 0;
-    const delay = Math.max(0, (atTime ?? now) - now);
-    if (delay <= 0.005) {
+    const target = atTime ?? now;
+    if (target <= now + 0.005) {
       fn();
-    } else {
-      const id = window.setTimeout(() => {
-        this.timerIds.delete(id);
-        fn();
-      }, delay * 1000);
-      this.timerIds.add(id);
+      return;
+    }
+    this.heapPush({ atTime: target, seq: ++this.schedulerSeq, fn });
+    this.armScheduler();
+  }
+
+  private eventBefore(a: { atTime: number; seq: number }, b: { atTime: number; seq: number }): boolean {
+    return a.atTime < b.atTime || (a.atTime === b.atTime && a.seq < b.seq);
+  }
+
+  private heapPush(event: { atTime: number; seq: number; fn: () => void }) {
+    const heap = this.scheduledEvents;
+    let i = heap.length;
+    heap.push(event);
+    while (i > 0) {
+      const parent = (i - 1) >> 1;
+      if (this.eventBefore(heap[parent], heap[i])) break;
+      [heap[parent], heap[i]] = [heap[i], heap[parent]];
+      i = parent;
+    }
+  }
+
+  private heapPop(): { atTime: number; seq: number; fn: () => void } | undefined {
+    const heap = this.scheduledEvents;
+    if (!heap.length) return undefined;
+    const root = heap[0];
+    const last = heap.pop()!;
+    if (heap.length) {
+      heap[0] = last;
+      let i = 0;
+      while (true) {
+        const left = i * 2 + 1;
+        const right = left + 1;
+        let smallest = i;
+        if (left < heap.length && this.eventBefore(heap[left], heap[smallest])) smallest = left;
+        if (right < heap.length && this.eventBefore(heap[right], heap[smallest])) smallest = right;
+        if (smallest === i) break;
+        [heap[i], heap[smallest]] = [heap[smallest], heap[i]];
+        i = smallest;
+      }
+    }
+    return root;
+  }
+
+  private armScheduler() {
+    if (this.schedulerTimer !== null || this.scheduledEvents.length === 0) return;
+    const now = this.ctx?.currentTime ?? 0;
+    const next = this.scheduledEvents[0];
+    const delayMs = Math.max(1, (next.atTime - now) * 1000);
+    this.schedulerTimer = window.setTimeout(() => {
+      this.schedulerTimer = null;
+      this.drainScheduledEvents();
+      this.armScheduler();
+    }, Math.min(delayMs, 25));
+  }
+
+  private drainScheduledEvents() {
+    const now = this.ctx?.currentTime ?? 0;
+    while (this.scheduledEvents.length && this.scheduledEvents[0].atTime <= now + 0.005) {
+      this.heapPop()!.fn();
     }
   }
 
@@ -693,7 +741,7 @@ export class BandWorkletNode {
 
     const norm = value / 127;
     if (cc === 7 || cc === 11) {
-      const isElectronic = ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN.test((params.instrumentId || '').toLowerCase());
+      const isElectronic = instrumentHasKey(params.instrumentId || '', ENGINE_INSTRUMENT_KEYS.electronic);
       const effectiveModelForGain = isElectronic ? 9 : params.model;
       const baseGain = makeupGainFor(effectiveModelForGain, params.instrumentId);
       params.volume = Math.max(0.01, Math.min(35, norm * baseGain * (params.roleGain ?? 1)));
@@ -756,8 +804,11 @@ export class BandWorkletNode {
   }
 
   softNotesOff() {
-    for (const id of this.timerIds) window.clearTimeout(id);
-    this.timerIds.clear();
+    this.scheduledEvents.length = 0;
+    if (this.schedulerTimer !== null) {
+      window.clearTimeout(this.schedulerTimer);
+      this.schedulerTimer = null;
+    }
 
     for (const [trackId, voices] of this.trackVoicesMap.entries()) {
       for (let vIdx = 0; vIdx < voices.length; vIdx++) {
@@ -771,8 +822,11 @@ export class BandWorkletNode {
   }
 
   clear() {
-    for (const id of this.timerIds) window.clearTimeout(id);
-    this.timerIds.clear();
+    this.scheduledEvents.length = 0;
+    if (this.schedulerTimer !== null) {
+      window.clearTimeout(this.schedulerTimer);
+      this.schedulerTimer = null;
+    }
 
     for (const [trackId, voices] of this.trackVoicesMap.entries()) {
       for (let vIdx = 0; vIdx < voices.length; vIdx++) {

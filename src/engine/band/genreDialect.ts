@@ -1,5 +1,6 @@
 import { contractForGenre } from '../../engine/style/contracts';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
+import { instrumentHasKey } from '../../engine/lookup/instrumentKeys.ts';
 import { getStyle } from '../../engine/style/registry';
 
 import type { InstrumentDialect, PerformanceMode } from '../../data/styles/contracts';
@@ -41,10 +42,8 @@ export function resolveDialect(
         }
 
         // 2. Family / related instrument matches
-        const related: string[] = [];
-        for (const [token, instruments] of Object.entries(RELATED_DIALECT_INSTRUMENTS)) {
-          if (normId.includes(token)) related.push(...instruments);
-        }
+        const related = Object.values(RELATED_DIALECT_INSTRUMENTS)
+          .find(instruments => instruments.includes(normId)) ?? [];
 
         for (const rel of related) {
           const matched = contract.instrumentDialects[rel];
@@ -77,6 +76,15 @@ export function resolveDialect(
     }
   }
 
+  // Exact authored world/instrument dialects are checked before sparse fuzzy
+  // fallback rules. This prevents a fully authored Tango/Flamenco instrument
+  // from silently dropping into the generic dialect just because the contract
+  // does not repeat every instrument entry.
+  if (worldId) {
+    const exactWorldDialect = DIALECTS[`${normId}:${worldId}`];
+    if (exactWorldDialect) return resolveVariants(exactWorldDialect);
+  }
+
   const sparse = fallbackDialectForSparseContracts(instrumentId, worldId, styleId);
   if (sparse) return sparse;
   const def = INSTRUMENTS_BY_ID[normId] || INSTRUMENTS_BY_ID[instrumentId];
@@ -97,6 +105,7 @@ export function fallbackDialectForSparseContracts(
 ): InstrumentDialect | null {
   const token = `${worldId}:${styleId}:${instrumentId}`.toLowerCase();
   const matches = (matcher: DialectMatcher): boolean => {
+    if (matcher.source === 'instrument' && matcher.engineKey) return instrumentHasKey(instrumentId, matcher.engineKey as any);
     const value = matcher.source === 'token' ? token : instrumentId;
     return matcher.includes !== undefined ? value.includes(matcher.includes) : matcher.pattern?.test(value) ?? false;
   };

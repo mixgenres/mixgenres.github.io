@@ -3,7 +3,7 @@
 // rendering audio. Used by reports/style-levels.ts. Optional input: audit/mix-schemas/instrument-levels.json.
 import { existsSync, readFileSync } from 'node:fs';
 import { INSTRUMENTS_BY_ID } from '../../src/data/instruments/index.ts';
-import { ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN } from '../../src/data/instruments/idClassifiers.ts';
+import { instrumentHasKey, ENGINE_INSTRUMENT_KEYS } from '../../src/engine/lookup/instrumentKeys.ts';
 import { PAN_MAP } from '../../src/data/sound/mix/panMap.ts';
 import { ROLE_DB_PROFILES } from '../../src/data/sound/mix/roleProfiles.ts';
 import { GENRE_MIX_OFFSETS } from '../../src/data/sound/mix/genreMixOffsets.ts';
@@ -78,7 +78,7 @@ export function describeMix(sheet: Sheet, perf: Performance): MixDescription {
 
     // --- gain chain: makeupGain * roleGain * trackVolume (mp3Export.ts) ---
     const model = def?.elementaryModel ?? modelForInstrument(instrumentId);
-    const isElectronic = def?.family === 'electronic' || def?.elementaryModel === 9 || ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN.test(instrumentId.toLowerCase());
+    const isElectronic = def?.family === 'electronic' || def?.elementaryModel === 9 || instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.electronic);
     const effectiveModel = isElectronic ? 9 : model;
     const makeup = def?.makeupGain ?? makeupGainFor(effectiveModel, instrumentId);
     const instrumentRole = def?.acousticProfile?.role || 'comp';

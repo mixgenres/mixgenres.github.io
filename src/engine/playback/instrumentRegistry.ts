@@ -1,8 +1,9 @@
-import { BELLOWS_LEGATO_INSTRUMENT_PATTERN, DEFAULT_ACTION_BY_FAMILY } from '../../data/performance/defaultInstrumentActions';
+import { DEFAULT_ACTION_BY_FAMILY } from '../../data/performance/defaultInstrumentActions';
 import { el } from '@elemaudio/core';
 import type { VoiceState, TrackParams } from './elementaryEngine.ts';
 import { midiToFreq } from './elementaryEngine.ts';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
+import { ENGINE_INSTRUMENT_KEYS, instrumentHasKey } from '../../engine/lookup/instrumentKeys.ts';
 import type { InstrumentDSPProfile } from '../../data/sound/schema/dsp-profile';
 import { getGenreDialect } from '../band/instrumentGenreDialect.ts';
 import type { VoiceRenderContext, InstrumentModule } from './instrumentTypes.ts';
@@ -86,7 +87,7 @@ export function buildVoiceContext(
   const family = instrumentDef?.family;
   const defaultAction =
     params.bodyTap > 0.5 ? 'golpe'
-      : family === 'bellows-and-keys' && BELLOWS_LEGATO_INSTRUMENT_PATTERN.test(params.instrumentId ?? '') ? 'legato'
+      : family === 'bellows-and-keys' && instrumentHasKey(params.instrumentId ?? '', ENGINE_INSTRUMENT_KEYS.bellows) ? 'legato'
       : DEFAULT_ACTION_BY_FAMILY[family ?? ''] ?? 'tone';
   const action = voice.action ?? defaultAction;
   const articulation = voice.articulation ?? params.articulation;

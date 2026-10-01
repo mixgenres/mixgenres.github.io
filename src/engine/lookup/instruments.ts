@@ -5,6 +5,7 @@ import type { LuthierPhysicalParameters } from '../../data/instruments/schema/lu
 import type { PluckedPreset } from '../../data/instruments/schema/plucked-preset';
 import { INSTRUMENT_CATALOG } from '../../data/instruments';
 import { INSTRUMENT_PATTERN_KIND_RULES } from '../../data/instruments/patternKinds';
+import { instrumentEngineKeys } from './instrumentKeys.ts';
 export { INSTRUMENT_CATALOG } from '../../data/instruments';
 export type { InstrumentDef, InstrumentFamily, DrumVoice, InstrumentTechniqueProfile } from '../../data/instruments/schema/instrument-def';
 /** Engine-side physics enrichment and runtime instrument queries. */
@@ -76,7 +77,7 @@ export function instrument(id: string): InstrumentDef {
 export function instrumentPatternKinds(id: string): string[] {
   const d = INSTRUMENTS_BY_ID[id];
   if (!d) return [];
-  const out = new Set<string>([id]);
+  const out = new Set<string>([id, ...instrumentEngineKeys(id)]);
   for (const rule of INSTRUMENT_PATTERN_KIND_RULES) {
     const matchesVoicing = rule.voicing !== undefined && d.voicing === rule.voicing;
     const matchesFamily = rule.family !== undefined && d.family === rule.family;

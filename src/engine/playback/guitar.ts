@@ -1,5 +1,5 @@
 import { GUITAR_GENRE_RESPONSE, TANGO_ACOUSTIC_GUITAR_RESPONSE, URBAN_ACOUSTIC_GUITAR_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
-import { GUITAR_INSTRUMENT_PATTERNS } from '../../data/instruments/idClassifiers';
+import { instrumentHasKey, ENGINE_INSTRUMENT_KEYS } from '../../engine/lookup/instrumentKeys.ts';
 import { TARAB_SYMPATHETIC_RATIOS } from '../../data/musicTheory/tarabSympatheticRatios';
 import { GUITAR_EXACT_GENRE_IDS } from '../../data/sound/dsp/genrePlaybackProfiles';
 import { KIZOMBA_PATTERN, REGGAETON_PATTERN, TANGO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
@@ -27,8 +27,8 @@ export default class GuitarModule implements InstrumentModule {
     const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isTangoAcoustic = isTango && GUITAR_INSTRUMENT_PATTERNS.acousticTango.test(instId);
-    const isUrbanAcoustic = (isKizomba || isReggaeton) && GUITAR_INSTRUMENT_PATTERNS.urbanAcoustic.test(instId);
+    const isTangoAcoustic = isTango && instrumentHasKey(instId, ENGINE_INSTRUMENT_KEYS.acousticGuitar);
+    const isUrbanAcoustic = (isKizomba || isReggaeton) && instrumentHasKey(instId, ENGINE_INSTRUMENT_KEYS.acousticGuitar);
     const isMarcato = action === 'marcato' || /marcato/i.test(action ?? '');
     const isArrastre = action === 'arrastre' || /arrastre|drag/i.test(action ?? '');
     const gd = ctx.genreDialect;
@@ -158,7 +158,7 @@ export default class GuitarModule implements InstrumentModule {
       stringSignal = el.add(loop1, el.mul(0.25, loop2));
     }
 
-    const hasJawari = GUITAR_INSTRUMENT_PATTERNS.jawari.test(instId);
+    const hasJawari = instrumentHasKey(instId, ENGINE_INSTRUMENT_KEYS.jawari);
     if (hasJawari) {
       const jawariEnv = el.adsr(0.001, 0.18 + decayTime * 0.30, 0.15, 0.08, gateSignal);
       const buzzAmount = el.add(el.const({ value: 1.0 }), el.mul(el.const({ value: 8.5 }), jawariEnv));

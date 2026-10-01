@@ -12,7 +12,7 @@ import { suggestedPaletteForGenre } from '../../engine/lookup/theory';
 import { clampEnergy, energyForFormIntensity, energyOf, formIntensityForEnergy, shapeScalarOf } from './sectionEnergy.ts';
 import { FEELS, type TempoFeel } from '../../data/tempoFeels';
 import { SECTION_ENERGY_DEFAULT } from '../../data/performance/sectionEnergyDefaults';
-import { BASS_INSTRUMENT_ROLE_PATTERN, VOICE_INSTRUMENT_ROLE_PATTERN, VOICE_FAMILY_ROLE_PATTERN } from '../../data/instruments/roleAssignmentPatterns';
+import { ENGINE_INSTRUMENT_KEYS, instrumentHasKey } from '../lookup/instrumentKeys.ts';
 import { ELECTRONIC_TRACK_GENRE_PATTERN, ACOUSTIC_BASS_TRACK_VOLUME_STEPS, ELECTRONIC_BASS_TRACK_VOLUME_STEPS, FIXED_INSTRUMENT_TRACK_VOLUME, TRACK_VOLUME_BY_ROLE, DEFAULT_TRACK_VOLUME } from '../../data/sound/mix/trackVolume';
 
 export interface Voice extends Track {
@@ -227,10 +227,10 @@ export function guestWorldIdsFor(worldId: string): string[] {
 export function roleForInstrument(instrumentId: string): string {
   const def = INSTRUMENTS_BY_ID[instrumentId];
   if (!def) return 'harmony';
-  if (def.voicing === 'bass' || BASS_INSTRUMENT_ROLE_PATTERN.test(instrumentId)) return 'bass';
+  if (def.voicing === 'bass' || instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.bass)) return 'bass';
   if (def.voicing === 'unpitched') return 'percussion';
   // Keep the composition role vocabulary aligned with instrumentProfile.
-  if (VOICE_INSTRUMENT_ROLE_PATTERN.test(instrumentId) || VOICE_FAMILY_ROLE_PATTERN.test(def.family ?? '')) return 'voice';
+  if (instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.voice) || def.family === 'voice') return 'voice';
   if (def.voicing === 'single') {
     const role = voiceProfile(instrumentId).role;
     return role === 'perc' ? 'percussion' : role;

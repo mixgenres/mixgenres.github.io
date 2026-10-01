@@ -52,7 +52,8 @@
     "audit:style": "node --import tsx scripts/audit/style-audit.ts",
     "report:song-card": "node --import tsx scripts/reports/song-card.ts",
     "render:stems-analyze": "python3 scripts/render/stems-analyze.py",
-    "migrate:consolidate-genres": "python3 scripts/migrations/consolidate-genre-files.py"
+    "migrate:consolidate-genres": "python3 scripts/migrations/consolidate-genre-files.py",
+    "check:runtime-routing": "node --import tsx scripts/checks/runtime-routing.ts"
   },
   "dependencies": {
     "@breezystack/lamejs": "^1.2.7",

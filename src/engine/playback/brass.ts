@@ -1,4 +1,4 @@
-import { HORN_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
+import { instrumentHasKey, ENGINE_INSTRUMENT_KEYS } from '../../engine/lookup/instrumentKeys.ts';
 import { el } from '@elemaudio/core';
 import { getFormantProfileForInstrument } from './elementaryEngine.ts';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
@@ -12,7 +12,7 @@ export default class BrassModule implements InstrumentModule {
     const profile = getFormantProfileForInstrument(params.instrumentId ?? '', 15);
     const trombone = id === 'trombone';
     const muted = id === 'muted-trumpet' || action === 'mute';
-    const horn = HORN_INSTRUMENT_PATTERN.test(id);
+    const horn = instrumentHasKey(id, ENGINE_INSTRUMENT_KEYS.horn);
     const tuba = id === 'tuba';
     const pressure = Math.max(0.05, Math.min(1, params.pressure));
     const lipDrive = dspProfile?.excitationDynamics.lipTensionResistance?.nonlinearBlare ?? (trombone ? 0.72 : 0.82);

@@ -1,4 +1,4 @@
-import { SCRAPER_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
+import { instrumentHasKey, ENGINE_INSTRUMENT_KEYS } from '../../engine/lookup/instrumentKeys.ts';
 import { URBAN_LATIN_INSTRUMENT_RESPONSE, SCRAPER_STROKE_RESPONSE as K } from '../../data/sound/dsp/genreInstrumentProfiles';
 import { KIZOMBA_PATTERN, REGGAETON_PATTERN } from '../../data/sound/dsp/genreClassifiers';
 import { el } from '@elemaudio/core';
@@ -23,7 +23,7 @@ export default class ShakerModule implements InstrumentModule {
     const freqDev = randNorm(hitSeed ^ 0x9999) * 200;
 
     const instId = (params.instrumentId ?? '').toLowerCase();
-    const isScraper = SCRAPER_INSTRUMENT_PATTERN.test(instId);
+    const isScraper = instrumentHasKey(instId, ENGINE_INSTRUMENT_KEYS.scraper);
     const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
 

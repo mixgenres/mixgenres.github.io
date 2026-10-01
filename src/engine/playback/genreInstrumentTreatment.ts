@@ -1,4 +1,4 @@
-import { GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS } from '../../data/instruments/idClassifiers';
+import { instrumentHasKey, ENGINE_INSTRUMENT_KEYS } from '../../engine/lookup/instrumentKeys.ts';
 import { el } from '@elemaudio/core';
 import type { VoiceRenderContext, AudioSignal } from './instrumentTypes.ts';
 
@@ -8,16 +8,15 @@ import type { VoiceRenderContext, AudioSignal } from './instrumentTypes.ts';
  * attacks and mechanical noise belong to the instrument module, so this layer
  * must not add generic noise sources that can read as extra instruments.
  */
-export function applyGenreInstrumentTreatment(audio: AudioSignal, ctx: VoiceRenderContext, family?: string): AudioSignal {
+export function applyGenreInstrumentTreatment(audio: AudioSignal, ctx: VoiceRenderContext, _family?: string): AudioSignal {
   const g = ctx.genreDialect;
   const inst = (ctx.params.instrumentId ?? '').toLowerCase();
-  const fam = String(family ?? '').toLowerCase();
-  const isBass = GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.bassInstrument.test(inst) || GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.bassFamily.test(fam);
-  const isDrum = GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.drumFamily.test(fam) || GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.drumInstrument.test(inst);
-  const isPlucked = GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.pluckedFamily.test(fam) || GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.pluckedInstrument.test(inst);
-  const isKeys = GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.keysFamily.test(fam) || GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.keysInstrument.test(inst);
-  const isBowed = GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.bowedFamily.test(fam) || GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.bowedInstrument.test(inst);
-  const isWind = GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.windFamily.test(fam) || GENRE_TREATMENT_INSTRUMENT_CLASSIFIERS.windInstrument.test(inst);
+  const isBass = instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.bass);
+  const isDrum = instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.percussion);
+  const isPlucked = instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.plucked);
+  const isKeys = instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.keys);
+  const isBowed = instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.bowed);
+  const isWind = instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.winds) || instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.brass);
 
   let out = audio;
 

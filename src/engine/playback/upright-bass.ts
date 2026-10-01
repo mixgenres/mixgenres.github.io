@@ -3,6 +3,7 @@ import { UPRIGHT_BASS_CUTOFF_RULES, UPRIGHT_BASS_DECAY_RULES } from '../../data/
 import { KIZOMBA_PATTERN, REGGAETON_PATTERN, TANGO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
 import { el } from '@elemaudio/core';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
+import { ENGINE_INSTRUMENT_KEYS, instrumentHasKey } from '../../engine/lookup/instrumentKeys.ts';
 import { createDampedStringLoop, fbGainForDecay } from './instrumentLib_stringLoop.ts';
 
 /**
@@ -44,7 +45,7 @@ export default class UprightBassModule implements InstrumentModule {
     const isMarcato = action === 'marcato' || /marcato|marked/i.test(action ?? '');
     const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isSubBass = /^(sub-bass|bass-lead)$/i.test(params.instrumentId ?? '');
+    const isSubBass = instrumentHasKey(params.instrumentId ?? '', ENGINE_INSTRUMENT_KEYS.subBass);
     const gd = ctx.genreDialect;
     const genre = gd.id;
 

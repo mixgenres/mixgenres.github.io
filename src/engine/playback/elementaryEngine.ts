@@ -1,4 +1,4 @@
-import { BASS_INSTRUMENT_PATTERN, DRUM_BUS_INSTRUMENT_PATTERN, ELECTRIC_INSTRUMENT_PATTERN, ELECTRONIC_GAIN_INSTRUMENT_PATTERN, FAMILY_NOISE_SCALE_RULES, SUB_BUS_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
+import { instrumentHasKey, ENGINE_INSTRUMENT_KEYS } from '../../engine/lookup/instrumentKeys.ts';
 import { ELECTRONIC_GENRE_PATTERN } from '../../data/sound/dsp/genreClassifiers';
 import { INSTRUMENTS_BY_ID, EXACT_PLUCKED_PRESETS, GAIN_BY_INSTRUMENT } from '../../engine/lookup/instruments';
 import { el } from '@elemaudio/core';
@@ -197,7 +197,7 @@ export function modelForInstrument(instrumentId: string): number {
   throw new Error(`UNRESOLVED_MUSICAL_IDENTITY_ERROR: instrument "${instrumentId}" has no elementary model.`);
 }
 export function normalizedParams(instrumentId: string, luthier: LuthierPhysicalParameters, modelNum: number) {
-const electric = ELECTRIC_INSTRUMENT_PATTERN.test(instrumentId.toLowerCase());
+const electric = instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.electric);
 const b = Math.max(0, Math.min(1, 0.42 + luthier.harmonicRichness * 0.48 + (electric ? 0.1 : 0)));
 const d = Math.max(0.1, Math.min(8, luthier.decayTimeSec ?? luthier.decayTimeFactor));
 const dr = Math.max(0, Math.min(1, electric ? 0.15 + luthier.harmonicRichness * 0.55 : luthier.harmonicRichness * 0.08));
@@ -227,7 +227,7 @@ export function makeupGainFor(modelNum: number, instrumentId?: string): number {
 export function defaultTrackParams(instrumentId = '', luthier?: LuthierPhysicalParameters, modelNum = 0): TrackParams {
 const l = luthier ?? getLuthierModelForInstrument(instrumentId);
 const norm = normalizedParams(instrumentId, l, modelNum);
-const isElectronic = ELECTRONIC_GAIN_INSTRUMENT_PATTERN.test(instrumentId.toLowerCase());
+const isElectronic = instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.electronic);
 const effectiveModelForGain = isElectronic ? 9 : modelNum;
 // Volume un-clamped from upper boundaries to support massive hybrid textures
 const volume = Math.max(0.01, 0.8 * makeupGainFor(effectiveModelForGain, instrumentId));
@@ -303,7 +303,7 @@ export function renderVoice(
     // Mechanical/air noise is detail, not the instrument's primary tone.
     // notes were active. Keep the authored artifacts, but put them behind a
     // family-dependent acoustic-detail ceiling.
-    const familyNoiseScale = FAMILY_NOISE_SCALE_RULES.find(rule => rule.pattern.test(String(family)))?.scale ?? 0.30;
+    const familyNoiseScale = family === 'kit' || family === 'hand-drums' || family === 'metal-and-wood' || family === 'body-percussion' ? 0.62 : family === 'bowed' ? 0.30 : family === 'plucked' || family === 'plucked-string' ? 0.34 : family === 'winds' || family === 'brass' ? 0.28 : family === 'bellows-and-keys' ? 0.26 : 0.30;
     const dialectBrightness = dialect.brightness ?? ctx.genreDialect.brightness;
     const dialectDamping = dialect.damping ?? 0;
     const directionText = ctx.action.toLowerCase();
@@ -554,16 +554,16 @@ export function determineBusCategory(
   // Acoustic/electric bass instruments need their full harmonic body in the mix.
   // Reserve the sub bus for genuinely sub-oriented instruments; the master chain
   // may add a controlled low-end enhancement without throwing away upper harmonics.
-  if (SUB_BUS_INSTRUMENT_PATTERN.test(inst)) {
+  if (instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.subBass)) {
     return 'sub';
   }
-  if (r === 'bass' || BASS_INSTRUMENT_PATTERN.test(inst)) {
+  if (r === 'bass' || instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.bass)) {
     return 'inst';
   }
   if (
     r === 'drums' ||
     r === 'percussion' ||
-    DRUM_BUS_INSTRUMENT_PATTERN.test(inst)
+    instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.percussion)
   ) {
     return 'drums';
   }

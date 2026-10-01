@@ -1,4 +1,4 @@
-import { ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
+import { instrumentHasKey, ENGINE_INSTRUMENT_KEYS } from '../../engine/lookup/instrumentKeys.ts';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { computeTrackStemFingerprint, stemCache } from '../cache/stemCache.ts';
 import OfflineRenderer from '@elemaudio/offline-renderer';
@@ -55,7 +55,7 @@ function applyCCToParams(
     const isElectronic =
       instDef?.family === 'electronic' ||
       instDef?.elementaryModel === 9 ||
-      ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN.test((params.instrumentId || '').toLowerCase());
+      instrumentHasKey(params.instrumentId || '', ENGINE_INSTRUMENT_KEYS.electronic);
     const baseGain = instDef?.makeupGain ?? makeupGainFor(isElectronic ? 9 : params.model, params.instrumentId);
     params.volume = Math.max(0, Math.min(35, baseGain * roleGain * trackMixVolume * controllerGain.volume * controllerGain.expression));
   } else if (cc === 10) params.pan = norm;
@@ -312,9 +312,7 @@ export async function renderPerformanceToMp3(
             const isElectronic =
               instDef?.family === 'electronic' ||
               instDef?.elementaryModel === 9 ||
-              ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN.test(
-                (params.instrumentId || '').toLowerCase(),
-              );
+              instrumentHasKey(params.instrumentId || '', ENGINE_INSTRUMENT_KEYS.electronic);
             const effectiveModelForGain = isElectronic ? 9 : params.model;
             const baseGain = instDef?.makeupGain ?? makeupGainFor(effectiveModelForGain, params.instrumentId);
 

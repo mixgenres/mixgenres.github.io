@@ -220,9 +220,21 @@ export default function App() {
   const seekSecondsRef = useRef<number>(0);
   const transportRef = useRef<Transport | null>(null);
 
+  // The musical performance is a compiled artifact. Mixer-only UI changes
+  // (volume/pan/mute/solo/spotlight) must never invalidate or regenerate it.
+  // Those controls are applied directly to the persistent audio graph below.
+  // Only musical inputs participate in this key.
+  const performanceCompileKey = useMemo(() => JSON.stringify({
+    ...song,
+    tracks: song.tracks.map(({ volume: _volume, pan: _pan, muted: _muted, solo: _solo, spotlight: _spotlight, ...track }) => track),
+  }), [song]);
+
   const perf = useMemo(() => {
     return arrangeBand(song, 0);
-  }, [song]);
+    // Intentionally keyed by musical content rather than the whole SongSheet.
+    // A new SongSheet object is expected for UI/mixer edits.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [performanceCompileKey]);
   const perfRef = useRef(perf);
   perfRef.current = perf;
 

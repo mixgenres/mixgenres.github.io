@@ -12,6 +12,7 @@ import { getInstrumentModule } from '../../src/engine/playback/instrumentRegistr
 import { resolveRenderGesture } from '../../src/engine/playback/renderGesture.ts';
 import { codeForGesture } from '../../src/engine/band/gestures.ts';
 import { determineBusCategory } from '../../src/engine/playback/elementaryEngine.ts';
+import { instrumentEngineKeys } from '../../src/engine/lookup/instrumentKeys.ts';
 import { resolveInstrumentKitComponent } from '../../src/engine/lookup/instrument-components';
 import { writeReport } from '../lib/io.ts';
 import type { InstrumentDef } from '../../src/data/instruments/schema/instrument-def';
@@ -32,6 +33,7 @@ const rows = Object.values(INSTRUMENTS_BY_ID).map((def: InstrumentDef) => {
   const dedicated = Boolean(module) && (module!.id === def.id || module!.specializedInstrumentIds?.includes(def.id) === true || (def.id === 'muted-trumpet' && module!.id === 'trumpet'));
   return {
     instrumentId: def.id, family: def.family,
+    engineKeys: instrumentEngineKeys(def.id),
     acousticRole: def.acousticProfile?.role ?? null,
     busCategory: determineBusCategory(def.acousticProfile?.role, def.id),
     moduleId: module?.id ?? null, registryError,
@@ -43,6 +45,7 @@ const rows = Object.values(INSTRUMENTS_BY_ID).map((def: InstrumentDef) => {
 });
 
 const failures = rows.flatMap(r => [
+  ...rows.filter(r => r.engineKeys.length === 0).map(r => `${r.instrumentId}: no semantic engine key`),
   ...(r.moduleId ? [] : [`${r.instrumentId}: ${r.registryError ?? 'missing registry module'}`]),
   ...(r.hasPhysicalSource ? [] : [`${r.instrumentId}: no physical source metadata`]),
   ...(r.acousticRole === 'percussion' && r.busCategory !== 'drums' ? [`${r.instrumentId}: percussion role routed to ${r.busCategory}`] : []),

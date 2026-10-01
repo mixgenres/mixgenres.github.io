@@ -1,7 +1,8 @@
 import { InstrumentDef, INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import type { VoiceProfile } from '../../data/instruments/schema/voice-profile';
 import { DEFAULT_VOICE_PROFILE, FAMILY_DEFAULTS } from '../../data/instruments/familyVoiceDefaults';
-import { DROP_TUNING_GENRE_PATTERN, GUITAR_INSTRUMENT_PATTERN, DROP_TUNING_LOW_MIDI } from '../../data/instruments/genreRangeRules';
+import { DROP_TUNING_GENRE_PATTERN, DROP_TUNING_LOW_MIDI } from '../../data/instruments/genreRangeRules';
+import { ENGINE_INSTRUMENT_KEYS, instrumentHasKey } from '../lookup/instrumentKeys.ts';
 
 /** Per-instrument overrides (now authored directly inside definitions/<instrument>.ts). */
 const OVERRIDES: Record<string, Partial<VoiceProfile>> = {};
@@ -22,7 +23,7 @@ export function voiceProfile(instrumentId: string, genreId?: string): VoiceProfi
   const embedded = def?.acousticProfile ? def.acousticProfile : {};
   const merged: VoiceProfile = { ...DEFAULT_VOICE_PROFILE, ...fam, ...over, ...embedded, id: instrumentId };
 
-  if (genreId && DROP_TUNING_GENRE_PATTERN.test(genreId) && GUITAR_INSTRUMENT_PATTERN.test(instrumentId)) {
+  if (genreId && DROP_TUNING_GENRE_PATTERN.test(genreId) && instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.guitar)) {
     // Drop-D tuning: adjust lowest allowable pitch to D2 (MIDI 38)
     merged.low = DROP_TUNING_LOW_MIDI;
   }
