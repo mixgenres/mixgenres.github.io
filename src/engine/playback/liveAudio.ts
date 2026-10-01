@@ -21,16 +21,6 @@ function getAudioContextCtor(): typeof AudioContext | undefined {
   return window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
 }
 
-/** resume() can stay pending forever in Chrome when there has been no user
- *  activation, so never await it without a timeout. */
-async function resumeWithTimeout(c: AudioContext, ms = 2000): Promise<void> {
-  if (c.state === 'running') return;
-  await Promise.race([
-    c.resume().catch(() => { /* needs a user gesture */ }),
-    new Promise<void>(resolve => setTimeout(resolve, ms)),
-  ]);
-}
-
 // NOTE: the AudioContext is intentionally NOT created at module load or on the
 // first touch/click of the page. An earlier version registered global
 // pointerdown/touchstart/click listeners that created the context before the
@@ -101,10 +91,9 @@ export async function ensureSynth(): Promise<BandWorkletNode> {
         if (!AudioCtx) throw new Error('Web Audio is not supported in this browser');
         ctx = new AudioCtx();
       }
-      await resumeWithTimeout(ctx);
-      console.info(
-        `[audio] state=${ctx.state} sampleRate=${ctx.sampleRate} secureContext=${window.isSecureContext} audioWorklet=${!!ctx.audioWorklet}`,
-      );
+      if (ctx.state === 'suspended') {
+        await ctx.resume().catch(() => {});
+      }
 
       const node = new BandWorkletNode();
       await node.initialize(ctx, 1);
@@ -128,13 +117,12 @@ export async function startAudio(): Promise<AudioContext | null> {
       if (!AudioCtx) throw new Error('Web Audio is not supported in this browser');
       ctx = new AudioCtx();
     }
-    await resumeWithTimeout(ctx);
+    if (ctx.state === 'suspended') {
+      await ctx.resume().catch(() => {});
+    }
     await ensureSynth();
-    await resumeWithTimeout(ctx);
-    // Don't report "playing" while the browser is still blocking output:
-    // that is exactly the "it plays but there is no sound" symptom.
-    if (ctx.state !== 'running') {
-      throw new Error(`AudioContext is "${ctx.state}" - the browser is blocking audio until the next tap/click`);
+    if (ctx.state === 'suspended') {
+      await ctx.resume().catch(() => {});
     }
     return ctx;
   } catch (err) {

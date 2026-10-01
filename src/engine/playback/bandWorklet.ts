@@ -1,7 +1,7 @@
 import { ELECTRONIC_PLAYBACK_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
 import { POLYPHONY_FALLBACK_RULES } from '../../data/sound/polyphony';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
-import WebRenderer from '@elemaudio/web-renderer';
+import OfflineRenderer from '@elemaudio/offline-renderer';
 import { el } from '@elemaudio/core';
 import type { LuthierPhysicalParameters } from '../../data/instruments/schema/luthier';
 import type { MasterChain } from '../studio/mixer.ts';
@@ -66,7 +66,7 @@ export class BandWorkletNode {
   public static readonly MAX_POLYPHONY = 32;
 
   private ctx!: AudioContext;
-  private core!: InstanceType<typeof WebRenderer>;
+  private core!: InstanceType<typeof OfflineRenderer>;
   private audioNode!: AudioNode;
   private voiceSeq = 0;
   private masterChain?: MasterChain;
@@ -156,7 +156,12 @@ export class BandWorkletNode {
       delegate.commitUpdates();
       const instructions = delegate.getPackedInstructions();
       if (instructions && instructions.length > 0) {
-        renderer._sendMessage(instructions);
+        const native = (this.core as any)._native;
+        if (native && typeof native.postMessageBatch === 'function') {
+          native.postMessageBatch(instructions);
+        } else if (typeof renderer._sendMessage === 'function') {
+          renderer._sendMessage(instructions);
+        }
       }
     }
   }
@@ -182,16 +187,39 @@ export class BandWorkletNode {
   async initialize(context: AudioContext, volume = 1): Promise<AudioNode> {
     this.ctx = context;
     if (this.ctx.state === 'suspended') {
-      this.ctx.resume().catch(() => { });
+      await this.ctx.resume().catch(() => { });
     }
 
-    this.core = new WebRenderer();
-
-    this.audioNode = await this.core.initialize(context, {
-      numberOfInputs: 0,
-      numberOfOutputs: 1,
-      outputChannelCount: [2],
+    const offlineCore = new OfflineRenderer();
+    const blockSize = 512;
+    await offlineCore.initialize({
+      numInputChannels: 0,
+      numOutputChannels: 2,
+      sampleRate: context.sampleRate || 44100,
+      blockSize,
     });
+    this.core = offlineCore;
+
+    const bufferSize = 1024;
+    const scriptNode = context.createScriptProcessor(bufferSize, 0, 2);
+    const tempL = new Float32Array(bufferSize);
+    const tempR = new Float32Array(bufferSize);
+
+    scriptNode.onaudioprocess = (e: AudioProcessingEvent) => {
+      const outL = e.outputBuffer.getChannelData(0);
+      const outR = e.outputBuffer.getChannelData(1);
+      const numBlocks = bufferSize / blockSize;
+      for (let b = 0; b < numBlocks; b++) {
+        const offset = b * blockSize;
+        const subL = tempL.subarray(offset, offset + blockSize);
+        const subR = tempR.subarray(offset, offset + blockSize);
+        offlineCore.process([], [subL, subR]);
+        outL.set(subL, offset);
+        outR.set(subR, offset);
+      }
+    };
+
+    this.audioNode = scriptNode;
 
     if (this.masterChain) {
       this.masterChain.dispose();
@@ -210,14 +238,14 @@ export class BandWorkletNode {
     this.audioNode.connect(this.masterChain.input);
 
     this.masterVolume = volume;
-    this.syncGraph();
+    await this.syncGraph();
     return this.masterChain.output;
   }
 
   async setVolume(value: number) {
     this.masterVolume = Math.max(0, Math.min(2, value));
     this.masterChain?.setVolume(value);
-    this.syncGraph();
+    await this.syncGraph();
   }
 
   setPlaybackEnabled(enabled: boolean) {
@@ -364,7 +392,7 @@ export class BandWorkletNode {
       }
     }
     if (graphDirty) {
-      this.syncGraph();
+      await this.syncGraph();
     }
     this.updateTrackMuteSoloLevels();
   }
@@ -399,7 +427,7 @@ export class BandWorkletNode {
     ]);
   }
 
-  private syncGraph() {
+  private async syncGraph(): Promise<void> {
     if (!this.core) return;
 
     let anyDirty = false;
@@ -460,9 +488,11 @@ export class BandWorkletNode {
       genreId: this.activeWorldId,
       bpm: 120,
     });
-    this.core.render(masterSig.left, masterSig.right).catch((err: unknown) => {
+    try {
+      await this.core.render(masterSig.left, masterSig.right);
+    } catch (err: unknown) {
       console.warn('[Elementary] Render error:', err);
-    });
+    }
 
     this.dirtyTracks.clear();
   }

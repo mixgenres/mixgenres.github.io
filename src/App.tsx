@@ -43,7 +43,6 @@ export default function App() {
   const [playbackStatus, setPlaybackStatus] = useState<'idle' | 'buffering' | 'playing' | 'paused' | 'error'>('idle');
   const playing = playbackStatus === 'playing';
   const audioLoading = playbackStatus === 'buffering';
-  const playbackActive = playbackStatus === 'buffering' || playbackStatus === 'playing';
   const [isBouncing, setIsBouncing] = useState(false);
   const [bounceProgress, setBounceProgress] = useState<number | null>(null);
   const [step, setStep] = useState(0);
@@ -63,17 +62,6 @@ export default function App() {
       return false;
     }
   });
-  const togglePlayback = () => {
-    const isStopping = playbackStatus === 'playing' || playbackStatus === 'buffering';
-    if (!isStopping) {
-      // Warm up inside the click so the browser sees the user activation;
-      // failures are surfaced by the playback effect below.
-      startAudio().catch(() => { /* handled in the playback effect */ });
-    }
-    setPlaybackStatus(status =>
-      status === 'playing' || status === 'buffering' ? 'paused' : 'buffering'
-    );
-  };
 
   const [pickedRegion, setPickedRegion] = useState<string | null>(null);
 
@@ -104,6 +92,11 @@ export default function App() {
   }, [song.worldId, song.styleId, (song as any).styleInfluences, (song as any).styleOverrides]);
 
   const handleStartOver = (worldId: string, styleId?: string) => {
+    if (playbackStatus === 'playing' || playbackStatus === 'buffering') {
+      transportRef.current?.stop();
+      stopAudio();
+      setPlaybackStatus('paused');
+    }
     const canonical = getCanonicalStyle(worldId);
     const targetStyleId = styleId ?? canonical.id;
     const fresh = createSheet(worldId, targetStyleId);
@@ -119,6 +112,11 @@ export default function App() {
   };
 
   const handleSelectStyle = (styleId: string) => {
+    if (playbackStatus === 'playing' || playbackStatus === 'buffering') {
+      transportRef.current?.stop();
+      stopAudio();
+      setPlaybackStatus('paused');
+    }
     const next = createSheet(song.worldId, styleId);
     if (song.title && song.title !== 'Untitled') {
       next.title = song.title;
@@ -222,6 +220,69 @@ export default function App() {
   const seekSecondsRef = useRef<number>(0);
   const transportRef = useRef<Transport | null>(null);
 
+  const perf = useMemo(() => {
+    return arrangeBand(song, 0);
+  }, [song]);
+  const perfRef = useRef(perf);
+  perfRef.current = perf;
+
+  const getTransport = () => {
+    if (!transportRef.current) {
+      transportRef.current = new Transport(createSink(), {
+        onPosition(seconds) {
+          const bars = perfRef.current.bars;
+          if (!bars.length) return;
+          let i = Math.min(bars.length - 1, Math.max(0, barRef.current));
+          // the playhead only ever moves a little between ticks, so walk
+          // from where it was instead of searching the whole song
+          while (i > 0 && seconds < bars[i].start) i--;
+          while (i < bars.length - 1 && seconds >= bars[i].end) i++;
+          const bt = bars[i];
+          const frac = bt.end > bt.start ? (seconds - bt.start) / (bt.end - bt.start) : 0;
+          const st = Math.max(0, Math.min(15, Math.floor(frac * 16)));
+          if (barRef.current !== i) { barRef.current = i; setBar(i); }
+          if (stepRef.current !== st) { stepRef.current = st; setStep(st); }
+        },
+        onEnd() {
+          setPlaybackStatus('paused');
+        },
+      });
+    }
+    return transportRef.current;
+  };
+
+  const togglePlayback = async () => {
+    if (playbackStatus === 'playing' || playbackStatus === 'buffering') {
+      transportRef.current?.stop();
+      stopAudio();
+      setPlaybackStatus('paused');
+      return;
+    }
+
+    setPlaybackStatus('buffering');
+    try {
+      const audioCtx = await startAudio();
+      if (!audioCtx) {
+        setPlaybackStatus('error');
+        showToast("Couldn't start audio. Please try again.");
+        return;
+      }
+      setMasterVolume(0.85);
+
+      const tr = getTransport();
+      tr.setPerformance(perfRef.current);
+      tr.setLooping(true);
+      tr.start(seekSecondsRef.current);
+      setPlaybackStatus('playing');
+    } catch (err) {
+      console.error('Audio playback error:', err);
+      transportRef.current?.stop();
+      stopAudio();
+      setPlaybackStatus('error');
+      showToast("Couldn't start audio. Please try again.");
+    }
+  };
+
   const seekTo = (newBar: number, newStep: number = 0) => {
     const total = songRef.current.durationMeasures || 1;
     const clampedBar = Math.max(0, Math.min(total - 1, newBar));
@@ -317,12 +378,6 @@ export default function App() {
      cells are cached and only invalidated when their specific inputs change. */
   const stereoField = useMemo(() => new StereoFieldManager(), []);
 
-  const perf = useMemo(() => {
-    return arrangeBand(song, 0);
-  }, [song]);
-  const perfRef = useRef(perf);
-  perfRef.current = perf;
-
   useEffect(() => {
     transportRef.current?.patchPerformance(perf);
   }, [perf]);
@@ -338,62 +393,11 @@ export default function App() {
   }, [song.tracks, song.worldId, song.styleId]);
 
   useEffect(() => {
-    if (!playbackActive) {
-      transportRef.current?.stop();
-      stopAudio();
-      return;
-    }
-    let alive = true;
-
-    (async () => {
-      try {
-        const ctx = await startAudio();
-        if (!alive) return;
-        if (!ctx) {
-          setPlaybackStatus('error');
-          showToast("Couldn't start audio. Please try again.");
-          return;
-        }
-        setMasterVolume(0.85);
-
-        if (!transportRef.current) {
-          transportRef.current = new Transport(createSink(), {
-            onPosition(seconds) {
-              const bars = perfRef.current.bars;
-              if (!bars.length) return;
-              let i = Math.min(bars.length - 1, Math.max(0, barRef.current));
-              // the playhead only ever moves a little between ticks, so walk
-              // from where it was instead of searching the whole song
-              while (i > 0 && seconds < bars[i].start) i--;
-              while (i < bars.length - 1 && seconds >= bars[i].end) i++;
-              const bt = bars[i];
-              const frac = bt.end > bt.start ? (seconds - bt.start) / (bt.end - bt.start) : 0;
-              const st = Math.max(0, Math.min(15, Math.floor(frac * 16)));
-              if (barRef.current !== i) { barRef.current = i; setBar(i); }
-              if (stepRef.current !== st) { stepRef.current = st; setStep(st); }
-            },
-          });
-        }
-
-        const tr = transportRef.current;
-        tr.setPerformance(perfRef.current);
-        tr.setLooping(true);
-        tr.start(seekSecondsRef.current);
-        if (alive) setPlaybackStatus('playing');
-      } catch (err) {
-        console.error('Audio playback error:', err);
-        if (!alive) return;
-        setPlaybackStatus('error');
-        showToast("Couldn't start audio. Please try again.");
-      }
-    })();
-
     return () => {
-      alive = false;
       transportRef.current?.stop();
       stopAudio();
     };
-  }, [playbackActive]);
+  }, []);
 
   // Accepts a plain Track: the sheet's tracks always carry an instrumentId at
   // runtime, but the stored type keeps it optional for older saved songs.

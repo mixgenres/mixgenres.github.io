@@ -2,74 +2,13 @@
  * CULTURAL ACOUSTIC TRANSPORT & SCHEDULER
  * ======================================
  * Event queue and playhead management for the physical acoustic engine.
+ * Directly scheduled via high-precision lookahead on the audio clock without Web Workers.
  */
 
 import type { Performance, PerfNote, PerfCC } from '../band/performanceData.ts';
 
 const LOOKAHEAD_SEC = 0.40;
 const TICK_MS = 25;
-
-let sharedWorkerBlobUrl: string | null = null;
-
-function getSharedWorkerBlobUrl(): string | null {
-  if (sharedWorkerBlobUrl) return sharedWorkerBlobUrl;
-  if (typeof window === 'undefined' || typeof Blob === 'undefined' || typeof URL === 'undefined') return null;
-  try {
-    const inlineWorkerScript = `
-      var timer = null;
-      self.onmessage = function(e) {
-        if (e.data === 'ping') {
-          self.postMessage('pong');
-          return;
-        }
-        if (e.data === 'start') {
-          self.postMessage('tick');
-          if (timer === null) {
-            timer = setInterval(function() {
-              self.postMessage('tick');
-            }, 25);
-          }
-          return;
-        }
-        if (e.data === 'stop') {
-          if (timer !== null) {
-            clearInterval(timer);
-            timer = null;
-          }
-        }
-      };
-    `;
-    const blob = new Blob([inlineWorkerScript], { type: 'application/javascript' });
-    sharedWorkerBlobUrl = URL.createObjectURL(blob);
-    return sharedWorkerBlobUrl;
-  } catch {
-    return null;
-  }
-}
-
-function createSchedulerWorker(): Worker | null {
-  if (typeof window === 'undefined' || typeof Worker === 'undefined') return null;
-
-  // 1. Try Blob worker first with persistent URL:
-  // Instantaneous parse, zero network round-trip, no CORS or module loading delays in Chrome.
-  const blobUrl = getSharedWorkerBlobUrl();
-  if (blobUrl) {
-    try {
-      return new Worker(blobUrl);
-    } catch {
-      // Fall back if Blob workers are restricted
-    }
-  }
-
-  // 2. Fall back to Vite module worker URL
-  try {
-    return new Worker(new URL('./schedulerWorker.ts', import.meta.url), {
-      type: 'module',
-    });
-  } catch {
-    return null;
-  }
-}
 
 export interface TransportSink {
   now(): number;
@@ -101,10 +40,8 @@ export class Transport {
   private sink: TransportSink;
   private cb: TransportCallbacks;
 
-  private worker: Worker | null = null;
-  private fallbackTimer: number | null = null;
+  private timerId: number | null = null;
   private rafId: number | null = null;
-  private livenessTimeout: number | null = null;
 
   private origin = 0;
   private startOffset = 0;
@@ -114,49 +51,9 @@ export class Transport {
   private looping = true;
   private endFired = false;
 
-  /**
-   * @static
-   * Creates a Web Worker scheduler for lookahead timing.
-   */
-  public static createWorker(): Worker | null {
-    return createSchedulerWorker();
-  }
-
   constructor(sink: TransportSink, cb: TransportCallbacks = {}) {
     this.sink = sink;
     this.cb = cb;
-    this.initWorker();
-  }
-
-  private initWorker() {
-    if (this.worker) {
-      try {
-        this.worker.terminate();
-      } catch {}
-      this.worker = null;
-    }
-    this.worker = createSchedulerWorker();
-    if (this.worker) {
-      this.worker.onmessage = event => {
-        if (event.data !== 'tick') return;
-        if (this.running) this.tick();
-      };
-      this.worker.onerror = () => this.disableWorker();
-      this.worker.onmessageerror = () => this.disableWorker();
-      try {
-        this.worker.postMessage('ping');
-      } catch {
-        this.disableWorker();
-      }
-    }
-  }
-
-  private disableWorker() {
-    this.worker?.terminate();
-    this.worker = null;
-    if (this.running && this.fallbackTimer === null) {
-      this.fallbackTimer = window.setInterval(() => this.tick(), TICK_MS);
-    }
   }
 
   get isRunning() { return this.running; }
@@ -174,6 +71,7 @@ export class Transport {
         this.sink.allNotesOff();
       }
       this.locate(pos);
+      this.tick();
     }
   }
 
@@ -194,6 +92,7 @@ export class Transport {
       this.sink.allNotesOff();
     }
     this.locate(currentPos);
+    this.tick();
   }
 
   // Live mix controls (Tier 3 -> Sink direct path)
@@ -238,23 +137,12 @@ export class Transport {
     this.running = true;
     this.endFired = false;
 
-    if (!this.worker) {
-      this.initWorker();
+    // Start direct lookahead timer
+    if (this.timerId !== null) {
+      window.clearInterval(this.timerId);
+      this.timerId = null;
     }
-
-    // Always run high-precision lookahead timer immediately so playback never stalls
-    if (this.fallbackTimer === null) {
-      this.fallbackTimer = window.setInterval(() => this.tick(), TICK_MS);
-    }
-
-    // Start background lookahead scheduler worker for tab-switch resilience
-    if (this.worker) {
-      try {
-        this.worker.postMessage('start');
-      } catch {
-        this.disableWorker();
-      }
-    }
+    this.timerId = window.setInterval(() => this.tick(), TICK_MS);
 
     // Decoupled visual loop using requestAnimationFrame
     this.startVisualLoop();
@@ -266,21 +154,9 @@ export class Transport {
   stop() {
     this.running = false;
     this.sink.setPlaybackEnabled?.(false);
-    if (this.worker) {
-      try {
-        this.worker.postMessage('stop');
-      } catch {
-        this.worker.terminate();
-        this.worker = null;
-      }
-    }
-    if (this.livenessTimeout !== null) {
-      window.clearTimeout(this.livenessTimeout);
-      this.livenessTimeout = null;
-    }
-    if (this.fallbackTimer !== null) {
-      window.clearInterval(this.fallbackTimer);
-      this.fallbackTimer = null;
+    if (this.timerId !== null) {
+      window.clearInterval(this.timerId);
+      this.timerId = null;
     }
     this.stopVisualLoop();
     this.sink.allNotesOff();
