@@ -93,8 +93,8 @@ const EXACT_KEY_IDS: Record<InstrumentEngineKey, readonly string[]> = {
   [ENGINE_INSTRUMENT_KEYS.voice]: ['voice', 'choir', 'backing-vocals'],
   [ENGINE_INSTRUMENT_KEYS.electronic]: [
     'synth', 'synth-brass', 'synth-strings', 'saw-lead', 'square-lead', 'polysynth', 'acid-303',
-    'warm-pad', 'halo-pad', 'sweep-pad', 'drone', 'noise-sweep', 'dub-echo', 'tape-echo',
-    'spring-reverb', 'sampler', 'turntable', 'sub-bass',
+    'bass-lead', 'crystal', 'warm-pad', 'halo-pad', 'sweep-pad', 'drone', 'noise-sweep',
+    'dub-echo', 'tape-echo', 'spring-reverb', 'sampler', 'turntable', 'sub-bass',
   ],
   [ENGINE_INSTRUMENT_KEYS.scraper]: ['guiro', 'guacharaca', 'dikanza', 'cabasa'],
   [ENGINE_INSTRUMENT_KEYS.metalShell]: ['timbales', 'steel-drums', 'tubular-bells', 'steel-guitar', 'cowbell', 'agogo'],

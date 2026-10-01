@@ -6,7 +6,7 @@ export const synth: InstrumentDef = {
   family: "electronic",
   voicing: "single",
   elementaryModel: 9,
-  makeupGain: 0.548,
+  makeupGain: 14.757,
   polyphony: 8,
   note: "Lead synth voice",
   acousticProfile: {

@@ -6,7 +6,7 @@ export const backing_vocals: InstrumentDef = {
   family: "voice",
   voicing: "chord",
   elementaryModel: 12,
-  makeupGain: 0.455,
+  makeupGain: 29.744,
   polyphony: 8,
   note: "Harmonized vocal ensemble providing lush background pad chords and call-and-response hooks",
   acousticProfile: {

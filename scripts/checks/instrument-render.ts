@@ -1,6 +1,6 @@
 // CHECK: every instrument renders through the offline Elementary engine - finite output, produces sound, and its
-// tail dies after note-off. Also records the raw accent-note PEAK per instrument (pre-mix; no makeup/role gain),
-// which reports/level-targets-diff.py reuses as the intrinsic loudness table.
+// tail dies after note-off. Also records the raw accent-note PEAK per instrument at unit track gain
+// (pre-mix; no makeup/role gain), which scripts/reports/level-targets-diff.py reuses as the intrinsic loudness table.
 // Writes audit/instrument-render-audit.json.   Run: npm run check:instrument-render   Exit 1 on failures.
 import { mkdirSync, writeFileSync } from 'node:fs';
 import OfflineRenderer from '@elemaudio/offline-renderer';
@@ -34,6 +34,11 @@ async function main(): Promise<void> {
       const luthier = def.luthierPhysics ?? getLuthierModelForInstrument(instrumentId);
       const model = modelForInstrument(instrumentId);
       const params = defaultTrackParams(instrumentId, luthier, model);
+      // This audit measures the instrument itself. defaultTrackParams normally
+      // seeds volume with 0.8 × makeupGain, but applying that here would make
+      // the supposedly "raw" peak include mix makeup and invite a second
+      // makeup multiplication in level-targets-diff.py.
+      params.volume = 1;
       const gestureName = def.techniques.articulations[0] ?? 'tone';
       const gesture = resolveRenderGesture(instrumentId, codeForGesture(gestureName));
       const midi = def.kitComponents?.[0]?.midi ?? def.tuningAndMechanics?.keyRange?.lowMidi ?? 60;
@@ -53,13 +58,21 @@ async function main(): Promise<void> {
       renderer.reset();
       const signal = renderTrack(trackId, [voice], params);
       await renderer.render(signal.left, signal.right);
-      renderer.process([], outputs);
 
+      // Measure a real note window, not just the first 256-sample block.
+      // Bowed/reed/wind instruments deliberately ramp into their body after
+      // the attack, so the old first-block measurement systematically called
+      // healthy instruments "quiet".
+      const measureSeconds = 1.5;
+      const measureBlocks = Math.ceil(sampleRate * measureSeconds / blockSize);
       let peak = 0;
       let finite = true;
-      for (let i = 0; i < blockSize; i++) {
-        finite &&= Number.isFinite(outputs[0][i]) && Number.isFinite(outputs[1][i]);
-        peak = Math.max(peak, Math.abs(outputs[0][i]), Math.abs(outputs[1][i]));
+      for (let block = 0; block < measureBlocks; block++) {
+        renderer.process([], outputs);
+        for (let i = 0; i < blockSize; i++) {
+          finite &&= Number.isFinite(outputs[0][i]) && Number.isFinite(outputs[1][i]);
+          peak = Math.max(peak, Math.abs(outputs[0][i]), Math.abs(outputs[1][i]));
+        }
       }
       const row = {
         instrumentId,

@@ -1,4 +1,5 @@
-# REPORT: estimated per-track peak level (raw instrument peak x real gain chain) vs a role-based target, per style.
+# REPORT: estimated per-track peak level (unit-gain instrument peak x real gain chain) vs a role-based target, per style.
+# The instrument audit measures at unit track gain; makeup is applied exactly once here via effDb.
 # Needs audit/instrument-render-audit.json (npm run check:instrument-render) and audit/song-levels/style-levels.json
 # (npm run report:levels). Usage: python3 scripts/reports/level-targets-diff.py [styleId ...]
 # Writes /tmp/current.tsv and /tmp/proposed.tsv; `git diff --no-index /tmp/current.tsv /tmp/proposed.tsv` is the per-song level diff.

@@ -11,7 +11,7 @@ export const castanets: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 18,
-  makeupGain: 0.600,
+  makeupGain: 0.342,
   polyphony: 8,
   note: "Authentic paired Spanish hardwood castañuelas (granadillo/ebony) with hembra (high right hand) for cascading carretilla rolls and macho (low left hand) for single downbeat golpes",
   acousticProfile: {

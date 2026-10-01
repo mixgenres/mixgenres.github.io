@@ -8,7 +8,7 @@ export const bandoneon: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "breath",
   elementaryModel: 10,
-  makeupGain: 0.589,
+  makeupGain: 32.466,
   polyphony: 8,
   note: "Authentic 142-tone AA (Alfred Arnold) Rheinische Tonlage bisonoric bandoneon: 38 right + 33 left buttons, each with separate Zug/Druck pitches, physical button mapping compiled at phrase level, dual zinc octave reed banks, resonant wooden air chamber, knee-drop marcato, and expressive arrastre drags",
   acousticProfile: {

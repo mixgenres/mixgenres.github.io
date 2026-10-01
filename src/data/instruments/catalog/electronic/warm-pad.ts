@@ -6,7 +6,7 @@ export const warm_pad: InstrumentDef = {
   family: "electronic",
   voicing: "chord",
   elementaryModel: 9,
-  makeupGain: 0.548,
+  makeupGain: 10.920,
   polyphony: 8,
   acousticProfile: {
     sustain: "sustained",

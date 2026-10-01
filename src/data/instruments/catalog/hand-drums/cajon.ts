@@ -13,7 +13,7 @@ export const cajon: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "fingerpad",
   elementaryModel: 4,
-  makeupGain: 2.299,
+  makeupGain: 0.977,
   polyphony: 12,
   note: "Authentic Flamenco/Peruvian wooden box drum with thin resonant birch tapa, internal guitar string snare wires, deep 65Hz cavity bass thump (grave), crisp corner snare slap (agudo), open tones, and fingertip ghost taps",
   acousticProfile: {

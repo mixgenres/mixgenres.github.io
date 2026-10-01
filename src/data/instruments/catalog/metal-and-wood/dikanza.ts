@@ -11,7 +11,7 @@ export const dikanza: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 17,
-  makeupGain: 0.350,
+  makeupGain: 0.187,
   polyphony: 8,
   note: "Long Angolan notched bamboo scraper providing the continuous syncopated rasp in semba and kizomba",
   acousticProfile: {

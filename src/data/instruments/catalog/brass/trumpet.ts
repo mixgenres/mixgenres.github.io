@@ -8,7 +8,7 @@ export const trumpet: InstrumentDef = {
   bodyConstruction: "brass-tube",
   excitationType: "breath",
   elementaryModel: 15,
-  makeupGain: 0.399,
+  makeupGain: 31.238,
   polyphony: 4,
   note: "Bb brass trumpet with lip-reed excitation, cylindrical bore shockwave steepening, flaring bell radiation, salsa mambo stabs, screams, and cup-mute colors",
   acousticProfile: {

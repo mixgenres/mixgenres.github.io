@@ -9,7 +9,7 @@ export const violin: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "bow",
   elementaryModel: 6,
-  makeupGain: 0.26,
+  makeupGain: 40.000,
   polyphony: 4,
   maxSimultaneousPitches: 2,
   note: "Acoustic orchestral, chamber, and folk violin with horsehair-on-rosin stick-slip friction, spruce corpus modes, 3kHz bridge hill presence, spiccato bounce, and tango chicharra techniques",

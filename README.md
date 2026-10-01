@@ -81,3 +81,7 @@ To run the style-performance compilation audit:
 ```bash
 npm run audit:run
 ```
+
+## Comprehensive mix calibration
+
+The mix system is calibrated from the existing static unit-gain instrument audit, with per-instrument makeup normalization followed by small reference-informed genre role offsets. The canonical reference lineage is recorded in `src/data/performance/genreDialectTargets.ts` and the complete static calibration is documented under `audit/`. No runtime Node execution or MP3 generation is required for this calibration pass.

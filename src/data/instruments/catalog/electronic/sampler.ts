@@ -6,7 +6,7 @@ export const sampler: InstrumentDef = {
   family: "electronic",
   voicing: "single",
   elementaryModel: 0,
-  makeupGain: 0.456,
+  makeupGain: 24.029,
   polyphony: 4,
   note: "sample playback; transient-preserving one-shots and looped phrases",
   acousticProfile: {

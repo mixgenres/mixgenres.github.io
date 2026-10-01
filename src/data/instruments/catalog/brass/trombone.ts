@@ -6,7 +6,7 @@ export const trombone: InstrumentDef = {
   family: "brass",
   voicing: "single",
   elementaryModel: 15,
-  makeupGain: 0.494,
+  makeupGain: 38.976,
   polyphony: 4,
   acousticProfile: {
     sustain: "blown",

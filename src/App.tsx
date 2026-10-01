@@ -395,8 +395,12 @@ export default function App() {
   // sync with the current song so noteOn can look the instrument back up.
   useEffect(() => {
     const map: Record<string, string | undefined> = {};
-    for (const t of song.tracks) map[t.id] = t.instrumentId ?? t.instrument;
-    setTrackInstruments(map);
+    const volumes: Record<string, number | undefined> = {};
+    for (const t of song.tracks) {
+      map[t.id] = t.instrumentId ?? t.instrument;
+      volumes[t.id] = (t as any).volume ?? 0.82;
+    }
+    setTrackInstruments(map, volumes);
     setActiveWorld(song.worldId, song.styleId);
   }, [song.tracks, song.worldId, song.styleId]);
 

@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 2,
+  "nodeExecuted": false,
+  "mp3Generated": false,
+  "canonicalGenres": [
+    {
+      "genre": "afrobeats",
+      "minPeakDb": -18.1,
+      "maxPeakDb": -9.1,
+      "spreadDb": 9.0,
+      "tracks": 8
+    },
+    {
+      "genre": "bachata",
+      "minPeakDb": -17.1,
+      "maxPeakDb": -9.0,
+      "spreadDb": 8.1,
+      "tracks": 8
+    },
+    {
+      "genre": "blues",
+      "minPeakDb": -17.0,
+      "maxPeakDb": -8.2,
+      "spreadDb": 8.9,
+      "tracks": 8
+    },
+    {
+      "genre": "brazilian",
+      "minPeakDb": -16.6,
+      "maxPeakDb": -9.9,
+      "spreadDb": 6.7,
+      "tracks": 8
+    },
+    {
+      "genre": "country",
+      "minPeakDb": -18.0,
+      "maxPeakDb": -9.0,
+      "spreadDb": 9.0,
+      "tracks": 8
+    },
+    {
+      "genre": "cumbia",
+      "minPeakDb": -18.0,
+      "maxPeakDb": -9.9,
+      "spreadDb": 8.1,
+      "tracks": 8
+    },
+    {
+      "genre": "disco",
+      "minPeakDb": -17.9,
+      "maxPeakDb": -9.2,
+      "spreadDb": 8.7,
+      "tracks": 8
+    },
+    {
+      "genre": "drum-and-bass",
+      "minPeakDb": -17.0,
+      "maxPeakDb": -7.6,
+      "spreadDb": 9.4,
+      "tracks": 8
+    },
+    {
+      "genre": "electronic",
+      "minPeakDb": -17.1,
+      "maxPeakDb": -8.2,
+      "spreadDb": 8.8,
+      "tracks": 8
+    },
+    {
+      "genre": "flamenco",
+      "minPeakDb": -17.0,
+      "maxPeakDb": -9.9,
+      "spreadDb": 7.1,
+      "tracks": 8
+    },
+    {
+      "genre": "folk",
+      "minPeakDb": -17.1,
+      "maxPeakDb": -9.0,
+      "spreadDb": 8.1,
+      "tracks": 8
+    },
+    {
+      "genre": "funk",
+      "minPeakDb": -17.0,
+      "maxPeakDb": -9.2,
+      "spreadDb": 7.8,
+      "tracks": 8
+    },
+    {
+      "genre": "gospel",
+      "minPeakDb": -17.0,
+      "maxPeakDb": -8.9,
+      "spreadDb": 8.1,
+      "tracks": 8
+    },
+    {
+      "genre": "hip-hop",
+      "minPeakDb": -17.0,
+      "maxPeakDb": -8.1,
+      "spreadDb": 8.9,
+      "tracks": 8
+    },
+    {
+      "genre": "house",
+      "minPeakDb": -23.0,
+      "maxPeakDb": -7.6,
+      "spreadDb": 15.5,
+      "tracks": 8
+    },
+    {
+      "genre": "industrial",
+      "minPeakDb": -23.0,
+      "maxPeakDb": -8.6,
+      "spreadDb": 14.5,
+      "tracks": 8
+    },
+    {
+      "genre": "jazz",
+      "minPeakDb": -17.0,
+      "maxPeakDb": -8.2,
+      "spreadDb": 8.8,
+      "tracks": 8
+    },
+    {
+      "genre": "kizomba",
+      "minPeakDb": -17.1,
+      "maxPeakDb": -8.6,
+      "spreadDb": 8.5,
+      "tracks": 8
+    },
+    {
+      "genre": "metal",
+      "minPeakDb": -25.5,
+      "maxPeakDb": -9.0,
+      "spreadDb": 16.5,
+      "tracks": 8
+    },
+    {
+      "genre": "punk-hardcore",
+      "minPeakDb": -25.5,
+      "maxPeakDb": -9.7,
+      "spreadDb": 15.8,
+      "tracks": 8
+    },
+    {
+      "genre": "r-and-b",
+      "minPeakDb": -17.0,
+      "maxPeakDb": -9.2,
+      "spreadDb": 7.8,
+      "tracks": 8
+    },
+    {
+      "genre": "reggae",
+      "minPeakDb": -17.0,
+      "maxPeakDb": -8.1,
+      "spreadDb": 9.0,
+      "tracks": 8
+    },
+    {
+      "genre": "reggaeton",
+      "minPeakDb": -17.0,
+      "maxPeakDb": -7.6,
+      "spreadDb": 9.5,
+      "tracks": 8
+    },
+    {
+      "genre": "rock",
+      "minPeakDb": -25.5,
+      "maxPeakDb": -9.2,
+      "spreadDb": 16.3,
+      "tracks": 8
+    },
+    {
+      "genre": "salsa",
+      "minPeakDb": -17.0,
+      "maxPeakDb": -9.7,
+      "spreadDb": 7.3,
+      "tracks": 8
+    },
+    {
+      "genre": "ska",
+      "minPeakDb": -17.0,
+      "maxPeakDb": -9.0,
+      "spreadDb": 8.0,
+      "tracks": 8
+    },
+    {
+      "genre": "soul",
+      "minPeakDb": -17.0,
+      "maxPeakDb": -9.2,
+      "spreadDb": 7.8,
+      "tracks": 8
+    },
+    {
+      "genre": "swing",
+      "minPeakDb": -17.0,
+      "maxPeakDb": -8.7,
+      "spreadDb": 8.3,
+      "tracks": 8
+    },
+    {
+      "genre": "tango",
+      "minPeakDb": -20.2,
+      "maxPeakDb": -11.4,
+      "spreadDb": 8.8,
+      "tracks": 8
+    },
+    {
+      "genre": "timba",
+      "minPeakDb": -17.0,
+      "maxPeakDb": -9.0,
+      "spreadDb": 8.0,
+      "tracks": 8
+    },
+    {
+      "genre": "uk-bass",
+      "minPeakDb": -17.0,
+      "maxPeakDb": -7.6,
+      "spreadDb": 9.4,
+      "tracks": 8
+    },
+    {
+      "genre": "zouk",
+      "minPeakDb": -17.0,
+      "maxPeakDb": -8.6,
+      "spreadDb": 8.4,
+      "tracks": 8
+    }
+  ],
+  "referenceCount": 32,
+  "references": {
+    "afrobeats": "Essence \u2014 Wizkid feat. Tems",
+    "bachata": "Obsesi\u00f3n \u2014 Aventura",
+    "blues": "Sweet Home Chicago \u2014 Robert Johnson / blues standard",
+    "brazilian": "Chega de Saudade \u2014 Ant\u00f4nio Carlos Jobim",
+    "country": "Folsom Prison Blues \u2014 Johnny Cash",
+    "cumbia": "La Pollera Color\u00e1 \u2014 Colombian cumbia standard",
+    "disco": "Stayin' Alive \u2014 Bee Gees",
+    "electronic": "Blue Monday \u2014 New Order",
+    "folk": "The Times They Are a-Changin\\",
+    "funk": "Superstition \u2014 Stevie Wonder",
+    "gospel": "Oh Happy Day \u2014 Edwin Hawkins Singers",
+    "hip-hop": "The Message \u2014 Grandmaster Flash and the Furious Five",
+    "house": "Show Me Love \u2014 Robin S.",
+    "jazz": "Autumn Leaves \u2014 standard",
+    "kizomba": "Saudade \u2014 Kizomba repertoire example",
+    "tango": "La Cumparsita \u2014 Gerardo Matos Rodr\u00edguez",
+    "flamenco": "Entre Dos Aguas \u2014 Paco de Luc\u00eda",
+    "metal": "Paranoid \u2014 Black Sabbath",
+    "r-and-b": "No Diggity \u2014 Blackstreet",
+    "reggae": "Three Little Birds \u2014 Bob Marley & The Wailers",
+    "reggaeton": "Gasolina \u2014 Daddy Yankee",
+    "rock": "Back in Black \u2014 AC/DC",
+    "salsa": "Pedro Navaja \u2014 Rub\u00e9n Blades",
+    "ska": "A Message to You, Rudy \u2014 The Specials",
+    "soul": "Ain't No Sunshine \u2014 Bill Withers",
+    "swing": "Sing, Sing, Sing \u2014 Benny Goodman",
+    "timba": "La Sandunguita \u2014 Cuban timba repertoire example",
+    "zouk": "Zouk la s\u00e9 s\u00e8l m\u00e9dikaman nou ni \u2014 Kassav\\",
+    "drum-and-bass": "Inner City Life \u2014 Goldie",
+    "industrial": "Head Like a Hole \u2014 Nine Inch Nails",
+    "punk-hardcore": "Blitzkrieg Bop \u2014 Ramones",
+    "uk-bass": "Flowers \u2014 Sweet Female Attitude"
+  },
+  "electronicFamilyCheck": {
+    "catalogElectronic": 20,
+    "engineElectronic": 20,
+    "familyMissingEngine": [],
+    "engineNonFamily": []
+  },
+  "gainContract": "makeupGain \u00d7 roleGain \u00d7 authoredTrackVolume; genre offset is inside roleGain exactly once",
+  "instrumentCalibration": "64 canonical-default instruments recalibrated from the existing unit-gain audit, with 40x conservative makeup cap",
+  "validation": "static source/data validation only; no Node execution"
+}

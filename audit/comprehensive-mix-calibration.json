@@ -1,0 +1,576 @@
+{
+  "schemaVersion": 1,
+  "nodeExecuted": false,
+  "mp3Generated": false,
+  "changedInstrumentCount": 64,
+  "roleTargetsDb": {
+    "lead": -10,
+    "melody": -10,
+    "bass": -11,
+    "drums": -12,
+    "percussion": -16,
+    "perc": -16,
+    "comp": -17,
+    "harmony": -17,
+    "pad": -21,
+    "voice": -10,
+    "effect": -23
+  },
+  "genreOffsetsDb": {
+    "afrobeats": {
+      "bass": 0.5,
+      "percussion": 0.5,
+      "harmony": -1
+    },
+    "bachata": {
+      "lead": 0.5,
+      "bass": -0.5
+    },
+    "blues": {
+      "lead": 1,
+      "melody": 0.5
+    },
+    "brazilian": {
+      "harmony": 0.5,
+      "melody": 0.5,
+      "bass": -0.5,
+      "percussion": 0.5
+    },
+    "country": {
+      "lead": 0.5,
+      "harmony": -0.5
+    },
+    "cumbia": {
+      "lead": 0.5,
+      "percussion": 1,
+      "harmony": -0.5
+    },
+    "disco": {
+      "bass": 1,
+      "percussion": 0.5,
+      "comp": -0.5
+    },
+    "drum-and-bass": {
+      "bass": 2,
+      "percussion": 0.5,
+      "pad": -1
+    },
+    "electronic": {
+      "bass": 2,
+      "comp": -1,
+      "pad": -1
+    },
+    "flamenco": {
+      "lead": 1.5,
+      "comp": 2,
+      "bass": -2.5,
+      "pad": -4
+    },
+    "folk": {
+      "lead": 0.5,
+      "bass": -0.5,
+      "percussion": -0.5
+    },
+    "funk": {
+      "bass": 1,
+      "lead": 0.5,
+      "drums": 0.5
+    },
+    "gospel": {
+      "voice": 1,
+      "comp": 0.5
+    },
+    "hip-hop": {
+      "bass": 1.5,
+      "percussion": 0.5,
+      "comp": -1
+    },
+    "house": {
+      "bass": 2,
+      "percussion": 0.5,
+      "comp": -1,
+      "pad": -1
+    },
+    "industrial": {
+      "bass": 1,
+      "percussion": 0.5,
+      "comp": -1
+    },
+    "jazz": {
+      "lead": 1,
+      "melody": 0.5,
+      "bass": 0.5,
+      "percussion": -0.5
+    },
+    "kizomba": {
+      "bass": 1,
+      "percussion": 0.5,
+      "comp": -0.5
+    },
+    "metal": {
+      "bass": 1,
+      "drums": 1,
+      "comp": 0.5,
+      "lead": 0.5
+    },
+    "punk-hardcore": {
+      "lead": 0.5,
+      "bass": 0.5,
+      "drums": 0.5
+    },
+    "r-and-b": {
+      "bass": 1,
+      "voice": 0.5,
+      "comp": -0.5
+    },
+    "reggae": {
+      "bass": 1.5,
+      "comp": -0.5,
+      "percussion": 0.5
+    },
+    "reggaeton": {
+      "bass": 2,
+      "percussion": 0.5,
+      "comp": -1
+    },
+    "rock": {
+      "bass": 1,
+      "comp": 1,
+      "lead": 0.5,
+      "drums": 0.5
+    },
+    "salsa": {
+      "bass": 0.5,
+      "percussion": 0.5,
+      "comp": 0.5,
+      "lead": 0.5
+    },
+    "ska": {
+      "bass": 0.5,
+      "lead": 0.5,
+      "comp": -0.5,
+      "percussion": 0.5
+    },
+    "soul": {
+      "bass": 1,
+      "voice": 0.5,
+      "percussion": 0.5
+    },
+    "swing": {
+      "lead": 0.5,
+      "melody": 0.5,
+      "bass": 0.5,
+      "percussion": -0.5
+    },
+    "tango": {
+      "lead": 1,
+      "melody": 0.5,
+      "bass": -0.5,
+      "harmony": 0.5,
+      "percussion": -0.5
+    },
+    "timba": {
+      "bass": 0.5,
+      "percussion": 1,
+      "lead": 0.5
+    },
+    "uk-bass": {
+      "bass": 2,
+      "percussion": 0.5,
+      "pad": -1,
+      "comp": -1
+    },
+    "zouk": {
+      "bass": 1,
+      "voice": 0.5,
+      "percussion": 0.5,
+      "comp": -0.5
+    }
+  },
+  "changes": [
+    {
+      "instrumentId": "accordion",
+      "old": 0.457,
+      "new": 22.702,
+      "file": "src/data/instruments/catalog/bellows-and-keys/accordion.ts"
+    },
+    {
+      "instrumentId": "acid-303",
+      "old": 0.548,
+      "new": 17.6,
+      "file": "src/data/instruments/catalog/electronic/acid-303.ts"
+    },
+    {
+      "instrumentId": "acoustic-guitar",
+      "old": 12.0,
+      "new": 15.812,
+      "file": "src/data/instruments/catalog/plucked/acoustic-guitar.ts"
+    },
+    {
+      "instrumentId": "alto-sax",
+      "old": 0.411,
+      "new": 40.0,
+      "file": "src/data/instruments/catalog/winds/alto-sax.ts"
+    },
+    {
+      "instrumentId": "backing-vocals",
+      "old": 0.455,
+      "new": 29.744,
+      "file": "src/data/instruments/catalog/voice/backing-vocals.ts"
+    },
+    {
+      "instrumentId": "bandoneon",
+      "old": 0.589,
+      "new": 32.466,
+      "file": "src/data/instruments/catalog/bellows-and-keys/bandoneon.ts"
+    },
+    {
+      "instrumentId": "banjo",
+      "old": 8.0,
+      "new": 8.15,
+      "file": "src/data/instruments/catalog/plucked/banjo.ts"
+    },
+    {
+      "instrumentId": "bass",
+      "old": 0.685,
+      "new": 31.764,
+      "file": "src/data/instruments/catalog/plucked/bass.ts"
+    },
+    {
+      "instrumentId": "bass-lead",
+      "old": 0.685,
+      "new": 40.0,
+      "file": "src/data/instruments/catalog/electronic/bass-lead.ts"
+    },
+    {
+      "instrumentId": "bongos",
+      "old": 2.046,
+      "new": 2.777,
+      "file": "src/data/instruments/catalog/hand-drums/bongos.ts"
+    },
+    {
+      "instrumentId": "brass",
+      "old": 0.399,
+      "new": 22.795,
+      "file": "src/data/instruments/catalog/brass/brass.ts"
+    },
+    {
+      "instrumentId": "cajon",
+      "old": 2.299,
+      "new": 0.977,
+      "file": "src/data/instruments/catalog/hand-drums/cajon.ts"
+    },
+    {
+      "instrumentId": "castanets",
+      "old": 0.6,
+      "new": 0.342,
+      "file": "src/data/instruments/catalog/metal-and-wood/castanets.ts"
+    },
+    {
+      "instrumentId": "cello",
+      "old": 0.25,
+      "new": 40.0,
+      "file": "src/data/instruments/catalog/bowed/cello.ts"
+    },
+    {
+      "instrumentId": "choir",
+      "old": 0.455,
+      "new": 40.0,
+      "file": "src/data/instruments/catalog/voice/choir.ts"
+    },
+    {
+      "instrumentId": "clarinet",
+      "old": 0.411,
+      "new": 40.0,
+      "file": "src/data/instruments/catalog/winds/clarinet.ts"
+    },
+    {
+      "instrumentId": "claves",
+      "old": 0.285,
+      "new": 8.588,
+      "file": "src/data/instruments/catalog/metal-and-wood/claves.ts"
+    },
+    {
+      "instrumentId": "clavinet",
+      "old": 8.0,
+      "new": 8.545,
+      "file": "src/data/instruments/catalog/bellows-and-keys/clavinet.ts"
+    },
+    {
+      "instrumentId": "congas",
+      "old": 1.54,
+      "new": 2.419,
+      "file": "src/data/instruments/catalog/hand-drums/congas.ts"
+    },
+    {
+      "instrumentId": "dikanza",
+      "old": 0.35,
+      "new": 0.187,
+      "file": "src/data/instruments/catalog/metal-and-wood/dikanza.ts"
+    },
+    {
+      "instrumentId": "distortion-guitar",
+      "old": 2.994,
+      "new": 21.882,
+      "file": "src/data/instruments/catalog/plucked/distortion-guitar.ts"
+    },
+    {
+      "instrumentId": "drums",
+      "old": 0.898,
+      "new": 18.676,
+      "file": "src/data/instruments/catalog/kit/drums.ts"
+    },
+    {
+      "instrumentId": "electric-guitar",
+      "old": 13.58,
+      "new": 3.921,
+      "file": "src/data/instruments/catalog/plucked/electric-guitar.ts"
+    },
+    {
+      "instrumentId": "fiddle",
+      "old": 0.27,
+      "new": 40.0,
+      "file": "src/data/instruments/catalog/bowed/fiddle.ts"
+    },
+    {
+      "instrumentId": "flute",
+      "old": 0.466,
+      "new": 40.0,
+      "file": "src/data/instruments/catalog/winds/flute.ts"
+    },
+    {
+      "instrumentId": "guacharaca",
+      "old": 0.4,
+      "new": 0.236,
+      "file": "src/data/instruments/catalog/metal-and-wood/guacharaca.ts"
+    },
+    {
+      "instrumentId": "guiro",
+      "old": 0.4,
+      "new": 0.196,
+      "file": "src/data/instruments/catalog/metal-and-wood/guiro.ts"
+    },
+    {
+      "instrumentId": "guitar-harmonics",
+      "old": 0.378,
+      "new": 12.892,
+      "file": "src/data/instruments/catalog/plucked/guitar-harmonics.ts"
+    },
+    {
+      "instrumentId": "hand-percussion",
+      "old": 2.914,
+      "new": 1.207,
+      "file": "src/data/instruments/catalog/body-percussion/hand-percussion.ts"
+    },
+    {
+      "instrumentId": "harmonica",
+      "old": 0.457,
+      "new": 20.279,
+      "file": "src/data/instruments/catalog/winds/harmonica.ts"
+    },
+    {
+      "instrumentId": "horn-section",
+      "old": 0.399,
+      "new": 23.832,
+      "file": "src/data/instruments/catalog/brass/horn-section.ts"
+    },
+    {
+      "instrumentId": "jazz-guitar",
+      "old": 4.5,
+      "new": 2.925,
+      "file": "src/data/instruments/catalog/plucked/jazz-guitar.ts"
+    },
+    {
+      "instrumentId": "log-drum",
+      "old": 1.159,
+      "new": 12.253,
+      "file": "src/data/instruments/catalog/hand-drums/log-drum.ts"
+    },
+    {
+      "instrumentId": "mandolin",
+      "old": 7.0,
+      "new": 7.737,
+      "file": "src/data/instruments/catalog/plucked/mandolin.ts"
+    },
+    {
+      "instrumentId": "maracas",
+      "old": 1.2,
+      "new": 0.654,
+      "file": "src/data/instruments/catalog/metal-and-wood/maracas.ts"
+    },
+    {
+      "instrumentId": "noise-sweep",
+      "old": 0.548,
+      "new": 5.181,
+      "file": "src/data/instruments/catalog/electronic/noise-sweep.ts"
+    },
+    {
+      "instrumentId": "organ",
+      "old": 0.417,
+      "new": 16.431,
+      "file": "src/data/instruments/catalog/bellows-and-keys/organ.ts"
+    },
+    {
+      "instrumentId": "overdrive-guitar",
+      "old": 6.443,
+      "new": 40.0,
+      "file": "src/data/instruments/catalog/plucked/overdrive-guitar.ts"
+    },
+    {
+      "instrumentId": "palmas",
+      "old": 0.3,
+      "new": 0.159,
+      "file": "src/data/instruments/catalog/body-percussion/palmas.ts"
+    },
+    {
+      "instrumentId": "piano",
+      "old": 6.626,
+      "new": 35.971,
+      "file": "src/data/instruments/catalog/bellows-and-keys/piano.ts"
+    },
+    {
+      "instrumentId": "requinto",
+      "old": 5.0,
+      "new": 5.514,
+      "file": "src/data/instruments/catalog/plucked/requinto.ts"
+    },
+    {
+      "instrumentId": "rhodes",
+      "old": 0.322,
+      "new": 11.964,
+      "file": "src/data/instruments/catalog/bellows-and-keys/rhodes.ts"
+    },
+    {
+      "instrumentId": "ride",
+      "old": 1.639,
+      "new": 2.182,
+      "file": "src/data/instruments/catalog/metal-and-wood/ride.ts"
+    },
+    {
+      "instrumentId": "sampler",
+      "old": 0.456,
+      "new": 24.029,
+      "file": "src/data/instruments/catalog/electronic/sampler.ts"
+    },
+    {
+      "instrumentId": "saw-lead",
+      "old": 0.548,
+      "new": 17.033,
+      "file": "src/data/instruments/catalog/electronic/saw-lead.ts"
+    },
+    {
+      "instrumentId": "shaker",
+      "old": 1.25,
+      "new": 0.706,
+      "file": "src/data/instruments/catalog/metal-and-wood/shaker.ts"
+    },
+    {
+      "instrumentId": "spanish-guitar",
+      "old": 6.0,
+      "new": 3.849,
+      "file": "src/data/instruments/catalog/plucked/spanish-guitar.ts"
+    },
+    {
+      "instrumentId": "steel-guitar",
+      "old": 14.0,
+      "new": 13.806,
+      "file": "src/data/instruments/catalog/plucked/steel-guitar.ts"
+    },
+    {
+      "instrumentId": "strings",
+      "old": 0.37,
+      "new": 40.0,
+      "file": "src/data/instruments/catalog/bowed/strings.ts"
+    },
+    {
+      "instrumentId": "sub-bass",
+      "old": 0.685,
+      "new": 35.146,
+      "file": "src/data/instruments/catalog/electronic/sub-bass.ts"
+    },
+    {
+      "instrumentId": "synth",
+      "old": 0.548,
+      "new": 14.757,
+      "file": "src/data/instruments/catalog/electronic/synth.ts"
+    },
+    {
+      "instrumentId": "tambora",
+      "old": 0.853,
+      "new": 4.75,
+      "file": "src/data/instruments/catalog/hand-drums/tambora.ts"
+    },
+    {
+      "instrumentId": "tambourine",
+      "old": 0.285,
+      "new": 33.894,
+      "file": "src/data/instruments/catalog/metal-and-wood/tambourine.ts"
+    },
+    {
+      "instrumentId": "tenor-sax",
+      "old": 0.411,
+      "new": 40.0,
+      "file": "src/data/instruments/catalog/winds/tenor-sax.ts"
+    },
+    {
+      "instrumentId": "timbales",
+      "old": 1.54,
+      "new": 3.126,
+      "file": "src/data/instruments/catalog/hand-drums/timbales.ts"
+    },
+    {
+      "instrumentId": "trombone",
+      "old": 0.494,
+      "new": 38.976,
+      "file": "src/data/instruments/catalog/brass/trombone.ts"
+    },
+    {
+      "instrumentId": "trumpet",
+      "old": 0.399,
+      "new": 31.238,
+      "file": "src/data/instruments/catalog/brass/trumpet.ts"
+    },
+    {
+      "instrumentId": "turntable",
+      "old": 0.548,
+      "new": 17.209,
+      "file": "src/data/instruments/catalog/electronic/turntable.ts"
+    },
+    {
+      "instrumentId": "upright-bass",
+      "old": 0.406,
+      "new": 9.672,
+      "file": "src/data/instruments/catalog/plucked/upright-bass.ts"
+    },
+    {
+      "instrumentId": "vibraphone",
+      "old": 0.708,
+      "new": 16.014,
+      "file": "src/data/instruments/catalog/metal-and-wood/vibraphone.ts"
+    },
+    {
+      "instrumentId": "violin",
+      "old": 0.26,
+      "new": 40.0,
+      "file": "src/data/instruments/catalog/bowed/violin.ts"
+    },
+    {
+      "instrumentId": "voice",
+      "old": 0.455,
+      "new": 36.656,
+      "file": "src/data/instruments/catalog/voice/voice.ts"
+    },
+    {
+      "instrumentId": "warm-pad",
+      "old": 0.548,
+      "new": 10.92,
+      "file": "src/data/instruments/catalog/electronic/warm-pad.ts"
+    },
+    {
+      "instrumentId": "zapateado",
+      "old": 0.5,
+      "new": 0.265,
+      "file": "src/data/instruments/catalog/body-percussion/zapateado.ts"
+    }
+  ]
+}

@@ -6,7 +6,7 @@ export const alto_sax: InstrumentDef = {
   family: "winds",
   voicing: "single",
   elementaryModel: 16,
-  makeupGain: 0.411,
+  makeupGain: 40.000,
   polyphony: 4,
   note: "E-flat curved conical brass saxophone with single reed mouthpiece, delivering the expressive bite, vocal flexibility, and iconic bebop agility of Charlie Parker",
   acousticProfile: {

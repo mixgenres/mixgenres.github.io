@@ -9,7 +9,7 @@ export const upright_bass: InstrumentDef = {
   excitationType: "fingerpad",
   sympatheticStrings: true,
   elementaryModel: 3,
-  makeupGain: 0.406,
+  makeupGain: 9.672,
   polyphony: 4,
   note: "Acoustic 3/4 spruce/maple double bass delivering deep woody fundamental resonance, expressive pizzicato, rich arco bowing, and dedicated Tango techniques (arrastre drag, strappata fingerboard snap, lija sandpaper bow scrape, and tambor wood hits)",
   acousticProfile: {

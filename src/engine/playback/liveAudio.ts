@@ -41,6 +41,7 @@ if (typeof window !== 'undefined') {
  *  even though the transport only ever hands it a bare trackId. Populated by
  *  the UI layer (App.tsx) from the current song's tracks whenever they change. */
 const trackInstruments = new Map<string, string>();
+const trackMixVolumes = new Map<string, number>();
 interface TrackRenderContext {
   instrumentId: string;
   luthier: ReturnType<typeof getLuthierModelForInstrument>;
@@ -58,18 +59,30 @@ export function setActiveWorld(worldId: string, styleId?: string) {
   trackRenderContexts.clear();
   if (bandWorklet) {
     bandWorklet.setWorldAndStyle(worldId, styleId);
-    void bandWorklet.prepareTracks(trackInstruments);
+    void bandWorklet.prepareTracks(trackInstruments).then(() => {
+      for (const [trackId, volume] of trackMixVolumes) bandWorklet?.setTrackVolume(trackId, volume);
+    });
   }
 }
 
-export function setTrackInstruments(map: Record<string, string | undefined>) {
+export function setTrackInstruments(
+  map: Record<string, string | undefined>,
+  volumes: Record<string, number | undefined> = {},
+) {
   trackInstruments.clear();
+  trackMixVolumes.clear();
   trackRenderContexts.clear();
   for (const key of Object.keys(map)) {
     const v = map[key];
     if (v) trackInstruments.set(key, v);
+    const volume = volumes[key];
+    if (volume !== undefined) trackMixVolumes.set(key, Math.max(0, Math.min(1.5, volume)));
   }
-  if (bandWorklet) void bandWorklet.prepareTracks(trackInstruments);
+  if (bandWorklet) {
+    void bandWorklet.prepareTracks(trackInstruments).then(() => {
+      for (const [trackId, volume] of trackMixVolumes) bandWorklet?.setTrackVolume(trackId, volume);
+    });
+  }
 }
 let initPromise: Promise<BandWorkletNode> | null = null;
 
@@ -99,6 +112,7 @@ export async function ensureSynth(): Promise<BandWorkletNode> {
       await node.initialize(ctx, 1);
       bandWorklet = node;
       await node.prepareTracks(trackInstruments);
+      for (const [trackId, volume] of trackMixVolumes) node.setTrackVolume(trackId, volume);
       return node;
     } catch (err) {
       console.error('Physical Modeling Worklet initialization error:', err);

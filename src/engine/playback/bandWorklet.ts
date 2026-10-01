@@ -242,12 +242,32 @@ export class BandWorkletNode {
   }
 
   // Live mix methods (Tier 3 -> Tier 4 live parameter update, no graph reconstruction)
+  /**
+   * Authored track volume is a mix scalar, not the final DSP gain.
+   * Keep the live path identical to mp3Export:
+   *   makeupGain × roleGain × authoredTrackVolume.
+   *
+   * Previously this method wrote the UI volume directly into params.volume,
+   * replacing makeupGain and roleGain. That made live playback disagree with
+   * export and could make individual instruments appear missing or wildly hot.
+   */
+  private effectiveTrackVolume(trackId: string, authoredVolume: number): number {
+    const params = this.trackParamsMap.get(trackId);
+    if (!params) return 0;
+    const instrumentId = params.instrumentId || '';
+    const isElectronic = instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.electronic);
+    const baseGain = makeupGainFor(isElectronic ? 9 : params.model, instrumentId);
+    const roleGain = params.roleGain ?? 1;
+    return Math.max(0, Math.min(35, baseGain * roleGain * Math.max(0, Math.min(1.5, authoredVolume))));
+  }
+
   setTrackVolume(trackId: string, volume: number, atTime?: number) {
     this.schedule(() => {
-      this.trackVolumes.set(trackId, volume);
+      const authored = Math.max(0, Math.min(1.5, volume));
+      this.trackVolumes.set(trackId, authored);
       const params = this.trackParamsMap.get(trackId);
       if (params) {
-        params.volume = volume;
+        params.volume = this.effectiveTrackVolume(trackId, authored);
       }
       this.updateTrackMuteSoloLevels();
     }, atTime);
@@ -359,8 +379,15 @@ export class BandWorkletNode {
         const role = instDef?.acousticProfile?.role || 'comp';
         params.roleGain = getRoleGainLinear(role, this.activeWorldId || 'default', instrumentId);
         params.volume *= params.roleGain;
-        // Preserve live mixer controls when static track parameters are rebuilt.
-        if (this.trackVolumes.has(trackId)) params.volume = this.trackVolumes.get(trackId)!;
+        // Preserve the authored track scalar when static track parameters are rebuilt,
+        // while retaining the instrument makeup and role gain in the effective signal.
+        if (this.trackVolumes.has(trackId)) {
+          params.volume = Math.max(0, Math.min(35,
+            (instDef?.makeupGain ?? makeupGainFor(instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.electronic) ? 9 : model, instrumentId))
+            * (params.roleGain ?? 1)
+            * this.trackVolumes.get(trackId)!,
+          ));
+        }
         if (this.trackPans.has(trackId)) params.pan = this.trackPans.get(trackId)!;
         this.trackParamsMap.set(trackId, params);
 
@@ -553,7 +580,10 @@ export class BandWorkletNode {
       const role = instDef?.acousticProfile?.role || 'comp';
       p.roleGain = getRoleGainLinear(role, this.activeWorldId || 'default', instrumentId);
       p.volume *= p.roleGain;
-      if (this.trackVolumes.has(trackId)) p.volume = this.trackVolumes.get(trackId)!;
+      if (this.trackVolumes.has(trackId)) {
+        const baseGain = makeupGainFor(instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.electronic) ? 9 : model, instrumentId);
+        p.volume = Math.max(0, Math.min(35, baseGain * (p.roleGain ?? 1) * this.trackVolumes.get(trackId)!));
+      }
       if (this.trackPans.has(trackId)) p.pan = this.trackPans.get(trackId)!;
       if (this.activeWorldId) p.genreId = this.activeWorldId;
       if (this.activeStyleId) p.styleId = this.activeStyleId;
@@ -708,7 +738,11 @@ export class BandWorkletNode {
       const isElectronic = instrumentHasKey(params.instrumentId || '', ENGINE_INSTRUMENT_KEYS.electronic);
       const effectiveModelForGain = isElectronic ? 9 : params.model;
       const baseGain = makeupGainFor(effectiveModelForGain, params.instrumentId);
-      params.volume = Math.max(0.01, Math.min(35, norm * baseGain * (params.roleGain ?? 1)));
+      const authoredTrackVolume = this.trackVolumes.get(trackId) ?? 1;
+      params.volume = Math.max(0.01, Math.min(
+        35,
+        norm * baseGain * (params.roleGain ?? 1) * authoredTrackVolume,
+      ));
       this.queueParamUpdate(`track_${trackId}_vol`, params.volume);
     } else if (cc === 10) {
       params.pan = norm;

@@ -6,7 +6,7 @@ export const brass: InstrumentDef = {
   family: "brass",
   voicing: "chord",
   elementaryModel: 15,
-  makeupGain: 0.399,
+  makeupGain: 22.795,
   polyphony: 8,
   note: "Power brass ensemble (trumpets, trombones, French horns) with punchy stabs and soaring fanfare",
   acousticProfile: {
