@@ -39,6 +39,14 @@ type TrackRenderEvent =
   | { sample: number; kind: 'cc'; cc: PerfCC }
   | { sample: number; kind: 'bend'; value: number; targetMidi?: number; noteInstanceId?: string };
 
+function blueprintTrackProfile(blueprint: typeof FORM_BLUEPRINTS[string] | undefined, instrumentId: string, instrumentName?: string) {
+  const profiles = blueprint?.dspProfile?.instruments;
+  if (!profiles) return undefined;
+  const norm = (v: string) => v.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '');
+  const wanted = new Set([norm(instrumentId), norm(instrumentName ?? ''), norm(INSTRUMENTS_BY_ID[instrumentId]?.name ?? '')]);
+  return Object.entries(profiles).find(([name]) => wanted.has(norm(name)))?.[1];
+}
+
 function applyCCToParams(
   params: TrackParams,
   cc: number,
@@ -120,6 +128,8 @@ export async function renderPerformanceToMp3(
     }
   }
 
+  const styleBlueprint = (options.styleId ? FORM_BLUEPRINTS[options.styleId] : undefined) ?? (options.worldId ? FORM_BLUEPRINTS[options.worldId] : undefined);
+
   // Pre-allocate 3 stereo stem bus buffers: drums, sub, and instruments
   const drumBusL = new Float32Array(totalSamples);
   const drumBusR = new Float32Array(totalSamples);
@@ -150,6 +160,7 @@ export async function renderPerformanceToMp3(
       params.genreId = options.worldId;
     }
     if (dialect) {
+      params.instrumentDialectId = dialect.id;
       params.dialect = dialect.id;
       params.performanceMode = dialect.performanceMode;
       if (dialect.pluckPositionOverride !== undefined) params.pluckPosition = dialect.pluckPositionOverride;
@@ -447,11 +458,15 @@ export async function renderPerformanceToMp3(
       targetR = instBusR;
     }
 
+    const trackProfile = blueprintTrackProfile(styleBlueprint, instrumentId, instDef?.name);
+    const processedLeft = new Float32Array(stem.left);
+    const processedRight = new Float32Array(stem.right);
+    if (trackProfile) processOfflineAudioDSP(processedLeft, processedRight, { master: trackProfile });
     const offset = stem.startSample;
-    const copyLen = Math.min(stem.left.length, Math.max(0, totalSamples - offset));
+    const copyLen = Math.min(processedLeft.length, Math.max(0, totalSamples - offset));
     for (let i = 0; i < copyLen; i++) {
-      targetL[offset + i] += stem.left[i];
-      targetR[offset + i] += stem.right[i];
+      targetL[offset + i] += processedLeft[i];
+      targetR[offset + i] += processedRight[i];
     }
 
     if (onProgress) {
@@ -474,8 +489,6 @@ export async function renderPerformanceToMp3(
   }
 
   if (onProgress) onProgress(0.75);
-
-  const styleBlueprint = options.styleId ? FORM_BLUEPRINTS[options.styleId] : (options.worldId ? FORM_BLUEPRINTS[options.worldId] : undefined);
 
   // Node/CI environments do not expose Web Audio's OfflineAudioContext. Keep a
   // deterministic export path for isolated instrument validation: the exact same

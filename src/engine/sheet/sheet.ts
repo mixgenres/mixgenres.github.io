@@ -583,9 +583,21 @@ export function suggestPattern(
   const guestWorlds = guestWorldIdsFor(worldId);
   const guestIds = guestWorlds.flatMap(g => (PATTERNS_BY_WORLD[g] || []).map(p => p.id));
   const candidateIds = Array.from(new Set([...(curated ?? []), ...worldWide, ...guestIds, ...Object.keys(PATTERNS_BY_ID)]));
-  const scored = candidateIds
+  const rawCandidates = candidateIds
     .map(id => PATTERNS_BY_ID[id])
-    .filter((p): p is MusicalPattern => !!p && p.enabled !== false)
+    .filter((p): p is MusicalPattern => !!p && p.enabled !== false);
+  const instrumentKinds = new Set(instrumentPatternKinds(voice.instrumentId));
+  const hasCompatibleExplicit = rawCandidates.some(p => {
+    const targets = new Set([...(p.instruments ?? []).map(String), ...(p.compatibleInstruments ?? []).map(String)]);
+    return targets.size > 0 && [...targets].some(k => instrumentKinds.has(k));
+  });
+  const candidatePool = hasCompatibleExplicit
+    ? rawCandidates.filter(p => {
+        const targets = new Set([...(p.instruments ?? []).map(String), ...(p.compatibleInstruments ?? []).map(String)]);
+        return targets.size === 0 || [...targets].some(k => instrumentKinds.has(k));
+      })
+    : rawCandidates;
+  const scored = candidatePool
     .map(p => {
       let n = affinity(p.id, voice, worldId, styleId);
       const behavioralFit = approachFit(p, approach);
@@ -1906,8 +1918,8 @@ export function makeSheet(
 
   const sectionProgressions = (resolved.harmony?.sectionProgressions as Record<string, string[]>) ?? {};
   const regions: Region[] = form.map((f, i) => {
-    const fallback = chordCells[i % Math.max(1, chordCells.length)] ?? chords;
-    const pickedRaw = progressionForSection(sectionProgressions, f.key, f.kind, fallback, resolved.contract);
+    const fallback = chords;
+    const pickedRaw = progressionForSection(sectionProgressions, f.key, f.kind, fallback, resolved.contract, resolved.primaryGenre === 'tango');
     // Section templates describe harmonic function, not an automatic key change.
     // Keep the whole song in the first section's tonic unless the user explicitly
     // changes the song key elsewhere.

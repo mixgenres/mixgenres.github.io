@@ -7,7 +7,7 @@ const STYLE_0: GenreStyleDefinition = {
         "name": "Tango Tradicional",
         "origin": "Buenos Aires / Montevideo",
         "era": "Golden Age (1935–1955)",
-        "description": "Marcato • Bandoneón • Golden Age\nThe",
+        "description": "Marcato • Bandoneón • Golden Age tango with arrastre, accented marcato and dramatic stops.",
         "characteristicInstruments": [
           "bandoneon",
           "violin",
@@ -48,28 +48,11 @@ const STYLE_0: GenreStyleDefinition = {
           "microtimingFeel": "straight"
         },
         "sectionProgressions": {
-          "intro": [
-            "Am",
-            "E7",
-            "Am",
-            "E7"
-          ],
-          "tema-a": [
-            "Am",
-            "Dm",
-            "E7",
-            "Am",
-            "Am",
-            "Dm",
-            "E7",
-            "Am"
-          ],
-          "coda": [
-            "E7",
-            "E7",
-            "Am",
-            "Am"
-          ]
+          "intro": ["Am","E7","Am","E7"],
+          "A": ["Am","Dm","E7","Am","Am","Dm","E7","Am"],
+          "B": ["Am","C","E7","Am","Dm","G7","C","E7"],
+          "variación": ["Dm","Gm","A7","Dm","E7","Am","E7","Am"],
+          "coda": ["E7","E7","Am","Am"]
         }
       };
 
@@ -120,28 +103,12 @@ const STYLE_1: GenreStyleDefinition = {
     "microtimingFeel": "pushed"
   },
   "sectionProgressions": {
-    "intro": [
-      "Am7",
-      "Dm7",
-      "F#dim",
-      "E7b9"
-    ],
-    "theme": [
-      "Am7",
-      "Dm7",
-      "G7",
-      "Cmaj7",
-      "Fmaj7",
-      "Bm7b5",
-      "E7b9",
-      "Am7"
-    ],
-    "coda": [
-      "F#dim",
-      "E7b9",
-      "Am",
-      "Am"
-    ]
+    "intro": ["Am7","Dm7","F#dim","E7b9"],
+    "tema": ["Am7","Dm7","G7","Cmaj7","Fmaj7","Bm7b5","E7b9","Am7"],
+    "development": ["Am7","Cmaj7","Fmaj7#11","E7alt","Am7","Dm7","G7","Cmaj7"],
+    "3+3+2 ostinato": ["Am7","Am7","Fmaj7#11","E7alt","Dm7","E7b9","Am7"],
+    "lyrical section": ["Dm7","G7","Cmaj7","Fmaj7","Bm7b5","E7b9","Am7","Am7"],
+    "coda": ["F#dim","E7b9","Am","Am"]
   },
   "referenceArtists": [
     "Astor Piazzolla"
@@ -165,7 +132,7 @@ const STYLE_2: GenreStyleDefinition = {
         "name": "Milonga",
         "origin": "Río de la Plata",
         "era": "Late 19th Century–Present",
-        "description": "Fast • Habanera Syncopation • Bouncy\nFast,",
+        "description": "Fast • Habanera Syncopation • Bouncy milonga with traspié accents and crisp staccato phrasing.",
         "characteristicInstruments": [
           "bandoneon",
           "violin",
@@ -205,28 +172,11 @@ const STYLE_2: GenreStyleDefinition = {
           "microtimingFeel": "pushed"
         },
         "sectionProgressions": {
-          "intro": [
-            "D",
-            "A7",
-            "D",
-            "A7"
-          ],
-          "verse": [
-            "D",
-            "A7",
-            "D",
-            "A7",
-            "D",
-            "G",
-            "A7",
-            "D"
-          ],
-          "coda": [
-            "A7",
-            "A7",
-            "D",
-            "D"
-          ]
+          "intro": ["D","A7","D","A7"],
+          "milonga-a": ["D","A7","D","G","A7","D"],
+          "milonga-b": ["G","A7","D","B7","Em","A7","D"],
+          "variación": ["D","F#7","Bm","E7","A7","D"],
+          "coda": ["A7","A7","D","D"]
         }
       };
 
@@ -237,7 +187,7 @@ const STYLE_3: GenreStyleDefinition = {
         "name": "Tango Vals",
         "origin": "Río de la Plata",
         "era": "Golden Age (1930s–1950s)",
-        "description": "Lyrical • 3/4 Waltzing • Flowing\nFlowing,",
+        "description": "Lyrical • 3/4 Waltzing • Flowing tango vals with expressive violin and buoyant accompaniment.",
         "characteristicInstruments": [
           "violin",
           "bandoneon",
@@ -277,28 +227,11 @@ const STYLE_3: GenreStyleDefinition = {
           "microtimingFeel": "rubato"
         },
         "sectionProgressions": {
-          "intro": [
-            "Am",
-            "E7",
-            "Am",
-            "E7"
-          ],
-          "vals-a": [
-            "Am",
-            "Dm",
-            "G7",
-            "C",
-            "F",
-            "Dm",
-            "E7",
-            "Am"
-          ],
-          "coda": [
-            "E7",
-            "E7",
-            "Am",
-            "Am"
-          ]
+          "intro": ["Am","E7","Am","E7"],
+          "vals-a": ["Am","Dm","G7","C","F","Dm","E7","Am"],
+          "vals-b": ["C","G7","C","F","Dm","E7","Am","Am"],
+          "variación": ["F","Dm","G7","C","F","E7","Am","Am"],
+          "coda": ["E7","E7","Am","Am"]
         }
       };
 
@@ -350,28 +283,11 @@ const STYLE_4: GenreStyleDefinition = {
     "microtimingFeel": "laid-back"
   },
   "sectionProgressions": {
-    "intro": [
-      "Dm",
-      "Gm",
-      "A7",
-      "Dm"
-    ],
-    "groove": [
-      "Dm",
-      "Gm",
-      "C",
-      "F",
-      "Bb",
-      "Gm",
-      "A7",
-      "Dm"
-    ],
-    "coda": [
-      "Gm",
-      "A7",
-      "Dm",
-      "Dm"
-    ]
+    "intro": ["Dm","Gm","A7","Dm"],
+    "A": ["Dm","Gm","C","F","Bb","Gm","A7","Dm"],
+    "B": ["Gm","A7","Dm","Bb","F","C","A7","Dm"],
+    "variación": ["Dm","C","Bb","A7","Gm","A7","Dm","Dm"],
+    "coda": ["Gm","A7","Dm","Dm"]
   },
   "referenceArtists": [
     "Gotan Project"
@@ -438,42 +354,11 @@ const EXPANSION_STYLE_0: GenreStyleDefinition = {
     "G7"
   ],
   "sectionProgressions": {
-    "intro": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "verse": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "chorus": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "bridge": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "solo": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "coda": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ]
+    "intro": ["Am", "E7", "Am", "G7"],
+    "verse": ["Am", "Dm", "E7", "Am"],
+    "chorus": ["C", "G7", "Am", "E7"],
+    "solo": ["Dm", "Am", "E7", "Am"],
+    "coda": ["Am", "E7", "Dm", "G7", "C", "E7", "Am"]
   },
   "referenceArtists": [
     "Carlos Gardel"
@@ -538,42 +423,11 @@ const EXPANSION_STYLE_1: GenreStyleDefinition = {
     "G7"
   ],
   "sectionProgressions": {
-    "intro": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "verse": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "chorus": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "bridge": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "solo": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "coda": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ]
+    "intro": ["Am", "E7", "Am", "E7"],
+    "verse": ["Am", "Dm", "G7", "C", "E7", "Am"],
+    "chorus": ["Dm", "Gm", "A7", "Dm", "E7", "Am"],
+    "solo": ["Am", "C", "E7", "Am"],
+    "coda": ["Am", "Dm", "E7", "G7", "C", "F", "E7"]
   },
   "referenceArtists": [
     "Julio de Caro"
@@ -640,42 +494,11 @@ const EXPANSION_STYLE_2: GenreStyleDefinition = {
     "G7"
   ],
   "sectionProgressions": {
-    "intro": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "verse": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "chorus": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "bridge": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "solo": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "coda": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ]
+    "intro": ["Am", "E7", "Am", "E7"],
+    "verse": ["Am", "E7", "Am", "Dm"],
+    "chorus": ["Am", "C", "E7", "Am"],
+    "solo": ["Dm", "Am", "E7", "Am"],
+    "coda": ["Am", "E7", "Dm", "E7", "Am"]
   },
   "referenceArtists": [
     "Juan D'Arienzo"
@@ -741,42 +564,11 @@ const EXPANSION_STYLE_3: GenreStyleDefinition = {
     "G7"
   ],
   "sectionProgressions": {
-    "intro": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "verse": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "chorus": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "bridge": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "solo": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "coda": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ]
+    "intro": ["Am", "E7", "Am", "E7"],
+    "verse": ["Am", "Dm", "G7", "C"],
+    "chorus": ["F", "Dm", "E7", "Am"],
+    "solo": ["C", "G7", "C", "F", "E7"],
+    "coda": ["Am", "C", "F", "Dm", "E7", "Am"]
   },
   "referenceArtists": [
     "Carlos Di Sarli"
@@ -845,42 +637,11 @@ const EXPANSION_STYLE_4: GenreStyleDefinition = {
     "G7"
   ],
   "sectionProgressions": {
-    "intro": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "verse": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "chorus": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "bridge": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "solo": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "coda": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ]
+    "intro": ["Am", "E7", "Am", "E7"],
+    "verse": ["Am", "Dm", "E7", "Am", "C", "F", "E7", "Am"],
+    "chorus": ["Dm", "Gm", "A7", "Dm", "Bb", "E7", "Am"],
+    "solo": ["C", "G7", "C", "F", "E7", "Am"],
+    "coda": ["Am", "Dm", "G7", "C", "F", "E7", "Am"]
   },
   "referenceArtists": [
     "Aníbal Troilo"
@@ -949,42 +710,11 @@ const EXPANSION_STYLE_5: GenreStyleDefinition = {
     "G7"
   ],
   "sectionProgressions": {
-    "intro": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "verse": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "chorus": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "bridge": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "solo": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "coda": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ]
+    "intro": ["Am", "E7", "Am", "E7"],
+    "verse": ["Am", "E7", "Am", "Dm"],
+    "chorus": ["Am", "G", "F", "E7"],
+    "solo": ["Dm", "E7", "Am", "E7"],
+    "coda": ["Am", "E7", "F", "E7", "Dm", "G", "C", "E7"]
   },
   "referenceArtists": [
     "Osvaldo Pugliese"
@@ -1054,42 +784,11 @@ const EXPANSION_STYLE_6: GenreStyleDefinition = {
     "G7"
   ],
   "sectionProgressions": {
-    "intro": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "verse": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "chorus": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "bridge": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "solo": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "coda": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ]
+    "intro": ["Am7", "E7b9", "Am7", "E7b9"],
+    "verse": ["Am7", "Dm7", "G7", "Cmaj7"],
+    "chorus": ["Fmaj7", "Bm7b5", "E7b9", "Am7"],
+    "solo": ["Dm7", "G7", "Cmaj7", "Fmaj7#11", "E7alt"],
+    "coda": ["Am7", "Cmaj7", "Fmaj7#11", "E7alt", "Dm7", "G7", "Cmaj7"]
   },
   "referenceArtists": [
     "Horacio Salgán"
@@ -1157,42 +856,11 @@ const EXPANSION_STYLE_7: GenreStyleDefinition = {
     "G7"
   ],
   "sectionProgressions": {
-    "intro": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "verse": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "chorus": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "bridge": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "solo": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ],
-    "coda": [
-      "Am",
-      "E7",
-      "Am",
-      "G7"
-    ]
+    "intro": ["Am7", "D7", "Gmaj7", "E7"],
+    "verse": ["Am7", "Dm7", "G7", "Cmaj7"],
+    "chorus": ["Fmaj7", "Bm7b5", "E7", "Am7"],
+    "solo": ["Dm7", "G7", "Cmaj7", "E7alt"],
+    "coda": ["Am7", "D7", "Gmaj7", "Cmaj7", "Fmaj7", "E7"]
   },
   "referenceArtists": [
     "Bajofondo"

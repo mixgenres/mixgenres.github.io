@@ -12,17 +12,17 @@ export function applyStyleDialect(style: SongStyle, _index?: number): SongStyle 
   const theory = styleTheoryFor(style.id, style.primaryGenre);
   const base = profile;
   const rhythm = { ...(style.rhythm ?? {}) };
-  rhythm.defaultBpm = base.bpm ?? rhythm.defaultBpm;
-  rhythm.tempoRange = base.tempoRange ?? rhythm.tempoRange;
-  rhythm.meter = base.meter ?? rhythm.meter;
-  rhythm.feel = base.feel ?? rhythm.feel;
-  rhythm.swingPercentage = base.swing ?? rhythm.swingPercentage;
-  rhythm.signatureCell = base.signatureCell;
-  rhythm.timelineClave = base.timeline ?? rhythm.timelineClave;
+  rhythm.defaultBpm = rhythm.defaultBpm ?? base.bpm;
+  rhythm.tempoRange = rhythm.tempoRange ?? base.tempoRange;
+  rhythm.meter = rhythm.meter ?? base.meter;
+  rhythm.feel = rhythm.feel ?? base.feel;
+  rhythm.swingPercentage = rhythm.swingPercentage ?? base.swing;
+  rhythm.signatureCell = rhythm.signatureCell ?? base.signatureCell;
+  rhythm.timelineClave = rhythm.timelineClave ?? base.timeline;
   rhythm.microtimingFeel = /laid-back|behind|space/.test(base.feel ?? '') ? 'laid-back' : /shuffle|swing/.test(base.feel ?? '') ? 'swung' : rhythm.microtimingFeel;
 
   style.rhythm = rhythm;
-  style.summary = `${style.name}: ${base.signatureCell}`;
+  style.summary = style.summary ?? `${style.name}: ${base.signatureCell}`;
   style.signatureTraits = [
     base.signatureCell,
     `${theory.meter} ${theory.harmonicModel}`,
@@ -38,18 +38,20 @@ export function applyStyleDialect(style: SongStyle, _index?: number): SongStyle 
     ...(style.harmony ?? {}),
     model: theory.harmonicModel ?? base.harmonyModel ?? style.harmony?.model ?? 'functional',
     modePolicy: theory.defaultScale ?? base.modePolicy ?? style.harmony?.modePolicy ?? 'major',
-    progressionTemplates: (base.progressions.length ? base.progressions : theory.progressions).map(value => ({w:1,value})),
+    progressionTemplates: style.harmony?.progressionTemplates?.length
+      ? style.harmony.progressionTemplates
+      : (base.progressions.length ? base.progressions : theory.progressions).map(value => ({w:1,value})),
     harmonicRhythm: theory.harmonicRhythm ?? base.harmonicRhythm ?? style.harmony?.harmonicRhythm,
     bassMotion: theory.bass.style ?? base.bassMotion ?? style.harmony?.bassMotion,
   };
   style.melody = {
     ...(style.melody ?? {}),
-    contourArchetypes: Array.from(new Set([...theory.melody.contour, ...base.contours])),
+    contourArchetypes: Array.from(new Set([...(style.melody?.contourArchetypes ?? []), ...theory.melody.contour, ...base.contours])),
     phraseLengthsBars: theory.melody.phraseBars.length ? theory.melody.phraseBars : [4,8],
   };
   style.arrangement = {
     ...(style.arrangement ?? {}),
-    doublingRules: base.arrangement,
+    doublingRules: style.arrangement?.doublingRules ?? base.arrangement,
   };
   style.sound = {
     ...(style.sound ?? {}),
@@ -58,7 +60,7 @@ export function applyStyleDialect(style: SongStyle, _index?: number): SongStyle 
     // authored palette here caused unrelated instruments to leak into starter
     // ensembles (for example a scraper part disappearing from Kizomba).
     instrumentPalette: style.sound?.instrumentPalette ?? base.instruments.map(value => ({value,w:1})),
-    masterProfile: { pocket: style.sound?.masterProfile?.pocket ?? .5, lift: style.sound?.masterProfile?.lift ?? .5 },
+    masterProfile: { ...(style.sound?.masterProfile ?? {}), pocket: style.sound?.masterProfile?.pocket ?? .5, lift: style.sound?.masterProfile?.lift ?? .5 },
   };
   return style;
 }

@@ -57,6 +57,13 @@ import { LRUMap, registerCache } from '../cache/lru.ts';
 const resolveCache = new LRUMap<string, ResolvedStyle>(2000, 'resolveCache');
 registerCache(resolveCache);
 
+function stableSerialize(value: unknown): string {
+  if (value === null || typeof value !== 'object') return JSON.stringify(value);
+  if (Array.isArray(value)) return `[${value.map(stableSerialize).join(',')}]`;
+  const obj = value as Record<string, unknown>;
+  return `{${Object.keys(obj).sort().map(key => `${JSON.stringify(key)}:${stableSerialize(obj[key])}`).join(',')}}`;
+}
+
 function cacheKey(opts: ResolveStyleOptions): string {
   const g = opts.genreId ?? '';
   const s = opts.styleId;
@@ -67,10 +74,7 @@ function cacheKey(opts: ResolveStyleOptions): string {
       .sort()
       .join(';');
   }
-  let overKey = '';
-  if (opts.userOverrides) {
-    overKey = Object.keys(opts.userOverrides).sort().join(',');
-  }
+  const overKey = opts.userOverrides ? stableSerialize(opts.userOverrides) : '';
   return `${g}|${s}|${infKey}|${overKey}`;
 }
 
@@ -87,7 +91,7 @@ function lerpRange(a: Range, b: Range, t: number): Range {
 
 function blendWeighted<T>(baseList: Weighted<T>[], influenceList: Weighted<T>[], weight: number): Weighted<T>[] {
   const w = Math.max(0, Math.min(1, weight));
-  const baseScale = 1 - w * 0.5;
+  const baseScale = 1 - w;
   const infScale = w;
 
   const results: Weighted<T>[] = [];
@@ -360,8 +364,8 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
           if (infStyle.melody) {
             if (w >= 0.5) {
               merged.melody.scaleMode = infStyle.melody.scaleMode ?? merged.melody.scaleMode;
-              if (infStyle.melody.pitchIntervals) merged.melody.pitchIntervals = infStyle.melody.pitchIntervals;
-              if (infStyle.melody.contourArchetypes) merged.melody.contourArchetypes = infStyle.melody.contourArchetypes;
+              if (infStyle.melody.pitchIntervals) merged.melody.pitchIntervals = Array.from(new Set([...(merged.melody.pitchIntervals ?? []), ...infStyle.melody.pitchIntervals]));
+              if (infStyle.melody.contourArchetypes) merged.melody.contourArchetypes = Array.from(new Set([...(merged.melody.contourArchetypes ?? []), ...infStyle.melody.contourArchetypes]));
             }
             if (infStyle.melody.ornamentVocabulary) {
               merged.melody.ornamentVocabulary = Array.from(new Set([
@@ -394,6 +398,8 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
             );
             if (w >= 0.5 && infStyle.sound.masterProfile) {
               merged.sound.masterProfile = {
+                ...merged.sound.masterProfile,
+                ...infStyle.sound.masterProfile,
                 pocket: lerp(merged.sound.masterProfile.pocket ?? 0.5, infStyle.sound.masterProfile.pocket ?? 0.5, w),
                 lift: lerp(merged.sound.masterProfile.lift ?? 0.5, infStyle.sound.masterProfile.lift ?? 0.5, w),
               };
@@ -406,8 +412,9 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
           if (infStyle.gestures) {
             for (const [gid, gest] of Object.entries(infStyle.gestures)) {
               merged.gestures[gid] = {
+                ...(merged.gestures[gid] ?? {}),
                 ...gest,
-                probability: (merged.gestures[gid]?.probability ?? 0) * (1 - w) + gest.probability * w
+                probability: (merged.gestures[gid]?.probability ?? gest.probability ?? 0) * (1 - w) + gest.probability * w
               };
             }
             recordDecision('gestures', merged.gestures, 'influence', srcId, w);

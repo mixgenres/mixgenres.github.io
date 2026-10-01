@@ -161,18 +161,30 @@ export function compactDefaultChordLoop(chords: string[], contract?: WorldContra
   return chords.slice(0, 4);
 }
 
+function normalizeSectionKey(value: string): string {
+  return String(value ?? '')
+    .normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase().replace(/[^a-z0-9]+/g, '');
+}
+
 export function progressionForSection(
   sectionProgressions: Record<string, string[]> | undefined,
   formKey: string,
   kind: string,
   fallback: string[],
   contract?: WorldContract,
+  strictNamedSection = false,
 ): string[] {
   if (!sectionProgressions) return compactDefaultChordLoop(fallback, contract);
-  const tryKeys = [formKey, kind, kind.replace(/-/g, ''), 'verse'];
-  for (const k of tryKeys) {
-    const found = sectionProgressions[k];
-    if (found && found.length) return compactDefaultChordLoop(found, contract);
+  // Match only authored section identity. Never treat `verse` as a universal
+  // fallback: that silently turns B/variation/development sections into A.
+  const aliases = new Set([normalizeSectionKey(formKey), normalizeSectionKey(kind)]);
+  const foundEntry = Object.entries(sectionProgressions).find(([key, value]) =>
+    value?.length && aliases.has(normalizeSectionKey(key))
+  );
+  if (foundEntry) return compactDefaultChordLoop(foundEntry[1], contract);
+  if (strictNamedSection) {
+    throw new Error(`Missing authored section progression for formKey="${formKey}" kind="${kind}"; refusing positional harmony fallback.`);
   }
   return compactDefaultChordLoop(fallback, contract);
 }

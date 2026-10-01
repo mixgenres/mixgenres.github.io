@@ -72,6 +72,8 @@ export function buildVoiceContext(
   const safeFreqSignal = el.max(el.const({ value: 20 }), freqSignal);
   const pressureSensitivity = dspProfile?.excitationDynamics.pressureSensitivity ?? 0.5;
   const velBoost = 0.55 + 0.6 * Math.max(0, Math.min(1, voice.velocity ?? 0)) * (0.8 + pressureSensitivity * 0.4);
+  // Instrument dialect multipliers are baked into TrackParams once by the render path.
+  // Genre dialect is a separate genre-level shaping layer and is never inferred from the instrument dialect id.
   const genreDialect = getGenreDialect(params);
   const nailBrightness = physics ? (physics.fleshVsNail - 0.5) * 0.08 : 0;
   const b = Math.max(0, Math.min(1, params.brightness * velBoost * genreDialect.brightness + nailBrightness));
@@ -105,8 +107,8 @@ export function buildVoiceContext(
   const attackCoupling = physics ? 0.75 + physics.attackToPitchCoupling * 0.5 : 1;
   const releaseCoupling = physics ? 0.75 + physics.releaseCoupling * 0.5 : 1;
   const attack = voice.attack !== undefined ? voice.attack : (isDecayingInstrument ? 0.0004 * genreDialect.attack : (0.0008 + (1 - b) * 0.01) * genreDialect.attack) * attackCoupling;
-  const release = voice.release !== undefined ? voice.release : (isMuted ? 0.012 : (isDecayingInstrument ? 0.045 * genreDialect.decay : (0.06 + decayTime * 0.15) * genreDialect.decay)) * releaseCoupling;
-  const sustain = voice.sustain !== undefined ? voice.sustain : (isDecayingInstrument ? 1.0 : (isMuted ? 0.05 : 0.75 + 0.15 * params.body * genreDialect.body));
+  const release = voice.release !== undefined ? voice.release : (isMuted ? 0.012 : (isDecayingInstrument ? 0.045 : (0.06 + decayTime * 0.15))) * releaseCoupling;
+  const sustain = voice.sustain !== undefined ? voice.sustain : (isDecayingInstrument ? 1.0 : (isMuted ? 0.05 : 0.75 + 0.15 * params.body));
   const envDecay = voice.decay !== undefined ? voice.decay : (isDecayingInstrument ? 12.0 : (decayTime * (isMuted ? 0.1 : 0.4)));
 
   const attackSignal = el.const({ key: `${pk}_attack`, value: attack });

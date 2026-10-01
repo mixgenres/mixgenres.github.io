@@ -38,7 +38,7 @@ export const WORLD_INSTRUMENT_HINTS: Record<string, string[]> = {
   house: ['voice', 'bass', 'piano', 'drums', 'sub-bass', 'rhodes', 'saw-lead', 'synth'],
   jazz: ['upright-bass', 'ride', 'piano', 'trumpet', 'tenor-sax', 'alto-sax', 'vibraphone', 'jazz-guitar'],
   kizomba: ['voice', 'dikanza', 'sub-bass', 'rhodes', 'drums', 'electric-guitar', 'warm-pad', 'shaker'],
-  tango: ['bandoneon', 'piano', 'upright-bass', 'violin', 'cello', 'flute', 'clarinet', 'acoustic-guitar'],
+  tango: ['bandoneon', 'piano', 'upright-bass', 'violin', 'cello', 'electric-guitar', 'spanish-guitar', 'accordion'],
   flamenco: ['spanish-guitar', 'cajon', 'palmas', 'zapateado', 'flute', 'voice', 'castanets', 'hand-percussion'],
   metal: ['synth', 'strings', 'guitar-harmonics', 'voice', 'bass', 'drums', 'distortion-guitar', 'overdrive-guitar'],
   'r-and-b': ['bass', 'electric-guitar', 'rhodes', 'drums', 'warm-pad', 'voice', 'synth', 'backing-vocals'],

@@ -135,8 +135,21 @@ for (const world of GENRE_WORLDS) {
   }
 }
 
+function validateAuthoredTangoHarmony(stylesToCheck: SongStyle[]): void {
+  for (const style of stylesToCheck.filter(s => s.primaryGenre === 'tango')) {
+    const sections = Object.entries(style.harmony?.sectionProgressions ?? {}).filter(([, chords]) => chords?.length);
+    if (!sections.length) throw new Error(`Tango style ${style.id} has no authored section progressions.`);
+    const unique = new Set(sections.map(([, chords]) => JSON.stringify(chords)));
+    if (unique.size === 1 && sections.length > 1) {
+      throw new Error(`Tango style ${style.id} uses one identical harmony cell for every named section; author section-specific progressions or inheritance before runtime.`);
+    }
+  }
+}
+
 let styles = buildCuratedStyles(baseStyles, ALL_PATTERNS);
+validateAuthoredTangoHarmony(styles);
 styles = styles.map((style, index) => applyStyleDialect(style, index));
+validateAuthoredTangoHarmony(styles);
 const curatedPatterns = assembleStylePatterns(styles, ALL_PATTERNS);
 
 // The runtime registry exposes shared pattern definitions through genre views.

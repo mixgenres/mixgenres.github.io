@@ -27,7 +27,7 @@ export const SPARSE_DIALECT_FALLBACK_RULES: SparseDialectFallbackRule[] = [
   { dialectId: 'trumpet:jazz', allOf: [{ source: 'instrument', includes: 'trumpet' }, { source: 'token', includes: 'jazz' }] },
   { dialectId: 'upright-bass:tango-arco', allOf: [{ source: 'token', includes: 'tango' }, { source: 'instrument', pattern: /(bass|upright)/ }] },
   { dialectId: 'guitar:flamenco', allOf: [{ source: 'token', includes: 'flamenco' }, { source: 'instrument', includes: 'guitar' }] },
-  { dialectId: 'guitar:tango', allOf: [{ source: 'token', includes: 'tango' }, { source: 'instrument', includes: 'guitar' }] },
+  { dialectId: 'acoustic-guitar:tango', allOf: [{ source: 'token', includes: 'tango' }, { source: 'instrument', includes: 'guitar' }] },
   { dialectId: 'guitar:blues', allOf: [{ source: 'token', includes: 'blues' }], anyOf: [{ source: 'instrument', includes: 'guitar' }, { source: 'instrument', includes: 'guitarra' }] },
   { dialectId: 'cajon:flamenco', allOf: [{ source: 'token', includes: 'flamenco' }, { source: 'instrument', includes: 'cajon' }] },
   { dialectId: 'bandoneon:tango', allOf: [{ source: 'token', includes: 'tango' }, { source: 'instrument', includes: 'bandoneon' }] },

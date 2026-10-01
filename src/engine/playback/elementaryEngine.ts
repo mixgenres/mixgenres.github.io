@@ -287,14 +287,18 @@ export function renderVoice(
     const a = dspProfile.mechanicalArtifacts;
     const ap = dspProfile.articulationPhysics;
     const styleKey = (params.styleId ?? '').toLowerCase();
-    const genreKey = (params.genreId ?? params.dialect ?? '').toLowerCase();
+    const genreKey = (params.genreId ?? '').toLowerCase();
     const authoredDialect = (styleKey ? dspProfile.genreDialects[styleKey] : undefined)
       ?? (genreKey ? dspProfile.genreDialects[genreKey] : undefined);
+    // Genre shaping is already applied once in buildVoiceContext. Keep the
+    // generic fallback neutral here so brightness/decay/body are not multiplied
+    // a second time by the same genre profile. Authored instrument/style
+    // dialects remain free to supply their own physical coloration.
     const dialect = authoredDialect ?? {
-      brightness: ctx.genreDialect.brightness,
-      damping: Math.max(0, 0.055 * (1 - ctx.genreDialect.decay)),
-      attack: ctx.genreDialect.attack,
-      body: ctx.genreDialect.body,
+      brightness: 1,
+      damping: 0,
+      attack: 1,
+      body: 1,
       articulation: [],
     };
     const physical = dspProfile.physicalDetails;
