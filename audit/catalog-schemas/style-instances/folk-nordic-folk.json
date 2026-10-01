@@ -1,0 +1,346 @@
+{
+  "schemaVersion": 2,
+  "genre": "folk",
+  "styleId": "folk-nordic-folk",
+  "styleName": "Nordic Folk",
+  "durationSec": 69.90291262135919,
+  "tempoBpm": 103,
+  "meter": "3/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "fiddle",
+      "role": "lead",
+      "patternIds": [
+        "style-folk-nordic-folk-signature",
+        "folk-fiddle-drone",
+        "tech-folk-fiddle-double-stop"
+      ],
+      "noteCount": 62
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "folk-strum-sync",
+        "folk-travis",
+        "style-folk-nordic-folk-signature"
+      ],
+      "noteCount": 476
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-folk-nordic-folk-signature"
+      ],
+      "noteCount": 96
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "cello",
+      "role": "lead",
+      "patternIds": [
+        "tech-folk-modal-cadence",
+        "style-folk-nordic-folk-signature",
+        "tech-folk-celtic-ornament",
+        "tech-folk-fiddle-double-stop"
+      ],
+      "noteCount": 104
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-folk-celtic-ornament",
+        "tech-folk-fiddle-double-stop",
+        "tech-folk-modal-cadence"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "mandolin",
+      "role": "lead",
+      "patternIds": [
+        "folk-travis",
+        "folk-strum-sync"
+      ],
+      "noteCount": 113
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "guitar",
+      "role": "harmony",
+      "patternIds": [
+        "style-folk-nordic-folk-signature",
+        "folk-travis"
+      ],
+      "noteCount": 633
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-folk-fiddle-double-stop",
+        "folk-strum-sync",
+        "folk-travis"
+      ],
+      "noteCount": 177
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-folk-nordic-folk-signature",
+      "name": "Nordic Folk",
+      "worldId": "folk",
+      "meter": "3/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": [
+        "drone",
+        "Celtic ornament",
+        "fiddle double-stop",
+        "modal cadence"
+      ]
+    },
+    {
+      "id": "folk-fiddle-drone",
+      "name": "Old-Time Fiddle Drone & Shuffle Bow",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-folk-fiddle-double-stop",
+      "name": "fiddle double-stop",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "fiddle double-stop"
+      ]
+    },
+    {
+      "id": "folk-strum-sync",
+      "name": "Syncopated Strum",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "folk-travis",
+      "name": "Travis Picking",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        6,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-folk-modal-cadence",
+      "name": "modal cadence",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "modal cadence"
+      ]
+    },
+    {
+      "id": "tech-folk-celtic-ornament",
+      "name": "Celtic ornament",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Celtic ornament"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "fiddle",
+      "acoustic-guitar",
+      "drums",
+      "cello"
+    ],
+    "techniques": [
+      "drone",
+      "Celtic ornament",
+      "fiddle double-stop",
+      "modal cadence"
+    ],
+    "signatureCell": "Modal drone over asymmetrical dance meter",
+    "tempoRange": [
+      75,
+      130
+    ],
+    "preferredMeters": [
+      "3/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Hedningarna",
+      "traditional Swedish/Norwegian ensembles"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "folk-nordic-folk"
+  },
+  "performance": {
+    "noteCount": 1725,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-folk-nordic-folk-signature",
+      "folk-fiddle-drone",
+      "tech-folk-fiddle-double-stop",
+      "folk-strum-sync",
+      "folk-travis",
+      "tech-folk-modal-cadence",
+      "tech-folk-celtic-ornament"
+    ]
+  }
+}

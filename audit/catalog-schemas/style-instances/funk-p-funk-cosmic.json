@@ -1,0 +1,521 @@
+{
+  "schemaVersion": 2,
+  "genre": "funk",
+  "styleId": "funk-p-funk-cosmic",
+  "styleName": "P-Funk Cosmic",
+  "durationSec": 97.95918367346933,
+  "tempoBpm": 98,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "D9",
+        "Am7",
+        "E7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am7",
+        "D9",
+        "Am7",
+        "E7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am7",
+        "D9",
+        "Am7",
+        "E7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am7",
+        "D9",
+        "Am7",
+        "E7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am7",
+        "D9",
+        "Am7",
+        "E7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "D9",
+        "Am7",
+        "E7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "style-funk-p-funk-cosmic-signature"
+      ],
+      "noteCount": 200
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "funk-drum-breakbeat"
+      ],
+      "noteCount": 362
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "funk-chicken-scratch-guitar",
+        "funk-16th-strum"
+      ],
+      "noteCount": 1822
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-funk-funk-horn-stab",
+        "tech-funk-vamp-extension",
+        "funk-clavinet",
+        "style-funk-p-funk-cosmic-signature"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-funk-rhythmic-stop",
+        "tech-funk-vamp-extension",
+        "tech-funk-funk-horn-stab"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "clavinet",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "zouk-guitar-skank-chawa",
+        "tango-piano-chumba",
+        "kizomba-bridge-16",
+        "tech-funk-funk-horn-stab",
+        "reggaeton--rg-synth-stab"
+      ],
+      "noteCount": 583
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "jazz-piano-comping",
+        "jazz-comping-sync",
+        "jazz-piano-red-garland",
+        "zouk-bridge-16",
+        "afro-amapiano-pad"
+      ],
+      "noteCount": 386
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "patternIds": [
+        "funk-drum-breakbeat"
+      ],
+      "noteCount": 362
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-funk-p-funk-cosmic-signature",
+      "name": "P-Funk Cosmic",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "funk horn stab",
+        "rhythmic stop",
+        "vamp extension"
+      ]
+    },
+    {
+      "id": "funk-drum-breakbeat",
+      "name": "Clyde Stubblefield \"Funky Drummer\" Breakbeat",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        8,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-chicken-scratch-guitar",
+      "name": "Chicken-Scratch 9th Chords",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-16th-strum",
+      "name": "16th Note Strum",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-funk-funk-horn-stab",
+      "name": "horn stab",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "funk horn stab"
+      ]
+    },
+    {
+      "id": "tech-funk-vamp-extension",
+      "name": "vamp extension",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vamp extension"
+      ]
+    },
+    {
+      "id": "funk-clavinet",
+      "name": "Clavinet Sync",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        4,
+        7,
+        10,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-funk-rhythmic-stop",
+      "name": "rhythmic stop",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "rhythmic stop"
+      ]
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-guitar-skank-chawa",
+      "name": "Chawa Guitar Skank",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-piano-chumba",
+      "name": "Piano Chumba",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        4,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-bridge-16",
+      "name": "Semba Bridge",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        10,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-synth-stab",
+      "name": "Offbeat Synth Stab",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-comping",
+      "name": "Syncopated Piano Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-comping-sync",
+      "name": "Syncopated Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        1,
+        4,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-red-garland",
+      "name": "Block Chords",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        3,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-bridge-16",
+      "name": "Chawa Bridge",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        11,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "bass",
+      "drums",
+      "electric-guitar",
+      "synth",
+      "voice"
+    ],
+    "techniques": [
+      "funk horn stab",
+      "rhythmic stop",
+      "vamp extension"
+    ],
+    "signatureCell": "Psychedelic funk vamp with layered vocals",
+    "tempoRange": [
+      85,
+      110
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Parliament",
+      "Funkadelic"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "funk-p-funk-cosmic"
+  },
+  "performance": {
+    "noteCount": 3843,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-funk-p-funk-cosmic-signature",
+      "funk-drum-breakbeat",
+      "funk-chicken-scratch-guitar",
+      "funk-16th-strum",
+      "tech-funk-funk-horn-stab",
+      "tech-funk-vamp-extension",
+      "funk-clavinet",
+      "tech-funk-rhythmic-stop",
+      "afro-amapiano-pad",
+      "zouk-guitar-skank-chawa",
+      "tango-piano-chumba",
+      "kizomba-bridge-16",
+      "reggaeton--rg-synth-stab",
+      "jazz-piano-comping",
+      "jazz-comping-sync",
+      "jazz-piano-red-garland",
+      "zouk-bridge-16"
+    ]
+  }
+}

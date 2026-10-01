@@ -1,0 +1,406 @@
+{
+  "schemaVersion": 2,
+  "genre": "country",
+  "styleId": "country-alt-country-roots-rock",
+  "styleName": "Alt-Country / Roots Rock",
+  "durationSec": 101.05263157894738,
+  "tempoBpm": 95,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "style-country-alt-country-roots-rock-signature",
+        "country-boom-chuck",
+        "country-pedal-steel-swell"
+      ],
+      "noteCount": 496
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "country-pedal-steel-swell",
+        "style-country-alt-country-roots-rock-signature",
+        "country-boom-chuck"
+      ],
+      "noteCount": 397
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "country-waltz",
+        "country-boom-chuck"
+      ],
+      "noteCount": 168
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "country-waltz",
+        "style-country-alt-country-roots-rock-signature",
+        "tech-country-country-shuffle"
+      ],
+      "noteCount": 163
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "fiddle",
+      "role": "lead",
+      "patternIds": [
+        "country-fiddle-answer"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-country-pedal-steel-fills",
+        "tech-country-country-shuffle"
+      ],
+      "noteCount": 52
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "zouk-guitar-skank-chawa",
+        "brazilian--sb-12-bossa-piano-voicing",
+        "tech-country-country-shuffle",
+        "country-steel-answer"
+      ],
+      "noteCount": 532
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "mandolin",
+      "role": "lead",
+      "patternIds": [
+        "country-boom-chuck",
+        "country-pedal-steel-swell"
+      ],
+      "noteCount": 88
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-country-alt-country-roots-rock-signature",
+      "name": "Alt-Country/Roots Rock",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "country shuffle",
+        "pedal-steel fills"
+      ]
+    },
+    {
+      "id": "country-boom-chuck",
+      "name": "Boom-Chuck",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-pedal-steel-swell",
+      "name": "Pedal Steel Volume Swell",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-waltz",
+      "name": "Waltz",
+      "worldId": "country",
+      "meter": "3/4",
+      "subdivisions": 6,
+      "onsetGrid": [
+        0,
+        2,
+        4
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-country-country-shuffle",
+      "name": "shuffle",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "country shuffle"
+      ]
+    },
+    {
+      "id": "country-fiddle-answer",
+      "name": "Fiddle Answer",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        7,
+        8,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-country-pedal-steel-fills",
+      "name": "pedal-steel fills",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "pedal-steel fills"
+      ]
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-guitar-skank-chawa",
+      "name": "Chawa Guitar Skank",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "brazilian--sb-12-bossa-piano-voicing",
+      "name": "Bossa piano chord punctuation",
+      "worldId": "brazilian",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        2,
+        6,
+        9,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-steel-answer",
+      "name": "Steel Answer",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "acoustic-guitar",
+      "electric-guitar",
+      "bass",
+      "drums",
+      "fiddle",
+      "voice"
+    ],
+    "techniques": [
+      "country shuffle",
+      "pedal-steel fills"
+    ],
+    "signatureCell": "Folk-derived strum with rough rock pocket",
+    "tempoRange": [
+      70,
+      120
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Uncle Tupelo",
+      "Lucinda Williams",
+      "Steve Earle"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "country-alt-country-roots-rock"
+  },
+  "performance": {
+    "noteCount": 1960,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-country-alt-country-roots-rock-signature",
+      "country-boom-chuck",
+      "country-pedal-steel-swell",
+      "country-waltz",
+      "tech-country-country-shuffle",
+      "country-fiddle-answer",
+      "tech-country-pedal-steel-fills",
+      "afro-amapiano-pad",
+      "zouk-guitar-skank-chawa",
+      "brazilian--sb-12-bossa-piano-voicing",
+      "country-steel-answer"
+    ]
+  }
+}

@@ -1,0 +1,342 @@
+{
+  "schemaVersion": 2,
+  "genre": "jazz",
+  "styleId": "jazz-hard-bop",
+  "styleName": "Hard Bop",
+  "durationSec": 116.57142857142841,
+  "tempoBpm": 140,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "head-0",
+      "kind": "head",
+      "label": "Head",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Fm7",
+        "A#m7",
+        "C7#9",
+        "Fm7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "solo-1",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Fm7",
+        "A#m7",
+        "C7#9",
+        "Fm7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "trading-2",
+      "kind": "trading",
+      "label": "Trading",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "Fm7",
+        "A#m7",
+        "C7#9",
+        "Fm7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "solo-3",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Fm7",
+        "A#m7",
+        "C7#9",
+        "Fm7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "head-4",
+      "kind": "head",
+      "label": "Head",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Fm7",
+        "A#m7",
+        "C7#9",
+        "Fm7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "tag-5",
+      "kind": "tag",
+      "label": "Tag",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Fm7",
+        "A#m7",
+        "C7#9",
+        "Fm7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "tenor-sax",
+      "role": "melody",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 195
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "trumpet",
+      "role": "lead",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 197
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "jazz-comping-sync",
+        "jazz-latin-montuno-comp",
+        "jazz-piano-comping"
+      ],
+      "noteCount": 1178
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "jazz-walking-bass",
+        "tech-jazz-walking-bass"
+      ],
+      "noteCount": 244
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "jazz-ride-spangalang",
+        "jazz-snare-comp"
+      ],
+      "noteCount": 341
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "ride",
+      "role": "percussion",
+      "patternIds": [
+        "jazz-snare-comp",
+        "jazz-ride-spangalang"
+      ],
+      "noteCount": 257
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "alto-sax",
+      "role": "lead",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 200
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "vibraphone",
+      "role": "harmony",
+      "patternIds": [
+        "jazz-piano-comping",
+        "jazz-latin-montuno-comp"
+      ],
+      "noteCount": 252
+    }
+  ],
+  "patterns": [
+    {
+      "id": "jazz-horn-swing-phrase",
+      "name": "Horn Swing Phrase",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-comping-sync",
+      "name": "Syncopated Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        1,
+        4,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-latin-montuno-comp",
+      "name": "Latin Jazz Montuno Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        7,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-comping",
+      "name": "Syncopated Piano Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-walking-bass",
+      "name": "Walking Bass",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-jazz-walking-bass",
+      "name": "walking bass",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "walking bass"
+      ]
+    },
+    {
+      "id": "jazz-ride-spangalang",
+      "name": "Ride Cymbal",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-snare-comp",
+      "name": "Snare Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        2,
+        7,
+        10
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "tenor-sax",
+      "trumpet",
+      "piano",
+      "upright-bass",
+      "drums"
+    ],
+    "techniques": [],
+    "signatureCell": "Art Blakey explosive drum press-roll erupting into soulful minor-blues horn unison",
+    "tempoRange": [
+      120,
+      160
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "swung",
+    "swingPercentage": 58,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "jazz-hard-bop"
+  },
+  "performance": {
+    "noteCount": 2864,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "jazz-horn-swing-phrase",
+      "jazz-comping-sync",
+      "jazz-latin-montuno-comp",
+      "jazz-piano-comping",
+      "jazz-walking-bass",
+      "tech-jazz-walking-bass",
+      "jazz-ride-spangalang",
+      "jazz-snare-comp"
+    ]
+  }
+}

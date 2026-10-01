@@ -1,0 +1,382 @@
+{
+  "schemaVersion": 2,
+  "genre": "flamenco",
+  "styleId": "flamenco-flamenco-fusion",
+  "styleName": "Flamenco Fusion",
+  "durationSec": 71.11111111111111,
+  "tempoBpm": 108,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Salida",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Letra",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "solo-2",
+      "kind": "solo",
+      "label": "Falseta",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "chorus-3",
+      "kind": "chorus",
+      "label": "Letra / Jaleo",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "coda-4",
+      "kind": "coda",
+      "label": "Remate / Cierre",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "spanish-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "flam-solea-guitar-compas",
+        "flam-tangos-guitar",
+        "flam-remate-12"
+      ],
+      "noteCount": 688
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "flam-alzapua-12",
+        "flam-solea-guitar-compas",
+        "flam-buleria-compas",
+        "flam-tangos-guitar"
+      ],
+      "noteCount": 645
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "style-flamenco-flamenco-fusion-signature",
+        "flam-alegrias-compas",
+        "flam-alzapua-12"
+      ],
+      "noteCount": 176
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "bongos",
+      "role": "percussion",
+      "patternIds": [
+        "style-flamenco-flamenco-fusion-signature",
+        "flamenco-golpe"
+      ],
+      "noteCount": 133
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "cajon",
+      "role": "percussion",
+      "patternIds": [
+        "flam-remate-12",
+        "flam-buleria-compas"
+      ],
+      "noteCount": 192
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "palmas",
+      "role": "percussion",
+      "patternIds": [
+        "flam-buleria-compas",
+        "flam-remate-12"
+      ],
+      "noteCount": 184
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "zapateado",
+      "role": "percussion",
+      "patternIds": [
+        "flam-remate-12",
+        "flam-buleria-compas"
+      ],
+      "noteCount": 179
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "flute",
+      "role": "melody",
+      "patternIds": [
+        "tech-flamenco-12-beat-compas",
+        "flam-solea-12beat"
+      ],
+      "noteCount": 83
+    }
+  ],
+  "patterns": [
+    {
+      "id": "flam-solea-guitar-compas",
+      "name": "Soleá Guitar Compás",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        11,
+        2,
+        5,
+        7,
+        9
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-tangos-guitar",
+      "name": "Tangos Guitar Compás",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-remate-12",
+      "name": "12-Beat Remate",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        9,
+        10,
+        11,
+        0,
+        2
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-alzapua-12",
+      "name": "Alzapúa over 12-Beat Compás",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        11,
+        0,
+        2,
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-buleria-compas",
+      "name": "Bulería Compás/Jerez Drive",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        11,
+        2,
+        5,
+        7,
+        8,
+        9,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-flamenco-flamenco-fusion-signature",
+      "name": "Fusion",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "12-beat compás"
+      ]
+    },
+    {
+      "id": "flam-alegrias-compas",
+      "name": "Alegrías/Cantiñas Bright Compás",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        11,
+        2,
+        5,
+        7,
+        9
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-golpe",
+      "name": "Golpe",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-flamenco-12-beat-compas",
+      "name": "12-beat compás",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10
+      ],
+      "techniques": [
+        "12-beat compás"
+      ]
+    },
+    {
+      "id": "flam-solea-12beat",
+      "name": "Soleá 12-Beat Compás Framework",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        2,
+        5,
+        7,
+        9,
+        11
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "spanish-guitar",
+      "electric-guitar",
+      "bass",
+      "bongos",
+      "cajon",
+      "palmas"
+    ],
+    "techniques": [
+      "12-beat compás"
+    ],
+    "signatureCell": "Flamenco guitar over Latin/jazz ensemble",
+    "tempoRange": [
+      90,
+      125
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Paco de Lucía",
+      "Ketama"
+    ],
+    "tracks": [
+      "Entre Dos Aguas"
+    ]
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "flamenco-flamenco-fusion"
+  },
+  "performance": {
+    "noteCount": 2280,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "flam-solea-guitar-compas",
+      "flam-tangos-guitar",
+      "flam-remate-12",
+      "flam-alzapua-12",
+      "flam-buleria-compas",
+      "style-flamenco-flamenco-fusion-signature",
+      "flam-alegrias-compas",
+      "flamenco-golpe",
+      "tech-flamenco-12-beat-compas",
+      "flam-solea-12beat"
+    ]
+  }
+}

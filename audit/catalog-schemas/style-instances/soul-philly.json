@@ -1,0 +1,345 @@
+{
+  "schemaVersion": 2,
+  "genre": "soul",
+  "styleId": "soul-philly",
+  "styleName": "Philadelphia Soul",
+  "durationSec": 109.71428571428581,
+  "tempoBpm": 105,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "Am7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "Am7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "F",
+        "Em7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "Am7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "instrumental-4",
+      "kind": "instrumental",
+      "label": "Instrumental",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "Am7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "Am7",
+        "Dm7",
+        "G7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "soul-horn-response",
+        "soul-backbeat-tambourine",
+        "soul-motown-bass"
+      ],
+      "noteCount": 68
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "strings",
+      "role": "harmony",
+      "patternIds": [
+        "tech-soul-string-swell"
+      ],
+      "noteCount": 248
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-soul-melodic-bass"
+      ],
+      "noteCount": 199
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-soul-soul-backbeat"
+      ],
+      "noteCount": 195
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-soul-vocal-harmony-stack"
+      ],
+      "noteCount": 729
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "soul-backbeat-tambourine",
+        "soul-motown-bass"
+      ],
+      "noteCount": 1119
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "soul-motown-bass",
+        "soul-horn-response",
+        "soul-backbeat-tambourine"
+      ],
+      "noteCount": 450
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "horn-section",
+      "role": "harmony",
+      "patternIds": [
+        "tech-soul-horn-response"
+      ],
+      "noteCount": 196
+    }
+  ],
+  "patterns": [
+    {
+      "id": "soul-horn-response",
+      "name": "Horn Response",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        6,
+        7,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "soul-backbeat-tambourine",
+      "name": "Backbeat Tambourine",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "soul-motown-bass",
+      "name": "Motown Bass",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        11,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-soul-string-swell",
+      "name": "string swell",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "string swell"
+      ]
+    },
+    {
+      "id": "tech-soul-melodic-bass",
+      "name": "melodic bass",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "melodic bass"
+      ]
+    },
+    {
+      "id": "tech-soul-soul-backbeat",
+      "name": "backbeat",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "soul backbeat"
+      ]
+    },
+    {
+      "id": "tech-soul-vocal-harmony-stack",
+      "name": "vocal harmony stack",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal harmony stack"
+      ]
+    },
+    {
+      "id": "tech-soul-horn-response",
+      "name": "horn response",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "horn response"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "voice",
+      "strings",
+      "bass",
+      "drums",
+      "piano"
+    ],
+    "techniques": [],
+    "signatureCell": "Sweeping string answer over a buoyant bass line and blended vocal phrase",
+    "tempoRange": [
+      85,
+      125
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "soul-philly"
+  },
+  "performance": {
+    "noteCount": 3204,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "soul-horn-response",
+      "soul-backbeat-tambourine",
+      "soul-motown-bass",
+      "tech-soul-string-swell",
+      "tech-soul-melodic-bass",
+      "tech-soul-soul-backbeat",
+      "tech-soul-vocal-harmony-stack",
+      "tech-soul-horn-response"
+    ]
+  }
+}

@@ -1,0 +1,471 @@
+{
+  "schemaVersion": 2,
+  "genre": "drum-and-bass",
+  "styleId": "drum-and-bass-minimal-autonomic",
+  "styleName": "Minimal / Autonomic",
+  "durationSec": 101.6470588235293,
+  "tempoBpm": 170,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Groove",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Main Groove",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "bridge-4",
+      "kind": "bridge",
+      "label": "Return",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-drum-and-bass-minimal-autonomic-signature"
+      ],
+      "noteCount": 439
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-drum-and-bass-sub-bass-glide",
+        "dnb-sub-phrase"
+      ],
+      "noteCount": 197
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "style-drum-and-bass-minimal-autonomic-signature",
+        "dnb-break-core"
+      ],
+      "noteCount": 148
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "dnb-sub-phrase",
+        "dnb-break-core"
+      ],
+      "noteCount": 97
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "dnb-break-core",
+        "tech-drum-and-bass-rolling-16th-bass",
+        "tech-drum-and-bass-think-break",
+        "tech-drum-and-bass-reese-bass",
+        "dnb-sub-phrase"
+      ],
+      "noteCount": 91
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "saw-lead",
+      "role": "lead",
+      "patternIds": [
+        "tech-drum-and-bass-think-break",
+        "kizomba-vocal-comping",
+        "dnb-break-core",
+        "tech-drum-and-bass-sub-bass-glide",
+        "tech-drum-and-bass-break-rearrangement"
+      ],
+      "noteCount": 194
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-drum-and-bass-jungle-chopped-vocal",
+        "tech-drum-and-bass-think-break",
+        "dnb-sub-phrase"
+      ],
+      "noteCount": 88
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "jazz-comping-sync",
+        "brazilian--sb-12-bossa-piano-voicing",
+        "tango-arrastre",
+        "dnb-sub-phrase"
+      ],
+      "noteCount": 720
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-drum-and-bass-minimal-autonomic-signature",
+      "name": "Minimal/Autonomic",
+      "worldId": "drum-and-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "sub-bass glide",
+        "Reese bass",
+        "Think break",
+        "break rearrangement",
+        "rolling 16th bass"
+      ]
+    },
+    {
+      "id": "tech-drum-and-bass-sub-bass-glide",
+      "name": "sub-bass glide",
+      "worldId": "drum-and-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "sub-bass glide"
+      ]
+    },
+    {
+      "id": "dnb-sub-phrase",
+      "name": "DnB Sub Phrase",
+      "worldId": "drum-and-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        7,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "dnb-break-core",
+      "name": "DnB Break Core",
+      "worldId": "drum-and-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        8,
+        10,
+        12,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-drum-and-bass-rolling-16th-bass",
+      "name": "rolling 16th bass",
+      "worldId": "drum-and-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "rolling 16th bass"
+      ]
+    },
+    {
+      "id": "tech-drum-and-bass-think-break",
+      "name": "Think break",
+      "worldId": "drum-and-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "Think break"
+      ]
+    },
+    {
+      "id": "tech-drum-and-bass-reese-bass",
+      "name": "Reese bass",
+      "worldId": "drum-and-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Reese bass"
+      ]
+    },
+    {
+      "id": "kizomba-vocal-comping",
+      "name": "Vocal Phrase Response",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        7,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-drum-and-bass-break-rearrangement",
+      "name": "break rearrangement",
+      "worldId": "drum-and-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "break rearrangement"
+      ]
+    },
+    {
+      "id": "tech-drum-and-bass-jungle-chopped-vocal",
+      "name": "jungle chopped vocal",
+      "worldId": "drum-and-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "jungle chopped vocal"
+      ]
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-comping-sync",
+      "name": "Syncopated Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        1,
+        4,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "brazilian--sb-12-bossa-piano-voicing",
+      "name": "Bossa piano chord punctuation",
+      "worldId": "brazilian",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        2,
+        6,
+        9,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-arrastre",
+      "name": "Arrastre",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        13,
+        14,
+        15,
+        0
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "sub-bass",
+      "warm-pad",
+      "sampler"
+    ],
+    "techniques": [
+      "sub-bass glide",
+      "Reese bass",
+      "Think break",
+      "break rearrangement",
+      "rolling 16th bass"
+    ],
+    "signatureCell": "Sparse break with deep sub and space",
+    "tempoRange": [
+      165,
+      175
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Instra:mental",
+      "dBridge"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "drum-and-bass-minimal-autonomic"
+  },
+  "performance": {
+    "noteCount": 1974,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-drum-and-bass-minimal-autonomic-signature",
+      "tech-drum-and-bass-sub-bass-glide",
+      "dnb-sub-phrase",
+      "dnb-break-core",
+      "tech-drum-and-bass-rolling-16th-bass",
+      "tech-drum-and-bass-think-break",
+      "tech-drum-and-bass-reese-bass",
+      "kizomba-vocal-comping",
+      "tech-drum-and-bass-break-rearrangement",
+      "tech-drum-and-bass-jungle-chopped-vocal",
+      "afro-amapiano-pad",
+      "jazz-comping-sync",
+      "brazilian--sb-12-bossa-piano-voicing",
+      "tango-arrastre"
+    ]
+  }
+}

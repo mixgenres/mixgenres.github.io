@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "id": "gospel",
+  "name": "Gospel",
+  "family": "Vocal / Church / Soul",
+  "description": "Devotional spirit, church pocket, call-and-response choirs, and Hammond organ swells.",
+  "substyles": [
+    "Traditional Gospel",
+    "Contemporary Gospel",
+    "Southern Gospel",
+    "Choir Gospel"
+  ],
+  "styleIds": [
+    "gospel-traditional",
+    "gospel-contemporary",
+    "gospel-southern",
+    "gospel-choir",
+    "gospel-black-gospel-quartet",
+    "gospel-gospel-soul",
+    "gospel-gospel-choir-massed-voices",
+    "gospel-modern-gospel-r-b"
+  ],
+  "patternIds": [
+    "gospel--gospel-church-pocket",
+    "gospel--gospel-shout-vamp",
+    "gospel--gospel-organ-response",
+    "gospel--gospel-church-shuffle",
+    "gospel--gospel-organ-bubble",
+    "gospel--gospel-tambourine-backbeat",
+    "gospel--gospel-choir-response",
+    "gospel--gospel-bass-walk",
+    "gospel--gospel-handclap-pulse",
+    "tech-gospel-church-shout",
+    "tech-gospel-vamp",
+    "tech-gospel-gospel-turnaround",
+    "tech-gospel-amen-cadence",
+    "tech-gospel-call-and-response",
+    "tech-gospel-handclap-pattern",
+    "tech-gospel-hammond-swell",
+    "tech-gospel-choir-unison-harmony",
+    "tech-gospel-preacher-style-spoken-break",
+    "tech-gospel-gospel-passing-chords",
+    "style-gospel-black-gospel-quartet-signature",
+    "style-gospel-gospel-soul-signature",
+    "style-gospel-gospel-choir-massed-voices-signature",
+    "style-gospel-modern-gospel-r-b-signature",
+    "gospel-shout-vamp",
+    "gospel-organ-response",
+    "gospel-church-shuffle",
+    "gospel-organ-bubble",
+    "gospel-tambourine-backbeat",
+    "gospel-choir-response",
+    "gospel-bass-walk",
+    "gospel-handclap-pulse"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "gospel-traditional",
+      "name": "Traditional Gospel",
+      "keySubstyles": [
+        "Traditional Gospel",
+        "Choir Gospel"
+      ],
+      "characteristicInstruments": [
+        "organ",
+        "piano",
+        "choir",
+        "drums",
+        "tambourine"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "gospel-contemporary",
+      "name": "Contemporary Gospel",
+      "keySubstyles": [
+        "Contemporary Gospel",
+        "Praise & Worship"
+      ],
+      "characteristicInstruments": [
+        "piano",
+        "organ",
+        "choir",
+        "bass",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "gospel-southern",
+      "name": "Southern Gospel",
+      "keySubstyles": [
+        "Southern Gospel",
+        "Gospel Quartet"
+      ],
+      "characteristicInstruments": [
+        "piano",
+        "bass",
+        "choir",
+        "drums",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "gospel-choir",
+      "name": "Choir Gospel",
+      "keySubstyles": [
+        "Choir Gospel",
+        "Mass Choir"
+      ],
+      "characteristicInstruments": [
+        "organ",
+        "choir",
+        "piano",
+        "drums",
+        "tambourine"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "gospel-black-gospel-quartet",
+      "name": "Black Gospel Quartet",
+      "keySubstyles": [
+        "Black Gospel Quartet"
+      ],
+      "characteristicInstruments": [
+        "voice",
+        "backing-vocals",
+        "piano",
+        "bass",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "gospel-gospel-soul",
+      "name": "Gospel Soul",
+      "keySubstyles": [
+        "Gospel Soul"
+      ],
+      "characteristicInstruments": [
+        "voice",
+        "organ",
+        "piano",
+        "bass",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "gospel-gospel-choir-massed-voices",
+      "name": "Gospel Choir / Massed Voices",
+      "keySubstyles": [
+        "Gospel Choir / Massed Voices"
+      ],
+      "characteristicInstruments": [
+        "choir",
+        "organ",
+        "piano",
+        "drums",
+        "tambourine"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "gospel-modern-gospel-r-b",
+      "name": "Modern Gospel R&B",
+      "keySubstyles": [
+        "Modern Gospel R&B"
+      ],
+      "characteristicInstruments": [
+        "voice",
+        "choir",
+        "piano",
+        "organ",
+        "bass",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "gospel-starter"
+}

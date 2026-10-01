@@ -1,0 +1,471 @@
+{
+  "schemaVersion": 2,
+  "genre": "folk",
+  "styleId": "folk-chamber-folk",
+  "styleName": "Chamber Folk",
+  "durationSec": 120,
+  "tempoBpm": 96,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A#maj7",
+        "C",
+        "Dm",
+        "F"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A#maj7",
+        "C",
+        "Dm",
+        "F"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "refrain-2",
+      "kind": "refrain",
+      "label": "Refrain",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A#maj7",
+        "C",
+        "Dm",
+        "F"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "instrumental-3",
+      "kind": "instrumental",
+      "label": "Instrumental",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "A#maj7",
+        "C",
+        "Dm",
+        "F"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A#maj7",
+        "C",
+        "Dm",
+        "F"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C#maj7",
+        "D#",
+        "Fm",
+        "Fm"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "style-folk-nordic-folk-signature",
+        "folk-strum-sync",
+        "folk-fast-bluegrass",
+        "style-folk-celtic-traditional-signature",
+        "style-folk-appalachian-string-band-signature"
+      ],
+      "noteCount": 542
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "strings",
+      "role": "harmony",
+      "patternIds": [
+        "tango-arrastre",
+        "tango-marcato-4",
+        "tango-marcato-2"
+      ],
+      "noteCount": 162
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "violin",
+      "role": "melody",
+      "patternIds": [
+        "folk-fiddle-drone"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "flute",
+      "role": "melody",
+      "patternIds": [
+        "folk-fast-bluegrass",
+        "folk-strum-sync"
+      ],
+      "noteCount": 95
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "tango-332-piazzolla",
+        "tango-piano-chumba",
+        "kizomba-bridge-16",
+        "reggaeton--rg-09-reggaeton-piano-stab",
+        "tango-marcato-2"
+      ],
+      "noteCount": 616
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "style-folk-british-ballad-tradition-signature"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "fiddle",
+      "role": "lead",
+      "patternIds": [
+        "style-folk-appalachian-string-band-signature",
+        "folk-fiddle-drone",
+        "style-folk-celtic-traditional-signature",
+        "style-folk-nordic-folk-signature"
+      ],
+      "noteCount": 63
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "mandolin",
+      "role": "lead",
+      "patternIds": [
+        "folk-strum-sync",
+        "folk-fast-bluegrass"
+      ],
+      "noteCount": 141
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-folk-nordic-folk-signature",
+      "name": "Nordic Folk",
+      "worldId": "folk",
+      "meter": "3/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": [
+        "drone",
+        "Celtic ornament",
+        "fiddle double-stop",
+        "modal cadence"
+      ]
+    },
+    {
+      "id": "folk-strum-sync",
+      "name": "Syncopated Strum",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "folk-fast-bluegrass",
+      "name": "Fast Bluegrass Drive",
+      "worldId": "folk",
+      "meter": "2/4",
+      "subdivisions": 4,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-folk-celtic-traditional-signature",
+      "name": "Celtic Traditional",
+      "worldId": "folk",
+      "meter": "6/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9
+      ],
+      "techniques": [
+        "Celtic ornament",
+        "drone",
+        "jig 6/8",
+        "modal cadence",
+        "reel 4/4"
+      ]
+    },
+    {
+      "id": "style-folk-appalachian-string-band-signature",
+      "name": "Appalachian String Band",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "banjo roll",
+        "clawhammer banjo",
+        "drone",
+        "fiddle double-stop"
+      ]
+    },
+    {
+      "id": "tango-arrastre",
+      "name": "Arrastre",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        13,
+        14,
+        15,
+        0
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-marcato-4",
+      "name": "Marcato en 4",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-marcato-2",
+      "name": "Marcato en 2",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": []
+    },
+    {
+      "id": "folk-fiddle-drone",
+      "name": "Old-Time Fiddle Drone & Shuffle Bow",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-332-piazzolla",
+      "name": "3+3+2 Nuevo Tango Pulse",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-piano-chumba",
+      "name": "Piano Chumba",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        4,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-bridge-16",
+      "name": "Semba Bridge",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        10,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-09-reggaeton-piano-stab",
+      "name": "Reggaetón piano offbeat stab",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-folk-british-ballad-tradition-signature",
+      "name": "British Ballad Tradition",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "modal cadence",
+        "drone",
+        "call-and-response verse"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "acoustic-guitar",
+      "strings",
+      "violin",
+      "flute",
+      "piano"
+    ],
+    "techniques": [],
+    "signatureCell": "Pizzicato string counterpoint weaving through fingerpicked acoustic guitar and glockenspiel",
+    "tempoRange": [
+      80,
+      112
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "folk-chamber-folk"
+  },
+  "performance": {
+    "noteCount": 1747,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-folk-nordic-folk-signature",
+      "folk-strum-sync",
+      "folk-fast-bluegrass",
+      "style-folk-celtic-traditional-signature",
+      "style-folk-appalachian-string-band-signature",
+      "tango-arrastre",
+      "tango-marcato-4",
+      "tango-marcato-2",
+      "folk-fiddle-drone",
+      "afro-amapiano-pad",
+      "tango-332-piazzolla",
+      "tango-piano-chumba",
+      "kizomba-bridge-16",
+      "reggaeton--rg-09-reggaeton-piano-stab",
+      "style-folk-british-ballad-tradition-signature"
+    ]
+  }
+}

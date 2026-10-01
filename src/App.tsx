@@ -4,8 +4,6 @@ import { Dices, Trash2, Pencil, Sparkles, Volume2, Volume1, VolumeX } from 'luci
 import './index.css';
 
 import { Glyph, PlayIcon, PauseIcon } from './ui/Glyph';
-import { NoteCard, NoteMark } from './ui/Sheet';
-import { noteTags } from './ui/noteTags';
 import { WorldSheet, InstrumentSheet, PatternSheet, SectionSheet, SectionGenreSheet, TempoSheet, DownloadSheet, StartOverModal, RandomizeSheet, ChordSheet } from './ui/sheets';
 import { StyleSheetModal } from './ui/StyleSheet';
 import { StyleInspector } from './ui/StyleInspector';
@@ -71,7 +69,6 @@ export default function App() {
   const [instrFor, setInstrFor] = useState<string | null>(null);
   const [addingVoice, setAddingVoice] = useState(false);
   const [patternFor, setPatternFor] = useState<string | null>(null);
-  const [note, setNote] = useState<{ title: string; body: string; tags?: string[] } | null>(null);
 
   const [toast, setToast] = useState<string | null>(null);
   const toastTimerRef = useRef<number | null>(null);
@@ -376,7 +373,6 @@ export default function App() {
   const focusIndex = Math.max(0, song.regions.findIndex(r => r.id === focusId));
   const region = song.regions[focusIndex] ?? song.regions[0];
   const chords = region?.chords ?? ['Am'];
-  const chordHere = song.measures[bar]?.chord ?? chords[0];
   const live = region?.id === playingRegion;
   // One name for the focused part, used everywhere it shows up in text.
   const partName = region ? (region.formLabel ?? region.name ?? String(region.kind)) : '';
@@ -870,15 +866,21 @@ export default function App() {
           >
             <div className="flex flex-wrap gap-x-2.5 items-center">
               {chords.map((c, i) => {
-                const now = (playing || isScrubbing) && live && c === chordHere;
+                const currentMeasure = song.measures[bar];
+                const barInRegion = currentMeasure ? Math.max(0, currentMeasure.index - (region?.start ?? 0)) : 0;
+                const activeChordIdx = barInRegion % (chords.length || 1);
+                const now = (playing || isScrubbing) && live && i === activeChordIdx;
                 return (
                   <span
                     key={i}
                     style={{
-                      fontSize: 13,
-                      opacity: now ? 1 : 0.75,
+                      fontSize: 12.5,
                       fontWeight: now ? 700 : 600,
-                      color: now ? plate.signal : 'inherit',
+                      color: now ? 'var(--ground)' : 'inherit',
+                      background: now ? 'var(--signal)' : 'transparent',
+                      padding: now ? '1px 5px' : '0 1px',
+                      borderRadius: 3,
+                      transition: 'all 0.15s ease',
                     }}
                   >
                     {c}
@@ -953,7 +955,6 @@ export default function App() {
             const isSilentInAll = isVoiceSilentInAll(song, t.id);
             const shape = isSilentHere ? undefined : shownMeasure?.patternDetailsByTrack?.[t.id];
             const sounding = (playing || isScrubbing) && live && !t.muted && !isSilentHere;
-            const isNoteActive = sounding && (shape?.onsetGrid ?? []).includes(step);
 
             const handleCycleSilence = (trackId: string, shiftKey = false) => {
               if (shiftKey) {
@@ -983,46 +984,14 @@ export default function App() {
             return (
               <div
                 key={t.id}
-                className="py-2.5 flex items-start gap-2.5"
+                className="py-2.5 flex items-stretch gap-2.5"
                 style={{
                   borderTop: '1px solid color-mix(in srgb, var(--ink) 14%, transparent)',
                   opacity: t.muted ? 0.35 : isSilentHere ? 0.65 : 1,
                 }}
               >
-                {/* Side Icon Column: Square (activity) -> Sound (silence) -> Spotlight */}
-                <div className="flex flex-col items-center gap-1.5 shrink-0 pt-0.5" style={{ width: 16 }}>
-                  {/* Square: Activity indicator showing note pulse */}
-                  <div
-                    className="relative shrink-0 flex items-center justify-center select-none"
-                    style={{
-                      width: 13,
-                      height: 13,
-                      background: isSilentHere ? 'transparent' : 'var(--ink)',
-                      boxShadow: 'inset 0 0 0 1.5px var(--ink)',
-                      borderRadius: 2,
-                    }}
-                    title={isSilentHere ? `${t.name} (silent)` : `${t.name} activity`}
-                    aria-hidden="true"
-                  >
-                    {isNoteActive && (
-                      <span
-                        className="w-1.5 h-1.5 rounded-full"
-                        style={{
-                          background: plate.signal,
-                        }}
-                      />
-                    )}
-                    {isNoteActive && (
-                      <span
-                        className="absolute inset-0 rounded-full animate-ping pointer-events-none"
-                        style={{
-                          background: plate.signal,
-                          opacity: 0.7,
-                        }}
-                      />
-                    )}
-                  </div>
-
+                {/* Side Icon Column: Sound (silence) -> Spotlight (each 50% of row height) */}
+                <div className="flex flex-col items-center justify-between shrink-0 gap-1 self-stretch" style={{ width: 24 }}>
                   {/* Sound Icon: iterates between part | song | silent */}
                   <button
                     type="button"
@@ -1030,7 +999,7 @@ export default function App() {
                       e.stopPropagation();
                       handleCycleSilence(t.id, e.shiftKey || e.altKey);
                     }}
-                    className="relative w-4 h-4 flex items-center justify-center cursor-pointer transition-transform active:scale-95 rounded-[2px]"
+                    className="relative flex-1 w-full flex items-center justify-center cursor-pointer transition-transform active:scale-95 rounded"
                     style={{
                       color: 'var(--ink)',
                       opacity: isSilentInAll ? 0.35 : isSilentHere ? 0.65 : 0.95,
@@ -1051,18 +1020,18 @@ export default function App() {
                     }
                   >
                     {isSilentInAll ? (
-                      <VolumeX size={13} strokeWidth={2} />
+                      <VolumeX size={18} strokeWidth={2} />
                     ) : isSilentHere ? (
-                      <Volume1 size={13} strokeWidth={2} />
+                      <Volume1 size={18} strokeWidth={2} />
                     ) : (
-                      <Volume2 size={13} strokeWidth={2} />
+                      <Volume2 size={18} strokeWidth={2} />
                     )}
                     {(isSilentHere || isSilentInAll) && (
                       <span
-                        className="absolute -top-1 -right-1 font-mono font-bold leading-none select-none rounded-[1px]"
+                        className="absolute -top-0.5 -right-0.5 font-mono font-bold leading-none select-none rounded-[1px]"
                         style={{
-                          fontSize: '7px',
-                          padding: '1px 1.5px',
+                          fontSize: '8px',
+                          padding: '1px 2px',
                           background: 'var(--tone)',
                           color: 'var(--ink)',
                           boxShadow: '0 0 0 1px var(--ground)',
@@ -1073,7 +1042,7 @@ export default function App() {
                     )}
                   </button>
 
-                  {/* Spotlight Icon: click on and off */}
+                  {/* Spotlight / Highlight Icon: click on and off */}
                   <button
                     type="button"
                     onClick={(e) => {
@@ -1082,7 +1051,7 @@ export default function App() {
                       edit(s => setTrackSpotlight(s, t.id, next));
                       showToast(`Spotlight ${next === 'on' ? 'on' : 'off'} for ${v.name}`);
                     }}
-                    className="relative w-4 h-4 flex items-center justify-center cursor-pointer transition-transform active:scale-95 rounded-[2px]"
+                    className="relative flex-1 w-full flex items-center justify-center cursor-pointer transition-transform active:scale-95 rounded"
                     style={{
                       opacity: isSpotlightExplicitOff ? 0.3 : isSpotlightActive ? 1 : 0.45,
                       color: isSpotlightExplicitOn ? 'var(--signal)' : 'var(--ink)',
@@ -1097,16 +1066,16 @@ export default function App() {
                     aria-label={`Spotlight ${t.name}: ${t.spotlight ?? 'auto'}`}
                   >
                     <Sparkles
-                      size={11.5}
+                      size={17}
                       fill={isSpotlightExplicitOn ? 'currentColor' : isSpotlightActive ? 'currentColor' : 'none'}
-                      strokeWidth={1.75}
+                      strokeWidth={1.85}
                     />
                     {(t.spotlight === 'auto' || !t.spotlight) && (
                       <span
-                        className="absolute -top-1 -right-1 font-mono font-bold leading-none select-none rounded-[1px]"
+                        className="absolute -top-0.5 -right-0.5 font-mono font-bold leading-none select-none rounded-[1px]"
                         style={{
-                          fontSize: '7px',
-                          padding: '1px 1.5px',
+                          fontSize: '8px',
+                          padding: '1px 2px',
                           background: 'var(--tone)',
                           color: 'var(--ink)',
                           boxShadow: '0 0 0 1px var(--ground)',
@@ -1126,7 +1095,7 @@ export default function App() {
                       onClick={() => setInstrFor(t.id)}
                       className="font-semibold text-left transition-all hover:opacity-100 cursor-pointer flex items-center gap-1 shrink-0 pb-[1px]"
                       style={{
-                        fontSize: 13.5,
+                        fontSize: 11.5,
                         border: 'none',
                         borderBottom: '1px dotted color-mix(in srgb, var(--ink) 45%, transparent)',
                         borderRadius: 0,
@@ -1163,14 +1132,6 @@ export default function App() {
                         </span>
                         <Pencil size={10} strokeWidth={2} style={{ opacity: 0.45, flexShrink: 0 }} />
                       </button>
-
-                      {p && !isSilentHere && (
-                        <NoteMark onClick={() => setNote({
-                          title: cleanPatternName(p.name),
-                          body: p.description,
-                          tags: noteTags(p),
-                        })} />
-                      )}
 
                       {/* Delete instrument button */}
                       <button
@@ -1595,11 +1556,6 @@ export default function App() {
         onSilenceAll={() => patternFor && edit(s => silenceVoiceInAll(s, patternFor))}
         onPick={id => patternFor && edit(s => setPattern(s, patternFor, region.id, id, 'section'))}
         onPickEverywhere={id => patternFor && edit(s => setPattern(s, patternFor, region.id, id, 'song'))}
-      />
-
-      <NoteCard
-        open={!!note} onClose={() => setNote(null)}
-        title={note?.title ?? ''} body={note?.body ?? ''} tags={note?.tags}
       />
 
       {downloadOpen && (

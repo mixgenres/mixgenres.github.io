@@ -1,0 +1,326 @@
+{
+  "schemaVersion": 1,
+  "id": "country-starter",
+  "genreId": "country",
+  "genreName": "Country",
+  "styleId": "country-neotraditional",
+  "styleName": "Neotraditional",
+  "styleDescription": "Fiddle and steel guitar in a",
+  "bpm": 110,
+  "meter": "4/4",
+  "regions": [
+    {
+      "id": "r0",
+      "name": "Intro",
+      "type": "intro",
+      "genreId": "country",
+      "styleId": "country-neotraditional",
+      "chords": [
+        "G",
+        "C",
+        "D",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "name": "Verse",
+      "type": "verse",
+      "genreId": "country",
+      "styleId": "country-neotraditional",
+      "chords": [
+        "G",
+        "C",
+        "D",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "Chorus",
+      "type": "chorus",
+      "genreId": "country",
+      "styleId": "country-neotraditional",
+      "chords": [
+        "D#",
+        "F",
+        "A#",
+        "Gm"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "Instrumental",
+      "type": "instrumental",
+      "genreId": "country",
+      "styleId": "country-neotraditional",
+      "chords": [
+        "G",
+        "C",
+        "D",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Verse",
+      "type": "verse",
+      "genreId": "country",
+      "styleId": "country-neotraditional",
+      "chords": [
+        "G",
+        "C",
+        "D",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "name": "Outro",
+      "type": "outro",
+      "genreId": "country",
+      "styleId": "country-neotraditional",
+      "chords": [
+        "G",
+        "C",
+        "D",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "v0",
+      "instrumentId": "steel-guitar",
+      "instrumentName": "Resonator Steel Guitar",
+      "role": "harmony",
+      "patternIds": [
+        "country-pedal-steel-swell",
+        "country-steel-answer",
+        "country-boom-chuck"
+      ],
+      "noteCount": 657,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 60,
+        "6655": 460,
+        "30366": 125,
+        "44655": 12
+      }
+    },
+    {
+      "id": "v1",
+      "instrumentId": "fiddle",
+      "instrumentName": "Fiddle",
+      "role": "lead",
+      "patternIds": [
+        "country-steel-answer",
+        "tech-country-train-beat",
+        "tech-country-pedal-steel-fills",
+        "tango-fraseo-bandoneon"
+      ],
+      "noteCount": 56,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 8,
+        "6655": 18,
+        "44655": 30
+      }
+    },
+    {
+      "id": "v2",
+      "instrumentId": "acoustic-guitar",
+      "instrumentName": "Steel-String Acoustic Guitar",
+      "role": "harmony",
+      "patternIds": [
+        "country-boom-chuck",
+        "country-pedal-steel-swell"
+      ],
+      "noteCount": 420,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "mute",
+        "bend"
+      ],
+      "gestureCounts": {
+        "4607": 24,
+        "44655": 396
+      }
+    },
+    {
+      "id": "v3",
+      "instrumentId": "electric-guitar",
+      "instrumentName": "Electric Guitar",
+      "role": "harmony",
+      "patternIds": [
+        "country-pedal-steel-swell",
+        "country-boom-chuck"
+      ],
+      "noteCount": 465,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 12,
+        "6655": 12,
+        "30366": 7,
+        "44655": 422,
+        "48234": 12
+      }
+    },
+    {
+      "id": "v4",
+      "instrumentId": "bass",
+      "instrumentName": "Electric Bass Guitar",
+      "role": "bass",
+      "patternIds": [
+        "country-outlaw"
+      ],
+      "noteCount": 298,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4607": 47,
+        "5227": 9,
+        "6655": 38,
+        "12200": 12,
+        "30366": 6,
+        "44655": 186
+      }
+    },
+    {
+      "id": "v5",
+      "instrumentId": "voice",
+      "instrumentName": "Synth voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-country-pedal-steel-fills",
+        "tech-country-train-beat"
+      ],
+      "noteCount": 64,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 53,
+        "6655": 11
+      }
+    },
+    {
+      "id": "v6",
+      "instrumentId": "piano",
+      "instrumentName": "Acoustic Grand Piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "jazz-comping-sync",
+        "tango-332-piazzolla",
+        "brazilian--sb-15-bossa-ending-turn"
+      ],
+      "noteCount": 435,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "marcato",
+        "arrastre",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 31,
+        "6655": 51,
+        "8118": 232,
+        "8526": 11,
+        "19949": 7,
+        "21063": 103
+      }
+    },
+    {
+      "id": "v7",
+      "instrumentId": "mandolin",
+      "instrumentName": "Mandolin",
+      "role": "lead",
+      "patternIds": [
+        "country-pedal-steel-swell",
+        "flamenco-bridge-17"
+      ],
+      "noteCount": 110,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 10,
+        "6655": 61,
+        "42219": 12,
+        "44655": 27
+      }
+    }
+  ],
+  "usedPatternIds": [
+    "country-pedal-steel-swell",
+    "country-steel-answer",
+    "country-boom-chuck",
+    "tech-country-train-beat",
+    "tech-country-pedal-steel-fills",
+    "tango-fraseo-bandoneon",
+    "country-outlaw",
+    "afro-amapiano-pad",
+    "jazz-comping-sync",
+    "tango-332-piazzolla",
+    "brazilian--sb-15-bossa-ending-turn",
+    "flamenco-bridge-17"
+  ],
+  "performance": {
+    "durationSeconds": 104.72727272727278,
+    "noteCount": 2505,
+    "trackCount": 8,
+    "tracksWithNoNotes": []
+  }
+}

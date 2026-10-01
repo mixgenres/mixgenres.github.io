@@ -1,0 +1,381 @@
+{
+  "schemaVersion": 2,
+  "genre": "country",
+  "styleId": "country-bakersfield",
+  "styleName": "Bakersfield",
+  "durationSec": 90,
+  "tempoBpm": 128,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "E",
+        "A",
+        "B7",
+        "E"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "E",
+        "E",
+        "A",
+        "E"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "A",
+        "A",
+        "E",
+        "E"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "instrumental-3",
+      "kind": "instrumental",
+      "label": "Instrumental",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "E",
+        "E",
+        "A",
+        "E"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "E",
+        "E",
+        "A",
+        "E"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "E",
+        "E",
+        "A",
+        "E"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "country-pedal-steel-swell"
+      ],
+      "noteCount": 311
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "steel-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-country-pedal-steel-fills",
+        "country-steel-answer"
+      ],
+      "noteCount": 807
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-country-carter-style-alternating-bass"
+      ],
+      "noteCount": 314
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-country-country-shuffle",
+        "country-train"
+      ],
+      "noteCount": 586
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "fiddle",
+      "role": "lead",
+      "patternIds": [
+        "country-steel-answer",
+        "tech-country-vocal-harmony-thirds-sixths",
+        "tech-country-pedal-steel-fills",
+        "tech-country-train-beat"
+      ],
+      "noteCount": 68
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-country-vocal-harmony-thirds-sixths",
+        "tech-country-pedal-steel-fills",
+        "tech-country-train-beat",
+        "tech-country-country-shuffle"
+      ],
+      "noteCount": 72
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-country-vocal-harmony-thirds-sixths"
+      ],
+      "noteCount": 598
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "mandolin",
+      "role": "lead",
+      "patternIds": [
+        "country-pedal-steel-swell",
+        "flamenco-bridge-17"
+      ],
+      "noteCount": 110
+    }
+  ],
+  "patterns": [
+    {
+      "id": "country-pedal-steel-swell",
+      "name": "Pedal Steel Volume Swell",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-country-pedal-steel-fills",
+      "name": "pedal-steel fills",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "pedal-steel fills"
+      ]
+    },
+    {
+      "id": "country-steel-answer",
+      "name": "Steel Answer",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-country-carter-style-alternating-bass",
+      "name": "Carter-style alternating bass",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "Carter-style alternating bass"
+      ]
+    },
+    {
+      "id": "tech-country-country-shuffle",
+      "name": "shuffle",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "country shuffle"
+      ]
+    },
+    {
+      "id": "country-train",
+      "name": "Train Beat",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-country-vocal-harmony-thirds-sixths",
+      "name": "vocal harmony thirds/sixths",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal harmony thirds/sixths"
+      ]
+    },
+    {
+      "id": "tech-country-train-beat",
+      "name": "train beat",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "train beat"
+      ]
+    },
+    {
+      "id": "flamenco-bridge-17",
+      "name": "Rasgueado Bridge",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        8
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "steel-guitar",
+      "bass",
+      "drums",
+      "fiddle"
+    ],
+    "techniques": [],
+    "signatureCell": "Treble-heavy Telecaster twang lick backed by snappy drum rimshots",
+    "tempoRange": [
+      115,
+      140
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "country-bakersfield"
+  },
+  "performance": {
+    "noteCount": 2866,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "country-pedal-steel-swell",
+      "tech-country-pedal-steel-fills",
+      "country-steel-answer",
+      "tech-country-carter-style-alternating-bass",
+      "tech-country-country-shuffle",
+      "country-train",
+      "tech-country-vocal-harmony-thirds-sixths",
+      "tech-country-train-beat",
+      "flamenco-bridge-17"
+    ]
+  }
+}

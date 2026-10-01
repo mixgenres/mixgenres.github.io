@@ -1,0 +1,391 @@
+{
+  "schemaVersion": 2,
+  "genre": "bachata",
+  "styleId": "bachata-bolero",
+  "styleName": "Bolero Bachata",
+  "durationSec": 73.14285714285714,
+  "tempoBpm": 105,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em",
+        "B7",
+        "Em",
+        "B7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verso-1",
+      "kind": "verso",
+      "label": "Verso",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C#m",
+        "F#m",
+        "B7",
+        "E"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "coro-2",
+      "kind": "coro",
+      "label": "Coro",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C#m",
+        "F#m",
+        "B7",
+        "E"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "mambo-3",
+      "kind": "mambo",
+      "label": "Mambo",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "C#m",
+        "F#m",
+        "B7",
+        "E"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "coda-4",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "B7",
+        "Em",
+        "Em"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-bachata-guitar-arpeggio-ostinato",
+        "bachata-segunda-derecho",
+        "tech-bachata-guitar-pickup-into-chorus"
+      ],
+      "noteCount": 407
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "bachata-bass-derecho",
+        "tech-bachata-descending-bachata-bass"
+      ],
+      "noteCount": 171
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bongos",
+      "role": "percussion",
+      "patternIds": [
+        "bachata-bongo-derecho",
+        "bachata-bongo-majao"
+      ],
+      "noteCount": 172
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "maracas",
+      "role": "percussion",
+      "patternIds": [
+        "bachata-bongo-majao"
+      ],
+      "noteCount": 145
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "requinto",
+      "role": "lead",
+      "patternIds": [
+        "bachata-segunda-derecho"
+      ],
+      "noteCount": 62
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-bachata-guitar-pickup-into-chorus",
+        "tech-bachata-guitar-arpeggio-ostinato"
+      ],
+      "noteCount": 48
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "reggaeton--rg-09-reggaeton-piano-stab",
+        "tango-sincopa",
+        "tango-332-piazzolla",
+        "jazz-piano-comping"
+      ],
+      "noteCount": 384
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "guiro",
+      "role": "percussion",
+      "patternIds": [
+        "bachata-bongo-majao",
+        "bachata-bongo-derecho"
+      ],
+      "noteCount": 176
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-bachata-guitar-arpeggio-ostinato",
+      "name": "guitar arpeggio ostinato",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "guitar arpeggio ostinato"
+      ]
+    },
+    {
+      "id": "bachata-segunda-derecho",
+      "name": "Segunda Guitar",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-bachata-guitar-pickup-into-chorus",
+      "name": "guitar pickup into chorus",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "guitar pickup into chorus"
+      ]
+    },
+    {
+      "id": "bachata-bass-derecho",
+      "name": "Bass Derecho",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-bachata-descending-bachata-bass",
+      "name": "descending bachata bass",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "descending bachata bass"
+      ]
+    },
+    {
+      "id": "bachata-bongo-derecho",
+      "name": "Bongo Derecho",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "bachata-bongo-majao",
+      "name": "Bongo Majao",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-09-reggaeton-piano-stab",
+      "name": "Reggaetón piano offbeat stab",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-sincopa",
+      "name": "Síncopa a Tierra",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-332-piazzolla",
+      "name": "3+3+2 Nuevo Tango Pulse",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-comping",
+      "name": "Syncopated Piano Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "acoustic-guitar",
+      "upright-bass",
+      "bongos",
+      "maracas",
+      "requinto"
+    ],
+    "techniques": [],
+    "signatureCell": "Romantic nylon-string guitar arpeggios over soft acoustic bolero pulse",
+    "tempoRange": [
+      96,
+      114
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "bachata-bolero"
+  },
+  "performance": {
+    "noteCount": 1565,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-bachata-guitar-arpeggio-ostinato",
+      "bachata-segunda-derecho",
+      "tech-bachata-guitar-pickup-into-chorus",
+      "bachata-bass-derecho",
+      "tech-bachata-descending-bachata-bass",
+      "bachata-bongo-derecho",
+      "bachata-bongo-majao",
+      "afro-amapiano-pad",
+      "reggaeton--rg-09-reggaeton-piano-stab",
+      "tango-sincopa",
+      "tango-332-piazzolla",
+      "jazz-piano-comping"
+    ]
+  }
+}

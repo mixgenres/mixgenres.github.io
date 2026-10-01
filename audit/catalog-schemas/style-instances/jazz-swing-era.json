@@ -1,0 +1,304 @@
+{
+  "schemaVersion": 2,
+  "genre": "jazz",
+  "styleId": "jazz-swing-era",
+  "styleName": "Swing Era",
+  "durationSec": 74.32258064516125,
+  "tempoBpm": 155,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Head",
+      "bars": 4,
+      "intensity": "medium",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Head / A",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "solo-2",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Trading / Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "chorus-4",
+      "kind": "chorus",
+      "label": "Head Return",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "jazz-ride-spangalang",
+        "jazz-ride-broken"
+      ],
+      "noteCount": 253
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "jazz-walking-bass"
+      ],
+      "noteCount": 170
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "style-jazz-swing-era-signature"
+      ],
+      "noteCount": 1060
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "style-jazz-swing-era-signature"
+      ],
+      "noteCount": 1328
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "clarinet",
+      "role": "lead",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 149
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "ride",
+      "role": "percussion",
+      "patternIds": [
+        "jazz-ride-broken",
+        "jazz-ride-spangalang"
+      ],
+      "noteCount": 243
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "trumpet",
+      "role": "lead",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 141
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "tenor-sax",
+      "role": "melody",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 149
+    }
+  ],
+  "patterns": [
+    {
+      "id": "jazz-ride-spangalang",
+      "name": "Ride Cymbal",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-ride-broken",
+      "name": "Broken Ride",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        9
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-walking-bass",
+      "name": "Walking Bass",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-jazz-swing-era-signature",
+      "name": "Swing Era",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "walking bass",
+        "big-band shout chorus",
+        "ride cymbal swing"
+      ]
+    },
+    {
+      "id": "jazz-horn-swing-phrase",
+      "name": "Horn Swing Phrase",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "upright-bass",
+      "piano",
+      "brass",
+      "clarinet"
+    ],
+    "techniques": [
+      "walking bass",
+      "big-band shout chorus",
+      "ride cymbal swing"
+    ],
+    "signatureCell": "Walking bass under ride-driven swing",
+    "tempoRange": [
+      120,
+      190
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Count Basie",
+      "Duke Ellington"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "jazz-swing-era"
+  },
+  "performance": {
+    "noteCount": 3493,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "jazz-ride-spangalang",
+      "jazz-ride-broken",
+      "jazz-walking-bass",
+      "style-jazz-swing-era-signature",
+      "jazz-horn-swing-phrase"
+    ]
+  }
+}

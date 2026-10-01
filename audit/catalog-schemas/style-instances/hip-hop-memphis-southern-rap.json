@@ -1,0 +1,374 @@
+{
+  "schemaVersion": 2,
+  "genre": "hip-hop",
+  "styleId": "hip-hop-memphis-southern-rap",
+  "styleName": "Memphis / Southern Rap",
+  "durationSec": 115.66265060240953,
+  "tempoBpm": 83,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-hip-hop-memphis-southern-rap-signature"
+      ],
+      "noteCount": 232
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "hiphop-808-glide-bass"
+      ],
+      "noteCount": 114
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "tech-hip-hop-sample-chop"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-hip-hop-vocal-chop"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "hiphop-pocket-percussion",
+        "hip-hop-sampled-keys"
+      ],
+      "noteCount": 587
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "turntable",
+      "role": "lead",
+      "patternIds": [
+        "tech-hip-hop-sample-chop",
+        "hiphop-808-glide-bass"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "hiphop-808-glide-bass",
+        "tech-hip-hop-sample-chop"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "alto-sax",
+      "role": "lead",
+      "patternIds": [
+        "tech-hip-hop-triplet-hi-hats",
+        "hiphop-pocket-percussion",
+        "afro-mambo-horn-hits",
+        "afro-horn-stabs"
+      ],
+      "noteCount": 128
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-hip-hop-memphis-southern-rap-signature",
+      "name": "Memphis/Southern Rap",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "808 glide",
+        "triplet hi-hats",
+        "chopped break",
+        "sample chop",
+        "vocal chop"
+      ]
+    },
+    {
+      "id": "hiphop-808-glide-bass",
+      "name": "808 Glide & Sub Slide Bass",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-hip-hop-sample-chop",
+      "name": "sample chop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "sample chop"
+      ]
+    },
+    {
+      "id": "tech-hip-hop-vocal-chop",
+      "name": "vocal chop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal chop"
+      ]
+    },
+    {
+      "id": "hiphop-pocket-percussion",
+      "name": "Hip-Hop Pocket Percussion",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        3,
+        7,
+        11,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "hip-hop-sampled-keys",
+      "name": "Sampled Keys Loop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 24,
+      "onsetGrid": [
+        0,
+        6,
+        12,
+        18,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-hip-hop-triplet-hi-hats",
+      "name": "triplet hi-hats",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "triplet hi-hats"
+      ]
+    },
+    {
+      "id": "afro-mambo-horn-hits",
+      "name": "Mambo Section Horn Stabs & Punctuation",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        6,
+        12,
+        14,
+        22,
+        28,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-horn-stabs",
+      "name": "Fela Afrobeat Horn Section Stabs",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        3,
+        7,
+        11,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "sub-bass",
+      "sampler",
+      "voice"
+    ],
+    "techniques": [
+      "808 glide",
+      "triplet hi-hats",
+      "chopped break",
+      "sample chop",
+      "vocal chop"
+    ],
+    "signatureCell": "Dark sample loop with triplet hats",
+    "tempoRange": [
+      65,
+      100
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Three 6 Mafia",
+      "UGK"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "hip-hop-memphis-southern-rap"
+  },
+  "performance": {
+    "noteCount": 1317,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-hip-hop-memphis-southern-rap-signature",
+      "hiphop-808-glide-bass",
+      "tech-hip-hop-sample-chop",
+      "tech-hip-hop-vocal-chop",
+      "hiphop-pocket-percussion",
+      "hip-hop-sampled-keys",
+      "tech-hip-hop-triplet-hi-hats",
+      "afro-mambo-horn-hits",
+      "afro-horn-stabs"
+    ]
+  }
+}

@@ -1,0 +1,347 @@
+{
+  "schemaVersion": 2,
+  "genre": "jazz",
+  "styleId": "jazz-cool-jazz",
+  "styleName": "Cool Jazz",
+  "durationSec": 144.42477876106196,
+  "tempoBpm": 113,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "head-0",
+      "kind": "head",
+      "label": "Head",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "Bm7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "solo-1",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "Bm7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "trading-2",
+      "kind": "trading",
+      "label": "Trading",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "Dmaj7",
+        "Dm7",
+        "C#m7",
+        "F#7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "solo-3",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "Dmaj7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "head-4",
+      "kind": "head",
+      "label": "Head",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "Bm7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "tag-5",
+      "kind": "tag",
+      "label": "Tag",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "Bm7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "trumpet",
+      "role": "lead",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 196
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "alto-sax",
+      "role": "lead",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 211
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "jazz-latin-montuno-comp"
+      ],
+      "noteCount": 1342
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "jazz-walking-bass",
+        "tech-jazz-walking-bass"
+      ],
+      "noteCount": 241
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "jazz-ride-spangalang"
+      ],
+      "noteCount": 371
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "ride",
+      "role": "percussion",
+      "patternIds": [
+        "jazz-ride-broken"
+      ],
+      "noteCount": 333
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "tenor-sax",
+      "role": "melody",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 186
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "vibraphone",
+      "role": "harmony",
+      "patternIds": [
+        "tech-jazz-walking-bass",
+        "tech-jazz-ride-cymbal-swing",
+        "tech-jazz-guide-tone-line"
+      ],
+      "noteCount": 325
+    }
+  ],
+  "patterns": [
+    {
+      "id": "jazz-horn-swing-phrase",
+      "name": "Horn Swing Phrase",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-latin-montuno-comp",
+      "name": "Latin Jazz Montuno Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        7,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-walking-bass",
+      "name": "Walking Bass",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-jazz-walking-bass",
+      "name": "walking bass",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "walking bass"
+      ]
+    },
+    {
+      "id": "jazz-ride-spangalang",
+      "name": "Ride Cymbal",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-ride-broken",
+      "name": "Broken Ride",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        9
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-jazz-ride-cymbal-swing",
+      "name": "ride cymbal swing",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "ride cymbal swing"
+      ]
+    },
+    {
+      "id": "tech-jazz-guide-tone-line",
+      "name": "guide-tone line",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "guide-tone line"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "trumpet",
+      "alto-sax",
+      "piano",
+      "upright-bass",
+      "drums"
+    ],
+    "techniques": [],
+    "signatureCell": "Miles Davis Harmon-muted trumpet line whispering gently over brushed snare and cool bass",
+    "tempoRange": [
+      95,
+      130
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 56,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "jazz-cool-jazz"
+  },
+  "performance": {
+    "noteCount": 3205,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "jazz-horn-swing-phrase",
+      "jazz-latin-montuno-comp",
+      "jazz-walking-bass",
+      "tech-jazz-walking-bass",
+      "jazz-ride-spangalang",
+      "jazz-ride-broken",
+      "tech-jazz-ride-cymbal-swing",
+      "tech-jazz-guide-tone-line"
+    ]
+  }
+}

@@ -99,65 +99,6 @@ export function Sheet({
   );
 }
 
-/**
- * A note. The theory lives here and nowhere else — a mark you can turn over,
- * not a paragraph sitting on the page waiting to be skipped.
- */
-export function NoteCard({
-  open, onClose, title, body, tags,
-}: {
-  open: boolean; onClose: () => void; title: string; body: string; tags?: string[];
-}) {
-  return (
-    <AnimatePresence>
-      {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <motion.button
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            onClick={onClose} aria-label="Close note"
-            className="fixed inset-0"
-            style={{ background: 'color-mix(in srgb, var(--ink) 30%, transparent)' }}
-          />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94, y: 8 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: 6 }}
-            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-            onClick={onClose}
-            className="relative z-10 w-full max-w-[min(20rem,88vw)] px-5 py-4 cursor-pointer"
-            style={{
-              background: 'var(--ground)',
-              boxShadow: '6px 7px 0 0 color-mix(in srgb, var(--ink) 80%, transparent)',
-            }}
-          >
-            <div className="slab" style={{ fontSize: 18, lineHeight: 1.15 }}>{title}</div>
-            <p style={{ fontSize: 13.5, lineHeight: 1.5, marginTop: 8, opacity: 0.82 }}>{body}</p>
-            {!!tags?.length && (
-              <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3">
-                {tags.map(t => <span key={t} className="micro">{t}</span>)}
-              </div>
-            )}
-          </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
-  );
-}
-
-/** The footnote mark itself. */
-export function NoteMark({ onClick }: { onClick: (e: React.MouseEvent) => void }) {
-  return (
-    <button
-      onClick={onClick}
-      aria-label="Read the note"
-      className="align-super"
-      style={{ fontSize: 11, opacity: 0.5, padding: '0 3px', fontFamily: 'var(--slab)' }}
-    >
-      °
-    </button>
-  );
-}
-
 type ChipProps = React.ComponentPropsWithoutRef<'button'> & { active?: boolean; muted?: boolean };
 
 export function Chip({ children, onClick, active = false, muted = false, className = '', ...rest }: ChipProps) {

@@ -1,0 +1,296 @@
+{
+  "schemaVersion": 1,
+  "id": "jazz",
+  "name": "Jazz",
+  "family": "Improvisation / Harmony",
+  "description": "Jazz encompasses swing, improvisation, and a wide range of ensemble traditions.",
+  "substyles": [
+    "Bebop",
+    "Cool Jazz",
+    "Hard Bop",
+    "Free Jazz",
+    "Gypsy Jazz",
+    "Fusion",
+    "Spiritual Jazz",
+    "Ragtime"
+  ],
+  "styleIds": [
+    "jazz-bebop",
+    "jazz-cool-jazz",
+    "jazz-hard-bop",
+    "jazz-free-jazz",
+    "jazz-gypsy-jazz",
+    "jazz-fusion",
+    "jazz-spiritual-jazz",
+    "jazz-ragtime",
+    "jazz-swing-era",
+    "jazz-modal-jazz",
+    "jazz-post-bop",
+    "jazz-jazz-funk",
+    "jazz-avant-garde-free-improvisation",
+    "jazz-brazilian-jazz"
+  ],
+  "patternIds": [
+    "jazz-walking-bass",
+    "jazz-ride-spangalang",
+    "jazz-piano-comping",
+    "jazz-brushes-swing",
+    "jazz-latin-montuno-comp",
+    "jazz-piano-red-garland",
+    "jazz-hihat-2-4",
+    "jazz-ride-broken",
+    "jazz-bass-pedal",
+    "jazz-comping-sync",
+    "jazz-snare-comp",
+    "jazz-waltz-ride",
+    "jazz-phrase-13",
+    "jazz-call-14",
+    "jazz-anchor-15",
+    "jazz-comp-16",
+    "jazz-intro-17",
+    "tech-jazz-walking-bass",
+    "tech-jazz-bebop-enclosure",
+    "tech-jazz-ii-v-i",
+    "tech-jazz-tritone-substitution",
+    "tech-jazz-guide-tone-line",
+    "tech-jazz-quartal-voicing",
+    "tech-jazz-modal-vamp",
+    "tech-jazz-ride-cymbal-swing",
+    "tech-jazz-comping-anticipation",
+    "tech-jazz-jazz-triplet",
+    "tech-jazz-trading-fours",
+    "style-jazz-swing-era-signature",
+    "style-jazz-modal-jazz-signature",
+    "style-jazz-post-bop-signature",
+    "style-jazz-jazz-funk-signature",
+    "style-jazz-avant-garde-free-improvisation-signature",
+    "style-jazz-brazilian-jazz-signature",
+    "tech-jazz-non-grid-phrasing",
+    "tech-jazz-collective-improvisation",
+    "tech-jazz-big-band-shout-chorus",
+    "jazz-horn-swing-phrase"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "jazz-bebop",
+      "name": "Bebop",
+      "keySubstyles": [
+        "Classic Bebop",
+        "52nd Street Sound"
+      ],
+      "characteristicInstruments": [
+        "alto-sax",
+        "trumpet",
+        "piano",
+        "upright-bass",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "jazz-cool-jazz",
+      "name": "Cool Jazz",
+      "keySubstyles": [
+        "Birth of the Cool",
+        "West Coast Jazz"
+      ],
+      "characteristicInstruments": [
+        "trumpet",
+        "alto-sax",
+        "piano",
+        "upright-bass",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "jazz-hard-bop",
+      "name": "Hard Bop",
+      "keySubstyles": [
+        "Blue Note Sound",
+        "Soul Jazz"
+      ],
+      "characteristicInstruments": [
+        "tenor-sax",
+        "trumpet",
+        "piano",
+        "upright-bass",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "jazz-free-jazz",
+      "name": "Free Jazz",
+      "keySubstyles": [
+        "Avant-Garde Jazz",
+        "Harmolodics",
+        "Energy Music"
+      ],
+      "characteristicInstruments": [
+        "tenor-sax",
+        "alto-sax",
+        "trumpet",
+        "upright-bass",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "jazz-gypsy-jazz",
+      "name": "Gypsy Jazz",
+      "keySubstyles": [
+        "Jazz Manouche",
+        "Hot Club Swing"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "violin",
+        "upright-bass",
+        "clarinet",
+        "tenor-sax"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "jazz-fusion",
+      "name": "Fusion",
+      "keySubstyles": [
+        "Jazz-Rock Fusion",
+        "Electric Jazz"
+      ],
+      "characteristicInstruments": [
+        "synth",
+        "electric-guitar",
+        "bass",
+        "drums",
+        "tenor-sax"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "jazz-spiritual-jazz",
+      "name": "Spiritual Jazz",
+      "keySubstyles": [
+        "Strata-East Sound",
+        "Cosmic Jazz",
+        "Transcendental Jazz"
+      ],
+      "characteristicInstruments": [
+        "tenor-sax",
+        "harp",
+        "piano",
+        "upright-bass",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "jazz-ragtime",
+      "name": "Ragtime",
+      "keySubstyles": [
+        "Classic Ragtime",
+        "St. Louis Rag"
+      ],
+      "characteristicInstruments": [
+        "piano",
+        "banjo",
+        "brass",
+        "upright-bass",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "jazz-swing-era",
+      "name": "Swing Era",
+      "keySubstyles": [
+        "Swing Era"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "upright-bass",
+        "piano",
+        "brass",
+        "clarinet"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "jazz-modal-jazz",
+      "name": "Modal Jazz",
+      "keySubstyles": [
+        "Modal Jazz"
+      ],
+      "characteristicInstruments": [
+        "upright-bass",
+        "drums",
+        "piano",
+        "tenor-sax",
+        "trumpet"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "jazz-post-bop",
+      "name": "Post-Bop",
+      "keySubstyles": [
+        "Post-Bop"
+      ],
+      "characteristicInstruments": [
+        "upright-bass",
+        "drums",
+        "piano",
+        "tenor-sax",
+        "trumpet"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "jazz-jazz-funk",
+      "name": "Jazz-Funk",
+      "keySubstyles": [
+        "Jazz-Funk"
+      ],
+      "characteristicInstruments": [
+        "bass",
+        "drums",
+        "rhodes",
+        "clavinet",
+        "electric-guitar"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "jazz-avant-garde-free-improvisation",
+      "name": "Avant-Garde / Free Improvisation",
+      "keySubstyles": [
+        "Avant-Garde / Free Improvisation"
+      ],
+      "characteristicInstruments": [
+        "piano",
+        "upright-bass",
+        "drums",
+        "alto-sax",
+        "trumpet"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "jazz-brazilian-jazz",
+      "name": "Brazilian Jazz",
+      "keySubstyles": [
+        "Brazilian Jazz"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "piano",
+        "upright-bass",
+        "drums",
+        "flute"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "jazz-starter"
+}

@@ -1,0 +1,338 @@
+{
+  "schemaVersion": 2,
+  "genre": "gospel",
+  "styleId": "gospel-traditional",
+  "styleName": "Traditional Gospel",
+  "durationSec": 96.00000000000006,
+  "tempoBpm": 100,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "verse-0",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 4,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "build-1",
+      "kind": "build",
+      "label": "Build",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "vamp-2",
+      "kind": "vamp",
+      "label": "Vamp",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "shout-3",
+      "kind": "shout",
+      "label": "Shout",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "coda-4",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F",
+        "C",
+        "F",
+        "C"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "tech-gospel-hammond-swell",
+        "gospel--gospel-church-pocket"
+      ],
+      "noteCount": 333
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "gospel--gospel-organ-response",
+        "gospel--gospel-choir-response",
+        "gospel--gospel-organ-bubble"
+      ],
+      "noteCount": 378
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "choir",
+      "role": "voice",
+      "patternIds": [
+        "tech-gospel-call-and-response"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "gospel--gospel-church-pocket",
+        "gospel--gospel-shout-vamp"
+      ],
+      "noteCount": 51
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "tambourine",
+      "role": "percussion",
+      "patternIds": [
+        "gospel--gospel-handclap-pulse",
+        "gospel--gospel-organ-response",
+        "gospel--gospel-shout-vamp",
+        "gospel--gospel-organ-bubble"
+      ],
+      "noteCount": 217
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "gospel--gospel-choir-response",
+        "gospel--gospel-handclap-pulse",
+        "gospel--gospel-organ-response"
+      ],
+      "noteCount": 184
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "gospel--gospel-shout-vamp",
+        "gospel--gospel-organ-bubble",
+        "gospel--gospel-handclap-pulse",
+        "gospel--gospel-choir-response"
+      ],
+      "noteCount": 732
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "gospel--gospel-organ-bubble",
+        "tech-gospel-call-and-response",
+        "gospel--gospel-shout-vamp"
+      ],
+      "noteCount": 48
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-gospel-hammond-swell",
+      "name": "Hammond swell",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Hammond swell"
+      ]
+    },
+    {
+      "id": "gospel--gospel-church-pocket",
+      "name": "Church Pocket",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "gospel--gospel-organ-response",
+      "name": "Organ Response",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        3,
+        7,
+        11,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "gospel--gospel-choir-response",
+      "name": "Choir Call and Response",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        6,
+        7,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "gospel--gospel-organ-bubble",
+      "name": "Organ Bubble",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-gospel-call-and-response",
+      "name": "call-and-response",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "call-and-response"
+      ]
+    },
+    {
+      "id": "gospel--gospel-shout-vamp",
+      "name": "Shout Vamp",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        11,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "gospel--gospel-handclap-pulse",
+      "name": "Handclap Pulse",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        12,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "organ",
+      "piano",
+      "choir",
+      "drums",
+      "tambourine"
+    ],
+    "techniques": [],
+    "signatureCell": "Gospel shuffle with tambourine on 2 and 4",
+    "tempoRange": [
+      80,
+      120
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 54,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "gospel-traditional"
+  },
+  "performance": {
+    "noteCount": 2007,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-gospel-hammond-swell",
+      "gospel--gospel-church-pocket",
+      "gospel--gospel-organ-response",
+      "gospel--gospel-choir-response",
+      "gospel--gospel-organ-bubble",
+      "tech-gospel-call-and-response",
+      "gospel--gospel-shout-vamp",
+      "gospel--gospel-handclap-pulse"
+    ]
+  }
+}

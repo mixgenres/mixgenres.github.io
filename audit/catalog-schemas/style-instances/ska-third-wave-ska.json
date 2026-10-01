@@ -1,0 +1,471 @@
+{
+  "schemaVersion": 2,
+  "genre": "ska",
+  "styleId": "ska-third-wave-ska",
+  "styleName": "Third-Wave Ska",
+  "durationSec": 56.47058823529414,
+  "tempoBpm": 170,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "style-ska-third-wave-ska-signature"
+      ],
+      "noteCount": 495
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-ska-walking-ska-bass",
+        "sk-07-walking-ska-bass",
+        "sk-walking-bass"
+      ],
+      "noteCount": 339
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-ska-ska-punk-double-time"
+      ],
+      "noteCount": 164
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "tech-ska-horn-stab",
+        "tech-ska-jazz-horn-solo"
+      ],
+      "noteCount": 165
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-ska-horn-guitar-call-response"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "tenor-sax",
+      "role": "melody",
+      "patternIds": [
+        "tech-ska-jazz-horn-solo",
+        "tech-ska-horn-stab",
+        "tech-ska-walking-ska-bass"
+      ],
+      "noteCount": 181
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "trombone",
+      "role": "lead",
+      "patternIds": [
+        "tech-ska-jazz-horn-solo",
+        "style-ska-third-wave-ska-signature"
+      ],
+      "noteCount": 158
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "jazz-comping-sync",
+        "cu-11-cumbia-organ-hook",
+        "tech-ska-two-tone-organ",
+        "kizomba-bridge-16",
+        "reggae--rd-skank"
+      ],
+      "noteCount": 384
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-ska-third-wave-ska-signature",
+      "name": "Third-Wave Ska",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "horn stab",
+        "ska-punk double-time",
+        "horn/guitar call-response",
+        "jazz horn solo",
+        "walking ska bass"
+      ]
+    },
+    {
+      "id": "tech-ska-walking-ska-bass",
+      "name": "walking ska bass",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "walking ska bass"
+      ]
+    },
+    {
+      "id": "sk-07-walking-ska-bass",
+      "name": "walking bass contour",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        7,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "sk-walking-bass",
+      "name": "Walking Bass",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-ska-ska-punk-double-time",
+      "name": "ska-punk double-time",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "ska-punk double-time"
+      ]
+    },
+    {
+      "id": "tech-ska-horn-stab",
+      "name": "horn stab",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "horn stab"
+      ]
+    },
+    {
+      "id": "tech-ska-jazz-horn-solo",
+      "name": "jazz horn solo",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "jazz horn solo"
+      ]
+    },
+    {
+      "id": "tech-ska-horn-guitar-call-response",
+      "name": "horn/guitar call-response",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "horn/guitar call-response"
+      ]
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-comping-sync",
+      "name": "Syncopated Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        1,
+        4,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-11-cumbia-organ-hook",
+      "name": "Organ Hook",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        6,
+        12,
+        16,
+        22,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-ska-two-tone-organ",
+      "name": "two-tone organ",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "two-tone organ"
+      ]
+    },
+    {
+      "id": "kizomba-bridge-16",
+      "name": "Semba Bridge",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        10,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-skank",
+      "name": "Offbeat Skank",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "brass",
+      "voice"
+    ],
+    "techniques": [
+      "horn stab",
+      "ska-punk double-time",
+      "horn/guitar call-response",
+      "jazz horn solo",
+      "walking ska bass"
+    ],
+    "signatureCell": "Double-time punk drums with horn stabs",
+    "tempoRange": [
+      150,
+      190
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Reel Big Fish",
+      "Less Than Jake"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "ska-third-wave-ska"
+  },
+  "performance": {
+    "noteCount": 1950,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-ska-third-wave-ska-signature",
+      "tech-ska-walking-ska-bass",
+      "sk-07-walking-ska-bass",
+      "sk-walking-bass",
+      "tech-ska-ska-punk-double-time",
+      "tech-ska-horn-stab",
+      "tech-ska-jazz-horn-solo",
+      "tech-ska-horn-guitar-call-response",
+      "afro-amapiano-pad",
+      "jazz-comping-sync",
+      "cu-11-cumbia-organ-hook",
+      "tech-ska-two-tone-organ",
+      "kizomba-bridge-16",
+      "reggae--rd-skank"
+    ]
+  }
+}

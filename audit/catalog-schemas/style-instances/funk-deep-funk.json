@@ -1,0 +1,438 @@
+{
+  "schemaVersion": 2,
+  "genre": "funk",
+  "styleId": "funk-deep-funk",
+  "styleName": "Deep Funk",
+  "durationSec": 88.1632653061224,
+  "tempoBpm": 98,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C7",
+        "C7",
+        "C7",
+        "C7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "groove-1",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C7",
+        "F7",
+        "C7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "verse-2",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "F7",
+        "F7",
+        "C7",
+        "C7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "G7",
+        "F7",
+        "C7",
+        "C7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "groove-4",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C7",
+        "F7",
+        "C7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "tag-5",
+      "kind": "tag",
+      "label": "Tag",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C7",
+        "F7",
+        "C7",
+        "G7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-funk-jazz-funk-signature"
+      ],
+      "noteCount": 145
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-funk-ghost-note-bass",
+        "funk-the-one-bass"
+      ],
+      "noteCount": 214
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "funk-chicken-scratch-guitar",
+        "tech-funk-16th-note-guitar-scratch"
+      ],
+      "noteCount": 1334
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "funk-clavinet"
+      ],
+      "noteCount": 362
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "tech-funk-funk-horn-stab"
+      ],
+      "noteCount": 146
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-funk-16th-note-guitar-scratch",
+        "tech-funk-ghost-note-bass"
+      ],
+      "noteCount": 36
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "clavinet",
+      "role": "harmony",
+      "patternIds": [
+        "style-funk-jazz-funk-signature",
+        "funk-clavinet"
+      ],
+      "noteCount": 311
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "patternIds": [
+        "funk-drum-breakbeat",
+        "timba-bata-fusion",
+        "funk-16th-strum",
+        "afrobeats-break-15",
+        "cumbia-guiro"
+      ],
+      "noteCount": 251
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-funk-jazz-funk-signature",
+      "name": "Jazz-Funk",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "clavinet riff",
+        "funk horn stab",
+        "vamp extension"
+      ]
+    },
+    {
+      "id": "tech-funk-ghost-note-bass",
+      "name": "ghost-note bass",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "ghost-note bass"
+      ]
+    },
+    {
+      "id": "funk-the-one-bass",
+      "name": "\"The One\" 16th-Note Syncopated Bass",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-chicken-scratch-guitar",
+      "name": "Chicken-Scratch 9th Chords",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-funk-16th-note-guitar-scratch",
+      "name": "16th-note guitar scratch",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "16th-note guitar scratch"
+      ]
+    },
+    {
+      "id": "funk-clavinet",
+      "name": "Clavinet Sync",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        4,
+        7,
+        10,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-funk-funk-horn-stab",
+      "name": "horn stab",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "funk horn stab"
+      ]
+    },
+    {
+      "id": "funk-drum-breakbeat",
+      "name": "Clyde Stubblefield \"Funky Drummer\" Breakbeat",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        8,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "timba-bata-fusion",
+      "name": "Bata Fusion",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-16th-strum",
+      "name": "16th Note Strum",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afrobeats-break-15",
+      "name": "Afrobeat Break",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        5,
+        7,
+        11,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cumbia-guiro",
+      "name": "Cumbia Güiro",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "bass",
+      "electric-guitar",
+      "organ",
+      "brass"
+    ],
+    "techniques": [],
+    "signatureCell": "Syncopated second-line snare drag locked with clean single-note guitar chicken-scratch",
+    "tempoRange": [
+      88,
+      108
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "swung",
+    "swingPercentage": 60,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "funk-deep-funk"
+  },
+  "performance": {
+    "noteCount": 2799,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-funk-jazz-funk-signature",
+      "tech-funk-ghost-note-bass",
+      "funk-the-one-bass",
+      "funk-chicken-scratch-guitar",
+      "tech-funk-16th-note-guitar-scratch",
+      "funk-clavinet",
+      "tech-funk-funk-horn-stab",
+      "funk-drum-breakbeat",
+      "timba-bata-fusion",
+      "funk-16th-strum",
+      "afrobeats-break-15",
+      "cumbia-guiro"
+    ]
+  }
+}

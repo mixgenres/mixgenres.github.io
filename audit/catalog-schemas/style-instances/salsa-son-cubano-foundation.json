@@ -1,0 +1,437 @@
+{
+  "schemaVersion": 2,
+  "genre": "salsa",
+  "styleId": "salsa-son-cubano-foundation",
+  "styleName": "Son Cubano Foundation",
+  "durationSec": 111.84466019417486,
+  "tempoBpm": 103,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verso",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Coro",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Mambo / Gear",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Montuno",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Cierre",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "tres",
+      "role": "harmony",
+      "patternIds": [
+        "style-salsa-son-cubano-foundation-signature"
+      ],
+      "noteCount": 576
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bongos",
+      "role": "percussion",
+      "patternIds": [
+        "afro-clave-son-23",
+        "salsa-maracas",
+        "salsa-clave-32"
+      ],
+      "noteCount": 224
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "afro-bass-tumbao"
+      ],
+      "noteCount": 158
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "claves",
+      "role": "percussion",
+      "patternIds": [
+        "salsa-maracas",
+        "salsa-clave-32",
+        "afro-clave-son-23"
+      ],
+      "noteCount": 257
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-salsa-bongo-martillo",
+        "tech-salsa-coro-pregon",
+        "tech-salsa-3-2-clave",
+        "tech-salsa-2-3-clave"
+      ],
+      "noteCount": 80
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "reggaeton--rg-09-reggaeton-piano-stab",
+        "afro-piano-montuno",
+        "tech-salsa-2-3-clave",
+        "afro-bass-tumbao"
+      ],
+      "noteCount": 651
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "patternIds": [
+        "salsa-clave-32",
+        "afro-clave-son-23",
+        "salsa-maracas"
+      ],
+      "noteCount": 234
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "timbales",
+      "role": "percussion",
+      "patternIds": [
+        "afro-clave-son-23",
+        "salsa-maracas",
+        "salsa-clave-32"
+      ],
+      "noteCount": 303
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-salsa-son-cubano-foundation-signature",
+      "name": "Son Cubano Foundation",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "bongó martillo",
+        "2-3 clave",
+        "3-2 clave"
+      ]
+    },
+    {
+      "id": "afro-clave-son-23",
+      "name": "Son Clave 2–3 Structural Timeline",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        4,
+        8,
+        16,
+        22,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "salsa-maracas",
+      "name": "Maracas",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "salsa-clave-32",
+      "name": "3-2 Son Clave",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        10,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-bass-tumbao",
+      "name": "Bass Tumbao",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-salsa-bongo-martillo",
+      "name": "bongó martillo",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "bongó martillo"
+      ]
+    },
+    {
+      "id": "tech-salsa-coro-pregon",
+      "name": "coro/pregón",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "coro/pregón"
+      ]
+    },
+    {
+      "id": "tech-salsa-3-2-clave",
+      "name": "3-2 clave",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "3-2 clave"
+      ]
+    },
+    {
+      "id": "tech-salsa-2-3-clave",
+      "name": "2-3 clave",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "2-3 clave"
+      ]
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-09-reggaeton-piano-stab",
+      "name": "Reggaetón piano offbeat stab",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-piano-montuno",
+      "name": "Piano Montuno/Guajeo",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14,
+        16,
+        19,
+        22,
+        24,
+        27,
+        30
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "tres",
+      "bongos",
+      "bass",
+      "claves",
+      "voice"
+    ],
+    "techniques": [
+      "bongó martillo",
+      "2-3 clave",
+      "3-2 clave"
+    ],
+    "signatureCell": "Clave cycle with son bass and tres",
+    "tempoRange": [
+      85,
+      120
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Buena Vista Social Club",
+      "Arsenio Rodríguez"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "salsa-son-cubano-foundation"
+  },
+  "performance": {
+    "noteCount": 2483,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-salsa-son-cubano-foundation-signature",
+      "afro-clave-son-23",
+      "salsa-maracas",
+      "salsa-clave-32",
+      "afro-bass-tumbao",
+      "tech-salsa-bongo-martillo",
+      "tech-salsa-coro-pregon",
+      "tech-salsa-3-2-clave",
+      "tech-salsa-2-3-clave",
+      "afro-amapiano-pad",
+      "reggaeton--rg-09-reggaeton-piano-stab",
+      "afro-piano-montuno"
+    ]
+  }
+}

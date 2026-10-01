@@ -11,7 +11,7 @@ export const palmas: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 18,
-  makeupGain: 24.182,
+  makeupGain: 0.300,
   polyphony: 8,
   note: "Authentic flamenco handclapping ensemble capturing both hollow, deep, cupped Palmas Sordas (for cante jondo and Soleá) and sharp, cutting, dry Palmas Claras/Fuertes (for Bulerías, Alegrías, and remates)",
   acousticProfile: {

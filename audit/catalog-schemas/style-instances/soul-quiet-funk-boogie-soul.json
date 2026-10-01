@@ -1,0 +1,409 @@
+{
+  "schemaVersion": 2,
+  "genre": "soul",
+  "styleId": "soul-quiet-funk-boogie-soul",
+  "styleName": "Quiet Funk / Boogie Soul",
+  "durationSec": 88.88888888888894,
+  "tempoBpm": 108,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "style-soul-quiet-funk-boogie-soul-signature",
+        "tech-soul-melodic-bass"
+      ],
+      "noteCount": 188
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "rhodes",
+      "role": "harmony",
+      "patternIds": [
+        "tech-soul-vocal-harmony-stack",
+        "tech-soul-rhodes-voicing"
+      ],
+      "noteCount": 598
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "soul-motown-bass",
+        "soul-backbeat-tambourine"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-soul-soul-backbeat",
+        "style-soul-quiet-funk-boogie-soul-signature"
+      ],
+      "noteCount": 161
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-soul-gospel-vocal-run"
+      ],
+      "noteCount": 61
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "soul-backbeat-tambourine",
+        "soul-motown-bass"
+      ],
+      "noteCount": 998
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "soul-backbeat-tambourine",
+        "tango-piano-chumba",
+        "zouk-bridge-16",
+        "swing-charleston"
+      ],
+      "noteCount": 392
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "horn-section",
+      "role": "harmony",
+      "patternIds": [
+        "tech-soul-rhodes-voicing",
+        "soul-motown-bass",
+        "tech-soul-vocal-harmony-stack"
+      ],
+      "noteCount": 508
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-soul-quiet-funk-boogie-soul-signature",
+      "name": "Quiet Funk/Boogie Soul",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Rhodes voicing",
+        "melodic bass",
+        "soul backbeat",
+        "vocal harmony stack"
+      ]
+    },
+    {
+      "id": "tech-soul-melodic-bass",
+      "name": "melodic bass",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "melodic bass"
+      ]
+    },
+    {
+      "id": "tech-soul-vocal-harmony-stack",
+      "name": "vocal harmony stack",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal harmony stack"
+      ]
+    },
+    {
+      "id": "tech-soul-rhodes-voicing",
+      "name": "Rhodes voicing",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Rhodes voicing"
+      ]
+    },
+    {
+      "id": "soul-motown-bass",
+      "name": "Motown Bass",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        11,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "soul-backbeat-tambourine",
+      "name": "Backbeat Tambourine",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-soul-soul-backbeat",
+      "name": "backbeat",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "soul backbeat"
+      ]
+    },
+    {
+      "id": "tech-soul-gospel-vocal-run",
+      "name": "gospel vocal run",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "gospel vocal run"
+      ]
+    },
+    {
+      "id": "tango-piano-chumba",
+      "name": "Piano Chumba",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        4,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-bridge-16",
+      "name": "Chawa Bridge",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "swing-charleston",
+      "name": "Charleston Comping",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        3
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "bass",
+      "rhodes",
+      "synth",
+      "drums",
+      "voice"
+    ],
+    "techniques": [
+      "Rhodes voicing",
+      "melodic bass",
+      "soul backbeat",
+      "vocal harmony stack"
+    ],
+    "signatureCell": "Rhodes harmony over polished boogie pocket",
+    "tempoRange": [
+      95,
+      120
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Leon Ware",
+      "Patrice Rushen"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "soul-quiet-funk-boogie-soul"
+  },
+  "performance": {
+    "noteCount": 2970,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-soul-quiet-funk-boogie-soul-signature",
+      "tech-soul-melodic-bass",
+      "tech-soul-vocal-harmony-stack",
+      "tech-soul-rhodes-voicing",
+      "soul-motown-bass",
+      "soul-backbeat-tambourine",
+      "tech-soul-soul-backbeat",
+      "tech-soul-gospel-vocal-run",
+      "tango-piano-chumba",
+      "zouk-bridge-16",
+      "swing-charleston"
+    ]
+  }
+}

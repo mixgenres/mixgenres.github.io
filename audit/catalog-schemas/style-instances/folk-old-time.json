@@ -1,0 +1,450 @@
+{
+  "schemaVersion": 2,
+  "genre": "folk",
+  "styleId": "folk-old-time",
+  "styleName": "Old-Time",
+  "durationSec": 46.82926829268296,
+  "tempoBpm": 123,
+  "meter": "2/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A",
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "refrain-2",
+      "kind": "refrain",
+      "label": "Refrain",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "D",
+        "A",
+        "E",
+        "A",
+        "D",
+        "A",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "instrumental-3",
+      "kind": "instrumental",
+      "label": "Instrumental",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "D",
+        "E",
+        "A",
+        "A"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "D",
+        "E",
+        "A",
+        "A"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "banjo",
+      "role": "harmony",
+      "patternIds": [
+        "tech-folk-clawhammer-banjo",
+        "folk-strum-basic",
+        "tech-folk-banjo-roll",
+        "folk-fast-bluegrass"
+      ],
+      "noteCount": 596
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "fiddle",
+      "role": "lead",
+      "patternIds": [
+        "tech-folk-fiddle-double-stop",
+        "folk-fiddle-drone"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "folk-strum-basic",
+        "folk-fast-bluegrass",
+        "folk-driving-8ths"
+      ],
+      "noteCount": 516
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "folk-driving-8ths",
+        "folk-fast-bluegrass",
+        "folk-strum-basic"
+      ],
+      "noteCount": 231
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-batida-groove",
+        "flamenco-bulerias-palmas",
+        "cumbia-guiro",
+        "tech-folk-clawhammer-banjo",
+        "flamenco-cajon-rumba",
+        "tech-folk-banjo-roll"
+      ],
+      "noteCount": 235
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-folk-banjo-roll",
+        "tech-folk-fiddle-double-stop",
+        "tech-folk-drone",
+        "tech-folk-clawhammer-banjo"
+      ],
+      "noteCount": 62
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "mandolin",
+      "role": "lead",
+      "patternIds": [
+        "folk-fast-bluegrass",
+        "folk-strum-basic",
+        "folk-driving-8ths"
+      ],
+      "noteCount": 138
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "guitar",
+      "role": "harmony",
+      "patternIds": [
+        "folk-fast-bluegrass",
+        "folk-strum-basic",
+        "flamenco-bridge-17"
+      ],
+      "noteCount": 585
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-folk-clawhammer-banjo",
+      "name": "clawhammer banjo",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "clawhammer banjo"
+      ]
+    },
+    {
+      "id": "folk-strum-basic",
+      "name": "Basic Strum",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-folk-banjo-roll",
+      "name": "banjo roll",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "banjo roll"
+      ]
+    },
+    {
+      "id": "folk-fast-bluegrass",
+      "name": "Fast Bluegrass Drive",
+      "worldId": "folk",
+      "meter": "2/4",
+      "subdivisions": 4,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-folk-fiddle-double-stop",
+      "name": "fiddle double-stop",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "fiddle double-stop"
+      ]
+    },
+    {
+      "id": "folk-fiddle-drone",
+      "name": "Old-Time Fiddle Drone & Shuffle Bow",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "folk-driving-8ths",
+      "name": "Driving 8ths",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-batida-groove",
+      "name": "Batida & Sub-Kick Beat",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-bulerias-palmas",
+      "name": "Bulerias Palmas",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cumbia-guiro",
+      "name": "Cumbia Güiro",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-cajon-rumba",
+      "name": "Cajon Rumba",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-folk-drone",
+      "name": "drone",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": [
+        "drone"
+      ]
+    },
+    {
+      "id": "flamenco-bridge-17",
+      "name": "Rasgueado Bridge",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        8
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "banjo",
+      "fiddle",
+      "acoustic-guitar",
+      "upright-bass",
+      "hand-percussion"
+    ],
+    "techniques": [],
+    "signatureCell": "Clawhammer banjo bump-ditty rhythm locked in unison with droning mountain fiddle",
+    "tempoRange": [
+      110,
+      136
+    ],
+    "preferredMeters": [
+      "2/4"
+    ],
+    "microtimingFeel": "pushed",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "folk-old-time"
+  },
+  "performance": {
+    "noteCount": 2427,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-folk-clawhammer-banjo",
+      "folk-strum-basic",
+      "tech-folk-banjo-roll",
+      "folk-fast-bluegrass",
+      "tech-folk-fiddle-double-stop",
+      "folk-fiddle-drone",
+      "folk-driving-8ths",
+      "kizomba-batida-groove",
+      "flamenco-bulerias-palmas",
+      "cumbia-guiro",
+      "flamenco-cajon-rumba",
+      "tech-folk-drone",
+      "flamenco-bridge-17"
+    ]
+  }
+}

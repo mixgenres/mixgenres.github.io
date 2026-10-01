@@ -1,0 +1,342 @@
+{
+  "schemaVersion": 2,
+  "genre": "industrial",
+  "styleId": "industrial-industrial-metal",
+  "styleName": "Industrial Metal",
+  "durationSec": 88.88888888888894,
+  "tempoBpm": 108,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "distortion-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "style-industrial-industrial-metal-signature"
+      ],
+      "noteCount": 312
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "industrial--industrial-bass-lock"
+      ],
+      "noteCount": 230
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-industrial-mechanical-ostinato",
+        "industrial--industrial-four-kick",
+        "industrial--industrial-metal-percussion",
+        "tech-industrial-machine-kick"
+      ],
+      "noteCount": 175
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "noise-sweep",
+      "role": "effect",
+      "patternIds": [
+        "tech-industrial-industrial-noise-layer"
+      ],
+      "noteCount": 60
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "industrial--industrial-metal-percussion",
+        "industrial--industrial-four-kick"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-industrial-industrial-noise-layer",
+        "style-industrial-industrial-metal-signature",
+        "industrial--industrial-metal-percussion",
+        "industrial--industrial-bass-lock"
+      ],
+      "noteCount": 148
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "industrial--industrial-four-kick",
+        "tech-industrial-industrial-noise-layer"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "acid-303",
+      "role": "lead",
+      "patternIds": [
+        "tech-industrial-industrial-noise-layer"
+      ],
+      "noteCount": 64
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-industrial-industrial-metal-signature",
+      "name": "Metal",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "mechanical ostinato",
+        "synchronized guitar/kick",
+        "industrial noise layer",
+        "machine kick"
+      ]
+    },
+    {
+      "id": "industrial--industrial-bass-lock",
+      "name": "Bass Lock",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-industrial-mechanical-ostinato",
+      "name": "mechanical ostinato",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "mechanical ostinato"
+      ]
+    },
+    {
+      "id": "industrial--industrial-four-kick",
+      "name": "Four Kick",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "industrial--industrial-metal-percussion",
+      "name": "Metal Percussion",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        7,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-industrial-machine-kick",
+      "name": "machine kick",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "machine kick"
+      ]
+    },
+    {
+      "id": "tech-industrial-industrial-noise-layer",
+      "name": "noise layer",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "industrial noise layer"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "distortion-guitar",
+      "bass",
+      "drums",
+      "noise-sweep"
+    ],
+    "techniques": [
+      "mechanical ostinato",
+      "synchronized guitar/kick",
+      "industrial noise layer",
+      "machine kick"
+    ],
+    "signatureCell": "Mechanical guitar riff locked to kick",
+    "tempoRange": [
+      80,
+      135
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Godflesh",
+      "Fear Factory"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "industrial-industrial-metal"
+  },
+  "performance": {
+    "noteCount": 1117,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-industrial-industrial-metal-signature",
+      "industrial--industrial-bass-lock",
+      "tech-industrial-mechanical-ostinato",
+      "industrial--industrial-four-kick",
+      "industrial--industrial-metal-percussion",
+      "tech-industrial-machine-kick",
+      "tech-industrial-industrial-noise-layer"
+    ]
+  }
+}

@@ -1,0 +1,382 @@
+{
+  "schemaVersion": 2,
+  "genre": "metal",
+  "styleId": "metal-death-metal",
+  "styleName": "Death Metal",
+  "durationSec": 58.046511627907,
+  "tempoBpm": 215,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "B5",
+        "C5",
+        "B5",
+        "F5"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "riff-1",
+      "kind": "riff",
+      "label": "Riff",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "B5",
+        "B5",
+        "C5",
+        "B5"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "verse-2",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "B5",
+        "B5",
+        "C5",
+        "B5"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "chorus-3",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "B5",
+        "B5",
+        "C5",
+        "B5"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "breakdown-4",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "B5",
+        "B5",
+        "C5",
+        "B5"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "solo-5",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "B5",
+        "B5",
+        "C5",
+        "B5"
+      ]
+    },
+    {
+      "id": "r6",
+      "key": "coda-6",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "B5",
+        "C5",
+        "B5",
+        "B5"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "metal-gallop-riff",
+        "metal-groove-metal"
+      ],
+      "noteCount": 1252
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "metal-breakdown"
+      ],
+      "noteCount": 342
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-metal-breakdown",
+        "metal-blast-beat",
+        "tech-metal-blast-beat"
+      ],
+      "noteCount": 551
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "overdrive-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "metal-groove-metal",
+        "metal-gallop-riff"
+      ],
+      "noteCount": 394
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "patternIds": [
+        "tech-metal-breakdown"
+      ],
+      "noteCount": 293
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-metal-tremolo-drone-layer"
+      ],
+      "noteCount": 74
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "strings",
+      "role": "harmony",
+      "patternIds": [
+        "tech-metal-chromatic-low-string-riff"
+      ],
+      "noteCount": 144
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "guitar-harmonics",
+      "role": "lead",
+      "patternIds": [
+        "metal-groove-metal",
+        "metal-breakdown",
+        "metal-gallop-riff"
+      ],
+      "noteCount": 227
+    }
+  ],
+  "patterns": [
+    {
+      "id": "metal-gallop-riff",
+      "name": "The Gallop Rhythm",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        12,
+        13,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "metal-groove-metal",
+      "name": "Groove Metal Riff",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        5,
+        6,
+        8,
+        9,
+        11
+      ],
+      "techniques": []
+    },
+    {
+      "id": "metal-breakdown",
+      "name": "Breakdown Chug",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-metal-breakdown",
+      "name": "breakdown",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "breakdown"
+      ]
+    },
+    {
+      "id": "metal-blast-beat",
+      "name": "Blast Beat",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-metal-blast-beat",
+      "name": "blast beat",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "blast beat"
+      ]
+    },
+    {
+      "id": "tech-metal-tremolo-drone-layer",
+      "name": "tremolo/drone layer",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": [
+        "tremolo/drone layer"
+      ]
+    },
+    {
+      "id": "tech-metal-chromatic-low-string-riff",
+      "name": "chromatic low-string riff",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "chromatic low-string riff"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "overdrive-guitar",
+      "hand-percussion"
+    ],
+    "techniques": [],
+    "signatureCell": "Relentless snare blast beat with down-tuned chromatic tremolo guitar riff and guttural growl",
+    "tempoRange": [
+      180,
+      250
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "pushed",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "metal-death-metal"
+  },
+  "performance": {
+    "noteCount": 3277,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "metal-gallop-riff",
+      "metal-groove-metal",
+      "metal-breakdown",
+      "tech-metal-breakdown",
+      "metal-blast-beat",
+      "tech-metal-blast-beat",
+      "tech-metal-tremolo-drone-layer",
+      "tech-metal-chromatic-low-string-riff"
+    ]
+  }
+}

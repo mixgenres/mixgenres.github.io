@@ -1,0 +1,371 @@
+{
+  "schemaVersion": 2,
+  "genre": "industrial",
+  "styleId": "industrial-power-electronics",
+  "styleName": "Power Electronics",
+  "durationSec": 101.05263157894738,
+  "tempoBpm": 95,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "noise-sweep",
+      "role": "effect",
+      "patternIds": [
+        "tech-industrial-gated-noise",
+        "tech-industrial-frequency-density-build"
+      ],
+      "noteCount": 58
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "tech-industrial-feedback-swell",
+        "tech-industrial-industrial-noise-layer",
+        "tech-industrial-frequency-density-build",
+        "style-industrial-power-electronics-signature"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-industrial-power-electronics-signature",
+        "industrial--industrial-four-native",
+        "industrial--industrial-ebm-pulse-native"
+      ],
+      "noteCount": 190
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "industrial--industrial-four-native",
+        "industrial--industrial-ebm-pulse-native",
+        "industrial--industrial-four-kick"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "distortion-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "industrial--industrial-ebm-pulse-native",
+        "industrial--industrial-four-native",
+        "industrial--industrial-four-kick"
+      ],
+      "noteCount": 310
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-industrial-industrial-noise-layer",
+        "tech-industrial-gated-noise",
+        "tech-industrial-feedback-swell"
+      ],
+      "noteCount": 154
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-industrial-frequency-density-build",
+        "tech-industrial-industrial-noise-layer",
+        "tech-industrial-gated-noise",
+        "tech-industrial-feedback-swell"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "acid-303",
+      "role": "lead",
+      "patternIds": [
+        "tech-industrial-gated-noise",
+        "tech-industrial-industrial-noise-layer",
+        "industrial--industrial-four-native",
+        "tech-industrial-frequency-density-build"
+      ],
+      "noteCount": 64
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-industrial-gated-noise",
+      "name": "gated noise",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "gated noise"
+      ]
+    },
+    {
+      "id": "tech-industrial-frequency-density-build",
+      "name": "frequency-density build",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "frequency-density build"
+      ]
+    },
+    {
+      "id": "tech-industrial-feedback-swell",
+      "name": "feedback swell",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "feedback swell"
+      ]
+    },
+    {
+      "id": "tech-industrial-industrial-noise-layer",
+      "name": "noise layer",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "industrial noise layer"
+      ]
+    },
+    {
+      "id": "style-industrial-power-electronics-signature",
+      "name": "Power Electronics",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "feedback swell",
+        "frequency-density build",
+        "industrial noise layer",
+        "gated noise"
+      ]
+    },
+    {
+      "id": "industrial--industrial-four-native",
+      "name": "Four Pulse",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "industrial--industrial-ebm-pulse-native",
+      "name": "EBM 16th Pulse",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "industrial--industrial-four-kick",
+      "name": "Four Kick",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        15
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "noise-sweep",
+      "sampler",
+      "drums",
+      "voice"
+    ],
+    "techniques": [
+      "feedback swell",
+      "frequency-density build",
+      "industrial noise layer",
+      "gated noise"
+    ],
+    "signatureCell": "Noise texture with non-grid density",
+    "tempoRange": [
+      50,
+      140
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Whitehouse",
+      "Merzbow"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "industrial-power-electronics"
+  },
+  "performance": {
+    "noteCount": 968,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-industrial-gated-noise",
+      "tech-industrial-frequency-density-build",
+      "tech-industrial-feedback-swell",
+      "tech-industrial-industrial-noise-layer",
+      "style-industrial-power-electronics-signature",
+      "industrial--industrial-four-native",
+      "industrial--industrial-ebm-pulse-native",
+      "industrial--industrial-four-kick"
+    ]
+  }
+}

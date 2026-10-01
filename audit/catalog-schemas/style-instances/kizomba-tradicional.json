@@ -1,0 +1,409 @@
+{
+  "schemaVersion": 2,
+  "genre": "kizomba",
+  "styleId": "kizomba-tradicional",
+  "styleName": "Tradicional",
+  "durationSec": 146.08695652173895,
+  "tempoBpm": 92,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Gm",
+        "C",
+        "F",
+        "Dm"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "verse-3",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "instrumental-4",
+      "kind": "instrumental",
+      "label": "Instrumental",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "chorus-5",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Gm",
+        "C",
+        "F",
+        "Dm"
+      ]
+    },
+    {
+      "id": "r6",
+      "key": "coda-6",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Gm",
+        "A7",
+        "Dm",
+        "Dm"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "kizomba-tarraxinha-sub"
+      ],
+      "noteCount": 168
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-batida-groove",
+        "kizomba-kick-batida"
+      ],
+      "noteCount": 253
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-kizomba-long-r-b-chord-voicing",
+        "tango-marcato-4",
+        "kizomba-chorus-15",
+        "kizomba-semba-guitar",
+        "kizomba-bridge-16",
+        "afrobeats-cadence-16"
+      ],
+      "noteCount": 1014
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "kizomba-vocal-comping"
+      ],
+      "noteCount": 83
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "dikanza",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-batida-groove"
+      ],
+      "noteCount": 264
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-kizomba-vocal-space-arrangement"
+      ],
+      "noteCount": 88
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "kizomba-vocal-comping",
+        "kizomba-tarraxinha-sub"
+      ],
+      "noteCount": 133
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "rhodes",
+      "role": "harmony",
+      "patternIds": [
+        "tech-kizomba-long-r-b-chord-voicing"
+      ],
+      "noteCount": 664
+    }
+  ],
+  "patterns": [
+    {
+      "id": "kizomba-tarraxinha-sub",
+      "name": "Tarraxinha Sub-Bass",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-batida-groove",
+      "name": "Batida & Sub-Kick Beat",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-kick-batida",
+      "name": "Kick Batida",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-kizomba-long-r-b-chord-voicing",
+      "name": "long R&B chord voicing",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "long R&B chord voicing"
+      ]
+    },
+    {
+      "id": "tango-marcato-4",
+      "name": "Marcato en 4",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-chorus-15",
+      "name": "Bass Chorus Lift",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        9,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-semba-guitar",
+      "name": "Semba Guitar Arpeggio",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-bridge-16",
+      "name": "Semba Bridge",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        10,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afrobeats-cadence-16",
+      "name": "Log Drum Cadence",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-vocal-comping",
+      "name": "Vocal Phrase Response",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        7,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-kizomba-vocal-space-arrangement",
+      "name": "vocal-space arrangement",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal-space arrangement"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "bass",
+      "drums",
+      "acoustic-guitar",
+      "synth",
+      "dikanza"
+    ],
+    "techniques": [],
+    "signatureCell": "grounded kick pattern with melodic bass and soft guitar/synth",
+    "tempoRange": [
+      86,
+      98
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 55,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "kizomba-tradicional"
+  },
+  "performance": {
+    "noteCount": 2667,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "kizomba-tarraxinha-sub",
+      "kizomba-batida-groove",
+      "kizomba-kick-batida",
+      "tech-kizomba-long-r-b-chord-voicing",
+      "tango-marcato-4",
+      "kizomba-chorus-15",
+      "kizomba-semba-guitar",
+      "kizomba-bridge-16",
+      "afrobeats-cadence-16",
+      "kizomba-vocal-comping",
+      "tech-kizomba-vocal-space-arrangement"
+    ]
+  }
+}

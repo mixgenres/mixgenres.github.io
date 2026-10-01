@@ -1,0 +1,361 @@
+{
+  "schemaVersion": 2,
+  "genre": "electronic",
+  "styleId": "electronic-breakbeat-hardcore",
+  "styleName": "Breakbeat Hardcore",
+  "durationSec": 108,
+  "tempoBpm": 160,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Groove",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Main Groove",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "bridge-4",
+      "kind": "bridge",
+      "label": "Return",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "elec-dnb-amen",
+        "style-electronic-breakbeat-hardcore-signature"
+      ],
+      "noteCount": 445
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-electronic-rave-stab",
+        "style-electronic-breakbeat-hardcore-signature"
+      ],
+      "noteCount": 92
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "elec-breakbeat-response",
+        "style-electronic-breakbeat-hardcore-signature",
+        "tech-electronic-rave-stab",
+        "elec-trance-16ths"
+      ],
+      "noteCount": 104
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "bass-lead",
+      "role": "bass",
+      "patternIds": [
+        "tech-electronic-filter-envelope-bass"
+      ],
+      "noteCount": 277
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "elec-sidechain-space",
+        "elec-breakbeat-response"
+      ],
+      "noteCount": 96
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "style-electronic-breakbeat-hardcore-signature",
+        "elec-sidechain-space",
+        "elec-trance-16ths",
+        "tech-electronic-rave-stab"
+      ],
+      "noteCount": 220
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "saw-lead",
+      "role": "lead",
+      "patternIds": [
+        "tech-electronic-rave-stab",
+        "elec-trance-16ths",
+        "elec-breakbeat-response"
+      ],
+      "noteCount": 272
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "polysynth",
+      "role": "harmony",
+      "patternIds": [
+        "style-electronic-breakbeat-hardcore-signature",
+        "tech-electronic-rave-stab",
+        "elec-sidechain-space"
+      ],
+      "noteCount": 502
+    }
+  ],
+  "patterns": [
+    {
+      "id": "elec-dnb-amen",
+      "name": "DnB Break",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        7,
+        9,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-electronic-breakbeat-hardcore-signature",
+      "name": "Breakbeat Hardcore",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "breakbeat chopping",
+        "rave stab",
+        "filter-envelope bass"
+      ]
+    },
+    {
+      "id": "tech-electronic-rave-stab",
+      "name": "rave stab",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "rave stab"
+      ]
+    },
+    {
+      "id": "elec-breakbeat-response",
+      "name": "Breakbeat Response",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        5,
+        7,
+        8,
+        11,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "elec-trance-16ths",
+      "name": "Trance Bass 16ths",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-electronic-filter-envelope-bass",
+      "name": "filter-envelope bass",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "filter-envelope bass"
+      ]
+    },
+    {
+      "id": "elec-sidechain-space",
+      "name": "Sidechain Space",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "synth",
+      "sampler",
+      "bass-lead",
+      "voice"
+    ],
+    "techniques": [
+      "breakbeat chopping",
+      "rave stab",
+      "filter-envelope bass"
+    ],
+    "signatureCell": "Rave stab over chopped breakbeat",
+    "tempoRange": [
+      145,
+      175
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "The Prodigy",
+      "4hero",
+      "Acen"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "electronic-breakbeat-hardcore"
+  },
+  "performance": {
+    "noteCount": 2008,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "elec-dnb-amen",
+      "style-electronic-breakbeat-hardcore-signature",
+      "tech-electronic-rave-stab",
+      "elec-breakbeat-response",
+      "elec-trance-16ths",
+      "tech-electronic-filter-envelope-bass",
+      "elec-sidechain-space"
+    ]
+  }
+}

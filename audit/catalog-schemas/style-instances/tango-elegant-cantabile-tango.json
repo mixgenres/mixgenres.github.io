@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 2,
+  "genre": "tango",
+  "styleId": "tango-elegant-cantabile-tango",
+  "styleName": "Elegant Cantabile Tango",
+  "durationSec": 93.20388349514569,
+  "tempoBpm": 103,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "A",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "B",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "solo-3",
+      "kind": "solo",
+      "label": "Variación",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "coda-4",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "bandoneon",
+      "role": "harmony",
+      "patternIds": [
+        "tech-tango-marcato-en-2",
+        "tech-tango-bandoneon-string-counterpoint",
+        "tech-tango-chromatic-tango-bass",
+        "tech-tango-marcato-en-4"
+      ],
+      "noteCount": 392
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "violin",
+      "role": "melody",
+      "patternIds": [
+        "tango-violin-melody"
+      ],
+      "noteCount": 60
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "style-tango-elegant-cantabile-tango-signature"
+      ],
+      "noteCount": 372
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "tango-yumba"
+      ],
+      "noteCount": 110
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "cello",
+      "role": "lead",
+      "patternIds": [
+        "tango-yumba",
+        "tango-violin-melody"
+      ],
+      "noteCount": 94
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "flute",
+      "role": "melody",
+      "patternIds": [
+        "tech-tango-chromatic-tango-bass",
+        "tango-yumba",
+        "tech-tango-tango-vals-bass"
+      ],
+      "noteCount": 95
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "clarinet",
+      "role": "lead",
+      "patternIds": [
+        "tech-tango-bandoneon-string-counterpoint",
+        "tech-tango-chromatic-tango-bass",
+        "tech-tango-marcato-en-4"
+      ],
+      "noteCount": 98
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tango-marcato-2",
+        "tango-332-piazzolla",
+        "tango-marcato-4"
+      ],
+      "noteCount": 370
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-tango-marcato-en-2",
+      "name": "marcato en 2",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "marcato en 2"
+      ]
+    },
+    {
+      "id": "tech-tango-bandoneon-string-counterpoint",
+      "name": "bandoneon/string counterpoint",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "bandoneon/string counterpoint"
+      ]
+    },
+    {
+      "id": "tech-tango-chromatic-tango-bass",
+      "name": "chromatic tango bass",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "chromatic tango bass"
+      ]
+    },
+    {
+      "id": "tech-tango-marcato-en-4",
+      "name": "marcato en 4",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "marcato en 4"
+      ]
+    },
+    {
+      "id": "tango-violin-melody",
+      "name": "Violin Legato",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        4
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-tango-elegant-cantabile-tango-signature",
+      "name": "Elegant Cantabile Tango",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "bandoneon/string counterpoint",
+        "chromatic tango bass",
+        "marcato en 2",
+        "marcato en 4",
+        "tango vals bass"
+      ]
+    },
+    {
+      "id": "tango-yumba",
+      "name": "Yumba/Heavy Tango Accent",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-tango-tango-vals-bass",
+      "name": "vals bass",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "tango vals bass"
+      ]
+    },
+    {
+      "id": "tango-marcato-2",
+      "name": "Marcato en 2",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-332-piazzolla",
+      "name": "3+3+2 Nuevo Tango Pulse",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-marcato-4",
+      "name": "Marcato en 4",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "bandoneon",
+      "violin",
+      "piano",
+      "upright-bass",
+      "cello"
+    ],
+    "techniques": [
+      "bandoneon/string counterpoint",
+      "chromatic tango bass",
+      "marcato en 2",
+      "marcato en 4",
+      "tango vals bass"
+    ],
+    "signatureCell": "Lyrical strings over elegant marcato",
+    "tempoRange": [
+      85,
+      120
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "rubato",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Carlos Di Sarli"
+    ],
+    "tracks": [
+      "Bahía Blanca"
+    ]
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "tango-elegant-cantabile-tango"
+  },
+  "performance": {
+    "noteCount": 1591,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-tango-marcato-en-2",
+      "tech-tango-bandoneon-string-counterpoint",
+      "tech-tango-chromatic-tango-bass",
+      "tech-tango-marcato-en-4",
+      "tango-violin-melody",
+      "style-tango-elegant-cantabile-tango-signature",
+      "tango-yumba",
+      "tech-tango-tango-vals-bass",
+      "tango-marcato-2",
+      "tango-332-piazzolla",
+      "tango-marcato-4"
+    ]
+  }
+}

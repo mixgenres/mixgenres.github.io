@@ -1,0 +1,464 @@
+{
+  "schemaVersion": 2,
+  "genre": "kizomba",
+  "styleId": "kizomba-tarraxo",
+  "styleName": "Tarraxo",
+  "durationSec": 167.44186046511624,
+  "tempoBpm": 86,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Cm",
+        "G#",
+        "Fm",
+        "G7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "groove-1",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "Cm",
+        "G#",
+        "Fm",
+        "G7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "verse-2",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Cm",
+        "G#",
+        "Fm",
+        "G7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "refrain-3",
+      "kind": "refrain",
+      "label": "Refrain",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Cm",
+        "G#",
+        "Fm",
+        "G7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Cm",
+        "G#",
+        "Fm",
+        "G7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "refrain-5",
+      "kind": "refrain",
+      "label": "Refrain",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Cm",
+        "G#",
+        "Fm",
+        "G7"
+      ]
+    },
+    {
+      "id": "r6",
+      "key": "break-6",
+      "kind": "break",
+      "label": "Break",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Cm",
+        "G#",
+        "Fm",
+        "G7"
+      ]
+    },
+    {
+      "id": "r7",
+      "key": "outro-7",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Cm",
+        "G#",
+        "Fm",
+        "G7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-kizomba-kizomba-bass-ostinato",
+        "kizomba-tarraxinha-sub"
+      ],
+      "noteCount": 132
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-chorus-15",
+        "kizomba-hats",
+        "kizomba-batida-groove",
+        "kizomba-kick-batida"
+      ],
+      "noteCount": 357
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "kizomba-tarraxinha-sub",
+        "kizomba-vocal-comping"
+      ],
+      "noteCount": 54
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "kizomba-tarraxinha-sub",
+        "kizomba-vocal-comping"
+      ],
+      "noteCount": 52
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "kizomba-tarraxinha-sub",
+        "kizomba-chorus-15"
+      ],
+      "noteCount": 87
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-kizomba-tarraxo-stop",
+        "kizomba-chorus-15",
+        "tech-kizomba-kizomba-bass-ostinato",
+        "tech-kizomba-delayed-kick"
+      ],
+      "noteCount": 60
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "dikanza",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-batida-groove",
+        "kizomba-chorus-15"
+      ],
+      "noteCount": 289
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "rhodes",
+      "role": "harmony",
+      "patternIds": [
+        "tango-arrastre",
+        "tech-kizomba-tarraxo-stop",
+        "kizomba-chorus-15",
+        "jazz-piano-red-garland",
+        "tango-piano-chumba",
+        "kizomba-bridge-16",
+        "tech-kizomba-kizomba-bass-ostinato"
+      ],
+      "noteCount": 635
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-kizomba-kizomba-bass-ostinato",
+      "name": "bass ostinato",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "kizomba bass ostinato"
+      ]
+    },
+    {
+      "id": "kizomba-tarraxinha-sub",
+      "name": "Tarraxinha Sub-Bass",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-chorus-15",
+      "name": "Bass Chorus Lift",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        9,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-hats",
+      "name": "Hi-Hats",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-batida-groove",
+      "name": "Batida & Sub-Kick Beat",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-kick-batida",
+      "name": "Kick Batida",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-vocal-comping",
+      "name": "Vocal Phrase Response",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        7,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-kizomba-tarraxo-stop",
+      "name": "tarraxo stop",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "tarraxo stop"
+      ]
+    },
+    {
+      "id": "tech-kizomba-delayed-kick",
+      "name": "delayed kick",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "delayed kick"
+      ]
+    },
+    {
+      "id": "tango-arrastre",
+      "name": "Arrastre",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        13,
+        14,
+        15,
+        0
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-red-garland",
+      "name": "Block Chords",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        3,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-piano-chumba",
+      "name": "Piano Chumba",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        4,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-bridge-16",
+      "name": "Semba Bridge",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        10,
+        11,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "sub-bass",
+      "drums",
+      "synth",
+      "sampler",
+      "warm-pad"
+    ],
+    "techniques": [],
+    "signatureCell": "Aggressive electronic sub-kick and trap snare supporting dynamic chest-roll isolation",
+    "tempoRange": [
+      80,
+      92
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "kizomba-tarraxo"
+  },
+  "performance": {
+    "noteCount": 1666,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-kizomba-kizomba-bass-ostinato",
+      "kizomba-tarraxinha-sub",
+      "kizomba-chorus-15",
+      "kizomba-hats",
+      "kizomba-batida-groove",
+      "kizomba-kick-batida",
+      "kizomba-vocal-comping",
+      "tech-kizomba-tarraxo-stop",
+      "tech-kizomba-delayed-kick",
+      "tango-arrastre",
+      "jazz-piano-red-garland",
+      "tango-piano-chumba",
+      "kizomba-bridge-16"
+    ]
+  }
+}

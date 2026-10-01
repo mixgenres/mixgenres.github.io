@@ -11,7 +11,7 @@ export const guacharaca: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 17,
-  makeupGain: 23.683,
+  makeupGain: 0.400,
   polyphony: 8,
   note: "Cane or tin scraper rubbed with wire fork; provides the driving metallic scraping rhythm in vallenato and cumbia",
   acousticProfile: {

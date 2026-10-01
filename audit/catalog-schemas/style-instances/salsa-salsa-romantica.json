@@ -1,0 +1,394 @@
+{
+  "schemaVersion": 2,
+  "genre": "salsa",
+  "styleId": "salsa-salsa-romantica",
+  "styleName": "Salsa Romántica",
+  "durationSec": 100,
+  "tempoBpm": 96,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "Dm",
+        "G",
+        "C"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verso-tema-1",
+      "kind": "verso/tema",
+      "label": "Verso/Tema",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "Dm",
+        "G",
+        "C",
+        "F",
+        "Dm",
+        "E7",
+        "Am"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "montuno-2",
+      "kind": "montuno",
+      "label": "Montuno",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "Dm",
+        "G",
+        "C",
+        "F",
+        "Dm",
+        "E7",
+        "Am"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "mambo-3",
+      "kind": "mambo",
+      "label": "Mambo",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "Dm",
+        "G",
+        "C",
+        "F",
+        "Dm",
+        "E7",
+        "Am"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "montuno-4",
+      "kind": "montuno",
+      "label": "Montuno",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "Dm",
+        "G",
+        "C",
+        "F",
+        "Dm",
+        "E7",
+        "Am"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "cierre-5",
+      "kind": "cierre",
+      "label": "Cierre",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "Dm",
+        "G",
+        "C",
+        "F",
+        "Dm",
+        "E7",
+        "Am"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "tech-salsa-mambo-horn-section"
+      ],
+      "noteCount": 169
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-bass-tumbao"
+      ],
+      "noteCount": 209
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-salsa-bongo-martillo",
+        "tech-salsa-tumbao",
+        "house--ht-10-detroit-sequence"
+      ],
+      "noteCount": 48
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "patternIds": [
+        "afro-conga-tumbao",
+        "salsa-campana"
+      ],
+      "noteCount": 308
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "timbales",
+      "role": "percussion",
+      "patternIds": [
+        "salsa-campana",
+        "afro-conga-tumbao"
+      ],
+      "noteCount": 306
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-salsa-2-3-clave",
+        "tech-salsa-coro-pregon",
+        "tech-salsa-tumbao"
+      ],
+      "noteCount": 48
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "bongos",
+      "role": "percussion",
+      "patternIds": [
+        "afro-conga-tumbao",
+        "salsa-campana"
+      ],
+      "noteCount": 292
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "claves",
+      "role": "percussion",
+      "patternIds": [
+        "afro-conga-tumbao",
+        "salsa-campana"
+      ],
+      "noteCount": 284
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-salsa-mambo-horn-section",
+      "name": "mambo horn section",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "mambo horn section"
+      ]
+    },
+    {
+      "id": "afro-bass-tumbao",
+      "name": "Bass Tumbao",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-salsa-bongo-martillo",
+      "name": "bongó martillo",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "bongó martillo"
+      ]
+    },
+    {
+      "id": "tech-salsa-tumbao",
+      "name": "tumbao",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "tumbao"
+      ]
+    },
+    {
+      "id": "house--ht-10-detroit-sequence",
+      "name": "Detroit Sequence",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        16,
+        19,
+        22,
+        25,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-conga-tumbao",
+      "name": "Conga Marcha",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "salsa-campana",
+      "name": "Campana",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-salsa-2-3-clave",
+      "name": "2-3 clave",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "2-3 clave"
+      ]
+    },
+    {
+      "id": "tech-salsa-coro-pregon",
+      "name": "coro/pregón",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "coro/pregón"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "brass",
+      "piano",
+      "synth",
+      "congas",
+      "timbales"
+    ],
+    "techniques": [],
+    "signatureCell": "Smooth crooner vocal melody over synthesizer string pad and warm congas",
+    "tempoRange": [
+      88,
+      104
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "salsa-salsa-romantica"
+  },
+  "performance": {
+    "noteCount": 1664,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-salsa-mambo-horn-section",
+      "afro-bass-tumbao",
+      "tech-salsa-bongo-martillo",
+      "tech-salsa-tumbao",
+      "house--ht-10-detroit-sequence",
+      "afro-conga-tumbao",
+      "salsa-campana",
+      "tech-salsa-2-3-clave",
+      "tech-salsa-coro-pregon"
+    ]
+  }
+}

@@ -1,0 +1,411 @@
+{
+  "schemaVersion": 2,
+  "genre": "country",
+  "styleId": "country-nashville-sound",
+  "styleName": "Nashville Sound",
+  "durationSec": 137.1428571428572,
+  "tempoBpm": 84,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "Am",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "Am",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "F",
+        "G7",
+        "C",
+        "Am"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "instrumental-3",
+      "kind": "instrumental",
+      "label": "Instrumental",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "Am",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "Am",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "Am",
+        "Dm7",
+        "G7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "strings",
+      "role": "harmony",
+      "patternIds": [
+        "style-country-nashville-country-pop-signature"
+      ],
+      "noteCount": 228
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-country-nashville-number-style-progression"
+      ],
+      "noteCount": 712
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "steel-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "country-chicken"
+      ],
+      "noteCount": 1019
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-country-carter-style-alternating-bass",
+        "country-outlaw"
+      ],
+      "noteCount": 321
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "country-nashville"
+      ],
+      "noteCount": 218
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "country-banjo-roll",
+        "tech-country-carter-style-alternating-bass",
+        "tech-country-country-shuffle"
+      ],
+      "noteCount": 72
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "mandolin",
+      "role": "lead",
+      "patternIds": [
+        "flam-solea-12beat",
+        "tech-country-carter-style-alternating-bass",
+        "country-pedal-steel-swell",
+        "flamenco-bridge-17",
+        "tech-country-country-shuffle",
+        "country-banjo-roll"
+      ],
+      "noteCount": 191
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "brush-kit",
+      "role": "percussion",
+      "patternIds": [
+        "tech-country-country-shuffle",
+        "country-nashville"
+      ],
+      "noteCount": 233
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-country-nashville-country-pop-signature",
+      "name": "Nashville Country-Pop",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "pedal-steel fills",
+        "vocal harmony thirds/sixths",
+        "Nashville number-style progression",
+        "country shuffle"
+      ]
+    },
+    {
+      "id": "tech-country-nashville-number-style-progression",
+      "name": "Nashville number-style progression",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Nashville number-style progression"
+      ]
+    },
+    {
+      "id": "country-chicken",
+      "name": "Chicken Pickin",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        11,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-country-carter-style-alternating-bass",
+      "name": "Carter-style alternating bass",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "Carter-style alternating bass"
+      ]
+    },
+    {
+      "id": "country-outlaw",
+      "name": "Outlaw 8ths",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-nashville",
+      "name": "Nashville Smooth",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-banjo-roll",
+      "name": "Banjo Roll",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-country-country-shuffle",
+      "name": "shuffle",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "country shuffle"
+      ]
+    },
+    {
+      "id": "flam-solea-12beat",
+      "name": "Soleá 12-Beat Compás Framework",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        2,
+        5,
+        7,
+        9,
+        11
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-pedal-steel-swell",
+      "name": "Pedal Steel Volume Swell",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-bridge-17",
+      "name": "Rasgueado Bridge",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        8
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "strings",
+      "piano",
+      "steel-guitar",
+      "upright-bass",
+      "drums"
+    ],
+    "techniques": [],
+    "signatureCell": "Floyd Cramer slip-note piano melody enveloped in lush string orchestra swells",
+    "tempoRange": [
+      72,
+      95
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 54,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "country-nashville-sound"
+  },
+  "performance": {
+    "noteCount": 2994,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-country-nashville-country-pop-signature",
+      "tech-country-nashville-number-style-progression",
+      "country-chicken",
+      "tech-country-carter-style-alternating-bass",
+      "country-outlaw",
+      "country-nashville",
+      "country-banjo-roll",
+      "tech-country-country-shuffle",
+      "flam-solea-12beat",
+      "country-pedal-steel-swell",
+      "flamenco-bridge-17"
+    ]
+  }
+}

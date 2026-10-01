@@ -1,0 +1,359 @@
+{
+  "schemaVersion": 2,
+  "genre": "country",
+  "styleId": "country-americana",
+  "styleName": "Americana",
+  "durationSec": 122.55319148936184,
+  "tempoBpm": 94,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "F",
+        "C",
+        "G",
+        "Am"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "instrumental-3",
+      "kind": "instrumental",
+      "label": "Instrumental",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "country-pedal-steel-swell"
+      ],
+      "noteCount": 309
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "fiddle",
+      "role": "lead",
+      "patternIds": [
+        "country-fiddle-answer"
+      ],
+      "noteCount": 72
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "banjo",
+      "role": "harmony",
+      "patternIds": [
+        "country-banjo-roll"
+      ],
+      "noteCount": 1224
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "country-ballad"
+      ],
+      "noteCount": 148
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "country-trap-hats",
+        "country-nashville"
+      ],
+      "noteCount": 289
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-country-vocal-harmony-thirds-sixths",
+        "country-steel-answer"
+      ],
+      "noteCount": 72
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-country-vocal-harmony-thirds-sixths"
+      ],
+      "noteCount": 594
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "mandolin",
+      "role": "lead",
+      "patternIds": [
+        "country-pedal-steel-swell",
+        "flamenco-bridge-17"
+      ],
+      "noteCount": 110
+    }
+  ],
+  "patterns": [
+    {
+      "id": "country-pedal-steel-swell",
+      "name": "Pedal Steel Volume Swell",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-fiddle-answer",
+      "name": "Fiddle Answer",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        7,
+        8,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-banjo-roll",
+      "name": "Banjo Roll",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-ballad",
+      "name": "Slow Ballad 6/8",
+      "worldId": "country",
+      "meter": "6/8",
+      "subdivisions": 6,
+      "onsetGrid": [
+        0,
+        3
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-trap-hats",
+      "name": "Hick-Hop Trap Hi-Hats",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        10,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-nashville",
+      "name": "Nashville Smooth",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-country-vocal-harmony-thirds-sixths",
+      "name": "vocal harmony thirds/sixths",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal harmony thirds/sixths"
+      ]
+    },
+    {
+      "id": "country-steel-answer",
+      "name": "Steel Answer",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-bridge-17",
+      "name": "Rasgueado Bridge",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        8
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "acoustic-guitar",
+      "fiddle",
+      "banjo",
+      "bass",
+      "drums"
+    ],
+    "techniques": [],
+    "signatureCell": "Warm fingerpicked acoustic guitar paired with plaintive close-harmony vocals",
+    "tempoRange": [
+      80,
+      108
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "country-americana"
+  },
+  "performance": {
+    "noteCount": 2818,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "country-pedal-steel-swell",
+      "country-fiddle-answer",
+      "country-banjo-roll",
+      "country-ballad",
+      "country-trap-hats",
+      "country-nashville",
+      "tech-country-vocal-harmony-thirds-sixths",
+      "country-steel-answer",
+      "flamenco-bridge-17"
+    ]
+  }
+}

@@ -1,0 +1,461 @@
+{
+  "schemaVersion": 2,
+  "genre": "rock",
+  "styleId": "rock-british-invasion",
+  "styleName": "British Invasion",
+  "durationSec": 71.1111111111111,
+  "tempoBpm": 135,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-rock-guitar-octave",
+        "rock-lead-bend",
+        "rock-acoustic-strum",
+        "style-rock-british-invasion-signature"
+      ],
+      "noteCount": 280
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "rock-riff-lock",
+        "rock-acoustic-strum",
+        "style-rock-british-invasion-signature"
+      ],
+      "noteCount": 238
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-rock-british-invasion-signature",
+        "rock-riff-lock",
+        "rock-straight-drive"
+      ],
+      "noteCount": 263
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-rock-dual-guitar-harmony",
+        "style-rock-british-invasion-signature"
+      ],
+      "noteCount": 326
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-rock-motorik-beat",
+        "tech-rock-dual-guitar-harmony",
+        "tech-rock-guitar-octave"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "overdrive-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "rock-lead-bend",
+        "tech-rock-guitar-octave",
+        "rock-acoustic-strum"
+      ],
+      "noteCount": 234
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "hip-hop-sampled-keys",
+        "zouk-guitar-skank-chawa",
+        "rock-open-close"
+      ],
+      "noteCount": 296
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-rock-feedback-swell",
+        "tech-rock-guitar-octave",
+        "kizomba-vocal-comping"
+      ],
+      "noteCount": 64
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-rock-guitar-octave",
+      "name": "guitar octave",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "guitar octave"
+      ]
+    },
+    {
+      "id": "rock-lead-bend",
+      "name": "Lead Guitar Bend",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        2,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-acoustic-strum",
+      "name": "Acoustic Strum",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-rock-british-invasion-signature",
+      "name": "British Invasion",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "dual-guitar harmony",
+        "guitar octave",
+        "motorik beat"
+      ]
+    },
+    {
+      "id": "rock-riff-lock",
+      "name": "Riff + Bass Lock",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-straight-drive",
+      "name": "Straight-Eighth Drive",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-rock-dual-guitar-harmony",
+      "name": "dual-guitar harmony",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "dual-guitar harmony"
+      ]
+    },
+    {
+      "id": "tech-rock-motorik-beat",
+      "name": "motorik beat",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "motorik beat"
+      ]
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "hip-hop-sampled-keys",
+      "name": "Sampled Keys Loop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 24,
+      "onsetGrid": [
+        0,
+        6,
+        12,
+        18,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-guitar-skank-chawa",
+      "name": "Chawa Guitar Skank",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-open-close",
+      "name": "Open Verse → Full Chorus",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-rock-feedback-swell",
+      "name": "feedback swell",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "feedback swell"
+      ]
+    },
+    {
+      "id": "kizomba-vocal-comping",
+      "name": "Vocal Phrase Response",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        7,
+        12,
+        15
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "piano",
+      "voice"
+    ],
+    "techniques": [
+      "dual-guitar harmony",
+      "guitar octave",
+      "motorik beat"
+    ],
+    "signatureCell": "Beat-group guitars with melodic bass",
+    "tempoRange": [
+      110,
+      160
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "The Beatles",
+      "The Rolling Stones",
+      "The Kinks"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "rock-british-invasion"
+  },
+  "performance": {
+    "noteCount": 1765,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-rock-guitar-octave",
+      "rock-lead-bend",
+      "rock-acoustic-strum",
+      "style-rock-british-invasion-signature",
+      "rock-riff-lock",
+      "rock-straight-drive",
+      "tech-rock-dual-guitar-harmony",
+      "tech-rock-motorik-beat",
+      "afro-amapiano-pad",
+      "hip-hop-sampled-keys",
+      "zouk-guitar-skank-chawa",
+      "rock-open-close",
+      "tech-rock-feedback-swell",
+      "kizomba-vocal-comping"
+    ]
+  }
+}

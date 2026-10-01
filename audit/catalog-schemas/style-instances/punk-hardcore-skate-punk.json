@@ -1,0 +1,375 @@
+{
+  "schemaVersion": 2,
+  "genre": "punk-hardcore",
+  "styleId": "punk-hardcore-skate-punk",
+  "styleName": "Skate Punk",
+  "durationSec": 45.47368421052632,
+  "tempoBpm": 190,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "D5",
+        "A5",
+        "B5",
+        "G5"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "D5",
+        "A5",
+        "B5",
+        "G5"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C5",
+        "F5",
+        "G5",
+        "G5"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "break-3",
+      "kind": "break",
+      "label": "Break",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "D5",
+        "A5",
+        "B5",
+        "G5"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "chorus-4",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C5",
+        "F5",
+        "G5",
+        "G5"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "ending-5",
+      "kind": "ending",
+      "label": "Ending",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "D5",
+        "A5",
+        "B5",
+        "G5"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "punk-d-beat",
+        "punk-downpick-eighths",
+        "punk-half-time-breakdown"
+      ],
+      "noteCount": 536
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "punk-bass-unison",
+        "style-punk-hardcore-proto-punk-garage-punk-signature"
+      ],
+      "noteCount": 204
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-punk-hardcore-proto-punk-garage-punk-signature",
+        "tech-punk-hardcore-stop-start-punk"
+      ],
+      "noteCount": 136
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-punk-hardcore-gang-vocal"
+      ],
+      "noteCount": 52
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "backing-vocals",
+      "role": "voice",
+      "patternIds": [
+        "punk-half-time-breakdown",
+        "punk-d-beat",
+        "punk-downpick-eighths"
+      ],
+      "noteCount": 92
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "overdrive-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "punk-downpick-eighths",
+        "punk-half-time-breakdown",
+        "punk-d-beat",
+        "punk-bass-unison"
+      ],
+      "noteCount": 268
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "distortion-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "style-punk-hardcore-proto-punk-garage-punk-signature",
+        "punk-half-time-breakdown",
+        "punk-bass-unison"
+      ],
+      "noteCount": 276
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "punk-bass-unison",
+        "jazz-comping-sync",
+        "reggae--rd-09-bubble-organ",
+        "punk-downpick-eighths"
+      ],
+      "noteCount": 270
+    }
+  ],
+  "patterns": [
+    {
+      "id": "punk-d-beat",
+      "name": "D-Beat",
+      "worldId": "punk-hardcore",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        8,
+        11,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "punk-downpick-eighths",
+      "name": "Downpick Eighths",
+      "worldId": "punk-hardcore",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "punk-half-time-breakdown",
+      "name": "Hardcore Half-Time Breakdown",
+      "worldId": "punk-hardcore",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "punk-bass-unison",
+      "name": "Bass Unison",
+      "worldId": "punk-hardcore",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-punk-hardcore-proto-punk-garage-punk-signature",
+      "name": "Proto-Punk/Garage Punk",
+      "worldId": "punk-hardcore",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "power-chord eighths",
+        "stop-start punk",
+        "octave guitar",
+        "tremolo guitar"
+      ]
+    },
+    {
+      "id": "tech-punk-hardcore-stop-start-punk",
+      "name": "stop-start punk",
+      "worldId": "punk-hardcore",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "stop-start punk"
+      ]
+    },
+    {
+      "id": "tech-punk-hardcore-gang-vocal",
+      "name": "gang vocal",
+      "worldId": "punk-hardcore",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "gang vocal"
+      ]
+    },
+    {
+      "id": "jazz-comping-sync",
+      "name": "Syncopated Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        1,
+        4,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-09-bubble-organ",
+      "name": "Bubble Organ",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "voice",
+      "backing-vocals"
+    ],
+    "techniques": [],
+    "signatureCell": "Fast melodic eighth-note guitar with a tight backbeat",
+    "tempoRange": [
+      160,
+      220
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "punk-hardcore-skate-punk"
+  },
+  "performance": {
+    "noteCount": 1834,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "punk-d-beat",
+      "punk-downpick-eighths",
+      "punk-half-time-breakdown",
+      "punk-bass-unison",
+      "style-punk-hardcore-proto-punk-garage-punk-signature",
+      "tech-punk-hardcore-stop-start-punk",
+      "tech-punk-hardcore-gang-vocal",
+      "jazz-comping-sync",
+      "reggae--rd-09-bubble-organ"
+    ]
+  }
+}

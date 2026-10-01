@@ -1,0 +1,415 @@
+{
+  "schemaVersion": 2,
+  "genre": "zouk",
+  "styleId": "zouk-cabo-zouk",
+  "styleName": "Cabo Zouk",
+  "durationSec": 97.95918367346933,
+  "tempoBpm": 98,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "style-zouk-cabo-zouk-signature",
+        "tech-zouk-zouk-guitar-syncopation"
+      ],
+      "noteCount": 608
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-zouk-ghetto-zouk-sub-bass",
+        "tech-zouk-zouk-beton-bass",
+        "tech-zouk-kizomba-zouk-hybrid-bass"
+      ],
+      "noteCount": 152
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-zouk-zouk-guitar-syncopation",
+        "style-zouk-cabo-zouk-signature",
+        "tech-zouk-zouk-horn-stab"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-zouk-cabo-zouk-signature",
+        "zouk-snare",
+        "zouk-ti-bwa"
+      ],
+      "noteCount": 177
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-zouk-zouk-horn-stab",
+        "tech-zouk-r-b-chord-extensions",
+        "tech-zouk-zouk-beton-bass"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "zouk-french-bass",
+        "tech-zouk-zouk-beton-bass",
+        "tech-zouk-kizomba-zouk-hybrid-bass"
+      ],
+      "noteCount": 115
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "rhodes",
+      "role": "harmony",
+      "patternIds": [
+        "tech-zouk-r-b-chord-extensions",
+        "zouk-guitar-skank-chawa"
+      ],
+      "noteCount": 567
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "style-zouk-cabo-zouk-signature"
+      ],
+      "noteCount": 218
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-zouk-cabo-zouk-signature",
+      "name": "Cabo Zouk",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "ghetto-zouk sub-bass",
+        "R&B chord extensions",
+        "kizomba/zouk hybrid bass",
+        "zouk béton bass",
+        "zouk guitar syncopation",
+        "zouk horn stab"
+      ]
+    },
+    {
+      "id": "tech-zouk-zouk-guitar-syncopation",
+      "name": "guitar syncopation",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "zouk guitar syncopation"
+      ]
+    },
+    {
+      "id": "tech-zouk-ghetto-zouk-sub-bass",
+      "name": "ghetto-zouk sub-bass",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "ghetto-zouk sub-bass"
+      ]
+    },
+    {
+      "id": "tech-zouk-zouk-beton-bass",
+      "name": "béton bass",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "zouk béton bass"
+      ]
+    },
+    {
+      "id": "tech-zouk-kizomba-zouk-hybrid-bass",
+      "name": "kizomba/zouk hybrid bass",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "kizomba/zouk hybrid bass"
+      ]
+    },
+    {
+      "id": "tech-zouk-zouk-horn-stab",
+      "name": "horn stab",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "zouk horn stab"
+      ]
+    },
+    {
+      "id": "zouk-snare",
+      "name": "Snare Rimshot",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-ti-bwa",
+      "name": "Ti-Bwa Woodblock Ostinato",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-zouk-r-b-chord-extensions",
+      "name": "R&B chord extensions",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "R&B chord extensions"
+      ]
+    },
+    {
+      "id": "zouk-french-bass",
+      "name": "French Antillean Zouk Bass",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-guitar-skank-chawa",
+      "name": "Chawa Guitar Skank",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "bass",
+      "synth",
+      "drums",
+      "voice"
+    ],
+    "techniques": [
+      "ghetto-zouk sub-bass",
+      "R&B chord extensions",
+      "kizomba/zouk hybrid bass",
+      "zouk béton bass",
+      "zouk guitar syncopation",
+      "zouk horn stab"
+    ],
+    "signatureCell": "Cape Verdean melody over zouk pulse",
+    "tempoRange": [
+      85,
+      110
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Nelson Freitas",
+      "Gil Semedo"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "zouk-cabo-zouk"
+  },
+  "performance": {
+    "noteCount": 1965,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-zouk-cabo-zouk-signature",
+      "tech-zouk-zouk-guitar-syncopation",
+      "tech-zouk-ghetto-zouk-sub-bass",
+      "tech-zouk-zouk-beton-bass",
+      "tech-zouk-kizomba-zouk-hybrid-bass",
+      "tech-zouk-zouk-horn-stab",
+      "zouk-snare",
+      "zouk-ti-bwa",
+      "tech-zouk-r-b-chord-extensions",
+      "zouk-french-bass",
+      "zouk-guitar-skank-chawa"
+    ]
+  }
+}

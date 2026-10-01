@@ -1,0 +1,468 @@
+{
+  "schemaVersion": 2,
+  "genre": "swing",
+  "styleId": "swing-vocal-swing",
+  "styleName": "Vocal Swing",
+  "durationSec": 85.33333333333327,
+  "tempoBpm": 135,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Head",
+      "bars": 4,
+      "intensity": "medium",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Head / A",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "solo-2",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Trading / Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "chorus-4",
+      "kind": "chorus",
+      "label": "Head Return",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-swing-scat-syllables"
+      ],
+      "noteCount": 88
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-swing-horn-section-voicing",
+        "style-swing-vocal-swing-signature",
+        "swing-shout-chorus"
+      ],
+      "noteCount": 786
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "style-swing-vocal-swing-signature"
+      ],
+      "noteCount": 178
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "swing-shout-chorus",
+        "swing-spang",
+        "swing-bebop-ride"
+      ],
+      "noteCount": 281
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "tech-swing-ride-swing",
+        "tech-swing-swing-triplets",
+        "tech-swing-horn-section-voicing"
+      ],
+      "noteCount": 451
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "tenor-sax",
+      "role": "melody",
+      "patternIds": [
+        "tech-swing-swing-triplets",
+        "tech-swing-ride-swing",
+        "tech-swing-horn-section-voicing"
+      ],
+      "noteCount": 203
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "jazz-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "flam-llamada-12",
+        "flam-seguiriya-compas",
+        "zouk-bridge-16",
+        "metal-djent-chug",
+        "afrobeats-chorus-12",
+        "jazz-piano-comping"
+      ],
+      "noteCount": 1034
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "trumpet",
+      "role": "lead",
+      "patternIds": [
+        "swing-shout-chorus"
+      ],
+      "noteCount": 111
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-swing-scat-syllables",
+      "name": "scat syllables",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "scat syllables"
+      ]
+    },
+    {
+      "id": "tech-swing-horn-section-voicing",
+      "name": "horn section voicing",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "horn section voicing"
+      ]
+    },
+    {
+      "id": "style-swing-vocal-swing-signature",
+      "name": "Vocal Swing",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "scat syllables",
+        "swing triplets",
+        "ride swing"
+      ]
+    },
+    {
+      "id": "swing-shout-chorus",
+      "name": "Shout Chorus Ensemble Hits",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        8,
+        11,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "swing-spang",
+      "name": "Spang-a-lang",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "swing-bebop-ride",
+      "name": "Bebop Ride",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        10,
+        11
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-swing-ride-swing",
+      "name": "ride swing",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "ride swing"
+      ]
+    },
+    {
+      "id": "tech-swing-swing-triplets",
+      "name": "triplets",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "swing triplets"
+      ]
+    },
+    {
+      "id": "flam-llamada-12",
+      "name": "Llamada into Cante",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        9,
+        10,
+        11,
+        0,
+        2
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-seguiriya-compas",
+      "name": "Seguiriya 2+2+3+3+2",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        7,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-bridge-16",
+      "name": "Chawa Bridge",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "metal-djent-chug",
+      "name": "Djent Polymetric Low Chug",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afrobeats-chorus-12",
+      "name": "Shekere Chorus Lift",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        5,
+        6,
+        8,
+        11,
+        13,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-comping",
+      "name": "Syncopated Piano Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "voice",
+      "piano",
+      "upright-bass",
+      "drums",
+      "brass"
+    ],
+    "techniques": [
+      "scat syllables",
+      "swing triplets",
+      "ride swing"
+    ],
+    "signatureCell": "Flexible vocal phrasing over swing",
+    "tempoRange": [
+      90,
+      180
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Ella Fitzgerald",
+      "Billie Holiday"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "swing-vocal-swing"
+  },
+  "performance": {
+    "noteCount": 3132,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-swing-scat-syllables",
+      "tech-swing-horn-section-voicing",
+      "style-swing-vocal-swing-signature",
+      "swing-shout-chorus",
+      "swing-spang",
+      "swing-bebop-ride",
+      "tech-swing-ride-swing",
+      "tech-swing-swing-triplets",
+      "flam-llamada-12",
+      "flam-seguiriya-compas",
+      "zouk-bridge-16",
+      "metal-djent-chug",
+      "afrobeats-chorus-12",
+      "jazz-piano-comping"
+    ]
+  }
+}

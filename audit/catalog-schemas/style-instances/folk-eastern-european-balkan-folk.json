@@ -1,0 +1,393 @@
+{
+  "schemaVersion": 2,
+  "genre": "folk",
+  "styleId": "folk-eastern-european-balkan-folk",
+  "styleName": "Eastern European / Balkan Folk",
+  "durationSec": 70,
+  "tempoBpm": 120,
+  "meter": "7/8",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "violin",
+      "role": "melody",
+      "patternIds": [
+        "style-folk-eastern-european-balkan-folk-signature",
+        "folk-fiddle-drone"
+      ],
+      "noteCount": 84
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "accordion",
+      "role": "harmony",
+      "patternIds": [
+        "style-folk-eastern-european-balkan-folk-signature"
+      ],
+      "noteCount": 502
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "clarinet",
+      "role": "lead",
+      "patternIds": [
+        "style-folk-eastern-european-balkan-folk-signature",
+        "tech-folk-balkan-7-8",
+        "tech-folk-celtic-ornament",
+        "tech-folk-balkan-9-8"
+      ],
+      "noteCount": 188
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "trombone",
+      "role": "lead",
+      "patternIds": [
+        "tech-folk-balkan-9-8",
+        "tech-folk-celtic-ornament",
+        "tech-folk-balkan-7-8"
+      ],
+      "noteCount": 196
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "patternIds": [
+        "tech-folk-balkan-7-8",
+        "cumbia-guiro",
+        "timba-bata-fusion",
+        "bachata-bongo-majao",
+        "tech-folk-celtic-ornament"
+      ],
+      "noteCount": 202
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-folk-celtic-ornament",
+        "tech-folk-drone"
+      ],
+      "noteCount": 63
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "fiddle",
+      "role": "lead",
+      "patternIds": [
+        "folk-fiddle-drone",
+        "tech-folk-celtic-ornament"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "mandolin",
+      "role": "lead",
+      "patternIds": [
+        "folk-strum-sync"
+      ],
+      "noteCount": 128
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-folk-eastern-european-balkan-folk-signature",
+      "name": "Eastern European/Balkan Folk",
+      "worldId": "folk",
+      "meter": "7/8",
+      "subdivisions": 14,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Balkan 7/8",
+        "Balkan 9/8"
+      ]
+    },
+    {
+      "id": "folk-fiddle-drone",
+      "name": "Old-Time Fiddle Drone & Shuffle Bow",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-folk-balkan-7-8",
+      "name": "Balkan 7/8",
+      "worldId": "folk",
+      "meter": "7/8",
+      "subdivisions": 14,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        10,
+        12
+      ],
+      "techniques": [
+        "Balkan 7/8"
+      ]
+    },
+    {
+      "id": "tech-folk-celtic-ornament",
+      "name": "Celtic ornament",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Celtic ornament"
+      ]
+    },
+    {
+      "id": "tech-folk-balkan-9-8",
+      "name": "Balkan 9/8",
+      "worldId": "folk",
+      "meter": "9/8",
+      "subdivisions": 18,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        14,
+        16
+      ],
+      "techniques": [
+        "Balkan 9/8"
+      ]
+    },
+    {
+      "id": "cumbia-guiro",
+      "name": "Cumbia Güiro",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "timba-bata-fusion",
+      "name": "Bata Fusion",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "bachata-bongo-majao",
+      "name": "Bongo Majao",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-folk-drone",
+      "name": "drone",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": [
+        "drone"
+      ]
+    },
+    {
+      "id": "folk-strum-sync",
+      "name": "Syncopated Strum",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "violin",
+      "accordion",
+      "clarinet",
+      "trombone",
+      "hand-percussion"
+    ],
+    "techniques": [
+      "Balkan 7/8",
+      "Balkan 9/8"
+    ],
+    "signatureCell": "Asymmetric Balkan meter with ornamented melody",
+    "tempoRange": [
+      90,
+      150
+    ],
+    "preferredMeters": [
+      "7/8"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Taraf de Haïdouks",
+      "Goran Bregović"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "folk-eastern-european-balkan-folk"
+  },
+  "performance": {
+    "noteCount": 1427,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-folk-eastern-european-balkan-folk-signature",
+      "folk-fiddle-drone",
+      "tech-folk-balkan-7-8",
+      "tech-folk-celtic-ornament",
+      "tech-folk-balkan-9-8",
+      "cumbia-guiro",
+      "timba-bata-fusion",
+      "bachata-bongo-majao",
+      "tech-folk-drone",
+      "folk-strum-sync"
+    ]
+  }
+}

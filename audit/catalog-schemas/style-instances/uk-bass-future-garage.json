@@ -1,0 +1,333 @@
+{
+  "schemaVersion": 2,
+  "genre": "uk-bass",
+  "styleId": "uk-bass-future-garage",
+  "styleName": "Future Garage",
+  "durationSec": 66.46153846153847,
+  "tempoBpm": 130,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em7",
+        "Cmaj7",
+        "G",
+        "D"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "groove-1",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Em7",
+        "Cmaj7",
+        "G",
+        "D"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "drop-2",
+      "kind": "drop",
+      "label": "Drop",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Em7",
+        "Cmaj7",
+        "G",
+        "D"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em7",
+        "Cmaj7",
+        "G",
+        "D"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "drop-4",
+      "kind": "drop",
+      "label": "Drop",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Em7",
+        "Cmaj7",
+        "G",
+        "D"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em7",
+        "Cmaj7",
+        "G",
+        "D"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-uk-bass-2-step-kick-displacement",
+        "tech-uk-bass-breakstep-rhythm",
+        "tech-uk-bass-shuffled-percussion"
+      ],
+      "noteCount": 182
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "ukbass-halfstep-drop",
+        "ukbass-grime-stab"
+      ],
+      "noteCount": 120
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "ukbass-grime-stab",
+        "ukbass-halfstep-drop"
+      ],
+      "noteCount": 52
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "ukbass-grime-stab",
+        "tech-uk-bass-shuffled-percussion",
+        "tech-uk-bass-breakstep-rhythm"
+      ],
+      "noteCount": 52
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-uk-bass-chopped-vocal"
+      ],
+      "noteCount": 52
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "acid-303",
+      "role": "lead",
+      "patternIds": [
+        "ukbass-halfstep-drop",
+        "ukbass-grime-stab",
+        "tech-uk-bass-breakstep-rhythm"
+      ],
+      "noteCount": 44
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "ukbass-halfstep-drop",
+        "ukbass-grime-stab"
+      ],
+      "noteCount": 151
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "ukbass-halfstep-drop",
+        "ukbass-grime-stab"
+      ],
+      "noteCount": 423
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-uk-bass-2-step-kick-displacement",
+      "name": "2-step kick displacement",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        14
+      ],
+      "techniques": [
+        "2-step kick displacement"
+      ]
+    },
+    {
+      "id": "tech-uk-bass-breakstep-rhythm",
+      "name": "breakstep rhythm",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "breakstep rhythm"
+      ]
+    },
+    {
+      "id": "tech-uk-bass-shuffled-percussion",
+      "name": "shuffled percussion",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "shuffled percussion"
+      ]
+    },
+    {
+      "id": "ukbass-halfstep-drop",
+      "name": "Half-Step Drop",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        7,
+        8,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "ukbass-grime-stab",
+      "name": "Grime Stab",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-uk-bass-chopped-vocal",
+      "name": "chopped vocal",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "chopped vocal"
+      ]
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "sub-bass",
+      "synth",
+      "sampler",
+      "voice"
+    ],
+    "techniques": [],
+    "signatureCell": "Sparse swung garage break under a long atmospheric chord",
+    "tempoRange": [
+      125,
+      135
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 57,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "uk-bass-future-garage"
+  },
+  "performance": {
+    "noteCount": 1076,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-uk-bass-2-step-kick-displacement",
+      "tech-uk-bass-breakstep-rhythm",
+      "tech-uk-bass-shuffled-percussion",
+      "ukbass-halfstep-drop",
+      "ukbass-grime-stab",
+      "tech-uk-bass-chopped-vocal",
+      "afro-amapiano-pad"
+    ]
+  }
+}

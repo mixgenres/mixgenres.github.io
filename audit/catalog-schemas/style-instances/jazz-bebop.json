@@ -1,0 +1,334 @@
+{
+  "schemaVersion": 2,
+  "genre": "jazz",
+  "styleId": "jazz-bebop",
+  "styleName": "Bebop",
+  "durationSec": 74.18181818181826,
+  "tempoBpm": 220,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "head-0",
+      "kind": "head",
+      "label": "Head",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Fm7",
+        "A#7",
+        "D#maj7",
+        "C7b9"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "solo-1",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Fm7",
+        "A#7",
+        "D#maj7",
+        "C7b9"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "trading-2",
+      "kind": "trading",
+      "label": "Trading",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "Gm7",
+        "C7",
+        "Fmaj7",
+        "Fmaj7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "solo-3",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Gm7",
+        "C7",
+        "Fmaj7",
+        "Fmaj7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "head-4",
+      "kind": "head",
+      "label": "Head",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Fm7",
+        "A#7",
+        "D#maj7",
+        "C7b9"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "tag-5",
+      "kind": "tag",
+      "label": "Tag",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Fm7",
+        "A#7",
+        "D#maj7",
+        "C7b9"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "alto-sax",
+      "role": "lead",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 202
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "trumpet",
+      "role": "lead",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 197
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "jazz-piano-red-garland",
+        "jazz-piano-comping"
+      ],
+      "noteCount": 782
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "jazz-walking-bass"
+      ],
+      "noteCount": 238
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "jazz-ride-spangalang",
+        "jazz-snare-comp",
+        "jazz-hihat-2-4"
+      ],
+      "noteCount": 247
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "ride",
+      "role": "percussion",
+      "patternIds": [
+        "jazz-hihat-2-4",
+        "jazz-ride-spangalang",
+        "jazz-snare-comp"
+      ],
+      "noteCount": 190
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "tenor-sax",
+      "role": "melody",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 186
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "vibraphone",
+      "role": "harmony",
+      "patternIds": [
+        "jazz-piano-comping",
+        "tech-jazz-big-band-shout-chorus"
+      ],
+      "noteCount": 243
+    }
+  ],
+  "patterns": [
+    {
+      "id": "jazz-horn-swing-phrase",
+      "name": "Horn Swing Phrase",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-red-garland",
+      "name": "Block Chords",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        3,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-comping",
+      "name": "Syncopated Piano Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-walking-bass",
+      "name": "Walking Bass",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-ride-spangalang",
+      "name": "Ride Cymbal",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-snare-comp",
+      "name": "Snare Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        2,
+        7,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-hihat-2-4",
+      "name": "Hi-Hat 2 & 4",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 4,
+      "onsetGrid": [
+        1,
+        3
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-jazz-big-band-shout-chorus",
+      "name": "big-band shout chorus",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "big-band shout chorus"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "alto-sax",
+      "trumpet",
+      "piano",
+      "upright-bass",
+      "drums"
+    ],
+    "techniques": [],
+    "signatureCell": "Rapid chromatic enclosure lick landing on #11 upper chord extension with ride cymbal drive",
+    "tempoRange": [
+      180,
+      260
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "swung",
+    "swingPercentage": 54,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "jazz-bebop"
+  },
+  "performance": {
+    "noteCount": 2285,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "jazz-horn-swing-phrase",
+      "jazz-piano-red-garland",
+      "jazz-piano-comping",
+      "jazz-walking-bass",
+      "jazz-ride-spangalang",
+      "jazz-snare-comp",
+      "jazz-hihat-2-4",
+      "tech-jazz-big-band-shout-chorus"
+    ]
+  }
+}

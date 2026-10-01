@@ -1,0 +1,431 @@
+{
+  "schemaVersion": 2,
+  "genre": "r-and-b",
+  "styleId": "r-and-b-motown-r-b",
+  "styleName": "Motown R&B",
+  "durationSec": 87.27272727272728,
+  "tempoBpm": 110,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "Bm7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "Bm7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "Bm7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "Bm7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "Bm7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "Bm7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "style-r-and-b-motown-r-b-signature",
+        "tech-r-and-b-syncopated-bass"
+      ],
+      "noteCount": 196
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-r-and-b-motown-r-b-signature",
+        "rnb-neo-soul-comp",
+        "rnb-vocal-answer"
+      ],
+      "noteCount": 209
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "tambourine",
+      "role": "percussion",
+      "patternIds": [
+        "rnb-vocal-answer",
+        "rnb-chromatic-bass"
+      ],
+      "noteCount": 262
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "strings",
+      "role": "harmony",
+      "patternIds": [
+        "rnb-chromatic-bass",
+        "rnb-vocal-answer",
+        "style-r-and-b-motown-r-b-signature",
+        "rnb-neo-soul-comp"
+      ],
+      "noteCount": 232
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-r-and-b-background-vocal-answer",
+        "tech-r-and-b-vocal-chop"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "rnb-neo-soul-comp",
+        "tango-332-piazzolla",
+        "rnb-chromatic-bass",
+        "rnb-vocal-answer",
+        "afrobeats-cadence-16"
+      ],
+      "noteCount": 810
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "rhodes",
+      "role": "harmony",
+      "patternIds": [
+        "tango-arrastre",
+        "brazilian--sb-15-bossa-ending-turn",
+        "rnb-neo-soul-comp",
+        "rnb-chromatic-bass",
+        "rnb-vocal-answer",
+        "swing-charleston"
+      ],
+      "noteCount": 350
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "rnb-neo-soul-comp",
+        "rnb-vocal-answer",
+        "rnb-chromatic-bass"
+      ],
+      "noteCount": 112
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-r-and-b-motown-r-b-signature",
+      "name": "Motown R&B",
+      "worldId": "r-and-b",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "background-vocal answer",
+        "syncopated bass",
+        "vocal chop",
+        "vocal stack"
+      ]
+    },
+    {
+      "id": "tech-r-and-b-syncopated-bass",
+      "name": "syncopated bass",
+      "worldId": "r-and-b",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "syncopated bass"
+      ]
+    },
+    {
+      "id": "rnb-neo-soul-comp",
+      "name": "Syncopated Comp",
+      "worldId": "r-and-b",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        4,
+        6,
+        9,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rnb-vocal-answer",
+      "name": "Vocal Answer",
+      "worldId": "r-and-b",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        6,
+        7,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rnb-chromatic-bass",
+      "name": "Chromatic Bass",
+      "worldId": "r-and-b",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        5,
+        7,
+        8,
+        11,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-r-and-b-background-vocal-answer",
+      "name": "background-vocal answer",
+      "worldId": "r-and-b",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "background-vocal answer"
+      ]
+    },
+    {
+      "id": "tech-r-and-b-vocal-chop",
+      "name": "vocal chop",
+      "worldId": "r-and-b",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal chop"
+      ]
+    },
+    {
+      "id": "tango-332-piazzolla",
+      "name": "3+3+2 Nuevo Tango Pulse",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afrobeats-cadence-16",
+      "name": "Log Drum Cadence",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-arrastre",
+      "name": "Arrastre",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        13,
+        14,
+        15,
+        0
+      ],
+      "techniques": []
+    },
+    {
+      "id": "brazilian--sb-15-bossa-ending-turn",
+      "name": "Bossa ending cadence",
+      "worldId": "brazilian",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        5,
+        9,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "swing-charleston",
+      "name": "Charleston Comping",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        3
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "bass",
+      "drums",
+      "tambourine",
+      "strings",
+      "voice"
+    ],
+    "techniques": [
+      "background-vocal answer",
+      "syncopated bass",
+      "vocal chop",
+      "vocal stack"
+    ],
+    "signatureCell": "Melodic bass with tambourine backbeat",
+    "tempoRange": [
+      95,
+      125
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Marvin Gaye",
+      "Smokey Robinson",
+      "The Supremes"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "r-and-b-motown-r-b"
+  },
+  "performance": {
+    "noteCount": 2235,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-r-and-b-motown-r-b-signature",
+      "tech-r-and-b-syncopated-bass",
+      "rnb-neo-soul-comp",
+      "rnb-vocal-answer",
+      "rnb-chromatic-bass",
+      "tech-r-and-b-background-vocal-answer",
+      "tech-r-and-b-vocal-chop",
+      "tango-332-piazzolla",
+      "afrobeats-cadence-16",
+      "tango-arrastre",
+      "brazilian--sb-15-bossa-ending-turn",
+      "swing-charleston"
+    ]
+  }
+}

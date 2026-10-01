@@ -1,0 +1,368 @@
+{
+  "schemaVersion": 2,
+  "genre": "country",
+  "styleId": "country-appalachian-old-time",
+  "styleName": "Appalachian Old-Time",
+  "durationSec": 88.88888888888894,
+  "tempoBpm": 108,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "banjo",
+      "role": "harmony",
+      "patternIds": [
+        "style-country-appalachian-old-time-signature",
+        "country-banjo-roll",
+        "country-boom-chuck"
+      ],
+      "noteCount": 714
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "fiddle",
+      "role": "lead",
+      "patternIds": [
+        "country-fiddle-answer",
+        "tech-country-fiddle-drone"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "country-boom-chuck",
+        "style-country-appalachian-old-time-signature"
+      ],
+      "noteCount": 398
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-country-carter-style-alternating-bass",
+        "country-boom-chuck"
+      ],
+      "noteCount": 260
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-country-banjo-roll",
+        "country-fiddle-answer",
+        "tech-country-fiddle-drone",
+        "tech-country-nashville-number-style-progression",
+        "country-banjo-roll"
+      ],
+      "noteCount": 48
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-country-nashville-number-style-progression"
+      ],
+      "noteCount": 593
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "mandolin",
+      "role": "lead",
+      "patternIds": [
+        "country-banjo-roll",
+        "country-boom-chuck"
+      ],
+      "noteCount": 115
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "steel-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "style-country-appalachian-old-time-signature",
+        "country-boom-chuck"
+      ],
+      "noteCount": 376
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-country-appalachian-old-time-signature",
+      "name": "Appalachian Old-Time",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": [
+        "banjo roll",
+        "fiddle drone",
+        "Carter-style alternating bass"
+      ]
+    },
+    {
+      "id": "country-banjo-roll",
+      "name": "Banjo Roll",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-boom-chuck",
+      "name": "Boom-Chuck",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-fiddle-answer",
+      "name": "Fiddle Answer",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        7,
+        8,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-country-fiddle-drone",
+      "name": "fiddle drone",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": [
+        "fiddle drone"
+      ]
+    },
+    {
+      "id": "tech-country-carter-style-alternating-bass",
+      "name": "Carter-style alternating bass",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "Carter-style alternating bass"
+      ]
+    },
+    {
+      "id": "tech-country-banjo-roll",
+      "name": "banjo roll",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "banjo roll"
+      ]
+    },
+    {
+      "id": "tech-country-nashville-number-style-progression",
+      "name": "Nashville number-style progression",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Nashville number-style progression"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "banjo",
+      "fiddle",
+      "acoustic-guitar",
+      "upright-bass",
+      "voice"
+    ],
+    "techniques": [
+      "banjo roll",
+      "fiddle drone",
+      "Carter-style alternating bass"
+    ],
+    "signatureCell": "Fiddle drone with alternating guitar bass",
+    "tempoRange": [
+      80,
+      135
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "The Carter Family",
+      "Doc Watson"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "country-appalachian-old-time"
+  },
+  "performance": {
+    "noteCount": 2568,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-country-appalachian-old-time-signature",
+      "country-banjo-roll",
+      "country-boom-chuck",
+      "country-fiddle-answer",
+      "tech-country-fiddle-drone",
+      "tech-country-carter-style-alternating-bass",
+      "tech-country-banjo-roll",
+      "tech-country-nashville-number-style-progression"
+    ]
+  }
+}

@@ -1,0 +1,317 @@
+{
+  "schemaVersion": 2,
+  "genre": "electronic",
+  "styleId": "electronic-idm",
+  "styleName": "IDM",
+  "durationSec": 64.00000000000001,
+  "tempoBpm": 135,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "D#maj7",
+        "Cm7",
+        "G#maj7",
+        "A#"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "build-1",
+      "kind": "build",
+      "label": "Build",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "D#maj7",
+        "Cm7",
+        "G#maj7",
+        "A#"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "drop-2",
+      "kind": "drop",
+      "label": "Drop",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "D#maj7",
+        "Cm7",
+        "G#maj7",
+        "A#"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "D#maj7",
+        "Cm7",
+        "G#maj7",
+        "A#"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "drop-4",
+      "kind": "drop",
+      "label": "Drop",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "D#maj7",
+        "Cm7",
+        "G#maj7",
+        "A#"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "D#maj7",
+        "Cm7",
+        "G#maj7",
+        "A#"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "elec-ambient",
+        "elec-synthwave"
+      ],
+      "noteCount": 40
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-electronic-gated-synth-sequence"
+      ],
+      "noteCount": 52
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "elec-dubstep-half",
+        "elec-electro"
+      ],
+      "noteCount": 157
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "elec-synthwave",
+        "elec-ambient"
+      ],
+      "noteCount": 124
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "polysynth",
+      "role": "harmony",
+      "patternIds": [
+        "elec-ambient",
+        "elec-synthwave",
+        "elec-breakbeat-response"
+      ],
+      "noteCount": 110
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "bass-lead",
+      "role": "bass",
+      "patternIds": [
+        "elec-ambient",
+        "elec-breakbeat-response",
+        "elec-synthwave",
+        "tech-electronic-gated-synth-sequence"
+      ],
+      "noteCount": 114
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "elec-breakbeat-response",
+        "elec-ambient",
+        "tech-electronic-gated-synth-sequence"
+      ],
+      "noteCount": 51
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "saw-lead",
+      "role": "lead",
+      "patternIds": [
+        "tech-electronic-gated-synth-sequence",
+        "elec-synthwave",
+        "elec-ambient"
+      ],
+      "noteCount": 100
+    }
+  ],
+  "patterns": [
+    {
+      "id": "elec-ambient",
+      "name": "Ambient Pulse",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 4,
+      "onsetGrid": [
+        0,
+        2
+      ],
+      "techniques": []
+    },
+    {
+      "id": "elec-synthwave",
+      "name": "Synthwave 8ths",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-electronic-gated-synth-sequence",
+      "name": "gated synth sequence",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "gated synth sequence"
+      ]
+    },
+    {
+      "id": "elec-dubstep-half",
+      "name": "Dubstep Half-Time",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": []
+    },
+    {
+      "id": "elec-electro",
+      "name": "Electro 808",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        7,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "elec-breakbeat-response",
+      "name": "Breakbeat Response",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        5,
+        7,
+        8,
+        11,
+        13,
+        15
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "sampler",
+      "synth",
+      "drums",
+      "sub-bass",
+      "polysynth"
+    ],
+    "techniques": [],
+    "signatureCell": "Micro-edited 64th-note glitch drum roll juxtaposed with warm melancholic synth chord",
+    "tempoRange": [
+      110,
+      160
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "electronic-idm"
+  },
+  "performance": {
+    "noteCount": 748,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "elec-ambient",
+      "elec-synthwave",
+      "tech-electronic-gated-synth-sequence",
+      "elec-dubstep-half",
+      "elec-electro",
+      "elec-breakbeat-response"
+    ]
+  }
+}

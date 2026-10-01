@@ -1,0 +1,344 @@
+{
+  "schemaVersion": 2,
+  "genre": "uk-bass",
+  "styleId": "uk-bass-grime-instrumental",
+  "styleName": "Grime Instrumental",
+  "durationSec": 125.21739130434786,
+  "tempoBpm": 138,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Groove",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Main Groove",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "bridge-4",
+      "kind": "bridge",
+      "label": "Return",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-uk-bass-jungle-hardcore-continuum-signature",
+        "style-uk-bass-grime-instrumental-signature"
+      ],
+      "noteCount": 362
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "square-lead",
+      "role": "lead",
+      "patternIds": [
+        "ukbass-halfstep-drop",
+        "style-uk-bass-jungle-hardcore-continuum-signature",
+        "style-uk-bass-grime-instrumental-signature"
+      ],
+      "noteCount": 202
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-uk-bass-sub-bass-wobble",
+        "ukbass-sub-anticipation"
+      ],
+      "noteCount": 256
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "style-uk-bass-grime-instrumental-signature",
+        "ukbass-grime-stab",
+        "ukbass-halfstep-drop"
+      ],
+      "noteCount": 96
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "acid-303",
+      "role": "lead",
+      "patternIds": [
+        "ukbass-sub-anticipation",
+        "ukbass-halfstep-drop",
+        "ukbass-grime-stab"
+      ],
+      "noteCount": 100
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "ukbass-grime-stab",
+        "style-uk-bass-jungle-hardcore-continuum-signature",
+        "style-uk-bass-grime-instrumental-signature"
+      ],
+      "noteCount": 296
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "ukbass-sub-anticipation",
+        "tech-uk-bass-2-step-kick-displacement"
+      ],
+      "noteCount": 103
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "ukbass-halfstep-drop",
+        "style-uk-bass-jungle-hardcore-continuum-signature",
+        "style-uk-bass-grime-instrumental-signature"
+      ],
+      "noteCount": 104
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-uk-bass-jungle-hardcore-continuum-signature",
+      "name": "Jungle/Hardcore Continuum",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "sub-bass wobble",
+        "chopped vocal",
+        "grime square-wave bass"
+      ]
+    },
+    {
+      "id": "style-uk-bass-grime-instrumental-signature",
+      "name": "Grime Instrumental",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "grime square-wave bass",
+        "sub-bass wobble"
+      ]
+    },
+    {
+      "id": "ukbass-halfstep-drop",
+      "name": "Half-Step Drop",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        7,
+        8,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-uk-bass-sub-bass-wobble",
+      "name": "sub-bass wobble",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "sub-bass wobble"
+      ]
+    },
+    {
+      "id": "ukbass-sub-anticipation",
+      "name": "Sub Anticipation",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "ukbass-grime-stab",
+      "name": "Grime Stab",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-uk-bass-2-step-kick-displacement",
+      "name": "2-step kick displacement",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        14
+      ],
+      "techniques": [
+        "2-step kick displacement"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "square-lead",
+      "sub-bass",
+      "synth"
+    ],
+    "techniques": [
+      "grime square-wave bass",
+      "sub-bass wobble"
+    ],
+    "signatureCell": "Sparse grime grid with square bass",
+    "tempoRange": [
+      130,
+      145
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Wiley",
+      "Dizzee Rascal"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "uk-bass-grime-instrumental"
+  },
+  "performance": {
+    "noteCount": 1519,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-uk-bass-jungle-hardcore-continuum-signature",
+      "style-uk-bass-grime-instrumental-signature",
+      "ukbass-halfstep-drop",
+      "tech-uk-bass-sub-bass-wobble",
+      "ukbass-sub-anticipation",
+      "ukbass-grime-stab",
+      "tech-uk-bass-2-step-kick-displacement"
+    ]
+  }
+}

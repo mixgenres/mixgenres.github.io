@@ -1,0 +1,351 @@
+{
+  "schemaVersion": 2,
+  "genre": "ska",
+  "styleId": "ska-trad-ska",
+  "styleName": "Traditional Ska",
+  "durationSec": 88.61538461538454,
+  "tempoBpm": 130,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A#",
+        "D#",
+        "F",
+        "A#"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A#",
+        "D#",
+        "F",
+        "A#"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "A#",
+        "A#",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "instrumental-3",
+      "kind": "instrumental",
+      "label": "Instrumental",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "D#",
+        "F",
+        "A#",
+        "A#"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A#",
+        "D#",
+        "F",
+        "A#"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A#",
+        "D#",
+        "F",
+        "A#"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "tech-ska-jazz-horn-solo",
+        "ska-offbeat-guitar"
+      ],
+      "noteCount": 401
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "sk-offbeat-chop"
+      ],
+      "noteCount": 510
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "sk-offbeat-chop",
+        "sk-06-first-wave-offbeat-chop"
+      ],
+      "noteCount": 585
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "sk-walking-bass",
+        "sk-07-walking-ska-bass"
+      ],
+      "noteCount": 386
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "ska-offbeat-guitar",
+        "ska-walking-bass"
+      ],
+      "noteCount": 336
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "ska-walking-bass",
+        "ska-offbeat-guitar",
+        "tech-ska-jazz-horn-solo"
+      ],
+      "noteCount": 72
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "tenor-sax",
+      "role": "melody",
+      "patternIds": [
+        "ska-offbeat-guitar",
+        "sk-06-first-wave-offbeat-chop",
+        "ska-walking-bass"
+      ],
+      "noteCount": 239
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "trombone",
+      "role": "lead",
+      "patternIds": [
+        "sk-horn-answer"
+      ],
+      "noteCount": 129
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-ska-jazz-horn-solo",
+      "name": "jazz horn solo",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "jazz horn solo"
+      ]
+    },
+    {
+      "id": "ska-offbeat-guitar",
+      "name": "Offbeat Guitar",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "sk-offbeat-chop",
+      "name": "Offbeat Chop",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "sk-06-first-wave-offbeat-chop",
+      "name": "First-Wave Offbeat Chop",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "sk-walking-bass",
+      "name": "Walking Bass",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "sk-07-walking-ska-bass",
+      "name": "walking bass contour",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        7,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "ska-walking-bass",
+      "name": "Walking Bass",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "sk-horn-answer",
+      "name": "Horn Section Answer",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        16,
+        20,
+        22,
+        24,
+        28,
+        30
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "brass",
+      "electric-guitar",
+      "piano",
+      "upright-bass",
+      "drums"
+    ],
+    "techniques": [],
+    "signatureCell": "Don Drummond trombone lead soaring over sharp offbeat skank guitar chop and walking bass",
+    "tempoRange": [
+      120,
+      140
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "pushed",
+    "swingPercentage": 54,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "ska-trad-ska"
+  },
+  "performance": {
+    "noteCount": 2658,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-ska-jazz-horn-solo",
+      "ska-offbeat-guitar",
+      "sk-offbeat-chop",
+      "sk-06-first-wave-offbeat-chop",
+      "sk-walking-bass",
+      "sk-07-walking-ska-bass",
+      "ska-walking-bass",
+      "sk-horn-answer"
+    ]
+  }
+}

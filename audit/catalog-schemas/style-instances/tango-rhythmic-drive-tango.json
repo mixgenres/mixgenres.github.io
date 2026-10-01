@@ -1,0 +1,343 @@
+{
+  "schemaVersion": 2,
+  "genre": "tango",
+  "styleId": "tango-rhythmic-drive-tango",
+  "styleName": "Rhythmic Drive Tango",
+  "durationSec": 73.84615384615383,
+  "tempoBpm": 130,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "A",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "B",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "solo-3",
+      "kind": "solo",
+      "label": "Variación",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "coda-4",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "bandoneon",
+      "role": "harmony",
+      "patternIds": [
+        "style-tango-rhythmic-drive-tango-signature",
+        "tech-tango-marcato-en-4",
+        "tech-tango-chromatic-tango-bass",
+        "tech-tango-marcato-en-2"
+      ],
+      "noteCount": 392
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "violin",
+      "role": "melody",
+      "patternIds": [
+        "tango-marcato-2",
+        "tango-marcato-4"
+      ],
+      "noteCount": 96
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tango-marcato-4",
+        "tango-marcato-2"
+      ],
+      "noteCount": 417
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "tango-yumba",
+        "style-tango-rhythmic-drive-tango-signature"
+      ],
+      "noteCount": 132
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "cello",
+      "role": "lead",
+      "patternIds": [
+        "tech-tango-tango-vals-bass",
+        "tango-marcato-2",
+        "tango-yumba"
+      ],
+      "noteCount": 108
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "flute",
+      "role": "melody",
+      "patternIds": [
+        "tech-tango-chromatic-tango-bass",
+        "tango-yumba",
+        "tech-tango-tango-vals-bass"
+      ],
+      "noteCount": 95
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "clarinet",
+      "role": "lead",
+      "patternIds": [
+        "tech-tango-marcato-en-2",
+        "tech-tango-chromatic-tango-bass",
+        "tech-tango-marcato-en-4"
+      ],
+      "noteCount": 120
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tango-marcato-4",
+        "tango-marcato-2"
+      ],
+      "noteCount": 369
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-tango-rhythmic-drive-tango-signature",
+      "name": "Rhythmic Drive Tango",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "chromatic tango bass",
+        "marcato en 2",
+        "marcato en 4",
+        "tango vals bass"
+      ]
+    },
+    {
+      "id": "tech-tango-marcato-en-4",
+      "name": "marcato en 4",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "marcato en 4"
+      ]
+    },
+    {
+      "id": "tech-tango-chromatic-tango-bass",
+      "name": "chromatic tango bass",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "chromatic tango bass"
+      ]
+    },
+    {
+      "id": "tech-tango-marcato-en-2",
+      "name": "marcato en 2",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "marcato en 2"
+      ]
+    },
+    {
+      "id": "tango-marcato-2",
+      "name": "Marcato en 2",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-marcato-4",
+      "name": "Marcato en 4",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-yumba",
+      "name": "Yumba/Heavy Tango Accent",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-tango-tango-vals-bass",
+      "name": "vals bass",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "tango vals bass"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "bandoneon",
+      "violin",
+      "piano",
+      "upright-bass"
+    ],
+    "techniques": [
+      "chromatic tango bass",
+      "marcato en 2",
+      "marcato en 4",
+      "tango vals bass"
+    ],
+    "signatureCell": "Hard marcato pulse with staccato attack",
+    "tempoRange": [
+      110,
+      150
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "rubato",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Juan D'Arienzo"
+    ],
+    "tracks": [
+      "La Cumparsita"
+    ]
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "tango-rhythmic-drive-tango"
+  },
+  "performance": {
+    "noteCount": 1729,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-tango-rhythmic-drive-tango-signature",
+      "tech-tango-marcato-en-4",
+      "tech-tango-chromatic-tango-bass",
+      "tech-tango-marcato-en-2",
+      "tango-marcato-2",
+      "tango-marcato-4",
+      "tango-yumba",
+      "tech-tango-tango-vals-bass"
+    ]
+  }
+}

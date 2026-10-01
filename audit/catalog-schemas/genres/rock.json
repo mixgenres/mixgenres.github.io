@@ -1,0 +1,290 @@
+{
+  "schemaVersion": 1,
+  "id": "rock",
+  "name": "Rock",
+  "family": "Amplified / Guitar Music",
+  "description": "A broad rock vocabulary organized around",
+  "substyles": [
+    "Hard Rock",
+    "Grunge",
+    "Progressive Rock",
+    "Punk Rock",
+    "Garage Rock",
+    "Psychedelic",
+    "Post-Rock",
+    "Shoegaze"
+  ],
+  "styleIds": [
+    "rock-hard-rock",
+    "rock-grunge",
+    "rock-progressive-rock",
+    "rock-punk-rock",
+    "rock-garage-rock",
+    "rock-psychedelic",
+    "rock-post-rock",
+    "rock-shoegaze",
+    "rock-rock-roll",
+    "rock-british-invasion",
+    "rock-southern-rock",
+    "rock-krautrock",
+    "rock-math-rock",
+    "rock-dream-pop"
+  ],
+  "patternIds": [
+    "rock-riff-lock",
+    "rock-straight-drive",
+    "rock-open-close",
+    "rock-odd-meter",
+    "rock-power-chords",
+    "rock-halftime-groove",
+    "rock-tom-beat",
+    "rock-organ-sustain",
+    "rock-prog-7-8",
+    "rock-prog-synth",
+    "rock-acoustic-strum",
+    "rock-lead-bend",
+    "rock-roster-",
+    "rock-call-14",
+    "rock-anchor-15",
+    "rock-comp-16",
+    "rock-verse-17",
+    "tech-rock-power-chord",
+    "tech-rock-palm-mute",
+    "tech-rock-guitar-octave",
+    "tech-rock-dual-guitar-harmony",
+    "tech-rock-rock-backbeat",
+    "tech-rock-motorik-beat",
+    "tech-rock-odd-meter-riff",
+    "tech-rock-arpeggiated-shoegaze-wall",
+    "style-rock-rock-roll-signature",
+    "style-rock-british-invasion-signature",
+    "style-rock-southern-rock-signature",
+    "style-rock-krautrock-signature",
+    "style-rock-math-rock-signature",
+    "style-rock-dream-pop-signature",
+    "tech-rock-boogie-riff",
+    "tech-rock-feedback-swell",
+    "tech-rock-crescendo-architecture"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "rock-hard-rock",
+      "name": "Hard Rock",
+      "keySubstyles": [
+        "Classic Hard Rock",
+        "Blues Rock",
+        "Arena Rock"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "overdrive-guitar",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "rock-grunge",
+      "name": "Grunge",
+      "keySubstyles": [
+        "Seattle Sound",
+        "Post-Grunge"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "distortion-guitar",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "rock-progressive-rock",
+      "name": "Progressive Rock",
+      "keySubstyles": [
+        "Symphonic Prog",
+        "Canterbury Scene",
+        "Space Rock"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "strings",
+        "bass",
+        "drums",
+        "organ"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "rock-punk-rock",
+      "name": "Punk Rock",
+      "keySubstyles": [
+        "NYC 77 Punk",
+        "UK 77 Punk",
+        "Hardcore Punk"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "distortion-guitar",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "rock-garage-rock",
+      "name": "Garage Rock",
+      "keySubstyles": [
+        "60s Garage Punk",
+        "2000s Garage Revival"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "overdrive-guitar",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "rock-psychedelic",
+      "name": "Psychedelic",
+      "keySubstyles": [
+        "Acid Rock",
+        "San Francisco Sound"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "organ",
+        "bass",
+        "drums",
+        "tape-echo"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "rock-post-rock",
+      "name": "Post-Rock",
+      "keySubstyles": [
+        "Crescendo Post-Rock",
+        "Cinematic Ambient Rock"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "strings",
+        "glockenspiel"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "rock-shoegaze",
+      "name": "Shoegaze",
+      "keySubstyles": [
+        "Dream Pop",
+        "Noise Pop Shoegaze"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "synth",
+        "distortion-guitar"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "rock-rock-roll",
+      "name": "Rock & Roll",
+      "keySubstyles": [
+        "Rock & Roll"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "piano",
+        "bass",
+        "drums",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "rock-british-invasion",
+      "name": "British Invasion",
+      "keySubstyles": [
+        "British Invasion"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "piano",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "rock-southern-rock",
+      "name": "Southern Rock",
+      "keySubstyles": [
+        "Southern Rock"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "steel-guitar",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "rock-krautrock",
+      "name": "Krautrock",
+      "keySubstyles": [
+        "Krautrock"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "synth"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "rock-math-rock",
+      "name": "Math Rock",
+      "keySubstyles": [
+        "Math Rock"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "rock-dream-pop",
+      "name": "Dream Pop",
+      "keySubstyles": [
+        "Dream Pop"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "synth",
+        "bass",
+        "drums",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "rock-starter"
+}

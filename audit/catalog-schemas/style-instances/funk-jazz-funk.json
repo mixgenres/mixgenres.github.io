@@ -1,0 +1,346 @@
+{
+  "schemaVersion": 2,
+  "genre": "funk",
+  "styleId": "funk-jazz-funk",
+  "styleName": "Jazz-Funk",
+  "durationSec": 91.42857142857147,
+  "tempoBpm": 105,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "D9",
+        "Am7",
+        "E7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am7",
+        "D9",
+        "Am7",
+        "E7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am7",
+        "D9",
+        "Am7",
+        "E7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am7",
+        "D9",
+        "Am7",
+        "E7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am7",
+        "D9",
+        "Am7",
+        "E7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "D9",
+        "Am7",
+        "E7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "rhodes",
+      "role": "harmony",
+      "patternIds": [
+        "style-funk-jazz-funk-signature",
+        "funk-clavinet"
+      ],
+      "noteCount": 540
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "clavinet",
+      "role": "harmony",
+      "patternIds": [
+        "tech-funk-clavinet-riff",
+        "style-funk-jazz-funk-signature",
+        "funk-clavinet"
+      ],
+      "noteCount": 554
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "style-funk-jazz-funk-signature"
+      ],
+      "noteCount": 204
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "funk-drum-breakbeat"
+      ],
+      "noteCount": 362
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "funk-16th-strum"
+      ],
+      "noteCount": 1374
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-funk-funk-horn-stab",
+        "tech-funk-vamp-extension",
+        "tech-funk-clavinet-riff"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "funk-clavinet"
+      ],
+      "noteCount": 404
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "patternIds": [
+        "funk-drum-breakbeat"
+      ],
+      "noteCount": 362
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-funk-jazz-funk-signature",
+      "name": "Jazz-Funk",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "clavinet riff",
+        "funk horn stab",
+        "vamp extension"
+      ]
+    },
+    {
+      "id": "funk-clavinet",
+      "name": "Clavinet Sync",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        4,
+        7,
+        10,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-funk-clavinet-riff",
+      "name": "clavinet riff",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "clavinet riff"
+      ]
+    },
+    {
+      "id": "funk-drum-breakbeat",
+      "name": "Clyde Stubblefield \"Funky Drummer\" Breakbeat",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        8,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-16th-strum",
+      "name": "16th Note Strum",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-funk-funk-horn-stab",
+      "name": "horn stab",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "funk horn stab"
+      ]
+    },
+    {
+      "id": "tech-funk-vamp-extension",
+      "name": "vamp extension",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vamp extension"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "rhodes",
+      "clavinet",
+      "bass",
+      "drums",
+      "electric-guitar"
+    ],
+    "techniques": [
+      "clavinet riff",
+      "funk horn stab",
+      "vamp extension"
+    ],
+    "signatureCell": "Electric funk vamp with jazz harmony",
+    "tempoRange": [
+      90,
+      120
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Herbie Hancock",
+      "Roy Ayers"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "funk-jazz-funk"
+  },
+  "performance": {
+    "noteCount": 3864,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-funk-jazz-funk-signature",
+      "funk-clavinet",
+      "tech-funk-clavinet-riff",
+      "funk-drum-breakbeat",
+      "funk-16th-strum",
+      "tech-funk-funk-horn-stab",
+      "tech-funk-vamp-extension"
+    ]
+  }
+}

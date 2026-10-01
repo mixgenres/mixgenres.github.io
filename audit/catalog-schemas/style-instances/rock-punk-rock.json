@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 2,
+  "genre": "rock",
+  "styleId": "rock-punk-rock",
+  "styleName": "Punk Rock",
+  "durationSec": 62.27027027027031,
+  "tempoBpm": 185,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "E5",
+        "A5",
+        "B5",
+        "E5"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "E5",
+        "A5",
+        "B5",
+        "E5"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C5",
+        "D5",
+        "G5",
+        "E5"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "E5",
+        "A5",
+        "B5",
+        "E5"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "E5",
+        "A5",
+        "B5",
+        "E5"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "E5",
+        "A5",
+        "B5",
+        "E5"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-rock-power-chord",
+        "rock-power-chords",
+        "rock-acoustic-strum"
+      ],
+      "noteCount": 433
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "rock-riff-lock",
+        "rock-acoustic-strum",
+        "rock-odd-meter"
+      ],
+      "noteCount": 286
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "rock-straight-drive",
+        "rock-riff-lock",
+        "rock-odd-meter"
+      ],
+      "noteCount": 304
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "distortion-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "rock-power-chords",
+        "tech-rock-power-chord",
+        "rock-straight-drive"
+      ],
+      "noteCount": 364
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "patternIds": [
+        "afro-clave-son-23",
+        "tech-rock-rock-backbeat",
+        "flam-tangos-compas"
+      ],
+      "noteCount": 191
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-rock-rock-backbeat",
+        "tech-rock-power-chord"
+      ],
+      "noteCount": 72
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "rock-organ-sustain"
+      ],
+      "noteCount": 376
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "overdrive-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "rock-acoustic-strum",
+        "rock-odd-meter",
+        "rock-power-chords",
+        "rock-riff-lock"
+      ],
+      "noteCount": 332
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-rock-power-chord",
+      "name": "power chord",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "power chord"
+      ]
+    },
+    {
+      "id": "rock-power-chords",
+      "name": "Power Chords",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-acoustic-strum",
+      "name": "Acoustic Strum",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-riff-lock",
+      "name": "Riff + Bass Lock",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-odd-meter",
+      "name": "7/8 Accent Group",
+      "worldId": "rock",
+      "meter": "7/8",
+      "subdivisions": 14,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-straight-drive",
+      "name": "Straight-Eighth Drive",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-clave-son-23",
+      "name": "Son Clave 2–3 Structural Timeline",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        4,
+        8,
+        16,
+        22,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-rock-rock-backbeat",
+      "name": "backbeat",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "rock backbeat"
+      ]
+    },
+    {
+      "id": "flam-tangos-compas",
+      "name": "Tangos de Triana",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-organ-sustain",
+      "name": "Hammond Organ Sustain",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        7,
+        8,
+        15
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "distortion-guitar",
+      "hand-percussion"
+    ],
+    "techniques": [],
+    "signatureCell": "\"1-2-3-4!\" shout launching into blinding 180 BPM downpicked 3-chord power blast",
+    "tempoRange": [
+      160,
+      210
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "pushed",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "rock-punk-rock"
+  },
+  "performance": {
+    "noteCount": 2358,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-rock-power-chord",
+      "rock-power-chords",
+      "rock-acoustic-strum",
+      "rock-riff-lock",
+      "rock-odd-meter",
+      "rock-straight-drive",
+      "afro-clave-son-23",
+      "tech-rock-rock-backbeat",
+      "flam-tangos-compas",
+      "rock-organ-sustain"
+    ]
+  }
+}

@@ -1,0 +1,514 @@
+{
+  "schemaVersion": 2,
+  "genre": "country",
+  "styleId": "country-western-swing",
+  "styleName": "Western Swing",
+  "durationSec": 83.47826086956523,
+  "tempoBpm": 138,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "G",
+        "E7",
+        "A7",
+        "D7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "G",
+        "G#dim",
+        "Am7",
+        "D7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "G",
+        "G#dim",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "instrumental-3",
+      "kind": "instrumental",
+      "label": "Instrumental",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "G",
+        "G#dim",
+        "Am7",
+        "D7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "G",
+        "G#dim",
+        "Am7",
+        "D7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "G",
+        "G#dim",
+        "Am7",
+        "D7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "fiddle",
+      "role": "lead",
+      "patternIds": [
+        "country-fiddle-answer",
+        "tech-country-fiddle-drone"
+      ],
+      "noteCount": 72
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "steel-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-country-pedal-steel-fills",
+        "country-steel-answer"
+      ],
+      "noteCount": 887
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-country-carter-style-alternating-bass",
+        "flam-alegrias-compas",
+        "tango-marcato-4",
+        "zouk-bridge-16",
+        "brazilian--sb-15-bossa-ending-turn",
+        "afrobeats-cadence-16"
+      ],
+      "noteCount": 801
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "country-western-swing",
+        "tech-country-carter-style-alternating-bass"
+      ],
+      "noteCount": 305
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-country-boom-chicka-rhythm",
+        "country-western-swing"
+      ],
+      "noteCount": 270
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-country-fiddle-drone",
+        "tech-country-pedal-steel-fills",
+        "country-steel-answer",
+        "tech-country-train-beat"
+      ],
+      "noteCount": 72
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "country-steel-answer",
+        "jazz-comping-sync",
+        "tango-332-piazzolla",
+        "tech-country-train-beat"
+      ],
+      "noteCount": 501
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "mandolin",
+      "role": "lead",
+      "patternIds": [
+        "flam-llamada-12",
+        "cu-chicha-guitar",
+        "country-fiddle-answer",
+        "tech-country-carter-style-alternating-bass",
+        "tech-country-boom-chicka-rhythm"
+      ],
+      "noteCount": 239
+    }
+  ],
+  "patterns": [
+    {
+      "id": "country-fiddle-answer",
+      "name": "Fiddle Answer",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        7,
+        8,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-country-fiddle-drone",
+      "name": "fiddle drone",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": [
+        "fiddle drone"
+      ]
+    },
+    {
+      "id": "tech-country-pedal-steel-fills",
+      "name": "pedal-steel fills",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "pedal-steel fills"
+      ]
+    },
+    {
+      "id": "country-steel-answer",
+      "name": "Steel Answer",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-country-carter-style-alternating-bass",
+      "name": "Carter-style alternating bass",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "Carter-style alternating bass"
+      ]
+    },
+    {
+      "id": "flam-alegrias-compas",
+      "name": "Alegrías/Cantiñas Bright Compás",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        11,
+        2,
+        5,
+        7,
+        9
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-marcato-4",
+      "name": "Marcato en 4",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-bridge-16",
+      "name": "Chawa Bridge",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "brazilian--sb-15-bossa-ending-turn",
+      "name": "Bossa ending cadence",
+      "worldId": "brazilian",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        5,
+        9,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afrobeats-cadence-16",
+      "name": "Log Drum Cadence",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-western-swing",
+      "name": "Western Swing",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-country-boom-chicka-rhythm",
+      "name": "boom-chicka rhythm",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "boom-chicka rhythm"
+      ]
+    },
+    {
+      "id": "tech-country-train-beat",
+      "name": "train beat",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "train beat"
+      ]
+    },
+    {
+      "id": "jazz-comping-sync",
+      "name": "Syncopated Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        1,
+        4,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-332-piazzolla",
+      "name": "3+3+2 Nuevo Tango Pulse",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-llamada-12",
+      "name": "Llamada into Cante",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        9,
+        10,
+        11,
+        0,
+        2
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-chicha-guitar",
+      "name": "Chicha Tremolo Guitar",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "fiddle",
+      "steel-guitar",
+      "electric-guitar",
+      "upright-bass",
+      "drums"
+    ],
+    "techniques": [],
+    "signatureCell": "Triple fiddle swinging harmonization over walking bass and hot steel guitar riff",
+    "tempoRange": [
+      120,
+      155
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "swung",
+    "swingPercentage": 60,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "country-western-swing"
+  },
+  "performance": {
+    "noteCount": 3147,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "country-fiddle-answer",
+      "tech-country-fiddle-drone",
+      "tech-country-pedal-steel-fills",
+      "country-steel-answer",
+      "tech-country-carter-style-alternating-bass",
+      "flam-alegrias-compas",
+      "tango-marcato-4",
+      "zouk-bridge-16",
+      "brazilian--sb-15-bossa-ending-turn",
+      "afrobeats-cadence-16",
+      "country-western-swing",
+      "tech-country-boom-chicka-rhythm",
+      "tech-country-train-beat",
+      "jazz-comping-sync",
+      "tango-332-piazzolla",
+      "flam-llamada-12",
+      "cu-chicha-guitar"
+    ]
+  }
+}

@@ -1,0 +1,373 @@
+{
+  "schemaVersion": 2,
+  "genre": "flamenco",
+  "styleId": "flamenco-tangos-style",
+  "styleName": "Tangos",
+  "durationSec": 66.46153846153847,
+  "tempoBpm": 130,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "salida-0",
+      "kind": "salida",
+      "label": "Salida",
+      "bars": 4,
+      "intensity": "medium",
+      "chords": [
+        "A#m",
+        "G#",
+        "F#",
+        "F"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "llamada-1",
+      "kind": "llamada",
+      "label": "Llamada",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A#m",
+        "G#",
+        "F#",
+        "F"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "letra-2",
+      "kind": "letra",
+      "label": "Letra",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A#m",
+        "G#",
+        "F#",
+        "F"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "falseta-3",
+      "kind": "falseta",
+      "label": "Falseta",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "A#m",
+        "G#",
+        "F#",
+        "F"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "remate-4",
+      "kind": "remate",
+      "label": "Remate",
+      "bars": 4,
+      "intensity": "peak",
+      "chords": [
+        "A#m",
+        "G#",
+        "F#",
+        "F"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "cierre-5",
+      "kind": "cierre",
+      "label": "Cierre",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A#m",
+        "G#",
+        "F#",
+        "F"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "spanish-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "flam-tangos-guitar",
+        "flam-tientos-compas",
+        "flam-buleria-compas"
+      ],
+      "noteCount": 726
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "flute",
+      "role": "melody",
+      "patternIds": [
+        "flam-tangos-compas",
+        "tech-flamenco-golpe"
+      ],
+      "noteCount": 87
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "palmas",
+      "role": "percussion",
+      "patternIds": [
+        "flamenco-bulerias-palmas",
+        "flam-buleria-compas"
+      ],
+      "noteCount": 182
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "cajon",
+      "role": "percussion",
+      "patternIds": [
+        "flam-buleria-compas",
+        "flam-tangos-compas"
+      ],
+      "noteCount": 204
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "flamenco-picado",
+        "flam-tangos-guitar"
+      ],
+      "noteCount": 281
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "zapateado",
+      "role": "percussion",
+      "patternIds": [
+        "flam-tangos-compas",
+        "flamenco-bulerias-palmas",
+        "flam-buleria-compas"
+      ],
+      "noteCount": 176
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-flamenco-golpe",
+        "tech-flamenco-12-beat-compas",
+        "tech-flamenco-melisma"
+      ],
+      "noteCount": 47
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "castanets",
+      "role": "percussion",
+      "patternIds": [
+        "flam-tangos-compas",
+        "flamenco-bulerias-palmas"
+      ],
+      "noteCount": 162
+    }
+  ],
+  "patterns": [
+    {
+      "id": "flam-tangos-guitar",
+      "name": "Tangos Guitar Compás",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-tientos-compas",
+      "name": "Tientos Slow Binary Compás",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-buleria-compas",
+      "name": "Bulería Compás/Jerez Drive",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        11,
+        2,
+        5,
+        7,
+        8,
+        9,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-tangos-compas",
+      "name": "Tangos de Triana",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-flamenco-golpe",
+      "name": "golpe",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "golpe"
+      ]
+    },
+    {
+      "id": "flamenco-bulerias-palmas",
+      "name": "Bulerias Palmas",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-picado",
+      "name": "Picado Scale",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-flamenco-12-beat-compas",
+      "name": "12-beat compás",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10
+      ],
+      "techniques": [
+        "12-beat compás"
+      ]
+    },
+    {
+      "id": "tech-flamenco-melisma",
+      "name": "melisma",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "melisma"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "spanish-guitar",
+      "flute",
+      "palmas",
+      "cajon",
+      "bass"
+    ],
+    "techniques": [],
+    "signatureCell": "4/4 flamenco tangos with a breathing downbeat and weighted 2–3–4.",
+    "tempoRange": [
+      110,
+      150
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "flamenco-tangos-style"
+  },
+  "performance": {
+    "noteCount": 1865,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "flam-tangos-guitar",
+      "flam-tientos-compas",
+      "flam-buleria-compas",
+      "flam-tangos-compas",
+      "tech-flamenco-golpe",
+      "flamenco-bulerias-palmas",
+      "flamenco-picado",
+      "tech-flamenco-12-beat-compas",
+      "tech-flamenco-melisma"
+    ]
+  }
+}

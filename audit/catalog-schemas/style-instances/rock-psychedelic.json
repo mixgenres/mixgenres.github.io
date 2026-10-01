@@ -1,0 +1,443 @@
+{
+  "schemaVersion": 2,
+  "genre": "rock",
+  "styleId": "rock-psychedelic",
+  "styleName": "Psychedelic",
+  "durationSec": 102.85714285714282,
+  "tempoBpm": 112,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "B7#9",
+        "D",
+        "E",
+        "B7#9"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "B7#9",
+        "D",
+        "E",
+        "B7#9"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "B7#9",
+        "D",
+        "E",
+        "B7#9"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "B7#9",
+        "D",
+        "E",
+        "B7#9"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "E7#9",
+        "A7",
+        "E7#9",
+        "B7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "B7#9",
+        "D",
+        "E",
+        "B7#9"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-rock-power-chord",
+        "rock-power-chords",
+        "rock-acoustic-strum",
+        "style-rock-math-rock-signature"
+      ],
+      "noteCount": 444
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "rock-organ-sustain"
+      ],
+      "noteCount": 288
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "style-rock-math-rock-signature",
+        "rock-acoustic-strum",
+        "rock-straight-drive",
+        "style-rock-rock-roll-signature"
+      ],
+      "noteCount": 242
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "rock-halftime-groove"
+      ],
+      "noteCount": 104
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "tape-echo",
+      "role": "percussion",
+      "patternIds": [
+        "tech-rock-feedback-swell",
+        "flamenco-golpe",
+        "bachata-bongo-majao",
+        "flam-tangos-compas",
+        "style-rock-dream-pop-signature"
+      ],
+      "noteCount": 72
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-rock-power-chord"
+      ],
+      "noteCount": 72
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "style-rock-rock-roll-signature",
+        "rock-organ-sustain"
+      ],
+      "noteCount": 396
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "overdrive-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "rock-acoustic-strum",
+        "rock-straight-drive",
+        "rock-power-chords"
+      ],
+      "noteCount": 360
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-rock-power-chord",
+      "name": "power chord",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "power chord"
+      ]
+    },
+    {
+      "id": "rock-power-chords",
+      "name": "Power Chords",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-acoustic-strum",
+      "name": "Acoustic Strum",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-rock-math-rock-signature",
+      "name": "Math Rock",
+      "worldId": "rock",
+      "meter": "5/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "odd-meter riff",
+        "boogie riff",
+        "dual-guitar harmony",
+        "guitar octave",
+        "rock backbeat"
+      ]
+    },
+    {
+      "id": "rock-organ-sustain",
+      "name": "Hammond Organ Sustain",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        7,
+        8,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-straight-drive",
+      "name": "Straight-Eighth Drive",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-rock-rock-roll-signature",
+      "name": "& Roll",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "boogie riff",
+        "rock backbeat",
+        "dual-guitar harmony",
+        "guitar octave",
+        "odd-meter riff"
+      ]
+    },
+    {
+      "id": "rock-halftime-groove",
+      "name": "Half-Time Groove",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        4
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-rock-feedback-swell",
+      "name": "feedback swell",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "feedback swell"
+      ]
+    },
+    {
+      "id": "flamenco-golpe",
+      "name": "Golpe",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "bachata-bongo-majao",
+      "name": "Bongo Majao",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-tangos-compas",
+      "name": "Tangos de Triana",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-rock-dream-pop-signature",
+      "name": "Dream Pop",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "dual-guitar harmony",
+        "arpeggiated shoegaze wall",
+        "guitar octave"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "organ",
+      "bass",
+      "drums",
+      "tape-echo"
+    ],
+    "techniques": [],
+    "signatureCell": "Wah-wah pedal sweep over overdriven fuzz 7#9 Hendrix chord with swirling tape flanger",
+    "tempoRange": [
+      95,
+      128
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "rubato",
+    "swingPercentage": 54,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "rock-psychedelic"
+  },
+  "performance": {
+    "noteCount": 1978,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-rock-power-chord",
+      "rock-power-chords",
+      "rock-acoustic-strum",
+      "style-rock-math-rock-signature",
+      "rock-organ-sustain",
+      "rock-straight-drive",
+      "style-rock-rock-roll-signature",
+      "rock-halftime-groove",
+      "tech-rock-feedback-swell",
+      "flamenco-golpe",
+      "bachata-bongo-majao",
+      "flam-tangos-compas",
+      "style-rock-dream-pop-signature"
+    ]
+  }
+}

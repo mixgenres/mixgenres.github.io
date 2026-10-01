@@ -1,0 +1,419 @@
+{
+  "schemaVersion": 2,
+  "genre": "salsa",
+  "styleId": "salsa-cha-cha-cha",
+  "styleName": "Cha-Cha-Chá",
+  "durationSec": 102.85714285714282,
+  "tempoBpm": 112,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "tema-1",
+      "kind": "tema",
+      "label": "Tema",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7",
+        "F",
+        "C",
+        "G7",
+        "C"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "coro-2",
+      "kind": "coro",
+      "label": "Coro",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7",
+        "F",
+        "C",
+        "G7",
+        "C"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "montuno-3",
+      "kind": "montuno",
+      "label": "Montuno",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7",
+        "F",
+        "C",
+        "G7",
+        "C"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "instrumental-4",
+      "kind": "instrumental",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7",
+        "F",
+        "C",
+        "G7",
+        "C"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coro-5",
+      "kind": "coro",
+      "label": "Coro",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7",
+        "F",
+        "C",
+        "G7",
+        "C"
+      ]
+    },
+    {
+      "id": "r6",
+      "key": "cierre-6",
+      "kind": "cierre",
+      "label": "Cierre",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7",
+        "F",
+        "C",
+        "G7",
+        "C"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "flute",
+      "role": "melody",
+      "patternIds": [
+        "tech-salsa-mambo-break",
+        "tech-salsa-3-2-clave",
+        "tech-salsa-2-3-clave",
+        "tech-salsa-cascara"
+      ],
+      "noteCount": 236
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "violin",
+      "role": "melody",
+      "patternIds": [
+        "tech-salsa-cascara",
+        "afro-piano-montuno",
+        "tech-salsa-mambo-break",
+        "tech-salsa-3-2-clave"
+      ],
+      "noteCount": 63
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "guiro",
+      "role": "percussion",
+      "patternIds": [
+        "afro-timbal-cascara",
+        "salsa-timbal-bell"
+      ],
+      "noteCount": 352
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "patternIds": [
+        "salsa-timbal-bell",
+        "afro-timbal-cascara"
+      ],
+      "noteCount": 361
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-piano-montuno"
+      ],
+      "noteCount": 608
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-salsa-2-3-clave",
+        "tech-salsa-coro-pregon",
+        "tech-salsa-mambo-break",
+        "tech-salsa-cascara"
+      ],
+      "noteCount": 56
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "bongos",
+      "role": "percussion",
+      "patternIds": [
+        "afro-timbal-cascara",
+        "salsa-timbal-bell"
+      ],
+      "noteCount": 350
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "claves",
+      "role": "percussion",
+      "patternIds": [
+        "afro-timbal-cascara",
+        "salsa-timbal-bell"
+      ],
+      "noteCount": 359
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-salsa-mambo-break",
+      "name": "mambo break",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "mambo break"
+      ]
+    },
+    {
+      "id": "tech-salsa-3-2-clave",
+      "name": "3-2 clave",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "3-2 clave"
+      ]
+    },
+    {
+      "id": "tech-salsa-2-3-clave",
+      "name": "2-3 clave",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "2-3 clave"
+      ]
+    },
+    {
+      "id": "tech-salsa-cascara",
+      "name": "cascara",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "cascara"
+      ]
+    },
+    {
+      "id": "afro-piano-montuno",
+      "name": "Piano Montuno/Guajeo",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14,
+        16,
+        19,
+        22,
+        24,
+        27,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-timbal-cascara",
+      "name": "Timbal Cáscara",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        26,
+        28,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "salsa-timbal-bell",
+      "name": "Timbal Mambo Bell",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        11,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-salsa-coro-pregon",
+      "name": "coro/pregón",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "coro/pregón"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "flute",
+      "violin",
+      "guiro",
+      "congas",
+      "piano"
+    ],
+    "techniques": [],
+    "signatureCell": "4-and-1 cha-cha-chá figure with güiro, timbales and charanga melody",
+    "tempoRange": [
+      104,
+      120
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "salsa-cha-cha-cha"
+  },
+  "performance": {
+    "noteCount": 2385,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-salsa-mambo-break",
+      "tech-salsa-3-2-clave",
+      "tech-salsa-2-3-clave",
+      "tech-salsa-cascara",
+      "afro-piano-montuno",
+      "afro-timbal-cascara",
+      "salsa-timbal-bell",
+      "tech-salsa-coro-pregon"
+    ]
+  }
+}

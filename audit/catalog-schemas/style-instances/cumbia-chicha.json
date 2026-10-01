@@ -1,0 +1,511 @@
+{
+  "schemaVersion": 2,
+  "genre": "cumbia",
+  "styleId": "cumbia-chicha",
+  "styleName": "Chicha",
+  "durationSec": 115.2000000000001,
+  "tempoBpm": 100,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-riff-0",
+      "kind": "intro riff",
+      "label": "Intro Riff",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "C",
+        "G",
+        "Am",
+        "C",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "C",
+        "G",
+        "Am",
+        "C",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "A",
+        "E",
+        "F#m",
+        "C#7",
+        "A",
+        "E",
+        "D",
+        "C#7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "guitar-solo-3",
+      "kind": "guitar solo",
+      "label": "Guitar Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "C",
+        "G",
+        "Am",
+        "C",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "C",
+        "G",
+        "Am",
+        "C",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F",
+        "E7",
+        "Am",
+        "Am"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "cu-09-cumbia-guitar-offbeat",
+        "cu-10-chicha-tremolo-figure"
+      ],
+      "noteCount": 652
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-cumbia-digital-cumbia-sub-bass",
+        "cu-10-chicha-tremolo-figure",
+        "cu-chicha-guitar"
+      ],
+      "noteCount": 72
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "cu-cumbia-bass",
+        "cu-09-cumbia-guitar-offbeat",
+        "tech-cumbia-digital-cumbia-sub-bass"
+      ],
+      "noteCount": 297
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "timbales",
+      "role": "percussion",
+      "patternIds": [
+        "tech-cumbia-electric-guitar-cumbia-riff",
+        "cu-cumbia-drum",
+        "flam-tangos-compas"
+      ],
+      "noteCount": 245
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "guiro",
+      "role": "percussion",
+      "patternIds": [
+        "cu-14-cumbia-stop-break",
+        "cu-08-guacharaca-scrape",
+        "cu-guacharaca"
+      ],
+      "noteCount": 395
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-cumbia-digital-cumbia-sub-bass",
+        "tech-cumbia-electric-guitar-cumbia-riff"
+      ],
+      "noteCount": 72
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "guacharaca",
+      "role": "percussion",
+      "patternIds": [
+        "cu-cumbia-drum",
+        "cu-guacharaca",
+        "cu-14-cumbia-stop-break",
+        "cu-08-guacharaca-scrape"
+      ],
+      "noteCount": 323
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "tambora",
+      "role": "percussion",
+      "patternIds": [
+        "style-cumbia-traditional-coastal-cumbia-signature",
+        "flamenco-bulerias-palmas",
+        "blues-shuffle",
+        "flam-tangos-compas",
+        "timba-bata-fusion"
+      ],
+      "noteCount": 226
+    }
+  ],
+  "patterns": [
+    {
+      "id": "cu-09-cumbia-guitar-offbeat",
+      "name": "guitar anticipations",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        5,
+        9,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-10-chicha-tremolo-figure",
+      "name": "Chicha Tremolo Figure",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14,
+        16,
+        19,
+        22,
+        24,
+        27,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-cumbia-digital-cumbia-sub-bass",
+      "name": "digital cumbia sub-bass",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "digital cumbia sub-bass"
+      ]
+    },
+    {
+      "id": "cu-chicha-guitar",
+      "name": "Chicha Tremolo Guitar",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-cumbia-bass",
+      "name": "bass anticipation",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-cumbia-electric-guitar-cumbia-riff",
+      "name": "electric-guitar cumbia riff",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "electric-guitar cumbia riff"
+      ]
+    },
+    {
+      "id": "cu-cumbia-drum",
+      "name": "Tambora/alegre conversation",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        8,
+        10,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-tangos-compas",
+      "name": "Tangos de Triana",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-14-cumbia-stop-break",
+      "name": "Stop Break",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-08-guacharaca-scrape",
+      "name": "Guacharaca reverse accent cycle",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-guacharaca",
+      "name": "Guacharaca scraper pulse",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        3,
+        4,
+        6,
+        7,
+        9,
+        10,
+        12,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-cumbia-traditional-coastal-cumbia-signature",
+      "name": "Traditional Coastal Cumbia",
+      "worldId": "cumbia",
+      "meter": "2/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "alegre improvisation",
+        "guacharaca scrape",
+        "llamador pulse",
+        "tambora pattern",
+        "cumbia bass ostinato",
+        "cumbia turnaround"
+      ]
+    },
+    {
+      "id": "flamenco-bulerias-palmas",
+      "name": "Bulerias Palmas",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "blues-shuffle",
+      "name": "Chicago Shuffle",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        11
+      ],
+      "techniques": []
+    },
+    {
+      "id": "timba-bata-fusion",
+      "name": "Bata Fusion",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        10,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "synth",
+      "bass",
+      "timbales",
+      "guiro"
+    ],
+    "techniques": [],
+    "signatureCell": "surf/psychedelic electric guitar, cumbia bass and tight percussion",
+    "tempoRange": [
+      92,
+      108
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "cumbia-chicha"
+  },
+  "performance": {
+    "noteCount": 2282,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "cu-09-cumbia-guitar-offbeat",
+      "cu-10-chicha-tremolo-figure",
+      "tech-cumbia-digital-cumbia-sub-bass",
+      "cu-chicha-guitar",
+      "cu-cumbia-bass",
+      "tech-cumbia-electric-guitar-cumbia-riff",
+      "cu-cumbia-drum",
+      "flam-tangos-compas",
+      "cu-14-cumbia-stop-break",
+      "cu-08-guacharaca-scrape",
+      "cu-guacharaca",
+      "style-cumbia-traditional-coastal-cumbia-signature",
+      "flamenco-bulerias-palmas",
+      "blues-shuffle",
+      "timba-bata-fusion"
+    ]
+  }
+}

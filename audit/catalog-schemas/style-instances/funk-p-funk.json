@@ -1,0 +1,413 @@
+{
+  "schemaVersion": 2,
+  "genre": "funk",
+  "styleId": "funk-p-funk",
+  "styleName": "P-Funk",
+  "durationSec": 81.50943396226417,
+  "tempoBpm": 106,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "E7#9",
+        "E7#9",
+        "E7#9",
+        "E7#9"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "groove-1",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "E7#9",
+        "E7#9",
+        "A7",
+        "E7#9"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "verse-2",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "E7",
+        "E7",
+        "B7#9",
+        "B7#9"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "E7#9",
+        "E7#9",
+        "E7#9",
+        "E7#9"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "groove-4",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "E7#9",
+        "E7#9",
+        "A7",
+        "E7#9"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "tag-5",
+      "kind": "tag",
+      "label": "Tag",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "E7",
+        "E7",
+        "B7#9",
+        "B7#9"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "funk-slap-bass",
+        "funk-the-one-bass"
+      ],
+      "noteCount": 239
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "funk-drum-breakbeat",
+        "funk-hihat-open",
+        "funk-ghost-snares"
+      ],
+      "noteCount": 182
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "funk-chicken-scratch-guitar",
+        "funk-wah-guitar"
+      ],
+      "noteCount": 1584
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "funk-clavinet"
+      ],
+      "noteCount": 36
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "funk-horn-section",
+        "tech-funk-funk-horn-stab"
+      ],
+      "noteCount": 106
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-funk-funk-horn-stab"
+      ],
+      "noteCount": 36
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "clavinet",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "funk-clavinet"
+      ],
+      "noteCount": 195
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "funk-clavinet"
+      ],
+      "noteCount": 362
+    }
+  ],
+  "patterns": [
+    {
+      "id": "funk-slap-bass",
+      "name": "Slap Bass",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-the-one-bass",
+      "name": "\"The One\" 16th-Note Syncopated Bass",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-drum-breakbeat",
+      "name": "Clyde Stubblefield \"Funky Drummer\" Breakbeat",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        8,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-hihat-open",
+      "name": "Open Hi-Hat",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        1,
+        3,
+        5,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-ghost-snares",
+      "name": "Ghost Snares",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        3,
+        6,
+        7,
+        10,
+        11,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-chicken-scratch-guitar",
+      "name": "Chicken-Scratch 9th Chords",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-wah-guitar",
+      "name": "Wah-Wah Guitar",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        7,
+        8,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-clavinet",
+      "name": "Clavinet Sync",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        4,
+        7,
+        10,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-horn-section",
+      "name": "Horn Section Hits",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-funk-funk-horn-stab",
+      "name": "horn stab",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "funk horn stab"
+      ]
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "bass",
+      "drums",
+      "electric-guitar",
+      "synth",
+      "brass"
+    ],
+    "techniques": [],
+    "signatureCell": "Massive downbeat \"ONE\" followed by Bootsy envelope-filter bass bubble and synth squelch",
+    "tempoRange": [
+      96,
+      116
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "swung",
+    "swingPercentage": 58,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "funk-p-funk"
+  },
+  "performance": {
+    "noteCount": 2740,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "funk-slap-bass",
+      "funk-the-one-bass",
+      "funk-drum-breakbeat",
+      "funk-hihat-open",
+      "funk-ghost-snares",
+      "funk-chicken-scratch-guitar",
+      "funk-wah-guitar",
+      "funk-clavinet",
+      "funk-horn-section",
+      "tech-funk-funk-horn-stab",
+      "afro-amapiano-pad"
+    ]
+  }
+}

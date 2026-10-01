@@ -1,0 +1,348 @@
+{
+  "schemaVersion": 2,
+  "genre": "r-and-b",
+  "styleId": "r-and-b-new-jack-swing",
+  "styleName": "New Jack Swing",
+  "durationSec": 87.27272727272728,
+  "tempoBpm": 110,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Dm7",
+        "E7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Dm7",
+        "E7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "pre-chorus-2",
+      "kind": "pre-chorus",
+      "label": "Pre-Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Dm7",
+        "E7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "chorus-3",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "bridge-4",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Dm7",
+        "E7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Dm7",
+        "E7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-r-and-b-new-jack-swing-swing-grid"
+      ],
+      "noteCount": 198
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "rnb-vocal-answer"
+      ],
+      "noteCount": 56
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-r-and-b-syncopated-bass"
+      ],
+      "noteCount": 192
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-r-and-b-background-vocal-answer",
+        "tech-r-and-b-vocal-chop"
+      ],
+      "noteCount": 56
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "rnb-chromatic-bass",
+        "rnb-neo-soul-comp"
+      ],
+      "noteCount": 56
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "rnb-neo-soul-comp",
+        "rnb-chromatic-bass"
+      ],
+      "noteCount": 1002
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "rhodes",
+      "role": "harmony",
+      "patternIds": [
+        "tech-r-and-b-rhodes-voicing"
+      ],
+      "noteCount": 606
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "rnb-neo-soul-comp",
+        "rnb-vocal-answer",
+        "rnb-chromatic-bass"
+      ],
+      "noteCount": 104
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-r-and-b-new-jack-swing-swing-grid",
+      "name": "New Jack Swing swing-grid",
+      "worldId": "r-and-b",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "New Jack Swing swing-grid"
+      ]
+    },
+    {
+      "id": "rnb-vocal-answer",
+      "name": "Vocal Answer",
+      "worldId": "r-and-b",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        6,
+        7,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-r-and-b-syncopated-bass",
+      "name": "syncopated bass",
+      "worldId": "r-and-b",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "syncopated bass"
+      ]
+    },
+    {
+      "id": "tech-r-and-b-background-vocal-answer",
+      "name": "background-vocal answer",
+      "worldId": "r-and-b",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "background-vocal answer"
+      ]
+    },
+    {
+      "id": "tech-r-and-b-vocal-chop",
+      "name": "vocal chop",
+      "worldId": "r-and-b",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal chop"
+      ]
+    },
+    {
+      "id": "rnb-chromatic-bass",
+      "name": "Chromatic Bass",
+      "worldId": "r-and-b",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        5,
+        7,
+        8,
+        11,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rnb-neo-soul-comp",
+      "name": "Syncopated Comp",
+      "worldId": "r-and-b",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        4,
+        6,
+        9,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-r-and-b-rhodes-voicing",
+      "name": "Rhodes voicing",
+      "worldId": "r-and-b",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Rhodes voicing"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "synth",
+      "bass",
+      "voice",
+      "sampler"
+    ],
+    "techniques": [],
+    "signatureCell": "Swinging drum-machine backbeat and syncopated bass beneath a layered vocal hook",
+    "tempoRange": [
+      95,
+      125
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "swung",
+    "swingPercentage": 57,
+    "anticipationOffsetSteps": 1
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "r-and-b-new-jack-swing"
+  },
+  "performance": {
+    "noteCount": 2270,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-r-and-b-new-jack-swing-swing-grid",
+      "rnb-vocal-answer",
+      "tech-r-and-b-syncopated-bass",
+      "tech-r-and-b-background-vocal-answer",
+      "tech-r-and-b-vocal-chop",
+      "rnb-chromatic-bass",
+      "rnb-neo-soul-comp",
+      "tech-r-and-b-rhodes-voicing"
+    ]
+  }
+}

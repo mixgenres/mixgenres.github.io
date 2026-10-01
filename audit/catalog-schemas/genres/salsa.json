@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "id": "salsa",
+  "name": "Salsa",
+  "family": "Caribbean / Cuban",
+  "description": "The monumental Afro-Cuban & Salsa universe:",
+  "substyles": [
+    "Mambo",
+    "Salsa Dura",
+    "Son Montuno",
+    "Cha-Cha-Chá",
+    "Salsa Romántica"
+  ],
+  "styleIds": [
+    "salsa-mambo",
+    "salsa-salsa-dura",
+    "salsa-son-montuno",
+    "salsa-cha-cha-cha",
+    "salsa-salsa-romantica",
+    "salsa-son-cubano-foundation",
+    "salsa-salsa-brava-1970s-new-york",
+    "salsa-salsa-conjunto",
+    "salsa-salsa-jazz-fusion",
+    "salsa-boogaloo-latin-soul"
+  ],
+  "patternIds": [
+    "afro-clave-son-23",
+    "afro-bass-tumbao",
+    "afro-piano-montuno",
+    "afro-timbal-cascara",
+    "afro-conga-tumbao",
+    "afro-mambo-horn-hits",
+    "salsa-campana",
+    "salsa-guiro",
+    "salsa-maracas",
+    "salsa-clave-32",
+    "salsa-timbal-bell",
+    "salsa-phrase-12",
+    "salsa-call-13",
+    "salsa-anchor-14",
+    "salsa-comp-15",
+    "salsa-intro-16",
+    "salsa--phrasing",
+    "tech-salsa-tumbao",
+    "tech-salsa-montuno",
+    "tech-salsa-2-3-clave",
+    "tech-salsa-3-2-clave",
+    "tech-salsa-cascara",
+    "tech-salsa-bongo-martillo",
+    "tech-salsa-campana",
+    "tech-salsa-mambo-break",
+    "tech-salsa-percussion-coda",
+    "style-salsa-son-cubano-foundation-signature",
+    "style-salsa-salsa-brava-1970s-new-york-signature",
+    "style-salsa-salsa-conjunto-signature",
+    "style-salsa-salsa-jazz-fusion-signature",
+    "style-salsa-boogaloo-latin-soul-signature",
+    "tech-salsa-mambo-horn-section",
+    "tech-salsa-coro-pregon",
+    "tech-salsa-mona"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "salsa-mambo",
+      "name": "Mambo",
+      "keySubstyles": [
+        "Palladium Mambo",
+        "Afro-Cuban Mambo"
+      ],
+      "characteristicInstruments": [
+        "brass",
+        "timbales",
+        "congas",
+        "piano",
+        "bass"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "salsa-salsa-dura",
+      "name": "Salsa Dura",
+      "keySubstyles": [
+        "Fania Sound",
+        "Barrio Salsa"
+      ],
+      "characteristicInstruments": [
+        "brass",
+        "congas",
+        "timbales",
+        "bongos",
+        "piano"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "salsa-son-montuno",
+      "name": "Son Montuno",
+      "keySubstyles": [
+        "Arsenio Style",
+        "Son Tradicional"
+      ],
+      "characteristicInstruments": [
+        "tres",
+        "bongos",
+        "claves",
+        "acoustic-bass",
+        "trumpet"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "salsa-cha-cha-cha",
+      "name": "Cha-Cha-Chá",
+      "keySubstyles": [
+        "Charanga Cha-Cha-Chá",
+        "Big Band Cha-Cha"
+      ],
+      "characteristicInstruments": [
+        "flute",
+        "violin",
+        "guiro",
+        "congas",
+        "piano"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "salsa-salsa-romantica",
+      "name": "Salsa Romántica",
+      "keySubstyles": [
+        "Salsa Sensual",
+        "Salsa de Alcoba"
+      ],
+      "characteristicInstruments": [
+        "brass",
+        "piano",
+        "synth",
+        "congas",
+        "timbales"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "salsa-son-cubano-foundation",
+      "name": "Son Cubano Foundation",
+      "keySubstyles": [
+        "Son Cubano Foundation"
+      ],
+      "characteristicInstruments": [
+        "tres",
+        "bongos",
+        "bass",
+        "claves",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "salsa-salsa-brava-1970s-new-york",
+      "name": "Salsa Brava / 1970s New York",
+      "keySubstyles": [
+        "Salsa Brava / 1970s New York"
+      ],
+      "characteristicInstruments": [
+        "trombone",
+        "piano",
+        "bass",
+        "congas",
+        "timbales",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "salsa-salsa-conjunto",
+      "name": "Salsa Conjunto",
+      "keySubstyles": [
+        "Salsa Conjunto"
+      ],
+      "characteristicInstruments": [
+        "trumpet",
+        "piano",
+        "bass",
+        "congas",
+        "bongos",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "salsa-salsa-jazz-fusion",
+      "name": "Salsa Jazz Fusion",
+      "keySubstyles": [
+        "Salsa Jazz Fusion"
+      ],
+      "characteristicInstruments": [
+        "piano",
+        "bass",
+        "congas",
+        "timbales",
+        "brass"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "salsa-boogaloo-latin-soul",
+      "name": "Boogaloo / Latin Soul",
+      "keySubstyles": [
+        "Boogaloo / Latin Soul"
+      ],
+      "characteristicInstruments": [
+        "piano",
+        "bass",
+        "congas",
+        "brass",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "salsa-starter"
+}

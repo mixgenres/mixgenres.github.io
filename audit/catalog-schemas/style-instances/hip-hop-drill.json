@@ -1,0 +1,509 @@
+{
+  "schemaVersion": 2,
+  "genre": "hip-hop",
+  "styleId": "hip-hop-drill",
+  "styleName": "Drill",
+  "durationSec": 67.60563380281693,
+  "tempoBpm": 142,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "A#",
+        "Gm",
+        "A7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "A#",
+        "Gm",
+        "A7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "hook-2",
+      "kind": "hook",
+      "label": "Hook",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Dm",
+        "Dm",
+        "A#",
+        "A7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "verse-3",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "A#",
+        "Gm",
+        "A7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "bridge-4",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "A#",
+        "Gm",
+        "A7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "A#",
+        "Gm",
+        "A7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "hiphop-808-glide-bass",
+        "tech-hip-hop-boom-bap-kick-snare",
+        "hiphop-trap-basic"
+      ],
+      "noteCount": 130
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "hiphop-boom-basic",
+        "hiphop-dembow-riddim",
+        "hiphop-neosoul"
+      ],
+      "noteCount": 202
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-hip-hop-boom-bap-kick-snare",
+        "hiphop-neosoul",
+        "house--ht-10-detroit-sequence",
+        "reggaeton--rg-16-perreo-synth-hook",
+        "style-hip-hop-west-coast-g-funk-expansion-signature",
+        "kizomba-vocal-comping"
+      ],
+      "noteCount": 48
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "hip-hop-sampled-keys"
+      ],
+      "noteCount": 501
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "style-hip-hop-golden-age-sample-collage-signature",
+        "reggaeton--rg-16-perreo-synth-hook",
+        "kizomba-vocal-comping",
+        "tech-hip-hop-vinyl-texture"
+      ],
+      "noteCount": 48
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "turntable",
+      "role": "lead",
+      "patternIds": [
+        "reggaeton--rg-11-dembow-vocal-pickup",
+        "tech-hip-hop-vinyl-texture",
+        "hiphop-808-glide-bass",
+        "style-hip-hop-golden-age-sample-collage-signature",
+        "tech-hip-hop-sample-chop"
+      ],
+      "noteCount": 40
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "hiphop-808-glide-bass",
+        "tech-hip-hop-sample-chop"
+      ],
+      "noteCount": 83
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-hip-hop-vocal-chop",
+        "tech-hip-hop-boom-bap-kick-snare"
+      ],
+      "noteCount": 48
+    }
+  ],
+  "patterns": [
+    {
+      "id": "hiphop-808-glide-bass",
+      "name": "808 Glide & Sub Slide Bass",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-hip-hop-boom-bap-kick-snare",
+      "name": "boom-bap kick/snare",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "boom-bap kick/snare"
+      ]
+    },
+    {
+      "id": "hiphop-trap-basic",
+      "name": "Trap Half-Time",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "hiphop-boom-basic",
+      "name": "Boom Bap Basic",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "hiphop-dembow-riddim",
+      "name": "Classic Dembow Riddim",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        8,
+        11,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "hiphop-neosoul",
+      "name": "Neo-Soul Hip Hop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        5,
+        8,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "house--ht-10-detroit-sequence",
+      "name": "Detroit Sequence",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        16,
+        19,
+        22,
+        25,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-16-perreo-synth-hook",
+      "name": "Perreo Minor Synth Hook",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-hip-hop-west-coast-g-funk-expansion-signature",
+      "name": "West Coast G-Funk Expansion",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "beat switch",
+        "vinyl texture"
+      ]
+    },
+    {
+      "id": "kizomba-vocal-comping",
+      "name": "Vocal Phrase Response",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        7,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "hip-hop-sampled-keys",
+      "name": "Sampled Keys Loop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 24,
+      "onsetGrid": [
+        0,
+        6,
+        12,
+        18,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-hip-hop-golden-age-sample-collage-signature",
+      "name": "Golden-Age Sample Collage",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "MPC swing",
+        "beat switch",
+        "sample chop",
+        "vinyl texture",
+        "chopped break",
+        "vocal chop"
+      ]
+    },
+    {
+      "id": "tech-hip-hop-vinyl-texture",
+      "name": "vinyl texture",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vinyl texture"
+      ]
+    },
+    {
+      "id": "reggaeton--rg-11-dembow-vocal-pickup",
+      "name": "Dembow Vocal Pickup",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-hip-hop-sample-chop",
+      "name": "sample chop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "sample chop"
+      ]
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-hip-hop-vocal-chop",
+      "name": "vocal chop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal chop"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "sub-bass",
+      "drums",
+      "synth",
+      "piano",
+      "sampler"
+    ],
+    "techniques": [],
+    "signatureCell": "Extreme sliding 808 octave jump landing on syncopated counter-snare and hi-hat triplet skip",
+    "tempoRange": [
+      138,
+      146
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "pushed",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "hip-hop-drill"
+  },
+  "performance": {
+    "noteCount": 1100,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "hiphop-808-glide-bass",
+      "tech-hip-hop-boom-bap-kick-snare",
+      "hiphop-trap-basic",
+      "hiphop-boom-basic",
+      "hiphop-dembow-riddim",
+      "hiphop-neosoul",
+      "house--ht-10-detroit-sequence",
+      "reggaeton--rg-16-perreo-synth-hook",
+      "style-hip-hop-west-coast-g-funk-expansion-signature",
+      "kizomba-vocal-comping",
+      "hip-hop-sampled-keys",
+      "style-hip-hop-golden-age-sample-collage-signature",
+      "tech-hip-hop-vinyl-texture",
+      "reggaeton--rg-11-dembow-vocal-pickup",
+      "tech-hip-hop-sample-chop",
+      "afro-amapiano-pad",
+      "tech-hip-hop-vocal-chop"
+    ]
+  }
+}

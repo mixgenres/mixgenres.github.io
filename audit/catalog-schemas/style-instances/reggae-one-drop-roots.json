@@ -1,0 +1,424 @@
+{
+  "schemaVersion": 2,
+  "genre": "reggae",
+  "styleId": "reggae-one-drop-roots",
+  "styleName": "One-Drop Roots",
+  "durationSec": 120,
+  "tempoBpm": 80,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Bm",
+        "A",
+        "G",
+        "A"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Bm",
+        "A",
+        "G",
+        "A"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Bm",
+        "A",
+        "G",
+        "A"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Bm",
+        "A",
+        "G",
+        "A"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Bm",
+        "A",
+        "G",
+        "A"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Bm",
+        "A",
+        "G",
+        "A"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "style-reggae-one-drop-roots-signature",
+        "reggae--rd-reggae-bass",
+        "reggae--rd-08-reggae-bass-lead",
+        "tech-reggae-reggae-bassline"
+      ],
+      "noteCount": 140
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "reggae--rd-one-drop"
+      ],
+      "noteCount": 189
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-reggae-guitar-skank",
+        "style-reggae-one-drop-roots-signature"
+      ],
+      "noteCount": 348
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--reggae-melodic-bass",
+        "reggae--rd-09-bubble-organ",
+        "style-reggae-one-drop-roots-signature",
+        "reggae--rd-skank"
+      ],
+      "noteCount": 366
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-reggae-reggae-bassline",
+        "reggae--reggae-melodic-bass",
+        "tech-reggae-one-drop"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "reggae--rd-reggae-bass",
+        "reggae--rd-08-reggae-bass-lead",
+        "tech-reggae-reggae-bassline"
+      ],
+      "noteCount": 117
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "horn-section",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--reggae-melodic-bass",
+        "tech-reggae-guitar-skank",
+        "tech-reggae-one-drop"
+      ],
+      "noteCount": 146
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-reggae-one-drop",
+        "tango-332-piazzolla",
+        "zouk-guitar-skank-chawa",
+        "reggae--reggae-melodic-bass"
+      ],
+      "noteCount": 594
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-reggae-one-drop-roots-signature",
+      "name": "One-Drop Roots",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        12
+      ],
+      "techniques": [
+        "guitar skank",
+        "one-drop",
+        "reggae bassline"
+      ]
+    },
+    {
+      "id": "reggae--rd-reggae-bass",
+      "name": "Melodic Reggae Bass",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-08-reggae-bass-lead",
+      "name": "Bass Lead",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        6,
+        9,
+        14,
+        16,
+        22,
+        25,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-reggae-reggae-bassline",
+      "name": "bassline",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "reggae bassline"
+      ]
+    },
+    {
+      "id": "reggae--rd-one-drop",
+      "name": "One-Drop Foundation",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-reggae-guitar-skank",
+      "name": "guitar skank",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": [
+        "guitar skank"
+      ]
+    },
+    {
+      "id": "reggae--reggae-melodic-bass",
+      "name": "Melodic Reggae Bass",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-09-bubble-organ",
+      "name": "Bubble Organ",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-skank",
+      "name": "Offbeat Skank",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-reggae-one-drop",
+      "name": "one-drop",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        12
+      ],
+      "techniques": [
+        "one-drop"
+      ]
+    },
+    {
+      "id": "tango-332-piazzolla",
+      "name": "3+3+2 Nuevo Tango Pulse",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-guitar-skank-chawa",
+      "name": "Chawa Guitar Skank",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "bass",
+      "drums",
+      "electric-guitar",
+      "organ",
+      "voice"
+    ],
+    "techniques": [
+      "guitar skank",
+      "one-drop",
+      "reggae bassline"
+    ],
+    "signatureCell": "One-drop pulse with melodic bass",
+    "tempoRange": [
+      70,
+      90
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Bob Marley",
+      "The Abyssinians"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "reggae-one-drop-roots"
+  },
+  "performance": {
+    "noteCount": 1964,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-reggae-one-drop-roots-signature",
+      "reggae--rd-reggae-bass",
+      "reggae--rd-08-reggae-bass-lead",
+      "tech-reggae-reggae-bassline",
+      "reggae--rd-one-drop",
+      "tech-reggae-guitar-skank",
+      "reggae--reggae-melodic-bass",
+      "reggae--rd-09-bubble-organ",
+      "reggae--rd-skank",
+      "tech-reggae-one-drop",
+      "tango-332-piazzolla",
+      "zouk-guitar-skank-chawa"
+    ]
+  }
+}

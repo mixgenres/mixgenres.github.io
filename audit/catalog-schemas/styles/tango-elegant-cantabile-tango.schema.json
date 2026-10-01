@@ -1,0 +1,295 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mixgenres.local/schema/catalog-style/tango-elegant-cantabile-tango.schema.json",
+  "title": "MixGenres Elegant Cantabile Tango Song Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "genre",
+    "styleId",
+    "styleName",
+    "durationSec",
+    "tempoBpm",
+    "meter",
+    "sections",
+    "tracks",
+    "patterns",
+    "sonicFeatures",
+    "references",
+    "render",
+    "performance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "genre": {
+      "const": "tango"
+    },
+    "styleId": {
+      "const": "tango-elegant-cantabile-tango"
+    },
+    "styleName": {
+      "const": "Elegant Cantabile Tango"
+    },
+    "durationSec": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "tempoBpm": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "meter": {
+      "type": "string"
+    },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "key",
+          "kind",
+          "label",
+          "bars",
+          "intensity",
+          "chords"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "bars": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "intensity": {
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "peak"
+            ]
+          },
+          "chords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "tracks": {
+      "type": "array",
+      "minItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "trackId",
+          "instrumentId",
+          "role",
+          "patternIds",
+          "noteCount"
+        ],
+        "properties": {
+          "trackId": {
+            "type": "string"
+          },
+          "instrumentId": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "patternIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "noteCount": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "patterns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "worldId",
+          "meter",
+          "subdivisions",
+          "onsetGrid",
+          "techniques"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "worldId": {
+            "type": "string"
+          },
+          "meter": {
+            "type": "string"
+          },
+          "subdivisions": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "onsetGrid": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "techniques": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "sonicFeatures": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "characteristicInstruments",
+        "techniques",
+        "signatureCell",
+        "tempoRange",
+        "preferredMeters",
+        "microtimingFeel",
+        "swingPercentage",
+        "anticipationOffsetSteps"
+      ],
+      "properties": {
+        "characteristicInstruments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "techniques": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "signatureCell": {
+          "type": "string"
+        },
+        "tempoRange": {
+          "type": "array"
+        },
+        "preferredMeters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "microtimingFeel": {
+          "type": "string"
+        },
+        "swingPercentage": {
+          "type": "number"
+        },
+        "anticipationOffsetSteps": {
+          "type": "number"
+        }
+      }
+    },
+    "references": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artists",
+        "tracks"
+      ],
+      "properties": {
+        "artists": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tracks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "render": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "renderer",
+        "sourceStyleId"
+      ],
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "renderer": {
+          "type": "string"
+        },
+        "sourceStyleId": {
+          "const": "tango-elegant-cantabile-tango"
+        }
+      }
+    },
+    "performance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "noteCount",
+        "trackCount",
+        "usedPatternIds"
+      ],
+      "properties": {
+        "noteCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "trackCount": {
+          "const": 8
+        },
+        "usedPatternIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,423 @@
+{
+  "schemaVersion": 2,
+  "genre": "timba",
+  "styleId": "timba-timba-habanera",
+  "styleName": "Timba Habanera",
+  "durationSec": 134.40000000000015,
+  "tempoBpm": 100,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Fm7",
+        "A#m7",
+        "C7alt",
+        "Fm7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "marcha-1",
+      "kind": "marcha",
+      "label": "Marcha",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Fm7",
+        "A#m7",
+        "D#7",
+        "G#maj7",
+        "C#maj7",
+        "A#m7",
+        "C7",
+        "Fm7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "verse-2",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A#m7",
+        "C7",
+        "Fm7",
+        "Fm7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "coro-3",
+      "kind": "coro",
+      "label": "Coro",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Fm7",
+        "A#m7",
+        "C7alt",
+        "Fm7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "montuno-4",
+      "kind": "montuno",
+      "label": "Montuno",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A#m7",
+        "C7",
+        "Fm7",
+        "Fm7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "gear-shift-5",
+      "kind": "gear-shift",
+      "label": "Gear Shift",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A#m7",
+        "C7",
+        "Fm7",
+        "Fm7"
+      ]
+    },
+    {
+      "id": "r6",
+      "key": "coro-6",
+      "kind": "coro",
+      "label": "Coro",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Fm7",
+        "A#m7",
+        "C7alt",
+        "Fm7"
+      ]
+    },
+    {
+      "id": "r7",
+      "key": "cierre-7",
+      "kind": "cierre",
+      "label": "Cierre",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Fm7",
+        "A#m7",
+        "D#7",
+        "G#maj7",
+        "C#maj7",
+        "A#m7",
+        "C7",
+        "Fm7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "timba-kick-bomobo",
+        "timba-bata-fusion",
+        "timba-clave-rumba",
+        "timba-songo-groove"
+      ],
+      "noteCount": 238
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "timbales",
+      "role": "percussion",
+      "patternIds": [
+        "timba-clave-rumba",
+        "timba-conga-gear",
+        "timba-bata-fusion"
+      ],
+      "noteCount": 311
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "patternIds": [
+        "timba-bata-fusion",
+        "timba-clave-rumba",
+        "timba-conga-gear"
+      ],
+      "noteCount": 307
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "timba-synth-bass"
+      ],
+      "noteCount": 242
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "timba-gear-marcha",
+        "timba-piano-guajeo"
+      ],
+      "noteCount": 1063
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "trombone",
+      "role": "lead",
+      "patternIds": [
+        "timba-horn-moña"
+      ],
+      "noteCount": 160
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-timba-coro-pregon"
+      ],
+      "noteCount": 72
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "bongos",
+      "role": "percussion",
+      "patternIds": [
+        "timba-conga-gear",
+        "timba-songo-groove"
+      ],
+      "noteCount": 454
+    }
+  ],
+  "patterns": [
+    {
+      "id": "timba-kick-bomobo",
+      "name": "Kick Bombo",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        6,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "timba-bata-fusion",
+      "name": "Bata Fusion",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "timba-clave-rumba",
+      "name": "2-3 Rumba Clave",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "timba-songo-groove",
+      "name": "Songo Drum Kit & Cowbell Groove",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "timba-conga-gear",
+      "name": "Conga Gear",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        11,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "timba-synth-bass",
+      "name": "Synth Bass Tumbao",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "timba-gear-marcha",
+      "name": "Gear Change: Marcha",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        4,
+        6,
+        10,
+        12,
+        14,
+        16,
+        20,
+        22,
+        26,
+        28,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "timba-piano-guajeo",
+      "name": "Piano Guajeo",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "timba-horn-moña",
+      "name": "Horn Moña",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        4,
+        7,
+        9,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-timba-coro-pregon",
+      "name": "coro/pregón",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "coro/pregón"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "timbales",
+      "congas",
+      "bass",
+      "piano"
+    ],
+    "techniques": [],
+    "signatureCell": "Explosive transition into bomba gear: slap-bass slide, conga slap frenzy, and brass shout",
+    "tempoRange": [
+      92,
+      108
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "pushed",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "timba-timba-habanera"
+  },
+  "performance": {
+    "noteCount": 2847,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "timba-kick-bomobo",
+      "timba-bata-fusion",
+      "timba-clave-rumba",
+      "timba-songo-groove",
+      "timba-conga-gear",
+      "timba-synth-bass",
+      "timba-gear-marcha",
+      "timba-piano-guajeo",
+      "timba-horn-moña",
+      "tech-timba-coro-pregon"
+    ]
+  }
+}

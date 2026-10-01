@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 2,
+  "genre": "tango",
+  "styleId": "tango-guardia-nueva-modernism",
+  "styleName": "Guardia Nueva Modernism",
+  "durationSec": 88.88888888888894,
+  "tempoBpm": 108,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "A",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "B",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "solo-3",
+      "kind": "solo",
+      "label": "Variación",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "coda-4",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "bandoneon",
+      "role": "harmony",
+      "patternIds": [
+        "tech-tango-chromatic-tango-bass",
+        "tech-tango-bandoneon-string-counterpoint"
+      ],
+      "noteCount": 390
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "violin",
+      "role": "melody",
+      "patternIds": [
+        "style-tango-guardia-nueva-modernism-signature",
+        "tech-tango-orchestral-silence"
+      ],
+      "noteCount": 124
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tango-yumba",
+        "style-tango-guardia-nueva-modernism-signature"
+      ],
+      "noteCount": 272
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "tango-bass-pizzicato"
+      ],
+      "noteCount": 87
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "cello",
+      "role": "lead",
+      "patternIds": [
+        "tech-tango-orchestral-silence",
+        "tango-yumba"
+      ],
+      "noteCount": 126
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "flute",
+      "role": "melody",
+      "patternIds": [
+        "tech-tango-tango-vals-bass",
+        "tango-yumba",
+        "tech-tango-chromatic-tango-bass",
+        "tech-tango-bandoneon-string-counterpoint"
+      ],
+      "noteCount": 88
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "clarinet",
+      "role": "lead",
+      "patternIds": [
+        "tech-tango-bandoneon-string-counterpoint",
+        "tech-tango-sincopa-tanguera"
+      ],
+      "noteCount": 133
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tango-marcato-2",
+        "tango-332-piazzolla",
+        "tango-marcato-4"
+      ],
+      "noteCount": 370
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-tango-chromatic-tango-bass",
+      "name": "chromatic tango bass",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "chromatic tango bass"
+      ]
+    },
+    {
+      "id": "tech-tango-bandoneon-string-counterpoint",
+      "name": "bandoneon/string counterpoint",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "bandoneon/string counterpoint"
+      ]
+    },
+    {
+      "id": "style-tango-guardia-nueva-modernism-signature",
+      "name": "Guardia Nueva Modernism",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "síncopa tanguera",
+        "bandoneon/string counterpoint",
+        "chromatic tango bass",
+        "orchestral silence",
+        "tango vals bass"
+      ]
+    },
+    {
+      "id": "tech-tango-orchestral-silence",
+      "name": "orchestral silence",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "orchestral silence"
+      ]
+    },
+    {
+      "id": "tango-yumba",
+      "name": "Yumba/Heavy Tango Accent",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-bass-pizzicato",
+      "name": "Pizzicato Bass",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        3,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-tango-tango-vals-bass",
+      "name": "vals bass",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "tango vals bass"
+      ]
+    },
+    {
+      "id": "tech-tango-sincopa-tanguera",
+      "name": "síncopa tanguera",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "síncopa tanguera"
+      ]
+    },
+    {
+      "id": "tango-marcato-2",
+      "name": "Marcato en 2",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-332-piazzolla",
+      "name": "3+3+2 Nuevo Tango Pulse",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-marcato-4",
+      "name": "Marcato en 4",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "bandoneon",
+      "violin",
+      "piano",
+      "upright-bass"
+    ],
+    "techniques": [
+      "síncopa tanguera",
+      "bandoneon/string counterpoint",
+      "chromatic tango bass",
+      "orchestral silence",
+      "tango vals bass"
+    ],
+    "signatureCell": "Counterpoint-driven tango with syncopation",
+    "tempoRange": [
+      90,
+      125
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "rubato",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Julio de Caro"
+    ],
+    "tracks": [
+      "Mala Junta"
+    ]
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "tango-guardia-nueva-modernism"
+  },
+  "performance": {
+    "noteCount": 1590,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-tango-chromatic-tango-bass",
+      "tech-tango-bandoneon-string-counterpoint",
+      "style-tango-guardia-nueva-modernism-signature",
+      "tech-tango-orchestral-silence",
+      "tango-yumba",
+      "tango-bass-pizzicato",
+      "tech-tango-tango-vals-bass",
+      "tech-tango-sincopa-tanguera",
+      "tango-marcato-2",
+      "tango-332-piazzolla",
+      "tango-marcato-4"
+    ]
+  }
+}

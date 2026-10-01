@@ -1,0 +1,416 @@
+{
+  "schemaVersion": 2,
+  "genre": "house",
+  "styleId": "house-chicago-house",
+  "styleName": "Chicago House",
+  "durationSec": 140.4878048780488,
+  "tempoBpm": 123,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Groove",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Main Groove",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "bridge-4",
+      "kind": "bridge",
+      "label": "Return",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "house--ht-four-floor",
+        "house--ht-06-four-on-the-floor-kick",
+        "style-house-chicago-house-signature"
+      ],
+      "noteCount": 287
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-house-piano-house-stab",
+        "style-house-chicago-house-signature"
+      ],
+      "noteCount": 1164
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "house--house-piano-stab",
+        "style-house-chicago-house-signature"
+      ],
+      "noteCount": 288
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "style-house-chicago-house-signature",
+        "house--house-piano-stab"
+      ],
+      "noteCount": 104
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "house--house-piano-stab",
+        "tech-house-offbeat-open-hat",
+        "tech-house-house-clap",
+        "tech-house-four-on-floor"
+      ],
+      "noteCount": 104
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "style-house-chicago-house-signature",
+        "house--house-piano-stab"
+      ],
+      "noteCount": 282
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "rhodes",
+      "role": "harmony",
+      "patternIds": [
+        "tech-house-piano-house-stab",
+        "style-house-chicago-house-signature",
+        "house--ht-09-house-chord-stab"
+      ],
+      "noteCount": 1086
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "saw-lead",
+      "role": "lead",
+      "patternIds": [
+        "style-house-chicago-house-signature",
+        "house--ht-techno-sequence",
+        "house--ht-10-detroit-sequence"
+      ],
+      "noteCount": 215
+    }
+  ],
+  "patterns": [
+    {
+      "id": "house--ht-four-floor",
+      "name": "Four-on-the-Floor Foundation",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "house--ht-06-four-on-the-floor-kick",
+      "name": "Four-floor kick with bar accent",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-house-chicago-house-signature",
+      "name": "Chicago House",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "offbeat open hat",
+        "piano house stab",
+        "four-on-floor",
+        "house clap"
+      ]
+    },
+    {
+      "id": "tech-house-piano-house-stab",
+      "name": "piano house stab",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "piano house stab"
+      ]
+    },
+    {
+      "id": "house--house-piano-stab",
+      "name": "Piano Stab",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-house-offbeat-open-hat",
+      "name": "offbeat open hat",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": [
+        "offbeat open hat"
+      ]
+    },
+    {
+      "id": "tech-house-house-clap",
+      "name": "clap",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "house clap"
+      ]
+    },
+    {
+      "id": "tech-house-four-on-floor",
+      "name": "four-on-floor",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "four-on-floor"
+      ]
+    },
+    {
+      "id": "house--ht-09-house-chord-stab",
+      "name": "Chord Stab",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "house--ht-techno-sequence",
+      "name": "Detroit 16th Sequence",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        6,
+        8,
+        10,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "house--ht-10-detroit-sequence",
+      "name": "Detroit Sequence",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        16,
+        19,
+        22,
+        25,
+        28
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "piano",
+      "bass",
+      "synth",
+      "voice"
+    ],
+    "techniques": [
+      "offbeat open hat",
+      "piano house stab",
+      "four-on-floor",
+      "house clap"
+    ],
+    "signatureCell": "Four-on-floor with piano stabs and bass",
+    "tempoRange": [
+      118,
+      128
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Frankie Knuckles",
+      "Marshall Jefferson"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "house-chicago-house"
+  },
+  "performance": {
+    "noteCount": 3530,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "house--ht-four-floor",
+      "house--ht-06-four-on-the-floor-kick",
+      "style-house-chicago-house-signature",
+      "tech-house-piano-house-stab",
+      "house--house-piano-stab",
+      "tech-house-offbeat-open-hat",
+      "tech-house-house-clap",
+      "tech-house-four-on-floor",
+      "house--ht-09-house-chord-stab",
+      "house--ht-techno-sequence",
+      "house--ht-10-detroit-sequence"
+    ]
+  }
+}

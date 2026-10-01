@@ -1,0 +1,475 @@
+{
+  "schemaVersion": 2,
+  "genre": "gospel",
+  "styleId": "gospel-modern-gospel-r-b",
+  "styleName": "Modern Gospel R&B",
+  "durationSec": 103.22580645161285,
+  "tempoBpm": 93,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Response",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Vamp",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Shout / Solo",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-gospel-call-and-response"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "choir",
+      "role": "voice",
+      "patternIds": [
+        "gospel--gospel-choir-response",
+        "gospel--gospel-organ-response"
+      ],
+      "noteCount": 192
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "style-gospel-modern-gospel-r-b-signature",
+        "tech-gospel-choir-unison-harmony",
+        "tech-gospel-gospel-turnaround",
+        "tech-gospel-gospel-passing-chords"
+      ],
+      "noteCount": 435
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "gospel--gospel-organ-response",
+        "style-gospel-modern-gospel-r-b-signature",
+        "gospel--gospel-bass-walk"
+      ],
+      "noteCount": 468
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "gospel--gospel-bass-walk",
+        "gospel--gospel-organ-response"
+      ],
+      "noteCount": 233
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-batida-groove",
+        "gospel--gospel-organ-response",
+        "gospel--gospel-choir-response",
+        "afro-conga-tumbao"
+      ],
+      "noteCount": 231
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-gospel-gospel-turnaround",
+        "tech-gospel-gospel-passing-chords",
+        "gospel--gospel-organ-response",
+        "gospel--gospel-choir-response"
+      ],
+      "noteCount": 498
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "tambourine",
+      "role": "percussion",
+      "patternIds": [
+        "jazz-ride-spangalang",
+        "salsa-clave-32",
+        "kizomba-batida-groove",
+        "gospel--gospel-bass-walk",
+        "funk-drum-breakbeat",
+        "flam-tangos-compas"
+      ],
+      "noteCount": 233
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-gospel-call-and-response",
+      "name": "call-and-response",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "call-and-response"
+      ]
+    },
+    {
+      "id": "gospel--gospel-choir-response",
+      "name": "Choir Call and Response",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        6,
+        7,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "gospel--gospel-organ-response",
+      "name": "Organ Response",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        3,
+        7,
+        11,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-gospel-modern-gospel-r-b-signature",
+      "name": "Modern Gospel R&B",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "gospel passing chords",
+        "call-and-response",
+        "choir unison → harmony",
+        "gospel turnaround"
+      ]
+    },
+    {
+      "id": "tech-gospel-choir-unison-harmony",
+      "name": "choir unison → harmony",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "choir unison → harmony"
+      ]
+    },
+    {
+      "id": "tech-gospel-gospel-turnaround",
+      "name": "turnaround",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "gospel turnaround"
+      ]
+    },
+    {
+      "id": "tech-gospel-gospel-passing-chords",
+      "name": "passing chords",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "gospel passing chords"
+      ]
+    },
+    {
+      "id": "gospel--gospel-bass-walk",
+      "name": "Bass Walk",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-batida-groove",
+      "name": "Batida & Sub-Kick Beat",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-conga-tumbao",
+      "name": "Conga Marcha",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-ride-spangalang",
+      "name": "Ride Cymbal",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "salsa-clave-32",
+      "name": "3-2 Son Clave",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        10,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-drum-breakbeat",
+      "name": "Clyde Stubblefield \"Funky Drummer\" Breakbeat",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        8,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-tangos-compas",
+      "name": "Tangos de Triana",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "voice",
+      "choir",
+      "piano",
+      "organ",
+      "bass",
+      "drums"
+    ],
+    "techniques": [
+      "gospel passing chords",
+      "call-and-response",
+      "choir unison → harmony",
+      "gospel turnaround"
+    ],
+    "signatureCell": "R&B pocket with gospel choir response",
+    "tempoRange": [
+      70,
+      115
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Kirk Franklin",
+      "Tasha Cobbs Leonard"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "gospel-modern-gospel-r-b"
+  },
+  "performance": {
+    "noteCount": 2354,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-gospel-call-and-response",
+      "gospel--gospel-choir-response",
+      "gospel--gospel-organ-response",
+      "style-gospel-modern-gospel-r-b-signature",
+      "tech-gospel-choir-unison-harmony",
+      "tech-gospel-gospel-turnaround",
+      "tech-gospel-gospel-passing-chords",
+      "gospel--gospel-bass-walk",
+      "kizomba-batida-groove",
+      "afro-conga-tumbao",
+      "jazz-ride-spangalang",
+      "salsa-clave-32",
+      "funk-drum-breakbeat",
+      "flam-tangos-compas"
+    ]
+  }
+}

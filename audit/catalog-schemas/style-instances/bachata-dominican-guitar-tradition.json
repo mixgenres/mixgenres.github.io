@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 2,
+  "genre": "bachata",
+  "styleId": "bachata-dominican-guitar-tradition",
+  "styleName": "Dominican Guitar Tradition",
+  "durationSec": 72.1804511278196,
+  "tempoBpm": 133,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "E7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "E7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "E7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "E7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "E7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "E7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-bachata-guitar-arpeggio-ostinato",
+        "style-bachata-dominican-guitar-tradition-signature",
+        "tech-bachata-guitar-pickup-into-chorus"
+      ],
+      "noteCount": 524
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "requinto",
+      "role": "lead",
+      "patternIds": [
+        "tech-bachata-requinto-lead-fills"
+      ],
+      "noteCount": 117
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-bachata-descending-bachata-bass",
+        "tech-bachata-bachata-bass-anticipation"
+      ],
+      "noteCount": 219
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "bongos",
+      "role": "percussion",
+      "patternIds": [
+        "style-bachata-dominican-guitar-tradition-signature",
+        "bachata-bongo-majao"
+      ],
+      "noteCount": 164
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "guiro",
+      "role": "percussion",
+      "patternIds": [
+        "bachata-bongo-derecho",
+        "cumbia-guiro",
+        "bachata-bongo-majao"
+      ],
+      "noteCount": 210
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-bachata-guitar-pickup-into-chorus",
+        "tech-bachata-guira-continuous-subdivision"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "reggaeton--rg-09-reggaeton-piano-stab",
+        "jazz-piano-red-garland",
+        "kizomba-bridge-16",
+        "tech-bachata-guitar-pickup-into-chorus",
+        "tech-bachata-bongo-martillo"
+      ],
+      "noteCount": 496
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "maracas",
+      "role": "percussion",
+      "patternIds": [
+        "bachata-bongo-majao",
+        "bachata-bongo-derecho",
+        "bachata-guira-majao",
+        "tech-bachata-bongo-martillo",
+        "tech-bachata-guira-continuous-subdivision"
+      ],
+      "noteCount": 294
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-bachata-guitar-arpeggio-ostinato",
+      "name": "guitar arpeggio ostinato",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "guitar arpeggio ostinato"
+      ]
+    },
+    {
+      "id": "style-bachata-dominican-guitar-tradition-signature",
+      "name": "Dominican Guitar Tradition",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "bachata bass anticipation",
+        "requinto lead fills",
+        "güira continuous subdivision",
+        "bongó martillo",
+        "descending bachata bass",
+        "guitar arpeggio ostinato"
+      ]
+    },
+    {
+      "id": "tech-bachata-guitar-pickup-into-chorus",
+      "name": "guitar pickup into chorus",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "guitar pickup into chorus"
+      ]
+    },
+    {
+      "id": "tech-bachata-requinto-lead-fills",
+      "name": "requinto lead fills",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "requinto lead fills"
+      ]
+    },
+    {
+      "id": "tech-bachata-descending-bachata-bass",
+      "name": "descending bachata bass",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "descending bachata bass"
+      ]
+    },
+    {
+      "id": "tech-bachata-bachata-bass-anticipation",
+      "name": "bass anticipation",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "bachata bass anticipation"
+      ]
+    },
+    {
+      "id": "bachata-bongo-majao",
+      "name": "Bongo Majao",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "bachata-bongo-derecho",
+      "name": "Bongo Derecho",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cumbia-guiro",
+      "name": "Cumbia Güiro",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-bachata-guira-continuous-subdivision",
+      "name": "güira continuous subdivision",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "güira continuous subdivision"
+      ]
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-09-reggaeton-piano-stab",
+      "name": "Reggaetón piano offbeat stab",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-red-garland",
+      "name": "Block Chords",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        3,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-bridge-16",
+      "name": "Semba Bridge",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        10,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-bachata-bongo-martillo",
+      "name": "bongó martillo",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "bongó martillo"
+      ]
+    },
+    {
+      "id": "bachata-guira-majao",
+      "name": "Güira Majao",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "acoustic-guitar",
+      "requinto",
+      "bass",
+      "bongos",
+      "guiro",
+      "voice"
+    ],
+    "techniques": [
+      "bachata bass anticipation",
+      "requinto lead fills",
+      "güira continuous subdivision",
+      "bongó martillo",
+      "descending bachata bass",
+      "guitar arpeggio ostinato"
+    ],
+    "signatureCell": "Requinto arpeggio with anticipated bass",
+    "tempoRange": [
+      120,
+      145
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 1
+  },
+  "references": {
+    "artists": [
+      "José Manuel Calderón",
+      "Luis Segura"
+    ],
+    "tracks": [
+      "Borracho de Amor"
+    ]
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "bachata-dominican-guitar-tradition"
+  },
+  "performance": {
+    "noteCount": 2088,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-bachata-guitar-arpeggio-ostinato",
+      "style-bachata-dominican-guitar-tradition-signature",
+      "tech-bachata-guitar-pickup-into-chorus",
+      "tech-bachata-requinto-lead-fills",
+      "tech-bachata-descending-bachata-bass",
+      "tech-bachata-bachata-bass-anticipation",
+      "bachata-bongo-majao",
+      "bachata-bongo-derecho",
+      "cumbia-guiro",
+      "tech-bachata-guira-continuous-subdivision",
+      "afro-amapiano-pad",
+      "reggaeton--rg-09-reggaeton-piano-stab",
+      "jazz-piano-red-garland",
+      "kizomba-bridge-16",
+      "tech-bachata-bongo-martillo",
+      "bachata-guira-majao"
+    ]
+  }
+}

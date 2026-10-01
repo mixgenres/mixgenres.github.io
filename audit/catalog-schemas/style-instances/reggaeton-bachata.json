@@ -1,0 +1,430 @@
+{
+  "schemaVersion": 2,
+  "genre": "reggaeton",
+  "styleId": "reggaeton-bachata",
+  "styleName": "Bachata",
+  "durationSec": 78.04878048780493,
+  "tempoBpm": 123,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "Gm",
+        "A7",
+        "Dm"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verso-1",
+      "kind": "verso",
+      "label": "Verso",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "coro-2",
+      "kind": "coro",
+      "label": "Coro",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "puente-3",
+      "kind": "puente",
+      "label": "Puente",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "coro-4",
+      "kind": "coro",
+      "label": "Coro",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "requinto",
+      "role": "lead",
+      "patternIds": [
+        "reggaeton--reggaeton-bass-anticipation",
+        "reggaeton--reggaeton-dembow-kick"
+      ],
+      "noteCount": 198
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bongos",
+      "role": "percussion",
+      "patternIds": [
+        "reggaeton--reggaeton-dembow-kick",
+        "reggaeton--reggaeton-bass-anticipation"
+      ],
+      "noteCount": 240
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "reggaeton--rg-dembow-bass",
+        "reggaeton--rg-08-reggaeton-sub-answer",
+        "reggaeton--rg-11-dembow-vocal-pickup"
+      ],
+      "noteCount": 125
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "reggaeton--rg-06-classic-dembow-skeleton",
+        "reggaeton--rg-12-reggaeton-hook-lift"
+      ],
+      "noteCount": 320
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "guiro",
+      "role": "percussion",
+      "patternIds": [
+        "reggaeton--reggaeton-dembow-kick",
+        "timba-bata-fusion",
+        "tech-reggaeton-reggaeton-kick-bass-lock",
+        "reggaeton--reggaeton-bass-anticipation"
+      ],
+      "noteCount": 201
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "reggaeton--reggaeton-dembow-kick",
+        "reggaeton--reggaeton-bass-anticipation",
+        "tech-reggaeton-reggaeton-kick-bass-lock"
+      ],
+      "noteCount": 56
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "patternIds": [
+        "tech-reggaeton-reggaeton-kick-bass-lock",
+        "flamenco-cajon-rumba",
+        "zouk-ti-bwa",
+        "reggaeton--reggaeton-bass-anticipation",
+        "reggaeton--rg-12-reggaeton-hook-lift",
+        "timba-bata-fusion"
+      ],
+      "noteCount": 246
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "reggaeton--rg-11-dembow-vocal-pickup"
+      ],
+      "noteCount": 40
+    }
+  ],
+  "patterns": [
+    {
+      "id": "reggaeton--reggaeton-bass-anticipation",
+      "name": "Bass Anticipation",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        11,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--reggaeton-dembow-kick",
+      "name": "Dembow Kick",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-dembow-bass",
+      "name": "Dembow Syncopated Bass",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        14,
+        16,
+        22,
+        24,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-08-reggaeton-sub-answer",
+      "name": "Sub Answer",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        6,
+        10,
+        14,
+        16,
+        22,
+        26,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-11-dembow-vocal-pickup",
+      "name": "Dembow Vocal Pickup",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-06-classic-dembow-skeleton",
+      "name": "Classic dembow two-bar answer",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        8,
+        11,
+        12,
+        14,
+        16,
+        19,
+        20,
+        22,
+        24,
+        27,
+        28,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-12-reggaeton-hook-lift",
+      "name": "Hook Dembow Lift",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        8,
+        11,
+        12,
+        14,
+        16,
+        19,
+        20,
+        22,
+        24,
+        27,
+        28,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "timba-bata-fusion",
+      "name": "Bata Fusion",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-reggaeton-reggaeton-kick-bass-lock",
+      "name": "kick/bass lock",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "reggaeton kick/bass lock"
+      ]
+    },
+    {
+      "id": "flamenco-cajon-rumba",
+      "name": "Cajon Rumba",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-ti-bwa",
+      "name": "Ti-Bwa Woodblock Ostinato",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "requinto",
+      "bongos",
+      "sub-bass",
+      "drums",
+      "guiro"
+    ],
+    "techniques": [],
+    "signatureCell": "High virtuosic requinto guitar arpeggio ringing over fused bongo martillo and Dembow bass pulse",
+    "tempoRange": [
+      115,
+      130
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "reggaeton-bachata"
+  },
+  "performance": {
+    "noteCount": 1426,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "reggaeton--reggaeton-bass-anticipation",
+      "reggaeton--reggaeton-dembow-kick",
+      "reggaeton--rg-dembow-bass",
+      "reggaeton--rg-08-reggaeton-sub-answer",
+      "reggaeton--rg-11-dembow-vocal-pickup",
+      "reggaeton--rg-06-classic-dembow-skeleton",
+      "reggaeton--rg-12-reggaeton-hook-lift",
+      "timba-bata-fusion",
+      "tech-reggaeton-reggaeton-kick-bass-lock",
+      "flamenco-cajon-rumba",
+      "zouk-ti-bwa"
+    ]
+  }
+}

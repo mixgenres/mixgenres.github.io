@@ -1,0 +1,573 @@
+{
+  "schemaVersion": 2,
+  "genre": "cumbia",
+  "styleId": "cumbia-colombiana",
+  "styleName": "Cumbia Colombiana",
+  "durationSec": 50,
+  "tempoBpm": 96,
+  "meter": "2/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "introducci-n-0",
+      "kind": "introducción",
+      "label": "Introducción",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Am"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "tema-1",
+      "kind": "tema",
+      "label": "Tema",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Am"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "preg-n-2",
+      "kind": "pregón",
+      "label": "Pregón",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Am"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "tema-3",
+      "kind": "tema",
+      "label": "Tema",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Am"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "mambo-4",
+      "kind": "mambo",
+      "label": "Mambo",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Am"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "cierre-5",
+      "kind": "cierre",
+      "label": "Cierre",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Am"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "accordion",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "hip-hop-sampled-keys",
+        "tango-piano-chumba",
+        "jazz-latin-montuno-comp",
+        "zouk-bridge-16",
+        "jazz-piano-comping"
+      ],
+      "noteCount": 239
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "cu-14-cumbia-stop-break",
+        "cumbia-guiro"
+      ],
+      "noteCount": 116
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "patternIds": [
+        "cumbia-guiro"
+      ],
+      "noteCount": 226
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-cumbia-digital-cumbia-sub-bass",
+        "cu-cumbia-bass",
+        "cu-06-cumbia-bass-tumbao"
+      ],
+      "noteCount": 200
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "flute",
+      "role": "melody",
+      "patternIds": [
+        "tech-cumbia-gaita-melody",
+        "cu-guacharaca"
+      ],
+      "noteCount": 154
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-swing-scat-syllables",
+        "tech-cumbia-digital-cumbia-sub-bass",
+        "tech-kizomba-vocal-space-arrangement",
+        "tech-blues-call-and-response-guitar-vocal"
+      ],
+      "noteCount": 48
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "guacharaca",
+      "role": "percussion",
+      "patternIds": [
+        "cu-guacharaca",
+        "cu-08-guacharaca-scrape"
+      ],
+      "noteCount": 385
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "tambora",
+      "role": "percussion",
+      "patternIds": [
+        "style-cumbia-traditional-coastal-cumbia-signature",
+        "cumbia-guiro",
+        "cu-07-tambor-alegre-reply"
+      ],
+      "noteCount": 202
+    }
+  ],
+  "patterns": [
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "hip-hop-sampled-keys",
+      "name": "Sampled Keys Loop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 24,
+      "onsetGrid": [
+        0,
+        6,
+        12,
+        18,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-piano-chumba",
+      "name": "Piano Chumba",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        4,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-latin-montuno-comp",
+      "name": "Latin Jazz Montuno Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        7,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-bridge-16",
+      "name": "Chawa Bridge",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-comping",
+      "name": "Syncopated Piano Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-14-cumbia-stop-break",
+      "name": "Stop Break",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cumbia-guiro",
+      "name": "Cumbia Güiro",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-cumbia-digital-cumbia-sub-bass",
+      "name": "digital cumbia sub-bass",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "digital cumbia sub-bass"
+      ]
+    },
+    {
+      "id": "cu-cumbia-bass",
+      "name": "bass anticipation",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-06-cumbia-bass-tumbao",
+      "name": "tumbao bass",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-cumbia-gaita-melody",
+      "name": "gaita melody",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "gaita melody"
+      ]
+    },
+    {
+      "id": "cu-guacharaca",
+      "name": "Guacharaca scraper pulse",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        3,
+        4,
+        6,
+        7,
+        9,
+        10,
+        12,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-swing-scat-syllables",
+      "name": "scat syllables",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "scat syllables"
+      ]
+    },
+    {
+      "id": "tech-kizomba-vocal-space-arrangement",
+      "name": "vocal-space arrangement",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal-space arrangement"
+      ]
+    },
+    {
+      "id": "tech-blues-call-and-response-guitar-vocal",
+      "name": "call-and-response guitar/vocal",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "call-and-response guitar/vocal"
+      ]
+    },
+    {
+      "id": "cu-08-guacharaca-scrape",
+      "name": "Guacharaca reverse accent cycle",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-cumbia-traditional-coastal-cumbia-signature",
+      "name": "Traditional Coastal Cumbia",
+      "worldId": "cumbia",
+      "meter": "2/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "alegre improvisation",
+        "guacharaca scrape",
+        "llamador pulse",
+        "tambora pattern",
+        "cumbia bass ostinato",
+        "cumbia turnaround"
+      ]
+    },
+    {
+      "id": "cu-07-tambor-alegre-reply",
+      "name": "Tambor Alegre Reply",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        5,
+        8,
+        13,
+        16,
+        21,
+        24,
+        29
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "accordion",
+      "drums",
+      "hand-percussion",
+      "bass",
+      "flute"
+    ],
+    "techniques": [],
+    "signatureCell": "guache/guacharaca motor, llamador pulse, alegre repiques and melodic gaita/accordion",
+    "tempoRange": [
+      88,
+      104
+    ],
+    "preferredMeters": [
+      "2/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 54,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "cumbia-colombiana"
+  },
+  "performance": {
+    "noteCount": 1570,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "afro-amapiano-pad",
+      "hip-hop-sampled-keys",
+      "tango-piano-chumba",
+      "jazz-latin-montuno-comp",
+      "zouk-bridge-16",
+      "jazz-piano-comping",
+      "cu-14-cumbia-stop-break",
+      "cumbia-guiro",
+      "tech-cumbia-digital-cumbia-sub-bass",
+      "cu-cumbia-bass",
+      "cu-06-cumbia-bass-tumbao",
+      "tech-cumbia-gaita-melody",
+      "cu-guacharaca",
+      "tech-swing-scat-syllables",
+      "tech-kizomba-vocal-space-arrangement",
+      "tech-blues-call-and-response-guitar-vocal",
+      "cu-08-guacharaca-scrape",
+      "style-cumbia-traditional-coastal-cumbia-signature",
+      "cu-07-tambor-alegre-reply"
+    ]
+  }
+}

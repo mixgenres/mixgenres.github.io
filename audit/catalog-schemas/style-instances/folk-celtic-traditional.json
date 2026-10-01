@@ -1,0 +1,416 @@
+{
+  "schemaVersion": 2,
+  "genre": "folk",
+  "styleId": "folk-celtic-traditional",
+  "styleName": "Celtic Traditional",
+  "durationSec": 62.60869565217398,
+  "tempoBpm": 115,
+  "meter": "6/8",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "fiddle",
+      "role": "lead",
+      "patternIds": [
+        "style-folk-celtic-traditional-signature",
+        "folk-fiddle-drone",
+        "tech-folk-celtic-ornament"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "tin-whistle",
+      "role": "lead",
+      "patternIds": [
+        "tech-folk-celtic-ornament",
+        "style-folk-celtic-traditional-signature"
+      ],
+      "noteCount": 160
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "folk-waltz-pick",
+        "style-folk-celtic-traditional-signature"
+      ],
+      "noteCount": 537
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "celtic-harp",
+      "role": "harmony",
+      "patternIds": [
+        "style-folk-celtic-traditional-signature",
+        "folk-waltz-pick"
+      ],
+      "noteCount": 555
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "bodhran",
+      "role": "percussion",
+      "patternIds": [
+        "tech-folk-drone",
+        "kizomba-batida-groove",
+        "cumbia-guiro",
+        "zouk-ti-bwa",
+        "tech-folk-reel-4-4"
+      ],
+      "noteCount": 172
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-folk-modal-cadence",
+        "tech-folk-jig-6-8"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "mandolin",
+      "role": "lead",
+      "patternIds": [
+        "folk-waltz-pick"
+      ],
+      "noteCount": 126
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "guitar",
+      "role": "harmony",
+      "patternIds": [
+        "style-folk-celtic-traditional-signature",
+        "folk-waltz-pick"
+      ],
+      "noteCount": 580
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-folk-celtic-traditional-signature",
+      "name": "Celtic Traditional",
+      "worldId": "folk",
+      "meter": "6/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9
+      ],
+      "techniques": [
+        "Celtic ornament",
+        "drone",
+        "jig 6/8",
+        "modal cadence",
+        "reel 4/4"
+      ]
+    },
+    {
+      "id": "folk-fiddle-drone",
+      "name": "Old-Time Fiddle Drone & Shuffle Bow",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-folk-celtic-ornament",
+      "name": "Celtic ornament",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Celtic ornament"
+      ]
+    },
+    {
+      "id": "folk-waltz-pick",
+      "name": "Waltz Fingerpick",
+      "worldId": "folk",
+      "meter": "3/4",
+      "subdivisions": 6,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-folk-drone",
+      "name": "drone",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": [
+        "drone"
+      ]
+    },
+    {
+      "id": "kizomba-batida-groove",
+      "name": "Batida & Sub-Kick Beat",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cumbia-guiro",
+      "name": "Cumbia Güiro",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-ti-bwa",
+      "name": "Ti-Bwa Woodblock Ostinato",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-folk-reel-4-4",
+      "name": "reel 4/4",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "reel 4/4"
+      ]
+    },
+    {
+      "id": "tech-folk-modal-cadence",
+      "name": "modal cadence",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "modal cadence"
+      ]
+    },
+    {
+      "id": "tech-folk-jig-6-8",
+      "name": "jig 6/8",
+      "worldId": "folk",
+      "meter": "6/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9
+      ],
+      "techniques": [
+        "jig 6/8"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "fiddle",
+      "tin-whistle",
+      "acoustic-guitar",
+      "celtic-harp",
+      "bodhran"
+    ],
+    "techniques": [
+      "Celtic ornament",
+      "drone",
+      "jig 6/8",
+      "modal cadence",
+      "reel 4/4"
+    ],
+    "signatureCell": "Modal melody over jig/reel pulse",
+    "tempoRange": [
+      90,
+      140
+    ],
+    "preferredMeters": [
+      "6/8"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Planxty",
+      "The Chieftains"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "folk-celtic-traditional"
+  },
+  "performance": {
+    "noteCount": 2258,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-folk-celtic-traditional-signature",
+      "folk-fiddle-drone",
+      "tech-folk-celtic-ornament",
+      "folk-waltz-pick",
+      "tech-folk-drone",
+      "kizomba-batida-groove",
+      "cumbia-guiro",
+      "zouk-ti-bwa",
+      "tech-folk-reel-4-4",
+      "tech-folk-modal-cadence",
+      "tech-folk-jig-6-8"
+    ]
+  }
+}

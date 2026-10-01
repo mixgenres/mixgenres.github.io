@@ -1,0 +1,391 @@
+{
+  "schemaVersion": 2,
+  "genre": "soul",
+  "styleId": "soul-stax-soul",
+  "styleName": "Stax Soul",
+  "durationSec": 101.05263157894738,
+  "tempoBpm": 95,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "tech-soul-hammond-swell",
+        "style-soul-stax-soul-signature"
+      ],
+      "noteCount": 592
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "style-soul-stax-soul-signature",
+        "soul-backbeat-tambourine"
+      ],
+      "noteCount": 616
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "style-soul-stax-soul-signature",
+        "soul-backbeat-tambourine",
+        "soul-horn-response"
+      ],
+      "noteCount": 172
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-soul-soul-backbeat"
+      ],
+      "noteCount": 160
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "tech-soul-horn-response",
+        "soul-horn-response"
+      ],
+      "noteCount": 211
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-soul-call-and-response"
+      ],
+      "noteCount": 58
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "horn-section",
+      "role": "harmony",
+      "patternIds": [
+        "soul-horn-response",
+        "soul-backbeat-tambourine",
+        "tech-soul-horn-response"
+      ],
+      "noteCount": 217
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "soul-backbeat-tambourine",
+        "tango-sincopa",
+        "tango-marcato-4",
+        "tango-arrastre"
+      ],
+      "noteCount": 596
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-soul-hammond-swell",
+      "name": "Hammond swell",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Hammond swell"
+      ]
+    },
+    {
+      "id": "style-soul-stax-soul-signature",
+      "name": "Stax Soul",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Hammond swell",
+        "horn response",
+        "soul backbeat",
+        "call-and-response",
+        "string swell"
+      ]
+    },
+    {
+      "id": "soul-backbeat-tambourine",
+      "name": "Backbeat Tambourine",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "soul-horn-response",
+      "name": "Horn Response",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        6,
+        7,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-soul-soul-backbeat",
+      "name": "backbeat",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "soul backbeat"
+      ]
+    },
+    {
+      "id": "tech-soul-horn-response",
+      "name": "horn response",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "horn response"
+      ]
+    },
+    {
+      "id": "tech-soul-call-and-response",
+      "name": "call-and-response",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "call-and-response"
+      ]
+    },
+    {
+      "id": "tango-sincopa",
+      "name": "Síncopa a Tierra",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-marcato-4",
+      "name": "Marcato en 4",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-arrastre",
+      "name": "Arrastre",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        13,
+        14,
+        15,
+        0
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "organ",
+      "electric-guitar",
+      "bass",
+      "drums",
+      "brass",
+      "voice"
+    ],
+    "techniques": [
+      "Hammond swell",
+      "horn response",
+      "soul backbeat",
+      "call-and-response",
+      "string swell"
+    ],
+    "signatureCell": "Raw pocket with Hammond and horn",
+    "tempoRange": [
+      80,
+      110
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Booker T. & the M.G.'s",
+      "Otis Redding"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "soul-stax-soul"
+  },
+  "performance": {
+    "noteCount": 2622,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-soul-hammond-swell",
+      "style-soul-stax-soul-signature",
+      "soul-backbeat-tambourine",
+      "soul-horn-response",
+      "tech-soul-soul-backbeat",
+      "tech-soul-horn-response",
+      "tech-soul-call-and-response",
+      "tango-sincopa",
+      "tango-marcato-4",
+      "tango-arrastre"
+    ]
+  }
+}

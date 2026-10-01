@@ -1,0 +1,295 @@
+{
+  "schemaVersion": 2,
+  "genre": "blues",
+  "styleId": "blues-soul",
+  "styleName": "Soul Blues",
+  "durationSec": 102.85714285714288,
+  "tempoBpm": 84,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "12-bar-head-0",
+      "kind": "12-bar head",
+      "label": "12-Bar Head",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "C",
+        "C",
+        "C"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "harmonica-guitar-answer-1",
+      "kind": "harmonica/guitar answer",
+      "label": "Harmonica/Guitar Answer",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "C",
+        "C",
+        "C"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "solo-2",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "C",
+        "C",
+        "C"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "turnaround-3",
+      "kind": "turnaround",
+      "label": "Turnaround",
+      "bars": 4,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "C",
+        "C",
+        "C"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-blues-guitar-bend-vibrato-phrasing"
+      ],
+      "noteCount": 400
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "blues-horn-stabs"
+      ],
+      "noteCount": 73
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "blues-organ-swell"
+      ],
+      "noteCount": 193
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-blues-walking-blues-bass"
+      ],
+      "noteCount": 244
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "blues-soul-groove"
+      ],
+      "noteCount": 138
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "blues-organ-swell"
+      ],
+      "noteCount": 202
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "harmonica",
+      "role": "melody",
+      "patternIds": [
+        "tech-blues-call-and-response-guitar-vocal",
+        "tech-blues-shuffle-triplet-pocket"
+      ],
+      "noteCount": 101
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-blues-call-and-response-guitar-vocal"
+      ],
+      "noteCount": 52
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-blues-guitar-bend-vibrato-phrasing",
+      "name": "guitar bend/vibrato phrasing",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "guitar bend/vibrato phrasing"
+      ]
+    },
+    {
+      "id": "blues-horn-stabs",
+      "name": "Horn Stabs",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        2,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "blues-organ-swell",
+      "name": "Organ Swell",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 4,
+      "onsetGrid": [
+        0,
+        2
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-blues-walking-blues-bass",
+      "name": "walking-blues bass",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "walking-blues bass"
+      ]
+    },
+    {
+      "id": "blues-soul-groove",
+      "name": "Soul Blues Beat",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-blues-call-and-response-guitar-vocal",
+      "name": "call-and-response guitar/vocal",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "call-and-response guitar/vocal"
+      ]
+    },
+    {
+      "id": "tech-blues-shuffle-triplet-pocket",
+      "name": "shuffle triplet pocket",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "shuffle triplet pocket"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "brass",
+      "organ",
+      "bass",
+      "drums"
+    ],
+    "techniques": [],
+    "signatureCell": "Singing vibrato guitar line answering lush warm horn section swells",
+    "tempoRange": [
+      74,
+      94
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 66,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "blues-soul"
+  },
+  "performance": {
+    "noteCount": 1403,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-blues-guitar-bend-vibrato-phrasing",
+      "blues-horn-stabs",
+      "blues-organ-swell",
+      "tech-blues-walking-blues-bass",
+      "blues-soul-groove",
+      "tech-blues-call-and-response-guitar-vocal",
+      "tech-blues-shuffle-triplet-pocket"
+    ]
+  }
+}

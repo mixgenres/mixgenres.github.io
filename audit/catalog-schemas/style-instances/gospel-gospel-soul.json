@@ -1,0 +1,430 @@
+{
+  "schemaVersion": 2,
+  "genre": "gospel",
+  "styleId": "gospel-gospel-soul",
+  "styleName": "Gospel Soul",
+  "durationSec": 106.66666666666671,
+  "tempoBpm": 90,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Response",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Vamp",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Shout / Solo",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-gospel-call-and-response"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "style-gospel-gospel-soul-signature",
+        "tech-gospel-hammond-swell"
+      ],
+      "noteCount": 465
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-gospel-gospel-passing-chords",
+        "tech-gospel-choir-unison-harmony",
+        "tech-gospel-gospel-turnaround"
+      ],
+      "noteCount": 438
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "style-gospel-gospel-soul-signature",
+        "gospel--gospel-organ-response"
+      ],
+      "noteCount": 163
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "gospel--gospel-choir-response",
+        "gospel--gospel-organ-response"
+      ],
+      "noteCount": 157
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "gospel--gospel-organ-response",
+        "gospel--gospel-choir-response",
+        "jazz-piano-comping"
+      ],
+      "noteCount": 531
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "choir",
+      "role": "voice",
+      "patternIds": [
+        "tech-gospel-call-and-response"
+      ],
+      "noteCount": 80
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "tambourine",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-batida-groove",
+        "salsa-clave-32",
+        "gospel--gospel-choir-response",
+        "funk-drum-breakbeat",
+        "tech-gospel-gospel-passing-chords"
+      ],
+      "noteCount": 211
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-gospel-call-and-response",
+      "name": "call-and-response",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "call-and-response"
+      ]
+    },
+    {
+      "id": "style-gospel-gospel-soul-signature",
+      "name": "Soul",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Hammond swell",
+        "call-and-response",
+        "choir unison → harmony",
+        "gospel passing chords",
+        "gospel turnaround"
+      ]
+    },
+    {
+      "id": "tech-gospel-hammond-swell",
+      "name": "Hammond swell",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Hammond swell"
+      ]
+    },
+    {
+      "id": "tech-gospel-gospel-passing-chords",
+      "name": "passing chords",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "gospel passing chords"
+      ]
+    },
+    {
+      "id": "tech-gospel-choir-unison-harmony",
+      "name": "choir unison → harmony",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "choir unison → harmony"
+      ]
+    },
+    {
+      "id": "tech-gospel-gospel-turnaround",
+      "name": "turnaround",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "gospel turnaround"
+      ]
+    },
+    {
+      "id": "gospel--gospel-organ-response",
+      "name": "Organ Response",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        3,
+        7,
+        11,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "gospel--gospel-choir-response",
+      "name": "Choir Call and Response",
+      "worldId": "gospel",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        6,
+        7,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-comping",
+      "name": "Syncopated Piano Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-batida-groove",
+      "name": "Batida & Sub-Kick Beat",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "salsa-clave-32",
+      "name": "3-2 Son Clave",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        10,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-drum-breakbeat",
+      "name": "Clyde Stubblefield \"Funky Drummer\" Breakbeat",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        8,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "voice",
+      "organ",
+      "piano",
+      "bass",
+      "drums"
+    ],
+    "techniques": [
+      "Hammond swell",
+      "call-and-response",
+      "choir unison → harmony",
+      "gospel passing chords",
+      "gospel turnaround"
+    ],
+    "signatureCell": "Gospel vocal run over soul pocket",
+    "tempoRange": [
+      70,
+      110
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Aretha Franklin",
+      "Mavis Staples"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "gospel-gospel-soul"
+  },
+  "performance": {
+    "noteCount": 2109,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-gospel-call-and-response",
+      "style-gospel-gospel-soul-signature",
+      "tech-gospel-hammond-swell",
+      "tech-gospel-gospel-passing-chords",
+      "tech-gospel-choir-unison-harmony",
+      "tech-gospel-gospel-turnaround",
+      "gospel--gospel-organ-response",
+      "gospel--gospel-choir-response",
+      "jazz-piano-comping",
+      "kizomba-batida-groove",
+      "salsa-clave-32",
+      "funk-drum-breakbeat"
+    ]
+  }
+}

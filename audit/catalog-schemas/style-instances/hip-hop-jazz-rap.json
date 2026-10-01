@@ -1,0 +1,354 @@
+{
+  "schemaVersion": 2,
+  "genre": "hip-hop",
+  "styleId": "hip-hop-jazz-rap",
+  "styleName": "Jazz Rap",
+  "durationSec": 102.12765957446817,
+  "tempoBpm": 94,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Cm9",
+        "F13",
+        "A#maj7",
+        "G7b9"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Cm9",
+        "F13",
+        "A#maj7",
+        "G7b9"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "hook-2",
+      "kind": "hook",
+      "label": "Hook",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Cm9",
+        "F13",
+        "A#maj7",
+        "G7b9"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "verse-3",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Cm9",
+        "F13",
+        "A#maj7",
+        "G7b9"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "bridge-4",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Cm9",
+        "F13",
+        "A#maj7",
+        "G7b9"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Cm9",
+        "F13",
+        "A#maj7",
+        "G7b9"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "hiphop-808-glide-bass"
+      ],
+      "noteCount": 112
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "hiphop-pocket-percussion"
+      ],
+      "noteCount": 160
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "hiphop-boom-basic",
+        "hiphop-breakbeat",
+        "hiphop-neosoul"
+      ],
+      "noteCount": 228
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tango-arrastre",
+        "hip-hop-sampled-keys",
+        "hiphop-pocket-percussion",
+        "jazz-piano-comping"
+      ],
+      "noteCount": 568
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "hiphop-808-glide-bass",
+        "hiphop-pocket-percussion"
+      ],
+      "noteCount": 48
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "hiphop-808-glide-bass"
+      ],
+      "noteCount": 112
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "turntable",
+      "role": "lead",
+      "patternIds": [
+        "hiphop-808-glide-bass",
+        "tech-hip-hop-boom-bap-kick-snare"
+      ],
+      "noteCount": 48
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "hiphop-808-glide-bass"
+      ],
+      "noteCount": 48
+    }
+  ],
+  "patterns": [
+    {
+      "id": "hiphop-808-glide-bass",
+      "name": "808 Glide & Sub Slide Bass",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "hiphop-pocket-percussion",
+      "name": "Hip-Hop Pocket Percussion",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        3,
+        7,
+        11,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "hiphop-boom-basic",
+      "name": "Boom Bap Basic",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "hiphop-breakbeat",
+      "name": "Old School Break",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        10,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "hiphop-neosoul",
+      "name": "Neo-Soul Hip Hop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        5,
+        8,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-arrastre",
+      "name": "Arrastre",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        13,
+        14,
+        15,
+        0
+      ],
+      "techniques": []
+    },
+    {
+      "id": "hip-hop-sampled-keys",
+      "name": "Sampled Keys Loop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 24,
+      "onsetGrid": [
+        0,
+        6,
+        12,
+        18,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-comping",
+      "name": "Syncopated Piano Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-hip-hop-boom-bap-kick-snare",
+      "name": "boom-bap kick/snare",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "boom-bap kick/snare"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "upright-bass",
+      "brass",
+      "drums",
+      "piano",
+      "sampler"
+    ],
+    "techniques": [],
+    "signatureCell": "Warm upright bass walking line locked with jazzy snare rimshot and muted trumpet lick",
+    "tempoRange": [
+      88,
+      100
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "swung",
+    "swingPercentage": 60,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "hip-hop-jazz-rap"
+  },
+  "performance": {
+    "noteCount": 1324,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "hiphop-808-glide-bass",
+      "hiphop-pocket-percussion",
+      "hiphop-boom-basic",
+      "hiphop-breakbeat",
+      "hiphop-neosoul",
+      "tango-arrastre",
+      "hip-hop-sampled-keys",
+      "jazz-piano-comping",
+      "tech-hip-hop-boom-bap-kick-snare"
+    ]
+  }
+}

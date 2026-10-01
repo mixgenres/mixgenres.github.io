@@ -1,0 +1,441 @@
+{
+  "schemaVersion": 2,
+  "genre": "flamenco",
+  "styleId": "flamenco-solea-por-medio",
+  "styleName": "Soleá por Medio",
+  "durationSec": 135.52941176470588,
+  "tempoBpm": 85,
+  "meter": "12/8",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Salida",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Letra",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "solo-2",
+      "kind": "solo",
+      "label": "Falseta",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "chorus-3",
+      "kind": "chorus",
+      "label": "Letra / Jaleo",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "coda-4",
+      "kind": "coda",
+      "label": "Remate / Cierre",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "spanish-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "flam-solea-guitar-compas",
+        "flam-remate-12"
+      ],
+      "noteCount": 538
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "palmas",
+      "role": "percussion",
+      "patternIds": [
+        "style-flamenco-solea-por-medio-signature",
+        "flam-remate-12"
+      ],
+      "noteCount": 158
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "cajon",
+      "role": "percussion",
+      "patternIds": [
+        "flam-remate-12",
+        "style-flamenco-solea-por-medio-signature"
+      ],
+      "noteCount": 159
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-flamenco-remate",
+        "tech-flamenco-12-beat-compas",
+        "tech-flamenco-rasgueado"
+      ],
+      "noteCount": 48
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "zapateado",
+      "role": "percussion",
+      "patternIds": [
+        "style-flamenco-solea-por-medio-signature",
+        "flam-remate-12"
+      ],
+      "noteCount": 158
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "flute",
+      "role": "melody",
+      "patternIds": [
+        "tech-flamenco-rasgueado",
+        "flam-solea-12beat",
+        "flam-falseta-melodic",
+        "tech-flamenco-llamada",
+        "tech-flamenco-12-beat-compas"
+      ],
+      "noteCount": 125
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "castanets",
+      "role": "percussion",
+      "patternIds": [
+        "flamenco-bulerias-palmas",
+        "flamenco-golpe",
+        "flam-tangos-compas",
+        "flamenco-cajon-rumba"
+      ],
+      "noteCount": 146
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "patternIds": [
+        "flamenco-golpe",
+        "flamenco-cajon-rumba",
+        "flam-tangos-compas"
+      ],
+      "noteCount": 161
+    }
+  ],
+  "patterns": [
+    {
+      "id": "flam-solea-guitar-compas",
+      "name": "Soleá Guitar Compás",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        11,
+        2,
+        5,
+        7,
+        9
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-remate-12",
+      "name": "12-Beat Remate",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        9,
+        10,
+        11,
+        0,
+        2
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-flamenco-solea-por-medio-signature",
+      "name": "Soleá por Medio",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10
+      ],
+      "techniques": [
+        "falseta",
+        "llamada",
+        "rasgueado",
+        "remate",
+        "12-beat compás"
+      ]
+    },
+    {
+      "id": "tech-flamenco-remate",
+      "name": "remate",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "remate"
+      ]
+    },
+    {
+      "id": "tech-flamenco-12-beat-compas",
+      "name": "12-beat compás",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10
+      ],
+      "techniques": [
+        "12-beat compás"
+      ]
+    },
+    {
+      "id": "tech-flamenco-rasgueado",
+      "name": "rasgueado",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "rasgueado"
+      ]
+    },
+    {
+      "id": "flam-solea-12beat",
+      "name": "Soleá 12-Beat Compás Framework",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        2,
+        5,
+        7,
+        9,
+        11
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-falseta-melodic",
+      "name": "Falseta Melodic Development",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        12,
+        14,
+        16,
+        19,
+        22,
+        24,
+        28,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-flamenco-llamada",
+      "name": "llamada",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "llamada"
+      ]
+    },
+    {
+      "id": "flamenco-bulerias-palmas",
+      "name": "Bulerias Palmas",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-golpe",
+      "name": "Golpe",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-tangos-compas",
+      "name": "Tangos de Triana",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-cajon-rumba",
+      "name": "Cajon Rumba",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "spanish-guitar",
+      "palmas",
+      "cajon",
+      "voice"
+    ],
+    "techniques": [
+      "falseta",
+      "llamada",
+      "rasgueado",
+      "remate",
+      "12-beat compás"
+    ],
+    "signatureCell": "12-beat soleá compás with rasgueado",
+    "tempoRange": [
+      70,
+      100
+    ],
+    "preferredMeters": [
+      "12/8"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Paco de Lucía",
+      "Camarón"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "flamenco-solea-por-medio"
+  },
+  "performance": {
+    "noteCount": 1493,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "flam-solea-guitar-compas",
+      "flam-remate-12",
+      "style-flamenco-solea-por-medio-signature",
+      "tech-flamenco-remate",
+      "tech-flamenco-12-beat-compas",
+      "tech-flamenco-rasgueado",
+      "flam-solea-12beat",
+      "flam-falseta-melodic",
+      "tech-flamenco-llamada",
+      "flamenco-bulerias-palmas",
+      "flamenco-golpe",
+      "flam-tangos-compas",
+      "flamenco-cajon-rumba"
+    ]
+  }
+}

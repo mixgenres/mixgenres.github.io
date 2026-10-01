@@ -1,0 +1,487 @@
+{
+  "schemaVersion": 2,
+  "genre": "swing",
+  "styleId": "swing-kansas-city-swing",
+  "styleName": "Kansas City Swing",
+  "durationSec": 74.32258064516125,
+  "tempoBpm": 155,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Head",
+      "bars": 4,
+      "intensity": "medium",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Head / A",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "solo-2",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Trading / Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "chorus-4",
+      "kind": "chorus",
+      "label": "Head Return",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "swing-shout-chorus",
+        "tech-swing-horn-section-voicing"
+      ],
+      "noteCount": 838
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-swing-walking-bass",
+        "style-swing-kansas-city-swing-signature"
+      ],
+      "noteCount": 188
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-swing-kansas-city-swing-signature",
+        "swing-shout-chorus"
+      ],
+      "noteCount": 229
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "tenor-sax",
+      "role": "melody",
+      "patternIds": [
+        "style-swing-kansas-city-swing-signature",
+        "tech-swing-shout-chorus"
+      ],
+      "noteCount": 190
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "tech-swing-shout-chorus",
+        "tech-swing-big-band-riff",
+        "tech-swing-horn-section-voicing",
+        "tech-swing-ride-swing"
+      ],
+      "noteCount": 435
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "jazz-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-swing-horn-section-voicing",
+        "tango-332-piazzolla",
+        "kizomba-bridge-16",
+        "zouk-bridge-16",
+        "bachata-chorus-16",
+        "jazz-piano-comping"
+      ],
+      "noteCount": 938
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "trumpet",
+      "role": "lead",
+      "patternIds": [
+        "swing-shout-chorus"
+      ],
+      "noteCount": 111
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "trombone",
+      "role": "lead",
+      "patternIds": [
+        "tech-swing-ride-swing",
+        "tech-swing-shout-chorus",
+        "zouk-horn-stabs",
+        "reggae--rd-14-dub-horn-reply",
+        "afro-horn-stabs"
+      ],
+      "noteCount": 158
+    }
+  ],
+  "patterns": [
+    {
+      "id": "swing-shout-chorus",
+      "name": "Shout Chorus Ensemble Hits",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        8,
+        11,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-swing-horn-section-voicing",
+      "name": "horn section voicing",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "horn section voicing"
+      ]
+    },
+    {
+      "id": "tech-swing-walking-bass",
+      "name": "walking bass",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "walking bass"
+      ]
+    },
+    {
+      "id": "style-swing-kansas-city-swing-signature",
+      "name": "Kansas City Swing",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "ride swing",
+        "shout chorus",
+        "walking bass",
+        "big-band riff",
+        "swing triplets"
+      ]
+    },
+    {
+      "id": "tech-swing-shout-chorus",
+      "name": "shout chorus",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "shout chorus"
+      ]
+    },
+    {
+      "id": "tech-swing-big-band-riff",
+      "name": "big-band riff",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "big-band riff"
+      ]
+    },
+    {
+      "id": "tech-swing-ride-swing",
+      "name": "ride swing",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "ride swing"
+      ]
+    },
+    {
+      "id": "tango-332-piazzolla",
+      "name": "3+3+2 Nuevo Tango Pulse",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-bridge-16",
+      "name": "Semba Bridge",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        10,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-bridge-16",
+      "name": "Chawa Bridge",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "bachata-chorus-16",
+      "name": "Majao Chorus Lift",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        3,
+        5,
+        8,
+        10,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-comping",
+      "name": "Syncopated Piano Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-horn-stabs",
+      "name": "Kassav Horn Section Stabs",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        3,
+        6,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-14-dub-horn-reply",
+      "name": "Dub Horn Reply",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        8,
+        12,
+        24,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-horn-stabs",
+      "name": "Fela Afrobeat Horn Section Stabs",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        3,
+        7,
+        11,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "piano",
+      "upright-bass",
+      "drums",
+      "tenor-sax",
+      "brass"
+    ],
+    "techniques": [
+      "ride swing",
+      "shout chorus",
+      "walking bass",
+      "big-band riff",
+      "swing triplets"
+    ],
+    "signatureCell": "Relaxed swing with riff-based horns",
+    "tempoRange": [
+      120,
+      190
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Count Basie",
+      "Lester Young"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "swing-kansas-city-swing"
+  },
+  "performance": {
+    "noteCount": 3087,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "swing-shout-chorus",
+      "tech-swing-horn-section-voicing",
+      "tech-swing-walking-bass",
+      "style-swing-kansas-city-swing-signature",
+      "tech-swing-shout-chorus",
+      "tech-swing-big-band-riff",
+      "tech-swing-ride-swing",
+      "tango-332-piazzolla",
+      "kizomba-bridge-16",
+      "zouk-bridge-16",
+      "bachata-chorus-16",
+      "jazz-piano-comping",
+      "zouk-horn-stabs",
+      "reggae--rd-14-dub-horn-reply",
+      "afro-horn-stabs"
+    ]
+  }
+}

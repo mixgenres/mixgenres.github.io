@@ -1,0 +1,411 @@
+{
+  "schemaVersion": 2,
+  "genre": "country",
+  "styleId": "country-neotraditional",
+  "styleName": "Neotraditional",
+  "durationSec": 104.72727272727278,
+  "tempoBpm": 110,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "G",
+        "C",
+        "D",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "G",
+        "C",
+        "D",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "D#",
+        "F",
+        "A#",
+        "Gm"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "instrumental-3",
+      "kind": "instrumental",
+      "label": "Instrumental",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "G",
+        "C",
+        "D",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "G",
+        "C",
+        "D",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "G",
+        "C",
+        "D",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "steel-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "country-pedal-steel-swell",
+        "country-steel-answer",
+        "country-boom-chuck"
+      ],
+      "noteCount": 657
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "fiddle",
+      "role": "lead",
+      "patternIds": [
+        "country-steel-answer",
+        "tech-country-train-beat",
+        "tech-country-pedal-steel-fills",
+        "tango-fraseo-bandoneon"
+      ],
+      "noteCount": 56
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "country-boom-chuck",
+        "country-pedal-steel-swell"
+      ],
+      "noteCount": 420
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "country-pedal-steel-swell",
+        "country-boom-chuck"
+      ],
+      "noteCount": 465
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "country-outlaw"
+      ],
+      "noteCount": 298
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-country-pedal-steel-fills",
+        "tech-country-train-beat"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "jazz-comping-sync",
+        "tango-332-piazzolla",
+        "brazilian--sb-15-bossa-ending-turn"
+      ],
+      "noteCount": 435
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "mandolin",
+      "role": "lead",
+      "patternIds": [
+        "country-pedal-steel-swell",
+        "flamenco-bridge-17"
+      ],
+      "noteCount": 110
+    }
+  ],
+  "patterns": [
+    {
+      "id": "country-pedal-steel-swell",
+      "name": "Pedal Steel Volume Swell",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-steel-answer",
+      "name": "Steel Answer",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-boom-chuck",
+      "name": "Boom-Chuck",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-country-train-beat",
+      "name": "train beat",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "train beat"
+      ]
+    },
+    {
+      "id": "tech-country-pedal-steel-fills",
+      "name": "pedal-steel fills",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "pedal-steel fills"
+      ]
+    },
+    {
+      "id": "tango-fraseo-bandoneon",
+      "name": "Fraseo y Rubato",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        14,
+        16,
+        20,
+        24,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-outlaw",
+      "name": "Outlaw 8ths",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-comping-sync",
+      "name": "Syncopated Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        1,
+        4,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-332-piazzolla",
+      "name": "3+3+2 Nuevo Tango Pulse",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "brazilian--sb-15-bossa-ending-turn",
+      "name": "Bossa ending cadence",
+      "worldId": "brazilian",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        5,
+        9,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-bridge-17",
+      "name": "Rasgueado Bridge",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        8
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "steel-guitar",
+      "fiddle",
+      "acoustic-guitar",
+      "electric-guitar",
+      "bass"
+    ],
+    "techniques": [],
+    "signatureCell": "Weeping pedal steel guitar swell answering clean baritone vocal line",
+    "tempoRange": [
+      98,
+      122
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "country-neotraditional"
+  },
+  "performance": {
+    "noteCount": 2505,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "country-pedal-steel-swell",
+      "country-steel-answer",
+      "country-boom-chuck",
+      "tech-country-train-beat",
+      "tech-country-pedal-steel-fills",
+      "tango-fraseo-bandoneon",
+      "country-outlaw",
+      "afro-amapiano-pad",
+      "jazz-comping-sync",
+      "tango-332-piazzolla",
+      "brazilian--sb-15-bossa-ending-turn",
+      "flamenco-bridge-17"
+    ]
+  }
+}

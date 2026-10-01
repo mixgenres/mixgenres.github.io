@@ -1,0 +1,358 @@
+{
+  "schemaVersion": 2,
+  "genre": "funk",
+  "styleId": "funk-carioca",
+  "styleName": "Funk Carioca",
+  "durationSec": 65.45454545454547,
+  "tempoBpm": 132,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "Am",
+        "Am",
+        "Am"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "groove-1",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "F",
+        "G",
+        "Am"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "verse-2",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "F",
+        "G",
+        "Am"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "G",
+        "Am"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "groove-4",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "F",
+        "G",
+        "Am"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "tag-5",
+      "kind": "tag",
+      "label": "Tag",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "G",
+        "Am"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "funk-drum-breakbeat",
+        "style-funk-jazz-funk-signature"
+      ],
+      "noteCount": 240
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "style-funk-jazz-funk-signature",
+        "funk-clavinet",
+        "tech-funk-syncopated-bass-octave",
+        "funk-slap-bass"
+      ],
+      "noteCount": 139
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "funk-clavinet"
+      ],
+      "noteCount": 36
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "tenor-sax",
+      "role": "melody",
+      "patternIds": [
+        "tech-funk-funk-horn-stab",
+        "tech-funk-syncopated-bass-octave"
+      ],
+      "noteCount": 140
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "funk-the-one-bass",
+        "funk-clavinet"
+      ],
+      "noteCount": 36
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-funk-syncopated-bass-octave",
+        "tech-funk-funk-horn-stab"
+      ],
+      "noteCount": 36
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "clavinet",
+      "role": "harmony",
+      "patternIds": [
+        "style-funk-jazz-funk-signature",
+        "funk-clavinet"
+      ],
+      "noteCount": 377
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "funk-clavinet"
+      ],
+      "noteCount": 297
+    }
+  ],
+  "patterns": [
+    {
+      "id": "funk-drum-breakbeat",
+      "name": "Clyde Stubblefield \"Funky Drummer\" Breakbeat",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        8,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-funk-jazz-funk-signature",
+      "name": "Jazz-Funk",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "clavinet riff",
+        "funk horn stab",
+        "vamp extension"
+      ]
+    },
+    {
+      "id": "funk-clavinet",
+      "name": "Clavinet Sync",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        4,
+        7,
+        10,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-funk-syncopated-bass-octave",
+      "name": "syncopated bass octave",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "syncopated bass octave"
+      ]
+    },
+    {
+      "id": "funk-slap-bass",
+      "name": "Slap Bass",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-funk-funk-horn-stab",
+      "name": "horn stab",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "funk horn stab"
+      ]
+    },
+    {
+      "id": "funk-the-one-bass",
+      "name": "\"The One\" 16th-Note Syncopated Bass",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "sub-bass",
+      "sampler",
+      "tenor-sax",
+      "synth"
+    ],
+    "techniques": [],
+    "signatureCell": "Explosive Tamborzão favela drum rhythm driving under aggressive call-and-response vocal chant",
+    "tempoRange": [
+      128,
+      136
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "funk-carioca"
+  },
+  "performance": {
+    "noteCount": 1301,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "funk-drum-breakbeat",
+      "style-funk-jazz-funk-signature",
+      "funk-clavinet",
+      "tech-funk-syncopated-bass-octave",
+      "funk-slap-bass",
+      "tech-funk-funk-horn-stab",
+      "funk-the-one-bass",
+      "afro-amapiano-pad"
+    ]
+  }
+}

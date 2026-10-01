@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 2,
+  "genre": "reggae",
+  "styleId": "reggae-nyabinghi-rastafari-percussion",
+  "styleName": "Nyabinghi / Rastafari Percussion",
+  "durationSec": 106.66666666666671,
+  "tempoBpm": 90,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Bm",
+        "A",
+        "G",
+        "A"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Bm",
+        "A",
+        "G",
+        "A"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Bm",
+        "A",
+        "G",
+        "A"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Bm",
+        "A",
+        "G",
+        "A"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Bm",
+        "A",
+        "G",
+        "A"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Bm",
+        "A",
+        "G",
+        "A"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "patternIds": [
+        "style-reggae-nyabinghi-rastafari-percussion-signature"
+      ],
+      "noteCount": 168
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bombo",
+      "role": "percussion",
+      "patternIds": [
+        "style-reggae-nyabinghi-rastafari-percussion-signature",
+        "reggae--reggae-melodic-bass"
+      ],
+      "noteCount": 217
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "reggae--rd-one-drop"
+      ],
+      "noteCount": 187
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "reggae--reggae-melodic-bass",
+        "reggae--reggae-one-drop"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "reggae--rd-11-dub-dropout",
+        "reggae--rd-reggae-bass"
+      ],
+      "noteCount": 83
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--rd-dub-drop"
+      ],
+      "noteCount": 327
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--reggae-one-drop",
+        "reggae--rd-skank",
+        "reggae--rd-dub-drop"
+      ],
+      "noteCount": 393
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "horn-section",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--reggae-melodic-bass",
+        "reggae--reggae-one-drop",
+        "reggae--rd-dub-drop"
+      ],
+      "noteCount": 133
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-reggae-nyabinghi-rastafari-percussion-signature",
+      "name": "Nyabinghi/Rastafari Percussion",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "nyabinghi drums"
+      ]
+    },
+    {
+      "id": "reggae--reggae-melodic-bass",
+      "name": "Melodic Reggae Bass",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-one-drop",
+      "name": "One-Drop Foundation",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--reggae-one-drop",
+      "name": "One-Drop",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-11-dub-dropout",
+      "name": "Dub subtraction/return",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-reggae-bass",
+      "name": "Melodic Reggae Bass",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-dub-drop",
+      "name": "Dub Dropout & Echo Fragment",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-skank",
+      "name": "Offbeat Skank",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "hand-percussion",
+      "bombo",
+      "drums",
+      "voice"
+    ],
+    "techniques": [
+      "nyabinghi drums"
+    ],
+    "signatureCell": "Polyrhythmic hand-drum cycle with space",
+    "tempoRange": [
+      70,
+      110
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Count Ossie"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "reggae-nyabinghi-rastafari-percussion"
+  },
+  "performance": {
+    "noteCount": 1572,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-reggae-nyabinghi-rastafari-percussion-signature",
+      "reggae--reggae-melodic-bass",
+      "reggae--rd-one-drop",
+      "reggae--reggae-one-drop",
+      "reggae--rd-11-dub-dropout",
+      "reggae--rd-reggae-bass",
+      "reggae--rd-dub-drop",
+      "reggae--rd-skank"
+    ]
+  }
+}

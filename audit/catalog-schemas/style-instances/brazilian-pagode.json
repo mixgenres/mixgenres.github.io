@@ -1,0 +1,397 @@
+{
+  "schemaVersion": 2,
+  "genre": "brazilian",
+  "styleId": "brazilian-pagode",
+  "styleName": "Pagode",
+  "durationSec": 46.601941747572845,
+  "tempoBpm": 103,
+  "meter": "2/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "G",
+        "E7",
+        "Am7",
+        "D7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "theme-1",
+      "kind": "theme",
+      "label": "Theme",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "G",
+        "E7",
+        "Am7",
+        "D7",
+        "Bm7",
+        "E7",
+        "Am7",
+        "D7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "variation-2",
+      "kind": "variation",
+      "label": "Variation",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "G",
+        "E7",
+        "Am7",
+        "D7",
+        "Bm7",
+        "E7",
+        "Am7",
+        "D7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "solo-3",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "G",
+        "E7",
+        "Am7",
+        "D7",
+        "Bm7",
+        "E7",
+        "Am7",
+        "D7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "coda-4",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "D7",
+        "G",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "cavaquinho",
+      "role": "harmony",
+      "patternIds": [
+        "brazilian--sb-cavaquinho"
+      ],
+      "noteCount": 572
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "pandeiro",
+      "role": "percussion",
+      "patternIds": [
+        "brazilian--sb-pandeiro"
+      ],
+      "noteCount": 207
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "tantan",
+      "role": "percussion",
+      "patternIds": [
+        "brazilian--brz-samba-batucada"
+      ],
+      "noteCount": 290
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "repinique",
+      "role": "percussion",
+      "patternIds": [
+        "brazilian--sb-surdo-foundation",
+        "brazilian--brz-samba-batucada",
+        "brazilian--sb-07-samba-pandeiro-interlock",
+        "zouk-ti-bwa"
+      ],
+      "noteCount": 248
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "brazilian--brz-samba-batucada",
+        "tech-brazilian-7-string-baixaria",
+        "house--ht-10-detroit-sequence"
+      ],
+      "noteCount": 63
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "brazilian--sb-cavaquinho"
+      ],
+      "noteCount": 587
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "brazilian--sb-bossa-bass"
+      ],
+      "noteCount": 193
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-brazilian-7-string-baixaria",
+        "brazilian--sb-15-bossa-ending-turn",
+        "brazilian--sb-12-bossa-piano-voicing"
+      ],
+      "noteCount": 305
+    }
+  ],
+  "patterns": [
+    {
+      "id": "brazilian--sb-cavaquinho",
+      "name": "Cavaquinho Comp",
+      "worldId": "brazilian",
+      "meter": "2/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        1,
+        3,
+        5,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "brazilian--sb-pandeiro",
+      "name": "Pandeiro Syncopation",
+      "worldId": "brazilian",
+      "meter": "2/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "brazilian--brz-samba-batucada",
+      "name": "Samba Batucada",
+      "worldId": "brazilian",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "brazilian--sb-surdo-foundation",
+      "name": "Surdo Two-Beat Foundation",
+      "worldId": "brazilian",
+      "meter": "2/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        4,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "brazilian--sb-07-samba-pandeiro-interlock",
+      "name": "Samba Pandeiro Interlock",
+      "worldId": "brazilian",
+      "meter": "2/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-ti-bwa",
+      "name": "Ti-Bwa Woodblock Ostinato",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-brazilian-7-string-baixaria",
+      "name": "7-string baixaria",
+      "worldId": "brazilian",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "7-string baixaria"
+      ]
+    },
+    {
+      "id": "house--ht-10-detroit-sequence",
+      "name": "Detroit Sequence",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        16,
+        19,
+        22,
+        25,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "brazilian--sb-bossa-bass",
+      "name": "Bossa bass anchor/anticipation",
+      "worldId": "brazilian",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        11,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "brazilian--sb-15-bossa-ending-turn",
+      "name": "Bossa ending cadence",
+      "worldId": "brazilian",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        5,
+        9,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "brazilian--sb-12-bossa-piano-voicing",
+      "name": "Bossa piano chord punctuation",
+      "worldId": "brazilian",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        2,
+        6,
+        9,
+        13
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "cavaquinho",
+      "pandeiro",
+      "tantan",
+      "repinique",
+      "synth"
+    ],
+    "techniques": [],
+    "signatureCell": "Tantan hand bass slap answering cheerful cavaquinho intro and communal roda singalong",
+    "tempoRange": [
+      90,
+      115
+    ],
+    "preferredMeters": [
+      "2/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 54,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "brazilian-pagode"
+  },
+  "performance": {
+    "noteCount": 2465,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "brazilian--sb-cavaquinho",
+      "brazilian--sb-pandeiro",
+      "brazilian--brz-samba-batucada",
+      "brazilian--sb-surdo-foundation",
+      "brazilian--sb-07-samba-pandeiro-interlock",
+      "zouk-ti-bwa",
+      "tech-brazilian-7-string-baixaria",
+      "house--ht-10-detroit-sequence",
+      "brazilian--sb-bossa-bass",
+      "brazilian--sb-15-bossa-ending-turn",
+      "brazilian--sb-12-bossa-piano-voicing"
+    ]
+  }
+}

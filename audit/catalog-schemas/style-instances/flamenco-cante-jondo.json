@@ -1,0 +1,363 @@
+{
+  "schemaVersion": 2,
+  "genre": "flamenco",
+  "styleId": "flamenco-cante-jondo",
+  "styleName": "Cante Jondo",
+  "durationSec": 135.52941176470588,
+  "tempoBpm": 85,
+  "meter": "12/8",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Salida",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Letra",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "solo-2",
+      "kind": "solo",
+      "label": "Falseta",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "chorus-3",
+      "kind": "chorus",
+      "label": "Letra / Jaleo",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "coda-4",
+      "kind": "coda",
+      "label": "Remate / Cierre",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-flamenco-melisma",
+        "tech-flamenco-jaleo"
+      ],
+      "noteCount": 48
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "spanish-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "flam-buleria-compas"
+      ],
+      "noteCount": 676
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "palmas",
+      "role": "percussion",
+      "patternIds": [
+        "style-flamenco-cante-jondo-signature",
+        "flam-buleria-compas"
+      ],
+      "noteCount": 174
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "cajon",
+      "role": "percussion",
+      "patternIds": [
+        "style-flamenco-cante-jondo-signature",
+        "flam-buleria-compas"
+      ],
+      "noteCount": 192
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "zapateado",
+      "role": "percussion",
+      "patternIds": [
+        "style-flamenco-cante-jondo-signature",
+        "flam-buleria-compas"
+      ],
+      "noteCount": 206
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "flute",
+      "role": "melody",
+      "patternIds": [
+        "flam-solea-12beat"
+      ],
+      "noteCount": 94
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "castanets",
+      "role": "percussion",
+      "patternIds": [
+        "flamenco-bulerias-palmas",
+        "flamenco-golpe",
+        "flam-tangos-compas",
+        "flamenco-cajon-rumba"
+      ],
+      "noteCount": 146
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "patternIds": [
+        "flamenco-golpe",
+        "flamenco-cajon-rumba",
+        "flam-tangos-compas"
+      ],
+      "noteCount": 161
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-flamenco-melisma",
+      "name": "melisma",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "melisma"
+      ]
+    },
+    {
+      "id": "tech-flamenco-jaleo",
+      "name": "jaleo",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "jaleo"
+      ]
+    },
+    {
+      "id": "flam-buleria-compas",
+      "name": "Bulería Compás/Jerez Drive",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        11,
+        2,
+        5,
+        7,
+        8,
+        9,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-flamenco-cante-jondo-signature",
+      "name": "Cante Jondo",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10
+      ],
+      "techniques": [
+        "dramatic pause",
+        "rubato entrance",
+        "jaleo",
+        "melisma",
+        "12-beat compás"
+      ]
+    },
+    {
+      "id": "flam-solea-12beat",
+      "name": "Soleá 12-Beat Compás Framework",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        2,
+        5,
+        7,
+        9,
+        11
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-bulerias-palmas",
+      "name": "Bulerias Palmas",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-golpe",
+      "name": "Golpe",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-tangos-compas",
+      "name": "Tangos de Triana",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-cajon-rumba",
+      "name": "Cajon Rumba",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "voice",
+      "spanish-guitar",
+      "palmas",
+      "cajon"
+    ],
+    "techniques": [
+      "dramatic pause",
+      "rubato entrance",
+      "jaleo",
+      "melisma",
+      "12-beat compás"
+    ],
+    "signatureCell": "Ornamented cante over flexible compás",
+    "tempoRange": [
+      60,
+      110
+    ],
+    "preferredMeters": [
+      "12/8"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Camarón",
+      "Enrique Morente"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "flamenco-cante-jondo"
+  },
+  "performance": {
+    "noteCount": 1697,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-flamenco-melisma",
+      "tech-flamenco-jaleo",
+      "flam-buleria-compas",
+      "style-flamenco-cante-jondo-signature",
+      "flam-solea-12beat",
+      "flamenco-bulerias-palmas",
+      "flamenco-golpe",
+      "flam-tangos-compas",
+      "flamenco-cajon-rumba"
+    ]
+  }
+}

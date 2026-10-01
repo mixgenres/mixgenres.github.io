@@ -1,0 +1,539 @@
+{
+  "schemaVersion": 2,
+  "genre": "swing",
+  "styleId": "swing-chicago-swing",
+  "styleName": "Chicago Swing",
+  "durationSec": 74.32258064516125,
+  "tempoBpm": 155,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Head",
+      "bars": 4,
+      "intensity": "medium",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Head / A",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "solo-2",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Trading / Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "chorus-4",
+      "kind": "chorus",
+      "label": "Head Return",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C6",
+        "A7",
+        "Dm7",
+        "G7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "clarinet",
+      "role": "lead",
+      "patternIds": [
+        "style-swing-chicago-swing-signature"
+      ],
+      "noteCount": 190
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "style-swing-chicago-swing-signature",
+        "swing-charleston",
+        "swing-chorus-16"
+      ],
+      "noteCount": 718
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "swing-walking-bass",
+        "swing-2-feel"
+      ],
+      "noteCount": 134
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "swing-spang"
+      ],
+      "noteCount": 276
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "tech-swing-charleston",
+        "tech-swing-walking-bass",
+        "tech-swing-ride-swing",
+        "swing-2-feel"
+      ],
+      "noteCount": 243
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "tenor-sax",
+      "role": "melody",
+      "patternIds": [
+        "tech-swing-ride-swing",
+        "tech-swing-charleston",
+        "tech-swing-walking-bass",
+        "tech-swing-swing-triplets"
+      ],
+      "noteCount": 261
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "jazz-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tango-bordoneo",
+        "flam-seguiriya-compas",
+        "zouk-bridge-16",
+        "tech-swing-ride-swing",
+        "afrobeats-chorus-12",
+        "afrobeats-cadence-16"
+      ],
+      "noteCount": 1052
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "trumpet",
+      "role": "lead",
+      "patternIds": [
+        "tech-swing-walking-bass",
+        "swing-shout-chorus",
+        "tech-swing-charleston",
+        "afro-mambo-horn-hits",
+        "zouk-horn-stabs"
+      ],
+      "noteCount": 148
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-swing-chicago-swing-signature",
+      "name": "Chicago Swing",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "walking bass",
+        "Charleston",
+        "ride swing",
+        "swing triplets"
+      ]
+    },
+    {
+      "id": "swing-charleston",
+      "name": "Charleston Comping",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        3
+      ],
+      "techniques": []
+    },
+    {
+      "id": "swing-chorus-16",
+      "name": "La Pompe Chorus Lift",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        5,
+        8,
+        10,
+        11,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "swing-walking-bass",
+      "name": "Walking Bass",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 4,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "techniques": []
+    },
+    {
+      "id": "swing-2-feel",
+      "name": "2-Feel Bass",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 4,
+      "onsetGrid": [
+        0,
+        2
+      ],
+      "techniques": []
+    },
+    {
+      "id": "swing-spang",
+      "name": "Spang-a-lang",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-swing-charleston",
+      "name": "Charleston",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Charleston"
+      ]
+    },
+    {
+      "id": "tech-swing-walking-bass",
+      "name": "walking bass",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "walking bass"
+      ]
+    },
+    {
+      "id": "tech-swing-ride-swing",
+      "name": "ride swing",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "ride swing"
+      ]
+    },
+    {
+      "id": "tech-swing-swing-triplets",
+      "name": "triplets",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "swing triplets"
+      ]
+    },
+    {
+      "id": "tango-bordoneo",
+      "name": "Bordoneo Criollo",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-seguiriya-compas",
+      "name": "Seguiriya 2+2+3+3+2",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        7,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-bridge-16",
+      "name": "Chawa Bridge",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afrobeats-chorus-12",
+      "name": "Shekere Chorus Lift",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        5,
+        6,
+        8,
+        11,
+        13,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afrobeats-cadence-16",
+      "name": "Log Drum Cadence",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "swing-shout-chorus",
+      "name": "Shout Chorus Ensemble Hits",
+      "worldId": "swing",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        8,
+        11,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-mambo-horn-hits",
+      "name": "Mambo Section Horn Stabs & Punctuation",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        6,
+        12,
+        14,
+        22,
+        28,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-horn-stabs",
+      "name": "Kassav Horn Section Stabs",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        3,
+        6,
+        11,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "clarinet",
+      "piano",
+      "upright-bass",
+      "drums",
+      "brass"
+    ],
+    "techniques": [
+      "walking bass",
+      "Charleston",
+      "ride swing",
+      "swing triplets"
+    ],
+    "signatureCell": "Clarinet-led swing with tight ensemble",
+    "tempoRange": [
+      120,
+      190
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Benny Goodman"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "swing-chicago-swing"
+  },
+  "performance": {
+    "noteCount": 3022,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-swing-chicago-swing-signature",
+      "swing-charleston",
+      "swing-chorus-16",
+      "swing-walking-bass",
+      "swing-2-feel",
+      "swing-spang",
+      "tech-swing-charleston",
+      "tech-swing-walking-bass",
+      "tech-swing-ride-swing",
+      "tech-swing-swing-triplets",
+      "tango-bordoneo",
+      "flam-seguiriya-compas",
+      "zouk-bridge-16",
+      "afrobeats-chorus-12",
+      "afrobeats-cadence-16",
+      "swing-shout-chorus",
+      "afro-mambo-horn-hits",
+      "zouk-horn-stabs"
+    ]
+  }
+}

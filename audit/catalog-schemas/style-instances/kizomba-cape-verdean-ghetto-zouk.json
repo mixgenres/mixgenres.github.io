@@ -1,0 +1,364 @@
+{
+  "schemaVersion": 2,
+  "genre": "kizomba",
+  "styleId": "kizomba-cape-verdean-ghetto-zouk",
+  "styleName": "Cape Verdean Ghetto Zouk",
+  "durationSec": 103.22580645161285,
+  "tempoBpm": 93,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "style-kizomba-cape-verdean-ghetto-zouk-signature",
+        "kizomba-tarraxinha-sub"
+      ],
+      "noteCount": 54
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-kizomba-ghetto-zouk-sub-bass",
+        "tech-kizomba-kizomba-bass-ostinato",
+        "style-kizomba-cape-verdean-ghetto-zouk-signature"
+      ],
+      "noteCount": 155
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-chorus-15"
+      ],
+      "noteCount": 310
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "kizomba-chorus-15",
+        "style-kizomba-cape-verdean-ghetto-zouk-signature"
+      ],
+      "noteCount": 1048
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-kizomba-kizomba-bass-ostinato",
+        "tech-kizomba-long-r-b-chord-voicing",
+        "tech-kizomba-ghetto-zouk-sub-bass",
+        "tech-kizomba-tarraxinha-bass-pulse"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "dikanza",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-chorus-15",
+        "kizomba-dikanza-scraper"
+      ],
+      "noteCount": 295
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "rhodes",
+      "role": "harmony",
+      "patternIds": [
+        "tech-kizomba-long-r-b-chord-voicing"
+      ],
+      "noteCount": 580
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "kizomba-tarraxinha-sub",
+        "style-kizomba-cape-verdean-ghetto-zouk-signature"
+      ],
+      "noteCount": 141
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-kizomba-cape-verdean-ghetto-zouk-signature",
+      "name": "Cape Verdean Ghetto Zouk",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "sparse percussion",
+        "ghetto-zouk sub-bass",
+        "long R&B chord voicing",
+        "kizomba bass ostinato",
+        "tarraxinha bass pulse"
+      ]
+    },
+    {
+      "id": "kizomba-tarraxinha-sub",
+      "name": "Tarraxinha Sub-Bass",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-kizomba-ghetto-zouk-sub-bass",
+      "name": "ghetto-zouk sub-bass",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "ghetto-zouk sub-bass"
+      ]
+    },
+    {
+      "id": "tech-kizomba-kizomba-bass-ostinato",
+      "name": "bass ostinato",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "kizomba bass ostinato"
+      ]
+    },
+    {
+      "id": "kizomba-chorus-15",
+      "name": "Bass Chorus Lift",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        9,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-kizomba-long-r-b-chord-voicing",
+      "name": "long R&B chord voicing",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "long R&B chord voicing"
+      ]
+    },
+    {
+      "id": "tech-kizomba-tarraxinha-bass-pulse",
+      "name": "tarraxinha bass pulse",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "tarraxinha bass pulse"
+      ]
+    },
+    {
+      "id": "kizomba-dikanza-scraper",
+      "name": "Dikanza Scraper",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        7,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "synth",
+      "sub-bass",
+      "drums",
+      "electric-guitar",
+      "voice"
+    ],
+    "techniques": [
+      "sparse percussion",
+      "ghetto-zouk sub-bass",
+      "long R&B chord voicing",
+      "kizomba bass ostinato",
+      "tarraxinha bass pulse"
+    ],
+    "signatureCell": "Sparse R&B chords over deep sub",
+    "tempoRange": [
+      80,
+      105
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Nelson Freitas",
+      "Johnny Ramos"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "kizomba-cape-verdean-ghetto-zouk"
+  },
+  "performance": {
+    "noteCount": 2647,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-kizomba-cape-verdean-ghetto-zouk-signature",
+      "kizomba-tarraxinha-sub",
+      "tech-kizomba-ghetto-zouk-sub-bass",
+      "tech-kizomba-kizomba-bass-ostinato",
+      "kizomba-chorus-15",
+      "tech-kizomba-long-r-b-chord-voicing",
+      "tech-kizomba-tarraxinha-bass-pulse",
+      "kizomba-dikanza-scraper"
+    ]
+  }
+}

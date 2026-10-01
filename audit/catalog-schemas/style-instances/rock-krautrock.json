@@ -1,0 +1,437 @@
+{
+  "schemaVersion": 2,
+  "genre": "rock",
+  "styleId": "rock-krautrock",
+  "styleName": "Krautrock",
+  "durationSec": 81.35593220338988,
+  "tempoBpm": 118,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "style-rock-krautrock-signature",
+        "rock-odd-meter",
+        "style-rock-math-rock-signature"
+      ],
+      "noteCount": 338
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "style-rock-math-rock-signature",
+        "style-rock-krautrock-signature",
+        "rock-odd-meter"
+      ],
+      "noteCount": 184
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "rock-odd-meter",
+        "rock-halftime-groove",
+        "rock-straight-drive"
+      ],
+      "noteCount": 139
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-rock-dual-guitar-harmony",
+        "style-rock-krautrock-signature",
+        "kizomba-vocal-comping"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-rock-motorik-beat",
+        "tech-rock-dual-guitar-harmony"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-rock-dual-guitar-harmony"
+      ],
+      "noteCount": 326
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "overdrive-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "rock-straight-drive",
+        "style-rock-math-rock-signature"
+      ],
+      "noteCount": 306
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "jazz-comping-sync",
+        "hip-hop-sampled-keys",
+        "timba-piano-guajeo",
+        "tech-rock-motorik-beat",
+        "reggae--rd-skank"
+      ],
+      "noteCount": 274
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-rock-krautrock-signature",
+      "name": "Krautrock",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "motorik beat"
+      ]
+    },
+    {
+      "id": "rock-odd-meter",
+      "name": "7/8 Accent Group",
+      "worldId": "rock",
+      "meter": "7/8",
+      "subdivisions": 14,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-rock-math-rock-signature",
+      "name": "Math Rock",
+      "worldId": "rock",
+      "meter": "5/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "odd-meter riff",
+        "boogie riff",
+        "dual-guitar harmony",
+        "guitar octave",
+        "rock backbeat"
+      ]
+    },
+    {
+      "id": "rock-halftime-groove",
+      "name": "Half-Time Groove",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        4
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-straight-drive",
+      "name": "Straight-Eighth Drive",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-rock-dual-guitar-harmony",
+      "name": "dual-guitar harmony",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "dual-guitar harmony"
+      ]
+    },
+    {
+      "id": "kizomba-vocal-comping",
+      "name": "Vocal Phrase Response",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        7,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-rock-motorik-beat",
+      "name": "motorik beat",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "motorik beat"
+      ]
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-comping-sync",
+      "name": "Syncopated Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        1,
+        4,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "hip-hop-sampled-keys",
+      "name": "Sampled Keys Loop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 24,
+      "onsetGrid": [
+        0,
+        6,
+        12,
+        18,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "timba-piano-guajeo",
+      "name": "Piano Guajeo",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-skank",
+      "name": "Offbeat Skank",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "synth"
+    ],
+    "techniques": [
+      "motorik beat"
+    ],
+    "signatureCell": "Motorik pulse with gradual texture",
+    "tempoRange": [
+      100,
+      135
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Can",
+      "Neu!",
+      "Kraftwerk"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "rock-krautrock"
+  },
+  "performance": {
+    "noteCount": 1695,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-rock-krautrock-signature",
+      "rock-odd-meter",
+      "style-rock-math-rock-signature",
+      "rock-halftime-groove",
+      "rock-straight-drive",
+      "tech-rock-dual-guitar-harmony",
+      "kizomba-vocal-comping",
+      "tech-rock-motorik-beat",
+      "afro-amapiano-pad",
+      "jazz-comping-sync",
+      "hip-hop-sampled-keys",
+      "timba-piano-guajeo",
+      "reggae--rd-skank"
+    ]
+  }
+}

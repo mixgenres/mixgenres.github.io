@@ -1,0 +1,366 @@
+{
+  "schemaVersion": 2,
+  "genre": "zouk",
+  "styleId": "zouk-zouk-love",
+  "styleName": "Zouk Love",
+  "durationSec": 146.08695652173895,
+  "tempoBpm": 92,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "pre-2",
+      "kind": "pre",
+      "label": "Pre",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "chorus-3",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Gm",
+        "C",
+        "F",
+        "Dm"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "bridge-5",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r6",
+      "key": "chorus-6",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Gm",
+        "C",
+        "F",
+        "Dm"
+      ]
+    },
+    {
+      "id": "r7",
+      "key": "outro-7",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "Gm",
+        "C",
+        "F"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "zouk-synth-chords"
+      ],
+      "noteCount": 68
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-zouk-ghetto-zouk-sub-bass",
+        "zouk-french-bass"
+      ],
+      "noteCount": 231
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "zouk-shaker"
+      ],
+      "noteCount": 837
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "zouk-guitar-skank-chawa"
+      ],
+      "noteCount": 856
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "rhodes",
+      "role": "harmony",
+      "patternIds": [
+        "zouk-guitar-skank-chawa"
+      ],
+      "noteCount": 672
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-zouk-romantic-vocal-legato"
+      ],
+      "noteCount": 70
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "zouk-bass-movement",
+        "zouk-french-bass"
+      ],
+      "noteCount": 174
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "zouk-synth-chords",
+        "zouk-bass-movement"
+      ],
+      "noteCount": 72
+    }
+  ],
+  "patterns": [
+    {
+      "id": "zouk-synth-chords",
+      "name": "DX7 Synth Stabs",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        3,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-zouk-ghetto-zouk-sub-bass",
+      "name": "ghetto-zouk sub-bass",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "ghetto-zouk sub-bass"
+      ]
+    },
+    {
+      "id": "zouk-french-bass",
+      "name": "French Antillean Zouk Bass",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-shaker",
+      "name": "Shaker",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-guitar-skank-chawa",
+      "name": "Chawa Guitar Skank",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-zouk-romantic-vocal-legato",
+      "name": "romantic vocal legato",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": [
+        "romantic vocal legato"
+      ]
+    },
+    {
+      "id": "zouk-bass-movement",
+      "name": "Syncopated Bass Movement",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "synth",
+      "bass",
+      "drums",
+      "electric-guitar",
+      "rhodes"
+    ],
+    "techniques": [
+      "romantic vocal legato",
+      "R&B chord extensions",
+      "sparse electronic percussion"
+    ],
+    "signatureCell": "continuous smooth bass, soft rim/kick pulse and lush keyboard/guitar",
+    "tempoRange": [
+      84,
+      100
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Patrick Saint-Éloi"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "zouk-zouk-love"
+  },
+  "performance": {
+    "noteCount": 2980,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "zouk-synth-chords",
+      "tech-zouk-ghetto-zouk-sub-bass",
+      "zouk-french-bass",
+      "zouk-shaker",
+      "zouk-guitar-skank-chawa",
+      "tech-zouk-romantic-vocal-legato",
+      "zouk-bass-movement"
+    ]
+  }
+}

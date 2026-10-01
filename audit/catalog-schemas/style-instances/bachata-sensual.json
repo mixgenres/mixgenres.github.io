@@ -1,0 +1,425 @@
+{
+  "schemaVersion": 2,
+  "genre": "bachata",
+  "styleId": "bachata-sensual",
+  "styleName": "Sensual",
+  "durationSec": 89.49152542372887,
+  "tempoBpm": 118,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Bm",
+        "G",
+        "D",
+        "A"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Bm",
+        "G",
+        "D",
+        "A"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "pre-2",
+      "kind": "pre",
+      "label": "Pre",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Bm",
+        "G",
+        "D",
+        "A"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "chorus-3",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Gmaj7",
+        "A",
+        "Bm",
+        "F#m"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "break-4",
+      "kind": "break",
+      "label": "Break",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Bm",
+        "G",
+        "D",
+        "A"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "chorus-5",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Gmaj7",
+        "A",
+        "Bm",
+        "F#m"
+      ]
+    },
+    {
+      "id": "r6",
+      "key": "outro-6",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Bm",
+        "G",
+        "D",
+        "A"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "bachata-chorus-16",
+        "bachata-requinto-derecho"
+      ],
+      "noteCount": 983
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-bachata-descending-bachata-bass",
+        "bachata-bass-derecho",
+        "bachata-bass-majao"
+      ],
+      "noteCount": 195
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-bachata-vocal-guitar-call-response",
+        "tech-bachata-bongo-martillo",
+        "tech-bachata-guitar-pickup-into-chorus"
+      ],
+      "noteCount": 60
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "bongos",
+      "role": "percussion",
+      "patternIds": [
+        "bachata-chorus-16"
+      ],
+      "noteCount": 312
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "guiro",
+      "role": "percussion",
+      "patternIds": [
+        "bachata-chorus-16",
+        "cumbia-guiro"
+      ],
+      "noteCount": 302
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-bachata-vocal-guitar-call-response"
+      ],
+      "noteCount": 60
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "reggaeton--rg-09-reggaeton-piano-stab",
+        "tech-bachata-descending-bachata-bass",
+        "brazilian--sb-15-bossa-ending-turn"
+      ],
+      "noteCount": 505
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "maracas",
+      "role": "percussion",
+      "patternIds": [
+        "bachata-chorus-16"
+      ],
+      "noteCount": 312
+    }
+  ],
+  "patterns": [
+    {
+      "id": "bachata-chorus-16",
+      "name": "Majao Chorus Lift",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        3,
+        5,
+        8,
+        10,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "bachata-requinto-derecho",
+      "name": "Requinto Derecho",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-bachata-descending-bachata-bass",
+      "name": "descending bachata bass",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "descending bachata bass"
+      ]
+    },
+    {
+      "id": "bachata-bass-derecho",
+      "name": "Bass Derecho",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "bachata-bass-majao",
+      "name": "Bass Majao",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-bachata-vocal-guitar-call-response",
+      "name": "vocal/guitar call-response",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal/guitar call-response"
+      ]
+    },
+    {
+      "id": "tech-bachata-bongo-martillo",
+      "name": "bongó martillo",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "bongó martillo"
+      ]
+    },
+    {
+      "id": "tech-bachata-guitar-pickup-into-chorus",
+      "name": "guitar pickup into chorus",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "guitar pickup into chorus"
+      ]
+    },
+    {
+      "id": "cumbia-guiro",
+      "name": "Cumbia Güiro",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-09-reggaeton-piano-stab",
+      "name": "Reggaetón piano offbeat stab",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "brazilian--sb-15-bossa-ending-turn",
+      "name": "Bossa ending cadence",
+      "worldId": "brazilian",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        5,
+        9,
+        13
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "acoustic-guitar",
+      "bass",
+      "synth",
+      "bongos",
+      "guiro"
+    ],
+    "techniques": [],
+    "signatureCell": "wide guitar hooks, pauses and sustained low end around bachata pulse",
+    "tempoRange": [
+      108,
+      126
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "bachata-sensual"
+  },
+  "performance": {
+    "noteCount": 2729,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "bachata-chorus-16",
+      "bachata-requinto-derecho",
+      "tech-bachata-descending-bachata-bass",
+      "bachata-bass-derecho",
+      "bachata-bass-majao",
+      "tech-bachata-vocal-guitar-call-response",
+      "tech-bachata-bongo-martillo",
+      "tech-bachata-guitar-pickup-into-chorus",
+      "cumbia-guiro",
+      "afro-amapiano-pad",
+      "reggaeton--rg-09-reggaeton-piano-stab",
+      "brazilian--sb-15-bossa-ending-turn"
+    ]
+  }
+}

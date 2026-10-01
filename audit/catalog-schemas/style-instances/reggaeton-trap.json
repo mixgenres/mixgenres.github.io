@@ -1,0 +1,422 @@
+{
+  "schemaVersion": 2,
+  "genre": "reggaeton",
+  "styleId": "reggaeton-trap",
+  "styleName": "Trap",
+  "durationSec": 71.1111111111111,
+  "tempoBpm": 135,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "Dm",
+        "Em"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verso-1",
+      "kind": "verso",
+      "label": "Verso",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "F",
+        "Dm",
+        "Em"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "coro-2",
+      "kind": "coro",
+      "label": "Coro",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "F",
+        "Dm",
+        "Em"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "puente-3",
+      "kind": "puente",
+      "label": "Puente",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "F",
+        "Dm",
+        "Em"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "coro-4",
+      "kind": "coro",
+      "label": "Coro",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "F",
+        "Dm",
+        "Em"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "Dm",
+        "Em"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "reggaeton--reggaeton-bass-anticipation",
+        "reggaeton--rg-dembow-bass",
+        "reggaeton--rg-16-perreo-synth-hook"
+      ],
+      "noteCount": 125
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-reggaeton-snare-clap-displacement",
+        "reggaeton--reggaeton-dembow-kick",
+        "tech-reggaeton-reggaeton-kick-bass-lock"
+      ],
+      "noteCount": 185
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "reggaeton--rg-17-melodic-pluck-lead",
+        "reggaeton--rg-16-perreo-synth-hook"
+      ],
+      "noteCount": 56
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "reggaeton--rg-16-perreo-synth-hook",
+        "reggaeton--rg-17-melodic-pluck-lead"
+      ],
+      "noteCount": 56
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "reggaeton--reggaeton-dembow-kick",
+        "brazilian--sb-15-bossa-ending-turn",
+        "reggaeton--reggaeton-bass-anticipation"
+      ],
+      "noteCount": 630
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "reggaeton--reggaeton-dembow-kick",
+        "tech-reggaeton-reggaeton-kick-bass-lock",
+        "reggaeton--reggaeton-bass-anticipation",
+        "tech-reggaeton-snare-clap-displacement"
+      ],
+      "noteCount": 56
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "patternIds": [
+        "tech-reggaeton-reggaeton-kick-bass-lock",
+        "reggaeton--reggaeton-bass-anticipation",
+        "flamenco-golpe",
+        "timba-bata-fusion"
+      ],
+      "noteCount": 212
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "maracas",
+      "role": "percussion",
+      "patternIds": [
+        "reggaeton--reggaeton-dembow-kick",
+        "kizomba-batida-groove",
+        "bachata-bongo-majao"
+      ],
+      "noteCount": 209
+    }
+  ],
+  "patterns": [
+    {
+      "id": "reggaeton--reggaeton-bass-anticipation",
+      "name": "Bass Anticipation",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        11,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-dembow-bass",
+      "name": "Dembow Syncopated Bass",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        14,
+        16,
+        22,
+        24,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-16-perreo-synth-hook",
+      "name": "Perreo Minor Synth Hook",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-reggaeton-snare-clap-displacement",
+      "name": "snare/clap displacement",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "snare/clap displacement"
+      ]
+    },
+    {
+      "id": "reggaeton--reggaeton-dembow-kick",
+      "name": "Dembow Kick",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-reggaeton-reggaeton-kick-bass-lock",
+      "name": "kick/bass lock",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "reggaeton kick/bass lock"
+      ]
+    },
+    {
+      "id": "reggaeton--rg-17-melodic-pluck-lead",
+      "name": "Medellín Plucked Synth Lead",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        7,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "brazilian--sb-15-bossa-ending-turn",
+      "name": "Bossa ending cadence",
+      "worldId": "brazilian",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        5,
+        9,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-golpe",
+      "name": "Golpe",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "timba-bata-fusion",
+      "name": "Bata Fusion",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-batida-groove",
+      "name": "Batida & Sub-Kick Beat",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "bachata-bongo-majao",
+      "name": "Bongo Majao",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "sub-bass",
+      "drums",
+      "synth",
+      "sampler",
+      "electric-guitar"
+    ],
+    "techniques": [],
+    "signatureCell": "Booming 808 pitch glide locked with sharp snare on 3 and melancholic minor guitar sample",
+    "tempoRange": [
+      125,
+      145
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "reggaeton-trap"
+  },
+  "performance": {
+    "noteCount": 1529,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "reggaeton--reggaeton-bass-anticipation",
+      "reggaeton--rg-dembow-bass",
+      "reggaeton--rg-16-perreo-synth-hook",
+      "tech-reggaeton-snare-clap-displacement",
+      "reggaeton--reggaeton-dembow-kick",
+      "tech-reggaeton-reggaeton-kick-bass-lock",
+      "reggaeton--rg-17-melodic-pluck-lead",
+      "brazilian--sb-15-bossa-ending-turn",
+      "flamenco-golpe",
+      "timba-bata-fusion",
+      "kizomba-batida-groove",
+      "bachata-bongo-majao"
+    ]
+  }
+}

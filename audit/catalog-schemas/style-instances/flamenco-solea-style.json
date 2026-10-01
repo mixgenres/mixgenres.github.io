@@ -1,0 +1,372 @@
+{
+  "schemaVersion": 2,
+  "genre": "flamenco",
+  "styleId": "flamenco-solea-style",
+  "styleName": "Soleá",
+  "durationSec": 190.843373493976,
+  "tempoBpm": 83,
+  "meter": "12/8",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "salida-0",
+      "kind": "salida",
+      "label": "Salida",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "llamada-1",
+      "kind": "llamada",
+      "label": "Llamada",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "letra-2",
+      "kind": "letra",
+      "label": "Letra",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "falseta-3",
+      "kind": "falseta",
+      "label": "Falseta",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "letra-4",
+      "kind": "letra",
+      "label": "Letra",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "cierre-5",
+      "kind": "cierre",
+      "label": "Cierre",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "spanish-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "flam-llamada-12",
+        "flam-solea-guitar-compas"
+      ],
+      "noteCount": 696
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "flute",
+      "role": "melody",
+      "patternIds": [
+        "flam-falseta-melodic",
+        "flam-solea-12beat"
+      ],
+      "noteCount": 144
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "palmas",
+      "role": "percussion",
+      "patternIds": [
+        "flam-solea-palmas",
+        "flamenco-bulerias-palmas",
+        "flamenco-golpe"
+      ],
+      "noteCount": 231
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "cajon",
+      "role": "percussion",
+      "patternIds": [
+        "flamenco-bulerias-palmas",
+        "flamenco-golpe"
+      ],
+      "noteCount": 192
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "patternIds": [
+        "flamenco-golpe",
+        "flamenco-chorus-16",
+        "flamenco-bulerias-palmas"
+      ],
+      "noteCount": 221
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "zapateado",
+      "role": "percussion",
+      "patternIds": [
+        "flamenco-chorus-16",
+        "flam-solea-palmas",
+        "flamenco-golpe"
+      ],
+      "noteCount": 277
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "flam-solea-12beat",
+        "flam-falseta-melodic",
+        "flamenco-bridge-17"
+      ],
+      "noteCount": 43
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "castanets",
+      "role": "percussion",
+      "patternIds": [
+        "flamenco-golpe",
+        "flamenco-bulerias-palmas",
+        "flamenco-chorus-16"
+      ],
+      "noteCount": 204
+    }
+  ],
+  "patterns": [
+    {
+      "id": "flam-llamada-12",
+      "name": "Llamada into Cante",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        9,
+        10,
+        11,
+        0,
+        2
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-solea-guitar-compas",
+      "name": "Soleá Guitar Compás",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        11,
+        2,
+        5,
+        7,
+        9
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-falseta-melodic",
+      "name": "Falseta Melodic Development",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        12,
+        14,
+        16,
+        19,
+        22,
+        24,
+        28,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-solea-12beat",
+      "name": "Soleá 12-Beat Compás Framework",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        2,
+        5,
+        7,
+        9,
+        11
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-solea-palmas",
+      "name": "Soleá Palmas Contratiempo",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        1,
+        3,
+        4,
+        6,
+        8,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-bulerias-palmas",
+      "name": "Bulerias Palmas",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-golpe",
+      "name": "Golpe",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-chorus-16",
+      "name": "Remate Chorus Lift",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-bridge-17",
+      "name": "Rasgueado Bridge",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        8
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "spanish-guitar",
+      "flute",
+      "palmas",
+      "cajon",
+      "hand-percussion"
+    ],
+    "techniques": [],
+    "signatureCell": "12-beat compás accented on [12, 3, 6, 8, 10] with Andalusian cadence",
+    "tempoRange": [
+      70,
+      95
+    ],
+    "preferredMeters": [
+      "12/8"
+    ],
+    "microtimingFeel": "rubato",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "flamenco-solea-style"
+  },
+  "performance": {
+    "noteCount": 2008,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "flam-llamada-12",
+      "flam-solea-guitar-compas",
+      "flam-falseta-melodic",
+      "flam-solea-12beat",
+      "flam-solea-palmas",
+      "flamenco-bulerias-palmas",
+      "flamenco-golpe",
+      "flamenco-chorus-16",
+      "flamenco-bridge-17"
+    ]
+  }
+}

@@ -1,0 +1,414 @@
+{
+  "schemaVersion": 2,
+  "genre": "metal",
+  "styleId": "metal-deathcore",
+  "styleName": "Deathcore",
+  "durationSec": 71.1111111111111,
+  "tempoBpm": 135,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "medium",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "bridge-4",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "distortion-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "metal-prog-odd-meter",
+        "metal-groove-metal",
+        "style-metal-deathcore-signature"
+      ],
+      "noteCount": 236
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "style-metal-deathcore-signature"
+      ],
+      "noteCount": 228
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-metal-half-time-breakdown",
+        "metal-blast-beat",
+        "tech-metal-breakdown"
+      ],
+      "noteCount": 476
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-metal-blast-beat",
+        "tech-metal-half-time-breakdown",
+        "style-metal-deathcore-signature"
+      ],
+      "noteCount": 48
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-metal-breakdown",
+        "kizomba-vocal-comping",
+        "tech-metal-chromatic-low-string-riff",
+        "tech-metal-blast-beat"
+      ],
+      "noteCount": 61
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "strings",
+      "role": "harmony",
+      "patternIds": [
+        "tech-metal-chromatic-low-string-riff"
+      ],
+      "noteCount": 124
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "guitar-harmonics",
+      "role": "lead",
+      "patternIds": [
+        "metal-groove-metal",
+        "metal-prog-odd-meter"
+      ],
+      "noteCount": 124
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "overdrive-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "metal-groove-metal",
+        "metal-prog-odd-meter",
+        "metal-djent-chug"
+      ],
+      "noteCount": 276
+    }
+  ],
+  "patterns": [
+    {
+      "id": "metal-prog-odd-meter",
+      "name": "5/8 Riff",
+      "worldId": "metal",
+      "meter": "5/8",
+      "subdivisions": 10,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "metal-groove-metal",
+      "name": "Groove Metal Riff",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        5,
+        6,
+        8,
+        9,
+        11
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-metal-deathcore-signature",
+      "name": "Deathcore",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "blast beat",
+        "breakdown",
+        "chromatic low-string riff",
+        "half-time breakdown"
+      ]
+    },
+    {
+      "id": "tech-metal-half-time-breakdown",
+      "name": "half-time breakdown",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "half-time breakdown"
+      ]
+    },
+    {
+      "id": "metal-blast-beat",
+      "name": "Blast Beat",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-metal-breakdown",
+      "name": "breakdown",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "breakdown"
+      ]
+    },
+    {
+      "id": "tech-metal-blast-beat",
+      "name": "blast beat",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "blast beat"
+      ]
+    },
+    {
+      "id": "kizomba-vocal-comping",
+      "name": "Vocal Phrase Response",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        7,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-metal-chromatic-low-string-riff",
+      "name": "chromatic low-string riff",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "chromatic low-string riff"
+      ]
+    },
+    {
+      "id": "metal-djent-chug",
+      "name": "Djent Polymetric Low Chug",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9,
+        11,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "distortion-guitar",
+      "bass",
+      "drums",
+      "voice"
+    ],
+    "techniques": [
+      "blast beat",
+      "breakdown",
+      "chromatic low-string riff",
+      "half-time breakdown"
+    ],
+    "signatureCell": "Low-tuned riff into half-time breakdown",
+    "tempoRange": [
+      80,
+      190
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Whitechapel",
+      "Suicide Silence"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "metal-deathcore"
+  },
+  "performance": {
+    "noteCount": 1573,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "metal-prog-odd-meter",
+      "metal-groove-metal",
+      "style-metal-deathcore-signature",
+      "tech-metal-half-time-breakdown",
+      "metal-blast-beat",
+      "tech-metal-breakdown",
+      "tech-metal-blast-beat",
+      "kizomba-vocal-comping",
+      "tech-metal-chromatic-low-string-riff",
+      "metal-djent-chug"
+    ]
+  }
+}

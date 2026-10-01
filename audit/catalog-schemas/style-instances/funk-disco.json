@@ -1,0 +1,587 @@
+{
+  "schemaVersion": 2,
+  "genre": "funk",
+  "styleId": "funk-disco",
+  "styleName": "Disco",
+  "durationSec": 70.81967213114751,
+  "tempoBpm": 122,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em7",
+        "A7",
+        "Em7",
+        "A7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "groove-1",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Em7",
+        "A7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "verse-2",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Em7",
+        "A7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em7",
+        "A7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "groove-4",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Em7",
+        "A7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "tag-5",
+      "kind": "tag",
+      "label": "Tag",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em7",
+        "A7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "funk-ghost-snares",
+        "funk-hihat-open"
+      ],
+      "noteCount": 187
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-funk-ghost-note-bass",
+        "funk-slap-bass",
+        "funk-the-one-bass"
+      ],
+      "noteCount": 236
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "funk-chicken-scratch-guitar",
+        "tech-funk-16th-note-guitar-scratch"
+      ],
+      "noteCount": 1334
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "strings",
+      "role": "harmony",
+      "patternIds": [
+        "tech-funk-16th-note-guitar-scratch",
+        "tango-marcato-4",
+        "tech-funk-ghost-note-bass"
+      ],
+      "noteCount": 72
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "style-funk-one-pocket-funk-james-brown-signature",
+        "funk-horn-section",
+        "funk-chicken-scratch-guitar"
+      ],
+      "noteCount": 311
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-soul-call-and-response",
+        "tech-funk-ghost-note-bass",
+        "tech-blues-call-and-response-guitar-vocal",
+        "tech-soul-gospel-vocal-run"
+      ],
+      "noteCount": 36
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "clavinet",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "jazz-piano-comping",
+        "jazz-comping-sync",
+        "reggaeton--rg-synth-stab",
+        "funk-clavinet"
+      ],
+      "noteCount": 309
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--rd-skank",
+        "hip-hop-sampled-keys",
+        "jazz-latin-montuno-comp",
+        "afro-amapiano-pad",
+        "tango-piano-chumba"
+      ],
+      "noteCount": 352
+    }
+  ],
+  "patterns": [
+    {
+      "id": "funk-ghost-snares",
+      "name": "Ghost Snares",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        3,
+        6,
+        7,
+        10,
+        11,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-hihat-open",
+      "name": "Open Hi-Hat",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        1,
+        3,
+        5,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-funk-ghost-note-bass",
+      "name": "ghost-note bass",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "ghost-note bass"
+      ]
+    },
+    {
+      "id": "funk-slap-bass",
+      "name": "Slap Bass",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-the-one-bass",
+      "name": "\"The One\" 16th-Note Syncopated Bass",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-chicken-scratch-guitar",
+      "name": "Chicken-Scratch 9th Chords",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-funk-16th-note-guitar-scratch",
+      "name": "16th-note guitar scratch",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "16th-note guitar scratch"
+      ]
+    },
+    {
+      "id": "tango-marcato-4",
+      "name": "Marcato en 4",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-funk-one-pocket-funk-james-brown-signature",
+      "name": "One-Pocket Funk — James Brown",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "rhythmic stop",
+        "16th-note guitar scratch",
+        "James Brown “one”",
+        "ghost-note bass",
+        "funk horn stab",
+        "muted guitar"
+      ]
+    },
+    {
+      "id": "funk-horn-section",
+      "name": "Horn Section Hits",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-soul-call-and-response",
+      "name": "call-and-response",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "call-and-response"
+      ]
+    },
+    {
+      "id": "tech-blues-call-and-response-guitar-vocal",
+      "name": "call-and-response guitar/vocal",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "call-and-response guitar/vocal"
+      ]
+    },
+    {
+      "id": "tech-soul-gospel-vocal-run",
+      "name": "gospel vocal run",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "gospel vocal run"
+      ]
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-comping",
+      "name": "Syncopated Piano Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-comping-sync",
+      "name": "Syncopated Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        1,
+        4,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-synth-stab",
+      "name": "Offbeat Synth Stab",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-clavinet",
+      "name": "Clavinet Sync",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        4,
+        7,
+        10,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-skank",
+      "name": "Offbeat Skank",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "hip-hop-sampled-keys",
+      "name": "Sampled Keys Loop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 24,
+      "onsetGrid": [
+        0,
+        6,
+        12,
+        18,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-latin-montuno-comp",
+      "name": "Latin Jazz Montuno Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        7,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-piano-chumba",
+      "name": "Piano Chumba",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        4,
+        5
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "bass",
+      "electric-guitar",
+      "strings",
+      "brass"
+    ],
+    "techniques": [],
+    "signatureCell": "Nile Rodgers 16th-note chucking guitar rhythm locked with driving octave disco bassline",
+    "tempoRange": [
+      115,
+      128
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "funk-disco"
+  },
+  "performance": {
+    "noteCount": 2837,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "funk-ghost-snares",
+      "funk-hihat-open",
+      "tech-funk-ghost-note-bass",
+      "funk-slap-bass",
+      "funk-the-one-bass",
+      "funk-chicken-scratch-guitar",
+      "tech-funk-16th-note-guitar-scratch",
+      "tango-marcato-4",
+      "style-funk-one-pocket-funk-james-brown-signature",
+      "funk-horn-section",
+      "tech-soul-call-and-response",
+      "tech-blues-call-and-response-guitar-vocal",
+      "tech-soul-gospel-vocal-run",
+      "afro-amapiano-pad",
+      "jazz-piano-comping",
+      "jazz-comping-sync",
+      "reggaeton--rg-synth-stab",
+      "funk-clavinet",
+      "reggae--rd-skank",
+      "hip-hop-sampled-keys",
+      "jazz-latin-montuno-comp",
+      "tango-piano-chumba"
+    ]
+  }
+}

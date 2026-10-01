@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 2,
+  "genre": "afrobeats",
+  "styleId": "afrobeats-afro-house",
+  "styleName": "Afro-House",
+  "durationSec": 70.24390243902444,
+  "tempoBpm": 123,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "Em7",
+        "Fmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am7",
+        "Em7",
+        "Fmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "pre-chorus-2",
+      "kind": "pre-chorus",
+      "label": "Pre-Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am7",
+        "Em7",
+        "Fmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "chorus-3",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Fmaj7",
+        "G",
+        "Am7",
+        "Em7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "break-4",
+      "kind": "break",
+      "label": "Break",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "Em7",
+        "Fmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "Em7",
+        "Fmaj7",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "afrobeats-chorus-12",
+        "afro-syncopated-kit"
+      ],
+      "noteCount": 216
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "afro-log-drum-bass"
+      ],
+      "noteCount": 236
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "afro-amapiano-pad"
+      ],
+      "noteCount": 38
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "patternIds": [
+        "afro-shekere-shaker",
+        "tech-afrobeats-shaker-16ths-with-displaced-accents"
+      ],
+      "noteCount": 459
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad"
+      ],
+      "noteCount": 308
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-afrobeats-vocal-as-rhythm-phrasing"
+      ],
+      "noteCount": 52
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "afro-log-drum-bass"
+      ],
+      "noteCount": 136
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "log-drum",
+      "role": "percussion",
+      "patternIds": [
+        "afro-shekere-shaker",
+        "afrobeats-chorus-12",
+        "afro-log-drum-bass"
+      ],
+      "noteCount": 347
+    }
+  ],
+  "patterns": [
+    {
+      "id": "afrobeats-chorus-12",
+      "name": "Shekere Chorus Lift",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        5,
+        6,
+        8,
+        11,
+        13,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-syncopated-kit",
+      "name": "Modern Afropop Kick & Rim Pocket",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-log-drum-bass",
+      "name": "Pitched Log Drum Bass Groove",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-shekere-shaker",
+      "name": "Shekere & Gourd Shaker Engine",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-afrobeats-shaker-16ths-with-displaced-accents",
+      "name": "shaker 16ths with displaced accents",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "shaker 16ths with displaced accents"
+      ]
+    },
+    {
+      "id": "tech-afrobeats-vocal-as-rhythm-phrasing",
+      "name": "vocal-as-rhythm phrasing",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal-as-rhythm phrasing"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "bass",
+      "synth",
+      "hand-percussion",
+      "piano"
+    ],
+    "techniques": [],
+    "signatureCell": "Four-on-the-floor kick with deep tribal conga syncopations and lush chords",
+    "tempoRange": [
+      120,
+      126
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "afrobeats-afro-house"
+  },
+  "performance": {
+    "noteCount": 1792,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "afrobeats-chorus-12",
+      "afro-syncopated-kit",
+      "afro-log-drum-bass",
+      "afro-amapiano-pad",
+      "afro-shekere-shaker",
+      "tech-afrobeats-shaker-16ths-with-displaced-accents",
+      "tech-afrobeats-vocal-as-rhythm-phrasing"
+    ]
+  }
+}

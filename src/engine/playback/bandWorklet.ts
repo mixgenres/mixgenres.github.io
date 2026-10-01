@@ -35,12 +35,12 @@ interface RendererDelegate {
   nodeMap: Map<number, RendererNodeEntry>;
   setProperty(hash: number, property: string, value: number): void;
   commitUpdates(): void;
-  getPackedInstructions(): { length: number };
+  getPackedInstructions(): unknown[];
 }
 
 interface RendererInternals {
   _delegate?: RendererDelegate;
-  _sendMessage(instructions: unknown): void;
+  _sendMessage(instructions: unknown): Promise<unknown>;
 }
 
 export function getPolyphonyForTrack(instrumentId: string, role?: string): number {
@@ -95,13 +95,14 @@ export class BandWorkletNode {
   private trackSpotlightMap = new Map<string, string>();
   private trackVolumes = new Map<string, number>();
   private trackPans = new Map<string, number>();
-  private trackSignalsCache = new Map<string, { fingerprint: string; signal: { left: AudioSignal; right: AudioSignal } }>();
   private dirtyTracks = new Set<string>();
 
   // Real-time parameter updates without dynamic graph reconstruction
   private paramHashes = new Map<string, number>();
   private pendingParamUpdates: Record<string, number> = {};
   private paramFlushScheduled = false;
+  private isSyncing = false;
+  private pendingSync = false;
 
   private getHashForKey(key: string): number {
     const existing = this.paramHashes.get(key);
@@ -125,6 +126,11 @@ export class BandWorkletNode {
           this.paramFlushScheduled = false;
           this.flushParamUpdates();
         });
+      } else {
+        setTimeout(() => {
+          this.paramFlushScheduled = false;
+          this.flushParamUpdates();
+        }, 0);
       }
     }
   }
@@ -160,11 +166,8 @@ export class BandWorkletNode {
       delegate.commitUpdates();
       const instructions = delegate.getPackedInstructions();
       if (instructions && instructions.length > 0) {
-        const native = (this.core as any)._native;
-        if (native && typeof native.postMessageBatch === 'function') {
-          native.postMessageBatch(instructions);
-        } else if (typeof renderer._sendMessage === 'function') {
-          renderer._sendMessage(instructions);
+        if (typeof renderer._sendMessage === 'function') {
+          void renderer._sendMessage(instructions);
         }
       }
     }
@@ -315,7 +318,6 @@ export class BandWorkletNode {
       if (!instrumentsMap.has(trackId)) {
         this.trackParamsMap.delete(trackId);
         this.trackVoicesMap.delete(trackId);
-        this.trackSignalsCache.delete(trackId);
         this.dirtyTracks.delete(trackId);
         graphDirty = true;
       }
@@ -383,104 +385,64 @@ export class BandWorkletNode {
     this.updateTrackMuteSoloLevels();
   }
 
-  /**
-   * Only hashes the track's instrument assignment and static macro parameters.
-   * Completely ignores voice states (gate, note, velocity, frequency).
-   */
-  private computeTrackFingerprint(trackId: string, params: TrackParams): string {
-    // Every field used to build the static Elementary graph must participate.
-    // World/style values affect treatment even when the resolved dialect happens
-    // to remain the same, so hashing only broad macros can reuse stale audio.
-    return JSON.stringify([
-      trackId,
-      params.instrumentId,
-      params.model,
-      params.genreId ?? '',
-      params.styleId ?? '',
-      params.styleFlavor,
-      params.dialect ?? '',
-      params.performanceMode ?? '',
-      params.brightness,
-      params.decay,
-      params.drive,
-      params.body,
-      params.tension,
-      params.excitationType,
-      params.courses,
-      params.bodyConstruction,
-      params.sympatheticStrings,
-      params.bendGlideMs,
-    ]);
-  }
-
   private async syncGraph(): Promise<void> {
     if (!this.core) return;
-
-    let anyDirty = false;
-    for (const [trackId, params] of this.trackParamsMap.entries()) {
-      const fp = this.computeTrackFingerprint(trackId, params);
-      const cached = this.trackSignalsCache.get(trackId);
-
-      if (!cached || cached.fingerprint !== fp) {
-        anyDirty = true;
-        const voices = this.trackVoicesMap.get(trackId) ?? [];
-        const sig = renderTrack(trackId, voices, params);
-        this.trackSignalsCache.set(trackId, { fingerprint: fp, signal: sig });
-      }
-    }
-
-    if (!anyDirty && this.trackSignalsCache.size > 0) {
-      this.dirtyTracks.clear();
+    if (this.isSyncing) {
+      this.pendingSync = true;
       return;
     }
-
-    const trackSignals: {
-      left: AudioSignal;
-      right: AudioSignal;
-      trackId?: string;
-      instrumentId?: string;
-      role?: string;
-    }[] = [];
-
-    for (const [trackId, params] of this.trackParamsMap.entries()) {
-      const cached = this.trackSignalsCache.get(trackId);
-      if (cached) {
-        trackSignals.push({
-          left: cached.signal.left,
-          right: cached.signal.right,
-          trackId,
-          instrumentId: params.instrumentId,
-          role: INSTRUMENTS_BY_ID[params.instrumentId ?? '']?.acousticProfile?.role,
-        });
-      }
-    }
-
-    let mixCharacter: import('../../engine/style/contracts').MixCharacter | undefined;
-    if (this.activeWorldId) {
-      try {
-        const style = this.activeStyleId
-          ? resolveStyle({ genreId: this.activeWorldId, styleId: this.activeStyleId })
-          : undefined;
-        mixCharacter = contractForGenre(this.activeWorldId, style)?.timbreSpace?.mixCharacter;
-      } catch {
-        /* ignore missing contract */
-      }
-    }
-
-    const masterSig = renderMaster(trackSignals, {
-      highPass: 20,
-      volume: this.masterVolume,
-      mixCharacter,
-      genreId: this.activeWorldId,
-      bpm: 120,
-    });
+    this.isSyncing = true;
     try {
-      await this.core.render(masterSig.left, masterSig.right);
+      do {
+        this.pendingSync = false;
+        const trackSignals: {
+          left: AudioSignal;
+          right: AudioSignal;
+          trackId?: string;
+          instrumentId?: string;
+          role?: string;
+        }[] = [];
+
+        for (const [trackId, params] of this.trackParamsMap.entries()) {
+          const voices = this.trackVoicesMap.get(trackId) ?? [];
+          const sig = renderTrack(trackId, voices, params);
+          trackSignals.push({
+            left: sig.left,
+            right: sig.right,
+            trackId,
+            instrumentId: params.instrumentId,
+            role: INSTRUMENTS_BY_ID[params.instrumentId ?? '']?.acousticProfile?.role,
+          });
+        }
+
+        let mixCharacter: import('../../engine/style/contracts').MixCharacter | undefined;
+        if (this.activeWorldId) {
+          try {
+            const style = this.activeStyleId
+              ? resolveStyle({ genreId: this.activeWorldId, styleId: this.activeStyleId })
+              : undefined;
+            mixCharacter = contractForGenre(this.activeWorldId, style)?.timbreSpace?.mixCharacter;
+          } catch {
+            /* ignore missing contract */
+          }
+        }
+
+        const masterSig = renderMaster(trackSignals, {
+          highPass: 20,
+          volume: this.masterVolume,
+          mixCharacter,
+          genreId: this.activeWorldId,
+          bpm: 120,
+        });
+
+        await this.core.render(masterSig.left, masterSig.right);
+      } while (this.pendingSync);
     } catch (err: unknown) {
       console.warn('[Elementary] Render error:', err);
+    } finally {
+      this.isSyncing = false;
+      this.dirtyTracks.clear();
     }
-
-    this.dirtyTracks.clear();
   }
 
   /**
@@ -841,7 +803,6 @@ export class BandWorkletNode {
     this.clear();
     this.trackVoicesMap.clear();
     this.trackParamsMap.clear();
-    this.trackSignalsCache.clear();
     this.dirtyTracks.clear();
     try { this.audioNode?.disconnect(); } catch { }
     this.masterChain?.dispose();

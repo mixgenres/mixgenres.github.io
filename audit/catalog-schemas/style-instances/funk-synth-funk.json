@@ -1,0 +1,512 @@
+{
+  "schemaVersion": 2,
+  "genre": "funk",
+  "styleId": "funk-synth-funk",
+  "styleName": "Synth Funk",
+  "durationSec": 74.4827586206897,
+  "tempoBpm": 116,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "G",
+        "Dm",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "groove-1",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "G",
+        "Dm",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "verse-2",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "G",
+        "Dm",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "G",
+        "Dm",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "groove-4",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "G",
+        "Dm",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "tag-5",
+      "kind": "tag",
+      "label": "Tag",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "G",
+        "Dm",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "style-funk-minneapolis-funk-signature"
+      ],
+      "noteCount": 36
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-funk-minneapolis-funk-signature"
+      ],
+      "noteCount": 145
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-funk-ghost-note-bass",
+        "funk-the-one-bass"
+      ],
+      "noteCount": 214
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-funk-16th-note-guitar-scratch",
+        "funk-16th-strum",
+        "funk-chicken-scratch-guitar"
+      ],
+      "noteCount": 1002
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "tech-funk-funk-horn-stab"
+      ],
+      "noteCount": 146
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-afrobeats-vocal-as-rhythm-phrasing",
+        "tech-funk-16th-note-guitar-scratch",
+        "tech-funk-ghost-note-bass"
+      ],
+      "noteCount": 36
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "clavinet",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "jazz-piano-comping",
+        "jazz-comping-sync",
+        "reggaeton--rg-synth-stab",
+        "funk-clavinet"
+      ],
+      "noteCount": 247
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--rd-skank",
+        "hip-hop-sampled-keys",
+        "jazz-latin-montuno-comp",
+        "afro-amapiano-pad",
+        "tango-piano-chumba"
+      ],
+      "noteCount": 300
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-funk-minneapolis-funk-signature",
+      "name": "Minneapolis Funk",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "syncopated bass octave",
+        "clavinet riff",
+        "muted guitar",
+        "16th-note guitar scratch",
+        "funk horn stab",
+        "ghost-note bass"
+      ]
+    },
+    {
+      "id": "tech-funk-ghost-note-bass",
+      "name": "ghost-note bass",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "ghost-note bass"
+      ]
+    },
+    {
+      "id": "funk-the-one-bass",
+      "name": "\"The One\" 16th-Note Syncopated Bass",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-funk-16th-note-guitar-scratch",
+      "name": "16th-note guitar scratch",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "16th-note guitar scratch"
+      ]
+    },
+    {
+      "id": "funk-16th-strum",
+      "name": "16th Note Strum",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-chicken-scratch-guitar",
+      "name": "Chicken-Scratch 9th Chords",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-funk-funk-horn-stab",
+      "name": "horn stab",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "funk horn stab"
+      ]
+    },
+    {
+      "id": "tech-afrobeats-vocal-as-rhythm-phrasing",
+      "name": "vocal-as-rhythm phrasing",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal-as-rhythm phrasing"
+      ]
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-comping",
+      "name": "Syncopated Piano Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-comping-sync",
+      "name": "Syncopated Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        1,
+        4,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-synth-stab",
+      "name": "Offbeat Synth Stab",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-clavinet",
+      "name": "Clavinet Sync",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        4,
+        7,
+        10,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-skank",
+      "name": "Offbeat Skank",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "hip-hop-sampled-keys",
+      "name": "Sampled Keys Loop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 24,
+      "onsetGrid": [
+        0,
+        6,
+        12,
+        18,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-latin-montuno-comp",
+      "name": "Latin Jazz Montuno Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        7,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-piano-chumba",
+      "name": "Piano Chumba",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        4,
+        5
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "synth",
+      "drums",
+      "bass",
+      "electric-guitar",
+      "brass"
+    ],
+    "techniques": [],
+    "signatureCell": "LinnDrum side-stick crack with punchy Oberheim synth brass stab and thumb-slap bass",
+    "tempoRange": [
+      108,
+      124
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "funk-synth-funk"
+  },
+  "performance": {
+    "noteCount": 2126,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-funk-minneapolis-funk-signature",
+      "tech-funk-ghost-note-bass",
+      "funk-the-one-bass",
+      "tech-funk-16th-note-guitar-scratch",
+      "funk-16th-strum",
+      "funk-chicken-scratch-guitar",
+      "tech-funk-funk-horn-stab",
+      "tech-afrobeats-vocal-as-rhythm-phrasing",
+      "afro-amapiano-pad",
+      "jazz-piano-comping",
+      "jazz-comping-sync",
+      "reggaeton--rg-synth-stab",
+      "funk-clavinet",
+      "reggae--rd-skank",
+      "hip-hop-sampled-keys",
+      "jazz-latin-montuno-comp",
+      "tango-piano-chumba"
+    ]
+  }
+}

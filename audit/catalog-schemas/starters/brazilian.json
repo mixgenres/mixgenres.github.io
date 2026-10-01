@@ -1,0 +1,316 @@
+{
+  "schemaVersion": 1,
+  "id": "brazilian-starter",
+  "genreId": "brazilian",
+  "genreName": "Brazilian",
+  "styleId": "brazilian-bossa-nova",
+  "styleName": "Bossa Nova",
+  "styleDescription": "Nylon-string guitar and intimate vocals.",
+  "bpm": 133,
+  "meter": "2/4",
+  "regions": [
+    {
+      "id": "r0",
+      "name": "Intro",
+      "type": "intro",
+      "genreId": "brazilian",
+      "styleId": "brazilian-bossa-nova",
+      "chords": [
+        "Fmaj7",
+        "G7",
+        "Gm7",
+        "C7b9"
+      ]
+    },
+    {
+      "id": "r1",
+      "name": "Theme",
+      "type": "theme",
+      "genreId": "brazilian",
+      "styleId": "brazilian-bossa-nova",
+      "chords": [
+        "Fmaj7",
+        "G7",
+        "Gm7",
+        "C7b9",
+        "Fmaj7",
+        "G7",
+        "Gm7",
+        "C7b9"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "Variation",
+      "type": "variation",
+      "genreId": "brazilian",
+      "styleId": "brazilian-bossa-nova",
+      "chords": [
+        "F#maj7",
+        "B7",
+        "F#m7",
+        "B7",
+        "Gm7",
+        "C7",
+        "Fmaj7",
+        "C7b9"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "Solo",
+      "type": "solo",
+      "genreId": "brazilian",
+      "styleId": "brazilian-bossa-nova",
+      "chords": [
+        "F#maj7",
+        "C7b9",
+        "Fmaj7",
+        "Fmaj7"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Coda",
+      "type": "coda",
+      "genreId": "brazilian",
+      "styleId": "brazilian-bossa-nova",
+      "chords": [
+        "F#maj7",
+        "C7b9",
+        "Fmaj7",
+        "Fmaj7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "v0",
+      "instrumentId": "acoustic-guitar",
+      "instrumentName": "Steel-String Acoustic Guitar",
+      "role": "harmony",
+      "patternIds": [
+        "brazilian--sb-bossa-guitar",
+        "brazilian--sb-cavaquinho"
+      ],
+      "noteCount": 882,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "mute",
+        "bend"
+      ],
+      "gestureCounts": {
+        "4607": 10,
+        "6655": 51,
+        "8118": 399,
+        "12200": 10,
+        "44655": 412
+      }
+    },
+    {
+      "id": "v1",
+      "instrumentId": "piano",
+      "instrumentName": "Acoustic Grand Piano",
+      "role": "harmony",
+      "patternIds": [
+        "brazilian--brz-bossa-violao",
+        "brazilian--sb-bossa-guitar"
+      ],
+      "noteCount": 890,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "marcato",
+        "arrastre",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 46,
+        "6655": 32,
+        "8118": 224,
+        "8526": 10,
+        "19949": 10,
+        "21063": 109,
+        "44655": 459
+      }
+    },
+    {
+      "id": "v2",
+      "instrumentId": "flute",
+      "instrumentName": "Concert Flute",
+      "role": "melody",
+      "patternIds": [
+        "brazilian--brz-bossa-violao"
+      ],
+      "noteCount": 124,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "vibrato",
+        "bend"
+      ],
+      "gestureCounts": {
+        "4607": 10,
+        "8118": 10,
+        "44655": 100,
+        "48234": 4
+      }
+    },
+    {
+      "id": "v3",
+      "instrumentId": "upright-bass",
+      "instrumentName": "Upright Double Bass",
+      "role": "bass",
+      "patternIds": [
+        "brazilian--sb-bossa-bass",
+        "brazilian--sb-10-bossa-guitar-clave",
+        "brazilian--sb-11-bossa-bass-anticipation"
+      ],
+      "noteCount": 213,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "arrastre",
+        "pizzicato",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 29,
+        "6655": 6,
+        "8118": 10,
+        "12200": 10,
+        "38280": 7,
+        "44655": 151
+      }
+    },
+    {
+      "id": "v4",
+      "instrumentId": "drums",
+      "instrumentName": "Standard Drum Kit",
+      "role": "percussion",
+      "patternIds": [
+        "brazilian--sb-surdo-foundation"
+      ],
+      "noteCount": 113,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "choke",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4337": 10,
+        "4607": 8,
+        "12200": 95
+      }
+    },
+    {
+      "id": "v5",
+      "instrumentId": "voice",
+      "instrumentName": "Synth voice",
+      "role": "voice",
+      "patternIds": [
+        "brazilian--brz-bossa-violao"
+      ],
+      "noteCount": 64,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 6,
+        "44655": 58
+      }
+    },
+    {
+      "id": "v6",
+      "instrumentId": "shaker",
+      "instrumentName": "Shaker",
+      "role": "percussion",
+      "patternIds": [
+        "brazilian--sb-pandeiro"
+      ],
+      "noteCount": 198,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 23,
+        "12200": 166,
+        "44655": 9
+      }
+    },
+    {
+      "id": "v7",
+      "instrumentId": "tenor-sax",
+      "instrumentName": "Bb Tenor Saxophone",
+      "role": "melody",
+      "patternIds": [
+        "brazilian--brz-bossa-violao"
+      ],
+      "noteCount": 124,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 10,
+        "8118": 10,
+        "44655": 104
+      }
+    }
+  ],
+  "usedPatternIds": [
+    "brazilian--sb-bossa-guitar",
+    "brazilian--sb-cavaquinho",
+    "brazilian--brz-bossa-violao",
+    "brazilian--sb-bossa-bass",
+    "brazilian--sb-10-bossa-guitar-clave",
+    "brazilian--sb-11-bossa-bass-anticipation",
+    "brazilian--sb-surdo-foundation",
+    "brazilian--sb-pandeiro"
+  ],
+  "performance": {
+    "durationSeconds": 36.0902255639098,
+    "noteCount": 2608,
+    "trackCount": 8,
+    "tracksWithNoNotes": []
+  }
+}

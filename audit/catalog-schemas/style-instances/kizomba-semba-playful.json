@@ -1,0 +1,414 @@
+{
+  "schemaVersion": 2,
+  "genre": "kizomba",
+  "styleId": "kizomba-semba-playful",
+  "styleName": "Semba Playful",
+  "durationSec": 130.90909090909102,
+  "tempoBpm": 110,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "groove-1",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "verse-2",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "refrain-3",
+      "kind": "refrain",
+      "label": "Refrain",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "refrain-5",
+      "kind": "refrain",
+      "label": "Refrain",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7"
+      ]
+    },
+    {
+      "id": "r6",
+      "key": "break-6",
+      "kind": "break",
+      "label": "Break",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7"
+      ]
+    },
+    {
+      "id": "r7",
+      "key": "outro-7",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "kizomba-bridge-16",
+        "kizomba-chorus-15"
+      ],
+      "noteCount": 1370
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "kizomba-semba-guitar",
+        "kizomba-chorus-15"
+      ],
+      "noteCount": 180
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-batida-groove",
+        "kizomba-hats",
+        "kizomba-kick-batida",
+        "kizomba-fill-17"
+      ],
+      "noteCount": 302
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-dikanza-scraper",
+        "kizomba-batida-groove",
+        "kizomba-fill-17"
+      ],
+      "noteCount": 327
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "kizomba-vocal-comping"
+      ],
+      "noteCount": 60
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-kizomba-vocal-space-arrangement"
+      ],
+      "noteCount": 60
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "dikanza",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-chorus-15",
+        "kizomba-batida-groove",
+        "kizomba-dikanza-scraper",
+        "kizomba-fill-17"
+      ],
+      "noteCount": 306
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "kizomba-vocal-comping"
+      ],
+      "noteCount": 115
+    }
+  ],
+  "patterns": [
+    {
+      "id": "kizomba-bridge-16",
+      "name": "Semba Bridge",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        10,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-chorus-15",
+      "name": "Bass Chorus Lift",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        9,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-semba-guitar",
+      "name": "Semba Guitar Arpeggio",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-batida-groove",
+      "name": "Batida & Sub-Kick Beat",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-hats",
+      "name": "Hi-Hats",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-kick-batida",
+      "name": "Kick Batida",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-fill-17",
+      "name": "Call Fill",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-dikanza-scraper",
+      "name": "Dikanza Scraper",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        7,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-vocal-comping",
+      "name": "Vocal Phrase Response",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        7,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-kizomba-vocal-space-arrangement",
+      "name": "vocal-space arrangement",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal-space arrangement"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "congas",
+      "synth"
+    ],
+    "techniques": [],
+    "signatureCell": "Bouncy dual-guitar syncopation with continuous dikanza scrape and playful vocal laugh",
+    "tempoRange": [
+      102,
+      118
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "pushed",
+    "swingPercentage": 54,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "kizomba-semba-playful"
+  },
+  "performance": {
+    "noteCount": 2720,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "kizomba-bridge-16",
+      "kizomba-chorus-15",
+      "kizomba-semba-guitar",
+      "kizomba-batida-groove",
+      "kizomba-hats",
+      "kizomba-kick-batida",
+      "kizomba-fill-17",
+      "kizomba-dikanza-scraper",
+      "kizomba-vocal-comping",
+      "tech-kizomba-vocal-space-arrangement"
+    ]
+  }
+}

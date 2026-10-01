@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 2,
+  "genre": "tango",
+  "styleId": "tango-milonga",
+  "styleName": "Milonga",
+  "durationSec": 35.29411764705883,
+  "tempoBpm": 136,
+  "meter": "2/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A",
+        "E7",
+        "A",
+        "E7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "milonga-a-1",
+      "kind": "milonga-a",
+      "label": "Milonga A",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A",
+        "E7",
+        "A",
+        "E7",
+        "A",
+        "D",
+        "E7",
+        "A"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "milonga-b-2",
+      "kind": "milonga-b",
+      "label": "Milonga B",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A",
+        "E7",
+        "A",
+        "E7",
+        "A",
+        "D",
+        "E7",
+        "A"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "milonga-a-3",
+      "kind": "milonga-a",
+      "label": "Milonga A",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A",
+        "E7",
+        "A",
+        "E7",
+        "A",
+        "D",
+        "E7",
+        "A"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "variaci-n-4",
+      "kind": "variación",
+      "label": "Variación",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "A",
+        "E7",
+        "A",
+        "E7",
+        "A",
+        "D",
+        "E7",
+        "A"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "E7",
+        "E7",
+        "A",
+        "A"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "bandoneon",
+      "role": "harmony",
+      "patternIds": [
+        "tango-332-piazzolla"
+      ],
+      "noteCount": 186
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "violin",
+      "role": "melody",
+      "patternIds": [
+        "tango-marcato-2",
+        "tango-marcato-4"
+      ],
+      "noteCount": 85
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tango-bordoneo",
+        "tango-marcato-2",
+        "tango-marcato-4"
+      ],
+      "noteCount": 383
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "tango-yumba",
+        "tango-bordoneo",
+        "tango-marcato-4"
+      ],
+      "noteCount": 212
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "spanish-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tango-marcato-4",
+        "tango-bordoneo",
+        "tango-332-piazzolla",
+        "tango-marcato-2"
+      ],
+      "noteCount": 434
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "cello",
+      "role": "lead",
+      "patternIds": [
+        "tango-percussion-candombe",
+        "tango-yumba"
+      ],
+      "noteCount": 80
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "flute",
+      "role": "melody",
+      "patternIds": [
+        "tango-yumba",
+        "tango-percussion-candombe"
+      ],
+      "noteCount": 117
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "clarinet",
+      "role": "lead",
+      "patternIds": [
+        "tech-tango-chromatic-tango-bass",
+        "tango-yumba"
+      ],
+      "noteCount": 131
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tango-332-piazzolla",
+      "name": "3+3+2 Nuevo Tango Pulse",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-marcato-2",
+      "name": "Marcato en 2",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-marcato-4",
+      "name": "Marcato en 4",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-bordoneo",
+      "name": "Bordoneo Criollo",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-yumba",
+      "name": "Yumba/Heavy Tango Accent",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-percussion-candombe",
+      "name": "Percussive Accent",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        5,
+        8,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-tango-chromatic-tango-bass",
+      "name": "chromatic tango bass",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "chromatic tango bass"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "bandoneon",
+      "violin",
+      "piano",
+      "upright-bass",
+      "spanish-guitar"
+    ],
+    "techniques": [],
+    "signatureCell": "milonga 3+3+2 / habanera bounce with traspié accents",
+    "tempoRange": [
+      124,
+      148
+    ],
+    "preferredMeters": [
+      "2/4"
+    ],
+    "microtimingFeel": "pushed",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "tango-milonga"
+  },
+  "performance": {
+    "noteCount": 1628,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tango-332-piazzolla",
+      "tango-marcato-2",
+      "tango-marcato-4",
+      "tango-bordoneo",
+      "tango-yumba",
+      "tango-percussion-candombe",
+      "tech-tango-chromatic-tango-bass"
+    ]
+  }
+}

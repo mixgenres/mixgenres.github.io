@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "id": "electronic",
+  "name": "Electronic",
+  "family": "Electronic / Dance",
+  "description": "Synthesizer and drum machine driven music",
+  "substyles": [
+    "Downtempo",
+    "Trip-Hop",
+    "IDM",
+    "Dubstep",
+    "Garage",
+    "Synthwave",
+    "Ambient",
+    "Techno"
+  ],
+  "styleIds": [
+    "electronic-downtempo",
+    "electronic-trip-hop",
+    "electronic-idm",
+    "electronic-dubstep",
+    "electronic-garage",
+    "electronic-synthwave",
+    "electronic-ambient",
+    "electronic-techno",
+    "electronic-electro",
+    "electronic-detroit-techno",
+    "electronic-chicago-acid-house",
+    "electronic-ambient-techno",
+    "electronic-breakbeat-hardcore"
+  ],
+  "patternIds": [
+    "elec-4onfloor",
+    "elec-offbeat-hats",
+    "elec-techno-rumble",
+    "elec-trance-16ths",
+    "elec-dubstep-half",
+    "elec-dnb-amen",
+    "elec-footwork",
+    "elec-ukg",
+    "elec-electro",
+    "elec-ambient",
+    "elec-synthwave",
+    "elec-acid-303",
+    "electronic-phrase-13",
+    "electronic-call-14",
+    "electronic-anchor-15",
+    "electronic-comp-16",
+    "electronic-intro-17",
+    "tech-electronic-303-acid-sequence",
+    "tech-electronic-filter-envelope-bass",
+    "tech-electronic-808-909-programming",
+    "tech-electronic-electro-syncopated-kick",
+    "tech-electronic-breakbeat-chopping",
+    "tech-electronic-four-on-floor-groove",
+    "tech-electronic-techno-percussion-loop",
+    "style-electronic-electro-signature",
+    "style-electronic-detroit-techno-signature",
+    "style-electronic-chicago-acid-house-signature",
+    "style-electronic-ambient-techno-signature",
+    "style-electronic-breakbeat-hardcore-signature",
+    "tech-electronic-gated-synth-sequence",
+    "tech-electronic-rave-stab",
+    "tech-electronic-evolving-ambient-pad",
+    "elec-sidechain-space",
+    "elec-breakbeat-response"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "electronic-downtempo",
+      "name": "Downtempo",
+      "keySubstyles": [
+        "Chillout",
+        "Lush Organic Downtempo"
+      ],
+      "characteristicInstruments": [
+        "synth",
+        "drums",
+        "bass",
+        "sampler",
+        "acoustic-guitar"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "electronic-trip-hop",
+      "name": "Trip-Hop",
+      "keySubstyles": [
+        "Bristol Sound",
+        "Cinematic Trip Hop"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "bass",
+        "sampler",
+        "synth",
+        "strings"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "electronic-idm",
+      "name": "IDM",
+      "keySubstyles": [
+        "Intelligent Dance Music",
+        "Braindance",
+        "Glitch"
+      ],
+      "characteristicInstruments": [
+        "sampler",
+        "synth",
+        "drums",
+        "sub-bass",
+        "polysynth"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "electronic-dubstep",
+      "name": "Dubstep",
+      "keySubstyles": [
+        "Deep Dubstep",
+        "UK Garage Roots Dubstep"
+      ],
+      "characteristicInstruments": [
+        "sub-bass",
+        "drums",
+        "synth",
+        "sampler",
+        "dub-echo"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "electronic-garage",
+      "name": "Garage",
+      "keySubstyles": [
+        "UK 2-Step",
+        "Speed Garage",
+        "Future Garage"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "bass",
+        "synth",
+        "sampler",
+        "piano"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "electronic-synthwave",
+      "name": "Synthwave",
+      "keySubstyles": [
+        "Outrun",
+        "Darksynth",
+        "Dreamwave"
+      ],
+      "characteristicInstruments": [
+        "synth",
+        "drums",
+        "bass",
+        "electric-guitar",
+        "warm-pad"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "electronic-ambient",
+      "name": "Ambient",
+      "keySubstyles": [
+        "Classic Ambient",
+        "Drone Music",
+        "Environmental Soundscapes"
+      ],
+      "characteristicInstruments": [
+        "synth",
+        "sampler",
+        "drone",
+        "strings",
+        "piano"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "electronic-techno",
+      "name": "Techno",
+      "keySubstyles": [
+        "Detroit Techno",
+        "Berlin Warehouse Techno",
+        "Hypnotic Techno"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "synth",
+        "sub-bass",
+        "sampler",
+        "noise-sweep"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "electronic-electro",
+      "name": "Electro",
+      "keySubstyles": [
+        "Electro"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "synth",
+        "bass-lead",
+        "snare",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "electronic-detroit-techno",
+      "name": "Detroit Techno",
+      "keySubstyles": [
+        "Detroit Techno"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "synth",
+        "polysynth",
+        "bass-lead",
+        "strings"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "electronic-chicago-acid-house",
+      "name": "Chicago Acid House",
+      "keySubstyles": [
+        "Chicago Acid House"
+      ],
+      "characteristicInstruments": [
+        "acid-303",
+        "drums",
+        "bass-lead",
+        "synth"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "electronic-ambient-techno",
+      "name": "Ambient Techno",
+      "keySubstyles": [
+        "Ambient Techno"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "warm-pad",
+        "halo-pad",
+        "bass-lead",
+        "sampler"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "electronic-breakbeat-hardcore",
+      "name": "Breakbeat Hardcore",
+      "keySubstyles": [
+        "Breakbeat Hardcore"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "synth",
+        "sampler",
+        "bass-lead",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "electronic-starter"
+}

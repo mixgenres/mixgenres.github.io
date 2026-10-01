@@ -9,7 +9,7 @@ export const spanish_guitar: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "nail",
   elementaryModel: 0,
-  makeupGain: 30.000,
+  makeupGain: 6.000,
   polyphony: 8,
   note: "Authentic handcrafted Spanish flamenco guitar (blanca cypress/spruce) with dual golpeador tap plates, low-action fret clack (ceceo), explosive 5-finger rasgueados, alzapúa thumb sweeps, picado rest strokes, and 5-note tremolo (p-i-a-m-i)",
   acousticProfile: {

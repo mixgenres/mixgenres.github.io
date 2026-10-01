@@ -1,0 +1,354 @@
+{
+  "schemaVersion": 2,
+  "genre": "industrial",
+  "styleId": "industrial-techno",
+  "styleName": "Industrial Techno",
+  "durationSec": 124.31654676259011,
+  "tempoBpm": 139,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "Dm",
+        "Dm",
+        "Dm"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "groove-1",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "Dm",
+        "A#",
+        "C"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "breakdown-2",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "Dm",
+        "Dm",
+        "Dm"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "drop-3",
+      "kind": "drop",
+      "label": "Drop",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "Dm",
+        "Dm",
+        "Dm",
+        "Dm"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "groove-4",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Dm",
+        "Dm",
+        "A#",
+        "C"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "Dm",
+        "Dm",
+        "Dm"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-industrial-industrial-noise-layer"
+      ],
+      "noteCount": 102
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-industrial-metallic-percussion"
+      ],
+      "noteCount": 326
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "industrial--industrial-bass-lock",
+        "industrial--industrial-ebm-pulse-native",
+        "industrial--industrial-four-native",
+        "industrial--industrial-metal-hit"
+      ],
+      "noteCount": 102
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "bass-lead",
+      "role": "bass",
+      "patternIds": [
+        "industrial--industrial-ebm-pulse-native",
+        "industrial--industrial-bass-lock"
+      ],
+      "noteCount": 281
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "noise-sweep",
+      "role": "effect",
+      "patternIds": [
+        "tech-industrial-industrial-noise-layer",
+        "industrial--industrial-ebm-pulse-native",
+        "industrial--industrial-metal-percussion"
+      ],
+      "noteCount": 101
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "industrial--industrial-four-native",
+        "industrial--industrial-metal-hit",
+        "industrial--industrial-four-kick",
+        "industrial--industrial-ebm-pulse-native"
+      ],
+      "noteCount": 103
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "distortion-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "industrial--industrial-metal-percussion",
+        "industrial--industrial-four-kick",
+        "industrial--industrial-metal-hit"
+      ],
+      "noteCount": 426
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-industrial-industrial-noise-layer",
+        "industrial--industrial-four-native",
+        "industrial--industrial-four-kick",
+        "industrial--industrial-metal-percussion"
+      ],
+      "noteCount": 257
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-industrial-industrial-noise-layer",
+      "name": "noise layer",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "industrial noise layer"
+      ]
+    },
+    {
+      "id": "tech-industrial-metallic-percussion",
+      "name": "metallic percussion",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "metallic percussion"
+      ]
+    },
+    {
+      "id": "industrial--industrial-bass-lock",
+      "name": "Bass Lock",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "industrial--industrial-ebm-pulse-native",
+      "name": "EBM 16th Pulse",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "industrial--industrial-four-native",
+      "name": "Four Pulse",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "industrial--industrial-metal-hit",
+      "name": "Metal Hit",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        7,
+        8,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "industrial--industrial-metal-percussion",
+      "name": "Metal Percussion",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        7,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "industrial--industrial-four-kick",
+      "name": "Four Kick",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        15
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "synth",
+      "drums",
+      "sampler",
+      "bass-lead",
+      "noise-sweep"
+    ],
+    "techniques": [],
+    "signatureCell": "Overdriven four-on-the-floor kick with offbeat rumble bass and metal hits",
+    "tempoRange": [
+      128,
+      150
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "industrial-techno"
+  },
+  "performance": {
+    "noteCount": 1698,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-industrial-industrial-noise-layer",
+      "tech-industrial-metallic-percussion",
+      "industrial--industrial-bass-lock",
+      "industrial--industrial-ebm-pulse-native",
+      "industrial--industrial-four-native",
+      "industrial--industrial-metal-hit",
+      "industrial--industrial-metal-percussion",
+      "industrial--industrial-four-kick"
+    ]
+  }
+}

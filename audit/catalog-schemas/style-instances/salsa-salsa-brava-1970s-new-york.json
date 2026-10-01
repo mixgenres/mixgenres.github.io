@@ -1,0 +1,561 @@
+{
+  "schemaVersion": 2,
+  "genre": "salsa",
+  "styleId": "salsa-salsa-brava-1970s-new-york",
+  "styleName": "Salsa Brava / 1970s New York",
+  "durationSec": 115.2000000000001,
+  "tempoBpm": 100,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verso",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Coro",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Mambo / Gear",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Montuno",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Cierre",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "trombone",
+      "role": "lead",
+      "patternIds": [
+        "tech-salsa-mambo-horn-section",
+        "style-salsa-salsa-brava-1970s-new-york-signature"
+      ],
+      "noteCount": 191
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "style-salsa-salsa-brava-1970s-new-york-signature",
+        "afro-piano-montuno",
+        "tech-salsa-montuno"
+      ],
+      "noteCount": 801
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "style-salsa-salsa-brava-1970s-new-york-signature",
+        "tech-salsa-tumbao"
+      ],
+      "noteCount": 235
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "patternIds": [
+        "style-salsa-salsa-brava-1970s-new-york-signature",
+        "salsa-clave-32",
+        "salsa-campana"
+      ],
+      "noteCount": 223
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "timbales",
+      "role": "percussion",
+      "patternIds": [
+        "afro-clave-son-23",
+        "afro-conga-tumbao",
+        "salsa-clave-32",
+        "tech-salsa-campana",
+        "salsa-campana",
+        "salsa-guiro"
+      ],
+      "noteCount": 310
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-salsa-coro-pregon"
+      ],
+      "noteCount": 76
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "bongos",
+      "role": "percussion",
+      "patternIds": [
+        "afro-conga-tumbao",
+        "salsa-timbal-bell",
+        "salsa-maracas",
+        "tech-salsa-mambo-break",
+        "afro-timbal-cascara",
+        "salsa-clave-32"
+      ],
+      "noteCount": 329
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "claves",
+      "role": "percussion",
+      "patternIds": [
+        "afro-timbal-cascara",
+        "salsa-maracas",
+        "salsa-guiro",
+        "style-salsa-son-cubano-foundation-signature",
+        "afro-conga-tumbao"
+      ],
+      "noteCount": 370
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-salsa-mambo-horn-section",
+      "name": "mambo horn section",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "mambo horn section"
+      ]
+    },
+    {
+      "id": "style-salsa-salsa-brava-1970s-new-york-signature",
+      "name": "Brava/1970s New York",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "campana",
+        "montuno",
+        "coro/pregón",
+        "mambo horn section",
+        "mambo break"
+      ]
+    },
+    {
+      "id": "afro-piano-montuno",
+      "name": "Piano Montuno/Guajeo",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14,
+        16,
+        19,
+        22,
+        24,
+        27,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-salsa-montuno",
+      "name": "montuno",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "montuno"
+      ]
+    },
+    {
+      "id": "tech-salsa-tumbao",
+      "name": "tumbao",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "tumbao"
+      ]
+    },
+    {
+      "id": "salsa-clave-32",
+      "name": "3-2 Son Clave",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        10,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "salsa-campana",
+      "name": "Campana",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-clave-son-23",
+      "name": "Son Clave 2–3 Structural Timeline",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        4,
+        8,
+        16,
+        22,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-conga-tumbao",
+      "name": "Conga Marcha",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-salsa-campana",
+      "name": "campana",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "campana"
+      ]
+    },
+    {
+      "id": "salsa-guiro",
+      "name": "Guiro",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-salsa-coro-pregon",
+      "name": "coro/pregón",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "coro/pregón"
+      ]
+    },
+    {
+      "id": "salsa-timbal-bell",
+      "name": "Timbal Mambo Bell",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        11,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "salsa-maracas",
+      "name": "Maracas",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-salsa-mambo-break",
+      "name": "mambo break",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "mambo break"
+      ]
+    },
+    {
+      "id": "afro-timbal-cascara",
+      "name": "Timbal Cáscara",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        26,
+        28,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-salsa-son-cubano-foundation-signature",
+      "name": "Son Cubano Foundation",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "bongó martillo",
+        "2-3 clave",
+        "3-2 clave"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "trombone",
+      "piano",
+      "bass",
+      "congas",
+      "timbales",
+      "voice"
+    ],
+    "techniques": [
+      "campana",
+      "montuno",
+      "coro/pregón",
+      "mambo horn section",
+      "mambo break"
+    ],
+    "signatureCell": "Hard montuno with trombone response",
+    "tempoRange": [
+      90,
+      110
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Willie Colón",
+      "Héctor Lavoe"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "salsa-salsa-brava-1970s-new-york"
+  },
+  "performance": {
+    "noteCount": 2535,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-salsa-mambo-horn-section",
+      "style-salsa-salsa-brava-1970s-new-york-signature",
+      "afro-piano-montuno",
+      "tech-salsa-montuno",
+      "tech-salsa-tumbao",
+      "salsa-clave-32",
+      "salsa-campana",
+      "afro-clave-son-23",
+      "afro-conga-tumbao",
+      "tech-salsa-campana",
+      "salsa-guiro",
+      "tech-salsa-coro-pregon",
+      "salsa-timbal-bell",
+      "salsa-maracas",
+      "tech-salsa-mambo-break",
+      "afro-timbal-cascara",
+      "style-salsa-son-cubano-foundation-signature"
+    ]
+  }
+}

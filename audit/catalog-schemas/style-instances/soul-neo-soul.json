@@ -1,0 +1,366 @@
+{
+  "schemaVersion": 2,
+  "genre": "soul",
+  "styleId": "soul-neo-soul",
+  "styleName": "Neo-Soul",
+  "durationSec": 142.2222222222222,
+  "tempoBpm": 81,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Cmaj9",
+        "Am9",
+        "Dm9",
+        "G13"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Cmaj9",
+        "Am9",
+        "Dm9",
+        "G13"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Fmaj9",
+        "Em9",
+        "Dm9",
+        "G13"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Cmaj9",
+        "Am9",
+        "Dm9",
+        "G13"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "instrumental-4",
+      "kind": "instrumental",
+      "label": "Instrumental",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Cmaj9",
+        "Am9",
+        "Dm9",
+        "G13"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Cmaj9",
+        "Am9",
+        "Dm9",
+        "G13"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-soul-gospel-vocal-run"
+      ],
+      "noteCount": 69
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-soul-melodic-bass"
+      ],
+      "noteCount": 208
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "funk-neo-soul-beat",
+        "tech-soul-soul-backbeat"
+      ],
+      "noteCount": 202
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "rhodes",
+      "role": "harmony",
+      "patternIds": [
+        "tech-soul-vocal-harmony-stack"
+      ],
+      "noteCount": 712
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "soul-motown-bass",
+        "funk-16th-strum",
+        "soul-horn-response"
+      ],
+      "noteCount": 1152
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "soul-horn-response",
+        "soul-motown-bass",
+        "soul-backbeat-tambourine"
+      ],
+      "noteCount": 476
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "horn-section",
+      "role": "harmony",
+      "patternIds": [
+        "soul-backbeat-tambourine",
+        "soul-horn-response",
+        "soul-motown-bass"
+      ],
+      "noteCount": 308
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-soul-vocal-harmony-stack",
+        "soul-backbeat-tambourine"
+      ],
+      "noteCount": 796
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-soul-gospel-vocal-run",
+      "name": "gospel vocal run",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "gospel vocal run"
+      ]
+    },
+    {
+      "id": "tech-soul-melodic-bass",
+      "name": "melodic bass",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "melodic bass"
+      ]
+    },
+    {
+      "id": "funk-neo-soul-beat",
+      "name": "Neo-Soul Drag",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        5,
+        8,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-soul-soul-backbeat",
+      "name": "backbeat",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "soul backbeat"
+      ]
+    },
+    {
+      "id": "tech-soul-vocal-harmony-stack",
+      "name": "vocal harmony stack",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal harmony stack"
+      ]
+    },
+    {
+      "id": "soul-motown-bass",
+      "name": "Motown Bass",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        11,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "funk-16th-strum",
+      "name": "16th Note Strum",
+      "worldId": "funk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "soul-horn-response",
+      "name": "Horn Response",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        6,
+        7,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "soul-backbeat-tambourine",
+      "name": "Backbeat Tambourine",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        12,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "voice",
+      "bass",
+      "drums",
+      "rhodes",
+      "electric-guitar"
+    ],
+    "techniques": [],
+    "signatureCell": "Behind-the-beat vocal and bass phrase answered by a soft extended keyboard chord",
+    "tempoRange": [
+      62,
+      100
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 55,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "soul-neo-soul"
+  },
+  "performance": {
+    "noteCount": 3923,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-soul-gospel-vocal-run",
+      "tech-soul-melodic-bass",
+      "funk-neo-soul-beat",
+      "tech-soul-soul-backbeat",
+      "tech-soul-vocal-harmony-stack",
+      "soul-motown-bass",
+      "funk-16th-strum",
+      "soul-horn-response",
+      "soul-backbeat-tambourine"
+    ]
+  }
+}

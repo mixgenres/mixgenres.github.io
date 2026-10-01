@@ -91,7 +91,7 @@ export async function ensureSynth(): Promise<BandWorkletNode> {
         if (!AudioCtx) throw new Error('Web Audio is not supported in this browser');
         ctx = new AudioCtx();
       }
-      if (ctx.state === 'suspended') {
+      if (ctx.state !== 'running') {
         await ctx.resume().catch(() => {});
       }
 
@@ -117,11 +117,11 @@ export async function startAudio(): Promise<AudioContext | null> {
       if (!AudioCtx) throw new Error('Web Audio is not supported in this browser');
       ctx = new AudioCtx();
     }
-    if (ctx.state === 'suspended') {
+    if (ctx.state !== 'running') {
       await ctx.resume().catch(() => {});
     }
     await ensureSynth();
-    if (ctx.state === 'suspended') {
+    if (ctx.state !== 'running') {
       await ctx.resume().catch(() => {});
     }
     return ctx;

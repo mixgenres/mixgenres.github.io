@@ -1,0 +1,362 @@
+{
+  "schemaVersion": 1,
+  "id": "tango-starter",
+  "genreId": "tango",
+  "genreName": "Tango",
+  "styleId": "tango-tango-tradicional",
+  "styleName": "Tango Tradicional",
+  "styleDescription": "Marcato • Bandoneón • Golden Age",
+  "bpm": 128,
+  "meter": "4/4",
+  "regions": [
+    {
+      "id": "r0",
+      "name": "Intro",
+      "type": "intro",
+      "genreId": "tango",
+      "styleId": "tango-tango-tradicional",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "E7"
+      ]
+    },
+    {
+      "id": "r1",
+      "name": "A",
+      "type": "A",
+      "genreId": "tango",
+      "styleId": "tango-tango-tradicional",
+      "chords": [
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Am",
+        "Dm",
+        "E7",
+        "Am"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "B",
+      "type": "B",
+      "genreId": "tango",
+      "styleId": "tango-tango-tradicional",
+      "chords": [
+        "E7",
+        "E7",
+        "Am",
+        "Am"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "A",
+      "type": "A",
+      "genreId": "tango",
+      "styleId": "tango-tango-tradicional",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "E7"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Variación",
+      "type": "variación",
+      "genreId": "tango",
+      "styleId": "tango-tango-tradicional",
+      "chords": [
+        "Am",
+        "Dm",
+        "E7",
+        "Am",
+        "Am",
+        "Dm",
+        "E7",
+        "Am"
+      ]
+    },
+    {
+      "id": "r5",
+      "name": "Coda",
+      "type": "coda",
+      "genreId": "tango",
+      "styleId": "tango-tango-tradicional",
+      "chords": [
+        "E7",
+        "E7",
+        "Am",
+        "Am"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "v0",
+      "instrumentId": "bandoneon",
+      "instrumentName": "Bandoneon",
+      "role": "harmony",
+      "patternIds": [
+        "tango-arrastre",
+        "tango-piano-chumba",
+        "tango-sincopa"
+      ],
+      "noteCount": 214,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "marcato",
+        "arrastre",
+        "bend",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 21,
+        "6655": 8,
+        "8118": 56,
+        "8526": 9,
+        "19949": 70,
+        "36720": 8,
+        "44655": 42
+      }
+    },
+    {
+      "id": "v1",
+      "instrumentId": "violin",
+      "instrumentName": "Acoustic Violin",
+      "role": "melody",
+      "patternIds": [
+        "tango-violin-melody",
+        "tango-marcato-4",
+        "tango-marcato-2"
+      ],
+      "noteCount": 60,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "vibrato",
+        "pizzicato",
+        "bend"
+      ],
+      "gestureCounts": {
+        "2428": 1,
+        "4349": 25,
+        "6655": 1,
+        "32916": 10,
+        "38280": 14,
+        "44655": 9
+      }
+    },
+    {
+      "id": "v2",
+      "instrumentId": "piano",
+      "instrumentName": "Acoustic Grand Piano",
+      "role": "harmony",
+      "patternIds": [
+        "tango-marcato-4",
+        "tango-sincopa",
+        "tango-piano-chumba"
+      ],
+      "noteCount": 424,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "marcato",
+        "arrastre",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 10,
+        "8526": 75,
+        "15539": 10,
+        "15957": 10,
+        "19949": 184,
+        "41706": 10,
+        "44655": 125
+      }
+    },
+    {
+      "id": "v3",
+      "instrumentId": "upright-bass",
+      "instrumentName": "Upright Double Bass",
+      "role": "bass",
+      "patternIds": [
+        "tango-marcato-2",
+        "tango-arrastre",
+        "tango-marcato-4"
+      ],
+      "noteCount": 146,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "arrastre",
+        "pizzicato",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "2428": 9,
+        "4607": 10,
+        "6655": 5,
+        "19949": 39,
+        "28631": 8,
+        "32916": 10,
+        "38280": 10,
+        "44655": 40,
+        "46661": 15
+      }
+    },
+    {
+      "id": "v4",
+      "instrumentId": "cello",
+      "instrumentName": "Cello",
+      "role": "lead",
+      "patternIds": [
+        "tango-yumba",
+        "tango-marcato-4",
+        "tango-arrastre",
+        "tango-violin-melody"
+      ],
+      "noteCount": 59,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "vibrato",
+        "pizzicato",
+        "bend",
+        "arrastre"
+      ],
+      "gestureCounts": {
+        "4349": 14,
+        "4607": 16,
+        "32916": 17,
+        "44655": 12
+      }
+    },
+    {
+      "id": "v5",
+      "instrumentId": "flute",
+      "instrumentName": "Concert Flute",
+      "role": "melody",
+      "patternIds": [
+        "tango-fraseo-bandoneon"
+      ],
+      "noteCount": 108,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "vibrato",
+        "bend"
+      ],
+      "gestureCounts": {
+        "4607": 11,
+        "6655": 19,
+        "8118": 52,
+        "44655": 21,
+        "48234": 5
+      }
+    },
+    {
+      "id": "v6",
+      "instrumentId": "clarinet",
+      "instrumentName": "Clarinet",
+      "role": "lead",
+      "patternIds": [
+        "tango-yumba"
+      ],
+      "noteCount": 81,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 62,
+        "6655": 10,
+        "8118": 9
+      }
+    },
+    {
+      "id": "v7",
+      "instrumentId": "acoustic-guitar",
+      "instrumentName": "Steel-String Acoustic Guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tango-sincopa",
+        "tango-marcato-2",
+        "tango-marcato-4"
+      ],
+      "noteCount": 330,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "mute",
+        "bend"
+      ],
+      "gestureCounts": {
+        "4607": 37,
+        "6655": 10,
+        "8118": 10,
+        "9742": 10,
+        "12200": 13,
+        "44655": 232,
+        "49857": 18
+      }
+    }
+  ],
+  "usedPatternIds": [
+    "tango-arrastre",
+    "tango-piano-chumba",
+    "tango-sincopa",
+    "tango-violin-melody",
+    "tango-marcato-4",
+    "tango-marcato-2",
+    "tango-yumba",
+    "tango-fraseo-bandoneon"
+  ],
+  "performance": {
+    "durationSeconds": 75,
+    "noteCount": 1422,
+    "trackCount": 8,
+    "tracksWithNoNotes": []
+  }
+}

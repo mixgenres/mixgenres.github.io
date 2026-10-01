@@ -1,0 +1,318 @@
+{
+  "schemaVersion": 1,
+  "id": "reggae-starter",
+  "genreId": "reggae",
+  "genreName": "Reggae",
+  "styleId": "reggae-roots-reggae",
+  "styleName": "Roots Reggae",
+  "styleDescription": "One Drop • Skank • Conscious",
+  "bpm": 76,
+  "meter": "4/4",
+  "regions": [
+    {
+      "id": "r0",
+      "name": "Intro",
+      "type": "intro",
+      "genreId": "reggae",
+      "styleId": "reggae-roots-reggae",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D"
+      ]
+    },
+    {
+      "id": "r1",
+      "name": "Verse",
+      "type": "verse",
+      "genreId": "reggae",
+      "styleId": "reggae-roots-reggae",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "Chorus",
+      "type": "chorus",
+      "genreId": "reggae",
+      "styleId": "reggae-roots-reggae",
+      "chords": [
+        "C",
+        "G",
+        "D",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "Dub Break",
+      "type": "dub break",
+      "genreId": "reggae",
+      "styleId": "reggae-roots-reggae",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Verse",
+      "type": "verse",
+      "genreId": "reggae",
+      "styleId": "reggae-roots-reggae",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D"
+      ]
+    },
+    {
+      "id": "r5",
+      "name": "Outro",
+      "type": "outro",
+      "genreId": "reggae",
+      "styleId": "reggae-roots-reggae",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "v0",
+      "instrumentId": "drums",
+      "instrumentName": "Standard Drum Kit",
+      "role": "percussion",
+      "patternIds": [
+        "reggae--rd-one-drop"
+      ],
+      "noteCount": 161,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "choke",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4337": 8,
+        "4607": 12,
+        "9363": 94,
+        "12200": 26,
+        "44655": 21
+      }
+    },
+    {
+      "id": "v1",
+      "instrumentId": "bass",
+      "instrumentName": "Electric Bass Guitar",
+      "role": "bass",
+      "patternIds": [
+        "reggae--reggae-skank",
+        "reggae--rd-reggae-bass",
+        "reggae--rd-08-reggae-bass-lead"
+      ],
+      "noteCount": 122,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4607": 22,
+        "6655": 91,
+        "12200": 9
+      }
+    },
+    {
+      "id": "v2",
+      "instrumentId": "electric-guitar",
+      "instrumentName": "Electric Guitar",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--rd-skank"
+      ],
+      "noteCount": 396,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 9,
+        "44655": 369,
+        "49857": 18
+      }
+    },
+    {
+      "id": "v3",
+      "instrumentId": "organ",
+      "instrumentName": "Tonewheel organ",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--rd-skank",
+        "reggae--reggae-skank",
+        "reggae--reggae-melodic-bass"
+      ],
+      "noteCount": 372,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 158,
+        "6655": 9,
+        "8118": 9,
+        "44655": 187,
+        "48871": 9
+      }
+    },
+    {
+      "id": "v4",
+      "instrumentId": "brass",
+      "instrumentName": "Brass section",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--reggae-one-drop",
+        "reggae--reggae-melodic-bass"
+      ],
+      "noteCount": 179,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 74,
+        "6655": 5,
+        "8118": 1,
+        "8526": 9,
+        "12241": 5,
+        "44655": 80,
+        "50696": 5
+      }
+    },
+    {
+      "id": "v5",
+      "instrumentId": "voice",
+      "instrumentName": "Synth voice",
+      "role": "voice",
+      "patternIds": [
+        "reggae--reggae-melodic-bass",
+        "reggae--reggae-one-drop",
+        "tech-reggae-toast-vocal-deejay"
+      ],
+      "noteCount": 44,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 26,
+        "6655": 2,
+        "44655": 16
+      }
+    },
+    {
+      "id": "v6",
+      "instrumentId": "sub-bass",
+      "instrumentName": "Sub bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-reggae-reggae-bassline",
+        "reggae--rd-reggae-bass",
+        "reggae--rd-08-reggae-bass-lead"
+      ],
+      "noteCount": 123,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 85,
+        "6655": 33,
+        "30366": 5
+      }
+    },
+    {
+      "id": "v7",
+      "instrumentId": "horn-section",
+      "instrumentName": "Horn section",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--reggae-one-drop",
+        "reggae--reggae-skank",
+        "reggae--reggae-melodic-bass"
+      ],
+      "noteCount": 266,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 195,
+        "8118": 4,
+        "8526": 6,
+        "12200": 9,
+        "12241": 6,
+        "44655": 40,
+        "50696": 6
+      }
+    }
+  ],
+  "usedPatternIds": [
+    "reggae--rd-one-drop",
+    "reggae--reggae-skank",
+    "reggae--rd-reggae-bass",
+    "reggae--rd-08-reggae-bass-lead",
+    "reggae--rd-skank",
+    "reggae--reggae-melodic-bass",
+    "reggae--reggae-one-drop",
+    "tech-reggae-toast-vocal-deejay",
+    "tech-reggae-reggae-bassline"
+  ],
+  "performance": {
+    "durationSeconds": 113.68421052631584,
+    "noteCount": 1663,
+    "trackCount": 8,
+    "tracksWithNoNotes": []
+  }
+}

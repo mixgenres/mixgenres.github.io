@@ -1,0 +1,326 @@
+{
+  "schemaVersion": 2,
+  "genre": "industrial",
+  "styleId": "industrial-industrial-rock",
+  "styleName": "Industrial Rock",
+  "durationSec": 87.27272727272728,
+  "tempoBpm": 110,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "distortion-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "style-industrial-industrial-rock-signature"
+      ],
+      "noteCount": 294
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "industrial--industrial-metal-percussion",
+        "industrial--industrial-four-kick",
+        "style-industrial-industrial-rock-signature"
+      ],
+      "noteCount": 166
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-industrial-synchronized-guitar-kick",
+        "tech-industrial-machine-kick"
+      ],
+      "noteCount": 167
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "tech-industrial-industrial-noise-layer"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "industrial--industrial-four-kick",
+        "industrial--industrial-metal-percussion"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-industrial-industrial-noise-layer",
+        "industrial--industrial-metal-percussion",
+        "style-industrial-industrial-rock-signature"
+      ],
+      "noteCount": 138
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-industrial-industrial-noise-layer"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "acid-303",
+      "role": "lead",
+      "patternIds": [
+        "tech-industrial-industrial-noise-layer",
+        "industrial--industrial-four-kick"
+      ],
+      "noteCount": 64
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-industrial-industrial-rock-signature",
+      "name": "Rock",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "distorted loop",
+        "machine kick",
+        "synchronized guitar/kick",
+        "industrial noise layer",
+        "metallic percussion"
+      ]
+    },
+    {
+      "id": "industrial--industrial-metal-percussion",
+      "name": "Metal Percussion",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        7,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "industrial--industrial-four-kick",
+      "name": "Four Kick",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-industrial-synchronized-guitar-kick",
+      "name": "synchronized guitar/kick",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "synchronized guitar/kick"
+      ]
+    },
+    {
+      "id": "tech-industrial-machine-kick",
+      "name": "machine kick",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "machine kick"
+      ]
+    },
+    {
+      "id": "tech-industrial-industrial-noise-layer",
+      "name": "noise layer",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "industrial noise layer"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "distortion-guitar",
+      "bass",
+      "drums",
+      "sampler",
+      "voice"
+    ],
+    "techniques": [
+      "distorted loop",
+      "machine kick",
+      "synchronized guitar/kick",
+      "industrial noise layer",
+      "metallic percussion"
+    ],
+    "signatureCell": "Rock song form with machine percussion",
+    "tempoRange": [
+      90,
+      130
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Nine Inch Nails",
+      "Ministry"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "industrial-industrial-rock"
+  },
+  "performance": {
+    "noteCount": 1021,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-industrial-industrial-rock-signature",
+      "industrial--industrial-metal-percussion",
+      "industrial--industrial-four-kick",
+      "tech-industrial-synchronized-guitar-kick",
+      "tech-industrial-machine-kick",
+      "tech-industrial-industrial-noise-layer"
+    ]
+  }
+}

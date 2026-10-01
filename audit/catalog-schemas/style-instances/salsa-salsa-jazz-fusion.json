@@ -1,0 +1,503 @@
+{
+  "schemaVersion": 2,
+  "genre": "salsa",
+  "styleId": "salsa-salsa-jazz-fusion",
+  "styleName": "Salsa Jazz Fusion",
+  "durationSec": 109.71428571428581,
+  "tempoBpm": 105,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verso",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Coro",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Mambo / Gear",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Montuno",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Cierre",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7",
+        "B7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "style-salsa-salsa-jazz-fusion-signature",
+        "afro-piano-montuno"
+      ],
+      "noteCount": 750
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "afro-piano-montuno",
+        "style-salsa-salsa-jazz-fusion-signature"
+      ],
+      "noteCount": 269
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "patternIds": [
+        "style-salsa-salsa-jazz-fusion-signature",
+        "salsa-clave-32"
+      ],
+      "noteCount": 228
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "timbales",
+      "role": "percussion",
+      "patternIds": [
+        "style-salsa-salsa-jazz-fusion-signature",
+        "afro-conga-tumbao"
+      ],
+      "noteCount": 316
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "tech-salsa-mambo-horn-section"
+      ],
+      "noteCount": 193
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-salsa-2-3-clave",
+        "afro-mambo-horn-hits",
+        "tech-salsa-3-2-clave"
+      ],
+      "noteCount": 61
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "bongos",
+      "role": "percussion",
+      "patternIds": [
+        "afro-conga-tumbao",
+        "salsa-timbal-bell",
+        "salsa-maracas",
+        "tech-salsa-3-2-clave",
+        "tech-salsa-2-3-clave",
+        "salsa-clave-32"
+      ],
+      "noteCount": 323
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "claves",
+      "role": "percussion",
+      "patternIds": [
+        "afro-clave-son-23",
+        "tech-salsa-2-3-clave",
+        "salsa-guiro",
+        "style-salsa-son-cubano-foundation-signature",
+        "afro-timbal-cascara"
+      ],
+      "noteCount": 329
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-salsa-salsa-jazz-fusion-signature",
+      "name": "Jazz Fusion",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "montuno",
+        "2-3 clave",
+        "3-2 clave",
+        "mambo horn section"
+      ]
+    },
+    {
+      "id": "afro-piano-montuno",
+      "name": "Piano Montuno/Guajeo",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14,
+        16,
+        19,
+        22,
+        24,
+        27,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "salsa-clave-32",
+      "name": "3-2 Son Clave",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        10,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-conga-tumbao",
+      "name": "Conga Marcha",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-salsa-mambo-horn-section",
+      "name": "mambo horn section",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "mambo horn section"
+      ]
+    },
+    {
+      "id": "tech-salsa-2-3-clave",
+      "name": "2-3 clave",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "2-3 clave"
+      ]
+    },
+    {
+      "id": "afro-mambo-horn-hits",
+      "name": "Mambo Section Horn Stabs & Punctuation",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        6,
+        12,
+        14,
+        22,
+        28,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-salsa-3-2-clave",
+      "name": "3-2 clave",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "3-2 clave"
+      ]
+    },
+    {
+      "id": "salsa-timbal-bell",
+      "name": "Timbal Mambo Bell",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        11,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "salsa-maracas",
+      "name": "Maracas",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-clave-son-23",
+      "name": "Son Clave 2–3 Structural Timeline",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        4,
+        8,
+        16,
+        22,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "salsa-guiro",
+      "name": "Guiro",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-salsa-son-cubano-foundation-signature",
+      "name": "Son Cubano Foundation",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "bongó martillo",
+        "2-3 clave",
+        "3-2 clave"
+      ]
+    },
+    {
+      "id": "afro-timbal-cascara",
+      "name": "Timbal Cáscara",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        26,
+        28,
+        30
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "piano",
+      "bass",
+      "congas",
+      "timbales",
+      "brass"
+    ],
+    "techniques": [
+      "montuno",
+      "2-3 clave",
+      "3-2 clave",
+      "mambo horn section"
+    ],
+    "signatureCell": "Jazz harmony over clave-driven montuno",
+    "tempoRange": [
+      90,
+      120
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Eddie Palmieri"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "salsa-salsa-jazz-fusion"
+  },
+  "performance": {
+    "noteCount": 2469,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-salsa-salsa-jazz-fusion-signature",
+      "afro-piano-montuno",
+      "salsa-clave-32",
+      "afro-conga-tumbao",
+      "tech-salsa-mambo-horn-section",
+      "tech-salsa-2-3-clave",
+      "afro-mambo-horn-hits",
+      "tech-salsa-3-2-clave",
+      "salsa-timbal-bell",
+      "salsa-maracas",
+      "afro-clave-son-23",
+      "salsa-guiro",
+      "style-salsa-son-cubano-foundation-signature",
+      "afro-timbal-cascara"
+    ]
+  }
+}

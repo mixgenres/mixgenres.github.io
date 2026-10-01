@@ -1,0 +1,410 @@
+{
+  "schemaVersion": 2,
+  "genre": "tango",
+  "styleId": "tango-elastic-golden-age-tango",
+  "styleName": "Elastic Golden-Age Tango",
+  "durationSec": 93.20388349514569,
+  "tempoBpm": 103,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "A",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "B",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "solo-3",
+      "kind": "solo",
+      "label": "Variación",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "coda-4",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "G7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "bandoneon",
+      "role": "harmony",
+      "patternIds": [
+        "tech-tango-bandoneon-repeated-note-figure",
+        "style-tango-elastic-golden-age-tango-signature",
+        "tech-tango-chromatic-tango-bass"
+      ],
+      "noteCount": 354
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "violin",
+      "role": "melody",
+      "patternIds": [
+        "style-tango-elastic-golden-age-tango-signature",
+        "tango-fraseo-bandoneon"
+      ],
+      "noteCount": 65
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tango-332-piazzolla",
+        "tango-sincopa",
+        "style-tango-elastic-golden-age-tango-signature"
+      ],
+      "noteCount": 366
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "style-tango-elastic-golden-age-tango-signature",
+        "tango-bass-pizzicato"
+      ],
+      "noteCount": 91
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "cello",
+      "role": "lead",
+      "patternIds": [
+        "tech-tango-orchestral-silence"
+      ],
+      "noteCount": 122
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "flute",
+      "role": "melody",
+      "patternIds": [
+        "tango-fraseo-bandoneon",
+        "tech-tango-chromatic-tango-bass"
+      ],
+      "noteCount": 104
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "clarinet",
+      "role": "lead",
+      "patternIds": [
+        "tech-tango-bandoneon-string-counterpoint",
+        "tech-tango-elastic-rubato",
+        "tango-fraseo-bandoneon"
+      ],
+      "noteCount": 75
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-tango-chromatic-tango-bass",
+        "tango-marcato-4",
+        "tango-marcato-2"
+      ],
+      "noteCount": 386
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-tango-bandoneon-repeated-note-figure",
+      "name": "bandoneon repeated-note figure",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "bandoneon repeated-note figure"
+      ]
+    },
+    {
+      "id": "style-tango-elastic-golden-age-tango-signature",
+      "name": "Elastic Golden-Age Tango",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": [
+        "elastic rubato",
+        "orchestral silence",
+        "arrastre",
+        "bandoneon/string counterpoint",
+        "bandoneon repeated-note figure",
+        "chromatic tango bass"
+      ]
+    },
+    {
+      "id": "tech-tango-chromatic-tango-bass",
+      "name": "chromatic tango bass",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "chromatic tango bass"
+      ]
+    },
+    {
+      "id": "tango-fraseo-bandoneon",
+      "name": "Fraseo y Rubato",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        14,
+        16,
+        20,
+        24,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-332-piazzolla",
+      "name": "3+3+2 Nuevo Tango Pulse",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-sincopa",
+      "name": "Síncopa a Tierra",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-bass-pizzicato",
+      "name": "Pizzicato Bass",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        3,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-tango-orchestral-silence",
+      "name": "orchestral silence",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "orchestral silence"
+      ]
+    },
+    {
+      "id": "tech-tango-bandoneon-string-counterpoint",
+      "name": "bandoneon/string counterpoint",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "bandoneon/string counterpoint"
+      ]
+    },
+    {
+      "id": "tech-tango-elastic-rubato",
+      "name": "elastic rubato",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": [
+        "elastic rubato"
+      ]
+    },
+    {
+      "id": "tango-marcato-4",
+      "name": "Marcato en 4",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-marcato-2",
+      "name": "Marcato en 2",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "bandoneon",
+      "violin",
+      "piano",
+      "upright-bass",
+      "cello"
+    ],
+    "techniques": [
+      "elastic rubato",
+      "orchestral silence",
+      "arrastre",
+      "bandoneon/string counterpoint",
+      "bandoneon repeated-note figure",
+      "chromatic tango bass"
+    ],
+    "signatureCell": "Elastic rubato with bandoneon countermelody",
+    "tempoRange": [
+      80,
+      125
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "rubato",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Aníbal Troilo"
+    ],
+    "tracks": [
+      "Toda Mi Vida"
+    ]
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "tango-elastic-golden-age-tango"
+  },
+  "performance": {
+    "noteCount": 1563,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-tango-bandoneon-repeated-note-figure",
+      "style-tango-elastic-golden-age-tango-signature",
+      "tech-tango-chromatic-tango-bass",
+      "tango-fraseo-bandoneon",
+      "tango-332-piazzolla",
+      "tango-sincopa",
+      "tango-bass-pizzicato",
+      "tech-tango-orchestral-silence",
+      "tech-tango-bandoneon-string-counterpoint",
+      "tech-tango-elastic-rubato",
+      "tango-marcato-4",
+      "tango-marcato-2"
+    ]
+  }
+}

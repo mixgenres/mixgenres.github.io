@@ -1,0 +1,381 @@
+{
+  "schemaVersion": 2,
+  "genre": "rock",
+  "styleId": "rock-dream-pop",
+  "styleName": "Dream Pop",
+  "durationSec": 101.05263157894738,
+  "tempoBpm": 95,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "rock-lead-bend",
+        "rock-acoustic-strum",
+        "tech-rock-guitar-octave"
+      ],
+      "noteCount": 262
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "style-rock-dream-pop-signature",
+        "rock-prog-synth"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "rock-acoustic-strum",
+        "style-rock-dream-pop-signature"
+      ],
+      "noteCount": 204
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-rock-arpeggiated-shoegaze-wall",
+        "style-rock-dream-pop-signature",
+        "rock-open-close"
+      ],
+      "noteCount": 163
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-rock-dual-guitar-harmony",
+        "tech-rock-arpeggiated-shoegaze-wall"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "rock-organ-sustain",
+        "tech-rock-dual-guitar-harmony"
+      ],
+      "noteCount": 306
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "overdrive-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-rock-guitar-octave",
+        "rock-lead-bend"
+      ],
+      "noteCount": 264
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "rock-prog-synth",
+        "rock-organ-sustain"
+      ],
+      "noteCount": 264
+    }
+  ],
+  "patterns": [
+    {
+      "id": "rock-lead-bend",
+      "name": "Lead Guitar Bend",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        2,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-acoustic-strum",
+      "name": "Acoustic Strum",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-rock-guitar-octave",
+      "name": "guitar octave",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "guitar octave"
+      ]
+    },
+    {
+      "id": "style-rock-dream-pop-signature",
+      "name": "Dream Pop",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "dual-guitar harmony",
+        "arpeggiated shoegaze wall",
+        "guitar octave"
+      ]
+    },
+    {
+      "id": "rock-prog-synth",
+      "name": "Prog Synth Arp",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-rock-arpeggiated-shoegaze-wall",
+      "name": "arpeggiated shoegaze wall",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "arpeggiated shoegaze wall"
+      ]
+    },
+    {
+      "id": "rock-open-close",
+      "name": "Open Verse → Full Chorus",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-rock-dual-guitar-harmony",
+      "name": "dual-guitar harmony",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "dual-guitar harmony"
+      ]
+    },
+    {
+      "id": "rock-organ-sustain",
+      "name": "Hammond Organ Sustain",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        7,
+        8,
+        15
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "synth",
+      "bass",
+      "drums",
+      "voice"
+    ],
+    "techniques": [
+      "dual-guitar harmony",
+      "arpeggiated shoegaze wall",
+      "guitar octave"
+    ],
+    "signatureCell": "Reverberant guitar wall with slow harmony",
+    "tempoRange": [
+      70,
+      120
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Cocteau Twins",
+      "Beach House"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "rock-dream-pop"
+  },
+  "performance": {
+    "noteCount": 1591,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "rock-lead-bend",
+      "rock-acoustic-strum",
+      "tech-rock-guitar-octave",
+      "style-rock-dream-pop-signature",
+      "rock-prog-synth",
+      "tech-rock-arpeggiated-shoegaze-wall",
+      "rock-open-close",
+      "tech-rock-dual-guitar-harmony",
+      "rock-organ-sustain"
+    ]
+  }
+}

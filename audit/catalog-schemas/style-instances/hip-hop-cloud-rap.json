@@ -1,0 +1,354 @@
+{
+  "schemaVersion": 2,
+  "genre": "hip-hop",
+  "styleId": "hip-hop-cloud-rap",
+  "styleName": "Cloud Rap",
+  "durationSec": 73.84615384615383,
+  "tempoBpm": 130,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C#maj7",
+        "A#m7",
+        "Fm",
+        "G#"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C#maj7",
+        "A#m7",
+        "Fm",
+        "G#"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "hook-2",
+      "kind": "hook",
+      "label": "Hook",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C#maj7",
+        "A#m7",
+        "Fm",
+        "G#"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "verse-3",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C#maj7",
+        "A#m7",
+        "Fm",
+        "G#"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "bridge-4",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C#maj7",
+        "A#m7",
+        "Fm",
+        "G#"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C#maj7",
+        "A#m7",
+        "Fm",
+        "G#"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-hip-hop-sample-chop"
+      ],
+      "noteCount": 48
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "tech-hip-hop-sample-chop",
+        "hiphop-pocket-percussion"
+      ],
+      "noteCount": 48
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "hiphop-trap-basic"
+      ],
+      "noteCount": 113
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-hip-hop-beat-switch",
+        "hiphop-trap-hats",
+        "tech-hip-hop-triplet-hi-hats"
+      ],
+      "noteCount": 453
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "hiphop-pocket-percussion",
+        "hip-hop-sampled-keys"
+      ],
+      "noteCount": 526
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "turntable",
+      "role": "lead",
+      "patternIds": [
+        "tech-hip-hop-sample-chop"
+      ],
+      "noteCount": 48
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "tech-hip-hop-sample-chop"
+      ],
+      "noteCount": 48
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-hip-hop-vocal-chop"
+      ],
+      "noteCount": 48
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-hip-hop-sample-chop",
+      "name": "sample chop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "sample chop"
+      ]
+    },
+    {
+      "id": "hiphop-pocket-percussion",
+      "name": "Hip-Hop Pocket Percussion",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        3,
+        7,
+        11,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "hiphop-trap-basic",
+      "name": "Trap Half-Time",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-hip-hop-beat-switch",
+      "name": "beat switch",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "beat switch"
+      ]
+    },
+    {
+      "id": "hiphop-trap-hats",
+      "name": "Trap Hi-Hats",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        21,
+        22,
+        24,
+        26,
+        28,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-hip-hop-triplet-hi-hats",
+      "name": "triplet hi-hats",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "triplet hi-hats"
+      ]
+    },
+    {
+      "id": "hip-hop-sampled-keys",
+      "name": "Sampled Keys Loop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 24,
+      "onsetGrid": [
+        0,
+        6,
+        12,
+        18,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-hip-hop-vocal-chop",
+      "name": "vocal chop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal chop"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "synth",
+      "sampler",
+      "sub-bass",
+      "drums",
+      "piano"
+    ],
+    "techniques": [],
+    "signatureCell": "Ethereal vocal chop drowning in massive reverb over soft half-time 808 bass kick",
+    "tempoRange": [
+      120,
+      140
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "hip-hop-cloud-rap"
+  },
+  "performance": {
+    "noteCount": 1332,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-hip-hop-sample-chop",
+      "hiphop-pocket-percussion",
+      "hiphop-trap-basic",
+      "tech-hip-hop-beat-switch",
+      "hiphop-trap-hats",
+      "tech-hip-hop-triplet-hi-hats",
+      "hip-hop-sampled-keys",
+      "tech-hip-hop-vocal-chop"
+    ]
+  }
+}

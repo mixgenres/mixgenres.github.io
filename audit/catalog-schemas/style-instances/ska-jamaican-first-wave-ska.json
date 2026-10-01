@@ -1,0 +1,424 @@
+{
+  "schemaVersion": 2,
+  "genre": "ska",
+  "styleId": "ska-jamaican-first-wave-ska",
+  "styleName": "Jamaican First-Wave Ska",
+  "durationSec": 87.27272727272728,
+  "tempoBpm": 110,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-ska-skank-guitar",
+        "style-ska-jamaican-first-wave-ska-signature"
+      ],
+      "noteCount": 504
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-ska-walking-ska-bass",
+        "sk-walking-bass"
+      ],
+      "noteCount": 304
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-ska-jamaican-first-wave-ska-signature",
+        "tech-ska-jamaican-shuffle"
+      ],
+      "noteCount": 224
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "tech-ska-horn-stab",
+        "tech-ska-jazz-horn-solo"
+      ],
+      "noteCount": 165
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-ska-horn-guitar-call-response",
+        "sk-offbeat-chop",
+        "sk-12-ska-piano-bubble",
+        "zouk-bridge-16"
+      ],
+      "noteCount": 525
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-ska-horn-guitar-call-response"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "tenor-sax",
+      "role": "melody",
+      "patternIds": [
+        "tech-ska-jazz-horn-solo",
+        "tech-ska-walking-ska-bass"
+      ],
+      "noteCount": 218
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "trombone",
+      "role": "lead",
+      "patternIds": [
+        "style-ska-jamaican-first-wave-ska-signature",
+        "tech-ska-horn-stab",
+        "tech-ska-jazz-horn-solo"
+      ],
+      "noteCount": 157
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-ska-skank-guitar",
+      "name": "skank guitar",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": [
+        "skank guitar"
+      ]
+    },
+    {
+      "id": "style-ska-jamaican-first-wave-ska-signature",
+      "name": "Jamaican First-Wave Ska",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": [
+        "jazz horn solo",
+        "walking ska bass",
+        "skank guitar",
+        "horn/guitar call-response",
+        "Jamaican shuffle",
+        "horn stab"
+      ]
+    },
+    {
+      "id": "tech-ska-walking-ska-bass",
+      "name": "walking ska bass",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "walking ska bass"
+      ]
+    },
+    {
+      "id": "sk-walking-bass",
+      "name": "Walking Bass",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-ska-jamaican-shuffle",
+      "name": "Jamaican shuffle",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "Jamaican shuffle"
+      ]
+    },
+    {
+      "id": "tech-ska-horn-stab",
+      "name": "horn stab",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "horn stab"
+      ]
+    },
+    {
+      "id": "tech-ska-jazz-horn-solo",
+      "name": "jazz horn solo",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "jazz horn solo"
+      ]
+    },
+    {
+      "id": "tech-ska-horn-guitar-call-response",
+      "name": "horn/guitar call-response",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "horn/guitar call-response"
+      ]
+    },
+    {
+      "id": "sk-offbeat-chop",
+      "name": "Offbeat Chop",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "sk-12-ska-piano-bubble",
+      "name": "Piano bubble response",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-bridge-16",
+      "name": "Chawa Bridge",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        11,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "brass",
+      "piano"
+    ],
+    "techniques": [
+      "jazz horn solo",
+      "walking ska bass",
+      "skank guitar",
+      "horn/guitar call-response",
+      "Jamaican shuffle",
+      "horn stab"
+    ],
+    "signatureCell": "Walking bass with offbeat skank",
+    "tempoRange": [
+      90,
+      130
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "The Skatalites",
+      "Prince Buster"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "ska-jamaican-first-wave-ska"
+  },
+  "performance": {
+    "noteCount": 2161,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-ska-skank-guitar",
+      "style-ska-jamaican-first-wave-ska-signature",
+      "tech-ska-walking-ska-bass",
+      "sk-walking-bass",
+      "tech-ska-jamaican-shuffle",
+      "tech-ska-horn-stab",
+      "tech-ska-jazz-horn-solo",
+      "tech-ska-horn-guitar-call-response",
+      "sk-offbeat-chop",
+      "sk-12-ska-piano-bubble",
+      "zouk-bridge-16"
+    ]
+  }
+}

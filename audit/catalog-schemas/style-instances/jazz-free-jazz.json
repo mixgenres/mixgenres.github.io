@@ -1,0 +1,351 @@
+{
+  "schemaVersion": 2,
+  "genre": "jazz",
+  "styleId": "jazz-free-jazz",
+  "styleName": "Free Jazz",
+  "durationSec": 102,
+  "tempoBpm": 160,
+  "meter": "free",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "statement-0",
+      "kind": "statement",
+      "label": "Statement",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "D#",
+        "A",
+        "C#",
+        "G",
+        "C",
+        "F#",
+        "B",
+        "F"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "collective-improvisation-1",
+      "kind": "collective-improvisation",
+      "label": "Collective Improvisation",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "D#",
+        "A",
+        "C#",
+        "G",
+        "C",
+        "F#",
+        "B",
+        "F"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "open-solo-2",
+      "kind": "open-solo",
+      "label": "Open Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "D#",
+        "A",
+        "C#",
+        "G",
+        "C",
+        "F#",
+        "B",
+        "F"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "texture-shift-3",
+      "kind": "texture-shift",
+      "label": "Texture Shift",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "D#",
+        "A",
+        "C#",
+        "G",
+        "C",
+        "F#",
+        "B",
+        "F"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "collective-climax-4",
+      "kind": "collective-climax",
+      "label": "Collective Climax",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "D#",
+        "A",
+        "C#",
+        "G",
+        "C",
+        "F#",
+        "B",
+        "F"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "release-5",
+      "kind": "release",
+      "label": "Release",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "D#",
+        "A",
+        "C#",
+        "G",
+        "C",
+        "F#",
+        "B",
+        "F"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "tenor-sax",
+      "role": "melody",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 201
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "alto-sax",
+      "role": "lead",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 204
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "trumpet",
+      "role": "lead",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 183
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-jazz-collective-improvisation",
+        "jazz-piano-comping"
+      ],
+      "noteCount": 234
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "jazz-brushes-swing",
+        "jazz-ride-spangalang"
+      ],
+      "noteCount": 440
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "ride",
+      "role": "percussion",
+      "patternIds": [
+        "jazz-ride-spangalang",
+        "jazz-brushes-swing"
+      ],
+      "noteCount": 448
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "jazz-comping-sync",
+        "jazz-latin-montuno-comp",
+        "jazz-piano-comping"
+      ],
+      "noteCount": 984
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "vibraphone",
+      "role": "harmony",
+      "patternIds": [
+        "jazz-piano-comping"
+      ],
+      "noteCount": 245
+    }
+  ],
+  "patterns": [
+    {
+      "id": "jazz-horn-swing-phrase",
+      "name": "Horn Swing Phrase",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-jazz-collective-improvisation",
+      "name": "collective improvisation",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "collective improvisation"
+      ]
+    },
+    {
+      "id": "jazz-piano-comping",
+      "name": "Syncopated Piano Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-brushes-swing",
+      "name": "Brushes Swing",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        5,
+        6,
+        8,
+        9,
+        11
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-ride-spangalang",
+      "name": "Ride Cymbal",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-comping-sync",
+      "name": "Syncopated Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        1,
+        4,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-latin-montuno-comp",
+      "name": "Latin Jazz Montuno Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        7,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "tenor-sax",
+      "alto-sax",
+      "trumpet",
+      "upright-bass",
+      "drums"
+    ],
+    "techniques": [],
+    "signatureCell": "High multiphonic saxophone shriek erupting over frantic multidirectional free drum flurry",
+    "tempoRange": [
+      100,
+      220
+    ],
+    "preferredMeters": [
+      "free"
+    ],
+    "microtimingFeel": "rubato",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "jazz-free-jazz"
+  },
+  "performance": {
+    "noteCount": 2939,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "jazz-horn-swing-phrase",
+      "tech-jazz-collective-improvisation",
+      "jazz-piano-comping",
+      "jazz-brushes-swing",
+      "jazz-ride-spangalang",
+      "jazz-comping-sync",
+      "jazz-latin-montuno-comp"
+    ]
+  }
+}

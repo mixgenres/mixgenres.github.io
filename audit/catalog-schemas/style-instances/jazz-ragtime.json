@@ -1,0 +1,439 @@
+{
+  "schemaVersion": 2,
+  "genre": "jazz",
+  "styleId": "jazz-ragtime",
+  "styleName": "Ragtime",
+  "durationSec": 73.04347826086948,
+  "tempoBpm": 92,
+  "meter": "2/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "strain-a-0",
+      "kind": "strain-a",
+      "label": "Strain A",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7",
+        "C",
+        "C7",
+        "F",
+        "D7",
+        "G",
+        "G7",
+        "C",
+        "C"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "strain-a-1",
+      "kind": "strain-a",
+      "label": "Strain A",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7",
+        "C",
+        "C7",
+        "F",
+        "D7",
+        "G",
+        "G7",
+        "C",
+        "C"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "strain-b-2",
+      "kind": "strain-b",
+      "label": "Strain B",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "C",
+        "F",
+        "C",
+        "G7",
+        "C"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "strain-a-3",
+      "kind": "strain-a",
+      "label": "Strain A",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7",
+        "C",
+        "C7",
+        "F",
+        "D7",
+        "G",
+        "G7",
+        "C",
+        "C"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "strain-c-4",
+      "kind": "strain-c",
+      "label": "Strain C",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "strain-d-5",
+      "kind": "strain-d",
+      "label": "Strain D",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7",
+        "C",
+        "C7",
+        "F",
+        "D7",
+        "G",
+        "G7",
+        "C",
+        "C"
+      ]
+    },
+    {
+      "id": "r6",
+      "key": "final-strain-6",
+      "kind": "final-strain",
+      "label": "Final Strain",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "C",
+        "F",
+        "C",
+        "G7",
+        "C"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "jazz-piano-comping",
+        "jazz-latin-montuno-comp"
+      ],
+      "noteCount": 790
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "banjo",
+      "role": "harmony",
+      "patternIds": [
+        "jazz-piano-comping"
+      ],
+      "noteCount": 639
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "jazz-piano-comping",
+        "jazz-latin-montuno-comp",
+        "style-jazz-swing-era-signature",
+        "tech-jazz-ride-cymbal-swing"
+      ],
+      "noteCount": 436
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "jazz-walking-bass"
+      ],
+      "noteCount": 177
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "jazz-ride-spangalang",
+        "jazz-ride-broken"
+      ],
+      "noteCount": 288
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "ride",
+      "role": "percussion",
+      "patternIds": [
+        "jazz-hihat-2-4",
+        "jazz-ride-spangalang",
+        "jazz-ride-broken"
+      ],
+      "noteCount": 189
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "trumpet",
+      "role": "lead",
+      "patternIds": [
+        "jazz-horn-swing-phrase"
+      ],
+      "noteCount": 166
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "tenor-sax",
+      "role": "melody",
+      "patternIds": [
+        "tech-jazz-ride-cymbal-swing",
+        "tech-jazz-walking-bass"
+      ],
+      "noteCount": 215
+    }
+  ],
+  "patterns": [
+    {
+      "id": "jazz-piano-comping",
+      "name": "Syncopated Piano Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-latin-montuno-comp",
+      "name": "Latin Jazz Montuno Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        7,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-jazz-swing-era-signature",
+      "name": "Swing Era",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "walking bass",
+        "big-band shout chorus",
+        "ride cymbal swing"
+      ]
+    },
+    {
+      "id": "tech-jazz-ride-cymbal-swing",
+      "name": "ride cymbal swing",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "ride cymbal swing"
+      ]
+    },
+    {
+      "id": "jazz-walking-bass",
+      "name": "Walking Bass",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-ride-spangalang",
+      "name": "Ride Cymbal",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-ride-broken",
+      "name": "Broken Ride",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        9
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-hihat-2-4",
+      "name": "Hi-Hat 2 & 4",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 4,
+      "onsetGrid": [
+        1,
+        3
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-horn-swing-phrase",
+      "name": "Horn Swing Phrase",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-jazz-walking-bass",
+      "name": "walking bass",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "walking bass"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "piano",
+      "banjo",
+      "brass",
+      "upright-bass",
+      "drums"
+    ],
+    "techniques": [],
+    "signatureCell": "Steady left-hand boom-chick march bass with sparkling syncopated right-hand Joplin melody",
+    "tempoRange": [
+      80,
+      104
+    ],
+    "preferredMeters": [
+      "2/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "jazz-ragtime"
+  },
+  "performance": {
+    "noteCount": 2900,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "jazz-piano-comping",
+      "jazz-latin-montuno-comp",
+      "style-jazz-swing-era-signature",
+      "tech-jazz-ride-cymbal-swing",
+      "jazz-walking-bass",
+      "jazz-ride-spangalang",
+      "jazz-ride-broken",
+      "jazz-hihat-2-4",
+      "jazz-horn-swing-phrase",
+      "tech-jazz-walking-bass"
+    ]
+  }
+}

@@ -1,0 +1,397 @@
+{
+  "schemaVersion": 2,
+  "genre": "industrial",
+  "styleId": "industrial-dark",
+  "styleName": "Dark Industrial",
+  "durationSec": 124.80000000000013,
+  "tempoBpm": 100,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em",
+        "Em",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Em",
+        "Em",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "D",
+        "Em",
+        "Em"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "verse-3",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Em",
+        "Em",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "chorus-4",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "D",
+        "Em",
+        "Em"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "break-5",
+      "kind": "break",
+      "label": "Break",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em",
+        "Em",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "id": "r6",
+      "key": "chorus-6",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "C",
+        "D",
+        "Em",
+        "Em"
+      ]
+    },
+    {
+      "id": "r7",
+      "key": "outro-7",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em",
+        "Em",
+        "C",
+        "D"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-industrial-industrial-noise-layer",
+        "industrial--industrial-mechanical-pulse"
+      ],
+      "noteCount": 57
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-industrial-industrial-rock-signature"
+      ],
+      "noteCount": 216
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "industrial--industrial-four-native",
+        "industrial--industrial-mechanical-pulse",
+        "tech-industrial-industrial-noise-layer"
+      ],
+      "noteCount": 42
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "bass-lead",
+      "role": "bass",
+      "patternIds": [
+        "industrial--industrial-mechanical-pulse",
+        "industrial--industrial-bass-lock",
+        "industrial--industrial-ebm-pulse-native",
+        "industrial--industrial-ebm-pulse"
+      ],
+      "noteCount": 162
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "noise-sweep",
+      "role": "effect",
+      "patternIds": [
+        "tech-industrial-industrial-noise-layer",
+        "industrial--industrial-ebm-pulse-native",
+        "industrial--industrial-four-native",
+        "industrial--industrial-four-kick",
+        "industrial--industrial-ebm-pulse"
+      ],
+      "noteCount": 74
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "industrial--industrial-ebm-pulse-native",
+        "industrial--industrial-bass-lock",
+        "industrial--industrial-ebm-pulse",
+        "industrial--industrial-four-native"
+      ],
+      "noteCount": 76
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "distortion-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "style-industrial-industrial-rock-signature",
+        "industrial--industrial-four-kick",
+        "industrial--industrial-ebm-pulse-native"
+      ],
+      "noteCount": 404
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "industrial--industrial-ebm-pulse",
+        "industrial--industrial-bass-lock",
+        "style-industrial-industrial-rock-signature"
+      ],
+      "noteCount": 190
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-industrial-industrial-noise-layer",
+      "name": "noise layer",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "industrial noise layer"
+      ]
+    },
+    {
+      "id": "industrial--industrial-mechanical-pulse",
+      "name": "Mechanical Pulse",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-industrial-industrial-rock-signature",
+      "name": "Rock",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "distorted loop",
+        "machine kick",
+        "synchronized guitar/kick",
+        "industrial noise layer",
+        "metallic percussion"
+      ]
+    },
+    {
+      "id": "industrial--industrial-four-native",
+      "name": "Four Pulse",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "industrial--industrial-bass-lock",
+      "name": "Bass Lock",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "industrial--industrial-ebm-pulse-native",
+      "name": "EBM 16th Pulse",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "industrial--industrial-ebm-pulse",
+      "name": "EBM Pulse",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "industrial--industrial-four-kick",
+      "name": "Four Kick",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        15
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "synth",
+      "drums",
+      "sampler",
+      "bass-lead",
+      "noise-sweep"
+    ],
+    "techniques": [],
+    "signatureCell": "Heavy half-time backbeat with distorted sequenced bass and cold synth pads",
+    "tempoRange": [
+      80,
+      120
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "pushed",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "industrial-dark"
+  },
+  "performance": {
+    "noteCount": 1221,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-industrial-industrial-noise-layer",
+      "industrial--industrial-mechanical-pulse",
+      "style-industrial-industrial-rock-signature",
+      "industrial--industrial-four-native",
+      "industrial--industrial-bass-lock",
+      "industrial--industrial-ebm-pulse-native",
+      "industrial--industrial-ebm-pulse",
+      "industrial--industrial-four-kick"
+    ]
+  }
+}

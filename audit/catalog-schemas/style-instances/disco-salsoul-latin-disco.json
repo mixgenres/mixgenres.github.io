@@ -1,0 +1,329 @@
+{
+  "schemaVersion": 2,
+  "genre": "disco",
+  "styleId": "disco-salsoul-latin-disco",
+  "styleName": "Salsoul / Latin Disco",
+  "durationSec": 144,
+  "tempoBpm": 120,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Groove",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Main Groove",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "bridge-4",
+      "kind": "bridge",
+      "label": "Return",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-disco-salsoul-latin-disco-signature"
+      ],
+      "noteCount": 313
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-disco-disco-octave-bass"
+      ],
+      "noteCount": 303
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "strings",
+      "role": "harmony",
+      "patternIds": [
+        "tech-disco-string-disco-stabs"
+      ],
+      "noteCount": 368
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "disco-octave-bass",
+        "disco-string-hits",
+        "disco-offbeat-hat"
+      ],
+      "noteCount": 697
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "patternIds": [
+        "disco-offbeat-hat",
+        "disco-octave-bass",
+        "disco-string-hits"
+      ],
+      "noteCount": 404
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "disco-string-hits",
+        "disco-offbeat-hat",
+        "disco-octave-bass"
+      ],
+      "noteCount": 1738
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "disco-string-hits",
+        "disco-octave-bass",
+        "disco-offbeat-hat"
+      ],
+      "noteCount": 1648
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "horn-section",
+      "role": "harmony",
+      "patternIds": [
+        "style-disco-salsoul-latin-disco-signature"
+      ],
+      "noteCount": 1048
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-disco-salsoul-latin-disco-signature",
+      "name": "Salsoul/Latin Disco",
+      "worldId": "disco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "disco conga pattern",
+        "string disco stabs",
+        "four-on-floor kick",
+        "disco octave bass"
+      ]
+    },
+    {
+      "id": "tech-disco-disco-octave-bass",
+      "name": "octave bass",
+      "worldId": "disco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "disco octave bass"
+      ]
+    },
+    {
+      "id": "tech-disco-string-disco-stabs",
+      "name": "string disco stabs",
+      "worldId": "disco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "string disco stabs"
+      ]
+    },
+    {
+      "id": "disco-octave-bass",
+      "name": "Octave Bass",
+      "worldId": "disco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        11,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "disco-string-hits",
+      "name": "String Hits",
+      "worldId": "disco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        7,
+        8,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "disco-offbeat-hat",
+      "name": "Open-Hat Lift",
+      "worldId": "disco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "bass",
+      "strings",
+      "brass",
+      "congas",
+      "piano"
+    ],
+    "techniques": [
+      "disco conga pattern",
+      "string disco stabs",
+      "four-on-floor kick",
+      "disco octave bass"
+    ],
+    "signatureCell": "Four-on-floor with Latin percussion and strings",
+    "tempoRange": [
+      115,
+      125
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Salsoul Orchestra",
+      "Joe Bataan"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "disco-salsoul-latin-disco"
+  },
+  "performance": {
+    "noteCount": 6519,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-disco-salsoul-latin-disco-signature",
+      "tech-disco-disco-octave-bass",
+      "tech-disco-string-disco-stabs",
+      "disco-octave-bass",
+      "disco-string-hits",
+      "disco-offbeat-hat"
+    ]
+  }
+}

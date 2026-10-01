@@ -1,0 +1,479 @@
+{
+  "schemaVersion": 2,
+  "genre": "reggaeton",
+  "styleId": "reggaeton-dancehall",
+  "styleName": "Dancehall",
+  "durationSec": 97.95918367346933,
+  "tempoBpm": 98,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F",
+        "C",
+        "Dm",
+        "A#"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verso-1",
+      "kind": "verso",
+      "label": "Verso",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "F",
+        "C",
+        "Dm",
+        "A#"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "coro-2",
+      "kind": "coro",
+      "label": "Coro",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "F",
+        "C",
+        "Dm",
+        "A#"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "puente-3",
+      "kind": "puente",
+      "label": "Puente",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "F",
+        "C",
+        "Dm",
+        "A#"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "coro-4",
+      "kind": "coro",
+      "label": "Coro",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "F",
+        "C",
+        "Dm",
+        "A#"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F",
+        "C",
+        "Dm",
+        "A#"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "reggaeton--rg-06-classic-dembow-skeleton"
+      ],
+      "noteCount": 304
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "reggaeton--rg-dembow-bass"
+      ],
+      "noteCount": 148
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "reggaeton--rg-16-perreo-synth-hook",
+        "reggaeton--rg-17-melodic-pluck-lead"
+      ],
+      "noteCount": 56
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "tech-reggaeton-dancehall-derived-riddim",
+        "tango-piano-chumba",
+        "cu-keyboard-hook",
+        "reggae--rd-09-bubble-organ",
+        "jazz-piano-red-garland",
+        "jazz-piano-comping"
+      ],
+      "noteCount": 375
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "reggaeton--rg-17-melodic-pluck-lead",
+        "reggaeton--rg-16-perreo-synth-hook"
+      ],
+      "noteCount": 56
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-reggaeton-classic-dembow",
+        "tech-reggaeton-reggaeton-kick-bass-lock"
+      ],
+      "noteCount": 56
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "patternIds": [
+        "tech-reggaeton-reggaeton-kick-bass-lock",
+        "flamenco-bulerias-palmas",
+        "flamenco-cajon-rumba",
+        "tech-reggaeton-dancehall-derived-riddim",
+        "tech-reggaeton-classic-dembow"
+      ],
+      "noteCount": 214
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "reggaeton--rg-08-reggaeton-sub-answer"
+      ],
+      "noteCount": 160
+    }
+  ],
+  "patterns": [
+    {
+      "id": "reggaeton--rg-06-classic-dembow-skeleton",
+      "name": "Classic dembow two-bar answer",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        8,
+        11,
+        12,
+        14,
+        16,
+        19,
+        20,
+        22,
+        24,
+        27,
+        28,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-dembow-bass",
+      "name": "Dembow Syncopated Bass",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        14,
+        16,
+        22,
+        24,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-16-perreo-synth-hook",
+      "name": "Perreo Minor Synth Hook",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-17-melodic-pluck-lead",
+      "name": "Medellín Plucked Synth Lead",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        7,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-reggaeton-dancehall-derived-riddim",
+      "name": "dancehall-derived riddim",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "dancehall-derived riddim"
+      ]
+    },
+    {
+      "id": "tango-piano-chumba",
+      "name": "Piano Chumba",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        4,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-keyboard-hook",
+      "name": "Keyboard Hook",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        10,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-09-bubble-organ",
+      "name": "Bubble Organ",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-red-garland",
+      "name": "Block Chords",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        3,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-comping",
+      "name": "Syncopated Piano Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-reggaeton-classic-dembow",
+      "name": "classic dembow",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "classic dembow"
+      ]
+    },
+    {
+      "id": "tech-reggaeton-reggaeton-kick-bass-lock",
+      "name": "kick/bass lock",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "reggaeton kick/bass lock"
+      ]
+    },
+    {
+      "id": "flamenco-bulerias-palmas",
+      "name": "Bulerias Palmas",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-cajon-rumba",
+      "name": "Cajon Rumba",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-08-reggaeton-sub-answer",
+      "name": "Sub Answer",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        6,
+        10,
+        14,
+        16,
+        22,
+        26,
+        30
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "bass",
+      "sampler",
+      "organ",
+      "synth"
+    ],
+    "techniques": [],
+    "signatureCell": "Classic Bam-Bam riddim snare skip with punchy Spanish vocal toasting and organ skank",
+    "tempoRange": [
+      94,
+      102
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "pushed",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "reggaeton-dancehall"
+  },
+  "performance": {
+    "noteCount": 1369,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "reggaeton--rg-06-classic-dembow-skeleton",
+      "reggaeton--rg-dembow-bass",
+      "reggaeton--rg-16-perreo-synth-hook",
+      "reggaeton--rg-17-melodic-pluck-lead",
+      "tech-reggaeton-dancehall-derived-riddim",
+      "tango-piano-chumba",
+      "cu-keyboard-hook",
+      "reggae--rd-09-bubble-organ",
+      "jazz-piano-red-garland",
+      "jazz-piano-comping",
+      "tech-reggaeton-classic-dembow",
+      "tech-reggaeton-reggaeton-kick-bass-lock",
+      "flamenco-bulerias-palmas",
+      "flamenco-cajon-rumba",
+      "reggaeton--rg-08-reggaeton-sub-answer"
+    ]
+  }
+}

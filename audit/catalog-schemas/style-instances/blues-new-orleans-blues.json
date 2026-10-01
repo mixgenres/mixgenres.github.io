@@ -1,0 +1,459 @@
+{
+  "schemaVersion": 2,
+  "genre": "blues",
+  "styleId": "blues-new-orleans-blues",
+  "styleName": "New Orleans Blues",
+  "durationSec": 105.60000000000008,
+  "tempoBpm": 100,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Head",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C7",
+        "F7",
+        "C7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 12,
+      "intensity": "medium",
+      "chords": [
+        "C7",
+        "F7",
+        "C7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Answer",
+      "bars": 12,
+      "intensity": "high",
+      "chords": [
+        "C7",
+        "F7",
+        "C7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "solo-3",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 12,
+      "intensity": "peak",
+      "chords": [
+        "C7",
+        "F7",
+        "C7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "coda-4",
+      "kind": "coda",
+      "label": "Turnaround",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C7",
+        "F7",
+        "C7",
+        "G7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "style-blues-new-orleans-blues-signature"
+      ],
+      "noteCount": 1052
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-blues-blues-scale-enclosure"
+      ],
+      "noteCount": 642
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "blues-bass-walk"
+      ],
+      "noteCount": 119
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-blues-shuffle-triplet-pocket",
+        "tech-blues-stop-time-blues"
+      ],
+      "noteCount": 241
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "tech-blues-walking-blues-bass",
+        "blues-horn-stabs",
+        "tech-blues-new-orleans-second-line-accents"
+      ],
+      "noteCount": 193
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-blues-new-orleans-second-line-accents",
+        "tech-blues-walking-blues-bass",
+        "tech-blues-boogie-bass"
+      ],
+      "noteCount": 68
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "harmonica",
+      "role": "melody",
+      "patternIds": [
+        "tech-blues-boogie-bass",
+        "tech-blues-shuffle-triplet-pocket",
+        "tech-blues-stop-time-blues"
+      ],
+      "noteCount": 101
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "blues-organ-swell",
+        "blues-piano-triplets",
+        "kizomba-bridge-16",
+        "reggae--rd-skank"
+      ],
+      "noteCount": 516
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-blues-new-orleans-blues-signature",
+      "name": "New Orleans Blues",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "New Orleans second-line accents",
+        "walking-blues bass",
+        "blues scale enclosure",
+        "boogie bass",
+        "shuffle triplet pocket",
+        "stop-time blues"
+      ]
+    },
+    {
+      "id": "tech-blues-blues-scale-enclosure",
+      "name": "scale enclosure",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "blues scale enclosure"
+      ]
+    },
+    {
+      "id": "blues-bass-walk",
+      "name": "Walking Blues Bass",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 4,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-blues-shuffle-triplet-pocket",
+      "name": "shuffle triplet pocket",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "shuffle triplet pocket"
+      ]
+    },
+    {
+      "id": "tech-blues-stop-time-blues",
+      "name": "stop-time blues",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "stop-time blues"
+      ]
+    },
+    {
+      "id": "tech-blues-walking-blues-bass",
+      "name": "walking-blues bass",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "walking-blues bass"
+      ]
+    },
+    {
+      "id": "blues-horn-stabs",
+      "name": "Horn Stabs",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        2,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-blues-new-orleans-second-line-accents",
+      "name": "New Orleans second-line accents",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "New Orleans second-line accents"
+      ]
+    },
+    {
+      "id": "tech-blues-boogie-bass",
+      "name": "boogie bass",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "boogie bass"
+      ]
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "blues-organ-swell",
+      "name": "Organ Swell",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 4,
+      "onsetGrid": [
+        0,
+        2
+      ],
+      "techniques": []
+    },
+    {
+      "id": "blues-piano-triplets",
+      "name": "Piano Triplets",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-bridge-16",
+      "name": "Semba Bridge",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        10,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-skank",
+      "name": "Offbeat Skank",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "piano",
+      "electric-guitar",
+      "bass",
+      "drums",
+      "brass",
+      "voice"
+    ],
+    "techniques": [
+      "New Orleans second-line accents",
+      "walking-blues bass",
+      "blues scale enclosure",
+      "boogie bass",
+      "shuffle triplet pocket",
+      "stop-time blues"
+    ],
+    "signatureCell": "Second-line piano with rolling bass",
+    "tempoRange": [
+      80,
+      120
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Professor Longhair",
+      "Dr. John"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "blues-new-orleans-blues"
+  },
+  "performance": {
+    "noteCount": 2932,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-blues-new-orleans-blues-signature",
+      "tech-blues-blues-scale-enclosure",
+      "blues-bass-walk",
+      "tech-blues-shuffle-triplet-pocket",
+      "tech-blues-stop-time-blues",
+      "tech-blues-walking-blues-bass",
+      "blues-horn-stabs",
+      "tech-blues-new-orleans-second-line-accents",
+      "tech-blues-boogie-bass",
+      "afro-amapiano-pad",
+      "blues-organ-swell",
+      "blues-piano-triplets",
+      "kizomba-bridge-16",
+      "reggae--rd-skank"
+    ]
+  }
+}

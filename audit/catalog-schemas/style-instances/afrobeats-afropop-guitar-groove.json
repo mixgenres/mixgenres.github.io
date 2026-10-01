@@ -1,0 +1,377 @@
+{
+  "schemaVersion": 2,
+  "genre": "afrobeats",
+  "styleId": "afrobeats-afropop-guitar-groove",
+  "styleName": "Afropop Guitar Groove",
+  "durationSec": 91.42857142857147,
+  "tempoBpm": 105,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "style-afrobeats-afropop-guitar-groove-signature",
+        "afro-highlife-guitar"
+      ],
+      "noteCount": 738
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-afrobeats-sparse-sub-bass-anticipation",
+        "afro-log-drum-bass"
+      ],
+      "noteCount": 238
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "afro-shekere-shaker",
+        "style-afrobeats-afropop-guitar-groove-signature"
+      ],
+      "noteCount": 438
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "shaker",
+      "role": "percussion",
+      "patternIds": [
+        "afro-interlocking-16ths",
+        "style-afrobeats-afropop-guitar-groove-signature",
+        "afro-shekere-shaker"
+      ],
+      "noteCount": 259
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "afro-interlocking-16ths"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "afro-log-drum-bass",
+        "tech-afrobeats-sparse-sub-bass-anticipation"
+      ],
+      "noteCount": 185
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "log-drum",
+      "role": "percussion",
+      "patternIds": [
+        "style-afrobeats-afropop-guitar-groove-signature",
+        "afro-log-drum-bass",
+        "afro-shekere-shaker"
+      ],
+      "noteCount": 451
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "tenor-sax",
+      "role": "melody",
+      "patternIds": [
+        "afro-interlocking-16ths",
+        "tech-afrobeats-interlocking-guitar-ostinati",
+        "tech-afrobeats-shaker-16ths-with-displaced-accents"
+      ],
+      "noteCount": 169
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-afrobeats-afropop-guitar-groove-signature",
+      "name": "Afropop Guitar Groove",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "shaker 16ths with displaced accents",
+        "interlocking guitar ostinati",
+        "sparse sub-bass anticipation"
+      ]
+    },
+    {
+      "id": "afro-highlife-guitar",
+      "name": "Highlife Fingerstyle Clean Guitar",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        7,
+        8,
+        11,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-afrobeats-sparse-sub-bass-anticipation",
+      "name": "sparse sub-bass anticipation",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "sparse sub-bass anticipation"
+      ]
+    },
+    {
+      "id": "afro-log-drum-bass",
+      "name": "Pitched Log Drum Bass Groove",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-shekere-shaker",
+      "name": "Shekere & Gourd Shaker Engine",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-interlocking-16ths",
+      "name": "Interlocking 16ths",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        8,
+        10,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-afrobeats-interlocking-guitar-ostinati",
+      "name": "interlocking guitar ostinati",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "interlocking guitar ostinati"
+      ]
+    },
+    {
+      "id": "tech-afrobeats-shaker-16ths-with-displaced-accents",
+      "name": "shaker 16ths with displaced accents",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "shaker 16ths with displaced accents"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "shaker",
+      "voice"
+    ],
+    "techniques": [
+      "shaker 16ths with displaced accents",
+      "interlocking guitar ostinati",
+      "sparse sub-bass anticipation"
+    ],
+    "signatureCell": "Clean guitar ostinato over shaker-led subdivision",
+    "tempoRange": [
+      95,
+      115
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Wizkid",
+      "2Baba",
+      "Davido"
+    ],
+    "tracks": [
+      "Ojuelegba"
+    ]
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "afrobeats-afropop-guitar-groove"
+  },
+  "performance": {
+    "noteCount": 2542,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-afrobeats-afropop-guitar-groove-signature",
+      "afro-highlife-guitar",
+      "tech-afrobeats-sparse-sub-bass-anticipation",
+      "afro-log-drum-bass",
+      "afro-shekere-shaker",
+      "afro-interlocking-16ths",
+      "tech-afrobeats-interlocking-guitar-ostinati",
+      "tech-afrobeats-shaker-16ths-with-displaced-accents"
+    ]
+  }
+}

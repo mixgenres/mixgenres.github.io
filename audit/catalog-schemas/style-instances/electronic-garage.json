@@ -1,0 +1,429 @@
+{
+  "schemaVersion": 2,
+  "genre": "electronic",
+  "styleId": "electronic-garage",
+  "styleName": "Garage",
+  "durationSec": 64.47761194029857,
+  "tempoBpm": 134,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C#maj7",
+        "D#m7",
+        "Fm7",
+        "F#maj7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "build-1",
+      "kind": "build",
+      "label": "Build",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C#maj7",
+        "D#m7",
+        "Fm7",
+        "F#maj7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "drop-2",
+      "kind": "drop",
+      "label": "Drop",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "C#maj7",
+        "D#m7",
+        "Fm7",
+        "F#maj7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C#maj7",
+        "D#m7",
+        "Fm7",
+        "F#maj7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "drop-4",
+      "kind": "drop",
+      "label": "Drop",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "C#maj7",
+        "D#m7",
+        "Fm7",
+        "F#maj7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C#maj7",
+        "D#m7",
+        "Fm7",
+        "F#maj7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "elec-offbeat-hats",
+        "elec-footwork",
+        "elec-4onfloor",
+        "elec-techno-rumble"
+      ],
+      "noteCount": 246
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-electronic-filter-envelope-bass"
+      ],
+      "noteCount": 143
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "elec-acid-303"
+      ],
+      "noteCount": 52
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "elec-trance-16ths"
+      ],
+      "noteCount": 52
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "tech-electronic-electro-syncopated-kick",
+        "zouk-bridge-16",
+        "reggaeton--rg-09-reggaeton-piano-stab",
+        "brazilian--sb-15-bossa-ending-turn"
+      ],
+      "noteCount": 544
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "bass-lead",
+      "role": "bass",
+      "patternIds": [
+        "tech-electronic-filter-envelope-bass",
+        "elec-techno-rumble",
+        "elec-acid-303"
+      ],
+      "noteCount": 134
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "elec-acid-303"
+      ],
+      "noteCount": 52
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "saw-lead",
+      "role": "lead",
+      "patternIds": [
+        "elec-acid-303"
+      ],
+      "noteCount": 95
+    }
+  ],
+  "patterns": [
+    {
+      "id": "elec-offbeat-hats",
+      "name": "Offbeat Hats",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "elec-footwork",
+      "name": "Chicago Footwork/Juke",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        7,
+        9,
+        12,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "elec-4onfloor",
+      "name": "Four on the Floor",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "elec-techno-rumble",
+      "name": "Techno Rumble",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-electronic-filter-envelope-bass",
+      "name": "filter-envelope bass",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "filter-envelope bass"
+      ]
+    },
+    {
+      "id": "elec-acid-303",
+      "name": "Acid House 303 Bassline",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        10,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "elec-trance-16ths",
+      "name": "Trance Bass 16ths",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-electronic-electro-syncopated-kick",
+      "name": "electro syncopated kick",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "electro syncopated kick"
+      ]
+    },
+    {
+      "id": "zouk-bridge-16",
+      "name": "Chawa Bridge",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-09-reggaeton-piano-stab",
+      "name": "Reggaetón piano offbeat stab",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "brazilian--sb-15-bossa-ending-turn",
+      "name": "Bossa ending cadence",
+      "worldId": "brazilian",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        5,
+        9,
+        13
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "bass",
+      "synth",
+      "sampler",
+      "piano"
+    ],
+    "techniques": [],
+    "signatureCell": "Skippy 2-step kick syncopation with snappy pitched vocal slice and deep Reese bass",
+    "tempoRange": [
+      130,
+      138
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "swung",
+    "swingPercentage": 58,
+    "anticipationOffsetSteps": 1
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "electronic-garage"
+  },
+  "performance": {
+    "noteCount": 1318,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "elec-offbeat-hats",
+      "elec-footwork",
+      "elec-4onfloor",
+      "elec-techno-rumble",
+      "tech-electronic-filter-envelope-bass",
+      "elec-acid-303",
+      "elec-trance-16ths",
+      "afro-amapiano-pad",
+      "tech-electronic-electro-syncopated-kick",
+      "zouk-bridge-16",
+      "reggaeton--rg-09-reggaeton-piano-stab",
+      "brazilian--sb-15-bossa-ending-turn"
+    ]
+  }
+}

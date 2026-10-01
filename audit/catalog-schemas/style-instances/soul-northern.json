@@ -1,0 +1,345 @@
+{
+  "schemaVersion": 2,
+  "genre": "soul",
+  "styleId": "soul-northern",
+  "styleName": "Northern Soul",
+  "durationSec": 79.44827586206902,
+  "tempoBpm": 145,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "G#",
+        "A#",
+        "D#",
+        "Cm"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "instrumental-4",
+      "kind": "instrumental",
+      "label": "Instrumental",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-soul-gospel-vocal-run"
+      ],
+      "noteCount": 69
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-soul-melodic-bass"
+      ],
+      "noteCount": 204
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-soul-soul-backbeat"
+      ],
+      "noteCount": 189
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-soul-vocal-harmony-stack"
+      ],
+      "noteCount": 585
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "soul-horn-response",
+        "soul-motown-bass"
+      ],
+      "noteCount": 280
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "soul-backbeat-tambourine",
+        "soul-motown-bass"
+      ],
+      "noteCount": 690
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "soul-motown-bass",
+        "soul-horn-response",
+        "soul-backbeat-tambourine"
+      ],
+      "noteCount": 432
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "horn-section",
+      "role": "harmony",
+      "patternIds": [
+        "soul-horn-response",
+        "tech-soul-string-swell"
+      ],
+      "noteCount": 492
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-soul-gospel-vocal-run",
+      "name": "gospel vocal run",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "gospel vocal run"
+      ]
+    },
+    {
+      "id": "tech-soul-melodic-bass",
+      "name": "melodic bass",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "melodic bass"
+      ]
+    },
+    {
+      "id": "tech-soul-soul-backbeat",
+      "name": "backbeat",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "soul backbeat"
+      ]
+    },
+    {
+      "id": "tech-soul-vocal-harmony-stack",
+      "name": "vocal harmony stack",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal harmony stack"
+      ]
+    },
+    {
+      "id": "soul-horn-response",
+      "name": "Horn Response",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        6,
+        7,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "soul-motown-bass",
+      "name": "Motown Bass",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        11,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "soul-backbeat-tambourine",
+      "name": "Backbeat Tambourine",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-soul-string-swell",
+      "name": "string swell",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "string swell"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "voice",
+      "bass",
+      "drums",
+      "piano",
+      "brass"
+    ],
+    "techniques": [],
+    "signatureCell": "Urgent vocal pickup answered by a tight horn stab over a fast backbeat",
+    "tempoRange": [
+      125,
+      165
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 1
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "soul-northern"
+  },
+  "performance": {
+    "noteCount": 2941,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-soul-gospel-vocal-run",
+      "tech-soul-melodic-bass",
+      "tech-soul-soul-backbeat",
+      "tech-soul-vocal-harmony-stack",
+      "soul-horn-response",
+      "soul-motown-bass",
+      "soul-backbeat-tambourine",
+      "tech-soul-string-swell"
+    ]
+  }
+}

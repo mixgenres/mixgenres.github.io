@@ -1,0 +1,534 @@
+{
+  "schemaVersion": 2,
+  "genre": "cumbia",
+  "styleId": "cumbia-cumbia-peruana",
+  "styleName": "Cumbia Peruana",
+  "durationSec": 91.42857142857147,
+  "tempoBpm": 105,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "G",
+        "F",
+        "E7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-cumbia-electric-guitar-cumbia-riff",
+        "cu-09-cumbia-guitar-offbeat"
+      ],
+      "noteCount": 524
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "style-cumbia-cumbia-peruana-signature",
+        "cu-cumbia-bass",
+        "cu-06-cumbia-bass-tumbao",
+        "tech-cumbia-digital-cumbia-sub-bass"
+      ],
+      "noteCount": 225
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-cumbia-cumbia-peruana-signature"
+      ],
+      "noteCount": 161
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "patternIds": [
+        "style-cumbia-cumbia-peruana-signature"
+      ],
+      "noteCount": 160
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-cumbia-cumbia-turnaround",
+        "tech-cumbia-electric-guitar-cumbia-riff",
+        "tech-cumbia-digital-cumbia-sub-bass",
+        "house--ht-10-detroit-sequence",
+        "reggaeton--rg-11-dembow-vocal-pickup"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-cumbia-cumbia-bass-ostinato",
+        "tech-cumbia-electric-guitar-cumbia-riff",
+        "tech-cumbia-digital-cumbia-sub-bass",
+        "tech-cumbia-cumbia-turnaround"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "guacharaca",
+      "role": "percussion",
+      "patternIds": [
+        "style-cumbia-traditional-coastal-cumbia-signature",
+        "cu-guacharaca",
+        "cu-08-guacharaca-scrape",
+        "cu-14-cumbia-stop-break"
+      ],
+      "noteCount": 337
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "tambora",
+      "role": "percussion",
+      "patternIds": [
+        "jazz-ride-spangalang",
+        "style-cumbia-traditional-coastal-cumbia-signature",
+        "flamenco-bulerias-palmas",
+        "tech-cumbia-digital-cumbia-sub-bass",
+        "timba-bata-fusion"
+      ],
+      "noteCount": 171
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-cumbia-electric-guitar-cumbia-riff",
+      "name": "electric-guitar cumbia riff",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "electric-guitar cumbia riff"
+      ]
+    },
+    {
+      "id": "cu-09-cumbia-guitar-offbeat",
+      "name": "guitar anticipations",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        5,
+        9,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-cumbia-cumbia-peruana-signature",
+      "name": "Peruana",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "cumbia bass ostinato",
+        "electric-guitar cumbia riff",
+        "digital cumbia sub-bass",
+        "cumbia turnaround"
+      ]
+    },
+    {
+      "id": "cu-cumbia-bass",
+      "name": "bass anticipation",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-06-cumbia-bass-tumbao",
+      "name": "tumbao bass",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-cumbia-digital-cumbia-sub-bass",
+      "name": "digital cumbia sub-bass",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "digital cumbia sub-bass"
+      ]
+    },
+    {
+      "id": "tech-cumbia-cumbia-turnaround",
+      "name": "turnaround",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "cumbia turnaround"
+      ]
+    },
+    {
+      "id": "house--ht-10-detroit-sequence",
+      "name": "Detroit Sequence",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        16,
+        19,
+        22,
+        25,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggaeton--rg-11-dembow-vocal-pickup",
+      "name": "Dembow Vocal Pickup",
+      "worldId": "reggaeton",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-cumbia-cumbia-bass-ostinato",
+      "name": "bass ostinato",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "cumbia bass ostinato"
+      ]
+    },
+    {
+      "id": "style-cumbia-traditional-coastal-cumbia-signature",
+      "name": "Traditional Coastal Cumbia",
+      "worldId": "cumbia",
+      "meter": "2/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "alegre improvisation",
+        "guacharaca scrape",
+        "llamador pulse",
+        "tambora pattern",
+        "cumbia bass ostinato",
+        "cumbia turnaround"
+      ]
+    },
+    {
+      "id": "cu-guacharaca",
+      "name": "Guacharaca scraper pulse",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        3,
+        4,
+        6,
+        7,
+        9,
+        10,
+        12,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-08-guacharaca-scrape",
+      "name": "Guacharaca reverse accent cycle",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-14-cumbia-stop-break",
+      "name": "Stop Break",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-ride-spangalang",
+      "name": "Ride Cymbal",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flamenco-bulerias-palmas",
+      "name": "Bulerias Palmas",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        10
+      ],
+      "techniques": []
+    },
+    {
+      "id": "timba-bata-fusion",
+      "name": "Bata Fusion",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        10,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "hand-percussion",
+      "synth",
+      "voice"
+    ],
+    "techniques": [
+      "cumbia bass ostinato",
+      "electric-guitar cumbia riff",
+      "digital cumbia sub-bass",
+      "cumbia turnaround"
+    ],
+    "signatureCell": "Electric guitar ostinato over cumbia bass",
+    "tempoRange": [
+      90,
+      120
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Los Mirlos"
+    ],
+    "tracks": [
+      "La Danza del Petrolero"
+    ]
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "cumbia-cumbia-peruana"
+  },
+  "performance": {
+    "noteCount": 1706,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-cumbia-electric-guitar-cumbia-riff",
+      "cu-09-cumbia-guitar-offbeat",
+      "style-cumbia-cumbia-peruana-signature",
+      "cu-cumbia-bass",
+      "cu-06-cumbia-bass-tumbao",
+      "tech-cumbia-digital-cumbia-sub-bass",
+      "tech-cumbia-cumbia-turnaround",
+      "house--ht-10-detroit-sequence",
+      "reggaeton--rg-11-dembow-vocal-pickup",
+      "tech-cumbia-cumbia-bass-ostinato",
+      "style-cumbia-traditional-coastal-cumbia-signature",
+      "cu-guacharaca",
+      "cu-08-guacharaca-scrape",
+      "cu-14-cumbia-stop-break",
+      "jazz-ride-spangalang",
+      "flamenco-bulerias-palmas",
+      "timba-bata-fusion"
+    ]
+  }
+}

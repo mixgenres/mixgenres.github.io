@@ -1,0 +1,365 @@
+{
+  "schemaVersion": 2,
+  "genre": "reggae",
+  "styleId": "reggae-lovers-rock",
+  "styleName": "Lovers Rock",
+  "durationSec": 109.367088607595,
+  "tempoBpm": 79,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Cmaj7",
+        "Am7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Cmaj7",
+        "Am7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Fmaj7",
+        "Em7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "dub-break-3",
+      "kind": "dub break",
+      "label": "Dub Break",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Cmaj7",
+        "Am7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Cmaj7",
+        "Am7",
+        "Dm7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Cmaj7",
+        "Am7",
+        "Dm7",
+        "G7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-reggae-guitar-skank"
+      ],
+      "noteCount": 640
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-reggae-reggae-bassline",
+        "reggae--rd-reggae-bass",
+        "reggae--rd-08-reggae-bass-lead",
+        "reggae--reggae-one-drop"
+      ],
+      "noteCount": 112
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "reggae--rd-one-drop"
+      ],
+      "noteCount": 165
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--reggae-melodic-bass",
+        "reggae--reggae-one-drop"
+      ],
+      "noteCount": 618
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "strings",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--reggae-one-drop",
+        "reggae--reggae-melodic-bass",
+        "tech-reggae-toast-vocal-deejay"
+      ],
+      "noteCount": 56
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-reggae-toast-vocal-deejay"
+      ],
+      "noteCount": 44
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "reggae--rd-reggae-bass",
+        "tech-reggae-reggae-bassline",
+        "reggae--rd-08-reggae-bass-lead"
+      ],
+      "noteCount": 118
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--reggae-one-drop",
+        "reggae--rd-09-bubble-organ",
+        "reggae--reggae-melodic-bass"
+      ],
+      "noteCount": 496
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-reggae-guitar-skank",
+      "name": "guitar skank",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": [
+        "guitar skank"
+      ]
+    },
+    {
+      "id": "tech-reggae-reggae-bassline",
+      "name": "bassline",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "reggae bassline"
+      ]
+    },
+    {
+      "id": "reggae--rd-reggae-bass",
+      "name": "Melodic Reggae Bass",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-08-reggae-bass-lead",
+      "name": "Bass Lead",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        6,
+        9,
+        14,
+        16,
+        22,
+        25,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--reggae-one-drop",
+      "name": "One-Drop",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-one-drop",
+      "name": "One-Drop Foundation",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--reggae-melodic-bass",
+      "name": "Melodic Reggae Bass",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-reggae-toast-vocal-deejay",
+      "name": "toast/vocal deejay",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "toast/vocal deejay"
+      ]
+    },
+    {
+      "id": "reggae--rd-09-bubble-organ",
+      "name": "Bubble Organ",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "piano",
+      "strings"
+    ],
+    "techniques": [],
+    "signatureCell": "Silky sweet vocal harmony floating over gentle one-drop reggae beat and melodic bass",
+    "tempoRange": [
+      72,
+      86
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 56,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "reggae-lovers-rock"
+  },
+  "performance": {
+    "noteCount": 2249,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-reggae-guitar-skank",
+      "tech-reggae-reggae-bassline",
+      "reggae--rd-reggae-bass",
+      "reggae--rd-08-reggae-bass-lead",
+      "reggae--reggae-one-drop",
+      "reggae--rd-one-drop",
+      "reggae--reggae-melodic-bass",
+      "tech-reggae-toast-vocal-deejay",
+      "reggae--rd-09-bubble-organ"
+    ]
+  }
+}

@@ -1,0 +1,431 @@
+{
+  "schemaVersion": 2,
+  "genre": "blues",
+  "styleId": "blues-swamp",
+  "styleName": "Swamp Blues",
+  "durationSec": 99.31034482758626,
+  "tempoBpm": 87,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "12-bar-head-0",
+      "kind": "12-bar head",
+      "label": "12-Bar Head",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "E",
+        "E",
+        "E",
+        "E"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "harmonica-guitar-answer-1",
+      "kind": "harmonica/guitar answer",
+      "label": "Harmonica/Guitar Answer",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "E",
+        "E",
+        "E",
+        "E"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "solo-2",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "E",
+        "E",
+        "E",
+        "E"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "turnaround-3",
+      "kind": "turnaround",
+      "label": "Turnaround",
+      "bars": 4,
+      "intensity": "medium",
+      "chords": [
+        "E",
+        "E",
+        "E",
+        "E"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "blues-texas-shuffle"
+      ],
+      "noteCount": 706
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "harmonica",
+      "role": "melody",
+      "patternIds": [
+        "tech-blues-shuffle-triplet-pocket",
+        "tech-blues-stop-time-blues",
+        "tech-blues-boogie-bass"
+      ],
+      "noteCount": 81
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-blues-walking-blues-bass",
+        "tech-blues-boogie-bass"
+      ],
+      "noteCount": 231
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "blues-shuffle",
+        "blues-slow-12-8"
+      ],
+      "noteCount": 173
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "blues-turnaround",
+        "zouk-guitar-skank-chawa"
+      ],
+      "noteCount": 678
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-blues-call-and-response-guitar-vocal"
+      ],
+      "noteCount": 52
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "blues-organ-swell",
+        "tech-blues-boogie-bass",
+        "tech-blues-stop-time-blues",
+        "tango-piano-chumba"
+      ],
+      "noteCount": 354
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "trumpet",
+      "role": "lead",
+      "patternIds": [
+        "tech-blues-stop-time-blues",
+        "tech-blues-shuffle-triplet-pocket",
+        "tango-fraseo-bandoneon",
+        "afro-mambo-horn-hits"
+      ],
+      "noteCount": 115
+    }
+  ],
+  "patterns": [
+    {
+      "id": "blues-texas-shuffle",
+      "name": "Texas Shuffle",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        5,
+        6,
+        8,
+        9,
+        11
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-blues-shuffle-triplet-pocket",
+      "name": "shuffle triplet pocket",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "shuffle triplet pocket"
+      ]
+    },
+    {
+      "id": "tech-blues-stop-time-blues",
+      "name": "stop-time blues",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "stop-time blues"
+      ]
+    },
+    {
+      "id": "tech-blues-boogie-bass",
+      "name": "boogie bass",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "boogie bass"
+      ]
+    },
+    {
+      "id": "tech-blues-walking-blues-bass",
+      "name": "walking-blues bass",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "walking-blues bass"
+      ]
+    },
+    {
+      "id": "blues-shuffle",
+      "name": "Chicago Shuffle",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        11
+      ],
+      "techniques": []
+    },
+    {
+      "id": "blues-slow-12-8",
+      "name": "Slow 12/8 Groove",
+      "worldId": "blues",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9
+      ],
+      "techniques": []
+    },
+    {
+      "id": "blues-turnaround",
+      "name": "12-Bar Turnaround",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-guitar-skank-chawa",
+      "name": "Chawa Guitar Skank",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-blues-call-and-response-guitar-vocal",
+      "name": "call-and-response guitar/vocal",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "call-and-response guitar/vocal"
+      ]
+    },
+    {
+      "id": "blues-organ-swell",
+      "name": "Organ Swell",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 4,
+      "onsetGrid": [
+        0,
+        2
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-piano-chumba",
+      "name": "Piano Chumba",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        4,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-fraseo-bandoneon",
+      "name": "Fraseo y Rubato",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        14,
+        16,
+        20,
+        24,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-mambo-horn-hits",
+      "name": "Mambo Section Horn Stabs & Punctuation",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        6,
+        12,
+        14,
+        22,
+        28,
+        30
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "harmonica",
+      "bass",
+      "drums",
+      "piano"
+    ],
+    "techniques": [],
+    "signatureCell": "Tremolo-pulsing electric guitar chord over slow relaxed swamp groove",
+    "tempoRange": [
+      78,
+      96
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 62,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "blues-swamp"
+  },
+  "performance": {
+    "noteCount": 2390,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "blues-texas-shuffle",
+      "tech-blues-shuffle-triplet-pocket",
+      "tech-blues-stop-time-blues",
+      "tech-blues-boogie-bass",
+      "tech-blues-walking-blues-bass",
+      "blues-shuffle",
+      "blues-slow-12-8",
+      "blues-turnaround",
+      "zouk-guitar-skank-chawa",
+      "tech-blues-call-and-response-guitar-vocal",
+      "blues-organ-swell",
+      "tango-piano-chumba",
+      "tango-fraseo-bandoneon",
+      "afro-mambo-horn-hits"
+    ]
+  }
+}

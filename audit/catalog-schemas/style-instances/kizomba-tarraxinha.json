@@ -1,0 +1,404 @@
+{
+  "schemaVersion": 2,
+  "genre": "kizomba",
+  "styleId": "kizomba-tarraxinha",
+  "styleName": "Tarraxinha",
+  "durationSec": 141.81818181818193,
+  "tempoBpm": 88,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Dm9",
+        "Gm7",
+        "A7",
+        "Dm9"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "groove-1",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "A#maj7",
+        "Gm7",
+        "A7",
+        "Dm9"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "verse-2",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm9",
+        "Gm7",
+        "A7",
+        "Dm9"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "break-3",
+      "kind": "break",
+      "label": "Break",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A#maj7",
+        "Gm7",
+        "A7",
+        "Dm9"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "groove-4",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "Dm9",
+        "Gm7",
+        "A7",
+        "Dm9"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A#maj7",
+        "Gm7",
+        "A7",
+        "Dm9"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "kizomba-tarraxinha-sub",
+        "kizomba-vocal-comping",
+        "style-kizomba-minimal-tarraxinha-signature"
+      ],
+      "noteCount": 132
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-chorus-15",
+        "kizomba-kick-batida",
+        "kizomba-batida-groove"
+      ],
+      "noteCount": 294
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "kizomba-vocal-comping",
+        "kizomba-tarraxinha-sub"
+      ],
+      "noteCount": 51
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "kizomba-vocal-comping",
+        "style-kizomba-minimal-tarraxinha-signature"
+      ],
+      "noteCount": 52
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "style-kizomba-minimal-tarraxinha-signature",
+        "kizomba-vocal-comping",
+        "kizomba-chorus-15",
+        "kizomba-tarraxinha-sub"
+      ],
+      "noteCount": 160
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-kizomba-vocal-space-arrangement"
+      ],
+      "noteCount": 52
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "dikanza",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-batida-groove",
+        "kizomba-chorus-15"
+      ],
+      "noteCount": 258
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "rhodes",
+      "role": "harmony",
+      "patternIds": [
+        "tango-arrastre",
+        "tech-kizomba-tarraxinha-bass-pulse",
+        "kizomba-chorus-15",
+        "kizomba-bridge-16",
+        "brazilian--sb-15-bossa-ending-turn"
+      ],
+      "noteCount": 590
+    }
+  ],
+  "patterns": [
+    {
+      "id": "kizomba-tarraxinha-sub",
+      "name": "Tarraxinha Sub-Bass",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-vocal-comping",
+      "name": "Vocal Phrase Response",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        7,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-kizomba-minimal-tarraxinha-signature",
+      "name": "Minimal Tarraxinha",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "tarraxinha bass pulse",
+        "vocal-space arrangement",
+        "ghetto-zouk sub-bass",
+        "kizomba bass ostinato",
+        "sparse percussion"
+      ]
+    },
+    {
+      "id": "kizomba-chorus-15",
+      "name": "Bass Chorus Lift",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        9,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-kick-batida",
+      "name": "Kick Batida",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-batida-groove",
+      "name": "Batida & Sub-Kick Beat",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-kizomba-vocal-space-arrangement",
+      "name": "vocal-space arrangement",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal-space arrangement"
+      ]
+    },
+    {
+      "id": "tango-arrastre",
+      "name": "Arrastre",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        13,
+        14,
+        15,
+        0
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-kizomba-tarraxinha-bass-pulse",
+      "name": "tarraxinha bass pulse",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "tarraxinha bass pulse"
+      ]
+    },
+    {
+      "id": "kizomba-bridge-16",
+      "name": "Semba Bridge",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        10,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "brazilian--sb-15-bossa-ending-turn",
+      "name": "Bossa ending cadence",
+      "worldId": "brazilian",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        5,
+        9,
+        13
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "sub-bass",
+      "drums",
+      "synth",
+      "sampler",
+      "warm-pad"
+    ],
+    "techniques": [],
+    "signatureCell": "minimal drums, deep sub and tiny syncopated accents leaving maximum space",
+    "tempoRange": [
+      82,
+      94
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 55,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "kizomba-tarraxinha"
+  },
+  "performance": {
+    "noteCount": 1589,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "kizomba-tarraxinha-sub",
+      "kizomba-vocal-comping",
+      "style-kizomba-minimal-tarraxinha-signature",
+      "kizomba-chorus-15",
+      "kizomba-kick-batida",
+      "kizomba-batida-groove",
+      "tech-kizomba-vocal-space-arrangement",
+      "tango-arrastre",
+      "tech-kizomba-tarraxinha-bass-pulse",
+      "kizomba-bridge-16",
+      "brazilian--sb-15-bossa-ending-turn"
+    ]
+  }
+}

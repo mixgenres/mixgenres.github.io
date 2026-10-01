@@ -1,0 +1,336 @@
+{
+  "schemaVersion": 1,
+  "id": "swing-starter",
+  "genreId": "swing",
+  "genreName": "Swing",
+  "styleId": "swing-big-band-swing",
+  "styleName": "Big Band Swing",
+  "styleDescription": "Four-on-the-Floor • Horn Riffs • Lindy",
+  "bpm": 163,
+  "meter": "4/4",
+  "regions": [
+    {
+      "id": "r0",
+      "name": "Head",
+      "type": "head",
+      "genreId": "swing",
+      "styleId": "swing-big-band-swing",
+      "chords": [
+        "A#",
+        "G7",
+        "Cm7",
+        "F7"
+      ]
+    },
+    {
+      "id": "r1",
+      "name": "Ensemble Riff",
+      "type": "ensemble riff",
+      "genreId": "swing",
+      "styleId": "swing-big-band-swing",
+      "chords": [
+        "A#",
+        "D#7",
+        "A#",
+        "A#7"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "Shout Chorus",
+      "type": "shout chorus",
+      "genreId": "swing",
+      "styleId": "swing-big-band-swing",
+      "chords": [
+        "Cm7",
+        "F7",
+        "A#",
+        "A#"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "Solo",
+      "type": "solo",
+      "genreId": "swing",
+      "styleId": "swing-big-band-swing",
+      "chords": [
+        "A#",
+        "G7",
+        "Cm7",
+        "F7"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Head",
+      "type": "head",
+      "genreId": "swing",
+      "styleId": "swing-big-band-swing",
+      "chords": [
+        "A#",
+        "D#7",
+        "A#",
+        "A#7"
+      ]
+    },
+    {
+      "id": "r5",
+      "name": "Tag",
+      "type": "tag",
+      "genreId": "swing",
+      "styleId": "swing-big-band-swing",
+      "chords": [
+        "Cm7",
+        "F7",
+        "A#",
+        "A#"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "v0",
+      "instrumentId": "brass",
+      "instrumentName": "Brass section",
+      "role": "harmony",
+      "patternIds": [
+        "swing-chorus-16"
+      ],
+      "noteCount": 869,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "6655": 13,
+        "8118": 13,
+        "8526": 13,
+        "12241": 676,
+        "50696": 154
+      }
+    },
+    {
+      "id": "v1",
+      "instrumentId": "clarinet",
+      "instrumentName": "Clarinet",
+      "role": "lead",
+      "patternIds": [
+        "tech-swing-big-band-riff"
+      ],
+      "noteCount": 195,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 153,
+        "6655": 12,
+        "8118": 12,
+        "29346": 3,
+        "48234": 15
+      }
+    },
+    {
+      "id": "v2",
+      "instrumentId": "piano",
+      "instrumentName": "Acoustic Grand Piano",
+      "role": "harmony",
+      "patternIds": [
+        "swing-charleston"
+      ],
+      "noteCount": 349,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "marcato",
+        "arrastre",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 74,
+        "6655": 33,
+        "8118": 147,
+        "8526": 13,
+        "19949": 10,
+        "21063": 72
+      }
+    },
+    {
+      "id": "v3",
+      "instrumentId": "upright-bass",
+      "instrumentName": "Upright Double Bass",
+      "role": "bass",
+      "patternIds": [
+        "swing-walking-bass",
+        "swing-2-feel"
+      ],
+      "noteCount": 140,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "arrastre",
+        "pizzicato",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 8,
+        "6655": 35,
+        "12200": 97
+      }
+    },
+    {
+      "id": "v4",
+      "instrumentId": "drums",
+      "instrumentName": "Standard Drum Kit",
+      "role": "percussion",
+      "patternIds": [
+        "swing-shuffle",
+        "swing-shout-chorus"
+      ],
+      "noteCount": 411,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "choke",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4337": 13,
+        "9363": 13,
+        "12200": 385
+      }
+    },
+    {
+      "id": "v5",
+      "instrumentId": "tenor-sax",
+      "instrumentName": "Bb Tenor Saxophone",
+      "role": "melody",
+      "patternIds": [
+        "swing-shout-chorus",
+        "swing-2-feel",
+        "flamenco-bridge-17",
+        "style-swing-kansas-city-swing-signature"
+      ],
+      "noteCount": 120,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "1465": 2,
+        "4607": 23,
+        "6655": 12,
+        "8118": 9,
+        "29346": 74
+      }
+    },
+    {
+      "id": "v6",
+      "instrumentId": "jazz-guitar",
+      "instrumentName": "Jazz guitar",
+      "role": "harmony",
+      "patternIds": [
+        "zouk-guitar-skank-chawa",
+        "tango-marcato-4",
+        "bachata-chorus-16",
+        "tango-332-piazzolla",
+        "brazilian--sb-15-bossa-ending-turn"
+      ],
+      "noteCount": 801,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 75,
+        "6655": 13,
+        "9742": 13,
+        "12200": 91,
+        "44655": 609
+      }
+    },
+    {
+      "id": "v7",
+      "instrumentId": "trumpet",
+      "instrumentName": "Bb Trumpet",
+      "role": "lead",
+      "patternIds": [
+        "swing-ensemble",
+        "swing-shout-chorus"
+      ],
+      "noteCount": 82,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "vibrato",
+        "mute"
+      ],
+      "gestureCounts": {
+        "6655": 12,
+        "12241": 20,
+        "50141": 35,
+        "50696": 15
+      }
+    }
+  ],
+  "usedPatternIds": [
+    "swing-chorus-16",
+    "tech-swing-big-band-riff",
+    "swing-charleston",
+    "swing-walking-bass",
+    "swing-2-feel",
+    "swing-shuffle",
+    "swing-shout-chorus",
+    "flamenco-bridge-17",
+    "style-swing-kansas-city-swing-signature",
+    "zouk-guitar-skank-chawa",
+    "tango-marcato-4",
+    "bachata-chorus-16",
+    "tango-332-piazzolla",
+    "brazilian--sb-15-bossa-ending-turn",
+    "swing-ensemble"
+  ],
+  "performance": {
+    "durationSeconds": 76.56441717791407,
+    "noteCount": 2967,
+    "trackCount": 8,
+    "tracksWithNoNotes": []
+  }
+}

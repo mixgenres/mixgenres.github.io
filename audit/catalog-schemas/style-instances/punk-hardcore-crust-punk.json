@@ -1,0 +1,391 @@
+{
+  "schemaVersion": 2,
+  "genre": "punk-hardcore",
+  "styleId": "punk-hardcore-crust-punk",
+  "styleName": "Crust Punk",
+  "durationSec": 49.37142857142859,
+  "tempoBpm": 175,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F#5",
+        "E5",
+        "D5",
+        "E5"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "F#5",
+        "E5",
+        "D5",
+        "E5"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "E5",
+        "G5",
+        "A5",
+        "E5"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "break-3",
+      "kind": "break",
+      "label": "Break",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F#5",
+        "E5",
+        "D5",
+        "E5"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "chorus-4",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "E5",
+        "G5",
+        "A5",
+        "E5"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "ending-5",
+      "kind": "ending",
+      "label": "Ending",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F#5",
+        "E5",
+        "D5",
+        "E5"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "distortion-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "punk-d-beat",
+        "punk-bass-unison",
+        "punk-half-time-breakdown"
+      ],
+      "noteCount": 270
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "punk-downpick-eighths",
+        "punk-bass-unison"
+      ],
+      "noteCount": 240
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-punk-hardcore-d-beat",
+        "punk-half-time-breakdown",
+        "tech-punk-hardcore-stop-start-punk"
+      ],
+      "noteCount": 137
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "punk-bass-unison",
+        "punk-downpick-eighths",
+        "punk-d-beat"
+      ],
+      "noteCount": 52
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "overdrive-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "punk-half-time-breakdown",
+        "punk-downpick-eighths"
+      ],
+      "noteCount": 248
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "punk-half-time-breakdown",
+        "tech-punk-hardcore-power-chord-eighths",
+        "punk-bass-unison",
+        "tango-332-piazzolla",
+        "punk-downpick-eighths"
+      ],
+      "noteCount": 348
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "punk-downpick-eighths",
+        "zouk-guitar-skank-chawa",
+        "jazz-piano-red-garland",
+        "tech-punk-hardcore-power-chord-eighths",
+        "punk-half-time-breakdown"
+      ],
+      "noteCount": 258
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "backing-vocals",
+      "role": "voice",
+      "patternIds": [
+        "punk-half-time-breakdown",
+        "punk-bass-unison",
+        "punk-d-beat",
+        "tech-punk-hardcore-power-chord-eighths"
+      ],
+      "noteCount": 100
+    }
+  ],
+  "patterns": [
+    {
+      "id": "punk-d-beat",
+      "name": "D-Beat",
+      "worldId": "punk-hardcore",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        8,
+        11,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "punk-bass-unison",
+      "name": "Bass Unison",
+      "worldId": "punk-hardcore",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "punk-half-time-breakdown",
+      "name": "Hardcore Half-Time Breakdown",
+      "worldId": "punk-hardcore",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "punk-downpick-eighths",
+      "name": "Downpick Eighths",
+      "worldId": "punk-hardcore",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-punk-hardcore-d-beat",
+      "name": "d-beat",
+      "worldId": "punk-hardcore",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "d-beat"
+      ]
+    },
+    {
+      "id": "tech-punk-hardcore-stop-start-punk",
+      "name": "stop-start punk",
+      "worldId": "punk-hardcore",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "stop-start punk"
+      ]
+    },
+    {
+      "id": "tech-punk-hardcore-power-chord-eighths",
+      "name": "power-chord eighths",
+      "worldId": "punk-hardcore",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "power-chord eighths"
+      ]
+    },
+    {
+      "id": "tango-332-piazzolla",
+      "name": "3+3+2 Nuevo Tango Pulse",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-guitar-skank-chawa",
+      "name": "Chawa Guitar Skank",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-red-garland",
+      "name": "Block Chords",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        3,
+        5
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "distortion-guitar",
+      "bass",
+      "drums",
+      "voice",
+      "overdrive-guitar"
+    ],
+    "techniques": [],
+    "signatureCell": "Driving D-beat that drops into a heavy half-time riff",
+    "tempoRange": [
+      130,
+      220
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "punk-hardcore-crust-punk"
+  },
+  "performance": {
+    "noteCount": 1653,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "punk-d-beat",
+      "punk-bass-unison",
+      "punk-half-time-breakdown",
+      "punk-downpick-eighths",
+      "tech-punk-hardcore-d-beat",
+      "tech-punk-hardcore-stop-start-punk",
+      "tech-punk-hardcore-power-chord-eighths",
+      "tango-332-piazzolla",
+      "zouk-guitar-skank-chawa",
+      "jazz-piano-red-garland"
+    ]
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "id": "house",
+  "name": "House",
+  "family": "Electronic dance music",
+  "description": "House and techno share a club-oriented",
+  "substyles": [
+    "Peak Time",
+    "Minimal",
+    "Dub Techno",
+    "Detroit Techno",
+    "Acid Techno",
+    "Hard Techno",
+    "Melodic Techno",
+    "EBM"
+  ],
+  "styleIds": [
+    "house-peak-time",
+    "house-minimal",
+    "house-dub-techno",
+    "house-detroit-techno",
+    "house-acid-techno",
+    "house-hard-techno",
+    "house-melodic-techno",
+    "house-ebm",
+    "house-chicago-house",
+    "house-deep-house",
+    "house-acid-house",
+    "house-minimal-techno"
+  ],
+  "patternIds": [
+    "house--ht-four-floor",
+    "house--ht-offbeat-hat",
+    "house--ht-house-bass",
+    "house--ht-techno-sequence",
+    "house--ht-acid-303",
+    "house--ht-06-four-on-the-floor-kick",
+    "house--ht-07-offbeat-hat",
+    "house--ht-08-house-bass-lock",
+    "house--ht-09-house-chord-stab",
+    "house--ht-10-detroit-sequence",
+    "house--ht-11-acid-303-accent",
+    "house--ht-12-techno-clap-backbeat",
+    "house--ht-13-riser-build",
+    "house--ht-14-club-breakdown",
+    "house--ht-15-drop-re-entry",
+    "house--house-four-floor",
+    "house--house-offbeat-hat",
+    "house--house-piano-stab",
+    "house--house-bass-lock",
+    "tech-house-four-on-floor",
+    "tech-house-offbeat-open-hat",
+    "tech-house-house-clap",
+    "tech-house-piano-house-stab",
+    "tech-house-303-acid-sequence",
+    "tech-house-detroit-synth-sequence",
+    "tech-house-tom-based-techno-groove",
+    "tech-house-minimal-microvariation",
+    "tech-house-filter-automation",
+    "tech-house-8-16-bar-club-phrasing",
+    "style-house-chicago-house-signature",
+    "style-house-deep-house-signature",
+    "style-house-acid-house-signature",
+    "style-house-minimal-techno-signature",
+    "house-four-floor",
+    "house-offbeat-hat",
+    "house-piano-stab",
+    "house-bass-lock"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "house-peak-time",
+      "name": "Peak Time",
+      "keySubstyles": [
+        "Peak Time Driving Techno",
+        "Main Room Techno"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "synth",
+        "sub-bass",
+        "sampler",
+        "noise-sweep"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "house-minimal",
+      "name": "Minimal",
+      "keySubstyles": [
+        "Clicks & Cuts",
+        "Minimal Techno / Microhouse"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "sampler",
+        "synth",
+        "sub-bass",
+        "warm-pad"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "house-dub-techno",
+      "name": "Dub Techno",
+      "keySubstyles": [
+        "Echospace",
+        "Deep Dub Techno"
+      ],
+      "characteristicInstruments": [
+        "synth",
+        "sub-bass",
+        "drums",
+        "tape-echo",
+        "sampler"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "house-detroit-techno",
+      "name": "Detroit Techno",
+      "keySubstyles": [
+        "Belleville Three Sound",
+        "Futuristic Soul"
+      ],
+      "characteristicInstruments": [
+        "synth",
+        "drums",
+        "strings",
+        "bass",
+        "sampler"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "house-acid-techno",
+      "name": "Acid Techno",
+      "keySubstyles": [
+        "Acid House / Acid Techno",
+        "TB-303 Squelch"
+      ],
+      "characteristicInstruments": [
+        "synth",
+        "drums",
+        "sub-bass",
+        "sampler",
+        "acid-303"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "house-hard-techno",
+      "name": "Hard Techno",
+      "keySubstyles": [
+        "Schranz",
+        "Industrial Hard Techno"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "sub-bass",
+        "synth",
+        "sampler",
+        "noise-sweep"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "house-melodic-techno",
+      "name": "Melodic Techno",
+      "keySubstyles": [
+        "Afterlife Sound",
+        "Cinematic Techno"
+      ],
+      "characteristicInstruments": [
+        "synth",
+        "drums",
+        "bass",
+        "strings",
+        "piano"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "house-ebm",
+      "name": "EBM",
+      "keySubstyles": [
+        "Electronic Body Music",
+        "Dark EBM / Techno-EBM"
+      ],
+      "characteristicInstruments": [
+        "synth",
+        "drums",
+        "sub-bass",
+        "sampler",
+        "saw-lead"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "house-chicago-house",
+      "name": "Chicago House",
+      "keySubstyles": [
+        "Chicago House"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "piano",
+        "bass",
+        "synth",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "house-deep-house",
+      "name": "Deep House",
+      "keySubstyles": [
+        "Deep House"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "rhodes",
+        "bass",
+        "synth",
+        "warm-pad"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "house-acid-house",
+      "name": "Acid House",
+      "keySubstyles": [
+        "Acid House"
+      ],
+      "characteristicInstruments": [
+        "acid-303",
+        "drums",
+        "bass-lead"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "house-minimal-techno",
+      "name": "Minimal Techno",
+      "keySubstyles": [
+        "Minimal Techno"
+      ],
+      "characteristicInstruments": [
+        "drums",
+        "synth",
+        "bass-lead",
+        "noise-sweep"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "house-starter"
+}

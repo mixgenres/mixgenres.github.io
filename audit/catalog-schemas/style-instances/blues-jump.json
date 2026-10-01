@@ -1,0 +1,362 @@
+{
+  "schemaVersion": 2,
+  "genre": "blues",
+  "styleId": "blues-jump",
+  "styleName": "Jump Blues",
+  "durationSec": 55.74193548387094,
+  "tempoBpm": 155,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "12-bar-head-0",
+      "kind": "12-bar head",
+      "label": "12-Bar Head",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A#7",
+        "A#7",
+        "A#7",
+        "A#7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "harmonica-guitar-answer-1",
+      "kind": "harmonica/guitar answer",
+      "label": "Harmonica/Guitar Answer",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A#7",
+        "A#7",
+        "A#7",
+        "A#7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "solo-2",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "A#7",
+        "A#7",
+        "A#7",
+        "A#7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "turnaround-3",
+      "kind": "turnaround",
+      "label": "Turnaround",
+      "bars": 4,
+      "intensity": "medium",
+      "chords": [
+        "A#7",
+        "A#7",
+        "A#7",
+        "A#7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "tech-blues-stop-time-blues",
+        "tech-blues-boogie-bass",
+        "tech-blues-walking-blues-bass"
+      ],
+      "noteCount": 159
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "blues-boogie-bass"
+      ],
+      "noteCount": 1116
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-blues-new-orleans-second-line-accents",
+        "blues-turnaround",
+        "afrobeats-bridge-13"
+      ],
+      "noteCount": 748
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "blues-bass-walk"
+      ],
+      "noteCount": 101
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "blues-soul-groove"
+      ],
+      "noteCount": 138
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-blues-walking-blues-bass",
+        "blues-bass-walk"
+      ],
+      "noteCount": 190
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "harmonica",
+      "role": "melody",
+      "patternIds": [
+        "tech-blues-call-and-response-guitar-vocal",
+        "tech-blues-walking-blues-bass",
+        "tech-blues-stop-time-blues"
+      ],
+      "noteCount": 89
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-blues-call-and-response-guitar-vocal"
+      ],
+      "noteCount": 52
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-blues-stop-time-blues",
+      "name": "stop-time blues",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "stop-time blues"
+      ]
+    },
+    {
+      "id": "tech-blues-boogie-bass",
+      "name": "boogie bass",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "boogie bass"
+      ]
+    },
+    {
+      "id": "tech-blues-walking-blues-bass",
+      "name": "walking-blues bass",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "walking-blues bass"
+      ]
+    },
+    {
+      "id": "blues-boogie-bass",
+      "name": "Boogie Root–Fifth Bass",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-blues-new-orleans-second-line-accents",
+      "name": "New Orleans second-line accents",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "New Orleans second-line accents"
+      ]
+    },
+    {
+      "id": "blues-turnaround",
+      "name": "12-Bar Turnaround",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afrobeats-bridge-13",
+      "name": "Hook Bridge",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        7,
+        8,
+        10,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "blues-bass-walk",
+      "name": "Walking Blues Bass",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 4,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "techniques": []
+    },
+    {
+      "id": "blues-soul-groove",
+      "name": "Soul Blues Beat",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-blues-call-and-response-guitar-vocal",
+      "name": "call-and-response guitar/vocal",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "call-and-response guitar/vocal"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "brass",
+      "piano",
+      "electric-guitar",
+      "upright-bass",
+      "drums"
+    ],
+    "techniques": [],
+    "signatureCell": "Punchy horn unison riff over driving boogie-woogie piano and walking bass",
+    "tempoRange": [
+      135,
+      175
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "swung",
+    "swingPercentage": 60,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "blues-jump"
+  },
+  "performance": {
+    "noteCount": 2593,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-blues-stop-time-blues",
+      "tech-blues-boogie-bass",
+      "tech-blues-walking-blues-bass",
+      "blues-boogie-bass",
+      "tech-blues-new-orleans-second-line-accents",
+      "blues-turnaround",
+      "afrobeats-bridge-13",
+      "blues-bass-walk",
+      "blues-soul-groove",
+      "tech-blues-call-and-response-guitar-vocal"
+    ]
+  }
+}

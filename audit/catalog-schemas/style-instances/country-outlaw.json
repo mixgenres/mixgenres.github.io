@@ -1,0 +1,515 @@
+{
+  "schemaVersion": 2,
+  "genre": "country",
+  "styleId": "country-outlaw",
+  "styleName": "Outlaw",
+  "durationSec": 98.46153846153834,
+  "tempoBpm": 117,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A",
+        "D",
+        "E",
+        "A"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A",
+        "A",
+        "D",
+        "A"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "A",
+        "A",
+        "E",
+        "E"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "instrumental-3",
+      "kind": "instrumental",
+      "label": "Instrumental",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "A",
+        "A",
+        "D",
+        "A"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A",
+        "A",
+        "D",
+        "A"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A",
+        "A",
+        "D",
+        "A"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "country-chicken"
+      ],
+      "noteCount": 1029
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-country-carter-style-alternating-bass",
+        "country-chicken",
+        "flamenco-bridge-17"
+      ],
+      "noteCount": 933
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "country-outlaw",
+        "country-waltz"
+      ],
+      "noteCount": 254
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "country-waltz",
+        "country-train"
+      ],
+      "noteCount": 343
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "harmonica",
+      "role": "melody",
+      "patternIds": [
+        "tech-country-boom-chicka-rhythm",
+        "tech-country-train-beat",
+        "tech-country-country-shuffle"
+      ],
+      "noteCount": 180
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-country-country-shuffle",
+        "tech-country-train-beat",
+        "tech-country-boom-chicka-rhythm"
+      ],
+      "noteCount": 72
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "jazz-comping-sync",
+        "tango-332-piazzolla",
+        "tech-country-boom-chicka-rhythm"
+      ],
+      "noteCount": 510
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "mandolin",
+      "role": "lead",
+      "patternIds": [
+        "flam-llamada-12",
+        "country-boom-chuck",
+        "tech-country-country-shuffle",
+        "flam-solea-12beat",
+        "country-pedal-steel-swell",
+        "zouk-bridge-16"
+      ],
+      "noteCount": 160
+    }
+  ],
+  "patterns": [
+    {
+      "id": "country-chicken",
+      "name": "Chicken Pickin",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        11,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-country-carter-style-alternating-bass",
+      "name": "Carter-style alternating bass",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "Carter-style alternating bass"
+      ]
+    },
+    {
+      "id": "flamenco-bridge-17",
+      "name": "Rasgueado Bridge",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        8
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-outlaw",
+      "name": "Outlaw 8ths",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-waltz",
+      "name": "Waltz",
+      "worldId": "country",
+      "meter": "3/4",
+      "subdivisions": 6,
+      "onsetGrid": [
+        0,
+        2,
+        4
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-train",
+      "name": "Train Beat",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-country-boom-chicka-rhythm",
+      "name": "boom-chicka rhythm",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "boom-chicka rhythm"
+      ]
+    },
+    {
+      "id": "tech-country-train-beat",
+      "name": "train beat",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "train beat"
+      ]
+    },
+    {
+      "id": "tech-country-country-shuffle",
+      "name": "shuffle",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "country shuffle"
+      ]
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-comping-sync",
+      "name": "Syncopated Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        1,
+        4,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-332-piazzolla",
+      "name": "3+3+2 Nuevo Tango Pulse",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-llamada-12",
+      "name": "Llamada into Cante",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        9,
+        10,
+        11,
+        0,
+        2
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-boom-chuck",
+      "name": "Boom-Chuck",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-solea-12beat",
+      "name": "Soleá 12-Beat Compás Framework",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        2,
+        5,
+        7,
+        9,
+        11
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-pedal-steel-swell",
+      "name": "Pedal Steel Volume Swell",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-bridge-16",
+      "name": "Chawa Bridge",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        11,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "acoustic-guitar",
+      "bass",
+      "drums",
+      "harmonica"
+    ],
+    "techniques": [],
+    "signatureCell": "Phaser-soaked electric guitar chug locked with driving four-on-the-floor kick",
+    "tempoRange": [
+      105,
+      128
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "country-outlaw"
+  },
+  "performance": {
+    "noteCount": 3481,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "country-chicken",
+      "tech-country-carter-style-alternating-bass",
+      "flamenco-bridge-17",
+      "country-outlaw",
+      "country-waltz",
+      "country-train",
+      "tech-country-boom-chicka-rhythm",
+      "tech-country-train-beat",
+      "tech-country-country-shuffle",
+      "afro-amapiano-pad",
+      "jazz-comping-sync",
+      "tango-332-piazzolla",
+      "flam-llamada-12",
+      "country-boom-chuck",
+      "flam-solea-12beat",
+      "country-pedal-steel-swell",
+      "zouk-bridge-16"
+    ]
+  }
+}

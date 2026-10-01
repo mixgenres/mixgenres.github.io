@@ -1,0 +1,346 @@
+{
+  "schemaVersion": 2,
+  "genre": "afrobeats",
+  "styleId": "afrobeats-palm-wine",
+  "styleName": "Palm-Wine",
+  "durationSec": 92.90322580645157,
+  "tempoBpm": 93,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "G7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "F",
+        "C",
+        "G7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "pre-chorus-2",
+      "kind": "pre-chorus",
+      "label": "Pre-Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "F",
+        "C",
+        "G7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "chorus-3",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "F",
+        "C",
+        "G7",
+        "C"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "break-4",
+      "kind": "break",
+      "label": "Break",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "F",
+        "C",
+        "G7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "F",
+        "C",
+        "G7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "afro-highlife-guitar"
+      ],
+      "noteCount": 696
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "patternIds": [
+        "afro-shekere-shaker",
+        "tech-afrobeats-percussion-dropouts"
+      ],
+      "noteCount": 485
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "afro-interlocking-16ths",
+        "afro-highlife-guitar",
+        "afro-logdrum-call"
+      ],
+      "noteCount": 250
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "afro-logdrum-call",
+        "afro-interlocking-16ths"
+      ],
+      "noteCount": 52
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "afro-shekere-shaker",
+        "afro-logdrum-call",
+        "tech-afrobeats-percussion-dropouts"
+      ],
+      "noteCount": 332
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-afrobeats-call-and-response-vocal-fragments"
+      ],
+      "noteCount": 52
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "afro-logdrum-call",
+        "afro-log-drum-bass",
+        "afro-interlocking-16ths"
+      ],
+      "noteCount": 147
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "log-drum",
+      "role": "percussion",
+      "patternIds": [
+        "afro-shekere-shaker"
+      ],
+      "noteCount": 489
+    }
+  ],
+  "patterns": [
+    {
+      "id": "afro-highlife-guitar",
+      "name": "Highlife Fingerstyle Clean Guitar",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        7,
+        8,
+        11,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-shekere-shaker",
+      "name": "Shekere & Gourd Shaker Engine",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-afrobeats-percussion-dropouts",
+      "name": "percussion dropouts",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "percussion dropouts"
+      ]
+    },
+    {
+      "id": "afro-interlocking-16ths",
+      "name": "Interlocking 16ths",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        8,
+        10,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-logdrum-call",
+      "name": "Log-Drum Call",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-afrobeats-call-and-response-vocal-fragments",
+      "name": "call-and-response vocal fragments",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "call-and-response vocal fragments"
+      ]
+    },
+    {
+      "id": "afro-log-drum-bass",
+      "name": "Pitched Log Drum Bass Groove",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "acoustic-guitar",
+      "hand-percussion",
+      "bass",
+      "synth",
+      "drums"
+    ],
+    "techniques": [],
+    "signatureCell": "Gentle two-finger plucked acoustic guitar arpeggio with knife-on-bottle pulse",
+    "tempoRange": [
+      84,
+      102
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 56,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "afrobeats-palm-wine"
+  },
+  "performance": {
+    "noteCount": 2503,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "afro-highlife-guitar",
+      "afro-shekere-shaker",
+      "tech-afrobeats-percussion-dropouts",
+      "afro-interlocking-16ths",
+      "afro-logdrum-call",
+      "tech-afrobeats-call-and-response-vocal-fragments",
+      "afro-log-drum-bass"
+    ]
+  }
+}

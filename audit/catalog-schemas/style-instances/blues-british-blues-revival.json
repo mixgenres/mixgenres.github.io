@@ -1,0 +1,475 @@
+{
+  "schemaVersion": 2,
+  "genre": "blues",
+  "styleId": "blues-british-blues-revival",
+  "styleName": "British Blues Revival",
+  "durationSec": 107.75510204081625,
+  "tempoBpm": 98,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Head",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C7",
+        "F7",
+        "C7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 12,
+      "intensity": "medium",
+      "chords": [
+        "C7",
+        "F7",
+        "C7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Answer",
+      "bars": 12,
+      "intensity": "high",
+      "chords": [
+        "C7",
+        "F7",
+        "C7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "solo-3",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 12,
+      "intensity": "peak",
+      "chords": [
+        "C7",
+        "F7",
+        "C7",
+        "G7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "coda-4",
+      "kind": "coda",
+      "label": "Turnaround",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C7",
+        "F7",
+        "C7",
+        "G7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "blues-delta-slide",
+        "tech-blues-blues-scale-enclosure"
+      ],
+      "noteCount": 678
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-blues-walking-blues-bass",
+        "style-blues-british-blues-revival-signature"
+      ],
+      "noteCount": 263
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-blues-british-blues-revival-signature",
+        "tech-blues-stop-time-blues"
+      ],
+      "noteCount": 176
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "style-blues-british-blues-revival-signature",
+        "blues-piano-triplets"
+      ],
+      "noteCount": 700
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-blues-call-and-response-guitar-vocal"
+      ],
+      "noteCount": 68
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "blues-piano-triplets",
+        "tango-332-piazzolla",
+        "blues-turnaround"
+      ],
+      "noteCount": 1008
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "harmonica",
+      "role": "melody",
+      "patternIds": [
+        "tech-blues-guitar-bend-vibrato-phrasing",
+        "tech-blues-dominant-7th-riff",
+        "tech-blues-stop-time-blues",
+        "tech-blues-blues-scale-enclosure"
+      ],
+      "noteCount": 90
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "trumpet",
+      "role": "lead",
+      "patternIds": [
+        "tech-blues-dominant-7th-riff",
+        "blues-horn-stabs",
+        "zouk-horn-stabs",
+        "afro-horn-stabs",
+        "tech-blues-guitar-bend-vibrato-phrasing"
+      ],
+      "noteCount": 90
+    }
+  ],
+  "patterns": [
+    {
+      "id": "blues-delta-slide",
+      "name": "Slide Guitar Lick",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        10,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-blues-blues-scale-enclosure",
+      "name": "scale enclosure",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "blues scale enclosure"
+      ]
+    },
+    {
+      "id": "tech-blues-walking-blues-bass",
+      "name": "walking-blues bass",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "walking-blues bass"
+      ]
+    },
+    {
+      "id": "style-blues-british-blues-revival-signature",
+      "name": "British Blues Revival",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "dominant 7th riff",
+        "guitar bend/vibrato phrasing",
+        "blues scale enclosure",
+        "call-and-response guitar/vocal",
+        "stop-time blues",
+        "walking-blues bass"
+      ]
+    },
+    {
+      "id": "tech-blues-stop-time-blues",
+      "name": "stop-time blues",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "stop-time blues"
+      ]
+    },
+    {
+      "id": "blues-piano-triplets",
+      "name": "Piano Triplets",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-blues-call-and-response-guitar-vocal",
+      "name": "call-and-response guitar/vocal",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "call-and-response guitar/vocal"
+      ]
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-332-piazzolla",
+      "name": "3+3+2 Nuevo Tango Pulse",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "blues-turnaround",
+      "name": "12-Bar Turnaround",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-blues-guitar-bend-vibrato-phrasing",
+      "name": "guitar bend/vibrato phrasing",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "guitar bend/vibrato phrasing"
+      ]
+    },
+    {
+      "id": "tech-blues-dominant-7th-riff",
+      "name": "dominant 7th riff",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "dominant 7th riff"
+      ]
+    },
+    {
+      "id": "blues-horn-stabs",
+      "name": "Horn Stabs",
+      "worldId": "blues",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        2,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-horn-stabs",
+      "name": "Kassav Horn Section Stabs",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        3,
+        6,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-horn-stabs",
+      "name": "Fela Afrobeat Horn Section Stabs",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        3,
+        7,
+        11,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "organ",
+      "voice"
+    ],
+    "techniques": [
+      "dominant 7th riff",
+      "guitar bend/vibrato phrasing",
+      "blues scale enclosure",
+      "call-and-response guitar/vocal",
+      "stop-time blues",
+      "walking-blues bass"
+    ],
+    "signatureCell": "Dominant blues riff with lead answer",
+    "tempoRange": [
+      70,
+      125
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "John Mayall",
+      "Eric Clapton",
+      "Peter Green"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "blues-british-blues-revival"
+  },
+  "performance": {
+    "noteCount": 3073,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "blues-delta-slide",
+      "tech-blues-blues-scale-enclosure",
+      "tech-blues-walking-blues-bass",
+      "style-blues-british-blues-revival-signature",
+      "tech-blues-stop-time-blues",
+      "blues-piano-triplets",
+      "tech-blues-call-and-response-guitar-vocal",
+      "afro-amapiano-pad",
+      "tango-332-piazzolla",
+      "blues-turnaround",
+      "tech-blues-guitar-bend-vibrato-phrasing",
+      "tech-blues-dominant-7th-riff",
+      "blues-horn-stabs",
+      "zouk-horn-stabs",
+      "afro-horn-stabs"
+    ]
+  }
+}

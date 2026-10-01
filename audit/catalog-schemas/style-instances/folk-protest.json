@@ -1,0 +1,461 @@
+{
+  "schemaVersion": 2,
+  "genre": "folk",
+  "styleId": "folk-protest",
+  "styleName": "Protest",
+  "durationSec": 115.2000000000001,
+  "tempoBpm": 100,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "refrain-2",
+      "kind": "refrain",
+      "label": "Refrain",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "instrumental-3",
+      "kind": "instrumental",
+      "label": "Instrumental",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "D",
+        "G",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "folk-strum-sync",
+        "folk-68-arpeggio",
+        "folk-strum-basic",
+        "folk-fast-bluegrass"
+      ],
+      "noteCount": 565
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "harmonica",
+      "role": "melody",
+      "patternIds": [
+        "tech-folk-modal-cadence",
+        "folk-roster-"
+      ],
+      "noteCount": 99
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "patternIds": [
+        "folk-fast-bluegrass",
+        "folk-waltz",
+        "folk-68-arpeggio"
+      ],
+      "noteCount": 156
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "patternIds": [
+        "folk-strum-basic",
+        "folk-strum-sync",
+        "bachata-bongo-majao",
+        "folk-fast-bluegrass"
+      ],
+      "noteCount": 193
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "house--ht-four-floor",
+        "zouk-snare",
+        "rock-halftime-groove",
+        "folk-waltz",
+        "elec-offbeat-hats",
+        "rock-open-close"
+      ],
+      "noteCount": 148
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-folk-call-and-response-verse",
+        "folk-roster-",
+        "tech-folk-modal-cadence"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "fiddle",
+      "role": "lead",
+      "patternIds": [
+        "folk-roster-",
+        "folk-fast-bluegrass",
+        "folk-strum-basic"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "mandolin",
+      "role": "lead",
+      "patternIds": [
+        "folk-68-arpeggio",
+        "folk-strum-basic",
+        "folk-waltz",
+        "folk-strum-sync",
+        "folk-driving-8ths"
+      ],
+      "noteCount": 161
+    }
+  ],
+  "patterns": [
+    {
+      "id": "folk-strum-sync",
+      "name": "Syncopated Strum",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "folk-68-arpeggio",
+      "name": "6/8 Arpeggio",
+      "worldId": "folk",
+      "meter": "6/8",
+      "subdivisions": 6,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "folk-strum-basic",
+      "name": "Basic Strum",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "folk-fast-bluegrass",
+      "name": "Fast Bluegrass Drive",
+      "worldId": "folk",
+      "meter": "2/4",
+      "subdivisions": 4,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-folk-modal-cadence",
+      "name": "modal cadence",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "modal cadence"
+      ]
+    },
+    {
+      "id": "folk-roster-",
+      "name": "part",
+      "worldId": "folk",
+      "meter": "6/8",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        4,
+        7,
+        10,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "folk-waltz",
+      "name": "Waltz Strum",
+      "worldId": "folk",
+      "meter": "3/4",
+      "subdivisions": 6,
+      "onsetGrid": [
+        0,
+        2,
+        4
+      ],
+      "techniques": []
+    },
+    {
+      "id": "bachata-bongo-majao",
+      "name": "Bongo Majao",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "house--ht-four-floor",
+      "name": "Four-on-the-Floor Foundation",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-snare",
+      "name": "Snare Rimshot",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-halftime-groove",
+      "name": "Half-Time Groove",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        4
+      ],
+      "techniques": []
+    },
+    {
+      "id": "elec-offbeat-hats",
+      "name": "Offbeat Hats",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-open-close",
+      "name": "Open Verse → Full Chorus",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-folk-call-and-response-verse",
+      "name": "call-and-response verse",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "call-and-response verse"
+      ]
+    },
+    {
+      "id": "folk-driving-8ths",
+      "name": "Driving 8ths",
+      "worldId": "folk",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "acoustic-guitar",
+      "harmonica",
+      "upright-bass",
+      "hand-percussion",
+      "drums"
+    ],
+    "techniques": [],
+    "signatureCell": "Strummed acoustic guitar pause followed by piercing rack-harmonica cry between verses",
+    "tempoRange": [
+      85,
+      115
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "folk-protest"
+  },
+  "performance": {
+    "noteCount": 1450,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "folk-strum-sync",
+      "folk-68-arpeggio",
+      "folk-strum-basic",
+      "folk-fast-bluegrass",
+      "tech-folk-modal-cadence",
+      "folk-roster-",
+      "folk-waltz",
+      "bachata-bongo-majao",
+      "house--ht-four-floor",
+      "zouk-snare",
+      "rock-halftime-groove",
+      "elec-offbeat-hats",
+      "rock-open-close",
+      "tech-folk-call-and-response-verse",
+      "folk-driving-8ths"
+    ]
+  }
+}

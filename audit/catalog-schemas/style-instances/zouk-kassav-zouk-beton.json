@@ -1,0 +1,403 @@
+{
+  "schemaVersion": 2,
+  "genre": "zouk",
+  "styleId": "zouk-kassav-zouk-beton",
+  "styleName": "Kassav' / Zouk Béton",
+  "durationSec": 83.47826086956519,
+  "tempoBpm": 115,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am7",
+        "Fmaj7",
+        "Cmaj7",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "style-zouk-kassav-zouk-beton-signature",
+        "tech-zouk-zouk-guitar-syncopation"
+      ],
+      "noteCount": 603
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-zouk-ghetto-zouk-sub-bass",
+        "tech-zouk-zouk-beton-bass",
+        "tech-zouk-kizomba-zouk-hybrid-bass"
+      ],
+      "noteCount": 152
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-zouk-caribbean-percussion-layer",
+        "style-zouk-kassav-zouk-beton-signature"
+      ],
+      "noteCount": 163
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "patternIds": [
+        "style-zouk-kassav-zouk-beton-signature",
+        "tech-zouk-caribbean-percussion-layer"
+      ],
+      "noteCount": 163
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "rhodes",
+      "role": "harmony",
+      "patternIds": [
+        "tech-zouk-zouk-guitar-syncopation",
+        "zouk-guitar-skank-chawa",
+        "zouk-bridge-16"
+      ],
+      "noteCount": 529
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-zouk-sparse-electronic-percussion",
+        "tech-zouk-zouk-guitar-syncopation",
+        "tech-zouk-ghetto-zouk-sub-bass"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-zouk-kizomba-zouk-hybrid-bass",
+        "zouk-french-bass",
+        "tech-zouk-sparse-electronic-percussion"
+      ],
+      "noteCount": 113
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "tech-zouk-sparse-electronic-percussion"
+      ],
+      "noteCount": 64
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-zouk-kassav-zouk-beton-signature",
+      "name": "Kassav'/Zouk Béton",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "zouk guitar syncopation",
+        "zouk béton bass",
+        "Caribbean percussion layer",
+        "ghetto-zouk sub-bass",
+        "kizomba/zouk hybrid bass",
+        "sparse electronic percussion"
+      ]
+    },
+    {
+      "id": "tech-zouk-zouk-guitar-syncopation",
+      "name": "guitar syncopation",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "zouk guitar syncopation"
+      ]
+    },
+    {
+      "id": "tech-zouk-ghetto-zouk-sub-bass",
+      "name": "ghetto-zouk sub-bass",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "ghetto-zouk sub-bass"
+      ]
+    },
+    {
+      "id": "tech-zouk-zouk-beton-bass",
+      "name": "béton bass",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "zouk béton bass"
+      ]
+    },
+    {
+      "id": "tech-zouk-kizomba-zouk-hybrid-bass",
+      "name": "kizomba/zouk hybrid bass",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "kizomba/zouk hybrid bass"
+      ]
+    },
+    {
+      "id": "tech-zouk-caribbean-percussion-layer",
+      "name": "Caribbean percussion layer",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Caribbean percussion layer"
+      ]
+    },
+    {
+      "id": "zouk-guitar-skank-chawa",
+      "name": "Chawa Guitar Skank",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "zouk-bridge-16",
+      "name": "Chawa Bridge",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        9,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-zouk-sparse-electronic-percussion",
+      "name": "sparse electronic percussion",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "sparse electronic percussion"
+      ]
+    },
+    {
+      "id": "zouk-french-bass",
+      "name": "French Antillean Zouk Bass",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        12
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "hand-percussion",
+      "rhodes",
+      "voice"
+    ],
+    "techniques": [
+      "zouk guitar syncopation",
+      "zouk béton bass",
+      "Caribbean percussion layer",
+      "ghetto-zouk sub-bass",
+      "kizomba/zouk hybrid bass",
+      "sparse electronic percussion"
+    ],
+    "signatureCell": "Fast zouk groove with guitar syncopation",
+    "tempoRange": [
+      105,
+      125
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 1
+  },
+  "references": {
+    "artists": [
+      "Kassav'"
+    ],
+    "tracks": [
+      "Zouk la sé sèl médikaman nou ni"
+    ]
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "zouk-kassav-zouk-beton"
+  },
+  "performance": {
+    "noteCount": 1851,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-zouk-kassav-zouk-beton-signature",
+      "tech-zouk-zouk-guitar-syncopation",
+      "tech-zouk-ghetto-zouk-sub-bass",
+      "tech-zouk-zouk-beton-bass",
+      "tech-zouk-kizomba-zouk-hybrid-bass",
+      "tech-zouk-caribbean-percussion-layer",
+      "zouk-guitar-skank-chawa",
+      "zouk-bridge-16",
+      "tech-zouk-sparse-electronic-percussion",
+      "zouk-french-bass"
+    ]
+  }
+}

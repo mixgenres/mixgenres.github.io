@@ -1,0 +1,271 @@
+{
+  "schemaVersion": 1,
+  "id": "folk",
+  "name": "Folk",
+  "family": "Acoustic / Traditional",
+  "description": "Acoustic-driven music centered around storytelling, fingerpicking,",
+  "substyles": [
+    "Indie Folk",
+    "Old-Time",
+    "Protest",
+    "Psychedelic Folk",
+    "Anti-Folk",
+    "Bluegrass",
+    "Neo-Traditional",
+    "Chamber Folk"
+  ],
+  "styleIds": [
+    "folk-indie-folk",
+    "folk-old-time",
+    "folk-protest",
+    "folk-psychedelic-folk",
+    "folk-anti-folk",
+    "folk-bluegrass",
+    "folk-neo-traditional",
+    "folk-chamber-folk",
+    "folk-celtic-traditional",
+    "folk-british-ballad-tradition",
+    "folk-appalachian-string-band",
+    "folk-nordic-folk",
+    "folk-eastern-european-balkan-folk"
+  ],
+  "patternIds": [
+    "folk-travis",
+    "folk-travis-sync",
+    "folk-strum-basic",
+    "folk-strum-sync",
+    "folk-waltz",
+    "folk-waltz-pick",
+    "folk-68-arpeggio",
+    "folk-fiddle-drone",
+    "folk-fast-bluegrass",
+    "folk-driving-8ths",
+    "folk-roster-bass",
+    "folk-roster-",
+    "folk-call-13",
+    "folk-anchor-14",
+    "folk-comp-15",
+    "folk-intro-16",
+    "folk-verse-17",
+    "tech-folk-modal-cadence",
+    "tech-folk-clawhammer-banjo",
+    "tech-folk-banjo-roll",
+    "tech-folk-jig-6-8",
+    "tech-folk-reel-4-4",
+    "tech-folk-balkan-7-8",
+    "tech-folk-balkan-9-8",
+    "style-folk-celtic-traditional-signature",
+    "style-folk-british-ballad-tradition-signature",
+    "style-folk-appalachian-string-band-signature",
+    "style-folk-nordic-folk-signature",
+    "style-folk-eastern-european-balkan-folk-signature",
+    "tech-folk-fiddle-double-stop",
+    "tech-folk-celtic-ornament",
+    "tech-folk-call-and-response-verse",
+    "tech-folk-drone"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "folk-indie-folk",
+      "name": "Indie Folk",
+      "keySubstyles": [
+        "Chamber Indie Folk",
+        "Freak Folk"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "banjo",
+        "upright-bass",
+        "piano",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-old-time",
+      "name": "Old-Time",
+      "keySubstyles": [
+        "Appalachian Old-Time",
+        "Clawhammer Banjo Tune"
+      ],
+      "characteristicInstruments": [
+        "banjo",
+        "fiddle",
+        "acoustic-guitar",
+        "upright-bass",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-protest",
+      "name": "Protest",
+      "keySubstyles": [
+        "Topical Song Movement",
+        "60s Folk Revival"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "harmonica",
+        "upright-bass",
+        "hand-percussion",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-psychedelic-folk",
+      "name": "Psychedelic Folk",
+      "keySubstyles": [
+        "Acid Folk",
+        "Freak Folk",
+        "Pagan Folk"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "sitar",
+        "flute",
+        "hand-percussion",
+        "synth"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-anti-folk",
+      "name": "Anti-Folk",
+      "keySubstyles": [
+        "NYC Anti-Folk",
+        "Lo-Fi Folk Punk"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "piano",
+        "upright-bass",
+        "drums",
+        "bass"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-bluegrass",
+      "name": "Bluegrass",
+      "keySubstyles": [
+        "Progressive Bluegrass",
+        "Traditional Bluegrass"
+      ],
+      "characteristicInstruments": [
+        "banjo",
+        "mandolin",
+        "acoustic-guitar",
+        "fiddle",
+        "upright-bass"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-neo-traditional",
+      "name": "Neo-Traditional",
+      "keySubstyles": [
+        "British Folk Revival",
+        "Traditional Balladry"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "upright-bass",
+        "fiddle",
+        "harmonium",
+        "flute"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-chamber-folk",
+      "name": "Chamber Folk",
+      "keySubstyles": [
+        "Orchestral Folk",
+        "Baroque Pop Folk"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "strings",
+        "violin",
+        "flute",
+        "piano"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-celtic-traditional",
+      "name": "Celtic Traditional",
+      "keySubstyles": [
+        "Celtic Traditional"
+      ],
+      "characteristicInstruments": [
+        "fiddle",
+        "tin-whistle",
+        "acoustic-guitar",
+        "celtic-harp",
+        "bodhran"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-british-ballad-tradition",
+      "name": "British Ballad Tradition",
+      "keySubstyles": [
+        "British Ballad Tradition"
+      ],
+      "characteristicInstruments": [
+        "voice",
+        "acoustic-guitar",
+        "fiddle",
+        "cello"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-appalachian-string-band",
+      "name": "Appalachian String Band",
+      "keySubstyles": [
+        "Appalachian String Band"
+      ],
+      "characteristicInstruments": [
+        "banjo",
+        "fiddle",
+        "acoustic-guitar",
+        "upright-bass"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-nordic-folk",
+      "name": "Nordic Folk",
+      "keySubstyles": [
+        "Nordic Folk"
+      ],
+      "characteristicInstruments": [
+        "fiddle",
+        "acoustic-guitar",
+        "drums",
+        "cello"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "folk-eastern-european-balkan-folk",
+      "name": "Eastern European / Balkan Folk",
+      "keySubstyles": [
+        "Eastern European / Balkan Folk"
+      ],
+      "characteristicInstruments": [
+        "violin",
+        "accordion",
+        "clarinet",
+        "trombone",
+        "hand-percussion"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "folk-starter"
+}

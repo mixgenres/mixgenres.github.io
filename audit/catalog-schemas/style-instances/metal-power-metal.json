@@ -1,0 +1,471 @@
+{
+  "schemaVersion": 2,
+  "genre": "metal",
+  "styleId": "metal-power-metal",
+  "styleName": "Power Metal",
+  "durationSec": 67.45945945945948,
+  "tempoBpm": 185,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "G",
+        "C"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "riff-1",
+      "kind": "riff",
+      "label": "Riff",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "F",
+        "G",
+        "C"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "verse-2",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "F",
+        "G",
+        "C"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "chorus-3",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "F",
+        "G",
+        "C",
+        "Am"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "breakdown-4",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "G",
+        "C"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "solo-5",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "F",
+        "G",
+        "C"
+      ]
+    },
+    {
+      "id": "r6",
+      "key": "coda-6",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F",
+        "G",
+        "Am",
+        "Am"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "metal-chorus-16",
+        "metal-clean-arp",
+        "metal-gallop-riff"
+      ],
+      "noteCount": 986
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "metal-blast-beat",
+        "metal-gallop-riff",
+        "metal-chorus-16"
+      ],
+      "noteCount": 720
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "metal-bass-gallop",
+        "metal-clean-arp"
+      ],
+      "noteCount": 398
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-metal-twin-guitar-harmony",
+        "tech-metal-double-kick",
+        "house--ht-10-detroit-sequence"
+      ],
+      "noteCount": 76
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "overdrive-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "metal-gallop-riff",
+        "metal-chorus-16",
+        "metal-groove-metal"
+      ],
+      "noteCount": 398
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "strings",
+      "role": "harmony",
+      "patternIds": [
+        "style-metal-blackgaze-signature",
+        "tech-metal-double-kick",
+        "tech-metal-twin-guitar-harmony",
+        "tango-marcato-2"
+      ],
+      "noteCount": 136
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "guitar-harmonics",
+      "role": "lead",
+      "patternIds": [
+        "metal-clean-arp",
+        "metal-groove-metal"
+      ],
+      "noteCount": 196
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-metal-double-kick",
+        "metal-chorus-16",
+        "tech-metal-twin-guitar-harmony",
+        "tech-flamenco-melisma"
+      ],
+      "noteCount": 76
+    }
+  ],
+  "patterns": [
+    {
+      "id": "metal-chorus-16",
+      "name": "Gallop Chorus Lift",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        3,
+        6,
+        7,
+        10,
+        11,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "metal-clean-arp",
+      "name": "Clean Arpeggio",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "metal-gallop-riff",
+      "name": "The Gallop Rhythm",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        12,
+        13,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "metal-blast-beat",
+      "name": "Blast Beat",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "metal-bass-gallop",
+      "name": "Bass Gallop",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-metal-twin-guitar-harmony",
+      "name": "twin-guitar harmony",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "twin-guitar harmony"
+      ]
+    },
+    {
+      "id": "tech-metal-double-kick",
+      "name": "double-kick",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "double-kick"
+      ]
+    },
+    {
+      "id": "house--ht-10-detroit-sequence",
+      "name": "Detroit Sequence",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        16,
+        19,
+        22,
+        25,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "metal-groove-metal",
+      "name": "Groove Metal Riff",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        5,
+        6,
+        8,
+        9,
+        11
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-metal-blackgaze-signature",
+      "name": "Blackgaze",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "blast beat",
+        "tremolo picking",
+        "tremolo/drone layer"
+      ]
+    },
+    {
+      "id": "tango-marcato-2",
+      "name": "Marcato en 2",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-flamenco-melisma",
+      "name": "melisma",
+      "worldId": "flamenco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "melisma"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "drums",
+      "bass",
+      "synth",
+      "overdrive-guitar"
+    ],
+    "techniques": [],
+    "signatureCell": "High operatic tenor vocal soaring over blinding double-kick speed and triumphant twin-guitar lead",
+    "tempoRange": [
+      160,
+      210
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "pushed",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "metal-power-metal"
+  },
+  "performance": {
+    "noteCount": 2986,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "metal-chorus-16",
+      "metal-clean-arp",
+      "metal-gallop-riff",
+      "metal-blast-beat",
+      "metal-bass-gallop",
+      "tech-metal-twin-guitar-harmony",
+      "tech-metal-double-kick",
+      "house--ht-10-detroit-sequence",
+      "metal-groove-metal",
+      "style-metal-blackgaze-signature",
+      "tango-marcato-2",
+      "tech-flamenco-melisma"
+    ]
+  }
+}

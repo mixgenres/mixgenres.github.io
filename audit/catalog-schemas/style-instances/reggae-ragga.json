@@ -1,0 +1,454 @@
+{
+  "schemaVersion": 2,
+  "genre": "reggae",
+  "styleId": "reggae-ragga",
+  "styleName": "Ragga",
+  "durationSec": 83.07692307692305,
+  "tempoBpm": 104,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F#m",
+        "E",
+        "F#m",
+        "E"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "F#m",
+        "E",
+        "F#m",
+        "E"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "D",
+        "Em",
+        "Bm"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "dub-break-3",
+      "kind": "dub break",
+      "label": "Dub Break",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F#m",
+        "E",
+        "F#m",
+        "E"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "F#m",
+        "E",
+        "F#m",
+        "E"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F#m",
+        "E",
+        "F#m",
+        "E"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "tech-reggae-rockers-beat",
+        "tech-reggae-toast-vocal-deejay",
+        "reggae--rd-14-dub-horn-reply"
+      ],
+      "noteCount": 36
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "reggae--rd-steppers",
+        "reggae--rd-06-one-drop-core",
+        "reggae--rd-12-steppers-kick-grid"
+      ],
+      "noteCount": 144
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "reggae--rd-reggae-bass"
+      ],
+      "noteCount": 91
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "reggae--rd-14-dub-horn-reply",
+        "house--ht-10-detroit-sequence",
+        "reggae--rd-10-dub-echo-fragment",
+        "tech-reggae-dub-delay-throw"
+      ],
+      "noteCount": 44
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "horn-section",
+      "role": "harmony",
+      "patternIds": [
+        "tech-reggae-toast-vocal-deejay",
+        "tech-reggae-rockers-beat"
+      ],
+      "noteCount": 145
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-reggae-toast-vocal-deejay"
+      ],
+      "noteCount": 44
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--rd-09-bubble-organ",
+        "reggae--rd-skank"
+      ],
+      "noteCount": 414
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--rd-skank",
+        "brazilian--sb-15-bossa-ending-turn",
+        "reggae--rd-07-skank-guitar",
+        "tango-marcato-2"
+      ],
+      "noteCount": 342
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-reggae-rockers-beat",
+      "name": "rockers beat",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "rockers beat"
+      ]
+    },
+    {
+      "id": "tech-reggae-toast-vocal-deejay",
+      "name": "toast/vocal deejay",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "toast/vocal deejay"
+      ]
+    },
+    {
+      "id": "reggae--rd-14-dub-horn-reply",
+      "name": "Dub Horn Reply",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        8,
+        12,
+        24,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-steppers",
+      "name": "Steppers Foundation",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-06-one-drop-core",
+      "name": "One Drop Core",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-12-steppers-kick-grid",
+      "name": "Steppers four-kick pulse",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-reggae-bass",
+      "name": "Melodic Reggae Bass",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "house--ht-10-detroit-sequence",
+      "name": "Detroit Sequence",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        16,
+        19,
+        22,
+        25,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-10-dub-echo-fragment",
+      "name": "Dub Echo Fragment",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-reggae-dub-delay-throw",
+      "name": "dub delay throw",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "dub delay throw"
+      ]
+    },
+    {
+      "id": "reggae--rd-09-bubble-organ",
+      "name": "Bubble Organ",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-skank",
+      "name": "Offbeat Skank",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "brazilian--sb-15-bossa-ending-turn",
+      "name": "Bossa ending cadence",
+      "worldId": "brazilian",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        5,
+        9,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-07-skank-guitar",
+      "name": "Skank Guitar",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-marcato-2",
+      "name": "Marcato en 2",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "sampler",
+      "drums",
+      "sub-bass",
+      "synth",
+      "horn-section"
+    ],
+    "techniques": [],
+    "signatureCell": "Gravelly baritone vocal shout cutting through aggressive digital ragga synth bass and drum loop",
+    "tempoRange": [
+      96,
+      112
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "pushed",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "reggae-ragga"
+  },
+  "performance": {
+    "noteCount": 1260,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-reggae-rockers-beat",
+      "tech-reggae-toast-vocal-deejay",
+      "reggae--rd-14-dub-horn-reply",
+      "reggae--rd-steppers",
+      "reggae--rd-06-one-drop-core",
+      "reggae--rd-12-steppers-kick-grid",
+      "reggae--rd-reggae-bass",
+      "house--ht-10-detroit-sequence",
+      "reggae--rd-10-dub-echo-fragment",
+      "tech-reggae-dub-delay-throw",
+      "reggae--rd-09-bubble-organ",
+      "reggae--rd-skank",
+      "brazilian--sb-15-bossa-ending-turn",
+      "reggae--rd-07-skank-guitar",
+      "tango-marcato-2"
+    ]
+  }
+}

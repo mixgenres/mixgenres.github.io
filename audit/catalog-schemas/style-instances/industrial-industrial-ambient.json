@@ -1,0 +1,344 @@
+{
+  "schemaVersion": 2,
+  "genre": "industrial",
+  "styleId": "industrial-industrial-ambient",
+  "styleName": "Industrial Ambient",
+  "durationSec": 137.14285714285717,
+  "tempoBpm": 70,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Em",
+        "C",
+        "D",
+        "B7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drone",
+      "role": "harmony",
+      "patternIds": [
+        "tech-industrial-frequency-density-build",
+        "tech-industrial-drone",
+        "style-industrial-industrial-ambient-signature",
+        "tech-industrial-industrial-noise-layer"
+      ],
+      "noteCount": 76
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "noise-sweep",
+      "role": "effect",
+      "patternIds": [
+        "tech-industrial-drone",
+        "tech-industrial-industrial-noise-layer",
+        "style-industrial-industrial-ambient-signature"
+      ],
+      "noteCount": 49
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "style-industrial-industrial-ambient-signature",
+        "tech-industrial-frequency-density-build",
+        "tech-industrial-industrial-noise-layer"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "tech-industrial-industrial-noise-layer",
+        "tech-industrial-frequency-density-build",
+        "tech-industrial-drone",
+        "style-industrial-industrial-ambient-signature"
+      ],
+      "noteCount": 80
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "industrial--industrial-four-native",
+        "industrial--industrial-metal-percussion"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "distortion-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "industrial--industrial-metal-percussion",
+        "industrial--industrial-metal-hit",
+        "industrial--industrial-four-native"
+      ],
+      "noteCount": 232
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-industrial-frequency-density-build",
+        "tech-industrial-drone"
+      ],
+      "noteCount": 116
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-industrial-industrial-noise-layer",
+        "tech-industrial-drone",
+        "industrial--industrial-four-native",
+        "industrial--industrial-metal-hit"
+      ],
+      "noteCount": 61
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-industrial-frequency-density-build",
+      "name": "frequency-density build",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "frequency-density build"
+      ]
+    },
+    {
+      "id": "tech-industrial-drone",
+      "name": "drone",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": [
+        "drone"
+      ]
+    },
+    {
+      "id": "style-industrial-industrial-ambient-signature",
+      "name": "Ambient",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": [
+        "drone",
+        "frequency-density build",
+        "industrial noise layer",
+        "metallic percussion"
+      ]
+    },
+    {
+      "id": "tech-industrial-industrial-noise-layer",
+      "name": "noise layer",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "industrial noise layer"
+      ]
+    },
+    {
+      "id": "industrial--industrial-four-native",
+      "name": "Four Pulse",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "industrial--industrial-metal-percussion",
+      "name": "Metal Percussion",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        7,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "industrial--industrial-metal-hit",
+      "name": "Metal Hit",
+      "worldId": "industrial",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        7,
+        8,
+        15
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drone",
+      "noise-sweep",
+      "sampler",
+      "warm-pad"
+    ],
+    "techniques": [
+      "drone",
+      "frequency-density build",
+      "industrial noise layer",
+      "metallic percussion"
+    ],
+    "signatureCell": "Dark drone with metallic texture",
+    "tempoRange": [
+      40,
+      100
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Lustmord",
+      "Coil"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "industrial-industrial-ambient"
+  },
+  "performance": {
+    "noteCount": 742,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-industrial-frequency-density-build",
+      "tech-industrial-drone",
+      "style-industrial-industrial-ambient-signature",
+      "tech-industrial-industrial-noise-layer",
+      "industrial--industrial-four-native",
+      "industrial--industrial-metal-percussion",
+      "industrial--industrial-metal-hit"
+    ]
+  }
+}

@@ -1,0 +1,417 @@
+{
+  "schemaVersion": 2,
+  "genre": "kizomba",
+  "styleId": "kizomba-passada",
+  "styleName": "Passada",
+  "durationSec": 150,
+  "tempoBpm": 96,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "groove-1",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "verse-2",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "chorus-3",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Bm7",
+        "E7",
+        "Amaj7",
+        "Dmaj7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "break-4",
+      "kind": "break",
+      "label": "Break",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "groove-5",
+      "kind": "groove",
+      "label": "Groove",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r6",
+      "key": "outro-6",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-kizomba-semba-guitar"
+      ],
+      "noteCount": 954
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "kizomba-tarraxinha-sub"
+      ],
+      "noteCount": 183
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-batida-groove",
+        "kizomba-fill-17",
+        "kizomba-kick-batida"
+      ],
+      "noteCount": 252
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "kizomba-bridge-16",
+        "kizomba-urban-synth-pulse",
+        "house--ht-09-house-chord-stab",
+        "tango-piano-chumba"
+      ],
+      "noteCount": 922
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "kizomba-tarraxinha-sub",
+        "kizomba-vocal-comping"
+      ],
+      "noteCount": 59
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-kizomba-vocal-space-arrangement"
+      ],
+      "noteCount": 68
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "dikanza",
+      "role": "percussion",
+      "patternIds": [
+        "kizomba-fill-17",
+        "kizomba-batida-groove"
+      ],
+      "noteCount": 275
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "kizomba-tarraxinha-sub"
+      ],
+      "noteCount": 146
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-kizomba-semba-guitar",
+      "name": "semba guitar",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "semba guitar"
+      ]
+    },
+    {
+      "id": "kizomba-tarraxinha-sub",
+      "name": "Tarraxinha Sub-Bass",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-batida-groove",
+      "name": "Batida & Sub-Kick Beat",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-fill-17",
+      "name": "Call Fill",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-kick-batida",
+      "name": "Kick Batida",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-bridge-16",
+      "name": "Semba Bridge",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        10,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-urban-synth-pulse",
+      "name": "Urban Kiz Synth Pulse",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        5,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "house--ht-09-house-chord-stab",
+      "name": "Chord Stab",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-piano-chumba",
+      "name": "Piano Chumba",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        1,
+        4,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-vocal-comping",
+      "name": "Vocal Phrase Response",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        7,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-kizomba-vocal-space-arrangement",
+      "name": "vocal-space arrangement",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal-space arrangement"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "acoustic-guitar",
+      "bass",
+      "drums",
+      "piano",
+      "synth"
+    ],
+    "techniques": [],
+    "signatureCell": "forward-moving bass walk with clean syncopated kick and small guitar answers",
+    "tempoRange": [
+      88,
+      104
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 55,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "kizomba-passada"
+  },
+  "performance": {
+    "noteCount": 2859,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-kizomba-semba-guitar",
+      "kizomba-tarraxinha-sub",
+      "kizomba-batida-groove",
+      "kizomba-fill-17",
+      "kizomba-kick-batida",
+      "afro-amapiano-pad",
+      "kizomba-bridge-16",
+      "kizomba-urban-synth-pulse",
+      "house--ht-09-house-chord-stab",
+      "tango-piano-chumba",
+      "kizomba-vocal-comping",
+      "tech-kizomba-vocal-space-arrangement"
+    ]
+  }
+}

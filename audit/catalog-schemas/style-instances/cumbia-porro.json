@@ -1,0 +1,514 @@
+{
+  "schemaVersion": 2,
+  "genre": "cumbia",
+  "styleId": "cumbia-porro",
+  "styleName": "Porro",
+  "durationSec": 39.633027522935784,
+  "tempoBpm": 109,
+  "meter": "2/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F",
+        "C7",
+        "F",
+        "C7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "tema-1",
+      "kind": "tema",
+      "label": "Tema",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "F",
+        "A#",
+        "C7",
+        "F",
+        "A#",
+        "C7",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "verso-2",
+      "kind": "verso",
+      "label": "Verso",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "F",
+        "A#",
+        "C7",
+        "F",
+        "A#",
+        "C7",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "coro-3",
+      "kind": "coro",
+      "label": "Coro",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "F",
+        "A#",
+        "C7",
+        "F",
+        "A#",
+        "C7",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "break-4",
+      "kind": "break",
+      "label": "Break",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F",
+        "A#",
+        "C7",
+        "F",
+        "A#",
+        "C7",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "cierre-5",
+      "kind": "cierre",
+      "label": "Cierre",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F",
+        "A#",
+        "C7",
+        "F",
+        "A#",
+        "C7",
+        "F",
+        "F"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "tech-cumbia-alegre-improvisation",
+        "cu-cumbia-drum",
+        "cu-06-cumbia-bass-tumbao",
+        "cu-14-cumbia-stop-break"
+      ],
+      "noteCount": 118
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "trumpet",
+      "role": "lead",
+      "patternIds": [
+        "cu-15-cumbia-final-tag",
+        "afro-horn-stabs",
+        "tech-cumbia-alegre-improvisation",
+        "reggae--rd-14-dub-horn-reply",
+        "afro-mambo-horn-hits"
+      ],
+      "noteCount": 78
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "clarinet",
+      "role": "lead",
+      "patternIds": [
+        "cu-13-cumbia-call-and-response",
+        "cu-06-cumbia-bass-tumbao",
+        "tech-cumbia-alegre-improvisation",
+        "cu-14-cumbia-stop-break"
+      ],
+      "noteCount": 103
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "cu-14-cumbia-stop-break"
+      ],
+      "noteCount": 78
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "patternIds": [
+        "tech-cumbia-alegre-improvisation",
+        "cu-cumbia-drum",
+        "cu-07-tambor-alegre-reply"
+      ],
+      "noteCount": 156
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-timba-coro-pregon",
+        "tech-hip-hop-vocal-chop",
+        "tech-zouk-romantic-vocal-legato",
+        "tech-r-and-b-r-b-melisma",
+        "tech-cumbia-alegre-improvisation"
+      ],
+      "noteCount": 44
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "guacharaca",
+      "role": "percussion",
+      "patternIds": [
+        "cu-14-cumbia-stop-break",
+        "cu-08-guacharaca-scrape"
+      ],
+      "noteCount": 142
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "tambora",
+      "role": "percussion",
+      "patternIds": [
+        "cu-07-tambor-alegre-reply",
+        "cu-12-cumbia-maraca-layer"
+      ],
+      "noteCount": 240
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-cumbia-alegre-improvisation",
+      "name": "alegre improvisation",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "alegre improvisation"
+      ]
+    },
+    {
+      "id": "cu-cumbia-drum",
+      "name": "Tambora/alegre conversation",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        8,
+        10,
+        13
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-06-cumbia-bass-tumbao",
+      "name": "tumbao bass",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-14-cumbia-stop-break",
+      "name": "Stop Break",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-15-cumbia-final-tag",
+      "name": "Final Tag",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-horn-stabs",
+      "name": "Fela Afrobeat Horn Section Stabs",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        3,
+        7,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-14-dub-horn-reply",
+      "name": "Dub Horn Reply",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        8,
+        12,
+        24,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-mambo-horn-hits",
+      "name": "Mambo Section Horn Stabs & Punctuation",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        6,
+        12,
+        14,
+        22,
+        28,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-13-cumbia-call-and-response",
+      "name": "Call-and-Response",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        18,
+        22,
+        26,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-07-tambor-alegre-reply",
+      "name": "Tambor Alegre Reply",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        5,
+        8,
+        13,
+        16,
+        21,
+        24,
+        29
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-timba-coro-pregon",
+      "name": "coro/pregón",
+      "worldId": "timba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "coro/pregón"
+      ]
+    },
+    {
+      "id": "tech-hip-hop-vocal-chop",
+      "name": "vocal chop",
+      "worldId": "hip-hop",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal chop"
+      ]
+    },
+    {
+      "id": "tech-zouk-romantic-vocal-legato",
+      "name": "romantic vocal legato",
+      "worldId": "zouk",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8
+      ],
+      "techniques": [
+        "romantic vocal legato"
+      ]
+    },
+    {
+      "id": "tech-r-and-b-r-b-melisma",
+      "name": "melisma",
+      "worldId": "r-and-b",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "R&B melisma"
+      ]
+    },
+    {
+      "id": "cu-08-guacharaca-scrape",
+      "name": "Guacharaca reverse accent cycle",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        10,
+        12,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-12-cumbia-maraca-layer",
+      "name": "Maraca offbeat shimmer",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "brass",
+      "trumpet",
+      "clarinet",
+      "drums",
+      "hand-percussion"
+    ],
+    "techniques": [],
+    "signatureCell": "Clattering bombo wood-rim paliteo erupting into joyous brass fanfare",
+    "tempoRange": [
+      98,
+      120
+    ],
+    "preferredMeters": [
+      "2/4"
+    ],
+    "microtimingFeel": "pushed",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "cumbia-porro"
+  },
+  "performance": {
+    "noteCount": 959,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-cumbia-alegre-improvisation",
+      "cu-cumbia-drum",
+      "cu-06-cumbia-bass-tumbao",
+      "cu-14-cumbia-stop-break",
+      "cu-15-cumbia-final-tag",
+      "afro-horn-stabs",
+      "reggae--rd-14-dub-horn-reply",
+      "afro-mambo-horn-hits",
+      "cu-13-cumbia-call-and-response",
+      "cu-07-tambor-alegre-reply",
+      "tech-timba-coro-pregon",
+      "tech-hip-hop-vocal-chop",
+      "tech-zouk-romantic-vocal-legato",
+      "tech-r-and-b-r-b-melisma",
+      "cu-08-guacharaca-scrape",
+      "cu-12-cumbia-maraca-layer"
+    ]
+  }
+}

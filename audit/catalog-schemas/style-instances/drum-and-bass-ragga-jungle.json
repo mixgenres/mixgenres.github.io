@@ -1,0 +1,393 @@
+{
+  "schemaVersion": 2,
+  "genre": "drum-and-bass",
+  "styleId": "drum-and-bass-ragga-jungle",
+  "styleName": "Ragga Jungle",
+  "durationSec": 104.72727272727266,
+  "tempoBpm": 165,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Groove",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Main Groove",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "bridge-4",
+      "kind": "bridge",
+      "label": "Return",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-drum-and-bass-ragga-jungle-signature"
+      ],
+      "noteCount": 440
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "dnb-sub-phrase"
+      ],
+      "noteCount": 157
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "dnb-break-core",
+        "dnb-two-step"
+      ],
+      "noteCount": 96
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "dub-echo",
+      "role": "effect",
+      "patternIds": [
+        "dnb-two-step",
+        "dnb-break-core"
+      ],
+      "noteCount": 98
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-drum-and-bass-jungle-chopped-vocal"
+      ],
+      "noteCount": 103
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-drum-and-bass-break-rearrangement",
+        "dnb-two-step",
+        "tech-drum-and-bass-think-break",
+        "dnb-break-core",
+        "tech-drum-and-bass-amen-chop"
+      ],
+      "noteCount": 87
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "dnb-two-step",
+        "dnb-sub-phrase",
+        "tech-drum-and-bass-amen-chop",
+        "tech-drum-and-bass-break-rearrangement"
+      ],
+      "noteCount": 92
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "saw-lead",
+      "role": "lead",
+      "patternIds": [
+        "tech-drum-and-bass-think-break",
+        "dnb-two-step",
+        "house--ht-10-detroit-sequence",
+        "dnb-sub-phrase",
+        "dnb-break-core"
+      ],
+      "noteCount": 185
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-drum-and-bass-ragga-jungle-signature",
+      "name": "Ragga Jungle",
+      "worldId": "drum-and-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "jungle chopped vocal",
+        "Amen chop",
+        "Think break",
+        "break rearrangement"
+      ]
+    },
+    {
+      "id": "dnb-sub-phrase",
+      "name": "DnB Sub Phrase",
+      "worldId": "drum-and-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        7,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "dnb-break-core",
+      "name": "DnB Break Core",
+      "worldId": "drum-and-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        6,
+        8,
+        10,
+        12,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "dnb-two-step",
+      "name": "DnB Two-Step Variant",
+      "worldId": "drum-and-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-drum-and-bass-jungle-chopped-vocal",
+      "name": "jungle chopped vocal",
+      "worldId": "drum-and-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "jungle chopped vocal"
+      ]
+    },
+    {
+      "id": "tech-drum-and-bass-break-rearrangement",
+      "name": "break rearrangement",
+      "worldId": "drum-and-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "break rearrangement"
+      ]
+    },
+    {
+      "id": "tech-drum-and-bass-think-break",
+      "name": "Think break",
+      "worldId": "drum-and-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "Think break"
+      ]
+    },
+    {
+      "id": "tech-drum-and-bass-amen-chop",
+      "name": "Amen chop",
+      "worldId": "drum-and-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "Amen chop"
+      ]
+    },
+    {
+      "id": "house--ht-10-detroit-sequence",
+      "name": "Detroit Sequence",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        16,
+        19,
+        22,
+        25,
+        28
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "sub-bass",
+      "sampler",
+      "dub-echo",
+      "voice"
+    ],
+    "techniques": [
+      "jungle chopped vocal",
+      "Amen chop",
+      "Think break",
+      "break rearrangement"
+    ],
+    "signatureCell": "Chopped break with reggae vocal space",
+    "tempoRange": [
+      155,
+      175
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Congo Natty",
+      "Shy FX"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "drum-and-bass-ragga-jungle"
+  },
+  "performance": {
+    "noteCount": 1258,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-drum-and-bass-ragga-jungle-signature",
+      "dnb-sub-phrase",
+      "dnb-break-core",
+      "dnb-two-step",
+      "tech-drum-and-bass-jungle-chopped-vocal",
+      "tech-drum-and-bass-break-rearrangement",
+      "tech-drum-and-bass-think-break",
+      "tech-drum-and-bass-amen-chop",
+      "house--ht-10-detroit-sequence"
+    ]
+  }
+}

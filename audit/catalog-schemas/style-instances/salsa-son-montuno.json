@@ -1,0 +1,370 @@
+{
+  "schemaVersion": 2,
+  "genre": "salsa",
+  "styleId": "salsa-son-montuno",
+  "styleName": "Son Montuno",
+  "durationSec": 110,
+  "tempoBpm": 96,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "tema-0",
+      "kind": "tema",
+      "label": "Tema",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "C7",
+        "F",
+        "G7",
+        "C",
+        "G7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "montuno-1",
+      "kind": "montuno",
+      "label": "Montuno",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "F",
+        "G7",
+        "C",
+        "C"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "horn-mambo-2",
+      "kind": "horn-mambo",
+      "label": "Horn-Mambo",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "C7",
+        "F",
+        "G7",
+        "C",
+        "G7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "montuno-3",
+      "kind": "montuno",
+      "label": "Montuno",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "F",
+        "G7",
+        "C",
+        "C"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "G7",
+        "C",
+        "C7",
+        "F",
+        "G7",
+        "C",
+        "G7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "cierre-5",
+      "kind": "cierre",
+      "label": "Cierre",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Cm",
+        "Fm",
+        "G7",
+        "Cm",
+        "G#",
+        "A#7",
+        "D#",
+        "G7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "tres",
+      "role": "harmony",
+      "patternIds": [
+        "afro-piano-montuno"
+      ],
+      "noteCount": 586
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bongos",
+      "role": "percussion",
+      "patternIds": [
+        "afro-conga-tumbao"
+      ],
+      "noteCount": 370
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "claves",
+      "role": "percussion",
+      "patternIds": [
+        "afro-clave-son-23",
+        "afro-conga-tumbao"
+      ],
+      "noteCount": 158
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "acoustic-bass",
+      "role": "bass",
+      "patternIds": [
+        "afro-bass-tumbao"
+      ],
+      "noteCount": 168
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "trumpet",
+      "role": "lead",
+      "patternIds": [
+        "afro-mambo-horn-hits",
+        "tech-salsa-mambo-horn-section"
+      ],
+      "noteCount": 70
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-salsa-2-3-clave",
+        "tech-salsa-bongo-martillo",
+        "afro-mambo-horn-hits"
+      ],
+      "noteCount": 60
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-piano-montuno"
+      ],
+      "noteCount": 591
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "patternIds": [
+        "afro-conga-tumbao",
+        "afro-clave-son-23"
+      ],
+      "noteCount": 256
+    }
+  ],
+  "patterns": [
+    {
+      "id": "afro-piano-montuno",
+      "name": "Piano Montuno/Guajeo",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14,
+        16,
+        19,
+        22,
+        24,
+        27,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-conga-tumbao",
+      "name": "Conga Marcha",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-clave-son-23",
+      "name": "Son Clave 2–3 Structural Timeline",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        4,
+        8,
+        16,
+        22,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-bass-tumbao",
+      "name": "Bass Tumbao",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "afro-mambo-horn-hits",
+      "name": "Mambo Section Horn Stabs & Punctuation",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        6,
+        12,
+        14,
+        22,
+        28,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-salsa-mambo-horn-section",
+      "name": "mambo horn section",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "mambo horn section"
+      ]
+    },
+    {
+      "id": "tech-salsa-2-3-clave",
+      "name": "2-3 clave",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": [
+        "2-3 clave"
+      ]
+    },
+    {
+      "id": "tech-salsa-bongo-martillo",
+      "name": "bongó martillo",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "bongó martillo"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "tres",
+      "bongos",
+      "claves",
+      "acoustic-bass",
+      "trumpet"
+    ],
+    "techniques": [],
+    "signatureCell": "son montuno tres/piano guajeo with bass tumbao and horn section",
+    "tempoRange": [
+      88,
+      106
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "salsa-son-montuno"
+  },
+  "performance": {
+    "noteCount": 2259,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "afro-piano-montuno",
+      "afro-conga-tumbao",
+      "afro-clave-son-23",
+      "afro-bass-tumbao",
+      "afro-mambo-horn-hits",
+      "tech-salsa-mambo-horn-section",
+      "tech-salsa-2-3-clave",
+      "tech-salsa-bongo-martillo"
+    ]
+  }
+}

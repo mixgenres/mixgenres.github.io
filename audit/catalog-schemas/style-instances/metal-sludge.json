@@ -1,0 +1,414 @@
+{
+  "schemaVersion": 2,
+  "genre": "metal",
+  "styleId": "metal-sludge",
+  "styleName": "Sludge",
+  "durationSec": 183.52941176470594,
+  "tempoBpm": 68,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C#5",
+        "D5",
+        "C#5",
+        "G5"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "riff-1",
+      "kind": "riff",
+      "label": "Riff",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C#5",
+        "D5",
+        "C#5",
+        "G5"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "verse-2",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C#5",
+        "D5",
+        "C#5",
+        "G5"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "chorus-3",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C#5",
+        "D5",
+        "C#5",
+        "G5"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "breakdown-4",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C#5",
+        "D5",
+        "C#5",
+        "G5"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "solo-5",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "C#5",
+        "D5",
+        "C#5",
+        "G5"
+      ]
+    },
+    {
+      "id": "r6",
+      "key": "coda-6",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C#5",
+        "G5",
+        "C#5",
+        "C#5"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "metal-chorus-16",
+        "metal-djent-chug"
+      ],
+      "noteCount": 678
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "style-metal-groove-metal-signature",
+        "metal-breakdown",
+        "style-metal-deathcore-signature"
+      ],
+      "noteCount": 296
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "style-metal-deathcore-signature",
+        "metal-chorus-16"
+      ],
+      "noteCount": 362
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "overdrive-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "metal-djent-chug",
+        "metal-breakdown",
+        "metal-prog-odd-meter"
+      ],
+      "noteCount": 350
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "patternIds": [
+        "metal-chorus-16"
+      ],
+      "noteCount": 380
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-metal-chromatic-low-string-riff",
+        "house--ht-10-detroit-sequence",
+        "kizomba-vocal-comping"
+      ],
+      "noteCount": 76
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "strings",
+      "role": "harmony",
+      "patternIds": [
+        "tech-metal-chromatic-low-string-riff"
+      ],
+      "noteCount": 144
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "guitar-harmonics",
+      "role": "lead",
+      "patternIds": [
+        "metal-prog-odd-meter",
+        "metal-groove-metal"
+      ],
+      "noteCount": 176
+    }
+  ],
+  "patterns": [
+    {
+      "id": "metal-chorus-16",
+      "name": "Gallop Chorus Lift",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        3,
+        6,
+        7,
+        10,
+        11,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "metal-djent-chug",
+      "name": "Djent Polymetric Low Chug",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-metal-groove-metal-signature",
+      "name": "Groove Metal",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "palm-muted chug",
+        "chromatic low-string riff",
+        "double-kick",
+        "twin-guitar harmony"
+      ]
+    },
+    {
+      "id": "metal-breakdown",
+      "name": "Breakdown Chug",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "style-metal-deathcore-signature",
+      "name": "Deathcore",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "blast beat",
+        "breakdown",
+        "chromatic low-string riff",
+        "half-time breakdown"
+      ]
+    },
+    {
+      "id": "metal-prog-odd-meter",
+      "name": "5/8 Riff",
+      "worldId": "metal",
+      "meter": "5/8",
+      "subdivisions": 10,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-metal-chromatic-low-string-riff",
+      "name": "chromatic low-string riff",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "chromatic low-string riff"
+      ]
+    },
+    {
+      "id": "house--ht-10-detroit-sequence",
+      "name": "Detroit Sequence",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        16,
+        19,
+        22,
+        25,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-vocal-comping",
+      "name": "Vocal Phrase Response",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        7,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "metal-groove-metal",
+      "name": "Groove Metal Riff",
+      "worldId": "metal",
+      "meter": "4/4",
+      "subdivisions": 12,
+      "onsetGrid": [
+        0,
+        2,
+        3,
+        5,
+        6,
+        8,
+        9,
+        11
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "overdrive-guitar",
+      "hand-percussion"
+    ],
+    "techniques": [],
+    "signatureCell": "Swampy down-tuned blues riff collapsing into screeching feedback and agonized vocal shriek",
+    "tempoRange": [
+      55,
+      80
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 54,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "metal-sludge"
+  },
+  "performance": {
+    "noteCount": 2462,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "metal-chorus-16",
+      "metal-djent-chug",
+      "style-metal-groove-metal-signature",
+      "metal-breakdown",
+      "style-metal-deathcore-signature",
+      "metal-prog-odd-meter",
+      "tech-metal-chromatic-low-string-riff",
+      "house--ht-10-detroit-sequence",
+      "kizomba-vocal-comping",
+      "metal-groove-metal"
+    ]
+  }
+}

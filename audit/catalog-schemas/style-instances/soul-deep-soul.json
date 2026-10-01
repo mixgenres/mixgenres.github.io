@@ -1,0 +1,359 @@
+{
+  "schemaVersion": 2,
+  "genre": "soul",
+  "styleId": "soul-deep-soul",
+  "styleName": "Deep Soul",
+  "durationSec": 144,
+  "tempoBpm": 80,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "G#",
+        "A#",
+        "D#",
+        "Cm"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "instrumental-4",
+      "kind": "instrumental",
+      "label": "Instrumental",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "C",
+        "Am",
+        "F",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-soul-gospel-vocal-run"
+      ],
+      "noteCount": 69
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-soul-vocal-harmony-stack"
+      ],
+      "noteCount": 564
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-soul-melodic-bass"
+      ],
+      "noteCount": 199
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-soul-soul-backbeat"
+      ],
+      "noteCount": 195
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "soul-horn-response",
+        "soul-organ-swell",
+        "soul-backbeat-tambourine"
+      ],
+      "noteCount": 348
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "soul-organ-swell",
+        "soul-horn-response",
+        "soul-backbeat-tambourine"
+      ],
+      "noteCount": 468
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "horn-section",
+      "role": "harmony",
+      "patternIds": [
+        "soul-backbeat-tambourine",
+        "soul-horn-response"
+      ],
+      "noteCount": 236
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "tambourine",
+      "role": "percussion",
+      "patternIds": [
+        "soul-backbeat-tambourine",
+        "cumbia-guiro",
+        "kizomba-batida-groove",
+        "soul-horn-response"
+      ],
+      "noteCount": 226
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-soul-gospel-vocal-run",
+      "name": "gospel vocal run",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "gospel vocal run"
+      ]
+    },
+    {
+      "id": "tech-soul-vocal-harmony-stack",
+      "name": "vocal harmony stack",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal harmony stack"
+      ]
+    },
+    {
+      "id": "tech-soul-melodic-bass",
+      "name": "melodic bass",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "melodic bass"
+      ]
+    },
+    {
+      "id": "tech-soul-soul-backbeat",
+      "name": "backbeat",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "soul backbeat"
+      ]
+    },
+    {
+      "id": "soul-horn-response",
+      "name": "Horn Response",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        6,
+        7,
+        14,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "soul-organ-swell",
+      "name": "Organ Swell",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "soul-backbeat-tambourine",
+      "name": "Backbeat Tambourine",
+      "worldId": "soul",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        4,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cumbia-guiro",
+      "name": "Cumbia Güiro",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "kizomba-batida-groove",
+      "name": "Batida & Sub-Kick Beat",
+      "worldId": "kizomba",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "voice",
+      "piano",
+      "bass",
+      "drums",
+      "organ"
+    ],
+    "techniques": [],
+    "signatureCell": "A rising, gospel-shaped vocal phrase over sustained keys and a spacious backbeat",
+    "tempoRange": [
+      55,
+      105
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 56,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "soul-deep-soul"
+  },
+  "performance": {
+    "noteCount": 2305,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-soul-gospel-vocal-run",
+      "tech-soul-vocal-harmony-stack",
+      "tech-soul-melodic-bass",
+      "tech-soul-soul-backbeat",
+      "soul-horn-response",
+      "soul-organ-swell",
+      "soul-backbeat-tambourine",
+      "cumbia-guiro",
+      "kizomba-batida-groove"
+    ]
+  }
+}

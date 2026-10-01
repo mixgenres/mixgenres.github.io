@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "id": "brazilian",
+  "name": "Brazilian",
+  "family": "Brazilian",
+  "description": "Samba and bossa nova share ancestry",
+  "substyles": [
+    "Bossa Nova",
+    "Samba de Enredo",
+    "Pagode",
+    "Samba-Reggae"
+  ],
+  "styleIds": [
+    "brazilian-bossa-nova",
+    "brazilian-samba-de-enredo",
+    "brazilian-pagode",
+    "brazilian-samba-reggae",
+    "brazilian-choro-brazilian-chamber-groove",
+    "brazilian-baiao-northeastern-brazilian",
+    "brazilian-forro",
+    "brazilian-tropicalia",
+    "brazilian-mpb"
+  ],
+  "patternIds": [
+    "brazilian--sb-surdo-foundation",
+    "brazilian--sb-pandeiro",
+    "brazilian--sb-cavaquinho",
+    "brazilian--sb-bossa-guitar",
+    "brazilian--sb-bossa-bass",
+    "brazilian--sb-06-samba-surdo-foundation",
+    "brazilian--sb-07-samba-pandeiro-interlock",
+    "brazilian--sb-08-tamborim-cross-accent",
+    "brazilian--sb-09-cavaquinho-partido",
+    "brazilian--sb-10-bossa-guitar-clave",
+    "brazilian--sb-11-bossa-bass-anticipation",
+    "brazilian--sb-12-bossa-piano-voicing",
+    "brazilian--sb-13-samba-call-response",
+    "brazilian--sb-14-batucada-break",
+    "brazilian--sb-15-bossa-ending-turn",
+    "brazilian--brz-samba-batucada",
+    "brazilian--brz-bossa-violao",
+    "brazilian--brz-choro-maxixe",
+    "brazilian--brz-baiao-zabumba",
+    "tech-brazilian-pandeiro-subdivision",
+    "tech-brazilian-7-string-baixaria",
+    "tech-brazilian-cavaquinho-syncopation",
+    "tech-brazilian-choro-counterpoint",
+    "tech-brazilian-zabumba-bass-stroke-relationship",
+    "tech-brazilian-triangle-16ths",
+    "tech-brazilian-baiao-6-8-ambiguity",
+    "tech-brazilian-partido-alto-rhythm",
+    "tech-brazilian-samba-tamborim-phrases",
+    "tech-brazilian-brazilian-guitar-syncopation",
+    "style-brazilian-choro-brazilian-chamber-groove-signature",
+    "style-brazilian-baiao-northeastern-brazilian-signature",
+    "style-brazilian-forro-signature",
+    "style-brazilian-tropicalia-signature",
+    "style-brazilian-mpb-signature",
+    "brz-samba-batucada",
+    "brz-bossa-violao",
+    "brz-choro-maxixe",
+    "brz-baiao-zabumba"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "brazilian-bossa-nova",
+      "name": "Bossa Nova",
+      "keySubstyles": [
+        "Classic Bossa",
+        "Bossa-Jazz"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "piano",
+        "flute",
+        "upright-bass",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "brazilian-samba-de-enredo",
+      "name": "Samba de Enredo",
+      "keySubstyles": [
+        "Carnival Samba",
+        "Escola de Samba"
+      ],
+      "characteristicInstruments": [
+        "surdo",
+        "tamborim",
+        "cavaquinho",
+        "cuica",
+        "brass"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "brazilian-pagode",
+      "name": "Pagode",
+      "keySubstyles": [
+        "Pagode Tradicional",
+        "Pagode Romântico"
+      ],
+      "characteristicInstruments": [
+        "cavaquinho",
+        "pandeiro",
+        "tantan",
+        "repinique",
+        "synth"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "brazilian-samba-reggae",
+      "name": "Samba-Reggae",
+      "keySubstyles": [
+        "Bahian Carnival Bloc",
+        "Axé Fusion"
+      ],
+      "characteristicInstruments": [
+        "surdo",
+        "timbales",
+        "repinique",
+        "brass",
+        "synth"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "brazilian-choro-brazilian-chamber-groove",
+      "name": "Choro / Brazilian Chamber Groove",
+      "keySubstyles": [
+        "Choro / Brazilian Chamber Groove"
+      ],
+      "characteristicInstruments": [
+        "cavaquinho",
+        "acoustic-guitar",
+        "pandeiro",
+        "mandolin",
+        "upright-bass",
+        "flute"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "brazilian-baiao-northeastern-brazilian",
+      "name": "Baião / Northeastern Brazilian",
+      "keySubstyles": [
+        "Baião / Northeastern Brazilian"
+      ],
+      "characteristicInstruments": [
+        "accordion",
+        "zabumba",
+        "triangle",
+        "acoustic-guitar",
+        "bass",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "brazilian-forro",
+      "name": "Forró",
+      "keySubstyles": [
+        "Forró"
+      ],
+      "characteristicInstruments": [
+        "accordion",
+        "zabumba",
+        "triangle",
+        "bass",
+        "acoustic-guitar",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "brazilian-tropicalia",
+      "name": "Tropicalia",
+      "keySubstyles": [
+        "Tropicalia"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "acoustic-guitar",
+        "bass",
+        "drums",
+        "strings",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "brazilian-mpb",
+      "name": "MPB",
+      "keySubstyles": [
+        "MPB"
+      ],
+      "characteristicInstruments": [
+        "acoustic-guitar",
+        "piano",
+        "bass",
+        "drums",
+        "flute",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "brazilian-starter"
+}

@@ -1,0 +1,468 @@
+{
+  "schemaVersion": 2,
+  "genre": "ska",
+  "styleId": "ska-two-tone",
+  "styleName": "Two-Tone",
+  "durationSec": 75.29411764705883,
+  "tempoBpm": 153,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "G",
+        "Dm",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "F",
+        "G",
+        "Dm",
+        "Dm"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "instrumental-3",
+      "kind": "instrumental",
+      "label": "Instrumental",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Dm",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "sk-two-tone-drive"
+      ],
+      "noteCount": 570
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "tech-ska-two-tone-organ",
+        "reggae--rd-09-bubble-organ",
+        "sk-12-ska-piano-bubble",
+        "jazz-latin-montuno-comp",
+        "jazz-piano-comping"
+      ],
+      "noteCount": 510
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "tech-ska-horn-guitar-call-response",
+        "sk-12-ska-piano-bubble"
+      ],
+      "noteCount": 196
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "sk-rocksteady-bass",
+        "sk-07-walking-ska-bass"
+      ],
+      "noteCount": 379
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "sk-14-ska-break-call",
+        "sk-09-ska-drum-drive",
+        "sk-15-ska-final-shout"
+      ],
+      "noteCount": 272
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-ska-horn-guitar-call-response"
+      ],
+      "noteCount": 72
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "tenor-sax",
+      "role": "melody",
+      "patternIds": [
+        "ska-horn-stabs",
+        "ska-drums-rocker",
+        "sk-14-ska-break-call",
+        "tech-ska-horn-guitar-call-response",
+        "sk-08-horn-section-answer"
+      ],
+      "noteCount": 155
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "trombone",
+      "role": "lead",
+      "patternIds": [
+        "sk-13-ska-horn-stab"
+      ],
+      "noteCount": 131
+    }
+  ],
+  "patterns": [
+    {
+      "id": "sk-two-tone-drive",
+      "name": "Two-tone upstroke drive",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-ska-two-tone-organ",
+      "name": "two-tone organ",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "two-tone organ"
+      ]
+    },
+    {
+      "id": "reggae--rd-09-bubble-organ",
+      "name": "Bubble Organ",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "sk-12-ska-piano-bubble",
+      "name": "Piano bubble response",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-latin-montuno-comp",
+      "name": "Latin Jazz Montuno Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        7,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-comping",
+      "name": "Syncopated Piano Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-ska-horn-guitar-call-response",
+      "name": "horn/guitar call-response",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "horn/guitar call-response"
+      ]
+    },
+    {
+      "id": "sk-rocksteady-bass",
+      "name": "Rocksteady Bass Hold",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "sk-07-walking-ska-bass",
+      "name": "walking bass contour",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        7,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "sk-14-ska-break-call",
+      "name": "Break Call",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "sk-09-ska-drum-drive",
+      "name": "Drum Drive",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "sk-15-ska-final-shout",
+      "name": "Final Shout",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "ska-horn-stabs",
+      "name": "Horn Stabs",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        7,
+        8,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "ska-drums-rocker",
+      "name": "Drummer Drive",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "sk-08-horn-section-answer",
+      "name": "Horn Section Answer",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        8,
+        10,
+        12,
+        24,
+        26,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "sk-13-ska-horn-stab",
+      "name": "Horn offbeat punctuations",
+      "worldId": "ska",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        3,
+        7,
+        11,
+        15
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "organ",
+      "brass",
+      "bass",
+      "drums"
+    ],
+    "techniques": [],
+    "signatureCell": "Fast-paced organ skank chop launching into snappy British vocal delivery and punchy brass",
+    "tempoRange": [
+      140,
+      165
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "pushed",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "ska-two-tone"
+  },
+  "performance": {
+    "noteCount": 2285,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "sk-two-tone-drive",
+      "tech-ska-two-tone-organ",
+      "reggae--rd-09-bubble-organ",
+      "sk-12-ska-piano-bubble",
+      "jazz-latin-montuno-comp",
+      "jazz-piano-comping",
+      "tech-ska-horn-guitar-call-response",
+      "sk-rocksteady-bass",
+      "sk-07-walking-ska-bass",
+      "sk-14-ska-break-call",
+      "sk-09-ska-drum-drive",
+      "sk-15-ska-final-shout",
+      "ska-horn-stabs",
+      "ska-drums-rocker",
+      "sk-08-horn-section-answer",
+      "sk-13-ska-horn-stab"
+    ]
+  }
+}

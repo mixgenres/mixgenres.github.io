@@ -1,0 +1,377 @@
+{
+  "schemaVersion": 2,
+  "genre": "electronic",
+  "styleId": "electronic-chicago-acid-house",
+  "styleName": "Chicago Acid House",
+  "durationSec": 138.24000000000004,
+  "tempoBpm": 125,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Groove",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Main Groove",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "bridge-4",
+      "kind": "bridge",
+      "label": "Return",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "Am",
+        "F",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "acid-303",
+      "role": "lead",
+      "patternIds": [
+        "style-electronic-chicago-acid-house-signature",
+        "elec-acid-303",
+        "tech-electronic-303-acid-sequence",
+        "tech-electronic-gated-synth-sequence"
+      ],
+      "noteCount": 104
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "elec-4onfloor",
+        "elec-footwork",
+        "style-electronic-chicago-acid-house-signature"
+      ],
+      "noteCount": 348
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass-lead",
+      "role": "bass",
+      "patternIds": [
+        "tech-electronic-gated-synth-sequence",
+        "tech-electronic-filter-envelope-bass"
+      ],
+      "noteCount": 275
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "elec-acid-303",
+        "style-electronic-chicago-acid-house-signature",
+        "elec-trance-16ths"
+      ],
+      "noteCount": 104
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "elec-trance-16ths",
+        "style-electronic-chicago-acid-house-signature"
+      ],
+      "noteCount": 208
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "saw-lead",
+      "role": "lead",
+      "patternIds": [
+        "tech-electronic-gated-synth-sequence",
+        "elec-acid-303"
+      ],
+      "noteCount": 251
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "polysynth",
+      "role": "harmony",
+      "patternIds": [
+        "style-electronic-chicago-acid-house-signature",
+        "tech-electronic-gated-synth-sequence",
+        "elec-acid-303"
+      ],
+      "noteCount": 503
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "style-electronic-chicago-acid-house-signature",
+        "elec-acid-303",
+        "tech-electronic-gated-synth-sequence"
+      ],
+      "noteCount": 104
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-electronic-chicago-acid-house-signature",
+      "name": "Chicago Acid House",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "303 acid sequence",
+        "filter-envelope bass",
+        "gated synth sequence"
+      ]
+    },
+    {
+      "id": "elec-acid-303",
+      "name": "Acid House 303 Bassline",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        10,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-electronic-303-acid-sequence",
+      "name": "303 acid sequence",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "303 acid sequence"
+      ]
+    },
+    {
+      "id": "tech-electronic-gated-synth-sequence",
+      "name": "gated synth sequence",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "gated synth sequence"
+      ]
+    },
+    {
+      "id": "elec-4onfloor",
+      "name": "Four on the Floor",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "elec-footwork",
+      "name": "Chicago Footwork/Juke",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        7,
+        9,
+        12,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-electronic-filter-envelope-bass",
+      "name": "filter-envelope bass",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "filter-envelope bass"
+      ]
+    },
+    {
+      "id": "elec-trance-16ths",
+      "name": "Trance Bass 16ths",
+      "worldId": "electronic",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "acid-303",
+      "drums",
+      "bass-lead",
+      "synth"
+    ],
+    "techniques": [
+      "303 acid sequence",
+      "filter-envelope bass",
+      "gated synth sequence"
+    ],
+    "signatureCell": "Repeating 303 sequence with filter motion",
+    "tempoRange": [
+      120,
+      130
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Phuture"
+    ],
+    "tracks": [
+      "Acid Tracks"
+    ]
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "electronic-chicago-acid-house"
+  },
+  "performance": {
+    "noteCount": 1897,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-electronic-chicago-acid-house-signature",
+      "elec-acid-303",
+      "tech-electronic-303-acid-sequence",
+      "tech-electronic-gated-synth-sequence",
+      "elec-4onfloor",
+      "elec-footwork",
+      "tech-electronic-filter-envelope-bass",
+      "elec-trance-16ths"
+    ]
+  }
+}

@@ -1,0 +1,343 @@
+{
+  "schemaVersion": 2,
+  "genre": "uk-bass",
+  "styleId": "uk-bass-uk-funky",
+  "styleName": "UK Funky",
+  "durationSec": 135,
+  "tempoBpm": 128,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Groove",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Main Groove",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "bridge-4",
+      "kind": "bridge",
+      "label": "Return",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-uk-bass-shuffled-percussion",
+        "style-uk-bass-uk-funky-signature",
+        "tech-uk-bass-syncopated-uk-funky-percussion"
+      ],
+      "noteCount": 347
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-uk-bass-grime-square-wave-bass",
+        "style-uk-bass-uk-funky-signature",
+        "tech-uk-bass-sub-bass-wobble"
+      ],
+      "noteCount": 289
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "patternIds": [
+        "style-uk-bass-uk-funky-signature",
+        "tech-uk-bass-syncopated-uk-funky-percussion"
+      ],
+      "noteCount": 292
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "ukbass-grime-stab",
+        "ukbass-halfstep-drop"
+      ],
+      "noteCount": 100
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "ukbass-halfstep-drop",
+        "ukbass-grime-stab"
+      ],
+      "noteCount": 100
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-uk-bass-sub-bass-wobble",
+        "tech-uk-bass-grime-square-wave-bass"
+      ],
+      "noteCount": 280
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "acid-303",
+      "role": "lead",
+      "patternIds": [
+        "style-uk-bass-uk-funky-signature",
+        "ukbass-halfstep-drop"
+      ],
+      "noteCount": 101
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "warm-pad",
+      "role": "harmony",
+      "patternIds": [
+        "style-uk-bass-uk-funky-signature"
+      ],
+      "noteCount": 280
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-uk-bass-shuffled-percussion",
+      "name": "shuffled percussion",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "shuffled percussion"
+      ]
+    },
+    {
+      "id": "style-uk-bass-uk-funky-signature",
+      "name": "UK Funky",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "syncopated UK funky percussion",
+        "grime square-wave bass",
+        "shuffled percussion",
+        "sub-bass wobble"
+      ]
+    },
+    {
+      "id": "tech-uk-bass-syncopated-uk-funky-percussion",
+      "name": "syncopated UK funky percussion",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "syncopated UK funky percussion"
+      ]
+    },
+    {
+      "id": "tech-uk-bass-grime-square-wave-bass",
+      "name": "grime square-wave bass",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "grime square-wave bass"
+      ]
+    },
+    {
+      "id": "tech-uk-bass-sub-bass-wobble",
+      "name": "sub-bass wobble",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "sub-bass wobble"
+      ]
+    },
+    {
+      "id": "ukbass-grime-stab",
+      "name": "Grime Stab",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "ukbass-halfstep-drop",
+      "name": "Half-Step Drop",
+      "worldId": "uk-bass",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        7,
+        8,
+        15
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "drums",
+      "bass",
+      "hand-percussion",
+      "synth",
+      "voice"
+    ],
+    "techniques": [
+      "syncopated UK funky percussion",
+      "grime square-wave bass",
+      "shuffled percussion",
+      "sub-bass wobble"
+    ],
+    "signatureCell": "Swung percussion with syncopated bass",
+    "tempoRange": [
+      120,
+      135
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 1
+  },
+  "references": {
+    "artists": [
+      "Roska",
+      "Donae'o"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "uk-bass-uk-funky"
+  },
+  "performance": {
+    "noteCount": 1789,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-uk-bass-shuffled-percussion",
+      "style-uk-bass-uk-funky-signature",
+      "tech-uk-bass-syncopated-uk-funky-percussion",
+      "tech-uk-bass-grime-square-wave-bass",
+      "tech-uk-bass-sub-bass-wobble",
+      "ukbass-grime-stab",
+      "ukbass-halfstep-drop"
+    ]
+  }
+}

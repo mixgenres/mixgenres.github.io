@@ -1,0 +1,416 @@
+{
+  "schemaVersion": 2,
+  "genre": "cumbia",
+  "styleId": "cumbia-digitale",
+  "styleName": "Digitale",
+  "durationSec": 45.47368421052632,
+  "tempoBpm": 95,
+  "meter": "2/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "Am",
+        "A#",
+        "C"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "tema-1",
+      "kind": "tema",
+      "label": "Tema",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "Am",
+        "A#",
+        "C",
+        "Dm",
+        "Am",
+        "A#",
+        "C"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "verso-2",
+      "kind": "verso",
+      "label": "Verso",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Dm",
+        "Am",
+        "A#",
+        "C",
+        "Dm",
+        "Am",
+        "A#",
+        "C"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "coro-3",
+      "kind": "coro",
+      "label": "Coro",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Dm",
+        "Am",
+        "A#",
+        "C",
+        "Dm",
+        "Am",
+        "A#",
+        "C"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "break-4",
+      "kind": "break",
+      "label": "Break",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "Am",
+        "A#",
+        "C",
+        "Dm",
+        "Am",
+        "A#",
+        "C"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "cierre-5",
+      "kind": "cierre",
+      "label": "Cierre",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Dm",
+        "Am",
+        "A#",
+        "C",
+        "Dm",
+        "Am",
+        "A#",
+        "C"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "tech-cumbia-digital-cumbia-sub-bass",
+        "tech-cumbia-electric-guitar-cumbia-riff",
+        "tech-cumbia-cumbia-turnaround"
+      ],
+      "noteCount": 44
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "patternIds": [
+        "tech-cumbia-electric-guitar-cumbia-riff",
+        "tech-cumbia-cumbia-turnaround",
+        "house--ht-10-detroit-sequence"
+      ],
+      "noteCount": 44
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "cu-06-cumbia-bass-tumbao",
+        "cu-cumbia-bass"
+      ],
+      "noteCount": 97
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "guiro",
+      "role": "percussion",
+      "patternIds": [
+        "cu-guacharaca"
+      ],
+      "noteCount": 324
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "flute",
+      "role": "melody",
+      "patternIds": [
+        "tech-cumbia-cumbia-turnaround",
+        "cu-06-cumbia-bass-tumbao",
+        "tech-cumbia-digital-cumbia-sub-bass",
+        "tech-cumbia-electric-guitar-cumbia-riff",
+        "tech-cumbia-gaita-melody"
+      ],
+      "noteCount": 133
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-cumbia-digital-cumbia-sub-bass",
+        "cu-06-cumbia-bass-tumbao"
+      ],
+      "noteCount": 44
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "guacharaca",
+      "role": "percussion",
+      "patternIds": [
+        "cu-guacharaca"
+      ],
+      "noteCount": 324
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "tambora",
+      "role": "percussion",
+      "patternIds": [
+        "afro-clave-son-23",
+        "cu-cumbia-drum"
+      ],
+      "noteCount": 188
+    }
+  ],
+  "patterns": [
+    {
+      "id": "tech-cumbia-digital-cumbia-sub-bass",
+      "name": "digital cumbia sub-bass",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "digital cumbia sub-bass"
+      ]
+    },
+    {
+      "id": "tech-cumbia-electric-guitar-cumbia-riff",
+      "name": "electric-guitar cumbia riff",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "electric-guitar cumbia riff"
+      ]
+    },
+    {
+      "id": "tech-cumbia-cumbia-turnaround",
+      "name": "turnaround",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "cumbia turnaround"
+      ]
+    },
+    {
+      "id": "house--ht-10-detroit-sequence",
+      "name": "Detroit Sequence",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        16,
+        19,
+        22,
+        25,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-06-cumbia-bass-tumbao",
+      "name": "tumbao bass",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-cumbia-bass",
+      "name": "bass anticipation",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        7,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-guacharaca",
+      "name": "Guacharaca scraper pulse",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        1,
+        3,
+        4,
+        6,
+        7,
+        9,
+        10,
+        12,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-cumbia-gaita-melody",
+      "name": "gaita melody",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "gaita melody"
+      ]
+    },
+    {
+      "id": "afro-clave-son-23",
+      "name": "Son Clave 2–3 Structural Timeline",
+      "worldId": "salsa",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        4,
+        8,
+        16,
+        22,
+        28
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-cumbia-drum",
+      "name": "Tambora/alegre conversation",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        8,
+        10,
+        13
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "synth",
+      "sampler",
+      "sub-bass",
+      "guiro",
+      "flute"
+    ],
+    "techniques": [],
+    "signatureCell": "Warped digital synth-flute hook dropping over massive 808 sub-bass and shaker",
+    "tempoRange": [
+      86,
+      104
+    ],
+    "preferredMeters": [
+      "2/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "cumbia-digitale"
+  },
+  "performance": {
+    "noteCount": 1198,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "tech-cumbia-digital-cumbia-sub-bass",
+      "tech-cumbia-electric-guitar-cumbia-riff",
+      "tech-cumbia-cumbia-turnaround",
+      "house--ht-10-detroit-sequence",
+      "cu-06-cumbia-bass-tumbao",
+      "cu-cumbia-bass",
+      "cu-guacharaca",
+      "tech-cumbia-gaita-melody",
+      "afro-clave-son-23",
+      "cu-cumbia-drum"
+    ]
+  }
+}

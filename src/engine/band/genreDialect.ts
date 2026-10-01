@@ -2,6 +2,7 @@ import { contractForGenre } from '../../engine/style/contracts';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { instrumentHasKey } from '../../engine/lookup/instrumentKeys.ts';
 import { getStyle } from '../../engine/style/registry';
+import { getInstrumentPerformanceProfile } from '../../engine/lookup/performance';
 
 import type { InstrumentDialect, PerformanceMode } from '../../data/styles/contracts';
 import { DIALECTS, DEFAULT_DIALECT_SHAPE } from '../../data/performance/dialects';
@@ -83,6 +84,38 @@ export function resolveDialect(
   if (worldId) {
     const exactWorldDialect = DIALECTS[`${normId}:${worldId}`];
     if (exactWorldDialect) return resolveVariants(exactWorldDialect);
+
+    try {
+      const perfProfile = getInstrumentPerformanceProfile(normId);
+      const gp = perfProfile?.genreProfiles?.[worldId];
+      if (gp) {
+        const def = INSTRUMENTS_BY_ID[normId] || INSTRUMENTS_BY_ID[instrumentId];
+        const defaultTech = gp.preferredGestures?.[0] ?? 'default';
+        const allowedTechs = (gp.preferredGestures?.length ? gp.preferredGestures : (gp.gestureIds?.length ? gp.gestureIds : ['default']));
+        const profileDialect: InstrumentDialect = {
+          ...DEFAULT_DIALECT_SHAPE,
+          id: `${normId}:${worldId}`,
+          instrumentId: normId,
+          name: `${def?.name ?? normId} (${worldId})`,
+          family: def?.family ?? DEFAULT_DIALECT_SHAPE.family,
+          performanceMode: performanceModeForContext(worldId, styleId),
+          defaultTechnique: defaultTech,
+          allowedTechniques: allowedTechs,
+          brightnessMultiplier: 1.0 + ((gp.phrase?.attack ?? 0.5) - 0.5) * 0.4,
+          decayMultiplier: 1.0 + ((gp.phrase?.sustain ?? 0.5) - 0.5) * 0.4,
+          micProximityPreset: gp.timing?.feel === 'push' ? 'close-mic' : 'room-ambient',
+          roleVariants: (gp.roles ?? []).reduce((acc: Record<string, Partial<InstrumentDialect>>, r: string) => {
+            acc[r] = {
+              defaultTechnique: defaultTech,
+            };
+            return acc;
+          }, {}),
+        };
+        return resolveVariants(profileDialect);
+      }
+    } catch {
+      // ignore
+    }
   }
 
   const sparse = fallbackDialectForSparseContracts(instrumentId, worldId, styleId);

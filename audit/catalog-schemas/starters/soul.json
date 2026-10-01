@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "id": "soul-starter",
+  "genreId": "soul",
+  "genreName": "Soul",
+  "styleId": "soul-deep-funk",
+  "styleName": "Classic Soul",
+  "styleDescription": "Expressive lead singing, gospel-rooted response, a",
+  "bpm": 93,
+  "meter": "4/4",
+  "regions": [
+    {
+      "id": "r0",
+      "name": "Intro",
+      "type": "intro",
+      "genreId": "soul",
+      "styleId": "soul-deep-funk",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r1",
+      "name": "Verse",
+      "type": "verse",
+      "genreId": "soul",
+      "styleId": "soul-deep-funk",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "Chorus",
+      "type": "chorus",
+      "genreId": "soul",
+      "styleId": "soul-deep-funk",
+      "chords": [
+        "Fmaj7",
+        "G7",
+        "Em7",
+        "Am7"
+      ]
+    },
+    {
+      "id": "r3",
+      "name": "Bridge",
+      "type": "bridge",
+      "genreId": "soul",
+      "styleId": "soul-deep-funk",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Instrumental",
+      "type": "instrumental",
+      "genreId": "soul",
+      "styleId": "soul-deep-funk",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r5",
+      "name": "Outro",
+      "type": "outro",
+      "genreId": "soul",
+      "styleId": "soul-deep-funk",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "v0",
+      "instrumentId": "voice",
+      "instrumentName": "Synth voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-soul-call-and-response"
+      ],
+      "noteCount": 69,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "6655": 63,
+        "44655": 6
+      }
+    },
+    {
+      "id": "v1",
+      "instrumentId": "bass",
+      "instrumentName": "Electric Bass Guitar",
+      "role": "bass",
+      "patternIds": [
+        "tech-soul-melodic-bass"
+      ],
+      "noteCount": 208,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4607": 175,
+        "5227": 2,
+        "6655": 7,
+        "30366": 1,
+        "44655": 12,
+        "49857": 11
+      }
+    },
+    {
+      "id": "v2",
+      "instrumentId": "drums",
+      "instrumentName": "Standard Drum Kit",
+      "role": "percussion",
+      "patternIds": [
+        "tech-soul-soul-backbeat"
+      ],
+      "noteCount": 189,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "choke",
+        "slap"
+      ],
+      "gestureCounts": {
+        "4337": 12,
+        "4607": 155,
+        "9363": 10,
+        "44655": 12
+      }
+    },
+    {
+      "id": "v3",
+      "instrumentId": "piano",
+      "instrumentName": "Acoustic Grand Piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-soul-vocal-harmony-stack"
+      ],
+      "noteCount": 774,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "marcato",
+        "arrastre",
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 714,
+        "8118": 12,
+        "8526": 12,
+        "19949": 12,
+        "21063": 12,
+        "44655": 12
+      }
+    },
+    {
+      "id": "v4",
+      "instrumentId": "brass",
+      "instrumentName": "Brass section",
+      "role": "harmony",
+      "patternIds": [
+        "soul-horn-response",
+        "soul-motown-bass"
+      ],
+      "noteCount": 360,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 302,
+        "8118": 10,
+        "8526": 12,
+        "12241": 12,
+        "44655": 12,
+        "50696": 12
+      }
+    },
+    {
+      "id": "v5",
+      "instrumentId": "electric-guitar",
+      "instrumentName": "Electric Guitar",
+      "role": "harmony",
+      "patternIds": [
+        "soul-backbeat-tambourine",
+        "soul-motown-bass"
+      ],
+      "noteCount": 886,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [
+        "bend",
+        "mute",
+        "vibrato"
+      ],
+      "gestureCounts": {
+        "4607": 826,
+        "29346": 12,
+        "30366": 12,
+        "44655": 12,
+        "48234": 12,
+        "49857": 12
+      }
+    },
+    {
+      "id": "v6",
+      "instrumentId": "organ",
+      "instrumentName": "Tonewheel organ",
+      "role": "harmony",
+      "patternIds": [
+        "soul-motown-bass",
+        "soul-horn-response",
+        "soul-backbeat-tambourine"
+      ],
+      "noteCount": 570,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 522,
+        "6655": 12,
+        "8118": 12,
+        "44655": 12,
+        "48871": 12
+      }
+    },
+    {
+      "id": "v7",
+      "instrumentId": "horn-section",
+      "instrumentName": "Horn section",
+      "role": "harmony",
+      "patternIds": [
+        "soul-horn-response",
+        "tech-soul-string-swell"
+      ],
+      "noteCount": 650,
+      "techniqueIds": [
+        "articulations",
+        "techniqueMethods",
+        "playingStyles",
+        "genreTechniques"
+      ],
+      "articulationIds": [],
+      "gestureCounts": {
+        "4607": 590,
+        "8118": 12,
+        "8526": 12,
+        "12241": 12,
+        "44655": 12,
+        "50696": 12
+      }
+    }
+  ],
+  "usedPatternIds": [
+    "tech-soul-call-and-response",
+    "tech-soul-melodic-bass",
+    "tech-soul-soul-backbeat",
+    "tech-soul-vocal-harmony-stack",
+    "soul-horn-response",
+    "soul-motown-bass",
+    "soul-backbeat-tambourine",
+    "tech-soul-string-swell"
+  ],
+  "performance": {
+    "durationSeconds": 123.87096774193542,
+    "noteCount": 3706,
+    "trackCount": 8,
+    "tracksWithNoNotes": []
+  }
+}

@@ -1,0 +1,395 @@
+{
+  "schemaVersion": 2,
+  "genre": "bachata",
+  "styleId": "bachata-campestre",
+  "styleName": "Campestre",
+  "durationSec": 57.31343283582095,
+  "tempoBpm": 134,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "Am",
+        "E7",
+        "Am",
+        "E7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verso-1",
+      "kind": "verso",
+      "label": "Verso",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "Am",
+        "Dm",
+        "E7",
+        "Am"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "coro-2",
+      "kind": "coro",
+      "label": "Coro",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "Am",
+        "Dm",
+        "E7",
+        "Am"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "mambo-3",
+      "kind": "mambo",
+      "label": "Mambo",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "Am",
+        "Dm",
+        "E7",
+        "Am"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "coda-4",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "E7",
+        "E7",
+        "Am",
+        "Am"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "bachata-requinto-derecho",
+        "bachata-segunda-derecho"
+      ],
+      "noteCount": 616
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-bachata-descending-bachata-bass",
+        "bachata-bass-derecho"
+      ],
+      "noteCount": 180
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bongos",
+      "role": "percussion",
+      "patternIds": [
+        "bachata-bongo-derecho"
+      ],
+      "noteCount": 231
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "guiro",
+      "role": "percussion",
+      "patternIds": [
+        "bachata-bongo-derecho",
+        "cumbia-guiro",
+        "bachata-bongo-majao"
+      ],
+      "noteCount": 200
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "requinto",
+      "role": "lead",
+      "patternIds": [
+        "bachata-segunda-derecho",
+        "bachata-requinto-derecho"
+      ],
+      "noteCount": 99
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-bachata-vocal-guitar-call-response"
+      ],
+      "noteCount": 48
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "afro-amapiano-pad",
+        "jazz-piano-red-garland",
+        "jazz-comping-sync",
+        "tech-bachata-guitar-arpeggio-ostinato"
+      ],
+      "noteCount": 290
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "maracas",
+      "role": "percussion",
+      "patternIds": [
+        "bachata-bongo-derecho",
+        "bachata-bongo-majao"
+      ],
+      "noteCount": 219
+    }
+  ],
+  "patterns": [
+    {
+      "id": "bachata-requinto-derecho",
+      "name": "Requinto Derecho",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "bachata-segunda-derecho",
+      "name": "Segunda Guitar",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-bachata-descending-bachata-bass",
+      "name": "descending bachata bass",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "descending bachata bass"
+      ]
+    },
+    {
+      "id": "bachata-bass-derecho",
+      "name": "Bass Derecho",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "bachata-bongo-derecho",
+      "name": "Bongo Derecho",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cumbia-guiro",
+      "name": "Cumbia Güiro",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        4,
+        6,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "bachata-bongo-majao",
+      "name": "Bongo Majao",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-bachata-vocal-guitar-call-response",
+      "name": "vocal/guitar call-response",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal/guitar call-response"
+      ]
+    },
+    {
+      "id": "afro-amapiano-pad",
+      "name": "Airy Rhodes & Synth Pad Comping",
+      "worldId": "afrobeats",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        8,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-piano-red-garland",
+      "name": "Block Chords",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        3,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "jazz-comping-sync",
+      "name": "Syncopated Comping",
+      "worldId": "jazz",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        1,
+        4,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-bachata-guitar-arpeggio-ostinato",
+      "name": "guitar arpeggio ostinato",
+      "worldId": "bachata",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "guitar arpeggio ostinato"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "acoustic-guitar",
+      "bass",
+      "bongos",
+      "guiro",
+      "requinto"
+    ],
+    "techniques": [],
+    "signatureCell": "Sharp rustic requinto picados over earthy driving Cibao percussion",
+    "tempoRange": [
+      125,
+      142
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "bachata-campestre"
+  },
+  "performance": {
+    "noteCount": 1883,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "bachata-requinto-derecho",
+      "bachata-segunda-derecho",
+      "tech-bachata-descending-bachata-bass",
+      "bachata-bass-derecho",
+      "bachata-bongo-derecho",
+      "cumbia-guiro",
+      "bachata-bongo-majao",
+      "tech-bachata-vocal-guitar-call-response",
+      "afro-amapiano-pad",
+      "jazz-piano-red-garland",
+      "jazz-comping-sync",
+      "tech-bachata-guitar-arpeggio-ostinato"
+    ]
+  }
+}

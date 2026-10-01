@@ -1,0 +1,412 @@
+{
+  "schemaVersion": 2,
+  "genre": "reggae",
+  "styleId": "reggae-rocksteady",
+  "styleName": "Rocksteady",
+  "durationSec": 102.85714285714288,
+  "tempoBpm": 84,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F",
+        "A#",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "F",
+        "A#",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "C#",
+        "D#",
+        "G#",
+        "Fm"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "dub-break-3",
+      "kind": "dub break",
+      "label": "Dub Break",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F",
+        "A#",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "verse-4",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "F",
+        "A#",
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "F",
+        "A#",
+        "C",
+        "F"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "reggae--reggae-skank",
+        "reggae--rd-07-skank-guitar",
+        "reggae--rd-08-reggae-bass-lead",
+        "tech-reggae-reggae-bassline",
+        "reggae--rd-reggae-bass"
+      ],
+      "noteCount": 125
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--rd-skank"
+      ],
+      "noteCount": 396
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "reggae--reggae-melodic-bass",
+        "reggae--rd-one-drop",
+        "reggae--rd-15-dub-version-tag"
+      ],
+      "noteCount": 182
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--reggae-skank",
+        "reggae--reggae-melodic-bass"
+      ],
+      "noteCount": 312
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tango-arrastre",
+        "reggae--reggae-skank",
+        "tango-332-piazzolla"
+      ],
+      "noteCount": 432
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "reggae--reggae-skank",
+        "tech-reggae-reggae-bassline",
+        "tech-reggae-toast-vocal-deejay",
+        "reggae--reggae-melodic-bass"
+      ],
+      "noteCount": 44
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-reggae-reggae-bassline",
+        "reggae--rd-08-reggae-bass-lead",
+        "reggae--rd-reggae-bass"
+      ],
+      "noteCount": 104
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "reggae--rd-skank"
+      ],
+      "noteCount": 396
+    }
+  ],
+  "patterns": [
+    {
+      "id": "reggae--reggae-skank",
+      "name": "Skank",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-07-skank-guitar",
+      "name": "Skank Guitar",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-08-reggae-bass-lead",
+      "name": "Bass Lead",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        6,
+        9,
+        14,
+        16,
+        22,
+        25,
+        30
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-reggae-reggae-bassline",
+      "name": "bassline",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "reggae bassline"
+      ]
+    },
+    {
+      "id": "reggae--rd-reggae-bass",
+      "name": "Melodic Reggae Bass",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-skank",
+      "name": "Offbeat Skank",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--reggae-melodic-bass",
+      "name": "Melodic Reggae Bass",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-one-drop",
+      "name": "One-Drop Foundation",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        8,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "reggae--rd-15-dub-version-tag",
+      "name": "Dub Version Tag",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        8,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-arrastre",
+      "name": "Arrastre",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        13,
+        14,
+        15,
+        0
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tango-332-piazzolla",
+      "name": "3+3+2 Nuevo Tango Pulse",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        6,
+        12
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-reggae-toast-vocal-deejay",
+      "name": "toast/vocal deejay",
+      "worldId": "reggae",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "toast/vocal deejay"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "bass",
+      "electric-guitar",
+      "drums",
+      "brass",
+      "piano"
+    ],
+    "techniques": [],
+    "signatureCell": "Prominent melodic bassline hook carrying the groove under three-part soulful vocal harmonies",
+    "tempoRange": [
+      76,
+      92
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 58,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "reggae-rocksteady"
+  },
+  "performance": {
+    "noteCount": 1991,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "reggae--reggae-skank",
+      "reggae--rd-07-skank-guitar",
+      "reggae--rd-08-reggae-bass-lead",
+      "tech-reggae-reggae-bassline",
+      "reggae--rd-reggae-bass",
+      "reggae--rd-skank",
+      "reggae--reggae-melodic-bass",
+      "reggae--rd-one-drop",
+      "reggae--rd-15-dub-version-tag",
+      "tango-arrastre",
+      "tango-332-piazzolla",
+      "tech-reggae-toast-vocal-deejay"
+    ]
+  }
+}

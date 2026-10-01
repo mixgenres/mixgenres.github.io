@@ -1,0 +1,369 @@
+{
+  "schemaVersion": 2,
+  "genre": "rock",
+  "styleId": "rock-hard-rock",
+  "styleName": "Hard Rock",
+  "durationSec": 90,
+  "tempoBpm": 128,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A5",
+        "G5",
+        "D5",
+        "A5"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A5",
+        "G5",
+        "D5",
+        "A5"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "D5",
+        "C5",
+        "G5",
+        "A5"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "A5",
+        "G5",
+        "D5",
+        "A5"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Solo",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "A5",
+        "G5",
+        "D5",
+        "A5"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "A5",
+        "G5",
+        "D5",
+        "A5"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "rock-lead-bend",
+        "rock-acoustic-strum",
+        "rock-roster-"
+      ],
+      "noteCount": 424
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "rock-riff-lock",
+        "rock-acoustic-strum"
+      ],
+      "noteCount": 321
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "rock-straight-drive",
+        "rock-riff-lock"
+      ],
+      "noteCount": 339
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "overdrive-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "tech-rock-power-chord",
+        "rock-roster-",
+        "rock-lead-bend"
+      ],
+      "noteCount": 274
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-rock-rock-backbeat",
+        "tech-rock-power-chord"
+      ],
+      "noteCount": 72
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "rock-organ-sustain"
+      ],
+      "noteCount": 376
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "patternIds": [
+        "rock-organ-sustain"
+      ],
+      "noteCount": 288
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "rock-roster-",
+        "house--ht-10-detroit-sequence"
+      ],
+      "noteCount": 71
+    }
+  ],
+  "patterns": [
+    {
+      "id": "rock-lead-bend",
+      "name": "Lead Guitar Bend",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        2,
+        6
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-acoustic-strum",
+      "name": "Acoustic Strum",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        7
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-roster-",
+      "name": "part",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        1,
+        4,
+        7,
+        10,
+        13,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-riff-lock",
+      "name": "Riff + Bass Lock",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "rock-straight-drive",
+      "name": "Straight-Eighth Drive",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-rock-power-chord",
+      "name": "power chord",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "power chord"
+      ]
+    },
+    {
+      "id": "tech-rock-rock-backbeat",
+      "name": "backbeat",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "rock backbeat"
+      ]
+    },
+    {
+      "id": "rock-organ-sustain",
+      "name": "Hammond Organ Sustain",
+      "worldId": "rock",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        7,
+        8,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "house--ht-10-detroit-sequence",
+      "name": "Detroit Sequence",
+      "worldId": "house",
+      "meter": "4/4",
+      "subdivisions": 32,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        16,
+        19,
+        22,
+        25,
+        28
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "electric-guitar",
+      "bass",
+      "drums",
+      "overdrive-guitar",
+      "voice"
+    ],
+    "techniques": [],
+    "signatureCell": "Thunderous Marshall stack power chord riff ringing out over driving open-hi-hat drum beat",
+    "tempoRange": [
+      115,
+      140
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "pushed",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "rock-hard-rock"
+  },
+  "performance": {
+    "noteCount": 2165,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "rock-lead-bend",
+      "rock-acoustic-strum",
+      "rock-roster-",
+      "rock-riff-lock",
+      "rock-straight-drive",
+      "tech-rock-power-chord",
+      "tech-rock-rock-backbeat",
+      "rock-organ-sustain",
+      "house--ht-10-detroit-sequence"
+    ]
+  }
+}

@@ -1,0 +1,367 @@
+{
+  "schemaVersion": 2,
+  "genre": "disco",
+  "styleId": "disco-italo-hi-energy",
+  "styleName": "Italo Hi-Energy",
+  "durationSec": 127.99999999999979,
+  "tempoBpm": 135,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Groove",
+      "bars": 16,
+      "intensity": "medium",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Main Groove",
+      "bars": 16,
+      "intensity": "high",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "breakdown-3",
+      "kind": "breakdown",
+      "label": "Breakdown",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "bridge-4",
+      "kind": "bridge",
+      "label": "Return",
+      "bars": 16,
+      "intensity": "peak",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "outro-5",
+      "kind": "outro",
+      "label": "Outro",
+      "bars": 8,
+      "intensity": "low",
+      "chords": [
+        "F#m7",
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "synth",
+      "role": "lead",
+      "patternIds": [
+        "style-disco-italo-hi-energy-signature",
+        "disco-string-hits"
+      ],
+      "noteCount": 104
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "polysynth",
+      "role": "harmony",
+      "patternIds": [
+        "disco-string-hits",
+        "disco-offbeat-hat",
+        "style-disco-italo-hi-energy-signature",
+        "disco-octave-bass"
+      ],
+      "noteCount": 794
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass-lead",
+      "role": "bass",
+      "patternIds": [
+        "tech-disco-disco-octave-bass"
+      ],
+      "noteCount": 273
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "patternIds": [
+        "tech-disco-breakdown-final-chorus"
+      ],
+      "noteCount": 409
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "disco-octave-bass",
+        "disco-string-hits",
+        "disco-offbeat-hat"
+      ],
+      "noteCount": 104
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "tech-disco-disco-octave-bass",
+        "disco-octave-bass"
+      ],
+      "noteCount": 396
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "disco-offbeat-hat",
+        "disco-octave-bass",
+        "disco-string-hits"
+      ],
+      "noteCount": 1590
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tango-arrastre",
+        "disco-string-hits",
+        "tech-disco-string-disco-stabs",
+        "disco-octave-bass",
+        "disco-offbeat-hat"
+      ],
+      "noteCount": 1464
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-disco-italo-hi-energy-signature",
+      "name": "Italo Hi-Energy",
+      "worldId": "disco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "disco octave bass",
+        "breakdown → final chorus",
+        "disco conga pattern",
+        "string disco stabs"
+      ]
+    },
+    {
+      "id": "disco-string-hits",
+      "name": "String Hits",
+      "worldId": "disco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        7,
+        8,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "disco-offbeat-hat",
+      "name": "Open-Hat Lift",
+      "worldId": "disco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "techniques": []
+    },
+    {
+      "id": "disco-octave-bass",
+      "name": "Octave Bass",
+      "worldId": "disco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        11,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-disco-disco-octave-bass",
+      "name": "octave bass",
+      "worldId": "disco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "disco octave bass"
+      ]
+    },
+    {
+      "id": "tech-disco-breakdown-final-chorus",
+      "name": "breakdown → final chorus",
+      "worldId": "disco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "techniques": [
+        "breakdown → final chorus"
+      ]
+    },
+    {
+      "id": "tango-arrastre",
+      "name": "Arrastre",
+      "worldId": "tango",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        13,
+        14,
+        15,
+        0
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-disco-string-disco-stabs",
+      "name": "string disco stabs",
+      "worldId": "disco",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "string disco stabs"
+      ]
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "synth",
+      "polysynth",
+      "bass-lead",
+      "drums",
+      "voice"
+    ],
+    "techniques": [
+      "disco octave bass",
+      "breakdown → final chorus",
+      "disco conga pattern",
+      "string disco stabs"
+    ],
+    "signatureCell": "Fast sequenced disco with dramatic vocal",
+    "tempoRange": [
+      125,
+      145
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "straight",
+    "swingPercentage": 50,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Patrick Cowley",
+      "Sylvester"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "disco-italo-hi-energy"
+  },
+  "performance": {
+    "noteCount": 5134,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-disco-italo-hi-energy-signature",
+      "disco-string-hits",
+      "disco-offbeat-hat",
+      "disco-octave-bass",
+      "tech-disco-disco-octave-bass",
+      "tech-disco-breakdown-final-chorus",
+      "tango-arrastre",
+      "tech-disco-string-disco-stabs"
+    ]
+  }
+}

@@ -1,0 +1,391 @@
+{
+  "schemaVersion": 2,
+  "genre": "country",
+  "styleId": "country-country-gospel",
+  "styleName": "Country Gospel",
+  "durationSec": 101.05263157894738,
+  "tempoBpm": 95,
+  "meter": "4/4",
+  "sections": [
+    {
+      "id": "r0",
+      "key": "intro-0",
+      "kind": "intro",
+      "label": "Intro",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    },
+    {
+      "id": "r1",
+      "key": "verse-1",
+      "kind": "verse",
+      "label": "Verse",
+      "bars": 8,
+      "intensity": "medium",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    },
+    {
+      "id": "r2",
+      "key": "chorus-2",
+      "kind": "chorus",
+      "label": "Chorus",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    },
+    {
+      "id": "r3",
+      "key": "bridge-3",
+      "kind": "bridge",
+      "label": "Bridge",
+      "bars": 8,
+      "intensity": "high",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    },
+    {
+      "id": "r4",
+      "key": "solo-4",
+      "kind": "solo",
+      "label": "Instrumental",
+      "bars": 8,
+      "intensity": "peak",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    },
+    {
+      "id": "r5",
+      "key": "coda-5",
+      "kind": "coda",
+      "label": "Coda",
+      "bars": 4,
+      "intensity": "low",
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "D7"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "v0",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "style-country-country-gospel-signature",
+        "country-chicken"
+      ],
+      "noteCount": 746
+    },
+    {
+      "trackId": "v1",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "patternIds": [
+        "tech-country-vocal-harmony-thirds-sixths",
+        "style-country-country-gospel-signature"
+      ],
+      "noteCount": 527
+    },
+    {
+      "trackId": "v2",
+      "instrumentId": "bass",
+      "role": "bass",
+      "patternIds": [
+        "country-waltz",
+        "country-ballad"
+      ],
+      "noteCount": 146
+    },
+    {
+      "trackId": "v3",
+      "instrumentId": "fiddle",
+      "role": "lead",
+      "patternIds": [
+        "country-fiddle-answer",
+        "style-country-country-gospel-signature"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v4",
+      "instrumentId": "voice",
+      "role": "voice",
+      "patternIds": [
+        "tech-country-country-shuffle",
+        "country-fiddle-answer"
+      ],
+      "noteCount": 64
+    },
+    {
+      "trackId": "v5",
+      "instrumentId": "backing-vocals",
+      "role": "voice",
+      "patternIds": [
+        "tech-country-vocal-harmony-thirds-sixths",
+        "country-waltz",
+        "tech-country-country-shuffle"
+      ],
+      "noteCount": 109
+    },
+    {
+      "trackId": "v6",
+      "instrumentId": "mandolin",
+      "role": "lead",
+      "patternIds": [
+        "country-pedal-steel-swell",
+        "flam-llamada-12",
+        "cu-chicha-guitar"
+      ],
+      "noteCount": 122
+    },
+    {
+      "trackId": "v7",
+      "instrumentId": "steel-guitar",
+      "role": "harmony",
+      "patternIds": [
+        "country-chicken",
+        "style-country-country-gospel-signature"
+      ],
+      "noteCount": 650
+    }
+  ],
+  "patterns": [
+    {
+      "id": "style-country-country-gospel-signature",
+      "name": "Gospel",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal harmony thirds/sixths",
+        "country shuffle"
+      ]
+    },
+    {
+      "id": "country-chicken",
+      "name": "Chicken Pickin",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        11,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-country-vocal-harmony-thirds-sixths",
+      "name": "vocal harmony thirds/sixths",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        4,
+        8,
+        12
+      ],
+      "techniques": [
+        "vocal harmony thirds/sixths"
+      ]
+    },
+    {
+      "id": "country-waltz",
+      "name": "Waltz",
+      "worldId": "country",
+      "meter": "3/4",
+      "subdivisions": 6,
+      "onsetGrid": [
+        0,
+        2,
+        4
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-ballad",
+      "name": "Slow Ballad 6/8",
+      "worldId": "country",
+      "meter": "6/8",
+      "subdivisions": 6,
+      "onsetGrid": [
+        0,
+        3
+      ],
+      "techniques": []
+    },
+    {
+      "id": "country-fiddle-answer",
+      "name": "Fiddle Answer",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        5,
+        7,
+        8,
+        10,
+        12,
+        15
+      ],
+      "techniques": []
+    },
+    {
+      "id": "tech-country-country-shuffle",
+      "name": "shuffle",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        3,
+        6,
+        8,
+        11,
+        14
+      ],
+      "techniques": [
+        "country shuffle"
+      ]
+    },
+    {
+      "id": "country-pedal-steel-swell",
+      "name": "Pedal Steel Volume Swell",
+      "worldId": "country",
+      "meter": "4/4",
+      "subdivisions": 8,
+      "onsetGrid": [
+        0,
+        5
+      ],
+      "techniques": []
+    },
+    {
+      "id": "flam-llamada-12",
+      "name": "Llamada into Cante",
+      "worldId": "flamenco",
+      "meter": "12/8",
+      "subdivisions": 12,
+      "onsetGrid": [
+        9,
+        10,
+        11,
+        0,
+        2
+      ],
+      "techniques": []
+    },
+    {
+      "id": "cu-chicha-guitar",
+      "name": "Chicha Tremolo Guitar",
+      "worldId": "cumbia",
+      "meter": "4/4",
+      "subdivisions": 16,
+      "onsetGrid": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "techniques": []
+    }
+  ],
+  "sonicFeatures": {
+    "characteristicInstruments": [
+      "acoustic-guitar",
+      "piano",
+      "bass",
+      "fiddle",
+      "voice",
+      "backing-vocals"
+    ],
+    "techniques": [
+      "vocal harmony thirds/sixths",
+      "country shuffle"
+    ],
+    "signatureCell": "Close harmony over country gospel cadence",
+    "tempoRange": [
+      70,
+      120
+    ],
+    "preferredMeters": [
+      "4/4"
+    ],
+    "microtimingFeel": "laid-back",
+    "swingPercentage": 52,
+    "anticipationOffsetSteps": 0
+  },
+  "references": {
+    "artists": [
+      "Hank Williams",
+      "The Louvin Brothers"
+    ],
+    "tracks": []
+  },
+  "render": {
+    "status": "compiled",
+    "renderer": "MixGenres compileWholeSong",
+    "sourceStyleId": "country-country-gospel"
+  },
+  "performance": {
+    "noteCount": 2428,
+    "trackCount": 8,
+    "usedPatternIds": [
+      "style-country-country-gospel-signature",
+      "country-chicken",
+      "tech-country-vocal-harmony-thirds-sixths",
+      "country-waltz",
+      "country-ballad",
+      "country-fiddle-answer",
+      "tech-country-country-shuffle",
+      "country-pedal-steel-swell",
+      "flam-llamada-12",
+      "cu-chicha-guitar"
+    ]
+  }
+}

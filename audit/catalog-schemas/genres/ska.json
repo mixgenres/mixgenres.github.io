@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "id": "ska",
+  "name": "Ska",
+  "family": "Jamaican / UK revival",
+  "description": "Ska gets its own world because",
+  "substyles": [
+    "Traditional Ska",
+    "Two-Tone",
+    "Ska-Punk"
+  ],
+  "styleIds": [
+    "ska-trad-ska",
+    "ska-two-tone",
+    "ska-ska-punk",
+    "ska-jamaican-first-wave-ska",
+    "ska-rocksteady",
+    "ska-jamaican-ska-jazz",
+    "ska-third-wave-ska"
+  ],
+  "patternIds": [
+    "sk-offbeat-chop",
+    "sk-walking-bass",
+    "sk-horn-answer",
+    "sk-two-tone-drive",
+    "sk-rocksteady-bass",
+    "sk-06-first-wave-offbeat-chop",
+    "sk-07-walking-ska-bass",
+    "sk-08-horn-section-answer",
+    "sk-09-ska-drum-drive",
+    "sk-10-rocksteady-transition",
+    "sk-11-two-tone-guitar-pulse",
+    "sk-12-ska-piano-bubble",
+    "sk-13-ska-horn-stab",
+    "sk-14-ska-break-call",
+    "sk-15-ska-final-shout",
+    "tech-ska-walking-ska-bass",
+    "tech-ska-rocksteady-bass",
+    "tech-ska-skank-guitar",
+    "tech-ska-two-tone-organ",
+    "tech-ska-jamaican-shuffle",
+    "tech-ska-ska-punk-double-time",
+    "style-ska-jamaican-first-wave-ska-signature",
+    "style-ska-rocksteady-signature",
+    "style-ska-jamaican-ska-jazz-signature",
+    "style-ska-third-wave-ska-signature",
+    "tech-ska-horn-stab",
+    "tech-ska-jazz-horn-solo",
+    "tech-ska-horn-guitar-call-response",
+    "ska-offbeat-guitar",
+    "ska-walking-bass",
+    "ska-horn-stabs",
+    "ska-drums-rocker"
+  ],
+  "styleReferenceChecks": [
+    {
+      "id": "ska-trad-ska",
+      "name": "Traditional Ska",
+      "keySubstyles": [
+        "First Wave Ska",
+        "Studio One Sound"
+      ],
+      "characteristicInstruments": [
+        "brass",
+        "electric-guitar",
+        "piano",
+        "upright-bass",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "ska-two-tone",
+      "name": "Two-Tone",
+      "keySubstyles": [
+        "2-Tone UK",
+        "Nutty Sound"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "organ",
+        "brass",
+        "bass",
+        "drums"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "ska-ska-punk",
+      "name": "Ska-Punk",
+      "keySubstyles": [
+        "Third Wave Ska",
+        "Skate Ska-Punk"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "brass",
+        "bass",
+        "drums",
+        "synth"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "ska-jamaican-first-wave-ska",
+      "name": "Jamaican First-Wave Ska",
+      "keySubstyles": [
+        "Jamaican First-Wave Ska"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "brass",
+        "piano"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "ska-rocksteady",
+      "name": "Rocksteady",
+      "keySubstyles": [
+        "Rocksteady"
+      ],
+      "characteristicInstruments": [
+        "bass",
+        "electric-guitar",
+        "drums",
+        "voice",
+        "backing-vocals"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "ska-jamaican-ska-jazz",
+      "name": "Jamaican Ska Jazz",
+      "keySubstyles": [
+        "Jamaican Ska Jazz"
+      ],
+      "characteristicInstruments": [
+        "trumpet",
+        "trombone",
+        "bass",
+        "drums",
+        "electric-guitar"
+      ],
+      "hasFormTemplate": true
+    },
+    {
+      "id": "ska-third-wave-ska",
+      "name": "Third-Wave Ska",
+      "keySubstyles": [
+        "Third-Wave Ska"
+      ],
+      "characteristicInstruments": [
+        "electric-guitar",
+        "bass",
+        "drums",
+        "brass",
+        "voice"
+      ],
+      "hasFormTemplate": true
+    }
+  ],
+  "defaultStarterId": "ska-starter"
+}
