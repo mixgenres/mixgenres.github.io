@@ -27,8 +27,9 @@ export default class GuitarModule implements InstrumentModule {
     const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isTangoAcoustic = isTango && GUITAR_INSTRUMENT_PATTERNS.acousticTango.test(instId);
-    const isUrbanAcoustic = (isKizomba || isReggaeton) && GUITAR_INSTRUMENT_PATTERNS.urbanAcoustic.test(instId);
+    const acousticSetup = params.variantId === 'nylon' || params.variantId === 'steel-acoustic';
+    const isTangoAcoustic = isTango && acousticSetup;
+    const isUrbanAcoustic = (isKizomba || isReggaeton) && acousticSetup;
     const isMarcato = action === 'marcato' || /marcato/i.test(action ?? '');
     const isArrastre = action === 'arrastre' || /arrastre|drag/i.test(action ?? '');
     const gd = ctx.genreDialect;

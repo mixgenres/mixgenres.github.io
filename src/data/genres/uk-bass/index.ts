@@ -82,13 +82,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "origin": "Bristol / Vienna / Ibiza",
       "era": "1990s–Present",
       "description": "Chilled • 4/4 • Atmospheric\nRelaxed, lush",
-      "characteristicInstruments": [
-        "synth",
-        "drums",
-        "bass",
-        "sampler",
-        "acoustic-guitar"
-      ],
+      "characteristicInstruments": ["synth", "drums", "bass", "sampler", "guitar"],
       "preferredMeters": [
         "4/4"
       ],
@@ -162,13 +156,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "origin": "Bristol, UK",
       "era": "1990s",
       "description": "Moody • Cinematic • Heavy\nSlow hip-hop",
-      "characteristicInstruments": [
-        "drums",
-        "bass",
-        "sampler",
-        "synth",
-        "strings"
-      ],
+      "characteristicInstruments": ["drums", "bass", "sampler", "synth", "string-ensemble"],
       "preferredMeters": [
         "4/4"
       ],
@@ -242,13 +230,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "origin": "UK / Europe",
       "era": "1990s–Present",
       "description": "Complex • Glitchy • Brain Dance\nIntricate",
-      "characteristicInstruments": [
-        "sampler",
-        "synth",
-        "drums",
-        "sub-bass",
-        "polysynth"
-      ],
+      "characteristicInstruments": ["sampler", "synth", "drums", "synth", "synth"],
       "preferredMeters": [
         "4/4",
         "7/8"
@@ -313,13 +295,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "origin": "Croydon, South London",
       "era": "2000s",
       "description": "Heavy Sub • Half-step • Dark\n140",
-      "characteristicInstruments": [
-        "sub-bass",
-        "drums",
-        "synth",
-        "sampler",
-        "dub-echo"
-      ],
+      "characteristicInstruments": ["synth", "drums", "synth", "sampler"],
       "preferredMeters": [
         "4/4"
       ],
@@ -393,13 +369,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "origin": "London, UK",
       "era": "Late 1990s–Present",
       "description": "Skippy • 2-Step • Vocal chops\nSyncopated",
-      "characteristicInstruments": [
-        "drums",
-        "bass",
-        "synth",
-        "sampler",
-        "piano"
-      ],
+      "characteristicInstruments": ["drums", "bass", "synth", "sampler", "piano"],
       "preferredMeters": [
         "4/4"
       ],
@@ -474,13 +444,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "origin": "France / USA / Internet",
       "era": "2000s–Present",
       "description": "80s Nostalgia • Arpeggios • Gated",
-      "characteristicInstruments": [
-        "synth",
-        "drums",
-        "bass",
-        "electric-guitar",
-        "warm-pad"
-      ],
+      "characteristicInstruments": ["synth", "drums", "bass", "guitar", "synth"],
       "preferredMeters": [
         "4/4"
       ],
@@ -554,13 +518,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "origin": "UK / Global",
       "era": "1970s–Present",
       "description": "Timbral • Beatless • Expansive\nSubtle sonic",
-      "characteristicInstruments": [
-        "synth",
-        "sampler",
-        "drone",
-        "strings",
-        "piano"
-      ],
+      "characteristicInstruments": ["synth", "sampler", "synth", "string-ensemble", "piano"],
       "preferredMeters": [
         "free"
       ],
@@ -624,13 +582,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "origin": "Detroit, Michigan / Berlin",
       "era": "1980s–Present",
       "description": "Relentless • 4/4 • Industrial\nMachine-driven hypnotic",
-      "characteristicInstruments": [
-        "drums",
-        "synth",
-        "sub-bass",
-        "sampler",
-        "noise-sweep"
-      ],
+      "characteristicInstruments": ["drums", "synth", "synth", "sampler", "synth"],
       "preferredMeters": [
         "4/4"
       ],
@@ -717,9 +669,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums"
-      ],
+      "instruments": ["drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -854,9 +804,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums"
-      ],
+      "instruments": ["drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -993,10 +941,7 @@ export const UK_BASS_WORLD: GenreWorld = {
         "groove",
         "walking"
       ],
-      "instruments": [
-        "drums",
-        "bass"
-      ],
+      "instruments": ["drums", "bass"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1208,10 +1153,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "approaches": [
         "walking"
       ],
-      "instruments": [
-        "bass",
-        "synth"
-      ],
+      "instruments": ["bass", "synth"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1460,9 +1402,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums"
-      ],
+      "instruments": ["drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1577,9 +1517,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums"
-      ],
+      "instruments": ["drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1732,9 +1670,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums"
-      ],
+      "instruments": ["drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1903,9 +1839,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums"
-      ],
+      "instruments": ["drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -2057,9 +1991,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums"
-      ],
+      "instruments": ["drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -2212,10 +2144,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "keys",
-        "synth"
-      ],
+      "instruments": ["keys", "synth"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 4,
@@ -2331,10 +2260,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "approaches": [
         "walking"
       ],
-      "instruments": [
-        "bass",
-        "synth"
-      ],
+      "instruments": ["bass", "synth"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 8,
@@ -2506,10 +2432,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "approaches": [
         "walking"
       ],
-      "instruments": [
-        "bass",
-        "synth"
-      ],
+      "instruments": ["bass", "synth"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -2674,9 +2597,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "approaches": [
         "phrase"
       ],
-      "instruments": [
-        "synth"
-      ],
+      "instruments": ["synth"],
       "compatibleRoles": [
         "synth"
       ],
@@ -2853,10 +2774,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "approaches": [
         "phrase"
       ],
-      "instruments": [
-        "synth",
-        "bass"
-      ],
+      "instruments": ["synth", "bass"],
       "compatibleRoles": [
         "synth",
         "lead"
@@ -3087,9 +3005,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "approaches": [
         "walking"
       ],
-      "instruments": [
-        "bass"
-      ],
+      "instruments": ["bass"],
       "compatibleRoles": [
         "bass"
       ],
@@ -3266,9 +3182,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "approaches": [
         "comping"
       ],
-      "instruments": [
-        "synth"
-      ],
+      "instruments": ["synth"],
       "compatibleRoles": [
         "harmony"
       ],
@@ -3445,9 +3359,7 @@ export const UK_BASS_WORLD: GenreWorld = {
       "approaches": [
         "comping"
       ],
-      "instruments": [
-        "synth"
-      ],
+      "instruments": ["synth"],
       "compatibleRoles": [
         "harmony",
         "texture"

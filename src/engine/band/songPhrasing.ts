@@ -86,8 +86,17 @@ function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: 
   const rootShare = rootRatio(notes, sheet);
   const rootHeavy = /bass|comp|harmony/.test(role) && notes.length >= 4 && rootShare > target.maxBassRootRatio;
   const family = profile.family;
-  const density = Math.max(0.45, Math.min(1.0, notes.length / Math.max(4, (phraseEnd - phraseStart) * 2)));
-  const desiredTechniqueCount = Math.max(0, Math.floor(notes.length * Math.max(target.techniqueLandmarkRatio, phraseTechniqueBudget(role, family, genre, notes))));
+  // Chord tones belong to one musical attack. Technique and density decisions
+  // must not change just because a pianist adds another extension.
+  const attacks = new Map<string, PerfNote[]>();
+  for (const note of notes) {
+    const key = note.attackId ?? `${note.bar}:${note.time}`;
+    const group = attacks.get(key) ?? [];
+    group.push(note); attacks.set(key, group);
+  }
+  const attackGroups = [...attacks.values()];
+  const density = Math.max(0.45, Math.min(1.0, attackGroups.length / Math.max(4, (phraseEnd - phraseStart) * 2)));
+  const desiredTechniqueCount = Math.max(0, Math.floor(attackGroups.length * Math.max(target.techniqueLandmarkRatio, phraseTechniqueBudget(role, family, genre, attackGroups.map(group => group[0])))));
 
   // One phrase-level dynamic sentence: establish -> develop -> cadence.
   for (let i = 0; i < notes.length; i++) {
@@ -97,11 +106,8 @@ function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: 
     n.vel = Math.max(1, Math.min(127, Math.round(n.vel * arc * (pos > 0.82 ? 0.98 : 1) * roleGain)));
     if (/bass/.test(role) && n.midi < profile.capabilities.comfortableLowMidi && n.hitFunctionCode !== 0) n.vel = Math.max(1, Math.round(n.vel * 0.88));
 
-    // Harmony: selected inner attacks become 3rds/5ths/7ths instead of repeating roots.
-    if (rootHeavy && /comp|harmony/.test(role) && pos > 0.12 && pos < 0.86 && i % 3 === 1) {
-      const chord = sheet.measures[n.bar]?.chord, parsed = chord ? parseChord(chord) : undefined;
-      if (parsed) { const candidate = nearestNonRootChordTone(n.midi, chordTonePcs(chord!), parsed.rootPc ?? 0); if (candidate !== n.midi && Math.abs(candidate - n.midi) <= 5) n.midi = candidate; }
-    }
+    // Harmony is voiced as a unit upstream. Replacing individual roots here
+    // would duplicate inner voices and destroy an intentional chord/inversion.
     // Bass: structural roots remain roots; inner attacks can outline the harmony.
     if (/bass/.test(role) && rootShare > 0.78 && pos > 0.16 && pos < 0.82 && i % 4 === 2) {
       const chord = sheet.measures[n.bar]?.chord, parsed = chord ? parseChord(chord) : undefined;
@@ -113,12 +119,12 @@ function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: 
   const techniquePool = Array.from(new Set([...(styleTechnique.required ?? []), ...prefs]))
     .filter(id => profile.gestures[id] && !styleTechnique.forbidden.includes(id));
   if (techniquePool.length && desiredTechniqueCount) {
-    const landmarks = Array.from(new Set([0, Math.floor(notes.length * 0.22), Math.floor(notes.length * 0.48), Math.floor(notes.length * 0.72), Math.max(0, notes.length - 1)]))
-      .filter(i => i >= 0 && i < notes.length);
+    const landmarks = Array.from(new Set([0, Math.floor(attackGroups.length * 0.22), Math.floor(attackGroups.length * 0.48), Math.floor(attackGroups.length * 0.72), Math.max(0, attackGroups.length - 1)]))
+      .filter(i => i >= 0 && i < attackGroups.length);
     const count = Math.min(desiredTechniqueCount, landmarks.length);
     for (let k = 0; k < count; k++) {
       const desired = techniquePool[(k + Math.floor((phraseEnd - phraseStart) / 2)) % techniquePool.length];
-      if (desired) notes[landmarks[k]].gestureCode = GESTURE_CODES[desired] ?? notes[landmarks[k]].gestureCode;
+      if (desired) for (const note of attackGroups[landmarks[k]]) note.gestureCode = GESTURE_CODES[desired] ?? note.gestureCode;
     }
   }
 
@@ -147,7 +153,9 @@ function ensureRegionTechnique(trackNotes: PerfNote[], profile: InstrumentPerfor
   const desired = usable.find(id => prefs.includes(id)) ?? usable[0];
   const ordered = [...trackNotes].sort((a, b) => a.time - b.time);
   const target = ordered[Math.floor(ordered.length * 0.48)];
-  if (target && GESTURE_CODES[desired] !== undefined) target.gestureCode = GESTURE_CODES[desired];
+  if (target && GESTURE_CODES[desired] !== undefined) {
+    for (const note of trackNotes) if (target.attackId ? note.attackId === target.attackId : note.bar === target.bar && note.time === target.time) note.gestureCode = GESTURE_CODES[desired];
+  }
 }
 
 export function optimizePerformanceByPhraseAndSong(sheet: Sheet, perf: Performance): { performance: Performance; report: PhraseOptimizationReport } {
@@ -169,12 +177,19 @@ export function optimizePerformanceByPhraseAndSong(sheet: Sheet, perf: Performan
       const before = new Set<string>();
       const after = new Set<string>();
       let phrases = 0;
-      for (let start = region.start; start < region.end; start += phraseBars) {
-        const end = Math.min(region.end, start + phraseBars);
-        const phrase = trackNotes.filter(n => n.bar >= start && n.bar < end);
+      // Respect the player's compiled sentences, including longer solo/trading
+      // phrases, rather than subdividing every musician into a generic window.
+      const compiledPhrases = perf.phrases?.filter(phrase => phrase.trackId === track.id && phrase.regionId === region.id);
+      const spans = compiledPhrases?.length ? compiledPhrases.map(phrase => ({
+        start: phrase.startBar, end: phrase.endBar, id: phrase.id,
+      })) : Array.from({ length: Math.ceil((region.end - region.start) / phraseBars) }, (_, i) => ({
+        start: region.start + i * phraseBars, end: Math.min(region.end, region.start + (i + 1) * phraseBars), id: undefined,
+      }));
+      for (const { start, end, id } of spans) {
+        const phrase = trackNotes.filter(n => id ? n.phraseId === id : n.bar >= start && n.bar < end);
         if (!phrase.length) continue;
         phrases++;
-        const result = optimizePhrase(phrase, sheet, track, profile, genre, style, target, start, end);
+        const result = optimizePhrase(phrase, sheet, { ...track, role: getTrackRole(sheet, track.id, region.id) }, profile, genre, style, target, start, end);
         if (result.rootHeavy) rootHeavyPhrases++;
         result.beforeGestures.forEach(x => before.add(x));
         result.afterGestures.forEach(x => after.add(x));
@@ -231,15 +246,8 @@ export function optimizePerformanceByPhraseAndSong(sheet: Sheet, perf: Performan
     }
   }
 
-  // Song-level headroom pass. The loudest phrase in the song establishes a soft
-  // ceiling; the whole ensemble is gently backed off if necessary instead of
-  // allowing a single dense section to determine master loudness.
-  const peakVelocity = notes.reduce((m, n) => Math.max(m, n.vel), 0);
-  if (peakVelocity > 122) {
-    const factor = 122 / peakVelocity;
-    for (const n of notes) n.vel = Math.max(1, Math.round(n.vel * factor));
-    warnings.push(`song-headroom: reduced peak velocity ${peakVelocity} -> 122`);
-  }
+  // Audio headroom belongs to the mixer; scaling MIDI velocity changes timbre
+  // and erases authored fortissimo across the entire ensemble.
 
   return {
     performance: { ...perf, notes },

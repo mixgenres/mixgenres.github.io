@@ -14,7 +14,7 @@ export const dspOverride: InstrumentDSPOverride = {
     ],
     "couplingPaths": [
       "courses",
-      "drone"
+      "synth"
     ],
     "techniqueBindings": [
       "continuous plectrum tremolo melodic lines",

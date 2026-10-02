@@ -22,9 +22,7 @@ export const COUNTRY_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -273,9 +271,7 @@ export const COUNTRY_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -445,9 +441,7 @@ export const COUNTRY_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -563,10 +557,7 @@ export const COUNTRY_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "guitar",
-            "bass"
-          ],
+          "instruments": ["guitar", "bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -697,9 +688,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -865,10 +854,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "walking"],
-          "instruments": [
-            "drums",
-            "bass"
-          ],
+          "instruments": ["drums", "bass"],
           "meter": "3/4",
           "cycleLength": 1,
           "subdivisions": 6,
@@ -987,10 +973,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "walking"],
-          "instruments": [
-            "drums",
-            "bass"
-          ],
+          "instruments": ["drums", "bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -1119,9 +1102,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1252,13 +1233,11 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             "measure"
           ],
           "roles": [
-            "electric-guitar"
+            "guitar"
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "electric-guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1423,10 +1402,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "walking"],
-          "instruments": [
-            "drums",
-            "bass"
-          ],
+          "instruments": ["drums", "bass"],
           "meter": "6/8",
           "cycleLength": 1,
           "subdivisions": 6,
@@ -1539,9 +1515,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
             "harmony"
           ],
@@ -1721,11 +1695,7 @@ export const COUNTRY_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "percussion",
-            "guitar"
-          ],
+          "instruments": ["drums", "percussion", "guitar"],
           "compatibleRoles": [
             "pulse",
             "rhythm-guitar",
@@ -1898,18 +1868,16 @@ export const COUNTRY_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             "phrase"
           ],
           "roles": [
-            "steel-guitar"
+            "resonator-guitar"
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "steel-guitar"
-          ],
+          "instruments": ["resonator-guitar"],
           "compatibleRoles": [
-            "steel-guitar"
+            "resonator-guitar"
           ],
           "compatibleInstruments": [
-            "steel-guitar"
+            "resonator-guitar"
           ],
           "canCrossRole": true,
           "meter": "4/4",
@@ -2142,9 +2110,7 @@ export const COUNTRY_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "compatibleRoles": [
             "bass"
           ],
@@ -2322,18 +2288,16 @@ export const COUNTRY_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             "phrase"
           ],
           "roles": [
-            "steel-guitar"
+            "resonator-guitar"
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "steel-guitar"
-          ],
+          "instruments": ["resonator-guitar"],
           "compatibleRoles": [
-            "steel-guitar"
+            "resonator-guitar"
           ],
           "compatibleInstruments": [
-            "steel-guitar"
+            "resonator-guitar"
           ],
           "canCrossRole": true,
           "meter": "4/4",
@@ -2493,7 +2457,7 @@ export const COUNTRY_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "description": "Storytelling verse vocal placement with room",
           "tags": [
             "country",
-            "steel-guitar",
+            "resonator-guitar",
             "vocal-phrasing",
             "catalog-v2"
           ],
@@ -2502,19 +2466,17 @@ export const COUNTRY_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             "phrase"
           ],
           "roles": [
-            "steel-guitar"
+            "resonator-guitar"
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "steel-guitar"
-          ],
+          "instruments": ["resonator-guitar"],
           "compatibleRoles": [
-            "steel-guitar",
+            "resonator-guitar",
             "lead"
           ],
           "compatibleInstruments": [
-            "steel-guitar"
+            "resonator-guitar"
           ],
           "meter": "4/4",
           "cycleLength": 1,
@@ -2644,7 +2606,7 @@ export const COUNTRY_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "provenance": "GenreDAW catalog rebuild: dedicated vocal phrasing coverage for Country.",
           "authenticityTags": [
             "country",
-            "steel-guitar"
+            "resonator-guitar"
           ],
           "danceTags": [
             "listening"
@@ -2681,9 +2643,7 @@ export const COUNTRY_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
             "harmony",
             "texture"

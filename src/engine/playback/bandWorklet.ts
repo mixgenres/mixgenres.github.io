@@ -1,3 +1,5 @@
+import { createSongMixGraph, type SongMixGraph } from '../studio/dynamicMix/MixGraph';
+import { ensembleHeadroom } from '../studio/masterSettings';
 import WebRenderer from '@elemaudio/web-renderer';
 import { createMasterChain, type MasterChain } from '../studio/mixer';
 import { renderMixBuses, midiToFreq, type TrackParams } from './elementaryEngine';
@@ -32,17 +34,17 @@ export interface PlaybackConfiguration {
  * in the note/controller/transport paths, including loops and voice stealing.
  */
 export class BandWorkletNode {
-  public static readonly MAX_POLYPHONY = 32;
   private ctx?: AudioContext;
   private core?: InstanceType<typeof WebRenderer>;
   private audioNode?: AudioNode;
   private masterChain?: MasterChain;
+  private dynamicMixGraph?: SongMixGraph;
+  private rendererOutputCount = 0;
   public activeWorldId = 'flamenco';
   public activeStyleId = '';
   private configuration?: PlaybackConfiguration;
   private configurationKey = '';
   private preparationRevision = 0;
-  private preparationPending = false;
   private tracks = new Map<string, LiveTrack>();
   private trackMutedMap = new Map<string, boolean>();
   private trackSoloMap = new Map<string, boolean>();
@@ -53,42 +55,54 @@ export class BandWorkletNode {
   private appliedValues = new Map<string, number>();
   private pendingParamUpdates: Record<string, number> = {};
   private paramFlushScheduled = false;
-  private timerIds = new Set<ReturnType<typeof setTimeout>>();
+  private scheduledEvents: Array<{ atTime: number; revision: number; sequence: number; fn: () => void }> = [];
+  private scheduledTimeout: ReturnType<typeof setTimeout> | null = null;
+  private scheduledTimeoutAt = Number.POSITIVE_INFINITY;
+  private scheduleSequence = 0;
+  private preparationAbort?: AbortController;
   private generation = 0;
   private voiceSeq = 0;
   private renderPending = false;
   private graphCommit: Promise<void> = Promise.resolve();
   private disposed = false;
   private diagnostics = { preparations: 0, graphCommits: 0, parameterBatches: 0, propertyWrites: 0,
-    unpreparedEvents: 0, missingBindings: 0, voices: 0, variants: 0, controls: 0, preparationMs: 0 };
+    activeVoiceSteals: 0, tailVoiceReuses: 0, unpreparedEvents: 0, missingBindings: 0, voices: 0, variants: 0, controls: 0, preparationMs: 0 };
 
-  getDiagnostics() { return { ...this.diagnostics, pendingTimers: this.timerIds.size, tracks: this.tracks.size }; }
+  getDiagnostics() { return { ...this.diagnostics, pendingTimers: this.scheduledEvents.length, tracks: this.tracks.size }; }
 
   /** Called from the song/UI effect, with all inputs in a single transaction. */
   async configure(config: PlaybackConfiguration): Promise<void> {
     if (this.disposed) throw new Error('Cannot configure a disposed playback engine');
     const snapshot = { ...config, instruments: new Map(config.instruments), roles: new Map(config.roles), levels: new Map(config.levels) };
     const key = JSON.stringify([config.worldId, config.styleId ?? '', [...config.instruments], [...config.roles],
-      config.performance.notes, config.performance.ccs]);
+      config.performance.notes, config.performance.ccs, config.performance.mixTimeline]);
     for (const [id, level] of config.levels ?? []) this.trackVolumes.set(id, level);
-    if (key === this.configurationKey && !this.preparationPending) {
+    if (key === this.configurationKey) {
+      this.preparationAbort?.abort();
+      this.preparationAbort = undefined;
+      this.preparationRevision++;
       this.configuration = snapshot;
       for (const [id, track] of this.tracks) track.params.volume = this.trackGain(id, track.params);
       this.updateTrackMuteSoloLevels();
       await this.graphCommit; return;
     }
+    this.preparationAbort?.abort();
+    const abort = new AbortController();
+    this.preparationAbort = abort;
     const request = ++this.preparationRevision;
-    this.preparationPending = true;
     let prepared: PreparedPlaybackGraph;
     try {
       prepared = await preparePlaybackGraphAsync(snapshot, { levels: new Map(this.trackVolumes), pans: new Map(this.trackPans),
-        muted: new Map(this.trackMutedMap), solo: new Map(this.trackSoloMap) });
+        muted: new Map(this.trackMutedMap), solo: new Map(this.trackSoloMap) }, abort.signal);
     } catch (error) {
-      if (request === this.preparationRevision) this.preparationPending = false;
+      if (request === this.preparationRevision) {
+        this.preparationAbort = undefined;
+      }
+      if (abort.signal.aborted) return;
       throw error;
     }
     if (this.disposed || request !== this.preparationRevision) return;
-    this.preparationPending = false;
+    this.preparationAbort = undefined;
     this.clear(); this.generation++;
     const worldChanged = this.activeWorldId !== config.worldId || this.activeStyleId !== (config.styleId ?? '');
     this.activeWorldId = config.worldId; this.activeStyleId = config.styleId ?? '';
@@ -110,41 +124,70 @@ export class BandWorkletNode {
   }
 
   private commitGraph() {
-    if (!this.core) return;
+    if (!this.ctx || !this.masterChain) return;
+    const revision = this.generation;
     const mix = resolvePlaybackMix(this.activeWorldId, this.activeStyleId);
     const signals = [...this.tracks].map(([trackId, t]) => ({ ...t.signal, trackId,
       instrumentId: t.params.instrumentId, role: this.configuration?.roles.get(trackId) }));
-    const buses = renderMixBuses(signals, mix.masterProfile.lift);
-    const revision = this.generation;
+    const timeline = this.configuration?.performance.mixTimeline;
+    const dynamic = signals.length > 0 && timeline?.scenes.some(scene => scene.enabled) ? timeline : undefined;
+    const outputCount = dynamic ? Math.max(1, signals.length) : 3;
     this.renderPending = true;
     this.diagnostics.graphCommits++;
-    // Renderer reconciliation is synchronous; defer control messages until its
-    // worklet acknowledgement, and retain updates that arrived during the commit.
-    this.graphCommit = this.core.render(buses.drums.left, buses.drums.right, buses.sub.left, buses.sub.right, buses.inst.left, buses.inst.right)
-      .then(() => {
-        if (this.disposed || revision !== this.generation) return;
-        this.renderPending = false;
-        this.flushParamUpdates();
-      }).catch((error: unknown) => {
-        if (revision === this.generation) this.renderPending = false;
-        throw error;
-      });
+    const previousCommit = this.graphCommit;
+    this.graphCommit = previousCommit.then(async () => {
+      if (this.disposed || revision !== this.generation) return;
+      this.audioNode?.disconnect();
+      this.dynamicMixGraph?.dispose(); this.dynamicMixGraph = undefined;
+      if (!this.core || this.rendererOutputCount !== outputCount) {
+        // Only a user composition edit may change output topology; scenes never do.
+        if (this.core && this.audioNode) {
+          await this.core.reset();
+          if (typeof AudioWorkletNode !== 'undefined' && this.audioNode instanceof AudioWorkletNode) this.audioNode.port.close();
+        }
+        this.core = new WebRenderer();
+        this.audioNode = await this.core.initialize(this.ctx!, { numberOfInputs: 0,
+          numberOfOutputs: outputCount, outputChannelCount: Array(outputCount).fill(2) });
+        this.rendererOutputCount = outputCount;
+      }
+      if (this.disposed || revision !== this.generation) return;
+      if (dynamic) {
+        this.masterChain!.setMixCharacter(dynamic.scenes[0].resolvedMix.contract.character, mix.context);
+        this.dynamicMixGraph = createSongMixGraph(this.ctx!, this.masterChain!, dynamic,
+          signals.map(signal => signal.trackId), dynamic.baselineHeadroom ?? ensembleHeadroom(signals.length, mix.masterProfile.lift));
+        signals.forEach((signal, index) => this.audioNode!.connect(this.dynamicMixGraph!.tracks.get(signal.trackId)!.input, index));
+        this.dynamicMixGraph.schedule(this.ctx!.currentTime, 0);
+        await this.core.render(...signals.flatMap(signal => [signal.left, signal.right]));
+      } else {
+        if (mix.mixCharacter) this.masterChain!.setMixCharacter(mix.mixCharacter, mix.context);
+        this.audioNode!.connect(this.masterChain!.drumBus, 0);
+        this.audioNode!.connect(this.masterChain!.subBus, 1);
+        this.audioNode!.connect(this.masterChain!.instBus, 2);
+        const buses = renderMixBuses(signals, mix.masterProfile.lift);
+        await this.core.render(buses.drums.left, buses.drums.right, buses.sub.left, buses.sub.right, buses.inst.left, buses.inst.right);
+      }
+      if (this.disposed || revision !== this.generation) return;
+      this.renderPending = false;
+      this.flushParamUpdates();
+    }).catch((error: unknown) => {
+      if (revision === this.generation) this.renderPending = false;
+      throw error;
+    });
   }
 
   async initialize(context: AudioContext, volume = 1): Promise<AudioNode> {
     this.ctx = context;
-    this.core = new WebRenderer();
-    this.audioNode = await this.core.initialize(context, { numberOfInputs: 0, numberOfOutputs: 3, outputChannelCount: [2, 2, 2] });
     const mix = resolvePlaybackMix(this.activeWorldId, this.activeStyleId);
     this.masterChain = createMasterChain(context, mix.mixCharacter, mix.context);
     this.masterChain.setPlaybackEnabled(false);
     this.masterChain.setVolume(volume);
-    this.audioNode.connect(this.masterChain.drumBus, 0);
-    this.audioNode.connect(this.masterChain.subBus, 1);
-    this.audioNode.connect(this.masterChain.instBus, 2);
     this.commitGraph();
     await this.graphCommit;
     return this.masterChain.output;
+  }
+
+  setMixPosition(songTime: number, contextTime: number) {
+    this.dynamicMixGraph?.schedule(contextTime, songTime);
   }
 
   // Compatibility entry points for UI integrations. Always use the same atomic plan.
@@ -159,7 +202,10 @@ export class BandWorkletNode {
     if (this.configuration) await this.configure({ ...this.configuration, instruments });
   }
   async setVolume(value: number) { this.masterChain?.setVolume(value); }
-  setPlaybackEnabled(enabled: boolean) { this.masterChain?.setPlaybackEnabled(enabled); }
+  setPlaybackEnabled(enabled: boolean) {
+    if (!enabled) this.dynamicMixGraph?.cancel();
+    this.masterChain?.setPlaybackEnabled(enabled);
+  }
 
   private queueParamUpdate(key: string, value: number) {
     if (!Number.isFinite(value)) throw new Error(`Non-finite live control: ${key}`);
@@ -243,30 +289,70 @@ export class BandWorkletNode {
 
   private schedule(fn: () => void, atTime?: number) {
     if (this.disposed) return;
-    const delay = Math.max(0, (atTime ?? this.ctx?.currentTime ?? 0) - (this.ctx?.currentTime ?? 0));
-    if (delay <= 0.005) { fn(); return; }
-    const revision = this.generation;
-    const id = setTimeout(() => {
-      this.timerIds.delete(id);
-      if (!this.disposed && revision === this.generation) fn();
-    }, delay * 1000);
-    this.timerIds.add(id);
+    const now = this.ctx?.currentTime ?? 0;
+    const when = atTime ?? now;
+    if (when <= now + 0.005) { fn(); return; }
+    const event = { atTime: when, revision: this.generation, sequence: ++this.scheduleSequence, fn };
+    let lo = 0, hi = this.scheduledEvents.length;
+    while (lo < hi) {
+      const mid = (lo + hi) >>> 1;
+      const other = this.scheduledEvents[mid];
+      if (other.atTime < event.atTime || (other.atTime === event.atTime && other.sequence < event.sequence)) lo = mid + 1;
+      else hi = mid;
+    }
+    this.scheduledEvents.splice(lo, 0, event);
+    if (this.scheduledTimeout === null || when < this.scheduledTimeoutAt) this.armScheduledEvents(true);
   }
-  processPendingEvents() { this.flushParamUpdates(); }
+  private armScheduledEvents(rearm = false) {
+    if (this.scheduledTimeout !== null && !rearm) return;
+    if (this.scheduledTimeout !== null) clearTimeout(this.scheduledTimeout);
+    this.scheduledTimeout = null;
+    this.scheduledTimeoutAt = Number.POSITIVE_INFINITY;
+    if (!this.scheduledEvents.length || this.disposed) return;
+    const nextTime = this.scheduledEvents[0].atTime;
+    const remaining = nextTime - (this.ctx?.currentTime ?? 0);
+    this.scheduledTimeoutAt = nextTime;
+    this.scheduledTimeout = setTimeout(() => {
+      this.scheduledTimeout = null;
+      this.scheduledTimeoutAt = Number.POSITIVE_INFINITY;
+      this.dispatchScheduledEvents();
+    }, Math.max(5, remaining * 1000));
+  }
+  private dispatchScheduledEvents() {
+    const now = (this.ctx?.currentTime ?? 0) + 0.005;
+    let dispatched = false;
+    while (this.scheduledEvents.length && this.scheduledEvents[0].atTime <= now) {
+      const event = this.scheduledEvents.shift()!;
+      if (!this.disposed && event.revision === this.generation) event.fn();
+      dispatched = true;
+    }
+    if (dispatched) this.flushParamUpdates();
+    this.armScheduledEvents();
+  }
+  processPendingEvents() { this.dispatchScheduledEvents(); this.flushParamUpdates(); }
 
   postPreparedNote(trackId: string, profileId: number, noteInstanceId: string, atTime?: number) {
     this.schedule(() => {
       const track = this.tracks.get(trackId);
       const profile = track?.profiles.get(profileId);
       if (!track || !profile) { this.diagnostics.unpreparedEvents++; throw new Error(`Unprepared note ${trackId}:${profileId}; configure the UI performance first`); }
-      let index = track.voices.findIndex(v => v.state.gate === 0);
+      const now = this.ctx?.currentTime ?? 0;
+      let index = track.voices.findIndex(v => v.state.gate === 0 && (v.availableAt ?? 0) <= now);
+      if (index < 0) {
+        index = track.voices.reduce((best, slot, i, slots) => slot.state.gate === 0 &&
+          (slots[best].state.gate !== 0 || (slot.availableAt ?? 0) < (slots[best].availableAt ?? 0)) ? i : best, 0);
+        if (track.voices[index].state.gate !== 0) index = -1;
+      }
       if (index < 0) {
         index = track.voices.reduce((best, slot, i, slots) => (slot.state.triggerSeq ?? 0) < (slots[best].state.triggerSeq ?? 0) ? i : best, 0);
       }
       const slot = track.voices[index];
+      if (slot.state.gate) this.diagnostics.activeVoiceSteals++;
+      else if ((slot.availableAt ?? 0) > now) this.diagnostics.tailVoiceReuses++;
       const program = profile.programs[index].get(controllerStateKey(track.params));
       if (!program) { this.diagnostics.unpreparedEvents++; throw new Error(`Unprepared controller state for ${trackId}`); }
       this.deactivate(slot);
+      slot.availableAt = Infinity;
       slot.profile = profile;
       slot.state = { ...profile.voice, gate: 1, noteInstanceId, triggerSeq: ++this.voiceSeq,
         baseFrequencyHz: profile.voice.frequencyHz };
@@ -303,6 +389,7 @@ export class BandWorkletNode {
     this.schedule(() => {
       for (const slot of this.tracks.get(trackId)?.voices ?? []) {
         if (slot.state.gate && Math.round(slot.state.note) === Math.round(midi) && (!instance || slot.state.noteInstanceId === instance)) {
+          slot.availableAt = (this.ctx?.currentTime ?? 0) + this.tracks.get(trackId)!.tailSeconds;
           slot.state.gate = 0; this.voiceControl(slot, 'gate', 0);
         }
       }
@@ -377,9 +464,12 @@ export class BandWorkletNode {
     }, atTime);
   }
   softNotesOff() {
-    for (const id of this.timerIds) clearTimeout(id);
-    this.timerIds.clear();
+    this.scheduledEvents = [];
+    if (this.scheduledTimeout !== null) clearTimeout(this.scheduledTimeout);
+    this.scheduledTimeout = null;
+    this.scheduledTimeoutAt = Number.POSITIVE_INFINITY;
     for (const track of this.tracks.values()) for (const slot of track.voices) {
+      slot.availableAt = (this.ctx?.currentTime ?? 0) + track.tailSeconds;
       slot.state.gate = 0; this.voiceControl(slot, 'gate', 0);
     }
     this.flushParamUpdates();
@@ -396,10 +486,13 @@ export class BandWorkletNode {
   }
 
   dispose() {
+    this.preparationAbort?.abort();
     this.clear(); this.disposed = true; this.generation++; this.preparationRevision++;
     this.tracks.clear(); this.bindings.clear(); this.appliedValues.clear(); this.pendingParamUpdates = {};
     this.trackVolumes.clear(); this.trackPans.clear(); this.trackMutedMap.clear(); this.trackSoloMap.clear(); this.trackControllerGain.clear();
     this.configuration = undefined;
-    this.audioNode?.disconnect(); this.masterChain?.dispose(); this.masterChain = undefined;
+    this.audioNode?.disconnect(); this.dynamicMixGraph?.dispose(); this.dynamicMixGraph = undefined;
+    if (typeof AudioWorkletNode !== 'undefined' && this.audioNode instanceof AudioWorkletNode) this.audioNode.port.close();
+    this.masterChain?.dispose(); this.masterChain = undefined;
   }
 }

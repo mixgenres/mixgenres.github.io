@@ -424,6 +424,43 @@ export interface InstrumentTechniqueProfile {
   articulationMetadata?: Record<string, { onsetShape?: string; envelope?: string; velocityCurve?: string; pitchBehavior?: string; noiseComponent?: number; }>;
 }
 
+/** A physical setup of one instrument. Style names and playing techniques do not belong here. */
+export interface InstrumentVariant {
+  id: string;
+  name: string;
+  bodyConstruction?: InstrumentDef['bodyConstruction'];
+  courses?: number;
+  frets?: number;
+  tuningAndMechanics?: TuningAndMechanics;
+  acousticProfile?: AcousticProfile;
+  luthierPhysics?: LuthierPhysicsProfile;
+  excitationType?: InstrumentDef['excitationType'];
+  polyphony?: number;
+  physicalModel?: PhysicalModelProfile;
+  performanceArticulations?: PhysicalPerformanceArticulations;
+  techniqueAdditions?: string[];
+  techniqueRestrictions?: string[];
+}
+
+/** A saved timbral parameter set for the one canonical Synth instrument. */
+export interface SynthPatch {
+  id: string;
+  name: string;
+  role?: 'bass' | 'lead' | 'pad' | 'texture' | 'comp';
+  oscillator: 'saw' | 'square' | 'sine' | 'triangle' | 'noise' | 'hybrid';
+  filter: 'lowpass' | 'bandpass' | 'highpass' | 'ladder';
+  cutoffHz: number;
+  resonance: number;
+  attackSeconds: number;
+  decaySeconds: number;
+  sustain: number;
+  releaseSeconds: number;
+  unison?: number;
+  saturation?: number;
+  noise?: number;
+  signalChain?: PhysicalModelProfile['signalChain'];
+}
+
 export interface InstrumentDef {
   id: string;
   name: string;
@@ -467,6 +504,12 @@ export interface InstrumentDef {
   microtonalTuning?: MicrotonalTuning;
 
   techniques: InstrumentTechniqueProfile;
+  /** Hard physical capabilities used to filter style vocabulary during fusion. */
+  physicalTechniques?: string[];
+  /** Physically meaningful setup choices, independent of genre. */
+  variants?: InstrumentVariant[];
+  /** Electronic timbres available on Synth; never top-level instrument IDs. */
+  patches?: SynthPatch[];
   physicalModel?: PhysicalModelProfile;
   freeReedSynthesis?: FreeReedSynthesisProfile;
   pipeSynthesis?: PipeSynthesisProfile;

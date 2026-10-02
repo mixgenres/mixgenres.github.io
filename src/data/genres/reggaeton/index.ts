@@ -86,13 +86,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "origin": "San Juan, Puerto Rico",
       "era": "2000s",
       "description": "Heavy Dembow • 4/4 3-3-2 •",
-      "characteristicInstruments": [
-        "drums",
-        "sub-bass",
-        "synth",
-        "sampler",
-        "maracas"
-      ],
+      "characteristicInstruments": ["drums", "synth", "synth", "sampler", "maracas"],
       "preferredMeters": [
         "4/4"
       ],
@@ -166,13 +160,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "origin": "Medellín, Colombia / Puerto Rico",
       "era": "2015–Present",
       "description": "Smooth • Pop-Sensibility • Romantic\nPolished Colombian",
-      "characteristicInstruments": [
-        "synth",
-        "drums",
-        "sub-bass",
-        "electric-guitar",
-        "maracas"
-      ],
+      "characteristicInstruments": ["synth", "drums", "synth", "guitar", "maracas"],
       "preferredMeters": [
         "4/4"
       ],
@@ -245,13 +233,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "origin": "Santiago, Chile / Mexico / Spain",
       "era": "2018–Present",
       "description": "Distorted • Cyberpunk • Club Underground\nDistorted",
-      "characteristicInstruments": [
-        "sampler",
-        "drums",
-        "sub-bass",
-        "synth",
-        "noise-sweep"
-      ],
+      "characteristicInstruments": ["sampler", "drums", "synth", "synth", "synth"],
       "preferredMeters": [
         "4/4"
       ],
@@ -324,13 +306,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "origin": "Panama / Puerto Rico",
       "era": "1990s",
       "description": "Spanish Reggae • Roots • Jamaican",
-      "characteristicInstruments": [
-        "drums",
-        "bass",
-        "sampler",
-        "organ",
-        "synth"
-      ],
+      "characteristicInstruments": ["drums", "bass", "sampler", "organ", "synth"],
       "preferredMeters": [
         "4/4"
       ],
@@ -404,13 +380,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "origin": "Miami / San Juan / Madrid",
       "era": "2017–Present",
       "description": "Commercial • Acoustic Guitar • Global",
-      "characteristicInstruments": [
-        "acoustic-guitar",
-        "synth",
-        "drums",
-        "sub-bass",
-        "piano"
-      ],
+      "characteristicInstruments": ["guitar", "synth", "drums", "synth", "piano"],
       "preferredMeters": [
         "4/4"
       ],
@@ -484,13 +454,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "origin": "San Juan, Puerto Rico",
       "era": "2016–Present",
       "description": "808 • Dark • Melancholic\nLatin trap",
-      "characteristicInstruments": [
-        "sub-bass",
-        "drums",
-        "synth",
-        "sampler",
-        "electric-guitar"
-      ],
+      "characteristicInstruments": ["synth", "drums", "synth", "sampler", "guitar"],
       "preferredMeters": [
         "4/4"
       ],
@@ -563,13 +527,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "origin": "San Juan, Puerto Rico (Casas & Mixtapes)",
       "era": "1990s",
       "description": "Underground • Mixtape • Raw Loops\nDJ",
-      "characteristicInstruments": [
-        "sampler",
-        "drums",
-        "synth",
-        "turntable",
-        "sub-bass"
-      ],
+      "characteristicInstruments": ["sampler", "drums", "synth", "turntable", "synth"],
       "preferredMeters": [
         "4/4"
       ],
@@ -633,13 +591,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "origin": "Dominican Republic / Puerto Rico",
       "era": "2000s–Present",
       "description": "Requinto • Bongo • Dembow Fusion\nBachata-reggaeton",
-      "characteristicInstruments": [
-        "requinto",
-        "bongos",
-        "sub-bass",
-        "drums",
-        "guiro"
-      ],
+      "characteristicInstruments": ["requinto", "bongos", "synth", "drums", "guiro"],
       "preferredMeters": [
         "4/4"
       ],
@@ -734,11 +686,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums",
-        "kick",
-        "snare"
-      ],
+      "instruments": ["drums", "drums", "drums"],
       "meter": "4/4",
       "cycleLength": 2,
       "subdivisions": 32,
@@ -965,10 +913,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "approaches": [
         "walking"
       ],
-      "instruments": [
-        "sub-bass",
-        "bass"
-      ],
+      "instruments": ["synth", "bass"],
       "meter": "4/4",
       "cycleLength": 2,
       "subdivisions": 32,
@@ -1113,10 +1058,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "shaker",
-        "cabasa"
-      ],
+      "instruments": ["shaker", "cabasa"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1240,10 +1182,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "approaches": [
         "comping"
       ],
-      "instruments": [
-        "polysynth",
-        "clavinet"
-      ],
+      "instruments": ["synth", "clavinet"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1363,10 +1302,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums",
-        "snare"
-      ],
+      "instruments": ["drums", "drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1499,11 +1435,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums",
-        "kick",
-        "snare"
-      ],
+      "instruments": ["drums", "drums", "drums"],
       "meter": "4/4",
       "cycleLength": 2,
       "subdivisions": 32,
@@ -1617,10 +1549,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "shaker",
-        "drums"
-      ],
+      "instruments": ["shaker", "drums"],
       "meter": "4/4",
       "cycleLength": 2,
       "subdivisions": 32,
@@ -1685,7 +1614,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "category": "rolePattern",
       "description": "Short sub-bass answer lands around the",
       "tags": [
-        "sub-bass",
+        "synth",
         "syncopation"
       ],
       "scopes": [
@@ -1701,9 +1630,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "approaches": [
         "walking"
       ],
-      "instruments": [
-        "sub-bass"
-      ],
+      "instruments": ["synth"],
       "meter": "4/4",
       "cycleLength": 2,
       "subdivisions": 32,
@@ -1747,7 +1674,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "variants": [],
       "provenance": "Authored genre-pack pattern based on Bass; designed for engine-level recombination rather than literal transcription.",
       "authenticityTags": [
-        "sub-bass",
+        "synth",
         "syncopation"
       ],
       "danceTags": [
@@ -1783,10 +1710,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "approaches": [
         "comping"
       ],
-      "instruments": [
-        "piano",
-        "polysynth"
-      ],
+      "instruments": ["piano", "synth"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1859,9 +1783,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "shaker"
-      ],
+      "instruments": ["shaker"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1941,9 +1863,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "approaches": [
         "phrase"
       ],
-      "instruments": [
-        "synth"
-      ],
+      "instruments": ["synth"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -2014,9 +1934,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums"
-      ],
+      "instruments": ["drums"],
       "meter": "4/4",
       "cycleLength": 2,
       "subdivisions": 32,
@@ -2133,11 +2051,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums",
-        "kick",
-        "snare"
-      ],
+      "instruments": ["drums", "drums", "drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -2221,9 +2135,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums"
-      ],
+      "instruments": ["drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -2300,10 +2212,7 @@ export const REGGAETON_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums",
-        "claves"
-      ],
+      "instruments": ["drums", "claves"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -2385,9 +2294,7 @@ export const REGGAETON_WORLD: GenreWorld = {
         "lead",
         "melody"
       ],
-      "instruments": [
-        "synth"
-      ],
+      "instruments": ["synth"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -2491,9 +2398,7 @@ export const REGGAETON_WORLD: GenreWorld = {
         "lead",
         "melody"
       ],
-      "instruments": [
-        "synth"
-      ],
+      "instruments": ["synth"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -2590,9 +2495,7 @@ export const REGGAETON_WORLD: GenreWorld = {
         "counterline",
         "groove"
       ],
-      "instruments": [
-        "synth"
-      ],
+      "instruments": ["synth"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,

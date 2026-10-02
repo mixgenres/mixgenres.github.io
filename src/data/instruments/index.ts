@@ -1,4 +1,6 @@
 import type { InstrumentDef } from './schema/instrument-def';
+import { pedalSteel, lapSteel, resonatorGuitar, guira, djembe, shekere, talkingDrum, balafon, qanun, ney, duduk, bansuri, tanpura, sarangi, gayageum, haegeum, janggu, gamelanMetallophone, kendang, bandolaLlanera, marimbaDeChonta } from './catalog/world-instruments';
+
 import { bandoneon } from './catalog/bellows-and-keys/bandoneon';
 import { accordion } from './catalog/bellows-and-keys/accordion';
 import { piano } from './catalog/bellows-and-keys/piano';
@@ -6,7 +8,6 @@ import { fm_ep } from './catalog/bellows-and-keys/fm-ep';
 import { rhodes } from './catalog/bellows-and-keys/rhodes';
 import { clavinet } from './catalog/bellows-and-keys/clavinet';
 import { organ } from './catalog/bellows-and-keys/organ';
-import { rock_organ } from './catalog/bellows-and-keys/rock-organ';
 import { harpsichord } from './catalog/bellows-and-keys/harpsichord';
 import { celeste } from './catalog/metal-and-wood/celeste';
 import { glockenspiel } from './catalog/metal-and-wood/glockenspiel';
@@ -18,17 +19,7 @@ import { xylophone } from './catalog/metal-and-wood/xylophone';
 import { tubular_bells } from './catalog/metal-and-wood/tubular-bells';
 import { dulcimer } from './catalog/plucked/dulcimer';
 import { guitar } from './catalog/plucked/guitar';
-import { spanish_guitar } from './catalog/plucked/spanish-guitar';
-import { acoustic_guitar } from './catalog/plucked/acoustic-guitar';
-import { steel_guitar } from './catalog/plucked/steel-guitar';
-import { i_12_string_guitar } from './catalog/plucked/12-string-guitar';
-import { electric_guitar } from './catalog/plucked/electric-guitar';
-import { jazz_guitar } from './catalog/plucked/jazz-guitar';
-import { distortion_guitar } from './catalog/plucked/distortion-guitar';
-import { muted_guitar } from './catalog/plucked/muted-guitar';
-import { guitar_harmonics } from './catalog/plucked/guitar-harmonics';
 import { requinto } from './catalog/plucked/requinto';
-import { overdrive_guitar } from './catalog/plucked/overdrive-guitar';
 import { tres } from './catalog/plucked/tres';
 import { cuatro } from './catalog/plucked/cuatro';
 import { cavaquinho } from './catalog/plucked/cavaquinho';
@@ -36,7 +27,6 @@ import { charango } from './catalog/plucked/charango';
 import { oud } from './catalog/plucked/oud';
 import { bouzouki } from './catalog/plucked/bouzouki';
 import { harp } from './catalog/plucked/harp';
-import { celtic_harp } from './catalog/plucked/celtic-harp';
 import { concertina } from './catalog/bellows-and-keys/concertina';
 import { guitarron } from './catalog/plucked/guitarron';
 import { mandolin } from './catalog/plucked/mandolin';
@@ -54,21 +44,11 @@ import { koto } from './catalog/plucked/koto';
 import { kalimba } from './catalog/plucked/kalimba';
 import { bass } from './catalog/plucked/bass';
 import { upright_bass } from './catalog/plucked/upright-bass';
-import { slap_bass } from './catalog/plucked/slap-bass';
-import { acoustic_bass } from './catalog/plucked/acoustic-bass';
-import { pick_bass } from './catalog/plucked/pick-bass';
-import { fretless_bass } from './catalog/plucked/fretless-bass';
-import { sub_bass } from './catalog/electronic/sub-bass';
 import { synth } from './catalog/electronic/synth';
+import { string_ensemble } from './catalog/bowed/string-ensemble';
 import { violin } from './catalog/bowed/violin';
 import { viola } from './catalog/bowed/viola';
 import { cello } from './catalog/bowed/cello';
-import { strings } from './catalog/bowed/strings';
-import { slow_strings } from './catalog/bowed/slow-strings';
-import { tremolo_strings } from './catalog/bowed/tremolo-strings';
-import { orchestral_harp } from './catalog/plucked/orchestral-harp';
-import { pizz_strings } from './catalog/plucked-string/pizz-strings';
-import { fiddle } from './catalog/bowed/fiddle';
 import { erhu } from './catalog/bowed/erhu';
 import { jinghu } from './catalog/bowed/jinghu';
 import { flute } from './catalog/winds/flute';
@@ -96,16 +76,12 @@ import { english_horn } from './catalog/winds/english-horn';
 import { recorder } from './catalog/winds/recorder';
 import { ocarina } from './catalog/winds/ocarina';
 import { trumpet } from './catalog/brass/trumpet';
-import { muted_trumpet } from './catalog/brass/muted-trumpet';
 import { trombone } from './catalog/brass/trombone';
 import { horn_section } from './catalog/brass/horn-section';
-import { brass } from './catalog/brass/brass';
 import { french_horn } from './catalog/brass/french-horn';
 import { tuba } from './catalog/brass/tuba';
-import { synth_brass } from './catalog/electronic/synth-brass';
 import { voice } from './catalog/voice/voice';
 import { choir } from './catalog/voice/choir';
-import { backing_vocals } from './catalog/voice/backing-vocals';
 import { congas } from './catalog/hand-drums/congas';
 import { bongos } from './catalog/hand-drums/bongos';
 import { zabumba } from './catalog/hand-drums/zabumba';
@@ -141,60 +117,36 @@ import { cabasa } from './catalog/metal-and-wood/cabasa';
 import { tambourine } from './catalog/metal-and-wood/tambourine';
 import { castanets } from './catalog/metal-and-wood/castanets';
 import { palmas } from './catalog/body-percussion/palmas';
-import { ride } from './catalog/metal-and-wood/ride';
 import { steel_drums } from './catalog/metal-and-wood/steel-drums';
 import { taiko } from './catalog/metal-and-wood/taiko';
 import { paigu } from './catalog/hand-drums/paigu';
 import { kane } from './catalog/metal-and-wood/kane';
 import { zapateado } from './catalog/body-percussion/zapateado';
 import { drums } from './catalog/kit/drums';
-import { brush_kit } from './catalog/kit/brush-kit';
-import { kick } from './catalog/kit/kick';
-import { snare } from './catalog/kit/snare';
-import { hats } from './catalog/kit/hats';
-import { acid_303 } from './catalog/electronic/acid-303';
-import { noise_sweep } from './catalog/electronic/noise-sweep';
-import { dub_echo } from './catalog/electronic/dub-echo';
 import { turntable } from './catalog/electronic/turntable';
 import { melodica } from './catalog/winds/melodica';
-import { saw_lead } from './catalog/electronic/saw-lead';
-import { square_lead } from './catalog/electronic/square-lead';
-import { warm_pad } from './catalog/electronic/warm-pad';
-import { synth_strings } from './catalog/electronic/synth-strings';
-import { bass_lead } from './catalog/electronic/bass-lead';
-import { polysynth } from './catalog/electronic/polysynth';
-import { halo_pad } from './catalog/electronic/halo-pad';
-import { sweep_pad } from './catalog/electronic/sweep-pad';
 
 import { cuica } from './catalog/hand-drums/cuica';
 import { dikanza } from './catalog/metal-and-wood/dikanza';
-import { drone } from './catalog/electronic/drone';
 import { foot_stomp } from './catalog/body-percussion/foot-stomp';
 import { hand_percussion } from './catalog/body-percussion/hand-percussion';
 import { harmonium } from './catalog/bellows-and-keys/harmonium';
 import { repinique } from './catalog/hand-drums/repinique';
 import { sampler } from './catalog/electronic/sampler';
-import { slide_guitar } from './catalog/plucked/slide-guitar';
-import { spring_reverb } from './catalog/electronic/spring-reverb';
 import { tantan } from './catalog/hand-drums/tantan';
-import { tape_echo } from './catalog/electronic/tape-echo';
 import { washboard } from './catalog/metal-and-wood/washboard';
 export type { InstrumentDef, InstrumentFamily, DrumVoice, InstrumentTechniqueProfile } from './schema/instrument-def';
 
 export const INSTRUMENT_CATALOG: InstrumentDef[] = [
   cuica,
   dikanza,
-  drone,
   foot_stomp,
   hand_percussion,
   harmonium,
   repinique,
   sampler,
-  slide_guitar,
-  spring_reverb,
   steel_drums,
   tantan,
-  tape_echo,
   washboard,
 
   bandoneon,
@@ -204,29 +156,24 @@ export const INSTRUMENT_CATALOG: InstrumentDef[] = [
   rhodes,
   clavinet,
   organ,
-  rock_organ,
   harpsichord,
   celeste,
   glockenspiel,
   crystal,
   vibraphone,
   marimba,
+  balafon,
+  marimbaDeChonta,
+  gamelanMetallophone,
   music_box,
   xylophone,
   tubular_bells,
   dulcimer,
   guitar,
-  spanish_guitar,
-  acoustic_guitar,
-  steel_guitar,
-  i_12_string_guitar,
-  electric_guitar,
-  jazz_guitar,
-  distortion_guitar,
-  muted_guitar,
-  guitar_harmonics,
+  resonatorGuitar,
+  pedalSteel,
+  lapSteel,
   requinto,
-  overdrive_guitar,
   tres,
   cuatro,
   cavaquinho,
@@ -234,7 +181,6 @@ export const INSTRUMENT_CATALOG: InstrumentDef[] = [
   oud,
   bouzouki,
   harp,
-  celtic_harp,
   concertina,
   guitarron,
   mandolin,
@@ -242,6 +188,9 @@ export const INSTRUMENT_CATALOG: InstrumentDef[] = [
   sitar,
   shamisen,
   kora,
+  qanun,
+  tanpura,
+  bandolaLlanera,
   berimbau,
   sho,
   guqin,
@@ -249,27 +198,23 @@ export const INSTRUMENT_CATALOG: InstrumentDef[] = [
   guzheng,
   jarana,
   koto,
+  gayageum,
   kalimba,
   bass,
   upright_bass,
-  slap_bass,
-  acoustic_bass,
-  pick_bass,
-  fretless_bass,
-  sub_bass,
   synth,
+  string_ensemble,
   violin,
+  sarangi,
+  haegeum,
   viola,
   cello,
-  strings,
-  slow_strings,
-  tremolo_strings,
-  orchestral_harp,
-  pizz_strings,
-  fiddle,
   erhu,
   jinghu,
   flute,
+  ney,
+  bansuri,
+  duduk,
   tin_whistle,
   low_whistle,
   bagpipes,
@@ -294,16 +239,12 @@ export const INSTRUMENT_CATALOG: InstrumentDef[] = [
   recorder,
   ocarina,
   trumpet,
-  muted_trumpet,
   trombone,
   horn_section,
-  brass,
   french_horn,
   tuba,
-  synth_brass,
   voice,
   choir,
-  backing_vocals,
   congas,
   bongos,
   zabumba,
@@ -318,6 +259,11 @@ export const INSTRUMENT_CATALOG: InstrumentDef[] = [
   tamborim,
   darbuka,
   tabla,
+  djembe,
+  shekere,
+  talkingDrum,
+  janggu,
+  kendang,
   log_drum,
   cumbia_drum,
   bombo_andino,
@@ -335,33 +281,18 @@ export const INSTRUMENT_CATALOG: InstrumentDef[] = [
   maracas,
   shaker,
   guiro,
+  guira,
   cabasa,
   tambourine,
   castanets,
   palmas,
-  ride,
   taiko,
   paigu,
   kane,
   zapateado,
   drums,
-  brush_kit,
-  kick,
-  snare,
-  hats,
-  acid_303,
-  noise_sweep,
-  dub_echo,
   turntable,
   melodica,
-  saw_lead,
-  square_lead,
-  warm_pad,
-  synth_strings,
-  bass_lead,
-  polysynth,
-  halo_pad,
-  sweep_pad,
 ];
 
 

@@ -7,13 +7,7 @@ const STYLE_6: GenreStyleDefinition = {
         "origin": "UK / Global",
         "era": "1970s–Present",
         "description": "Timbral • Beatless • Expansive\nSubtle sonic",
-        "characteristicInstruments": [
-          "synth",
-          "sampler",
-          "drone",
-          "strings",
-          "piano"
-        ],
+        "characteristicInstruments": ["synth", "sampler", "synth", "string-ensemble", "piano"],
         "preferredMeters": [
           "free"
         ],
@@ -78,13 +72,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Bristol / Vienna / Ibiza",
         "era": "1990s–Present",
         "description": "Chilled • 4/4 • Atmospheric\nRelaxed, lush",
-        "characteristicInstruments": [
-          "synth",
-          "drums",
-          "bass",
-          "sampler",
-          "acoustic-guitar"
-        ],
+        "characteristicInstruments": ["synth", "drums", "bass", "sampler", "guitar"],
         "preferredMeters": [
           "4/4"
         ],
@@ -159,13 +147,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "Croydon, South London",
         "era": "2000s",
         "description": "Heavy Sub • Half-step • Dark\n140",
-        "characteristicInstruments": [
-          "sub-bass",
-          "drums",
-          "synth",
-          "sampler",
-          "dub-echo"
-        ],
+        "characteristicInstruments": ["synth", "drums", "synth", "sampler"],
         "preferredMeters": [
           "4/4"
         ],
@@ -240,13 +222,7 @@ const STYLE_4: GenreStyleDefinition = {
         "origin": "London, UK",
         "era": "Late 1990s–Present",
         "description": "Skippy • 2-Step • Vocal chops\nSyncopated",
-        "characteristicInstruments": [
-          "drums",
-          "bass",
-          "synth",
-          "sampler",
-          "piano"
-        ],
+        "characteristicInstruments": ["drums", "bass", "synth", "sampler", "piano"],
         "preferredMeters": [
           "4/4"
         ],
@@ -322,13 +298,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "UK / Europe",
         "era": "1990s–Present",
         "description": "Complex • Glitchy • Brain Dance\nIntricate",
-        "characteristicInstruments": [
-          "sampler",
-          "synth",
-          "drums",
-          "sub-bass",
-          "polysynth"
-        ],
+        "characteristicInstruments": ["sampler", "synth", "drums", "synth", "synth"],
         "preferredMeters": [
           "4/4",
           "7/8"
@@ -394,13 +364,7 @@ const STYLE_5: GenreStyleDefinition = {
         "origin": "France / USA / Internet",
         "era": "2000s–Present",
         "description": "80s Nostalgia • Arpeggios • Gated",
-        "characteristicInstruments": [
-          "synth",
-          "drums",
-          "bass",
-          "electric-guitar",
-          "warm-pad"
-        ],
+        "characteristicInstruments": ["synth", "drums", "bass", "guitar", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -475,13 +439,7 @@ const STYLE_7: GenreStyleDefinition = {
         "origin": "Detroit, Michigan / Berlin",
         "era": "1980s–Present",
         "description": "Relentless • 4/4 • Industrial\nMachine-driven hypnotic",
-        "characteristicInstruments": [
-          "drums",
-          "synth",
-          "sub-bass",
-          "sampler",
-          "noise-sweep"
-        ],
+        "characteristicInstruments": ["drums", "synth", "synth", "sampler", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -552,13 +510,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Bristol, UK",
         "era": "1990s",
         "description": "Moody • Cinematic • Heavy\nSlow hip-hop",
-        "characteristicInstruments": [
-          "drums",
-          "bass",
-          "sampler",
-          "synth",
-          "strings"
-        ],
+        "characteristicInstruments": ["drums", "bass", "sampler", "synth", "string-ensemble"],
         "preferredMeters": [
           "4/4"
         ],

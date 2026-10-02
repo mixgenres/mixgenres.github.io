@@ -7,14 +7,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Chicago, Illinois",
         "era": "1940s–1960s",
         "description": "Electric • 12-bar • Driving\nAmplified harmonica",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "harmonica",
-          "piano",
-          "bass",
-          "drums",
-          "voice"
-        ],
+        "characteristicInstruments": ["guitar", "harmonica", "piano", "bass", "drums", "voice"],
         "preferredMeters": [
           "4/4"
         ],
@@ -97,13 +90,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Mississippi Delta",
         "era": "1920s–1930s",
         "description": "Raw • Acoustic • Bottleneck\nSlide guitar",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "harmonica",
-          "piano",
-          "foot-stomp",
-          "slide-guitar"
-        ],
+        "characteristicInstruments": ["guitar", "harmonica", "piano", "foot-stomp", "guitar"],
         "preferredMeters": [
           "4/4"
         ],
@@ -171,13 +158,7 @@ const STYLE_5: GenreStyleDefinition = {
         "origin": "North Mississippi Hill Country",
         "era": "1960s–Present",
         "description": "Hypnotic • One-chord • Droning\nRelentless groove-based",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "drums",
-          "bass",
-          "harmonica",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["guitar", "drums", "bass", "harmonica", "hand-percussion"],
         "preferredMeters": [
           "4/4"
         ],
@@ -252,13 +233,7 @@ const STYLE_4: GenreStyleDefinition = {
         "origin": "Kansas City / Los Angeles",
         "era": "1940s–1950s",
         "description": "Fast • Horns • Swinging\nUpbeat predecessor",
-        "characteristicInstruments": [
-          "brass",
-          "piano",
-          "electric-guitar",
-          "upright-bass",
-          "drums"
-        ],
+        "characteristicInstruments": ["horn-section", "piano", "guitar", "upright-bass", "drums"],
         "preferredMeters": [
           "4/4"
         ],
@@ -341,13 +316,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "East Coast USA (Piedmont region)",
         "era": "1920s–1940s",
         "description": "Bouncy • Ragtime • Fingerpicked\nSyncopated acoustic",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "harmonica",
-          "washboard",
-          "piano",
-          "upright-bass"
-        ],
+        "characteristicInstruments": ["guitar", "harmonica", "washboard", "piano", "upright-bass"],
         "preferredMeters": [
           "4/4"
         ],
@@ -422,13 +391,7 @@ const STYLE_7: GenreStyleDefinition = {
         "origin": "Memphis / Chicago / Jackson, MS",
         "era": "1960s–1970s",
         "description": "Smooth • Horn-fed • Expressive\nGospel-influenced 60s",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "brass",
-          "organ",
-          "bass",
-          "drums"
-        ],
+        "characteristicInstruments": ["guitar", "horn-section", "organ", "bass", "drums"],
         "preferredMeters": [
           "4/4"
         ],
@@ -507,14 +470,7 @@ const STYLE_6: GenreStyleDefinition = {
         "origin": "Baton Rouge, Louisiana",
         "era": "1950s–1960s",
         "description": "Laid-back • Reverb • Tremolo\nLethargic Louisiana",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "harmonica",
-          "bass",
-          "drums",
-          "piano",
-          "voice"
-        ],
+        "characteristicInstruments": ["guitar", "harmonica", "bass", "drums", "piano", "voice"],
         "preferredMeters": [
           "4/4"
         ],
@@ -583,14 +539,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "Texas, USA",
         "era": "1950s–1980s",
         "description": "Swinging • Sharp • Virtuosic\nSingle-note electric",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "bass",
-          "drums",
-          "piano",
-          "harmonica",
-          "voice"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "piano", "harmonica", "voice"],
         "preferredMeters": [
           "4/4"
         ],

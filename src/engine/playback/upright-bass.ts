@@ -1,6 +1,6 @@
-import { TANGO_INSTRUMENT_RESPONSE, URBAN_BASS_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
+import { TANGO_INSTRUMENT_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
 import { UPRIGHT_BASS_CUTOFF_RULES, UPRIGHT_BASS_DECAY_RULES } from '../../data/sound/dsp/genrePlaybackProfiles';
-import { KIZOMBA_PATTERN, REGGAETON_PATTERN, TANGO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
+import { TANGO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
 import { el } from '@elemaudio/core';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { createDampedStringLoop, fbGainForDecay } from './instrumentLib_stringLoop.ts';
@@ -42,27 +42,8 @@ export default class UprightBassModule implements InstrumentModule {
     const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const tangoResponse = TANGO_INSTRUMENT_RESPONSE.uprightBass;
     const isMarcato = action === 'marcato' || /marcato|marked/i.test(action ?? '');
-    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
-    const isSubBass = /^(sub-bass|bass-lead)$/i.test(params.instrumentId ?? '');
     const gd = ctx.genreDialect;
     const genre = gd.id;
-
-    // Programmed low-end instruments need a dedicated sub-bass voice rather than
-    // inheriting the acoustic upright-bass model. Keep the same module boundary,
-    // but make the physical response appropriate to Kizomba/Reggaetón production.
-    if (isSubBass && (isKizomba || isReggaeton || /electronic|urban/i.test(params.performanceMode ?? ''))) {
-      const p = el.syncphasor(safeFreqSignal, gateSignal);
-      const sine = el.sin(el.mul(2 * Math.PI, p));
-      const fifth = el.sin(el.mul(2 * Math.PI, el.syncphasor(el.mul(safeFreqSignal, 2), gateSignal)));
-      const urbanBass = isReggaeton ? URBAN_BASS_RESPONSE.reggaeton : URBAN_BASS_RESPONSE.default;
-      const attack = el.adsr(0.001, urbanBass.attack, 0.68, 0.035, gateSignal);
-      const click = el.mul(0.045, el.mul(el.highpass(900, 1.0, el.noise()), el.adsr(0.0002, 0.008, 0, 0.002, gateSignal)));
-      const harmonic = el.mul(urbanBass.harmonic, fifth);
-      const tone = el.add(el.mul(0.82, sine), el.add(harmonic, click));
-      const cutoff = urbanBass.cutoffBase + b * urbanBass.cutoffBrightness;
-      return el.lowpass(cutoff, 1.0, el.tanh(el.mul(urbanBass.drive, el.mul(attack, tone))));
-    }
     const isYumba = action === 'yumba' || /yumba/i.test(action ?? '');
     const isArco = action === 'arco' || action === 'bow_drag' || isLija || params.bowPressure > 0.45;
 

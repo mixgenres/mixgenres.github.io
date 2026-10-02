@@ -37,6 +37,11 @@ export interface Track {
   role: Role;
   /** id from INSTRUMENT_CATALOG — the sound, chosen independently of the pattern */
   instrumentId?: string;
+  /** Optional physical setup and synth timbre selections within that instrument. */
+  variantId?: string;
+  patchId?: string;
+  /** Drum-kit component addressed by the part's pattern, e.g. kick or ride. */
+  kitVoice?: string;
   instrument: string;
   kind: InstrumentKind;
   muted: boolean;
@@ -134,6 +139,5 @@ export interface Song {
   styleOverrides?: Record<string, unknown>;
   phrasePatternCache?: Record<string, string>;
 }
-
 
 

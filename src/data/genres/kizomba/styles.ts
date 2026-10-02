@@ -7,13 +7,7 @@ const STYLE_6: GenreStyleDefinition = {
         "origin": "Lisbon, Portugal / Rotterdam / Paris",
         "era": "2000s–Present",
         "description": "R&B Chords • Electronic • Heavy",
-        "characteristicInstruments": [
-          "synth",
-          "drums",
-          "sub-bass",
-          "piano",
-          "warm-pad"
-        ],
+        "characteristicInstruments": ["synth", "drums", "synth", "piano", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -88,13 +82,7 @@ const STYLE_5: GenreStyleDefinition = {
         "origin": "Cape Verde / Angola",
         "era": "1980s–Present",
         "description": "Smooth • Walking • Classic\nRefined, flowing",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "bass",
-          "drums",
-          "piano",
-          "synth"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "piano", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -168,13 +156,7 @@ const STYLE_7: GenreStyleDefinition = {
         "origin": "Angola",
         "era": "1970s–Present",
         "description": "Slow • Nostalgic • Grounded\nDeep, soulful",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "acoustic-bass",
-          "dikanza",
-          "hand-percussion",
-          "synth"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "dikanza", "hand-percussion", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -249,13 +231,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Luanda, Angola",
         "era": "1950s–Present",
         "description": "Upbeat • Bouncy • Roots\nJoyful fast-paced",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "bass",
-          "drums",
-          "congas",
-          "synth"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "congas", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -330,13 +306,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "Luanda, Angola",
         "era": "Late 1990s–Present",
         "description": "Sensual • Deep Bass • Micro-movement\nSlow,",
-        "characteristicInstruments": [
-          "sub-bass",
-          "drums",
-          "synth",
-          "sampler",
-          "warm-pad"
-        ],
+        "characteristicInstruments": ["synth", "drums", "synth", "sampler", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -385,13 +355,7 @@ const STYLE_4: GenreStyleDefinition = {
         "origin": "Paris, France / Portugal",
         "era": "2018–Present",
         "description": "Heavy Sub • Robotic • Chest",
-        "characteristicInstruments": [
-          "sub-bass",
-          "drums",
-          "synth",
-          "sampler",
-          "warm-pad"
-        ],
+        "characteristicInstruments": ["synth", "drums", "synth", "sampler", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -444,13 +408,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Luanda, Angola",
         "era": "1980s–1990s",
         "description": "Grounded • 4/4 Zouk Beat •",
-        "characteristicInstruments": [
-          "bass",
-          "drums",
-          "acoustic-guitar",
-          "synth",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["bass", "drums", "guitar", "synth", "hand-percussion"],
         "preferredMeters": [
           "4/4"
         ],
@@ -524,13 +482,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "Paris, France / European Circuit",
         "era": "2010s–Present",
         "description": "Linear • Electronic • Syncopated Breaks\nFrench",
-        "characteristicInstruments": [
-          "synth",
-          "drums",
-          "sub-bass",
-          "sampler",
-          "warm-pad"
-        ],
+        "characteristicInstruments": ["synth", "drums", "synth", "sampler", "synth"],
         "preferredMeters": [
           "4/4"
         ],

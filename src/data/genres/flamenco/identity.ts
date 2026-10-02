@@ -56,14 +56,14 @@ export const FLAMENCO_WORLD_CULTURE: Partial<GenreWorld> = {
 export const FLAMENCO_WORLD_ROLES: Partial<GenreWorld> = {
   "roles": {
       "harmony": [
-        "spanish-guitar",
+        "guitar",
         "abanico rasgueado",
         "compás accompaniment",
         "arpeggios",
         "golpe on top plate"
       ],
       "melody": [
-        "spanish-guitar",
+        "guitar",
         "flute",
         "falseta development",
         "picado runs",
@@ -90,14 +90,14 @@ export const FLAMENCO_WORLD_ROLES: Partial<GenreWorld> = {
         "hand-percussion"
       ],
       "bass": [
-        "spanish-guitar",
+        "guitar",
         "compás root support",
         "alzapúa doubling",
         "rumba bassline",
         "modal pedal"
       ],
       "lead": [
-        "spanish-guitar",
+        "guitar",
         "flute",
         "voice",
         "falseta dialogue",

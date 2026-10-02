@@ -19,9 +19,7 @@ export const ROCK_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -132,9 +130,7 @@ export const ROCK_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -284,7 +280,7 @@ export const ROCK_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
 
 export const ROCK_WORLD_PATTERNS_CELL: MusicalPattern[] = [
   {
-          "id": "rock-organ-sustain",
+          "id": "organ-sustain",
           "worldId": "rock",
           "styleIds": ["rock-hard-rock"],
           "name": "Hammond Organ Sustain",
@@ -304,9 +300,7 @@ export const ROCK_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "keys"
-          ],
+          "instruments": ["keys"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -339,8 +333,8 @@ export const ROCK_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           ],
           "variants": [
             {
-              "id": "rock-organ-sustain-v-01",
-              "parentPatternId": "rock-organ-sustain",
+              "id": "organ-sustain-v-01",
+              "parentPatternId": "organ-sustain",
               "name": "Hammond Organ Sustain — sparse variation",
               "variationType": "sparse",
               "probability": 0.22,
@@ -367,8 +361,8 @@ export const ROCK_WORLD_PATTERNS_CELL: MusicalPattern[] = [
               ]
             },
             {
-              "id": "rock-organ-sustain-v-02",
-              "parentPatternId": "rock-organ-sustain",
+              "id": "organ-sustain-v-02",
+              "parentPatternId": "organ-sustain",
               "name": "Hammond Organ Sustain — accent shift",
               "variationType": "accentShift",
               "probability": 0.2,
@@ -432,13 +426,11 @@ export const ROCK_WORLD_PATTERNS_FILL: MusicalPattern[] = [
             "measure"
           ],
           "roles": [
-            "electric-guitar"
+            "guitar"
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "electric-guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -598,13 +590,11 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             "measure"
           ],
           "roles": [
-            "electric-guitar"
+            "guitar"
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "electric-guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "7/8",
           "cycleLength": 1,
           "subdivisions": 7,
@@ -730,10 +720,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "synth",
-            "keys"
-          ],
+          "instruments": ["synth", "keys"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -974,9 +961,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["chop"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -1115,13 +1100,11 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             "measure"
           ],
           "roles": [
-            "electric-guitar"
+            "guitar"
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "electric-guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -1235,10 +1218,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar",
-            "keys"
-          ],
+          "instruments": ["guitar", "keys"],
           "compatibleRoles": [
             "harmony"
           ],
@@ -1385,11 +1365,7 @@ export const ROCK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "percussion",
-            "guitar"
-          ],
+          "instruments": ["drums", "percussion", "guitar"],
           "compatibleRoles": [
             "pulse",
             "rhythm-guitar",
@@ -1571,18 +1547,16 @@ export const ROCK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             "phrase"
           ],
           "roles": [
-            "electric-guitar"
+            "guitar"
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "electric-guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
-            "electric-guitar"
+            "guitar"
           ],
           "compatibleInstruments": [
-            "electric-guitar"
+            "guitar"
           ],
           "canCrossRole": true,
           "meter": "4/4",
@@ -1771,11 +1745,7 @@ export const ROCK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking", "groove"],
-          "instruments": [
-            "electric-guitar",
-            "bass",
-            "drums"
-          ],
+          "instruments": ["guitar", "bass", "drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1922,11 +1892,7 @@ export const ROCK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking", "groove"],
-          "instruments": [
-            "electric-guitar",
-            "bass",
-            "drums"
-          ],
+          "instruments": ["guitar", "bass", "drums"],
           "meter": "7/8",
           "cycleLength": 1,
           "subdivisions": 14,
@@ -2058,9 +2024,7 @@ export const ROCK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "compatibleRoles": [
             "bass"
           ],
@@ -2214,11 +2178,7 @@ export const ROCK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["walking", "groove"],
-          "instruments": [
-            "electric-guitar",
-            "bass",
-            "drums"
-          ],
+          "instruments": ["guitar", "bass", "drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -2386,18 +2346,16 @@ export const ROCK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
             "phrase"
           ],
           "roles": [
-            "electric-guitar"
+            "guitar"
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "electric-guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
-            "electric-guitar"
+            "guitar"
           ],
           "compatibleInstruments": [
-            "electric-guitar"
+            "guitar"
           ],
           "canCrossRole": true,
           "meter": "4/4",
@@ -2549,12 +2507,7 @@ export const ROCK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["walking", "groove"],
-          "instruments": [
-            "electric-guitar",
-            "bass",
-            "drums",
-            "keys"
-          ],
+          "instruments": ["guitar", "bass", "drums", "keys"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,

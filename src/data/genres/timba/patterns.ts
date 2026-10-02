@@ -19,9 +19,7 @@ export const TIMBA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion"
-          ],
+          "instruments": ["percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -189,9 +187,7 @@ export const TIMBA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion"
-          ],
+          "instruments": ["percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -344,11 +340,7 @@ export const TIMBA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "timbales",
-            "percussion"
-          ],
+          "instruments": ["drums", "timbales", "percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -508,10 +500,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "synth",
-            "bass"
-          ],
+          "instruments": ["synth", "bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -641,10 +630,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "piano",
-            "keys"
-          ],
+          "instruments": ["piano", "keys"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -790,9 +776,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -898,15 +882,12 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             "measure"
           ],
           "roles": [
-            "brass",
+            "horn-section",
             "trumpet"
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "brass",
-            "trumpet"
-          ],
+          "instruments": ["horn-section", "trumpet"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1041,9 +1022,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion"
-          ],
+          "instruments": ["percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1182,9 +1161,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1319,9 +1296,7 @@ export const TIMBA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "piano"
-          ],
+          "instruments": ["piano"],
           "compatibleRoles": [
             "harmony"
           ],
@@ -1498,9 +1473,7 @@ export const TIMBA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "synth"
-          ],
+          "instruments": ["synth"],
           "compatibleRoles": [
             "synth"
           ],
@@ -1733,10 +1706,7 @@ export const TIMBA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking", "groove"],
-          "instruments": [
-            "bass",
-            "synth"
-          ],
+          "instruments": ["bass", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1878,9 +1848,7 @@ export const TIMBA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "compatibleRoles": [
             "bass"
           ],
@@ -2058,9 +2026,7 @@ export const TIMBA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "synth"
-          ],
+          "instruments": ["synth"],
           "compatibleRoles": [
             "synth"
           ],
@@ -2234,9 +2200,7 @@ export const TIMBA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "synth"
-          ],
+          "instruments": ["synth"],
           "compatibleRoles": [
             "synth",
             "lead"
@@ -2415,10 +2379,7 @@ export const TIMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "piano",
-            "keys"
-          ],
+          "instruments": ["piano", "keys"],
           "canCrossRole": true,
           "meter": "4/4",
           "cycleLength": 2,
@@ -2657,9 +2618,7 @@ export const TIMBA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "piano"
-          ],
+          "instruments": ["piano"],
           "compatibleRoles": [
             "harmony",
             "texture"

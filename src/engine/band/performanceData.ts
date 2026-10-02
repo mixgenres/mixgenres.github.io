@@ -2,7 +2,6 @@ import { Sheet } from '../sheet/sheet.ts';
 import type { MusicalPattern, Role } from '../../types';
 import type { Region } from '../../types';
 import { PATTERNS_BY_ID } from '../../data/genres';
-import type { VoiceProfile } from '../../data/instruments/schema/voice-profile';
 import { beatsPerBarOf, culturalCyclePosition, type TransitionEvent } from '../sheet/grid.ts';
 import { getEffectiveBpm } from '../sheet/sheet.ts';
 import { getResolvedSectionStyle } from '../sheet/sheet.ts';
@@ -20,6 +19,11 @@ export interface PitchBendPoint {
 }
 
 export interface PerfNote {
+  /** Musical attack and phrase ownership, shared by all tones of a voicing/roll. */
+  attackId?: string;
+  phraseId?: string;
+  /** Preserve the performing section's sound identity across the engine boundary. */
+  soundContext?: { worldId: string; styleId: string; role: string };
   /** seconds from the start of the song */
   time: number;
   /** seconds */
@@ -69,7 +73,22 @@ export interface BarTime {
   regionId: string;
 }
 
+export interface PerformancePhrase {
+  id: string;
+  trackId: string;
+  regionId: string;
+  startBar: number;
+  endBar: number;
+  start: number;
+  end: number;
+  soundContext: NonNullable<PerfNote['soundContext']>;
+}
+
 export interface Performance {
+  /** Immutable musical mix decisions shared by realtime and offline consumers. */
+  mixTimeline?: import('../studio/dynamicMix/MixScene').MixSceneTimeline;
+  /** Player-owned musical sentences, retained alongside their render events. */
+  phrases?: PerformancePhrase[];
   notes: PerfNote[];
   ccs: PerfCC[];
   bars: BarTime[];
@@ -96,7 +115,7 @@ export function buildBarTimes(sheet: Sheet): BarTime[] {
   let t = 0;
   sheet.measures.forEach((m, i) => {
     const { bpm } = getEffectiveBpm(sheet, m.regionId);
-    const safeBpm = Math.max(20, Math.min(400, bpm || 110));
+    const safeBpm = Number.isFinite(bpm) && bpm > 0 ? bpm : 110;
     const dur = (beatsPerBar * 60) / safeBpm;
     bars.push({ index: i, start: t, end: t + dur, bpm: safeBpm, beatsPerBar, regionId: m.regionId });
     t += dur;
@@ -108,32 +127,6 @@ export function buildBarTimes(sheet: Sheet): BarTime[] {
 
 export function intensityOf(region: Region | undefined): number {
   return INTENSITY_LEVEL[String(region?.intensity ?? 'medium')] ?? 0.55;
-}
-
-export function thinForSustain(
-  prof: VoiceProfile,
-  attacks: { beatInBar: number; accent: number }[],
-  beatsPerBar: number,
-  intensity: number,
-  prevLastKeptBeat?: number,
-): boolean[] {
-  const keep = attacks.map(() => true);
-  if (prof.sustain !== 'sustained' && prof.sustain !== 'blown') return keep;
-
-  const padLike = prof.role === 'pad' || prof.ring >= 4;
-  const minGap = padLike
-    ? (intensity > 0.8 ? beatsPerBar / 2 : beatsPerBar)
-    : prof.sustain === 'blown' ? 0.5 : 1.0;
-
-  let lastKept = prevLastKeptBeat !== undefined ? prevLastKeptBeat : -Infinity;
-  attacks.forEach((a, i) => {
-    if (a.beatInBar - lastKept + 1e-6 >= minGap || (prevLastKeptBeat === undefined && i === 0)) {
-      lastKept = a.beatInBar;
-    } else {
-      keep[i] = false;
-    }
-  });
-  return keep;
 }
 
 function energyForRegion(region: Region): 1 | 2 | 3 | 4 | 5 {

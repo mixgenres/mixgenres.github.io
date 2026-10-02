@@ -26,11 +26,7 @@ export const AFROBEATS_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "walking"],
-          "instruments": [
-            "drums",
-            "percussion",
-            "bass"
-          ],
+          "instruments": ["drums", "percussion", "bass"],
           "compatibleRoles": [
             "drums",
             "bass"
@@ -232,7 +228,7 @@ export const AFROBEATS_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           "tags": [
             "afrobeat",
             "horns",
-            "brass",
+            "horn-section",
             "fela"
           ],
           "scopes": [
@@ -241,15 +237,11 @@ export const AFROBEATS_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
           "roles": [
             "lead",
-            "brass"
+            "horn-section"
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "trumpet",
-            "brass",
-            "sax"
-          ],
+          "instruments": ["trumpet", "horn-section", "sax"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -422,10 +414,7 @@ export const AFROBEATS_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "walking"],
-          "instruments": [
-            "guitar",
-            "bass"
-          ],
+          "instruments": ["guitar", "bass"],
           "compatibleRoles": [
             "harmony",
             "bass"
@@ -642,10 +631,7 @@ export const AFROBEATS_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "percussion"
-          ],
+          "instruments": ["drums", "percussion"],
           "compatibleRoles": [
             "fill",
             "drums"
@@ -860,10 +846,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["walking", "groove"],
-          "instruments": [
-            "bass",
-            "synth"
-          ],
+          "instruments": ["bass", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1022,9 +1005,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1168,10 +1149,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion",
-            "guiro"
-          ],
+          "instruments": ["percussion", "guiro"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1424,11 +1402,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "keys",
-            "piano",
-            "synth"
-          ],
+          "instruments": ["keys", "piano", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1553,9 +1527,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
             "harmony"
           ],
@@ -1720,11 +1692,7 @@ export const AFROBEATS_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "percussion",
-            "bass"
-          ],
+          "instruments": ["drums", "percussion", "bass"],
           "compatibleRoles": [
             "pulse",
             "rhythm-guitar",
@@ -1911,9 +1879,7 @@ export const AFROBEATS_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "synth"
-          ],
+          "instruments": ["synth"],
           "compatibleRoles": [
             "synth"
           ],
@@ -2125,10 +2091,7 @@ export const AFROBEATS_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "chop"],
-          "instruments": [
-            "guitar",
-            "electric-guitar"
-          ],
+          "instruments": ["guitar", "guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -2293,9 +2256,7 @@ export const AFROBEATS_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "compatibleRoles": [
             "bass"
           ],
@@ -2462,9 +2423,7 @@ export const AFROBEATS_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "synth"
-          ],
+          "instruments": ["synth"],
           "compatibleRoles": [
             "synth",
             "lead"
@@ -2640,9 +2599,7 @@ export const AFROBEATS_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
             "harmony",
             "texture"
@@ -2877,11 +2834,7 @@ export const AFROBEATS_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "comping"],
-          "instruments": [
-            "drums",
-            "percussion",
-            "guitar"
-          ],
+          "instruments": ["drums", "percussion", "guitar"],
           "compatibleRoles": [
             "pulse",
             "harmony",
@@ -3119,9 +3072,7 @@ export const AFROBEATS_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "phrase"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
             "harmony",
             "lead"

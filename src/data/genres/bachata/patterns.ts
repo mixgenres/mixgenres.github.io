@@ -23,9 +23,7 @@ export const BACHATA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -187,9 +185,7 @@ export const BACHATA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion"
-          ],
+          "instruments": ["percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -415,9 +411,7 @@ export const BACHATA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -592,9 +586,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion"
-          ],
+          "instruments": ["percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -730,9 +722,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion"
-          ],
+          "instruments": ["percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -982,9 +972,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["chop"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1108,7 +1096,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "description": "Classic cumbia shh-shh-pah scraper rhythm.",
           "tags": [
             "cumbia",
-            "guiro",
+            "guira",
             "percussion"
           ],
           "scopes": [
@@ -1119,9 +1107,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion"
-          ],
+          "instruments": ["percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1273,9 +1259,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
             "harmony"
           ],
@@ -1451,11 +1435,7 @@ export const BACHATA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "percussion",
-            "guitar"
-          ],
+          "instruments": ["drums", "percussion", "guitar"],
           "compatibleRoles": [
             "pulse",
             "rhythm-guitar",
@@ -1635,9 +1615,7 @@ export const BACHATA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "requinto"
-          ],
+          "instruments": ["requinto"],
           "compatibleRoles": [
             "requinto"
           ],
@@ -1869,10 +1847,7 @@ export const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase", "comping"],
-          "instruments": [
-            "guitar",
-            "electric-guitar"
-          ],
+          "instruments": ["guitar", "guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -2111,10 +2086,7 @@ export const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking", "groove"],
-          "instruments": [
-            "bass",
-            "piano"
-          ],
+          "instruments": ["bass", "piano"],
           "meter": "2/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -2248,9 +2220,7 @@ export const BACHATA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "compatibleRoles": [
             "bass"
           ],
@@ -2428,9 +2398,7 @@ export const BACHATA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "requinto"
-          ],
+          "instruments": ["requinto"],
           "compatibleRoles": [
             "requinto",
             "lead"
@@ -2605,10 +2573,7 @@ export const BACHATA_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "drums"
-          ],
+          "instruments": ["drums", "drums"],
           "compatibleRoles": [
             "drums"
           ],
@@ -2787,9 +2752,7 @@ export const BACHATA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
             "harmony",
             "texture"
@@ -3013,11 +2976,7 @@ export const BACHATA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "comping"],
-          "instruments": [
-            "drums",
-            "percussion",
-            "guitar"
-          ],
+          "instruments": ["drums", "percussion", "guitar"],
           "compatibleRoles": [
             "pulse",
             "harmony",

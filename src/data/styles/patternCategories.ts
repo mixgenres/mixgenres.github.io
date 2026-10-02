@@ -5,6 +5,6 @@ export const PATTERN_CATEGORY_RULES: Array<{ categoryIds: string[]; pattern: Reg
   { categoryIds: ['break'], pattern: /break|drop|stop|gear/, value: 'break' },
   { categoryIds: ['lead', 'motif'], pattern: /lead|melod|riff|hook|solo/, value: 'lead' },
   { categoryIds: ['comping', 'accompaniment'], pattern: /comp|chord|skank|strum|stab/, value: 'comping' },
-  { categoryIds: ['texture', 'drone'], pattern: /pad|texture|drone|wash/, value: 'texture' },
+  { categoryIds: ['texture', 'synth'], pattern: /pad|texture|drone|wash/, value: 'texture' },
 ] as const;
 export const PATTERN_CATEGORY_FALLBACK = 'groove';

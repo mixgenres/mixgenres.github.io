@@ -35,15 +35,15 @@ export const INDUSTRIAL_WORLD: GenreWorld = {
   "roles": {
     "lead": [
       "synth",
-      "noise-sweep"
+      "synth"
     ],
     "harmony": [
       "synth",
       "sampler"
     ],
     "bass": [
-      "bass-lead",
-      "sub-bass",
+      "synth",
+      "synth",
       "synth"
     ],
     "rhythm": [
@@ -51,7 +51,7 @@ export const INDUSTRIAL_WORLD: GenreWorld = {
     ],
     "percussion": [
       "sampler",
-      "noise-sweep"
+      "synth"
     ]
   },
   "rhythm": {
@@ -75,13 +75,7 @@ export const INDUSTRIAL_WORLD: GenreWorld = {
       "origin": "Belgium / Germany",
       "era": "1980s–1990s",
       "description": "Electronic Body Music: sequencing, harsh beats, and aggressive synth bass.",
-      "characteristicInstruments": [
-        "synth",
-        "drums",
-        "sampler",
-        "bass-lead",
-        "noise-sweep"
-      ],
+      "characteristicInstruments": ["synth", "drums", "sampler", "synth", "synth"],
       "preferredMeters": [
         "4/4"
       ],
@@ -144,13 +138,7 @@ export const INDUSTRIAL_WORLD: GenreWorld = {
         1,
         0
       ],
-      "instruments": [
-        "synth",
-        "drums",
-        "sampler",
-        "bass-lead",
-        "noise-sweep"
-      ],
+      "instruments": ["synth", "drums", "sampler", "synth", "synth"],
       "roles": [
         "rhythm",
         "bass"

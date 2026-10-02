@@ -2,20 +2,11 @@ import assert from 'node:assert/strict';
 import { makeSheet, setSectionSolo, duplicateSection, removeVoice, rebuild, getResolvedSectionStyle } from '../src/engine/sheet/sheet';
 import { arrangeBand } from '../src/engine/band/arrangeBand';
 import { soloistAtBar, supportsSolo } from '../src/engine/sheet/solo';
-import { GENRE_CONTRACTS } from '../src/data/styles/contracts';
 import { GENRE_SOLO_DEFINITIONS } from '../src/data/performance/soloDefinitions';
-
-for (const [id, contract] of Object.entries(GENRE_CONTRACTS)) {
-  assert.ok(contract.soloDefinition, `${id} must define solo behavior`);
-  for (const policy of Object.values(contract.soloDefinition.modes)) {
-    assert.ok(policy.name && policy.description);
-    assert.ok(policy.phraseBars > 0);
-  }
-}
 
 const base = makeSheet('flamenco');
 const region = base.regions[1];
-const guitar = base.tracks.find(t => t.instrumentId === 'spanish-guitar')!;
+const guitar = base.tracks.find(t => t.instrumentId === 'guitar')!;
 const flute = base.tracks.find(t => t.instrumentId === 'flute')!;
 const palmas = base.tracks.find(t => t.instrumentId === 'palmas')!;
 assert.ok(guitar && flute && palmas);

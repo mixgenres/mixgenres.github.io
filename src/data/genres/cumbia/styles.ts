@@ -7,13 +7,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "Lima / Peruvian Amazon",
         "era": "1970s–1980s",
         "description": "Psychedelic • Pentatonic • Surf Guitar\nAndean",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "synth",
-          "bass",
-          "timbales",
-          "guiro"
-        ],
+        "characteristicInstruments": ["guitar", "synth", "bass", "timbales", "guiro"],
         "preferredMeters": [
           "2/4"
         ],
@@ -89,13 +83,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Caribbean Coast, Colombia",
         "era": "1940s–Present",
         "description": "Classic • 2/4 • Guache Shaker\nTraditional",
-        "characteristicInstruments": [
-          "accordion",
-          "drums",
-          "hand-percussion",
-          "bass",
-          "flute"
-        ],
+        "characteristicInstruments": ["accordion", "drums", "hand-percussion", "bass", "flute"],
         "preferredMeters": [
           "2/4"
         ],
@@ -170,13 +158,7 @@ const STYLE_5: GenreStyleDefinition = {
         "origin": "Buenos Aires / Mexico City / Global",
         "era": "2008–Present",
         "description": "Electronic • Bass • Crossover\nFolktronica meets",
-        "characteristicInstruments": [
-          "synth",
-          "sampler",
-          "sub-bass",
-          "guiro",
-          "flute"
-        ],
+        "characteristicInstruments": ["synth", "sampler", "synth", "guiro", "flute"],
         "preferredMeters": [
           "2/4",
           "4/4"
@@ -252,13 +234,7 @@ const STYLE_7: GenreStyleDefinition = {
         "origin": "Sucre / Córdoba, Colombia",
         "era": "Traditional / 20th Century",
         "description": "Brass Band • Festive • Syncopated\nPelayero",
-        "characteristicInstruments": [
-          "brass",
-          "trumpet",
-          "clarinet",
-          "drums",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["horn-section", "trumpet", "clarinet", "drums", "hand-percussion"],
         "preferredMeters": [
           "2/4"
         ],
@@ -334,13 +310,7 @@ const STYLE_4: GenreStyleDefinition = {
         "origin": "Monterrey, Mexico (Sonidero Culture)",
         "era": "Late 1970s–Present",
         "description": "Slowed-down • Deep • Hypnotic\nPitch-shifted pitched",
-        "characteristicInstruments": [
-          "accordion",
-          "bass",
-          "guiro",
-          "drums",
-          "synth"
-        ],
+        "characteristicInstruments": ["accordion", "bass", "guiro", "drums", "synth"],
         "preferredMeters": [
           "2/4"
         ],
@@ -415,13 +385,7 @@ const STYLE_6: GenreStyleDefinition = {
         "origin": "Santa Fe, Argentina",
         "era": "1970s–Present",
         "description": "Romantic • Guitar-led • Melodic\nAcoustic guitar",
-        "characteristicInstruments": [
-          "accordion",
-          "acoustic-guitar",
-          "bass",
-          "timbales",
-          "guiro"
-        ],
+        "characteristicInstruments": ["accordion", "guitar", "bass", "timbales", "guiro"],
         "preferredMeters": [
           "2/4"
         ],
@@ -495,13 +459,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "Mexico / Cuba / Colombia",
         "era": "1950s–1970s",
         "description": "Big Band • Trumpets • Polished\nBig",
-        "characteristicInstruments": [
-          "trumpet",
-          "brass",
-          "piano",
-          "bass",
-          "timbales"
-        ],
+        "characteristicInstruments": ["trumpet", "horn-section", "piano", "bass", "timbales"],
         "preferredMeters": [
           "2/4"
         ],
@@ -575,13 +533,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Buenos Aires, Argentina (Villas Miseria)",
         "era": "Late 1990s–Present",
         "description": "Gritty • Synthesizer • Keytar\nRaw Argentine",
-        "characteristicInstruments": [
-          "synth",
-          "drums",
-          "bass",
-          "guiro",
-          "sampler"
-        ],
+        "characteristicInstruments": ["synth", "drums", "bass", "guiro", "sampler"],
         "preferredMeters": [
           "2/4"
         ],

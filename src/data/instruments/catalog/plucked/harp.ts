@@ -45,5 +45,9 @@ export const harp: InstrumentDef = {
       cinematic: ["legato", "tenuto", "harmonic", "crescendo"],
       celtic: ["legato", "staccato", "accent"]
     }
-  }
+  },
+  variants: [
+    { id: "pedal", name: "Pedal harp", bodyConstruction: "wood-box", courses: 47, techniqueAdditions: ["pedal-accidental-change", "glissando"] },
+    { id: "lever", name: "Lever harp", bodyConstruction: "wood-box", courses: 34, techniqueAdditions: ["lever-change"] }
+  ]
 };

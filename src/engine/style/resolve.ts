@@ -1,3 +1,5 @@
+import { resolveMixLayers, blendMixInfluence, legacyMixCharacterLayer, type MixLayer } from '../studio/dynamicMix/resolveMixContract';
+import { STYLE_PATCHES } from '../../data/styles/contracts';
 import { DEFAULT_STYLE_MASTER_PROFILE } from '../../data/sound/mix/masterProfiles';
 import type {
   SongStyle,
@@ -59,20 +61,10 @@ const resolveCache = new LRUMap<string, ResolvedStyle>(2000, 'resolveCache');
 registerCache(resolveCache);
 
 function cacheKey(opts: ResolveStyleOptions): string {
-  const g = opts.genreId ?? '';
-  const s = opts.styleId;
-  let infKey = '';
-  if (opts.influences && opts.influences.length > 0) {
-    infKey = opts.influences
-      .map(inf => `${inf.source.styleId ?? inf.source.genreId}:${(inf.weight * 100) | 0}:${inf.aspects.slice().sort().join(',')}`)
-      .sort()
-      .join(';');
-  }
-  let overKey = '';
-  if (opts.userOverrides) {
-    overKey = Object.keys(opts.userOverrides).sort().join(',');
-  }
-  return `${g}|${s}|${infKey}|${overKey}`;
+  // Preserve influence order and values: two user edits with the same keys differ.
+  const stable = (value: unknown): unknown => Array.isArray(value) ? value.map(stable)
+    : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => [k, stable(v)])) : value;
+  return JSON.stringify(stable(opts));
 }
 
 function lerp(a: number, b: number, t: number): number {
@@ -444,8 +436,34 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
   const effectiveGenreId = opts.genreId ?? merged.primaryGenre;
   const contract = contractForGenre(effectiveGenreId, merged);
 
+  const world = contractForGenre(effectiveGenreId);
+  const mixLayers: MixLayer[] = hierarchy.slice(0, -1).flatMap(parent => [
+    { mix: legacyMixCharacterLayer(STYLE_PATCHES[parent.id]?.timbreSpace?.mixCharacter), source: { source: 'extends' as const, sourceId: parent.id } },
+    { mix: parent.sound?.mix, source: { source: 'extends' as const, sourceId: parent.id } },
+  ]);
+  for (const influence of appliedInfluences) {
+    if (!influence.aspects.includes('sound')) continue;
+    const source = influence.source.styleId ? getStyle(influence.source.styleId) : getCanonicalStyle(influence.source.genreId!);
+    if (!source?.sound?.mix) continue;
+    const base = resolveMixLayers(world, effectiveGenreId, mixLayers).contract;
+    mixLayers.push({ mix: blendMixInfluence(base, source.sound.mix, Math.max(0, Math.min(1, influence.weight))),
+      source: { source: 'influence', sourceId: source.id, weight: influence.weight } });
+  }
+  mixLayers.push(
+    { mix: legacyMixCharacterLayer(STYLE_PATCHES[targetStyle.id]?.timbreSpace?.mixCharacter), source: { source: 'style', sourceId: targetStyle.id } },
+    { mix: targetStyle.sound?.mix, source: { source: 'style', sourceId: targetStyle.id } },
+    { mix: opts.userOverrides?.sound?.mix, source: { source: 'user' } },
+  );
+  const resolvedMix = resolveMixLayers(world, effectiveGenreId, mixLayers);
+  Object.assign(provenance, resolvedMix.provenance);
+  trace.push(...resolvedMix.trace);
+  merged.sound.mix = resolvedMix.contract;
+  contract.timbreSpace.mix = resolvedMix.contract;
+  if (resolvedMix.contract.enabled) contract.timbreSpace.mixCharacter = resolvedMix.contract.character;
+
   const result: ResolvedStyle = Object.freeze({
     ...merged,
+    resolvedMix,
     contract,
     form: (merged.form ?? {}) as FormGrammar,
     harmony: (merged.harmony ?? {}) as HarmonyGrammar,

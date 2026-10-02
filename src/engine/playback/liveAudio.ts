@@ -128,10 +128,9 @@ export async function startAudio(): Promise<AudioContext | null> {
   }
 }
 
+/** Direct engine reset for non-transport integrations. */
 export function stopAudio() {
-  if (bandWorklet) {
-    bandWorklet.clear();
-  }
+  bandWorklet?.clear();
 }
 
 export function createSink(): TransportSink {
@@ -147,12 +146,13 @@ export function createSink(): TransportSink {
       // no-op for decaying/percussive voices, which just ring out.
       if (bandWorklet) bandWorklet.postRelease(String(trackId), midi, time, noteInstanceId);
     },
-    pitchBend(trackId, value, time) {
-      if (bandWorklet) bandWorklet.postBend(String(trackId), value, time);
+    pitchBend(trackId, value, time, targetMidi) {
+      if (bandWorklet) bandWorklet.postBend(String(trackId), value, targetMidi, time);
     },
     controlChange(trackId, cc, value, time) {
       if (bandWorklet) bandWorklet.postCC(String(trackId), cc, value, time);
     },
+    setMixPosition(songTime, contextTime) { bandWorklet?.setMixPosition(songTime, contextTime); },
     restoreControllers(controllers, time) { bandWorklet?.restoreControllers(controllers, time); },
     setDrumChannel(_trackId, _isDrum) {
       // Percussive vs. pitched behaviour is carried by the luthier category.

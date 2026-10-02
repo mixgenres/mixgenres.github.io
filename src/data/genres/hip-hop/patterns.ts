@@ -23,10 +23,7 @@ export const HIP_HOP_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "walking"],
-          "instruments": [
-            "drums",
-            "bass"
-          ],
+          "instruments": ["drums", "bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -150,9 +147,7 @@ export const HIP_HOP_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 32,
@@ -412,9 +407,7 @@ export const HIP_HOP_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -567,9 +560,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "keys"
-          ],
+          "instruments": ["keys"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 24,
@@ -714,9 +705,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -884,9 +873,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1017,9 +1004,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1179,9 +1164,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1330,9 +1313,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1470,9 +1451,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1604,10 +1583,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "walking"],
-          "instruments": [
-            "drums",
-            "bass"
-          ],
+          "instruments": ["drums", "bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1735,9 +1711,7 @@ export const HIP_HOP_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1911,9 +1885,7 @@ export const HIP_HOP_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "synth"
-          ],
+          "instruments": ["synth"],
           "compatibleRoles": [
             "synth"
           ],
@@ -2129,10 +2101,7 @@ export const HIP_HOP_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking", "groove"],
-          "instruments": [
-            "bass",
-            "synth"
-          ],
+          "instruments": ["bass", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -2256,9 +2225,7 @@ export const HIP_HOP_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "compatibleRoles": [
             "bass"
           ],
@@ -2426,9 +2393,7 @@ export const HIP_HOP_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "synth"
-          ],
+          "instruments": ["synth"],
           "compatibleRoles": [
             "synth"
           ],
@@ -2577,9 +2542,7 @@ export const HIP_HOP_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,

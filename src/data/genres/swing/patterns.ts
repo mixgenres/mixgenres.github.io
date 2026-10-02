@@ -22,9 +22,7 @@ export const SWING_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 4,
@@ -158,9 +156,7 @@ export const SWING_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 4,
@@ -276,9 +272,7 @@ export const SWING_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -428,10 +422,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "keys",
-            "piano"
-          ],
+          "instruments": ["keys", "piano"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -542,9 +533,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -715,9 +704,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -875,9 +862,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -979,10 +964,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "keys",
-            "trumpet"
-          ],
+          "instruments": ["keys", "trumpet"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -1103,9 +1085,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "piano"
-          ],
+          "instruments": ["piano"],
           "compatibleRoles": [
             "harmony"
           ],
@@ -1277,11 +1257,7 @@ export const SWING_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "percussion",
-            "bass"
-          ],
+          "instruments": ["drums", "percussion", "bass"],
           "compatibleRoles": [
             "pulse",
             "rhythm-guitar",
@@ -1447,11 +1423,7 @@ export const SWING_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "drums",
-            "bass",
-            "piano"
-          ],
+          "instruments": ["drums", "bass", "piano"],
           "compatibleRoles": [
             "alto-sax",
             "lead"
@@ -1680,9 +1652,7 @@ export const SWING_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "compatibleRoles": [
             "bass"
           ],
@@ -1856,9 +1826,7 @@ export const SWING_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "alto-sax"
-          ],
+          "instruments": ["alto-sax"],
           "compatibleRoles": [
             "alto-sax"
           ],
@@ -2028,9 +1996,7 @@ export const SWING_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "alto-sax"
-          ],
+          "instruments": ["alto-sax"],
           "compatibleRoles": [
             "alto-sax",
             "lead"
@@ -2181,11 +2147,7 @@ export const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "keys",
-            "trumpet",
-            "drums"
-          ],
+          "instruments": ["keys", "trumpet", "drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -2383,9 +2345,7 @@ export const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "piano"
-          ],
+          "instruments": ["piano"],
           "compatibleRoles": [
             "harmony",
             "texture"
@@ -2609,11 +2569,7 @@ export const SWING_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "comping"],
-          "instruments": [
-            "drums",
-            "percussion",
-            "piano"
-          ],
+          "instruments": ["drums", "percussion", "piano"],
           "compatibleRoles": [
             "pulse",
             "harmony",

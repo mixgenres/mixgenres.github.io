@@ -63,7 +63,7 @@ const plucked = (d: InstrumentDef): InstrumentDSPProfile => {
 
 const bowed = (d: InstrumentDef): InstrumentDSPProfile => {
   const id = d.id.toLowerCase();
-  const fiddle = id === 'fiddle';
+  const fiddle = id === 'violin';
   const erhu = id === 'erhu' || id === 'jinghu';
   const heavy = /cello|bass|contrabass|upright/.test(id);
   return {
@@ -202,7 +202,7 @@ const reservoir = (d: InstrumentDef): InstrumentDSPProfile => {
 
 const brass = (d: InstrumentDef): InstrumentDSPProfile => {
   const id = d.id.toLowerCase();
-  const trumpet = id === 'trumpet' || id === 'muted-trumpet';
+  const trumpet = id === 'trumpet' || id === 'trumpet';
   const mute = id.includes('muted');
   return {
     familyModel: 'lip',
@@ -360,11 +360,8 @@ const EXACT: Record<string, Partial<InstrumentDSPProfile>> = {
   'uilleann-pipes': reservoir({ id: 'uilleann-pipes', name: 'Uilleann pipes', family: 'free-reed', voicing: 'single', techniques: { articulations: [], techniqueMethods: [], playingStyles: [] } }),
   banjo: plucked({ id: 'banjo', name: '5-String Banjo', family: 'plucked', voicing: 'chord', bodyConstruction: 'skin-faced', excitationType: 'hard-pick', courses: 1, techniques: { articulations: [], techniqueMethods: [], playingStyles: [] } }),
   trumpet: brass({ id: 'trumpet', name: 'Bb Trumpet', family: 'brass', voicing: 'single', techniques: { articulations: [], techniqueMethods: [], playingStyles: [] } }),
-  'muted-trumpet': brass({ id: 'muted-trumpet', name: 'Muted Trumpet', family: 'brass', voicing: 'single', techniques: { articulations: [], techniqueMethods: [], playingStyles: [] } }),
   congas: membrane({ id: 'congas', name: 'Congas', family: 'hand-drums', voicing: 'unpitched', bodyConstruction: 'skin-faced', excitationType: 'fingerpad', techniques: { articulations: [], techniqueMethods: [], playingStyles: [] } }),
-  'spanish-guitar': plucked({ id: 'spanish-guitar', name: 'Flamenco Guitar', family: 'plucked', voicing: 'chord', bodyConstruction: 'wood-box', excitationType: 'nail', techniques: { articulations: [], techniqueMethods: [], playingStyles: [] } }),
-  'flamenco-guitar': plucked({ id: 'flamenco-guitar', name: 'Flamenco Guitar', family: 'plucked', voicing: 'chord', bodyConstruction: 'wood-box', excitationType: 'nail', techniques: { articulations: [], techniqueMethods: [], playingStyles: [] } }),
-  tabla: membrane({ id: 'tabla', name: 'Indian Tabla Pair', family: 'hand-drums', voicing: 'unpitched', bodyConstruction: 'skin-faced', excitationType: 'fingerpad', techniques: { articulations: [], techniqueMethods: [], playingStyles: [] } }),
+    tabla: membrane({ id: 'tabla', name: 'Indian Tabla Pair', family: 'hand-drums', voicing: 'unpitched', bodyConstruction: 'skin-faced', excitationType: 'fingerpad', techniques: { articulations: [], techniqueMethods: [], playingStyles: [] } }),
 };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -437,9 +434,8 @@ export function buildInstrumentDSPProfile(def: InstrumentDef): InstrumentDSPProf
     profile.coupledResonators.membrane2D = { radial: 0.94, circular: 0.78, tension: 0.90, damping: 0.72, strikeZoneSensitivity: 0.98 };
     profile.instrumentSpecific = { banjoHead: { sympatheticDrone5th: true, headTensionSnap: 0.94, pickMaterial: 'metal', mylarDecay: 0.94 } };
   }
-  if (id === 'trumpet' || id === 'muted-trumpet') profile.instrumentSpecific = { trumpet: { embouchureTension: 0.86, pressureToBrightnessCurve: 1.28, muteDamping: id === 'muted-trumpet' ? 0.82 : 0.20, muteCombResonance: id === 'muted-trumpet' ? 0.72 : 0.08 } };
+  if (id === 'trumpet') profile.instrumentSpecific = { trumpet: { embouchureTension: 0.86, pressureToBrightnessCurve: 1.28, muteDamping: 0, muteCombResonance: 0 } };
   if (id === 'congas' || id === 'tabla') profile.instrumentSpecific = { membrane: { strikeZoneLocation: id === 'congas' ? 'center vs edge vs rim' : 'syahi center vs ring', openToneShellCoupling: id === 'congas' ? 0.86 : 0.62, slapSkinOnly: id === 'congas' ? 0.92 : 0.68, handDamping: profile.articulationPhysics.handDamping } };
-  if (id === 'spanish-guitar' || id === 'flamenco-guitar') profile.instrumentSpecific = { flamencoGuitar: { soundboardThudHz: 185, fleshVsNail: 0.86, rasgueadoMicroTransients: 5, golpeBodyCoupling: 0.78 } };
 
   for (const style of def.techniques.playingStyles ?? []) {
     const key = style.toLowerCase();
@@ -464,7 +460,7 @@ export function buildInstrumentDSPProfile(def: InstrumentDef): InstrumentDSPProf
   // continuous reservoir instrument).
   if (def.family === 'plucked' || def.family === 'plucked-string') {
     profile.articulationPhysics.continuousSustain = false;
-    const slideLike = id === 'slide-guitar' || id === 'fretless-bass';
+    const slideLike = id === 'guitar' || id === 'bass';
     profile.articulationPhysics.noteTransition = slideLike ? 'slide' : 'retrigger';
   } else if (def.family === 'bowed') {
     profile.articulationPhysics.continuousSustain = true;

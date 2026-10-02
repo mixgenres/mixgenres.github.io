@@ -7,13 +7,7 @@ const STYLE_4: GenreStyleDefinition = {
         "origin": "East Village, New York",
         "era": "1980s–2000s",
         "description": "Quirky • Raw • Irreverent\nPunk attitude",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "piano",
-          "upright-bass",
-          "drums",
-          "bass"
-        ],
+        "characteristicInstruments": ["guitar", "piano", "upright-bass", "drums", "bass"],
         "preferredMeters": [
           "4/4"
         ],
@@ -88,13 +82,7 @@ const STYLE_5: GenreStyleDefinition = {
         "origin": "Appalachia / Kentucky",
         "era": "1940s–Present",
         "description": "High-Speed • Banjo • Chop\nVirtuosic multi-instrumental",
-        "characteristicInstruments": [
-          "banjo",
-          "mandolin",
-          "acoustic-guitar",
-          "fiddle",
-          "upright-bass"
-        ],
+        "characteristicInstruments": ["banjo", "mandolin", "guitar", "violin", "upright-bass"],
         "preferredMeters": [
           "2/4",
           "4/4"
@@ -176,13 +164,7 @@ const STYLE_7: GenreStyleDefinition = {
         "origin": "North America / Europe",
         "era": "2000s–Present",
         "description": "Orchestral • Intricate • Elegant\nAcoustic songwriting",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "strings",
-          "violin",
-          "flute",
-          "piano"
-        ],
+        "characteristicInstruments": ["guitar", "string-ensemble", "violin", "flute", "piano"],
         "preferredMeters": [
           "4/4",
           "7/8",
@@ -258,13 +240,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Pacific Northwest / Global",
         "era": "2000s–Present",
         "description": "Acoustic • 4/4 • Warm Harmonies\nModern",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "banjo",
-          "upright-bass",
-          "piano",
-          "drums"
-        ],
+        "characteristicInstruments": ["guitar", "banjo", "upright-bass", "piano", "drums"],
         "preferredMeters": [
           "4/4",
           "3/4",
@@ -341,13 +317,7 @@ const STYLE_6: GenreStyleDefinition = {
         "origin": "UK / North America",
         "era": "1990s–Present",
         "description": "Pure • Modal • Fingerstyle\nRefined preservation",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "upright-bass",
-          "fiddle",
-          "harmonium",
-          "flute"
-        ],
+        "characteristicInstruments": ["guitar", "upright-bass", "violin", "harmonium", "flute"],
         "preferredMeters": [
           "4/4",
           "3/4"
@@ -412,13 +382,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Appalachian Mountains, USA",
         "era": "19th Century–Early 20th Century",
         "description": "Clawhammer • Fiddle • Drone\nRaw mountain",
-        "characteristicInstruments": [
-          "banjo",
-          "fiddle",
-          "acoustic-guitar",
-          "upright-bass",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["banjo", "violin", "guitar", "upright-bass", "hand-percussion"],
         "preferredMeters": [
           "2/4",
           "4/4"
@@ -494,13 +458,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "Greenwich Village, New York",
         "era": "1960s",
         "description": "Lyrical • Acoustic • Message-driven\nTopical songs",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "harmonica",
-          "upright-bass",
-          "hand-percussion",
-          "drums"
-        ],
+        "characteristicInstruments": ["guitar", "harmonica", "upright-bass", "hand-percussion", "drums"],
         "preferredMeters": [
           "4/4",
           "3/4"
@@ -573,13 +531,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "UK / San Francisco",
         "era": "Late 1960s–1970s",
         "description": "Dreamy • Exotic • Expansive\nAcid-tinged mystical",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "sitar",
-          "flute",
-          "hand-percussion",
-          "synth"
-        ],
+        "characteristicInstruments": ["guitar", "sitar", "flute", "hand-percussion", "synth"],
         "preferredMeters": [
           "4/4",
           "6/8",

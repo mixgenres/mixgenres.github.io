@@ -7,13 +7,7 @@ const STYLE_6: GenreStyleDefinition = {
         "origin": "Lagos, Nigeria",
         "era": "1970s",
         "description": "Polyrhythmic • Horn Section • Endless",
-        "characteristicInstruments": [
-          "drums",
-          "bass",
-          "electric-guitar",
-          "brass",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["drums", "bass", "guitar", "horn-section", "hand-percussion"],
         "preferredMeters": [
           "4/4"
         ],
@@ -84,13 +78,7 @@ const STYLE_5: GenreStyleDefinition = {
         "origin": "New York / London",
         "era": "Late 1970s–Early 1980s",
         "description": "Mid-tempo • Synth Bass • Electric\nPost-disco",
-        "characteristicInstruments": [
-          "synth",
-          "bass",
-          "drums",
-          "electric-guitar",
-          "piano"
-        ],
+        "characteristicInstruments": ["synth", "bass", "drums", "guitar", "piano"],
         "preferredMeters": [
           "4/4"
         ],
@@ -165,13 +153,7 @@ const STYLE_7: GenreStyleDefinition = {
         "origin": "Rio de Janeiro Favelas, Brazil",
         "era": "1990s–Present",
         "description": "Volt Mix Beat • Vocal Chants",
-        "characteristicInstruments": [
-          "drums",
-          "sub-bass",
-          "sampler",
-          "tenor-sax",
-          "synth"
-        ],
+        "characteristicInstruments": ["drums", "synth", "sampler", "tenor-sax", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -246,13 +228,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "New Orleans / Cincinnati",
         "era": "Late 1960s–1970s",
         "description": "Raw • Syncopated • Tight\nAnalog rhythm",
-        "characteristicInstruments": [
-          "drums",
-          "bass",
-          "electric-guitar",
-          "organ",
-          "brass"
-        ],
+        "characteristicInstruments": ["drums", "bass", "guitar", "organ", "horn-section"],
         "preferredMeters": [
           "4/4"
         ],
@@ -327,13 +303,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "New York City / Philadelphia",
         "era": "1970s",
         "description": "Four-on-the-floor • Strings • Glamorous\nOrchestral dance",
-        "characteristicInstruments": [
-          "drums",
-          "bass",
-          "electric-guitar",
-          "strings",
-          "brass"
-        ],
+        "characteristicInstruments": ["drums", "bass", "guitar", "string-ensemble", "horn-section"],
         "preferredMeters": [
           "4/4"
         ],
@@ -409,13 +379,7 @@ const STYLE_4: GenreStyleDefinition = {
         "origin": "Washington, D.C.",
         "era": "1970s–1980s",
         "description": "Percussive • Call-and-Response • Non-stop\nD.C. continuous",
-        "characteristicInstruments": [
-          "drums",
-          "cowbell",
-          "timbales",
-          "bass",
-          "brass"
-        ],
+        "characteristicInstruments": ["drums", "cowbell", "timbales", "bass", "horn-section"],
         "preferredMeters": [
           "4/4"
         ],
@@ -490,13 +454,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Plainfield, NJ / Detroit",
         "era": "1970s",
         "description": "Heavy On The One • Space",
-        "characteristicInstruments": [
-          "bass",
-          "drums",
-          "electric-guitar",
-          "synth",
-          "brass"
-        ],
+        "characteristicInstruments": ["bass", "drums", "guitar", "synth", "horn-section"],
         "preferredMeters": [
           "4/4"
         ],
@@ -572,13 +530,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "Minneapolis / Los Angeles",
         "era": "1980s",
         "description": "Electronic • Drum Machine • Slap",
-        "characteristicInstruments": [
-          "synth",
-          "drums",
-          "bass",
-          "electric-guitar",
-          "brass"
-        ],
+        "characteristicInstruments": ["synth", "drums", "bass", "guitar", "horn-section"],
         "preferredMeters": [
           "4/4"
         ],

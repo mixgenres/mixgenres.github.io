@@ -43,8 +43,8 @@ const STANDALONE_WORLD_OVERRIDES: Record<string, Partial<GenreWorld>> = {
 };
 
 const INAPPROPRIATE_ELECTRONIC_PATTERNS: Record<string, Set<string>> = {
-  'drum-and-bass': new Set(['4onfloor', 'techno-rumble', 'trance-16ths', 'dubstep-half', 'footwork', 'ukg', 'electro', 'ambient', 'synthwave', 'acid-303']),
-  'uk-bass': new Set(['techno-rumble', 'trance-16ths', 'footwork', 'electro', 'synthwave', 'acid-303']),
+  'drum-and-bass': new Set(['4onfloor', 'techno-rumble', 'trance-16ths', 'dubstep-half', 'footwork', 'ukg', 'electro', 'ambient', 'synthwave', 'synth']),
+  'uk-bass': new Set(['techno-rumble', 'trance-16ths', 'footwork', 'electro', 'synthwave', 'synth']),
 };
 
 /** Every public genre is defined by its own folder and world definition. */

@@ -16,14 +16,11 @@ export const TANGO_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
           "roles": [
             "violin",
-            "strings"
+            "string-ensemble"
           ],
     
           "approaches": ["sustain"],
-          "instruments": [
-            "violin",
-            "strings"
-          ],
+          "instruments": ["violin", "string-ensemble"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -138,10 +135,7 @@ export const TANGO_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "piano",
-            "keys"
-          ],
+          "instruments": ["piano", "keys"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -285,12 +279,7 @@ export const TANGO_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "walking"],
-          "instruments": [
-            "piano",
-            "bandoneon",
-            "guitar",
-            "bass"
-          ],
+          "instruments": ["piano", "bandoneon", "guitar", "bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -451,10 +440,7 @@ export const TANGO_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "bandoneon",
-            "keys"
-          ],
+          "instruments": ["bandoneon", "keys"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -585,9 +571,7 @@ export const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -710,10 +694,7 @@ export const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar",
-            "piano"
-          ],
+          "instruments": ["guitar", "piano"],
           "compatibleRoles": [
             "harmony"
           ],
@@ -888,11 +869,7 @@ export const TANGO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "percussion",
-            "guitar"
-          ],
+          "instruments": ["drums", "percussion", "guitar"],
           "compatibleRoles": [
             "pulse",
             "rhythm-guitar",
@@ -1060,11 +1037,7 @@ export const TANGO_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "guitar",
-            "bass",
-            "sax"
-          ],
+          "instruments": ["guitar", "bass", "sax"],
           "compatibleRoles": [
             "bandoneon",
             "lead"
@@ -1302,12 +1275,7 @@ export const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "comping", "walking"],
-          "instruments": [
-            "piano",
-            "bass",
-            "strings",
-            "guitar"
-          ],
+          "instruments": ["piano", "bass", "string-ensemble", "guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1503,12 +1471,7 @@ export const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "comping", "walking"],
-          "instruments": [
-            "piano",
-            "bass",
-            "guitar",
-            "strings"
-          ],
+          "instruments": ["piano", "bass", "guitar", "string-ensemble"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1610,7 +1573,7 @@ export const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
             "piazzolla",
             "332",
             "nuevo-tango",
-            "electric-guitar",
+            "guitar",
             "piano"
           ],
           "scopes": [
@@ -1630,13 +1593,7 @@ export const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "comping", "walking"],
-          "instruments": [
-            "piano",
-            "electric-guitar",
-            "bandoneon",
-            "bass",
-            "drums"
-          ],
+          "instruments": ["piano", "guitar", "bandoneon", "bass", "drums"],
           "canCrossRole": true,
           "meter": "4/4",
           "cycleLength": 1,
@@ -1760,9 +1717,7 @@ export const TANGO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "compatibleRoles": [
             "bass"
           ],
@@ -1943,12 +1898,7 @@ export const TANGO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["walking", "comping"],
-          "instruments": [
-            "bass",
-            "piano",
-            "bandoneon",
-            "strings"
-          ],
+          "instruments": ["bass", "piano", "bandoneon", "string-ensemble"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -2082,13 +2032,7 @@ export const TANGO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "bandoneon",
-            "sax",
-            "violin",
-            "trumpet",
-            "flute"
-          ],
+          "instruments": ["bandoneon", "sax", "violin", "trumpet", "flute"],
           "canCrossRole": true,
           "meter": "4/4",
           "cycleLength": 2,
@@ -2260,9 +2204,7 @@ export const TANGO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "bandoneon"
-          ],
+          "instruments": ["bandoneon"],
           "compatibleRoles": [
             "bandoneon"
           ],
@@ -2441,11 +2383,7 @@ export const TANGO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "walking"],
-          "instruments": [
-            "guitar",
-            "electric-guitar",
-            "piano"
-          ],
+          "instruments": ["guitar", "guitar", "piano"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -2600,10 +2538,7 @@ export const TANGO_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar",
-            "piano"
-          ],
+          "instruments": ["guitar", "piano"],
           "compatibleRoles": [
             "harmony",
             "texture"

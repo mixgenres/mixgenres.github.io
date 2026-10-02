@@ -36,7 +36,7 @@ function fakeRenderer(node: BandWorkletNode) {
 }
 
 test('notes, expression, CCs, bends, mix controls, stop and stealing never prepare or commit graphs', async () => {
-  for (const instrument of ['piano', 'bandoneon', 'drums', 'violin', 'flute', 'spanish-guitar']) {
+  for (const instrument of ['piano', 'bandoneon', 'drums', 'violin', 'flute', 'guitar']) {
     const node = new BandWorkletNode(); const renderer = fakeRenderer(node); const c = config(instrument);
     await node.configure(c); const baseline = node.getDiagnostics();
     for (let loop = 0; loop < 4; loop++) {

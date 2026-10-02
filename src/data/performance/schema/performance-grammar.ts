@@ -67,7 +67,7 @@ export interface PerformanceGrammar {
   /** 0..1 scale of allowing guest subdivisions in hybrid contexts without breaking host timeline. */
   allowCrossStyleSubdivision: number;
 
-  /** Cultural/genre negative constraints (e.g. ['walking-bass', 'slap-bass', 'swung-eighths', 'western-backbeat']). */
+  /** Cultural/genre negative constraints (e.g. ['walking-bass', 'bass', 'swung-eighths', 'western-backbeat']). */
   forbiddenInterpretations?: string[];
 
   /** Style-grounded microtiming tendencies. */

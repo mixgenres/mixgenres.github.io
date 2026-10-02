@@ -14,6 +14,31 @@ export default class SynthModule implements InstrumentModule {
       b
     } = ctx;
 
+    const patch = params.synthPatch;
+    if (patch) {
+      const phase = el.syncphasor(freqSignal, gateSignal);
+      const sine = el.sin(el.mul(2 * Math.PI, phase));
+      const saw = el.blepsaw(freqSignal);
+      const square = el.tanh(el.mul(7, sine));
+      const sub = el.sin(el.mul(2 * Math.PI, el.syncphasor(el.mul(freqSignal, 0.5), gateSignal)));
+      let oscillator: AudioSignal = patch.oscillator === 'saw' ? saw
+        : patch.oscillator === 'square' ? square
+        : patch.oscillator === 'sine' ? sine
+        : patch.oscillator === 'triangle' ? el.sub(el.mul(2, el.abs(el.sub(el.mul(2, phase), 1))), 1)
+        : patch.oscillator === 'noise' ? el.noise()
+        : el.add(el.mul(0.55, saw), el.add(el.mul(0.25, square), el.mul(0.2, sub)));
+      if ((patch.unison ?? 1) > 1) {
+        const detuned = el.blepsaw(el.mul(freqSignal, 1.003));
+        oscillator = el.mul(0.5, el.add(oscillator, detuned));
+      }
+      const envelope = el.adsr(patch.attackSeconds, patch.decaySeconds, patch.sustain, patch.releaseSeconds, gateSignal);
+      const mode = patch.filter === 'ladder' ? 'lowpass' : patch.filter;
+      const filtered = el.svf({ mode }, patch.cutoffHz + b * Math.max(250, patch.cutoffHz * 0.75), 0.7 + patch.resonance * 5, oscillator);
+      const texture = patch.noise ? el.mul(patch.noise, el.highpass(1600, 0.8, el.noise())) : el.const({ value: 0 });
+      const driven = patch.saturation ? el.tanh(el.mul(1 + patch.saturation * 8, el.add(filtered, texture))) : el.add(filtered, texture);
+      return el.mul(envelope, driven);
+    }
+
     const instId = (params.instrumentId ?? '').toLowerCase();
     const isTangoSampler = instId === 'sampler' && TANGO_ELECTRONICO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);

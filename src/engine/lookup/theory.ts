@@ -148,7 +148,7 @@ export function styleTheoryFor(styleId: string | undefined, genreId: string): Ge
   if (has('melodic')) out.melody.scale.push('major-pentatonic');
   if (has('pop-punk')) out.harmonicModel='functional';
   if (has('uk-garage') || has('2-step')) { out.rhythm.signature.push('2-step','skippy-snare'); out.bass.style='sub'; }
-  if (has('grime')) { out.rhythm.signature.push('sparse-snare','square-lead'); out.bass.silenceProbability=.12; }
+  if (has('grime')) { out.rhythm.signature.push('sparse-snare','synth'); out.bass.silenceProbability=.12; }
   if (has('dubstep')) { out.rhythm.signature.push('half-time','bass-drop'); out.bass.style='sub'; }
   if (has('future-garage')) { out.rhythm.signature.push('shuffled-ghost','vocal-chop'); out.rhythm.swing=.56; }
   if (has('bassline')) { out.rhythm.signature.push('bassline-syncopation'); out.bass.passingProbability=.18; }

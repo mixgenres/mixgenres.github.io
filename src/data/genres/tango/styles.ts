@@ -9,7 +9,7 @@ const build = (id: string, name: string, description: string, tempoRange: [numbe
   sectionProgressions: chords, arrangementSections: sections,
 });
 
-const pugliesePersonnel = ['bandoneon', 'violin', 'piano', 'upright-bass', 'cello', 'strings', 'voice'];
+const pugliesePersonnel = ['bandoneon', 'violin', 'piano', 'upright-bass', 'cello', 'string-ensemble', 'voice'];
 export const PUGLIESE_STYLE = build('pugliese', 'Tango Pugliese', 'Tense, orchestral tango with weighty yumba, elastic pauses, and dramatic ensemble accents.', [112, 132], pugliesePersonnel,
   ['yumba piano and bass ostinato', 'dramatic silences and holds', 'strong dynamic contrast', 'orchestral unison attacks'],
   'A heavy marcato/yumba motor alternates with suspended pauses before sharp tutti attacks.',
@@ -21,7 +21,7 @@ export const PUGLIESE_STYLE = build('pugliese', 'Tango Pugliese', 'Tense, orches
     { key: 'coda', label: 'Coda', kind: 'coda', bars: 4, intensity: 'high', instruments: ['bandoneon', 'violin', 'piano', 'upright-bass', 'cello'], leadInstrumentId: 'bandoneon' },
   ]);
 
-const troiloPersonnel = ['bandoneon', 'violin', 'piano', 'upright-bass', 'cello', 'voice', 'strings'];
+const troiloPersonnel = ['bandoneon', 'violin', 'piano', 'upright-bass', 'cello', 'voice', 'string-ensemble'];
 export const TROILO_STYLE = build('troilo', 'Tango Troilo', 'Warm, lyrical orquesta típica writing with expressive bandoneon phrasing and conversational violin answers.', [116, 132], troiloPersonnel,
   ['expressive bandoneon lead', 'legato violin responses', 'singable melodic phrasing', 'marcato support with restrained rubato'],
   'A lyrical melody breathes over a steady marcato pulse, with violin answering the bandoneon between phrases.',
@@ -33,13 +33,13 @@ export const TROILO_STYLE = build('troilo', 'Tango Troilo', 'Warm, lyrical orque
     { key: 'coda', label: 'Coda', kind: 'coda', bars: 4, intensity: 'high', instruments: ['bandoneon', 'violin', 'piano', 'upright-bass'], leadInstrumentId: 'bandoneon' },
   ]);
 
-export const TANGO_CANCION_STYLE = build('cancion', 'Tango Canción', 'Vocal tango song form: an instrumental introduction frames a lyric-led verse, instrumental interlude, and closing return.', [88, 116], ['voice', 'bandoneon', 'piano', 'upright-bass', 'violin', 'cello', 'strings'],
+export const TANGO_CANCION_STYLE = build('cancion', 'Tango Canción', 'Vocal tango song form: an instrumental introduction frames a lyric-led verse, instrumental interlude, and closing return.', [88, 116], ['voice', 'bandoneon', 'piano', 'upright-bass', 'violin', 'cello', 'string-ensemble'],
   ['sung narrative and clear diction', 'instrumental interludes', 'lyrical bandoneon countermelody', 'rubato at phrase ends'],
   'The singer leads over restrained marcato; bandoneon and violin answer in the vocal gaps.',
   { intro: ['Am', 'Dm', 'E7', 'Am'], verse: ['Am', 'Dm', 'G7', 'C', 'F', 'Dm', 'E7', 'Am'], interlude: ['Dm', 'G7', 'C', 'F', 'Dm', 'E7', 'Am', 'Am'], coda: ['Dm', 'E7', 'Am', 'Am'] }, [
     { key: 'intro', label: 'Instrumental introduction', kind: 'intro', bars: 8, intensity: 'low', instruments: ['bandoneon', 'piano', 'upright-bass'], leadInstrumentId: 'bandoneon', tempoFeel: 'rubato introduction' },
     { key: 'verse', label: 'Vocal verse', kind: 'verse', bars: 16, intensity: 'medium', instruments: ['voice', 'bandoneon', 'piano', 'upright-bass', 'violin'], leadInstrumentId: 'voice' },
-    { key: 'interlude', label: 'Orchestral interlude', kind: 'interlude', bars: 8, intensity: 'high', instruments: ['bandoneon', 'violin', 'piano', 'upright-bass', 'cello', 'strings'], leadInstrumentId: 'bandoneon' },
+    { key: 'interlude', label: 'Orchestral interlude', kind: 'interlude', bars: 8, intensity: 'high', instruments: ['bandoneon', 'violin', 'piano', 'upright-bass', 'cello', 'string-ensemble'], leadInstrumentId: 'bandoneon' },
     { key: 'verse-return', label: 'Verse return', kind: 'verse', bars: 16, intensity: 'high', instruments: ['voice', 'bandoneon', 'piano', 'upright-bass', 'violin', 'cello'], leadInstrumentId: 'voice' },
     { key: 'coda', label: 'Coda', kind: 'coda', bars: 4, intensity: 'low', instruments: ['bandoneon', 'piano', 'upright-bass'], leadInstrumentId: 'bandoneon', tempoFeel: 'ritardando' },
   ]);
@@ -51,13 +51,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "Río de la Plata",
         "era": "Late 19th Century–Present",
         "description": "Fast • Habanera Syncopation • Bouncy\nFast,",
-        "characteristicInstruments": [
-          "bandoneon",
-          "violin",
-          "piano",
-          "upright-bass",
-          "spanish-guitar"
-        ],
+        "characteristicInstruments": ["bandoneon", "violin", "piano", "upright-bass", "guitar"],
         "preferredMeters": [
           "2/4"
         ],
@@ -122,15 +116,7 @@ const STYLE_4: GenreStyleDefinition = {
         "origin": "Paris / Buenos Aires",
         "era": "2000s–Present",
         "description": "Bandoneon-led electrotango with a steady electronic pulse, deep bass, and sharply edited acoustic phrases.",
-        "characteristicInstruments": [
-          "bandoneon",
-          "sub-bass",
-          "drums",
-          "sampler",
-          "synth",
-          "electric-guitar",
-          "piano"
-        ],
+        "characteristicInstruments": ["bandoneon", "synth", "drums", "sampler", "synth", "guitar", "piano"],
         "preferredMeters": [
           "4/4"
         ],
@@ -189,10 +175,10 @@ const STYLE_4: GenreStyleDefinition = {
         }
         ,"arrangementSections": [
           { "key": "intro", "label": "Filtered bandoneon intro", "kind": "intro", "bars": 8, "intensity": "low", "instruments": ["bandoneon", "sampler", "synth"], "leadInstrumentId": "bandoneon", "tempoFeel": "steady electronic pulse, filtered entrance" },
-          { "key": "groove", "label": "Electrotango groove", "kind": "groove", "bars": 16, "intensity": "medium", "instruments": ["bandoneon", "sub-bass", "drums", "sampler", "synth", "electric-guitar", "piano"], "leadInstrumentId": "bandoneon" },
+          { "key": "groove", "label": "Electrotango groove", "kind": "groove", "bars": 16, "intensity": "medium", "instruments": ["bandoneon", "synth", "drums", "sampler", "synth", "guitar", "piano"], "leadInstrumentId": "bandoneon" },
           { "key": "breakdown", "label": "Bandoneon breakdown", "kind": "breakdown", "bars": 8, "intensity": "low", "instruments": ["bandoneon", "sampler", "piano"], "leadInstrumentId": "bandoneon", "tempoFeel": "pulse thins; tempo stays fixed" },
-          { "key": "return", "label": "Full groove return", "kind": "drop", "bars": 16, "intensity": "peak", "instruments": ["bandoneon", "sub-bass", "drums", "sampler", "synth", "electric-guitar", "piano"], "leadInstrumentId": "bandoneon" },
-          { "key": "coda", "label": "Electronic coda", "kind": "coda", "bars": 8, "intensity": "low", "instruments": ["bandoneon", "sub-bass", "sampler"], "leadInstrumentId": "bandoneon" }
+          { "key": "return", "label": "Full groove return", "kind": "drop", "bars": 16, "intensity": "peak", "instruments": ["bandoneon", "synth", "drums", "sampler", "synth", "guitar", "piano"], "leadInstrumentId": "bandoneon" },
+          { "key": "coda", "label": "Electronic coda", "kind": "coda", "bars": 8, "intensity": "low", "instruments": ["bandoneon", "synth", "sampler"], "leadInstrumentId": "bandoneon" }
         ]
       };
 
@@ -203,13 +189,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Buenos Aires / Paris",
         "era": "1960s–1990s",
         "description": "3+3+2 • Dissonance • Bandoneón Virtuosity\nAstor",
-        "characteristicInstruments": [
-          "bandoneon",
-          "violin",
-          "electric-guitar",
-          "piano",
-          "upright-bass"
-        ],
+        "characteristicInstruments": ["bandoneon", "violin", "guitar", "piano", "upright-bass"],
         "preferredMeters": [
           "4/4"
         ],
@@ -274,14 +254,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Buenos Aires / Montevideo",
         "era": "Golden Age (1935–1955)",
         "description": "Marcato • Bandoneón • Golden Age\nThe",
-        "characteristicInstruments": [
-          "bandoneon",
-          "violin",
-          "piano",
-          "upright-bass",
-          "cello",
-          "strings"
-        ],
+        "characteristicInstruments": ["bandoneon", "violin", "piano", "upright-bass", "cello", "string-ensemble"],
         "preferredMeters": [
           "4/4",
           "2/4"
@@ -340,9 +313,9 @@ const STYLE_0: GenreStyleDefinition = {
         },
         "arrangementSections": [
           { "key": "intro", "label": "Piano and bandoneon introduction", "kind": "intro", "bars": 4, "intensity": "medium", "instruments": ["piano", "upright-bass", "bandoneon"], "leadInstrumentId": "bandoneon", "tempoFeel": "rubato pickup into steady marcato" },
-          { "key": "tema-a", "label": "Main theme", "kind": "theme", "bars": 16, "intensity": "medium", "instruments": ["bandoneon", "violin", "piano", "upright-bass", "cello", "strings"], "leadInstrumentId": "bandoneon" },
-          { "key": "tema-b", "label": "Contrasting theme", "kind": "theme", "bars": 16, "intensity": "high", "instruments": ["bandoneon", "violin", "piano", "upright-bass", "cello", "strings"], "leadInstrumentId": "violin" },
-          { "key": "variation", "label": "Instrumental variation", "kind": "variation", "bars": 8, "intensity": "peak", "instruments": ["bandoneon", "violin", "piano", "upright-bass", "cello", "strings"], "leadInstrumentId": "bandoneon" },
+          { "key": "tema-a", "label": "Main theme", "kind": "theme", "bars": 16, "intensity": "medium", "instruments": ["bandoneon", "violin", "piano", "upright-bass", "cello", "string-ensemble"], "leadInstrumentId": "bandoneon" },
+          { "key": "tema-b", "label": "Contrasting theme", "kind": "theme", "bars": 16, "intensity": "high", "instruments": ["bandoneon", "violin", "piano", "upright-bass", "cello", "string-ensemble"], "leadInstrumentId": "violin" },
+          { "key": "variation", "label": "Instrumental variation", "kind": "variation", "bars": 8, "intensity": "peak", "instruments": ["bandoneon", "violin", "piano", "upright-bass", "cello", "string-ensemble"], "leadInstrumentId": "bandoneon" },
           { "key": "coda", "label": "Coda", "kind": "coda", "bars": 4, "intensity": "high", "instruments": ["bandoneon", "violin", "piano", "upright-bass"], "leadInstrumentId": "bandoneon" }
         ]
       };
@@ -354,14 +327,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "Río de la Plata",
         "era": "Golden Age (1930s–1950s)",
         "description": "Lyrical • 3/4 Waltzing • Flowing\nFlowing,",
-        "characteristicInstruments": [
-          "violin",
-          "bandoneon",
-          "piano",
-          "upright-bass",
-          "cello",
-          "strings"
-        ],
+        "characteristicInstruments": ["violin", "bandoneon", "piano", "upright-bass", "cello", "string-ensemble"],
         "preferredMeters": [
           "3/4"
         ],
@@ -419,6 +385,32 @@ const STYLE_3: GenreStyleDefinition = {
         }
       };
 
+const GUARDIA_VIEJA_STYLE: GenreStyleDefinition = {
+  ...build('guardia-vieja', 'Guardia Vieja', 'Small early tango ensemble with short melodic exchanges over a clear habanera pulse.',
+    [108, 128], ['bandoneon', 'guitar', 'violin', 'upright-bass', 'piano'],
+    ['short melodic exchanges', 'habanera pulse', 'acoustic articulation'],
+    'A dry 2/4 habanera motor supports short bandoneon and violin phrases.',
+    { intro: ['Am', 'E7'], tema: ['Am', 'Dm', 'E7', 'Am'], trio: ['C', 'G7', 'C', 'E7'], coda: ['Dm', 'E7', 'Am', 'Am'] }, [
+      { key: 'intro', label: 'Habanera introduction', kind: 'intro', bars: 4, intensity: 'low', instruments: ['guitar', 'upright-bass', 'bandoneon'], leadInstrumentId: 'bandoneon' },
+      { key: 'tema', label: 'Main theme', kind: 'theme', bars: 16, intensity: 'medium', instruments: ['bandoneon', 'guitar', 'violin', 'upright-bass', 'piano'], leadInstrumentId: 'bandoneon' },
+      { key: 'trio', label: 'Violin exchange', kind: 'response', bars: 8, intensity: 'medium', instruments: ['guitar', 'upright-bass', 'violin', 'piano'], leadInstrumentId: 'violin' },
+      { key: 'coda', label: 'Closing phrase', kind: 'coda', bars: 4, intensity: 'low', instruments: ['bandoneon', 'guitar', 'upright-bass'], leadInstrumentId: 'bandoneon' },
+    ]),
+  preferredMeters: ['2/4'], era: 'Early tango',
+};
+
+const PIAZZOLLA_STYLE = build('piazzolla', 'Piazzolla', 'Concert tango with contrapuntal lines, hard ostinati and lyrical release.',
+  [118, 146], ['bandoneon', 'guitar', 'piano', 'violin', 'upright-bass'],
+  ['3+3+2 ostinato', 'counterpoint', 'hard attack and lyrical contrast', 'jazz harmony'],
+  'Interlocking 3+3+2 ostinati alternate with spacious contrapuntal and lyrical passages.',
+  { intro: ['Dm9', 'G7b9'], tema: ['Dm9', 'G7b9', 'Cmaj7', 'A7'], development: ['Am', 'Bb7', 'E7b9', 'Am'], coda: ['Dm', 'E7', 'Am', 'Am'] }, [
+    { key: 'intro', label: 'Free introduction', kind: 'intro', bars: 4, intensity: 'low', instruments: ['bandoneon', 'piano'], leadInstrumentId: 'bandoneon' },
+    { key: 'tema', label: 'Concert theme', kind: 'theme', bars: 16, intensity: 'high', instruments: ['bandoneon', 'guitar', 'piano', 'violin', 'upright-bass'], leadInstrumentId: 'bandoneon' },
+    { key: 'development', label: 'Contrapuntal development', kind: 'development', bars: 16, intensity: 'peak', instruments: ['bandoneon', 'guitar', 'piano', 'violin', 'upright-bass'], leadInstrumentId: 'violin' },
+    { key: 'lyric', label: 'Lyrical release', kind: 'bridge', bars: 8, intensity: 'low', instruments: ['bandoneon', 'piano', 'violin', 'upright-bass'], leadInstrumentId: 'bandoneon' },
+    { key: 'coda', label: 'Concert coda', kind: 'coda', bars: 4, intensity: 'high', instruments: ['bandoneon', 'guitar', 'piano', 'violin', 'upright-bass'], leadInstrumentId: 'bandoneon' },
+  ]);
+
 export const TANGO_WORLD_STYLES: Partial<GenreWorld> = {
-  styleDefinitions: [STYLE_0, STYLE_1, STYLE_2, STYLE_3, STYLE_4, PUGLIESE_STYLE, TROILO_STYLE, TANGO_CANCION_STYLE],
+  styleDefinitions: [STYLE_0, STYLE_1, STYLE_2, STYLE_3, STYLE_4, PUGLIESE_STYLE, TROILO_STYLE, TANGO_CANCION_STYLE, GUARDIA_VIEJA_STYLE, PIAZZOLLA_STYLE],
 };

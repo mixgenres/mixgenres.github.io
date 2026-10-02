@@ -27,10 +27,7 @@ export const FLAMENCO_WORLD_PATTERNS_BASS: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass",
-            "upright-bass"
-          ],
+          "instruments": ["bass", "upright-bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -113,9 +110,7 @@ export const FLAMENCO_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion"
-          ],
+          "instruments": ["percussion"],
           "meter": "12/8",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -254,9 +249,7 @@ export const FLAMENCO_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["chop"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -445,11 +438,7 @@ export const FLAMENCO_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "groove"],
-          "instruments": [
-            "guitar",
-            "palmas",
-            "cajon"
-          ],
+          "instruments": ["guitar", "palmas", "cajon"],
           "meter": "12/8",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -525,10 +514,7 @@ export const FLAMENCO_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "chop"],
-          "instruments": [
-            "percussion",
-            "guitar"
-          ],
+          "instruments": ["percussion", "guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -660,10 +646,7 @@ export const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion",
-            "drums"
-          ],
+          "instruments": ["percussion", "drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -816,9 +799,7 @@ export const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
             "harmony"
           ],
@@ -971,11 +952,7 @@ export const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "percussion",
-            "guitar"
-          ],
+          "instruments": ["drums", "percussion", "guitar"],
           "compatibleRoles": [
             "pulse",
             "rhythm-guitar",
@@ -1145,11 +1122,7 @@ export const FLAMENCO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "comping"],
-          "instruments": [
-            "guitar",
-            "palmas",
-            "cajon"
-          ],
+          "instruments": ["guitar", "palmas", "cajon"],
           "meter": "12/8",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -1278,9 +1251,7 @@ export const FLAMENCO_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "flute"
-          ],
+          "instruments": ["flute"],
           "compatibleRoles": [
             "flute"
           ],
@@ -1515,10 +1486,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "groove"],
-          "instruments": [
-            "guitar",
-            "electric-guitar"
-          ],
+          "instruments": ["guitar", "guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1729,10 +1697,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "hand-percussion",
-            "percussion"
-          ],
+          "instruments": ["hand-percussion", "percussion"],
           "canCrossRole": true,
           "meter": "4/4",
           "cycleLength": 1,
@@ -1865,9 +1830,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "compatibleRoles": [
             "bass"
           ],
@@ -2046,9 +2009,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "groove"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "12/8",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -2167,9 +2128,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "groove"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "12/8",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -2253,9 +2212,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "groove"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -2344,9 +2301,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "groove"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -2431,9 +2386,7 @@ export const FLAMENCO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "groove"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "3/4",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -2512,10 +2465,7 @@ export const FLAMENCO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "flute",
-            "guitar"
-          ],
+          "instruments": ["flute", "guitar"],
           "canCrossRole": true,
           "meter": "12/8",
           "cycleLength": 1,
@@ -2659,12 +2609,7 @@ export const FLAMENCO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "guitar",
-            "flute",
-            "sax",
-            "violin"
-          ],
+          "instruments": ["guitar", "flute", "sax", "violin"],
           "canCrossRole": true,
           "meter": "4/4",
           "cycleLength": 2,
@@ -2876,9 +2821,7 @@ export const FLAMENCO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "flute"
-          ],
+          "instruments": ["flute"],
           "compatibleRoles": [
             "flute"
           ],
@@ -3056,10 +2999,7 @@ export const FLAMENCO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "comping"],
-          "instruments": [
-            "guitar",
-            "palmas"
-          ],
+          "instruments": ["guitar", "palmas"],
           "meter": "12/8",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -3177,10 +3117,7 @@ export const FLAMENCO_WORLD_PATTERNS_PULSE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "zapateado",
-            "cajon"
-          ],
+          "instruments": ["zapateado", "cajon"],
           "meter": "12/8",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -3275,11 +3212,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["walking", "comping"],
-          "instruments": [
-            "guitar",
-            "electric-guitar",
-            "bass"
-          ],
+          "instruments": ["guitar", "guitar", "bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -3465,9 +3398,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "palmas"
-          ],
+          "instruments": ["palmas"],
           "meter": "12/8",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -3556,9 +3487,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "palmas"
-          ],
+          "instruments": ["palmas"],
           "meter": "12/8",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -3651,9 +3580,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["walking", "comping"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "12/8",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -3746,9 +3673,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "palmas"
-          ],
+          "instruments": ["palmas"],
           "meter": "12/8",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -3837,9 +3762,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "palmas"
-          ],
+          "instruments": ["palmas"],
           "meter": "12/8",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -3918,9 +3841,7 @@ export const FLAMENCO_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "palmas"
-          ],
+          "instruments": ["palmas"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -4000,9 +3921,7 @@ export const FLAMENCO_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
             "harmony",
             "texture"
@@ -4210,11 +4129,7 @@ export const FLAMENCO_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "comping"],
-          "instruments": [
-            "drums",
-            "percussion",
-            "guitar"
-          ],
+          "instruments": ["drums", "percussion", "guitar"],
           "compatibleRoles": [
             "pulse",
             "harmony",
@@ -4429,10 +4344,7 @@ export const FLAMENCO_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "phrase"],
-          "instruments": [
-            "guitar",
-            "sax"
-          ],
+          "instruments": ["guitar", "sax"],
           "compatibleRoles": [
             "harmony",
             "lead"
@@ -4627,9 +4539,7 @@ export const FLAMENCO_WORLD_PATTERNS_TRANSITION: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "phrase", "groove"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "12/8",
           "cycleLength": 1,
           "subdivisions": 12,

@@ -178,7 +178,7 @@ const CURATED_GENRE_OVERRIDES: Record<string, Record<string, string[]>> = {
     swing: ['pizzicato','accent','ghost','legato'],
     flamenco: ['pizzicato','slap','tambor','accent'],
   },
-  'slap-bass': {
+  'bass': {
     funk: ['slap','pop','ghost','accent'],
     blues: ['slap','ghost','accent','staccato'],
     salsa: ['slap','ghost','accent','staccato'],

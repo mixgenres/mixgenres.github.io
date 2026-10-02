@@ -144,7 +144,7 @@ export default class BandoneonModule implements InstrumentModule {
     const modes = dspProfile?.coupledResonators?.bodyModes;
     if (modes && modes.length > 0) {
       const modeSignals: AudioSignal[] = [];
-      for (let i = 0; i < Math.min(4, modes.length); i++) {
+      for (let i = 0; i < modes.length; i++) {
         const m = modes[i];
         const modeFreq = Math.min(19000, Math.max(30, ctx.freq * m.ratio * directionFormant));
         modeSignals.push(el.mul(m.gain, el.svf({ mode: 'bandpass' }, modeFreq, m.q, reedPressure)));

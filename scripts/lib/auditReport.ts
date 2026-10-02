@@ -9,7 +9,7 @@ export function sourceFingerprint(): string {
     for (const entry of readdirSync(dir, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
       const path = join(dir, entry.name);
       if (entry.isDirectory()) visit(path);
-      else if (/\.(ts|mjs|json|html)$/.test(path)) { hash.update(path); hash.update(readFileSync(path)); }
+      else if (/\.(tsx?|mjs|json|html)$/.test(path)) { hash.update(path); hash.update(readFileSync(path)); }
     }
   };
   visit('src'); visit('scripts'); hash.update(readFileSync('package.json'));
@@ -24,4 +24,12 @@ export function writeReport(name: string, payload: unknown) {
 }
 export function summarizeFindings(findings: Finding[]) {
   return { errors: findings.filter(f => f.severity === 'error').length, warnings: findings.filter(f => f.severity === 'warning').length, info: findings.filter(f => f.severity === 'info').length };
+}
+
+export function printFindings(label: string, findings: Finding[], coverage: Record<string, number>) {
+  const counts = summarizeFindings(findings);
+  console.log(`${counts.errors ? 'FAIL' : 'PASS'} ${label}: ${Object.entries(coverage).map(([key, value]) => `${value} ${key}`).join(', ')}; ${counts.errors} errors, ${counts.warnings} warnings`);
+  for (const finding of findings.slice(0, 10)) console.log(`  ${finding.scope}: ${finding.message}`);
+  if (findings.length > 10) console.log(`  ${findings.length - 10} more findings in audit/${label}.json`);
+  if (counts.errors) process.exitCode = 1;
 }

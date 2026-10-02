@@ -11,7 +11,7 @@ export const dspOverride: InstrumentDSPOverride = {
       "bellows"
     ],
     "couplingPaths": [
-      "drone"
+      "synth"
     ],
     "techniqueBindings": [
       "bellows pumping for dynamic control",

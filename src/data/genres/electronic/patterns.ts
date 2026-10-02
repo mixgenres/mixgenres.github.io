@@ -22,9 +22,7 @@ export const ELECTRONIC_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -160,10 +158,7 @@ export const ELECTRONIC_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "walking"],
-          "instruments": [
-            "drums",
-            "bass"
-          ],
+          "instruments": ["drums", "bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -376,9 +371,7 @@ export const ELECTRONIC_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -513,10 +506,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass",
-            "synth"
-          ],
+          "instruments": ["bass", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -764,9 +754,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -880,9 +868,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1033,9 +1019,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1203,9 +1187,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1355,9 +1337,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1507,10 +1487,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "keys",
-            "synth"
-          ],
+          "instruments": ["keys", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 4,
@@ -1624,10 +1601,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass",
-            "synth"
-          ],
+          "instruments": ["bass", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -1797,9 +1771,7 @@ export const ELECTRONIC_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "synth"
-          ],
+          "instruments": ["synth"],
           "compatibleRoles": [
             "harmony"
           ],
@@ -1976,10 +1948,7 @@ export const ELECTRONIC_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "synth",
-            "bass"
-          ],
+          "instruments": ["synth", "bass"],
           "compatibleRoles": [
             "synth",
             "lead"
@@ -2209,10 +2178,7 @@ export const ELECTRONIC_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass",
-            "synth"
-          ],
+          "instruments": ["bass", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -2375,9 +2341,7 @@ export const ELECTRONIC_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "compatibleRoles": [
             "bass"
           ],
@@ -2554,9 +2518,7 @@ export const ELECTRONIC_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "synth"
-          ],
+          "instruments": ["synth"],
           "compatibleRoles": [
             "synth"
           ],
@@ -2733,9 +2695,7 @@ export const ELECTRONIC_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "synth"
-          ],
+          "instruments": ["synth"],
           "compatibleRoles": [
             "harmony",
             "texture"

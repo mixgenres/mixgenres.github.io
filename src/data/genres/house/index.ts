@@ -81,13 +81,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "origin": "Berlin / Ibiza / Amsterdam",
       "era": "2010s–Present",
       "description": "Pounding 909 • Big Room Drop",
-      "characteristicInstruments": [
-        "drums",
-        "synth",
-        "sub-bass",
-        "sampler",
-        "noise-sweep"
-      ],
+      "characteristicInstruments": ["drums", "synth", "synth", "sampler", "synth"],
       "preferredMeters": [
         "4/4"
       ],
@@ -156,13 +150,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "origin": "Berlin / Frankfurt",
       "era": "2000s",
       "description": "Sparse • Sub-bass • Micro-sounds\nSubtle hypnotic",
-      "characteristicInstruments": [
-        "drums",
-        "sampler",
-        "synth",
-        "sub-bass",
-        "warm-pad"
-      ],
+      "characteristicInstruments": ["drums", "sampler", "synth", "synth", "synth"],
       "preferredMeters": [
         "4/4"
       ],
@@ -214,13 +202,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "origin": "Berlin / Detroit",
       "era": "1990s–Present",
       "description": "Echo • Filter Sweep • Cavernous\nBasic",
-      "characteristicInstruments": [
-        "synth",
-        "sub-bass",
-        "drums",
-        "tape-echo",
-        "sampler"
-      ],
+      "characteristicInstruments": ["synth", "synth", "drums", "sampler"],
       "preferredMeters": [
         "4/4"
       ],
@@ -284,13 +266,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "origin": "Detroit, Michigan",
       "era": "1980s–1990s",
       "description": "Soulful • Futuristic • Strings\nThe original",
-      "characteristicInstruments": [
-        "synth",
-        "drums",
-        "strings",
-        "bass",
-        "sampler"
-      ],
+      "characteristicInstruments": ["synth", "drums", "string-ensemble", "bass", "sampler"],
       "preferredMeters": [
         "4/4"
       ],
@@ -353,13 +329,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "origin": "Chicago / London",
       "era": "Late 1980s–1990s",
       "description": "TB-303 Squawk • Resonant • Fast\nRoland",
-      "characteristicInstruments": [
-        "synth",
-        "drums",
-        "sub-bass",
-        "sampler",
-        "acid-303"
-      ],
+      "characteristicInstruments": ["synth", "drums", "synth", "sampler", "synth"],
       "preferredMeters": [
         "4/4"
       ],
@@ -422,13 +392,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "origin": "Berlin / Netherlands / UK",
       "era": "2000s–Present",
       "description": "Industrial • 140+ BPM • Distorted",
-      "characteristicInstruments": [
-        "drums",
-        "sub-bass",
-        "synth",
-        "sampler",
-        "noise-sweep"
-      ],
+      "characteristicInstruments": ["drums", "synth", "synth", "sampler", "synth"],
       "preferredMeters": [
         "4/4"
       ],
@@ -491,13 +455,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "origin": "Berlin / Italy / Ibiza",
       "era": "2015–Present",
       "description": "Emotional • Plucks • Cinematic\nEthereal lead",
-      "characteristicInstruments": [
-        "synth",
-        "drums",
-        "bass",
-        "strings",
-        "piano"
-      ],
+      "characteristicInstruments": ["synth", "drums", "bass", "string-ensemble", "piano"],
       "preferredMeters": [
         "4/4"
       ],
@@ -570,13 +528,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "origin": "Belgium / Germany",
       "era": "1980s–Present",
       "description": "Aggressive • 16th Bassline • Cyberpunk\nElectronic",
-      "characteristicInstruments": [
-        "synth",
-        "drums",
-        "sub-bass",
-        "sampler",
-        "saw-lead"
-      ],
+      "characteristicInstruments": ["synth", "drums", "synth", "sampler", "synth"],
       "preferredMeters": [
         "4/4"
       ],
@@ -660,10 +612,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums",
-        "kick"
-      ],
+      "instruments": ["drums", "drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -784,10 +733,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "hats",
-        "drums"
-      ],
+      "instruments": ["drums", "drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -906,10 +852,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "approaches": [
         "walking"
       ],
-      "instruments": [
-        "bass",
-        "sub-bass"
-      ],
+      "instruments": ["bass", "synth"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1041,10 +984,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "approaches": [
         "phrase"
       ],
-      "instruments": [
-        "polysynth",
-        "saw-lead"
-      ],
+      "instruments": ["synth", "synth"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1189,10 +1129,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "approaches": [
         "walking"
       ],
-      "instruments": [
-        "bass-lead",
-        "sub-bass"
-      ],
+      "instruments": ["synth", "synth"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1335,10 +1272,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "kick",
-        "drums"
-      ],
+      "instruments": ["drums", "drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1410,9 +1344,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "hats"
-      ],
+      "instruments": ["drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1479,10 +1411,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "approaches": [
         "walking"
       ],
-      "instruments": [
-        "bass",
-        "sub-bass"
-      ],
+      "instruments": ["bass", "synth"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1554,10 +1483,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "approaches": [
         "comping"
       ],
-      "instruments": [
-        "piano",
-        "polysynth"
-      ],
+      "instruments": ["piano", "synth"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1630,10 +1556,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "approaches": [
         "phrase"
       ],
-      "instruments": [
-        "synth",
-        "saw-lead"
-      ],
+      "instruments": ["synth", "synth"],
       "meter": "4/4",
       "cycleLength": 2,
       "subdivisions": 32,
@@ -1719,9 +1642,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "approaches": [
         "walking"
       ],
-      "instruments": [
-        "acid-303"
-      ],
+      "instruments": ["synth"],
       "meter": "4/4",
       "cycleLength": 2,
       "subdivisions": 32,
@@ -1812,10 +1733,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums",
-        "claves"
-      ],
+      "instruments": ["drums", "claves"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1883,10 +1801,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "saw-lead",
-        "noise-sweep"
-      ],
+      "instruments": ["synth", "synth"],
       "meter": "4/4",
       "cycleLength": 4,
       "subdivisions": 64,
@@ -1968,10 +1883,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "warm-pad",
-        "polysynth"
-      ],
+      "instruments": ["synth", "synth"],
       "meter": "4/4",
       "cycleLength": 2,
       "subdivisions": 32,
@@ -2041,11 +1953,7 @@ export const HOUSE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "kick",
-        "bass",
-        "synth"
-      ],
+      "instruments": ["drums", "bass", "synth"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,

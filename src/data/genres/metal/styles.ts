@@ -7,13 +7,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "Norway / Sweden / UK",
         "era": "Early 1990s",
         "description": "Atmospheric • High Shrieks • Tremolo\nIcy",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "drums",
-          "bass",
-          "overdrive-guitar",
-          "synth"
-        ],
+        "characteristicInstruments": ["guitar", "drums", "bass", "guitar", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -87,13 +81,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "Tampa, Florida / Sweden",
         "era": "Late 1980s–Present",
         "description": "Guttural • Blast Beats • Tremolo\nExtreme",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "bass",
-          "drums",
-          "overdrive-guitar",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "guitar", "hand-percussion"],
         "preferredMeters": [
           "4/4"
         ],
@@ -168,13 +156,7 @@ const STYLE_5: GenreStyleDefinition = {
         "origin": "Birmingham / Maryland / Sweden",
         "era": "1970s–Present",
         "description": "Slow • Heavy • Crushing\nMassive low-tempo",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "bass",
-          "drums",
-          "overdrive-guitar",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "guitar", "hand-percussion"],
         "preferredMeters": [
           "4/4"
         ],
@@ -248,13 +230,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Birmingham, UK",
         "era": "1970s–1980s",
         "description": "Riff-driven • Distorted • Operatic\nThe foundational",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "bass",
-          "drums",
-          "overdrive-guitar",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "guitar", "hand-percussion"],
         "preferredMeters": [
           "4/4"
         ],
@@ -338,13 +314,7 @@ const STYLE_4: GenreStyleDefinition = {
         "origin": "Germany / Finland",
         "era": "1980s–Present",
         "description": "Euphoric • Double-Bass • Fantasy\nHigh-speed soaring",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "drums",
-          "bass",
-          "synth",
-          "overdrive-guitar"
-        ],
+        "characteristicInstruments": ["guitar", "drums", "bass", "synth", "guitar"],
         "preferredMeters": [
           "4/4"
         ],
@@ -418,13 +388,7 @@ const STYLE_7: GenreStyleDefinition = {
         "origin": "Boston / Sweden / Global",
         "era": "Late 1980s–Present",
         "description": "Technical • Complex Meter • Dynamic\nOdd-time",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "bass",
-          "drums",
-          "synth",
-          "overdrive-guitar"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "synth", "guitar"],
         "preferredMeters": [
           "7/8",
           "5/8",
@@ -512,13 +476,7 @@ const STYLE_6: GenreStyleDefinition = {
         "origin": "New Orleans, Louisiana (NOLA)",
         "era": "Late 1980s–1990s",
         "description": "Grimy • Down-tuned • Hardcore Slowness\nBlack",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "bass",
-          "drums",
-          "overdrive-guitar",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "guitar", "hand-percussion"],
         "preferredMeters": [
           "4/4"
         ],
@@ -583,13 +541,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Bay Area, California / Los Angeles",
         "era": "1980s",
         "description": "Fast • Palm-muted • Aggressive\nHigh-speed palm-muted",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "bass",
-          "drums",
-          "overdrive-guitar",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "guitar", "hand-percussion"],
         "preferredMeters": [
           "4/4"
         ],

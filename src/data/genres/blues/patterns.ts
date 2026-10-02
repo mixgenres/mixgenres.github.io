@@ -19,9 +19,7 @@ export const BLUES_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "12/8",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -162,11 +160,7 @@ export const BLUES_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "phrase"],
-          "instruments": [
-            "electric-guitar",
-            "guitar",
-            "piano"
-          ],
+          "instruments": ["guitar", "guitar", "piano"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -392,10 +386,7 @@ export const BLUES_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "percussion"
-          ],
+          "instruments": ["drums", "percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -537,14 +528,11 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
           "roles": [
             "guitar",
-            "electric-guitar"
+            "guitar"
           ],
     
           "approaches": ["chop"],
-          "instruments": [
-            "guitar",
-            "electric-guitar"
-          ],
+          "instruments": ["guitar", "guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -709,9 +697,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -840,9 +826,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 4,
@@ -971,10 +955,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "piano",
-            "keys"
-          ],
+          "instruments": ["piano", "keys"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -1174,17 +1155,13 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             "measure"
           ],
           "roles": [
-            "brass",
+            "horn-section",
             "trumpet",
             "sax"
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "brass",
-            "trumpet",
-            "sax"
-          ],
+          "instruments": ["horn-section", "trumpet", "sax"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -1291,14 +1268,11 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
           "roles": [
             "guitar",
-            "electric-guitar"
+            "guitar"
           ],
     
           "approaches": ["chop"],
-          "instruments": [
-            "guitar",
-            "electric-guitar"
-          ],
+          "instruments": ["guitar", "guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1433,9 +1407,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1582,10 +1554,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "keys",
-            "synth"
-          ],
+          "instruments": ["keys", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 4,
@@ -1701,10 +1670,7 @@ export const BLUES_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar",
-            "piano"
-          ],
+          "instruments": ["guitar", "piano"],
           "compatibleRoles": [
             "harmony"
           ],
@@ -1882,9 +1848,7 @@ export const BLUES_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "harmonica"
-          ],
+          "instruments": ["harmonica"],
           "compatibleRoles": [
             "harmonica"
           ],
@@ -2117,10 +2081,7 @@ export const BLUES_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking", "groove"],
-          "instruments": [
-            "bass",
-            "piano"
-          ],
+          "instruments": ["bass", "piano"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -2289,9 +2250,7 @@ export const BLUES_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "compatibleRoles": [
             "bass"
           ],
@@ -2469,9 +2428,7 @@ export const BLUES_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "harmonica"
-          ],
+          "instruments": ["harmonica"],
           "compatibleRoles": [
             "harmonica"
           ],
@@ -2645,9 +2602,7 @@ export const BLUES_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "harmonica"
-          ],
+          "instruments": ["harmonica"],
           "compatibleRoles": [
             "harmonica",
             "lead"

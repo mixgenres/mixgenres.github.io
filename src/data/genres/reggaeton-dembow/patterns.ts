@@ -27,10 +27,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "snare"
-          ],
+          "instruments": ["drums", "drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -161,11 +158,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "kick",
-            "snare"
-          ],
+          "instruments": ["drums", "drums", "drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -248,10 +241,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "claves"
-          ],
+          "instruments": ["drums", "claves"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -329,10 +319,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "piano",
-            "polysynth"
-          ],
+          "instruments": ["piano", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -406,9 +393,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -484,11 +469,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "kick",
-            "snare"
-          ],
+          "instruments": ["drums", "drums", "drums"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -710,11 +691,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "kick",
-            "snare"
-          ],
+          "instruments": ["drums", "drums", "drums"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -825,10 +802,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "shaker",
-            "drums"
-          ],
+          "instruments": ["shaker", "drums"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -912,10 +886,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "sub-bass",
-            "bass"
-          ],
+          "instruments": ["synth", "bass"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -1059,10 +1030,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "polysynth",
-            "clavinet"
-          ],
+          "instruments": ["synth", "clavinet"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1179,9 +1147,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "shaker"
-          ],
+          "instruments": ["shaker"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1296,9 +1262,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "synth"
-          ],
+          "instruments": ["synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1439,10 +1403,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "shaker",
-            "cabasa"
-          ],
+          "instruments": ["shaker", "cabasa"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1547,7 +1508,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "category": "rolePattern",
           "description": "Short sub-bass answer lands around the",
           "tags": [
-            "sub-bass",
+            "synth",
             "syncopation"
           ],
           "scopes": [
@@ -1562,9 +1523,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "sub-bass"
-          ],
+          "instruments": ["synth"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -1606,7 +1565,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           "variants": [],
           "provenance": "Authored genre-pack pattern based on Bass; designed for engine-level recombination rather than literal transcription.",
           "authenticityTags": [
-            "sub-bass",
+            "synth",
             "syncopation"
           ],
           "danceTags": [
@@ -1645,9 +1604,7 @@ export const REGGAETON_DEMBOW_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = 
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,

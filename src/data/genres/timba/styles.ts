@@ -7,13 +7,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Havana, Cuba (Los Van Van)",
         "era": "1970s–1980s",
         "description": "Changuito Drum Groove • Cowbell •",
-        "characteristicInstruments": [
-          "drums",
-          "congas",
-          "bass",
-          "piano",
-          "flute"
-        ],
+        "characteristicInstruments": ["drums", "congas", "bass", "piano", "flute"],
         "preferredMeters": [
           "4/4"
         ],
@@ -77,13 +71,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Havana, Cuba",
         "era": "1990s–Present",
         "description": "Funk Slap Bass • Gear Shifts",
-        "characteristicInstruments": [
-          "drums",
-          "timbales",
-          "congas",
-          "bass",
-          "piano"
-        ],
+        "characteristicInstruments": ["drums", "timbales", "congas", "bass", "piano"],
         "preferredMeters": [
           "4/4"
         ],

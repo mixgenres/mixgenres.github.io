@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../../schema/instrument-def';
 
 export const violin: InstrumentDef = {
   id: "violin",
-  name: "Acoustic Violin",
+  name: "Violin",
   family: "bowed",
   octave: 12,
   voicing: "single",
@@ -45,6 +45,7 @@ export const violin: InstrumentDef = {
     bridgeHillQ: 2.6,
     bridgeHillGain: 0.42
   },
+  physicalTechniques: ["accent", "staccato", "legato", "portato", "tremolo", "pizzicato", "vibrato", "spiccato", "chicharra", "tambor", "latigo", "arco", "detache", "shuffle-bow", "cross-string", "drone-double-stop", "ornamented-slide", "open-string-drone", "short-bow-accent", "double-stop", "folk-vibrato", "bluegrass-run", "celtic-ornament"],
   tuningAndMechanics: {
     tuningName: "GDAE Standard Violin Tuning",
     frets: 0,

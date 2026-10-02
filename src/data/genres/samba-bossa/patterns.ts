@@ -25,9 +25,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_BASS: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -100,11 +98,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "surdo",
-            "pandeiro",
-            "tamborim"
-          ],
+          "instruments": ["surdo", "pandeiro", "tamborim"],
           "meter": "2/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -173,10 +167,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar",
-            "piano"
-          ],
+          "instruments": ["guitar", "piano"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -248,9 +239,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           ],
     
           "approaches": ["chop"],
-          "instruments": [
-            "cavaquinho"
-          ],
+          "instruments": ["cavaquinho"],
           "meter": "2/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -323,10 +312,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "surdo",
-            "drums"
-          ],
+          "instruments": ["surdo", "drums"],
           "meter": "2/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -439,10 +425,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "pandeiro",
-            "shaker"
-          ],
+          "instruments": ["pandeiro", "shaker"],
           "meter": "2/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -573,10 +556,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar",
-            "piano"
-          ],
+          "instruments": ["guitar", "piano"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -718,9 +698,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "surdo"
-          ],
+          "instruments": ["surdo"],
           "meter": "2/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -785,9 +763,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "pandeiro"
-          ],
+          "instruments": ["pandeiro"],
           "meter": "2/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -862,10 +838,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "pandeiro",
-            "tamborim"
-          ],
+          "instruments": ["pandeiro", "tamborim"],
           "meter": "2/4",
           "cycleLength": 2,
           "subdivisions": 16,
@@ -937,10 +910,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "cavaquinho",
-            "guitar"
-          ],
+          "instruments": ["cavaquinho", "guitar"],
           "meter": "2/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -1058,10 +1028,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass",
-            "upright-bass"
-          ],
+          "instruments": ["bass", "upright-bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1191,9 +1158,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "tamborim"
-          ],
+          "instruments": ["tamborim"],
           "meter": "2/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -1264,9 +1229,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["chop"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1343,9 +1306,7 @@ export const SAMBA_BOSSA_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "piano"
-          ],
+          "instruments": ["piano"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,

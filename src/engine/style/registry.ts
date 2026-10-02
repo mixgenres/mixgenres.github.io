@@ -1,3 +1,4 @@
+import { TANGO_STYLE_MIX } from '../../data/sound/mix/tangoMix';
 import { DEFAULT_STYLE_MASTER_PROFILE } from '../../data/sound/mix/masterProfiles';
 import { suggestedPaletteForGenre } from '../lookup/theory';
 import type { SongStyle } from '../../data/styles/schema';
@@ -20,8 +21,11 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, index: numbe
   const contract = contractForGenre(worldId);
   // The ensemble is authored by the style seed. Never synthesize a genre-level
   // starter ensemble: a song style must inherit only its own musical personnel.
-  const instruments = Array.from(new Set(seed.characteristicInstruments
-    .filter((id: string) => INSTRUMENTS_BY_ID[id])));
+  // Repeated canonical IDs are separate ensemble parts. Keep them so a style
+  // can use several synth patches or guitar roles without inventing new
+  // instrument identities.
+  const instruments = seed.characteristicInstruments
+    .filter((id: string) => INSTRUMENTS_BY_ID[id]);
   const leadInstrumentId = seed.arrangementSections?.find(section => section.leadInstrumentId)?.leadInstrumentId
     ?? instruments.find(id => INSTRUMENTS_BY_ID[id]?.acousticProfile?.role === 'lead')
     ?? instruments[0];
@@ -139,9 +143,11 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, index: numbe
       doublingRules:[contract.ensemble.motor ?? '', contract.ensemble.answer ?? ''].filter(Boolean),
     },
     sound:{
+      ...(TANGO_STYLE_MIX[seed.id] ? { mix: TANGO_STYLE_MIX[seed.id] } : {}),
       instrumentPalette:instruments.map(value => ({value: String(value), w: 1})),
       masterProfile:{...DEFAULT_STYLE_MASTER_PROFILE},
     },
+    instrumentDialects: contract.instrumentDialects ?? {},
     patterns:{require:[],preferred:[],allowed:[],avoid:[]}, gestures:{}, rules:{
       require:contract.timelineRequired ? [{tag:'timeline-lock',description:contract.timeline}] : [],
       forbid:contract.forbidden.map(tag => ({tag})),

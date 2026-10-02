@@ -17,7 +17,7 @@ export const ENTRY_5: [string, InstrumentDialect] = ["upright-bass:tango-arco", 
 
 export const ENTRY_7: [string, InstrumentDialect] = ["guitar:tango", {
     id: 'guitar:tango',
-    instrumentId: 'guitarra_tango',
+    instrumentId: 'guitar',
     name: 'Tango Guitar (Steel/Nylon Muted Chording)',
     family: 'guitar',
     performanceMode: 'acoustic-ensemble',

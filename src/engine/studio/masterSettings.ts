@@ -21,7 +21,12 @@ export function resolveMasterSettings(char?: MixCharacter, context = '') {
     presenceDb: (dry - 0.5) * 3,
     airDb: ((char?.brightness ?? MASTER_MIX_DEFAULTS.brightness) - 0.5) * 5,
     roomDepth: salsa ? SALSA_MASTER_ROOM_DEPTH : (1 - dry) * MASTER_MIX_DEFAULTS.roomScale,
-    duckDepth: ELECTRONIC_MIX_PATTERN.test(context) ? ELECTRONIC_MASTER_SIDECHAIN_DEPTH
+    springReverbMix: char?.reverbType === 'spring' ? clamp((1 - dry) * 0.38, 0.04, 0.32) : 0,
+    delaySend: clamp(char?.delaySend ?? 0, 0, 0.8),
+    delayTimeSeconds: clamp(char?.delayTimeSeconds ?? 0.32, 0.04, 1.5),
+    delayFeedback: clamp(char?.delayFeedback ?? 0.28, 0, 0.82),
+    delayToneHz: clamp(char?.delayToneHz ?? 4200, 500, 12000),
+    duckDepth: char?.sidechainDucking !== undefined ? clamp(char.sidechainDucking * .45, 0, .45) : ELECTRONIC_MIX_PATTERN.test(context) ? ELECTRONIC_MASTER_SIDECHAIN_DEPTH
       : TANGO_PATTERN.test(context) ? TANGO_MASTER_SIDECHAIN_DEPTH
         : clamp((char?.sidechainDucking ?? 0.12) * 0.45, 0.08, 0.45),
     drumKnock: clamp((bass - 0.3) * 1.2, 0.05, 0.85),

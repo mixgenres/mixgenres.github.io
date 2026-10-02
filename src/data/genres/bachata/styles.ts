@@ -7,13 +7,7 @@ const STYLE_5: GenreStyleDefinition = {
         "origin": "Buenos Aires / Dominican Republic / Europe",
         "era": "2000s–Present",
         "description": "Dramatic • Bandoneón • Fusion\nTango strings",
-        "characteristicInstruments": [
-          "bandoneon",
-          "violin",
-          "acoustic-guitar",
-          "bass",
-          "bongos"
-        ],
+        "characteristicInstruments": ["bandoneon", "violin", "guitar", "bass", "bongos"],
         "preferredMeters": [
           "4/4"
         ],
@@ -88,13 +82,7 @@ const STYLE_4: GenreStyleDefinition = {
         "origin": "Santo Domingo, Dominican Republic",
         "era": "1950s–1960s",
         "description": "Slow • Vintage • Lyrical\n50s romantic",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "upright-bass",
-          "bongos",
-          "maracas",
-          "requinto"
-        ],
+        "characteristicInstruments": ["guitar", "upright-bass", "bongos", "maracas", "requinto"],
         "preferredMeters": [
           "4/4"
         ],
@@ -169,13 +157,7 @@ const STYLE_6: GenreStyleDefinition = {
         "origin": "Rural Cibao, Dominican Republic",
         "era": "1970s–1980s",
         "description": "Raw • Unpolished • Folk\nHinterland Dominican",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "bass",
-          "bongos",
-          "guiro",
-          "requinto"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "bongos", "guiro", "requinto"],
         "preferredMeters": [
           "4/4"
         ],
@@ -249,13 +231,7 @@ const STYLE_7: GenreStyleDefinition = {
         "origin": "Dominican Republic",
         "era": "1970s–Present",
         "description": "Fast • Driving Tambora • Guitar-led\nHigh-tempo",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "bass",
-          "drums",
-          "guiro",
-          "requinto"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "guiro", "requinto"],
         "preferredMeters": [
           "2/4"
         ],
@@ -329,13 +305,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "Dominican Republic / USA",
         "era": "2000s–2010s",
         "description": "Balanced • Pop-infused • Clear Syncopation\nVersatile",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "bass",
-          "bongos",
-          "guiro",
-          "synth"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "bongos", "guiro", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -409,13 +379,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "Cadiz, Spain / European Social Circuit",
         "era": "2005–Present",
         "description": "Slow • Expressive • Body rolls\nModern",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "bass",
-          "synth",
-          "bongos",
-          "guiro"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "synth", "bongos", "guiro"],
         "preferredMeters": [
           "4/4"
         ],
@@ -497,13 +461,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Dominican Republic (Campesino Roots)",
         "era": "1960s–1980s",
         "description": "Fast • Arpeggiated • Raw\nAcoustic guitar",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "bass",
-          "bongos",
-          "guiro",
-          "requinto"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "bongos", "guiro", "requinto"],
         "preferredMeters": [
           "4/4"
         ],
@@ -588,13 +546,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Bronx, New York / Dominican Republic",
         "era": "1999–Present",
         "description": "Smooth • 4/4 • Guitar-driven\nPop and",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "bass",
-          "bongos",
-          "guiro",
-          "requinto"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "bongos", "guiro", "requinto"],
         "preferredMeters": [
           "4/4"
         ],

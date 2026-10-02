@@ -61,7 +61,7 @@ export const ZOUK_WORLD_ROLES: Partial<GenreWorld> = {
         "ti-bwa woodblock stick pattern",
         "shaker shimmer"
       ],
-      "brass": [
+      "horn-section": [
         "punchy horn section stabs",
         "trumpet counter-melodies"
       ]

@@ -82,13 +82,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "origin": "Kingston, Jamaica",
       "era": "1970s",
       "description": "One Drop • Skank • Conscious\nSpiritual",
-      "characteristicInstruments": [
-        "drums",
-        "bass",
-        "electric-guitar",
-        "organ",
-        "brass"
-      ],
+      "characteristicInstruments": ["drums", "bass", "guitar", "organ", "horn-section"],
       "preferredMeters": [
         "4/4"
       ],
@@ -162,13 +156,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "origin": "Kingston, Jamaica",
       "era": "1970s",
       "description": "Space Echo • Bass Drops •",
-      "characteristicInstruments": [
-        "bass",
-        "drums",
-        "tape-echo",
-        "spring-reverb",
-        "organ"
-      ],
+      "characteristicInstruments": ["bass", "drums", "organ"],
       "preferredMeters": [
         "4/4"
       ],
@@ -232,13 +220,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "origin": "Kingston, Jamaica",
       "era": "1980s–Present",
       "description": "Digital Riddim • Deejay Toasting •",
-      "characteristicInstruments": [
-        "sampler",
-        "drums",
-        "sub-bass",
-        "synth",
-        "horn-section"
-      ],
+      "characteristicInstruments": ["sampler", "drums", "synth", "synth", "horn-section"],
       "preferredMeters": [
         "4/4"
       ],
@@ -302,13 +284,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "origin": "London, UK / Jamaica",
       "era": "Late 1970s–1980s",
       "description": "Romantic • Smooth • Soul Harmonies\nSoulful",
-      "characteristicInstruments": [
-        "electric-guitar",
-        "bass",
-        "drums",
-        "piano",
-        "strings"
-      ],
+      "characteristicInstruments": ["guitar", "bass", "drums", "piano", "string-ensemble"],
       "preferredMeters": [
         "4/4"
       ],
@@ -381,13 +357,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "origin": "Kingston, Jamaica",
       "era": "1966–1968",
       "description": "Soulful • Prominent Bass • Slow",
-      "characteristicInstruments": [
-        "bass",
-        "electric-guitar",
-        "drums",
-        "brass",
-        "piano"
-      ],
+      "characteristicInstruments": ["bass", "guitar", "drums", "horn-section", "piano"],
       "preferredMeters": [
         "4/4"
       ],
@@ -461,13 +431,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "origin": "Kingston, Jamaica",
       "era": "Late 1980s–1990s",
       "description": "Digital • Hardcore • Machine Beats\nRaggamuffin",
-      "characteristicInstruments": [
-        "sampler",
-        "drums",
-        "sub-bass",
-        "synth",
-        "horn-section"
-      ],
+      "characteristicInstruments": ["sampler", "drums", "synth", "synth", "horn-section"],
       "preferredMeters": [
         "4/4"
       ],
@@ -540,13 +504,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "origin": "Kingston, Jamaica",
       "era": "Late 1950s–1960s",
       "description": "Fast • Walking Bass • Big",
-      "characteristicInstruments": [
-        "brass",
-        "electric-guitar",
-        "upright-bass",
-        "drums",
-        "piano"
-      ],
+      "characteristicInstruments": ["horn-section", "guitar", "upright-bass", "drums", "piano"],
       "preferredMeters": [
         "4/4"
       ],
@@ -620,13 +578,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "origin": "Trinidad and Tobago",
       "era": "Early 20th Century–Present",
       "description": "Steelpan • Acoustic • Witty\nTrinidadian storytelling",
-      "characteristicInstruments": [
-        "steel-drums",
-        "acoustic-guitar",
-        "brass",
-        "hand-percussion",
-        "bass"
-      ],
+      "characteristicInstruments": ["steel-drums", "guitar", "horn-section", "hand-percussion", "bass"],
       "preferredMeters": [
         "2/4",
         "4/4"
@@ -722,11 +674,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums",
-        "kick",
-        "snare"
-      ],
+      "instruments": ["drums", "drums", "drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -854,10 +802,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "approaches": [
         "comping"
       ],
-      "instruments": [
-        "electric-guitar",
-        "organ"
-      ],
+      "instruments": ["guitar", "organ"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -977,10 +922,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "approaches": [
         "walking"
       ],
-      "instruments": [
-        "bass",
-        "sub-bass"
-      ],
+      "instruments": ["bass", "synth"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1114,11 +1056,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "electric-guitar",
-        "organ",
-        "horn-section"
-      ],
+      "instruments": ["guitar", "organ", "horn-section"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1232,10 +1170,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums",
-        "kick"
-      ],
+      "instruments": ["drums", "drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1351,9 +1286,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums"
-      ],
+      "instruments": ["drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1424,10 +1357,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "approaches": [
         "chop"
       ],
-      "instruments": [
-        "electric-guitar",
-        "guitar"
-      ],
+      "instruments": ["guitar", "guitar"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1498,9 +1428,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "approaches": [
         "walking"
       ],
-      "instruments": [
-        "bass"
-      ],
+      "instruments": ["bass"],
       "meter": "4/4",
       "cycleLength": 2,
       "subdivisions": 32,
@@ -1579,9 +1507,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "approaches": [
         "comping"
       ],
-      "instruments": [
-        "organ"
-      ],
+      "instruments": ["organ"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1629,7 +1555,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "enabled": true
     },
     {
-      "id": "reggae--rd-10-dub-echo-fragment",
+      "id": "reggae--rd-10-echo-throw-fragment",
       "worldId": "reggae",
       "styleIds": [],
       "name": "Dub Echo Fragment",
@@ -1654,10 +1580,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "snare",
-        "shaker"
-      ],
+      "instruments": ["drums", "shaker"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1727,11 +1650,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "bass",
-        "drums",
-        "dub-echo"
-      ],
+      "instruments": ["bass", "drums"],
       "meter": "4/4",
       "cycleLength": 2,
       "subdivisions": 32,
@@ -1799,10 +1718,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "kick",
-        "drums"
-      ],
+      "instruments": ["drums", "drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1874,10 +1790,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "shaker",
-        "maracas"
-      ],
+      "instruments": ["shaker", "maracas"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1949,10 +1862,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "approaches": [
         "phrase"
       ],
-      "instruments": [
-        "trumpet",
-        "trombone"
-      ],
+      "instruments": ["trumpet", "trombone"],
       "meter": "4/4",
       "cycleLength": 2,
       "subdivisions": 32,
@@ -2025,10 +1935,7 @@ export const REGGAE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "bass",
-        "drums"
-      ],
+      "instruments": ["bass", "drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,

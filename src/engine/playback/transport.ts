@@ -30,6 +30,7 @@ export interface TransportSink {
   pitchBend(trackId: string | number, value: number, time: number, targetMidi?: number): void;
   controlChange(trackId: string | number, cc: number, value: number, time: number): void;
   restoreControllers?(controllers: PerfCC[], time: number): void;
+  setMixPosition?(songTime: number, contextTime: number): void;
   setDrumChannel(trackId: string | number, isDrum: boolean): void;
   allNotesOff(): void;
   setPlaybackEnabled?(enabled: boolean): void;
@@ -108,11 +109,6 @@ export class Transport {
     const pos = wasRunning ? this.position() : this.startOffset;
     this.perf = perf;
     if (wasRunning) {
-      if (typeof this.sink.softNotesOff === 'function') {
-        this.sink.softNotesOff();
-      } else {
-        this.sink.allNotesOff();
-      }
       this.locate(pos);
     }
   }
@@ -129,11 +125,6 @@ export class Transport {
     }
     const currentPos = this.position();
     this.perf = perf;
-    if (typeof this.sink.softNotesOff === 'function') {
-      this.sink.softNotesOff();
-    } else {
-      this.sink.allNotesOff();
-    }
     this.locate(currentPos);
   }
 
@@ -173,6 +164,7 @@ export class Transport {
     if (!this.perf) return;
     this.locate(fromSeconds ?? this.startOffset);
     this.sink.setPlaybackEnabled?.(true);
+    this.sink.setMixPosition?.(this.startOffset, this.sink.now());
     this.running = true;
     this.endFired = false;
     this.workerTicked = false;
@@ -203,6 +195,7 @@ export class Transport {
   }
 
   stop() {
+    if (!this.running) return;
     this.running = false;
     this.sink.setPlaybackEnabled?.(false);
     if (this.worker) {
@@ -254,6 +247,7 @@ export class Transport {
     }
     this.ccCursor = ci;
     const now = this.sink.now() + 0.005;
+    this.sink.setMixPosition?.(pos + .005, now);
     if (this.running) this.sink.allNotesOff();
     if (this.sink.restoreControllers) this.sink.restoreControllers([...latest.values()], now);
     else for (const c of latest.values()) this.sink.controlChange(c.trackId, c.cc, c.value, now);
@@ -301,6 +295,7 @@ export class Transport {
       if (this.noteCursor >= notes.length) {
         if (this.looping) {
           this.origin += total;
+          this.sink.setMixPosition?.(0, this.origin);
           this.sink.restoreControllers?.([], this.origin);
           this.noteCursor = 0;
           this.ccCursor = 0;

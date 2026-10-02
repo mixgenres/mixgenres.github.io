@@ -4,7 +4,7 @@ import { el } from '@elemaudio/core';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 
 export default class StringsModule implements InstrumentModule {
-  id = 'strings';
+  id = 'string-ensemble';
 
   renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {

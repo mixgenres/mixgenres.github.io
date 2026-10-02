@@ -15,13 +15,11 @@ export const FUNK_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             "measure"
           ],
           "roles": [
-            "electric-guitar"
+            "guitar"
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "electric-guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -197,9 +195,7 @@ export const FUNK_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -378,10 +374,7 @@ export const FUNK_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "percussion"
-          ],
+          "instruments": ["drums", "percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -551,9 +544,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -716,10 +707,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "keys",
-            "synth"
-          ],
+          "instruments": ["keys", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -847,17 +835,13 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             "measure"
           ],
           "roles": [
-            "brass",
+            "horn-section",
             "trumpet",
             "sax"
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "brass",
-            "trumpet",
-            "sax"
-          ],
+          "instruments": ["horn-section", "trumpet", "sax"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -971,9 +955,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1116,9 +1098,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -1243,9 +1223,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1366,13 +1344,11 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             "measure"
           ],
           "roles": [
-            "electric-guitar"
+            "guitar"
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "electric-guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1539,9 +1515,7 @@ export const FUNK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
             "harmony"
           ],
@@ -1704,9 +1678,7 @@ export const FUNK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "tenor-sax"
-          ],
+          "instruments": ["tenor-sax"],
           "compatibleRoles": [
             "tenor-sax"
           ],
@@ -1953,10 +1925,7 @@ export const FUNK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking", "groove"],
-          "instruments": [
-            "bass",
-            "synth"
-          ],
+          "instruments": ["bass", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -2121,10 +2090,7 @@ export const FUNK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "electric-guitar",
-            "guitar"
-          ],
+          "instruments": ["guitar", "guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -2333,9 +2299,7 @@ export const FUNK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "compatibleRoles": [
             "bass"
           ],
@@ -2517,9 +2481,7 @@ export const FUNK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "tenor-sax"
-          ],
+          "instruments": ["tenor-sax"],
           "compatibleRoles": [
             "tenor-sax"
           ],
@@ -2700,9 +2662,7 @@ export const FUNK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "tenor-sax"
-          ],
+          "instruments": ["tenor-sax"],
           "compatibleRoles": [
             "tenor-sax",
             "lead"

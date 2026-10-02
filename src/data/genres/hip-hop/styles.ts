@@ -7,13 +7,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "New York City",
         "era": "1990s",
         "description": "Punchy • 4/4 MPC • Head-nod\nGritty",
-        "characteristicInstruments": [
-          "sampler",
-          "drums",
-          "bass",
-          "turntable",
-          "piano"
-        ],
+        "characteristicInstruments": ["sampler", "drums", "bass", "turntable", "piano"],
         "preferredMeters": [
           "4/4"
         ],
@@ -84,13 +78,7 @@ const STYLE_6: GenreStyleDefinition = {
         "origin": "Stockholm / Internet / Houston",
         "era": "2010s–Present",
         "description": "Ethereal • Reverb • Dreamy\nSpacey, ambient-sampled",
-        "characteristicInstruments": [
-          "synth",
-          "sampler",
-          "sub-bass",
-          "drums",
-          "piano"
-        ],
+        "characteristicInstruments": ["synth", "sampler", "synth", "drums", "piano"],
         "preferredMeters": [
           "4/4"
         ],
@@ -165,13 +153,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "Chicago / London / Brooklyn",
         "era": "2010s–Present",
         "description": "Sliding 808s • Syncopated Snare •",
-        "characteristicInstruments": [
-          "sub-bass",
-          "drums",
-          "synth",
-          "piano",
-          "sampler"
-        ],
+        "characteristicInstruments": ["synth", "drums", "synth", "piano", "sampler"],
         "preferredMeters": [
           "4/4"
         ],
@@ -246,13 +228,7 @@ const STYLE_5: GenreStyleDefinition = {
         "origin": "Sacramento / Los Angeles / Underground",
         "era": "2010s–Present",
         "description": "Abrasive • Industrial • Glitchy\nDistorted avant-garde",
-        "characteristicInstruments": [
-          "sampler",
-          "drums",
-          "sub-bass",
-          "synth",
-          "distortion-guitar"
-        ],
+        "characteristicInstruments": ["sampler", "drums", "synth", "synth", "guitar"],
         "preferredMeters": [
           "4/4",
           "5/4"
@@ -320,13 +296,7 @@ const STYLE_4: GenreStyleDefinition = {
         "origin": "Los Angeles / Long Beach, California",
         "era": "1990s",
         "description": "Laid-back • Whiny Synth • Funk",
-        "characteristicInstruments": [
-          "synth",
-          "bass",
-          "drums",
-          "electric-guitar",
-          "sampler"
-        ],
+        "characteristicInstruments": ["synth", "bass", "drums", "guitar", "sampler"],
         "preferredMeters": [
           "4/4"
         ],
@@ -401,13 +371,7 @@ const STYLE_7: GenreStyleDefinition = {
         "origin": "Queens / Brooklyn / Chicago",
         "era": "1990s–Present",
         "description": "Upright Bass • Horns • Conscious\nLyrical",
-        "characteristicInstruments": [
-          "upright-bass",
-          "brass",
-          "drums",
-          "piano",
-          "sampler"
-        ],
+        "characteristicInstruments": ["upright-bass", "horn-section", "drums", "piano", "sampler"],
         "preferredMeters": [
           "4/4"
         ],
@@ -483,13 +447,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "Tokyo / Internet / Global",
         "era": "2010s–Present",
         "description": "Warm • Vinyl Noise • Relaxed\nJazzy,",
-        "characteristicInstruments": [
-          "sampler",
-          "piano",
-          "drums",
-          "bass",
-          "acoustic-guitar"
-        ],
+        "characteristicInstruments": ["sampler", "piano", "drums", "bass", "guitar"],
         "preferredMeters": [
           "4/4"
         ],
@@ -563,13 +521,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Atlanta, Georgia",
         "era": "2000s–Present",
         "description": "808 • Fast Hi-Hats • Dark\nRolling",
-        "characteristicInstruments": [
-          "sub-bass",
-          "drums",
-          "synth",
-          "sampler",
-          "piano"
-        ],
+        "characteristicInstruments": ["synth", "drums", "synth", "sampler", "piano"],
         "preferredMeters": [
           "4/4"
         ],

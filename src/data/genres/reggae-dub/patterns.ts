@@ -24,9 +24,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_BASS: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -108,11 +106,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "electric-guitar",
-            "organ",
-            "horn-section"
-          ],
+          "instruments": ["guitar", "organ", "horn-section"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -226,11 +220,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "bass",
-            "drums",
-            "dub-echo"
-          ],
+          "instruments": ["bass", "drums"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -302,10 +292,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "bass",
-            "drums"
-          ],
+          "instruments": ["bass", "drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -374,10 +361,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           ],
     
           "approaches": ["chop"],
-          "instruments": [
-            "electric-guitar",
-            "guitar"
-          ],
+          "instruments": ["guitar", "guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -444,9 +428,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "organ"
-          ],
+          "instruments": ["organ"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -518,11 +500,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "kick",
-            "snare"
-          ],
+          "instruments": ["drums", "drums", "drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -647,10 +625,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "kick"
-          ],
+          "instruments": ["drums", "drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -765,9 +740,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -834,10 +807,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "kick",
-            "drums"
-          ],
+          "instruments": ["drums", "drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -907,10 +877,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "trumpet",
-            "trombone"
-          ],
+          "instruments": ["trumpet", "trombone"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -982,10 +949,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "electric-guitar",
-            "organ"
-          ],
+          "instruments": ["guitar", "organ"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1104,10 +1068,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass",
-            "sub-bass"
-          ],
+          "instruments": ["bass", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1237,10 +1198,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "shaker",
-            "maracas"
-          ],
+          "instruments": ["shaker", "maracas"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1292,7 +1250,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
 
 export const REGGAE_DUB_WORLD_PATTERNS_TEXTURE: MusicalPattern[] = [
   {
-          "id": "rd-10-dub-echo-fragment",
+          "id": "rd-10-echo-throw-fragment",
           "worldId": "reggae-dub",
           "styleIds": ["dub"],
           "name": "Dub Echo Fragment",
@@ -1316,10 +1274,7 @@ export const REGGAE_DUB_WORLD_PATTERNS_TEXTURE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "snare",
-            "shaker"
-          ],
+          "instruments": ["drums", "shaker"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,

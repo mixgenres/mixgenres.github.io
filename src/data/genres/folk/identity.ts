@@ -56,7 +56,7 @@ export const FOLK_WORLD_CULTURE: Partial<GenreWorld> = {
 
 export const FOLK_WORLD_ROLES: Partial<GenreWorld> = {
   "roles": {
-      "guitar": [
+      "voice": [
         "Travis picking",
         "flatpicking runs",
         "syncopated strumming"
@@ -69,7 +69,7 @@ export const FOLK_WORLD_ROLES: Partial<GenreWorld> = {
         "old-time fiddle drones",
         "melodic breaks"
       ],
-      "acoustic-guitar": [
+      "guitar": [
         "narrative delivery",
         "high lonesome vocal harmony"
       ]

@@ -58,6 +58,17 @@ export interface MasterChain {
   instBus: GainNode;
   subBus: GainNode;
   output: GainNode;
+  roomInput: GainNode;
+  delayInput: AudioNode;
+  roomSize: AudioParam;
+  roomPreDelay: AudioParam;
+  roomDelayTimes: AudioParam[];
+  dynamicParameters: {
+    low: AudioParam; presence: AudioParam; air: AudioParam; width: AudioParam; roomReturn: AudioParam;
+    legacyAmbience: AudioParam; delayTime: AudioParam; delayFeedback: AudioParam; delayTone: AudioParam;
+    glueThreshold: AudioParam; glueRatio: AudioParam;
+  };
+  setTrackSendsEnabled(enabled: boolean): void;
   tap: GainNode;
   setVolume(v: number): void;
   setPlaybackEnabled(enabled: boolean): void;
@@ -221,6 +232,9 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   roomInput.connect(roomPreDelay);
 
   const roomSum = ctx.createGain();
+  const roomSizeGain = ctx.createGain();
+  roomSizeGain.gain.value = 1;
+  roomSum.connect(roomSizeGain);
   const roomDelays = [0.013, 0.019, 0.029, 0.037, 0.053, 0.071].map((time, i) => {
     const delay = ctx.createDelay(0.5);
     delay.delayTime.value = time;
@@ -247,7 +261,32 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   const revMix = ctx.createGain();
   revMix.gain.value = initialRoomDepth;
   let roomDepth = initialRoomDepth;
-  roomSum.connect(revMix);
+  roomSizeGain.connect(revMix);
+  const springTone = ctx.createBiquadFilter();
+  springTone.type = 'bandpass';
+  springTone.frequency.value = 2400;
+  springTone.Q.value = 2.8;
+  const springWet = ctx.createGain();
+  springWet.gain.value = settings.springReverbMix;
+  roomSizeGain.connect(springTone);
+  springTone.connect(springWet);
+  // Echo is a production send, not an instrument occupying an arrangement slot.
+  const delaySend = ctx.createGain();
+  delaySend.gain.value = settings.delaySend;
+  const delay = ctx.createDelay(1.6);
+  delay.delayTime.value = settings.delayTimeSeconds;
+  const delayTone = ctx.createBiquadFilter();
+  delayTone.type = 'lowpass';
+  delayTone.frequency.value = settings.delayToneHz;
+  const delayFeedback = ctx.createGain();
+  delayFeedback.gain.value = settings.delayFeedback;
+  const delayReturn = ctx.createGain();
+  delayReturn.gain.value = 0.42;
+  delaySend.connect(delay);
+  delay.connect(delayTone);
+  delayTone.connect(delayReturn);
+  delayTone.connect(delayFeedback);
+  delayFeedback.connect(delay);
   // 6. Master Summing
   const masterSum = ctx.createGain();
   masterSum.gain.value = 1.0;
@@ -265,9 +304,14 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   instHigh.connect(masterSum);
 
   // Feed the shared stereo room from instruments and drums.
-  instBus.connect(roomInput);
-  drumBus.connect(roomInput);
+  const legacyAmbienceFeed = ctx.createGain();
+  instBus.connect(legacyAmbienceFeed);
+  drumBus.connect(legacyAmbienceFeed);
+  legacyAmbienceFeed.connect(roomInput);
+  legacyAmbienceFeed.connect(delaySend);
   revMix.connect(masterSum);
+  springWet.connect(masterSum);
+  delayReturn.connect(masterSum);
 
   // 7. Subsonic Filter & Master EQ
   const hp = ctx.createBiquadFilter();
@@ -394,6 +438,15 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
     instBus,
     subBus,
     output,
+    roomInput,
+    delayInput: delay,
+    roomSize: roomSizeGain.gain,
+    roomPreDelay: roomPreDelay.delayTime,
+    roomDelayTimes: roomDelays.map(room => room.delay.delayTime),
+    dynamicParameters: { low: low.gain, presence: pres.gain, air: air.gain, width: sideGain.gain, roomReturn: revMix.gain,
+      legacyAmbience: legacyAmbienceFeed.gain, delayTime: delay.delayTime, delayFeedback: delayFeedback.gain,
+      delayTone: delayTone.frequency, glueThreshold: glue.threshold, glueRatio: glue.ratio },
+    setTrackSendsEnabled(enabled: boolean) { legacyAmbienceFeed.gain.value = enabled ? 0 : 1; },
     tap,
     setVolume(v: number) {
       output.gain.setTargetAtTime(Math.max(0, Math.min(1.5, v * MASTER_MIX_DEFAULTS.outputGain)), ctx.currentTime, 0.02);
@@ -404,10 +457,12 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
       revMix.gain.cancelScheduledValues(now);
       roomInput.gain.cancelScheduledValues(now);
       for (const r of roomDelays) r.feedback.gain.cancelScheduledValues(now);
+      delaySend.gain.cancelScheduledValues(now);
       if (!enabled) {
         playbackGate.gain.setValueAtTime(0, now);
         revMix.gain.setValueAtTime(0, now);
         roomInput.gain.setValueAtTime(0, now);
+        delaySend.gain.setValueAtTime(0, now);
         for (const r of roomDelays) r.feedback.gain.setValueAtTime(0, now);
       } else {
         playbackGate.gain.setValueAtTime(1, now);
@@ -418,6 +473,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
         });
         revMix.gain.setValueAtTime(0, now);
         revMix.gain.setValueAtTime(roomDepth, now + 0.09);
+        delaySend.gain.setValueAtTime(settings.delaySend, now + 0.09);
       }
     },
     setMixCharacter(char: MixCharacter, genId?: string) {
@@ -440,8 +496,16 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
       glue.ratio.setTargetAtTime(next.glue.ratio, now, 0.05);
       glue.attack.setTargetAtTime(next.glue.attack, now, 0.05);
       glue.release.setTargetAtTime(next.glue.release, now, 0.05);
+      roomPreDelay.delayTime.setTargetAtTime(.012, now, .05);
+      roomSizeGain.gain.setTargetAtTime(1, now, .05);
+      roomDelays.forEach((room, index) => room.delay.delayTime.setTargetAtTime([.013, .019, .029, .037, .053, .071][index], now, .05));
       roomDepth = next.roomDepth;
       revMix.gain.setTargetAtTime(roomDepth, now, 0.05);
+      springWet.gain.setTargetAtTime(next.springReverbMix, now, 0.05);
+      delaySend.gain.setTargetAtTime(next.delaySend, now, 0.05);
+      delay.delayTime.setTargetAtTime(next.delayTimeSeconds, now, 0.05);
+      delayFeedback.gain.setTargetAtTime(next.delayFeedback, now, 0.05);
+      delayTone.frequency.setTargetAtTime(next.delayToneHz, now, 0.05);
       drumShaper.curve = saturationCurve(next.drumKnock, next.saturationType);
       sideGain.gain.setTargetAtTime(next.widthGain, now, 0.05);
     },
@@ -467,6 +531,8 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
         subDuckingGain.disconnect();
         masterSum.disconnect();
         roomInput.disconnect();
+        legacyAmbienceFeed.disconnect();
+        roomSizeGain.disconnect();
         playbackGate.disconnect();
         roomPreDelay.disconnect();
         roomSum.disconnect();
@@ -478,6 +544,13 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
           r.panner.disconnect();
         }
         revMix.disconnect();
+        springTone.disconnect();
+        springWet.disconnect();
+        delaySend.disconnect();
+        delay.disconnect();
+        delayTone.disconnect();
+        delayFeedback.disconnect();
+        delayReturn.disconnect();
         msSplitter.disconnect();
         midSum.disconnect();
         midL.disconnect();

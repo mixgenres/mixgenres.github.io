@@ -7,13 +7,7 @@ const STYLE_2: GenreStyleDefinition = {
         "name": "Alegrías",
         "origin": "Cádiz, western Andalusia",
         "description": "Bright • 12-beat • Major\nCadiz sparkle,",
-        "characteristicInstruments": [
-          "spanish-guitar",
-          "flute",
-          "palmas",
-          "cajon",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["guitar", "flute", "palmas", "cajon", "hand-percussion"],
         "preferredMeters": [
           "12/8",
           "6/8",
@@ -65,13 +59,7 @@ const STYLE_1: GenreStyleDefinition = {
         "name": "Bulerías",
         "origin": "Jerez de la Frontera & Triana",
         "description": "Fast • 12-beat • Contratiempo\nPlayful, explosive,",
-        "characteristicInstruments": [
-          "spanish-guitar",
-          "flute",
-          "palmas",
-          "cajon",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["guitar", "flute", "palmas", "cajon", "hand-percussion"],
         "preferredMeters": [
           "12/8",
           "6/8",
@@ -149,13 +137,7 @@ const STYLE_6: GenreStyleDefinition = {
         "name": "Fandangos",
         "origin": "Huelva, Andalusia",
         "description": "Folk-rooted • 3-beat • Expressive\nCoplas, melody",
-        "characteristicInstruments": [
-          "spanish-guitar",
-          "flute",
-          "palmas",
-          "hand-percussion",
-          "drums"
-        ],
+        "characteristicInstruments": ["guitar", "flute", "palmas", "hand-percussion", "drums"],
         "preferredMeters": [
           "3/4",
           "6/8"
@@ -198,13 +180,7 @@ const STYLE_7: GenreStyleDefinition = {
         "name": "Rumba",
         "origin": "Catalonia, Andalusia & Caribbean crossover",
         "description": "Driving • 4-beat • Crossover\nFlamenco guitar",
-        "characteristicInstruments": [
-          "spanish-guitar",
-          "cajon",
-          "palmas",
-          "bass",
-          "flute"
-        ],
+        "characteristicInstruments": ["guitar", "cajon", "palmas", "bass", "flute"],
         "preferredMeters": [
           "4/4"
         ],
@@ -277,13 +253,7 @@ const STYLE_4: GenreStyleDefinition = {
         "name": "Seguiriya",
         "origin": "Andalusia",
         "description": "Dark • Asymmetric • Cante jondo\nRaw,",
-        "characteristicInstruments": [
-          "spanish-guitar",
-          "flute",
-          "palmas",
-          "hand-percussion",
-          "drums"
-        ],
+        "characteristicInstruments": ["guitar", "flute", "palmas", "hand-percussion", "drums"],
         "preferredMeters": [
           "12/8",
           "6/8"
@@ -328,13 +298,7 @@ const STYLE_0: GenreStyleDefinition = {
         "name": "Soleá",
         "origin": "Andalusia (Seville, Cádiz, Jerez)",
         "description": "Deep • 12-beat • Phrygian\nThe foundation",
-        "characteristicInstruments": [
-          "spanish-guitar",
-          "flute",
-          "palmas",
-          "cajon",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["guitar", "flute", "palmas", "cajon", "hand-percussion"],
         "preferredMeters": [
           "12/8",
           "3/4"
@@ -412,13 +376,7 @@ const STYLE_3: GenreStyleDefinition = {
         "name": "Tangos",
         "origin": "Cádiz, Triana, Granada",
         "description": "Grounded • 4-beat • Phrygian\nHeavy pulse,",
-        "characteristicInstruments": [
-          "spanish-guitar",
-          "flute",
-          "palmas",
-          "cajon",
-          "bass"
-        ],
+        "characteristicInstruments": ["guitar", "flute", "palmas", "cajon", "bass"],
         "preferredMeters": [
           "4/4",
           "2/4"
@@ -490,13 +448,7 @@ const STYLE_5: GenreStyleDefinition = {
         "name": "Tientos",
         "origin": "Andalusia",
         "description": "Slow • 4-beat • Modal\nTangos stretched",
-        "characteristicInstruments": [
-          "spanish-guitar",
-          "flute",
-          "palmas",
-          "cajon",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["guitar", "flute", "palmas", "cajon", "hand-percussion"],
         "preferredMeters": [
           "4/4",
           "2/4"

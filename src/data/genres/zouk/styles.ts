@@ -7,13 +7,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "Lisbon / Rotterdam / Paris",
         "era": "2000s–Present",
         "description": "R&B Chords • Modern Beat •",
-        "characteristicInstruments": [
-          "synth",
-          "drums",
-          "sub-bass",
-          "piano",
-          "warm-pad"
-        ],
+        "characteristicInstruments": ["synth", "drums", "synth", "piano", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -88,13 +82,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "Rio de Janeiro / Sao Paulo",
         "era": "2010s–Present",
         "description": "Lyrical • Head Movements • Modern",
-        "characteristicInstruments": [
-          "synth",
-          "sub-bass",
-          "drums",
-          "sampler",
-          "warm-pad"
-        ],
+        "characteristicInstruments": ["synth", "synth", "drums", "sampler", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -169,13 +157,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Guadeloupe & Martinique",
         "era": "1980s",
         "description": "Carnival Horns • Fast 4/4 •",
-        "characteristicInstruments": [
-          "brass",
-          "drums",
-          "bass",
-          "synth",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["horn-section", "drums", "bass", "synth", "hand-percussion"],
         "preferredMeters": [
           "4/4"
         ],
@@ -250,13 +232,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Guadeloupe & Martinique / Paris",
         "era": "Late 1980s–1990s",
         "description": "Slow • Sensual • Romantic Keyboards\nRomantic,",
-        "characteristicInstruments": [
-          "synth",
-          "bass",
-          "drums",
-          "electric-guitar",
-          "rhodes"
-        ],
+        "characteristicInstruments": ["synth", "bass", "drums", "guitar", "rhodes"],
         "preferredMeters": [
           "4/4"
         ],

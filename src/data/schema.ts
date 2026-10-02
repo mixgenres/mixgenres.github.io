@@ -35,7 +35,7 @@ export type PatternCategory =
   | 'comping'
   | 'accompaniment'
   | 'lead'
-  | 'drone'
+  | 'synth'
   | 'transition'
   | 'polyrhythm'
   | string;

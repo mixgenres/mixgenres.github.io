@@ -19,9 +19,7 @@ export const SALSA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion"
-          ],
+          "instruments": ["percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -229,9 +227,7 @@ export const SALSA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion"
-          ],
+          "instruments": ["percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -401,9 +397,7 @@ export const SALSA_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion"
-          ],
+          "instruments": ["percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -564,9 +558,7 @@ export const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion"
-          ],
+          "instruments": ["percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -701,9 +693,7 @@ export const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion"
-          ],
+          "instruments": ["percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -873,10 +863,7 @@ export const SALSA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar",
-            "piano"
-          ],
+          "instruments": ["guitar", "piano"],
           "compatibleRoles": [
             "harmony"
           ],
@@ -1043,9 +1030,7 @@ export const SALSA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "trumpet"
-          ],
+          "instruments": ["trumpet"],
           "compatibleRoles": [
             "trumpet"
           ],
@@ -1262,11 +1247,7 @@ export const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion",
-            "drums",
-            "cowbell"
-          ],
+          "instruments": ["percussion", "drums", "cowbell"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -1398,10 +1379,7 @@ export const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking", "groove"],
-          "instruments": [
-            "bass",
-            "piano"
-          ],
+          "instruments": ["bass", "piano"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1518,11 +1496,7 @@ export const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "piano",
-            "keys",
-            "guitar"
-          ],
+          "instruments": ["piano", "keys", "guitar"],
           "canCrossRole": true,
           "meter": "4/4",
           "cycleLength": 2,
@@ -1731,11 +1705,7 @@ export const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "timbales",
-            "percussion",
-            "drums"
-          ],
+          "instruments": ["timbales", "percussion", "drums"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -1964,10 +1934,7 @@ export const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "congas",
-            "percussion"
-          ],
+          "instruments": ["congas", "percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -2134,9 +2101,7 @@ export const SALSA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "compatibleRoles": [
             "bass"
           ],
@@ -2293,7 +2258,7 @@ export const SALSA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             "mambo",
             "trumpet",
             "sax",
-            "brass",
+            "horn-section",
             "stabs"
           ],
           "scopes": [
@@ -2308,12 +2273,7 @@ export const SALSA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "trumpet",
-            "sax",
-            "electric-guitar",
-            "keys"
-          ],
+          "instruments": ["trumpet", "sax", "guitar", "keys"],
           "canCrossRole": true,
           "meter": "4/4",
           "cycleLength": 2,
@@ -2461,9 +2421,7 @@ export const SALSA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "trumpet"
-          ],
+          "instruments": ["trumpet"],
           "compatibleRoles": [
             "trumpet"
           ],
@@ -2626,9 +2584,7 @@ export const SALSA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "trumpet"
-          ],
+          "instruments": ["trumpet"],
           "compatibleRoles": [
             "trumpet",
             "lead"
@@ -2805,10 +2761,7 @@ export const SALSA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar",
-            "piano"
-          ],
+          "instruments": ["guitar", "piano"],
           "compatibleRoles": [
             "harmony",
             "texture"

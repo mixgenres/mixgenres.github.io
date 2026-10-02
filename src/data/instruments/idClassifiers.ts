@@ -1,7 +1,7 @@
 /** Ordered text classifiers used by engine algorithms to resolve instrument families. */
-export const ELECTRIC_INSTRUMENT_PATTERN = /electric|distortion|synth|acid|clavinet|sub-bass|rhodes|fm-ep/;
-export const ELECTRONIC_GAIN_INSTRUMENT_PATTERN = /synth|808|909|acid|sub-bass|kizomba|tarraxo|trap|house/;
-export const SUB_BUS_INSTRUMENT_PATTERN = /sub-bass|808|909|log-drum|subwoofer/i;
+export const ELECTRIC_INSTRUMENT_PATTERN = /electric|distortion|synth|acid|clavinet|rhodes|fm-ep/;
+export const ELECTRONIC_GAIN_INSTRUMENT_PATTERN = /synth|808|909|acid|kizomba|tarraxo|trap|house/;
+export const SUB_BUS_INSTRUMENT_PATTERN = /808|909|log-drum|subwoofer/i;
 export const BASS_INSTRUMENT_PATTERN = /bass|tuba|guitarron|bassoon/i;
 export const DRUM_BUS_INSTRUMENT_PATTERN = /drum|kick|snare|hats|cajon|conga|bongo|timbal|pandeiro|shaker|guiro|cabasa|maracas|surdo|bodhran|taiko|paigu|tam-tam|percussion|perc/i;
 export const FAMILY_NOISE_SCALE_RULES = [
@@ -40,8 +40,6 @@ export const BRASS_REED_INSTRUMENT_PATTERNS = {
   endBlown: /quena|shakuhachi|xiao|dizi|ryuteki|pan-flute|ocarina/i,
 } as const;
 export const GUITAR_INSTRUMENT_PATTERNS = {
-  acousticTango: /acoustic-guitar|guitar/,
-  urbanAcoustic: /guitar|acoustic-guitar|spanish-guitar/,
   jawari: /sitar|shamisen|tambura/,
 } as const;
 

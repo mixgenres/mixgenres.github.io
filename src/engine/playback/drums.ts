@@ -42,7 +42,7 @@ export default class DrumsModule implements InstrumentModule {
     // A real kit is a collection of physically different sources. The compiler
     // carries the GM/component MIDI identity into the voice; do not collapse the
     // kit back into one generic membrane after that point.
-    if (instId === 'drums' || instId === 'brush-kit') {
+    if (instId === 'drums' || instId === 'drums') {
       if (component) {
         const f = Math.max(35, component.tuningHz ?? 60);
         const componentEnv = el.adsr(0.00015, Math.max(0.008, component.decayTimeSec ?? decayTime), 0, Math.min(0.08, Math.max(0.003, (component.decayTimeSec ?? decayTime) * 0.12)), gateSignal);

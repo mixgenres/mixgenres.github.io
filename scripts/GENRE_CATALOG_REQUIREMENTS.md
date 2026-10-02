@@ -2,15 +2,15 @@
 
 ## Scope
 
-- Supported genres are the 33 canonical leaves in `data/genres/index.ts`.
+- Supported genres are the registered musical worlds in `src/data/genres/index.ts`.
 - Unsupported legacy genres must not appear in the public catalog.
-- The instrument catalog is authoritative and must remain unchanged.
+- The instrument catalog is authoritative for instrument references.
 
 ## Genre hierarchy
 
 - Use one canonical genre ID per public genre.
 - Default style is the first listed style.
-- Keep 6–8 styles per genre.
+- Include distinct authored styles without a fixed count.
 - Style names describe reusable musical identities.
 - Do not clone individual artist or song styles.
 
@@ -26,9 +26,9 @@
 - Songs must select patterns from this catalog.
 - Do not define song-specific pattern cells.
 
-## Four-chord catalog
+## Harmonic catalog
 
-- Every reusable chord cell contains exactly four chords.
+- Chord cells retain the complete authored harmonic sentence; their length follows the music.
 - Chord cells live in `data/chordPalette.ts`.
 - Reuse cells across genres where musically appropriate.
 - Remove exact or trivial progression duplicates.
@@ -38,7 +38,7 @@
 
 ## Starter songs
 
-- Starter songs use exactly five instruments.
+- Starter songs preserve the genre/style ensemble and its musical roles without a fixed instrument count.
 - Instrument choices should reflect genre identity.
 - Do not modify the instrument catalog to satisfy this rule.
 - Song structures must use existing engine section kinds.

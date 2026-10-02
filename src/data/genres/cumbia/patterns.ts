@@ -25,9 +25,7 @@ export const CUMBIA_WORLD_PATTERNS_BASS: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -107,10 +105,7 @@ export const CUMBIA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "guiro"
-          ],
+          "instruments": ["drums", "guiro"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -182,10 +177,7 @@ export const CUMBIA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "bass",
-            "cumbia-drum"
-          ],
+          "instruments": ["bass", "cumbia-drum"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -258,10 +250,7 @@ export const CUMBIA_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           ],
     
           "approaches": ["chop"],
-          "instruments": [
-            "electric-guitar",
-            "guitar"
-          ],
+          "instruments": ["guitar", "guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -337,9 +326,7 @@ export const CUMBIA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "cumbia-drum"
-          ],
+          "instruments": ["cumbia-drum"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -468,9 +455,7 @@ export const CUMBIA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "cumbia-drum"
-          ],
+          "instruments": ["cumbia-drum"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -552,10 +537,7 @@ export const CUMBIA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "electric-guitar",
-            "organ"
-          ],
+          "instruments": ["guitar", "organ"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -638,10 +620,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass",
-            "acoustic-bass"
-          ],
+          "instruments": ["bass", "bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -766,9 +745,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "guacharaca"
-          ],
+          "instruments": ["guacharaca"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -920,10 +897,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "electric-guitar",
-            "guitar"
-          ],
+          "instruments": ["guitar", "guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1064,9 +1038,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "guacharaca"
-          ],
+          "instruments": ["guacharaca"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1150,9 +1122,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "electric-guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -1241,9 +1211,7 @@ export const CUMBIA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "maracas"
-          ],
+          "instruments": ["maracas"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1327,10 +1295,7 @@ export const CUMBIA_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "polysynth",
-            "organ"
-          ],
+          "instruments": ["synth", "organ"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1454,9 +1419,7 @@ export const CUMBIA_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "organ"
-          ],
+          "instruments": ["organ"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,

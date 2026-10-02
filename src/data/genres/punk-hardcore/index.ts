@@ -85,13 +85,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "origin": "London / Los Angeles",
       "era": "Late 1960s–1980s",
       "description": "Heavy Riffs • Marshall Stacks •",
-      "characteristicInstruments": [
-        "electric-guitar",
-        "bass",
-        "drums",
-        "overdrive-guitar",
-        "hand-percussion"
-      ],
+      "characteristicInstruments": ["guitar", "bass", "drums", "guitar", "hand-percussion"],
       "preferredMeters": [
         "4/4"
       ],
@@ -171,13 +165,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "origin": "Seattle, Washington",
       "era": "Late 1980s–1990s",
       "description": "Loud-Quiet-Loud • Fuzz • Anguish\nRaw flannel-clad",
-      "characteristicInstruments": [
-        "electric-guitar",
-        "bass",
-        "drums",
-        "distortion-guitar",
-        "hand-percussion"
-      ],
+      "characteristicInstruments": ["guitar", "bass", "drums", "guitar", "hand-percussion"],
       "preferredMeters": [
         "4/4",
         "6/8",
@@ -252,13 +240,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "origin": "London / Cambridge, UK",
       "era": "Late 1960s–1970s",
       "description": "Odd Meters • Mellotron • Multi-Movement\nComplex",
-      "characteristicInstruments": [
-        "electric-guitar",
-        "strings",
-        "bass",
-        "drums",
-        "organ"
-      ],
+      "characteristicInstruments": ["guitar", "string-ensemble", "bass", "drums", "organ"],
       "preferredMeters": [
         "7/8",
         "5/4",
@@ -335,13 +317,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "origin": "New York / London",
       "era": "Mid 1970s",
       "description": "Fast Downstrokes • 3 Chords •",
-      "characteristicInstruments": [
-        "electric-guitar",
-        "bass",
-        "drums",
-        "distortion-guitar",
-        "hand-percussion"
-      ],
+      "characteristicInstruments": ["guitar", "bass", "drums", "guitar", "hand-percussion"],
       "preferredMeters": [
         "4/4"
       ],
@@ -415,13 +391,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "origin": "Detroit / Detroit / NYC",
       "era": "1960s / 2000s Revival",
       "description": "Lo-Fi Fuzz • Catchy Riffs •",
-      "characteristicInstruments": [
-        "electric-guitar",
-        "bass",
-        "drums",
-        "overdrive-guitar",
-        "hand-percussion"
-      ],
+      "characteristicInstruments": ["guitar", "bass", "drums", "guitar", "hand-percussion"],
       "preferredMeters": [
         "4/4"
       ],
@@ -495,13 +465,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "origin": "San Francisco / London",
       "era": "Late 1960s",
       "description": "Wah-wah • Tape Delay • Mind-expanding\nAcid-soaked",
-      "characteristicInstruments": [
-        "electric-guitar",
-        "organ",
-        "bass",
-        "drums",
-        "tape-echo"
-      ],
+      "characteristicInstruments": ["guitar", "organ", "bass", "drums"],
       "preferredMeters": [
         "4/4",
         "3/4"
@@ -576,13 +540,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "origin": "Montreal / Reykjavik / Texas",
       "era": "Late 1990s–Present",
       "description": "Crescendo • Cinematic • Instrumental\nEpic dynamic",
-      "characteristicInstruments": [
-        "electric-guitar",
-        "bass",
-        "drums",
-        "strings",
-        "glockenspiel"
-      ],
+      "characteristicInstruments": ["guitar", "bass", "drums", "string-ensemble", "glockenspiel"],
       "preferredMeters": [
         "4/4",
         "6/8",
@@ -657,13 +615,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "origin": "London / Oxford / Dublin",
       "era": "Late 1980s–Early 1990s",
       "description": "Glide Guitar • Wall of Sound",
-      "characteristicInstruments": [
-        "electric-guitar",
-        "bass",
-        "drums",
-        "synth",
-        "distortion-guitar"
-      ],
+      "characteristicInstruments": ["guitar", "bass", "drums", "synth", "guitar"],
       "preferredMeters": [
         "4/4"
       ],
@@ -763,11 +715,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
         "walking",
         "groove"
       ],
-      "instruments": [
-        "electric-guitar",
-        "bass",
-        "drums"
-      ],
+      "instruments": ["guitar", "bass", "drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -921,11 +869,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
         "walking",
         "groove"
       ],
-      "instruments": [
-        "electric-guitar",
-        "bass",
-        "drums"
-      ],
+      "instruments": ["guitar", "bass", "drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1102,12 +1046,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
         "walking",
         "groove"
       ],
-      "instruments": [
-        "electric-guitar",
-        "bass",
-        "drums",
-        "keys"
-      ],
+      "instruments": ["guitar", "bass", "drums", "keys"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1292,11 +1231,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
         "walking",
         "groove"
       ],
-      "instruments": [
-        "electric-guitar",
-        "bass",
-        "drums"
-      ],
+      "instruments": ["guitar", "bass", "drums"],
       "meter": "7/8",
       "cycleLength": 1,
       "subdivisions": 14,
@@ -1423,14 +1358,12 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
         "measure"
       ],
       "roles": [
-        "electric-guitar"
+        "guitar"
       ],
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "electric-guitar"
-      ],
+      "instruments": ["guitar"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 8,
@@ -1597,9 +1530,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums"
-      ],
+      "instruments": ["drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 8,
@@ -1712,9 +1643,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums"
-      ],
+      "instruments": ["drums"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1865,7 +1794,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       ]
     },
     {
-      "id": "punk-hardcore--rock-organ-sustain",
+      "id": "punk-hardcore--organ-sustain",
       "worldId": "punk-hardcore",
       "styleIds": [],
       "name": "Hammond Organ Sustain",
@@ -1886,9 +1815,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "keys"
-      ],
+      "instruments": ["keys"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1924,8 +1851,8 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       ],
       "variants": [
         {
-          "id": "punk-hardcore--rock-organ-sustain-v-01",
-          "parentPatternId": "punk-hardcore--rock-organ-sustain",
+          "id": "punk-hardcore--organ-sustain-v-01",
+          "parentPatternId": "punk-hardcore--organ-sustain",
           "name": "Hammond Organ Sustain — sparse variation",
           "variationType": "sparse",
           "probability": 0.22,
@@ -1952,8 +1879,8 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
           ]
         },
         {
-          "id": "punk-hardcore--rock-organ-sustain-v-02",
-          "parentPatternId": "punk-hardcore--rock-organ-sustain",
+          "id": "punk-hardcore--organ-sustain-v-02",
+          "parentPatternId": "punk-hardcore--organ-sustain",
           "name": "Hammond Organ Sustain — accent shift",
           "variationType": "accentShift",
           "probability": 0.2,
@@ -2013,14 +1940,12 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
         "measure"
       ],
       "roles": [
-        "electric-guitar"
+        "guitar"
       ],
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "electric-guitar"
-      ],
+      "instruments": ["guitar"],
       "meter": "7/8",
       "cycleLength": 1,
       "subdivisions": 7,
@@ -2151,10 +2076,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "synth",
-        "keys"
-      ],
+      "instruments": ["synth", "keys"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -2400,9 +2322,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "approaches": [
         "chop"
       ],
-      "instruments": [
-        "guitar"
-      ],
+      "instruments": ["guitar"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 8,
@@ -2545,14 +2465,12 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
         "measure"
       ],
       "roles": [
-        "electric-guitar"
+        "guitar"
       ],
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "electric-guitar"
-      ],
+      "instruments": ["guitar"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 8,
@@ -2665,19 +2583,17 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
         "phrase"
       ],
       "roles": [
-        "electric-guitar"
+        "guitar"
       ],
       "approaches": [
         "phrase"
       ],
-      "instruments": [
-        "electric-guitar"
-      ],
+      "instruments": ["guitar"],
       "compatibleRoles": [
-        "electric-guitar"
+        "guitar"
       ],
       "compatibleInstruments": [
-        "electric-guitar"
+        "guitar"
       ],
       "canCrossRole": true,
       "meter": "4/4",
@@ -2820,19 +2736,17 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
         "phrase"
       ],
       "roles": [
-        "electric-guitar"
+        "guitar"
       ],
       "approaches": [
         "phrase"
       ],
-      "instruments": [
-        "electric-guitar"
-      ],
+      "instruments": ["guitar"],
       "compatibleRoles": [
-        "electric-guitar"
+        "guitar"
       ],
       "compatibleInstruments": [
-        "electric-guitar"
+        "guitar"
       ],
       "canCrossRole": true,
       "meter": "4/4",
@@ -3015,9 +2929,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "approaches": [
         "walking"
       ],
-      "instruments": [
-        "bass"
-      ],
+      "instruments": ["bass"],
       "compatibleRoles": [
         "bass"
       ],
@@ -3165,10 +3077,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "approaches": [
         "comping"
       ],
-      "instruments": [
-        "guitar",
-        "keys"
-      ],
+      "instruments": ["guitar", "keys"],
       "compatibleRoles": [
         "harmony"
       ],
@@ -3318,11 +3227,7 @@ export const PUNK_HARDCORE_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "drums",
-        "percussion",
-        "guitar"
-      ],
+      "instruments": ["drums", "percussion", "guitar"],
       "compatibleRoles": [
         "pulse",
         "rhythm-guitar",

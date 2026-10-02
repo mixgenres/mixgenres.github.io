@@ -1,65 +1,17 @@
-# System checks
+# Checks
 
-`npm run check` runs types, data boundaries, all-style generation/provenance,
-section technique coverage, all instrument paths, solo and sound metadata,
-master regression tests, and the structural mix audit. Every gate runs even if
-an earlier one fails. Exit code 1 means a gate or current report contains errors.
-A report marked PARTIAL means important audio coverage is absent or incomplete;
-it is not an audio-quality pass.
+- `npm run check`: one catalog pass over every exported data property and resolved style/profile, then focused musical, sound-resolution, solo, mix and playback regressions. No PCM rendering. Stops at the first failed gate.
+- `npm run audit:catalog`: only the complete data/profile pass: references, finite numbers, probabilities, ranges, weighted distributions, provenance, physical DSP, gestures, kits, solo policies and mix settings.
+- `npm run check:audio`: fast gates first (reused when the source fingerprint is unchanged), then PCM regression fixtures, representative instrument mechanisms and two short ensemble excerpts per selected style. `check:full` is an alias; neither renders the catalog.
+- `npm run audit:browser`: native playback buffers and Web Audio master in the chosen browser at `http://127.0.0.1:3001/scripts/browser-mix-audit.html`. Defaults to renderer coverage; a specific style can be selected.
+- `npm run test:audio -- --style=<id>`: targeted portable PCM. Add `--encoded` for MP3 stream and decoded loudness checks (requires ffmpeg/ffprobe), `--save` to retain clips in `/tmp/mixgenres-audio-regression`, or `--details` for per-stem diagnostics.
+- `npm run audit:instrument-render -- --instrument=<id>`: targeted physical-model probes. Defaults to representatives covering shared modules, model IDs, excitation and sustain types. `--details` retains individual metrics.
+- `npm run audit:report`: show the last run's result and whether its sources have changed.
 
-- `npm run check:audio`: those checks plus every instrument's PCM probes and
-  default-genre/contrasting-style opening and dense-ensemble renders.
-- `npm run check:full`: also renders excerpts for every style in the catalog.
-- `npm run audit:browser`: starts a local audit page at
-  `http://127.0.0.1:3001/scripts/browser-mix-audit.html`. Choose all styles for
-  exhaustive style coverage of the native OfflineAudioContext master.
-  Completed results are saved in `audit/browser-mix-audit.json`; audio excerpts
-  are saved in `/tmp/mixgenres-browser-audit`. The server binds to loopback.
-- `npm run audit:report`: rebuilds the view using existing results without
-  rerunning tests. Changed sources make previous checks and reports stale.
-- `npm run audit:mix`: inspects structural gains and mix profiles for all styles.
-- `npm run test:mix`: verifies initial/update master equivalence, gain-control
-  baselines, silence preservation, disposal and six-channel bus separation.
-- `npm run test:audio -- --style=tango-tango-electronico`: focused PCM/export
-  measurement. `--all-styles` selects the catalog; `AUDIO_START` / `AUDIO_END`
-  select validated zero-based half-open shards. Focused and sharded reports
-  cannot replace the canonical full/subset report.
+Reports in `audit/*.json` contain coverage and actionable findings. Successful runs print one line per gate. Type checking belongs to `lint`/`build`; it is not repeated inside audits. `test:all` adds targeted audio and a production build.
 
-Open `audit/system-report.html` for a searchable view of genres, styles,
-instrument gain factors, warnings, stem/bus/output levels and coverage gaps.
-The companion Markdown file is concise and the JSON preserves full evidence.
-Reports include generation time and a fingerprint of source files. Old reports
-are excluded from current conclusions instead of silently combined.
+`audit/` is disposable generated output, ignored by Git. The app never reads it. Delete the entire folder at any time; checks regenerate reports and rerun fast gates if their optional cache is absent. The report viewer prints a short message when no saved report exists.
 
-## What the measurements mean
+All styles and profiles receive structural checks; numerical variations of the same renderer do not require separate audio renders. The audio selector automatically includes newly introduced renderer mechanisms. Explicit IDs are available for changes needing listening or focused diagnosis.
 
-Structural gain is the product of instrument makeup, assigned-role trim,
-user track level, CC7 volume and CC11 expression. Velocity is a separate
-per-note excitation control. None of those numbers is acoustic loudness.
-The structural audit preserves silent and unused lanes and shows the selected
-pattern versus compiled notes for each section.
-
-PCM diagnostics are taken before encoding. They report sample peak, RMS,
-active-window RMS, crest factor, DC offset, samples at/above full scale,
-stereo correlation and mono RMS. An isolated stem or unmastered bus can exceed
-full scale in float PCM; that is a headroom warning, not automatic proof of
-clipping. Non-finite audio or a rendered stem with compiled notes but no sound
-fails the check. Encoder peak trim is reported so normalization cannot conceal
-an overloaded sum.
-
-Decoded MP3 measurements use ffmpeg EBU R128 to report LUFS and true peak after
-encoder trimming and codec effects. A 2-second excerpt's LUFS and loudness range
-are not whole-song targets. These diagnostics require `ffmpeg` and `ffprobe`.
-Missing tools produce a failed measurement rather than a partial PASS.
-
-Node rendering measures Elementary stems and style DSP. The native browser
-audit measures the actual Web Audio master. Both use song track levels and
-roles, preserve controller state for later excerpts, and sample openings plus
-the busiest ensemble window. The report identifies unmeasured live scheduling,
-long-term playback, whole-song loudness and perceptual authenticity.
-
-The old `gain-calibration --apply` did not apply anything. Build now validates
-without pretending to calibrate; `gain-calibration` remains an alias for the
-read-only mix audit. The former seven-instrument "authenticity" probe is
-consolidated into the full catalog identity/path audit. Runtime catalog defaults
-are traced separately from missing data and hardcoded fallbacks.
+Node checks cover stems, portable mixing and export. Browser checks cover the native master and the PCM buffer used by the player. Passing either says what was measured; it does not claim every device or perceptual arrangement has been verified. Short-excerpt loudness is not a whole-song target. Isolated stem headroom is not reported as a clipping failure.

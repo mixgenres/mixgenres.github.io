@@ -67,13 +67,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "origin": "Rio de Janeiro (Ipanema / Copacabana)",
       "era": "Late 1950s–1960s",
       "description": "Nylon Guitar • Whispering Vocals •",
-      "characteristicInstruments": [
-        "acoustic-guitar",
-        "piano",
-        "flute",
-        "upright-bass",
-        "drums"
-      ],
+      "characteristicInstruments": ["guitar", "piano", "flute", "upright-bass", "drums"],
       "preferredMeters": [
         "2/4",
         "4/4"
@@ -147,13 +141,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "origin": "Rio de Janeiro (Sambadrome / Escolas de Samba)",
       "era": "1930s–Present",
       "description": "Bateria • Surdo Accent • Carnival",
-      "characteristicInstruments": [
-        "surdo",
-        "tamborim",
-        "cavaquinho",
-        "cuica",
-        "brass"
-      ],
+      "characteristicInstruments": ["surdo", "tamborim", "cavaquinho", "cuica", "horn-section"],
       "preferredMeters": [
         "2/4"
       ],
@@ -226,13 +214,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "origin": "Rio de Janeiro (Fundo de Quintal)",
       "era": "Late 1970s–Present",
       "description": "Tantan • Pandeiro • Backyard Party\nWarm,",
-      "characteristicInstruments": [
-        "cavaquinho",
-        "pandeiro",
-        "tantan",
-        "repinique",
-        "synth"
-      ],
+      "characteristicInstruments": ["cavaquinho", "pandeiro", "tantan", "repinique", "synth"],
       "preferredMeters": [
         "2/4"
       ],
@@ -305,13 +287,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "origin": "Salvador da Bahia (Pelourinho / Olodum)",
       "era": "1980s–Present",
       "description": "Afro-Bahian Drums • Slow Swing •",
-      "characteristicInstruments": [
-        "surdo",
-        "timbales",
-        "repinique",
-        "brass",
-        "synth"
-      ],
+      "characteristicInstruments": ["surdo", "timbales", "repinique", "horn-section", "synth"],
       "preferredMeters": [
         "4/4",
         "2/4"
@@ -406,10 +382,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "surdo",
-        "drums"
-      ],
+      "instruments": ["surdo", "drums"],
       "meter": "2/4",
       "cycleLength": 1,
       "subdivisions": 8,
@@ -523,10 +496,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "pandeiro",
-        "shaker"
-      ],
+      "instruments": ["pandeiro", "shaker"],
       "meter": "2/4",
       "cycleLength": 1,
       "subdivisions": 8,
@@ -659,10 +629,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "approaches": [
         "comping"
       ],
-      "instruments": [
-        "cavaquinho",
-        "guitar"
-      ],
+      "instruments": ["cavaquinho", "guitar"],
       "meter": "2/4",
       "cycleLength": 1,
       "subdivisions": 8,
@@ -781,10 +748,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "approaches": [
         "comping"
       ],
-      "instruments": [
-        "guitar",
-        "piano"
-      ],
+      "instruments": ["guitar", "piano"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -929,10 +893,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "approaches": [
         "walking"
       ],
-      "instruments": [
-        "bass",
-        "upright-bass"
-      ],
+      "instruments": ["bass", "upright-bass"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1064,9 +1025,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "surdo"
-      ],
+      "instruments": ["surdo"],
       "meter": "2/4",
       "cycleLength": 1,
       "subdivisions": 8,
@@ -1134,9 +1093,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "pandeiro"
-      ],
+      "instruments": ["pandeiro"],
       "meter": "2/4",
       "cycleLength": 1,
       "subdivisions": 8,
@@ -1213,9 +1170,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "tamborim"
-      ],
+      "instruments": ["tamborim"],
       "meter": "2/4",
       "cycleLength": 1,
       "subdivisions": 8,
@@ -1290,9 +1245,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "approaches": [
         "chop"
       ],
-      "instruments": [
-        "cavaquinho"
-      ],
+      "instruments": ["cavaquinho"],
       "meter": "2/4",
       "cycleLength": 1,
       "subdivisions": 8,
@@ -1365,9 +1318,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "approaches": [
         "chop"
       ],
-      "instruments": [
-        "guitar"
-      ],
+      "instruments": ["guitar"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1445,9 +1396,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "approaches": [
         "walking"
       ],
-      "instruments": [
-        "bass"
-      ],
+      "instruments": ["bass"],
       "meter": "4/4",
       "cycleLength": 1,
       "subdivisions": 16,
@@ -1520,9 +1469,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "approaches": [
         "comping"
       ],
-      "instruments": [
-        "piano"
-      ],
+      "instruments": ["piano"],
       "meter": "4/4",
       "cycleLength": 2,
       "subdivisions": 32,
@@ -1593,10 +1540,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "pandeiro",
-        "tamborim"
-      ],
+      "instruments": ["pandeiro", "tamborim"],
       "meter": "2/4",
       "cycleLength": 2,
       "subdivisions": 16,
@@ -1669,11 +1613,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "approaches": [
         "groove"
       ],
-      "instruments": [
-        "surdo",
-        "pandeiro",
-        "tamborim"
-      ],
+      "instruments": ["surdo", "pandeiro", "tamborim"],
       "meter": "2/4",
       "cycleLength": 1,
       "subdivisions": 8,
@@ -1742,10 +1682,7 @@ export const BRAZILIAN_WORLD: GenreWorld = {
       "approaches": [
         "comping"
       ],
-      "instruments": [
-        "guitar",
-        "piano"
-      ],
+      "instruments": ["guitar", "piano"],
       "meter": "4/4",
       "cycleLength": 2,
       "subdivisions": 32,

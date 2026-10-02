@@ -11,10 +11,10 @@ export interface SparseDialectFallbackRule {
 }
 
 export const RELATED_DIALECT_INSTRUMENTS: Record<string, string[]> = {
-  bass: ['upright-bass', 'bass', 'pick-bass'],
-  guitar: ['guitar', 'spanish-guitar', 'acoustic-guitar', 'electric-guitar'],
+  bass: ['upright-bass', 'bass', 'bass'],
+  guitar: ['guitar', 'guitar', 'guitar', 'guitar'],
   sax: ['tenor-sax', 'alto-sax', 'soprano-sax', 'bari-sax'],
-  drum: ['drums', 'brush-kit'],
+  drum: ['drums', 'drums'],
 };
 
 export const SPARSE_DIALECT_FALLBACK_RULES: SparseDialectFallbackRule[] = [

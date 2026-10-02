@@ -1,6 +1,5 @@
 import type { ExportFormat } from './export/formats';
-import { StereoFieldManager } from './engine/studio/index.ts';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Dices, Trash2, Pencil } from 'lucide-react';
 import './index.css';
 
@@ -28,12 +27,8 @@ import {
 } from './engine/sheet/index.ts';
 import { FEELS } from './data/tempoFeels';
 import { ENERGY_LABELS } from './data/performance/energy';
-import {
-  startAudio, stopAudio, setMasterVolume,
-  createSink, setPlaybackConfiguration,
-  Transport,
-} from './engine/playback/index.ts';
-import { arrangeBand } from './engine/band/index.ts';
+import { SongPlayer, type PlayerState } from './engine/playback/songPlayer';
+import type { Performance } from './engine/band/performanceData';
 import { PATTERNS_BY_ID, cleanPatternName } from './data/genres';
 
 function loadInitialSong(): { song: SongSheet; isNew: boolean } {
@@ -43,7 +38,14 @@ function loadInitialSong(): { song: SongSheet; isNew: boolean } {
 export default function App() {
   const [initialData] = useState(() => loadInitialSong());
   const [song, setSong] = useState<SongSheet>(initialData.song);
-  const [playing, setPlaying] = useState(false);
+  const [playerState, setPlayerState] = useState<PlayerState>({ status: 'idle', progress: 0 });
+  const playerStatus = playerState.composition === song ? playerState.status : 'compiling';
+  const playing = playerStatus === 'playing';
+  const audioLoading = ['compiling', 'rendering', 'starting'].includes(playerStatus);
+  const playbackLabel = playerStatus === 'compiling' ? 'Compiling arrangement…'
+    : playerStatus === 'rendering' ? `Preparing audio… ${Math.round(playerState.progress * 100)}%`
+      : playerStatus === 'starting' ? 'Starting audio…'
+        : playing ? 'Pause (Space)' : playerStatus === 'error' ? 'Retry playback (Space)' : 'Play (Space)';
   const [isBouncing, setIsBouncing] = useState(false);
   const [bounceProgress, setBounceProgress] = useState<number | null>(null);
   const [step, setStep] = useState(0);
@@ -63,7 +65,6 @@ export default function App() {
       return false;
     }
   });
-  const [audioLoading, setAudioLoading] = useState(false);
 
   const [pickedRegion, setPickedRegion] = useState<string | null>(null);
 
@@ -107,7 +108,7 @@ export default function App() {
     barRef.current = 0;
     stepRef.current = 0;
     seekSecondsRef.current = 0;
-    transportRef.current?.locate(0);
+    playerRef.current?.locate(0);
     showToast(`Started a new ${plateFor(worldId).short} song (${resolveStyle({ genreId: worldId, styleId: targetStyleId }).name})`);
   };
 
@@ -123,7 +124,7 @@ export default function App() {
     barRef.current = 0;
     stepRef.current = 0;
     seekSecondsRef.current = 0;
-    transportRef.current?.locate(0);
+    playerRef.current?.locate(0);
     const targetName = resolveStyle({ genreId: song.worldId, styleId }).name;
     showToast(`Style set to ${targetName}`);
   };
@@ -131,6 +132,10 @@ export default function App() {
   const exportAbortRef = useRef<AbortController | null>(null);
   const handleExport = async (selectedTrackIds: string[], format: ExportFormat) => {
     if (exportAbortRef.current) return;
+    if (!perfRef.current || playerRef.current?.composition !== songRef.current || playerRef.current.snapshot.performance !== perfRef.current) {
+      showToast('Wait for the arrangement to finish compiling before exporting.');
+      return;
+    }
     const controller = new AbortController();
     exportAbortRef.current = controller;
     setIsBouncing(true);
@@ -173,7 +178,7 @@ export default function App() {
   const stepRef = useRef(step);
   stepRef.current = step;
   const seekSecondsRef = useRef<number>(0);
-  const transportRef = useRef<Transport | null>(null);
+  const playerRef = useRef<SongPlayer | null>(null);
 
   const seekTo = (newBar: number, newStep: number = 0) => {
     const total = songRef.current.durationMeasures || 1;
@@ -189,7 +194,7 @@ export default function App() {
     if (bt) {
       const seconds = bt.start + ((bt.end - bt.start) * clampedStep) / 16;
       seekSecondsRef.current = seconds;
-      transportRef.current?.locate(seconds);
+      playerRef.current?.locate(seconds);
     }
   };
 
@@ -237,7 +242,7 @@ export default function App() {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
       if (e.code === 'Space') {
         e.preventDefault();
-        setPlaying(p => !p);
+        if (!e.repeat) { playerRef.current?.configure(songRef.current); playerRef.current?.toggle(); }
       } else if (e.code === 'ArrowLeft') {
         e.preventDefault();
         seekTo(bar - 1, 0);
@@ -264,81 +269,39 @@ export default function App() {
   const partName = region ? (region.formLabel ?? region.name ?? String(region.kind)) : '';
   const sectionStyle = region ? getResolvedSectionStyle(song, region) : null;
 
-  /* ---- tiered performance compilation ----------------------------------
-     Cost scales with the scope of the edit, not song length.
-     Tier 0 (Structure), Tier 1 (Arrangement), and Tier 2 (Performance)
-     cells are cached and only invalidated when their specific inputs change. */
-  const stereoField = useMemo(() => new StereoFieldManager(), []);
-
-  const perf = useMemo(() => {
-    return arrangeBand(song, 0);
-  }, [song]);
-  const perfRef = useRef(perf);
-  perfRef.current = perf;
-
-  // Configure before scheduling the edited performance. Playhead updates are
-  // independent of these inputs and cannot enter audio graph preparation.
-  useEffect(() => {
-    const map = Object.fromEntries(song.tracks.map(t => [t.id, t.instrumentId ?? t.instrument]));
-    setPlaybackConfiguration(perf, map, Object.fromEntries(song.tracks.map(t => [t.id, t.role])),
-      Object.fromEntries(song.tracks.map(t => [t.id, t.volume ?? 1])), song.worldId, song.styleId);
-    transportRef.current?.patchPerformance(perf);
-  }, [perf, song.tracks, song.worldId, song.styleId]);
+  /* ---- one compiled snapshot owns both audio and the playhead ------------ */
+  const perfRef = useRef<Performance | null>(null);
 
   useEffect(() => {
-    if (!playing) {
-      transportRef.current?.stop();
-      stopAudio();
-      return;
-    }
-    let alive = true;
-
-    (async () => {
-      try {
-        setAudioLoading(true);
-        const ctx = await startAudio();
-        if (!ctx || !alive) return;
-        setAudioLoading(false);
-        if (!alive) return;
-        setMasterVolume(0.85);
-
-        if (!transportRef.current) {
-          transportRef.current = new Transport(createSink(), {
-            onPosition(seconds) {
-              const bars = perfRef.current.bars;
-              if (!bars.length) return;
-              let i = Math.min(bars.length - 1, Math.max(0, barRef.current));
-              // the playhead only ever moves a little between ticks, so walk
-              // from where it was instead of searching the whole song
-              while (i > 0 && seconds < bars[i].start) i--;
-              while (i < bars.length - 1 && seconds >= bars[i].end) i++;
-              const bt = bars[i];
-              const frac = bt.end > bt.start ? (seconds - bt.start) / (bt.end - bt.start) : 0;
-              const st = Math.max(0, Math.min(15, Math.floor(frac * 16)));
-              if (barRef.current !== i) { barRef.current = i; setBar(i); }
-              if (stepRef.current !== st) { stepRef.current = st; setStep(st); }
-            },
-          });
-        }
-
-        const tr = transportRef.current;
-        tr.setPerformance(perfRef.current);
-        tr.setLooping(true);
-        tr.start(seekSecondsRef.current);
-      } catch (err) {
-        console.error('Audio playback error:', err);
-        setAudioLoading(false);
-        setPlaying(false);
-        showToast("Couldn't start audio. Please try again.");
-      }
-    })();
-
+    const player = new SongPlayer(state => {
+      perfRef.current = state.performance ?? null;
+      setPlayerState(state);
+    }, seconds => {
+      seekSecondsRef.current = seconds;
+      const bars = player.snapshot.performance?.bars;
+      if (!bars?.length) return;
+      let i = Math.min(bars.length - 1, Math.max(0, barRef.current));
+      while (i > 0 && seconds < bars[i].start) i--;
+      while (i < bars.length - 1 && seconds >= bars[i].end) i++;
+      const bt = bars[i];
+      const frac = bt.end > bt.start ? (seconds - bt.start) / (bt.end - bt.start) : 0;
+      const st = Math.max(0, Math.min(15, Math.floor(frac * 16)));
+      if (barRef.current !== i) { barRef.current = i; setBar(i); }
+      if (stepRef.current !== st) { stepRef.current = st; setStep(st); }
+    });
+    playerRef.current = player;
+    player.configure(songRef.current);
     return () => {
-      alive = false;
-      transportRef.current?.stop();
-      stopAudio();
+      player.dispose();
+      if (playerRef.current === player) playerRef.current = null;
+      exportAbortRef.current?.abort();
+      if (toastTimerRef.current) window.clearTimeout(toastTimerRef.current);
     };
-  }, [playing]);
+  }, []);
+
+  useLayoutEffect(() => {
+    playerRef.current?.configure(song);
+  }, [song]);
 
   // Accepts a plain Track: the sheet's tracks always carry an instrumentId at
   // runtime, but the stored type keeps it optional for older saved songs.
@@ -379,23 +342,10 @@ export default function App() {
     fn: (s: SongSheet) => SongSheet,
     scope?: { tier: 0 | 1 | 2; regions?: string[] } | { tier: 3; tracks?: string[] } | { tier: 'none' }
   ) => {
-    setSong(s => {
-      const next = fn(s);
-      if (scope && scope.tier === 3) {
-        if (transportRef.current && scope.tracks) {
-          for (const trackId of scope.tracks) {
-            const t = next.tracks.find(tr => tr.id === trackId);
-            if (t) {
-              transportRef.current.setTrackVolume(t.id, (t as any).volume ?? 0.85);
-              transportRef.current.setTrackMute(t.id, !!t.muted);
-              transportRef.current.setTrackPan(t.id, (t as any).pan ?? stereoField.resolveInstrumentPanNormalized(t.instrumentId ?? t.instrument));
-              transportRef.current.setTrackSolo(t.id, !!(t as any).solo);
-            }
-          }
-        }
-      }
-      return next;
-    });
+    // Mix edits also produce a new immutable playback snapshot. Re-rendering
+    // finishes before that version resumes, so UI and audio cannot disagree.
+    void scope;
+    setSong(fn);
   };
   const playheadPercent = Math.min(100, Math.max(0, ((bar * 16 + step) / (totalBars * 16)) * 100));
 
@@ -519,9 +469,11 @@ export default function App() {
         <div className="flex items-stretch gap-2.5 select-none mb-5">
           {/* Play/Pause button */}
           <button
-            onClick={() => setPlaying(p => !p)}
-            disabled={audioLoading}
-            aria-label={playing ? 'Pause' : 'Play'}
+            onClick={() => { playerRef.current?.configure(songRef.current); playerRef.current?.toggle(); }}
+            disabled={playerStatus === 'compiling'}
+            aria-label={playbackLabel}
+            aria-busy={audioLoading}
+            aria-pressed={playing}
             className="flex items-center justify-center transition-transform active:scale-95 rounded shrink-0 self-stretch cursor-pointer relative"
             style={{
               width: 52,
@@ -529,22 +481,19 @@ export default function App() {
               color: 'var(--ground)',
               opacity: audioLoading ? 0.75 : 1,
             }}
-            title={
-              audioLoading
-                ? 'Loading sounds…'
-                : playing
-                ? 'Pause (Space)'
-                : 'Play (Space)'
-            }
+            title={audioLoading && playerStatus !== 'compiling' ? `${playbackLabel} — click to cancel` : playbackLabel}
           >
             {audioLoading ? (
-              <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+              <div aria-hidden="true" className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
             ) : playing ? (
               <PauseIcon size={18} />
             ) : (
               <PlayIcon size={18} />
             )}
           </button>
+
+          <span className="sr-only" role="status" aria-live="polite">{playbackLabel}</span>
+          {playerState.composition === song && playerState.error && <div role="alert" className="text-xs self-center">{playerState.error}</div>}
 
           {/* Scrubber & Section Structure Timeline */}
           <div className="flex-1 flex flex-col justify-between gap-1.5 min-w-0">

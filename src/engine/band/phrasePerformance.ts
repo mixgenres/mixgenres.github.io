@@ -16,6 +16,7 @@ import type { ImprovisationGrammar } from '../../data/styles/schema';
 
 export interface PhraseState {
   previousMidi?: number;
+  previousVoicing?: number[];
   previousPc?: number;
   previousTime?: number;
   previousAccent?: number;
@@ -84,7 +85,7 @@ function degreePc(chord: string, degree: number, theory: GenreTheoryProfile): nu
   const key = chordScaleKey(parsed.quality as ChordQuality);
   const mode = (key ? theory.chordScales[key] : undefined) ?? theory.defaultScale;
   const pcs = scalePcsForMode(mode, parsed.rootPc);
-  const idx = Math.max(0, Math.min(6, Math.round(degree) - 1));
+  const idx = ((Math.round(degree) - 1) % pcs.length + pcs.length) % pcs.length;
   return pcs[idx] ?? parsed.rootPc;
 }
 
@@ -106,7 +107,7 @@ function chordTonePcsWithQuality(chord: string): number[] {
 function nearestMidi(pc: number, target: number, low: number, high: number): number {
   let best = Math.max(low, Math.min(high, target));
   let bestDist = Infinity;
-  for (let oct = -6; oct <= 6; oct++) {
+  for (let oct = Math.ceil((low - pc) / 12); oct <= Math.floor((high - pc) / 12); oct++) {
     const m = pc + 12 * oct;
     if (m < low || m > high) continue;
     const d = Math.abs(m - target);
@@ -194,13 +195,13 @@ function stateTarget(ctx: PhraseContext, target: number, center: number, low: nu
   return nearestMidi(target % 12, ctx.statePreviousMidi ?? center, low, high);
 }
 
-function chordVoicing(ctx: PhraseContext, _index: number): number[] {
+function chordVoicing(ctx: PhraseContext, state: PhraseState): number[] {
   const parsed = parseChord(ctx.chord);
   const tones = chordTonePcsWithQuality(ctx.chord);
   const guide = parsed.guideTones?.map(x => (parsed.rootPc + x) % 12) ?? [];
   const tension = parsed.tensions?.map(x => (parsed.rootPc + x) % 12) ?? [];
   const voicing = ctx.hybridTheory.harmony.voicing;
-  const poly = Math.max(1, Math.min(ctx.profile.capabilities.polyphony, 4));
+  const poly = Math.max(1, ctx.profile.capabilities.polyphony);
   const base = Math.max(ctx.profile.capabilities.lowMidi, Math.min(ctx.profile.capabilities.highMidi, ctx.profile.capabilities.comfortableLowMidi + (voicing === 'power' ? 4 : 10)));
   let pcs: number[];
   if (voicing === 'power') pcs = [parsed.rootPc, (parsed.rootPc + 7) % 12, parsed.rootPc];
@@ -215,25 +216,20 @@ function chordVoicing(ctx: PhraseContext, _index: number): number[] {
   const out: number[] = [];
   const spacing = voicing === 'open' || voicing === 'drop-two' ? 7 : 4;
   for (let i = 0; i < Math.min(poly, pcs.length); i++) {
-    const target = base + i * spacing + (voicing === 'montuno' || voicing === 'yumba' ? 7 : 0);
+    const target = (state.previousVoicing?.[i] ?? base + i * spacing + (voicing === 'montuno' || voicing === 'yumba' ? 7 : 0));
     out.push(nearestMidi(pcs[i], target, ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi));
   }
-  if (ctx.nextChord && ctx.phrasePosition > 0.72 && out.length) {
-    const nextParsed = parseChord(ctx.nextChord);
-    const targetPc = nextParsed.guideTones?.length ? (nextParsed.rootPc + nextParsed.guideTones[0]) % 12 : nextParsed.rootPc;
-    const top = out[out.length - 1];
-    const target = nearestMidi(targetPc, top, ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi);
-    if (Math.abs(target - top) <= 7) out[out.length - 1] = target;
-  }
-  return Array.from(new Set(out));
+  state.previousVoicing = Array.from(new Set(out)).sort((a, b) => a - b);
+  return state.previousVoicing;
 }
 
 export function realizeMidi(ctx: PhraseContext, index: number, total: number, state: PhraseState): number[] {
+  ctx = { ...ctx, statePreviousMidi: state.previousMidi };
   const d = ctx.profile.instrumentId.toLowerCase();
   if (ctx.profile.family === 'membrane' || ctx.profile.family === 'kit' || ctx.profile.family === 'metal-wood-percussion' || ctx.profile.family === 'body-percussion' || voiceProfile(ctx.profile.instrumentId).role === 'perc') return [60];
   if (!ctx.soloist && (voiceProfile(ctx.profile.instrumentId).role === 'bass' || d.includes('bass') || d === 'upright-bass' || d.includes('tuba'))) return [bassMidi(ctx, index, total)];
   const melodicRole = /^(lead|melody|counterline|voice)$/.test(ctx.role);
-  if (!ctx.soloist && !melodicRole && (ctx.profile.family === 'keyboard' || ctx.profile.family === 'plucked-string' && ctx.profile.capabilities.polyphony > 1 || ctx.pattern.roles.includes('harmony') || /piano|organ|rhodes|guitar|bandoneon|accordion/.test(d))) return chordVoicing(ctx, index);
+  if (!ctx.soloist && !melodicRole && (ctx.profile.family === 'keyboard' || ctx.profile.family === 'plucked-string' && ctx.profile.capabilities.polyphony > 1 || ctx.pattern.roles.includes('harmony') || /piano|organ|rhodes|guitar|bandoneon|accordion/.test(d))) return chordVoicing(ctx, state);
 
   const scale = ctx.soloist && ctx.soloGrammar?.scaleMode
     ? scalePcsForMode(ctx.soloGrammar.scaleMode, rootPc(ctx.chord))

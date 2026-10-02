@@ -22,9 +22,7 @@ export const FOLK_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -158,9 +156,7 @@ export const FOLK_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -301,9 +297,7 @@ export const FOLK_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -452,9 +446,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "3/4",
           "cycleLength": 1,
           "subdivisions": 6,
@@ -572,9 +564,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "3/4",
           "cycleLength": 1,
           "subdivisions": 6,
@@ -721,9 +711,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "6/8",
           "cycleLength": 1,
           "subdivisions": 6,
@@ -869,9 +857,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "2/4",
           "cycleLength": 1,
           "subdivisions": 4,
@@ -999,9 +985,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 8,
@@ -1168,9 +1152,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
             "harmony"
           ],
@@ -1303,11 +1285,7 @@ export const FOLK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "percussion",
-            "guitar"
-          ],
+          "instruments": ["drums", "percussion", "guitar"],
           "compatibleRoles": [
             "pulse",
             "rhythm-guitar",
@@ -1487,18 +1465,16 @@ export const FOLK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             "phrase"
           ],
           "roles": [
-            "acoustic-guitar"
+            "guitar"
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "acoustic-guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
-            "acoustic-guitar"
+            "guitar"
           ],
           "compatibleInstruments": [
-            "acoustic-guitar"
+            "guitar"
           ],
           "canCrossRole": true,
           "meter": "4/4",
@@ -1678,7 +1654,7 @@ export const FOLK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           "tags": [
             "folk",
             "old-time",
-            "fiddle"
+            "violin"
           ],
           "scopes": [
             "measure"
@@ -1688,9 +1664,7 @@ export const FOLK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "violin"
-          ],
+          "instruments": ["violin"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -1839,9 +1813,7 @@ export const FOLK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "compatibleRoles": [
             "bass"
           ],
@@ -1991,9 +1963,7 @@ export const FOLK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -2150,9 +2120,7 @@ export const FOLK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "compatibleRoles": [
             "bass"
           ],
@@ -2297,18 +2265,16 @@ export const FOLK_WORLD_PATTERNS_ROLEPATTERN: MusicalPattern[] = [
             "phrase"
           ],
           "roles": [
-            "acoustic-guitar"
+            "guitar"
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "acoustic-guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
-            "acoustic-guitar"
+            "guitar"
           ],
           "compatibleInstruments": [
-            "acoustic-guitar"
+            "guitar"
           ],
           "canCrossRole": true,
           "meter": "6/8",
@@ -2456,9 +2422,7 @@ export const FOLK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
             "harmony",
             "texture"

@@ -12,7 +12,7 @@ export function enrichInstrumentPhysics(d: InstrumentDef): InstrumentDef {
   const isStruckAcousticString = id === 'piano' || id === 'dulcimer' || id === 'celeste';
 
   const bodyConstruction = d.bodyConstruction ?? (d.family === 'plucked'
-    ? (/electric|overdrive|distortion|pick-bass|slap-bass|sub-bass/i.test(id) ? 'solid-electric' : 'wood-box')
+    ? (/electric|overdrive|distortion/i.test(id) ? 'solid-electric' : 'wood-box')
     : undefined);
 
   // Never invent a generic GM drum kit for arbitrary unpitched/effect objects.

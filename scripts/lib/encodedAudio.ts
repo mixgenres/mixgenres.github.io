@@ -1,12 +1,20 @@
-import { execFileSync } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 
 /** Loudness of the decoded export, including encoder peak trim. Not a whole-song target. */
 export function measureEncodedAudio(bytes: Uint8Array) {
-  const metadata = JSON.parse(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'stream=codec_name,sample_rate,channels,duration', '-of', 'json', '-i', 'pipe:0'], { input: bytes, maxBuffer: 1024 * 1024 }).toString());
+  const probe = spawnSync('ffprobe', ['-v', 'error', '-show_entries', 'stream=codec_name,sample_rate,channels,duration', '-of', 'json', '-i', 'pipe:0'], {
+    input: bytes, maxBuffer: 1024 * 1024, encoding: 'utf8',
+  });
+  // ffprobe may stop reading once it has enough stream headers and close stdin
+  // early. Node reports that successful probe as EPIPE; trust the metadata only
+  // when ffprobe still exited successfully and produced parseable JSON.
+  if (probe.status !== 0 || (probe.error && probe.error.code !== 'EPIPE')) {
+    throw new Error(`ffprobe failed: ${probe.error ?? probe.stderr}`);
+  }
+  const metadata = JSON.parse(probe.stdout);
   // Use spawnSync so stderr is captured even on a successful ffmpeg process.
   return { metadata, ...loudness(bytes) };
 }
-import { spawnSync } from 'node:child_process';
 function loudness(bytes: Uint8Array) {
   const result = spawnSync('ffmpeg', ['-hide_banner', '-nostats', '-i', 'pipe:0', '-af', 'ebur128=peak=true', '-f', 'null', '-'], { input: bytes, maxBuffer: 4 * 1024 * 1024 });
   if (result.error || result.status !== 0) throw new Error(`Encoded loudness measurement failed: ${result.error ?? result.stderr.toString().slice(-500)}`);

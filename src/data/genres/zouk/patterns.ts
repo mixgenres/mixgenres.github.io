@@ -23,9 +23,7 @@ export const ZOUK_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -168,9 +166,7 @@ export const ZOUK_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion"
-          ],
+          "instruments": ["percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -425,9 +421,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "percussion"
-          ],
+          "instruments": ["percussion"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -592,10 +586,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "keys",
-            "synth"
-          ],
+          "instruments": ["keys", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -728,9 +719,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -834,7 +823,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           "description": "Punchy Kassav-style brass horn section stabs",
           "tags": [
             "zouk",
-            "brass",
+            "horn-section",
             "horns",
             "kassav",
             "antilles"
@@ -844,14 +833,11 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
           "roles": [
             "lead",
-            "brass"
+            "horn-section"
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "trumpet",
-            "brass"
-          ],
+          "instruments": ["trumpet", "horn-section"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -985,10 +971,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar",
-            "keys"
-          ],
+          "instruments": ["guitar", "keys"],
           "compatibleRoles": [
             "harmony"
           ],
@@ -1154,11 +1137,7 @@ export const ZOUK_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "percussion",
-            "bass"
-          ],
+          "instruments": ["drums", "percussion", "bass"],
           "compatibleRoles": [
             "pulse",
             "rhythm-guitar",
@@ -1338,9 +1317,7 @@ export const ZOUK_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "synth"
-          ],
+          "instruments": ["synth"],
           "compatibleRoles": [
             "synth"
           ],
@@ -1556,10 +1533,7 @@ export const ZOUK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking", "groove"],
-          "instruments": [
-            "bass",
-            "synth"
-          ],
+          "instruments": ["bass", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1707,11 +1681,7 @@ export const ZOUK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "electric-guitar",
-            "guitar",
-            "keys"
-          ],
+          "instruments": ["guitar", "guitar", "keys"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1847,9 +1817,7 @@ export const ZOUK_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "compatibleRoles": [
             "bass"
           ],
@@ -2016,9 +1984,7 @@ export const ZOUK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "synth"
-          ],
+          "instruments": ["synth"],
           "compatibleRoles": [
             "synth"
           ],
@@ -2181,9 +2147,7 @@ export const ZOUK_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "synth"
-          ],
+          "instruments": ["synth"],
           "compatibleRoles": [
             "synth",
             "lead"
@@ -2359,10 +2323,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar",
-            "keys"
-          ],
+          "instruments": ["guitar", "keys"],
           "compatibleRoles": [
             "harmony",
             "texture"
@@ -2587,11 +2548,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "comping"],
-          "instruments": [
-            "drums",
-            "percussion",
-            "guitar"
-          ],
+          "instruments": ["drums", "percussion", "guitar"],
           "compatibleRoles": [
             "pulse",
             "harmony",
@@ -2818,10 +2775,7 @@ export const ZOUK_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "phrase"],
-          "instruments": [
-            "guitar",
-            "keys"
-          ],
+          "instruments": ["guitar", "keys"],
           "compatibleRoles": [
             "harmony",
             "lead"

@@ -7,13 +7,7 @@ const STYLE_4: GenreStyleDefinition = {
         "origin": "South Africa / Angola",
         "era": "2000s–Present",
         "description": "Steady • 4/4 • Hypnotic\nDeep electronic",
-        "characteristicInstruments": [
-          "drums",
-          "bass",
-          "synth",
-          "hand-percussion",
-          "piano"
-        ],
+        "characteristicInstruments": ["drums", "bass", "synth", "hand-percussion", "piano"],
         "preferredMeters": [
           "4/4"
         ],
@@ -80,13 +74,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Nigeria / Ghana / Pan-African",
         "era": "2010s–Present",
         "description": "Upbeat • 4/4 Syncopated • Bright\nPolished",
-        "characteristicInstruments": [
-          "drums",
-          "bass",
-          "acoustic-guitar",
-          "synth",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["drums", "bass", "guitar", "synth", "hand-percussion"],
         "preferredMeters": [
           "4/4"
         ],
@@ -154,13 +142,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Lagos, Nigeria",
         "era": "1970s–1980s",
         "description": "Polyrhythmic • Big Band • Foundation\nFela's",
-        "characteristicInstruments": [
-          "drums",
-          "bass",
-          "electric-guitar",
-          "brass",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["drums", "bass", "guitar", "horn-section", "hand-percussion"],
         "preferredMeters": [
           "4/4"
         ],
@@ -227,13 +209,7 @@ const STYLE_7: GenreStyleDefinition = {
         "origin": "Lagos, Nigeria / London",
         "era": "2016–Present",
         "description": "Experimental • Chill • Eclectic\nLo-fi West",
-        "characteristicInstruments": [
-          "synth",
-          "bass",
-          "drums",
-          "acoustic-guitar",
-          "synth"
-        ],
+        "characteristicInstruments": ["synth", "bass", "drums", "guitar", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -300,13 +276,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "South Africa",
         "era": "2018–Present",
         "description": "Driving • 4/4 Log Drum •",
-        "characteristicInstruments": [
-          "drums",
-          "bass",
-          "piano",
-          "synth",
-          "shaker"
-        ],
+        "characteristicInstruments": ["drums", "bass", "piano", "synth", "shaker"],
         "preferredMeters": [
           "4/4"
         ],
@@ -373,13 +343,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "Durban, South Africa",
         "era": "2012–Present",
         "description": "Raw • Heavy Percussion • Dark\nDurban",
-        "characteristicInstruments": [
-          "drums",
-          "sub-bass",
-          "synth",
-          "hand-percussion",
-          "sampler"
-        ],
+        "characteristicInstruments": ["drums", "synth", "synth", "hand-percussion", "sampler"],
         "preferredMeters": [
           "4/4"
         ],
@@ -445,13 +409,7 @@ const STYLE_5: GenreStyleDefinition = {
         "origin": "Ghana / Nigeria",
         "era": "1950s–Present",
         "description": "Bouncy • Bright Guitars • Horns\nFoundational",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "bass",
-          "drums",
-          "brass",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "horn-section", "hand-percussion"],
         "preferredMeters": [
           "4/4"
         ],
@@ -525,13 +483,7 @@ const STYLE_6: GenreStyleDefinition = {
         "origin": "Sierra Leone / Ghana / Nigeria",
         "era": "1920s–1960s",
         "description": "Acoustic • Laid Back • Folk\nRaw",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "hand-percussion",
-          "bass",
-          "synth",
-          "drums"
-        ],
+        "characteristicInstruments": ["guitar", "hand-percussion", "bass", "synth", "drums"],
         "preferredMeters": [
           "4/4"
         ],

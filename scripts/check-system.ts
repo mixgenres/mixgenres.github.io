@@ -1,42 +1,62 @@
 import { spawnSync } from 'node:child_process';
-import { mkdirSync } from 'node:fs';
-import { reportMetadata } from './lib/auditReport';
-import { buildSystemView, type CheckResult } from './lib/systemView';
+import { existsSync, readFileSync } from 'node:fs';
+import { reportMetadata, writeReport } from './lib/auditReport';
 
-const full = process.argv.includes('--full'), audio = full || process.argv.includes('--audio'), view = process.argv.includes('--report-only');
-const steps: Array<{ id: string; args: string[]; report?: string; enabled: boolean }> = [
-  { id: 'types', args: ['node_modules/typescript/bin/tsc', '--noEmit'], enabled: true },
-  { id: 'data-boundary', args: ['scripts/audit-data-boundary.mjs'], enabled: true },
-  ...[
-    ['integrity', 'engine-integrity-audit.ts', 'engine-integrity-audit.json'],
-    ['style-provenance', 'audit-all-styles.ts', 'all-styles-audit.json'],
-    ['performance', 'audit-style-performance.ts', 'style-performance-audit.json'],
-    ['instrument-paths', 'audit-instrument-paths.ts', 'instrument-path-audit.json'],
-    ['solos', 'solo-performance.test.ts'], ['sound-metadata', 'sound-metadata.test.ts'],
-    ['mix-regression', 'mix-regression.test.ts'], ['mix-settings', 'audit-mix.ts', 'mix-audit.json'],
-  ].map(([id, file, report]) => ({ id, args: ['--import', 'tsx', ...(file.endsWith('mix-regression.test.ts') ? ['--test'] : []), `scripts/${file}`], report, enabled: true })),
-  { id: 'instrument-pcm', args: ['--import', 'tsx', 'scripts/audit-instrument-render.ts'], report: 'instrument-render-audit.json', enabled: audio },
-  { id: 'audio-pcm', args: ['--import', 'tsx', 'scripts/audio-regression-harness.ts', ...(full ? ['--all-styles'] : [])], report: 'audio-regression.json', enabled: audio },
-];
-const results: CheckResult[] = [];
-mkdirSync('audit', { recursive: true });
-if (!view) for (const step of steps) {
-  if (!step.enabled) { results.push({ id: step.id, status: 'NOT_RUN', seconds: 0, command: '', sourceFingerprint: reportMetadata().sourceFingerprint, output: 'Run npm run check:audio or check:full for PCM coverage.', report: step.report }); continue; }
-  console.log(`Checking ${step.id}…`);
-  const source = reportMetadata().sourceFingerprint;
-  const started = performance.now();
-  const result = spawnSync(process.execPath, step.args, { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024, timeout: 30 * 60 * 1000 });
-  const output = [result.stdout, result.stderr, result.error?.message].filter(Boolean).join('\n');
-  const row: CheckResult = { id: step.id, status: result.status === 0 && !result.error ? 'PASS' : 'FAIL', seconds: (performance.now() - started) / 1000, sourceFingerprint: source, command: `node ${step.args.join(' ')}`, output, report: step.report };
-  results.push(row); console.log(`${row.status} ${row.id} (${row.seconds.toFixed(1)}s)${row.status === 'FAIL' ? '\n' + output : ''}`);
-  buildSystemView(reportMetadata(), results);
+type CheckResult = { id: string; status: 'PASS' | 'FAIL'; seconds: number; output?: string; reused?: boolean };
+const audio = process.argv.includes('--audio') || process.argv.includes('--full');
+const metadata = reportMetadata();
+if (process.argv.includes('--report-only')) {
+  if (!existsSync('audit/system-report.json')) {
+    console.log('No saved audit report. Run npm run check to create one.');
+  } else {
+    const report = JSON.parse(readFileSync('audit/system-report.json', 'utf8'));
+    const stale = report.sourceFingerprint !== metadata.sourceFingerprint;
+    console.log(`${stale ? 'STALE' : report.status} ${report.scope}: ${report.checks.length} checks; ${report.generatedAt}`);
+    for (const check of report.checks.filter((x: CheckResult) => x.status === 'FAIL')) console.log(`FAIL ${check.id}\n${check.output}`);
+    if (stale || report.status === 'FAIL') process.exitCode = 1;
+  }
+} else {
+  const script = (file: string, args: string[] = []) => ['--import', 'tsx', `scripts/${file}`, ...args];
+  const fastSteps = [
+    { id: 'data-boundary', args: ['scripts/audit-data-boundary.mjs'] },
+    { id: 'catalog', args: script('audit-catalog.ts') },
+    { id: 'sound-resolution', args: script('sound-metadata.test.ts') },
+    { id: 'solo-behavior', args: script('solo-performance.test.ts') },
+    { id: 'regressions', args: ['--import', 'tsx', '--test', 'scripts/musical-fidelity.test.ts', 'scripts/mix-regression.test.ts', 'scripts/dynamic-mix.test.ts', 'scripts/playback-regression.test.ts', 'scripts/instrument-catalog-migration.test.ts'] },
+  ];
+  const audioSteps = [
+      { id: 'render-regressions', args: ['--import', 'tsx', '--test', 'scripts/render-regression.test.ts'] },
+      { id: 'instrument-renderers', args: script('audit-instrument-render.ts') },
+      { id: 'ensemble-export', args: script('audio-regression-harness.ts') },
+  ];
+  const checks: CheckResult[] = [];
+  if (audio) {
+    try {
+      const previous = JSON.parse(readFileSync('audit/system-report.json', 'utf8'));
+      if (previous.status === 'PASS' && previous.sourceFingerprint === metadata.sourceFingerprint &&
+        fastSteps.every(step => previous.checks.some((check: CheckResult) => check.id === step.id && check.status === 'PASS'))) {
+        checks.push(...previous.checks.filter((check: CheckResult) => fastSteps.some(step => step.id === check.id)).map((check: CheckResult) => ({ ...check, reused: true })));
+        console.log('PASS structural + behavior (unchanged sources; reused)');
+      }
+    } catch { /* No current baseline: run fast gates first. */ }
+  }
+  const steps = [...(checks.length ? [] : fastSteps), ...(audio ? audioSteps : [])];
+  for (const step of steps) {
+    const started = performance.now();
+    const result = spawnSync(process.execPath, step.args, { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024, timeout: audio ? 10 * 60_000 : 60_000 });
+    const status = result.status === 0 && !result.error ? 'PASS' : 'FAIL';
+    const row: CheckResult = { id: step.id, status, seconds: Number(((performance.now() - started) / 1000).toFixed(1)) };
+    if (status === 'FAIL') row.output = [result.stdout, result.stderr, result.error?.message].filter(Boolean).join('\n').trim();
+    checks.push(row);
+    console.log(`${status} ${row.id} (${row.seconds}s)`);
+    if (row.output) console.log(row.output);
+    // Audio probes are useful only after structural and behavioral gates pass.
+    if (status === 'FAIL') break;
+  }
+  const changed = metadata.sourceFingerprint !== reportMetadata().sourceFingerprint;
+  const report = { ...metadata, status: checks.some(x => x.status === 'FAIL') || changed ? 'FAIL' : 'PASS', scope: audio ? 'structural + targeted PCM' : 'structural + behavior', checks,
+    ...(changed ? { error: 'Sources changed during the run; rerun checks.' } : {}) };
+  writeReport('system-report', report);
+  console.log(`${report.status} ${report.scope}; audit/system-report.json`);
+  if (report.status === 'FAIL') process.exitCode = 1;
 }
-// Refreshing a view must preserve the last run's gate outcomes.
-if (view) {
-  const { readFileSync } = await import('node:fs');
-  try { results.push(...JSON.parse(readFileSync('audit/system-report.json', 'utf8')).checks); }
-  catch { throw new Error('No previous system run. Run npm run check first.'); }
-}
-const report = buildSystemView(reportMetadata(), results);
-console.log(`${report.status}: audit/system-report.html and audit/system-report.md`);
-if (results.some(r => r.status === 'FAIL') || report.findings.some(f => f.severity === 'error')) process.exitCode = 1;

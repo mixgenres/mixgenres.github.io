@@ -7,13 +7,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "New York / Kansas City / Chicago",
         "era": "1930s–1940s",
         "description": "Four-on-the-Floor • Horn Riffs • Lindy",
-        "characteristicInstruments": [
-          "brass",
-          "clarinet",
-          "piano",
-          "upright-bass",
-          "drums"
-        ],
+        "characteristicInstruments": ["horn-section", "clarinet", "piano", "upright-bass", "drums"],
         "preferredMeters": [
           "4/4"
         ],
@@ -82,13 +76,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Paris, France",
         "era": "1930s–1950s",
         "description": "La Pompe • Selmer Guitars •",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "violin",
-          "upright-bass",
-          "clarinet",
-          "alto-sax"
-        ],
+        "characteristicInstruments": ["guitar", "violin", "upright-bass", "clarinet", "alto-sax"],
         "preferredMeters": [
           "4/4"
         ],
@@ -167,13 +155,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "Los Angeles / Kansas City",
         "era": "Late 1940s–1950s",
         "description": "Honking Tenor Sax • Boogying Bass",
-        "characteristicInstruments": [
-          "tenor-sax",
-          "brass",
-          "piano",
-          "upright-bass",
-          "drums"
-        ],
+        "characteristicInstruments": ["tenor-sax", "horn-section", "piano", "upright-bass", "drums"],
         "preferredMeters": [
           "4/4"
         ],

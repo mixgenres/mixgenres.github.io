@@ -46,25 +46,25 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
         vintage: { saturation: 0.15 } // SSL Bus Comp glue
       },
       instruments: {
-        'Electric Guitar': {
+        'guitar': {
           distortion: { drive: 0.95, type: 'fuzz', tone: 6000, circuitModel: 'Boss HM-2 Heavy Metal pedal. Maxed out knobs (Swedish Chainsaw). Asymmetric diode clipping creating dense square waves.' },
           eq: { highPassCutoff: 120, midPeak: { freq: 1000, gain: 10.0, q: 1.5 }, lowPassCutoff: 8000 }
         },
-        'Electric Bass': {
+        'bass': {
           distortion: { drive: 0.75, type: 'digital', tone: 4000, circuitModel: 'Darkglass B7K CMOS parallel distortion. Gritty upper-mid clank mixed with clean sub-bass.' },
           eq: { lowShelf: { freq: 60, gain: 4.0 }, midPeak: { freq: 2500, gain: 6.0, q: 2.0 } }
         },
-        'Drum Kit': {
+        'drums': {
           dynamics: { ratio: 8.0, threshold: -20, attack: 1, release: 15 }, // Fast FET compression (1176 style) for transient snap
           eq: { highShelf: { freq: 8000, gain: 4.0 } }
         }
       }
     },
     sections: [
-      { id: 'Intro', energy: 'medium', instruments: ['Distortion Guitar', 'Bass', 'Drums'], patterns: ['Blast Beat'] },
-      { id: 'Verse', energy: 'high', instruments: ['Distortion Guitar', 'Bass', 'Drums'], patterns: ['Tremolo Picking'] },
-      { id: 'Chorus', energy: 'peak', instruments: ['Distortion Guitar', 'Bass', 'Drums'], patterns: ['Chainsaw Riff'] },
-      { id: 'Outro', energy: 'low', instruments: ['Distortion Guitar', 'Drums'], patterns: ['Slow Groove'] },
+      { id: 'Intro', energy: 'medium', instruments: ['guitar', 'bass', 'drums'], patterns: ['Blast Beat'] },
+      { id: 'Verse', energy: 'high', instruments: ['guitar', 'bass', 'drums'], patterns: ['Tremolo Picking'] },
+      { id: 'Chorus', energy: 'peak', instruments: ['guitar', 'bass', 'drums'], patterns: ['Chainsaw Riff'] },
+      { id: 'Outro', energy: 'low', instruments: ['guitar', 'drums'], patterns: ['Slow Groove'] },
     ],
   },
   'tech-death-modern': {
@@ -74,9 +74,9 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       eq: { highPassCutoff: 120, midPeak: { freq: 1500, gain: 3.5, q: 1.5 } }
     },
     sections: [
-      { id: 'Intro', energy: 'high', instruments: ['Distortion Guitar', 'Bass', 'Drums'], patterns: ['Polyrhythmic Riff'] },
-      { id: 'Verse', energy: 'high', instruments: ['Distortion Guitar', 'Bass', 'Drums'], patterns: ['Sweep Picking'] },
-      { id: 'Breakdown', energy: 'peak', instruments: ['Distortion Guitar', 'Bass', 'Drums'], patterns: ['Odd Time Groove'] },
+      { id: 'Intro', energy: 'high', instruments: ['guitar', 'bass', 'drums'], patterns: ['Polyrhythmic Riff'] },
+      { id: 'Verse', energy: 'high', instruments: ['guitar', 'bass', 'drums'], patterns: ['Sweep Picking'] },
+      { id: 'Breakdown', energy: 'peak', instruments: ['guitar', 'bass', 'drums'], patterns: ['Odd Time Groove'] },
     ],
   },
   'black-metal-traditional': {
@@ -86,8 +86,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       eq: { highPassCutoff: 200, highShelf: { freq: 6000, gain: 8.0 } }
     },
     sections: [
-      { id: 'Intro', energy: 'high', instruments: ['Distortion Guitar', 'Drums'], patterns: ['Tremolo Buzz'] },
-      { id: 'Verse', energy: 'peak', instruments: ['Distortion Guitar', 'Bass', 'Drums'], patterns: ['Cold Blast'] },
+      { id: 'Intro', energy: 'high', instruments: ['guitar', 'drums'], patterns: ['Tremolo Buzz'] },
+      { id: 'Verse', energy: 'peak', instruments: ['guitar', 'bass', 'drums'], patterns: ['Cold Blast'] },
     ],
   },
   'doom-sludge-metal': {
@@ -97,8 +97,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       eq: { lowShelf: { freq: 80, gain: 6.0 }, lowPassCutoff: 5000 }
     },
     sections: [
-      { id: 'Intro', energy: 'medium', instruments: ['Distortion Guitar', 'Bass', 'Drums'], patterns: ['Sludge Drone'] },
-      { id: 'Riff', energy: 'high', instruments: ['Distortion Guitar', 'Bass', 'Drums'], patterns: ['Heavy Sabbath Groove'] },
+      { id: 'Intro', energy: 'medium', instruments: ['guitar', 'bass', 'drums'], patterns: ['Sludge Drone'] },
+      { id: 'Riff', energy: 'high', instruments: ['guitar', 'bass', 'drums'], patterns: ['Heavy Sabbath Groove'] },
     ],
   },
   'classic-rock': {
@@ -108,9 +108,9 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       eq: { midPeak: { freq: 2500, gain: 2.5, q: 1.0 } }
     },
     sections: [
-      { id: 'Intro', energy: 'low', instruments: ['Electric Guitar', 'Bass', 'Drums'], patterns: ['Riff'] },
-      { id: 'Verse', energy: 'medium', instruments: ['Electric Guitar', 'Bass', 'Drums'], patterns: ['Four on Floor'] },
-      { id: 'Chorus', energy: 'high', instruments: ['Electric Guitar', 'Bass', 'Drums'], patterns: ['Driving Backbeat'] },
+      { id: 'Intro', energy: 'low', instruments: ['guitar', 'bass', 'drums'], patterns: ['Riff'] },
+      { id: 'Verse', energy: 'medium', instruments: ['guitar', 'bass', 'drums'], patterns: ['Four on Floor'] },
+      { id: 'Chorus', energy: 'high', instruments: ['guitar', 'bass', 'drums'], patterns: ['Driving Backbeat'] },
     ],
   },
   'punk-rock': {
@@ -120,8 +120,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       eq: { highPassCutoff: 100, midPeak: { freq: 3000, gain: 4.0, q: 1.2 } }
     },
     sections: [
-      { id: 'Intro', energy: 'high', instruments: ['Electric Guitar', 'Bass', 'Drums'], patterns: ['Fast Downpick'] },
-      { id: 'Verse', energy: 'high', instruments: ['Electric Guitar', 'Bass', 'Drums'], patterns: ['Punk Beat'] },
+      { id: 'Intro', energy: 'high', instruments: ['guitar', 'bass', 'drums'], patterns: ['Fast Downpick'] },
+      { id: 'Verse', energy: 'high', instruments: ['guitar', 'bass', 'drums'], patterns: ['Punk Beat'] },
     ],
   },
   'shoegaze': {
@@ -131,8 +131,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       spatial: { reverbMix: 0.8, reverbTime: 3.5, reverbType: 'reverse' }
     },
     sections: [
-      { id: 'Intro', energy: 'medium', instruments: ['Electric Guitar', 'Bass', 'Drums'], patterns: ['Wall of Sound'] },
-      { id: 'Chorus', energy: 'peak', instruments: ['Electric Guitar', 'Bass', 'Drums'], patterns: ['Glider Swirl'] },
+      { id: 'Intro', energy: 'medium', instruments: ['guitar', 'bass', 'drums'], patterns: ['Wall of Sound'] },
+      { id: 'Chorus', energy: 'peak', instruments: ['guitar', 'bass', 'drums'], patterns: ['Glider Swirl'] },
     ],
   },
   'techno-peak-time': {
@@ -142,8 +142,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       eq: { lowShelf: { freq: 50, gain: 4.0 } }
     },
     sections: [
-      { id: 'Intro', energy: 'medium', instruments: ['909 Kick', 'Hi-hat'], patterns: ['Four on Floor'] },
-      { id: 'Drop', energy: 'peak', instruments: ['909 Kick', 'Synth Bass', 'Clap'], patterns: ['Rumble Kick'] },
+      { id: 'Intro', energy: 'medium', instruments: ['drums', 'drums'], patterns: ['Four on Floor'] },
+      { id: 'Drop', energy: 'peak', instruments: ['drums', 'synth', 'drums'], patterns: ['Rumble Kick'] },
     ],
   },
   'dubstep-modern': {
@@ -153,8 +153,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       dynamics: { ratio: 10.0, threshold: -20, attack: 2, release: 30 }
     },
     sections: [
-      { id: 'Intro', energy: 'low', instruments: ['Sub Bass', 'Hi-hat'], patterns: ['Half-time'] },
-      { id: 'Drop', energy: 'peak', instruments: ['Growl Bass', 'Snare', 'Sub'], patterns: ['Wobble Heavy'] },
+      { id: 'Intro', energy: 'low', instruments: ['synth', 'drums'], patterns: ['Half-time'] },
+      { id: 'Drop', energy: 'peak', instruments: ['synth', 'drums', 'synth'], patterns: ['Wobble Heavy'] },
     ],
   },
   'synthwave': {
@@ -165,23 +165,20 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
         dynamics: { ratio: 4.0, threshold: -16, attack: 10, release: 200 } // Master bus pumping
       },
       instruments: {
-        'Synth Bass': {
-          distortion: { drive: 0.45, type: 'analog_console', tone: 2000, circuitModel: 'Overdriven Moog Ladder Filter. 24dB/octave analog clipping for fat, squelchy 16th notes.' },
-          eq: { lowShelf: { freq: 60, gain: 4.0 }, midPeak: { freq: 800, gain: -3.0, q: 1.0 } }
-        },
         'Drum Machine': {
           distortion: { drive: 0.5, type: 'digital', tone: 10000, circuitModel: 'LinnDrum / Oberheim DMX EPROM circuit. 8-bit non-linear compounding logic.' },
           vintage: { bitcrush: 8 }
         },
-        'Lead Synth': {
-          spatial: { reverbMix: 0.4, reverbTime: 3.0, reverbType: 'plate', delayMix: 0.35 }, // Lexicon 224 style expansive reverbs
-          distortion: { drive: 0.15, type: 'tape', tone: 8000, circuitModel: 'Roland RE-201 Space Echo preamp drive.' }
+        'synth': {
+          distortion: { drive: 0.45, type: 'analog_console', tone: 2000, circuitModel: 'Overdriven Moog Ladder Filter. 24dB/octave analog clipping for fat, squelchy 16th notes.' },
+          eq: { lowShelf: { freq: 60, gain: 4.0 }, midPeak: { freq: 800, gain: -3.0, q: 1.0 } },
+          spatial: { reverbMix: 0.4, reverbTime: 3.0, reverbType: 'plate', delayMix: 0.35 }
         }
       }
     },
     sections: [
-      { id: 'Intro', energy: 'low', instruments: ['Synth Arp', 'Synth Bass'], patterns: ['Retro 80s'] },
-      { id: 'Chorus', energy: 'high', instruments: ['Synth Lead', 'Synth Bass', 'Drums'], patterns: ['Gated Snare'] },
+      { id: 'Intro', energy: 'low', instruments: ['synth', 'synth'], patterns: ['Retro 80s'] },
+      { id: 'Chorus', energy: 'high', instruments: ['synth', 'synth', 'drums'], patterns: ['Gated Snare'] },
     ],
   },
   'boom-bap-classic': {
@@ -191,8 +188,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       vintage: { bitcrush: 12, saturation: 0.6 }
     },
     sections: [
-      { id: 'Intro', energy: 'low', instruments: ['Drums', 'Rhodes'], patterns: ['Swing Boom Bap'] },
-      { id: 'Verse', energy: 'medium', instruments: ['Drums', 'Bass', 'Rhodes'], patterns: ['Boom Bap Pocket'] },
+      { id: 'Intro', energy: 'low', instruments: ['drums', 'rhodes'], patterns: ['Swing Boom Bap'] },
+      { id: 'Verse', energy: 'medium', instruments: ['drums', 'bass', 'rhodes'], patterns: ['Boom Bap Pocket'] },
     ],
   },
   'trap-modern': {
@@ -202,23 +199,21 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
         distortion: { drive: 0.1, type: 'digital', tone: 20000, circuitModel: 'Fruity Soft Clipper. Shaves off 0dBFS peaks transparently, allowing 808s to dominate headroom.' }
       },
       instruments: {
-        '808 Bass': {
+        'synth': {
           distortion: { drive: 0.40, type: 'digital', tone: 2500, circuitModel: 'Wavefolder / Hard Clipper. Generates massive odd-harmonics so sub-bass cuts through phone speakers.' },
           eq: { lowShelf: { freq: 40, gain: 8.0 }, highPassCutoff: 20 }
         },
-        'Hi-hat': {
+        'drums': {
           vintage: { bitcrush: 12, wowFlutter: 0.3 }, // Cassette degradation for dark, rolling hats
-          eq: { lowPassCutoff: 12000 }
-        },
-        'Snare': {
+          eq: { lowPassCutoff: 12000 },
           dynamics: { ratio: 4.0, threshold: -12, attack: 5, release: 50 },
           spatial: { reverbMix: 0.15, reverbTime: 0.5, reverbType: 'plate' }
         }
       }
     },
     sections: [
-      { id: 'Intro', energy: 'low', instruments: ['808 Bass', 'Hi-hat'], patterns: ['Trap Roll'] },
-      { id: 'Drop', energy: 'peak', instruments: ['808 Bass', 'Snare', 'Hi-hat', 'Synth'], patterns: ['Heavy 808'] },
+      { id: 'Intro', energy: 'low', instruments: ['synth', 'drums'], patterns: ['Trap Roll'] },
+      { id: 'Drop', energy: 'peak', instruments: ['synth', 'drums', 'drums', 'synth'], patterns: ['Heavy 808'] },
     ],
   },
   'drill-uk': {
@@ -228,8 +223,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       dynamics: { ratio: 8.0, threshold: -18, attack: 5, release: 40 }
     },
     sections: [
-      { id: 'Intro', energy: 'low', instruments: ['808 Slide', 'Hi-hat'], patterns: ['Drill Slide'] },
-      { id: 'Drop', energy: 'peak', instruments: ['808 Slide', 'Snare', 'Hi-hat'], patterns: ['Syncopated Drill'] },
+      { id: 'Intro', energy: 'low', instruments: ['synth', 'drums'], patterns: ['Drill Slide'] },
+      { id: 'Drop', energy: 'peak', instruments: ['synth', 'drums', 'drums'], patterns: ['Syncopated Drill'] },
     ],
   },
   'lo-fi-chillhop': {
@@ -239,8 +234,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       eq: { lowPassCutoff: 5000, highPassCutoff: 100 }
     },
     sections: [
-      { id: 'Intro', energy: 'low', instruments: ['Rhodes', 'Vinyl Noise'], patterns: ['Laid Back'] },
-      { id: 'Groove', energy: 'medium', instruments: ['Rhodes', 'Bass', 'Drums'], patterns: ['Dilla Swing'] },
+      { id: 'Intro', energy: 'low', instruments: ['rhodes', 'sampler'], patterns: ['Laid Back'] },
+      { id: 'Groove', energy: 'medium', instruments: ['rhodes', 'bass', 'drums'], patterns: ['Dilla Swing'] },
     ],
   },
   'reggaeton-classic': {
@@ -250,8 +245,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       eq: { lowShelf: { freq: 60, gain: 6.0 } }
     },
     sections: [
-      { id: 'Intro', energy: 'low', instruments: ['Dembow Loop', 'Synth'], patterns: ['Dembow 3-3-2'] },
-      { id: 'Coro', energy: 'high', instruments: ['Dembow Loop', 'Sub Bass', 'Synth Lead'], patterns: ['Perreo Drive'] },
+      { id: 'Intro', energy: 'low', instruments: ['drums', 'synth'], patterns: ['Dembow 3-3-2'] },
+      { id: 'Coro', energy: 'high', instruments: ['drums', 'synth', 'synth'], patterns: ['Perreo Drive'] },
     ],
   },
   'salsa-dura': {
@@ -261,8 +256,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       vintage: { saturation: 0.4 }
     },
     sections: [
-      { id: 'Intro', energy: 'medium', instruments: ['Piano', 'Bass', 'Congas', 'Timbales'], patterns: ['Montuno'] },
-      { id: 'Montuno', energy: 'high', instruments: ['Piano', 'Bass', 'Congas', 'Timbales', 'Brass'], patterns: ['Tumbao'] },
+      { id: 'Intro', energy: 'medium', instruments: ['piano', 'bass', 'congas', 'timbales'], patterns: ['Montuno'] },
+      { id: 'Montuno', energy: 'high', instruments: ['piano', 'bass', 'congas', 'timbales', 'horn-section'], patterns: ['Tumbao'] },
     ],
   },
   'flamenco-traditional': {
@@ -272,8 +267,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       eq: { highPassCutoff: 120, midPeak: { freq: 4500, gain: 3.0, q: 1.5 } }
     },
     sections: [
-      { id: 'Falseta', energy: 'low', instruments: ['Flamenco Guitar'], patterns: ['Picado'] },
-      { id: 'Letra', energy: 'medium', instruments: ['Flamenco Guitar', 'Palmas', 'Cajón'], patterns: ['Rasgueado'] },
+      { id: 'Falseta', energy: 'low', instruments: ['guitar'], patterns: ['Picado'] },
+      { id: 'Letra', energy: 'medium', instruments: ['guitar', 'palmas', 'cajon'], patterns: ['Rasgueado'] },
     ],
   },
   'reggae-roots': {
@@ -283,8 +278,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       spatial: { reverbMix: 0.4, reverbTime: 2.5, reverbType: 'spring', delayMix: 0.5 }
     },
     sections: [
-      { id: 'Intro', energy: 'low', instruments: ['Bass', 'Drums', 'Guitar'], patterns: ['One Drop'] },
-      { id: 'Verse', energy: 'medium', instruments: ['Bass', 'Drums', 'Guitar', 'Organ'], patterns: ['Skank'] },
+      { id: 'Intro', energy: 'low', instruments: ['bass', 'drums', 'guitar'], patterns: ['One Drop'] },
+      { id: 'Verse', energy: 'medium', instruments: ['bass', 'drums', 'guitar', 'organ'], patterns: ['Skank'] },
     ],
   },
   'jazz-bebop': {
@@ -294,8 +289,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       spatial: { reverbMix: 0.15, reverbTime: 0.8, reverbType: 'room' }
     },
     sections: [
-      { id: 'Head', energy: 'medium', instruments: ['Upright Bass', 'Drums', 'Piano', 'Sax'], patterns: ['Walking Bass'] },
-      { id: 'Solo', energy: 'high', instruments: ['Upright Bass', 'Drums', 'Sax'], patterns: ['Swing Ride'] },
+      { id: 'Head', energy: 'medium', instruments: ['upright-bass', 'drums', 'piano', 'tenor-sax'], patterns: ['Walking Bass'] },
+      { id: 'Solo', energy: 'high', instruments: ['upright-bass', 'drums', 'tenor-sax'], patterns: ['Swing Ride'] },
     ],
   },
   'jazz-fusion': {
@@ -305,8 +300,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       dynamics: { ratio: 4.0, threshold: -16, attack: 10, release: 80 }
     },
     sections: [
-      { id: 'Intro', energy: 'medium', instruments: ['Slap Bass', 'Drums', 'Rhodes', 'Synth Lead'], patterns: ['Fusion Funk'] },
-      { id: 'Solo', energy: 'peak', instruments: ['Slap Bass', 'Drums', 'Synth Lead'], patterns: ['Odd Meter'] },
+      { id: 'Intro', energy: 'medium', instruments: ['bass', 'drums', 'rhodes', 'synth'], patterns: ['Fusion Funk'] },
+      { id: 'Solo', energy: 'peak', instruments: ['bass', 'drums', 'synth'], patterns: ['Odd Meter'] },
     ],
   },
   'blues-chicago': {
@@ -316,8 +311,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       eq: { midPeak: { freq: 1200, gain: 4.0, q: 1.0 } }
     },
     sections: [
-      { id: 'Intro', energy: 'low', instruments: ['Electric Guitar', 'Bass', 'Drums'], patterns: ['Shuffle'] },
-      { id: 'Solo', energy: 'peak', instruments: ['Electric Guitar', 'Bass', 'Drums'], patterns: ['Chicago Bend'] },
+      { id: 'Intro', energy: 'low', instruments: ['guitar', 'bass', 'drums'], patterns: ['Shuffle'] },
+      { id: 'Solo', energy: 'peak', instruments: ['guitar', 'bass', 'drums'], patterns: ['Chicago Bend'] },
     ],
   },
   'pop-modern': {
@@ -327,8 +322,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       eq: { highShelf: { freq: 10000, gain: 3.0 } }
     },
     sections: [
-      { id: 'Intro', energy: 'low', instruments: ['Piano', 'Drums'], patterns: ['Four on Floor'] },
-      { id: 'Chorus', energy: 'high', instruments: ['Synth Bass', 'Drums', 'Synth Lead'], patterns: ['Modern Pop'] },
+      { id: 'Intro', energy: 'low', instruments: ['piano', 'drums'], patterns: ['Four on Floor'] },
+      { id: 'Chorus', energy: 'high', instruments: ['synth', 'drums', 'synth'], patterns: ['Modern Pop'] },
     ],
   },
   'synthpop-80s': {
@@ -338,8 +333,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       spatial: { reverbMix: 0.25, reverbTime: 2.5, reverbType: 'hall' }
     },
     sections: [
-      { id: 'Intro', energy: 'low', instruments: ['Synth Bass', 'Synth Arp', 'Drums'], patterns: ['80s Pulse'] },
-      { id: 'Chorus', energy: 'high', instruments: ['Synth Lead', 'Synth Bass', 'Drums'], patterns: ['LinnDrum Groove'] },
+      { id: 'Intro', energy: 'low', instruments: ['synth', 'synth', 'drums'], patterns: ['80s Pulse'] },
+      { id: 'Chorus', energy: 'high', instruments: ['synth', 'synth', 'drums'], patterns: ['LinnDrum Groove'] },
     ],
   },
   'country-modern': {
@@ -349,8 +344,8 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       dynamics: { ratio: 3.0, threshold: -12, attack: 20, release: 150 }
     },
     sections: [
-      { id: 'Intro', energy: 'low', instruments: ['Acoustic Guitar', 'Bass', 'Drums'], patterns: ['Train Beat'] },
-      { id: 'Chorus', energy: 'high', instruments: ['Acoustic Guitar', 'Electric Guitar', 'Bass', 'Drums'], patterns: ['Nashville Two-Step'] },
+      { id: 'Intro', energy: 'low', instruments: ['guitar', 'bass', 'drums'], patterns: ['Train Beat'] },
+      { id: 'Chorus', energy: 'high', instruments: ['guitar', 'guitar', 'bass', 'drums'], patterns: ['Nashville Two-Step'] },
     ],
   },
   tango: {
@@ -361,27 +356,27 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
         eq: { highPassCutoff: 40, lowPassCutoff: 12000 }
       },
       instruments: {
-        'Bandoneón': {
+        'bandoneon': {
           distortion: { drive: 0.15, type: 'tube', tone: 4500, circuitModel: 'RCA 44 Ribbon Mic into tube preamp. Thickens the harsh reed transients into a warm, weeping midrange.' },
           eq: { midPeak: { freq: 2000, gain: 3.5, q: 1.2 } },
           spatial: { reverbMix: 0.1, reverbTime: 0.8, reverbType: 'room' }
         },
-        'Upright Bass': {
+        'upright-bass': {
           distortion: { drive: 0.2, type: 'tape', tone: 1000, circuitModel: 'Pushed magnetic tape. Saturates the low-end pizzicato attacks without clipping.' },
           eq: { lowShelf: { freq: 80, gain: 3.0 } }
         },
-        'Violin': {
+        'violin': {
           spatial: { reverbMix: 0.25, reverbTime: 1.4, reverbType: 'chamber' }, // Darker, larger acoustic space for strings
           eq: { highShelf: { freq: 6000, gain: -2.0 } }
         }
       }
     },
     sections: [
-      { id: 'Intro', energy: 'low', instruments: ['Piano', 'Bandoneón'], patterns: ['Marcato 4'] },
-      { id: 'A', energy: 'medium', instruments: ['Piano', 'Bandoneón', 'Upright Bass'], patterns: ['Síncopa'] },
-      { id: 'B', energy: 'high', instruments: ['Piano', 'Bandoneón', 'Upright Bass', 'Violin'], patterns: ['Marcato 4', 'Arrastre'], featured: ['Violin'] },
-      { id: 'C', energy: 'low', instruments: ['Bandoneón'], patterns: ['Rubato'], featured: ['Bandoneón'] },
-      { id: 'Outro', energy: 'high', instruments: ['Piano', 'Bandoneón', 'Upright Bass', 'Violin'], patterns: ['Síncopa'] },
+      { id: 'Intro', energy: 'low', instruments: ['piano', 'bandoneon'], patterns: ['Marcato 4'] },
+      { id: 'A', energy: 'medium', instruments: ['piano', 'bandoneon', 'upright-bass'], patterns: ['Síncopa'] },
+      { id: 'B', energy: 'high', instruments: ['piano', 'bandoneon', 'upright-bass', 'violin'], patterns: ['Marcato 4', 'Arrastre'], featured: ['violin'] },
+      { id: 'C', energy: 'low', instruments: ['bandoneon'], patterns: ['Rubato'], featured: ['bandoneon'] },
+      { id: 'Outro', energy: 'high', instruments: ['piano', 'bandoneon', 'upright-bass', 'violin'], patterns: ['Síncopa'] },
     ],
   },
   flamenco: {
@@ -391,11 +386,11 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       eq: { highPassCutoff: 120, midPeak: { freq: 4500, gain: 3.0, q: 1.5 } }
     },
     sections: [
-      { id: 'Falseta', energy: 'low', instruments: ['Flamenco Guitar'], patterns: ['Picado'], featured: ['Flamenco Guitar'] },
-      { id: 'Letra', energy: 'medium', instruments: ['Flamenco Guitar', 'Cajón', 'Palmas'], patterns: ['Rasgueado', 'Golpe'], featured: ['Voice'] },
-      { id: 'Escobilla', energy: 'high', instruments: ['Cajón', 'Palmas', 'Flamenco Guitar'], patterns: ['Compás 12'], featured: ['Palmas'] },
-      { id: 'Macho', energy: 'peak', instruments: ['Flamenco Guitar', 'Cajón', 'Palmas'], patterns: ['Bulerías Fast'], featured: ['Flamenco Guitar'] },
-      { id: 'Cierre', energy: 'high', instruments: ['Flamenco Guitar', 'Cajón', 'Palmas'], patterns: ['Remate'] },
+      { id: 'Falseta', energy: 'low', instruments: ['guitar'], patterns: ['Picado'], featured: ['guitar'] },
+      { id: 'Letra', energy: 'medium', instruments: ['guitar', 'cajon', 'palmas'], patterns: ['Rasgueado', 'Golpe'], featured: ['voice'] },
+      { id: 'Escobilla', energy: 'high', instruments: ['cajon', 'palmas', 'guitar'], patterns: ['Compás 12'], featured: ['palmas'] },
+      { id: 'Macho', energy: 'peak', instruments: ['guitar', 'cajon', 'palmas'], patterns: ['Bulerías Fast'], featured: ['guitar'] },
+      { id: 'Cierre', energy: 'high', instruments: ['guitar', 'cajon', 'palmas'], patterns: ['Remate'] },
     ],
   },
   afrobeats: {
@@ -405,11 +400,11 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       eq: { lowShelf: { freq: 55, gain: 5.0 } }
     },
     sections: [
-      { id: 'Intro', energy: 'low', instruments: ['Shaker', 'Log Drum'], patterns: ['Timeline Cycle'] },
-      { id: 'Verse', energy: 'medium', instruments: ['Shaker', 'Log Drum', 'Electric Bass', 'Electric Guitar'], patterns: ['Syncopated Groove'] },
-      { id: 'Chorus', energy: 'high', instruments: ['Shaker', 'Log Drum', 'Electric Bass', 'Electric Guitar', 'Horns'], patterns: ['3-2 Polyrhythm'], featured: ['Horns'] },
-      { id: 'Bridge', energy: 'medium', instruments: ['Log Drum', 'Keys'], patterns: ['Sparse Beat'] },
-      { id: 'Outro', energy: 'low', instruments: ['Shaker', 'Keys'] },
+      { id: 'Intro', energy: 'low', instruments: ['shaker', 'log-drum'], patterns: ['Timeline Cycle'] },
+      { id: 'Verse', energy: 'medium', instruments: ['shaker', 'log-drum', 'bass', 'guitar'], patterns: ['Syncopated Groove'] },
+      { id: 'Chorus', energy: 'high', instruments: ['shaker', 'log-drum', 'bass', 'guitar', 'horn-section'], patterns: ['3-2 Polyrhythm'], featured: ['horn-section'] },
+      { id: 'Bridge', energy: 'medium', instruments: ['log-drum', 'piano'], patterns: ['Sparse Beat'] },
+      { id: 'Outro', energy: 'low', instruments: ['shaker', 'piano'] },
     ],
   },
   house: {
@@ -419,12 +414,12 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
       dynamics: { ratio: 4.0, threshold: -14, attack: 15, release: 50 }
     },
     sections: [
-      { id: 'Intro', energy: 'low', instruments: ['909 Kick', 'Hi-hat'], patterns: ['Four on Floor'] },
-      { id: 'Build', energy: 'medium', instruments: ['909 Kick', 'Hi-hat', 'Snare Roll', 'Synth Arp'], patterns: ['Riser', 'Filter Sweep'] },
-      { id: 'Drop', energy: 'peak', instruments: ['909 Kick', 'Hi-hat', 'Clap', 'Synth Bass', 'Lead Synth'], patterns: ['Four on Floor', 'Syncopated Bass'], featured: ['Synth Bass'] },
-      { id: 'Breakdown', energy: 'low', instruments: ['Synth Pad', 'Vocal Chop'], patterns: ['Atmospheric'] },
-      { id: 'Drop 2', energy: 'peak', instruments: ['909 Kick', 'Hi-hat', 'Clap', 'Synth Bass', 'Lead Synth', 'Ride Cymbal'], patterns: ['Four on Floor', 'Maximalist'], featured: ['Lead Synth'] },
-      { id: 'Outro', energy: 'low', instruments: ['909 Kick', 'Hi-hat'], patterns: ['Fade Out'] },
+      { id: 'Intro', energy: 'low', instruments: ['drums', 'drums'], patterns: ['Four on Floor'] },
+      { id: 'Build', energy: 'medium', instruments: ['drums', 'drums', 'drums', 'synth'], patterns: ['Riser', 'Filter Sweep'] },
+      { id: 'Drop', energy: 'peak', instruments: ['drums', 'drums', 'drums', 'synth', 'synth'], patterns: ['Four on Floor', 'Syncopated Bass'], featured: ['synth'] },
+      { id: 'Breakdown', energy: 'low', instruments: ['synth', 'sampler'], patterns: ['Atmospheric'] },
+      { id: 'Drop 2', energy: 'peak', instruments: ['drums', 'drums', 'drums', 'synth', 'synth', 'drums'], patterns: ['Four on Floor', 'Maximalist'], featured: ['synth'] },
+      { id: 'Outro', energy: 'low', instruments: ['drums', 'drums'], patterns: ['Fade Out'] },
     ],
   },
 };
@@ -459,42 +454,42 @@ const METAL = (): GenreForm => ({
 });
 const TANGO = (): GenreForm => ({
   steps: [
-    F('intro', 'intro', 8, 'Intro', 'low', ['Piano', 'Bandoneón'], ['Marcato 4']),
-    F('a', 'verse', 16, 'A', 'medium', ['Piano', 'Bandoneón', 'Upright Bass'], ['Síncopa']),
-    F('b', 'bridge', 16, 'B', 'high', ['Piano', 'Bandoneón', 'Upright Bass', 'Violin'], ['Marcato 4', 'Arrastre'], ['Violin']),
-    F('c', 'solo', 16, 'C', 'low', ['Bandoneón'], ['Rubato'], ['Bandoneón']),
-    F('outro', 'ending', 8, 'Outro', 'high', ['Piano', 'Bandoneón', 'Upright Bass', 'Violin'], ['Síncopa']),
+    F('intro', 'intro', 8, 'Intro', 'low', ['piano', 'bandoneon'], ['Marcato 4']),
+    F('a', 'verse', 16, 'A', 'medium', ['piano', 'bandoneon', 'upright-bass'], ['Síncopa']),
+    F('b', 'bridge', 16, 'B', 'high', ['piano', 'bandoneon', 'upright-bass', 'violin'], ['Marcato 4', 'Arrastre'], ['violin']),
+    F('c', 'solo', 16, 'C', 'low', ['bandoneon'], ['Rubato'], ['bandoneon']),
+    F('outro', 'ending', 8, 'Outro', 'high', ['piano', 'bandoneon', 'upright-bass', 'violin'], ['Síncopa']),
   ],
   allowed: ['intro', 'a', 'b', 'c', 'outro'],
 });
 const FLAMENCO = (): GenreForm => ({
   steps: [
-    F('falseta', 'solo', 12, 'Falseta', 'low', ['Flamenco Guitar'], ['Picado'], ['Flamenco Guitar']),
-    F('letra', 'verse', 12, 'Letra', 'medium', ['Flamenco Guitar', 'Cajón', 'Palmas'], ['Rasgueado', 'Golpe'], ['Voice']),
-    F('escobilla', 'chorus', 8, 'Escobilla', 'high', ['Cajón', 'Palmas', 'Flamenco Guitar'], ['Compás 12'], ['Palmas']),
-    F('macho', 'bridge', 8, 'Macho', 'peak', ['Flamenco Guitar', 'Cajón', 'Palmas'], ['Bulerías Fast'], ['Flamenco Guitar']),
-    F('cierre', 'ending', 4, 'Cierre', 'high', ['Flamenco Guitar', 'Cajón', 'Palmas'], ['Remate']),
+    F('falseta', 'solo', 12, 'Falseta', 'low', ['guitar'], ['Picado'], ['guitar']),
+    F('letra', 'verse', 12, 'Letra', 'medium', ['guitar', 'cajon', 'palmas'], ['Rasgueado', 'Golpe'], ['voice']),
+    F('escobilla', 'chorus', 8, 'Escobilla', 'high', ['cajon', 'palmas', 'guitar'], ['Compás 12'], ['palmas']),
+    F('macho', 'bridge', 8, 'Macho', 'peak', ['guitar', 'cajon', 'palmas'], ['Bulerías Fast'], ['guitar']),
+    F('cierre', 'ending', 4, 'Cierre', 'high', ['guitar', 'cajon', 'palmas'], ['Remate']),
   ],
   allowed: ['falseta', 'letra', 'escobilla', 'macho', 'cierre'],
 });
 const AFROBEATS = (): GenreForm => ({
   steps: [
-    F('intro', 'intro', 8, 'Intro', 'low', ['Shaker', 'Log Drum'], ['Timeline Cycle']),
-    F('verse', 'verse', 16, 'Verse', 'medium', ['Shaker', 'Log Drum', 'Electric Bass', 'Electric Guitar'], ['Syncopated Groove']),
-    F('chorus', 'chorus', 16, 'Chorus', 'high', ['Shaker', 'Log Drum', 'Electric Bass', 'Electric Guitar', 'Horns'], ['3-2 Polyrhythm'], ['Horns']),
-    F('bridge', 'bridge', 8, 'Bridge', 'medium', ['Log Drum', 'Keys'], ['Sparse Beat']),
-    F('outro', 'ending', 8, 'Outro', 'low', ['Shaker', 'Keys']),
+    F('intro', 'intro', 8, 'Intro', 'low', ['shaker', 'log-drum'], ['Timeline Cycle']),
+    F('verse', 'verse', 16, 'Verse', 'medium', ['shaker', 'log-drum', 'bass', 'guitar'], ['Syncopated Groove']),
+    F('chorus', 'chorus', 16, 'Chorus', 'high', ['shaker', 'log-drum', 'bass', 'guitar', 'horn-section'], ['3-2 Polyrhythm'], ['horn-section']),
+    F('bridge', 'bridge', 8, 'Bridge', 'medium', ['log-drum', 'piano'], ['Sparse Beat']),
+    F('outro', 'ending', 8, 'Outro', 'low', ['shaker', 'piano']),
   ],
   allowed: ['intro', 'verse', 'chorus', 'bridge', 'outro'],
 });
 const HOUSE = (): GenreForm => ({
   steps: [
-    F('intro', 'intro', 8, 'Intro', 'low', ['909 Kick', 'Hi-hat'], ['Four on Floor']),
-    F('build', 'verse', 16, 'Build', 'medium', ['909 Kick', 'Hi-hat', 'Snare Roll', 'Synth Arp'], ['Riser', 'Filter Sweep']),
-    F('drop', 'chorus', 24, 'Drop', 'peak', ['909 Kick', 'Hi-hat', 'Clap', 'Synth Bass', 'Lead Synth'], ['Four on Floor', 'Syncopated Bass'], ['Synth Bass']),
-    F('breakdown', 'breakdown', 8, 'Breakdown', 'low', ['Synth Pad', 'Vocal Chop'], ['Atmospheric']),
-    F('drop-2', 'chorus', 24, 'Drop 2', 'peak', ['909 Kick', 'Hi-hat', 'Clap', 'Synth Bass', 'Lead Synth', 'Ride Cymbal'], ['Four on Floor', 'Maximalist'], ['Lead Synth']),
-    F('outro', 'ending', 8, 'Outro', 'low', ['909 Kick', 'Hi-hat'], ['Fade Out']),
+    F('intro', 'intro', 8, 'Intro', 'low', ['drums', 'drums'], ['Four on Floor']),
+    F('build', 'verse', 16, 'Build', 'medium', ['drums', 'drums', 'drums', 'synth'], ['Riser', 'Filter Sweep']),
+    F('drop', 'chorus', 24, 'Drop', 'peak', ['drums', 'drums', 'drums', 'synth', 'synth'], ['Four on Floor', 'Syncopated Bass'], ['synth']),
+    F('breakdown', 'breakdown', 8, 'Breakdown', 'low', ['synth', 'sampler'], ['Atmospheric']),
+    F('drop-2', 'chorus', 24, 'Drop 2', 'peak', ['drums', 'drums', 'drums', 'synth', 'synth', 'drums'], ['Four on Floor', 'Maximalist'], ['synth']),
+    F('outro', 'ending', 8, 'Outro', 'low', ['drums', 'drums'], ['Fade Out']),
   ],
   allowed: ['intro', 'build', 'drop', 'breakdown', 'drop-2', 'outro'],
 });

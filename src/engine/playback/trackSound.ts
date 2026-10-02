@@ -9,10 +9,17 @@ import type { LuthierPhysicalParameters } from '../../data/instruments/schema/lu
 export function resolveTrackSound(instrumentId: string, worldId = '', styleId = '', role?: string, luthier?: LuthierPhysicalParameters) {
   const def = INSTRUMENTS_BY_ID[instrumentId];
   const assignedRole = role ?? def?.acousticProfile?.role ?? 'comp';
-  const params = defaultTrackParams(instrumentId, luthier ?? def?.luthierPhysics ?? getLuthierModelForInstrument(instrumentId), def?.elementaryModel ?? modelForInstrument(instrumentId));
+  const dialect = resolveDialect(instrumentId, worldId, styleId, assignedRole);
+  const variant = def?.variants?.find(item => item.id === dialect?.variantId);
+  const params = defaultTrackParams(instrumentId, luthier ?? variant?.luthierPhysics ?? def?.luthierPhysics ?? getLuthierModelForInstrument(instrumentId), def?.elementaryModel ?? modelForInstrument(instrumentId));
+  params.variantId = variant?.id;
+  params.courses = variant?.courses ?? params.courses;
+  params.bodyConstruction = variant?.bodyConstruction ?? params.bodyConstruction;
+  params.excitationType = variant?.excitationType ?? params.excitationType;
+  params.synthPatchId = dialect?.patchId;
+  params.synthPatch = def?.patches?.find(item => item.id === dialect?.patchId);
   params.genreId = worldId;
   params.performanceMode = performanceModeForContext(worldId, styleId);
-  const dialect = resolveDialect(instrumentId, worldId, styleId, assignedRole);
   if (dialect) {
     params.dialect = dialect.id;
     if (dialect.courses !== undefined) params.courses = dialect.courses;
@@ -27,6 +34,10 @@ export function resolveTrackSound(instrumentId: string, worldId = '', styleId = 
     params.decay *= dialect.decayMultiplier ?? 1;
     params.body *= dialect.bodyMultiplier ?? 1;
     if (dialect.bendGlideMs !== undefined) params.bendGlideMs = dialect.bendGlideMs;
+    if (dialect.drive !== undefined) params.drive = Math.max(params.drive, dialect.drive);
+    if (dialect.registration !== undefined) params.registration = dialect.registration;
+    if (dialect.rotary !== undefined) params.rotary = dialect.rotary;
+    if (dialect.muteType && dialect.muteType !== 'open') params.mute = Math.max(params.mute, 0.82);
   }
   params.roleGain = getRoleGainLinear(assignedRole, worldId || 'default', instrumentId, styleId);
   return params;

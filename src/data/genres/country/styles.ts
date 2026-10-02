@@ -7,13 +7,7 @@ const STYLE_5: GenreStyleDefinition = {
         "origin": "USA",
         "era": "1990s–Present",
         "description": "Rootsy • Acoustic • Soulful\nContemporary folk-country",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "fiddle",
-          "banjo",
-          "bass",
-          "drums"
-        ],
+        "characteristicInstruments": ["guitar", "violin", "banjo", "bass", "drums"],
         "preferredMeters": [
           "4/4",
           "3/4"
@@ -90,13 +84,7 @@ const STYLE_4: GenreStyleDefinition = {
         "origin": "Bakersfield, California",
         "era": "1950s–1960s",
         "description": "Twangy • Telecaster • Loud\nWest Coast",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "steel-guitar",
-          "bass",
-          "drums",
-          "fiddle"
-        ],
+        "characteristicInstruments": ["guitar", "resonator-guitar", "bass", "drums", "violin"],
         "preferredMeters": [
           "4/4"
         ],
@@ -179,13 +167,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "Kentucky / Appalachia",
         "era": "1940s–Present",
         "description": "Acoustic • High-Speed • Virtuosic\nFast banjo,",
-        "characteristicInstruments": [
-          "banjo",
-          "mandolin",
-          "fiddle",
-          "acoustic-guitar",
-          "upright-bass"
-        ],
+        "characteristicInstruments": ["banjo", "mandolin", "violin", "guitar", "upright-bass"],
         "preferredMeters": [
           "2/4",
           "4/4"
@@ -268,13 +250,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "Texas / Oklahoma / Nashville",
         "era": "1940s–1950s",
         "description": "Twin Fiddle • Steel • 2-Step\nBeer-joint",
-        "characteristicInstruments": [
-          "fiddle",
-          "steel-guitar",
-          "acoustic-guitar",
-          "upright-bass",
-          "piano"
-        ],
+        "characteristicInstruments": ["violin", "resonator-guitar", "guitar", "upright-bass", "piano"],
         "preferredMeters": [
           "4/4",
           "2/4"
@@ -348,13 +324,7 @@ const STYLE_6: GenreStyleDefinition = {
         "origin": "Nashville, Tennessee",
         "era": "Late 1950s–1960s",
         "description": "Smooth • Strings • Polished\nPop-country crossover",
-        "characteristicInstruments": [
-          "strings",
-          "piano",
-          "steel-guitar",
-          "upright-bass",
-          "drums"
-        ],
+        "characteristicInstruments": ["string-ensemble", "piano", "resonator-guitar", "upright-bass", "drums"],
         "preferredMeters": [
           "4/4",
           "3/4"
@@ -438,13 +408,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Nashville / Texas",
         "era": "1980s–Present",
         "description": "Fiddle & Steel • 4/4 •",
-        "characteristicInstruments": [
-          "steel-guitar",
-          "fiddle",
-          "acoustic-guitar",
-          "electric-guitar",
-          "bass"
-        ],
+        "characteristicInstruments": ["resonator-guitar", "violin", "guitar", "guitar", "bass"],
         "preferredMeters": [
           "4/4"
         ],
@@ -525,13 +489,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Austin, Texas / Nashville",
         "era": "1970s",
         "description": "Gritty • Driving • Rebellious\nRaw, rock-edged",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "acoustic-guitar",
-          "bass",
-          "drums",
-          "harmonica"
-        ],
+        "characteristicInstruments": ["guitar", "guitar", "bass", "drums", "harmonica"],
         "preferredMeters": [
           "4/4"
         ],
@@ -606,13 +564,7 @@ const STYLE_7: GenreStyleDefinition = {
         "origin": "Texas / Oklahoma",
         "era": "1930s–1950s",
         "description": "Swinging • Big Band • Jazzy\nFiddle-driven",
-        "characteristicInstruments": [
-          "fiddle",
-          "steel-guitar",
-          "electric-guitar",
-          "upright-bass",
-          "drums"
-        ],
+        "characteristicInstruments": ["violin", "resonator-guitar", "guitar", "upright-bass", "drums"],
         "preferredMeters": [
           "4/4"
         ],

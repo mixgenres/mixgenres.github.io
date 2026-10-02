@@ -113,38 +113,14 @@ export function decide(trackId: string, context?: ArrangementContext): Arrangeme
   };
 }
 
-/**
- * Keep authored/default harmony compact at the section level. The arranger
- * repeats this loop across the section's bars, so storing 8/16/32 copies of
- * the same progression only makes the song data noisy and makes chord changes
- * look much more complicated than the music actually is.
- *
- * If the authored sequence is already a <=4-chord loop, preserve it exactly.
- * If it is a longer exact repetition of a <=4-chord loop, collapse it to that
- * loop. Otherwise use the first four authored chords as the default harmonic
- * cell. User-entered/custom progressions are never passed through this helper.
- *
- * Tango and Flamenco remain intentionally untouched here.
- */
-export function compactDefaultChordLoop(chords: string[], contract?: WorldContract): string[] {
-  const preserveLong = !!contract && (contract.meter !== '4/4' || contract.pulseModel === 'long-cycle' || contract.form.some(x => /^[ABC]$/.test(x) || /letra|falseta|variación|remate|cierre/i.test(x)));
-  if (!chords.length || chords.length <= 4 || preserveLong) {
-    return [...chords];
-  }
-
-  const limit = Math.min(4, chords.length);
-  for (let period = 1; period <= limit; period++) {
-    let repeats = true;
-    for (let i = 0; i < chords.length; i++) {
-      if (chords[i] !== chords[i % period]) {
-        repeats = false;
-        break;
-      }
+/** Collapse only complete, exact repetitions; preserve the whole harmonic sentence. */
+export function compactDefaultChordLoop(chords: string[], _contract?: WorldContract): string[] {
+  for (let period = 1; period <= chords.length / 2; period++) {
+    if (chords.length % period === 0 && chords.every((chord, i) => chord === chords[i % period])) {
+      return chords.slice(0, period);
     }
-    if (repeats) return chords.slice(0, period);
   }
-
-  return chords.slice(0, 4);
+  return [...chords];
 }
 
 export function progressionForSection(

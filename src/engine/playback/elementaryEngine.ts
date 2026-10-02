@@ -122,6 +122,8 @@ if (token.includes('samba') || token.includes('bossa')) return 0.50;
 return 0.35;
 }
 export interface VoiceState {
+soundParams?: TrackParams;
+controllerKeys?: Array<'articulation' | 'brightness' | 'contact' | 'mute' | 'bowPressure' | 'bowVelocity' | 'bodyTap' | 'pluckPosition' | 'pressure' | 'resonance'>;
 note: number;
 velocity: number;
 gate: number;
@@ -174,7 +176,12 @@ instrumentId?: string;
 courses?: number;
 bodyConstruction?: 'wood-box' | 'gourd' | 'skin-faced' | 'board' | 'solid-electric' | 'metal-shell' | 'brass-tube';
 excitationType?: 'plectrum' | 'nail' | 'fingerpad' | 'hard-pick' | 'hammer' | 'stick' | 'mallet' | 'breath' | 'bow';
-sympatheticStrings?: boolean;
+  sympatheticStrings?: boolean;
+  variantId?: string;
+  registration?: string;
+  rotary?: boolean;
+  synthPatchId?: string;
+  synthPatch?: import('../../data/instruments/schema/instrument-def').SynthPatch;
 roleGain?: number;
 }
 export function getFormantProfileForInstrument(instrumentId: string, model: number): AcousticFormantProfile {
@@ -270,6 +277,12 @@ export function renderVoice(
   voice: VoiceState,
   params: TrackParams
 ): Node {
+  const roleGain = params.roleGain ?? 1;
+  if (voice.soundParams) {
+    const contextParams = { ...voice.soundParams, pan: params.pan, volume: params.volume };
+    for (const key of voice.controllerKeys ?? []) contextParams[key] = params[key];
+    params = contextParams;
+  }
   const ctx = buildVoiceContext(trackId, voiceIndex, voice, params);
   const mod = getInstrumentModule(params.instrumentId ?? '');
   let rawAudio: Node = mod.renderVoice(ctx);
@@ -314,7 +327,7 @@ export function renderVoice(
 
     // Apply coupled resonators if not owned by bespoke module
     if (!ownedSections.includes('coupledResonators')) {
-      for (let i = 0; i < Math.min(4, c.bodyModes.length); i++) {
+      for (let i = 0; i < c.bodyModes.length; i++) {
         const m = c.bodyModes[i];
         modeSignals.push(el.mul(
           m.gain * (0.72 + (physical?.response.bodyCoupling ?? 0.5) * 0.48) * (dialect.body ?? ctx.genreDialect.body),
@@ -328,7 +341,7 @@ export function renderVoice(
         modeSignals.push(thud);
       }
       if (c.airModes?.length) {
-        for (let i = 0; i < Math.min(3, c.airModes.length); i++) {
+        for (let i = 0; i < c.airModes.length; i++) {
           const m = c.airModes[i];
           const resonanceHz = m.frequencyHz ?? (ctx.freq * m.ratio);
           modeSignals.push(
@@ -351,8 +364,8 @@ export function renderVoice(
       }
       if (c.sympathetic) {
         const s = c.sympathetic;
-        const sympatheticNodes = s.ratios.slice(0, 6).map((ratio, i) =>
-          el.mul(s.coupling * (1 - i * 0.10) * (s.decayScale ?? 1), el.svf({ mode: "bandpass" }, Math.min(18000, Math.max(30, ctx.freq * ratio)), s.q, rawAudio))
+        const sympatheticNodes = s.ratios.map((ratio, i) =>
+          el.mul(s.coupling * (1 / (1 + i * 0.10)) * (s.decayScale ?? 1), el.svf({ mode: "bandpass" }, Math.min(18000, Math.max(30, ctx.freq * ratio)), s.q, rawAudio))
         );
         modeSignals.push(...sympatheticNodes);
       }
@@ -477,7 +490,7 @@ export function renderVoice(
   const gain = ctx.isDecayingInstrument
     ? ctx.velSignal
     : el.mul(ctx.velSignal, ctx.env);
-  return el.mul(gain, finalRawAudio);
+  return el.mul((params.roleGain ?? 1) / Math.max(0.0001, roleGain), gain, finalRawAudio);
 }
 
 export function renderTrack(

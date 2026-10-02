@@ -1,12 +1,13 @@
 import OfflineRenderer from '@elemaudio/offline-renderer';
-import { INSTRUMENTS_BY_ID } from '../src/data/instruments';
 import { getInstrumentModule } from '../src/engine/playback/instrumentRegistry';
 import { midiToFreq, renderTrack } from '../src/engine/playback/elementaryEngine';
 import { resolveTrackSound, resolveTrackGain } from '../src/engine/playback/trackSound';
 import { resolveRenderGesture } from '../src/engine/playback/renderGesture';
 import { codeForGesture } from '../src/engine/band/gestures';
 import { measureAudio } from '../src/engine/studio/audioMetrics';
-import { reportMetadata, writeReport, summarizeFindings, type Finding } from './lib/auditReport';
+import { selectInstruments, instrumentMechanisms } from './lib/audioSelection';
+import { voiceTailSeconds } from '../src/engine/playback/voiceAllocation';
+import { reportMetadata, writeReport, summarizeFindings, printFindings, type Finding } from './lib/auditReport';
 
 const sampleRate = 44100, blockSize = 256;
 const renderer = new OfflineRenderer();
@@ -23,7 +24,9 @@ function capture(seconds: number) {
   }
   return { left, right, metrics: measureAudio(left, right, sampleRate) };
 }
-for (const def of Object.values(INSTRUMENTS_BY_ID)) {
+const selection = selectInstruments(process.argv.find(a => a.startsWith('--instrument='))?.slice(13));
+const details = process.argv.includes('--details');
+for (const def of selection) {
   const probes = [];
   const low = def.tuningAndMechanics?.keyRange?.lowMidi ?? 48, high = def.tuningAndMechanics?.keyRange?.highMidi ?? 84;
   const mid = Math.round((low + high) / 2);
@@ -51,21 +54,20 @@ for (const def of Object.values(INSTRUMENTS_BY_ID)) {
       if (attack.samplePeak > 1) add('warning', 'isolated-overload', scope, `${attack.samplePeakDbfs?.toFixed(2)} dBFS before ensemble headroom and master`);
       voice.gate = 0;
       const releaseSignal = renderTrack(trackId, [voice], params); await renderer.render(releaseSignal.left, releaseSignal.right);
-      const release = capture(1.5);
+      const releaseSeconds = Math.max(1.5, voiceTailSeconds(params));
+      const release = capture(releaseSeconds);
       const tail = measureAudio(release.left.subarray(-2048), release.right.subarray(-2048), sampleRate);
       if (release.metrics.nonFiniteSamples) add('error', 'non-finite-release', scope, `${release.metrics.nonFiniteSamples} samples`);
-      if (['sustained', 'blown'].includes(def.acousticProfile?.sustain ?? '') && tail.samplePeak > 1e-4) add('error', 'stuck-sustain', scope, `Note-off tail ${tail.samplePeak} after 1.5s`);
-      probes.push({ ...probe, resolvedGesture: gesture.name, attack, releaseTail: tail });
+      if (['sustained', 'blown'].includes(def.acousticProfile?.sustain ?? '') && tail.samplePeak > 1e-4) add('error', 'stuck-sustain', scope, `Note-off tail ${tail.samplePeak} after ${releaseSeconds.toFixed(2)}s`);
+      probes.push({ name: probe.name, ...(details ? { ...probe, resolvedGesture: gesture.name, attack, releaseTail: tail } : {}) });
     } catch (e) { add('error', 'render-exception', scope, String(e)); probes.push({ ...probe, error: String(e) }); }
   }
   rows.push({ instrumentId: def.id, family: def.family, moduleId: getInstrumentModule(def.id).id, probes });
 }
 renderer.reset();
 const counts = summarizeFindings(findings);
-const report = { ...reportMetadata(), status: counts.errors ? 'FAIL' : 'PASS', sampleRate, blockSize,
-  coverage: { expectedInstruments: Object.keys(INSTRUMENTS_BY_ID).length, instruments: rows.length, probes: rows.reduce((sum, r) => sum + r.probes.length, 0) },
-  methodology: '35 centisecond attack across low/high registers, soft/strong notes and techniques; every kit component; 1.5s note-off release. Isolated unmastered PCM.',
-  gaps: ['Register/technique probes do not measure every articulation or every genre dialect.', 'This checks rendered sound and release, not perceptual instrument authenticity.'], counts, findings, rows };
-writeReport('instrument-render-audit', report);
-console.log(JSON.stringify({ status: report.status, coverage: report.coverage, ...counts }));
-if (counts.errors) process.exitCode = 1;
+const coverage = { instruments: rows.length, mechanisms: new Set(selection.flatMap(instrumentMechanisms)).size, probes: rows.reduce((sum, r) => sum + r.probes.length, 0) };
+writeReport('instrument-render-audit', { ...reportMetadata(), status: counts.errors ? 'FAIL' : 'PASS', sampleRate, blockSize,
+  scope: 'Shared modules, physical models, excitation and sustain mechanisms; low/soft/high attacks, kit components and authored note-off tails.',
+  coverage, counts, findings, rows });
+printFindings('instrument-render-audit', findings, coverage);

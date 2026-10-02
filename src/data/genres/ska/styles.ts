@@ -7,13 +7,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "California / Gainesville / Boston",
         "era": "1990s",
         "description": "Distortion • Blistering Speed • Horn",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "brass",
-          "bass",
-          "drums",
-          "synth"
-        ],
+        "characteristicInstruments": ["guitar", "horn-section", "bass", "drums", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -87,13 +81,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Kingston, Jamaica",
         "era": "Late 1950s–1960s",
         "description": "Upbeat Chop • Big Band Horns",
-        "characteristicInstruments": [
-          "brass",
-          "electric-guitar",
-          "piano",
-          "upright-bass",
-          "drums"
-        ],
+        "characteristicInstruments": ["horn-section", "guitar", "piano", "upright-bass", "drums"],
         "preferredMeters": [
           "4/4"
         ],
@@ -168,13 +156,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Coventry / London, UK",
         "era": "Late 1970s–Early 1980s",
         "description": "Punk Energy • Checkered • Social",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "organ",
-          "brass",
-          "bass",
-          "drums"
-        ],
+        "characteristicInstruments": ["guitar", "organ", "horn-section", "bass", "drums"],
         "preferredMeters": [
           "4/4"
         ],

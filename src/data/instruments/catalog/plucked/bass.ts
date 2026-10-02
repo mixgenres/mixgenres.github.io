@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../../schema/instrument-def';
 
 export const bass: InstrumentDef = {
   id: "bass",
-  name: "Electric Bass Guitar",
+  name: "Bass",
   family: "plucked",
   voicing: "bass",
   bodyConstruction: "solid-electric",
@@ -82,13 +82,20 @@ export const bass: InstrumentDef = {
     }
   },
   techniques: {
-    articulations: ["accent", "staccato", "legato", "ghost", "palm-mute", "slap", "slide"],
-    techniqueMethods: ["two-finger plucking", "thumb muting", "hammer-on", "slide"],
-    playingStyles: ["funk", "rock", "pop", "rnb", "salsa", "reggae"],
+    articulations: ["accent", "staccato", "legato", "ghost-note", "dead-note", "palm-mute", "slap", "thumb", "pop", "pick", "slide", "hammer-on", "pull-off", "harmonic"],
+    techniqueMethods: ["fingerstyle", "pick", "slap", "thumb", "pop", "dead note", "ghost note", "hammer-on", "pull-off", "slide", "harmonic"],
+    playingStyles: ["funk", "rock", "pop", "rnb", "salsa", "reggae", "jazz", "country"],
     genreTechniques: {
-      funk: ["staccato", "ghost", "accent", "slap"],
+    funk: ["staccato", "ghost", "accent", "slap", "thumb", "pop", "ghost-note"],
       rock: ["accent", "legato", "staccato"],
+      country: ["pick", "staccato"],
       reggae: ["legato", "staccato"]
     }
-  }
+  },
+  physicalTechniques: ["fingerstyle", "pick", "slap", "thumb", "pop", "dead-note", "ghost-note", "hammer-on", "pull-off", "slide", "harmonic", "staccato", "legato", "accent", "ghost"],
+  variants: [
+    { id: "fretted-electric", name: "Fretted electric", bodyConstruction: "solid-electric", excitationType: "fingerpad", courses: 4 },
+    { id: "fretless-electric", name: "Fretless electric", bodyConstruction: "solid-electric", excitationType: "fingerpad", courses: 4, techniqueAdditions: ["continuous-slide", "portamento"] },
+    { id: "acoustic-bass-guitar", name: "Acoustic bass guitar", bodyConstruction: "wood-box", excitationType: "fingerpad", courses: 4 }
+  ]
 };

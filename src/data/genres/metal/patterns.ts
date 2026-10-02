@@ -15,15 +15,12 @@ export const METAL_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
             "measure"
           ],
           "roles": [
-            "electric-guitar",
+            "guitar",
             "bass"
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "electric-guitar",
-            "bass"
-          ],
+          "instruments": ["guitar", "bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -177,13 +174,11 @@ export const METAL_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
             "measure"
           ],
           "roles": [
-            "electric-guitar"
+            "guitar"
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "electric-guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -332,9 +327,7 @@ export const METAL_WORLD_PATTERNS_FILL: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -632,15 +625,12 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             "measure"
           ],
           "roles": [
-            "electric-guitar",
+            "guitar",
             "guitar"
           ],
     
           "approaches": ["chop"],
-          "instruments": [
-            "electric-guitar",
-            "guitar"
-          ],
+          "instruments": ["guitar", "guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -802,9 +792,7 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1002,13 +990,11 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             "measure"
           ],
           "roles": [
-            "electric-guitar"
+            "guitar"
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "electric-guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "5/8",
           "cycleLength": 1,
           "subdivisions": 10,
@@ -1137,13 +1123,11 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
             "measure"
           ],
           "roles": [
-            "electric-guitar"
+            "guitar"
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "electric-guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 12,
@@ -1310,9 +1294,7 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
             "harmony"
           ],
@@ -1476,11 +1458,7 @@ export const METAL_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "percussion",
-            "guitar"
-          ],
+          "instruments": ["drums", "percussion", "guitar"],
           "compatibleRoles": [
             "pulse",
             "rhythm-guitar",
@@ -1662,18 +1640,16 @@ export const METAL_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
             "phrase"
           ],
           "roles": [
-            "overdrive-guitar"
+            "guitar"
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "overdrive-guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
-            "overdrive-guitar"
+            "guitar"
           ],
           "compatibleInstruments": [
-            "overdrive-guitar"
+            "guitar"
           ],
           "canCrossRole": true,
           "meter": "4/4",
@@ -1885,11 +1861,7 @@ export const METAL_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "walking", "groove"],
-          "instruments": [
-            "electric-guitar",
-            "bass",
-            "drums"
-          ],
+          "instruments": ["guitar", "bass", "drums"],
           "canCrossRole": true,
           "meter": "4/4",
           "cycleLength": 1,
@@ -2104,10 +2076,7 @@ export const METAL_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["comping", "walking"],
-          "instruments": [
-            "electric-guitar",
-            "bass"
-          ],
+          "instruments": ["guitar", "bass"],
           "canCrossRole": true,
           "meter": "4/4",
           "cycleLength": 1,
@@ -2250,9 +2219,7 @@ export const METAL_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "compatibleRoles": [
             "bass"
           ],
@@ -2414,18 +2381,16 @@ export const METAL_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             "phrase"
           ],
           "roles": [
-            "overdrive-guitar"
+            "guitar"
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "overdrive-guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
-            "overdrive-guitar"
+            "guitar"
           ],
           "compatibleInstruments": [
-            "overdrive-guitar"
+            "guitar"
           ],
           "canCrossRole": true,
           "meter": "4/4",
@@ -2569,7 +2534,7 @@ export const METAL_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "description": "Screamed/clean vocal onset template with accented",
           "tags": [
             "metal",
-            "overdrive-guitar",
+            "guitar",
             "vocal-phrasing",
             "catalog-v2"
           ],
@@ -2578,19 +2543,17 @@ export const METAL_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
             "phrase"
           ],
           "roles": [
-            "overdrive-guitar"
+            "guitar"
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "overdrive-guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
-            "overdrive-guitar",
+            "guitar",
             "lead"
           ],
           "compatibleInstruments": [
-            "overdrive-guitar"
+            "guitar"
           ],
           "meter": "4/4",
           "cycleLength": 1,
@@ -2720,7 +2683,7 @@ export const METAL_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           "provenance": "GenreDAW catalog rebuild: dedicated vocal phrasing coverage for Metal.",
           "authenticityTags": [
             "metal",
-            "overdrive-guitar"
+            "guitar"
           ],
           "danceTags": [
             "listening"
@@ -2757,9 +2720,7 @@ export const METAL_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "guitar"
-          ],
+          "instruments": ["guitar"],
           "compatibleRoles": [
             "harmony",
             "texture"
@@ -2997,11 +2958,7 @@ export const METAL_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove", "comping"],
-          "instruments": [
-            "drums",
-            "percussion",
-            "guitar"
-          ],
+          "instruments": ["drums", "percussion", "guitar"],
           "compatibleRoles": [
             "pulse",
             "harmony",

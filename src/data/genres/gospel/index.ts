@@ -39,7 +39,7 @@ export const GOSPEL_WORLD: GenreWorld = {
     ],
     "harmony": [
       "piano",
-      "rock-organ",
+      "organ",
       "organ"
     ],
     "bass": [
@@ -69,13 +69,7 @@ export const GOSPEL_WORLD: GenreWorld = {
       "origin": "Chicago / Deep South",
       "era": "1930s–1950s",
       "description": "Handclaps, foot-stomps, and soaring vocal passion.",
-      "characteristicInstruments": [
-        "organ",
-        "piano",
-        "choir",
-        "drums",
-        "tambourine"
-      ],
+      "characteristicInstruments": ["organ", "piano", "choir", "drums", "tambourine"],
       "preferredMeters": [
         "4/4"
       ],
@@ -136,13 +130,7 @@ export const GOSPEL_WORLD: GenreWorld = {
         0,
         0
       ],
-      "instruments": [
-        "organ",
-        "piano",
-        "choir",
-        "drums",
-        "tambourine"
-      ],
+      "instruments": ["organ", "piano", "choir", "drums", "tambourine"],
       "roles": [
         "rhythm",
         "percussion"

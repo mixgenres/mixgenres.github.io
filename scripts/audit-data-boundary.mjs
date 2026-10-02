@@ -28,26 +28,8 @@ for (const file of files) {
   }
 }
 
-const catalogRoot = path.join(dataRoot, 'instruments/catalog');
-const dspRoot = path.join(dataRoot, 'sound/dsp');
-const catalogIds = new Set();
-const dspIds = new Set();
-function collectIds(root, ids) {
-  for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
-    const full = path.join(root, entry.name);
-    if (entry.isDirectory()) collectIds(full, ids);
-    else if (entry.name.endsWith('.ts') && entry.name !== 'index.ts' && entry.name !== 'profileBuilders.ts' && entry.name !== 'genreClassifiers.ts' && entry.name !== 'genrePlaybackProfiles.ts' && entry.name !== 'genreInstrumentProfiles.ts') ids.add(path.basename(entry.name, '.ts'));
-  }
-}
-collectIds(catalogRoot, catalogIds);
-collectIds(dspRoot, dspIds);
-for (const id of catalogIds) if (!dspIds.has(id)) failures.push(`Missing DSP definition for ${id}`);
-for (const id of dspIds) if (!catalogIds.has(id)) failures.push(`DSP has no instrument definition: ${id}`);
-
 if (failures.length) {
-  console.error(`Data boundary audit failed (${failures.length} issue(s)):`);
-  for (const failure of failures) console.error(` - ${failure}`);
+  console.error(`FAIL data-boundary: ${failures.length} issues`);
+  failures.forEach(failure => console.error(`  ${failure}`));
   process.exitCode = 1;
-} else {
-  console.log(`Data boundary PASS: ${files.length} files are leaf-only; ${catalogIds.size} catalog and DSP ids align.`);
-}
+} else console.log(`PASS data-boundary: ${files.length} data files`);

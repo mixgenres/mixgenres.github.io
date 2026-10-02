@@ -7,13 +7,7 @@ const STYLE_7: GenreStyleDefinition = {
         "origin": "Trinidad and Tobago",
         "era": "Early 20th Century–Present",
         "description": "Steelpan • Acoustic • Witty\nTrinidadian storytelling",
-        "characteristicInstruments": [
-          "steel-drums",
-          "acoustic-guitar",
-          "brass",
-          "hand-percussion",
-          "bass"
-        ],
+        "characteristicInstruments": ["steel-drums", "guitar", "horn-section", "hand-percussion", "bass"],
         "preferredMeters": [
           "2/4",
           "4/4"
@@ -89,13 +83,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "Kingston, Jamaica",
         "era": "1980s–Present",
         "description": "Digital Riddim • Deejay Toasting •",
-        "characteristicInstruments": [
-          "sampler",
-          "drums",
-          "sub-bass",
-          "synth",
-          "horn-section"
-        ],
+        "characteristicInstruments": ["sampler", "drums", "synth", "synth", "horn-section"],
         "preferredMeters": [
           "4/4"
         ],
@@ -160,13 +148,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Kingston, Jamaica",
         "era": "1970s",
         "description": "Space Echo • Bass Drops •",
-        "characteristicInstruments": [
-          "bass",
-          "drums",
-          "tape-echo",
-          "spring-reverb",
-          "organ"
-        ],
+        "characteristicInstruments": ["bass", "drums", "organ"],
         "preferredMeters": [
           "4/4"
         ],
@@ -231,13 +213,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "London, UK / Jamaica",
         "era": "Late 1970s–1980s",
         "description": "Romantic • Smooth • Soul Harmonies\nSoulful",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "bass",
-          "drums",
-          "piano",
-          "strings"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "piano", "string-ensemble"],
         "preferredMeters": [
           "4/4"
         ],
@@ -311,13 +287,7 @@ const STYLE_5: GenreStyleDefinition = {
         "origin": "Kingston, Jamaica",
         "era": "Late 1980s–1990s",
         "description": "Digital • Hardcore • Machine Beats\nRaggamuffin",
-        "characteristicInstruments": [
-          "sampler",
-          "drums",
-          "sub-bass",
-          "synth",
-          "horn-section"
-        ],
+        "characteristicInstruments": ["sampler", "drums", "synth", "synth", "horn-section"],
         "preferredMeters": [
           "4/4"
         ],
@@ -391,13 +361,7 @@ const STYLE_4: GenreStyleDefinition = {
         "origin": "Kingston, Jamaica",
         "era": "1966–1968",
         "description": "Soulful • Prominent Bass • Slow",
-        "characteristicInstruments": [
-          "bass",
-          "electric-guitar",
-          "drums",
-          "brass",
-          "piano"
-        ],
+        "characteristicInstruments": ["bass", "guitar", "drums", "horn-section", "piano"],
         "preferredMeters": [
           "4/4"
         ],
@@ -472,13 +436,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Kingston, Jamaica",
         "era": "1970s",
         "description": "One Drop • Skank • Conscious\nSpiritual",
-        "characteristicInstruments": [
-          "drums",
-          "bass",
-          "electric-guitar",
-          "organ",
-          "brass"
-        ],
+        "characteristicInstruments": ["drums", "bass", "guitar", "organ", "horn-section"],
         "preferredMeters": [
           "4/4"
         ],
@@ -553,13 +511,7 @@ const STYLE_6: GenreStyleDefinition = {
         "origin": "Kingston, Jamaica",
         "era": "Late 1950s–1960s",
         "description": "Fast • Walking Bass • Big",
-        "characteristicInstruments": [
-          "brass",
-          "electric-guitar",
-          "upright-bass",
-          "drums",
-          "piano"
-        ],
+        "characteristicInstruments": ["horn-section", "guitar", "upright-bass", "drums", "piano"],
         "preferredMeters": [
           "4/4"
         ],

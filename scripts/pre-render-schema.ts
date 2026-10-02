@@ -1,6 +1,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { INSTRUMENTS_BY_ID } from '../src/data/instruments';
 import { GENRE_NAMES } from '../src/data/genres';
+import { ALL_STYLES } from '../src/engine/style';
 import { getInstrumentModule } from '../src/engine/playback/instrumentRegistry.ts';
 import { BANDONEON_142_BUTTONS } from '../src/engine/band/fingering/bandoneon';
 import { makeSheet } from '../src/engine/sheet/sheet.ts';
@@ -12,7 +13,9 @@ if (!instrumentId || !INSTRUMENTS_BY_ID[instrumentId]) throw new Error(`Unknown 
 
 const def = INSTRUMENTS_BY_ID[instrumentId];
 const module = getInstrumentModule(instrumentId);
-const sheet = makeSheet(genre || Object.keys(GENRE_NAMES).find(g => makeSheet(g).tracks.some(t => t.instrumentId === instrumentId)) || Object.keys(GENRE_NAMES)[0]);
+const style = ALL_STYLES.find(s => s.arrangement?.ensemble?.some(part => part.instrumentIds.includes(instrumentId)));
+if (!genre && !style) throw new Error(`No style uses ${instrumentId}; specify a genre for inspection.`);
+const sheet = makeSheet(genre || style!.primaryGenre, genre ? undefined : style!.id);
 const performance = compileWholeSong(sheet);
 const notes = performance.notes.filter(n => sheet.tracks.some(t => t.id === n.trackId && t.instrumentId === instrumentId));
 const gestures = new Map<number, string>();

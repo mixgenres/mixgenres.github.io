@@ -23,7 +23,7 @@ export class VoiceLeadingResolver {
       }
     }
 
-    return [currentChord[0], ...bestInversion.slice(1)].sort((a, b) => this.pitchOf(a) - this.pitchOf(b));
+    return [...bestInversion].sort((a, b) => this.pitchOf(a) - this.pitchOf(b));
   }
 
   private pitchOf(note: ChordNote): number {

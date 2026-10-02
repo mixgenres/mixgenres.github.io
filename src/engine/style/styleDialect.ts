@@ -1,3 +1,4 @@
+import { mergeMixOverrides } from '../studio/dynamicMix/resolveMixContract';
 import { DEFAULT_STYLE_MASTER_PROFILE } from '../../data/sound/mix/masterProfiles';
 import type { SongStyle } from '../../data/styles/schema';
 import { styleTheoryFor } from '../../engine/lookup/theory';
@@ -61,6 +62,7 @@ export function applyStyleDialect(style: SongStyle, _index?: number): SongStyle 
   };
   style.sound = {
     ...(style.sound ?? {}),
+    ...(base.mix ? { mix: mergeMixOverrides(style.sound?.mix ?? {}, base.mix) } : {}),
     instrumentPalette: base.instruments.map(value => ({value,w:1})),
     masterProfile: { ...DEFAULT_STYLE_MASTER_PROFILE, ...(style.sound?.masterProfile ?? {}) },
   };

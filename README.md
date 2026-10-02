@@ -53,7 +53,7 @@ Style expectations are calibrated against documented musical practice and repres
 The project has two complementary validation layers:
 
 1. **Schema validation** — every catalog style resolves to a complete musical/performance contract, and its selected patterns and instrument techniques are usable.
-2. **Rendered-song validation** — default songs are compiled and rendered so rhythm, articulation, technique usage, instrument range, density, and mix behavior are tested on actual generated events/audio.
+2. **Behavior and audio validation** — focused regressions verify musical interactions; optional PCM checks cover shared renderer mechanisms rather than rendering every genre and style.
 
 Generated audit reports are intentionally not stored in the repository. Long-lived source-of-truth data belongs in `src/data`; transient validation output belongs in CI or local runs.
 
@@ -73,10 +73,10 @@ To render a song locally:
 npm run render-song -- salsa /tmp/salsa.mp3
 ```
 
-To run the style-performance audit without creating repository report files:
+To inspect every catalog property and resolved profile without rendering audio:
 
 ```bash
-npx tsx scripts/audit-style-performance.ts
+npm run audit:catalog
 ```
 
 ## Sound metadata resolution

@@ -1,7 +1,6 @@
 import { createServer } from 'vite';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { reportMetadata } from './lib/auditReport';
-import { measureEncodedAudio } from './lib/encodedAudio';
 
 const once = process.argv.includes('--once');
 const server = await createServer({ server: { host: '127.0.0.1', port: 3001, strictPort: true } });
@@ -10,7 +9,7 @@ server.middlewares.use('/__audit', async (request, response, next) => {
   response.setHeader('Content-Type', 'application/json');
   try {
     if (request.method === 'GET' && url.pathname === '/meta') { response.end(JSON.stringify(reportMetadata())); return; }
-    if (request.method !== 'POST' || !['/measure', '/report'].includes(url.pathname)) { next(); return; }
+    if (request.method !== 'POST' || url.pathname !== '/report') { next(); return; }
     const chunks: Buffer[] = []; let size = 0;
     for await (const chunk of request) {
       const buffer = Buffer.from(chunk); size += buffer.length;
@@ -18,14 +17,6 @@ server.middlewares.use('/__audit', async (request, response, next) => {
       chunks.push(buffer);
     }
     const body = Buffer.concat(chunks);
-    if (url.pathname === '/measure') {
-      const scope = url.searchParams.get('scope');
-      if (!scope || !/^[a-z0-9-]+$/.test(scope)) throw new Error('Invalid audit scope');
-      const measured = measureEncodedAudio(body);
-      mkdirSync('/tmp/mixgenres-browser-audit', { recursive: true });
-      writeFileSync(`/tmp/mixgenres-browser-audit/${scope}.mp3`, body);
-      response.end(JSON.stringify(measured)); return;
-    }
     const report = JSON.parse(body.toString());
     if (!Array.isArray(report.cases) || !Array.isArray(report.findings) || !report.coverage || !['PASS', 'FAIL'].includes(report.status)) throw new Error('Invalid browser report');
     const current = reportMetadata();

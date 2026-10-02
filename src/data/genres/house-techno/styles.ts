@@ -7,13 +7,7 @@ const STYLE_4: GenreStyleDefinition = {
         "origin": "Chicago / London",
         "era": "Late 1980s–1990s",
         "description": "TB-303 Squawk • Resonant • Fast\nRoland",
-        "characteristicInstruments": [
-          "synth",
-          "drums",
-          "sub-bass",
-          "sampler",
-          "acid-303"
-        ],
+        "characteristicInstruments": ["synth", "drums", "synth", "sampler", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -77,13 +71,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "Detroit, Michigan",
         "era": "1980s–1990s",
         "description": "Soulful • Futuristic • Strings\nThe original",
-        "characteristicInstruments": [
-          "synth",
-          "drums",
-          "strings",
-          "bass",
-          "sampler"
-        ],
+        "characteristicInstruments": ["synth", "drums", "string-ensemble", "bass", "sampler"],
         "preferredMeters": [
           "4/4"
         ],
@@ -147,13 +135,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "Berlin / Detroit",
         "era": "1990s–Present",
         "description": "Echo • Filter Sweep • Cavernous\nBasic",
-        "characteristicInstruments": [
-          "synth",
-          "sub-bass",
-          "drums",
-          "tape-echo",
-          "sampler"
-        ],
+        "characteristicInstruments": ["synth", "synth", "drums", "sampler"],
         "preferredMeters": [
           "4/4"
         ],
@@ -218,13 +200,7 @@ const STYLE_7: GenreStyleDefinition = {
         "origin": "Belgium / Germany",
         "era": "1980s–Present",
         "description": "Aggressive • 16th Bassline • Cyberpunk\nElectronic",
-        "characteristicInstruments": [
-          "synth",
-          "drums",
-          "sub-bass",
-          "sampler",
-          "saw-lead"
-        ],
+        "characteristicInstruments": ["synth", "drums", "synth", "sampler", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -288,13 +264,7 @@ const STYLE_5: GenreStyleDefinition = {
         "origin": "Berlin / Netherlands / UK",
         "era": "2000s–Present",
         "description": "Industrial • 140+ BPM • Distorted",
-        "characteristicInstruments": [
-          "drums",
-          "sub-bass",
-          "synth",
-          "sampler",
-          "noise-sweep"
-        ],
+        "characteristicInstruments": ["drums", "synth", "synth", "sampler", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -358,13 +328,7 @@ const STYLE_6: GenreStyleDefinition = {
         "origin": "Berlin / Italy / Ibiza",
         "era": "2015–Present",
         "description": "Emotional • Plucks • Cinematic\nEthereal lead",
-        "characteristicInstruments": [
-          "synth",
-          "drums",
-          "bass",
-          "strings",
-          "piano"
-        ],
+        "characteristicInstruments": ["synth", "drums", "bass", "string-ensemble", "piano"],
         "preferredMeters": [
           "4/4"
         ],
@@ -438,13 +402,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Berlin / Frankfurt",
         "era": "2000s",
         "description": "Sparse • Sub-bass • Micro-sounds\nSubtle hypnotic",
-        "characteristicInstruments": [
-          "drums",
-          "sampler",
-          "synth",
-          "sub-bass",
-          "warm-pad"
-        ],
+        "characteristicInstruments": ["drums", "sampler", "synth", "synth", "synth"],
         "preferredMeters": [
           "4/4"
         ],
@@ -497,13 +455,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Berlin / Ibiza / Amsterdam",
         "era": "2010s–Present",
         "description": "Pounding 909 • Big Room Drop",
-        "characteristicInstruments": [
-          "drums",
-          "synth",
-          "sub-bass",
-          "sampler",
-          "noise-sweep"
-        ],
+        "characteristicInstruments": ["drums", "synth", "synth", "sampler", "synth"],
         "preferredMeters": [
           "4/4"
         ],

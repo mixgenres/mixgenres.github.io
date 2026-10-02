@@ -7,13 +7,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "Havana, Cuba",
         "era": "1950s",
         "description": "Güiro • Flute & Violins •",
-        "characteristicInstruments": [
-          "flute",
-          "violin",
-          "guiro",
-          "congas",
-          "piano"
-        ],
+        "characteristicInstruments": ["flute", "violin", "guiro", "congas", "piano"],
         "preferredMeters": [
           "4/4"
         ],
@@ -87,13 +81,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Havana / New York",
         "era": "1940s–1950s",
         "description": "Big Band • Clave 2-3 •",
-        "characteristicInstruments": [
-          "brass",
-          "timbales",
-          "congas",
-          "piano",
-          "bass"
-        ],
+        "characteristicInstruments": ["horn-section", "timbales", "congas", "piano", "bass"],
         "preferredMeters": [
           "4/4"
         ],
@@ -158,13 +146,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "New York City (Fania Records)",
         "era": "1970s",
         "description": "Trombone Heavy • Clave Driven •",
-        "characteristicInstruments": [
-          "brass",
-          "congas",
-          "timbales",
-          "bongos",
-          "piano"
-        ],
+        "characteristicInstruments": ["horn-section", "congas", "timbales", "bongos", "piano"],
         "preferredMeters": [
           "4/4"
         ],
@@ -235,13 +217,7 @@ const STYLE_4: GenreStyleDefinition = {
         "origin": "Puerto Rico / Miami",
         "era": "1980s–1990s",
         "description": "Lush Synths • Romantic • Polished\nSmooth",
-        "characteristicInstruments": [
-          "brass",
-          "piano",
-          "synth",
-          "congas",
-          "timbales"
-        ],
+        "characteristicInstruments": ["horn-section", "piano", "synth", "congas", "timbales"],
         "preferredMeters": [
           "4/4"
         ],
@@ -316,13 +292,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "Eastern Cuba / Havana",
         "era": "1920s–1940s",
         "description": "Tres Cubano • Bongo • Root",
-        "characteristicInstruments": [
-          "tres",
-          "bongos",
-          "claves",
-          "acoustic-bass",
-          "trumpet"
-        ],
+        "characteristicInstruments": ["tres", "bongos", "claves", "bass", "trumpet"],
         "preferredMeters": [
           "4/4"
         ],

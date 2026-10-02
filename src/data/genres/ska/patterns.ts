@@ -24,9 +24,7 @@ export const SKA_WORLD_PATTERNS_BASS: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass"
-          ],
+          "instruments": ["bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -109,10 +107,7 @@ export const SKA_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "horn-section"
-          ],
+          "instruments": ["drums", "horn-section"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -185,11 +180,7 @@ export const SKA_WORLD_PATTERNS_CADENCE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "horn-section",
-            "guitar"
-          ],
+          "instruments": ["drums", "horn-section", "guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -262,10 +253,7 @@ export const SKA_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "electric-guitar",
-            "piano"
-          ],
+          "instruments": ["guitar", "piano"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -334,9 +322,7 @@ export const SKA_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "piano"
-          ],
+          "instruments": ["piano"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -401,14 +387,11 @@ export const SKA_WORLD_PATTERNS_CELL: MusicalPattern[] = [
             "song"
           ],
           "roles": [
-            "brass"
+            "horn-section"
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "trumpet",
-            "trombone"
-          ],
+          "instruments": ["trumpet", "trombone"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -482,10 +465,7 @@ export const SKA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "electric-guitar",
-            "drums"
-          ],
+          "instruments": ["guitar", "drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -601,9 +581,7 @@ export const SKA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -676,9 +654,7 @@ export const SKA_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "electric-guitar"
-          ],
+          "instruments": ["guitar"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -755,10 +731,7 @@ export const SKA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "trumpet",
-            "trombone"
-          ],
+          "instruments": ["trumpet", "trombone"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -886,11 +859,7 @@ export const SKA_WORLD_PATTERNS_INTERACTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "trumpet",
-            "trombone",
-            "alto-sax"
-          ],
+          "instruments": ["trumpet", "trombone", "alto-sax"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -968,10 +937,7 @@ export const SKA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "electric-guitar",
-            "piano"
-          ],
+          "instruments": ["guitar", "piano"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1089,10 +1055,7 @@ export const SKA_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass",
-            "upright-bass"
-          ],
+          "instruments": ["bass", "upright-bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1214,10 +1177,7 @@ export const SKA_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass",
-            "upright-bass"
-          ],
+          "instruments": ["bass", "upright-bass"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1361,10 +1321,7 @@ export const SKA_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass",
-            "drums"
-          ],
+          "instruments": ["bass", "drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,

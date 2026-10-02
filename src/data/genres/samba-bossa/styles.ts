@@ -7,13 +7,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Rio de Janeiro (Ipanema / Copacabana)",
         "era": "Late 1950s–1960s",
         "description": "Nylon Guitar • Whispering Vocals •",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "piano",
-          "flute",
-          "upright-bass",
-          "drums"
-        ],
+        "characteristicInstruments": ["guitar", "piano", "flute", "upright-bass", "drums"],
         "preferredMeters": [
           "2/4",
           "4/4"
@@ -88,13 +82,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "Rio de Janeiro (Fundo de Quintal)",
         "era": "Late 1970s–Present",
         "description": "Tantan • Pandeiro • Backyard Party\nWarm,",
-        "characteristicInstruments": [
-          "cavaquinho",
-          "pandeiro",
-          "tantan",
-          "repinique",
-          "synth"
-        ],
+        "characteristicInstruments": ["cavaquinho", "pandeiro", "tantan", "repinique", "synth"],
         "preferredMeters": [
           "2/4"
         ],
@@ -168,13 +156,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Rio de Janeiro (Sambadrome / Escolas de Samba)",
         "era": "1930s–Present",
         "description": "Bateria • Surdo Accent • Carnival",
-        "characteristicInstruments": [
-          "surdo",
-          "tamborim",
-          "cavaquinho",
-          "cuica",
-          "brass"
-        ],
+        "characteristicInstruments": ["surdo", "tamborim", "cavaquinho", "cuica", "horn-section"],
         "preferredMeters": [
           "2/4"
         ],
@@ -248,13 +230,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "Salvador da Bahia (Pelourinho / Olodum)",
         "era": "1980s–Present",
         "description": "Afro-Bahian Drums • Slow Swing •",
-        "characteristicInstruments": [
-          "surdo",
-          "timbales",
-          "repinique",
-          "brass",
-          "synth"
-        ],
+        "characteristicInstruments": ["surdo", "timbales", "repinique", "horn-section", "synth"],
         "preferredMeters": [
           "4/4",
           "2/4"

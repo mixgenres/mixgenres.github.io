@@ -11,7 +11,7 @@ export interface CulturalRules {
   avoidBassFoundation: boolean;
 }
 
-export const PREVIEW_MODAL_INSTRUMENTS = ['guqin','guzheng','pipa','erhu','dizi','xiao','jinghu','bagpipes','uilleann-pipes','tin-whistle','low-whistle','celtic-harp','fiddle','concertina','bodhran','bones'];
+export const PREVIEW_MODAL_INSTRUMENTS = ['guqin','guzheng','pipa','erhu','dizi','xiao','jinghu','bagpipes','uilleann-pipes','tin-whistle','low-whistle','harp','violin','concertina','bodhran','bones'];
 export const PREVIEW_FIXED_INSTRUMENTS = ['sho','ryuteki','hichiriki'];
 export const PREVIEW_CLUSTER_INSTRUMENTS = ['sho'];
 export const FIXED_CULTURAL_PITCH_INTERVALS = [0,2,4,7,9];

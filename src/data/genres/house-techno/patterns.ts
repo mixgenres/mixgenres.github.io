@@ -24,10 +24,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_BASS: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass",
-            "sub-bass"
-          ],
+          "instruments": ["bass", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -99,10 +96,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_BREAK: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "warm-pad",
-            "polysynth"
-          ],
+          "instruments": ["synth", "synth"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -172,10 +166,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_CELL: MusicalPattern[] = [
           ],
     
           "approaches": ["comping"],
-          "instruments": [
-            "piano",
-            "polysynth"
-          ],
+          "instruments": ["piano", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -248,10 +239,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "kick"
-          ],
+          "instruments": ["drums", "drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -369,10 +357,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "kick",
-            "drums"
-          ],
+          "instruments": ["drums", "drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -441,10 +426,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_GROOVE: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "drums",
-            "claves"
-          ],
+          "instruments": ["drums", "claves"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -513,10 +495,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "hats",
-            "drums"
-          ],
+          "instruments": ["drums", "drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -634,10 +613,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass",
-            "sub-bass"
-          ],
+          "instruments": ["bass", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -767,10 +743,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "polysynth",
-            "saw-lead"
-          ],
+          "instruments": ["synth", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -909,9 +882,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "hats"
-          ],
+          "instruments": ["drums"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -975,10 +946,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["phrase"],
-          "instruments": [
-            "synth",
-            "saw-lead"
-          ],
+          "instruments": ["synth", "synth"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -1061,9 +1029,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_OSTINATO: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "acid-303"
-          ],
+          "instruments": ["synth"],
           "meter": "4/4",
           "cycleLength": 2,
           "subdivisions": 32,
@@ -1155,10 +1121,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_PHRASEPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["walking"],
-          "instruments": [
-            "bass-lead",
-            "sub-bass"
-          ],
+          "instruments": ["synth", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,
@@ -1301,10 +1264,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "saw-lead",
-            "noise-sweep"
-          ],
+          "instruments": ["synth", "synth"],
           "meter": "4/4",
           "cycleLength": 4,
           "subdivisions": 64,
@@ -1382,11 +1342,7 @@ export const HOUSE_TECHNO_WORLD_PATTERNS_SECTIONPATTERN: MusicalPattern[] = [
           ],
     
           "approaches": ["groove"],
-          "instruments": [
-            "kick",
-            "bass",
-            "synth"
-          ],
+          "instruments": ["drums", "bass", "synth"],
           "meter": "4/4",
           "cycleLength": 1,
           "subdivisions": 16,

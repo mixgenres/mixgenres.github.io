@@ -1118,7 +1118,7 @@ function BpmControl({
       <div className="flex items-center gap-2">
         <button
           type="button"
-          onClick={() => onChange(Math.max(30, value - 5))}
+          onClick={() => { if (value > 5) onChange(value - 5); }}
           className="btn-pill font-mono font-bold cursor-pointer hover:bg-black/10 transition-colors px-3 py-1.5 text-xs"
           style={{ boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 25%, transparent)' }}
         >
@@ -1126,7 +1126,7 @@ function BpmControl({
         </button>
         <button
           type="button"
-          onClick={() => onChange(Math.max(30, value - 1))}
+          onClick={() => { if (value > 1) onChange(value - 1); }}
           className="btn-pill font-mono font-bold cursor-pointer hover:bg-black/10 transition-colors px-3 py-1.5 text-xs"
           style={{ boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 25%, transparent)' }}
         >
@@ -1135,12 +1135,12 @@ function BpmControl({
         <div className="flex-1 flex items-center justify-center gap-1.5 bg-black/5 px-3 py-1.5 rounded-[3px]" style={{ border: '1px solid color-mix(in srgb, var(--ink) 20%, transparent)' }}>
           <input
             type="number"
-            min={30}
-            max={300}
+            min={0}
+            step="any"
             value={value}
             onChange={e => {
-              const val = parseInt(e.target.value, 10);
-              if (!isNaN(val)) onChange(Math.max(30, Math.min(300, val)));
+              const val = Number(e.target.value);
+              if (Number.isFinite(val) && val > 0) onChange(val);
             }}
             className="w-14 text-center font-mono font-bold text-base bg-transparent outline-none"
           />
@@ -1148,7 +1148,7 @@ function BpmControl({
         </div>
         <button
           type="button"
-          onClick={() => onChange(Math.min(300, value + 1))}
+          onClick={() => onChange(value + 1)}
           className="btn-pill font-mono font-bold cursor-pointer hover:bg-black/10 transition-colors px-3 py-1.5 text-xs"
           style={{ boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 25%, transparent)' }}
         >
@@ -1156,7 +1156,7 @@ function BpmControl({
         </button>
         <button
           type="button"
-          onClick={() => onChange(Math.min(300, value + 5))}
+          onClick={() => onChange(value + 5)}
           className="btn-pill font-mono font-bold cursor-pointer hover:bg-black/10 transition-colors px-3 py-1.5 text-xs"
           style={{ boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 25%, transparent)' }}
         >

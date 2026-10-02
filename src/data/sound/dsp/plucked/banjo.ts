@@ -13,7 +13,7 @@ export const dspOverride: InstrumentDSPOverride = {
       "slide"
     ],
     "couplingPaths": [
-      "drone"
+      "synth"
     ],
     "techniqueBindings": [
       "Scruggs three-finger roll patterns (T-I-M)",

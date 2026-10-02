@@ -1,3 +1,4 @@
+import type { MixContract, MixOverride, ResolvedMixContract } from '../sound/schema/dynamicMix';
 import type { Role, SectionType, TuningSystemTag, GrooveMechanics, SectionEnergy } from '../schema';
 import type { WorldContract } from './contracts';
 
@@ -63,7 +64,7 @@ export interface HarmonyGrammar {
   chordVocabulary: string[];
   harmonicRhythm?: '1-bar' | '2-bar' | 'half-bar' | 'static' | string;
   voicingStyle?: string;
-  bassMotion?: 'root-fifth' | 'walking' | 'tumbao' | 'drone' | 'arpeggiated' | 'riff' | 'syncopated' | string;
+  bassMotion?: 'root-fifth' | 'walking' | 'tumbao' | 'synth' | 'arpeggiated' | 'riff' | 'syncopated' | string;
   tuningSystem?: TuningSystemTag;
 }
 
@@ -156,6 +157,7 @@ export interface ArrangementGrammar {
 }
 
 export interface SoundProfile {
+  mix?: MixOverride<MixContract>;
   instrumentPalette: Weighted<string>[];
   articulations?: Record<string, string>;
   masterProfile: { pocket?: number; lift?: number };
@@ -215,6 +217,7 @@ export interface DecisionTraceItem {
 export type DecisionTrace = DecisionTraceItem[];
 
 export interface ResolvedStyle extends SongStyle {
+  resolvedMix: ResolvedMixContract;
   contract: WorldContract;
   form: FormGrammar;
   harmony: HarmonyGrammar;

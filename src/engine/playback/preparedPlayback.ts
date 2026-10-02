@@ -1,3 +1,4 @@
+import { requiredVoiceCount, voiceTailSeconds } from './voiceAllocation';
 import { POLYPHONY_FALLBACK_RULES } from '../../data/sound/polyphony';
 import { INSTRUMENTS_BY_ID } from '../lookup/instruments';
 import { el } from '@elemaudio/core';
@@ -18,6 +19,7 @@ export interface LiveVoice {
   state: VoiceState;
   profile?: PreparedNote;
   program?: PreparedProgram;
+  availableAt?: number;
   panL: string;
   panR: string;
 }
@@ -26,6 +28,7 @@ export interface LiveTrack {
   initialParams: TrackParams;
   voices: LiveVoice[];
   profiles: Map<number, PreparedNote>;
+  tailSeconds: number;
   signal: { left: AudioSignal; right: AudioSignal };
 }
 export function getPolyphonyForTrack(instrumentId: string, role?: string): number {
@@ -53,7 +56,10 @@ export function preparePlaybackGraph(config: PlaybackConfiguration, mix: Prepara
       const params = resolveTrackSound(instrumentId, config.worldId, config.styleId ?? '', role);
       params.pan = mix.pans.get(id) ?? params.pan;
       params.volume = resolveTrackGain(params, mix.levels.get(id) ?? 1);
-      const count = Math.min(32, getPolyphonyForTrack(instrumentId, role));
+      const trackNotes = config.performance.notes.filter(note => note.trackId === id);
+      const tailSeconds = trackNotes.reduce((tail, note) => Math.max(tail, note.soundContext
+        ? voiceTailSeconds(resolveTrackSound(instrumentId, note.soundContext.worldId, note.soundContext.styleId, note.soundContext.role)) : 0), voiceTailSeconds(params));
+      const count = requiredVoiceCount(trackNotes, tailSeconds);
       const voices: LiveVoice[] = Array.from({ length: count }, (_, index) => ({
         graph: new PreparedVoiceGraph(`track_${id}_voice_${index}`),
         state: { id: `live-${id}-${index}`, note: 60, velocity: 0, gate: 0 },
@@ -71,7 +77,7 @@ export function preparePlaybackGraph(config: PlaybackConfiguration, mix: Prepara
       const dependencyKey = (keys: Array<keyof VoiceState>, voice: VoiceState) => JSON.stringify(keys.map(k => voice[k]));
       config.performance.notes.forEach((note, noteIndex) => {
         if (note.trackId !== id) return;
-        const voice = prepareNoteVoice(note, params, config.worldId, config.styleId ?? '', role);
+        const voice = prepareNoteVoice(note, params, config.worldId, config.styleId ?? '', role, config.performance.ccs.filter(cc => cc.trackId === id).map(cc => cc.cc));
         let programs: PreparedNote['programs'] | undefined;
         for (const cache of profileCaches.values()) {
           programs = cache.programs.get(dependencyKey(cache.keys, voice));
@@ -116,7 +122,7 @@ export function preparePlaybackGraph(config: PlaybackConfiguration, mix: Prepara
       });
       voicesCount += count;
       const volume = control(`track_${id}_vol`, mix.muted.get(id) || ([...mix.solo.values()].some(Boolean) && !mix.solo.get(id)) ? 0 : params.volume);
-      tracks.set(id, { params, initialParams: { ...params }, voices, profiles, signal: {
+      tracks.set(id, { params, tailSeconds, initialParams: { ...params }, voices, profiles, signal: {
         left: el.mul(volume, left.length ? el.add(...left) : 0), right: el.mul(volume, right.length ? el.add(...right) : 0),
       } });
     }
@@ -125,15 +131,25 @@ export function preparePlaybackGraph(config: PlaybackConfiguration, mix: Prepara
 export type PreparedPlaybackGraph = ReturnType<typeof preparePlaybackGraph>;
 
 /** Runs expensive UI preparation off the scheduling/UI thread in browsers. */
-export async function preparePlaybackGraphAsync(config: PlaybackConfiguration, mix: PreparationMixState): Promise<PreparedPlaybackGraph> {
+export async function preparePlaybackGraphAsync(config: PlaybackConfiguration, mix: PreparationMixState, signal?: AbortSignal): Promise<PreparedPlaybackGraph> {
+  if (signal?.aborted) throw new DOMException('Playback preparation was superseded', 'AbortError');
   if (typeof Worker === 'undefined') return preparePlaybackGraph(config, mix);
   const worker = new Worker(new URL('./playbackPreparationWorker.ts', import.meta.url), { type: 'module' });
   return new Promise((resolve, reject) => {
-    worker.onmessage = ({ data }: MessageEvent<{ result?: PreparedPlaybackGraph; error?: string }>) => {
+    const cleanup = () => {
+      signal?.removeEventListener('abort', abort);
       worker.terminate();
+    };
+    const abort = () => {
+      cleanup();
+      reject(new DOMException('Playback preparation was superseded', 'AbortError'));
+    };
+    signal?.addEventListener('abort', abort, { once: true });
+    worker.onmessage = ({ data }: MessageEvent<{ result?: PreparedPlaybackGraph; error?: string }>) => {
+      cleanup();
       if (data.result) resolve(data.result); else reject(new Error(data.error ?? 'Playback preparation failed'));
     };
-    worker.onerror = event => { worker.terminate(); reject(new Error(event.message || 'Playback preparation worker failed')); };
+    worker.onerror = event => { cleanup(); reject(new Error(event.message || 'Playback preparation worker failed')); };
     worker.postMessage({ config, mix });
   });
 }

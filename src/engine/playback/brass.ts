@@ -5,7 +5,7 @@ import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instru
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 
 export default class BrassModule implements InstrumentModule {
-  id = 'brass';
+  id = 'brass-family';
 
   renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const { params, gateSignal, freqSignal, action, dspProfile } = ctx;

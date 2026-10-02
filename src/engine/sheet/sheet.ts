@@ -208,13 +208,11 @@ export function toBar(
     return { onsets: keep, accents: accents ? a : undefined, durations: durations ? d : undefined };
   }
 
-  const seen = new Set<number>();
   const keep: number[] = [], a: number[] = [], d: number[] = [];
   onsets.forEach((o, i) => {
     if (o < 0 || o >= sourceGrid) return;
-    const mapped = Math.min(15, Math.max(0, Math.round((o * 16) / sourceGrid)));
-    if (seen.has(mapped)) return;
-    seen.add(mapped); keep.push(mapped);
+    const mapped = (o * 16) / sourceGrid;
+    keep.push(mapped);
     if (accents) a.push(accents[i] ?? 0.75);
     if (durations) d.push(durations[i] ?? 1);
   });
@@ -1982,25 +1980,43 @@ export function makeSheet(
   });
 
 
-  // Start with the authored style band, then fill from the genre palette so
-  // generated examples have enough independent musical roles.
+  // Keep the authored band size, including repeated instrument parts.
+  // Use the genre palette only when the style has no authored band.
   const stylePalette = runtime.getInstrumentPalette();
   const genrePalette = contractForGenre(genreId).timbreSpace.palette;
   const ensembleIds = (resolved.arrangement?.ensemble ?? [])
     .flatMap(e => e.instrumentIds ?? []);
   const ensembleRoleByInstrument = new Map((resolved.arrangement?.ensemble ?? [])
     .flatMap(e => (e.instrumentIds ?? []).map(id => [id, e.role] as const)));
-  const candidates = [...stylePalette, ...ensembleIds, ...genrePalette]
-    .filter((id, i, arr) => INSTRUMENTS_BY_ID[id] && arr.indexOf(id) === i);
-  const targetCount = Math.min(8, Math.max(6, stylePalette.length || candidates.length));
+  // Repeated canonical IDs represent separate ensemble parts. This matters for
+  // styles that used to spell synth patches or guitar setups as separate
+  // instruments: the part now carries the same physical instrument and gets
+  // its timbre from its role-specific dialect.
+  const authoredPalette = stylePalette.filter(id => INSTRUMENTS_BY_ID[id]);
+  const supplemental = [...ensembleIds, ...genrePalette]
+    .filter((id, i, arr) => INSTRUMENTS_BY_ID[id] && arr.indexOf(id) === i && !authoredPalette.includes(id));
+  const candidates = [...authoredPalette, ...supplemental];
+  const targetCount = authoredPalette.length || candidates.length;
   const hints = candidates.slice(0, targetCount);
+  while (hints.length < targetCount && candidates.length) hints.push(candidates[hints.length % candidates.length]);
+  const paletteRoles = new Map<string, string[]>();
+  for (const id of hints) {
+    const roles = paletteRoles.get(id) ?? [];
+    roles.push(id === 'synth' ? ['bass', 'lead', 'pad', 'comp', 'texture'][roles.length % 5]
+      : id === 'guitar' ? ['comp', 'rhythm', 'lead', 'texture'][roles.length % 4]
+        : roleForInstrument(id));
+    paletteRoles.set(id, roles);
+  }
 
   const tracks: Voice[] = hints.map((instrumentId, i) => {
     const def = instrument(instrumentId);
+    const paletteRole = paletteRoles.get(instrumentId)?.shift() ?? roleForInstrument(instrumentId);
+    const role = (instrumentId === 'synth' || instrumentId === 'guitar') && (paletteRoles.get(instrumentId)?.length ?? 0) > 0
+      ? paletteRole : ensembleRoleByInstrument.get(instrumentId) ?? paletteRole;
     return {
       id: `v${i}`, instrumentId, name: def.name, instrument: def.name,
-      role: ensembleRoleByInstrument.get(instrumentId) ?? roleForInstrument(instrumentId), kind: instrumentId,
-      muted: false, volume: calibratedTrackVolume(genreId, instrumentId, ensembleRoleByInstrument.get(instrumentId) ?? roleForInstrument(instrumentId), styleId, resolved.contract.timbreSpace.mixCharacter?.bassForward), lensIds: [],
+      role, kind: instrumentId,
+      muted: false, volume: calibratedTrackVolume(genreId, instrumentId, role, styleId, resolved.contract.timbreSpace.mixCharacter?.bassForward), lensIds: [],
     };
   });
 
@@ -2175,19 +2191,20 @@ export function setSectionChords(sheet: Sheet, regionId: string, chords: string[
  * Set the song base BPM.
  */
 export function setSongBpm(sheet: Sheet, bpm: number): Sheet {
-  const clamped = Math.max(30, Math.min(300, Math.round(bpm)));
-  return rebuild({ ...sheet, bpm: clamped });
+  if (!Number.isFinite(bpm) || bpm <= 0) return sheet;
+  return rebuild({ ...sheet, bpm });
 }
 
 /**
  * Set a specific section BPM (or remove the section override if bpm is undefined).
  */
 export function setSectionBpm(sheet: Sheet, regionId: string, bpm?: number): Sheet {
+  if (bpm !== undefined && (!Number.isFinite(bpm) || bpm <= 0)) return sheet;
   const regions = sheet.regions.map(r => {
     if (r.id !== regionId) return r;
     return {
       ...r,
-      bpm: bpm ? Math.max(30, Math.min(300, Math.round(bpm))) : undefined,
+      bpm,
     };
   });
   return rebuild({ ...sheet, regions });

@@ -7,13 +7,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "Harlem, New York City",
         "era": "1940s",
         "description": "Fast • Chromatic • Virtuosic\nRapid harmonic",
-        "characteristicInstruments": [
-          "alto-sax",
-          "trumpet",
-          "piano",
-          "upright-bass",
-          "drums"
-        ],
+        "characteristicInstruments": ["alto-sax", "trumpet", "piano", "upright-bass", "drums"],
         "preferredMeters": [
           "4/4"
         ],
@@ -88,13 +82,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "New York / Los Angeles (West Coast)",
         "era": "Late 1940s–1950s",
         "description": "Subtle • Relaxed • Lyricism\nRestrained, understated",
-        "characteristicInstruments": [
-          "trumpet",
-          "alto-sax",
-          "piano",
-          "upright-bass",
-          "drums"
-        ],
+        "characteristicInstruments": ["trumpet", "alto-sax", "piano", "upright-bass", "drums"],
         "preferredMeters": [
           "4/4",
           "3/4"
@@ -170,13 +158,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "New York City / Los Angeles",
         "era": "Late 1950s–1960s",
         "description": "Avant-Garde • Atonal • Unbound\nRadical improvisation",
-        "characteristicInstruments": [
-          "tenor-sax",
-          "alto-sax",
-          "trumpet",
-          "upright-bass",
-          "drums"
-        ],
+        "characteristicInstruments": ["tenor-sax", "alto-sax", "trumpet", "upright-bass", "drums"],
         "preferredMeters": [
           "free"
         ],
@@ -229,13 +211,7 @@ const STYLE_5: GenreStyleDefinition = {
         "origin": "New York / Los Angeles",
         "era": "Late 1960s–1970s",
         "description": "Electric • Complex Meter • High",
-        "characteristicInstruments": [
-          "synth",
-          "electric-guitar",
-          "bass",
-          "drums",
-          "tenor-sax"
-        ],
+        "characteristicInstruments": ["synth", "guitar", "bass", "drums", "tenor-sax"],
         "preferredMeters": [
           "4/4",
           "7/8",
@@ -311,13 +287,7 @@ const STYLE_4: GenreStyleDefinition = {
         "origin": "Paris, France (Manouche GenreStyleDefinition)",
         "era": "1930s–1940s",
         "description": "La Pompe • Acoustic Guitar •",
-        "characteristicInstruments": [
-          "acoustic-guitar",
-          "violin",
-          "upright-bass",
-          "clarinet",
-          "tenor-sax"
-        ],
+        "characteristicInstruments": ["guitar", "violin", "upright-bass", "clarinet", "tenor-sax"],
         "preferredMeters": [
           "4/4"
         ],
@@ -392,13 +362,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "New York / Philadelphia / Detroit",
         "era": "1950s–1960s",
         "description": "Soulful • Blues-infused • Driving\nGospel and",
-        "characteristicInstruments": [
-          "tenor-sax",
-          "trumpet",
-          "piano",
-          "upright-bass",
-          "drums"
-        ],
+        "characteristicInstruments": ["tenor-sax", "trumpet", "piano", "upright-bass", "drums"],
         "preferredMeters": [
           "4/4"
         ],
@@ -473,13 +437,7 @@ const STYLE_7: GenreStyleDefinition = {
         "origin": "Sedalia / St. Louis, Missouri",
         "era": "1890s–1910s",
         "description": "Syncopated • Marching Bass • Piano\nFoundational",
-        "characteristicInstruments": [
-          "piano",
-          "banjo",
-          "brass",
-          "upright-bass",
-          "drums"
-        ],
+        "characteristicInstruments": ["piano", "banjo", "horn-section", "upright-bass", "drums"],
         "preferredMeters": [
           "2/4"
         ],
@@ -558,13 +516,7 @@ const STYLE_6: GenreStyleDefinition = {
         "origin": "New York / Chicago / Global",
         "era": "Late 1960s–1970s",
         "description": "Modal Drone • Cosmic • Transcendental\nSearching",
-        "characteristicInstruments": [
-          "tenor-sax",
-          "harp",
-          "piano",
-          "upright-bass",
-          "drums"
-        ],
+        "characteristicInstruments": ["tenor-sax", "harp", "piano", "upright-bass", "drums"],
         "preferredMeters": [
           "4/4",
           "3/4",
@@ -615,7 +567,7 @@ const STYLE_6: GenreStyleDefinition = {
             "C7alt",
             "Fm7"
           ],
-          "drone": [
+          "synth": [
             "Fm7",
             "Fm7",
             "Fm7",

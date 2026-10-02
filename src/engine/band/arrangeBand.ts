@@ -1,3 +1,5 @@
+import { compileMixSceneTimeline } from '../studio/dynamicMix/compileMixSceneTimeline';
+import { beatsPerBarOf } from '../sheet/grid';
 import { supportsSolo, soloistAtBar } from '../sheet/solo';
 import { GENRE_ID_ALIASES } from '../../data/performance/genreAliases';
 import { KIT_COMPONENT_MIDI_ALIASES } from '../../data/instruments/kitComponentAliases';
@@ -15,7 +17,7 @@ import { getResolvedSectionStyle } from '../sheet/sheet.ts';
 import { parseChord } from '../sheet/musicTheory.ts';
 import { foldToRange, noteLengthBeats, voiceProfile } from '../sheet/instrumentRoles.ts';
 import { resolveTuningSystem } from '../sheet/tuning.ts';
-import { buildBarTimes, thinForSustain, type BarTime, type Performance, type PerfNote, type PerfCC } from '../band/performanceData.ts';
+import { buildBarTimes, type BarTime, type Performance, type PerformancePhrase, type PerfNote, type PerfCC } from '../band/performanceData.ts';
 import {
   buildHybridGrammar,
   createPhraseState,
@@ -119,13 +121,14 @@ function hitFrom(pattern: MusicalPattern, i: number, rawHit?: string): HitFuncti
   return 'tone';
 }
 
-function rhythmIdeaFromPattern(p: MusicalPattern, sourceGenre: string): RhythmIdea {
+function rhythmIdeaFromPattern(p: MusicalPattern, sourceGenre: string, beatsPerBar = 4): RhythmIdea {
   const sub = Math.max(1, p.subdivisions ?? 16);
   const onsets = (p.onsetGrid ?? []).map((position: number, i: number) => ({
     position: (position + Number(p.anticipationOffset ?? 0)) / sub,
     accent: clamp(Number(p.accentProfile?.[i] ?? 0.72)),
     velocity: clamp(Number(p.velocityProfile?.[i] ?? p.accentProfile?.[i] ?? 0.72)),
-    duration: clamp(Number(p.durationGrid?.[i] ?? 1) / sub * 4, 0.05, 2),
+    duration: Math.max(0.001, Number(p.durationGrid?.[i] ?? 1) / sub * beatsPerBar),
+    durationAuthored: Array.isArray(p.durationGrid),
     hit: hitFrom(p, i),
     sourceHit: p.hitGrid?.[i] ?? (p.instruments?.includes('drums') || p.family?.toLowerCase().includes('drum') ? `${p.id} ${p.name}` : undefined),
     sourceGenre: p.worldId || sourceGenre,
@@ -163,23 +166,23 @@ function isPatternPerformanceDetails(value: unknown): value is PatternPerformanc
   return typeof value === 'object' && value !== null;
 }
 
-function rhythmIdeaFromMeasure(detail: NonNullable<Measure['patternDetailsByTrack']>[string] | undefined, fallback: RhythmIdea): RhythmIdea {
+function rhythmIdeaFromMeasure(detail: NonNullable<Measure['patternDetailsByTrack']>[string] | undefined, fallback: RhythmIdea, beatsPerBar: number): RhythmIdea {
   if (!detail) return fallback;
   const p = PATTERNS_BY_ID[detail.patternId] ?? fallback.pattern;
   const runtimeDetail = detail as RuntimePatternDetails;
   const perf = isPatternPerformanceDetails(runtimeDetail.perf) ? runtimeDetail.perf : undefined;
   const steps = Math.max(1, Number(perf?.stepsPerBar ?? p.subdivisions ?? fallback.subdivisions));
-  const nativeOnsets = Array.isArray(perf?.onsets) ? perf.onsets : [];
+  const nativeOnsets = Array.isArray(perf?.onsets) ? perf.onsets : detail.onsetGrid;
   const nativeAccents = Array.isArray(perf?.accents) ? perf.accents : [];
   const nativeVelocities = Array.isArray(perf?.velocities) ? perf.velocities : [];
   const nativeDurations = Array.isArray(perf?.durations) ? perf.durations : [];
   const nativeHitTypes = Array.isArray(perf?.hitTypes) ? perf.hitTypes : [];
-  const nativeSteps = Math.max(1, Number(perf?.stepsPerBar ?? p.subdivisions ?? fallback.subdivisions));
+  const nativeSteps = Math.max(1, Number(perf?.stepsPerBar ?? 16));
   const onsets = nativeOnsets.map((position: number, i: number) => ({
     position: (position + Number(p.anticipationOffset ?? 0)) / nativeSteps,
     accent: clamp(Number(nativeAccents[i] ?? detail.accentProfile?.[i] ?? 0.72)),
     velocity: clamp(Number(nativeVelocities[i] ?? p.velocityProfile?.[i] ?? nativeAccents[i] ?? detail.accentProfile?.[i] ?? 0.72)),
-    duration: clamp(Number(nativeDurations[i] ?? detail.durationGrid?.[i] ?? 1) / nativeSteps * 4, 0.05, 2),
+    duration: Math.max(0.001, Number(nativeDurations[i] ?? detail.durationGrid?.[i] ?? 1) / nativeSteps * beatsPerBar),
     durationAuthored: Boolean(perf?.durationsAuthored) || Array.isArray(detail.durationGrid),
     hit: hitFrom(p, i, nativeHitTypes[i] ?? detail.hitTypes?.[i]),
     sourceHit: nativeHitTypes[i] || detail.hitTypes?.[i] || p.hitGrid?.[i] || (p.instruments?.includes('drums') || p.family?.toLowerCase().includes('drum') ? `${p.id} ${p.name}` : undefined),
@@ -242,7 +245,7 @@ function resolveLens(sheet: Sheet, region: Region, track: Voice): LensStack {
 function chooseRhythm(sheet: Sheet, region: Region, track: Voice, style?: ResolvedStyle): RhythmIdea {
   const measure = sheet.measures.find(x => x.regionId === region.id && (x.patternByTrack?.[track.id] || x.patternDetailsByTrack?.[track.id]));
   const pid = measure?.patternByTrack?.[track.id] ?? measure?.patternDetailsByTrack?.[track.id]?.patternId;
-  if (pid && PATTERNS_BY_ID[pid]) return rhythmIdeaFromPattern(PATTERNS_BY_ID[pid], region.genre ?? sheet.worldId);
+  if (pid && PATTERNS_BY_ID[pid]) return rhythmIdeaFromPattern(PATTERNS_BY_ID[pid], region.genre ?? sheet.worldId, beatsPerBarOf(sheet.timeSignature));
   const g = region.genre ?? sheet.worldId;
   const role = voiceProfile(track.instrumentId).role;
   const styleText = `${style?.id ?? ''} ${style?.name ?? ''} ${(style?.rhythm?.signatureCell ?? '')} ${(style?.signatureTraits ?? []).join(' ')}`.toLowerCase();
@@ -264,7 +267,7 @@ function chooseRhythm(sheet: Sheet, region: Region, track: Voice, style?: Resolv
   };
   const p = candidates.sort((a,b) => score(b) - score(a) || a.id.localeCompare(b.id))[0] ?? Object.values(PATTERNS_BY_ID).sort((a,b)=>a.id.localeCompare(b.id))[0];
   if (!p) throw new Error('No rhythm definitions available');
-  return rhythmIdeaFromPattern(p, g);
+  return rhythmIdeaFromPattern(p, g, beatsPerBarOf(sheet.timeSignature));
 }
 
 function patternGestureHint(pattern: MusicalPattern, instrumentId: string, styleId: string | undefined): string | undefined {
@@ -340,7 +343,7 @@ function grooveTime(
   onsetIndex: number,
   groove: BandPlan['lanes'][string][number]['groove'],
 ): number {
-  const beatSec = 60 / Math.max(20, bt.bpm);
+  const beatSec = 60 / bt.bpm;
   const beat = onset.position * bt.beatsPerBar;
   const anticipation = (Number(onset.anticipationOffsetSteps ?? 0) + Number(groove.anticipationOffsetSteps ?? 0)) * (beatSec * bt.beatsPerBar / 16);
   const swingDelta = onsetIndex % 2 === 1 ? (groove.swing - 0.5) * beatSec * 0.5 : 0;
@@ -451,6 +454,7 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
 
   const band = { song, lanes } satisfies BandPlan;
   const notes: PerfNote[] = [];
+  const phrases: PerformancePhrase[] = [];
   const ccs: PerfCC[] = [];
 
   for (const region of sheet.regions) {
@@ -486,6 +490,13 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
       const phraseBars = Math.max(cycle, Math.ceil(Number(preferredPhraseBars) / cycle) * cycle);
       for (let phraseStart = region.start, phraseIndex = 0; phraseStart < region.end; phraseStart += phraseBars, phraseIndex++) {
         const phraseEnd = Math.min(region.end, phraseStart + phraseBars);
+        const phraseId = `${track.id}:${region.id}:${phraseIndex}`;
+        const soundContext = { worldId: region.genre ?? sheet.worldId, styleId: regionStyle.id, role: track.role };
+        const phrase: PerformancePhrase = {
+          id: phraseId, trackId: track.id, regionId: region.id, startBar: phraseStart, endBar: phraseEnd,
+          start: bars[phraseStart]?.start ?? 0, end: bars[phraseEnd - 1]?.end ?? 0, soundContext,
+        };
+        phrases.push(phrase);
         const state = createPhraseState(phraseIndex);
         const phraseNotes: PerfNote[] = [];
         for (let bar = phraseStart; bar < phraseEnd; bar++) {
@@ -497,15 +508,11 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
           const measure = sheet.measures[bar];
           if (!bt || !measure) continue;
           const detail = measure.patternDetailsByTrack?.[track.id];
-          const rhythm = rhythmIdeaFromMeasure(detail, lane.rhythm);
+          const rhythm = rhythmIdeaFromMeasure(detail, lane.rhythm, bt.beatsPerBar);
           if (!rhythm.onsets.length) continue;
           const chord = measure.chord || 'C';
           const nextChord = sheet.measures[bar + 1]?.chord;
           const energy = activityFor(regionStyle.contract, decision.sectionEnergy);
-          const voiceShape = voiceProfile(track.instrumentId);
-          const keepAttack = thinForSustain(voiceShape,
-            rhythm.onsets.map(o => ({ beatInBar: o.position * bt.beatsPerBar, accent: o.accent })),
-            bt.beatsPerBar, energy);
           const phrasePosition = ((bar - phraseStart) + 0.5) / Math.max(1, phraseEnd - phraseStart);
           const phraseStage = soloGrammar?.phraseStages?.length
             ? soloGrammar.phraseStages[phraseIndex % soloGrammar.phraseStages.length]
@@ -519,7 +526,6 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
           const barNotes: PerfNote[] = [];
 
           for (let i = 0; i < rhythm.onsets.length; i++) {
-            if (!keepAttack[i]) continue;
             if (soloist && phraseStage === 'rest' && phrasePosition >= 0.38 && phrasePosition <= 0.62) continue;
             const onset = rhythm.onsets[i];
           const ctx: PhraseContext = {
@@ -591,8 +597,8 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
             const sustainEligible = pv.sustain === 'sustained' || pv.sustain === 'blown' || pv.sustain === 'decaying';
             const authoredBeats = Math.max(0.04, sustainEligible && authoredIsDefaultStep ? localGapBeats : onset.duration);
             const gapBeats = Math.max(localGapBeats, onset.hit === 'sustain' ? 1.0 : 0.18);
-            const durBeats = noteLengthBeats(pv, authoredBeats, gapBeats * (onset.hit === 'sustain' ? 3.5 : 1.7), gestureName);
-            const dur = Math.max(0.028, durBeats * (60 / Math.max(20, bt.bpm)) * (0.82 + ctx.hostProfile.phrase.sustain * 0.32));
+            const durBeats = noteLengthBeats(pv, authoredBeats, Math.max(gapBeats, onset.durationAuthored ? authoredBeats : 0) * (onset.hit === 'sustain' ? 3.5 : 1.7), gestureName);
+            const dur = Math.max(0.028, durBeats * (60 / bt.bpm) * (0.82 + ctx.hostProfile.phrase.sustain * 0.32));
             const tuning = resolveTuningSystem(regionStyle.harmony?.tuningSystem ?? '12-tet');
 
             for (let mi = 0; mi < midis.length; mi++) {
@@ -606,6 +612,9 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
                 ? mi * (rolledChord ? INSTRUMENTS_BY_ID[track.instrumentId]?.attackProfile?.rolledChordSpreadSeconds ?? 0.011 : 0.014)
                 : 0;
               const note: PerfNote = {
+                soundContext,
+                attackId: `${track.id}:${region.id}:${bar}:${i}`,
+                phraseId,
                 time: Math.max(0, time + stagger),
                 dur: Math.max(0.028, dur - stagger * 0.35),
                 midi,
@@ -630,12 +639,15 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
                 grammarBundle.hybrid.subdivisionVocabulary?.bass?.includes(2)) {
               const current = midis[0];
               const gap = time - state.previousTime;
-              if (gap > (60 / Math.max(20, bt.bpm)) * 0.72 && gap < (60 / Math.max(20, bt.bpm)) * 1.8) {
+              if (gap > (60 / bt.bpm) * 0.72 && gap < (60 / bt.bpm) * 1.8) {
                 const passing = derivePassingMidi(state, current, ctx);
                 if (passing !== undefined && passing !== state.previousMidi && passing !== current) {
                   const passTime = state.previousTime + gap * 0.5;
                   const passVel = Math.max(18, Math.round(vel * 0.68));
                   barNotes.push({
+                    soundContext,
+                    attackId: `${track.id}:${region.id}:${bar}:${i}:passing`,
+                    phraseId,
                     time: passTime,
                     dur: Math.min(0.16, gap * 0.42),
                     midi: passing,
@@ -688,16 +700,15 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
       // instrument's playable range. Clamping to an endpoint can turn a root
       // into a different pitch class; octave-folding cannot.
       n.midi = foldToRange(n.midi, voiceProfile(track.instrumentId));
-      if (kept.length) {
-        const prev = kept[kept.length - 1];
-        const minGap = p.capabilities.polyphony <= 1 ? 0.004 : 0.001;
-        if (n.time < prev.time + minGap && p.capabilities.polyphony <= 1) {
-          if (n.vel <= prev.vel) continue;
-          prev.dur = Math.max(0.008, n.time - prev.time - minGap);
+      // A new attack is never discarded because its predecessor still rings.
+      // Single-player monophonic lines release their predecessor at the next
+      // distinct attack; polyphonic parts keep authored overlaps intact.
+      if (p.capabilities.polyphony <= 1) {
+        for (let i = kept.length - 1; i >= 0; i--) {
+          const prev = kept[i];
+          if (prev.time < n.time && prev.time + prev.dur > n.time) prev.dur = n.time - prev.time;
         }
       }
-      const active = kept.filter(x => x.time <= n.time && x.time + x.dur > n.time);
-      if (active.length >= p.capabilities.polyphony) continue;
       kept.push(n);
     }
     resolved.push(...kept);
@@ -709,20 +720,27 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
     const trackNotes = resolved.filter(x => x.trackId === track.id).sort((a, b) => a.time - b.time);
 
     if (track.instrumentId === 'bandoneon') {
-      resolveBandoneonPhysicalFingering(track, trackNotes);
       continue;
     }
 
     let reservoir = 0.5;
     let dir: 1 | 2 = 1;
-    for (const n of trackNotes) {
-      const need = 0.08 + n.accent * 0.18;
+    const attacks = new Map<string, PerfNote[]>();
+    for (const note of trackNotes) {
+      const key = note.attackId ?? String(note.time);
+      const group = attacks.get(key) ?? [];
+      group.push(note); attacks.set(key, group);
+    }
+    for (const group of attacks.values()) {
+      const n = group[0];
+      const accent = group.reduce((sum, note) => sum + note.accent, 0) / group.length;
+      const need = 0.08 + accent * 0.18;
       if (reservoir < need || (n.gestureCode === GESTURE_CODES['accent'] && reservoir > 0.35)) {
         dir = dir === 1 ? 2 : 1;
         reservoir = 0.65;
       }
       reservoir = clamp(reservoir - need, 0.05, 0.95);
-      n.bellowsDirectionCode = dir;
+      for (const note of group) note.bellowsDirectionCode = dir;
     }
   }
 
@@ -730,6 +748,7 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
   const duration = bars[bars.length - 1]?.end ?? 0;
   const basePerformance: Performance = {
     notes: resolved,
+    phrases,
     ccs,
     bars,
     duration,
@@ -766,6 +785,23 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
       }
     }
   }
+  // Bisonoric fingering must agree with the final phrase-shaped pitches.
+  for (const track of sheet.tracks as Voice[]) {
+    if (track.instrumentId === 'bandoneon') resolveBandoneonPhysicalFingering(track,
+      performance.notes.filter(note => note.trackId === track.id).sort((a, b) => a.time - b.time));
+  }
+  // Pitch shaping and range folding happen before frequency is finalized.
+  for (const note of performance.notes) {
+    const track = sheet.tracks.find(t => t.id === note.trackId);
+    const region = sheet.regions.find(r => r.id === bars[note.bar]?.regionId);
+    if (!track?.instrumentId || !region) continue;
+    const genre = region.genre ?? sheet.worldId;
+    note.midi = foldToRange(note.midi, voiceProfile(track.instrumentId, genre));
+    const style = getResolvedSectionStyle(sheet, region);
+    note.frequencyHz = resolveTuningSystem(style.harmony?.tuningSystem ?? '12-tet')
+      .getFrequencyHz(note.midi, parseChord(sheet.measures[note.bar]?.chord || 'C').rootPc);
+  }
+  performance.mixTimeline = compileMixSceneTimeline(sheet, performance);
   return performance;
 }
 

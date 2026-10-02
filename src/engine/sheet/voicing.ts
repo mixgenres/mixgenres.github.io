@@ -111,7 +111,7 @@ export function voiceChord(req: VoicingRequest): number[] {
     const prevTopNote = prevSorted[prevSorted.length - 1];
 
     const wanted = priorityIntervals(chord, req.bassCovered, intensity, isJazzFunkNeo);
-    const numNotes = Math.max(3, Math.min(5, req.size));
+    const numNotes = Math.max(3, req.size);
     const pcs = wanted.slice(0, numNotes).map(iv => pcOf(chord.rootPc + iv));
 
     let bestVoicing: number[] = [];
@@ -144,7 +144,7 @@ export function voiceChord(req: VoicingRequest): number[] {
 
   // Strict 4-Part SATB Divisi for Choirs & Vocal Sections (Prompt 22)
   const isChoir = VOICING_CLASSIFIERS.choir.test(profile.id || '') && !/lead/i.test(profile.id || '');
-  if (isChoir) {
+  if (isChoir && req.size === 4) {
     const wanted = priorityIntervals(chord, req.bassCovered, intensity, isJazzFunkNeo);
     // Ensure we have exactly 4 notes (Bass, Tenor, Alto, Soprano)
     const rawPcs = wanted.slice(0, 4);
@@ -457,7 +457,7 @@ export function voiceChord(req: VoicingRequest): number[] {
   const wanted = priorityIntervals(chord, req.bassCovered, intensity, isJazzFunkNeo);
   const energySize = energy >= 5 ? 1 : energy <= 1 ? -1 : 0;
   const phaseSize = cycleLength > 1 && phase === cycleLength - 1 ? 0 : 0;
-  let requestedSize = Math.max(2, Math.min(12, req.size + energySize + phaseSize));
+  let requestedSize = Math.max(2, req.size + energySize + phaseSize);
 
   const isGospelOrSoul = VOICING_CLASSIFIERS.gospelOrSoul.test(styleStr);
   if (isGospelOrSoul && isKeyboard && intensity > 0.5) {

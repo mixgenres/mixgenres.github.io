@@ -1,3 +1,5 @@
+import type { TrackParams } from './elementaryEngine';
+import { resolveVoiceParameters } from './instrumentRegistry';
 import { TANGO_INSTRUMENT_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
 import { PIANO_DANCE_PATTERN, PIANO_JAZZ_FAMILY_PATTERN, TANGO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
 import { el } from '@elemaudio/core';
@@ -23,6 +25,15 @@ import { createDampedStringLoop, fbGainForDecay } from './instrumentLib_stringLo
  */
 export default class PianoModule implements InstrumentModule {
   id = 'piano';
+
+  releaseTailSeconds(params: TrackParams): number {
+    const physical = resolveVoiceParameters({ id: 'tail', note: 60, velocity: 1, gate: 0, action: 'tone' }, params);
+    const response = TANGO_INSTRUMENT_RESPONSE.piano;
+    // The same T60 law as the longest normal string, plus technique-specific
+    // resonances. Export and voice allocation must not cut this at four seconds.
+    return Math.max(3.8, response.marcatoDecay, response.marcatoDecayDefault,
+      0.85 + physical.decayTime * (1.5 + physical.b * 2.2) * physical.genreDialect.decay);
+  }
 
   renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {

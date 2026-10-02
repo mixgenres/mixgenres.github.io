@@ -1,5 +1,5 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><title>Native browser mix audit</title>
-<style>body{font:16px system-ui;margin:32px;max-width:1000px;background:#f8fafc;color:#172033}button,select{font:inherit;padding:10px;margin-right:8px}textarea{width:100%;height:420px;font:12px monospace}pre{white-space:pre-wrap}.error{color:#b91c1c}</style>
-<h1>Native browser mix audit</h1><p>Runs the actual Web Audio master and export path. Measures PCM before encoding and decoded MP3 LUFS/true peak. Short excerpts do not establish whole-song loudness.</p>
-<label>Coverage <select id="scope"><option value="representative">Default genres and contrasting styles</option><option value="all">All styles</option><option value="smoke">Tango, Electrotango, K-Pop and Guqin</option></select></label><button id="run">Run audit</button><p id="status">Ready</p><pre id="progress"></pre><label for="report">Detailed JSON report</label><textarea id="report" readonly></textarea>
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Browser audio check</title>
+<style>body{font:16px system-ui;margin:32px;max-width:900px;background:#f8fafc;color:#172033}button,select{font:inherit;padding:10px;margin-right:8px}pre{white-space:pre-wrap}</style>
+<h1>Browser audio check</h1><p>Checks the native playback buffer and Web Audio master with a small set covering shared renderer mechanisms. Run in each target browser. Detailed measurements are saved to JSON.</p>
+<label>Selection <select id="scope"><option value="">Renderer coverage</option></select></label><button id="run">Run check</button><p id="status" role="status">Ready</p><pre id="report"></pre>
 <script type="module" src="./browser-mix-audit.ts"></script></html>

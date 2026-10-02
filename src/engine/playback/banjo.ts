@@ -4,7 +4,7 @@ import { createDampedStringLoop, fbGainForDecay } from './instrumentLib_stringLo
 
 /**
  * Five-string banjo: a short, bright plucked-string instrument coupled to a
- * tensioned head. It deliberately does not reuse the acoustic-guitar body
+ * tensioned head. It deliberately does not reuse a guitar's body
  * path because the head transient and short decay are part of the instrument's
  * identity.
  */

@@ -53,6 +53,7 @@ export const GENRE_SOLO_DEFINITIONS: Record<string, GenreSoloDefinition> = {
   metal: definition('Lead break', 'A lead passage over restrained riff and rhythm accompaniment.'),
   'r-and-b': definition('Melodic feature', 'A featured line over a restrained pocket.'),
   reggae: definition('Instrumental feature', 'A melodic feature over the continuing bass, skank and drum groove.'),
+  'reggae-dub': definition('Dub feature', 'A melodica, organ, or guitar phrase sits over the bass-led groove and production echoes.'),
   reggaeton: definition('Instrumental feature', 'A featured melodic phrase over dembow accompaniment.'),
   rock: definition('Lead break', 'A featured instrumental passage over the band’s backing.'),
   ska: definition('Instrumental break', 'A melodic feature over offbeat accompaniment.'),
@@ -66,6 +67,13 @@ export const GENRE_SOLO_DEFINITIONS: Record<string, GenreSoloDefinition> = {
   'chinese-traditional': definition('Ornamented melodic variation', 'A lead instrument varies the tune over a sparse heterophonic ensemble; an unaccompanied guqin passage is also idiomatic.', 4),
   'japanese-pop': definition('Melodic feature', 'A vocal or instrumental lead takes a short melodic feature over the selected pop backing.', 4, true),
   'japanese-rock': definition('Lead break', 'A guitar or vocal feature sits over the rhythm section while other lead lines rest.', 4, true),
+  arabic: definition('Ornamented melodic variation', 'A lead instrument develops a modal phrase over the continuing rhythmic accompaniment.'),
+  armenian: definition('Duduk or violin feature', 'A lyrical melodic feature over the held drone and supporting ensemble.'),
+  'indian-classical': definition('Raga development', 'A melodic instrument develops the raga over the tanpura drone and tabla cycle.', 8),
+  'korean-traditional': definition('Melodic variation', 'A lead instrument ornaments the shared melody over janggu support.'),
+  gamelan: definition('Heterophonic variation', 'A metallophone develops the shared melody within the interlocking ensemble.'),
+  'west-african': definition('Call and response feature', 'A talking drum or tuned-bar lead trades phrases with the continuing ensemble.'),
+  'afro-colombian': definition('Marimba currulao feature', 'The marimba develops an interlocking currulao line over the drum and scraper parts.'),
 };
 
 // A palo's own pitch language wins: flamenco also uses major and minor tonality.

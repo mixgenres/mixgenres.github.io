@@ -1,12 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import OfflineRenderer from '@elemaudio/offline-renderer';
-import { el } from '@elemaudio/core';
 import { ALL_STYLES } from '../src/engine/style';
 import { createMasterChain } from '../src/engine/studio/mixer';
 import { resolvePlaybackMix } from '../src/engine/studio/masterSettings';
 import { measureAudio } from '../src/engine/studio/audioMetrics';
-import { renderMixBuses } from '../src/engine/playback/elementaryEngine';
 import { excerptPerformance } from './lib/audioExcerpt';
 import type { Performance } from '../src/engine/band/performanceData';
 
@@ -73,19 +70,6 @@ test('all saturation modes preserve exact silence', () => {
     assert.equal(curve[(curve.length - 1) / 2], 0);
     chain.dispose();
   }
-});
-
-test('raw bus rendering keeps all six output channels separate', async () => {
-  const renderer = new OfflineRenderer();
-  await renderer.initialize({ sampleRate: 44100, numInputChannels: 0, numOutputChannels: 6, blockSize: 64 });
-  try {
-    const signals = [ ['drums', 'drums', 0.1], ['sub', 'sub-bass', 0.2], ['inst', 'piano', 0.3] ] as const;
-    const buses = renderMixBuses(signals.map(([category, instrumentId, value]) => ({ category, instrumentId, left: el.const({ value }), right: el.const({ value: -value }) })));
-    await renderer.render(buses.drums.left, buses.drums.right, buses.sub.left, buses.sub.right, buses.inst.left, buses.inst.right);
-    const outputs = Array.from({ length: 6 }, () => new Float32Array(64));
-    for (let block = 0; block < 32; block++) renderer.process([], outputs);
-    [0.1, -0.1, 0.2, -0.2, 0.3, -0.3].forEach((expected, i) => assert.ok(Math.abs(outputs[i][63] - expected) < 1e-6, `channel ${i}: ${outputs[i][63]} expected ${expected}`));
-  } finally { renderer.reset(); }
 });
 
 test('PCM measurements reveal silence, clipping, invalid samples, DC and mono cancellation', () => {

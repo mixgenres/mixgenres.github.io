@@ -31,7 +31,7 @@ export const ENTRY_4: [string, InstrumentDialect] = ["upright-bass:salsa-tumbao"
     family: 'bass',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'pizzicato',
-    allowedTechniques: ['pizzicato', 'slap-bass', 'mute'],
+    allowedTechniques: ['pizzicato', 'bass', 'mute'],
     pluckPositionOverride: 0.15,
     contactPointOverride: 0.2,
     decayMultiplier: 0.7,

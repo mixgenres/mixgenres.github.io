@@ -1,3 +1,4 @@
+import { excerptMixTimeline } from '../../src/engine/studio/dynamicMix/MixAutomation';
 import type { Performance } from '../../src/engine/band/performanceData';
 
 /** Retain sounding notes and last controller state when sampling a later section. */
@@ -11,6 +12,7 @@ export function excerptPerformance(perf: Performance, start: number, seconds: nu
     if (!prior || prior.time <= cc.time) priorControllers.set(key, cc);
   }
   return { ...perf, duration: end - start, tail: 1,
+    mixTimeline: perf.mixTimeline ? excerptMixTimeline(perf.mixTimeline, start, end - start) : undefined,
     notes: perf.notes.filter(n => n.time < end && n.time + n.dur > start).map(n => {
       const onset = Math.max(start, n.time);
       return { ...n, time: onset - start, dur: Math.min(n.time + n.dur, end) - onset,
@@ -18,6 +20,11 @@ export function excerptPerformance(perf: Performance, start: number, seconds: nu
     }),
     ccs: [...[...priorControllers.values()].map(cc => ({ ...cc, time: 0 })),
       ...perf.ccs.filter(cc => cc.time >= start && cc.time < end).map(cc => ({ ...cc, time: cc.time - start }))],
+    mixTimeline: perf.mixTimeline && { ...perf.mixTimeline, duration: end - start,
+      scenes: perf.mixTimeline.scenes.filter(scene => scene.endTime > start && scene.startTime < end)
+        .map(scene => ({ ...scene, startTime: Math.max(0, scene.startTime - start), endTime: Math.min(end, scene.endTime) - start })) },
+    phrases: perf.phrases?.filter(phrase => phrase.end > start && phrase.start < end)
+      .map(phrase => ({ ...phrase, start: Math.max(0, phrase.start - start), end: Math.min(end, phrase.end) - start })),
     bars: perf.bars.filter(b => b.end > start && b.start < end).map(b => ({ ...b, start: Math.max(0, b.start - start), end: Math.min(end, b.end) - start })),
   };
 }

@@ -7,13 +7,7 @@ const STYLE_4: GenreStyleDefinition = {
         "origin": "Detroit / Detroit / NYC",
         "era": "1960s / 2000s Revival",
         "description": "Lo-Fi Fuzz • Catchy Riffs •",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "bass",
-          "drums",
-          "overdrive-guitar",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "guitar", "hand-percussion"],
         "preferredMeters": [
           "4/4"
         ],
@@ -88,13 +82,7 @@ const STYLE_1: GenreStyleDefinition = {
         "origin": "Seattle, Washington",
         "era": "Late 1980s–1990s",
         "description": "Loud-Quiet-Loud • Fuzz • Anguish\nRaw flannel-clad",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "bass",
-          "drums",
-          "distortion-guitar",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "guitar", "hand-percussion"],
         "preferredMeters": [
           "4/4",
           "6/8",
@@ -170,13 +158,7 @@ const STYLE_0: GenreStyleDefinition = {
         "origin": "London / Los Angeles",
         "era": "Late 1960s–1980s",
         "description": "Heavy Riffs • Marshall Stacks •",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "bass",
-          "drums",
-          "overdrive-guitar",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "guitar", "hand-percussion"],
         "preferredMeters": [
           "4/4"
         ],
@@ -257,13 +239,7 @@ const STYLE_6: GenreStyleDefinition = {
         "origin": "Montreal / Reykjavik / Texas",
         "era": "Late 1990s–Present",
         "description": "Crescendo • Cinematic • Instrumental\nEpic dynamic",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "bass",
-          "drums",
-          "strings",
-          "glockenspiel"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "string-ensemble", "glockenspiel"],
         "preferredMeters": [
           "4/4",
           "6/8",
@@ -339,13 +315,7 @@ const STYLE_2: GenreStyleDefinition = {
         "origin": "London / Cambridge, UK",
         "era": "Late 1960s–1970s",
         "description": "Odd Meters • Mellotron • Multi-Movement\nComplex",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "strings",
-          "bass",
-          "drums",
-          "organ"
-        ],
+        "characteristicInstruments": ["guitar", "string-ensemble", "bass", "drums", "organ"],
         "preferredMeters": [
           "7/8",
           "5/4",
@@ -423,13 +393,7 @@ const STYLE_5: GenreStyleDefinition = {
         "origin": "San Francisco / London",
         "era": "Late 1960s",
         "description": "Wah-wah • Tape Delay • Mind-expanding\nAcid-soaked",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "organ",
-          "bass",
-          "drums",
-          "tape-echo"
-        ],
+        "characteristicInstruments": ["guitar", "organ", "bass", "drums"],
         "preferredMeters": [
           "4/4",
           "3/4"
@@ -505,13 +469,7 @@ const STYLE_3: GenreStyleDefinition = {
         "origin": "New York / London",
         "era": "Mid 1970s",
         "description": "Fast Downstrokes • 3 Chords •",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "bass",
-          "drums",
-          "distortion-guitar",
-          "hand-percussion"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "guitar", "hand-percussion"],
         "preferredMeters": [
           "4/4"
         ],
@@ -586,13 +544,7 @@ const STYLE_7: GenreStyleDefinition = {
         "origin": "London / Oxford / Dublin",
         "era": "Late 1980s–Early 1990s",
         "description": "Glide Guitar • Wall of Sound",
-        "characteristicInstruments": [
-          "electric-guitar",
-          "bass",
-          "drums",
-          "synth",
-          "distortion-guitar"
-        ],
+        "characteristicInstruments": ["guitar", "bass", "drums", "synth", "guitar"],
         "preferredMeters": [
           "4/4"
         ],

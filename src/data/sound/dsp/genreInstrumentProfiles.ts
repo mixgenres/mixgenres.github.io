@@ -69,18 +69,10 @@ export const URBAN_LATIN_DRUM_RESPONSE = {
   kick: { reggaeton: { fast: 0.028, tail: 0.115, pitchFall: -0.58, click: 0.18, clickCutoff: 2200 }, kizomba: { fast: 0.045, tail: 0.16, pitchFall: -0.38, click: 0.10, clickCutoff: 1500 }, thumpKizomba: 0.22, thumpDefault: 0.16 },
   snare: { reggaeton: { bodyFrequency: 185, decay: 0.065, crack: 0.55, crackDecay: 0.022 }, kizomba: { bodyFrequency: 210, decay: 0.09, crack: 0.38, crackDecay: 0.03 }, ringKizomba: 0.12, ringDefault: 0.08 },
 };
-export const URBAN_BASS_RESPONSE = {
-  reggaeton: { attack: 0.055, harmonic: 0.13, cutoffBase: 1150, cutoffBrightness: 900, drive: 1.15 },
-  default: { attack: 0.075, harmonic: 0.09, cutoffBase: 900, cutoffBrightness: 700, drive: 1.05 },
-};
 export const URBAN_ACOUSTIC_GUITAR_RESPONSE = {
   kizomba: { decayBase: 0.012, pickNoise: 0.12, noiseCutoff: 1750, bodyGain: 0.10, bodyFrequency: 105 },
   default: { decayBase: 0.008, pickNoise: 0.20, noiseCutoff: 2350, bodyGain: 0.06, bodyFrequency: 120 },
   kizombaDecayBase: 0.28, kizombaDecayTime: 0.55, reggaetonDecayBase: 0.20, reggaetonDecayTime: 0.45,
-};
-export const URBAN_ELECTRIC_GUITAR_RESPONSE = {
-  kizombaDecayBase: 0.19, kizombaDecayTime: 0.55, reggaetonDecayBase: 0.16, reggaetonDecayTime: 0.42,
-  urbanKizombaMult: 3.2, urbanKizombaBrightness: 4.0, urbanReggaetonMult: 2.7, urbanReggaetonBrightness: 3.5,
 };
 export const SYNTH_GENRE_RESPONSE = {
   industrialDrive: 4.8, defaultDrive: 3.0,
