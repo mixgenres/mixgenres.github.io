@@ -9,7 +9,6 @@ export const REFERENCE_SETS: Record<string, string[]> = {
   electronic: ['Blue Monday — New Order', 'Around the World — Daft Punk', 'Windowlicker — Aphex Twin', 'Breathe — The Prodigy', 'Enjoy the Silence — Depeche Mode'],
   folk: ['The Times They Are a-Changin’ — Bob Dylan', 'House of the Rising Sun — traditional', 'The Boxer — Simon & Garfunkel', 'Scarborough Fair — traditional', 'Suzanne — Leonard Cohen'],
   funk: ['Superstition — Stevie Wonder', 'Cissy Strut — The Meters', 'Give Up the Funk — Parliament', 'Chameleon — Herbie Hancock', 'Pick Up the Pieces — Average White Band'],
-  gospel: ['Oh Happy Day — Edwin Hawkins Singers', 'Take Me Back — Shirley Caesar', 'Soon and Very Soon — Andraé Crouch', 'Total Praise — Richard Smallwood', 'This Little Light of Mine — traditional'],
   'hip-hop': ['The Message — Grandmaster Flash and the Furious Five', 'Nuthin’ but a G Thang — Dr. Dre', 'C.R.E.A.M. — Wu-Tang Clan', 'Juicy — The Notorious B.I.G.', 'Electric Relaxation — A Tribe Called Quest'],
   house: ['Show Me Love — Robin S.', 'Finally — CeCe Peniston', 'Your Love — Frankie Knuckles', 'Can You Feel It — Mr. Fingers', 'Gypsy Woman — Crystal Waters'],
   jazz: ['Autumn Leaves — jazz standard', 'So What — Miles Davis', 'Take the A Train — Duke Ellington', 'All Blues — Miles Davis', 'Giant Steps — John Coltrane'],

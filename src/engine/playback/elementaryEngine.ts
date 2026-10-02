@@ -167,6 +167,7 @@ model: number;
 volume: number;
 pan: number;
 dialect?: string;
+instrumentDialectId?: string;
 genreId?: string;
 styleId?: string;
 performanceMode?: PerformanceMode;

@@ -165,13 +165,13 @@ const FAMILY_PRIMARY_GENRES: Record<PerformanceFamily,string[]> = {
   'bellows': ['tango','folk','cumbia','salsa'],
   'bowed-string': ['classical','jazz','folk','tango'],
   'plucked-string': ['folk','jazz','blues','flamenco'],
-  'keyboard': ['jazz','gospel','funk','rock'],
+  'keyboard': ['jazz','funk','rock'],
   'wind': ['jazz','folk','classical','blues'],
   'brass': ['jazz','salsa','funk','ska'],
   'membrane': ['salsa','timba','folk','flamenco'],
   'metal-wood-percussion': ['folk','salsa','jazz','classical'],
   'kit': ['jazz','rock','funk','swing'],
-  'voice': ['folk','jazz','gospel','soul'],
+  'voice': ['folk','jazz','soul'],
   'electronic': ['electronic','house','funk','hip-hop'],
   'body-percussion': ['flamenco','folk','salsa','tango'],
   'effect': ['electronic','dub','rock','ambient'],
@@ -218,7 +218,6 @@ const CURATED_GENRE_OVERRIDES: Record<string, Record<string, string[]>> = {
     timba: ['marcato','staccato','accent','chapa','cluster'],
     jazz: ['legato','staccato','accent','tenuto'],
     blues: ['staccato','accent','tenuto'],
-    gospel: ['legato','accent','tenuto','cluster'],
   },
 };
 

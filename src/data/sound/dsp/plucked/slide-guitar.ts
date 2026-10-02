@@ -125,18 +125,6 @@ export const dspOverride: InstrumentDSPOverride = {
         "muted pick attack"
       ]
     },
-    "gospel": {
-      "excitationBias": 0,
-      "brightness": 1.0,
-      "damping": 0,
-      "attack": 1.0,
-      "articulation": [
-        "slide-bar contact",
-        "picked or fingered attack",
-        "position-based vibrato",
-        "muted pick attack"
-      ]
-    },
     "americana": {
       "excitationBias": 0,
       "brightness": 1.0,

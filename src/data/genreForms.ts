@@ -501,7 +501,7 @@ const HOUSE = (): GenreForm => ({
 
 const FORM_BUILDERS: Record<string,()=>GenreForm> = {
   afrobeats:AFROBEATS,bachata:POP,blues:BLUES,brazilian:DANCE,country:POP,cumbia:DANCE,disco:DANCE,electronic:DANCE,
-  folk:POP,funk:DANCE,gospel:POP,'hip-hop':POP,house:HOUSE,jazz:JAZZ,kizomba:BALLAD,tango:TANGO,
+  folk:POP,funk:DANCE,'hip-hop':POP,house:HOUSE,jazz:JAZZ,kizomba:BALLAD,tango:TANGO,
   flamenco:FLAMENCO,metal:METAL,'r-and-b':POP,reggae:DANCE,reggaeton:DANCE,rock:POP,salsa:LATIN,ska:DANCE,soul:POP,
   swing:JAZZ,timba:LATIN,zouk:BALLAD,'drum-and-bass':DANCE,industrial:DANCE,'punk-hardcore':METAL,'uk-bass':DANCE,
 };
@@ -509,7 +509,7 @@ export const GENRE_FORMS: Record<string,GenreForm> = Object.fromEntries(Object.e
 
 export const PROGRESSIONS: Record<string,string[]> = {
   afrobeats:['Am7','Fmaj7','Cmaj7','G6'],bachata:['Am','F','C','G'],blues:['C7','F7','G7','C7'],brazilian:['Dm7','G7','Cmaj7','A7'],country:['G','C','D','G'],
-  cumbia:['Am','G','F','E7'],disco:['Am7','D9','Am7','D9'],electronic:['Em','D','C','Em'],folk:['G','C','D','G'],funk:['Dm7','C','Bb','C'],gospel:['C','F','G','Am'],
+  cumbia:['Am','G','F','E7'],disco:['Am7','D9','Am7','D9'],electronic:['Em','D','C','Em'],folk:['G','C','D','G'],funk:['Dm7','C','Bb','C'],
   'hip-hop':['Dm7','Bb','F','C'],house:['Fmaj7','Em7','Dm7','Cmaj7'],jazz:['Dm7','G7','Cmaj7','Am7'],kizomba:['Fmaj7','Em7','Am7','Dm7'],
   tango:['Am','E7','Am','Dm'],flamenco:['Am','G','F','E7'],metal:['E5','C5','D5','B5'],
   'r-and-b':['Dm7','G7','Cmaj7','Am7'],reggae:['Am','G','F','G'],reggaeton:['Am','F','C','G'],rock:['Em','C','D','B7'],salsa:['Cmaj7','Fmaj7','G7','Cmaj7'],
@@ -517,7 +517,7 @@ export const PROGRESSIONS: Record<string,string[]> = {
   'drum-and-bass':['Em7','Cmaj7','G','D'],'industrial':['E5','F5','E5','F5'],'punk-hardcore':['E5','G5','A5','B5'],'uk-bass':['Am7','G','F','G'],
 };
 export const TEMPOS: Record<string,number> = {
-  afrobeats:108,bachata:128,blues:92,brazilian:112,country:110,cumbia:102,disco:120,electronic:124,folk:96,funk:104,gospel:104,'hip-hop':90,
+  afrobeats:108,bachata:128,blues:92,brazilian:112,country:110,cumbia:102,disco:120,electronic:124,folk:96,funk:104,'hip-hop':90,
   house:124,jazz:140,kizomba:92,tango:120,flamenco:96,metal:150,'r-and-b':82,reggae:78,reggaeton:96,rock:128,salsa:96,
   ska:168,soul:94,swing:160,timba:100,zouk:100,'drum-and-bass':174,industrial:128,'punk-hardcore':180,'uk-bass':132,
 };

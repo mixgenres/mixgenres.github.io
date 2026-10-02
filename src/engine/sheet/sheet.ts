@@ -1301,7 +1301,7 @@ function patternCandidatesForVoice(
       if (['verse', 'pre-chorus', 'bridge'].includes(sectionKind) && ['fill', 'cadence', 'sectionPattern'].includes(p.category)) n -= 15;
       return { p, score: n };
     })
-    .filter(x => x.score > -200)
+    .filter((x): x is { p: MusicalPattern; score: number } => x !== null && x.score > -200)
     .sort((a, b) => b.score - a.score);
 }
 

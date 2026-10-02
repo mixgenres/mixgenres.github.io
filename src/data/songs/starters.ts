@@ -4,23 +4,6 @@ export interface SongTemplate { id: string; name: string; genreId: string; style
 /** Canonical, generated starter catalog. Instrument lists are the exact eight-part palette compiled by makeSheet. */
 export const starterSongs: SongTemplate[] = [
   {
-    "id": "afrobeats-starter",
-    "name": "Afrobeats: Afro-Pop",
-    "genreId": "afrobeats",
-    "styleId": "afrobeats-afro-pop",
-    "bpm": 107,
-    "instruments": [
-      "drums",
-      "bass",
-      "acoustic-guitar",
-      "synth",
-      "hand-percussion",
-      "voice",
-      "sub-bass",
-      "log-drum"
-    ]
-  },
-  {
     "id": "bachata-starter",
     "name": "Bachata: Urbana",
     "genreId": "bachata",
@@ -55,23 +38,6 @@ export const starterSongs: SongTemplate[] = [
     ]
   },
   {
-    "id": "brazilian-starter",
-    "name": "Brazilian: Bossa Nova",
-    "genreId": "brazilian",
-    "styleId": "brazilian-bossa-nova",
-    "bpm": 133,
-    "instruments": [
-      "acoustic-guitar",
-      "piano",
-      "flute",
-      "upright-bass",
-      "drums",
-      "voice",
-      "shaker",
-      "tenor-sax"
-    ]
-  },
-  {
     "id": "country-starter",
     "name": "Country: Neotraditional",
     "genreId": "country",
@@ -86,40 +52,6 @@ export const starterSongs: SongTemplate[] = [
       "voice",
       "piano",
       "mandolin"
-    ]
-  },
-  {
-    "id": "cumbia-starter",
-    "name": "Cumbia: Cumbia Colombiana",
-    "genreId": "cumbia",
-    "styleId": "cumbia-colombiana",
-    "bpm": 96,
-    "instruments": [
-      "accordion",
-      "drums",
-      "hand-percussion",
-      "bass",
-      "flute",
-      "voice",
-      "guacharaca",
-      "tambora"
-    ]
-  },
-  {
-    "id": "disco-starter",
-    "name": "Disco: Classic Disco",
-    "genreId": "disco",
-    "styleId": "disco-classic",
-    "bpm": 120,
-    "instruments": [
-      "drums",
-      "bass",
-      "strings",
-      "piano",
-      "voice",
-      "electric-guitar",
-      "horn-section",
-      "synth"
     ]
   },
   {
@@ -173,23 +105,7 @@ export const starterSongs: SongTemplate[] = [
       "organ"
     ]
   },
-  {
-    "id": "gospel-starter",
-    "name": "Gospel: Traditional Gospel",
-    "genreId": "gospel",
-    "styleId": "gospel-traditional",
-    "bpm": 100,
-    "instruments": [
-      "organ",
-      "piano",
-      "choir",
-      "drums",
-      "tambourine",
-      "bass",
-      "electric-guitar",
-      "voice"
-    ]
-  },
+  
   {
     "id": "hip-hop-starter",
     "name": "Global Urban Beat: Boom Bap",
@@ -205,23 +121,6 @@ export const starterSongs: SongTemplate[] = [
       "sub-bass",
       "warm-pad",
       "voice"
-    ]
-  },
-  {
-    "id": "house-starter",
-    "name": "House: Peak Time",
-    "genreId": "house",
-    "styleId": "house-peak-time",
-    "bpm": 133,
-    "instruments": [
-      "drums",
-      "synth",
-      "sub-bass",
-      "sampler",
-      "noise-sweep",
-      "voice",
-      "bass",
-      "piano"
     ]
   },
   {
@@ -327,23 +226,6 @@ export const starterSongs: SongTemplate[] = [
     ]
   },
   {
-    "id": "reggae-starter",
-    "name": "Reggae: Roots Reggae",
-    "genreId": "reggae",
-    "styleId": "reggae-roots-reggae",
-    "bpm": 76,
-    "instruments": [
-      "drums",
-      "bass",
-      "electric-guitar",
-      "organ",
-      "brass",
-      "voice",
-      "sub-bass",
-      "horn-section"
-    ]
-  },
-  {
     "id": "reggaeton-starter",
     "name": "Reggaeton: Perreo",
     "genreId": "reggaeton",
@@ -392,40 +274,6 @@ export const starterSongs: SongTemplate[] = [
       "voice",
       "bongos",
       "claves"
-    ]
-  },
-  {
-    "id": "ska-starter",
-    "name": "Ska: Traditional Ska",
-    "genreId": "ska",
-    "styleId": "ska-trad-ska",
-    "bpm": 130,
-    "instruments": [
-      "brass",
-      "electric-guitar",
-      "piano",
-      "upright-bass",
-      "drums",
-      "voice",
-      "tenor-sax",
-      "trombone"
-    ]
-  },
-  {
-    "id": "soul-starter",
-    "name": "Soul: Classic Soul",
-    "genreId": "soul",
-    "styleId": "soul-deep-funk",
-    "bpm": 93,
-    "instruments": [
-      "voice",
-      "bass",
-      "drums",
-      "piano",
-      "brass",
-      "electric-guitar",
-      "organ",
-      "horn-section"
     ]
   },
   {
@@ -497,23 +345,6 @@ export const starterSongs: SongTemplate[] = [
     ]
   },
   {
-    "id": "industrial-starter",
-    "name": "Industrial: EBM",
-    "genreId": "industrial",
-    "styleId": "industrial-ebm",
-    "bpm": 124,
-    "instruments": [
-      "synth",
-      "drums",
-      "sampler",
-      "bass-lead",
-      "noise-sweep",
-      "voice",
-      "distortion-guitar",
-      "sub-bass"
-    ]
-  },
-  {
     "id": "punk-hardcore-starter",
     "name": "Punk / Hardcore: Punk Rock",
     "genreId": "punk-hardcore",
@@ -530,21 +361,5 @@ export const starterSongs: SongTemplate[] = [
       "backing-vocals"
     ]
   },
-  {
-    "id": "uk-bass-starter",
-    "name": "UK Bass: UK Garage",
-    "genreId": "uk-bass",
-    "styleId": "uk-bass-garage",
-    "bpm": 133,
-    "instruments": [
-      "drums",
-      "sub-bass",
-      "synth",
-      "sampler",
-      "voice",
-      "acid-303",
-      "warm-pad",
-      "piano"
-    ]
-  }
+  
 ];

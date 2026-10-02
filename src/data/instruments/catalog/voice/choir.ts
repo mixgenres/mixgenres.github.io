@@ -38,7 +38,7 @@ export const choir: InstrumentDef = {
       "gentle vocal onset without harsh consonants",
       "cathedral acoustic release decay"
     ],
-    playingStyles: ["choral", "cinematic", "classical", "gospel", "ambient"],
+    playingStyles: ["choral", "cinematic", "classical", "ambient"],
     genreTechniques: {
       cinematic: ["tenuto", "legato", "crescendo", "diminuendo"],
       choral: ["legato", "tenuto", "portato"],

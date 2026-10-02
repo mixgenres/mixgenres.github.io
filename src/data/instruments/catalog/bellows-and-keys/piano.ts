@@ -102,7 +102,7 @@ export const piano: InstrumentDef = {
       "Horacio Salgán campana high register bell stabs",
       "pesada heavy sub-octave fundamental coupling"
     ],
-    playingStyles: ["classical", "jazz", "tango", "salsa", "pop", "rock", "gospel", "bossa-nova"],
+    playingStyles: ["classical", "jazz", "tango", "salsa", "pop", "rock", "bossa-nova"],
     genreTechniques: {
       tango: ["marcato", "arrastre", "yumba", "cluster", "chapa", "campana", "pesada", "staccato", "accent"],
       salsa: ["montuno", "accent", "staccato", "octave-stabs"],

@@ -37,7 +37,7 @@ export const slide_guitar: InstrumentDef = {
   techniques: {
     articulations: ["accent", "legato", "slide", "palm-mute", "staccato"],
     techniqueMethods: ["slide-bar contact", "picked or fingered attack", "position-based vibrato", "muted pick attack"],
-    playingStyles: ["blues", "country", "roots", "gospel", "americana", "genre-native performance"],
+    playingStyles: ["blues", "country", "roots", "americana", "genre-native performance"],
     genreTechniques: {}
   }
 };

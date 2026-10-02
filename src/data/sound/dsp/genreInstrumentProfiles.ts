@@ -90,7 +90,7 @@ export const SYNTH_GENRE_RESPONSE = {
 };
 export const RHODES_GENRE_RESPONSE = {
   funkDiscoHouseTransient: 0.13, defaultTransient: 0.08,
-  jazzSoulGospelSustain: 0.58, defaultSustain: 0.44,
+  jazzSoulSustain: 0.58, defaultSustain: 0.44,
 };
 export const GUITAR_GENRE_RESPONSE: Record<string, { short: boolean; decay: number; noiseFrequency: number; pluckGain: number; bodyFrequency: number; bodyGain: number; targetDecayBase: number; targetDecayTime: number }> = {
   bachata: { short: true, decay: 0.009, noiseFrequency: 2050, pluckGain: 0.64, bodyFrequency: 135, bodyGain: 0.10, targetDecayBase: 0.16, targetDecayTime: 0.42 },

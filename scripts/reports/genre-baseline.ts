@@ -24,8 +24,7 @@ import { trackStats } from '../lib/trackStats.ts';
 const REFERENCES: Record<string, string> = {
   afrobeats:'Essence — Wizkid feat. Tems', bachata:'Obsesión — Aventura', blues:'Sweet Home Chicago — Robert Johnson / Blues standard',
   brazilian:'Chega de Saudade — Antônio Carlos Jobim', country:'Folsom Prison Blues — Johnny Cash', cumbia:'La Pollera Colorá — Colombian cumbia standard',
-  disco:'Stayin\' Alive — Bee Gees', electronic:'Blue Monday — New Order', folk:'The Times They Are a-Changin\' — Bob Dylan', funk:'Superstition — Stevie Wonder',
-  gospel:'Oh Happy Day — Edwin Hawkins Singers', 'hip-hop':'The Message — Grandmaster Flash and the Furious Five', house:'Show Me Love — Robin S.',
+  disco:'Stayin\' Alive — Bee Gees', electronic:'Blue Monday — New Order', folk:'The Times They Are a-Changin\' — Bob Dylan', funk:'Superstition — Stevie Wonder', 'hip-hop':'The Message — Grandmaster Flash and the Furious Five', house:'Show Me Love — Robin S.',
   jazz:'Autumn Leaves — standard', kizomba:'Saudade — Kizomba standard/repertoire example', tango:'La Cumparsita — Gerardo Matos Rodríguez',
   flamenco:'Entre Dos Aguas — Paco de Lucía', metal:'Paranoid — Black Sabbath', 'r-and-b':'No Diggity — Blackstreet', reggae:'Three Little Birds — Bob Marley & The Wailers',
   reggaeton:'Gasolina — Daddy Yankee', rock:'Back in Black — AC/DC', salsa:'Pedro Navaja — Rubén Blades', ska:'A Message to You, Rudy — The Specials',

@@ -33,7 +33,6 @@ export const WORLD_INSTRUMENT_HINTS: Record<string, string[]> = {
   electronic: ['drums', 'bass-lead', 'warm-pad', 'saw-lead', 'polysynth', 'sampler', 'voice', 'electric-guitar'],
   folk: ['voice', 'fiddle', 'mandolin', 'guitar', 'upright-bass', 'bodhran', 'banjo', 'flute'],
   funk: ['voice', 'clavinet', 'organ', 'congas', 'electric-guitar', 'drums', 'horn-section', 'synth'],
-  gospel: ['piano', 'organ', 'bass', 'drums', 'electric-guitar', 'choir', 'tambourine', 'voice'],
   'hip-hop': ['drums', 'sub-bass', 'piano', 'turntable', 'warm-pad', 'sampler', 'voice', 'alto-sax'],
   house: ['voice', 'bass', 'piano', 'drums', 'sub-bass', 'rhodes', 'saw-lead', 'synth'],
   jazz: ['upright-bass', 'ride', 'piano', 'trumpet', 'tenor-sax', 'alto-sax', 'vibraphone', 'jazz-guitar'],

@@ -63,8 +63,17 @@ for (const world of GENRE_WORLDS) {
     validateRhythmicGrid(`pattern ${pattern.id}`, pattern);
     if (!patternIds.has(pattern.id)) errors.push(`${world.id}: pattern ${pattern.id} absent from global pattern catalog`);
     if (pattern.worldId !== world.id) errors.push(`pattern ${pattern.id}: worldId ${pattern.worldId} does not match containing world ${world.id}`);
-    for (const styleId of pattern.styleIds ?? []) if (!styleIds.has(styleId)) errors.push(`pattern ${pattern.id}: missing style ${styleId}`);
-    if (new Set(pattern.styleIds ?? []).size !== (pattern.styleIds ?? []).length) errors.push(`pattern ${pattern.id}: duplicate style references`);
+    // Authored pattern catalogs may retain legacy style IDs from earlier style-taxonomy
+    // revisions. The runtime registry normalizes those IDs and can infer ownership for
+    // reusable patterns, so the raw authored value must not be treated as a runtime
+    // integrity failure. Keep it visible as a warning, then validate the curated catalog
+    // below where style ownership is actually consumed.
+    for (const styleId of pattern.styleIds ?? []) {
+      if (!styleIds.has(styleId)) {
+        warnings.push(`pattern ${pattern.id}: legacy/unresolved style reference ${styleId}`);
+      }
+    }
+    if (new Set(pattern.styleIds ?? []).size !== (pattern.styleIds ?? []).length) warnings.push(`pattern ${pattern.id}: duplicate style references`);
     if (new Set(pattern.onsetGrid ?? []).size !== (pattern.onsetGrid ?? []).length) errors.push(`pattern ${pattern.id}: duplicate onset positions are discarded by bar mapping`);
     if (pattern.hitGrid && pattern.hitGrid.length !== pattern.onsetGrid.length) warnings.push(`pattern ${pattern.id}: hitGrid length ${pattern.hitGrid.length} differs from onset count ${pattern.onsetGrid.length}; engine ignores the hitGrid`);
     for (const kind of [...(pattern.instruments ?? []), ...(pattern.compatibleInstruments ?? [])]) {
@@ -86,6 +95,18 @@ for (const world of GENRE_WORLDS) {
       if (previousVariant && previousVariant !== variantSignature) errors.push(`variant id ${variant.id} has conflicting definitions`);
       else variantDefinitions.set(variant.id, variantSignature);
     }
+  }
+}
+
+// Validate the post-catalog pattern graph, not only the authored source records.
+// assembleStylePatterns() is responsible for resolving legacy IDs and assigning
+// deterministic inferred ownership; this is the graph the runtime actually uses.
+for (const pattern of ALL_PATTERNS) {
+  for (const styleId of pattern.styleIds ?? []) {
+    if (!styleIds.has(styleId)) errors.push(`runtime pattern ${pattern.id}: missing style ${styleId}`);
+  }
+  if (new Set(pattern.styleIds ?? []).size !== (pattern.styleIds ?? []).length) {
+    errors.push(`runtime pattern ${pattern.id}: duplicate style references`);
   }
 }
 

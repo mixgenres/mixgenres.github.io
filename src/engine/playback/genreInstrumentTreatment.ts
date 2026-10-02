@@ -33,7 +33,7 @@ export function applyGenreInstrumentTreatment(audio: AudioSignal, ctx: VoiceRend
   }
 
   if (isKeys) {
-    // Gospel/jazz/soul/blues retain body; house/disco/electronic tighten the attack.
+    // Jazz/soul/blues retain body; house/disco/electronic tighten the attack.
     const body = Math.max(0, g.body - 1);
     if (body > 0.03) out = el.add(out, el.mul(body * 0.055, el.svf({ mode: 'bandpass' }, 180, 1.7, out)));
   }

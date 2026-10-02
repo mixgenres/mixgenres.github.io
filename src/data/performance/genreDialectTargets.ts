@@ -37,7 +37,6 @@ export const GENRE_DIALECT_TARGETS: Record<string, GenreDialectTarget> = {
   electronic: {...COMMON_DIALECT_TARGET, reference:'Blue Monday — New Order', maxBassRootRatio:.74, accompanimentNonRootRatio:.26, techniqueLandmarkRatio:.10, bassTrimDb:.0},
   folk: {...COMMON_DIALECT_TARGET, reference:'The Times They Are a-Changin\' — Bob Dylan', maxBassRootRatio:.70, accompanimentNonRootRatio:.24, techniqueLandmarkRatio:.16, bassTrimDb:-1.5},
   funk: {...COMMON_DIALECT_TARGET, reference:'Superstition — Stevie Wonder', maxBassRootRatio:.52, maxBassLowRegisterRatio:.78, accompanimentNonRootRatio:.36, techniqueLandmarkRatio:.28, bassTrimDb:-.25, harmonicVoicing:'extended'},
-  gospel: {...COMMON_DIALECT_TARGET, reference:'Oh Happy Day — Edwin Hawkins Singers', maxBassRootRatio:.58, accompanimentNonRootRatio:.38, techniqueLandmarkRatio:.24, bassTrimDb:-1.0, harmonicVoicing:'extended'},
   'hip-hop': {...COMMON_DIALECT_TARGET, reference:'The Message — Grandmaster Flash and the Furious Five', maxBassRootRatio:.76, accompanimentNonRootRatio:.20, techniqueLandmarkRatio:.10, bassTrimDb:-.25},
   house: {...COMMON_DIALECT_TARGET, reference:'Show Me Love — Robin S.', maxBassRootRatio:.76, accompanimentNonRootRatio:.26, techniqueLandmarkRatio:.10, bassTrimDb:.0},
   jazz: {...COMMON_DIALECT_TARGET, reference:'Autumn Leaves — standard', maxBassRootRatio:.54, maxBassLowRegisterRatio:.80, accompanimentNonRootRatio:.42, techniqueLandmarkRatio:.28, bassTrimDb:-1.75, harmonicVoicing:'extended'},

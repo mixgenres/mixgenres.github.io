@@ -11,7 +11,6 @@ export const PROFILES: Record<string, Omit<GenreDialect, 'id'>> = {
   electronic: { attack:.70, decay:.64, body:.92, brightness:1.12, transient:1.18, lowEnd:1.18, stereo:1.35, drive:1.05, syncopation:1.00, swing:.00, electronic:true },
   folk: { attack:.96, decay:.90, body:1.10, brightness:.94, transient:.92, lowEnd:.96, stereo:.92, drive:.48, syncopation:.82, swing:.04, electronic:false },
   funk: { attack:.76, decay:.64, body:1.04, brightness:1.12, transient:1.20, lowEnd:1.08, stereo:1.08, drive:.88, syncopation:1.28, swing:.04, electronic:false },
-  gospel: { attack:.88, decay:1.06, body:1.12, brightness:1.00, transient:.98, lowEnd:1.04, stereo:1.04, drive:.72, syncopation:.96, swing:.12, electronic:false },
   'hip-hop': { attack:.72, decay:.60, body:1.04, brightness:1.05, transient:1.18, lowEnd:1.20, stereo:1.15, drive:1.00, syncopation:1.12, swing:.04, electronic:true },
   house: { attack:.72, decay:.62, body:.98, brightness:1.12, transient:1.16, lowEnd:1.15, stereo:1.28, drive:.92, syncopation:.92, swing:.00, electronic:true },
   jazz: { attack:.96, decay:1.16, body:1.14, brightness:.94, transient:.88, lowEnd:1.04, stereo:1.06, drive:.56, syncopation:1.05, swing:.22, electronic:false },

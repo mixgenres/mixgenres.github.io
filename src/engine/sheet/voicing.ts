@@ -382,12 +382,12 @@ export function voiceChord(req: VoicingRequest): number[] {
     }
   }
 
-  // 5. Neo-Soul / Gospel Top-Down Voicing
-  // Check if styleStr includes 'neo-soul', 'gospel', or 'r-and-b' AND instrument is piano/rhodes/organ
-  const isNeoSoulOrGospel = VOICING_CLASSIFIERS.neoSoulOrGospel.test(styleStr);
+  // 5. Neo-Soul / R&B Top-Down Voicing
+  // Check if styleStr includes 'neo-soul' or 'r-and-b' AND instrument is piano/rhodes/organ
+  const isNeoSoulOrRnb = VOICING_CLASSIFIERS.neoSoulOrRnb.test(styleStr);
   const isNeoKeys = /piano|rhodes|organ|keys|keyboard|wurlitzer/i.test(profile.id || '');
 
-  if (isNeoSoulOrGospel && isNeoKeys) {
+  if (isNeoSoulOrRnb && isNeoKeys) {
     // 1. Identify highest tension (9, 11, or 13)
     const allIntervals = [...chord.tensions, ...chord.intervals];
     let topTensionIv = 2; // Default to 9th (standard neo-soul colour)
@@ -459,8 +459,8 @@ export function voiceChord(req: VoicingRequest): number[] {
   const phaseSize = cycleLength > 1 && phase === cycleLength - 1 ? 0 : 0;
   let requestedSize = Math.max(2, Math.min(12, req.size + energySize + phaseSize));
 
-  const isGospelOrSoul = VOICING_CLASSIFIERS.gospelOrSoul.test(styleStr);
-  if (isGospelOrSoul && isKeyboard && intensity > 0.5) {
+  const isSoulOrRnb = VOICING_CLASSIFIERS.soulOrRnb.test(styleStr);
+  if (isSoulOrRnb && isKeyboard && intensity > 0.5) {
     requestedSize = Math.max(5, requestedSize);
   }
 
