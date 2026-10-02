@@ -4,7 +4,6 @@ export type { SectionEnergy, LensId, Scope, Role, InstrumentKind, SectionType, D
 
 /** Authoring vocabulary for form templates. Converted to SectionEnergy at the boundary. */
 export type FormIntensity = 'low' | 'medium' | 'high' | 'peak';
-export type SpotlightMode = 'auto' | 'on' | 'off';
 
 /** A part playing "in the voice of" another world. The lens is always explicit. */
 export interface GuestLens {
@@ -157,8 +156,6 @@ export interface MusicalPattern {
   tags: string[];
   /** Optional explicit behavioral vocabulary; tags remain the compatibility fallback. */
   approaches?: string[];
-  /** Authored playing techniques represented by this reusable primitive. */
-  techniques?: string[];
   scopes: Scope[];
   
   roles: Role[];
@@ -205,6 +202,8 @@ export interface MusicalPattern {
 }
 
 export interface GenreStyleDefinition {
+  /** Authored playable scale identity; distinct from descriptive genre pitch labels. */
+  scaleMode?: string;
   id: string;
   worldId: string;
   name: string;
@@ -223,11 +222,12 @@ export interface GenreStyleDefinition {
   grooveMechanics?: GrooveMechanics;
   prominentChords?: string[];
   sectionProgressions?: Partial<Record<SectionType | string, string[]>>;
-  /** Reference lineage used for research/provenance; never treated as an artist style clone. */
-  referenceArtists?: string[];
-  referenceTracks?: string[];
-  /** Reusable performance vocabulary surfaced to the style/runtime layer. */
-  techniques?: string[];
+  /** Style-authored form with changing personnel and optional tempo shifts. */
+  arrangementSections?: Array<{
+    key: string; label: string; kind: string; bars: number;
+    intensity: 'low' | 'medium' | 'high' | 'peak';
+    instruments: string[]; leadInstrumentId?: string; bpm?: number; tempoFeel?: string;
+  }>;
 }
 
 export interface PhysicalPlayerState {

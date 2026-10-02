@@ -1,0 +1,603 @@
+{
+  "schemaVersion": 3,
+  "generatedAt": "2026-10-02T15:06:29.392Z",
+  "sourceFingerprint": "c4edd2aa47c558cee9940d517540902eb6ce7403078a7c51ec25767b7f12f528",
+  "status": "PASS",
+  "renderMode": "Elementary stems + style DSP; Web Audio master NOT executed",
+  "coverage": {
+    "catalogStyles": 222,
+    "selectedStyles": 1,
+    "renderedStyles": 1,
+    "fullCatalog": false,
+    "selection": "tango-tango-electronico",
+    "shard": [
+      0,
+      1
+    ]
+  },
+  "measurements": "Float PCM before encoder peak trim; sample peak, RMS/active RMS, crest, DC, clipping fraction, stereo correlation, mono RMS. RMS is not LUFS; sample peak is not true peak.",
+  "gaps": [
+    "Browser master graph is excluded from this Node render; run browser-mix-audit for mastered PCM.",
+    "Two excerpts per style do not validate every note or transition in the full song.",
+    "Decoded excerpt LUFS/true peak include encoder trim; no whole-song loudness or reference-recording comparison."
+  ],
+  "counts": {
+    "errors": 0,
+    "warnings": 2,
+    "info": 0
+  },
+  "findings": [
+    {
+      "severity": "warning",
+      "code": "pre-encoding-overload",
+      "scope": "tango-tango-electronico/opening/output/master",
+      "message": "Sample peak 5.63 dBFS before encoder peak trim; browser master not measured"
+    },
+    {
+      "severity": "warning",
+      "code": "pre-encoding-overload",
+      "scope": "tango-tango-electronico/ensemble/output/master",
+      "message": "Sample peak 3.58 dBFS before encoder peak trim; browser master not measured"
+    }
+  ],
+  "cases": [
+    {
+      "genre": "tango",
+      "styleId": "tango-tango-electronico",
+      "tracks": 7,
+      "fullSongNotes": 1800,
+      "windows": [
+        {
+          "name": "opening",
+          "start": 0,
+          "regionId": "r0",
+          "notes": 32,
+          "expectedAudibleTracks": 7,
+          "bytes": 72724,
+          "stream": {
+            "codec_name": "mp3",
+            "sample_rate": "44100",
+            "channels": 2
+          },
+          "encoded": {
+            "metadata": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "mp3",
+                  "sample_rate": "44100",
+                  "channels": 2
+                }
+              ]
+            },
+            "integratedLufs": -18.6,
+            "loudnessRangeLu": 20,
+            "decodedTruePeakDbfs": -0.6,
+            "method": "ffmpeg EBU R128 on decoded excerpt export; includes encoder trim; short-excerpt LRA has limited meaning"
+          },
+          "diagnostics": [
+            {
+              "stage": "stem",
+              "id": "v4",
+              "instrumentId": "synth",
+              "bus": "inst",
+              "metrics": {
+                "frames": 132300,
+                "durationSeconds": 3,
+                "nonFiniteSamples": 0,
+                "samplePeak": 0.06069467216730118,
+                "samplePeakDbfs": -24.33698860020637,
+                "rmsDbfs": -40.759403676888404,
+                "activeRmsDbfs": -35.019091003605865,
+                "crestDb": 16.422415076682032,
+                "dcOffset": 0.000009006129984443746,
+                "clippedSampleFraction": 0,
+                "activeWindowFraction": 0.26666666666666666,
+                "stereoCorrelation": 0.9999999999999564,
+                "monoRmsDbfs": -42.14408794476566
+              },
+              "trackLevel": 0.9,
+              "resolvedGain": 0.4149760838594103
+            },
+            {
+              "stage": "stem",
+              "id": "v2",
+              "instrumentId": "drums",
+              "bus": "drums",
+              "metrics": {
+                "frames": 131859,
+                "durationSeconds": 2.99,
+                "nonFiniteSamples": 0,
+                "samplePeak": 0.17332038283348083,
+                "samplePeakDbfs": -15.22300720716768,
+                "rmsDbfs": -40.882705295174105,
+                "activeRmsDbfs": -38.67871846908116,
+                "crestDb": 25.659698088006422,
+                "dcOffset": 0.000011662931902016923,
+                "clippedSampleFraction": 0,
+                "activeWindowFraction": 0.6,
+                "stereoCorrelation": 0.996931840838188,
+                "monoRmsDbfs": -40.897484108944894
+              },
+              "trackLevel": 0.8,
+              "resolvedGain": 0.5387239999844363
+            },
+            {
+              "stage": "stem",
+              "id": "v5",
+              "instrumentId": "electric-guitar",
+              "bus": "inst",
+              "metrics": {
+                "frames": 131859,
+                "durationSeconds": 2.99,
+                "nonFiniteSamples": 0,
+                "samplePeak": 2.78586483001709,
+                "samplePeakDbfs": 8.899200813174396,
+                "rmsDbfs": -13.883843432588716,
+                "activeRmsDbfs": -13.883843432588716,
+                "crestDb": 22.783044245763108,
+                "dcOffset": 4.897679560361431e-7,
+                "clippedSampleFraction": 0.003977733791398388,
+                "activeWindowFraction": 1,
+                "stereoCorrelation": 0.9999999999999258,
+                "monoRmsDbfs": -14.8862257513427
+              },
+              "trackLevel": 0.82,
+              "resolvedGain": 7.442410528477065
+            },
+            {
+              "stage": "stem",
+              "id": "v6",
+              "instrumentId": "piano",
+              "bus": "inst",
+              "metrics": {
+                "frames": 131859,
+                "durationSeconds": 2.99,
+                "nonFiniteSamples": 0,
+                "samplePeak": 0.5269245505332947,
+                "samplePeakDbfs": -5.565031325080677,
+                "rmsDbfs": -20.6009187561962,
+                "activeRmsDbfs": -20.6009187561962,
+                "crestDb": 15.035887431115524,
+                "dcOffset": 0.0003400696327696992,
+                "clippedSampleFraction": 0,
+                "activeWindowFraction": 1,
+                "stereoCorrelation": 0.9999999999999307,
+                "monoRmsDbfs": -21.03679224543155
+              },
+              "trackLevel": 0.76,
+              "resolvedGain": 3.069481525646154
+            },
+            {
+              "stage": "stem",
+              "id": "v3",
+              "instrumentId": "sampler",
+              "bus": "inst",
+              "metrics": {
+                "frames": 125878,
+                "durationSeconds": 2.85437641723356,
+                "nonFiniteSamples": 0,
+                "samplePeak": 0.033753491938114166,
+                "samplePeakDbfs": -29.433625819026055,
+                "rmsDbfs": -40.48110075317901,
+                "activeRmsDbfs": -36.33991520504809,
+                "crestDb": 11.047474934152955,
+                "dcOffset": 0.00005012019090108381,
+                "clippedSampleFraction": 0,
+                "activeWindowFraction": 0.3793103448275862,
+                "stereoCorrelation": 1,
+                "monoRmsDbfs": -40.48110075317897
+              },
+              "trackLevel": 0.9,
+              "resolvedGain": 0.3453085661311881
+            },
+            {
+              "stage": "stem",
+              "id": "v0",
+              "instrumentId": "bandoneon",
+              "bus": "inst",
+              "metrics": {
+                "frames": 48810,
+                "durationSeconds": 1.1068027210884355,
+                "nonFiniteSamples": 0,
+                "samplePeak": 0.060495659708976746,
+                "samplePeakDbfs": -24.365515658044337,
+                "rmsDbfs": -45.54394951751434,
+                "activeRmsDbfs": -42.092947897627404,
+                "crestDb": 21.178433859470005,
+                "dcOffset": 0.000029648026569054992,
+                "clippedSampleFraction": 0,
+                "activeWindowFraction": 0.4166666666666667,
+                "stereoCorrelation": 1,
+                "monoRmsDbfs": -45.54394951751462
+              },
+              "trackLevel": 0.82,
+              "resolvedGain": 0.38364465080713345
+            },
+            {
+              "stage": "stem",
+              "id": "v1",
+              "instrumentId": "sub-bass",
+              "bus": "sub",
+              "metrics": {
+                "frames": 48810,
+                "durationSeconds": 1.1068027210884355,
+                "nonFiniteSamples": 0,
+                "samplePeak": 0.04086868837475777,
+                "samplePeakDbfs": -27.772186003167544,
+                "rmsDbfs": -44.547546705375424,
+                "activeRmsDbfs": -41.88835741051143,
+                "crestDb": 16.775360702207873,
+                "dcOffset": 0.00009360188682919608,
+                "clippedSampleFraction": 0,
+                "activeWindowFraction": 0.5,
+                "stereoCorrelation": 1,
+                "monoRmsDbfs": -44.54754670537543
+              },
+              "trackLevel": 0.92,
+              "resolvedGain": 0.44614743331888373
+            },
+            {
+              "stage": "bus",
+              "id": "drums",
+              "metrics": {
+                "frames": 132300,
+                "durationSeconds": 3,
+                "nonFiniteSamples": 0,
+                "samplePeak": 0.11791610717773438,
+                "samplePeakDbfs": -18.568537336500935,
+                "rmsDbfs": -44.24273625667248,
+                "activeRmsDbfs": -41.51272384364876,
+                "crestDb": 25.674198920171545,
+                "dcOffset": 0.000007908264436677916,
+                "clippedSampleFraction": 0,
+                "activeWindowFraction": 0.5333333333333333,
+                "stereoCorrelation": 0.9969318409022925,
+                "monoRmsDbfs": -44.25751507053476
+              },
+              "headroomTrim": 0.680336051416609
+            },
+            {
+              "stage": "bus",
+              "id": "sub",
+              "metrics": {
+                "frames": 132300,
+                "durationSeconds": 3,
+                "nonFiniteSamples": 0,
+                "samplePeak": 0.02780444175004959,
+                "samplePeakDbfs": -31.117716402899205,
+                "rmsDbfs": -52.22358736499724,
+                "activeRmsDbfs": -45.9033555440946,
+                "crestDb": 21.105870962098034,
+                "dcOffset": 0.00002349400484102898,
+                "clippedSampleFraction": 0,
+                "activeWindowFraction": 0.23333333333333334,
+                "stereoCorrelation": 1,
+                "monoRmsDbfs": -52.22358736499733
+              },
+              "headroomTrim": 0.680336051416609
+            },
+            {
+              "stage": "bus",
+              "id": "inst",
+              "metrics": {
+                "frames": 132300,
+                "durationSeconds": 3,
+                "nonFiniteSamples": 0,
+                "samplePeak": 1.9120577573776245,
+                "samplePeakDbfs": 5.630020136746571,
+                "rmsDbfs": -16.399979104330797,
+                "activeRmsDbfs": -16.399979104330797,
+                "crestDb": 22.029999241077366,
+                "dcOffset": 0.00020695180666846868,
+                "clippedSampleFraction": 0.0005706727135298563,
+                "activeWindowFraction": 1,
+                "stereoCorrelation": 0.7576813752937257,
+                "monoRmsDbfs": -17.29923687737633
+              },
+              "headroomTrim": 0.680336051416609
+            },
+            {
+              "stage": "output",
+              "id": "master",
+              "metrics": {
+                "frames": 132300,
+                "durationSeconds": 3,
+                "nonFiniteSamples": 0,
+                "samplePeak": 1.9120577573776245,
+                "samplePeakDbfs": 5.630020136746571,
+                "rmsDbfs": -16.392944642338062,
+                "activeRmsDbfs": -16.392944642338062,
+                "crestDb": 22.022964779084635,
+                "dcOffset": 0.00023813654817269854,
+                "clippedSampleFraction": 0.0005706727135298563,
+                "activeWindowFraction": 1,
+                "stereoCorrelation": 0.757638707400327,
+                "monoRmsDbfs": -17.290725314188027
+              },
+              "browserMasterApplied": false,
+              "rawStem": false,
+              "encodingPeakTrim": 0.5046918673228217
+            }
+          ]
+        },
+        {
+          "name": "ensemble",
+          "start": 114.17475728155351,
+          "regionId": "r4",
+          "notes": 51,
+          "expectedAudibleTracks": 7,
+          "bytes": 72724,
+          "stream": {
+            "codec_name": "mp3",
+            "sample_rate": "44100",
+            "channels": 2
+          },
+          "encoded": {
+            "metadata": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "mp3",
+                  "sample_rate": "44100",
+                  "channels": 2
+                }
+              ]
+            },
+            "integratedLufs": -16.4,
+            "loudnessRangeLu": 20,
+            "decodedTruePeakDbfs": -0.5,
+            "method": "ffmpeg EBU R128 on decoded excerpt export; includes encoder trim; short-excerpt LRA has limited meaning"
+          },
+          "diagnostics": [
+            {
+              "stage": "stem",
+              "id": "v0",
+              "instrumentId": "bandoneon",
+              "bus": "inst",
+              "metrics": {
+                "frames": 132300,
+                "durationSeconds": 3,
+                "nonFiniteSamples": 0,
+                "samplePeak": 0.08951982855796814,
+                "samplePeakDbfs": -20.96161516417851,
+                "rmsDbfs": -35.39685932611127,
+                "activeRmsDbfs": -34.427759223891925,
+                "crestDb": 14.435244161932756,
+                "dcOffset": 0.000052222587933066024,
+                "clippedSampleFraction": 0,
+                "activeWindowFraction": 0.8,
+                "stereoCorrelation": 1,
+                "monoRmsDbfs": -35.39685932611143
+              },
+              "trackLevel": 0.82,
+              "resolvedGain": 0.38364465080713345
+            },
+            {
+              "stage": "stem",
+              "id": "v1",
+              "instrumentId": "sub-bass",
+              "bus": "sub",
+              "metrics": {
+                "frames": 132300,
+                "durationSeconds": 3,
+                "nonFiniteSamples": 0,
+                "samplePeak": 0.06148918718099594,
+                "samplePeakDbfs": -24.224024956196445,
+                "rmsDbfs": -37.96116361877536,
+                "activeRmsDbfs": -37.169351187102016,
+                "crestDb": 13.737138662578914,
+                "dcOffset": 0.00017467762503964535,
+                "clippedSampleFraction": 0,
+                "activeWindowFraction": 0.8333333333333334,
+                "stereoCorrelation": 1,
+                "monoRmsDbfs": -37.96116361877543
+              },
+              "trackLevel": 0.92,
+              "resolvedGain": 0.44614743331888373
+            },
+            {
+              "stage": "stem",
+              "id": "v3",
+              "instrumentId": "sampler",
+              "bus": "inst",
+              "metrics": {
+                "frames": 132300,
+                "durationSeconds": 3,
+                "nonFiniteSamples": 0,
+                "samplePeak": 0.048742279410362244,
+                "samplePeakDbfs": -26.241883301878982,
+                "rmsDbfs": -35.95979155751039,
+                "activeRmsDbfs": -32.32801253390831,
+                "crestDb": 9.717908255631414,
+                "dcOffset": 0.000027040193838876897,
+                "clippedSampleFraction": 0,
+                "activeWindowFraction": 0.43333333333333335,
+                "stereoCorrelation": 1,
+                "monoRmsDbfs": -35.9597915575104
+              },
+              "trackLevel": 0.9,
+              "resolvedGain": 0.3453085661311881
+            },
+            {
+              "stage": "stem",
+              "id": "v4",
+              "instrumentId": "synth",
+              "bus": "inst",
+              "metrics": {
+                "frames": 132300,
+                "durationSeconds": 3,
+                "nonFiniteSamples": 0,
+                "samplePeak": 0.08951307088136673,
+                "samplePeakDbfs": -20.962270869731864,
+                "rmsDbfs": -33.38907688480443,
+                "activeRmsDbfs": -29.757297885044984,
+                "crestDb": 12.426806015072572,
+                "dcOffset": 0.00005225452399984731,
+                "clippedSampleFraction": 0,
+                "activeWindowFraction": 0.43333333333333335,
+                "stereoCorrelation": 0.9999999999999357,
+                "monoRmsDbfs": -34.77376115201519
+              },
+              "trackLevel": 0.9,
+              "resolvedGain": 0.4149760838594103
+            },
+            {
+              "stage": "stem",
+              "id": "v2",
+              "instrumentId": "drums",
+              "bus": "drums",
+              "metrics": {
+                "frames": 131859,
+                "durationSeconds": 2.99,
+                "nonFiniteSamples": 0,
+                "samplePeak": 0.1829746514558792,
+                "samplePeakDbfs": -14.75218142892722,
+                "rmsDbfs": -38.46682787453767,
+                "activeRmsDbfs": -36.2628410622181,
+                "crestDb": 23.714646445610448,
+                "dcOffset": 0.000013025063440597888,
+                "clippedSampleFraction": 0,
+                "activeWindowFraction": 0.6,
+                "stereoCorrelation": 0.9970093541675906,
+                "monoRmsDbfs": -38.47773520819338
+              },
+              "trackLevel": 0.8,
+              "resolvedGain": 0.5387239999844363
+            },
+            {
+              "stage": "stem",
+              "id": "v5",
+              "instrumentId": "electric-guitar",
+              "bus": "inst",
+              "metrics": {
+                "frames": 131859,
+                "durationSeconds": 2.99,
+                "nonFiniteSamples": 0,
+                "samplePeak": 2.220344066619873,
+                "samplePeakDbfs": 6.928405566996597,
+                "rmsDbfs": -13.821945968880813,
+                "activeRmsDbfs": -13.821945968880813,
+                "crestDb": 20.75035153587741,
+                "dcOffset": 0.00004517559608194205,
+                "clippedSampleFraction": 0.003981525720656155,
+                "activeWindowFraction": 1,
+                "stereoCorrelation": 0.9999999999999405,
+                "monoRmsDbfs": -14.82432828742735
+              },
+              "trackLevel": 0.82,
+              "resolvedGain": 7.442410528477065
+            },
+            {
+              "stage": "stem",
+              "id": "v6",
+              "instrumentId": "piano",
+              "bus": "inst",
+              "metrics": {
+                "frames": 131859,
+                "durationSeconds": 2.99,
+                "nonFiniteSamples": 0,
+                "samplePeak": 0.8041619062423706,
+                "samplePeakDbfs": -1.8931300720776214,
+                "rmsDbfs": -17.789433827289724,
+                "activeRmsDbfs": -17.789433827289724,
+                "crestDb": 15.8963037552121,
+                "dcOffset": 0.00006472076373621532,
+                "clippedSampleFraction": 0,
+                "activeWindowFraction": 1,
+                "stereoCorrelation": 0.9999999999999309,
+                "monoRmsDbfs": -18.225307316452188
+              },
+              "trackLevel": 0.76,
+              "resolvedGain": 3.069481525646154
+            },
+            {
+              "stage": "bus",
+              "id": "drums",
+              "metrics": {
+                "frames": 132300,
+                "durationSeconds": 3,
+                "nonFiniteSamples": 0,
+                "samplePeak": 0.12448424845933914,
+                "samplePeakDbfs": -18.097711965737744,
+                "rmsDbfs": -41.826858837038614,
+                "activeRmsDbfs": -39.096846346875004,
+                "crestDb": 23.729146871300873,
+                "dcOffset": 0.000008831881588056443,
+                "clippedSampleFraction": 0,
+                "activeWindowFraction": 0.5333333333333333,
+                "stereoCorrelation": 0.9970093541961931,
+                "monoRmsDbfs": -41.83776617064977
+              },
+              "headroomTrim": 0.680336051416609
+            },
+            {
+              "stage": "bus",
+              "id": "sub",
+              "metrics": {
+                "frames": 132300,
+                "durationSeconds": 3,
+                "nonFiniteSamples": 0,
+                "samplePeak": 0.041833311319351196,
+                "samplePeakDbfs": -27.569555148834652,
+                "rmsDbfs": -41.30669391682433,
+                "activeRmsDbfs": -40.51488148515099,
+                "crestDb": 13.737138767989684,
+                "dcOffset": 0.00011883948631267153,
+                "clippedSampleFraction": 0,
+                "activeWindowFraction": 0.8333333333333334,
+                "stereoCorrelation": 1,
+                "monoRmsDbfs": -41.30669391682442
+              },
+              "headroomTrim": 0.680336051416609
+            },
+            {
+              "stage": "bus",
+              "id": "inst",
+              "metrics": {
+                "frames": 132300,
+                "durationSeconds": 3,
+                "nonFiniteSamples": 0,
+                "samplePeak": 1.5111056566238403,
+                "samplePeakDbfs": 3.585896626085518,
+                "rmsDbfs": -15.668930546922429,
+                "activeRmsDbfs": -15.668930546922429,
+                "crestDb": 19.254827173007946,
+                "dcOffset": 0.00009639240240258784,
+                "clippedSampleFraction": 0.000491307634164777,
+                "activeWindowFraction": 1,
+                "stereoCorrelation": 0.7048977820064471,
+                "monoRmsDbfs": -16.528886151442062
+              },
+              "headroomTrim": 0.680336051416609
+            },
+            {
+              "stage": "output",
+              "id": "master",
+              "metrics": {
+                "frames": 132300,
+                "durationSeconds": 3,
+                "nonFiniteSamples": 0,
+                "samplePeak": 1.510464072227478,
+                "samplePeakDbfs": 3.582207992796107,
+                "rmsDbfs": -15.645383942846747,
+                "activeRmsDbfs": -15.645383942846747,
+                "crestDb": 19.227591935642852,
+                "dcOffset": 0.000028803193741164437,
+                "clippedSampleFraction": 0.0004950869236583522,
+                "activeWindowFraction": 1,
+                "stereoCorrelation": 0.7064010742599466,
+                "monoRmsDbfs": -16.500223252932244
+              },
+              "browserMasterApplied": false,
+              "rawStem": false,
+              "encodingPeakTrim": 0.6388765001056375
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

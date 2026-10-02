@@ -8,7 +8,7 @@ export const flute: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "breath",
   elementaryModel: 7,
-  makeupGain: 40.000,
+  makeupGain: 0.466,
   polyphony: 4,
   note: "Concert C silver transverse flute delivering silky breathy tones, rapid ornamentation, and soaring melodies",
   acousticProfile: {
@@ -23,7 +23,7 @@ export const flute: InstrumentDef = {
     ring: 3
   },
   luthierPhysics: {
-    category: "aerophone_lip_tension",
+    category: "aerophone_edge_blown",
     materialDensity: 0.88,
     tension: 0.82,
     bodyResonanceVolume: 1.2,

@@ -1,5 +1,5 @@
 import { GUITAR_GENRE_RESPONSE, TANGO_ACOUSTIC_GUITAR_RESPONSE, URBAN_ACOUSTIC_GUITAR_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
-import { instrumentHasKey, ENGINE_INSTRUMENT_KEYS } from '../../engine/lookup/instrumentKeys.ts';
+import { GUITAR_INSTRUMENT_PATTERNS } from '../../data/instruments/idClassifiers';
 import { TARAB_SYMPATHETIC_RATIOS } from '../../data/musicTheory/tarabSympatheticRatios';
 import { GUITAR_EXACT_GENRE_IDS } from '../../data/sound/dsp/genrePlaybackProfiles';
 import { KIZOMBA_PATTERN, REGGAETON_PATTERN, TANGO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
@@ -24,11 +24,11 @@ export default class GuitarModule implements InstrumentModule {
     } = ctx;
 
     const instId = (params.instrumentId ?? '').toLowerCase();
-    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''}`);
-    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''}`);
-    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''}`);
-    const isTangoAcoustic = isTango && instrumentHasKey(instId, ENGINE_INSTRUMENT_KEYS.acousticGuitar);
-    const isUrbanAcoustic = (isKizomba || isReggaeton) && instrumentHasKey(instId, ENGINE_INSTRUMENT_KEYS.acousticGuitar);
+    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isTangoAcoustic = isTango && GUITAR_INSTRUMENT_PATTERNS.acousticTango.test(instId);
+    const isUrbanAcoustic = (isKizomba || isReggaeton) && GUITAR_INSTRUMENT_PATTERNS.urbanAcoustic.test(instId);
     const isMarcato = action === 'marcato' || /marcato/i.test(action ?? '');
     const isArrastre = action === 'arrastre' || /arrastre|drag/i.test(action ?? '');
     const gd = ctx.genreDialect;
@@ -158,7 +158,7 @@ export default class GuitarModule implements InstrumentModule {
       stringSignal = el.add(loop1, el.mul(0.25, loop2));
     }
 
-    const hasJawari = instrumentHasKey(instId, ENGINE_INSTRUMENT_KEYS.jawari);
+    const hasJawari = GUITAR_INSTRUMENT_PATTERNS.jawari.test(instId);
     if (hasJawari) {
       const jawariEnv = el.adsr(0.001, 0.18 + decayTime * 0.30, 0.15, 0.08, gateSignal);
       const buzzAmount = el.add(el.const({ value: 1.0 }), el.mul(el.const({ value: 8.5 }), jawariEnv));

@@ -21,7 +21,7 @@ export const ocarina: InstrumentDef = {
     ring: 3
   },
   luthierPhysics: {
-    category: "aerophone_lip_tension",
+    category: "aerophone_flue",
     materialDensity: 0.4,
     tension: 0.4,
     bodyResonanceVolume: 0.4,

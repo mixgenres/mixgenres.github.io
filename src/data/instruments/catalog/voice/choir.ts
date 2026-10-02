@@ -6,7 +6,7 @@ export const choir: InstrumentDef = {
   family: "voice",
   voicing: "chord",
   elementaryModel: 12,
-  makeupGain: 40.000,
+  makeupGain: 0.455,
   polyphony: 8,
   note: "Polyphonic acoustic choral ensemble combining soprano, alto, tenor, and bass vocalists singing sustained vowel sonorities with expansive cathedral acoustic bloom",
   acousticProfile: {
@@ -38,7 +38,7 @@ export const choir: InstrumentDef = {
       "gentle vocal onset without harsh consonants",
       "cathedral acoustic release decay"
     ],
-    playingStyles: ["choral", "cinematic", "classical", "ambient"],
+    playingStyles: ["choral", "cinematic", "classical", "gospel", "ambient"],
     genreTechniques: {
       cinematic: ["tenuto", "legato", "crescendo", "diminuendo"],
       choral: ["legato", "tenuto", "portato"],

@@ -9,7 +9,7 @@ export const piano: InstrumentDef = {
   excitationType: "hammer",
   sympatheticStrings: true,
   elementaryModel: 11,
-  makeupGain: 35.971,
+  makeupGain: 6.626,
   polyphony: 16,
   note: "Concert grand piano with multi-string unisons, velocity-sensitive felt hammers, cast-iron frame duplex scale chime, and comprehensive support for Tango techniques (marcato en 4, arrastre drag, Pugliese yumba clusters, chapa damping, Salgán campana stabs, and pesada sub-octaves)",
   acousticProfile: {
@@ -102,7 +102,7 @@ export const piano: InstrumentDef = {
       "Horacio Salgán campana high register bell stabs",
       "pesada heavy sub-octave fundamental coupling"
     ],
-    playingStyles: ["classical", "jazz", "tango", "salsa", "pop", "rock", "bossa-nova"],
+    playingStyles: ["classical", "jazz", "tango", "salsa", "pop", "rock", "gospel", "bossa-nova"],
     genreTechniques: {
       tango: ["marcato", "arrastre", "yumba", "cluster", "chapa", "campana", "pesada", "staccato", "accent"],
       salsa: ["montuno", "accent", "staccato", "octave-stabs"],

@@ -121,6 +121,18 @@ export const dspOverride: InstrumentDSPOverride = {
         "gentle vocal onset without harsh consonants"
       ]
     },
+    "gospel": {
+      "excitationBias": 0,
+      "brightness": 1.0,
+      "damping": 0,
+      "attack": 1.0,
+      "articulation": [
+        "polyphonic SATB voice leading and suspensions",
+        "seamless staggered breathing for infinite sustains",
+        "dynamic choral swells (messa di voce)",
+        "gentle vocal onset without harsh consonants"
+      ]
+    },
     "ambient": {
       "excitationBias": 0,
       "brightness": 1.0,

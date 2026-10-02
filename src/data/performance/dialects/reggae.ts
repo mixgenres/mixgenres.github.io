@@ -3,7 +3,7 @@ import type { InstrumentDialect } from '../../styles/contracts';
 export const ENTRY_17: [string, InstrumentDialect] = ["bass:reggae", {
     id: 'bass:reggae',
     instrumentId: 'bass',
-    name: 'Reggae Bass',
+    name: 'Reggae Bass (Deep/Muted)',
     family: 'bass',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'legato',

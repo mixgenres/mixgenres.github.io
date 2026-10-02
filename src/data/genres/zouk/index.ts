@@ -1,10 +1,10 @@
 import type { GenreWorld } from '../../schema';
-import { ZOUK_WORLD_WORLD } from './meta';
-import { ZOUK_WORLD_CULTURE } from './meta';
-import { ZOUK_WORLD_ROLES } from './meta';
-import { ZOUK_WORLD_FEEL } from './meta';
-import { ZOUK_WORLD_STYLES } from './styles';
-import { ZOUK_WORLD_PATTERNS } from './patterns';
+import { ZOUK_WORLD_WORLD } from './world';
+import { ZOUK_WORLD_CULTURE } from './culture';
+import { ZOUK_WORLD_ROLES } from './roles';
+import { ZOUK_WORLD_FEEL } from './feel';
+import { ZOUK_WORLD_STYLES } from './styles/index';
+import { ZOUK_WORLD_PATTERNS } from './patterns/index';
 
 export const ZOUK_WORLD: GenreWorld = {
   ...ZOUK_WORLD_WORLD,

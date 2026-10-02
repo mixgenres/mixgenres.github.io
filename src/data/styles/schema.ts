@@ -36,6 +36,11 @@ export interface FormStepTemplate {
   kind: SectionType | string;
   bars: number;
   intensity: 'low' | 'medium' | 'high' | 'peak';
+  /** When present, only these ensemble members play in this section. */
+  instrumentIds?: string[];
+  leadInstrumentId?: string;
+  bpm?: number;
+  tempoFeel?: string;
 }
 
 export interface FormGrammar {
@@ -46,8 +51,6 @@ export interface FormGrammar {
   outros?: Weighted<string>[];
   breaks?: Weighted<string>[];
   pickups?: Weighted<boolean>[];
-  /** Roles that receive an automatic arrangement spotlight for each form section. */
-  defaultSpotlights: Record<string, Role[]>;
   preferredMeters: string[];
 }
 
@@ -100,7 +103,7 @@ export interface MelodyGrammar {
 }
 
 /**
- * World-level grammar for a spotlighted Solo section. Unlike MelodyGrammar,
+ * World-level grammar for an assigned musical solo. Unlike MelodyGrammar,
  * this describes improvisational behavior rather than the style's written/head melody.
  */
 export interface ImprovisationGrammar {
@@ -112,6 +115,34 @@ export interface ImprovisationGrammar {
   rapidRunOrnaments?: string[];
 }
 
+export type SoloMode = 'accompanied' | 'unaccompanied' | 'trading';
+
+export interface SoloPolicy {
+  name: string;
+  description: string;
+  accompaniment: 'ensemble' | 'rhythm' | 'none';
+  /** Only consulted when an explicit solo is assigned. */
+  supportRoles?: string[];
+  backingEnergyOffset: number;
+  phraseBars: number;
+  tradingBars?: number;
+  /** Trading turns in these roles leave space by resting the backing. */
+  tradingRestRoles?: string[];
+  /** 'style' inherits the selected style's melodic pitch language. */
+  scaleMode?: string;
+}
+
+export interface GenreSoloDefinition {
+  defaultMode: SoloMode;
+  modes: Record<SoloMode, SoloPolicy>;
+}
+
+export interface SoloAssignment {
+  trackIds: string[];
+  /** Unset/genre follows the resolved genre/style definition. */
+  mode?: SoloMode | 'genre';
+}
+
 export interface ArrangementGrammar {
   ensemble: { role: Role | string; instrumentIds: string[]; priority: number }[];
   schedule?: Record<string, string[]>;
@@ -121,6 +152,7 @@ export interface ArrangementGrammar {
   doublingRules?: string[];
   stabsAndHits?: Record<string, number>;
   solos?: string[];
+  soloDefinition?: GenreSoloDefinition;
 }
 
 export interface SoundProfile {
@@ -145,7 +177,7 @@ export interface RuleRef {
 export interface SongStyle {
   id: string;
   /** Per-field source metadata for values materialized from genre contracts/defaults. */
-  sourceProvenance?: Record<string, 'style' | 'genre' | 'hardcoded'>;
+  sourceProvenance?: Record<string, 'style' | 'genre' | 'default' | 'hardcoded'>;
   name: string;
   aliases?: string[];
   genres: string[];
@@ -158,12 +190,6 @@ export interface SongStyle {
   region?: string;
   summary: string;
   signatureTraits: string[];  // shown in UI
-  danceTags?: import('../primitives').DanceTag[];
-  /** Research/reference lineage; not an artist-style identity. */
-  referenceArtists?: string[];
-  referenceTracks?: string[];
-  /** Authored technique vocabulary used by pattern/gesture selection. */
-  techniques?: string[];
 
   form?: Partial<FormGrammar>;             // section vocab, order templates (weighted), bar-length distributions, intros/outros/breaks, pickups, endings
   harmony?: Partial<HarmonyGrammar>;       // mode/key policy, progression templates (functional/roman), cadences, chord vocabulary + extensions, harmonic rhythm, voicing style, bass-motion rules
@@ -181,7 +207,7 @@ export interface SongStyle {
 export interface DecisionTraceItem {
   path: string;
   value: unknown;
-  source: 'style' | 'influence' | 'genre' | 'user' | 'extends' | 'hardcoded';
+  source: 'style' | 'influence' | 'genre' | 'user' | 'extends' | 'default' | 'hardcoded';
   sourceId?: string;
   weight?: number;
 }
@@ -206,7 +232,7 @@ export interface ResolvedStyle extends SongStyle {
     appliedInfluences: StyleInfluence[];
   };
   provenance: Record<string, {
-    source: 'style' | 'influence' | 'genre' | 'user' | 'extends' | 'hardcoded';
+    source: 'style' | 'influence' | 'genre' | 'user' | 'extends' | 'default' | 'hardcoded';
     sourceId?: string;
     weight?: number;
   }>;

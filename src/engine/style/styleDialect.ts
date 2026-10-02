@@ -1,3 +1,4 @@
+import { DEFAULT_STYLE_MASTER_PROFILE } from '../../data/sound/mix/masterProfiles';
 import type { SongStyle } from '../../data/styles/schema';
 import { styleTheoryFor } from '../../engine/lookup/theory';
 import { profileForStyle } from './profiles';
@@ -12,17 +13,17 @@ export function applyStyleDialect(style: SongStyle, _index?: number): SongStyle 
   const theory = styleTheoryFor(style.id, style.primaryGenre);
   const base = profile;
   const rhythm = { ...(style.rhythm ?? {}) };
-  rhythm.defaultBpm = rhythm.defaultBpm ?? base.bpm;
-  rhythm.tempoRange = rhythm.tempoRange ?? base.tempoRange;
-  rhythm.meter = rhythm.meter ?? base.meter;
-  rhythm.feel = rhythm.feel ?? base.feel;
-  rhythm.swingPercentage = rhythm.swingPercentage ?? base.swing;
-  rhythm.signatureCell = rhythm.signatureCell ?? base.signatureCell;
-  rhythm.timelineClave = rhythm.timelineClave ?? base.timeline;
+  rhythm.defaultBpm = base.bpm ?? rhythm.defaultBpm;
+  rhythm.tempoRange = base.tempoRange ?? rhythm.tempoRange;
+  rhythm.meter = base.meter ?? rhythm.meter;
+  rhythm.feel = base.feel ?? rhythm.feel;
+  rhythm.swingPercentage = base.swing ?? rhythm.swingPercentage;
+  rhythm.signatureCell = base.signatureCell;
+  rhythm.timelineClave = base.timeline ?? rhythm.timelineClave;
   rhythm.microtimingFeel = /laid-back|behind|space/.test(base.feel ?? '') ? 'laid-back' : /shuffle|swing/.test(base.feel ?? '') ? 'swung' : rhythm.microtimingFeel;
 
   style.rhythm = rhythm;
-  style.summary = style.summary ?? `${style.name}: ${base.signatureCell}`;
+  style.summary = `${style.name}: ${base.signatureCell}`;
   style.signatureTraits = [
     base.signatureCell,
     `${theory.meter} ${theory.harmonicModel}`,
@@ -31,36 +32,37 @@ export function applyStyleDialect(style: SongStyle, _index?: number): SongStyle 
     ...base.contours,
     ...(base.arrangement ?? []),
   ].filter(Boolean).slice(0, 14);
-  // Form templates are authored per style in STYLE_FORM_TEMPLATES and are not
-  // overwritten by a broad sonic profile.
-  style.form = { ...(style.form ?? {}), preferredMeters: [rhythm.meter ?? '4/4'] };
+  if (style.sourceProvenance?.['form.templates'] !== 'style') style.form = {
+    ...(style.form ?? {}),
+    sectionVocab: base.form,
+    templates: [{w:1, value: base.form.map((label, i) => ({
+      key: `${label.toLowerCase().replace(/[^a-z0-9]+/g,'-')}-${i}`,
+      label, kind: label, bars: label === 'intro' || label === 'outro' || label === 'coda' || label === 'cierre' ? 4 : 8,
+      intensity: i === base.form.length - 1 ? 'low' : i >= base.form.length - 2 ? 'high' : 'medium'
+    }))}],
+    preferredMeters: [rhythm.meter ?? '4/4'],
+  };
   style.harmony = {
     ...(style.harmony ?? {}),
     model: theory.harmonicModel ?? base.harmonyModel ?? style.harmony?.model ?? 'functional',
     modePolicy: theory.defaultScale ?? base.modePolicy ?? style.harmony?.modePolicy ?? 'major',
-    progressionTemplates: style.harmony?.progressionTemplates?.length
-      ? style.harmony.progressionTemplates
-      : (base.progressions.length ? base.progressions : theory.progressions).map(value => ({w:1,value})),
+    progressionTemplates: (base.progressions.length ? base.progressions : theory.progressions).map(value => ({w:1,value})),
     harmonicRhythm: theory.harmonicRhythm ?? base.harmonicRhythm ?? style.harmony?.harmonicRhythm,
     bassMotion: theory.bass.style ?? base.bassMotion ?? style.harmony?.bassMotion,
   };
   style.melody = {
     ...(style.melody ?? {}),
-    contourArchetypes: Array.from(new Set([...(style.melody?.contourArchetypes ?? []), ...theory.melody.contour, ...base.contours])),
+    contourArchetypes: Array.from(new Set([...theory.melody.contour, ...base.contours])),
     phraseLengthsBars: theory.melody.phraseBars.length ? theory.melody.phraseBars : [4,8],
   };
   style.arrangement = {
     ...(style.arrangement ?? {}),
-    doublingRules: style.arrangement?.doublingRules ?? base.arrangement,
+    doublingRules: base.arrangement,
   };
   style.sound = {
     ...(style.sound ?? {}),
-    // Personnel belongs to the selected GenreStyleDefinition. The broader
-    // style profile may describe alternate orchestration, but replacing the
-    // authored palette here caused unrelated instruments to leak into starter
-    // ensembles (for example a scraper part disappearing from Kizomba).
-    instrumentPalette: style.sound?.instrumentPalette ?? base.instruments.map(value => ({value,w:1})),
-    masterProfile: { ...(style.sound?.masterProfile ?? {}), pocket: style.sound?.masterProfile?.pocket ?? .5, lift: style.sound?.masterProfile?.lift ?? .5 },
+    instrumentPalette: base.instruments.map(value => ({value,w:1})),
+    masterProfile: { ...DEFAULT_STYLE_MASTER_PROFILE, ...(style.sound?.masterProfile ?? {}) },
   };
   return style;
 }

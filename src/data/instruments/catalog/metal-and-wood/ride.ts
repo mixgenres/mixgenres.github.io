@@ -11,7 +11,7 @@ export const ride: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 18,
-  makeupGain: 2.182,
+  makeupGain: 1.639,
   polyphony: 8,
   acousticProfile: {
     sustain: "percussive",

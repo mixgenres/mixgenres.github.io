@@ -1,12 +1,12 @@
 # MixGenres
 
-MixGenres is a browser-based musical generation and audio-rendering engine. A song style supplies musical rules for form, harmony, rhythm, patterns, instruments, performance, and production. Those rules guide song compilation and audio rendering; generated performances are still assembled from reusable patterns and engine rules.
+MixGenres is a browser-based musical generation and audio-rendering engine. A song style is treated as a **musical grammar**: its form, harmony, rhythm, pattern vocabulary, instrument palette, performance idioms, and production behavior are resolved before note realization.
 
 ## Musical source of truth
 
-The resolved `SongStyle` provides the active style settings. Instrument capabilities and the genre contract also constrain what the engine can generate and play. A guitar can therefore be fingerstyle, flamenco, jazz comping, rock riffing, or metal rhythm depending on the style and role; a piano can use montuno, jazz comping, gospel, blues, rock, or another style-specific approach.
+The resolved `SongStyle` is authoritative. Instrument classification never overrides the style grammar. A guitar can therefore be fingerstyle, flamenco, jazz comping, rock riffing, or metal rhythm depending on the authored style and role; a piano can be montuno, jazz comping, gospel, blues, rock, or another style-specific performance rather than a universal chord block.
 
-Style data and genre contracts guide generation through:
+Style schemas actively drive generation through:
 
 - form and phrase lengths
 - meter, subdivision, swing, anticipation, and microtiming
@@ -34,31 +34,28 @@ Examples include:
 - bowed strings: style-appropriate sustain, bow articulation, portamento, spiccato, and phrase release
 - winds/brass: breath, tonguing, falls, doits, shakes, register transitions, and phrase constraints
 
-Note durations are derived from pattern durations, rhythmic spacing, and style/instrument behavior. During compilation, overlapping notes on monophonic instruments may be shortened to make room for a stronger attack, and notes may be omitted when an instrument's polyphony limit is reached. Playback then renders the compiled events using the selected instrument module and performance parameters.
+The engine does not shorten an authored physical note merely because another instrument overlaps it. Ensemble interaction primarily changes emphasis, density, and attention while preserving the instrument's declared articulation and decay behavior.
+
+## Musical solos and roles
+
+Click the role icon to open the role sheet and change the musical role or select **Solo in this part**. Click the instrument name to open the instrument selector and control silence for the part or song. Assignments use track IDs and are independent of part names. **Genre default** follows the current part's resolved genre/style; accompanied, unaccompanied, and trading modes can be chosen explicitly. With several soloists, accompanied and unaccompanied modes feature them together; trading rotates through them in selection order.
+
+Genre definitions live in `src/data/performance/soloDefinitions.ts`. Each specifies backing coverage, a backing energy offset, phrase length, and trading length. Styles can override the full definition through `arrangement.soloDefinition`. Backing offsets affect resolved performance energy without changing authored energy values. Muted or silent soloists are excluded; if none can play, normal ensemble behavior resumes. Live playback and MP3 export use the same compiled solo events.
+
+The defaults represent selectable arrangement choices, not exclusive rules about a genre. Jazz accompaniment/trading and unaccompanied passages are described in the [Smithsonian jazz glossary](https://amhistory.si.edu/jazz/education/Glossary.pdf); Flamenco's rhythm-backed guitar passages are illustrated by [José del Calli's account of accompanying falsetas](https://tablaoflamenco1911.com/es/palmas-flamencas/). All genres offer an unaccompanied override.
 
 ## Reference calibration
 
-The data includes representative repertoire references and authored genre/style descriptions. These provide curation context; they are not an automatic audio-matching or source-separation system. A generated song is a new composition guided by the catalog, not a reconstruction of a reference recording.
+Style expectations are calibrated against documented musical practice and representative repertoire. References are used as a **sanity check**, not as a replacement for the authored style grammar. The style always wins when an intentional departure is authored.
 
-## Genre data
+## Validation
 
-Each genre has style definitions, playable instruments, performance rules, patterns, and a compiled eight-part starter. Style coverage follows the genre's distinct traditions; a genre with fewer well-established substyles is not padded with invented categories. Drum & Bass distinguishes Jungle, Liquid, Dancefloor, Jump-Up, Techstep, Neurofunk, Atmospheric and Drumfunk; UK Bass distinguishes UK Garage, 2-Step, Speed Garage, Bassline, Dubstep, UK Funky, Future Garage and Grime. Soul and R&B have separate style records and ensembles. These rules guide new compositions; they do not promise note-for-note reproduction of a specific recording.
+The project has two complementary validation layers:
 
-The generated catalog schemas in `audit/catalog-schemas/genres/` and `audit/catalog-schemas/starters/` capture genre/style references and each compiled starter's tracks, patterns, gestures, and event counts. Regenerate them with `npm run generate:catalog`.
+1. **Schema validation** — every catalog style resolves to a complete musical/performance contract, and its selected patterns and instrument techniques are usable.
+2. **Rendered-song validation** — default songs are compiled and rendered so rhythm, articulation, technique usage, instrument range, density, and mix behavior are tested on actual generated events/audio.
 
-## Validation and rendering
-
-The available commands cover different checks:
-
-- `npm run check` type-checks the project, checks the data boundary, and validates genre, style, pattern, variant, instrument, starter, and form-template IDs (`npm run check:ids`).
-- `npm test` runs `check`, the filter test, and the engine-integrity audit.
-- `npm run audit:run` compiles songs for every catalog style and checks style fields, pattern availability, and whether expected gestures appear in compiled notes. It does not render audio.
-- `npm run audit:style` compiles every style and checks decision provenance and runtime fallbacks.
-- `npm run generate:catalog` validates catalog references and regenerates the per-genre and per-starter JSON schemas.
-- `npm run test:audio` compiles every public genre and renders a short MP3 excerpt to check the export path and encoded audio metadata. In Node, it does not run the browser master chain.
-- `npm run build:static` builds the browser app.
-
-Some audit scripts write generated reports under `audit/`; the audio regression script also writes MP3s under `/tmp/mixgenres-audio-regression`.
+Generated audit reports are intentionally not stored in the repository. Long-lived source-of-truth data belongs in `src/data`; transient validation output belongs in CI or local runs.
 
 ## Development
 
@@ -73,15 +70,21 @@ npm run build:static
 To render a song locally:
 
 ```bash
-npm run render:song -- salsa /tmp/salsa.mp3
+npm run render-song -- salsa /tmp/salsa.mp3
 ```
 
-To run the style-performance compilation audit:
+To run the style-performance audit without creating repository report files:
 
 ```bash
-npm run audit:run
+npx tsx scripts/audit-style-performance.ts
 ```
 
-## Comprehensive mix calibration
+## Sound metadata resolution
 
-The mix system is calibrated from the existing static unit-gain instrument audit, with per-instrument makeup normalization followed by small reference-informed genre role offsets. The canonical reference lineage is recorded in `src/data/performance/genreDialectTargets.ts` and the complete static calibration is documented under `audit/`. No runtime Node execution or MP3 generation is required for this calibration pass.
+Live playback and MP3 export share `resolveTrackSound` and `resolveTrackGain`. Resolution starts with the catalog's physical model, applies the resolved instrument/style dialect once, and uses the track's assigned role for dialect variants and balance. Partial style dialects retain inherited techniques and physical fields. Authored DSP genre dialects take precedence over generic timbre treatment. Live envelope updates share the same sustain and envelope calculation as graph construction; volume and expression controllers multiply independently instead of replacing the assigned role or user level.
+
+Spotlight controls, state, gain processing, form metadata and APIs have been removed. Musical solo assignments live in the role sheet and retain genre/style policies. Energy selection has its own sheet; effective tempo feel is shown beside BPM.
+
+The genre review keeps continuing dance grooves as accompaniment for dance-oriented features, rhythm-section comping for jazz/swing/blues, and compás with rhythmic harmony for flamenco. Flamenco pitch language follows the selected style rather than a universal Phrygian override. Jazz/swing/blues trading can rest backing during percussion turns. All genres retain explicit unaccompanied and trading options as creative choices; these options are not claims that every mode is customary in every tradition. Phrase lengths are editable policy defaults, and do not infer behavior from part names.
+
+Review references: [Jazz in America: rhythm-section roles](https://www.jazzinamerica.org/LessonPlan/8/3/204), [Smithsonian: salsa and clave](https://latino.si.edu/exhibitions/puro-ritmo/qr/salsas-roots-case), [Andalusian flamenco teaching materials: tonalities and compás](https://www.juntadeandalucia.es/cultura/flamenco/sites/default/files/flamenco/docs/gestion_cultural_materiales_didacticos.pdf).

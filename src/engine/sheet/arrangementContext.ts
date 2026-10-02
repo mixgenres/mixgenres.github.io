@@ -1,10 +1,10 @@
-import { SECTION_ENERGY_LEVELS } from '../../data/performance/spotlightRules';
 import type { WorldContract } from '../../engine/style/contracts';
 
 import type { Region } from '../../types';
 import { Voice } from './sheet.ts';
-import type { SectionEnergy, SpotlightMode } from '../../types';
+import type { SectionEnergy } from '../../types';
 import { clampEnergy } from './sectionEnergy.ts';
+import { supportsSolo, type SoloPlan } from './solo';
 
 export interface SectionShape {
   intensity: number;
@@ -34,11 +34,10 @@ export function shapeOf(regions: Region[], index: number, intensityOf: (r: Regio
   };
 }
 
-export type { SpotlightMode, SectionEnergy };
+export type { SectionEnergy };
 
 export interface ArrangementContext {
-  /** Explicitly foregrounded tracks retained for manual spotlight controls. */
-  spotlightedTrackIds: string[];
+  solo?: SoloPlan;
   /** Effective Section Energy assigned to each track (explicit value or section default). */
   energyByTrack: Record<string, SectionEnergy>;
   energyMappings: WorldContract['energyMappings'];
@@ -61,35 +60,22 @@ export interface ArrangementDecision {
   reason: string;
 }
 
-/**
- * Track labels and roles do not choose musical foreground behavior. Spotlight
- * metadata is retained for authored/UI compatibility, but automatic behavior
- * is resolved from section energy alone.
- */
-export function isSpotlit(mode: SpotlightMode | undefined): boolean {
-  if (mode === 'on') return true;
-  return false;
-}
-
 /** Resolve a section's energy for each track without inspecting part labels or roles. */
 export function buildArrangementContext(
   voices: Voice[],
   contract: WorldContract,
-  sectionIntensity = 0.55,
+  sectionEnergy: SectionEnergy = 3,
   authoredEnergyByTrack: Record<string, SectionEnergy> = {},
+  solo?: SoloPlan,
 ): ArrangementContext {
-  const spotlightedTrackIds = voices
-    .filter(v => isSpotlit(v.spotlight))
-    .map(v => v.id);
   const energyByTrack: Record<string, SectionEnergy> = {};
-  const energyEntries = SECTION_ENERGY_LEVELS.map(
-    level => [level, contract.energyMappings[level].activity] as const);
-  const targetActivity = Math.max(0, Math.min(1, sectionIntensity));
-  const baseEnergy = clampEnergy(
-    energyEntries.sort((a, b) => Math.abs(a[1] - targetActivity) - Math.abs(b[1] - targetActivity))[0]?.[0] ?? 3);
-  for (const v of voices) energyByTrack[v.id] = clampEnergy(authoredEnergyByTrack[v.id] ?? baseEnergy);
+  for (const v of voices) {
+    const authored = authoredEnergyByTrack[v.id] ?? sectionEnergy;
+    const backing = solo && !solo.trackIds.includes(v.id) && supportsSolo(solo, v);
+    energyByTrack[v.id] = clampEnergy(authored + (backing ? solo.policy.backingEnergyOffset : 0));
+  }
 
-  return { spotlightedTrackIds, energyByTrack, energyMappings: contract.energyMappings };
+  return { solo, energyByTrack, energyMappings: contract.energyMappings };
 }
 
 /**
@@ -161,71 +147,19 @@ export function compactDefaultChordLoop(chords: string[], contract?: WorldContra
   return chords.slice(0, 4);
 }
 
-function normalizeSectionKey(value: string): string {
-  return String(value ?? '')
-    .normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase().replace(/[^a-z0-9]+/g, '');
-}
-
-/**
- * Semantic aliases are deliberately narrower than the old universal `verse`
- * fallback. They let a catalog use its own cultural vocabulary (coro/chorus,
- * verso/verse, falseta/solo, cierre/coda, etc.) without ever rotating a named
- * section into an unrelated authored cell. A semantic alias is used only when
- * the section has exactly one authored candidate in that class.
- */
-function sectionSemanticClass(value: string): string | undefined {
-  const k = normalizeSectionKey(value);
-  if (!k) return undefined;
-  if (/^(intro|introduccion|salida|opening|quietintro|introtexture)$/.test(k)) return 'intro';
-  if (/^(verse|verso|letra|tema|canto|pregon|parta|partb|strain[abcd]|statement)$/.test(k)) return 'verse';
-  if (/^(chorus|coro|refrain|hook|shoutchorus|montuno|remate)$/.test(k)) return 'chorus';
-  if (/^(bridge|puente|break|breakdown|drop|gearshift|machine|texturebloom|build|buildup)$/.test(k)) return 'bridge';
-  if (/^(solo|trading|instrumental|falseta|variacion|descarga|mambo|development|opensolo|collectiveimprovisation|guitarsolo)$/.test(k)) return 'solo';
-  if (/^(coda|cierre|outro|ending|tag|release|decay)$/.test(k)) return 'ending';
-  if (/^(head|theme|strain|groove|loop|vamp)$/.test(k)) return 'head';
-  return undefined;
-}
-
 export function progressionForSection(
   sectionProgressions: Record<string, string[]> | undefined,
   formKey: string,
   kind: string,
   fallback: string[],
   contract?: WorldContract,
-  strictNamedSection = false,
 ): string[] {
   if (!sectionProgressions) return compactDefaultChordLoop(fallback, contract);
-  // Match only authored section identity. Never treat `verse` as a universal
-  // fallback: that silently turns B/variation/development sections into A.
-  const aliases = new Set([normalizeSectionKey(formKey), normalizeSectionKey(kind)]);
-  const foundEntry = Object.entries(sectionProgressions).find(([key, value]) =>
-    value?.length && aliases.has(normalizeSectionKey(key))
-  );
-  if (foundEntry) return compactDefaultChordLoop(foundEntry[1], contract);
-  if (strictNamedSection) {
-    throw new Error(`Missing authored section progression for formKey="${formKey}" kind="${kind}"; refusing positional harmony fallback.`);
+  const tryKeys = [formKey, kind, kind.replace(/-/g, ''), 'verse'];
+  for (const k of tryKeys) {
+    const found = sectionProgressions[k];
+    if (found && found.length) return compactDefaultChordLoop(found, contract);
   }
-
-  // If the catalog uses a cultural synonym, reuse it only when the synonym is
-  // unambiguous. This is intentionally not a nearest-string or positional
-  // match: a named B section must never inherit an arbitrary A/verse cell.
-  const semantic = sectionSemanticClass(`${kind} ${formKey}`);
-  if (semantic) {
-    const semanticEntries = Object.entries(sectionProgressions).filter(([key, value]) =>
-      value?.length && sectionSemanticClass(key) === semantic
-    );
-    if (semanticEntries.length === 1) return compactDefaultChordLoop(semanticEntries[0][1], contract);
-  }
-
-  // A one-cell authored style is an intentional vamp often used by electronic,
-  // funk and loop-based catalogs. Preserve that authored cell instead of
-  // silently replacing it with the genre's generic first progression.
-  const authoredEntries = Object.values(sectionProgressions).filter(value => value?.length);
-  if (authoredEntries.length === 1) return compactDefaultChordLoop(authoredEntries[0], contract);
-
-  // Multiple authored cells with no matching identity are ambiguous. Use the
-  // caller's explicit fallback rather than borrowing another named section.
   return compactDefaultChordLoop(fallback, contract);
 }
 

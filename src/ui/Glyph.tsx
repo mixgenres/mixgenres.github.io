@@ -49,7 +49,7 @@ export function Glyph({
       ))}
 
       {playhead !== null && playhead >= 0 && (
-        <rect x={playhead * cell} y={0} width={cell} height={height} fill="var(--ink)" opacity={0.15} />
+        <rect x={playhead * cell} y={0} width={cell} height={height} fill="var(--signal)" opacity={0.18} />
       )}
 
       {onsets.map((s, i) => {
@@ -65,8 +65,8 @@ export function Glyph({
             width={Math.max(1.6, cell * 0.68)}
             height={h}
             rx={0.8}
-            fill="var(--ink)"
-            opacity={dim ? 0.3 : hit ? 1 : 0.45}
+            fill={hit ? 'var(--signal)' : 'var(--ink)'}
+            opacity={dim ? 0.3 : hit ? 1 : 0.88}
           />
         );
       })}

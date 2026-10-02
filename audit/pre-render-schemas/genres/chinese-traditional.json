@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 2,
+  "preRender": true,
+  "genre": "chinese-traditional",
+  "styleId": "chinese-traditional-silk-and-bamboo",
+  "worldId": "chinese-traditional",
+  "tracks": [
+    {
+      "id": "v0",
+      "role": "lead",
+      "instrumentId": "erhu",
+      "moduleId": "violin",
+      "family": "bowed",
+      "articulations": [
+        "accent",
+        "legato",
+        "portamento",
+        "vibrato",
+        "tremolo"
+      ],
+      "kitComponents": []
+    },
+    {
+      "id": "v1",
+      "role": "lead",
+      "instrumentId": "pipa",
+      "moduleId": "guitar",
+      "family": "plucked",
+      "articulations": [
+        "accent",
+        "staccato",
+        "legato",
+        "tremolo",
+        "slide",
+        "vibrato",
+        "harmonic",
+        "marcato",
+        "tenuto"
+      ],
+      "kitComponents": []
+    },
+    {
+      "id": "v2",
+      "role": "lead",
+      "instrumentId": "guzheng",
+      "moduleId": "guitar",
+      "family": "plucked",
+      "articulations": [
+        "accent",
+        "staccato",
+        "legato",
+        "tremolo",
+        "bend"
+      ],
+      "kitComponents": []
+    },
+    {
+      "id": "v3",
+      "role": "lead",
+      "instrumentId": "dizi",
+      "moduleId": "wind",
+      "family": "winds",
+      "articulations": [
+        "accent",
+        "staccato",
+        "legato",
+        "trill",
+        "slide",
+        "tremolo",
+        "tenuto",
+        "vibrato"
+      ],
+      "kitComponents": []
+    },
+    {
+      "id": "v4",
+      "role": "lead",
+      "instrumentId": "guqin",
+      "moduleId": "guitar",
+      "family": "plucked",
+      "articulations": [
+        "accent",
+        "legato",
+        "harmonic",
+        "vibrato"
+      ],
+      "kitComponents": []
+    },
+    {
+      "id": "v5",
+      "role": "lead",
+      "instrumentId": "jinghu",
+      "moduleId": "violin",
+      "family": "bowed",
+      "articulations": [
+        "arco",
+        "staccato",
+        "legato",
+        "vibrato",
+        "bend",
+        "accent",
+        "portamento"
+      ],
+      "kitComponents": []
+    },
+    {
+      "id": "v6",
+      "role": "percussion",
+      "instrumentId": "paigu",
+      "moduleId": "drums",
+      "family": "hand-drums",
+      "articulations": [
+        "accent",
+        "ghost",
+        "flam",
+        "drag",
+        "roll"
+      ],
+      "kitComponents": []
+    }
+  ],
+  "compiledNoteCount": 1162
+}

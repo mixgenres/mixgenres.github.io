@@ -22,7 +22,7 @@ export const english_horn: InstrumentDef = {
     ring: 3
   },
   luthierPhysics: {
-    category: "aerophone_lip_tension",
+    category: "aerophone_double_reed",
     materialDensity: 0.75,
     tension: 0.75,
     bodyResonanceVolume: 2.5,

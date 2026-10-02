@@ -1,11 +1,11 @@
 import type { GenreWorld } from '../../schema';
-import { JAZZ_WORLD_WORLD } from './meta';
-import { JAZZ_WORLD_CULTURE } from './meta';
-import { JAZZ_WORLD_ROLES } from './meta';
-import { JAZZ_WORLD_FEEL } from './meta';
-import { JAZZ_WORLD_HARMONY } from './meta';
-import { JAZZ_WORLD_STYLES } from './styles';
-import { JAZZ_WORLD_PATTERNS } from './patterns';
+import { JAZZ_WORLD_WORLD } from './world';
+import { JAZZ_WORLD_CULTURE } from './culture';
+import { JAZZ_WORLD_ROLES } from './roles';
+import { JAZZ_WORLD_FEEL } from './feel';
+import { JAZZ_WORLD_HARMONY } from './harmony';
+import { JAZZ_WORLD_STYLES } from './styles/index';
+import { JAZZ_WORLD_PATTERNS } from './patterns/index';
 
 export const JAZZ_WORLD: GenreWorld = {
   ...JAZZ_WORLD_WORLD,

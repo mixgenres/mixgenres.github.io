@@ -6,83 +6,66 @@
 
 import { BandWorkletNode } from './bandWorklet.ts';
 import { previewCulturalRules, culturalPitchSet, shoCluster, celticOpenHarmony } from '../sheet/culturalMaterial.ts';
+import { PREVIEW_CLUSTER_INSTRUMENTS } from '../../data/musicTheory/culturalPitchSets';
 import { parseChord, noteName as theoryNoteName, midiOf } from '../sheet/musicTheory.ts';
 import { voiceProfile, foldToRange } from '../sheet/instrumentRoles.ts';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
-import { getLuthierModelForInstrument } from './luthier.ts';
 import type { TransportSink } from './transport.ts';
 import type { Performance } from '../band/performanceData.ts';
 
 let ctx: AudioContext | null = null;
 let bandWorklet: BandWorkletNode | null = null;
 
-function getAudioContextCtor(): typeof AudioContext | undefined {
-  if (typeof window === 'undefined') return undefined;
-  return window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-}
-
-// NOTE: the AudioContext is intentionally NOT created at module load or on the
-// first touch/click of the page. An earlier version registered global
-// pointerdown/touchstart/click listeners that created the context before the
-// user pressed Play. In Chrome a context created without user activation starts
-// "suspended" (WebView relaxes that policy, which is why it "worked" there).
-// The context is now created only inside the Play click (startAudio below), the
-// same lifecycle as the known-good build.
-if (typeof window !== 'undefined') {
-  // Recover from 'interrupted'/'suspended' when the tab comes back to the foreground.
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible' && ctx && ctx.state !== 'running') {
-      ctx.resume().catch(() => { /* needs a gesture */ });
-    }
-  });
-}
-
 /** trackId -> instrumentId, so the sink can resolve a physical model per note
  *  even though the transport only ever hands it a bare trackId. Populated by
  *  the UI layer (App.tsx) from the current song's tracks whenever they change. */
 const trackInstruments = new Map<string, string>();
-const trackMixVolumes = new Map<string, number>();
-interface TrackRenderContext {
-  instrumentId: string;
-  luthier: ReturnType<typeof getLuthierModelForInstrument>;
-  dialect: ReturnType<typeof resolveDialect>;
-  tuningSystem: ReturnType<typeof resolveTuningSystem>;
-  roleGain: number;
-}
-const trackRenderContexts = new Map<string, TrackRenderContext>();
-let activeWorldId = '';
+const trackRoles = new Map<string, string>();
+const trackLevels = new Map<string, number>();
+let activeWorldId = 'flamenco';
 let activeStyleId = '';
+
+let activePerformance: Performance | null = null;
+
+/** Single UI transaction; musical ticks never resolve or construct graphs. */
+export function setPlaybackConfiguration(performance: Performance, instruments: Record<string, string | undefined>, roles: Record<string, string>, levels: Record<string, number>, worldId: string, styleId?: string) {
+  activePerformance = performance;
+  activeWorldId = worldId; activeStyleId = styleId ?? '';
+  trackInstruments.clear(); trackRoles.clear(); trackLevels.clear();
+  for (const [id, instrument] of Object.entries(instruments)) if (instrument) trackInstruments.set(id, instrument);
+  for (const [id, role] of Object.entries(roles)) trackRoles.set(id, role);
+  for (const [id, level] of Object.entries(levels)) trackLevels.set(id, level);
+  if (bandWorklet) void bandWorklet.configure(currentConfiguration()).catch(error => console.error('Playback preparation failed:', error));
+}
+function currentConfiguration() {
+  if (!activePerformance) throw new Error('Prepare a song before starting audio');
+  return { performance: activePerformance, instruments: trackInstruments, roles: trackRoles, levels: trackLevels, worldId: activeWorldId, styleId: activeStyleId };
+}
+export function getPlaybackDiagnostics() { return bandWorklet?.getDiagnostics() ?? null; }
 
 export function setActiveWorld(worldId: string, styleId?: string) {
   activeWorldId = worldId;
-  if (styleId !== undefined) activeStyleId = styleId;
-  trackRenderContexts.clear();
+  activeStyleId = styleId ?? '';
   if (bandWorklet) {
     bandWorklet.setWorldAndStyle(worldId, styleId);
-    void bandWorklet.prepareTracks(trackInstruments).then(() => {
-      for (const [trackId, volume] of trackMixVolumes) bandWorklet?.setTrackVolume(trackId, volume);
-    });
   }
 }
 
-export function setTrackInstruments(
-  map: Record<string, string | undefined>,
-  volumes: Record<string, number | undefined> = {},
-) {
+export function setTrackInstruments(map: Record<string, string | undefined>, roles: Record<string, string> = {}, levels: Record<string, number> = {}) {
+  trackLevels.clear();
+  for (const [id, level] of Object.entries(levels)) {
+    trackLevels.set(id, level);
+    bandWorklet?.setTrackVolume(id, level);
+  }
+  trackRoles.clear();
+  for (const [id, role] of Object.entries(roles)) trackRoles.set(id, role);
+  bandWorklet?.setTrackRoles(trackRoles);
   trackInstruments.clear();
-  trackMixVolumes.clear();
-  trackRenderContexts.clear();
   for (const key of Object.keys(map)) {
     const v = map[key];
     if (v) trackInstruments.set(key, v);
-    const volume = volumes[key];
-    if (volume !== undefined) trackMixVolumes.set(key, Math.max(0, Math.min(1.5, volume)));
   }
-  if (bandWorklet) {
-    void bandWorklet.prepareTracks(trackInstruments).then(() => {
-      for (const [trackId, volume] of trackMixVolumes) bandWorklet?.setTrackVolume(trackId, volume);
-    });
-  }
+  if (bandWorklet) void bandWorklet.prepareTracks(trackInstruments);
 }
 let initPromise: Promise<BandWorkletNode> | null = null;
 
@@ -100,19 +83,22 @@ export async function ensureSynth(): Promise<BandWorkletNode> {
   initPromise = (async () => {
     try {
       if (!ctx) {
-        const AudioCtx = getAudioContextCtor();
-        if (!AudioCtx) throw new Error('Web Audio is not supported in this browser');
+        const AudioCtx = window.AudioContext;
         ctx = new AudioCtx();
       }
-      if (ctx.state !== 'running') {
-        await ctx.resume().catch(() => {});
+      if (ctx.state === 'suspended') {
+        try {
+          await ctx.resume();
+        } catch {
+          // Resume on user action
+        }
       }
 
       const node = new BandWorkletNode();
+      await node.configure(currentConfiguration());
       await node.initialize(ctx, 1);
       bandWorklet = node;
-      await node.prepareTracks(trackInstruments);
-      for (const [trackId, volume] of trackMixVolumes) node.setTrackVolume(trackId, volume);
+      await node.configure(currentConfiguration());
       return node;
     } catch (err) {
       console.error('Physical Modeling Worklet initialization error:', err);
@@ -127,17 +113,13 @@ export async function ensureSynth(): Promise<BandWorkletNode> {
 export async function startAudio(): Promise<AudioContext | null> {
   try {
     if (!ctx) {
-      const AudioCtx = getAudioContextCtor();
-      if (!AudioCtx) throw new Error('Web Audio is not supported in this browser');
+      const AudioCtx = window.AudioContext;
       ctx = new AudioCtx();
     }
-    if (ctx.state !== 'running') {
-      await ctx.resume().catch(() => {});
+    if (ctx.state === 'suspended') {
+      await ctx.resume();
     }
     await ensureSynth();
-    if (ctx.state !== 'running') {
-      await ctx.resume().catch(() => {});
-    }
     return ctx;
   } catch (err) {
     console.error('Failed to start audio engine:', err);
@@ -152,94 +134,26 @@ export function stopAudio() {
   }
 }
 
-/** Stable id shared by noteOn/noteOff for the same physical voice, so a
- *  RELEASE message can actually find and stop the sustained voice it started
- *  (bowed strings, reed instruments, winds, held synth/pad notes). */
-function voiceId(trackId: string | number, midi: number, noteInstanceId?: string): string {
-  return noteInstanceId ? `${trackId}_${noteInstanceId}` : `${trackId}_${midi}`;
-}
-
-import { resolveDialect } from '../band/genreDialect.ts';
-import { resolveTuningSystem } from '../sheet/tuning.ts';
-import { getRoleGainLinear } from '../studio/mixer.ts';
-import { resolveRenderGesture } from './renderGesture.ts';
-
 export function createSink(): TransportSink {
   return {
     now: () => (ctx ? ctx.currentTime : 0),
-    noteOn(trackId, midi, vel, time, gestureCode, frequencyHz, bellowsDirectionCode, bandoneonButtonId, bandoneonButtonIndex, bandoneonSideCode, noteInstanceId) {
+    noteOn(trackId, _midi, _vel, time, _gestureCode, _frequencyHz, _bellowsDirectionCode, _bandoneonButtonId, _bandoneonButtonIndex, _bandoneonSideCode, noteInstanceId, profileId) {
       if (!bandWorklet) return;
-      const instrumentId = trackInstruments.get(String(trackId)) ?? String(trackId);
-      const vel01 = Math.max(0, Math.min(1, vel / 127));
-      let renderContext = trackRenderContexts.get(String(trackId));
-      if (!renderContext || renderContext.instrumentId !== instrumentId) {
-        const dialect = resolveDialect(instrumentId, activeWorldId, activeStyleId);
-        const tuningSystem = resolveTuningSystem(dialect?.tuningSystemId || (activeWorldId.includes('maqam') || activeWorldId.includes('middle_east') ? 'maqam-bayati' : activeWorldId.includes('blues') ? 'blues-continuum' : '12-tet'));
-        const instDef = INSTRUMENTS_BY_ID[instrumentId];
-        const role = instDef?.acousticProfile?.role || 'comp';
-        renderContext = {
-          instrumentId,
-          luthier: getLuthierModelForInstrument(instrumentId),
-          dialect,
-          tuningSystem,
-          roleGain: getRoleGainLinear(role, activeWorldId || 'default', instrumentId),
-        };
-        trackRenderContexts.set(String(trackId), renderContext);
-      }
-      let luthier = renderContext.luthier;
-      const dialect = renderContext.dialect;
-      const tuningSystem = renderContext.tuningSystem;
-      const freqHz = frequencyHz ?? tuningSystem.getFrequencyHz(midi);
-      const rendered = resolveRenderGesture(instrumentId, gestureCode ?? 0);
-      const action = rendered.action;
-      if (rendered.categoryOverride) luthier = { ...luthier, category: rendered.categoryOverride };
-      if (rendered.harmonicRichnessDelta !== 0 || rendered.decayTimeFactorScale !== 1) {
-        luthier = {
-          ...luthier,
-          harmonicRichness: Math.max(0, Math.min(1, luthier.harmonicRichness + rendered.harmonicRichnessDelta)),
-          decayTimeFactor: luthier.decayTimeFactor * rendered.decayTimeFactorScale,
-        };
-      }
-
-      const roleGain = renderContext.roleGain;
-      const deterministicJitter = (((Number(gestureCode ?? 0) * 1103515245 + midi * 12345 + Math.round(time * 1000)) >>> 0) / 0xffffffff) - 0.5;
-      const contactPoint = Math.max(0.05, Math.min(0.95, dialect?.contactPointOverride ?? (rendered.contactPoint - (vel01 - 0.5) * 0.18 + deterministicJitter * 0.08)));
-      const mass = Math.max(0.1, Math.min(0.95, rendered.mass + vel01 * 0.42 + deterministicJitter * 0.08));
-
-      bandWorklet.postEvent({
-        id: voiceId(trackId, midi, noteInstanceId),
-        noteInstanceId,
-        cyclePhase: 0,
-        luthierObjectId: instrumentId,
-        trackId: String(trackId),
-        action: { type: action as import('./acousticEvent.ts').ExcitationActionType, force: vel01, contactPoint, mass },
-        tuning: { baseFrequencyHz: freqHz, culturalMicrotoneCents: tuningSystem.getCentsOffset(midi) },
-        spatialPosition: { x: 0, y: 0, z: 0 },
-        luthier,
-        worldId: activeWorldId,
-        midi,
-        velocity: vel,
-        frequencyHz: freqHz,
-        duration: 0.5,
-        gestureCode,
-        bellowsDirectionCode,
-        bandoneonButtonId,
-        bandoneonButtonIndex,
-        bandoneonSideCode,
-        roleGain,
-      }, time);
+      if (profileId === undefined || !noteInstanceId) throw new Error('Transport must supply a prepared note profile');
+      bandWorklet.postPreparedNote(String(trackId), profileId, noteInstanceId, time);
     },
     noteOff(trackId, midi, time, noteInstanceId) {
       // Releases sustain-capable voices (bowed/reed/wind/held synth); a
       // no-op for decaying/percussive voices, which just ring out.
       if (bandWorklet) bandWorklet.postRelease(String(trackId), midi, time, noteInstanceId);
     },
-    pitchBend(trackId, value, time, targetMidi) {
-      if (bandWorklet) bandWorklet.postBend(String(trackId), value, targetMidi, time);
+    pitchBend(trackId, value, time) {
+      if (bandWorklet) bandWorklet.postBend(String(trackId), value, time);
     },
     controlChange(trackId, cc, value, time) {
       if (bandWorklet) bandWorklet.postCC(String(trackId), cc, value, time);
     },
+    restoreControllers(controllers, time) { bandWorklet?.restoreControllers(controllers, time); },
     setDrumChannel(_trackId, _isDrum) {
       // Percussive vs. pitched behaviour is carried by the luthier category.
     },
@@ -268,9 +182,6 @@ export function createSink(): TransportSink {
     },
     setTrackSolo(trackId, solo, time) {
       if (bandWorklet) bandWorklet.setTrackSolo(String(trackId), solo, time);
-    },
-    setTrackSpotlight(trackId, mode, time) {
-      if (bandWorklet) bandWorklet.setTrackSpotlight(String(trackId), mode, time);
     },
   };
 }
@@ -304,7 +215,7 @@ export function getVoiceFeedSummary(instrumentId: string, chord: string) {
     const pcs = culturalPitchSet(culture, parsed.rootPc);
     const midis = culture.sourceModel === 'modal-drone' && def.voicing === 'chord'
       ? celticOpenHarmony(parsed.rootPc, prof, 0.84, 17)
-      : instrumentId === 'sho'
+      : PREVIEW_CLUSTER_INSTRUMENTS.includes(instrumentId)
         ? shoCluster(parsed.rootPc, prof, 0.84)
         : [foldToRange(midiOf(pcs[0], 4), prof)];
     return {
@@ -356,7 +267,10 @@ export async function renderSongToMp3(
     perf,
     {
       selectedTrackIds: options.selectedTrackIds,
+      signal: options.signal,
+      format: options.format,
       trackInstruments,
+      trackRoles,
       worldId: options.worldId || activeWorldId,
       styleId: options.styleId || activeStyleId,
       mixState: options.mixState,

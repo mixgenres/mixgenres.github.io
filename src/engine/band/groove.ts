@@ -179,7 +179,14 @@ export function applyFeel(g: GrooveProfile, input: FeelInput): FeelOutput {
     ? (input.authoredMs ?? 0)
     : (g.lean + (g.roleLean[input.role] ?? 0) + (g.pocket?.[slot] ?? 0) + roleMs + (input.anticipated ? g.anticipationMs : 0)) * scale + (input.authoredMs ?? 0);
 
-  const currentHumanizeMs = g.humanizeMs;
+  let currentHumanizeMs = g.humanizeMs;
+  if (g.id?.includes('tango')) {
+    if (input.role === 'comp' || input.role === 'bass') {
+      currentHumanizeMs = 2;
+    } else if (input.role === 'lead') {
+      currentHumanizeMs = 12;
+    }
+  }
 
   // A human ensemble does not independently jitter every player. There is a
   // shared breath/pocket plus a much smaller player-specific deviation. This

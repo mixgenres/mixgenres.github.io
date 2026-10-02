@@ -2,7 +2,6 @@
  * CULTURAL ACOUSTIC TRANSPORT & SCHEDULER
  * ======================================
  * Event queue and playhead management for the physical acoustic engine.
- * Directly scheduled via high-precision lookahead on the audio clock without Web Workers.
  */
 
 import type { Performance, PerfNote, PerfCC } from '../band/performanceData.ts';
@@ -10,12 +9,27 @@ import type { Performance, PerfNote, PerfCC } from '../band/performanceData.ts';
 const LOOKAHEAD_SEC = 0.40;
 const TICK_MS = 25;
 
+function createSchedulerWorker(): Worker | null {
+  try {
+    if (typeof window === 'undefined' || typeof Worker === 'undefined') return null;
+
+    // Use a Vite-managed module worker instead of a Blob URL. Blob workers are
+    // commonly rejected by CSP in hosted environments (including AI Studio).
+    return new Worker(new URL('./schedulerWorker.ts', import.meta.url), {
+      type: 'module',
+    });
+  } catch {
+    return null;
+  }
+}
+
 export interface TransportSink {
   now(): number;
-  noteOn(trackId: string | number, midi: number, vel: number, time: number, gestureCode?: number, frequencyHz?: number, bellowsDirectionCode?: 1 | 2, bandoneonButtonId?: string, bandoneonButtonIndex?: number, bandoneonSideCode?: 1 | 2, noteInstanceId?: string): void;
+  noteOn(trackId: string | number, midi: number, vel: number, time: number, gestureCode?: number, frequencyHz?: number, bellowsDirectionCode?: 1 | 2, bandoneonButtonId?: string, bandoneonButtonIndex?: number, bandoneonSideCode?: 1 | 2, noteInstanceId?: string, profileId?: number): void;
   noteOff(trackId: string | number, midi: number, time: number, noteInstanceId?: string): void;
   pitchBend(trackId: string | number, value: number, time: number, targetMidi?: number): void;
   controlChange(trackId: string | number, cc: number, value: number, time: number): void;
+  restoreControllers?(controllers: PerfCC[], time: number): void;
   setDrumChannel(trackId: string | number, isDrum: boolean): void;
   allNotesOff(): void;
   setPlaybackEnabled?(enabled: boolean): void;
@@ -25,7 +39,6 @@ export interface TransportSink {
   setTrackMute?(trackId: string | number, muted: boolean, time?: number): void;
   setTrackPan?(trackId: string | number, pan: number, time?: number): void;
   setTrackSolo?(trackId: string | number, solo: boolean, time?: number): void;
-  setTrackSpotlight?(trackId: string | number, mode: string, time?: number): void;
 }
 
 export interface TransportCallbacks {
@@ -40,7 +53,10 @@ export class Transport {
   private sink: TransportSink;
   private cb: TransportCallbacks;
 
-  private timerId: number | null = null;
+  private worker: Worker | null = null;
+  private fallbackTimer: number | null = null;
+  private livenessTimeout: number | null = null;
+  private workerTicked = false;
   private rafId: number | null = null;
 
   private origin = 0;
@@ -51,9 +67,35 @@ export class Transport {
   private looping = true;
   private endFired = false;
 
+  /**
+   * @static
+   * Creates a Web Worker scheduler for lookahead timing.
+   */
+  public static createWorker(): Worker | null {
+    return createSchedulerWorker();
+  }
+
   constructor(sink: TransportSink, cb: TransportCallbacks = {}) {
     this.sink = sink;
     this.cb = cb;
+    this.worker = createSchedulerWorker();
+    if (this.worker) {
+      this.worker.onmessage = () => {
+        this.workerTicked = true;
+        if (this.running) this.tick();
+      };
+      this.worker.onerror = () => {
+        // A worker can be constructed successfully but fail when the browser
+        // attempts to load/execute its module (CSP, MIME, deployment path,
+        // cross-origin hosting, etc.). Fall back immediately rather than
+        // waiting for the liveness timeout.
+        this.worker?.terminate();
+        this.worker = null;
+        if (this.running && this.fallbackTimer === null) {
+          this.fallbackTimer = window.setInterval(() => this.tick(), TICK_MS);
+        }
+      };
+    }
   }
 
   get isRunning() { return this.running; }
@@ -61,6 +103,7 @@ export class Transport {
   setLooping(v: boolean) { this.looping = v; }
 
   setPerformance(perf: Performance) {
+    if (this.perf === perf) return;
     const wasRunning = this.running;
     const pos = wasRunning ? this.position() : this.startOffset;
     this.perf = perf;
@@ -71,7 +114,6 @@ export class Transport {
         this.sink.allNotesOff();
       }
       this.locate(pos);
-      this.tick();
     }
   }
 
@@ -80,6 +122,7 @@ export class Transport {
    * and resumes cleanly from the current playback position.
    */
   patchPerformance(perf: Performance, _changedRegionIds?: string[]) {
+    if (this.perf === perf) return;
     if (!this.running || !this.perf) {
       this.setPerformance(perf);
       return;
@@ -92,7 +135,6 @@ export class Transport {
       this.sink.allNotesOff();
     }
     this.locate(currentPos);
-    this.tick();
   }
 
   // Live mix controls (Tier 3 -> Sink direct path)
@@ -112,9 +154,6 @@ export class Transport {
     this.sink.setTrackSolo?.(trackId, solo, this.sink.now());
   }
 
-  setTrackSpotlight(trackId: string | number, mode: string) {
-    this.sink.setTrackSpotlight?.(trackId, mode, this.sink.now());
-  }
 
   position(): number {
     if (!this.perf) return this.startOffset;
@@ -136,13 +175,25 @@ export class Transport {
     this.sink.setPlaybackEnabled?.(true);
     this.running = true;
     this.endFired = false;
+    this.workerTicked = false;
 
-    // Start direct lookahead timer
-    if (this.timerId !== null) {
-      window.clearInterval(this.timerId);
-      this.timerId = null;
+    // Start background lookahead scheduler
+    if (this.worker) {
+      this.worker.postMessage('start');
+
+      // Liveness check: if worker doesn't tick within 100ms, fall back to setInterval
+      if (this.livenessTimeout !== null) {
+        window.clearTimeout(this.livenessTimeout);
+      }
+      this.livenessTimeout = window.setTimeout(() => {
+        if (this.running && !this.workerTicked && this.fallbackTimer === null) {
+          console.warn("[Transport] Web Worker is blocked or inactive. Falling back to main-thread setInterval.");
+          this.fallbackTimer = window.setInterval(() => this.tick(), TICK_MS);
+        }
+      }, 100);
+    } else if (this.fallbackTimer === null) {
+      this.fallbackTimer = window.setInterval(() => this.tick(), TICK_MS);
     }
-    this.timerId = window.setInterval(() => this.tick(), TICK_MS);
 
     // Decoupled visual loop using requestAnimationFrame
     this.startVisualLoop();
@@ -154,9 +205,16 @@ export class Transport {
   stop() {
     this.running = false;
     this.sink.setPlaybackEnabled?.(false);
-    if (this.timerId !== null) {
-      window.clearInterval(this.timerId);
-      this.timerId = null;
+    if (this.worker) {
+      this.worker.postMessage('stop');
+    }
+    if (this.livenessTimeout !== null) {
+      window.clearTimeout(this.livenessTimeout);
+      this.livenessTimeout = null;
+    }
+    if (this.fallbackTimer !== null) {
+      window.clearInterval(this.fallbackTimer);
+      this.fallbackTimer = null;
     }
     this.stopVisualLoop();
     this.sink.allNotesOff();
@@ -196,9 +254,9 @@ export class Transport {
     }
     this.ccCursor = ci;
     const now = this.sink.now() + 0.005;
-    for (const c of latest.values()) this.sink.controlChange(c.trackId, c.cc, c.value, now);
-
     if (this.running) this.sink.allNotesOff();
+    if (this.sink.restoreControllers) this.sink.restoreControllers([...latest.values()], now);
+    else for (const c of latest.values()) this.sink.controlChange(c.trackId, c.cc, c.value, now);
   }
 
   private findCursor(pos: number): number {
@@ -243,6 +301,7 @@ export class Transport {
       if (this.noteCursor >= notes.length) {
         if (this.looping) {
           this.origin += total;
+          this.sink.restoreControllers?.([], this.origin);
           this.noteCursor = 0;
           this.ccCursor = 0;
           continue;
@@ -275,7 +334,7 @@ export class Transport {
       }
     }
     const noteInstanceId = `${String(n.trackId)}:${this.noteCursor}:${Math.round(at * 1000)}`;
-    this.sink.noteOn(n.trackId, midi, vel, targetOn, n.gestureCode, n.frequencyHz, n.bellowsDirectionCode, n.bandoneonButtonId, n.bandoneonButtonIndex, n.bandoneonSideCode, noteInstanceId);
+    this.sink.noteOn(n.trackId, midi, vel, targetOn, n.gestureCode, n.frequencyHz, n.bellowsDirectionCode, n.bandoneonButtonId, n.bandoneonButtonIndex, n.bandoneonSideCode, noteInstanceId, this.noteCursor);
     this.sink.noteOff(n.trackId, midi, targetOff, noteInstanceId);
     if (n.pitchBend?.length) this.sink.pitchBend(n.trackId, 8192, targetOff, midi);
   }

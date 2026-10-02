@@ -1,3 +1,4 @@
+import { DEFAULT_STYLE_MASTER_PROFILE } from '../../data/sound/mix/masterProfiles';
 import type {
   SongStyle,
   ResolvedStyle,
@@ -40,12 +41,12 @@ type CompleteStyle = SongStyle & {
 function completeStyle(style: SongStyle): CompleteStyle {
   return {
     ...style,
-    form: { ...style.form, sectionVocab: style.form?.sectionVocab ?? [], templates: style.form?.templates ?? [], preferredMeters: style.form?.preferredMeters ?? [], defaultSpotlights: style.form?.defaultSpotlights ?? {} },
+    form: { ...style.form, sectionVocab: style.form?.sectionVocab ?? [], templates: style.form?.templates ?? [], preferredMeters: style.form?.preferredMeters ?? [] },
     harmony: { ...style.harmony, model: style.harmony?.model ?? 'functional', modePolicy: style.harmony?.modePolicy ?? 'major', progressionTemplates: style.harmony?.progressionTemplates ?? [], chordVocabulary: style.harmony?.chordVocabulary ?? [] },
     rhythm: { ...style.rhythm, meter: style.rhythm?.meter ?? '4/4', tempoRange: style.rhythm?.tempoRange ?? [80, 140], defaultBpm: style.rhythm?.defaultBpm ?? 110, feel: style.rhythm?.feel ?? 'style-native', swingPercentage: style.rhythm?.swingPercentage ?? 50, anticipationOffsetSteps: style.rhythm?.anticipationOffsetSteps ?? 0, microtimingFeel: style.rhythm?.microtimingFeel ?? 'straight', humanizeJitterMs: style.rhythm?.humanizeJitterMs ?? 8 },
     melody: { ...style.melody, scaleMode: style.melody?.scaleMode ?? 'major' },
     arrangement: { ...style.arrangement, ensemble: style.arrangement?.ensemble ?? [] },
-    sound: { ...style.sound, instrumentPalette: style.sound?.instrumentPalette ?? [], masterProfile: { pocket: style.sound?.masterProfile?.pocket ?? 0.5, lift: style.sound?.masterProfile?.lift ?? 0.5, ...(style.sound?.masterProfile ?? {}) } },
+    sound: { ...style.sound, instrumentPalette: style.sound?.instrumentPalette ?? [], masterProfile: { ...DEFAULT_STYLE_MASTER_PROFILE, ...(style.sound?.masterProfile ?? {}) } },
     gestures: { ...(style.gestures ?? {}) },
     rules: { require: [], forbid: [], ...(style.rules ?? {}) },
   };
@@ -57,13 +58,6 @@ import { LRUMap, registerCache } from '../cache/lru.ts';
 const resolveCache = new LRUMap<string, ResolvedStyle>(2000, 'resolveCache');
 registerCache(resolveCache);
 
-function stableSerialize(value: unknown): string {
-  if (value === null || typeof value !== 'object') return JSON.stringify(value);
-  if (Array.isArray(value)) return `[${value.map(stableSerialize).join(',')}]`;
-  const obj = value as Record<string, unknown>;
-  return `{${Object.keys(obj).sort().map(key => `${JSON.stringify(key)}:${stableSerialize(obj[key])}`).join(',')}}`;
-}
-
 function cacheKey(opts: ResolveStyleOptions): string {
   const g = opts.genreId ?? '';
   const s = opts.styleId;
@@ -74,7 +68,10 @@ function cacheKey(opts: ResolveStyleOptions): string {
       .sort()
       .join(';');
   }
-  const overKey = opts.userOverrides ? stableSerialize(opts.userOverrides) : '';
+  let overKey = '';
+  if (opts.userOverrides) {
+    overKey = Object.keys(opts.userOverrides).sort().join(',');
+  }
   return `${g}|${s}|${infKey}|${overKey}`;
 }
 
@@ -91,7 +88,7 @@ function lerpRange(a: Range, b: Range, t: number): Range {
 
 function blendWeighted<T>(baseList: Weighted<T>[], influenceList: Weighted<T>[], weight: number): Weighted<T>[] {
   const w = Math.max(0, Math.min(1, weight));
-  const baseScale = 1 - w;
+  const baseScale = 1 - w * 0.5;
   const infScale = w;
 
   const results: Weighted<T>[] = [];
@@ -172,7 +169,7 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
   // leaves against the authored base before the defaults make them look real.
   const authoredBase = hierarchy[0] as Partial<CompleteStyle>;
   const requiredLeaves: Array<[Aspect, string[]]> = [
-    ['form', ['sectionVocab', 'templates', 'preferredMeters', 'defaultSpotlights']],
+    ['form', ['sectionVocab', 'templates', 'preferredMeters']],
     ['harmony', ['model', 'modePolicy', 'progressionTemplates', 'chordVocabulary']],
     ['rhythm', ['meter', 'tempoRange', 'defaultBpm', 'feel', 'swingPercentage', 'anticipationOffsetSteps', 'microtimingFeel', 'humanizeJitterMs']],
     ['melody', ['scaleMode']],
@@ -364,8 +361,8 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
           if (infStyle.melody) {
             if (w >= 0.5) {
               merged.melody.scaleMode = infStyle.melody.scaleMode ?? merged.melody.scaleMode;
-              if (infStyle.melody.pitchIntervals) merged.melody.pitchIntervals = Array.from(new Set([...(merged.melody.pitchIntervals ?? []), ...infStyle.melody.pitchIntervals]));
-              if (infStyle.melody.contourArchetypes) merged.melody.contourArchetypes = Array.from(new Set([...(merged.melody.contourArchetypes ?? []), ...infStyle.melody.contourArchetypes]));
+              if (infStyle.melody.pitchIntervals) merged.melody.pitchIntervals = infStyle.melody.pitchIntervals;
+              if (infStyle.melody.contourArchetypes) merged.melody.contourArchetypes = infStyle.melody.contourArchetypes;
             }
             if (infStyle.melody.ornamentVocabulary) {
               merged.melody.ornamentVocabulary = Array.from(new Set([
@@ -398,8 +395,6 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
             );
             if (w >= 0.5 && infStyle.sound.masterProfile) {
               merged.sound.masterProfile = {
-                ...merged.sound.masterProfile,
-                ...infStyle.sound.masterProfile,
                 pocket: lerp(merged.sound.masterProfile.pocket ?? 0.5, infStyle.sound.masterProfile.pocket ?? 0.5, w),
                 lift: lerp(merged.sound.masterProfile.lift ?? 0.5, infStyle.sound.masterProfile.lift ?? 0.5, w),
               };
@@ -412,9 +407,8 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
           if (infStyle.gestures) {
             for (const [gid, gest] of Object.entries(infStyle.gestures)) {
               merged.gestures[gid] = {
-                ...(merged.gestures[gid] ?? {}),
                 ...gest,
-                probability: (merged.gestures[gid]?.probability ?? gest.probability ?? 0) * (1 - w) + gest.probability * w
+                probability: (merged.gestures[gid]?.probability ?? 0) * (1 - w) + gest.probability * w
               };
             }
             recordDecision('gestures', merged.gestures, 'influence', srcId, w);

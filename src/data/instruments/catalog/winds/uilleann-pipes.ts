@@ -4,6 +4,7 @@ export const uilleann_pipes: InstrumentDef = {
   id: "uilleann-pipes",
   name: "Uilleann pipes",
   family: "winds",
+  pipeSynthesis: { droneRatios: [0.5, 1, 2] },
   voicing: "single",
   elementaryModel: 16,
   makeupGain: 0.411,
@@ -21,7 +22,7 @@ export const uilleann_pipes: InstrumentDef = {
     ring: 5
   },
   luthierPhysics: {
-    category: "aerophone_lip_tension",
+    category: "aerophone_bagpipe_reed",
     materialDensity: 0.65,
     tension: 0.75,
     bodyResonanceVolume: 3,

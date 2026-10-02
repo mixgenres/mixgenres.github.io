@@ -278,40 +278,6 @@ export function applySongStyleProcessing(
 /**
  * Applies wave-shaper distortion and vintage saturation to audio buffers in offline MP3 export.
  */
-function applyOfflineEq(left: Float32Array, right: Float32Array, eq?: TrackDSPProfile['eq']): void {
-  if (!eq) return;
-  // Deterministic one-pole approximations keep the export path dependency-free.
-  const hp = eq.highPassCutoff;
-  const lp = eq.lowPassCutoff;
-  const lowGain = eq.lowShelf?.gain ?? 0;
-  const midGain = eq.midPeak?.gain ?? 0;
-  const highGain = eq.highShelf?.gain ?? 0;
-  const lowMul = Math.pow(10, lowGain / 20);
-  const midMul = Math.pow(10, midGain / 20);
-  const highMul = Math.pow(10, highGain / 20);
-  let prevL = 0, prevR = 0;
-  const sr = 44100;
-  const hpA = hp ? Math.exp(-2 * Math.PI * hp / sr) : 0;
-  const lpA = lp ? Math.exp(-2 * Math.PI * lp / sr) : 0;
-  for (let i = 0; i < left.length; i++) {
-    let l = left[i], r = right[i];
-    if (hp) {
-      const nextL = hpA * (prevL + l - prevL);
-      const nextR = hpA * (prevR + r - prevR);
-      l -= nextL; r -= nextR;
-    }
-    if (lp) {
-      prevL = lpA * prevL + (1 - lpA) * l;
-      prevR = lpA * prevR + (1 - lpA) * r;
-      l = prevL; r = prevR;
-    }
-    // Broad spectral shelves/peak approximations; exact WebAudio EQ remains in browser master processing.
-    const broad = lowMul * midMul * highMul;
-    left[i] = l * broad;
-    right[i] = r * broad;
-  }
-}
-
 export function processOfflineAudioDSP(
   left: Float32Array,
   right: Float32Array,
@@ -320,10 +286,9 @@ export function processOfflineAudioDSP(
   if (!dspProfile) return;
 
   const trackProfile = dspProfile.master || (dspProfile.distortion ? (dspProfile as TrackDSPProfile) : undefined);
-  if (!trackProfile?.distortion && !trackProfile?.vintage && !trackProfile?.eq && !trackProfile?.spatial) return;
+  if (!trackProfile?.distortion && !trackProfile?.vintage) return;
 
   const len = left.length;
-  applyOfflineEq(left, right, trackProfile.eq);
   if (trackProfile.distortion && trackProfile.distortion.drive > 0) {
     const { drive, type } = trackProfile.distortion;
     const k = drive * 100;
@@ -363,48 +328,13 @@ export function processOfflineAudioDSP(
     }
   }
 
-  // Vintage coloration is part of the authored blueprint, not an ignored annotation.
-  if (trackProfile.vintage?.saturation && trackProfile.vintage.saturation > 0) {
-    const amount = Math.max(0, Math.min(1, trackProfile.vintage.saturation));
-    const drive = 1 + amount * 2.5;
-    for (let i = 0; i < len; i++) {
-      left[i] = Math.tanh(left[i] * drive) / Math.tanh(drive);
-      right[i] = Math.tanh(right[i] * drive) / Math.tanh(drive);
-    }
-  }
-  if (trackProfile.vintage?.wowFlutter && trackProfile.vintage.wowFlutter > 0) {
-    const amount = Math.max(0, Math.min(1, trackProfile.vintage.wowFlutter));
-    for (let i = 0; i < len; i++) {
-      const mod = 1 + Math.sin((i / 44100) * Math.PI * 2 * 0.55) * amount * 0.012;
-      left[i] *= mod;
-      right[i] *= mod;
-    }
-  }
+  // Vintage bitcrush or tape saturation
   if (trackProfile.vintage?.bitcrush && trackProfile.vintage.bitcrush < 16) {
     const bits = trackProfile.vintage.bitcrush;
     const step = Math.pow(2, bits - 1);
     for (let i = 0; i < len; i++) {
       left[i] = Math.round(left[i] * step) / step;
       right[i] = Math.round(right[i] * step) / step;
-    }
-  }
-
-  if (trackProfile.spatial?.reverbMix && trackProfile.spatial.reverbMix > 0) {
-    const mix = Math.max(0, Math.min(1, trackProfile.spatial.reverbMix));
-    const delay = Math.max(1, Math.round(44100 * Math.min(2.5, Math.max(0.08, trackProfile.spatial.reverbTime))));
-    const wetL = new Float32Array(len), wetR = new Float32Array(len);
-    for (let i = delay; i < len; i++) {
-      wetL[i] = left[i - delay] * 0.42 + (i > delay * 2 ? wetL[i - delay * 2] * 0.18 : 0);
-      wetR[i] = right[i - delay] * 0.38 + (i > delay * 3 ? wetR[i - delay * 3] * 0.16 : 0);
-    }
-    const delayMix = Math.max(0, Math.min(1, trackProfile.spatial.delayMix ?? 0));
-    for (let i = 0; i < len; i++) {
-      left[i] = left[i] * (1 - mix) + wetL[i] * mix;
-      right[i] = right[i] * (1 - mix) + wetR[i] * mix;
-      if (delayMix > 0 && i > 2205) {
-        left[i] += left[i - 2205] * delayMix * 0.08;
-        right[i] += right[i - 2205] * delayMix * 0.08;
-      }
     }
   }
 }

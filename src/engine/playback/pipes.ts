@@ -1,13 +1,13 @@
 import { el } from '@elemaudio/core';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
+import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 
 export default class PipesModule implements InstrumentModule {
   id = 'pipes';
 
   renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const { params, gateSignal, freqSignal, action, dspProfile } = ctx;
-    const id = (params.instrumentId ?? '').toLowerCase();
-    const uilleann = id === 'uilleann-pipes';
+    const droneRatios = INSTRUMENTS_BY_ID[params.instrumentId ?? '']?.pipeSynthesis?.droneRatios ?? [0.5, 1, 1.5, 2];
     const pressure = dspProfile?.excitationDynamics.continuousReservoir?.pressure ?? 0.8;
     const phase = el.syncphasor(freqSignal, gateSignal);
     const chanter = el.add(
@@ -15,7 +15,6 @@ export default class PipesModule implements InstrumentModule {
       el.mul(0.18, el.sin(el.mul(2 * Math.PI, el.mul(phase, 2)))),
     );
 
-    const droneRatios = uilleann ? [0.5, 1, 2] : [0.5, 1, 1.5, 2];
     const drones = droneRatios.map((ratio, i) =>
       el.mul(
         (0.10 - i * 0.012) * (0.75 + pressure * 0.35),

@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "renderMode": "elementary-core-plus-style-dsp; browser master chain not executed in Node",
+  "genreCount": 36,
+  "cases": [
+    {
+      "genre": "chinese-traditional",
+      "styleId": "chinese-traditional-silk-and-bamboo",
+      "tracks": 7,
+      "notes": 15,
+      "duration": 1.5,
+      "bytes": 63947,
+      "stream": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2,
+        "duration": "2.664458"
+      }
+    },
+    {
+      "genre": "japanese-pop",
+      "styleId": "japanese-pop-j-pop",
+      "tracks": 8,
+      "notes": 18,
+      "duration": 1.5,
+      "bytes": 55170,
+      "stream": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2,
+        "duration": "2.298750"
+      }
+    },
+    {
+      "genre": "japanese-rock",
+      "styleId": "japanese-rock-j-rock",
+      "tracks": 7,
+      "notes": 30,
+      "duration": 1.5,
+      "bytes": 55170,
+      "stream": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2,
+        "duration": "2.298750"
+      }
+    },
+    {
+      "genre": "kpop",
+      "styleId": "kpop-dance-pop",
+      "tracks": 8,
+      "notes": 17,
+      "duration": 1.5,
+      "bytes": 55170,
+      "stream": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2,
+        "duration": "2.298750"
+      }
+    }
+  ]
+}

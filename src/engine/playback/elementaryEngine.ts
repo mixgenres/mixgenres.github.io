@@ -1,5 +1,4 @@
-import { instrumentHasKey, ENGINE_INSTRUMENT_KEYS } from '../../engine/lookup/instrumentKeys.ts';
-import { ELECTRONIC_GENRE_PATTERN } from '../../data/sound/dsp/genreClassifiers';
+import { BASS_INSTRUMENT_PATTERN, DRUM_BUS_INSTRUMENT_PATTERN, ELECTRIC_INSTRUMENT_PATTERN, ELECTRONIC_GAIN_INSTRUMENT_PATTERN, FAMILY_NOISE_SCALE_RULES, SUB_BUS_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
 import { INSTRUMENTS_BY_ID, EXACT_PLUCKED_PRESETS, GAIN_BY_INSTRUMENT } from '../../engine/lookup/instruments';
 import { el } from '@elemaudio/core';
 import { getLuthierModelForInstrument } from './luthier.ts';
@@ -7,9 +6,7 @@ import type { LuthierPhysicalParameters } from '../../data/instruments/schema/lu
 import type { AcousticFormantProfile } from '../../data/instruments/schema/formant-profile';
 import type { BowedResonanceProfile } from '../../data/instruments/schema/bowed-resonance';
 import { GAIN_BY_MODEL } from '../../data/sound/makeupGainByModel';
-import { CALIBRATED_MAKEUP } from '../../data/sound/calibratedMakeup';
-import type { MixCharacter } from '../../engine/style/contracts';
-import { calculateSidechainDepth, calculateDrumKnock } from '../studio/mixer.ts';
+import { ensembleHeadroom } from '../studio/masterSettings';
 import { buildVoiceContext, getInstrumentModule } from './instrumentRegistry.ts';
 import { isCollisionAllowedForAction } from '../band/excitationChoices.ts';
 import { applyInstrumentEffectsChain } from './instrumentEffects.ts';
@@ -147,6 +144,8 @@ articulation?: number;
 baseFrequencyHz?: number;
 triggerSeq?: number;
 noteInstanceId?: string;
+harmonicRichnessDelta?: number;
+decayTimeFactorScale?: number;
 }
 export interface TrackParams {
 brightness: number;
@@ -168,9 +167,7 @@ model: number;
 volume: number;
 pan: number;
 dialect?: string;
-instrumentDialectId?: string;
 genreId?: string;
-styleId?: string;
 performanceMode?: PerformanceMode;
 bendGlideMs?: number;
 instrumentId?: string;
@@ -199,7 +196,7 @@ export function modelForInstrument(instrumentId: string): number {
   throw new Error(`UNRESOLVED_MUSICAL_IDENTITY_ERROR: instrument "${instrumentId}" has no elementary model.`);
 }
 export function normalizedParams(instrumentId: string, luthier: LuthierPhysicalParameters, modelNum: number) {
-const electric = instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.electric);
+const electric = ELECTRIC_INSTRUMENT_PATTERN.test(instrumentId.toLowerCase());
 const b = Math.max(0, Math.min(1, 0.42 + luthier.harmonicRichness * 0.48 + (electric ? 0.1 : 0)));
 const d = Math.max(0.1, Math.min(8, luthier.decayTimeSec ?? luthier.decayTimeFactor));
 const dr = Math.max(0, Math.min(1, electric ? 0.15 + luthier.harmonicRichness * 0.55 : luthier.harmonicRichness * 0.08));
@@ -215,8 +212,6 @@ model: modelNum,
 }
 export function makeupGainFor(modelNum: number, instrumentId?: string): number {
   if (instrumentId) {
-    const calibrated = CALIBRATED_MAKEUP[instrumentId];
-    if (typeof calibrated === 'number') return calibrated;
     const def = INSTRUMENTS_BY_ID[instrumentId];
     if (typeof def?.makeupGain === 'number') {
       return def.makeupGain;
@@ -231,7 +226,7 @@ export function makeupGainFor(modelNum: number, instrumentId?: string): number {
 export function defaultTrackParams(instrumentId = '', luthier?: LuthierPhysicalParameters, modelNum = 0): TrackParams {
 const l = luthier ?? getLuthierModelForInstrument(instrumentId);
 const norm = normalizedParams(instrumentId, l, modelNum);
-const isElectronic = instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.electronic);
+const isElectronic = ELECTRONIC_GAIN_INSTRUMENT_PATTERN.test(instrumentId.toLowerCase());
 const effectiveModelForGain = isElectronic ? 9 : modelNum;
 // Volume un-clamped from upper boundaries to support massive hybrid textures
 const volume = Math.max(0.01, 0.8 * makeupGainFor(effectiveModelForGain, instrumentId));
@@ -239,7 +234,7 @@ const idLower = instrumentId.toLowerCase();
 const preset = EXACT_PLUCKED_PRESETS[idLower];
 const courses = l?.courses ?? preset?.courses ?? 1;
 const bodyConstruction = l?.bodyConstruction ?? preset?.bodyConstruction ?? 'wood-box';
-const excitationType = l?.excitationType ?? preset?.excitationType ?? 'fingerpad';
+const excitationType = l?.excitationType ?? INSTRUMENTS_BY_ID[instrumentId]?.excitationType ?? preset?.excitationType ?? 'fingerpad';
 const sympatheticStrings = l?.sympatheticStrings ?? preset?.sympatheticStrings ?? false;
 return {
 brightness: norm.brightness,
@@ -278,7 +273,10 @@ export function renderVoice(
   const ctx = buildVoiceContext(trackId, voiceIndex, voice, params);
   const mod = getInstrumentModule(params.instrumentId ?? '');
   let rawAudio: Node = mod.renderVoice(ctx);
-  rawAudio = applyGenreInstrumentTreatment(rawAudio, ctx, INSTRUMENTS_BY_ID[params.instrumentId ?? '']?.family);
+  // Authored DSP dialects own the timbre; generic treatment is a fallback only.
+  if (!ctx.dspProfile?.genreDialects[params.genreId ?? '']) {
+    rawAudio = applyGenreInstrumentTreatment(rawAudio, ctx, INSTRUMENTS_BY_ID[params.instrumentId ?? '']?.family);
+  }
 
   const instId = params.instrumentId || '';
   const instDef = INSTRUMENTS_BY_ID[instId] || INSTRUMENTS_BY_ID[instId.toLowerCase()];
@@ -290,19 +288,13 @@ export function renderVoice(
     const c = dspProfile.coupledResonators;
     const a = dspProfile.mechanicalArtifacts;
     const ap = dspProfile.articulationPhysics;
-    const styleKey = (params.styleId ?? '').toLowerCase();
-    const genreKey = (params.genreId ?? '').toLowerCase();
-    const authoredDialect = (styleKey ? dspProfile.genreDialects[styleKey] : undefined)
-      ?? (genreKey ? dspProfile.genreDialects[genreKey] : undefined);
-    // Genre shaping is already applied once in buildVoiceContext. Keep the
-    // generic fallback neutral here so brightness/decay/body are not multiplied
-    // a second time by the same genre profile. Authored instrument/style
-    // dialects remain free to supply their own physical coloration.
+    const genreKey = (params.genreId ?? params.dialect ?? '').toLowerCase();
+    const authoredDialect = genreKey ? dspProfile.genreDialects[genreKey] : undefined;
     const dialect = authoredDialect ?? {
-      brightness: 1,
-      damping: 0,
-      attack: 1,
-      body: 1,
+      brightness: ctx.genreDialect.brightness,
+      damping: Math.max(0, 0.055 * (1 - ctx.genreDialect.decay)),
+      attack: ctx.genreDialect.attack,
+      body: ctx.genreDialect.body,
       articulation: [],
     };
     const physical = dspProfile.physicalDetails;
@@ -311,8 +303,7 @@ export function renderVoice(
     // Mechanical/air noise is detail, not the instrument's primary tone.
     // notes were active. Keep the authored artifacts, but put them behind a
     // family-dependent acoustic-detail ceiling.
-    const familyNoiseScale = family === 'kit' || family === 'hand-drums' || family === 'metal-and-wood' || family === 'body-percussion' ? 0.62 : family === 'bowed' ? 0.30 : family === 'plucked' || family === 'plucked-string' ? 0.34 : family === 'winds' || family === 'brass' ? 0.28 : family === 'bellows-and-keys' ? 0.26 : 0.30;
-    const dialectBrightness = dialect.brightness ?? ctx.genreDialect.brightness;
+    const familyNoiseScale = FAMILY_NOISE_SCALE_RULES.find(rule => rule.pattern.test(String(family)))?.scale ?? 0.30;
     const dialectDamping = dialect.damping ?? 0;
     const directionText = ctx.action.toLowerCase();
     const bisonoric = dspProfile?.excitationDynamics.bisonoricAsymmetry;
@@ -383,9 +374,8 @@ export function renderVoice(
     // Apply mechanical artifacts if not owned by bespoke module
     if (!ownedSections.includes('mechanicalArtifacts')) {
       const pmNoise = instDef?.physicalModel?.parameters?.breathNoise ?? 0;
-      const breathBurst = a.breathBurst ?? 0;
-      if (a.airHiss > 0.02 || pmNoise > 0.02 || breathBurst > 0.02) {
-        const hissLevel = Math.max(a.airHiss, pmNoise * 0.15, breathBurst);
+      if (a.airHiss > 0.02 || pmNoise > 0.02) {
+        const hissLevel = Math.max(a.airHiss, pmNoise * 0.15);
         const hiss = el.mul(familyNoiseScale * hissLevel * (0.03 + 0.10 * params.pressure), el.mul(el.highpass(3000, 0.8, el.noise()), el.mul(ctx.gateSignal, 0.65)));
         modeSignals.push(hiss);
       }
@@ -403,10 +393,6 @@ export function renderVoice(
       if ((a.slideNoise ?? 0) > 0.02) {
         const slide = el.mul(familyNoiseScale * (a.slideNoise ?? 0) * 0.08, el.mul(el.highpass(1800, 1.0, el.pinknoise()), collisionEnv));
         modeSignals.push(slide);
-      }
-      if ((a.pedalNoise ?? 0) > 0.02) {
-        const pedal = el.mul(familyNoiseScale * (a.pedalNoise ?? 0) * 0.08, el.mul(el.lowpass(900, 1.1, el.pinknoise()), collisionEnv));
-        modeSignals.push(pedal);
       }
       if ((a.reedChatter ?? 0) > 0.02) {
         const reed = el.mul(familyNoiseScale * (a.reedChatter ?? 0) * 0.06, el.mul(el.highpass(2400, 1.0, el.noise()), collisionEnv));
@@ -469,30 +455,15 @@ export function renderVoice(
     if (excitationSaturation === 'generic') {
       const pmDrive = instDef?.physicalModel?.parameters?.nonlinearDrive ?? instDef?.physicalModel?.parameters?.stiffness ?? 0;
       const drive = 1 + (x.nonlinearDrive + pmDrive * 0.25 + (physical?.response.nonlinearTransfer ?? 0) * 0.18) * (0.4 + 1.2 * ctx.velBoost) + Math.max(0, (dialectAttack - 1) * 0.12);
-      rawAudio = el.tanh(el.mul(drive, rawAudio));
+      rawAudio = el.tanh(el.mul(drive * (authoredDialect ? 1 : Math.max(0.92, Math.min(1.22, ctx.genreDialect.drive))), rawAudio));
     }
 
-    if (dialectBrightness !== 1) {
-      const dialectCutoff = Math.min(19000, Math.max(900, (1800 + ctx.b * 9500) * dialectBrightness));
-      rawAudio = el.lowpass(dialectCutoff, 1.0, rawAudio);
-    }
     if (dialectDamping !== 0) {
       const dampingCutoff = Math.min(19000, Math.max(700, 12000 * (1 - dialectDamping)));
       rawAudio = el.lowpass(dampingCutoff, 1.0, rawAudio);
     }
 
-    // Fallback genre dialect for instruments whose physical profile has not yet
-    // authored a dedicated genre entry. This keeps the existing DSP model but
-    // prevents every un-authored genre from sounding like the neutral patch.
-    if (!authoredDialect) {
-      const transient = Math.max(0.75, Math.min(1.30, ctx.genreDialect.transient));
-      const dialectDrive = Math.max(0.92, Math.min(1.22, ctx.genreDialect.drive));
-      rawAudio = el.tanh(el.mul(dialectDrive, rawAudio));
-      if (ctx.genreDialect.electronic) {
-        const snap = el.mul((transient - 0.8) * 0.035, el.mul(el.highpass(2600, 0.9, el.noise()), el.adsr(0.00015, 0.004, 0, 0.0015, ctx.gateSignal)));
-        rawAudio = el.add(rawAudio, snap);
-      }
-    }
+
   }
 
   // Apply declared per-instrument physicalModel insert effects chain if authored
@@ -562,117 +533,34 @@ export function determineBusCategory(
   // Acoustic/electric bass instruments need their full harmonic body in the mix.
   // Reserve the sub bus for genuinely sub-oriented instruments; the master chain
   // may add a controlled low-end enhancement without throwing away upper harmonics.
-  if (instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.subBass)) {
+  if (SUB_BUS_INSTRUMENT_PATTERN.test(inst)) {
     return 'sub';
   }
-  if (r === 'bass' || instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.bass)) {
+  if (r === 'bass' || BASS_INSTRUMENT_PATTERN.test(inst)) {
     return 'inst';
   }
   if (
     r === 'drums' ||
     r === 'percussion' ||
-    instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.percussion)
+    DRUM_BUS_INSTRUMENT_PATTERN.test(inst)
   ) {
     return 'drums';
   }
   return 'inst';
 }
 
-export interface MasterParams {
-  highPass?: number;
-  volume?: number;
-  performanceMode?: PerformanceMode;
-  mixCharacter?: MixCharacter;
-  sidechainDepth?: number;
-  drumKnock?: number;
-  acousticCrosstalk?: number;
-  genreId?: string;
-  bpm?: number;
-}
-
-export function defaultMasterParams(): MasterParams {
-  return {
-    highPass: 20,
-    volume: 1.0,
-    performanceMode: 'acoustic-ensemble',
-  };
-}
-
-export function renderMaster(
-  trackSignals: CategorizedTrackSignal[] | CategorizedTrackSignals,
-  params: MasterParams = defaultMasterParams()
-): { left: Node; right: Node } {
-  let drumSignals: { left: Node; right: Node }[] = [];
-  let subSignals: { left: Node; right: Node }[] = [];
-  let instSignals: { left: Node; right: Node }[] = [];
-
-  if (Array.isArray(trackSignals)) {
-    for (const sig of trackSignals) {
-      const cat = sig.category ?? determineBusCategory(sig.role, sig.instrumentId);
-      if (cat === 'drums') drumSignals.push(sig);
-      else if (cat === 'sub') subSignals.push(sig);
-      else instSignals.push(sig);
-    }
-  } else {
-    drumSignals = trackSignals.drums ?? [];
-    subSignals = trackSignals.sub ?? [];
-    instSignals = trackSignals.inst ?? [];
+/** Unprocessed stereo buses feed the same Web Audio master used by export. */
+export function renderMixBuses(trackSignals: CategorizedTrackSignal[], lift = 0.5) {
+  const buses: CategorizedTrackSignals = { drums: [], sub: [], inst: [] };
+  for (const signal of trackSignals) {
+    buses[signal.category ?? determineBusCategory(signal.role, signal.instrumentId)]!.push(signal);
   }
-
-  const zero = el.const({ value: 0 });
-
-  // 1. Drum Bus Summing & Saturation ("Knock")
-  const drumLeftRaw = drumSignals.length > 0 ? (drumSignals.length === 1 ? drumSignals[0].left : el.add(...drumSignals.map(s => s.left))) : zero;
-  const drumRightRaw = drumSignals.length > 0 ? (drumSignals.length === 1 ? drumSignals[0].right : el.add(...drumSignals.map(s => s.right))) : zero;
-
-  const char = params.mixCharacter;
-  const sidechainDepth = params.sidechainDepth ?? calculateSidechainDepth(char);
-  const drumKnock = params.drumKnock ?? calculateDrumKnock(char);
-
-  const drumDrive = 1.0 + drumKnock * 1.5;
-  const saturatedDrumL = el.tanh(el.mul(el.const({ value: drumDrive }), drumLeftRaw));
-  const saturatedDrumR = el.tanh(el.mul(el.const({ value: drumDrive }), drumRightRaw));
-
-  // 2. Sub / Bass Bus Summing & Sidechain Ducking
-  const subLeftRaw = subSignals.length > 0 ? (subSignals.length === 1 ? subSignals[0].left : el.add(...subSignals.map(s => s.left))) : zero;
-  const subRightRaw = subSignals.length > 0 ? (subSignals.length === 1 ? subSignals[0].right : el.add(...subSignals.map(s => s.right))) : zero;
-
-  // Envelope follower on drum kick frequency range (30Hz - 110Hz) with tempo-scaled release
-  const bpm = params.bpm ?? 120;
-  const releaseSec = (60 / bpm) * 0.25; // 16th note sync
-  const kickMono = el.lowpass(110, 1.0, el.add(drumLeftRaw, drumRightRaw));
-  const kickEnv = el.env(0.005, releaseSec, kickMono);
-
-  const genreId = params.genreId ?? '';
-  const isElectronic = ELECTRONIC_GENRE_PATTERN.test(genreId);
-
-  // Clean, phase-coherent sub ducking: avoids destructive biquad phase splitting
-  const effectiveDuckDepth = isElectronic ? sidechainDepth * 0.95 : 0.22;
-  const subDuckingMultiplier = el.sub(1.0, el.mul(el.const({ value: effectiveDuckDepth }), kickEnv));
-  const duckedSubL = el.mul(subLeftRaw, subDuckingMultiplier);
-  const duckedSubR = el.mul(subRightRaw, subDuckingMultiplier);
-
-  // 3. Instrumental Bus Summing
-  const instLeftRaw = instSignals.length > 0 ? (instSignals.length === 1 ? instSignals[0].left : el.add(...instSignals.map(s => s.left))) : zero;
-  const instRightRaw = instSignals.length > 0 ? (instSignals.length === 1 ? instSignals[0].right : el.add(...instSignals.map(s => s.right))) : zero;
-
-  // 4. Master Summing (Acoustic crosstalk Haas delays stripped for 100% phase coherence & mono compatibility)
-  const masterLeftSum = el.add(saturatedDrumL, el.add(duckedSubL, instLeftRaw));
-  const masterRightSum = el.add(saturatedDrumR, el.add(duckedSubR, instRightRaw));
-
-  const totalTrackCount = Math.max(1, drumSignals.length + subSignals.length + instSignals.length);
-  const headroomTrim = Math.min(1.0, 1.8 / Math.sqrt(totalTrackCount));
-  const hpFreq = Math.max(15, params.highPass ?? 20);
-
-  const hpLeft = el.highpass(hpFreq, 0.707, el.mul(el.const({ value: headroomTrim }), masterLeftSum));
-  const hpRight = el.highpass(hpFreq, 0.707, el.mul(el.const({ value: headroomTrim }), masterRightSum));
-
-  const satLeft = el.tanh(hpLeft);
-  const satRight = el.tanh(hpRight);
-
-  const vol = Math.max(0, Math.min(2.0, params.volume ?? 1.0));
-  const finalLeft = el.mul(el.const({ value: vol }), satLeft);
-  const finalRight = el.mul(el.const({ value: vol }), satRight);
-
-  return { left: finalLeft, right: finalRight };
+  const trim = el.const({ value: ensembleHeadroom(trackSignals.length, lift) });
+  const sum = (signals: { left: Node; right: Node }[]) => {
+    const channel = (side: 'left' | 'right') => signals.length
+      ? el.mul(trim, signals.length === 1 ? signals[0][side] : el.add(...signals.map(s => s[side])))
+      : el.const({ value: 0 });
+    return { left: channel('left'), right: channel('right') };
+  };
+  return { drums: sum(buses.drums!), sub: sum(buses.sub!), inst: sum(buses.inst!) };
 }

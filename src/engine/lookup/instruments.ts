@@ -5,7 +5,7 @@ import type { LuthierPhysicalParameters } from '../../data/instruments/schema/lu
 import type { PluckedPreset } from '../../data/instruments/schema/plucked-preset';
 import { INSTRUMENT_CATALOG } from '../../data/instruments';
 import { INSTRUMENT_PATTERN_KIND_RULES } from '../../data/instruments/patternKinds';
-import { instrumentEngineKeys } from './instrumentKeys.ts';
+import { INSTRUMENT_PRESET_ALIASES } from '../../data/instruments/presetAliases';
 export { INSTRUMENT_CATALOG } from '../../data/instruments';
 export type { InstrumentDef, InstrumentFamily, DrumVoice, InstrumentTechniqueProfile } from '../../data/instruments/schema/instrument-def';
 /** Engine-side physics enrichment and runtime instrument queries. */
@@ -28,8 +28,8 @@ for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
     };
   }
 }
-if (EXACT_PLUCKED_PRESETS['12-string-guitar']) {
-  EXACT_PLUCKED_PRESETS['12-string'] = EXACT_PLUCKED_PRESETS['12-string-guitar'];
+for (const [alias, canonicalId] of Object.entries(INSTRUMENT_PRESET_ALIASES)) {
+  if (EXACT_PLUCKED_PRESETS[canonicalId]) EXACT_PLUCKED_PRESETS[alias] = EXACT_PLUCKED_PRESETS[canonicalId];
 }
 
 export const WIND_BRASS_REED_FORMANTS: Record<string, AcousticFormantProfile> = {};
@@ -77,7 +77,7 @@ export function instrument(id: string): InstrumentDef {
 export function instrumentPatternKinds(id: string): string[] {
   const d = INSTRUMENTS_BY_ID[id];
   if (!d) return [];
-  const out = new Set<string>([id, ...instrumentEngineKeys(id)]);
+  const out = new Set<string>([id]);
   for (const rule of INSTRUMENT_PATTERN_KIND_RULES) {
     const matchesVoicing = rule.voicing !== undefined && d.voicing === rule.voicing;
     const matchesFamily = rule.family !== undefined && d.family === rule.family;

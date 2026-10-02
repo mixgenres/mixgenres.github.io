@@ -3,7 +3,7 @@ import type { InstrumentDialect } from '../../styles/contracts';
 export const ENTRY_8: [string, InstrumentDialect] = ["guitar:blues", {
     id: 'guitar:blues',
     instrumentId: 'guitarra_blues',
-    name: 'Blues Guitar',
+    name: 'Blues Guitar (Slide & Bent Notes)',
     family: 'guitar',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'pick',

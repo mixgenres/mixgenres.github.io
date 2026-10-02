@@ -9,7 +9,7 @@ export const acoustic_guitar: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "hard-pick",
   elementaryModel: 0,
-  makeupGain: 15.812,
+  makeupGain: 30.000,
   polyphony: 8,
   note: "Steel-string dreadnought acoustic guitar with solid Sitka spruce top and phosphor bronze strings delivering crisp projection",
   acousticProfile: {
@@ -39,7 +39,6 @@ export const acoustic_guitar: InstrumentDef = {
     tuningName: "E Standard Steel-String Acoustic",
     courses: 1,
     frets: 20,
-    maxFretStretch: 4,
     openStrings: [
       {
         name: "E2",

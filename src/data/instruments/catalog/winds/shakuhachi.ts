@@ -22,7 +22,7 @@ export const shakuhachi: InstrumentDef = {
     ring: 3
   },
   luthierPhysics: {
-    category: "aerophone_lip_tension",
+    category: "aerophone_edge_blown",
     materialDensity: 0.45,
     tension: 0.45,
     bodyResonanceVolume: 1.2,

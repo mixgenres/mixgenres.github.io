@@ -21,14 +21,8 @@ export const piccolo: InstrumentDef = {
     space: 0.34,
     ring: 3
   },
-  playability: {
-    absoluteRange: { lowMidi: 74, highMidi: 108 }, // sounding D5–C8
-    practicalRange: { lowMidi: 74, highMidi: 108 },
-    comfortableRange: { lowMidi: 79, highMidi: 103 }, // G5–G7
-    characteristicRegister: { lowMidi: 86, centreMidi: 96, highMidi: 108 }
-  },
   luthierPhysics: {
-    category: "aerophone_lip_tension",
+    category: "aerophone_edge_blown",
     materialDensity: 0.3,
     tension: 0.65,
     bodyResonanceVolume: 0.3,

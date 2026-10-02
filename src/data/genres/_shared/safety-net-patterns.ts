@@ -33,10 +33,13 @@ export const CANONICAL_GENRE_PATTERNS: MusicalPattern[] = [
   P('country-banjo-roll', 'country', 'Country Banjo Roll', 'Forward-moving Scruggs-style roll cell with alternating thumb/inner-string space.', [0,2,4,5,7,9,11,13,15], ['melody','harmony','comp'], ['country','banjo','roll','bluegrass'], ['accented'], ['banjo'], ['country-bluegrass','country-americana','country-honky-tonk']),
   P('country-steel-answer', 'country', 'Country Steel Answer', 'Pedal-steel answer cell with sustained gaps and phrase-ending approach.', [0,3,7,8,11,14], ['melody','lead','harmony'], ['country','steel','answer','slide'], ['legato'], ['steel-guitar'], ['country-honky-tonk','country-americana']),
 
+  // Afrobeats / electronic / gospel / industrial dialect markers used by the theory audit.
   P('afro-interlocking-16ths', 'afrobeats', 'Afrobeats Interlocking 16ths', 'Interlocking guitar, percussion and bass cells organized around a repeating 3+3+2-derived contour.', [0,2,5,8,10,13,15], ['bass','harmony','percussion'], ['interlocking-16ths','3+3+2-cell','afrobeats']),
   P('afro-logdrum-call', 'afrobeats', 'Afrobeats Log-Drum Call', 'Pitched low-register call answered by guitar/percussion in the gaps.', [0,3,6,8,11,14], ['bass','percussion'], ['log-drum','call-response','3+3+2-cell']),
   P('elec-sidechain-space', 'electronic', 'Electronic Sidechain Space', 'Four-on-floor or break pulse with deliberately sparse sustained material around the kick envelope.', [0,4,8,12], ['drums','pulse','harmony'], ['four-on-floor','sidechain-space','electronic']),
   P('elec-breakbeat-response', 'electronic', 'Electronic Breakbeat Response', 'Breakbeat response cell alternating dense drums with a short synth answer.', [0,3,5,7,8,11,13,15], ['drums','percussion','lead'], ['breakbeat','response','electronic']),
+  P('gospel-shout-vamp', 'gospel', 'Gospel Shout Vamp', 'Repeating dominant/tonic vamp that intensifies through choir answers and organ accents.', [0,3,4,7,8,11,12,15], ['harmony','voice','rhythm'], ['shout-vamp','church-backbeat','gospel']),
+  P('gospel-organ-response', 'gospel', 'Gospel Organ Response', 'Organ chord swell or pickup between vocal statements.', [3,7,11,15], ['harmony','comp'], ['organ-response','gospel','call-response']),
   P('industrial-ebm-pulse-native', 'industrial', 'Industrial EBM 16th Pulse', 'Rigid electronic 16th-note motor with heavy downbeat emphasis and hard stop at the bar turn.', [0,2,4,6,8,10,12,14], ['bass','rhythm','drums'], ['EBM-pulse','mechanical-stop','industrial']),
   P('industrial-four-native', 'industrial', 'Industrial Four Pulse', 'Relentless quarter-note pulse with metallic punctuation at the phrase end.', [0,4,8,12,15], ['drums','rhythm','percussion'], ['industrial-four','mechanical-stop','industrial']),
   // Brazilian: distinguish samba/bossa/choro vocabulary instead of borrowing a generic source rhythm.
@@ -51,6 +54,12 @@ export const CANONICAL_GENRE_PATTERNS: MusicalPattern[] = [
   P('disco-octave-bass', 'disco', 'Disco Octave Bass', 'Driving octave/fifth bass movement designed to converse with the kick and string stabs.', [0,3,4,7,8,11,12,15], ['bass','pulse'], ['octave-bass','disco','drive']),
   P('disco-string-hits', 'disco', 'Disco String Hits', 'Short high-register ensemble punctuation placed around the vocal/hook rather than every subdivision.', [0,4,7,8,12,15], ['harmony','lead'], ['string-hit','disco','punctuation']),
 
+  // Gospel: pocket, church response, organ and hand-clap architecture.
+  P('gospel-church-shuffle', 'gospel', 'Church Shuffle Pocket', 'Moderate shuffle with a deep backbeat and phrase-level space for choir responses.', [0,3,4,7,8,11,12,15], ['rhythm','drums'], ['shuffle','church-pocket','backbeat']),
+  P('gospel-organ-bubble', 'gospel', 'Organ Bubble', 'Left-hand pulse with offbeat upper-organ answers, leaving the vocal on top.', [0,2,4,6,8,10,12,14], ['harmony','comp'], ['organ','bubble','response']),
+  P('gospel-tambourine-backbeat', 'gospel', 'Gospel Tambourine Backbeat', 'Strong 2-and-4 tambourine with selective fills at phrase boundaries.', [4,12,14], ['percussion','rhythm'], ['tambourine','2-and-4','fill']),
+  P('gospel-choir-response', 'gospel', 'Choir Call and Response', 'Short answer cells that occupy the gaps left by a lead statement.', [6,7,14,15], ['lead','voice','harmony'], ['call-response','choir','answer']),
+
   // House: club grid, syncopated bass, chord-stab architecture.
   P('house-four-floor', 'house', 'House Four-on-the-Floor', 'Steady quarter-note kick with minimal variation so syncopation can live above the pulse.', [0,4,8,12], ['drums','rhythm','pulse'], ['four-on-floor','house','kick']),
   P('house-offbeat-hat', 'house', 'House Offbeat Hat', 'Open-hat lift on the offbeats with occasional phrase-end omission.', [2,6,10,14], ['rhythm','percussion'], ['offbeat-hat','house']),
@@ -64,6 +73,8 @@ export const CANONICAL_GENRE_PATTERNS: MusicalPattern[] = [
   P('rnb-vocal-answer', 'r-and-b', 'R&B Vocal Answer', 'Short melodic response cells occupying intentional gaps after the lead phrase.', [6,7,14,15], ['melody','lead','voice'], ['call-response','answer','space']),
 
 
+  P('gospel-bass-walk', 'gospel', 'Gospel Bass Walk', 'Root/third/fifth passing motion that climbs into the next church cadence.', [0,2,4,6,8,10,12,14], ['bass'], ['gospel','bass','passing']),
+  P('gospel-handclap-pulse', 'gospel', 'Gospel Handclap Pulse', 'Handclap/foot-stomp answer around 2 and 4 with phrase-end lifts.', [4,12,14], ['percussion','rhythm'], ['gospel','church-backbeat','clap']),
   // Reggae: one-drop, skank, melodic bass, steppers.
   P('reggae-one-drop', 'reggae', 'Reggae One-Drop', 'The classic one-drop pulse with the downbeat de-emphasized and backbeat centered.', [4,12], ['drums','rhythm','pulse'], ['one-drop','reggae','backbeat']),
   P('reggae-skank', 'reggae', 'Reggae Skank', 'Tight offbeat guitar/keyboard chops that answer the bass rather than doubling it.', [2,6,10,14], ['harmony','comp'], ['skank','offbeat','reggae']),

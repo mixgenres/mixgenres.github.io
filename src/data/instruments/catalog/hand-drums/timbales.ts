@@ -13,7 +13,7 @@ export const timbales: InstrumentDef = {
   bodyConstruction: "skin-faced",
   excitationType: "stick",
   elementaryModel: 4,
-  makeupGain: 3.126,
+  makeupGain: 1.540,
   polyphony: 12,
   note: "Single-headed metal shell drums (Macho 13-inch, Hembra 14-inch) played with wooden dowels for explosive cáscara shell tapping and mambo bell riffs",
   acousticProfile: {
@@ -40,7 +40,7 @@ export const timbales: InstrumentDef = {
   kitComponents: [
     {
       id: "cascara",
-      name: "Cáscara",
+      name: "Cascara (Metal Shell Stick Tapping)",
       midi: 68,
       physicalType: "metal",
       tuningHz: 950,

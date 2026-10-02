@@ -9,7 +9,7 @@ export const electric_guitar: InstrumentDef = {
   bodyConstruction: "solid-electric",
   excitationType: "hard-pick",
   elementaryModel: 21,
-  makeupGain: 3.921,
+  makeupGain: 13.580,
   polyphony: 8,
   note: "Solid-body electric guitar with magnetic dual humbuckers or single-coil pickups, delivering clean chnk, funk rhythm, and biting leads",
   acousticProfile: {
@@ -39,7 +39,6 @@ export const electric_guitar: InstrumentDef = {
     tuningName: "E Standard Electric",
     courses: 1,
     frets: 22,
-    maxFretStretch: 4,
     openStrings: [
       {
         name: "E2",

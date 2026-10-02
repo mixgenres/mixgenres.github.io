@@ -41,7 +41,7 @@ export default class CelloModule implements InstrumentModule {
     const isLegato = action === 'legato' || action === 'slur';
     const isArrastre = action === 'arrastre' || /arrastre|drag/i.test(action ?? '');
     const isChicharra = action === 'chicharra' || /chicharra/i.test(action ?? '');
-    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''}`);
+    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const tangoResponse = TANGO_INSTRUMENT_RESPONSE.cello;
     const isYumba = action === 'yumba' || /yumba/i.test(action ?? '');
     const isMarcato = action === 'marcato' || /marcato|marked/i.test(action ?? '');

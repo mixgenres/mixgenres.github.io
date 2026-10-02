@@ -4,6 +4,7 @@ export const melodica: InstrumentDef = {
   id: "melodica",
   name: "Melodica",
   family: "winds",
+  freeReedSynthesis: { fundamentalGain: 0.62, upperPartialGain: 0.20, upperPartialRatio: 2, breathNoiseCutoffHz: 1800, transientClickGain: 0.05, attackSeconds: 0.045, bendDepth: 0.035, chamberFrequencyMultiple: 2.1, chamberQ: 2.8 },
   octave: 12,
   voicing: "single",
   elementaryModel: 10,
@@ -22,7 +23,7 @@ export const melodica: InstrumentDef = {
     ring: 3
   },
   luthierPhysics: {
-    category: "bellows_free_reed",
+    category: "breath_free_reed",
     materialDensity: 0.6,
     tension: 0.7,
     bodyResonanceVolume: 1,

@@ -155,6 +155,18 @@ export const dspOverride: InstrumentDSPOverride = {
         "golpe de cluster palm slap"
       ]
     },
+    "gospel": {
+      "excitationBias": 0,
+      "brightness": 1.0,
+      "damping": 0,
+      "attack": 1.0,
+      "articulation": [
+        "sustain pedal resonance",
+        "octave octave bass coupling",
+        "syncopated salsa montuno two-hand interlocking",
+        "golpe de cluster palm slap"
+      ]
+    },
     "bossa-nova": {
       "excitationBias": 0,
       "brightness": 0.97,

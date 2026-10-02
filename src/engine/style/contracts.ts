@@ -39,6 +39,7 @@ export function contractForGenre(genreId: string, style?: SongStyle): WorldContr
     if (style.harmony.bassMotion) out.bass.style = style.harmony.bassMotion as BassDialect['style'];
     out.harmonyVocabulary = Array.from(new Set([...out.harmonyVocabulary, ...(style.harmony.chordVocabulary ?? [])]));
   }
+  if (style?.arrangement?.soloDefinition) out.soloDefinition = cloneDeep(style.arrangement.soloDefinition);
   return out;
 }
 
@@ -56,6 +57,23 @@ function mergeContract(baseContract: WorldContract, patch: Partial<WorldContract
     },
   };
   out.percussion = { ...baseContract.percussion, ...(patch.percussion ?? {}) };
-  out.instrumentDialects = { ...baseContract.instrumentDialects, ...(patch.instrumentDialects ?? {}) };
+  out.instrumentDialects = { ...baseContract.instrumentDialects };
+  for (const [id, dialect] of Object.entries(patch.instrumentDialects ?? {})) {
+    const inherited = baseContract.instrumentDialects?.[id];
+    out.instrumentDialects[id] = mergeDialectMetadata(inherited ?? {}, dialect);
+  }
   return out;
+}
+
+/** Partial style dialects preserve unauthored physical and technique fields. */
+export function mergeDialectMetadata<T extends object>(base: T, patch: Partial<T>): T {
+  const result = { ...base } as Record<string, unknown>;
+  for (const [key, value] of Object.entries(patch)) {
+    if (value === undefined) continue;
+    const previous = result[key];
+    result[key] = value && typeof value === 'object' && !Array.isArray(value)
+      && previous && typeof previous === 'object' && !Array.isArray(previous)
+      ? mergeDialectMetadata(previous, value) : value;
+  }
+  return result as T;
 }

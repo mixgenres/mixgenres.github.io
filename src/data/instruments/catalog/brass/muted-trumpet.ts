@@ -4,6 +4,7 @@ export const muted_trumpet: InstrumentDef = {
   id: "muted-trumpet",
   name: "Muted trumpet",
   family: "brass",
+  brassSynthesis: { muted: true },
   octave: 12,
   voicing: "single",
   elementaryModel: 15,

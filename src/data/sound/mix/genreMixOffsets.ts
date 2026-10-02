@@ -1,4 +1,7 @@
-/** Genre-specific dB offsets applied once after intrinsic instrument calibration. */
 export const GENRE_MIX_OFFSETS: Record<string, Record<string, number>> = {
-   bachata:{lead:.5,bass:-.5}, blues:{lead:1,melody:.5},  country:{lead:.5,harmony:-.5},   'drum-and-bass':{bass:2,percussion:.5,pad:-1}, electronic:{bass:2,comp:-1,pad:-1}, flamenco:{lead:1.5,comp:2,bass:-2.5,pad:-4}, folk:{lead:.5,bass:-.5,percussion:-.5}, funk:{bass:1,lead:.5,drums:.5}, 'hip-hop':{bass:1.5,percussion:.5,comp:-1},   jazz:{lead:1,melody:.5,bass:.5,percussion:-.5}, kizomba:{bass:1,percussion:.5,comp:-.5}, metal:{bass:1,drums:1,comp:.5,lead:.5}, 'punk-hardcore':{lead:.5,bass:.5,drums:.5}, 'r-and-b':{bass:1,voice:.5,comp:-.5},  reggaeton:{bass:2,percussion:.5,comp:-1}, rock:{bass:1,comp:1,lead:.5,drums:.5}, salsa:{bass:.5,percussion:.5,comp:.5,lead:.5},   swing:{lead:.5,melody:.5,bass:.5,percussion:-.5}, tango:{lead:1,melody:.5,bass:-.5,harmony:.5,percussion:-.5}, timba:{bass:.5,percussion:1,lead:.5},  zouk:{bass:1,voice:.5,percussion:.5,comp:-.5}
+  flamenco: { lead: 1.5, comp: 2.0, bass: -2.5, pad: -4.0 },
+  electronic: { bass: 3.0, lead: 0.0, comp: -1.5, pad: 1.0 },
+  jazz: { lead: 1.0, bass: 1.0, comp: -0.5, pad: -3.0 },
+  rock: { comp: 2.0, bass: 1.5, lead: 1.0, pad: -2.0 },
+  orchestral: { pad: 2.0, lead: 0.0, comp: 0.0, bass: 0.0 },
 };

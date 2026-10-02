@@ -9,8 +9,9 @@ export const banjo: InstrumentDef = {
   bodyConstruction: "skin-faced",
   excitationType: "hard-pick",
   elementaryModel: 0,
-  makeupGain: 8.150,
+  makeupGain: 30.000,
   polyphony: 8,
+  attackProfile: { chordAttack: 'rolled', rolledChordSpreadSeconds: 0.011 },
   note: "American 5-string banjo with brass tone ring and mylar head stretched over a maple rim, generating blistering high-speed rolls and crisp percussive projection",
   acousticProfile: {
     sustain: "decaying",

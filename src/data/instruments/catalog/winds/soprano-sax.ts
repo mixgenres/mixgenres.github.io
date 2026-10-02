@@ -21,7 +21,7 @@ export const soprano_sax: InstrumentDef = {
     ring: 3
   },
   luthierPhysics: {
-    category: "aerophone_lip_tension",
+    category: "aerophone_single_reed",
     materialDensity: 0.85,
     tension: 0.8,
     bodyResonanceVolume: 2,

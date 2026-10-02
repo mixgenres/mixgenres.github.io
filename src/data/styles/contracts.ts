@@ -1,4 +1,5 @@
-import type { ImprovisationGrammar } from './schema';
+import type { ImprovisationGrammar, GenreSoloDefinition } from './schema';
+import { GENRE_SOLO_DEFINITIONS } from '../performance/soloDefinitions';
 export type PerformanceMode = 'acoustic-ensemble' | 'programmed-electronic' | 'hybrid';
 
 export interface InstrumentDialect {
@@ -99,7 +100,7 @@ export interface DragProfile {
 export interface PerformanceIdioms {
   bluesRockLeadMinorThirdBend?: boolean;
   dropPortamento?: boolean;
-  spotlightLeadRubato?: boolean;
+  leadRubato?: boolean;
   dragProfile?: DragProfile;
 }
 
@@ -140,9 +141,9 @@ export interface WorldContract {
   interactionModel: InteractionModel;
   approaches: Record<string, ApproachSpec>;
   transitionGrammar: TransitionGrammar;
-  defaultSpotlights: Record<string, string[]>;
   performanceIdioms: PerformanceIdioms;
   improvisationGrammar: ImprovisationGrammar;
+  soloDefinition?: GenreSoloDefinition;
   ensemble: Record<string, string>;
   timbreSpace: { palette: string[]; production: string; mixCharacter?: MixCharacter };
   instrumentDialects?: Record<string, Partial<InstrumentDialect>>;
@@ -233,7 +234,7 @@ function base(
     performanceIdioms: {
       bluesRockLeadMinorThirdBend: false,
       dropPortamento: false,
-      spotlightLeadRubato: false,
+      leadRubato: false,
       ...(opts.performanceIdioms ?? {}),
     },
     improvisationGrammar: {
@@ -246,7 +247,6 @@ function base(
       ...(opts.improvisationGrammar ?? {}),
     },
     transitionGrammar,
-    defaultSpotlights: {},
     ensemble,
     timbreSpace: {
       palette,
@@ -325,13 +325,14 @@ G.bachata = simple('bachata','4/4','metric-hierarchical','derecho with anticipat
 G.brazilian = simple('brazilian','2/4','timeline-cycle','interlocking Brazilian pulse',.5,{style:'samba',rhythmJob:'style-specific syncopation; surdo anchor; bass follows style',pitchJob:'root/guide-tone with passing tones',articulation:['muted','short','ghost']},['intro','theme','variation','solo','coda'],{motor:'surdo + pandeiro + tamborim',harmony:'cavaquinho/violão interlock'},['cavaquinho','pandeiro','surdo','tamborim','flute'],['generic Latin backbeat','four-on-floor'],'samba-specific cells','functional/modal-vamp','major/minor','tight ensemble, natural room');
 G.country = simple('country','4/4','metric-hierarchical','boom-chick / shuffle',.56,{style:'rootFifth',rhythmJob:'alternating bass with strum backbeat',pitchJob:'root/fifth + walk-ups',articulation:['pick','muted','slide']},['intro','verse','chorus','instrumental','verse','outro'],{motor:'alternating bass + strum',lead:'fiddle / steel'},['steel-guitar','fiddle','banjo','upright-bass','mandolin'],['funk syncopation','four-on-floor'],'none','functional','major/mixolydian','dry room, string articulation');
 G.cumbia = simple('cumbia','4/4','timeline-cycle','chucu-chucu',.5,{style:'cumbia',rhythmJob:'alternating bass around percussion cycle',pitchJob:'root/fifth/approach',articulation:['plucked','short']},['intro','tema','verso','coro','break','cierre'],{motor:'guacharaca + bass + percussion',lead:'accordion/guitar'},['accordion','guacharaca','tambora','bass','clarinet'],['generic pop backbeat','four-on-floor'],'chucu-chucu cell','functional','minor/major','dry percussion, bright melodic lead');
-G.disco = simple('disco','4/4','machine-grid','four-on-floor + syncopated bass',.5,{style:'octave',rhythmJob:'octave and syncopated bass locked to steady kick',pitchJob:'root/octave with passing tones',articulation:['short','palm-muted']},['intro','verse','chorus','break','chorus','outro'],{motor:'four-on-floor kick + bass',lead:'vocal hook and string answers'},['drums','bass','strings','piano','voice'],['swing','rock backbeat'],'four-on-floor','functional','major/minor','live rhythm section, string lifts, vocal-forward chorus');
+G.disco = simple('disco','4/4','machine-grid','four-on-floor + octave bass',.5,{style:'octave',rhythmJob:'repeating octave 16ths locked to kick',pitchJob:'root/octave with passing tones',articulation:['short','palm-muted']},['intro','verse','chorus','break','chorus','outro'],{motor:'kick + octave bass',lead:'strings/horns'},['strings','clavinet','synth','slap-bass','drums'],['swing','rock backbeat'],'four-on-floor','functional','major/minor','pumping sidechain-style dynamics');
 G.electronic = simple('electronic','4/4','machine-grid','style-dependent machine grid',.5,{style:'octave',rhythmJob:'loop-specific bass pulse',pitchJob:'root/octave or modal sub',articulation:['short','gated']},['intro','build','drop','breakdown','drop','outro'],{motor:'drum machine + bass',texture:'synth/pads'},['synth','acid-303','drums','sub-bass','noise-sweep'],['unjustified acoustic fills'],'none','modal-vamp','mode/scale','automation and filter movement');
 G.folk = simple('folk','4/4','metric-hierarchical','acoustic cycle',.5,{style:'rootFifth',rhythmJob:'supportive root/fifth; style-dependent drone',pitchJob:'modal/tonal melody',articulation:['pick','open','drone']},['intro','verse','refrain','instrumental','verse','coda'],{motor:'acoustic strum',lead:'fiddle/tin-whistle'},['banjo','fiddle','mandolin','upright-bass','tin-whistle'],['default pop chorus'],'none','modal-vamp','major/minor/modal','natural room, limited processing');
 G.funk = simple('funk','4/4','metric-hierarchical','the one',.5,{style:'riff',rhythmJob:'syncopated short bass locked to kick',pitchJob:'root/fifth/7th with chromatic approach',articulation:['muted','ghost','slap']},['intro','groove','verse','breakdown','groove','tag'],{motor:'bass + kick',comp:'guitar/clavinet stabs',lead:'horn/electric-guitar'},['clavinet','slap-bass','electric-guitar','drums','horn-section'],['straight rock bass','crash every section'],'none','functional','mixolydian/dorian','tape warmth, tight mono-ish center');
+G.gospel = simple('gospel','4/4','metric-hierarchical','call-response build',.52,{style:'rootFifth',rhythmJob:'supportive bass with gospel passing motion',pitchJob:'roots/guide tones and passing chords',articulation:['legato','staccato']},['verse','build','vamp','shout','coda'],{motor:'organ + piano + bass',lead:'organ / alto-sax'},['organ','alto-sax','piano','bass','drums'],['static pop loop'],'none','functional','major/blues/gospel','crescendo and room bloom');
 G['hip-hop'] = simple('hip-hop','4/4','machine-grid','sample pocket / laid-back drag',.5,{style:'sub',rhythmJob:'sparse kick-synced sub; style-specific 808 rhythm',pitchJob:'root with 808 glides when available',articulation:['short','slide','sustain']},['intro','verse','hook','verse','bridge','outro'],{motor:'drums + sub',texture:'sample/chop',lead:'synth / alto-sax'},['drums','sub-bass','synth','electric-guitar','alto-sax'],['rock drum kit','four-on-floor'],'boom-bap / trap cells','functional/modal-vamp','minor/pentatonic','sample space, controlled sub');
 G.house = simple('house','4/4','machine-grid','four-on-floor',.5,{style:'house',rhythmJob:'bass syncopates between kicks; repeats as a loop',pitchJob:'root/fifth/7th',articulation:['short','gated']},['intro','groove','breakdown','drop','groove','outro'],{motor:'four-on-floor kick + bass',texture:'hats/pads'},['acid-303','synth','drums','sub-bass','cowbell'],['rock backbeat','random fills'],'four-on-floor','functional/modal-vamp','minor/dorian','sidechain pumping, filter automation');
-G.kizomba = simple('kizomba','4/4','metric-hierarchical','deep laid-back',.5,{style:'sub',rhythmJob:'sub-bass anchors with syncopated anticipations',pitchJob:'root/fifth with melodic movement',articulation:['legato','short']},['intro','verse','chorus','break','chorus','outro'],{motor:'sub-bass + batida',texture:'dikanza scraper',lead:'synth or vocal'},['sub-bass','guitar','dikanza','drums','synth'],['reggaeton dembow','rock backbeat'],'none','modal-vamp','minor/major','sub-heavy, soft transients, Angolan percussion');
+G.kizomba = simple('kizomba','4/4','metric-hierarchical','deep laid-back',.5,{style:'sub',rhythmJob:'sub-bass anchors with syncopated anticipations',pitchJob:'root/fifth with melodic movement',articulation:['legato','short']},['intro','verse','chorus','break','chorus','outro'],{motor:'sub-bass + percussion',lead:'synth'},['sub-bass','guitar','shaker','drums','synth'],['reggaeton dembow','rock backbeat'],'none','modal-vamp','minor/major','sub-heavy, soft transients');
 G.flamenco = simple('flamenco','12/8','long-cycle','compás',.5,{style:'root',rhythmJob:'compás-anchored bass/guitar support; avoid generic backbeat',pitchJob:'tonic/dominant with Phrygian cadence color',articulation:['rasgueado','golpe','ligado','alzapúa']},['salida','llamada','letra','falseta','remate','cierre'],{motor:'guitar + palmas/cajón',lead:'spanish-guitar',answer:'falseta'},['guitar','palmas','cajon','flute','castanets'],['rock backbeat','crash on section start','walking bass','four-on-floor'],'12-count compás','functional','phrygian/Andalusian','dry room, strong transient contrast',{kitMode:'hybrid',allowedHitTypes:['rim','ghost'],forbidWesternBackbeat:true,forbidSectionCrash:true,allowTomFills:false,ride:false});
 G.flamenco.groove.swing = 0.5;
 G.flamenco.groove.roleLean = { bass: 0, comp: -4, lead: 15, perc: 0 };
@@ -339,7 +340,7 @@ G.flamenco.groove.humanizeMs = 3;
 G.flamenco.microtiming.byRole = { bass: [0], comp: [-4], lead: [15], percussion: [0] };
 G.flamenco.microtiming.jitterMs = 3;
 G.metal = simple('metal','4/4','machine-grid','precision',.5,{style:'riff',rhythmJob:'palm-muted riff alignment with kick/double-kick',pitchJob:'root/power-chord/tritone/Phrygian color',articulation:['palm-mute','staccato','tremolo']},['intro','riff','verse','chorus','breakdown','solo','coda'],{motor:'guitar riffs + kick',lead:'guitar solo'},['distortion-guitar','bass','drums','tremolo-strings','overdrive-guitar'],['swing','loose shuffle','pop fills'],'none','functional','minor/phrygian','tight multitrack, saturation');
-G['r-and-b'] = simple('r-and-b','4/4','metric-hierarchical','behind-the-beat pocket',.5,{style:'sub',rhythmJob:'syncopated melodic bass with space',pitchJob:'extended chord tones and blues-inflected vocal lines',articulation:['legato','ghost','slide']},['intro','verse','pre-chorus','chorus','bridge','outro'],{motor:'bass + drums',harmony:'piano / electric keys',lead:'lead vocal'},['voice','piano','bass','drums','synth'],['stiff quantization','rock backbeat default'],'none','functional','major/minor','warm, close, lead-forward, layered backing vocals');
+G['r-and-b'] = simple('r-and-b','4/4','metric-hierarchical','behind-the-beat pocket',.5,{style:'sub',rhythmJob:'syncopated melodic bass with space',pitchJob:'extended chord tones',articulation:['legato','ghost','slide']},['intro','verse','pre-chorus','chorus','bridge','outro'],{motor:'bass + drums',harmony:'Rhodes/keys',lead:'rhodes'},['rhodes','fretless-bass','clavinet','drums','synth'],['stiff quantization','rock backbeat default'],'none','functional','major/minor','warm, close, lead-forward');
 G.reggae = simple('reggae','4/4','metric-hierarchical','one-drop + skank',.5,{style:'reggae',rhythmJob:'melodic heavy bass; leaves space',pitchJob:'root/5th/6th with melodic contour',articulation:['short','muted','legato']},['intro','verse','chorus','dub break','verse','outro'],{motor:'bass + one-drop',comp:'offbeat skank',texture:'organ bubble'},['organ','electric-guitar','bass','drums','horn-section'],['rock backbeat','kick on 1 as default','crash section start'],'none','modal-vamp','major/minor/mixolydian','drop-outs, delay throws');
 G.reggaeton = simple('reggaeton','4/4','machine-grid','straight dembow',.5,{style:'dembow',rhythmJob:'bass answers the dembow cell; avoid continuous blanket',pitchJob:'root/fifth/approach',articulation:['short','sub']},['intro','verso','coro','puente','coro','outro'],{motor:'dembow + sub-bass',lead:'synth'},['synth','sub-bass','drums','congas','polysynth'],['swing','rock backbeat'],'3+3+2 dembow','functional/modal-vamp','minor/major','dry punch, controlled sub');
 G.rock = { ...simple('rock','4/4','metric-hierarchical','driving backbeat',.5,{style:'riff',rhythmJob:'riff-centered bass/guitar lock',pitchJob:'root/fifth/power-chord tones',articulation:['pick','palm-mute','sustain']},['intro','verse','chorus','bridge','solo','outro'],{motor:'guitar + bass + drums',lead:'guitar'},['overdrive-guitar','bass','drums','organ','electric-guitar'],['swing as default','genre-inappropriate Latin cells'],'none','functional','major/minor/mixolydian','live room, guitar-forward'),
@@ -353,30 +354,19 @@ G.rock = { ...simple('rock','4/4','metric-hierarchical','driving backbeat',.5,{s
   }
 };
 G.ska = simple('ska','4/4','metric-hierarchical','fast offbeat skank',.5,{style:'walking',rhythmJob:'walking/propulsive bass under offbeat guitar',pitchJob:'root/fifth/passing',articulation:['short','staccato']},['intro','verse','chorus','instrumental','verse','outro'],{motor:'offbeat guitar + walking bass',lead:'horns'},['trumpet','trombone','electric-guitar','bass','drums'],['reggae one-drop as identity'],'none','functional','major/minor','bright horns, dry room');
-G.soul = simple('soul','4/4','metric-hierarchical','deep pocket',.5,{style:'riff',rhythmJob:'melodic bass with backbeat support',pitchJob:'root/guide-tone/chromatic fills',articulation:['legato','short','ghost']},['intro','verse','chorus','bridge','instrumental','outro'],{motor:'melodic bass + drums',answer:'backing vocal or horn response',lead:'lead vocal'},['voice','bass','drums','organ','brass'],['generic R&B pad wash','fixed contemporary R&B arrangement'],'none','functional','major/minor/blues','warm room, vocal-led phrasing, horn and organ answers');
+G.soul = simple('soul','4/4','metric-hierarchical','deep pocket',.5,{style:'riff',rhythmJob:'melodic bass with backbeat support',pitchJob:'root/guide-tone/chromatic fills',articulation:['legato','short','ghost']},['intro','verse','chorus','bridge','instrumental','outro'],{motor:'bass + drums',answer:'horn response',lead:'alto-sax'},['rhodes','strings','organ','bass','alto-sax'],['generic contemporary R&B surface without soul-specific pocket and arrangement'],'none','functional','major/minor/blues','tape-like warmth, solo space');
 G.zouk = simple('zouk','4/4','metric-hierarchical','rolling offbeat',.5,{style:'sub',rhythmJob:'soft rolling bass with offbeat movement',pitchJob:'root/5th/6th',articulation:['legato','short']},['intro','verse','refrain','break','refrain','outro'],{motor:'bass + percussion',harmony:'pads/keys',lead:'synth'},['guitar','sub-bass','synth','shaker','brass'],['busy kizomba batida as primary groove','reggaeton dembow as primary groove'],'none','modal-vamp','major/minor','wide pads, soft transient profile');
-G['drum-and-bass'] = simple('drum-and-bass','4/4','machine-grid','fast breakbeat drive',.5,{style:'sub',rhythmJob:'sub/reese locks to break gaps; half-time bass phrasing',pitchJob:'root/fifth with modal tension',articulation:['sustain','glide']},['intro','drop','breakdown','drop','variation','outro'],{motor:'fast breakbeat + sub/reese',texture:'pads and sampled breaks'},['drums','sub-bass','sampler','synth','voice'],['four-on-floor as core','slow breakbeat feel'],'two-step break','modal-vamp','minor/dorian','sub-heavy, break-led, controlled sidechain');
+G['drum-and-bass'] = simple('drum-and-bass','4/4','machine-grid','breakbeat drive',.5,{style:'sub',rhythmJob:'sub/reese locks to break gaps; half-time bass phrasing',pitchJob:'root/fifth with modal tension',articulation:['sustain','glide']},['intro','drop','breakdown','drop','variation','outro'],{motor:'breakbeat + sub/reese',texture:'pads/noise'},['sub-bass','drums','synth','soprano-sax','noise-sweep'],['four-on-floor as core','swing default'],'two-step break','modal-vamp','minor/dorian','sub-heavy, pumping');
 G.industrial = simple('industrial','4/4','machine-grid','mechanical pulse',.5,{style:'riff',rhythmJob:'repeating machine riff and bass lock',pitchJob:'chromatic/power/tritone',articulation:['staccato','distorted','gated']},['intro','machine','verse','break','machine','outro'],{motor:'drums + bass + noise',texture:'distortion/noise'},['distortion-guitar','synth','drums','sub-bass','noise-sweep'],['swing','random humanization'],'none','fixed-cluster','chromatic','distortion/noise bursts');
 G['punk-hardcore'] = simple('punk-hardcore','4/4','machine-grid','straight speed',.5,{style:'riff',rhythmJob:'direct eighth-note root/power-chord lock',pitchJob:'root/fifth/power chords',articulation:['down-pick','staccato']},['intro','verse','chorus','break','chorus','ending'],{motor:'guitar + bass + drums',lead:'guitar'},['distortion-guitar','bass','drums','overdrive-guitar','electric-guitar'],['swing','extended jazz harmony','long intro'],'none','functional','major/minor/power','dry loud room');
-G['uk-bass'] = simple('uk-bass','4/4','machine-grid','broken UK club groove',.5,{style:'sub',rhythmJob:'style-owned 2-step/half-time bass cell',pitchJob:'sub root/5th with style-specific movement',articulation:['sustain','glide','gated']},['intro','groove','drop','breakdown','drop','outro'],{motor:'broken drums + sub',texture:'bass sound design and chopped vocals'},['drums','sub-bass','synth','sampler','voice'],['generic EDM four-on-floor'],'2-step / half-time style cell','modal-vamp','minor/dorian','deep sub, swung or half-time drums, style-specific movement');
+G['uk-bass'] = simple('uk-bass','4/4','machine-grid','broken club umbrella',.5,{style:'sub',rhythmJob:'style-owned 2-step/half-time bass cell',pitchJob:'sub root/5th with style-specific movement',articulation:['sustain','glide','gated']},['intro','groove','drop','breakdown','drop','outro'],{motor:'broken drums + sub',texture:'bass sound design'},['sub-bass','synth','drums','cowbell','soprano-sax'],['generic EDM four-on-floor'],'2-step / half-time style cell','modal-vamp','minor/dorian','bass sound design, pumping where style permits');
+G.kpop = simple('kpop','4/4','metric-hierarchical','polished pop backbeat',.5,{style:'riff',rhythmJob:'syncopated melodic bass under pop backbeat',pitchJob:'root/third/fifth with approach tones',articulation:['short','legato']},['intro','verse','pre-chorus','chorus','verse','pre-chorus','chorus','bridge','final chorus','outro'],{motor:'drums + bass',lead:'vocal hook',texture:'synths and vocal layers'},['voice','synth','sub-bass','drums','piano','electric-guitar','strings','sampler'],['fixed EDM drop form','generic four-on-floor as default'],'none','functional','major/minor pop','polished, wide vocal and synth layers');
+G['chinese-traditional'] = simple('chinese-traditional','4/4','metric-hierarchical','ornamented heterophony',.5,{style:'root',rhythmJob:'phrase-led low-string support; no western walking line',pitchJob:'pentatonic roots and drone tones',articulation:['plucked','ornamented','sustained']},['intro','theme','variation','answer','theme','coda'],{lead:'erhu / dizi',answer:'pipa / zither',texture:'heterophonic ensemble'},['erhu','pipa','guzheng','dizi','guqin','jinghu','paigu'],['rock backbeat','four-on-floor','western functional cadence'],'none','heterophonic','pentatonic/modal','natural chamber space, clear acoustic transients',{kitMode:'none',allowedHitTypes:[],forbidWesternBackbeat:true,forbidSectionCrash:true,allowTomFills:false,ride:false});
+G['japanese-pop'] = simple('japanese-pop','4/4','metric-hierarchical','melody-forward pop pulse',.5,{style:'riff',rhythmJob:'melodic bass with deliberate section lifts',pitchJob:'root/guide-tone with diatonic and chromatic approach',articulation:['short','legato']},['intro','verse','pre-chorus','chorus','verse','chorus','bridge','final chorus','outro'],{motor:'bass + drums',lead:'vocal melody',texture:'keys, guitar, and strings'},['voice','piano','synth','electric-guitar','bass','drums','strings','sampler'],['fixed EDM drop form'],'none','functional','major/minor pop','bright, detailed, layered pop production');
+G['japanese-rock'] = simple('japanese-rock','4/4','metric-hierarchical','driving melodic rock',.5,{style:'riff',rhythmJob:'active root and approach bass against guitar riffs',pitchJob:'power chords, diatonic hooks, and melodic lead lines',articulation:['down-pick','palm-mute','sustain']},['intro','verse','pre-chorus','chorus','verse','chorus','instrumental','bridge','final chorus','outro'],{motor:'electric guitar + bass + drums',lead:'vocal and guitar melody',texture:'keyboard support'},['voice','electric-guitar','bass','drums','piano','synth','strings'],['walking bass','four-on-floor as default'],'none','functional','major/minor rock','live band attack with clear melodic lead');
 
 // Explicit Cultural Overrides for Mastering & Spatialization
 const CULTURAL_OVERRIDES: Record<string, Partial<WorldContract>> = {
-  // Acoustic Latin / African styles: close-miked, dry, top end rolled back.  They were
-  // previously falling through to the generic default (dryness 0.6, brightness 0.5),
-  // which put a roomy, bright mix on genres whose records are typically intimate and warm.
-  tango: {
-    timbreSpace: { mixCharacter: { dryness: 0.8, bassForward: 0.45, width: 0.5, brightness: 0.3, saturationType: 'tape', compressionRatio: 1.8, transientSnap: 0.25 } } as WorldContract['timbreSpace'],
-  },
-  flamenco: {
-    timbreSpace: { mixCharacter: { dryness: 0.85, bassForward: 0.4, width: 0.45, brightness: 0.35, saturationType: 'tape', compressionRatio: 1.6, transientSnap: 0.3 } } as WorldContract['timbreSpace'],
-  },
-  bachata: {
-    timbreSpace: { mixCharacter: { dryness: 0.78, bassForward: 0.5, width: 0.5, brightness: 0.35, saturationType: 'tape', compressionRatio: 2.0, transientSnap: 0.3 } } as WorldContract['timbreSpace'],
-  },
-  afrobeats: {
-    timbreSpace: { mixCharacter: { dryness: 0.75, bassForward: 0.6, width: 0.6, brightness: 0.4, saturationType: 'tape', compressionRatio: 2.5, transientSnap: 0.4 } } as WorldContract['timbreSpace'],
-  },
   reggaeton: {
     performanceIdioms: { dropPortamento: true },
     timbreSpace: {
@@ -402,7 +392,7 @@ const CULTURAL_OVERRIDES: Record<string, Partial<WorldContract>> = {
     },
   },
   folk: {
-    performanceIdioms: { spotlightLeadRubato: true },
+    performanceIdioms: { leadRubato: true },
     timbreSpace: {
       palette: ['banjo', 'fiddle', 'mandolin', 'upright-bass', 'tin-whistle'],
       production: 'natural room, limited processing, tape warmth',
@@ -412,7 +402,7 @@ const CULTURAL_OVERRIDES: Record<string, Partial<WorldContract>> = {
   jazz: {
     cycleLength: 4,
     interactionModel: 'counterpoint',
-    performanceIdioms: { spotlightLeadRubato: true },
+    performanceIdioms: { leadRubato: true },
     timbreSpace: {
       palette: ['tenor-sax', 'upright-bass', 'piano', 'jazz-guitar', 'brush-kit'],
       production: 'live room, moderate width, transparent tape compression',
@@ -429,7 +419,7 @@ const CULTURAL_OVERRIDES: Record<string, Partial<WorldContract>> = {
   blues: {
     cycleLength: 12,
     interactionModel: 'counterpoint',
-    performanceIdioms: { bluesRockLeadMinorThirdBend: true, spotlightLeadRubato: true },
+    performanceIdioms: { bluesRockLeadMinorThirdBend: true, leadRubato: true },
     timbreSpace: {
       palette: ['electric-guitar', 'harmonica', 'piano', 'bass', 'drums'],
       production: 'tape compression, warm valve room',
@@ -478,20 +468,6 @@ const CULTURAL_OVERRIDES: Record<string, Partial<WorldContract>> = {
       mixCharacter: { dryness: 0.55, bassForward: 0.85, width: 0.75, brightness: 0.65, saturationType: 'hard-clip', compressionRatio: 4.5, subHarmonics: 0.75, transientSnap: 0.8 },
     },
   },
-  brazilian: { timbreSpace: { palette: G.brazilian.timbreSpace.palette, production: G.brazilian.timbreSpace.production, mixCharacter: { dryness: 0.72, bassForward: 0.48, width: 0.42, brightness: 0.42, saturationType: 'tape', compressionRatio: 1.6, subHarmonics: 0, transientSnap: 0.25 } } },
-  country: { timbreSpace: { palette: G.country.timbreSpace.palette, production: G.country.timbreSpace.production, mixCharacter: { dryness: 0.78, bassForward: 0.48, width: 0.5, brightness: 0.46, saturationType: 'tape', compressionRatio: 1.8, subHarmonics: 0, transientSnap: 0.3 } } },
-  cumbia: { timbreSpace: { palette: G.cumbia.timbreSpace.palette, production: G.cumbia.timbreSpace.production, mixCharacter: { dryness: 0.72, bassForward: 0.56, width: 0.48, brightness: 0.44, saturationType: 'tape', compressionRatio: 2.2, subHarmonics: 0.05, transientSnap: 0.38 } } },
-  disco: { timbreSpace: { palette: G.disco.timbreSpace.palette, production: G.disco.timbreSpace.production, mixCharacter: { dryness: 0.82, bassForward: 0.62, width: 0.68, brightness: 0.52, saturationType: 'tape', compressionRatio: 3.5, subHarmonics: 0.1, transientSnap: 0.62 } } },
-  'drum-and-bass': { timbreSpace: { palette: G['drum-and-bass'].timbreSpace.palette, production: G['drum-and-bass'].timbreSpace.production, mixCharacter: { dryness: 0.84, bassForward: 0.82, width: 0.68, brightness: 0.56, saturationType: 'tape', compressionRatio: 4.2, subHarmonics: 0.5, transientSnap: 0.68 } } },
-  electronic: { timbreSpace: { palette: G.electronic.timbreSpace.palette, production: G.electronic.timbreSpace.production, mixCharacter: { dryness: 0.72, bassForward: 0.64, width: 0.62, brightness: 0.48, saturationType: 'tape', compressionRatio: 3.0, subHarmonics: 0.3, transientSnap: 0.5 } } },
-  funk: { timbreSpace: { palette: G.funk.timbreSpace.palette, production: G.funk.timbreSpace.production, mixCharacter: { dryness: 0.8, bassForward: 0.62, width: 0.5, brightness: 0.48, saturationType: 'tape', compressionRatio: 2.5, subHarmonics: 0.05, transientSnap: 0.45 } } },
-  kizomba: { timbreSpace: { palette: G.kizomba.timbreSpace.palette, production: G.kizomba.timbreSpace.production, mixCharacter: { dryness: 0.78, bassForward: 0.68, width: 0.5, brightness: 0.4, saturationType: 'tape', compressionRatio: 1.8, subHarmonics: 0.05, transientSnap: 0.25 } } },
-  'r-and-b': { timbreSpace: { palette: G['r-and-b'].timbreSpace.palette, production: G['r-and-b'].timbreSpace.production, mixCharacter: { dryness: 0.68, bassForward: 0.58, width: 0.56, brightness: 0.44, saturationType: 'tape', compressionRatio: 2.4, subHarmonics: 0.05, transientSnap: 0.38 } } },
-  reggae: { timbreSpace: { palette: G.reggae.timbreSpace.palette, production: G.reggae.timbreSpace.production, mixCharacter: { dryness: 0.76, bassForward: 0.62, width: 0.5, brightness: 0.42, saturationType: 'tape', compressionRatio: 1.8, subHarmonics: 0.05, transientSnap: 0.28 } } },
-  ska: { timbreSpace: { palette: G.ska.timbreSpace.palette, production: G.ska.timbreSpace.production, mixCharacter: { dryness: 0.78, bassForward: 0.52, width: 0.55, brightness: 0.5, saturationType: 'tape', compressionRatio: 2.0, subHarmonics: 0, transientSnap: 0.36 } } },
-  soul: { timbreSpace: { palette: G.soul.timbreSpace.palette, production: G.soul.timbreSpace.production, mixCharacter: { dryness: 0.66, bassForward: 0.55, width: 0.52, brightness: 0.44, saturationType: 'tape', compressionRatio: 2.0, subHarmonics: 0, transientSnap: 0.3 } } },
-  timba: { timbreSpace: { palette: G.timba.timbreSpace.palette, production: G.timba.timbreSpace.production, mixCharacter: { dryness: 0.72, bassForward: 0.64, width: 0.56, brightness: 0.48, saturationType: 'tape', compressionRatio: 2.5, subHarmonics: 0.08, transientSnap: 0.45 } } },
-  zouk: { timbreSpace: { palette: G.zouk.timbreSpace.palette, production: G.zouk.timbreSpace.production, mixCharacter: { dryness: 0.62, bassForward: 0.62, width: 0.68, brightness: 0.44, saturationType: 'tape', compressionRatio: 1.8, subHarmonics: 0.08, transientSnap: 0.28 } } },
 };
 
 for (const [id, override] of Object.entries(CULTURAL_OVERRIDES)) {
@@ -515,48 +491,20 @@ for (const [id, override] of Object.entries(CULTURAL_OVERRIDES)) {
   }
 }
 
+for (const [genreId, definition] of Object.entries(GENRE_SOLO_DEFINITIONS)) {
+  if (G[genreId]) G[genreId].soloDefinition = definition;
+}
+
 export const GENRE_CONTRACTS: Record<string, WorldContract> = G;
 
-const tone = (dryness: number, bassForward: number, width: number, brightness: number, compressionRatio = 1.8, transientSnap = 0.3) => ({
-  dryness, bassForward, width, brightness, saturationType: 'tape' as const,
-  compressionRatio, subHarmonics: 0, transientSnap,
-});
-
-const styleTone = (genreId: string, mixCharacter: ReturnType<typeof tone>): Partial<WorldContract> => ({
-  timbreSpace: { ...G[genreId].timbreSpace, mixCharacter },
-});
-
 export const STYLE_PATCHES: Record<string, Partial<WorldContract>> = {
+  'tango-tango-electronico': {
+    performanceMode: 'programmed-electronic',
+    timbreSpace: {
+      palette: ['bandoneon', 'sub-bass', 'drums', 'sampler', 'synth', 'electric-guitar', 'piano'],
+      production: 'bandoneon-led electrotango; deep controlled sub, tight programmed percussion, filtered samples, and wide restrained ambience',
+      mixCharacter: { dryness: 0.55, bassForward: 0.84, width: 0.82, brightness: 0.64, saturationType: 'tape', compressionRatio: 3.8, subHarmonics: 0.58, transientSnap: 0.72, sidechainDucking: 0.62 },
+    },
+  },
   'reggae-dancehall': { timbreSpace: { palette: ['synth', 'sub-bass', 'drums', 'congas'], production: 'dembow skank, hard clip', mixCharacter: { dryness: 0.7, bassForward: 0.88, width: 0.65, brightness: 0.65, saturationType: 'hard-clip', compressionRatio: 5.0, subHarmonics: 0.8, transientSnap: 0.8 } } },
-  // Style-owned production targets. Traditional acoustic styles stay close and
-  // transient-clear; electronic hybrids gain controlled width and low end.
-  'tango-tango-tradicional': styleTone('tango', tone(0.9, 0.45, 0.42, 0.32)),
-  'tango-tango-nuevo': styleTone('tango', tone(0.82, 0.48, 0.52, 0.38, 2.0, 0.35)),
-  'tango-milonga': styleTone('tango', tone(0.9, 0.47, 0.44, 0.38)),
-  'tango-tango-vals': styleTone('tango', tone(0.84, 0.44, 0.5, 0.34)),
-  'tango-tango-electronico': styleTone('tango', tone(0.74, 0.56, 0.62, 0.42, 2.2, 0.4)),
-  'afrobeats-afro-pop': styleTone('afrobeats', tone(0.82, 0.6, 0.52, 0.42, 2.2, 0.4)),
-  'afrobeats-afrobeat': styleTone('afrobeats', tone(0.66, 0.58, 0.58, 0.46, 2.0, 0.35)),
-  'afrobeats-amapiano': styleTone('afrobeats', tone(0.74, 0.68, 0.62, 0.4, 2.8, 0.45)),
-  'afrobeats-gqom': styleTone('afrobeats', tone(0.8, 0.66, 0.5, 0.42, 3.0, 0.5)),
-  'afrobeats-afro-house': styleTone('afrobeats', tone(0.74, 0.62, 0.6, 0.45, 2.8, 0.45)),
-  'afrobeats-highlife': styleTone('afrobeats', tone(0.7, 0.5, 0.5, 0.44, 1.8, 0.28)),
-  'afrobeats-palm-wine': styleTone('afrobeats', tone(0.84, 0.46, 0.44, 0.38, 1.6, 0.22)),
-  'afrobeats-alte': styleTone('afrobeats', tone(0.76, 0.58, 0.58, 0.38, 2.0, 0.35)),
-  'bachata-urbana': styleTone('bachata', tone(0.84, 0.5, 0.45, 0.36, 1.9, 0.3)),
-  'bachata-tradicional': styleTone('bachata', tone(0.9, 0.48, 0.4, 0.38, 1.7, 0.26)),
-  'bachata-sensual': styleTone('bachata', tone(0.72, 0.5, 0.58, 0.4, 1.8, 0.28)),
-  'bachata-moderna': styleTone('bachata', tone(0.78, 0.54, 0.52, 0.42, 2.2, 0.38)),
-  'bachata-bolero': styleTone('bachata', tone(0.88, 0.44, 0.46, 0.32, 1.5, 0.2)),
-  'bachata-bachatango': styleTone('bachata', tone(0.8, 0.5, 0.48, 0.36, 1.9, 0.3)),
-  'bachata-campestre': styleTone('bachata', tone(0.9, 0.46, 0.4, 0.38, 1.7, 0.25)),
-  'bachata-merengue-de-guitarra': styleTone('bachata', tone(0.82, 0.54, 0.48, 0.44, 2.0, 0.34)),
-  'flamenco-solea-style': styleTone('flamenco', tone(0.92, 0.4, 0.38, 0.3, 1.5, 0.22)),
-  'flamenco-buleria-style': styleTone('flamenco', tone(0.9, 0.48, 0.44, 0.42, 1.8, 0.34)),
-  'flamenco-alegrias-style': styleTone('flamenco', tone(0.88, 0.48, 0.48, 0.42, 1.8, 0.34)),
-  'flamenco-tangos-style': styleTone('flamenco', tone(0.9, 0.46, 0.42, 0.4, 1.7, 0.3)),
-  'flamenco-seguiriya-style': styleTone('flamenco', tone(0.94, 0.4, 0.36, 0.28, 1.4, 0.2)),
-  'flamenco-tientos-style': styleTone('flamenco', tone(0.92, 0.42, 0.4, 0.3, 1.5, 0.22)),
-  'flamenco-fandango-style': styleTone('flamenco', tone(0.86, 0.46, 0.48, 0.4, 1.8, 0.3)),
-  'flamenco-rumba': styleTone('flamenco', tone(0.8, 0.52, 0.56, 0.44, 2.0, 0.36)),
 };

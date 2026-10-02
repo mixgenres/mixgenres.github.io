@@ -9,7 +9,7 @@ export const guitar_harmonics: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "nail",
   elementaryModel: 26,
-  makeupGain: 12.892,
+  makeupGain: 0.378,
   polyphony: 4,
   note: "Pure acoustic guitar natural and artificial bell harmonics ringing at nodal division points",
   acousticProfile: {

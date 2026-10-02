@@ -21,7 +21,7 @@ export const pan_flute: InstrumentDef = {
     ring: 3
   },
   luthierPhysics: {
-    category: "aerophone_lip_tension",
+    category: "aerophone_edge_blown",
     materialDensity: 0.35,
     tension: 0.45,
     bodyResonanceVolume: 0.5,

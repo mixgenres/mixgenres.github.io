@@ -1,6 +1,9 @@
-import type { Song, Region, Track, Measure, SectionType, PatternVariant, MusicalPattern, SpotlightMode, SectionEnergy, GuestLens } from '../../types';
+import { resolveSoloPlan } from './solo';
+import type { SoloAssignment } from '../../data/styles/schema';
+import type { Song, Region, Track, Measure, SectionType, PatternVariant, MusicalPattern, SectionEnergy, GuestLens } from '../../types';
 import { GENRE_WORLDS_BY_ID, ALL_PATTERNS, PATTERNS_BY_ID, PATTERNS_BY_WORLD } from '../../data/genres';
-import { INSTRUMENTS_BY_ID, INSTRUMENT_CATALOG, WORLD_INSTRUMENT_HINTS, instrument, instrumentPatternKinds } from '../../engine/lookup/instruments';
+import { TANGO_ARRASTRE_COMPING_KINDS } from '../../data/genres/tango/arrangement';
+import { INSTRUMENTS_BY_ID, INSTRUMENT_CATALOG, instrument, instrumentPatternKinds } from '../../engine/lookup/instruments';
 import { sliceBarNative } from './grid.ts';
 import { progressionForSection, buildArrangementContext, ArrangementContext } from './arrangementContext.ts';
 import { inferKey, parseChord, assertValidChordProgression } from './musicTheory.ts';
@@ -9,10 +12,10 @@ import { voiceProfile } from '../sheet/instrumentRoles.ts';
 import { resolveStyle, StyleRuntime, StyleInfluence, SongStyle, getCanonicalStyle, getStyle } from '../../engine/style';
 import { contractForGenre, type ApproachSpec } from '../../engine/style/contracts';
 import { suggestedPaletteForGenre } from '../../engine/lookup/theory';
-import { clampEnergy, energyForFormIntensity, energyOf, formIntensityForEnergy, shapeScalarOf } from './sectionEnergy.ts';
+import { clampEnergy, energyForFormIntensity, energyOf, formIntensityForEnergy } from './sectionEnergy.ts';
 import { FEELS, type TempoFeel } from '../../data/tempoFeels';
 import { SECTION_ENERGY_DEFAULT } from '../../data/performance/sectionEnergyDefaults';
-import { ENGINE_INSTRUMENT_KEYS, instrumentHasKey } from '../lookup/instrumentKeys.ts';
+import { BASS_INSTRUMENT_ROLE_PATTERN, VOICE_INSTRUMENT_ROLE_PATTERN, VOICE_FAMILY_ROLE_PATTERN } from '../../data/instruments/roleAssignmentPatterns';
 import { ELECTRONIC_TRACK_GENRE_PATTERN, ACOUSTIC_BASS_TRACK_VOLUME_STEPS, ELECTRONIC_BASS_TRACK_VOLUME_STEPS, FIXED_INSTRUMENT_TRACK_VOLUME, TRACK_VOLUME_BY_ROLE, DEFAULT_TRACK_VOLUME } from '../../data/sound/mix/trackVolume';
 
 export interface Voice extends Track {
@@ -46,7 +49,11 @@ export function phraseSpanBars(cycleLength: number): number {
 export function getResolvedSectionStyle(sheet: Sheet, region: Region): ReturnType<typeof resolveStyle> {
   const genreId = region.genre ?? sheet.worldId;
   const styleId = region.styleId ?? (genreId === sheet.worldId ? sheet.styleId : undefined) ?? getCanonicalStyle(genreId).id;
-  return resolveStyle({ genreId, styleId });
+  const inheritsSongStyle = genreId === sheet.worldId && styleId === sheet.styleId;
+  return resolveStyle({ genreId, styleId,
+    influences: inheritsSongStyle ? sheet.styleInfluences as StyleInfluence[] | undefined : undefined,
+    userOverrides: inheritsSongStyle ? sheet.styleOverrides as Partial<SongStyle> | undefined : undefined,
+  });
 }
 
 export function getSectionStyleId(sheet: Sheet, region: Region): string {
@@ -72,6 +79,8 @@ export interface Sheet extends Song {
    * explicitly pins the part to the host style, suppressing inference.
    */
   partLens?: Record<string, Record<string, GuestLens>>;
+  /** Per-part role overrides. Missing entries inherit the song-wide track role. */
+  partRoles?: Record<string, Record<string, string>>;
   /** Per-section interaction state propagated by rebuild into performance compilation. */
   arrangementContext?: Record<string, ArrangementContext>;
 }
@@ -92,7 +101,7 @@ export function getEffectiveBpm(
           ? (FEELS.find(f => f.id === region.tempoShift) ?? defaultFeel)
           : songFeel;
         return {
-          bpm: Math.round(baseBpm * (region.tempoShift ? sectionFeel.mult : 1)),
+          bpm: Math.round(baseBpm * sectionFeel.mult),
           feel: sectionFeel,
           isSectionOverride: true,
         };
@@ -227,10 +236,10 @@ export function guestWorldIdsFor(worldId: string): string[] {
 export function roleForInstrument(instrumentId: string): string {
   const def = INSTRUMENTS_BY_ID[instrumentId];
   if (!def) return 'harmony';
-  if (def.voicing === 'bass' || instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.bass)) return 'bass';
+  if (def.voicing === 'bass' || BASS_INSTRUMENT_ROLE_PATTERN.test(instrumentId)) return 'bass';
   if (def.voicing === 'unpitched') return 'percussion';
   // Keep the composition role vocabulary aligned with instrumentProfile.
-  if (instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.voice) || def.family === 'voice') return 'voice';
+  if (VOICE_INSTRUMENT_ROLE_PATTERN.test(instrumentId) || VOICE_FAMILY_ROLE_PATTERN.test(def.family ?? '')) return 'voice';
   if (def.voicing === 'single') {
     const role = voiceProfile(instrumentId).role;
     return role === 'perc' ? 'percussion' : role;
@@ -238,9 +247,9 @@ export function roleForInstrument(instrumentId: string): string {
   return 'harmony';
 }
 
-function calibratedTrackVolume(genreId: string, instrumentId: string, role: string): number {
-  const forward = contractForGenre(genreId).timbreSpace.mixCharacter?.bassForward ?? 0.5;
-  const acoustic = !ELECTRONIC_TRACK_GENRE_PATTERN.test(genreId);
+function calibratedTrackVolume(genreId: string, instrumentId: string, role: string, styleId?: string, bassForward?: number): number {
+  const forward = bassForward ?? contractForGenre(genreId).timbreSpace.mixCharacter?.bassForward ?? 0.5;
+  const acoustic = !ELECTRONIC_TRACK_GENRE_PATTERN.test(`${genreId} ${styleId ?? ''}`);
   if (role === 'bass') {
     const steps = acoustic ? ACOUSTIC_BASS_TRACK_VOLUME_STEPS : ELECTRONIC_BASS_TRACK_VOLUME_STEPS;
     return steps.find(step => forward < step.upperBound)?.level ?? steps[steps.length - 1].level;
@@ -291,9 +300,6 @@ export function patternStyleFit(
   const daring = Math.max(0, Math.min(1, adventure));
 
   let penalty = 0;
-  const styleDanceTags = new Set(resolved.danceTags ?? []);
-  const matchingDanceTag = (pattern.danceTags ?? []).some(tag => styleDanceTags.has(tag));
-  if (matchingDanceTag) penalty += 14;
   if (stylePatternIds.avoid?.includes(pattern.id)) penalty -= 80;
   if (pattern.tags?.some(tag => resolved.rules?.forbid?.some(r => r.tag === tag || r.tag === `tag:${tag}`))) {
     penalty -= 80;
@@ -369,10 +375,6 @@ export function affinity(
 
   // Pattern weight is a tie-breaker among otherwise compatible cells.
   if (typeof p.weight === 'number') score += (p.weight - 0.5) * 10;
-  if (typeof p.difficulty === 'number') score += (daring - p.difficulty) * 12;
-  if (typeof p.syncopationRating === 'number') score += (p.syncopationRating - 0.5) * (daring * 8);
-  if (p.transitionType && /section|cadence|break/i.test(`${p.category} ${p.family}`)) score += 3;
-  if (p.scopes?.includes('region') && /section|cadence|break/i.test(`${p.category} ${p.family}`)) score += 2;
   if (kinds.has('coro') && p.roles.includes('voice')) score += 8;
   if (kinds.has('drums') && p.roles.includes('drums')) score += 8;
   return score;
@@ -441,10 +443,9 @@ function synthesizeBoundaryVariant(
 
   // Tango arrastre gesture (pickup anticipation on step 14 or 15)
   if (phraseRole === 'cadence' && gestures['arrastre']?.probability && gestures['arrastre']?.probability !== 0) {
-    const isBassOrPiano = p.roles.includes('bass')
-      || (p.instruments ?? []).some(id => /piano|bandoneon/i.test(String(id)))
-      || (p.compatibleInstruments ?? []).some(id => /piano|bandoneon/i.test(String(id)));
-    if (isBassOrPiano) {
+    const hasIdiomaticTarget = p.roles.includes('bass')
+      || [...(p.instruments ?? []), ...(p.compatibleInstruments ?? [])].some(id => TANGO_ARRASTRE_COMPING_KINDS.includes(String(id) as typeof TANGO_ARRASTRE_COMPING_KINDS[number]));
+    if (hasIdiomaticTarget) {
       return {
         id: `${p.id}-arrastre-cadence`, parentPatternId: p.id,
         name: `${p.name} — arrastre`, variationType: 'cadence', probability: 0.85,
@@ -583,31 +584,10 @@ export function suggestPattern(
   const guestWorlds = guestWorldIdsFor(worldId);
   const guestIds = guestWorlds.flatMap(g => (PATTERNS_BY_WORLD[g] || []).map(p => p.id));
   const candidateIds = Array.from(new Set([...(curated ?? []), ...worldWide, ...guestIds, ...Object.keys(PATTERNS_BY_ID)]));
-  const rawCandidates = candidateIds
+  const scored = candidateIds
     .map(id => PATTERNS_BY_ID[id])
-    .filter((p): p is MusicalPattern => !!p && p.enabled !== false);
-  const instrumentKinds = new Set(instrumentPatternKinds(voice.instrumentId));
-  const hasCompatibleExplicit = rawCandidates.some(p => {
-    const targets = new Set([...(p.instruments ?? []).map(String), ...(p.compatibleInstruments ?? []).map(String)]);
-    return targets.size > 0 && [...targets].some(k => instrumentKinds.has(k));
-  });
-  const candidatePool = hasCompatibleExplicit
-    ? rawCandidates.filter(p => {
-        const targets = new Set([...(p.instruments ?? []).map(String), ...(p.compatibleInstruments ?? []).map(String)]);
-        return targets.size === 0 || [...targets].some(k => instrumentKinds.has(k));
-      })
-    : rawCandidates;
-  const scored = candidatePool
+    .filter((p): p is MusicalPattern => !!p && p.enabled !== false)
     .map(p => {
-      const kinds = new Set(instrumentPatternKinds(voice.instrumentId));
-      const explicitTargets = new Set([...(p.instruments ?? []).map(String), ...(p.compatibleInstruments ?? []).map(String)]);
-      const instrumentMatch = [...explicitTargets].some(k => kinds.has(k));
-      const roleMatch = p.roles.some(r => r === voice.role || p.compatibleRoles?.includes(voice.role) || kinds.has(r));
-      // Explicit instrument targets are a compatibility contract, not merely a
-      // ranking hint. A role match can widen that contract; otherwise do not
-      // assign a guitar/palmas/drum cell to an unrelated voice just because it
-      // scored well on style or section affinity.
-      if (explicitTargets.size > 0 && !instrumentMatch && !roleMatch) return null;
       let n = affinity(p.id, voice, worldId, styleId);
       const behavioralFit = approachFit(p, approach);
       if (approach && behavioralFit > 0) n += behavioralFit;
@@ -634,31 +614,10 @@ export function suggestPattern(
       if (taken?.has(p.id)) n -= 75;
       return { id: p.id, n: n + hash(`${p.id}:${sectionKind ?? 'body'}`, salt) * 3 };
     })
-    .filter((x): x is { id: string; n: number } => !!x)
     .sort((a, b) => b.n - a.n);
 
   const viable = scored.filter(x => x.n > -150);
-  if (!viable.length) {
-    // A playable instrument must not become silent merely because the style's
-    // affinity/avoid rules rejected every preferred cell. Do one final hard
-    // compatibility search without style scoring. This is especially important
-    // when the user reduces the ensemble to a single instrument.
-    const fallback = rawCandidates
-      .filter(p => {
-        const targets = new Set([...(p.instruments ?? []).map(String), ...(p.compatibleInstruments ?? []).map(String)]);
-        const instrumentMatch = [...targets].some(k => instrumentKinds.has(k));
-        const roleMatch = p.roles.some(r => r === voice.role || p.compatibleRoles?.includes(voice.role) || instrumentKinds.has(r));
-        return targets.size === 0 || instrumentMatch || roleMatch;
-      })
-      .sort((a, b) => {
-        const aw = a.worldId === worldId ? 1 : 0;
-        const bw = b.worldId === worldId ? 1 : 0;
-        const ar = a.roles.includes(voice.role) ? 1 : 0;
-        const br = b.roles.includes(voice.role) ? 1 : 0;
-        return bw - aw || br - ar || a.id.localeCompare(b.id);
-      })[0];
-    return fallback?.id;
-  }
+  if (!viable.length) return scored[0]?.id;
   const best = viable[0].n;
   const window = viable.filter(x => x.n >= best - 25).slice(0, 10);
   return window[Math.floor(hash(`pick:${worldId}:${voice.instrumentId}:${sectionKind ?? 'body'}`, salt) * window.length)]?.id
@@ -737,16 +696,21 @@ export function rebuild(sheet: Sheet): Sheet {
   }
 
   // Resolve interaction context once per section. This is deliberately kept
-  // on the rebuilt sheet so the performance compiler sees the same spotlight
+  // on the rebuilt sheet so the performance compiler sees the same solo assignments
   // decisions that the UI is showing.
   const arrangementContext: Record<string, ArrangementContext> = {};
   for (const r of regions) {
     const resolved = getResolvedSectionStyle(sheet, r);
+    const sectionTracks = sheet.tracks.map(t => ({ ...t, role: sheet.partRoles?.[r.id]?.[t.id] ?? t.role })) as Voice[];
     arrangementContext[r.id] = buildArrangementContext(
-      sheet.tracks as Voice[],
+      sectionTracks,
       resolved.contract,
-      shapeScalarOf(r),
+      energyOf(r),
       energies[r.id],
+      resolveSoloPlan(r, sectionTracks, resolved.contract, sectionTracks.filter(t => {
+        const patternId = sheet.arrangement[r.id]?.[t.id];
+        return !!patternId && patternId !== 'silent';
+      }).map(t => t.id)),
     );
   }
 
@@ -765,17 +729,18 @@ export function rebuild(sheet: Sheet): Sheet {
     // Compute or retrieve cached pattern details for each track in this region
     const trackBarDetails = new Map<string, (PatternDetails | undefined)[]>();
 
-    for (const track of sheet.tracks) {
+    for (const baseTrack of sheet.tracks) {
+      const track = { ...baseTrack, role: sheet.partRoles?.[r.id]?.[baseTrack.id] ?? baseTrack.role };
       const basePatternId = byTrack[track.id];
       if (!basePatternId || basePatternId === 'silent') {
         trackBarDetails.set(track.id, new Array(bars).fill(undefined));
         continue;
       }
 
-      const partEnergy: SectionEnergy = clampEnergy(energies[r.id]?.[track.id] ?? energyOf(r));
+      const partEnergy: SectionEnergy = clampEnergy(interaction?.energyByTrack[track.id] ?? energies[r.id]?.[track.id] ?? energyOf(r));
 
       const cellKey = `${r.id}:${track.id}`;
-      const cellFp = `${r.id}:${track.id}:${track.instrumentId}:${r.genre ?? sheet.worldId}:${getSectionStyleId(sheet, r)}:${bars}:${r.kind}:${r.formKey}:${chords.join(',')}:${basePatternId}:${partEnergy}:${sheet.generationSeed ?? 0}:${JSON.stringify(sheet.partLens?.[r.id]?.[track.id] ?? '')}:${interaction?.spotlightedTrackIds?.includes(track.id)}:${interaction?.energyByTrack?.[track.id] ?? ''}`;
+      const cellFp = `${r.id}:${track.id}:${track.instrumentId}:${track.role}:${r.genre ?? sheet.worldId}:${getSectionStyleId(sheet, r)}:${bars}:${r.kind}:${r.formKey}:${chords.join(',')}:${basePatternId}:${partEnergy}:${sheet.generationSeed ?? 0}:${JSON.stringify(sheet.partLens?.[r.id]?.[track.id] ?? '')}:${interaction?.energyByTrack?.[track.id] ?? ''}`;
 
       const cached = arrangementCellDetailsCache.get(cellKey);
       if (cached && cached.fingerprint === cellFp && cached.detailsByBar.length === bars) {
@@ -1005,6 +970,7 @@ export function duplicateSection(sheet: Sheet, regionId: string): { sheet: Sheet
     ...src,
     id,
     name: src.name,
+    solo: src.solo ? { ...src.solo, trackIds: [...src.solo.trackIds] } : undefined,
     kind: src.kind,
     formKey: src.formKey,
     formLabel: src.formLabel,
@@ -1021,6 +987,8 @@ export function duplicateSection(sheet: Sheet, regionId: string): { sheet: Sheet
   
   const arrangement = { ...sheet.arrangement, [id]: { ...(sheet.arrangement[regionId] ?? {}) } };
   const energies = { ...sheet.energies, [id]: { ...(sheet.energies?.[regionId] ?? {}) } };
+  const partRoles = { ...(sheet.partRoles ?? {}) };
+  if (partRoles[regionId]) partRoles[id] = { ...partRoles[regionId] };
   
   return {
     sheet: rebuild({
@@ -1028,6 +996,7 @@ export function duplicateSection(sheet: Sheet, regionId: string): { sheet: Sheet
       regions,
       arrangement,
       energies,
+      partRoles,
     }),
     newRegionId: id,
   };
@@ -1147,8 +1116,10 @@ export function removeSection(sheet: Sheet, regionId: string): Sheet {
   
   const energies = { ...sheet.energies };
   delete energies[regionId];
+  const partRoles = { ...(sheet.partRoles ?? {}) };
+  delete partRoles[regionId];
   
-  return rebuild({ ...sheet, regions: sheet.regions.filter(r => r.id !== regionId), arrangement, energies });
+  return rebuild({ ...sheet, regions: sheet.regions.filter(r => r.id !== regionId), arrangement, energies, partRoles });
 }
 
 export function moveSection(sheet: Sheet, regionId: string, delta: number): Sheet {
@@ -1166,7 +1137,8 @@ export function setInstrument(sheet: Sheet, trackId: string, instrumentId: strin
   const def = instrument(instrumentId);
   const newVoice = {
     ...(sheet.tracks.find(t => t.id === trackId) as Voice),
-    instrumentId, instrument: def.name, name: def.name, kind: instrumentId, role: roleForInstrument(instrumentId)
+    instrumentId, instrument: def.name, name: def.name, kind: instrumentId,
+    role: sheet.tracks.find(t => t.id === trackId)?.role ?? roleForInstrument(instrumentId)
   };
   
   const tracks = sheet.tracks.map(t => t.id === trackId ? newVoice : t) as Voice[];
@@ -1224,7 +1196,7 @@ function rankInstrumentsForWorld(worldId: string, targetRole?: string, styleId?:
       const fakeVoice = {
         id: 'candidate', instrumentId: def.id, name: def.name, instrument: def.name,
         role: roleForInstrument(def.id), kind: def.id,
-        muted: false, volume: 0.85, lensIds: [], spotlight: 'auto',
+        muted: false, volume: 0.85, lensIds: [],
       } as Voice;
       const best = (PATTERNS_BY_WORLD[worldId] || [])
         .filter(p => p.enabled !== false)
@@ -1268,15 +1240,6 @@ function patternCandidatesForVoice(
   return pool
     .filter(p => p.enabled !== false)
     .map(p => {
-      const kinds = new Set(instrumentPatternKinds(voice.instrumentId));
-      const explicitTargets = new Set([...(p.instruments ?? []).map(String), ...(p.compatibleInstruments ?? []).map(String)]);
-      const instrumentMatch = [...explicitTargets].some(k => kinds.has(k));
-      const roleMatch = p.roles.some(r => r === voice.role || p.compatibleRoles?.includes(voice.role) || kinds.has(r));
-      // Explicit instrument targets are a compatibility contract, not merely a
-      // ranking hint. A role match can widen that contract; otherwise do not
-      // assign a guitar/palmas/drum cell to an unrelated voice just because it
-      // scored well on style or section affinity.
-      if (explicitTargets.size > 0 && !instrumentMatch && !roleMatch) return null;
       let n = affinity(p.id, voice, worldId, styleId);
       const behavioralFit = approachFit(p, approach);
       if (approach && behavioralFit > 0) n += behavioralFit;
@@ -1301,7 +1264,7 @@ function patternCandidatesForVoice(
       if (['verse', 'pre-chorus', 'bridge'].includes(sectionKind) && ['fill', 'cadence', 'sectionPattern'].includes(p.category)) n -= 15;
       return { p, score: n };
     })
-    .filter((x): x is { p: MusicalPattern; score: number } => x !== null && x.score > -200)
+    .filter(x => x.score > -200)
     .sort((a, b) => b.score - a.score);
 }
 
@@ -1346,7 +1309,9 @@ export function randomizeInstruments(sheet: Sheet, repickPatterns = true): Sheet
 export function removeAllInstruments(sheet: Sheet): Sheet {
   const arrangement: Arrangement = {};
   for (const r of sheet.regions) arrangement[r.id] = {};
-  return rebuild({ ...sheet, tracks: [], arrangement, patternMemory: {} });
+  return rebuild({ ...sheet, tracks: [], arrangement, patternMemory: {},
+    regions: sheet.regions.map(r => ({ ...r, solo: undefined })),
+  });
 }
 
 /** Randomise every part in one section, favouring strong genre/instrument matches. */
@@ -1827,7 +1792,7 @@ export function addVoice(
   const voice: Voice = {
     id, instrumentId, name: def.name, instrument: def.name,
     role: roleForInstrument(instrumentId), kind: instrumentId,
-    muted: false, volume: 0.85, lensIds: [], spotlight: 'auto',
+    muted: false, volume: 0.85, lensIds: [],
   };
   const arrangement = { ...sheet.arrangement };
   const energies = { ...sheet.energies };
@@ -1892,17 +1857,56 @@ export function removeVoice(sheet: Sheet, trackId: string): Sheet {
       energies[rid] = copy;
     }
   }
-  return rebuild({ ...sheet, tracks: sheet.tracks.filter(t => t.id !== trackId), arrangement, energies });
+  const partRoles: Sheet['partRoles'] = {};
+  for (const [rid, roles] of Object.entries(sheet.partRoles ?? {})) {
+    const copy = { ...roles };
+    delete copy[trackId];
+    if (Object.keys(copy).length) partRoles[rid] = copy;
+  }
+  return rebuild({ ...sheet, tracks: sheet.tracks.filter(t => t.id !== trackId), arrangement, energies, partRoles,
+    regions: sheet.regions.map(r => {
+      if (!r.solo) return r;
+      const trackIds = r.solo.trackIds.filter(id => id !== trackId);
+      return { ...r, solo: trackIds.length ? { ...r.solo, trackIds } : undefined };
+    }),
+  });
 }
 
 export function toggleVoice(sheet: Sheet, trackId: string): Sheet {
   return { ...sheet, tracks: sheet.tracks.map(t => (t.id === trackId ? { ...t, muted: !t.muted } : t)) };
 }
 
-export function setTrackSpotlight(sheet: Sheet, trackId: string, spotlight: SpotlightMode): Sheet {
-  const tracks = sheet.tracks.map(t => t.id === trackId ? { ...t, spotlight } : t);
-  return rebuild({ ...sheet, tracks });
+export function setSectionSolo(sheet: Sheet, regionId: string, solo: SoloAssignment | undefined): Sheet {
+  const valid = solo?.trackIds.filter(id => sheet.tracks.some(t => t.id === id)) ?? [];
+  return rebuild({ ...sheet, regions: sheet.regions.map(r => r.id === regionId
+    ? { ...r, solo: valid.length ? { ...solo!, trackIds: [...new Set(valid)] } : undefined } : r) });
 }
+
+export function getTrackRole(sheet: Sheet, trackId: string, regionId: string): string {
+  return sheet.partRoles?.[regionId]?.[trackId] ?? sheet.tracks.find(t => t.id === trackId)?.role ?? 'harmony';
+}
+
+export function setTrackRole(sheet: Sheet, trackId: string, regionId: string, role: string, scope: 'section' | 'song' = 'section'): Sheet {
+  if (scope === 'song') {
+    const partRoles = { ...(sheet.partRoles ?? {}) };
+    for (const [id, roles] of Object.entries(partRoles)) {
+      const next = { ...roles };
+      delete next[trackId];
+      if (Object.keys(next).length) partRoles[id] = next;
+      else delete partRoles[id];
+    }
+    return rebuild({ ...sheet, tracks: sheet.tracks.map(t => t.id === trackId ? { ...t, role } : t), partRoles });
+  }
+  const partRoles = { ...(sheet.partRoles ?? {}) };
+  const roles = { ...(partRoles[regionId] ?? {}) };
+  const songRole = sheet.tracks.find(t => t.id === trackId)?.role;
+  if (role === songRole) delete roles[trackId];
+  else roles[trackId] = role;
+  if (Object.keys(roles).length) partRoles[regionId] = roles;
+  else delete partRoles[regionId];
+  return rebuild({ ...sheet, partRoles });
+}
+
 
 
 
@@ -1946,10 +1950,9 @@ export function makeSheet(
   const runtime = new StyleRuntime(resolved);
 
   const formTemplates = runtime.getFormTemplate(42);
-  if (!formTemplates.length) {
-    throw new Error(`Style ${resolved.id} has no usable form template; refusing to create a one-section fallback song.`);
-  }
-  const form = formTemplates;
+  const form = formTemplates && formTemplates.length > 0
+    ? formTemplates
+    : [{ key: 'verse', label: 'Verse', kind: 'verse', bars: 8, intensity: 'medium' as const }];
   const styleChordCells = (resolved.harmony?.progressionTemplates ?? []).map(x => x.value as string[]);
   const paletteChordCells = suggestedPaletteForGenre(genreId).map(cell => cell.chords as string[]);
   const chordCells = styleChordCells.length ? styleChordCells : paletteChordCells;
@@ -1957,8 +1960,8 @@ export function makeSheet(
 
   const sectionProgressions = (resolved.harmony?.sectionProgressions as Record<string, string[]>) ?? {};
   const regions: Region[] = form.map((f, i) => {
-    const fallback = chords;
-    const pickedRaw = progressionForSection(sectionProgressions, f.key, f.kind, fallback, resolved.contract, resolved.primaryGenre === 'tango' || resolved.primaryGenre === 'flamenco');
+    const fallback = chordCells[i % Math.max(1, chordCells.length)] ?? chords;
+    const pickedRaw = progressionForSection(sectionProgressions, f.key, f.kind, fallback, resolved.contract);
     // Section templates describe harmonic function, not an automatic key change.
     // Keep the whole song in the first section's tonic unless the user explicitly
     // changes the song key elsewhere.
@@ -1968,6 +1971,10 @@ export function makeSheet(
       id: `r${i}`, name: f.label, kind: f.kind, formKey: f.key, formLabel: f.label,
       intensity: f.intensity, energy, start: 0, end: f.bars,
       bars: f.bars,
+      ...(f.bpm ? { bpm: f.bpm } : {}),
+      ...(f.instrumentIds ? { activeInstrumentIds: f.instrumentIds } : {}),
+      ...(f.leadInstrumentId ? { leadInstrumentId: f.leadInstrumentId } : {}),
+      ...(f.tempoFeel ? { tempoFeel: f.tempoFeel } : {}),
       genre: genreId,
       styleId: resolved.id,
       chords: picked,
@@ -1975,27 +1982,25 @@ export function makeSheet(
   });
 
 
-  // Instrument hints from resolved style palette or genre defaults
+  // Start with the authored style band, then fill from the genre palette so
+  // generated examples have enough independent musical roles.
   const stylePalette = runtime.getInstrumentPalette();
+  const genrePalette = contractForGenre(genreId).timbreSpace.palette;
   const ensembleIds = (resolved.arrangement?.ensemble ?? [])
     .flatMap(e => e.instrumentIds ?? []);
-  // The style's personnel is the authored base ensemble. Genre-specific hints
-  // supply additional idiomatic colors until the starter reaches eight parts.
-  const candidates = [...stylePalette, ...ensembleIds]
-    .concat(WORLD_INSTRUMENT_HINTS[genreId] ?? [])
+  const ensembleRoleByInstrument = new Map((resolved.arrangement?.ensemble ?? [])
+    .flatMap(e => (e.instrumentIds ?? []).map(id => [id, e.role] as const)));
+  const candidates = [...stylePalette, ...ensembleIds, ...genrePalette]
     .filter((id, i, arr) => INSTRUMENTS_BY_ID[id] && arr.indexOf(id) === i);
-  const targetCount = 8;
-  if (candidates.length < targetCount) {
-    throw new Error(`Genre ${genreId} / style ${resolved.id} provides only ${candidates.length} distinct playable starter instruments; expected ${targetCount}.`);
-  }
+  const targetCount = Math.min(8, Math.max(6, stylePalette.length || candidates.length));
   const hints = candidates.slice(0, targetCount);
 
   const tracks: Voice[] = hints.map((instrumentId, i) => {
     const def = instrument(instrumentId);
     return {
       id: `v${i}`, instrumentId, name: def.name, instrument: def.name,
-      role: roleForInstrument(instrumentId), kind: instrumentId,
-      muted: false, volume: calibratedTrackVolume(genreId, instrumentId, roleForInstrument(instrumentId)), lensIds: [], spotlight: 'auto',
+      role: ensembleRoleByInstrument.get(instrumentId) ?? roleForInstrument(instrumentId), kind: instrumentId,
+      muted: false, volume: calibratedTrackVolume(genreId, instrumentId, ensembleRoleByInstrument.get(instrumentId) ?? roleForInstrument(instrumentId), styleId, resolved.contract.timbreSpace.mixCharacter?.bassForward), lensIds: [],
     };
   });
 
@@ -2012,6 +2017,11 @@ export function makeSheet(
     for (const [i, v] of tracks.entries()) {
       const d: SectionEnergy = clampEnergy(styleEnergy ?? energyOf(r));
       energies[r.id][v.id] = d;
+
+      if (r.activeInstrumentIds && !r.activeInstrumentIds.includes(v.instrumentId)) {
+        arrangement[r.id][v.id] = 'silent';
+        continue;
+      }
 
       const p = suggestPattern(v, genreId, ri * 31 + i * 13 + 7, String(r.kind), taken, d, resolved.id);
       if (p) {

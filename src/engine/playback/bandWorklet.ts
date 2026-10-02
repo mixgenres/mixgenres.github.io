@@ -1,847 +1,405 @@
-import { instrumentHasKey, ENGINE_INSTRUMENT_KEYS } from '../../engine/lookup/instrumentKeys.ts';
-import { POLYPHONY_FALLBACK_RULES } from '../../data/sound/polyphony';
-import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import WebRenderer from '@elemaudio/web-renderer';
-import { el } from '@elemaudio/core';
-import type { LuthierPhysicalParameters } from '../../data/instruments/schema/luthier';
-import type { MasterChain } from '../studio/mixer.ts';
-import { createMasterChain, getRoleGainLinear } from '../studio/mixer.ts';
-import { CulturalAcousticEvent } from './acousticEvent.ts';
-import {
-  defaultTrackParams,
-  styleFlavorForGenre,
-  modelForInstrument,
-  makeupGainFor,
-  renderTrack,
-  renderMaster,
-  midiToFreq,
-  type TrackParams,
-  type VoiceState,
-} from './elementaryEngine.ts';
-
-import { resolveDialect, performanceModeForContext } from '../band/genreDialect.ts';
-import { resolveRenderGesture } from './renderGesture.ts';
-import { contractForGenre } from '../../engine/style/contracts';
-import { resolveStyle } from '../../engine/style';
-import type { AudioSignal } from './instrumentTypes.ts';
-import { spotlightGain } from '../band/spotlight.ts';
-
-interface RendererNodeEntry {
-  props: Record<string, unknown>;
-}
+import { createMasterChain, type MasterChain } from '../studio/mixer';
+import { renderMixBuses, midiToFreq, type TrackParams } from './elementaryEngine';
+import { resolveTrackGain } from './trackSound';
+import { resolvePlaybackMix } from '../studio/masterSettings';
+import type { Performance } from '../band/performanceData';
+import type { PreparedProgram } from './preparedGraph';
+import { preparePlaybackGraphAsync, type PreparedPlaybackGraph, type LiveTrack, type LiveVoice } from './preparedPlayback';
+export { getPolyphonyForTrack } from './preparedPlayback';
+import { applyPhysicalController, controllerStateKey } from './performancePlan';
 
 interface RendererDelegate {
   clear(): void;
-  nodeMap: Map<number, RendererNodeEntry>;
+  nodeMap: Map<number, { props: Record<string, unknown> }>;
   setProperty(hash: number, property: string, value: number): void;
   commitUpdates(): void;
-  getPackedInstructions(): unknown[];
+  getPackedInstructions(): { length: number };
 }
-
-interface RendererInternals {
-  _delegate?: RendererDelegate;
-  _sendMessage(instructions: unknown): Promise<unknown>;
-}
-
-export function getPolyphonyForTrack(instrumentId: string, role?: string): number {
-  const idLower = (instrumentId || '').toLowerCase();
-  const def = INSTRUMENTS_BY_ID[instrumentId] || INSTRUMENTS_BY_ID[idLower];
-  if (typeof def?.polyphony === 'number') return def.polyphony;
-  const r = (role || '').toLowerCase();
-  const inst = idLower;
-  if (instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.kit)) return 12;
-  if (instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.percussion)) return 10;
-  if (instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.bass)) return 4;
-  if (instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.winds) || instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.brass) || instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.bowed)) return 4;
-  if (instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.keys) || instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.guitar) || instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.strings) || instrumentHasKey(inst, ENGINE_INSTRUMENT_KEYS.electronic)) return 8;
-  for (const rule of POLYPHONY_FALLBACK_RULES) {
-    if (rule.roles?.includes(r) || rule.instrumentPattern?.test(inst)) return rule.voices;
-  }
-  return 8;
+interface RendererInternals { _delegate?: RendererDelegate; _sendMessage(instructions: unknown): void; }
+export interface PlaybackConfiguration {
+  performance: Performance;
+  instruments: Map<string, string>;
+  roles: Map<string, string>;
+  levels?: Map<string, number>;
+  worldId: string;
+  styleId?: string;
 }
 
 /**
- * Elementary Audio live engine.
- * Natural acoustic/electronic physical model summation with conservative mastering.
+ * UI owns preparation and graph commits. Performance owns only prepared scalar
+ * programs, gates and scheduling. No renderVoice/el graph construction occurs
+ * in the note/controller/transport paths, including loops and voice stealing.
  */
 export class BandWorkletNode {
-  /**
-   * @static
-   */
   public static readonly MAX_POLYPHONY = 32;
-
-  private ctx!: AudioContext;
-  private core!: WebRenderer;
-  private audioNode!: AudioNode;
-  private voiceSeq = 0;
+  private ctx?: AudioContext;
+  private core?: InstanceType<typeof WebRenderer>;
+  private audioNode?: AudioNode;
   private masterChain?: MasterChain;
-
-  // Min-heap ordered by audio time/sequence. Transport feeds a 400 ms lookahead;
-  // sorting that queue on every note was an avoidable main-thread hotspot in dense arrangements.
-  private scheduledEvents: Array<{ atTime: number; seq: number; fn: () => void }> = [];
-  private schedulerTimer: number | null = null;
-  private schedulerSeq = 0;
-
-  public activeWorldId = '';
+  public activeWorldId = 'flamenco';
   public activeStyleId = '';
-
-  private masterVolume = 1.0;
-  private trackParamsMap = new Map<string, TrackParams>();
-  private trackVoicesMap = new Map<string, VoiceState[]>();
-
-  // Tier 4: Live mix state and per-track signal caching
+  private configuration?: PlaybackConfiguration;
+  private configurationKey = '';
+  private preparationRevision = 0;
+  private preparationPending = false;
+  private tracks = new Map<string, LiveTrack>();
   private trackMutedMap = new Map<string, boolean>();
   private trackSoloMap = new Map<string, boolean>();
-  private trackSpotlightMap = new Map<string, string>();
+  private trackControllerGain = new Map<string, { volume: number; expression: number }>();
   private trackVolumes = new Map<string, number>();
   private trackPans = new Map<string, number>();
-  private dirtyTracks = new Set<string>();
-
-  // Real-time parameter updates without dynamic graph reconstruction
-  private paramHashes = new Map<string, number>();
+  private bindings = new Map<string, number>();
+  private appliedValues = new Map<string, number>();
   private pendingParamUpdates: Record<string, number> = {};
   private paramFlushScheduled = false;
-  private isSyncing = false;
-  private pendingSync = false;
+  private timerIds = new Set<ReturnType<typeof setTimeout>>();
+  private generation = 0;
+  private voiceSeq = 0;
+  private renderPending = false;
+  private graphCommit: Promise<void> = Promise.resolve();
+  private disposed = false;
+  private diagnostics = { preparations: 0, graphCommits: 0, parameterBatches: 0, propertyWrites: 0,
+    unpreparedEvents: 0, missingBindings: 0, voices: 0, variants: 0, controls: 0, preparationMs: 0 };
 
-  private getHashForKey(key: string): number {
-    const existing = this.paramHashes.get(key);
-    if (existing !== undefined) return existing;
-    const hash = el.const({ key, value: 0 }).hash;
-    if (hash === undefined) throw new Error(`Unable to allocate parameter hash for ${key}`);
-    this.paramHashes.set(key, hash);
-    return hash;
-  }
+  getDiagnostics() { return { ...this.diagnostics, pendingTimers: this.timerIds.size, tracks: this.tracks.size }; }
 
-  public updateMap(updates: Record<string, number>) {
-    this.applyParamUpdates(updates);
-  }
-
-  private queueParamUpdate(key: string, value: number) {
-    this.pendingParamUpdates[key] = value;
-    if (!this.paramFlushScheduled) {
-      this.paramFlushScheduled = true;
-      if (typeof queueMicrotask !== 'undefined') {
-        queueMicrotask(() => {
-          this.paramFlushScheduled = false;
-          this.flushParamUpdates();
-        });
-      } else {
-        setTimeout(() => {
-          this.paramFlushScheduled = false;
-          this.flushParamUpdates();
-        }, 0);
-      }
+  /** Called from the song/UI effect, with all inputs in a single transaction. */
+  async configure(config: PlaybackConfiguration): Promise<void> {
+    if (this.disposed) throw new Error('Cannot configure a disposed playback engine');
+    const snapshot = { ...config, instruments: new Map(config.instruments), roles: new Map(config.roles), levels: new Map(config.levels) };
+    const key = JSON.stringify([config.worldId, config.styleId ?? '', [...config.instruments], [...config.roles],
+      config.performance.notes, config.performance.ccs]);
+    for (const [id, level] of config.levels ?? []) this.trackVolumes.set(id, level);
+    if (key === this.configurationKey && !this.preparationPending) {
+      this.configuration = snapshot;
+      for (const [id, track] of this.tracks) track.params.volume = this.trackGain(id, track.params);
+      this.updateTrackMuteSoloLevels();
+      await this.graphCommit; return;
     }
+    const request = ++this.preparationRevision;
+    this.preparationPending = true;
+    let prepared: PreparedPlaybackGraph;
+    try {
+      prepared = await preparePlaybackGraphAsync(snapshot, { levels: new Map(this.trackVolumes), pans: new Map(this.trackPans),
+        muted: new Map(this.trackMutedMap), solo: new Map(this.trackSoloMap) });
+    } catch (error) {
+      if (request === this.preparationRevision) this.preparationPending = false;
+      throw error;
+    }
+    if (this.disposed || request !== this.preparationRevision) return;
+    this.preparationPending = false;
+    this.clear(); this.generation++;
+    const worldChanged = this.activeWorldId !== config.worldId || this.activeStyleId !== (config.styleId ?? '');
+    this.activeWorldId = config.worldId; this.activeStyleId = config.styleId ?? '';
+    this.configuration = snapshot; this.configurationKey = key;
+    this.tracks = prepared.tracks; this.bindings = prepared.bindings;
+    this.appliedValues.clear(); this.pendingParamUpdates = {};
+    for (const map of [this.trackVolumes, this.trackPans, this.trackMutedMap, this.trackSoloMap, this.trackControllerGain]) {
+      for (const id of map.keys()) if (!config.instruments.has(id)) map.delete(id);
+    }
+    this.trackControllerGain.clear();
+    this.diagnostics.preparations++;
+    const { variants, voices, controls, preparationMs } = prepared;
+    Object.assign(this.diagnostics, { variants, voices, controls, preparationMs });
+    if (worldChanged && this.masterChain) {
+      const mix = resolvePlaybackMix(this.activeWorldId, this.activeStyleId);
+      if (mix.mixCharacter) this.masterChain.setMixCharacter(mix.mixCharacter, mix.context);
+    }
+    this.commitGraph(); await this.graphCommit;
   }
 
-  public flushParamUpdates() {
-    const keys = Object.keys(this.pendingParamUpdates);
-    if (keys.length === 0) return;
-    const updates = this.pendingParamUpdates;
-    this.pendingParamUpdates = {};
-    this.applyParamUpdates(updates);
-  }
-
-  private applyParamUpdates(updates: Record<string, number>) {
-    const renderer = (this.core as unknown as { _renderer?: RendererInternals })._renderer;
-    if (!renderer || !renderer._delegate) return;
-    const delegate = renderer._delegate;
-
-    delegate.clear();
-    let hasUpdates = false;
-
-    for (const [key, value] of Object.entries(updates)) {
-      const hash = this.getHashForKey(key);
-      if (delegate.nodeMap.has(hash)) {
-        const entry = delegate.nodeMap.get(hash);
-        if (!entry) continue;
-        delegate.setProperty(hash, 'value', value);
-        entry.props['value'] = value;
-        hasUpdates = true;
-      }
-    }
-
-    if (hasUpdates) {
-      delegate.commitUpdates();
-      const instructions = delegate.getPackedInstructions();
-      if (instructions && instructions.length > 0) {
-        if (typeof renderer._sendMessage === 'function') {
-          void renderer._sendMessage(instructions);
-        }
-      }
-    }
-  }
-
-  setWorldAndStyle(worldId: string, styleId?: string) {
-    this.activeWorldId = worldId;
-    this.activeStyleId = styleId || '';
-    this.trackParamsMap.clear();
-    this.dirtyTracks.add('*');
-    if (worldId && this.masterChain) {
-      try {
-        const style = styleId ? resolveStyle({ genreId: worldId, styleId }) : undefined;
-        const contract = contractForGenre(worldId, style);
-        if (contract?.timbreSpace?.mixCharacter) {
-          this.masterChain.setMixCharacter(contract.timbreSpace.mixCharacter, worldId);
-        }
-      } catch {
-        // world not yet defined or invalid id
-      }
-    }
+  private commitGraph() {
+    if (!this.core) return;
+    const mix = resolvePlaybackMix(this.activeWorldId, this.activeStyleId);
+    const signals = [...this.tracks].map(([trackId, t]) => ({ ...t.signal, trackId,
+      instrumentId: t.params.instrumentId, role: this.configuration?.roles.get(trackId) }));
+    const buses = renderMixBuses(signals, mix.masterProfile.lift);
+    const revision = this.generation;
+    this.renderPending = true;
+    this.diagnostics.graphCommits++;
+    // Renderer reconciliation is synchronous; defer control messages until its
+    // worklet acknowledgement, and retain updates that arrived during the commit.
+    this.graphCommit = this.core.render(buses.drums.left, buses.drums.right, buses.sub.left, buses.sub.right, buses.inst.left, buses.inst.right)
+      .then(() => {
+        if (this.disposed || revision !== this.generation) return;
+        this.renderPending = false;
+        this.flushParamUpdates();
+      }).catch((error: unknown) => {
+        if (revision === this.generation) this.renderPending = false;
+        throw error;
+      });
   }
 
   async initialize(context: AudioContext, volume = 1): Promise<AudioNode> {
     this.ctx = context;
-    if (this.ctx.state === 'suspended') {
-      await this.ctx.resume().catch(() => { });
-    }
-
-    // The live renderer must run inside an AudioWorklet. The previous implementation
-    // drove OfflineRenderer through ScriptProcessorNode on the main thread, which made
-    // 512/1024-sample callback stalls audible as chopped attacks, especially in dense
-    // tango/flamenco arrangements. WebRenderer uses Elementary's native WASM processor
-    // with the browser's fixed 128-sample render quantum.
-    const webCore = new WebRenderer();
-    this.audioNode = await webCore.initialize(context, {
-      numberOfInputs: 0,
-      numberOfOutputs: 1,
-      outputChannelCount: [2],
-    }, 8);
-    this.core = webCore;
-
-    if (this.masterChain) {
-      this.masterChain.dispose();
-    }
-    let initialMixChar: import('../../engine/style/contracts').MixCharacter | undefined;
-    if (this.activeWorldId) {
-      try {
-        const style = this.activeStyleId ? resolveStyle({ genreId: this.activeWorldId, styleId: this.activeStyleId }) : undefined;
-        initialMixChar = contractForGenre(this.activeWorldId, style)?.timbreSpace?.mixCharacter;
-      } catch {}
-    }
-    this.masterChain = createMasterChain(context, initialMixChar, this.activeWorldId);
-    // Gate stays OPEN until the transport explicitly closes it (stop/pause), so a
-    // missed 'enable' call can never leave the engine permanently muted.
+    this.core = new WebRenderer();
+    this.audioNode = await this.core.initialize(context, { numberOfInputs: 0, numberOfOutputs: 3, outputChannelCount: [2, 2, 2] });
+    const mix = resolvePlaybackMix(this.activeWorldId, this.activeStyleId);
+    this.masterChain = createMasterChain(context, mix.mixCharacter, mix.context);
+    this.masterChain.setPlaybackEnabled(false);
     this.masterChain.setVolume(volume);
-    this.audioNode.connect(this.masterChain.input);
-
-    this.masterVolume = volume;
-    await this.syncGraph();
+    this.audioNode.connect(this.masterChain.drumBus, 0);
+    this.audioNode.connect(this.masterChain.subBus, 1);
+    this.audioNode.connect(this.masterChain.instBus, 2);
+    this.commitGraph();
+    await this.graphCommit;
     return this.masterChain.output;
   }
 
-  async setVolume(value: number) {
-    this.masterVolume = Math.max(0, Math.min(2, value));
-    this.masterChain?.setVolume(value);
-    await this.syncGraph();
+  // Compatibility entry points for UI integrations. Always use the same atomic plan.
+  setTrackRoles(roles: Map<string, string>) {
+    if (this.configuration) return this.configure({ ...this.configuration, roles });
+  }
+  setWorldAndStyle(worldId: string, styleId = '') {
+    if (this.configuration) return this.configure({ ...this.configuration, worldId, styleId });
+    this.activeWorldId = worldId; this.activeStyleId = styleId;
+  }
+  async prepareTracks(instruments: Map<string, string>) {
+    if (this.configuration) await this.configure({ ...this.configuration, instruments });
+  }
+  async setVolume(value: number) { this.masterChain?.setVolume(value); }
+  setPlaybackEnabled(enabled: boolean) { this.masterChain?.setPlaybackEnabled(enabled); }
+
+  private queueParamUpdate(key: string, value: number) {
+    if (!Number.isFinite(value)) throw new Error(`Non-finite live control: ${key}`);
+    if (!this.bindings.has(key)) { this.diagnostics.missingBindings++; throw new Error(`Unprepared live control: ${key}`); }
+    this.pendingParamUpdates[key] = value;
+    if (!this.paramFlushScheduled) {
+      this.paramFlushScheduled = true;
+      queueMicrotask(() => { this.paramFlushScheduled = false; this.flushParamUpdates(); });
+    }
+  }
+  updateMap(updates: Record<string, number>) {
+    for (const [key, value] of Object.entries(updates)) this.queueParamUpdate(key, value);
+    this.flushParamUpdates();
+  }
+  flushParamUpdates() {
+    if (this.renderPending || !this.core || this.disposed) return;
+    const renderer = (this.core as unknown as { _renderer?: RendererInternals })._renderer;
+    const delegate = renderer?._delegate;
+    if (!delegate) return;
+    const updates = this.pendingParamUpdates;
+    this.pendingParamUpdates = {};
+    delegate.clear();
+    let writes = 0;
+    for (const [key, value] of Object.entries(updates)) {
+      if (this.appliedValues.get(key) === value) continue;
+      const hash = this.bindings.get(key)!;
+      const entry = delegate.nodeMap.get(hash);
+      if (!entry) { this.diagnostics.missingBindings++; throw new Error(`Prepared control was not mounted: ${key}`); }
+      if (entry.props.value !== value) {
+        delegate.setProperty(hash, 'value', value); entry.props.value = value; writes++;
+      }
+      this.appliedValues.set(key, value);
+    }
+    if (writes) {
+      delegate.commitUpdates();
+      const instructions = delegate.getPackedInstructions();
+      if (instructions.length) renderer!._sendMessage(instructions);
+      this.diagnostics.parameterBatches++; this.diagnostics.propertyWrites += writes;
+    }
   }
 
-  setPlaybackEnabled(enabled: boolean) {
-    this.masterChain?.setPlaybackEnabled(enabled);
+  private trackGain(id: string, params: TrackParams) {
+    const cc = this.trackControllerGain.get(id);
+    return resolveTrackGain(params, this.trackVolumes.get(id) ?? 1, cc?.volume, cc?.expression);
   }
-
-  // Live mix methods (Tier 3 -> Tier 4 live parameter update, no graph reconstruction)
-  /**
-   * Authored track volume is a mix scalar, not the final DSP gain.
-   * Keep the live path identical to mp3Export:
-   *   makeupGain × roleGain × authoredTrackVolume.
-   *
-   * Previously this method wrote the UI volume directly into params.volume,
-   * replacing makeupGain and roleGain. That made live playback disagree with
-   * export and could make individual instruments appear missing or wildly hot.
-   */
-  private effectiveTrackVolume(trackId: string, authoredVolume: number): number {
-    const params = this.trackParamsMap.get(trackId);
-    if (!params) return 0;
-    const instrumentId = params.instrumentId || '';
-    const isElectronic = instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.electronic);
-    const baseGain = makeupGainFor(isElectronic ? 9 : params.model, instrumentId);
-    const roleGain = params.roleGain ?? 1;
-    return Math.max(0, Math.min(35, baseGain * roleGain * Math.max(0, Math.min(1.5, authoredVolume))));
+  private effectiveVolume(id: string, volume: number) {
+    return this.trackMutedMap.get(id) || ([...this.trackSoloMap.values()].some(Boolean) && !this.trackSoloMap.get(id)) ? 0 : volume;
   }
-
-  setTrackVolume(trackId: string, volume: number, atTime?: number) {
+  private updateTrackMuteSoloLevels() {
+    for (const [id, track] of this.tracks) this.queueParamUpdate(`track_${id}_vol`, this.effectiveVolume(id, track.params.volume));
+    this.flushParamUpdates();
+  }
+  setTrackVolume(id: string, value: number, atTime?: number) {
     this.schedule(() => {
-      const authored = Math.max(0, Math.min(1.5, volume));
-      this.trackVolumes.set(trackId, authored);
-      const params = this.trackParamsMap.get(trackId);
-      if (params) {
-        params.volume = this.effectiveTrackVolume(trackId, authored);
+      this.trackVolumes.set(id, value);
+      const track = this.tracks.get(id);
+      if (track) track.params.volume = this.trackGain(id, track.params);
+      this.updateTrackMuteSoloLevels();
+    }, atTime);
+  }
+  setTrackMute(id: string, muted: boolean, atTime?: number) {
+    this.schedule(() => { this.trackMutedMap.set(id, muted); this.updateTrackMuteSoloLevels(); }, atTime);
+  }
+  setTrackSolo(id: string, solo: boolean, atTime?: number) {
+    this.schedule(() => { this.trackSoloMap.set(id, solo); this.updateTrackMuteSoloLevels(); }, atTime);
+  }
+  private panVoice(slot: LiveVoice, pan: number) {
+    const combined = Math.max(0, Math.min(1, pan + (slot.profile?.componentPan ?? 0)));
+    this.queueParamUpdate(slot.panL, Math.cos(combined * Math.PI / 2));
+    this.queueParamUpdate(slot.panR, Math.sin(combined * Math.PI / 2));
+  }
+  setTrackPan(id: string, pan: number, atTime?: number) {
+    this.schedule(() => {
+      this.trackPans.set(id, pan);
+      const track = this.tracks.get(id);
+      if (!track) return;
+      track.params.pan = pan;
+      for (const slot of track.voices) this.panVoice(slot, pan);
+    }, atTime);
+  }
+
+  private schedule(fn: () => void, atTime?: number) {
+    if (this.disposed) return;
+    const delay = Math.max(0, (atTime ?? this.ctx?.currentTime ?? 0) - (this.ctx?.currentTime ?? 0));
+    if (delay <= 0.005) { fn(); return; }
+    const revision = this.generation;
+    const id = setTimeout(() => {
+      this.timerIds.delete(id);
+      if (!this.disposed && revision === this.generation) fn();
+    }, delay * 1000);
+    this.timerIds.add(id);
+  }
+  processPendingEvents() { this.flushParamUpdates(); }
+
+  postPreparedNote(trackId: string, profileId: number, noteInstanceId: string, atTime?: number) {
+    this.schedule(() => {
+      const track = this.tracks.get(trackId);
+      const profile = track?.profiles.get(profileId);
+      if (!track || !profile) { this.diagnostics.unpreparedEvents++; throw new Error(`Unprepared note ${trackId}:${profileId}; configure the UI performance first`); }
+      let index = track.voices.findIndex(v => v.state.gate === 0);
+      if (index < 0) {
+        index = track.voices.reduce((best, slot, i, slots) => (slot.state.triggerSeq ?? 0) < (slots[best].state.triggerSeq ?? 0) ? i : best, 0);
+      }
+      const slot = track.voices[index];
+      const program = profile.programs[index].get(controllerStateKey(track.params));
+      if (!program) { this.diagnostics.unpreparedEvents++; throw new Error(`Unprepared controller state for ${trackId}`); }
+      this.deactivate(slot);
+      slot.profile = profile;
+      slot.state = { ...profile.voice, gate: 1, noteInstanceId, triggerSeq: ++this.voiceSeq,
+        baseFrequencyHz: profile.voice.frequencyHz };
+      this.activate(slot, program);
+      this.queueParamUpdate(slot.graph.trigger.key, this.voiceSeq);
+      this.panVoice(slot, track.params.pan);
+    }, atTime);
+  }
+
+  private deactivate(slot: LiveVoice) {
+    this.voiceControl(slot, 'gate', 0);
+    if (slot.program) this.queueParamUpdate(slot.graph.variants[slot.program.variant].select.key, 0);
+  }
+  private activate(slot: LiveVoice, program: PreparedProgram) {
+    const variant = slot.graph.variants[program.variant];
+    program.values.forEach((value, i) => { const control = variant.controls[i]; if (control) this.queueParamUpdate(control.key, value); });
+    slot.program = program;
+    this.voiceControl(slot, 'gate', slot.state.gate);
+    if (slot.state.frequencyHz !== undefined) this.voiceControl(slot, 'freq', slot.state.frequencyHz);
+    this.queueParamUpdate(variant.select.key, 1);
+    this.queueParamUpdate(slot.graph.choice.key, program.variant);
+  }
+  private voiceControl(slot: LiveVoice, suffix: string, value: number) {
+    if (!slot.program) return;
+    const variant = slot.graph.variants[slot.program.variant];
+    for (const [semantic, index] of variant.semanticControls) {
+      if (semantic.endsWith(`_${suffix}`)) {
+        const control = variant.controls[index];
+        if (control) this.queueParamUpdate(control.key, value);
+      }
+    }
+  }
+  postRelease(trackId: string, midi: number, atTime?: number, instance?: string) {
+    this.schedule(() => {
+      for (const slot of this.tracks.get(trackId)?.voices ?? []) {
+        if (slot.state.gate && Math.round(slot.state.note) === Math.round(midi) && (!instance || slot.state.noteInstanceId === instance)) {
+          slot.state.gate = 0; this.voiceControl(slot, 'gate', 0);
+        }
+      }
+    }, atTime);
+  }
+  postCC(trackId: string, cc: number, value: number, atTime?: number) {
+    this.schedule(() => {
+      const track = this.tracks.get(trackId);
+      if (!track) return;
+      const norm = Math.max(0, Math.min(1, value / 127));
+      if (cc === 7 || cc === 11) {
+        const gain = this.trackControllerGain.get(trackId) ?? { volume: 1, expression: 1 };
+        if (cc === 7) gain.volume = norm; else gain.expression = norm;
+        this.trackControllerGain.set(trackId, gain);
+        track.params.volume = this.trackGain(trackId, track.params);
+        this.queueParamUpdate(`track_${trackId}_vol`, this.effectiveVolume(trackId, track.params.volume));
+      } else if (cc === 10) {
+        track.params.pan = norm;
+        for (const slot of track.voices) this.panVoice(slot, norm);
+      } else {
+        const next = { ...track.params };
+        if (!applyPhysicalController(next, cc, value)) return;
+        this.applyPhysicalState(trackId, track, next);
+
+      }
+    }, atTime);
+  }
+  private applyPhysicalState(trackId: string, track: LiveTrack, next: TrackParams) {
+    const key = controllerStateKey(next);
+    const programs = track.voices.map((slot, i) => slot.profile?.programs[i].get(key));
+    if (track.voices.some((slot, i) => slot.profile && !programs[i])) {
+      this.diagnostics.unpreparedEvents++; throw new Error(`Controller state was not prepared by the UI for ${trackId}`);
+    }
+    track.params = next;
+    track.voices.forEach((slot, i) => {
+      const program = programs[i];
+      if (program) { this.deactivate(slot); this.activate(slot, program); }
+    });
+  }
+
+  /** Seek/loop restoration is atomic, so partial controller states never leak. */
+  restoreControllers(controllers: Performance['ccs'], atTime?: number) {
+    this.schedule(() => {
+      this.trackControllerGain.clear();
+      for (const [id, track] of this.tracks) {
+        const next = { ...track.initialParams, pan: this.trackPans.get(id) ?? track.initialParams.pan };
+        const gain = { volume: 1, expression: 1 };
+        for (const cc of controllers) {
+          if (cc.trackId !== id) continue;
+          const norm = Math.max(0, Math.min(1, cc.value / 127));
+          if (cc.cc === 7) gain.volume = norm;
+          else if (cc.cc === 11) gain.expression = norm;
+          else if (cc.cc === 10) next.pan = norm;
+          else applyPhysicalController(next, cc.cc, cc.value);
+        }
+        this.trackControllerGain.set(id, gain);
+        next.volume = this.trackGain(id, next);
+        this.applyPhysicalState(id, track, next);
+        for (const slot of track.voices) this.panVoice(slot, next.pan);
       }
       this.updateTrackMuteSoloLevels();
     }, atTime);
   }
-
-  setTrackMute(trackId: string, muted: boolean, atTime?: number) {
+  postBend(trackId: string, value: number, targetMidi?: number, atTime?: number) {
     this.schedule(() => {
-      this.trackMutedMap.set(trackId, muted);
-      this.updateTrackMuteSoloLevels();
+      const active = this.tracks.get(trackId)?.voices.filter(v => v.state.gate) ?? [];
+      const slot = active.find(v => targetMidi !== undefined && Math.round(v.state.note) === Math.round(targetMidi)) ?? active[0];
+      if (!slot) return;
+      const base = slot.state.baseFrequencyHz ?? slot.state.frequencyHz ?? midiToFreq(slot.state.note);
+      slot.state.frequencyHz = base * Math.pow(2, (((value - 8192) / 8192) * 2) / 12);
+      this.voiceControl(slot, 'freq', slot.state.frequencyHz);
     }, atTime);
   }
-
-  setTrackSolo(trackId: string, solo: boolean, atTime?: number) {
-    this.schedule(() => {
-      this.trackSoloMap.set(trackId, solo);
-      this.updateTrackMuteSoloLevels();
-    }, atTime);
-  }
-
-  private updateTrackMuteSoloLevels() {
-    const hasAnySolo = Array.from(this.trackSoloMap.values()).some(Boolean);
-    const hasSpotlight = Array.from(this.trackSpotlightMap.values()).some(mode => mode === 'on');
-    for (const [trackId, params] of this.trackParamsMap.entries()) {
-      const isMuted = !!this.trackMutedMap.get(trackId);
-      const isSoloed = !!this.trackSoloMap.get(trackId);
-      const isSilenced = isMuted || (hasAnySolo && !isSoloed);
-      const gain = spotlightGain(this.trackSpotlightMap.get(trackId), hasSpotlight);
-      const effectiveVol = isSilenced ? 0 : (params.volume ?? 1) * gain;
-      this.queueParamUpdate(`track_${trackId}_vol`, effectiveVol);
+  softNotesOff() {
+    for (const id of this.timerIds) clearTimeout(id);
+    this.timerIds.clear();
+    for (const track of this.tracks.values()) for (const slot of track.voices) {
+      slot.state.gate = 0; this.voiceControl(slot, 'gate', 0);
     }
     this.flushParamUpdates();
   }
-
-  setTrackPan(trackId: string, pan: number, atTime?: number) {
-    this.schedule(() => {
-      this.trackPans.set(trackId, pan);
-      const params = this.trackParamsMap.get(trackId);
-      if (params) params.pan = pan;
-      const clampedPan = Math.max(0, Math.min(1, pan));
-      const leftGain = Math.cos(clampedPan * Math.PI * 0.5);
-      const rightGain = Math.sin(clampedPan * Math.PI * 0.5);
-      this.queueParamUpdate(`track_${trackId}_panL`, leftGain);
-      this.queueParamUpdate(`track_${trackId}_panR`, rightGain);
-      this.flushParamUpdates();
-    }, atTime);
-  }
-
-  setTrackSpotlight(trackId: string, mode: string, atTime?: number) {
-    this.schedule(() => {
-      this.trackSpotlightMap.set(trackId, mode);
-      this.updateTrackMuteSoloLevels();
-    }, atTime);
-  }
-
-  private markDirty(trackId: string) {
-    this.dirtyTracks.add(trackId);
-  }
-
-  /**
-   * Pre-allocates all tracks in the track params and voices maps with right-sized polyphony.
-   * Calls syncGraph ONLY if an instrument was added, removed, or changed.
-   */
-  async prepareTracks(instrumentsMap: Map<string, string>) {
-    let graphDirty = false;
-
-    // Clean up tracks that were removed from the song
-    for (const trackId of Array.from(this.trackParamsMap.keys())) {
-      if (!instrumentsMap.has(trackId)) {
-        this.trackParamsMap.delete(trackId);
-        this.trackVoicesMap.delete(trackId);
-        this.dirtyTracks.delete(trackId);
-        graphDirty = true;
-      }
-    }
-
-    for (const [trackId, instrumentId] of instrumentsMap.entries()) {
-      const existing = this.trackParamsMap.get(trackId);
-      if (!existing || existing.instrumentId !== instrumentId) {
-        const instDef = INSTRUMENTS_BY_ID[instrumentId];
-        const instLuthier: LuthierPhysicalParameters = instDef?.luthierPhysics ?? {
-          category: 'electro_acoustic_algorithmic',
-          materialDensity: 0.5,
-          tension: 0.5,
-          bodyResonanceVolume: 10,
-          decayTimeFactor: 2,
-          harmonicRichness: 0.7,
-        };
-        const model = instDef?.elementaryModel ?? modelForInstrument(instrumentId);
-        const params = defaultTrackParams(instrumentId, instLuthier, model);
-        params.performanceMode = performanceModeForContext(this.activeWorldId, this.activeStyleId);
-        if (this.activeWorldId) {
-          params.genreId = this.activeWorldId;
-        }
-        if (this.activeStyleId) params.styleId = this.activeStyleId;
-        params.styleFlavor = styleFlavorForGenre(this.activeWorldId, this.activeStyleId);
-        const dialect = resolveDialect(instrumentId, this.activeWorldId, this.activeStyleId);
-        if (dialect) {
-          params.instrumentDialectId = dialect.id;
-      params.dialect = params.genreId;
-          params.performanceMode = dialect.performanceMode;
-          if (dialect.pluckPositionOverride !== undefined) params.pluckPosition = dialect.pluckPositionOverride;
-          if (dialect.bowPressureOverride !== undefined) params.bowPressure = dialect.bowPressureOverride;
-          if (dialect.contactPointOverride !== undefined) params.contact = dialect.contactPointOverride;
-          if (dialect.brightnessMultiplier !== undefined) params.brightness *= dialect.brightnessMultiplier;
-          if (dialect.decayMultiplier !== undefined) params.decay *= dialect.decayMultiplier;
-          if (dialect.bodyMultiplier !== undefined) params.body *= dialect.bodyMultiplier;
-          if (dialect.bendGlideMs !== undefined) params.bendGlideMs = dialect.bendGlideMs;
-        }
-        const role = instDef?.acousticProfile?.role || 'comp';
-        params.roleGain = getRoleGainLinear(role, this.activeWorldId || 'default', instrumentId);
-        params.volume *= params.roleGain;
-        // Preserve the authored track scalar when static track parameters are rebuilt,
-        // while retaining the instrument makeup and role gain in the effective signal.
-        if (this.trackVolumes.has(trackId)) {
-          params.volume = Math.max(0, Math.min(35,
-            makeupGainFor(instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.electronic) ? 9 : model, instrumentId)
-            * (params.roleGain ?? 1)
-            * this.trackVolumes.get(trackId)!,
-          ));
-        }
-        if (this.trackPans.has(trackId)) params.pan = this.trackPans.get(trackId)!;
-        this.trackParamsMap.set(trackId, params);
-
-        const voiceCount = getPolyphonyForTrack(instrumentId);
-        const preallocatedVoices: VoiceState[] = [];
-        for (let vIdx = 0; vIdx < voiceCount; vIdx++) {
-          preallocatedVoices.push({
-            id: `live-${trackId}-v${vIdx}`,
-            gate: 0,
-            frequencyHz: 440,
-            note: 60,
-            velocity: 0,
-          });
-        }
-        this.trackVoicesMap.set(trackId, preallocatedVoices);
-        this.markDirty(trackId);
-        graphDirty = true;
-      }
-    }
-    if (graphDirty) {
-      await this.syncGraph();
+  clear() {
+    this.softNotesOff();
+    this.trackControllerGain.clear();
+    for (const [id, track] of this.tracks) {
+      const pan = track.params.pan;
+      track.params = { ...track.initialParams, pan };
+      track.params.volume = this.trackGain(id, track.params);
     }
     this.updateTrackMuteSoloLevels();
   }
 
-  private async syncGraph(): Promise<void> {
-    if (!this.core) return;
-    if (this.isSyncing) {
-      this.pendingSync = true;
-      return;
-    }
-    this.isSyncing = true;
-    try {
-      do {
-        this.pendingSync = false;
-        const trackSignals: {
-          left: AudioSignal;
-          right: AudioSignal;
-          trackId?: string;
-          instrumentId?: string;
-          role?: string;
-        }[] = [];
-
-        for (const [trackId, params] of this.trackParamsMap.entries()) {
-          const voices = this.trackVoicesMap.get(trackId) ?? [];
-          const sig = renderTrack(trackId, voices, params);
-          trackSignals.push({
-            left: sig.left,
-            right: sig.right,
-            trackId,
-            instrumentId: params.instrumentId,
-            role: INSTRUMENTS_BY_ID[params.instrumentId ?? '']?.acousticProfile?.role,
-          });
-        }
-
-        let mixCharacter: import('../../engine/style/contracts').MixCharacter | undefined;
-        if (this.activeWorldId) {
-          try {
-            const style = this.activeStyleId
-              ? resolveStyle({ genreId: this.activeWorldId, styleId: this.activeStyleId })
-              : undefined;
-            mixCharacter = contractForGenre(this.activeWorldId, style)?.timbreSpace?.mixCharacter;
-          } catch {
-            /* ignore missing contract */
-          }
-        }
-
-        const masterSig = renderMaster(trackSignals, {
-          highPass: 20,
-          volume: this.masterVolume,
-          mixCharacter,
-          genreId: this.activeWorldId,
-          bpm: 120,
-        });
-
-        await this.core.render(masterSig.left, masterSig.right);
-      } while (this.pendingSync);
-    } catch (err: unknown) {
-      console.warn('[Elementary] Render error:', err);
-    } finally {
-      this.isSyncing = false;
-      this.dirtyTracks.clear();
-    }
-  }
-
-  /**
-   * One lookahead scheduler for all live control events.
-   *
-   * The old implementation created one setTimeout per note-on/note-off/CC/bend.
-   * A dense tango or flamenco phrase can queue thousands of browser timers inside
-   * the 400 ms transport horizon. Keep the event clock here, but service it with
-   * one timer and let the AudioWorklet own the actual audio rendering.
-   */
-  private schedule(fn: () => void, atTime?: number) {
-    const now = this.ctx?.currentTime ?? 0;
-    const target = atTime ?? now;
-    if (target <= now + 0.005) {
-      fn();
-      return;
-    }
-    this.heapPush({ atTime: target, seq: ++this.schedulerSeq, fn });
-    this.armScheduler();
-  }
-
-  private eventBefore(a: { atTime: number; seq: number }, b: { atTime: number; seq: number }): boolean {
-    return a.atTime < b.atTime || (a.atTime === b.atTime && a.seq < b.seq);
-  }
-
-  private heapPush(event: { atTime: number; seq: number; fn: () => void }) {
-    const heap = this.scheduledEvents;
-    let i = heap.length;
-    heap.push(event);
-    while (i > 0) {
-      const parent = (i - 1) >> 1;
-      if (this.eventBefore(heap[parent], heap[i])) break;
-      [heap[parent], heap[i]] = [heap[i], heap[parent]];
-      i = parent;
-    }
-  }
-
-  private heapPop(): { atTime: number; seq: number; fn: () => void } | undefined {
-    const heap = this.scheduledEvents;
-    if (!heap.length) return undefined;
-    const root = heap[0];
-    const last = heap.pop()!;
-    if (heap.length) {
-      heap[0] = last;
-      let i = 0;
-      while (true) {
-        const left = i * 2 + 1;
-        const right = left + 1;
-        let smallest = i;
-        if (left < heap.length && this.eventBefore(heap[left], heap[smallest])) smallest = left;
-        if (right < heap.length && this.eventBefore(heap[right], heap[smallest])) smallest = right;
-        if (smallest === i) break;
-        [heap[i], heap[smallest]] = [heap[smallest], heap[i]];
-        i = smallest;
-      }
-    }
-    return root;
-  }
-
-  private armScheduler() {
-    if (this.schedulerTimer !== null || this.scheduledEvents.length === 0) return;
-    const now = this.ctx?.currentTime ?? 0;
-    const next = this.scheduledEvents[0];
-    const delayMs = Math.max(1, (next.atTime - now) * 1000);
-    this.schedulerTimer = window.setTimeout(() => {
-      this.schedulerTimer = null;
-      this.drainScheduledEvents();
-      this.armScheduler();
-    }, Math.min(delayMs, 25));
-  }
-
-  private drainScheduledEvents() {
-    const now = this.ctx?.currentTime ?? 0;
-    while (this.scheduledEvents.length && this.scheduledEvents[0].atTime <= now + 0.005) {
-      this.heapPop()!.fn();
-    }
-  }
-
-  processPendingEvents() {
-    this.flushParamUpdates();
-  }
-
-  postEvent(event: CulturalAcousticEvent, atTime?: number) {
-    if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume().catch(() => { });
-    }
-    this.schedule(() => {
-      this.executeNoteOn(event);
-    }, atTime);
-  }
-
-  private executeNoteOn(event: CulturalAcousticEvent) {
-    const trackId = event.trackId;
-    const instrumentId = event.luthierObjectId || trackId;
-    if (!this.trackParamsMap.has(trackId)) {
-      const instDef = INSTRUMENTS_BY_ID[instrumentId];
-      const luthier = (event.luthier ?? instDef?.luthierPhysics ?? {
-        category: 'electro_acoustic_algorithmic',
-        materialDensity: 0.5,
-        tension: 0.5,
-        bodyResonanceVolume: 10,
-        decayTimeFactor: 2,
-        harmonicRichness: 0.7,
-      }) as LuthierPhysicalParameters;
-      const model = modelForInstrument(instrumentId);
-      const p = defaultTrackParams(instrumentId, luthier, model);
-      const role = instDef?.acousticProfile?.role || 'comp';
-      p.roleGain = getRoleGainLinear(role, this.activeWorldId || 'default', instrumentId);
-      p.volume *= p.roleGain;
-      if (this.trackVolumes.has(trackId)) {
-        const baseGain = makeupGainFor(instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.electronic) ? 9 : model, instrumentId);
-        p.volume = Math.max(0, Math.min(35, baseGain * (p.roleGain ?? 1) * this.trackVolumes.get(trackId)!));
-      }
-      if (this.trackPans.has(trackId)) p.pan = this.trackPans.get(trackId)!;
-      if (this.activeWorldId) p.genreId = this.activeWorldId;
-      if (this.activeStyleId) p.styleId = this.activeStyleId;
-      p.styleFlavor = styleFlavorForGenre(this.activeWorldId, this.activeStyleId);
-      p.performanceMode = performanceModeForContext(this.activeWorldId, this.activeStyleId);
-      const dialect = resolveDialect(instrumentId, this.activeWorldId, this.activeStyleId);
-      if (dialect) {
-        p.instrumentDialectId = dialect.id;
-        p.dialect = p.genreId;
-        p.performanceMode = dialect.performanceMode;
-        if (dialect.pluckPositionOverride !== undefined) p.pluckPosition = dialect.pluckPositionOverride;
-        if (dialect.bowPressureOverride !== undefined) p.bowPressure = dialect.bowPressureOverride;
-        if (dialect.contactPointOverride !== undefined) p.contact = dialect.contactPointOverride;
-        if (dialect.brightnessMultiplier !== undefined) p.brightness *= dialect.brightnessMultiplier;
-        if (dialect.decayMultiplier !== undefined) p.decay *= dialect.decayMultiplier;
-        if (dialect.bodyMultiplier !== undefined) p.body *= dialect.bodyMultiplier;
-        if (dialect.bendGlideMs !== undefined) p.bendGlideMs = dialect.bendGlideMs;
-      }
-      this.trackParamsMap.set(trackId, p);
-    }
-
-    const params = this.trackParamsMap.get(trackId)!;
-    const noteMidi = event.midi ?? 60;
-    const rendered = resolveRenderGesture(instrumentId, event.gestureCode ?? 0);
-    const hitGainMultiplier = rendered.gainMultiplier;
-
-    // Normalize event performance controls once per note. Keep velocity in the
-    // renderer's canonical 0..1 range and fold gesture gain into the note-local
-    // excitation rather than changing the track's static volume.
-    const velRaw = Number.isFinite(event.velocity) ? event.velocity! : 102;
-    const velScaled = Math.max(0, Math.min(1, (velRaw / 127) * hitGainMultiplier));
-    const articulationNorm = Math.max(0, Math.min(1, rendered.articulationNorm));
-
-    // Track volume is controlled by mixer/CC updates, never by note-on.
-
-    let voices = this.trackVoicesMap.get(trackId);
-    if (!voices) {
-      voices = [];
-      const voiceCount = getPolyphonyForTrack(instrumentId);
-      for (let vIdx = 0; vIdx < voiceCount; vIdx++) {
-        voices.push({
-          id: `live-${trackId}-v${vIdx}`,
-          gate: 0,
-          frequencyHz: 440,
-          note: 60,
-          velocity: 0,
-        });
-      }
-      this.trackVoicesMap.set(trackId, voices);
-    }
-
-    // Round-robin voice allocation: prefer idle voice, then oldest triggered voice
-    let bestVIdx = 0;
-    let oldestSeq = Infinity;
-    for (let i = 0; i < voices.length; i++) {
-      const v = voices[i];
-      if (v.gate === 0) {
-        bestVIdx = i;
-        break;
-      }
-      const seq = v.triggerSeq ?? 0;
-      if (seq < oldestSeq) {
-        oldestSeq = seq;
-        bestVIdx = i;
-      }
-    }
-
-    const voice = voices[bestVIdx];
-    voice.note = noteMidi;
-    voice.noteInstanceId = event.noteInstanceId;
-    const targetFreq = Math.max(20, event.frequencyHz ?? midiToFreq(noteMidi));
-    voice.frequencyHz = targetFreq;
-    voice.baseFrequencyHz = targetFreq;
-    voice.triggerSeq = ++this.voiceSeq;
-    voice.velocity = velScaled;
-    voice.gate = 1;
-
-    voice.action = rendered.action;
-    voice.articulation = rendered.articulationNorm;
-    voice.bellowsDirectionCode = event.bellowsDirectionCode;
-    voice.bandoneonButtonId = event.bandoneonButtonId;
-    voice.bandoneonButtonIndex = event.bandoneonButtonIndex;
-    voice.bandoneonSideCode = event.bandoneonSideCode;
-    voice.action = rendered.action;
-    voice.excitationType = rendered.excitationType || params.excitationType;
-
-    voice.attack = event.attack;
-    voice.decay = event.decay;
-    voice.sustain = event.sustain;
-    voice.release = event.release;
-
-    // Apply parameter updates to static DSP nodes directly without core.render()
-    const pk = `track_${trackId}_voice_${bestVIdx}`;
-    this.queueParamUpdate(`${pk}_freq`, targetFreq);
-    this.queueParamUpdate(`${pk}_vel`, velScaled * (1 - 0.58 * params.mute));
-    this.queueParamUpdate(`${pk}_gate`, 1);
-    this.queueParamUpdate(`${pk}_art`, articulationNorm);
-
-    const velBoost = 0.55 + 0.6 * Math.max(0, Math.min(1, velScaled));
-    const b = Math.max(0, Math.min(1, params.brightness * velBoost));
-    const decayTime = Math.max(0.05, params.decay);
-    const isMuted = params.mute > 0.4;
-    const attack = event.attack !== undefined ? event.attack : (0.0008 + (1 - b) * 0.01);
-    const release = event.release !== undefined ? event.release : (isMuted ? 0.012 : 0.03 + decayTime * 0.25);
-    const sustain = event.sustain !== undefined ? event.sustain : (isMuted ? 0.05 : 0.35 + 0.3 * params.body);
-    const envDecay = event.decay !== undefined ? event.decay : (decayTime * (isMuted ? 0.1 : 0.3));
-
-    this.queueParamUpdate(`${pk}_attack`, attack);
-    this.queueParamUpdate(`${pk}_decay`, envDecay);
-    this.queueParamUpdate(`${pk}_sustain`, sustain);
-    this.queueParamUpdate(`${pk}_release`, release);
-    this.queueParamUpdate(`track_${trackId}_vol`, params.volume);
-  }
-
-  postRelease(trackId: string, midi: number, atTime?: number, noteInstanceId?: string) {
-    this.schedule(() => {
-      this.executeNoteOff(trackId, midi, noteInstanceId);
-    }, atTime);
-  }
-
-  private executeNoteOff(trackId: string, midi: number, noteInstanceId?: string) {
-    const voices = this.trackVoicesMap.get(trackId);
-    if (!voices) return;
-
-    const roundedMidi = Math.round(midi);
-    for (let vIdx = 0; vIdx < voices.length; vIdx++) {
-      const v = voices[vIdx];
-      const idMatches = noteInstanceId ? String(v.noteInstanceId ?? '') === noteInstanceId : true;
-      if (idMatches && (v.note === midi || Math.round(v.note) === roundedMidi) && v.gate === 1) {
-        v.gate = 0;
-        if (v.baseFrequencyHz) {
-          v.frequencyHz = v.baseFrequencyHz;
-        }
-        const pk = `track_${trackId}_voice_${vIdx}`;
-        this.queueParamUpdate(`${pk}_gate`, 0);
-      }
-    }
-  }
-
-  postCC(trackId: string, cc: number, value: number, atTime?: number) {
-    this.schedule(() => {
-      this.executeCC(trackId, cc, value);
-    }, atTime);
-  }
-
-  private executeCC(trackId: string, cc: number, value: number) {
-    const params = this.trackParamsMap.get(trackId);
-    if (!params) return;
-
-    const norm = value / 127;
-    if (cc === 7 || cc === 11) {
-      const isElectronic = instrumentHasKey(params.instrumentId || '', ENGINE_INSTRUMENT_KEYS.electronic);
-      const effectiveModelForGain = isElectronic ? 9 : params.model;
-      const baseGain = makeupGainFor(effectiveModelForGain, params.instrumentId);
-      const authoredTrackVolume = this.trackVolumes.get(trackId) ?? 1;
-      params.volume = Math.max(0.01, Math.min(
-        35,
-        norm * baseGain * (params.roleGain ?? 1) * authoredTrackVolume,
-      ));
-      this.queueParamUpdate(`track_${trackId}_vol`, params.volume);
-    } else if (cc === 10) {
-      params.pan = norm;
-      const clampedPan = Math.max(0, Math.min(1, params.pan));
-      const leftGain = Math.cos(clampedPan * Math.PI * 0.5);
-      const rightGain = Math.sin(clampedPan * Math.PI * 0.5);
-      this.queueParamUpdate(`track_${trackId}_panL`, leftGain);
-      this.queueParamUpdate(`track_${trackId}_panR`, rightGain);
-    } else if (cc === 16) {
-      params.articulation = norm;
-      const voices = this.trackVoicesMap.get(trackId) ?? [];
-      for (let vIdx = 0; vIdx < voices.length; vIdx++) {
-        this.queueParamUpdate(`track_${trackId}_voice_${vIdx}_art`, norm);
-      }
-    } else if (cc === 74) params.brightness = norm;
-    else if (cc === 17) params.contact = norm;
-    else if (cc === 18) params.mute = norm;
-    else if (cc === 19) params.bowPressure = norm;
-    else if (cc === 20) params.bowVelocity = norm;
-    else if (cc === 21) params.bodyTap = norm;
-    else if (cc === 22) params.pluckPosition = norm;
-    else if (cc === 24) params.pressure = norm;
-    else if (cc === 25) params.resonance = norm;
-  }
-
-  postBend(trackId: string, value: number, targetMidi?: number, atTime?: number) {
-    this.schedule(() => {
-      this.executeBend(trackId, value, targetMidi);
-    }, atTime);
-  }
-
-  private executeBend(trackId: string, value: number, targetMidi?: number) {
-    const voices = this.trackVoicesMap.get(trackId);
-    if (!voices || voices.length === 0) return;
-
-    const activeVoices: { voice: VoiceState; index: number }[] = [];
-    for (let i = 0; i < voices.length; i++) {
-      if (voices[i].gate === 1) activeVoices.push({ voice: voices[i], index: i });
-    }
-    if (activeVoices.length === 0) return;
-
-    let target = activeVoices[0];
-    if (targetMidi !== undefined) {
-      const rounded = Math.round(targetMidi);
-      const found = activeVoices.find(item => item.voice.note === targetMidi || Math.round(item.voice.note) === rounded);
-      if (found) target = found;
-    }
-
-    const semitones = ((value - 8192) / 8192) * 2;
-    const bendRatio = Math.pow(2, semitones / 12);
-    const base = target.voice.baseFrequencyHz ?? target.voice.frequencyHz ?? midiToFreq(target.voice.note);
-    target.voice.baseFrequencyHz = base;
-    const targetFreq = base * bendRatio;
-    target.voice.frequencyHz = targetFreq;
-
-    this.queueParamUpdate(`track_${trackId}_voice_${target.index}_freq`, targetFreq);
-  }
-
-  softNotesOff() {
-    this.scheduledEvents.length = 0;
-    if (this.schedulerTimer !== null) {
-      window.clearTimeout(this.schedulerTimer);
-      this.schedulerTimer = null;
-    }
-
-    for (const [trackId, voices] of this.trackVoicesMap.entries()) {
-      for (let vIdx = 0; vIdx < voices.length; vIdx++) {
-        if (voices[vIdx].gate === 1) {
-          voices[vIdx].gate = 0;
-          this.queueParamUpdate(`track_${trackId}_voice_${vIdx}_gate`, 0);
-        }
-      }
-    }
-    this.flushParamUpdates();
-  }
-
-  clear() {
-    this.scheduledEvents.length = 0;
-    if (this.schedulerTimer !== null) {
-      window.clearTimeout(this.schedulerTimer);
-      this.schedulerTimer = null;
-    }
-
-    for (const [trackId, voices] of this.trackVoicesMap.entries()) {
-      for (let vIdx = 0; vIdx < voices.length; vIdx++) {
-        voices[vIdx].gate = 0;
-        this.queueParamUpdate(`track_${trackId}_voice_${vIdx}_gate`, 0);
-      }
-    }
-    this.flushParamUpdates();
-  }
-
   dispose() {
-    this.clear();
-    this.trackVoicesMap.clear();
-    this.trackParamsMap.clear();
-    this.dirtyTracks.clear();
-    try { this.audioNode?.disconnect(); } catch { }
-    this.masterChain?.dispose();
-    this.masterChain = undefined;
+    this.clear(); this.disposed = true; this.generation++; this.preparationRevision++;
+    this.tracks.clear(); this.bindings.clear(); this.appliedValues.clear(); this.pendingParamUpdates = {};
+    this.trackVolumes.clear(); this.trackPans.clear(); this.trackMutedMap.clear(); this.trackSoloMap.clear(); this.trackControllerGain.clear();
+    this.configuration = undefined;
+    this.audioNode?.disconnect(); this.masterChain?.dispose(); this.masterChain = undefined;
   }
 }

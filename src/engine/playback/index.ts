@@ -8,6 +8,8 @@ export {
   setMasterVolume,
   setTrackInstruments,
   setActiveWorld,
+  setPlaybackConfiguration,
+  getPlaybackDiagnostics,
 } from './liveAudio.ts';
 export { renderPerformanceToMp3, type Mp3RenderOptions } from './mp3Export.ts';
 export { Transport } from './transport.ts';

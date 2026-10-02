@@ -1,4 +1,4 @@
-import type { DrumHitType, GuestLens, SectionEnergy, SpotlightMode, Role, InstrumentKind, SectionType, FormIntensity, InteractionRelationship, Scope, UserPatternPreference, PatternPerformanceDetails } from '../data/schema';
+import type { DrumHitType, GuestLens, SectionEnergy, Role, InstrumentKind, SectionType, FormIntensity, InteractionRelationship, Scope, UserPatternPreference, PatternPerformanceDetails } from '../data/schema';
 
 
 
@@ -42,13 +42,14 @@ export interface Track {
   muted: boolean;
   solo?: boolean;
   /** Manual foreground hint. Automatic presence and dynamics come from Section Energy. */
-  spotlight?: SpotlightMode;
   volume: number;
   pan?: number;
   lensIds: string[];
 }
 
 export interface Region {
+  /** Explicit musical solo; independent of this part’s display name and form label. */
+  solo?: import('../data/styles/schema').SoloAssignment;
   id: string;
   name: string;
   start: number;
@@ -57,6 +58,10 @@ export interface Region {
   bars?: number;
   /** section BPM override */
   bpm?: number;
+  /** Arrangement entrance schedule authored by the selected style. */
+  activeInstrumentIds?: string[];
+  leadInstrumentId?: string;
+  tempoFeel?: string;
   /** the progression this section cycles through */
   chords?: string[];
   /** Song-form role. Genre-specific form names live in the form registry, not in pattern category. */
@@ -129,7 +134,6 @@ export interface Song {
   styleOverrides?: Record<string, unknown>;
   phrasePatternCache?: Record<string, string>;
 }
-
 
 
 

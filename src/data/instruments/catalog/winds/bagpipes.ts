@@ -4,6 +4,7 @@ export const bagpipes: InstrumentDef = {
   id: "bagpipes",
   name: "Great Highland Bagpipes",
   family: "winds",
+  pipeSynthesis: { droneRatios: [0.5, 1, 1.5, 2] },
   voicing: "single",
   elementaryModel: 16,
   makeupGain: 0.300,
@@ -21,7 +22,7 @@ export const bagpipes: InstrumentDef = {
     ring: 6
   },
   luthierPhysics: {
-    category: "aerophone_lip_tension",
+    category: "aerophone_bagpipe_reed",
     materialDensity: 0.7,
     tension: 0.8,
     bodyResonanceVolume: 5,

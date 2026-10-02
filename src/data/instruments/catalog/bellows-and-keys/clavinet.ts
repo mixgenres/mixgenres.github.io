@@ -6,7 +6,7 @@ export const clavinet: InstrumentDef = {
   family: "bellows-and-keys",
   voicing: "chord",
   elementaryModel: 19,
-  makeupGain: 8.545,
+  makeupGain: 30.000,
   polyphony: 8,
   acousticProfile: {
     sustain: "short",

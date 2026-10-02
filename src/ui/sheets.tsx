@@ -1,3 +1,4 @@
+import { EXPORT_FORMATS, type ExportFormat } from '../export/formats';
 import React, { useMemo, useState, useEffect } from 'react';
 import { Sheet, Chip } from './Sheet';
 import { Glyph } from './Glyph';
@@ -145,56 +146,10 @@ export function InstrumentSheet({
   };
 
   return (
-    <Sheet open={open} onClose={onClose} title={title}>
+    <Sheet open={open} onClose={onClose} title={title} kicker={sectionKind ? `This part · ${sectionKind}` : undefined}>
 
-      {onPickWithScope && (
-        <div className="mb-3.5 flex gap-2">
-          <Chip
-            active={addScope === 'section'}
-            onClick={() => setAddScope('section')}
-          >
-            {sectionKind ? `This part (${sectionKind})` : 'This part'}
-          </Chip>
-          <Chip
-            active={addScope === 'song'}
-            onClick={() => setAddScope('song')}
-          >
-            Whole song
-          </Chip>
-        </div>
-      )}
-
-      <input
-        value={q}
-        onChange={e => setQ(e.target.value)}
-        placeholder="Search instruments…"
-        className="w-full mb-4"
-        style={{
-          background: 'transparent', padding: '6px 0', fontSize: 15,
-          borderBottom: '1px solid color-mix(in srgb, var(--ink) 25%, transparent)', outline: 'none',
-        }}
-      />
-      {(hits ? [{ family: null, items: hits }] : FAMILY_ORDER.map(f => ({
-        family: f, items: alphabetical(INSTRUMENT_CATALOG.filter(i => i.family === f)),
-      }))).map(({ family, items }) => (
-        items.length ? (
-          <div key={family ?? 'search'} className="mb-5">
-            {family && <div className="micro mb-2">{FAMILY_LABELS[family]}</div>}
-            <div className="flex flex-wrap gap-1.5">
-              {items.map(i => (
-                <Chip key={i.id} active={i.id === current} onClick={() => handlePick(i.id)}>
-                  {i.name}
-                </Chip>
-              ))}
-            </div>
-          </div>
-        ) : null
-      ))}
-      {hits && hits.length === 0 && (
-        <div className="micro mb-5">No instruments match “{q.trim()}”.</div>
-      )}
       {(onRemove || onSilenceAll || onPlayAll || onSilencePart || onPlayPart) && (
-        <div className="flex items-center justify-between flex-wrap gap-2 pt-3.5" style={{ borderTop: '1px solid color-mix(in srgb, var(--ink) 18%, transparent)' }}>
+        <div className="flex items-center justify-between flex-wrap gap-2 py-3.5 mb-4" style={{ borderTop: '1px solid color-mix(in srgb, var(--ink) 18%, transparent)' }}>
           {(onSilencePart || onSilenceAll || onPlayPart || onPlayAll) && (
             <div className="flex items-center gap-2 flex-wrap">
               <span className="text-xs opacity-75">silent in</span>
@@ -206,6 +161,7 @@ export function InstrumentSheet({
                       if (isSilentPart && !isSilentAll) {
                         onPlayPart?.();
                       } else {
+                        if (isSilentAll) onPlayAll?.();
                         onSilencePart?.();
                       }
                       onClose();
@@ -254,6 +210,53 @@ export function InstrumentSheet({
           )}
         </div>
       )}
+      {onPickWithScope && (
+        <div className="mb-3.5 flex gap-2">
+          <Chip
+            active={addScope === 'section'}
+            onClick={() => setAddScope('section')}
+          >
+            {sectionKind ? `This part (${sectionKind})` : 'This part'}
+          </Chip>
+          <Chip
+            active={addScope === 'song'}
+            onClick={() => setAddScope('song')}
+          >
+            Whole song
+          </Chip>
+        </div>
+      )}
+
+      <input
+        value={q}
+        onChange={e => setQ(e.target.value)}
+        placeholder="Search instruments…"
+        className="w-full mb-4"
+        style={{
+          background: 'transparent', padding: '6px 0', fontSize: 15,
+          borderBottom: '1px solid color-mix(in srgb, var(--ink) 25%, transparent)', outline: 'none',
+        }}
+      />
+      {(hits ? [{ family: null, items: hits }] : FAMILY_ORDER.map(f => ({
+        family: f, items: alphabetical(INSTRUMENT_CATALOG.filter(i => i.family === f)),
+      }))).map(({ family, items }) => (
+        items.length ? (
+          <div key={family ?? 'search'} className="mb-5">
+            {family && <div className="micro mb-2">{FAMILY_LABELS[family]}</div>}
+            <div className="flex flex-wrap gap-1.5">
+              {items.map(i => (
+                <Chip key={i.id} active={i.id === current} onClick={() => handlePick(i.id)}>
+                  {i.name}
+                </Chip>
+              ))}
+            </div>
+          </div>
+        ) : null
+      ))}
+      {hits && hits.length === 0 && (
+        <div className="micro mb-5">No instruments match “{q.trim()}”.</div>
+      )}
+
     </Sheet>
   );
 }
@@ -1300,20 +1303,21 @@ export function TempoSheet({
 
 
 /* ========================================================================== */
-/*  Download Sheet — export song and stems to MP3                             */
+/*  Download Sheet — audio, performance, notation and DAW interchange                             */
 /* ========================================================================== */
 
 export function DownloadSheet({
   open,
   onClose,
   song,
-  onBounceMp3,
+  onExport,
 }: {
   open: boolean;
   onClose: () => void;
   song: any;
-  onBounceMp3?: (selectedTrackIds: string[]) => void;
+  onExport?: (selectedTrackIds: string[], format: ExportFormat) => void;
 }) {
+  const [format, setFormat] = useState<ExportFormat>('mp3');
   const [selectedTracks, setSelectedTracks] = useState<Record<string, boolean>>({});
 
   // Initialize selected tracks when dialog opens or tracks change
@@ -1338,16 +1342,24 @@ export function DownloadSheet({
   };
 
   const handleDownload = () => {
-    if (onBounceMp3) {
+    if (onExport) {
       const selectedTrackIds = song.tracks
         .filter((t: any) => selectedTracks[t.id])
         .map((t: any) => t.id);
-      onBounceMp3(selectedTrackIds);
+      onExport(selectedTrackIds, format);
     }
   };
 
   return (
     <Sheet open={open} onClose={onClose} title="Download">
+      <div className="mb-5">
+        <label htmlFor="export-format" className="micro font-semibold block mb-2">Export format</label>
+        <select id="export-format" value={format} onChange={e => setFormat(e.target.value as ExportFormat)} className="w-full p-3 border border-black/20 rounded bg-transparent">
+          {EXPORT_FORMATS.map(option => <option key={option.id} value={option.id}>{option.label}</option>)}
+        </select>
+        <p className="text-xs opacity-70 mt-2 leading-relaxed">{EXPORT_FORMATS.find(option => option.id === format)?.description}</p>
+        <p className="text-xs opacity-60 mt-2">Selected parts are included regardless of playback mute or solo. Scores use quantized timing; MIDI and JSON retain performance timing.</p>
+      </div>
 
       <div className="mb-5">
         <div className="flex items-center justify-between mb-2">
@@ -1375,6 +1387,7 @@ export function DownloadSheet({
             >
               None
             </button>
+            {['bass', 'percussion'].map(role => <button key={role} onClick={() => setSelectedTracks(Object.fromEntries(song.tracks.map((t: any) => [t.id, role === 'bass' ? t.role === 'bass' : ['drums', 'percussion'].includes(t.role)])))} className="btn-pill cursor-pointer" style={{ background: 'transparent', color: 'var(--ink)' }}>{role === 'bass' ? 'Bass' : 'Percussion'}</button>)}
           </div>
         </div>
 
@@ -1432,7 +1445,7 @@ export function DownloadSheet({
             color: 'var(--ground)',
           }}
         >
-          Download MP3
+          Download {format === 'mp3' ? 'MP3' : format === 'wav' ? 'WAV' : 'export'}
         </button>
       </div>
     </Sheet>
@@ -1638,4 +1651,21 @@ export function RandomizeSheet({
       </div>
     </Sheet>
   );
+}
+
+export function EnergySheet({ open, onClose, energy, sectionKind, onPick }: {
+  open: boolean; onClose: () => void; energy: SectionEnergy; sectionKind: string;
+  onPick: (energy: SectionEnergy) => void;
+}) {
+  return <Sheet open={open} onClose={onClose} title="Energy" kicker={`This part · ${sectionKind}`}>
+    <p className="text-xs opacity-65 mb-4">How much this part of the song is working.</p>
+    <div className="flex flex-col gap-2">
+      {([1, 2, 3, 4, 5] as const).map(value => <button key={value} type="button"
+        aria-pressed={energy === value} onClick={() => { onPick(value); onClose(); }}
+        className="flex items-center gap-3 p-3 text-left text-sm cursor-pointer rounded-sm hover:opacity-80"
+        style={{ background: energy === value ? 'var(--ink)' : 'transparent', color: energy === value ? 'var(--ground)' : 'var(--ink)' }}>
+        <span className="font-mono opacity-60">{value}</span><span className="font-semibold">{ENERGY_LABELS[value]}</span>
+      </button>)}
+    </div>
+  </Sheet>;
 }

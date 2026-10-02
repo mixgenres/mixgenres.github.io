@@ -16,7 +16,7 @@ export default class RhodesModule implements InstrumentModule {
       params,
       action
     } = ctx;
-    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''}`);
+    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const gd = ctx.genreDialect;
     const genre = gd.id;
     if (isKizomba) {
@@ -34,7 +34,7 @@ export default class RhodesModule implements InstrumentModule {
       const fundamental = el.sin(el.mul(2 * Math.PI, p));
       const tine = el.sin(el.mul(4 * Math.PI, p));
       const bark = el.mul((RHODES_TRANSIENT_GENRE_PATTERN.test(genre) ? RHODES_GENRE_RESPONSE.funkDiscoHouseTransient : RHODES_GENRE_RESPONSE.defaultTransient) * gd.transient, el.mul(el.highpass(1700, 1.0, el.noise()), el.adsr(0.00025, 0.006, 0, 0.002, gateSignal)));
-      const env = el.adsr(0.001, 0.075 + decayTime * 0.07 * gd.decay, RHODES_SUSTAIN_GENRE_PATTERN.test(genre) ? RHODES_GENRE_RESPONSE.jazzSoulSustain : RHODES_GENRE_RESPONSE.defaultSustain, 0.045, gateSignal);
+      const env = el.adsr(0.001, 0.075 + decayTime * 0.07 * gd.decay, RHODES_SUSTAIN_GENRE_PATTERN.test(genre) ? RHODES_GENRE_RESPONSE.jazzSoulGospelSustain : RHODES_GENRE_RESPONSE.defaultSustain, 0.045, gateSignal);
       return el.lowpass(5800 + b * 5200 * gd.brightness, 1.0, el.mul(env, el.add(el.mul(0.80, fundamental), el.add(el.mul(0.14, tine), bark))));
     }
 

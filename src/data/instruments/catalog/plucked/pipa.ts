@@ -9,7 +9,7 @@ export const pipa: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "nail",
   elementaryModel: 0,
-  makeupGain: 8.500,
+  makeupGain: 30.000,
   polyphony: 4,
   note: "Chinese four-string pear-shaped vertical lute with 24-30 frets, capable of delicate lyrical poetry, lightning five-finger wheel tremolos, and explosive martial clatter",
   acousticProfile: {

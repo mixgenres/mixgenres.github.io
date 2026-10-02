@@ -1,7 +1,7 @@
 /** Genre keyed playback response rules. Arrays preserve the original first-match precedence. */
 export const UPRIGHT_BASS_DECAY_RULES = [
   { pattern: /funk|disco|ska|reggaeton|house|drum-and-bass|uk-bass/, value: 0.28 },
-  { pattern: /jazz|blues|swing|soul/, value: 0.62 },
+  { pattern: /jazz|blues|swing|gospel|soul/, value: 0.62 },
   { pattern: /reggae|afrobeats|zouk|kizomba/, value: 0.50 },
 ] as const;
 export const UPRIGHT_BASS_CUTOFF_RULES = [

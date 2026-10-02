@@ -1,10 +1,10 @@
 import type { GenreWorld } from '../../schema';
-import { TIMBA_WORLD_WORLD } from './meta';
-import { TIMBA_WORLD_CULTURE } from './meta';
-import { TIMBA_WORLD_ROLES } from './meta';
-import { TIMBA_WORLD_FEEL } from './meta';
-import { TIMBA_WORLD_STYLES } from './styles';
-import { TIMBA_WORLD_PATTERNS } from './patterns';
+import { TIMBA_WORLD_WORLD } from './world';
+import { TIMBA_WORLD_CULTURE } from './culture';
+import { TIMBA_WORLD_ROLES } from './roles';
+import { TIMBA_WORLD_FEEL } from './feel';
+import { TIMBA_WORLD_STYLES } from './styles/index';
+import { TIMBA_WORLD_PATTERNS } from './patterns/index';
 
 export const TIMBA_WORLD: GenreWorld = {
   ...TIMBA_WORLD_WORLD,

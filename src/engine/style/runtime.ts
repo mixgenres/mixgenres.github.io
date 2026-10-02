@@ -190,6 +190,8 @@ export class StyleRuntime {
     styleDecisions: number;
     influenceDecisions: number;
     hardcodedDecisions: number;
+    defaultDecisions: number;
+    userDecisions: number;
     coveragePct: number;
     byAspect: Record<Aspect, { style: number; influence: number; hardcoded: number }>;
     fallbackPaths: string[];
@@ -197,6 +199,8 @@ export class StyleRuntime {
     let style = 0;
     let influence = 0;
     let hardcoded = 0;
+    let defaults = 0;
+    let user = 0;
     const fallbackPaths: string[] = [];
     const byAspect: Record<Aspect, { style: number; influence: number; hardcoded: number }> = {
       form: { style: 0, influence: 0, hardcoded: 0 },
@@ -216,6 +220,10 @@ export class StyleRuntime {
       } else if (item.source === 'influence') {
         influence++;
         if (byAspect[aspect]) byAspect[aspect].influence++;
+      } else if (item.source === 'default') {
+        defaults++;
+      } else if (item.source === 'user') {
+        user++;
       } else {
         hardcoded++;
         fallbackPaths.push(item.path);
@@ -223,14 +231,16 @@ export class StyleRuntime {
       }
     }
 
-    const total = style + influence + hardcoded;
-    const coveragePct = total > 0 ? Math.round(((style + influence) / total) * 100) : 100;
+    const total = style + influence + hardcoded + defaults + user;
+    const coveragePct = total > 0 ? Math.round(((style + influence + user) / total) * 100) : 100;
 
     return {
       totalDecisions: total,
       styleDecisions: style,
       influenceDecisions: influence,
       hardcodedDecisions: hardcoded,
+      defaultDecisions: defaults,
+      userDecisions: user,
       coveragePct,
       byAspect,
       fallbackPaths: Array.from(new Set(fallbackPaths)),

@@ -4,6 +4,7 @@ export const tuba: InstrumentDef = {
   id: "tuba",
   name: "Tuba",
   family: "brass",
+  brassSynthesis: { cutoffScale: 0.78 },
   octave: -12,
   voicing: "single",
   elementaryModel: 3,

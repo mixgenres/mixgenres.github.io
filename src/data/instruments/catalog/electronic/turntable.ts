@@ -6,7 +6,7 @@ export const turntable: InstrumentDef = {
   family: "electronic",
   voicing: "single",
   elementaryModel: 9,
-  makeupGain: 17.209,
+  makeupGain: 0.548,
   polyphony: 4,
   note: "DJ scratch / sampled texture",
   acousticProfile: {

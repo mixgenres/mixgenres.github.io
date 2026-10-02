@@ -13,6 +13,7 @@ export interface CulturalRules {
 
 export const PREVIEW_MODAL_INSTRUMENTS = ['guqin','guzheng','pipa','erhu','dizi','xiao','jinghu','bagpipes','uilleann-pipes','tin-whistle','low-whistle','celtic-harp','fiddle','concertina','bodhran','bones'];
 export const PREVIEW_FIXED_INSTRUMENTS = ['sho','ryuteki','hichiriki'];
+export const PREVIEW_CLUSTER_INSTRUMENTS = ['sho'];
 export const FIXED_CULTURAL_PITCH_INTERVALS = [0,2,4,7,9];
 export const MODAL_CULTURAL_PITCH_INTERVALS = [0,2,4,5,7,9,10];
 export const CELTIC_OPEN_HARMONY_INTERVALS = [0, 7, 12];

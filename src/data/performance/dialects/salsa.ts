@@ -3,7 +3,7 @@ import type { InstrumentDialect } from '../../styles/contracts';
 export const ENTRY_0: [string, InstrumentDialect] = ["congas:salsa", {
     id: 'congas:salsa',
     instrumentId: 'congas',
-    name: 'Congas',
+    name: 'Congas (Salsa/Timba)',
     family: 'percussion',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'open',
@@ -15,7 +15,7 @@ export const ENTRY_0: [string, InstrumentDialect] = ["congas:salsa", {
 export const ENTRY_2: [string, InstrumentDialect] = ["trumpet:salsa", {
     id: 'trumpet:salsa',
     instrumentId: 'trumpet',
-    name: 'Trumpet',
+    name: 'Trumpet (Salsa Mambo)',
     family: 'brass',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'marcato',
@@ -27,7 +27,7 @@ export const ENTRY_2: [string, InstrumentDialect] = ["trumpet:salsa", {
 export const ENTRY_4: [string, InstrumentDialect] = ["upright-bass:salsa-tumbao", {
     id: 'upright-bass:salsa-tumbao',
     instrumentId: 'upright-bass',
-    name: 'Upright Bass',
+    name: 'Upright Bass (Salsa Tumbao)',
     family: 'bass',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'pizzicato',

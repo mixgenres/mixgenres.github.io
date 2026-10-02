@@ -2,7 +2,7 @@ import type { InstrumentDef } from '../../schema/instrument-def';
 
 export const castanets: InstrumentDef = {
   id: "castanets",
-  name: "Castanuelas",
+  name: "Castanets",
   family: "metal-and-wood",
   drum: {
     low: 76,
@@ -11,7 +11,7 @@ export const castanets: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 18,
-  makeupGain: 0.342,
+  makeupGain: 16.475,
   polyphony: 8,
   note: "Authentic paired Spanish hardwood castañuelas (granadillo/ebony) with hembra (high right hand) for cascading carretilla rolls and macho (low left hand) for single downbeat golpes",
   acousticProfile: {

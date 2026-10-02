@@ -1,3 +1,5 @@
+import { DEFAULT_STYLE_MASTER_PROFILE } from '../../data/sound/mix/masterProfiles';
+import { suggestedPaletteForGenre } from '../lookup/theory';
 import type { SongStyle } from '../../data/styles/schema';
 import type { GenreStyleDefinition } from '../../data/schema';
 import { GENRE_NAMES, GENRE_WORLDS } from '../../data/genres';
@@ -8,7 +10,6 @@ import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { contractForGenre } from '../../engine/style/contracts';
 import { energyForFormIntensity } from '../sheet/sectionEnergy.ts';
 import type { SectionEnergy } from '../../data/schema';
-import { STYLE_FORM_TEMPLATES } from '../../data/styles/styleFormTemplates';
 
 function shortText(value: string): string {
   return String(value ?? '').replace(/\s+/g, ' ').trim().split(' ').slice(0, 6).join(' ');
@@ -21,30 +22,57 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, index: numbe
   // starter ensemble: a song style must inherit only its own musical personnel.
   const instruments = Array.from(new Set(seed.characteristicInstruments
     .filter((id: string) => INSTRUMENTS_BY_ID[id])));
-  const formSteps = STYLE_FORM_TEMPLATES[seed.id];
-  if (!formSteps?.length) {
-    throw new Error(`Style ${seed.id} has no authored form template.`);
-  }
-  const ensemble = instruments.map(instrumentId => ({
-    role: INSTRUMENTS_BY_ID[instrumentId]?.acousticProfile?.role ?? 'support',
-    instrumentIds: [instrumentId],
-    priority: Math.max(1, instruments.length - instruments.indexOf(instrumentId)),
-  }));
-  const spotlightRoles = Array.from(new Set(ensemble.map(part => String(part.role))));
-  const defaultSpotlights = Object.fromEntries(formSteps.map(step => [
-    step.kind,
-    step.intensity === 'peak' || step.intensity === 'high'
-      ? spotlightRoles
-      : spotlightRoles.filter(role => /lead|melody|voice|drum|percussion|bass/i.test(role)),
-  ]));
-  const pocket = Math.max(0, Math.min(1, 0.5 + contract.groove.lean / 100));
-  const lift = Math.max(0, Math.min(1, 0.5 + (contract.groove.dynamicRange - 1) / 2));
+  const leadInstrumentId = seed.arrangementSections?.find(section => section.leadInstrumentId)?.leadInstrumentId
+    ?? instruments.find(id => INSTRUMENTS_BY_ID[id]?.acousticProfile?.role === 'lead')
+    ?? instruments[0];
+  const foundation = instruments.filter(id => {
+    const def = INSTRUMENTS_BY_ID[id];
+    return def?.voicing === 'bass' || def?.voicing === 'unpitched';
+  });
+  const harmony = instruments.filter(id => !foundation.includes(id) && id !== leadInstrumentId);
+  const formSteps = seed.arrangementSections?.length ? seed.arrangementSections.map(section => ({
+    key: section.key, label: section.label, kind: section.kind, bars: section.bars,
+    intensity: section.intensity, instrumentIds: section.instruments,
+    leadInstrumentId: section.leadInstrumentId, bpm: section.bpm, tempoFeel: section.tempoFeel,
+  })) : contract.form.map((name, i) => {
+    const lower = name.toLowerCase();
+    const solo = /solo|variación|variation|improvisation/.test(lower);
+    const sparse = /intro|break|bridge|breakdown|coda|outro|ending|tag/.test(lower);
+    const active = solo
+      ? [...foundation, ...(leadInstrumentId ? [leadInstrumentId] : []), ...harmony.slice(0, 1)]
+      : sparse
+        ? [...foundation, ...(leadInstrumentId ? [leadInstrumentId] : []), ...harmony.slice(0, 1)]
+        : lower.includes('chorus') || lower.includes('drop') || lower.includes('mambo') || lower.includes('coro')
+          ? instruments
+          : [...foundation, ...(leadInstrumentId ? [leadInstrumentId] : []), ...harmony.slice(0, 2)];
+    return {
+      key: `${lower.replace(/[^a-z0-9]+/g,'-')}-${i}`,
+      label: name,
+      kind: name,
+      bars: i === 0 ? 4 : 8,
+      intensity: i === contract.form.length - 1 ? 'low' : (i >= contract.form.length - 2 ? 'high' : 'medium') as 'low'|'medium'|'high'|'peak',
+      instrumentIds: Array.from(new Set(active)),
+      ...(leadInstrumentId ? { leadInstrumentId } : {}),
+    };
+  });
+  const ensemble = instruments.map((instrumentId: string, i: number) => {
+    const def = INSTRUMENTS_BY_ID[instrumentId];
+    const authoredRole = def?.acousticProfile?.role;
+    const role = instrumentId === leadInstrumentId ? 'lead'
+      : def?.voicing === 'bass' || authoredRole === 'bass' ? 'bass'
+      : def?.voicing === 'unpitched' || authoredRole === 'perc' || authoredRole === 'percussion' ? 'percussion'
+      : def?.family === 'voice' ? 'voice'
+      : authoredRole === 'lead' ? 'lead'
+      : authoredRole === 'melody' ? 'melody'
+      : def?.voicing === 'single' ? 'melody' : 'harmony';
+    return { role, instrumentIds:[instrumentId], priority:10-i };
+  });
   return {
     id: seed.id,
     sourceProvenance: {
-      'form.sectionVocab':'style', 'form.templates':'style', 'form.defaultSpotlights':'style',
+      'form.sectionVocab':seed.arrangementSections?.length ? 'style' : 'genre', 'form.templates':seed.arrangementSections?.length ? 'style' : 'genre',
       'form.preferredMeters': seed.preferredMeters?.length ? 'style' : 'genre',
-      'harmony.model':'genre', 'harmony.modePolicy':'genre', 'harmony.progressionTemplates': Object.keys(seed.sectionProgressions ?? {}).length ? 'style' : 'hardcoded',
+      'harmony.model':'genre', 'harmony.modePolicy':'genre', 'harmony.progressionTemplates': Object.keys(seed.sectionProgressions ?? {}).length ? 'style' : 'genre',
       'harmony.chordVocabulary':'genre', 'harmony.harmonicRhythm':'genre', 'harmony.bassMotion':'genre',
       'harmony.sectionProgressions': Object.keys(seed.sectionProgressions ?? {}).length ? 'style' : 'hardcoded',
       'rhythm.meter': seed.preferredMeters?.length ? 'style' : 'genre',
@@ -53,36 +81,28 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, index: numbe
       'rhythm.swingPercentage': seed.grooveMechanics?.swingPercentage !== undefined ? 'style' : 'genre',
       'rhythm.anticipationOffsetSteps': seed.grooveMechanics?.anticipationOffsetSteps !== undefined ? 'style' : 'hardcoded',
       'rhythm.microtimingFeel': seed.grooveMechanics?.microtimingFeel ? 'style' : 'genre',
-      'rhythm.humanizeJitterMs':'genre', 'melody.scaleMode':'genre',
-      'sound.instrumentPalette':'style',
-      'arrangement.ensemble':'style',
-      'sound.masterProfile.pocket':'genre', 'sound.masterProfile.lift':'genre',
+      'rhythm.humanizeJitterMs':'genre', 'melody.scaleMode':seed.scaleMode ? 'style' : 'genre', 'arrangement.ensemble':'style',
+      'arrangement.energyMappings':'genre', 'sound.instrumentPalette':'style',
+      'sound.masterProfile.pocket':'default', 'sound.masterProfile.lift':'default',
     },
     name: seed.name,
     genres:[worldId], primaryGenre:worldId,
     kind:index === 0 ? 'canonical' : 'form', canonical:index === 0,
     summary:shortText(seed.description || `${seed.name} ${GENRE_NAMES[worldId]}`),
-    aliases: seed.keySubstyles,
-    danceTags: seed.danceTags,
-    referenceArtists: seed.referenceArtists,
-    referenceTracks: seed.referenceTracks,
-    techniques: seed.techniques,
-
-    signatureTraits:Array.from(new Set([...(seed.coreConcepts ?? []), ...(seed.techniques ?? []), ...(seed.keySubstyles ?? []), ...(seed.rhythmicGrammar ?? [seed.name])])).slice(0, 8),
+    signatureTraits:(seed.coreConcepts ?? seed.rhythmicGrammar ?? [seed.name]).slice(0, 6),
     era:seed.era, region:seed.origin,
     form:{
-      sectionVocab:formSteps.map(step => step.kind),
+      sectionVocab:[...contract.form],
       templates:[{w:1, value:formSteps}],
-      defaultSpotlights,
       preferredMeters:[seed.preferredMeters?.[0] ?? contract.meter],
     },
     harmony:{
       model:contract.harmonyModel,
-      modePolicy: contract.pitchModel.toLowerCase().replace(/\s+/g, '-'),
+      modePolicy: seed.scaleMode ?? contract.pitchModel.toLowerCase().replace(/\s+/g, '-'),
       progressionTemplates:Array.from(new Map(
-        Object.values(seed.sectionProgressions ?? {}).filter((value): value is string[] => Array.isArray(value)).map(value => [JSON.stringify(value), value] as const)
+        (Object.keys(seed.sectionProgressions ?? {}).length ? Object.values(seed.sectionProgressions!) : suggestedPaletteForGenre(worldId).map(cell => cell.chords as string[])).filter((value): value is string[] => Array.isArray(value)).map(value => [JSON.stringify(value), value] as const)
       ).values()).map(value => ({w:1, value})),
-      chordVocabulary:Array.from(new Set([...contract.harmonyVocabulary, ...(seed.prominentChords ?? []), ...(Object.values(seed.sectionProgressions ?? {}).flatMap(x => x).map(String))])),
+      chordVocabulary:Array.from(new Set([...contract.harmonyVocabulary, ...(Object.values(seed.sectionProgressions ?? {}).flatMap(x => x).map(String))])),
       harmonicRhythm:contract.harmonicRhythm,
       bassMotion:contract.bass.style,
       sectionProgressions: seed.sectionProgressions ?? {},
@@ -107,7 +127,8 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, index: numbe
       },
     },
     melody:{
-      scaleMode:contract.pitchModel,
+      scaleMode:seed.scaleMode ?? contract.pitchModel,
+      phraseLengthsBars:[4,8],
       chordToneTargeting:contract.harmonyModel === 'functional',
       callAndResponse:/call|answer|coro|response/i.test(contract.ensemble.lead ?? '') || /call|response/i.test(contract.ensemble.interaction ?? ''),
       ornamentVocabulary:Object.values(contract.articulationGrammar).flat(),
@@ -119,7 +140,7 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, index: numbe
     },
     sound:{
       instrumentPalette:instruments.map(value => ({value: String(value), w: 1})),
-      masterProfile:{ pocket, lift },
+      masterProfile:{...DEFAULT_STYLE_MASTER_PROFILE},
     },
     patterns:{require:[],preferred:[],allowed:[],avoid:[]}, gestures:{}, rules:{
       require:contract.timelineRequired ? [{tag:'timeline-lock',description:contract.timeline}] : [],
@@ -135,21 +156,8 @@ for (const world of GENRE_WORLDS) {
   }
 }
 
-function validateAuthoredTangoHarmony(stylesToCheck: SongStyle[]): void {
-  for (const style of stylesToCheck.filter(s => s.primaryGenre === 'tango')) {
-    const sections = Object.entries(style.harmony?.sectionProgressions ?? {}).filter(([, chords]) => chords?.length);
-    if (!sections.length) throw new Error(`Tango style ${style.id} has no authored section progressions.`);
-    const unique = new Set(sections.map(([, chords]) => JSON.stringify(chords)));
-    if (unique.size === 1 && sections.length > 1) {
-      throw new Error(`Tango style ${style.id} uses one identical harmony cell for every named section; author section-specific progressions or inheritance before runtime.`);
-    }
-  }
-}
-
 let styles = buildCuratedStyles(baseStyles, ALL_PATTERNS);
-validateAuthoredTangoHarmony(styles);
 styles = styles.map((style, index) => applyStyleDialect(style, index));
-validateAuthoredTangoHarmony(styles);
 const curatedPatterns = assembleStylePatterns(styles, ALL_PATTERNS);
 
 // The runtime registry exposes shared pattern definitions through genre views.

@@ -110,6 +110,18 @@ export const dspOverride: InstrumentDSPOverride = {
         "call-and-response dynamic balance"
       ]
     },
+    "gospel": {
+      "excitationBias": 0,
+      "brightness": 1.0,
+      "damping": 0,
+      "attack": 1.0,
+      "articulation": [
+        "blended vocal harmony vowel shaping",
+        "tight onset consonant synchronization",
+        "subtle vibrato warm tails",
+        "call-and-response dynamic balance"
+      ]
+    },
     "r&b": {
       "excitationBias": 0,
       "brightness": 1.0,

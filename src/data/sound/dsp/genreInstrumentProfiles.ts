@@ -90,7 +90,7 @@ export const SYNTH_GENRE_RESPONSE = {
 };
 export const RHODES_GENRE_RESPONSE = {
   funkDiscoHouseTransient: 0.13, defaultTransient: 0.08,
-  jazzSoulSustain: 0.58, defaultSustain: 0.44,
+  jazzSoulGospelSustain: 0.58, defaultSustain: 0.44,
 };
 export const GUITAR_GENRE_RESPONSE: Record<string, { short: boolean; decay: number; noiseFrequency: number; pluckGain: number; bodyFrequency: number; bodyGain: number; targetDecayBase: number; targetDecayTime: number }> = {
   bachata: { short: true, decay: 0.009, noiseFrequency: 2050, pluckGain: 0.64, bodyFrequency: 135, bodyGain: 0.10, targetDecayBase: 0.16, targetDecayTime: 0.42 },
@@ -102,23 +102,3 @@ export const GUITAR_GENRE_RESPONSE: Record<string, { short: boolean; decay: numb
 };
 export const TANGO_ACOUSTIC_GUITAR_RESPONSE = { targetDecayBase: 0.22, targetDecayTime: 0.45, targetDecayBrightness: 0.85 };
 export const TANGO_ELECTRONIC_DRUM_RESPONSE = { pitchAttack: 0.055, pitchFall: -0.46, bodyGain: 0.90, bodyDecay: 0.14, clickGain: 0.13, clickFrequency: 1800, drive: 1.25, driveMultiplier: 0.8 };
-
-/**
- * Scraper stroke model (guacharaca, guiro, cabasa, dikanza), read by ShakerModule.
- * One stroke is a short run of ridge ticks dragged across a rasp, so the ridge rate must sit
- * well above ~75 Hz (below that the ear hears discrete pulses: a typewriter/ratchet).
- * Velocity lengthens the stroke and speeds the ridges, so the accent profile alternates
- * long bright downstrokes with short soft upstrokes.
- */
-export const SCRAPER_STROKE_RESPONSE = {
-  attackSec: 0.007, releaseSec: 0.018,
-  strokeBaseSec: 0.028, strokeVelSec: 0.057, strokeJitter: 0.15,
-  strokeScaleBase: 0.6, strokeScaleMin: 0.6, strokeScaleMax: 1.5,
-  ridgeRateBaseHz: 95, ridgeRateVelHz: 45, ridgeRateJitter: 0.14,
-  ridgeSlowFloor: 0.55, ridgeBeatRatio: 1.37, ridgeMixA: 0.6, ridgeMixB: 0.4,
-  ridgeLowpassHz: 1400, ridgeLowpassQ: 0.7, ridgeFloor: 0.4, ridgeDepth: 0.6,
-  raspCentreBaseHz: 2600, raspCentreBodyHz: 1800, raspCentreBrightHz: 900, raspCentreJitter: 0.08, raspQ: 1.3,
-  dikanzaKizombaCentreHz: 1700, dikanzaKizombaBodyHz: 1800,
-  knockHz: 1150, knockQ: 3.0, knockDecaySec: 0.014, knockReleaseSec: 0.008, knockGain: 0.25,
-  levelBase: 0.92, levelJitter: 0.08, outputGain: 2.2,
-} as const;

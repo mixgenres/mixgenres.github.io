@@ -21,27 +21,38 @@ export interface Plate {
 }
 
 const CURATED_PLATES: Record<string, Omit<Plate, 'short'>> = {
+  'afrobeats': { ground: '#E9E2CE', tone: '#E9E2CE', ink: '#1F1F1F', signal: '#5A6B7A' },
   'bachata': { ground: '#E8D8DB', tone: '#E8D8DB', ink: '#1F1F1F', signal: '#5A6B7A' },
   'blues': { ground: '#CBD6DD', tone: '#CBD6DD', ink: '#1F1F1F', signal: '#5A6B7A' },
+  'brazilian': { ground: '#E6E1C8', tone: '#E6E1C8', ink: '#1F1F1F', signal: '#5A6B7A' },
   'country': { ground: '#E8D3B8', tone: '#E8D3B8', ink: '#1F1F1F', signal: '#5A6B7A' },
+  'cumbia': { ground: '#E3E0C8', tone: '#E3E0C8', ink: '#1F1F1F', signal: '#5A6B7A' },
+  'disco': { ground: '#E9DCC6', tone: '#E9DCC6', ink: '#1F1F1F', signal: '#5A6B7A' },
   'electronic': { ground: '#C3E7EB', tone: '#C3E7EB', ink: '#1F1F1F', signal: '#5A6B7A' },
   'folk': { ground: '#DFE2C7', tone: '#DFE2C7', ink: '#1F1F1F', signal: '#5A6B7A' },
   'funk': { ground: '#E9DCC6', tone: '#E9DCC6', ink: '#1F1F1F', signal: '#5A6B7A' },
+  'gospel': { ground: '#E3DCCB', tone: '#E3DCCB', ink: '#1F1F1F', signal: '#5A6B7A' },
   'hip-hop': { ground: '#D9D9D9', tone: '#D9D9D9', ink: '#1F1F1F', signal: '#5A6B7A' },
+  'house': { ground: '#CDE5EB', tone: '#CDE5EB', ink: '#1F1F1F', signal: '#5A6B7A' },
   'jazz': { ground: '#D8DDE1', tone: '#D8DDE1', ink: '#1F1F1F', signal: '#5A6B7A' },
   'kizomba': { ground: '#D4DEC9', tone: '#D4DEC9', ink: '#1F1F1F', signal: '#5A6B7A' },
   'tango': { ground: '#DAD6E1', tone: '#DAD6E1', ink: '#1F1F1F', signal: '#5A6B7A' },
   'flamenco': { ground: '#E5D2C1', tone: '#E5D2C1', ink: '#1F1F1F', signal: '#5A6B7A' },
   'metal': { ground: '#CFCFD3', tone: '#CFCFD3', ink: '#1F1F1F', signal: '#5A6B7A' },
   'r-and-b': { ground: '#E3D8D0', tone: '#E3D8D0', ink: '#1F1F1F', signal: '#5A6B7A' },
+  'reggae': { ground: '#DEE4CA', tone: '#DEE4CA', ink: '#1F1F1F', signal: '#5A6B7A' },
   'reggaeton': { ground: '#E7D8C8', tone: '#E7D8C8', ink: '#1F1F1F', signal: '#5A6B7A' },
   'rock': { ground: '#DEDAD2', tone: '#DEDAD2', ink: '#1F1F1F', signal: '#5A6B7A' },
   'salsa': { ground: '#E7DCBE', tone: '#E7DCBE', ink: '#1F1F1F', signal: '#5A6B7A' },
+  'ska': { ground: '#DCDFE1', tone: '#DCDFE1', ink: '#1F1F1F', signal: '#5A6B7A' },
+  'soul': { ground: '#E9DCC6', tone: '#E9DCC6', ink: '#1F1F1F', signal: '#5A6B7A' },
   'swing': { ground: '#EFD1D7', tone: '#EFD1D7', ink: '#1F1F1F', signal: '#5A6B7A' },
   'timba': { ground: '#D8DFDA', tone: '#D8DFDA', ink: '#1F1F1F', signal: '#5A6B7A' },
   'zouk': { ground: '#D9E4D7', tone: '#D9E4D7', ink: '#1F1F1F', signal: '#5A6B7A' },
   'drum-and-bass': { ground: '#C3E7EB', tone: '#C3E7EB', ink: '#1F1F1F', signal: '#5A6B7A' },
+  'industrial': { ground: '#D4D4D6', tone: '#D4D4D6', ink: '#1F1F1F', signal: '#5A6B7A' },
   'punk-hardcore': { ground: '#DEDAD2', tone: '#DEDAD2', ink: '#1F1F1F', signal: '#5A6B7A' },
+  'uk-bass': { ground: '#CDE5EB', tone: '#CDE5EB', ink: '#1F1F1F', signal: '#5A6B7A' }
 };
 
 function hexToRgb(hex: string) {

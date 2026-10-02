@@ -3,7 +3,7 @@ import type { InstrumentDialect } from '../../styles/contracts';
 export const ENTRY_11: [string, InstrumentDialect] = ["oud:arabic-maqam", {
     id: 'oud:arabic-maqam',
     instrumentId: 'oud',
-    name: 'Oud',
+    name: 'Arabic Oud (Fretless Microtonal Lute)',
     family: 'guitar',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'pluck',
@@ -18,7 +18,7 @@ export const ENTRY_11: [string, InstrumentDialect] = ["oud:arabic-maqam", {
 export const ENTRY_12: [string, InstrumentDialect] = ["sitar:hindustani", {
     id: 'sitar:hindustani',
     instrumentId: 'sitar',
-    name: 'Sitar',
+    name: 'Hindustani Sitar (Meend Bend & Sympathetic Strings)',
     family: 'guitar',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'pluck',
@@ -34,7 +34,7 @@ export const ENTRY_12: [string, InstrumentDialect] = ["sitar:hindustani", {
 export const ENTRY_13: [string, InstrumentDialect] = ["quena:andean-flute", {
     id: 'quena:andean-flute',
     instrumentId: 'quena',
-    name: 'Quena',
+    name: 'Andean Quena (Notched Cane Jet-Drive Flute)',
     family: 'wind',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'breath',

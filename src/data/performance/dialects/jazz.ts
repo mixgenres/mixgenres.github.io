@@ -3,7 +3,7 @@ import type { InstrumentDialect } from '../../styles/contracts';
 export const ENTRY_3: [string, InstrumentDialect] = ["trumpet:jazz", {
     id: 'trumpet:jazz',
     instrumentId: 'trumpet',
-    name: 'Trumpet',
+    name: 'Trumpet (Cool Jazz)',
     family: 'brass',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'legato',

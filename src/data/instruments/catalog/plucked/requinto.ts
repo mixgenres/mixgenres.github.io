@@ -10,7 +10,7 @@ export const requinto: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "plectrum",
   elementaryModel: 0,
-  makeupGain: 5.514,
+  makeupGain: 30.000,
   polyphony: 4,
   note: "Authentic Latin/Mexican 6-string Requinto guitar tuned a fourth higher (A2-D3-G3-C4-E4-A4), with 535mm scale, deep 115mm wooden body, crystalline mordiente snap, fast picado scales, tremolo, and alzapúa",
   acousticProfile: {

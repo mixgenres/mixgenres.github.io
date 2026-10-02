@@ -1,50 +1,51 @@
 import { el } from '@elemaudio/core';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
+import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 
 export default class FreeReedModule implements InstrumentModule {
   id = 'free-reed';
 
   renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const { params, gateSignal, freqSignal, action, dspProfile } = ctx;
-    const id = (params.instrumentId ?? '').toLowerCase();
-    const harmonica = id === 'harmonica';
-    const melodica = id === 'melodica';
-    const sho = id === 'sho';
+    const profile = INSTRUMENTS_BY_ID[params.instrumentId ?? '']?.freeReedSynthesis;
+    const fundamentalGain = profile?.fundamentalGain ?? 0.62;
+    const upperPartialGain = profile?.upperPartialGain ?? 0.20;
+    const upperPartialRatio = profile?.upperPartialRatio ?? 2;
     const pressure = Math.max(0.05, Math.min(1, params.pressure));
 
     const reedFreq = action === 'bend'
-      ? el.mul(freqSignal, el.add(1, el.mul(-0.035 * pressure, el.cycle(1.2))))
+      ? el.mul(freqSignal, el.add(1, el.mul(-(profile?.bendDepth ?? 0.035) * pressure, el.cycle(1.2))))
       : freqSignal;
     const primary = el.blepsaw(reedFreq);
-    const upper = el.blepsaw(el.mul(reedFreq, harmonica ? 2.01 : 2));
+    const upper = el.blepsaw(el.mul(reedFreq, upperPartialRatio));
     const reed = el.add(
-      el.mul(harmonica ? 0.58 : sho ? 0.46 : 0.62, primary),
-      el.mul(harmonica ? 0.24 : 0.20, upper),
+      el.mul(fundamentalGain, primary),
+      el.mul(upperPartialGain, upper),
     );
 
     const breath = el.mul(
       (dspProfile?.mechanicalArtifacts.airHiss ?? 0.12) * (0.12 + 0.18 * pressure),
-      el.highpass(harmonica ? 2600 : 1800, 0.9, el.noise()),
+      el.highpass(profile?.breathNoiseCutoffHz ?? 1800, 0.9, el.noise()),
     );
     const click = el.mul(
-      melodica ? 0.05 : harmonica ? 0.12 : 0.025,
+      profile?.transientClickGain ?? 0.025,
       el.highpass(2500, 1.0, el.noise()),
     );
-    const chamber = sho
-      ? el.add(
-          el.mul(0.20, el.svf({ mode: 'bandpass' }, 900, 4.5, reed)),
-          el.mul(0.12, el.svf({ mode: 'bandpass' }, 1800, 3.5, reed)),
-        )
-      : el.mul(0.10, el.svf({ mode: 'bandpass' }, Math.max(400, ctx.freq * 2.1), 2.8, reed));
+    const chamber = profile?.chamberResonances?.length
+      ? profile.chamberResonances.reduce((sum, band) => el.add(
+          sum,
+          el.mul(band.gain, el.svf({ mode: 'bandpass' }, band.frequencyHz, band.q, reed)),
+        ), el.const({ value: 0 }))
+      : el.mul(0.10, el.svf({ mode: 'bandpass' }, Math.max(400, ctx.freq * (profile?.chamberFrequencyMultiple ?? 2.1)), profile?.chamberQ ?? 2.8, reed));
 
     const env = el.adsr(
       0.002,
-      harmonica ? 0.025 : 0.045,
+      profile?.attackSeconds ?? 0.045,
       0.78,
       0.05,
       gateSignal,
     );
-    const handWah = harmonica && (action === 'wah' || action === 'hand-wah')
+    const handWah = profile?.handWah && (action === 'wah' || action === 'hand-wah')
       ? el.svf({ mode: 'lowpass' }, 900 + ctx.b * 3800, 2.2, reed)
       : reed;
 

@@ -6,7 +6,7 @@ export const backing_vocals: InstrumentDef = {
   family: "voice",
   voicing: "chord",
   elementaryModel: 12,
-  makeupGain: 29.744,
+  makeupGain: 0.455,
   polyphony: 8,
   note: "Harmonized vocal ensemble providing lush background pad chords and call-and-response hooks",
   acousticProfile: {
@@ -37,8 +37,9 @@ export const backing_vocals: InstrumentDef = {
       "subtle vibrato warm tails",
       "call-and-response dynamic balance"
     ],
-    playingStyles: ["pop", "soul", "r&b", "afrobeats", "reggae"],
+    playingStyles: ["pop", "soul", "gospel", "r&b", "afrobeats", "reggae"],
     genreTechniques: {
+      gospel: ["legato", "tenuto", "crescendo", "accent"],
       soul: ["legato", "accent", "tenuto"],
       afrobeats: ["staccato", "accent", "legato"],
       pop: ["legato", "tenuto", "staccato"]

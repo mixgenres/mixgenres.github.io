@@ -1,7 +1,8 @@
-import { instrumentHasKey, ENGINE_INSTRUMENT_KEYS } from '../../engine/lookup/instrumentKeys.ts';
+import { HORN_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
 import { el } from '@elemaudio/core';
 import { getFormantProfileForInstrument } from './elementaryEngine.ts';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
+import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 
 export default class BrassModule implements InstrumentModule {
   id = 'brass';
@@ -10,15 +11,14 @@ export default class BrassModule implements InstrumentModule {
     const { params, gateSignal, freqSignal, action, dspProfile } = ctx;
     const id = (params.instrumentId ?? '').toLowerCase();
     const profile = getFormantProfileForInstrument(params.instrumentId ?? '', 15);
-    const trombone = id === 'trombone';
-    const muted = id === 'muted-trumpet' || action === 'mute';
-    const horn = instrumentHasKey(id, ENGINE_INSTRUMENT_KEYS.horn);
-    const tuba = id === 'tuba';
+    const synthesis = INSTRUMENTS_BY_ID[params.instrumentId ?? '']?.brassSynthesis;
+    const muted = synthesis?.muted === true || action === 'mute';
+    const horn = HORN_INSTRUMENT_PATTERN.test(id);
     const pressure = Math.max(0.05, Math.min(1, params.pressure));
-    const lipDrive = dspProfile?.excitationDynamics.lipTensionResistance?.nonlinearBlare ?? (trombone ? 0.72 : 0.82);
+    const lipDrive = dspProfile?.excitationDynamics.lipTensionResistance?.nonlinearBlare ?? synthesis?.defaultNonlinearBlare ?? 0.82;
 
     const vibrato = action === 'vibrato' || action === 'shake'
-      ? el.mul(0.004 + 0.006 * pressure, el.cycle(trombone ? 5.3 : 6.0))
+      ? el.mul(0.004 + 0.006 * pressure, el.cycle(synthesis?.vibratoRateHz ?? 6.0))
       : 0;
     const pitch = el.mul(freqSignal, el.add(1, vibrato));
 
@@ -54,7 +54,8 @@ export default class BrassModule implements InstrumentModule {
     );
 
     const muteFilter = muted ? 0.52 : 1;
-    const cutoff = Math.max(900, Math.min(15000, (1400 + ctx.b * 8500) * muteFilter * (tuba ? 0.78 : horn ? 0.88 : 1)));
+    const cutoffScale = synthesis?.cutoffScale ?? (horn ? 0.88 : 1);
+    const cutoff = Math.max(900, Math.min(15000, (1400 + ctx.b * 8500) * muteFilter * cutoffScale));
     const attack = action === 'staccato' || action === 'accent' ? 0.0012 : 0.004;
     const env = el.adsr(attack, 0.045, 0.76, 0.055, gateSignal);
 

@@ -1,4 +1,4 @@
-export const ELECTRONIC_TRACK_GENRE_PATTERN = /electronic|house|disco|drum-and-bass|industrial|uk-bass|reggaeton/;
+export const ELECTRONIC_TRACK_GENRE_PATTERN = /electronic|house|disco|drum-and-bass|industrial|uk-bass|reggaeton|kpop/;
 export const ACOUSTIC_BASS_TRACK_VOLUME_STEPS: Array<{ upperBound: number; level: number }> = [
   { upperBound: 0.5, level: 0.62 },
   { upperBound: 0.68, level: 0.68 },

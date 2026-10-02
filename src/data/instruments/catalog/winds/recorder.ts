@@ -21,7 +21,7 @@ export const recorder: InstrumentDef = {
     ring: 3
   },
   luthierPhysics: {
-    category: "aerophone_lip_tension",
+    category: "aerophone_flue",
     materialDensity: 0.35,
     tension: 0.45,
     bodyResonanceVolume: 0.5,

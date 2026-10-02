@@ -4,6 +4,7 @@ export const french_horn: InstrumentDef = {
   id: "french-horn",
   name: "French horn",
   family: "brass",
+  brassSynthesis: { cutoffScale: 0.88 },
   voicing: "single",
   elementaryModel: 15,
   makeupGain: 0.399,

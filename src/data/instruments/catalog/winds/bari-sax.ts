@@ -21,7 +21,7 @@ export const bari_sax: InstrumentDef = {
     ring: 3
   },
   luthierPhysics: {
-    category: "aerophone_lip_tension",
+    category: "aerophone_single_reed",
     materialDensity: 0.9,
     tension: 0.72,
     bodyResonanceVolume: 7,

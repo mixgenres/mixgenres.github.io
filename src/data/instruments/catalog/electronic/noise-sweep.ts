@@ -6,7 +6,7 @@ export const noise_sweep: InstrumentDef = {
   family: "electronic",
   voicing: "single",
   elementaryModel: 9,
-  makeupGain: 5.181,
+  makeupGain: 0.548,
   polyphony: 4,
   note: "Build and riser sweep",
   acousticProfile: {

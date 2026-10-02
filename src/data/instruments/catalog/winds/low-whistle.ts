@@ -21,7 +21,7 @@ export const low_whistle: InstrumentDef = {
     ring: 3
   },
   luthierPhysics: {
-    category: "aerophone_lip_tension",
+    category: "aerophone_flue",
     materialDensity: 0.4,
     tension: 0.55,
     bodyResonanceVolume: 1,

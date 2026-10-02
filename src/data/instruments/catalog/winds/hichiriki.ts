@@ -22,7 +22,7 @@ export const hichiriki: InstrumentDef = {
     ring: 3
   },
   luthierPhysics: {
-    category: "aerophone_lip_tension",
+    category: "aerophone_double_reed",
     materialDensity: 0.8,
     tension: 0.9,
     bodyResonanceVolume: 0.6,

@@ -8,7 +8,7 @@ export const tenor_sax: InstrumentDef = {
   bodyConstruction: "brass-tube",
   excitationType: "breath",
   elementaryModel: 16,
-  makeupGain: 40.000,
+  makeupGain: 0.411,
   polyphony: 4,
   note: "Bb brass single-reed tenor saxophone with husky low register, smoky subtones, and screaming high altissimo bends",
   acousticProfile: {
@@ -16,14 +16,14 @@ export const tenor_sax: InstrumentDef = {
     role: "melody",
     centre: 62,
     low: 44,
-    high: 76,
+    high: 80,
     pan: -0.26,
     trim: -1,
     space: 0.32,
     ring: 2.8
   },
   luthierPhysics: {
-    category: "aerophone_lip_tension",
+    category: "aerophone_single_reed",
     materialDensity: 0.85,
     tension: 0.82,
     bodyResonanceVolume: 8.5,
@@ -57,7 +57,7 @@ export const tenor_sax: InstrumentDef = {
       lowNote: "Ab2",
       highNote: "E5",
       lowMidi: 44,
-      highMidi: 76
+      highMidi: 80
     }
   },
   performanceArticulations: {

@@ -8,6 +8,11 @@ export interface DrumVoice { low: number; mid: number; high: number; }
 import type { LuthierModelCategory } from './luthier';
 
 export interface LuthierPhysicsProfile {
+  /**
+   * Renderer model controls, not a claim of laboratory measurement. Values
+   * without units are normalized or relative synthesis estimates; fields with
+   * explicit SI units carry the stated units.
+   */
   category: LuthierModelCategory;
   materialDensity: number;
   tension: number;
@@ -122,20 +127,8 @@ export interface TuningAndMechanics {
   openStrings?: Array<{ name: string; note: string; midi: number; frequencyHz: number }>;
   courses?: number;
   frets?: number;
-  /** Maximum span between fretted positions in a playable chord shape. */
-  maxFretStretch?: number;
   tuningName?: string;
   keyRange?: { lowNote: string; highNote: string; lowMidi: number; highMidi: number };
-}
-
-export interface MidiRange { lowMidi: number; highMidi: number; }
-
-/** Human playability, separated from the instrument's strongest acoustic register. */
-export interface InstrumentPlayability {
-  absoluteRange?: MidiRange;
-  practicalRange?: MidiRange;
-  comfortableRange?: MidiRange;
-  characteristicRegister?: { lowMidi: number; centreMidi: number; highMidi: number };
 }
 
 /**
@@ -385,6 +378,32 @@ export interface PhysicalModelProfile {
   synthesisNotes: string[];
 }
 
+/** Renderer voicing controls for the shared free-reed synthesis module. */
+export interface FreeReedSynthesisProfile {
+  fundamentalGain: number;
+  upperPartialGain: number;
+  upperPartialRatio: number;
+  breathNoiseCutoffHz: number;
+  transientClickGain: number;
+  attackSeconds: number;
+  bendDepth: number;
+  chamberResonances?: Array<{ frequencyHz: number; q: number; gain: number }>;
+  chamberFrequencyMultiple?: number;
+  chamberQ?: number;
+  handWah?: boolean;
+}
+
+export interface PipeSynthesisProfile {
+  droneRatios: number[];
+}
+
+export interface BrassSynthesisProfile {
+  muted?: boolean;
+  vibratoRateHz?: number;
+  defaultNonlinearBlare?: number;
+  cutoffScale?: number;
+}
+
 export interface ArticulationModel {
   id: string;
   method: string;
@@ -423,11 +442,9 @@ export interface InstrumentDef {
   luthierPhysics?: LuthierPhysicsProfile;
   elementaryModel?: number;
   makeupGain?: number;
-  /** Renderer voice allocation; distinct from how many pitches a player can sound. */
   polyphony?: number;
-  /** Maximum concurrent musical pitches for generated performance. */
-  maxSimultaneousPitches?: number;
-  playability?: InstrumentPlayability;
+  /** Performance layout hints consumed by generic arrangement algorithms. */
+  attackProfile?: { chordAttack?: 'block' | 'rolled'; rolledChordSpreadSeconds?: number };
   formantProfile?: AcousticFormantProfile;
   bowedResonance?: BowedResonanceProfile;
   tuningAndMechanics?: TuningAndMechanics;
@@ -451,6 +468,9 @@ export interface InstrumentDef {
 
   techniques: InstrumentTechniqueProfile;
   physicalModel?: PhysicalModelProfile;
+  freeReedSynthesis?: FreeReedSynthesisProfile;
+  pipeSynthesis?: PipeSynthesisProfile;
+  brassSynthesis?: BrassSynthesisProfile;
   /** First-class instrument physics used by the live/offline renderer. */
   dspProfile?: import('../../sound/schema/dsp-profile').InstrumentDSPProfile;
   articulationModels?: ArticulationModel[];

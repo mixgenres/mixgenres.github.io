@@ -1,8 +1,6 @@
-import { contractForGenre } from '../../engine/style/contracts';
+import { contractForGenre, mergeDialectMetadata } from '../../engine/style/contracts';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
-import { instrumentHasKey } from '../../engine/lookup/instrumentKeys.ts';
 import { getStyle } from '../../engine/style/registry';
-import { getInstrumentPerformanceProfile } from '../../engine/lookup/performance';
 
 import type { InstrumentDialect, PerformanceMode } from '../../data/styles/contracts';
 import { DIALECTS, DEFAULT_DIALECT_SHAPE } from '../../data/performance/dialects';
@@ -24,11 +22,16 @@ export function resolveDialect(
   if (styleId) {
     const style = getStyle(styleId) as (ReturnType<typeof getStyle> & { instrumentDialects?: Record<string, Partial<InstrumentDialect>> }) | undefined;
     const authored = (role ? style?.instrumentDialects?.[`${normId}:${role}`] : undefined) ?? style?.instrumentDialects?.[normId] ?? style?.instrumentDialects?.[instrumentId];
-    if (authored) return resolveVariants({ ...DEFAULT_DIALECT_SHAPE, id: `${normId}:${styleId}`, instrumentId: normId, name: `${normId} (${styleId})`, ...authored });
+    if (authored) {
+      const inherited = resolveDialect(instrumentId, worldId, '', role);
+      return resolveVariants(mergeDialectMetadata({ ...DEFAULT_DIALECT_SHAPE, ...inherited,
+        id: `${normId}:${styleId}`, instrumentId: normId, name: `${normId} (${styleId})`,
+      }, authored));
+    }
   }
   if (worldId) {
     try {
-      const contract = contractForGenre(worldId);
+      const contract = contractForGenre(worldId, styleId ? getStyle(styleId) : undefined);
       if (contract?.instrumentDialects) {
         // 1. Exact match
         const exact = (role ? contract.instrumentDialects[`${normId}:${role}`] : undefined) || contract.instrumentDialects[normId] || contract.instrumentDialects[instrumentId];
@@ -43,8 +46,10 @@ export function resolveDialect(
         }
 
         // 2. Family / related instrument matches
-        const related = Object.values(RELATED_DIALECT_INSTRUMENTS)
-          .find(instruments => instruments.includes(normId)) ?? [];
+        const related: string[] = [];
+        for (const [token, instruments] of Object.entries(RELATED_DIALECT_INSTRUMENTS)) {
+          if (normId.includes(token)) related.push(...instruments);
+        }
 
         for (const rel of related) {
           const matched = contract.instrumentDialects[rel];
@@ -77,47 +82,6 @@ export function resolveDialect(
     }
   }
 
-  // Exact authored world/instrument dialects are checked before sparse fuzzy
-  // fallback rules. This prevents a fully authored Tango/Flamenco instrument
-  // from silently dropping into the generic dialect just because the contract
-  // does not repeat every instrument entry.
-  if (worldId) {
-    const exactWorldDialect = DIALECTS[`${normId}:${worldId}`];
-    if (exactWorldDialect) return resolveVariants(exactWorldDialect);
-
-    try {
-      const perfProfile = getInstrumentPerformanceProfile(normId);
-      const gp = perfProfile?.genreProfiles?.[worldId];
-      if (gp) {
-        const def = INSTRUMENTS_BY_ID[normId] || INSTRUMENTS_BY_ID[instrumentId];
-        const defaultTech = gp.preferredGestures?.[0] ?? 'default';
-        const allowedTechs = (gp.preferredGestures?.length ? gp.preferredGestures : (gp.gestureIds?.length ? gp.gestureIds : ['default']));
-        const profileDialect: InstrumentDialect = {
-          ...DEFAULT_DIALECT_SHAPE,
-          id: `${normId}:${worldId}`,
-          instrumentId: normId,
-          name: `${def?.name ?? normId} (${worldId})`,
-          family: def?.family ?? DEFAULT_DIALECT_SHAPE.family,
-          performanceMode: performanceModeForContext(worldId, styleId),
-          defaultTechnique: defaultTech,
-          allowedTechniques: allowedTechs,
-          brightnessMultiplier: 1.0 + ((gp.phrase?.attack ?? 0.5) - 0.5) * 0.4,
-          decayMultiplier: 1.0 + ((gp.phrase?.sustain ?? 0.5) - 0.5) * 0.4,
-          micProximityPreset: gp.timing?.feel === 'push' ? 'close-mic' : 'room-ambient',
-          roleVariants: (gp.roles ?? []).reduce((acc: Record<string, Partial<InstrumentDialect>>, r: string) => {
-            acc[r] = {
-              defaultTechnique: defaultTech,
-            };
-            return acc;
-          }, {}),
-        };
-        return resolveVariants(profileDialect);
-      }
-    } catch {
-      // ignore
-    }
-  }
-
   const sparse = fallbackDialectForSparseContracts(instrumentId, worldId, styleId);
   if (sparse) return sparse;
   const def = INSTRUMENTS_BY_ID[normId] || INSTRUMENTS_BY_ID[instrumentId];
@@ -138,7 +102,6 @@ export function fallbackDialectForSparseContracts(
 ): InstrumentDialect | null {
   const token = `${worldId}:${styleId}:${instrumentId}`.toLowerCase();
   const matches = (matcher: DialectMatcher): boolean => {
-    if (matcher.source === 'instrument' && matcher.engineKey) return instrumentHasKey(instrumentId, matcher.engineKey as any);
     const value = matcher.source === 'token' ? token : instrumentId;
     return matcher.includes !== undefined ? value.includes(matcher.includes) : matcher.pattern?.test(value) ?? false;
   };

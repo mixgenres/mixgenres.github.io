@@ -1,0 +1,2004 @@
+{
+  "generatedAt": "2026-10-02T14:27:33.515Z",
+  "applied": false,
+  "rows": [
+    {
+      "genre": "afrobeats",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 253,
+      "meanVelocity": 105.25691699604744,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "afrobeats",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 380,
+      "meanVelocity": 65.43684210526315,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "afrobeats",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 1064,
+      "meanVelocity": 104.39191729323308,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "afrobeats",
+      "instrumentId": "synth",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 112.26923076923077,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "afrobeats",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 275,
+      "meanVelocity": 108.85818181818182,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "afrobeats",
+      "instrumentId": "log-drum",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 308,
+      "meanVelocity": 105.24675324675324,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "bachata",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 788,
+      "meanVelocity": 93.8769035532995,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "bachata",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 199,
+      "meanVelocity": 58.949748743718594,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "bachata",
+      "instrumentId": "bongos",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 199,
+      "meanVelocity": 99.05527638190955,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "bachata",
+      "instrumentId": "guiro",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 219,
+      "meanVelocity": 108.98630136986301,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "bachata",
+      "instrumentId": "requinto",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 261,
+      "meanVelocity": 112.3984674329502,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "bachata",
+      "instrumentId": "guitarron",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 214,
+      "meanVelocity": 60.3411214953271,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "blues",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 575,
+      "meanVelocity": 89.63652173913043,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "blues",
+      "instrumentId": "harmonica",
+      "role": "melody",
+      "trackVolume": 0.9,
+      "noteCount": 159,
+      "meanVelocity": 102.21383647798743,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "blues",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "trackVolume": 0.76,
+      "noteCount": 896,
+      "meanVelocity": 96.95089285714286,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "blues",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 164,
+      "meanVelocity": 54.98170731707317,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "blues",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 137,
+      "meanVelocity": 100.8029197080292,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "blues",
+      "instrumentId": "voice",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 36,
+      "meanVelocity": 106.69444444444444,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "brazilian",
+      "instrumentId": "acoustic-guitar",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 220,
+      "meanVelocity": 112.95454545454545,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "brazilian",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "trackVolume": 0.76,
+      "noteCount": 724,
+      "meanVelocity": 94.79005524861878,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "brazilian",
+      "instrumentId": "flute",
+      "role": "melody",
+      "trackVolume": 0.9,
+      "noteCount": 137,
+      "meanVelocity": 106.86131386861314,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "brazilian",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 180,
+      "meanVelocity": 58.15555555555556,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "brazilian",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 103,
+      "meanVelocity": 104.60194174757281,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "brazilian",
+      "instrumentId": "cavaquinho",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 552,
+      "meanVelocity": 92.68115942028986,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "country",
+      "instrumentId": "steel-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 783,
+      "meanVelocity": 104.21583652618135,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "country",
+      "instrumentId": "fiddle",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 50,
+      "meanVelocity": 110.94,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "country",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 610,
+      "meanVelocity": 99.65573770491804,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "country",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 654,
+      "meanVelocity": 97.9908256880734,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "country",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 247,
+      "meanVelocity": 73.04453441295547,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "country",
+      "instrumentId": "banjo",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 750,
+      "meanVelocity": 95.836,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "cumbia",
+      "instrumentId": "guacharaca",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 370,
+      "meanVelocity": 112.34864864864865,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "cumbia",
+      "instrumentId": "tambor-alegre",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 299,
+      "meanVelocity": 112.55183946488295,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "cumbia",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 254,
+      "meanVelocity": 70.11023622047244,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "cumbia",
+      "instrumentId": "accordion",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 88,
+      "meanVelocity": 116.18181818181819,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "cumbia",
+      "instrumentId": "clarinet",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 129,
+      "meanVelocity": 117.04651162790698,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "cumbia",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 244,
+      "meanVelocity": 116.21311475409836,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "disco",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.82,
+      "noteCount": 310,
+      "meanVelocity": 75.60967741935484,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "disco",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 349,
+      "meanVelocity": 101.89684813753581,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "disco",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 2286,
+      "meanVelocity": 99.13517060367454,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "disco",
+      "instrumentId": "synth",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 111.75,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "disco",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 449,
+      "meanVelocity": 96.62583518930958,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "disco",
+      "instrumentId": "strings",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 208,
+      "meanVelocity": 110.3076923076923,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "electronic",
+      "instrumentId": "synth",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 51,
+      "meanVelocity": 111.66666666666667,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "electronic",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 189,
+      "meanVelocity": 104.52910052910053,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "electronic",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.82,
+      "noteCount": 314,
+      "meanVelocity": 78.77707006369427,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "electronic",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 111.25,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "electronic",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 752,
+      "meanVelocity": 103.15957446808511,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "electronic",
+      "instrumentId": "acid-303",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 112.21153846153847,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "folk",
+      "instrumentId": "acoustic-guitar",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 214,
+      "meanVelocity": 110.23364485981308,
+      "bassForward": 0.4
+    },
+    {
+      "genre": "folk",
+      "instrumentId": "banjo",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 668,
+      "meanVelocity": 99.41467065868264,
+      "bassForward": 0.4
+    },
+    {
+      "genre": "folk",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "trackVolume": 0.62,
+      "noteCount": 273,
+      "meanVelocity": 59.54945054945055,
+      "bassForward": 0.4
+    },
+    {
+      "genre": "folk",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "trackVolume": 0.76,
+      "noteCount": 655,
+      "meanVelocity": 104.7969465648855,
+      "bassForward": 0.4
+    },
+    {
+      "genre": "folk",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 294,
+      "meanVelocity": 105.0578231292517,
+      "bassForward": 0.4
+    },
+    {
+      "genre": "folk",
+      "instrumentId": "fiddle",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 112.48076923076923,
+      "bassForward": 0.4
+    },
+    {
+      "genre": "funk",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 451,
+      "meanVelocity": 72.19068736141907,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "funk",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 191,
+      "meanVelocity": 109.54450261780104,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "funk",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 1993,
+      "meanVelocity": 96.55494229804314,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "funk",
+      "instrumentId": "synth",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 111.17307692307692,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "funk",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 684,
+      "meanVelocity": 92.1842105263158,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "funk",
+      "instrumentId": "clavinet",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 2704,
+      "meanVelocity": 95.64977810650888,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "gospel",
+      "instrumentId": "organ",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 118,
+      "meanVelocity": 103.66949152542372,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "gospel",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "trackVolume": 0.76,
+      "noteCount": 599,
+      "meanVelocity": 105.56260434056762,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "gospel",
+      "instrumentId": "choir",
+      "role": "voice",
+      "trackVolume": 0.9,
+      "noteCount": 44,
+      "meanVelocity": 110.79545454545455,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "gospel",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 135,
+      "meanVelocity": 85.7925925925926,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "gospel",
+      "instrumentId": "tambourine",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 128,
+      "meanVelocity": 109.0078125,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "gospel",
+      "instrumentId": "alto-sax",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 72,
+      "meanVelocity": 108.38888888888889,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "hip-hop",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 112.03846153846153,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "hip-hop",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 219,
+      "meanVelocity": 110.53881278538813,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "hip-hop",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.84,
+      "noteCount": 137,
+      "meanVelocity": 87.30656934306569,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "hip-hop",
+      "instrumentId": "turntable",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 111.88461538461539,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "hip-hop",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "trackVolume": 0.76,
+      "noteCount": 848,
+      "meanVelocity": 105.90566037735849,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "hip-hop",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "trackVolume": 0.84,
+      "noteCount": 132,
+      "meanVelocity": 85.0530303030303,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "house",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 174,
+      "meanVelocity": 106.66666666666667,
+      "bassForward": 0.85
+    },
+    {
+      "genre": "house",
+      "instrumentId": "synth",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 110.90384615384616,
+      "bassForward": 0.85
+    },
+    {
+      "genre": "house",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "trackVolume": 0.92,
+      "noteCount": 161,
+      "meanVelocity": 84.54037267080746,
+      "bassForward": 0.85
+    },
+    {
+      "genre": "house",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 110.9423076923077,
+      "bassForward": 0.85
+    },
+    {
+      "genre": "house",
+      "instrumentId": "noise-sweep",
+      "role": "melody",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 107.61538461538461,
+      "bassForward": 0.85
+    },
+    {
+      "genre": "house",
+      "instrumentId": "acid-303",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 111.9423076923077,
+      "bassForward": 0.85
+    },
+    {
+      "genre": "jazz",
+      "instrumentId": "alto-sax",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 251,
+      "meanVelocity": 109.54183266932272,
+      "bassForward": 0.4
+    },
+    {
+      "genre": "jazz",
+      "instrumentId": "trumpet",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 264,
+      "meanVelocity": 109.48484848484848,
+      "bassForward": 0.4
+    },
+    {
+      "genre": "jazz",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "trackVolume": 0.76,
+      "noteCount": 597,
+      "meanVelocity": 108.76046901172529,
+      "bassForward": 0.4
+    },
+    {
+      "genre": "jazz",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "trackVolume": 0.62,
+      "noteCount": 295,
+      "meanVelocity": 57.48135593220339,
+      "bassForward": 0.4
+    },
+    {
+      "genre": "jazz",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 193,
+      "meanVelocity": 112.61658031088083,
+      "bassForward": 0.4
+    },
+    {
+      "genre": "jazz",
+      "instrumentId": "tenor-sax",
+      "role": "melody",
+      "trackVolume": 0.9,
+      "noteCount": 264,
+      "meanVelocity": 106.82954545454545,
+      "bassForward": 0.4
+    },
+    {
+      "genre": "kizomba",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 164,
+      "meanVelocity": 64.83536585365853,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "kizomba",
+      "instrumentId": "acoustic-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 1020,
+      "meanVelocity": 108.73627450980392,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "kizomba",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 202,
+      "meanVelocity": 114.60396039603961,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "kizomba",
+      "instrumentId": "shaker",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 222,
+      "meanVelocity": 114.3963963963964,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "kizomba",
+      "instrumentId": "synth",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 56,
+      "meanVelocity": 116.67857142857143,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "kizomba",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 234,
+      "meanVelocity": 64.3119658119658,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "tango",
+      "instrumentId": "bandoneon",
+      "role": "lead",
+      "trackVolume": 0.82,
+      "noteCount": 159,
+      "meanVelocity": 121.30817610062893,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "tango",
+      "instrumentId": "violin",
+      "role": "melody",
+      "trackVolume": 0.86,
+      "noteCount": 73,
+      "meanVelocity": 121.21917808219177,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "tango",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "trackVolume": 0.76,
+      "noteCount": 507,
+      "meanVelocity": 115.86193293885601,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "tango",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 213,
+      "meanVelocity": 68.56338028169014,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "tango",
+      "instrumentId": "cello",
+      "role": "lead",
+      "trackVolume": 0.78,
+      "noteCount": 74,
+      "meanVelocity": 121.22972972972973,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "tango",
+      "instrumentId": "strings",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 70,
+      "meanVelocity": 111.18571428571428,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "flamenco",
+      "instrumentId": "spanish-guitar",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 246,
+      "meanVelocity": 107.65447154471545,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "flamenco",
+      "instrumentId": "flute",
+      "role": "melody",
+      "trackVolume": 0.9,
+      "noteCount": 230,
+      "meanVelocity": 110.65652173913044,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "flamenco",
+      "instrumentId": "palmas",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 259,
+      "meanVelocity": 106.84555984555985,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "flamenco",
+      "instrumentId": "cajon",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 212,
+      "meanVelocity": 110.40094339622641,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "flamenco",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 228,
+      "meanVelocity": 106.80263157894737,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "flamenco",
+      "instrumentId": "guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 660,
+      "meanVelocity": 99.06363636363636,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "metal",
+      "instrumentId": "electric-guitar",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 439,
+      "meanVelocity": 112.78815489749431,
+      "bassForward": 0.72
+    },
+    {
+      "genre": "metal",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.76,
+      "noteCount": 562,
+      "meanVelocity": 76.3932384341637,
+      "bassForward": 0.72
+    },
+    {
+      "genre": "metal",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 515,
+      "meanVelocity": 107.27766990291262,
+      "bassForward": 0.72
+    },
+    {
+      "genre": "metal",
+      "instrumentId": "overdrive-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 380,
+      "meanVelocity": 109.86315789473684,
+      "bassForward": 0.72
+    },
+    {
+      "genre": "metal",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 379,
+      "meanVelocity": 110.59366754617415,
+      "bassForward": 0.72
+    },
+    {
+      "genre": "metal",
+      "instrumentId": "distortion-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 416,
+      "meanVelocity": 110.46153846153847,
+      "bassForward": 0.72
+    },
+    {
+      "genre": "r-and-b",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 419,
+      "meanVelocity": 67.17661097852029,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "r-and-b",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 361,
+      "meanVelocity": 101.33795013850416,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "r-and-b",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 2304,
+      "meanVelocity": 96.97048611111111,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "r-and-b",
+      "instrumentId": "synth",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 111.40384615384616,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "r-and-b",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 701,
+      "meanVelocity": 93.7018544935806,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "r-and-b",
+      "instrumentId": "rhodes",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 704,
+      "meanVelocity": 107.0909090909091,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "reggae",
+      "instrumentId": "drums",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 184,
+      "meanVelocity": 108.89673913043478,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "reggae",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 250,
+      "meanVelocity": 66.912,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "reggae",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 498,
+      "meanVelocity": 99.56626506024097,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "reggae",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 528,
+      "meanVelocity": 99.88068181818181,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "reggae",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 480,
+      "meanVelocity": 99.9375,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "reggae",
+      "instrumentId": "horn-section",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 528,
+      "meanVelocity": 100.99431818181819,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "reggaeton",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 274,
+      "meanVelocity": 112.02919708029196,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "reggaeton",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "trackVolume": 0.92,
+      "noteCount": 124,
+      "meanVelocity": 88.85483870967742,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "reggaeton",
+      "instrumentId": "synth",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 111.90384615384616,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "reggaeton",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 111.61538461538461,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "reggaeton",
+      "instrumentId": "maracas",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 310,
+      "meanVelocity": 105.4,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "reggaeton",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 132,
+      "meanVelocity": 105.78030303030303,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "rock",
+      "instrumentId": "electric-guitar",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 228,
+      "meanVelocity": 109.92105263157895,
+      "bassForward": 0.65
+    },
+    {
+      "genre": "rock",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 297,
+      "meanVelocity": 69.51851851851852,
+      "bassForward": 0.65
+    },
+    {
+      "genre": "rock",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 255,
+      "meanVelocity": 108.52941176470588,
+      "bassForward": 0.65
+    },
+    {
+      "genre": "rock",
+      "instrumentId": "overdrive-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 246,
+      "meanVelocity": 101.1951219512195,
+      "bassForward": 0.65
+    },
+    {
+      "genre": "rock",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 251,
+      "meanVelocity": 110.26294820717132,
+      "bassForward": 0.65
+    },
+    {
+      "genre": "rock",
+      "instrumentId": "organ",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 264,
+      "meanVelocity": 97.85606060606061,
+      "bassForward": 0.65
+    },
+    {
+      "genre": "salsa",
+      "instrumentId": "brass",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 124,
+      "meanVelocity": 111.2258064516129,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "salsa",
+      "instrumentId": "timbales",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 304,
+      "meanVelocity": 106.95394736842105,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "salsa",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 310,
+      "meanVelocity": 111.89677419354838,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "salsa",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "trackVolume": 0.76,
+      "noteCount": 594,
+      "meanVelocity": 97.16161616161617,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "salsa",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 166,
+      "meanVelocity": 63.54216867469879,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "salsa",
+      "instrumentId": "trumpet",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 176,
+      "meanVelocity": 111.30681818181819,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "ska",
+      "instrumentId": "brass",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 149,
+      "meanVelocity": 111.74496644295301,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "ska",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 458,
+      "meanVelocity": 94.80786026200873,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "ska",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "trackVolume": 0.76,
+      "noteCount": 488,
+      "meanVelocity": 97.98770491803279,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "ska",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 350,
+      "meanVelocity": 68.79142857142857,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "ska",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 248,
+      "meanVelocity": 110.91129032258064,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "ska",
+      "instrumentId": "trumpet",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 176,
+      "meanVelocity": 108.04545454545455,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "soul",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 423,
+      "meanVelocity": 60.8983451536643,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "soul",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 345,
+      "meanVelocity": 100.26376811594203,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "soul",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 2452,
+      "meanVelocity": 97.02936378466558,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "soul",
+      "instrumentId": "synth",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 112.01923076923077,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "soul",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 247,
+      "meanVelocity": 103.48987854251013,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "soul",
+      "instrumentId": "rhodes",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 352,
+      "meanVelocity": 106.61363636363636,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "swing",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 745,
+      "meanVelocity": 95.48456375838926,
+      "bassForward": 0.42
+    },
+    {
+      "genre": "swing",
+      "instrumentId": "clarinet",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 163,
+      "meanVelocity": 114.7361963190184,
+      "bassForward": 0.42
+    },
+    {
+      "genre": "swing",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "trackVolume": 0.76,
+      "noteCount": 695,
+      "meanVelocity": 94.45611510791367,
+      "bassForward": 0.42
+    },
+    {
+      "genre": "swing",
+      "instrumentId": "upright-bass",
+      "role": "bass",
+      "trackVolume": 0.62,
+      "noteCount": 127,
+      "meanVelocity": 76.55905511811024,
+      "bassForward": 0.42
+    },
+    {
+      "genre": "swing",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 286,
+      "meanVelocity": 107.74125874125875,
+      "bassForward": 0.42
+    },
+    {
+      "genre": "swing",
+      "instrumentId": "tenor-sax",
+      "role": "melody",
+      "trackVolume": 0.9,
+      "noteCount": 220,
+      "meanVelocity": 110.05909090909091,
+      "bassForward": 0.42
+    },
+    {
+      "genre": "timba",
+      "instrumentId": "drums",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 331,
+      "meanVelocity": 114.3202416918429,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "timba",
+      "instrumentId": "timbales",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 316,
+      "meanVelocity": 113.52215189873418,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "timba",
+      "instrumentId": "congas",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 367,
+      "meanVelocity": 114.14441416893733,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "timba",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 335,
+      "meanVelocity": 65.38507462686567,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "timba",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "trackVolume": 0.76,
+      "noteCount": 958,
+      "meanVelocity": 102.42484342379959,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "timba",
+      "instrumentId": "trumpet",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 364,
+      "meanVelocity": 112.10714285714286,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "zouk",
+      "instrumentId": "brass",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 155,
+      "meanVelocity": 108.13548387096775,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "zouk",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 253,
+      "meanVelocity": 106.04347826086956,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "zouk",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 240,
+      "meanVelocity": 69.4375,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "zouk",
+      "instrumentId": "synth",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 112.21153846153847,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "zouk",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 297,
+      "meanVelocity": 107.18181818181819,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "zouk",
+      "instrumentId": "guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 924,
+      "meanVelocity": 103.03896103896103,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "drum-and-bass",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 220,
+      "meanVelocity": 106.44090909090909,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "drum-and-bass",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 111.21153846153847,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "drum-and-bass",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "trackVolume": 0.82,
+      "noteCount": 120,
+      "meanVelocity": 80.9,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "drum-and-bass",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.82,
+      "noteCount": 281,
+      "meanVelocity": 79.98932384341637,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "drum-and-bass",
+      "instrumentId": "voice",
+      "role": "voice",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 111.13461538461539,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "drum-and-bass",
+      "instrumentId": "synth",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 112.21153846153847,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "industrial",
+      "instrumentId": "synth",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 48,
+      "meanVelocity": 112.97916666666667,
+      "bassForward": 0.82
+    },
+    {
+      "genre": "industrial",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 226,
+      "meanVelocity": 104.09292035398231,
+      "bassForward": 0.82
+    },
+    {
+      "genre": "industrial",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 42,
+      "meanVelocity": 108.92857142857143,
+      "bassForward": 0.82
+    },
+    {
+      "genre": "industrial",
+      "instrumentId": "bass-lead",
+      "role": "bass",
+      "trackVolume": 0.92,
+      "noteCount": 174,
+      "meanVelocity": 84.5632183908046,
+      "bassForward": 0.82
+    },
+    {
+      "genre": "industrial",
+      "instrumentId": "noise-sweep",
+      "role": "melody",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 112.21153846153847,
+      "bassForward": 0.82
+    },
+    {
+      "genre": "industrial",
+      "instrumentId": "distortion-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 352,
+      "meanVelocity": 102.35795454545455,
+      "bassForward": 0.82
+    },
+    {
+      "genre": "punk-hardcore",
+      "instrumentId": "electric-guitar",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 229,
+      "meanVelocity": 111.26637554585153,
+      "bassForward": 0.68
+    },
+    {
+      "genre": "punk-hardcore",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.76,
+      "noteCount": 272,
+      "meanVelocity": 71.73161764705883,
+      "bassForward": 0.68
+    },
+    {
+      "genre": "punk-hardcore",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 167,
+      "meanVelocity": 101.95808383233533,
+      "bassForward": 0.68
+    },
+    {
+      "genre": "punk-hardcore",
+      "instrumentId": "overdrive-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 234,
+      "meanVelocity": 105.7008547008547,
+      "bassForward": 0.68
+    },
+    {
+      "genre": "punk-hardcore",
+      "instrumentId": "hand-percussion",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 345,
+      "meanVelocity": 94.4608695652174,
+      "bassForward": 0.68
+    },
+    {
+      "genre": "punk-hardcore",
+      "instrumentId": "distortion-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 352,
+      "meanVelocity": 108.22727272727273,
+      "bassForward": 0.68
+    },
+    {
+      "genre": "uk-bass",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 187,
+      "meanVelocity": 109.75935828877006,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "uk-bass",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "trackVolume": 0.92,
+      "noteCount": 126,
+      "meanVelocity": 90.47619047619048,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "uk-bass",
+      "instrumentId": "synth",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 111.09615384615384,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "uk-bass",
+      "instrumentId": "voice",
+      "role": "voice",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 110.78846153846153,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "uk-bass",
+      "instrumentId": "cowbell",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 176,
+      "meanVelocity": 104.6875,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "uk-bass",
+      "instrumentId": "soprano-sax",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 176,
+      "meanVelocity": 106.04545454545455,
+      "bassForward": 0.88
+    },
+    {
+      "genre": "kpop",
+      "instrumentId": "voice",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 72,
+      "meanVelocity": 114.08333333333333,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "kpop",
+      "instrumentId": "backing-vocals",
+      "role": "voice",
+      "trackVolume": 0.9,
+      "noteCount": 72,
+      "meanVelocity": 113.95833333333333,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "kpop",
+      "instrumentId": "synth",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 111.11538461538461,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "kpop",
+      "instrumentId": "sub-bass",
+      "role": "bass",
+      "trackVolume": 0.82,
+      "noteCount": 240,
+      "meanVelocity": 66.97916666666667,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "kpop",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 309,
+      "meanVelocity": 111.31391585760518,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "kpop",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "trackVolume": 0.76,
+      "noteCount": 324,
+      "meanVelocity": 106.71604938271605,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "kpop",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 693,
+      "meanVelocity": 110.8932178932179,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "kpop",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 72,
+      "meanVelocity": 114.13888888888889,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "chinese-traditional",
+      "instrumentId": "erhu",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 51,
+      "meanVelocity": 110.96078431372548,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "chinese-traditional",
+      "instrumentId": "pipa",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 214,
+      "meanVelocity": 110.51869158878505,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "chinese-traditional",
+      "instrumentId": "guzheng",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 246,
+      "meanVelocity": 109.34552845528455,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "chinese-traditional",
+      "instrumentId": "dizi",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 171,
+      "meanVelocity": 109.48538011695906,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "chinese-traditional",
+      "instrumentId": "guqin",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 224,
+      "meanVelocity": 113.11607142857143,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "chinese-traditional",
+      "instrumentId": "jinghu",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 52,
+      "meanVelocity": 111.25,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "chinese-traditional",
+      "instrumentId": "paigu",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 204,
+      "meanVelocity": 112.52941176470588,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "japanese-pop",
+      "instrumentId": "voice",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 72,
+      "meanVelocity": 114.02777777777777,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "japanese-pop",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "trackVolume": 0.76,
+      "noteCount": 510,
+      "meanVelocity": 111.29019607843138,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "japanese-pop",
+      "instrumentId": "synth",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 72,
+      "meanVelocity": 113.97222222222223,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "japanese-pop",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 656,
+      "meanVelocity": 110.7560975609756,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "japanese-pop",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 386,
+      "meanVelocity": 68.64766839378238,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "japanese-pop",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 244,
+      "meanVelocity": 113.72540983606558,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "japanese-pop",
+      "instrumentId": "strings",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 120,
+      "meanVelocity": 100.26666666666667,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "japanese-pop",
+      "instrumentId": "sampler",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 64,
+      "meanVelocity": 113.25,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "japanese-rock",
+      "instrumentId": "voice",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 72,
+      "meanVelocity": 114.06944444444444,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "japanese-rock",
+      "instrumentId": "electric-guitar",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 577,
+      "meanVelocity": 106.90641247833622,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "japanese-rock",
+      "instrumentId": "bass",
+      "role": "bass",
+      "trackVolume": 0.68,
+      "noteCount": 369,
+      "meanVelocity": 68.86720867208672,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "japanese-rock",
+      "instrumentId": "drums",
+      "role": "percussion",
+      "trackVolume": 0.8,
+      "noteCount": 277,
+      "meanVelocity": 107.70758122743682,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "japanese-rock",
+      "instrumentId": "piano",
+      "role": "harmony",
+      "trackVolume": 0.76,
+      "noteCount": 428,
+      "meanVelocity": 110.19626168224299,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "japanese-rock",
+      "instrumentId": "synth",
+      "role": "lead",
+      "trackVolume": 0.9,
+      "noteCount": 64,
+      "meanVelocity": 113.25,
+      "bassForward": 0.5
+    },
+    {
+      "genre": "japanese-rock",
+      "instrumentId": "strings",
+      "role": "harmony",
+      "trackVolume": 0.82,
+      "noteCount": 120,
+      "meanVelocity": 102.2,
+      "bassForward": 0.5
+    }
+  ]
+}

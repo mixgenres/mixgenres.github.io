@@ -62,7 +62,7 @@ export function styleTechniqueExpectation(style: ResolvedStyle, profile: Instrum
     ...(profile.genreProfiles[style.primaryGenre]?.forbiddenGestures ?? []),
     ...(style.rules?.forbid ?? []).map(x => x.tag),
   ]));
-  return { required: required.slice(0, 5), preferred, forbidden };
+  return { required, preferred, forbidden };
 }
 
 export function buildStylePerformanceSchema(style: ResolvedStyle, instruments: string[]): StylePerformanceSchema {

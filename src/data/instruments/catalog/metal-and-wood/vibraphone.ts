@@ -6,7 +6,7 @@ export const vibraphone: InstrumentDef = {
   family: "metal-and-wood",
   voicing: "chord",
   elementaryModel: 8,
-  makeupGain: 16.014,
+  makeupGain: 0.708,
   polyphony: 8,
   note: "Useful for jazz, city pop and soft color",
   acousticProfile: {

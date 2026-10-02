@@ -1,12 +1,17 @@
+import type { ExportFormat } from './export/formats';
 import { StereoFieldManager } from './engine/studio/index.ts';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Dices, Trash2, Pencil, Sparkles, Volume2, Volume1, VolumeX } from 'lucide-react';
+import { Dices, Trash2, Pencil } from 'lucide-react';
 import './index.css';
 
 import { Glyph, PlayIcon, PauseIcon } from './ui/Glyph';
-import { WorldSheet, InstrumentSheet, PatternSheet, SectionSheet, SectionGenreSheet, TempoSheet, DownloadSheet, StartOverModal, RandomizeSheet, ChordSheet } from './ui/sheets';
+import { Sheet, NoteCard, NoteMark } from './ui/Sheet';
+import { noteTags } from './ui/noteTags';
+import { WorldSheet, InstrumentSheet, PatternSheet, SectionSheet, SectionGenreSheet, TempoSheet, EnergySheet, DownloadSheet, StartOverModal, RandomizeSheet, ChordSheet } from './ui/sheets';
 import { StyleSheetModal } from './ui/StyleSheet';
 import { StyleInspector } from './ui/StyleInspector';
+import { RoleIcon, RoleSettings } from './ui/RoleControl';
+import { supportsSolo, soloistAtBar } from './engine/sheet/solo';
 import { plateFor, applyPlate } from './ui/worlds';
 import { resolveStyle, getCanonicalStyle } from './engine/style';
 import {
@@ -18,14 +23,14 @@ import {
   isVoiceSilentInSection, isVoiceSilentInAll, silenceVoiceInSection, silenceVoiceInAll,
   unsilenceVoiceInSection, unsilenceVoiceInAll,
   silenceAllVoicesInSection, unsilenceAllVoicesInSection,
-  setTrackSpotlight, getResolvedSectionStyle,
+  setTrackRole, getTrackRole, setSectionSolo, getResolvedSectionStyle,
   getEffectiveBpm, setSectionTempoShift, setSongTempoShift, setSongBpm, setSectionBpm, setSectionEnergy,
 } from './engine/sheet/index.ts';
 import { FEELS } from './data/tempoFeels';
 import { ENERGY_LABELS } from './data/performance/energy';
 import {
-  startAudio, stopAudio, setMasterVolume, renderSongToMp3,
-  createSink, setTrackInstruments, setActiveWorld,
+  startAudio, stopAudio, setMasterVolume,
+  createSink, setPlaybackConfiguration,
   Transport,
 } from './engine/playback/index.ts';
 import { arrangeBand } from './engine/band/index.ts';
@@ -38,9 +43,7 @@ function loadInitialSong(): { song: SongSheet; isNew: boolean } {
 export default function App() {
   const [initialData] = useState(() => loadInitialSong());
   const [song, setSong] = useState<SongSheet>(initialData.song);
-  const [playbackStatus, setPlaybackStatus] = useState<'idle' | 'buffering' | 'playing' | 'paused' | 'error'>('idle');
-  const playing = playbackStatus === 'playing';
-  const audioLoading = playbackStatus === 'buffering';
+  const [playing, setPlaying] = useState(false);
   const [isBouncing, setIsBouncing] = useState(false);
   const [bounceProgress, setBounceProgress] = useState<number | null>(null);
   const [step, setStep] = useState(0);
@@ -60,15 +63,20 @@ export default function App() {
       return false;
     }
   });
+  const [audioLoading, setAudioLoading] = useState(false);
 
   const [pickedRegion, setPickedRegion] = useState<string | null>(null);
 
   const [worldOpen, setWorldOpen] = useState(false);
   const [sectionOpen, setSectionOpen] = useState(false);
   const [chordOpen, setChordOpen] = useState(false);
+  const [roleFor, setRoleFor] = useState<string | null>(null);
+  const [roleScope, setRoleScope] = useState<'section' | 'song'>('section');
+  const [energyOpen, setEnergyOpen] = useState(false);
   const [instrFor, setInstrFor] = useState<string | null>(null);
   const [addingVoice, setAddingVoice] = useState(false);
   const [patternFor, setPatternFor] = useState<string | null>(null);
+  const [note, setNote] = useState<{ title: string; body: string; tags?: string[] } | null>(null);
 
   const [toast, setToast] = useState<string | null>(null);
   const toastTimerRef = useRef<number | null>(null);
@@ -89,11 +97,6 @@ export default function App() {
   }, [song.worldId, song.styleId, (song as any).styleInfluences, (song as any).styleOverrides]);
 
   const handleStartOver = (worldId: string, styleId?: string) => {
-    if (playbackStatus === 'playing' || playbackStatus === 'buffering') {
-      transportRef.current?.stop();
-      stopAudio();
-      setPlaybackStatus('paused');
-    }
     const canonical = getCanonicalStyle(worldId);
     const targetStyleId = styleId ?? canonical.id;
     const fresh = createSheet(worldId, targetStyleId);
@@ -109,11 +112,6 @@ export default function App() {
   };
 
   const handleSelectStyle = (styleId: string) => {
-    if (playbackStatus === 'playing' || playbackStatus === 'buffering') {
-      transportRef.current?.stop();
-      stopAudio();
-      setPlaybackStatus('paused');
-    }
     const next = createSheet(song.worldId, styleId);
     if (song.title && song.title !== 'Untitled') {
       next.title = song.title;
@@ -130,68 +128,28 @@ export default function App() {
     showToast(`Style set to ${targetName}`);
   };
 
-  // Set to true right before a render starts and checked once it resolves,
-  // so a user who hits Cancel doesn't get a surprise download afterwards.
-  const bounceCancelledRef = useRef(false);
-
-  const lastExportUrlRef = useRef<string | null>(null);
-
-  /**
-   * Renders the current song straight from its compiled event list to an
-   * MP3, without playing it out loud or touching the transport at all.
-   */
-  const handleBounceMp3 = async (selectedTrackIds: string[]) => {
-    bounceCancelledRef.current = false;
+  const exportAbortRef = useRef<AbortController | null>(null);
+  const handleExport = async (selectedTrackIds: string[], format: ExportFormat) => {
+    if (exportAbortRef.current) return;
+    const controller = new AbortController();
+    exportAbortRef.current = controller;
     setIsBouncing(true);
     setBounceProgress(0);
+    // Capture the composition and compiled performance together before yielding.
+    const context = { song: songRef.current, performance: perfRef.current, selectedTrackIds };
     try {
-      const blob = await renderSongToMp3(
-        perfRef.current,
-        {
-          selectedTrackIds,
-          worldId: songRef.current.worldId,
-          styleId: songRef.current.styleId,
-          mixState: {
-            volume: Object.fromEntries(songRef.current.tracks.map(t => [t.id, (t as any).volume ?? 1])),
-            pan: Object.fromEntries(songRef.current.tracks.map(t => [t.id, (t as any).pan ?? stereoField.resolveInstrumentPanNormalized(t.instrumentId ?? t.instrument)])),
-            muted: Object.fromEntries(songRef.current.tracks.map(t => [t.id, !!t.muted])),
-            solo: Object.fromEntries(songRef.current.tracks.map(t => [t.id, !!(t as any).solo])),
-            spotlight: Object.fromEntries(songRef.current.tracks.map(t => [t.id, (t as any).spotlight ?? 'off'])),
-          },
-        },
-        (frac) => {
-          if (!bounceCancelledRef.current) setBounceProgress(frac);
-        }
-      );
-      if (bounceCancelledRef.current) return;
-      if (lastExportUrlRef.current) {
-        URL.revokeObjectURL(lastExportUrlRef.current);
-      }
-      if (blob.size < 1024 || blob.type !== 'audio/mpeg') {
-        throw new Error('MP3 encoder returned an invalid audio blob');
-      }
-      const url = URL.createObjectURL(blob);
-      lastExportUrlRef.current = url;
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${(songRef.current.title || 'song').toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9_-]+/g, '') || 'song'}.mp3`;
-      a.rel = 'noopener';
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      // Keep the URL alive long enough for browsers that defer the download
-      // navigation, then release it instead of accumulating Blob URLs.
-      window.setTimeout(() => {
-        if (lastExportUrlRef.current === url) lastExportUrlRef.current = null;
-        URL.revokeObjectURL(url);
-      }, 60_000);
-      showToast('MP3 exported');
-    } catch (err) {
-      console.error('MP3 render failed:', err);
-      if (!bounceCancelledRef.current) showToast('MP3 export failed. Please try again.');
+      const { createExport, downloadExport } = await import('./export');
+      const result = await createExport(context, format, fraction => {
+        if (!controller.signal.aborted) setBounceProgress(fraction);
+      }, controller.signal);
+      if (controller.signal.aborted) return;
+      downloadExport(result.blob, result.name);
+      showToast(`Exported ${result.name}`);
+    } catch (error) {
+      if (!controller.signal.aborted) showToast(error instanceof Error ? error.message : 'Export failed. Please try again.');
     } finally {
-      if (!bounceCancelledRef.current) {
+      if (exportAbortRef.current === controller) {
+        exportAbortRef.current = null;
         setIsBouncing(false);
         setBounceProgress(null);
       }
@@ -216,81 +174,6 @@ export default function App() {
   stepRef.current = step;
   const seekSecondsRef = useRef<number>(0);
   const transportRef = useRef<Transport | null>(null);
-
-  // The musical performance is a compiled artifact. Mixer-only UI changes
-  // (volume/pan/mute/solo/spotlight) must never invalidate or regenerate it.
-  // Those controls are applied directly to the persistent audio graph below.
-  // Only musical inputs participate in this key.
-  const performanceCompileKey = useMemo(() => JSON.stringify({
-    ...song,
-    tracks: song.tracks.map(({ volume: _volume, pan: _pan, muted: _muted, solo: _solo, spotlight: _spotlight, ...track }) => track),
-  }), [song]);
-
-  const perf = useMemo(() => {
-    return arrangeBand(song, 0);
-    // Intentionally keyed by musical content rather than the whole SongSheet.
-    // A new SongSheet object is expected for UI/mixer edits.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [performanceCompileKey]);
-  const perfRef = useRef(perf);
-  perfRef.current = perf;
-
-  const getTransport = () => {
-    if (!transportRef.current) {
-      transportRef.current = new Transport(createSink(), {
-        onPosition(seconds) {
-          const bars = perfRef.current.bars;
-          if (!bars.length) return;
-          let i = Math.min(bars.length - 1, Math.max(0, barRef.current));
-          // the playhead only ever moves a little between ticks, so walk
-          // from where it was instead of searching the whole song
-          while (i > 0 && seconds < bars[i].start) i--;
-          while (i < bars.length - 1 && seconds >= bars[i].end) i++;
-          const bt = bars[i];
-          const frac = bt.end > bt.start ? (seconds - bt.start) / (bt.end - bt.start) : 0;
-          const st = Math.max(0, Math.min(15, Math.floor(frac * 16)));
-          if (barRef.current !== i) { barRef.current = i; setBar(i); }
-          if (stepRef.current !== st) { stepRef.current = st; setStep(st); }
-        },
-        onEnd() {
-          setPlaybackStatus('paused');
-        },
-      });
-    }
-    return transportRef.current;
-  };
-
-  const togglePlayback = async () => {
-    if (playbackStatus === 'playing' || playbackStatus === 'buffering') {
-      transportRef.current?.stop();
-      stopAudio();
-      setPlaybackStatus('paused');
-      return;
-    }
-
-    setPlaybackStatus('buffering');
-    try {
-      const audioCtx = await startAudio();
-      if (!audioCtx) {
-        setPlaybackStatus('error');
-        showToast("Couldn't start audio. Please try again.");
-        return;
-      }
-      setMasterVolume(0.85);
-
-      const tr = getTransport();
-      tr.setPerformance(perfRef.current);
-      tr.setLooping(true);
-      tr.start(seekSecondsRef.current);
-      setPlaybackStatus('playing');
-    } catch (err) {
-      console.error('Audio playback error:', err);
-      transportRef.current?.stop();
-      stopAudio();
-      setPlaybackStatus('error');
-      showToast("Couldn't start audio. Please try again.");
-    }
-  };
 
   const seekTo = (newBar: number, newStep: number = 0) => {
     const total = songRef.current.durationMeasures || 1;
@@ -354,7 +237,7 @@ export default function App() {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
       if (e.code === 'Space') {
         e.preventDefault();
-        togglePlayback();
+        setPlaying(p => !p);
       } else if (e.code === 'ArrowLeft') {
         e.preventDefault();
         seekTo(bar - 1, 0);
@@ -374,11 +257,12 @@ export default function App() {
   const region = song.regions[focusIndex] ?? song.regions[0];
   const chords = region?.chords ?? ['Am'];
   const live = region?.id === playingRegion;
+  const activeChordIndex = (playing || isScrubbing) && live
+    ? Math.max(0, ((song.measures[bar]?.index ?? bar) - (region?.start ?? 0)) % chords.length)
+    : -1;
   // One name for the focused part, used everywhere it shows up in text.
   const partName = region ? (region.formLabel ?? region.name ?? String(region.kind)) : '';
   const sectionStyle = region ? getResolvedSectionStyle(song, region) : null;
-  const spotlightDefaults = sectionStyle?.form?.defaultSpotlights ?? {};
-  const defaultSpotlightRoles = spotlightDefaults[String(region?.formKey ?? region?.kind)] ?? [];
 
   /* ---- tiered performance compilation ----------------------------------
      Cost scales with the scope of the edit, not song length.
@@ -386,35 +270,78 @@ export default function App() {
      cells are cached and only invalidated when their specific inputs change. */
   const stereoField = useMemo(() => new StereoFieldManager(), []);
 
+  const perf = useMemo(() => {
+    return arrangeBand(song, 0);
+  }, [song]);
+  const perfRef = useRef(perf);
+  perfRef.current = perf;
+
+  // Configure before scheduling the edited performance. Playhead updates are
+  // independent of these inputs and cannot enter audio graph preparation.
   useEffect(() => {
+    const map = Object.fromEntries(song.tracks.map(t => [t.id, t.instrumentId ?? t.instrument]));
+    setPlaybackConfiguration(perf, map, Object.fromEntries(song.tracks.map(t => [t.id, t.role])),
+      Object.fromEntries(song.tracks.map(t => [t.id, t.volume ?? 1])), song.worldId, song.styleId);
     transportRef.current?.patchPerformance(perf);
-  }, [perf]);
+  }, [perf, song.tracks, song.worldId, song.styleId]);
 
-  // The audio engine resolves a physical model per note from the instrument
-  // id, but the transport only ever hands it a bare track id — keep it in
-  // sync with the current song so noteOn can look the instrument back up.
   useEffect(() => {
-    const map: Record<string, string | undefined> = {};
-    const volumes: Record<string, number | undefined> = {};
-    for (const t of song.tracks) {
-      map[t.id] = t.instrumentId ?? t.instrument;
-      volumes[t.id] = (t as any).volume ?? 0.82;
+    if (!playing) {
+      transportRef.current?.stop();
+      stopAudio();
+      return;
     }
-    setTrackInstruments(map, volumes);
-    setActiveWorld(song.worldId, song.styleId);
-  }, [song.tracks, song.worldId, song.styleId]);
+    let alive = true;
 
-  useEffect(() => {
+    (async () => {
+      try {
+        setAudioLoading(true);
+        const ctx = await startAudio();
+        if (!ctx || !alive) return;
+        setAudioLoading(false);
+        if (!alive) return;
+        setMasterVolume(0.85);
+
+        if (!transportRef.current) {
+          transportRef.current = new Transport(createSink(), {
+            onPosition(seconds) {
+              const bars = perfRef.current.bars;
+              if (!bars.length) return;
+              let i = Math.min(bars.length - 1, Math.max(0, barRef.current));
+              // the playhead only ever moves a little between ticks, so walk
+              // from where it was instead of searching the whole song
+              while (i > 0 && seconds < bars[i].start) i--;
+              while (i < bars.length - 1 && seconds >= bars[i].end) i++;
+              const bt = bars[i];
+              const frac = bt.end > bt.start ? (seconds - bt.start) / (bt.end - bt.start) : 0;
+              const st = Math.max(0, Math.min(15, Math.floor(frac * 16)));
+              if (barRef.current !== i) { barRef.current = i; setBar(i); }
+              if (stepRef.current !== st) { stepRef.current = st; setStep(st); }
+            },
+          });
+        }
+
+        const tr = transportRef.current;
+        tr.setPerformance(perfRef.current);
+        tr.setLooping(true);
+        tr.start(seekSecondsRef.current);
+      } catch (err) {
+        console.error('Audio playback error:', err);
+        setAudioLoading(false);
+        setPlaying(false);
+        showToast("Couldn't start audio. Please try again.");
+      }
+    })();
+
     return () => {
+      alive = false;
       transportRef.current?.stop();
       stopAudio();
     };
-  }, []);
+  }, [playing]);
 
   // Accepts a plain Track: the sheet's tracks always carry an instrumentId at
   // runtime, but the stored type keeps it optional for older saved songs.
-  const spotlightIsActive = (track: Pick<Voice, 'spotlight' | 'role'>) =>
-    track.spotlight === 'on' || (track.spotlight !== 'off' && defaultSpotlightRoles.includes(track.role));
 
   const sectionGenreId = getSectionGenre(song, region?.id);
   const sectionPlate = plateFor(sectionGenreId);
@@ -463,7 +390,6 @@ export default function App() {
               transportRef.current.setTrackMute(t.id, !!t.muted);
               transportRef.current.setTrackPan(t.id, (t as any).pan ?? stereoField.resolveInstrumentPanNormalized(t.instrumentId ?? t.instrument));
               transportRef.current.setTrackSolo(t.id, !!(t as any).solo);
-              transportRef.current.setTrackSpotlight(t.id, (t as any).spotlight ?? 'auto');
             }
           }
         }
@@ -593,9 +519,9 @@ export default function App() {
         <div className="flex items-stretch gap-2.5 select-none mb-5">
           {/* Play/Pause button */}
           <button
-            onClick={togglePlayback}
-            aria-label={audioLoading ? 'Cancel audio loading' : playbackStatus === 'error' ? 'Retry audio' : playing ? 'Pause' : 'Play'}
-            aria-busy={audioLoading}
+            onClick={() => setPlaying(p => !p)}
+            disabled={audioLoading}
+            aria-label={playing ? 'Pause' : 'Play'}
             className="flex items-center justify-center transition-transform active:scale-95 rounded shrink-0 self-stretch cursor-pointer relative"
             style={{
               width: 52,
@@ -606,8 +532,6 @@ export default function App() {
             title={
               audioLoading
                 ? 'Loading sounds…'
-                : playbackStatus === 'error'
-                ? 'Audio failed to start. Retry (Space)'
                 : playing
                 ? 'Pause (Space)'
                 : 'Play (Space)'
@@ -824,37 +748,13 @@ export default function App() {
 
         {/* Weight, Chords, BPM & Part Genre in this section */}
         <div className="flex items-center gap-2.5 mb-5 flex-wrap">
-          {/* Section weight selector */}
-          <div
-            className="btn-pill inline-flex items-center gap-1 p-1 shrink-0 h-[34px]"
-            style={{
-              background: 'var(--tone)',
-              color: 'var(--ink)',
-              boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 25%, transparent)',
-            }}
-            title="Weight — how much this part of the song is working"
-          >
-            {([1, 2, 3, 4, 5] as const).map(d => {
-              const isActive = (region.energy ?? 3) === d;
-              const label = isActive ? ENERGY_LABELS[d] : String(d);
-              return (
-                <button
-                  key={d}
-                  type="button"
-                  onClick={() => edit(s => setSectionEnergy(s, region.id, d))}
-                  className="px-2.5 h-full rounded-full text-xs font-bold cursor-pointer transition-all flex items-center justify-center min-w-[22px]"
-                  style={{
-                    background: isActive ? 'var(--ink)' : 'transparent',
-                    color: isActive ? '#ffffff' : 'var(--ink)',
-                    opacity: isActive ? 1 : 0.6,
-                  }}
-                  title={`Weight ${d} — ${ENERGY_LABELS[d]}`}
-                >
-                  {label}
-                </button>
-              );
-            })}
-          </div>
+          <button type="button" onClick={() => setEnergyOpen(true)}
+            className="btn-pill inline-flex items-center gap-1.5 px-3 shrink-0 h-[34px] cursor-pointer hover:opacity-85"
+            style={{ background: 'var(--tone)', color: 'var(--ink)', boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 25%, transparent)' }}
+            title="Change energy">
+            <span className="text-xs font-semibold">{ENERGY_LABELS[region.energy ?? 3]}</span>
+            <Pencil size={9} strokeWidth={2} style={{ opacity: 0.45 }} />
+          </button>
 
           {/* Chords Button */}
           <button
@@ -870,21 +770,19 @@ export default function App() {
           >
             <div className="flex flex-wrap gap-x-2.5 items-center">
               {chords.map((c, i) => {
-                const currentMeasure = song.measures[bar];
-                const barInRegion = currentMeasure ? Math.max(0, currentMeasure.index - (region?.start ?? 0)) : 0;
-                const activeChordIdx = barInRegion % (chords.length || 1);
-                const now = (playing || isScrubbing) && live && i === activeChordIdx;
+                const now = i === activeChordIndex;
                 return (
                   <span
                     key={i}
                     style={{
-                      fontSize: 12.5,
+                      fontSize: 13,
+                      opacity: now ? 1 : 0.75,
                       fontWeight: now ? 700 : 600,
                       color: now ? 'var(--ground)' : 'inherit',
-                      background: now ? 'var(--signal)' : 'transparent',
-                      padding: now ? '1px 5px' : '0 1px',
-                      borderRadius: 3,
-                      transition: 'all 0.15s ease',
+                      background: now ? 'var(--ink)' : 'transparent',
+                      border: now ? '1px solid var(--ink)' : '1px solid transparent',
+                      borderRadius: 2,
+                      padding: '1px 4px',
                     }}
                   >
                     {c}
@@ -908,6 +806,7 @@ export default function App() {
             title="Change tempo"
           >
             <span style={{ fontWeight: 600, fontSize: 12 }}>{effectivePlayback.bpm} BPM</span>
+            <span className="text-xs opacity-65">· {effectivePlayback.feel.name}</span>
             <Pencil size={9} strokeWidth={2} style={{ opacity: 0.45, flexShrink: 0 }} />
           </button>
 
@@ -957,149 +856,34 @@ export default function App() {
             const p = patternOf(t.id);
             const isSilentHere = isVoiceSilentInSection(song, t.id, region.id);
             const isSilentInAll = isVoiceSilentInAll(song, t.id);
+            const soloPlan = song.arrangementContext?.[region.id]?.solo;
+            const restsForSolo = !!soloPlan && (!supportsSolo(soloPlan, t, soloistAtBar(soloPlan, region, shownMeasure?.index ?? region.start, sectionStyle?.contract.cycleLength)) ||
+              (soloPlan.mode === 'trading' && soloPlan.trackIds.includes(t.id) &&
+                !soloistAtBar(soloPlan, region, shownMeasure?.index ?? region.start, sectionStyle?.contract.cycleLength).includes(t.id)));
             const shape = isSilentHere ? undefined : shownMeasure?.patternDetailsByTrack?.[t.id];
-            const sounding = (playing || isScrubbing) && live && !t.muted && !isSilentHere;
-
-            const handleCycleSilence = (trackId: string, shiftKey = false) => {
-              if (shiftKey) {
-                edit(s => isSilentInAll ? unsilenceVoiceInAll(s, trackId) : silenceVoiceInAll(s, trackId));
-                showToast(isSilentInAll ? `Playing ${v.name} in song` : `Silenced ${v.name} in all parts`);
-                return;
-              }
-              if (isSilentInAll) {
-                edit(s => unsilenceVoiceInAll(s, trackId));
-                showToast(`Playing ${v.name} in song`);
-              } else if (isSilentHere) {
-                edit(s => {
-                  const un = unsilenceVoiceInSection(s, trackId, region.id);
-                  return silenceVoiceInAll(un, trackId);
-                });
-                showToast(`Silenced ${v.name} in all parts`);
-              } else {
-                edit(s => silenceVoiceInSection(s, trackId, region.id));
-                showToast(`Silenced ${v.name} in ${partName}`);
-              }
-            };
-
-            const isSpotlightActive = spotlightIsActive(t);
-            const isSpotlightExplicitOn = t.spotlight === 'on';
-            const isSpotlightExplicitOff = t.spotlight === 'off';
+            const sounding = (playing || isScrubbing) && live && !t.muted && !isSilentHere && !restsForSolo;
 
             return (
               <div
                 key={t.id}
-                className="py-2.5 flex items-stretch gap-2.5"
+                className="py-2.5 flex flex-col justify-center"
                 style={{
                   borderTop: '1px solid color-mix(in srgb, var(--ink) 14%, transparent)',
-                  opacity: t.muted ? 0.35 : isSilentHere ? 0.65 : 1,
+                  opacity: t.muted ? 0.35 : isSilentHere || restsForSolo ? 0.65 : 1,
                 }}
               >
-                {/* Side Icon Column: Sound (silence) -> Spotlight (each 50% of row height) */}
-                <div className="flex flex-col items-center justify-between shrink-0 gap-1 self-stretch" style={{ width: 24 }}>
-                  {/* Sound Icon: iterates between part | song | silent */}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleCycleSilence(t.id, e.shiftKey || e.altKey);
-                    }}
-                    className="relative flex-1 w-full flex items-center justify-center cursor-pointer transition-transform active:scale-95 rounded"
-                    style={{
-                      color: 'var(--ink)',
-                      opacity: isSilentInAll ? 0.35 : isSilentHere ? 0.65 : 0.95,
-                    }}
-                    title={
-                      isSilentInAll
-                        ? `Silent in all parts (click to play in song · Shift-click to toggle all)`
-                        : isSilentHere
-                        ? `Silent in ${partName} only (click to silence in all parts)`
-                        : `Playing in song (click to silence in ${partName})`
-                    }
-                    aria-label={
-                      isSilentInAll
-                        ? `Sound for ${v.name}: Silent in all parts`
-                        : isSilentHere
-                        ? `Sound for ${v.name}: Silent in ${partName}`
-                        : `Sound for ${v.name}: Playing in song`
-                    }
-                  >
-                    {isSilentInAll ? (
-                      <VolumeX size={18} strokeWidth={2} />
-                    ) : isSilentHere ? (
-                      <Volume1 size={18} strokeWidth={2} />
-                    ) : (
-                      <Volume2 size={18} strokeWidth={2} />
-                    )}
-                    {(isSilentHere || isSilentInAll) && (
-                      <span
-                        className="absolute -top-0.5 -right-0.5 font-mono font-bold leading-none select-none rounded-[1px]"
-                        style={{
-                          fontSize: '8px',
-                          padding: '1px 2px',
-                          background: 'var(--tone)',
-                          color: 'var(--ink)',
-                          boxShadow: '0 0 0 1px var(--ground)',
-                        }}
-                      >
-                        {isSilentInAll ? 's' : 'p'}
-                      </span>
-                    )}
-                  </button>
+                {/* Row Header Line: Role + Name + Status on left, Pattern + Action on right */}
+                <div className="flex items-center justify-between gap-2">
+                  {/* Left Column: Role Icon + Instrument Name + Status */}
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <RoleIcon instrumentName={v.name} role={getTrackRole(song, t.id, region.id)}
+                      solo={!!region.solo?.trackIds.includes(t.id)} onClick={() => { setRoleScope('section'); setRoleFor(t.id); }} />
 
-                  {/* Spotlight / Highlight Icon: click on and off */}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      const next = isSpotlightExplicitOn ? 'off' : 'on';
-                      edit(s => setTrackSpotlight(s, t.id, next));
-                      showToast(`Spotlight ${next === 'on' ? 'on' : 'off'} for ${v.name}`);
-                    }}
-                    className="relative flex-1 w-full flex items-center justify-center cursor-pointer transition-transform active:scale-95 rounded"
-                    style={{
-                      opacity: isSpotlightExplicitOff ? 0.3 : isSpotlightActive ? 1 : 0.45,
-                      color: isSpotlightExplicitOn ? 'var(--signal)' : 'var(--ink)',
-                    }}
-                    title={
-                      isSpotlightExplicitOn
-                        ? `Spotlight: On (click to turn off)`
-                        : isSpotlightExplicitOff
-                        ? `Spotlight: Off (click to turn on)`
-                        : `Spotlight: Auto (${isSpotlightActive ? 'active' : 'inactive'} in style). Click to turn on`
-                    }
-                    aria-label={`Spotlight ${t.name}: ${t.spotlight ?? 'auto'}`}
-                  >
-                    <Sparkles
-                      size={17}
-                      fill={isSpotlightExplicitOn ? 'currentColor' : isSpotlightActive ? 'currentColor' : 'none'}
-                      strokeWidth={1.85}
-                    />
-                    {(t.spotlight === 'auto' || !t.spotlight) && (
-                      <span
-                        className="absolute -top-0.5 -right-0.5 font-mono font-bold leading-none select-none rounded-[1px]"
-                        style={{
-                          fontSize: '8px',
-                          padding: '1px 2px',
-                          background: 'var(--tone)',
-                          color: 'var(--ink)',
-                          boxShadow: '0 0 0 1px var(--ground)',
-                        }}
-                      >
-                        a
-                      </span>
-                    )}
-                  </button>
-                </div>
-
-                {/* Main Track Info + Rhythm line */}
-                <div className="flex-1 min-w-0 flex flex-col justify-center">
-                  {/* Row Header Line: Instrument Name on left, Pattern + Action on right */}
-                  <div className="flex items-center justify-between gap-2">
                     <button
                       onClick={() => setInstrFor(t.id)}
                       className="font-semibold text-left transition-all hover:opacity-100 cursor-pointer flex items-center gap-1 shrink-0 pb-[1px]"
                       style={{
-                        fontSize: 11.5,
+                        fontSize: 13.5,
                         border: 'none',
                         borderBottom: '1px dotted color-mix(in srgb, var(--ink) 45%, transparent)',
                         borderRadius: 0,
@@ -1107,85 +891,101 @@ export default function App() {
                       }}
                       title={`Change instrument (${v.name})`}
                     >
-                      <span className="truncate max-w-[140px] sm:max-w-[200px]">{v.name}</span>
+                      <span className="truncate max-w-[120px] sm:max-w-[160px]">{v.name}</span>
                       <Pencil size={10} strokeWidth={2} style={{ opacity: 0.45, flexShrink: 0 }} />
                     </button>
 
-                    <div className="flex items-center justify-end gap-1.5 shrink-0">
-                      <button
-                        onClick={() => setPatternFor(t.id)}
-                        className="text-right transition-all hover:opacity-100 font-mono cursor-pointer flex items-center gap-1 shrink-0 pb-[1px]"
-                        style={{
-                          fontSize: 11.5,
-                          border: 'none',
-                          borderBottom: '1px dotted color-mix(in srgb, var(--ink) 40%, transparent)',
-                          borderRadius: 0,
-                          opacity: isSilentHere ? 0.6 : 0.85,
-                          lineHeight: 1.2,
-                        }}
-                        title={
-                          isSilentInAll
-                            ? 'Pick a rhythm to play in the whole song'
-                            : isSilentHere
-                            ? `Pick a rhythm to play in ${partName}`
-                            : `Change rhythm for ${partName}`
-                        }
-                      >
-                        <span className="truncate max-w-[140px] sm:max-w-[200px]">
-                          {isSilentInAll ? 'silent in all' : isSilentHere ? '+ pick rhythm' : p ? cleanPatternName(p.name) : 'silent'}
-                        </span>
-                        <Pencil size={10} strokeWidth={2} style={{ opacity: 0.45, flexShrink: 0 }} />
-                      </button>
-
-                      {/* Delete instrument button */}
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          edit(s => removeVoice(s, t.id));
-                          showToast(`Deleted ${v.name}`);
-                        }}
-                        className="w-6 h-6 opacity-35 hover:opacity-100 hover:text-red-500 transition-all cursor-pointer flex items-center justify-center shrink-0 ml-0.5"
-                        style={{
-                          boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 15%, transparent)',
-                        }}
-                        title={`Delete ${v.name} from song`}
-                        aria-label={`Delete ${v.name}`}
-                      >
-                        <Trash2 size={13.5} />
-                      </button>
-                    </div>
+                    {isSilentHere && <span className="text-[11px] opacity-60">silent</span>}
                   </div>
 
-                  {/* Rhythm glyph or rest indicator */}
-                  <div style={{ marginTop: 5 }}>
-                    {isSilentHere ? (
-                      <div
-                        onClick={() => handleCycleSilence(t.id, false)}
-                        className="relative flex items-center justify-center cursor-pointer transition-opacity hover:opacity-80"
-                        style={{ height: 22 }}
-                        title={isSilentInAll ? 'Click to play in all parts' : `Click to play in ${partName}`}
-                      >
-                        <div className="w-full opacity-20">
-                          <Glyph onsets={[]} dim steps={16} height={22} />
-                        </div>
-                        <span
-                          className="absolute text-[10px] micro tracking-wider opacity-50 select-none"
-                          style={{ color: 'var(--ink)' }}
-                        >
-                          {isSilentInAll ? '— silent in all parts —' : `— silent in ${partName} —`}
-                        </span>
-                      </div>
-                    ) : (
-                      <Glyph
-                        onsets={shape?.onsetGrid}
-                        accents={shape?.accentProfile}
-                        playhead={sounding ? step : null}
-                        dim={t.muted}
-                        height={22}
-                      />
+                  {/* Right Column: Pattern Name & Actions */}
+                  <div className="flex items-center justify-end gap-1.5 shrink-0">
+                    <button
+                      onClick={() => setPatternFor(t.id)}
+                      className="text-right transition-all hover:opacity-100 font-mono cursor-pointer flex items-center gap-1 shrink-0 pb-[1px]"
+                      style={{
+                        fontSize: 11.5,
+                        border: 'none',
+                        borderBottom: '1px dotted color-mix(in srgb, var(--ink) 40%, transparent)',
+                        borderRadius: 0,
+                        opacity: isSilentHere ? 0.6 : 0.85,
+                        lineHeight: 1.2,
+                      }}
+                      title={
+                        isSilentInAll
+                          ? 'Pick a rhythm to play in the whole song'
+                          : isSilentHere
+                          ? `Pick a rhythm to play in ${partName}`
+                          : `Change rhythm for ${partName}`
+                      }
+                    >
+                      <span className="truncate max-w-[140px] sm:max-w-[200px]">
+                        {isSilentInAll ? 'silent in all' : isSilentHere ? '+ pick rhythm' : p ? cleanPatternName(p.name) : 'silent'}
+                      </span>
+                      <Pencil size={10} strokeWidth={2} style={{ opacity: 0.45, flexShrink: 0 }} />
+                    </button>
+
+                    {p && !isSilentHere && (
+                      <NoteMark onClick={() => setNote({
+                        title: cleanPatternName(p.name),
+                        body: p.description,
+                        tags: noteTags(p),
+                      })} />
                     )}
+
+                    {/* Delete instrument button with consistent hit-box */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        edit(s => removeVoice(s, t.id));
+                        showToast(`Deleted ${v.name}`);
+                      }}
+                      className="w-6 h-6 opacity-35 hover:opacity-100 hover:text-red-500 transition-all cursor-pointer flex items-center justify-center shrink-0 ml-0.5"
+                      style={{
+                        boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 15%, transparent)',
+                      }}
+                      title={`Delete ${v.name} from song`}
+                      aria-label={`Delete ${v.name}`}
+                    >
+                      <Trash2 size={13.5} />
+                    </button>
                   </div>
+                </div>
+
+                {/* Rhythm glyph or rest indicator aligned to instrument baseline */}
+                <div style={{ marginLeft: 23, marginTop: 5 }}>
+                  {restsForSolo && !isSilentHere ? (
+                    <div className="relative flex items-center justify-center" style={{ height: 22 }}>
+                      <div className="w-full opacity-20"><Glyph onsets={[]} dim steps={16} height={22} /></div>
+                      <span className="absolute text-[10px] opacity-60">{soloPlan?.trackIds.includes(t.id) ? '— waiting for solo turn —' : '— rests for solo —'}</span>
+                    </div>
+                  ) : isSilentHere ? (
+                    <div
+                      onClick={() => edit(s => isSilentInAll ? unsilenceVoiceInAll(s, t.id) : unsilenceVoiceInSection(s, t.id, region.id))}
+                      className="relative flex items-center justify-center cursor-pointer transition-opacity hover:opacity-80"
+                      style={{ height: 22 }}
+                      title={isSilentInAll ? 'Click to play in all parts' : `Click to play in ${partName}`}
+                    >
+                      <div className="w-full opacity-20">
+                        <Glyph onsets={[]} dim steps={16} height={22} />
+                      </div>
+                      <span
+                        className="absolute text-[10px] micro tracking-wider opacity-50 select-none"
+                        style={{ color: 'var(--ink)' }}
+                      >
+                        {isSilentInAll ? '— silent in all parts —' : `— silent in ${partName} —`}
+                      </span>
+                    </div>
+                  ) : (
+                    <Glyph
+                      onsets={shape?.onsetGrid}
+                      accents={shape?.accentProfile}
+                      playhead={sounding ? step : null}
+                      dim={t.muted}
+                      height={22}
+                    />
+                  )}
                 </div>
               </div>
             );
@@ -1256,7 +1056,7 @@ export default function App() {
       {isBouncing && (
         <div className="fixed inset-0 bg-white/85 z-[100] flex flex-col items-center justify-center p-6 backdrop-blur-sm text-center">
           <div className="w-10 h-10 border-3 border-black/15 border-t-black rounded-full animate-spin mb-4" />
-          <div className="text-xl font-bold mb-2">Creating your MP3…</div>
+          <div className="text-xl font-bold mb-2">Creating your export…</div>
           <p className="text-sm opacity-60 max-w-xs leading-relaxed mb-2">
             Please stand by while your song renders…
           </p>
@@ -1270,9 +1070,7 @@ export default function App() {
           )}
           <button 
             onClick={() => {
-              bounceCancelledRef.current = true;
-              setIsBouncing(false);
-              setBounceProgress(null);
+              exportAbortRef.current?.abort();
             }}
             className="btn-pill mt-6 cursor-pointer transition-opacity hover:opacity-80"
             style={{
@@ -1525,8 +1323,64 @@ export default function App() {
         onSetSectionTempoShift={shift => region && edit(s => setSectionTempoShift(s, region.id, shift))}
       />
 
+      <EnergySheet open={energyOpen} onClose={() => setEnergyOpen(false)}
+        energy={region.energy ?? 3} sectionKind={partName}
+        onPick={energy => edit(s => setSectionEnergy(s, region.id, energy))} />
+
+      <Sheet open={!!roleFor} onClose={() => setRoleFor(null)} title="Instrument role"
+        kicker={`${song.tracks.find(t => t.id === roleFor)?.name ?? 'Instrument'} · ${roleScope === 'section' ? `${partName} only` : 'whole song'}`}>
+        {roleFor && (
+          <RoleSettings
+            role={getTrackRole(song, roleFor, region.id)}
+            roleScope={roleScope}
+            onRoleScope={setRoleScope}
+            onRole={(role, scope) => edit(s => setTrackRole(s, roleFor!, region.id, role, scope))}
+            silentInPart={roleScope === 'song'
+              ? isVoiceSilentInAll(song, roleFor!)
+              : isVoiceSilentInSection(song, roleFor!, region.id)}
+            onTogglePartSilence={() => edit(s => roleScope === 'song'
+              ? isVoiceSilentInAll(s, roleFor!) ? unsilenceVoiceInAll(s, roleFor!) : silenceVoiceInAll(s, roleFor!)
+              : isVoiceSilentInSection(s, roleFor!, region.id) ? unsilenceVoiceInSection(s, roleFor!, region.id) : silenceVoiceInSection(s, roleFor!, region.id))}
+            solo={roleScope === 'song'
+              ? song.regions.length > 0 && song.regions.every(r => r.solo?.trackIds.includes(roleFor!))
+              : !!region.solo?.trackIds.includes(roleFor!)}
+            soloMode={region.solo?.mode ?? 'genre'}
+            soloistCount={region.solo?.trackIds.length ?? 0}
+            definition={sectionStyle?.contract.soloDefinition}
+            onSolo={() => edit(s => {
+              if (roleScope === 'song') {
+                const allEnabled = s.regions.length > 0 && s.regions.every(r => r.solo?.trackIds.includes(roleFor!));
+                return s.regions.reduce((nextSheet, r) => {
+                  const current = nextSheet.regions.find(part => part.id === r.id)?.solo;
+                  const ids = current?.trackIds ?? [];
+                  const nextIds = allEnabled ? ids.filter(id => id !== roleFor!) : [...new Set([...ids, roleFor!])];
+                  return setSectionSolo(nextSheet, r.id, { trackIds: nextIds, mode: current?.mode ?? region.solo?.mode ?? 'genre' });
+                }, s);
+              }
+              const current = s.regions.find(r => r.id === region.id)?.solo;
+              const ids = current?.trackIds ?? [];
+              const next = ids.includes(roleFor!) ? ids.filter(id => id !== roleFor!) : [...ids, roleFor!];
+              return setSectionSolo(s, region.id, { trackIds: next, mode: current?.mode ?? 'genre' });
+            })}
+            onMode={mode => edit(s => {
+              if (roleScope === 'song') {
+                return s.regions.reduce((nextSheet, r) => {
+                  const current = nextSheet.regions.find(part => part.id === r.id)?.solo;
+                  if (!current?.trackIds.includes(roleFor!)) return nextSheet;
+                  return setSectionSolo(nextSheet, r.id, { trackIds: current.trackIds, mode });
+                }, s);
+              }
+              const current = s.regions.find(r => r.id === region.id)?.solo;
+              return setSectionSolo(s, region.id, { trackIds: current?.trackIds ?? [roleFor!], mode });
+            })}
+          />
+        )}
+      </Sheet>
+
       <InstrumentSheet
         open={!!instrFor} onClose={() => setInstrFor(null)}
+        title={song.tracks.find(t => t.id === instrFor)?.name ?? 'Instrument'}
+        sectionKind={partName}
         current={(song.tracks.find(t => t.id === instrFor) as Voice | undefined)?.instrumentId}
         isSilentPart={instrFor ? isVoiceSilentInSection(song, instrFor, region.id) : false}
         onSilencePart={() => instrFor && edit(s => silenceVoiceInSection(s, instrFor, region.id))}
@@ -1562,14 +1416,19 @@ export default function App() {
         onPickEverywhere={id => patternFor && edit(s => setPattern(s, patternFor, region.id, id, 'song'))}
       />
 
+      <NoteCard
+        open={!!note} onClose={() => setNote(null)}
+        title={note?.title ?? ''} body={note?.body ?? ''} tags={note?.tags}
+      />
+
       {downloadOpen && (
         <DownloadSheet
           open={downloadOpen}
           onClose={() => setDownloadOpen(false)}
           song={song}
-          onBounceMp3={(selectedTrackIds) => {
+          onExport={(selectedTrackIds, format) => {
             setDownloadOpen(false);
-            handleBounceMp3(selectedTrackIds);
+            void handleExport(selectedTrackIds, format);
           }}
         />
       )}

@@ -4,9 +4,10 @@ export const horn_section: InstrumentDef = {
   id: "horn-section",
   name: "Horn section",
   family: "brass",
+  brassSynthesis: { cutoffScale: 0.88 },
   voicing: "chord",
   elementaryModel: 15,
-  makeupGain: 23.832,
+  makeupGain: 0.399,
   polyphony: 8,
   note: "Tight funk and soul brass section (trumpet, tenor sax, trombone) with laser-accurate syncopated hits",
   acousticProfile: {

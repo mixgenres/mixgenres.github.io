@@ -22,7 +22,7 @@ export const ryuteki: InstrumentDef = {
     ring: 3
   },
   luthierPhysics: {
-    category: "aerophone_lip_tension",
+    category: "aerophone_edge_blown",
     materialDensity: 0.4,
     tension: 0.5,
     bodyResonanceVolume: 0.6,

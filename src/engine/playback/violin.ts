@@ -43,7 +43,7 @@ export default class ViolinModule implements InstrumentModule {
     const isChicharra = action === 'chicharra' || /chicharra/i.test(action ?? '');
     const isTambor = action === 'tambor' || /tambor/i.test(action ?? '');
     const isLatigo = action === 'latigo' || /latigo|whip/i.test(action ?? '');
-    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''}`);
+    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const tangoResponse = TANGO_INSTRUMENT_RESPONSE.violin;
     const isArrastre = action === 'arrastre' || /arrastre|drag/i.test(action ?? '');
     const isTangoObligato = isTango && (ctx.voice.note ?? 60) <= 62 && !isPizz;

@@ -12,10 +12,14 @@ export default defineConfig({
     allowedHosts: true,
   },
   plugins: [react(), tailwindcss()],
+  // The MP3 worker pulls in a dynamically split encoder dependency. IIFE
+  // workers cannot represent that chunk graph, so emit it as an ES module.
+  worker: {
+    format: 'es',
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '.'),
     },
   },
 });
-

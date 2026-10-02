@@ -1,6 +1,5 @@
 import { TANGO_ELECTRONIC_DRUM_RESPONSE, URBAN_LATIN_DRUM_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
-import { DRUM_COMPONENT_PATTERNS } from '../../data/instruments/idClassifiers';
-import { instrumentHasKey, ENGINE_INSTRUMENT_KEYS } from '../../engine/lookup/instrumentKeys.ts';
+import { DRUM_COMPONENT_PATTERNS, METAL_SHELL_INSTRUMENT_PATTERN, WOOD_BOX_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
 import { DRUM_HEAVY_ROCK_PATTERN, DRUM_KICK_GENRE_TUNING, DRUM_LATIN_PATTERN, DRUM_REGGAE_SKA_PATTERN, DRUM_ROCK_PATTERN, DRUM_URBAN_PATTERN } from '../../data/sound/dsp/genrePlaybackProfiles';
 import { HOUSE_DISCO_PATTERN, KIZOMBA_PATTERN, REGGAETON_PATTERN, TANGO_ELECTRONICO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
 import { el } from '@elemaudio/core';
@@ -31,9 +30,9 @@ export default class DrumsModule implements InstrumentModule {
     const f0 = el.mul(freqSignal, Math.pow(2, detuneSemitones / 12));
 
     const instId = (params.instrumentId ?? '').toLowerCase();
-    const isTangoElectronico = TANGO_ELECTRONICO_PATTERN.test(`${params.genreId ?? ''}`);
-    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''}`);
-    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''}`);
+    const isTangoElectronico = TANGO_ELECTRONICO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const gd = ctx.genreDialect;
     const genre = gd.id;
     const component = resolveInstrumentKitComponent(instId, voice.note, `${action} ${voice.action ?? ''}`);
@@ -275,8 +274,8 @@ export default class DrumsModule implements InstrumentModule {
       return el.tanh(el.mul(response.drive + params.drive * response.driveMultiplier, el.add(body, click)));
     }
     const construction = params.bodyConstruction ?? 'wood-box';
-    const isMetalShell = construction === 'metal-shell' || instrumentHasKey(instId, ENGINE_INSTRUMENT_KEYS.metalShell);
-    const isWoodBox = construction === 'wood-box' || instrumentHasKey(instId, ENGINE_INSTRUMENT_KEYS.woodBox);
+    const isMetalShell = construction === 'metal-shell' || METAL_SHELL_INSTRUMENT_PATTERN.test(instId);
+    const isWoodBox = construction === 'wood-box' || WOOD_BOX_INSTRUMENT_PATTERN.test(instId);
     const isHeelToe = action === 'heel' || action === 'toe' || /heel|toe/i.test(action ?? '');
 
     const isLogDrum = instId.includes('log-drum');

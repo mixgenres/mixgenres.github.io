@@ -6,7 +6,7 @@ export const sub_bass: InstrumentDef = {
   family: "electronic",
   voicing: "bass",
   elementaryModel: 3,
-  makeupGain: 35.146,
+  makeupGain: 0.685,
   polyphony: 4,
   note: "Felt more than heard",
   acousticProfile: {

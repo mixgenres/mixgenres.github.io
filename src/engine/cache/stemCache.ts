@@ -59,57 +59,42 @@ export function computeTrackStemFingerprint(
     h2 = Math.imul(h2, 0x27d4eb2d);
   }
 
-  // 1. Static instrument assignment & macro parameters
+  // Preserve event order and exact numeric values: ordering affects voice
+  // stealing and same-time controller changes. Include all physical controls.
   update(trackId);
   update(instrumentId);
-  update(String(params.model));
-  update(params.dialect || '');
-  update(params.performanceMode || '');
-  update(params.genreId || '');
-  update(params.volume.toFixed(4));
-  update((params.roleGain ?? 1).toFixed(4));
-  update(params.decay.toFixed(3));
-  update(params.brightness.toFixed(3));
-  update(params.articulation.toFixed(3));
-  update(params.pluckPosition.toFixed(3));
-  update(params.bowPressure.toFixed(3));
-  update(params.contact.toFixed(3));
-  update(params.drive.toFixed(3));
-  update(params.body.toFixed(3));
-  update(params.tension.toFixed(3));
-  update((params.bendGlideMs ?? 0).toFixed(1));
-  update(params.pan.toFixed(3));
-  update(trackMixVolume.toFixed(3));
+  update(JSON.stringify(Object.entries(params).sort(([a], [b]) => a.localeCompare(b))));
+  update(String(trackMixVolume));
   update(String(sampleRate));
-
-  // 2. Exact sequence of timed notes
-  const sortedNotes = trackNotes.slice().sort((a, b) => a.time - b.time || a.midi - b.midi || a.dur - b.dur);
-  update(`notes_${sortedNotes.length}`);
-  for (let i = 0; i < sortedNotes.length; i++) {
-    const n = sortedNotes[i];
-    let s = `${n.time.toFixed(4)},${n.dur.toFixed(4)},${n.midi},${n.vel},${n.gestureCode},${n.frequencyHz ? n.frequencyHz.toFixed(2) : ''}`;
-    if (n.pitchBend && n.pitchBend.length > 0) {
-      s += ':' + n.pitchBend.map(p => `${p.offset.toFixed(4)}@${p.value}`).join(';');
-    }
-    update(s);
-  }
-
-  // 3. Exact sequence of timed CCs
-  const sortedCCs = trackCCs.slice().sort((a, b) => a.time - b.time || a.cc - b.cc);
-  update(`ccs_${sortedCCs.length}`);
-  for (let i = 0; i < sortedCCs.length; i++) {
-    const c = sortedCCs[i];
-    update(`${c.time.toFixed(4)},${c.cc},${c.value}`);
-  }
-  // Physical bandoneon fingering is part of the render identity; changing the
-  // selected button/side must invalidate a cached stem even when MIDI is equal.
-  for (const n of trackNotes.slice().sort((a, b) => a.time - b.time || a.midi - b.midi)) {
-    update(`bn_${n.bandoneonButtonId ?? ''},${n.bandoneonButtonIndex ?? -1},${n.bandoneonSideCode ?? 0},${n.bellowsDirectionCode ?? 0}`);
-  }
+  update(JSON.stringify(trackNotes));
+  update(JSON.stringify(trackCCs));
 
   return (h1 >>> 0).toString(16).padStart(8, '0') + (h2 >>> 0).toString(16).padStart(8, '0');
 }
 
-export const stemCache = new LRUMap<string, StemCacheEntry>(128, 'stemCache');
+export class PCMStemCache extends LRUMap<string, StemCacheEntry> {
+  private bytes = 0;
+  constructor(readonly maxBytes = 64 * 1024 * 1024) { super(128, 'stemCache'); }
+  override set(key: string, value: StemCacheEntry): this {
+    this.delete(key);
+    const size = value.left.byteLength + value.right.byteLength;
+    if (size > this.maxBytes) return this;
+    while (this.bytes + size > this.maxBytes || this.size >= this.maxSize) {
+      const oldest = this.keys().next().value;
+      if (oldest === undefined) break;
+      this.delete(oldest);
+    }
+    super.set(key, value); this.bytes += size;
+    return this;
+  }
+  override delete(key: string): boolean {
+    const value = [...this.entries()].find(([k]) => k === key)?.[1];
+    if (value) this.bytes -= value.left.byteLength + value.right.byteLength;
+    return super.delete(key);
+  }
+  override clear(): void { super.clear(); this.bytes = 0; }
+  get byteLength(): number { return this.bytes; }
+}
+export const stemCache = new PCMStemCache();
 registerCache(stemCache);
 export function clearStemCache(): void { stemCache.clear(); }

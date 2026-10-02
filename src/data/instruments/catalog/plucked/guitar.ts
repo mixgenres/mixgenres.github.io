@@ -9,7 +9,7 @@ export const guitar: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "fingerpad",
   elementaryModel: 0,
-  makeupGain: 14.000,
+  makeupGain: 30.000,
   polyphony: 8,
   acousticProfile: {
     sustain: "decaying",

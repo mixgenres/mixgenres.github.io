@@ -1,7 +1,6 @@
 import { ANTICIPATED_BASS_GENRES, IDIOMATIC_DEGREE_RULES } from '../../data/performance/genreInstrumentBehaviors';
 import { GENRE_GESTURE_HINT_RULES } from '../../data/performance/genreGestureRules';
 import { GESTURE_HINT_ALIASES } from '../../data/performance/gestureHintAliases';
-import { matchesGestureConcept } from '../../data/performance/gestureLexicon';
 import type { MusicalPattern, Measure } from '../../types';
 import type { HitFunction } from '../../data/performance/hitFunctions';
 import type { InstrumentPerformanceProfile, GenrePerformanceProfile } from '../../engine/lookup/performance';
@@ -11,7 +10,6 @@ import { type GenreTheoryProfile } from '../../engine/lookup/theory';
 import { voiceProfile } from '../sheet/instrumentRoles.ts';
 import { resolveStyle } from '../../engine/style/resolve';
 import { getCanonicalStyle } from '../../engine/style/registry';
-import { constrainToFretboard } from './fretboard';
 import { getPerformanceGrammar, resolveHybridGrammar } from './performanceGrammar.ts';
 import type { PerformanceGrammar } from '../../data/performance/schema/performance-grammar';
 import type { ImprovisationGrammar } from '../../data/styles/schema';
@@ -202,7 +200,7 @@ function chordVoicing(ctx: PhraseContext, _index: number): number[] {
   const guide = parsed.guideTones?.map(x => (parsed.rootPc + x) % 12) ?? [];
   const tension = parsed.tensions?.map(x => (parsed.rootPc + x) % 12) ?? [];
   const voicing = ctx.hybridTheory.harmony.voicing;
-  const poly = Math.max(1, Math.min(ctx.profile.capabilities.maxSimultaneousPitches, 4));
+  const poly = Math.max(1, Math.min(ctx.profile.capabilities.polyphony, 4));
   const base = Math.max(ctx.profile.capabilities.lowMidi, Math.min(ctx.profile.capabilities.highMidi, ctx.profile.capabilities.comfortableLowMidi + (voicing === 'power' ? 4 : 10)));
   let pcs: number[];
   if (voicing === 'power') pcs = [parsed.rootPc, (parsed.rootPc + 7) % 12, parsed.rootPc];
@@ -227,15 +225,15 @@ function chordVoicing(ctx: PhraseContext, _index: number): number[] {
     const target = nearestMidi(targetPc, top, ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi);
     if (Math.abs(target - top) <= 7) out[out.length - 1] = target;
   }
-  const unique = Array.from(new Set(out));
-  return constrainToFretboard(unique, ctx.profile.instrumentId, ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi);
+  return Array.from(new Set(out));
 }
 
 export function realizeMidi(ctx: PhraseContext, index: number, total: number, state: PhraseState): number[] {
   const d = ctx.profile.instrumentId.toLowerCase();
   if (ctx.profile.family === 'membrane' || ctx.profile.family === 'kit' || ctx.profile.family === 'metal-wood-percussion' || ctx.profile.family === 'body-percussion' || voiceProfile(ctx.profile.instrumentId).role === 'perc') return [60];
-  if (voiceProfile(ctx.profile.instrumentId).role === 'bass' || d.includes('bass') || d === 'upright-bass' || d.includes('tuba')) return [bassMidi(ctx, index, total)];
-  if (ctx.profile.family === 'keyboard' || ctx.profile.family === 'plucked-string' && ctx.profile.capabilities.maxSimultaneousPitches > 1 || ctx.pattern.roles.includes('harmony') || /piano|organ|rhodes|guitar|bandoneon|accordion/.test(d)) return chordVoicing(ctx, index);
+  if (!ctx.soloist && (voiceProfile(ctx.profile.instrumentId).role === 'bass' || d.includes('bass') || d === 'upright-bass' || d.includes('tuba'))) return [bassMidi(ctx, index, total)];
+  const melodicRole = /^(lead|melody|counterline|voice)$/.test(ctx.role);
+  if (!ctx.soloist && !melodicRole && (ctx.profile.family === 'keyboard' || ctx.profile.family === 'plucked-string' && ctx.profile.capabilities.polyphony > 1 || ctx.pattern.roles.includes('harmony') || /piano|organ|rhodes|guitar|bandoneon|accordion/.test(d))) return chordVoicing(ctx, index);
 
   const scale = ctx.soloist && ctx.soloGrammar?.scaleMode
     ? scalePcsForMode(ctx.soloGrammar.scaleMode, rootPc(ctx.chord))
@@ -309,24 +307,19 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
   // transfers the timing/weight; it never transfers another instrument's name.
   const contextual: string[] = [];
   const add = (...xs: string[]) => contextual.push(...xs.filter(allowed));
-  if (matchesGestureConcept(String(desired ?? ''), 'heel')) add('heel','toe','ghost');
-  if (matchesGestureConcept(String(desired ?? ''), 'slap')) add('slap','quinto-slap','accent','slap-tapao');
-  if (matchesGestureConcept(String(desired ?? ''), 'muffled')) add('slap-tapao','ghost','muffled');
-  if (matchesGestureConcept(String(desired ?? ''), 'open')) add('tumba-open','conga-open','open','tone');
+  if (/heel/.test(String(desired ?? ''))) add('heel','toe','ghost');
+  if (/slap|quinto/.test(String(desired ?? ''))) add('slap','quinto-slap','accent','slap-tapao');
+  if (/tapao|mute|closed/.test(String(desired ?? ''))) add('slap-tapao','ghost','muffled');
+  if (/open|abierto|tone|tumba/.test(String(desired ?? ''))) add('tumba-open','conga-open','open','tone');
   const family = ctx.profile.family;
-  if (family === 'membrane' && matchesGestureConcept(sourceHit, 'heel')) add('heel','toe','ghost');
-  if (family === 'membrane' && matchesGestureConcept(sourceHit, 'toe')) add('toe','heel','ghost');
-  if (family === 'membrane' && matchesGestureConcept(sourceHit, 'slap')) add('slap','quinto-slap','accent');
-  if (family === 'membrane' && matchesGestureConcept(sourceHit, 'muffled')) add('slap-tapao','ghost','muffled');
-  if (family === 'membrane' && matchesGestureConcept(sourceHit, 'open')) add('tumba-open','conga-open','open','tone');
+  if (family === 'membrane' && /heel/.test(sourceHit)) add('heel','toe','ghost');
+  if (family === 'membrane' && /toe|tip/.test(sourceHit)) add('toe','heel','ghost');
+  if (family === 'membrane' && /slap|quinto/.test(sourceHit)) add('slap','quinto-slap','accent');
+  if (family === 'membrane' && /tapao|mute|closed/.test(sourceHit)) add('slap-tapao','ghost','muffled');
+  if (family === 'membrane' && /open|tone|tumba/.test(sourceHit)) add('tumba-open','conga-open','open','tone');
 
-  if (ctx.profile.instrumentId === 'bandoneon') {
-    for (const rule of GENRE_GESTURE_HINT_RULES.bandoneon) if (rule.pattern.test(text)) add(...rule.gestures);
-  }
-  const instrumentRules = ctx.profile.instrumentId === 'upright-bass' ? GENRE_GESTURE_HINT_RULES.uprightBass
-    : ctx.profile.instrumentId === 'violin' ? GENRE_GESTURE_HINT_RULES.violin
-    : ctx.profile.instrumentId === 'piano' ? GENRE_GESTURE_HINT_RULES.piano : undefined;
-  if (instrumentRules?.genrePattern.test(text)) {
+  for (const instrumentRules of GENRE_GESTURE_HINT_RULES) {
+    if (instrumentRules.instrumentId !== ctx.profile.instrumentId || !instrumentRules.genrePattern.test(text)) continue;
     const rule = instrumentRules.rules.find(candidate => candidate.pattern.test(text));
     if (rule) add(...rule.gestures);
   }
@@ -359,11 +352,11 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
     if (theoryHints.some(h => GESTURE_HINT_ALIASES[h.toLowerCase().replace(/[^a-z0-9]+/g,'_')]?.test(gl) || gl.includes(h.toLowerCase()))) score += 6;
     if (hostPreferred.has(g)) score += 5;
     if (sourcePreferred.has(g)) score += 4;
-    if (hitWord === 'ghost' && matchesGestureConcept(gl, 'ghostHit')) score += 6;
-    if (hitWord === 'slap' && (matchesGestureConcept(gl, 'slap') || /marcato|accent/.test(gl))) score += 6;
-    if (hitWord === 'open' && matchesGestureConcept(gl, 'openHit')) score += 5;
-    if (hitWord === 'muffled' && matchesGestureConcept(gl, 'muffledHit')) score += 6;
-    if (hitWord === 'fill' && matchesGestureConcept(gl, 'fillHit')) score += 5;
+    if (hitWord === 'ghost' && /ghost|heel|toe|tap|mute|dead/.test(gl)) score += 6;
+    if (hitWord === 'slap' && /slap|strappata|golpe|marcato|accent/.test(gl)) score += 6;
+    if (hitWord === 'open' && /open|ring|legato|tone|tumba/.test(gl)) score += 5;
+    if (hitWord === 'muffled' && /mute|chapa|tapao|stacc|palm/.test(gl)) score += 6;
+    if (hitWord === 'fill' && /roll|fill|tremolo|ornament|shake|triplet/.test(gl)) score += 5;
     if (ctx.phrasePosition > 0.75 && /arrastre|fall|doit|turn|cadence|accent|marcato|staccato/.test(gl)) score += 2;
     if (ctx.phrasePosition < 0.2 && /accent|marcato|staccato/.test(gl)) score += 1;
     // Keep the vocabulary varied inside a phrase, but deterministically.

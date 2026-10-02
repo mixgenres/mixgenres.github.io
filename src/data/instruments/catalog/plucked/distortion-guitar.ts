@@ -9,7 +9,7 @@ export const distortion_guitar: InstrumentDef = {
   bodyConstruction: "solid-electric",
   excitationType: "hard-pick",
   elementaryModel: 24,
-  makeupGain: 21.882,
+  makeupGain: 2.994,
   polyphony: 8,
   acousticProfile: {
     sustain: "sustained",

@@ -9,7 +9,7 @@ export const celtic_harp: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "fingerpad",
   elementaryModel: 0,
-  makeupGain: 5.500,
+  makeupGain: 30.000,
   polyphony: 8,
   note: "Lever harp with nylon or wire strings and warm acoustic resonance for traditional airs and reels",
   acousticProfile: {
