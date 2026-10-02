@@ -1,7 +1,7 @@
 import type { Sheet, Voice } from '../sheet/sheet.ts';
 import type { ResolvedStyle } from '../../data/styles/schema';
 import type { Performance, PerfNote } from '../band/performanceData.ts';
-import { getResolvedSectionStyle, phraseSpanBars } from '../sheet/sheet.ts';
+import { getResolvedSectionStyle, getTrackRole, phraseSpanBars } from '../sheet/sheet.ts';
 import { contractForGenre } from '../../engine/style/contracts';
 import { getInstrumentPerformanceProfile, type InstrumentPerformanceProfile } from '../../engine/lookup/performance';
 import { GESTURE_CODES, GESTURE_NAMES } from './gestures.ts';
@@ -129,6 +129,27 @@ function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: 
   return { rootHeavy, beforeGestures, afterGestures };
 }
 
+/**
+ * Phrases shorter than PHRASE_TECHNIQUE_MIN_NOTES get no technique budget, so a
+ * track whose phrases are all short (e.g. 8 bars split into 4-note phrases) could
+ * play a whole region with none of the style's expected gestures. Guarantee at
+ * least one expected technique per region without touching tracks that already
+ * show one.
+ */
+function ensureRegionTechnique(trackNotes: PerfNote[], profile: InstrumentPerformanceProfile, genre: string, style: ResolvedStyle, role: string): void {
+  if (trackNotes.length < PHRASE_TECHNIQUE_MIN_NOTES + 1) return;
+  const expectation = styleTechniqueExpectation(style, profile, role);
+  const usable = expectation.required.filter(id => profile.gestures[id] && !expectation.forbidden.includes(id));
+  if (!usable.length) return;
+  const used = new Set(trackNotes.map(n => GESTURE_NAMES[n.gestureCode]));
+  if (usable.some(id => used.has(id))) return;
+  const prefs = preferredGestureSet(profile, genre);
+  const desired = usable.find(id => prefs.includes(id)) ?? usable[0];
+  const ordered = [...trackNotes].sort((a, b) => a.time - b.time);
+  const target = ordered[Math.floor(ordered.length * 0.48)];
+  if (target && GESTURE_CODES[desired] !== undefined) target.gestureCode = GESTURE_CODES[desired];
+}
+
 export function optimizePerformanceByPhraseAndSong(sheet: Sheet, perf: Performance): { performance: Performance; report: PhraseOptimizationReport } {
   const notes = perf.notes.map(n => ({ ...n }));
   const warnings: string[] = [];
@@ -158,6 +179,8 @@ export function optimizePerformanceByPhraseAndSong(sheet: Sheet, perf: Performan
         result.beforeGestures.forEach(x => before.add(x));
         result.afterGestures.forEach(x => after.add(x));
       }
+
+      ensureRegionTechnique(trackNotes, profile, genre, style, getTrackRole(sheet, track.id, region.id));
 
       const role = String(track.role ?? profile.genreProfiles[genre]?.roles?.[0] ?? 'harmony').toLowerCase();
       const scopeWarnings: string[] = [];
