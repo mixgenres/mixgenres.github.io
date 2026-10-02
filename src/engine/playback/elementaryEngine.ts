@@ -7,6 +7,7 @@ import type { LuthierPhysicalParameters } from '../../data/instruments/schema/lu
 import type { AcousticFormantProfile } from '../../data/instruments/schema/formant-profile';
 import type { BowedResonanceProfile } from '../../data/instruments/schema/bowed-resonance';
 import { GAIN_BY_MODEL } from '../../data/sound/makeupGainByModel';
+import { CALIBRATED_MAKEUP } from '../../data/sound/calibratedMakeup';
 import type { MixCharacter } from '../../engine/style/contracts';
 import { calculateSidechainDepth, calculateDrumKnock } from '../studio/mixer.ts';
 import { buildVoiceContext, getInstrumentModule } from './instrumentRegistry.ts';
@@ -214,6 +215,8 @@ model: modelNum,
 }
 export function makeupGainFor(modelNum: number, instrumentId?: string): number {
   if (instrumentId) {
+    const calibrated = CALIBRATED_MAKEUP[instrumentId];
+    if (typeof calibrated === 'number') return calibrated;
     const def = INSTRUMENTS_BY_ID[instrumentId];
     if (typeof def?.makeupGain === 'number') {
       return def.makeupGain;

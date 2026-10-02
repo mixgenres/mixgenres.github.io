@@ -64,7 +64,7 @@ function applyCCToParams(
       instDef?.family === 'electronic' ||
       instDef?.elementaryModel === 9 ||
       instrumentHasKey(params.instrumentId || '', ENGINE_INSTRUMENT_KEYS.electronic);
-    const baseGain = instDef?.makeupGain ?? makeupGainFor(isElectronic ? 9 : params.model, params.instrumentId);
+    const baseGain = makeupGainFor(isElectronic ? 9 : params.model, params.instrumentId);
     params.volume = Math.max(0, Math.min(35, baseGain * roleGain * trackMixVolume * controllerGain.volume * controllerGain.expression));
   } else if (cc === 10) params.pan = norm;
   else if (cc === 74) params.brightness = norm;
@@ -325,7 +325,7 @@ export async function renderPerformanceToMp3(
               instDef?.elementaryModel === 9 ||
               instrumentHasKey(params.instrumentId || '', ENGINE_INSTRUMENT_KEYS.electronic);
             const effectiveModelForGain = isElectronic ? 9 : params.model;
-            const baseGain = instDef?.makeupGain ?? makeupGainFor(effectiveModelForGain, params.instrumentId);
+            const baseGain = makeupGainFor(effectiveModelForGain, params.instrumentId);
 
             const rendered = resolveRenderGesture(instrumentId, event.note.gestureCode);
             const hitGainMultiplier = rendered.gainMultiplier;

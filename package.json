@@ -21,7 +21,7 @@
     "check:instruments": "node --import tsx scripts/checks/instruments.ts",
     "check:instrument-render": "node --import tsx scripts/checks/instrument-render.ts",
     "check:markers": "node --import tsx scripts/checks/source-markers.ts",
-    "check:rigorous": "npm run check && npm run check:instruments && npm run check:instrument-render && npm run test:audio",
+    "check:rigorous": "npm run check && npm run check:instruments && npm run check:instrument-render && npm run check:makeup && npm run check:levels && npm run test:audio",
     "test": "npm run check && npm run check:smoke && npm run test:integrity",
     "test:integrity": "node --import tsx scripts/checks/styles.ts --only=compile",
     "test:unit": "node --import tsx --test scripts/checks/unit/engine-behavior.test.mjs && node --import tsx scripts/checks/unit/engine-arrangement.test.ts",
@@ -50,7 +50,10 @@
     "report:song-card": "node --import tsx scripts/reports/song-card.ts",
     "render:stems-analyze": "python3 scripts/render/stems-analyze.py",
     "migrate:consolidate-genres": "python3 scripts/migrations/consolidate-genre-files.py",
-    "check:runtime-routing": "node --import tsx scripts/checks/runtime-routing.ts"
+    "check:runtime-routing": "node --import tsx scripts/checks/runtime-routing.ts",
+    "calibrate:makeup": "node --import tsx scripts/calibrate/makeup.ts",
+    "check:makeup": "node --import tsx scripts/calibrate/makeup.ts --check",
+    "check:levels": "npm run report:levels && python3 scripts/reports/level-targets-diff.py --gate"
   },
   "dependencies": {
     "@breezystack/lamejs": "^1.2.7",

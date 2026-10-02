@@ -80,7 +80,7 @@ export function describeMix(sheet: Sheet, perf: Performance): MixDescription {
     const model = def?.elementaryModel ?? modelForInstrument(instrumentId);
     const isElectronic = def?.family === 'electronic' || def?.elementaryModel === 9 || instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.electronic);
     const effectiveModel = isElectronic ? 9 : model;
-    const makeup = def?.makeupGain ?? makeupGainFor(effectiveModel, instrumentId);
+    const makeup = makeupGainFor(effectiveModel, instrumentId);
     const instrumentRole = def?.acousticProfile?.role || 'comp';
     const roleKey = instrumentRole.toLowerCase();
     const roleBaseDb = ROLE_DB_PROFILES[roleKey] ?? -3.0;

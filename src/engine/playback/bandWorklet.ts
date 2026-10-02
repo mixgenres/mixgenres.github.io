@@ -383,7 +383,7 @@ export class BandWorkletNode {
         // while retaining the instrument makeup and role gain in the effective signal.
         if (this.trackVolumes.has(trackId)) {
           params.volume = Math.max(0, Math.min(35,
-            (instDef?.makeupGain ?? makeupGainFor(instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.electronic) ? 9 : model, instrumentId))
+            makeupGainFor(instrumentHasKey(instrumentId, ENGINE_INSTRUMENT_KEYS.electronic) ? 9 : model, instrumentId)
             * (params.roleGain ?? 1)
             * this.trackVolumes.get(trackId)!,
           ));
