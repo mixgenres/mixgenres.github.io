@@ -8,7 +8,7 @@ export function measureEncodedAudio(bytes: Uint8Array) {
   // ffprobe may stop reading once it has enough stream headers and close stdin
   // early. Node reports that successful probe as EPIPE; trust the metadata only
   // when ffprobe still exited successfully and produced parseable JSON.
-  if (probe.status !== 0 || (probe.error && probe.error.code !== 'EPIPE')) {
+  if (probe.status !== 0 || (probe.error && (probe.error as NodeJS.ErrnoException).code !== 'EPIPE')) {
     throw new Error(`ffprobe failed: ${probe.error ?? probe.stderr}`);
   }
   const metadata = JSON.parse(probe.stdout);

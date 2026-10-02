@@ -11,6 +11,7 @@ export const TANGO_WORLD: GenreWorld = {
   ...TANGO_WORLD_HARMONY,
   ...TANGO_WORLD_STYLES,
   ...TANGO_WORLD_PATTERNS,
+  homeStyleId: 'tango-golden-age',
 } as GenreWorld;
 
 export const TangoGenre = TANGO_WORLD;

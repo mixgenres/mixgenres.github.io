@@ -10,4 +10,5 @@ export const ELECTRONIC_WORLD: GenreWorld = {
   ...ELECTRONIC_WORLD_FEEL,
   ...ELECTRONIC_WORLD_STYLES,
   ...ELECTRONIC_WORLD_PATTERNS,
+  homeStyleId: 'electronic-techno',
 } as GenreWorld;

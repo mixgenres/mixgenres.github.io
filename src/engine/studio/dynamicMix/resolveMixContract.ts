@@ -13,7 +13,9 @@ export function mergeMixOverrides<T extends object>(base: T, patch?: MixOverride
   const out = structuredClone(base) as Record<string, unknown>;
   for (const [key, value] of Object.entries(patch ?? {})) {
     if (unsafeKeys.has(key) || value === undefined || value === null) continue;
-    out[key] = record(value) ? mergeMixOverrides(record(out[key]) ? out[key] : {}, value) : structuredClone(value);
+    out[key] = record(value)
+      ? mergeMixOverrides(record(out[key]) ? out[key] as Record<string, unknown> : {}, value as MixOverride<Record<string, unknown>>)
+      : structuredClone(value);
   }
   return out as T;
 }

@@ -10,6 +10,7 @@ export const METAL_WORLD: GenreWorld = {
   ...METAL_WORLD_FEEL,
   ...METAL_WORLD_STYLES,
   ...METAL_WORLD_PATTERNS,
+  homeStyleId: 'metal-heavy-metal',
 } as GenreWorld;
 
 export const MetalGenre = METAL_WORLD;

@@ -10,4 +10,5 @@ export const SALSA_WORLD: GenreWorld = {
   ...SALSA_WORLD_FEEL,
   ...SALSA_WORLD_STYLES,
   ...SALSA_WORLD_PATTERNS,
+  homeStyleId: 'salsa-salsa-dura',
 } as GenreWorld;

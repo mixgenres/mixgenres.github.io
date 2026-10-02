@@ -1,7 +1,8 @@
 import type { GenreWorld } from '../../schema';
+import { DRUM_AND_BASS_STYLES, DRUM_AND_BASS_WORLD_DETAILS } from './standalone';
 
 /** Standalone authored definition for Drum & Bass. */
-export const DRUM_AND_BASS_WORLD: GenreWorld = {
+const DRUM_AND_BASS_WORLD_BASE: GenreWorld = {
   "id": "drum-and-bass",
   "name": "Drum & Bass",
   "family": "Electronic / Dance",
@@ -3806,4 +3807,10 @@ export const DRUM_AND_BASS_WORLD: GenreWorld = {
   ],
   "kind": "world",
   "strictness": "strict"
+};
+
+export const DRUM_AND_BASS_WORLD: GenreWorld = {
+  ...DRUM_AND_BASS_WORLD_BASE,
+  ...DRUM_AND_BASS_WORLD_DETAILS,
+  styleDefinitions: DRUM_AND_BASS_STYLES,
 };

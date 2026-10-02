@@ -88,15 +88,20 @@ export function assembleStylePatterns(styles: SongStyle[], patterns: MusicalPatt
   for (const p of patterns) {
     p.styleIds = Array.from(new Set((p.styleIds ?? [])
       .map(id => resolveStaleId(id))
-      .filter(id => styles.some(style => style.id === id))));
+      // Explicit ownership is genre-local. A similarly named style in another
+      // world cannot claim this pattern; cross-world material belongs in a
+      // separately authored fusion style/influence.
+      .filter(id => styles.some(style => style.id === id && style.primaryGenre === p.worldId))));
   }
 
   // Styles share authored pattern definitions, but do not share one identical
   // six-pattern shortlist. Selection is semantic: each style gets the patterns
   // whose names/tags/description actually match its musical vocabulary.
   for (const style of styles) {
-    const patternIds = new Set((GENRE_WORLDS_BY_ID[style.primaryGenre]?.patterns ?? []).map(pattern => pattern.id));
-    const candidates = patterns.filter(pattern => patternIds.has(pattern.id));
+    const patternIds = new Set((GENRE_WORLDS_BY_ID[style.primaryGenre]?.patterns ?? [])
+      .filter(pattern => pattern.worldId === style.primaryGenre)
+      .map(pattern => pattern.id));
+    const candidates = patterns.filter(pattern => pattern.worldId === style.primaryGenre && patternIds.has(pattern.id));
     const chosen = selectSharedPatterns(style, candidates, Math.min(8, Math.max(4, candidates.length)));
     const authored = chosen.filter(p => p.styleIds?.includes(style.id));
     const inferred = chosen.filter(p => !p.styleIds?.includes(style.id));

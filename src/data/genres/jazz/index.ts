@@ -11,6 +11,7 @@ export const JAZZ_WORLD: GenreWorld = {
   ...JAZZ_WORLD_HARMONY,
   ...JAZZ_WORLD_STYLES,
   ...JAZZ_WORLD_PATTERNS,
+  homeStyleId: 'jazz-hard-bop',
 } as GenreWorld;
 
 export const JazzGenre = JAZZ_WORLD;

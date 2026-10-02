@@ -10,4 +10,5 @@ export const ZOUK_WORLD: GenreWorld = {
   ...ZOUK_WORLD_FEEL,
   ...ZOUK_WORLD_STYLES,
   ...ZOUK_WORLD_PATTERNS,
+  homeStyleId: 'zouk-zouk-love',
 } as GenreWorld;

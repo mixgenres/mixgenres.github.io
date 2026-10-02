@@ -17,7 +17,7 @@ function shortText(value: string): string {
 }
 
 
-function styleFromSeed(worldId: string, seed: GenreStyleDefinition, index: number): SongStyle {
+function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: boolean): SongStyle {
   const contract = contractForGenre(worldId);
   // The ensemble is authored by the style seed. Never synthesize a genre-level
   // starter ensemble: a song style must inherit only its own musical personnel.
@@ -91,7 +91,7 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, index: numbe
     },
     name: seed.name,
     genres:[worldId], primaryGenre:worldId,
-    kind:index === 0 ? 'canonical' : 'form', canonical:index === 0,
+    kind:canonical ? 'canonical' : 'form', canonical,
     summary:shortText(seed.description || `${seed.name} ${GENRE_NAMES[worldId]}`),
     signatureTraits:(seed.coreConcepts ?? seed.rhythmicGrammar ?? [seed.name]).slice(0, 6),
     era:seed.era, region:seed.origin,
@@ -158,7 +158,8 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, index: numbe
 const baseStyles: SongStyle[] = [];
 for (const world of GENRE_WORLDS) {
   for (const [index, seed] of (world.styleDefinitions ?? []).entries()) {
-    baseStyles.push(styleFromSeed(world.id, seed, index));
+    const canonical = seed.id === world.homeStyleId || (!world.homeStyleId && index === 0);
+    baseStyles.push(styleFromSeed(world.id, seed, canonical));
   }
 }
 

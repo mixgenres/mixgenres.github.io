@@ -2,7 +2,6 @@ import { resolveSoloPlan } from './solo';
 import type { SoloAssignment } from '../../data/styles/schema';
 import type { Song, Region, Track, Measure, SectionType, PatternVariant, MusicalPattern, SectionEnergy, GuestLens } from '../../types';
 import { GENRE_WORLDS_BY_ID, ALL_PATTERNS, PATTERNS_BY_ID, PATTERNS_BY_WORLD } from '../../data/genres';
-import { TANGO_ARRASTRE_COMPING_KINDS } from '../../data/genres/tango/arrangement';
 import { INSTRUMENTS_BY_ID, INSTRUMENT_CATALOG, instrument, instrumentPatternKinds } from '../../engine/lookup/instruments';
 import { sliceBarNative } from './grid.ts';
 import { progressionForSection, buildArrangementContext, ArrangementContext } from './arrangementContext.ts';
@@ -442,7 +441,8 @@ function synthesizeBoundaryVariant(
   // Tango arrastre gesture (pickup anticipation on step 14 or 15)
   if (phraseRole === 'cadence' && gestures['arrastre']?.probability && gestures['arrastre']?.probability !== 0) {
     const hasIdiomaticTarget = p.roles.includes('bass')
-      || [...(p.instruments ?? []), ...(p.compatibleInstruments ?? [])].some(id => TANGO_ARRASTRE_COMPING_KINDS.includes(String(id) as typeof TANGO_ARRASTRE_COMPING_KINDS[number]));
+      || (p.worldId === 'tango' && [...(p.instruments ?? []), ...(p.compatibleInstruments ?? [])]
+        .some(id => id === 'piano' || id === 'bandoneon'));
     if (hasIdiomaticTarget) {
       return {
         id: `${p.id}-arrastre-cadence`, parentPatternId: p.id,

@@ -1,7 +1,8 @@
 import type { GenreWorld } from '../../schema';
+import { UK_BASS_STYLES, UK_BASS_WORLD_DETAILS } from './standalone';
 
 /** Standalone authored definition for UK Bass. */
-export const UK_BASS_WORLD: GenreWorld = {
+const UK_BASS_WORLD_BASE: GenreWorld = {
   "id": "uk-bass",
   "name": "UK Bass",
   "family": "Electronic / Dance",
@@ -3788,4 +3789,10 @@ export const UK_BASS_WORLD: GenreWorld = {
   ],
   "kind": "family",
   "strictness": "strict"
+};
+
+export const UK_BASS_WORLD: GenreWorld = {
+  ...UK_BASS_WORLD_BASE,
+  ...UK_BASS_WORLD_DETAILS,
+  styleDefinitions: UK_BASS_STYLES,
 };

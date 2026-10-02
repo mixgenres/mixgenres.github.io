@@ -9,6 +9,17 @@ const build = (id: string, name: string, description: string, tempoRange: [numbe
   sectionProgressions: chords, arrangementSections: sections,
 });
 
+const GOLDEN_AGE_STYLE = build('golden-age', 'Golden Age', 'Dance-first orquesta típica tango: steady marcato, compact phrases, tightly coordinated bandoneón, piano, strings, and bass.', [112, 132],
+  ['bandoneon', 'violin', 'piano', 'upright-bass', 'cello'],
+  ['steady marcato pulse', 'compact melodic phrases', 'bandoneón and violin unison', 'clear tonic-dominant cadences'],
+  'A firm marcato en 4 or en 2 supports short, sharply articulated phrases and clear cadential turns.',
+  { intro: ['Am', 'E7', 'Am', 'E7'], A: ['Am', 'Dm', 'E7', 'Am'], B: ['C', 'G7', 'C', 'E7'], coda: ['Dm', 'E7', 'Am', 'Am'] }, [
+    { key: 'intro', label: 'Marcato introduction', kind: 'intro', bars: 4, intensity: 'medium', instruments: ['piano', 'upright-bass', 'bandoneon'], leadInstrumentId: 'bandoneon' },
+    { key: 'tema', label: 'Main theme', kind: 'theme', bars: 16, intensity: 'high', instruments: ['bandoneon', 'violin', 'piano', 'upright-bass'], leadInstrumentId: 'bandoneon' },
+    { key: 'variation', label: 'Orchestral variation', kind: 'variation', bars: 16, intensity: 'high', instruments: ['bandoneon', 'violin', 'piano', 'upright-bass', 'cello'], leadInstrumentId: 'violin' },
+    { key: 'coda', label: 'Dance coda', kind: 'coda', bars: 4, intensity: 'high', instruments: ['bandoneon', 'violin', 'piano', 'upright-bass'], leadInstrumentId: 'bandoneon' },
+  ]);
+
 const pugliesePersonnel = ['bandoneon', 'violin', 'piano', 'upright-bass', 'cello', 'string-ensemble', 'voice'];
 export const PUGLIESE_STYLE = build('pugliese', 'Tango Pugliese', 'Tense, orchestral tango with weighty yumba, elastic pauses, and dramatic ensemble accents.', [112, 132], pugliesePersonnel,
   ['yumba piano and bass ostinato', 'dramatic silences and holds', 'strong dynamic contrast', 'orchestral unison attacks'],
@@ -412,5 +423,5 @@ const PIAZZOLLA_STYLE = build('piazzolla', 'Piazzolla', 'Concert tango with cont
   ]);
 
 export const TANGO_WORLD_STYLES: Partial<GenreWorld> = {
-  styleDefinitions: [STYLE_0, STYLE_1, STYLE_2, STYLE_3, STYLE_4, PUGLIESE_STYLE, TROILO_STYLE, TANGO_CANCION_STYLE, GUARDIA_VIEJA_STYLE, PIAZZOLLA_STYLE],
+  styleDefinitions: [GOLDEN_AGE_STYLE, STYLE_0, STYLE_1, STYLE_2, STYLE_3, STYLE_4, PUGLIESE_STYLE, TROILO_STYLE, TANGO_CANCION_STYLE, GUARDIA_VIEJA_STYLE, PIAZZOLLA_STYLE],
 };

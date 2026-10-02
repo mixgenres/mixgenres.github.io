@@ -11,6 +11,7 @@ export const FLAMENCO_WORLD: GenreWorld = {
   ...FLAMENCO_WORLD_HARMONY,
   ...FLAMENCO_WORLD_STYLES,
   ...FLAMENCO_WORLD_PATTERNS,
+  homeStyleId: 'flamenco-solea-style',
 } as GenreWorld;
 
 export const FlamencoGenre = FLAMENCO_WORLD;

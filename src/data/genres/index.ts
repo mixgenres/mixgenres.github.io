@@ -1,46 +1,22 @@
 import type { GenreWorld, MusicalPattern } from '../schema';
-
-import { AFROBEATS_WORLD } from './afrobeats';
-import { BACHATA_WORLD } from './bachata';
-import { BLUES_WORLD } from './blues';
-import { BRAZILIAN_WORLD } from './brazilian';
-import { COUNTRY_WORLD } from './country';
-import { CUMBIA_WORLD } from './cumbia';
-import { DISCO_WORLD } from './disco';
-import { ELECTRONIC_WORLD } from './electronic';
-import { FOLK_WORLD } from './folk';
-import { FUNK_WORLD } from './funk';
-import { GOSPEL_WORLD } from './gospel';
-import { HIP_HOP_WORLD } from './hip-hop';
-import { HOUSE_WORLD } from './house';
-import { JAZZ_WORLD } from './jazz';
-import { KIZOMBA_WORLD } from './kizomba';
-import { TANGO_WORLD } from './tango';
-import { FLAMENCO_WORLD } from './flamenco';
-import { METAL_WORLD } from './metal';
-import { R_AND_B_WORLD } from './r-and-b';
-import { REGGAE_WORLD } from './reggae';
-import { REGGAETON_WORLD } from './reggaeton';
-import { ROCK_WORLD } from './rock';
-import { SALSA_WORLD } from './salsa';
-import { SKA_WORLD } from './ska';
-import { SOUL_WORLD } from './soul';
-import { SWING_WORLD } from './swing';
-import { TIMBA_WORLD } from './timba';
-import { ZOUK_WORLD } from './zouk';
-import { DRUM_AND_BASS_WORLD } from './drum-and-bass';
-import { INDUSTRIAL_WORLD } from './industrial';
-import { PUNK_HARDCORE_WORLD } from './punk-hardcore';
-import { UK_BASS_WORLD } from './uk-bass';
-import { KPOP_WORLD, CHINESE_TRADITIONAL_WORLD, JAPANESE_POP_WORLD, JAPANESE_ROCK_WORLD } from './east-asian';
 import { CANONICAL_GENRE_PATTERNS } from './canonicalPatterns';
-import { DRUM_AND_BASS_STYLES, DRUM_AND_BASS_WORLD_DETAILS } from './drum-and-bass/standalone';
-import { UK_BASS_STYLES, UK_BASS_WORLD_DETAILS } from './uk-bass/standalone';
 
-const STANDALONE_WORLD_OVERRIDES: Record<string, Partial<GenreWorld>> = {
-  'drum-and-bass': { ...DRUM_AND_BASS_WORLD_DETAILS, styleDefinitions: DRUM_AND_BASS_STYLES },
-  'uk-bass': { ...UK_BASS_WORLD_DETAILS, styleDefinitions: UK_BASS_STYLES },
-};
+// Genre folders are the discovery boundary. Removing a folder removes that
+// world and its styles/patterns from the catalog without editing this registry.
+// The module contract is intentionally minimal: one exported GenreWorld value.
+const genreModules = import.meta.glob<Record<string, unknown>>('./*/index.ts', { eager: true });
+function isGenreWorld(value: unknown): value is GenreWorld {
+  if (!value || typeof value !== 'object') return false;
+  const candidate = value as Partial<GenreWorld>;
+  return typeof candidate.id === 'string'
+    && typeof candidate.name === 'string'
+    && Array.isArray(candidate.styleDefinitions)
+    && Array.isArray(candidate.patterns);
+}
+
+const discoveredWorlds = Object.values(genreModules)
+  .flatMap(module => Object.values(module))
+  .filter(isGenreWorld);
 
 const INAPPROPRIATE_ELECTRONIC_PATTERNS: Record<string, Set<string>> = {
   'drum-and-bass': new Set(['4onfloor', 'techno-rumble', 'trance-16ths', 'dubstep-half', 'footwork', 'ukg', 'electro', 'ambient', 'synthwave', 'synth']),
@@ -48,27 +24,29 @@ const INAPPROPRIATE_ELECTRONIC_PATTERNS: Record<string, Set<string>> = {
 };
 
 /** Every public genre is defined by its own folder and world definition. */
-export const GENRE_WORLDS: GenreWorld[] = [
-  AFROBEATS_WORLD, BACHATA_WORLD, BLUES_WORLD, BRAZILIAN_WORLD, COUNTRY_WORLD, CUMBIA_WORLD,
-  DISCO_WORLD, ELECTRONIC_WORLD, FOLK_WORLD, FUNK_WORLD, GOSPEL_WORLD, HIP_HOP_WORLD,
-  HOUSE_WORLD, JAZZ_WORLD, KIZOMBA_WORLD, TANGO_WORLD, FLAMENCO_WORLD, METAL_WORLD,
-  R_AND_B_WORLD, REGGAE_WORLD, REGGAETON_WORLD, ROCK_WORLD, SALSA_WORLD, SKA_WORLD,
-  SOUL_WORLD, SWING_WORLD, TIMBA_WORLD, ZOUK_WORLD, DRUM_AND_BASS_WORLD, INDUSTRIAL_WORLD,
-  PUNK_HARDCORE_WORLD, UK_BASS_WORLD, KPOP_WORLD, CHINESE_TRADITIONAL_WORLD, JAPANESE_POP_WORLD, JAPANESE_ROCK_WORLD,
-].map(world => {
+export const GENRE_WORLDS: GenreWorld[] = discoveredWorlds.map(world => {
   const native = CANONICAL_GENRE_PATTERNS.filter(pattern => pattern.worldId === world.id);
   const excluded = INAPPROPRIATE_ELECTRONIC_PATTERNS[world.id];
   const patterns = new Map((world.patterns ?? [])
     .filter(pattern => {
+      if (pattern.worldId !== world.id) return false;
       const marker = String(pattern.id).lastIndexOf('--elec-');
       const sharedElectronicId = marker >= 0 ? pattern.id.slice(marker + '--elec-'.length) : '';
       return !excluded?.has(sharedElectronicId);
     })
     .map(pattern => [pattern.id, pattern]));
   for (const pattern of native) patterns.set(pattern.id, pattern);
-  const standalone = STANDALONE_WORLD_OVERRIDES[world.id];
-  return { ...world, ...(standalone ?? {}), ...(native.length || excluded ? { patterns: [...patterns.values()] } : {}) };
-});
+  const homeStyleId = world.styleDefinitions.some(style => style.id === world.homeStyleId)
+    ? world.homeStyleId
+    : world.styleDefinitions[0]?.id;
+  return {
+    ...world,
+    patterns: [...patterns.values()],
+    // Capture the authored default on the world itself so later sorting or UI
+    // presentation cannot silently change the default song style.
+    homeStyleId,
+  };
+}).sort((a, b) => a.name.localeCompare(b.name));
 
 export const GENRE_WORLDS_BY_ID: Record<string, GenreWorld> = Object.fromEntries(
   GENRE_WORLDS.map(world => [world.id, world])
