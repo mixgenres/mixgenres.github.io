@@ -1111,7 +1111,8 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "lambazouk lilting syncopated bass and acoustic hook kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
         {"name": "lambazouk lilting syncopated bass and acoustic hook drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
         {"name": "lambazouk lilting syncopated bass and acoustic hook shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "lambazouk lilting syncopated bass and acoustic hook shaker cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["shaker"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "lambazouk lilting syncopated bass and acoustic hook shaker cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["shaker"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
+        {"name": "Lambazouk accordion reply to the vocal call", "role": "lead", "instruments": ["accordion"], "onsets": [2, 2.75, 3.5], "durations": [0.4, 0.4, 0.4], "articulation": "legato"}
       ],
       "instrumentTechniques": {
         "voice": ["legato", "accent", "staccato", "vibrato"],

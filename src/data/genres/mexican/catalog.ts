@@ -515,7 +515,8 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "son jarocho sesquialtera jarana and harp exchange low anchor", "role": "bass", "onsets": [0, 1.5], "instruments": ["guitarron"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
         {"name": "son jarocho sesquialtera jarana and harp exchange guitarron cadence fill", "role": "bass", "onsets": [2.0, 2.5, 2.75], "instruments": ["guitarron"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "son jarocho sesquialtera jarana and harp exchange foot-stomp pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5], "instruments": ["foot-stomp"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "son jarocho sesquialtera jarana and harp exchange foot-stomp cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 2.75], "instruments": ["foot-stomp"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "son jarocho sesquialtera jarana and harp exchange foot-stomp cadence fill", "role": "percussion", "onsets": [2.0, 2.5, 2.75], "instruments": ["foot-stomp"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
+        {"name": "Son jarocho requinto answer in the sesquialtera cycle", "role": "lead", "instruments": ["requinto"], "onsets": [1.5, 2, 2.5], "durations": [0.4, 0.4, 0.4], "articulation": "legato"}
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],

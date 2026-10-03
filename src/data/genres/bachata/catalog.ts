@@ -419,7 +419,8 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "modern muted segunda guitar with requinto hook guira pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["guira"], "cycleLength": 1, "articulation": "accent"},
         {"name": "modern muted segunda guitar with requinto hook guira cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["guira"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "modern muted segunda guitar with requinto hook kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "modern muted segunda guitar with requinto hook drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "modern muted segunda guitar with requinto hook drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
+        {"name": "Moderna bass anticipation and turnaround", "role": "bass", "instruments": ["bass"], "onsets": [1.5, 2.5, 3.5], "durations": [0.6, 0.6, 0.5], "articulation": "staccato"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],

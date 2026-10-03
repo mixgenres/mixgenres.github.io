@@ -497,11 +497,6 @@ export default function App() {
           </button>
 
           <span className="sr-only" role="status" aria-live="polite">{playbackLabel}</span>
-          {showDevAudio && <output aria-label="Playback diagnostics" className="text-xs self-center tabular-nums">
-            {playerStatus} · {Math.round(playerState.progress*100)}% · {playerRef.current?.preparedDuration.toFixed(1) ?? '0'}s prepared
-            {playerState.audioStartMs !== undefined && <> · click to signal {playerState.audioStartMs.toFixed(1)}ms · hardware latency {playerState.outputLatencyMs?.toFixed(1)}ms</>}
-            {' · '}{(preparedAudioStats().bytes/1024/1024).toFixed(1)} MB cached · {preparedAudioStats().hits} hits / {preparedAudioStats().misses} misses
-          </output>}
           {playerState.composition === song && playerState.error && <div role="alert" className="text-xs self-center">{playerState.error}</div>}
 
           {/* Scrubber & Section Structure Timeline */}
@@ -634,6 +629,12 @@ export default function App() {
             </div>
           </div>
         </div>
+
+        {showDevAudio && <output aria-label="Playback diagnostics" className="block text-xs tabular-nums -mt-3 mb-5">
+          {playerStatus} · {Math.round(playerState.progress*100)}% · {playerRef.current?.preparedDuration.toFixed(1) ?? '0'}s prepared
+          {playerState.audioStartMs !== undefined && <> · click to signal {playerState.audioStartMs.toFixed(1)}ms · hardware latency {playerState.outputLatencyMs?.toFixed(1)}ms</>}
+          {' · '}{(preparedAudioStats().bytes/1024/1024).toFixed(1)} MB cached · {preparedAudioStats().hits} hits / {preparedAudioStats().misses} misses
+        </output>}
 
         {/* ---- 3. SECTION HEADING & CHORDS (Spacious & Refined) ------------ */}
         <div className="flex items-center justify-between gap-3 pt-2 pb-2">

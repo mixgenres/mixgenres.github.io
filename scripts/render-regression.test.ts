@@ -64,6 +64,7 @@ test('piano release budgeting follows the played articulation', () => {
 test('background song mixes preserve export levels and apply the ensemble processing once', async () => {
   const { renderSongMix, songMixOptions } = await import('../src/engine/playback/renderSongMix');
   const { clearStemCache } = await import('../src/engine/cache/stemCache');
+  const { clearPreparedAudio, preparedAudioStats, preparedMixStats } = await import('../src/engine/cache/preparedAudio');
   const { makeSheet } = await import('../src/engine/sheet/sheet');
   const song = makeSheet('tango');
   song.tracks = [
@@ -73,6 +74,7 @@ test('background song mixes preserve export levels and apply the ensemble proces
   const perf = { ...performanceOf([note(), { ...note(.2, 67), trackId: 'lead' }]), worldId: 'tango',
     trackInfo: { keys: { instrumentId: 'organ', role: 'harmony' }, lead: { instrumentId: 'bandoneon', role: 'lead' } } };
   clearStemCache();
+  clearPreparedAudio();
   const expected = await renderPerformanceToAudio(perf, songMixOptions(song));
   const actual = await renderSongMix(perf, song, new AbortController().signal);
   assert.equal(actual.sampleRate, expected.sampleRate);
@@ -81,10 +83,15 @@ test('background song mixes preserve export levels and apply the ensemble proces
   for (let i = 0; i < actual.left.length; i++) difference = Math.max(difference,
     Math.abs(actual.left[i] - expected.left[i]), Math.abs(actual.right[i] - expected.right[i]));
   assert.ok(difference < 1e-6, `prepared stems must reproduce the shared export mix; max difference ${difference}`);
+  const coldDSP = preparedAudioStats(), coldMix = preparedMixStats();
+  const replay = await renderSongMix(perf, song, new AbortController().signal);
+  assert.equal(replay.left, actual.left, 'replay reuses the finished PCM instead of mastering again');
+  assert.equal(preparedMixStats().hits, coldMix.hits + 1);
+  assert.equal(preparedAudioStats().misses, coldDSP.misses);
 });
 
 test('section DSP PCM reuses unchanged parts and preserves sustained notes and controller carry across boundaries', async () => {
-  const { planDSPSections } = await import('../src/engine/playback/dspSections');
+  const { planDSPSections, assembleDSPSections } = await import('../src/engine/playback/dspSections');
   const { renderPlaybackPart } = await import('../src/engine/playback/renderPlaybackPart');
   const { clearPreparedAudio, preparedAudioStats } = await import('../src/engine/cache/preparedAudio');
   clearPreparedAudio();
@@ -106,11 +113,20 @@ test('section DSP PCM reuses unchanged parts and preserves sustained notes and c
   const warm=preparedAudioStats();
   assert.equal(warm.misses,cold.misses); assert.equal(warm.hits-cold.hits,2);
   assert.deepEqual(same.left,first.left,'mixer edits leave physical audio unchanged');
+  const chunked = await renderPlaybackPart(perf, { ...options, sectionStems: true });
+  assert.equal(chunked.left.length, 0, 'the mixer does not allocate a duplicate whole-instrument buffer');
+  assert.equal(chunked.sections?.length, 2);
+  const assembled = assembleDSPSections(perf, sections,
+    chunked.sections!.map(chunk => ({ ...chunk, sampleRate: chunked.sampleRate })));
+  assert.deepEqual(assembled.left, first.left, 'direct section sources retain the complete overlapping waveform');
+  assert.deepEqual(assembled.right, first.right);
+  const chunkStats = preparedAudioStats();
+  assert.equal(chunkStats.misses, warm.misses, 'changing the consumer buffer layout never reruns DSP');
   const changed={...perf,notes:perf.notes.map((n,i) => i ? {...n,midi:69} : n)};
   const changedSections=planDSPSections(changed,options);
   assert.equal(sections[0].key,changedSections[0].key); assert.notEqual(sections[1].key,changedSections[1].key);
   await renderPlaybackPart(changed,options);
   const edited=preparedAudioStats();
-  assert.equal(edited.misses-warm.misses,1); assert.equal(edited.hits-warm.hits,1);
+  assert.equal(edited.misses-chunkStats.misses,1); assert.equal(edited.hits-chunkStats.hits,1);
   assert.ok(first.left.slice(44100,Math.floor(1.1*44100)).some(v => Math.abs(v)>.0001),'the outgoing hold remains audible after the boundary');
 });

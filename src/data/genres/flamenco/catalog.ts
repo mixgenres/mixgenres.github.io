@@ -752,7 +752,8 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "rumba percussive strum and bass syncopation palmas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["palmas"], "cycleLength": 1, "articulation": "accent"},
         {"name": "rumba percussive strum and bass syncopation palmas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["palmas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "rumba percussive strum and bass syncopation cajon pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "rumba percussive strum and bass syncopation cajon cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cajon"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "rumba percussive strum and bass syncopation cajon cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cajon"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
+        {"name": "Rumba bass syncopation", "role": "bass", "instruments": ["bass"], "onsets": [0, 1.5, 2.5, 3.5], "durations": [0.65, 0.4, 0.4, 0.35], "articulation": "staccato"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],

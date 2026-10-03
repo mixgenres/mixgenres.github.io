@@ -50,6 +50,7 @@ button.onclick = async () => {
           });
           const output = diagnostics.find(d => d.stage === 'output');
           if (!output?.browserMasterApplied) throw new Error('Native master was bypassed');
+          if (output.metrics.samplePeak > .981) add('output-headroom', `${style.id}/${window.name}`, 'Mastered PCM exceeds its final headroom');
           for (const event of diagnostics) {
             const scope = `${style.id}/${window.name}/${event.instrumentId ?? event.id}`;
             if (event.metrics.nonFiniteSamples) add('non-finite-pcm', scope, `${event.metrics.nonFiniteSamples} invalid samples`);

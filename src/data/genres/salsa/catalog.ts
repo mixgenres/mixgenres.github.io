@@ -81,7 +81,8 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "salsa dura brass punches over son clave bongos cadence fill", "role": "percussion", "onsets": [7.0, 7.5, 7.75], "instruments": ["bongos"], "cycleLength": 2, "phraseEnd": true, "articulation": "roll"},
         {"name": "salsa dura brass punches over son clave timbales pulse", "role": "percussion", "onsets": [0, 1.5, 3, 5, 6], "instruments": ["timbales"], "cycleLength": 2, "articulation": "accent"},
         {"name": "salsa dura brass punches over son clave timbales cadence fill", "role": "percussion", "onsets": [7.0, 7.5, 7.75], "instruments": ["timbales"], "cycleLength": 2, "phraseEnd": true, "articulation": "roll"},
-        {"name": "salsa dura brass punches over son clave claves pulse", "role": "percussion", "onsets": [0, 1.5, 3, 5, 6], "instruments": ["claves"], "cycleLength": 2, "articulation": "accent"}
+        {"name": "salsa dura brass punches over son clave claves pulse", "role": "percussion", "onsets": [0, 1.5, 3, 5, 6], "instruments": ["claves"], "cycleLength": 2, "articulation": "accent"},
+        {"name": "Salsa dura campana pulse over the two-bar clave", "role": "percussion", "instruments": ["cowbell"], "cycleLength": 2, "onsets": [0, 1, 2, 3, 4, 5, 6, 7], "hits": ["bell", "bell", "bell", "bell", "bell", "bell", "bell", "bell"], "accents": [0.8, 0.5, 0.8, 0.5, 0.8, 0.5, 0.8, 0.5], "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "fall", "accent", "legato", "vibrato"],

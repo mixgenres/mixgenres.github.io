@@ -13,6 +13,7 @@ import { resolveTrackSound, resolveTrackGain } from './trackSound';
 import { createMasterChain, type MasterChain, type StudioMixState } from '../studio/mixer.ts';
 import { resolvePlaybackMix, ensembleHeadroom } from '../studio/masterSettings';
 import { measureAudio, type RenderDiagnostic } from '../studio/audioMetrics';
+import { reserveOutputHeadroom } from '../studio/outputHeadroom';
 import { FORM_BLUEPRINTS } from '../../data/genreForms';
 import { processOfflineAudioDSP } from '../studio/effects.ts';
 import { excerptMixTimeline } from '../studio/dynamicMix/MixAutomation';
@@ -29,7 +30,7 @@ export interface Mp3RenderOptions {
   selectedTrackIds?: string[];
   /** Physical stems already rendered in workers, before any ensemble mastering. */
   preparedStems?: Map<string, RenderedPerformanceAudio>;
-  /** Render a short window of the performance timeline for incremental playback. */
+  /** Render a short excerpt for auditions and diagnostic exports. */
   renderWindow?: { start: number; end: number };
   /** Lower values run first. Evaluated again when a queued render is picked. */
   renderPriority?: () => number;
@@ -545,6 +546,7 @@ async function renderPerformance(
         renderedRight[i] = drumBusR[i] + subBusR[i] + instBusR[i];
       }
       if (!options.rawStem && styleBlueprint?.dspProfile) processOfflineAudioDSP(renderedLeft, renderedRight, styleBlueprint.dspProfile);
+      if (!options.rawStem) reserveOutputHeadroom(renderedLeft, renderedRight);
       observeOutput(renderedLeft, renderedRight, false);
       checkAbort(options.signal);
       if (pcm) { onProgress?.(1); return { sampleRate, left: renderedLeft, right: renderedRight }; }
@@ -594,6 +596,7 @@ async function renderPerformance(
     if (!options.rawStem && styleBlueprint?.dspProfile) {
       processOfflineAudioDSP(renderedLeft, renderedRight, styleBlueprint.dspProfile);
     }
+    if (!options.rawStem) reserveOutputHeadroom(renderedLeft, renderedRight);
 
     observeOutput(renderedLeft, renderedRight, true);
     checkAbort(options.signal);

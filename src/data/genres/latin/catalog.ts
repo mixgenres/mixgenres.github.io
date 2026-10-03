@@ -517,7 +517,8 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "chicha electric guitar melody and cumbia pulse cumbia-drum pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cumbia-drum"], "cycleLength": 1, "articulation": "accent"},
         {"name": "chicha electric guitar melody and cumbia pulse cumbia-drum cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cumbia-drum"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "chicha electric guitar melody and cumbia pulse guiro pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "chicha electric guitar melody and cumbia pulse guiro cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["guiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "chicha electric guitar melody and cumbia pulse guiro cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["guiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
+        {"name": "Chicha organ offbeat chord support", "role": "harmony", "instruments": ["organ"], "onsets": [0.5, 1.5, 2.5, 3.5], "durations": [0.3, 0.3, 0.3, 0.3], "articulation": "staccato"}
       ],
       "instrumentTechniques": {
         "guitar": ["tremolo", "strum", "arpeggio", "short-chord-stab", "muted-strum", "accent", "staccato", "legato", "vibrato"],
@@ -740,7 +741,11 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "tropical horn response over dance percussion cumbia-drum pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cumbia-drum"], "cycleLength": 1, "articulation": "accent"},
         {"name": "tropical horn response over dance percussion cumbia-drum cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cumbia-drum"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "tropical horn response over dance percussion guiro pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["guiro"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "tropical horn response over dance percussion guiro cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["guiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "tropical horn response over dance percussion guiro cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["guiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
+        {"name": "Tropical horn answer after the vocal call", "role": "lead", "instruments": ["horn-section"], "onsets": [2, 2.75, 3.5], "durations": [0.4, 0.4, 0.35], "articulation": "staccato"},
+        {"name": "Tropical piano syncopated chord support", "role": "harmony", "instruments": ["piano"], "onsets": [0, 0.75, 1.5, 2.5, 3.25, 3.5], "durations": [0.35, 0.35, 0.35, 0.35, 0.2, 0.35], "articulation": "staccato"},
+        {"name": "Tropical conga open tones and slap", "role": "percussion", "instruments": ["congas"], "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "hits": ["mute", "mute", "slap", "mute", "mute", "mute", "open", "open"], "articulation": "accent"},
+        {"name": "Tropical timbales cascara support", "role": "percussion", "instruments": ["timbales"], "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "hits": ["rim", "rim", "rim", "rim", "rim", "rim", "rim", "rim"], "accents": [0.8, 0.4, 0.6, 0.4, 0.8, 0.4, 0.6, 0.4], "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],

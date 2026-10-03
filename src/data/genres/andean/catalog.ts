@@ -281,7 +281,8 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "saya drum and vocal response guitar accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "saya drum and vocal response guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "saya drum and vocal response bombo-andino pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["bombo-andino"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "saya drum and vocal response bombo-andino cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["bombo-andino"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "saya drum and vocal response bombo-andino cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["bombo-andino"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
+        {"name": "Saya vocal call before the instrumental response", "role": "lead", "instruments": ["voice"], "onsets": [0, 0.5, 1], "durations": [0.45, 0.45, 0.8], "articulation": "legato"}
       ],
       "instrumentTechniques": {
         "quena": ["accent", "breath", "staccato", "legato", "vibrato"],

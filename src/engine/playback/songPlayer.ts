@@ -242,6 +242,8 @@ export class SongPlayer {
     const duration = this.loopDuration();
     this.offset = Math.max(0, Math.min(Math.max(0, duration - 1 / 44100), seconds));
     if (this.wantsPlayback && this.state.performance && this.fullBuffer) {
+      this.playClickedAt = performance.now();
+      this.publish({audioStartMs:undefined});
       this.startSourcesAt(this.offset);
       const request = ++this.playRequest;
       const revision = this.revision;
