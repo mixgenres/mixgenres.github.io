@@ -16,7 +16,7 @@ function config(instrument = 'piano'): PlaybackConfiguration {
     ccs: [{ trackId: 't', cc: 74, value: 100, time: 0.1 }, { trackId: 't', cc: 18, value: 90, time: 0.2 }],
     bars: [], duration: 2, tail: 1, blends: {} };
   return { performance, instruments: new Map([['t', instrument]]), roles: new Map([['t', 'lead']]),
-    levels: new Map([['t', 0.7]]), worldId: 'tango', styleId: 'tango-tango-electronico' };
+    levels: new Map([['t', 0.7]]), worldId: 'tango', styleId: 'tango-electrotango-gotan' };
 }
 function fakeRenderer(node: BandWorkletNode) {
   const nodeMap = new Map<number, { props: Record<string, unknown> }>();
@@ -31,7 +31,12 @@ function fakeRenderer(node: BandWorkletNode) {
   }, commitUpdates() {}, getPackedInstructions() { return [1]; } };
   const core = { render(...roots: NodeRepr_t[]) { commits++; nodeMap.clear(); roots.forEach(mount); return Promise.resolve(); },
     _renderer: { _delegate: delegate, _sendMessage() { messages++; } } };
-  Object.assign(node, { core });
+  const audioNode = { connect() {}, disconnect() {} };
+  const bus = { connect() {}, disconnect() {} };
+  const masterChain = { drumBus: bus, subBus: bus, instBus: bus, setMixCharacter() {}, dispose() {} };
+  // Model an already initialized output graph; configure() owns graph commits,
+  // while these tests focus on updates after that initial preparation.
+  Object.assign(node, { core, ctx: { currentTime: 0 }, audioNode, masterChain, rendererOutputCount: 3 });
   return { get commits() { return commits; }, get messages() { return messages; }, nodeMap };
 }
 

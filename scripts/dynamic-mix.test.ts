@@ -18,7 +18,7 @@ import type { Sheet } from '../src/engine/sheet/sheet';
 import { makeSheet, setSectionSolo } from '../src/engine/sheet/sheet';
 import { arrangeBand } from '../src/engine/band/arrangeBand';
 
-const tango = () => resolveStyle({ genreId: 'tango', styleId: 'tango-tango-tradicional' });
+const tango = () => resolveStyle({ genreId: 'tango', styleId: 'tango-golden-age' });
 const note = (trackId: string, midi = 65, time = 0, dur = 3): PerfNote => ({ trackId, midi, time, dur, bar: 0,
   vel: 88, gestureCode: 0, hitFunctionCode: 0, accent: .7, attackId: `${trackId}:${time}` });
 function scene(startTime = 0, endTime = 4) {
@@ -80,13 +80,13 @@ test('selected styles win over sound influences; rhythm influences do not import
     influences: [{ source: { styleId: 'tango-pugliese' }, weight: 1, aspects: ['sound'] }] });
   assert.equal(sound.resolvedMix.contract.character.dryness, .76);
   assert.equal(sound.resolvedMix.contract.ambience.roomSize, .3);
-  assert.equal(sound.resolvedMix.contract.dynamics.foregroundContrastDb, 3);
+  assert.equal(sound.resolvedMix.contract.dynamics.foregroundContrastDb, 2.8);
   assert.equal(sound.provenance['sound.mix.character.dryness'].source, 'style');
 });
 
 test('extends metadata merges through resolveStyle and user edits with the same keys invalidate its cache', () => {
   const parent = { ...ALL_STYLES_BY_ID['tango-troilo'], id: 'test-mix-parent', sound: { mix: { ambience: { roomSize: .7 } } } };
-  const child = { ...ALL_STYLES_BY_ID['tango-tango-tradicional'], id: 'test-mix-child', extends: parent.id,
+  const child = { ...ALL_STYLES_BY_ID['tango-golden-age'], id: 'test-mix-child', extends: parent.id,
     sound: { mix: { dynamics: { foregroundContrastDb: 2.6 } } } };
   ALL_STYLES_BY_ID[parent.id] = parent; ALL_STYLES_BY_ID[child.id] = child;
   try {
@@ -108,22 +108,22 @@ test('major Tango styles have distinct structured room, stage, dynamics and hand
   const troilo = resolveStyle({ genreId: 'tango', styleId: 'tango-troilo' }).resolvedMix.contract;
   const pugliese = resolveStyle({ genreId: 'tango', styleId: 'tango-pugliese' }).resolvedMix.contract;
   const milonga = resolveStyle({ genreId: 'tango', styleId: 'tango-milonga' }).resolvedMix.contract;
-  const nuevo = resolveStyle({ genreId: 'tango', styleId: 'tango-tango-nuevo' }).resolvedMix.contract;
+  const nuevo = resolveStyle({ genreId: 'tango', styleId: 'tango-piazzolla-nuevo-tango' }).resolvedMix.contract;
   assert.ok(pugliese.ambience.roomSize > troilo.ambience.roomSize);
   assert.ok(pugliese.dynamics.ensembleBreathing > milonga.dynamics.ensembleBreathing);
   assert.ok(milonga.transitions.foregroundHandoffMs < troilo.transitions.foregroundHandoffMs);
   assert.ok(nuevo.character.transientSnap! > troilo.character.transientSnap!);
-  for (const id of ['tango-guardia-vieja', 'tango-piazzolla', 'tango-tango-vals']) assert.ok(resolveStyle({ genreId: 'tango', styleId: id }).resolvedMix.contract.enabled);
+  for (const id of ['tango-guardia-nueva-de-caro', 'tango-piazzolla-nuevo-tango', 'tango-vals']) assert.ok(resolveStyle({ genreId: 'tango', styleId: id }).resolvedMix.contract.enabled);
 });
 
 test('resolved authored roles and phrase functions govern importance; instrument identity is absent', () => {
   const mix = tango().resolvedMix.contract;
-  assert.deepEqual(resolveMixFunctions('harmony', mix).mixFunctions, ['pulse-anchor', 'harmonic-support']);
+  assert.deepEqual(resolveMixFunctions('harmony', mix).mixFunctions, ['harmonic-support']);
   assert.ok(resolveMixFunctions('harmony', mix, true).mixFunctions.includes('foreground'));
   const planned = scene();
   assert.deepEqual(planned.foregroundTrackIds, ['lead']);
-  assert.equal(planned.tracks.bass.gainOffsetDb, 0);
-  assert.equal(planned.tracks.comp.gainOffsetDb, 0);
+  assert.ok(planned.tracks.bass.gainOffsetDb > 0);
+  assert.ok(planned.tracks.comp.gainOffsetDb < 0);
   assert.ok(planned.tracks.comp.presenceOffsetDb < 0);
   assert.ok(planned.tracks.lead.gainOffsetDb > 0);
 });
@@ -170,9 +170,9 @@ test('scene compilation is deterministic, honours section role/solo changes and 
   assert.match(formatMixTrace(perf.mixTimeline!), /sound.mix.ambience.roomSize/);
 });
 
-test('uncalibrated worlds and explicitly disabled mix contracts produce neutral track automation', () => {
+test('catalog styles have calibrated mixes and explicitly disabled mix contracts produce neutral track automation', () => {
   const style = resolveStyle({ genreId: 'jazz', styleId: Object.values(ALL_STYLES_BY_ID).find(s => s.primaryGenre === 'jazz')!.id });
-  assert.equal(style.resolvedMix.contract.enabled, false);
+  assert.equal(style.resolvedMix.contract.enabled, true);
   const disabled = resolveMixContract(tango(), { enabled: false });
   const planned = planMixScene(scene().analysis, disabled, 'disabled');
   for (const state of Object.values(planned.tracks)) {

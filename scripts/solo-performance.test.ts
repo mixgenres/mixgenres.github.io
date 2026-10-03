@@ -65,6 +65,6 @@ const backing = { id: 'piano', role: 'harmony' } as any;
 assert.equal(supportsSolo(drumTrading, backing, ['horn']), true);
 assert.equal(supportsSolo(drumTrading, backing, ['drum']), false, 'backing rests during a jazz drum trade');
 
-const alegrias = makeSheet({ genreId: 'flamenco', styleId: 'flamenco-alegrias-style' });
+const alegrias = makeSheet({ genreId: 'flamenco', styleId: 'flamenco-alegrias' });
 assert.equal(getResolvedSectionStyle(alegrias, alegrias.regions[0]).melody.scaleMode, 'major');
-assert.equal(getResolvedSectionStyle(base, base.regions[0]).melody.scaleMode, 'phrygian');
+assert.equal(getResolvedSectionStyle(base, base.regions[0]).melody.scaleMode, 'Phrygian');

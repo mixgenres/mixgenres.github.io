@@ -64,7 +64,7 @@ test('ducking controls supply unity at rest without an additive bass boost; enha
 test('all saturation modes preserve exact silence', () => {
   for (const saturationType of ['tube', 'tape', 'hard-clip'] as const) {
     const graph = context();
-    const mix = resolvePlaybackMix('tango', 'tango-tango-electronico');
+    const mix = resolvePlaybackMix('tango', 'tango-electrotango-gotan');
     const chain = createMasterChain(graph.ctx, { ...mix.mixCharacter!, saturationType });
     const curve = graph.nodes.find(n => n.kind === 'shaper')!.curve!;
     assert.equal(curve[(curve.length - 1) / 2], 0);

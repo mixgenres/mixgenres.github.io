@@ -243,6 +243,9 @@ function styleDefinition(input: GenrePackInput, item: CalibratedStyleInput): Gen
     ? [Math.max(48, input.tempo[0] - 24), Math.max(72, input.tempo[1] - 18)] as [number, number]
     : /jhala|speed|fast|punk|hardcore|bebop|drum.?and.?bass/i.test(styleTerms)
       ? [input.tempo[0] + 12, input.tempo[1] + 28] as [number, number] : input.tempo;
+  const scaleMode = /major(?:-key)? emphasis|major tonality|major mode|bright major/i.test(styleTerms) ? 'major'
+    : /minor(?:-key)? emphasis|minor tonality|minor mode/i.test(styleTerms) ? 'minor'
+      : input.scales[0] ?? input.pitchSystem;
   const stylePatterns = authoredOrDerived(item.patterns, input.patternFamilies, input.id, item.name, 'pattern').slice(0, 10);
   const styleTechniques = authoredOrDerived(item.techniques, input.techniques, input.id, item.name, 'technique').slice(0, 20);
   const styleHarmony = authoredOrDerived(item.harmony, [...input.chordQualities, ...input.cadences], input.id, item.name, 'harmony').slice(0, 20);
@@ -259,7 +262,7 @@ function styleDefinition(input: GenrePackInput, item: CalibratedStyleInput): Gen
     id: styleId, worldId: input.id, name: item.name, origin: input.family, description,
     characteristicInstruments: Array.from(new Set(Object.values(styleRoles).flat())) as GenreStyleDefinition['characteristicInstruments'],
     preferredMeters: [meter === 'free / cycle' || meter === 'free / 4/4' ? '4/4' : meter], tempoRange: tempo, keySubstyles: [item.name], coreConcepts: list(stylePatterns, styleTechniques).slice(0, 10),
-    rhythmicGrammar: stylePatterns.slice(0, 6), scaleMode: input.scales[0] ?? input.pitchSystem,
+    rhythmicGrammar: stylePatterns.slice(0, 6), scaleMode,
     tuningSystem: input.pitchSystem, signatureCell: stylePatterns[0] ?? input.patternFamilies[0],
     grooveMechanics: grooveCalibration(input, item),
     prominentChords: styleHarmony,

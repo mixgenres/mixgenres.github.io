@@ -470,7 +470,6 @@ export default function App() {
           {/* Play/Pause button */}
           <button
             onClick={() => { playerRef.current?.configure(songRef.current); playerRef.current?.toggle(); }}
-            disabled={playerStatus === 'compiling'}
             aria-label={playbackLabel}
             aria-busy={audioLoading}
             aria-pressed={playing}

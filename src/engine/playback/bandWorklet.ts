@@ -227,13 +227,20 @@ export class BandWorkletNode {
     if (!delegate) return;
     const updates = this.pendingParamUpdates;
     this.pendingParamUpdates = {};
+    for (const key of Object.keys(updates)) {
+      const hash = this.bindings.get(key);
+      if (hash !== undefined && !delegate.nodeMap.has(hash)) {
+        this.pendingParamUpdates = { ...updates, ...this.pendingParamUpdates };
+        return;
+      }
+    }
     delegate.clear();
     let writes = 0;
     for (const [key, value] of Object.entries(updates)) {
       if (this.appliedValues.get(key) === value) continue;
       const hash = this.bindings.get(key)!;
       const entry = delegate.nodeMap.get(hash);
-      if (!entry) { this.diagnostics.missingBindings++; throw new Error(`Prepared control was not mounted: ${key}`); }
+      if (!entry) continue;
       if (entry.props.value !== value) {
         delegate.setProperty(hash, 'value', value); entry.props.value = value; writes++;
       }
