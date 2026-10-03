@@ -4,13 +4,11 @@ import OfflineRenderer from '@elemaudio/offline-renderer';
 import { renderVoice, midiToFreq } from '../src/engine/playback/elementaryEngine';
 import { prepareNoteVoice } from '../src/engine/playback/performancePlan';
 import { resolveTrackSound } from '../src/engine/playback/trackSound';
-import { renderBakedTrack } from '../src/engine/playback/renderBakedTrack';
 import { codeForGesture } from '../src/engine/band/gestures';
 import { frequencyEnergy, spectralPeak, rms } from './lib/spectral';
-import type { BakedBank } from '../src/engine/playback/bakedInstruments';
 
 const sr = 44100;
-async function physical(id: string, midi = 60, action = 'tone', held = .8) {
+async function physical(id: string, midi = 60, action = 'tone', held = .8, release = 0) {
   const renderer = new OfflineRenderer();
   await renderer.initialize({ sampleRate: sr, numInputChannels: 0, numOutputChannels: 1, blockSize: 64 });
   try {
@@ -18,7 +16,14 @@ async function physical(id: string, midi = 60, action = 'tone', held = .8) {
     const note = { time: 0, dur: held, midi, vel: 100, trackId: 'test', bar: 0, gestureCode: codeForGesture(action), hitFunctionCode: 0, accent: 0 };
     const voice = prepareNoteVoice(note, params, 'tango', ''); voice.gate = 1;
     await renderer.render(renderVoice('test', 0, voice, params));
-    const pcm = new Float32Array(Math.ceil(held * sr / 64) * 64); renderer.process([], [pcm]);
+    const heldFrames = Math.ceil(held * sr / 64) * 64;
+    const pcm = new Float32Array(heldFrames + Math.ceil(release * sr / 64) * 64);
+    renderer.process([], [pcm.subarray(0, heldFrames)]);
+    if (release > 0) {
+      voice.gate = 0;
+      await renderer.render(renderVoice('test', 0, voice, params));
+      renderer.process([], [pcm.subarray(heldFrames)]);
+    }
     return pcm;
   } finally { renderer.reset(); }
 }
@@ -55,15 +60,11 @@ test('carved marimba bars and steel pan use their tuned modal spectra', async ()
   }
 });
 
-test('sampled piano and vibraphone respect short notes and their dampers', async () => {
-  const pcm = Float32Array.from({ length: sr * 2 }, (_, i) => .2 * Math.sin(2 * Math.PI * midiToFreq(60) * i / sr));
-  const bank: BakedBank = { pcm, manifest: { version: 1, instrumentId: 'piano', sourceHash: '', sampleRate: sr, unpitched: false,
-    samples: [{ midi: 60, velocity: 100, action: 'tone', offset: 0, frames: pcm.length }] } };
+test('physical piano and vibraphone respect short notes and their dampers', async () => {
   for (const id of ['piano', 'vibraphone']) {
-    const note = { time: 0, dur: .1, midi: 60, vel: 100, trackId: 'test', bar: 0, gestureCode: codeForGesture('staccato'), hitFunctionCode: 0, accent: 0 };
-    const rendered = await renderBakedTrack(bank, [note], [], resolveTrackSound(id), 1, 0, sr)!;
-    assert.ok(rendered);
-    assert.ok(rms(rendered.left, sr, .01, .09) > .001);
-    assert.equal(rms(rendered.left, sr, .15, .5), 0, `${id} must stop ringing after damping`);
+    const pcm = await physical(id, 60, 'staccato', .1, .6);
+    const attack = rms(pcm, sr, .01, .09);
+    assert.ok(attack > .001, `${id} has an audible attack`);
+    assert.ok(rms(pcm, sr, .3, .6) < attack * .01, `${id} must stop ringing after damping`);
   }
 });

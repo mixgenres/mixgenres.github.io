@@ -74,7 +74,7 @@ export function computeTrackStemFingerprint(
 
 export class PCMStemCache extends LRUMap<string, StemCacheEntry> {
   private bytes = 0;
-  constructor(readonly maxBytes = 64 * 1024 * 1024) { super(128, 'stemCache'); }
+  constructor(readonly maxBytes = 64 * 1024 * 1024, name = 'stemCache') { super(128, name); }
   override set(key: string, value: StemCacheEntry): this {
     this.delete(key);
     const size = value.left.byteLength + value.right.byteLength;

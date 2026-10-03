@@ -484,7 +484,7 @@ export const GENRE_PACK: GenrePackInput = {
       "scale": "minor",
       "roles": {
         "lead": ["guitar"],
-        "harmony": ["guitar"],
+        "harmony": ["guitar", "organ"],
         "bass": ["bass"],
         "percussion": ["cumbia-drum", "guiro"]
       },
@@ -704,10 +704,10 @@ export const GENRE_PACK: GenrePackInput = {
       "tempo": [104, 120],
       "scale": "minor",
       "roles": {
-        "lead": ["voice", "accordion"],
-        "harmony": ["guitar"],
+        "lead": ["voice", "horn-section"],
+        "harmony": ["piano"],
         "bass": ["bass"],
-        "percussion": ["cumbia-drum", "guiro"]
+        "percussion": ["congas", "timbales", "guiro"]
       },
       "progressions": {
         "intro": ["Am", "Dm", "E7", "Am"],

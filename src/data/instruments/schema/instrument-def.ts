@@ -462,6 +462,7 @@ export interface SynthPatch {
 }
 
 export interface InstrumentDef {
+  notationRules?: Partial<import('../../notation/rules').NotationRules>;
   id: string;
   name: string;
   family: InstrumentFamily;

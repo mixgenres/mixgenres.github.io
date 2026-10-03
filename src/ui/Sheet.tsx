@@ -111,7 +111,7 @@ export function NoteCard({
             }}
           >
             <div className="slab" style={{ fontSize: 18, lineHeight: 1.15 }}>{title}</div>
-            <p style={{ fontSize: 13.5, lineHeight: 1.5, marginTop: 8, opacity: 0.82 }}>{body}</p>
+            <p style={{ fontSize: 13.5, lineHeight: 1.5, marginTop: 8, opacity: 0.82, whiteSpace: 'pre-line' }}>{body}</p>
             {!!tags?.length && (
               <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3">
                 {tags.map(t => <span key={t} className="micro">{t}</span>)}

@@ -1,5 +1,6 @@
 import { GESTURE_NAMES } from '../engine/band/gestures';
 import { renderPerformanceToMp3 } from '../engine/playback/mp3Export';
+import { renderPlaybackPart } from '../engine/playback/renderPlaybackPart';
 import { checkAbort, yieldToUI } from './audioEncoding';
 import { filename, selectedTracks, type ExportContext } from './model';
 import { midiBytes } from './midi';
@@ -15,13 +16,25 @@ function performanceJson(ctx: ExportContext) {
 }
 async function audio(ctx: ExportContext, format: 'mp3' | 'wav', progress?: (fraction: number) => void, signal?: AbortSignal, rawStem = false) {
   const tracks = selectedTracks(ctx);
-  return renderPerformanceToMp3(ctx.performance, {
+  const options = {
     selectedTrackIds: tracks.map(t => t.id), trackInstruments: new Map(tracks.map(t => [t.id, t.instrumentId ?? t.instrument])), trackRoles: new Map(tracks.map(t => [t.id, t.role])),
     worldId: ctx.performance.worldId, styleId: (ctx.song as ExportContext['song'] & { styleId?: string }).styleId,
     signal, format, rawStem, bypassWebAudioMaster: rawStem,
     // Explicit export selection is authoritative, including a currently muted part.
     mixState: { volume: Object.fromEntries(tracks.map(t => [t.id, t.volume])), pan: Object.fromEntries(tracks.filter(t => t.pan !== undefined).map(t => [t.id, t.pan!])) },
-  }, progress);
+  };
+  const preparationProgress = new Map<string,number>();
+  const preparedStems = new Map(await Promise.all(tracks.map(async track => {
+    const part = await renderPlaybackPart(ctx.performance, { ...options, selectedTrackIds:[track.id], rawStem:true }, fraction => {
+      preparationProgress.set(track.id,fraction);
+      progress?.([...preparationProgress.values()].reduce((a,b) => a+b,0)/tracks.length*.75);
+    });
+    preparationProgress.set(track.id,1);
+    progress?.([...preparationProgress.values()].reduce((a,b) => a+b,0)/tracks.length*.75);
+    return [track.id,part] as const;
+  })));
+  checkAbort(signal);
+  return renderPerformanceToMp3(ctx.performance, { ...options, preparedStems }, fraction => progress?.(.75+fraction*.25));
 }
 export async function createExport(ctx: ExportContext, format: ExportFormat, progress?: (fraction: number) => void, signal?: AbortSignal): Promise<{ blob: Blob; name: string }> {
   checkAbort(signal); selectedTracks(ctx);

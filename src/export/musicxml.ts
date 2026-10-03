@@ -1,4 +1,7 @@
 import { assignStringPositions } from './gp5';
+import { musicianScoreFromArrangement } from '../engine/score/musicianScore';
+import { exportMusicXml } from '../engine/score/musicXml';
+import type { Sheet } from '../engine/sheet/sheet';
 import { GESTURE_NAMES } from '../engine/band/gestures';
 import { isPercussion, meter, pitch, PPQ, programFor, scoreNotes, selectedTracks, stringTuning, timeline, xml, type ExportContext, type ScoreNote } from './model';
 const durations = [
@@ -36,6 +39,13 @@ function noteXml(item: ScoreNote | undefined, start: number, ticks: number, voic
 }
 /** MusicXML 4 score with independent polyphonic voices, complete rests, ties, and tempo changes. */
 export function musicXml(ctx: ExportContext, tablature = false): string {
+  const sheet = ctx.song as Sheet;
+  if (ctx.performance.scoreVersion === 1 && sheet.measures) {
+    const ids = new Set(selectedTracks(ctx).map(track => track.id));
+    const score = musicianScoreFromArrangement(sheet,ctx.performance);
+    return exportMusicXml({ ...score, parts:score.parts.filter(p => ids.has(p.id)),
+      notes:score.notes.filter(n => ids.has(n.trackId)), rests:score.rests.filter(r => ids.has(r.trackId)) },tablature);
+  }
   const tracks = selectedTracks(ctx), [beats, beatType] = meter(ctx), bars = timeline(ctx.performance);
   if (!bars.length) throw new Error('No measures to export.');
   const prepared = tracks.map(track => {

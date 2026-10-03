@@ -149,8 +149,11 @@ export interface PatternVariant {
  * in the pattern's own meter; fractional values support tuplets and pickup
  * gestures without forcing the pattern onto a fixed 16th-note grid. */
 export interface PatternEvent {
-  /** Chord-relative pitch; register anchors the root, degree retains octaves. */
-  pitch?: { degree?: number; semitoneOffset?: number; register?: number; voicing?: 'single' | 'chord' };
+  /** Player-facing directions are retained separately from DSP controls. */
+  notation?: { string?: number; fret?: number; fingering?: string; stroke?: 'up' | 'down'; bowing?: 'up' | 'down'; grace?: boolean; ornament?: string; tuplet?: { actual: number; normal: number }; tieToNext?: boolean };
+  /** Absolute MIDI pitches take precedence. Chord-relative register anchors
+   * the root; degree retains octaves. Cents offsets are relative to the tuning. */
+  pitch?: { midi?: number | number[]; cents?: number; degree?: number; semitoneOffset?: number; register?: number; voicing?: 'single' | 'chord' };
   position: number;
   duration?: number;
   kind?: 'attack' | 'rest' | 'tie' | 'sustain' | 'ghost' | 'accent' | 'ornament' | 'pickup' | 'fill';
@@ -265,8 +268,15 @@ export interface StyleCalibration {
   instrumentTechniques?: Record<string, string[]>;
   roles: Record<string, { preferredInstruments: string[]; required?: boolean; register?: [number, number]; mixFunction?: string }>;
   techniques: Record<string, string[]>;
+  /** Flat rows: one technique mapping with its valid performance context. */
+  techniqueMappings?: Array<{
+    technique: string; instruments: string[]; roles: string[]; registers?: Array<[number, number]>;
+    minDurationBeats: number; maxDensityPerBar: number;
+    phrasePositions: string[]; transitionUse: boolean; intensity: [number, number];
+  }>;
   techniqueScopes?: Partial<Record<string, Array<'note' | 'motif' | 'phrase' | 'section' | 'song'>>>;
-  patterns: { families: string[]; interaction?: string[]; phraseBehaviors?: string[]; forbidden?: string[] };
+  patterns: { families: string[]; interaction?: string[]; phraseBehaviors?: string[]; forbidden?: string[];
+    mappedFamilies?: Array<{ name: string; category: PatternCategory; roles: string[]; instruments: string[]; context: 'note' | 'phrase' | 'section' }> };
   harmony: {
     pitchSystem: string;
     scales: string[];
@@ -278,6 +288,14 @@ export interface StyleCalibration {
     requiresChords?: boolean;
     preferredVoicingTones?: [number, number];
     voicingTonesByRole?: Record<string, [number, number]>;
+    /** Preferred simultaneous pitch count. This is a style/instrument target, not a chord-size cap. */
+    voicingDensity?: { min: number; max: number };
+    voicingDensityByInstrument?: Record<string, { min: number; max: number }>;
+    chordFamilyWeights?: Record<string, number>;
+    borrowedHarmony?: string[];
+    substitutions?: string[];
+    voiceLeading?: string[];
+    pedalDroneBehavior?: string;
   };
   mix: import('./sound/schema/dynamicMix').MixOverride<import('./sound/schema/dynamicMix').MixContract>;
 }
@@ -382,6 +400,7 @@ export type LensDef = GenreWorld;
 export type PatternDef = MusicalPattern;
 
 export interface PatternPerformanceDetails {
+  notations?: Array<PatternEvent['notation']>;
   pitches?: Array<PatternEvent['pitch']>;
   stepsPerBar: number;
   onsets: number[];

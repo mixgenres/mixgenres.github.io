@@ -173,7 +173,7 @@ test('an unchanged song warms the entire mix without waiting for Play; titles re
   assert.equal(player.revision, revision);
   assert.ok(player.fullBuffer);
   player.configure({ ...song, tracks: [{ ...song.tracks[0], volume: .2 }] });
-  assert.equal(player.fullBuffer, undefined, 'a fader change invalidates the baked mix');
+  assert.equal(player.fullBuffer, undefined, 'a fader change invalidates the rendered mix');
   assert.equal(player.state.performance, perf, 'fader changes reuse the musical calculation');
   await player.compiling;
 });

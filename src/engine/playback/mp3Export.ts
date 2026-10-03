@@ -1,6 +1,7 @@
 import { createSongMixGraph, type SongMixGraph } from '../studio/dynamicMix/MixGraph';
 import { accumulatePortableMix, renderPortableAmbience } from '../studio/dynamicMix/PortableMixRuntime';
 import { requiredVoiceCount, voiceTailSeconds } from './voiceAllocation';
+import { createNoteTailResolver } from './noteLifetime';
 import { prepareNoteVoice, applyPhysicalController } from './performancePlan';
 import { checkAbort, encodeMp3, wavBlob, yieldToUI } from '../../export/audioEncoding';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
@@ -15,8 +16,6 @@ import { FORM_BLUEPRINTS } from '../../data/genreForms';
 import { processOfflineAudioDSP } from '../studio/effects.ts';
 import { excerptMixTimeline } from '../studio/dynamicMix/MixAutomation';
 import { RenderQueue } from './renderQueue';
-import { loadBakedBank } from './bakedInstruments';
-import { renderBakedTrack } from './renderBakedTrack';
 import {
   renderTrack,
   determineBusCategory,
@@ -26,9 +25,6 @@ import {
 } from './elementaryEngine.ts';
 
 export interface Mp3RenderOptions {
-  /** Defaults to baked samples when available; physics remains an explicit reference. */
-  synthesisMode?: 'auto' | 'physical';
-  sampleBankBaseUrl?: string;
   selectedTrackIds?: string[];
   /** Physical stems already rendered in workers, before any ensemble mastering. */
   preparedStems?: Map<string, RenderedPerformanceAudio>;
@@ -39,6 +35,8 @@ export interface Mp3RenderOptions {
   signal?: AbortSignal;
   format?: 'mp3' | 'wav';
   rawStem?: boolean;
+  /** Main-thread section PCM owns reuse; workers need not retain a second copy. */
+  cacheDSPStem?: boolean;
   trackInstruments: Map<string, string>;
   trackRoles?: Map<string, string>;
   worldId?: string;
@@ -107,41 +105,7 @@ async function renderPerformance(
   perf = { ...perf, notes: perf.notes.filter(note => isActive(note.trackId)), ccs: perf.ccs.filter(cc => isActive(cc.trackId)) };
   if (options.renderWindow) perf = performanceWindow(perf, options.renderWindow.start, options.renderWindow.end);
   const sampleRate = 44100;
-  const lifetimeControls = new Map<string, { brightness?: number; mute?: number }>();
-  for (const cc of perf.ccs) {
-    if (cc.cc !== 74 && cc.cc !== 18) continue;
-    const bounds = lifetimeControls.get(cc.trackId) ?? {};
-    const value = Math.max(0, Math.min(1, cc.value / 127));
-    if (cc.cc === 74) bounds.brightness = Math.max(bounds.brightness ?? 0, value);
-    else bounds.mute = Math.min(bounds.mute ?? 1, value);
-    lifetimeControls.set(cc.trackId, bounds);
-  }
-  const tails = new WeakMap<PerfNote, number>();
-  const sounds = new Map<string, TrackParams>();
-  const noteTail = (note: PerfNote) => {
-    const existing = tails.get(note);
-    if (existing !== undefined) return existing;
-    const instrumentId = options.trackInstruments.get(note.trackId) ?? perf.trackInfo?.[note.trackId]?.instrumentId ?? note.trackId;
-    const worldId = note.soundContext?.worldId ?? options.worldId ?? perf.worldId;
-    const styleId = note.soundContext?.styleId ?? options.styleId;
-    const role = note.soundContext?.role ?? options.trackRoles?.get(note.trackId) ?? perf.trackInfo?.[note.trackId]?.role;
-    const key = JSON.stringify([instrumentId, worldId, styleId, role]);
-    let params = sounds.get(key);
-    if (!params) {
-      params = resolveTrackSound(instrumentId, worldId, styleId, role);
-      sounds.set(key, params);
-    }
-    const prepared = prepareNoteVoice(note, params, worldId ?? '', styleId ?? '', role);
-    const lifetimeParams = { ...(prepared.soundParams ?? params) };
-    const controls = lifetimeControls.get(note.trackId);
-    // Controllers may brighten/unmute a ringing note after its attack. Budget
-    // their widest decay without replaying the entire CC list per note.
-    if (controls?.brightness !== undefined) lifetimeParams.brightness = Math.max(lifetimeParams.brightness, controls.brightness);
-    if (controls?.mute !== undefined) lifetimeParams.mute = Math.min(lifetimeParams.mute, controls.mute);
-    const tail = voiceTailSeconds(lifetimeParams, prepared);
-    tails.set(note, tail);
-    return tail;
-  };
+  const noteTail = createNoteTailResolver(perf, options);
   // Match each note's end to its own lifetime, rather than adding the longest
   // instrument tail to the latest note in an unrelated part.
   const lastDecayEnd = perf.notes.reduce((end, note) => Math.max(end, note.time + note.dur + noteTail(note)), 0);
@@ -207,17 +171,12 @@ async function renderPerformance(
       const instrumentId = options.trackInstruments.get(trackId) || perf.trackInfo?.[trackId]?.instrumentId || trackId;
       const instDef = INSTRUMENTS_BY_ID[instrumentId];
       const params = resolveTrackSound(instrumentId, options.worldId ?? perf.worldId, options.styleId, options.trackRoles?.get(trackId) ?? perf.trackInfo?.[trackId]?.role);
-
-      let trackMixVolume = 1.0;
+      const trackMixVolume = options.mixState?.volume?.[trackId] ?? 1;
+      const trackMixPan = options.mixState?.pan?.[trackId] ?? params.pan;
+      // Instrument physics and authored CCs render at unity, with the kit's
+      // own component placement. User balance belongs after this reusable PCM.
+      params.pan = .5;
       const controllerGain = { volume: 1, expression: 1 };
-      if (options.mixState) {
-        if (options.mixState.volume?.[trackId] !== undefined) {
-          trackMixVolume = options.mixState.volume[trackId];
-        }
-        if (options.mixState.pan?.[trackId] !== undefined) {
-          params.pan = options.mixState.pan[trackId];
-        }
-      }
 
       // Determine active time window for this track to avoid rendering silence
       let minNoteTime = Infinity;
@@ -237,7 +196,7 @@ async function renderPerformance(
       for (const cc of trackCCs) {
         const s = Math.round(cc.time * sampleRate);
         if (s <= trackStartSample) {
-          applyCCToParams(params, cc.cc, cc.value, trackMixVolume, controllerGain);
+          applyCCToParams(params, cc.cc, cc.value, 1, controllerGain);
         }
       }
 
@@ -246,24 +205,17 @@ async function renderPerformance(
         trackId,
         instrumentId,
         params,
-        trackMixVolume,
+        1,
         trackNotes,
         trackCCs,
         sampleRate,
       );
 
-      const bank = options.synthesisMode !== 'physical' && !options.preparedStems?.has(trackId)
-        ? await loadBakedBank(instrumentId, options.sampleBankBaseUrl) : undefined;
-      checkAbort(options.signal);
-      const cacheKey = `${stemFingerprint}:${trackStartSample}:${trackSamples}:v7:${bank?.manifest.sourceHash ?? 'physical'}:${bank?.manifest.playbackGain ?? 1}:${bank?.manifest.levelsVersion ?? 0}`;
+      const cacheKey = `${stemFingerprint}:${trackStartSample}:${trackSamples}:v9`;
       const prepared = options.preparedStems?.get(trackId);
       if (prepared && prepared.sampleRate !== sampleRate) throw new Error('Prepared stem sample rate does not match the mix.');
-      let stem = prepared ? { left: prepared.left, right: prepared.right, startSample: 0 } : stemCache.get(cacheKey);
-
-      if (!stem && bank) {
-        stem = await renderBakedTrack(bank, trackNotes, trackCCs, params, trackMixVolume, trackStartSample, trackSamples, options.signal);
-        if (stem) stemCache.set(cacheKey, stem);
-      }
+      let stem = prepared ? { left: prepared.left, right: prepared.right, startSample: 0 }
+        : options.cacheDSPStem === false ? undefined : stemCache.get(cacheKey);
 
       if (!stem) {
         const voiceCount = requiredVoiceCount(trackNotes, noteTail);
@@ -365,7 +317,7 @@ async function renderPerformance(
               // Track gain is static. Per-note dynamics belong to the voice, not the
               // whole track; changing params.volume here used to pump every sounding
               // voice whenever a new note arrived.
-              params.volume = resolveTrackGain(params, trackMixVolume, controllerGain.volume, controllerGain.expression);
+              params.volume = resolveTrackGain(params, 1, controllerGain.volume, controllerGain.expression);
 
               // Prefer idle voice; if all busy, steal oldest
               const idleVoices = voices.filter(v => v.gate === 0 && (availableAt.get(v) ?? 0) <= event.sample);
@@ -428,7 +380,7 @@ async function renderPerformance(
                 graphDirty = true;
               }
             } else if (event.kind === 'cc') {
-              applyCCToParams(params, event.cc.cc, event.cc.value, trackMixVolume, controllerGain);
+              applyCCToParams(params, event.cc.cc, event.cc.value, 1, controllerGain);
               graphDirty = true;
             }
           }
@@ -465,7 +417,19 @@ async function renderPerformance(
           startSample: trackStartSample,
         };
 
-        stemCache.set(cacheKey, stem);
+        if (options.cacheDSPStem !== false) stemCache.set(cacheKey, stem);
+      }
+
+      if (!options.rawStem || options.mixState) {
+        // Equal-power balance of the centred physical stem. This preserves kit
+        // spread and authored pan automation, and is identical for cached and
+        // freshly synthesized stems. Never mutate shared cached arrays.
+        const pan = Math.max(0, Math.min(1, trackMixPan));
+        const gainL = Math.cos(pan * Math.PI / 2) * Math.SQRT2 * trackMixVolume;
+        const gainR = Math.sin(pan * Math.PI / 2) * Math.SQRT2 * trackMixVolume;
+        const left = new Float32Array(stem.left.length), right = new Float32Array(stem.right.length);
+        for (let i = 0; i < left.length; i++) { left[i] = stem.left[i] * gainL; right[i] = stem.right[i] * gainR; }
+        stem = { left, right, startSample: stem.startSample };
       }
 
       if (options.onDiagnostics) options.onDiagnostics({ stage: 'stem', id: trackId, instrumentId,

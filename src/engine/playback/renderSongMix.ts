@@ -4,7 +4,7 @@ import { checkAbort } from '../../export/audioEncoding';
 import { renderPerformanceToAudio, type Mp3RenderOptions, type RenderedPerformanceAudio } from './mp3Export';
 import { renderPlaybackPart } from './renderPlaybackPart';
 
-/** The exact sheet mix is baked once, before the shared buses and master. */
+/** Resolve the sheet's instrument, role and mixer settings for playback and export. */
 export function songMixOptions(song: Sheet): Mp3RenderOptions {
   return {
     trackInstruments: new Map(song.tracks.map(track => [track.id, track.instrumentId ?? track.instrument])),
@@ -33,12 +33,16 @@ export async function renderSongMix(performance: Performance, song: Sheet, signa
     const frames = Math.ceil(Math.max(.1, window ? window.end - window.start : performance.duration + (performance.tail ?? 0)) * 44100);
     return { sampleRate: 44100, left: new Float32Array(frames), right: new Float32Array(frames) };
   }
-  let completed = 0;
+  const trackProgress = new Map<string,number>();
   const entries = await Promise.all(active.map(async track => {
     const audio = await renderPlaybackPart(performance, { ...options, selectedTrackIds: [track.id],
-      rawStem: true, renderWindow: window, signal, renderPriority: priority });
+      rawStem: true, renderWindow: window, signal, renderPriority: priority }, fraction => {
+        trackProgress.set(track.id,fraction);
+        onProgress?.([...trackProgress.values()].reduce((a,b) => a+b,0)/active.length*.8);
+      });
     checkAbort(signal);
-    onProgress?.(++completed / active.length * .8);
+    trackProgress.set(track.id,1);
+    onProgress?.([...trackProgress.values()].reduce((a,b) => a+b,0)/active.length*.8);
     return [track.id, audio] as const;
   }));
   checkAbort(signal);

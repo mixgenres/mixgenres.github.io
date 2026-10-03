@@ -8,7 +8,6 @@ import { createPhraseState, realizeMidi, type PhraseContext } from '../src/engin
 import { GESTURE_NAMES } from '../src/engine/band/gestures';
 import { PATTERNS_BY_ID } from '../src/data/genres';
 import { sliceBarNative } from '../src/engine/sheet/grid';
-import { selectBakedSample, type BakedBank } from '../src/engine/playback/bakedInstruments';
 import { resolveVoiceParameters, getInstrumentModule } from '../src/engine/playback/instrumentRegistry';
 import { resolveTrackSound } from '../src/engine/playback/trackSound';
 import { ALL_STYLES } from '../src/engine/style';
@@ -79,15 +78,9 @@ test('tango variants use their actual meters and accompaniment cells', () => {
 });
 
 test('source-changing techniques do not alias a different excitation', () => {
-  const bank = (instrumentId: string): BakedBank => ({ pcm: new Float32Array(32), manifest: { version: 1, instrumentId, sourceHash: '', sampleRate: 44100,
-    unpitched: false, samples: [{ midi: 60, velocity: 100, action: 'tone', offset: 0, frames: 32 }] } });
-  assert.equal(selectBakedSample(bank('upright-bass'), 60, 100, 'arco'), undefined);
-  assert.equal(selectBakedSample(bank('sarangi'), 60, 100, 'pluck'), undefined);
-  const directions = bank('bandoneon');
-  directions.manifest.samples.push({ ...directions.manifest.samples[0], bellowsDirectionCode: 2, offset: 16 });
-  assert.equal(selectBakedSample(directions, 60, 100, 'tone', 2)?.offset, 16);
   const params = resolveTrackSound('upright-bass', 'tango');
   assert.equal(resolveVoiceParameters({ id: 'v', note: 40, velocity: .8, gate: 1, action: 'arco' }, params).isDecayingInstrument, false);
+  assert.equal(resolveVoiceParameters({ id: 'v', note: 40, velocity: .8, gate: 1, action: 'pizzicato' }, params).isDecayingInstrument, true);
   assert.equal(getInstrumentModule('celeste').id, 'marimba');
   assert.equal(getInstrumentModule('music-box').id, 'marimba');
 });

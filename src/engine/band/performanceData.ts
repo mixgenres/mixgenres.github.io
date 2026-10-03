@@ -19,6 +19,16 @@ export interface PitchBendPoint {
 }
 
 export interface PerfNote {
+  /** Layer 3 output, prepared once on composition edits and consumed by renderers. */
+  physical?: import('../sound/transformMusicians').PhysicalNote;
+  musicianNotation?: import('../../data/schema').PatternEvent['notation'];
+  percussion?: import('../score/percussionNotation').NotatedDrum;
+  notationEventId?: string;
+  /** Written quarter-note beats, before groove/roll displacement. */
+  notation?: { bar?: number; beat: number; durationBeats: number };
+  /** Absolute score pitches must never acquire automatic register changes. */
+  exactPitch?: boolean;
+  tuningCents?: number;
   /** Musical attack and phrase ownership, shared by all tones of a voicing/roll. */
   attackId?: string;
   phraseId?: string;
@@ -89,6 +99,9 @@ export interface PerformancePhrase {
 }
 
 export interface Performance {
+  pipeline?: import('../pipeline/compileSong').PipelineTrace;
+  /** Playback events have passed through the explicit musician-score boundary. */
+  scoreVersion?: 1;
   /** Immutable musical mix decisions shared by realtime and offline consumers. */
   mixTimeline?: import('../studio/dynamicMix/MixScene').MixSceneTimeline;
   /** Player-owned musical sentences, retained alongside their render events. */

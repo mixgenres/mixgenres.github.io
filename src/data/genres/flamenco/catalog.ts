@@ -721,6 +721,7 @@ export const GENRE_PACK: GenrePackInput = {
       "scale": "phrygian",
       "roles": {
         "lead": ["voice", "guitar"],
+        "bass": ["bass"],
         "percussion": ["palmas", "cajon"]
       },
       "progressions": {

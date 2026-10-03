@@ -1075,7 +1075,7 @@ export const GENRE_PACK: GenrePackInput = {
       "tempo": [104, 120],
       "scale": "minor",
       "roles": {
-        "lead": ["voice"],
+        "lead": ["voice", "accordion"],
         "harmony": ["guitar", "synth"],
         "bass": ["bass"],
         "percussion": ["drums", "shaker"]

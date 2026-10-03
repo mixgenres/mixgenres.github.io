@@ -199,6 +199,10 @@ export interface SongStyle {
   region?: string;
   summary: string;
   signatureTraits: string[];  // shown in UI
+  /** Recording used as a sonic calibration anchor, not as transcription source. */
+  reference?: { credit: string; recording?: string };
+  /** Concise, style-specific traits distilled from the calibration reference. */
+  calibrationQualities?: string[];
   calibration?: StyleCalibration;
 
   form?: Partial<FormGrammar>;             // section vocab, order templates (weighted), bar-length distributions, intros/outros/breaks, pickups, endings

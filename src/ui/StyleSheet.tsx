@@ -39,9 +39,25 @@ export function StyleSheetModal({
 
   const openNote = (s: SongStyle) => {
     const tempo = s.rhythm?.tempoRange ? `${s.rhythm.tempoRange[0]}–${s.rhythm.tempoRange[1]} bpm` : null;
+    const reference = s.reference
+      ? `${s.reference.credit}${s.reference.recording ? ` — ${s.reference.recording}` : ''}`
+      : null;
+    const instruments = [...new Set((s.sound?.instrumentPalette ?? []).map(item => item.value))];
+    const mix = s.calibration?.mix?.character;
+    const mixSummary = mix ? [
+      (mix.dryness ?? 0.5) >= 0.68 ? 'dry room' : (mix.dryness ?? 0.5) <= 0.4 ? 'roomy ambience' : 'moderate room',
+      (mix.bassForward ?? 0.5) >= 0.68 ? 'bass-forward' : (mix.bassForward ?? 0.5) <= 0.4 ? 'lighter low end' : 'balanced low end',
+      (mix.width ?? 0.5) >= 0.68 ? 'wide stereo' : (mix.width ?? 0.5) <= 0.4 ? 'compact stereo' : 'natural stereo width',
+      (mix.brightness ?? 0.5) >= 0.68 ? 'bright transients' : (mix.brightness ?? 0.5) <= 0.4 ? 'warm/dark tone' : 'balanced tone',
+    ].join(' · ') : null;
     setNote({
       title: s.name,
-      body: s.summary,
+      body: [
+        reference ? `Reference: ${reference}` : null,
+        s.calibrationQualities?.length ? `Sonic cues: ${s.calibrationQualities.slice(0, 6).join('; ')}` : s.summary,
+        instruments.length ? `Ensemble palette: ${instruments.join(', ')}` : null,
+        mixSummary ? `Mix: ${mixSummary}` : null,
+      ].filter((line): line is string => !!line).join('\n\n'),
       tags: [s.rhythm?.meter, tempo, s.region].filter((t): t is string => !!t),
     });
   };

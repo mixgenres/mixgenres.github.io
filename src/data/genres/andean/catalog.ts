@@ -248,7 +248,7 @@ export const GENRE_PACK: GenrePackInput = {
       "tempo": [92, 108],
       "scale": "minor-pentatonic",
       "roles": {
-        "lead": ["quena", "siku"],
+        "lead": ["voice", "quena", "siku"],
         "harmony": ["charango", "guitar"],
         "percussion": ["bombo-andino"]
       },

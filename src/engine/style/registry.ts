@@ -12,6 +12,7 @@ import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { contractForGenre } from '../../engine/style/contracts';
 import { energyForFormIntensity } from '../sheet/sectionEnergy.ts';
 import type { SectionEnergy } from '../../data/schema';
+import { STYLE_REFERENCES, styleReferenceKey } from '../../data/styles/styleReferences';
 
 function shortText(value: string): string {
   return String(value ?? '').replace(/\s+/g, ' ').trim().split(' ').slice(0, 6).join(' ');
@@ -20,6 +21,7 @@ function shortText(value: string): string {
 
 function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: boolean): SongStyle {
   const contract = contractForGenre(worldId);
+  const calibrationReference = STYLE_REFERENCES[styleReferenceKey(worldId, seed.name) as keyof typeof STYLE_REFERENCES];
   // The ensemble is authored by the style seed. Never synthesize a genre-level
   // starter ensemble: a song style must inherit only its own musical personnel.
   // Repeated canonical IDs are separate ensemble parts. Keep them so a style
@@ -100,8 +102,14 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: b
     calibration: seed.calibration,
     genres:[worldId], primaryGenre:worldId,
     kind:canonical ? 'canonical' : 'form', canonical,
-    summary:shortText(seed.description || `${seed.name} ${GENRE_NAMES[worldId]}`),
+    summary: calibrationReference?.qualities.length
+      ? calibrationReference.qualities.slice(0, 3).join('; ')
+      : shortText(seed.description || `${seed.name} ${GENRE_NAMES[worldId]}`),
     signatureTraits:(seed.coreConcepts ?? seed.rhythmicGrammar ?? [seed.name]).slice(0, 6),
+    ...(calibrationReference ? {
+      reference: { credit: calibrationReference.credit, ...(calibrationReference.recording ? { recording: calibrationReference.recording } : {}) },
+      calibrationQualities: [...calibrationReference.qualities],
+    } : {}),
     era:seed.era, region:seed.origin,
     form:{
       sectionVocab:[...contract.form],

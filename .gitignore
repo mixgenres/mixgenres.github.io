@@ -1,6 +1,7 @@
 node_modules/
 dist/
 audit/
+public/instrument-banks/
 .env
 .env.*
 !.env.example

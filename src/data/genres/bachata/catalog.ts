@@ -381,7 +381,7 @@ export const GENRE_PACK: GenrePackInput = {
       "roles": {
         "lead": ["voice", "requinto"],
         "harmony": ["guitar", "synth"],
-        "bass": ["synth"],
+        "bass": ["bass"],
         "percussion": ["bongos", "guira", "drums"]
       },
       "progressions": {

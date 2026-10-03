@@ -16,7 +16,7 @@ export interface PlayerState {
 
 interface Segment { index: number; start: number; end: number }
 
-/** Warm a coherent opening, then prepare one complete, shared-master song mix. */
+/** Prepare cached section physics and one complete mix on composition edits. */
 export class SongPlayer {
   private state: PlayerState = { status: 'idle', progress: 0 };
   private song?: Sheet;
@@ -99,21 +99,14 @@ export class SongPlayer {
     this.compiling = (retainedPerformance ? Promise.resolve(retainedPerformance) : compilePerformance(song, signal)).then(performance => {
       if (signal.aborted || revision !== this.revision || this.disposed) return;
       this.offset = Math.min(this.offset, Math.max(0, this.loopDuration(performance) - 1 / 44100));
-      this.publish({ status: this.wantsPlayback ? 'starting' : 'ready', progress: 0, performance });
+      this.publish({ status: this.wantsPlayback ? 'starting' : 'rendering', progress: 0, performance });
       this.onPosition(this.offset);
-      // Create the suspended output context ahead of the first click so opening
-      // clips can really be materialized as AudioBuffers during background warmup.
+      // Create the suspended output context ahead of the first click so the
+      // prepared mix can be materialized as an AudioBuffer during warmup.
       try { this.ensureContext(); } catch { /* Play surfaces browser capability errors. */ }
-      // Warm clips in the background; never hold the transport for all tracks.
-      void this.prepareOpening(performance, signal, revision).then(() => {
-        if (signal.aborted || revision !== this.revision || this.disposed) return;
-        if (!this.wantsPlayback) this.publish({ status: 'ready', progress: 1 });
-        this.prepareWholeSong(performance, song, signal, revision);
-      }).catch(error => {
-        // Background warming is opportunistic. Surface failures only when the
-        // user has asked to hear the arrangement; playback retries the part.
-        if (!signal.aborted && revision === this.revision && this.wantsPlayback) this.fail(error);
-      });
+      // Composition edits own all expensive preparation. Play/seek/resume only
+      // consume this job's completed mix; they never request new physical audio.
+      this.prepareWholeSong(performance, song, signal, revision);
       if (this.wantsPlayback) void this.play();
     }).catch(error => { if (!signal.aborted && revision === this.revision) this.fail(error); });
   }
@@ -151,18 +144,8 @@ export class SongPlayer {
 
   private segment(performance: Performance, index: number) { return this.segments(performance)[index]; }
 
-  private segmentAt(performance: Performance, seconds: number) {
-    const segments = this.segments(performance);
-    return segments.find(segment => seconds < segment.end) ?? segments[segments.length - 1];
-  }
-
   private loopDuration(performance = this.state.performance) {
     return this.fullPlaying && this.fullBuffer ? this.fullBuffer.duration : Math.max(0.1, (performance?.duration ?? 0) + (performance?.tail ?? 0));
-  }
-
-  private async prepareOpening(performance: Performance, signal: AbortSignal, revision: number) {
-    const opening = this.segmentAt(performance, 0);
-    if (opening) await this.ensureSegment(performance, opening.index, signal, revision);
   }
 
   private ensureSegment(performance: Performance, index: number, signal: AbortSignal, revision: number): Promise<AudioBuffer> {
@@ -188,16 +171,18 @@ export class SongPlayer {
 
   private prepareWholeSong(performance: Performance, song: Sheet, signal: AbortSignal, revision: number) {
     if (this.fullJob) return;
-    this.fullJob = renderSongMix(performance, song, signal, undefined, () => 3).then(audio => {
+    this.fullJob = renderSongMix(performance, song, signal, undefined, () => 3, progress => {
+      if (!signal.aborted && revision === this.revision && !this.disposed) this.publish({ progress });
+    }).then(audio => {
       checkAbort(signal);
       if (revision !== this.revision || this.disposed) return;
       this.fullBuffer = this.toAudioBuffer(audio);
       if (this.wantsPlayback && this.ctx?.state === 'running') this.startFullMix();
-      else this.publish({ progress: 1 });
+      else this.publish({ status: 'ready', progress: 1 });
       this.previewAbort?.abort();
       this.chunks.clear();
     }).catch(error => {
-      if (!signal.aborted && revision === this.revision) this.publish({ error: `Could not finish preparing audio: ${error instanceof Error ? error.message : String(error)}` });
+      if (!signal.aborted && revision === this.revision) this.fail(error);
     });
   }
 
@@ -262,10 +247,12 @@ export class SongPlayer {
       const resumed = this.ctx!.state === 'running' ? Promise.resolve() : this.ctx!.resume();
       await resumed;
       await this.compiling;
+      if (this.fullJob) await this.fullJob;
       if (!this.current(request, revision)) return;
       const performance = this.state.performance;
       if (!performance?.notes.length) throw new Error('This arrangement has no audible notes.');
       if (this.ctx!.state !== 'running') throw new Error('Audio is suspended. Press Play to resume.');
+      if (this.fullJob && !this.fullBuffer) throw new Error(this.state.error ?? 'Audio preparation did not complete.');
       this.startSourcesAt(this.offset);
       this.publish({ status: 'starting', progress: 1, error: undefined });
       if (this.fullBuffer) this.startFullMix(); else this.scheduleAhead();

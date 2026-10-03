@@ -7,7 +7,7 @@ import { songMixOptions } from '../src/engine/playback/renderSongMix';
 mkdirSync('audit', { recursive: true });
 const song = makeSheet('tango', 'tango-golden-age'), perf = compileWholeSong(song);
 const options = songMixOptions(song);
-const save = async (name: string, extra: Parameters<typeof renderPerformanceToMp3>[1]) => {
+const save = async (name: string, extra: Partial<Parameters<typeof renderPerformanceToMp3>[1]>) => {
   const blob = await renderPerformanceToMp3(perf, { ...options, ...extra });
   writeFileSync(`audit/${name}`, Buffer.from(await blob.arrayBuffer()));
   console.log(`Rendered audit/${name}`);

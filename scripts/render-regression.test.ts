@@ -82,3 +82,35 @@ test('background song mixes preserve export levels and apply the ensemble proces
     Math.abs(actual.left[i] - expected.left[i]), Math.abs(actual.right[i] - expected.right[i]));
   assert.ok(difference < 1e-6, `prepared stems must reproduce the shared export mix; max difference ${difference}`);
 });
+
+test('section DSP PCM reuses unchanged parts and preserves sustained notes and controller carry across boundaries', async () => {
+  const { planDSPSections } = await import('../src/engine/playback/dspSections');
+  const { renderPlaybackPart } = await import('../src/engine/playback/renderPlaybackPart');
+  const { clearPreparedAudio, preparedAudioStats } = await import('../src/engine/cache/preparedAudio');
+  clearPreparedAudio();
+  const perf: Performance = { ...performanceOf([
+    { ...note(0,60), dur:1.5, bar:0 }, { ...note(1.1,67), dur:.2, bar:1 },
+  ]), duration:2, tail:.3, ccs:[{trackId:'keys',time:0,cc:11,value:90},{trackId:'keys',time:1.2,cc:11,value:60}],
+    bars:[{index:0,start:0,end:1,bpm:240,beatsPerBar:4,regionId:'a'},
+      {index:1,start:1,end:2,bpm:240,beatsPerBar:4,regionId:'b'}] };
+  const options={selectedTrackIds:['keys'],trackInstruments:new Map([['keys','organ']]),rawStem:true};
+  const sections=planDSPSections(perf,options);
+  assert.equal(sections.length,2);
+  assert.equal(sections[0].performance.notes[0].dur,1.5,'a hold continues through the next section, without a second attack');
+  assert.equal(sections[1].performance.notes.length,1,'the incoming hold is not synthesized twice');
+  assert.ok(sections[0].performance.ccs.some(c => c.time===1.2),'later expression changes still affect the outgoing hold');
+  assert.equal(sections[1].performance.ccs[0].value,90,'controller state is carried into the new section');
+  const first=await renderPlaybackPart(perf,options), cold=preparedAudioStats();
+  assert.equal(cold.size,2); assert.equal(cold.pending,0);
+  const same=await renderPlaybackPart(perf,{...options,mixState:{volume:{keys:.2},pan:{keys:.1}}});
+  const warm=preparedAudioStats();
+  assert.equal(warm.misses,cold.misses); assert.equal(warm.hits-cold.hits,2);
+  assert.deepEqual(same.left,first.left,'mixer edits leave physical audio unchanged');
+  const changed={...perf,notes:perf.notes.map((n,i) => i ? {...n,midi:69} : n)};
+  const changedSections=planDSPSections(changed,options);
+  assert.equal(sections[0].key,changedSections[0].key); assert.notEqual(sections[1].key,changedSections[1].key);
+  await renderPlaybackPart(changed,options);
+  const edited=preparedAudioStats();
+  assert.equal(edited.misses-warm.misses,1); assert.equal(edited.hits-warm.hits,1);
+  assert.ok(first.left.slice(44100,Math.floor(1.1*44100)).some(v => Math.abs(v)>.0001),'the outgoing hold remains audible after the boundary');
+});

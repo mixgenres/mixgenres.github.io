@@ -81,6 +81,8 @@ npm run audit:catalog
 
 ## Sound metadata resolution
 
+Playback and export synthesize instruments from their physical DSP models at 44.1 kHz. Instrument definitions store model parameters and performance behavior. Workers render the requested music, and an in-memory stem cache reuses those results for playback and mixing. There is no downloadable instrument audio library or alternate sample playback backend.
+
 Live playback and MP3 export share `resolveTrackSound` and `resolveTrackGain`. Resolution starts with the catalog's physical model, applies the resolved instrument/style dialect once, and uses the track's assigned role for dialect variants and balance. Partial style dialects retain inherited techniques and physical fields. Authored DSP genre dialects take precedence over generic timbre treatment. Live envelope updates share the same sustain and envelope calculation as graph construction; volume and expression controllers multiply independently instead of replacing the assigned role or user level.
 
 Spotlight controls, state, gain processing, form metadata and APIs have been removed. Musical solo assignments live in the role sheet and retain genre/style policies. Energy selection has its own sheet; effective tempo feel is shown beside BPM.

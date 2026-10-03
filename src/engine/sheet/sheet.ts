@@ -539,16 +539,17 @@ function projectPatternEvents(
     return hash(`${seed}:event:${eventIndex}`, 913) < (event.probability ?? 1);
   }).sort((a, b) => a.event.position - b.event.position);
   const result = { onsets: [] as number[], accents: [] as number[], velocities: [] as number[], durations: [] as number[],
-    microtiming: [] as number[], hitTypes: [] as string[], articulations: [] as string[], fractionalSteps: [] as number[], pitches: [] as Array<import('../../data/schema').PatternEvent['pitch']> };
+    microtiming: [] as number[], hitTypes: [] as string[], articulations: [] as string[], fractionalSteps: [] as number[], pitches: [] as Array<import('../../data/schema').PatternEvent['pitch']>, notations: [] as Array<import('../../data/schema').PatternEvent['notation']> };
   let priorBeat = 0;
   for (const { event } of chosen) {
     if (event.kind === 'rest') {
-      if (result.durations.length) result.durations[result.durations.length - 1] = Math.max(1,
-        Math.min(result.durations.at(-1)!, Math.round((event.position - priorBeat) * stepsPerBeat)));
+      if (result.durations.length) result.durations[result.durations.length - 1] = Math.max(0.000001,
+        Math.min(result.durations.at(-1)!, (event.position - priorBeat) * stepsPerBeat));
       continue;
     }
     if (event.kind === 'tie') {
-      if (result.durations.length) result.durations[result.durations.length - 1] += Math.max(1, Math.round((event.duration ?? .25) * stepsPerBeat));
+      if (result.durations.length) result.durations[result.durations.length - 1] = Math.max(result.durations.at(-1)!,
+        (event.position + (event.duration ?? .25) - priorBeat) * stepsPerBeat);
       continue;
     }
     const cycleBeats = quarterBeats * Math.max(1, pattern.cycleLength || 1);
@@ -561,11 +562,13 @@ function projectPatternEvents(
     result.fractionalSteps.push(fractionalStep);
     result.accents.push(event.accent ?? (event.kind === 'accent' ? 1 : .6));
     result.velocities.push(event.velocity ?? .72);
-    result.durations.push(Math.max(.01, (event.duration ?? .25) * stepsPerBeat));
+    if (event.duration !== undefined && !(Number.isFinite(event.duration) && event.duration > 0)) throw new Error(`Invalid written duration in ${pattern.id}`);
+    result.durations.push(Math.max(0.000001, (event.duration ?? .25) * stepsPerBeat));
     result.microtiming.push(event.microtiming ?? 0);
     result.hitTypes.push(event.hitType ?? '');
     result.articulations.push(event.articulation && supportsTechnique(event.articulation) ? event.articulation : '');
     result.pitches.push(event.pitch);
+    result.notations.push({ ...event.notation, ...(event.tuplet ? { tuplet: event.tuplet } : {}), ...(event.tieToNext ? { tieToNext: true } : {}) });
     priorBeat = event.position;
   }
   return result;
@@ -917,6 +920,7 @@ export function rebuild(sheet: Sheet): Sheet {
           useEventProjection && eventProjection.articulations.length ? eventProjection.articulations : undefined,
           useEventProjection && eventProjection.fractionalSteps.length ? eventProjection.fractionalSteps : undefined,
           useEventProjection ? eventProjection.pitches : undefined,
+          useEventProjection ? eventProjection.notations : undefined,
         );
 
         const explicitLens = sheet.partLens?.[r.id]?.[track.id];

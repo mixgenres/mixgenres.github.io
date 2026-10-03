@@ -5,9 +5,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "bake:instruments": "node --import tsx scripts/bake-instruments.ts",
-    "test:baked": "node --import tsx --test scripts/baked-instruments.test.ts",
-    "audit:baked": "node --import tsx scripts/audit-baked-audio.ts",
     "dev": "vite --host 0.0.0.0 --port 3000",
     "build": "npm run lint && npm run check && vite build",
     "build:static": "vite build",
@@ -37,6 +34,7 @@
     "audit:starters": "node --import tsx scripts/audit-starters.ts",
     "audit:accuracy": "node --import tsx scripts/audit-sample-accuracy.ts --scores",
     "test:accuracy": "node --import tsx --test scripts/sample-accuracy.test.ts scripts/sample-sound-accuracy.test.ts",
+    "test:score": "node --import tsx --test scripts/musician-score.test.ts scripts/engine-pipeline.test.ts",
     "audit:audio-catalog": "node --import tsx scripts/audio-regression-harness.ts --all-styles"
   },
   "dependencies": {

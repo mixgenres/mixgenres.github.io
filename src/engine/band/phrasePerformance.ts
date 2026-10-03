@@ -229,7 +229,16 @@ function chordVoicing(ctx: PhraseContext, state: PhraseState): number[] {
 export function realizeMidi(ctx: PhraseContext, index: number, total: number, state: PhraseState): number[] {
   ctx = { ...ctx, statePreviousMidi: state.previousMidi };
   const d = ctx.profile.instrumentId.toLowerCase();
-  if (ctx.authoredPitch && !ctx.soloist) {
+  if (ctx.authoredPitch?.midi !== undefined) {
+    const midis = Array.isArray(ctx.authoredPitch.midi) ? ctx.authoredPitch.midi : [ctx.authoredPitch.midi];
+    if (!midis.length || midis.some(midi => !Number.isInteger(midi) || midi < ctx.profile.capabilities.lowMidi || midi > ctx.profile.capabilities.highMidi)) {
+      throw new Error(`Invalid absolute score pitch for ${ctx.profile.instrumentId}: ${midis.join(', ')}`);
+    }
+    if (midis.length > ctx.profile.capabilities.polyphony) throw new Error(`Score voicing exceeds ${ctx.profile.instrumentId} polyphony`);
+    state.previousVoicing = midis.slice();
+    return midis.slice();
+  }
+  if (ctx.authoredPitch) {
     const pitch = ctx.authoredPitch;
     if (pitch.voicing === 'chord') return chordVoicing(ctx, state);
     const pc = ((pitch.semitoneOffset !== undefined ? rootPc(ctx.chord) + pitch.semitoneOffset

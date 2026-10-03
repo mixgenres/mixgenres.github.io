@@ -26,6 +26,7 @@ export function culturalCyclePosition(barIndex: number, cycleLength: number): nu
 }
 
 export interface NativeSlice {
+  notations?: Array<PatternEvent['notation']>;
   pitches?: Array<PatternEvent['pitch']>;
   /** step indices within this bar, on the pattern's own grid */
   onsets: number[];
@@ -56,10 +57,11 @@ export function sliceBarNative(
   articulations?: string[],
   fractionalSteps?: number[],
   pitches?: Array<PatternEvent['pitch']>,
+  notations?: Array<PatternEvent['notation']>,
 ): NativeSlice {
   const declared = Math.max(1, subdivisions || 16);
-  const authoredMax = onsets.length ? Math.max(...onsets) : -1;
-  const total = authoredMax >= declared ? authoredMax + 1 : declared;
+  const authoredMax = onsets.length ? Math.max(...onsets.map((onset, i) => fractionalSteps?.[i] ?? onset)) : -1;
+  const total = authoredMax >= declared ? Math.floor(authoredMax) + 1 : declared;
 
   let cycleBars = Math.max(1, Math.round(cycleLength || 1));
   if (total > declared) cycleBars = Math.max(cycleBars, Math.ceil(total / declared));
@@ -67,10 +69,12 @@ export function sliceBarNative(
 
   const from = (barInCycle % cycleBars) * stepsPerBar;
   const keepP: Array<PatternEvent['pitch']> = [];
+  const keepN: Array<PatternEvent['notation']> = [];
   const keepO: number[] = [], keepA: number[] = [], keepV: number[] = [], keepD: number[] = [], keepM: number[] = [], keepH: string[] = [], keepT: string[] = [], keepF: number[] = [];
 
   onsets.forEach((o, i) => {
-    if (o < from || o >= from + stepsPerBar) return;
+    const exactStep = fractionalSteps?.[i] ?? o;
+    if (exactStep < from || exactStep >= from + stepsPerBar) return;
     const barStep = o - from;
     keepO.push(barStep);
     const authoredFraction = fractionalSteps?.[i];
@@ -84,9 +88,10 @@ export function sliceBarNative(
     keepH.push(hitTypes?.[i] ?? '');
     keepT.push(articulations?.[i] ?? '');
     keepP.push(pitches?.[i]);
+    keepN.push(notations?.[i]);
   });
 
-  return { onsets: keepO, accents: keepA, velocities: keepV, durations: keepD, microtiming: keepM, hitTypes: keepH, articulations: keepT, pitches: keepP, stepsPerBar, fractionalPositions: keepF, durationsAuthored: durations !== undefined };
+  return { onsets: keepO, accents: keepA, velocities: keepV, durations: keepD, microtiming: keepM, hitTypes: keepH, articulations: keepT, pitches: keepP, notations: keepN, stepsPerBar, fractionalPositions: keepF, durationsAuthored: durations !== undefined };
 }
 
 /** Quarter-note beats in one bar of the given time signature. */

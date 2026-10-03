@@ -4,9 +4,11 @@ import type { TrackParams, VoiceState } from './elementaryEngine';
 import { midiToFreq } from './elementaryEngine';
 import { resolveRenderGesture } from './renderGesture';
 import { resolveDialect } from '../band/genreDialect';
+import { contentKey } from '../cache/contentKey';
 
 /** Physical performance controls are resolved on UI compilation, never a tick. */
 export function prepareNoteVoice(note: PerfNote, params: TrackParams, worldId: string, styleId: string, role?: string, controllerCCs: readonly number[] = []): VoiceState {
+  if (note.physical) return { ...note.physical.voice };
   const instrumentId = params.instrumentId!;
   const context = note.soundContext;
   const soundParams = context ? resolveTrackSound(instrumentId, context.worldId, context.styleId, context.role) : undefined;
@@ -19,7 +21,8 @@ export function prepareNoteVoice(note: PerfNote, params: TrackParams, worldId: s
   const vel01 = vel / 127;
   const dialect = resolveDialect(instrumentId, context?.worldId ?? worldId, context?.styleId ?? styleId, context?.role ?? role);
   // Song-relative time makes expression independent of scheduling latency/loops.
-  const jitter = (((note.gestureCode * 1103515245 + midi * 12345 + Math.round(note.time * 1000)) >>> 0) / 0xffffffff) - 0.5;
+  const attackSeed = note.notationEventId ? parseInt(contentKey(note.notationEventId).slice(0, 8), 16) : Math.round(note.time * 1000);
+  const jitter = (((note.gestureCode * 1103515245 + midi * 12345 + attackSeed) >>> 0) / 0xffffffff) - 0.5;
   return {
     noteDurationSeconds: note.dur,
     id: 'prepared', gate: 0, note: midi,

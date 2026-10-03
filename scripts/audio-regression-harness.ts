@@ -70,6 +70,6 @@ for (const style of selection) {
 }
 const coverage = { styles: selection.length, rendered: cases.length, mechanisms: new Set(selection.flatMap(styleMechanisms)).size };
 writeReport('audio-regression', { ...reportMetadata(), status: findings.some(f => f.severity === 'error') ? 'FAIL' : 'PASS',
-  scope: 'Representative renderer mechanisms; Node portable mix. Native master is measured separately by audit:browser.',
+  scope: `${allStyles ? 'All starter styles' : 'Selected renderer mechanisms'}; two-second entrance and developed-section excerpts through the Node portable mix. Native master is measured separately by audit:browser. Not a perceptual authenticity test.`,
   selection: selection.map(s => s.id), coverage, counts: summarizeFindings(findings), findings, cases });
 printFindings('audio-regression', findings, coverage);
