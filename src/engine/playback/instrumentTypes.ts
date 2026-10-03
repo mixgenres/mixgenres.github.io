@@ -43,6 +43,6 @@ export interface InstrumentModule {
   specializedInstrumentIds?: string[];
   ownedDspSections?: Array<'coupledResonators' | 'excitationDynamics.kneeDropImpact' | 'articulationPhysics' | 'mechanicalArtifacts' | string>;
   /** Conservative audible decay lifetime; bespoke resonators can author their own. */
-  releaseTailSeconds?(params: TrackParams): number;
+  releaseTailSeconds?(params: TrackParams, voice?: VoiceState): number;
   renderVoice(ctx: VoiceRenderContext): AudioSignal;
 }

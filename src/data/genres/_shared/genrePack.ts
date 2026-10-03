@@ -1,7 +1,37 @@
-import type { GenreWorld, GenreStyleDefinition, GrooveMechanics, MusicalPattern, PatternEvent, Role, Scope } from '../../schema';
+import type { GenreWorld, GenreStyleDefinition, GrooveMechanics, MusicalPattern, PatternEvent, Role } from '../../schema';
 import type { MixOverride, MixContract } from '../../sound/schema/dynamicMix';
 
+/** Authored beat positions, in quarter-note units; no style-name hashing. */
+export interface AuthoredCell {
+  name: string;
+  role: string;
+  instruments?: string[];
+  onsets: number[];
+  durations?: number[];
+  accents?: number[];
+  hits?: PatternEvent['hitType'][];
+  cycleLength?: number;
+  articulation?: string;
+  articulations?: string[];
+  pitches?: Array<PatternEvent['pitch']>;
+  phraseEnd?: boolean;
+}
 export interface CalibratedStyleInput {
+  instrumentDialects: Record<string, Partial<import('../../styles/contracts').InstrumentDialect>>;
+  meter: string;
+  tempo: [number, number];
+  scale: string;
+  roles: Record<string, string[]>;
+  progressions: Record<string, string[]>;
+  form: Array<{ label: string; bars: number; soloInstrumentId?: string; soloMode?: 'accompanied' | 'unaccompanied' | 'trading' }>;
+  cells: AuthoredCell[];
+  groove: GrooveMechanics;
+  instrumentTechniques: Record<string, string[]>;
+  requiresChords: boolean;
+  harmonyModel: string;
+  harmonicRhythm: string;
+  bassMotion: string;
+  mix: MixOverride<MixContract>;
   name: string;
   id: string;
   description: string;
@@ -35,27 +65,9 @@ export interface GenrePackInput {
 const toRole = (key: string): Role | string => key as Role;
 const slug = (value: string) => value.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const list = (...values: string[][]) => Array.from(new Set(values.flat().map(v => v.trim()).filter(Boolean)));
-function progressions(input: GenrePackInput, style: CalibratedStyleInput): Record<string, string[]> {
-  const seed = `${input.id} ${style.name}`.toLowerCase();
-  if (/flamenco|soleá|solea|bulería|buleria|tientos|farruca/.test(seed)) return { intro: ['Am', 'G', 'F', 'E'], verse: ['Am', 'G', 'F', 'E'], cierre: ['F', 'E', 'Am'] };
-  if (/tango/.test(seed)) return { intro: ['Am', 'E7', 'Am', 'E7'], A: ['Am', 'Dm', 'E7', 'Am'], B: ['C', 'G7', 'C', 'E7'], coda: ['Dm', 'E7', 'Am'] };
-  if (/salsa|timba|latin/.test(seed)) return { intro: ['Dm7', 'G7', 'Cmaj7', 'A7'], montuno: ['Dm7', 'G7', 'Dm7', 'A7'], mambo: ['Dm7', 'G7', 'Cmaj7', 'A7'] };
-  if (/zouk|kizomba|bachata/.test(seed)) return { verse: ['Am7', 'Fmaj7', 'Cadd9', 'G'], refrain: ['Am7', 'Fmaj7', 'Cadd9', 'G'] };
-  if (/indian|qawwali|arabic|persian|taarab|gamelan|chinese|japanese|korean|gnawa|ethiopian/.test(seed)) return { alap: ['D drone', 'D drone'], theme: ['D modal center', 'D modal center'], cadence: ['D cadence'] };
-  if (/ambient|cinematic|weird/.test(seed)) return { opening: ['D5(add9)', 'D5(add9)'], development: ['Bbmaj7(#11)', 'D5(add9)'], coda: ['D drone'] };
-  if (/metal|rock|punk|industrial/.test(seed)) return { riff: ['E5', 'G5', 'A5', 'E5'], chorus: ['Em', 'C', 'G', 'D'] };
-  if (/jazz|swing|blues/.test(seed)) return { head: ['C7', 'F7', 'C7', 'G7'], solo: ['Dm7', 'G7', 'Cmaj7', 'A7'] };
-  return { verse: ['C', 'Am', 'F', 'G'], chorus: ['F', 'G', 'Em', 'Am'] };
-}
-function sections(input: GenrePackInput, styleRoles: Record<string, string[]>): NonNullable<GenreStyleDefinition['arrangementSections']> {
-  const genres: Record<string, string[]> = {
-    tango: ['intro', 'theme', 'variation', 'coda'], flamenco: ['salida', 'llamada', 'letra', 'falseta', 'remate', 'cierre'],
-    salsa: ['intro', 'tema', 'montuno', 'mambo', 'montuno return', 'cierre'], timba: ['intro', 'verso', 'coro', 'marcha', 'gear', 'break', 'cierre'],
-    ambient: ['drone opening', 'slow evolution', 'texture shift', 'dissolve'], cinematic: ['opening', 'development', 'climax', 'resolution'],
-    'indian-classical': ['alap', 'jor', 'gat', 'jhala'], qawwali: ['intro', 'verse', 'refrain', 'climax'], gamelan: ['buka', 'main cycle', 'irama shift', 'suwuk'],
-    arabic: ['instrumental opening', 'vocal section', 'taqsim', 'return'], persian: ['darâmad', 'gushé', 'avaz', 'forud'],
-  };
-  const labels = genres[input.id] ?? ['intro', 'theme', 'development', 'return', 'coda'];
+function progressions(_input: GenrePackInput, style: CalibratedStyleInput): Record<string, string[]> { return style.progressions; }
+function sections(_input: GenrePackInput, styleRoles: Record<string, string[]>, style: CalibratedStyleInput): NonNullable<GenreStyleDefinition['arrangementSections']> {
+  const labels = style.form.map(step => step.label);
   const roles = styleRoles;
   return labels.map((label, i) => {
     const isSparse = i === 0 || i === labels.length - 1 || /break|alap|drone|avaz/i.test(label);
@@ -63,78 +75,16 @@ function sections(input: GenrePackInput, styleRoles: Record<string, string[]>): 
     const chosen = Object.entries(roles).flatMap(([role, ids]) => {
       if (isSparse && !['lead','voice','bass'].includes(role)) return [];
       if (/break|suwuk|dissolve/i.test(label) && role === 'percussion') return [];
-      return ids.slice(0, /mambo|climax|gear|jhala/i.test(label) ? ids.length : 2);
+      return ids;
     });
-    return { key: slug(label), label, kind: label, bars: /alap|drone/i.test(label) ? 8 : i === 0 ? 4 : 8,
+    return { key: `${slug(label)}-${i}`, label, kind: label, bars: style.form?.[i]?.bars ?? (/alap|drone/i.test(label) ? 8 : i === 0 ? 4 : 8),
+      ...(style.form?.[i]?.soloInstrumentId ? { soloInstrumentId: style.form[i].soloInstrumentId, soloMode: style.form[i].soloMode } : {}),
       intensity: i === labels.length - 1 ? 'medium' : /climax|mambo|gear|jhala|remate/i.test(label) ? 'peak' : isSparse ? 'low' : 'high',
       instruments: Array.from(new Set(chosen)), leadInstrumentId: leadRole[0] };
   });
 }
 
-function rolesForStyle(input: GenrePackInput, style: CalibratedStyleInput): Record<string, string[]> {
-  const roles = Object.fromEntries(Object.entries(input.roles).map(([role, instruments]) => [role, [...instruments]]));
-  const key = `${input.id} ${style.name}`.toLowerCase();
-  const narrow = (role: string, preferred: string[]) => {
-    if (!roles[role]) return;
-    const present = preferred.filter(instrument => Object.values(input.roles).flat().includes(instrument));
-    if (present.length) roles[role] = present;
-  };
-  if (input.id === 'tango') {
-    if (/canyengue|milonga/.test(key)) { narrow('harmony', ['piano','guitar']); narrow('lead', ['bandoneon','violin']); }
-    if (/d'arienzo|d-arienzo/.test(key)) { narrow('harmony', ['piano']); narrow('bass', ['upright-bass']); }
-    if (/di sarli/.test(key)) { narrow('lead', ['violin','bandoneon']); narrow('harmony', ['piano','cello']); }
-    if (/pugliese/.test(key)) { narrow('lead', ['bandoneon','violin']); narrow('harmony', ['piano','cello']); narrow('bass', ['upright-bass']); }
-    if (/salgán|salgan|nuevo tango|piazzolla|electro|bajofondo/.test(key)) {
-      roles.lead = /electro|bajofondo/.test(key) ? ['bandoneon','synth'] : ['bandoneon','violin'];
-      roles.harmony = /electro|bajofondo/.test(key) ? ['piano','synth'] : ['piano','cello'];
-      if (/electro|bajofondo/.test(key)) { roles.bass = ['synth-bass']; roles.percussion = ['drum-kit','sampler']; }
-    }
-  }
-  if (input.id === 'timba') {
-    if (/songo/.test(key)) narrow('percussion', ['congas','drum-kit']);
-    if (/charanga habanera|ng la banda|bamboleo|havana d/.test(key)) { narrow('lead', ['voice','trumpet','trombone']); narrow('percussion', ['congas','timbales','drum-kit','cowbell']); }
-    if (/irakere/.test(key)) { narrow('lead', ['trumpet','tenor-sax','flute']); narrow('harmony', ['piano','guitar']); }
-  }
-  if (input.id === 'flamenco') {
-    if (/tonás|tonas|martinetes|taranta|granaína|granaina|malagueña|malaguena/.test(key)) { delete roles.percussion; narrow('harmony', ['guitar']); }
-    if (/rumba|nuevo|rock|urban|experimental/.test(key)) { narrow('percussion', ['palmas','cajon','drum-kit']); }
-  }
-  if (input.id === 'salsa' && /charanga|pachanga/.test(key)) { roles.lead = ['flute','violin','voice']; roles.harmony = ['piano','violin']; }
-  if (input.id === 'brazilian' && /bossa/.test(key)) { roles.harmony = ['guitar','piano']; roles.percussion = ['pandeiro']; }
-  if (input.id === 'jazz' && /big band/.test(key)) { roles.lead = ['trumpet','alto-sax','trombone']; roles.harmony = ['piano']; }
-  if (input.id === 'indian-classical' && /dhrupad/.test(key)) { roles.lead = ['voice','rudra-veena']; roles.percussion = ['pakhawaj']; }
-  if (input.id === 'chinese' && /guqin/.test(key)) { roles.lead = ['guqin']; roles.harmony = ['guqin']; roles.percussion = []; }
-  if (input.id === 'japanese' && /shakuhachi/.test(key)) { roles.lead = ['shakuhachi']; roles.harmony = ['koto']; roles.percussion = []; }
-  if (input.id === 'korean' && /pansori/.test(key)) { roles.lead = ['voice']; roles.harmony = []; roles.percussion = ['buk']; }
-  if (input.id === 'ambient' && /drone|generative|microsound|glitch/.test(key)) { roles.percussion = []; roles.bass = ['synth-bass']; }
-  if (/urban|electronic|club|electro|synth|experimental|deconstructed/i.test(style.name)) {
-    if (roles.percussion && input.instruments.includes('sampler')) roles.percussion = [...new Set([...roles.percussion, 'sampler'])];
-  }
-  return Object.fromEntries(Object.entries(roles).filter(([, instruments]) => instruments.length));
-}
-
-const genericAuthoring = /(?:style-defined rhythmic cells|phrase-level variation|section-specific fills|instrument-specific articulation|style-appropriate tonal\/modal vocabulary|style-specific cycle and phrase variation|style-specific articulation and phrase gesture|style-specific harmony and cadence)/i;
-function authoredOrDerived(
-  authored: string[], baseline: string[], genreId: string, styleName: string, kind: 'pattern'|'technique'|'harmony',
-): string[] {
-  const explicit = authored.filter(value => !genericAuthoring.test(value.trim()));
-  if (explicit.length) return explicit;
-  const meaningful = baseline.filter(value => !genericAuthoring.test(value.trim()));
-  const key = `${genreId}/${styleName}/${kind}`;
-  const hash = Array.from(key).reduce((sum, char) => sum + char.charCodeAt(0), 0);
-  if (!meaningful.length) {
-    if (kind === 'pattern') return [
-      `${styleName} pulse cell`, `${styleName} role interlock`, `${styleName} phrase-end variation`, `${styleName} section transition`,
-    ];
-    if (kind === 'technique') return [`${styleName} articulation`, `${styleName} phrase shaping`, `${styleName} ensemble response`];
-    return [`${styleName} pitch vocabulary`, `${styleName} harmonic motion`, `${styleName} phrase cadence`];
-  }
-  // When source notes provide only a genre baseline, rotate a bounded subset
-  // per style and bind it to that style's name. No other genre is consulted.
-  const count = Math.min(4, meaningful.length);
-  const picked = Array.from({ length: count }, (_, i) => meaningful[(hash + i * 3) % meaningful.length]);
-  return Array.from(new Set(picked)).map(value => `${styleName}: ${value}`);
-}
+function rolesForStyle(_input: GenrePackInput, style: CalibratedStyleInput) { return style.roles; }
 
 function scopesForTechnique(value: string): Array<'note'|'motif'|'phrase'|'section'|'song'> {
   const term = value.toLowerCase();
@@ -157,6 +107,16 @@ function techniquesByRole(role: string, techniques: string[]): string[] {
   };
   const matched = techniques.filter(value => signal[role]?.test(value));
   return matched.length ? matched : techniques;
+}
+
+function mergeAuthoredMix(base: MixOverride<MixContract>, authored: MixOverride<MixContract>): MixOverride<MixContract> {
+  const merge = (left: Record<string, unknown>, right: Record<string, unknown>): Record<string, unknown> => {
+    const result = { ...left };
+    for (const [key, value] of Object.entries(right)) result[key] = value && typeof value === 'object' && !Array.isArray(value)
+      ? merge((left[key] as Record<string, unknown>) ?? {}, value as Record<string, unknown>) : value;
+    return result;
+  };
+  return merge(base as Record<string, unknown>, authored as Record<string, unknown>) as MixOverride<MixContract>;
 }
 
 function mixCalibration(input: GenrePackInput, style: CalibratedStyleInput, styleRoles: Record<string, string[]>) {
@@ -216,133 +176,101 @@ function mixCalibration(input: GenrePackInput, style: CalibratedStyleInput, styl
   } as MixOverride<MixContract>;
 }
 
-function grooveCalibration(input: GenrePackInput, style: CalibratedStyleInput): GrooveMechanics {
-  const terms = `${input.id} ${input.family} ${style.name} ${style.description} ${style.patterns.join(' ')} ${style.techniques.join(' ')}`.toLowerCase();
-  const swingPercentage = /hard.?swing|heavy shuffle|triplet shuffle/.test(terms) ? 62
-    : /swing|shuffle|blues|jazz|soul|funk|swung|ternary|12\/8/.test(terms) ? 56 : 50;
-  const anticipationOffsetSteps = /anticipat|tumbao|dembow|one.?drop|pickup bass|bass pickup|yumba/.test(terms)
-    || /^(salsa|timba|zouk|bachata|reggaeton-dembow|tango)$/.test(input.id) ? 1 : 0;
-  const microtimingFeel: NonNullable<GrooveMechanics['microtimingFeel']> = /rubato|free time|alap|avaz|taqsim|tak.?sim/.test(terms) ? 'rubato'
-    : /laid.?back|behind the beat|lazy pocket|drunk feel/.test(terms) ? 'laid-back'
-      : /pushed|ahead of the beat|driving pocket|urgent/.test(terms) ? 'pushed'
-        : swingPercentage > 50 ? 'swung'
-          : /quantiz|machine.?tight|four.?on.?the.?floor/.test(terms) ? 'quantized' : 'straight';
-  const humanizeJitterMs = /ambient|drone|rubato|free time|alap|avaz|taqsim/.test(terms) ? 9
-    : /quantiz|machine.?tight|four.?on.?the.?floor|electronic|techno|drum.?and.?bass/.test(terms) ? 3
-      : /flamenco|jazz|folk|acoustic|live|gamelan|taarab|classical/.test(terms) ? 7 : 5;
-  return { swingPercentage, anticipationOffsetSteps, microtimingFeel, humanizeJitterMs };
-}
-
 function styleDefinition(input: GenrePackInput, item: CalibratedStyleInput): GenreStyleDefinition {
   const styleId = `${input.id}-${item.id}`;
-  const styleTerms = `${item.name} ${item.description} ${item.patterns.join(' ')}`;
-  const meter = /vals|waltz|3\/4/i.test(styleTerms) ? '3/4'
-    : /milonga|samba|choro|forro|forró|2\/4/i.test(styleTerms) ? '2/4'
-      : /solea|soleá|buleria|bulería|seguiriya|12\/8|12-count|12-beat|compas/i.test(styleTerms) ? '12/8' : input.meter;
-  const tempo = /ambient|drone|slow|ballad|zouk love|tarab/i.test(styleTerms)
-    ? [Math.max(48, input.tempo[0] - 24), Math.max(72, input.tempo[1] - 18)] as [number, number]
-    : /jhala|speed|fast|punk|hardcore|bebop|drum.?and.?bass/i.test(styleTerms)
-      ? [input.tempo[0] + 12, input.tempo[1] + 28] as [number, number] : input.tempo;
-  const scaleMode = /major(?:-key)? emphasis|major tonality|major mode|bright major/i.test(styleTerms) ? 'major'
-    : /minor(?:-key)? emphasis|minor tonality|minor mode/i.test(styleTerms) ? 'minor'
-      : input.scales[0] ?? input.pitchSystem;
-  const stylePatterns = authoredOrDerived(item.patterns, input.patternFamilies, input.id, item.name, 'pattern').slice(0, 10);
-  const styleTechniques = authoredOrDerived(item.techniques, input.techniques, input.id, item.name, 'technique').slice(0, 20);
-  const styleHarmony = authoredOrDerived(item.harmony, [...input.chordQualities, ...input.cadences], input.id, item.name, 'harmony').slice(0, 20);
+  const meter = item.meter, tempo = item.tempo, scaleMode = item.scale;
+  const stylePatterns = item.patterns, styleTechniques = item.techniques, styleHarmony = item.harmony;
   const styleRoles = rolesForStyle(input, item);
-  const sectionsForStyle = sections(input, styleRoles);
-  const description = genericAuthoring.test(item.description)
-    ? `${item.name}: ${stylePatterns.slice(0, 2).join('; ')}; ${styleTechniques.slice(0, 2).join('; ')}; ${styleHarmony.slice(0, 2).join('; ')}.`
-    : item.description;
+  const sectionsForStyle = sections(input, styleRoles, item);
+  const description = item.description;
   const roles = Object.fromEntries(Object.entries(styleRoles).map(([role, instruments]) => [role, {
     preferredInstruments: instruments, required: role === 'lead' || role === 'bass',
     mixFunction: role === 'lead' || role === 'voice' ? 'foreground' : role === 'bass' ? 'low-anchor' : role === 'percussion' ? 'pulse-anchor' : 'harmonic-support',
   }]));
   return {
     id: styleId, worldId: input.id, name: item.name, origin: input.family, description,
-    characteristicInstruments: Array.from(new Set(Object.values(styleRoles).flat())) as GenreStyleDefinition['characteristicInstruments'],
+    characteristicInstruments: Object.values(styleRoles).flat() as GenreStyleDefinition['characteristicInstruments'],
     preferredMeters: [meter === 'free / cycle' || meter === 'free / 4/4' ? '4/4' : meter], tempoRange: tempo, keySubstyles: [item.name], coreConcepts: list(stylePatterns, styleTechniques).slice(0, 10),
     rhythmicGrammar: stylePatterns.slice(0, 6), scaleMode,
     tuningSystem: input.pitchSystem, signatureCell: stylePatterns[0] ?? input.patternFamilies[0],
-    grooveMechanics: grooveCalibration(input, item),
+    grooveMechanics: item.groove,
     prominentChords: styleHarmony,
     sectionProgressions: progressions(input, item),
     arrangementSections: sectionsForStyle,
+    instrumentDialects: item.instrumentDialects, harmonyModel: item.harmonyModel, bassMotion: item.bassMotion,
     calibration: {
-      roles, techniques: Object.fromEntries(Object.keys(styleRoles).map(role => [role, techniquesByRole(role, styleTechniques)])),
+      roles, instrumentTechniques: item.instrumentTechniques, techniques: Object.fromEntries(Object.keys(styleRoles).map(role => [role, techniquesByRole(role, styleTechniques)])),
       techniqueScopes: Object.fromEntries(styleTechniques.map(technique => [technique, scopesForTechnique(technique)])),
       patterns: { families: stylePatterns, interaction: list(stylePatterns.filter(x => /answer|call|interlock|response|counter|gear|clave|compas/i.test(x))),
         phraseBehaviors: ['pickup', 'phrase-end cadence', 'section variation'], forbidden: input.forbiddenPatterns },
-      harmony: { pitchSystem: input.pitchSystem, scales: input.scales, chordQualities: styleHarmony,
+      harmony: { pitchSystem: input.pitchSystem, scales: list([scaleMode], input.scales), chordQualities: styleHarmony,
         progressionExamples: Object.values(progressions(input, item)),
-        harmonicRhythm: input.harmonicRhythm, cadences: list(item.harmony, input.cadences),
-        bassChordInteraction: input.bassChordInteraction, requiresChords: !/free|drone|atonal|heterophonic/i.test(input.pitchSystem),
+        harmonicRhythm: item.harmonicRhythm ?? input.harmonicRhythm, cadences: list(item.harmony, input.cadences),
+        bassChordInteraction: input.bassChordInteraction, requiresChords: item.requiresChords ?? !/free|drone|atonal|heterophonic/i.test(input.pitchSystem),
         preferredVoicingTones: /jazz|bossa|soul|cinematic|orchestra/i.test(item.name) ? [3, 8] : [2, 5],
         voicingTonesByRole: { guitar: [2, 5], piano: [2, 8], strings: [2, 12], horns: [3, 8], pads: [3, 12] } },
-      mix: mixCalibration(input, item, styleRoles),
+      mix: mergeAuthoredMix(mixCalibration(input, item, styleRoles), item.mix),
     },
   };
 }
 
-function patternFromFamily(input: GenrePackInput, style: GenreStyleDefinition, family: string, index: number): MusicalPattern {
-  const id = `${style.id}-pattern-${slug(family) || index}`;
-  const meter = style.preferredMeters[0] ?? input.meter;
-  const [meterNumerator, meterDenominator] = meter.split('/').map(Number);
-  const beats = meterNumerator && meterDenominator ? meterNumerator * 4 / meterDenominator : 4;
-  const stepsPerBeat = meterDenominator === 8 ? 2 : 4;
-  const cycleLength = /phrase|form|section|gear|compas|coro/i.test(family) ? 2 : 1;
-  const span = beats * stepsPerBeat * cycleLength;
-  const tuplettedFamily = /triplet|tuplet|shuffle|jig|compound|waltz|ternary|12\/8|12-count/i.test(family);
-  const seed = Array.from(`${input.id}/${style.id}/${family}`).reduce((n, c) => n + c.charCodeAt(0), index * 7) % 5;
-  let positions = Array.from({ length: Math.min(6, beats * cycleLength) }, (_, i) => (i * stepsPerBeat + seed) % span).sort((a,b) => a-b);
-  if (/clave|compas|marcato|one.?drop|dembow|tumbao|yumba|songo|log.?drum/i.test(family)) {
-    positions = Array.from(new Set([0, Math.floor(span * .1875), Math.floor(span * .375), Math.floor(span * .5), Math.floor(span * .75), Math.floor(span * .875)])).sort((a,b) => a-b);
-  }
-  const events: PatternEvent[] = positions.map((position, i) => ({
-    position: position / stepsPerBeat,
-    duration: /drone|sustain|pad|legato/i.test(family) ? .75 : .2,
-    kind: /ghost/i.test(family) ? 'ghost' : /pickup|anticip/i.test(family) && i === positions.length - 1 ? 'pickup' : 'attack',
-    accent: i === 0 || /marcato|clave|compas|bell|gear/i.test(family) ? .9 : .55,
-    velocity: i === 0 ? .9 : .7,
-    articulation: /staccato|marcato|rasgueado|skank|stab/i.test(family) ? 'staccato' : undefined,
-    microtiming: /laid.?back|behind/i.test(input.description) ? .012 : /pushed|ahead/i.test(input.description) ? -.01 : 0,
-    probability: /fill|ornament|response|transition/i.test(family) ? .68 : 1,
-    condition: /fill|transition|cadence/i.test(family) ? { phrasePosition: ['end'] } : undefined,
-    ...(tuplettedFamily && i % 3 === 0 ? { tuplet: { actual: 3, normal: 2 } } : {}),
+function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cell: AuthoredCell, index: number): MusicalPattern {
+  const id = `${style.id}-pattern-${index}-${slug(cell.name)}`;
+  const meter = style.preferredMeters[0];
+  const [n, d] = meter.split('/').map(Number);
+  const beats = n * 4 / d;
+  const stepsPerBeat = 4;
+  const cycleLength = cell.cycleLength ?? 1;
+  const instruments = cell.instruments ?? style.calibration!.roles[cell.role]?.preferredInstruments ?? [];
+  const events: PatternEvent[] = cell.onsets.map((position, i) => ({
+    position, duration: cell.durations?.[i] ?? (cell.role === 'harmony' ? .35 : .2),
+    kind: cell.phraseEnd ? 'fill' : 'attack',
+    accent: cell.accents?.[i] ?? (i === 0 ? .9 : .65), velocity: i === 0 ? .85 : .7,
+    articulation: cell.articulations?.[i] ?? cell.articulation, hitType: cell.hits?.[i], pitch: cell.pitches?.[i],
+    ...(cell.phraseEnd ? { condition: { phrasePosition: ['cadence', 'transition'] }, probability: .85 } : {}),
   }));
-  events.push({ position: Math.max(0, span / stepsPerBeat / 2), kind: 'rest', condition: { phrasePosition: ['end'] } });
-  events.push({ position: Math.max(0, span / stepsPerBeat - .25), duration: .5, kind: 'tie', tieToNext: true,
-    condition: { phrasePosition: ['end'] } });
-  if (/interlock|polyrhythm|clave|compas/i.test(family)) {
-    events.push({ position: .5, kind: 'ghost', accent: .35, velocity: .42, probability: .55,
-      polyrhythm: { numerator: 3, denominator: 2, phase: seed % 3 } });
-  }
-  const lowerFamily = family.toLowerCase();
-  const availableRoles = style.calibration?.roles ?? {};
-  const patternRoles = /bass|tumbao|yumba|log.?drum|walking|low.?anchor/.test(lowerFamily) ? ['bass']
-    : /palmas|clap|bell|clave|cáscara|cascara|drum|shaker|percussion|tambora|cajon/.test(lowerFamily) ? ['percussion']
-      : /chord|montuno|guajeo|comping|strum|skank|harmony|voicing/.test(lowerFamily) ? ['harmony']
-        : /response|answer|call|melody|phrase|falseta|lead|vocal/.test(lowerFamily) ? ['lead'] : Object.keys(availableRoles);
-  const instruments = Array.from(new Set(patternRoles.flatMap(role => availableRoles[role]?.preferredInstruments ?? [])));
   return {
-    id, worldId: input.id, styleIds: [style.id], name: `${style.name} ${family}`, shortName: family,
-    family, category: /fill|remate|cierre/i.test(family) ? 'fill' : /bass|tumbao|yumba|log.?drum/i.test(family) ? 'bass' : 'groove',
-    description: `${style.name}: ${family}. ${style.calibration?.patterns.families.join('; ')}.`,
-    tags: [input.id, style.id, slug(family)], scopes: ['measure', ...(cycleLength > 1 ? ['phrase'] : [])] as Scope[],
-    roles: patternRoles as MusicalPattern['roles'], instruments: instruments as MusicalPattern['instruments'],
-    meter, cycleLength, subdivisions: stepsPerBeat * beats, onsetGrid: events.filter(e => e.kind !== 'rest' && e.kind !== 'tie').map(e => Math.round(e.position * stepsPerBeat)),
-    durationGrid: events.map(e => Math.max(1, Math.round((e.duration ?? .25) * stepsPerBeat))),
-    accentProfile: events.map(e => e.accent ?? .6), velocityProfile: events.map(e => e.velocity ?? .7), events,
-    syncopationRating: /syncop|clave|offbeat|dembow|síncopa|sincopa/i.test(family) ? .72 : .35,
-    supportedEnergy: [1,2,3,4,5], phrasePosition: ['start','middle','end','any'], variants: [],
-    provenance: 'Genre/style calibration map; pattern family is owned by this style and genre.',
-    authenticityTags: [input.id, style.id, slug(family)], tuningSystem: input.pitchSystem, enabled: true, weight: 1,
+    id, worldId: input.id, styleIds: [style.id], name: `${style.name}: ${cell.name}`, shortName: cell.name,
+    family: cell.name, category: cell.phraseEnd ? 'fill' : cell.role === 'bass' ? 'bass' : 'groove',
+    description: `${cell.name}. ${style.description}`, tags: [input.id, style.id, cell.role, slug(cell.name)],
+    scopes: cell.phraseEnd ? ['phrase'] : ['measure', 'phrase'], roles: [cell.role] as MusicalPattern['roles'],
+    instruments: instruments as MusicalPattern['instruments'], canCrossRole: false, sourceLevel: 'style-authored',
+    meter, cycleLength, subdivisions: beats * stepsPerBeat * cycleLength,
+    onsetGrid: cell.onsets.map(position => Math.round(position * stepsPerBeat)),
+    durationGrid: events.map(event => Math.max(1, Math.round(event.duration! * stepsPerBeat))),
+    accentProfile: events.map(event => event.accent!), velocityProfile: events.map(event => event.velocity!),
+    ...(cell.hits ? { hitGrid: cell.hits.filter((hit): hit is string => typeof hit === 'string') } : {}), events,
+    supportedEnergy: [1,2,3,4,5], phrasePosition: cell.phraseEnd ? ['end'] : ['start','middle','end','any'], variants: [],
+    provenance: 'Folder-authored role cell; quarter-note beat positions and phrase conditions.',
+    authenticityTags: [input.id, style.id, slug(cell.name)], tuningSystem: input.pitchSystem, enabled: true, weight: cell.phraseEnd ? .4 : 1,
   };
 }
 
 export function createGenreWorld(input: GenrePackInput): GenreWorld {
   const styles = input.styles.map(item => styleDefinition(input, item));
-  const patternItems = styles.flatMap(style => style.calibration!.patterns.families.slice(0, 4).map((family, index) => patternFromFamily(input, style, family, index)));
+  const patternItems = styles.flatMap((style, i) => {
+    const cells = input.styles[i].cells;
+    // Packs without authored cells still use their genre-level canonical
+    // patterns. Keep them loadable; a missing optional style overlay must not
+    // crash the entire genre registry (and therefore the player app).
+    if (!cells?.length) return [];
+    return cells.filter(cell => !cell.phraseEnd && style.calibration!.roles[cell.role]).map((cell, index) => {
+      const pattern = patternFromCell(input, style, cell, index);
+      const fill = cells.find(candidate => candidate.phraseEnd && candidate.role === cell.role && candidate.instruments?.[0] === cell.instruments?.[0]);
+      if (fill) {
+        const fillPattern = patternFromCell(input, style, fill, index);
+        const boundary = Math.min(...fill.onsets);
+        const events = [...pattern.events!.filter(event => event.position < boundary), ...fillPattern.events!];
+        pattern.variants = [{ id: `${pattern.id}-cadence`, parentPatternId: pattern.id,
+          name: `${cell.name} cadence`, variationType: 'cadence', probability: 1,
+          onsetGrid: events.map(event => Math.round(event.position * 4)),
+          durationGrid: events.map(event => Math.max(1, Math.round(event.duration! * 4))),
+          accentProfile: events.map(event => event.accent!), velocityProfile: events.map(event => event.velocity!), events,
+        }];
+      }
+      return pattern;
+    });
+  });
   const homeStyleId = styles.find(style => style.name === input.defaultStyle)?.id ?? styles[0]?.id;
   return {
     id: input.id, name: input.name, catalogGeneration: 'genre-style-map-v1', homeStyleId,

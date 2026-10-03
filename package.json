@@ -5,6 +5,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "bake:instruments": "node --import tsx scripts/bake-instruments.ts",
+    "test:baked": "node --import tsx --test scripts/baked-instruments.test.ts",
+    "audit:baked": "node --import tsx scripts/audit-baked-audio.ts",
     "dev": "vite --host 0.0.0.0 --port 3000",
     "build": "npm run lint && npm run check && vite build",
     "build:static": "vite build",
@@ -30,7 +33,11 @@
     "audit:report": "node --import tsx scripts/check-system.ts --report-only",
     "test:mix": "node --import tsx --test scripts/mix-regression.test.ts scripts/dynamic-mix.test.ts",
     "audit:browser": "node --import tsx scripts/browser-audit-server.ts",
-    "audit:catalog": "node --import tsx scripts/audit-catalog.ts"
+    "audit:catalog": "node --import tsx scripts/audit-catalog.ts",
+    "audit:starters": "node --import tsx scripts/audit-starters.ts",
+    "audit:accuracy": "node --import tsx scripts/audit-sample-accuracy.ts --scores",
+    "test:accuracy": "node --import tsx --test scripts/sample-accuracy.test.ts scripts/sample-sound-accuracy.test.ts",
+    "audit:audio-catalog": "node --import tsx scripts/audio-regression-harness.ts --all-styles"
   },
   "dependencies": {
     "@breezystack/lamejs": "^1.2.7",

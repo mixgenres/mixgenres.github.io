@@ -348,6 +348,7 @@ export function affinity(
   const p = PATTERNS_BY_ID[patternId];
   if (!p) return Number.NEGATIVE_INFINITY;
 
+  if (p.sourceLevel === 'style-authored' && (!p.roles.includes(voice.role) || !p.instruments?.includes(voice.instrumentId))) return Number.NEGATIVE_INFINITY;
   const sFit = styleId ? patternStyleFit(p, styleId, worldId, adventure) : 0;
 
   const kinds = new Set(instrumentPatternKinds(voice.instrumentId));
@@ -519,7 +520,7 @@ function projectPatternEvents(
 ) {
   const [numerator = 4, denominator = 4] = pattern.meter.split('/').map(Number);
   const quarterBeats = numerator * 4 / denominator || 4;
-  const stepsPerBeat = (pattern.subdivisions || 16) / quarterBeats;
+  const stepsPerBeat = (pattern.subdivisions || 16) / (quarterBeats * Math.max(1, pattern.cycleLength || 1));
   const sectionName = String(region.kind ?? '');
   const authoredTechniques = instrumentId ? genreTechniquesForInstrument(instrumentId, styleId) : [];
   const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, '');
@@ -538,7 +539,7 @@ function projectPatternEvents(
     return hash(`${seed}:event:${eventIndex}`, 913) < (event.probability ?? 1);
   }).sort((a, b) => a.event.position - b.event.position);
   const result = { onsets: [] as number[], accents: [] as number[], velocities: [] as number[], durations: [] as number[],
-    microtiming: [] as number[], hitTypes: [] as string[], articulations: [] as string[], fractionalSteps: [] as number[] };
+    microtiming: [] as number[], hitTypes: [] as string[], articulations: [] as string[], fractionalSteps: [] as number[], pitches: [] as Array<import('../../data/schema').PatternEvent['pitch']> };
   let priorBeat = 0;
   for (const { event } of chosen) {
     if (event.kind === 'rest') {
@@ -555,15 +556,16 @@ function projectPatternEvents(
       ? (event.polyrhythm.phase ?? 0) * event.polyrhythm.denominator / Math.max(1, event.polyrhythm.numerator)
       : 0;
     const eventPosition = ((event.position + phaseOffset) % cycleBeats + cycleBeats) % cycleBeats;
-    const fractionalStep = (eventPosition + (event.microtiming ?? 0)) * stepsPerBeat;
+    const fractionalStep = eventPosition * stepsPerBeat;
     result.onsets.push(Math.max(0, Math.round(fractionalStep)));
     result.fractionalSteps.push(fractionalStep);
     result.accents.push(event.accent ?? (event.kind === 'accent' ? 1 : .6));
     result.velocities.push(event.velocity ?? .72);
-    result.durations.push(Math.max(1, Math.round((event.duration ?? .25) * stepsPerBeat)));
+    result.durations.push(Math.max(.01, (event.duration ?? .25) * stepsPerBeat));
     result.microtiming.push(event.microtiming ?? 0);
     result.hitTypes.push(event.hitType ?? '');
     result.articulations.push(event.articulation && supportsTechnique(event.articulation) ? event.articulation : '');
+    result.pitches.push(event.pitch);
     priorBeat = event.position;
   }
   return result;
@@ -886,9 +888,9 @@ export function rebuild(sheet: Sheet): Sheet {
           p.variants, phraseRole, variantSeed, partEnergy,
         );
         const styleIdForRegion = getSectionStyleId(sheet, r);
-        if (!v && phraseRole === 'cadence' && !hasCadenceVariant) {
+        if (!v && phraseRole === 'cadence' && !hasCadenceVariant && !p.events?.length) {
           v = synthesizeBoundaryVariant(p, 'cadence', `${patternId}:${r.id}:${index}`, styleIdForRegion);
-        } else if (!v && phraseRole === 'transition' && !hasTransitionVariant) {
+        } else if (!v && phraseRole === 'transition' && !hasTransitionVariant && !p.events?.length) {
           v = synthesizeBoundaryVariant(p, 'transition', `${patternId}:${r.id}:${index}`, styleIdForRegion);
         }
 
@@ -897,7 +899,7 @@ export function rebuild(sheet: Sheet): Sheet {
         const resolvedStyle = getResolvedSectionStyle(sheet, r);
         const eventProjection = projectPatternEvents(v?.events ?? p.events ?? [], p, variantSeed, r, phraseRole, partEnergy,
           track.instrumentId, resolvedStyle.id, track.role);
-        const useEventProjection = !!eventProjection.onsets.length && (v?.events?.length ? true : !v && !!p.events?.length);
+        const useEventProjection = !!(v?.events?.length || (!v && p.events?.length));
         const rawOnsets = useEventProjection ? eventProjection.onsets : v?.onsetGrid ?? p.onsetGrid;
         const rawAccents = useEventProjection ? eventProjection.accents : v?.accentProfile ?? p.accentProfile;
         const rawVelocities = useEventProjection ? eventProjection.velocities : v?.velocityProfile ?? p.velocityProfile;
@@ -914,6 +916,7 @@ export function rebuild(sheet: Sheet): Sheet {
           rawOnsets, rawAccents, rawVelocities, rawDurations, rawMicro, rawHitTypes, sub, patternCycleBars, i % patternCycleBars,
           useEventProjection && eventProjection.articulations.length ? eventProjection.articulations : undefined,
           useEventProjection && eventProjection.fractionalSteps.length ? eventProjection.fractionalSteps : undefined,
+          useEventProjection ? eventProjection.pitches : undefined,
         );
 
         const explicitLens = sheet.partLens?.[r.id]?.[track.id];
@@ -2057,41 +2060,27 @@ export function makeSheet(
   // Use the genre palette only when the style has no authored band.
   const stylePalette = runtime.getInstrumentPalette();
   const genrePalette = contractForGenre(genreId).timbreSpace.palette;
-  const ensembleIds = (resolved.arrangement?.ensemble ?? [])
-    .flatMap(e => e.instrumentIds ?? []);
-  const ensembleRoleByInstrument = new Map((resolved.arrangement?.ensemble ?? [])
-    .flatMap(e => (e.instrumentIds ?? []).map(id => [id, e.role] as const)));
-  // Repeated canonical IDs represent separate ensemble parts. This matters for
-  // styles that used to spell synth patches or guitar setups as separate
-  // instruments: the part now carries the same physical instrument and gets
-  // its timbre from its role-specific dialect.
-  const authoredPalette = stylePalette.filter(id => INSTRUMENTS_BY_ID[id]);
-  const supplemental = [...ensembleIds, ...genrePalette]
-    .filter((id, i, arr) => INSTRUMENTS_BY_ID[id] && arr.indexOf(id) === i && !authoredPalette.includes(id));
-  const candidates = [...authoredPalette, ...supplemental];
-  const targetCount = authoredPalette.length || candidates.length;
-  const hints = candidates.slice(0, targetCount);
-  while (hints.length < targetCount && candidates.length) hints.push(candidates[hints.length % candidates.length]);
-  const paletteRoles = new Map<string, string[]>();
-  for (const id of hints) {
-    const roles = paletteRoles.get(id) ?? [];
-    roles.push(id === 'synth' ? ['bass', 'lead', 'pad', 'comp', 'texture'][roles.length % 5]
-      : id === 'guitar' ? ['comp', 'rhythm', 'lead', 'texture'][roles.length % 4]
-        : roleForInstrument(id));
-    paletteRoles.set(id, roles);
-  }
+  const authoredParts = (resolved.arrangement?.ensemble ?? []).flatMap(part =>
+    part.instrumentIds.filter(id => INSTRUMENTS_BY_ID[id]).map(instrumentId => ({ instrumentId, role: String(part.role) })));
+  const hints = authoredParts.length ? authoredParts.map(part => part.instrumentId)
+    : (stylePalette.length ? stylePalette : genrePalette).filter(id => INSTRUMENTS_BY_ID[id]);
 
   const tracks: Voice[] = hints.map((instrumentId, i) => {
     const def = instrument(instrumentId);
-    const paletteRole = paletteRoles.get(instrumentId)?.shift() ?? roleForInstrument(instrumentId);
-    const role = (instrumentId === 'synth' || instrumentId === 'guitar') && (paletteRoles.get(instrumentId)?.length ?? 0) > 0
-      ? paletteRole : ensembleRoleByInstrument.get(instrumentId) ?? paletteRole;
+    const role = authoredParts[i]?.role ?? roleForInstrument(instrumentId);
     return {
       id: `v${i}`, instrumentId, name: def.name, instrument: def.name,
       role, kind: instrumentId,
       muted: false, volume: calibratedTrackVolume(genreId, instrumentId, role, styleId, resolved.contract.timbreSpace.mixCharacter?.bassForward), lensIds: [],
     };
   });
+
+  for (const [i, region] of regions.entries()) {
+    const feature = form[i].soloInstrumentId;
+    const track = feature ? tracks.find(part => part.instrumentId === feature && part.role === 'lead')
+      ?? tracks.find(part => part.instrumentId === feature) : undefined;
+    if (track) region.solo = { trackIds: [track.id], mode: form[i].soloMode ?? 'accompanied' };
+  }
 
   const arrangement: Arrangement = {};
   const energies: Record<string, Record<string, SectionEnergy>> = {};

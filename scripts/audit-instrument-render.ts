@@ -8,6 +8,7 @@ import { measureAudio } from '../src/engine/studio/audioMetrics';
 import { selectInstruments, instrumentMechanisms } from './lib/audioSelection';
 import { voiceTailSeconds } from '../src/engine/playback/voiceAllocation';
 import { reportMetadata, writeReport, summarizeFindings, printFindings, type Finding } from './lib/auditReport';
+import { ENRICHED_INSTRUMENT_CATALOG } from '../src/engine/lookup/instruments';
 
 const sampleRate = 44100, blockSize = 256;
 const renderer = new OfflineRenderer();
@@ -24,11 +25,12 @@ function capture(seconds: number) {
   }
   return { left, right, metrics: measureAudio(left, right, sampleRate) };
 }
-const selection = selectInstruments(process.argv.find(a => a.startsWith('--instrument='))?.slice(13));
+const selection = process.argv.includes('--all') ? ENRICHED_INSTRUMENT_CATALOG : selectInstruments(process.argv.find(a => a.startsWith('--instrument='))?.slice(13));
 const details = process.argv.includes('--details');
 for (const def of selection) {
   const probes = [];
-  const low = def.tuningAndMechanics?.keyRange?.lowMidi ?? 48, high = def.tuningAndMechanics?.keyRange?.highMidi ?? 84;
+  const low = def.tuningAndMechanics?.keyRange?.lowMidi ?? def.acousticProfile?.low ?? 48;
+  const high = def.tuningAndMechanics?.keyRange?.highMidi ?? def.acousticProfile?.high ?? 84;
   const mid = Math.round((low + high) / 2);
   const gestures = def.techniques.articulations;
   const cases = def.kitComponents?.length

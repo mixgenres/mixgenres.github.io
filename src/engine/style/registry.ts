@@ -38,7 +38,7 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: b
   const formSteps = seed.arrangementSections?.length ? seed.arrangementSections.map(section => ({
     key: section.key, label: section.label, kind: section.kind, bars: section.bars,
     intensity: section.intensity, instrumentIds: section.instruments,
-    leadInstrumentId: section.leadInstrumentId, bpm: section.bpm, tempoFeel: section.tempoFeel,
+    leadInstrumentId: section.leadInstrumentId, soloInstrumentId: section.soloInstrumentId, soloMode: section.soloMode, bpm: section.bpm, tempoFeel: section.tempoFeel,
   })) : contract.form.map((name, i) => {
     const lower = name.toLowerCase();
     const solo = /solo|variación|variation|improvisation/.test(lower);
@@ -109,14 +109,14 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: b
       preferredMeters:[seed.preferredMeters?.[0] ?? contract.meter],
     },
     harmony:{
-      model:contract.harmonyModel,
+      model:seed.harmonyModel ?? contract.harmonyModel,
       modePolicy: seed.scaleMode ?? contract.pitchModel.toLowerCase().replace(/\s+/g, '-'),
       progressionTemplates:Array.from(new Map(
         (Object.keys(seed.sectionProgressions ?? {}).length ? Object.values(seed.sectionProgressions!) : seed.calibration?.harmony.progressionExamples ?? suggestedPaletteForGenre(worldId).map(cell => cell.chords as string[])).filter((value): value is string[] => Array.isArray(value)).map(value => [JSON.stringify(value), value] as const)
       ).values()).map(value => ({w:1, value})),
       chordVocabulary:Array.from(new Set([...(seed.calibration?.harmony.chordQualities ?? contract.harmonyVocabulary), ...(Object.values(seed.sectionProgressions ?? {}).flatMap(x => x).map(String))])),
       harmonicRhythm:seed.calibration?.harmony.harmonicRhythm ?? contract.harmonicRhythm,
-      bassMotion:contract.bass.style,
+      bassMotion:seed.bassMotion ?? contract.bass.style,
       sectionProgressions: seed.sectionProgressions ?? {},
       tuningSystem: seed.tuningSystem ?? contract.tuningSystem,
       preferredVoicingTones: seed.calibration?.harmony.preferredVoicingTones,
@@ -133,14 +133,14 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: b
       swingPercentage:seed.grooveMechanics?.swingPercentage ?? contract.groove.swing * 100,
       anticipationOffsetSteps:seed.grooveMechanics?.anticipationOffsetSteps ?? 0,
       microtimingFeel: seed.grooveMechanics?.microtimingFeel === 'quantized' ? 'straight' : (seed.grooveMechanics?.microtimingFeel ?? (contract.groove.swing > .57 ? 'swung' : 'straight')),
-      humanizeJitterMs:contract.groove.humanizeMs,
+      humanizeJitterMs:seed.grooveMechanics?.humanizeJitterMs ?? contract.groove.humanizeMs,
       timelineClave:contract.timeline === 'none' ? undefined : contract.timeline,
       signatureCell:seed.signatureCell ?? contract.timeline,
       grooveMechanics:{
         swingPercentage:seed.grooveMechanics?.swingPercentage ?? contract.groove.swing * 100,
         anticipationOffsetSteps:seed.grooveMechanics?.anticipationOffsetSteps ?? 0,
         microtimingFeel: seed.grooveMechanics?.microtimingFeel ?? 'straight',
-        humanizeJitterMs:contract.groove.humanizeMs,
+        humanizeJitterMs:seed.grooveMechanics?.humanizeJitterMs ?? contract.groove.humanizeMs,
       },
     },
     melody:{
@@ -160,7 +160,7 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: b
       instrumentPalette:instruments.map(value => ({value: String(value), w: 1})),
       masterProfile:{...DEFAULT_STYLE_MASTER_PROFILE},
     },
-    instrumentDialects: contract.instrumentDialects ?? {},
+    instrumentDialects: seed.instrumentDialects ?? contract.instrumentDialects ?? {},
     patterns:{require:[],preferred:[],allowed:[],avoid:[]}, gestures:{}, rules:{
       require:contract.timelineRequired ? [{tag:'timeline-lock',description:contract.timeline}] : [],
       forbid:contract.forbidden.map(tag => ({tag})),

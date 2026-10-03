@@ -5,6 +5,7 @@ import { soloistAtBar, supportsSolo } from '../src/engine/sheet/solo';
 import { GENRE_SOLO_DEFINITIONS } from '../src/data/performance/soloDefinitions';
 
 const base = makeSheet('flamenco');
+assert.ok(base.energies, 'generated sheet includes per-region energy settings');
 const region = base.regions[1];
 const guitar = base.tracks.find(t => t.instrumentId === 'guitar')!;
 const secondLead = base.tracks.find(t => t.instrumentId === 'voice')!;
@@ -25,7 +26,7 @@ const backedNotes = arrangeBand(backed).notes.filter(n => inPart(n.bar));
 assert.ok(backedNotes.some(n => n.trackId === guitar.id));
 assert.ok(backedNotes.some(n => n.trackId === palmas.id), 'falseta keeps compás support');
 assert.ok(backedNotes.every(n => n.trackId !== secondLead.id), 'the explicit rhythm-only policy rests other melodic lines');
-assert.equal(backed.arrangementContext?.[region.id].energyByTrack[palmas.id], base.energies[region.id][palmas.id] - 1);
+assert.equal(backed.arrangementContext?.[region.id].energyByTrack[palmas.id], base.energies![region.id][palmas.id] - 1);
 
 const trading = setSectionSolo(base, region.id, { trackIds: [guitar.id, secondLead.id], mode: 'trading' });
 const tradingPerf = arrangeBand(trading);
@@ -67,4 +68,4 @@ assert.equal(supportsSolo(drumTrading, backing, ['drum']), false, 'backing rests
 
 const alegrias = makeSheet({ genreId: 'flamenco', styleId: 'flamenco-alegrias' });
 assert.equal(getResolvedSectionStyle(alegrias, alegrias.regions[0]).melody.scaleMode, 'major');
-assert.equal(getResolvedSectionStyle(base, base.regions[0]).melody.scaleMode, 'Phrygian');
+assert.equal(getResolvedSectionStyle(base, base.regions[0]).melody.scaleMode.toLowerCase(), 'phrygian');

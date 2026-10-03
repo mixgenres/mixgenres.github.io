@@ -21,6 +21,7 @@ export function prepareNoteVoice(note: PerfNote, params: TrackParams, worldId: s
   // Song-relative time makes expression independent of scheduling latency/loops.
   const jitter = (((note.gestureCode * 1103515245 + midi * 12345 + Math.round(note.time * 1000)) >>> 0) / 0xffffffff) - 0.5;
   return {
+    noteDurationSeconds: note.dur,
     id: 'prepared', gate: 0, note: midi,
     soundParams, controllerKeys,
     frequencyHz: note.frequencyHz ?? midiToFreq(midi),

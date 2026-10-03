@@ -3,6 +3,7 @@ import { el } from '@elemaudio/core';
 import { getFormantProfileForInstrument } from './elementaryEngine.ts';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
+import { brassReleasePitch } from './brassPitch';
 
 export default class BrassModule implements InstrumentModule {
   id = 'brass-family';
@@ -20,7 +21,7 @@ export default class BrassModule implements InstrumentModule {
     const vibrato = action === 'vibrato' || action === 'shake'
       ? el.mul(0.004 + 0.006 * pressure, el.cycle(synthesis?.vibratoRateHz ?? 6.0))
       : 0;
-    const pitch = el.mul(freqSignal, el.add(1, vibrato));
+    const pitch = el.mul(freqSignal, el.mul(el.add(1, vibrato), brassReleasePitch(ctx)));
 
     // Lip-reed source: asymmetric buzz plus standing-wave feedback. The bore
     // formants come from the instrument definition, so trombone/horn/tuba do
@@ -28,7 +29,7 @@ export default class BrassModule implements InstrumentModule {
     const buzz = el.add(
       el.mul(0.62, el.blepsaw(pitch)),
       el.mul(0.18, el.blepsquare(el.mul(pitch, 2))),
-      el.mul(0.10, el.blepsaw(el.mul(pitch, horn ? 0.5 : 1.5))),
+      el.mul(0.10 * pressure, el.blepsaw(el.mul(pitch, 3))),
     );
     const breath = el.mul(
       (dspProfile?.mechanicalArtifacts.airHiss ?? 0.10) * 0.12,
@@ -39,11 +40,8 @@ export default class BrassModule implements InstrumentModule {
     const f2 = el.mul(profile.f2.gain, el.svf({ mode: 'bandpass' }, profile.f2.freq, profile.f2.q, buzz));
     const f3 = profile.f3 ? el.mul(profile.f3.gain, el.svf({ mode: 'bandpass' }, profile.f3.freq, profile.f3.q, buzz)) : 0;
 
-    const fall = action === 'fall' || action === 'doit'
-      ? el.mul(action === 'fall' ? -0.08 : 0.10, el.sub(1, gateSignal))
-      : 0;
     const source = el.mul(
-      el.add(1, fall),
+      1,
       el.add(
         el.mul(0.48, buzz),
         el.mul(0.22, f1),

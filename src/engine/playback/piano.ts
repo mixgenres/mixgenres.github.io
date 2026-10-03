@@ -1,4 +1,4 @@
-import type { TrackParams } from './elementaryEngine';
+import type { TrackParams, VoiceState } from './elementaryEngine';
 import { resolveVoiceParameters } from './instrumentRegistry';
 import { TANGO_INSTRUMENT_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
 import { PIANO_DANCE_PATTERN, PIANO_JAZZ_FAMILY_PATTERN, TANGO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
@@ -10,29 +10,35 @@ import { createDampedStringLoop, fbGainForDecay } from './instrumentLib_stringLo
 /**
  * PianoModule
  * 
- * Physical synthesis module modeling an authentic Concert Grand Piano:
+ * Simplified concert piano synthesis:
  * - Non-linear felt hammer dynamics: Velocity-dependent hammer hardness shaping attack spectrum
  * - Multi-string unison dispersion: 3 detuned unisons in treble, 2 in tenor, single copper-wound string in bass
  * - String inharmonicity (B-parameter dispersion) modeling stiff steel wire acoustics
  * - Soundboard corpus: 120Hz longitudinal spruce mode, 240Hz cross-grain mode, and cast-iron frame duplex chime
- * - Authentic Tango techniques:
+ * - Tango attack shaping (rhythm and chord pitches are authored in the score):
  *   - Marcato en 4: Heavy percussive chord attack with dry felt rebound
- *   - Arrastre: Anticipatory pre-beat pitch drag
+ *   - Arrastre: Discrete anticipatory chromatic notes
  *   - Yumba (Pugliese): Deep accented low cluster slam with rich plate resonance
  *   - Chapa: Damped metallic percussive chop
  *   - Campana (Salgán): High-register crystal-clear ringing bell stabs
- *   - Pesada: Heavy sub-octave fundamental coupling
+ *   - Pesada: Heavy hammer/keybed attack
  */
 export default class PianoModule implements InstrumentModule {
   id = 'piano';
 
-  releaseTailSeconds(params: TrackParams): number {
-    const physical = resolveVoiceParameters({ id: 'tail', note: 60, velocity: 1, gate: 0, action: 'tone' }, params);
+  releaseTailSeconds(params: TrackParams, voice?: VoiceState): number {
+    const physical = resolveVoiceParameters(voice ?? { id: 'tail', note: 60, velocity: 1, gate: 0, action: 'tone' }, params);
     const response = TANGO_INSTRUMENT_RESPONSE.piano;
-    // The same T60 law as the longest normal string, plus technique-specific
-    // resonances. Export and voice allocation must not cut this at four seconds.
-    return Math.max(3.8, response.marcatoDecay, response.marcatoDecayDefault,
-      0.85 + physical.decayTime * (1.5 + physical.b * 2.2) * physical.genreDialect.decay);
+    const action = physical.action;
+    const normal = 0.85 + physical.decayTime * (1.5 + physical.b * 2.2) * physical.genreDialect.decay;
+    if (!voice) return Math.max(3.8, response.marcatoDecay, response.marcatoDecayDefault, normal);
+    // Match the string loop's T60 for the actual articulation. A short muted
+    // strike must not reserve a sustained piano voice for sixteen seconds.
+    if (/chapa|muted/i.test(action) || params.mute > 0.4) return 0.12;
+    if (/marcato/i.test(action)) return TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`)
+      ? response.marcatoDecay : response.marcatoDecayDefault;
+    if (/campana|bell/i.test(action)) return 3.8;
+    return normal;
   }
 
   renderVoice(ctx: VoiceRenderContext): AudioSignal {
@@ -56,7 +62,6 @@ export default class PianoModule implements InstrumentModule {
 
     // 1. Tango Technique & Articulation Recognition
     const isMarcato = action === 'marcato' || /marcato/i.test(action ?? '');
-    const isArrastre = action === 'arrastre' || /arrastre/i.test(action ?? '');
     const isYumba = action === 'yumba' || action === 'cluster' || /yumba|cluster/i.test(action ?? '');
     const isChapa = action === 'chapa' || /chapa|muted/i.test(action ?? '') || params.mute > 0.4;
     const isCampana = action === 'campana' || /campana|bell/i.test(action ?? '');
@@ -69,14 +74,9 @@ export default class PianoModule implements InstrumentModule {
     const isJazzFamily = PIANO_JAZZ_FAMILY_PATTERN.test(genre);
     const isDance = PIANO_DANCE_PATTERN.test(genre);
 
-    // 2. Arrastre Pre-Beat Pitch Scoop
+    // 2. Arrastre uses discrete chromatic approach notes, authored in the score.
+    // A struck piano string cannot bend into a new pitch.
     let activeFreqSignal = safeFreqSignal;
-    if (isArrastre) {
-      const arrastrePitchEnv = el.adsr(0.001, 0.045, 0.0, 0.01, gateSignal);
-      const semitoneDrop = el.mul(arrastrePitchEnv, el.const({ value: -2.0 }));
-      const pitchRatio = el.pow(2, el.div(semitoneDrop, 12));
-      activeFreqSignal = el.mul(safeFreqSignal, pitchRatio);
-    }
 
     // 3. Dynamic Felt Hammer Non-linear Excitation
     // Felt gets dramatically stiffer as velocity increases, injecting high frequencies
@@ -104,19 +104,20 @@ export default class PianoModule implements InstrumentModule {
       hammerImpulse = el.add(hammerImpulse, el.mul(0.45, el.mul(knockNoise, knockEnv)));
     }
 
-    // Yumba cluster slam: Adds lower sub-cluster burst
+    // Yumba gives the authored low chord a heavier attack. It does not add
+    // an unrelated fixed 58 Hz note to every chord.
     if (isYumba) {
       // Pugliese yumba: accented chord attack followed by a low cluster that
       // blooms briefly under the damper/pedal rather than a generic sub hit.
       const clusterThump = el.mul(
-        el.cycle(58),
+        el.lowpass(180, .7, el.noise()),
         el.adsr(0.0005, 0.12, 0.0, 0.055, gateSignal)
       );
       const clusterBody = el.add(
         el.svf({ mode: 'bandpass' }, 58, 2.2, clusterThump),
         el.svf({ mode: 'bandpass' }, 116, 2.8, clusterThump)
       );
-      hammerImpulse = el.add(hammerImpulse, el.mul(0.62, clusterBody));
+      hammerImpulse = el.add(hammerImpulse, el.mul(0.18, clusterBody));
     }
 
     if (isCampanitas) {
@@ -147,9 +148,10 @@ export default class PianoModule implements InstrumentModule {
 
     // Piano String Decay Times
     const baseDecay = isChapa ? 0.12 : (isMarcato ? (isTango ? tangoResponse.marcatoDecay : tangoResponse.marcatoDecayDefault) : (isCampana || isCampanitas ? 3.8 : (0.85 + decayTime * (1.5 + b * 2.2) * gd.decay))); 
-    const d1 = fbGainForDecay(f1, baseDecay);
-    const d2 = fbGainForDecay(f2, baseDecay * 0.94);
-    const d3 = fbGainForDecay(f3, baseDecay * 0.91);
+    const damperDecay = el.add(el.mul(gateSignal, baseDecay), el.mul(el.sub(1, gateSignal), 0.09));
+    const d1 = fbGainForDecay(f1, damperDecay);
+    const d2 = fbGainForDecay(f2, el.mul(damperDecay, 0.94));
+    const d3 = fbGainForDecay(f3, el.mul(damperDecay, 0.91));
 
     const stringCutoff = el.min(
       el.const({ value: 19000 }),
@@ -184,16 +186,8 @@ export default class PianoModule implements InstrumentModule {
       )
     );
 
-    // 6. Sub-octave reinforcement for Pesada and low bass notes
+    // Heavy accents change hammer/body energy, not the string's pitch.
     let finalTone = soundboardBloom;
-    if (isPesada || (isBassRegister && isMarcato)) {
-      const subPhasor = el.syncphasor(el.mul(f1, 0.5), gateSignal);
-      const subRumble = el.mul(
-        0.30,
-        el.mul(el.sin(el.mul(2 * Math.PI, subPhasor)), el.adsr(0.001, baseDecay * 0.8, 0, 0.02, gateSignal))
-      );
-      finalTone = el.add(finalTone, subRumble);
-    }
 
     const outputCutoff = Math.min(19000, isChapa ? 1400 : (1200 + b * 8500));
     return el.lowpass(outputCutoff, 1.0, finalTone);

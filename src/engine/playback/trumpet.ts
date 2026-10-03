@@ -3,6 +3,7 @@ import { seedOf, randNorm } from '../sheet/random.ts';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { getFormantProfileForInstrument } from './elementaryEngine.ts';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
+import { brassReleasePitch } from './brassPitch';
 
 /**
  * TrumpetModule
@@ -42,13 +43,11 @@ export default class TrumpetModule implements InstrumentModule {
 
     // 2. Pitch Dynamics & Gesture Shaping
     // Attack scoop on unslurred notes
-    const scoopDepth = (isFall || isDoit || isSlur) ? 0 : 0.042 * (0.5 + params.pressure * 0.5);
+    const scoopDepth = (isFall || isDoit || isSlur) ? 0 : (action === 'scoop' ? 0.042 : 0.003) * (0.5 + params.pressure * 0.5);
     const scoopEnv = el.adsr(0.0003, 0.022, 0, 0.005, gateSignal);
     const scoopOffset = el.mul(scoopDepth, scoopEnv);
 
     // Fall & Doit pitch trajectories
-    const fallGlide = isFall ? el.mul(el.const({ value: -0.22 }), el.sub(1.0, gateSignal)) : el.const({ value: 0 });
-    const doitGlide = isDoit ? el.mul(el.const({ value: 0.25 }), el.sub(1.0, gateSignal)) : el.const({ value: 0 });
 
     // Lip-trill shake (rapid alternation between overtone modes at 7.2Hz)
     const shakeMod = isShake ? el.mul(el.cycle(7.2), el.mul(el.const({ value: 0.065 }), gateSignal)) : el.const({ value: 0 });
@@ -63,8 +62,8 @@ export default class TrumpetModule implements InstrumentModule {
     const vibratoMod = el.mul(vibratoDepth, vibratoLfo);
 
     // Dynamic pitch combination
-    const pitchMod = el.add(el.sub(1.0, scoopOffset), el.add(fallGlide, el.add(doitGlide, el.add(shakeMod, vibratoMod))));
-    const dynamicFreqSignal = el.mul(freqSignal, pitchMod);
+    const pitchMod = el.add(el.sub(1.0, scoopOffset), el.add(shakeMod, vibratoMod));
+    const dynamicFreqSignal = el.mul(freqSignal, el.mul(pitchMod, brassReleasePitch(ctx)));
     const safeDynamicFreqSignal = el.min(el.const({ value: 19000 }), el.max(el.const({ value: 20 }), dynamicFreqSignal));
 
     // 3. Lip-Reed Excitation with Shockwave Steepening

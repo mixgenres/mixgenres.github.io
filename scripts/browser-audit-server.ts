@@ -3,8 +3,9 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { reportMetadata } from './lib/auditReport';
 
 const once = process.argv.includes('--once');
-const server = await createServer({ server: { host: '127.0.0.1', port: 3001, strictPort: true } });
-server.middlewares.use('/__audit', async (request, response, next) => {
+const server = await createServer({ server: { host: '127.0.0.1', port: 3001, strictPort: true },
+  plugins: [{ name: 'native-audio-audit', configureServer(auditServer) {
+    auditServer.middlewares.use('/__audit', async (request, response, next) => {
   const url = new URL(request.url ?? '/', 'http://127.0.0.1');
   response.setHeader('Content-Type', 'application/json');
   try {
@@ -26,6 +27,8 @@ server.middlewares.use('/__audit', async (request, response, next) => {
     response.end(JSON.stringify({ saved: 'audit/browser-mix-audit.json' }));
     if (once) setTimeout(() => { void server.close().then(() => { process.exitCode = report.status === 'PASS' ? 0 : 1; }); }, 1000);
   } catch (e) { response.statusCode = 400; response.end(JSON.stringify({ error: String(e) })); }
+});
+  } }],
 });
 await server.listen();
 console.log('Native browser audit: http://127.0.0.1:3001/scripts/browser-mix-audit.html');

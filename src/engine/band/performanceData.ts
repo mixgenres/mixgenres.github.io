@@ -54,6 +54,10 @@ export interface PerfNote {
   bandoneonSideCode?: 1 | 2;
   /** 0 = authored rhythm attack, 1 = compiler-derived phrase fill/ornament. */
   originCode?: 0 | 1;
+  /** Explicit score articulation; phrase development must preserve it. */
+  authoredTechnique?: boolean;
+  authoredPitch?: boolean;
+  authoredDuration?: boolean;
 }
 
 export interface PerfCC {

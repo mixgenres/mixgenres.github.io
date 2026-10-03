@@ -42,6 +42,7 @@ export { GESTURE_NAMES, GESTURE_CODES };
 import { HIT_FUNCTIONS, type HitFunction } from '../../data/performance/hitFunctions';
 
 export interface RhythmOnset {
+  pitch?: import('../../data/schema').PatternEvent['pitch'];
   position: number;
   accent: number;
   velocity: number;
@@ -92,7 +93,7 @@ export interface BandPlan {
     sectionId: string;
     lens: LensStack;
     rhythm: RhythmIdea;
-    groove: { offsetMs: number; swing: number; subdivision: number; anticipationOffsetSteps?: number };
+    groove: { offsetMs: number; swing: number; swingUnit?: number; subdivision: number; anticipationOffsetSteps?: number };
   }[]>;
 }
 
@@ -148,6 +149,7 @@ function rhythmIdeaFromPattern(p: MusicalPattern, sourceGenre: string, beatsPerB
 }
 
 interface PatternPerformanceDetails {
+  pitches?: Array<import('../../data/schema').PatternEvent['pitch']>;
   stepsPerBar?: number;
   onsets?: number[];
   accents?: number[];
@@ -181,6 +183,7 @@ function rhythmIdeaFromMeasure(detail: NonNullable<Measure['patternDetailsByTrac
   const fractionalPositions = Array.isArray(perf?.fractionalPositions) ? perf.fractionalPositions : [];
   const nativeSteps = Math.max(1, Number(perf?.stepsPerBar ?? 16));
   const onsets = nativeOnsets.map((position: number, i: number) => ({
+    pitch: perf?.pitches?.[i],
     position: (fractionalPositions[i] !== undefined ? fractionalPositions[i] * nativeSteps : position) / nativeSteps
       + Number(p.anticipationOffset ?? 0) / nativeSteps,
     accent: clamp(Number(nativeAccents[i] ?? detail.accentProfile?.[i] ?? 0.72)),
@@ -343,13 +346,16 @@ function effectiveGesture(profile: InstrumentPerformanceProfile, ctx: PhraseCont
 function grooveTime(
   bt: BarTime,
   onset: RhythmOnset,
-  onsetIndex: number,
+  _onsetIndex: number,
   groove: BandPlan['lanes'][string][number]['groove'],
 ): number {
   const beatSec = 60 / bt.bpm;
   const beat = onset.position * bt.beatsPerBar;
   const anticipation = (Number(onset.anticipationOffsetSteps ?? 0) + Number(groove.anticipationOffsetSteps ?? 0)) * (beatSec * bt.beatsPerBar / 16);
-  const swingDelta = onsetIndex % 2 === 1 ? (groove.swing - 0.5) * beatSec * 0.5 : 0;
+  const unit = groove.swingUnit === 16 ? 0.25 : 0.5;
+  const swingPosition = beat / unit;
+  const swingDelta = Math.abs(swingPosition - Math.round(swingPosition)) < 0.001 && Math.round(swingPosition) % 2 === 1
+    ? (groove.swing - 0.5) * beatSec * unit * 2 : 0;
   const authoredMicro = onset.microtiming ?? 0;
   const microSec = Math.abs(authoredMicro) > 0.5 ? authoredMicro / 1000 : authoredMicro * beatSec / Math.max(1, groove.subdivision);
   return bt.start + beat * beatSec + groove.offsetMs / 1000 + anticipation + swingDelta + microSec;
@@ -413,7 +419,7 @@ function applyPhraseBandInteraction(
       // Four-bar breathing: phrase-final attacks get a controlled release rather
       // than a hard clip, while the preceding bar stays slightly more open.
       if (n.bar === phraseEnd - 1) {
-        if (/lead|melody|voice/.test(role)) n.dur *= 1.04;
+        if (!n.authoredDuration && /lead|melody|voice/.test(role)) n.dur *= 1.04;
         if (/bass|percussion|drum/.test(role)) n.vel = Math.min(127, Math.round(n.vel * 1.025));
       }
       n.vel = Math.max(1, Math.min(127, n.vel));
@@ -431,6 +437,7 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
     for (const baseTrack of sheet.tracks as Voice[]) {
       const track = { ...baseTrack, role: sheet.partRoles?.[region.id]?.[baseTrack.id] ?? baseTrack.role };
       if (track.muted) continue;
+      if (sheet.arrangement[region.id]?.[track.id] === 'silent') continue;
       const preliminaryStyle = getResolvedSectionStyle(sheet, styleRegion(region));
       const rhythm = chooseRhythm(sheet, region, track, preliminaryStyle);
       const lens = resolveLens(sheet, region, track);
@@ -447,7 +454,8 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
         rhythm,
         groove: {
           offsetMs: host.timing.offsetMs * (1 - lens.weight) + source.timing.offsetMs * lens.weight,
-          swing: host.timing.swing * (1 - lens.weight) + source.timing.swing * lens.weight,
+          swing: (preliminaryStyle.rhythm.swingPercentage / 100) * (1 - lens.weight) + source.timing.swing * lens.weight,
+          swingUnit: preliminaryStyle.contract.groove.swingUnit,
           subdivision: rhythm.subdivisions,
           anticipationOffsetSteps: Number(preliminaryStyle.rhythm?.anticipationOffsetSteps ?? 0),
         },
@@ -510,6 +518,7 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
           const bt = bars[bar];
           const measure = sheet.measures[bar];
           if (!bt || !measure) continue;
+          if (measure.patternByTrack?.[track.id] === 'silent') continue;
           const detail = measure.patternDetailsByTrack?.[track.id];
           const rhythm = rhythmIdeaFromMeasure(detail, lane.rhythm, bt.beatsPerBar);
           if (!rhythm.onsets.length) continue;
@@ -552,6 +561,7 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
               phraseIndex,
               onsetIndex: i,
               onsetPosition: onset.position,
+              authoredPitch: onset.pitch,
               hit: onset.hit,
               chord,
               nextChord,
@@ -593,15 +603,14 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
             const vel = Math.max(1, Math.min(127, Math.round(velocityForEnergy(energy, onset.velocity, sharedHostProfile.density.accentContrast) * decision.drive * brightnessLift)));
             const time = Math.max(0, grooveTime(bt, onset, i, lane.groove));
             const pv = voiceProfile(track.instrumentId);
-            const nextPosition = rhythm.onsets[i + 1]?.position ?? (onset.position + Math.max(onset.duration, 1 / Math.max(1, rhythm.subdivisions)));
+            const nextPosition = rhythm.onsets[i + 1]?.position ?? (onset.position + onset.duration / bt.beatsPerBar);
             const localGapBeats = Math.max(0.08, (nextPosition - onset.position) * bt.beatsPerBar);
-            const defaultStepBeats = bt.beatsPerBar / Math.max(1, rhythm.subdivisions);
-            const authoredIsDefaultStep = onset.durationAuthored !== true || Math.abs(onset.duration - defaultStepBeats) < 0.0001;
+            const authoredIsDefaultStep = onset.durationAuthored !== true;
             const sustainEligible = pv.sustain === 'sustained' || pv.sustain === 'blown' || pv.sustain === 'decaying';
             const authoredBeats = Math.max(0.04, sustainEligible && authoredIsDefaultStep ? localGapBeats : onset.duration);
             const gapBeats = Math.max(localGapBeats, onset.hit === 'sustain' ? 1.0 : 0.18);
             const durBeats = noteLengthBeats(pv, authoredBeats, Math.max(gapBeats, onset.durationAuthored ? authoredBeats : 0) * (onset.hit === 'sustain' ? 3.5 : 1.7), gestureName);
-            const dur = Math.max(0.028, durBeats * (60 / bt.bpm) * (0.82 + ctx.hostProfile.phrase.sustain * 0.32));
+            const dur = Math.max(0.028, (onset.durationAuthored ? authoredBeats : durBeats * (0.82 + ctx.hostProfile.phrase.sustain * 0.32)) * (60 / bt.bpm));
             const tuning = resolveTuningSystem(regionStyle.harmony?.tuningSystem ?? '12-tet');
 
             for (let mi = 0; mi < midis.length; mi++) {
@@ -629,6 +638,9 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
                 hitFunctionCode,
                 accent: Math.round(accent * 1000) / 1000,
                 originCode: 0,
+                authoredTechnique: Boolean(authoredGesture && profile.gestures[authoredGesture]),
+                authoredPitch: Boolean(onset.pitch),
+                authoredDuration: Boolean(onset.durationAuthored),
               };
               barNotes.push(note);
             }
@@ -638,7 +650,7 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
             // theory-derived passing tone aimed at the next played degree.
             if (state.previousMidi !== undefined && state.previousTime !== undefined &&
                 (profile.capabilities.polyphony <= 1 || voiceProfile(track.instrumentId).role === 'bass') && grammarBundle.hybrid.allowDerivedAttacks > 0.28 &&
-                grammarBundle.hybrid.allowDerivedPitch > 0.2 && /bass/.test(String(ctx.role)) &&
+                grammarBundle.hybrid.allowDerivedPitch > 0.2 && !onset.pitch && /bass/.test(String(ctx.role)) &&
                 grammarBundle.hybrid.subdivisionVocabulary?.bass?.includes(2)) {
               const current = midis[0];
               const gap = time - state.previousTime;
@@ -672,10 +684,10 @@ export function arrangeBand(sheet: Sheet, _seed = 0): Performance {
 
           // End-of-bar feedback/settling: preserve a sustained resonant answer
           // on continuous instruments when a phrase has a strong cadence attack.
-          if (barNotes.length) {
+          if (barNotes.length && !rhythm.onsets.at(-1)?.durationAuthored) {
             const last = barNotes[barNotes.length - 1];
             const resonance = profile.capabilities.sustained ? 1.18 : profile.capabilities.continuous ? 1.06 : 1.0;
-            last.dur = Math.min(last.dur * resonance, Math.max(last.dur, (bt.end - last.time) * (0.52 + profile.genreProfiles[lane.lens.hostGenre].phrase.sustain * 0.35)));
+            last.dur = Math.min(last.dur * resonance, Math.max(last.dur, (bt.end - last.time) * (0.52 + sharedHostProfile.phrase.sustain * 0.35)));
           }
 
           phraseNotes.push(...barNotes);
@@ -858,8 +870,10 @@ function resolveBandoneonPhysicalFingering(track: Voice, notes: PerfNote[]): voi
       : openScore > closeScore ? 1 : 2;
 
     for (const n of group) {
-      let targetMidi = Math.round(n.midi);
-      let chosenCandidates = candidatesFor(n, direction).candidates;
+      const selected = candidatesFor(n, direction);
+      let targetMidi = selected.targetMidi;
+      let chosenCandidates = selected.candidates;
+      if (chosenCandidates.length && n.midi !== targetMidi) { n.midi = targetMidi; n.frequencyHz = undefined; }
       if (!chosenCandidates.length) {
         const other: 1 | 2 = direction === 1 ? 2 : 1;
         chosenCandidates = candidatesFor(n, other).candidates;

@@ -81,7 +81,8 @@ export function getInstrumentModule(instrumentId: string): InstrumentModule {
   if (instrumentId === 'bandoneon') return bandoneon;
   if (instrumentId === 'accordion') return accordion;
   if (instrumentId === 'concertina') return concertina;
-  if (instrumentId === 'piano' || instrumentId === 'harpsichord' || instrumentId === 'celeste' || instrumentId === 'music-box') return instrumentId === 'harpsichord' ? harpsichord : piano;
+  if (instrumentId === 'piano' || instrumentId === 'harpsichord') return instrumentId === 'harpsichord' ? harpsichord : piano;
+  if (instrumentId === 'celeste' || instrumentId === 'music-box') return marimba;
   if (instrumentId === 'rhodes' || instrumentId === 'fm-ep') return rhodes;
   if (instrumentId === 'clavinet') return clavinet;
   if (instrumentId === 'organ') return organ;
@@ -139,11 +140,14 @@ export function resolveVoiceParameters(voice: VoiceState, params: TrackParams) {
   const articulation = voice.articulation ?? params.articulation;
   const isMuted = action === 'mute' || params.mute > 0.4;
   const authoredSustain = instrumentDef?.acousticProfile?.sustain;
-  const isDecayingInstrument = authoredSustain
+  const bowedBass = instrumentDef?.family === 'plucked' && /^(arco|bow|bow_drag|lija)$/.test(action);
+  const isDecayingInstrument = !bowedBass && (authoredSustain
     ? authoredSustain === 'decaying' || authoredSustain === 'short' || authoredSustain === 'percussive'
-    : model === 0 || model === 1 || model === 2 || model === 3 || model === 4 || model === 5 || model === 8 || model === 11 || model === 17 || model === 18 || model === 19 || model === 20 || (model >= 21 && model <= 26);
+    : model === 0 || model === 1 || model === 2 || model === 3 || model === 4 || model === 5 || model === 8 || model === 11 || model === 17 || model === 18 || model === 19 || model === 20 || (model >= 21 && model <= 26));
   let attack = voice.attack !== undefined ? voice.attack : (isDecayingInstrument ? 0.0004 * genreDialect.attack : (0.0008 + (1 - b) * 0.01) * genreDialect.attack);
   let release = voice.release !== undefined ? voice.release : (isMuted ? 0.012 : (isDecayingInstrument ? 0.045 * genreDialect.decay : (0.06 + decayTime * 0.15)));
+  if (voice.release === undefined && !isDecayingInstrument) release = /^(staccato|seco|marcato|chapa|choke)$/.test(action)
+    ? .04 : Math.min(.18, release);
   let sustain = voice.sustain !== undefined ? voice.sustain : (isDecayingInstrument ? 1.0 : (isMuted ? 0.05 : 0.75 + 0.15 * params.body * genreDialect.body));
   let envDecay = voice.decay !== undefined ? voice.decay : (isDecayingInstrument ? 12.0 : (decayTime * (isMuted ? 0.1 : 0.4)));
   if (dspProfile?.excitationDynamics.continuousReservoir?.articulationNeverSilences) {
@@ -160,7 +164,11 @@ export function buildVoiceContext(trackId: string, voiceIndex: number, voice: Vo
   const gateSignal = el.const({ key: `${pk}_gate`, value: voice.gate ?? 0 });
   const velSignal = el.const({ key: `${pk}_vel`, value: (voice.velocity ?? 0) * (1 - 0.58 * params.mute) });
   const glideSec = Math.max(0.005, Math.min(0.2, (params.bendGlideMs ?? 15) / 1000));
-  const freqSignal = el.smooth(el.tau2pole(glideSec), el.const({ key: `${pk}_freq`, value: freq }));
+  // Smooth bends relative to the note's starting pitch. A fresh smoother begins
+  // at zero; smoothing absolute Hz made every physical attack sweep up from DC.
+  const initialFreq = voice.baseFrequencyHz ?? freq;
+  const freqSignal = el.add(initialFreq, el.smooth(el.tau2pole(glideSec),
+    el.sub(el.const({ key: `${pk}_freq`, value: freq }), initialFreq)));
   const safeFreqSignal = el.max(el.const({ value: 20 }), freqSignal);
   const { velBoost, genreDialect, b, decayTime, model, dspProfile, action, articulation, isMuted, isDecayingInstrument, attack, release, sustain, envDecay } = resolveVoiceParameters(voice, params);
   const attackSignal = el.const({ key: `${pk}_attack`, value: attack });

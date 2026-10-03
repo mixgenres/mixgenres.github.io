@@ -109,7 +109,7 @@ function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: 
     // Harmony is voiced as a unit upstream. Replacing individual roots here
     // would duplicate inner voices and destroy an intentional chord/inversion.
     // Bass: structural roots remain roots; inner attacks can outline the harmony.
-    if (/bass/.test(role) && rootShare > 0.78 && pos > 0.16 && pos < 0.82 && i % 4 === 2) {
+    if (!n.authoredPitch && /bass/.test(role) && rootShare > 0.78 && pos > 0.16 && pos < 0.82 && i % 4 === 2) {
       const chord = sheet.measures[n.bar]?.chord, parsed = chord ? parseChord(chord) : undefined;
       if (parsed) { const candidate = nearestNonRootChordTone(n.midi, chordTonePcs(chord!), parsed.rootPc ?? 0); if (candidate !== n.midi && Math.abs(candidate - n.midi) <= 7) n.midi = candidate; }
     }
@@ -124,7 +124,7 @@ function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: 
     const count = Math.min(desiredTechniqueCount, landmarks.length);
     for (let k = 0; k < count; k++) {
       const desired = techniquePool[(k + Math.floor((phraseEnd - phraseStart) / 2)) % techniquePool.length];
-      if (desired) for (const note of attackGroups[landmarks[k]]) note.gestureCode = GESTURE_CODES[desired] ?? note.gestureCode;
+      if (desired) for (const note of attackGroups[landmarks[k]]) if (!note.authoredTechnique) note.gestureCode = GESTURE_CODES[desired] ?? note.gestureCode;
     }
   }
 
@@ -151,7 +151,7 @@ function ensureRegionTechnique(trackNotes: PerfNote[], profile: InstrumentPerfor
   if (usable.some(id => used.has(id))) return;
   const prefs = preferredGestureSet(profile, genre);
   const desired = usable.find(id => prefs.includes(id)) ?? usable[0];
-  const ordered = [...trackNotes].sort((a, b) => a.time - b.time);
+  const ordered = trackNotes.filter(note => !note.authoredTechnique).sort((a, b) => a.time - b.time);
   const target = ordered[Math.floor(ordered.length * 0.48)];
   if (target && GESTURE_CODES[desired] !== undefined) {
     for (const note of trackNotes) if (target.attackId ? note.attackId === target.attackId : note.bar === target.bar && note.time === target.time) note.gestureCode = GESTURE_CODES[desired];

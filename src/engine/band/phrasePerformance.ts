@@ -27,6 +27,7 @@ export interface PhraseState {
 }
 
 export interface PhraseContext {
+  authoredPitch?: import('../../data/schema').PatternEvent['pitch'];
   sheetWorldId: string;
   hostGenre: string;
   sourceGenre: string;
@@ -129,10 +130,11 @@ function approachPc(targetPc: number, currentPc: number, chromatic: boolean): nu
 
 function bassMidi(ctx: PhraseContext, index: number, total: number): number {
   const low = ctx.profile.capabilities.lowMidi;
-  const high = ctx.profile.capabilities.highMidi;
-  const center = ctx.profile.capabilities.comfortableLowMidi + 5;
-  const b = ctx.bassStyle ?? ctx.hybridTheory.bass.style ?? 'riff';
-  const root = rootPc(ctx.chord);
+  const high = Math.min(ctx.profile.capabilities.highMidi, /^(bass|low-anchor)$/.test(ctx.role) ? 60 : 127);
+  const center = Math.min(ctx.profile.capabilities.comfortableLowMidi + 5, 48);
+  const rawMotion = ctx.bassStyle ?? ctx.hybridTheory.bass.style ?? 'riff';
+  const b = rawMotion === 'root-fifth' ? 'rootFifth' : rawMotion;
+  const root = parseChord(ctx.chord).bassPc;
   const nextRoot = ctx.nextChord ? rootPc(ctx.nextChord) : root;
   const nextTarget = ctx.nextChord ? degreePc(ctx.nextChord, index % 2 === 0 ? 3 : 1, ctx.hybridTheory) : nextRoot;
   const r = nearestMidi(root, center, low, high);
@@ -202,7 +204,8 @@ function chordVoicing(ctx: PhraseContext, state: PhraseState): number[] {
   const tension = parsed.tensions?.map(x => (parsed.rootPc + x) % 12) ?? [];
   const voicing = ctx.hybridTheory.harmony.voicing;
   const poly = Math.max(1, ctx.profile.capabilities.polyphony);
-  const base = Math.max(ctx.profile.capabilities.lowMidi, Math.min(ctx.profile.capabilities.highMidi, ctx.profile.capabilities.comfortableLowMidi + (voicing === 'power' ? 4 : 10)));
+  const base = Math.max(ctx.profile.capabilities.lowMidi, Math.min(ctx.profile.capabilities.highMidi,
+    voiceProfile(ctx.profile.instrumentId).centre + (voicing === 'power' ? -12 : 0)));
   let pcs: number[];
   if (voicing === 'power') pcs = [parsed.rootPc, (parsed.rootPc + 7) % 12, parsed.rootPc];
   else if (voicing === 'guide-tone' || voicing === 'shell') pcs = [...guide, ...tension, ...tones];
@@ -226,8 +229,23 @@ function chordVoicing(ctx: PhraseContext, state: PhraseState): number[] {
 export function realizeMidi(ctx: PhraseContext, index: number, total: number, state: PhraseState): number[] {
   ctx = { ...ctx, statePreviousMidi: state.previousMidi };
   const d = ctx.profile.instrumentId.toLowerCase();
-  if (ctx.profile.family === 'membrane' || ctx.profile.family === 'kit' || ctx.profile.family === 'metal-wood-percussion' || ctx.profile.family === 'body-percussion' || voiceProfile(ctx.profile.instrumentId).role === 'perc') return [60];
-  if (!ctx.soloist && (voiceProfile(ctx.profile.instrumentId).role === 'bass' || d.includes('bass') || d === 'upright-bass' || d.includes('tuba'))) return [bassMidi(ctx, index, total)];
+  if (ctx.authoredPitch && !ctx.soloist) {
+    const pitch = ctx.authoredPitch;
+    if (pitch.voicing === 'chord') return chordVoicing(ctx, state);
+    const pc = ((pitch.semitoneOffset !== undefined ? rootPc(ctx.chord) + pitch.semitoneOffset
+      : degreePc(ctx.chord, pitch.degree ?? 1, ctx.hybridTheory)) + 120) % 12;
+    const root = rootPc(ctx.chord);
+    const rootMidi = nearestMidi(root, pitch.register ?? voiceProfile(ctx.profile.instrumentId).centre,
+      ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi);
+    const scaleLength = chordScalePcs(ctx.chord, ctx.hybridTheory).length;
+    const offset = pitch.semitoneOffset ?? (pc - root + 12) % 12 + 12 * Math.floor(((pitch.degree ?? 1) - 1) / scaleLength);
+    // Degree contours are relative to one root register. Picking every pitch
+    // nearest the same centre makes a descending 5–3–2–1 jump up at its tonic.
+    return [nearestMidi(pc, rootMidi + offset,
+      ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi)];
+  }
+  if (voiceProfile(ctx.profile.instrumentId).role === 'perc') return [60];
+  if (!ctx.soloist && (/^(bass|low-anchor)$/.test(ctx.role) || voiceProfile(ctx.profile.instrumentId).role === 'bass')) return [bassMidi(ctx, index, total)];
   const melodicRole = /^(lead|melody|counterline|voice)$/.test(ctx.role);
   if (!ctx.soloist && !melodicRole && (ctx.profile.family === 'keyboard' || ctx.profile.family === 'plucked-string' && ctx.profile.capabilities.polyphony > 1 || ctx.pattern.roles.includes('harmony') || /piano|organ|rhodes|guitar|bandoneon|accordion/.test(d))) return chordVoicing(ctx, state);
 
@@ -276,7 +294,9 @@ export function realizeMidi(ctx: PhraseContext, index: number, total: number, st
     pc = nextParsed.rootPc;
   }
   const target = state.previousMidi ?? (ctx.profile.capabilities.comfortableLowMidi + ctx.hostProfile.register.highBias * 18);
-  return [nearestMidi(pc, target + (ctx.phrasePosition > 0.72 ? 4 : 0), ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi)];
+  // Do not add four semitones to the register on every late-phrase attack:
+  // repeated answers otherwise climb to the instrument's ceiling.
+  return [nearestMidi(pc, target, ctx.profile.capabilities.comfortableLowMidi, ctx.profile.capabilities.comfortableHighMidi)];
 }
 
 export function shouldDevelopPhrase(ctx: PhraseContext): 'repeat' | 'variation' | 'answer' | 'fill' | 'rest' | 'cadence' {
@@ -293,6 +313,7 @@ export function shouldDevelopPhrase(ctx: PhraseContext): 'repeat' | 'variation' 
 export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?: string): string {
   const desired = authored?.trim();
   const allowed = (g: string) => Boolean(g && ctx.profile.gestures[g]);
+  if (desired && allowed(desired)) return desired;
   const hostPreferred = new Set(ctx.hostProfile.preferredGestures);
   const sourcePreferred = new Set(ctx.sourceProfile.preferredGestures);
   const text = `${ctx.pattern?.id ?? ''} ${ctx.pattern?.name ?? ''} ${ctx.regionStyleId ?? ''}`.toLowerCase();

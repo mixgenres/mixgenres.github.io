@@ -5,11 +5,11 @@ import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instru
 /**
  * BandoneonModule
  * 
- * Physical synthesis module modeling an authentic 142-tone Alfred Arnold (AA) bisonoric bandoneon:
- * - Dual zinc reed plates (dry 8' register + octave-lower 16' companion) delivering characteristic metallic bite
+ * Simplified reed synthesis for a 142-tone bisonoric bandoneon:
+ * - Dry 8' fundamental and 4' upper-octave reeds
  * - True bisonoric asymmetry between bellows opening (abrir/pull) and closing (cerrar/push)
  * - Knee-drop ("golpe de rodilla") impact transients on aggressive marcato downbeats
- * - Tango arrastre pitch & pressure scooping dynamics
+ * - Bellows pressure shaping; chromatic arrastre approaches belong in the score
  * - Resonant wooden air chamber and valve air-rush acoustic modeling
  */
 export default class BandoneonModule implements InstrumentModule {
@@ -77,32 +77,31 @@ export default class BandoneonModule implements InstrumentModule {
     // 3. Pitch Dynamics & Tango Arrastre (Pre-beat scooping drag)
     const isArrastre = action === 'arrastre' || /arrastre|drag/i.test(action ?? '');
     const isMarcato = action === 'marcato' || /marcato|en 4|marcado/i.test(action ?? '');
-    const isStaccato = action === 'staccato' || action === 'seco' || /staccato|seco/i.test(action ?? '');
     const isLegato = action === 'legato' || action === 'legato_squeeze' || /legato/i.test(action ?? '');
     const isPortato = action === 'portato';
     const isChapa = action === 'chapa' || /chapa|mute/i.test(action ?? '');
     const isTremolo = action === 'tremolo';
     const isBend = action === 'bend' || /bend|portamento/i.test(action ?? '');
 
-    // Arrastre starts ~2-3 semitones below and sweeps quickly into the fundamental with rising bellows pressure
+    // Arrastre is an approach figure and pressure swell. Chromatic approach
+    // notes belong in the score; a free reed does not slide three semitones.
     const arrastreEnv = el.adsr(0.001, 0.085, 0, 0.01, gateSignal);
     const arrastrePitchMod = isArrastre
-      ? el.sub(1.0, el.mul(el.const({ value: 0.16 }), arrastreEnv))
+      ? el.sub(1.0, el.mul(el.const({ value: 0.002 }), arrastreEnv))
       : el.const({ value: 1.0 });
 
     // Vibrato on sustained lyrical notes
-    const wantsVibrato = isLegato || (!isMarcato && !isStaccato && !isArrastre);
+    const wantsVibrato = action === 'vibrato' || isTremolo;
     const vibratoRate = 5.2 + randNorm(noteSeed ^ 0x51) * 0.12;
-    const vibratoDepthRatio = Math.pow(2, 28 / 1200) - 1; // 28 cents
     const vibratoOnsetEnv = el.adsr(isLegato ? 0.15 : 0.28, 0.05, 1.0, 0.04, gateSignal);
     const vibLfo = el.cycle(vibratoRate);
     const vibratoMod = wantsVibrato
-      ? el.add(1.0, el.mul(vibratoDepthRatio, el.mul(vibLfo, vibratoOnsetEnv)))
+      ? el.add(1.0, el.mul(0.055, el.mul(vibLfo, vibratoOnsetEnv)))
       : el.const({ value: 1.0 });
     const tremoloLfo = el.add(0.78, el.mul(0.22, el.add(1, el.cycle(8.5))));
     const tremoloMod = isTremolo ? tremoloLfo : el.const({ value: 1.0 });
     const bendEnv = isBend ? el.adsr(0.001, 0.14, 0, 0.02, gateSignal) : el.const({ value: 0 });
-    const bendRatio = isBend ? el.add(1, el.mul(-0.11, bendEnv)) : el.const({ value: 1.0 });
+    const bendRatio = isBend ? el.add(1, el.mul(-0.004, bendEnv)) : el.const({ value: 1.0 });
 
     const directionPitchCents = bellows
       ? (isClosing ? bellows.closing.pitchDriftCents : bellows.opening.pitchDriftCents)
@@ -110,22 +109,21 @@ export default class BandoneonModule implements InstrumentModule {
     const directionPitchRatio = Math.pow(2, directionPitchCents / 1200);
     const reedFreq = el.mul(
       freqSignal,
-      el.mul(arrastrePitchMod, el.mul(vibratoMod, el.mul(bendRatio, directionPitchRatio)))
+      el.mul(arrastrePitchMod, el.mul(bendRatio, directionPitchRatio))
     );
     const safeReedFreq = el.min(el.const({ value: 18000 }), el.max(el.const({ value: 20 }), reedFreq));
 
     // 4. Dual zinc reed generation. A 142-tone Rheinische/Doble-A bandoneon is
-    // two-chörig in octave tuning: the characteristic register is a middle reed
-    // plus its octave-lower companion, not an accordion-like 8'/4' combination.
+    // two-chörig in octave tuning: the written fundamental plus its octave above.
     // Keep the pair dry and beat-free; the octave relationship is a major part of
     // the instrument's recognizable compact, transparent spectrum.
-    const octaveLowerFreq = el.mul(safeReedFreq, 0.5);
+    const octaveUpperFreq = el.min(19000, el.mul(safeReedFreq, 2));
     const reed8 = el.blepsaw(safeReedFreq);
-    const reed16 = el.blepsaw(octaveLowerFreq);
+    const reed4 = el.blepsaw(octaveUpperFreq);
 
     const reedCore = el.add(
       el.mul(0.64, reed8),
-      el.mul(0.36, reed16)
+      el.mul(0.36, reed4)
     );
 
     // 5. Non-linear Zinc Reed Pressure Waveshaping (Self-Owned Excitation Saturation)
@@ -137,7 +135,7 @@ export default class BandoneonModule implements InstrumentModule {
     // Asymmetric soft-clipping characteristic of heavy zinc reeds
     const reedPressure = el.tanh(el.mul(el.add(1.0, el.mul(0.85, basePressure)), reedPressureRaw));
     const articulationDamp = isChapa ? 0.42 : isPortato ? 0.72 : 1.0;
-    const articulationPressure = el.mul(articulationDamp, tremoloMod);
+    const articulationPressure = el.mul(articulationDamp, el.mul(tremoloMod, vibratoMod));
 
     // 6. Resonant Wooden Air Chamber & Bisonoric Formants (Owned coupledResonators)
     let chamberAudio: AudioSignal;
@@ -172,7 +170,7 @@ export default class BandoneonModule implements InstrumentModule {
     const kneeData = dspProfile?.excitationDynamics?.kneeDropImpact;
     const kneeDecayMs = kneeData?.decayMs ?? 18;
     const kneeBaseGain = (kneeData?.gain ?? 0.9) * (kneeData?.saturation ?? 1.0);
-    const kneeAccentScale = isMarcato ? 1.0 : action === 'accent' ? 0.22 : 0;
+    const kneeAccentScale = isMarcato && (voice.velocity ?? 0) >= (kneeData?.threshold ?? .65) ? 0.16 : 0;
     const kneeEnv = el.adsr(0.0002, kneeDecayMs / 1000, 0, 0.004, gateSignal);
     const kneeThump = el.mul(el.cycle(68), kneeEnv);
     const kneeNoise = el.mul(el.highpass(1600 + b * 2000, 0.9, el.noise()), kneeEnv);

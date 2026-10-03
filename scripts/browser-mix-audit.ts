@@ -1,5 +1,6 @@
 import { makeSheet } from '../src/engine/sheet/sheet';
 import { compileWholeSong } from '../src/engine/band/arrangeBand';
+import { renderSongMix } from '../src/engine/playback/renderSongMix';
 import { renderPerformanceToAudio } from '../src/engine/playback/mp3Export';
 import type { RenderDiagnostic } from '../src/engine/studio/audioMetrics';
 import { measureAudio } from '../src/engine/studio/audioMetrics';
@@ -12,12 +13,13 @@ const button = document.querySelector<HTMLButtonElement>('#run')!;
 const status = document.querySelector<HTMLElement>('#status')!;
 const selection = document.querySelector<HTMLSelectElement>('#scope')!;
 const reportText = document.querySelector<HTMLElement>('#report')!;
+selection.add(new Option('All Tango styles', 'genre:tango'));
 for (const style of ALL_STYLES) selection.add(new Option(style.name, style.id));
 button.onclick = async () => {
   button.disabled = true; reportText.textContent = '';
   try {
     const meta = await fetch('/__audit/meta').then(r => r.json());
-    const styles = selectStyles(selection.value || undefined);
+    const styles = selection.value.startsWith('genre:') ? selectStyles(undefined, selection.value.slice(6)) : selectStyles(selection.value || undefined);
     const findings: { severity: string; code: string; scope: string; message: string }[] = [];
     const cases = [];
     const add = (code: string, scope: string, message: string) => findings.push({ severity: 'error', code, scope, message });
@@ -54,7 +56,17 @@ button.onclick = async () => {
             if (event.stage !== 'bus' && event.metrics.samplePeak < 1e-7) add('silent-pcm', scope, 'Audible part rendered silence');
           }
           if (!audio.buffer || audio.buffer.length !== audio.left.length) throw new Error('Native playback buffer is missing or truncated');
-          windows.push({ ...window, output: output.metrics, frames: audio.buffer.length });
+          const prepared = await renderSongMix(excerptPerformance(performance, window.start, 2), sheet, new AbortController().signal);
+          if (!prepared.buffer) throw new Error('Background playback bypassed the native master');
+          const preparedMetrics = measureAudio(prepared.left, prepared.right, prepared.sampleRate);
+          const levelDifferenceDb = Math.abs((preparedMetrics.rmsDbfs ?? -120) - (output.metrics.rmsDbfs ?? -120));
+          let sampleDifference = 0;
+          if (prepared.left.length !== audio.left.length) add('playback-length', `${style.id}/${window.name}`, 'Background playback has a different duration from export');
+          for (let n = 0; n < Math.min(prepared.left.length, audio.left.length); n++) sampleDifference = Math.max(sampleDifference,
+            Math.abs(prepared.left[n] - audio.left[n]), Math.abs(prepared.right[n] - audio.right[n]));
+          if (preparedMetrics.nonFiniteSamples || preparedMetrics.samplePeak < 1e-7) add('playback-pcm', `${style.id}/${window.name}`, 'Background mix is silent or invalid');
+          if (levelDifferenceDb > .5) add('playback-level', `${style.id}/${window.name}`, `Background mix differs from export by ${levelDifferenceDb.toFixed(2)} dB`);
+          windows.push({ ...window, output: output.metrics, prepared: preparedMetrics, levelDifferenceDb, sampleDifference, frames: audio.buffer.length });
         }
         cases.push({ styleId: style.id, mechanisms: styleMechanisms(style), windows });
       } catch (error) { add('browser-render', style.id, String(error)); }

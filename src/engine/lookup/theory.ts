@@ -191,7 +191,13 @@ export function styleTheoryFor(styleId: string | undefined, genreId: string): Ge
     const harmony = calibration.harmony;
     out.meter = style.preferredMeters[0] ?? out.meter;
     out.defaultScale = harmony.scales[0] ? scaleFromWords(harmony.scales[0]) : out.defaultScale;
-    out.chordScales = { major: out.defaultScale, minor: out.defaultScale, dominant: out.defaultScale };
+    // A song's pitch language does not turn a major chord into a minor chord.
+    // Keep third/seventh quality when deriving chord-relative notes. Modal
+    // and non-functional traditions retain their authored pitch collection.
+    out.chordScales = harmony.requiresChords === false || /maqam|raga|dastgah|pelog|slendro/i.test(harmony.pitchSystem)
+      ? { major: out.defaultScale, minor: out.defaultScale, dominant: out.defaultScale }
+      : { ...out.chordScales, major: 'ionian', minor: /harmonic.?minor/.test(out.defaultScale) ? 'harmonic-minor' : /dorian/.test(out.defaultScale) ? 'dorian' : 'aeolian', dominant: 'mixolydian' };
+    if (style.bassMotion) out.bass.style = (style.bassMotion === 'root-fifth' ? 'rootFifth' : style.bassMotion) as typeof out.bass.style;
     if (harmony.progressionExamples?.length) out.progressions = harmony.progressionExamples;
     else if (style.sectionProgressions) out.progressions = Object.values(style.sectionProgressions).filter((value): value is string[] => !!value);
     if (harmony.cadences.length) out.cadences = harmony.cadences.map(cadence => [cadence]);

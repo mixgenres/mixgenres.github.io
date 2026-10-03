@@ -21,7 +21,7 @@ export const dspOverride: InstrumentDSPOverride = {
       "knee-drop marcato (golpe de rodilla) with violent pressure burst",
       "abrir (opening bellows) weeping lyrical cantabile with wrist vibrato",
       "cerrar (closing bellows) compressed biting rhythmic articulation",
-      "arrastre pitch drag and pressure swell into the downbeat",
+      "arrastre chromatic approach figure and pressure swell into the downbeat",
       "staccato seco with instantaneous pallet choke",
       "bellows slap and wooden casing golpe"
     ]
@@ -173,7 +173,7 @@ export const dspOverride: InstrumentDSPOverride = {
       "opening": "Abrir: singing, lower pressure gradient, softer onset, slight chamber warmth (-2.4 cents sag on forte)",
       "closing": "Cerrar: sharp attack, compressed chamber, bright high-order harmonics (+2.1 cents push)",
       "kneeDropImpact": true,
-      "dryReedBanks": "two-chörig octave register (16-foot + 8-foot relative to written pitch); dry tuning without musette beating"
+      "dryReedBanks": "two-chörig octave register (8-foot fundamental + 4-foot upper octave); dry tuning without musette beating"
     }
   },
   "physicalDetails": {
@@ -186,7 +186,7 @@ export const dspOverride: InstrumentDSPOverride = {
       "Knee-drop marcato transient surge"
     ],
     "coupling": [
-      "16-foot and 8-foot inter-reed acoustic coupling",
+      "8-foot and 4-foot inter-reed acoustic coupling",
       "Reed-plate to hardwood block resonance transfer",
       "Bellows air reservoir compliance",
       "Acoustic wooden case radiation"
@@ -198,7 +198,7 @@ export const dspOverride: InstrumentDSPOverride = {
       "Knee-drop transient pulse"
     ],
     "detail": [
-      "Dry 16' and 8' octave-paired reed voices provide characteristic biting Argentine tango color",
+      "Dry 8' and 4' octave-paired reed voices provide characteristic biting Argentine tango color",
       "Zero musette beating gives pure harmonic punch",
       "Nonlinear pressure curve produces soaring harmonic brilliance under fortissimo"
     ],

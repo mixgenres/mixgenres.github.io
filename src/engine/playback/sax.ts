@@ -2,6 +2,7 @@ import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../sheet/random.ts';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { getFormantProfileForInstrument } from './elementaryEngine.ts';
+import { brassReleasePitch } from './brassPitch';
 
 export default class SaxModule implements InstrumentModule {
   id = 'sax';
@@ -26,16 +27,14 @@ export default class SaxModule implements InstrumentModule {
     const isGrowl = action === 'growl' || /growl|throat-growl/i.test(action ?? '');
     const isShake = action === 'shake' || /shake|lip-trill/i.test(action ?? '');
 
-    const scoopDepth = (isFall || isDoit) ? 0 : 0.04 * (0.5 + params.pressure * 0.5);
+    const scoopDepth = (isFall || isDoit) ? 0 : (action === 'scoop' ? .04 : .003) * (0.5 + params.pressure * 0.5);
     const scoopEnv = el.adsr(0.0003, 0.024, 0, 0.006, gateSignal);
     const scoopOffset = el.mul(scoopDepth, scoopEnv);
 
-    const fallGlide = isFall ? el.mul(el.const({ value: -0.18 }), el.sub(1.0, gateSignal)) : el.const({ value: 0 });
-    const doitGlide = isDoit ? el.mul(el.const({ value: 0.20 }), el.sub(1.0, gateSignal)) : el.const({ value: 0 });
     const shakeMod = isShake ? el.mul(el.cycle(7.8), el.mul(el.const({ value: 0.055 }), gateSignal)) : el.const({ value: 0 });
 
-    const pitchMod = el.add(el.sub(1.0, scoopOffset), el.add(fallGlide, el.add(doitGlide, shakeMod)));
-    const dynamicFreqSignal = el.mul(freqSignal, pitchMod);
+    const pitchMod = el.add(el.sub(1.0, scoopOffset), shakeMod);
+    const dynamicFreqSignal = el.mul(freqSignal, el.mul(pitchMod, brassReleasePitch(ctx)));
     const safeDynamicFreqSignal = el.min(el.const({ value: 19000 }), el.max(el.const({ value: 20 }), dynamicFreqSignal));
 
     let reedPulse: AudioSignal = el.add(

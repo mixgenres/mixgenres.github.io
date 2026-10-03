@@ -140,7 +140,9 @@ export function genreTechniquesForInstrument(
   const world = match?.world;
   const style = match?.style;
   if (world && style?.calibration) {
-    const scoped = Object.entries(style.calibration.techniques).flatMap(([_, techniques]) => techniques)
+    const authored = style.calibration.instrumentTechniques?.[id]
+      ?? Object.values(style.calibration.techniques).flat();
+    const scoped = authored
       .filter(term => !scope || !style.calibration?.techniqueScopes?.[term] || style.calibration.techniqueScopes[term]!.includes(scope));
     const wanted = scoped.map(value => value.toLowerCase());
     const capabilities = Array.from(new Set([

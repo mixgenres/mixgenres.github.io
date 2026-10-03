@@ -9,6 +9,7 @@ import { noteTags } from './ui/noteTags';
 import { WorldSheet, InstrumentSheet, PatternSheet, SectionSheet, SectionGenreSheet, TempoSheet, EnergySheet, DownloadSheet, StartOverModal, RandomizeSheet, ChordSheet } from './ui/sheets';
 import { StyleSheetModal } from './ui/StyleSheet';
 import { StyleInspector } from './ui/StyleInspector';
+import { PerformanceInspector } from './ui/PerformanceInspector';
 import { RoleIcon, RoleSettings } from './ui/RoleControl';
 import { supportsSolo, soloistAtBar } from './engine/sheet/solo';
 import { plateFor, applyPlate } from './ui/worlds';
@@ -32,6 +33,12 @@ import type { Performance } from './engine/band/performanceData';
 import { PATTERNS_BY_ID, cleanPatternName } from './data/genres';
 
 function loadInitialSong(): { song: SongSheet; isNew: boolean } {
+  const params = new URLSearchParams(window.location.search);
+  const genre = params.get('genre');
+  if (genre || params.get('score') === '1') {
+    try { return { song: createSheet(genre ?? 'tango', params.get('style') ?? undefined), isNew: false }; }
+    catch { /* An invalid review link falls back to the normal starter. */ }
+  }
   return { song: createSheet('tango'), isNew: true };
 }
 
@@ -54,6 +61,7 @@ export default function App() {
   const [isEditingPartTitle, setIsEditingPartTitle] = useState(false);
   const [sectionGenreOpen, setSectionGenreOpen] = useState(false);
   const [styleOpen, setStyleOpen] = useState(false);
+  const [scoreOpen, setScoreOpen] = useState(() => new URLSearchParams(window.location.search).get('score') === '1');
   const [showDevStyle, setShowDevStyle] = useState(() => {
     try {
       return typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('dev') === 'style';
@@ -448,6 +456,8 @@ export default function App() {
               </div>
             </button>
 
+            <button type="button" className="btn-pill cursor-pointer shrink-0" title="Inspect every note and audition individual instruments"
+              onClick={() => { playerRef.current?.pause(); setScoreOpen(true); }}>Score</button>
             {showDevStyle && (
               <button
                 type="button"
@@ -1243,6 +1253,7 @@ export default function App() {
         onPickStyle={handleSelectStyle}
       />
 
+      {scoreOpen && <PerformanceInspector song={song} onClose={() => setScoreOpen(false)} />}
       {showDevStyle && (
         <StyleInspector
           song={song}

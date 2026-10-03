@@ -1,3 +1,4 @@
+import type { PatternEvent } from '../../data/schema';
 export type TransitionType = 'fill' | 'turnaround' | 'drop-out' | 'arrastre' | 'corte';
 
 export interface TransitionEvent {
@@ -25,6 +26,7 @@ export function culturalCyclePosition(barIndex: number, cycleLength: number): nu
 }
 
 export interface NativeSlice {
+  pitches?: Array<PatternEvent['pitch']>;
   /** step indices within this bar, on the pattern's own grid */
   onsets: number[];
   accents: number[];
@@ -53,6 +55,7 @@ export function sliceBarNative(
   barInCycle: number,
   articulations?: string[],
   fractionalSteps?: number[],
+  pitches?: Array<PatternEvent['pitch']>,
 ): NativeSlice {
   const declared = Math.max(1, subdivisions || 16);
   const authoredMax = onsets.length ? Math.max(...onsets) : -1;
@@ -63,6 +66,7 @@ export function sliceBarNative(
   const stepsPerBar = Math.max(1, Math.round(total / cycleBars));
 
   const from = (barInCycle % cycleBars) * stepsPerBar;
+  const keepP: Array<PatternEvent['pitch']> = [];
   const keepO: number[] = [], keepA: number[] = [], keepV: number[] = [], keepD: number[] = [], keepM: number[] = [], keepH: string[] = [], keepT: string[] = [], keepF: number[] = [];
 
   onsets.forEach((o, i) => {
@@ -79,9 +83,10 @@ export function sliceBarNative(
     keepM.push(micro?.[i] ?? 0);
     keepH.push(hitTypes?.[i] ?? '');
     keepT.push(articulations?.[i] ?? '');
+    keepP.push(pitches?.[i]);
   });
 
-  return { onsets: keepO, accents: keepA, velocities: keepV, durations: keepD, microtiming: keepM, hitTypes: keepH, articulations: keepT, stepsPerBar, fractionalPositions: keepF, durationsAuthored: durations !== undefined };
+  return { onsets: keepO, accents: keepA, velocities: keepV, durations: keepD, microtiming: keepM, hitTypes: keepH, articulations: keepT, pitches: keepP, stepsPerBar, fractionalPositions: keepF, durationsAuthored: durations !== undefined };
 }
 
 /** Quarter-note beats in one bar of the given time signature. */

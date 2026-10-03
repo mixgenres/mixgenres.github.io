@@ -4,6 +4,8 @@ import { TANGO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
 import { el } from '@elemaudio/core';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { createDampedStringLoop, fbGainForDecay } from './instrumentLib_stringLoop.ts';
+import { resolveVoiceParameters } from './instrumentRegistry';
+import type { TrackParams } from './elementaryEngine';
 
 /**
  * UprightBassModule
@@ -21,6 +23,18 @@ import { createDampedStringLoop, fbGainForDecay } from './instrumentLib_stringLo
  */
 export default class UprightBassModule implements InstrumentModule {
   id = 'upright-bass';
+
+  releaseTailSeconds(params: TrackParams): number {
+    const physical = resolveVoiceParameters({ id: 'tail', note: 60, velocity: 1, gate: 0 }, params);
+    const response = TANGO_INSTRUMENT_RESPONSE.uprightBass;
+    const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const base = UPRIGHT_BASS_DECAY_RULES.find(rule => rule.pattern.test(physical.genreDialect.id))?.value ?? 0.55;
+    // fbGainForDecay already expresses T60, not an exponential time constant.
+    // Use the actual string-loop law instead of multiplying decayTime by four.
+    return isTango
+      ? response.decayBase + physical.decayTime * (response.decayTimeMultiplier + physical.b * response.brightnessMultiplier)
+      : base + physical.decayTime * (1.05 + physical.b * 1.25) * physical.genreDialect.decay;
+  }
 
   renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
@@ -45,7 +59,7 @@ export default class UprightBassModule implements InstrumentModule {
     const gd = ctx.genreDialect;
     const genre = gd.id;
     const isYumba = action === 'yumba' || /yumba/i.test(action ?? '');
-    const isArco = action === 'arco' || action === 'bow_drag' || isLija || params.bowPressure > 0.45;
+    const isArco = action === 'arco' || action === 'bow' || action === 'bow_drag' || isLija;
 
     // 2. Tambor (Wooden lower bout strike)
     if (isTambor) {

@@ -122,6 +122,7 @@ if (token.includes('samba') || token.includes('bossa')) return 0.50;
 return 0.35;
 }
 export interface VoiceState {
+noteDurationSeconds?: number;
 soundParams?: TrackParams;
 controllerKeys?: Array<'articulation' | 'brightness' | 'contact' | 'mute' | 'bowPressure' | 'bowVelocity' | 'bodyTap' | 'pluckPosition' | 'pressure' | 'resonance'>;
 note: number;
@@ -496,17 +497,19 @@ export function renderVoice(
 export function renderTrack(
 trackId: string,
 voices: VoiceState[],
-params: TrackParams
+params: TrackParams,
+active?: (voice: VoiceState) => boolean
 ): { left: Node; right: Node } {
-if (voices.length === 0) {
+const sounding = voices.map((voice, index) => ({ voice, index })).filter(({ voice }) => !active || active(voice));
+if (sounding.length === 0) {
 const zero = el.const({ value: 0 });
 return { left: zero, right: zero };
 }
-const voiceNodes = voices.map((v, idx) => renderVoice(trackId, idx, v, params));
+const voiceNodes = sounding.map(({ voice, index }) => renderVoice(trackId, index, voice, params));
 const leftVoices: Node[] = [];
 const rightVoices: Node[] = [];
 for (let i = 0; i < voiceNodes.length; i++) {
-  const componentPan = resolveInstrumentKitComponent(params.instrumentId ?? '', voices[i].note, voices[i].action)?.defaultPan ?? 0;
+  const componentPan = resolveInstrumentKitComponent(params.instrumentId ?? '', sounding[i].voice.note, sounding[i].voice.action)?.defaultPan ?? 0;
   const pan = Math.max(0, Math.min(1, params.pan + componentPan));
   leftVoices.push(el.mul(el.const({ value: Math.cos(pan * Math.PI * 0.5) }), voiceNodes[i]));
   rightVoices.push(el.mul(el.const({ value: Math.sin(pan * Math.PI * 0.5) }), voiceNodes[i]));

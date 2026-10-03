@@ -10,7 +10,7 @@ export const bandoneon: InstrumentDef = {
   elementaryModel: 10,
   makeupGain: 0.589,
   polyphony: 8,
-  note: "Authentic 142-tone AA (Alfred Arnold) Rheinische Tonlage bisonoric bandoneon: 38 right + 33 left buttons, each with separate Zug/Druck pitches, physical button mapping compiled at phrase level, dual zinc octave reed banks, resonant wooden air chamber, knee-drop marcato, and expressive arrastre drags",
+  note: "142-tone Rheinische Tonlage bisonoric bandoneon model: 38 right + 33 left buttons with separate Zug/Druck pitches, dry 8′/4′ octave reeds and bellows pressure shaping. Synthesis approximation, not a recorded Alfred Arnold instrument.",
   acousticProfile: {
     sustain: "sustained",
     role: "harmony",
@@ -53,18 +53,18 @@ export const bandoneon: InstrumentDef = {
     },
     arrastre: {
       preBeatOffsetMs: -85,
-      pitchDragSemitones: -3,
+      pitchDragSemitones: 0,
       pressureRamp: true,
       velocityGrowth: 2.2
     },
     bend: {
-      maxSemitones: 2,
+      maxSemitones: 0.08,
       speedMs: 140,
       curve: "s-curve"
     },
     vibrato: {
       rateHz: 5.2,
-      depthCents: 28,
+      depthCents: 0,
       onsetDelayMs: 250
     }
   },

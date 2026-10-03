@@ -77,6 +77,9 @@ const GENRES = [...Object.keys(WORLD_INSTRUMENT_HINTS), 'milonga'];
 
 function familyOf(d: InstrumentDef): PerformanceFamily {
   const f = d.family;
+  // The catalog groups pianos and accordions together for browsing. That is
+  // not their energy source: a piano must never acquire bellows phrasing.
+  if (f === 'bellows-and-keys' && !['accordion', 'bandoneon', 'concertina', 'harmonium'].includes(d.id)) return 'keyboard';
   if (/bellows|free-reed/.test(f)) return 'bellows';
   if (f === 'bowed') return 'bowed-string';
   if (/plucked|string/.test(f) || d.excitationType === 'plectrum' || d.excitationType === 'nail' || d.excitationType === 'fingerpad') return 'plucked-string';
@@ -355,4 +358,3 @@ export const INSTRUMENT_PERFORMANCE_PROFILES: Record<string, InstrumentPerforman
     } satisfies InstrumentPerformanceProfile];
   })
 );
-

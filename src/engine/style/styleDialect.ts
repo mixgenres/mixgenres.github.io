@@ -10,7 +10,7 @@ export function applyStyleDialect(style: SongStyle, _index?: number): SongStyle 
   const profile = profileForStyle(style.primaryGenre, style.name);
   // GenreStyleDefinition already carries the rhythm, form and personnel. Do not
   // invent a substitute dialect or progression from a style name/index.
-  if (!profile) return style;
+  if (!profile || style.calibration) return style;
   const theory = styleTheoryFor(style.id, style.primaryGenre);
   const base = profile;
   const rhythm = { ...(style.rhythm ?? {}) };

@@ -149,6 +149,8 @@ export interface PatternVariant {
  * in the pattern's own meter; fractional values support tuplets and pickup
  * gestures without forcing the pattern onto a fixed 16th-note grid. */
 export interface PatternEvent {
+  /** Chord-relative pitch; register anchors the root, degree retains octaves. */
+  pitch?: { degree?: number; semitoneOffset?: number; register?: number; voicing?: 'single' | 'chord' };
   position: number;
   duration?: number;
   kind?: 'attack' | 'rest' | 'tie' | 'sustain' | 'ghost' | 'accent' | 'ornament' | 'pickup' | 'fill';
@@ -224,6 +226,9 @@ export interface MusicalPattern {
 }
 
 export interface GenreStyleDefinition {
+  instrumentDialects?: Record<string, Partial<import('./styles/contracts').InstrumentDialect>>;
+  harmonyModel?: string;
+  bassMotion?: string;
   /** Authored playable scale identity; distinct from descriptive genre pitch labels. */
   scaleMode?: string;
   id: string;
@@ -252,10 +257,12 @@ export interface GenreStyleDefinition {
     key: string; label: string; kind: string; bars: number;
     intensity: 'low' | 'medium' | 'high' | 'peak';
     instruments: string[]; leadInstrumentId?: string; bpm?: number; tempoFeel?: string;
+    soloInstrumentId?: string; soloMode?: import('./styles/schema').SoloMode;
   }>;
 }
 
 export interface StyleCalibration {
+  instrumentTechniques?: Record<string, string[]>;
   roles: Record<string, { preferredInstruments: string[]; required?: boolean; register?: [number, number]; mixFunction?: string }>;
   techniques: Record<string, string[]>;
   techniqueScopes?: Partial<Record<string, Array<'note' | 'motif' | 'phrase' | 'section' | 'song'>>>;
@@ -375,6 +382,7 @@ export type LensDef = GenreWorld;
 export type PatternDef = MusicalPattern;
 
 export interface PatternPerformanceDetails {
+  pitches?: Array<PatternEvent['pitch']>;
   stepsPerBar: number;
   onsets: number[];
   accents: number[];

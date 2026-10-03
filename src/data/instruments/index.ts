@@ -300,6 +300,8 @@ export const INSTRUMENT_CATALOG: InstrumentDef[] = [
 // backed by the closest available model; callers never need to silently drop
 // a role or rewrite a genre's authored instrumentation.
 const instrumentAliases: Array<[string, string, string]> = [
+  ['suona','oboe','Chinese conical double-reed shawm; approximated with the double-reed physical model.'],
+  ['gaohu','erhu','Cantonese high-register bowed fiddle; approximated with the erhu physical model.'],
   ['ajaeng','cello','Korean bowed zither modeled from the low bowed-string profile.'],
   ['baglama','bouzouki','Long-necked saz-family lute, modeled from a plucked fretted lute.'],
   ['bajo-sexto','guitar','Mexican twelve-string bass-register guitar, modeled from guitar.'],

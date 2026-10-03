@@ -1,5 +1,6 @@
 import { el } from '@elemaudio/core';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
+import { STRUCK_MODES, UNMEASURED_BAR_MODES } from '../../data/sound/dsp/struckModes';
 
 export default class MarimbaModule implements InstrumentModule {
   id = 'marimba';
@@ -11,13 +12,13 @@ export default class MarimbaModule implements InstrumentModule {
       decayTime
     } = ctx;
 
-    const f0 = freqSignal;
-    const bar0 = el.mul(el.cycle(f0), el.adsr(0.0003, decayTime * 0.4, 0, 0.01, gateSignal));
-    const bar1 = el.mul(0.35, el.mul(el.cycle(el.mul(f0, 2.756)), el.adsr(0.0003, decayTime * 0.2, 0, 0.005, gateSignal)));
-    const bar2 = el.mul(0.15, el.mul(el.cycle(el.mul(f0, 5.404)), el.adsr(0.0003, decayTime * 0.1, 0, 0.002, gateSignal)));
-
-    const strike = el.mul(0.3, el.adsr(0.0002, 0.005, 0, 0.002, gateSignal));
-    
-    return el.add(strike, el.add(bar0, el.add(bar1, bar2)));
+    const profile = STRUCK_MODES[ctx.params.instrumentId ?? ''] ?? UNMEASURED_BAR_MODES;
+    const modes = profile.ratios.map((ratio, index) => el.mul(profile.gains[index],
+      el.mul(el.cycle(el.min(19000, el.mul(freqSignal, ratio))),
+        el.adsr(.0003, decayTime * profile.decays[index], 0, .03, gateSignal))));
+    // A mallet strike is a short noise impulse, not a unipolar DC step.
+    const strike = el.mul(profile.strike, el.mul(el.highpass(1800, .7, el.noise()),
+      el.adsr(.0002, .004, 0, .002, gateSignal)));
+    return modes.reduce((sum, mode) => el.add(sum, mode), strike);
   }
 }

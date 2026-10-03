@@ -40,6 +40,8 @@ export interface FormStepTemplate {
   /** When present, only these ensemble members play in this section. */
   instrumentIds?: string[];
   leadInstrumentId?: string;
+  soloInstrumentId?: string;
+  soloMode?: SoloMode;
   bpm?: number;
   tempoFeel?: string;
 }

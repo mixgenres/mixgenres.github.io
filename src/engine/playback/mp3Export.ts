@@ -14,6 +14,9 @@ import { measureAudio, type RenderDiagnostic } from '../studio/audioMetrics';
 import { FORM_BLUEPRINTS } from '../../data/genreForms';
 import { processOfflineAudioDSP } from '../studio/effects.ts';
 import { excerptMixTimeline } from '../studio/dynamicMix/MixAutomation';
+import { RenderQueue } from './renderQueue';
+import { loadBakedBank } from './bakedInstruments';
+import { renderBakedTrack } from './renderBakedTrack';
 import {
   renderTrack,
   determineBusCategory,
@@ -23,9 +26,16 @@ import {
 } from './elementaryEngine.ts';
 
 export interface Mp3RenderOptions {
+  /** Defaults to baked samples when available; physics remains an explicit reference. */
+  synthesisMode?: 'auto' | 'physical';
+  sampleBankBaseUrl?: string;
   selectedTrackIds?: string[];
+  /** Physical stems already rendered in workers, before any ensemble mastering. */
+  preparedStems?: Map<string, RenderedPerformanceAudio>;
   /** Render a short window of the performance timeline for incremental playback. */
   renderWindow?: { start: number; end: number };
+  /** Lower values run first. Evaluated again when a queued render is picked. */
+  renderPriority?: () => number;
   signal?: AbortSignal;
   format?: 'mp3' | 'wav';
   rawStem?: boolean;
@@ -71,19 +81,14 @@ export interface RenderedPerformanceAudio {
 
 // Serialize expensive renders so superseded edits and exports cannot allocate
 // several full-song graphs/buffers at once on memory-constrained devices.
-let renderQueue: Promise<unknown> = Promise.resolve();
-function enqueueRender<T>(run: () => Promise<T>): Promise<T> {
-  const result = renderQueue.then(run);
-  renderQueue = result.then(() => undefined, () => undefined);
-  return result;
-}
+const renderQueue = new RenderQueue();
 
 export function renderPerformanceToMp3(perf: Performance, options: Mp3RenderOptions, onProgress?: (fraction: number) => void): Promise<Blob> {
-  return enqueueRender(() => renderPerformance(perf, options, onProgress, false) as Promise<Blob>);
+  return renderQueue.enqueue(() => renderPerformance(perf, options, onProgress, false) as Promise<Blob>, options.renderPriority, options.signal);
 }
 
 export function renderPerformanceToAudio(perf: Performance, options: Mp3RenderOptions, onProgress?: (fraction: number) => void): Promise<RenderedPerformanceAudio> {
-  return enqueueRender(() => renderPerformance(perf, options, onProgress, true) as Promise<RenderedPerformanceAudio>);
+  return renderQueue.enqueue(() => renderPerformance(perf, options, onProgress, true) as Promise<RenderedPerformanceAudio>, options.renderPriority, options.signal);
 }
 
 async function renderPerformance(
@@ -93,27 +98,56 @@ async function renderPerformance(
   pcm = false,
 ): Promise<Blob | RenderedPerformanceAudio> {
   checkAbort(options.signal);
-  if (options.renderWindow) perf = performanceWindow(perf, options.renderWindow.start, options.renderWindow.end);
-  const sampleRate = 44100;
-  const decayTail = perf.notes.reduce((tail, note) => Math.max(tail, voiceTailSeconds(resolveTrackSound(
-    options.trackInstruments.get(note.trackId) ?? perf.trackInfo?.[note.trackId]?.instrumentId ?? note.trackId,
-    note.soundContext?.worldId ?? options.worldId ?? perf.worldId,
-    note.soundContext?.styleId ?? options.styleId,
-    note.soundContext?.role ?? options.trackRoles?.get(note.trackId) ?? perf.trackInfo?.[note.trackId]?.role))), 0);
-  const lastEnd = perf.notes.reduce((end, note) => Math.max(end, note.time + note.dur), perf.duration);
-  const duration = Math.max(1, perf.duration + (perf.tail ?? 3), lastEnd + decayTail);
-  const totalSamples = Math.ceil(duration * sampleRate);
   const selected = options.selectedTrackIds ? new Set(options.selectedTrackIds) : null;
   const hasSolo = options.mixState?.solo && Object.values(options.mixState.solo).some(Boolean);
-
-  const activeTrackIds = [...new Set(perf.notes.map(n => n.trackId))].filter(id => {
-    if (selected && !selected.has(id)) return false;
-    if (options.mixState) {
-      if (hasSolo && !options.mixState.solo?.[id]) return false;
-      if (options.mixState.muted?.[id]) return false;
+  const isActive = (id: string) => (!selected || selected.has(id)) &&
+    (!hasSolo || !!options.mixState?.solo?.[id]) && !options.mixState?.muted?.[id];
+  // Isolated playback parts must not pay for other parts' event scans, sound
+  // resolution or decay tails. Keep the ensemble mix timeline for its headroom.
+  perf = { ...perf, notes: perf.notes.filter(note => isActive(note.trackId)), ccs: perf.ccs.filter(cc => isActive(cc.trackId)) };
+  if (options.renderWindow) perf = performanceWindow(perf, options.renderWindow.start, options.renderWindow.end);
+  const sampleRate = 44100;
+  const lifetimeControls = new Map<string, { brightness?: number; mute?: number }>();
+  for (const cc of perf.ccs) {
+    if (cc.cc !== 74 && cc.cc !== 18) continue;
+    const bounds = lifetimeControls.get(cc.trackId) ?? {};
+    const value = Math.max(0, Math.min(1, cc.value / 127));
+    if (cc.cc === 74) bounds.brightness = Math.max(bounds.brightness ?? 0, value);
+    else bounds.mute = Math.min(bounds.mute ?? 1, value);
+    lifetimeControls.set(cc.trackId, bounds);
+  }
+  const tails = new WeakMap<PerfNote, number>();
+  const sounds = new Map<string, TrackParams>();
+  const noteTail = (note: PerfNote) => {
+    const existing = tails.get(note);
+    if (existing !== undefined) return existing;
+    const instrumentId = options.trackInstruments.get(note.trackId) ?? perf.trackInfo?.[note.trackId]?.instrumentId ?? note.trackId;
+    const worldId = note.soundContext?.worldId ?? options.worldId ?? perf.worldId;
+    const styleId = note.soundContext?.styleId ?? options.styleId;
+    const role = note.soundContext?.role ?? options.trackRoles?.get(note.trackId) ?? perf.trackInfo?.[note.trackId]?.role;
+    const key = JSON.stringify([instrumentId, worldId, styleId, role]);
+    let params = sounds.get(key);
+    if (!params) {
+      params = resolveTrackSound(instrumentId, worldId, styleId, role);
+      sounds.set(key, params);
     }
-    return true;
-  });
+    const prepared = prepareNoteVoice(note, params, worldId ?? '', styleId ?? '', role);
+    const lifetimeParams = { ...(prepared.soundParams ?? params) };
+    const controls = lifetimeControls.get(note.trackId);
+    // Controllers may brighten/unmute a ringing note after its attack. Budget
+    // their widest decay without replaying the entire CC list per note.
+    if (controls?.brightness !== undefined) lifetimeParams.brightness = Math.max(lifetimeParams.brightness, controls.brightness);
+    if (controls?.mute !== undefined) lifetimeParams.mute = Math.min(lifetimeParams.mute, controls.mute);
+    const tail = voiceTailSeconds(lifetimeParams, prepared);
+    tails.set(note, tail);
+    return tail;
+  };
+  // Match each note's end to its own lifetime, rather than adding the longest
+  // instrument tail to the latest note in an unrelated part.
+  const lastDecayEnd = perf.notes.reduce((end, note) => Math.max(end, note.time + note.dur + noteTail(note)), 0);
+  const duration = Math.max(1, perf.duration + (perf.tail ?? 3), lastDecayEnd);
+  const totalSamples = Math.ceil(duration * sampleRate);
+  const activeTrackIds = [...new Set(perf.notes.map(n => n.trackId))];
 
   if (!activeTrackIds.length && !options.rawStem) throw new Error('No audible notes in the selected tracks.');
   const notesByTrack = new Map<string, PerfNote[]>();
@@ -128,7 +162,7 @@ async function renderPerformance(
     if (!options.onDiagnostics) return;
     const metrics = measureAudio(left, right, sampleRate);
     options.onDiagnostics({ stage: 'output', id: 'master', metrics, browserMasterApplied, rawStem: !!options.rawStem,
-      encodingPeakTrim: options.format === 'wav' ? 1 : metrics.samplePeak > 0.965 ? 0.965 / metrics.samplePeak : 1 });
+      encodingPeakTrim: options.rawStem && options.format === 'wav' ? 1 : metrics.samplePeak > 0.965 ? 0.965 / metrics.samplePeak : 1 });
   };
 
   // Accumulate directly into Web Audio bus buffers, avoiding six full-song
@@ -187,21 +221,17 @@ async function renderPerformance(
 
       // Determine active time window for this track to avoid rendering silence
       let minNoteTime = Infinity;
-      let maxNoteEndTime = 0;
       for (const n of trackNotes) {
         if (n.time < minNoteTime) minNoteTime = n.time;
-        const end = n.time + n.dur;
-        if (end > maxNoteEndTime) maxNoteEndTime = end;
       }
 
-      const tailSec = trackNotes.reduce((tail, note) => Math.max(tail, note.soundContext ? voiceTailSeconds(resolveTrackSound(instrumentId,
-        note.soundContext.worldId, note.soundContext.styleId, note.soundContext.role)) : 0), voiceTailSeconds(params));
       const trackStartSample = Math.max(0, Math.floor(minNoteTime * sampleRate));
-      const trackEndSample = Math.min(totalSamples, Math.ceil((maxNoteEndTime + tailSec) * sampleRate));
+      const trackEndSample = Math.min(totalSamples, Math.ceil(trackNotes.reduce((end, note) => Math.max(end, note.time + note.dur + noteTail(note)), 0) * sampleRate));
       const trackSamples = trackEndSample - trackStartSample;
       if (trackSamples <= 0) continue;
 
       const trackCCs = ccsByTrack.get(trackId) ?? [];
+      const controllerNumbers = [...new Set(trackCCs.map(cc => cc.cc))];
 
       // Apply any initial CC values before track start
       for (const cc of trackCCs) {
@@ -222,12 +252,23 @@ async function renderPerformance(
         sampleRate,
       );
 
-      const cacheKey = `${stemFingerprint}:${trackStartSample}:${trackSamples}:v3`;
-      let stem = stemCache.get(cacheKey);
+      const bank = options.synthesisMode !== 'physical' && !options.preparedStems?.has(trackId)
+        ? await loadBakedBank(instrumentId, options.sampleBankBaseUrl) : undefined;
+      checkAbort(options.signal);
+      const cacheKey = `${stemFingerprint}:${trackStartSample}:${trackSamples}:v7:${bank?.manifest.sourceHash ?? 'physical'}:${bank?.manifest.playbackGain ?? 1}:${bank?.manifest.levelsVersion ?? 0}`;
+      const prepared = options.preparedStems?.get(trackId);
+      if (prepared && prepared.sampleRate !== sampleRate) throw new Error('Prepared stem sample rate does not match the mix.');
+      let stem = prepared ? { left: prepared.left, right: prepared.right, startSample: 0 } : stemCache.get(cacheKey);
+
+      if (!stem && bank) {
+        stem = await renderBakedTrack(bank, trackNotes, trackCCs, params, trackMixVolume, trackStartSample, trackSamples, options.signal);
+        if (stem) stemCache.set(cacheKey, stem);
+      }
 
       if (!stem) {
-        const voiceCount = requiredVoiceCount(trackNotes, tailSec);
+        const voiceCount = requiredVoiceCount(trackNotes, noteTail);
         const availableAt = new Map<VoiceState, number>();
+        const releaseTails = new Map<VoiceState, number>();
 
         const voices: VoiceState[] = [];
         for (let vIdx = 0; vIdx < voiceCount; vIdx++) {
@@ -287,7 +328,8 @@ async function renderPerformance(
           blockSize: BLOCK_SIZE,
         });
 
-        let currentSig = renderTrack(trackId, voices, params);
+        const sounding = new Set<VoiceState>();
+        let currentSig = renderTrack(trackId, voices, params, voice => sounding.has(voice));
         await core.render(currentSig.left, currentSig.right);
 
         const trackLeft = new Float32Array(trackSamples);
@@ -309,6 +351,12 @@ async function renderPerformance(
           }
           const nextBlockLimit = cursor + BLOCK_SIZE;
           let graphDirty = false;
+          for (const voice of sounding) {
+            if (voice.gate === 0 && (availableAt.get(voice) ?? Infinity) <= cursor) {
+              sounding.delete(voice);
+              graphDirty = true;
+            }
+          }
 
           while (eventIdx < trackEvents.length && trackEvents[eventIdx].sample < nextBlockLimit) {
             const event = trackEvents[eventIdx++];
@@ -338,16 +386,18 @@ async function renderPerformance(
               }
 
               const prepared = prepareNoteVoice(event.note, params, options.worldId ?? perf.worldId ?? '', options.styleId ?? '',
-                options.trackRoles?.get(trackId) ?? perf.trackInfo?.[trackId]?.role, trackCCs.map(cc => cc.cc));
+                options.trackRoles?.get(trackId) ?? perf.trackInfo?.[trackId]?.role, controllerNumbers);
               Object.assign(voice, prepared, { id: voice.id, noteInstanceId: event.noteInstanceId, gate: 1,
                 baseFrequencyHz: prepared.frequencyHz, triggerSeq: ++eventSeq });
               availableAt.set(voice, Infinity);
+              releaseTails.set(voice, noteTail(event.note));
+              sounding.add(voice);
 
               graphDirty = true;
             } else if (event.kind === 'off') {
               const activeVoices = voices.filter(v => v.noteInstanceId === event.noteInstanceId && v.gate === 1);
               for (const voice of activeVoices) {
-                availableAt.set(voice, event.sample + Math.ceil(tailSec * sampleRate));
+                availableAt.set(voice, event.sample + Math.ceil((releaseTails.get(voice) ?? voiceTailSeconds(params)) * sampleRate));
                 voice.gate = 0;
                 if (voice.baseFrequencyHz) {
                   voice.frequencyHz = voice.baseFrequencyHz;
@@ -384,7 +434,7 @@ async function renderPerformance(
           }
 
           if (graphDirty) {
-            currentSig = renderTrack(trackId, voices, params);
+            currentSig = renderTrack(trackId, voices, params, voice => sounding.has(voice));
             await core.render(currentSig.left, currentSig.right);
             syncCount++;
             if (syncCount % 64 === 0) {
@@ -398,7 +448,10 @@ async function renderPerformance(
           const nextEventBoundary = eventIdx < trackEvents.length
             ? Math.floor(trackEvents[eventIdx].sample / BLOCK_SIZE) * BLOCK_SIZE
             : trackSamples;
-          const frames = Math.min(BLOCK_SIZE * 128, trackSamples - cursor, Math.max(BLOCK_SIZE, nextEventBoundary - cursor));
+          const nextReleaseBoundary = [...sounding].reduce((end, voice) => voice.gate === 0
+            ? Math.min(end, Math.ceil((availableAt.get(voice) ?? Infinity) / BLOCK_SIZE) * BLOCK_SIZE) : end, trackSamples);
+          const frames = Math.min(BLOCK_SIZE * 128, trackSamples - cursor,
+            Math.max(BLOCK_SIZE, Math.min(nextEventBoundary, nextReleaseBoundary) - cursor));
           core.process([], [trackLeft.subarray(cursor, cursor + frames), trackRight.subarray(cursor, cursor + frames)]);
 
           cursor += frames;

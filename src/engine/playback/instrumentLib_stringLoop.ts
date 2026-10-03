@@ -28,7 +28,9 @@ export function createDampedStringLoop(
     ? el.const({ key: `${pKey}:dt`, value: delaySamples })
     : delaySamples;
   const clampedDelay = el.min(el.const({ value: 44000 }), el.max(el.const({ value: 1 }), rawDelay));
-  const safeDelay = el.smooth(el.tau2pole(0.003), clampedDelay);
+  // The note frequency already handles explicit glides. Starting another
+  // smoother at zero here excites the wrong string length on every new voice.
+  const safeDelay = clampedDelay;
 
   // Soften the initial burst to prevent raw metallic comb-filtering
   const dampedExcite = el.lowpass(dampingCutoffHz, dampingQ, excitation);

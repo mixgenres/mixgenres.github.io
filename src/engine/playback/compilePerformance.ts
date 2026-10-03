@@ -2,6 +2,10 @@ import { arrangeBand } from '../band/arrangeBand';
 import type { Performance } from '../band/performanceData';
 import type { Sheet } from '../sheet/sheet';
 
+// Reuse the loaded compiler/catalog between successful edits. Cancellation
+// still terminates active work, and concurrent players acquire separate workers.
+let idleCompilerWorker: Worker | undefined;
+
 /** Worker support/CSP failures fall back to the same compiler, never another score. */
 export async function compilePerformance(sheet: Sheet, signal: AbortSignal): Promise<Performance> {
   const cancelled = () => new DOMException('Compilation superseded', 'AbortError');
@@ -13,14 +17,22 @@ export async function compilePerformance(sheet: Sheet, signal: AbortSignal): Pro
   if (signal.aborted) throw cancelled();
   if (typeof Worker === 'undefined') return fallback();
   let worker: Worker;
-  try { worker = new Worker(new URL('./compositionWorker.ts', import.meta.url), { type: 'module' }); }
+  try {
+    worker = idleCompilerWorker ?? new Worker(new URL('./compositionWorker.ts', import.meta.url), { type: 'module' });
+    idleCompilerWorker = undefined;
+  }
   catch { return fallback(); }
   return new Promise((resolve, reject) => {
-    const cleanup = () => { signal.removeEventListener('abort', abort); worker.terminate(); };
+    const cleanup = (reuse = false) => {
+      signal.removeEventListener('abort', abort);
+      worker.onmessage = null; worker.onerror = null; worker.onmessageerror = null;
+      if (reuse && !idleCompilerWorker) idleCompilerWorker = worker;
+      else worker.terminate();
+    };
     const abort = () => { cleanup(); reject(cancelled()); };
     signal.addEventListener('abort', abort, { once: true });
     worker.onmessage = ({ data }: MessageEvent<{ performance?: Performance; error?: string }>) => {
-      cleanup();
+      cleanup(!signal.aborted);
       if (signal.aborted) reject(cancelled());
       else if (data.performance) resolve(data.performance);
       else reject(new Error(data.error ?? 'Compilation failed'));
