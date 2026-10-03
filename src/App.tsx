@@ -40,12 +40,8 @@ export default function App() {
   const [song, setSong] = useState<SongSheet>(initialData.song);
   const [playerState, setPlayerState] = useState<PlayerState>({ status: 'idle', progress: 0 });
   const playerStatus = playerState.composition === song ? playerState.status : 'compiling';
-  const playing = playerStatus === 'playing';
-  const audioLoading = ['compiling', 'rendering', 'starting'].includes(playerStatus);
-  const playbackLabel = playerStatus === 'compiling' ? 'Compiling arrangement…'
-    : playerStatus === 'rendering' ? `Preparing audio… ${Math.round(playerState.progress * 100)}%`
-      : playerStatus === 'starting' ? 'Starting audio…'
-        : playing ? 'Pause (Space)' : playerStatus === 'error' ? 'Retry playback (Space)' : 'Play (Space)';
+  const playing = playerStatus === 'playing' || playerStatus === 'starting';
+  const playbackLabel = playing ? 'Pause (Space)' : playerStatus === 'error' ? 'Retry playback (Space)' : 'Play (Space)';
   const [isBouncing, setIsBouncing] = useState(false);
   const [bounceProgress, setBounceProgress] = useState<number | null>(null);
   const [step, setStep] = useState(0);
@@ -471,20 +467,17 @@ export default function App() {
           <button
             onClick={() => { playerRef.current?.configure(songRef.current); playerRef.current?.toggle(); }}
             aria-label={playbackLabel}
-            aria-busy={audioLoading}
+            aria-busy={false}
             aria-pressed={playing}
             className="flex items-center justify-center transition-transform active:scale-95 rounded shrink-0 self-stretch cursor-pointer relative"
             style={{
               width: 52,
               background: 'var(--ink)',
               color: 'var(--ground)',
-              opacity: audioLoading ? 0.75 : 1,
             }}
-            title={audioLoading && playerStatus !== 'compiling' ? `${playbackLabel} — click to cancel` : playbackLabel}
+            title={playbackLabel}
           >
-            {audioLoading ? (
-              <div aria-hidden="true" className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-            ) : playing ? (
+            {playing ? (
               <PauseIcon size={18} />
             ) : (
               <PlayIcon size={18} />

@@ -9,9 +9,11 @@ import { measureEncodedAudio } from './lib/encodedAudio';
 import { reportMetadata, writeReport, summarizeFindings, printFindings, type Finding } from './lib/auditReport';
 
 const styleId = process.argv.find(a => a.startsWith('--style='))?.slice(8);
+const genreId = process.argv.find(a => a.startsWith('--genre='))?.slice(8);
 const encoded = process.argv.includes('--encoded'), save = process.argv.includes('--save'), details = process.argv.includes('--details');
 if (process.argv.includes('--all-styles')) throw new Error('Use --style=<id> for a focused render; catalog coverage is handled by npm run check.');
-const selection = selectStyles(styleId);
+if (styleId && genreId) throw new Error('Choose --style or --genre, not both.');
+const selection = selectStyles(styleId, genreId);
 const findings: Finding[] = [], cases: Array<Record<string, unknown>> = [];
 const add = (severity: Finding['severity'], code: string, scope: string, message: string) => findings.push({ severity, code, scope, message });
 for (const style of selection) {

@@ -44,11 +44,17 @@ export function styleMechanisms(style: typeof ALL_STYLES[number]) {
     `delay:${settings.delaySend > 0}`, `dynamic-mix:${resolved.resolvedMix.contract.enabled}`,
     `ducking:${settings.duckDepth > 0}`, `compressor:${settings.glue.ratio <= 2 ? 'gentle' : 'punchy'}`];
 }
-export function selectStyles(id?: string) {
+export function selectStyles(id?: string, genreId?: string) {
+  if (id && genreId) throw new Error('Choose a style or a genre, not both');
   if (id) {
     const style = ALL_STYLES.find(x => x.id === id);
     if (!style) throw new Error(`Unknown style ${id}`);
     return [style];
+  }
+  if (genreId) {
+    const styles = ALL_STYLES.filter(style => style.primaryGenre === genreId);
+    if (!styles.length) throw new Error(`Unknown genre or genre has no styles: ${genreId}`);
+    return styles;
   }
   return cover(ALL_STYLES, styleMechanisms);
 }

@@ -18,10 +18,11 @@ interface Segment { index: number; start: number; end: number }
 interface TrackOutput { gain: GainNode; pan: StereoPannerNode }
 
 /**
- * Playback renders short, isolated track segments. The opening segment is
- * prepared with the arrangement, then the scheduler asks for upcoming segments
- * only as playback approaches them. Offline instrument and master processing
- * remain in the shared renderer; Web Audio only schedules and sums ready clips.
+ * Playback renders two-bar, isolated track segments. The opening segment is
+ * warmed in the background with the arrangement, then the scheduler asks for
+ * upcoming segments only as playback approaches them. Offline instrument and
+ * master processing remain in the shared renderer; Web Audio only schedules
+ * and sums ready clips.
  */
 export class SongPlayer {
   private state: PlayerState = { status: 'idle', progress: 0 };
@@ -40,6 +41,7 @@ export class SongPlayer {
   private scheduled = new Set<string>();
   private anchorContextTime = 0;
   private anchorPosition = 0;
+  private transportStarted = false;
   private offset = 0;
   private raf?: number;
   private disposed = false;
@@ -87,23 +89,36 @@ export class SongPlayer {
     const revision = ++this.revision;
     ++this.playRequest;
     this.song = song;
-    if (!retainedChunks) { this.chunks.clear(); this.chunkJobs.clear(); }
+    // In-flight jobs captured the old AbortSignal even if their composition is
+    // still reusable. Keep completed buffers, but let the new revision restart
+    // any unfinished renders with its own signal.
+    this.chunkJobs.clear();
+    if (!retainedChunks) this.chunks.clear();
     this.updateTrackOutputs();
-    this.publish({ status: retainedPerformance ? 'rendering' : 'compiling', composition: song, progress: 0,
+    this.publish({ status: retainedPerformance ? 'ready' : 'compiling', composition: song, progress: 0,
       performance: retainedPerformance, error: undefined });
 
-    this.compiling = (retainedPerformance ? Promise.resolve(retainedPerformance) : compilePerformance(song, signal)).then(async performance => {
+    this.compiling = (retainedPerformance ? Promise.resolve(retainedPerformance) : compilePerformance(song, signal)).then(performance => {
       if (signal.aborted || revision !== this.revision || this.disposed) return;
       this.offset = Math.min(this.offset, Math.max(0, this.loopDuration(performance) - 1 / 44100));
-      this.publish({ status: 'rendering', progress: 0, performance });
+      this.publish({ status: 'ready', progress: 0, performance });
+      this.updateTrackOutputs();
       this.onPosition(this.offset);
-      await this.prepareOpening(performance, signal, revision);
-      if (signal.aborted || revision !== this.revision || this.disposed) return;
-      if (!this.wantsPlayback) this.publish({ status: 'ready', progress: 1 });
+      // Create the suspended output context ahead of the first click so opening
+      // clips can really be materialized as AudioBuffers during background warmup.
+      try { this.ensureContext(); } catch { /* Play surfaces browser capability errors. */ }
+      // Warm clips in the background; never hold the transport for all tracks.
+      void this.prepareOpening(performance, signal, revision).then(() => {
+        if (signal.aborted || revision !== this.revision || this.disposed) return;
+        if (!this.wantsPlayback) this.publish({ status: 'ready', progress: 1 });
+        const next = this.segmentAt(performance, 0).index + 1;
+        if (this.segment(performance, next)) void this.ensureSegment(performance, next, signal, revision).catch(() => {});
+      }).catch(error => {
+        // Background warming is opportunistic. Surface failures only when the
+        // user has asked to hear the arrangement; playback retries the part.
+        if (!signal.aborted && revision === this.revision && this.wantsPlayback) this.fail(error);
+      });
       if (this.wantsPlayback) void this.play();
-      // Keep one more short segment warm while the user is deciding to play.
-      const next = this.segmentAt(performance, 0).index + 1;
-      if (this.segment(performance, next)) void this.ensureSegment(performance, next, signal, revision).catch(() => {});
     }).catch(error => { if (!signal.aborted && revision === this.revision) this.fail(error); });
   }
 
@@ -166,8 +181,8 @@ export class SongPlayer {
     const bars = performance.bars;
     const loopEnd = this.loopDuration(performance);
     const segments: Segment[] = [];
-    for (let first = 0, index = 0; first < bars.length; first += 4, index++) {
-      const last = Math.min(first + 3, bars.length - 1);
+    for (let first = 0, index = 0; first < bars.length; first += 2, index++) {
+      const last = Math.min(first + 1, bars.length - 1);
       segments.push({ index, start: bars[first].start, end: last === bars.length - 1 ? loopEnd : bars[last].end });
     }
     if (!segments.length) segments.push({ index: 0, start: 0, end: loopEnd });
@@ -189,7 +204,7 @@ export class SongPlayer {
 
   private async prepareOpening(performance: Performance, signal: AbortSignal, revision: number) {
     const opening = this.segmentAt(performance, 0);
-    if (!opening || !this.audibleTrackIds(performance, opening).length) throw new Error('This arrangement has no audible parts.');
+    if (!opening || !this.audibleTrackIds(performance, opening).length) return;
     await this.ensureSegment(performance, opening.index, signal, revision, true);
   }
 
@@ -201,7 +216,7 @@ export class SongPlayer {
     let completed = 0;
     return Promise.all(ids.map(trackId => this.ensurePart(performance, segment, trackId, signal, revision).then(() => {
       completed++;
-      if (report && revision === this.revision) this.publish({ status: 'rendering', progress: completed / ids.length });
+      if (report && revision === this.revision) this.publish({ progress: completed / ids.length });
     }))).then(() => undefined);
   }
 
@@ -221,7 +236,10 @@ export class SongPlayer {
       // mute and solo remain live controls on the per-part Web Audio output.
       mixState: { volume: { [trackId]: 1 }, solo: { [trackId]: true } },
     }, fraction => {
-      if (revision === this.revision && this.wantsPlayback) this.publish({ status: 'rendering', progress: fraction });
+      if (revision === this.revision && this.wantsPlayback) this.publish({
+        ...(this.state.status === 'playing' || this.state.status === 'starting' ? {} : { status: 'rendering' }),
+        progress: fraction,
+      });
     }).then(audio => {
       checkAbort(signal);
       if (revision !== this.revision || this.disposed) throw new DOMException('Playback segment was superseded', 'AbortError');
@@ -255,9 +273,6 @@ export class SongPlayer {
       if (!this.current(request, revision)) return;
       const performance = this.state.performance;
       if (!performance?.notes.length) throw new Error('This arrangement has no audible notes.');
-      const segment = this.segmentAt(performance, this.offset);
-      await this.ensureSegment(performance, segment.index, this.abort!.signal, revision);
-      if (!this.current(request, revision)) return;
       if (this.ctx!.state !== 'running') throw new Error('Audio is suspended. Press Play to resume.');
       this.updateTrackOutputs();
       this.startSourcesAt(this.offset);
@@ -275,7 +290,8 @@ export class SongPlayer {
     this.haltSources();
     this.offset = position;
     this.anchorPosition = position;
-    this.anchorContextTime = this.ctx!.currentTime + 0.02;
+    this.anchorContextTime = 0;
+    this.transportStarted = false;
     this.scheduled.clear();
   }
 
@@ -283,31 +299,56 @@ export class SongPlayer {
     if (!this.wantsPlayback || !this.ctx || !this.state.performance) return;
     const performance = this.state.performance;
     const loopDuration = this.loopDuration(performance);
-    const absolutePosition = this.anchorPosition + Math.max(0, this.ctx.currentTime - this.anchorContextTime);
+    const absolutePosition = this.transportStarted
+      ? this.anchorPosition + Math.max(0, this.ctx.currentTime - this.anchorContextTime)
+      : this.offset;
     const currentCycle = Math.floor(absolutePosition / loopDuration);
     const localPosition = absolutePosition % loopDuration;
-    const horizon = localPosition + 12;
+    const horizon = localPosition + 8;
     const segments = this.segments(performance);
     for (let cycle = currentCycle; cycle <= currentCycle + 1; cycle++) {
       for (const segment of segments) {
         const cycleStart = cycle * loopDuration + segment.start;
         const cycleEnd = cycle * loopDuration + segment.end;
         if (cycleEnd <= absolutePosition || cycleStart > currentCycle * loopDuration + horizon) continue;
-        for (const trackId of this.audibleTrackIds(performance, segment)) {
+        const audibleTrackIds = this.audibleTrackIds(performance, segment);
+        if (!audibleTrackIds.length && !this.transportStarted && cycle === currentCycle &&
+            localPosition >= segment.start && localPosition < segment.end) {
+          // A deliberately silent opening (or a fully muted mix) needs no
+          // render gate; let the playhead advance through the silence.
+          this.anchorPosition = this.offset;
+          this.anchorContextTime = this.ctx.currentTime + 0.02;
+          this.transportStarted = true;
+        }
+        for (const trackId of audibleTrackIds) {
           const token = `${cycle}:${this.chunkKey(trackId, segment.index)}`;
           if (this.scheduled.has(token)) continue;
           const request = this.playRequest, revision = this.revision, signal = this.abort!.signal;
           void this.ensurePart(performance, segment, trackId, signal, revision).then(buffer => {
             if (!this.wantsPlayback || request !== this.playRequest || revision !== this.revision || !this.ctx) return;
             const now = this.ctx.currentTime;
-            const currentAbsolute = this.anchorPosition + Math.max(0, now - this.anchorContextTime);
+            // Hold the playhead at the requested position until at least one
+            // clip for the current segment is ready, then start cleanly at its
+            // beginning. This avoids skipping the opening while DSP warms up.
+            const requestedAbsolute = this.transportStarted
+              ? this.anchorPosition + Math.max(0, now - this.anchorContextTime)
+              : this.offset;
             const segmentAbsoluteStart = cycle * loopDuration + segment.start;
             const segmentAbsoluteEnd = cycle * loopDuration + segment.end;
+            if (!this.transportStarted) {
+              if (requestedAbsolute < segmentAbsoluteStart || requestedAbsolute >= segmentAbsoluteEnd) return;
+              this.anchorPosition = requestedAbsolute;
+              this.anchorContextTime = now + 0.02;
+              this.transportStarted = true;
+            }
+            const currentAbsolute = this.anchorPosition + Math.max(0, now - this.anchorContextTime);
             let localOffset = Math.max(0, currentAbsolute - segmentAbsoluteStart);
             let when = this.anchorContextTime + (segmentAbsoluteStart - this.anchorPosition);
             if (when < now + 0.01) when = now + 0.01;
             if (localOffset >= segment.end - segment.start) return;
-            const duration = Math.min(segmentAbsoluteEnd - Math.max(currentAbsolute, segmentAbsoluteStart), buffer.duration - localOffset);
+            // Keep the rendered release tail across chunk boundaries; limiting
+            // playback to the bar window creates audible hard cuts.
+            const duration = buffer.duration - localOffset;
             if (duration <= 0) return;
             const source = this.ctx!.createBufferSource();
             source.buffer = buffer;
@@ -326,6 +367,7 @@ export class SongPlayer {
 
   position(): number {
     if (!this.wantsPlayback || !this.ctx || !this.state.performance) return this.offset;
+    if (!this.transportStarted) return this.offset;
     const duration = this.loopDuration();
     return duration > 0 ? (this.anchorPosition + Math.max(0, this.ctx.currentTime - this.anchorContextTime)) % duration : 0;
   }
@@ -338,10 +380,7 @@ export class SongPlayer {
       this.startSourcesAt(this.offset);
       const request = ++this.playRequest;
       const revision = this.revision;
-      const segment = this.segmentAt(this.state.performance, this.offset);
-      void this.ensureSegment(this.state.performance, segment.index, this.abort!.signal, revision).then(() => {
-        if (this.current(request, revision)) { this.scheduleAhead(); this.animate(); }
-      }).catch(error => { if (this.current(request, revision)) this.fail(error); });
+      if (this.current(request, revision)) { this.scheduleAhead(); this.animate(); }
     }
     this.onPosition(this.offset);
   }
@@ -359,7 +398,7 @@ export class SongPlayer {
 
   private animate() {
     if (!this.wantsPlayback || this.disposed) return;
-    if (this.state.status === 'starting' && this.ctx!.currentTime >= this.anchorContextTime) {
+    if (this.state.status === 'starting' && this.transportStarted && this.ctx!.currentTime >= this.anchorContextTime) {
       this.publish({ status: 'playing', progress: 1, error: undefined });
     }
     this.offset = this.position();
