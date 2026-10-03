@@ -11,12 +11,10 @@ interface Job {
   reject: (error: unknown) => void;
   abort: () => void;
   worker?: Worker;
-  background?: boolean;
 }
 const pending: Job[] = [];
 const idle: Worker[] = [];
 let running = 0;
-let runningBackground = 0;
 let unavailable = false;
 const cancelled = () => new DOMException('Playback rendering superseded', 'AbortError');
 
@@ -31,13 +29,15 @@ export function renderPlaybackPart(performance: Performance, options: Mp3RenderO
     if (sections.length) {
       // Deduplicate assemblies while retaining only their expensive section
       // PCM, avoiding a second full-song copy in the same cache budget.
-      return preparePartAudio(`assembly:${key}`, options.signal, async signal => {
+      return preparePartAudio(`${options.sectionStems ? 'sections' : 'assembly'}:${key}`, options.signal, async signal => {
         let completed = 0;
         const audio = await Promise.all(sections.map(async section => {
           const result = await preparePartAudio(section.key, signal, sectionSignal =>
             renderUncachedPart(section.performance, { ...rawOptions, signal: sectionSignal }));
           onProgress?.(++completed/sections.length); return result;
         }));
+        if(options.sectionStems) return {sampleRate:44100,left:new Float32Array(0),right:new Float32Array(0),
+          sections:sections.map((section,index) => ({...audio[index],startSample:section.startSample}))};
         return assembleDSPSections(performance, sections, audio);
       }, false);
     }
@@ -45,6 +45,9 @@ export function renderPlaybackPart(performance: Performance, options: Mp3RenderO
   }
   return renderUncachedPart(performance, options);
 }
+
+/** Release idle WASM heaps before the native studio master allocates buffers. */
+export function releasePlaybackWorkers() { for(const worker of idle.splice(0)) worker.terminate(); }
 
 function renderUncachedPart(performance: Performance, options: Mp3RenderOptions): Promise<RenderedPerformanceAudio> {
   if (typeof Worker === 'undefined' || unavailable) return renderPerformanceToAudio(performance, options);
@@ -76,7 +79,6 @@ function finish(job: Job, reuse: boolean) {
   if (reuse) idle.push(worker); else worker.terminate();
   job.options.signal?.removeEventListener('abort', job.abort);
   running--;
-  if (job.background) runningBackground--;
   queueMicrotask(dispatch);
 }
 
@@ -87,12 +89,12 @@ function fallback(job: Job) {
 }
 
 function dispatch() {
-  // Keep a worker available for an urgent preview while long song stems render.
-  const concurrency = Math.max(2, Math.min(3, (navigator.hardwareConcurrency || 2) - 1));
+  // Every slot prepares UI-owned sections. Priorities reorder queued edits;
+  // no worker is reserved for the removed playback-time clip renderer.
+  const concurrency = Math.max(1, Math.min(3, (navigator.hardwareConcurrency || 2) - 1));
   while (pending.length && running < concurrency) {
     let next = -1;
     for (let i = 0; i < pending.length; i++) {
-      if (!unavailable && pending[i].priority() >= 2 && runningBackground >= concurrency - 1) continue;
       if (next < 0 || pending[i].priority() < pending[next].priority()) next = i;
     }
     if (next < 0) break;
@@ -106,8 +108,6 @@ function dispatch() {
     try {
       job.worker = idle.pop() ?? new Worker(new URL('./playbackRenderWorker.ts', import.meta.url), { type: 'module' });
       running++;
-      job.background = job.priority() >= 2;
-      if (job.background) runningBackground++;
       job.worker.onmessage = ({ data }: MessageEvent<{ audio?: RenderedPerformanceAudio; error?: string }>) => {
         finish(job, true);
         if (job.options.signal?.aborted) job.reject(cancelled());

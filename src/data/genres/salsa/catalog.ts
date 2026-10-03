@@ -9,12 +9,12 @@ export const GENRE_PACK: GenrePackInput = {
   "defaultStyle": "Salsa Dura",
   "meter": "4/4",
   "tempo": [96, 112],
-  "instruments": ["voice", "trumpet", "trombone", "piano", "tres", "bass", "congas", "bongos", "timbales", "claves", "maracas", "flute", "guiro", "violin", "tambora", "guira", "accordion", "cumbia-drum"],
+  "instruments": ["voice", "trumpet", "trombone", "piano", "tres", "bass", "congas", "bongos", "timbales", "claves", "cowbell", "maracas", "flute", "guiro", "violin", "tambora", "guira", "accordion", "cumbia-drum"],
   "roles": {
     "lead": ["voice", "trumpet", "trombone"],
     "harmony": ["piano", "tres"],
     "bass": ["bass"],
-    "percussion": ["congas", "bongos", "timbales", "claves"]
+    "percussion": ["congas", "bongos", "timbales", "claves", "cowbell"]
   },
   "pitchSystem": "12-tet",
   "scales": ["major"],
@@ -30,8 +30,8 @@ export const GENRE_PACK: GenrePackInput = {
       "id": "salsa-dura",
       "name": "Salsa Dura",
       "description": "Salsa Dura: salsa dura brass punches over son clave. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
-      "patterns": ["Aggressive dual trombone fanfare over thunderous campana bell and piano guajeo", "salsa dura brass punches over son clave", "hard 2-3/3-2 clave", "aggressive montuno", "trombone mambo"],
-      "techniques": ["montuno", "short-chord-stab", "open-tone", "slap", "roll", "scrape", "staccato", "brass stabs/falls", "strong cowbell", "dense percussion fills", "aggressive dual-trombone arrangements", "driving 3-2 / 2-3 son clave and bongo campana bell", "percussive piano guajeos", "gritty barrio storytelling", "fall", "accent", "legato", "vibrato", "tenuto", "campana", "guajeo", "open", "slap-tapao", "quinto-slap", "ghost"],
+      "patterns": ["Aggressive dual trombone fanfare over thunderous campana bell and piano guajeo", "salsa dura brass punches over son clave", "hard 2-3/3-2 clave", "aggressive montuno", "trombone mambo", "mambo horn blocks", "coro/pregón over the montuno", "campana bell enters for montuno and mambo sections"],
+      "techniques": ["montuno", "short-chord-stab", "open-tone", "slap", "roll", "scrape", "staccato", "brass stabs/falls", "strong cowbell", "dense percussion fills", "aggressive dual-trombone arrangements", "driving 3-2 / 2-3 son clave and bongo campana bell", "percussive piano guajeos", "gritty barrio storytelling", "fall", "accent", "legato", "vibrato", "tenuto", "campana", "guajeo", "open", "slap-tapao", "quinto-slap", "ghost", "cowbell open and damped strokes", "brass shakes, falls and doits", "vocal soneo and coro response"],
       "harmony": ["Dm7", "G7", "C6", "A7", "F", "dominant sevenths/ninths", "chromatic turnarounds", "modal vamp sections"],
       "meter": "4/4",
       "tempo": [96, 112],
@@ -40,7 +40,7 @@ export const GENRE_PACK: GenrePackInput = {
         "lead": ["voice", "trumpet", "trombone"],
         "harmony": ["piano", "tres"],
         "bass": ["bass"],
-        "percussion": ["congas", "bongos", "timbales", "claves"]
+        "percussion": ["congas", "bongos", "timbales", "claves", "cowbell"]
       },
       "progressions": {
         "intro": ["Dm", "A7", "Dm", "A7"],
@@ -93,7 +93,8 @@ export const GENRE_PACK: GenrePackInput = {
         "congas": ["open", "staccato", "slap", "slap-tapao", "quinto-slap", "accent", "ghost"],
         "bongos": ["open", "slap", "staccato", "accent", "ghost"],
         "timbales": ["open", "staccato", "roll", "accent"],
-        "claves": ["staccato", "open", "accent"]
+        "claves": ["staccato", "accent"],
+        "cowbell": ["open", "damped", "accent"]
       },
       "instrumentDialects": {
         "voice:lead": {

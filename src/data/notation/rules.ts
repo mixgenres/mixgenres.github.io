@@ -20,7 +20,7 @@ export const DRUM_STAFF: NonNullable<NotationRules['percussion']> = {
   bell: { step: 'F', octave: 5, notehead: 'diamond' },
 };
 export const GENRE_NOTATION_RULES: Record<string, Partial<NotationRules>> = {
-  flamenco: { views: ['staff', 'tablature', 'technique'], vocabulary: ['compás', 'falseta', 'rasgueado', 'alzapúa', 'picado', 'golpe', 'palmas', 'remate'] },
+  flamenco: { vocabulary: ['compás', 'falseta', 'rasgueado', 'alzapúa', 'picado', 'golpe', 'palmas', 'remate'] },
   tango: { vocabulary: ['marcato', 'arrastre', 'corte', 'yumba', 'bellows direction', 'arco', 'pizzicato'] },
 };
 export const INSTRUMENT_NOTATION_RULES: Record<string, Partial<NotationRules>> = {

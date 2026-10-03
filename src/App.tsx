@@ -30,6 +30,7 @@ import { FEELS } from './data/tempoFeels';
 import { ENERGY_LABELS } from './data/performance/energy';
 import { SongPlayer, type PlayerState } from './engine/playback/songPlayer';
 import type { Performance } from './engine/band/performanceData';
+import { preparedAudioStats } from './engine/cache/preparedAudio';
 import { PATTERNS_BY_ID, cleanPatternName } from './data/genres';
 
 function loadInitialSong(): { song: SongSheet; isNew: boolean } {
@@ -69,6 +70,7 @@ export default function App() {
       return false;
     }
   });
+  const [showDevAudio] = useState(() => new URLSearchParams(window.location.search).get('dev') === 'audio');
 
   const [pickedRegion, setPickedRegion] = useState<string | null>(null);
 
@@ -292,7 +294,7 @@ export default function App() {
       const st = Math.max(0, Math.min(15, Math.floor(frac * 16)));
       if (barRef.current !== i) { barRef.current = i; setBar(i); }
       if (stepRef.current !== st) { stepRef.current = st; setStep(st); }
-    });
+    }, showDevAudio);
     playerRef.current = player;
     player.configure(songRef.current);
     return () => {
@@ -495,6 +497,11 @@ export default function App() {
           </button>
 
           <span className="sr-only" role="status" aria-live="polite">{playbackLabel}</span>
+          {showDevAudio && <output aria-label="Playback diagnostics" className="text-xs self-center tabular-nums">
+            {playerStatus} · {Math.round(playerState.progress*100)}% · {playerRef.current?.preparedDuration.toFixed(1) ?? '0'}s prepared
+            {playerState.audioStartMs !== undefined && <> · click to signal {playerState.audioStartMs.toFixed(1)}ms · hardware latency {playerState.outputLatencyMs?.toFixed(1)}ms</>}
+            {' · '}{(preparedAudioStats().bytes/1024/1024).toFixed(1)} MB cached · {preparedAudioStats().hits} hits / {preparedAudioStats().misses} misses
+          </output>}
           {playerState.composition === song && playerState.error && <div role="alert" className="text-xs self-center">{playerState.error}</div>}
 
           {/* Scrubber & Section Structure Timeline */}

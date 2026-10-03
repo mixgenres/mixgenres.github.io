@@ -26,6 +26,7 @@ export interface StemCacheEntry {
   left: Float32Array;
   right: Float32Array;
   startSample: number;
+  buffer?: AudioBuffer;
 }
 
 /**

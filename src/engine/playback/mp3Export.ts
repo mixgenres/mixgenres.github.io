@@ -6,6 +6,7 @@ import { prepareNoteVoice, applyPhysicalController } from './performancePlan';
 import { checkAbort, encodeMp3, wavBlob, yieldToUI } from '../../export/audioEncoding';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { computeTrackStemFingerprint, stemCache } from '../cache/stemCache.ts';
+import type { StemCacheEntry } from '../cache/stemCache';
 import OfflineRenderer from '@elemaudio/offline-renderer';
 import type { Performance, PerfNote, PerfCC } from '../band/performanceData.ts';
 import { resolveTrackSound, resolveTrackGain } from './trackSound';
@@ -37,6 +38,8 @@ export interface Mp3RenderOptions {
   rawStem?: boolean;
   /** Main-thread section PCM owns reuse; workers need not retain a second copy. */
   cacheDSPStem?: boolean;
+  /** Mix preparation can consume cached sections without copying a whole part. */
+  sectionStems?: boolean;
   trackInstruments: Map<string, string>;
   trackRoles?: Map<string, string>;
   worldId?: string;
@@ -75,6 +78,7 @@ export interface RenderedPerformanceAudio {
   left: Float32Array;
   right: Float32Array;
   buffer?: AudioBuffer;
+  sections?: StemCacheEntry[];
 }
 
 // Serialize expensive renders so superseded edits and exports cannot allocate
@@ -420,35 +424,58 @@ async function renderPerformance(
         if (options.cacheDSPStem !== false) stemCache.set(cacheKey, stem);
       }
 
-      if (!options.rawStem || options.mixState) {
+      let chunks = prepared?.sections ?? [stem];
+      const applyBalance = !options.rawStem || !!options.mixState;
+      const pan = Math.max(0, Math.min(1, trackMixPan));
+      const gainL = applyBalance ? Math.cos(pan * Math.PI / 2) * Math.SQRT2 * trackMixVolume : 1;
+      const gainR = applyBalance ? Math.sin(pan * Math.PI / 2) * Math.SQRT2 * trackMixVolume : 1;
+      if (!masterContext && applyBalance) {
         // Equal-power balance of the centred physical stem. This preserves kit
         // spread and authored pan automation, and is identical for cached and
         // freshly synthesized stems. Never mutate shared cached arrays.
-        const pan = Math.max(0, Math.min(1, trackMixPan));
-        const gainL = Math.cos(pan * Math.PI / 2) * Math.SQRT2 * trackMixVolume;
-        const gainR = Math.sin(pan * Math.PI / 2) * Math.SQRT2 * trackMixVolume;
-        const left = new Float32Array(stem.left.length), right = new Float32Array(stem.right.length);
-        for (let i = 0; i < left.length; i++) { left[i] = stem.left[i] * gainL; right[i] = stem.right[i] * gainR; }
-        stem = { left, right, startSample: stem.startSample };
+        chunks = chunks.map(chunk => {
+          const left = new Float32Array(chunk.left.length), right = new Float32Array(chunk.right.length);
+          for (let i = 0; i < left.length; i++) { left[i] = chunk.left[i]*gainL; right[i] = chunk.right[i]*gainR; }
+          return {left,right,startSample:chunk.startSample};
+        });
       }
 
-      if (options.onDiagnostics) options.onDiagnostics({ stage: 'stem', id: trackId, instrumentId,
-        bus: determineBusCategory(instDef?.acousticProfile?.role, instrumentId),
-        metrics: measureAudio(stem.left, stem.right, sampleRate), trackLevel: trackMixVolume,
-        resolvedGain: resolveTrackGain(params, trackMixVolume, controllerGain.volume, controllerGain.expression) });
+      if (options.onDiagnostics) {
+        const left = new Float32Array(trackSamples), right = new Float32Array(trackSamples);
+        for (const chunk of chunks) for (let i=0;i<chunk.left.length;i++) {
+          const offset=chunk.startSample+i-trackStartSample;
+          if(offset>=0 && offset<trackSamples) {
+            left[offset]+=chunk.left[i]*(masterContext ? gainL : 1);
+            right[offset]+=chunk.right[i]*(masterContext ? gainR : 1);
+          }
+        }
+        options.onDiagnostics({ stage: 'stem', id: trackId, instrumentId,
+          bus: determineBusCategory(instDef?.acousticProfile?.role, instrumentId),
+          metrics: measureAudio(left,right,sampleRate), trackLevel: trackMixVolume,
+          resolvedGain: resolveTrackGain(params,trackMixVolume,controllerGain.volume,controllerGain.expression) });
+      }
 
       if (dynamicGraph && masterContext) {
-        const buffer = masterContext.createBuffer(2, stem.left.length, sampleRate);
-        buffer.getChannelData(0).set(stem.left); buffer.getChannelData(1).set(stem.right);
-        const source = masterContext.createBufferSource(); source.buffer = buffer;
-        source.connect(dynamicGraph.tracks.get(trackId)!.input);
-        source.start(stem.startSample / sampleRate);
+        // Keep cached sections intact. Native sources sum their complete tails
+        // into one continuous master, without a second full-part PCM copy.
+        const split=masterContext.createChannelSplitter(2), merge=masterContext.createChannelMerger(2);
+        const balanceL=masterContext.createGain(), balanceR=masterContext.createGain();
+        balanceL.gain.value=gainL; balanceR.gain.value=gainR;
+        split.connect(balanceL,0); split.connect(balanceR,1);
+        balanceL.connect(merge,0,0); balanceR.connect(merge,0,1);
+        merge.connect(dynamicGraph.tracks.get(trackId)!.input);
+        for(const chunk of chunks) {
+          const buffer=masterContext.createBuffer(2,chunk.left.length,sampleRate);
+          buffer.getChannelData(0).set(chunk.left); buffer.getChannelData(1).set(chunk.right);
+          const source=masterContext.createBufferSource(); source.buffer=buffer; source.connect(split);
+          source.start(chunk.startSample/sampleRate);
+        }
         onProgress?.(0.05 + ((tIdx + 1) / totalTracks) * .68);
         continue;
       }
       if (timeline && !masterContext) {
-        accumulatePortableMix(timeline, trackId, stem.left, stem.right, stem.startSample, sampleRate,
-          instBusL, instBusR, roomL, roomR, echoL, echoR);
+        for(const chunk of chunks) accumulatePortableMix(timeline,trackId,chunk.left,chunk.right,chunk.startSample,sampleRate,
+          instBusL,instBusR,roomL,roomR,echoL,echoR);
         onProgress?.(0.05 + ((tIdx + 1) / totalTracks) * .68);
         continue;
       }
@@ -468,11 +495,12 @@ async function renderPerformance(
         targetR = instBusR;
       }
 
-      const offset = stem.startSample;
-      const copyLen = Math.min(stem.left.length, Math.max(0, totalSamples - offset));
-      for (let i = 0; i < copyLen; i++) {
-        targetL[offset + i] += stem.left[i];
-        targetR[offset + i] += stem.right[i];
+      for(const chunk of chunks) {
+        const offset=chunk.startSample, copyLen=Math.min(chunk.left.length,Math.max(0,totalSamples-offset));
+        for(let i=0;i<copyLen;i++) {
+          targetL[offset+i]+=chunk.left[i]*(masterContext ? gainL : 1);
+          targetR[offset+i]+=chunk.right[i]*(masterContext ? gainR : 1);
+        }
       }
 
       if (onProgress) {

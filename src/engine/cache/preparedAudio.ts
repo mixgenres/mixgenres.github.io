@@ -6,6 +6,7 @@ import type { Mp3RenderOptions, RenderedPerformanceAudio } from '../playback/mp3
 
 /** Main-thread section PCM survives worker reassignment and mixer edits. */
 const audio = new PCMStemCache(192 * 1024 * 1024, 'preparedPartAudio'); registerCache(audio);
+const mixes = new PCMStemCache(32 * 1024 * 1024, 'preparedSongMix'); registerCache(mixes);
 const jobs = new Map<string, { promise: Promise<RenderedPerformanceAudio>; controller: AbortController; users: number }>();
 export function preparedAudioKey(performance: Performance, options: Mp3RenderOptions) {
   const ids = new Set(options.selectedTrackIds ?? options.trackInstruments.keys());
@@ -15,16 +16,16 @@ export function preparedAudioKey(performance: Performance, options: Mp3RenderOpt
     options.renderWindow ?? [performance.duration, performance.tail]]);
 }
 export function preparePartAudio(key: string, signal: AbortSignal | undefined,
-  render: (signal: AbortSignal) => Promise<RenderedPerformanceAudio>, retain = true): Promise<RenderedPerformanceAudio> {
+  render: (signal: AbortSignal) => Promise<RenderedPerformanceAudio>, retain = true, cache = audio): Promise<RenderedPerformanceAudio> {
   const cancelled = () => new DOMException('Audio preparation superseded', 'AbortError');
   if (signal?.aborted) return Promise.reject(cancelled());
-  const ready = retain ? audio.get(key) : undefined;
-  if (ready) return Promise.resolve({ sampleRate: 44100, left: ready.left, right: ready.right });
+  const ready = retain ? cache.get(key) : undefined;
+  if (ready) return Promise.resolve({ sampleRate: 44100, left: ready.left, right: ready.right, buffer: ready.buffer });
   let job = jobs.get(key);
   if (!job || job.controller.signal.aborted) {
     const controller = new AbortController();
     const created = { controller, users: 0, promise: Promise.resolve().then(() => render(controller.signal)).then(result => {
-      if (retain && !controller.signal.aborted) audio.set(key, { left: result.left, right: result.right, startSample: 0 });
+      if (retain && !controller.signal.aborted) cache.set(key, { left: result.left, right: result.right, startSample: 0, buffer: result.buffer });
       return result;
     }).finally(() => { if (jobs.get(key) === created) jobs.delete(key); }) };
     job = created; jobs.set(key, job);
@@ -39,4 +40,7 @@ export function preparePartAudio(key: string, signal: AbortSignal | undefined,
   });
 }
 export function preparedAudioStats() { return { ...audio.getStats(), bytes: audio.byteLength, pending: jobs.size }; }
-export function clearPreparedAudio() { for (const job of jobs.values()) job.controller.abort(); jobs.clear(); audio.clear(); }
+export function prepareSongMix(key: string, signal: AbortSignal | undefined,
+  render: (signal: AbortSignal) => Promise<RenderedPerformanceAudio>) { return preparePartAudio(`mix:${key}`,signal,render,true,mixes); }
+export function preparedMixStats() { return {...mixes.getStats(),bytes:mixes.byteLength}; }
+export function clearPreparedAudio() { for (const job of jobs.values()) job.controller.abort(); jobs.clear(); audio.clear(); mixes.clear(); }

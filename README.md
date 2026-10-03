@@ -81,7 +81,11 @@ npm run audit:catalog
 
 ## Sound metadata resolution
 
-Playback and export synthesize instruments from their physical DSP models at 44.1 kHz. Instrument definitions store model parameters and performance behavior. Workers render the requested music, and an in-memory stem cache reuses those results for playback and mixing. There is no downloadable instrument audio library or alternate sample playback backend.
+The engine has four explicit layers: written musician notation, band interpretation, instrument mechanics, and audio mixing. The **Score** panel displays each layer for every player and section, including exact fractional beats, rests, techniques, drum components and physical controls. See [the engine and cache design](docs/engine-pipeline.md) for the contracts, dependencies and current fidelity limits.
+
+Playback and export synthesize instruments from their DSP models at 44.1 kHz. Composition edits prepare notation, interpreted parts, physical controls and cached section audio. A section retains its complete holds and releases across boundaries; the browser mixes them into one continuous song buffer. Play, pause and seek consume that buffer without requesting synthesis. Fader/pan/mute/solo edits reuse physical audio. Concurrent players and exports share bounded caches: up to 192 MiB for DSP sections and 32 MiB for complete mixes. Initial synthesis can still be slow, and session caches reset on reload. There is no downloadable instrument audio library or alternate sample playback backend.
+
+For the complete Golden Age tango cache benchmark, run `node --import tsx scripts/benchmark-dsp-cache.ts`. Use `?genre=tango&style=tango-golden-age&dev=audio` in the app to measure click-to-output signal and inspect preparation/cache status. Hardware latency is reported separately. These checks establish playback integrity; they do not certify acoustic realism or equivalence to a historical performance.
 
 Live playback and MP3 export share `resolveTrackSound` and `resolveTrackGain`. Resolution starts with the catalog's physical model, applies the resolved instrument/style dialect once, and uses the track's assigned role for dialect variants and balance. Partial style dialects retain inherited techniques and physical fields. Authored DSP genre dialects take precedence over generic timbre treatment. Live envelope updates share the same sustain and envelope calculation as graph construction; volume and expression controllers multiply independently instead of replacing the assigned role or user level.
 

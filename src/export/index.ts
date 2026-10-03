@@ -1,7 +1,8 @@
 import { GESTURE_NAMES } from '../engine/band/gestures';
 import { renderPerformanceToMp3 } from '../engine/playback/mp3Export';
 import { renderPlaybackPart } from '../engine/playback/renderPlaybackPart';
-import { checkAbort, yieldToUI } from './audioEncoding';
+import { renderPreparedMix } from '../engine/playback/renderSongMix';
+import { checkAbort, yieldToUI, encodeMp3, wavBlob } from './audioEncoding';
 import { filename, selectedTracks, type ExportContext } from './model';
 import { midiBytes } from './midi';
 import { musicXml } from './musicxml';
@@ -23,6 +24,13 @@ async function audio(ctx: ExportContext, format: 'mp3' | 'wav', progress?: (frac
     // Explicit export selection is authoritative, including a currently muted part.
     mixState: { volume: Object.fromEntries(tracks.map(t => [t.id, t.volume])), pan: Object.fromEntries(tracks.filter(t => t.pan !== undefined).map(t => [t.id, t.pan!])) },
   };
+  if(!rawStem) {
+    const mixed=await renderPreparedMix(ctx.performance,options,signal ?? new AbortController().signal,() => 2,
+      fraction => progress?.(fraction*.85));
+    checkAbort(signal);
+    if(format==='wav') {progress?.(1);return wavBlob(mixed.left,mixed.right,mixed.sampleRate);}
+    return encodeMp3(mixed.left,mixed.right,mixed.sampleRate,fraction => progress?.(.85+fraction*.15),signal);
+  }
   const preparationProgress = new Map<string,number>();
   const preparedStems = new Map(await Promise.all(tracks.map(async track => {
     const part = await renderPlaybackPart(ctx.performance, { ...options, selectedTrackIds:[track.id], rawStem:true }, fraction => {

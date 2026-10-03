@@ -17,70 +17,29 @@ test('render queue promotes currently needed work and removes cancelled queued r
   assert.deepEqual(order, ['playback', 'background', 'export']);
 });
 
-test('unfinished playback clips schedule once and retain the requested opening position', async () => {
-  const player = new SongPlayer(() => {}, () => {}) as any;
-  const starts: Array<{ when: number; offset: number }> = [];
-  let resolveBuffer!: (buffer: any) => void;
-  const buffer = new Promise(resolve => { resolveBuffer = resolve; });
-  let renders = 0;
-  player.ctx = { currentTime: 0, createBufferSource: () => ({
-    connect() {}, disconnect() {}, start(when: number, offset: number) { starts.push({ when, offset }); },
-  }) };
-  player.output = {};
-  player.song = { tracks: [{ id: 'lead', role: 'lead' }] };
-  player.state.performance = { duration: 4, tail: 0, bars: [{ start: 0, end: 4 }],
-    notes: [{ time: 0, dur: 1, trackId: 'lead' }] };
-  player.abort = new AbortController();
-  player.wantsPlayback = true;
-  player.ensureSegment = () => { renders++; return buffer; };
-  for (let i = 0; i < 20; i++) {
-    player.ctx.currentTime = i * 0.2;
-    player.scheduleAhead();
-  }
-  assert.equal(renders, 2, 'one pending render subscription for each loop occurrence');
-  assert.equal(player.position(), 0, 'rendering time does not consume the opening');
-  resolveBuffer({ duration: 4.25 });
-  await buffer;
-  await Promise.resolve();
-  assert.equal(starts.length, 2, 'each loop clip starts once');
-  assert.equal(starts[0].offset, 0);
-  assert.ok(Math.abs(starts[0].when - 3.82) < 1e-6);
+test('seek during preparation retains the requested position without starting synthesis', async () => {
+  const fake = fakePlaybackContext(), player = new SongPlayer(() => {}, () => {}) as any;
+  player.ctx = fake.ctx; player.output = fake.output; player.ensureContext = () => {}; player.animate = () => {};
+  player.song = { tracks: [] }; player.state.performance = { duration: 4, tail: 0, notes: [{}] };
+  let ready!: () => void;
+  player.fullJob = new Promise<void>(resolve => { ready = resolve; });
+  const playing = player.play(); await new Promise(resolve => setImmediate(resolve));
+  fake.ctx.currentTime = 10; player.locate(2);
+  assert.equal(player.position(),2); assert.equal(fake.starts.length,0);
+  player.fullBuffer = { duration: 4 }; ready(); await playing;
+  assert.equal(fake.starts.length,1); assert.equal(fake.starts[0].offset,2);
 });
 
-test('a late mid-song segment resumes from its boundary without losing playback intent', async () => {
-  const player = new SongPlayer(() => {}, () => {}) as any;
-  const starts: Array<{ part: string; offset: number }> = [];
-  let stoppedSources = 0;
-  let finishNext!: (buffer: any) => void;
-  const next = new Promise(resolve => { finishNext = resolve; });
-  player.ctx = { currentTime: 0, createBufferSource: () => ({
-    buffer: undefined as any, connect() {}, disconnect() {}, stop() { stoppedSources++; },
-    start(_when: number, offset: number) { starts.push({ part: this.buffer.part, offset }); },
-  }) };
-  player.output = {};
-  player.song = { tracks: [{ id: 'lead', role: 'lead' }] };
-  player.state.performance = { duration: 4, tail: 0,
-    bars: [0, 1, 2, 3].map(start => ({ start, end: start + 1 })),
-    notes: [{ time: 0, dur: 4, trackId: 'lead' }] };
-  player.abort = new AbortController();
-  player.wantsPlayback = true;
-  player.ensureSegment = (_p: unknown, index: number) => index === 0
-    ? Promise.resolve({ duration: 2.2, part: 'opening' }) : next;
-  player.scheduleAhead();
-  await new Promise(resolve => setImmediate(resolve));
-  assert.equal(player.scheduledThrough, 2);
-  player.ctx.currentTime = 2.3;
-  player.advancePlayback();
-  assert.equal(player.position(), 2);
-  assert.equal(player.wantsPlayback, true);
-  assert.equal(stoppedSources, 0, 'sounding releases finish naturally while the next clip renders');
-  assert.equal(player.transportStarted, false);
-  finishNext({ duration: 2.2, part: 'next' });
-  await new Promise(resolve => setImmediate(resolve));
-  player.scheduleAhead();
-  await new Promise(resolve => setImmediate(resolve));
-  assert.equal(player.transportStarted, true);
-  assert.deepEqual(starts.find(start => start.part === 'next'), { part: 'next', offset: 0 });
+test('pause cancels a pending start and replay consumes the completed buffer', async () => {
+  const fake = fakePlaybackContext(), player = new SongPlayer(() => {}, () => {}) as any;
+  player.ctx = fake.ctx; player.output = fake.output; player.ensureContext = () => {}; player.animate = () => {};
+  player.song = { tracks: [] }; player.state.performance = { duration: 4, tail: 0, notes: [{}] };
+  let ready!: () => void;
+  player.fullJob = new Promise<void>(resolve => { ready = resolve; });
+  const playing = player.play(); await new Promise(resolve => setImmediate(resolve));
+  player.pause(); player.fullBuffer = { duration: 4 }; ready(); await playing;
+  assert.equal(fake.starts.length,0,'finished preparation must not override Pause');
+  await player.play(); assert.equal(fake.starts.length,1);
 });
 
 test('playback workers prioritize parts and stop superseded work', async () => {
@@ -146,10 +105,10 @@ test('the complete mix plays as one looping source and keeps the play position',
   assert.equal(fake.starts[0].buffer, player.fullBuffer);
   assert.equal(fake.starts[0].loop, true);
   assert.equal(fake.starts[0].offset, 7);
-  fake.ctx.currentTime = 3.02;
+  fake.ctx.currentTime = 3.005;
   assert.ok(Math.abs(player.position() - 10) < 1e-6);
-  player.scheduleAhead();
-  assert.equal(fake.starts.length, 1, 'no independent instrument sources are scheduled');
+  player.startFullMix();
+  assert.equal(fake.starts.length, 1, 'starting again cannot duplicate the prepared source');
 });
 
 test('an unchanged song warms the entire mix without waiting for Play; titles retain it', async () => {
@@ -160,7 +119,6 @@ test('an unchanged song warms the entire mix without waiting for Play; titles re
   player.ctx = fake.ctx; player.output = fake.output; player.state.performance = perf;
   player.compositionKey = JSON.stringify({ ...song, title: '', tracks: song.tracks.map(({ volume: _volume, ...track }: any) => track) });
   let backgroundRenders = 0;
-  player.prepareOpening = async () => {};
   player.prepareWholeSong = () => { backgroundRenders++; };
   player.configure(song);
   await player.compiling;

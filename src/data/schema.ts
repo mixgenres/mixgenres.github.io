@@ -284,7 +284,9 @@ export interface StyleCalibration {
     progressionExamples?: string[][];
     harmonicRhythm: string;
     cadences: string[];
+    cadenceTypes?: string[];
     bassChordInteraction: string;
+    bassNoteRules?: string[];
     requiresChords?: boolean;
     preferredVoicingTones?: [number, number];
     voicingTonesByRole?: Record<string, [number, number]>;

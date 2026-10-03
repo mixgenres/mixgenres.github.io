@@ -12,9 +12,10 @@ export interface PlayerState {
   performance?: Performance;
   composition?: Sheet;
   error?: string;
+  /** Optional development measurement at the player's output, before hardware latency. */
+  audioStartMs?: number;
+  outputLatencyMs?: number;
 }
-
-interface Segment { index: number; start: number; end: number }
 
 /** Prepare cached section physics and one complete mix on composition edits. */
 export class SongPlayer {
@@ -23,7 +24,6 @@ export class SongPlayer {
   private compositionKey = '';
   private renderKey = '';
   private abort?: AbortController;
-  private previewAbort?: AbortController;
   private revision = 0;
   private playRequest = 0;
   private wantsPlayback = false;
@@ -33,23 +33,21 @@ export class SongPlayer {
   private fullBuffer?: AudioBuffer;
   private fullPlaying = false;
   private fullJob?: Promise<void>;
-  private chunks = new Map<number, AudioBuffer>();
-  private chunkJobs = new Map<number, Promise<AudioBuffer>>();
   private sources = new Set<AudioBufferSourceNode>();
-  private scheduled = new Set<string>();
-  private segmentCache?: { performance: Performance; segments: Segment[] };
-  private lastScheduleTime = -Infinity;
   private anchorContextTime = 0;
   private anchorPosition = 0;
   private transportStarted = false;
-  private scheduledThrough = 0;
   private offset = 0;
   private raf?: number;
-  private schedulerTimer?: ReturnType<typeof setInterval>;
   private disposed = false;
   private compiling: Promise<void> = Promise.resolve();
+  private probe?: AnalyserNode;
+  private probeSamples = new Float32Array(256);
+  private playClickedAt = 0;
+  private waitingForSignal = false;
 
-  constructor(private readonly onState: (state: PlayerState) => void, private readonly onPosition: (seconds: number) => void) {}
+  constructor(private readonly onState: (state: PlayerState) => void, private readonly onPosition: (seconds: number) => void,
+    private readonly diagnostics = false) {}
 
   get snapshot(): PlayerState { return this.state; }
   get composition(): Sheet | undefined { return this.song; }
@@ -81,15 +79,11 @@ export class SongPlayer {
     this.offset = this.position();
     this.haltSources();
     this.abort?.abort();
-    this.previewAbort?.abort();
     this.abort = new AbortController();
-    this.previewAbort = new AbortController();
     const signal = this.abort.signal;
     const revision = ++this.revision;
     ++this.playRequest;
     this.song = song;
-    this.chunkJobs.clear();
-    this.chunks.clear();
     this.fullBuffer = undefined;
     this.fullPlaying = false;
     this.fullJob = undefined;
@@ -115,10 +109,13 @@ export class SongPlayer {
     if (!this.ctx || this.ctx.state === 'closed') {
       const Constructor = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
       if (!Constructor) throw new Error('This browser does not support audio playback.');
-      this.ctx = new Constructor({ latencyHint: 'playback' });
+      this.ctx = new Constructor({ latencyHint: 'interactive' });
       this.output = this.ctx.createGain();
       this.output.gain.value = 1;
-      this.output.connect(this.ctx.destination);
+      if (this.diagnostics) {
+        this.probe = this.ctx.createAnalyser(); this.probe.fftSize = 256;
+        this.output.connect(this.probe); this.probe.connect(this.ctx.destination);
+      } else this.output.connect(this.ctx.destination);
       this.ctx.onstatechange = () => {
         if (this.sources.size && this.ctx?.state !== 'running') {
           this.pause();
@@ -128,45 +125,8 @@ export class SongPlayer {
     }
   }
 
-  private segments(performance: Performance): Segment[] {
-    if (this.segmentCache?.performance === performance) return this.segmentCache.segments;
-    const bars = performance.bars;
-    const loopEnd = this.loopDuration(performance);
-    const segments: Segment[] = [];
-    for (let first = 0, index = 0; first < bars.length; first += 2, index++) {
-      const last = Math.min(first + 1, bars.length - 1);
-      segments.push({ index, start: bars[first].start, end: last === bars.length - 1 ? loopEnd : bars[last].end });
-    }
-    if (!segments.length) segments.push({ index: 0, start: 0, end: loopEnd });
-    this.segmentCache = { performance, segments };
-    return segments;
-  }
-
-  private segment(performance: Performance, index: number) { return this.segments(performance)[index]; }
-
   private loopDuration(performance = this.state.performance) {
-    return this.fullPlaying && this.fullBuffer ? this.fullBuffer.duration : Math.max(0.1, (performance?.duration ?? 0) + (performance?.tail ?? 0));
-  }
-
-  private ensureSegment(performance: Performance, index: number, signal: AbortSignal, revision: number): Promise<AudioBuffer> {
-    const cached = this.chunks.get(index);
-    if (cached) return Promise.resolve(cached);
-    const pending = this.chunkJobs.get(index);
-    if (pending) return pending;
-    const segment = this.segment(performance, index)!;
-    const renderSignal = this.previewAbort?.signal ?? signal;
-    const task = renderSongMix(performance, this.song!, renderSignal, segment, () => {
-      const position = this.position();
-      return this.wantsPlayback && position >= segment.start && position < segment.end ? 0 : 1;
-    }).then(audio => {
-      checkAbort(signal);
-      if (revision !== this.revision || this.disposed) throw new DOMException('Playback segment was superseded', 'AbortError');
-      const buffer = this.toAudioBuffer(audio);
-      this.chunks.set(index, buffer);
-      return buffer;
-    }).finally(() => { if (this.chunkJobs.get(index) === task) this.chunkJobs.delete(index); });
-    this.chunkJobs.set(index, task);
-    return task;
+    return this.fullBuffer?.duration ?? Math.max(0.1, (performance?.duration ?? 0) + (performance?.tail ?? 0));
   }
 
   private prepareWholeSong(performance: Performance, song: Sheet, signal: AbortSignal, revision: number) {
@@ -177,10 +137,7 @@ export class SongPlayer {
       checkAbort(signal);
       if (revision !== this.revision || this.disposed) return;
       this.fullBuffer = this.toAudioBuffer(audio);
-      if (this.wantsPlayback && this.ctx?.state === 'running') this.startFullMix();
-      else this.publish({ status: 'ready', progress: 1 });
-      this.previewAbort?.abort();
-      this.chunks.clear();
+      this.publish({ status: this.wantsPlayback ? 'starting' : 'ready', progress: 1 });
     }).catch(error => {
       if (!signal.aborted && revision === this.revision) this.fail(error);
     });
@@ -188,20 +145,18 @@ export class SongPlayer {
 
   private startFullMix() {
     if (!this.fullBuffer || !this.ctx || this.fullPlaying || !this.wantsPlayback) return;
-    const position = this.position() + (this.transportStarted ? .02 : 0);
-    const now = this.ctx.currentTime, when = now + .02;
+    const position = this.position();
+    const now = this.ctx.currentTime, when = now + .005;
     const oldSources = [...this.sources];
     const oldOutput = this.mixOutput;
     ++this.playRequest;
-    this.scheduled.clear();
     this.fullPlaying = true;
     this.anchorPosition = position;
     this.anchorContextTime = when;
     this.transportStarted = true;
-    this.scheduledThrough = Infinity;
     const gain = this.ctx.createGain();
     gain.gain.setValueAtTime(0, when);
-    gain.gain.linearRampToValueAtTime(1, when + .025);
+    gain.gain.linearRampToValueAtTime(1, when + .008);
     gain.connect(this.output!);
     this.mixOutput = gain;
     const source = this.ctx.createBufferSource();
@@ -211,15 +166,16 @@ export class SongPlayer {
     source.onended = () => { this.sources.delete(source); source.disconnect(); };
     this.sources.add(source);
     source.start(when, position % this.fullBuffer.duration);
+    this.waitingForSignal = this.diagnostics;
     if (oldOutput) {
       oldOutput.gain.cancelScheduledValues(now);
       oldOutput.gain.setValueAtTime(1, when);
-      oldOutput.gain.linearRampToValueAtTime(0, when + .025);
+      oldOutput.gain.linearRampToValueAtTime(0, when + .008);
     }
     if (!oldSources.length) oldOutput?.disconnect();
     for (const old of oldSources) {
       old.onended = () => { this.sources.delete(old); old.disconnect(); if (!oldSources.some(item => this.sources.has(item))) oldOutput?.disconnect(); };
-      try { old.stop(when + .03); } catch { /* already ended */ }
+      try { old.stop(when + .01); } catch { /* already ended */ }
     }
     this.publish({ status: 'playing', progress: 1, error: undefined });
   }
@@ -235,13 +191,14 @@ export class SongPlayer {
   /** Called directly from click/keyboard handlers so resume retains user activation. */
   async play(): Promise<void> {
     if (this.disposed || !this.song || this.state.status === 'playing') return;
+    if (!this.wantsPlayback) this.playClickedAt = performance.now();
     this.wantsPlayback = true;
     const request = ++this.playRequest;
     const revision = this.revision;
     // Acknowledge the click immediately, even while AudioContext resume or the
     // arrangement compile is pending. The control becomes Pause at once and a
     // second click can cancel this queued start.
-    this.publish({ status: 'starting', error: undefined });
+    this.publish({ status: 'starting', error: undefined, audioStartMs: undefined });
     try {
       this.ensureContext();
       const resumed = this.ctx!.state === 'running' ? Promise.resolve() : this.ctx!.resume();
@@ -252,10 +209,10 @@ export class SongPlayer {
       const performance = this.state.performance;
       if (!performance?.notes.length) throw new Error('This arrangement has no audible notes.');
       if (this.ctx!.state !== 'running') throw new Error('Audio is suspended. Press Play to resume.');
-      if (this.fullJob && !this.fullBuffer) throw new Error(this.state.error ?? 'Audio preparation did not complete.');
+      if (!this.fullBuffer) throw new Error(this.state.error ?? 'Audio preparation did not complete.');
       this.startSourcesAt(this.offset);
       this.publish({ status: 'starting', progress: 1, error: undefined });
-      if (this.fullBuffer) this.startFullMix(); else this.scheduleAhead();
+      this.startFullMix();
       this.animate();
     } catch (error) { if (this.current(request, revision)) this.fail(error); }
   }
@@ -264,109 +221,19 @@ export class SongPlayer {
     return !this.disposed && this.wantsPlayback && request === this.playRequest && revision === this.revision;
   }
 
-  private startSourcesAt(position: number, preserveTimers = false) {
-    // On a buffer underrun, already played notes can finish their natural
-    // release while the transport waits for the next clip.
-    if (!preserveTimers) {
-      this.haltSources();
-      this.mixOutput = this.ctx?.createGain();
-      this.mixOutput?.connect(this.output!);
-      this.fullPlaying = false;
-    }
+  private startSourcesAt(position: number) {
+    this.haltSources();
     this.offset = position;
     this.anchorPosition = position;
     this.anchorContextTime = 0;
     this.transportStarted = false;
-    this.scheduledThrough = position;
-    this.lastScheduleTime = -Infinity;
-    this.scheduled.clear();
-  }
-
-  private advancePlayback() {
-    if (!this.wantsPlayback || !this.ctx || !this.state.performance || !this.transportStarted || this.fullPlaying) return;
-    const absolute = this.anchorPosition + Math.max(0, this.ctx.currentTime - this.anchorContextTime);
-    if (absolute <= this.scheduledThrough) return;
-    const boundary = this.scheduledThrough;
-    // Never consume a segment that has not rendered. Retire the old schedule,
-    // retain playback intent, and automatically resume at this exact boundary.
-    ++this.playRequest;
-    this.startSourcesAt(boundary % this.loopDuration(), true);
-    this.publish({ status: 'starting' });
-  }
-
-  private scheduleAhead() {
-    if (!this.wantsPlayback || !this.ctx || !this.state.performance || this.fullPlaying) return;
-    if (this.fullBuffer) { this.startFullMix(); return; }
-    if (this.ctx.currentTime - this.lastScheduleTime < 0.1) return;
-    this.lastScheduleTime = this.ctx.currentTime;
-    const performance = this.state.performance;
-    const loopDuration = this.loopDuration(performance);
-    const absolutePosition = this.transportStarted
-      ? this.anchorPosition + Math.max(0, this.ctx.currentTime - this.anchorContextTime) : this.offset;
-    const currentCycle = Math.floor(absolutePosition / loopDuration);
-    const horizon = absolutePosition + 8;
-    for (let cycle = currentCycle; cycle <= currentCycle + 1; cycle++) {
-      for (const segment of this.segments(performance)) {
-        const segmentStart = cycle * loopDuration + segment.start;
-        const segmentEnd = cycle * loopDuration + segment.end;
-        if (segmentEnd <= absolutePosition || segmentStart > horizon) continue;
-        const token = `${cycle}:${segment.index}`;
-        if (this.scheduled.has(token)) continue;
-        // Reserve the whole ensemble before awaiting any render. A pending job
-        // receives one completion callback, and all parts enter together.
-        this.scheduled.add(token);
-        const request = this.playRequest, revision = this.revision, signal = this.abort!.signal;
-        void this.ensureSegment(performance, segment.index, signal, revision).then(buffer => {
-          if (!this.current(request, revision) || !this.ctx) return;
-          this.advancePlayback();
-          if (!this.current(request, revision)) return;
-          const now = this.ctx.currentTime;
-          const currentAbsolute = this.transportStarted
-            ? this.anchorPosition + Math.max(0, now - this.anchorContextTime) : this.offset;
-          // Ready future clips wait for any earlier missing segment. Do not
-          // schedule them against a clock that may need to stop and re-anchor.
-          if (segmentStart > this.scheduledThrough + 1e-6) {
-            this.scheduled.delete(token);
-            return;
-          }
-          if (!this.transportStarted) {
-            if (currentAbsolute < segmentStart || currentAbsolute >= segmentEnd) {
-              this.scheduled.delete(token);
-              return;
-            }
-            this.anchorPosition = currentAbsolute;
-            this.anchorContextTime = now + 0.02;
-            this.transportStarted = true;
-          }
-          const localOffset = Math.max(0, currentAbsolute - segmentStart);
-          if (localOffset >= segment.end - segment.start) {
-            this.scheduled.delete(token);
-            this.advancePlayback();
-            return;
-          }
-          const when = Math.max(now + 0.01, this.anchorContextTime + segmentStart - this.anchorPosition);
-          const duration = Math.min(buffer.duration, segment.end - segment.start) - localOffset;
-          if (duration > 0) {
-            const source = this.ctx.createBufferSource();
-            source.buffer = buffer;
-            source.connect(this.mixOutput ?? this.output!);
-            source.onended = () => { this.sources.delete(source); source.disconnect(); };
-            this.sources.add(source);
-            source.start(when, localOffset, duration);
-          }
-          this.scheduledThrough = Math.max(this.scheduledThrough, segmentEnd);
-        }).catch(error => {
-          if (this.current(request, revision) && !(error instanceof DOMException && error.name === 'AbortError')) this.fail(error);
-        });
-      }
-    }
   }
 
   position(): number {
     if (!this.wantsPlayback || !this.ctx || !this.state.performance) return this.offset;
     if (!this.transportStarted) return this.offset;
     const duration = this.loopDuration();
-    const absolute = Math.min(this.scheduledThrough, this.anchorPosition + Math.max(0, this.ctx.currentTime - this.anchorContextTime));
+    const absolute = this.anchorPosition + Math.max(0, this.ctx.currentTime - this.anchorContextTime);
     return duration > 0 ? absolute % duration : 0;
   }
 
@@ -374,11 +241,11 @@ export class SongPlayer {
     if (!Number.isFinite(seconds)) return;
     const duration = this.loopDuration();
     this.offset = Math.max(0, Math.min(Math.max(0, duration - 1 / 44100), seconds));
-    if (this.wantsPlayback && this.state.performance) {
+    if (this.wantsPlayback && this.state.performance && this.fullBuffer) {
       this.startSourcesAt(this.offset);
       const request = ++this.playRequest;
       const revision = this.revision;
-      if (this.current(request, revision)) { if (this.fullBuffer) this.startFullMix(); else this.scheduleAhead(); this.animate(); }
+      if (this.current(request, revision)) { this.startFullMix(); this.animate(); }
     }
     this.onPosition(this.offset);
   }
@@ -396,27 +263,25 @@ export class SongPlayer {
 
   private animate() {
     if (!this.wantsPlayback || this.disposed) return;
-    if (this.schedulerTimer === undefined) this.schedulerTimer = setInterval(() => {
-      this.advancePlayback();
-      this.scheduleAhead();
-    }, 100);
-    this.advancePlayback();
+    if (this.waitingForSignal && this.probe) {
+      this.probe.getFloatTimeDomainData(this.probeSamples);
+      if (this.probeSamples.some(sample => Math.abs(sample) > 1e-5)) {
+        this.waitingForSignal = false;
+        this.publish({ audioStartMs: performance.now()-this.playClickedAt,
+          outputLatencyMs: (this.ctx!.outputLatency ?? this.ctx!.baseLatency ?? 0)*1000 });
+      }
+    }
     if (this.state.status === 'starting' && this.transportStarted && this.ctx!.currentTime >= this.anchorContextTime) {
       this.publish({ status: 'playing', progress: 1, error: undefined });
     }
     this.offset = this.position();
     this.onPosition(this.offset);
-    this.scheduleAhead();
     this.raf = requestAnimationFrame(() => this.animate());
   }
 
-  private haltSources(preserveTimers = false) {
-    if (!preserveTimers) {
-      if (this.schedulerTimer !== undefined) clearInterval(this.schedulerTimer);
-      this.schedulerTimer = undefined;
-      if (this.raf !== undefined) cancelAnimationFrame(this.raf);
-      this.raf = undefined;
-    }
+  private haltSources() {
+    if (this.raf !== undefined) cancelAnimationFrame(this.raf);
+    this.raf = undefined;
     for (const source of this.sources) {
       source.onended = () => source.disconnect();
       try { source.stop(); } catch { /* source already ended */ }
@@ -426,7 +291,7 @@ export class SongPlayer {
     this.mixOutput?.disconnect();
     this.mixOutput = undefined;
     this.fullPlaying = false;
-    this.scheduled.clear();
+    this.waitingForSignal = false;
   }
 
   private fail(error: unknown) {
@@ -440,12 +305,10 @@ export class SongPlayer {
     this.wantsPlayback = false;
     ++this.revision; ++this.playRequest;
     this.abort?.abort();
-    this.previewAbort?.abort();
     this.haltSources();
     if (this.ctx) { this.ctx.onstatechange = null; void this.ctx.close().catch(() => {}); }
     this.output?.disconnect();
+    this.probe?.disconnect();
     this.fullBuffer = undefined;
-    this.chunks.clear();
-    this.chunkJobs.clear();
   }
 }
