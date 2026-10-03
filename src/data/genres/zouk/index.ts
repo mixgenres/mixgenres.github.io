@@ -1,14 +1,5 @@
-import type { GenreWorld } from '../../schema';
-import { ZOUK_WORLD_WORLD, ZOUK_WORLD_CULTURE, ZOUK_WORLD_ROLES, ZOUK_WORLD_FEEL } from './identity';
-import { ZOUK_WORLD_STYLES } from './styles';
-import { ZOUK_WORLD_PATTERNS } from './patterns';
+import { createGenreWorld } from '../_shared/genrePack';
+import { GENRE_PACK } from './catalog';
 
-export const ZOUK_WORLD: GenreWorld = {
-  ...ZOUK_WORLD_WORLD,
-  ...ZOUK_WORLD_CULTURE,
-  ...ZOUK_WORLD_ROLES,
-  ...ZOUK_WORLD_FEEL,
-  ...ZOUK_WORLD_STYLES,
-  ...ZOUK_WORLD_PATTERNS,
-  homeStyleId: 'zouk-zouk-love',
-} as GenreWorld;
+export const GENRE_WORLD = createGenreWorld(GENRE_PACK);
+export const ZoukGenre = GENRE_WORLD;

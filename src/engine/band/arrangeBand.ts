@@ -155,6 +155,7 @@ interface PatternPerformanceDetails {
   durations?: number[];
   hitTypes?: string[];
   microtiming?: number[];
+  fractionalPositions?: number[];
   durationsAuthored?: boolean;
 }
 
@@ -177,9 +178,11 @@ function rhythmIdeaFromMeasure(detail: NonNullable<Measure['patternDetailsByTrac
   const nativeVelocities = Array.isArray(perf?.velocities) ? perf.velocities : [];
   const nativeDurations = Array.isArray(perf?.durations) ? perf.durations : [];
   const nativeHitTypes = Array.isArray(perf?.hitTypes) ? perf.hitTypes : [];
+  const fractionalPositions = Array.isArray(perf?.fractionalPositions) ? perf.fractionalPositions : [];
   const nativeSteps = Math.max(1, Number(perf?.stepsPerBar ?? 16));
   const onsets = nativeOnsets.map((position: number, i: number) => ({
-    position: (position + Number(p.anticipationOffset ?? 0)) / nativeSteps,
+    position: (fractionalPositions[i] !== undefined ? fractionalPositions[i] * nativeSteps : position) / nativeSteps
+      + Number(p.anticipationOffset ?? 0) / nativeSteps,
     accent: clamp(Number(nativeAccents[i] ?? detail.accentProfile?.[i] ?? 0.72)),
     velocity: clamp(Number(nativeVelocities[i] ?? p.velocityProfile?.[i] ?? nativeAccents[i] ?? detail.accentProfile?.[i] ?? 0.72)),
     duration: Math.max(0.001, Number(nativeDurations[i] ?? detail.durationGrid?.[i] ?? 1) / nativeSteps * beatsPerBar),

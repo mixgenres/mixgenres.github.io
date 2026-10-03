@@ -1,17 +1,5 @@
-import type { GenreWorld } from '../../schema';
-import { FLAMENCO_WORLD_WORLD, FLAMENCO_WORLD_CULTURE, FLAMENCO_WORLD_ROLES, FLAMENCO_WORLD_FEEL, FLAMENCO_WORLD_HARMONY } from './identity';
-import { FLAMENCO_WORLD_STYLES } from './styles';
-import { FLAMENCO_WORLD_PATTERNS } from './patterns';
+import { createGenreWorld } from '../_shared/genrePack';
+import { GENRE_PACK } from './catalog';
 
-export const FLAMENCO_WORLD: GenreWorld = {
-  ...FLAMENCO_WORLD_WORLD,
-  ...FLAMENCO_WORLD_CULTURE,
-  ...FLAMENCO_WORLD_ROLES,
-  ...FLAMENCO_WORLD_FEEL,
-  ...FLAMENCO_WORLD_HARMONY,
-  ...FLAMENCO_WORLD_STYLES,
-  ...FLAMENCO_WORLD_PATTERNS,
-  homeStyleId: 'flamenco-solea-style',
-} as GenreWorld;
-
-export const FlamencoGenre = FLAMENCO_WORLD;
+export const GENRE_WORLD = createGenreWorld(GENRE_PACK);
+export const FlamencoGenre = GENRE_WORLD;

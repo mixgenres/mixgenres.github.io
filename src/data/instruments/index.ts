@@ -295,6 +295,50 @@ export const INSTRUMENT_CATALOG: InstrumentDef[] = [
   melodica,
 ];
 
+// Genre packs may name regional instruments more precisely than the shared
+// physical model catalog. Give every such name a real, resolvable definition
+// backed by the closest available model; callers never need to silently drop
+// a role or rewrite a genre's authored instrumentation.
+const instrumentAliases: Array<[string, string, string]> = [
+  ['ajaeng','cello','Korean bowed zither modeled from the low bowed-string profile.'],
+  ['baglama','bouzouki','Long-necked saz-family lute, modeled from a plucked fretted lute.'],
+  ['bajo-sexto','guitar','Mexican twelve-string bass-register guitar, modeled from guitar.'],
+  ['biwa','pipa','Japanese short-necked lute, modeled from the pipa profile.'],
+  ['bonang','gamelan-metallophone','Gamelan kettle-gong row, modeled from the gamelan metallophone profile.'],
+  ['buk','janggu','Korean barrel drum, modeled from the janggu drum profile.'],
+  ['dholak','tabla','Double-headed folk drum, modeled from the tabla percussion profile.'],
+  ['dombra','mandolin','Central Asian long-necked plucked lute, modeled from a bright plucked-string profile.'],
+  ['drum-kit','drums','Drum kit alias for the canonical kit model.'],
+  ['frame-drum','tambourine','Frame drum, modeled from the frame-percussion profile.'],
+  ['guembri','bass','Gnawa low plucked lute, modeled from the bass-string profile.'],
+  ['kebero','djembe','Ethiopian double-headed drum, modeled from the hand-drum profile.'],
+  ['khomus','kalimba','Jaw harp, modeled from a plucked resonator profile.'],
+  ['krar','kora','Ethiopian lyre, modeled from a plucked African harp profile.'],
+  ['masenqo','violin','Ethiopian one-string bowed fiddle, modeled from the bowed-string profile.'],
+  ['morin-khuur','cello','Mongolian horsehead fiddle, modeled from the low bowed-string profile.'],
+  ['mridangam','tabla','Carnatic double-headed drum, modeled from the tabla profile.'],
+  ['pakhawaj','tabla','North Indian barrel drum, modeled from the tabla profile.'],
+  ['qraqeb','castanets','Gnawa iron castanets, modeled from the castanet articulation profile.'],
+  ['rebab','violin','Regional bowed rebab, modeled from the bowed-string profile.'],
+  ['riq','tambourine','Arabic frame drum with jingles, modeled from tambourine.'],
+  ['rudra-veena','sitar','Rudra veena, modeled from the sitar plucked-string profile.'],
+  ['sabar','djembe','Senegalese sabar drum, modeled from a hand-drum profile.'],
+  ['santur','dulcimer','Persian struck zither, modeled from the dulcimer profile.'],
+  ['setar','sitar','Persian long-necked lute, modeled from the sitar profile.'],
+  ['siku','pan-flute','Andean panpipe, modeled from the pan flute profile.'],
+  ['synth-bass','synth','Synth bass alias for the canonical synthesizer model.'],
+  ['tar','oud','Persian tar lute, modeled from an oud plucked-string profile.'],
+  ['timpani','drums','Orchestral timpani, modeled from the pitched drum profile.'],
+  ['tombak','darbuka','Persian goblet drum, modeled from the darbuka percussion profile.'],
+  ['veena','sitar','Indian veena, modeled from the sitar plucked-string profile.'],
+  ['zurna','oboe','Loud double-reed zurna, modeled from the oboe wind profile.'],
+];
+for (const [id, sourceId, note] of instrumentAliases) {
+  const source = INSTRUMENT_CATALOG.find(instrument => instrument.id === sourceId);
+  if (!source || INSTRUMENT_CATALOG.some(instrument => instrument.id === id)) continue;
+  INSTRUMENT_CATALOG.push({ ...structuredClone(source), id, name: id.replace(/-/g, ' '), note });
+}
+
 
 export const INSTRUMENTS_BY_ID: Record<string, InstrumentDef> = Object.fromEntries(INSTRUMENT_CATALOG.map(i => [i.id, i]));
 

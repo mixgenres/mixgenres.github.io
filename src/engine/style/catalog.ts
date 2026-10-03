@@ -40,6 +40,10 @@ function selectSharedPatterns(style: SongStyle, candidates: MusicalPattern[], ta
     categories.add(patternCategory(p));
   }
 
+  // Style-owned material is a closed set. Semantic genre-local borrowing is
+  // reserved for legacy styles with no explicitly owned pattern definitions.
+  if (selected.length) return selected;
+
   for (const { p } of ranked) {
     if (selected.includes(p) || selected.some(x => nearDuplicate(x, p))) continue;
     const cat = patternCategory(p);

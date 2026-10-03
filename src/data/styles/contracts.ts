@@ -2,6 +2,7 @@ import type { MixContract } from '../sound/schema/dynamicMix';
 import { TANGO_MIX } from '../sound/mix/tangoMix';
 import type { ImprovisationGrammar, GenreSoloDefinition } from './schema';
 import { GENRE_SOLO_DEFINITIONS } from '../performance/soloDefinitions';
+import { GENRE_WORLDS } from '../genres';
 export type PerformanceMode = 'acoustic-ensemble' | 'programmed-electronic' | 'hybrid';
 
 export interface InstrumentDialect {
@@ -350,6 +351,7 @@ G.funk = simple('funk','4/4','metric-hierarchical','the one',.5,{style:'riff',rh
 G.gospel = simple('gospel','4/4','metric-hierarchical','call-response build',.52,{style:'rootFifth',rhythmJob:'supportive bass with gospel passing motion',pitchJob:'roots/guide tones and passing chords',articulation:['legato','staccato']},['verse','build','vamp','shout','coda'],{motor:'organ + piano + bass',lead:'organ / alto-sax'},['organ','alto-sax','piano','bass','drums'],['static pop loop'],'none','functional','major/blues/gospel','crescendo and room bloom');
 G['hip-hop'] = simple('hip-hop','4/4','machine-grid','sample pocket / laid-back drag',.5,{style:'sub',rhythmJob:'sparse kick-synced sub; style-specific 808 rhythm',pitchJob:'root with 808 glides when available',articulation:['short','slide','sustain']},['intro','verse','hook','verse','bridge','outro'],{motor:'drums + sub',texture:'sample/chop',lead:'synth / alto-sax'},['drums','synth','synth','guitar','alto-sax'],['rock drum kit','four-on-floor'],'boom-bap / trap cells','functional/modal-vamp','minor/pentatonic','sample space, controlled sub');
 G.house = simple('house','4/4','machine-grid','four-on-floor',.5,{style:'house',rhythmJob:'bass syncopates between kicks; repeats as a loop',pitchJob:'root/fifth/7th',articulation:['short','gated']},['intro','groove','breakdown','drop','groove','outro'],{motor:'four-on-floor kick + bass',texture:'hats/pads'},['synth','drums','cowbell'],['rock backbeat','random fills'],'four-on-floor','functional/modal-vamp','minor/dorian','sidechain pumping, filter automation');
+G['house-techno'] = simple('house-techno','4/4','machine-grid','four-on-floor with evolving club sequences',.5,{style:'house',rhythmJob:'locked kick with repeating, gradually mutating bass sequences',pitchJob:'modal roots, fifths, and restrained chord movement',articulation:['short','gated','sustained']},['intro','groove','build','breakdown','drop','outro'],{motor:'four-on-floor kick + sequenced bass',texture:'hats, pads, and evolving synth sequences'},['synth','drums','sampler'],['rock backbeat','random acoustic fills'],'four-on-floor','functional/modal-vamp','minor/dorian','controlled club low end, filter movement, and gradual arrangement development');
 G.kizomba = simple('kizomba','4/4','metric-hierarchical','deep laid-back',.5,{style:'sub',rhythmJob:'sub-bass anchors with syncopated anticipations',pitchJob:'root/fifth with melodic movement',articulation:['legato','short']},['intro','verse','chorus','break','chorus','outro'],{motor:'sub-bass + percussion',lead:'synth'},['synth','guitar','shaker','drums'],['reggaeton dembow','rock backbeat'],'none','modal-vamp','minor/major','sub-heavy, soft transients');
 G.flamenco = simple('flamenco','12/8','long-cycle','compás',.5,{style:'root',rhythmJob:'compás-anchored bass/guitar support; avoid generic backbeat',pitchJob:'tonic/dominant with Phrygian cadence color',articulation:['rasgueado','golpe','ligado','alzapúa']},['salida','llamada','letra','falseta','remate','cierre'],{motor:'guitar + palmas/cajón',lead:'guitar',answer:'falseta'},['guitar','palmas','cajon','flute','castanets'],['rock backbeat','crash on section start','walking bass','four-on-floor'],'12-count compás','functional','phrygian/Andalusian','dry room, strong transient contrast',{kitMode:'hybrid',allowedHitTypes:['rim','ghost'],forbidWesternBackbeat:true,forbidSectionCrash:true,allowTomFills:false,ride:false});
 G.flamenco.groove.swing = 0.5;
@@ -361,6 +363,8 @@ G.metal = simple('metal','4/4','machine-grid','precision',.5,{style:'riff',rhyth
 G['r-and-b'] = simple('r-and-b','4/4','metric-hierarchical','behind-the-beat pocket',.5,{style:'sub',rhythmJob:'syncopated melodic bass with space',pitchJob:'extended chord tones',articulation:['legato','ghost','slide']},['intro','verse','pre-chorus','chorus','bridge','outro'],{motor:'bass + drums',harmony:'Rhodes/keys',lead:'rhodes'},['rhodes','bass','clavinet','drums','synth'],['stiff quantization','rock backbeat default'],'none','functional','major/minor','warm, close, lead-forward');
 G.reggae = simple('reggae','4/4','metric-hierarchical','one-drop + skank',.5,{style:'reggae',rhythmJob:'melodic heavy bass; leaves space',pitchJob:'root/5th/6th with melodic contour',articulation:['short','muted','legato']},['intro','verse','chorus','dub break','verse','outro'],{motor:'bass + one-drop',comp:'offbeat skank',texture:'organ bubble'},['organ','guitar','bass','drums','horn-section'],['rock backbeat','kick on 1 as default','crash section start'],'none','modal-vamp','major/minor/mixolydian','drop-outs, filtered dub delay throws',undefined,{mixCharacter:{dryness:.48,bassForward:.62,width:.66,brightness:.46,delaySend:.34,delayTimeSeconds:.38,delayFeedback:.58,delayToneHz:3600}});
 G.reggaeton = simple('reggaeton','4/4','machine-grid','straight dembow',.5,{style:'dembow',rhythmJob:'bass answers the dembow cell; avoid continuous blanket',pitchJob:'root/fifth/approach',articulation:['short','sub']},['intro','verso','coro','puente','coro','outro'],{motor:'dembow + sub-bass',lead:'synth'},['synth','drums','congas'],['swing','rock backbeat'],'3+3+2 dembow','functional/modal-vamp','minor/major','dry punch, controlled sub');
+G['reggaeton-dembow'] = simple('reggaeton-dembow','4/4','machine-grid','strict-grid dembow',.5,{style:'dembow',rhythmJob:'kick and snare interlock around the dembow cell; bass answers with space',pitchJob:'root/fifth with short melodic approaches',articulation:['short','sub','gated']},['intro','verso','coro','puente','coro','outro'],{motor:'dembow kick/snare + syncopated sub',lead:'voice/synth'},['synth','drums','congas','sampler'],['swing','rock backbeat','four-on-floor'],'3+3+2 dembow','functional/modal-vamp','minor/major','dry punch, controlled sub, and vocal-focused space');
+G['samba-bossa'] = simple('samba-bossa','2/4','timeline-cycle','Brazilian samba and bossa interlock',.5,{style:'samba',rhythmJob:'surdo anchor and syncopated bass support with room for guitar comping',pitchJob:'root, guide tones, and chromatic/jazz approaches',articulation:['muted','short','ghost','fingerstyle']},['intro','theme','verse','chorus','instrumental','coda'],{motor:'surdo/pandeiro + bass',harmony:'cavaquinho or bossa guitar',lead:'voice/flute'},['cavaquinho','guitar','pandeiro','surdo','tamborim','bass','flute'],['generic Latin backbeat','four-on-floor','rock fills'],'Brazilian samba/bossa cycles','functional/modal-vamp','major/minor','intimate guitar detail or layered Brazilian percussion');
 G.rock = { ...simple('rock','4/4','metric-hierarchical','driving backbeat',.5,{style:'riff',rhythmJob:'riff-centered bass/guitar lock',pitchJob:'root/fifth/power-chord tones',articulation:['pick','palm-mute','sustain']},['intro','verse','chorus','bridge','solo','outro'],{motor:'guitar + bass + drums',lead:'guitar'},['guitar','bass','drums','organ'],['swing as default','genre-inappropriate Latin cells'],'none','functional','major/minor/mixolydian','live room, guitar-forward'),
   improvisationGrammar:{
     scaleMode:'minor-pentatonic',
@@ -541,6 +545,88 @@ for (const [genreId, definition] of Object.entries(GENRE_SOLO_DEFINITIONS)) {
   if (G[genreId]) G[genreId].soloDefinition = definition;
 }
 
+// Genre folders own the public taxonomy. Older curated contracts remain the
+// richer override where present; this materializes a complete safe contract
+// for every folder-discovered world without a parallel handwritten ID list.
+for (const world of GENRE_WORLDS) {
+  if (G[world.id]) continue;
+  const seed = world.styleDefinitions.find(style => style.id === world.homeStyleId) ?? world.styleDefinitions[0];
+  const calibration = seed?.calibration;
+  if (!seed || !calibration) continue;
+  const electronic = /house|electronic|ambient|bass|industrial|hip-hop|weird|cinematic|reggaeton|amapiano/i.test(world.id);
+  const template = G[electronic ? 'electronic' : /salsa|timba|latin|brazilian|bachata|zouk|kizomba/i.test(world.id) ? 'salsa' : /jazz|swing|blues/i.test(world.id) ? 'jazz' : 'folk'];
+  const contract = structuredClone(template);
+  const meter = seed.preferredMeters[0] ?? '4/4';
+  const machine = /house|electronic|ambient|bass|industrial|hip-hop|weird|cinematic|reggaeton|amapiano/i.test(world.id);
+  const bassStyle: BassDialect['style'] = /salsa|timba|latin|bachata|kizomba|zouk/i.test(world.id) ? 'tumbao'
+    : /jazz|swing|blues/i.test(world.id) ? 'walking'
+      : /house/i.test(world.id) ? 'house'
+        : /reggaeton/i.test(world.id) ? 'dembow'
+          : machine ? 'sub' : 'riff';
+  contract.pulseModel = machine ? 'machine-grid'
+    : /tango|flamenco|salsa|timba|gamelan|indian|arabic|taarab/i.test(world.id) ? 'timeline-cycle'
+      : /ambient|weird|cinematic/i.test(world.id) ? 'free-rubato' : 'metric-hierarchical';
+  contract.meter = meter;
+  contract.subdivision = /12\/8|12-count/i.test(meter) ? 12 : /2\/4/.test(meter) ? 8 : 16;
+  contract.cycleLength = /clave|compás|compas|tala|gamelan/i.test(seed.signatureCell ?? '') ? 2 : 1;
+  contract.timeline = seed.signatureCell ?? 'style-owned phrase grammar';
+  contract.timelineRequired = /clave|compás|compas|timeline|tala|gamelan|cycle/i.test(contract.timeline);
+  contract.timelineGrid = contract.timelineRequired ? Array.from({ length: contract.subdivision }, (_, index) => index)
+    .filter(index => index === 0 || index % 3 === 0) : [];
+  contract.harmonyModel = !calibration.harmony.requiresChords ? 'modal-drone'
+    : /power chord|riff/i.test(calibration.harmony.chordQualities.join(' ')) ? 'power-riff'
+      : /blues/i.test(`${world.id} ${seed.name}`) ? 'blues-form' : 'functional';
+  contract.harmonyVocabulary = calibration.harmony.chordQualities;
+  contract.harmonicRhythm = calibration.harmony.harmonicRhythm;
+  contract.pitchModel = calibration.harmony.scales.join(' / ') || seed.scaleMode || 'style-defined';
+  contract.tuningSystem = calibration.harmony.pitchSystem || seed.tuningSystem || world.tuningSystem || '12-tet';
+  contract.bass = { ...contract.bass, style: bassStyle, rhythmJob: calibration.harmony.bassChordInteraction,
+    pitchJob: calibration.harmony.scales.join(', '), articulation: calibration.techniques.bass ?? [] };
+  contract.form = seed.arrangementSections?.map(section => section.label) ?? ['intro', 'theme', 'development', 'return', 'coda'];
+  contract.ensemble = Object.fromEntries(Object.entries(calibration.roles).map(([role, preference]) => [role, preference.preferredInstruments.join(' / ')]));
+  contract.timbreSpace.palette = seed.characteristicInstruments;
+  contract.timbreSpace.production = `${seed.name}: ${seed.description}`;
+  const inheritedMix = contract.timbreSpace.mixCharacter ?? { dryness: .6, bassForward: .5, width: .5, brightness: .5 };
+  const authoredMix = calibration.mix.character;
+  contract.timbreSpace.mixCharacter = {
+    ...inheritedMix,
+    ...(authoredMix ? {
+      dryness: authoredMix.dryness ?? inheritedMix.dryness,
+      bassForward: authoredMix.bassForward ?? inheritedMix.bassForward,
+      width: authoredMix.width ?? inheritedMix.width,
+      brightness: authoredMix.brightness ?? inheritedMix.brightness,
+      compressionRatio: authoredMix.compressionRatio ?? inheritedMix.compressionRatio,
+      saturationType: authoredMix.saturationType ?? inheritedMix.saturationType,
+      subHarmonics: authoredMix.subHarmonics ?? inheritedMix.subHarmonics,
+      transientSnap: authoredMix.transientSnap ?? inheritedMix.transientSnap,
+      sidechainDucking: authoredMix.sidechainDucking ?? inheritedMix.sidechainDucking,
+      delaySend: authoredMix.delaySend ?? inheritedMix.delaySend,
+      delayTimeSeconds: authoredMix.delayTimeSeconds ?? inheritedMix.delayTimeSeconds,
+      delayFeedback: authoredMix.delayFeedback ?? inheritedMix.delayFeedback,
+      delayToneHz: authoredMix.delayToneHz ?? inheritedMix.delayToneHz,
+      reverbType: authoredMix.reverbType ?? inheritedMix.reverbType,
+    } : {}),
+  };
+  contract.forbidden = calibration.patterns.forbidden ?? [];
+  contract.instrumentDialects = {};
+  contract.articulationGrammar = Object.fromEntries(Object.entries(calibration.techniques));
+  contract.groove = { ...contract.groove,
+    swing: (seed.grooveMechanics?.swingPercentage ?? 50) / 100,
+    anticipationMs: (seed.grooveMechanics?.anticipationOffsetSteps ?? 0) * 12,
+  };
+  contract.percussion = { ...contract.percussion,
+    kitMode: /machine|electronic|drum|percussion/i.test(`${world.id} ${seed.name}`) ? 'hybrid' : 'none',
+    forbidWesternBackbeat: /flamenco|tango|indian-classical|gamelan|chinese|japanese|korean|arabic|persian/i.test(world.id),
+    forbidSectionCrash: true,
+  };
+  contract.soloDefinition = structuredClone(GENRE_SOLO_DEFINITIONS.folk);
+  contract.soloDefinition.modes.accompanied.name = `${world.name} featured passage`;
+  contract.soloDefinition.modes.accompanied.description = `A featured line follows the selected ${seed.name} style over its authored accompaniment.`;
+  contract.soloDefinition.modes.unaccompanied.description = `The selected ${seed.name} style carries a solo passage without ensemble backing.`;
+  contract.soloDefinition.modes.trading.description = `Featured parts exchange phrases within the selected ${seed.name} style.`;
+  G[world.id] = contract;
+}
+
 /** Authored instrument dialects keep each world’s technique and timbre choices in its style grammar. */
 function dialectsFor(worldId: string, entries: Record<string, Partial<InstrumentDialect>>) {
   const contract = G[worldId];
@@ -571,6 +657,10 @@ dialectsFor('west-african', { djembe: { allowedTechniques: ['bass','tone','slap'
 dialectsFor('afro-colombian', { 'marimba-de-chonta': { allowedTechniques: ['interlocking-pattern','roll','damping','call-response'], techniquePreferences: { 'interlocking-pattern': 1, 'call-response': 0.85 } }, guacharaca: { allowedTechniques: ['scrape','accent'] } });
 
 G.tango.timbreSpace.mix = TANGO_MIX;
+
+for (const genreId of Object.keys(G)) {
+  if (!GENRE_WORLDS.some(world => world.id === genreId)) delete G[genreId];
+}
 
 export const GENRE_CONTRACTS: Record<string, WorldContract> = G;
 

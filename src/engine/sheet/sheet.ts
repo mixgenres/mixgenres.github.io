@@ -2,7 +2,7 @@ import { resolveSoloPlan } from './solo';
 import type { SoloAssignment } from '../../data/styles/schema';
 import type { Song, Region, Track, Measure, SectionType, PatternVariant, MusicalPattern, SectionEnergy, GuestLens } from '../../types';
 import { GENRE_WORLDS_BY_ID, ALL_PATTERNS, PATTERNS_BY_ID, PATTERNS_BY_WORLD } from '../../data/genres';
-import { INSTRUMENTS_BY_ID, INSTRUMENT_CATALOG, instrument, instrumentPatternKinds } from '../../engine/lookup/instruments';
+import { INSTRUMENTS_BY_ID, INSTRUMENT_CATALOG, instrument, instrumentPatternKinds, genreTechniquesForInstrument } from '../../engine/lookup/instruments';
 import { sliceBarNative } from './grid.ts';
 import { progressionForSection, buildArrangementContext, ArrangementContext } from './arrangementContext.ts';
 import { inferKey, parseChord, assertValidChordProgression } from './musicTheory.ts';
@@ -503,6 +503,72 @@ function synthesizeBoundaryVariant(
   };
 }
 
+/** Project an authored event pattern into the legacy grid arrays at the render
+ * boundary. The rich event model remains the source of truth for probability,
+ * phrase/section conditions, tuplets and fractional microtiming. */
+function projectPatternEvents(
+  events: NonNullable<MusicalPattern['events']>,
+  pattern: MusicalPattern,
+  seed: string,
+  region: Region,
+  phraseRole: 'transition' | 'cadence' | 'body',
+  energy: SectionEnergy,
+  instrumentId: string | undefined,
+  styleId: string,
+  role: string,
+) {
+  const [numerator = 4, denominator = 4] = pattern.meter.split('/').map(Number);
+  const quarterBeats = numerator * 4 / denominator || 4;
+  const stepsPerBeat = (pattern.subdivisions || 16) / quarterBeats;
+  const sectionName = String(region.kind ?? '');
+  const authoredTechniques = instrumentId ? genreTechniquesForInstrument(instrumentId, styleId) : [];
+  const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, '');
+  const supportsTechnique = (value: string) => {
+    const term = normalize(value);
+    return authoredTechniques.some(candidate => {
+      const supported = normalize(candidate);
+      return term.length > 2 && supported.length > 2 && (term.includes(supported) || supported.includes(term));
+    });
+  };
+  const chosen = events.map((event, eventIndex) => ({ event, eventIndex })).filter(({ event, eventIndex }) => {
+    if (event.condition?.role && event.condition.role !== role) return false;
+    if (event.condition?.section?.length && !event.condition.section.includes(sectionName)) return false;
+    if (event.condition?.phrasePosition?.length && !event.condition.phrasePosition.includes(phraseRole)) return false;
+    if (event.condition?.energy?.length && !event.condition.energy.includes(energy)) return false;
+    return hash(`${seed}:event:${eventIndex}`, 913) < (event.probability ?? 1);
+  }).sort((a, b) => a.event.position - b.event.position);
+  const result = { onsets: [] as number[], accents: [] as number[], velocities: [] as number[], durations: [] as number[],
+    microtiming: [] as number[], hitTypes: [] as string[], articulations: [] as string[], fractionalSteps: [] as number[] };
+  let priorBeat = 0;
+  for (const { event } of chosen) {
+    if (event.kind === 'rest') {
+      if (result.durations.length) result.durations[result.durations.length - 1] = Math.max(1,
+        Math.min(result.durations.at(-1)!, Math.round((event.position - priorBeat) * stepsPerBeat)));
+      continue;
+    }
+    if (event.kind === 'tie') {
+      if (result.durations.length) result.durations[result.durations.length - 1] += Math.max(1, Math.round((event.duration ?? .25) * stepsPerBeat));
+      continue;
+    }
+    const cycleBeats = quarterBeats * Math.max(1, pattern.cycleLength || 1);
+    const phaseOffset = event.polyrhythm
+      ? (event.polyrhythm.phase ?? 0) * event.polyrhythm.denominator / Math.max(1, event.polyrhythm.numerator)
+      : 0;
+    const eventPosition = ((event.position + phaseOffset) % cycleBeats + cycleBeats) % cycleBeats;
+    const fractionalStep = (eventPosition + (event.microtiming ?? 0)) * stepsPerBeat;
+    result.onsets.push(Math.max(0, Math.round(fractionalStep)));
+    result.fractionalSteps.push(fractionalStep);
+    result.accents.push(event.accent ?? (event.kind === 'accent' ? 1 : .6));
+    result.velocities.push(event.velocity ?? .72);
+    result.durations.push(Math.max(1, Math.round((event.duration ?? .25) * stepsPerBeat)));
+    result.microtiming.push(event.microtiming ?? 0);
+    result.hitTypes.push(event.hitType ?? '');
+    result.articulations.push(event.articulation && supportsTechnique(event.articulation) ? event.articulation : '');
+    priorBeat = event.position;
+  }
+  return result;
+}
+
 /**
  * Choose a base pattern or one of its authored variants.
  *
@@ -826,14 +892,19 @@ export function rebuild(sheet: Sheet): Sheet {
           v = synthesizeBoundaryVariant(p, 'transition', `${patternId}:${r.id}:${index}`, styleIdForRegion);
         }
 
-        const rawOnsets = v?.onsetGrid ?? p.onsetGrid;
         const sub = p.subdivisions || 16;
         const patternCycleBars = Math.max(1, p.cycleLength || Math.ceil(sub / 16));
-        const rawAccents = v?.accentProfile ?? p.accentProfile;
-        const rawVelocities = v?.velocityProfile ?? p.velocityProfile;
-        const rawDurations = v?.durationGrid ?? p.durationGrid;
-        const rawMicro = v?.microtimingOffset;
-        const candidateHitTypes = v?.hitGrid ?? p.hitGrid;
+        const resolvedStyle = getResolvedSectionStyle(sheet, r);
+        const eventProjection = projectPatternEvents(v?.events ?? p.events ?? [], p, variantSeed, r, phraseRole, partEnergy,
+          track.instrumentId, resolvedStyle.id, track.role);
+        const useEventProjection = !!eventProjection.onsets.length && (v?.events?.length ? true : !v && !!p.events?.length);
+        const rawOnsets = useEventProjection ? eventProjection.onsets : v?.onsetGrid ?? p.onsetGrid;
+        const rawAccents = useEventProjection ? eventProjection.accents : v?.accentProfile ?? p.accentProfile;
+        const rawVelocities = useEventProjection ? eventProjection.velocities : v?.velocityProfile ?? p.velocityProfile;
+        const rawDurations = useEventProjection ? eventProjection.durations : v?.durationGrid ?? p.durationGrid;
+        const rawMicro = useEventProjection ? eventProjection.microtiming : v?.microtimingOffset;
+        const projectedHits = eventProjection.hitTypes.some(Boolean) ? eventProjection.hitTypes : undefined;
+        const candidateHitTypes = v?.hitGrid ?? p.hitGrid ?? projectedHits;
         const rawHitTypes = candidateHitTypes && candidateHitTypes.length === rawOnsets.length
           ? candidateHitTypes
           : undefined;
@@ -841,6 +912,8 @@ export function rebuild(sheet: Sheet): Sheet {
         const bar = toBar(rawOnsets, rawAccents, rawDurations, sub, i % patternCycleBars);
         const perf = sliceBarNative(
           rawOnsets, rawAccents, rawVelocities, rawDurations, rawMicro, rawHitTypes, sub, patternCycleBars, i % patternCycleBars,
+          useEventProjection && eventProjection.articulations.length ? eventProjection.articulations : undefined,
+          useEventProjection && eventProjection.fractionalSteps.length ? eventProjection.fractionalSteps : undefined,
         );
 
         const explicitLens = sheet.partLens?.[r.id]?.[track.id];
@@ -853,8 +926,8 @@ export function rebuild(sheet: Sheet): Sheet {
           onsetGrid: bar.onsets,
           accentProfile: bar.accents,
           durationGrid: bar.durations,
-          articulation: v?.articulation ?? p.articulations?.[0],
-          articulations: mergeArticulations(p, v),
+          articulation: (useEventProjection ? eventProjection.articulations.find(Boolean) : undefined) ?? v?.articulation ?? p.articulations?.[0],
+          articulations: useEventProjection && perf.articulations.some(Boolean) ? perf.articulations : mergeArticulations(p, v),
           variationType: v?.variationType,
           lens,
           partEnergy,

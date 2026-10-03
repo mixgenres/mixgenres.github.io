@@ -1,4 +1,5 @@
 import type { GenreSoloDefinition } from '../styles/schema';
+import { GENRE_WORLDS } from '../genres';
 
 const rhythmRoles = ['harmony', 'comp', 'guitar', 'rhythm-guitar', 'rhythmGuitar', 'piano', 'keyboard', 'bandoneon', 'pad', 'texture', 'bass', 'pulse', 'rhythm', 'percussion', 'aux-percussion', 'drums', 'drum-kit', 'drumKit', 'hand-percussion', 'bell', 'shaker'];
 
@@ -88,4 +89,16 @@ GENRE_SOLO_DEFINITIONS.flamenco.modes.trading.description = 'Featured instrument
 
 for (const genre of ['jazz', 'swing', 'blues']) {
   GENRE_SOLO_DEFINITIONS[genre].modes.trading.tradingRestRoles = ['percussion', 'drums', 'drum-kit', 'drumKit', 'aux-percussion'];
+}
+
+for (const world of GENRE_WORLDS) {
+  if (!GENRE_SOLO_DEFINITIONS[world.id]) {
+    GENRE_SOLO_DEFINITIONS[world.id] = definition(
+      `${world.name} featured passage`,
+      `A featured line follows the selected ${world.name} style over its authored accompaniment.`,
+    );
+  }
+}
+for (const genreId of Object.keys(GENRE_SOLO_DEFINITIONS)) {
+  if (!GENRE_WORLDS.some(world => world.id === genreId)) delete GENRE_SOLO_DEFINITIONS[genreId];
 }

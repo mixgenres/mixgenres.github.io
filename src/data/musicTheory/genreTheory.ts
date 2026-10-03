@@ -1,3 +1,5 @@
+import { GENRE_WORLDS } from '../genres';
+
 export type ScaleName =
   | 'ionian' | 'dorian' | 'phrygian' | 'lydian' | 'mixolydian'
   | 'aeolian' | 'harmonic-minor' | 'melodic-minor' | 'major-pentatonic'
@@ -27,6 +29,10 @@ export interface GenreTheoryProfile {
     guideTonePriority: boolean;
     upperStructure: boolean;
     maxLowDensity: number;
+    preferredVoicingTones?: [number, number];
+    voicingTonesByRole?: Record<string, [number, number]>;
+    pitchSystem?: string;
+    requiresChords?: boolean;
   };
   melody: {
     scale: ScaleName[];
@@ -133,4 +139,67 @@ export const GENRE_THEORY: Record<string, GenreTheoryProfile> = {
   'japanese-rock': P({ genreId: 'japanese-rock', defaultScale: 'aeolian', progressions: [['Em','C','G','D'],['C','D','Bm','Em']], harmonicRhythm: 'bar', bass: { style: 'riff', passingProbability: .18, phraseFillProbability: .2 }, harmony: { voicing: 'power', guideTonePriority: false }, melody: { scale: ['aeolian','minor-pentatonic','ionian'], phraseBars: [4,8], contour: ['melodic-answer','riff','sustained-hook'], callResponse: true }, rhythm: { signature: ['driving-backbeat','muted-riff','half-time-bridge'], swing: .5 }, techniques: { harmony: ['mute','accent','legato'], melody: ['bend','legato','accent'], bass: ['pluck','accent'], percussion: ['accent','ghost'] }, mixFocus: { lead: .82, harmony: .65, bass: .6, drums: .7 } }),
 };
 
+const scaleFromWords = (words: string[]): ScaleName => {
+  const text = words.join(' ').toLowerCase();
+  if (/phrygian/.test(text)) return 'phrygian';
+  if (/dorian/.test(text)) return 'dorian';
+  if (/mixolydian/.test(text)) return 'mixolydian';
+  if (/lydian/.test(text)) return 'lydian';
+  if (/locrian/.test(text)) return 'locrian';
+  if (/whole.?tone/.test(text)) return 'whole-tone';
+  if (/chromatic|atonal|xenharmonic|microtonal/.test(text)) return 'chromatic';
+  if (/blues/.test(text)) return 'blues';
+  if (/minor|aeolian|dastgah|raga|maqam/.test(text)) return 'aeolian';
+  if (/pentatonic/.test(text)) return 'major-pentatonic';
+  return 'ionian';
+};
+const rhythmRate = (value: string): GenreTheoryProfile['harmonicRhythm'] => {
+  const text = value.toLowerCase();
+  return /static|drone|none/.test(text) ? 'static' : /phrase|section|alap/.test(text) ? 'phrase'
+    : /two|2-bar|slow/.test(text) ? 'two-bar' : /half|montuno|fast|compas|compás/.test(text) ? 'half-bar' : 'bar';
+};
+for (const world of GENRE_WORLDS) {
+  const seed = world.styleDefinitions.find(style => style.id === world.homeStyleId) ?? world.styleDefinitions[0];
+  const calibration = seed?.calibration;
+  if (!seed || !calibration) continue;
+  const scales = calibration.harmony.scales;
+  const scale = scaleFromWords(scales);
+  const words = `${world.id} ${seed.name} ${calibration.harmony.chordQualities.join(' ')}`.toLowerCase();
+  const harmonicModel: GenreTheoryProfile['harmonicModel'] = !calibration.harmony.requiresChords ? 'modal-vamp'
+    : /blues/.test(words) ? 'blues-form' : /phrygian/.test(words) ? 'phrygian-cadence'
+      : /power.?chord|power-riff/.test(words) ? 'power-riff' : /drone|modal|heterophonic|maqam|raga/.test(words) ? 'modal-vamp' : 'functional';
+  const subdivision: GenreTheoryProfile['rhythm']['subdivision'] = /12\/8/.test(seed.preferredMeters[0] ?? '') ? 12
+    : /2\/4/.test(seed.preferredMeters[0] ?? '') ? 8 : /polyrhythm|tuplets|32nd|rapid rolls/i.test(calibration.patterns.families.join(' ')) ? 32 : 16;
+  const progressionExamples = calibration.harmony.progressionExamples ?? [];
+  GENRE_THEORY[world.id] = P({
+    genreId: world.id, meter: seed.preferredMeters[0] ?? '4/4', cycleBars: /cycle|clave|compás|compas|long/i.test(seed.signatureCell ?? '') ? 2 : 4,
+    harmonicModel, defaultScale: scale, chordScales: { major: scale, minor: scale === 'ionian' ? 'aeolian' : scale, dominant: scale === 'ionian' ? 'mixolydian' : scale },
+    progressions: progressionExamples, cadences: calibration.harmony.cadences.map(cadence => [cadence]),
+    harmonicRhythm: rhythmRate(calibration.harmony.harmonicRhythm),
+    bass: { style: /tumbao|clave|tumbao/i.test(calibration.harmony.bassChordInteraction) ? 'tumbao' : /drone|pedal/i.test(calibration.harmony.bassChordInteraction) ? 'drone' : 'style-owned',
+      targetDegrees: [1,3,5,7], chromaticApproach: /chromatic|approach/i.test(calibration.harmony.bassChordInteraction),
+      passingProbability: /chromatic|approach/i.test(calibration.harmony.bassChordInteraction) ? .22 : .08,
+      phraseFillProbability: .14, anticipationBeats: /anticip|tumbao|dembow/i.test(calibration.harmony.bassChordInteraction) ? [3.5] : [],
+      silenceProbability: /sparse|rest|silence|drone/i.test(calibration.patterns.families.join(' ')) ? .25 : .06 },
+    harmony: { voicing: /tango|yumba/i.test(words) ? 'yumba' : /salsa|timba|montuno/i.test(words) ? 'montuno'
+      : /power.?chord|riff/i.test(words) ? 'power' : /jazz|extended|guide.?tone/i.test(words) ? 'guide-tone' : 'open',
+      guideTonePriority: /jazz|extended|7|9|13|guide/i.test(words), upperStructure: /jazz|extended|9|11|13/i.test(words),
+      maxLowDensity: /sub|bass|industrial|metal/i.test(words) ? .2 : .38 },
+    melody: { scale: [scale], targetDegrees: [1,3,5,7], approachDegrees: [2,4,6], phraseBars: [2,4,8],
+      contour: calibration.patterns.phraseBehaviors ?? [], callResponse: calibration.patterns.interaction?.some(x => /call|answer|response/i.test(x)) ?? false,
+      ornamentCap: /ornament|melisma|improvis/i.test(calibration.techniques.melody?.join(' ') ?? '') ? .28 : .12 },
+    rhythm: { subdivision, swing: (seed.grooveMechanics?.swingPercentage ?? 50) / 100,
+      accent: [1,.7,.85,.6], signature: calibration.patterns.families, fillBars: [2,4], ghostShare: .08 },
+    techniques: { bass: calibration.techniques.bass ?? [], harmony: calibration.techniques.harmony ?? [],
+      melody: calibration.techniques.lead ?? calibration.techniques.voice ?? [], percussion: calibration.techniques.percussion ?? [],
+      bowed: calibration.techniques.strings ?? calibration.techniques.bowed ?? [], winds: calibration.techniques.winds ?? [],
+      bellows: calibration.techniques.bandoneon ?? [], voice: calibration.techniques.voice ?? [] },
+    mixFocus: Object.fromEntries(Object.entries(calibration.mix.roles ?? {}).map(([role, policy]) => [role, policy?.priority ?? .5])),
+    forbidden: calibration.patterns.forbidden,
+  });
+}
 
+// Cached/legacy profiles never keep a deleted folder's public genre alive.
+for (const genreId of Object.keys(GENRE_THEORY)) {
+  if (!GENRE_WORLDS.some(world => world.id === genreId)) delete GENRE_THEORY[genreId];
+}

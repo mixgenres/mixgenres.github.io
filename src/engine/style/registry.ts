@@ -1,4 +1,5 @@
 import { TANGO_STYLE_MIX } from '../../data/sound/mix/tangoMix';
+import { mergeMixOverrides } from '../studio/dynamicMix/resolveMixContract';
 import { DEFAULT_STYLE_MASTER_PROFILE } from '../../data/sound/mix/masterProfiles';
 import { suggestedPaletteForGenre } from '../lookup/theory';
 import type { SongStyle } from '../../data/styles/schema';
@@ -71,6 +72,12 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: b
       : def?.voicing === 'single' ? 'melody' : 'harmony';
     return { role, instrumentIds:[instrumentId], priority:10-i };
   });
+  const authoredEnsemble = seed.calibration?.roles
+    ? Object.entries(seed.calibration.roles).flatMap(([role, preference], i) => {
+      const instrumentIds = preference.preferredInstruments.filter(id => INSTRUMENTS_BY_ID[id]);
+      return instrumentIds.length ? [{ role, instrumentIds, priority: 100 - i }] : [];
+    })
+    : ensemble;
   return {
     id: seed.id,
     sourceProvenance: {
@@ -90,6 +97,7 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: b
       'sound.masterProfile.pocket':'default', 'sound.masterProfile.lift':'default',
     },
     name: seed.name,
+    calibration: seed.calibration,
     genres:[worldId], primaryGenre:worldId,
     kind:canonical ? 'canonical' : 'form', canonical,
     summary:shortText(seed.description || `${seed.name} ${GENRE_NAMES[worldId]}`),
@@ -104,13 +112,18 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: b
       model:contract.harmonyModel,
       modePolicy: seed.scaleMode ?? contract.pitchModel.toLowerCase().replace(/\s+/g, '-'),
       progressionTemplates:Array.from(new Map(
-        (Object.keys(seed.sectionProgressions ?? {}).length ? Object.values(seed.sectionProgressions!) : suggestedPaletteForGenre(worldId).map(cell => cell.chords as string[])).filter((value): value is string[] => Array.isArray(value)).map(value => [JSON.stringify(value), value] as const)
+        (Object.keys(seed.sectionProgressions ?? {}).length ? Object.values(seed.sectionProgressions!) : seed.calibration?.harmony.progressionExamples ?? suggestedPaletteForGenre(worldId).map(cell => cell.chords as string[])).filter((value): value is string[] => Array.isArray(value)).map(value => [JSON.stringify(value), value] as const)
       ).values()).map(value => ({w:1, value})),
-      chordVocabulary:Array.from(new Set([...contract.harmonyVocabulary, ...(Object.values(seed.sectionProgressions ?? {}).flatMap(x => x).map(String))])),
-      harmonicRhythm:contract.harmonicRhythm,
+      chordVocabulary:Array.from(new Set([...(seed.calibration?.harmony.chordQualities ?? contract.harmonyVocabulary), ...(Object.values(seed.sectionProgressions ?? {}).flatMap(x => x).map(String))])),
+      harmonicRhythm:seed.calibration?.harmony.harmonicRhythm ?? contract.harmonicRhythm,
       bassMotion:contract.bass.style,
       sectionProgressions: seed.sectionProgressions ?? {},
       tuningSystem: seed.tuningSystem ?? contract.tuningSystem,
+      preferredVoicingTones: seed.calibration?.harmony.preferredVoicingTones,
+      voicingTonesByRole: seed.calibration?.harmony.voicingTonesByRole,
+      pitchSystem: seed.calibration?.harmony.pitchSystem,
+      requiresChords: seed.calibration?.harmony.requiresChords,
+      cadences: seed.calibration ? [{ w: 1, value: seed.calibration.harmony.cadences }] : undefined,
     },
     rhythm:{
       meter:seed.preferredMeters?.[0] ?? contract.meter,
@@ -138,12 +151,12 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: b
       ornamentVocabulary:Object.values(contract.articulationGrammar).flat(),
     },
     arrangement:{
-      ensemble,
+      ensemble:authoredEnsemble,
       energyMappings:Object.fromEntries(formSteps.map(step => [step.key, energyForFormIntensity(step.intensity)])) as Partial<Record<string, SectionEnergy>>,
       doublingRules:[contract.ensemble.motor ?? '', contract.ensemble.answer ?? ''].filter(Boolean),
     },
     sound:{
-      ...(TANGO_STYLE_MIX[seed.id] ? { mix: TANGO_STYLE_MIX[seed.id] } : {}),
+      ...(seed.calibration?.mix || TANGO_STYLE_MIX[seed.id] ? { mix: mergeMixOverrides(seed.calibration?.mix ?? {}, TANGO_STYLE_MIX[seed.id]) } : {}),
       instrumentPalette:instruments.map(value => ({value: String(value), w: 1})),
       masterProfile:{...DEFAULT_STYLE_MASTER_PROFILE},
     },

@@ -5,6 +5,7 @@ import type { LuthierPhysicalParameters } from '../../data/instruments/schema/lu
 import type { PluckedPreset } from '../../data/instruments/schema/plucked-preset';
 import { INSTRUMENT_CATALOG } from '../../data/instruments';
 import { INSTRUMENT_PATTERN_KIND_RULES } from '../../data/instruments/patternKinds';
+import { GENRE_WORLDS } from '../../data/genres';
 export { INSTRUMENT_CATALOG } from '../../data/instruments';
 export type { InstrumentDef, InstrumentFamily, DrumVoice, InstrumentTechniqueProfile } from '../../data/instruments/schema/instrument-def';
 /** Engine-side physics enrichment and runtime instrument queries. */
@@ -121,13 +122,52 @@ export function techniqueProfile(id: string): InstrumentTechniqueProfile {
   return def.techniques;
 }
 
+const calibratedStylesById = new Map(GENRE_WORLDS.flatMap(world =>
+  world.styleDefinitions.map(style => [style.id.toLowerCase(), { world, style }] as const)));
+const resolvedTechniqueCache = new Map<string, string[]>();
+
 /** Pick style-specific idiomatic articulations without inventing unsupported gestures. */
-export function genreTechniquesForInstrument(id: string, styleId?: string): string[] {
+export function genreTechniquesForInstrument(
+  id: string, styleId?: string, scope?: 'note'|'motif'|'phrase'|'section'|'song',
+): string[] {
   const p = techniqueProfile(id);
   if (!styleId) return p.articulations;
   const key = styleId.toLowerCase();
+  const cacheKey = `${id}:${key}:${scope ?? 'all'}`;
+  const cached = resolvedTechniqueCache.get(cacheKey);
+  if (cached) return cached;
+  const match = calibratedStylesById.get(key);
+  const world = match?.world;
+  const style = match?.style;
+  if (world && style?.calibration) {
+    const scoped = Object.entries(style.calibration.techniques).flatMap(([_, techniques]) => techniques)
+      .filter(term => !scope || !style.calibration?.techniqueScopes?.[term] || style.calibration.techniqueScopes[term]!.includes(scope));
+    const wanted = scoped.map(value => value.toLowerCase());
+    const capabilities = Array.from(new Set([
+      ...p.articulations, ...p.techniqueMethods, ...p.playingStyles,
+      ...(p.genreTechniques?.[world.id] ?? []),
+      ...(INSTRUMENTS_BY_ID[id].physicalTechniques ?? []),
+      ...(INSTRUMENTS_BY_ID[id].luthierPhysics?.articulationCapabilities ?? []),
+    ]));
+    const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, '');
+    const contextual = capabilities.filter(capability => wanted.some(term => {
+      const a = normalize(capability); const b = normalize(term);
+      return a.length > 2 && (b.includes(a) || a.includes(b));
+    }));
+    if (contextual.length) {
+      const result = Array.from(new Set(contextual));
+      resolvedTechniqueCache.set(cacheKey, result);
+      return result;
+    }
+    // A calibrated style with no feasible techniques for this instrument does
+    // not inherit another instrument's or genre's vocabulary.
+    resolvedTechniqueCache.set(cacheKey, []);
+    return [];
+  }
   for (const [style, arts] of Object.entries(p.genreTechniques ?? {})) {
     if (key === style || key.includes(style) || style.includes(key)) return arts.filter(a => p.articulations.includes(a));
   }
-  return p.articulations;
+  const result = p.articulations;
+  resolvedTechniqueCache.set(cacheKey, result);
+  return result;
 }

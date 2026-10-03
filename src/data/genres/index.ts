@@ -1,39 +1,137 @@
 import type { GenreWorld, MusicalPattern } from '../schema';
 import { CANONICAL_GENRE_PATTERNS } from './canonicalPatterns';
 
-// Genre folders are the discovery boundary. Removing a folder removes that
-// world and its styles/patterns from the catalog without editing this registry.
-// The module contract is intentionally minimal: one exported GenreWorld value.
-const genreModules = import.meta.glob<Record<string, unknown>>('./*/index.ts', { eager: true });
+// Keep this registry explicit so it can be loaded by both Vite and Node-based checks.
+import { GENRE_WORLD as AfrobeatWorld } from './afrobeat';
+import { GENRE_WORLD as AfrobeatsWorld } from './afrobeats';
+import { GENRE_WORLD as AmapianoWorld } from './amapiano';
+import { GENRE_WORLD as AmbientWorld } from './ambient';
+import { GENRE_WORLD as AndeanWorld } from './andean';
+import { GENRE_WORLD as ArabicWorld } from './arabic';
+import { GENRE_WORLD as BachataWorld } from './bachata';
+import { GENRE_WORLD as BassWorld } from './bass';
+import { GENRE_WORLD as BluesWorld } from './blues';
+import { GENRE_WORLD as BollywoodWorld } from './bollywood';
+import { GENRE_WORLD as BrazilianWorld } from './brazilian';
+import { GENRE_WORLD as ChineseWorld } from './chinese';
+import { GENRE_WORLD as CinematicWorld } from './cinematic';
+import { GENRE_WORLD as ClassicalWorld } from './classical';
+import { GENRE_WORLD as CountryWorld } from './country';
+import { GENRE_WORLD as DangdutWorld } from './dangdut';
+import { GENRE_WORLD as DesertBluesWorld } from './desert-blues';
+import { GENRE_WORLD as ElectronicWorld } from './electronic';
+import { GENRE_WORLD as EthiopianWorld } from './ethiopian';
+import { GENRE_WORLD as FlamencoWorld } from './flamenco';
+import { GENRE_WORLD as FolkWorld } from './folk';
+import { GENRE_WORLD as FunkWorld } from './funk';
+import { GENRE_WORLD as GamelanWorld } from './gamelan';
+import { GENRE_WORLD as GnawaWorld } from './gnawa';
+import { GENRE_WORLD as GospelWorld } from './gospel';
+import { GENRE_WORLD as HipHopWorld } from './hip-hop';
+import { GENRE_WORLD as HouseWorld } from './house';
+import { GENRE_WORLD as IndianClassicalWorld } from './indian-classical';
+import { GENRE_WORLD as IndustrialWorld } from './industrial';
+import { GENRE_WORLD as JapaneseWorld } from './japanese';
+import { GENRE_WORLD as JazzWorld } from './jazz';
+import { GENRE_WORLD as KizombaWorld } from './kizomba';
+import { GENRE_WORLD as KoreanWorld } from './korean';
+import { GENRE_WORLD as LatinWorld } from './latin';
+import { GENRE_WORLD as MbalaxWorld } from './mbalax';
+import { GENRE_WORLD as MetalWorld } from './metal';
+import { GENRE_WORLD as MexicanWorld } from './mexican';
+import { GENRE_WORLD as PersianWorld } from './persian';
+import { GENRE_WORLD as PopWorld } from './pop';
+import { GENRE_WORLD as PunkWorld } from './punk';
+import { GENRE_WORLD as QawwaliWorld } from './qawwali';
+import { GENRE_WORLD as RAndBWorld } from './r-and-b';
+import { GENRE_WORLD as ReggaeWorld } from './reggae';
+import { GENRE_WORLD as ReggaetonWorld } from './reggaeton';
+import { GENRE_WORLD as RockWorld } from './rock';
+import { GENRE_WORLD as SalsaWorld } from './salsa';
+import { GENRE_WORLD as SoukousWorld } from './soukous';
+import { GENRE_WORLD as SteppeWorld } from './steppe';
+import { GENRE_WORLD as SwingWorld } from './swing';
+import { GENRE_WORLD as TaarabWorld } from './taarab';
+import { GENRE_WORLD as TangoWorld } from './tango';
+import { GENRE_WORLD as TimbaWorld } from './timba';
+import { GENRE_WORLD as TurkishWorld } from './turkish';
+import { GENRE_WORLD as WeirdWorld } from './weird';
+import { GENRE_WORLD as ZoukWorld } from './zouk';
+
+const discoveredWorlds = [
+  AfrobeatWorld,
+  AfrobeatsWorld,
+  AmapianoWorld,
+  AmbientWorld,
+  AndeanWorld,
+  ArabicWorld,
+  BachataWorld,
+  BassWorld,
+  BluesWorld,
+  BollywoodWorld,
+  BrazilianWorld,
+  ChineseWorld,
+  CinematicWorld,
+  ClassicalWorld,
+  CountryWorld,
+  DangdutWorld,
+  DesertBluesWorld,
+  ElectronicWorld,
+  EthiopianWorld,
+  FlamencoWorld,
+  FolkWorld,
+  FunkWorld,
+  GamelanWorld,
+  GnawaWorld,
+  GospelWorld,
+  HipHopWorld,
+  HouseWorld,
+  IndianClassicalWorld,
+  IndustrialWorld,
+  JapaneseWorld,
+  JazzWorld,
+  KizombaWorld,
+  KoreanWorld,
+  LatinWorld,
+  MbalaxWorld,
+  MetalWorld,
+  MexicanWorld,
+  PersianWorld,
+  PopWorld,
+  PunkWorld,
+  QawwaliWorld,
+  RAndBWorld,
+  ReggaeWorld,
+  ReggaetonWorld,
+  RockWorld,
+  SalsaWorld,
+  SoukousWorld,
+  SteppeWorld,
+  SwingWorld,
+  TaarabWorld,
+  TangoWorld,
+  TimbaWorld,
+  TurkishWorld,
+  WeirdWorld,
+  ZoukWorld,
+].filter(isGenreWorld);
+
 function isGenreWorld(value: unknown): value is GenreWorld {
   if (!value || typeof value !== 'object') return false;
   const candidate = value as Partial<GenreWorld>;
   return typeof candidate.id === 'string'
     && typeof candidate.name === 'string'
+    && candidate.catalogGeneration === 'genre-style-map-v1'
     && Array.isArray(candidate.styleDefinitions)
     && Array.isArray(candidate.patterns);
 }
 
-const discoveredWorlds = Object.values(genreModules)
-  .flatMap(module => Object.values(module))
-  .filter(isGenreWorld);
-
-const INAPPROPRIATE_ELECTRONIC_PATTERNS: Record<string, Set<string>> = {
-  'drum-and-bass': new Set(['4onfloor', 'techno-rumble', 'trance-16ths', 'dubstep-half', 'footwork', 'ukg', 'electro', 'ambient', 'synthwave', 'synth']),
-  'uk-bass': new Set(['techno-rumble', 'trance-16ths', 'footwork', 'electro', 'synthwave', 'synth']),
-};
 
 /** Every public genre is defined by its own folder and world definition. */
 export const GENRE_WORLDS: GenreWorld[] = discoveredWorlds.map(world => {
   const native = CANONICAL_GENRE_PATTERNS.filter(pattern => pattern.worldId === world.id);
-  const excluded = INAPPROPRIATE_ELECTRONIC_PATTERNS[world.id];
   const patterns = new Map((world.patterns ?? [])
-    .filter(pattern => {
-      if (pattern.worldId !== world.id) return false;
-      const marker = String(pattern.id).lastIndexOf('--elec-');
-      const sharedElectronicId = marker >= 0 ? pattern.id.slice(marker + '--elec-'.length) : '';
-      return !excluded?.has(sharedElectronicId);
-    })
+    .filter(pattern => pattern.worldId === world.id)
     .map(pattern => [pattern.id, pattern]));
   for (const pattern of native) patterns.set(pattern.id, pattern);
   const homeStyleId = world.styleDefinitions.some(style => style.id === world.homeStyleId)

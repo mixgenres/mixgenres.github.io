@@ -1,13 +1,5 @@
-import type { GenreWorld } from '../../schema';
-import { SWING_WORLD_WORLD, SWING_WORLD_CULTURE, SWING_WORLD_ROLES, SWING_WORLD_FEEL } from './identity';
-import { SWING_WORLD_STYLES } from './styles';
-import { SWING_WORLD_PATTERNS } from './patterns';
+import { createGenreWorld } from '../_shared/genrePack';
+import { GENRE_PACK } from './catalog';
 
-export const SWING_WORLD: GenreWorld = {
-  ...SWING_WORLD_WORLD,
-  ...SWING_WORLD_CULTURE,
-  ...SWING_WORLD_ROLES,
-  ...SWING_WORLD_FEEL,
-  ...SWING_WORLD_STYLES,
-  ...SWING_WORLD_PATTERNS,
-} as GenreWorld;
+export const GENRE_WORLD = createGenreWorld(GENRE_PACK);
+export const SwingGenre = GENRE_WORLD;

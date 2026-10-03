@@ -7,9 +7,9 @@ import { GENRE_SOLO_DEFINITIONS } from '../src/data/performance/soloDefinitions'
 const base = makeSheet('flamenco');
 const region = base.regions[1];
 const guitar = base.tracks.find(t => t.instrumentId === 'guitar')!;
-const flute = base.tracks.find(t => t.instrumentId === 'flute')!;
+const secondLead = base.tracks.find(t => t.instrumentId === 'voice')!;
 const palmas = base.tracks.find(t => t.instrumentId === 'palmas')!;
-assert.ok(guitar && flute && palmas);
+assert.ok(guitar && secondLead && palmas);
 const inPart = (bar: number) => bar >= region.start && bar < region.end;
 
 const alone = setSectionSolo(base, region.id, { trackIds: [guitar.id], mode: 'unaccompanied' });
@@ -17,17 +17,17 @@ const alonePerf = arrangeBand(alone);
 const aloneNotes = alonePerf.notes.filter(n => inPart(n.bar));
 assert.ok(aloneNotes.length);
 assert.ok(aloneNotes.every(n => n.trackId === guitar.id), 'unaccompanied means no backing notes');
-assert.ok(alonePerf.notes.some(n => !inPart(n.bar) && n.trackId === flute.id), 'backing returns outside the assigned part');
+assert.ok(alonePerf.notes.some(n => !inPart(n.bar) && n.trackId === secondLead.id), 'backing returns outside the assigned part');
 assert.deepEqual(alone.energies, base.energies, 'solo behavior does not overwrite authored energy');
 
 const backed = setSectionSolo(base, region.id, { trackIds: [guitar.id], mode: 'genre' });
 const backedNotes = arrangeBand(backed).notes.filter(n => inPart(n.bar));
 assert.ok(backedNotes.some(n => n.trackId === guitar.id));
 assert.ok(backedNotes.some(n => n.trackId === palmas.id), 'falseta keeps compás support');
-assert.ok(backedNotes.every(n => n.trackId !== flute.id), 'the explicit rhythm-only policy rests other melodic lines');
-assert.equal(backed.arrangementContext?.[region.id].energyByTrack[palmas.id], 2);
+assert.ok(backedNotes.every(n => n.trackId !== secondLead.id), 'the explicit rhythm-only policy rests other melodic lines');
+assert.equal(backed.arrangementContext?.[region.id].energyByTrack[palmas.id], base.energies[region.id][palmas.id] - 1);
 
-const trading = setSectionSolo(base, region.id, { trackIds: [guitar.id, flute.id], mode: 'trading' });
+const trading = setSectionSolo(base, region.id, { trackIds: [guitar.id, secondLead.id], mode: 'trading' });
 const tradingPerf = arrangeBand(trading);
 const plan = trading.arrangementContext![region.id].solo!;
 for (const note of tradingPerf.notes.filter(n => inPart(n.bar) && plan.trackIds.includes(n.trackId))) {
@@ -38,25 +38,25 @@ for (const note of tradingPerf.notes.filter(n => inPart(n.bar) && plan.trackIds.
   }
 }
 assert.ok(tradingPerf.notes.some(n => inPart(n.bar) && n.trackId === guitar.id));
-assert.ok(tradingPerf.notes.some(n => inPart(n.bar) && n.trackId === flute.id));
+assert.ok(tradingPerf.notes.some(n => inPart(n.bar) && n.trackId === secondLead.id));
 
 const renamed = { ...trading, regions: trading.regions.map(r => ({ ...r, name: 'renamed', formLabel: 'renamed', kind: 'renamed' })) };
 assert.deepEqual(arrangeBand(renamed).notes, tradingPerf.notes, 'display/form names do not select solos');
 
 const inactive = rebuild({ ...alone, tracks: alone.tracks.map(t => t.id === guitar.id ? { ...t, muted: true } : t) });
 assert.equal(inactive.arrangementContext?.[region.id].solo, undefined);
-assert.ok(arrangeBand(inactive).notes.some(n => inPart(n.bar) && n.trackId === flute.id), 'muting the only soloist does not silence the whole band');
+assert.ok(arrangeBand(inactive).notes.some(n => inPart(n.bar) && n.trackId === secondLead.id), 'muting the only soloist does not silence the whole band');
 const silent = rebuild({ ...alone, arrangement: { ...alone.arrangement, [region.id]: { ...alone.arrangement[region.id], [guitar.id]: 'silent' } } });
 assert.equal(silent.arrangementContext?.[region.id].solo, undefined);
 
 const copied = duplicateSection(trading, region.id);
 assert.deepEqual(copied.sheet.regions.find(r => r.id === copied.newRegionId)?.solo, region.solo ?? trading.regions.find(r => r.id === region.id)?.solo);
-assert.deepEqual(removeVoice(trading, guitar.id).regions.find(r => r.id === region.id)?.solo?.trackIds, [flute.id]);
+assert.deepEqual(removeVoice(trading, guitar.id).regions.find(r => r.id === region.id)?.solo?.trackIds, [secondLead.id]);
 
-const custom = makeSheet({ genreId: 'flamenco', overrides: { arrangement: { soloDefinition: GENRE_SOLO_DEFINITIONS.disco } } });
+const custom = makeSheet({ genreId: 'flamenco', overrides: { arrangement: { soloDefinition: GENRE_SOLO_DEFINITIONS.salsa } } });
 const customSolo = setSectionSolo(custom, custom.regions[0].id, { trackIds: [guitar.id], mode: 'genre' });
 assert.equal(customSolo.arrangementContext?.[custom.regions[0].id].solo?.policy.accompaniment, 'ensemble', 'style overrides may replace genre solo definitions');
-assert.ok(arrangeBand(customSolo).notes.some(n => n.bar < custom.regions[0].end && n.trackId === flute.id));
+assert.ok(arrangeBand(customSolo).notes.some(n => n.bar < custom.regions[0].end && n.trackId === secondLead.id));
 
 console.log('Solo performance checks passed: genre coverage, accompaniment, trading, names, energy, inactive players, lifecycle and style overrides.');
 

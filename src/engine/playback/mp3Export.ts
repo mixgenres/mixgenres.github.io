@@ -13,6 +13,7 @@ import { resolvePlaybackMix, ensembleHeadroom } from '../studio/masterSettings';
 import { measureAudio, type RenderDiagnostic } from '../studio/audioMetrics';
 import { FORM_BLUEPRINTS } from '../../data/genreForms';
 import { processOfflineAudioDSP } from '../studio/effects.ts';
+import { excerptMixTimeline } from '../studio/dynamicMix/MixAutomation';
 import {
   renderTrack,
   determineBusCategory,
@@ -23,6 +24,8 @@ import {
 
 export interface Mp3RenderOptions {
   selectedTrackIds?: string[];
+  /** Render a short window of the performance timeline for incremental playback. */
+  renderWindow?: { start: number; end: number };
   signal?: AbortSignal;
   format?: 'mp3' | 'wav';
   rawStem?: boolean;
@@ -90,6 +93,7 @@ async function renderPerformance(
   pcm = false,
 ): Promise<Blob | RenderedPerformanceAudio> {
   checkAbort(options.signal);
+  if (options.renderWindow) perf = performanceWindow(perf, options.renderWindow.start, options.renderWindow.end);
   const sampleRate = 44100;
   const decayTail = perf.notes.reduce((tail, note) => Math.max(tail, voiceTailSeconds(resolveTrackSound(
     options.trackInstruments.get(note.trackId) ?? perf.trackInfo?.[note.trackId]?.instrumentId ?? note.trackId,
@@ -555,4 +559,37 @@ async function renderPerformance(
     dynamicGraph?.dispose();
     dynamicChain?.dispose();
   }
+}
+
+/** Clip events to one playback window while retaining controller state at its start. */
+function performanceWindow(perf: Performance, start: number, end: number): Performance {
+  const from = Math.max(0, start), to = Math.max(from + 0.01, end);
+  const notes = perf.notes.flatMap(note => {
+    const noteStart = Math.max(from, note.time), noteEnd = Math.min(to, note.time + note.dur);
+    if (noteEnd <= noteStart) return [];
+    const bendBefore = (note.pitchBend ?? []).filter(bend => note.time + bend.offset < noteStart).at(-1);
+    const pitchBend = [
+      ...(bendBefore ? [{ ...bendBefore, offset: 0 }] : []),
+      ...(note.pitchBend ?? []).filter(bend => note.time + bend.offset >= noteStart && note.time + bend.offset < noteEnd)
+        .map(bend => ({ ...bend, offset: note.time + bend.offset - noteStart })),
+    ];
+    return [{ ...note, time: noteStart - from, dur: noteEnd - noteStart, ...(pitchBend.length ? { pitchBend } : {}) }];
+  });
+  const latestCC = new Map<string, PerfCC>();
+  const windowCCs: PerfCC[] = [];
+  for (const cc of perf.ccs) {
+    if (cc.time < from) latestCC.set(`${cc.trackId}:${cc.cc}`, cc);
+    else if (cc.time < to) windowCCs.push({ ...cc, time: cc.time - from });
+  }
+  const ccs = [
+    ...[...latestCC.values()].map(cc => ({ ...cc, time: 0 })),
+    ...windowCCs,
+  ].sort((a, b) => a.time - b.time);
+  const bars = perf.bars.filter(bar => bar.end > from && bar.start < to).map(bar => ({
+    ...bar, start: Math.max(0, bar.start - from), end: Math.min(to, bar.end) - from,
+  }));
+  const timeline = perf.mixTimeline && from < perf.mixTimeline.duration
+    ? excerptMixTimeline(perf.mixTimeline, from, Math.min(to - from, perf.mixTimeline.duration - from))
+    : undefined;
+  return { ...perf, notes, ccs, bars, duration: to - from, tail: 0, mixTimeline: timeline };
 }

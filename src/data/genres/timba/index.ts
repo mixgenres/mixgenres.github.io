@@ -1,13 +1,5 @@
-import type { GenreWorld } from '../../schema';
-import { TIMBA_WORLD_WORLD, TIMBA_WORLD_CULTURE, TIMBA_WORLD_ROLES, TIMBA_WORLD_FEEL } from './identity';
-import { TIMBA_WORLD_STYLES } from './styles';
-import { TIMBA_WORLD_PATTERNS } from './patterns';
+import { createGenreWorld } from '../_shared/genrePack';
+import { GENRE_PACK } from './catalog';
 
-export const TIMBA_WORLD: GenreWorld = {
-  ...TIMBA_WORLD_WORLD,
-  ...TIMBA_WORLD_CULTURE,
-  ...TIMBA_WORLD_ROLES,
-  ...TIMBA_WORLD_FEEL,
-  ...TIMBA_WORLD_STYLES,
-  ...TIMBA_WORLD_PATTERNS,
-} as GenreWorld;
+export const GENRE_WORLD = createGenreWorld(GENRE_PACK);
+export const TimbaGenre = GENRE_WORLD;

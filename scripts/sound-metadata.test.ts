@@ -12,7 +12,8 @@ import { getRoleGainLinear } from '../src/engine/studio/mixer';
 const before = JSON.stringify(INSTRUMENTS_BY_ID);
 let combinations = 0;
 for (const genre of Object.keys(GENRE_CONTRACTS)) {
-  assert.equal(getGenreDialect({ genreId: genre, dialect: `flute:${genre}` }).id, genre === 'r-and-b' ? 'rnb' : genre);
+  const canonicalGenre = genre === 'r-and-b' ? 'rnb' : genre === 'punk' ? 'punk-hardcore' : genre;
+  assert.equal(getGenreDialect({ genreId: genre, dialect: `flute:${genre}` }).id, canonicalGenre);
   for (const def of Object.values(INSTRUMENTS_BY_ID)) {
     const params = resolveTrackSound(def.id, genre, '', 'lead');
     assert.deepEqual(resolveTrackSound(def.id, genre, '', 'lead'), params, 'resolution must not accumulate multipliers');

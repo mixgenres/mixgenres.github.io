@@ -32,6 +32,7 @@ export interface NativeSlice {
   durations: number[];
   microtiming: number[];
   hitTypes: string[];
+  articulations: string[];
   /** how many steps this pattern puts in one bar */
   stepsPerBar: number;
   /** fractional percentage (0..1) of the bar where each onset occurs */
@@ -50,6 +51,8 @@ export function sliceBarNative(
   subdivisions: number,
   cycleLength: number,
   barInCycle: number,
+  articulations?: string[],
+  fractionalSteps?: number[],
 ): NativeSlice {
   const declared = Math.max(1, subdivisions || 16);
   const authoredMax = onsets.length ? Math.max(...onsets) : -1;
@@ -60,21 +63,25 @@ export function sliceBarNative(
   const stepsPerBar = Math.max(1, Math.round(total / cycleBars));
 
   const from = (barInCycle % cycleBars) * stepsPerBar;
-  const keepO: number[] = [], keepA: number[] = [], keepV: number[] = [], keepD: number[] = [], keepM: number[] = [], keepH: string[] = [], keepF: number[] = [];
+  const keepO: number[] = [], keepA: number[] = [], keepV: number[] = [], keepD: number[] = [], keepM: number[] = [], keepH: string[] = [], keepT: string[] = [], keepF: number[] = [];
 
   onsets.forEach((o, i) => {
     if (o < from || o >= from + stepsPerBar) return;
     const barStep = o - from;
     keepO.push(barStep);
-    keepF.push(barStep / stepsPerBar);
+    const authoredFraction = fractionalSteps?.[i];
+    keepF.push(authoredFraction !== undefined
+      ? Math.max(0, Math.min(1, (authoredFraction - from) / stepsPerBar))
+      : barStep / stepsPerBar);
     keepA.push(accents?.[i] ?? 0.78);
     keepV.push(velocities?.[i] ?? 0.78);
     keepD.push(durations?.[i] ?? 1);
     keepM.push(micro?.[i] ?? 0);
     keepH.push(hitTypes?.[i] ?? '');
+    keepT.push(articulations?.[i] ?? '');
   });
 
-  return { onsets: keepO, accents: keepA, velocities: keepV, durations: keepD, microtiming: keepM, hitTypes: keepH, stepsPerBar, fractionalPositions: keepF, durationsAuthored: durations !== undefined };
+  return { onsets: keepO, accents: keepA, velocities: keepV, durations: keepD, microtiming: keepM, hitTypes: keepH, articulations: keepT, stepsPerBar, fractionalPositions: keepF, durationsAuthored: durations !== undefined };
 }
 
 /** Quarter-note beats in one bar of the given time signature. */

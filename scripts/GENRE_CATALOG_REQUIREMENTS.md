@@ -1,57 +1,30 @@
-# Genre Catalog Requirements
+# Genre catalog requirements
 
-## Scope
+## Ownership and discovery
 
-- Supported genres are the registered musical worlds in `src/data/genres/index.ts`.
-- Unsupported legacy genres must not appear in the public catalog.
-- The instrument catalog is authoritative for instrument references.
+- The 55-folder map under `src/data/genres/*/catalog.ts` is the public taxonomy and contains 420 styles with an explicit default for each genre.
+- Each folder exports one `GENRE_WORLD` with `catalogGeneration: 'genre-style-map-v1'`.
+- `src/data/genres/index.ts` discovers folder-owned worlds. Do not maintain a second handwritten genre registry.
+- Deleting a genre folder removes only that genre, its styles, and its patterns. Avoid cross-folder imports of genre-owned data.
 
-## Genre hierarchy
+## Styles, instruments, techniques, and patterns
 
-- Use one canonical genre ID per public genre.
-- Default style is the first listed style.
-- Include distinct authored styles without a fixed count.
-- Style names describe reusable musical identities.
-- Do not clone individual artist or song styles.
+- Keep each style's calibration in its genre folder: role/instrument preferences, register and mix function, scoped technique vocabulary, rhythm/pattern grammar, style-specific harmony, and authored form.
+- Instruments referenced by a style must resolve through `INSTRUMENTS_BY_ID`. Add a physical definition or an explicitly modeled alias when required.
+- Expose a technique only when the style supports it and the instrument has the corresponding physical capability. Keep phrase and section techniques scoped to their proper musical context.
+- Each calibrated pattern has exactly one owning genre and explicit style ownership. Pattern selection for that style is a closed set; do not borrow another genre's pattern or use a generic cross-genre fallback.
+- Use rich pattern events for rests, ties, durations, accents, probability, microtiming, tuplets, polyrhythm, and phrase/section conditions where the source grammar needs them. Legacy onset grids may be projections for renderers that require them.
+- Chord and voicing size follows the selected style and instrument. Do not impose a global four-note ceiling.
 
-## Pattern catalog
+## Harmony, arrangement, and mix
 
-- Patterns are reusable musical definitions.
-- Reuse shared pattern objects across genres when valid.
-- Never add trivial rhythmic duplicates.
-- Prefer one pattern per distinct musical job.
-- Pattern descriptions use six words maximum.
-- Keep authored onset, accent, velocity, and articulation data.
-- Patterns must be reachable through the active style contract.
-- Songs must select patterns from this catalog.
-- Do not define song-specific pattern cells.
+- Calibrate pitch systems, scales, chord vocabulary, progression examples, harmonic rhythm, cadences, and bass/harmony interaction per style.
+- Author role-first arrangements and style-specific section forms; keep meter, tempo, and personnel consistent with each style's calibration.
+- Every style enables the dynamic mixer and authors its character, stage, dynamics, masking, ambience, role, section, transition, and bus settings. Resolve partial overrides over `DYNAMIC_MIX_DEFAULTS`; do not leave required runtime attributes unset.
+- Preserve folder independence in theory and contract lookup. Unknown or deleted genres must fail explicitly rather than silently use another genre's profile.
 
-## Harmonic catalog
+## Maintenance
 
-- Chord cells retain the complete authored harmonic sentence; their length follows the music.
-- Chord cells live in `data/chordPalette.ts`.
-- Reuse cells across genres where musically appropriate.
-- Remove exact or trivial progression duplicates.
-- Chord descriptions use six words maximum.
-- Songs must choose chord cells from this catalog.
-- Do not define song-specific progression arrays.
-
-## Starter songs
-
-- Starter songs preserve the genre/style ensemble and its musical roles without a fixed instrument count.
-- Instrument choices should reflect genre identity.
-- Do not modify the instrument catalog to satisfy this rule.
-- Song structures must use existing engine section kinds.
-- Forms must be representable by `GenreForm` and `FormStep`.
-- Use genre-appropriate BPM ranges and meters.
-- Use authored groove mechanics for timing and velocity feel.
-- Density should follow section intensity and genre expectations.
-- Avoid uniformly busy arrangements.
-
-## Cleanup
-
-- Remove obsolete genre packs from the active registry.
-- Do not retain compatibility aliases for deleted public genres.
-- Keep source musical definitions only when reachable from supported genres.
-- Prefer shared references over cloned catalog entries.
-- Validate TypeScript before shipping catalog changes.
+- Keep legacy catalog code only when it remains reachable and useful to the mapped public worlds.
+- Update starter song genre/style IDs when the public map changes.
+- Run TypeScript static validation after schema or catalog changes. Do not replace missing genre data with another genre's catalog.

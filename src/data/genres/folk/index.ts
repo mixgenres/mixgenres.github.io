@@ -1,13 +1,5 @@
-import type { GenreWorld } from '../../schema';
-import { FOLK_WORLD_WORLD, FOLK_WORLD_CULTURE, FOLK_WORLD_ROLES, FOLK_WORLD_FEEL } from './identity';
-import { FOLK_WORLD_STYLES } from './styles';
-import { FOLK_WORLD_PATTERNS } from './patterns';
+import { createGenreWorld } from '../_shared/genrePack';
+import { GENRE_PACK } from './catalog';
 
-export const FOLK_WORLD: GenreWorld = {
-  ...FOLK_WORLD_WORLD,
-  ...FOLK_WORLD_CULTURE,
-  ...FOLK_WORLD_ROLES,
-  ...FOLK_WORLD_FEEL,
-  ...FOLK_WORLD_STYLES,
-  ...FOLK_WORLD_PATTERNS,
-} as GenreWorld;
+export const GENRE_WORLD = createGenreWorld(GENRE_PACK);
+export const FolkGenre = GENRE_WORLD;

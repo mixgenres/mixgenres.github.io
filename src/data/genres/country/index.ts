@@ -1,15 +1,5 @@
-import type { GenreWorld } from '../../schema';
-import { COUNTRY_WORLD_WORLD, COUNTRY_WORLD_CULTURE, COUNTRY_WORLD_ROLES, COUNTRY_WORLD_FEEL } from './identity';
-import { COUNTRY_WORLD_STYLES } from './styles';
-import { COUNTRY_WORLD_PATTERNS } from './patterns';
+import { createGenreWorld } from '../_shared/genrePack';
+import { GENRE_PACK } from './catalog';
 
-export const COUNTRY_WORLD: GenreWorld = {
-  ...COUNTRY_WORLD_WORLD,
-  ...COUNTRY_WORLD_CULTURE,
-  ...COUNTRY_WORLD_ROLES,
-  ...COUNTRY_WORLD_FEEL,
-  ...COUNTRY_WORLD_STYLES,
-  ...COUNTRY_WORLD_PATTERNS,
-} as GenreWorld;
-
-export const CountryGenre = COUNTRY_WORLD;
+export const GENRE_WORLD = createGenreWorld(GENRE_PACK);
+export const CountryGenre = GENRE_WORLD;

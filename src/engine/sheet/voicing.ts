@@ -72,7 +72,7 @@ function priorityIntervals(
 
   if (fifth !== undefined && (fifth !== 7 || out.length < 3 || chord.isPower)) out.push(fifth);
 
-  const colourBudget = intensity > 0.75 ? colours.length : intensity > 0.45 ? Math.min(1, colours.length) : 0;
+  const colourBudget = intensity > 0.75 ? colours.length : intensity > 0.45 ? Math.ceil(colours.length / 2) : 0;
   for (let i = 0; i < colourBudget; i++) out.push(colours[i]);
 
   if (!skipRoot && bassCovered && !out.includes(0) && out.length < 3) out.push(0);
@@ -144,49 +144,16 @@ export function voiceChord(req: VoicingRequest): number[] {
 
   // Strict 4-Part SATB Divisi for Choirs & Vocal Sections (Prompt 22)
   const isChoir = VOICING_CLASSIFIERS.choir.test(profile.id || '') && !/lead/i.test(profile.id || '');
-  if (isChoir && req.size === 4) {
+  if (isChoir && req.size > 1) {
     const wanted = priorityIntervals(chord, req.bassCovered, intensity, isJazzFunkNeo);
-    // Ensure we have exactly 4 notes (Bass, Tenor, Alto, Soprano)
-    const rawPcs = wanted.slice(0, 4);
-    while (rawPcs.length < 4) {
-      rawPcs.push(wanted[rawPcs.length % wanted.length]);
-    }
-    
-    // Distribute into SATB ranges:
-    // Bass: C2-E4 (36-64), Tenor: C3-G4 (48-67), Alto: F3-D5 (53-74), Soprano: C4-A5 (60-81)
-    const b = nearestPc(pcOf(chord.rootPc + rawPcs[0]), 45); // bass
-    const t = nearestPc(pcOf(chord.rootPc + rawPcs[1]), 55); // tenor
-    const a = nearestPc(pcOf(chord.rootPc + rawPcs[2]), 64); // alto
-    const s = nearestPc(pcOf(chord.rootPc + rawPcs[3]), 72); // soprano
-    
-    let satb = [b, t, a, s].sort((x, y) => x - y);
-    
-    // Contrary Motion Voice Leading: Soprano moves contrary to Bass if previous exists
-    if (previous.length >= 4) {
-      const prevBass = previous[0];
-      const prevSop = previous[previous.length - 1];
-      const bassDiff = satb[0] - prevBass;
-      if (bassDiff > 0) {
-        // Bass moved up, Soprano should stay or move down
-        if (satb[3] > prevSop) {
-          satb[3] -= 12; // Force down
-        }
-      } else if (bassDiff < 0) {
-        // Bass moved down, Soprano should stay or move up
-        if (satb[3] < prevSop) {
-          satb[3] += 12; // Force up
-        }
-      }
-    }
-    
-    // Prevent voice crossing
-    satb = [
-      satb[0],
-      Math.max(satb[0], satb[1]),
-      Math.max(satb[1], satb[2]),
-      Math.max(satb[2], satb[3])
-    ];
-    return satb.map(n => clampRange(n, profile));
+    const source = [...new Set([...wanted, ...chord.tensions, ...chord.intervals])];
+    const count = Math.max(1, Math.round(req.size));
+    const notes = Array.from({ length: count }, (_, i) => {
+      const interval = source[i % source.length] + 12 * Math.floor(i / source.length);
+      const low = profile.low + (profile.high - profile.low) * (i / Math.max(1, count));
+      return nearestPc(pcOf(chord.rootPc + interval), low);
+    }).sort((a, b) => a - b);
+    return dedupe(notes.map(n => clampRange(n, profile)));
   }
 
   // Drop-D Tuning for Metal and Grunge (Prompt 10)
@@ -290,7 +257,7 @@ export function voiceChord(req: VoicingRequest): number[] {
 
       let funkVoicing = [topNote, ...lowerNotes].filter(n => n >= 65 && n <= 79).sort((a, b) => a - b);
       if (funkVoicing.length >= 2 && funkVoicing[funkVoicing.length - 1] === topNote) {
-        return dedupe(funkVoicing.slice(-4));
+        return dedupe(funkVoicing.slice(-Math.max(1, Math.round(req.size))));
       }
     }
 
@@ -328,7 +295,7 @@ export function voiceChord(req: VoicingRequest): number[] {
     while (topNote < profile.centre) topNote += 12;
 
     // Stack 2 or 3 notes beneath it in Perfect Fourths (-5 semitones)
-    const quartalCount = req.size >= 4 ? 4 : 3;
+    const quartalCount = Math.max(1, Math.round(req.size));
     let quartalStack: number[] = [];
     for (let i = 0; i < quartalCount; i++) {
       quartalStack.push(topNote - i * 5);
@@ -681,29 +648,36 @@ export function styleFor(
   intensity: number,
   resolved: ResolvedStyle,
 ): { style: VoicingStyle; size: number } {
+  const calibratedSize = (style: VoicingStyle, fallback: number) => {
+    const role = String(profile.role ?? 'harmony');
+    const [min, max] = resolved.harmony.voicingTonesByRole?.[role]
+      ?? resolved.harmony.preferredVoicingTones
+      ?? [fallback, fallback];
+    return { style, size: Math.max(1, Math.round(min + (max - min) * Math.max(0, Math.min(1, intensity)))) };
+  };
   if (chord.isPower) return { style: 'power', size: 3 };
 
   const id = instrumentId;
   if (profile.role === 'pad' || VOICING_CLASSIFIERS.pad.test(id)) {
-    return { style: 'spread', size: intensity > 0.6 ? 5 : 4 };
+    return calibratedSize('spread', intensity > 0.6 ? 5 : 4);
   }
   if (VOICING_CLASSIFIERS.organ.test(id)) {
-    return { style: 'close', size: intensity > 0.6 ? 4 : 3 };
+    return calibratedSize('close', intensity > 0.6 ? 4 : 3);
   }
   if (VOICING_CLASSIFIERS.powerAmp.test(id)) {
     return { style: 'power', size: 3 };
   }
   if (VOICING_CLASSIFIERS.guitarFamily.test(id)) {
-    return { style: intensity > 0.55 ? 'close' : 'shell', size: intensity > 0.55 ? 4 : 3 };
+    return calibratedSize(intensity > 0.55 ? 'close' : 'shell', intensity > 0.55 ? 4 : 3);
   }
   if (VOICING_CLASSIFIERS.pianoInstrument.test(id)) {
     const jazzy = resolved.contract.harmonyModel === 'functional' && VOICING_CLASSIFIERS.salsaFunk.test(resolved.name + ' ' + resolved.contract.harmonyVocabulary.join(' '));
-    if (jazzy && intensity < 0.55) return { style: 'shell', size: 3 };
-    if (jazzy && intensity > 0.82) return { style: 'spread', size: 8 };
-    return { style: 'drop2', size: jazzy ? 5 : (intensity > 0.7 ? 4 : 3) };
+    if (jazzy && intensity < 0.55) return calibratedSize('shell', 3);
+    if (jazzy && intensity > 0.82) return calibratedSize('spread', 8);
+    return calibratedSize('drop2', jazzy ? 5 : (intensity > 0.7 ? 4 : 3));
   }
   if (VOICING_CLASSIFIERS.horn.test(id)) {
-    return { style: 'close', size: intensity > 0.6 ? 4 : 3 };
+    return calibratedSize('close', intensity > 0.6 ? 4 : 3);
   }
-  return { style: 'close', size: 3 };
+  return calibratedSize('close', 3);
 }

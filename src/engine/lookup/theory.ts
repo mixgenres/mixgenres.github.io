@@ -6,9 +6,12 @@ import type { GenreTheoryProfile } from '../../data/musicTheory/genreTheory';
 import { GENRE_THEORY } from '../../data/musicTheory/genreTheory';
 import { CHORD_PALETTE, CHORD_MOOD_ORDER_RAW } from '../../data/chordPalette';
 import type { ChordMood, ChordOption } from '../../data/chordPalette';
+import { GENRE_WORLDS_BY_ID } from '../../data/genres';
 
 export function getGenreTheory(genreId: string): GenreTheoryProfile {
-  return GENRE_THEORY[genreId] ?? GENRE_THEORY.rock;
+  const profile = GENRE_THEORY[genreId];
+  if (!profile) throw new Error(`No theory profile for ${genreId}; no genre folder exports this world.`);
+  return profile;
 }
 
 export function blendGenreTheory(host: GenreTheoryProfile, guest: GenreTheoryProfile, weight: number): GenreTheoryProfile {
@@ -56,6 +59,24 @@ export function blendGenreTheory(host: GenreTheoryProfile, guest: GenreTheoryPro
 
 export function styleTheoryFor(styleId: string | undefined, genreId: string): GenreTheoryProfile {
   const base = getGenreTheory(genreId);
+  const scaleFromWords = (value: string): GenreTheoryProfile['defaultScale'] => {
+    const term = value.toLowerCase();
+    if (/phrygian.?dominant|hijaz/.test(term)) return 'phrygian-dominant';
+    if (/phrygian/.test(term)) return 'phrygian';
+    if (/dorian/.test(term)) return 'dorian';
+    if (/lydian/.test(term)) return 'lydian';
+    if (/mixolydian/.test(term)) return 'mixolydian';
+    if (/harmonic.?minor/.test(term)) return 'harmonic-minor';
+    if (/melodic.?minor/.test(term)) return 'melodic-minor';
+    if (/minor.?pentatonic/.test(term)) return 'minor-pentatonic';
+    if (/pentatonic/.test(term)) return 'major-pentatonic';
+    if (/blues/.test(term)) return 'blues';
+    if (/whole.?tone/.test(term)) return 'whole-tone';
+    if (/chromatic/.test(term)) return 'chromatic';
+    if (/aeolian|minor/.test(term)) return 'aeolian';
+    if (/locrian/.test(term)) return 'locrian';
+    return 'ionian';
+  };
   const slug = (value: string) => value.toLowerCase().normalize('NFKD')
     .replace(/[\u0300-\u036f]/g, '').replace(/&/g, '-and-')
     .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -159,13 +180,53 @@ export function styleTheoryFor(styleId: string | undefined, genreId: string): Ge
   if (has('shoegaze')) { out.harmony.voicing='open'; out.mixFocus.pad=.7; out.mixFocus.lead=.72; }
   if (has('grunge')) { out.rhythm.signature.push('dynamic-verse-chorus'); }
   if (has('prog')) { out.meter='7/8'; out.cycleBars=2; out.rhythm.signature.push('odd-meter','metric-displacement'); }
+
+  // Folder-owned style calibration is the final authority. The legacy clauses
+  // above remain available to older callers, while new genre packs stay
+  // exclusive and do not inherit another genre's theory defaults.
+  const world = GENRE_WORLDS_BY_ID[genreId];
+  const style = world?.styleDefinitions.find(candidate => candidate.id === fullId || candidate.id === styleId);
+  const calibration = style?.calibration;
+  if (style && calibration) {
+    const harmony = calibration.harmony;
+    out.meter = style.preferredMeters[0] ?? out.meter;
+    out.defaultScale = harmony.scales[0] ? scaleFromWords(harmony.scales[0]) : out.defaultScale;
+    out.chordScales = { major: out.defaultScale, minor: out.defaultScale, dominant: out.defaultScale };
+    if (harmony.progressionExamples?.length) out.progressions = harmony.progressionExamples;
+    else if (style.sectionProgressions) out.progressions = Object.values(style.sectionProgressions).filter((value): value is string[] => !!value);
+    if (harmony.cadences.length) out.cadences = harmony.cadences.map(cadence => [cadence]);
+    out.harmonicModel = harmony.requiresChords === false ? 'modal-vamp'
+      : /heterophonic|raga|maqam|dastgah/i.test(harmony.pitchSystem) ? 'modal-vamp'
+        : /power.?chord|riff/i.test(harmony.chordQualities.join(' ')) ? 'power-riff' : out.harmonicModel;
+    out.harmony.voicing = /tango|yumba/i.test(`${genreId} ${style.name}`) ? 'yumba'
+      : /power.?chord|power.?riff/i.test(harmony.chordQualities.join(' ')) ? 'power'
+        : /jazz|extended|guide.?tone/i.test(`${style.name} ${harmony.chordQualities.join(' ')}`) ? 'guide-tone' : out.harmony.voicing;
+    out.harmony.preferredVoicingTones = harmony.preferredVoicingTones ?? out.harmony.preferredVoicingTones;
+    out.harmony.voicingTonesByRole = harmony.voicingTonesByRole ?? out.harmony.voicingTonesByRole;
+    out.harmony.pitchSystem = harmony.pitchSystem;
+    out.harmony.requiresChords = harmony.requiresChords ?? true;
+    out.rhythm.signature = [...calibration.patterns.families];
+    out.rhythm.subdivision = /32nd|rapid.?roll|micro.?edit/i.test(calibration.patterns.families.join(' ')) ? 32
+      : /12\/8|12.?beat|compound/i.test(`${out.meter} ${calibration.patterns.families.join(' ')}`) ? 12 : out.rhythm.subdivision;
+    out.melody.scale = harmony.scales.length ? harmony.scales.map(scaleFromWords) : out.melody.scale;
+    out.techniques = {
+      bass: calibration.techniques.bass ?? [], harmony: calibration.techniques.harmony ?? [],
+      melody: calibration.techniques.lead ?? calibration.techniques.voice ?? [],
+      percussion: calibration.techniques.percussion ?? [], bowed: calibration.techniques.strings ?? calibration.techniques.bowed ?? [],
+      winds: calibration.techniques.winds ?? [], bellows: calibration.techniques.bandoneon ?? [],
+      voice: calibration.techniques.voice ?? [],
+    };
+    out.mixFocus = Object.fromEntries(Object.entries(calibration.mix.roles ?? {})
+      .map(([role, policy]) => [role, policy?.priority ?? .5]));
+    out.forbidden = [...(calibration.patterns.forbidden ?? [])];
+  }
   return out;
 }
 
 export function chordsForMood(mood: ChordMood): ChordOption[] { return CHORD_PALETTE.filter(c => c.mood === mood); }
 export function suggestedPaletteForGenre(genreId: string): ChordOption[] {
   const exact = CHORD_PALETTE.filter(c => c.genres.includes(genreId));
-  return exact.length ? exact.slice(0, 8) : CHORD_PALETTE.slice(0, 4);
+  return exact.slice(0, 8);
 }
 export function suggestedPaletteForStyle(styleId?: string, genreId?: string): ChordOption[] {
   const g = genreId ?? 'rock';

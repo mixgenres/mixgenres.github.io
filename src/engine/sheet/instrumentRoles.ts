@@ -1,4 +1,4 @@
-import { InstrumentDef, INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
+import { InstrumentDef, INSTRUMENTS_BY_ID, genreTechniquesForInstrument } from '../../engine/lookup/instruments';
 import type { VoiceProfile } from '../../data/instruments/schema/voice-profile';
 import { DEFAULT_VOICE_PROFILE, FAMILY_DEFAULTS } from '../../data/instruments/familyVoiceDefaults';
 import { DROP_TUNING_GENRE_PATTERN, GUITAR_INSTRUMENT_PATTERN, DROP_TUNING_LOW_MIDI } from '../../data/instruments/genreRangeRules';
@@ -32,12 +32,16 @@ export function voiceProfile(instrumentId: string, genreId?: string): VoiceProfi
   return merged;
 }
 
-export function resolveTechniqueProfile(instrumentId: string, genreId?: string) {
+export function resolveTechniqueProfile(
+  instrumentId: string, genreId?: string, styleId?: string,
+  scope?: 'note'|'motif'|'phrase'|'section'|'song',
+) {
   const def = INSTRUMENTS_BY_ID[instrumentId];
   if (!def?.techniques) return undefined;
   const methods = def.techniques.techniqueMethods ?? [];
   const styles = def.techniques.playingStyles ?? [];
-  const genreTechs = genreId ? def.techniques.genreTechniques?.[genreId.toLowerCase()] : undefined;
+  const genreTechs = styleId ? genreTechniquesForInstrument(instrumentId, styleId, scope)
+    : genreId ? def.techniques.genreTechniques?.[genreId.toLowerCase()] : undefined;
   return {
     methods,
     styles,

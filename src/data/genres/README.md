@@ -1,14 +1,12 @@
-# Genre data layout
+# Folder-owned genre catalog
 
-Rich genre catalogs intentionally use a small number of semantic modules instead of mirroring every schema dimension onto the filesystem.
+Each public genre is an independent folder containing:
 
-Each fully modeled genre should normally contain:
+- `catalog.ts` — genre identity, the exact mapped style list, the default style, and genre-level source calibration.
+- `index.ts` — exports that folder's `GENRE_WORLD` through the shared pack builder.
 
-- `identity.ts` — genre-wide identity, cultural context, roles, feel, harmony, and other world-level metadata.
-- `patterns.ts` — the genre's complete musical-pattern catalog and its stable ordering.
-- `styles.ts` — all style definitions and style-specific arrangement metadata for the genre.
-- `index.ts` — assembles the public `GenreWorld` export from those modules.
+`src/data/genres/index.ts` discovers only folders that export the current catalog generation marker. Removing a genre folder removes that genre, its styles, and its owned patterns from discovery without changing another folder. Do not add genre IDs to a central registry.
 
-Keep a separate genre-local file only when it contains executable or engine-facing behavior with a real independent responsibility (for example Tango's arrangement constants). Do not create one file per style, pattern category, or schema field.
+Patterns are authored under one `worldId` and one or more explicit `styleIds`. The style catalog uses only explicitly owned patterns for calibrated styles; semantic fallback is reserved for older catalogs that do not author style ownership. Do not copy or assign another genre's patterns to a style.
 
-Small/alias genres that are already represented cleanly by one or two files do not need to adopt the four-file layout artificially.
+Every style calibration supplies role-specific instrument preferences, technique vocabulary and scope, pattern families, pitch/harmony rules, arrangement sections, and a dynamic `MixContract` override. Mix overrides are resolved over `DYNAMIC_MIX_DEFAULTS`; authored leaves must use valid keys and values. Instrument IDs must resolve through `INSTRUMENTS_BY_ID`, and technique selection must intersect the style's vocabulary with the instrument's physical capabilities.

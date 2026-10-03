@@ -142,6 +142,26 @@ export interface PatternVariant {
   microtimingOffset?: number[]; // ms or fraction of tick
   articulation?: string;
   constraints?: string[];
+  events?: PatternEvent[];
+}
+
+/** A composable rhythmic or phrase event. `position` and `duration` are beats
+ * in the pattern's own meter; fractional values support tuplets and pickup
+ * gestures without forcing the pattern onto a fixed 16th-note grid. */
+export interface PatternEvent {
+  position: number;
+  duration?: number;
+  kind?: 'attack' | 'rest' | 'tie' | 'sustain' | 'ghost' | 'accent' | 'ornament' | 'pickup' | 'fill';
+  hitType?: DrumHitType;
+  accent?: number;
+  velocity?: number;
+  articulation?: string;
+  microtiming?: number;
+  probability?: number;
+  condition?: { section?: string[]; phrasePosition?: string[]; energy?: SectionEnergy[]; role?: Role | string };
+  tuplet?: { actual: number; normal: number };
+  polyrhythm?: { numerator: number; denominator: number; phase?: number };
+  tieToNext?: boolean;
 }
 
 export interface MusicalPattern {
@@ -172,6 +192,8 @@ export interface MusicalPattern {
   subdivisions: number; // e.g. 16 per measure
 
   onsetGrid: number[]; // 16th note indices where events hit (0..15 for 1-bar 4/4)
+  /** Rich style grammar; onsetGrid is retained as the legacy renderer projection. */
+  events?: PatternEvent[];
   /** Optional per-onset drum/perc articulation. */
   hitGrid?: DrumHitType[];
   durationGrid?: number[]; // duration in steps
@@ -221,6 +243,9 @@ export interface GenreStyleDefinition {
   signatureCell?: string;
   grooveMechanics?: GrooveMechanics;
   prominentChords?: string[];
+  /** Independent calibration for instrument roles, performance vocabulary,
+   * pattern grammar, harmony/voicing, and the dynamic mix engine. */
+  calibration?: StyleCalibration;
   sectionProgressions?: Partial<Record<SectionType | string, string[]>>;
   /** Style-authored form with changing personnel and optional tempo shifts. */
   arrangementSections?: Array<{
@@ -228,6 +253,26 @@ export interface GenreStyleDefinition {
     intensity: 'low' | 'medium' | 'high' | 'peak';
     instruments: string[]; leadInstrumentId?: string; bpm?: number; tempoFeel?: string;
   }>;
+}
+
+export interface StyleCalibration {
+  roles: Record<string, { preferredInstruments: string[]; required?: boolean; register?: [number, number]; mixFunction?: string }>;
+  techniques: Record<string, string[]>;
+  techniqueScopes?: Partial<Record<string, Array<'note' | 'motif' | 'phrase' | 'section' | 'song'>>>;
+  patterns: { families: string[]; interaction?: string[]; phraseBehaviors?: string[]; forbidden?: string[] };
+  harmony: {
+    pitchSystem: string;
+    scales: string[];
+    chordQualities: string[];
+    progressionExamples?: string[][];
+    harmonicRhythm: string;
+    cadences: string[];
+    bassChordInteraction: string;
+    requiresChords?: boolean;
+    preferredVoicingTones?: [number, number];
+    voicingTonesByRole?: Record<string, [number, number]>;
+  };
+  mix: import('./sound/schema/dynamicMix').MixOverride<import('./sound/schema/dynamicMix').MixContract>;
 }
 
 export interface PhysicalPlayerState {
@@ -303,6 +348,8 @@ export interface GenreWorld {
   kind?: 'world' | 'family' | 'fusion';
   strictness?: 'strict' | 'flexible' | 'open';
   homeStyleId?: string;
+  /** Only folder-local, authored catalog generations are public runtime worlds. */
+  catalogGeneration?: 'genre-style-map-v1';
   family: string;
   color: string;
   description: string;
@@ -334,6 +381,7 @@ export interface PatternPerformanceDetails {
   velocities: number[];
   durations: number[];
   hitTypes: string[];
+  articulations?: string[];
   microtiming: number[];
   fractionalPositions: number[];
   durationsAuthored: boolean;

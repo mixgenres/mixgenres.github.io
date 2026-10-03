@@ -1,5 +1,5 @@
 import type { MixContract, MixOverride, ResolvedMixContract } from '../sound/schema/dynamicMix';
-import type { Role, SectionType, TuningSystemTag, GrooveMechanics, SectionEnergy } from '../schema';
+import type { Role, SectionType, TuningSystemTag, GrooveMechanics, SectionEnergy, StyleCalibration } from '../schema';
 import type { WorldContract } from './contracts';
 
 export type Aspect = 'form' | 'harmony' | 'rhythm' | 'melody' | 'arrangement' | 'sound' | 'gestures';
@@ -66,6 +66,11 @@ export interface HarmonyGrammar {
   voicingStyle?: string;
   bassMotion?: 'root-fifth' | 'walking' | 'tumbao' | 'synth' | 'arpeggiated' | 'riff' | 'syncopated' | string;
   tuningSystem?: TuningSystemTag;
+  /** Number of distinct pitches a role may realize; chord identity stays separate. */
+  preferredVoicingTones?: [number, number];
+  voicingTonesByRole?: Record<string, [number, number]>;
+  pitchSystem?: string;
+  requiresChords?: boolean;
 }
 
 export interface RhythmGrammar {
@@ -192,6 +197,7 @@ export interface SongStyle {
   region?: string;
   summary: string;
   signatureTraits: string[];  // shown in UI
+  calibration?: StyleCalibration;
 
   form?: Partial<FormGrammar>;             // section vocab, order templates (weighted), bar-length distributions, intros/outros/breaks, pickups, endings
   harmony?: Partial<HarmonyGrammar>;       // mode/key policy, progression templates (functional/roman), cadences, chord vocabulary + extensions, harmonic rhythm, voicing style, bass-motion rules

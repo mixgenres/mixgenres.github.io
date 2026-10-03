@@ -1,13 +1,5 @@
-import type { GenreWorld } from '../../schema';
-import { BLUES_WORLD_WORLD, BLUES_WORLD_CULTURE, BLUES_WORLD_ROLES, BLUES_WORLD_FEEL } from './identity';
-import { BLUES_WORLD_STYLES } from './styles';
-import { BLUES_WORLD_PATTERNS } from './patterns';
+import { createGenreWorld } from '../_shared/genrePack';
+import { GENRE_PACK } from './catalog';
 
-export const BLUES_WORLD: GenreWorld = {
-  ...BLUES_WORLD_WORLD,
-  ...BLUES_WORLD_CULTURE,
-  ...BLUES_WORLD_ROLES,
-  ...BLUES_WORLD_FEEL,
-  ...BLUES_WORLD_STYLES,
-  ...BLUES_WORLD_PATTERNS,
-} as GenreWorld;
+export const GENRE_WORLD = createGenreWorld(GENRE_PACK);
+export const BluesGenre = GENRE_WORLD;

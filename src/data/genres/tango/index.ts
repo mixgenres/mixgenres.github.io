@@ -1,17 +1,5 @@
-import type { GenreWorld } from '../../schema';
-import { TANGO_WORLD_WORLD, TANGO_WORLD_CULTURE, TANGO_WORLD_ROLES, TANGO_WORLD_FEEL, TANGO_WORLD_HARMONY } from './identity';
-import { TANGO_WORLD_STYLES } from './styles';
-import { TANGO_WORLD_PATTERNS } from './patterns';
+import { createGenreWorld } from '../_shared/genrePack';
+import { GENRE_PACK } from './catalog';
 
-export const TANGO_WORLD: GenreWorld = {
-  ...TANGO_WORLD_WORLD,
-  ...TANGO_WORLD_CULTURE,
-  ...TANGO_WORLD_ROLES,
-  ...TANGO_WORLD_FEEL,
-  ...TANGO_WORLD_HARMONY,
-  ...TANGO_WORLD_STYLES,
-  ...TANGO_WORLD_PATTERNS,
-  homeStyleId: 'tango-golden-age',
-} as GenreWorld;
-
-export const TangoGenre = TANGO_WORLD;
+export const GENRE_WORLD = createGenreWorld(GENRE_PACK);
+export const TangoGenre = GENRE_WORLD;
