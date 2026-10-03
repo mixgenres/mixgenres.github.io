@@ -17,6 +17,19 @@ const idle: Worker[] = [];
 let running = 0;
 let unavailable = false;
 const cancelled = () => new DOMException('Playback rendering superseded', 'AbortError');
+const concurrency = () => Math.max(1, Math.min(3, (navigator.hardwareConcurrency || 2) - 1));
+const createWorker = () => new Worker(new URL('./playbackRenderWorker.ts', import.meta.url), { type: 'module' });
+
+/** Construct worker threads as soon as a compiled song is available. */
+export function warmPlaybackWorkers() {
+  if (typeof Worker === 'undefined' || unavailable) return;
+  try {
+    while (idle.length + running < concurrency()) idle.push(createWorker());
+  } catch {
+    unavailable = true;
+    releasePlaybackWorkers();
+  }
+}
 
 /** Independent parts can render concurrently without blocking transport/UI timers. */
 export function renderPlaybackPart(performance: Performance, options: Mp3RenderOptions, onProgress?: (fraction: number) => void): Promise<RenderedPerformanceAudio> {
@@ -33,7 +46,7 @@ export function renderPlaybackPart(performance: Performance, options: Mp3RenderO
         let completed = 0;
         const audio = await Promise.all(sections.map(async section => {
           const result = await preparePartAudio(section.key, signal, sectionSignal =>
-            renderUncachedPart(section.performance, { ...rawOptions, signal: sectionSignal }));
+            renderUncachedPart(section.performance, { ...rawOptions, renderWindow: undefined, signal: sectionSignal }));
           onProgress?.(++completed/sections.length); return result;
         }));
         if(options.sectionStems) return {sampleRate:44100,left:new Float32Array(0),right:new Float32Array(0),
@@ -46,7 +59,7 @@ export function renderPlaybackPart(performance: Performance, options: Mp3RenderO
   return renderUncachedPart(performance, options);
 }
 
-/** Release idle WASM heaps before the native studio master allocates buffers. */
+/** Explicit teardown for app/player disposal; normal mixes keep helpers warm. */
 export function releasePlaybackWorkers() { for(const worker of idle.splice(0)) worker.terminate(); }
 
 function renderUncachedPart(performance: Performance, options: Mp3RenderOptions): Promise<RenderedPerformanceAudio> {
@@ -91,8 +104,7 @@ function fallback(job: Job) {
 function dispatch() {
   // Every slot prepares UI-owned sections. Priorities reorder queued edits;
   // no worker is reserved for the removed playback-time clip renderer.
-  const concurrency = Math.max(1, Math.min(3, (navigator.hardwareConcurrency || 2) - 1));
-  while (pending.length && running < concurrency) {
+  while (pending.length && running < concurrency()) {
     let next = -1;
     for (let i = 0; i < pending.length; i++) {
       if (next < 0 || pending[i].priority() < pending[next].priority()) next = i;
@@ -106,7 +118,7 @@ function dispatch() {
       continue;
     }
     try {
-      job.worker = idle.pop() ?? new Worker(new URL('./playbackRenderWorker.ts', import.meta.url), { type: 'module' });
+      job.worker = idle.pop() ?? createWorker();
       running++;
       job.worker.onmessage = ({ data }: MessageEvent<{ audio?: RenderedPerformanceAudio; error?: string }>) => {
         finish(job, true);

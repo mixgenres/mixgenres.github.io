@@ -30,11 +30,17 @@ import { FEELS } from './data/tempoFeels';
 import { ENERGY_LABELS } from './data/performance/energy';
 import { SongPlayer, type PlayerState } from './engine/playback/songPlayer';
 import type { Performance } from './engine/band/performanceData';
+import { createCatalogSong } from './engine/sheet/songCatalog';
+import { fullSongs, FULL_SONGS_BY_ID } from './data/songs/catalog';
 import { preparedAudioStats } from './engine/cache/preparedAudio';
 import { PATTERNS_BY_ID, cleanPatternName } from './data/genres';
 
 function loadInitialSong(): { song: SongSheet; isNew: boolean } {
   const params = new URLSearchParams(window.location.search);
+  const catalogId = params.get('song');
+  if (catalogId) {
+    try { return { song: createCatalogSong(catalogId), isNew: false }; } catch { /* Unknown catalog link falls back to picker. */ }
+  }
   const genre = params.get('genre');
   if (genre || params.get('score') === '1') {
     try { return { song: createSheet(genre ?? 'tango', params.get('style') ?? undefined), isNew: false }; }
@@ -103,10 +109,11 @@ export default function App() {
     });
   }, [song.worldId, song.styleId, (song as any).styleInfluences, (song as any).styleOverrides]);
 
-  const handleStartOver = (worldId: string, styleId?: string) => {
+  const handleStartOver = (worldId: string, styleId?: string, catalogId?: string) => {
     const canonical = getCanonicalStyle(worldId);
     const targetStyleId = styleId ?? canonical.id;
-    const fresh = createSheet(worldId, targetStyleId);
+    const entry = catalogId ?? fullSongs.find(entry => entry.styleId === targetStyleId)?.id;
+    const fresh = entry ? createCatalogSong(entry) : createSheet(worldId, targetStyleId);
     setSong(fresh);
     setPickedRegion(null);
     setBar(0);
@@ -119,10 +126,7 @@ export default function App() {
   };
 
   const handleSelectStyle = (styleId: string) => {
-    const next = createSheet(song.worldId, styleId);
-    if (song.title && song.title !== 'Untitled') {
-      next.title = song.title;
-    }
+    const next = createCatalogSong(`${styleId}_starter`);
     setSong(next);
     setPickedRegion(null);
     setBar(0);
@@ -1047,8 +1051,8 @@ export default function App() {
         open={startOverOpen}
         onClose={() => setStartOverOpen(false)}
         currentWorldId={song.worldId}
-        onConfirmResetCurrent={() => handleStartOver(song.worldId)}
-        onSelectNewGenre={handleStartOver}
+        onConfirmResetCurrent={() => handleStartOver(song.worldId, song.styleId, song.catalogId)}
+        onSelectNewGenre={id => { handleStartOver(id); setStyleOpen(true); }}
         isInitialLoad={initialData.isNew}
       />
 
@@ -1259,6 +1263,11 @@ export default function App() {
         currentGenreId={song.worldId}
         currentStyleId={song.styleId}
         onPickStyle={handleSelectStyle}
+        currentCatalogId={song.catalogId}
+        onPickSong={id => {
+          const entry = FULL_SONGS_BY_ID[id];
+          handleStartOver(entry.genreId, entry.styleId, id);
+        }}
       />
 
       {scoreOpen && <PerformanceInspector song={song} onClose={() => setScoreOpen(false)} />}

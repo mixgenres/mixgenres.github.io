@@ -4,11 +4,13 @@ import type { Sheet } from '../src/engine/sheet/sheet';
 
 const report = document.querySelector<HTMLPreElement>('#report')!;
 let song: Sheet | undefined, started = 0, preparedMs: number | undefined;
-const player = new SongPlayer(() => update(), () => update());
+const player = new SongPlayer(() => update(), () => update(), true);
 function update() {
   if (player.preparedDuration && preparedMs === undefined) preparedMs = Math.round(performance.now() - started);
   report.textContent = JSON.stringify({ status: player.snapshot.status, preparedSeconds: player.preparedDuration,
-    backgroundPreparationMs: preparedMs, position: Number(player.position().toFixed(2)), error: player.snapshot.error ?? null }, null, 2);
+    backgroundPreparationMs: preparedMs, position: Number(player.position().toFixed(2)),
+    audioStartMs: player.snapshot.audioStartMs ?? null, outputLatencyMs: player.snapshot.outputLatencyMs ?? null,
+    error: player.snapshot.error ?? null }, null, 2);
 }
 document.querySelector<HTMLButtonElement>('#prepare')!.onclick = () => {
   song = makeSheet('tango', 'tango-golden-age'); started = performance.now(); preparedMs = undefined; player.configure(song); update();

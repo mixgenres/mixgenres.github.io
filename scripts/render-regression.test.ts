@@ -130,3 +130,47 @@ test('section DSP PCM reuses unchanged parts and preserves sustained notes and c
   assert.equal(edited.misses-chunkStats.misses,1); assert.equal(edited.hits-chunkStats.hits,1);
   assert.ok(first.left.slice(44100,Math.floor(1.1*44100)).some(v => Math.abs(v)>.0001),'the outgoing hold remains audible after the boundary');
 });
+
+test('window requests render complete section PCM and cannot poison the section cache', async () => {
+  const { renderPlaybackPart } = await import('../src/engine/playback/renderPlaybackPart');
+  const { clearPreparedAudio } = await import('../src/engine/cache/preparedAudio');
+  const perf: Performance = { ...performanceOf([
+    { ...note(.1), dur: .2 }, { ...note(1.1, 67), dur: .2, bar: 1 },
+  ]), duration: 2, tail: .3, bars: [
+    { index: 0, start: 0, end: 1, bpm: 240, beatsPerBar: 4, regionId: 'a' },
+    { index: 1, start: 1, end: 2, bpm: 240, beatsPerBar: 4, regionId: 'a' },
+  ] };
+  const options = { selectedTrackIds: ['keys'], trackInstruments: new Map([['keys', 'organ']]), rawStem: true, sectionStems: true };
+  clearPreparedAudio();
+  const whole = await renderPlaybackPart(perf, options);
+  clearPreparedAudio();
+  const windowed = await renderPlaybackPart(perf, { ...options, renderWindow: { start: .65, end: 2.2 } });
+  assert.ok(windowed.sections!.length > 0);
+  for (const section of windowed.sections!) {
+    const expected = whole.sections!.find(candidate => candidate.startSample === section.startSample)!;
+    assert.deepEqual(section.left, expected.left, 'physical PCM is independent of the requesting song window');
+    assert.deepEqual(section.right, expected.right);
+  }
+  const replay = await renderPlaybackPart(perf, options);
+  for (let i = 0; i < whole.sections!.length; i++) {
+    assert.deepEqual(replay.sections![i].left, whole.sections![i].left, 'a cold seek must not cache truncated or silent sections');
+  }
+});
+
+test('a window containing only a release tail retains its prepared track and does not re-attack it', async () => {
+  const { renderPreparedMix } = await import('../src/engine/playback/renderSongMix');
+  const { createNoteTailResolver } = await import('../src/engine/playback/noteLifetime');
+  const { clearPreparedAudio } = await import('../src/engine/cache/preparedAudio');
+  clearPreparedAudio();
+  const perf: Performance = { ...performanceOf([{ ...note(), dur: .2 }]), worldId: undefined,
+    duration: 4, tail: 0, bars: [{ index: 0, start: 0, end: 4, bpm: 60, beatsPerBar: 4, regionId: 'a' }] };
+  const options = { trackInstruments: new Map([['keys', 'organ']]), mixState: { volume: { keys: .1 } }, bypassWebAudioMaster: true };
+  const tail = createNoteTailResolver(perf, options)(perf.notes[0]);
+  assert.ok(tail > .1);
+  const window = { start: .21, end: .28 };
+  const whole = await renderPreparedMix(perf, options, new AbortController().signal);
+  const windowed = await renderPreparedMix(perf, { ...options, renderWindow: window }, new AbortController().signal);
+  const from = Math.floor(window.start * 44100), frames = Math.floor((window.end - window.start) * 44100);
+  assert.ok(windowed.left.subarray(0, frames).some(sample => Math.abs(sample) > 1e-6), 'the tail cannot become silent when its note-off precedes the window');
+  assert.deepEqual(windowed.left.subarray(0, frames), whole.left.subarray(from, from + frames));
+});

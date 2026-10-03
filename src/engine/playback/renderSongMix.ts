@@ -2,9 +2,10 @@ import type { Performance } from '../band/performanceData';
 import type { Sheet } from '../sheet/sheet';
 import { checkAbort } from '../../export/audioEncoding';
 import { renderPerformanceToAudio, type Mp3RenderOptions, type RenderedPerformanceAudio } from './mp3Export';
-import { renderPlaybackPart, releasePlaybackWorkers } from './renderPlaybackPart';
+import { renderPlaybackPart } from './renderPlaybackPart';
 import { preparedAudioKey, prepareSongMix } from '../cache/preparedAudio';
 import { contentKey } from '../cache/contentKey';
+import { createNoteTailResolver } from './noteLifetime';
 
 /** Resolve the sheet's instrument, role and mixer settings for playback and export. */
 export function songMixOptions(song: Sheet): Mp3RenderOptions {
@@ -28,6 +29,29 @@ export async function renderSongMix(performance: Performance, song: Sheet, signa
   return renderPreparedMix(performance, { ...songMixOptions(song), renderWindow: window }, signal, priority, onProgress);
 }
 
+function windowPreparedStem(audio: RenderedPerformanceAudio, window: { start: number; end: number }): RenderedPerformanceAudio {
+  // Without section stems, renderPlaybackPart already applied renderWindow.
+  if (!audio.sections) return audio;
+  const sampleRate = audio.sampleRate;
+  const from = Math.max(0, Math.round(window.start * sampleRate));
+  const to = Math.max(from + 1, Math.ceil(window.end * sampleRate));
+  const source = audio.sections;
+  const sections = source.flatMap(section => {
+    const sectionEnd = section.startSample + section.left.length;
+    const overlapStart = Math.max(from, section.startSample);
+    const overlapEnd = Math.min(to, sectionEnd);
+    if (overlapEnd <= overlapStart) return [];
+    const localStart = overlapStart - section.startSample;
+    const localEnd = overlapEnd - section.startSample;
+    return [{
+      left: section.left.subarray(localStart, localEnd),
+      right: section.right.subarray(localStart, localEnd),
+      startSample: overlapStart - from,
+    }];
+  });
+  return { sampleRate, left: new Float32Array(0), right: new Float32Array(0), sections };
+}
+
 /** Shared preparation for the player, auditions and audio downloads. */
 export async function renderPreparedMix(performance: Performance, options: Mp3RenderOptions, signal: AbortSignal,
   priority: () => number = () => 3, onProgress?: (fraction: number) => void): Promise<RenderedPerformanceAudio> {
@@ -36,10 +60,11 @@ export async function renderPreparedMix(performance: Performance, options: Mp3Re
   const window = options.renderWindow;
   const selected = new Set(options.selectedTrackIds ?? options.trackInstruments.keys());
   const solo = Object.values(options.mixState?.solo ?? {}).some(Boolean);
+  const noteTail = createNoteTailResolver(performance, options);
   const active = [...selected].filter(id =>
     !options.mixState?.muted?.[id] && (!solo || options.mixState?.solo?.[id]) &&
     performance.notes.some(note => note.trackId === id &&
-      (!window || note.time < window.end && note.time + note.dur > window.start)));
+      (!window || note.time < window.end && note.time + note.dur + noteTail(note) > window.start)));
   // An intentionally silent selection still advances the transport.
   if (!active.length) {
     const frames = Math.ceil(Math.max(.1, window ? window.end - window.start : performance.duration + (performance.tail ?? 0)) * 44100);
@@ -62,10 +87,9 @@ export async function renderPreparedMix(performance: Performance, options: Mp3Re
       checkAbort(preparationSignal);
       trackProgress.set(id, 1);
       progress();
-      return [id, audio] as const;
+      return [id, window ? windowPreparedStem(audio, window) : audio] as const;
     }));
     checkAbort(preparationSignal);
-    releasePlaybackWorkers();
     return renderPerformanceToAudio(performance, {
       ...options, selectedTrackIds: active, preparedStems: new Map(entries),
       signal: preparationSignal, renderPriority: priority,

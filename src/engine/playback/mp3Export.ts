@@ -116,7 +116,10 @@ async function renderPerformance(
   const lastDecayEnd = perf.notes.reduce((end, note) => Math.max(end, note.time + note.dur + noteTail(note)), 0);
   const duration = Math.max(1, perf.duration + (perf.tail ?? 3), lastDecayEnd);
   const totalSamples = Math.ceil(duration * sampleRate);
-  const activeTrackIds = [...new Set(perf.notes.map(n => n.trackId))];
+  const activeTrackIds = [...new Set([
+    ...perf.notes.map(n => n.trackId),
+    ...(options.preparedStems?.keys() ?? []),
+  ])];
 
   if (!activeTrackIds.length && !options.rawStem) throw new Error('No audible notes in the selected tracks.');
   const notesByTrack = new Map<string, PerfNote[]>();
@@ -171,7 +174,8 @@ async function renderPerformance(
       await yieldToUI();
       const trackId = activeTrackIds[tIdx];
       const trackNotes = notesByTrack.get(trackId) ?? [];
-      if (trackNotes.length === 0) continue;
+      const prepared = options.preparedStems?.get(trackId);
+      if (trackNotes.length === 0 && !prepared?.sections?.length && !prepared?.left.length) continue;
 
       const instrumentId = options.trackInstruments.get(trackId) || perf.trackInfo?.[trackId]?.instrumentId || trackId;
       const instDef = INSTRUMENTS_BY_ID[instrumentId];
@@ -183,14 +187,19 @@ async function renderPerformance(
       params.pan = .5;
       const controllerGain = { volume: 1, expression: 1 };
 
-      // Determine active time window for this track to avoid rendering silence
+      // A playback window can contain only the release tail of a note attacked
+      // earlier. In that case prepared PCM defines the active sample span.
       let minNoteTime = Infinity;
       for (const n of trackNotes) {
         if (n.time < minNoteTime) minNoteTime = n.time;
       }
 
-      const trackStartSample = Math.max(0, Math.floor(minNoteTime * sampleRate));
-      const trackEndSample = Math.min(totalSamples, Math.ceil(trackNotes.reduce((end, note) => Math.max(end, note.time + note.dur + noteTail(note)), 0) * sampleRate));
+      const preparedSections = prepared?.sections ?? (prepared?.left.length
+        ? [{ left: prepared.left, right: prepared.right, startSample: 0 }] : []);
+      const trackStartSample = prepared ? 0 : Math.max(0, Math.floor(minNoteTime * sampleRate));
+      const noteEndSample = Math.ceil(trackNotes.reduce((end, note) => Math.max(end, note.time + note.dur + noteTail(note)), 0) * sampleRate);
+      const preparedEndSample = preparedSections.reduce((end, section) => Math.max(end, section.startSample + section.left.length), 0);
+      const trackEndSample = Math.min(totalSamples, Math.max(noteEndSample, preparedEndSample));
       const trackSamples = trackEndSample - trackStartSample;
       if (trackSamples <= 0) continue;
 
@@ -217,7 +226,6 @@ async function renderPerformance(
       );
 
       const cacheKey = `${stemFingerprint}:${trackStartSample}:${trackSamples}:v9`;
-      const prepared = options.preparedStems?.get(trackId);
       if (prepared && prepared.sampleRate !== sampleRate) throw new Error('Prepared stem sample rate does not match the mix.');
       let stem = prepared ? { left: prepared.left, right: prepared.right, startSample: 0 }
         : options.cacheDSPStem === false ? undefined : stemCache.get(cacheKey);

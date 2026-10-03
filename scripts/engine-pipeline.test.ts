@@ -106,14 +106,16 @@ test('raw PCM jobs deduplicate across consumers, survive one cancellation and ex
   const cached=await preparePartAudio('shared',undefined,render); assert.strictEqual(cached.left,result.left); assert.equal(calls,1);
 });
 
-test('Play waits for UI-owned preparation and never starts synthesis or an incremental render', async () => {
+test('Play waits for its current chunk without requiring the whole song to be prepared', async () => {
   const player=new SongPlayer(()=>{},()=>{}) as any;
-  let finish!:()=>void, starts=0;
-  player.fullJob=new Promise<void>(resolve=>{finish=resolve;});
+  let finish!:(buffer:any)=>void, starts=0, requests=0;
+  const prepared=new Promise<any>(resolve=>{finish=resolve;});
   player.song={tracks:[]}; player.state.performance={notes:[{}],duration:2,tail:0};
+  player.chunks=[{index:0,start:0,end:1},{index:1,start:1,end:2}]; player.abort=new AbortController();
   player.ctx={state:'running',currentTime:0}; player.ensureContext=()=>{}; player.compiling=Promise.resolve();
-  player.startSourcesAt=()=>{}; player.animate=()=>{}; player.startFullMix=()=>{starts++;};
-  player.ensureSegment=()=>{throw new Error('Play requested physical rendering');};
-  const playing=player.play(); await Promise.resolve(); assert.equal(starts,0);
-  player.fullBuffer={duration:2}; finish(); await playing; assert.equal(starts,1);
+  player.startSourcesAt=()=>{}; player.beginChunkPlayback=()=>{starts++;};
+  player.ensureChunk=(index:number)=>{assert.equal(index,0);requests++;return prepared;};
+  const playing=player.play(); await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(requests,1); assert.equal(starts,0);
+  finish({duration:1}); await playing; assert.equal(starts,1);
 });

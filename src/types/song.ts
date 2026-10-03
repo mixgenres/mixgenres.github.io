@@ -121,6 +121,9 @@ export interface AppliedLens {
 }
 
 export interface Song {
+  /** Catalog provenance; editing the song does not change its source identity. */
+  catalogId?: string;
+  catalogKind?: 'full-song' | 'sample';
   id: string;
   title: string;
   bpm: number;

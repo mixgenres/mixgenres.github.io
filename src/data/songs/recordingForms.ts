@@ -1,0 +1,204 @@
+/** Authored whole-recording score plans. Each line is an independent arrangement.
+ * key | BPM | ordered section:bars:energy | harmonic cells (_ means recurring cell)
+ * These are editable synth arrangements, with idiomatic generated melodic parts.
+ */
+export const RECORDING_FORM_SCORES = `
+afrobeat::highlife|112|intro:8:2,head:16:3,verse:16:3,chorus:16:4,verse:16:3,solo:32:4,chorus:32:5,outro:8:2|_=C,F,C,G7
+ Afrobeat::palm-wine|96|intro:4:1,verse:16:2,response:8:2,verse:16:2,solo:16:3,verse:16:3,response:16:3,outro:4:1|_=G,C,G,D7
+ afrobeat::juju|112|intro:16:2,groove:32:3,verse:32:3,response:16:4,solo:32:3,verse:32:4,response:32:5,outro:16:2|_=A,D,A,E7
+ afrobeat::jazz-heavy-afrobeat|108|intro:8:2,groove:32:3,head:32:4,solo:48:3,break:8:1,groove:32:4,solo:32:5,outro:16:2|_=Dm7,G7,Dm7,Dm7
+ afrobeat::modern-revival|112|intro:16:2,riff:16:3,verse:32:3,chorus:16:4,solo:32:4,verse:32:3,chorus:32:5,outro:16:3|_=Em7,Em7,A7,Em7
+ afrobeats::contemporary-afrobeats|100|intro:8:2,verse:16:3,chorus:8:4,verse:16:3,chorus:8:4,bridge:8:2,chorus:16:4,outro:8:2|_=Bm,A,G,A
+ afrobeats::afropop|106|intro:4:2,chorus:16:4,verse:16:3,chorus:16:4,verse:16:3,bridge:8:2,chorus:16:5,outro:8:2|_=F#m,D,A,E
+ afrobeats::afrofusion|104|intro:8:2,verse:16:3,prechorus:8:3,chorus:16:4,verse:16:3,chorus:16:4,bridge:8:2,chorus:16:5,outro:4:2|_=Am,G,F,G
+ afrobeats::alte|96|intro:8:1,chorus:8:3,verse:16:3,chorus:8:4,verse:24:3,breakdown:8:1,chorus:16:4,outro:8:1|_=Cm,Ab,Eb,Bb
+ afrobeats::r-b-afrobeats|88|intro:8:1,verse:16:2,prechorus:8:3,chorus:16:4,verse:16:2,chorus:16:4,bridge:16:2,chorus:16:5,outro:8:1|_=F#m7,Dmaj7,Amaj7,E
+ amapiano::classic|112|intro:32:1,groove:32:2,verse:32:3,drop:32:4,verse:32:3,breakdown:16:1,build:16:3,drop:64:5,outro:32:2|_=Am7,Dm7,Em7,Am7
+ amapiano::private-school|112|intro:32:1,theme:32:2,verse:48:3,groove:64:3,solo:32:4,breakdown:32:1,theme:32:3,drop:64:4,outro:32:1|_=Fm9,Bbm9,Eb9,Abmaj7
+ amapiano::vocal|112|intro:16:1,groove:32:2,chorus:32:3,verse:32:3,drop:32:4,chorus:32:4,breakdown:16:1,drop:64:5,outro:16:2|_=Gm7,Cm7,Dm7,Gm7
+ amapiano::log-drum-heavy|113|intro:16:2,hook:16:3,verse:32:3,drop:32:5,verse:32:3,breakdown:16:1,drop:48:5,outro:16:2|_=F#m,F#m,D,E
+ amapiano::bacardi|114|intro:16:2,groove:32:3,drop:32:5,break:8:1,groove:32:4,drop:64:5,outro:16:2|_=Dm,Dm,Dm,Dm
+ amapiano::gqom-crossover|126|intro:16:1,chant:16:3,drop:32:5,verse:16:3,chant:16:4,breakdown:16:1,drop:48:5,outro:16:2|_=F5,F5,F5,F5
+ amapiano::kwaito-crossover|104|intro:16:2,chorus:16:3,verse:32:3,chorus:16:4,break:16:2,verse:32:3,chorus:32:4,outro:16:2|_=Am,F,G,Am
+ ambient::atmospheric|60|opening:16:1,A:32:2,B:32:2,A:32:3,release:16:2,dissolve:16:1|_=Ab,Eb,Db,Ab
+ ambient::drone|48|opening:32:1,evolution:64:2,texture:64:2,climax:32:3,release:32:2,dissolve:32:1|_=C5,C5,F5,C5
+ ambient::dark-ambient|48|opening:48:1,descent:64:2,ritual:96:3,climax:64:4,void:48:1,dissolve:32:1|_=C5,C5,Db5,C5
+ ambient::organic-ambient|66|opening:16:1,theme:32:2,texture:48:2,solo:48:3,theme:32:2,dissolve:16:1|_=Dm7,Gm7,Dm7,Am7
+ ambient::neo-classical-ambient|80|opening:8:1,A:16:2,B:16:3,A:16:3,build:16:4,release:8:2,dissolve:8:1|_=Am,F,C,G
+ ambient::glitch-ambient|72|opening:32:1,fragments:64:2,loop:128:3,rupture:16:1,loop:128:3,dissolve:32:1|_=D5,D5,A5,D5
+ ambient::cinematic-ambient|72|opening:16:1,theme:32:2,build:32:3,climax:32:4,release:16:2,theme:16:2,dissolve:16:1|_=D,Bm,G,A
+ ambient::downtempo-ambient|90|intro:8:1,theme:16:2,groove:16:3,B:16:4,breakdown:8:1,theme:16:3,B:16:4,outro:8:1|_=Am,F,Dm,Em
+ andean::huayno|104|intro:8:2,verse:16:3,response:8:3,verse:16:3,interlude:16:4,verse:16:4,fuga:16:5,cierre:4:2|_=Am,C,G,Am
+ andean::sanjuanito|108|intro:8:2,A:16:3,B:16:3,A:16:4,solo:16:3,B:16:4,A:16:5,cierre:4:2|_=Em,G,D,Em
+ andean::saya|92|intro:8:2,verse:16:3,chorus:16:4,verse:16:3,interlude:8:3,chorus:32:4,outro:8:2|_=Am,Dm,G,C,E7,Am
+ andean::tinku|144|intro:8:3,A:16:4,B:16:4,A:16:4,break:4:1,B:16:5,A:32:5,cierre:4:3|_=Em,G,D,Em
+ andean::carnavalito|132|intro:8:2,A:16:3,B:16:4,A:16:3,B:16:4,A:32:5,cierre:8:3|_=Am,C,G,Am
+ andean::nueva-cancion|108|intro:8:2,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,bridge:8:3,chorus:32:5,cierre:8:3|_=Am,E7,Am,Dm,E7,Am
+ andean::andean-fusion|90|opening:16:1,A:16:2,groove:32:3,B:16:4,breakdown:16:1,A:16:3,B:32:4,dissolve:16:1|_=Dm,Bb,F,C
+ arabic::tarab|76|prelude:64:2,A:64:3,response:32:3,B:64:4,response:32:3,C:64:4,solo:32:2,C:64:5,return:32:3,cadence:16:2|_=D5,D5,G5,D5
+ arabic::takht|84|taqsim:16:1,intro:16:2,verse:32:3,response:16:2,verse:32:4,solo:16:2,refrain:32:4,cadence:8:1|_=G5,G5,C5,G5
+ arabic::muwashshah|96|intro:10:2,A:20:3,B:20:3,A:20:4,response:10:2,B:20:4,A:20:5,cadence:10:2|_=D5,D5,A5,D5
+ arabic::instrumental-maqam|54|lower-register:16:1,exploration:24:2,upper-register:24:3,modulation:16:2,return:16:2,cadence:8:1|_=C5,C5,G5,C5
+ arabic::modern-arabic-orchestra|88|prelude:32:2,A:32:3,B:32:4,solo:24:2,C:32:4,A:32:5,coda:16:2|_=Dm,Gm,A7,Dm
+ bachata::dominican|132|intro:8:3,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,mambo:32:5,chorus:16:4,cierre:4:3|_=A,D,E7,A
+ bachata::amargue|112|intro:8:1,verse:16:2,chorus:16:3,verse:16:2,solo:16:3,chorus:16:4,cierre:4:1|_=Am,Dm,E7,Am
+ bachata::traditional-bolero-bachata|96|intro:4:1,verse:16:2,verse:16:2,bridge:8:3,solo:16:2,verse:16:3,cierre:4:1|_=C,Am,Dm,G7
+ bachata::sensual|126|intro:8:1,verse:16:2,chorus:16:3,verse:16:2,chorus:16:4,break:4:1,bridge:8:2,chorus:16:4,outro:8:1|_=Am,F,C,G
+ bachata::bachata-mambo|148|intro:8:3,verse:16:4,chorus:8:4,mambo:32:5,verse:16:3,chorus:16:4,mambo:48:5,cierre:4:3|_=G,C,D7,G
+ bachata::urban|128|intro:4:2,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,solo:8:3,chorus:16:5,outro:8:2|_=A,F#m,D,E
+ bachata::fusion|126|intro:8:1,verse:16:3,prechorus:8:3,chorus:16:4,interlude:8:2,verse:16:3,chorus:16:4,mambo:16:5,chorus:16:4,cierre:8:2|_=Am,Dm,G,C,E7,Am
+ bass::drum-bass|155|intro:32:1,verse:32:2,build:16:3,drop:64:5,verse:32:3,breakdown:32:1,build:16:3,drop:64:5,outro:32:2|_=Cm7,Abmaj7,Fm7,Gm7
+ bass::jungle|165|intro:16:2,chant:16:3,drop:64:5,break:16:1,chant:16:4,drop:64:5,outro:16:2|_=F5,F5,Ab5,F5
+ bass::liquid|174|intro:32:1,theme:32:2,build:16:3,drop:64:4,breakdown:32:1,theme:32:3,drop:64:5,outro:32:2|_=Fm7,Dbmaj7,Abmaj7,Eb
+ bass::neurofunk|172|intro:32:1,build:16:3,drop:64:5,breakdown:32:1,build:16:4,drop:64:5,variation:32:5,outro:16:2|_=F5,F5,Gb5,F5
+ bass::uk-garage|130|intro:16:2,A:32:3,B:16:4,A:32:3,breakdown:16:1,B:32:4,A:32:4,outro:16:2|_=Cm7,Fm7,Bb7,Ebmaj7
+ bass::2-step|130|intro:8:2,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,breakdown:16:1,chorus:32:5,outro:16:2|_=Am7,Dm7,G7,Cmaj7
+ bass::dubstep|140|intro:16:1,theme:16:2,drop:32:4,variation:32:5,breakdown:16:1,theme:16:2,drop:64:5,outro:16:1|_=F#m,F#m,D,E
+ bass::grime|140|intro:8:2,hook:8:3,verse:32:4,hook:8:4,verse:32:4,break:8:1,hook:16:5,outro:8:2|_=Em,Em,Em,Em
+ bass::future-garage|134|opening:16:1,A:32:2,B:16:3,A:32:3,breakdown:16:1,B:32:4,dissolve:16:1|_=G#m,E,B,F#
+ bass::breakbeat|109|intro:16:2,groove:32:4,hook:16:5,breakdown:16:1,build:16:3,groove:32:4,hook:32:5,outro:16:2|_=D5,D5,F5,D5
+ blues::delta|96|pickup:2:1,verse:12:2,verse:12:2,verse:12:3,verse:12:3,verse:12:2,turnaround:2:1|_=A7,A7,A7,A7,D7,D7,A7,A7,E7,D7,A7,E7
+ blues::piedmont|126|intro:4:2,A:12:3,B:12:3,A:12:3,solo:12:4,A:12:3,coda:4:2|_=C7,C7,C7,C7,F7,F7,C7,C7,G7,F7,C7,G7
+ blues::hill-country|108|intro:8:2,riff:16:3,verse:16:3,riff:16:4,verse:16:3,breakdown:8:1,riff:32:5,outro:8:2|_=E7,E7,E7,E7
+ blues::slow-blues|68|intro:12:2,verse:12:2,verse:12:3,solo:24:4,verse:12:3,solo:12:4,coda:4:1|_=Gm,Gm,Gm,Gm,Cm,Cm,Gm,Gm,Eb7,D7,Gm,D7
+ blues::blues-fusion|92|intro:8:1,verse:16:2,chorus:16:3,verse:16:2,chorus:16:4,breakdown:8:1,chorus:16:4,outro:8:1|_=Cm,Ab,Eb,Bb
+ bollywood::modern|137|intro:8:3,chorus:16:4,verse:16:3,chorus:16:4,interlude:16:3,verse:16:4,bridge:8:2,chorus:32:5,coda:8:3|_=Am,F,G,Am
+ bollywood::golden-age|90|prelude:16:2,refrain:16:3,verse:32:3,refrain:16:4,interlude:16:2,verse:32:4,refrain:16:5,coda:8:2|_=Dm,Gm,A7,Dm
+ bollywood::disco-bollywood|120|intro:16:3,chorus:16:4,verse:16:3,chorus:16:4,solo:16:4,verse:16:3,chorus:32:5,outro:8:3|_=Am,G,F,E7
+ bollywood::romantic|94|intro:8:1,verse:16:2,chorus:16:3,interlude:8:2,verse:16:3,chorus:16:4,bridge:8:2,chorus:16:5,coda:8:1|_=Fm,Db,Eb,Cm
+ bollywood::folk-cinematic|94|intro:16:2,refrain:16:4,verse:32:3,refrain:16:4,interlude:16:4,verse:32:3,refrain:32:5,coda:8:3|_=Dm,Dm,C,Dm
+ bollywood::electronic-club|129|intro:8:2,hook:16:4,verse:16:3,chorus:16:5,verse:16:3,breakdown:8:1,build:8:3,chorus:32:5,outro:8:2|_=Em,C,D,Em
+ brazilian::samba|84|intro:8:1,verse:16:2,bridge:16:3,verse:16:2,solo:16:2,bridge:16:3,verse:16:3,coda:4:1|_=Cmaj7,Am7,Dm7,G7;bridge=Em7,A7,Dm7,G7
+ brazilian::bossa-nova|136|intro:8:1,A:32:2,B:32:3,A:32:2,B:32:3,coda:8:1|A=Dm,E7,Am7,D7,Gm7,C7,Fmaj7,A7;B=Dmaj7,B7,Em7,A7,F#m7,B7,Em7,A7
+ brazilian::pagode|100|intro:8:2,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,solo:16:3,chorus:32:5,coda:4:2|_=Cmaj7,A7,Dm7,G7
+ brazilian::partido-alto|104|intro:8:2,refrain:16:3,verse:16:3,refrain:16:4,verse:16:3,solo:16:4,refrain:32:5,coda:8:2|_=G,D7,G,C,D7,G
+ brazilian::samba-de-roda|110|call:8:1,response:8:2,verse:16:3,response:16:3,solo:16:4,verse:16:3,response:32:5,coda:4:2|_=G,C,D7,G
+ brazilian::forro|116|intro:8:2,A:16:3,B:16:3,A:16:3,solo:16:4,B:16:4,A:16:4,coda:8:2|_=G,C,G,D7
+ brazilian::baiao|132|intro:8:3,verse:16:3,refrain:8:4,verse:16:3,solo:16:4,refrain:16:5,coda:4:2|_=D,G,D,A7
+ brazilian::xote|100|intro:8:2,verse:16:3,chorus:16:3,verse:16:3,solo:16:4,chorus:16:4,coda:4:2|_=G,D7,G,C,D7,G
+ brazilian::mpb|110|intro:8:2,verse:16:3,refrain:8:4,verse:16:3,interlude:16:3,verse:16:4,refrain:16:5,coda:8:2|_=A7,D7,A7,E7
+ brazilian::samba-reggae|108|intro:16:2,chant:16:3,verse:16:4,chorus:16:5,break:8:2,verse:16:4,chorus:32:5,coda:8:3|_=Dm,Bb,C,Dm
+ brazilian::samba-rock|112|intro:8:3,verse:16:3,chorus:8:4,verse:16:3,chorus:8:4,solo:16:4,chorus:32:5,outro:8:2|_=G,C,G,D7
+ chinese::jiangnan-sizhu|80|opening:8:1,A:16:2,B:16:3,C:16:3,A:16:3,variation:32:4,cadence:8:1|_=D5,D5,A5,D5
+ chinese::guqin|48|opening:16:1,stream:24:2,rapids:32:3,falls:24:4,return:16:2,silence:8:1|_=D5,D5,D5,D5
+ chinese::guzheng|72|opening:8:1,theme:16:2,variation:24:3,build:16:4,theme:16:2,cadence:8:1|_=G5,G5,D5,G5
+ chinese::pipa|96|muster:16:2,march:24:3,battle:32:5,aftermath:16:1,retreat:16:3,cadence:8:2|_=D5,D5,Eb5,D5
+ chinese::jingju|84|prelude:16:2,recitative:24:1,aria:32:3,response:8:2,aria:32:4,recitative:16:1,cadence:8:2|_=D5,D5,A5,D5
+ chinese::cantonese-ensemble|112|intro:4:2,A:16:3,B:16:3,A:16:4,B:16:4,coda:8:2|_=G5,D5,G5,G5
+ chinese::chaozhou|68|opening:8:1,A:24:2,B:24:3,variation:32:3,A:24:4,cadence:8:1|_=D5,D5,G5,D5
+ chinese::suona-chuida|126|intro:8:2,theme:16:3,bird-calls:24:4,theme:16:3,variation:32:5,coda:8:3|_=G5,G5,D5,G5
+ cinematic::golden-age|126|fanfare:16:4,A:32:4,B:24:2,development:32:3,battle:32:5,A:32:4,coda:16:5|_=Eb,Ab,Bb7,Eb;B=Cm,Fm,G7,Cm
+ cinematic::minimal-tension|60|opening:16:1,pulse:32:2,descent:32:3,build:48:4,climax:32:5,release:16:1|_=D5,D5,Eb5,D5
+ cinematic::epic|144|opening:8:3,battle:32:5,chorale:16:3,battle:32:5,break:8:1,climax:24:5,fall:8:1,coda:16:2|_=Dm,Bb,Gm,A;chorale=F,C,Bb,F
+ classical::classical-orchestra|160|exposition-a:40:3,transition:16:4,exposition-b:48:2,codetta:20:4,exposition-a:40:3,transition:16:4,exposition-b:48:2,codetta:20:4,development:80:4,recapitulation-a:40:3,recapitulation-b:48:4,coda:24:5|_=Gm,D7,Gm,Gm;exposition-b=Bb,F7,Bb,Eb;development=F#m,C#7,Em,B7,Cm,G7,D7,Gm
+ classical::baroque|144|ritornello:24:3,episode:32:3,ritornello:24:4,episode:40:3,ritornello:24:4,episode:32:4,ritornello:24:5,coda:8:3|_=G,D7,Em,Bm,C,G,Am,D7
+ classical::romantic|108|adagio:32:1,theme-a:48:3,transition:24:4,theme-b:64:2,development:96:5,recapitulation:64:4,theme-b:64:3,coda:32:2|_=Bm,F#7,Bm,Em;theme-b=D,A7,D,G
+ classical::impressionist|84|dawn:48:1,sea:64:3,noon:48:5,waves:64:3,dialogue:96:4,storm:64:5,coda:32:3|_=Dbmaj7,Abmaj7,Gbmaj7,Dbmaj7;waves=Emaj7,C#m7,Amaj7,B;storm=D5,Eb5,Ab5,Db5
+ classical::modernist|126|introduction:48:1,augurs:48:4,abduction:32:5,rounds:48:3,rival-tribes:32:5,procession:24:4,earth-dance:32:5,introduction:48:1,circles:48:3,glorification:32:5,evocation:24:3,ritual:48:4,sacrificial-dance:64:5|_=E5,F5,Eb5,E5
+ classical::minimalist|120|pulses:32:1,section-i:64:2,section-ii:64:3,section-iii:64:3,section-iv:64:4,section-v:64:3,section-vi:64:4,section-vii:64:3,section-viii:64:4,section-ix:64:3,section-x:64:4,section-xi:64:3,pulses:32:1|_=Dmaj7,Bm7,Emaj7,C#m7,Amaj7,F#m7,Bmaj7,G#m7,Emaj7,C#m7,F#maj7
+ classical::chamber|72|fugue:64:2,allegro:64:3,transition:8:1,variations:96:3,presto:64:4,adagio:24:1,finale:96:5,coda:16:2|_=C#m,G#7,C#m,F#m;allegro=D,A7,D,G;variations=A,E7,F#m,D;presto=E,B7,E,A
+ country::honky-tonk|148|intro:4:2,verse:16:3,chorus:16:4,solo:16:3,verse:16:3,chorus:16:4,tag:4:2|_=E,A,E,B7
+ country::bluegrass|180|intro:8:2,verse:16:2,chorus:16:3,solo:16:4,verse:16:3,chorus:16:4,solo:16:5,tag:4:2|_=Bb,Eb,Bb,F7
+ country::bakersfield|116|intro:4:3,verse:16:3,chorus:8:4,solo:16:4,verse:16:3,chorus:16:4,tag:4:2|_=G,C,D7,G
+ country::outlaw|112|intro:8:2,chorus:16:3,verse:16:3,chorus:16:4,solo:24:4,chorus:16:5,outro:8:3|_=C,F,C,G7
+ country::western-swing|150|intro:8:2,head:32:3,solo:32:3,head:32:3,solo:32:4,head:32:5,tag:8:2|_=D,G,A7,D;solo=D,D,G,G,E7,A7,D,A7
+ country::americana|78|intro:8:1,verse:16:2,chorus:16:3,verse:16:2,chorus:16:4,bridge:8:3,chorus:16:5,outro:8:1|_=D,G,D,A;chorus=Bm,G,D,A
+ country::country-pop|125|intro:8:3,verse:16:3,prechorus:8:3,chorus:16:5,verse:16:3,chorus:16:5,solo:8:4,chorus:32:5,outro:8:3|_=Bb,Eb,F,Bb
+ dangdut::classic|120|intro:8:2,verse:16:3,refrain:16:4,interlude:16:3,verse:16:3,refrain:32:5,coda:8:2|_=Am,G,F,E7
+ dangdut::koplo|150|intro:8:3,verse:16:3,chorus:16:4,break:8:2,verse:16:4,chorus:16:5,kendang:16:5,chorus:16:4,coda:4:3|_=C,G,Am,F
+ dangdut::rock-dangdut|132|intro:16:4,verse:16:3,chorus:16:5,solo:16:4,verse:16:3,chorus:16:5,solo:16:5,coda:8:3|_=Em,D,C,B7
+ dangdut::electronic-dangdut|140|intro:8:2,verse:16:3,chorus:16:4,drop:16:5,verse:16:3,chorus:16:4,drop:32:5,outro:8:2|_=Am,F,G,Am
+ desert-blues::tishoumaren|98|intro:16:2,verse:16:3,response:16:3,verse:16:3,solo:32:4,response:16:4,verse:16:3,response:32:5,outro:16:2|_=Em,Em,D,Em
+ desert-blues::sahel-guitar|92|intro:8:1,theme:16:2,verse:24:2,solo:32:3,verse:24:3,theme:16:3,outro:8:1|_=Am,Am,G,Am
+ desert-blues::acoustic-tuareg|88|intro:8:1,verse:16:2,response:8:2,verse:16:2,solo:16:3,verse:16:3,response:16:3,outro:8:1|_=D5,D5,C5,D5
+ desert-blues::psychedelic-desert|144|intro:16:2,verse:32:3,chorus:16:4,verse:32:3,chorus:16:4,solo:96:5,climax:32:5,outro:16:3|_=Em,Em,D,Em
+ electronic::techno|137|intro:32:2,riff:32:3,groove:64:4,breakdown:16:1,build:16:3,groove:64:5,variation:32:4,outro:32:2|_=C5,C5,C5,C5
+ electronic::detroit-techno|128|intro:16:2,theme:32:3,B:32:4,break:16:1,theme:32:4,solo:32:5,B:32:4,outro:16:2|_=Dm7,Gm7,Am7,Dm7
+ electronic::electro|128|intro:8:1,numbers:16:2,groove:32:3,voices:16:3,break:8:1,numbers:16:4,groove:32:4,outro:8:2|_=C5,C5,G5,C5
+ electronic::trance|132|intro:32:1,groove:32:2,theme:32:3,breakdown:32:1,build:16:3,drop:64:5,theme:32:4,outro:32:2|_=Am,F,C,G
+ electronic::idm|114|opening:16:1,groove:32:2,theme:32:3,variation:32:3,breakdown:16:1,theme:32:4,dissolve:32:1|_=Dmaj7,Bm7,Gmaj7,A
+ electronic::minimal|132|intro:32:1,cell:64:2,layer:64:3,break:16:1,cell:64:3,layer:64:4,outro:32:1|_=D5,D5,D5,D5
+ electronic::synthwave|92|intro:8:1,verse:16:2,chorus:16:3,verse:16:2,chorus:16:4,bridge:8:1,chorus:16:4,outro:8:1|_=Am,F,G,Am
+ electronic::melodic-electronic|123|opening:32:1,pulse:32:2,groove:64:3,build:32:4,climax:64:5,release:32:2,dissolve:32:1|_=F#m,F#m,D,F#m
+ ethiopian::ethio-jazz|106|intro:8:2,head:16:3,head:16:3,solo:32:3,head:16:4,solo:32:4,head:16:4,tag:8:2|_=Cm,Cm,Fm,Cm
+ ethiopian::tizita|76|opening:8:1,verse:24:2,response:8:2,verse:24:3,solo:16:2,verse:24:3,cadence:8:1|_=D5,D5,A5,D5
+ ethiopian::ethiopian-funk|112|intro:8:2,head:16:3,groove:32:3,solo:32:4,head:16:4,break:8:1,groove:32:5,outro:8:2|_=Em,Em,A7,Em
+ ethiopian::traditional-modal|66|opening:8:1,verse:16:2,response:8:1,verse:24:2,solo:16:2,verse:16:3,cadence:8:1|_=D5,D5,D5,D5
+ ethiopian::modern-ethio-jazz|108|intro:16:2,head:32:3,groove:32:4,solo:48:3,breakdown:16:1,head:32:4,climax:32:5,outro:16:2|_=Cm7,Fm7,Cm7,G7
+flamenco::solea|72|temple:8:1,verse:12:2,falseta:8:3,verse:12:3,llamada:4:4,verse:12:3,remate:4:2|_=Am,G,F,E;falseta=F,E,F,E
+flamenco::bulerias|210|intro:8:2,compas:16:3,falseta:16:4,compas:8:3,falseta:24:4,llamada:4:5,compas:16:4,remate:4:5|_=Bb,A,Bb,A;falseta=Dm,C,Bb,A
+flamenco::alegrias|144|intro:8:2,verse:16:3,response:8:2,verse:16:3,silencio:8:1,escobilla:16:4,bulerias:16:5,remate:4:3|_=C,G7,C,F,G7,C
+flamenco::tangos|112|intro:8:2,verse:16:3,chorus:8:4,verse:16:3,falseta:16:4,chorus:16:4,remate:4:3|_=Dm,C,Bb,A
+flamenco::seguiriya|64|temple:8:1,verse:12:2,response:8:2,verse:16:3,falseta:8:2,verse:16:4,remate:4:2|_=Bb,A,Bb,A
+flamenco::tientos|76|intro:8:1,verse:16:2,falseta:8:3,verse:16:3,tangos:24:4,remate:4:2|_=Dm,C,Bb,A
+flamenco::fandangos|90|intro:8:1,copla:12:2,response:4:2,copla:12:3,falseta:8:2,copla:12:4,remate:4:2|copla=C,F,C,G7,C,F,E;_=Am,G,F,E
+flamenco::rumba|108|intro:8:2,A:32:3,solo:32:3,solo:32:4,B:16:3,solo:32:5,A:16:4,outro:8:2|_=Em,Am,B7,Em
+flamenco::tonas-martinetes|54|temple:8:1,martinete:24:2,pause:4:1,debla:32:3,cadence:8:1|_=D5,D5,D5,D5
+flamenco::taranta|54|opening:8:1,lower-register:16:2,falseta:24:3,upper-register:16:4,return:16:2,cadence:8:1|_=F#7,G,F#7,F#7
+flamenco::granaina-malaguena|60|intro:8:1,verse:24:2,response:8:1,verse:24:3,melisma:16:4,cadence:8:1|_=Em,C,B7,Em
+flamenco::guajira|144|intro:8:2,A:16:3,falseta:16:3,B:16:4,A:16:3,falseta:24:4,remate:4:2|_=A,E7,A,D,E7,A
+flamenco::farruca|112|intro:8:2,A:16:3,falseta:16:3,A:16:4,escobilla:24:4,falseta:16:5,remate:4:3|_=Am,Dm,E7,Am
+flamenco::sevillanas|150|intro:4:2,copla-1:24:3,link:4:2,copla-2:24:3,link:4:2,copla-3:24:4,link:4:2,copla-4:24:4,remate:4:2|_=Am,G,F,E
+flamenco::nuevo-flamenco|128|intro:8:2,refrain:16:4,verse:16:3,refrain:16:4,solo:24:4,verse:16:3,refrain:32:5,outro:8:2|_=Em,D,C,B7
+flamenco::flamenco-jazz|116|intro:16:2,head:32:3,solo:64:3,bridge:16:4,solo:48:4,head:32:5,coda:8:2|_=Dm9,Gm9,A7b9,Dm9;bridge=Fmaj7,Bbmaj7,Em7b5,A7b9
+flamenco::flamenco-rock|108|intro:8:3,verse:16:3,chorus:16:4,falseta:16:3,verse:16:3,solo:24:5,chorus:16:5,outro:8:3|_=Am,D7,Am,E7
+flamenco::urban-experimental|98|intro:4:1,verse:8:2,chorus:8:4,verse:8:2,chorus:8:4,bridge:8:1,chorus:16:5,outro:4:1|_=Fm,Db,Eb,Fm
+folk::contemporary-folk|84|intro:4:1,verse:16:2,chorus:16:3,verse:16:2,chorus:16:3,verse:16:3,chorus:16:4,coda:4:1|_=G,C,G,D;chorus=G,Am,C,D
+folk::old-time|148|pickup:2:2,A:16:3,B:16:3,A:16:3,B:16:4,A:16:4,B:16:4,tag:2:2|_=G,C,G,D
+folk::appalachian|116|intro:8:1,verse:16:2,refrain:8:3,solo:16:3,verse:16:2,refrain:8:3,solo:16:4,tag:4:1|_=Dm,C,Dm,Dm
+folk::celtic|116|intro:4:1,A:16:2,B:16:3,A:16:3,B:16:3,variation:32:4,A:16:4,tag:4:2|_=Em,D,Em,Bm
+folk::singer-songwriter|84|intro:4:1,verse:16:2,refrain:8:2,interlude:8:1,verse:16:2,refrain:8:3,coda:4:1|_=C,G,Am,F
+folk::folk-revival|110|intro:4:1,verse:32:2,verse:32:2,solo:16:3,verse:32:3,verse:32:3,coda:4:1|_=C,G,Am,F,C,G,C,G
+funk::p-funk|106|intro:8:2,chant:16:3,verse:16:3,chorus:16:4,chant:16:4,breakdown:16:2,chorus:32:5,vamp:32:5,outro:8:3|_=E9,E9,A9,E9
+funk::disco|110|intro:16:3,chorus:16:4,verse:16:3,chorus:16:4,verse:16:3,breakdown:32:2,solo:32:4,chorus:32:5,outro:16:3|_=Em7,A7,Em7,A7
+funk::philly-disco|116|intro:16:2,theme:32:3,groove:32:4,solo:32:3,breakdown:16:1,theme:32:4,solo:48:5,outro:16:2|_=Cm7,Fm7,Bb7,Ebmaj7
+funk::boogie|120|intro:16:2,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,breakdown:16:1,solo:32:4,chorus:32:5,outro:16:2|_=Fm7,Bbm7,Eb7,Abmaj7
+funk::hi-nrg|133|intro:16:2,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,breakdown:32:2,build:16:3,chorus:64:5,outro:16:2|_=F,Bb,C,F
+ gamelan::balinese-gong-kebyar|144|buka:8:2,kebyar:16:5,theme:32:3,kotekan:32:4,break:4:1,kebyar:16:5,theme:32:4,kotekan:48:5,suwuk:8:2|_=D5,D5,D5,D5
+ gamelan::degung|72|buka:8:1,A:32:2,B:32:3,flute:32:3,A:32:3,suwuk:8:1|_=D5,D5,A5,D5
+ gamelan::gamelan-angklung|108|buka:8:1,cycle:32:2,variation:32:3,cycle:32:3,variation:48:4,suwuk:8:1|_=D5,D5,D5,D5
+ gnawa::traditional|102|opening:16:1,call:32:2,response:32:3,cycle:64:3,call:32:4,response:64:5,cycle:64:4,cadence:16:2|_=D5,D5,D5,D5
+ gnawa::lila-trance|96|invocation:24:1,cycle:64:2,response:64:3,cycle:96:4,solo:32:3,response:96:5,cadence:16:2|_=G5,G5,G5,G5
+ gnawa::gnawa-jazz|100|opening:16:1,theme:32:2,groove:64:3,solo:96:4,breakdown:32:1,theme:32:3,solo:64:5,outro:16:2|_=Dm7,Dm7,Gm7,Dm7
+ gnawa::gnawa-rock|116|intro:8:2,verse:16:3,chorus:16:4,verse:16:3,solo:16:4,bridge:8:2,chorus:32:5,outro:8:3|_=Em,G,D,Em
+ gospel::choir-gospel|106|intro:8:1,solo-verse:16:2,response:16:3,choir:16:4,solo-verse:16:3,response:16:4,choir:32:5,coda:8:2|_=Ab,Db,Ab,Eb7
+ gospel::traditional|104|intro:8:1,verse:24:2,response:16:3,verse:24:3,vamp:32:4,response:32:5,cadence:8:2|_=F,Bb,F,C7
+ gospel::quartet|96|intro:4:1,verse:16:2,response:8:3,verse:16:3,response:16:4,lead-adlib:16:4,response:16:5,cadence:4:2|_=G,C,G,D7
+ gospel::gospel-soul|66|opening:8:1,verse:24:2,verse:24:3,choir:24:4,solo:16:3,verse:24:5,cadence:8:1|_=Ab,Db,Ab,Eb7,Ab
+ gospel::contemporary|96|intro:8:2,hook:16:4,verse:16:3,hook:16:4,verse:16:3,breakdown:8:1,vamp:32:5,hook:16:5,outro:8:3|_=Fm7,Bbm7,Eb7,Abmaj7
+ hip-hop::g-funk|94|intro:8:2,verse:32:3,hook:8:4,verse:32:3,hook:8:4,verse:16:3,hook:16:4,outro:8:2|_=Bm7,Em7,Bm7,F#7
+ hip-hop::southern|104|intro:8:2,hook:8:4,verse:32:3,hook:8:4,verse:32:3,breakdown:16:2,hook:16:5,outro:8:2|_=Gm,Bb,Cm,D7
+ hip-hop::trap|120|intro:8:1,hook:16:3,verse:32:3,hook:16:4,verse:32:3,hook:16:4,outro:8:1|_=Fm,Db,Eb,Fm
+ hip-hop::drill|132|intro:8:1,hook:16:4,verse:16:3,hook:16:4,verse:16:4,hook:16:5,outro:8:2|_=Em,Em,C,Em
+ hip-hop::jazz-rap|94|intro:8:2,verse:24:3,hook:8:3,verse:24:3,hook:8:4,verse:24:4,hook:16:4,outro:8:2|_=Dm7,Dm7,Gm7,Dm7
+ hip-hop::abstract|88|intro:8:1,verse:32:3,hook:8:3,verse:32:3,hook:8:4,interlude:8:2,verse:16:3,outro:8:1|_=Cm7,Fm7,Bb7,Ebmaj7
+ hip-hop::lo-fi|90|intro:8:1,verse:24:2,hook:8:3,verse:24:2,hook:8:3,verse:24:3,hook:16:4,outro:8:1|_=Am7,Dm7,G7,Cmaj7
+ house::deep-house|117|intro:32:1,bass-entry:32:2,chords:64:3,breakdown:32:1,chords:64:4,variation:32:4,outro:32:2|_=Am7,Dm7,Am7,Em7
+ house::chicago-house|120|intro:32:1,arpeggio:32:2,bass-entry:32:3,verse:32:3,chorus:32:4,breakdown:16:1,chorus:64:5,outro:32:2|_=Am,F,G,Am
+ house::garage-piano-house|123|intro:16:2,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,breakdown:16:1,build:8:3,chorus:32:5,outro:16:2|_=Fm7,Bbm7,Eb7,Abmaj7
+ house::acid-house|122|intro:32:1,acid-entry:32:2,groove:64:3,filter-rise:64:4,breakdown:16:1,acid-peak:96:5,groove:32:3,outro:32:1|_=C5,C5,C5,C5
+ house::tech-house|128|intro:32:1,groove:32:3,voice:32:4,breakdown:16:1,build:16:3,drop:64:5,voice:32:4,outro:32:2|_=F5,F5,F5,F5
+ house::progressive-house|132|intro:32:1,arpeggio:64:2,theme:64:3,breakdown:32:1,build:32:3,drop:96:5,theme:64:4,outro:32:2|_=Bm,G,D,A
+ house::afro-house|120|intro:32:1,groove:32:2,verse:32:3,chorus:32:4,breakdown:32:1,build:16:3,chorus:64:5,outro:32:2|_=Am7,Fmaj7,G,Am7
+ indian-classical::hindustani-khayal|56|alap:48:1,vilambit:96:2,bol-alap:64:3,drut:64:4,taan:48:5,cadence:8:2|_=D5,D5,D5,D5
+ indian-classical::thumri|68|alap:16:1,sthayi:32:2,antara:32:3,bol-banav:48:3,laggi:32:4,cadence:8:1|_=D5,D5,G5,D5
+ indian-classical::carnatic-kriti|96|alapana:24:1,pallavi:16:2,anupallavi:16:3,charanam:32:3,neraval:32:4,swara:48:4,pallavi:16:4,cadence:8:2|_=D5,D5,D5,D5
+ indian-classical::ragam-tanam-pallavi|72|ragam:96:1,tanam:64:2,pallavi:64:3,neraval:48:3,trikalam:48:4,ragamalika:64:4,swara:64:5,pallavi:16:3,cadence:8:1|_=D5,D5,D5,D5;ragamalika=D5,E5,F5,G5
+ indian-classical::varnam|120|pallavi:16:2,anupallavi:16:3,muktayi:16:3,charanam:16:3,swara-1:16:3,charanam:8:3,swara-2:24:4,charanam:8:3,swara-3:32:5,charanam:8:4,cadence:4:2|_=D5,D5,D5,D5
+ indian-classical::tillana|144|pallavi:16:3,anupallavi:16:3,jathi:24:4,charanam:16:3,jathi:32:5,pallavi:16:4,cadence:4:2|_=D5,D5,D5,D5
+ industrial::ebm|128|intro:16:2,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,breakdown:16:1,build:8:3,chorus:32:5,outro:16:2|_=Em,Em,C,Em
+ industrial::early-industrial|66|opening:16:1,voice:32:2,pulse:32:3,voice:32:3,climax:32:4,disintegration:16:2,void:16:1|_=C5,C5,Db5,C5
+ industrial::industrial-dance|124|intro:16:2,chant:16:3,groove:32:4,chant:16:4,break:8:1,groove:32:5,chant:32:5,outro:16:2|_=F5,F5,F5,F5
+ industrial::industrial-rock|135|intro:8:2,verse:16:3,chorus:16:5,verse:16:3,chorus:16:5,breakdown:8:1,build:8:4,chorus:16:5,outro:8:3|_=D5,D5,F5,C5
+ industrial::industrial-metal|134|intro:16:2,riff:16:4,verse:16:3,chorus:16:5,verse:16:3,chorus:16:5,breakdown:16:1,riff:32:5,outro:16:3|_=E5,E5,G5,A5
+ japanese::gagaku|48|opening:16:1,jo:32:2,ha:64:3,kyu:32:4,cadence:16:1|_=E5,E5,B5,E5
+ japanese::shakuhachi|48|opening-call:16:1,response:16:2,development:32:3,duet:32:3,return:16:2,cadence:8:1|_=D5,D5,D5,D5
+ japanese::shamisen-min-yo|108|intro:8:2,verse:16:3,response:8:3,verse:16:3,solo:16:4,verse:16:4,response:16:5,cadence:4:2|_=D5,D5,A5,D5
+ japanese::koto-sankyoku|84|opening:8:1,A:24:2,B:32:3,C:24:4,A:24:3,cadence:8:1|_=D5,D5,A5,D5
+ japanese::taiko|80|silence:4:1,solo:32:2,build:32:3,ensemble:32:4,break:4:1,solo:32:4,climax:32:5,cadence:8:2|_=D5,D5,D5,D5
+ jazz::bebop|240|intro:8:3,head:64:4,solo:128:3,drum-solo:32:4,head:64:5,tag:8:3|_=Bbmaj7,Bbmaj7,Fm7,Bb7,Ebmaj7,Ab7,Bbmaj7,G7,Cm7,F7,Bbmaj7,F7
+ jazz::cool|136|intro:8:1,head:32:2,solo:32:3,solo:32:3,head:32:3,tag:8:1|_=Fmaj7,Dm7,Gm7,C7;solo=Bbmaj7,Eb7,Am7,D7,Gm7,C7,Fmaj7,Fmaj7
+ jazz::big-band|176|intro:12:2,piano:24:3,sax:24:3,trumpet:24:4,ensemble:24:4,shout:24:5,tag:4:3|_=F7,F7,F7,F7,Bb7,Bb7,F7,F7,C7,Bb7,F7,C7
+ jazz::jazz-fusion|156|intro:16:2,theme-a:32:3,theme-b:16:4,theme-c:16:4,solo:32:3,theme-a:32:4,theme-b:16:5,coda:16:3|_=G7,G7,C7,G7;theme-b=Cmaj7,D7,Gmaj7,Em7;theme-c=Am7,D7,Gmaj7,Cmaj7
+ jazz::free-jazz|96|bass-opening:8:1,head:24:3,solo:48:3,dialogue:32:4,head:24:4,coda:8:1|_=Dm,Dm,Dm,Dm
+`.trim().split('\n').map(line => line.trim().replace(/^Afrobeat/, 'afrobeat'));

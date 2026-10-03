@@ -1,0 +1,44 @@
+import { GENRE_WORLDS } from '../genres';
+import { STYLE_REFERENCES, styleReferenceKey } from '../styles/styleReferences';
+import { REFERENCE_SELECTIONS } from './referenceSelections';
+import { RECORDING_ARRANGEMENTS } from './recordingArrangements';
+import { starterSongs } from './starters';
+
+export interface FullSongTemplate {
+  id: string;
+  kind: 'full-song';
+  genreId: string;
+  styleId: string;
+  styleName: string;
+  artist: string;
+  track: string;
+  name: string;
+  referenceKey: string;
+  arrangementBasis: 'recording-informed' | 'style-derived';
+  selectedFromRepertoire: boolean;
+  description: string;
+}
+
+export const fullSongs: FullSongTemplate[] = GENRE_WORLDS.flatMap(world => world.styleDefinitions.map(style => {
+  const key = styleReferenceKey(world.id, style.name);
+  const reference = STYLE_REFERENCES[key as keyof typeof STYLE_REFERENCES];
+  const selection = REFERENCE_SELECTIONS[key];
+  const artist = selection?.artist ?? reference.credit;
+  const quoted = reference.recording.match(/“([^”]+)”/);
+  const track = selection?.track ?? quoted?.[1] ?? reference.recording;
+  if (!track || /repertoire|references|adjacent work/.test(track)) throw new Error(`Select a concrete recording for ${key}`);
+  const arrangement = RECORDING_ARRANGEMENTS[key];
+  return {
+    id: `${style.id}_song`, kind: 'full-song' as const,
+    genreId: world.id, styleId: style.id, styleName: style.name,
+    artist, track, name: `${artist} — ${track}`, referenceKey: key,
+    arrangementBasis: arrangement ? 'recording-informed' as const : 'style-derived' as const,
+    selectedFromRepertoire: !!selection,
+    description: arrangement?.note ?? reference.qualities.map(q => q.replace(/\s*---$/, '')).join('; '),
+  };
+}));
+
+/** Samples retain their pre-existing IDs, personnel, tempo and short authored forms. */
+export const sampleSongs = starterSongs.map(sample => ({ ...sample, kind: 'sample' as const }));
+export const songCatalog = [...fullSongs, ...sampleSongs];
+export const FULL_SONGS_BY_ID = Object.fromEntries(fullSongs.map(song => [song.id, song]));
