@@ -20,13 +20,13 @@ if (process.argv.includes('--report-only')) {
   const fastSteps = [
     { id: 'data-boundary', args: ['scripts/audit-data-boundary.mjs'] },
     { id: 'catalog', args: script('audit-catalog.ts') },
-    { id: 'starter-generation', args: script('audit-starters.ts') },
+    { id: 'example-generation', args: script('audit-examples.ts', ['--quick']) },
     { id: 'sound-resolution', args: script('sound-metadata.test.ts') },
     { id: 'solo-behavior', args: script('solo-performance.test.ts') },
-    { id: 'regressions', args: ['--import', 'tsx', '--test', 'scripts/technique-mechanics.test.ts', 'scripts/musical-fidelity.test.ts', 'scripts/musician-score.test.ts', 'scripts/engine-pipeline.test.ts', 'scripts/sample-accuracy.test.ts', 'scripts/mix-regression.test.ts', 'scripts/dynamic-mix.test.ts', 'scripts/playback-regression.test.ts', 'scripts/song-player-regression.test.ts', 'scripts/instrument-catalog-migration.test.ts', 'scripts/catalog-metadata.test.ts'] },
+    { id: 'regressions', args: ['--import', 'tsx', '--test', 'scripts/technique-mechanics.test.ts', 'scripts/musical-fidelity.test.ts', 'scripts/musician-score.test.ts', 'scripts/engine-pipeline.test.ts', 'scripts/song-accuracy.test.ts', 'scripts/mix-regression.test.ts', 'scripts/dynamic-mix.test.ts', 'scripts/playback-regression.test.ts', 'scripts/song-player-regression.test.ts', 'scripts/instrument-catalog-migration.test.ts', 'scripts/catalog-metadata.test.ts'] },
   ];
   const audioSteps = [
-      { id: 'render-regressions', args: ['--import', 'tsx', '--test', 'scripts/technique-audio.test.ts', 'scripts/render-regression.test.ts', 'scripts/sample-sound-accuracy.test.ts'] },
+      { id: 'render-regressions', args: ['--import', 'tsx', '--test', 'scripts/reference-calibration.test.ts', 'scripts/instrument-balance.test.ts', 'scripts/technique-audio.test.ts', 'scripts/render-regression.test.ts', 'scripts/song-sound-accuracy.test.ts'] },
       { id: 'instrument-renderers', args: script('audit-instrument-render.ts') },
       { id: 'ensemble-export', args: script('audio-regression-harness.ts') },
   ];
@@ -44,7 +44,7 @@ if (process.argv.includes('--report-only')) {
   const steps = [...(checks.length ? [] : fastSteps), ...(audio ? audioSteps : [])];
   for (const step of steps) {
     const started = performance.now();
-    const result = spawnSync(process.execPath, step.args, { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024, timeout: audio || step.id === 'starter-generation' ? 10 * 60_000 : 60_000 });
+    const result = spawnSync(process.execPath, step.args, { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024, timeout: audio || step.id === 'example-generation' ? 10 * 60_000 : 60_000 });
     const status = result.status === 0 && !result.error ? 'PASS' : 'FAIL';
     const row: CheckResult = { id: step.id, status, seconds: Number(((performance.now() - started) / 1000).toFixed(1)) };
     if (status === 'FAIL') row.output = [result.stdout, result.stderr, result.error?.message].filter(Boolean).join('\n').trim();

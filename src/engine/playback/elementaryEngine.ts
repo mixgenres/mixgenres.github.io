@@ -1,7 +1,7 @@
 import { renderBodyStrike } from './stringPercussion';
 import { BASS_INSTRUMENT_PATTERN, DRUM_BUS_INSTRUMENT_PATTERN, ELECTRIC_INSTRUMENT_PATTERN, ELECTRONIC_GAIN_INSTRUMENT_PATTERN, FAMILY_NOISE_SCALE_RULES, SUB_BUS_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
 import { INSTRUMENTS_BY_ID, EXACT_PLUCKED_PRESETS, GAIN_BY_INSTRUMENT } from '../../engine/lookup/instruments';
-import { el } from '@elemaudio/core';
+import { el } from './dsp';
 import { getLuthierModelForInstrument } from './luthier.ts';
 import type { LuthierPhysicalParameters } from '../../data/instruments/schema/luthier';
 import type { AcousticFormantProfile } from '../../data/instruments/schema/formant-profile';
@@ -302,7 +302,7 @@ export function renderVoice(
   const dspProfile = ctx.dspProfile;
   // Bespoke percussion already owns its excitation/body. Pitched generic
   // resonators and contact artifacts would turn it back into a harmonic note.
-  if (dspProfile && ctx.voice.mechanics?.tailSeconds === undefined) {
+  if (dspProfile && !params.synthPatch && ctx.voice.mechanics?.tailSeconds === undefined) {
     const x = dspProfile.excitationDynamics;
     const c = dspProfile.coupledResonators;
     const a = dspProfile.mechanicalArtifacts;
@@ -503,7 +503,7 @@ export function renderVoice(
   const finalRawAudio = rawAudio;
   // Decaying physical instruments own their release in the resonator. A short
   // global ADSR release here would choke plucked/struck tails at note-off.
-  const gain = ctx.isDecayingInstrument || voice.bodyAttack
+  const gain = ctx.isDecayingInstrument || voice.bodyAttack || params.synthPatch
     ? ctx.velSignal
     : el.mul(ctx.velSignal, ctx.env);
   return el.mul((params.roleGain ?? 1) / Math.max(0.0001, roleGain), gain, finalRawAudio);

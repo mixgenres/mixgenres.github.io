@@ -55,9 +55,12 @@ assert.deepEqual(copied.sheet.regions.find(r => r.id === copied.newRegionId)?.so
 assert.deepEqual(removeVoice(trading, guitar.id).regions.find(r => r.id === region.id)?.solo?.trackIds, [secondLead.id]);
 
 const custom = makeSheet({ genreId: 'flamenco', overrides: { arrangement: { soloDefinition: GENRE_SOLO_DEFINITIONS.salsa } } });
-const customSolo = setSectionSolo(custom, custom.regions[0].id, { trackIds: [guitar.id], mode: 'genre' });
-assert.equal(customSolo.arrangementContext?.[custom.regions[0].id].solo?.policy.accompaniment, 'ensemble', 'style overrides may replace genre solo definitions');
-assert.ok(arrangeBand(customSolo).notes.some(n => n.bar < custom.regions[0].end && n.trackId === secondLead.id));
+// The salida is deliberately guitar alone. Exercise an ensemble override in
+// the letra, where accompaniment is authored, rather than inventing an intro part.
+const customRegion = custom.regions[1];
+const customSolo = setSectionSolo(custom, customRegion.id, { trackIds: [guitar.id], mode: 'genre' });
+assert.equal(customSolo.arrangementContext?.[customRegion.id].solo?.policy.accompaniment, 'ensemble', 'style overrides may replace genre solo definitions');
+assert.ok(arrangeBand(customSolo).notes.some(n => n.bar >= customRegion.start && n.bar < customRegion.end && n.trackId === secondLead.id));
 
 console.log('Solo performance checks passed: genre coverage, accompaniment, trading, names, energy, inactive players, lifecycle and style overrides.');
 

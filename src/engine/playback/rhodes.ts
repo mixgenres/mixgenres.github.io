@@ -1,6 +1,6 @@
 import { RHODES_GENRE_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
 import { KIZOMBA_PATTERN, RHODES_SOUL_GENRE_PATTERN, RHODES_SUSTAIN_GENRE_PATTERN, RHODES_TRANSIENT_GENRE_PATTERN } from '../../data/sound/dsp/genreClassifiers';
-import { el } from '@elemaudio/core';
+import { el } from './dsp';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 
 export default class RhodesModule implements InstrumentModule {

@@ -26,6 +26,18 @@ export const ALZAPUA_CIERRE: Omit<AuthoredCell, 'name'> = {
   ],
 };
 
+/** One complete phrase-ending variant, so the tremolo does not hide the
+ * subsequent thumb/strum closing gesture in the variant selector. */
+export const SOLEA_FALSETA_CIERRE: Omit<AuthoredCell, 'name'> = {
+  ...SOLEA_TREMOLO, phraseEnd: true,
+  onsets: [...SOLEA_TREMOLO.onsets, ...ALZAPUA_CIERRE.onsets],
+  durations: [...SOLEA_TREMOLO.durations!, ...ALZAPUA_CIERRE.durations!],
+  accents: [...SOLEA_TREMOLO.accents!, ...ALZAPUA_CIERRE.accents!],
+  pitches: [...SOLEA_TREMOLO.pitches!, ...ALZAPUA_CIERRE.pitches!],
+  notations: [...SOLEA_TREMOLO.notations!, ...ALZAPUA_CIERRE.notations!],
+  articulations: [...Array(10).fill('tremolo'), ...Array(3).fill('alzapua')],
+};
+
 export const RUMBA_STRUM: Omit<AuthoredCell, 'name'> = {
   role: 'lead', instruments: ['guitar'], cycleLength: 1,
   onsets: [0, .5, 1, 1.5, 2, 2.5, 3, 3.5], durations: Array(8).fill(.3),

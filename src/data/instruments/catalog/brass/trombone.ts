@@ -7,7 +7,7 @@ export const trombone: InstrumentDef = {
   brassSynthesis: { vibratoRateHz: 5.3, defaultNonlinearBlare: 0.72 },
   voicing: "single",
   elementaryModel: 15,
-  makeupGain: 0.494,
+  makeupGain: 0.8555,
   polyphony: 4,
   acousticProfile: {
     sustain: "blown",

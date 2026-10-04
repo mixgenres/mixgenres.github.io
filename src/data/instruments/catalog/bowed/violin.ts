@@ -9,7 +9,7 @@ export const violin: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "bow",
   elementaryModel: 6,
-  makeupGain: 0.26,
+  makeupGain: 0.1791,
   polyphony: 4,
   note: "Acoustic orchestral, chamber, and folk violin with estimated bowed source/filter and corpus responses, bridge hill presence, and distinct tango string, afterlength, and body contacts",
   acousticProfile: {

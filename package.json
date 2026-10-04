@@ -31,9 +31,9 @@
     "test:mix": "node --import tsx --test scripts/mix-regression.test.ts scripts/dynamic-mix.test.ts",
     "audit:browser": "node --import tsx scripts/browser-audit-server.ts",
     "audit:catalog": "node --import tsx scripts/audit-catalog.ts",
-    "audit:starters": "node --import tsx scripts/audit-starters.ts",
-    "audit:accuracy": "node --import tsx scripts/audit-sample-accuracy.ts --scores",
-    "test:accuracy": "node --import tsx --test scripts/sample-accuracy.test.ts scripts/sample-sound-accuracy.test.ts",
+    "audit:examples": "node --import tsx scripts/audit-examples.ts",
+    "audit:accuracy": "node --import tsx scripts/audit-song-accuracy.ts --scores",
+    "test:accuracy": "node --import tsx --test scripts/song-accuracy.test.ts scripts/song-sound-accuracy.test.ts",
     "test:score": "node --import tsx --test scripts/musician-score.test.ts scripts/engine-pipeline.test.ts",
     "audit:audio-catalog": "node --import tsx scripts/audio-regression-harness.ts --all-styles"
   },

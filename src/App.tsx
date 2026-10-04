@@ -29,9 +29,15 @@ import { FEELS } from './data/tempoFeels';
 import { ENERGY_LABELS } from './data/performance/energy';
 import { SongPlayer, type PlayerState } from './engine/playback/songPlayer';
 import type { Performance } from './engine/band/performanceData';
-import { catalogIdForStyle, createCatalogSong, markCatalogModified, switchCatalogSongKind, type CatalogSongKind } from './engine/sheet/songCatalog';
+import { catalogIdForStyle, createCatalogSong } from './engine/sheet/songCatalog';
 import { preparedAudioStats } from './engine/cache/preparedAudio';
 import { PATTERNS_BY_ID, cleanPatternName } from './data/genres';
+import { beatsPerBarOf } from './engine/sheet/grid';
+
+function playbackTime(seconds: number) {
+  const whole = Math.max(0, Math.floor(seconds));
+  return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}`;
+}
 
 function loadInitialSong(): { song: SongSheet; isNew: boolean } {
   const params = new URLSearchParams(window.location.search);
@@ -43,12 +49,12 @@ function loadInitialSong(): { song: SongSheet; isNew: boolean } {
   if (genre) {
     try {
       const styleId = params.get('style') ?? getCanonicalStyle(genre).id;
-      return { song: createCatalogSong(catalogIdForStyle(styleId, 'sample')), isNew: false };
+      return { song: createCatalogSong(catalogIdForStyle(styleId)), isNew: false };
     }
     catch { /* An invalid review link falls back to the normal starter. */ }
   }
   const styleId = getCanonicalStyle('tango').id;
-  return { song: createCatalogSong(catalogIdForStyle(styleId, 'sample')), isNew: true };
+  return { song: createCatalogSong(catalogIdForStyle(styleId)), isNew: true };
 }
 
 export default function App() {
@@ -56,8 +62,10 @@ export default function App() {
   const [song, setSong] = useState<SongSheet>(initialData.song);
   const [playerState, setPlayerState] = useState<PlayerState>({ status: 'idle', progress: 0 });
   const playerStatus = playerState.composition === song ? playerState.status : 'compiling';
-  const playing = playerStatus === 'playing' || playerStatus === 'starting';
-  const playbackLabel = playing ? 'Pause (Space)' : playerStatus === 'error' ? 'Retry playback (Space)' : 'Play (Space)';
+  const preparing = playerStatus === 'compiling' || playerStatus === 'rendering';
+  const starting = playerStatus === 'starting';
+  const playing = playerStatus === 'playing' || starting || playerStatus === 'seeking';
+  const playbackLabel = starting ? 'Cancel start (Space)' : playing ? 'Pause (Space)' : playerStatus === 'error' ? 'Retry playback (Space)' : 'Play (Space)';
   const [isBouncing, setIsBouncing] = useState(false);
   const [bounceProgress, setBounceProgress] = useState<number | null>(null);
   const [step, setStep] = useState(0);
@@ -118,37 +126,23 @@ export default function App() {
     barRef.current = 0;
     stepRef.current = 0;
     seekSecondsRef.current = 0;
+    transportRef.current?.style.setProperty('--playhead', '0%');
     playerRef.current?.locate(0);
   };
 
-  const handleStartOver = (worldId: string, styleId?: string, kind: CatalogSongKind = song.catalogKind ?? 'sample') => {
+  const handleStartOver = (worldId: string, styleId?: string) => {
     const canonical = getCanonicalStyle(worldId);
     const targetStyleId = styleId ?? canonical.id;
-    const fresh = createCatalogSong(catalogIdForStyle(targetStyleId, kind));
+    const fresh = createCatalogSong(catalogIdForStyle(targetStyleId));
     resetTransportForSong(fresh);
     showToast(`Started a new ${plateFor(worldId).short} song (${resolveStyle({ genreId: worldId, styleId: targetStyleId }).name})`);
   };
 
   const handleSelectStyle = (styleId: string) => {
-    const next = createCatalogSong(catalogIdForStyle(styleId, song.catalogKind ?? 'sample'));
+    const next = createCatalogSong(catalogIdForStyle(styleId));
     resetTransportForSong(next);
     const targetName = resolveStyle({ genreId: next.worldId, styleId }).name;
     showToast(`Style set to ${targetName}`);
-  };
-
-  const handleCatalogKindChange = (kind: CatalogSongKind) => {
-    if (song.catalogKind === kind) return;
-    try {
-      playerRef.current?.pause();
-      const wasModified = !!song.catalogModified;
-      const next = switchCatalogSongKind(song, kind);
-      resetTransportForSong(next);
-      const label = kind === 'full-song' ? 'Full' : 'Sample';
-      showToast(wasModified ? `${label} version created with your edits` : `Switched to ${label.toLowerCase()} source`);
-    } catch (error) {
-      console.error('Unable to switch song length', { kind, error });
-      showToast('Could not switch song length');
-    }
   };
 
   const exportAbortRef = useRef<AbortController | null>(null);
@@ -184,6 +178,8 @@ export default function App() {
   };
 
   const timelineRef = useRef<HTMLDivElement>(null);
+  const transportRef = useRef<HTMLDivElement>(null);
+  const scrubbingRef = useRef(false);
   const [isScrubbing, setIsScrubbing] = useState(false);
   const [hoverFrac, setHoverFrac] = useState<number | null>(null);
 
@@ -205,19 +201,32 @@ export default function App() {
   const seekTo = (newBar: number, newStep: number = 0) => {
     const total = songRef.current.durationMeasures || 1;
     const clampedBar = Math.max(0, Math.min(total - 1, newBar));
-    const clampedStep = Math.max(0, Math.min(15, newStep));
+    const clampedStep = Math.max(0, Math.min(15.999, newStep));
     setBar(clampedBar);
-    setStep(clampedStep);
+    setStep(Math.floor(clampedStep));
     barRef.current = clampedBar;
-    stepRef.current = clampedStep;
+    stepRef.current = Math.floor(clampedStep);
+    transportRef.current?.style.setProperty('--playhead', `${(clampedBar + clampedStep / 16) / total * 100}%`);
     // the transport thinks in seconds, so translate the grid position through
     // the tempo map rather than assuming one tempo for the whole song
     const bt = perfRef.current?.bars[clampedBar];
-    if (bt) {
-      const seconds = bt.start + ((bt.end - bt.start) * clampedStep) / 16;
-      seekSecondsRef.current = seconds;
-      playerRef.current?.locate(seconds);
+    let seconds: number;
+    if (bt) seconds = bt.start + ((bt.end - bt.start) * clampedStep) / 16;
+    else {
+      // Seeking remains useful while the first compilation is still pending.
+      const sheet = songRef.current;
+      const barSeconds = (index: number) => 60 * beatsPerBarOf(sheet.timeSignature) /
+        getEffectiveBpm(sheet, sheet.measures[index]?.regionId).bpm;
+      seconds = barSeconds(clampedBar) * clampedStep / 16;
+      for (let i = 0; i < clampedBar; i++) seconds += barSeconds(i);
     }
+    seekSecondsRef.current = seconds;
+    playerRef.current?.locate(seconds);
+  };
+
+  const seekFraction = (fraction: number) => {
+    const target = Math.min(totalBars - .0001, Math.max(0, fraction * totalBars));
+    seekTo(Math.floor(target), (target % 1) * 16);
   };
 
   const getFracFromPointer = (clientX: number) => {
@@ -229,53 +238,62 @@ export default function App() {
   };
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!e.isPrimary || e.button !== 0) return;
+    e.currentTarget.focus();
     e.currentTarget.setPointerCapture(e.pointerId);
+    scrubbingRef.current = true;
     setIsScrubbing(true);
-    const frac = getFracFromPointer(e.clientX);
-    const totalSteps = totalBars * 16;
-    const target = Math.min(totalSteps - 1, Math.max(0, Math.round(frac * totalSteps)));
-    seekTo(Math.floor(target / 16), target % 16);
+    playerRef.current?.beginScrub();
+    seekFraction(getFracFromPointer(e.clientX));
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     const frac = getFracFromPointer(e.clientX);
-    if (isScrubbing) {
-      const totalSteps = totalBars * 16;
-      const target = Math.min(totalSteps - 1, Math.max(0, Math.round(frac * totalSteps)));
-      seekTo(Math.floor(target / 16), target % 16);
+    if (scrubbingRef.current) {
+      seekFraction(frac);
     } else {
       setHoverFrac(frac);
     }
   };
 
   const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (isScrubbing) {
+    if (scrubbingRef.current) {
+      if (e.type === 'pointerup') seekFraction(getFracFromPointer(e.clientX));
+      scrubbingRef.current = false;
       setIsScrubbing(false);
+      setHoverFrac(null);
+      playerRef.current?.endScrub();
       try { e.currentTarget.releasePointerCapture(e.pointerId); } catch {}
     }
   };
 
   const handlePointerLeave = () => {
-    if (!isScrubbing) setHoverFrac(null);
+    if (!scrubbingRef.current) setHoverFrac(null);
   };
 
+  const sheetOpen = tempoOpen || downloadOpen || startOverOpen || randomizeOpen || worldOpen || sectionOpen ||
+    chordOpen || energyOpen || sectionGenreOpen || styleOpen || addingVoice || !!roleFor || !!instrFor || !!patternFor || !!note;
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      if (sheetOpen || e.altKey || e.ctrlKey || e.metaKey ||
+        e.target instanceof Element && e.target.closest('input, textarea, select, [contenteditable="true"], [role="dialog"]')) return;
       if (e.code === 'Space') {
+        // Buttons retain their native keyboard click; the timeline and page
+        // use Space as a transport shortcut.
+        if (e.target instanceof Element && e.target.closest('button')) return;
         e.preventDefault();
-        if (!e.repeat) { playerRef.current?.configure(songRef.current); playerRef.current?.toggle(); }
+        if (!e.repeat) { playerRef.current?.configure(songRef.current); playerRef.current?.toggle(e.timeStamp); }
       } else if (e.code === 'ArrowLeft') {
         e.preventDefault();
-        seekTo(bar - 1, 0);
+        seekTo(barRef.current - 1, 0);
       } else if (e.code === 'ArrowRight') {
         e.preventDefault();
-        seekTo(bar + 1, 0);
+        seekTo(barRef.current + 1, 0);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [bar]);
+  }, [sheetOpen]);
 
   /* ---- what we are looking at ------------------------------------------ */
   const playingRegion = song.measures[bar]?.regionId ?? song.regions[0]?.id;
@@ -307,6 +325,10 @@ export default function App() {
       while (i < bars.length - 1 && seconds >= bars[i].end) i++;
       const bt = bars[i];
       const frac = bt.end > bt.start ? (seconds - bt.start) / (bt.end - bt.start) : 0;
+      // The timeline follows the audio clock every frame; React only updates
+      // the musical grid when its subdivision changes.
+      transportRef.current?.style.setProperty('--playhead', `${Math.min(100, Math.max(0,
+        (i + frac) / (songRef.current.durationMeasures || 1) * 100))}%`);
       const st = Math.max(0, Math.min(15, Math.floor(frac * 16)));
       if (barRef.current !== i) { barRef.current = i; setBar(i); }
       if (stepRef.current !== st) { stepRef.current = st; setStep(st); }
@@ -367,9 +389,8 @@ export default function App() {
     // Mix edits also produce a new immutable playback snapshot. Re-rendering
     // finishes before that version resumes, so UI and audio cannot disagree.
     void scope;
-    setSong(current => markCatalogModified(fn(current)));
+    setSong(current => fn(current));
   };
-  const playheadPercent = Math.min(100, Math.max(0, ((bar * 16 + step) / (totalBars * 16)) * 100));
 
   return (
     <div className="relative min-h-screen flex flex-col" style={{ zIndex: 1 }}>
@@ -474,38 +495,6 @@ export default function App() {
               </div>
             </button>
 
-            <div className="flex items-center gap-1 shrink-0" role="group" aria-label="Song length">
-              <button
-                type="button"
-                className="btn-pill cursor-pointer"
-                aria-pressed={(song.catalogKind ?? 'sample') === 'sample'}
-                onClick={() => handleCatalogKindChange('sample')}
-                title="Use the short style sample"
-                style={(song.catalogKind ?? 'sample') === 'sample' ? {
-                  background: 'var(--ink)', color: 'var(--ground)'
-                } : {
-                  background: 'var(--tone)', color: 'var(--ink)',
-                  boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 25%, transparent)',
-                }}
-              >
-                Sample
-              </button>
-              <button
-                type="button"
-                className="btn-pill cursor-pointer"
-                aria-pressed={song.catalogKind === 'full-song'}
-                onClick={() => handleCatalogKindChange('full-song')}
-                title="Use the full song form"
-                style={song.catalogKind === 'full-song' ? {
-                  background: 'var(--ink)', color: 'var(--ground)'
-                } : {
-                  background: 'var(--tone)', color: 'var(--ink)',
-                  boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 25%, transparent)',
-                }}
-              >
-                Full
-              </button>
-            </div>
             {showDevStyle && (
               <button
                 type="button"
@@ -520,12 +509,12 @@ export default function App() {
         </header>
 
         {/* ---- 2. PLAYBACK & RHYTHM NAVIGATION STRIP ---------------------- */}
-        <div className="flex items-stretch gap-2.5 select-none mb-5">
+        <div ref={transportRef} className="flex items-stretch gap-2.5 select-none mb-5">
           {/* Play/Pause button */}
           <button
-            onClick={() => { playerRef.current?.configure(songRef.current); playerRef.current?.toggle(); }}
+            onClick={e => { playerRef.current?.configure(songRef.current); playerRef.current?.toggle(e.timeStamp); }}
             aria-label={playbackLabel}
-            aria-busy={false}
+            aria-busy={starting || preparing}
             aria-pressed={playing}
             className="flex items-center justify-center transition-transform active:scale-95 rounded shrink-0 self-stretch cursor-pointer relative"
             style={{
@@ -533,8 +522,9 @@ export default function App() {
               background: 'var(--ink)',
               color: 'var(--ground)',
             }}
-            title={playbackLabel}
+            title={preparing ? 'Preparing audio in the background — Play starts when ready' : playbackLabel}
           >
+            {(preparing || starting) && <span className="playback-loading-ring" aria-hidden="true" />}
             {playing ? (
               <PauseIcon size={18} />
             ) : (
@@ -554,10 +544,30 @@ export default function App() {
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
               onPointerCancel={handlePointerUp}
+              onLostPointerCapture={handlePointerUp}
               onPointerLeave={handlePointerLeave}
-              className="relative cursor-ew-resize touch-none rounded"
+              role="slider"
+              tabIndex={0}
+              aria-label="Song position"
+              aria-valuemin={0}
+              aria-valuemax={totalBars * 16 - 1}
+              aria-valuenow={bar * 16 + step}
+              aria-valuetext={`Bar ${bar + 1} of ${totalBars}, ${playbackTime(seekSecondsRef.current)}`}
+              onKeyDown={e => {
+                const delta = e.shiftKey ? 1 : 16;
+                let target: number;
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') target = barRef.current * 16 + stepRef.current - delta;
+                else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') target = barRef.current * 16 + stepRef.current + delta;
+                else if (e.key === 'Home') target = 0;
+                else if (e.key === 'End') target = totalBars * 16 - 1;
+                else return;
+                e.preventDefault(); e.stopPropagation();
+                target = Math.max(0, Math.min(totalBars * 16 - 1, target));
+                seekTo(Math.floor(target / 16), target % 16);
+              }}
+              className="playback-timeline relative cursor-ew-resize touch-none rounded"
               style={{
-                height: 20,
+                height: 24,
                 background: 'var(--tone)',
                 border: '1px solid color-mix(in srgb, var(--ink) 14%, transparent)',
               }}
@@ -570,7 +580,7 @@ export default function App() {
                   top: 0,
                   bottom: 0,
                   left: 0,
-                  width: `${playheadPercent}%`,
+                  width: 'var(--playhead, 0%)',
                   background: `color-mix(in srgb, ${plate.signal} 20%, transparent)`,
                   borderRadius: 'inherit',
                   pointerEvents: 'none',
@@ -598,7 +608,7 @@ export default function App() {
                 style={{
                   position: 'absolute',
                   top: '50%',
-                  left: `${playheadPercent}%`,
+                  left: 'var(--playhead, 0%)',
                   transform: 'translate(-50%, -50%)',
                   width: 13,
                   height: 13,
@@ -621,7 +631,7 @@ export default function App() {
                   position: 'absolute',
                   top: 0,
                   bottom: 0,
-                  left: `${playheadPercent}%`,
+                  left: 'var(--playhead, 0%)',
                   width: 1.5,
                   background: plate.signal,
                   zIndex: 10,
@@ -677,8 +687,8 @@ export default function App() {
         </div>
 
         {showDevAudio && <output aria-label="Playback diagnostics" className="block text-xs tabular-nums -mt-3 mb-5">
-          {playerStatus} · {Math.round(playerState.progress*100)}% · {playerRef.current?.preparedDuration.toFixed(1) ?? '0'}s prepared
-          {playerState.audioStartMs !== undefined && <> · click to signal {playerState.audioStartMs.toFixed(1)}ms · hardware latency {playerState.outputLatencyMs?.toFixed(1)}ms</>}
+          {playerStatus} · {Math.round(playerState.progress*100)}% · {playerRef.current?.preparedAheadSeconds.toFixed(1) ?? '0'}s ahead
+          {playerState.audioStartMs !== undefined && <> · click to signal {playerState.audioStartMs.toFixed(1)}ms · output latency estimate {playerState.outputLatencyMs?.toFixed(1)}ms</>}
           {' · '}{(preparedAudioStats().bytes/1024/1024).toFixed(1)} MB cached · {preparedAudioStats().hits} hits / {preparedAudioStats().misses} misses
         </output>}
 
@@ -1089,16 +1099,16 @@ export default function App() {
         </div>
       )}
 
-      <StartOverModal
+      {(startOverOpen) && (<StartOverModal
         open={startOverOpen}
         onClose={() => setStartOverOpen(false)}
         currentWorldId={song.worldId}
-        onConfirmResetCurrent={() => handleStartOver(song.worldId, song.styleId, song.catalogKind ?? 'sample')}
+        onConfirmResetCurrent={() => handleStartOver(song.worldId, song.styleId)}
         onSelectNewGenre={id => { handleStartOver(id); setStyleOpen(true); }}
         isInitialLoad={initialData.isNew}
-      />
+      />)}
 
-      <RandomizeSheet
+      {(randomizeOpen) && (<RandomizeSheet
         open={randomizeOpen}
         onClose={() => setRandomizeOpen(false)}
         regionKind={partName}
@@ -1138,9 +1148,9 @@ export default function App() {
           edit(s => addRandomInstrument(s, region?.id, 'song'));
           showToast('Added a random instrument to the whole song');
         }}
-      />
+      />)}
 
-      <WorldSheet
+      {(worldOpen) && (<WorldSheet
         open={worldOpen}
         onClose={() => setWorldOpen(false)}
         current={song.worldId}
@@ -1157,9 +1167,9 @@ export default function App() {
           handleStartOver(id);
           setWorldOpen(false);
         }}
-      />
+      />)}
 
-      <SectionSheet
+      {(sectionOpen) && (<SectionSheet
         open={sectionOpen} onClose={() => setSectionOpen(false)}
         region={region ?? null} index={focusIndex} count={song.regions.length}
         regions={song.regions}
@@ -1193,7 +1203,7 @@ export default function App() {
           const i = song.regions.findIndex(r => r.id === region.id);
           const j = i + d;
           if (i < 0 || j < 0 || j >= song.regions.length) return;
-          const nextSheet = markCatalogModified(moveSection(song, region.id, d));
+          const nextSheet = moveSection(song, region.id, d);
           setSong(nextSheet);
           setPickedRegion(region.id);
           const moved = nextSheet.regions.find(r => r.id === region.id);
@@ -1203,7 +1213,7 @@ export default function App() {
         onDuplicate={() => {
           if (!region) return;
           const result = duplicateSection(song, region.id);
-          const nextSheet = markCatalogModified(result.sheet);
+          const nextSheet = result.sheet;
           const { newRegionId } = result;
           setSong(nextSheet);
           setPickedRegion(newRegionId);
@@ -1214,7 +1224,7 @@ export default function App() {
         onNewPart={() => {
           if (!region) return;
           const result = addSensibleSectionAfter(song, region.id);
-          const nextSheet = markCatalogModified(result.sheet);
+          const nextSheet = result.sheet;
           const { newRegionId } = result;
           setSong(nextSheet);
           setPickedRegion(newRegionId);
@@ -1225,7 +1235,7 @@ export default function App() {
         onRemove={() => {
           if (!region || song.regions.length <= 1) return;
           const i = song.regions.findIndex(r => r.id === region.id);
-          const nextSheet = markCatalogModified(removeSection(song, region.id));
+          const nextSheet = removeSection(song, region.id);
           const targetIndex = i > 0 ? i - 1 : 0;
           const nextReg = nextSheet.regions[targetIndex] ?? nextSheet.regions[0];
           setSong(nextSheet);
@@ -1265,9 +1275,9 @@ export default function App() {
           updated.customProgressions = updated.customProgressions?.filter((p: any) => p.id !== id);
           return updated;
         })}
-      />
+      />)}
 
-      <ChordSheet
+      {(chordOpen) && (<ChordSheet
         open={chordOpen}
         onClose={() => setChordOpen(false)}
         region={region}
@@ -1293,23 +1303,23 @@ export default function App() {
           updated.customProgressions = updated.customProgressions?.filter((p: any) => p.id !== id);
           return updated;
         })}
-      />
+      />)}
 
-      <SectionGenreSheet
+      {(sectionGenreOpen) && (<SectionGenreSheet
         open={sectionGenreOpen}
         onClose={() => setSectionGenreOpen(false)}
         currentGenre={sectionGenreId}
         regionKind={partName}
         onPick={handleSelectSectionGenre}
-      />
+      />)}
 
-      <StyleSheetModal
+      {(styleOpen) && (<StyleSheetModal
         open={styleOpen}
         onClose={() => setStyleOpen(false)}
         currentGenreId={song.worldId}
         currentStyleId={song.styleId}
         onPickStyle={handleSelectStyle}
-      />
+      />)}
       {showDevStyle && (
         <StyleInspector
           song={song}
@@ -1317,7 +1327,7 @@ export default function App() {
         />
       )}
 
-      <TempoSheet
+      {(tempoOpen) && (<TempoSheet
         open={tempoOpen}
         onClose={() => setTempoOpen(false)}
         baseBpm={song.bpm}
@@ -1329,11 +1339,11 @@ export default function App() {
         onSetSectionBpm={bpm => region && edit(s => setSectionBpm(s, region.id, bpm))}
         onSetSongTempoShift={shift => edit(s => setSongTempoShift(s, shift))}
         onSetSectionTempoShift={shift => region && edit(s => setSectionTempoShift(s, region.id, shift))}
-      />
+      />)}
 
-      <EnergySheet open={energyOpen} onClose={() => setEnergyOpen(false)}
+      {(energyOpen) && (<EnergySheet open={energyOpen} onClose={() => setEnergyOpen(false)}
         energy={region.energy ?? 3} sectionKind={partName}
-        onPick={energy => edit(s => setSectionEnergy(s, region.id, energy))} />
+        onPick={energy => edit(s => setSectionEnergy(s, region.id, energy))} />)}
 
       <Sheet open={!!roleFor} onClose={() => setRoleFor(null)} title="Instrument role"
         kicker={`${song.tracks.find(t => t.id === roleFor)?.name ?? 'Instrument'} · ${roleScope === 'section' ? `${partName} only` : 'whole song'}`}>
@@ -1385,7 +1395,7 @@ export default function App() {
         )}
       </Sheet>
 
-      <InstrumentSheet
+      {(!!instrFor) && (<InstrumentSheet
         open={!!instrFor} onClose={() => setInstrFor(null)}
         title={song.tracks.find(t => t.id === instrFor)?.name ?? 'Instrument'}
         sectionKind={partName}
@@ -1404,16 +1414,16 @@ export default function App() {
             showToast(`Deleted ${instrVoice?.name ?? 'instrument'}`);
           }
         }}
-      />
+      />)}
 
-      <InstrumentSheet
+      {(addingVoice) && (<InstrumentSheet
         open={addingVoice} onClose={() => setAddingVoice(false)}
         title="Add an instrument"
         sectionKind={partName}
         onPickWithScope={(id, scope) => edit(s => addVoice(s, id, region.id, scope))}
-      />
+      />)}
 
-      <PatternSheet
+      {(!!patternFor) && (<PatternSheet
         open={!!patternFor} onClose={() => setPatternFor(null)}
         voice={patternVoice ?? null} worldId={song.worldId}
         current={patternFor ? arrangementHere[patternFor] : undefined}
@@ -1422,7 +1432,7 @@ export default function App() {
         onSilenceAll={() => patternFor && edit(s => silenceVoiceInAll(s, patternFor))}
         onPick={id => patternFor && edit(s => setPattern(s, patternFor, region.id, id, 'section'))}
         onPickEverywhere={id => patternFor && edit(s => setPattern(s, patternFor, region.id, id, 'song'))}
-      />
+      />)}
 
       <NoteCard
         open={!!note} onClose={() => setNote(null)}

@@ -1,4 +1,4 @@
-import { el } from '@elemaudio/core';
+import { el } from './dsp';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { STRUCK_MODES, UNMEASURED_BAR_MODES } from '../../data/sound/dsp/struckModes';
 

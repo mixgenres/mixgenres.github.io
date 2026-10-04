@@ -9,7 +9,7 @@ export const bouzouki: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "hard-pick",
   elementaryModel: 0,
-  makeupGain: 30.000,
+  makeupGain: 7.7485,
   polyphony: 8,
   note: "Long-necked teardrop lute with four double courses tuned in unisons and octaves, producing expansive metallic chime, driving countermelodies, and modal drones",
   acousticProfile: {

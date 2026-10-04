@@ -4,7 +4,7 @@ import { MASTER_MIX_DEFAULTS } from '../../data/sound/mix/masterProfiles';
 
 import type { MixCharacter } from '../../engine/style/contracts';
 import { DEFAULT_ROLE_PROFILES, ROLE_DB_PROFILES } from '../../data/sound/mix/roleProfiles';
-import { GENRE_MIX_OFFSETS } from '../../data/sound/mix/genreMixOffsets';
+import { GENRE_MIX_OFFSETS, GENRE_INSTRUMENT_MIX_OFFSETS } from '../../data/sound/mix/genreMixOffsets';
 import type { MixRoleProfile } from '../../data/sound/schema/mix';
 import { ELECTRONIC_MIX_GENRE_PATTERN, INSTRUMENT_MIX_TRIMS } from '../../data/sound/mix/instrumentTrims';
 
@@ -30,7 +30,8 @@ export function getRoleGainLinear(role: string, genre: string = 'default', instr
   if (instrumentTrim?.electronic !== undefined) instrumentTrimDb = ELECTRONIC_MIX_GENRE_PATTERN.test(`${genre} ${styleId}`.toLowerCase()) ? instrumentTrim.electronic : instrumentTrim.acoustic ?? 0;
   else if (instrumentTrim?.acoustic !== undefined) instrumentTrimDb = instrumentTrim.acoustic;
   // Combine structural role, genre mix, and instrument-specific gain staging.
-  return Math.pow(10, (baseDb + offsetDb + instrumentTrimDb) / 20);
+  const ensembleTrimDb = GENRE_INSTRUMENT_MIX_OFFSETS[genre.toLowerCase()]?.[id] ?? 0;
+  return Math.pow(10, (baseDb + offsetDb + instrumentTrimDb + ensembleTrimDb) / 20);
 }
 
 export function roleProfileForGenre(role: string, mixCharacter?: MixCharacter): MixRoleProfile {

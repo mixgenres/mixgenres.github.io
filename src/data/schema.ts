@@ -286,6 +286,8 @@ export interface StyleCalibration {
     cadences: string[];
     cadenceTypes?: string[];
     bassChordInteraction: string;
+    /** Quarter-note positions that anticipate the next harmony. */
+    bassAnticipationBeats?: number[];
     bassNoteRules?: string[];
     requiresChords?: boolean;
     preferredVoicingTones?: [number, number];

@@ -1,5 +1,5 @@
 import type { GenrePackInput } from '../_shared/genrePack';
-import { SOLEA_TREMOLO, ALZAPUA_CIERRE, RUMBA_STRUM } from './techniqueCells';
+import { SOLEA_FALSETA_CIERRE, RUMBA_STRUM } from './techniqueCells';
 
 export const GENRE_PACK: GenrePackInput = {
   "id": "flamenco",
@@ -37,7 +37,7 @@ export const GENRE_PACK: GenrePackInput = {
       "scale": "phrygian",
       "roles": {
         "lead": ["voice", "guitar"],
-        "percussion": ["palmas", "cajon"]
+        "percussion": ["palmas"]
       },
       "progressions": {
         "intro": ["Am", "G", "F", "E"],
@@ -51,7 +51,7 @@ export const GENRE_PACK: GenrePackInput = {
       "harmonyModel": "functional",
       "bassMotion": "root-fifth",
       "form": [
-        {"label": "salida", "bars": 4},
+        {"label": "salida", "bars": 4, "instruments": ["guitar"], "leadInstrumentId": "guitar"},
         {"label": "letra", "bars": 8},
         {"label": "falseta", "bars": 8, "soloInstrumentId": "guitar", "soloMode": "accompanied"},
         {"label": "letra", "bars": 8},
@@ -62,8 +62,8 @@ export const GENRE_PACK: GenrePackInput = {
       "cells": [
         {"name": "soleá twelve-count accents and falseta voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "soleá twelve-count accents and falseta voice cadence fill", "role": "lead", "onsets": [5.0, 5.5, 5.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "soleá twelve-count accents and falseta guitar statement", ...SOLEA_TREMOLO},
-        {"name": "soleá twelve-count accents and falseta guitar cadence fill", ...ALZAPUA_CIERRE},
+        {"name": "Soleá guitar compás with bass and upper chord answers", "role": "lead", "instruments": ["guitar"], "onsets": [0, 1.5, 3, 4, 5], "durations": [1.4, 1.4, .9, .9, .9], "pitches": [{"degree": 1, "register": 45}, {"degree": 5, "register": 45}, {"voicing": "chord"}, {"degree": 1, "register": 45}, {"voicing": "chord"}], "articulations": ["legato", "legato", "rasgueado", "legato", "rasgueado"], "notations": [{"fingering": "p"}, {"fingering": "p"}, {"stroke": "down", "bodyTechnique": "golpe"}, {"fingering": "p"}, {"stroke": "down"}]},
+        {"name": "Soleá tremolo falseta at the phrase ending", ...SOLEA_FALSETA_CIERRE},
         {"name": "soleá twelve-count accents and falseta palmas pulse", "role": "percussion", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["palmas"], "cycleLength": 1, "articulation": "accent"},
         {"name": "soleá twelve-count accents and falseta palmas cadence fill", "role": "percussion", "onsets": [5.0, 5.5, 5.75], "instruments": ["palmas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "soleá twelve-count accents and falseta cajon pulse", "role": "percussion", "onsets": [0, 1.5, 3, 4, 5], "instruments": ["cajon"], "cycleLength": 1, "articulation": "accent"},

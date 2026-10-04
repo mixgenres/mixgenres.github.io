@@ -9,7 +9,7 @@ export const upright_bass: InstrumentDef = {
   excitationType: "fingerpad",
   sympatheticStrings: true,
   elementaryModel: 3,
-  makeupGain: 0.406,
+  makeupGain: 1.3636,
   polyphony: 4,
   note: "Acoustic double bass with estimated plucked/bowed source and body responses; separate tango arrastre, strappata bow-bounce, tambor damped pizzicato, lija rasp, and golpe-caja body contact",
   acousticProfile: {

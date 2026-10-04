@@ -1,3 +1,4 @@
+import { playbackResources } from '../playback/playbackResources';
 import { LRUMap, registerCache } from './lru.ts';
 import type { PerfNote, PerfCC } from '../band/performanceData.ts';
 
@@ -96,6 +97,6 @@ export class PCMStemCache extends LRUMap<string, StemCacheEntry> {
   override clear(): void { super.clear(); this.bytes = 0; }
   get byteLength(): number { return this.bytes; }
 }
-export const stemCache = new PCMStemCache();
+export const stemCache = new PCMStemCache(playbackResources().stemCacheBytes);
 registerCache(stemCache);
 export function clearStemCache(): void { stemCache.clear(); }

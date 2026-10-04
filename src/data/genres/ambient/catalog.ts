@@ -27,7 +27,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "atmospheric",
       "name": "Atmospheric",
-      "description": "Atmospheric: slow pad overlap and spacious motif. Melodic and rhythmic study over a modal center; chord symbols are playback anchors, not a Western chord progression.",
+      "description": "Atmospheric: independent middle-register pad voices, overlapping releases and a slow melodic contour. An original study, not a transcription of An Ending (Ascent).",
       "patterns": ["slow pad overlap and spacious motif"],
       "techniques": ["sustain", "legato", "slow-attack", "harmonics", "glissando", "volume-swell", "accent", "staccato", "tenuto", "vibrato"],
       "harmony": ["D5", "Dmaj7", "Gmaj7"],
@@ -35,8 +35,9 @@ export const GENRE_PACK: GenrePackInput = {
       "tempo": [56, 72],
       "scale": "major-pentatonic",
       "roles": {
-        "lead": ["piano"],
-        "texture": ["synth", "string-ensemble"]
+        "lead": ["synth"],
+        "harmony": ["synth"],
+        "texture": ["synth"]
       },
       "progressions": {
         "opening": ["D5", "D5"],
@@ -56,10 +57,9 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "slow pad overlap and spacious motif piano statement", "role": "lead", "onsets": [0], "instruments": ["piano"], "cycleLength": 1, "durations": [1.5], "articulation": "legato"},
-        {"name": "slow pad overlap and spacious motif piano cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "slow pad overlap and spacious motif synth accompaniment", "role": "texture", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"},
-        {"name": "slow pad overlap and spacious motif string-ensemble accompaniment", "role": "texture", "onsets": [0], "instruments": ["string-ensemble"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
+        {"name": "Breathing upper pad melody", "role": "lead", "instruments": ["synth"], "cycleLength": 4, "onsets": [0, 6, 11], "durations": [8, 7, 7], "pitches": [{"midi": [62, 74]}, {"midi": [66, 78]}, {"midi": [64, 76]}], "articulation": "legato"},
+        {"name": "Independent left pad harmony", "role": "harmony", "instruments": ["synth"], "cycleLength": 4, "onsets": [1, 8], "durations": [10, 10], "pitches": [{"midi": [57, 66]}, {"midi": [59, 64]}], "articulation": "legato"},
+        {"name": "Slow right string cloud", "role": "texture", "instruments": ["synth"], "cycleLength": 4, "onsets": [3, 10], "durations": [9, 9], "pitches": [{"midi": [55, 64]}, {"midi": [57, 62]}], "articulation": "legato"}
       ],
       "instrumentTechniques": {
         "piano": ["legato", "accent", "staccato", "tenuto"],
@@ -67,31 +67,23 @@ export const GENRE_PACK: GenrePackInput = {
         "string-ensemble": ["legato", "slow-attack", "accent", "staccato"]
       },
       "instrumentDialects": {
-        "piano:lead": {
-          "allowedTechniques": ["legato", "accent", "staccato", "tenuto"],
-          "defaultTechnique": "legato"
-        },
-        "synth:texture": {
-          "allowedTechniques": ["legato", "accent", "staccato", "vibrato"],
-          "defaultTechnique": "legato",
-          "patchId": "ambient-drone"
-        },
-        "string-ensemble:texture": {
-          "allowedTechniques": ["legato", "slow-attack", "accent", "staccato"],
-          "defaultTechnique": "legato"
-        }
+        "piano:lead": {"allowedTechniques": ["legato", "accent", "staccato", "tenuto"], "defaultTechnique": "legato"},
+        "synth:texture": {"allowedTechniques": ["legato", "accent", "staccato", "vibrato"], "defaultTechnique": "legato", "patchId": "breathing-pad"},
+        "string-ensemble:texture": {"allowedTechniques": ["legato", "slow-attack", "accent", "staccato"], "defaultTechnique": "legato"},
+        "synth:lead": {"allowedTechniques": ["legato", "accent", "staccato", "vibrato"], "defaultTechnique": "legato", "patchId": "breathing-pad"},
+        "synth:harmony": {"allowedTechniques": ["legato", "accent", "staccato", "vibrato"], "defaultTechnique": "legato", "patchId": "breathing-pad"}
       },
       "mix": {
         "enabled": true,
-        "character": {"dryness":0.28,"bassForward":0.46,"width":0.78,"brightness":0.44,"compressionRatio":1.45,"transientSnap":0.46,"subHarmonics":0,"sidechainDucking":0,"delaySend":0.28,"reverbType":"room","saturationType":"tape"},
-        "stage": {"width":0.78,"depthRange":0.62,"centerAnchorRoles":[],"rolePan":{"lead":0,"texture":0},"roleWidth":{"lead":0.16,"texture":0.62},"preserveNaturalStage":true},
-        "dynamics": {"foregroundContrastDb":2.8,"maxTrackBoostDb":3,"maxTrackCutDb":-6,"ensembleBreathing":0.48,"crescendoExpansion":0.45,"silenceContrast":0.72,"peakSectionHeadroomDb":3,"busCompressionAmount":0.22,"busCompressionRatio":1.7,"densityCompensation":0.34,"sharedForeground":true},
-        "masking": {"enabled":true,"minOverlap":0.2,"minPriorityDifference":0.14,"maxPresenceCutDb":2.2,"maxBodyCutDb":0.9,"maxGainCutDb":0.8,"amount":0.52,"preserveCounterpoint":true},
-        "ambience": {"roomSize":0.72,"foregroundDepthDifference":0.5,"reverbSend":0.3,"delaySend":0.28,"bloom":0.56,"preDelayMs":12},
-        "roles": {"lead":{"mixFunctions":["foreground"],"priority":0.9,"gainDb":0.8,"foregroundGainDb":1.4,"supportGainDb":-0.2,"presenceDb":0.8,"bodyDb":0,"width":0.16,"transientEmphasis":0.15,"maskingPriority":0.95,"ambienceSend":0.1,"protectLowEnd":false,"protectRhythmicDefinition":false,"mayYieldSpectrally":false,"mayYieldInGain":false,"depth":0.2},"texture":{"mixFunctions":["harmonic-support"],"priority":0.55,"gainDb":-1.2,"foregroundGainDb":0,"supportGainDb":-1,"presenceDb":-0.15,"bodyDb":0,"width":0.62,"transientEmphasis":0.15,"maskingPriority":0.52,"ambienceSend":0.42,"protectLowEnd":false,"protectRhythmicDefinition":false,"mayYieldSpectrally":true,"mayYieldInGain":true,"depth":0.48}},
-        "sections": {"intro":{"gainDb":-1,"depth":0.46,"width":0.5903999999999999},"breakdown":{"gainDb":-1.5,"ambience":1.12},"chorus":{"gainDb":0.7,"width":0.8064,"foregroundContrast":1.1},"climax":{"gainDb":0.8,"width":0.8351999999999999,"foregroundContrast":1.2}},
-        "transitions": {"attackMs":120,"releaseMs":480,"sectionTransitionMs":640,"foregroundHandoffMs":320,"spectralRampMs":240,"lookaheadMs":100},
-        "buses": {"glueAmount":0.18,"lowAnchorCompression":0.05,"rhythmCompression":0.12,"melodicCompression":0.08,"ensembleCompression":0.14,"parallelCompression":0,"sharedRoom":true,"roleBus":{"lead":"melodic","texture":"harmony"}}
+        "character": {"dryness": 0.28, "bassForward": 0.46, "width": 0.78, "brightness": 0.44, "compressionRatio": 1.45, "transientSnap": 0.46, "subHarmonics": 0, "sidechainDucking": 0, "delaySend": 0.28, "reverbType": "room", "saturationType": "tape"},
+        "stage": {"width": 0.78, "depthRange": 0.62, "centerAnchorRoles": [], "rolePan": {"lead": 0.85, "harmony": -0.85, "texture": -0.65}, "roleWidth": {"lead": 0.16, "texture": 0.62}, "preserveNaturalStage": true},
+        "dynamics": {"foregroundContrastDb": 2.8, "maxTrackBoostDb": 3, "maxTrackCutDb": -6, "ensembleBreathing": 0.48, "crescendoExpansion": 0.45, "silenceContrast": 0.72, "peakSectionHeadroomDb": 3, "busCompressionAmount": 0.22, "busCompressionRatio": 1.7, "densityCompensation": 0.34, "sharedForeground": true},
+        "masking": {"enabled": true, "minOverlap": 0.2, "minPriorityDifference": 0.14, "maxPresenceCutDb": 2.2, "maxBodyCutDb": 0.9, "maxGainCutDb": 0.8, "amount": 0.52, "preserveCounterpoint": true},
+        "ambience": {"roomSize": 0.72, "foregroundDepthDifference": 0.5, "reverbSend": 0.3, "delaySend": 0.28, "bloom": 0.56, "preDelayMs": 12},
+        "roles": {"lead": {"mixFunctions": ["foreground"], "priority": 0.9, "gainDb": 0, "foregroundGainDb": 1.4, "supportGainDb": -0.2, "presenceDb": 0.8, "bodyDb": 0, "width": 1, "transientEmphasis": 0.15, "maskingPriority": 0.95, "ambienceSend": 0.1, "protectLowEnd": false, "protectRhythmicDefinition": false, "mayYieldSpectrally": false, "mayYieldInGain": false, "depth": 0.2}, "texture": {"mixFunctions": ["harmonic-support"], "priority": 0.55, "gainDb": 4, "foregroundGainDb": 0, "supportGainDb": -1, "presenceDb": -0.15, "bodyDb": 0, "width": 1, "transientEmphasis": 0.15, "maskingPriority": 0.52, "ambienceSend": 0.42, "protectLowEnd": false, "protectRhythmicDefinition": false, "mayYieldSpectrally": true, "mayYieldInGain": true, "depth": 0.48}, "harmony": {"mixFunctions": ["harmonic-support"], "priority": 0.55, "gainDb": 0, "foregroundGainDb": 0, "supportGainDb": -1, "presenceDb": -0.15, "bodyDb": 0, "width": 1, "transientEmphasis": 0.15, "maskingPriority": 0.52, "ambienceSend": 0.42, "protectLowEnd": false, "protectRhythmicDefinition": false, "mayYieldSpectrally": true, "mayYieldInGain": true, "depth": 0.48}},
+        "sections": {"intro": {"gainDb": -1, "depth": 0.46, "width": 0.5903999999999999}, "breakdown": {"gainDb": -1.5, "ambience": 1.12}, "chorus": {"gainDb": 0.7, "width": 0.8064, "foregroundContrast": 1.1}, "climax": {"gainDb": 0.8, "width": 0.8351999999999999, "foregroundContrast": 1.2}},
+        "transitions": {"attackMs": 120, "releaseMs": 480, "sectionTransitionMs": 640, "foregroundHandoffMs": 320, "spectralRampMs": 240, "lookaheadMs": 100},
+        "buses": {"glueAmount": 0.18, "lowAnchorCompression": 0.05, "rhythmCompression": 0.12, "melodicCompression": 0.08, "ensembleCompression": 0.14, "parallelCompression": 0, "sharedRoom": true, "roleBus": {"lead": "melodic", "texture": "harmony", "harmony": "harmony"}}
       }
     },
     {

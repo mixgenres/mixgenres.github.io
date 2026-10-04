@@ -11,7 +11,7 @@ export const bones: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 18,
-  makeupGain: 0.285,
+  makeupGain: 0.5727,
   polyphony: 8,
   note: "Pair of curved animal bones or hardwoods held between fingers and clacked together with rapid wrist snaps",
   acousticProfile: {

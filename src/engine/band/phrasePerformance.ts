@@ -169,8 +169,12 @@ function bassMidi(ctx: PhraseContext, index: number, total: number): number {
   }
   if (b === 'tumbao' || ANTICIPATED_BASS_GENRES.includes(ctx.hostGenre)) {
     const anti = ctx.hybridTheory.bass.anticipationBeats;
-    const isAnticipation = anti.some(v => Math.abs(v - ctx.onsetPosition) < 0.35);
-    if (isAnticipation && ctx.nextChord) return nearestMidi(nextTarget, f, low, high);
+    const [numerator, denominator] = ctx.pattern.meter.split('/').map(Number);
+    // Rhythm onsets are fractions of a bar; theory anticipations are quarter
+    // beats. Comparing those units directly never recognized a 4-and attack.
+    const quarterBeat = ctx.onsetPosition * numerator * 4 / denominator;
+    const isAnticipation = anti.some(v => Math.abs(v - quarterBeat) < 0.1);
+    if (isAnticipation && ctx.nextChord) return nearestMidi(nextRoot, f, low, high);
     return index % 3 === 1 ? f : r;
   }
   if (b === 'rootFifth' || b === 'samba' || b === 'cumbia' || b === 'reggae') return index % 2 === 0 ? r : f;

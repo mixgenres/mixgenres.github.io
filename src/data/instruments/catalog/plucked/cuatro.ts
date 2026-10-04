@@ -10,7 +10,7 @@ export const cuatro: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "nail",
   elementaryModel: 0,
-  makeupGain: 30.000,
+  makeupGain: 5.931,
   polyphony: 8,
   note: "Venezuelan/Puerto Rican folk strum",
   acousticProfile: {

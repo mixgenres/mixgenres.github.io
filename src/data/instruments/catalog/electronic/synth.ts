@@ -38,6 +38,7 @@ export const synth: InstrumentDef = {
   },
   physicalTechniques: ["accent", "staccato", "legato", "portamento", "vibrato", "bend", "filter-sweep", "pulse-width-modulation", "unison", "sub-sweep", "punch-stab"],
   patches: [
+    { id: "breathing-pad", name: "Breathing Pad", role: "pad", oscillator: "sine", filter: "lowpass", cutoffHz: 950, resonance: 0.05, attackSeconds: 4, decaySeconds: 2.5, sustain: 0.92, releaseSeconds: 4, unison: 3 },
     { id: "saw-lead", name: "Saw Lead", role: "lead", oscillator: "saw", filter: "lowpass", cutoffHz: 4200, resonance: 0.2, attackSeconds: 0.008, decaySeconds: 0.18, sustain: 0.72, releaseSeconds: 0.12, unison: 1, saturation: 0.16 },
     { id: "square-lead", name: "Square Lead", role: "lead", oscillator: "square", filter: "lowpass", cutoffHz: 3000, resonance: 0.16, attackSeconds: 0.004, decaySeconds: 0.12, sustain: 0.68, releaseSeconds: 0.1 },
     { id: "warm-pad", name: "Warm Pad", role: "pad", oscillator: "hybrid", filter: "lowpass", cutoffHz: 1800, resonance: 0.08, attackSeconds: 0.42, decaySeconds: 0.7, sustain: 0.82, releaseSeconds: 1.3, unison: 3 },

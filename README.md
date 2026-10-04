@@ -1,10 +1,10 @@
 # MixGenres
 
-MixGenres is a browser song editor and synthesizer. Choose a style, switch between its short Sample and Full arrangement, edit sections, chords, patterns and instrumental parts, then play or export it.
+MixGenres is a browser song editor and synthesizer. Choose a style, start from its complete example arrangement, edit sections, chords, patterns and instrumental parts, then play or export it.
 
-## Songs and samples
+## Example songs
 
-Every authored style has a short Sample and a Full arrangement. The UI treats these as two lengths of the same style instead of exposing recording titles as separate catalog choices. Full arrangements retain separately authored section lengths, tempo and harmonic cells; `reference-songs.txt` remains the internal source/credit list.
+Every authored style has one complete example arrangement to start from. Choosing a style or starting over loads its authored sections, tempo, ensemble and harmonic cells; `reference-songs.txt` remains the internal source/credit list.
 
 These are editable score adaptations, not verified transcriptions or reproductions of the recordings. Bar counts, tempo and harmony may be approximate. Melodies come from the pattern vocabulary. An ensemble inherited from a style is not evidence of the recording's exact personnel. Drone anchors and Western bar grids also simplify traditions with different pitch and time systems. Representative selections for repertoire references are editorial choices, not rankings of historical significance. DSP instruments approximate acoustic and electronic sources; structural tests cannot certify how authentic they sound.
 
@@ -29,11 +29,11 @@ npm run check:audio
 npm run build:static
 ```
 
-`check` runs catalog validation, sample generation and focused musical, score, mix and playback regressions. `check:audio` adds targeted PCM and export checks. `build:static` only bundles the app; `build` also runs type and structural checks. Transient reports are written under `audit` and are not authored catalog data.
+`check` runs catalog validation, representative complete-example generation and focused musical, score, mix and playback regressions. `check:audio` adds targeted PCM and export checks. `build:static` only bundles the app; `build` also runs type and structural checks. Transient reports are written under `audit` and are not authored catalog data.
 
 ```bash
 npm run audit:catalog
-npm run audit:starters
+npm run audit:examples
 npm run test:score
 npm run render-song -- salsa /tmp/salsa.mp3
 ```

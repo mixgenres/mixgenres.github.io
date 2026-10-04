@@ -71,7 +71,7 @@ Prepared PCM is generated from DSP after editing; it is not a distributed SoundF
 
 ## Golden Age comparison
 
-The Golden Age sample and full song have separate forms. Exact player, bar and note counts depend on the selected catalog entry and edits; the benchmark reports the current sample counts. Caching must preserve those musical events and sentences.
+The Golden Age example uses its complete recording arrangement. Exact player, bar and note counts depend on the selected style and edits; the benchmark reports the current example counts. Caching must preserve those musical events and sentences.
 
 The existing Golden Age calibration reference is Aníbal Troilo's **Quejas de bandoneón**. [Todo Tango documents the 27 September 1944 recording](https://www.todotango.com/musica/tema/691/Quejas-de-bandoneon/). [Arranger Korey Ireland describes his work from that recording and orchestra manuscripts](https://www.communitytangoorchestra.org/arrangement/quejas-de-bandoneon/), and highlights its [low-register trio shared between bandoneon and piano, and demanding variation](https://www.communitytangoorchestra.org/arrangements/new-arrangement-quejas-de-bandoneon/).
 

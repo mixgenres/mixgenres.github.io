@@ -9,7 +9,7 @@ export const dulcimer: InstrumentDef = {
   bodyConstruction: "board",
   excitationType: "hammer",
   elementaryModel: 0,
-  makeupGain: 30.000,
+  makeupGain: 1.6971,
   polyphony: 4,
   note: "Trapezoidal multi-string zither struck with lightweight wooden hammers producing bright crystalline cascading tones",
   acousticProfile: {

@@ -6,7 +6,7 @@ export const organ: InstrumentDef = {
   family: "bellows-and-keys",
   voicing: "chord",
   elementaryModel: 13,
-  makeupGain: 0.417,
+  makeupGain: 0.8415,
   polyphony: 8,
   acousticProfile: {
     sustain: "sustained",

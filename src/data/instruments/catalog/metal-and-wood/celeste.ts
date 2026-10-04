@@ -6,7 +6,7 @@ export const celeste: InstrumentDef = {
   family: "metal-and-wood",
   voicing: "chord",
   elementaryModel: 8,
-  makeupGain: 1.000,
+  makeupGain: 0.7859,
   polyphony: 8,
   note: "Keyboard struck metal-plate idiophone with wooden box resonators sounding delicate bell-like tones",
   acousticProfile: {

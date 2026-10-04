@@ -6,7 +6,7 @@ export const low_whistle: InstrumentDef = {
   family: "winds",
   voicing: "single",
   elementaryModel: 7,
-  makeupGain: 0.466,
+  makeupGain: 0.8997,
   polyphony: 4,
   note: "Large cylindrical fipple flute pitched in D with deep, breathy, haunting Celtic tone",
   acousticProfile: {

@@ -11,7 +11,7 @@ export const guiro: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 17,
-  makeupGain: 27.315,
+  makeupGain: 12.9134,
   polyphony: 8,
   note: "Notched hollow gourd scraper played with wooden stick; defines the classic cha-cha and salsa groove",
   acousticProfile: {

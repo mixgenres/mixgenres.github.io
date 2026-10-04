@@ -1,3 +1,4 @@
+import { playbackResources } from '../playback/playbackResources';
 import { PCMStemCache } from './stemCache';
 import { registerCache } from './lru';
 import { contentKey } from './contentKey';
@@ -5,8 +6,8 @@ import type { Performance } from '../band/performanceData';
 import type { Mp3RenderOptions, RenderedPerformanceAudio } from '../playback/mp3Export';
 
 /** Main-thread section PCM survives worker reassignment and mixer edits. */
-const audio = new PCMStemCache(192 * 1024 * 1024, 'preparedPartAudio');
-const mixes = new PCMStemCache(32 * 1024 * 1024, 'preparedSongMix');
+const audio = new PCMStemCache(playbackResources().partCacheBytes, 'preparedPartAudio');
+const mixes = new PCMStemCache(playbackResources().mixCacheBytes, 'preparedSongMix');
 registerCache(audio);
 registerCache(mixes);
 
@@ -28,7 +29,16 @@ export function preparedAudioKey(performance: Performance, options: Mp3RenderOpt
     performance.notes.filter(note => ids.has(note.trackId)),
     performance.ccs.filter(cc => ids.has(cc.trackId)),
     options.renderWindow ?? [performance.duration, performance.tail],
+    options.maxDurationSeconds,
+    options.rawOutputStartSample,
   ]);
+}
+
+/** A completed section can satisfy a short playback request without new DSP. */
+export function completedPartAudio(key: string): RenderedPerformanceAudio | undefined {
+  if (!audio.has(key)) return undefined;
+  const ready = audio.get(key)!;
+  return { sampleRate: 44100, left: ready.left, right: ready.right };
 }
 
 /** Share work between consumers; only the final cancellation aborts synthesis. */

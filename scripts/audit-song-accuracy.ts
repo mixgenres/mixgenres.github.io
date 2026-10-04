@@ -1,5 +1,5 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { makeSheet } from '../src/engine/sheet/sheet';
+import { catalogIdForStyle, createCatalogSong } from '../src/engine/sheet/songCatalog';
 import { compileSongPipeline } from '../src/engine/pipeline/compileSong';
 import { beatValue } from '../src/engine/score/musicianScore';
 import { ALL_STYLES } from '../src/engine/style';
@@ -9,15 +9,15 @@ import { getInstrumentModule } from '../src/engine/playback/instrumentRegistry';
 import { GESTURE_NAMES } from '../src/engine/band/gestures';
 import { PATTERNS_BY_ID } from '../src/data/genres';
 import { reportMetadata, writeReport, printFindings, type Finding } from './lib/auditReport';
-import { writeSampleReview } from './lib/sampleReview';
+import { writeSongReview } from './lib/songReview';
 
 const findings: Finding[] = [];
-const cases: Parameters<typeof writeSampleReview>[0] = [];
+const cases: Parameters<typeof writeSongReview>[0] = [];
 const instruments = new Set<string>();
 const saveScores = process.argv.includes('--scores');
 if (saveScores) mkdirSync('audit/complete-scores', { recursive: true });
 for (const style of ALL_STYLES) {
-  const song = makeSheet(style.primaryGenre, style.id), pipeline = compileSongPipeline(song), score = pipeline.interpretation, performance = pipeline.performance;
+  const song = createCatalogSong(catalogIdForStyle(style.id)), pipeline = compileSongPipeline(song), score = pipeline.interpretation, performance = pipeline.performance;
   const check = (ok: boolean, code: string, scope: string, message: string) => {
     if (!ok) findings.push({ severity: 'error', code, scope: `${style.id}/${scope}`, message });
   };
@@ -67,7 +67,7 @@ for (const style of ALL_STYLES) {
   if (cases.length % 50 === 0) console.log(`Checked ${cases.length}/${ALL_STYLES.length} complete scores`);
 }
 const coverage = { genres: new Set(ALL_STYLES.map(s => s.primaryGenre)).size, styles: cases.length, instrumentsUsed: instruments.size };
-writeReport('sample-accuracy', { ...reportMetadata(), status: findings.length ? 'FAIL' : 'PASS', coverage,
+writeReport('song-accuracy', { ...reportMetadata(), status: findings.length ? 'FAIL' : 'PASS', coverage,
   evidence: 'All styles pass through complete first-pass notation, band interpretation and prepared physical controls before playback. Checks cover written rhythm, ensemble, range and technique data; pitch provenance distinguishes written patterns from composition. Not perceptual certification or a historical transcription audit.', findings, cases });
-if (saveScores) writeSampleReview(cases);
-printFindings('sample-accuracy', findings, coverage);
+if (saveScores) writeSongReview(cases);
+printFindings('song-accuracy', findings, coverage);

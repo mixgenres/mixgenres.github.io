@@ -1,4 +1,4 @@
-import { el } from '@elemaudio/core';
+import { el } from './dsp';
 import type { VoiceRenderContext, AudioSignal } from './instrumentTypes';
 
 /** Fixed body modes: body percussion must not transpose with harmony. These

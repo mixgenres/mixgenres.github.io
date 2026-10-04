@@ -193,3 +193,25 @@ body::before {
   justify-content: center;
   box-sizing: border-box;
 }
+
+.playback-timeline:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+
+
+/* Show background preparation in the existing control, without a status row. */
+.playback-loading-ring {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border: 2px solid color-mix(in srgb, currentColor 20%, transparent);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: playback-loading 1s linear infinite;
+  pointer-events: none;
+}
+@keyframes playback-loading { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .playback-loading-ring { animation: none; }
+}

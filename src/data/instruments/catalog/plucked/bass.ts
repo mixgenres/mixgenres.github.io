@@ -8,7 +8,7 @@ export const bass: InstrumentDef = {
   bodyConstruction: "solid-electric",
   excitationType: "fingerpad",
   elementaryModel: 3,
-  makeupGain: 0.685,
+  makeupGain: 3.9043,
   polyphony: 4,
   note: "Solid-body electric bass guitar driving low-end fundamental groove across funk, rock, pop, and Latin music",
   acousticProfile: {

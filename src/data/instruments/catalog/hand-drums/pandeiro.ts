@@ -12,7 +12,7 @@ export const pandeiro: InstrumentDef = {
   voicing: "unpitched",
   bodyConstruction: "skin-faced",
   elementaryModel: 4,
-  makeupGain: 1.540,
+  makeupGain: 1.9767,
   polyphony: 8,
   note: "Brazilian national frame drum with thin natural goatskin head and cupped metal platinelas (jingles) with internal dampening washers, capable of emulating an entire samba percussion section",
   acousticProfile: {

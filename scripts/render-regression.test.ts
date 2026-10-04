@@ -174,3 +174,76 @@ test('a window containing only a release tail retains its prepared track and doe
   assert.ok(windowed.left.subarray(0, frames).some(sample => Math.abs(sample) > 1e-6), 'the tail cannot become silent when its note-off precedes the window');
   assert.deepEqual(windowed.left.subarray(0, frames), whole.left.subarray(from, from + frames));
 });
+
+
+test('bounded playback renders exact physical prefixes without shortening exported releases', async () => {
+  const { renderPlaybackPart } = await import('../src/engine/playback/renderPlaybackPart');
+  const { clearPreparedAudio, preparedAudioStats } = await import('../src/engine/cache/preparedAudio');
+  const perf: Performance = { ...performanceOf([
+    { ...note(.1), dur: 1.4 }, { ...note(1.2, 67), dur: .2, bar: 1 },
+  ]), duration: 2, tail: .3, ccs: [{trackId:'keys',time:.8,cc:11,value:60}], bars: [
+    { index: 0, start: 0, end: 1, bpm: 240, beatsPerBar: 4, regionId: 'a' },
+    { index: 1, start: 1, end: 2, bpm: 240, beatsPerBar: 4, regionId: 'b' },
+  ] };
+  const options = { selectedTrackIds: ['keys'], trackInstruments: new Map([['keys', 'organ']]), rawStem: true, sectionStems: true };
+  clearPreparedAudio();
+  const prefix = await renderPlaybackPart(perf, { ...options, boundedStems: true, renderWindow: {start:0,end:.9} });
+  assert.equal(prefix.sections!.length, 1);
+  assert.equal(prefix.sections![0].left.length, Math.ceil(.9*44100));
+  const cold = preparedAudioStats();
+  const full = await renderPlaybackPart(perf, options);
+  assert.ok(preparedAudioStats().misses > cold.misses, 'a prefix cannot satisfy a complete export');
+  assert.ok(full.sections![0].left.length > prefix.sections![0].left.length, 'complete hold and release remain available');
+  assert.deepEqual(prefix.sections![0].left, full.sections![0].left.subarray(0,prefix.sections![0].left.length));
+  assert.deepEqual(prefix.sections![0].right, full.sections![0].right.subarray(0,prefix.sections![0].right.length));
+  const before = preparedAudioStats();
+  const later = await renderPlaybackPart(perf, { ...options, boundedStems: true, renderWindow:{start:1.05,end:1.4} });
+  assert.equal(preparedAudioStats().misses, before.misses, 'completed sections satisfy later playback windows without DSP');
+  assert.ok(later.sections!.some(section => section.startSample===0), 'incoming sustain keeps its original attack');
+});
+
+
+test('worker rendering without UI pauses produces identical PCM', async () => {
+  const perf = performanceOf([{ ...note(), dur: .25 }, note(.3, 67)]);
+  const options = { trackInstruments: new Map([['keys','organ']]), rawStem: true, cacheDSPStem: false };
+  const cooperative = await renderPerformanceToAudio(perf, { ...options, yieldForUI: true });
+  const worker = await renderPerformanceToAudio(perf, { ...options, yieldForUI: false });
+  assert.deepEqual(worker.left, cooperative.left);
+  assert.deepEqual(worker.right, cooperative.right);
+});
+
+test('cropped raw sections retain exact DSP state without storing the preceding PCM', async () => {
+  const perf = {...performanceOf([{...note(.01),dur:4.5}]),duration:6,
+    ccs:[{trackId:'keys',time:1.1,cc:11,value:60},{trackId:'keys',time:3.3,cc:11,value:95}]};
+  const options={trackInstruments:new Map([['keys','organ']]),rawStem:true,cacheDSPStem:false,maxDurationSeconds:5.4,yieldForUI:false};
+  const full=await renderPerformanceToAudio(perf,options);
+  const from=Math.floor(3.113*44100);
+  const cropped=await renderPerformanceToAudio(perf,{...options,rawOutputStartSample:from});
+  assert.equal(cropped.left.length,full.left.length-from);
+  assert.deepEqual(cropped.left,full.left.subarray(from),'discarding PCM must not restart a held note or shift DSP blocks');
+  assert.deepEqual(cropped.right,full.right.subarray(from));
+  const {renderPlaybackPart}=await import('../src/engine/playback/renderPlaybackPart');
+  const {clearPreparedAudio}=await import('../src/engine/cache/preparedAudio');
+  clearPreparedAudio();
+  const sectionPerf={...perf,bars:[{index:0,start:0,end:6,bpm:40,beatsPerBar:4,regionId:'hold'}]};
+  const sections=await renderPlaybackPart(sectionPerf,{...options,selectedTrackIds:['keys'],boundedStems:true,sectionStems:true,
+    renderWindow:{start:from/44100,end:5.4}});
+  assert.equal(sections.sections![0].startSample,from);
+  assert.deepEqual(sections.sections![0].left,cropped.left);
+});
+
+
+test('repeated renders reuse one WASM heap and release every native processor', async () => {
+  const { offlineRendererStats } = await import('../src/engine/playback/offlineRendererPool');
+  const perf = performanceOf([note()]);
+  const options = {trackInstruments:new Map([['keys','organ']]),rawStem:true,cacheDSPStem:false,maxDurationSeconds:.2,yieldForUI:false};
+  const first = await renderPerformanceToAudio(perf,options), baseline=offlineRendererStats();
+  for(let i=0;i<20;i++) {
+    const repeat=await renderPerformanceToAudio(perf,options);
+    assert.deepEqual(repeat.left,first.left,'fresh processor state and explicit noise seeds preserve the waveform');
+    const stats=offlineRendererStats();
+    assert.equal(stats.initializedRuntimes,1,'no module allocation per excerpt');
+    assert.equal(stats.liveProcessors,0,'native processors are destroyed after use');
+    assert.equal(stats.heapBytes,baseline.heapBytes,'repeated excerpts do not grow the heap');
+  }
+});

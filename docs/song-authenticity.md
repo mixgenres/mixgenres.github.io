@@ -1,6 +1,6 @@
-# Sample performance and sound audit
+# Song performance and sound audit
 
-The audit separates score correctness, instrument mechanism correctness and perceptual authenticity. Passing numerical checks is evidence for the first two; it does not certify a convincing imitation of 420 musical traditions or performances. All starter melodies are generated or original study phrases, not transcriptions of the named performers.
+The audit separates score correctness, instrument mechanism correctness and perceptual authenticity. Passing numerical checks is evidence for the first two; it does not certify a convincing imitation of 420 musical traditions or performances. All example melodies are generated or original study phrases, not transcriptions of the named performers.
 
 ## Confirmed faults corrected
 
@@ -23,20 +23,20 @@ The audit separates score correctness, instrument mechanism correctness and perc
 
 ## Tango arrangements
 
-All 17 tango-family starters now have explicit pitch phrases and accompaniment cells. Golden Age/Canaro/D'Arienzo/Di Sarli/Troilo studies use marcato en cuatro with distinct short or sustained melodic treatments. Pugliese has weighted beats one and three with lighter intervening releases; Salgán uses alternating low left-hand notes and right-hand offbeat chords. Milonga/canyengue use a 2/4 habanera cell; vals uses ternary bass/chord accompaniment. Nuevo uses a 3+3+2 ostinato and angular melody; canción leaves breathing and answering space; electronic crossovers retain their percussion parts; chacarera retains compound meter and hemiola.
+All 17 tango-family examples now have explicit pitch phrases and accompaniment cells. Golden Age/Canaro/D'Arienzo/Di Sarli/Troilo studies use marcato en cuatro with distinct short or sustained melodic treatments. Pugliese has weighted beats one and three with lighter intervening releases; Salgán uses alternating low left-hand notes and right-hand offbeat chords. Milonga/canyengue use a 2/4 habanera cell; vals uses ternary bass/chord accompaniment. Nuevo uses a 3+3+2 ostinato and angular melody; canción leaves breathing and answering space; electronic crossovers retain their percussion parts; chacarera retains compound meter and hemiola.
 
 These short original studies illustrate rhythmic models. They do not reproduce an orchestra's repertoire, historical voicing, rubato or expressive nuance. Arrastre is a discrete chromatic approach and pressure gesture; the piano and bandoneon models must not invent a continuous multi-semitone pitch glide to simulate it.
 
 ## Review and repeatable verification
 
 - **Score** in the app displays every track, section, bar, note, duration, technique and rest. It includes instrument settings, full-ensemble/individual auditions and a complete JSON download.
-- [Local review index](http://127.0.0.1:3000/audit/sample-review.html) links all 420 complete scores and contains the before/after tango comparison, full revised study and individual instrument recordings. It requires the local development server. `npm run audit:accuracy` regenerates the index and score files.
-- `npm run audit:accuracy` compiles every starter, checks physical ranges, sounding frequencies, silent parts, ensemble entries and preservation of authored techniques. It writes `audit/sample-accuracy.json` and all 420 complete scores under `audit/complete-scores/`.
+- [Local review index](http://127.0.0.1:3000/audit/song-review.html) links all 420 complete scores and contains the before/after tango comparison, full revised study and individual instrument recordings. It requires the local development server. `npm run audit:accuracy` regenerates the index and score files.
+- `npm run audit:accuracy` compiles every example, checks physical ranges, sounding frequencies, silent parts, ensemble entries and preservation of authored techniques. It writes `audit/song-accuracy.json` and all 420 complete scores under `audit/complete-scores/`.
 - `npm run test:accuracy` checks the known score failures and measures rendered bandoneon/brass pitch spectra, falls before note-off, tuned mallet modes and physical note-off damping.
 - `node --import tsx scripts/audit-instrument-pitch.ts` synthesizes and measures low/centre/high references for every pitched instrument at 44.1 kHz. Use `--instrument=<id>` for a focused probe. It retains ambiguous spectra as review findings and measures their attack separately from the decay tail.
 - `npm run audit:instrument-render -- --all --details` probes low/soft/high attacks, kit components and physical note-off tails for every catalog instrument.
 - `npm run check:audio` runs the normal behavior gates and targeted complete render/export regressions. It uses a representative set of engine mechanisms; it is not a listening review of every complete song.
-- `npm run audit:audio-catalog` renders entrance and developed-section excerpts for every starter style, checking each audible stem and encoded output for silence, invalid samples and clipping. These excerpts do not establish complete-song or perceptual authenticity.
+- `npm run audit:audio-catalog` renders entrance and developed-section excerpts for every example style, checking each audible stem and encoded output for silence, invalid samples and clipping. These excerpts do not establish complete-song or perceptual authenticity.
 
 Pitch audits retain ambiguous decay spectra as review findings and include separate attack windows and relative RMS. A weak decay-window peak must not justify mistuning a correctly pitched attack. All-instrument physical probes report raw isolated overload warnings before ensemble headroom and master processing; final output is checked separately.
 

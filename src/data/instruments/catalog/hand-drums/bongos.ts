@@ -13,7 +13,7 @@ export const bongos: InstrumentDef = {
   bodyConstruction: "skin-faced",
   excitationType: "fingerpad",
   elementaryModel: 4,
-  makeupGain: 2.046,
+  makeupGain: 3.5775,
   polyphony: 12,
   note: "Small Afro-Cuban paired high-pitched wooden hand drums (Macho 7-inch, Hembra 8.5-inch) playing the driving martillo pattern",
   acousticProfile: {

@@ -33,6 +33,7 @@ export interface CalibratedStyleInput {
   harmonyModel: string;
   harmonicRhythm: string;
   bassMotion: string;
+  bassAnticipationBeats?: number[];
   mix: MixOverride<MixContract>;
   name: string;
   id: string;
@@ -318,7 +319,7 @@ function styleDefinition(input: GenrePackInput, item: CalibratedStyleInput): Gen
       harmony: { pitchSystem: input.pitchSystem, scales: list([scaleMode], input.scales), chordQualities: styleHarmony,
         progressionExamples: Object.values(styleProgressions),
         harmonicRhythm: item.harmonicRhythm, cadences: cadenceVocabulary, cadenceTypes,
-        bassChordInteraction: input.bassChordInteraction, bassNoteRules, requiresChords,
+        bassChordInteraction: input.bassChordInteraction, bassAnticipationBeats: item.bassAnticipationBeats, bassNoteRules, requiresChords,
         chordFamilyWeights: chordFamilyWeights(styleHarmony, Object.values(styleProgressions), requiresChords),
         borrowedHarmony: styleHarmony.filter(value => /modal mixture|borrowed|augmented.?sixth|neapolitan|phrygian.?major/i.test(value)),
         substitutions: styleHarmony.filter(value => /substitut|tritone|diminished passing|secondary dominant|chromatic approach/i.test(value)),
@@ -342,7 +343,9 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
     kind: cell.phraseEnd ? 'fill' : 'attack',
     accent: cell.accents?.[i] ?? (i === 0 ? .9 : .65), velocity: i === 0 ? .85 : .7,
     articulation: cell.articulations?.[i] ?? cell.articulation, hitType: cell.hits?.[i], pitch: cell.pitches?.[i], notation: cell.notations?.[i],
-    ...(cell.phraseEnd ? { condition: { phrasePosition: ['cadence', 'transition'] }, probability: .85 } : {}),
+    // A notated tuplet/fingering sequence is one coherent gesture. Dropping
+    // individual attacks would change both its ratio and its finger order.
+    ...(cell.phraseEnd ? { condition: { phrasePosition: ['cadence', 'transition'] }, probability: cell.notations?.[i]?.tuplet ? 1 : .85 } : {}),
   }));
   return {
     id, worldId: input.id, styleIds: [style.id], name: `${style.name}: ${cell.name}`, shortName: cell.name,

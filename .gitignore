@@ -1,4 +1,8 @@
+samples/
+voiced/
 node_modules/
+.demucs-*/
+__pycache__/
 dist/
 audit/
 public/instrument-banks/

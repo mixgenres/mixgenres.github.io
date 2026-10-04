@@ -1,10 +1,13 @@
 import { SYNTH_GENRE_RESPONSE, URBAN_LATIN_INSTRUMENT_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
 import { DNB_UKBASS_PATTERN, HOUSE_DISCO_PATTERN, INDUSTRIAL_DNB_PATTERN, KIZOMBA_PATTERN, REGGAETON_PATTERN, SYNTH_ELECTRONIC_GENRE_PATTERN, SYNTH_LOW_CUTOFF_GENRE_PATTERN, TANGO_ELECTRONICO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
-import { el } from '@elemaudio/core';
+import { el } from './dsp';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 
 export default class SynthModule implements InstrumentModule {
   id = 'synth';
+  releaseTailSeconds(params: VoiceRenderContext['params']): number {
+    return params.synthPatch?.releaseSeconds ?? .5;
+  }
 
   renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
@@ -16,21 +19,25 @@ export default class SynthModule implements InstrumentModule {
 
     const patch = params.synthPatch;
     if (patch) {
-      const phase = el.syncphasor(freqSignal, gateSignal);
+      const oscillatorAt = (frequency: AudioSignal): AudioSignal => {
+      const phase = el.syncphasor(frequency, gateSignal);
       const sine = el.sin(el.mul(2 * Math.PI, phase));
-      const saw = el.blepsaw(freqSignal);
+      const saw = el.blepsaw(frequency);
       const square = el.tanh(el.mul(7, sine));
-      const sub = el.sin(el.mul(2 * Math.PI, el.syncphasor(el.mul(freqSignal, 0.5), gateSignal)));
-      let oscillator: AudioSignal = patch.oscillator === 'saw' ? saw
+      const sub = el.sin(el.mul(2 * Math.PI, el.syncphasor(el.mul(frequency, 0.5), gateSignal)));
+      return patch.oscillator === 'saw' ? saw
         : patch.oscillator === 'square' ? square
         : patch.oscillator === 'sine' ? sine
         : patch.oscillator === 'triangle' ? el.sub(el.mul(2, el.abs(el.sub(el.mul(2, phase), 1))), 1)
         : patch.oscillator === 'noise' ? el.noise()
         : el.add(el.mul(0.55, saw), el.add(el.mul(0.25, square), el.mul(0.2, sub)));
-      if ((patch.unison ?? 1) > 1) {
-        const detuned = el.blepsaw(el.mul(freqSignal, 1.003));
-        oscillator = el.mul(0.5, el.add(oscillator, detuned));
-      }
+      };
+      // Unison retains the selected waveform; a sine pad must not acquire a
+      // sawtooth merely because its patch asks for multiple detuned voices.
+      const count = Math.max(1, Math.min(8, Math.round(patch.unison ?? 1)));
+      const oscillators = Array.from({ length: count }, (_, i) => oscillatorAt(
+        el.mul(freqSignal, Math.pow(2, (i - (count - 1) / 2) * 4 / 1200))));
+      const oscillator = el.mul(1 / count, el.add(...oscillators));
       const envelope = el.adsr(patch.attackSeconds, patch.decaySeconds, patch.sustain, patch.releaseSeconds, gateSignal);
       const mode = patch.filter === 'ladder' ? 'lowpass' : patch.filter;
       const filtered = el.svf({ mode }, patch.cutoffHz + b * Math.max(250, patch.cutoffHz * 0.75), 0.7 + patch.resonance * 5, oscillator);

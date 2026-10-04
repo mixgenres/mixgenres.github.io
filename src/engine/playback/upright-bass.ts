@@ -1,7 +1,7 @@
 import { TANGO_INSTRUMENT_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
 import { UPRIGHT_BASS_CUTOFF_RULES, UPRIGHT_BASS_DECAY_RULES } from '../../data/sound/dsp/genrePlaybackProfiles';
 import { TANGO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
-import { el } from '@elemaudio/core';
+import { el } from './dsp';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { createDampedStringLoop, fbGainForDecay } from './instrumentLib_stringLoop.ts';
 import { resolveVoiceParameters } from './instrumentRegistry';

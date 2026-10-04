@@ -1,4 +1,4 @@
-import { el } from '@elemaudio/core';
+import { el } from './dsp';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 

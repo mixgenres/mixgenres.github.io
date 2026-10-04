@@ -1,4 +1,5 @@
-import { arrangeBand } from '../band/arrangeBand';
+import { compileInPlaybackWorker } from './renderPlaybackPart';
+import { playbackResources } from './playbackResources';
 import type { Performance } from '../band/performanceData';
 import type { Sheet } from '../sheet/sheet';
 
@@ -11,11 +12,13 @@ export async function compilePerformance(sheet: Sheet, signal: AbortSignal): Pro
   const cancelled = () => new DOMException('Compilation superseded', 'AbortError');
   const fallback = async () => {
     await new Promise<void>(resolve => setTimeout(resolve, 0));
+    const { arrangeBand } = await import('../band/arrangeBand');
     if (signal.aborted) throw cancelled();
     return arrangeBand(sheet);
   };
   if (signal.aborted) throw cancelled();
   if (typeof Worker === 'undefined') return fallback();
+  if (playbackResources().constrained) return compileInPlaybackWorker(sheet,signal,fallback);
   let worker: Worker;
   try {
     worker = idleCompilerWorker ?? new Worker(new URL('./compositionWorker.ts', import.meta.url), { type: 'module' });
@@ -26,7 +29,7 @@ export async function compilePerformance(sheet: Sheet, signal: AbortSignal): Pro
     const cleanup = (reuse = false) => {
       signal.removeEventListener('abort', abort);
       worker.onmessage = null; worker.onerror = null; worker.onmessageerror = null;
-      if (reuse && !idleCompilerWorker) idleCompilerWorker = worker;
+      if (reuse && !playbackResources().constrained && !idleCompilerWorker) idleCompilerWorker = worker;
       else worker.terminate();
     };
     const abort = () => { cleanup(); reject(cancelled()); };
@@ -43,3 +46,5 @@ export async function compilePerformance(sheet: Sheet, signal: AbortSignal): Pro
     catch { cleanup(); void fallback().then(resolve, reject); }
   });
 }
+
+export function releaseCompilerWorker() { idleCompilerWorker?.terminate(); idleCompilerWorker = undefined; }

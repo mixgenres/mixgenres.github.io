@@ -2,7 +2,7 @@
 
 Playback and exports use the instrument DSP renderer at 44.1 kHz. UI edits prepare the four [music-engine layers](../docs/engine-pipeline.md) and cache complete player/section audio, including outgoing holds and release tails. The player reads one prepared continuous mix. Instrument sound is authored through DSP models, physical parameters and genre dialects.
 
-- `npm run check`: one catalog pass over every exported data property and resolved style/profile, then focused musical, sound-resolution, solo, mix and playback regressions. No PCM rendering. Stops at the first failed gate.
+- `npm run check`: one catalog pass over every exported data property and resolved style/profile, then focused musical, sound-resolution, solo, mix and playback regressions. Complete-example generation uses representative mix mechanisms; `npm run audit:examples` compiles all 420 full arrangements. No PCM rendering. Stops at the first failed gate.
 - `npm run audit:catalog`: only the complete data/profile pass: references, finite numbers, probabilities, ranges, weighted distributions, provenance, physical DSP, gestures, kits, solo policies and mix settings.
 - `npm run check:audio`: fast gates first (reused when the source fingerprint is unchanged), then PCM regression fixtures, representative instrument mechanisms and two short ensemble excerpts per selected style. `check:full` is an alias; neither renders the catalog.
 - `npm run audit:browser`: native playback buffers and Web Audio master in the chosen browser at `http://127.0.0.1:3001/scripts/browser-mix-audit.html`. Defaults to renderer coverage; a specific style can be selected.

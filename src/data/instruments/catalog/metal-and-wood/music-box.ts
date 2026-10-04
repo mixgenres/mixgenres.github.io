@@ -6,7 +6,7 @@ export const music_box: InstrumentDef = {
   family: "metal-and-wood",
   voicing: "single",
   elementaryModel: 8,
-  makeupGain: 1.273,
+  makeupGain: 0.6609,
   polyphony: 4,
   acousticProfile: {
     sustain: "decaying",

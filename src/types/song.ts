@@ -123,13 +123,6 @@ export interface AppliedLens {
 export interface Song {
   /** Catalog provenance; editing the song does not change its source identity. */
   catalogId?: string;
-  catalogKind?: 'full-song' | 'sample';
-  /**
-   * True once the user has changed the catalog source in the editor. Length
-   * switching uses this to decide whether it can load the paired source
-   * verbatim or needs to project the user's edits onto the other form.
-   */
-  catalogModified?: boolean;
   id: string;
   title: string;
   bpm: number;

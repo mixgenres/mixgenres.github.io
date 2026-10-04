@@ -9,7 +9,7 @@ export const kora: InstrumentDef = {
   bodyConstruction: "gourd",
   excitationType: "fingerpad",
   elementaryModel: 0,
-  makeupGain: 24.072,
+  makeupGain: 2.4721,
   polyphony: 8,
   note: "West African 21-string gourd harp-lute",
   acousticProfile: {

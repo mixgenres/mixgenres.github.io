@@ -7,7 +7,7 @@ export const pan_flute: InstrumentDef = {
   octave: 12,
   voicing: "single",
   elementaryModel: 7,
-  makeupGain: 0.466,
+  makeupGain: 0.794,
   polyphony: 4,
   acousticProfile: {
     sustain: "blown",

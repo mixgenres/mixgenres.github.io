@@ -84,6 +84,7 @@ export function styleTheoryFor(styleId: string | undefined, genreId: string): Ge
   const calibration = style?.calibration;
   if (style && calibration) {
     const harmony = calibration.harmony;
+    if (harmony.bassAnticipationBeats !== undefined) out.bass.anticipationBeats = [...harmony.bassAnticipationBeats];
     out.meter = style.preferredMeters[0] ?? out.meter;
     out.defaultScale = harmony.scales[0] ? scaleFromWords(harmony.scales[0]) : out.defaultScale;
     // A song's pitch language does not turn a major chord into a minor chord.

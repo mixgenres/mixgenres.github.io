@@ -11,7 +11,7 @@ export const shaker: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 17,
-  makeupGain: 9.031,
+  makeupGain: 11.5084,
   polyphony: 8,
   acousticProfile: {
     sustain: "percussive",

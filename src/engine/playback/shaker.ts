@@ -1,7 +1,7 @@
 import { SCRAPER_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
 import { URBAN_LATIN_INSTRUMENT_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
 import { KIZOMBA_PATTERN, REGGAETON_PATTERN } from '../../data/sound/dsp/genreClassifiers';
-import { el } from '@elemaudio/core';
+import { el } from './dsp';
 import { seedOf, randNorm } from '../sheet/random.ts';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 

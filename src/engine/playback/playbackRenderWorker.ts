@@ -1,12 +1,16 @@
-import { renderPerformanceToAudio, type Mp3RenderOptions } from './mp3Export';
-import type { Performance } from '../band/performanceData';
+import { offlineRendererStats } from './offlineRendererPool';
+import { renderPerformanceToAudio } from './mp3Export';
+import type { PlaybackWorkerRequest } from './renderPlaybackPart';
 
-self.onmessage = async ({ data }: MessageEvent<{ performance: Performance; options: Mp3RenderOptions }>) => {
+self.onmessage = async ({ data }: MessageEvent<PlaybackWorkerRequest>) => {
   try {
-    // Workers use the engine's portable mix, including authored automation,
-    // ambience and master DSP, with the same physical instrument renderer.
-    const audio = await renderPerformanceToAudio(data.performance, data.options);
-    self.postMessage({ audio }, { transfer: [audio.left.buffer, audio.right.buffer] });
+    if(data.kind==='compile') {
+      const { arrangeBand } = await import('../band/arrangeBand');
+      self.postMessage({ performance:arrangeBand(data.sheet), runtime:offlineRendererStats() });
+      return;
+    }
+    const audio = await renderPerformanceToAudio(data.performance, { ...data.options, yieldForUI: false });
+    self.postMessage({ audio, runtime: offlineRendererStats() }, { transfer: [audio.left.buffer, audio.right.buffer] });
   } catch (error) {
     self.postMessage({ error: error instanceof Error ? error.message : String(error) });
   }

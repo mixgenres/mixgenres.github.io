@@ -83,3 +83,23 @@ export function playbackChunkAt(chunks: PlaybackChunk[], seconds: number): numbe
   const found = chunks.findIndex(chunk => position >= chunk.start && position < chunk.end);
   return found >= 0 ? found : chunks.length - 1;
 }
+
+/** Keep transport allocations bounded even in very slow meters/long releases.
+ * DSP attack ownership still uses the original bar-aligned sections above. */
+export function planTransportChunks(performance: Performance): PlaybackChunk[] {
+  return planPlaybackChunks(performance).flatMap(chunk => {
+    // Keep the opening prefix short; subsequent four-second chunks avoid
+    // repeatedly synthesizing overlapping prefixes of the same DSP section.
+    const first = Math.round(chunk.start * SAMPLE_RATE), last = Math.round(chunk.end * SAMPLE_RATE);
+    const parts: PlaybackChunk[] = [];
+    for (let frame = first; frame < last;) {
+      const maxFrames = (frame === 0 ? 2 : 4) * SAMPLE_RATE;
+      const endFrame = Math.min(frame + maxFrames, last);
+      const start = frame / SAMPLE_RATE, end = endFrame / SAMPLE_RATE;
+      parts.push({ ...chunk, id: `${chunk.id}:${frame}`, start, end,
+        renderStart: Math.max(0, start - PRE_ROLL_SECONDS), renderEnd: Math.min(performance.duration + (performance.tail ?? 0), end + POST_ROLL_SECONDS) });
+      frame = endFrame;
+    }
+    return parts;
+  }).map((chunk, index) => ({ ...chunk, index }));
+}

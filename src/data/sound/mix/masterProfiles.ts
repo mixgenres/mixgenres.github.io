@@ -2,7 +2,7 @@
 export const MASTER_MIX_DEFAULTS = {
   bassForward: 0.5, brightness: 0.5, dryness: 0.5, width: 0.5,
   roomScale: 0.55, subEnhancement: 0.16, outputGain: 0.95,
-  headroomNumerator: 1.8,
+  headroomNumerator: 1.8, programMakeupDb: 4,
 };
 export const MASTER_GLUE_PROFILES = {
   salsa: { threshold: -12, knee: 12, ratio: 3, attack: 0.01, release: 0.15 },

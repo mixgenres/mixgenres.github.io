@@ -1,6 +1,6 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { ALL_STYLES } from '../src/engine/style';
-import { makeSheet } from '../src/engine/sheet/sheet';
+import { catalogIdForStyle, createCatalogSong } from '../src/engine/sheet/songCatalog';
 import { compileWholeSong } from '../src/engine/band/arrangeBand';
 import { renderPerformanceToMp3 } from '../src/engine/playback/mp3Export';
 import { measureAudio } from '../src/engine/studio/audioMetrics';
@@ -21,7 +21,7 @@ const findings: Finding[] = [], cases: Array<Record<string, unknown>> = [];
 const add = (severity: Finding['severity'], code: string, scope: string, message: string) => findings.push({ severity, code, scope, message });
 for (const style of selection) {
   try {
-    const sheet = makeSheet(style.primaryGenre, style.id), performance = compileWholeSong(sheet);
+    const sheet = createCatalogSong(catalogIdForStyle(style.id)), performance = compileWholeSong(sheet);
     const windows = [];
     for (const window of chooseAudioWindows(performance)) {
       const excerpt = excerptPerformance(performance, window.start, 2), diagnostics: RenderDiagnostic[] = [];

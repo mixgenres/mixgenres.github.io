@@ -1,4 +1,4 @@
-import { el } from '@elemaudio/core';
+import { el } from './dsp';
 import { seedOf, randNorm } from '../sheet/random.ts';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { SHORT_HIT_ARTICULATIONS } from '../../data/performance/excitationCompatibility';

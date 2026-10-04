@@ -7,7 +7,7 @@ export const ocarina: InstrumentDef = {
   octave: 12,
   voicing: "single",
   elementaryModel: 7,
-  makeupGain: 0.466,
+  makeupGain: 0.8501,
   polyphony: 4,
   acousticProfile: {
     sustain: "blown",

@@ -7,7 +7,7 @@ import { checkAbort, encodeMp3, wavBlob, yieldToUI } from '../../export/audioEnc
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { computeTrackStemFingerprint, stemCache } from '../cache/stemCache.ts';
 import type { StemCacheEntry } from '../cache/stemCache';
-import OfflineRenderer from '@elemaudio/offline-renderer';
+import { acquireOfflineRenderer, releaseOfflineRenderer } from './offlineRendererPool';
 import type { Performance, PerfNote, PerfCC } from '../band/performanceData.ts';
 import { resolveTrackSound, resolveTrackGain } from './trackSound';
 import { createMasterChain, type MasterChain, type StudioMixState } from '../studio/mixer.ts';
@@ -41,6 +41,14 @@ export interface Mp3RenderOptions {
   cacheDSPStem?: boolean;
   /** Mix preparation can consume cached sections without copying a whole part. */
   sectionStems?: boolean;
+  /** Playback may stop section synthesis at its requested window's end. */
+  boundedStems?: boolean;
+  /** Limit PCM output without changing note holds, releases or DSP state. */
+  maxDurationSeconds?: number;
+  /** Internal raw-section optimization: advance DSP normally, retain only this suffix. */
+  rawOutputStartSample?: number;
+  /** Workers have their own event loop; main-thread fallback yields for input. */
+  yieldForUI?: boolean;
   trackInstruments: Map<string, string>;
   trackRoles?: Map<string, string>;
   worldId?: string;
@@ -114,8 +122,14 @@ async function renderPerformance(
   // Match each note's end to its own lifetime, rather than adding the longest
   // instrument tail to the latest note in an unrelated part.
   const lastDecayEnd = perf.notes.reduce((end, note) => Math.max(end, note.time + note.dur + noteTail(note)), 0);
-  const duration = Math.max(1, perf.duration + (perf.tail ?? 3), lastDecayEnd);
+  const completeDuration = Math.max(1, perf.duration + (perf.tail ?? 3), lastDecayEnd);
+  const limit = options.maxDurationSeconds ?? (options.preparedStems && options.renderWindow ? perf.duration : undefined);
+  const duration = limit !== undefined && Number.isFinite(limit) && limit > 0
+    ? Math.min(completeDuration, limit) : completeDuration;
   const totalSamples = Math.ceil(duration * sampleRate);
+  const outputStartSample = Math.max(0,Math.min(totalSamples-1,Math.floor(options.rawOutputStartSample ?? 0)));
+  if (outputStartSample && (!options.rawStem || options.onDiagnostics)) throw new Error('A cropped physical stem requires raw PCM without diagnostics.');
+  const outputSamples = totalSamples-outputStartSample;
   const activeTrackIds = [...new Set([
     ...perf.notes.map(n => n.trackId),
     ...(options.preparedStems?.keys() ?? []),
@@ -153,9 +167,11 @@ async function renderPerformance(
       dynamicGraph = createSongMixGraph(masterContext, dynamicChain, timeline, activeTrackIds, timeline.baselineHeadroom ?? ensembleHeadroom(activeTrackIds.length, styleMaster.lift));
       dynamicGraph.schedule(0, 0);
     }
+    const directRaw = !!options.rawStem && !options.onDiagnostics;
+    let rawOutput: {left: Float32Array; right: Float32Array} | undefined;
     const makeBus = () => {
       const buffer = dynamicGraph ? undefined : masterContext?.createBuffer(2, totalSamples, sampleRate);
-      return { buffer, left: buffer?.getChannelData(0) ?? new Float32Array(dynamicGraph ? 0 : totalSamples), right: buffer?.getChannelData(1) ?? new Float32Array(dynamicGraph ? 0 : totalSamples) };
+      return { buffer, left: buffer?.getChannelData(0) ?? new Float32Array(dynamicGraph || directRaw ? 0 : totalSamples), right: buffer?.getChannelData(1) ?? new Float32Array(dynamicGraph || directRaw ? 0 : totalSamples) };
     };
     const drums = makeBus(), sub = makeBus(), instruments = makeBus();
     const drumBusL = drums.left, drumBusR = drums.right;
@@ -171,7 +187,7 @@ async function renderPerformance(
     // Render each track in isolation (Stem-by-Stem Sequential Rendering)
     for (let tIdx = 0; tIdx < activeTrackIds.length; tIdx++) {
       checkAbort(options.signal);
-      await yieldToUI();
+      if (options.yieldForUI !== false) await yieldToUI();
       const trackId = activeTrackIds[tIdx];
       const trackNotes = notesByTrack.get(trackId) ?? [];
       const prepared = options.preparedStems?.get(trackId);
@@ -201,7 +217,8 @@ async function renderPerformance(
       const preparedEndSample = preparedSections.reduce((end, section) => Math.max(end, section.startSample + section.left.length), 0);
       const trackEndSample = Math.min(totalSamples, Math.max(noteEndSample, preparedEndSample));
       const trackSamples = trackEndSample - trackStartSample;
-      if (trackSamples <= 0) continue;
+      if (trackSamples <= 0 || trackEndSample <= outputStartSample) continue;
+      const retainedStart = Math.max(trackStartSample,outputStartSample);
 
       const trackCCs = ccsByTrack.get(trackId) ?? [];
       const controllerNumbers = [...new Set(trackCCs.map(cc => cc.cc))];
@@ -225,7 +242,7 @@ async function renderPerformance(
         sampleRate,
       );
 
-      const cacheKey = `${stemFingerprint}:${trackStartSample}:${trackSamples}:v9`;
+      const cacheKey = `${stemFingerprint}:${trackStartSample}:${trackSamples}:${outputStartSample}:v10`;
       if (prepared && prepared.sampleRate !== sampleRate) throw new Error('Prepared stem sample rate does not match the mix.');
       let stem = prepared ? { left: prepared.left, right: prepared.right, startSample: 0 }
         : options.cacheDSPStem === false ? undefined : stemCache.get(cacheKey);
@@ -284,21 +301,13 @@ async function renderPerformance(
         const priority = { off: 0, cc: 1, on: 2, bend: 3 };
         trackEvents.sort((a, b) => a.sample - b.sample || priority[a.kind] - priority[b.kind]);
 
-        // Initialize an isolated, lightweight OfflineRenderer for this single track
-        const core = new OfflineRenderer();
-        await core.initialize({
-          sampleRate,
-          numInputChannels: 0,
-          numOutputChannels: 2,
-          blockSize: BLOCK_SIZE,
-        });
-
         const sounding = new Set<VoiceState>();
         let currentSig = renderTrack(trackId, voices, params, voice => sounding.has(voice));
-        await core.render(currentSig.left, currentSig.right);
 
-        const trackLeft = new Float32Array(trackSamples);
-        const trackRight = new Float32Array(trackSamples);
+        const trackLeft = new Float32Array(trackEndSample-retainedStart);
+        const trackRight = new Float32Array(trackLeft.length);
+        const scratchLeft = outputStartSample ? new Float32Array(BLOCK_SIZE*128) : undefined;
+        const scratchRight = outputStartSample ? new Float32Array(BLOCK_SIZE*128) : undefined;
 
         let eventIdx = 0;
         let cursor = 0;
@@ -306,11 +315,15 @@ async function renderPerformance(
         let syncCount = 0;
 
         let lastYield = performance.now();
+        // Acquire only after JS graph/buffer setup; every native operation is
+        // inside the cleanup boundary, including the first graph submission.
+        const core = await acquireOfflineRenderer();
         try {
+        await core.render(currentSig.left, currentSig.right);
         while (cursor < trackSamples) {
           if (performance.now() - lastYield > 16) {
             onProgress?.(0.05 + ((tIdx + cursor / trackSamples) / totalTracks) * 0.68);
-            await yieldToUI();
+            if (options.yieldForUI !== false) await yieldToUI();
             checkAbort(options.signal);
             lastYield = performance.now();
           }
@@ -417,17 +430,27 @@ async function renderPerformance(
             ? Math.min(end, Math.ceil((availableAt.get(voice) ?? Infinity) / BLOCK_SIZE) * BLOCK_SIZE) : end, trackSamples);
           const frames = Math.min(BLOCK_SIZE * 128, trackSamples - cursor,
             Math.max(BLOCK_SIZE, Math.min(nextEventBoundary, nextReleaseBoundary) - cursor));
-          core.process([], [trackLeft.subarray(cursor, cursor + frames), trackRight.subarray(cursor, cursor + frames)]);
+          if (scratchLeft && scratchRight) {
+            // Replaying an incoming hold/release must preserve its original DSP
+            // state, but a far seek need not allocate all preceding PCM.
+            core.process([], [scratchLeft.subarray(0,frames),scratchRight.subarray(0,frames)]);
+            const from = Math.max(0,retainedStart-trackStartSample-cursor);
+            if(from<frames) {
+              const destination = cursor+from+trackStartSample-retainedStart;
+              trackLeft.set(scratchLeft.subarray(from,frames),destination);
+              trackRight.set(scratchRight.subarray(from,frames),destination);
+            }
+          } else core.process([], [trackLeft.subarray(cursor, cursor + frames), trackRight.subarray(cursor, cursor + frames)]);
 
           cursor += frames;
         }
 
-        } finally { core.reset(); }
+        } finally { await releaseOfflineRenderer(core); }
 
         stem = {
           left: trackLeft,
           right: trackRight,
-          startSample: trackStartSample,
+          startSample: retainedStart,
         };
 
         if (options.cacheDSPStem !== false) stemCache.set(cacheKey, stem);
@@ -464,6 +487,26 @@ async function renderPerformance(
           resolvedGain: resolveTrackGain(params,trackMixVolume,controllerGain.volume,controllerGain.expression) });
       }
 
+      if (directRaw) {
+        // Worker parts need physical PCM only. Avoid allocating three empty
+        // mix buses and another output copy around an already complete stem.
+        const single = chunks.length === 1 ? chunks[0] : undefined;
+        if (activeTrackIds.length === 1 && single?.startSample === outputStartSample && single.left.length === outputSamples && single.right.length === outputSamples) {
+          rawOutput = single;
+        } else {
+          rawOutput ??= {left:new Float32Array(outputSamples),right:new Float32Array(outputSamples)};
+          for (const chunk of chunks) {
+            const offset = chunk.startSample-outputStartSample;
+            const length = Math.min(chunk.left.length, Math.max(0,outputSamples-offset));
+            for(let i=0;i<length;i++) {
+              rawOutput.left[offset+i]+=chunk.left[i];
+              rawOutput.right[offset+i]+=chunk.right[i];
+            }
+          }
+        }
+        onProgress?.(0.05 + ((tIdx + 1) / totalTracks) * .68);
+        continue;
+      }
       if (dynamicGraph && masterContext) {
         // Keep cached sections intact. Native sources sum their complete tails
         // into one continuous master, without a second full-part PCM copy.
@@ -517,6 +560,14 @@ async function renderPerformance(
       }
     }
 
+    if (directRaw) {
+      const {left,right} = rawOutput ?? {left:new Float32Array(outputSamples),right:new Float32Array(outputSamples)};
+      checkAbort(options.signal);
+      if (pcm) {onProgress?.(1);return {sampleRate,left,right};}
+      if (options.format === 'wav') {onProgress?.(1);return wavBlob(left,right,sampleRate,true);}
+      return encodeMp3(left,right,sampleRate,fraction=>onProgress?.(.85+fraction*.15),options.signal);
+    }
+
     // Headroom trim across summed stems to maintain clean dynamic headroom
     const headroomTrim = options.rawStem ? 1 : timeline?.baselineHeadroom ?? ensembleHeadroom(activeTrackIds.length, styleMaster.lift);
     if (timeline && !masterContext) renderPortableAmbience(timeline, sampleRate, instBusL, instBusR, roomL, roomR, echoL, echoR);
@@ -565,6 +616,7 @@ async function renderPerformance(
     // Master Processing via Web Audio OfflineAudioContext
     const offlineCtx = masterContext;
     const offlineChain = dynamicChain ?? createMasterChain(offlineCtx, mixCharacter, mixContext);
+    dynamicChain = offlineChain;
 
     if (!dynamicGraph) {
 

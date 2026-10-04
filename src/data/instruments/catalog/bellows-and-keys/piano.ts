@@ -9,7 +9,7 @@ export const piano: InstrumentDef = {
   excitationType: "hammer",
   sympatheticStrings: true,
   elementaryModel: 11,
-  makeupGain: 6.626,
+  makeupGain: 2.1,
   polyphony: 16,
   note: "Concert grand piano with multi-string unisons, velocity-sensitive felt hammers, cast-iron frame duplex scale chime, and comprehensive support for Tango techniques (marcato en 4, arrastre drag, Pugliese yumba clusters, chapa damping, Salgán campana stabs, and pesada sub-octaves)",
   acousticProfile: {

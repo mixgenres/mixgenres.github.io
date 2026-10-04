@@ -2,11 +2,9 @@ import { GENRE_WORLDS } from '../genres';
 import { STYLE_REFERENCES, styleReferenceKey } from '../styles/styleReferences';
 import { REFERENCE_SELECTIONS } from './referenceSelections';
 import { RECORDING_ARRANGEMENTS } from './recordingArrangements';
-import { starterSongs } from './starters';
 
-export interface FullSongTemplate {
+export interface SongTemplate {
   id: string;
-  kind: 'full-song';
   genreId: string;
   styleId: string;
   styleName: string;
@@ -21,7 +19,7 @@ export interface FullSongTemplate {
   description: string;
 }
 
-export const fullSongs: FullSongTemplate[] = GENRE_WORLDS.flatMap(world => world.styleDefinitions.map(style => {
+export const songCatalog: SongTemplate[] = GENRE_WORLDS.flatMap(world => world.styleDefinitions.map(style => {
   const key = styleReferenceKey(world.id, style.name);
   const reference = STYLE_REFERENCES[key as keyof typeof STYLE_REFERENCES];
   const selection = REFERENCE_SELECTIONS[key];
@@ -32,7 +30,7 @@ export const fullSongs: FullSongTemplate[] = GENRE_WORLDS.flatMap(world => world
   const arrangement = RECORDING_ARRANGEMENTS[key];
   if (!arrangement) throw new Error(`Missing full arrangement for ${key}`);
   return {
-    id: `${style.id}_song`, kind: 'full-song' as const,
+    id: `${style.id}_song`,
     genreId: world.id, styleId: style.id, styleName: style.name,
     artist, track, name: `${artist} — ${track}`, referenceKey: key,
     reference: { credit: reference.credit, recording: reference.recording },
@@ -42,7 +40,4 @@ export const fullSongs: FullSongTemplate[] = GENRE_WORLDS.flatMap(world => world
   };
 }));
 
-/** Samples retain their pre-existing IDs, personnel, tempo and short authored forms. */
-export const sampleSongs = starterSongs.map(sample => ({ ...sample, kind: 'sample' as const }));
-export const songCatalog = [...fullSongs, ...sampleSongs];
-export const FULL_SONGS_BY_ID = Object.fromEntries(fullSongs.map(song => [song.id, song]));
+export const SONGS_BY_ID = Object.fromEntries(songCatalog.map(song => [song.id, song]));

@@ -9,7 +9,7 @@ export const shamisen: InstrumentDef = {
   bodyConstruction: "skin-faced",
   excitationType: "plectrum",
   elementaryModel: 0,
-  makeupGain: 10.457,
+  makeupGain: 1.1521,
   polyphony: 4,
   note: "Japanese three-string color",
   acousticProfile: {

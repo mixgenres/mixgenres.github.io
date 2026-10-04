@@ -7,7 +7,7 @@ export const english_horn: InstrumentDef = {
   octave: 12,
   voicing: "single",
   elementaryModel: 15,
-  makeupGain: 0.399,
+  makeupGain: 1.0225,
   polyphony: 4,
   note: "Tenor oboe with bulbous bell producing haunting, melancholic, autumnal double-reed tone",
   acousticProfile: {

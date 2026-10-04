@@ -8,9 +8,7 @@ import { plateFor } from './worlds';
 /**
  * Song style — the flavour of the current genre (Pugliese-school, Vals, Electrotango…).
  *
- * Song length is intentionally controlled at the app level. This panel only
- * changes style, so choosing a style cannot accidentally imply a particular
- * recording or switch between sample/full modes.
+ * Choosing a style loads its complete example arrangement.
  */
 export function StyleSheetModal({
   open,

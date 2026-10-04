@@ -9,7 +9,7 @@ export const oud: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "plectrum",
   elementaryModel: 0,
-  makeupGain: 30.000,
+  makeupGain: 4.1615,
   polyphony: 4,
   note: "Middle Eastern fretless lute with doubled courses",
   acousticProfile: {

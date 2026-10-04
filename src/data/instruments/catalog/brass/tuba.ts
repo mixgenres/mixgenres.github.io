@@ -8,7 +8,7 @@ export const tuba: InstrumentDef = {
   octave: -12,
   voicing: "single",
   elementaryModel: 3,
-  makeupGain: 0.685,
+  makeupGain: 1.0396,
   polyphony: 4,
   acousticProfile: {
     sustain: "blown",

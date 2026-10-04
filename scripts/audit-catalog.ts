@@ -6,7 +6,8 @@ import { ENRICHED_INSTRUMENT_CATALOG, INSTRUMENTS_BY_ID } from '../src/engine/lo
 import { INSTRUMENT_PATTERN_KIND_RULES } from '../src/data/instruments/patternKinds';
 import { GENRE_WORLDS, GENRE_WORLDS_BY_ID, ALL_PATTERNS, PATTERNS_BY_ID } from '../src/data/genres';
 import { GENRE_CONTRACTS } from '../src/data/styles/contracts';
-import { starterSongs } from '../src/data/songs/starters';
+import { songCatalog } from '../src/data/songs/catalog';
+import { RECORDING_ARRANGEMENTS } from '../src/data/songs/recordingArrangements';
 import { ALL_STYLES, ALL_STYLES_BY_ID, resolveStyle } from '../src/engine/style';
 import { StyleRuntime } from '../src/engine/style/runtime';
 import { getInstrumentModule, resolveVoiceParameters } from '../src/engine/playback/instrumentRegistry';
@@ -142,11 +143,10 @@ for (const style of ALL_STYLES) {
     inspect(resolveMasterSettings(character, `${style.primaryGenre} ${style.id}`), `master/${style.id}`);
   } catch (error) { check(false, style.id, String(error)); }
 }
-for (const starter of starterSongs) {
-  check(GENRE_WORLDS_BY_ID[starter.genreId!], starter.id, 'Unknown starter genre');
-  if (starter.styleId) check(ALL_STYLES_BY_ID[starter.styleId]?.primaryGenre === starter.genreId, starter.id, 'Invalid starter style');
-  check(starter.instruments.length, starter.id, 'Empty starter ensemble');
-  instrumentRefs(starter.instruments, starter.id);
+for (const song of songCatalog) {
+  check(GENRE_WORLDS_BY_ID[song.genreId], song.id, 'Unknown song genre');
+  check(ALL_STYLES_BY_ID[song.styleId]?.primaryGenre === song.genreId, song.id, 'Invalid song style');
+  instrumentRefs(RECORDING_ARRANGEMENTS[song.referenceKey].instruments ?? [], song.id);
 }
 const coverage = { dataFiles, properties, genres: GENRE_WORLDS.length, styles: ALL_STYLES.length, instruments: INSTRUMENT_CATALOG.length, patterns: ALL_PATTERNS.length, dialects };
 writeReport('catalog-audit', { ...reportMetadata(), status: findings.length ? 'FAIL' : 'PASS', coverage, counts: summarizeFindings(findings), findings });

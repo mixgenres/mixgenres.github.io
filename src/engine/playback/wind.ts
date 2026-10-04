@@ -1,5 +1,5 @@
 import { BRASS_REED_INSTRUMENT_PATTERNS } from '../../data/instruments/idClassifiers';
-import { el } from '@elemaudio/core';
+import { el } from './dsp';
 import { seedOf, randNorm } from '../sheet/random.ts';
 import { getFormantProfileForInstrument } from './elementaryEngine.ts';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';

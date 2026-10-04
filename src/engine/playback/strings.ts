@@ -1,6 +1,6 @@
 import { TANGO_INSTRUMENT_RESPONSE } from '../../data/sound/dsp/genreInstrumentProfiles';
 import { TANGO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
-import { el } from '@elemaudio/core';
+import { el } from './dsp';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 
 export default class StringsModule implements InstrumentModule {

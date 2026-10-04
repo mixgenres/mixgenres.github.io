@@ -3,7 +3,7 @@ import { GUITAR_INSTRUMENT_PATTERNS } from '../../data/instruments/idClassifiers
 import { TARAB_SYMPATHETIC_RATIOS } from '../../data/musicTheory/tarabSympatheticRatios';
 import { GUITAR_EXACT_GENRE_IDS } from '../../data/sound/dsp/genrePlaybackProfiles';
 import { KIZOMBA_PATTERN, REGGAETON_PATTERN, TANGO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
-import { el } from '@elemaudio/core';
+import { el } from './dsp';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { createDampedStringLoop, fbGainForDecay } from './instrumentLib_stringLoop.ts';
 import { renderBodyStrike, renderMutedString } from './stringPercussion';

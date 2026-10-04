@@ -6,7 +6,7 @@ export const harmonium: InstrumentDef = {
   family: "bellows-and-keys",
   voicing: "chord",
   elementaryModel: 0,
-  makeupGain: 0.344,
+  makeupGain: 0.9249,
   polyphony: 8,
   note: "Hand-pumped free-reed keyboard with sustained drone registers and warm bellows dynamics",
   acousticProfile: {

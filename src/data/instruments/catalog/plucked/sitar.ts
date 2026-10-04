@@ -10,7 +10,7 @@ export const sitar: InstrumentDef = {
   excitationType: "plectrum",
   sympatheticStrings: true,
   elementaryModel: 0,
-  makeupGain: 5.760,
+  makeupGain: 0.7975,
   polyphony: 4,
   note: "Standard concert sitar voicing",
   acousticProfile: {

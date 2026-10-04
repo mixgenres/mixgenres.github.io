@@ -2,7 +2,7 @@ import { TANGO_ELECTRONIC_DRUM_RESPONSE, URBAN_LATIN_DRUM_RESPONSE } from '../..
 import { DRUM_COMPONENT_PATTERNS, METAL_SHELL_INSTRUMENT_PATTERN, WOOD_BOX_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
 import { DRUM_HEAVY_ROCK_PATTERN, DRUM_KICK_GENRE_TUNING, DRUM_LATIN_PATTERN, DRUM_REGGAE_SKA_PATTERN, DRUM_ROCK_PATTERN, DRUM_URBAN_PATTERN } from '../../data/sound/dsp/genrePlaybackProfiles';
 import { HOUSE_DISCO_PATTERN, KIZOMBA_PATTERN, REGGAETON_PATTERN, TANGO_ELECTRONICO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
-import { el } from '@elemaudio/core';
+import { el } from './dsp';
 import { seedOf, randNorm } from '../sheet/random.ts';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { resolveInstrumentKitComponent } from '../../engine/lookup/instrument-components';

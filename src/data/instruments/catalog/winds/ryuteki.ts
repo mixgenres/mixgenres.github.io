@@ -7,7 +7,7 @@ export const ryuteki: InstrumentDef = {
   octave: 12,
   voicing: "single",
   elementaryModel: 7,
-  makeupGain: 0.466,
+  makeupGain: 0.6842,
   polyphony: 4,
   note: "Gagaku flute",
   acousticProfile: {

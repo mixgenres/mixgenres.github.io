@@ -11,7 +11,7 @@ export const bodhran: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 4,
-  makeupGain: 0.831,
+  makeupGain: 1.233,
   polyphony: 8,
   note: "Irish frame drum with goatskin head played with a double-ended tipper and inner-hand pitch modulation",
   acousticProfile: {

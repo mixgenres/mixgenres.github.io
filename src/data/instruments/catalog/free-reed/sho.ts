@@ -7,7 +7,7 @@ export const sho: InstrumentDef = {
   freeReedSynthesis: { fundamentalGain: 0.46, upperPartialGain: 0.20, upperPartialRatio: 2, breathNoiseCutoffHz: 1800, transientClickGain: 0.025, attackSeconds: 0.045, bendDepth: 0.035, chamberResonances: [{ frequencyHz: 900, q: 4.5, gain: 0.20 }, { frequencyHz: 1800, q: 3.5, gain: 0.12 }] },
   voicing: "chord",
   elementaryModel: 10,
-  makeupGain: 0.457,
+  makeupGain: 1.0668,
   polyphony: 8,
   note: "Sustained Japanese reed-organ cluster",
   acousticProfile: {

@@ -13,7 +13,7 @@ export const zapateado: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "hammer",
   elementaryModel: 18,
-  makeupGain: 7.299,
+  makeupGain: 1.676,
   polyphony: 8,
   note: "Authentic flamenco dance footwork percussion on a wooden tablao stage with nailed shoe strikes: Tacón heel drops, Planta ball-of-foot impacts, Punta toe taps, and rapid redoble heel-toe rolls",
   acousticProfile: {

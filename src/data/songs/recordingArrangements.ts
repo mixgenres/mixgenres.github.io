@@ -110,7 +110,7 @@ export function parseRecordingForm(value: string): Array<{ kind: string; bars: n
   });
 }
 
-/** All public songs require an authored score; there is no sample expansion path. */
+/** All public songs require an authored score. */
 export const RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = Object.fromEntries([
   ...RECORDING_FORM_SCORES.map(line => {
     const [key, bpm, form, cells] = line.split('|');

@@ -6,7 +6,7 @@ export const clarinet: InstrumentDef = {
   family: "winds",
   voicing: "single",
   elementaryModel: 16,
-  makeupGain: 0.411,
+  makeupGain: 1.0305,
   polyphony: 4,
   note: "Single-reed cylindrical woodwind with rich chalumeau low register and soaring expressive clarion highs",
   acousticProfile: {
