@@ -1,10 +1,10 @@
 # MixGenres
 
-MixGenres is a browser song editor and synthesizer. Choose a full song or a short style sample, edit its sections, chords, patterns and instrumental parts, then play or export it.
+MixGenres is a browser song editor and synthesizer. Choose a style, switch between its short Sample and Full arrangement, edit sections, chords, patterns and instrumental parts, then play or export it.
 
 ## Songs and samples
 
-The catalog contains one full-song entry for each of the 420 authored styles. Samples retain the short style-study forms. Full songs have separately authored section lengths, tempo and harmonic cells, and reuse the existing styles and patterns. `reference-songs.txt` lists their artist and track credits, one per line.
+Every authored style has a short Sample and a Full arrangement. The UI treats these as two lengths of the same style instead of exposing recording titles as separate catalog choices. Full arrangements retain separately authored section lengths, tempo and harmonic cells; `reference-songs.txt` remains the internal source/credit list.
 
 These are editable score adaptations, not verified transcriptions or reproductions of the recordings. Bar counts, tempo and harmony may be approximate. Melodies come from the pattern vocabulary. An ensemble inherited from a style is not evidence of the recording's exact personnel. Drone anchors and Western bar grids also simplify traditions with different pitch and time systems. Representative selections for repertoire references are editorial choices, not rankings of historical significance. DSP instruments approximate acoustic and electronic sources; structural tests cannot certify how authentic they sound.
 
@@ -16,7 +16,7 @@ The style registry validates instrument IDs and pattern ownership. It does not s
 
 Ensemble entries become separate track IDs, including several parts using the same instrument. Role and solo assignments belong to tracks. Recording personnel restrictions and solo features are applied only when declared; a section without a personnel restriction retains the full ensemble. Section chord cells retain their authored keys rather than being transposed to the opening tonic.
 
-The Score panel exposes written notation, band interpretation and prepared instrument controls. Written pitches, fractional beats, note lengths, techniques and drum identities pass through separate representations; expressive gate lengths and timing offsets are distinct from notation. Generated lead-sheet instructions are labeled as instructions. See [the engine pipeline](docs/engine-pipeline.md) and [calibration notes](docs/style-calibration-audit.md).
+Written pitches, fractional beats, note lengths, techniques and drum identities still pass through separate engine representations; expressive gate lengths and timing offsets remain distinct from notation. Score/notation inspection is no longer exposed as an application UI view. See [the engine pipeline](docs/engine-pipeline.md) and [calibration notes](docs/style-calibration-audit.md).
 
 ## Development and verification
 

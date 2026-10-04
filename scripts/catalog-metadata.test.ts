@@ -6,8 +6,8 @@ import { fullSongs } from '../src/data/songs/catalog';
 import { STYLE_REFERENCES } from '../src/data/styles/styleReferences';
 import { RECORDING_ARRANGEMENTS, parseRecordingForm } from '../src/data/songs/recordingArrangements';
 import { assembleStylePatterns } from '../src/engine/style/catalog';
-import { createCatalogSong } from '../src/engine/sheet/songCatalog';
-import { createSheet } from '../src/engine/sheet/sheet';
+import { createCatalogSong, markCatalogModified, switchCatalogSongKind } from '../src/engine/sheet/songCatalog';
+import { createSheet, moveSection } from '../src/engine/sheet/sheet';
 import { styleCalibrationTarget } from '../src/engine/style/performance-schema';
 import { compileNotatedScore } from '../src/engine/score/notatedScore';
 import { composeMusicianScore } from '../src/engine/band/arrangeBand';
@@ -78,6 +78,47 @@ test('full-song harmony preserves modal bridges and instruments are never substi
     for (const id of Object.values(RECORDING_ARRANGEMENTS[key].solos ?? {})) assert.ok(song.tracks.some(t => t.instrumentId === id));
     if (key.startsWith('qawwali')) assert.deepEqual(song.tracks.map(t => t.instrumentId), ['voice', 'synth']);
   }
+});
+
+test('sample/full is one style-level length switch and untouched songs use the exact paired source', () => {
+  const entry = fullSongs.find(song => song.genreId === 'tango')!;
+  const sample = createCatalogSong(`${entry.styleId}_starter`);
+  const full = switchCatalogSongKind(sample, 'full-song');
+  const canonicalFull = createCatalogSong(entry.id);
+  assert.equal(full.catalogKind, 'full-song');
+  assert.equal(full.catalogModified, false);
+  assert.equal(full.title, `${entry.styleName} Full`);
+  assert.equal(full.durationMeasures, canonicalFull.durationMeasures);
+  assert.deepEqual(full.regions.map(region => [region.kind, region.bars, region.chords]), canonicalFull.regions.map(region => [region.kind, region.bars, region.chords]));
+
+  const roundTrip = switchCatalogSongKind(full, 'sample');
+  assert.equal(roundTrip.catalogKind, 'sample');
+  assert.equal(roundTrip.catalogModified, false);
+  assert.equal(roundTrip.durationMeasures, sample.durationMeasures);
+  assert.deepEqual(roundTrip.regions.map(region => [region.kind, region.bars, region.chords]), sample.regions.map(region => [region.kind, region.bars, region.chords]));
+});
+
+test('sample/full preserves user edits and scales structurally edited forms instead of resetting them', () => {
+  const entry = fullSongs.find(song => song.genreId === 'tango')!;
+  const sample = createCatalogSong(`${entry.styleId}_starter`);
+  const editedBpm = sample.bpm + 7;
+  const edited = markCatalogModified({
+    ...sample,
+    title: 'My edited tango',
+    bpm: editedBpm,
+    regions: sample.regions.map((region, index) => index === 0 ? { ...region, chords: ['Dm', 'A7'] } : region),
+  });
+  const full = switchCatalogSongKind(edited, 'full-song');
+  assert.equal(full.catalogModified, true);
+  assert.equal(full.title, 'My edited tango');
+  assert.equal(full.bpm, editedBpm);
+  assert.deepEqual(full.regions[0].chords, ['Dm', 'A7']);
+
+  const reordered = markCatalogModified(moveSection(sample, sample.regions[0].id, 1));
+  const reorderedIds = reordered.regions.map(region => region.id);
+  const expanded = switchCatalogSongKind(reordered, 'full-song');
+  assert.deepEqual(expanded.regions.map(region => region.id), reorderedIds);
+  assert.equal(expanded.durationMeasures, createCatalogSong(entry.id).durationMeasures);
 });
 
 test('simultaneous written drum components remain separate notation attacks', () => {

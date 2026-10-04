@@ -9,13 +9,12 @@ import { noteTags } from './ui/noteTags';
 import { WorldSheet, InstrumentSheet, PatternSheet, SectionSheet, SectionGenreSheet, TempoSheet, EnergySheet, DownloadSheet, StartOverModal, RandomizeSheet, ChordSheet } from './ui/sheets';
 import { StyleSheetModal } from './ui/StyleSheet';
 import { StyleInspector } from './ui/StyleInspector';
-import { PerformanceInspector } from './ui/PerformanceInspector';
 import { RoleIcon, RoleSettings } from './ui/RoleControl';
 import { supportsSolo, soloistAtBar } from './engine/sheet/solo';
 import { plateFor, applyPlate } from './ui/worlds';
 import { resolveStyle, getCanonicalStyle } from './engine/style';
 import {
-  Sheet as SongSheet, Voice, createSheet, switchLensOnly, switchSectionWorld,
+  Sheet as SongSheet, Voice, switchLensOnly, switchSectionWorld,
   setBars, setKind, setSectionTitle, moveSection, setSectionChords, getSectionGenre,
   randomizeInstruments, addRandomInstrument, removeAllInstruments, randomizePatternsForSection, randomizePatternsForSong,
   randomizeChordsForSection, randomizeChordsForSong, randomizeEverythingForSong, randomizeEverythingForSection,
@@ -30,8 +29,7 @@ import { FEELS } from './data/tempoFeels';
 import { ENERGY_LABELS } from './data/performance/energy';
 import { SongPlayer, type PlayerState } from './engine/playback/songPlayer';
 import type { Performance } from './engine/band/performanceData';
-import { createCatalogSong } from './engine/sheet/songCatalog';
-import { fullSongs, FULL_SONGS_BY_ID } from './data/songs/catalog';
+import { catalogIdForStyle, createCatalogSong, markCatalogModified, switchCatalogSongKind, type CatalogSongKind } from './engine/sheet/songCatalog';
 import { preparedAudioStats } from './engine/cache/preparedAudio';
 import { PATTERNS_BY_ID, cleanPatternName } from './data/genres';
 
@@ -42,11 +40,15 @@ function loadInitialSong(): { song: SongSheet; isNew: boolean } {
     try { return { song: createCatalogSong(catalogId), isNew: false }; } catch { /* Unknown catalog link falls back to picker. */ }
   }
   const genre = params.get('genre');
-  if (genre || params.get('score') === '1') {
-    try { return { song: createSheet(genre ?? 'tango', params.get('style') ?? undefined), isNew: false }; }
+  if (genre) {
+    try {
+      const styleId = params.get('style') ?? getCanonicalStyle(genre).id;
+      return { song: createCatalogSong(catalogIdForStyle(styleId, 'sample')), isNew: false };
+    }
     catch { /* An invalid review link falls back to the normal starter. */ }
   }
-  return { song: createSheet('tango'), isNew: true };
+  const styleId = getCanonicalStyle('tango').id;
+  return { song: createCatalogSong(catalogIdForStyle(styleId, 'sample')), isNew: true };
 }
 
 export default function App() {
@@ -68,7 +70,6 @@ export default function App() {
   const [isEditingPartTitle, setIsEditingPartTitle] = useState(false);
   const [sectionGenreOpen, setSectionGenreOpen] = useState(false);
   const [styleOpen, setStyleOpen] = useState(false);
-  const [scoreOpen, setScoreOpen] = useState(() => new URLSearchParams(window.location.search).get('score') === '1');
   const [showDevStyle, setShowDevStyle] = useState(() => {
     try {
       return typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('dev') === 'style';
@@ -109,25 +110,7 @@ export default function App() {
     });
   }, [song.worldId, song.styleId, (song as any).styleInfluences, (song as any).styleOverrides]);
 
-  const handleStartOver = (worldId: string, styleId?: string, catalogId?: string) => {
-    const canonical = getCanonicalStyle(worldId);
-    const targetStyleId = styleId ?? canonical.id;
-    const entry = catalogId ?? fullSongs.find(entry => entry.styleId === targetStyleId)?.id;
-    if (!entry) throw new Error(`Missing catalog song for style ${targetStyleId}`);
-    const fresh = createCatalogSong(entry);
-    setSong(fresh);
-    setPickedRegion(null);
-    setBar(0);
-    setStep(0);
-    barRef.current = 0;
-    stepRef.current = 0;
-    seekSecondsRef.current = 0;
-    playerRef.current?.locate(0);
-    showToast(`Started a new ${plateFor(worldId).short} song (${resolveStyle({ genreId: worldId, styleId: targetStyleId }).name})`);
-  };
-
-  const handleSelectStyle = (styleId: string) => {
-    const next = createCatalogSong(`${styleId}_starter`);
+  const resetTransportForSong = (next: SongSheet) => {
     setSong(next);
     setPickedRegion(null);
     setBar(0);
@@ -136,8 +119,36 @@ export default function App() {
     stepRef.current = 0;
     seekSecondsRef.current = 0;
     playerRef.current?.locate(0);
+  };
+
+  const handleStartOver = (worldId: string, styleId?: string, kind: CatalogSongKind = song.catalogKind ?? 'sample') => {
+    const canonical = getCanonicalStyle(worldId);
+    const targetStyleId = styleId ?? canonical.id;
+    const fresh = createCatalogSong(catalogIdForStyle(targetStyleId, kind));
+    resetTransportForSong(fresh);
+    showToast(`Started a new ${plateFor(worldId).short} song (${resolveStyle({ genreId: worldId, styleId: targetStyleId }).name})`);
+  };
+
+  const handleSelectStyle = (styleId: string) => {
+    const next = createCatalogSong(catalogIdForStyle(styleId, song.catalogKind ?? 'sample'));
+    resetTransportForSong(next);
     const targetName = resolveStyle({ genreId: next.worldId, styleId }).name;
     showToast(`Style set to ${targetName}`);
+  };
+
+  const handleCatalogKindChange = (kind: CatalogSongKind) => {
+    if (song.catalogKind === kind) return;
+    try {
+      playerRef.current?.pause();
+      const wasModified = !!song.catalogModified;
+      const next = switchCatalogSongKind(song, kind);
+      resetTransportForSong(next);
+      const label = kind === 'full-song' ? 'Full' : 'Sample';
+      showToast(wasModified ? `${label} version created with your edits` : `Switched to ${label.toLowerCase()} source`);
+    } catch (error) {
+      console.error('Unable to switch song length', { kind, error });
+      showToast('Could not switch song length');
+    }
   };
 
   const exportAbortRef = useRef<AbortController | null>(null);
@@ -356,7 +367,7 @@ export default function App() {
     // Mix edits also produce a new immutable playback snapshot. Re-rendering
     // finishes before that version resumes, so UI and audio cannot disagree.
     void scope;
-    setSong(fn);
+    setSong(current => markCatalogModified(fn(current)));
   };
   const playheadPercent = Math.min(100, Math.max(0, ((bar * 16 + step) / (totalBars * 16)) * 100));
 
@@ -463,8 +474,38 @@ export default function App() {
               </div>
             </button>
 
-            <button type="button" className="btn-pill cursor-pointer shrink-0" title="Inspect every note and audition individual instruments"
-              onClick={() => { playerRef.current?.pause(); setScoreOpen(true); }}>Score</button>
+            <div className="flex items-center gap-1 shrink-0" role="group" aria-label="Song length">
+              <button
+                type="button"
+                className="btn-pill cursor-pointer"
+                aria-pressed={(song.catalogKind ?? 'sample') === 'sample'}
+                onClick={() => handleCatalogKindChange('sample')}
+                title="Use the short style sample"
+                style={(song.catalogKind ?? 'sample') === 'sample' ? {
+                  background: 'var(--ink)', color: 'var(--ground)'
+                } : {
+                  background: 'var(--tone)', color: 'var(--ink)',
+                  boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 25%, transparent)',
+                }}
+              >
+                Sample
+              </button>
+              <button
+                type="button"
+                className="btn-pill cursor-pointer"
+                aria-pressed={song.catalogKind === 'full-song'}
+                onClick={() => handleCatalogKindChange('full-song')}
+                title="Use the full song form"
+                style={song.catalogKind === 'full-song' ? {
+                  background: 'var(--ink)', color: 'var(--ground)'
+                } : {
+                  background: 'var(--tone)', color: 'var(--ink)',
+                  boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 25%, transparent)',
+                }}
+              >
+                Full
+              </button>
+            </div>
             {showDevStyle && (
               <button
                 type="button"
@@ -1052,7 +1093,7 @@ export default function App() {
         open={startOverOpen}
         onClose={() => setStartOverOpen(false)}
         currentWorldId={song.worldId}
-        onConfirmResetCurrent={() => handleStartOver(song.worldId, song.styleId, song.catalogId)}
+        onConfirmResetCurrent={() => handleStartOver(song.worldId, song.styleId, song.catalogKind ?? 'sample')}
         onSelectNewGenre={id => { handleStartOver(id); setStyleOpen(true); }}
         isInitialLoad={initialData.isNew}
       />
@@ -1152,7 +1193,7 @@ export default function App() {
           const i = song.regions.findIndex(r => r.id === region.id);
           const j = i + d;
           if (i < 0 || j < 0 || j >= song.regions.length) return;
-          const nextSheet = moveSection(song, region.id, d);
+          const nextSheet = markCatalogModified(moveSection(song, region.id, d));
           setSong(nextSheet);
           setPickedRegion(region.id);
           const moved = nextSheet.regions.find(r => r.id === region.id);
@@ -1161,7 +1202,9 @@ export default function App() {
         }}
         onDuplicate={() => {
           if (!region) return;
-          const { sheet: nextSheet, newRegionId } = duplicateSection(song, region.id);
+          const result = duplicateSection(song, region.id);
+          const nextSheet = markCatalogModified(result.sheet);
+          const { newRegionId } = result;
           setSong(nextSheet);
           setPickedRegion(newRegionId);
           const newReg = nextSheet.regions.find(r => r.id === newRegionId);
@@ -1170,7 +1213,9 @@ export default function App() {
         }}
         onNewPart={() => {
           if (!region) return;
-          const { sheet: nextSheet, newRegionId } = addSensibleSectionAfter(song, region.id);
+          const result = addSensibleSectionAfter(song, region.id);
+          const nextSheet = markCatalogModified(result.sheet);
+          const { newRegionId } = result;
           setSong(nextSheet);
           setPickedRegion(newRegionId);
           const newReg = nextSheet.regions.find(r => r.id === newRegionId);
@@ -1180,7 +1225,7 @@ export default function App() {
         onRemove={() => {
           if (!region || song.regions.length <= 1) return;
           const i = song.regions.findIndex(r => r.id === region.id);
-          const nextSheet = removeSection(song, region.id);
+          const nextSheet = markCatalogModified(removeSection(song, region.id));
           const targetIndex = i > 0 ? i - 1 : 0;
           const nextReg = nextSheet.regions[targetIndex] ?? nextSheet.regions[0];
           setSong(nextSheet);
@@ -1264,14 +1309,7 @@ export default function App() {
         currentGenreId={song.worldId}
         currentStyleId={song.styleId}
         onPickStyle={handleSelectStyle}
-        currentCatalogId={song.catalogId}
-        onPickSong={id => {
-          const entry = FULL_SONGS_BY_ID[id];
-          handleStartOver(entry.genreId, entry.styleId, id);
-        }}
       />
-
-      {scoreOpen && <PerformanceInspector song={song} onClose={() => setScoreOpen(false)} />}
       {showDevStyle && (
         <StyleInspector
           song={song}
