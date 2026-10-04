@@ -8,6 +8,14 @@ const report=document.querySelector<HTMLPreElement>('#report')!;
 let song: Sheet | undefined, started=0, preparedMs: number | undefined, fourSecondsMs: number | undefined, compileMs: number | undefined;
 let stress: {edits:number;peakRetainedPCMBytes:number;peakWorkerHeapBytes:number;error?:string} | undefined;
 const player=new SongPlayer(()=>update(),()=>update(),true);
+let previewRequest=0,previewTimer:ReturnType<typeof setTimeout> | undefined;
+function cancelPreview() {previewRequest++;clearTimeout(previewTimer);}
+function playOnce(inputTime:number) {
+  cancelPreview();const request=previewRequest;
+  void player.play(inputTime).then(()=>{
+    if(request===previewRequest)previewTimer=setTimeout(()=>player.stop(),500);
+  });
+}
 function update() {
   if(player.snapshot.performance && compileMs===undefined)compileMs=Math.round(performance.now()-started);
   if(player.preparedAheadSeconds>=4 && fourSecondsMs===undefined)fourSecondsMs=Math.round(performance.now()-started);
@@ -22,11 +30,11 @@ function update() {
     backgroundPreparationMs:preparedMs,fourSecondsPreparationMs:fourSecondsMs,compileMs,
     position:Number(player.position().toFixed(2)),clickToSound:player.snapshot.playbackTiming ?? null,
     outputLatencyEstimateMs:player.snapshot.outputLatencyMs ?? null,
-    memory:{retainedPCMBytes,workers,limits:playbackResources()},stress,
+    audio:player.playbackActivity,memory:{retainedPCMBytes,workers,limits:playbackResources()},stress,
     error:player.snapshot.error ?? null},null,2);
 }
 function changed(next:Sheet) {
-  player.pause();player.locate(0);song=next;started=performance.now();
+  cancelPreview();player.stop();player.locate(0);song=next;started=performance.now();
   preparedMs=undefined;fourSecondsMs=undefined;compileMs=undefined;player.configure(song);update();
 }
 function waitUntil(ready:()=>boolean,timeout=30_000) {
@@ -39,14 +47,14 @@ function waitUntil(ready:()=>boolean,timeout=30_000) {
 }
 document.querySelector<HTMLButtonElement>('#prepare')!.onclick=()=>changed(makeSheet('tango','tango-golden-age'));
 document.querySelector<HTMLButtonElement>('#cold')!.onclick=event=>{
-  changed(makeSheet('tango','tango-golden-age'));void player.play(event.timeStamp);
+  changed(makeSheet('tango','tango-golden-age'));playOnce(event.timeStamp);
 };
-document.querySelector<HTMLButtonElement>('#play')!.onclick=event=>{void player.play(event.timeStamp);};
-document.querySelector<HTMLButtonElement>('#pause')!.onclick=()=>player.pause();
+document.querySelector<HTMLButtonElement>('#play')!.onclick=event=>{playOnce(event.timeStamp);};
+document.querySelector<HTMLButtonElement>('#pause')!.onclick=()=>{cancelPreview();player.stop();};
 document.querySelector<HTMLButtonElement>('#seek')!.onclick=()=>player.locate(20);
 document.querySelector<HTMLButtonElement>('#rename')!.onclick=()=>{if(song){song={...song,title:'Renamed'};player.configure(song);update();}};
 document.querySelector<HTMLButtonElement>('#edit')!.onclick=event=>{
-  if(song){changed(setSongBpm(song,song.bpm===120?121:120));void player.play(event.timeStamp);}
+  if(song){changed(setSongBpm(song,song.bpm===120?121:120));playOnce(event.timeStamp);}
 };
 document.querySelector<HTMLButtonElement>('#stress')!.onclick=async()=>{
   stress={edits:0,peakRetainedPCMBytes:0,peakWorkerHeapBytes:0};
@@ -60,4 +68,4 @@ document.querySelector<HTMLButtonElement>('#stress')!.onclick=async()=>{
   } catch(error) {stress.error=String(error);update();}
 };
 const heartbeat=setInterval(update,250);
-window.addEventListener('pagehide',()=>{clearInterval(heartbeat);player.dispose();},{once:true});
+window.addEventListener('pagehide',()=>{cancelPreview();clearInterval(heartbeat);player.dispose();},{once:true});

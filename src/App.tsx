@@ -119,6 +119,7 @@ export default function App() {
   }, [song.worldId, song.styleId, (song as any).styleInfluences, (song as any).styleOverrides]);
 
   const resetTransportForSong = (next: SongSheet) => {
+    playerRef.current?.stop();
     setSong(next);
     setPickedRegion(null);
     setBar(0);
@@ -127,10 +128,12 @@ export default function App() {
     stepRef.current = 0;
     seekSecondsRef.current = 0;
     transportRef.current?.style.setProperty('--playhead', '0%');
+    playerRef.current?.configure(next);
     playerRef.current?.locate(0);
   };
 
   const handleStartOver = (worldId: string, styleId?: string) => {
+    playerRef.current?.stop();
     const canonical = getCanonicalStyle(worldId);
     const targetStyleId = styleId ?? canonical.id;
     const fresh = createCatalogSong(catalogIdForStyle(targetStyleId));
@@ -139,6 +142,7 @@ export default function App() {
   };
 
   const handleSelectStyle = (styleId: string) => {
+    playerRef.current?.stop();
     const next = createCatalogSong(catalogIdForStyle(styleId));
     resetTransportForSong(next);
     const targetName = resolveStyle({ genreId: next.worldId, styleId }).name;
@@ -347,6 +351,10 @@ export default function App() {
     playerRef.current?.configure(song);
   }, [song]);
 
+  useEffect(() => {
+    if(startOverOpen || worldOpen || styleOpen || sectionGenreOpen)playerRef.current?.stop();
+  },[startOverOpen,worldOpen,styleOpen,sectionGenreOpen]);
+
   // Accepts a plain Track: the sheet's tracks always carry an instrumentId at
   // runtime, but the stored type keeps it optional for older saved songs.
 
@@ -356,6 +364,7 @@ export default function App() {
 
   const handleSelectSectionGenre = (genreId: string) => {
     if (!region) return;
+    playerRef.current?.stop();
     try {
       edit(s => switchSectionWorld(s, region.id, genreId));
       showToast(`Switched ${partName} to ${plateFor(genreId).short}`);

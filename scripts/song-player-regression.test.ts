@@ -73,6 +73,7 @@ function fakePlaybackContext() {
     linearRampToValueAtTime(value: number, when: number) { fades.push({ value, when }); }, cancelScheduledValues() {} },
     connect() {}, disconnect() {} });
   const ctx = { currentTime: 0, sampleRate: 44100, state: 'running', createGain: gain,
+    suspend:async()=>{ctx.state='suspended';},resume:async()=>{ctx.state='running';},close:async()=>{ctx.state='closed';},
     createBuffer: (_channels: number, frames: number, sampleRate: number) => {
       const data = [new Float32Array(frames), new Float32Array(frames)];
       return { duration: frames / sampleRate, length: frames, numberOfChannels: 2, sampleRate, getChannelData: (index: number) => data[index] };
@@ -187,6 +188,62 @@ test('Pause fades the current output over eight milliseconds before stopping sou
   player.pause();
   assert.ok(stops.length > 0); assert.ok(stops.every(time => time === .258));
   assert.deepEqual(fades.at(-1), { value: 0, when: .258 });
+});
+
+test('Stop silences all scheduled sources and replay resumes the output', async () => {
+  const {player,stops,ctx,output,starts}=fixture();
+  await player.play();await flush();ctx.currentTime=.25;
+  const scheduled=starts.length;
+  player.stop();await flush();
+  assert.equal(stops.length,scheduled,'future scheduled chunks stop too');
+  assert.ok(stops.every(time=>time===.25),'shutdown does not wait for a fade or source-end event');
+  assert.equal(output.gain.value,0);assert.equal(ctx.state,'suspended');
+  assert.deepEqual(player.playbackActivity,{contextState:'suspended',scheduledSources:0,pendingStart:false});
+  await player.play();await flush();
+  assert.equal(ctx.state,'running');assert.equal(output.gain.value,1);assert.ok(starts.length>scheduled);
+  player.stop();
+});
+
+test('a rapid replay explicitly resumes a context whose suspension is still pending', async () => {
+  const {player,ctx,starts}=fixture();
+  const suspension=deferred<void>();let resumed=0;
+  ctx.suspend=()=>suspension.promise;
+  ctx.resume=()=>{resumed++;return suspension.promise.then(()=>{ctx.state='running';});};
+  await player.play();await flush();player.stop();const scheduled=starts.length;
+  const playing=player.play();await flush();
+  assert.equal(resumed,1,'current running state cannot hide a queued suspension');
+  assert.equal(starts.length,scheduled,'replay waits for resume to complete');
+  ctx.state='suspended';suspension.resolve();await playing;await flush();
+  assert.equal(ctx.state,'running');assert.ok(starts.length>scheduled);player.stop();
+});
+
+test('leaving or hiding the page stops audio, cancels pending starts, and disposal removes listeners', async () => {
+  const savedWindow=Object.getOwnPropertyDescriptor(globalThis,'window'),savedDocument=Object.getOwnPropertyDescriptor(globalThis,'document');
+  const win=new EventTarget(),doc=Object.assign(new EventTarget(),{visibilityState:'visible'});
+  Object.defineProperty(globalThis,'window',{configurable:true,value:win});
+  Object.defineProperty(globalThis,'document',{configurable:true,value:doc});
+  const {player,ctx,starts}=fixture();let stops=0;
+  const stop=player.stop.bind(player);player.stop=()=>{stops++;stop();};
+  try {
+    for(const [target,event] of [[win,'blur'],[win,'pagehide'],[win,'beforeunload'],[doc,'freeze']] as const) {
+      await player.play();await flush();target.dispatchEvent(new Event(event));await flush();
+      assert.equal(player.playbackActivity.scheduledSources,0);assert.equal(ctx.state,'suspended');
+      assert.equal(player.snapshot.status,'paused');
+    }
+    const compiling=deferred<void>();player.compiling=compiling.promise;
+    const playing=player.play();await flush();const scheduled=starts.length;
+    doc.visibilityState='hidden';doc.dispatchEvent(new Event('visibilitychange'));
+    compiling.resolve();await playing;await flush();
+    assert.equal(starts.length,scheduled,'compiler completion cannot restart a hidden page');
+    player.dispose();const stopped=stops;
+    win.dispatchEvent(new Event('blur'));doc.dispatchEvent(new Event('visibilitychange'));
+    assert.equal(stops,stopped,'disposed players unregister lifecycle callbacks');
+    assert.equal(ctx.state,'closed');
+  } finally {
+    player.dispose();
+    if(savedWindow)Object.defineProperty(globalThis,'window',savedWindow);else Reflect.deleteProperty(globalThis,'window');
+    if(savedDocument)Object.defineProperty(globalThis,'document',savedDocument);else Reflect.deleteProperty(globalThis,'document');
+  }
 });
 
 test('preparation follows a new position and reports ready after its first playable chunk', async () => {
@@ -505,6 +562,12 @@ test('cold Play resumes once after compilation and retains its complete wait tim
     assert.equal(calls,1,'compiler completion must not replace a Play already awaiting that score');
     assert.ok(player.snapshot.playbackTiming.compileWaitMs>=15,'timing includes the actual compilation wait');
     assert.ok(starts.length>0);assert.equal(player.snapshot.status,'playing');
+    const scheduled=starts.length;
+    player.configure({title:'Another genre',worldId:'salsa',styleId:'salsa',catalogId:'another-song',tracks:[]});
+    await flush();workers.at(-1).onmessage({data:{performance:compiled}});await player.compiling;await flush();
+    assert.equal(player.playbackActivity.scheduledSources,0);
+    assert.equal(starts.length,scheduled,'a new song must wait for another explicit Play');
+    assert.equal(calls,1,'genre changes cannot carry the previous playback request forward');
   } finally {
     player.pause();releasePlaybackWorkers();globalThis.Worker=savedWorker;
     if(savedNavigator)Object.defineProperty(globalThis,'navigator',savedNavigator);else Reflect.deleteProperty(globalThis,'navigator');

@@ -51,6 +51,8 @@ export class SongPlayer {
   private wantsPlayback = false;
   private scrubbing = false;
   private ctx?: AudioContext;
+  private suspending?: Promise<void>;
+  private removePageListeners?: () => void;
   private output?: GainNode;
   private mixOutput?: GainNode;
   private chunks: PlaybackChunk[] = [];
@@ -78,10 +80,26 @@ export class SongPlayer {
   private schedulerTimer?: ReturnType<typeof setInterval>;
 
   constructor(private readonly onState: (state: PlayerState) => void, private readonly onPosition: (seconds: number) => void,
-    private readonly diagnostics = false) {}
+    private readonly diagnostics = false) {
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      const stop = () => this.stop();
+      const hidden = () => {if(document.visibilityState === 'hidden')this.stop();};
+      const windowEvents = ['blur','pagehide','beforeunload'];
+      for(const event of windowEvents)window.addEventListener(event,stop);
+      document.addEventListener('visibilitychange',hidden);
+      document.addEventListener('freeze',stop);
+      this.removePageListeners = () => {
+        for(const event of windowEvents)window.removeEventListener(event,stop);
+        document.removeEventListener('visibilitychange',hidden);
+        document.removeEventListener('freeze',stop);
+      };
+    }
+  }
 
   get snapshot(): PlayerState { return this.state; }
   get composition(): Sheet | undefined { return this.song; }
+  get playbackActivity() {return {contextState:this.ctx?.state ?? 'none',scheduledSources:this.sources.size,
+    pendingStart:this.wantsPlayback && !this.transportStarted};}
   get preparedDuration(): number {
     let end = 0;
     for (const chunk of this.chunks) {
@@ -113,6 +131,7 @@ export class SongPlayer {
 
   configure(song: Sheet, force = false): void {
     if (this.disposed || !force && this.song === song) return;
+    if(this.song && (this.song.worldId !== song.worldId || this.song.styleId !== song.styleId || this.song.catalogId !== song.catalogId)) this.stop();
     const snapshot = audioSnapshot(song);
     const renderKey = JSON.stringify(snapshot);
     if (!force && renderKey === this.renderKey) {
@@ -402,8 +421,10 @@ export class SongPlayer {
     this.publish({ status: 'starting', error: undefined, audioStartMs: undefined });
     try {
       this.ensureContext();
+      this.output!.gain.cancelScheduledValues(this.ctx!.currentTime);
+      this.output!.gain.value = 1;
       const resumeStarted = globalThis.performance.now();
-      const resumed = this.ctx!.state === 'running' ? Promise.resolve() : this.ctx!.resume();
+      const resumed = this.ctx!.state === 'running' && !this.suspending ? Promise.resolve() : this.ctx!.resume();
       await resumed;
       if (!this.current(request, revision)) return;
       this.recordTiming({ contextResumeMs: globalThis.performance.now() - resumeStarted });
@@ -502,16 +523,34 @@ export class SongPlayer {
     else this.locate(this.offset);
   }
 
-  pause() {
+  pause() { this.pauseTransport(false); }
+
+  /** Navigation/shutdown silence synchronously, including future queued sources. */
+  stop() {
+    if(this.disposed)return;
+    this.scrubbing=false;
+    this.pauseTransport(true);
+    if(this.output && this.ctx) {
+      this.output.gain.cancelScheduledValues(this.ctx.currentTime);
+      this.output.gain.value=0;
+      this.output.gain.setValueAtTime(0,this.ctx.currentTime);
+    }
+    if(this.ctx && this.ctx.state !== 'closed' && typeof this.ctx.suspend === 'function') {
+      const suspension=this.ctx.suspend().catch(()=>{}).finally(()=>{if(this.suspending===suspension)this.suspending=undefined;});
+      this.suspending=suspension;
+    }
+  }
+
+  private pauseTransport(immediate: boolean) {
     this.offset = this.position();
     this.wantsPlayback = false;
     ++this.playRequest;
-    this.haltSources();
+    this.haltSources(immediate);
     if (this.state.status !== 'compiling') this.publish({ status: 'paused' });
     this.onPosition(this.offset);
   }
 
-  toggle(inputTime?: number) { if (this.wantsPlayback || this.sources.size) this.pause(); else void this.play(inputTime); }
+  toggle(inputTime?: number) { if (this.wantsPlayback || this.sources.size) this.stop(); else void this.play(inputTime); }
 
   private recordTiming(patch: Partial<PlaybackTiming>) {
     if (this.diagnostics) this.publish({ playbackTiming: { ...this.state.playbackTiming, ...patch } });
@@ -549,14 +588,14 @@ export class SongPlayer {
     this.raf = requestAnimationFrame(() => this.animate());
   }
 
-  private haltSources() {
+  private haltSources(immediate = false) {
     this.playbackGeneration++;
     if (this.schedulerTimer !== undefined) clearInterval(this.schedulerTimer);
     this.schedulerTimer = undefined;
     if (this.raf !== undefined) cancelAnimationFrame(this.raf);
     this.raf = undefined;
     const gain = this.mixOutput;
-    const fade = !!gain && !!this.sources.size && this.ctx?.state === 'running' && !this.disposed;
+    const fade = !immediate && !!gain && !!this.sources.size && this.ctx?.state === 'running' && !this.disposed;
     const now = this.ctx?.currentTime ?? 0;
     const stopAt = fade ? now + .008 : now;
     if (fade) {
@@ -585,6 +624,7 @@ export class SongPlayer {
   }
 
   dispose() {
+    this.removePageListeners?.();this.removePageListeners=undefined;
     this.disposed = true;
     this.wantsPlayback = false;
     ++this.revision; ++this.playRequest;
