@@ -247,3 +247,24 @@ test('repeated renders reuse one WASM heap and release every native processor', 
     assert.equal(stats.heapBytes,baseline.heapBytes,'repeated excerpts do not grow the heap');
   }
 });
+
+test('lookahead reuses a covering physical window without restarting a sustain or growing a second cache', async () => {
+  const { renderPlaybackPart } = await import('../src/engine/playback/renderPlaybackPart');
+  const { clearPreparedAudio, preparedAudioStats } = await import('../src/engine/cache/preparedAudio');
+  const perf = { ...performanceOf([{ ...note(.01), dur: 5.5 }]), duration: 7, tail: 0,
+    bars: [{ index: 0, start: 0, end: 7, bpm: 34, beatsPerBar: 4, regionId: 'hold' }] };
+  const options = { trackInstruments: new Map([['keys', 'organ']]), selectedTrackIds: ['keys'], rawStem: true,
+    sectionStems: true, boundedStems: true, stemLookaheadSeconds: 2, renderPriority: () => 1 };
+  clearPreparedAudio();
+  const first = await renderPlaybackPart(perf, { ...options, renderWindow: { start: .5, end: 2 } });
+  const cached = preparedAudioStats();
+  const later = await renderPlaybackPart(perf, { ...options, renderWindow: { start: 2, end: 3.5 } });
+  assert.equal(preparedAudioStats().misses, cached.misses, 'covered audio needs no more DSP');
+  assert.equal(preparedAudioStats().bytes, cached.bytes, 'window reuse retains no duplicate PCM');
+  assert.equal(later.sections![0].left, first.sections![0].left, 'the cached sustain keeps its original DSP state');
+  assert.equal(later.sections![0].startSample, first.sections![0].startSample);
+  const full = await renderPlaybackPart(perf, { ...options, boundedStems: false });
+  const section = first.sections![0], from = section.startSample;
+  assert.deepEqual(section.left, full.sections![0].left.subarray(from, from + section.left.length));
+  assert.deepEqual(section.right, full.sections![0].right.subarray(from, from + section.right.length));
+});

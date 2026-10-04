@@ -2,6 +2,7 @@ import type { InstrumentDSPOverride } from '../../schema/dsp-profile';
 
 /** Deep physical profile override for Guacharaca. Generated from this instrument's luthierPhysics, techniques, playingStyles and acoustic role; not a generic family alias. */
 export const dspOverride: InstrumentDSPOverride = {
+  "familyModel": "scrape",
   "instrumentCharacter": {
     "energySource": "impact",
     "energyPath": "plate/body/air",

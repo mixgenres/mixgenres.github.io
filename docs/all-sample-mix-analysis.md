@@ -26,7 +26,7 @@ node --import tsx scripts/validate-all-reference-audio.ts --jobs=4 --seconds=2 -
 The default-song preparation remains independent:
 
 ```sh
-bash remove.sh 'Aníbal Troilo - Quejas de Bandoneón.mp3'
+bash removeVoiceFromMp3.sh 'Aníbal Troilo - Quejas de Bandoneón.mp3'
 node --import tsx scripts/prepare-reference-samples.ts --separate --device=mps
 node --import tsx scripts/validate-default-reference-audio.ts --jobs=2 --phase=validated --resume
 ```

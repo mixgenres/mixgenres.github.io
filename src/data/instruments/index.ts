@@ -341,6 +341,18 @@ for (const [id, sourceId, note] of instrumentAliases) {
   INSTRUMENT_CATALOG.push({ ...structuredClone(source), id, name: id.replace(/-/g, ' '), note });
 }
 
+// These regional names share a starting point with a nearby instrument, but
+// their physical excitation still needs to resolve to the right family model.
+for (const id of ['frame-drum', 'riq']) {
+  const def = INSTRUMENT_CATALOG.find(instrument => instrument.id === id);
+  if (def) {
+    def.family = 'hand-drums';
+    if (def.luthierPhysics) def.luthierPhysics.category = 'membrane_tension_2d';
+  }
+}
+const qraqeb = INSTRUMENT_CATALOG.find(instrument => instrument.id === 'qraqeb');
+if (qraqeb?.luthierPhysics) qraqeb.luthierPhysics.category = 'body_impact';
+
 
 export const INSTRUMENTS_BY_ID: Record<string, InstrumentDef> = Object.fromEntries(INSTRUMENT_CATALOG.map(i => [i.id, i]));
 

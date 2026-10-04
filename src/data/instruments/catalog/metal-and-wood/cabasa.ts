@@ -26,7 +26,7 @@ export const cabasa: InstrumentDef = {
     ring: 0.5
   },
   luthierPhysics: {
-    category: "membrane_tension_2d",
+    category: "scraped_friction",
     materialDensity: 0.6,
     tension: 0.8,
     bodyResonanceVolume: 0.5,

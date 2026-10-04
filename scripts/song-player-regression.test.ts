@@ -225,7 +225,9 @@ test('leaving or hiding the page stops audio, cancels pending starts, and dispos
   const {player,ctx,starts}=fixture();let stops=0;
   const stop=player.stop.bind(player);player.stop=()=>{stops++;stop();};
   try {
-    for(const [target,event] of [[win,'blur'],[win,'pagehide'],[win,'beforeunload'],[doc,'freeze']] as const) {
+    await player.play(); await flush(); win.dispatchEvent(new Event('blur'));
+    assert.equal(player.snapshot.status, 'playing', 'visible mobile system controls must not stop audio');
+    for(const [target,event] of [[win,'pagehide'],[win,'beforeunload'],[doc,'freeze']] as const) {
       await player.play();await flush();target.dispatchEvent(new Event(event));await flush();
       assert.equal(player.playbackActivity.scheduledSources,0);assert.equal(ctx.state,'suspended');
       assert.equal(player.snapshot.status,'paused');
@@ -300,48 +302,57 @@ test('prepared chunks schedule contiguously across a loop and preserve song time
   const { player, starts, ctx, buffers } = fixture();
   try {
     await player.play(); await flush();
-    assert.equal(starts.length, 3);
+    assert.equal(starts.length, 6);
     for (let i = 1; i < starts.length; i++) assert.ok(Math.abs(starts[i].when - starts[i - 1].when - starts[i - 1].duration) < 1e-9);
-    ctx.currentTime = 3.005;
+    ctx.currentTime = 7.005;
     await player.pumpSchedule(player.playbackGeneration, player.revision);
-    assert.equal(starts[3].buffer, buffers[0]);
-    assert.ok(Math.abs(starts[3].when - 4.005) < 1e-9);
+    assert.equal(starts[6].buffer, buffers[0]);
+    assert.ok(Math.abs(starts[6].when - 8.005) < 1e-9);
     assert.ok(Math.abs(player.position() - 3) < 1e-9);
   } finally { player.pause(); }
 });
 
-test('a missed deadline skips expired chunks without shifting the playhead or loop phase', async () => {
-  const { player, starts, ctx, buffers } = fixture(Array(8).fill(1));
+test('a missed deadline resumes the next unscheduled sample without dropping music', async () => {
+  const { player, starts, ctx, buffers } = fixture(Array(16).fill(1));
   try {
     await player.play(); await flush(); const before = starts.length;
-    ctx.currentTime = 7.255;
+    ctx.currentTime = 11.255;
+    assert.ok(Math.abs(player.position() - 8) < 1e-9, 'the playhead cannot run past the last scheduled audio');
     await player.pumpSchedule(player.playbackGeneration, player.revision);
     const resumed = starts[before];
-    assert.equal(resumed.buffer, buffers[7]);
-    assert.ok(Math.abs(resumed.offset - .253) < 1e-9);
-    assert.ok(Math.abs(resumed.when + resumed.duration - 8.005) < 1e-9);
+    assert.equal(resumed.buffer, buffers[8]);
+    assert.equal(resumed.offset, 0);
+    assert.ok(Math.abs(resumed.when - 11.258) < 1e-9);
     const next = starts[before + 1];
-    assert.equal(next.buffer, buffers[0]); assert.ok(Math.abs(next.when - 8.005) < 1e-9);
+    assert.equal(next.buffer, buffers[9]); assert.ok(Math.abs(next.when - 12.258) < 1e-9);
+    ctx.currentTime = resumed.when;
+    assert.ok(Math.abs(player.position() - 8) < 1e-9, 'the silent interval is excluded from song time');
     ctx.currentTime = 1000.255; const count = starts.length;
     await player.pumpSchedule(player.playbackGeneration, player.revision);
     assert.equal(starts[count].buffer, buffers[0]);
-    assert.ok(Math.abs(starts[count].offset - .253) < 1e-8);
-    assert.ok(starts.length - count <= 5, 'catching up must not schedule every missed loop');
+    assert.equal(starts[count].offset, 0);
+    assert.ok(starts.length - count <= 8, 'a stalled timer must not schedule expired loops');
   } finally { player.pause(); }
 });
 
-test('a slow next-chunk render resumes at the correct sample of that chunk', async () => {
+test('a slow next-chunk render freezes and resumes at its first unheard sample', async () => {
   const { player, starts, ctx, buffers } = fixture();
   const waiting = deferred<AudioBuffer>(), ensure = player.ensureChunk.bind(player);
   player.chunkBuffers.delete(1);
   player.ensureChunk = (index: number, ...args: any[]) => index === 1 ? waiting.promise : ensure(index, ...args);
   try {
     await player.play(); await flush(); assert.equal(starts.length, 1);
-    ctx.currentTime = 1.5; waiting.resolve(buffers[1] as unknown as AudioBuffer);
+    ctx.currentTime = 1.5;
+    player.observeBuffering(player.playbackGeneration, player.revision);
+    assert.equal(player.snapshot.status, 'starting');
+    assert.ok(Math.abs(player.position() - 1) < 1e-9);
+    waiting.resolve(buffers[1] as unknown as AudioBuffer);
     await player.pump; await flush();
     assert.equal(starts[1].buffer, buffers[1]);
-    assert.ok(Math.abs(starts[1].offset - .498) < 1e-9);
-    assert.ok(Math.abs(starts[1].when + starts[1].duration - 3.005) < 1e-9);
+    assert.equal(starts[1].offset, 0);
+    assert.ok(Math.abs(starts[1].when - 1.503) < 1e-9);
+    assert.ok(Math.abs(starts[1].when + starts[1].duration - 3.503) < 1e-9);
+    assert.equal(player.snapshot.status, 'playing');
   } finally { player.pause(); }
 });
 
@@ -495,8 +506,10 @@ test('click-to-signal diagnostics work when animation frames stop', async () => 
 test('mobile resource policy caps workers and caches without deviceMemory', async () => {
   const { playbackResourceLimits } = await import('../src/engine/playback/playbackResources');
   const phone=playbackResourceLimits({touch:true,cores:8});
-  assert.equal(phone.workers,2);
-  assert.equal(phone.partCacheBytes+phone.mixCacheBytes+phone.playbackBufferBytes+phone.stemCacheBytes,28*1024*1024);
+  assert.equal(phone.workers,3);
+  assert.equal(phone.partCacheBytes+phone.mixCacheBytes+phone.playbackBufferBytes+phone.stemCacheBytes,36*1024*1024);
+  assert.equal(phone.aheadSeconds, 4);
+  assert.equal(phone.playingAheadSeconds, 8);
   assert.equal(playbackResourceLimits({memoryGB:2,cores:8}).workers,1);
   assert.equal(playbackResourceLimits({touch:true,cores:2}).workers,1);
   assert.equal(playbackResourceLimits({memoryGB:8,cores:8}).workers,3);
@@ -572,4 +585,118 @@ test('cold Play resumes once after compilation and retains its complete wait tim
     player.pause();releasePlaybackWorkers();globalThis.Worker=savedWorker;
     if(savedNavigator)Object.defineProperty(globalThis,'navigator',savedNavigator);else Reflect.deleteProperty(globalThis,'navigator');
   }
+});
+
+test('a hung mobile resume times out and the next gesture replaces its context, retaining prepared audio', async t => {
+  const savedWindow = Object.getOwnPropertyDescriptor(globalThis, 'window');
+  const { player, ctx, starts, buffers } = fixture();
+  const fresh = fakePlaybackContext(), never = deferred<void>();
+  let timeout!: () => void;
+  t.mock.method(globalThis, 'setTimeout', (callback: () => void) => { timeout = callback; return 456 as any; });
+  t.mock.method(globalThis, 'clearTimeout', () => {});
+  Object.defineProperty(globalThis, 'window', { configurable: true, value: { AudioContext: function() { return fresh.ctx; } } });
+  ctx.state = 'suspended'; ctx.resume = () => never.promise;
+  try {
+    const playing = player.play(); await flush();
+    assert.equal(starts.length, 0);
+    timeout(); await playing;
+    assert.equal(player.snapshot.status, 'error');
+    assert.match(player.snapshot.error, /Press Play/);
+    player.ensureContext = (SongPlayer.prototype as any).ensureContext;
+    await player.play(); await flush();
+    assert.equal(ctx.state, 'closed');
+    assert.equal(player.ctx, fresh.ctx);
+    assert.equal(fresh.starts[0].buffer, buffers[0], 'recovery reuses prepared audio from the old context');
+    assert.equal(player.snapshot.status, 'playing');
+  } finally {
+    player.dispose();
+    if (savedWindow) Object.defineProperty(globalThis, 'window', savedWindow); else Reflect.deleteProperty(globalThis, 'window');
+  }
+});
+
+test('cancelling a pending resume settles Play and a stale rejection cannot poison replay', async () => {
+  const { player, ctx, starts } = fixture(), first = deferred<void>(), second = deferred<void>();
+  ctx.state = 'suspended'; ctx.resume = () => first.promise;
+  try {
+    const pending = player.play(); await flush(); player.stop(); await pending;
+    ctx.resume = () => second.promise;
+    const replay = player.play(); await flush();
+    first.reject(new Error('Old resume failed')); await flush();
+    assert.equal(player.replaceContext, false);
+    assert.equal(starts.length, 0);
+    ctx.state = 'running'; second.resolve(); await replay; await flush();
+    assert.equal(player.snapshot.status, 'playing');
+  } finally { player.pause(); }
+});
+
+test('seeking while mobile audio resumes waits for the context and starts at the latest position', async () => {
+  const { player, ctx, starts, buffers } = fixture(), resumed = deferred<void>();
+  ctx.state = 'suspended'; ctx.resume = () => resumed.promise;
+  try {
+    const playing = player.play(); await flush(); player.locate(2); await flush();
+    assert.equal(starts.length, 0, 'a seek cannot schedule into the still-suspended context');
+    ctx.state = 'running'; resumed.resolve(); await playing; await flush();
+    assert.equal(starts[0].buffer, buffers[1]); assert.equal(starts[0].offset, 1);
+  } finally { player.pause(); }
+});
+
+test('an iOS interruption during startup cancels Play even before any sources exist', async () => {
+  const savedWindow = Object.getOwnPropertyDescriptor(globalThis, 'window');
+  const { player, ctx, starts } = fixture(), resumed = deferred<void>();
+  Object.defineProperty(globalThis, 'window', { configurable: true, value: { AudioContext: function() { return ctx; } } });
+  player.ctx = undefined; player.ensureContext = (SongPlayer.prototype as any).ensureContext;
+  ctx.state = 'suspended'; ctx.resume = () => resumed.promise;
+  try {
+    const playing = player.play(); await flush();
+    (ctx as any).state = 'interrupted'; (ctx as any).onstatechange(); await playing;
+    assert.equal(player.snapshot.status, 'paused'); assert.match(player.snapshot.error, /interrupted/);
+    ctx.state = 'running'; resumed.resolve(); await flush();
+    assert.equal(starts.length, 0, 'late resume completion must not restart interrupted playback');
+  } finally {
+    player.dispose();
+    if (savedWindow) Object.defineProperty(globalThis, 'window', savedWindow); else Reflect.deleteProperty(globalThis, 'window');
+  }
+});
+
+test('Pause during starvation retains the unheard position and cancels the pending scheduler', async () => {
+  const { player, ctx, buffers, starts } = fixture(), waiting = deferred<AudioBuffer>();
+  player.chunkBuffers.delete(1);
+  const ensure = player.ensureChunk.bind(player);
+  player.ensureChunk = (index: number, ...args: any[]) => index === 1 ? waiting.promise : ensure(index, ...args);
+  try {
+    await player.play(); await flush(); ctx.currentTime = 2;
+    player.pause(); const scheduled = starts.length;
+    assert.ok(Math.abs(player.position() - 1) < 1e-9);
+    waiting.resolve(buffers[1] as unknown as AudioBuffer); await flush();
+    assert.equal(starts.length, scheduled); assert.equal(player.snapshot.status, 'paused');
+  } finally { player.pause(); }
+});
+
+test('active preparation retains an eight-second reserve within the mobile PCM budget', async () => {
+  const { player, performance, buffers } = fixture(Array(20).fill(4));
+  player.chunkBuffers.clear(); player.wantsPlayback = true;
+  const requested: number[] = [];
+  player.ensureChunk = async (index: number) => { requested.push(index); player.chunkBuffers.set(index, buffers[index]); return buffers[index]; };
+  try {
+    player.warmChunks(performance, player.song, player.abort.signal, player.revision); await flush();
+    assert.deepEqual(requested, [0, 1]);
+    player.offset = 3.9;
+    player.warmChunks(performance, player.song, player.abort.signal, player.revision); await flush();
+    assert.deepEqual(requested, [0, 1, 2]);
+    assert.ok(player.preparedAheadSeconds >= 8);
+    assert.ok(player.bufferedBytes <= 6 * 1024 * 1024);
+  } finally { player.pause(); }
+});
+
+test('transport batches short musical sections without changing DSP attack boundaries', async () => {
+  const { planTransportChunks } = await import('../src/engine/playback/playbackChunks');
+  const performance = { duration: 20, tail: .1, bars: Array.from({ length: 100 }, (_, index) => ({
+    index, start: index / 5, end: (index + 1) / 5, regionId: `section-${index}`, bpm: 1200, beatsPerBar: 4,
+  })) } as any;
+  const chunks = planTransportChunks(performance);
+  assert.equal(planPlaybackChunks(performance).length, 100, 'musical attack ownership remains separate');
+  assert.equal(chunks.length, 6, 'short sections share transport/master renders');
+  assert.equal(chunks[0].end, .2, 'the opening bar remains quick to prepare');
+  for (let index = 1; index < chunks.length; index++) assert.equal(chunks[index].start, chunks[index - 1].end);
+  assert.equal(Math.round(chunks.at(-1)!.end * 44100), Math.ceil(20.1 * 44100));
 });

@@ -9,7 +9,7 @@ export const ENTRY_6: [string, InstrumentDialect] = ["guitar:flamenco", {
     defaultTechnique: 'fingerstyle',
     allowedTechniques: ['fingerstyle', 'rasgueado', 'abanico', 'golpe', 'picado', 'alzapua', 'tremolo', 'palm-mute'],
     pluckPositionOverride: 0.22,
-    brightnessMultiplier: 1.25,
+    brightnessMultiplier: 1.1,
     decayMultiplier: 0.85,
     micProximityPreset: 'close-mic',
   }];

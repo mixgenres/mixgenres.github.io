@@ -9,6 +9,7 @@ const args = process.argv.slice(2);
 const value = (flag: string) => args.find(arg => arg.startsWith(`${flag}=`))?.slice(flag.length + 1);
 const genres = value('--genres')?.split(',');
 const device = value('--device') ?? 'auto';
+const allStyles = args.includes('--all-styles');
 if (!['auto', 'mps', 'cpu'].includes(device)) throw new Error(`Unknown device: ${device}`);
 if (genres?.some(id => !GENRE_WORLDS.some(world => world.id === id))) throw new Error('Unknown genre selection');
 const root = resolve('.'), files = readdirSync(resolve(root, 'samples'));
@@ -16,17 +17,21 @@ const clean = (s: string) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').
 const priorities = ['tango', 'flamenco', 'salsa', 'ambient'];
 const worlds = GENRE_WORLDS.filter(world => !genres || genres.includes(world.id)).sort((a, b) =>
   (priorities.indexOf(a.id) < 0 ? 99 : priorities.indexOf(a.id)) - (priorities.indexOf(b.id) < 0 ? 99 : priorities.indexOf(b.id)));
-const manifest = worlds.map(world => {
-  const style = getCanonicalStyle(world.id);
-  const song = songCatalog.find(song => song.genreId === world.id && song.styleId === style.id)!;
+const selectedSongs = allStyles
+  ? songCatalog.filter(song => !genres || genres.includes(song.genreId))
+  : worlds.map(world => {
+    const style = getCanonicalStyle(world.id);
+    return songCatalog.find(song => song.genreId === world.id && song.styleId === style.id)!;
+  });
+const manifest = selectedSongs.map(song => {
   const candidates = files.filter(file => clean(file.replace(/\.[^.]+$/, '')) === clean(`${song.artist} - ${song.track}`));
   const sample = candidates.length === 1 ? resolve(root, 'samples', candidates[0]) : null;
   const output = sample ? resolve(root, 'voiced', basename(sample)) : null;
-  return { genre: world.id, styleId: style.id, songId: song.id, name: song.name, artist: song.artist, track: song.track,
+  return { genre: song.genreId, styleId: song.styleId, songId: song.id, name: song.name, artist: song.artist, track: song.track,
     sample, output, status: sample ? 'pending' : candidates.length > 1 ? 'ambiguous' : 'missing', candidates };
 });
 mkdirSync('audit/reference-separation', { recursive: true });
-const report = resolve('audit/default-reference-manifest.json');
+const report = resolve(allStyles ? 'audit/all-style-reference-manifest.json' : 'audit/default-reference-manifest.json');
 const save = () => writeFileSync(report, JSON.stringify({ generatedAt: new Date().toISOString(), entries: manifest }, null, 2) + '\n');
 save();
 for (const entry of manifest) {
@@ -39,7 +44,7 @@ for (const entry of manifest) {
   console.log(`PREPARE ${entry.genre}: ${entry.name}`);
   try {
     const code = await new Promise<number | null>((resolveCode, reject) => {
-      const child = spawn('bash', [resolve(root, 'remove.sh'), entry.sample!, '--device', device], { stdio: ['ignore', fd, fd] });
+      const child = spawn('bash', [resolve(root, 'removeVoiceFromMp3.sh'), entry.sample!, '--device', device], { stdio: ['ignore', fd, fd] });
       child.on('error', reject); child.on('exit', resolveCode);
     });
     entry.status = code === 0 && existsSync(entry.output!) ? 'available' : 'failed';
@@ -50,5 +55,5 @@ for (const entry of manifest) {
 }
 save();
 const counts = Object.fromEntries([...new Set(manifest.map(entry => entry.status))].map(status => [status, manifest.filter(entry => entry.status === status).length]));
-console.log(JSON.stringify({ genres: manifest.length, ...counts, report }));
+console.log(JSON.stringify({ styles: manifest.length, allStyles, ...counts, report }));
 if (manifest.some(entry => entry.status === 'failed' || entry.status === 'ambiguous')) process.exitCode = 1;

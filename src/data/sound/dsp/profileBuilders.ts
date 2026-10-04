@@ -454,6 +454,19 @@ export function buildInstrumentDSPProfile(def: InstrumentDef): InstrumentDSPProf
     profile = deepMergeDSP(profile, override);
   }
 
+  // Resolve the source mechanics from the instrument's physical construction,
+  // after style and instrument overrides. Material family alone is not an
+  // excitation model: a castanet is an impact, a maraca a particle shaker, and
+  // a frame drum a membrane even when all share broad catalog families.
+  const physicalCategory = def.luthierPhysics?.category;
+  if (physicalCategory === 'scraped_friction') profile.familyModel = 'scrape';
+  else if (physicalCategory === 'membrane_tension_2d') profile.familyModel = 'membrane';
+  else if (physicalCategory === 'body_impact') {
+    profile.familyModel = id === 'maracas' || id === 'shaker' ? 'shaker' : 'impact';
+  } else if (physicalCategory === 'resonator_struck_metal_wood' && profile.physicalDetails?.system === 'contact-noise-idiophone') {
+    profile.familyModel = 'impact';
+  }
+
   // Normalize the physical energy-source contract after generated/hand-authored
   // overrides. This prevents a copied transition flag from changing the
   // instrument's excitation family (for example, a banjo becoming a

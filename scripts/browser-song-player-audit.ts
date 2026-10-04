@@ -30,7 +30,7 @@ function update() {
     backgroundPreparationMs:preparedMs,fourSecondsPreparationMs:fourSecondsMs,compileMs,
     position:Number(player.position().toFixed(2)),clickToSound:player.snapshot.playbackTiming ?? null,
     outputLatencyEstimateMs:player.snapshot.outputLatencyMs ?? null,
-    audio:player.playbackActivity,memory:{retainedPCMBytes,workers,limits:playbackResources()},stress,
+    audio:player.playbackActivity,health:player.playbackHealth,memory:{retainedPCMBytes,workers,limits:playbackResources()},stress,
     error:player.snapshot.error ?? null},null,2);
 }
 function changed(next:Sheet) {
@@ -50,6 +50,7 @@ document.querySelector<HTMLButtonElement>('#cold')!.onclick=event=>{
   changed(makeSheet('tango','tango-golden-age'));playOnce(event.timeStamp);
 };
 document.querySelector<HTMLButtonElement>('#play')!.onclick=event=>{playOnce(event.timeStamp);};
+document.querySelector<HTMLButtonElement>('#continuous')!.onclick=event=>{cancelPreview();void player.play(event.timeStamp);};
 document.querySelector<HTMLButtonElement>('#pause')!.onclick=()=>{cancelPreview();player.stop();};
 document.querySelector<HTMLButtonElement>('#seek')!.onclick=()=>player.locate(20);
 document.querySelector<HTMLButtonElement>('#rename')!.onclick=()=>{if(song){song={...song,title:'Renamed'};player.configure(song);update();}};

@@ -5,8 +5,8 @@ ROOT="$(cd "$(dirname "$0")" && pwd)"
 
 usage() {
   cat <<'USAGE'
-Usage: ./remove.sh [FILE] [--device auto|mps|cpu] [--output-dir DIR] [--force]
-       ./remove.sh --file FILE [options]
+Usage: ./removeVoiceFromMp3.sh [FILE] [--device auto|mps|cpu] [--output-dir DIR] [--force]
+       ./removeVoiceFromMp3.sh --file FILE [options]
 
 With FILE, process only that audio file (a samples/ filename also works).
 Without FILE, process supported audio files in samples/.

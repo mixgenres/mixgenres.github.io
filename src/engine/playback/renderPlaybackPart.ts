@@ -2,7 +2,7 @@ import { playbackResources } from './playbackResources';
 import type { Mp3RenderOptions, RenderedPerformanceAudio } from './mp3Export';
 import type { Sheet } from '../sheet/sheet';
 import type { Performance } from '../band/performanceData';
-import { preparedAudioKey, preparePartAudio, completedPartAudio } from '../cache/preparedAudio';
+import { preparedAudioKey, preparePartAudio, completedPartAudioWindow } from '../cache/preparedAudio';
 import { planDSPSectionsWithTail, assembleDSPSections } from './dspSectionPlan';
 import { preparedNoteLifetimes } from './preparedNoteLifetimes';
 
@@ -67,21 +67,27 @@ export async function renderPlaybackPart(performance: Performance, options: Mp3R
           // The first bar must not wait for the following bars and every long
           // release to finish. Render its exact physical prefix, preserving the
           // original note durations. Complete exports keep their separate key.
-          const frames = options.boundedStems && options.renderWindow
+          const requestedFrames = options.boundedStems && options.renderWindow
             ? Math.ceil(options.renderWindow.end * 44100) - section.startSample : undefined;
-          const seconds = frames === undefined ? undefined : frames / 44100;
-          const bounded = seconds !== undefined && seconds < section.performance.duration;
           const from = options.boundedStems && options.sectionStems && options.renderWindow
             ? Math.max(0,Math.floor(options.renderWindow.start*44100)-section.startSample) : 0;
+          const complete = requestedFrames === undefined ? undefined
+            : completedPartAudioWindow(section.key, from, Math.min(requestedFrames, Math.ceil(section.performance.duration * 44100)));
+          // Current audio stays minimal for fast starts. Once transport has a
+          // reserve, complete nearby tails so later windows reuse their physics
+          // rather than repeatedly synthesizing from the original attack.
+          const frames = requestedFrames !== undefined && options.stemLookaheadSeconds
+            ? Math.min(Math.ceil(section.performance.duration * 44100), requestedFrames + options.stemLookaheadSeconds * 44100) : requestedFrames;
+          const seconds = frames === undefined ? undefined : frames / 44100;
+          const bounded = seconds !== undefined && seconds < section.performance.duration;
           const cropped = bounded || from > 0;
           const sectionKey = cropped ? `${section.key}:prefix:${frames}:from:${from}` : section.key;
-          const complete = cropped ? completedPartAudio(section.key) : undefined;
-          const result = complete ??
+          const result = complete?.audio ??
             await preparePartAudio(sectionKey, signal, sectionSignal =>
               renderUncachedPart(section.performance, { ...rawOptions, renderWindow: undefined,
                 maxDurationSeconds: bounded ? seconds : undefined, rawOutputStartSample:from, signal: sectionSignal }));
           onProgress?.(++completed/sections.length);
-          return {audio:result,startSample:section.startSample+(complete ? 0 : from)};
+          return {audio:result,startSample:section.startSample+(complete ? complete.from : from)};
         }));
         if(options.sectionStems) return {sampleRate:44100,left:new Float32Array(0),right:new Float32Array(0),
           sections:audio.map(section => ({...section.audio,startSample:section.startSample}))};

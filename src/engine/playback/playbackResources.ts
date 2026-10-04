@@ -8,12 +8,16 @@ export function playbackResourceLimits(device: PlaybackDevice) {
   const mb = 1024 * 1024;
   return {
     constrained: !!constrained,
-    workers: constrained ? small ? 1 : 2 : Math.max(1, Math.min(3, (device.cores ?? 2) - 1)),
-    partCacheBytes: (constrained ? 12 : 48) * mb,
+    workers: constrained ? small ? 1 : (device.cores ?? 2) >= 6 ? 3 : 2 : Math.max(1, Math.min(3, (device.cores ?? 2) - 1)),
+    partCacheBytes: (constrained ? 24 : 48) * mb,
     mixCacheBytes: (constrained ? 4 : 12) * mb,
-    playbackBufferBytes: (constrained ? 4 : 12) * mb,
-    stemCacheBytes: (constrained ? 8 : 32) * mb,
+    playbackBufferBytes: (constrained ? 6 : 12) * mb,
+    // Worker playback uses the shared physical cache, not this export cache.
+    stemCacheBytes: (constrained ? 2 : 32) * mb,
     aheadSeconds: 4,
+    // Idle preparation stays small for quick selection. Once playing, retain
+    // enough PCM to absorb a slow render, GC, or a delayed mobile timer.
+    playingAheadSeconds: 8,
   };
 }
 export function playbackResources() {

@@ -9,6 +9,7 @@ import { INSTRUMENTS_BY_ID } from '../src/engine/lookup/instruments';
 import { audioRenderFingerprint } from './lib/audioRenderFingerprint';
 const args = process.argv.slice(2);
 const option = (flag: string) => args.find(arg => arg.startsWith(`${flag}=`))?.slice(flag.length + 1);
+const genres = option('--genres')?.split(',');
 const jobs = Number(option('--jobs') ?? 2), seconds = Number(option('--seconds') ?? 8);
 if (!Number.isInteger(jobs) || jobs < 1 || jobs > 4 || !Number.isFinite(seconds) || seconds <= 0) throw new Error('Invalid jobs or seconds');
 const phase = option('--phase') ?? 'screened';
@@ -16,12 +17,13 @@ if (!/^[a-z0-9-]+$/.test(phase)) throw new Error('Invalid phase');
 interface Match { genre: string; styleId: string; name: string }
 interface Reference { file: string; matches: Match[] }
 const inventory: { entries: Reference[]; missing: Match[] } = JSON.parse(readFileSync('audit/all-samples/inventory.json', 'utf8'));
-const queue = inventory.entries.flatMap(reference => reference.matches.map(match => ({ ...match, file: reference.file })));
+if (genres?.some(genre => !inventory.entries.some(reference => reference.matches.some(match => match.genre === genre)))) throw new Error('Unknown genre');
+const queue = inventory.entries.flatMap(reference => reference.matches.filter(match => !genres || genres.includes(match.genre)).map(match => ({ ...match, file: reference.file })));
 const folder = resolve('audit/all-samples', phase); mkdirSync(folder, { recursive: true });
 const python = resolve('.demucs-mps-venv/bin/python');
 const patterns = JSON.parse(readFileSync('audit/all-samples/patterns.json', 'utf8')) as { rows: Array<{ styleId: string; tracks: Array<{ instrumentId: string }> }> };
 const results: Array<Record<string, unknown>> = [];
-const save = () => writeFileSync(resolve(folder, 'summary.json'), JSON.stringify({ phase, seconds, results, missing: inventory.missing }, null, 2) + '\n');
+const save = () => writeFileSync(resolve(folder, 'summary.json'), JSON.stringify({ phase, seconds, genres, results, missing: inventory.missing.filter(match => !genres || genres.includes(match.genre)) }, null, 2) + '\n');
 async function run(command: string, commandArgs: string[], log: string) {
   const fd = openSync(log, 'a');
   try { return await new Promise<number | null>((res, rej) => {

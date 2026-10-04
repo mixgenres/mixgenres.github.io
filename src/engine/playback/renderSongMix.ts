@@ -25,8 +25,9 @@ export function songMixOptions(song: Sheet): Mp3RenderOptions {
 /** Workers synthesize raw instruments; the browser masters the ensemble once. */
 export async function renderSongMix(performance: Performance, song: Sheet, signal: AbortSignal,
   window?: { start: number; end: number }, priority: () => number = () => 3,
-  onProgress?: (fraction: number) => void): Promise<RenderedPerformanceAudio> {
-  return renderPreparedMix(performance, { ...songMixOptions(song), renderWindow: window, boundedStems: !!window }, signal, priority, onProgress);
+  onProgress?: (fraction: number) => void, stemLookaheadSeconds = 0): Promise<RenderedPerformanceAudio> {
+  return renderPreparedMix(performance, { ...songMixOptions(song), renderWindow: window, boundedStems: !!window,
+    stemLookaheadSeconds }, signal, priority, onProgress);
 }
 
 function windowPreparedStem(audio: RenderedPerformanceAudio, window: { start: number; end: number }): RenderedPerformanceAudio {

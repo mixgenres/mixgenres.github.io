@@ -145,38 +145,38 @@ export const dspOverride: InstrumentDSPOverride = {
       ]
     }
   },
+  "familyModel": "mallet",
   "physicalDetails": {
-  "system": "membrane-shell-percussion",
-  "construction": "tensioned membrane over resonant shell/body",
-  "exciter": "hand/stick/beaters according to instrument",
+  "system": "struck-resonator",
+  "construction": "hollow hardwood log with tuned longitudinal slit tongues and shared air cavity",
+  "exciter": "soft rubber mallet or bare finger on an individual wooden tongue",
   "asymmetries": [
-    "center vs edge",
-    "open vs damped",
-    "hand vs stick",
-    "rim contact"
+    "tongue length and width set discrete pitch",
+    "strike position changes upper partial strength",
+    "soft mallet versus finger changes attack hardness",
+    "cavity opening and log wall couple low body resonance"
   ],
   "coupling": [
-    "membrane radial modes",
-    "membrane circular modes",
-    "shell/air cavity",
-    "hand damping"
+    "bending modes of each isolated tongue",
+    "tongue-to-log vibration transfer",
+    "shared hollow-body air resonance"
   ],
   "artifactSources": [
-    "skin contact",
-    "rim click",
-    "shell knock"
+    "mallet/finger contact",
+    "short hardwood body knock",
+    "air cavity bloom"
   ],
   "detail": [
-    "strike-zone controls modal mixture",
-    "membrane tension controls decay",
-    "shell/air coupling varies by stroke and hand damping"
+    "tongues are fixed-pitch wooden resonators rather than membranes",
+    "alternating tongues create the melodic contour",
+    "strike strength changes attack and partial balance without retuning the tongue"
   ],
   "response": {
-    "contactHardness": 0.608,
-    "resonatorQ": 0.72,
-    "nonlinearTransfer": 0.143,
-    "inharmonicity": 0.184,
-    "bodyCoupling": 0.646
+    "contactHardness": 0.46,
+    "resonatorQ": 0.68,
+    "nonlinearTransfer": 0.08,
+    "inharmonicity": 0.12,
+    "bodyCoupling": 0.62
   }
 }
 } as InstrumentDSPOverride;

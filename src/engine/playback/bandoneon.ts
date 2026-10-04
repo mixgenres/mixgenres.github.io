@@ -82,6 +82,7 @@ export default class BandoneonModule implements InstrumentModule {
     const isChapa = action === 'chapa' || /chapa|mute/i.test(action ?? '');
     const isTremolo = action === 'tremolo';
     const isBend = action === 'bend' || /bend|portamento/i.test(action ?? '');
+    const isTango = `${params.genreId ?? ''} ${params.dialect ?? ''}`.toLowerCase().includes('tango');
 
     // Arrastre is an approach figure and pressure swell. Chromatic approach
     // notes belong in the score; a free reed does not slide three semitones.
@@ -156,6 +157,19 @@ export default class BandoneonModule implements InstrumentModule {
       chamberAudio = el.add(el.mul(0.38, primaryChamber), el.add(el.mul(0.16, secondaryChamber), el.mul(0.18, airCavity)));
     }
 
+    // The old fixed chamber boost clustered the Golden Age reed sound around
+    // its low formants. Preserve that air chamber and add a quieter upper reed
+    // edge so short attacks retain the cutting presence heard in dance-band
+    // bandoneons. This remains a source-filter estimate, not a measured model.
+    if (isTango) {
+      const reedEdge = el.add(
+        el.mul(0.36, el.highpass(1350, 0.75, reedPressure)),
+        el.mul(0.25, el.svf({ mode: 'bandpass' }, 2100, 2.1, reedPressure)),
+        el.mul(0.14, el.svf({ mode: 'bandpass' }, 3900, 1.7, reedPressure)),
+      );
+      chamberAudio = el.add(chamberAudio, reedEdge);
+    }
+
     // 7. Mechanical Bellows Air Rush & Knee-Drop Impact (Owned excitationDynamics.kneeDropImpact)
     // Bellows leakage is a continuous acoustic detail, but it should sit well below
     // the reed core rather than behaving like broadband percussion.
@@ -180,12 +194,18 @@ export default class BandoneonModule implements InstrumentModule {
     );
 
     // 8. Final Acoustic Sum & Master Timbral Filter
-    const acousticSum = el.add(
+    let acousticSum = el.add(
       el.mul(0.42, el.mul(articulationPressure, reedPressure)),
       el.add(chamberAudio, el.add(flowNoise, kneeImpact))
     );
+    if (isTango) {
+      // The reference has more bow/reed bite above the cabinet's low formants;
+      // tilt the generated bandoneon toward its higher reed harmonics.
+      acousticSum = el.add(el.mul(0.72, el.lowpass(1250, 0.72, acousticSum)),
+        el.mul(1.22, el.highpass(1250, 0.72, acousticSum)));
+    }
 
-    const masterCutoff = Math.min(19000, 4200 + b * 4600 + (isClosing ? 400 : 0));
+    const masterCutoff = Math.min(19000, (isTango ? 6200 : 4200) + b * (isTango ? 5600 : 4600) + (isClosing ? 400 : 0));
     return el.lowpass(masterCutoff, 1.05, acousticSum);
   }
 }

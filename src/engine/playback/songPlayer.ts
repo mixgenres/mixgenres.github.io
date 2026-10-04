@@ -52,6 +52,8 @@ export class SongPlayer {
   private scrubbing = false;
   private ctx?: AudioContext;
   private suspending?: Promise<void>;
+  private cancelResume?: () => void;
+  private replaceContext = false;
   private removePageListeners?: () => void;
   private output?: GainNode;
   private mixOutput?: GainNode;
@@ -75,6 +77,11 @@ export class SongPlayer {
   private scheduleIndex = 0;
   private scheduleOffset = 0;
   private scheduleWhen = 0;
+  private stalledAt?: number;
+  private underruns = 0;
+  private bufferingSeconds = 0;
+  private renderedAudioSeconds = 0;
+  private renderMs = 0;
   private pump?: Promise<void>;
   private pumpGeneration = -1;
   private schedulerTimer?: ReturnType<typeof setInterval>;
@@ -84,7 +91,9 @@ export class SongPlayer {
     if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       const stop = () => this.stop();
       const hidden = () => {if(document.visibilityState === 'hidden')this.stop();};
-      const windowEvents = ['blur','pagehide','beforeunload'];
+      // Mobile system controls can blur a still-visible page. Visibility and
+      // lifecycle events, rather than focus, determine when playback stops.
+      const windowEvents = ['pagehide','beforeunload'];
       for(const event of windowEvents)window.addEventListener(event,stop);
       document.addEventListener('visibilitychange',hidden);
       document.addEventListener('freeze',stop);
@@ -100,6 +109,8 @@ export class SongPlayer {
   get composition(): Sheet | undefined { return this.song; }
   get playbackActivity() {return {contextState:this.ctx?.state ?? 'none',scheduledSources:this.sources.size,
     pendingStart:this.wantsPlayback && !this.transportStarted};}
+  get playbackHealth() { return { underruns: this.underruns, bufferingSeconds: this.bufferingSeconds,
+    renderedAudioSeconds: this.renderedAudioSeconds, renderMs: this.renderMs }; }
   get preparedDuration(): number {
     let end = 0;
     for (const chunk of this.chunks) {
@@ -163,6 +174,7 @@ export class SongPlayer {
     this.chunks = [];
     this.chunkBuffers.clear();
     this.chunkJobs.clear();
+    this.underruns = 0; this.bufferingSeconds = 0; this.renderedAudioSeconds = 0; this.renderMs = 0;
     this.publish({ status: retainedPerformance ? 'ready' : 'compiling', composition: song, progress: 0,
       performance: retainedPerformance, error: undefined });
 
@@ -182,7 +194,14 @@ export class SongPlayer {
   }
 
   private ensureContext() {
-    if (!this.ctx || this.ctx.state === 'closed') {
+    if (!this.ctx || this.ctx.state === 'closed' || this.replaceContext) {
+      if (this.ctx) {
+        this.ctx.onstatechange = null;
+        if (this.ctx.state !== 'closed') void this.ctx.close().catch(() => {});
+        this.output?.disconnect();
+        this.probe?.disconnect();
+      }
+      this.replaceContext = false;
       const Constructor = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
       if (!Constructor) throw new Error('This browser does not support audio playback.');
       this.ctx = new Constructor({ latencyHint: 'interactive' });
@@ -192,13 +211,41 @@ export class SongPlayer {
         this.probe = this.ctx.createAnalyser(); this.probe.fftSize = 256;
         this.output.connect(this.probe); this.probe.connect(this.ctx.destination);
       } else this.output.connect(this.ctx.destination);
+      const context = this.ctx;
       this.ctx.onstatechange = () => {
-        if (this.sources.size && this.ctx?.state !== 'running') {
+        if (this.ctx !== context || !this.wantsPlayback) return;
+        const state = context.state as string; // Safari also reports "interrupted".
+        if (state === 'interrupted' || state === 'closed' || state === 'suspended' && this.transportStarted) {
           this.pause();
           this.publish({ error: 'Audio was interrupted. Press Play to resume.' });
         }
       };
     }
+  }
+
+  /** Some mobile browsers leave resume() pending indefinitely. Retry on a
+   * fresh context on the next gesture, retaining all prepared AudioBuffers. */
+  private resumeContext(context: AudioContext): Promise<void> {
+    this.cancelResume?.();
+    if (context.state === 'running' && !this.suspending) return Promise.resolve();
+    const resumed = context.resume(); // Must run synchronously in the gesture.
+    return new Promise((resolve, reject) => {
+      let settled = false;
+      const finish = (error?: unknown) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        if (this.cancelResume === cancel) this.cancelResume = undefined;
+        if (error) reject(error); else resolve();
+      };
+      const cancel = () => finish(new DOMException('Playback start cancelled', 'AbortError'));
+      const timer = setTimeout(() => {
+        this.replaceContext = true;
+        finish(new Error('Audio could not resume. Press Play to try again.'));
+      }, 4000);
+      this.cancelResume = cancel;
+      resumed.then(() => finish(), error => { if (!settled) this.replaceContext = true; finish(error); });
+    });
   }
 
   private loopDuration(performance = this.state.performance) {
@@ -220,11 +267,15 @@ export class SongPlayer {
     if (pending) return pending;
     const chunk = this.chunks[index];
     if (!chunk) return Promise.reject(new Error(`Unknown playback chunk ${index}.`));
+    const began = globalThis.performance.now();
     const job = renderSongMix(performance, song, signal,
-      { start: chunk.renderStart, end: chunk.renderEnd }, priority).then(audio => {
+      { start: chunk.renderStart, end: chunk.renderEnd }, priority, undefined,
+      this.preparedAheadSeconds >= 4 ? 8 : 0).then(audio => {
       checkAbort(signal);
       if (revision !== this.revision || this.disposed) throw new DOMException('Playback rendering superseded', 'AbortError');
       const buffer = this.toChunkBuffer(audio, chunk);
+      this.renderedAudioSeconds += chunk.end - chunk.start;
+      this.renderMs += globalThis.performance.now() - began;
       this.chunkBuffers.set(index, buffer);
       this.trimChunkBuffers();
       return buffer;
@@ -235,7 +286,7 @@ export class SongPlayer {
     return job;
   }
 
-  /** Enough audio for an immediate start and four seconds ahead, not a whole song. */
+  /** Small idle warmup; a larger, bounded reserve during playback. */
   private bufferNeighborhood(): number[] {
     if (!this.chunks.length) return [];
     const position = this.position();
@@ -246,7 +297,8 @@ export class SongPlayer {
       indices.push(index);
       seconds += this.chunks[index].end - this.chunks[index].start;
       index = (index + 1) % this.chunks.length;
-    } while (seconds < playbackResources().aheadSeconds && indices.length < this.chunks.length);
+    } while (seconds < (this.wantsPlayback ? playbackResources().playingAheadSeconds : playbackResources().aheadSeconds) &&
+      indices.length < this.chunks.length);
     return indices;
   }
 
@@ -324,6 +376,7 @@ export class SongPlayer {
     this.scheduleIndex = index;
     this.scheduleOffset = Math.max(0, position - chunk.start);
     this.scheduleWhen = when;
+    this.stalledAt = undefined;
     const generation = this.playbackGeneration;
     this.requestPump(generation, revision);
     this.recordTiming({ scheduledStartMs: performance.now() - this.playClickedAt + (when - this.ctx.currentTime) * 1000 });
@@ -332,10 +385,23 @@ export class SongPlayer {
     if (this.sources.size) this.publish({ status: 'playing', error: undefined });
     // Audio scheduling must continue even when the browser stops UI frames.
     this.schedulerTimer = setInterval(() => {
+      this.observeBuffering(generation, revision);
       this.requestPump(generation, revision);
+      this.warmChunks(this.state.performance!, this.song!, this.abort!.signal, revision);
       this.observeSignal();
     }, 100);
+    this.warmChunks(this.state.performance, this.song, this.abort!.signal, revision);
     this.animate();
+  }
+
+  private observeBuffering(generation: number, revision: number) {
+    if (!this.currentPlayback(generation, revision) || !this.transportStarted || !this.ctx ||
+      this.stalledAt !== undefined || this.scheduleWhen >= this.ctx.currentTime) return;
+    // Freeze at the end of the last scheduled source, even while a worker is
+    // still rendering. Pause/seek must use this exact musical position too.
+    this.stalledAt = this.scheduleWhen;
+    this.publish({ status: 'starting' });
+    this.onPosition(this.position());
   }
 
   private requestPump(generation: number, revision: number) {
@@ -356,24 +422,28 @@ export class SongPlayer {
     const song = this.song;
     const signal = this.abort?.signal;
     if (!signal) return;
-    const horizon = 4;
+    const horizon = playbackResources().playingAheadSeconds;
     while (this.currentPlayback(generation, revision) && this.scheduleWhen < this.ctx.currentTime + horizon) {
       const index = this.scheduleIndex;
       const chunk = this.chunks[index];
       if (!chunk) return;
+      this.observeBuffering(generation, revision);
       const buffer = this.chunkBuffers.get(index) ?? await this.ensureChunk(index, performance, song, signal, revision,
         () => index === playbackChunkAt(this.chunks, this.position()) ? 0 : Math.min(3, this.chunkPriority(index) + 1));
       if (!this.currentPlayback(generation, revision) || !this.ctx || !this.mixOutput) return;
 
       const earliest = this.ctx.currentTime + .003;
-      // Preserve song time when rendering or a throttled timer misses a deadline.
-      // Skip complete loops cheaply, then advance through any missed chunks.
-      const loopDuration = this.loopDuration();
-      if (earliest - this.scheduleWhen >= loopDuration) {
-        this.scheduleWhen += Math.floor((earliest - this.scheduleWhen) / loopDuration) * loopDuration;
-      }
+      // A missed deadline is silence, not elapsed song time. Resume the next
+      // unscheduled sample rather than dropping notes or entire sections.
       const when = Math.max(this.scheduleWhen, earliest);
-      const offset = this.scheduleOffset + (when - this.scheduleWhen);
+      if (when - this.scheduleWhen > .02 && this.diagnostics) {
+        this.underruns++;
+        this.bufferingSeconds += when - this.scheduleWhen;
+      }
+      this.anchorContextTime += when - this.scheduleWhen;
+      this.scheduleWhen = when;
+      this.stalledAt = undefined;
+      const offset = this.scheduleOffset;
       const duration = chunk.end - chunk.start;
       if (offset < duration - 1 / 44100) {
         const remaining = duration - offset;
@@ -385,15 +455,13 @@ export class SongPlayer {
           source.onended = () => { this.sources.delete(source); source.disconnect(); };
           this.sources.add(source);
           source.start(when, offset, playable);
+          if (this.state.status === 'starting') this.publish({ status: 'playing', error: undefined });
         }
       }
       this.scheduleWhen += duration - this.scheduleOffset;
 
       this.scheduleIndex = (index + 1) % this.chunks.length;
       this.scheduleOffset = 0;
-      const next = this.scheduleIndex;
-      void this.ensureChunk(next, performance, song, signal, revision, () => 1).catch(() => {});
-
     }
   }
 
@@ -401,9 +469,31 @@ export class SongPlayer {
     return !this.disposed && this.wantsPlayback && generation === this.playbackGeneration && revision === this.revision;
   }
 
+  private async prepareStartReserve(performance: Performance, song: Sheet, signal: AbortSignal, revision: number, request: number) {
+    const rate = this.renderedAudioSeconds ? this.renderMs / (this.renderedAudioSeconds * 1000) : 0;
+    const target = Math.min(4, this.loopDuration());
+    // Fast synthesis and already-prepared playback start immediately. A slow
+    // cold mobile render banks a small reserve before starting the audio clock.
+    if (!playbackResources().constrained || rate < .35 || this.preparedAheadSeconds >= target) return false;
+    const position = this.offset;
+    let index = Math.max(0, playbackChunkAt(this.chunks, position));
+    let ahead = this.chunks[index].start - position, waited = false;
+    for (let count = 0; count < this.chunks.length && ahead < target; count++) {
+      if (!this.current(request, revision)) return waited;
+      if (!this.chunkBuffers.has(index)) {
+        waited = true;
+        await this.ensureChunk(index, performance, song, signal, revision, () => 0);
+      }
+      ahead += this.chunks[index].end - this.chunks[index].start;
+      index = (index + 1) % this.chunks.length;
+    }
+    return waited;
+  }
+
   /** Called directly from click/keyboard handlers so resume retains user activation. */
   async play(inputTime?: number): Promise<void> {
     if (this.disposed || !this.song || this.state.status === 'playing') return;
+    if (this.state.status === 'error' && !this.state.performance) this.configure(this.song, true);
     if (!this.wantsPlayback) {
       const enteredAt = performance.now();
       this.playClickedAt = inputTime !== undefined && Number.isFinite(inputTime) && inputTime <= enteredAt && inputTime >= enteredAt - 60_000
@@ -424,8 +514,7 @@ export class SongPlayer {
       this.output!.gain.cancelScheduledValues(this.ctx!.currentTime);
       this.output!.gain.value = 1;
       const resumeStarted = globalThis.performance.now();
-      const resumed = this.ctx!.state === 'running' && !this.suspending ? Promise.resolve() : this.ctx!.resume();
-      await resumed;
+      await this.resumeContext(this.ctx!);
       if (!this.current(request, revision)) return;
       this.recordTiming({ contextResumeMs: globalThis.performance.now() - resumeStarted });
       const compileStarted = globalThis.performance.now();
@@ -439,7 +528,10 @@ export class SongPlayer {
       const index = Math.max(0, playbackChunkAt(this.chunks, this.offset));
       const bufferStarted = globalThis.performance.now(), waitingForBuffer = !this.chunkBuffers.has(index);
       if (waitingForBuffer) await this.ensureChunk(index, performance, song, this.abort!.signal, revision, () => 0);
-      if (this.current(request, revision)) this.recordTiming({ bufferWaitMs: waitingForBuffer ? globalThis.performance.now() - bufferStarted : 0 });
+      if (!this.current(request, revision)) return;
+      const waitingForReserve = await this.prepareStartReserve(performance, song, this.abort!.signal, revision, request);
+      if (this.current(request, revision)) this.recordTiming({ bufferWaitMs: waitingForBuffer || waitingForReserve
+        ? globalThis.performance.now() - bufferStarted : 0 });
       if (!this.current(request, revision)) return;
       if (this.ctx!.state !== 'running') throw new Error('Audio is suspended. Press Play to resume.');
       this.startSourcesAt(this.offset);
@@ -465,7 +557,8 @@ export class SongPlayer {
     if (!this.wantsPlayback || !this.ctx || !this.state.performance) return this.offset;
     if (!this.transportStarted) return this.offset;
     const duration = this.loopDuration();
-    const absolute = this.anchorPosition + Math.max(0, this.ctx.currentTime - this.anchorContextTime);
+    const clock = Math.min(this.ctx.currentTime, this.stalledAt ?? this.scheduleWhen);
+    const absolute = this.anchorPosition + Math.max(0, clock - this.anchorContextTime);
     return duration > 0 ? absolute % duration : 0;
   }
 
@@ -475,6 +568,12 @@ export class SongPlayer {
     const duration = this.state.performance ? this.loopDuration() : Infinity;
     this.offset = Math.max(0, Math.min(Math.max(0, duration - 1 / 44100), seconds));
     if (!this.scrubbing && this.wantsPlayback && this.state.performance && this.song && this.chunks.length) {
+      if (this.ctx?.state !== 'running') {
+        // A Play still awaiting resume will consume this latest offset. A seek
+        // must not cancel that resume and schedule into a suspended context.
+        this.onPosition(this.offset);
+        return;
+      }
       this.playClickedAt = performance.now();
       if (this.diagnostics) this.publish({ playbackTiming: {}, outputLatencyMs: undefined });
       this.publish({ status: 'starting', audioStartMs: undefined });
@@ -484,11 +583,13 @@ export class SongPlayer {
       const perf = this.state.performance;
       const song = this.song;
       const index = Math.max(0, playbackChunkAt(this.chunks, this.offset));
-      const begin = () => {
+      const begin = async () => {
+        if (!this.current(request, revision)) return;
+        await this.prepareStartReserve(perf, song, this.abort!.signal, revision, request);
         if (!this.current(request, revision)) return;
         this.beginChunkPlayback(this.offset, revision);
       };
-      if (this.chunkBuffers.has(index)) begin();
+      if (this.chunkBuffers.has(index)) void begin().catch(error => { if (this.current(request, revision)) this.fail(error); });
       else void this.ensureChunk(index, perf, song, this.abort!.signal, revision, () => 0).then(begin)
         .catch(error => { if (this.current(request, revision)) this.fail(error); });
     } else if (!this.scrubbing && this.state.performance && this.song && this.chunks.length) {
@@ -580,7 +681,7 @@ export class SongPlayer {
   private animate() {
     if (!this.wantsPlayback || this.disposed) return;
     this.observeSignal();
-    if (this.state.status === 'starting' && this.transportStarted && this.ctx!.currentTime >= this.anchorContextTime) {
+    if (this.state.status === 'starting' && this.stalledAt === undefined && this.transportStarted && this.ctx!.currentTime >= this.anchorContextTime) {
       this.publish({ status: 'playing', error: undefined });
     }
     this.offset = this.position();
@@ -589,6 +690,7 @@ export class SongPlayer {
   }
 
   private haltSources(immediate = false) {
+    this.cancelResume?.();
     this.playbackGeneration++;
     if (this.schedulerTimer !== undefined) clearInterval(this.schedulerTimer);
     this.schedulerTimer = undefined;
@@ -613,6 +715,8 @@ export class SongPlayer {
     if (!fade) gain?.disconnect();
     this.mixOutput = undefined;
     this.waitingForSignal = false;
+    this.transportStarted = false;
+    this.stalledAt = undefined;
     this.pump = undefined;
     this.pumpGeneration = -1;
   }

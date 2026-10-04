@@ -11,7 +11,9 @@ export const guacharaca: InstrumentDef = {
   },
   voicing: "unpitched",
   elementaryModel: 17,
-  makeupGain: 23.683,
+  // Keep this scraper near the level of the guiro/dikanza family. The old
+  // 23.7x boost overloaded the isolated stem before the ensemble master.
+  makeupGain: 10.5,
   polyphony: 8,
   note: "Cane or tin scraper rubbed with wire fork; provides the driving metallic scraping rhythm in vallenato and cumbia",
   acousticProfile: {
@@ -26,7 +28,7 @@ export const guacharaca: InstrumentDef = {
     ring: 0.5
   },
   luthierPhysics: {
-    category: "membrane_tension_2d",
+    category: "scraped_friction",
     materialDensity: 0.7,
     tension: 0.8,
     bodyResonanceVolume: 1.2,

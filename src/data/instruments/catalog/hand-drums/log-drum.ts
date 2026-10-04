@@ -26,7 +26,7 @@ export const log_drum: InstrumentDef = {
     ring: 0.5
   },
   luthierPhysics: {
-    category: "membrane_tension_2d",
+    category: "resonator_struck_metal_wood",
     materialDensity: 0.5,
     tension: 0.6,
     bodyResonanceVolume: 14,

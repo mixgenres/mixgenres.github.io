@@ -26,7 +26,7 @@ export const guiro: InstrumentDef = {
     ring: 0.5
   },
   luthierPhysics: {
-    category: "membrane_tension_2d",
+    category: "scraped_friction",
     materialDensity: 0.7,
     tension: 0.8,
     bodyResonanceVolume: 1,

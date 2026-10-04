@@ -25,7 +25,7 @@ export const shaker: InstrumentDef = {
     ring: 0.5
   },
   luthierPhysics: {
-    category: "membrane_tension_2d",
+    category: "body_impact",
     materialDensity: 0.4,
     tension: 0.8,
     bodyResonanceVolume: 0.5,

@@ -43,6 +43,8 @@ export interface Mp3RenderOptions {
   sectionStems?: boolean;
   /** Playback may stop section synthesis at its requested window's end. */
   boundedStems?: boolean;
+  /** Internal: prepare reusable outgoing tails when transport has a reserve. */
+  stemLookaheadSeconds?: number;
   /** Limit PCM output without changing note holds, releases or DSP state. */
   maxDurationSeconds?: number;
   /** Internal raw-section optimization: advance DSP normally, retain only this suffix. */
@@ -232,7 +234,7 @@ async function renderPerformance(
       }
 
       // Check aggressive PCM stem cache (Tier 2 Performance Cell fingerprint)
-      const stemFingerprint = computeTrackStemFingerprint(
+      const stemFingerprint = !prepared && options.cacheDSPStem !== false ? computeTrackStemFingerprint(
         trackId,
         instrumentId,
         params,
@@ -240,7 +242,7 @@ async function renderPerformance(
         trackNotes,
         trackCCs,
         sampleRate,
-      );
+      ) : '';
 
       const cacheKey = `${stemFingerprint}:${trackStartSample}:${trackSamples}:${outputStartSample}:v10`;
       if (prepared && prepared.sampleRate !== sampleRate) throw new Error('Prepared stem sample rate does not match the mix.');

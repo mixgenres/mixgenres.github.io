@@ -112,6 +112,7 @@ test('Play waits for its current chunk without requiring the whole song to be pr
   const prepared=new Promise<any>(resolve=>{finish=resolve;});
   player.song={tracks:[]}; player.state.performance={notes:[{}],duration:2,tail:0};
   player.chunks=[{index:0,start:0,end:1},{index:1,start:1,end:2}]; player.abort=new AbortController();
+  player.output={gain:{value:1,cancelScheduledValues(){}}};
   player.ctx={state:'running',currentTime:0}; player.ensureContext=()=>{}; player.compiling=Promise.resolve();
   player.startSourcesAt=()=>{}; player.beginChunkPlayback=()=>{starts++;};
   player.ensureChunk=(index:number)=>{assert.equal(index,0);requests++;return prepared;};

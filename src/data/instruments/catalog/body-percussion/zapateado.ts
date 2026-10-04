@@ -28,7 +28,7 @@ export const zapateado: InstrumentDef = {
     ring: 0.5
   },
   luthierPhysics: {
-    category: "resonator_struck_metal_wood",
+    category: "body_impact",
     materialDensity: 0.75,
     tension: 0.82,
     bodyResonanceVolume: 1.2,

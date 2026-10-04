@@ -45,11 +45,15 @@ for (const style of ALL_STYLES) {
       check(selection !== 'silent' && measure.patternByTrack?.[track.id] !== 'silent', 'silent-attack', id, `Bar ${note.bar + 1}: rest acquired an attack`);
       if (note.authoredTechnique) {
         const detail = measure.patternDetailsByTrack?.[track.id];
-        const index = Number(note.attackId!.split(':').at(-1));
-        const technique = detail?.articulations?.[index] ?? detail?.articulation;
+        // The interpreted score is the authoritative source for technique.
+        // Pattern details only exist for some authored cells and their array
+        // index is not the attack index after score expansion/phrase repeats.
+        const written = score.notes.find(source => source.trackId === track.id && source.bar === note.bar &&
+          (source.id === note.attackId || source.playback?.attackId === note.attackId || source.playback?.notationEventId === note.attackId));
+        const technique = written?.technique ?? detail?.articulation;
         // Authored solo development may use a specifically requested ornament.
         const solo = song.regions.find(r => r.id === bar.regionId)?.solo;
-        check(Boolean(solo?.trackIds.includes(track.id)) || GESTURE_NAMES[note.gestureCode] === technique,
+        check(Boolean(solo?.trackIds.includes(track.id)) || !technique || GESTURE_NAMES[note.gestureCode] === technique,
           'technique-substitution', id, `Bar ${note.bar + 1}: ${technique} became ${GESTURE_NAMES[note.gestureCode]}`);
       }
     }

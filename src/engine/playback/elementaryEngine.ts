@@ -330,15 +330,27 @@ export function renderVoice(
       ? (/cerrar|closing|close|push|pushing|down/.test(directionText) ? bisonoric.closing.pressure : bisonoric.opening.pressure)
       : 1;
     const modeSignals: Node[] = [];
+    // Unpitched instruments still have resonances, but their modes belong to
+    // the object or membrane. They must not be retuned from the score's MIDI
+    // pitch (often just a notation key for a scraper, clap, or drum component).
+    const scorePitchDrivesResonators = ctx.voice.mechanics?.pitchIdentity !== 'unpitched';
 
     // Apply coupled resonators if not owned by bespoke module
     if (!ownedSections.includes('coupledResonators')) {
-      for (let i = 0; i < c.bodyModes.length; i++) {
-        const m = c.bodyModes[i];
-        modeSignals.push(el.mul(
-          m.gain * (0.72 + (physical?.response.bodyCoupling ?? 0.5) * 0.48) * (dialect.body ?? ctx.genreDialect.body),
-          el.svf({ mode: "bandpass" }, Math.min(19000, Math.max(30, ctx.freq * m.ratio * (1 + (physical?.response.inharmonicity ?? 0) * i * 0.006))), Math.max(0.6, m.q * (0.72 + (physical?.response.resonatorQ ?? 0.5) * 0.42)), rawAudio)
-        ));
+      if (scorePitchDrivesResonators) {
+        for (let i = 0; i < c.bodyModes.length; i++) {
+          const m = c.bodyModes[i];
+          modeSignals.push(el.mul(
+            m.gain * (0.72 + (physical?.response.bodyCoupling ?? 0.5) * 0.48) * (dialect.body ?? ctx.genreDialect.body),
+            el.svf({ mode: "bandpass" }, Math.min(19000, Math.max(30, m.frequencyHz ?? ctx.freq * m.ratio * (1 + (physical?.response.inharmonicity ?? 0) * i * 0.006))), Math.max(0.6, m.q * (0.72 + (physical?.response.resonatorQ ?? 0.5) * 0.42)), rawAudio)
+          ));
+        }
+      } else {
+        // Absolute modes describe a measured/fixed body resonance and remain
+        // valid for an unpitched source; ratio-only modes are score-pitch driven.
+        for (const mode of c.bodyModes.filter(mode => mode.frequencyHz !== undefined)) {
+          modeSignals.push(el.mul(mode.gain, el.svf({ mode: 'bandpass' }, mode.frequencyHz!, Math.max(0.6, mode.q), rawAudio)));
+        }
       }
       if (c.soundboard) {
         const sb = c.soundboard;
@@ -349,6 +361,7 @@ export function renderVoice(
       if (c.airModes?.length) {
         for (let i = 0; i < c.airModes.length; i++) {
           const m = c.airModes[i];
+          if (!scorePitchDrivesResonators && m.frequencyHz === undefined) continue;
           const resonanceHz = m.frequencyHz ?? (ctx.freq * m.ratio);
           modeSignals.push(
             el.mul(
@@ -358,7 +371,7 @@ export function renderVoice(
           );
         }
       }
-      if (c.membrane2D) {
+      if (c.membrane2D && scorePitchDrivesResonators) {
         const m = c.membrane2D;
         const center = ap.strikeZoneLocation === "center" || ctx.action === "heel" || ctx.action === "toe";
         const edge = ap.strikeZoneLocation === "edge" || ap.strikeZoneLocation === "rim" || ctx.action === "rim";
@@ -368,7 +381,7 @@ export function renderVoice(
         const circular = el.mul(m.strikeZoneSensitivity * (edge ? 0.34 : 0.12) * (1 - 0.12 * m.damping), el.svf({ mode: "bandpass" }, Math.min(18000, circularFreq), 2.4, rawAudio));
         modeSignals.push(radial, circular);
       }
-      if (c.sympathetic) {
+      if (c.sympathetic && scorePitchDrivesResonators) {
         const s = c.sympathetic;
         const sympatheticNodes = s.ratios.map((ratio, i) =>
           el.mul(s.coupling * (1 / (1 + i * 0.10)) * (s.decayScale ?? 1), el.svf({ mode: "bandpass" }, Math.min(18000, Math.max(30, ctx.freq * ratio)), s.q, rawAudio))

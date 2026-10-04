@@ -41,6 +41,22 @@ export function completedPartAudio(key: string): RenderedPerformanceAudio | unde
   return { sampleRate: 44100, left: ready.left, right: ready.right };
 }
 
+/** A lookahead render can cover later windows of the same physical section.
+ * Search only retained entries; the existing PCM budget owns their lifetime. */
+export function completedPartAudioWindow(key: string, from: number, to: number) {
+  const complete = completedPartAudio(key);
+  if (complete) return { audio: complete, from: 0 };
+  const prefix = `${key}:prefix:`;
+  for (const candidate of audio.keys()) {
+    if (!candidate.startsWith(prefix)) continue;
+    const [end, start] = candidate.slice(prefix.length).split(':from:').map(Number);
+    if (start > from || end < to) continue;
+    const ready = audio.get(candidate)!;
+    if (start + ready.left.length < to) continue;
+    return { audio: { sampleRate: 44100, left: ready.left, right: ready.right }, from: start };
+  }
+}
+
 /** Share work between consumers; only the final cancellation aborts synthesis. */
 export function preparePartAudio(
   key: string,

@@ -6,7 +6,7 @@ The local recordings reveal substantial differences between the generated studie
 
 ```sh
 # One file, including names with spaces and accents:
-./remove.sh 'Aníbal Troilo - Quejas de Bandoneón.mp3'
+./removeVoiceFromMp3.sh 'Aníbal Troilo - Quejas de Bandoneón.mp3'
 # Inspect availability without separating audio:
 node --import tsx scripts/prepare-reference-samples.ts
 # Separate only the catalog's default reference in each genre:
@@ -21,7 +21,7 @@ node --import tsx scripts/validate-default-reference-audio.ts \
 node --import tsx scripts/validate-default-reference-audio.ts --resume --phase=validated
 ```
 
-`remove.sh` preserves batch operation and adds one-file input, explicit device selection, output directory selection and forced regeneration. Each invocation owns its scratch directory. Outputs are encoded to a temporary file and moved into place when complete; existing outputs must contain an audio stream before they are reused. MPS inference requires the existing native Apple Silicon environment; the comparison itself uses NumPy and ffmpeg.
+`removeVoiceFromMp3.sh` preserves batch operation and adds one-file input, explicit device selection, output directory selection and forced regeneration. Each invocation owns its scratch directory. Outputs are encoded to a temporary file and moved into place when complete; existing outputs must contain an audio stream before they are reused. MPS inference requires the existing native Apple Silicon environment; the comparison itself uses NumPy and ffmpeg.
 
 The preparation manifest matches the canonical style's default reference by normalized artist and title, including diacritics. It does not substitute another recording when a match is absent or ambiguous. It records failures and continues to the next genre. Separation logs are in `audit/reference-separation/`. Comparisons, render diagnostics and review clips are in `audit/reference-comparison/`.
 

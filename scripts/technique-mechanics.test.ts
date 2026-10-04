@@ -15,6 +15,7 @@ import type { PerfNote, Performance } from '../src/engine/band/performanceData';
 import type { PatternEvent } from '../src/data/schema';
 import { INSTRUMENT_PERFORMANCE_PROFILES } from '../src/data/performance/instrumentPerformanceProfiles';
 import { PATTERNS_BY_ID } from '../src/data/genres';
+import { INSTRUMENTS_BY_ID } from '../src/engine/lookup/instruments';
 import type { MusicalPattern } from '../src/types';
 
 const gesture = (instrument: string, technique: string, source?: string) => resolveRenderGesture(instrument, codeForGesture(technique), source);
@@ -91,6 +92,45 @@ test('body/tambor/chicharra/strappata audio graphs do not use the harmony pitch 
     assert.ok(graph.length > 10);
     assert.ok(graph.every(n => !String(n.props?.key ?? '').endsWith('_freq')), `${instrument}/${technique} must not transpose with the chord`);
   }
+});
+
+test('unpitched scraper bodies keep fixed resonances and use a friction source', () => {
+  for (const id of ['guacharaca', 'guiro', 'dikanza', 'cabasa', 'washboard']) {
+    const def = INSTRUMENTS_BY_ID[id];
+    assert.ok(def, `${id} is represented in the instrument catalog`);
+    assert.equal(def.luthierPhysics?.category, 'scraped_friction', `${id} uses a frictional source`);
+    assert.equal(def.dspProfile?.familyModel, 'scrape', `${id} is not modeled as a membrane/struck note`);
+  }
+  for (const id of ['shaker', 'maracas']) {
+    assert.equal(INSTRUMENTS_BY_ID[id]?.luthierPhysics?.category, 'body_impact');
+    assert.equal(INSTRUMENTS_BY_ID[id]?.dspProfile?.familyModel, 'shaker');
+  }
+  const def = INSTRUMENTS_BY_ID.guacharaca;
+  assert.ok(def);
+  const params = resolveTrackSound('guacharaca', 'latin', 'latin-cumbia');
+  const graphAt = (midi: number) => {
+    const voice = prepareNoteVoice(note('accent', midi), params, 'latin', 'latin-cumbia'); voice.gate = 1;
+    return nodes(renderVoice('scraper', 0, voice, params)).map(node => node.props);
+  };
+  assert.equal(def.dspProfile?.familyModel, 'scrape');
+  assert.equal(def.luthierPhysics?.category, 'scraped_friction');
+  assert.deepEqual(graphAt(60), graphAt(72), 'notation MIDI must not tune an unpitched scraper body');
+});
+
+test('physical categories resolve to the source mechanism across idiophones and regional aliases', () => {
+  for (const id of ['bones', 'gongs', 'cowbell', 'agogo', 'claves', 'triangle', 'tambourine', 'castanets', 'kane', 'zapateado', 'qraqeb', 'foot-stomp', 'hand-percussion', 'palmas']) {
+    const def = INSTRUMENTS_BY_ID[id];
+    assert.ok(def, `${id} is represented in the instrument catalog`);
+    assert.equal(def.dspProfile?.familyModel, 'impact', `${id} uses a struck/body-contact source`);
+  }
+  for (const id of ['frame-drum', 'riq']) {
+    const def = INSTRUMENTS_BY_ID[id];
+    assert.equal(def?.luthierPhysics?.category, 'membrane_tension_2d', `${id} has a real tensioned head`);
+    assert.equal(def?.dspProfile?.familyModel, 'membrane');
+  }
+  const logDrum = INSTRUMENTS_BY_ID['log-drum'];
+  assert.equal(logDrum?.luthierPhysics?.category, 'resonator_struck_metal_wood');
+  assert.equal(logDrum?.dspProfile?.familyModel, 'mallet');
 });
 
 test('arco is held, pizzicato decays, and palm muting shortens physical string decay', () => {

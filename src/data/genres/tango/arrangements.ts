@@ -18,7 +18,7 @@ function line(instrument: string, name: string, onsets: number[], degrees: numbe
 const four = [0, 1, 2, 3];
 const marcato = (instrument: string, accents = [1, .68, .92, .68]) => cell('Marcato en cuatro', 'harmony', instrument,
   four, [.42, .28, .42, .28], 'marcato', four.map(() => chord), accents);
-const bass = (onsets = four, durations = [.5, .35, .5, .35], degrees = [1, 5, 1, 5], instrument = 'upright-bass') =>
+const bass = (onsets = four, durations = [.32, .28, .32, .28], degrees = [1, 5, 1, 5], instrument = 'upright-bass') =>
   cell('Root and fifth pulse', 'bass', instrument, onsets, durations, 'pizzicato', degrees.map(degree => pitch(degree, 40)), [1, .72, .92, .72]);
 const habanera = (instrument: string, role: string) => cell('Habanera dotted eighth–sixteenth–eighth–eighth', role, instrument,
   [0, .75, 1, 1.5], [.62, .18, .35, .35], instrument === 'upright-bass' ? 'pizzicato' : 'staccato',
@@ -76,7 +76,17 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
       { ...bass([0, 1.5, 3], [.9, .6, .7], [1, 5, 1], 'synth'), articulation: 'staccato' }, ...style.cells.filter(c => c.role === 'percussion' && !c.phraseEnd)];
     else if (id === 'chacarera-crossover') accompaniment = [cell('Guitar hemiola against compound bombo', 'harmony', 'guitar', [0, 1, 2], [.4, .4, .4], 'staccato', [chord, chord, chord]),
       { ...bass([0, 1.5], [.7, .7], [1, 5], 'bass'), articulation: 'staccato' }, cell('Bombo compound pulse and cross-accent', 'percussion', 'bombo-leguero', [0, .5, 1, 1.5, 2, 2.5], [.15, .15, .15, .15, .15, .15], 'accent', undefined, [1, .45, .8, 1, .8, .45])];
-    else accompaniment = [marcato('piano', id === 'darienzo' ? [1, .88, .95, .88] : undefined), bass()];
+    else accompaniment = [marcato('piano', id === 'darienzo' ? [1, .9, 1, .9] : id === 'golden-age' ? [1, .62, .94, .62] : undefined), bass()];
+    if (['golden-age', 'guardia-nueva-de-caro', 'canaro', 'darienzo', 'di-sarli', 'troilo', 'modern-orquesta'].includes(id)) {
+      // Keep the piano's marcato downbeats crisp while a picked/arco bass
+      // articulates the beat instead of only reinforcing half-note anchors.
+      const low = accompaniment.find(c => c.role === 'bass' && c.instruments?.[0] === 'upright-bass');
+      if (low && id !== 'pugliese') {
+        low.onsets = [0, 1, 2, 3]; low.durations = [.3, .25, .3, .25];
+        low.pitches = [1, 5, 1, 5].map(degree => pitch(degree, 40));
+        low.accents = [1, .58, .9, .62];
+      }
+    }
     const techniques = { ...style.instrumentTechniques, piano: [...new Set([...(style.instrumentTechniques.piano ?? []), 'yumba'])] };
     const dialects = { ...style.instrumentDialects };
     if (dialects['piano:harmony']) dialects['piano:harmony'] = { ...dialects['piano:harmony'], allowedTechniques: techniques.piano };

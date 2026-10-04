@@ -25,7 +25,7 @@ export const maracas: InstrumentDef = {
     ring: 0.5
   },
   luthierPhysics: {
-    category: "membrane_tension_2d",
+    category: "body_impact",
     materialDensity: 0.5,
     tension: 0.7,
     bodyResonanceVolume: 0.6,

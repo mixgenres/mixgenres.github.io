@@ -26,6 +26,7 @@ export default class GuitarModule implements InstrumentModule {
 
     const instId = (params.instrumentId ?? '').toLowerCase();
     const isTango = TANGO_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
+    const isFlamenco = /flamenco/.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`.toLowerCase());
     const isKizomba = KIZOMBA_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const isReggaeton = REGGAETON_PATTERN.test(`${params.genreId ?? ''} ${params.dialect ?? ''}`);
     const acousticSetup = params.variantId === 'nylon' || params.variantId === 'steel-acoustic';
@@ -243,6 +244,7 @@ export default class GuitarModule implements InstrumentModule {
 
     const filterCutoff = Math.min(19000,
       isTangoAcoustic ? 6200 + b * 4200
+      : isFlamenco ? 5200 + b * 4800
       : physical?.system === 'fretted-lute-with-sympathetics' ? 8500 + b * 6500
       : physical?.system === 'long-zither' ? 8200 + b * 7000
       : physical?.system === 'multi-string-bridge-zither' ? 8800 + b * 6200

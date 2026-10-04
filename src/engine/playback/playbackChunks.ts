@@ -87,19 +87,24 @@ export function playbackChunkAt(chunks: PlaybackChunk[], seconds: number): numbe
 /** Keep transport allocations bounded even in very slow meters/long releases.
  * DSP attack ownership still uses the original bar-aligned sections above. */
 export function planTransportChunks(performance: Performance): PlaybackChunk[] {
-  return planPlaybackChunks(performance).flatMap(chunk => {
-    // Keep the opening prefix short; subsequent four-second chunks avoid
-    // repeatedly synthesizing overlapping prefixes of the same DSP section.
-    const first = Math.round(chunk.start * SAMPLE_RATE), last = Math.round(chunk.end * SAMPLE_RATE);
-    const parts: PlaybackChunk[] = [];
-    for (let frame = first; frame < last;) {
-      const maxFrames = (frame === 0 ? 2 : 4) * SAMPLE_RATE;
-      const endFrame = Math.min(frame + maxFrames, last);
-      const start = frame / SAMPLE_RATE, end = endFrame / SAMPLE_RATE;
-      parts.push({ ...chunk, id: `${chunk.id}:${frame}`, start, end,
-        renderStart: Math.max(0, start - PRE_ROLL_SECONDS), renderEnd: Math.min(performance.duration + (performance.tail ?? 0), end + POST_ROLL_SECONDS) });
-      frame = endFrame;
-    }
-    return parts;
-  }).map((chunk, index) => ({ ...chunk, index }));
+  const sections = planPlaybackChunks(performance);
+  const last = Math.round(sections.at(-1)!.end * SAMPLE_RATE);
+  const openingFrames = Math.max(1, Math.min(2 * SAMPLE_RATE, Math.round(sections[0].end * SAMPLE_RATE)));
+  const chunks: PlaybackChunk[] = [];
+  let sectionIndex = 0;
+  // Short musical sections need not force another worker/mix round trip.
+  // Only the transport crosses their boundaries; DSP attack ownership above
+  // remains unchanged, including incoming holds and their release tails.
+  for (let frame = 0; frame < last;) {
+    while (sections[sectionIndex].end * SAMPLE_RATE <= frame && sectionIndex < sections.length - 1) sectionIndex++;
+    const section = sections[sectionIndex];
+    const endFrame = Math.min(frame + (frame === 0 ? openingFrames : 4 * SAMPLE_RATE), last);
+    const start = frame / SAMPLE_RATE, end = endFrame / SAMPLE_RATE;
+    const finalBar = performance.bars.filter(bar => bar.start < end).at(-1);
+    chunks.push({ ...section, index: chunks.length, id: `transport:${frame}`, start, end,
+      endBar: finalBar?.index ?? section.endBar,
+      renderStart: Math.max(0, start - PRE_ROLL_SECONDS), renderEnd: Math.min(last / SAMPLE_RATE, end + POST_ROLL_SECONDS) });
+    frame = endFrame;
+  }
+  return chunks;
 }
