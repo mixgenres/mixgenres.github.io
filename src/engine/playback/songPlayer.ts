@@ -1,12 +1,12 @@
 import { checkAbort } from '../../export/audioEncoding';
 import type { Sheet } from '../sheet/sheet';
 import type { Performance } from '../band/performanceData';
-import { renderSongMix } from './renderSongMix';
+import { renderSongMix, songMixOptions } from './renderSongMix';
 import { playbackResources } from './playbackResources';
 import { compilePerformance, releaseCompilerWorker } from './compilePerformance';
 import { type RenderedPerformanceAudio } from './mp3Export';
 import { planTransportChunks, playbackChunkAt, type PlaybackChunk } from './playbackChunks';
-import { releasePlaybackWorkers, warmPlaybackWorkers } from './renderPlaybackPart';
+import { preparePlaybackDSPCache, releasePlaybackWorkers, warmPlaybackWorkers } from './renderPlaybackPart';
 
 export type PlayerStatus = 'idle' | 'compiling' | 'ready' | 'rendering' | 'starting' | 'playing' | 'seeking' | 'paused' | 'error';
 export interface PlaybackTiming {
@@ -61,6 +61,8 @@ export class SongPlayer {
   private chunkBuffers = new Map<number, AudioBuffer>();
   private chunkJobs = new Map<number, Promise<AudioBuffer>>();
   private warming?: { revision: number; promise: Promise<void> };
+  private backgroundAbort?: AbortController;
+  private backgroundKey = '';
   private sources = new Set<AudioBufferSourceNode>();
   private anchorContextTime = 0;
   private anchorPosition = 0;
@@ -157,7 +159,13 @@ export class SongPlayer {
       delete musical.volume; delete musical.pan; delete musical.solo; delete musical.muted;
       return musical;
     }) });
-    const retainedPerformance = !force && compositionKey === this.compositionKey ? this.state.performance : undefined;
+    const physicalChanged = compositionKey !== this.compositionKey;
+    const retainedPerformance = !force && !physicalChanged ? this.state.performance : undefined;
+    if (physicalChanged) {
+      this.backgroundAbort?.abort();
+      this.backgroundAbort = undefined;
+      this.backgroundKey = '';
+    }
     this.compositionKey = compositionKey;
     this.offset = this.position();
     this.haltSources();
@@ -189,8 +197,23 @@ export class SongPlayer {
       try { this.ensureContext(); } catch { /* Play surfaces browser capability errors. */ }
       warmPlaybackWorkers();
       this.warmChunks(performance, song, signal, revision);
+      this.warmPersistentDSP(performance, song, compositionKey);
       if (this.wantsPlayback && !this.scrubbing && this.pendingPlay?.revision !== revision) void this.play();
     }).catch(error => { if (!signal.aborted && revision === this.revision) this.fail(error); });
+  }
+
+  /** Physical compilation survives mixer-only UI revisions. A musical edit
+   * cancels it immediately and starts a new content-addressed walk once the
+   * replacement Performance is ready. */
+  private warmPersistentDSP(performance: Performance, song: Sheet, compositionKey: string) {
+    if (this.backgroundKey === compositionKey && this.backgroundAbort && !this.backgroundAbort.signal.aborted) return;
+    this.backgroundAbort?.abort();
+    const controller = new AbortController();
+    this.backgroundAbort = controller;
+    this.backgroundKey = compositionKey;
+    void preparePlaybackDSPCache(performance, { ...songMixOptions(song), signal: controller.signal }, () => this.position()).catch(error => {
+      if (!controller.signal.aborted && !this.disposed) console.warn('Background DSP cache warmup failed', error);
+    });
   }
 
   private ensureContext() {
@@ -733,6 +756,7 @@ export class SongPlayer {
     this.wantsPlayback = false;
     ++this.revision; ++this.playRequest;
     this.abort?.abort();
+    this.backgroundAbort?.abort();
     this.haltSources();
     releasePlaybackWorkers();
     releaseCompilerWorker();

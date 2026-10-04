@@ -698,7 +698,8 @@ export default function App() {
         {showDevAudio && <output aria-label="Playback diagnostics" className="block text-xs tabular-nums -mt-3 mb-5">
           {playerStatus} · {Math.round(playerState.progress*100)}% · {playerRef.current?.preparedAheadSeconds.toFixed(1) ?? '0'}s ahead
           {playerState.audioStartMs !== undefined && <> · click to signal {playerState.audioStartMs.toFixed(1)}ms · output latency estimate {playerState.outputLatencyMs?.toFixed(1)}ms</>}
-          {' · '}{(preparedAudioStats().bytes/1024/1024).toFixed(1)} MB cached · {preparedAudioStats().hits} hits / {preparedAudioStats().misses} misses
+          {' · '}{(preparedAudioStats().bytes/1024/1024).toFixed(1)} MB RAM / {(preparedAudioStats().persistent.bytes/1024/1024).toFixed(1)} MB disk
+          {' · '}{preparedAudioStats().hits} RAM hits / {preparedAudioStats().persistent.hits} disk hits
         </output>}
 
         {/* ---- 3. SECTION HEADING & CHORDS (Spacious & Refined) ------------ */}

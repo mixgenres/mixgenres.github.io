@@ -2,7 +2,8 @@ import { playbackResources } from './playbackResources';
 import type { Mp3RenderOptions, RenderedPerformanceAudio } from './mp3Export';
 import type { Sheet } from '../sheet/sheet';
 import type { Performance } from '../band/performanceData';
-import { preparedAudioKey, preparePartAudio, completedPartAudioWindow } from '../cache/preparedAudio';
+import { preparedAudioKey, preparePartAudio, preparePersistentPartAudio, completedPartAudio, completedPartAudioWindow } from '../cache/preparedAudio';
+import { hasPersistentPreparedAudio, persistentPreparedAudioAvailable } from '../cache/persistentPreparedAudio';
 import { planDSPSectionsWithTail, assembleDSPSections } from './dspSectionPlan';
 import { preparedNoteLifetimes } from './preparedNoteLifetimes';
 
@@ -72,7 +73,7 @@ export async function renderPlaybackPart(performance: Performance, options: Mp3R
           const from = options.boundedStems && options.sectionStems && options.renderWindow
             ? Math.max(0,Math.floor(options.renderWindow.start*44100)-section.startSample) : 0;
           const complete = requestedFrames === undefined ? undefined
-            : completedPartAudioWindow(section.key, from, Math.min(requestedFrames, Math.ceil(section.performance.duration * 44100)));
+            : await completedPartAudioWindow(section.key, from, Math.min(requestedFrames, Math.ceil(section.performance.duration * 44100)), signal);
           // Current audio stays minimal for fast starts. Once transport has a
           // reserve, complete nearby tails so later windows reuse their physics
           // rather than repeatedly synthesizing from the original attack.
@@ -82,10 +83,12 @@ export async function renderPlaybackPart(performance: Performance, options: Mp3R
           const bounded = seconds !== undefined && seconds < section.performance.duration;
           const cropped = bounded || from > 0;
           const sectionKey = cropped ? `${section.key}:prefix:${frames}:from:${from}` : section.key;
-          const result = complete?.audio ??
-            await preparePartAudio(sectionKey, signal, sectionSignal =>
-              renderUncachedPart(section.performance, { ...rawOptions, renderWindow: undefined,
-                maxDurationSeconds: bounded ? seconds : undefined, rawOutputStartSample:from, signal: sectionSignal }));
+          const renderSection = (sectionSignal: AbortSignal) =>
+            renderUncachedPart(section.performance, { ...rawOptions, renderWindow: undefined,
+              maxDurationSeconds: bounded ? seconds : undefined, rawOutputStartSample:from, signal: sectionSignal });
+          const result = complete?.audio ?? await (cropped
+            ? preparePartAudio(sectionKey, signal, renderSection)
+            : preparePersistentPartAudio(sectionKey, signal, renderSection));
           onProgress?.(++completed/sections.length);
           return {audio:result,startSample:section.startSample+(complete ? complete.from : from)};
         }));
@@ -94,9 +97,50 @@ export async function renderPlaybackPart(performance: Performance, options: Mp3R
         return assembleDSPSections(performance, sections, audio.map(section=>section.audio));
       }, false);
     }
-    return preparePartAudio(key, options.signal, signal => renderUncachedPart(performance, { ...rawOptions, signal }));
+    return preparePersistentPartAudio(key, options.signal, signal => renderUncachedPart(performance, { ...rawOptions, signal }));
   }
   return renderUncachedPart(performance, options);
+}
+
+/** Low-priority compiler for complete physical DSP sections. It walks forward
+ * from the live playhead, persists results, and keeps at most one background
+ * synthesis job active so foreground playback can own the worker pool. */
+export async function preparePlaybackDSPCache(
+  performance: Performance,
+  options: Mp3RenderOptions,
+  position: () => number = () => 0,
+): Promise<void> {
+  if (typeof Worker === 'undefined' || unavailable || playbackResources().workers <= 1) return;
+  if (!await persistentPreparedAudioAvailable()) return;
+  const signal = options.signal;
+  const trackIds = options.selectedTrackIds ?? [...options.trackInstruments.keys()];
+  const tasks: Array<{ start: number; key: string; performance: Performance; options: Mp3RenderOptions }> = [];
+  for (const trackId of trackIds) {
+    if (signal?.aborted) throw cancelled();
+    const rawOptions: Mp3RenderOptions = { ...options, selectedTrackIds: [trackId], rawStem: true,
+      mixState: undefined, cacheDSPStem: false, renderWindow: undefined, boundedStems: false, sectionStems: false,
+      stemLookaheadSeconds: undefined };
+    const tail = await preparedNoteLifetimes(performance, rawOptions);
+    for (const section of planDSPSectionsWithTail(performance, rawOptions, tail)) {
+      tasks.push({ start: section.startSample / 44100, key: section.key, performance: section.performance, options: rawOptions });
+    }
+  }
+  const duration = Math.max(.001, performance.duration + (performance.tail ?? 0));
+  while (tasks.length) {
+    if (signal?.aborted) throw cancelled();
+    if (unavailable) return;
+    const here = Math.max(0, position()) % duration;
+    let next = 0;
+    let best = Infinity;
+    for (let i = 0; i < tasks.length; i++) {
+      const distance = (tasks[i].start - here + duration) % duration;
+      if (distance < best) { best = distance; next = i; }
+    }
+    const task = tasks.splice(next, 1)[0];
+    if (completedPartAudio(task.key) || await hasPersistentPreparedAudio(task.key)) continue;
+    await preparePersistentPartAudio(task.key, signal, sectionSignal =>
+      renderUncachedPart(task.performance, { ...task.options, signal: sectionSignal, renderPriority: () => 50 }), false);
+  }
 }
 
 /** Explicit teardown for app/player disposal; normal mixes keep helpers warm. */
