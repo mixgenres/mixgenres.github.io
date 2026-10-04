@@ -11,7 +11,7 @@ export const violin: InstrumentDef = {
   elementaryModel: 6,
   makeupGain: 0.26,
   polyphony: 4,
-  note: "Acoustic orchestral, chamber, and folk violin with horsehair-on-rosin stick-slip friction, spruce corpus modes, 3kHz bridge hill presence, spiccato bounce, and tango chicharra techniques",
+  note: "Acoustic orchestral, chamber, and folk violin with estimated bowed source/filter and corpus responses, bridge hill presence, and distinct tango string, afterlength, and body contacts",
   acousticProfile: {
     sustain: "sustained",
     role: "melody",
@@ -45,7 +45,7 @@ export const violin: InstrumentDef = {
     bridgeHillQ: 2.6,
     bridgeHillGain: 0.42
   },
-  physicalTechniques: ["accent", "staccato", "legato", "portato", "tremolo", "pizzicato", "vibrato", "spiccato", "chicharra", "tambor", "latigo", "arco", "detache", "shuffle-bow", "cross-string", "drone-double-stop", "ornamented-slide", "open-string-drone", "short-bow-accent", "double-stop", "folk-vibrato", "bluegrass-run", "celtic-ornament"],
+  physicalTechniques: ["accent", "staccato", "legato", "portato", "tremolo", "pizzicato", "vibrato", "spiccato", "chicharra", "tambor", "golpe-caja", "arrastre", "latigo", "arco", "detache", "shuffle-bow", "cross-string", "drone-double-stop", "ornamented-slide", "open-string-drone", "short-bow-accent", "double-stop", "folk-vibrato", "bluegrass-run", "celtic-ornament"],
   tuningAndMechanics: {
     tuningName: "GDAE Standard Violin Tuning",
     frets: 0,
@@ -104,6 +104,8 @@ export const violin: InstrumentDef = {
       "spiccato",
       "chicharra",
       "tambor",
+      "golpe-caja",
+      "arrastre",
       "latigo",
       "arco",
       "detache"
@@ -115,7 +117,9 @@ export const violin: InstrumentDef = {
       "sul tasto flautando",
       "martelé accented bow",
       "chicharra cricket scrape",
-      "tambor fingerboard snap",
+      "tambor damped G-string pizzicato with finger contact",
+      "golpe-caja palm or knuckle strike on the instrument body",
+      "arrastre bow-energy swell through authored approach notes",
       "látigo whip glissando",
       "sympathetic open string resonance"
     ],
@@ -123,7 +127,7 @@ export const violin: InstrumentDef = {
     genreTechniques: {
       classical: ["arco", "legato", "tremolo", "vibrato", "spiccato", "pizzicato", "detache"],
       orchestral: ["legato", "tremolo", "vibrato", "spiccato", "arco"],
-      tango: ["staccato", "accent", "pizzicato", "chicharra", "tambor", "latigo", "detache"],
+      tango: ["staccato", "accent", "pizzicato", "chicharra", "tambor", "golpe-caja", "arrastre", "latigo", "detache"],
       folk: ["staccato", "pizzicato", "accent", "detache"],
       gypsy: ["vibrato", "latigo", "spiccato", "legato"]
     }
@@ -140,9 +144,9 @@ export const violin: InstrumentDef = {
     },
     signalChain: ["preamp", "eq", "reverb"],
     synthesisNotes: [
-      "Continuous stick-slip Helmholtz motion generates a dynamic sawtooth wave with realistic rosin friction bite.",
-      "Dual corpus body modes (A0 air mode at 280Hz, wood mode at 460Hz, and singing bridge hill at 3.1kHz) deliver genuine acoustic warmth and acoustic presence.",
-      "Faithfully supports tango extended techniques including chicharra tailpiece scrape, látigo whip, tambor snap, and bouncing spiccato."
+      "A saw-based source/filter approximation with bow controls; not a nonlinear stick-slip waveguide.",
+      "Dual corpus body modes (A0 air mode at 280Hz, wood mode at 460Hz, and singing bridge hill at 3.1kHz) provide estimated body coloration; coefficients are not measurement calibrated.",
+      "Approximate tango chicharra afterlength rasp, latigo glissando, tambor damped pizzicato, and separate golpe-caja body percussion."
     ]
   }
 };

@@ -35,6 +35,7 @@ export interface ScoreNote {
   frequencyHz: number;
   velocity: number;
   technique: string;
+  pitchIdentity?: 'pitched' | 'unpitched';
   expression: { offsetSeconds: number; gateRatio: number };
   source: { pitch: 'written' | 'composed'; rhythm: 'written' | 'composed'; technique: 'written' | 'composed'; derived: boolean };
   playback: NotePlayback;
@@ -94,7 +95,7 @@ export function musicianScoreFromArrangement(sheet: Sheet, performance: Performa
     return { id: `${note.attackId ?? `${note.trackId}:${note.bar}`}:${index}`, trackId: note.trackId,
       bar: position.bar, sourceBar: note.bar, position: beatFraction(position.beat), duration: beatFraction(length),
       midi: note.midi, frequencyHz: note.frequencyHz ?? 440 * 2 ** ((note.midi - 69) / 12),
-      velocity: note.vel, technique: GESTURE_NAMES[note.gestureCode] ?? String(note.gestureCode),
+      velocity: note.vel, technique: GESTURE_NAMES[note.gestureCode] ?? String(note.gestureCode), pitchIdentity: note.pitchIdentity,
       expression: { offsetSeconds: note.time - nominalTime, gateRatio: note.dur / nominalDuration },
       source: { pitch: note.authoredPitch ? 'written' : 'composed', rhythm: note.authoredDuration ? 'written' : 'composed',
         technique: note.authoredTechnique ? 'written' : 'composed', derived: note.originCode === 1 }, playback };

@@ -1,4 +1,5 @@
 import { GENRE_WORLDS } from '../data/genres';
+import { genreCategoryId } from '../data/genreCategories';
 
 /**
  * Every world is a printing plate: a coloured stock, a second tone for panels,
@@ -86,10 +87,15 @@ export const PLATES: Record<string, Plate> = Object.fromEntries(
     .sort(([, a], [, b]) => a.short.localeCompare(b.short))
 );
 
+/** One tile per public category; underlying grammar IDs keep their own plates. */
+export const GENRE_PLATES: Record<string, Plate> = Object.fromEntries(
+  Object.entries(PLATES).filter(([id]) => genreCategoryId(id) === id)
+);
+
 export const FALLBACK_PLATE: Plate = PLATES.tango;
 
 export function plateFor(worldId: string): Plate {
-  return PLATES[worldId] ?? FALLBACK_PLATE;
+  return PLATES[genreCategoryId(worldId)] ?? FALLBACK_PLATE;
 }
 
 /** Paint the plate onto the document so CSS variables carry it everywhere. */

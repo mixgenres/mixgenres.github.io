@@ -92,7 +92,7 @@ export const cello: InstrumentDef = {
     },
     arrastre: {
       preBeatOffsetMs: -90,
-      pitchDragSemitones: -2,
+      pitchDragSemitones: 0,
       pressureRamp: true,
       velocityGrowth: 1.8
     }
@@ -111,6 +111,9 @@ export const cello: InstrumentDef = {
       "accent",
       "spiccato",
       "chicharra",
+      "strappata",
+      "tambor",
+      "golpe-caja",
       "detache"
     ],
     techniqueMethods: [
@@ -126,7 +129,7 @@ export const cello: InstrumentDef = {
     playingStyles: ["classical", "tango", "folk", "cinematic", "pop", "chamber"],
     genreTechniques: {
       classical: ["arco", "legato", "tenuto", "pizzicato", "portato", "detache"],
-      tango: ["arrastre", "staccato", "accent", "arco", "chicharra", "detache"],
+      tango: ["arrastre", "staccato", "accent", "arco", "chicharra", "strappata", "tambor", "golpe-caja", "detache"],
       cinematic: ["legato", "tenuto", "tremolo", "vibrato", "arco"],
       folk: ["arco", "pizzicato", "accent", "detache"],
       chamber: ["arco", "legato", "pizzicato", "vibrato"]
@@ -144,9 +147,9 @@ export const cello: InstrumentDef = {
     },
     signalChain: ["preamp", "eq", "reverb"],
     synthesisNotes: [
-      "Heavy wound string stick-slip oscillation captures the authentic settling delay and guttural rasp of lower cello registers.",
-      "Large wooden corpus mode (180Hz) and deep Helmholtz air mode (110Hz) deliver rich, resonant low-end presence.",
-      "Supports lyrical cantabile vibrato, deep tango arrastre dragging scoops, crisp spiccato bouncing, and resonant woody pizzicato."
+      "Estimated bowed source/filter and plucked delay-loop responses, not a nonlinear stick-slip waveguide or measured settling model.",
+      "Estimated large wooden corpus mode (180Hz) and air mode (110Hz) provide low-register coloration.",
+      "Arrastre adds bow energy through authored approach pitches; separate afterlength rasp, strappata bow-bounce, damped pizzicato, and body contacts."
     ]
   }
 };

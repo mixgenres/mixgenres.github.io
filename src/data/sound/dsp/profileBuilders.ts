@@ -523,8 +523,7 @@ export function buildInstrumentDSPProfile(def: InstrumentDef): InstrumentDSPProf
   for (const style of def.techniques.playingStyles ?? []) {
     const key = style.toLowerCase();
     const declared = def.techniques.genreTechniques?.[style] ?? def.techniques.genreTechniques?.[key];
-    const fallback = (def.techniques.techniqueMethods ?? []).slice(0, 4);
-    const articulation = (declared && declared.length ? declared : fallback).map(String);
+    const articulation = (declared ?? def.techniques.techniqueMethods ?? []).map(String);
     if (!profile.genreDialects[key]) profile.genreDialects[key] = {};
     profile.genreDialects[key].articulation = articulation;
   }

@@ -1,6 +1,6 @@
 # Music engine and preparation cache
 
-The song editor compiles four explicit musical layers. `compileSongPipeline` is the entry point; `arrangeBand` remains a compatibility wrapper. The Score panel exposes each layer and exports the complete notation, interpretation, transitions and sound plan.
+The song editor compiles four explicit musical layers. `compileSongPipeline` is the entry point; `arrangeBand` provides the performance projection used by composition callers. The Score panel exposes each layer and exports the complete notation, interpretation, transitions and sound plan.
 
 ```mermaid
 flowchart LR
@@ -27,7 +27,7 @@ Genre and instrument rules live in `data/notation/rules.ts` and instrument defin
 
 `band/interactions.ts` makes relationships such as call/answer, following, mirroring, reinforcing and leaving space explicit. Responses consider actual preceding notes and local harmony; they cannot rewrite literal score pitches. `band/transitions.ts` records the chosen written boundary, chords, tempo, incoming held notes, bellows/button state and authored fill/rest/sustain. Transition fills come from the selected genre's catalog and policies; the planner does not add an arbitrary fill merely because a section ends.
 
-The realized `MusicianScore` contains every final concert pitch, target frequency, velocity, technique and exact written beat. Gate ratios and expressive offsets remain separate. Playback projection makes no further pitch or arrangement choices. MusicXML preserves polyphonic voices, rests, ties, cents and drum identities. Authored TAB is exported when complete; otherwise standard notation is retained. Legacy MIDI and GP5 interchange still have their format-specific quantization and instrument limitations.
+The realized `MusicianScore` contains every final concert pitch, target frequency, velocity, technique and exact written beat. Gate ratios and expressive offsets remain separate. Playback projection makes no further pitch or arrangement choices. MusicXML preserves polyphonic voices, rests, ties, cents and drum identities. Authored TAB is exported when complete; otherwise standard notation is retained. MIDI and GP5 interchange still have their format-specific quantization and instrument limitations.
 
 ## 3. Instrument mechanics and DSP
 
@@ -43,7 +43,7 @@ The current instrument models remain approximations. Separating and caching thei
 
 The browser sums cached section sources, including overlapping tails, into **one continuous offline master**. It does not create one final mix per note or cut the master at section edges. Prepared sections enter directly, avoiding duplicate whole-instrument PCM arrays. Idle render workers release their WASM heaps before the native master allocates buffers.
 
-`SongPlayer.configure` owns preparation after an edit. Play waits for that job and starts one looping `AudioBufferSourceNode`. Pause, resume and seek read that buffer; they never request DSP. The obsolete incremental clip scheduler and its render-on-seek fallback have been removed. A low-latency output context and a short start ramp reduce warm startup delay.
+`SongPlayer.configure` owns preparation after an edit. Play waits for that job and starts one looping `AudioBufferSourceNode`. Pause, resume and seek read that buffer; they never request DSP. A low-latency output context and a short start ramp reduce warm startup delay.
 
 ## Cache dependencies
 
@@ -71,7 +71,7 @@ Prepared PCM is generated from DSP after editing; it is not a distributed SoundF
 
 ## Golden Age comparison
 
-The default study uses four players, 40 bars, 800 final notes and 38 player phrases. Its current form is intro–A–B–A–variación–cierre, lasting 80 seconds before release tails. Caching preserves those musical events and sentences.
+The Golden Age sample and full song have separate forms. Exact player, bar and note counts depend on the selected catalog entry and edits; the benchmark reports the current sample counts. Caching must preserve those musical events and sentences.
 
 The existing Golden Age calibration reference is Aníbal Troilo's **Quejas de bandoneón**. [Todo Tango documents the 27 September 1944 recording](https://www.todotango.com/musica/tema/691/Quejas-de-bandoneon/). [Arranger Korey Ireland describes his work from that recording and orchestra manuscripts](https://www.communitytangoorchestra.org/arrangement/quejas-de-bandoneon/), and highlights its [low-register trio shared between bandoneon and piano, and demanding variation](https://www.communitytangoorchestra.org/arrangements/new-arrangement-quejas-de-bandoneon/).
 

@@ -113,30 +113,16 @@ export function decide(trackId: string, context?: ArrangementContext): Arrangeme
   };
 }
 
-/** Collapse only complete, exact repetitions; preserve the whole harmonic sentence. */
-export function compactDefaultChordLoop(chords: string[], _contract?: WorldContract): string[] {
-  for (let period = 1; period <= chords.length / 2; period++) {
-    if (chords.length % period === 0 && chords.every((chord, i) => chord === chords[i % period])) {
-      return chords.slice(0, period);
-    }
-  }
-  return [...chords];
-}
-
+/** Resolve authored section harmony without shortening repeated sentences. */
 export function progressionForSection(
   sectionProgressions: Record<string, string[]> | undefined,
   formKey: string,
   kind: string,
-  fallback: string[],
-  contract?: WorldContract,
+  recurringCell: string[],
 ): string[] {
-  if (!sectionProgressions) return compactDefaultChordLoop(fallback, contract);
-  const tryKeys = [formKey, kind, kind.replace(/-/g, ''), 'verse'];
-  for (const k of tryKeys) {
-    const found = sectionProgressions[k];
-    if (found && found.length) return compactDefaultChordLoop(found, contract);
-  }
-  return compactDefaultChordLoop(fallback, contract);
+  const selected = sectionProgressions?.[formKey] ?? sectionProgressions?.[kind] ?? recurringCell;
+  if (!selected.length) throw new Error(`No harmony for section ${formKey}`);
+  return [...selected];
 }
 
 export function cadenceFor(kind: string, chords: string[], isLast: boolean): string[] {

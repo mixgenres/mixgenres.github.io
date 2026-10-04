@@ -7,6 +7,7 @@ import { INSTRUMENTS_BY_ID } from '../lookup/instruments';
 export function voiceTailSeconds(params: TrackParams, voice?: VoiceState): number {
   const acoustic = INSTRUMENTS_BY_ID[params.instrumentId ?? '']?.acousticProfile;
   const physical = resolveVoiceParameters(voice ?? { id: 'tail', note: 60, velocity: 1, gate: 0 }, params);
+  if (physical.mechanics?.tailSeconds !== undefined) return Math.max(physical.mechanics.tailSeconds, physical.release * 4);
   const authoredTail = getInstrumentModule(params.instrumentId ?? '').releaseTailSeconds?.(params, voice);
   // Held sources release through their envelope; struck/plucked sources keep
   // resonating after note-off. Use the model's lifetime when available, with a

@@ -150,7 +150,7 @@ export interface PatternVariant {
  * gestures without forcing the pattern onto a fixed 16th-note grid. */
 export interface PatternEvent {
   /** Player-facing directions are retained separately from DSP controls. */
-  notation?: { string?: number; fret?: number; fingering?: string; stroke?: 'up' | 'down'; bowing?: 'up' | 'down'; grace?: boolean; ornament?: string; tuplet?: { actual: number; normal: number }; tieToNext?: boolean };
+  notation?: { string?: number; fret?: number; fingering?: string; stroke?: 'up' | 'down'; bowing?: 'up' | 'down'; bodyTechnique?: 'golpe' | 'golpe-caja'; grace?: boolean; ornament?: string; tuplet?: { actual: number; normal: number }; tieToNext?: boolean };
   /** Absolute MIDI pitches take precedence. Chord-relative register anchors
    * the root; degree retains octaves. Cents offsets are relative to the tuning. */
   pitch?: { midi?: number | number[]; cents?: number; degree?: number; semitoneOffset?: number; register?: number; voicing?: 'single' | 'chord' };

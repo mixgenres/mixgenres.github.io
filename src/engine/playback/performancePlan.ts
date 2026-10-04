@@ -15,7 +15,7 @@ export function prepareNoteVoice(note: PerfNote, params: TrackParams, worldId: s
   const controllerKeys = controllerCCs.flatMap(cc => PHYSICAL_CONTROLLER_KEYS[cc] ? [PHYSICAL_CONTROLLER_KEYS[cc]] : []);
   const soundingParams = soundParams ? { ...soundParams } : params;
   for (const key of controllerKeys) soundingParams[key] = params[key];
-  const rendered = resolveRenderGesture(instrumentId, note.gestureCode);
+  const rendered = resolveRenderGesture(instrumentId, note.gestureCode, soundingParams.excitationType);
   const midi = Math.max(0, Math.min(127, Math.round(note.midi)));
   const vel = Math.max(1, Math.min(127, Math.round(note.vel)));
   const vel01 = vel / 127;
@@ -25,6 +25,8 @@ export function prepareNoteVoice(note: PerfNote, params: TrackParams, worldId: s
   const jitter = (((note.gestureCode * 1103515245 + midi * 12345 + attackSeed) >>> 0) / 0xffffffff) - 0.5;
   return {
     noteDurationSeconds: note.dur,
+    mechanics: rendered.mechanics,
+    bodyAttack: note.bodyAttack ? note.musicianNotation?.bodyTechnique : undefined,
     id: 'prepared', gate: 0, note: midi,
     soundParams, controllerKeys,
     frequencyHz: note.frequencyHz ?? midiToFreq(midi),

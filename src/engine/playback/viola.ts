@@ -2,9 +2,11 @@ import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../sheet/random.ts';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { createDampedStringLoop, fbGainForDecay } from './instrumentLib_stringLoop.ts';
+import { renderBodyStrike, renderMutedString } from './stringPercussion';
 
 export default class ViolaModule implements InstrumentModule {
   id = 'viola';
+  ownedDspSections: InstrumentModule['ownedDspSections'] = ['coupledResonators', 'mechanicalArtifacts'];
 
   renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
@@ -29,12 +31,15 @@ export default class ViolaModule implements InstrumentModule {
     const isLegato = action === 'legato' || action === 'slur';
     const isChicharra = action === 'chicharra' || /chicharra/i.test(action ?? '');
 
+    if (ctx.voice.mechanics?.surface === 'soundboard') return renderBodyStrike(ctx, 'viola');
+    if (ctx.voice.mechanics?.surface === 'muted-string') return renderMutedString(ctx);
+
     if (isChicharra) {
       const scrapeNoise = el.svf({ mode: 'bandpass' }, 3800, 5.5, el.pinknoise());
       const scrapeLfo = el.add(el.const({ value: 0.6 }), el.mul(el.const({ value: 0.4 }), el.blepsaw(el.const({ value: 15 }))));
       const cricketMod = el.mul(scrapeLfo, scrapeNoise);
       const chicharraEnv = el.adsr(0.002, 0.16, 0.2, 0.045, gateSignal);
-      const ring = el.mul(0.15, el.cycle(el.mul(safeFreqSignal, 4.2)));
+      const ring = el.mul(0.15, el.cycle(3800));
       return el.mul(chicharraEnv, el.add(cricketMod, ring));
     }
 
@@ -99,8 +104,8 @@ export default class ViolaModule implements InstrumentModule {
         ? el.adsr(0.0005, 0.018, 0, 0.009, gateSignal)
         : el.adsr(0.028, 0.10, 0.82, 0.052, gateSignal);
 
-      const bowSpeed = el.mul(el.const({ value: params.bowVelocity }), tremoloMod);
-      const bowForce = el.const({ value: params.bowPressure });
+      const bowSpeed = el.mul(el.const({ value: ctx.voice.mechanics?.bowVelocity ?? params.bowVelocity }), tremoloMod);
+      const bowForce = el.const({ value: ctx.voice.mechanics?.bowPressure ?? params.bowPressure });
       
       const rosinCutoff = isSulPonticello ? 3000 : 1100;
       const rosinGrit = isSulPonticello ? 1.50 : 1.08;

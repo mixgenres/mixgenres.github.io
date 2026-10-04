@@ -6,23 +6,13 @@ import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instru
 import { createDampedStringLoop, fbGainForDecay } from './instrumentLib_stringLoop.ts';
 import { resolveVoiceParameters } from './instrumentRegistry';
 import type { TrackParams } from './elementaryEngine';
+import { renderBodyStrike, renderMutedString, renderStrappata } from './stringPercussion';
 
-/**
- * UprightBassModule
- * 
- * Physical synthesis module modeling an authentic 3/4 Acoustic Double Bass:
- * - 42Hz Helmholtz internal air cavity resonance + 65Hz carved spruce top mode + 110Hz back maple mode
- * - Dedicated Tango mechanics:
- *   - Arrastre: Dynamic pre-beat upward pitch drag swelling into downbeat
- *   - Strappata: Violent string snap against the ebony fingerboard with metallic clack and deep body thud
- *   - Lija (Sandpaper): Gritty, over-pressured bow scrape across wound steel strings
- *   - Tambor: Resonant wooden palm/knuckle hit on the lower bout
- *   - Chicharra: High-pitched friction scraping behind the wooden bridge
- *   - Arco: Stick-slip rosin friction modeling with heavy string inertia
- *   - Pizzicato: Deep, warm fingerpad pluck with non-linear damping
- */
+/** Estimated plucked/bowed double-bass source and body response. Bowed tone
+ * uses a source/filter approximation, not a nonlinear bow/string waveguide. */
 export default class UprightBassModule implements InstrumentModule {
   id = 'upright-bass';
+  ownedDspSections: InstrumentModule['ownedDspSections'] = ['coupledResonators', 'mechanicalArtifacts'];
 
   releaseTailSeconds(params: TrackParams): number {
     const physical = resolveVoiceParameters({ id: 'tail', note: 60, velocity: 1, gate: 0 }, params);
@@ -59,42 +49,12 @@ export default class UprightBassModule implements InstrumentModule {
     const gd = ctx.genreDialect;
     const genre = gd.id;
     const isYumba = action === 'yumba' || /yumba/i.test(action ?? '');
-    const isArco = action === 'arco' || action === 'bow' || action === 'bow_drag' || isLija;
+    const isArco = ctx.voice.mechanics?.excitation === 'bow' || action === 'arco' || action === 'bow' || action === 'bow_drag' || isLija || isArrastre;
 
-    // 2. Tambor (Wooden lower bout strike)
-    if (isTambor) {
-      const bodyThud = el.mul(
-        el.cycle(58),
-        el.adsr(0.0005, 0.08, 0, 0.02, gateSignal)
-      );
-      const woodKnock = el.mul(
-        el.svf({ mode: 'bandpass' }, 340, 2.5, el.noise()),
-        el.adsr(0.0002, 0.015, 0, 0.005, gateSignal)
-      );
-      return el.add(el.mul(0.75, bodyThud), el.mul(0.40, woodKnock));
-    }
-
-    // 3. Strappata (Aggressive tango fingerboard snap)
-    if (isStrappata) {
-      const fingerboardClack = el.mul(
-        el.adsr(0.0002, 0.018, 0, 0.008, gateSignal),
-        el.svf({ mode: 'bandpass' }, 1850, 2.6, el.noise())
-      );
-      const subThud = el.mul(
-        el.cycle(el.max(25, el.mul(safeFreqSignal, 0.5))),
-        el.adsr(0.0005, 0.09, 0, 0.03, gateSignal)
-      );
-      const stringTwang = el.mul(
-        el.cycle(safeFreqSignal),
-        el.adsr(0.0008, 0.15, 0, 0.03, gateSignal)
-      );
-      return el.tanh(
-        el.add(
-          el.mul(0.70, fingerboardClack),
-          el.add(el.mul(0.85, subThud), el.mul(0.50, stringTwang))
-        )
-      );
-    }
+    if (ctx.voice.mechanics?.surface === 'soundboard' || action === 'golpe-caja' || action === 'body-tap') return renderBodyStrike(ctx, 'bass');
+    if (isTambor) return renderMutedString(ctx);
+    if (action === 'strappata') return renderStrappata(ctx);
+    if (ctx.voice.mechanics?.surface === 'muted-string') return renderMutedString(ctx);
 
     // 4. Chicharra (Behind bridge scrape)
     if (isChicharra) {
@@ -105,14 +65,9 @@ export default class UprightBassModule implements InstrumentModule {
       return el.add(scratch, el.mul(0.6, bridgeRes));
     }
 
-    // 5. Arrastre Pitch Drag Envelope
-    let activeFreq = safeFreqSignal;
-    if (isArrastre) {
-      const arrastrePitchEnv = el.adsr(0.001, 0.065, 0.0, 0.015, gateSignal);
-      const semitoneDrop = el.mul(arrastrePitchEnv, el.const({ value: -3.0 }));
-      const pitchRatio = el.pow(2, el.div(semitoneDrop, 12));
-      activeFreq = el.mul(safeFreqSignal, pitchRatio);
-    }
+    // Arrastre combines bow energy with the authored approach/target pitches.
+    // A universal three-semitone oscillator scoop invents an unwritten melody.
+    const activeFreq = safeFreqSignal;
 
     // 6. Bowed Double Bass (Arco / Lija)
     if (isArco) {
@@ -122,15 +77,17 @@ export default class UprightBassModule implements InstrumentModule {
       const subO = el.sin(el.mul(2 * Math.PI, el.syncphasor(jitteredFreq, gateSignal)));
       const osc = el.add(el.mul(0.58, rawSaw), el.mul(0.42, subO));
 
-      const effectivePressure = isLija ? 0.95 : Math.max(0.20, params.bowPressure);
+      const effectivePressure = ctx.voice.mechanics?.bowPressure ?? (isLija ? 0.95 : Math.max(0.20, params.bowPressure));
+      const bowSpeed = ctx.voice.mechanics?.bowVelocity ?? params.bowVelocity;
+      const bowEnvelope = el.adsr(isArrastre ? Math.min(.09, (ctx.voice.noteDurationSeconds ?? .2) * .5) : .012, .04, 1, .04, gateSignal);
       const frictionAttackGate = el.adsr(0.002, 0.06, 0.4, 0.04, gateSignal);
       const frictionNoise = el.mul(
         el.mul(effectivePressure * (isLija ? 0.65 : 0.35), frictionAttackGate),
         el.highpass(isLija ? 350 : 550, 1.0, isLija ? el.noise() : el.pinknoise())
       );
-      const rawExcited = el.add(osc, frictionNoise);
+      const rawExcited = el.mul(bowEnvelope, el.add(el.mul(.35 + bowSpeed * .65, osc), frictionNoise));
 
-      // Stick-slip non-linear saturation
+      // Source/filter saturation approximation
       const asymmetry = el.mul(0.20, gateSignal);
       const stickSlip = el.tanh(
         el.add(asymmetry, el.mul(el.add(1.0, el.mul(effectivePressure * 2.6, gateSignal)), rawExcited))
@@ -165,10 +122,17 @@ export default class UprightBassModule implements InstrumentModule {
 
     // Deep string pluck impulse with fleshy fingerpad damping
     const exciteFilter = el.lowpass(el.mul(activeFreq, 3.2), 0.9, el.pinknoise());
-    const impulse = el.mul(
+    let impulse = el.mul(
       el.add(el.mul(0.75, exciteFilter), el.mul(0.25, el.lowpass(1100, 0.8, el.noise()))),
       el.adsr(0.0015, 0.022, 0, 0.008, gateSignal)
     );
+
+    if (isStrappata) {
+      // Upright slap retains the plucked pitch plus fingerboard collision.
+      impulse = el.add(impulse, el.mul(.3, el.mul(el.highpass(1800, .8, el.noise()), el.adsr(.0002, .008, 0, .003, gateSignal))));
+    }
+    const pluckPosition = ctx.voice.mechanics?.pluckPosition ?? params.pluckPosition;
+    impulse = el.sub(impulse, el.delay({ size: 4096 }, el.mul(delayTimeSignal, Math.max(.05, Math.min(.9, pluckPosition))), 0, impulse));
 
     const genreDecayBase = UPRIGHT_BASS_DECAY_RULES.find(rule => rule.pattern.test(genre))?.value ?? 0.55;
     const targetDecaySeconds = isTango

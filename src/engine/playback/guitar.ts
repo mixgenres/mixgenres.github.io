@@ -6,6 +6,7 @@ import { KIZOMBA_PATTERN, REGGAETON_PATTERN, TANGO_PATTERN } from '../../data/so
 import { el } from '@elemaudio/core';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { createDampedStringLoop, fbGainForDecay } from './instrumentLib_stringLoop.ts';
+import { renderBodyStrike, renderMutedString } from './stringPercussion';
 
 export default class GuitarModule implements InstrumentModule {
   id = 'guitar';
@@ -42,14 +43,10 @@ export default class GuitarModule implements InstrumentModule {
     const isCountry = genre === GUITAR_EXACT_GENRE_IDS[5];
     const genreGuitarResponse = GUITAR_GENRE_RESPONSE[genre];
 
-    if (action === 'golpe' || action === 'tap' || action === 'golpe-caja') {
-      const bodyPunch = el.mul(el.cycle(110), el.adsr(0.0005, 0.02, 0, 0.01, gateSignal));
-      const woodClick = el.mul(el.highpass(1400, 1.2, el.noise()), el.adsr(0.0002, 0.008, 0, 0.004, gateSignal));
-      return el.add(el.mul(0.75, bodyPunch), el.mul(0.25, woodClick));
-    }
+    if (voice.mechanics?.surface === 'soundboard' || action === 'golpe' || action === 'tap' || action === 'golpe-caja') return renderBodyStrike(ctx, 'guitar');
+    if (voice.mechanics?.surface === 'muted-string') return renderMutedString(ctx);
 
     const B = 0.00015;
-    const isRasgueado = !isTangoAcoustic && !isUrbanAcoustic && !isBachata && !isBrazilian && !isReggae && !isSka && !isFunk && (action === 'abanico' || action === 'rasgueado' || ctx.articulation > 0.6);
     const excitation = voice.excitationType ?? params.excitationType ?? 'fingerpad';
     const construction = params.bodyConstruction ?? 'wood-box';
     const numCourses = params.courses ?? 1;
@@ -83,13 +80,6 @@ export default class GuitarModule implements InstrumentModule {
       );
       const bodyPulse = el.mul(el.cycle(108), el.adsr(0.0003, 0.028, 0, 0.009, gateSignal));
       impulse = el.add(el.mul(chordAttack, chordEnv), el.mul(0.13, bodyPulse));
-    } else if (isRasgueado) {
-      const burstCount = 5;
-      const bursts = Array.from({ length: burstCount }, (_, i) =>
-        el.adsr(0.0003 + i * 0.003, 0.0055, 0, 0.0025, gateSignal)
-      );
-      const rasgNoise = el.add(el.mul(0.6, broadbandPluck), el.mul(0.4, el.noise()));
-      impulse = el.mul(rasgNoise, bursts.reduce((acc, burst) => el.add(acc, burst), el.const({ value: 0 })));
     } else if (excitation === 'hard-pick') {
       const burstEnv = el.adsr(0.0002, 0.0035, 0, 0.002, gateSignal);
       const burstNoise = el.add(el.mul(0.65, broadbandPluck), el.mul(0.35, el.svf({ mode: 'bandpass' }, 2200, 1.2, el.noise())));
@@ -114,6 +104,11 @@ export default class GuitarModule implements InstrumentModule {
 
     const plectrumChoke = el.mul(-0.25, el.mul(el.svf({ mode: 'bandpass' }, 1200, 1.4, el.noise()), el.adsr(0.0001, 0.002, 0, 0.001, gateSignal)));
     impulse = el.add(impulse, plectrumChoke);
+
+    // Excitation-position comb shapes harmonic cancellation at the source.
+    const pluckPosition = voice.mechanics?.pluckPosition ?? params.pluckPosition;
+    const positionDelay = el.mul(el.div(el.sr(), safeFreqSignal), Math.max(.05, Math.min(.9, pluckPosition)));
+    impulse = el.sub(impulse, el.delay({ size: 4096 }, positionDelay, 0, impulse));
 
     let stringSignal: AudioSignal;
     const baseDelaySignal = el.min(el.const({ value: 4000 }), el.max(el.const({ value: 2 }), el.div(el.sr(), safeFreqSignal)));
@@ -243,7 +238,7 @@ export default class GuitarModule implements InstrumentModule {
       const sympatheticTap = el.mul(0.14, stringSignal);
       const tarabNodes = TARAB_SYMPATHETIC_RATIOS.map(r => el.svf({ mode: 'bandpass' }, droneBase * r, 24.0, sympatheticTap));
       const sumTarab = tarabNodes.reduce((acc, curr) => el.add(acc, curr));
-      finalAcoustic = el.add(bodyOut, el.mul(0.85, sumTarab));
+      finalAcoustic = el.add(finalAcoustic, el.mul(0.85, sumTarab));
     }
 
     const filterCutoff = Math.min(19000,

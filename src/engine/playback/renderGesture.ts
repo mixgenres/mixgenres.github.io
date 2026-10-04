@@ -1,6 +1,6 @@
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { GESTURE_NAMES } from '../band/gestures.ts';
-import { FINGERPAD_GESTURES, HARD_PICK_GESTURES, NAIL_GESTURES, HAMMER_GESTURES, BOW_GESTURES, AIR_GESTURES, BOWED_RENDER_INSTRUMENT_PATTERN } from '../../data/performance/gestureExcitations';
+import { normalizeTechnique, techniqueMechanics, type TechniqueMechanics } from '../../data/performance/techniqueMechanics';
 
 export type RenderExcitationType = 'plectrum' | 'nail' | 'fingerpad' | 'hard-pick' | 'hammer' | 'stick' | 'mallet' | 'breath' | 'bow';
 
@@ -15,17 +15,14 @@ export interface ResolvedRenderGesture {
   articulationNorm: number;
   harmonicRichnessDelta: number;
   decayTimeFactorScale: number;
+  mechanics: TechniqueMechanics;
 }
 
-function normalizedGesture(name: string): string {
-  return name.toLowerCase().replace(/é/g, 'e').replace(/á/g, 'a');
-}
-
-export function resolveRenderGesture(instrumentId: string, gestureCode: number): ResolvedRenderGesture {
+export function resolveRenderGesture(instrumentId: string, gestureCode: number, baseExcitation?: string): ResolvedRenderGesture {
   const def = INSTRUMENTS_BY_ID[instrumentId];
   const name = GESTURE_NAMES[gestureCode] ?? 'tone';
-  const g = normalizedGesture(name);
-  const isBowed = def?.family === 'bowed' || BOWED_RENDER_INSTRUMENT_PATTERN.test(instrumentId);
+  const g = normalizeTechnique(name);
+  const isBowed = def?.family === 'bowed';
   // A bowed instrument may use a plucked path only for an explicitly authored
   // pizzicato gesture. Generic pick/fingerstyle aliases must never override its
   // bow excitation simply because the gesture vocabulary overlaps.
@@ -40,19 +37,10 @@ export function resolveRenderGesture(instrumentId: string, gestureCode: number):
   else if (/tongue|tongued|martellato/.test(g)) action = 'tongue';
   else if (g === 'brush') action = 'strike';
 
-  let excitationType: RenderExcitationType | string = def?.excitationType ?? def?.luthierPhysics?.excitationType ?? 'fingerpad';
-  if (FINGERPAD_GESTURES.has(g)) excitationType = 'fingerpad';
-  else if (HARD_PICK_GESTURES.has(g)) excitationType = 'hard-pick';
-  else if (NAIL_GESTURES.has(g)) excitationType = 'nail';
-  else if (HAMMER_GESTURES.has(g)) excitationType = 'hammer';
-  else if (BOW_GESTURES.has(g)) excitationType = 'bow';
-  else if (AIR_GESTURES.has(g)) excitationType = 'breath';
-
-  // Generic aliases cannot change a bowed instrument's source of energy.
-  if (isBowed) excitationType = explicitPizz ? 'fingerpad' : 'bow';
-  const explicitExcitation = FINGERPAD_GESTURES.has(g) || HARD_PICK_GESTURES.has(g) || NAIL_GESTURES.has(g)
-    || HAMMER_GESTURES.has(g) || BOW_GESTURES.has(g) || AIR_GESTURES.has(g) || isBowed;
-  const excitationOverride = explicitExcitation ? excitationType : undefined;
+  if (!def) throw new Error(`No instrument mechanics for ${instrumentId}`);
+  const mechanics = techniqueMechanics(def, g, baseExcitation ?? def.excitationType ?? def.luthierPhysics?.excitationType);
+  const excitationType = mechanics.excitation;
+  const excitationOverride = excitationType;
 
   const handStroke = g.includes('heel') ? 0.34
     : /toe|finger-tap|tip/.test(g) ? 0.68
@@ -76,5 +64,5 @@ export function resolveRenderGesture(instrumentId: string, gestureCode: number):
   const harmonicRichnessDelta = g.includes('ponticello') ? 0.12 : g.includes('tasto') ? -0.10 : g.includes('mwah-growl') ? 0.07 : 0;
   const decayTimeFactorScale = g.includes('ponticello') ? 0.94 : g.includes('tasto') ? 1.05 : 1;
 
-  return { name, action, excitationType, excitationOverride, contactPoint, mass, gainMultiplier, articulationNorm, harmonicRichnessDelta, decayTimeFactorScale };
+  return { name, action, excitationType, excitationOverride, contactPoint, mass, gainMultiplier, articulationNorm, harmonicRichnessDelta, decayTimeFactorScale, mechanics };
 }

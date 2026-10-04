@@ -3,6 +3,7 @@ import {
   WORLD_INSTRUMENT_HINTS,
 } from '../instruments';
 import type { InstrumentDef } from '../instruments/types';
+import { techniqueMechanics } from './techniqueMechanics';
 
 export type PerformanceFamily =
   | 'bellows' | 'bowed-string' | 'plucked-string' | 'keyboard'
@@ -87,7 +88,8 @@ function familyOf(d: InstrumentDef): PerformanceFamily {
   if (f === 'brass') return 'brass';
   if (f === 'winds') return 'wind';
   if (f === 'voice') return 'voice';
-  if (f === 'hand-drums' || f === 'body-percussion') return 'membrane';
+  if (f === 'body-percussion') return 'body-percussion';
+  if (f === 'hand-drums') return 'membrane';
   if (f === 'kit') return 'kit';
   if (f === 'metal-and-wood') return 'metal-wood-percussion';
   if (f === 'electronic') return 'electronic';
@@ -151,7 +153,7 @@ function gestureSpec(d: InstrumentDef, id: string): GestureSpec {
   const pressure = d.dspProfile?.excitationDynamics.pressureSensitivity ?? d.physicalModel?.parameters?.bowPressure ?? 0.5;
   const pitchMotion = /arrastre|slide|bend|fall|doit|scoop|gliss|portamento/i.test(s) ? 1 : 0;
   const length = /ghost|staccato|slap|tap|chop|punct/i.test(s) ? 0.25 : /sustain|arco|legato|tenuto|open/i.test(s) ? 0.9 : 0.55;
-  const fidelity = (d.techniques.articulations.includes(id) ? 'faithful' : 'symbolic') as GestureSpec['fidelity'];
+  const fidelity = techniqueMechanics(d, id).fidelity;
   return { id, family, intent, attack, length, damping, pressure, pitchMotion, fidelity, sourceTechniques: [id] };
 }
 
@@ -268,8 +270,9 @@ function profileFor(d: InstrumentDef, genre: string, authored: boolean): GenrePe
   // extensions are layered on top, and the full physical technique catalog stays
   // available for adaptation. We never turn an instrument into a closed whitelist
   // merely because one genre profile omitted a technique.
-  const selected = Array.from(new Set([...curated, ...authoredGenre, ...all]));
-  const preferred = Array.from(new Set([...curated, ...authoredGenre]));
+  const feasible = new Set(all);
+  const selected = Array.from(new Set([...curated, ...authoredGenre, ...all])).filter(id => feasible.has(id));
+  const preferred = Array.from(new Set([...curated, ...authoredGenre])).filter(id => feasible.has(id));
   const roles = rolesForGenre(d, genre);
   const timing = timingForGenre(genre, d);
   const isPerc = familyOf(d) === 'membrane' || familyOf(d) === 'kit' || d.voicing === 'unpitched';

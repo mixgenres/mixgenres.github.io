@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { compactDefaultChordLoop } from '../src/engine/sheet/arrangementContext';
+import { progressionForSection } from '../src/engine/sheet/arrangementContext';
 import { makeSheet, toBar } from '../src/engine/sheet/sheet';
 import { VoiceLeadingResolver } from '../src/engine/band/voiceLeading';
 import { createPhraseState, realizeMidi, type PhraseContext } from '../src/engine/band/phrasePerformance';
@@ -21,11 +21,11 @@ const note = (time = 0, midi = 60): PerfNote => ({ time, dur: 0.1, midi, vel: 80
 const performanceOf = (notes: PerfNote[]): Performance => ({ notes, ccs: [], bars: [], duration: 0.4, tail: 0.1, blends: {},
   worldId: 'jazz', trackInfo: { keys: { instrumentId: 'organ', role: 'harmony' } } });
 
-test('harmonic sentences survive compaction, including long and incomplete cycles', () => {
+test('authored harmonic sentences retain repetitions and incomplete cycles', () => {
   const sentence = ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim', 'C'];
-  assert.deepEqual(compactDefaultChordLoop(sentence), sentence);
-  assert.deepEqual(compactDefaultChordLoop([...sentence, ...sentence]), sentence);
-  assert.deepEqual(compactDefaultChordLoop(['C', 'F', 'C', 'F', 'C']), ['C', 'F', 'C', 'F', 'C']);
+  assert.deepEqual(progressionForSection({ A: sentence }, 'A', 'A', []), sentence);
+  assert.deepEqual(progressionForSection({ A: [...sentence, ...sentence] }, 'A', 'A', []), [...sentence, ...sentence]);
+  assert.deepEqual(progressionForSection({ A: ['C', 'F', 'C', 'F', 'C'] }, 'A', 'A', []), ['C', 'F', 'C', 'F', 'C']);
 });
 
 test('extended harmony retains every pitch class and reaches the upper keyboard register', () => {

@@ -1,5 +1,5 @@
 import type { SongStyle } from '../../data/styles/schema';
-import { GENRE_CONTRACTS, STYLE_PATCHES } from '../../data/styles/contracts';
+import { GENRE_CONTRACTS } from '../../data/styles/contracts';
 import type { WorldContract, BassDialect } from '../../data/styles/contracts';
 import { GENRE_WORLDS_BY_ID } from '../../data/genres';
 export type { InteractionModel, PulseModel, PocketSpec, PercussionDialect, BassDialect, ApproachSpec, EnergyMapping, EnergyDelta, TransitionType, TransitionGrammar, DragProfile, PerformanceIdioms, MixCharacter, WorldContract, InstrumentDialect, PerformanceMode } from '../../data/styles/contracts';
@@ -12,39 +12,8 @@ export function contractForGenre(genreId: string, style?: SongStyle): WorldContr
   const ownerWorld = GENRE_WORLDS_BY_ID[genreId];
   if (!ownerWorld) throw new Error(`No Genre Contract for ${genreId}; no genre folder exports this world.`);
   const baseContract = GENRE_CONTRACTS[genreId];
-  let out: WorldContract;
-  if (baseContract) out = cloneDeep(baseContract);
-  else {
-    const world = ownerWorld;
-    const seed = world.styleDefinitions.find(item => item.id === world.homeStyleId) ?? world.styleDefinitions[0];
-    const calibration = seed?.calibration;
-    const isMachine = /electronic|ambient|bass|house|industrial|hip-hop|weird|cinematic/i.test(genreId);
-    const template = GENRE_CONTRACTS[isMachine ? 'electronic' : /afro|soukous|mbalax|gnawa|taarab/i.test(genreId) ? 'reggae' : 'folk']
-      ?? Object.values(GENRE_CONTRACTS)[0];
-    out = cloneDeep(template);
-    out.meter = seed?.preferredMeters[0] ?? out.meter;
-    out.form = seed?.arrangementSections?.map(section => section.label) ?? ['intro', 'theme', 'variation', 'return', 'coda'];
-    out.timeline = seed?.signatureCell ?? world.signatureCell ?? 'style-owned cycle';
-    out.timelineRequired = /clave|compás|compas|tala|cycle|timeline|gamelan/i.test(out.timeline);
-    out.harmonyModel = calibration?.harmony.requiresChords === false ? 'modal-drone'
-      : /heterophonic|raga|maqam|dastgah/i.test(calibration?.harmony.pitchSystem ?? '') ? 'heterophonic' : 'functional';
-    out.pitchModel = calibration?.harmony.scales.join(' / ') ?? seed?.scaleMode ?? 'style-defined';
-    out.tuningSystem = seed?.tuningSystem ?? world.tuningSystem ?? out.tuningSystem;
-    out.harmonicRhythm = calibration?.harmony.harmonicRhythm ?? out.harmonicRhythm;
-    out.harmonyVocabulary = calibration?.harmony.chordQualities ?? seed?.prominentChords ?? [];
-    out.forbidden = calibration?.patterns.forbidden ?? ['patterns owned by another genre'];
-    out.instrumentDialects = {};
-    out.ensemble = {
-      motor: Object.entries(seed?.calibration?.roles ?? {}).map(([role, data]) => `${role}: ${data.preferredInstruments.join('/')}`).join('; '),
-      lead: seed?.calibration?.roles.lead?.preferredInstruments.join('/') ?? seed?.characteristicInstruments.slice(0, 2).join('/'),
-      interaction: seed?.calibration?.patterns.interaction?.join('; ') ?? 'style-owned pattern interaction',
-    };
-    if (calibration?.mix.character) {
-      const baseCharacter = out.timbreSpace.mixCharacter ?? { dryness: .6, bassForward: .5, width: .5, brightness: .5 };
-      out.timbreSpace = { ...out.timbreSpace,
-        mixCharacter: { ...baseCharacter, ...calibration.mix.character } };
-    }
-  }
+  if (!baseContract) throw new Error(`Missing authored genre contract: ${genreId}`);
+  let out = cloneDeep(baseContract);
   const world = ownerWorld;
   const seed = world?.styleDefinitions.find(item => item.id === style?.id)
     ?? world?.styleDefinitions.find(item => item.id === world.homeStyleId)
@@ -52,7 +21,7 @@ export function contractForGenre(genreId: string, style?: SongStyle): WorldContr
   const calibration = style?.calibration ?? seed?.calibration;
   if (seed && calibration) {
     const meter = style?.rhythm?.meter ?? seed.preferredMeters[0] ?? out.meter;
-    const isMachine = /electronic|ambient|bass|house|industrial|hip-hop|weird|cinematic/i.test(`${genreId} ${seed.name}`);
+    const isMachine = out.performanceMode === 'programmed-electronic';
     out.meter = meter;
     out.subdivision = /12\/8|12-count/i.test(meter) ? 12 : /2\/4/.test(meter) ? 8 : 16;
     out.form = seed.arrangementSections?.map(section => section.label) ?? out.form;
@@ -100,15 +69,18 @@ export function contractForGenre(genreId: string, style?: SongStyle): WorldContr
       };
     }
     out.forbidden = [...(calibration.patterns.forbidden ?? [])];
-    out.instrumentDialects = {};
+    for (const layer of [seed.instrumentDialects, style?.instrumentDialects]) {
+      for (const [id, dialect] of Object.entries(layer ?? {})) {
+        out.instrumentDialects ??= {};
+        out.instrumentDialects[id] = mergeDialectMetadata(out.instrumentDialects[id] ?? {}, dialect);
+      }
+    }
     out.articulationGrammar = Object.fromEntries(Object.entries(calibration.techniques));
     out.groove = { ...out.groove,
       swing: ((style?.rhythm?.swingPercentage ?? seed.grooveMechanics?.swingPercentage) ?? 50) / 100,
       anticipationMs: (seed.grooveMechanics?.anticipationOffsetSteps ?? 0) * 12,
     };
   }
-  const patch = style ? STYLE_PATCHES[style.id] : undefined;
-  if (patch) out = mergeContract(out, patch);
 
   if (style?.rhythm) {
     const r = style.rhythm;
@@ -136,28 +108,6 @@ export function contractForGenre(genreId: string, style?: SongStyle): WorldContr
     out.harmonyVocabulary = Array.from(new Set([...out.harmonyVocabulary, ...(style.harmony.chordVocabulary ?? [])]));
   }
   if (style?.arrangement?.soloDefinition) out.soloDefinition = cloneDeep(style.arrangement.soloDefinition);
-  return out;
-}
-
-function mergeContract(baseContract: WorldContract, patch: Partial<WorldContract>): WorldContract {
-  const out = { ...baseContract, ...patch } as WorldContract;
-  out.groove = { ...baseContract.groove, ...(patch.groove ?? {}), roleLean:{...baseContract.groove.roleLean,...(patch.groove?.roleLean ?? {})} };
-  out.bass = { ...baseContract.bass, ...(patch.bass ?? {}) };
-  out.microtiming = { ...baseContract.microtiming, ...(patch.microtiming ?? {}), byRole:{...baseContract.microtiming.byRole,...(patch.microtiming?.byRole ?? {})} };
-  out.timbreSpace = {
-    ...baseContract.timbreSpace,
-    ...(patch.timbreSpace ?? {}),
-    mixCharacter: {
-      ...(baseContract.timbreSpace.mixCharacter ?? { dryness: 0.6, bassForward: 0.5, width: 0.5, brightness: 0.5 }),
-      ...(patch.timbreSpace?.mixCharacter ?? {}),
-    },
-  };
-  out.percussion = { ...baseContract.percussion, ...(patch.percussion ?? {}) };
-  out.instrumentDialects = { ...baseContract.instrumentDialects };
-  for (const [id, dialect] of Object.entries(patch.instrumentDialects ?? {})) {
-    const inherited = baseContract.instrumentDialects?.[id];
-    out.instrumentDialects[id] = mergeDialectMetadata(inherited ?? {}, dialect);
-  }
   return out;
 }
 

@@ -658,20 +658,35 @@ dialectsFor('afro-colombian', { 'marimba-de-chonta': { allowedTechniques: ['inte
 
 G.tango.timbreSpace.mix = TANGO_MIX;
 
+// Worlds without specialized contracts use their own authored seed over shared
+// mechanical defaults. They never inherit another genre's band or performance idioms.
+const programmedWorlds = new Set(['electronic', 'house', 'drum-and-bass', 'uk-bass', 'industrial', 'reggaeton', 'hip-hop']);
+const hybridWorlds = new Set(['cumbia', 'afrobeats', 'funk', 'ska', 'soul', 'r-and-b', 'rock', 'pop', 'zouk']);
+for (const world of GENRE_WORLDS) {
+  const seed = world.styleDefinitions.find(style => style.id === world.homeStyleId);
+  if (!seed?.calibration || !seed.arrangementSections?.length) throw new Error(`Incomplete genre contract source: ${world.id}`);
+  if (!G[world.id]) {
+    G[world.id] = base('metric-hierarchical', seed.preferredMeters[0], seed.signatureCell ?? 'none',
+      seed.harmonyModel ?? 'functional', seed.scaleMode ?? seed.calibration.harmony.scales.join(' / '), seed.tuningSystem ?? world.tuningSystem ?? '12-tet',
+      { style: seed.bassMotion as BassDialect['style'], rhythmJob: seed.calibration.harmony.bassChordInteraction,
+        pitchJob: seed.calibration.harmony.scales.join(', '), articulation: seed.calibration.techniques.bass ?? [] },
+      seed.arrangementSections.map(section => section.label),
+      Object.fromEntries(Object.entries(seed.calibration.roles).map(([role, value]) => [role, value.preferredInstruments.join(' / ')])),
+      [...seed.characteristicInstruments], seed.description, [...seed.calibration.patterns.forbidden ?? []],
+      { name: seed.grooveMechanics?.microtimingFeel ?? 'straight', swing: (seed.grooveMechanics?.swingPercentage ?? 50) / 100,
+        swingUnit: 16, lean: 0, roleLean: {}, humanizeMs: seed.grooveMechanics?.humanizeJitterMs ?? 0,
+        humanizeVel: .1, accentDepth: .8, pocket: z(), anticipationMs: 0, dynamicRange: 1 },
+      { kitMode: 'full', allowedHitTypes: [], forbidWesternBackbeat: false, forbidSectionCrash: true, allowTomFills: false, ride: false },
+      { harmonyVocabulary: [...seed.calibration.harmony.chordQualities], harmonicRhythm: seed.calibration.harmony.harmonicRhythm,
+        articulationGrammar: seed.calibration.techniques, instrumentDialects: seed.instrumentDialects,
+        mixCharacter: { dryness: .6, bassForward: .5, width: .5, brightness: .5, ...seed.calibration.mix.character } });
+  }
+  G[world.id].performanceMode = programmedWorlds.has(world.id) ? 'programmed-electronic'
+    : hybridWorlds.has(world.id) ? 'hybrid' : 'acoustic-ensemble';
+}
+
 for (const genreId of Object.keys(G)) {
   if (!GENRE_WORLDS.some(world => world.id === genreId)) delete G[genreId];
 }
 
 export const GENRE_CONTRACTS: Record<string, WorldContract> = G;
-
-export const STYLE_PATCHES: Record<string, Partial<WorldContract>> = {
-  'tango-tango-electronico': {
-    performanceMode: 'programmed-electronic',
-    timbreSpace: {
-      palette: ['bandoneon', 'synth', 'drums', 'sampler', 'guitar', 'piano'],
-      production: 'bandoneon-led electrotango; deep controlled sub, tight programmed percussion, filtered samples, and wide restrained ambience',
-      mixCharacter: { dryness: 0.55, bassForward: 0.84, width: 0.82, brightness: 0.64, saturationType: 'tape', compressionRatio: 3.8, subHarmonics: 0.58, transientSnap: 0.72, sidechainDucking: 0.62 },
-    },
-  },
-  'reggae-dancehall': { timbreSpace: { palette: ['synth', 'drums', 'congas'], production: 'dembow skank, hard clip', mixCharacter: { dryness: 0.7, bassForward: 0.88, width: 0.65, brightness: 0.65, saturationType: 'hard-clip', compressionRatio: 5.0, subHarmonics: 0.8, transientSnap: 0.8 } } },
-};

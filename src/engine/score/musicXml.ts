@@ -48,7 +48,13 @@ function voicesFor(segments: ScoreSegment[], assignments?: Map<string, number>):
   return voices.length ? voices : [[]];
 }
 
-function noteType(beats: number) {
+function noteType(beats: number, tuplet?: { actual: number; normal: number }): string {
+  if (tuplet) {
+    // Explicit written ratios own time modification. Do not recursively infer
+    // another triplet when a tied segment has a nonstandard normal duration.
+    const type = noteType(beats * tuplet.actual / tuplet.normal).replace(/<time-modification>.*?<\/time-modification>/g, '');
+    return `${type}<time-modification><actual-notes>${tuplet.actual}</actual-notes><normal-notes>${tuplet.normal}</normal-notes></time-modification>`;
+  }
   const types: Array<[number, string]> = [[8,'breve'],[4,'whole'],[2,'half'],[1,'quarter'],[.5,'eighth'],[.25,'16th'],[.125,'32nd'],[.0625,'64th'],[.03125,'128th']];
   for (const [length, type] of types) {
     if (Math.abs(beats - length) < 1e-9) return `<type>${type}</type>`;
@@ -116,14 +122,15 @@ export function exportMusicXml(score: MusicianScore, tablature = false): string 
             const drum = note.playback.percussion ?? notatedDrum(part.instrumentId, note.midi), directions = note.playback.musicianNotation;
             const cents = scoreTuningCents(note.midi, note.frequencyHz);
             const alteration = pitch.alter + (Math.abs(cents) > 1e-6 ? cents / 100 : 0);
-            const content = part.percussion ? `<unpitched><display-step>${drum.step}</display-step><display-octave>${drum.octave}</display-octave></unpitched>`
+            const unpitched = part.percussion || note.pitchIdentity === 'unpitched';
+            const content = unpitched ? `<unpitched><display-step>${part.percussion ? drum.step : 'C'}</display-step><display-octave>${part.percussion ? drum.octave : 5}</display-octave></unpitched>`
               : `<pitch><step>${pitch.step}</step>${alteration ? `<alter>${decimal(alteration)}</alter>` : ''}<octave>${pitch.octave}</octave></pitch>`;
             const ties = `${segment.tieIn ? '<tie type="stop"/>' : ''}${segment.tieOut ? '<tie type="start"/>' : ''}`;
             const tied = `${segment.tieIn ? '<tied type="stop"/>' : ''}${segment.tieOut ? '<tied type="start"/>' : ''}`;
             const technicalDirections = `${directions?.string ? `<string>${directions.string}</string>` : ''}${directions?.fret !== undefined ? `<fret>${directions.fret}</fret>` : ''}${directions?.fingering ? `<fingering>${escapeXml(directions.fingering)}</fingering>` : ''}${directions?.bowing ? `<${directions.bowing}-bow/>` : ''}${directions?.stroke ? `<other-technical>${directions.stroke} stroke</other-technical>` : ''}`;
-            const technique = segment.tieIn ? '' : `<technical><other-technical>${escapeXml(note.technique)}</other-technical>${technicalDirections}</technical>`;
+            const technique = segment.tieIn ? '' : `<technical><other-technical>${escapeXml(note.technique)}</other-technical>${note.playback.bodyAttack ? `<other-technical>${escapeXml(directions?.bodyTechnique ?? '')} simultaneously</other-technical>` : ''}${technicalDirections}</technical>`;
             const instrument = part.percussion ? `<instrument id="${part.xmlId}-I${note.midi}"/>` : '';
-            output.push(`<note dynamics="${decimal(note.velocity * 100 / 90)}">${tone ? '<chord/>' : ''}${content}<duration>${duration(segment.duration)}</duration>${ties}${instrument}<voice>${voiceNumber}</voice>${noteType(segment.duration)}${part.percussion ? `<notehead>${drum.notehead}</notehead>` : ''}<notations>${tied}${technique}</notations></note>`);
+            output.push(`<note dynamics="${decimal(note.velocity * 100 / 90)}">${tone ? '<chord/>' : ''}${content}<duration>${duration(segment.duration)}</duration>${ties}${instrument}<voice>${voiceNumber}</voice>${noteType(segment.duration, directions?.tuplet)}${unpitched ? `<notehead>${part.percussion ? drum.notehead : 'x'}</notehead>` : ''}<notations>${tied}${technique}</notations></note>`);
           }
           cursor = event.end;
         }

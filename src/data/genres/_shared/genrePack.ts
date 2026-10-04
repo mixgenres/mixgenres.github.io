@@ -15,6 +15,7 @@ export interface AuthoredCell {
   articulation?: string;
   articulations?: string[];
   pitches?: Array<PatternEvent['pitch']>;
+  notations?: Array<PatternEvent['notation']>;
   phraseEnd?: boolean;
 }
 export interface CalibratedStyleInput {
@@ -24,7 +25,7 @@ export interface CalibratedStyleInput {
   scale: string;
   roles: Record<string, string[]>;
   progressions: Record<string, string[]>;
-  form: Array<{ label: string; bars: number; soloInstrumentId?: string; soloMode?: 'accompanied' | 'unaccompanied' | 'trading' }>;
+  form: Array<{ label: string; bars: number; instruments?: string[]; intensity?: 'low' | 'medium' | 'high' | 'peak'; leadInstrumentId?: string; soloInstrumentId?: string; soloMode?: 'accompanied' | 'unaccompanied' | 'trading' }>;
   cells: AuthoredCell[];
   groove: GrooveMechanics;
   instrumentTechniques: Record<string, string[]>;
@@ -73,15 +74,11 @@ function sections(_input: GenrePackInput, styleRoles: Record<string, string[]>, 
   return labels.map((label, i) => {
     const isSparse = i === 0 || i === labels.length - 1 || /break|alap|drone|avaz/i.test(label);
     const leadRole = roles.lead ?? roles.voice ?? Object.values(roles)[0] ?? [];
-    const chosen = Object.entries(roles).flatMap(([role, ids]) => {
-      if (isSparse && !['lead','voice','bass'].includes(role)) return [];
-      if (/break|suwuk|dissolve/i.test(label) && role === 'percussion') return [];
-      return ids;
-    });
+    const chosen = style.form[i].instruments ?? Object.values(roles).flat();
     return { key: `${slug(label)}-${i}`, label, kind: label, bars: style.form?.[i]?.bars ?? (/alap|drone/i.test(label) ? 8 : i === 0 ? 4 : 8),
       ...(style.form?.[i]?.soloInstrumentId ? { soloInstrumentId: style.form[i].soloInstrumentId, soloMode: style.form[i].soloMode } : {}),
-      intensity: i === labels.length - 1 ? 'medium' : /climax|mambo|gear|jhala|remate/i.test(label) ? 'peak' : isSparse ? 'low' : 'high',
-      instruments: Array.from(new Set(chosen)), leadInstrumentId: leadRole[0] };
+      intensity: style.form[i].intensity ?? (i === labels.length - 1 ? 'medium' : /climax|mambo|gear|jhala|remate/i.test(label) ? 'peak' : isSparse ? 'low' : 'high'),
+      instruments: [...chosen], leadInstrumentId: style.form[i].leadInstrumentId ?? leadRole[0] };
   });
 }
 
@@ -93,21 +90,6 @@ function scopesForTechnique(value: string): Array<'note'|'motif'|'phrase'|'secti
   if (/phrase|cadence|fill|ornament|vibrato|rubato|pickup|response|call/.test(term)) return ['phrase'];
   if (/riff|ostinato|tremolo|repeated|roll|interlock|pattern/.test(term)) return ['motif'];
   return ['note'];
-}
-
-function techniquesByRole(role: string, techniques: string[]): string[] {
-  const signal: Record<string, RegExp> = {
-    bass: /bass|low|root|tumbao|walking|sub|anticipat|approach|pizz|slap|pluck|riff/i,
-    percussion: /drum|percuss|bell|clap|shaker|scrape|roll|stroke|ghost|hit|accent/i,
-    lead: /lead|melody|ornament|bend|slide|portamento|vibrato|trill|gliss|voice|phrase/i,
-    voice: /voice|vocal|breath|melisma|syllable|phrase/i,
-    harmony: /chord|harmony|comp|strum|voic|piano|staccato|marcato/i,
-    strings: /string|bow|pizz|arco|vibrato|portamento|tremolo/i,
-    winds: /wind|breath|tongue|reed|flute|sax|trumpet/i,
-    bandoneon: /bellows|bandoneon|button|staccato|legato/i,
-  };
-  const matched = techniques.filter(value => signal[role]?.test(value));
-  return matched;
 }
 
 function inferredTechniqueRoles(technique: string, roles: Record<string, string[]>): string[] {
@@ -186,16 +168,6 @@ function patternCategory(name: string): import('../../schema').PatternCategory {
   if (/cadence|cierre|coda|remate|ending|closing|tag/.test(text) && !/(?:\d+[- ]?beat|comp[aá]s|clave|rhythm|groove|pulse|cycle|meter|accent|grouping)/.test(text)) return 'cadence';
   if (/rhythm|groove|pulse|comp[aá]s|clave|cycle|meter|beat|count|syncopat|habanera|ostinato|backbeat|polyrhyth|hemiola|3\s*[+-]\s*3\s*[+-]\s*2/.test(text)) return 'groove';
   return 'groove';
-}
-
-/** Some legacy catalogs placed rhythm/form descriptions in the technique list.
- * Move those entries into the style's flat pattern vocabulary at resolution. */
-function isPatternVocabulary(value: string): boolean {
-  return /\b(?:\d+[- ]?(?:beat|count)|\d+\s*\/\s*\d+|\d[-/]\d[-/]\d|clave|comp[aá]s|rhythm|groove|pulse|syncopat|meter|subdivision|breaks?|drop(?:out)?|coro|montuno|guajeo|bassline|walking bass|shuffle|swing feel|timing|ostinato|riff|counterline|countermelody|phrase shape|call.?response|answer|cycle|theka|tala|section|escobilla|falseta|llamada|cierre|coda|remate|silencio|presi[oó]n|gear|bomba|cascara|c[aá]scara|martillo|habanera|arrastre|yumba|3\s*[+-]\s*3\s*[+-]\s*2|backbeat|beat [1-4]|four.?on.?the.?floor|polyrhyth|hemiola|tumbao|lead|bounce|tirititr[aá]n|contratiempo|subida|canti[ñn]as|the one|mallet pattern|rasgueado pattern|corte|slow binary|footwork|step pattern|cowbell|campana|snare|hi.?hat|kick drum|ghosted snare|short.?chord.?stab|arpeggio|melodic fill)\b/i.test(value);
-}
-
-function isHarmonyVocabulary(value: string): boolean {
-  return /\b(?:chord quality|chord tone|chord extension|upper.?structure|voicing|harmon(?:y|ic)|toniciz|cadence|substitut|tritone|secondary dominant|altered dominant|chromatic approach|chromatic passing chord|modal mixture|borrowed|augmented.?sixth|quartal|pedal tone|drone|bass.?note|ii\s*[-–]\s*v|ii-v|dominant tension|functional progression|tonic.?dominant|phrygian cadence|raga pitch|maqam|scale degree)\b/i.test(value);
 }
 
 function patternRole(name: string, category: import('../../schema').PatternCategory, roles: Record<string, string[]>): string[] {
@@ -301,83 +273,14 @@ function cadenceChords(progressions: Record<string, string[]>): string[] {
     .map(([, chords]) => chords[chords.length - 1]).filter((chord): chord is string => !!chord);
 }
 
-function mergeAuthoredMix(base: MixOverride<MixContract>, authored: MixOverride<MixContract>): MixOverride<MixContract> {
-  const merge = (left: Record<string, unknown>, right: Record<string, unknown>): Record<string, unknown> => {
-    const result = { ...left };
-    for (const [key, value] of Object.entries(right)) result[key] = value && typeof value === 'object' && !Array.isArray(value)
-      ? merge((left[key] as Record<string, unknown>) ?? {}, value as Record<string, unknown>) : value;
-    return result;
-  };
-  return merge(base as Record<string, unknown>, authored as Record<string, unknown>) as MixOverride<MixContract>;
-}
-
-function mixCalibration(input: GenrePackInput, style: CalibratedStyleInput, styleRoles: Record<string, string[]>) {
-  const lowEnd = /bass|zouk|reggaeton|hip-hop|metal|industrial|house|electronic|dembow/i.test(`${input.id} ${style.name}`);
-  const sparse = /ambient|drone|minimal|slow|solea|taranta|avaz/i.test(`${input.id} ${style.name}`);
-  const live = /flamenco|salsa|timba|jazz|gospel|classical|gamelan|taarab|folk/i.test(input.id);
-  const broad = /orchestra|big band|choir|symphonic|cinematic|epic/i.test(style.name);
-  const dryness = sparse ? .38 : live ? .68 : .56;
-  const width = broad || /electronic|ambient|pop|cinematic/.test(input.id) ? .72 : .48;
-  const bassForward = lowEnd ? .68 : input.id === 'tango' || input.id === 'flamenco' ? .4 : .52;
-  const rolePan = Object.fromEntries(Object.keys(styleRoles).map(role => [role,
-    role === 'harmony' ? -.12 : role === 'percussion' ? .12 : 0]));
-  const roleWidth = Object.fromEntries(Object.keys(styleRoles).map(role => [role,
-    role === 'harmony' || role === 'texture' ? .62 : role === 'percussion' ? .34 : .16]));
-  const roleMap = Object.fromEntries(Object.entries(styleRoles).map(([role]) => [role, {
-    mixFunctions: role === 'lead' || role === 'voice' ? ['foreground'] : role === 'bass' ? ['low-anchor'] : role === 'percussion' ? ['pulse-anchor', 'rhythmic-support'] : ['harmonic-support'],
-    priority: role === 'lead' || role === 'voice' ? .9 : role === 'bass' ? .82 : role === 'percussion' ? .72 : .55,
-    gainDb: role === 'lead' || role === 'voice' ? .8 : role === 'bass' ? .4 : -1.2,
-    foregroundGainDb: role === 'lead' || role === 'voice' ? 1.4 : role === 'bass' ? .5 : 0,
-    supportGainDb: role === 'lead' || role === 'voice' ? -.2 : -1,
-    presenceDb: role === 'lead' || role === 'voice' ? .8 : role === 'percussion' ? .25 : -.15,
-    bodyDb: role === 'bass' ? .55 : role === 'harmony' ? .2 : 0,
-    width: roleWidth[role], transientEmphasis: role === 'percussion' ? .6 : role === 'bass' ? .3 : .15,
-    maskingPriority: role === 'lead' || role === 'voice' ? .95 : role === 'bass' ? .86 : role === 'percussion' ? .72 : .52,
-    ambienceSend: role === 'lead' || role === 'voice' ? .1 : role === 'texture' ? .42 : .16,
-    protectLowEnd: role === 'bass', protectRhythmicDefinition: role === 'percussion' || role === 'bass',
-    mayYieldSpectrally: !['lead', 'voice', 'bass'].includes(role), mayYieldInGain: !['lead', 'voice', 'bass'].includes(role),
-    depth: role === 'lead' || role === 'voice' ? .2 : role === 'bass' ? .3 : .48,
-  }]));
-  return {
-    enabled: true,
-    character: { dryness, bassForward, width, brightness: /flamenco|salsa|pop|electronic|swing/i.test(input.id) ? .62 : .5,
-      compressionRatio: lowEnd ? 2.2 : live ? 1.5 : 1.8, transientSnap: live ? .72 : .48,
-      subHarmonics: lowEnd ? .3 : 0, sidechainDucking: /house|electronic|bass|reggaeton|amapiano/i.test(input.id) ? .35 : 0,
-      delaySend: /dub|ambient|zouk|taarab/i.test(`${input.id} ${style.name}`) ? .24 : .06,
-      reverbType: live ? 'room' : 'spring', saturationType: live ? 'tape' : 'tube' },
-    stage: { width, depthRange: sparse ? .62 : .38,
-      centerAnchorRoles: ['bass', 'percussion'].filter(role => role in styleRoles), rolePan, roleWidth, preserveNaturalStage: true },
-    dynamics: { foregroundContrastDb: broad ? 3.4 : 2.8, maxTrackBoostDb: 3.5, maxTrackCutDb: -5.5,
-      ensembleBreathing: live ? .68 : .48, crescendoExpansion: /timba|pugliese|cinematic|gospel/i.test(`${input.id} ${style.name}`) ? .82 : .45,
-      silenceContrast: .72, peakSectionHeadroomDb: 3, busCompressionAmount: live ? .16 : .22,
-      busCompressionRatio: lowEnd ? 2 : 1.7, densityCompensation: .34, sharedForeground: true },
-    masking: { enabled: true, minOverlap: .2, minPriorityDifference: .14, maxPresenceCutDb: live ? 1.5 : 2.2,
-      maxBodyCutDb: .9, maxGainCutDb: .8, amount: live ? .36 : .52, preserveCounterpoint: true },
-    ambience: { roomSize: dryness, foregroundDepthDifference: sparse ? .5 : .34, reverbSend: live ? .14 : .09,
-      delaySend: /dub|ambient|zouk|taarab/i.test(`${input.id} ${style.name}`) ? .24 : .04, bloom: sparse ? .56 : .3, preDelayMs: live ? 18 : 12 },
-    roles: roleMap,
-    sections: { intro: { gainDb: -1, depth: .46, width: width * .82 }, breakdown: { gainDb: -1.5, ambience: 1.12 },
-      chorus: { gainDb: .7, width: Math.min(1, width * 1.12), foregroundContrast: 1.1 }, climax: { gainDb: .8, width: Math.min(1, width * 1.16), foregroundContrast: 1.2 } },
-    transitions: { attackMs: live ? 80 : 120, releaseMs: live ? 360 : 480, sectionTransitionMs: 640,
-      foregroundHandoffMs: 320, spectralRampMs: 240, lookaheadMs: 100 },
-    buses: { glueAmount: live ? .12 : .18, lowAnchorCompression: lowEnd ? .18 : .05,
-      rhythmCompression: .12, melodicCompression: .08, ensembleCompression: .14,
-      parallelCompression: 0, sharedRoom: true,
-      roleBus: Object.fromEntries(Object.keys(styleRoles).map(role => [role,
-        role === 'bass' ? 'lowAnchor' : role === 'percussion' ? 'percussion' : role === 'lead' || role === 'voice' ? 'melodic' : 'harmony'])) },
-  } as MixOverride<MixContract>;
-}
-
 function styleDefinition(input: GenrePackInput, item: CalibratedStyleInput): GenreStyleDefinition {
   const styleId = `${input.id}-${item.id}`;
   const meter = item.meter, tempo = item.tempo, scaleMode = item.scale;
-  const misplacedPatterns = item.techniques.filter(isPatternVocabulary);
-  const misplacedHarmony = item.techniques.filter(isHarmonyVocabulary);
-  const stylePatterns = list(item.patterns, misplacedPatterns);
-  const styleTechniques = item.techniques.filter(technique => !isPatternVocabulary(technique) && !isHarmonyVocabulary(technique));
-  const styleHarmony = list(item.harmony, misplacedHarmony);
+  const stylePatterns = [...item.patterns];
+  const styleTechniques = [...item.techniques];
+  const styleHarmony = [...item.harmony];
   const styleProgressions = progressions(input, item);
-  const requiresChords = item.requiresChords ?? !/free|drone|atonal|heterophonic|raga|maqam|dastgah/i.test(input.pitchSystem);
+  const requiresChords = item.requiresChords;
   const cadenceVocabulary = list(input.cadences, cadenceChords(styleProgressions));
   const cadenceTypes = list(styleHarmony.filter(value => /cadence|cierre|coda|remate|delayed resolution|cadential delay|tag cadence/i.test(value)),
     stylePatterns.filter(value => /cadence|cierre|coda|remate|delayed resolution|cadential delay|tag cadence/i.test(value)));
@@ -392,8 +295,8 @@ function styleDefinition(input: GenrePackInput, item: CalibratedStyleInput): Gen
   return {
     id: styleId, worldId: input.id, name: item.name, origin: input.family, description,
     characteristicInstruments: Object.values(styleRoles).flat() as GenreStyleDefinition['characteristicInstruments'],
-    preferredMeters: [meter === 'free / cycle' || meter === 'free / 4/4' ? '4/4' : meter], tempoRange: tempo, keySubstyles: [item.name], coreConcepts: list(stylePatterns, styleTechniques).slice(0, 10),
-    rhythmicGrammar: stylePatterns.slice(0, 6), scaleMode,
+    preferredMeters: [meter === 'free / cycle' || meter === 'free / 4/4' ? '4/4' : meter], tempoRange: tempo, keySubstyles: [item.name], coreConcepts: list(stylePatterns, styleTechniques),
+    rhythmicGrammar: [...stylePatterns], scaleMode,
     tuningSystem: input.pitchSystem, signatureCell: stylePatterns[0] ?? input.patternFamilies[0],
     grooveMechanics: item.groove,
     prominentChords: styleHarmony,
@@ -401,7 +304,7 @@ function styleDefinition(input: GenrePackInput, item: CalibratedStyleInput): Gen
     arrangementSections: sectionsForStyle,
     instrumentDialects: item.instrumentDialects, harmonyModel: item.harmonyModel, bassMotion: item.bassMotion,
     calibration: {
-      roles, instrumentTechniques: item.instrumentTechniques, techniques: Object.fromEntries(Object.keys(styleRoles).map(role => [role, techniquesByRole(role, styleTechniques)])),
+      roles, instrumentTechniques: item.instrumentTechniques, techniques: Object.fromEntries(Object.keys(styleRoles).map(role => [role, list(...styleRoles[role].map(id => item.instrumentTechniques[id] ?? []))])),
       techniqueScopes: Object.fromEntries(styleTechniques.map(technique => [technique, scopesForTechnique(technique)])),
       patterns: { families: stylePatterns, interaction: list(stylePatterns.filter(x => /answer|call|interlock|response|counter|gear|clave|compas/i.test(x))),
         phraseBehaviors: ['pickup', 'phrase-end cadence', 'section variation'], forbidden: input.forbiddenPatterns,
@@ -414,17 +317,14 @@ function styleDefinition(input: GenrePackInput, item: CalibratedStyleInput): Gen
       techniqueMappings: techniqueMappings({ ...item, techniques: styleTechniques }),
       harmony: { pitchSystem: input.pitchSystem, scales: list([scaleMode], input.scales), chordQualities: styleHarmony,
         progressionExamples: Object.values(styleProgressions),
-        harmonicRhythm: item.harmonicRhythm ?? input.harmonicRhythm, cadences: cadenceVocabulary, cadenceTypes,
+        harmonicRhythm: item.harmonicRhythm, cadences: cadenceVocabulary, cadenceTypes,
         bassChordInteraction: input.bassChordInteraction, bassNoteRules, requiresChords,
-        voicingDensity: /jazz|bossa|soul|cinematic|orchestra|gospel/i.test(item.name) ? { min: 3, max: 10 } : { min: 2, max: 6 },
-        voicingDensityByInstrument: { guitar: { min: 2, max: 6 }, piano: /jazz|gospel|cinematic/i.test(item.name) ? { min: 3, max: 10 } : { min: 2, max: 7 },
-          strings: { min: 2, max: 16 }, horns: { min: 2, max: 10 }, pads: { min: 2, max: 12 }, bandoneon: { min: 2, max: 6 } },
         chordFamilyWeights: chordFamilyWeights(styleHarmony, Object.values(styleProgressions), requiresChords),
         borrowedHarmony: styleHarmony.filter(value => /modal mixture|borrowed|augmented.?sixth|neapolitan|phrygian.?major/i.test(value)),
         substitutions: styleHarmony.filter(value => /substitut|tritone|diminished passing|secondary dominant|chromatic approach/i.test(value)),
         voiceLeading: [input.bassChordInteraction, ...styleHarmony.filter(value => /voice.?leading|counterpoint|inversion|inner voice/i.test(value))],
         pedalDroneBehavior: /drone|pedal/i.test(`${stylePatterns.join(' ')} ${styleHarmony.join(' ')}`) ? 'sustain the authored tonic or modal center through changing upper voices' : 'follow authored bass motion; use pedals only where a pattern or progression calls for one' },
-      mix: mergeAuthoredMix(mixCalibration(input, item, styleRoles), item.mix),
+      mix: item.mix,
     },
   };
 }
@@ -441,7 +341,7 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
     position, duration: cell.durations?.[i] ?? (cell.role === 'harmony' ? .35 : .2),
     kind: cell.phraseEnd ? 'fill' : 'attack',
     accent: cell.accents?.[i] ?? (i === 0 ? .9 : .65), velocity: i === 0 ? .85 : .7,
-    articulation: cell.articulations?.[i] ?? cell.articulation, hitType: cell.hits?.[i], pitch: cell.pitches?.[i],
+    articulation: cell.articulations?.[i] ?? cell.articulation, hitType: cell.hits?.[i], pitch: cell.pitches?.[i], notation: cell.notations?.[i],
     ...(cell.phraseEnd ? { condition: { phrasePosition: ['cadence', 'transition'] }, probability: .85 } : {}),
   }));
   return {

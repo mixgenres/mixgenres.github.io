@@ -1,3 +1,4 @@
+import { renderBodyStrike } from './stringPercussion';
 import { BASS_INSTRUMENT_PATTERN, DRUM_BUS_INSTRUMENT_PATTERN, ELECTRIC_INSTRUMENT_PATTERN, ELECTRONIC_GAIN_INSTRUMENT_PATTERN, FAMILY_NOISE_SCALE_RULES, SUB_BUS_INSTRUMENT_PATTERN } from '../../data/instruments/idClassifiers';
 import { INSTRUMENTS_BY_ID, EXACT_PLUCKED_PRESETS, GAIN_BY_INSTRUMENT } from '../../engine/lookup/instruments';
 import { el } from '@elemaudio/core';
@@ -122,6 +123,8 @@ if (token.includes('samba') || token.includes('bossa')) return 0.50;
 return 0.35;
 }
 export interface VoiceState {
+mechanics?: import('../../data/performance/techniqueMechanics').TechniqueMechanics;
+bodyAttack?: 'golpe' | 'golpe-caja';
 noteDurationSeconds?: number;
 soundParams?: TrackParams;
 controllerKeys?: Array<'articulation' | 'brightness' | 'contact' | 'mute' | 'bowPressure' | 'bowVelocity' | 'bodyTap' | 'pluckPosition' | 'pressure' | 'resonance'>;
@@ -297,7 +300,9 @@ export function renderVoice(
   const ownedSections = mod.ownedDspSections ?? [];
 
   const dspProfile = ctx.dspProfile;
-  if (dspProfile) {
+  // Bespoke percussion already owns its excitation/body. Pitched generic
+  // resonators and contact artifacts would turn it back into a harmonic note.
+  if (dspProfile && ctx.voice.mechanics?.tailSeconds === undefined) {
     const x = dspProfile.excitationDynamics;
     const c = dspProfile.coupledResonators;
     const a = dspProfile.mechanicalArtifacts;
@@ -373,7 +378,7 @@ export function renderVoice(
     }
 
     // Gate collision transient by excitation type & action
-    const exType = params.excitationType ?? instDef?.luthierPhysics?.excitationType ?? instDef?.excitationType;
+    const exType = voice.excitationType ?? params.excitationType ?? instDef?.luthierPhysics?.excitationType ?? instDef?.excitationType;
     const pmSharpness = instDef?.physicalModel?.parameters?.transientSharpness ?? 1;
     const collisionEnv = el.adsr(0.0001, Math.max(0.0015, (0.004 + (1 - x.hardness) * 0.008) * pmSharpness), 0, 0.002, ctx.gateSignal);
 
@@ -480,6 +485,16 @@ export function renderVoice(
 
   }
 
+  // A companion body strike enters after string/pickup resonators: its modes
+  // must stay fixed even when the simultaneously played chord changes.
+  if (voice.bodyAttack) {
+    const kind = params.instrumentId === 'guitar' ? 'guitar' : params.instrumentId === 'upright-bass' ? 'bass'
+      : params.instrumentId === 'cello' ? 'cello' : params.instrumentId === 'viola' ? 'viola' : 'violin';
+    // A slow arco envelope belongs to the string source, not the simultaneous
+    // knuckle/palm impulse. Both sources share velocity and insert effects.
+    rawAudio = el.add(ctx.isDecayingInstrument ? rawAudio : el.mul(ctx.env, rawAudio), renderBodyStrike(ctx, kind));
+  }
+
   // Apply declared per-instrument physicalModel insert effects chain if authored
   if (instDef?.physicalModel?.signalChain) {
     rawAudio = applyInstrumentEffectsChain(rawAudio, instDef.physicalModel.signalChain, ctx);
@@ -488,7 +503,7 @@ export function renderVoice(
   const finalRawAudio = rawAudio;
   // Decaying physical instruments own their release in the resonator. A short
   // global ADSR release here would choke plucked/struck tails at note-off.
-  const gain = ctx.isDecayingInstrument
+  const gain = ctx.isDecayingInstrument || voice.bodyAttack
     ? ctx.velSignal
     : el.mul(ctx.velSignal, ctx.env);
   return el.mul((params.roleGain ?? 1) / Math.max(0.0001, roleGain), gain, finalRawAudio);

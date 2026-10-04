@@ -9,6 +9,8 @@ import { parseChord } from '../sheet/musicTheory.ts';
 import { PHRASE_TECHNIQUE_MIN_NOTES, PERCUSSION_ROLE_PATTERN, PERCUSSION_PHRASE_TECHNIQUE_BUDGET, BASS_ROLE_PATTERN, LEAD_ROLE_PATTERN, BASS_PHRASE_BUDGET_BY_GENRE, IDIOMATIC_BASS_GENRE_PATTERN, LONG_TONE_FAMILY_PATTERN, LONG_TONE_FAMILY_IDS, LONG_TONE_FAMILY_BUDGETS, LEAD_PHRASE_TECHNIQUE_BUDGET, DEFAULT_PHRASE_TECHNIQUE_BUDGET } from '../../data/performance/phraseTechniqueBudgets';
 import { styleCalibrationTarget, type StyleCalibrationTarget } from '../../engine/style/performance-schema';
 import { styleTechniqueExpectation } from '../../engine/style/performance-expectations';
+import { INSTRUMENTS_BY_ID } from '../lookup/instruments';
+import { techniqueMechanics } from '../../data/performance/techniqueMechanics';
 
 export interface PhraseOptimizationReport {
   genre: string;
@@ -117,7 +119,8 @@ function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: 
 
   const styleTechnique = styleTechniqueExpectation(style, profile, role);
   const techniquePool = Array.from(new Set([...(styleTechnique.required ?? []), ...prefs]))
-    .filter(id => profile.gestures[id] && !styleTechnique.forbidden.includes(id));
+    .filter(id => profile.gestures[id] && !styleTechnique.forbidden.includes(id)
+      && techniqueMechanics(INSTRUMENTS_BY_ID[profile.instrumentId], id).pitchIdentity !== 'unpitched');
   if (techniquePool.length && desiredTechniqueCount) {
     const landmarks = Array.from(new Set([0, Math.floor(attackGroups.length * 0.22), Math.floor(attackGroups.length * 0.48), Math.floor(attackGroups.length * 0.72), Math.max(0, attackGroups.length - 1)]))
       .filter(i => i >= 0 && i < attackGroups.length);
@@ -145,7 +148,8 @@ function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: 
 function ensureRegionTechnique(trackNotes: PerfNote[], profile: InstrumentPerformanceProfile, genre: string, style: ResolvedStyle, role: string): void {
   if (trackNotes.length < PHRASE_TECHNIQUE_MIN_NOTES + 1) return;
   const expectation = styleTechniqueExpectation(style, profile, role);
-  const usable = expectation.required.filter(id => profile.gestures[id] && !expectation.forbidden.includes(id));
+  const usable = expectation.required.filter(id => profile.gestures[id] && !expectation.forbidden.includes(id)
+    && techniqueMechanics(INSTRUMENTS_BY_ID[profile.instrumentId], id).pitchIdentity !== 'unpitched');
   if (!usable.length) return;
   const used = new Set(trackNotes.map(n => GESTURE_NAMES[n.gestureCode]));
   if (usable.some(id => used.has(id))) return;

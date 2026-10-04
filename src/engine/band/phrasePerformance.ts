@@ -1,6 +1,8 @@
 import { ANTICIPATED_BASS_GENRES, IDIOMATIC_DEGREE_RULES } from '../../data/performance/genreInstrumentBehaviors';
 import { GENRE_GESTURE_HINT_RULES } from '../../data/performance/genreGestureRules';
 import { GESTURE_HINT_ALIASES } from '../../data/performance/gestureHintAliases';
+import { INSTRUMENTS_BY_ID } from '../lookup/instruments';
+import { techniqueMechanics } from '../../data/performance/techniqueMechanics';
 import type { MusicalPattern, Measure } from '../../types';
 import type { HitFunction } from '../../data/performance/hitFunctions';
 import type { InstrumentPerformanceProfile, GenrePerformanceProfile } from '../../engine/lookup/performance';
@@ -367,7 +369,8 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
     ...ctx.hostProfile.gestureIds,
     ...ctx.sourceProfile.gestureIds,
     ...ctx.profile.adaptationOrder.flatMap(g => ctx.profile.genreProfiles[g]?.preferredGestures ?? []),
-  ].filter((g): g is string => Boolean(g) && allowed(g))));
+  ].filter((g): g is string => Boolean(g) && allowed(g)
+    && (['slap', 'ghost', 'muffled'].includes(hit) || techniqueMechanics(INSTRUMENTS_BY_ID[ctx.profile.instrumentId], g).pitchIdentity !== 'unpitched'))));
   const hitWord = hit.toLowerCase();
   const contextualSet = new Set(contextual);
   const scored = candidates.map(g => {

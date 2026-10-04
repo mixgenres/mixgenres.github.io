@@ -4,19 +4,13 @@ import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../sheet/random.ts';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { createDampedStringLoop, fbGainForDecay } from './instrumentLib_stringLoop.ts';
+import { renderBodyStrike, renderMutedString } from './stringPercussion';
 
-/**
- * ViolinModule
- * 
- * Physical synthesis module modeling an authentic acoustic violin:
- * - Helmholtz stick-slip horsehair-on-rosin bow friction interaction
- * - Corpus resonance network: A0 Helmholtz air cavity (280Hz), main wood modes (460Hz), and 3.1kHz bridge hill
- * - 4-string open sympathetic resonance bank (G3, D4, A4, E5)
- * - Authentic extended techniques: spiccato, sul-ponticello, sul-tasto, tango chicharra, tambor, and látigo whip
- * - Dedicated plucked pizzicato waveguide with realistic fingerpad damping
- */
+/** Estimated bowed source/filter model, explicit pizzicato waveguide, and
+ * distinct tango percussion. This is not a calibrated bow/string simulation. */
 export default class ViolinModule implements InstrumentModule {
   id = 'violin';
+  ownedDspSections: InstrumentModule['ownedDspSections'] = ['coupledResonators', 'mechanicalArtifacts'];
 
   renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
@@ -48,6 +42,8 @@ export default class ViolinModule implements InstrumentModule {
     const isArrastre = action === 'arrastre' || /arrastre|drag/i.test(action ?? '');
     const isTangoObligato = isTango && (ctx.voice.note ?? 60) <= 62 && !isPizz;
 
+    if (ctx.voice.mechanics?.surface === 'soundboard') return renderBodyStrike(ctx, 'violin');
+
     // 2. Special Extended Techniques (Chicharra, Tambor, Látigo)
     if (isChicharra) {
       // Tango behind-the-bridge metallic cricket scrape
@@ -55,29 +51,19 @@ export default class ViolinModule implements InstrumentModule {
       const scrapeLfo = el.add(el.const({ value: 0.55 }), el.mul(el.const({ value: 0.45 }), el.blepsaw(el.const({ value: 16 }))));
       const cricketMod = el.mul(scrapeLfo, scrapeNoise);
       const chicharraEnv = el.adsr(0.002, 0.15, 0.2, 0.04, gateSignal);
-      const ring = el.mul(0.15, el.cycle(el.mul(safeFreqSignal, 4.5)));
+      const ring = el.mul(0.15, el.cycle(4200));
       return el.mul(chicharraEnv, el.add(cricketMod, ring));
     }
 
-    if (isTambor) {
-      // Percussive string snap / knuckle body tap
-      const bodyThump = el.mul(el.cycle(145), el.adsr(0.0003, 0.025, 0, 0.008, gateSignal));
-      const stringSnap = el.mul(el.highpass(1600, 1.2, el.noise()), el.adsr(0.0002, 0.009, 0, 0.004, gateSignal));
-      return el.add(el.mul(0.70, bodyThump), el.mul(0.40, stringSnap));
-    }
+    if (isTambor) return renderMutedString(ctx);
 
     // 3. Attack Intonation Settling & Látigo Whip Pitch Trajectory
     const settleEnv = el.adsr(0.001, isStaccato ? 0.015 : 0.035, 0, 0.005, gateSignal);
     const intonationJitter = randNorm(noteSeed ^ 0x12) * (isStaccato ? 0.022 : 0.008);
     const intonationOffset = el.mul(el.const({ value: intonationJitter }), settleEnv);
 
-    // Tango arrastre: a short portamento-like scoop into the target pitch.
-    // It is deliberately shallower than the bandoneón/bass scoop because the
-    // violin's expressive slide is primarily a left-hand/bow inflection.
-    const arrastreEnv = el.adsr(0.001, 0.070, 0, 0.008, gateSignal);
-    const arrastrePitch = isArrastre
-      ? el.sub(1.0, el.mul(el.const({ value: 0.095 }), arrastreEnv))
-      : el.const({ value: 1.0 });
+    // Approach pitch is authored in the score; bow energy supplies the drag.
+    const arrastrePitch = el.const({ value: 1 });
 
     // Látigo whip: Rapid upward glissando spike
     const latigoEnv = el.adsr(0.01, 0.12, 0, 0.01, gateSignal);
@@ -121,7 +107,7 @@ export default class ViolinModule implements InstrumentModule {
       return el.add(stringLoop, el.add(el.mul(0.35, airRes), el.add(el.mul(0.28, woodRes), el.mul(0.18, bridgeRes))));
     }
 
-    // 6. Bowed Arco Synthesis (Continuous Stick-Slip Helmholtz Motion)
+    // 6. Bowed source/filter approximation
     const bowJitter = el.mul(el.const({ value: 0.0035 }), el.noise());
     const jitteredFreq = el.mul(vibratingFreq, el.add(1.0, bowJitter));
     
@@ -147,8 +133,8 @@ export default class ViolinModule implements InstrumentModule {
       ? el.adsr(0.0004, 0.015, 0, 0.008, gateSignal)
       : el.adsr(0.022, 0.08, 0.85, 0.045, gateSignal);
 
-    const bowSpeed = el.mul(el.const({ value: params.bowVelocity }), tremoloMod);
-    const bowForce = el.const({ value: params.bowPressure });
+    const bowSpeed = el.mul(el.const({ value: ctx.voice.mechanics?.bowVelocity ?? params.bowVelocity }), tremoloMod);
+    const bowForce = el.const({ value: ctx.voice.mechanics?.bowPressure ?? params.bowPressure });
 
     // Tango obligato often lives lower on the instrument, especially in the
     // traditional style. Give the low register a warmer fourth-string-like
@@ -205,6 +191,7 @@ export default class ViolinModule implements InstrumentModule {
       )
     );
 
-    return el.lowpass(dynamicCutoff, 1.15, combinedBody);
+    const bowEnergy = el.adsr(isArrastre ? Math.min(.07, (ctx.voice.noteDurationSeconds ?? .2) * .5) : .008, .03, 1, .04, gateSignal);
+    return el.add(el.mul(bowEnergy, el.lowpass(dynamicCutoff, 1.15, combinedBody)));
   }
 }

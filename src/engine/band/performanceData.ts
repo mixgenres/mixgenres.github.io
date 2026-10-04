@@ -19,6 +19,10 @@ export interface PitchBendPoint {
 }
 
 export interface PerfNote {
+  /** Unpitched string/body actions retain MIDI only for interchange compatibility. */
+  pitchIdentity?: 'pitched' | 'unpitched';
+  /** A simultaneous body strike is owned once by the musical attack. */
+  bodyAttack?: boolean;
   /** Layer 3 output, prepared once on composition edits and consumed by renderers. */
   physical?: import('../sound/transformMusicians').PhysicalNote;
   musicianNotation?: import('../../data/schema').PatternEvent['notation'];

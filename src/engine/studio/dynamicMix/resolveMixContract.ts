@@ -1,7 +1,7 @@
 import { DYNAMIC_MIX_DEFAULTS } from '../../../data/sound/mix/dynamicMixDefaults';
 import type { MixContract, MixOverride, ResolvedMixContract } from '../../../data/sound/schema/dynamicMix';
 import type { ResolvedStyle } from '../../../data/styles/schema';
-import type { MixCharacter, WorldContract } from '../../../data/styles/contracts';
+import type { WorldContract } from '../../../data/styles/contracts';
 
 type Source = ResolvedStyle['provenance'][string];
 export interface MixLayer { mix?: MixOverride<MixContract>; source: Source }
@@ -114,8 +114,4 @@ export function blendMixInfluence(base: Required<MixContract>, mix: MixOverride<
     ? Object.fromEntries(Object.entries(b).filter(([key]) => !unsafeKeys.has(key)).map(([key, value]) => [key, blend(record(a) ? a[key] : undefined, value)]))
     : typeof b === 'number' && typeof a === 'number' ? a + (b - a) * weight : weight >= .5 ? b : undefined;
   return blend(base, mix) as MixOverride<MixContract>;
-}
-
-export function legacyMixCharacterLayer(character?: MixCharacter): MixOverride<MixContract> | undefined {
-  return character ? { character } : undefined;
 }

@@ -1,3 +1,4 @@
+import { techniqueMechanics } from '../../data/performance/techniqueMechanics';
 import { BELLOWS_LEGATO_INSTRUMENT_PATTERN, DEFAULT_ACTION_BY_FAMILY } from '../../data/performance/defaultInstrumentActions';
 import { el } from '@elemaudio/core';
 import type { VoiceState, TrackParams } from './elementaryEngine.ts';
@@ -14,6 +15,7 @@ import StringsModule from './strings.ts';
 import CelloModule from './cello.ts';
 import ViolaModule from './viola.ts';
 import UprightBassModule from './upright-bass.ts';
+import ElectricBassModule from './electric-bass';
 import GuitarModule from './guitar.ts';
 import BanjoModule from './banjo.ts';
 import RequintoModule from './requinto.ts';
@@ -48,6 +50,7 @@ const strings = new StringsModule();
 const cello = new CelloModule();
 const viola = new ViolaModule();
 const bass = new UprightBassModule();
+const electricBass = new ElectricBassModule();
 const guitar = new GuitarModule();
 const banjo = new BanjoModule();
 const requinto = new RequintoModule();
@@ -92,7 +95,8 @@ export function getInstrumentModule(instrumentId: string): InstrumentModule {
   if (instrumentId === 'cello') return cello;
   if (instrumentId === 'violin' || instrumentId === 'erhu' || instrumentId === 'jinghu' || instrumentId === 'sarangi' || instrumentId === 'haegeum') return violin;
   if (instrumentId === 'string-ensemble') return strings;
-  if (instrumentId === 'upright-bass' || instrumentId === 'bass' || instrumentId === 'guitarron') return bass;
+  if (instrumentId === 'bass') return electricBass;
+  if (instrumentId === 'upright-bass' || instrumentId === 'guitarron') return bass;
   if (instrumentId === 'banjo') return banjo;
   if (instrumentId === 'requinto') return requinto;
   if (instrumentId === 'palmas') return palmas;
@@ -130,20 +134,22 @@ export function resolveVoiceParameters(voice: VoiceState, params: TrackParams) {
     attack: authored.attack ?? 1, body: authored.body ?? 1, decay: 1 } : fallbackDialect;
   const b = Math.max(0, Math.min(1, (params.brightness + (voice.harmonicRichnessDelta ?? 0)) * velBoost * genreDialect.brightness));
   const rawDecayTime = Math.max(0.05, params.decay * genreDialect.decay * (voice.decayTimeFactorScale ?? 1));
-  const muteDamping = Math.max(0.08, 1 - 0.88 * params.mute);
-  const decayTime = rawDecayTime * muteDamping;
-  const model = Math.round(params.model);
-  const dspProfile: InstrumentDSPProfile | undefined = instrumentDef?.dspProfile;
   const action = voice.action ?? (params.bodyTap > 0.5 ? 'golpe'
     : instrumentDef?.family === 'bellows-and-keys' && BELLOWS_LEGATO_INSTRUMENT_PATTERN.test(params.instrumentId ?? '')
       ? 'legato' : DEFAULT_ACTION_BY_FAMILY[instrumentDef?.family ?? ''] ?? 'tone');
+  const mechanics = voice.mechanics ?? (instrumentDef ? techniqueMechanics(instrumentDef, action, voice.excitationType ?? params.excitationType) : undefined);
+  const effectiveMute = Math.max(params.mute, mechanics?.damping ?? 0);
+  const muteDamping = Math.max(0.08, 1 - 0.88 * effectiveMute);
+  const decayTime = rawDecayTime * muteDamping;
+  const model = Math.round(params.model);
+  const dspProfile: InstrumentDSPProfile | undefined = instrumentDef?.dspProfile;
   const articulation = voice.articulation ?? params.articulation;
-  const isMuted = action === 'mute' || params.mute > 0.4;
+  const isMuted = action === 'mute' || effectiveMute > 0.4;
   const authoredSustain = instrumentDef?.acousticProfile?.sustain;
-  const bowedBass = instrumentDef?.family === 'plucked' && /^(arco|bow|bow_drag|lija)$/.test(action);
-  const isDecayingInstrument = !bowedBass && (authoredSustain
+  const bowedBass = mechanics?.excitation === 'bow' || (instrumentDef?.id === 'upright-bass' && /^(arco|bow|bow_drag|lija|arrastre)$/.test(action));
+  const isDecayingInstrument = mechanics?.pitchIdentity === 'unpitched' || (instrumentDef?.family === 'bowed' && mechanics?.excitation === 'fingerpad') || (!bowedBass && (authoredSustain
     ? authoredSustain === 'decaying' || authoredSustain === 'short' || authoredSustain === 'percussive'
-    : model === 0 || model === 1 || model === 2 || model === 3 || model === 4 || model === 5 || model === 8 || model === 11 || model === 17 || model === 18 || model === 19 || model === 20 || (model >= 21 && model <= 26));
+    : model === 0 || model === 1 || model === 2 || model === 3 || model === 4 || model === 5 || model === 8 || model === 11 || model === 17 || model === 18 || model === 19 || model === 20 || (model >= 21 && model <= 26)));
   let attack = voice.attack !== undefined ? voice.attack : (isDecayingInstrument ? 0.0004 * genreDialect.attack : (0.0008 + (1 - b) * 0.01) * genreDialect.attack);
   let release = voice.release !== undefined ? voice.release : (isMuted ? 0.012 : (isDecayingInstrument ? 0.045 * genreDialect.decay : (0.06 + decayTime * 0.15)));
   if (voice.release === undefined && !isDecayingInstrument) release = /^(staccato|seco|marcato|chapa|choke)$/.test(action)
@@ -154,7 +160,7 @@ export function resolveVoiceParameters(voice: VoiceState, params: TrackParams) {
     attack = voice.attack ?? 0.002; envDecay = voice.decay ?? 0.018; sustain = voice.sustain ?? 1;
     release = voice.release ?? Math.max(0.018, release * 0.35);
   }
-  return { velBoost, genreDialect, b, decayTime, model, instrumentDef, dspProfile, action, articulation, isMuted, isDecayingInstrument, attack, release, sustain, envDecay };
+  return { mechanics, velBoost, genreDialect, b, decayTime, model, instrumentDef, dspProfile, action, articulation, isMuted, isDecayingInstrument, attack, release, sustain, envDecay };
 }
 
 export function buildVoiceContext(trackId: string, voiceIndex: number, voice: VoiceState, params: TrackParams): VoiceRenderContext {
@@ -170,13 +176,13 @@ export function buildVoiceContext(trackId: string, voiceIndex: number, voice: Vo
   const freqSignal = el.add(initialFreq, el.smooth(el.tau2pole(glideSec),
     el.sub(el.const({ key: `${pk}_freq`, value: freq }), initialFreq)));
   const safeFreqSignal = el.max(el.const({ value: 20 }), freqSignal);
-  const { velBoost, genreDialect, b, decayTime, model, dspProfile, action, articulation, isMuted, isDecayingInstrument, attack, release, sustain, envDecay } = resolveVoiceParameters(voice, params);
+  const { mechanics, velBoost, genreDialect, b, decayTime, model, dspProfile, action, articulation, isMuted, isDecayingInstrument, attack, release, sustain, envDecay } = resolveVoiceParameters(voice, params);
   const attackSignal = el.const({ key: `${pk}_attack`, value: attack });
   const decaySignal = el.const({ key: `${pk}_decay`, value: envDecay });
   const sustainSignal = el.const({ key: `${pk}_sustain`, value: sustain });
   const releaseSignal = el.const({ key: `${pk}_release`, value: release });
   const env = el.adsr(attackSignal, decaySignal, sustainSignal, releaseSignal, gateSignal);
-  return { trackId, voiceIndex, voice, params, dspProfile, genreDialect, pk, freq, gateSignal, velSignal, freqSignal, safeFreqSignal,
+  return { trackId, voiceIndex, voice: { ...voice, mechanics }, params, dspProfile, genreDialect, pk, freq, gateSignal, velSignal, freqSignal, safeFreqSignal,
     velBoost, b, decayTime, model, action, articulation, isMuted, env, isDecayingInstrument, attack, release, sustain, envDecay,
     attackSignal, decaySignal, sustainSignal, releaseSignal };
 }

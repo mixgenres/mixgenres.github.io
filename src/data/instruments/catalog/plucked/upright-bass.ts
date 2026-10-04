@@ -11,7 +11,7 @@ export const upright_bass: InstrumentDef = {
   elementaryModel: 3,
   makeupGain: 0.406,
   polyphony: 4,
-  note: "Acoustic 3/4 spruce/maple double bass delivering deep woody fundamental resonance, expressive pizzicato, rich arco bowing, and dedicated Tango techniques (arrastre drag, strappata fingerboard snap, lija sandpaper bow scrape, and tambor wood hits)",
+  note: "Acoustic double bass with estimated plucked/bowed source and body responses; separate tango arrastre, strappata bow-bounce, tambor damped pizzicato, lija rasp, and golpe-caja body contact",
   acousticProfile: {
     sustain: "decaying",
     role: "bass",
@@ -77,7 +77,8 @@ export const upright_bass: InstrumentDef = {
   performanceArticulations: {
     arrastre: {
       preBeatOffsetMs: -60,
-      pitchDragSemitones: -3,
+      // Approach pitches belong to the written passage, not a universal scoop.
+      pitchDragSemitones: 0,
       pressureRamp: true,
       velocityGrowth: 1.4
     },
@@ -116,14 +117,16 @@ export const upright_bass: InstrumentDef = {
       "lija",
       "tambor",
       "chicharra",
+      "golpe-caja",
       "slap"
     ],
     techniqueMethods: [
       "fleshy fingerpad pizzicato walk",
-      "arrastre pre-beat glissando drag swelling into downbeat",
-      "strappata violent string slap against ebony fingerboard",
+      "arrastre bow-pressure swell through authored approach notes into an accent",
+      "strappata bouncing bow strikes with left-hand fingerboard percussion",
       "lija sandpaper bow scraping with high downward pressure",
-      "tambor lower bout wooden body thump",
+      "tambor damped pizzicato with string/finger contact and indefinite pitch",
+      "golpe-caja palm or knuckle strike on the instrument body",
       "arco cantabile with rich wood and Helmholtz air cavity coupling"
     ],
     playingStyles: ["tango", "jazz", "flamenco", "classical", "folk", "latin"],
@@ -145,8 +148,8 @@ export const upright_bass: InstrumentDef = {
     signalChain: ["preamp", "eq", "compressor", "reverb"],
     synthesisNotes: [
       "42Hz Helmholtz internal air cavity resonance paired with 65Hz main carved spruce soundboard mode.",
-      "Dual excitation pipeline: Karplus-Strong waveguide for pizzicato/strappata and stick-slip friction saturator for arco/lija.",
-      "Full Tango extended techniques including arrastre upward drag, strappata fingerboard slap, and lija bow scraping."
+      "Estimated plucked delay-loop and bowed source/filter paths; separate muted-string, bow-bounce and body percussion.",
+      "Approximate tango mechanisms: arrastre energy swell, strappata bow-bounce roll, tambor damped pizzicato, golpe-caja body strike, and lija bow rasp."
     ]
   }
 };

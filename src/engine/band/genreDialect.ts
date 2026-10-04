@@ -3,8 +3,8 @@ import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { getCanonicalStyle, getStyle } from '../../engine/style/registry';
 
 import type { InstrumentDialect, PerformanceMode } from '../../data/styles/contracts';
-import { DIALECTS, DEFAULT_DIALECT_SHAPE } from '../../data/performance/dialects';
-import { RELATED_DIALECT_INSTRUMENTS, SPARSE_DIALECT_FALLBACK_RULES, PROGRAMMED_ELECTRONIC_GENRE_PATTERN, HYBRID_GENRE_PATTERN, type DialectMatcher } from '../../data/performance/dialects/sparseFallbackRules';
+import { DEFAULT_DIALECT_SHAPE } from '../../data/performance/dialects';
+import { RELATED_DIALECT_INSTRUMENTS } from '../../data/performance/dialects/inheritance';
 
 export function resolveDialect(
   instrumentId: string,
@@ -13,7 +13,9 @@ export function resolveDialect(
   role?: string,
   energy?: 1 | 2 | 3 | 4 | 5,
 ): InstrumentDialect | null {
-  const normId = instrumentId.toLowerCase().replace(/_/g, '-');
+  const normId = instrumentId;
+  if (!INSTRUMENTS_BY_ID[instrumentId]) throw new Error(`Unknown dialect instrument: ${instrumentId}`);
+  if (styleId && !getStyle(styleId)) throw new Error(`Unknown dialect style: ${styleId}`);
   const resolveVariants = (base: InstrumentDialect): InstrumentDialect => {
     const roleVariant = role ? base.roleVariants?.[role] : undefined;
     const energyVariant = energy ? base.energyTweaks?.[energy] : undefined;
@@ -77,7 +79,7 @@ export function resolveDialect(
     return resolveVariants(merged);
   }
   if (worldId) {
-    try {
+    {
       const contract = contractForGenre(worldId, styleId ? getStyle(styleId) : undefined);
       if (contract?.instrumentDialects) {
         // 1. Exact match
@@ -124,13 +126,9 @@ export function resolveDialect(
           });
         }
       }
-    } catch {
-      // Contract lookup fallback
     }
   }
 
-  const sparse = fallbackDialectForSparseContracts(instrumentId, worldId, styleId);
-  if (sparse) return resolveVariants(sparse);
   const def = INSTRUMENTS_BY_ID[normId] || INSTRUMENTS_BY_ID[instrumentId];
   return resolveVariants({
     ...DEFAULT_DIALECT_SHAPE,
@@ -142,32 +140,10 @@ export function resolveDialect(
   });
 }
 
-export function fallbackDialectForSparseContracts(
-  instrumentId: string,
-  worldId = '',
-  styleId = ''
-): InstrumentDialect | null {
-  const token = `${worldId}:${styleId}:${instrumentId}`.toLowerCase();
-  const matches = (matcher: DialectMatcher): boolean => {
-    const value = matcher.source === 'token' ? token : instrumentId;
-    return matcher.includes !== undefined ? value.includes(matcher.includes) : matcher.pattern?.test(value) ?? false;
-  };
-  for (const rule of SPARSE_DIALECT_FALLBACK_RULES) {
-    if ((rule.allOf ?? []).every(matches) && (!rule.anyOf || rule.anyOf.some(matches))) {
-      return DIALECTS[rule.dialectId];
-    }
-  }
-  return null;
-}
-
-
-/** Resolve the production/performance mode when a style has not authored one.
- * This is deliberately conservative: acoustic traditions stay acoustic;
- * styles whose defining groove is programmed stay on the electronic path.
- */
+/** Production mode comes from the authored world contract, never a name regex. */
 export function performanceModeForContext(worldId = '', styleId = ''): PerformanceMode {
-  const token = `${worldId}:${styleId}`.toLowerCase();
-  if (PROGRAMMED_ELECTRONIC_GENRE_PATTERN.test(token)) return 'programmed-electronic';
-  if (HYBRID_GENRE_PATTERN.test(token)) return 'hybrid';
-  return 'acoustic-ensemble';
+  if (!worldId) return DEFAULT_DIALECT_SHAPE.performanceMode;
+  const style = styleId ? getStyle(styleId) : undefined;
+  if (styleId && !style) throw new Error(`Unknown performance style: ${styleId}`);
+  return contractForGenre(worldId, style).performanceMode ?? DEFAULT_DIALECT_SHAPE.performanceMode;
 }

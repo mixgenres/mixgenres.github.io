@@ -1,3 +1,7 @@
+import { RECORDING_FORM_SCORES } from './recordingForms';
+import { RECORDING_HARMONIES, parseHarmonicCells } from './recordingHarmonies';
+import { STYLE_REFERENCES } from '../styles/styleReferences';
+import type { SectionEnergy } from '../schema';
 import type { FormStepTemplate } from '../styles/schema';
 
 export interface RecordingArrangement {
@@ -10,6 +14,8 @@ export interface RecordingArrangement {
   /** Restrict the existing style ensemble, retaining each part's authored role. */
   instruments?: string[];
   lead?: string;
+  /** Explicit section personnel; omitted sections retain the complete ensemble. */
+  sectionInstruments?: Record<string, string[]>;
   solos?: Record<string, string>;
   note: string;
   source?: string;
@@ -18,12 +24,13 @@ export interface RecordingArrangement {
 const song = (bpm: number, form: string, note: string, chords?: Record<string, string[]>, extra?: Partial<RecordingArrangement>): RecordingArrangement => ({ bpm, form, note, chords, ...extra });
 const rockForm = 'intro:8:3,verse:16:3,chorus:8:4,verse:16:3,chorus:8:4,solo:16:4,chorus:16:5,outro:8:3';
 const popForm = 'intro:4:2,verse:16:3,prechorus:8:3,chorus:8:4,verse:16:3,prechorus:8:3,chorus:8:4,bridge:8:2,chorus:16:5,outro:4:2';
-const loop = (chords: string[]) => ({ intro: chords, verse: chords, prechorus: chords, chorus: chords, bridge: chords, solo: chords, outro: chords });
+/** An explicitly recurring cell applies to every section unless overridden. */
+const loop = (chords: string[]) => ({ _: chords });
 
 /** Recording-specific score adaptations, not claims of note-for-note transcription.
- * The remaining catalog uses the style's own sectional grammar, disclosed in UI.
+ * Every catalog recording has an explicit full form and harmonic plan.
  */
-export const RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = {
+const DETAILED_RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = {
   'tango::golden-age': song(124, 'intro:4:3,A:16:3,B:16:3,A:16:4,variacion:16:5,cierre:4:3', 'Orquesta típica conversation; bandoneón variation after the returning theme.'),
   'tango::troilo': song(124, 'intro:4:3,A:16:3,B:16:3,A:16:4,variacion:16:5,cierre:4:3', 'Bandoneón feature and flexible cadential responses.'),
   'tango::canyengue': song(116, 'intro:4:2,A:16:3,B:16:3,A:16:3,trio:16:4,A:16:3,cierre:2:2', 'Early dance-tango strains, compact attacks, lighter ensemble.'),
@@ -42,7 +49,7 @@ export const RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = {
   'rock::rock-roll': song(168, 'intro:12:4,verse:12:3,chorus:12:4,verse:12:3,chorus:12:4,solo:24:4,verse:12:3,chorus:12:5,outro:4:3', 'Twelve-bar vocal choruses and two guitar solo choruses.', loop(['Bb7','Bb7','Bb7','Bb7','Eb7','Eb7','Bb7','Bb7','F7','Eb7','Bb7','F7']), { solos: { intro: 'guitar', solo: 'guitar' } }),
   'rock::classic-rock': song(100, 'intro:8:2,verse:16:2,chorus:8:4,verse:16:2,chorus:8:4,solo:16:4,chorus:16:5,outro:16:4', 'Acoustic verses contrast with electric choruses and guitar lead.'),
   'rock::hard-rock': song(94, rockForm, 'Riff foundation, wide vocal gaps, guitar solo and returning riff.', loop(['E5','D5','A5','E5']), { solos: { solo: 'guitar' } }),
-  'rock::alternative': song(88, 'intro:8:3,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,bridge:16:2,solo:16:5,outro:8:4', 'Abrupt harmonic shifts and layered guitar climaxes; chord cells remain style-derived.'),
+  'rock::alternative': song(88, 'intro:8:3,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,bridge:16:2,solo:16:5,outro:8:4', 'Abrupt harmonic shifts and layered guitar climaxes; contrasting verse, chorus and bridge harmonic cells.'),
   'rock::psychedelic': song(108, 'intro:8:3,verse:12:3,chorus:4:4,verse:12:3,chorus:4:4,solo:24:5,verse:12:4,outro:16:4', 'Dominant-sharp-nine colour, riff, guitar feature and extended exit.', loop(['E7#9','E7#9','G','A']), { solos: { solo: 'guitar' } }),
   'rock::progressive': song(132, 'intro:16:1,A:32:4,B:24:3,A:32:4,bridge:32:2,solo:32:4,A:32:5,outro:16:2', 'Acoustic prelude, recurring electric themes, middle development and reprise; meter follows the existing progressive style.'),
   'rock::indie': song(104, 'intro:8:3,verse:16:3,chorus:8:4,verse:16:3,chorus:8:4,solo:8:4,verse:16:3,chorus:8:5,outro:8:3', 'Interlocking guitar roles; short lead solo.', undefined, { solos: { solo: 'guitar' } }),
@@ -94,11 +101,28 @@ export const RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = {
   'gamelan::javanese': song(64, 'buka:8:1,main-cycle:32:3,irama-change:32:2,main-cycle:64:3,irama-change:32:4,suwuk:8:1', 'Colotomic cycles and irama changes; Western bar labels approximate cyclic time.'),
 };
 
-export function parseRecordingForm(value: string): Array<{ kind: string; bars: number; intensity: FormStepTemplate['intensity'] }> {
+export function parseRecordingForm(value: string): Array<{ kind: string; bars: number; energy: SectionEnergy; intensity: FormStepTemplate['intensity'] }> {
   const levels = ['low','low','medium','high','peak'] as const;
   return value.split(',').map(token => {
     const [kind, bars, energy] = token.split(':');
-    if (!kind || !Number.isInteger(+bars) || +bars < 1 || +energy < 1 || +energy > 5) throw new Error(`Invalid recording section: ${token}`);
-    return { kind, bars: +bars, intensity: levels[+energy - 1] };
+    if (!kind || token.split(':').length !== 3 || !Number.isInteger(+energy) || !Number.isInteger(+bars) || +bars < 1 || +energy < 1 || +energy > 5) throw new Error(`Invalid recording section: ${token}`);
+    return { kind, bars: +bars, energy: +energy as SectionEnergy, intensity: levels[+energy - 1] };
   });
 }
+
+/** All public songs require an authored score; there is no sample expansion path. */
+export const RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = Object.fromEntries([
+  ...RECORDING_FORM_SCORES.map(line => {
+    const [key, bpm, form, cells] = line.split('|');
+    const reference = STYLE_REFERENCES[key as keyof typeof STYLE_REFERENCES];
+    if (!reference || !cells || !form || !(+bpm > 0)) throw new Error(`Invalid recording score: ${key}`);
+    return [key, { bpm: +bpm, form, chords: parseHarmonicCells(cells),
+      note: reference.qualities.join('; '),
+    }] as const;
+  }),
+  ...Object.entries(DETAILED_RECORDING_ARRANGEMENTS).map(([key, recording]) => {
+    const chords = recording.chords ?? RECORDING_HARMONIES[key];
+    if (!chords) throw new Error(`Missing recording harmony: ${key}`);
+    return [key, { ...recording, chords }] as const;
+  }),
+]);

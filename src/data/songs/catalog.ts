@@ -14,7 +14,9 @@ export interface FullSongTemplate {
   track: string;
   name: string;
   referenceKey: string;
-  arrangementBasis: 'recording-informed' | 'style-derived';
+  /** Original credit and recording/version label, preserved without title extraction. */
+  reference: { credit: string; recording: string };
+  source?: string;
   selectedFromRepertoire: boolean;
   description: string;
 }
@@ -28,13 +30,15 @@ export const fullSongs: FullSongTemplate[] = GENRE_WORLDS.flatMap(world => world
   const track = selection?.track ?? quoted?.[1] ?? reference.recording;
   if (!track || /repertoire|references|adjacent work/.test(track)) throw new Error(`Select a concrete recording for ${key}`);
   const arrangement = RECORDING_ARRANGEMENTS[key];
+  if (!arrangement) throw new Error(`Missing full arrangement for ${key}`);
   return {
     id: `${style.id}_song`, kind: 'full-song' as const,
     genreId: world.id, styleId: style.id, styleName: style.name,
     artist, track, name: `${artist} — ${track}`, referenceKey: key,
-    arrangementBasis: arrangement ? 'recording-informed' as const : 'style-derived' as const,
+    reference: { credit: reference.credit, recording: reference.recording },
+    source: selection?.source ?? arrangement.source,
     selectedFromRepertoire: !!selection,
-    description: arrangement?.note ?? reference.qualities.map(q => q.replace(/\s*---$/, '')).join('; '),
+    description: arrangement.note,
   };
 }));
 

@@ -23,10 +23,10 @@ if (process.argv.includes('--report-only')) {
     { id: 'starter-generation', args: script('audit-starters.ts') },
     { id: 'sound-resolution', args: script('sound-metadata.test.ts') },
     { id: 'solo-behavior', args: script('solo-performance.test.ts') },
-    { id: 'regressions', args: ['--import', 'tsx', '--test', 'scripts/musical-fidelity.test.ts', 'scripts/musician-score.test.ts', 'scripts/engine-pipeline.test.ts', 'scripts/sample-accuracy.test.ts', 'scripts/mix-regression.test.ts', 'scripts/dynamic-mix.test.ts', 'scripts/playback-regression.test.ts', 'scripts/song-player-regression.test.ts', 'scripts/instrument-catalog-migration.test.ts'] },
+    { id: 'regressions', args: ['--import', 'tsx', '--test', 'scripts/technique-mechanics.test.ts', 'scripts/musical-fidelity.test.ts', 'scripts/musician-score.test.ts', 'scripts/engine-pipeline.test.ts', 'scripts/sample-accuracy.test.ts', 'scripts/mix-regression.test.ts', 'scripts/dynamic-mix.test.ts', 'scripts/playback-regression.test.ts', 'scripts/song-player-regression.test.ts', 'scripts/instrument-catalog-migration.test.ts', 'scripts/catalog-metadata.test.ts'] },
   ];
   const audioSteps = [
-      { id: 'render-regressions', args: ['--import', 'tsx', '--test', 'scripts/render-regression.test.ts', 'scripts/sample-sound-accuracy.test.ts'] },
+      { id: 'render-regressions', args: ['--import', 'tsx', '--test', 'scripts/technique-audio.test.ts', 'scripts/render-regression.test.ts', 'scripts/sample-sound-accuracy.test.ts'] },
       { id: 'instrument-renderers', args: script('audit-instrument-render.ts') },
       { id: 'ensemble-export', args: script('audio-regression-harness.ts') },
   ];

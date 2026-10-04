@@ -72,7 +72,7 @@ export interface Sheet extends Song {
   patternMemory?: Record<string, Record<string, string>>;
   phrasePatternCache?: Record<string, string>;
   tempoShift?: string;
-  customProgressions?: (CustomProgression | string[])[];
+  customProgressions?: CustomProgression[];
   /**
    * Per-part playing style. regionId -> trackId -> lens. An entry with weight 0
    * explicitly pins the part to the host style, suppressing inference.
@@ -302,10 +302,8 @@ export function patternStyleFit(
     penalty -= 80;
   }
 
-  // Filter styleIds to only those that actually exist in our registry.
-  // Stale styleIds from catalog rebuilds should be treated as unowned/unscoped fallback material
-  // rather than a "sibling style" mismatch which would veto the pattern.
-  const ids = new Set((pattern.styleIds ?? []).filter(id => !!getStyle(id)));
+  // Ownership has already been validated against the authored catalog.
+  const ids = new Set(pattern.styleIds ?? []);
   if (ids.has(styleId)) return 100 + penalty;
   if (stylePatternIds.inferred?.includes(pattern.id)) return 50 + penalty;
   if (stylePatternIds.require?.includes(pattern.id)) return 90 + penalty;
@@ -319,7 +317,7 @@ export function patternStyleFit(
   if (stylePatternIds.allowed?.length && !stylePatternIds.allowed.includes(pattern.id)) {
     return -20 + daring * 35 + penalty;
   }
-  // Unscoped material: ordinary fallback.
+  // Explicitly unscoped reusable material remains available for exploration.
   return penalty;
 }
 
@@ -1129,7 +1127,7 @@ export function addSensibleSectionAfter(sheet: Sheet, regionId: string): { sheet
     ?? (suggestedPaletteForGenre(worldId)[0]?.chords as string[] | undefined)
     ?? PROGRESSIONS[worldId]
     ?? PROGRESSIONS.tango;
-  const pickedChords = progressionForSection(sectionChords, key, kind, chordsFallback, resolved.contract);
+  const pickedChords = progressionForSection(sectionChords, key, kind, chordsFallback);
 
   let id = `r${sheet.regions.length}`;
   while (sheet.regions.some(r => r.id === id)) id = `r${sheet.regions.length + 1}`;
@@ -2027,24 +2025,20 @@ export function makeSheet(
   });
   const runtime = new StyleRuntime(resolved);
 
-  const formTemplates = runtime.getFormTemplate(42);
-  const form = formTemplates && formTemplates.length > 0
-    ? formTemplates
-    : [{ key: 'verse', label: 'Verse', kind: 'verse', bars: 8, intensity: 'medium' as const }];
-  const styleChordCells = (resolved.harmony?.progressionTemplates ?? []).map(x => x.value as string[]);
-  const paletteChordCells = suggestedPaletteForGenre(genreId).map(cell => cell.chords as string[]);
-  const chordCells = styleChordCells.length ? styleChordCells : paletteChordCells;
-  const chords = chordCells[0] ?? ['C','G','Am','F'];
+  const form = runtime.getFormTemplate(42);
+  if (!form?.length) throw new Error(`Style ${resolved.id} has no authored form`);
+  const chordCells = resolved.harmony.progressionTemplates.map(cell => cell.value);
+  if (!chordCells.length) throw new Error(`Style ${resolved.id} has no authored harmony`);
 
   const sectionProgressions = (resolved.harmony?.sectionProgressions as Record<string, string[]>) ?? {};
   const regions: Region[] = form.map((f, i) => {
-    const fallback = chordCells[i % Math.max(1, chordCells.length)] ?? chords;
-    const pickedRaw = progressionForSection(sectionProgressions, f.key, f.kind, fallback, resolved.contract);
+    const recurringCell = chordCells[i % chordCells.length];
+    const pickedRaw = progressionForSection(sectionProgressions, f.key, f.kind, recurringCell);
     // Section templates describe harmonic function, not an automatic key change.
     // Keep the whole song in the first section's tonic unless the user explicitly
     // changes the song key elsewhere.
-    const picked = chordTemplateInKey(pickedRaw, chords[0]);
-    const energy = energyForFormIntensity(f.intensity);
+    const picked = [...pickedRaw];
+    const energy = resolved.arrangement?.energyMappings?.[f.key] ?? energyForFormIntensity(f.intensity);
     return {
       id: `r${i}`, name: f.label, kind: f.kind, formKey: f.key, formLabel: f.label,
       intensity: f.intensity, energy, start: 0, end: f.bars,
@@ -2060,18 +2054,18 @@ export function makeSheet(
   });
 
 
-  // Keep the authored band size, including repeated instrument parts.
-  // Use the genre palette only when the style has no authored band.
-  const stylePalette = runtime.getInstrumentPalette();
-  const genrePalette = contractForGenre(genreId).timbreSpace.palette;
-  const authoredParts = (resolved.arrangement?.ensemble ?? []).flatMap(part =>
-    part.instrumentIds.filter(id => INSTRUMENTS_BY_ID[id]).map(instrumentId => ({ instrumentId, role: String(part.role) })));
-  const hints = authoredParts.length ? authoredParts.map(part => part.instrumentId)
-    : (stylePalette.length ? stylePalette : genrePalette).filter(id => INSTRUMENTS_BY_ID[id]);
+  // Instrument/role entries are distinct parts, including repeated instrument IDs.
+  const authoredParts = resolved.arrangement.ensemble.flatMap(part =>
+    part.instrumentIds.map(instrumentId => {
+      if (!INSTRUMENTS_BY_ID[instrumentId]) throw new Error(`Style ${resolved.id} names unknown instrument ${instrumentId}`);
+      return { instrumentId, role: String(part.role) };
+    }));
+  if (!authoredParts.length) throw new Error(`Style ${resolved.id} has no authored ensemble`);
+  const hints = authoredParts.map(part => part.instrumentId);
 
   const tracks: Voice[] = hints.map((instrumentId, i) => {
     const def = instrument(instrumentId);
-    const role = authoredParts[i]?.role ?? roleForInstrument(instrumentId);
+    const role = authoredParts[i].role;
     return {
       id: `v${i}`, instrumentId, name: def.name, instrument: def.name,
       role, kind: instrumentId,

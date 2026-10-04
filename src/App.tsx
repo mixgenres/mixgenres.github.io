@@ -113,7 +113,8 @@ export default function App() {
     const canonical = getCanonicalStyle(worldId);
     const targetStyleId = styleId ?? canonical.id;
     const entry = catalogId ?? fullSongs.find(entry => entry.styleId === targetStyleId)?.id;
-    const fresh = entry ? createCatalogSong(entry) : createSheet(worldId, targetStyleId);
+    if (!entry) throw new Error(`Missing catalog song for style ${targetStyleId}`);
+    const fresh = createCatalogSong(entry);
     setSong(fresh);
     setPickedRegion(null);
     setBar(0);
@@ -135,7 +136,7 @@ export default function App() {
     stepRef.current = 0;
     seekSecondsRef.current = 0;
     playerRef.current?.locate(0);
-    const targetName = resolveStyle({ genreId: song.worldId, styleId }).name;
+    const targetName = resolveStyle({ genreId: next.worldId, styleId }).name;
     showToast(`Style set to ${targetName}`);
   };
 

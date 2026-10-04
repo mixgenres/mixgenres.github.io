@@ -1,23 +1,16 @@
 import { TANGO_STYLE_MIX } from '../../data/sound/mix/tangoMix';
 import { mergeMixOverrides } from '../studio/dynamicMix/resolveMixContract';
 import { DEFAULT_STYLE_MASTER_PROFILE } from '../../data/sound/mix/masterProfiles';
-import { suggestedPaletteForGenre } from '../lookup/theory';
 import type { SongStyle } from '../../data/styles/schema';
 import type { GenreStyleDefinition } from '../../data/schema';
 import { GENRE_NAMES, GENRE_WORLDS } from '../../data/genres';
-import { buildCuratedStyles, assembleStylePatterns } from './catalog';
-import { applyStyleDialect } from './styleDialect';
+import { assembleStylePatterns } from './catalog';
 import { ALL_PATTERNS, PATTERNS_BY_WORLD, PATTERNS_BY_ID } from '../../data/genres';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { contractForGenre } from '../../engine/style/contracts';
 import { energyForFormIntensity } from '../sheet/sectionEnergy.ts';
 import type { SectionEnergy } from '../../data/schema';
 import { STYLE_REFERENCES, styleReferenceKey } from '../../data/styles/styleReferences';
-
-function shortText(value: string): string {
-  return String(value ?? '').replace(/\s+/g, ' ').trim().split(' ').slice(0, 6).join(' ');
-}
-
 
 function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: boolean): SongStyle {
   const contract = contractForGenre(worldId);
@@ -27,59 +20,29 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: b
   // Repeated canonical IDs are separate ensemble parts. Keep them so a style
   // can use several synth patches or guitar roles without inventing new
   // instrument identities.
-  const instruments = seed.characteristicInstruments
-    .filter((id: string) => INSTRUMENTS_BY_ID[id]);
-  const leadInstrumentId = seed.arrangementSections?.find(section => section.leadInstrumentId)?.leadInstrumentId
-    ?? instruments.find(id => INSTRUMENTS_BY_ID[id]?.acousticProfile?.role === 'lead')
-    ?? instruments[0];
-  const foundation = instruments.filter(id => {
-    const def = INSTRUMENTS_BY_ID[id];
-    return def?.voicing === 'bass' || def?.voicing === 'unpitched';
-  });
-  const harmony = instruments.filter(id => !foundation.includes(id) && id !== leadInstrumentId);
-  const formSteps = seed.arrangementSections?.length ? seed.arrangementSections.map(section => ({
-    key: section.key, label: section.label, kind: section.kind, bars: section.bars,
-    intensity: section.intensity, instrumentIds: section.instruments,
-    leadInstrumentId: section.leadInstrumentId, soloInstrumentId: section.soloInstrumentId, soloMode: section.soloMode, bpm: section.bpm, tempoFeel: section.tempoFeel,
-  })) : contract.form.map((name, i) => {
-    const lower = name.toLowerCase();
-    const solo = /solo|variación|variation|improvisation/.test(lower);
-    const sparse = /intro|break|bridge|breakdown|coda|outro|ending|tag/.test(lower);
-    const active = solo
-      ? [...foundation, ...(leadInstrumentId ? [leadInstrumentId] : []), ...harmony.slice(0, 1)]
-      : sparse
-        ? [...foundation, ...(leadInstrumentId ? [leadInstrumentId] : []), ...harmony.slice(0, 1)]
-        : lower.includes('chorus') || lower.includes('drop') || lower.includes('mambo') || lower.includes('coro')
-          ? instruments
-          : [...foundation, ...(leadInstrumentId ? [leadInstrumentId] : []), ...harmony.slice(0, 2)];
+  if (!seed.calibration || !seed.arrangementSections?.length || !Object.keys(seed.sectionProgressions ?? {}).length) {
+    throw new Error(`Incomplete authored style metadata: ${seed.id}`);
+  }
+  const instruments = [...seed.characteristicInstruments];
+  const assertInstrument = (id: string) => {
+    if (!INSTRUMENTS_BY_ID[id]) throw new Error(`Style ${seed.id} names unknown instrument ${id}`);
+  };
+  instruments.forEach(assertInstrument);
+  const formSteps = seed.arrangementSections.map(section => {
+    section.instruments?.forEach(assertInstrument);
+    for (const id of [section.leadInstrumentId, section.soloInstrumentId]) if (id) assertInstrument(id);
     return {
-      key: `${lower.replace(/[^a-z0-9]+/g,'-')}-${i}`,
-      label: name,
-      kind: name,
-      bars: i === 0 ? 4 : 8,
-      intensity: i === contract.form.length - 1 ? 'low' : (i >= contract.form.length - 2 ? 'high' : 'medium') as 'low'|'medium'|'high'|'peak',
-      instrumentIds: Array.from(new Set(active)),
-      ...(leadInstrumentId ? { leadInstrumentId } : {}),
+      key: section.key, label: section.label, kind: section.kind, bars: section.bars,
+      intensity: section.intensity, instrumentIds: section.instruments,
+      leadInstrumentId: section.leadInstrumentId, soloInstrumentId: section.soloInstrumentId,
+      soloMode: section.soloMode, bpm: section.bpm, tempoFeel: section.tempoFeel,
     };
   });
-  const ensemble = instruments.map((instrumentId: string, i: number) => {
-    const def = INSTRUMENTS_BY_ID[instrumentId];
-    const authoredRole = def?.acousticProfile?.role;
-    const role = instrumentId === leadInstrumentId ? 'lead'
-      : def?.voicing === 'bass' || authoredRole === 'bass' ? 'bass'
-      : def?.voicing === 'unpitched' || authoredRole === 'perc' || authoredRole === 'percussion' ? 'percussion'
-      : def?.family === 'voice' ? 'voice'
-      : authoredRole === 'lead' ? 'lead'
-      : authoredRole === 'melody' ? 'melody'
-      : def?.voicing === 'single' ? 'melody' : 'harmony';
-    return { role, instrumentIds:[instrumentId], priority:10-i };
+  const authoredEnsemble = Object.entries(seed.calibration.roles).map(([role, preference], i) => {
+    preference.preferredInstruments.forEach(assertInstrument);
+    return { role, instrumentIds: [...preference.preferredInstruments], priority: 100 - i };
   });
-  const authoredEnsemble = seed.calibration?.roles
-    ? Object.entries(seed.calibration.roles).flatMap(([role, preference], i) => {
-      const instrumentIds = preference.preferredInstruments.filter(id => INSTRUMENTS_BY_ID[id]);
-      return instrumentIds.length ? [{ role, instrumentIds, priority: 100 - i }] : [];
-    })
-    : ensemble;
+  if (!authoredEnsemble.some(part => part.instrumentIds.length)) throw new Error(`Style ${seed.id} has no authored ensemble`);
   return {
     id: seed.id,
     sourceProvenance: {
@@ -103,9 +66,9 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: b
     genres:[worldId], primaryGenre:worldId,
     kind:canonical ? 'canonical' : 'form', canonical,
     summary: calibrationReference?.qualities.length
-      ? calibrationReference.qualities.slice(0, 3).join('; ')
-      : shortText(seed.description || `${seed.name} ${GENRE_NAMES[worldId]}`),
-    signatureTraits:(seed.coreConcepts ?? seed.rhythmicGrammar ?? [seed.name]).slice(0, 6),
+      ? calibrationReference.qualities.join('; ')
+      : seed.description,
+    signatureTraits:[...(seed.coreConcepts ?? seed.rhythmicGrammar ?? [seed.name])],
     ...(calibrationReference ? {
       reference: { credit: calibrationReference.credit, ...(calibrationReference.recording ? { recording: calibrationReference.recording } : {}) },
       calibrationQualities: [...calibrationReference.qualities],
@@ -114,14 +77,15 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: b
     form:{
       sectionVocab:[...contract.form],
       templates:[{w:1, value:formSteps}],
-      preferredMeters:[seed.preferredMeters?.[0] ?? contract.meter],
+      preferredMeters:[...seed.preferredMeters],
     },
     harmony:{
       model:seed.harmonyModel ?? contract.harmonyModel,
       modePolicy: seed.scaleMode ?? contract.pitchModel.toLowerCase().replace(/\s+/g, '-'),
-      progressionTemplates:Array.from(new Map(
-        (Object.keys(seed.sectionProgressions ?? {}).length ? Object.values(seed.sectionProgressions!) : seed.calibration?.harmony.progressionExamples ?? suggestedPaletteForGenre(worldId).map(cell => cell.chords as string[])).filter((value): value is string[] => Array.isArray(value)).map(value => [JSON.stringify(value), value] as const)
-      ).values()).map(value => ({w:1, value})),
+      progressionTemplates:Object.entries(seed.sectionProgressions!).map(([section, value]) => {
+        if (!value?.length) throw new Error(`Style ${seed.id} has empty harmony for ${section}`);
+        return {w:1, value:[...value]};
+      }),
       chordVocabulary:Array.from(new Set([...(seed.calibration?.harmony.chordQualities ?? contract.harmonyVocabulary), ...(Object.values(seed.sectionProgressions ?? {}).flatMap(x => x).map(String))])),
       harmonicRhythm:seed.calibration?.harmony.harmonicRhythm ?? contract.harmonicRhythm,
       bassMotion:seed.bassMotion ?? contract.bass.style,
@@ -184,8 +148,7 @@ for (const world of GENRE_WORLDS) {
   }
 }
 
-let styles = buildCuratedStyles(baseStyles, ALL_PATTERNS);
-styles = styles.map((style, index) => applyStyleDialect(style, index));
+const styles = baseStyles;
 const curatedPatterns = assembleStylePatterns(styles, ALL_PATTERNS);
 
 // The runtime registry exposes shared pattern definitions through genre views.
@@ -198,19 +161,6 @@ for (const pattern of curatedPatterns) {
   for (const [genreId, patternIds] of patternIdsByGenre) {
     if (patternIds.has(pattern.id)) (PATTERNS_BY_WORLD[genreId] ??= []).push(pattern);
   }
-}
-
-// Pattern selection is exclusively drawn from authored, reusable catalog entries.
-// No per-style generated patterns are created or exposed.
-for (const style of styles) {
-  const curated = Array.from(new Set(style.patterns?.allowed ?? []));
-  style.patterns = {
-    require: Array.from(new Set(style.patterns?.require ?? [])).filter(id => curated.includes(id)),
-    preferred: Array.from(new Set(style.patterns?.preferred ?? [])).filter(id => curated.includes(id)),
-    allowed: curated,
-    avoid: Array.from(new Set(style.patterns?.avoid ?? [])),
-    inferred: Array.from(new Set(style.patterns?.inferred ?? [])).filter(id => curated.includes(id)),
-  };
 }
 
 export const ALL_STYLES = styles;

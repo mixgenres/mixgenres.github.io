@@ -41,6 +41,7 @@ import { contentKey } from '../cache/contentKey';
 import { LRUMap, registerCache } from '../cache/lru';
 import { interpretRelationships } from './interactions';
 import { resolveWrittenTies } from './writtenTies';
+import { realizeTechniquePerformance } from './techniquePerformance';
 
 export { GESTURE_NAMES, GESTURE_CODES };
 
@@ -545,7 +546,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
               soloGrammar,
               soloist,
             };
-            const authoredGesture = detail?.articulations?.length ? detail.articulations[i % detail.articulations.length] : detail?.articulation;
+            const authoredGesture = writtenBar.attacks[i].technique ?? (detail?.articulations?.length ? detail.articulations[i % detail.articulations.length] : detail?.articulation);
             const authoredHint = authoredGesture ?? patternGestureHint(ctx.pattern, profile.instrumentId, regionStyle.id);
             const dialectTechnique = dialect?.defaultTechnique;
             let gestureName = !authoredHint && dialectTechnique && profile.gestures[dialectTechnique]
@@ -804,6 +805,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
     note.frequencyHz = resolveTuningSystem(style.harmony?.tuningSystem ?? '12-tet')
       .getFrequencyHz(note.midi, parseChord(sheet.measures[note.bar]?.chord || 'C').rootPc) * 2 ** ((note.tuningCents ?? 0) / 1200);
   }
+  realizeTechniquePerformance(performance);
   return performance;
 }
 

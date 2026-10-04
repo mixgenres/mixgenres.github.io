@@ -56,7 +56,7 @@ export function PerformanceInspector({ song, onClose }: { song: SongSheet; onClo
       <p role="status" className="text-xs mb-4">{status}</p>
       <p className="text-xs mb-4">Audio is prepared after edits. Play, pause and seek use the prepared mix. Cached instrument audio: {number(preparedAudioStats().bytes/1024/1024)} MB.</p>
       <div className="flex flex-wrap gap-2 my-3" role="tablist" aria-label="Music engine layers">{(['notation','interpretation','sound','mix'] as const).map((item,index) => <button key={item} role="tab" aria-selected={layer === item} className="btn-pill" onClick={() => setLayer(item)}>{index+1}. {item === 'notation' ? 'Written notation' : item === 'interpretation' ? 'Band interpretation' : item === 'sound' ? 'Instrument physics' : 'Audio mix'}</button>)}</div>
-      <p className="text-xs mb-4">Exact quarter-note fractions preserve written rhythms. Improvisation and chord instructions are resolved by the band. These are original study arrangements.</p>
+      <p className="text-xs mb-4">Exact quarter-note fractions preserve written rhythms. Improvisation and chord instructions are resolved by the band. {song.catalogKind === 'full-song' ? 'This is an editable score adaptation, not a verified recording transcription.' : 'This is an original style study.'}</p>
       {layer === 'mix' ? <div>{pipeline.mix.scenes.map((scene,index) => <details key={index} className="my-3"><summary>{scene.sectionId} · beats {scene.startBeat}–{scene.endBeat} · {scene.styleId}</summary><pre className="text-xs whitespace-pre-wrap">{JSON.stringify({ foreground: scene.foregroundTrackIds, tracks: scene.tracks, masking: scene.masking, mix: scene.resolvedMix.trace }, null, 2)}</pre></details>)}</div> : song.tracks.map((track, partIndex) => {
         const instrument = INSTRUMENTS_BY_ID[track.instrumentId ?? ''];
         const notes = score.notes.filter(note => note.trackId === track.id);
@@ -91,8 +91,8 @@ export function PerformanceInspector({ song, onClose }: { song: SongSheet; onClo
                     if (rest) return <tr key={`rest-${i}`} className="opacity-60"><td>{formatBeat(beatFraction(position + 1))}</td><td>Rest</td><td>{formatBeat(rest.duration)}</td><td colSpan={4}>—</td></tr>;
                     const note = segment!.note, cents = scoreTuningCents(note.midi, note.frequencyHz);
                     return <tr key={`${note.id}-${bar.index}`}><td>{formatBeat(beatFraction(position + 1))}</td>
-                      <td>{percussion ? note.playback.percussion?.name ?? `Hit ${note.midi}` : scorePitch(note.midi, bar.chord).name}{!percussion && <span className="opacity-60"> · {number(note.frequencyHz)} Hz{Math.abs(cents) > .05 ? ` (${number(cents)}¢)` : ''}</span>}{segment!.tieIn ? ' · tied in' : ''}{segment!.tieOut ? ' · tie →' : ''}</td>
-                      <td>{formatBeat(beatFraction(segment!.duration))}</td><td>{note.technique}</td><td>{note.velocity}</td>
+                      <td>{note.pitchIdentity === 'unpitched' ? 'Unpitched contact' : percussion ? note.playback.percussion?.name ?? `Hit ${note.midi}` : scorePitch(note.midi, bar.chord).name}{!percussion && note.pitchIdentity !== 'unpitched' && <span className="opacity-60"> · {number(note.frequencyHz)} Hz{Math.abs(cents) > .05 ? ` (${number(cents)}¢)` : ''}</span>}{segment!.tieIn ? ' · tied in' : ''}{segment!.tieOut ? ' · tie →' : ''}</td>
+                      <td>{formatBeat(beatFraction(segment!.duration))}</td><td>{note.technique}{note.playback.bodyAttack ? ` + ${note.playback.musicianNotation?.bodyTechnique}` : ''}</td><td>{note.velocity}</td>
                       <td>{number(note.expression.offsetSeconds * 1000)} ms · {number(note.expression.gateRatio)}× gate</td><td>{note.source.pitch}{note.source.derived ? ' · fill' : ''}</td></tr>;
                   })}</tbody>
                 </table></div>

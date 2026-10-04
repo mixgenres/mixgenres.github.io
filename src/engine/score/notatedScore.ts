@@ -11,6 +11,7 @@ import { beatFraction, beatValue, type BeatFraction } from './musicianScore';
 import { resolveNotatedDrum, notatedDrum, type NotatedDrum } from './percussionNotation';
 import { LRUMap, registerCache } from '../cache/lru';
 import { contentKey } from '../cache/contentKey';
+import { techniqueMechanics } from '../../data/performance/techniqueMechanics';
 
 export type WrittenPitch = { kind: 'notes'; value: NonNullable<PatternEvent['pitch']> }
   | { kind: 'drum'; drum: NotatedDrum }
@@ -20,6 +21,7 @@ export interface WrittenAttack {
   velocity: number; accent: number; hit: HitFunction; sourceHit?: string;
   technique?: string; microtiming: { value: number; unit: 'milliseconds' | 'grid' }; durationAuthored: boolean;
   notation?: PatternEvent['notation'];
+  pitchIdentity?: 'pitched' | 'unpitched';
 }
 export interface WrittenBar { bar: number; patternId: string; patternName: string; variation?: string; attacks: WrittenAttack[]; rests: Array<{ position: BeatFraction; duration: BeatFraction }> }
 export interface NotationCell {
@@ -56,13 +58,15 @@ export function compileNotatedScore(sheet: Sheet): NotatedScore {
             const native = detail?.perf as NativeSlice | undefined;
             const onsets = patternId === 'silent' ? [] : native?.onsets ?? detail?.onsetGrid ?? [];
             const steps = native?.stepsPerBar ?? 16;
-            const attacks = onsets.map((onset, index): WrittenAttack => {
+            const attacks = onsets.flatMap((onset, index): WrittenAttack | WrittenAttack[] => {
               const position = (native?.fractionalPositions?.[index] ?? onset / steps) * beats + (pattern?.anticipationOffset ?? 0) / steps * beats;
               const sourceHit = native?.hitTypes?.[index] || detail?.hitTypes?.[index] || pattern?.hitGrid?.[index]
                 || (pattern?.instruments?.includes('drums') || pattern?.family?.toLowerCase().includes('drum') ? `${pattern.id} ${pattern.name}` : undefined);
               const hit = notatedHit(pattern, index, native?.hitTypes?.[index] || detail?.hitTypes?.[index]);
               let value = native?.pitches?.[index];
               const directions = native?.notations?.[index];
+              if (directions?.bodyTechnique && !(def.id === 'guitar' || def.id === 'upright-bass' || def.family === 'bowed')) throw new Error(`No body-strike renderer for ${def.id}`);
+              if (directions?.tuplet && (!Number.isInteger(directions.tuplet.actual) || directions.tuplet.actual < 1 || !Number.isInteger(directions.tuplet.normal) || directions.tuplet.normal < 1)) throw new Error('Invalid written tuplet');
               if (directions?.string !== undefined && (!Number.isInteger(directions.string) || directions.string < 1)) throw new Error('Invalid written string number');
               if (directions?.fret !== undefined && (!Number.isInteger(directions.fret) || directions.fret < 0)) throw new Error('Invalid written fret');
               if (directions?.string && directions.fret !== undefined) {
@@ -75,10 +79,16 @@ export function compileNotatedScore(sheet: Sheet): NotatedScore {
               const pitch: WrittenPitch = percussion ? { kind: 'drum', drum: value?.midi !== undefined
                 ? notatedDrum(def.id, Array.isArray(value.midi) ? value.midi[0] : value.midi) : resolveNotatedDrum(def.id, sourceHit, hit, index) }
                 : value ? { kind: 'notes', value } : { kind: 'instruction', instruction: /bass|low-anchor/.test(role) ? 'bass-motion' : /lead|melody|counterline|voice/.test(role) ? 'improvise' : 'voice-chord', role };
-              return { position: beatFraction(position), duration: beatFraction((native?.durations?.[index] ?? detail?.durationGrid?.[index] ?? 1) / steps * beats), pitch,
+              const technique = native?.articulations?.[index] || detail?.articulations?.[index] || detail?.articulation;
+              const attack: WrittenAttack = { position: beatFraction(position), duration: beatFraction((native?.durations?.[index] ?? detail?.durationGrid?.[index] ?? 1) / steps * beats), pitch,
+                pitchIdentity: technique ? techniqueMechanics(def, technique).pitchIdentity : undefined,
                 velocity: native?.velocities?.[index] ?? pattern?.velocityProfile?.[index] ?? .72, accent: native?.accents?.[index] ?? detail?.accentProfile?.[index] ?? .72,
-                hit, sourceHit, technique: native?.articulations?.[index] || detail?.articulations?.[index] || detail?.articulation,
+                hit, sourceHit, technique,
                 microtiming: { value: native?.microtiming?.[index] ?? 0, unit: Math.abs(native?.microtiming?.[index] ?? 0) > .5 ? 'milliseconds' : 'grid' }, durationAuthored: native?.durationsAuthored ?? Boolean(detail?.durationGrid), notation: directions };
+              if (percussion && Array.isArray(value?.midi)) {
+                return value.midi.map(midi => ({ ...attack, pitch: { kind: 'drum', drum: notatedDrum(def.id, midi) } }));
+              }
+              return attack;
             });
             return { bar, patternId, patternName: pattern?.name ?? 'Silent', variation: detail?.variationType, attacks, rests: [] };
           });

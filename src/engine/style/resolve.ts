@@ -1,5 +1,4 @@
-import { resolveMixLayers, blendMixInfluence, legacyMixCharacterLayer, type MixLayer } from '../studio/dynamicMix/resolveMixContract';
-import { STYLE_PATCHES } from '../../data/styles/contracts';
+import { resolveMixLayers, blendMixInfluence, type MixLayer } from '../studio/dynamicMix/resolveMixContract';
 import { DEFAULT_STYLE_MASTER_PROFILE } from '../../data/sound/mix/masterProfiles';
 import type {
   SongStyle,
@@ -438,7 +437,6 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
 
   const world = contractForGenre(effectiveGenreId);
   const mixLayers: MixLayer[] = hierarchy.slice(0, -1).flatMap(parent => [
-    { mix: legacyMixCharacterLayer(STYLE_PATCHES[parent.id]?.timbreSpace?.mixCharacter), source: { source: 'extends' as const, sourceId: parent.id } },
     { mix: parent.sound?.mix, source: { source: 'extends' as const, sourceId: parent.id } },
   ]);
   for (const influence of appliedInfluences) {
@@ -450,7 +448,6 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
       source: { source: 'influence', sourceId: source.id, weight: influence.weight } });
   }
   mixLayers.push(
-    { mix: legacyMixCharacterLayer(STYLE_PATCHES[targetStyle.id]?.timbreSpace?.mixCharacter), source: { source: 'style', sourceId: targetStyle.id } },
     { mix: targetStyle.sound?.mix, source: { source: 'style', sourceId: targetStyle.id } },
     { mix: opts.userOverrides?.sound?.mix, source: { source: 'user' } },
   );

@@ -2,12 +2,13 @@ import { EXPORT_FORMATS, type ExportFormat } from '../export/formats';
 import React, { useMemo, useState, useEffect } from 'react';
 import { Sheet, Chip } from './Sheet';
 import { Glyph } from './Glyph';
-import { PLATES, plateFor } from './worlds';
+import { GENRE_PLATES, plateFor } from './worlds';
 import { INSTRUMENT_CATALOG, FAMILY_LABELS, FAMILY_ORDER, instrument } from '../engine/lookup/instruments';
 import { ALL_PATTERNS, GENRE_WORLDS_BY_ID, cleanPatternName, FEEL_ORDER, FEEL_LABELS, feelsForPattern, PatternFeel } from '../data/genres';
 import { Voice, toBar, getGenreForm, parseChord } from '../engine/sheet/index.ts';
 import { BAR_CHOICES } from '../data/barChoices';
 import { FEELS } from '../data/tempoFeels';
+import { genreCategoryId } from '../data/genreCategories';
 import { ENERGY_LABELS } from '../data/performance/energy';
 import type { Region } from '../types';
 import { CHORD_PALETTE, CHORD_MOODS, CHORD_MOOD_ORDER, ChordMood, JAZZ_CHORD_LIBRARY, suggestedPaletteForStyle } from '../engine/lookup/theory';
@@ -94,8 +95,8 @@ export function WorldSheet({
       )}
 
       <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
-        {Object.entries(PLATES).map(([id, p]) => {
-          const active = id === current;
+        {Object.entries(GENRE_PLATES).map(([id, p]) => {
+          const active = id === genreCategoryId(current);
           return (
             <GenreTile key={id} id={id} p={p} active={active} onClick={() => handleSelectWorld(id)} />
           );
@@ -323,7 +324,7 @@ export function PatternSheet({
     } else {
       items = [...items].sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
     }
-    return items.slice(0, 1000);
+    return items;
   }, [scope, feel, category, q, voice, worldId]);
 
   return (
@@ -485,7 +486,7 @@ export function ChordsControl({
   currentWorldId?: string;
   styleId?: string;
   onChords?: (chords: string[]) => void;
-  customProgressions?: any[];
+  customProgressions?: Array<{ id: string; name: string; chords: string[] }>;
   onAddCustomChords?: (name: string, chords: string[]) => void;
   onUpdateCustomChords?: (id: string, name: string, chords: string[]) => void;
   onDeleteCustomChords?: (id: string) => void;
@@ -615,9 +616,7 @@ export function ChordsControl({
 
       {customProgressions && customProgressions.length > 0 && (
         <div className="flex flex-wrap gap-2 mb-4">
-          {customProgressions.map((prog, i) => {
-            const isLegacy = Array.isArray(prog);
-            const p = isLegacy ? { id: `legacy-${i}`, name: 'Custom', chords: prog } : prog;
+          {customProgressions.map(p => {
             const progStr = p.chords.join(' ');
             const isActive = currentProgStr === progStr;
             return (
@@ -626,8 +625,7 @@ export function ChordsControl({
                   <span className="font-semibold mr-1.5">{p.name}:</span>
                   <span className="font-mono">{progStr}</span>
                 </Chip>
-                {!isLegacy && (
-                  <div className="hidden group-hover:flex items-center ml-1.5 bg-black/5 overflow-hidden rounded-[3px]" style={{ border: '1px solid color-mix(in srgb, var(--ink) 20%, transparent)' }}>
+                <div className="hidden group-hover:flex items-center ml-1.5 bg-black/5 overflow-hidden rounded-[3px]" style={{ border: '1px solid color-mix(in srgb, var(--ink) 20%, transparent)' }}>
                     <button
                       onClick={() => {
                         setEditingProgressionId(p.id);
@@ -647,8 +645,7 @@ export function ChordsControl({
                     >
                       Delete
                     </button>
-                  </div>
-                )}
+                </div>
               </div>
             );
           })}
@@ -769,7 +766,7 @@ export function ChordSheet({
   currentWorldId?: string;
   styleId?: string;
   onChords?: (chords: string[]) => void;
-  customProgressions?: any[];
+  customProgressions?: Array<{ id: string; name: string; chords: string[] }>;
   onAddCustomChords?: (name: string, chords: string[]) => void;
   onUpdateCustomChords?: (id: string, name: string, chords: string[]) => void;
   onDeleteCustomChords?: (id: string) => void;
@@ -832,7 +829,7 @@ export function SectionSheet({
   onGenre?: (genreId: string) => void;
   onEnergy?: (energy: SectionEnergy) => void;
   currentWorldId?: string;
-  customProgressions?: any[];
+  customProgressions?: Array<{ id: string; name: string; chords: string[] }>;
   onAddCustomChords?: (name: string, chords: string[]) => void;
   onUpdateCustomChords?: (id: string, name: string, chords: string[]) => void;
   onDeleteCustomChords?: (id: string) => void;
@@ -1007,8 +1004,8 @@ export function SectionSheet({
         <>
           <div className="micro mb-2">Part genre</div>
           <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mb-5">
-            {Object.entries(PLATES).map(([genreId, p]) => {
-              const active = (region.genre ?? currentWorldId ?? 'tango') === genreId;
+            {Object.entries(GENRE_PLATES).map(([genreId, p]) => {
+              const active = genreCategoryId(region.genre ?? currentWorldId ?? 'tango') === genreId;
               return (
                 <GenreTile key={genreId} id={genreId} p={p} active={active} onClick={() => onGenre(genreId)} compact />
               );
@@ -1062,12 +1059,12 @@ export function SectionGenreSheet({
       title={regionKind ? `Part genre: ${regionKind}` : 'Part genre'}
     >
       <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
-        {Object.entries(PLATES).map(([id, p]) => (
+        {Object.entries(GENRE_PLATES).map(([id, p]) => (
           <GenreTile
             key={id}
             id={id}
             p={p}
-            active={id === currentGenre}
+            active={id === genreCategoryId(currentGenre)}
             onClick={() => {
               onPick(id);
               onClose();
@@ -1528,12 +1525,12 @@ export function StartOverModal({
               )}
             </div>
             <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 max-h-[55vh] overflow-y-auto pr-1">
-              {Object.entries(PLATES).map(([id, p]) => (
+              {Object.entries(GENRE_PLATES).map(([id, p]) => (
                 <GenreTile
                   key={id}
                   id={id}
                   p={p}
-                  active={id === currentWorldId}
+                  active={id === genreCategoryId(currentWorldId)}
                   onClick={() => {
                     onSelectNewGenre(id);
                     setShowAllGenres(false);

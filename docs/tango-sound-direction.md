@@ -1,4 +1,6 @@
-# A compact, convincing tango engine
+# Tango synthesis design notes
+
+This document records an earlier graph inspection and proposed design work. Numerical counts and source descriptions below are observations from that snapshot, not assertions about the current renderer or catalog. Rerun the cited audit against the current checkout before using them as measurements.
 
 The current score checks establish that notes, rests and techniques survive compilation. They do not establish good sound. The previous corrections are useful, but the present synthesis architecture still falls short of a convincing tango ensemble. Playback and export now use the physical instrument models directly, so improvements must address their synthesis and performance behavior.
 

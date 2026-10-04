@@ -7,7 +7,7 @@ export const ENTRY_6: [string, InstrumentDialect] = ["guitar:flamenco", {
     family: 'guitar',
     performanceMode: 'acoustic-ensemble',
     defaultTechnique: 'fingerstyle',
-    allowedTechniques: ['fingerstyle', 'rasgueado', 'abanico', 'golpe', 'arrastre', 'palm-mute'],
+    allowedTechniques: ['fingerstyle', 'rasgueado', 'abanico', 'golpe', 'picado', 'alzapua', 'tremolo', 'palm-mute'],
     pluckPositionOverride: 0.22,
     brightnessMultiplier: 1.25,
     decayMultiplier: 0.85,

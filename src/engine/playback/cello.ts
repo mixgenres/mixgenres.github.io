@@ -4,18 +4,18 @@ import { el } from '@elemaudio/core';
 import { seedOf, randNorm } from '../sheet/random.ts';
 import type { VoiceRenderContext, InstrumentModule, AudioSignal } from './instrumentTypes.ts';
 import { createDampedStringLoop, fbGainForDecay } from './instrumentLib_stringLoop.ts';
+import { renderBodyStrike, renderMutedString, renderStrappata } from './stringPercussion';
 
 /**
  * CelloModule
  * 
- * Physical synthesis module modeling an authentic acoustic violoncello:
- * - Heavy wound steel/gut string stick-slip friction with realistic inertia and settling hysteresis
- * - Resonant corpus acoustics: 110Hz Helmholtz air mode, 180Hz main wood corpus mode, and 1.55kHz bridge hill
- * - 4-string open sympathetic resonance bank (C2, G2, D3, A3)
- * - Authentic tango arrastre bow drags, expressive cantabile vibrato, and deep woody pizzicato
+ * Estimated source/filter bowed tone and plucked delay loops, with fixed
+ * corpus modes, open-string coloration, and separate tango contacts.
+ * It does not simulate a nonlinear bow/string junction or measured inertia.
  */
 export default class CelloModule implements InstrumentModule {
   id = 'cello';
+  ownedDspSections: InstrumentModule['ownedDspSections'] = ['coupledResonators', 'mechanicalArtifacts'];
 
   renderVoice(ctx: VoiceRenderContext): AudioSignal {
     const {
@@ -46,13 +46,17 @@ export default class CelloModule implements InstrumentModule {
     const isYumba = action === 'yumba' || /yumba/i.test(action ?? '');
     const isMarcato = action === 'marcato' || /marcato|marked/i.test(action ?? '');
 
+    if (ctx.voice.mechanics?.surface === 'soundboard') return renderBodyStrike(ctx, 'cello');
+    if (action === 'strappata') return renderStrappata(ctx);
+    if (ctx.voice.mechanics?.surface === 'muted-string') return renderMutedString(ctx);
+
     // 2. Special Extended Techniques (Chicharra Scrape)
     if (isChicharra) {
       const scrapeNoise = el.svf({ mode: 'bandpass' }, 3400, 5.0, el.pinknoise());
       const scrapeLfo = el.add(el.const({ value: 0.55 }), el.mul(el.const({ value: 0.45 }), el.blepsaw(el.const({ value: 14 }))));
       const cricketMod = el.mul(scrapeLfo, scrapeNoise);
       const chicharraEnv = el.adsr(0.002, 0.18, 0.2, 0.05, gateSignal);
-      const ring = el.mul(0.15, el.cycle(el.mul(safeFreqSignal, 4.0)));
+      const ring = el.mul(0.15, el.cycle(2200));
       return el.mul(chicharraEnv, el.add(cricketMod, ring));
     }
 
@@ -62,13 +66,8 @@ export default class CelloModule implements InstrumentModule {
     const intonationJitter = randNorm(noteSeed ^ 0x22) * (isStaccato ? 0.018 : 0.006);
     const intonationOffset = el.mul(el.const({ value: intonationJitter }), settleEnv);
 
-    // Arrastre drag scoop
-    const arrastreEnv = el.adsr(0.001, 0.090, 0, 0.01, gateSignal);
-    const arrastrePitchMod = isArrastre
-      ? el.sub(1.0, el.mul(el.const({ value: isTango ? tangoResponse.arrastreSemitones : tangoResponse.arrastreDefault }), arrastreEnv))
-      : el.const({ value: 1.0 });
-
-    const settledFreq = el.mul(safeFreqSignal, el.mul(el.add(1.0, intonationOffset), arrastrePitchMod));
+    // Arrastre approach pitches are authored; the renderer adds bow energy.
+    const settledFreq = el.mul(safeFreqSignal, el.add(1.0, intonationOffset));
 
     // 4. Warmer, Deeper Cello Vibrato (5.2Hz, slightly deeper than violin, organic fluctuation jitter)
     const baseVibSpeed = 5.2 + randNorm(noteSeed ^ 0x44) * 0.15;
@@ -131,8 +130,8 @@ export default class CelloModule implements InstrumentModule {
       ? el.adsr(0.0006, 0.020, 0, 0.010, gateSignal)
       : el.adsr(0.035, 0.12, 0.80, 0.060, gateSignal);
 
-    const bowSpeed = el.mul(el.const({ value: params.bowVelocity }), tremoloMod);
-    const bowForce = el.const({ value: params.bowPressure });
+    const bowSpeed = el.mul(el.const({ value: ctx.voice.mechanics?.bowVelocity ?? params.bowVelocity }), tremoloMod);
+    const bowForce = el.const({ value: ctx.voice.mechanics?.bowPressure ?? params.bowPressure });
     
     const rosinCutoff = isSulPonticello ? 2400 : (isSulTasto ? 550 : 750);
     const rosinGrit = isSulPonticello ? 1.55 : (isSulTasto ? 0.40 : 1.15);
@@ -159,9 +158,10 @@ export default class CelloModule implements InstrumentModule {
       ? el.mul(tangoResponse.yumbaPulseGain, el.mul(el.cycle(82), el.adsr(0.001, 0.055, 0, 0.012, gateSignal)))
       : el.const({ value: 0 });
 
-    const excited = el.add(coreOsc, el.add(tangoWeight, el.add(frictionNoise, el.add(sympatheticSum, el.add(bowCatch, yumbaPulse)))));
+    const bowEnergy = isArrastre ? el.adsr(Math.min(.09, (ctx.voice.noteDurationSeconds ?? .2) * .5), .02, 1, .03, gateSignal) : 1;
+    const excited = el.mul(bowEnergy, el.add(coreOsc, el.add(tangoWeight, el.add(frictionNoise, el.add(sympatheticSum, el.add(bowCatch, yumbaPulse))))));
     
-    // Non-linear slip-stick saturation
+    // Source/filter saturation approximation
     const stickSlip = el.tanh(el.mul(el.add(1.0, el.mul(bowForce, 2.5)), excited));
 
     // Cello resonant body coloring: Main air cavity (Helmholtz 112Hz), Wood modes (185Hz), and Bridge Hill (1550Hz)
