@@ -109,6 +109,14 @@ export interface BandPlan {
 }
 
 function clamp(v: number, a = 0, b = 1): number { return Math.max(a, Math.min(b, v)); }
+function techniqueRoleClass(role: string): string {
+  const value = role.toLowerCase();
+  if (/lead|melody|voice/.test(value)) return 'lead';
+  if (/bass/.test(value)) return 'bass';
+  if (/percussion|drum|pulse|perc/.test(value)) return 'percussion';
+  if (/harmony|comp|chord/.test(value)) return 'harmony';
+  return value;
+}
 
 /** Map normalized section energy (0.2..1) and a pattern velocity to MIDI velocity. */
 export { velocityForEnergy } from './velocity.ts';
@@ -455,6 +463,9 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
       const firstNote = notes.length, firstPhrase = phrases.length;
       const profile = getInstrumentPerformanceProfile(track.instrumentId);
       const dialect = resolveDialect(track.instrumentId, region.genre ?? sheet.worldId, regionStyle.id, track.role, decision.sectionEnergy);
+      const partDialect = lane.lens.weight > 0
+        ? resolveDialect(track.instrumentId, lane.lens.sourceGenre, lane.lens.sourceStyleId, track.role, decision.sectionEnergy)
+        : undefined;
       const cycle = Math.max(1, Number(regionStyle?.contract?.cycleLength ?? 1));
       const soloCandidates = soloPlan?.trackIds ?? [];
       const soloGrammar = soloPlan ? {
@@ -558,7 +569,9 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
             };
             const authoredGesture = writtenBar.attacks[i].technique ?? (detail?.articulations?.length ? detail.articulations[i % detail.articulations.length] : detail?.articulation);
             const authoredHint = authoredGesture ?? patternGestureHint(ctx.pattern, profile.instrumentId, regionStyle.id);
-            const dialectTechnique = dialect?.defaultTechnique;
+            const dialectTechnique = lane.lens.weight >= 0.5
+              ? partDialect?.defaultTechnique ?? dialect?.defaultTechnique
+              : dialect?.defaultTechnique ?? partDialect?.defaultTechnique;
             let gestureName = !authoredHint && dialectTechnique && profile.gestures[dialectTechnique]
               ? dialectTechnique
               : effectiveGesture(profile, ctx, onset, authoredGesture);
@@ -598,6 +611,14 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
               scoreDurationSeconds({ bars }, bar, onset.position * bt.beatsPerBar, writtenDuration)
               * (onset.durationAuthored ? 1 : 0.82 + ctx.hostProfile.phrase.sustain * 0.32));
             const tuning = resolveTuningSystem(regionStyle.harmony?.tuningSystem ?? '12-tet');
+            const genericGesture = Boolean(authoredGesture && ['accent','staccato','legato','tenuto'].includes(authoredGesture.toLowerCase()));
+            const roleClass = techniqueRoleClass(track.role);
+            const hostRoles = sharedHostProfile.roles.map(techniqueRoleClass);
+            const partRoleOutsideHost = !hostRoles.includes(roleClass);
+            const patternRoleMismatch = !ctx.pattern.roles?.some(value => techniqueRoleClass(value) === roleClass)
+              && !ctx.pattern.compatibleRoles?.some(value => techniqueRoleClass(value) === roleClass)
+              && !ctx.pattern.canCrossRole;
+            const shouldAdaptGenericGesture = genericGesture && (lane.lens.weight >= .5 || partRoleOutsideHost || patternRoleMismatch);
 
             for (let mi = 0; mi < midis.length; mi++) {
               const exactPitch = onset.pitch?.midi !== undefined || Boolean(onset.percussion);
@@ -633,9 +654,11 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
                 originCode: 0,
                 // Generic articulation words establish a base articulation;
                 // style calibration may realize a more specific playable
-                // action on selected attacks. Named techniques stay protected.
+                // action when the part lens or assigned role changes its job.
+                // Named techniques stay protected, as do authored articulations
+                // when the pattern is being played in its intended role/style.
                 authoredTechnique: Boolean(authoredGesture && profile.gestures[authoredGesture]
-                  && !['accent','staccato','legato','tenuto'].includes(authoredGesture.toLowerCase())),
+                  && !shouldAdaptGenericGesture),
                 authoredPitch: Boolean(onset.pitch || onset.percussion),
                 authoredDuration: Boolean(onset.durationAuthored),
               };

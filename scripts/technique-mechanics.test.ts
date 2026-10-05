@@ -202,7 +202,21 @@ test('playback adapts style techniques through a part lens and atypical role', (
   const result = optimizePerformanceByPhraseAndSong(sheet, perf).performance;
   const gestures = new Set(result.notes.map(note => GESTURE_NAMES[note.gestureCode]));
   assert.ok(gestures.has('golpe'), 'the body strike is available when guitar is assigned a percussion role');
-  assert.ok(gestures.has('golpe'), `guest style gesture is selected during phrase realization: ${[...gestures].join(', ')}`);
+});
+
+test('compiled pattern playback uses a guest style after an atypical role assignment', () => {
+  const base = makeSheet('blues', 'blues-slow-blues');
+  const region = base.regions[0];
+  const guitar = base.tracks.find(track => track.instrumentId === 'guitar')!;
+  const sheet = rebuild({ ...base,
+    partLens: { [region.id]: { [guitar.id]: { genreId: 'flamenco', styleId: 'flamenco-solea', weight: 1 } } },
+    partRoles: { [region.id]: { [guitar.id]: 'percussion' } },
+  });
+  const pipeline = compileSongPipeline(sheet);
+  const gestures = new Set(pipeline.performance.notes.filter(note => note.trackId === guitar.id)
+    .map(note => GESTURE_NAMES[note.gestureCode]));
+  assert.ok(gestures.has('golpe'), 'compiled pattern events receive the guest instrument/body technique');
+  assert.ok(gestures.has('rasgueado'), 'compiled pattern events retain a second style technique instead of one generic hit');
 });
 
 test('authored flamenco fingers and simultaneous body strokes reach score, physics and MusicXML', () => {

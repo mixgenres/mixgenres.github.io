@@ -350,7 +350,6 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
       if (alias?.test(cue)) add(gesture);
     }
   }
-  add(...ctx.hostTechniqueGestures, ...ctx.sourceTechniqueGestures);
   if (/heel/.test(String(desired ?? ''))) add('heel','toe','ghost');
   if (/slap|quinto/.test(String(desired ?? ''))) add('slap','quinto-slap','accent','slap-tapao');
   if (/tapao|mute|closed/.test(String(desired ?? ''))) add('slap-tapao','ghost','muffled');
