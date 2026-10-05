@@ -4,8 +4,14 @@ import { GENRE_WORLDS, ALL_PATTERNS } from '../src/data/genres/index.ts';
 import { INSTRUMENT_PERFORMANCE_PROFILES } from '../src/data/performance/instrumentPerformanceProfiles.ts';
 import { calibratedTechniqueGestures } from '../src/engine/style/performance-expectations.ts';
 import { resolveStyle } from '../src/engine/style/resolve.ts';
+import { GESTURE_HINT_ALIASES } from '../src/data/performance/gestureHintAliases.ts';
 
 const norm = value => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '');
+const gestureMatchesCue = (gesture, cue) => {
+  const a = norm(gesture), b = norm(cue);
+  return a === b || (a.length >= 4 && b.length >= 4 && (a.includes(b) || b.includes(a)))
+    || GESTURE_HINT_ALIASES[gesture.replace(/[^a-z0-9]+/gi, '_').toLowerCase()]?.test(cue);
+};
 const styles = [];
 for (const world of GENRE_WORLDS) for (const definition of world.styleDefinitions ?? []) {
   const id = definition.id;
@@ -24,12 +30,11 @@ for (const world of GENRE_WORLDS) for (const definition of world.styleDefinition
     const patternGestures = [...new Set(patterns.filter(pattern => !pattern.instruments?.length || pattern.instruments.includes(instrumentId))
       .flatMap(pattern => [...(pattern.articulations ?? []), ...(pattern.events ?? []).map(event => event.articulation ?? '')])
       .filter(Boolean))];
-    const present = new Set(patternGestures.map(norm));
     const missingCueMappings = cues.filter(cue => !calibratedTechniqueGestures({ calibration: {
       instrumentTechniques: { [instrumentId]: [cue] }, techniqueMappings: style.calibration?.techniqueMappings,
     } }, profile, role).length);
     instruments.push({ id: instrumentId, cues, mappedGestures, missingCueMappings, patternGestures,
-      calibratedGesturesAbsentFromPattern: mappedGestures.filter(gesture => !present.has(norm(gesture))) });
+      calibratedGesturesAbsentFromPattern: mappedGestures.filter(gesture => !patternGestures.some(cue => gestureMatchesCue(gesture, cue))) });
   }
   styles.push({ id, genre: world.id, instruments });
 }

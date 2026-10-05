@@ -17,7 +17,7 @@ These problems become visible when comparing the styles' own references. Jiangna
 - 10,070 authored instrument/style cues
 - 9,964 cues map to one or more named gestures for that instrument
 - 106 cues do not map to a note gesture; these include some production/phrase directions (such as filter sweeps) and some actions that still need a dedicated multi-note realization (such as double-stops)
-- 8,313 mapped gestures do not appear as explicit articulations in the corresponding style-owned patterns
+- 8,172 mapped gestures do not appear as explicit articulations or recognized aliases in the corresponding style-owned patterns
 
 The last figure is a cue-to-pattern gap, not a count of silent or broken songs. Playback already had genre-wide gesture preferences and specialized arrangements, and the changes below let calibrated style gestures enter non-authored attacks. The report identifies where authored pattern material still does not explicitly teach those gestures. The count is intentionally not used as a quota: a fixed loop or sparse solo tradition should not be forced to exhibit every catalog capability in every passage.
 
