@@ -1,13 +1,15 @@
 import { SongPlayer } from '../src/engine/playback/songPlayer';
 import { makeSheet, setSongBpm, type Sheet } from '../src/engine/sheet/sheet';
-import { preparedAudioStats, preparedMixStats } from '../src/engine/cache/preparedAudio';
+import { clearPreparedAudio, preparedAudioStats, preparedMixStats } from '../src/engine/cache/preparedAudio';
+import { clearPersistentPreparedAudio } from '../src/engine/cache/persistentPreparedAudio';
 import { playbackResources } from '../src/engine/playback/playbackResources';
 import { playbackWorkerStats } from '../src/engine/playback/renderPlaybackPart';
+import { createCatalogSong, catalogIdForStyle } from '../src/engine/sheet/songCatalog';
 
 const report=document.querySelector<HTMLPreElement>('#report')!;
 let song: Sheet | undefined, started=0, preparedMs: number | undefined, fourSecondsMs: number | undefined, compileMs: number | undefined;
 let stress: {edits:number;peakRetainedPCMBytes:number;peakWorkerHeapBytes:number;error?:string} | undefined;
-const player=new SongPlayer(()=>update(),()=>update(),true);
+let player=new SongPlayer(()=>update(),()=>update(),true);
 let previewRequest=0,previewTimer:ReturnType<typeof setTimeout> | undefined;
 function cancelPreview() {previewRequest++;clearTimeout(previewTimer);}
 function playOnce(inputTime:number) {
@@ -30,7 +32,7 @@ function update() {
     backgroundPreparationMs:preparedMs,fourSecondsPreparationMs:fourSecondsMs,compileMs,
     position:Number(player.position().toFixed(2)),clickToSound:player.snapshot.playbackTiming ?? null,
     outputLatencyEstimateMs:player.snapshot.outputLatencyMs ?? null,
-    audio:player.playbackActivity,health:player.playbackHealth,memory:{retainedPCMBytes,workers,limits:playbackResources()},stress,
+    audio:player.playbackActivity,health:player.playbackHealth,persistent:part.persistent,cacheWarmup:player.cacheWarmup,memory:{retainedPCMBytes,workers,limits:playbackResources()},stress,
     error:player.snapshot.error ?? null},null,2);
 }
 function changed(next:Sheet) {
@@ -45,9 +47,16 @@ function waitUntil(ready:()=>boolean,timeout=30_000) {
     },50);
   });
 }
-document.querySelector<HTMLButtonElement>('#prepare')!.onclick=()=>changed(makeSheet('tango','tango-golden-age'));
+const tango=()=>createCatalogSong(catalogIdForStyle('tango-golden-age'));
+document.querySelector<HTMLButtonElement>('#prepare')!.onclick=()=>changed(tango());
 document.querySelector<HTMLButtonElement>('#cold')!.onclick=event=>{
-  changed(makeSheet('tango','tango-golden-age'));playOnce(event.timeStamp);
+  changed(tango());playOnce(event.timeStamp);
+};
+document.querySelector<HTMLButtonElement>('#cold-continuous')!.onclick=event=>{changed(tango());void player.play(event.timeStamp);};
+document.querySelector<HTMLButtonElement>('#clear-cache')!.onclick=async()=>{
+  cancelPreview();player.dispose();await clearPersistentPreparedAudio();clearPreparedAudio();song=undefined;
+  preparedMs=undefined;fourSecondsMs=undefined;compileMs=undefined;
+  player=new SongPlayer(()=>update(),()=>update(),true);update();
 };
 document.querySelector<HTMLButtonElement>('#play')!.onclick=event=>{playOnce(event.timeStamp);};
 document.querySelector<HTMLButtonElement>('#continuous')!.onclick=event=>{cancelPreview();void player.play(event.timeStamp);};

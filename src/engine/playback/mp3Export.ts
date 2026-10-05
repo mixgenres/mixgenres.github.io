@@ -45,6 +45,9 @@ export interface Mp3RenderOptions {
   boundedStems?: boolean;
   /** Internal: prepare reusable outgoing tails when transport has a reserve. */
   stemLookaheadSeconds?: number;
+  /** Keep a favorite's prepared opening mix across browser sessions. */
+  persistMix?: boolean;
+  persistMixPriority?: 'favorite' | 'catalog';
   /** Limit PCM output without changing note holds, releases or DSP state. */
   maxDurationSeconds?: number;
   /** Internal raw-section optimization: advance DSP normally, retain only this suffix. */

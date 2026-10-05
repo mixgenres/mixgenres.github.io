@@ -11,6 +11,8 @@ import { styleCalibrationTarget, type StyleCalibrationTarget } from '../../engin
 import { styleTechniqueExpectation } from '../../engine/style/performance-expectations';
 import { INSTRUMENTS_BY_ID } from '../lookup/instruments';
 import { techniqueMechanics } from '../../data/performance/techniqueMechanics';
+import { getCanonicalStyle, getStyle } from '../../engine/style/registry';
+import type { SongStyle } from '../../data/styles/schema';
 
 export interface PhraseOptimizationReport {
   genre: string;
@@ -80,7 +82,7 @@ function phraseTechniqueBudget(role: string, family: string, genre: string, note
   return DEFAULT_PHRASE_TECHNIQUE_BUDGET;
 }
 
-function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: InstrumentPerformanceProfile, genre: string, style: ResolvedStyle, target: StyleCalibrationTarget, phraseStart: number, phraseEnd: number) {
+function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: InstrumentPerformanceProfile, genre: string, style: ResolvedStyle, target: StyleCalibrationTarget, phraseStart: number, phraseEnd: number, partStyle?: SongStyle, partStyleWeight = 0) {
   if (!notes.length) return { rootHeavy: false, beforeGestures: new Set<string>(), afterGestures: new Set<string>() };
   const beforeGestures = new Set(notes.map(n => GESTURE_NAMES[n.gestureCode] ?? String(n.gestureCode)));
   const role = String(track.role ?? profile.genreProfiles[genre]?.roles?.[0] ?? 'harmony').toLowerCase();
@@ -117,10 +119,11 @@ function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: 
     }
   }
 
-  const styleTechnique = styleTechniqueExpectation(style, profile, role);
-  const techniquePool = Array.from(new Set([...(styleTechnique.required ?? []), ...prefs]))
+  const styleTechnique = styleTechniqueExpectation(style, profile, role, partStyle, partStyleWeight);
+  const percussiveRole = /percussion|drum|pulse/i.test(role);
+  const techniquePool = Array.from(new Set([...(styleTechnique.required ?? []), ...(styleTechnique.preferred ?? []), ...prefs]))
     .filter(id => profile.gestures[id] && !styleTechnique.forbidden.includes(id)
-      && techniqueMechanics(INSTRUMENTS_BY_ID[profile.instrumentId], id).pitchIdentity !== 'unpitched');
+      && (percussiveRole || techniqueMechanics(INSTRUMENTS_BY_ID[profile.instrumentId], id).pitchIdentity !== 'unpitched'));
   if (techniquePool.length && desiredTechniqueCount) {
     const landmarks = Array.from(new Set([0, Math.floor(attackGroups.length * 0.22), Math.floor(attackGroups.length * 0.48), Math.floor(attackGroups.length * 0.72), Math.max(0, attackGroups.length - 1)]))
       .filter(i => i >= 0 && i < attackGroups.length);
@@ -145,11 +148,12 @@ function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: 
  * least one expected technique per region without touching tracks that already
  * show one.
  */
-function ensureRegionTechnique(trackNotes: PerfNote[], profile: InstrumentPerformanceProfile, genre: string, style: ResolvedStyle, role: string): void {
+function ensureRegionTechnique(trackNotes: PerfNote[], profile: InstrumentPerformanceProfile, genre: string, style: ResolvedStyle, role: string, partStyle?: SongStyle, partStyleWeight = 0): void {
   if (trackNotes.length < PHRASE_TECHNIQUE_MIN_NOTES + 1) return;
-  const expectation = styleTechniqueExpectation(style, profile, role);
+  const expectation = styleTechniqueExpectation(style, profile, role, partStyle, partStyleWeight);
+  const percussiveRole = /percussion|drum|pulse/i.test(role);
   const usable = expectation.required.filter(id => profile.gestures[id] && !expectation.forbidden.includes(id)
-    && techniqueMechanics(INSTRUMENTS_BY_ID[profile.instrumentId], id).pitchIdentity !== 'unpitched');
+    && (percussiveRole || techniqueMechanics(INSTRUMENTS_BY_ID[profile.instrumentId], id).pitchIdentity !== 'unpitched'));
   if (!usable.length) return;
   const used = new Set(trackNotes.map(n => GESTURE_NAMES[n.gestureCode]));
   if (usable.some(id => used.has(id))) return;
@@ -175,6 +179,11 @@ export function optimizePerformanceByPhraseAndSong(sheet: Sheet, perf: Performan
     const regionNotes = notes.filter(n => n.bar >= region.start && n.bar < region.end);
     for (const track of sheet.tracks as Voice[]) {
       const profile = getInstrumentPerformanceProfile(track.instrumentId);
+      const lens = sheet.partLens?.[region.id]?.[track.id];
+      const partStyle = lens
+        ? (lens.styleId ? getStyle(lens.styleId) : undefined) ?? getCanonicalStyle(lens.genreId)
+        : undefined;
+      const partStyleWeight = lens ? clamp(lens.weight) : 0;
       const trackNotes = regionNotes.filter(n => n.trackId === track.id);
       if (!trackNotes.length) continue;
       let rootHeavyPhrases = 0;
@@ -193,13 +202,13 @@ export function optimizePerformanceByPhraseAndSong(sheet: Sheet, perf: Performan
         const phrase = trackNotes.filter(n => id ? n.phraseId === id : n.bar >= start && n.bar < end);
         if (!phrase.length) continue;
         phrases++;
-        const result = optimizePhrase(phrase, sheet, { ...track, role: getTrackRole(sheet, track.id, region.id) }, profile, genre, style, target, start, end);
+        const result = optimizePhrase(phrase, sheet, { ...track, role: getTrackRole(sheet, track.id, region.id) }, profile, genre, style, target, start, end, partStyle, partStyleWeight);
         if (result.rootHeavy) rootHeavyPhrases++;
         result.beforeGestures.forEach(x => before.add(x));
         result.afterGestures.forEach(x => after.add(x));
       }
 
-      ensureRegionTechnique(trackNotes, profile, genre, style, getTrackRole(sheet, track.id, region.id));
+      ensureRegionTechnique(trackNotes, profile, genre, style, getTrackRole(sheet, track.id, region.id), partStyle, partStyleWeight);
 
       const role = String(track.role ?? profile.genreProfiles[genre]?.roles?.[0] ?? 'harmony').toLowerCase();
       const scopeWarnings: string[] = [];

@@ -47,6 +47,8 @@ export class LRUMap<K, V> {
     return this.map.has(key);
   }
 
+  protected peek(key: K): V | undefined { return this.map.get(key); }
+
   delete(key: K): boolean {
     return this.map.delete(key);
   }

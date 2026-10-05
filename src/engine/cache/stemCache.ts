@@ -78,9 +78,15 @@ export class PCMStemCache extends LRUMap<string, StemCacheEntry> {
   private bytes = 0;
   constructor(readonly maxBytes = 64 * 1024 * 1024, name = 'stemCache') { super(128, name); }
   override set(key: string, value: StemCacheEntry): this {
-    this.delete(key);
     const size = value.left.byteLength + value.right.byteLength;
-    if (size > this.maxBytes) return this;
+    if (!size || size > this.maxBytes || value.left.length !== value.right.length) return this;
+    // A tiny view can otherwise retain a whole song while being charged only
+    // for its visible samples. Compact cropped/shared backing buffers once.
+    if (value.left.byteOffset || value.right.byteOffset || value.left.byteLength !== value.left.buffer.byteLength ||
+      value.right.byteLength !== value.right.buffer.byteLength || value.left.buffer === value.right.buffer) {
+      value = { ...value, left: value.left.slice(), right: value.right.slice(), buffer: undefined };
+    }
+    this.delete(key);
     while (this.bytes + size > this.maxBytes || this.size >= this.maxSize) {
       const oldest = this.keys().next().value;
       if (oldest === undefined) break;
@@ -90,7 +96,7 @@ export class PCMStemCache extends LRUMap<string, StemCacheEntry> {
     return this;
   }
   override delete(key: string): boolean {
-    const value = [...this.entries()].find(([k]) => k === key)?.[1];
+    const value = this.peek(key);
     if (value) this.bytes -= value.left.byteLength + value.right.byteLength;
     return super.delete(key);
   }

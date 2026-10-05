@@ -14,10 +14,12 @@ async function renderPerformanceToAudio(performance: Performance, options: Mp3Re
 
 export type PlaybackWorkerRequest =
   | { kind: 'render'; performance: Performance; options: Mp3RenderOptions }
-  | { kind: 'compile'; sheet: Sheet };
+  | { kind: 'compile'; sheet: Sheet }
+  | { kind: 'catalog'; id: string };
 interface WorkerResult {
   audio?: RenderedPerformanceAudio;
   performance?: Performance;
+  sheet?: Sheet;
   error?: string;
   runtime?: { initializedRuntimes: number; liveProcessors: number; heapBytes: number };
 }
@@ -36,8 +38,9 @@ const idle: Worker[] = [];
 const runtimes = new Map<Worker, { initializedRuntimes: number; liveProcessors: number; heapBytes: number }>();
 let running = 0;
 let unavailable = false;
+let backgroundPreparation = false;
 const cancelled = () => new DOMException('Playback rendering superseded', 'AbortError');
-const concurrency = () => playbackResources().workers;
+const concurrency = () => backgroundPreparation ? 1 : playbackResources().workers;
 const createWorker = () => new Worker(new URL('./playbackRenderWorker.ts', import.meta.url), { type: 'module' });
 
 /** Construct worker threads as soon as a compiled song is available. */
@@ -49,6 +52,14 @@ export function warmPlaybackWorkers() {
     unavailable = true;
     releasePlaybackWorkers();
   }
+}
+
+/** Idle catalog synthesis uses one warm engine at a time to contain mobile
+ * memory. Returning to foreground work restores the full device pool. */
+export function setPlaybackBackgroundPreparation(active: boolean) {
+  backgroundPreparation = active;
+  if (active) releasePlaybackWorkers();
+  queueMicrotask(dispatch);
 }
 
 /** Independent parts can render concurrently without blocking transport/UI timers. */
@@ -110,7 +121,7 @@ export async function preparePlaybackDSPCache(
   options: Mp3RenderOptions,
   position: () => number = () => 0,
 ): Promise<void> {
-  if (typeof Worker === 'undefined' || unavailable || playbackResources().workers <= 1) return;
+  if (typeof Worker === 'undefined' || unavailable || playbackResources().workers <= 1 && !backgroundPreparation) return;
   if (!await persistentPreparedAudioAvailable()) return;
   const signal = options.signal;
   const trackIds = options.selectedTrackIds ?? [...options.trackInstruments.keys()];
@@ -161,6 +172,14 @@ export function compileInPlaybackWorker(sheet: Sheet, signal: AbortSignal, fallb
     result => { if (!result.performance) throw new Error(result.error ?? 'Compilation failed'); return result.performance; }, fallback);
 }
 
+/** Even catalog construction runs off the UI thread during idle precaching. */
+export function prepareCatalogInPlaybackWorker(id: string, signal: AbortSignal) {
+  return enqueueWorker({kind:'catalog',id},signal,()=>50, result => {
+    if (!result.performance || !result.sheet) throw new Error(result.error ?? 'Catalog preparation failed');
+    return { performance:result.performance, song:result.sheet };
+  }, () => Promise.reject(new Error('Background catalog preparation requires workers')));
+}
+
 function enqueueWorker<T>(payload: PlaybackWorkerRequest, signal: AbortSignal | undefined, priority: () => number,
   read: (result: WorkerResult) => T, fallback: () => Promise<T>): Promise<T> {
   if (signal?.aborted) return Promise.reject(cancelled());
@@ -184,7 +203,8 @@ function finish(job: Job, reuse: boolean) {
   if (!worker) return;
   job.worker = undefined;
   worker.onmessage = null; worker.onerror = null; worker.onmessageerror = null;
-  if (reuse && !unavailable) idle.push(worker); else { worker.terminate(); runtimes.delete(worker); }
+  if (reuse && !unavailable && (!backgroundPreparation || !idle.length)) idle.push(worker);
+  else { worker.terminate(); runtimes.delete(worker); }
   job.signal?.removeEventListener('abort', job.abort);
   running--;
   queueMicrotask(dispatch);

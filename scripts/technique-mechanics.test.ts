@@ -16,6 +16,11 @@ import type { PatternEvent } from '../src/data/schema';
 import { INSTRUMENT_PERFORMANCE_PROFILES } from '../src/data/performance/instrumentPerformanceProfiles';
 import { PATTERNS_BY_ID } from '../src/data/genres';
 import { INSTRUMENTS_BY_ID } from '../src/engine/lookup/instruments';
+import { getInstrumentPerformanceProfile } from '../src/engine/lookup/performance';
+import { resolveStyle } from '../src/engine/style/resolve';
+import { calibratedTechniqueGestures, styleTechniqueExpectation } from '../src/engine/style/performance-expectations';
+import { optimizePerformanceByPhraseAndSong } from '../src/engine/band/songPhrasing';
+import { GESTURE_NAMES } from '../src/engine/band/gestures';
 import type { MusicalPattern } from '../src/types';
 
 const gesture = (instrument: string, technique: string, source?: string) => resolveRenderGesture(instrument, codeForGesture(technique), source);
@@ -153,6 +158,53 @@ test('catalog membership never certifies faithful synthesis', () => {
   }
 });
 
+test('style-authored instrument techniques reach the playable phrase vocabulary', () => {
+  const jiangnan = resolveStyle({ genreId: 'chinese', styleId: 'chinese-jiangnan-sizhu' });
+  const pipa = getInstrumentPerformanceProfile('pipa');
+  const pipaGestures = calibratedTechniqueGestures(jiangnan, pipa, 'harmony');
+  assert.ok(pipaGestures.includes('tremolo'), 'the Jiangnan pipa cue survives as a playable gesture');
+  assert.ok(pipaGestures.includes('vibrato'));
+  assert.ok(pipaGestures.includes('harmonic'));
+  const expectation = styleTechniqueExpectation(jiangnan, pipa, 'harmony');
+  for (const technique of pipaGestures) assert.ok(expectation.required.includes(technique));
+  assert.ok(!pipaGestures.some(technique => !pipa.gestures[technique]), 'calibration never invents gesture IDs');
+});
+
+test('a part-level genre/style lens contributes its own playable techniques at sufficient weight', () => {
+  const host = resolveStyle({ genreId: 'chinese', styleId: 'chinese-jiangnan-sizhu' });
+  const guest = resolveStyle({ genreId: 'flamenco', styleId: 'flamenco-solea' });
+  const guitar = getInstrumentPerformanceProfile('guitar');
+  const light = styleTechniqueExpectation(host, guitar, 'lead', guest, .2);
+  const guestCues = calibratedTechniqueGestures(guest, guitar, 'lead');
+  assert.ok(guestCues.includes('rasgueado') && guestCues.includes('golpe'));
+  assert.ok(!light.preferred.includes('rasgueado'), 'a light lens does not replace the host technique palette');
+  const blended = styleTechniqueExpectation(host, guitar, 'lead', guest, .8);
+  assert.ok(blended.required.includes('rasgueado') && blended.required.includes('golpe'));
+  assert.equal(calibratedTechniqueGestures(guest, guitar, 'percussion').includes('golpe'), true,
+    'role reassignment retains a physically playable guitar body strike');
+});
+
+test('playback adapts style techniques through a part lens and atypical role', () => {
+  const base = makeSheet('blues', 'blues-slow-blues');
+  const region = base.regions[0];
+  const guitar = base.tracks.find(track => track.instrumentId === 'guitar')!;
+  const sheet = rebuild({ ...base,
+    partLens: { [region.id]: { [guitar.id]: { genreId: 'flamenco', styleId: 'flamenco-solea', weight: 1 } } },
+    partRoles: { [region.id]: { [guitar.id]: 'percussion' } },
+  });
+  const notes = Array.from({ length: 16 }, (_, i): PerfNote => ({
+    trackId: guitar.id, bar: region.start + Math.floor(i / 4), time: i * .12, dur: .2,
+    midi: 60 + i % 5, vel: 70, gestureCode: codeForGesture('tone'), hitFunctionCode: 0,
+    accent: .6, authoredTechnique: false, attackId: `lens-${i}`,
+  }));
+  const perf: Performance = { trackInfo: { [guitar.id]: { instrumentId: 'guitar', role: 'lead' } }, notes,
+    ccs: [], bars: [], duration: 4, tail: .5, blends: {} };
+  const result = optimizePerformanceByPhraseAndSong(sheet, perf).performance;
+  const gestures = new Set(result.notes.map(note => GESTURE_NAMES[note.gestureCode]));
+  assert.ok(gestures.has('golpe'), 'the body strike is available when guitar is assigned a percussion role');
+  assert.ok(gestures.has('golpe'), `guest style gesture is selected during phrase realization: ${[...gestures].join(', ')}`);
+});
+
 test('authored flamenco fingers and simultaneous body strokes reach score, physics and MusicXML', () => {
   const song = makeSheet('flamenco', 'flamenco-rumba'), pipeline = compileSongPipeline(song);
   const body = pipeline.performance.notes.filter(n => n.bodyAttack);
@@ -191,6 +243,19 @@ test('a written body contact stays unpitched from the initial score through phys
   const xml = exportMusicXml(pipeline.interpretation);
   assert.ok(xml.includes('<unpitched>') && xml.includes('<notehead>x</notehead>'));
   assert.ok(!xml.includes('<pitch>'), 'a pitched instrument part can contain only body percussion');
+});
+
+test('an unfamiliar pattern technique is retained in notation and adapted to the receiving instrument', () => {
+  const pipeline = writtenFixture('piano', [{ kind: 'attack', position: 0, duration: 1,
+    articulation: 'rasgueado', pitch: { midi: 60 } }]);
+  const written = pipeline.notation.sections.flatMap(section => Object.values(section.cells))
+    .flatMap(cell => cell.bars).flatMap(bar => bar.attacks).find(attack => attack.technique === 'rasgueado');
+  assert.ok(written, 'pattern projection must preserve the authored cue for review/adaptation');
+  const sounded = pipeline.performance.notes.find(note => note.notationEventId?.includes(':0:'));
+  assert.ok(sounded);
+  const gestureName = Object.keys(GESTURE_NAMES).length && GESTURE_NAMES[sounded!.gestureCode];
+  assert.ok(getInstrumentPerformanceProfile('piano').gestures[gestureName], 'the receiving instrument gets a playable gesture');
+  assert.notEqual(gestureName, 'rasgueado', 'an unavailable source action cannot leak into the piano renderer');
 });
 
 test('written mechanics reject unsupported body companions and invalid tuplet ratios', () => {

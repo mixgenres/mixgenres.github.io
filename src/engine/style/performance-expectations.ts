@@ -3,6 +3,8 @@ import type { TechniqueExpectation, StyleReferenceExpectation } from '../../data
 import { REFERENCE_EXPECTATIONS } from '../../data/styles/performanceExpectations';
 import { R_AND_B_GENRE_ID } from '../../data/genres/genreIds';
 import { getInstrumentPerformanceProfile, type InstrumentPerformanceProfile } from '../../engine/lookup/performance';
+import type { SongStyle } from '../../data/styles/schema';
+import { GESTURE_HINT_ALIASES } from '../../data/performance/gestureHintAliases';
 
 export type StylePerformanceSchema = {
   styleId: string;
@@ -46,18 +48,63 @@ function normalizeRole(role: string): string {
   return 'comp';
 }
 
-export function styleTechniqueExpectation(style: ResolvedStyle, profile: InstrumentPerformanceProfile, role: string): TechniqueExpectation {
+const normalizeTechnique = (value: string) => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '');
+
+/** Convert style-authored vocabulary into gestures this instrument can actually perform.
+ * Descriptive cues that do not resolve to a named capability remain metadata; they
+ * are never turned into invented gesture IDs. */
+export function calibratedTechniqueGestures(style: Pick<SongStyle, 'calibration'> | undefined, profile: InstrumentPerformanceProfile, _role: string): string[] {
+  const calibration = style?.calibration;
+  if (!calibration) return [];
+  const instrumentId = profile.instrumentId;
+  const cues = calibration.instrumentTechniques?.[instrumentId] ?? [];
+  const gestures = Object.keys(profile.gestures);
+  const resolved = new Set<string>();
+  for (const cue of cues) {
+    const scope = calibration.techniqueScopes?.[cue];
+    if (scope?.length && !scope.some(item => item === 'note' || item === 'motif' || item === 'phrase')) continue;
+    const cueNorm = normalizeTechnique(cue);
+    if (!cueNorm) continue;
+    for (const gesture of gestures) {
+      const gestureNorm = normalizeTechnique(gesture);
+      const exactOrAlias = gestureNorm === cueNorm
+        || (gestureNorm.length >= 4 && cueNorm.length >= 4 && (cueNorm.includes(gestureNorm) || gestureNorm.includes(cueNorm)))
+        || GESTURE_HINT_ALIASES[gesture.replace(/[^a-z0-9]+/gi, '_').toLowerCase()]?.test(cue);
+      if (exactOrAlias) resolved.add(gesture);
+    }
+  }
+  return [...resolved];
+}
+
+export function styleTechniqueExpectation(
+  style: ResolvedStyle,
+  profile: InstrumentPerformanceProfile,
+  role: string,
+  partStyle?: SongStyle,
+  partStyleWeight = 0,
+): TechniqueExpectation {
   const ref = referenceFor(style);
   const styleArt = style.sound?.articulations?.[profile.instrumentId] ?? '';
   const roleRef = ref.roleExpectations[normalizeRole(role)] ?? [];
+  const hostCalibrated = calibratedTechniqueGestures(style, profile, role);
+  const guestCalibrated = partStyleWeight >= 0.3 ? calibratedTechniqueGestures(partStyle, profile, role) : [];
+  const guestReference = partStyleWeight >= 0.5 && partStyle
+    ? REFERENCE_EXPECTATIONS[partStyle.primaryGenre]?.articulation ?? [] : [];
+  const calibrationOrder = partStyleWeight >= 0.5
+    ? [...guestCalibrated, ...hostCalibrated] : [...hostCalibrated, ...guestCalibrated];
   const preferred = Array.from(new Set([
+    ...calibrationOrder,
+    ...guestReference,
     ...ref.articulation,
     ...roleRef,
     ...(profile.genreProfiles[style.primaryGenre]?.preferredGestures ?? []),
     ...String(styleArt).split(/[ ,|/]+/).filter(Boolean),
   ]));
   const available = new Set(Object.keys(profile.gestures));
-  const required = preferred.filter(x => available.has(x));
+  const required = Array.from(new Set([
+    ...calibrationOrder,
+    ...preferred.filter(x => available.has(x)),
+  ])).filter(x => available.has(x));
   const forbidden = Array.from(new Set([
     ...(profile.genreProfiles[style.primaryGenre]?.forbiddenGestures ?? []),
     ...(style.rules?.forbid ?? []).map(x => x.tag),

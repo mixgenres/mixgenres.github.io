@@ -2,7 +2,7 @@ import { resolveSoloPlan } from './solo';
 import type { SoloAssignment } from '../../data/styles/schema';
 import type { Song, Region, Track, Measure, SectionType, PatternVariant, MusicalPattern, SectionEnergy, GuestLens } from '../../types';
 import { GENRE_WORLDS_BY_ID, ALL_PATTERNS, PATTERNS_BY_ID, PATTERNS_BY_WORLD } from '../../data/genres';
-import { INSTRUMENTS_BY_ID, INSTRUMENT_CATALOG, instrument, instrumentPatternKinds, genreTechniquesForInstrument } from '../../engine/lookup/instruments';
+import { INSTRUMENTS_BY_ID, INSTRUMENT_CATALOG, instrument, instrumentPatternKinds } from '../../engine/lookup/instruments';
 import { sliceBarNative } from './grid.ts';
 import { progressionForSection, buildArrangementContext, ArrangementContext } from './arrangementContext.ts';
 import { inferKey, parseChord, assertValidChordProgression } from './musicTheory.ts';
@@ -512,23 +512,16 @@ function projectPatternEvents(
   region: Region,
   phraseRole: 'transition' | 'cadence' | 'body',
   energy: SectionEnergy,
-  instrumentId: string | undefined,
-  styleId: string,
   role: string,
 ) {
   const [numerator = 4, denominator = 4] = pattern.meter.split('/').map(Number);
   const quarterBeats = numerator * 4 / denominator || 4;
   const stepsPerBeat = (pattern.subdivisions || 16) / (quarterBeats * Math.max(1, pattern.cycleLength || 1));
   const sectionName = String(region.kind ?? '');
-  const authoredTechniques = instrumentId ? genreTechniquesForInstrument(instrumentId, styleId) : [];
-  const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, '');
-  const supportsTechnique = (value: string) => {
-    const term = normalize(value);
-    return authoredTechniques.some(candidate => {
-      const supported = normalize(candidate);
-      return term.length > 2 && supported.length > 2 && (term.includes(supported) || supported.includes(term));
-    });
-  };
+  // Keep the authored cue through notation even when this part's instrument or
+  // role cannot perform its literal gesture. Playback resolves it against the
+  // actual instrument and the part's host/guest technique vocabularies. Clearing
+  // it here used to erase cross-role adaptation before the renderer could act.
   const chosen = events.map((event, eventIndex) => ({ event, eventIndex })).filter(({ event, eventIndex }) => {
     if (event.condition?.role && event.condition.role !== role) return false;
     if (event.condition?.section?.length && !event.condition.section.includes(sectionName)) return false;
@@ -564,7 +557,7 @@ function projectPatternEvents(
     result.durations.push(Math.max(0.000001, (event.duration ?? .25) * stepsPerBeat));
     result.microtiming.push(event.microtiming ?? 0);
     result.hitTypes.push(event.hitType ?? '');
-    result.articulations.push(event.articulation && supportsTechnique(event.articulation) ? event.articulation : '');
+    result.articulations.push(event.articulation ?? '');
     result.pitches.push(event.pitch);
     result.notations.push({ ...event.notation, ...(event.tuplet ? { tuplet: event.tuplet } : {}), ...(event.tieToNext ? { tieToNext: true } : {}) });
     priorBeat = event.position;
@@ -897,9 +890,7 @@ export function rebuild(sheet: Sheet): Sheet {
 
         const sub = p.subdivisions || 16;
         const patternCycleBars = Math.max(1, p.cycleLength || Math.ceil(sub / 16));
-        const resolvedStyle = getResolvedSectionStyle(sheet, r);
-        const eventProjection = projectPatternEvents(v?.events ?? p.events ?? [], p, variantSeed, r, phraseRole, partEnergy,
-          track.instrumentId, resolvedStyle.id, track.role);
+        const eventProjection = projectPatternEvents(v?.events ?? p.events ?? [], p, variantSeed, r, phraseRole, partEnergy, track.role);
         const useEventProjection = !!(v?.events?.length || (!v && p.events?.length));
         const rawOnsets = useEventProjection ? eventProjection.onsets : v?.onsetGrid ?? p.onsetGrid;
         const rawAccents = useEventProjection ? eventProjection.accents : v?.accentProfile ?? p.accentProfile;

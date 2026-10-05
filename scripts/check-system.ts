@@ -23,7 +23,7 @@ if (process.argv.includes('--report-only')) {
     { id: 'example-generation', args: script('audit-examples.ts', ['--quick']) },
     { id: 'sound-resolution', args: script('sound-metadata.test.ts') },
     { id: 'solo-behavior', args: script('solo-performance.test.ts') },
-    { id: 'regressions', args: ['--import', 'tsx', '--test', 'scripts/technique-mechanics.test.ts', 'scripts/musical-fidelity.test.ts', 'scripts/musician-score.test.ts', 'scripts/engine-pipeline.test.ts', 'scripts/song-accuracy.test.ts', 'scripts/mix-regression.test.ts', 'scripts/dynamic-mix.test.ts', 'scripts/playback-regression.test.ts', 'scripts/song-player-regression.test.ts', 'scripts/instrument-catalog-migration.test.ts', 'scripts/catalog-metadata.test.ts'] },
+    { id: 'regressions', args: ['--import', 'tsx', '--test', 'scripts/technique-mechanics.test.ts', 'scripts/musical-fidelity.test.ts', 'scripts/musician-score.test.ts', 'scripts/engine-pipeline.test.ts', 'scripts/song-accuracy.test.ts', 'scripts/mix-regression.test.ts', 'scripts/dynamic-mix.test.ts', 'scripts/playback-regression.test.ts', 'scripts/song-player-regression.test.ts', 'scripts/audio-cache-regression.test.ts', 'scripts/instrument-catalog-migration.test.ts', 'scripts/catalog-metadata.test.ts'] },
   ];
   const audioSteps = [
       { id: 'render-regressions', args: ['--import', 'tsx', '--test', 'scripts/reference-calibration.test.ts', 'scripts/instrument-balance.test.ts', 'scripts/technique-audio.test.ts', 'scripts/render-regression.test.ts', 'scripts/song-sound-accuracy.test.ts'] },

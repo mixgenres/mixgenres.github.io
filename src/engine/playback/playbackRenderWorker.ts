@@ -4,6 +4,13 @@ import type { PlaybackWorkerRequest } from './renderPlaybackPart';
 
 self.onmessage = async ({ data }: MessageEvent<PlaybackWorkerRequest>) => {
   try {
+    if(data.kind==='catalog') {
+      const [{createCatalogSong},{arrangeBand}] = await Promise.all([
+        import('../sheet/songCatalog'),import('../band/arrangeBand')]);
+      const sheet=createCatalogSong(data.id);
+      self.postMessage({ sheet, performance:arrangeBand(sheet), runtime:offlineRendererStats() });
+      return;
+    }
     if(data.kind==='compile') {
       const { arrangeBand } = await import('../band/arrangeBand');
       self.postMessage({ performance:arrangeBand(data.sheet), runtime:offlineRendererStats() });

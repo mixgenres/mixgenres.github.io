@@ -38,6 +38,9 @@ export interface PhraseContext {
   profile: InstrumentPerformanceProfile;
   hostProfile: GenrePerformanceProfile;
   sourceProfile: GenrePerformanceProfile;
+  hostTechniqueGestures: string[];
+  sourceTechniqueGestures: string[];
+  lensWeight: number;
   hostGrammar: PerformanceGrammar;
   sourceGrammar: PerformanceGrammar;
   hybridGrammar: PerformanceGrammar;
@@ -331,6 +334,7 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
   if (desired && allowed(desired)) return desired;
   const hostPreferred = new Set(ctx.hostProfile.preferredGestures);
   const sourcePreferred = new Set(ctx.sourceProfile.preferredGestures);
+  const percussiveRole = /percussion|drum|pulse/i.test(ctx.role);
   const text = `${ctx.pattern?.id ?? ''} ${ctx.pattern?.name ?? ''} ${ctx.regionStyleId ?? ''}`.toLowerCase();
   const sourceHit = String(ctx.measureDetails?.hitTypes?.[ctx.onsetIndex] ?? '').toLowerCase();
 
@@ -339,6 +343,14 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
   // transfers the timing/weight; it never transfers another instrument's name.
   const contextual: string[] = [];
   const add = (...xs: string[]) => contextual.push(...xs.filter(allowed));
+  if (desired) {
+    const cue = desired.toLowerCase();
+    for (const gesture of Object.keys(ctx.profile.gestures)) {
+      const alias = GESTURE_HINT_ALIASES[gesture.toLowerCase().replace(/[^a-z0-9]+/g, '_')];
+      if (alias?.test(cue)) add(gesture);
+    }
+  }
+  add(...ctx.hostTechniqueGestures, ...ctx.sourceTechniqueGestures);
   if (/heel/.test(String(desired ?? ''))) add('heel','toe','ghost');
   if (/slap|quinto/.test(String(desired ?? ''))) add('slap','quinto-slap','accent','slap-tapao');
   if (/tapao|mute|closed/.test(String(desired ?? ''))) add('slap-tapao','ghost','muffled');
@@ -374,7 +386,8 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
     ...ctx.sourceProfile.gestureIds,
     ...ctx.profile.adaptationOrder.flatMap(g => ctx.profile.genreProfiles[g]?.preferredGestures ?? []),
   ].filter((g): g is string => Boolean(g) && allowed(g)
-    && (['slap', 'ghost', 'muffled'].includes(hit) || techniqueMechanics(INSTRUMENTS_BY_ID[ctx.profile.instrumentId], g).pitchIdentity !== 'unpitched'))));
+    && (percussiveRole || ['slap', 'ghost', 'muffled'].includes(hit)
+      || techniqueMechanics(INSTRUMENTS_BY_ID[ctx.profile.instrumentId], g).pitchIdentity !== 'unpitched'))));
   const hitWord = hit.toLowerCase();
   const contextualSet = new Set(contextual);
   const scored = candidates.map(g => {
@@ -385,6 +398,8 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
     if (theoryHints.some(h => GESTURE_HINT_ALIASES[h.toLowerCase().replace(/[^a-z0-9]+/g,'_')]?.test(gl) || gl.includes(h.toLowerCase()))) score += 6;
     if (hostPreferred.has(g)) score += 5;
     if (sourcePreferred.has(g)) score += 4;
+    if (ctx.hostTechniqueGestures.includes(g)) score += 3 * (1 - ctx.lensWeight);
+    if (ctx.sourceTechniqueGestures.includes(g)) score += 3 * ctx.lensWeight;
     if (hitWord === 'ghost' && /ghost|heel|toe|tap|mute|dead/.test(gl)) score += 6;
     if (hitWord === 'slap' && /slap|strappata|golpe|marcato|accent/.test(gl)) score += 6;
     if (hitWord === 'open' && /open|ring|legato|tone|tumba/.test(gl)) score += 5;
@@ -401,11 +416,12 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
   return scored[0]?.g ?? fallback;
 }
 
-export function buildHybridGrammar(_hostStyleId: string | undefined, sourceGenre: string, hostStyle: import('../../data/styles/schema').ResolvedStyle, lensWeight = 0.5): { host: PerformanceGrammar; source: PerformanceGrammar; hybrid: PerformanceGrammar } {
+export function buildHybridGrammar(_hostStyleId: string | undefined, sourceGenre: string, hostStyle: import('../../data/styles/schema').ResolvedStyle, lensWeight = 0.5, sourceStyleId?: string): { host: PerformanceGrammar; source: PerformanceGrammar; hybrid: PerformanceGrammar } {
   const host = getPerformanceGrammar(hostStyle ?? {});
   let source = host;
   try {
-    const resolvedSource = resolveStyle({ genreId: sourceGenre, styleId: getCanonicalStyle(sourceGenre).id });
+    const canonical = getCanonicalStyle(sourceGenre);
+    const resolvedSource = resolveStyle({ genreId: sourceGenre, styleId: sourceStyleId ?? canonical.id });
     source = getPerformanceGrammar(resolvedSource);
   } catch {
     source = host;

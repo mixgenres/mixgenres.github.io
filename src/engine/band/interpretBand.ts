@@ -13,6 +13,8 @@ import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { getInstrumentPerformanceProfile, resolveGenreProfile, type InstrumentPerformanceProfile } from '../../engine/lookup/performance';
 import { getGenreTheory, styleTheoryFor, blendGenreTheory } from '../../engine/lookup/theory';
 import { getResolvedSectionStyle } from '../sheet/sheet.ts';
+import { getCanonicalStyle, getStyle } from '../../engine/style/registry';
+import { calibratedTechniqueGestures } from '../../engine/style/performance-expectations';
 import { parseChord } from '../sheet/musicTheory.ts';
 import { foldToRange, noteLengthBeats, voiceProfile } from '../sheet/instrumentRoles.ts';
 import { resolveTuningSystem } from '../sheet/tuning.ts';
@@ -80,6 +82,7 @@ export interface RhythmIdea {
 export interface LensStack {
   hostGenre: string;
   sourceGenre: string;
+  sourceStyleId: string;
   weight: number;
   provenance: string[];
 }
@@ -188,10 +191,11 @@ function resolveLens(sheet: Sheet, region: Region, track: Voice): LensStack {
   const host = region.genre ?? sheet.worldId;
   const explicit: GuestLens | undefined = sheet.partLens?.[region.id]?.[track.id];
   const source = explicit?.genreId ?? host;
+  const sourceStyleId = explicit?.styleId ?? getCanonicalStyle(source).id;
   const weight = explicit ? clamp(explicit.weight) : 0;
   const provenance: string[] = [`host:${host}`];
-  if (explicit) provenance.push(`part-lens:${source}:${weight.toFixed(3)}`);
-  return { hostGenre: host, sourceGenre: source, weight, provenance };
+  if (explicit) provenance.push(`part-lens:${source}/${sourceStyleId}:${weight.toFixed(3)}`);
+  return { hostGenre: host, sourceGenre: source, sourceStyleId, weight, provenance };
 }
 
 function chooseRhythm(sheet: Sheet, region: Region, track: Voice, style?: ResolvedStyle): RhythmIdea {
@@ -502,9 +506,12 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
           const phraseStage = soloGrammar?.phraseStages?.length
             ? soloGrammar.phraseStages[phraseIndex % soloGrammar.phraseStages.length]
             : undefined;
-          const grammarBundle = buildHybridGrammar(regionStyle.id, lane.lens.sourceGenre, regionStyle, lane.lens.weight);
+          const grammarBundle = buildHybridGrammar(regionStyle.id, lane.lens.sourceGenre, regionStyle, lane.lens.weight, lane.lens.sourceStyleId);
           const sharedHostProfile = resolveGenreProfile(track.instrumentId, lane.lens.hostGenre);
           const sharedSourceProfile = resolveGenreProfile(track.instrumentId, lane.lens.sourceGenre);
+          const sourceStyle = getStyle(lane.lens.sourceStyleId) ?? getCanonicalStyle(lane.lens.sourceGenre);
+          const hostTechniqueGestures = calibratedTechniqueGestures(regionStyle, profile, track.role);
+          const sourceTechniqueGestures = calibratedTechniqueGestures(sourceStyle, profile, track.role);
           const hostTheory = styleTheoryFor(regionStyle.id, lane.lens.hostGenre);
           const sourceTheory = getGenreTheory(lane.lens.sourceGenre);
           const hybridTheory = blendGenreTheory(hostTheory, sourceTheory, lane.lens.weight);
@@ -522,6 +529,9 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
               profile,
               hostProfile: sharedHostProfile,
               sourceProfile: sharedSourceProfile,
+              hostTechniqueGestures,
+              sourceTechniqueGestures,
+              lensWeight: lane.lens.weight,
               hostGrammar: grammarBundle.host,
               sourceGrammar: grammarBundle.source,
               hybridGrammar: grammarBundle.hybrid,
@@ -621,7 +631,11 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
                 hitFunctionCode,
                 accent: Math.round(accent * 1000) / 1000,
                 originCode: 0,
-                authoredTechnique: Boolean(authoredGesture && profile.gestures[authoredGesture]),
+                // Generic articulation words establish a base articulation;
+                // style calibration may realize a more specific playable
+                // action on selected attacks. Named techniques stay protected.
+                authoredTechnique: Boolean(authoredGesture && profile.gestures[authoredGesture]
+                  && !['accent','staccato','legato','tenuto'].includes(authoredGesture.toLowerCase())),
                 authoredPitch: Boolean(onset.pitch || onset.percussion),
                 authoredDuration: Boolean(onset.durationAuthored),
               };

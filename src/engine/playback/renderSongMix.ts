@@ -27,7 +27,10 @@ export async function renderSongMix(performance: Performance, song: Sheet, signa
   window?: { start: number; end: number }, priority: () => number = () => 3,
   onProgress?: (fraction: number) => void, stemLookaheadSeconds = 0): Promise<RenderedPerformanceAudio> {
   return renderPreparedMix(performance, { ...songMixOptions(song), renderWindow: window, boundedStems: !!window,
-    stemLookaheadSeconds }, signal, priority, onProgress);
+    stemLookaheadSeconds, persistMix: !!song.catalogId && !!window &&
+      (['tango', 'flamenco'].includes(song.worldId) ? window.start < 10 : window.start < 2),
+    persistMixPriority: ['tango', 'flamenco'].includes(song.worldId) ? 'favorite' : 'catalog' },
+  signal, priority, onProgress);
 }
 
 function windowPreparedStem(audio: RenderedPerformanceAudio, window: { start: number; end: number }): RenderedPerformanceAudio {
@@ -96,7 +99,7 @@ export async function renderPreparedMix(performance: Performance, options: Mp3Re
       ...options, selectedTrackIds: active, preparedStems: new Map(entries),
       signal: preparationSignal, renderPriority: priority,
     }, fraction => onProgress?.(.8 + fraction * .2));
-  });
+  }, !!options.persistMix, options.persistMixPriority ?? 'catalog');
   onProgress?.(1);
   return result;
 }

@@ -700,3 +700,40 @@ test('transport batches short musical sections without changing DSP attack bound
   for (let index = 1; index < chunks.length; index++) assert.equal(chunks[index].start, chunks[index - 1].end);
   assert.equal(Math.round(chunks.at(-1)!.end * 44100), Math.ceil(20.1 * 44100));
 });
+
+test('foreground playback, seeking and disposal cancel background synthesis synchronously', async () => {
+  const {player}=fixture();
+  const background=()=>{const controller=new AbortController();player.backgroundAbort=controller;player.backgroundKey='old';return controller;};
+  const first=background();await player.play();assert.equal(first.signal.aborted,true);
+  const second=background();player.locate(2);assert.equal(second.signal.aborted,true);await flush();
+  const third=background();player.beginScrub();assert.equal(third.signal.aborted,true);player.endScrub();await flush();
+  const last=background();player.dispose();assert.equal(last.signal.aborted,true);assert.equal(player.backgroundTimer,undefined);
+});
+
+test('slow cold mobile synthesis banks a reserve and Pause cancels its pending start', async () => {
+  const savedNavigator=Object.getOwnPropertyDescriptor(globalThis,'navigator');
+  Object.defineProperty(globalThis,'navigator',{configurable:true,value:{maxTouchPoints:1,hardwareConcurrency:6}});
+  const {player,starts,buffers}=fixture([2,4,4]),waiting=deferred<AudioBuffer>();
+  player.chunkBuffers.delete(1);player.chunkBuffers.delete(2);player.renderedAudioSeconds=2;player.renderMs=1500;
+  player.ensureChunk=()=>waiting.promise;
+  try {
+    const play=player.play();await flush();assert.equal(starts.length,0,'slow cold Play waits for its reserve');
+    player.pause();player.chunkBuffers.set(1,buffers[1]);waiting.resolve(buffers[1] as unknown as AudioBuffer);await play;
+    assert.equal(starts.length,0,'late reserve completion cannot undo Pause');
+    await player.play();assert.ok(starts.length>0,'already-prepared reserve starts immediately');
+  } finally {player.dispose();if(savedNavigator)Object.defineProperty(globalThis,'navigator',savedNavigator);else Reflect.deleteProperty(globalThis,'navigator');}
+});
+
+test('severe measured rendering pressure banks eight seconds without slowing a cached start', async () => {
+  const saved=Object.getOwnPropertyDescriptor(globalThis,'navigator');
+  Object.defineProperty(globalThis,'navigator',{configurable:true,value:{maxTouchPoints:1,hardwareConcurrency:6}});
+  const {player,performance,buffers}=fixture([2,4,4]);player.wantsPlayback=true;
+  player.renderedAudioSeconds=2;player.renderMs=3000;player.chunkBuffers.delete(2);
+  const requested:number[]=[];
+  player.ensureChunk=async(index:number)=>{requested.push(index);player.chunkBuffers.set(index,buffers[index]);return buffers[index];};
+  try {
+    assert.equal(await player.prepareStartReserve(performance,player.song,player.abort.signal,player.revision,player.playRequest),true);
+    assert.deepEqual(requested,[2]);assert.ok(player.preparedAheadSeconds>=8);
+    assert.equal(await player.prepareStartReserve(performance,player.song,player.abort.signal,player.revision,player.playRequest),false);
+  } finally {player.dispose();if(saved)Object.defineProperty(globalThis,'navigator',saved);else Reflect.deleteProperty(globalThis,'navigator');}
+});

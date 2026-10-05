@@ -20,7 +20,7 @@ interface PreparationJob {
   persist: boolean;
   cache: PCMStemCache;
 }
-const jobs = new Map<string, PreparationJob>();
+const jobs = new Map<PCMStemCache, Map<string, PreparationJob>>();
 
 /** Mixer settings are deliberately absent from the physical audio identity. */
 export function preparedAudioKey(performance: Performance, options: Mp3RenderOptions) {
@@ -29,8 +29,8 @@ export function preparedAudioKey(performance: Performance, options: Mp3RenderOpt
     // This version is part of the physical-render contract. Bump it whenever
     // synthesis changes in a way not already represented by the inputs below.
     'part-audio-v2', [...ids].sort(),
-    [...options.trackInstruments].filter(([id]) => ids.has(id)),
-    [...options.trackRoles ?? []].filter(([id]) => ids.has(id)),
+    [...options.trackInstruments].filter(([id]) => ids.has(id)).sort(([a],[b]) => a.localeCompare(b)),
+    [...options.trackRoles ?? []].filter(([id]) => ids.has(id)).sort(([a],[b]) => a.localeCompare(b)),
     options.worldId, options.styleId,
     performance.notes.filter(note => ids.has(note.trackId)),
     performance.ccs.filter(cc => ids.has(cc.trackId)),
@@ -82,7 +82,9 @@ export function preparePartAudio(
   if (signal?.aborted) return Promise.reject(cancelled());
   const ready = retain ? cache.get(key) : undefined;
   if (ready) return Promise.resolve({ sampleRate: 44100, left: ready.left, right: ready.right, buffer: ready.buffer });
-  let job = jobs.get(key);
+  const cacheJobs = jobs.get(cache) ?? new Map<string, PreparationJob>();
+  jobs.set(cache, cacheJobs);
+  let job = cacheJobs.get(key);
   if (!job || job.controller.signal.aborted) {
     const controller = new AbortController();
     let loadedFromPersistent = false;
@@ -105,10 +107,11 @@ export function preparePartAudio(
       }
       return result;
     }).finally(() => {
-      if (jobs.get(key) === created) jobs.delete(key);
+      if (cacheJobs.get(key) === created) cacheJobs.delete(key);
+      if (!cacheJobs.size && jobs.get(cache) === cacheJobs) jobs.delete(cache);
     });
     job = created;
-    jobs.set(key, job);
+    cacheJobs.set(key, job);
   } else {
     job.retain ||= retain;
     job.persist ||= persist;
@@ -142,19 +145,22 @@ export function preparePersistentPartAudio(
   return preparePartAudio(key, signal, render, retain, audio, true);
 }
 
-export function preparedAudioStats() { return { ...audio.getStats(), bytes: audio.byteLength, pending: jobs.size, persistent: persistentPreparedAudioStats() }; }
+export function preparedAudioStats() { return { ...audio.getStats(), bytes: audio.byteLength,
+  pending: [...jobs.values()].reduce((sum, cacheJobs) => sum + cacheJobs.size, 0), persistent: persistentPreparedAudioStats() }; }
 export function preparedMixStats() { return { ...mixes.getStats(), bytes: mixes.byteLength }; }
 
 export function prepareSongMix(
   key: string,
   signal: AbortSignal | undefined,
   render: (signal: AbortSignal) => Promise<RenderedPerformanceAudio>,
+  persist = false,
+  priority: 'favorite' | 'catalog' = 'catalog',
 ) {
-  return preparePartAudio(`mix:${key}`, signal, render, true, mixes);
+  return preparePartAudio(`mix:${priority}:${key}`, signal, render, true, mixes, persist);
 }
 
 export function clearPreparedAudio() {
-  for (const job of jobs.values()) job.controller.abort();
+  for (const cacheJobs of jobs.values()) for (const job of cacheJobs.values()) job.controller.abort();
   jobs.clear();
   audio.clear();
   mixes.clear();

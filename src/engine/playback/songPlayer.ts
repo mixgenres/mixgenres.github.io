@@ -1,3 +1,5 @@
+import { catalogPreparationOrder, prepareCatalogOpenings } from '../cache/favoritePlayback';
+import { persistentPreparedAudioAvailable } from '../cache/persistentPreparedAudio';
 import { checkAbort } from '../../export/audioEncoding';
 import type { Sheet } from '../sheet/sheet';
 import type { Performance } from '../band/performanceData';
@@ -6,7 +8,7 @@ import { playbackResources } from './playbackResources';
 import { compilePerformance, releaseCompilerWorker } from './compilePerformance';
 import { type RenderedPerformanceAudio } from './mp3Export';
 import { planTransportChunks, playbackChunkAt, type PlaybackChunk } from './playbackChunks';
-import { preparePlaybackDSPCache, releasePlaybackWorkers, warmPlaybackWorkers } from './renderPlaybackPart';
+import { preparePlaybackDSPCache, releasePlaybackWorkers, setPlaybackBackgroundPreparation, warmPlaybackWorkers } from './renderPlaybackPart';
 
 export type PlayerStatus = 'idle' | 'compiling' | 'ready' | 'rendering' | 'starting' | 'playing' | 'seeking' | 'paused' | 'error';
 export interface PlaybackTiming {
@@ -63,6 +65,10 @@ export class SongPlayer {
   private warming?: { revision: number; promise: Promise<void> };
   private backgroundAbort?: AbortController;
   private backgroundKey = '';
+  private backgroundTimer?: ReturnType<typeof setTimeout>;
+  private backgroundRunning = false;
+  private catalogCursor?: string;
+  private preparedCatalog = new Set<string>();
   private sources = new Set<AudioBufferSourceNode>();
   private anchorContextTime = 0;
   private anchorPosition = 0;
@@ -92,7 +98,10 @@ export class SongPlayer {
     private readonly diagnostics = false) {
     if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       const stop = () => this.stop();
-      const hidden = () => {if(document.visibilityState === 'hidden')this.stop();};
+      const hidden = () => {
+        if(document.visibilityState === 'hidden')this.stop();
+        else if(this.state.performance && this.song && this.abort) this.warmChunks(this.state.performance,this.song,this.abort.signal,this.revision);
+      };
       // Mobile system controls can blur a still-visible page. Visibility and
       // lifecycle events, rather than focus, determine when playback stops.
       const windowEvents = ['pagehide','beforeunload'];
@@ -113,6 +122,8 @@ export class SongPlayer {
     pendingStart:this.wantsPlayback && !this.transportStarted};}
   get playbackHealth() { return { underruns: this.underruns, bufferingSeconds: this.bufferingSeconds,
     renderedAudioSeconds: this.renderedAudioSeconds, renderMs: this.renderMs }; }
+  get cacheWarmup() { return { active: !!this.backgroundTimer || this.backgroundRunning,
+    catalogSongsPrepared: this.preparedCatalog.size, catalogSongsTotal: catalogPreparationOrder.length }; }
   get preparedDuration(): number {
     let end = 0;
     for (const chunk of this.chunks) {
@@ -161,11 +172,7 @@ export class SongPlayer {
     }) });
     const physicalChanged = compositionKey !== this.compositionKey;
     const retainedPerformance = !force && !physicalChanged ? this.state.performance : undefined;
-    if (physicalChanged) {
-      this.backgroundAbort?.abort();
-      this.backgroundAbort = undefined;
-      this.backgroundKey = '';
-    }
+    this.cancelBackground();
     this.compositionKey = compositionKey;
     this.offset = this.position();
     this.haltSources();
@@ -197,23 +204,51 @@ export class SongPlayer {
       try { this.ensureContext(); } catch { /* Play surfaces browser capability errors. */ }
       warmPlaybackWorkers();
       this.warmChunks(performance, song, signal, revision);
-      this.warmPersistentDSP(performance, song, compositionKey);
       if (this.wantsPlayback && !this.scrubbing && this.pendingPlay?.revision !== revision) void this.play();
     }).catch(error => { if (!signal.aborted && revision === this.revision) this.fail(error); });
   }
 
-  /** Physical compilation survives mixer-only UI revisions. A musical edit
-   * cancels it immediately and starts a new content-addressed walk once the
-   * replacement Performance is ready. */
-  private warmPersistentDSP(performance: Performance, song: Sheet, compositionKey: string) {
-    if (this.backgroundKey === compositionKey && this.backgroundAbort && !this.backgroundAbort.signal.aborted) return;
+  private cancelBackground() {
+    clearTimeout(this.backgroundTimer);
+    this.backgroundTimer = undefined;
+    this.backgroundRunning = false;
     this.backgroundAbort?.abort();
+    setPlaybackBackgroundPreparation(false);
+    this.backgroundAbort = undefined;
+    this.backgroundKey = '';
+  }
+
+  /** Idle work starts after the playhead neighborhood is ready. Foreground
+   * playback, seeking, edits and page suspension always own the workers. */
+  private warmPersistentDSP(performance: Performance, song: Sheet, compositionKey: string) {
+    if (this.wantsPlayback || this.scrubbing || this.disposed || this.state.status === 'error' || this.warming?.revision === this.revision || typeof Worker === 'undefined' ||
+      typeof document !== 'undefined' && document.visibilityState === 'hidden') return;
+    if (this.backgroundKey === compositionKey && this.backgroundAbort && !this.backgroundAbort.signal.aborted) return;
+    this.cancelBackground();
     const controller = new AbortController();
     this.backgroundAbort = controller;
     this.backgroundKey = compositionKey;
-    void preparePlaybackDSPCache(performance, { ...songMixOptions(song), signal: controller.signal }, () => this.position()).catch(error => {
-      if (!controller.signal.aborted && !this.disposed) console.warn('Background DSP cache warmup failed', error);
-    });
+    this.backgroundTimer = setTimeout(() => {
+      this.backgroundTimer = undefined;
+      this.backgroundRunning = true;
+      void (async () => {
+        if (!await persistentPreparedAudioAvailable()) return;
+        checkAbort(controller.signal);
+        setPlaybackBackgroundPreparation(true);
+        try {
+          await prepareCatalogOpenings(controller.signal, this.catalogCursor ?? song.catalogId, undefined, id => {
+            this.preparedCatalog.add(id);
+            this.catalogCursor = catalogPreparationOrder[(catalogPreparationOrder.indexOf(id)+1)%catalogPreparationOrder.length];
+          });
+          checkAbort(controller.signal);
+          await preparePlaybackDSPCache(performance, { ...songMixOptions(song), signal: controller.signal }, () => this.position());
+        } finally {
+          if (this.backgroundAbort === controller) setPlaybackBackgroundPreparation(false);
+        }
+      })().catch(error => {
+        if (!controller.signal.aborted && !this.disposed) console.warn('Background DSP cache warmup failed', error);
+      }).finally(() => { if (this.backgroundAbort === controller) this.backgroundRunning = false; });
+    }, 500);
   }
 
   private ensureContext() {
@@ -293,7 +328,7 @@ export class SongPlayer {
     const began = globalThis.performance.now();
     const job = renderSongMix(performance, song, signal,
       { start: chunk.renderStart, end: chunk.renderEnd }, priority, undefined,
-      this.preparedAheadSeconds >= 4 ? 8 : 0).then(audio => {
+      Math.max(0, Math.min(8, this.preparedAheadSeconds - 4))).then(audio => {
       checkAbort(signal);
       if (revision !== this.revision || this.disposed) throw new DOMException('Playback rendering superseded', 'AbortError');
       const buffer = this.toChunkBuffer(audio, chunk);
@@ -367,7 +402,10 @@ export class SongPlayer {
       }
     })().catch(error => {
       if (!signal.aborted && revision === this.revision) this.fail(error);
-    }).finally(() => { if (this.warming === warming) this.warming = undefined; });
+    }).finally(() => {
+      if (this.warming === warming) this.warming = undefined;
+      if (!signal.aborted && revision === this.revision) this.warmPersistentDSP(performance,song,this.compositionKey);
+    });
   }
 
   private toChunkBuffer(audio: RenderedPerformanceAudio, chunk: PlaybackChunk) {
@@ -494,7 +532,7 @@ export class SongPlayer {
 
   private async prepareStartReserve(performance: Performance, song: Sheet, signal: AbortSignal, revision: number, request: number) {
     const rate = this.renderedAudioSeconds ? this.renderMs / (this.renderedAudioSeconds * 1000) : 0;
-    const target = Math.min(4, this.loopDuration());
+    const target = Math.min(rate > .9 ? 8 : 4, this.loopDuration());
     // Fast synthesis and already-prepared playback start immediately. A slow
     // cold mobile render banks a small reserve before starting the audio clock.
     if (!playbackResources().constrained || rate < .35 || this.preparedAheadSeconds >= target) return false;
@@ -516,6 +554,7 @@ export class SongPlayer {
   /** Called directly from click/keyboard handlers so resume retains user activation. */
   async play(inputTime?: number): Promise<void> {
     if (this.disposed || !this.song || this.state.status === 'playing') return;
+    this.cancelBackground();
     if (this.state.status === 'error' && !this.state.performance) this.configure(this.song, true);
     if (!this.wantsPlayback) {
       const enteredAt = performance.now();
@@ -587,6 +626,7 @@ export class SongPlayer {
 
   locate(seconds: number) {
     if (this.disposed || !Number.isFinite(seconds)) return;
+    this.cancelBackground();
     // Compilation will clamp to the real duration once its tempo map arrives.
     const duration = this.state.performance ? this.loopDuration() : Infinity;
     this.offset = Math.max(0, Math.min(Math.max(0, duration - 1 / 44100), seconds));
@@ -632,6 +672,7 @@ export class SongPlayer {
   /** Suspend once for a drag; locate() previews without restarting synthesis. */
   beginScrub() {
     if (this.disposed || this.scrubbing) return;
+    this.cancelBackground();
     this.offset = this.position();
     this.scrubbing = true;
     ++this.playRequest;
@@ -647,11 +688,15 @@ export class SongPlayer {
     else this.locate(this.offset);
   }
 
-  pause() { this.pauseTransport(false); }
+  pause() {
+    this.pauseTransport(false);
+    if (this.state.performance && this.song) this.warmPersistentDSP(this.state.performance,this.song,this.compositionKey);
+  }
 
   /** Navigation/shutdown silence synchronously, including future queued sources. */
   stop() {
     if(this.disposed)return;
+    this.cancelBackground();
     this.scrubbing=false;
     this.pauseTransport(true);
     if(this.output && this.ctx) {
@@ -756,7 +801,7 @@ export class SongPlayer {
     this.wantsPlayback = false;
     ++this.revision; ++this.playRequest;
     this.abort?.abort();
-    this.backgroundAbort?.abort();
+    this.cancelBackground();
     this.haltSources();
     releasePlaybackWorkers();
     releaseCompilerWorker();
