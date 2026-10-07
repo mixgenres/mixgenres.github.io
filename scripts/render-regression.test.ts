@@ -5,6 +5,7 @@ import { el } from '@elemaudio/core';
 import { renderMixBuses } from '../src/engine/playback/elementaryEngine';
 import { renderPerformanceToMp3, renderPerformanceToAudio } from '../src/engine/playback/mp3Export';
 import { voiceTailSeconds } from '../src/engine/playback/voiceAllocation';
+import { createNoteTailResolver } from '../src/engine/playback/noteLifetime';
 import { resolveTrackSound } from '../src/engine/playback/trackSound';
 import type { PerfNote, Performance } from '../src/engine/band/performanceData';
 const note = (time = 0, midi = 60): PerfNote => ({ time, dur: 0.1, midi, vel: 80, trackId: 'keys', bar: 0,
@@ -35,7 +36,8 @@ test('dense offline WAV renders all voices as finite, audible PCM and preserves 
   const data = new DataView(bytes);
   assert.equal(String.fromCharCode(...new Uint8Array(bytes, 0, 4)), 'RIFF');
   const seconds = (bytes.byteLength - 44) / (44100 * 2 * 2);
-  assert.ok(seconds >= 0.1 + voiceTailSeconds(resolveTrackSound('organ', 'jazz', '', 'harmony')) - 0.001);
+  const tail = createNoteTailResolver(perf, { trackInstruments: new Map() });
+  assert.ok(seconds >= .1 + tail(perf.notes[0]) - .001, 'the shared acoustic model release remains intact');
   let peak = 0;
   for (let i = 44; i + 1 < bytes.byteLength; i += 2) peak = Math.max(peak, Math.abs(data.getInt16(i, true)));
   assert.ok(peak > 10, 'audible waveform');
@@ -45,7 +47,8 @@ test('isolated playback windows allocate only the selected instrument lifetime',
   const perf = performanceOf([{ ...note(), trackId: 'lead' }, { ...note(), trackId: 'piano' }]);
   const audio = await renderPerformanceToAudio(perf, { selectedTrackIds: ['lead'], renderWindow: { start: 0, end: .4 },
     trackInstruments: new Map([['lead', 'bandoneon'], ['piano', 'piano']]), worldId: 'tango', rawStem: true });
-  const expected = Math.max(1, .4, .1 + voiceTailSeconds(resolveTrackSound('bandoneon', 'tango')));
+  const tail = createNoteTailResolver(perf, { trackInstruments: new Map([['lead', 'bandoneon'], ['piano', 'piano']]), worldId: 'tango' });
+  const expected = Math.max(1, .4, .1 + tail(perf.notes[0]));
   assert.ok(Math.abs(audio.left.length / audio.sampleRate - expected) < 1 / audio.sampleRate,
     'an unselected piano must not add its long ring to a bandoneon clip');
 });
@@ -233,7 +236,7 @@ test('cropped raw sections retain exact DSP state without storing the preceding 
 });
 
 
-test('independent renders start with fresh DSP state through the public lifecycle', async () => {
+test('independent renders reproduce shared PCM without allocating native DSP runtimes', async () => {
   const { offlineRendererStats } = await import('../src/engine/playback/offlineRenderer');
   const perf = performanceOf([note()]);
   const options = {trackInstruments:new Map([['keys','organ']]),rawStem:true,cacheDSPStem:false,maxDurationSeconds:.2,yieldForUI:false};
@@ -242,7 +245,7 @@ test('independent renders start with fresh DSP state through the public lifecycl
     const repeat=await renderPerformanceToAudio(perf,options);
     assert.ok(repeat.left.every((sample,index) => sample === first.left[index]), 'fresh public renderers preserve the waveform');
     const stats=offlineRendererStats();
-    assert.equal(stats.initializedRuntimes,baseline.initializedRuntimes+i+1,'each independent job initializes a renderer');
+    assert.equal(stats.initializedRuntimes,baseline.initializedRuntimes,'shared compact synthesis needs no per-job native runtime');
     assert.equal(stats.activeRenders,0,'no render remains acquired');
   }
 });

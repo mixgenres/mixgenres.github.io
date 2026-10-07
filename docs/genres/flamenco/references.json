@@ -1,0 +1,430 @@
+{
+  "genreId": "flamenco",
+  "created": "2026-10-07",
+  "purpose": "Genre-local reference expansion pilot for mix, instrumentation, technique, articulation, and pattern review.",
+  "targetPerStyle": 4,
+  "sourceRule": "Each style owns its evidence. A reference can inform multiple styles only when the performance itself demonstrates each style; neighboring genres are not substitutes.",
+  "storageGate": {
+    "volumeFreeBytesAtPlanning": null,
+    "preserveFreeBytes": null,
+    "status": "active-style-by-style-ingest",
+    "note": "User approved a bounded Flamenco-only storage exception, preserving about 5 GiB free. Continue one style at a time, use the existing Demucs environment, keep peak temporary audio within 1 GiB, retained reference/review audio within 500 MiB, and recheck free space before each style.",
+    "forecastNewMp3sAtObservedMean": "about 303 MiB for 55 added files, based on 17 existing Flamenco MP3s averaging 5.51 MiB each; actual duration/encoding may change this.",
+    "forecastAtFivePerStyle": "about 402 MiB for 73 added files at the same observed mean.",
+    "acquiredSoFarBytes": 24971507
+  },
+  "summary": {
+    "styleCount": 18,
+    "existingFiles": 20,
+    "targetFiles": 72,
+    "newFilesNeeded": 52,
+    "exactMatchedStyles": 17,
+    "zeroReferenceStyles": [
+      "flamenco-seguiriya"
+    ]
+  },
+  "styles": [
+    {
+      "styleId": "flamenco-solea",
+      "styleName": "Soleá",
+      "targetReferences": 4,
+      "currentCount": 4,
+      "addCount": 0,
+      "references": [
+        {
+          "id": "flamenco-solea-existing-camar-n-de-la-isla-de-tus-ojos-soy-cautivo",
+          "artist": "Camarón de la Isla",
+          "title": "De tus ojos soy cautivo",
+          "file": "samples/Camarón de la Isla - De tus ojos soy cautivo.mp3",
+          "state": "downloaded",
+          "bytes": 4666962,
+          "sha256": "95461d43d10519893f6c0784d60ad1b499849260c26e06d30fd6b4dabf32b88a",
+          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        },
+        {
+          "id": "flamenco-solea-fernanda-1991",
+          "artist": "Fernanda de Utrera",
+          "title": "Soleá (Fiesta de la Bulería 1991)",
+          "youtubeUrl": "https://www.youtube.com/watch?v=eTXQOcbSVJU",
+          "youtubeTitle": "LA FERNANDA NO SE PODIA AGUANTAR ESCUCHARLA",
+          "uploader": "Embedded on Los Caminos del Cante; upload channel to confirm in source page",
+          "performance": "Fernanda de Utrera and Moraíto at the 24th Fiesta de la Bulería in Jerez, 1991. The source commentary describes a complete soleá sequence with palmas and guitar; use the exact sequence to map variants and ensemble timing.",
+          "file": "samples/Fernanda de Utrera - Soleá (Fiesta de la Bulería 1991).mp3",
+          "state": "verified",
+          "bytes": 12471930,
+          "durationSeconds": 519.291088,
+          "sampleRateHz": 44100,
+          "channels": 2,
+          "sha256": "b66c03cd29c5a6259939473141e0ccbec0d839e0d140bac825af72711851db51",
+          "sourceVerification": "YouTube title and 8:39 duration resolved in MediaHuman; local MP3 decodes with ffprobe. Los Caminos del Cante identifies the event, performers and soleá variants. Musical listening/timecode map pending.",
+          "sourceEvidence": [
+            "https://www.youtube.com/watch?v=eTXQOcbSVJU",
+            "https://loscaminosdelcante.com/2026/08/21/en-recuerdo-del-paso-de-fernanda-de-utrera-por-la-fiesta-de-la-buleria-de-jerez-de-1991/"
+          ],
+          "source": "original-recording",
+          "windowsSeconds": [],
+          "separationState": "pending"
+        },
+        {
+          "id": "flamenco-solea-agujetas-1997",
+          "artist": "Manuel Agujetas",
+          "title": "Soleares de Joaquín el de la Paula y El Mellizo (La Soleá 1997)",
+          "youtubeUrl": "https://www.youtube.com/watch?v=avtXxxSkP5Y",
+          "youtubeTitle": "Manuel Agujetas - Soleares de Joaquín el de la Paula y El Mellizo",
+          "uploader": "Manuel Torre",
+          "performance": "Manuel Agujetas with Curro de Jerez, recorded at La Soleá in October 1997. The source names two soleá lineages; verify passage boundaries during listening.",
+          "file": "samples/Manuel Agujetas - Soleares de Joaquín el de la Paula y El Mellizo (La Soleá 1997).mp3",
+          "state": "verified",
+          "bytes": 7498797,
+          "durationSeconds": 311.903107,
+          "sampleRateHz": 44100,
+          "channels": 2,
+          "sha256": "4d5ae1bf070dffeaae50e2ecc28e06e9c1217c4df802f4d3351bb9868fb53041",
+          "sourceVerification": "MediaHuman resolved the title and 5:12 duration; local MP3 decodes with ffprobe. The source description credits Curro de Jerez and the October 1997 La Soleá recording. Musical listening/timecode map pending.",
+          "sourceEvidence": [
+            "https://www.youtube.com/watch?v=avtXxxSkP5Y",
+            "https://soniosnegros1970.blogspot.com/2018/11/"
+          ],
+          "source": "original-recording",
+          "windowsSeconds": [],
+          "separationState": "pending"
+        },
+        {
+          "id": "flamenco-solea-paco-2024-issue",
+          "artist": "Paco de Lucía",
+          "title": "Soleá Niño Ricardo - Solo De Guitarra",
+          "youtubeUrl": "https://www.youtube.com/watch?v=9AzmoKW4aPQ",
+          "youtubeTitle": "Soleá Niño Ricardo - Solo De Guitarra",
+          "uploader": "Paco de Lucía Official Artist Channel; audio distributed by BMG Rights Management (Spain)",
+          "performance": "Solo flamenco guitar recording, credited to Paco de Lucía; 2024 YouTube release. Use for guitar technique, register, note decay and melodic development, not for ensemble balance.",
+          "file": "samples/Paco de Lucía - Soleá Niño Ricardo (Solo De Guitarra).mp3",
+          "state": "verified",
+          "bytes": 5000780,
+          "durationSeconds": 202.766803,
+          "sampleRateHz": 44100,
+          "channels": 2,
+          "sha256": "41511500f8d5e3fda9b9caff6aa87c9bcbf053c81307ffe85a25bcf8193d429b",
+          "sourceVerification": "Official Artist Channel and BMG credit visible on YouTube; MediaHuman resolved title and 3:23 duration; local MP3 decodes with ffprobe. Recording date, rather than release date, remains unverified. Musical listening/timecode map pending.",
+          "sourceEvidence": [
+            "https://www.youtube.com/watch?v=9AzmoKW4aPQ"
+          ],
+          "source": "original-recording",
+          "windowsSeconds": [],
+          "separationState": "not-needed-instrumental"
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-bulerias",
+      "styleName": "Bulerías",
+      "targetReferences": 4,
+      "currentCount": 1,
+      "addCount": 3,
+      "references": [
+        {
+          "id": "flamenco-bulerias-existing-paco-de-luc-a-almoraima",
+          "artist": "Paco de Lucía",
+          "title": "Almoraima",
+          "file": "samples/Paco de Lucía - Almoraima.mp3",
+          "state": "downloaded",
+          "bytes": 7037669,
+          "sha256": "fa61156e45036984d1a3bd6f58f0b2bc4f7d6cd32132ca04cb965a3e21129848",
+          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-alegrias",
+      "styleName": "Alegrías",
+      "targetReferences": 4,
+      "currentCount": 1,
+      "addCount": 3,
+      "references": [
+        {
+          "id": "flamenco-alegrias-existing-camar-n-de-la-isla-bah-a-de-c-diz",
+          "artist": "Camarón de la Isla",
+          "title": "Bahía de Cádiz",
+          "file": "samples/Camarón de la Isla - Bahía de Cádiz.mp3",
+          "state": "downloaded",
+          "bytes": 4234679,
+          "sha256": "4729e3f9809a95fdd8478314028221a74b58ad823f761ee6d7586643b38a0849",
+          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-tangos",
+      "styleName": "Tangos",
+      "targetReferences": 4,
+      "currentCount": 1,
+      "addCount": 3,
+      "references": [
+        {
+          "id": "flamenco-tangos-existing-camar-n-de-la-isla-como-el-agua",
+          "artist": "Camarón de la Isla",
+          "title": "Como el Agua",
+          "file": "samples/Camarón de la Isla - Como el Agua.mp3",
+          "state": "downloaded",
+          "bytes": 5344055,
+          "sha256": "472855029d8cd98ddd82d62202be2d08c8cb8a1b720648cae966100adcd6c841",
+          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-seguiriya",
+      "styleName": "Seguiriya",
+      "targetReferences": 4,
+      "currentCount": 0,
+      "addCount": 4,
+      "references": []
+    },
+    {
+      "styleId": "flamenco-tientos",
+      "styleName": "Tientos",
+      "targetReferences": 4,
+      "currentCount": 1,
+      "addCount": 3,
+      "references": [
+        {
+          "id": "flamenco-tientos-existing-camar-n-mora-to-como-un-lirio",
+          "artist": "Camarón",
+          "title": "Moraíto como un lirio",
+          "file": "samples/Camarón - Moraíto como un lirio.mp3",
+          "state": "downloaded",
+          "bytes": 6469411,
+          "sha256": "0db13c817fb3e2bee47010fa434f9a69bbd6f7cb92e084fe7aa02b8fbcf56c78",
+          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-fandangos",
+      "styleName": "Fandangos",
+      "targetReferences": 4,
+      "currentCount": 1,
+      "addCount": 3,
+      "references": [
+        {
+          "id": "flamenco-fandangos-existing-camar-n-salud-antes-que-dinero",
+          "artist": "Camarón",
+          "title": "Salud antes que dinero",
+          "file": "samples/Camarón - Salud antes que dinero.mp3",
+          "state": "downloaded",
+          "bytes": 4162924,
+          "sha256": "5e8df34589f401916fc3594b0b1e6724d43b6c071ae6f0d4340c1fdc303aa6af",
+          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-rumba",
+      "styleName": "Rumba",
+      "targetReferences": 4,
+      "currentCount": 1,
+      "addCount": 3,
+      "references": [
+        {
+          "id": "flamenco-rumba-existing-paco-de-luc-a-entre-dos-aguas",
+          "artist": "Paco de Lucía",
+          "title": "Entre dos aguas",
+          "file": "samples/Paco de Lucía - Entre dos aguas.mp3",
+          "state": "downloaded",
+          "bytes": 7789062,
+          "sha256": "f9ef98179339f167c12ae3b23c7fc1b81eb4833a09d5a5dac4fd85dbce5d8aab",
+          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-tonas-martinetes",
+      "styleName": "Tonás / Martinetes",
+      "targetReferences": 4,
+      "currentCount": 1,
+      "addCount": 3,
+      "references": [
+        {
+          "id": "flamenco-tonas-martinetes-existing-antonio-mairena-martinete-y-debla",
+          "artist": "Antonio Mairena",
+          "title": "Martinete y Debla",
+          "file": "samples/Antonio Mairena - Martinete y Debla.mp3",
+          "state": "downloaded",
+          "bytes": 7121167,
+          "sha256": "118a852e5f6b5dfaea4c6f58aa4389529e752ef85d33a4762a7fa1a0168f718b",
+          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-taranta",
+      "styleName": "Taranta",
+      "targetReferences": 4,
+      "currentCount": 1,
+      "addCount": 3,
+      "references": [
+        {
+          "id": "flamenco-taranta-existing-paco-de-luc-a-t-o-sabas",
+          "artist": "Paco de Lucía",
+          "title": "Tío Sabas",
+          "file": "samples/Paco de Lucía - Tío Sabas.mp3",
+          "state": "downloaded",
+          "bytes": 7462207,
+          "sha256": "b7d87315d39470b483101a16a51cc53c1f87395fb20087e1357e6568c9b39f6d",
+          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-granaina-malaguena",
+      "styleName": "Granaína / Malagueña",
+      "targetReferences": 4,
+      "currentCount": 1,
+      "addCount": 3,
+      "references": [
+        {
+          "id": "flamenco-granaina-malaguena-existing-camar-n-que-he-dejao-de-quererte",
+          "artist": "Camarón",
+          "title": "Que he dejao de quererte",
+          "file": "samples/Camarón - Que he dejao de quererte.mp3",
+          "state": "downloaded",
+          "bytes": 2914717,
+          "sha256": "929ef776c85271cfaba454ed78547bceef448815267f888b89e53e1c7e12decb",
+          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-guajira",
+      "styleName": "Guajira",
+      "targetReferences": 4,
+      "currentCount": 1,
+      "addCount": 3,
+      "references": [
+        {
+          "id": "flamenco-guajira-existing-paco-de-luc-a-guajiras-de-luc-a",
+          "artist": "Paco de Lucía",
+          "title": "Guajiras de Lucía",
+          "file": "samples/Paco de Lucía - Guajiras de Lucía.mp3",
+          "state": "downloaded",
+          "bytes": 4910012,
+          "sha256": "74a2f8c18e35eee2a6203ba504629f58fe361b7e6aea5e437e388ef80e4c0e43",
+          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-farruca",
+      "styleName": "Farruca",
+      "targetReferences": 4,
+      "currentCount": 1,
+      "addCount": 3,
+      "references": [
+        {
+          "id": "flamenco-farruca-existing-sabicas-farruca",
+          "artist": "Sabicas",
+          "title": "Farruca",
+          "file": "samples/Sabicas - Farruca.mp3",
+          "state": "downloaded",
+          "bytes": 6689390,
+          "sha256": "861caf0db3977cf80512b256d71b20a3b7da2979dd80059354bdc7bb9d3730e2",
+          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-sevillanas",
+      "styleName": "Sevillanas",
+      "targetReferences": 4,
+      "currentCount": 1,
+      "addCount": 3,
+      "references": [
+        {
+          "id": "flamenco-sevillanas-existing-paco-de-luc-a-el-cobre",
+          "artist": "Paco de Lucía",
+          "title": "El Cobre",
+          "file": "samples/Paco de Lucía - El Cobre.mp3",
+          "state": "downloaded",
+          "bytes": 4622516,
+          "sha256": "d0dba7ec785c5c73784da3c8a716933107f0ce5dcdfe440a3142065141fa738f",
+          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-nuevo-flamenco",
+      "styleName": "Nuevo Flamenco",
+      "targetReferences": 4,
+      "currentCount": 1,
+      "addCount": 3,
+      "references": [
+        {
+          "id": "flamenco-nuevo-flamenco-existing-camar-n-la-leyenda-del-tiempo",
+          "artist": "Camarón",
+          "title": "La Leyenda del Tiempo",
+          "file": "samples/Camarón - La Leyenda del Tiempo.mp3",
+          "state": "downloaded",
+          "bytes": 5318036,
+          "sha256": "2634eda83ca46bc77c9ce0db9e1891bdd7fdbd8b652c7e42f9de9aa9502f5f10",
+          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-flamenco-jazz",
+      "styleName": "Flamenco Jazz",
+      "targetReferences": 4,
+      "currentCount": 1,
+      "addCount": 3,
+      "references": [
+        {
+          "id": "flamenco-flamenco-jazz-existing-paco-de-luc-a-zyryab",
+          "artist": "Paco de Lucía",
+          "title": "Zyryab",
+          "file": "samples/Paco de Lucía - Zyryab.mp3",
+          "state": "downloaded",
+          "bytes": 9188166,
+          "sha256": "bbc170f33b8f2d2fa1c1096903f712b9471a1b9a3bf983cc6f8220cd1693bf5c",
+          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-flamenco-rock",
+      "styleName": "Flamenco Rock",
+      "targetReferences": 4,
+      "currentCount": 1,
+      "addCount": 3,
+      "references": [
+        {
+          "id": "flamenco-flamenco-rock-existing-pata-negra-blues-de-la-frontera",
+          "artist": "Pata Negra",
+          "title": "Blues de la Frontera",
+          "file": "samples/Pata Negra - Blues de la Frontera.mp3",
+          "state": "downloaded",
+          "bytes": 6155719,
+          "sha256": "698bd480dc51a315848fbac2b4d3ffb6190545767ca164a889592d77714b95e2",
+          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-urban-experimental",
+      "styleName": "Urban / Experimental",
+      "targetReferences": 4,
+      "currentCount": 1,
+      "addCount": 3,
+      "references": [
+        {
+          "id": "flamenco-urban-experimental-existing-rosal-a-malamente",
+          "artist": "Rosalía",
+          "title": "Malamente",
+          "file": "samples/Rosalía - Malamente.mp3",
+          "state": "downloaded",
+          "bytes": 4111913,
+          "sha256": "503ec6ac158a80d2aa2c132174e2ec83ba4012a4f237714877ef2f27968dbfce",
+          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        }
+      ]
+    }
+  ]
+}

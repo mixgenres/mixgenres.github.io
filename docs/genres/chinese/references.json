@@ -1,0 +1,234 @@
+{
+  "genreId": "chinese",
+  "status": "inventory and provenance pass; musical/timecode review pending",
+  "references": [
+    {
+      "styleId": "chinese-jiangnan-sizhu",
+      "recording": "Shanghai Conservatory Professor Jiangnan Sizhu Research Group - Huanle Ge",
+      "source": "original-recording",
+      "audio": "samples/上海音乐学院教授丝竹研究组 - 欢乐歌.mp3",
+      "exists": true,
+      "targets": {
+        "rmsDbfs": -19.4947,
+        "crestDb": 18.7075,
+        "lowEnergyShare": 0.0005,
+        "highEnergyShare": 0.2231,
+        "sideMidRmsRatio": 0.7734
+      },
+      "windowsSeconds": [
+        75,
+        150,
+        250
+      ],
+      "exactLocalInventoryMatches": [],
+      "assessment": "Local file verified and measured; source remains descriptive evidence. Full player/timecode listening review pending.",
+      "candidateLocalRecordings": []
+    },
+    {
+      "styleId": "chinese-guqin",
+      "recording": "Guan Pinghu - Liu Shui",
+      "source": "original-recording",
+      "audio": "samples/Guan Pinghu - Liu Shui.mp3",
+      "exists": true,
+      "targets": {
+        "rmsDbfs": -21.34,
+        "crestDb": 15.33,
+        "lowEnergyShare": 0.1433,
+        "highEnergyShare": 0.001,
+        "sideMidRmsRatio": 0.22
+      },
+      "windowsSeconds": [
+        164.76,
+        305.98
+      ],
+      "exactLocalInventoryMatches": [],
+      "assessment": "Local file verified and measured; source remains descriptive evidence. Full player/timecode listening review pending.",
+      "candidateLocalRecordings": []
+    },
+    {
+      "styleId": "chinese-guzheng",
+      "recording": "Traditional - Fisherman's Song at Eventide",
+      "source": "original-recording",
+      "audio": "samples/Traditional - Fisherman's Song at Eventide.mp3",
+      "exists": true,
+      "targets": {
+        "rmsDbfs": -32.784,
+        "crestDb": 18.517,
+        "lowEnergyShare": 0.0026,
+        "highEnergyShare": 0.0928,
+        "sideMidRmsRatio": 0.0934
+      },
+      "windowsSeconds": [
+        88.25,
+        163.89
+      ],
+      "exactLocalInventoryMatches": [],
+      "assessment": "Local file verified and measured; source remains descriptive evidence. Full player/timecode listening review pending.",
+      "candidateLocalRecordings": []
+    },
+    {
+      "styleId": "chinese-pipa",
+      "recording": "Traditional - Ambush from Ten Sides",
+      "source": "original-recording",
+      "audio": "samples/Traditional - Ambush from Ten Sides.mp3",
+      "exists": true,
+      "targets": {
+        "rmsDbfs": -15.906,
+        "crestDb": 14.775,
+        "lowEnergyShare": 0.0001,
+        "highEnergyShare": 0.1373,
+        "sideMidRmsRatio": 0.274
+      },
+      "windowsSeconds": [
+        155.75,
+        289.24
+      ],
+      "exactLocalInventoryMatches": [],
+      "assessment": "Local file verified and measured; source remains descriptive evidence. Full player/timecode listening review pending.",
+      "candidateLocalRecordings": []
+    },
+    {
+      "styleId": "chinese-jingju",
+      "recording": "Mei Lanfang - The Drunken Concubine",
+      "source": "separated-accompaniment",
+      "audio": "voiced/Mei Lanfang - The Drunken Concubine.mp3",
+      "exists": true,
+      "targets": {
+        "rmsDbfs": -23.307,
+        "crestDb": 17.492,
+        "lowEnergyShare": 0.0692,
+        "highEnergyShare": 0.5799,
+        "sideMidRmsRatio": 0.7027
+      },
+      "windowsSeconds": [
+        55.41,
+        102.91
+      ],
+      "exactLocalInventoryMatches": [],
+      "assessment": "Local file verified and measured; source remains descriptive evidence. Full player/timecode listening review pending.",
+      "candidateLocalRecordings": []
+    },
+    {
+      "styleId": "chinese-cantonese-ensemble",
+      "recording": "Cantonese music ensemble - Bu Bu Gao",
+      "source": "separated-accompaniment",
+      "audio": "voiced/Cantonese music ensemble - Bu Bu Gao.mp3",
+      "exists": true,
+      "targets": {
+        "rmsDbfs": -18.358,
+        "crestDb": 12.703,
+        "lowEnergyShare": 0.0015,
+        "highEnergyShare": 0.0718,
+        "sideMidRmsRatio": 0.3042
+      },
+      "windowsSeconds": [
+        68.58,
+        127.35
+      ],
+      "exactLocalInventoryMatches": [],
+      "assessment": "Local file verified and measured; source remains descriptive evidence. Full player/timecode listening review pending.",
+      "candidateLocalRecordings": []
+    },
+    {
+      "styleId": "chinese-chaozhou",
+      "recording": "Chaozhou String Ensemble - Han Ya Xi Shui",
+      "source": "separated-accompaniment",
+      "audio": "voiced/Chaozhou String Ensemble - Han Ya Xi Shui.mp3",
+      "exists": true,
+      "targets": {
+        "rmsDbfs": -32.753,
+        "crestDb": 19.776,
+        "lowEnergyShare": 0.2103,
+        "highEnergyShare": 0.0491,
+        "sideMidRmsRatio": 0.0021
+      },
+      "windowsSeconds": [
+        155.88,
+        289.48
+      ],
+      "exactLocalInventoryMatches": [],
+      "assessment": "Local file verified and measured; source remains descriptive evidence. Full player/timecode listening review pending.",
+      "candidateLocalRecordings": []
+    },
+    {
+      "styleId": "chinese-suona-chuida",
+      "recording": "Bai Niao Chao Feng — suona and orchestra (orchestral adaptation; 2022 National Orchestra New Year Concert)",
+      "source": "original-recording",
+      "audio": "samples/Ren Tongxiang - Bai Niao Chao Feng.mp3",
+      "exists": true,
+      "targets": {
+        "rmsDbfs": -29.707,
+        "crestDb": 17.058,
+        "lowEnergyShare": 0.0062,
+        "highEnergyShare": 0.8567,
+        "sideMidRmsRatio": 0.5458
+      },
+      "windowsSeconds": [
+        0,
+        164.67,
+        305.82
+      ],
+      "exactLocalInventoryMatches": [
+        {
+          "genre": "chinese",
+          "styleId": "chinese-suona-chuida",
+          "songId": "chinese-suona-chuida_song",
+          "name": "Ren Tongxiang — Bai Niao Chao Feng"
+        }
+      ],
+      "assessment": "Downloaded with MediaHuman YouTube to MP3 after checking title, uploader, named performers and work. The recording supplies a direct suona example and an orchestral blend comparison. It is an orchestral adaptation, not a traditional processional chuida mix; these measurements are descriptive and do not tune the app defaults. No voice separation was run because the source is presented as instrumental.",
+      "provenance": {
+        "status": "downloaded-and-file-verified",
+        "url": "https://www.youtube.com/watch?v=MHacaLSPWy4",
+        "videoId": "MHacaLSPWy4",
+        "videoTitle": "百鸟朝凤 唢呐与乐队 编曲/任同祥 配器/王甫建 指挥/彭家鹏 唢呐/冯晓泉、石海彬、侯艳秋、史南南 中央民族乐团 中国广播民族乐团 中国歌剧舞剧院民族乐团 北京民族乐团",
+        "channel": "华乐世界",
+        "event": "2022 National Orchestra New Year Concert",
+        "downloader": "MediaHuman YouTube to MP3 3.9.24",
+        "originalFilename": "百鸟朝凤   唢呐与乐队   编曲_任同祥  配器_王甫建  指挥_彭家鹏  唢呐_冯晓泉、石海彬、侯艳秋、史南南    中央民族乐团  中国广播民族乐团  中国歌剧舞剧院民族乐团  北京民族乐团.mp3",
+        "canonicalPath": "samples/Ren Tongxiang - Bai Niao Chao Feng.mp3",
+        "durationSeconds": 470.485351,
+        "sampleRateHz": 44100,
+        "channels": 2,
+        "bitRateBps": 192865,
+        "bytes": 11342563,
+        "sha256": "c4c5a492808ac2bb0c1eed40eb2e3fae61e066a0e37a871ea5b0c04eb42f6b36",
+        "acquiredAt": "2026-10-07"
+      }
+    }
+  ],
+  "researchSources": [
+    {
+      "url": "https://academic.oup.com/edited-volume/52498/chapter-abstract/421531033",
+      "scope": "Chinese regional ensembles and heterophonic practice"
+    },
+    {
+      "url": "https://www2.umbc.edu/eol/dujunco/xsy.html",
+      "scope": "Chaozhou xianshi instruments and ensemble practice"
+    },
+    {
+      "url": "https://omeka-s.grinnell.edu/s/MusicalInstruments/page/beijing",
+      "scope": "Jingju percussion roles"
+    },
+    {
+      "url": "https://folkways.si.edu/china-chuida-wind-and-percussive-instrumental-ensembles/world/music/album/smithsonian",
+      "scope": "Chuida wind and percussion context"
+    },
+    {
+      "url": "https://scholarsbank.uoregon.edu/server/api/core/bitstreams/cfccde8b-024d-4f39-8c11-353a99fb37fe/content",
+      "scope": "Guqin open, stopped, and harmonic tone classes"
+    },
+    {
+      "url": "https://intermusic.lmta.lt/pluginfile.php/1432/block_file/file/Introduction%20to%20instruments%20GUZHENG",
+      "scope": "Guzheng plucking, tremolo, and pitch bending"
+    },
+    {
+      "url": "https://so06.tci-thaijo.org/index.php/jomld/article/view/274415",
+      "scope": "Pipa technique vocabulary"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=MHacaLSPWy4",
+      "scope": "Suona-and-orchestra performance; video metadata names the work, arranger, conductor, four suona performers, orchestras, and 2022 concert. Used as direct suona and broad blend evidence, not traditional chuida mix calibration."
+    }
+  ]
+}

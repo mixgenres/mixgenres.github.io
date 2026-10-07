@@ -3,7 +3,8 @@ import type { Mp3RenderOptions } from './mp3Export';
 import type { TrackParams } from './elementaryEngine';
 import { prepareNoteVoice } from './performancePlan';
 import { resolveTrackSound } from './trackSound';
-import { voiceTailSeconds } from './voiceAllocation';
+import { compactVoiceTailSeconds } from './compactInstrument';
+import { INSTRUMENTS_BY_ID } from '../lookup/instruments';
 
 /** One lifetime calculation for section preparation, voice allocation and mix
  * length. A held source or released resonator must survive its section edge. */
@@ -30,6 +31,6 @@ export function createNoteTailResolver(performance: Performance, options: Mp3Ren
     const lifetimeParams = { ...(prepared.soundParams ?? params) }, controls = lifetimeControls.get(note.trackId);
     if (controls?.brightness !== undefined) lifetimeParams.brightness = Math.max(lifetimeParams.brightness, controls.brightness);
     if (controls?.mute !== undefined) lifetimeParams.mute = Math.min(lifetimeParams.mute, controls.mute);
-    const tail = voiceTailSeconds(lifetimeParams, prepared); tails.set(note, tail); return tail;
+    const tail = compactVoiceTailSeconds(INSTRUMENTS_BY_ID[instrumentId], lifetimeParams, prepared); tails.set(note, tail); return tail;
   };
 }

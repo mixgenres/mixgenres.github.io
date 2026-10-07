@@ -286,7 +286,7 @@ export default function App() {
         // use Space as a transport shortcut.
         if (e.target instanceof Element && e.target.closest('button')) return;
         e.preventDefault();
-        if (!e.repeat) { playerRef.current?.configure(songRef.current); playerRef.current?.toggle(e.timeStamp); }
+        if (!e.repeat) playerRef.current?.toggle(e.timeStamp);
       } else if (e.code === 'ArrowLeft') {
         e.preventDefault();
         seekTo(barRef.current - 1, 0);
@@ -350,10 +350,6 @@ export default function App() {
   useLayoutEffect(() => {
     playerRef.current?.configure(song);
   }, [song]);
-
-  useEffect(() => {
-    if(startOverOpen || worldOpen || styleOpen || sectionGenreOpen)playerRef.current?.stop();
-  },[startOverOpen,worldOpen,styleOpen,sectionGenreOpen]);
 
   // Accepts a plain Track: the sheet's tracks always carry an instrumentId at
   // runtime, but the stored type keeps it optional for older saved songs.
@@ -521,7 +517,7 @@ export default function App() {
         <div ref={transportRef} className="flex items-stretch gap-2.5 select-none mb-5">
           {/* Play/Pause button */}
           <button
-            onClick={e => { playerRef.current?.configure(songRef.current); playerRef.current?.toggle(e.timeStamp); }}
+            onClick={e => playerRef.current?.toggle(e.timeStamp)}
             aria-label={playbackLabel}
             aria-busy={starting || preparing}
             aria-pressed={playing}

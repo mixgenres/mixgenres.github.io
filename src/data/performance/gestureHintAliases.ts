@@ -9,6 +9,7 @@ export const GESTURE_HINT_ALIASES: Record<string, RegExp> = {
   rasgueado: /rasgueado|strum|roll/i,
   golpe: /golpe|tap|percuss/i,
   arrastre: /arrastre|slide|gliss|drag/i,
+  portamento: /portamento|slide|gliss|arrastre/i,
   guajeo: /guajeo|montuno|staccato|chop/i,
   tumbao: /tumbao|bass|pizz|staccato|accent/i,
   one_drop: /one.?drop|skank|ghost|offbeat/i,

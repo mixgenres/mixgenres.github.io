@@ -1,13 +1,12 @@
 import { createSongMixGraph, type SongMixGraph } from '../studio/dynamicMix/MixGraph';
 import { accumulatePortableMix, renderPortableAmbience } from '../studio/dynamicMix/PortableMixRuntime';
-import { requiredVoiceCount, voiceTailSeconds } from './voiceAllocation';
 import { createNoteTailResolver } from './noteLifetime';
 import { prepareNoteVoice, applyPhysicalController } from './performancePlan';
 import { checkAbort, encodeMp3, wavBlob, yieldToUI } from '../../export/audioEncoding';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { computeTrackStemFingerprint, stemCache } from '../cache/stemCache.ts';
 import type { StemCacheEntry } from '../cache/stemCache';
-import { createOfflineRenderer, finishOfflineRender } from './offlineRenderer';
+import { renderCompactTrack } from './compactInstrument';
 import type { Performance, PerfNote, PerfCC } from '../band/performanceData.ts';
 import { resolveTrackSound, resolveTrackGain } from './trackSound';
 import { createMasterChain, type MasterChain, type StudioMixState } from '../studio/mixer.ts';
@@ -19,11 +18,8 @@ import { processOfflineAudioDSP } from '../studio/effects.ts';
 import { excerptMixTimeline } from '../studio/dynamicMix/MixAutomation';
 import { RenderQueue } from './renderQueue';
 import {
-  renderTrack,
   determineBusCategory,
-  midiToFreq,
   type TrackParams,
-  type VoiceState,
 } from './elementaryEngine.ts';
 
 export interface Mp3RenderOptions {
@@ -64,11 +60,6 @@ export interface Mp3RenderOptions {
   onDiagnostics?: (event: RenderDiagnostic) => void;
 }
 
-type TrackRenderEvent =
-  | { sample: number; kind: 'on'; note: PerfNote; noteInstanceId: string }
-  | { sample: number; kind: 'off'; noteInstanceId: string }
-  | { sample: number; kind: 'cc'; cc: PerfCC }
-  | { sample: number; kind: 'bend'; value: number; targetMidi?: number; noteInstanceId?: string };
 
 function applyCCToParams(
   params: TrackParams,
@@ -121,7 +112,7 @@ async function renderPerformance(
   // Isolated playback parts must not pay for other parts' event scans, sound
   // resolution or decay tails. Keep the ensemble mix timeline for its headroom.
   perf = { ...perf, notes: perf.notes.filter(note => isActive(note.trackId)), ccs: perf.ccs.filter(cc => isActive(cc.trackId)) };
-  if (options.renderWindow) perf = performanceWindow(perf, options.renderWindow.start, options.renderWindow.end);
+  if (options.renderWindow) perf = performanceWindow(perf, options.renderWindow.start, options.renderWindow.end, createNoteTailResolver(perf, options));
   const sampleRate = 44100;
   const noteTail = createNoteTailResolver(perf, options);
   // Match each note's end to its own lifetime, rather than adding the longest
@@ -186,7 +177,6 @@ async function renderPerformance(
     const roomL = timeline && !masterContext ? new Float32Array(totalSamples) : new Float32Array(0);
     const roomR = new Float32Array(roomL.length), echoL = new Float32Array(roomL.length), echoR = new Float32Array(roomL.length);
 
-    const BLOCK_SIZE = 64;
     const totalTracks = Math.max(1, activeTrackIds.length);
 
     // Render each track in isolation (Stem-by-Stem Sequential Rendering)
@@ -247,216 +237,18 @@ async function renderPerformance(
         sampleRate,
       ) : '';
 
-      const cacheKey = `${stemFingerprint}:${trackStartSample}:${trackSamples}:${outputStartSample}:v10`;
+      const cacheKey = `${stemFingerprint}:${trackStartSample}:${trackSamples}:${outputStartSample}:compact-v3`;
       if (prepared && prepared.sampleRate !== sampleRate) throw new Error('Prepared stem sample rate does not match the mix.');
       let stem = prepared ? { left: prepared.left, right: prepared.right, startSample: 0 }
         : options.cacheDSPStem === false ? undefined : stemCache.get(cacheKey);
 
       if (!stem) {
-        const voiceCount = requiredVoiceCount(trackNotes, noteTail);
-        const availableAt = new Map<VoiceState, number>();
-        const releaseTails = new Map<VoiceState, number>();
-
-        const voices: VoiceState[] = [];
-        for (let vIdx = 0; vIdx < voiceCount; vIdx++) {
-          voices.push({
-            id: `stem-${trackId}-v${vIdx}`,
-            gate: 0,
-            frequencyHz: 440,
-            note: 60,
-            velocity: 0,
-          });
-        }
-
-        // Build timeline of events relative to trackStartSample
-        const trackEvents: TrackRenderEvent[] = [];
-        for (let noteIndex = 0; noteIndex < trackNotes.length; noteIndex++) {
-          const note = trackNotes[noteIndex];
-          const noteInstanceId = `${trackId}:${noteIndex}`;
-          const start = Math.round(note.time * sampleRate) - trackStartSample;
-          const end = Math.round((note.time + note.dur) * sampleRate) - trackStartSample;
-          if (start >= 0 && start < trackSamples) {
-            trackEvents.push({ sample: start, kind: 'on', note, noteInstanceId });
-          }
-          if (end >= 0 && end <= trackSamples) {
-            trackEvents.push({ sample: end, kind: 'off', noteInstanceId });
-          }
-          for (const bend of note.pitchBend ?? []) {
-            const bendSample = Math.round((note.time + bend.offset) * sampleRate) - trackStartSample;
-            if (bendSample >= 0 && bendSample < trackSamples) {
-              trackEvents.push({ sample: bendSample, kind: 'bend', value: bend.value, targetMidi: note.midi, noteInstanceId });
-            }
-          }
-          if (note.pitchBend?.length) {
-            const lastBend = note.pitchBend[note.pitchBend.length - 1];
-            const unbendSample = Math.round((note.time + lastBend.offset + 0.05) * sampleRate) - trackStartSample;
-            if (unbendSample >= 0 && unbendSample < end && unbendSample < trackSamples) {
-              trackEvents.push({ sample: unbendSample, kind: 'bend', value: 8192, targetMidi: note.midi, noteInstanceId });
-            }
-          }
-        }
-
-        for (const cc of trackCCs) {
-          const sample = Math.round(cc.time * sampleRate) - trackStartSample;
-          if (sample >= 0 && sample < trackSamples) {
-            trackEvents.push({ sample, kind: 'cc', cc });
-          }
-        }
-
-        const priority = { off: 0, cc: 1, on: 2, bend: 3 };
-        trackEvents.sort((a, b) => a.sample - b.sample || priority[a.kind] - priority[b.kind]);
-
-        const sounding = new Set<VoiceState>();
-        let currentSig = renderTrack(trackId, voices, params, voice => sounding.has(voice));
-
-        const trackLeft = new Float32Array(trackEndSample-retainedStart);
-        const trackRight = new Float32Array(trackLeft.length);
-        const scratchLeft = outputStartSample ? new Float32Array(BLOCK_SIZE*128) : undefined;
-        const scratchRight = outputStartSample ? new Float32Array(BLOCK_SIZE*128) : undefined;
-
-        let eventIdx = 0;
-        let cursor = 0;
-        let eventSeq = 0;
-        let syncCount = 0;
-
-        let lastYield = performance.now();
-        // Acquire only after JS graph/buffer setup; every native operation is
-        // inside the cleanup boundary, including the first graph submission.
-        const core = await createOfflineRenderer();
-        try {
-        await core.render(currentSig.left, currentSig.right);
-        while (cursor < trackSamples) {
-          if (performance.now() - lastYield > 16) {
-            onProgress?.(0.05 + ((tIdx + cursor / trackSamples) / totalTracks) * 0.68);
-            if (options.yieldForUI !== false) await yieldToUI();
-            checkAbort(options.signal);
-            lastYield = performance.now();
-          }
-          const nextBlockLimit = cursor + BLOCK_SIZE;
-          let graphDirty = false;
-          for (const voice of sounding) {
-            if (voice.gate === 0 && (availableAt.get(voice) ?? Infinity) <= cursor) {
-              sounding.delete(voice);
-              graphDirty = true;
-            }
-          }
-
-          while (eventIdx < trackEvents.length && trackEvents[eventIdx].sample < nextBlockLimit) {
-            const event = trackEvents[eventIdx++];
-            if (event.kind === 'on') {
-
-              // Track gain is static. Per-note dynamics belong to the voice, not the
-              // whole track; changing params.volume here used to pump every sounding
-              // voice whenever a new note arrived.
-              params.volume = resolveTrackGain(params, 1, controllerGain.volume, controllerGain.expression);
-
-              // Prefer idle voice; if all busy, steal oldest
-              const idleVoices = voices.filter(v => v.gate === 0 && (availableAt.get(v) ?? 0) <= event.sample);
-              let voice: VoiceState;
-              if (idleVoices.length > 0) {
-                voice = idleVoices.reduce((oldest, current) => {
-                  const oSeq = oldest.triggerSeq ?? 0;
-                  const cSeq = current.triggerSeq ?? 0;
-                  return cSeq < oSeq ? current : oldest;
-                }, idleVoices[0]);
-              } else {
-                voice = voices.reduce((oldest, current) => {
-                  const oSeq = oldest.triggerSeq ?? 0;
-                  const cSeq = current.triggerSeq ?? 0;
-                  return cSeq < oSeq ? current : oldest;
-                }, voices[0]);
-                voice.retriggerId = (voice.retriggerId || 0) + 1;
-              }
-
-              const prepared = prepareNoteVoice(event.note, params, options.worldId ?? perf.worldId ?? '', options.styleId ?? '',
-                options.trackRoles?.get(trackId) ?? perf.trackInfo?.[trackId]?.role, controllerNumbers);
-              Object.assign(voice, prepared, { id: voice.id, noteInstanceId: event.noteInstanceId, gate: 1,
-                baseFrequencyHz: prepared.frequencyHz, triggerSeq: ++eventSeq });
-              availableAt.set(voice, Infinity);
-              releaseTails.set(voice, noteTail(event.note));
-              sounding.add(voice);
-
-              graphDirty = true;
-            } else if (event.kind === 'off') {
-              const activeVoices = voices.filter(v => v.noteInstanceId === event.noteInstanceId && v.gate === 1);
-              for (const voice of activeVoices) {
-                availableAt.set(voice, event.sample + Math.ceil((releaseTails.get(voice) ?? voiceTailSeconds(params)) * sampleRate));
-                voice.gate = 0;
-                if (voice.baseFrequencyHz) {
-                  voice.frequencyHz = voice.baseFrequencyHz;
-                }
-                graphDirty = true;
-              }
-            } else if (event.kind === 'bend') {
-              const activeVoices = voices.filter(v => v.gate === 1 && (!event.noteInstanceId || v.noteInstanceId === event.noteInstanceId));
-              if (activeVoices.length > 0) {
-                const semitones = ((event.value - 8192) / 8192) * 2;
-                const bendRatio = Math.pow(2, semitones / 12);
-                const targetVoice =
-                (event.noteInstanceId
-                  ? activeVoices.find(v => v.noteInstanceId === event.noteInstanceId)
-                  : event.targetMidi !== undefined
-                    ? activeVoices.find(v => Math.round(v.note) === Math.round(event.targetMidi!))
-                    : undefined) ??
-                  activeVoices.reduce((latest, current) => {
-                    const tSeq = current.triggerSeq ?? 0;
-                    const lSeq = latest.triggerSeq ?? 0;
-                    return tSeq >= lSeq ? current : latest;
-                  }, activeVoices[0]);
-
-                const base =
-                  targetVoice.baseFrequencyHz ?? targetVoice.frequencyHz ?? midiToFreq(targetVoice.note);
-                targetVoice.baseFrequencyHz = base;
-                targetVoice.frequencyHz = base * bendRatio;
-                graphDirty = true;
-              }
-            } else if (event.kind === 'cc') {
-              applyCCToParams(params, event.cc.cc, event.cc.value, 1, controllerGain);
-              graphDirty = true;
-            }
-          }
-
-          if (graphDirty) {
-            currentSig = renderTrack(trackId, voices, params, voice => sounding.has(voice));
-            await core.render(currentSig.left, currentSig.right);
-            syncCount++;
-            if (syncCount % 64 === 0) {
-              await core.gc();
-            }
-          }
-
-          // Graph parameters remain unchanged until the next event's original
-          // 64-sample boundary. Process those spans in batches directly into the
-          // stem buffers: fewer JS calls and no intermediate PCM copying.
-          const nextEventBoundary = eventIdx < trackEvents.length
-            ? Math.floor(trackEvents[eventIdx].sample / BLOCK_SIZE) * BLOCK_SIZE
-            : trackSamples;
-          const nextReleaseBoundary = [...sounding].reduce((end, voice) => voice.gate === 0
-            ? Math.min(end, Math.ceil((availableAt.get(voice) ?? Infinity) / BLOCK_SIZE) * BLOCK_SIZE) : end, trackSamples);
-          const frames = Math.min(BLOCK_SIZE * 128, trackSamples - cursor,
-            Math.max(BLOCK_SIZE, Math.min(nextEventBoundary, nextReleaseBoundary) - cursor));
-          if (scratchLeft && scratchRight) {
-            // Replaying an incoming hold/release must preserve its original DSP
-            // state, but a far seek need not allocate all preceding PCM.
-            core.process([], [scratchLeft.subarray(0,frames),scratchRight.subarray(0,frames)]);
-            const from = Math.max(0,retainedStart-trackStartSample-cursor);
-            if(from<frames) {
-              const destination = cursor+from+trackStartSample-retainedStart;
-              trackLeft.set(scratchLeft.subarray(from,frames),destination);
-              trackRight.set(scratchRight.subarray(from,frames),destination);
-            }
-          } else core.process([], [trackLeft.subarray(cursor, cursor + frames), trackRight.subarray(cursor, cursor + frames)]);
-
-          cursor += frames;
-        }
-
-        } finally { finishOfflineRender(core); }
-
-        stem = {
-          left: trackLeft,
-          right: trackRight,
-          startSample: retainedStart,
-        };
+        const voices = trackNotes.map(note => prepareNoteVoice(note, params,
+          options.worldId ?? perf.worldId ?? '', options.styleId ?? '',
+          options.trackRoles?.get(trackId) ?? perf.trackInfo?.[trackId]?.role, controllerNumbers));
+        if (!instDef) throw new Error(`Unknown instrument: ${instrumentId}`);
+        stem = await renderCompactTrack(trackNotes, trackCCs, instDef, { ...params, volume: resolveTrackGain(params) },
+          retainedStart, trackEndSample, voices, options.signal, options.yieldForUI !== false);
 
         if (options.cacheDSPStem !== false) stemCache.set(cacheKey, stem);
       }
@@ -599,7 +391,7 @@ async function renderPerformance(
 
     // Node/CI environments do not expose Web Audio's OfflineAudioContext. Keep a
     // deterministic export path for isolated instrument validation: the exact same
-    // Elementary-rendered stems are emitted without pretending that the browser
+    // shared instrument stems are emitted without pretending that the browser
     // studio master chain ran. Browser production exports continue through the full
     // Web Audio master chain below.
     if (!masterContext) {
@@ -674,30 +466,15 @@ async function renderPerformance(
   }
 }
 
-/** Clip events to one playback window while retaining controller state at its start. */
-function performanceWindow(perf: Performance, start: number, end: number): Performance {
-  const from = Math.max(0, start), to = Math.max(from + 0.01, end);
-  const notes = perf.notes.flatMap(note => {
-    const noteStart = Math.max(from, note.time), noteEnd = Math.min(to, note.time + note.dur);
-    if (noteEnd <= noteStart) return [];
-    const bendBefore = (note.pitchBend ?? []).filter(bend => note.time + bend.offset < noteStart).at(-1);
-    const pitchBend = [
-      ...(bendBefore ? [{ ...bendBefore, offset: 0 }] : []),
-      ...(note.pitchBend ?? []).filter(bend => note.time + bend.offset >= noteStart && note.time + bend.offset < noteEnd)
-        .map(bend => ({ ...bend, offset: note.time + bend.offset - noteStart })),
-    ];
-    return [{ ...note, time: noteStart - from, dur: noteEnd - noteStart, ...(pitchBend.length ? { pitchBend } : {}) }];
-  });
-  const latestCC = new Map<string, PerfCC>();
-  const windowCCs: PerfCC[] = [];
-  for (const cc of perf.ccs) {
-    if (cc.time < from) latestCC.set(`${cc.trackId}:${cc.cc}`, cc);
-    else if (cc.time < to) windowCCs.push({ ...cc, time: cc.time - from });
-  }
-  const ccs = [
-    ...[...latestCC.values()].map(cc => ({ ...cc, time: 0 })),
-    ...windowCCs,
-  ].sort((a, b) => a.time - b.time);
+/** Retain original attacks, bends and controller history when an excerpt starts
+ * inside a held note or release. Negative times describe its existing age. */
+function performanceWindow(perf: Performance, start: number, end: number, tail: (note: PerfNote) => number): Performance {
+  const from = Math.round(Math.max(0, start) * 44100) / 44100, to = Math.max(from + 0.01, end);
+  const notes = perf.notes.filter(note => note.time < to && note.time + note.dur + tail(note) > from)
+    .map(note => ({ ...note, time: (Math.round(note.time * 44100) - Math.round(from * 44100)) / 44100 }));
+  // Keep earlier events at their original relative time: a canonical synthesis
+  // block can begin just before the crop and must see the same controller state.
+  const ccs = perf.ccs.filter(cc => cc.time < to).map(cc => ({ ...cc, time: cc.time - from }));
   const bars = perf.bars.filter(bar => bar.end > from && bar.start < to).map(bar => ({
     ...bar, start: Math.max(0, bar.start - from), end: Math.min(to, bar.end) - from,
   }));

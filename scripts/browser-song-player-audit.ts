@@ -5,12 +5,14 @@ import { clearPersistentPreparedAudio } from '../src/engine/cache/persistentPrep
 import { playbackResources } from '../src/engine/playback/playbackResources';
 import { playbackWorkerStats } from '../src/engine/playback/renderPlaybackPart';
 import { createCatalogSong, catalogIdForStyle } from '../src/engine/sheet/songCatalog';
+import { densePlaybackFixture } from './lib/densePlaybackFixture';
 
 const report=document.querySelector<HTMLPreElement>('#report')!;
 let song: Sheet | undefined, started=0, preparedMs: number | undefined, fourSecondsMs: number | undefined, compileMs: number | undefined;
 let stress: {edits:number;peakRetainedPCMBytes:number;peakActiveRenders:number;error?:string} | undefined;
 let player=new SongPlayer(()=>update(),()=>update(),true);
 let previewRequest=0,previewTimer:ReturnType<typeof setTimeout> | undefined;
+let liveEditStarted: number | undefined, liveEditMs: number | undefined;
 function cancelPreview() {previewRequest++;clearTimeout(previewTimer);}
 function playOnce(inputTime:number) {
   cancelPreview();const request=previewRequest;
@@ -19,6 +21,9 @@ function playOnce(inputTime:number) {
   });
 }
 function update() {
+  if (liveEditStarted !== undefined && player.composition === song) {
+    liveEditMs = performance.now() - liveEditStarted; liveEditStarted = undefined;
+  }
   if(player.snapshot.performance && compileMs===undefined)compileMs=Math.round(performance.now()-started);
   if(player.preparedAheadSeconds>=4 && fourSecondsMs===undefined)fourSecondsMs=Math.round(performance.now()-started);
   if(player.preparedAheadSeconds && preparedMs===undefined)preparedMs=Math.round(performance.now()-started);
@@ -28,9 +33,11 @@ function update() {
     stress.peakRetainedPCMBytes=Math.max(stress.peakRetainedPCMBytes,retainedPCMBytes);
     stress.peakActiveRenders=Math.max(stress.peakActiveRenders,workers.activeRenders);
   }
-  report.textContent=JSON.stringify({status:player.snapshot.status,secondsAhead:player.preparedAheadSeconds,
+  report.textContent=JSON.stringify({status:player.snapshot.status,tracks:song?.tracks.length,
+    audibleTracks:player.snapshot.performance ? new Set(player.snapshot.performance.notes.map(note=>note.trackId)).size : 0,
+    secondsAhead:player.preparedAheadSeconds,
     backgroundPreparationMs:preparedMs,fourSecondsPreparationMs:fourSecondsMs,compileMs,
-    position:Number(player.position().toFixed(2)),clickToSound:player.snapshot.playbackTiming ?? null,
+    position:Number(player.position().toFixed(2)),liveEditMs,compositionCurrent:player.composition===song,clickToSound:player.snapshot.playbackTiming ?? null,
     outputLatencyEstimateMs:player.snapshot.outputLatencyMs ?? null,
     audio:player.playbackActivity,health:player.playbackHealth,persistent:part.persistent,cacheWarmup:player.cacheWarmup,memory:{retainedPCMBytes,workers,limits:playbackResources()},stress,
     error:player.snapshot.error ?? null},null,2);
@@ -53,6 +60,9 @@ document.querySelector<HTMLButtonElement>('#cold')!.onclick=event=>{
   changed(tango());playOnce(event.timeStamp);
 };
 document.querySelector<HTMLButtonElement>('#cold-continuous')!.onclick=event=>{changed(tango());void player.play(event.timeStamp);};
+for (const count of [12,15,30] as const) document.querySelector<HTMLButtonElement>(`#dense-${count}`)!.onclick=event=>{
+  changed(densePlaybackFixture(count)); void player.play(event.timeStamp);
+};
 document.querySelector<HTMLButtonElement>('#clear-cache')!.onclick=async()=>{
   cancelPreview();player.dispose();await clearPersistentPreparedAudio();clearPreparedAudio();song=undefined;
   preparedMs=undefined;fourSecondsMs=undefined;compileMs=undefined;
@@ -65,6 +75,13 @@ document.querySelector<HTMLButtonElement>('#seek')!.onclick=()=>player.locate(20
 document.querySelector<HTMLButtonElement>('#rename')!.onclick=()=>{if(song){song={...song,title:'Renamed'};player.configure(song);update();}};
 document.querySelector<HTMLButtonElement>('#edit')!.onclick=event=>{
   if(song){changed(setSongBpm(song,song.bpm===120?121:120));playOnce(event.timeStamp);}
+};
+document.querySelector<HTMLButtonElement>('#live-edit')!.onclick=()=>{
+  if (song) { song=setSongBpm(song,song.bpm===120?121:120); liveEditStarted=performance.now(); player.configure(song); update(); }
+};
+document.querySelector<HTMLButtonElement>('#mix-edit')!.onclick=()=>{
+  if (song) { song={...song,tracks:song.tracks.map(track=>({...track,volume:(track.volume ?? 1)>.5?.4:1}))};
+    liveEditStarted=performance.now(); player.configure(song); update(); }
 };
 document.querySelector<HTMLButtonElement>('#stress')!.onclick=async()=>{
   stress={edits:0,peakRetainedPCMBytes:0,peakActiveRenders:0};

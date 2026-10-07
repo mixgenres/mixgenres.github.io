@@ -32,7 +32,10 @@ export function planDSPSectionsWithTail(performance: Performance, options: Mp3Re
     const ccs = [...initial.values(), ...allCCs.filter(c => c.time > start && c.time < end).map(c => ({ ...c, time: c.time-start }))];
     const notes = source.map(note => ({ ...note, time: note.time-start, bar: note.bar-firstBar,
       ...(note.notation ? { notation: { ...note.notation, bar: note.bar-firstBar } } : {}) }));
-    const part: Performance = { ...performance, notes, ccs, mixTimeline: undefined,
+    // Workers consume physical events only. Copying the complete song's
+    // interpretation trace, transitions and inspector data into every section
+    // repeatedly structured-clones unrelated players and bars on the UI thread.
+    const part: Performance = { notes, ccs, blends: {}, worldId: performance.worldId, scoreVersion: performance.scoreVersion,
       bars: bars.map(b => ({ ...b,index:b.index-firstBar,start:b.start-start,end:b.end-start })),
       duration: end-start, tail: 0, trackInfo: performance.trackInfo?.[trackId] ? { [trackId]:performance.trackInfo[trackId] } : undefined };
     const key = preparedAudioKey(part, { ...options, renderWindow: undefined });

@@ -277,11 +277,11 @@ function canonicalPatternSection(sectionKind?: string): string | undefined {
   const k = String(sectionKind ?? '').toLowerCase();
   if (!k) return undefined;
   if (/intro|introduc|salida|opening/.test(k)) return 'intro';
-  if (/chorus|coro|refrain|hook|montuno|remate/.test(k)) return 'chorus';
-  if (/verse|verso|tema|letra|preg|a$|b$/.test(k)) return 'verse';
-  if (/solo|trading|instrumental|falseta|variaci|descarga|mambo|development/.test(k)) return 'solo';
-  if (/bridge|puente|break|drop|breakdown/.test(k)) return 'bridge';
-  if (/coda|cierre|outro|ending|tag|final|closing/.test(k)) return 'ending';
+  if (/chorus|coro|refrain|hook|montuno|remate|return|reprise|climax/.test(k)) return 'chorus';
+  if (/verse|verso|tema|letra|preg|cycle|theme|strophe|narration|jinyangjo|jungmori|jajinmori|hwimori|youngnam|honam|jungbu|a$|b$/.test(k)) return 'verse';
+  if (/solo|trading|instrumental|falseta|variaci|variation|descarga|mambo|development|improvis|alap|tanam|jhala|\bgat\b|jangdan/.test(k)) return 'solo';
+  if (/bridge|puente|break|drop|breakdown|exchange/.test(k)) return 'bridge';
+  if (/coda|cierre|outro|ending|tag|final|closing|cadence/.test(k)) return 'ending';
   return k;
 }
 
@@ -826,7 +826,10 @@ export function rebuild(sheet: Sheet): Sheet {
 
       for (let i = 0; i < bars; i++) {
         const index = r.start + i;
-        const phrase = Math.floor(i / phraseSpanBars(getResolvedSectionStyle(sheet, r).contract.cycleLength));
+        // Keep phrase development continuous across short sections. Resetting
+        // this at each region made every region shorter than one cycle repeat
+        // its base pattern, even deep into a long sample song.
+        const phrase = Math.floor(index / phraseSpanBars(getResolvedSectionStyle(sheet, r).contract.cycleLength));
         let patternId = basePatternId;
         if (phrase > 0) {
           const cacheKey = `${basePatternId}:${r.genre ?? sheet.worldId}:${track.id}:${r.id}:${phrase}`;

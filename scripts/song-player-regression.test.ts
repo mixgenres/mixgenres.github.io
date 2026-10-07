@@ -483,6 +483,135 @@ test('ready-prefix duration, title retention and mixer invalidation follow chunk
   await player.compiling;
 });
 
+async function liveEditFixture() {
+  const result = fixture([2, 4, 4]);
+  const { player } = result;
+  const template = makeSheet('tango');
+  const song = songFixture({ tracks: [{ ...template.tracks[0], id: 'keys', instrument: 'piano', instrumentId: 'piano' }] });
+  const musical = { ...song.tracks[0] } as Record<string, unknown>;
+  for (const key of ['name', 'volume', 'pan', 'muted', 'solo']) delete musical[key];
+  player.compositionKey = JSON.stringify({ ...song, title: '', tracks: [musical] });
+  player.warmChunks = () => {};
+  player.configure(song); await player.compiling;
+  result.buffers.forEach((buffer, index) => player.chunkBuffers.set(index, buffer));
+  await player.play(); await flush();
+  return { ...result, song };
+}
+
+test('live edits keep the active scheduler running and install independent buffers at the current clock', async () => {
+  const { player, ctx, starts, stops, song } = await liveEditFixture();
+  const waiting = deferred<Map<number, AudioBuffer>>();
+  const nextBuffers = new Map([0, 1, 2].map(index => [index, ctx.createBuffer(2, (index ? 4 : 2) * 44100, 44100)]));
+  player.prepareReplacement = () => waiting.promise;
+  try {
+    ctx.currentTime = .5;
+    const oldRevision = player.revision, oldPerformance = player.snapshot.performance;
+    const edit = { ...song, tracks: song.tracks.map(track => ({ ...track, volume: .2 })) };
+    player.configure(edit); await flush();
+    assert.equal(player.snapshot.status, 'playing');
+    assert.equal(player.snapshot.performance, oldPerformance);
+    assert.equal(player.revision, oldRevision, 'the active timer remains valid during preparation');
+    assert.equal(player.composition, song, 'exports cannot pair pending edits with the old score');
+    ctx.currentTime = 2.5;
+    await player.pumpSchedule(player.playbackGeneration, oldRevision);
+    const before = starts.length;
+    waiting.resolve(nextBuffers); await player.compiling; await flush();
+    assert.equal(player.revision, oldRevision + 1);
+    assert.equal(player.composition, edit);
+    assert.equal(starts[before].buffer, nextBuffers.get(1), 'old mix buffers cannot satisfy the replacement');
+    assert.ok(Math.abs(starts[before].offset - .495) < 1e-6, 'commit uses the advanced playhead');
+    assert.ok(stops.length > 0, 'all old scheduled sources retire');
+    const after = starts.length;
+    ctx.currentTime = 6.5;
+    await player.pumpSchedule(player.playbackGeneration, player.revision);
+    assert.ok(starts.length > after, 'the replacement continues scheduling beyond its first source');
+    assert.equal(player.snapshot.status, 'playing');
+  } finally { player.dispose(); }
+});
+
+test('Pause during live replacement commits the edit without restarting audio', async () => {
+  const { player, ctx, starts, song } = await liveEditFixture();
+  const waiting = deferred<Map<number, AudioBuffer>>();
+  player.prepareReplacement = () => waiting.promise;
+  try {
+    player.configure({ ...song, tracks: song.tracks.map(track => ({ ...track, volume: .2 })) });
+    await flush(); ctx.currentTime = .75; player.pause();
+    const before = starts.length, paused = player.position();
+    waiting.resolve(new Map([[0, ctx.createBuffer(2, 2 * 44100, 44100)]]));
+    await player.compiling; await flush();
+    assert.equal(starts.length, before);
+    assert.equal(player.position(), paused);
+    assert.equal(player.wantsPlayback, false);
+    assert.equal(player.playbackActivity.scheduledSources, 0);
+  } finally { player.dispose(); }
+});
+
+test('rapid live edits cancel obsolete preparation and a stale completion cannot replace the newest mix', async () => {
+  const { player, ctx, song } = await liveEditFixture();
+  const jobs: Array<{ signal: AbortSignal; waiting: ReturnType<typeof deferred<Map<number, AudioBuffer>>> }> = [];
+  player.prepareReplacement = (_performance, _song, _chunks, signal) => {
+    const waiting = deferred<Map<number, AudioBuffer>>(); jobs.push({ signal, waiting }); return waiting.promise;
+  };
+  try {
+    player.configure({ ...song, tracks: song.tracks.map(track => ({ ...track, volume: .2 })) }); await flush();
+    const obsolete = player.compiling;
+    const newest = { ...song, tracks: song.tracks.map(track => ({ ...track, volume: .8 })) };
+    player.configure(newest); await flush();
+    assert.equal(jobs[0].signal.aborted, true);
+    const buffer = ctx.createBuffer(2, 2 * 44100, 44100);
+    jobs[1].waiting.resolve(new Map([[0, buffer]])); await player.compiling;
+    const revision = player.revision;
+    jobs[0].waiting.resolve(new Map()); await obsolete;
+    assert.equal(player.revision, revision);
+    assert.equal(player.composition, newest);
+    assert.equal(player.chunkBuffers.get(0), buffer);
+  } finally { player.dispose(); }
+});
+
+test('measured slow desktop rendering also banks a startup reserve', async () => {
+  const { player, performance, buffers } = fixture([2, 4, 4]);
+  player.wantsPlayback = true; player.renderedAudioSeconds = 2; player.renderMs = 3000;
+  player.chunkBuffers.delete(2);
+  const requested: number[] = [];
+  player.ensureChunk = async index => { requested.push(index); player.chunkBuffers.set(index, buffers[index]); return buffers[index]; };
+  try {
+    assert.equal(await player.prepareStartReserve(performance, player.song, player.abort.signal, player.revision, player.playRequest), true);
+    assert.deepEqual(requested, [2]);
+    assert.ok(player.preparedAheadSeconds >= 8);
+  } finally { player.dispose(); }
+});
+
+test('physical section plans reuse window-independent identities and keep worker payloads limited to render data', async () => {
+  const { preparedDSPSections } = await import('../src/engine/playback/preparedDSPSections');
+  const { planDSPSections } = await import('../src/engine/playback/dspSections');
+  const { performance } = fixture([2, 4, 4]);
+  performance.notes = [noteFixture({ time: 0, bar: 0 }), noteFixture({ time: 2.1, bar: 1, midi: 67 })];
+  performance.pipeline = { version: 1, notation: ['inspector'], interpretation: 'song', transitions: [], sound: ['physical'], mix: 'mix' };
+  const options = { selectedTrackIds: ['keys'], trackInstruments: new Map([['keys', 'organ']]), rawStem: true };
+  const complete = await preparedDSPSections(performance, options);
+  assert.deepEqual(complete, planDSPSections(performance, options));
+  const opening = await preparedDSPSections(performance, { ...options, renderWindow: { start: 0, end: 1 } });
+  const balanced = await preparedDSPSections(performance, { ...options, mixState: { volume: { keys: .2 } } });
+  assert.equal(opening[0], complete[0], 'playback windows reuse the section and its physical hash');
+  assert.equal(balanced, complete, 'faders do not replan physics');
+  assert.equal(complete[0].performance.pipeline, undefined, 'whole-song trace is never cloned into section workers');
+  assert.deepEqual(complete[0].performance.blends, {});
+  const changed = { ...performance, notes: performance.notes.map(note => ({ ...note, midi: note.midi + 1 })) };
+  assert.notEqual((await preparedDSPSections(changed, options))[0].key, complete[0].key);
+  assert.notEqual((await preparedDSPSections(performance, { ...options, trackInstruments: new Map([['keys', 'piano']]) }))[0].key, complete[0].key);
+});
+
+test('a live tempo replacement retains the sounding bar and fractional beat', () => {
+  const { player, performance } = fixture([2, 4, 4]);
+  player.offset = 3;
+  const slower = { ...performance, duration: 20,
+    bars: performance.bars.map(bar => ({ ...bar, start: bar.start * 2, end: bar.end * 2, bpm: bar.bpm / 2 })) };
+  assert.equal(player.replacementPosition(slower), 6);
+  player.offset = 10.1;
+  assert.equal(player.replacementPosition(slower), 20.1, 'release-tail time follows the new final bar');
+  player.dispose();
+});
+
 test('chunk planning covers tempo and region boundaries, tail and exact loop wrap', () => {
   const { performance } = fixture();
   const chunks = planPlaybackChunks({ ...performance, tail: .5 });
@@ -785,4 +914,61 @@ test('severe measured rendering pressure banks eight seconds without slowing a c
     assert.deepEqual(requested,[2]);assert.ok(player.preparedAheadSeconds>=8);
     assert.equal(await player.prepareStartReserve(performance,player.song,player.abort.signal,player.revision,player.playRequest),false);
   } finally {player.dispose();if(saved)Object.defineProperty(globalThis,'navigator',saved);else Reflect.deleteProperty(globalThis,'navigator');}
+});
+
+test('slow live replacements stage ahead and wait for the audio clock instead of chasing it', async () => {
+  const {player,performance} = fixture(Array(8).fill(4));
+  let position=0;
+  player.replacementPosition=()=>position;
+  player.wantsPlayback=true;player.renderedAudioSeconds=4;player.renderMs=6000;
+  const controller=new AbortController();
+  let ready=false;
+  try {
+    const pending=player.prepareReplacement({...performance},player.song,player.chunks,controller.signal).then(buffers=>{ready=true;return buffers;});
+    await new Promise(resolve=>setTimeout(resolve,80));
+    assert.equal(ready,false,'the existing audio keeps playing until the prepared future window');
+    position=16;
+    const buffers=await pending;
+    assert.ok(buffers.has(4),'the new current window was staged ahead of the clock');
+    assert.ok(buffers.size<=4,'replacement PCM remains bounded');
+  } finally {controller.abort();player.dispose();}
+});
+test('pause and cancellation remain effective while a future replacement waits for the clock', async () => {
+  const {player,performance}=fixture(Array(8).fill(4));
+  player.replacementPosition=()=>0;player.wantsPlayback=true;player.renderedAudioSeconds=4;player.renderMs=6000;
+  const controller=new AbortController();
+  try {
+    const pending=player.prepareReplacement({...performance},player.song,player.chunks,controller.signal);
+    await new Promise(resolve=>setTimeout(resolve,80));
+    player.wantsPlayback=false;
+    const buffers=await pending;
+    assert.ok(buffers.has(0),'a paused edit prepares the actual paused position');
+    assert.equal(player.wantsPlayback,false);
+    player.wantsPlayback=true;
+    const aborted=player.prepareReplacement({...performance},player.song,player.chunks,controller.signal);
+    const rejected=assert.rejects(aborted,{name:'AbortError'});
+    await new Promise(resolve=>setTimeout(resolve,80));controller.abort();await rejected;
+  } finally {controller.abort();player.dispose();}
+});
+
+test('thirty player plans remain reusable after all other chairs prepare their windows', async () => {
+  const {preparedDSPSections}=await import('../src/engine/playback/preparedDSPSections');
+  const ids=Array.from({length:30},(_,i)=>`chair-${i}`);
+  const perf=performanceFixture({duration:4,bars:[{index:0,start:0,end:4,regionId:'band',bpm:60,beatsPerBar:4}],
+    notes:ids.map(trackId=>noteFixture({trackId}))});
+  const options={trackInstruments:new Map(ids.map(id=>[id,'organ']))};
+  const first=await preparedDSPSections(perf,{...options,selectedTrackIds:[ids[0]]});
+  for(const id of ids.slice(1)) await preparedDSPSections(perf,{...options,selectedTrackIds:[id]});
+  const again=await preparedDSPSections(perf,{...options,selectedTrackIds:[ids[0]]});
+  assert.equal(first,again,'large ensembles must not evict the first player after the eighth');
+});
+
+test('mixer-only replacements use the current cached physics even after a slow cold render', async () => {
+  const {player,performance}=fixture(Array(8).fill(4));
+  player.replacementPosition=()=>0;player.wantsPlayback=true;player.renderedAudioSeconds=4;player.renderMs=6000;
+  const controller=new AbortController();
+  try {
+    const buffers=await player.prepareReplacement(performance,player.song,player.chunks,controller.signal);
+    assert.ok(buffers.has(0),'a fader change need not wait for a future synthesis window');
+  } finally {controller.abort();player.dispose();}
 });

@@ -1,6 +1,7 @@
 import type { GenrePackInput } from '../_shared/genrePack';
+import { authorChineseStudies } from './studies';
 
-export const GENRE_PACK: GenrePackInput = {
+export const GENRE_PACK: GenrePackInput = authorChineseStudies({
   "id": "chinese",
   "name": "Chinese",
   "family": "China",
@@ -574,4 +575,4 @@ export const GENRE_PACK: GenrePackInput = {
       }
     }
   ]
-};
+});

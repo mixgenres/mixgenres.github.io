@@ -2,6 +2,21 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 
 /** Local recording measurements; original mixes may still contain vocals. */
 export const REFERENCE_MIX = {
+  "chinese-jiangnan-sizhu": {
+    "recording": "Shanghai Conservatory Professor Jiangnan Sizhu Research Group - Huanle Ge",
+    "audio": "samples/上海音乐学院教授丝竹研究组 - 欢乐歌.mp3",
+    "source": "original-recording",
+    "audioBytes": 8196209,
+    "audioModifiedNs": 1791140277851610066,
+    "windowsSeconds": [75, 150, 250],
+    "targets": {
+      "rmsDbfs": -19.4947,
+      "crestDb": 18.7075,
+      "lowEnergyShare": 0.0005,
+      "highEnergyShare": 0.2231,
+      "sideMidRmsRatio": 0.7734
+    }
+  },
   "chinese-cantonese-ensemble": {
     "recording": "Cantonese music ensemble - Bu Bu Gao",
     "audio": "voiced/Cantonese music ensemble - Bu Bu Gao.mp3",
@@ -41,7 +56,7 @@ export const REFERENCE_MIX = {
   "chinese-guqin": {
     "recording": "Guan Pinghu - Liu Shui",
     "audio": "samples/Guan Pinghu - Liu Shui.mp3",
-    "source": "original-with-vocals",
+    "source": "original-recording",
     "audioBytes": 11394384,
     "audioModifiedNs": 1791077061342470843,
     "windowsSeconds": [
@@ -77,7 +92,7 @@ export const REFERENCE_MIX = {
   "chinese-pipa": {
     "recording": "Traditional - Ambush from Ten Sides",
     "audio": "samples/Traditional - Ambush from Ten Sides.mp3",
-    "source": "original-with-vocals",
+    "source": "original-recording",
     "audioBytes": 10695759,
     "audioModifiedNs": 1791077062349234716,
     "windowsSeconds": [
@@ -95,7 +110,7 @@ export const REFERENCE_MIX = {
   "chinese-guzheng": {
     "recording": "Traditional - Fisherman's Song at Eventide",
     "audio": "samples/Traditional - Fisherman's Song at Eventide.mp3",
-    "source": "original-with-vocals",
+    "source": "original-recording",
     "audioBytes": 6104597,
     "audioModifiedNs": 1791077057165632603,
     "windowsSeconds": [
@@ -108,6 +123,21 @@ export const REFERENCE_MIX = {
       "lowEnergyShare": 0.0026,
       "highEnergyShare": 0.0928,
       "sideMidRmsRatio": 0.0934
+    }
+  },
+  "chinese-suona-chuida": {
+    "recording": "Bai Niao Chao Feng — suona and orchestra (2022 National Orchestra New Year Concert; orchestral adaptation)",
+    "audio": "samples/Ren Tongxiang - Bai Niao Chao Feng.mp3",
+    "source": "original-recording",
+    "audioBytes": 11342563,
+    "audioModifiedNs": 1791391568101723933,
+    "windowsSeconds": [0, 164.67, 305.82],
+    "targets": {
+      "rmsDbfs": -29.707,
+      "crestDb": 17.058,
+      "lowEnergyShare": 0.0062,
+      "highEnergyShare": 0.8567,
+      "sideMidRmsRatio": 0.5458
     }
   }
 } satisfies ReferenceMixCatalog;

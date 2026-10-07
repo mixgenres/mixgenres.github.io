@@ -4,8 +4,8 @@ import type { Sheet } from '../sheet/sheet';
 import type { Performance } from '../band/performanceData';
 import { preparedAudioKey, preparePartAudio, preparePersistentPartAudio, completedPartAudio, completedPartAudioWindow } from '../cache/preparedAudio';
 import { hasPersistentPreparedAudio, persistentPreparedAudioAvailable } from '../cache/persistentPreparedAudio';
-import { planDSPSectionsWithTail, assembleDSPSections } from './dspSectionPlan';
-import { preparedNoteLifetimes } from './preparedNoteLifetimes';
+import { assembleDSPSections } from './dspSectionPlan';
+import { preparedDSPSections } from './preparedDSPSections';
 
 async function renderPerformanceToAudio(performance: Performance, options: Mp3RenderOptions) {
   const renderer = await import('./mp3Export');
@@ -16,12 +16,13 @@ export type PlaybackWorkerRequest =
   | { kind: 'render'; performance: Performance; options: Mp3RenderOptions }
   | { kind: 'compile'; sheet: Sheet }
   | { kind: 'catalog'; id: string };
+interface RuntimeStats { initializedRuntimes: number; activeRenders: number; synthesis?: { notesRendered: number; renderMs: number; tableBytes: number } }
 interface WorkerResult {
   audio?: RenderedPerformanceAudio;
   performance?: Performance;
   sheet?: Sheet;
   error?: string;
-  runtime?: { initializedRuntimes: number; activeRenders: number };
+  runtime?: RuntimeStats;
 }
 interface Job {
   payload: PlaybackWorkerRequest;
@@ -38,7 +39,7 @@ interface Job {
 export const MAX_RENDERERS_PER_WORKER = 64;
 const pending: Job[] = [];
 const idle: Worker[] = [];
-const runtimes = new Map<Worker, { initializedRuntimes: number; activeRenders: number }>();
+const runtimes = new Map<Worker, RuntimeStats>();
 let running = 0;
 let retiredWorkerRuntimes = 0;
 let unavailable = false;
@@ -73,7 +74,7 @@ export async function renderPlaybackPart(performance: Performance, options: Mp3R
     // once when balancing the cached stems in the final mix.
     const rawOptions = { ...options, mixState: undefined, cacheDSPStem: false };
     const key = preparedAudioKey(performance, rawOptions);
-    const sections = planDSPSectionsWithTail(performance, rawOptions, await preparedNoteLifetimes(performance, rawOptions));
+    const sections = await preparedDSPSections(performance, rawOptions);
     if (sections.length) {
       // Deduplicate assemblies while retaining only their expensive section
       // PCM, avoiding a second full-song copy in the same cache budget.
@@ -135,8 +136,7 @@ export async function preparePlaybackDSPCache(
     const rawOptions: Mp3RenderOptions = { ...options, selectedTrackIds: [trackId], rawStem: true,
       mixState: undefined, cacheDSPStem: false, renderWindow: undefined, boundedStems: false, sectionStems: false,
       stemLookaheadSeconds: undefined };
-    const tail = await preparedNoteLifetimes(performance, rawOptions);
-    for (const section of planDSPSectionsWithTail(performance, rawOptions, tail)) {
+    for (const section of await preparedDSPSections(performance, rawOptions)) {
       tasks.push({ start: section.startSample / 44100, key: section.key, performance: section.performance, options: rawOptions });
     }
   }
@@ -270,5 +270,8 @@ function dispatch() {
 export function playbackWorkerStats() {
   return { limit: concurrency(), running, idle: idle.length, queued: pending.length, retiredWorkerRuntimes,
     runtimes: [...runtimes.values()].reduce((sum, runtime) => sum + runtime.initializedRuntimes, 0),
-    activeRenders: [...runtimes.values()].reduce((sum, runtime) => sum + runtime.activeRenders, 0) };
+    activeRenders: running,
+    synthesis: [...runtimes.values()].reduce((sum, runtime) => ({ notesRendered: sum.notesRendered + (runtime.synthesis?.notesRendered ?? 0),
+      renderMs: sum.renderMs + (runtime.synthesis?.renderMs ?? 0), tableBytes: sum.tableBytes + (runtime.synthesis?.tableBytes ?? 0) }),
+    { notesRendered: 0, renderMs: 0, tableBytes: 0 }) };
 }

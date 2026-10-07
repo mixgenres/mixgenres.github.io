@@ -27,7 +27,8 @@ export function playbackResources() {
   const nav = typeof navigator === 'undefined' ? undefined : navigator as Navigator & { deviceMemory?: number };
   // Reproduce the constrained profile in the diagnostics page on a desktop.
   const params = typeof location === 'undefined' ? undefined : new URLSearchParams(location.search);
-  const mobileAudit = params?.get('dev') === 'audio' && params.get('budget') === 'mobile';
-  return playbackResourceLimits({ memoryGB: nav?.deviceMemory, cores: nav?.hardwareConcurrency,
+  const singleWorkerAudit = params?.get('dev') === 'audio' && params.get('budget') === 'mobile-single';
+  const mobileAudit = params?.get('dev') === 'audio' && (params.get('budget') === 'mobile' || singleWorkerAudit);
+  return playbackResourceLimits({ memoryGB: singleWorkerAudit ? 2 : nav?.deviceMemory, cores: singleWorkerAudit ? 2 : nav?.hardwareConcurrency,
     touch: mobileAudit || !!nav?.maxTouchPoints && (typeof matchMedia === 'undefined' || matchMedia('(pointer: coarse)').matches) });
 }

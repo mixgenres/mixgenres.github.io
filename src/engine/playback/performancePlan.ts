@@ -7,11 +7,11 @@ import { resolveDialect } from '../band/genreDialect';
 import { contentKey } from '../cache/contentKey';
 
 /** Physical performance controls are resolved on UI compilation, never a tick. */
-export function prepareNoteVoice(note: PerfNote, params: TrackParams, worldId: string, styleId: string, role?: string, controllerCCs: readonly number[] = []): VoiceState {
+export function prepareNoteVoice(note: PerfNote, params: TrackParams, worldId: string, styleId: string, role?: string, controllerCCs: readonly number[] = [], contextSound?: TrackParams): VoiceState {
   if (note.physical) return { ...note.physical.voice };
   const instrumentId = params.instrumentId!;
   const context = note.soundContext;
-  const soundParams = context ? resolveTrackSound(instrumentId, context.worldId, context.styleId, context.role) : undefined;
+  const soundParams = context ? contextSound ?? resolveTrackSound(instrumentId, context.worldId, context.styleId, context.role) : undefined;
   const controllerKeys = controllerCCs.flatMap(cc => PHYSICAL_CONTROLLER_KEYS[cc] ? [PHYSICAL_CONTROLLER_KEYS[cc]] : []);
   const soundingParams = soundParams ? { ...soundParams } : params;
   for (const key of controllerKeys) soundingParams[key] = params[key];

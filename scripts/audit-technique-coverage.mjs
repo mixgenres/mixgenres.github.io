@@ -29,6 +29,8 @@ for (const world of GENRE_WORLDS) for (const definition of world.styleDefinition
     const mappedGestures = calibratedTechniqueGestures(style, profile, role);
     const instrumentPatterns = patterns.filter(pattern => pattern.instruments?.includes(instrumentId));
     const bodyPatterns = instrumentPatterns.filter(pattern => !['fill', 'cadence', 'transition', 'break'].includes(pattern.category));
+    const sourceBodyPatterns = bodyPatterns.filter(pattern => pattern.provenance?.startsWith('Folder-authored role cell'));
+    const derivedPracticePatterns = bodyPatterns.filter(pattern => pattern.provenance?.startsWith('Local '));
     const patternGestures = [...new Set(instrumentPatterns
       .flatMap(pattern => [...(pattern.articulations ?? []), ...(pattern.events ?? []).map(event => event.articulation ?? '')])
       .filter(Boolean))];
@@ -52,6 +54,10 @@ for (const world of GENRE_WORLDS) for (const definition of world.styleDefinition
       patternCoverage: {
         total: instrumentPatterns.length,
         body: bodyPatterns.length,
+        sourceAuthoredBody: sourceBodyPatterns.length,
+        derivedPractice: derivedPracticePatterns.length,
+        sourceAuthoredDistinctBehaviors: new Set(sourceBodyPatterns.map(behavior)).size,
+        sourceAuthoredPitchCoverage: sourceBodyPatterns.filter(pattern => pattern.events?.some(event => event.pitch)).length,
         distinctBodyBehaviors: new Set(bodyPatterns.map(behavior)).size,
         patternNames: instrumentPatterns.map(pattern => ({
           name: pattern.shortName ?? pattern.name, category: pattern.category,
@@ -66,6 +72,7 @@ for (const world of GENRE_WORLDS) for (const definition of world.styleDefinition
   styles.push({ id, genre: world.id, instruments,
     referenceAudio: reference ? {
       recording: reference.recording, source: reference.source, audio: reference.audio,
+      windowsSeconds: reference.windowsSeconds,
       rmsDbfs: reference.targets.rmsDbfs, crestDb: reference.targets.crestDb,
       lowEnergyShare: reference.targets.lowEnergyShare, highEnergyShare: reference.targets.highEnergyShare,
       sideMidRmsRatio: reference.targets.sideMidRmsRatio,
@@ -108,14 +115,21 @@ const summary = {
   mappedGesturesNotAuthoredInPatterns: cueRows.reduce((sum, row) => sum + row.instrument.calibratedGesturesAbsentFromPattern.length, 0),
   unmappedPatternVocabularyCues: cueRows.reduce((sum, row) => sum + row.instrument.missingCueDetails.filter(item => item.scopes.includes('motif') || item.scopes.includes('phrase')).length, 0),
   unmappedNoteTechniqueCues: cueRows.reduce((sum, row) => sum + row.instrument.missingCueDetails.filter(item => item.scopes.includes('note')).length, 0),
-  patternCoverage: {
-    instrumentStylePairs: bodyCounts.length,
+      patternCoverage: {
+        instrumentStylePairs: bodyCounts.length,
     pairsWithoutBodyPatterns: bodyCounts.filter(count => count === 0).length,
     pairsWithOneBodyPattern: bodyCounts.filter(count => count === 1).length,
     pairsWithTwoBodyPatterns: bodyCounts.filter(count => count === 2).length,
     pairsWithThreeOrMoreBodyPatterns: bodyCounts.filter(count => count >= 3).length,
     bodyPatternInstances: bodyCounts.reduce((sum, count) => sum + count, 0),
-    distinctBodyBehaviors: cueRows.reduce((sum, row) => sum + row.instrument.patternCoverage.distinctBodyBehaviors, 0),
+        distinctBodyBehaviors: cueRows.reduce((sum, row) => sum + row.instrument.patternCoverage.distinctBodyBehaviors, 0),
+        sourceAuthoredPairsWithoutBodyPatterns: cueRows.filter(row => row.instrument.patternCoverage.sourceAuthoredBody === 0).length,
+        sourceAuthoredPairsWithOneBodyPattern: cueRows.filter(row => row.instrument.patternCoverage.sourceAuthoredBody === 1).length,
+        sourceAuthoredPairsWithTwoOrMoreBodyPatterns: cueRows.filter(row => row.instrument.patternCoverage.sourceAuthoredBody >= 2).length,
+        sourceAuthoredBodyPatternInstances: cueRows.reduce((sum, row) => sum + row.instrument.patternCoverage.sourceAuthoredBody, 0),
+        sourceAuthoredDistinctBehaviors: cueRows.reduce((sum, row) => sum + row.instrument.patternCoverage.sourceAuthoredDistinctBehaviors, 0),
+        sourceAuthoredPatternsWithPitch: cueRows.reduce((sum, row) => sum + row.instrument.patternCoverage.sourceAuthoredPitchCoverage, 0),
+        derivedPracticePatternInstances: cueRows.reduce((sum, row) => sum + row.instrument.patternCoverage.derivedPractice, 0),
   },
   referenceCoverage: {
     localRecordingFiles: inventory.entries?.length ?? 0,
@@ -136,12 +150,25 @@ const shortfallRows = cueRows.filter(row => row.instrument.patternCoverage.body 
   || row.instrument.calibratedGesturesAbsentFromPattern.length || row.instrument.missingCueMappings.length);
 const byGenre = new Map();
 for (const style of styles) {
-  const group = byGenre.get(style.genre) ?? { styles: 0, exactReferences: 0, separated: 0 };
+  const group = byGenre.get(style.genre) ?? { styles: 0, exactReferences: 0, separated: 0, pairs: 0, zeroSource: 0, oneSource: 0, twoPlusSource: 0, sourceCells: 0 };
   group.styles++;
   if (matchedStyleIds.has(style.id)) group.exactReferences++;
   if (style.referenceAudio?.source === 'separated-accompaniment') group.separated++;
   byGenre.set(style.genre, group);
 }
+for (const { style, instrument } of cueRows) {
+  const group = byGenre.get(style.genre);
+  const cells = instrument.patternCoverage.sourceAuthoredBody;
+  group.pairs++;
+  group.sourceCells += cells;
+  if (cells === 0) group.zeroSource++;
+  else if (cells === 1) group.oneSource++;
+  else group.twoPlusSource++;
+}
+const priorityGenres = [...byGenre].map(([genre, values]) => ({ genre, ...values,
+  exactReferenceRate: values.styles ? values.exactReferences / values.styles : 0,
+  multiCellRate: values.pairs ? values.twoPlusSource / values.pairs : 0,
+})).sort((a, b) => (a.multiCellRate * .65 + a.exactReferenceRate * .35) - (b.multiCellRate * .65 + b.exactReferenceRate * .35));
 const markdown = [
   '# Genre pedagogy and instrument-data audit',
   '',
@@ -151,6 +178,7 @@ const markdown = [
   '',
   `- ${summary.patternCoverage.pairsWithoutBodyPatterns} instrument/style pairs have no local body pattern; ${summary.patternCoverage.pairsWithOneBodyPattern} have one; ${summary.patternCoverage.pairsWithTwoBodyPatterns} have two; ${summary.patternCoverage.pairsWithThreeOrMoreBodyPatterns} have at least three. Cadences and turnarounds are excluded from this count.`,
   `- ${summary.patternCoverage.bodyPatternInstances} local body studies have ${summary.patternCoverage.distinctBodyBehaviors} distinct event shapes, with technique, energy, difficulty and section information listed per pattern in the JSON report.`,
+  `- Source-authored body material is reported separately from generated exercises: ${summary.patternCoverage.sourceAuthoredBodyPatternInstances} source cells across ${summary.patternCoverage.sourceAuthoredPairsWithTwoOrMoreBodyPatterns} instrument/style pairs with two or more cells, ${summary.patternCoverage.sourceAuthoredPairsWithOneBodyPattern} with one, and ${summary.patternCoverage.sourceAuthoredPairsWithoutBodyPatterns} with none. ${summary.patternCoverage.sourceAuthoredPatternsWithPitch} source patterns include explicit pitch data; ${summary.patternCoverage.derivedPracticePatternInstances} local reductions, answers, phrase-development variations and technique drills are not counted as source repertoire.`,
   `- ${summary.mappedGesturesNotAuthoredInPatterns} mapped playable gestures have no explicit local pattern example; this should be zero. ${summary.cuesWithoutPlayableGesture} non-section cues have no named renderer gesture: ${summary.unmappedNoteTechniqueCues} note-level technique cues and ${summary.unmappedPatternVocabularyCues} motif/phrase vocabulary cues.`,
   `- ${summary.referenceCoverage.localRecordingFiles} local recordings map to ${summary.referenceCoverage.stylesWithExactLocalMatch} styles; ${summary.referenceCoverage.separatedAccompanimentProfiles} styles have separated-accompaniment calibration profiles and ${summary.referenceCoverage.stylesWithoutExactLocalMatch} have no exact local reference.`,
   '',
@@ -160,15 +188,23 @@ const markdown = [
   '',
   '## Remaining instrument and technique gaps',
   '',
-  '| Genre / style | Instrument | Local body patterns | Missing playable gesture examples | Cues without renderer mapping |',
-  '|---|---:|---:|---|---|',
-  ...shortfallRows.map(({ style, instrument }) => `| ${style.genre} / ${style.id} | ${instrument.id} | ${instrument.patternCoverage.body} | ${instrument.calibratedGesturesAbsentFromPattern.join(', ') || '—'} | ${instrument.missingCueMappings.join(', ') || '—'} |`),
+  '| Genre / style | Instrument | Source cells | Distinct source shapes | With pitch | Derived drills | Missing playable gesture examples | Cues without renderer mapping |',
+  '|---|---:|---:|---:|---:|---:|---|---|',
+  ...shortfallRows.map(({ style, instrument }) => `| ${style.genre} / ${style.id} | ${instrument.id} | ${instrument.patternCoverage.sourceAuthoredBody} | ${instrument.patternCoverage.sourceAuthoredDistinctBehaviors} | ${instrument.patternCoverage.sourceAuthoredPitchCoverage} | ${instrument.patternCoverage.derivedPractice} | ${instrument.calibratedGesturesAbsentFromPattern.join(', ') || '—'} | ${instrument.missingCueMappings.join(', ') || '—'} |`),
   '',
   '## Reference coverage by genre',
   '',
   '| Genre | Styles | Exact local reference | Separated accompaniment profile |',
   '|---|---:|---:|---:|',
   ...[...byGenre].sort(([a], [b]) => a.localeCompare(b)).map(([genre, values]) => `| ${genre} | ${values.styles} | ${values.exactReferences} | ${values.separated} |`),
+  '',
+  '## Catalog pass order: source-cell depth and references',
+  '',
+  'Low multi-cell coverage means students have fewer than two authored playable body choices for most instrument/style pairs. Exact local references help ground the next pass; a match alone does not establish that the file is appropriate or correctly separated.',
+  '',
+  '| Priority | Genre | Styles | Instrument/style pairs | Zero source cells | One source cell | Two or more | Exact local references |',
+  '|---:|---|---:|---:|---:|---:|---:|---:|',
+  ...priorityGenres.map((values, index) => `| ${index + 1} | ${values.genre} | ${values.styles} | ${values.pairs} | ${values.zeroSource} | ${values.oneSource} | ${values.twoPlusSource} | ${values.exactReferences} |`),
   '',
   'The full pattern names, articulation gestures, sections, energy bands, instrument pairs, raw technique cues and per-style mix evidence are in [`audit/technique-coverage/report.json`](../audit/technique-coverage/report.json).',
   '',

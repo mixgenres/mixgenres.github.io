@@ -26,7 +26,7 @@ export interface AuthoredCell {
   /** Difficulty of this individual, playable study (1 = foundation, 5 = advanced). */
   difficulty?: number;
   /** Generated from a folder-authored cell; kept distinct from source and cadence cells. */
-  pedagogicalStudy?: 'reduction' | 'answer' | 'technique';
+  pedagogicalStudy?: 'reduction' | 'answer' | 'technique' | 'variation';
 }
 export interface CalibratedStyleInput {
   instrumentDialects: Record<string, Partial<import('../../styles/contracts').InstrumentDialect>>;
@@ -363,10 +363,12 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
   return {
     id, worldId: input.id, styleIds: [style.id], name: `${style.name}: ${cell.name}`, shortName: cell.name,
     family: cell.name, category: cell.phraseEnd ? (/cadence|cierre|remate|ending|closing/i.test(cell.name) ? 'cadence' : 'fill')
-      : cell.role === 'bass' ? 'bass' : cell.role === 'percussion' ? 'percussion'
-        : cell.role === 'lead' || cell.role === 'voice' ? 'melodic'
-          : /break|dropout|silence/i.test(cell.name) ? 'break'
-            : /transition|pickup|turnaround/i.test(cell.name) ? 'transition' : 'comping',
+      : cell.pedagogicalStudy && (cell.role === 'bass' || cell.role === 'percussion' || cell.role === 'lead' || cell.role === 'voice' || cell.role === 'harmony')
+        ? cell.role === 'bass' ? 'bass' : cell.role === 'percussion' ? 'percussion' : cell.role === 'harmony' ? 'comping' : 'melodic'
+        : cell.role === 'bass' ? 'bass' : cell.role === 'percussion' ? 'percussion'
+          : cell.role === 'lead' || cell.role === 'voice' ? 'melodic'
+            : /break|dropout|silence/i.test(cell.name) ? 'break'
+              : /transition|pickup|turnaround/i.test(cell.name) ? 'transition' : 'comping',
     description: cell.description ?? `${cell.name}. ${style.description}`, tags: [input.id, style.id, cell.role, slug(cell.name)],
     scopes: cell.phraseEnd ? ['phrase'] : ['measure', 'phrase'], roles: [cell.role] as MusicalPattern['roles'],
     instruments: instruments as MusicalPattern['instruments'], canCrossRole: false, sourceLevel: 'style-authored',
@@ -378,8 +380,12 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
     supportedEnergy: cell.supportedEnergy ?? [1,2,3,4,5],
     sectionUsage: cell.sectionUsage ?? (cell.phraseEnd ? ['ending'] : undefined),
     phrasePosition: cell.phraseEnd ? ['end'] : ['start','middle','end','any'], variants: [],
+    ...(cell.pedagogicalStudy ? { sectionUsage: cell.sectionUsage ?? (cell.pedagogicalStudy === 'technique' ? ['solo']
+      : cell.pedagogicalStudy === 'answer' ? ['solo', 'bridge'] : cell.pedagogicalStudy === 'variation' ? ['verse', 'chorus', 'bridge', 'solo'] : ['intro', 'verse']) } : {}),
     ...(cell.difficulty ? { difficulty: cell.difficulty } : {}),
-    provenance: 'Folder-authored role cell; quarter-note beat positions and phrase conditions.',
+    provenance: cell.pedagogicalStudy
+      ? `Local ${cell.pedagogicalStudy} practice study derived from this style's folder-authored source cell; quarter-note beat positions and phrase conditions.`
+      : 'Folder-authored role cell; quarter-note beat positions and phrase conditions.',
     authenticityTags: [input.id, style.id, slug(cell.name)], tuningSystem: input.pitchSystem, enabled: true, weight: cell.phraseEnd ? .4 : 1,
   };
 }
@@ -409,9 +415,10 @@ function playableGestures(style: GenreStyleDefinition, instrumentId: string): st
 
 /**
  * Expand a local source cell into short instrument lessons. Reductions retain
- * the source's own accents and pitches; answer phrases reuse only its final
- * motif. Technique drills use the selected style's mapped instrument cues.
- * These are practice material, not claims of additional traditional grooves.
+ * the source's own accents and pitches; answers reuse its final motif; phrase
+ * variations restate its opening motif later in the cycle. Technique drills
+ * use the selected style's mapped instrument cues. These are local practice
+ * material, not claims of additional traditional grooves.
  */
 function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCell[]): AuthoredCell[] {
   const body = authored.filter(cell => !cell.phraseEnd && !!cell.instruments?.length);
@@ -428,7 +435,9 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
   }
 
   for (const cells of groups.values()) {
-    const source = cells[0];
+    // Prefer the most complete body cell as the source for local exercises;
+    // catalog ordering often places a short opening cue before the main part.
+    const source = cells.reduce((best, candidate) => candidate.onsets.length > best.onsets.length ? candidate : best);
     const instrumentId = source.instruments![0];
     const originalEvents = source.onsets.map((position, index) => ({
       position,
@@ -485,6 +494,39 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
         pedagogicalStudy: 'answer',
         supportedEnergy: [2, 3],
         description: `Phrase-answer study for ${style.name} ${instrumentId}: reposition the local cell's closing motif within the measure, keeping its own interval shape.`
+      });
+    }
+
+    // Phrase-level development gives the arranger a local alternative for
+    // long verse/chorus cycles. Repeat the opening motif later in this same
+    // style cell: unlike a generic fill, its pitch contour, hit types,
+    // articulations and note lengths remain owned by the source instrument.
+    // It is explicitly a learning variation rather than a historical claim.
+    if (originalEvents.length >= 2) {
+      const motif = originalEvents.length >= 4
+        ? originalEvents.slice(0, Math.max(2, Math.ceil(originalEvents.length / 2)))
+        : originalEvents;
+      const first = motif[0].position;
+      const last = motif[motif.length - 1].position;
+      const [numerator, denominator] = style.preferredMeters[0].split('/').map(Number);
+      const cycleBeats = numerator * 4 / denominator * (source.cycleLength ?? 1);
+      const span = Math.max(0, last - first);
+      const start = Math.max(0, Math.min(cycleBeats / 2, cycleBeats - span - 0.125));
+      studies.push({
+        ...source,
+        name: `${instrumentId} opening-motif development variation`,
+        onsets: motif.map(event => start + event.position - first),
+        durations: motif.map(event => event.duration ?? 0.25),
+        accents: motif.map(event => event.accent ?? 0.65),
+        pitches: motif.map(event => event.pitch),
+        notations: motif.map(event => event.notation),
+        hits: motif.map(event => event.hit),
+        articulations: motif.map(event => event.articulation ?? ''),
+        difficulty: 2,
+        pedagogicalStudy: 'variation',
+        sectionUsage: ['verse', 'chorus', 'bridge', 'solo'],
+        supportedEnergy: [2, 3],
+        description: `${style.name} ${instrumentId} development study: restate the opening motif from ${source.name} later in the cycle, retaining its local contour, rhythm, and playing technique.`,
       });
     }
 

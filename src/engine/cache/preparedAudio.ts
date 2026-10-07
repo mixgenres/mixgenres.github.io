@@ -28,11 +28,17 @@ export function preparedAudioKey(performance: Performance, options: Mp3RenderOpt
   return contentKey([
     // This version is part of the physical-render contract. Bump it whenever
     // synthesis changes in a way not already represented by the inputs below.
-    'part-audio-v2', [...ids].sort(),
+    'part-audio-v4', [...ids].sort(),
     [...options.trackInstruments].filter(([id]) => ids.has(id)).sort(([a],[b]) => a.localeCompare(b)),
     [...options.trackRoles ?? []].filter(([id]) => ids.has(id)).sort(([a],[b]) => a.localeCompare(b)),
     options.worldId, options.styleId,
-    performance.notes.filter(note => ids.has(note.trackId)),
+    performance.notes.filter(note => ids.has(note.trackId)).map(note => note.physical
+      // Physical keys already identify compiled mechanics and sound parameters.
+      // Re-serializing their complete parameter objects for every window grows
+      // with both the player count and the number of notes in the entire song.
+      ? [note.trackId, note.time, note.dur, note.midi, note.vel, note.frequencyHz,
+        note.pitchBend, note.percussion, note.notationEventId, note.physical.key, note.physical.tailSeconds]
+      : note),
     performance.ccs.filter(cc => ids.has(cc.trackId)),
     options.renderWindow ?? [performance.duration, performance.tail],
     options.maxDurationSeconds,
