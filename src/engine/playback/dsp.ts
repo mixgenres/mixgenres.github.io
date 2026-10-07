@@ -1,6 +1,6 @@
 import { el as standard } from '@elemaudio/core';
 
-/** Explicit seeds keep physical noise repeatable when a WASM runtime is reused.
+/** The documented seed property keeps physical noise repeatable.
  * Authored seeds remain authoritative. Otherwise identical sections must not
  * change their attacks/tails according to previous render jobs. */
 export const el = {

@@ -5,7 +5,7 @@ import { GENRE_WORLDS_BY_ID } from '../../data/genres';
 export type { InteractionModel, PulseModel, PocketSpec, PercussionDialect, BassDialect, ApproachSpec, EnergyMapping, EnergyDelta, TransitionType, TransitionGrammar, DragProfile, PerformanceIdioms, MixCharacter, WorldContract, InstrumentDialect, PerformanceMode } from '../../data/styles/contracts';
 
 function cloneDeep<T>(v: T): T {
-  return JSON.parse(JSON.stringify(v));
+  return structuredClone(v);
 }
 
 export function contractForGenre(genreId: string, style?: SongStyle): WorldContract {

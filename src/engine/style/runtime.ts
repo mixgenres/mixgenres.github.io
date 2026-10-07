@@ -8,10 +8,6 @@ import type {
 } from '../../data/styles/schema';
 import { rand01 } from '../sheet/random.ts';
 
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null;
-}
-
 export class StyleRuntime {
   public readonly resolved: ResolvedStyle;
   public readonly trace: DecisionTrace;
@@ -30,15 +26,13 @@ export class StyleRuntime {
   }
 
   /**
-   * Helper to sample from weighted distribution, filtered by optional condition.
+   * Samples a typed weighted distribution, filtered by optional condition.
    */
-  public pick<T>(path: string, rngOrSeed: (() => number) | number = 0.5, ctx?: Condition): T {
+  public pick<T>(target: readonly Weighted<T>[], rngOrSeed: (() => number) | number = 0.5, ctx?: Condition): T {
     const roll = typeof rngOrSeed === 'function' ? rngOrSeed() : (rngOrSeed > 1 ? rand01(rngOrSeed) : rngOrSeed);
-    const target = this.getByPath<Weighted<T>[]>(path);
 
     if (!Array.isArray(target) || target.length === 0) {
-      // Fallback for non-array or empty
-      return target as unknown as T;
+      throw new Error('Cannot sample an empty weighted distribution');
     }
 
     // Filter by condition if provided
@@ -69,10 +63,9 @@ export class StyleRuntime {
   }
 
   /**
-   * Samples or gets a numeric parameter from a path (e.g. 'rhythm.defaultBpm', 'rhythm.tempoRange').
+   * Samples a numeric parameter or range.
    */
-  public num(path: string, rngOrSeed?: (() => number) | number, _ctx?: Condition): number {
-    const val = this.getByPath<number | [number, number]>(path);
+  public num(val: number | readonly [number, number], rngOrSeed?: (() => number) | number, _ctx?: Condition): number {
     if (typeof val === 'number') return val;
     if (Array.isArray(val) && val.length === 2 && typeof val[0] === 'number') {
       const roll = typeof rngOrSeed === 'function' ? rngOrSeed() : (typeof rngOrSeed === 'number' ? (rngOrSeed > 1 ? rand01(rngOrSeed) : rngOrSeed) : 0.5);
@@ -103,24 +96,11 @@ export class StyleRuntime {
   }
 
   /**
-   * Helper to get nested value by path (e.g. 'rhythm.tempoRange').
-   */
-  public getByPath<T>(path: string): T {
-    const parts = path.split('.');
-    let curr: unknown = this.resolved;
-    for (const part of parts) {
-      if (!isRecord(curr)) return undefined as unknown as T;
-      curr = curr[part];
-    }
-    return curr as T;
-  }
-
-  /**
    * Returns the form step templates for the style.
    */
   public getFormTemplate(seed: number = 42): FormStepTemplate[] {
     if (this.resolved.form?.templates?.length) {
-      return this.pick<FormStepTemplate[]>('form.templates', seed);
+      return this.pick(this.resolved.form.templates, seed);
     }
     return [];
   }
@@ -133,7 +113,7 @@ export class StyleRuntime {
       return this.resolved.harmony.sectionProgressions[sectionKind]!;
     }
     if (this.resolved.harmony?.progressionTemplates?.length) {
-      return this.pick<string[]>('harmony.progressionTemplates', seed);
+      return this.pick(this.resolved.harmony.progressionTemplates, seed);
     }
     return ['Am', 'Dm', 'E7', 'Am'];
   }
@@ -143,7 +123,7 @@ export class StyleRuntime {
    */
   public getTempo(seed: number = 0.5): number {
     if (this.resolved.rhythm?.defaultBpm) return this.resolved.rhythm.defaultBpm;
-    if (this.resolved.rhythm?.tempoRange) return this.num('rhythm.tempoRange', seed);
+    if (this.resolved.rhythm?.tempoRange) return this.num(this.resolved.rhythm.tempoRange, seed);
     return 110;
   }
 

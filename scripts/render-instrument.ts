@@ -8,6 +8,7 @@ import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
 import { renderPerformanceToMp3 } from '../src/engine/playback/mp3Export.ts';
 import { INSTRUMENTS_BY_ID } from '../src/data/instruments';
 import { spawnSync } from 'node:child_process';
+import { parseAudioMetadata } from './lib/encodedAudio';
 
 const instrumentId = process.argv[2] || 'trumpet';
 const requestedGenre = process.argv[3];
@@ -54,7 +55,7 @@ async function main() {
   const bytes = Buffer.from(await blob.arrayBuffer());
   writeFileSync(outPath, bytes);
 
-  const probe = JSON.parse(execFileSync('ffprobe', [
+  const probe = parseAudioMetadata(execFileSync('ffprobe', [
     '-v', 'error', '-show_entries', 'stream=codec_name,sample_rate,channels,duration',
     '-of', 'json', outPath,
   ], { encoding: 'utf8' }));

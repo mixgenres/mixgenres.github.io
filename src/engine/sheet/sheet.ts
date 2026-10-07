@@ -1,7 +1,7 @@
 import { resolveSoloPlan } from './solo';
 import type { SoloAssignment } from '../../data/styles/schema';
 import type { Song, Region, Track, Measure, SectionType, PatternVariant, MusicalPattern, SectionEnergy, GuestLens } from '../../types';
-import { GENRE_WORLDS_BY_ID, ALL_PATTERNS, PATTERNS_BY_ID, PATTERNS_BY_WORLD } from '../../data/genres';
+import { GENRE_WORLDS_BY_ID, PATTERNS_BY_ID, PATTERNS_BY_WORLD } from '../../data/genres';
 import { INSTRUMENTS_BY_ID, INSTRUMENT_CATALOG, instrument, instrumentPatternKinds } from '../../engine/lookup/instruments';
 import { sliceBarNative } from './grid.ts';
 import { progressionForSection, buildArrangementContext, ArrangementContext } from './arrangementContext.ts';
@@ -50,8 +50,8 @@ export function getResolvedSectionStyle(sheet: Sheet, region: Region): ReturnTyp
   const styleId = region.styleId ?? (genreId === sheet.worldId ? sheet.styleId : undefined) ?? getCanonicalStyle(genreId).id;
   const inheritsSongStyle = genreId === sheet.worldId && styleId === sheet.styleId;
   return resolveStyle({ genreId, styleId,
-    influences: inheritsSongStyle ? sheet.styleInfluences as StyleInfluence[] | undefined : undefined,
-    userOverrides: inheritsSongStyle ? sheet.styleOverrides as Partial<SongStyle> | undefined : undefined,
+    influences: inheritsSongStyle ? sheet.styleInfluences : undefined,
+    userOverrides: inheritsSongStyle ? sheet.styleOverrides : undefined,
   });
 }
 
@@ -281,7 +281,7 @@ function canonicalPatternSection(sectionKind?: string): string | undefined {
   if (/verse|verso|tema|letra|preg|a$|b$/.test(k)) return 'verse';
   if (/solo|trading|instrumental|falseta|variaci|descarga|mambo|development/.test(k)) return 'solo';
   if (/bridge|puente|break|drop|breakdown/.test(k)) return 'bridge';
-  if (/coda|cierre|outro|ending|tag/.test(k)) return 'ending';
+  if (/coda|cierre|outro|ending|tag|final|closing/.test(k)) return 'ending';
   return k;
 }
 
@@ -637,16 +637,16 @@ export function suggestPattern(
   const want = partEnergy ?? (sectionKind ? SECTION_ENERGY_DEFAULT[sectionKind] : undefined);
   const resolved = styleId ? resolveStyle({ genreId: worldId, styleId }) : undefined;
   const approach = approachForVoice(voice, worldId, styleId);
-  // The curated set is the default menu. Adventure widens it to the whole
-  // world, then to neighbouring worlds the style explicitly cross-links to.
+  // Automatic arrangements are closed over this style's owned vocabulary.
+  // Deliberate user edits/influences can still introduce other material.
   const curated = resolved?.patterns?.allowed?.length ? resolved.patterns.allowed : undefined;
   const worldWide = (PATTERNS_BY_WORLD[worldId] || []).map(p => p.id);
-  const guestWorlds = guestWorldIdsFor(worldId);
-  const guestIds = guestWorlds.flatMap(g => (PATTERNS_BY_WORLD[g] || []).map(p => p.id));
-  const candidateIds = Array.from(new Set([...(curated ?? []), ...worldWide, ...guestIds, ...Object.keys(PATTERNS_BY_ID)]));
+  const candidateIds = curated ?? worldWide;
   const scored = candidateIds
     .map(id => PATTERNS_BY_ID[id])
-    .filter((p): p is MusicalPattern => !!p && p.enabled !== false)
+    .filter((p): p is MusicalPattern => !!p && p.enabled !== false && p.worldId === worldId)
+    .filter(p => !p.sectionUsage?.length || p.sectionUsage.some(section => canonicalPatternSection(section) === patternSection))
+    .filter(p => !['fill', 'cadence', 'transition'].includes(p.category) || !!p.sectionUsage?.some(section => canonicalPatternSection(section) === patternSection))
     .map(p => {
       let n = affinity(p.id, voice, worldId, styleId);
       const behavioralFit = approachFit(p, approach);
@@ -677,11 +677,23 @@ export function suggestPattern(
     .sort((a, b) => b.n - a.n);
 
   const viable = scored.filter(x => x.n > -150);
-  if (!viable.length) return scored[0]?.id;
+  if (!viable.length) return undefined;
   const best = viable[0].n;
   const window = viable.filter(x => x.n >= best - 25).slice(0, 10);
   return window[Math.floor(hash(`pick:${worldId}:${voice.instrumentId}:${sectionKind ?? 'body'}`, salt) * window.length)]?.id
     ?? window[0].id;
+}
+
+/** A missing context match remains a rest; never fill it from another genre. */
+function localPatternFallback(voice: Voice, worldId: string, sectionKind: string, styleId?: string): string | undefined {
+  const resolved = styleId ? resolveStyle({ genreId: worldId, styleId }) : undefined;
+  const allowed = resolved?.patterns?.allowed?.length ? new Set(resolved.patterns.allowed) : undefined;
+  return (PATTERNS_BY_WORLD[worldId] ?? []).find(pattern => pattern.enabled !== false
+    && (!allowed || allowed.has(pattern.id))
+    && Number.isFinite(affinity(pattern.id, voice, worldId, styleId))
+    && (!pattern.sectionUsage?.length || pattern.sectionUsage.some(section => canonicalPatternSection(section) === canonicalPatternSection(sectionKind)))
+    && (!['fill', 'cadence', 'transition'].includes(pattern.category)
+      || pattern.sectionUsage?.some(section => canonicalPatternSection(section) === canonicalPatternSection(sectionKind))))?.id;
 }
 
 /**
@@ -829,6 +841,7 @@ export function rebuild(sheet: Sheet): Sheet {
             const candidates = (PATTERNS_BY_WORLD[r.genre ?? sheet.worldId] || [])
               .filter(p => !allowedIds || allowedIds.has(p.id))
               .filter(p => p.enabled !== false)
+              .filter(p => !p.sectionUsage?.length || p.sectionUsage.some(section => canonicalPatternSection(section) === canonicalPatternSection(r.kind)))
               .filter(p => !base || p.family === base.family || p.category === base.category)
               .filter(p => {
                 if (!styleId) return true;
@@ -1299,13 +1312,13 @@ function patternCandidatesForVoice(
   const resolvedForPatterns = styleId ? resolveStyle({ genreId: worldId, styleId }) : undefined;
   const allowedIds = resolvedForPatterns?.patterns?.allowed?.length ? new Set(resolvedForPatterns.patterns.allowed) : undefined;
   const approach = approachForVoice(voice, worldId, styleId);
-  const pool = Array.from(new Set([
-    ...(PATTERNS_BY_WORLD[worldId] || []),
-    ...guestWorldIdsFor(worldId).flatMap(g => PATTERNS_BY_WORLD[g] || []),
-    ...Object.values(PATTERNS_BY_ID)
-  ]));
+  const pool = (PATTERNS_BY_WORLD[worldId] || [])
+    .filter(p => !allowedIds || allowedIds.has(p.id));
   return pool
     .filter(p => p.enabled !== false)
+    .filter(p => !p.sectionUsage?.length || p.sectionUsage.some(section => canonicalPatternSection(section) === canonicalPatternSection(sectionKind)))
+    .filter(p => !['fill', 'cadence', 'transition'].includes(p.category)
+      || p.sectionUsage?.some(section => canonicalPatternSection(section) === canonicalPatternSection(sectionKind)))
     .map(p => {
       let n = affinity(p.id, voice, worldId, styleId);
       const behavioralFit = approachFit(p, approach);
@@ -1695,11 +1708,10 @@ export function unsilenceVoiceInSection(sheet: Sheet, trackId: string, regionId:
     const region = sheet.regions.find(r => r.id === regionId);
     const taken = new Set(Object.values(sheet.arrangement[regionId] ?? {}));
     pId = suggestPattern(voice, region?.genre ?? sheet.worldId, sheet.tracks.length * 17 + 5, String(region?.kind ?? 'verse'), taken, sheet.energies?.[regionId]?.[voice.id], region ? getSectionStyleId(sheet, region) : undefined)
-      ?? ALL_PATTERNS.find(p => p.roles.includes(voice.role))?.id
-      ?? ALL_PATTERNS[0]?.id;
+      ?? localPatternFallback(voice, region?.genre ?? sheet.worldId, String(region?.kind ?? 'verse'), region ? getSectionStyleId(sheet, region) : undefined);
   }
   const arrangement = { ...sheet.arrangement };
-  arrangement[regionId] = { ...(arrangement[regionId] ?? {}), [trackId]: pId };
+  if (pId) arrangement[regionId] = { ...(arrangement[regionId] ?? {}), [trackId]: pId };
   const tracks = sheet.tracks.map(t => (t.id === trackId ? { ...t, muted: false } : t));
   return rebuild({ ...sheet, tracks, arrangement });
 }
@@ -1716,10 +1728,9 @@ export function unsilenceVoiceInAll(sheet: Sheet, trackId: string): Sheet {
     if (!pId) {
       const taken = new Set(Object.values(arrangement[r.id] ?? {}));
       pId = suggestPattern(voice, r.genre ?? sheet.worldId, ri * 31 + sheet.tracks.length * 13 + 7, String(r.kind), taken, sheet.energies?.[r.id]?.[voice.id], getSectionStyleId(sheet, r))
-        ?? ALL_PATTERNS.find(p => p.roles.includes(voice.role))?.id
-        ?? ALL_PATTERNS[0]?.id;
+        ?? localPatternFallback(voice, r.genre ?? sheet.worldId, String(r.kind), getSectionStyleId(sheet, r));
     }
-    arrangement[r.id] = { ...(arrangement[r.id] ?? {}), [trackId]: pId };
+    if (pId) arrangement[r.id] = { ...(arrangement[r.id] ?? {}), [trackId]: pId };
   }
   const tracks = sheet.tracks.map(t => (t.id === trackId ? { ...t, muted: false } : t));
   return rebuild({ ...sheet, tracks, arrangement });

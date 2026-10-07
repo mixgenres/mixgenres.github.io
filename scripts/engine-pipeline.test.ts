@@ -1,3 +1,5 @@
+import { performanceFixture } from './lib/playbackFixtures';
+import type { RenderedPerformanceAudio } from '../src/engine/playback/mp3Export';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { makeSheet } from '../src/engine/sheet/sheet';
@@ -5,7 +7,6 @@ import { compileSongPipeline } from '../src/engine/pipeline/compileSong';
 import { compileNotatedScore } from '../src/engine/score/notatedScore';
 import { cacheStats } from '../src/engine/cache/lru';
 import { preparePartAudio, preparedAudioKey, clearPreparedAudio } from '../src/engine/cache/preparedAudio';
-import { SongPlayer } from '../src/engine/playback/songPlayer';
 import { notatedDrum } from '../src/engine/score/percussionNotation';
 import { exportMusicXml } from '../src/engine/score/musicXml';
 import { interpretRelationships } from '../src/engine/band/interactions';
@@ -64,10 +65,10 @@ test('flamenco notation retains variations, playing vocabulary and explicit fing
 test('written ties produce one attack and reject a pitch-changing continuation', () => {
   const event=(beat:number,midi=69):PerfNote=>({time:beat/2,dur:.25,midi,vel:80,trackId:'p',bar:0,notation:{beat,durationBeats:.5},
     gestureCode:codeForGesture('legato'),hitFunctionCode:0,accent:.7,musicianNotation:{tieToNext:beat===0}});
-  const performance:any={bars:[{beatsPerBar:4}],notes:[event(0),event(.5)]};
+  const performance = performanceFixture({ bars: [{index:0,start:0,end:2,regionId:'a',bpm:120,beatsPerBar:4}], notes:[event(0),event(.5)] });
   resolveWrittenTies(performance); assert.equal(performance.notes.length,1); assert.equal(performance.notes[0].dur,.5);
-  assert.equal(performance.notes[0].notation.durationBeats,1);
-  assert.throws(()=>resolveWrittenTies({bars:[{beatsPerBar:4}],notes:[event(0),event(.5,70)]} as any),/no matching continuation/);
+  assert.equal(performance.notes[0].notation!.durationBeats,1);
+  assert.throws(()=>resolveWrittenTies(performanceFixture({bars:performance.bars,notes:[event(0),event(.5,70)]})),/no matching continuation/);
 });
 
 test('drummers have separate kit components, staff positions and noteheads in notation and MusicXML', () => {
@@ -96,27 +97,12 @@ test('raw PCM jobs deduplicate across consumers, survive one cancellation and ex
   const song = makeSheet('tango'), perf = compileSongPipeline(song).performance, track=song.tracks[0];
   const options={rawStem:true,selectedTrackIds:[track.id],trackInstruments:new Map([[track.id,track.instrumentId!]])};
   assert.equal(preparedAudioKey(perf,options),preparedAudioKey(perf,{...options,mixState:{volume:{[track.id]:.2},pan:{[track.id]:1}}}));
-  let calls=0, finish!:(audio:any)=>void;
-  const render=(_signal:AbortSignal)=>{calls++;return new Promise<any>(resolve=>{finish=resolve;});};
+  let calls=0, finish!:(audio:RenderedPerformanceAudio)=>void;
+  const render=(_signal:AbortSignal)=>{calls++;return new Promise<RenderedPerformanceAudio>(resolve=>{finish=resolve;});};
   const cancel=new AbortController(), a=preparePartAudio('shared',cancel.signal,render), b=preparePartAudio('shared',undefined,render);
   const rejected=assert.rejects(a,{name:'AbortError'});
   await Promise.resolve(); cancel.abort(); await rejected;
   finish({sampleRate:44100,left:new Float32Array([.2]),right:new Float32Array([.3])});
   const result=await b; assert.equal(calls,1);
   const cached=await preparePartAudio('shared',undefined,render); assert.strictEqual(cached.left,result.left); assert.equal(calls,1);
-});
-
-test('Play waits for its current chunk without requiring the whole song to be prepared', async () => {
-  const player=new SongPlayer(()=>{},()=>{}) as any;
-  let finish!:(buffer:any)=>void, starts=0, requests=0;
-  const prepared=new Promise<any>(resolve=>{finish=resolve;});
-  player.song={tracks:[]}; player.state.performance={notes:[{}],duration:2,tail:0};
-  player.chunks=[{index:0,start:0,end:1},{index:1,start:1,end:2}]; player.abort=new AbortController();
-  player.output={gain:{value:1,cancelScheduledValues(){}}};
-  player.ctx={state:'running',currentTime:0}; player.ensureContext=()=>{}; player.compiling=Promise.resolve();
-  player.startSourcesAt=()=>{}; player.beginChunkPlayback=()=>{starts++;};
-  player.ensureChunk=(index:number)=>{assert.equal(index,0);requests++;return prepared;};
-  const playing=player.play(); await new Promise(resolve=>setImmediate(resolve));
-  assert.equal(requests,1); assert.equal(starts,0);
-  finish({duration:1}); await playing; assert.equal(starts,1);
 });

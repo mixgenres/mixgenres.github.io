@@ -1,7 +1,8 @@
 import type { GenrePackInput } from '../_shared/genrePack';
 import { authorTangoArrangements } from './arrangements';
+import { authorChacareraPiano } from './studies';
 
-export const GENRE_PACK: GenrePackInput = authorTangoArrangements({
+export const GENRE_PACK: GenrePackInput = authorChacareraPiano(authorTangoArrangements({
   "id": "tango",
   "name": "Tango",
   "family": "Río de la Plata / Argentina",
@@ -1444,4 +1445,4 @@ export const GENRE_PACK: GenrePackInput = authorTangoArrangements({
       }
     }
   ]
-});
+}));

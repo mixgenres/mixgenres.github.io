@@ -1,5 +1,9 @@
 # Song performance and sound audit
 
+See [the genre reference and study pass](./genre-reference-pass.md) for the 55-folder audio evidence, ownership rules, and pattern-development limits.
+
+The current instrument-level study and technique coverage findings are in the [420-style pedagogy audit](./genre-pedagogy-audit.md).
+
 The audit separates score correctness, instrument mechanism correctness and perceptual authenticity. Passing numerical checks is evidence for the first two; it does not certify a convincing imitation of 420 musical traditions or performances. All example melodies are generated or original study phrases, not transcriptions of the named performers.
 
 ## Confirmed faults corrected

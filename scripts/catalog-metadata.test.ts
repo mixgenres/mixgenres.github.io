@@ -114,15 +114,14 @@ test('simultaneous written drum components remain separate notation attacks', ()
   assert.deepEqual(attacks[0].duration, attacks[1].duration);
 });
 
-test('all catalog mixes and vocabulary reach calibration directly from metadata', async () => {
+test('all catalog mixes and vocabulary reach calibration directly from metadata', () => {
   for (const world of GENRE_WORLDS) {
-    const { GENRE_PACK } = await import(`../src/data/genres/${world.id}/catalog.ts`);
-    for (const raw of GENRE_PACK.styles) {
-      const style = getStyle(`${world.id}-${raw.id}`)!;
-      assert.deepEqual(style.calibration!.mix, raw.mix);
-      assert.deepEqual(style.calibration!.patterns.families, raw.patterns);
-      assert.deepEqual(style.calibration!.harmony.chordQualities, raw.harmony);
-      assert.ok(raw.techniques.every((technique: string) => style.signatureTraits!.includes(technique)));
+    for (const seed of world.styleDefinitions) {
+      const style = getStyle(seed.id)!;
+      assert.deepEqual(style.calibration!.mix, seed.calibration?.mix);
+      assert.deepEqual(style.calibration!.referenceAudio, seed.calibration?.referenceAudio);
+      assert.deepEqual(style.calibration!.patterns.families, seed.calibration?.patterns.families);
+      assert.deepEqual(style.calibration!.harmony.chordQualities, seed.calibration?.harmony.chordQualities);
     }
   }
 });

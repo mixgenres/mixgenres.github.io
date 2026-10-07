@@ -1,4 +1,13 @@
 import { spawnSync } from 'node:child_process';
+import { parseObject, records, stringValue, finiteNumber } from './unknownData';
+
+export function parseAudioMetadata(text: string) {
+  return { streams: records(parseObject(text).streams).map(stream => ({
+    codec_name: stringValue(stream.codec_name), channels: finiteNumber(stream.channels),
+    sample_rate: stringValue(stream.sample_rate),
+    duration: stream.duration === undefined ? undefined : stringValue(stream.duration),
+  })) };
+}
 
 /** Loudness of the decoded export, including encoder peak trim. Not a whole-song target. */
 export function measureEncodedAudio(bytes: Uint8Array) {
@@ -11,7 +20,7 @@ export function measureEncodedAudio(bytes: Uint8Array) {
   if (probe.status !== 0 || (probe.error && (probe.error as NodeJS.ErrnoException).code !== 'EPIPE')) {
     throw new Error(`ffprobe failed: ${probe.error ?? probe.stderr}`);
   }
-  const metadata = JSON.parse(probe.stdout);
+  const metadata = parseAudioMetadata(probe.stdout);
   // Use spawnSync so stderr is captured even on a successful ffmpeg process.
   return { metadata, ...loudness(bytes) };
 }

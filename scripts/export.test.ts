@@ -10,6 +10,7 @@ import { musicXml } from '../src/export/musicxml';
 import { tickAt, type ExportContext } from '../src/export/model';
 import { PCMStemCache } from '../src/engine/cache/stemCache';
 import { encodeMp3PCM, wavBlob } from '../src/export/audioEncoding';
+import { parseObject, records } from './lib/unknownData';
 
 const song = createSheet('flamenco');
 const performance = arrangeBand(song);
@@ -33,9 +34,9 @@ const fixture: ExportContext = {
 };
 assert.equal(tickAt(fixture.performance, 3), 4800);
 const onlyBass = { ...fixture, selectedTrackIds: ['bass'] };
-const json = JSON.parse(await (await createExport(onlyBass, 'json')).blob.text());
-assert.deepEqual(json.tracks.map((t: { id: string }) => t.id), ['bass']);
-assert.equal(json.notes.length, 2);
+const json = parseObject(await (await createExport(onlyBass, 'json')).blob.text());
+assert.deepEqual(records(json.tracks).map(t => t.id), ['bass']);
+assert.equal(records(json.notes).length, 2);
 assert.ok(!musicXml(onlyBass).includes('<part-name>Percussion</part-name>'));
 assert.ok(musicXml(fixture).includes('<unpitched>'));
 assert.ok(musicXml(onlyBass).includes('<tied type="stop"/>'));

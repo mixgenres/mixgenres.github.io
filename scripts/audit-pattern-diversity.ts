@@ -1,9 +1,10 @@
+import { readObject, records, isRecord } from './lib/jsonData';
 /**
  * Describe authored pattern coverage, behavioral duplication, generated usage,
  * and available reference-MP3 evidence. Similarity and audio metrics are review
  * cues only; they are not musical-authenticity scores.
  */
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { ALL_PATTERNS } from '../src/data/genres';
@@ -70,30 +71,32 @@ function patternsFor(styleId: string): MusicalPattern[] {
 }
 function referenceEvidence(styleId: string) {
   const comparisonPath = resolve(comparisonRoot, `${styleId}-comparison.json`);
-  let comparison: any;
+  let comparison: Record<string, unknown> | undefined;
   if (existsSync(comparisonPath)) {
-    try { comparison = JSON.parse(readFileSync(comparisonPath, 'utf8')); } catch { /* report unavailable evidence below */ }
+    try { comparison = readObject(comparisonPath); } catch { /* report unavailable evidence below */ }
   }
-  const inventory = existsSync(inventoryPath) ? JSON.parse(readFileSync(inventoryPath, 'utf8')) as { entries?: Array<{ file: string; matches?: Array<{ styleId: string; name: string }> }> } : {};
-  const reference = inventory.entries?.find(entry => entry.matches?.some(match => match.styleId === styleId));
+  const inventory = existsSync(inventoryPath) ? readObject(inventoryPath) : {};
+  const reference = records(inventory.entries ?? []).find(entry => records(entry.matches).some(match => match.styleId === styleId));
   const alias = reviewedReferenceAliases[styleId];
-  const sourceFile = reference?.file ?? (alias && existsSync(resolve(alias.file)) ? resolve(alias.file) : null);
-  let sourceFeatures: any = null;
+  const sourceFile = (typeof reference?.file === 'string' ? reference.file : undefined) ?? (alias && existsSync(resolve(alias.file)) ? resolve(alias.file) : null);
+  let sourceFeatures: Record<string, unknown> | undefined;
   if (sourceFile) {
     const featurePath = resolve('audit/all-samples/features', `${createHash('sha256').update(sourceFile).digest('hex').slice(0, 16)}.json`);
     if (existsSync(featurePath)) {
-      try { sourceFeatures = JSON.parse(readFileSync(featurePath, 'utf8')); } catch { /* report unavailable evidence below */ }
+      try { sourceFeatures = readObject(featurePath); } catch { /* report unavailable evidence below */ }
     }
   }
+  const generated = isRecord(comparison?.generated) ? comparison.generated : undefined;
+  const duration = typeof generated?.durationSeconds === 'number' ? generated.durationSeconds : undefined;
   const song = songCatalog.find(value => value.styleId === styleId);
   return {
     sourceFile,
-    sourceTitle: reference?.matches?.find(match => match.styleId === styleId)?.name ?? song?.name ?? null,
+    sourceTitle: records(reference?.matches ?? []).find(match => match.styleId === styleId)?.name ?? song?.name ?? null,
     sourceMatchNote: alias?.note ?? (sourceFile ? 'Matched by the existing exact normalized artist/title inventory.' : null),
     sourceAudioFeatures: sourceFeatures ? {
       durationSeconds: sourceFeatures.durationSeconds,
       analysisSource: sourceFeatures.analysisSource,
-      windows: (sourceFeatures.accompanimentWindows ?? sourceFeatures.windows ?? []).map((window: any) => ({
+      windows: records(sourceFeatures.accompanimentWindows ?? sourceFeatures.windows ?? []).map(window => ({
         startSeconds: window.start, status: window.status,
         estimatedAttacksPerSecond: window.estimatedAttacksPerSecond,
         centroidHz: window.centroidHz, bandEnergy: window.bandEnergy,
@@ -101,7 +104,7 @@ function referenceEvidence(styleId: string) {
     } : null,
     comparisonFile: comparison ? comparisonPath : null,
     comparisonSource: comparison?.referenceSource ?? (comparison ? 'original album mix; may include vocals' : null),
-    windows: (comparison?.windows ?? []).map((window: any) => ({
+    windows: records(comparison?.windows ?? []).map(window => ({
       startSeconds: window.start,
       differences: window.differences,
       findings: window.findings,
@@ -114,7 +117,7 @@ function referenceEvidence(styleId: string) {
       generatedFeatures: comparison.generated,
     } : null,
     limitation: comparison
-      ? `Acoustic screening only${comparison.generated?.durationSeconds ? ` (${comparison.generated.durationSeconds.toFixed(1)}s render window)` : ''}; this comparison does not verify rhythm transcription, part relationships, or authenticity.`
+      ? `Acoustic screening only${duration ? ` (${duration.toFixed(1)}s render window)` : ''}; this comparison does not verify rhythm transcription, part relationships, or authenticity.`
       : 'No prepared reference comparison was found for this style.',
   };
 }

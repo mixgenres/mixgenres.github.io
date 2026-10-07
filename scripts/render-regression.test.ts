@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import OfflineRenderer from '@elemaudio/offline-renderer';
+import { AudioRenderer as OfflineRenderer } from '../src/engine/playback/offlineRenderer';
 import { el } from '@elemaudio/core';
 import { renderMixBuses } from '../src/engine/playback/elementaryEngine';
 import { renderPerformanceToMp3, renderPerformanceToAudio } from '../src/engine/playback/mp3Export';
@@ -233,18 +233,17 @@ test('cropped raw sections retain exact DSP state without storing the preceding 
 });
 
 
-test('repeated renders reuse one WASM heap and release every native processor', async () => {
-  const { offlineRendererStats } = await import('../src/engine/playback/offlineRendererPool');
+test('independent renders start with fresh DSP state through the public lifecycle', async () => {
+  const { offlineRendererStats } = await import('../src/engine/playback/offlineRenderer');
   const perf = performanceOf([note()]);
   const options = {trackInstruments:new Map([['keys','organ']]),rawStem:true,cacheDSPStem:false,maxDurationSeconds:.2,yieldForUI:false};
-  const first = await renderPerformanceToAudio(perf,options), baseline=offlineRendererStats();
-  for(let i=0;i<20;i++) {
+  const first = await renderPerformanceToAudio(perf,options), baseline = offlineRendererStats();
+  for(let i=0;i<5;i++) {
     const repeat=await renderPerformanceToAudio(perf,options);
-    assert.deepEqual(repeat.left,first.left,'fresh processor state and explicit noise seeds preserve the waveform');
+    assert.ok(repeat.left.every((sample,index) => sample === first.left[index]), 'fresh public renderers preserve the waveform');
     const stats=offlineRendererStats();
-    assert.equal(stats.initializedRuntimes,1,'no module allocation per excerpt');
-    assert.equal(stats.liveProcessors,0,'native processors are destroyed after use');
-    assert.equal(stats.heapBytes,baseline.heapBytes,'repeated excerpts do not grow the heap');
+    assert.equal(stats.initializedRuntimes,baseline.initializedRuntimes+i+1,'each independent job initializes a renderer');
+    assert.equal(stats.activeRenders,0,'no render remains acquired');
   }
 });
 

@@ -1,8 +1,9 @@
 import type { GenrePackInput } from '../_shared/genrePack';
 import { SOLEA_FALSETA_CIERRE, RUMBA_STRUM } from './techniqueCells';
 import { authorFlamencoArrangements } from './arrangements';
+import { authorFlamencoStudies } from './studies';
 
-export const GENRE_PACK: GenrePackInput = authorFlamencoArrangements({
+export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoArrangements({
   "id": "flamenco",
   "name": "Flamenco",
   "family": "Andalusia / Iberian",
@@ -1460,4 +1461,4 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoArrangements({
       }
     }
   ]
-});
+}));

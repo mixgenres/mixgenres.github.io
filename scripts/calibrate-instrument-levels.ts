@@ -5,17 +5,24 @@
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { INSTRUMENTS_BY_ID } from '../src/data/instruments';
-interface Probe { name: string; attack: { rmsDbfs: number | null; samplePeak: number } }
-interface Row { instrumentId: string; probes: Probe[] }
-const report: { rows: Row[] } = JSON.parse(readFileSync('audit/all-samples/instrument-gain-before.json', 'utf8'));
+import { readObject, readNumbers, records, stringValue, finiteNumber, isRecord } from './lib/jsonData';
+const rows = records(readObject('audit/all-samples/instrument-gain-before.json').rows).map(row => ({
+  instrumentId: stringValue(row.instrumentId), probes: records(row.probes).map(probe => {
+    if (!isRecord(probe.attack)) throw new Error('Expected probe attack metrics');
+    return { name: stringValue(probe.name), attack: {
+      rmsDbfs: probe.attack.rmsDbfs === null ? null : finiteNumber(probe.attack.rmsDbfs),
+      samplePeak: finiteNumber(probe.attack.samplePeak),
+    } };
+  }),
+}));
 function files(folder: string): string[] {
   return readdirSync(folder, { withFileTypes: true }).flatMap(entry => entry.isDirectory() ? files(join(folder, entry.name)) : [join(folder, entry.name)]);
 }
 const paths = files('src/data/instruments/catalog');
 const excluded = new Set(['synth', 'synth-bass', 'sampler', 'turntable', 'voice', 'choir']);
-const baseline: Record<string, number> = JSON.parse(readFileSync('audit/all-samples/instrument-gain-baseline.json', 'utf8'));
+const baseline = readNumbers('audit/all-samples/instrument-gain-baseline.json');
 const proposals = [];
-for (const row of report.rows) {
+for (const row of rows) {
   const def = INSTRUMENTS_BY_ID[row.instrumentId];
   if (excluded.has(def.id) || !def.makeupGain || baseline[def.id] === undefined) continue;
   const kit = !!def.kitComponents?.length;

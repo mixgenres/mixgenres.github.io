@@ -12,7 +12,8 @@ export function sourceFingerprint(): string {
       else if (/\.(tsx?|mjs|json|html)$/.test(path)) { hash.update(path); hash.update(readFileSync(path)); }
     }
   };
-  visit('src'); visit('scripts'); hash.update(readFileSync('package.json'));
+  visit('src'); visit('scripts');
+  for (const file of ['package.json', 'package-lock.json', 'tsconfig.json', 'vite.config.ts']) hash.update(readFileSync(file));
   return hash.digest('hex');
 }
 export function reportMetadata() { return { schemaVersion: 3, generatedAt: new Date().toISOString(), sourceFingerprint: sourceFingerprint() }; }

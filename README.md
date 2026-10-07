@@ -29,7 +29,7 @@ npm run check:audio
 npm run build:static
 ```
 
-`check` runs catalog validation, representative complete-example generation and focused musical, score, mix and playback regressions. `check:audio` adds targeted PCM and export checks. `build:static` only bundles the app; `build` also runs type and structural checks. Transient reports are written under `audit` and are not authored catalog data.
+`check` runs catalog validation, representative complete-example generation and focused musical, score, mix and playback regressions. `check:audio` adds targeted PCM and export checks. `build:static` only bundles the app; `build` and deployment run strict type, API boundary and structural checks. See the [engine API contract](docs/api-usage-audit.md). Transient reports are written under `audit` and are not authored catalog data.
 
 ```bash
 npm run audit:catalog
@@ -38,4 +38,4 @@ npm run test:score
 npm run render-song -- salsa /tmp/salsa.mp3
 ```
 
-Playback and audio export use the shared DSP preparation and mix pipeline. Session caches reuse prepared instrument audio across compatible edits. First-time synthesis can take time, especially for long arrangements. Audio tests cover selected mechanisms and excerpts, not listening verification of every reference recording.
+Playback and audio export use the shared DSP preparation and mix pipeline. Bounded caches reuse prepared instrument audio across compatible edits; versioned IndexedDB may retain physical sections between sessions. First-time synthesis can take time, especially for long arrangements. Audio tests cover selected mechanisms and excerpts, not listening verification of every reference recording.

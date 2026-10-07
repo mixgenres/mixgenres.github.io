@@ -1,6 +1,6 @@
 # Music engine and preparation cache
 
-The song editor compiles four explicit musical layers. `compileSongPipeline` is the entry point; `arrangeBand` provides the performance projection used by composition callers. The Score panel exposes each layer and exports the complete notation, interpretation, transitions and sound plan.
+The song editor compiles four explicit musical layers. `compileSongPipeline` is the entry point; `arrangeBand` provides the performance projection used by composition callers. The compiled pipeline retains notation, interpretation, transitions and sound controls for inspection and export.
 
 ```mermaid
 flowchart LR
@@ -9,7 +9,7 @@ flowchart LR
   B --> P[3. Instrument mechanics]
   P --> S[Cached section DSP audio]
   S --> M[4. Continuous ensemble mix]
-  M --> A[Prepared AudioBuffer]
+  M --> A[Prepared transport AudioBuffers]
   A --> T[Play / pause / seek]
 ```
 
@@ -41,9 +41,9 @@ The current instrument models remain approximations. Separating and caching thei
 
 `playback/renderSongMix.ts` shares preparation between the player, auditions and audio exports. Instrument audio is independent of user faders, pan, mute and solo. These controls act once at the mix stage; authored musical expression controllers remain part of the physical stem. The ensemble retains its section automation, masking, foreground, room and master processing.
 
-The browser sums cached section sources, including overlapping tails, into **one continuous offline master**. It does not create one final mix per note or cut the master at section edges. Prepared sections enter directly, avoiding duplicate whole-instrument PCM arrays. Idle render workers release their WASM heaps before the native master allocates buffers.
+The browser sums cached section sources, including overlapping tails, through the native offline master. Playback prepares sample-aligned transport chunks with master pre/post-roll; complete exports render the complete mix. Prepared sections enter directly, avoiding duplicate whole-instrument PCM arrays. Physical jobs initialize fresh Elementary renderers through the public API; playback workers retire after 16 renderer initializations to bound each WASM environment's lifetime. See the [API contract audit](api-usage-audit.md).
 
-`SongPlayer.configure` owns preparation after an edit. Play waits for that job and starts one looping `AudioBufferSourceNode`. Pause, resume and seek read that buffer; they never request DSP. A low-latency output context and a short start ramp reduce warm startup delay.
+`SongPlayer.configure` starts preparation after an edit. Play waits for the current chunk and, under measured rendering pressure, a short reserve. A timer schedules consecutive `AudioBufferSourceNode`s at sample-aligned boundaries and wraps at the exact loop duration. Seek promotes preparation near the new position; pause cancels pending starts and scheduled sources. A low-latency output context and short gain ramps reduce startup delay and clicks.
 
 ## Cache dependencies
 
@@ -54,12 +54,12 @@ The browser sums cached section sources, including overlapping tails, into **one
 | Realized ensemble | All musical inputs and relationships; excludes faders/pan/mute/solo | 16 songs |
 | Part transition | Boundary events, outgoing/incoming harmony, tempo, policy and actual held/mechanical state | 2,048 transitions |
 | Physical player/section | Interpreted notes, physical controller identities, instrument/style and incoming transition | 2,048 cells |
-| Raw DSP section PCM | Exact timed notes and controllers, instrument/role/style, complete hold/tail window | 192 MiB, 128 entries |
-| Complete mixed PCM / native buffer | Active players, section identities, user balance and musical mix timeline | 32 MiB, 128 entries |
+| Raw DSP section PCM | Exact timed notes and controllers, instrument/role/style, hold/tail window | 24–48 MiB RAM; 192–512 MiB IndexedDB |
+| Mixed PCM / native transport buffers | Active players, section identities, user balance, musical mix timeline and window | 4–12 MiB mix cache; 6–12 MiB transport buffers |
 
 Caches use deterministic content identities and bounded LRU eviction. A changed boundary invalidates dependent interpretation/physical state. A local interior edit reuses unaffected player/sections. Mix-only edits preserve physical PCM. Simultaneous requests share preparation jobs; cancelling one subscriber does not cancel another. Main-thread PCM survives worker reassignment. Workers do not keep a duplicate DSP stem cache for these jobs.
 
-Prepared PCM is generated from DSP after editing; it is not a distributed SoundFont or instrument bank. Caches are session-local and disappear on reload. Large entries beyond a cache's byte budget are played but not retained. Initial cold synthesis can still take significant time; there is no claim of instant first-load sound. During song playback the only continuous work is buffer output and transport/playhead updates. Optional `?dev=audio` diagnostics measure click-to-signal at the player's output separately from hardware latency.
+Prepared PCM is generated from DSP after editing; it is not a distributed SoundFont or instrument bank. Musical/RAM caches are session-local; physical section PCM and opening mixes may persist in versioned IndexedDB. Large entries beyond a cache's byte budget are played but not retained. Initial cold synthesis can still take significant time; there is no claim of instant first-load sound. During song playback the native output reads prepared buffers; workers prepare the upcoming reserve as needed. Optional `?dev=audio` diagnostics measure click-to-signal at the player's output separately from hardware latency.
 
 ## Verification
 

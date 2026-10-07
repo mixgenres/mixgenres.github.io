@@ -8,7 +8,7 @@ The recommended next step is a tango-only sound benchmark and four calibrated in
 
 ## What the actual graphs show
 
-Run `node --import tsx scripts/audit-tango-graph.ts`. It compiles the Golden Age starter and traverses the actual reachable Elementary graphs, including generic wrappers. The complete nodes and connections are written under `audit/tango-graphs/`; the summary is `audit/tango-graph.json`.
+Run `node --import tsx scripts/audit-tango-graph.ts` for current measurements. It compiles the Golden Age starter and reports public Elementary reconciliation statistics under `audit/tango-graphs/`, with the summary in `audit/tango-graph.json`. It no longer traverses opaque graphs or counts native mix nodes through a simulated context. Use the browser mix audit for actual native mastering checks. The table and structural observations below preserve the earlier inspection; they use a different measurement method and are historical.
 
 | Instrument | Core nodes / wrapped note | Maximum held notes / reserved voices | Physical graph at that instrument's reservation peak |
 | --- | ---: | ---: | ---: |

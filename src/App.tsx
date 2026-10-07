@@ -113,10 +113,10 @@ export default function App() {
     return resolveStyle({
       genreId: song.worldId,
       styleId: song.styleId ?? getCanonicalStyle(song.worldId).id,
-      influences: (song as any).styleInfluences,
-      userOverrides: (song as any).styleOverrides,
+      influences: song.styleInfluences,
+      userOverrides: song.styleOverrides,
     });
-  }, [song.worldId, song.styleId, (song as any).styleInfluences, (song as any).styleOverrides]);
+  }, [song.worldId, song.styleId, song.styleInfluences, song.styleOverrides]);
 
   const resetTransportForSong = (next: SongSheet) => {
     playerRef.current?.stop();
@@ -1275,14 +1275,14 @@ export default function App() {
         })}
         onUpdateCustomChords={(id, name, chords) => edit(s => {
           const updated = { ...s };
-          updated.customProgressions = updated.customProgressions?.map((p: any) => 
+          updated.customProgressions = updated.customProgressions?.map(p =>
             p.id === id ? { ...p, name, chords } : p
           );
           return updated;
         })}
         onDeleteCustomChords={id => edit(s => {
           const updated = { ...s };
-          updated.customProgressions = updated.customProgressions?.filter((p: any) => p.id !== id);
+          updated.customProgressions = updated.customProgressions?.filter(p => p.id !== id);
           return updated;
         })}
       />)}
@@ -1303,14 +1303,14 @@ export default function App() {
         })}
         onUpdateCustomChords={(id, name, chords) => edit(s => {
           const updated = { ...s };
-          updated.customProgressions = updated.customProgressions?.map((p: any) => 
+          updated.customProgressions = updated.customProgressions?.map(p =>
             p.id === id ? { ...p, name, chords } : p
           );
           return updated;
         })}
         onDeleteCustomChords={id => edit(s => {
           const updated = { ...s };
-          updated.customProgressions = updated.customProgressions?.filter((p: any) => p.id !== id);
+          updated.customProgressions = updated.customProgressions?.filter(p => p.id !== id);
           return updated;
         })}
       />)}

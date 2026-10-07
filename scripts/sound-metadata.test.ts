@@ -1,3 +1,4 @@
+import { makeSheet } from '../src/engine/sheet/sheet';
 import assert from 'node:assert/strict';
 import { INSTRUMENTS_BY_ID } from '../src/data/instruments';
 import { GENRE_CONTRACTS } from '../src/data/styles/contracts';
@@ -42,6 +43,7 @@ assert.equal(resolveTrackGain(gainParams, 0), 0, 'zero user volume must survive 
 assert.equal(resolveTrackGain(gainParams, .5, .8, .7), resolveTrackGain(gainParams) * .5 * .8 * .7);
 
 const { getEffectiveBpm } = await import('../src/engine/sheet/sheet');
-const tempo = { bpm: 100, tempoShift: 'pushed', regions: [{ id: 'part', bpm: 120 }] } as any;
+const base = makeSheet('tango');
+const tempo = { ...base, bpm: 100, tempoShift: 'pushed', regions: [{ ...base.regions[0], id: 'part', bpm: 120 }] };
 assert.equal(getEffectiveBpm(tempo, 'part').bpm, 130, 'custom part BPM still inherits the displayed song feel');
 assert.equal(getEffectiveBpm(tempo, 'part').feel.id, 'pushed');

@@ -1,3 +1,5 @@
+import { performanceFixture } from './lib/playbackFixtures';
+import type { RenderedPerformanceAudio } from '../src/engine/playback/mp3Export';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { IDBFactory, IDBObjectStore } from 'fake-indexeddb';
@@ -37,16 +39,17 @@ test('disk PCM round trips cropped stereo buffers, coalesces reads and accounts 
   assert.equal(await cache.put('b',pcm(4)),true); assert.equal(cache.stats().bytes,48);
 });
 
-test('disk LRU touches hits, protects just-written entries and keeps favorite openings', async () => {
+test('disk LRU touches hits, protects just-written entries and keeps favorite openings', async t => {
+  let now = 1000; t.mock.method(Date, 'now', () => ++now);
   const {cache}=fixture();
   await cache.put('a',pcm()); await cache.put('b',pcm());
   await cache.get('a'); await cache.put('c',pcm());
   assert.equal(await cache.has('a'),true); assert.equal(await cache.has('b'),false); assert.equal(await cache.has('c'),true);
   await cache.clear();
-  await cache.put('mix:favorite',pcm()); await cache.put('stem:a',pcm()); await cache.put('stem:b',pcm());
-  assert.equal(await cache.has('mix:favorite'),true); assert.equal(await cache.has('stem:b'),true);
+  await cache.put('mix:favorite:opening',pcm()); await cache.put('stem:a',pcm()); await cache.put('stem:b',pcm());
+  assert.equal(await cache.has('mix:favorite:opening'),true); assert.equal(await cache.has('stem:b'),true);
   assert.equal(await cache.put('huge-stem',pcm(8)),false,'full sections cannot displace favorite openings');
-  assert.equal(await cache.has('mix:favorite'),true); assert.ok(cache.stats().bytes<=64);
+  assert.equal(await cache.has('mix:favorite:opening'),true); assert.ok(cache.stats().bytes<=64);
 });
 
 test('same-timestamp eviction never throws away the new opening', async () => {
@@ -70,7 +73,7 @@ test('missing storage, blocked opens and hung transactions fall back within a de
   const bounded=new PersistentAudioCache({factory:()=>stuck,maxBytes:()=>64,namespace:'x',timeoutMs:10});
   assert.equal(await bounded.available(),false); assert.equal(await bounded.get('a'),undefined);
   const fakeDB={objectStoreNames:{contains:()=>true},transaction:()=>({objectStore:()=>({get:()=>({}),index:()=>({openCursor:()=>({})})}),abort(){}})};
-  const fakeFactory={open(){const request:any={result:fakeDB};queueMicrotask(()=>request.onsuccess());return request;}} as unknown as IDBFactory;
+  const fakeFactory={open(){const request: { result: typeof fakeDB; onsuccess?: () => void } = {result:fakeDB};queueMicrotask(()=>request.onsuccess?.());return request;}} as unknown as IDBFactory;
   const cache=new PersistentAudioCache({factory:()=>fakeFactory,maxBytes:()=>64,namespace:'x',timeoutMs:10});
   assert.equal(await cache.get('a'),undefined); await cache.flush();
 });
@@ -119,8 +122,8 @@ test('RAM PCM owns compact arrays and preserves good entries on invalid replacem
 
 test('shared preparation cancels only after the final consumer and isolates cache domains', async () => {
   const a=new PCMStemCache(128), b=new PCMStemCache(128); const one=new AbortController(),two=new AbortController();
-  let finish!:(value:any)=>void, signal!:AbortSignal, calls=0;
-  const render=(received:AbortSignal)=>{signal=received;calls++;return new Promise<any>(resolve=>finish=resolve);};
+  let finish!:(value:RenderedPerformanceAudio)=>void, signal!:AbortSignal, calls=0;
+  const render=(received:AbortSignal)=>{signal=received;calls++;return new Promise<RenderedPerformanceAudio>(resolve=>finish=resolve);};
   const first=preparePartAudio('same',one.signal,render,true,a);const rejected=assert.rejects(first,{name:'AbortError'});
   const second=preparePartAudio('same',two.signal,render,true,a);await turn();one.abort(); await rejected;assert.equal(signal.aborted,false);
   const other=await preparePartAudio('same',undefined,async()=>({sampleRate:44100,...pcm(4,.5)}),true,b);
@@ -129,7 +132,7 @@ test('shared preparation cancels only after the final consumer and isolates cach
 });
 
 test('prepared identities are independent of instrument-map insertion order', () => {
-  const performance={duration:1,tail:0,notes:[],ccs:[]} as any;
+  const performance=performanceFixture();
   assert.equal(preparedAudioKey(performance,{trackInstruments:new Map([['b','piano'],['a','guitar']])}),
     preparedAudioKey(performance,{trackInstruments:new Map([['a','guitar'],['b','piano']])}));
 });
@@ -139,7 +142,7 @@ test('favorite preparation covers every tango and flamenco style using real tran
   assert.ok(favoriteCatalogIds.length>10);
   const visited:string[]=[],windows:Array<{start:number;end:number}>=[];let flushed=0;
   await prepareFavoriteOpenings(new AbortController().signal,favoriteCatalogIds.at(-1),{
-    compile:async song=>{visited.push(song.catalogId!);return {duration:10,tail:0,bars:[],notes:[],ccs:[]} as any;},
+    compile:async song=>{visited.push(song.catalogId!);return performanceFixture({duration:10});},
     render:async(_performance,_song,_signal,window,priority)=>{windows.push(window!);assert.equal(priority!(),50);return {sampleRate:44100,...pcm()};},
     flush:async()=>{flushed++;},
   });
@@ -153,7 +156,7 @@ test('favorite preparation covers every tango and flamenco style using real tran
 test('favorite preparation stops between songs when playback takes over', async () => {
   const controller=new AbortController();let compiled=0;
   await assert.rejects(prepareFavoriteOpenings(controller.signal,undefined,{
-    compile:async()=>{compiled++;return {duration:10,bars:[],notes:[],ccs:[]} as any;},
+    compile:async()=>{compiled++;return performanceFixture({duration:10});},
     render:async()=>{controller.abort();return {sampleRate:44100,...pcm()};},flush:async()=>{},
   }),{name:'AbortError'}); assert.equal(compiled,1);
 });

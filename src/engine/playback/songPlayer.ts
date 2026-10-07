@@ -260,7 +260,7 @@ export class SongPlayer {
         this.probe?.disconnect();
       }
       this.replaceContext = false;
-      const Constructor = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      const Constructor = window.AudioContext ?? window.webkitAudioContext;
       if (!Constructor) throw new Error('This browser does not support audio playback.');
       this.ctx = new Constructor({ latencyHint: 'interactive' });
       this.output = this.ctx.createGain();

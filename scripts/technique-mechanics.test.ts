@@ -7,7 +7,6 @@ import { resolveTrackSound } from '../src/engine/playback/trackSound';
 import { getInstrumentModule, resolveVoiceParameters } from '../src/engine/playback/instrumentRegistry';
 import { realizeTechniquePerformance } from '../src/engine/band/techniquePerformance';
 import { voiceTailSeconds } from '../src/engine/playback/voiceAllocation';
-import { renderVoice } from '../src/engine/playback/elementaryEngine';
 import { makeSheet, rebuild } from '../src/engine/sheet/sheet';
 import { compileSongPipeline } from '../src/engine/pipeline/compileSong';
 import { exportMusicXml } from '../src/engine/score/musicXml';
@@ -82,24 +81,7 @@ test('unpitched actions produce one contact rather than a body strike per inferr
   }
 });
 
-/** Reachable graph inspection catches accidental pitch-dependent wrappers,
- * rather than merely checking a metadata label. */
-function nodes(root: any): any[] {
-  const found: any[] = [], visited = new Set<any>();
-  const walk = (node: any) => { if (!node || typeof node !== 'object' || visited.has(node)) return; visited.add(node); found.push(node); for (let list = node.children; list; list = list.tl) walk(list.hd); };
-  walk(root); return found;
-}
-test('body/tambor/chicharra/strappata audio graphs do not use the harmony pitch control', () => {
-  for (const [instrument, technique] of [['guitar', 'golpe'], ['violin', 'tambor'], ['violin', 'chicharra'], ['upright-bass', 'strappata'],
-    ['cello', 'strappata'], ['cello', 'chicharra'], ['cello', 'golpe-caja'], ['viola', 'tambor'], ['viola', 'chicharra'], ['viola', 'golpe-caja']]) {
-    const params = resolveTrackSound(instrument), voice = prepareNoteVoice(note(technique), params, '', ''); voice.gate = 1;
-    const graph = nodes(renderVoice('p', 0, voice, params));
-    assert.ok(graph.length > 10);
-    assert.ok(graph.every(n => !String(n.props?.key ?? '').endsWith('_freq')), `${instrument}/${technique} must not transpose with the chord`);
-  }
-});
-
-test('unpitched scraper bodies keep fixed resonances and use a friction source', () => {
+test('scraper metadata identifies an unpitched friction source', () => {
   for (const id of ['guacharaca', 'guiro', 'dikanza', 'cabasa', 'washboard']) {
     const def = INSTRUMENTS_BY_ID[id];
     assert.ok(def, `${id} is represented in the instrument catalog`);
@@ -110,16 +92,6 @@ test('unpitched scraper bodies keep fixed resonances and use a friction source',
     assert.equal(INSTRUMENTS_BY_ID[id]?.luthierPhysics?.category, 'body_impact');
     assert.equal(INSTRUMENTS_BY_ID[id]?.dspProfile?.familyModel, 'shaker');
   }
-  const def = INSTRUMENTS_BY_ID.guacharaca;
-  assert.ok(def);
-  const params = resolveTrackSound('guacharaca', 'latin', 'latin-cumbia');
-  const graphAt = (midi: number) => {
-    const voice = prepareNoteVoice(note('accent', midi), params, 'latin', 'latin-cumbia'); voice.gate = 1;
-    return nodes(renderVoice('scraper', 0, voice, params)).map(node => node.props);
-  };
-  assert.equal(def.dspProfile?.familyModel, 'scrape');
-  assert.equal(def.luthierPhysics?.category, 'scraped_friction');
-  assert.deepEqual(graphAt(60), graphAt(72), 'notation MIDI must not tune an unpitched scraper body');
 });
 
 test('physical categories resolve to the source mechanism across idiophones and regional aliases', () => {

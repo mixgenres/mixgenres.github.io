@@ -1,3 +1,4 @@
+import { isRecord } from './lib/unknownData';
 import { createServer } from 'vite';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { reportMetadata } from './lib/auditReport';
@@ -18,8 +19,8 @@ const server = await createServer({ server: { host: '127.0.0.1', port: 3001, str
       chunks.push(buffer);
     }
     const body = Buffer.concat(chunks);
-    const report = JSON.parse(body.toString());
-    if (!Array.isArray(report.cases) || !Array.isArray(report.findings) || !report.coverage || !['PASS', 'FAIL'].includes(report.status)) throw new Error('Invalid browser report');
+    const report: unknown = JSON.parse(body.toString());
+    if (!isRecord(report) || typeof report.status !== 'string' || !Array.isArray(report.cases) || !Array.isArray(report.findings) || !report.coverage || !['PASS', 'FAIL'].includes(report.status)) throw new Error('Invalid browser report');
     const current = reportMetadata();
     if (report.sourceFingerprint !== current.sourceFingerprint) throw new Error('Sources changed during browser audit; run it again');
     mkdirSync('audit', { recursive: true });

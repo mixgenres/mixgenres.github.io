@@ -1,3 +1,4 @@
+import { isRecord } from './lib/unknownData';
 import { makeSheet } from '../src/engine/sheet/sheet';
 import { compileWholeSong } from '../src/engine/band/arrangeBand';
 import { renderSongMix } from '../src/engine/playback/renderSongMix';
@@ -18,13 +19,13 @@ for (const style of ALL_STYLES) selection.add(new Option(style.name, style.id));
 button.onclick = async () => {
   button.disabled = true; reportText.textContent = '';
   try {
-    const meta = await fetch('/__audit/meta').then(r => r.json());
+    const meta: unknown = await fetch('/__audit/meta').then(r => r.json());
+    if (!isRecord(meta) || typeof meta.sourceFingerprint !== 'string') throw new Error('Invalid audit metadata');
     const styles = selection.value.startsWith('genre:') ? selectStyles(undefined, selection.value.slice(6)) : selectStyles(selection.value || undefined);
     const findings: { severity: string; code: string; scope: string; message: string }[] = [];
     const cases = [];
     const add = (code: string, scope: string, message: string) => findings.push({ severity: 'error', code, scope, message });
-    const OfflineConstructor = globalThis.OfflineAudioContext ??
-      (globalThis as unknown as { webkitOfflineAudioContext?: typeof OfflineAudioContext }).webkitOfflineAudioContext;
+    const OfflineConstructor = window.OfflineAudioContext ?? window.webkitOfflineAudioContext;
     if (!OfflineConstructor) throw new Error('OfflineAudioContext is unavailable');
     for (const saturationType of ['tube', 'tape', 'hard-clip'] as const) {
       const context = new OfflineConstructor(2, 22050, 44100);
@@ -76,8 +77,9 @@ button.onclick = async () => {
       coverage: { styles: styles.length, rendered: cases.length, mechanisms: new Set(styles.flatMap(styleMechanisms)).size, masterSilenceCases: 3 },
       findings, cases };
     const response = await fetch('/__audit/report', { method: 'POST', body: JSON.stringify(report) });
-    const saved = await response.json();
-    if (!response.ok) throw new Error(saved.error);
+    const saved: unknown = await response.json();
+    if (!isRecord(saved)) throw new Error('Invalid audit response');
+    if (!response.ok) throw new Error(typeof saved.error === 'string' ? saved.error : 'Audit upload failed');
     status.textContent = `${report.status}: ${cases.length}/${styles.length} styles, ${findings.length} errors. ${saved.saved}`;
     reportText.textContent = findings.map(f => `${f.scope}: ${f.message}`).join('\n') || 'No findings.';
   } catch (error) { status.textContent = `FAIL: ${String(error)}`; }

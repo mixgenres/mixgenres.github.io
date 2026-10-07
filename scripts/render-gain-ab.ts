@@ -1,7 +1,8 @@
 /** Controlled A/B: current physics/patterns, with previous versus calibrated static source gains.
  * Previous gains change only this process's instrument definitions, never repository files.
  */
-import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { readNumbers } from './lib/jsonData';
 import { resolve } from 'node:path';
 import { INSTRUMENTS_BY_ID } from '../src/engine/lookup/instruments';
 import { makeSheet } from '../src/engine/sheet/sheet';
@@ -12,7 +13,7 @@ import { songMixOptions } from '../src/engine/playback/renderSongMix';
 import { MASTER_MIX_DEFAULTS } from '../src/data/sound/mix/masterProfiles';
 import { stemCache } from '../src/engine/cache/stemCache';
 import type { RenderDiagnostic } from '../src/engine/studio/audioMetrics';
-const prior: Record<string, number> = JSON.parse(readFileSync('audit/all-samples/instrument-gain-baseline.json', 'utf8'));
+const prior = readNumbers('audit/all-samples/instrument-gain-baseline.json');
 const current = Object.fromEntries(Object.values(INSTRUMENTS_BY_ID).map(def => [def.id, def.makeupGain]));
 const programMakeupDb = MASTER_MIX_DEFAULTS.programMakeupDb;
 const genres = process.argv[2]?.split(',') ?? ['tango', 'flamenco', 'salsa', 'ambient', 'afrobeat', 'arabic', 'rock', 'country'];

@@ -153,7 +153,7 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
   };
 
   // 2. Merge hierarchy (base parent -> child style)
-  let merged: CompleteStyle = completeStyle(JSON.parse(JSON.stringify(hierarchy[0])));
+  let merged: CompleteStyle = completeStyle(structuredClone(hierarchy[0]));
   recordDecision('id', merged.id, 'style', merged.id);
 
   // Coverage must include defaults inserted by completeStyle. Trace required
@@ -171,10 +171,10 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
     for (const path of paths) {
       const authored = path.split('.').reduce<unknown>((value, key) =>
         value && typeof value === 'object' ? (value as Record<string, unknown>)[key] : undefined,
-        (authoredBase as Record<string, unknown>)[aspect]);
+        authoredBase[aspect]);
       const value = path.split('.').reduce<unknown>((v, key) =>
         v && typeof v === 'object' ? (v as Record<string, unknown>)[key] : undefined,
-        (merged as unknown as Record<string, unknown>)[aspect]);
+        merged[aspect]);
       const declaredSource = hierarchy[0].sourceProvenance?.[`${aspect}.${path}`];
       const source = declaredSource ?? (authored === undefined ? 'hardcoded' : 'style');
       recordDecision(`${aspect}.${path}`, value, source, source === 'hardcoded' ? 'completeStyle' : hierarchy[0].id);

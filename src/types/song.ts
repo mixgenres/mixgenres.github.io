@@ -1,3 +1,4 @@
+import type { StyleInfluence, SongStyle } from '../data/styles/schema';
 import type { DrumHitType, GuestLens, SectionEnergy, Role, InstrumentKind, SectionType, FormIntensity, InteractionRelationship, Scope, UserPatternPreference, PatternPerformanceDetails } from '../data/schema';
 
 
@@ -137,8 +138,8 @@ export interface Song {
   preferences?: UserPatternPreference[];
   generationSeed?: number;
   styleId?: string;
-  styleInfluences?: unknown[];
-  styleOverrides?: Record<string, unknown>;
+  styleInfluences?: StyleInfluence[];
+  styleOverrides?: Partial<SongStyle>;
   phrasePatternCache?: Record<string, string>;
 }
 

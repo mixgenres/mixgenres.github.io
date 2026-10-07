@@ -1,6 +1,7 @@
 import type { GenrePackInput } from '../_shared/genrePack';
+import { authorBachataStudies } from './studies';
 
-export const GENRE_PACK: GenrePackInput = {
+export const GENRE_PACK: GenrePackInput = authorBachataStudies({
   "id": "bachata",
   "name": "Bachata",
   "family": "Bachata",
@@ -836,4 +837,4 @@ export const GENRE_PACK: GenrePackInput = {
       }
     }
   ]
-};
+});

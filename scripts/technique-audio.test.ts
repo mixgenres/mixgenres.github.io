@@ -6,15 +6,15 @@ import { prepareNoteVoice } from '../src/engine/playback/performancePlan';
 import { resolveTrackSound } from '../src/engine/playback/trackSound';
 import type { PerfNote, Performance } from '../src/engine/band/performanceData';
 
-async function render(instrument: string, technique: string, controls: Record<string, number> = {}, bodyAttack = false) {
-  const midi = instrument === 'bass' || instrument === 'upright-bass' ? 40 : instrument === 'violin' ? 69 : instrument === 'cello' ? 48 : 60;
+async function render(instrument: string, technique: string, controls: Record<string, number> = {}, bodyAttack = false, midiOverride?: number) {
+  const midi = midiOverride ?? (instrument === 'bass' || instrument === 'upright-bass' ? 40 : instrument === 'violin' ? 69 : instrument === 'cello' ? 48 : 60);
   const note: PerfNote = { trackId: 'p', time: 0, dur: .2, bar: 0, midi, vel: 85,
     gestureCode: codeForGesture(technique), hitFunctionCode: 0, accent: .8, bodyAttack,
     musicianNotation: bodyAttack ? { bodyTechnique: 'golpe' } : undefined };
   const params = { ...resolveTrackSound(instrument), ...controls };
   const voice = prepareNoteVoice(note, params, '', '');
   voice.soundParams = params;
-  note.physical = { key: `${instrument}/${technique}/${JSON.stringify(controls)}/${bodyAttack}`, voice, tailSeconds: .5 };
+  note.physical = { key: `${instrument}/${technique}/${midi}/${JSON.stringify(controls)}/${bodyAttack}`, voice, tailSeconds: .5 };
   const perf: Performance = { notes: [note], ccs: [], bars: [], duration: .3, tail: .5, blends: {}, trackInfo: { p: { instrumentId: instrument, role: 'lead' } } };
   const audio = await renderPerformanceToAudio(perf, { trackInstruments: new Map([['p', instrument]]), rawStem: true });
   const samples = audio.left;
@@ -35,6 +35,16 @@ test('string, bow and body mechanisms render finite audible PCM through the shar
     ['bass', 'slap'], ['bass', 'pop'], ['bass', 'dead-note'],
     ['cello', 'arrastre'], ['cello', 'strappata'], ['cello', 'chicharra'], ['viola', 'tambor'], ['viola', 'chicharra'],
   ]) await render(instrument, technique);
+});
+
+test('unpitched body, bow-contact and scraper PCM does not transpose with the harmony', async () => {
+  for (const [instrument, technique] of [['guitar', 'golpe'], ['violin', 'tambor'], ['violin', 'chicharra'], ['upright-bass', 'strappata'],
+    ['cello', 'strappata'], ['cello', 'chicharra'], ['cello', 'golpe-caja'], ['viola', 'tambor'], ['viola', 'chicharra'], ['viola', 'golpe-caja'], ['guacharaca', 'accent']]) {
+    const original = await render(instrument, technique, {}, false, 60);
+    const transposed = await render(instrument, technique, {}, false, 72);
+    assert.equal(original.samples.length, transposed.samples.length);
+    assert.ok(original.samples.every((sample, i) => sample === transposed.samples[i]), `${instrument}/${technique} must keep its unpitched response`);
+  }
 });
 
 test('a body golpe is an impulse, rather than a pitched sustain under a held gate', async () => {

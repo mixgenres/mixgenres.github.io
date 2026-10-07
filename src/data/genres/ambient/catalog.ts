@@ -1,6 +1,7 @@
 import type { GenrePackInput } from '../_shared/genrePack';
+import { authorAmbientStudies } from './studies';
 
-export const GENRE_PACK: GenrePackInput = {
+export const GENRE_PACK: GenrePackInput = authorAmbientStudies({
   "id": "ambient",
   "name": "Ambient",
   "family": "Global electronic / experimental",
@@ -649,4 +650,4 @@ export const GENRE_PACK: GenrePackInput = {
       }
     }
   ]
-};
+});

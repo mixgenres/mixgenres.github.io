@@ -22,8 +22,7 @@ export function createDampedStringLoop(
     : feedbackGain;
 
   // Ensure delayTime can be safely updated at runtime via el.const or dynamic signal nodes.
-  // Clamp delay to [1, 44000] and apply a gentle 3ms pole smoother to eliminate click
-  // artifacts when delayTime is modulated or updated via el.const without graph recompilation.
+  // Clamp delay to the allocated line; keyed constants reconcile through render().
   const rawDelay = typeof delaySamples === 'number'
     ? el.const({ key: `${pKey}:dt`, value: delaySamples })
     : delaySamples;

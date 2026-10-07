@@ -1,7 +1,8 @@
 # Checks
 
-Playback and exports use the instrument DSP renderer at 44.1 kHz. UI edits prepare the four [music-engine layers](../docs/engine-pipeline.md) and cache complete player/section audio, including outgoing holds and release tails. The player reads one prepared continuous mix. Instrument sound is authored through DSP models, physical parameters and genre dialects.
+Playback and exports use the instrument DSP renderer at 44.1 kHz. UI edits prepare the four [music-engine layers](../docs/engine-pipeline.md) and cache complete player/section audio, including outgoing holds and release tails. The player schedules prepared, sample-aligned transport buffers and warms an upcoming reserve. Instrument sound is authored through DSP models, physical parameters and genre dialects.
 
+- `npm run audit:api`: scans application and scripts for loose types, suppressions and internal Elementary access. `lint` also runs this guard after strict TypeScript. See the [API contract](../docs/api-usage-audit.md).
 - `npm run check`: one catalog pass over every exported data property and resolved style/profile, then focused musical, sound-resolution, solo, mix and playback regressions. Complete-example generation uses representative mix mechanisms; `npm run audit:examples` compiles all 420 full arrangements. No PCM rendering. Stops at the first failed gate.
 - `npm run audit:catalog`: only the complete data/profile pass: references, finite numbers, probabilities, ranges, weighted distributions, provenance, physical DSP, gestures, kits, solo policies and mix settings.
 - `npm run check:audio`: fast gates first (reused when the source fingerprint is unchanged), then PCM regression fixtures, representative instrument mechanisms and two short ensemble excerpts per selected style. `check:full` is an alias; neither renders the catalog.
@@ -21,3 +22,5 @@ Reports in `audit/*.json` contain coverage and actionable findings. Successful r
 All styles and profiles receive structural checks; numerical variations of the same renderer do not require separate audio renders. The audio selector automatically includes newly introduced renderer mechanisms. Explicit IDs are available for changes needing listening or focused diagnosis.
 
 Node checks cover stems, portable mixing and export. Browser checks cover the native master and the PCM buffer used by the player. Passing either says what was measured; it does not claim every device or perceptual arrangement has been verified. Short-excerpt loudness is not a whole-song target. Isolated stem headroom is not reported as a clipping failure.
+
+Elementary probes and playback/export jobs use fresh public offline renderers. Diagnostics report retained PCM and application counters; they do not inspect private WASM heaps. The graph audit reports public RenderStats. Deployment builds run the same type, API and structural gates.

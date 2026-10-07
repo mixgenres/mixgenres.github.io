@@ -7,7 +7,7 @@ import { checkAbort, encodeMp3, wavBlob, yieldToUI } from '../../export/audioEnc
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { computeTrackStemFingerprint, stemCache } from '../cache/stemCache.ts';
 import type { StemCacheEntry } from '../cache/stemCache';
-import { acquireOfflineRenderer, releaseOfflineRenderer } from './offlineRendererPool';
+import { createOfflineRenderer, finishOfflineRender } from './offlineRenderer';
 import type { Performance, PerfNote, PerfCC } from '../band/performanceData.ts';
 import { resolveTrackSound, resolveTrackGain } from './trackSound';
 import { createMasterChain, type MasterChain, type StudioMixState } from '../studio/mixer.ts';
@@ -159,7 +159,7 @@ async function renderPerformance(
   // Accumulate directly into Web Audio bus buffers, avoiding six full-song
   // copies during mastering. Node/raw-stem exports use plain typed arrays.
   const OfflineConstructor = globalThis.OfflineAudioContext ??
-    (globalThis as unknown as { webkitOfflineAudioContext?: typeof OfflineAudioContext }).webkitOfflineAudioContext;
+    (typeof window !== 'undefined' ? window.webkitOfflineAudioContext : undefined);
   if (pcm && typeof window !== 'undefined' && !OfflineConstructor) throw new Error('This browser cannot prepare the studio audio. Try a browser with OfflineAudioContext support.');
   const masterContext = !options.rawStem && !options.bypassWebAudioMaster && OfflineConstructor
     ? new OfflineConstructor(2, totalSamples, sampleRate) : undefined;
@@ -322,7 +322,7 @@ async function renderPerformance(
         let lastYield = performance.now();
         // Acquire only after JS graph/buffer setup; every native operation is
         // inside the cleanup boundary, including the first graph submission.
-        const core = await acquireOfflineRenderer();
+        const core = await createOfflineRenderer();
         try {
         await core.render(currentSig.left, currentSig.right);
         while (cursor < trackSamples) {
@@ -421,7 +421,7 @@ async function renderPerformance(
             await core.render(currentSig.left, currentSig.right);
             syncCount++;
             if (syncCount % 64 === 0) {
-              core.gc();
+              await core.gc();
             }
           }
 
@@ -450,7 +450,7 @@ async function renderPerformance(
           cursor += frames;
         }
 
-        } finally { await releaseOfflineRenderer(core); }
+        } finally { finishOfflineRender(core); }
 
         stem = {
           left: trackLeft,

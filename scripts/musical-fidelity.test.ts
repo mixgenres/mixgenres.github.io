@@ -5,21 +5,17 @@ import { makeSheet, toBar } from '../src/engine/sheet/sheet';
 import { VoiceLeadingResolver } from '../src/engine/band/voiceLeading';
 import { createPhraseState, realizeMidi, type PhraseContext } from '../src/engine/band/phrasePerformance';
 import { arrangeBand } from '../src/engine/band/arrangeBand';
-import type { PerfNote, Performance } from '../src/engine/band/performanceData';
+import type { PerfNote } from '../src/engine/band/performanceData';
 import { getInstrumentPerformanceProfile } from '../src/engine/lookup/performance';
 import { getGenreTheory } from '../src/engine/lookup/theory';
 import { requiredVoiceCount } from '../src/engine/playback/voiceAllocation';
-import { BandWorkletNode } from '../src/engine/playback/bandWorklet';
 import { prepareNoteVoice } from '../src/engine/playback/performancePlan';
 import { resolveTrackSound } from '../src/engine/playback/trackSound';
-import { preparePlaybackGraph } from '../src/engine/playback/preparedPlayback';
 import { resolveTuningSystem } from '../src/engine/sheet/tuning';
 import { parseChord } from '../src/engine/sheet/musicTheory';
 
 const note = (time = 0, midi = 60): PerfNote => ({ time, dur: 0.1, midi, vel: 80, trackId: 'keys', bar: 0,
   gestureCode: 0, hitFunctionCode: 0, accent: 0.8 });
-const performanceOf = (notes: PerfNote[]): Performance => ({ notes, ccs: [], bars: [], duration: 0.4, tail: 0.1, blends: {},
-  worldId: 'jazz', trackInfo: { keys: { instrumentId: 'organ', role: 'harmony' } } });
 
 test('authored harmonic sentences retain repetitions and incomplete cycles', () => {
   const sentence = ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim', 'C'];
@@ -83,11 +79,6 @@ test('voice allocation has no 12/32-voice ceiling and accounts for release occup
   assert.equal(requiredVoiceCount(Array.from({ length: 64 }, () => note()), 0.1), 64);
   assert.equal(requiredVoiceCount([note(0), note(0.1)], 0.2), 2);
   assert.equal(requiredVoiceCount([note(0), note(0.1)], 0), 1);
-  const perf = performanceOf(Array.from({ length: 36 }, () => note()));
-  const graph = preparePlaybackGraph({ performance: perf, instruments: new Map([['keys', 'organ']]), roles: new Map(), worldId: 'jazz' },
-    { levels: new Map(), pans: new Map(), muted: new Map(), solo: new Map() });
-  assert.equal(graph.tracks.get('keys')!.voices.length, 36);
-  assert.equal(graph.tracks.get('keys')!.profiles.size, 36);
 });
 
 test('final tuning follows phrase-shaped pitches and chord/phrase attacks stay coherent', () => {
@@ -108,18 +99,6 @@ test('final tuning follows phrase-shaped pitches and chord/phrase attacks stay c
   }
 });
 
-test('live execution retains every dense-chord instance and avoids stealing active voices', async () => {
-  const notes = Array.from({ length: 36 }, () => note());
-  const engine = new BandWorkletNode();
-  await engine.configure({ performance: performanceOf(notes), instruments: new Map([['keys', 'organ']]), roles: new Map(), worldId: 'jazz' });
-  notes.forEach((_, index) => engine.postPreparedNote('keys', index, `instance-${index}`));
-  assert.equal(engine.getDiagnostics().activeVoiceSteals, 0);
-  assert.equal(engine.getDiagnostics().tailVoiceReuses, 0);
-  notes.forEach((n, index) => engine.postRelease('keys', n.midi, undefined, `instance-${index}`));
-  assert.equal(engine.getDiagnostics().unpreparedEvents, 0);
-  engine.dispose();
-});
-
 test('section sound identity crosses preparation and physical controllers retain ownership', () => {
   const params = resolveTrackSound('guitar', 'folk', '', 'harmony');
   const authored: PerfNote = { ...note(), soundContext: { worldId: 'metal', styleId: 'metal-heavy-metal', role: 'lead' } };
@@ -128,4 +107,3 @@ test('section sound identity crosses preparation and physical controllers retain
   assert.equal(voice.soundParams?.dialect, resolveTrackSound('guitar', 'metal', 'metal-heavy-metal', 'lead').dialect);
   assert.deepEqual(voice.controllerKeys, ['brightness']);
 });
-

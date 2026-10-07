@@ -9,6 +9,9 @@ export const GENRE_MIX_OFFSETS: Record<string, Record<string, number>> = {
 
 /** Context trims after shared source calibration: stage prominence belongs to the ensemble. */
 export const GENRE_INSTRUMENT_MIX_OFFSETS: Record<string, Record<string, number>> = {
+  // Developed Dominican reference/render: the bongo formerly exceeded bass
+  // by 17 dB and güira by 22 dB. Restore the low floor and continuous rasp.
+  bachata: { bass: 8, guira: 10, bongos: -5, guitar: 1.5 },
   tango: { violin: 6, bandoneon: 2, 'upright-bass': -4 },
   flamenco: { guitar: 3 },
   salsa: { trumpet: 3, trombone: 3 },

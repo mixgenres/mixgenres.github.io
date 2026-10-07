@@ -8,7 +8,7 @@ import type { GuestLens, Region, MusicalPattern, Role } from '../../types';
 import type { Sheet, Voice } from '../sheet/sheet.ts';
 import type { InstrumentDef } from '../../data/instruments/schema/instrument-def';
 import type { ResolvedStyle } from '../../data/styles/schema';
-import { PATTERNS_BY_ID } from '../../data/genres';
+import { PATTERNS_BY_ID, PATTERNS_BY_WORLD } from '../../data/genres';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { getInstrumentPerformanceProfile, resolveGenreProfile, type InstrumentPerformanceProfile } from '../../engine/lookup/performance';
 import { getGenreTheory, styleTheoryFor, blendGenreTheory } from '../../engine/lookup/theory';
@@ -209,8 +209,8 @@ function resolveLens(sheet: Sheet, region: Region, track: Voice): LensStack {
 function chooseRhythm(sheet: Sheet, region: Region, track: Voice, style?: ResolvedStyle): RhythmIdea {
   const measure = sheet.measures.find(x => x.regionId === region.id && (x.patternByTrack?.[track.id] || x.patternDetailsByTrack?.[track.id]));
   const pid = measure?.patternByTrack?.[track.id] ?? measure?.patternDetailsByTrack?.[track.id]?.patternId;
-  if (pid && PATTERNS_BY_ID[pid]) return rhythmIdeaFromPattern(PATTERNS_BY_ID[pid], region.genre ?? sheet.worldId, beatsPerBarOf(sheet.timeSignature));
   const g = region.genre ?? sheet.worldId;
+  if (pid && PATTERNS_BY_ID[pid]?.worldId === g) return rhythmIdeaFromPattern(PATTERNS_BY_ID[pid], g, beatsPerBarOf(sheet.timeSignature));
   const role = voiceProfile(track.instrumentId).role;
   const styleText = `${style?.id ?? ''} ${style?.name ?? ''} ${(style?.rhythm?.signatureCell ?? '')} ${(style?.signatureTraits ?? []).join(' ')}`.toLowerCase();
   const candidates = Object.values(PATTERNS_BY_ID).filter(p =>
@@ -229,7 +229,8 @@ function chooseRhythm(sheet: Sheet, region: Region, track: Voice, style?: Resolv
     if (styleText && styleText.split(/\s+/).some((w:string) => w.length > 4 && text.includes(w))) v += 1.5;
     return v;
   };
-  const p = candidates.sort((a,b) => score(b) - score(a) || a.id.localeCompare(b.id))[0] ?? Object.values(PATTERNS_BY_ID).sort((a,b)=>a.id.localeCompare(b.id))[0];
+  const p = candidates.sort((a,b) => score(b) - score(a) || a.id.localeCompare(b.id))[0]
+    ?? (PATTERNS_BY_WORLD[g] ?? []).filter(pattern => pattern.enabled !== false).sort((a,b) => a.id.localeCompare(b.id))[0];
   if (!p) throw new Error('No rhythm definitions available');
   return rhythmIdeaFromPattern(p, g, beatsPerBarOf(sheet.timeSignature));
 }

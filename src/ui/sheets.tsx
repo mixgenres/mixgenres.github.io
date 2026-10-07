@@ -10,6 +10,7 @@ import { BAR_CHOICES } from '../data/barChoices';
 import { FEELS } from '../data/tempoFeels';
 import { genreCategoryId } from '../data/genreCategories';
 import { ENERGY_LABELS } from '../data/performance/energy';
+import type { Sheet as SongSheet } from '../engine/sheet/sheet';
 import type { Region } from '../types';
 import { CHORD_PALETTE, CHORD_MOODS, CHORD_MOOD_ORDER, ChordMood, JAZZ_CHORD_LIBRARY, suggestedPaletteForStyle } from '../engine/lookup/theory';
 import { formSummary } from '../engine/lookup/forms';
@@ -28,7 +29,7 @@ function GenreTile({
 }: {
   key?: React.Key;
   id: string;
-  p: { ground: string; ink: string; signal: string; short: string; [key: string]: any };
+  p: { ground: string; ink: string; signal: string; short: string };
   active: boolean;
   onClick: () => void;
   compact?: boolean;
@@ -1311,7 +1312,7 @@ export function DownloadSheet({
 }: {
   open: boolean;
   onClose: () => void;
-  song: any;
+  song: SongSheet;
   onExport?: (selectedTrackIds: string[], format: ExportFormat) => void;
 }) {
   const [format, setFormat] = useState<ExportFormat>('mp3');
@@ -1321,7 +1322,7 @@ export function DownloadSheet({
   useEffect(() => {
     if (open && song?.tracks) {
       const initial: Record<string, boolean> = {};
-      song.tracks.forEach((t: any) => {
+      song.tracks.forEach(t => {
         initial[t.id] = !t.muted;
       });
       setSelectedTracks(initial);
@@ -1332,7 +1333,7 @@ export function DownloadSheet({
 
   const toggleAll = (select: boolean) => {
     const updated: Record<string, boolean> = {};
-    song.tracks.forEach((t: any) => {
+    song.tracks.forEach(t => {
       updated[t.id] = select;
     });
     setSelectedTracks(updated);
@@ -1341,8 +1342,8 @@ export function DownloadSheet({
   const handleDownload = () => {
     if (onExport) {
       const selectedTrackIds = song.tracks
-        .filter((t: any) => selectedTracks[t.id])
-        .map((t: any) => t.id);
+        .filter(t => selectedTracks[t.id])
+        .map(t => t.id);
       onExport(selectedTrackIds, format);
     }
   };
@@ -1384,13 +1385,13 @@ export function DownloadSheet({
             >
               None
             </button>
-            {['bass', 'percussion'].map(role => <button key={role} onClick={() => setSelectedTracks(Object.fromEntries(song.tracks.map((t: any) => [t.id, role === 'bass' ? t.role === 'bass' : ['drums', 'percussion'].includes(t.role)])))} className="btn-pill cursor-pointer" style={{ background: 'transparent', color: 'var(--ink)' }}>{role === 'bass' ? 'Bass' : 'Percussion'}</button>)}
+            {['bass', 'percussion'].map(role => <button key={role} onClick={() => setSelectedTracks(Object.fromEntries(song.tracks.map(t => [t.id, role === 'bass' ? t.role === 'bass' : ['drums', 'percussion'].includes(t.role)])))} className="btn-pill cursor-pointer" style={{ background: 'transparent', color: 'var(--ink)' }}>{role === 'bass' ? 'Bass' : 'Percussion'}</button>)}
           </div>
         </div>
 
         <div className="flex flex-col gap-1 max-h-56 overflow-y-auto pr-1">
-          {song?.tracks?.map((t: any) => {
-            const instDef = instrument(t.instrumentId);
+          {song?.tracks?.map(t => {
+            const instDef = instrument(t.instrumentId ?? t.instrument);
             const displayName = t.name || instDef?.name || 'Instrument';
             const isChecked = !!selectedTracks[t.id];
             return (

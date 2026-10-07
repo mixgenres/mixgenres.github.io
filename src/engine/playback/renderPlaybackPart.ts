@@ -21,7 +21,7 @@ interface WorkerResult {
   performance?: Performance;
   sheet?: Sheet;
   error?: string;
-  runtime?: { initializedRuntimes: number; liveProcessors: number; heapBytes: number };
+  runtime?: { initializedRuntimes: number; activeRenders: number };
 }
 interface Job {
   payload: PlaybackWorkerRequest;
@@ -33,10 +33,14 @@ interface Job {
   abort: () => void;
   worker?: Worker;
 }
+/** OfflineRenderer has reset/gc, but no public dispose call. Retire its owning
+ * worker periodically so the WASM environment has a defined lifetime. */
+export const MAX_RENDERERS_PER_WORKER = 64;
 const pending: Job[] = [];
 const idle: Worker[] = [];
-const runtimes = new Map<Worker, { initializedRuntimes: number; liveProcessors: number; heapBytes: number }>();
+const runtimes = new Map<Worker, { initializedRuntimes: number; activeRenders: number }>();
 let running = 0;
+let retiredWorkerRuntimes = 0;
 let unavailable = false;
 let backgroundPreparation = false;
 const cancelled = () => new DOMException('Playback rendering superseded', 'AbortError');
@@ -203,8 +207,13 @@ function finish(job: Job, reuse: boolean) {
   if (!worker) return;
   job.worker = undefined;
   worker.onmessage = null; worker.onerror = null; worker.onmessageerror = null;
-  if (reuse && !unavailable && (!backgroundPreparation || !idle.length)) idle.push(worker);
-  else { worker.terminate(); runtimes.delete(worker); }
+  const runtime = runtimes.get(worker);
+  const reachedLifetimeLimit = (runtime?.initializedRuntimes ?? 0) >= MAX_RENDERERS_PER_WORKER;
+  if (reuse && !reachedLifetimeLimit && !unavailable && (!backgroundPreparation || !idle.length)) idle.push(worker);
+  else {
+    if (reachedLifetimeLimit) retiredWorkerRuntimes++;
+    worker.terminate(); runtimes.delete(worker);
+  }
   job.signal?.removeEventListener('abort', job.abort);
   running--;
   queueMicrotask(dispatch);
@@ -259,7 +268,7 @@ function dispatch() {
 }
 
 export function playbackWorkerStats() {
-  return { limit: concurrency(), running, idle: idle.length, queued: pending.length,
+  return { limit: concurrency(), running, idle: idle.length, queued: pending.length, retiredWorkerRuntimes,
     runtimes: [...runtimes.values()].reduce((sum, runtime) => sum + runtime.initializedRuntimes, 0),
-    heapBytes: [...runtimes.values()].reduce((sum, runtime) => sum + runtime.heapBytes, 0) };
+    activeRenders: [...runtimes.values()].reduce((sum, runtime) => sum + runtime.activeRenders, 0) };
 }

@@ -65,7 +65,7 @@ assert.ok(arrangeBand(customSolo).notes.some(n => n.bar >= customRegion.start &&
 console.log('Solo performance checks passed: genre coverage, accompaniment, trading, names, energy, inactive players, lifecycle and style overrides.');
 
 const drumTrading = { trackIds: ['horn', 'drum'], trackRoles: { horn: 'lead', drum: 'percussion' }, mode: 'trading' as const, policy: GENRE_SOLO_DEFINITIONS.jazz.modes.trading };
-const backing = { id: 'piano', role: 'harmony' } as any;
+const backing = { ...makeSheet('jazz').tracks[0], id: 'piano', role: 'harmony' };
 assert.equal(supportsSolo(drumTrading, backing, ['horn']), true);
 assert.equal(supportsSolo(drumTrading, backing, ['drum']), false, 'backing rests during a jazz drum trade');
 

@@ -8,7 +8,7 @@ import { createCatalogSong, catalogIdForStyle } from '../src/engine/sheet/songCa
 
 const report=document.querySelector<HTMLPreElement>('#report')!;
 let song: Sheet | undefined, started=0, preparedMs: number | undefined, fourSecondsMs: number | undefined, compileMs: number | undefined;
-let stress: {edits:number;peakRetainedPCMBytes:number;peakWorkerHeapBytes:number;error?:string} | undefined;
+let stress: {edits:number;peakRetainedPCMBytes:number;peakActiveRenders:number;error?:string} | undefined;
 let player=new SongPlayer(()=>update(),()=>update(),true);
 let previewRequest=0,previewTimer:ReturnType<typeof setTimeout> | undefined;
 function cancelPreview() {previewRequest++;clearTimeout(previewTimer);}
@@ -26,7 +26,7 @@ function update() {
   const retainedPCMBytes=part.bytes+mix.bytes+player.bufferedBytes;
   if(stress) {
     stress.peakRetainedPCMBytes=Math.max(stress.peakRetainedPCMBytes,retainedPCMBytes);
-    stress.peakWorkerHeapBytes=Math.max(stress.peakWorkerHeapBytes,workers.heapBytes);
+    stress.peakActiveRenders=Math.max(stress.peakActiveRenders,workers.activeRenders);
   }
   report.textContent=JSON.stringify({status:player.snapshot.status,secondsAhead:player.preparedAheadSeconds,
     backgroundPreparationMs:preparedMs,fourSecondsPreparationMs:fourSecondsMs,compileMs,
@@ -67,7 +67,7 @@ document.querySelector<HTMLButtonElement>('#edit')!.onclick=event=>{
   if(song){changed(setSongBpm(song,song.bpm===120?121:120));playOnce(event.timeStamp);}
 };
 document.querySelector<HTMLButtonElement>('#stress')!.onclick=async()=>{
-  stress={edits:0,peakRetainedPCMBytes:0,peakWorkerHeapBytes:0};
+  stress={edits:0,peakRetainedPCMBytes:0,peakActiveRenders:0};
   try {
     for(let i=0;i<20;i++) {
       changed(setSongBpm(song ?? makeSheet('tango','tango-golden-age'),120+i));

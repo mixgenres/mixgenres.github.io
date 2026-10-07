@@ -10,14 +10,20 @@ const unsafeKeys = new Set(['__proto__', 'prototype', 'constructor']);
 
 /** Recursive partials preserve sibling leaves; arrays replace, undefined inherits. */
 export function mergeMixOverrides<T extends object>(base: T, patch?: MixOverride<T>): T {
-  const out = structuredClone(base) as Record<string, unknown>;
-  for (const [key, value] of Object.entries(patch ?? {})) {
-    if (unsafeKeys.has(key) || value === undefined || value === null) continue;
-    out[key] = record(value)
-      ? mergeMixOverrides(record(out[key]) ? out[key] as Record<string, unknown> : {}, value as MixOverride<Record<string, unknown>>)
-      : structuredClone(value);
-  }
-  return out as T;
+  const out = structuredClone(base);
+  const merge = (target: Record<string, unknown>, values: Record<string, unknown>) => {
+    for (const [key, value] of Object.entries(values)) {
+      if (unsafeKeys.has(key) || value === undefined || value === null) continue;
+      const previous = target[key];
+      if (record(value)) {
+        const child = record(previous) ? previous : {};
+        merge(child, value);
+        target[key] = child;
+      } else target[key] = structuredClone(value);
+    }
+  };
+  if (record(out) && record(patch)) merge(out, patch);
+  return out;
 }
 
 const numericKeys = new Set(['dryness', 'bassForward', 'width', 'brightness', 'compressionRatio', 'subHarmonics',
@@ -66,14 +72,15 @@ export function resolveMixLayers(world: WorldContract, genreId: string, layers: 
   const contract = structuredClone(DYNAMIC_MIX_DEFAULTS);
   const provenance: ResolvedStyle['provenance'] = {};
   const trace: ResolvedStyle['trace'] = [];
-  const apply = (target: Record<string, unknown>, patch: Record<string, unknown>, path: string, source: Source) => {
+  const apply = (target: unknown, patch: unknown, path: string, source: Source) => {
+    if (!record(target) || !record(patch)) throw new Error(`Invalid mix object at ${path}`);
     for (const [key, raw] of Object.entries(patch)) {
       if (unsafeKeys.has(key) || raw == null) continue;
       const nextPath = `${path}.${key}`;
       if (record(raw)) {
         if (target[key] !== undefined && !record(target[key])) continue;
         if (!record(target[key])) target[key] = {};
-        apply(target[key] as Record<string, unknown>, raw, nextPath, source);
+        apply(target[key], raw, nextPath, source);
       } else {
         const value = safeValue(nextPath, raw);
         if (value === undefined) continue;
@@ -86,11 +93,11 @@ export function resolveMixLayers(world: WorldContract, genreId: string, layers: 
       }
     }
   };
-  const target = contract as unknown as Record<string, unknown>;
+  const target = contract;
   apply(target, target, 'sound.mix', { source: 'default', sourceId: 'dynamicMixDefaults' });
   apply(target, { character: world.timbreSpace.mixCharacter ?? {} }, 'sound.mix', { source: 'genre', sourceId: genreId });
-  apply(target, (world.timbreSpace.mix ?? {}) as unknown as Record<string, unknown>, 'sound.mix', { source: 'genre', sourceId: genreId });
-  for (const layer of layers) apply(target, (layer.mix ?? {}) as Record<string, unknown>, 'sound.mix', layer.source);
+  apply(target, world.timbreSpace.mix ?? {}, 'sound.mix', { source: 'genre', sourceId: genreId });
+  for (const layer of layers) apply(target, layer.mix ?? {}, 'sound.mix', layer.source);
   const freeze = (v: object) => { for (const child of Object.values(v)) if (child && typeof child === 'object') freeze(child); Object.freeze(v); };
   freeze(contract); freeze(provenance); freeze(trace);
   return Object.freeze({ contract, provenance, trace });

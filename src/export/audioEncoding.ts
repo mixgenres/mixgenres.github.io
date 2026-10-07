@@ -1,3 +1,4 @@
+export type Mp3WorkerReply = { progress: number } | { error: string } | { blob: Blob };
 export function checkAbort(signal?: AbortSignal) { if (signal?.aborted) throw new DOMException('Export cancelled', 'AbortError'); }
 export const yieldToUI = () => new Promise<void>(resolve => setTimeout(resolve, 0));
 /** Reuse one small PCM window instead of allocating two full-length Int16 buffers. */
@@ -42,10 +43,10 @@ export async function encodeMp3(left: Float32Array, right: Float32Array, sampleR
     const abort = () => { clean(); reject(new DOMException('Export cancelled', 'AbortError')); };
     signal?.addEventListener('abort', abort, { once: true });
     worker.onerror = event => { clean(); reject(new Error(event.message || 'MP3 worker failed')); };
-    worker.onmessage = ({ data }) => {
-      if (data.progress !== undefined) onProgress?.(data.progress);
-      else if (data.error) { clean(); reject(new Error(data.error)); }
-      else if (data.blob) { clean(); resolve(data.blob); }
+    worker.onmessage = ({ data }: MessageEvent<Mp3WorkerReply>) => {
+      if ('progress' in data) onProgress?.(data.progress);
+      else if ('error' in data) { clean(); reject(new Error(data.error)); }
+      else if ('blob' in data) { clean(); resolve(data.blob); }
     };
     try { worker.postMessage({ left, right, sampleRate }, left.buffer === right.buffer ? [left.buffer] : [left.buffer, right.buffer]); }
     catch (error) { clean(); reject(error); }

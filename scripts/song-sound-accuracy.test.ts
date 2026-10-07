@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import OfflineRenderer from '@elemaudio/offline-renderer';
+import { AudioRenderer as OfflineRenderer } from '../src/engine/playback/offlineRenderer';
 import { renderVoice, midiToFreq } from '../src/engine/playback/elementaryEngine';
 import { prepareNoteVoice } from '../src/engine/playback/performancePlan';
 import { resolveTrackSound } from '../src/engine/playback/trackSound';

@@ -1,11 +1,10 @@
 /** Catalog-wide structural evidence accompanying the decoded reference survey. */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { writeFileSync } from 'node:fs';
+import { readReferenceInventory } from './lib/referenceData';
 import { catalogIdForStyle, createCatalogSong } from '../src/engine/sheet/songCatalog';
 import { compileWholeSong } from '../src/engine/band/arrangeBand';
 import { INSTRUMENTS_BY_ID } from '../src/engine/lookup/instruments';
-const inventory = JSON.parse(readFileSync('audit/all-samples/inventory.json', 'utf8')) as {
-  entries: Array<{ matches: Array<{ genre: string; styleId: string; name: string }> }>;
-};
+const inventory = readReferenceInventory();
 const rows = [];
 for (const match of inventory.entries.flatMap(entry => entry.matches)) {
   const sheet = createCatalogSong(catalogIdForStyle(match.styleId)), performance = compileWholeSong(sheet);

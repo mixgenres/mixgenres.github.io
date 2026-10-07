@@ -1,4 +1,4 @@
-import OfflineRenderer from '@elemaudio/offline-renderer';
+import { AudioRenderer as OfflineRenderer } from '../src/engine/playback/offlineRenderer';
 import { INSTRUMENTS_BY_ID } from '../src/engine/lookup/instruments';
 import { midiToFreq, renderVoice } from '../src/engine/playback/elementaryEngine';
 import { prepareNoteVoice } from '../src/engine/playback/performancePlan';
