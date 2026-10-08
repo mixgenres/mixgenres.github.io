@@ -1,7 +1,7 @@
 import { isRecord } from './lib/unknownData';
 import { makeSheet } from '../src/engine/sheet/sheet';
 import { compileWholeSong } from '../src/engine/band/arrangeBand';
-import { renderSongMix } from '../src/engine/playback/renderSongMix';
+import { renderSampleMix } from '../src/engine/playback/renderSongMix';
 import { renderPerformanceToAudio } from '../src/engine/playback/mp3Export';
 import type { RenderDiagnostic } from '../src/engine/studio/audioMetrics';
 import { measureAudio } from '../src/engine/studio/audioMetrics';
@@ -58,17 +58,16 @@ button.onclick = async () => {
             if (event.stage !== 'bus' && event.metrics.samplePeak < 1e-7) add('silent-pcm', scope, 'Audible part rendered silence');
           }
           if (!audio.buffer || audio.buffer.length !== audio.left.length) throw new Error('Native playback buffer is missing or truncated');
-          const prepared = await renderSongMix(excerptPerformance(performance, window.start, 2), sheet, new AbortController().signal);
-          if (!prepared.buffer) throw new Error('Background playback bypassed the native master');
-          const preparedMetrics = measureAudio(prepared.left, prepared.right, prepared.sampleRate);
-          const levelDifferenceDb = Math.abs((preparedMetrics.rmsDbfs ?? -120) - (output.metrics.rmsDbfs ?? -120));
+          const sampleMix = await renderSampleMix(excerptPerformance(performance, window.start, 2), sheet, new AbortController().signal);
+          const sampleMetrics = measureAudio(sampleMix.left, sampleMix.right, sampleMix.sampleRate);
+          const levelDifferenceDb = Math.abs((sampleMetrics.rmsDbfs ?? -120) - (output.metrics.rmsDbfs ?? -120));
           let sampleDifference = 0;
-          if (prepared.left.length !== audio.left.length) add('playback-length', `${style.id}/${window.name}`, 'Background playback has a different duration from export');
-          for (let n = 0; n < Math.min(prepared.left.length, audio.left.length); n++) sampleDifference = Math.max(sampleDifference,
-            Math.abs(prepared.left[n] - audio.left[n]), Math.abs(prepared.right[n] - audio.right[n]));
-          if (preparedMetrics.nonFiniteSamples || preparedMetrics.samplePeak < 1e-7) add('playback-pcm', `${style.id}/${window.name}`, 'Background mix is silent or invalid');
-          if (levelDifferenceDb > .5) add('playback-level', `${style.id}/${window.name}`, `Background mix differs from export by ${levelDifferenceDb.toFixed(2)} dB`);
-          windows.push({ ...window, output: output.metrics, prepared: preparedMetrics, levelDifferenceDb, sampleDifference, frames: audio.buffer.length });
+          if (sampleMix.left.length !== audio.left.length) add('playback-length', `${style.id}/${window.name}`, 'Sample mix has a different duration from export');
+          for (let n = 0; n < Math.min(sampleMix.left.length, audio.left.length); n++) sampleDifference = Math.max(sampleDifference,
+            Math.abs(sampleMix.left[n] - audio.left[n]), Math.abs(sampleMix.right[n] - audio.right[n]));
+          if (sampleMetrics.nonFiniteSamples || sampleMetrics.samplePeak < 1e-7) add('playback-pcm', `${style.id}/${window.name}`, 'Sample mix is silent or invalid');
+          if (levelDifferenceDb > .5) add('playback-level', `${style.id}/${window.name}`, `Sample mix differs from export by ${levelDifferenceDb.toFixed(2)} dB`);
+          windows.push({ ...window, output: output.metrics, sampleMix: sampleMetrics, levelDifferenceDb, sampleDifference, frames: audio.left.length });
         }
         cases.push({ styleId: style.id, mechanisms: styleMechanisms(style), windows });
       } catch (error) { add('browser-render', style.id, String(error)); }

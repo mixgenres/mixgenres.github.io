@@ -10,8 +10,8 @@ export const bombo_leguero: InstrumentDef = {
     high: 38
   },
   voicing: "unpitched",
-  elementaryModel: 4,
-  makeupGain: 0.8644,
+  
+  
   polyphony: 8,
   note: "Hollowed-tree trunk Argentine drum with goatskin heads said to be heard from leagues (leguas) away",
   acousticProfile: {

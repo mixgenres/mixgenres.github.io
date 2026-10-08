@@ -10,8 +10,8 @@ export const gongs: InstrumentDef = {
     high: 57
   },
   voicing: "unpitched",
-  elementaryModel: 18,
-  makeupGain: 0.743,
+  
+  
   polyphony: 8,
   note: "Suspended hammered bronze circular disks producing deep fundamental roars and shimmering overtone blooms",
   acousticProfile: {

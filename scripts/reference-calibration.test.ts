@@ -1,38 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { resolveTrackSound } from '../src/engine/playback/trackSound';
-import { prepareNoteVoice } from '../src/engine/playback/performancePlan';
-import { renderPerformanceToAudio } from '../src/engine/playback/mp3Export';
-import { voiceTailSeconds } from '../src/engine/playback/voiceAllocation';
+import { compileSamplePlan, SAMPLE_RELEASE_RESERVE } from '../src/engine/playback/soundfont/plan';
 import { makeSheet } from '../src/engine/sheet/sheet';
 import { compileSongPipeline } from '../src/engine/pipeline/compileSong';
 import type { PerfNote, Performance } from '../src/engine/band/performanceData';
 
-for (const unison of [1, 3]) test(`sine patch with ${unison} oscillator(s) keeps its waveform and allocates its release`, async () => {
-  const params = resolveTrackSound('synth', 'ambient', 'ambient-atmospheric', 'lead');
-  params.synthPatch = { id: 'test-sine-unison', name: 'Test sine', oscillator: 'sine', filter: 'lowpass',
-    cutoffHz: 3000, resonance: 0, attackSeconds: .02, decaySeconds: .1, sustain: 1, releaseSeconds: 2.5, unison };
-  params.synthPatchId = params.synthPatch.id;
+test('sample-backed synth plan retains the authored note and release budget', () => {
   const note: PerfNote = { trackId: 'p', time: 0, dur: 1.5, bar: 0, midi: 69, vel: 80, gestureCode: 0, hitFunctionCode: 0, accent: .8 };
-  const voice = prepareNoteVoice(note, params, 'ambient', 'ambient-atmospheric');
-  voice.soundParams = params;
-  assert.ok(voiceTailSeconds(params, voice) >= 2.5);
-  note.physical = { key: `sine-unison-calibration-${unison}`, voice, tailSeconds: 2.5 };
-  const performance: Performance = { notes: [note], ccs: [], bars: [], duration: 1.5, tail: 2.5, blends: {}, trackInfo: { p: { instrumentId: 'synth', role: 'lead' } } };
-  const audio = await renderPerformanceToAudio(performance, { trackInstruments: new Map([['p', 'synth']]), rawStem: true });
-  assert.ok(audio.left.every(Number.isFinite));
-  const segment = audio.left.subarray(Math.round(audio.sampleRate * .2), Math.round(audio.sampleRate * 1.2));
-  const energy = (frequency: number) => {
-    let real = 0, imaginary = 0;
-    for (let i = 0; i < segment.length; i++) {
-      const value = segment[i] * (.5 - .5 * Math.cos(2 * Math.PI * i / (segment.length - 1)));
-      const phase = 2 * Math.PI * frequency * i / audio.sampleRate;
-      real += value * Math.cos(phase); imaginary += value * Math.sin(phase);
-    }
-    return real ** 2 + imaginary ** 2;
-  };
-  assert.ok(energy(440) > 1e-5);
-  assert.ok(energy(880) < energy(440) * .001, 'unison must not inject a sawtooth second harmonic');
+  const performance: Performance = { notes: [note], ccs: [], bars: [], duration: 1.5, tail: 0, blends: {}, trackInfo: { p: { instrumentId: 'synth', role: 'lead' } } };
+  const plan = compileSamplePlan(performance, { trackInstruments: new Map([['p', 'synth']]), worldId: 'ambient', styleId: 'ambient-atmospheric' });
+  assert.equal(plan.events.filter(event => event.type === 'on').length, 1);
+  assert.equal(plan.events.find(event => event.type === 'on')?.patch.pack, 'electronic');
+  assert.ok(plan.duration >= note.time + note.dur);
+  assert.ok(SAMPLE_RELEASE_RESERVE > 0, 'the shared sample planner has a finite fallback tail');
 });
 
 test('default ambient has independent overlapping registers and flamenco opens with guitar alone', () => {

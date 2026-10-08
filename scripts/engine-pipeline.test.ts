@@ -1,12 +1,10 @@
 import { performanceFixture } from './lib/playbackFixtures';
-import type { RenderedPerformanceAudio } from '../src/engine/playback/mp3Export';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { makeSheet } from '../src/engine/sheet/sheet';
 import { compileSongPipeline } from '../src/engine/pipeline/compileSong';
 import { compileNotatedScore } from '../src/engine/score/notatedScore';
 import { cacheStats } from '../src/engine/cache/lru';
-import { preparePartAudio, preparedAudioKey, clearPreparedAudio } from '../src/engine/cache/preparedAudio';
 import { notatedDrum } from '../src/engine/score/percussionNotation';
 import { exportMusicXml } from '../src/engine/score/musicXml';
 import { interpretRelationships } from '../src/engine/band/interactions';
@@ -90,19 +88,4 @@ test('call/answer uses the actual call and local chord while preserving literal 
   const call = event(from.id,67,0), answer = event(to.id,90,.5), literal = { ...event(to.id,83,1),authoredPitch:true };
   const notes=[call,answer,literal]; interpretRelationships(notes,song,region);
   assert.notEqual(answer.midi,90); assert.equal(literal.midi,83);
-});
-
-test('raw PCM jobs deduplicate across consumers, survive one cancellation and exclude UI mixer controls', async () => {
-  clearPreparedAudio();
-  const song = makeSheet('tango'), perf = compileSongPipeline(song).performance, track=song.tracks[0];
-  const options={rawStem:true,selectedTrackIds:[track.id],trackInstruments:new Map([[track.id,track.instrumentId!]])};
-  assert.equal(preparedAudioKey(perf,options),preparedAudioKey(perf,{...options,mixState:{volume:{[track.id]:.2},pan:{[track.id]:1}}}));
-  let calls=0, finish!:(audio:RenderedPerformanceAudio)=>void;
-  const render=(_signal:AbortSignal)=>{calls++;return new Promise<RenderedPerformanceAudio>(resolve=>{finish=resolve;});};
-  const cancel=new AbortController(), a=preparePartAudio('shared',cancel.signal,render), b=preparePartAudio('shared',undefined,render);
-  const rejected=assert.rejects(a,{name:'AbortError'});
-  await Promise.resolve(); cancel.abort(); await rejected;
-  finish({sampleRate:44100,left:new Float32Array([.2]),right:new Float32Array([.3])});
-  const result=await b; assert.equal(calls,1);
-  const cached=await preparePartAudio('shared',undefined,render); assert.strictEqual(cached.left,result.left); assert.equal(calls,1);
 });

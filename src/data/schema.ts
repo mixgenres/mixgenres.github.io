@@ -197,7 +197,7 @@ export interface MusicalPattern {
   subdivisions: number; // e.g. 16 per measure
 
   onsetGrid: number[]; // 16th note indices where events hit (0..15 for 1-bar 4/4)
-  /** Rich style grammar; onsetGrid is retained as the legacy renderer projection. */
+  /** Rich style grammar; onsetGrid remains a compact compatibility projection. */
   events?: PatternEvent[];
   /** Optional per-onset drum/perc articulation. */
   hitGrid?: DrumHitType[];

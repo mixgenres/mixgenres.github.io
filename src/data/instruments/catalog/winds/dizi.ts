@@ -5,8 +5,8 @@ export const dizi: InstrumentDef = {
   name: "Dizi",
   family: "winds",
   voicing: "single",
-  elementaryModel: 7,
-  makeupGain: 0.6882,
+  
+  
   polyphony: 4,
   note: "Chinese transverse bamboo flute equipped with a mo-kong membrane hole covered by a thin reed tissue (dimo), radiating bright, buzzing, resonant, and soaring lyrical timbre",
   acousticProfile: {
@@ -79,11 +79,7 @@ export const dizi: InstrumentDef = {
       breathNoise: 0.24,
       transientSharpness: 0.62
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "Vibrating dimo membrane imparts a brilliant signature buzzing harmonic overtone series.",
-      "Higher breath pressure energizes the membrane into dramatic resonant brightness.",
-      "Rapid finger popping against tone holes generates crisp acoustic percussion."
-    ]
+    
+    
   }
 };

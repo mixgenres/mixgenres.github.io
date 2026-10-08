@@ -11,8 +11,8 @@ export const darbuka: InstrumentDef = {
   },
   voicing: "unpitched",
   bodyConstruction: "skin-faced",
-  elementaryModel: 4,
-  makeupGain: 1.540,
+  
+  
   polyphony: 8,
   note: "Middle Eastern goblet drum made of cast aluminum or ceramic with synthetic head, delivering booming resonant center Doums and lightning finger-snap Teks and Kaks",
   acousticProfile: {
@@ -65,11 +65,7 @@ export const darbuka: InstrumentDef = {
       transientSharpness: 0.92,
       bodyResonance: 0.86
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "Doum: striking head center allows goblet horn to amplify deep bass Helmholtz resonance.",
-      "Tek: high-tension snap of index/ring finger on the metal rim for razor-sharp transient.",
-      "Held horizontally under non-dominant arm, allowing lightning split-finger rolls."
-    ]
+    
+    
   }
 };

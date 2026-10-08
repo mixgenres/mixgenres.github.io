@@ -8,8 +8,8 @@ export const berimbau: InstrumentDef = {
   courses: 1,
   bodyConstruction: "gourd",
   excitationType: "hard-pick",
-  elementaryModel: 0,
-  makeupGain: 1.0885,
+  
+  
   polyphony: 4,
   note: "Afro-Brazilian musical bow of flexible biriba wood, single steel wire (arame), tuned gourd resonator (cabaça), baqueta stick strike, dobra coin, and caxixi rattle",
   acousticProfile: {
@@ -59,11 +59,7 @@ export const berimbau: InstrumentDef = {
       bodyResonance: 0.88,
       transientSharpness: 0.86
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "Coin or smooth stone pressed against wire shifts pitch by a half or whole step with metallic buzz.",
-      "Moving gourd against performer abdomen modulates open/closed acoustic cavity filtering (wah effect).",
-      "Baqueta wooden stick strikes wire while simultaneously shaking the woven caxixi rattle."
-    ]
+    
+    
   }
 };

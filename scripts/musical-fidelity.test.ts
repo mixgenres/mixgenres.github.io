@@ -8,7 +8,6 @@ import { arrangeBand } from '../src/engine/band/arrangeBand';
 import type { PerfNote } from '../src/engine/band/performanceData';
 import { getInstrumentPerformanceProfile } from '../src/engine/lookup/performance';
 import { getGenreTheory } from '../src/engine/lookup/theory';
-import { requiredVoiceCount } from '../src/engine/playback/voiceAllocation';
 import { prepareNoteVoice } from '../src/engine/playback/performancePlan';
 import { resolveTrackSound } from '../src/engine/playback/trackSound';
 import { resolveTuningSystem } from '../src/engine/sheet/tuning';
@@ -73,12 +72,6 @@ test('grid conversion retains all tuplets and fine subdivisions', () => {
   const dense = toBar(Array.from({ length: 30 }, (_, i) => i), undefined, undefined, 30, 0);
   assert.equal(dense.onsets.length, 30);
   assert.equal(new Set(dense.onsets).size, 30);
-});
-
-test('voice allocation has no 12/32-voice ceiling and accounts for release occupancy', () => {
-  assert.equal(requiredVoiceCount(Array.from({ length: 64 }, () => note()), 0.1), 64);
-  assert.equal(requiredVoiceCount([note(0), note(0.1)], 0.2), 2);
-  assert.equal(requiredVoiceCount([note(0), note(0.1)], 0), 1);
 });
 
 test('final tuning follows phrase-shaped pitches and chord/phrase attacks stay coherent', () => {

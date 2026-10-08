@@ -8,8 +8,8 @@ export const bouzouki: InstrumentDef = {
   courses: 2,
   bodyConstruction: "wood-box",
   excitationType: "hard-pick",
-  elementaryModel: 0,
-  makeupGain: 7.7485,
+  
+  
   polyphony: 8,
   note: "Long-necked teardrop lute with four double courses tuned in unisons and octaves, producing expansive metallic chime, driving countermelodies, and modal drones",
   acousticProfile: {
@@ -59,11 +59,7 @@ export const bouzouki: InstrumentDef = {
       bodyResonance: 0.74,
       transientSharpness: 0.78
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "Octave-tuned lower courses deliver a rich chiming chorus effect.",
-      "Long scale length provides high string tension with extended singing sustain.",
-      "Modal open tunings (GDAD / CFAD) facilitate ringing open-string drones."
-    ]
+    
+    
   }
 };

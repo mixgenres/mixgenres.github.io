@@ -10,8 +10,8 @@ export const log_drum: InstrumentDef = {
     high: 50
   },
   voicing: "unpitched",
-  elementaryModel: 4,
-  makeupGain: 1.4769,
+  
+  
   polyphony: 8,
   note: "Hollowed resonant hardwood log with tuned acoustic tongue slits delivering organic, woody percussive melodies",
   acousticProfile: {

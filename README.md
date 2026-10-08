@@ -2,11 +2,24 @@
 
 MixGenres is a browser song editor and synthesizer. Choose a style, start from its complete example arrangement, edit sections, chords, patterns and instrumental parts, then play or export it.
 
+## Playback
+
+Playback and audio exports use one SoundFont engine. The score compiler preserves phrasing, articulation, tuning and part relationships; a compact per-part event plan drives the live AudioWorklet or direct offline renderer. Both use the same mixer and master.
+
+Seventeen selectively packaged banks total 131.5 MiB and download only as needed. They combine GeneralUser GS with dedicated Spanish nylon/steel guitars, upright bass, tango bandoneon, and recorded piano, kit and hand-percussion sources. World instruments without dedicated recordings use explicit family approximations. See [architecture, measurements and limitations](docs/soundfont-playback.md) and [bank provenance/reproduction](src/assets/soundfonts/README.md).
+
+```bash
+npm run test:soundfont
+npm run audit:soundfont
+npm run benchmark:soundfont
+npm run render-song -- flamenco /tmp/flamenco.mp3 16 --bounded --ensemble
+```
+
 ## Example songs
 
 Every authored style has one complete example arrangement to start from. Choosing a style or starting over loads its authored sections, tempo, ensemble and harmonic cells; `reference-songs.txt` remains the internal source/credit list.
 
-These are editable score adaptations, not verified transcriptions or reproductions of the recordings. Bar counts, tempo and harmony may be approximate. Melodies come from the pattern vocabulary. An ensemble inherited from a style is not evidence of the recording's exact personnel. Drone anchors and Western bar grids also simplify traditions with different pitch and time systems. Representative selections for repertoire references are editorial choices, not rankings of historical significance. DSP instruments approximate acoustic and electronic sources; structural tests cannot certify how authentic they sound.
+These are editable score adaptations, not verified transcriptions or reproductions of the recordings. Bar counts, tempo and harmony may be approximate. Melodies come from the pattern vocabulary. An ensemble inherited from a style is not evidence of the recording's exact personnel. Drone anchors and Western bar grids also simplify traditions with different pitch and time systems. Representative selections for repertoire references are editorial choices, not rankings of historical significance. SoundFont mappings approximate acoustic and electronic sources; structural tests cannot certify how authentic they sound.
 
 ## Authoring and metadata
 
@@ -29,7 +42,7 @@ npm run check:audio
 npm run build:static
 ```
 
-`check` runs catalog validation, representative complete-example generation and focused musical, score, mix and playback regressions. `check:audio` adds targeted PCM and export checks. `build:static` only bundles the app; `build` and deployment run strict type, API boundary and structural checks. See the [engine API contract](docs/api-usage-audit.md). Transient reports are written under `audit` and are not authored catalog data.
+`check` runs catalog validation, representative complete-example generation and focused musical, score, mix and playback regressions. `check:audio` adds targeted rendering and export checks. `build:static` only bundles the app; `build` and deployment run strict type, API boundary and structural checks. `scripts/audit-api-usage.ts` enforces the small runtime boundary. Transient reports are written under `audit` and are not authored catalog data.
 
 ```bash
 npm run audit:catalog
@@ -38,4 +51,4 @@ npm run test:score
 npm run render-song -- salsa /tmp/salsa.mp3
 ```
 
-Playback and audio export use the shared DSP preparation and mix pipeline. Bounded caches reuse prepared instrument audio across compatible edits; versioned IndexedDB may retain physical sections between sessions. First-time synthesis can take time, especially for long arrangements. Audio tests cover selected mechanisms and excerpts, not listening verification of every reference recording.
+Playback and export share the score, sample event plan, mix pipeline and versioned SoundFont banks. Banks are demand-loaded and cached as compressed assets by the browser; audio is rendered per part when requested, with no pre-rendered PCM cache. First-time bank loading can take time, especially for large banks. Audio tests cover selected techniques and excerpts, not listening verification of every reference recording.

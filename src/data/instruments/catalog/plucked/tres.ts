@@ -8,8 +8,8 @@ export const tres: InstrumentDef = {
   courses: 3,
   bodyConstruction: "wood-box",
   excitationType: "plectrum",
-  elementaryModel: 0,
-  makeupGain: 1.942,
+  
+  
   polyphony: 8,
   note: "Cuban 3 double-course guitar (G4/G3 octave, C4/C4 unison, E4/E3 octave) creating metallic biting guajeos",
   acousticProfile: {

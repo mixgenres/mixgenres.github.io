@@ -234,7 +234,7 @@ test('live/offline scheduling uses identical lanes and never rebuilds strips or 
   assert.ok(a.nodes.every(node => node.disconnected));
 });
 
-test('portable runtime executes the timeline deterministically without mutating cached stems', () => {
+test('portable runtime executes the timeline deterministically without mutating part audio', () => {
   const scenes = timeline(), sampleRate = 8000;
   const l = new Float32Array(800).fill(.1), r = new Float32Array(800).fill(.2);
   const before = l.slice();
@@ -248,8 +248,8 @@ test('portable runtime executes the timeline deterministically without mutating 
 });
 
 // Compatibility fixtures lacking a timeline must remain valid Performance objects.
-const legacy: Performance = { notes: [], ccs: [], bars: [], duration: 0, tail: 0, blends: {} };
-test('legacy performances do not require mix metadata', () => assert.equal(legacy.mixTimeline, undefined));
+const minimal: Performance = { notes: [], ccs: [], bars: [], duration: 0, tail: 0, blends: {} };
+test('minimal performances do not require mix metadata', () => assert.equal(minimal.mixTimeline, undefined));
 
 
 test('render excerpts retain scene ramps, initial interpolation and ensemble headroom', () => {

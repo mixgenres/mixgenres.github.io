@@ -43,7 +43,7 @@ export interface BusMixPolicy {
   roleBus: Record<string, MixBusId>;
 }
 export interface MixContract {
-  /** Legacy/un-calibrated worlds resolve a neutral timeline until explicitly enabled. */
+  /** Uncalibrated worlds resolve a neutral timeline until explicitly enabled. */
   enabled?: boolean;
   character: MixCharacter;
   stage?: StageMixPolicy; dynamics?: DynamicsMixPolicy; masking?: MaskingPolicy; ambience?: AmbiencePolicy;

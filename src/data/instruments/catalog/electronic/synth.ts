@@ -5,8 +5,8 @@ export const synth: InstrumentDef = {
   name: "Synthesizer",
   family: "electronic",
   voicing: "single",
-  elementaryModel: 9,
-  makeupGain: 0.548,
+  
+  
   polyphony: 8,
   note: "Lead synth voice",
   acousticProfile: {
@@ -51,6 +51,6 @@ export const synth: InstrumentDef = {
     { id: "bass-lead", name: "Bass Lead", role: "bass", oscillator: "hybrid", filter: "lowpass", cutoffHz: 650, resonance: 0.38, attackSeconds: 0.003, decaySeconds: 0.14, sustain: 0.64, releaseSeconds: 0.1, saturation: 0.24 },
     { id: "acid-sequencer", name: "Acid Sequencer", role: "bass", oscillator: "saw", filter: "ladder", cutoffHz: 1200, resonance: 0.78, attackSeconds: 0.002, decaySeconds: 0.19, sustain: 0.16, releaseSeconds: 0.08, saturation: 0.42 },
     { id: "ambient-drone", name: "Ambient Drone", role: "texture", oscillator: "sine", filter: "lowpass", cutoffHz: 700, resonance: 0.05, attackSeconds: 1.2, decaySeconds: 2.5, sustain: 0.92, releaseSeconds: 2.4, unison: 3, noise: 0.018 },
-    { id: "noise-transition", name: "Noise Transition", role: "texture", oscillator: "noise", filter: "highpass", cutoffHz: 1600, resonance: 0.12, attackSeconds: 0.25, decaySeconds: 0.5, sustain: 0.24, releaseSeconds: 0.8, noise: 0.65, signalChain: ["filter", "delay", "reverb"] },
+    { id: "noise-transition", name: "Noise Transition", role: "texture", oscillator: "noise", filter: "highpass", cutoffHz: 1600, resonance: 0.12, attackSeconds: 0.25, decaySeconds: 0.5, sustain: 0.24, releaseSeconds: 0.8, noise: 0.65, },
   ]
 };

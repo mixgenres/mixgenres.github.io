@@ -12,8 +12,8 @@ export const zapateado: InstrumentDef = {
   voicing: "unpitched",
   bodyConstruction: "wood-box",
   excitationType: "hammer",
-  elementaryModel: 18,
-  makeupGain: 1.676,
+  
+  
   polyphony: 8,
   note: "Authentic flamenco dance footwork percussion on a wooden tablao stage with nailed shoe strikes: Tacón heel drops, Planta ball-of-foot impacts, Punta toe taps, and rapid redoble heel-toe rolls",
   acousticProfile: {
@@ -51,7 +51,7 @@ export const zapateado: InstrumentDef = {
       strikeZones: ["center"],
       defaultPan: -0.3,
       gainTrimDb: 1.0,
-      synthesisNotes: "Solid heel strike with nailed heel block driving 110Hz wooden stage cavity resonance"
+      
     },
     {
       id: "zapateado-planta",
@@ -64,7 +64,7 @@ export const zapateado: InstrumentDef = {
       strikeZones: ["center"],
       defaultPan: -0.35,
       gainTrimDb: 0,
-      synthesisNotes: "Flat strike of ball-of-foot on wooden floor producing sharp wooden slap"
+      
     },
     {
       id: "zapateado-punta",
@@ -77,7 +77,7 @@ export const zapateado: InstrumentDef = {
       strikeZones: ["edge"],
       defaultPan: -0.4,
       gainTrimDb: -1.5,
-      synthesisNotes: "Toe-tip click on floor with metal nail transient"
+      
     }
   ],
   performanceArticulations: {
@@ -111,10 +111,7 @@ export const zapateado: InstrumentDef = {
       transientSharpness: 0.96,
       damping: 0.75
     },
-    signalChain: ["preamp", "eq", "reverb"],
-    synthesisNotes: [
-      "110Hz hollow wooden stage platform resonance activated by heavy heel strikes.",
-      "High-frequency nail click transient at 2.8kHz modeling shoemaker nails in heels and toes."
-    ]
+    
+    
   }
 };

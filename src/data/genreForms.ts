@@ -1,5 +1,4 @@
 import type { SectionEnergy, FormIntensity } from './schema';
-import type { StyleDSPProfile } from './sound/schema/style-dsp';
 
 export type { FormIntensity };
 export interface FormStep {
@@ -27,7 +26,6 @@ export const F = (
 
 export interface FormBlueprint {
   name: string;
-  dspProfile?: StyleDSPProfile;
   sections: Array<{
     id: string;
     energy: 'low' | 'medium' | 'high' | 'peak';
@@ -40,26 +38,6 @@ export interface FormBlueprint {
 export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   'death-metal-old-school': {
     name: 'Death Metal Old School',
-    dspProfile: {
-      master: {
-        dynamics: { ratio: 2.0, threshold: -14, attack: 30, release: 100 },
-        vintage: { saturation: 0.15 } // SSL Bus Comp glue
-      },
-      instruments: {
-        'guitar': {
-          distortion: { drive: 0.95, type: 'fuzz', tone: 6000, circuitModel: 'Boss HM-2 Heavy Metal pedal. Maxed out knobs (Swedish Chainsaw). Asymmetric diode clipping creating dense square waves.' },
-          eq: { highPassCutoff: 120, midPeak: { freq: 1000, gain: 10.0, q: 1.5 }, lowPassCutoff: 8000 }
-        },
-        'bass': {
-          distortion: { drive: 0.75, type: 'digital', tone: 4000, circuitModel: 'Darkglass B7K CMOS parallel distortion. Gritty upper-mid clank mixed with clean sub-bass.' },
-          eq: { lowShelf: { freq: 60, gain: 4.0 }, midPeak: { freq: 2500, gain: 6.0, q: 2.0 } }
-        },
-        'drums': {
-          dynamics: { ratio: 8.0, threshold: -20, attack: 1, release: 15 }, // Fast FET compression (1176 style) for transient snap
-          eq: { highShelf: { freq: 8000, gain: 4.0 } }
-        }
-      }
-    },
     sections: [
       { id: 'Intro', energy: 'medium', instruments: ['guitar', 'bass', 'drums'], patterns: ['Blast Beat'] },
       { id: 'Verse', energy: 'high', instruments: ['guitar', 'bass', 'drums'], patterns: ['Tremolo Picking'] },
@@ -69,10 +47,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'tech-death-modern': {
     name: 'Tech Death Modern',
-    dspProfile: {
-      distortion: { drive: 0.95, type: 'digital', tone: 10000, circuitModel: 'Axe-Fx / Kemper digital modeling. Extreme high-gain hard clipping paired with lightning-fast noise gates for zero sag and surgical clarity on 32nd notes.' },
-      eq: { highPassCutoff: 120, midPeak: { freq: 1500, gain: 3.5, q: 1.5 } }
-    },
     sections: [
       { id: 'Intro', energy: 'high', instruments: ['guitar', 'bass', 'drums'], patterns: ['Polyrhythmic Riff'] },
       { id: 'Verse', energy: 'high', instruments: ['guitar', 'bass', 'drums'], patterns: ['Sweep Picking'] },
@@ -81,10 +55,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'black-metal-traditional': {
     name: 'Black Metal Traditional',
-    dspProfile: {
-      distortion: { drive: 0.98, type: 'fuzz', tone: 14000, circuitModel: 'Transistor-based raw clipping through 4-track tape. Extreme high-end fizz, zero low-end body, replicating early 90s Norwegian lo-fi grimness.' },
-      eq: { highPassCutoff: 200, highShelf: { freq: 6000, gain: 8.0 } }
-    },
     sections: [
       { id: 'Intro', energy: 'high', instruments: ['guitar', 'drums'], patterns: ['Tremolo Buzz'] },
       { id: 'Verse', energy: 'peak', instruments: ['guitar', 'bass', 'drums'], patterns: ['Cold Blast'] },
@@ -92,10 +62,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'doom-sludge-metal': {
     name: 'Doom / Sludge Metal',
-    dspProfile: {
-      distortion: { drive: 0.90, type: 'fuzz', tone: 3500, circuitModel: 'Electro-Harmonix Big Muff / Fuzz Face. Sluggish attack, wooly thick square-wave saturation crushing the sub-bass frequencies.' },
-      eq: { lowShelf: { freq: 80, gain: 6.0 }, lowPassCutoff: 5000 }
-    },
     sections: [
       { id: 'Intro', energy: 'medium', instruments: ['guitar', 'bass', 'drums'], patterns: ['Sludge Drone'] },
       { id: 'Riff', energy: 'high', instruments: ['guitar', 'bass', 'drums'], patterns: ['Heavy Sabbath Groove'] },
@@ -103,10 +69,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'classic-rock': {
     name: 'Classic Rock',
-    dspProfile: {
-      distortion: { drive: 0.65, type: 'tube', tone: 6500, circuitModel: 'Marshall Plexi pushed to natural power-amp breakup. Warm even-order harmonics, highly responsive to picking dynamics.' },
-      eq: { midPeak: { freq: 2500, gain: 2.5, q: 1.0 } }
-    },
     sections: [
       { id: 'Intro', energy: 'low', instruments: ['guitar', 'bass', 'drums'], patterns: ['Riff'] },
       { id: 'Verse', energy: 'medium', instruments: ['guitar', 'bass', 'drums'], patterns: ['Four on Floor'] },
@@ -115,10 +77,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'punk-rock': {
     name: 'Punk Rock',
-    dspProfile: {
-      distortion: { drive: 0.75, type: 'tube', tone: 7500, circuitModel: 'Marshall JCM800. Aggressive, biting upper-midrange crunch with tight low-end for rapid downpicking.' },
-      eq: { highPassCutoff: 100, midPeak: { freq: 3000, gain: 4.0, q: 1.2 } }
-    },
     sections: [
       { id: 'Intro', energy: 'high', instruments: ['guitar', 'bass', 'drums'], patterns: ['Fast Downpick'] },
       { id: 'Verse', energy: 'high', instruments: ['guitar', 'bass', 'drums'], patterns: ['Punk Beat'] },
@@ -126,10 +84,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'shoegaze': {
     name: 'Shoegaze',
-    dspProfile: {
-      distortion: { drive: 0.95, type: 'fuzz', tone: 6000, circuitModel: 'ProCo Rat stacked into a Reverse Reverb. Massive intermodulation distortion creating a continuous wall of saturated noise.' },
-      spatial: { reverbMix: 0.8, reverbTime: 3.5, reverbType: 'reverse' }
-    },
     sections: [
       { id: 'Intro', energy: 'medium', instruments: ['guitar', 'bass', 'drums'], patterns: ['Wall of Sound'] },
       { id: 'Chorus', energy: 'peak', instruments: ['guitar', 'bass', 'drums'], patterns: ['Glider Swirl'] },
@@ -137,10 +91,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'techno-peak-time': {
     name: 'Techno Peak Time',
-    dspProfile: {
-      distortion: { drive: 0.60, type: 'analog_console', tone: 11000, circuitModel: 'Mackie CR1604 mixer channel overdrive. Hard-driven analog circuitry on Roland TR-909 kicks to create gritty midrange harmonic bumps.' },
-      eq: { lowShelf: { freq: 50, gain: 4.0 } }
-    },
     sections: [
       { id: 'Intro', energy: 'medium', instruments: ['drums', 'drums'], patterns: ['Four on Floor'] },
       { id: 'Drop', energy: 'peak', instruments: ['drums', 'synth', 'drums'], patterns: ['Rumble Kick'] },
@@ -148,10 +98,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'dubstep-modern': {
     name: 'Dubstep Modern',
-    dspProfile: {
-      distortion: { drive: 0.85, type: 'digital', tone: 18000, circuitModel: 'Serum/Massive asymmetric diode clipping. Brutal high-frequency sizzle, squashed dynamic range, razor-sharp FM synthesis transients.' },
-      dynamics: { ratio: 10.0, threshold: -20, attack: 2, release: 30 }
-    },
     sections: [
       { id: 'Intro', energy: 'low', instruments: ['synth', 'drums'], patterns: ['Half-time'] },
       { id: 'Drop', energy: 'peak', instruments: ['synth', 'drums', 'synth'], patterns: ['Wobble Heavy'] },
@@ -159,23 +105,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'synthwave': {
     name: 'Synthwave',
-    dspProfile: {
-      master: {
-        vintage: { wowFlutter: 0.4, saturation: 0.35 }, // Master 2-track reel-to-reel wobble
-        dynamics: { ratio: 4.0, threshold: -16, attack: 10, release: 200 } // Master bus pumping
-      },
-      instruments: {
-        'Drum Machine': {
-          distortion: { drive: 0.5, type: 'digital', tone: 10000, circuitModel: 'LinnDrum / Oberheim DMX EPROM circuit. 8-bit non-linear compounding logic.' },
-          vintage: { bitcrush: 8 }
-        },
-        'synth': {
-          distortion: { drive: 0.45, type: 'analog_console', tone: 2000, circuitModel: 'Overdriven Moog Ladder Filter. 24dB/octave analog clipping for fat, squelchy 16th notes.' },
-          eq: { lowShelf: { freq: 60, gain: 4.0 }, midPeak: { freq: 800, gain: -3.0, q: 1.0 } },
-          spatial: { reverbMix: 0.4, reverbTime: 3.0, reverbType: 'plate', delayMix: 0.35 }
-        }
-      }
-    },
     sections: [
       { id: 'Intro', energy: 'low', instruments: ['synth', 'synth'], patterns: ['Retro 80s'] },
       { id: 'Chorus', energy: 'high', instruments: ['synth', 'synth', 'drums'], patterns: ['Gated Snare'] },
@@ -183,10 +112,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'boom-bap-classic': {
     name: 'Boom Bap Classic',
-    dspProfile: {
-      distortion: { drive: 0.40, type: 'digital', tone: 8000, circuitModel: 'Akai MPC60 / E-mu SP-1200 12-bit sampler crunch. Gritty low-mid punch, aliasing distortion on the high end from degraded sample rates.' },
-      vintage: { bitcrush: 12, saturation: 0.6 }
-    },
     sections: [
       { id: 'Intro', energy: 'low', instruments: ['drums', 'rhodes'], patterns: ['Swing Boom Bap'] },
       { id: 'Verse', energy: 'medium', instruments: ['drums', 'bass', 'rhodes'], patterns: ['Boom Bap Pocket'] },
@@ -194,23 +119,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'trap-modern': {
     name: 'Trap Modern',
-    dspProfile: {
-      master: {
-        distortion: { drive: 0.1, type: 'digital', tone: 20000, circuitModel: 'Fruity Soft Clipper. Shaves off 0dBFS peaks transparently, allowing 808s to dominate headroom.' }
-      },
-      instruments: {
-        'synth': {
-          distortion: { drive: 0.40, type: 'digital', tone: 2500, circuitModel: 'Wavefolder / Hard Clipper. Generates massive odd-harmonics so sub-bass cuts through phone speakers.' },
-          eq: { lowShelf: { freq: 40, gain: 8.0 }, highPassCutoff: 20 }
-        },
-        'drums': {
-          vintage: { bitcrush: 12, wowFlutter: 0.3 }, // Cassette degradation for dark, rolling hats
-          eq: { lowPassCutoff: 12000 },
-          dynamics: { ratio: 4.0, threshold: -12, attack: 5, release: 50 },
-          spatial: { reverbMix: 0.15, reverbTime: 0.5, reverbType: 'plate' }
-        }
-      }
-    },
     sections: [
       { id: 'Intro', energy: 'low', instruments: ['synth', 'drums'], patterns: ['Trap Roll'] },
       { id: 'Drop', energy: 'peak', instruments: ['synth', 'drums', 'drums', 'synth'], patterns: ['Heavy 808'] },
@@ -218,10 +126,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'drill-uk': {
     name: 'Drill UK',
-    dspProfile: {
-      distortion: { drive: 0.50, type: 'analog_console', tone: 10000, circuitModel: 'Aggressive console saturation on 808 glides. Gritty, harmonic-rich bass transients tearing through heavy master limiting.' },
-      dynamics: { ratio: 8.0, threshold: -18, attack: 5, release: 40 }
-    },
     sections: [
       { id: 'Intro', energy: 'low', instruments: ['synth', 'drums'], patterns: ['Drill Slide'] },
       { id: 'Drop', energy: 'peak', instruments: ['synth', 'drums', 'drums'], patterns: ['Syncopated Drill'] },
@@ -229,10 +133,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'lo-fi-chillhop': {
     name: 'Lo-Fi Chillhop',
-    dspProfile: {
-      distortion: { drive: 0.45, type: 'tape', tone: 4000, circuitModel: 'Roland SP-404 Vinyl Sim compression. Heavy high-frequency cut, boxy midrange distortion, pumpy attack, mechanical noise.' },
-      eq: { lowPassCutoff: 5000, highPassCutoff: 100 }
-    },
     sections: [
       { id: 'Intro', energy: 'low', instruments: ['rhodes', 'sampler'], patterns: ['Laid Back'] },
       { id: 'Groove', energy: 'medium', instruments: ['rhodes', 'bass', 'drums'], patterns: ['Dilla Swing'] },
@@ -240,10 +140,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'reggaeton-classic': {
     name: 'Reggaeton Classic',
-    dspProfile: {
-      distortion: { drive: 0.40, type: 'tube', tone: 9000, circuitModel: 'Driven LA-2A style optical compression on the Dembow loop. Saturation glued to the sub-bass with slightly distorted timbal impacts.' },
-      eq: { lowShelf: { freq: 60, gain: 6.0 } }
-    },
     sections: [
       { id: 'Intro', energy: 'low', instruments: ['drums', 'synth'], patterns: ['Dembow 3-3-2'] },
       { id: 'Coro', energy: 'high', instruments: ['drums', 'synth', 'synth'], patterns: ['Perreo Drive'] },
@@ -251,10 +147,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'salsa-dura': {
     name: 'Salsa Dura',
-    dspProfile: {
-      distortion: { drive: 0.25, type: 'tape', tone: 13000, circuitModel: '1970s Fania Records analog tape drive. Pushed tape reels compressing aggressive brass overtones and saturating the percussion bus.' },
-      vintage: { saturation: 0.4 }
-    },
     sections: [
       { id: 'Intro', energy: 'medium', instruments: ['piano', 'bass', 'congas', 'timbales'], patterns: ['Montuno'] },
       { id: 'Montuno', energy: 'high', instruments: ['piano', 'bass', 'congas', 'timbales', 'horn-section'], patterns: ['Tumbao'] },
@@ -262,10 +154,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'flamenco-traditional': {
     name: 'Flamenco Traditional',
-    dspProfile: {
-      distortion: { drive: 0.02, type: 'clean', tone: 15000, circuitModel: 'Ultra-fast solid-state clean preamps. Zero harmonic coloration to perfectly capture the sharp, percussive nail attacks (picado) and footwork.' },
-      eq: { highPassCutoff: 120, midPeak: { freq: 4500, gain: 3.0, q: 1.5 } }
-    },
     sections: [
       { id: 'Falseta', energy: 'low', instruments: ['guitar'], patterns: ['Picado'] },
       { id: 'Letra', energy: 'medium', instruments: ['guitar', 'palmas', 'cajon'], patterns: ['Rasgueado'] },
@@ -273,10 +161,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'reggae-roots': {
     name: 'Reggae Roots',
-    dspProfile: {
-      distortion: { drive: 0.30, type: 'tape', tone: 7000, circuitModel: 'Roland RE-201 Space Echo tape saturation. Overdriven delay repeats with heavy low-end dub mixing and spring reverb clangs.' },
-      spatial: { reverbMix: 0.4, reverbTime: 2.5, reverbType: 'spring', delayMix: 0.5 }
-    },
     sections: [
       { id: 'Intro', energy: 'low', instruments: ['bass', 'drums', 'guitar'], patterns: ['One Drop'] },
       { id: 'Verse', energy: 'medium', instruments: ['bass', 'drums', 'guitar', 'organ'], patterns: ['Skank'] },
@@ -284,10 +168,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'jazz-bebop': {
     name: 'Jazz Bebop',
-    dspProfile: {
-      distortion: { drive: 0.15, type: 'tube', tone: 6000, circuitModel: 'Rudy Van Gelder studio warmth. Dark hollow-body electric guitars pushing vintage tube amplifiers right to the edge of clean breakup.' },
-      spatial: { reverbMix: 0.15, reverbTime: 0.8, reverbType: 'room' }
-    },
     sections: [
       { id: 'Head', energy: 'medium', instruments: ['upright-bass', 'drums', 'piano', 'tenor-sax'], patterns: ['Walking Bass'] },
       { id: 'Solo', energy: 'high', instruments: ['upright-bass', 'drums', 'tenor-sax'], patterns: ['Swing Ride'] },
@@ -295,10 +175,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'jazz-fusion': {
     name: 'Jazz Fusion',
-    dspProfile: {
-      distortion: { drive: 0.20, type: 'analog_console', tone: 14000, circuitModel: 'Late 70s SSL analog console. Punchy, clean VCA compression with mild overdrive on synthesizer leads and slap-bass transients.' },
-      dynamics: { ratio: 4.0, threshold: -16, attack: 10, release: 80 }
-    },
     sections: [
       { id: 'Intro', energy: 'medium', instruments: ['bass', 'drums', 'rhodes', 'synth'], patterns: ['Fusion Funk'] },
       { id: 'Solo', energy: 'peak', instruments: ['bass', 'drums', 'synth'], patterns: ['Odd Meter'] },
@@ -306,10 +182,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'blues-chicago': {
     name: 'Blues Chicago',
-    dspProfile: {
-      distortion: { drive: 0.55, type: 'tube', tone: 5500, circuitModel: 'Fender Bassman Tweed 4x10 combo. Thick mid-range overdrive pushing the speaker cones into natural sagging and compression.' },
-      eq: { midPeak: { freq: 1200, gain: 4.0, q: 1.0 } }
-    },
     sections: [
       { id: 'Intro', energy: 'low', instruments: ['guitar', 'bass', 'drums'], patterns: ['Shuffle'] },
       { id: 'Solo', energy: 'peak', instruments: ['guitar', 'bass', 'drums'], patterns: ['Chicago Bend'] },
@@ -317,10 +189,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'pop-modern': {
     name: 'Pop Modern',
-    dspProfile: {
-      distortion: { drive: 0.10, type: 'digital', tone: 20000, circuitModel: 'Pristine in-the-box mix. Transparent digital limiting with subtle parallel decapitator-style saturation exciter on vocal/bass chains.' },
-      eq: { highShelf: { freq: 10000, gain: 3.0 } }
-    },
     sections: [
       { id: 'Intro', energy: 'low', instruments: ['piano', 'drums'], patterns: ['Four on Floor'] },
       { id: 'Chorus', energy: 'high', instruments: ['synth', 'drums', 'synth'], patterns: ['Modern Pop'] },
@@ -328,10 +196,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'synthpop-80s': {
     name: 'Synthpop 80s',
-    dspProfile: {
-      distortion: { drive: 0.25, type: 'analog_console', tone: 12000, circuitModel: 'Roland Juno analog chorus noise floor. Pushed bucket-brigade device (BBD) delay circuits creating a smeared, warm harmonic distortion.' },
-      spatial: { reverbMix: 0.25, reverbTime: 2.5, reverbType: 'hall' }
-    },
     sections: [
       { id: 'Intro', energy: 'low', instruments: ['synth', 'synth', 'drums'], patterns: ['80s Pulse'] },
       { id: 'Chorus', energy: 'high', instruments: ['synth', 'synth', 'drums'], patterns: ['LinnDrum Groove'] },
@@ -339,10 +203,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   'country-modern': {
     name: 'Country Modern',
-    dspProfile: {
-      distortion: { drive: 0.05, type: 'clean', tone: 16000, circuitModel: 'Nashville pristine clean tracking. Transparent VCA compression, massive vocal presence, virtually zero harmonic distortion.' },
-      dynamics: { ratio: 3.0, threshold: -12, attack: 20, release: 150 }
-    },
     sections: [
       { id: 'Intro', energy: 'low', instruments: ['guitar', 'bass', 'drums'], patterns: ['Train Beat'] },
       { id: 'Chorus', energy: 'high', instruments: ['guitar', 'guitar', 'bass', 'drums'], patterns: ['Nashville Two-Step'] },
@@ -350,27 +210,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   tango: {
     name: 'Tango Traditional',
-    dspProfile: {
-      master: {
-        vintage: { wowFlutter: 0.1, saturation: 0.25 }, // 1940s RCA Victor shellac/vinyl emulation
-        eq: { highPassCutoff: 40, lowPassCutoff: 12000 }
-      },
-      instruments: {
-        'bandoneon': {
-          distortion: { drive: 0.15, type: 'tube', tone: 4500, circuitModel: 'RCA 44 Ribbon Mic into tube preamp. Thickens the harsh reed transients into a warm, weeping midrange.' },
-          eq: { midPeak: { freq: 2000, gain: 3.5, q: 1.2 } },
-          spatial: { reverbMix: 0.1, reverbTime: 0.8, reverbType: 'room' }
-        },
-        'upright-bass': {
-          distortion: { drive: 0.2, type: 'tape', tone: 1000, circuitModel: 'Pushed magnetic tape. Saturates the low-end pizzicato attacks without clipping.' },
-          eq: { lowShelf: { freq: 80, gain: 3.0 } }
-        },
-        'violin': {
-          spatial: { reverbMix: 0.25, reverbTime: 1.4, reverbType: 'chamber' }, // Darker, larger acoustic space for strings
-          eq: { highShelf: { freq: 6000, gain: -2.0 } }
-        }
-      }
-    },
     sections: [
       { id: 'Intro', energy: 'low', instruments: ['piano', 'bandoneon'], patterns: ['Marcato 4'] },
       { id: 'A', energy: 'medium', instruments: ['piano', 'bandoneon', 'upright-bass'], patterns: ['Síncopa'] },
@@ -381,10 +220,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   flamenco: {
     name: 'Flamenco Bulerías',
-    dspProfile: {
-      distortion: { drive: 0.02, type: 'clean', tone: 15000, circuitModel: 'Ultra-fast solid-state clean preamps. Zero harmonic coloration to perfectly capture the sharp, percussive nail attacks (picado) and footwork.' },
-      eq: { highPassCutoff: 120, midPeak: { freq: 4500, gain: 3.0, q: 1.5 } }
-    },
     sections: [
       { id: 'Falseta', energy: 'low', instruments: ['guitar'], patterns: ['Picado'], featured: ['guitar'] },
       { id: 'Letra', energy: 'medium', instruments: ['guitar', 'cajon', 'palmas'], patterns: ['Rasgueado', 'Golpe'], featured: ['voice'] },
@@ -395,10 +230,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   afrobeats: {
     name: 'Afrobeats Modern',
-    dspProfile: {
-      distortion: { drive: 0.15, type: 'tape', tone: 16000, circuitModel: 'Modern clean digital bus with parallel tape saturation on the drum stem. Glues the shaker and log drum transients together warmly.' },
-      eq: { lowShelf: { freq: 55, gain: 5.0 } }
-    },
     sections: [
       { id: 'Intro', energy: 'low', instruments: ['shaker', 'log-drum'], patterns: ['Timeline Cycle'] },
       { id: 'Verse', energy: 'medium', instruments: ['shaker', 'log-drum', 'bass', 'guitar'], patterns: ['Syncopated Groove'] },
@@ -409,10 +240,6 @@ export const FORM_BLUEPRINTS: Record<string, FormBlueprint> = {
   },
   house: {
     name: 'House Club Mix',
-    dspProfile: {
-      distortion: { drive: 0.15, type: 'tube', tone: 18000, circuitModel: 'Subtle master bus tube warming. Clean transient retention with just a kiss of even-order harmonic excitement for club systems.' },
-      dynamics: { ratio: 4.0, threshold: -14, attack: 15, release: 50 }
-    },
     sections: [
       { id: 'Intro', energy: 'low', instruments: ['drums', 'drums'], patterns: ['Four on Floor'] },
       { id: 'Build', energy: 'medium', instruments: ['drums', 'drums', 'drums', 'synth'], patterns: ['Riser', 'Filter Sweep'] },

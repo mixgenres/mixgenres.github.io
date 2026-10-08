@@ -27,10 +27,11 @@ import {
 } from './engine/sheet/index.ts';
 import { FEELS } from './data/tempoFeels';
 import { ENERGY_LABELS } from './data/performance/energy';
-import { SongPlayer, type PlayerState } from './engine/playback/songPlayer';
+import { SoundfontSongPlayer } from './engine/playback/soundfont/player';
+import { soundfontBankStats } from './engine/playback/soundfont/banks';
+import type { PlayerState } from './engine/playback/playerTypes';
 import type { Performance } from './engine/band/performanceData';
 import { catalogIdForStyle, createCatalogSong } from './engine/sheet/songCatalog';
-import { preparedAudioStats } from './engine/cache/preparedAudio';
 import { PATTERNS_BY_ID, cleanPatternName } from './data/genres';
 import { beatsPerBarOf } from './engine/sheet/grid';
 
@@ -200,7 +201,7 @@ export default function App() {
   const stepRef = useRef(step);
   stepRef.current = step;
   const seekSecondsRef = useRef<number>(0);
-  const playerRef = useRef<SongPlayer | null>(null);
+  const playerRef = useRef<SoundfontSongPlayer | null>(null);
 
   const seekTo = (newBar: number, newStep: number = 0) => {
     const total = songRef.current.durationMeasures || 1;
@@ -317,7 +318,7 @@ export default function App() {
   const perfRef = useRef<Performance | null>(null);
 
   useEffect(() => {
-    const player = new SongPlayer(state => {
+    const player = new SoundfontSongPlayer(state => {
       perfRef.current = state.performance ?? null;
       setPlayerState(state);
     }, seconds => {
@@ -692,10 +693,9 @@ export default function App() {
         </div>
 
         {showDevAudio && <output aria-label="Playback diagnostics" className="block text-xs tabular-nums -mt-3 mb-5">
-          {playerStatus} · {Math.round(playerState.progress*100)}% · {playerRef.current?.preparedAheadSeconds.toFixed(1) ?? '0'}s ahead
+          SoundFont · {playerStatus} · {Math.round(playerState.progress*100)}%
+          {' · '}{soundfontBankStats().loaded.length} banks · {(soundfontBankStats().compressedBytes/1048576).toFixed(1)} MiB compressed samples
           {playerState.audioStartMs !== undefined && <> · click to signal {playerState.audioStartMs.toFixed(1)}ms · output latency estimate {playerState.outputLatencyMs?.toFixed(1)}ms</>}
-          {' · '}{(preparedAudioStats().bytes/1024/1024).toFixed(1)} MB RAM / {(preparedAudioStats().persistent.bytes/1024/1024).toFixed(1)} MB disk
-          {' · '}{preparedAudioStats().hits} RAM hits / {preparedAudioStats().persistent.hits} disk hits
         </output>}
 
         {/* ---- 3. SECTION HEADING & CHORDS (Spacious & Refined) ------------ */}

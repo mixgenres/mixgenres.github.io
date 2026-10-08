@@ -122,9 +122,9 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "takht",
       "name": "Takht",
-      "description": "Takht: takht heterophonic oud qanun and ney. Melodic and rhythmic study over a modal center; chord symbols are playback anchors, not a Western chord progression.",
-      "patterns": ["takht heterophonic oud qanun and ney"],
-      "techniques": ["microtonal-inflection", "ornament", "tremolo", "trill", "breath-phrase", "glissando", "ornamented-slide", "celtic-ornament", "accent", "staccato", "legato", "vibrato", "ghost", "roll"],
+      "description": "Takht: chamber ensemble built around maqam and iqa. Ney, kamanja, oud and qanun shape related but non-identical melodic lines; phrase entries, ornaments and rests make their heterophony audible. Taqsim and composed ensemble passages have separate roles.",
+      "patterns": ["takht heterophonic oud qanun and ney", "offset maqam phrase and instrumental response"],
+      "techniques": ["microtonal-inflection", "ornament", "tremolo", "trill", "breath-phrase", "glissando", "ornamented-slide", "accent", "staccato", "legato", "vibrato", "ghost", "roll"],
       "harmony": ["D5"],
       "meter": "4/4",
       "tempo": [84, 100],
@@ -166,7 +166,7 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "instrumentTechniques": {
         "ney": ["breath-phrase", "microtonal-inflection", "ornament", "glissando"],
-        "violin": ["tremolo", "ornamented-slide", "celtic-ornament", "accent", "staccato", "legato", "vibrato"],
+        "violin": ["tremolo", "ornament", "ornamented-slide", "microtonal-inflection", "accent", "staccato", "legato", "vibrato"],
         "oud": ["tremolo", "accent", "staccato", "legato", "vibrato"],
         "qanun": ["tremolo", "trill", "glissando", "ornament", "microtonal-inflection"],
         "riq": ["accent", "ghost", "roll"]
@@ -177,8 +177,8 @@ export const GENRE_PACK: GenrePackInput = {
           "defaultTechnique": "breath-phrase"
         },
         "violin:lead": {
-          "allowedTechniques": ["tremolo", "ornamented-slide", "celtic-ornament", "accent", "staccato", "legato", "vibrato"],
-          "defaultTechnique": "tremolo"
+          "allowedTechniques": ["tremolo", "ornament", "ornamented-slide", "microtonal-inflection", "accent", "staccato", "legato", "vibrato"],
+          "defaultTechnique": "legato"
         },
         "oud:harmony": {
           "allowedTechniques": ["tremolo", "accent", "staccato", "legato", "vibrato"],

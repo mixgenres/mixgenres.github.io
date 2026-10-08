@@ -7,8 +7,8 @@ export const tenor_sax: InstrumentDef = {
   voicing: "single",
   bodyConstruction: "brass-tube",
   excitationType: "breath",
-  elementaryModel: 16,
-  makeupGain: 0.8185,
+  
+  
   polyphony: 4,
   note: "Bb brass single-reed tenor saxophone with husky low register, smoky subtones, and screaming high altissimo bends",
   acousticProfile: {

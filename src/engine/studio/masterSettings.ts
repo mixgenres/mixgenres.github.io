@@ -1,8 +1,8 @@
 import type { MixCharacter } from '../style/contracts';
 import { contractForGenre } from '../style/contracts';
 import { resolveStyle } from '../style';
-import { ELECTRONIC_MIX_PATTERN, SALSA_GENRE_PATTERN, TANGO_PATTERN } from '../../data/sound/dsp/genreClassifiers';
-import { ELECTRONIC_MASTER_SIDECHAIN_DEPTH, SALSA_MASTER_ROOM_DEPTH, TANGO_MASTER_SIDECHAIN_DEPTH } from '../../data/sound/dsp/genrePlaybackProfiles';
+import { ELECTRONIC_MIX_PATTERN, SALSA_GENRE_PATTERN, TANGO_PATTERN,
+  ELECTRONIC_MASTER_SIDECHAIN_DEPTH, SALSA_MASTER_ROOM_DEPTH, TANGO_MASTER_SIDECHAIN_DEPTH } from '../../data/sound/playback/genreMix';
 import { DEFAULT_STYLE_MASTER_PROFILE, MASTER_GLUE_PROFILES, MASTER_MIX_DEFAULTS } from '../../data/sound/mix/masterProfiles';
 
 const clamp = (x: number, low: number, high: number) => Math.max(low, Math.min(high, x));

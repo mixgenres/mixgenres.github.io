@@ -4,10 +4,10 @@ export const french_horn: InstrumentDef = {
   id: "french-horn",
   name: "French horn",
   family: "brass",
-  brassSynthesis: { cutoffScale: 0.88 },
+  
   voicing: "single",
-  elementaryModel: 15,
-  makeupGain: 0.7136,
+  
+  
   polyphony: 4,
   note: "Coiled brass instrument with wide bell producing noble, heroic fanfare and warm, velvety choir blend",
   acousticProfile: {

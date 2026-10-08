@@ -8,8 +8,8 @@ export const cavaquinho: InstrumentDef = {
   courses: 1,
   bodyConstruction: "wood-box",
   excitationType: "plectrum",
-  elementaryModel: 0,
-  makeupGain: 3.2271,
+  
+  
   polyphony: 8,
   note: "Small 4 steel-string Portuguese/Brazilian chordophone (D4-G4-B4-D5) driving fast samba palhetada rhythm and choro counterpoint",
   acousticProfile: {

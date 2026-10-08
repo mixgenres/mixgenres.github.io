@@ -5,8 +5,8 @@ export const fm_ep: InstrumentDef = {
   name: "FM Electric Piano",
   family: "bellows-and-keys",
   voicing: "chord",
-  elementaryModel: 14,
-  makeupGain: 0.7455,
+  
+  
   polyphony: 8,
   note: "Classic 80s FM digital electric piano with glassy metallic chime and crystalline clarity",
   acousticProfile: {

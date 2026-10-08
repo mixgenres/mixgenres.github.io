@@ -6,8 +6,8 @@ export const xiao: InstrumentDef = {
   family: "winds",
   octave: 12,
   voicing: "single",
-  elementaryModel: 7,
-  makeupGain: 0.7768,
+  
+  
   polyphony: 4,
   note: "Soft Chinese end-blown flute",
   acousticProfile: {

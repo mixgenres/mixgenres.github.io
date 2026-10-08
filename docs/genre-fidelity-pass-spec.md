@@ -44,13 +44,13 @@ Read applicable `AGENTS.md` instructions and check the working tree. Preserve un
 
 Read at least:
 
-- `docs/engine-pipeline.md`, `docs/song-authenticity.md`, `docs/genre-reference-pass.md`, `scripts/README.md`, and `src/data/genres/README.md`.
+- `docs/engine-pipeline.md`, `docs/song-authenticity.md`, `docs/genre-reference-pass.md`, the current package scripts, and `src/data/genres/README.md`.
 - The requested folder's `catalog.ts`, `index.ts`, `studies.ts` and `referenceMix.ts` where present.
 - `src/data/schema.ts`, `src/data/genres/_shared/genrePack.ts`, and the resolved style contracts.
 - The relevant instrument definitions, capabilities, performance profiles, renderer modules, solo definitions, interactions, and mix contracts.
 - `src/data/songs/` and `reference-songs.txt`, plus existing local sample inventories.
 
-Resolve discrepancies from live behavior. For example, the current genre registry uses explicit imports for Vite and Node despite an older requirement describing folder discovery. Do not blindly implement an older proposal to replace the current cached playback architecture.
+Resolve discrepancies from live behavior. For example, the current genre registry uses explicit imports for Vite and Node despite an older requirement describing folder discovery. Keep audio rendering on demand: the SoundFont engine computes per-part events and does not pre-render or cache PCM audio.
 
 Build an architecture map with these four layers:
 
@@ -58,7 +58,7 @@ Build an architecture map with these four layers:
 | --- | --- | --- |
 | Written notation | `src/engine/score/notatedScore.ts`; `src/data/schema.ts`; genre-owned cells | Exact meter, beat units, rests, pitches, durations, ties, articulations, and written directions. |
 | Band interpretation | `src/engine/band/interpretBand.ts`, `interactions.ts`, `transitions.ts`; style contracts | Harmony, voicing, roles, phrase development, solo policies, ensemble timing, and boundaries. |
-| Instrument mechanics and sound | `src/engine/sound/transformMusicians.ts`; `src/data/instruments/`; `src/data/performance/`; `src/data/sound/dsp/`; `src/engine/playback/instrumentRegistry.ts` and renderer modules | Physical actions, state trajectories, routing, source behavior, pitch, attacks, sustain, and release. |
+| Instrument and sample routing | `src/engine/sound/transformMusicians.ts`; `src/data/instruments/`; `src/data/performance/`; `src/engine/playback/soundfont/presets.ts`; `soundfont/plan.ts` | Playable ranges, performer actions, note controls, preset zones, sample choice, pitch, attacks, sustain, and release. |
 | Ensemble mix and output | `src/engine/playback/renderSongMix.ts`; `src/engine/studio/dynamicMix/`; genre mix calibration | Stage, balance, foreground handoffs, room, processing, headroom, playback/export agreement. |
 
 Save the baseline before changing data: source fingerprint, selected style IDs, deterministic seed/settings, complete realized scores, one full example per style, and focused exposed passages. Identify the baseline's listening status honestly. If no listening capability is available, retain the audio for review and mark listening as unperformed.
@@ -71,7 +71,7 @@ For each style, document geographic/cultural scope, period, defining ensemble, p
 
 Use existing references as leads, not as unquestionable classifications. Check that the selected **performance/version**, not merely the title or artist, demonstrates the claimed style. A modern cover, remaster, live version, or crossover may change the arrangement and production evidence.
 
-As a research starting point, seek three complementary recordings per style from at least two performers/ensembles when available, plus a credible musician, notation, pedagogical, archival, or acoustics source for important technical claims. This is a sampling heuristic, not a quota or a guarantee of coverage. Expand until the important variation is explained; fewer sources require an explicit evidence limitation. One recording can legitimately support multiple styles, but cannot demonstrate all their differences by itself.
+For this catalog's reference-building workflow, target **five verified MP3 performances per song style**, chosen to cover a representative ensemble/groove, performer or regional contrast, exposed lead technique, rhythm-section interaction, and form/production development. Prefer at least two performers/ensembles. This is a practical evidence set, not a quota that overrides availability or proof of coverage: explain missing categories rather than filling them with weak matches, and expand when five recordings do not explain important variation. One recording can legitimately inform more than one style only when that specific performance belongs to both; document the reason. Follow the download, verification, voice-removal, and 5 GiB storage workflow in [the genre reference pass](./genre-reference-pass.md).
 
 Browse to verify niche musical claims, reference URLs, instrument acoustics, and exact recording identities. Prefer musician demonstrations, published scores, institutional archives, maker documentation, and primary research. Distinguish what is heard in one recording from a claim about the whole style. Resolve disagreement by documenting the differing practices rather than averaging them into a fictional rule.
 
@@ -174,12 +174,12 @@ Fully specify each characteristic instrument for its relevant roles. Cover model
 
 A new instrument requires the complete vertical path:
 
-1. Physical definition in `src/data/instruments/catalog/` and registration in `src/data/instruments/index.ts`.
+1. Instrument definition in `src/data/instruments/catalog/` and registration in `src/data/instruments/index.ts`.
 2. Relevant schema/type additions, notation/tuning/fingering rules, role preferences, and practical range rules.
-3. Real technique capabilities and performance mappings in `src/data/performance/`, with contextual style dialects.
-4. Appropriate DSP profile in `src/data/sound/dsp/`, renderer implementation/routing in `src/engine/playback/`, and prepared physical controls.
+3. Playable technique capabilities and performance mappings in `src/data/performance/`, with contextual style dialects.
+4. A suitable SoundFont preset and sample bank, or an explicit family approximation. Add alternate preset routes in `soundfont/presets.ts` and event handling in `soundfont/plan.ts` only where the available samples support the technique.
 5. Style-owned cells, exploration studies, solo/interaction policies, mix behavior, UI/score visibility, and export compatibility.
-6. Isolated mechanism/audio probes and an ensemble passage demonstrating why it is needed.
+6. A direct per-part render and an ensemble passage demonstrating why it is needed.
 
 Reuse a shared model only when its underlying mechanics and calibrated variant support the new instrument. A renamed generic patch is an approximation and must be disclosed. Do not add instruments merely to enlarge the ensemble or fill a quiet section.
 
@@ -194,7 +194,7 @@ Examples of required specificity:
 - Percussion: component identity, strike location/type, open versus muted state, damping, stick/hand coordination, interlocking lanes, and distinct transient/decay behavior.
 - Voice when required: range, phrase breathing, text/syllable constraints where supported, inflection, articulation, and answer relationships. If the engine cannot model a necessary vocal feature, retain a prominent limitation instead of replacing it with an instrument and claiming equivalence.
 
-Read renderer source; confirm the claimed mechanism really exists. Noisy saws are not automatically a bow/string model, and arbitrary body filters are not measured resonances. Measured/fitted reduced models are acceptable when they preserve relevant behavior and outperform more elaborate approximations. Record source data, units, fitted ranges, and uncertainty. Do not invent precise physical constants to make a model appear scientific.
+Read the sample planner and packaged preset zones; confirm the claimed articulation, bend, controller or alternate sample actually reaches playback. Do not claim fret-position, bellows, bow-noise or other nuance from a generic preset when the bank contains no such recorded or programmed variation. Record the bank source, preset identity, sample coverage and approximation limits.
 
 Use low/middle/high registers, soft/medium/strong excitation, isolated attacks, repetitions, sustains with changing control, connected phrases, release/damping, and maximum relevant polyphony. Check pitch-bearing attack and tail separately. Preserve valid tails and controller state across section boundaries; mix-only edits must not change the instrument's musical or physical behavior.
 
@@ -250,7 +250,7 @@ Level-match comparisons using a declared method; retain unnormalized peak/loudne
 
 ## Phase 8 — validate, compare, and iterate
 
-Run an evidence-driven loop: observe defect → assign owning layer → make a focused correction → inspect score/control changes → render fixed comparisons → evaluate → retain or revise. Hold score/settings/seed fixed when evaluating DSP; hold DSP/mix fixed when evaluating composition. Change comparison windows only for a recorded reason. Re-check shared-engine effects on other genres using representative mechanisms.
+Run an evidence-driven loop: observe defect → assign owning layer → make a focused correction → inspect score/control changes → render fixed comparisons → evaluate → retain or revise. Hold score/settings/seed fixed when evaluating sample routing or mix; hold the bank and mix fixed when evaluating composition. Change comparison windows only for a recorded reason. Re-check shared-engine effects on other genres using representative instruments and techniques.
 
 Use current supported commands after inspecting their arguments:
 
@@ -271,12 +271,12 @@ Illustrative existing targeted commands for tango:
 
 ```bash
 npm run test:audio -- --style=tango-golden-age --encoded --save --details
-npm run audit:instrument-render -- --instrument=bandoneon --details
-node --import tsx scripts/audit-instrument-pitch.ts --instrument=bandoneon
+npm run test:soundfont
+npm run audit:soundfont
 npm run render-song -- tango audit/genre-fidelity/tango/golden-age.wav --style=tango-golden-age --format=wav --report=audit/genre-fidelity/tango/golden-age-render.json
 ```
 
-The full-song render above uses the current **catalog recording example**. It does not prove coverage of every separately authored study. Render each changed study explicitly through the same pipeline; add a typed targeted fixture/runner if the existing scripts do not expose it. Do not pretend an unsupported CLI flag exists. `render-instrument.ts` currently extracts a short lane from a default arrangement; it is not a complete isolated acoustic calibration suite.
+The full-song render above uses the current **catalog recording example**. It does not prove coverage of every separately authored study. Render each changed study explicitly through the same on-demand SoundFont path; add a typed targeted fixture/runner if the existing scripts do not expose it. Do not pretend an unsupported CLI flag exists.
 
 Required validation layers:
 

@@ -5,8 +5,8 @@ export const accordion: InstrumentDef = {
   name: "Accordion",
   family: "bellows-and-keys",
   voicing: "chord",
-  elementaryModel: 10,
-  makeupGain: 1.0695,
+  
+  
   polyphony: 8,
   note: "Free-reed aerophone with hand-pumped bellows driving dual/triple reed banks in resonant wooden tone chambers with musette tremolo tuning",
   acousticProfile: {
@@ -55,11 +55,7 @@ export const accordion: InstrumentDef = {
       breathNoise: 0.12,
       transientSharpness: 0.55
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "Bellows pressure governs volume, pitch centroid, and reed formant saturation.",
-      "Reversing bellows direction produces a crisp articulation transient.",
-      "Cassotto tone chambers attenuate harsh upper partials for a warm round core."
-    ]
+    
+    
   }
 };

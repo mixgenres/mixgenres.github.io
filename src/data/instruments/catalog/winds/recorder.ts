@@ -6,8 +6,8 @@ export const recorder: InstrumentDef = {
   family: "winds",
   octave: 12,
   voicing: "single",
-  elementaryModel: 7,
-  makeupGain: 0.8462,
+  
+  
   polyphony: 4,
   acousticProfile: {
     sustain: "blown",

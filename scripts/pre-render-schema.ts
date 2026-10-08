@@ -2,7 +2,7 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { INSTRUMENTS_BY_ID } from '../src/data/instruments';
 import { GENRE_NAMES } from '../src/data/genres';
 import { ALL_STYLES } from '../src/engine/style';
-import { getInstrumentModule } from '../src/engine/playback/instrumentRegistry.ts';
+import { patchForInstrument } from '../src/engine/playback/soundfont/presets.ts';
 import { BANDONEON_142_BUTTONS } from '../src/engine/band/fingering/bandoneon';
 import { makeSheet } from '../src/engine/sheet/sheet.ts';
 import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
@@ -12,7 +12,7 @@ const genre = process.argv[3];
 if (!instrumentId || !INSTRUMENTS_BY_ID[instrumentId]) throw new Error(`Unknown instrument: ${instrumentId}`);
 
 const def = INSTRUMENTS_BY_ID[instrumentId];
-const module = getInstrumentModule(instrumentId);
+const samplePreset = patchForInstrument(instrumentId, !!def.kit || !!def.drum || def.voicing === 'unpitched');
 const style = ALL_STYLES.find(s => s.arrangement?.ensemble?.some(part => part.instrumentIds.includes(instrumentId)));
 if (!genre && !style) throw new Error(`No style uses ${instrumentId}; specify a genre for inspection.`);
 const sheet = makeSheet(genre || style!.primaryGenre, genre ? undefined : style!.id);
@@ -34,21 +34,15 @@ const report = {
     voicing: def.voicing,
     authoredEvidence: 'unspecified',
     physicalModel: def.physicalModel,
-    dspProfile: def.dspProfile,
     luthierPhysics: def.luthierPhysics,
     techniques: def.techniques,
-    articulationModels: def.articulationModels,
     performanceArticulations: def.performanceArticulations,
     biomechanicsAndKinematics: def.biomechanicsAndKinematics,
     transitionMechanics: def.transitionMechanics,
     tuningAndMechanics: def.tuningAndMechanics,
     kitComponents: def.kitComponents,
   },
-  runtimePath: {
-    registryModuleId: module.id,
-    specializedInstrumentIds: module.specializedInstrumentIds ?? [],
-    ownedDspSections: module.ownedDspSections ?? [],
-  },
+  samplePreset,
   genre,
   compiled: {
     duration: performance.duration,
@@ -68,4 +62,4 @@ const report = {
 mkdirSync('audit/pre-render-schemas', { recursive: true });
 const path = `audit/pre-render-schemas/${instrumentId}${genre ? `-${genre}` : ''}.json`;
 writeFileSync(path, JSON.stringify(report, null, 2));
-console.log(JSON.stringify({ path, instrumentId, genre: sheet.worldId, notes: notes.length, module: module.id }, null, 2));
+console.log(JSON.stringify({ path, instrumentId, genre: sheet.worldId, notes: notes.length, samplePreset }, null, 2));

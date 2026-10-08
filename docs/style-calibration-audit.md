@@ -8,7 +8,7 @@ Each example song requires an explicit form and harmonic plan from `src/data/son
 
 Full-song charts are score adaptations. Many section lengths, tempos and chord cells are estimates, and the existing style ensemble may differ from recorded personnel. The catalog does not contain note-for-note melodies or verified transcriptions of every recording. Modal/drone anchors and bar-based timing simplify some reference traditions. Generated structure, complete metadata and successful tests are separate from historical accuracy and acoustic fidelity.
 
-Instrument identities stay shared across styles. Several roles using the same synth or guitar remain separate tracks. Genre-specific techniques, setup and mix belong in metadata rather than new instrument identities. The current synthesis models need listening and model-specific refinement; catalog coverage does not prove they reproduce their references.
+Instrument identities stay shared across styles. Several roles using the same guitar or keyboard remain separate parts. Genre-specific techniques, setup and mix belong in metadata rather than new instrument identities. SoundFont preset routing and family approximations need listening and source-specific refinement; catalog coverage does not prove they reproduce their references.
 
 ## Checks
 

@@ -10,8 +10,8 @@ export const castanets: InstrumentDef = {
     high: 77
   },
   voicing: "unpitched",
-  elementaryModel: 18,
-  makeupGain: 6.8529,
+  
+  
   polyphony: 8,
   note: "Authentic paired Spanish hardwood castañuelas (granadillo/ebony) with hembra (high right hand) for cascading carretilla rolls and macho (low left hand) for single downbeat golpes",
   acousticProfile: {
@@ -57,10 +57,7 @@ export const castanets: InstrumentDef = {
       transientSharpness: 0.98,
       damping: 0.90
     },
-    signalChain: ["preamp", "eq", "reverb"],
-    synthesisNotes: [
-      "Granadillo hardwood cups generate sharp <0.5ms impact transients.",
-      "Dual pitch centers model hembra (980Hz) and macho (680Hz) with 3.4kHz wood crack."
-    ]
+    
+    
   }
 };

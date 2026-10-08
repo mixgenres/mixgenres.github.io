@@ -10,8 +10,8 @@ export const tambourine: InstrumentDef = {
     high: 54
   },
   voicing: "unpitched",
-  elementaryModel: 18,
-  makeupGain: 0.285,
+  
+  
   polyphony: 8,
   acousticProfile: {
     sustain: "percussive",

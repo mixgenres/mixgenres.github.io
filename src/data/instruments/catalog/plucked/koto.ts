@@ -8,8 +8,8 @@ export const koto: InstrumentDef = {
   courses: 1,
   bodyConstruction: "board",
   excitationType: "fingerpad",
-  elementaryModel: 0,
-  makeupGain: 1.4798,
+  
+  
   polyphony: 4,
   note: "Standard concert koto voicing",
   acousticProfile: {

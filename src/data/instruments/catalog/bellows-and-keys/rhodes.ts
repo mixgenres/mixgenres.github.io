@@ -7,8 +7,8 @@ export const rhodes: InstrumentDef = {
   voicing: "chord",
   bodyConstruction: "solid-electric",
   excitationType: "hammer",
-  elementaryModel: 14,
-  makeupGain: 0.191,
+  
+  
   polyphony: 8,
   note: "Electro-mechanical tine piano with neoprene hammers striking asymmetric tuning forks, producing warm chime-like purr and overdriven bark",
   acousticProfile: {
@@ -60,11 +60,7 @@ export const rhodes: InstrumentDef = {
       saturation: 0.35,
       transientSharpness: 0.6
     },
-    signalChain: ["preamp", "eq", "chorus", "reverb"],
-    synthesisNotes: [
-      "Soft velocities yield pure bell-like sine-dominant fundamentals.",
-      "Hard velocities induce mechanical tine bite and magnetic pickup clipping bark.",
-      "Stereo tremolo pans across harmonic fields for classic neo-soul movement."
-    ]
+    
+    
   }
 };

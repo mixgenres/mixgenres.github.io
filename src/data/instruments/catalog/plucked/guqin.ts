@@ -8,8 +8,8 @@ export const guqin: InstrumentDef = {
   courses: 1,
   bodyConstruction: "board",
   excitationType: "fingerpad",
-  elementaryModel: 0,
-  makeupGain: 0.7381,
+  
+  
   polyphony: 4,
   note: "Plucked Chinese zither",
   acousticProfile: {

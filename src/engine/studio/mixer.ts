@@ -66,10 +66,10 @@ export interface MasterChain {
   roomDelayTimes: AudioParam[];
   dynamicParameters: {
     low: AudioParam; presence: AudioParam; air: AudioParam; width: AudioParam; roomReturn: AudioParam;
-    legacyAmbience: AudioParam; delayTime: AudioParam; delayFeedback: AudioParam; delayTone: AudioParam;
+    fallbackAmbience: AudioParam; delayTime: AudioParam; delayFeedback: AudioParam; delayTone: AudioParam;
     glueThreshold: AudioParam; glueRatio: AudioParam;
   };
-  setTrackSendsEnabled(enabled: boolean): void;
+  setFallbackSendsEnabled(enabled: boolean): void;
   tap: GainNode;
   setVolume(v: number): void;
   setPlaybackEnabled(enabled: boolean): void;
@@ -305,11 +305,11 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   instHigh.connect(masterSum);
 
   // Feed the shared stereo room from instruments and drums.
-  const legacyAmbienceFeed = ctx.createGain();
-  instBus.connect(legacyAmbienceFeed);
-  drumBus.connect(legacyAmbienceFeed);
-  legacyAmbienceFeed.connect(roomInput);
-  legacyAmbienceFeed.connect(delaySend);
+  const fallbackAmbienceFeed = ctx.createGain();
+  instBus.connect(fallbackAmbienceFeed);
+  drumBus.connect(fallbackAmbienceFeed);
+  fallbackAmbienceFeed.connect(roomInput);
+  fallbackAmbienceFeed.connect(delaySend);
   revMix.connect(masterSum);
   springWet.connect(masterSum);
   delayReturn.connect(masterSum);
@@ -445,9 +445,9 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
     roomPreDelay: roomPreDelay.delayTime,
     roomDelayTimes: roomDelays.map(room => room.delay.delayTime),
     dynamicParameters: { low: low.gain, presence: pres.gain, air: air.gain, width: sideGain.gain, roomReturn: revMix.gain,
-      legacyAmbience: legacyAmbienceFeed.gain, delayTime: delay.delayTime, delayFeedback: delayFeedback.gain,
+      fallbackAmbience: fallbackAmbienceFeed.gain, delayTime: delay.delayTime, delayFeedback: delayFeedback.gain,
       delayTone: delayTone.frequency, glueThreshold: glue.threshold, glueRatio: glue.ratio },
-    setTrackSendsEnabled(enabled: boolean) { legacyAmbienceFeed.gain.value = enabled ? 0 : 1; },
+    setFallbackSendsEnabled(enabled: boolean) { fallbackAmbienceFeed.gain.value = enabled ? 0 : 1; },
     tap,
     setVolume(v: number) {
       output.gain.setTargetAtTime(Math.max(0, Math.min(1.5, v * MASTER_MIX_DEFAULTS.outputGain)), ctx.currentTime, 0.02);
@@ -532,7 +532,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
         subDuckingGain.disconnect();
         masterSum.disconnect();
         roomInput.disconnect();
-        legacyAmbienceFeed.disconnect();
+        fallbackAmbienceFeed.disconnect();
         roomSizeGain.disconnect();
         playbackGate.disconnect();
         roomPreDelay.disconnect();

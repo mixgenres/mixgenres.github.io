@@ -1,4 +1,5 @@
-import { defaultTrackParams, modelForInstrument, makeupGainFor, type TrackParams } from './elementaryEngine';
+import { defaultTrackParams } from './soundParameters';
+import type { TrackParams } from './soundTypes';
 import { getLuthierModelForInstrument } from './luthier';
 import { resolveDialect, performanceModeForContext } from '../band/genreDialect';
 import { getRoleGainLinear } from '../studio/mixer';
@@ -11,7 +12,7 @@ export function resolveTrackSound(instrumentId: string, worldId = '', styleId = 
   const assignedRole = role ?? def?.acousticProfile?.role ?? 'comp';
   const dialect = resolveDialect(instrumentId, worldId, styleId, assignedRole);
   const variant = def?.variants?.find(item => item.id === dialect?.variantId);
-  const params = defaultTrackParams(instrumentId, luthier ?? variant?.luthierPhysics ?? def?.luthierPhysics ?? getLuthierModelForInstrument(instrumentId), def?.elementaryModel ?? modelForInstrument(instrumentId));
+  const params = defaultTrackParams(instrumentId, luthier ?? variant?.luthierPhysics ?? def?.luthierPhysics ?? getLuthierModelForInstrument(instrumentId));
   params.variantId = variant?.id;
   params.courses = variant?.courses ?? params.courses;
   params.bodyConstruction = variant?.bodyConstruction ?? params.bodyConstruction;
@@ -45,5 +46,5 @@ export function resolveTrackSound(instrumentId: string, worldId = '', styleId = 
 
 /** User level, authored makeup gain, assigned role and controllers are independent factors. */
 export function resolveTrackGain(params: TrackParams, level = 1, volume = 1, expression = 1): number {
-  return Math.max(0, Math.min(35, makeupGainFor(params.model, params.instrumentId) * (params.roleGain ?? 1) * level * volume * expression));
+  return Math.max(0, (params.roleGain ?? 1) * level * volume * expression);
 }

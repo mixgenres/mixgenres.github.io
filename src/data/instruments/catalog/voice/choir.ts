@@ -5,8 +5,8 @@ export const choir: InstrumentDef = {
   name: "Full Vocal Choir",
   family: "voice",
   voicing: "chord",
-  elementaryModel: 12,
-  makeupGain: 0.455,
+  
+  
   polyphony: 8,
   note: "Polyphonic acoustic choral ensemble combining soprano, alto, tenor, and bass vocalists singing sustained vowel sonorities with expansive cathedral acoustic bloom",
   acousticProfile: {
@@ -53,11 +53,7 @@ export const choir: InstrumentDef = {
       bodyResonance: 0.9,
       stereoWidth: 0.95
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "Ensemble detuning creates rich natural chorus phase interaction without artificial modulation.",
-      "Dynamic velocity layers smoothly crossfade from intimate pianissimo humming to triumphant fortissimo chorales.",
-      "Long cathedral acoustic reverb tail envelops the voices in transcendent space."
-    ]
+    
+    
   }
 };

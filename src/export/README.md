@@ -20,17 +20,16 @@ Notation is quantized to a 1/24-quarter-note grid (40 of 960 ticks), representin
 
 MIDI bends are channel-wide, so overlapping per-note bends may not match the source. Shared channel 10 is used for percussion. Exact per-note bends and nonstandard frequencies remain in JSON. At most 15 melodic tracks can fit in one MIDI file; export smaller groups for larger ensembles.
 
-## Audio efficiency
+## Audio rendering and encoding
 
-- Notes/controllers are grouped by track once.
-- Event-free spans render in batches directly into stem buffers, while preserving the original 64-sample event boundaries. Rendering yields to the UI periodically. Before/after WAV comparisons for bandoneon, violin and piano were byte-identical.
+- Notes/controllers are grouped by part once, then the SoundFont renderer produces only the selected parts on demand.
+- Event-free spans render in batches directly into the current part buffer, preserving the original 64-sample event boundaries. Long browser exports yield to the UI periodically.
 - AbortSignal stops track rendering and terminates MP3 workers; a cancelled export cannot trigger a download.
 - Browser bus accumulation writes directly into AudioBuffers, eliminating six explicit full-song float-buffer copies.
 - MP3 PCM conversion reuses two 18,432-sample Int16 windows, instead of two full-song buffers. Encoding runs in an ES module worker with transferred buffers; Node uses the same encoder without a worker.
-- PCM stem cache is bounded to 2–32 MiB by device policy, includes exact events/all sound parameters/render window, and reuses unchanged stems across audio formats and exports.
-- Each independent physical render initializes a fresh renderer using the public Elementary API. Graph edits use awaited render/gc calls; no private processors or instruction queues are accessed.
+- Rendered part buffers are short-lived export inputs; no stem or complete-mix PCM cache is maintained.
 - Export implementation loads on demand when the user downloads.
 
-Run `npm run test:exports`. Tests cover selected parts, tempo mapping, score ties/percussion/TAB, archive output, GP5 selection restrictions, cancellation, bounded caching and MP3 encoding. Fixtures in `/tmp/mix-export-fixtures` can be checked independently with PyGuitarPro, mido, lxml and ffprobe. These are optional validation tools, not application runtime dependencies.
+Run `npm run test:exports`. Tests cover selected parts, tempo mapping, score ties/percussion/TAB, archive output, GP5 selection restrictions, cancellation, on-demand sample rendering and MP3 encoding. Fixtures in `/tmp/mix-export-fixtures` can be checked independently with PyGuitarPro, mido, lxml and ffprobe. These are optional validation tools, not application runtime dependencies.
 
 Format references: [MusicXML notation and TAB](https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/tutorial-tablature/), [Logic MIDI support](https://support.apple.com/en-kw/guide/logicpro/lgcpdf6a3851/mac), [Ableton MIDI interchange](https://help.ableton.com/hc/en-us/articles/209068169-Understanding-MIDI-files), [GP5 binary structure](https://github.com/TadaoYamaoka/gp5_file_format).

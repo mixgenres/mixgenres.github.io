@@ -43,13 +43,6 @@ for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
   }
 }
 
-export const GAIN_BY_INSTRUMENT: Partial<Record<string, number>> = {};
-for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
-  if (typeof def.makeupGain === 'number') {
-    GAIN_BY_INSTRUMENT[id] = def.makeupGain;
-  }
-}
-
 export const LUTHIER_INSTRUMENT_MAP: Record<string, LuthierPhysicalParameters> = {};
 for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
   if (def.luthierPhysics) {

@@ -5,8 +5,8 @@ export const bassoon: InstrumentDef = {
   name: "Bassoon",
   family: "winds",
   voicing: "single",
-  elementaryModel: 3,
-  makeupGain: 0.9015,
+  
+  
   polyphony: 4,
   note: "Double-reed bass woodwind with rich woody buzz, reedy warmth, and agile staccato articulation",
   acousticProfile: {

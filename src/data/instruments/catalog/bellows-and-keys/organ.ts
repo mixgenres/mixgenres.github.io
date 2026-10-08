@@ -5,8 +5,8 @@ export const organ: InstrumentDef = {
   name: "Tonewheel organ",
   family: "bellows-and-keys",
   voicing: "chord",
-  elementaryModel: 13,
-  makeupGain: 0.8415,
+  
+  
   polyphony: 8,
   acousticProfile: {
     sustain: "sustained",

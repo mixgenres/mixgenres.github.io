@@ -1,0 +1,8 @@
+Virtual Community Sample Library (VCSL), Sam Gossner and contributors
+https://github.com/sgossner/VCSL
+Source revision: c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e
+Samples dedicated to the public domain under CC0 1.0. See CC0.txt.
+
+Included: Cajon_hit1/2/3_mp/f_rr1 and Clap_rr1/2/3.
+MixGenres modifications: mono 44.1 kHz conversion, trailing-silence trimming,
+5 ms terminal fades, SF2 velocity zones, deterministic handclap take selection.

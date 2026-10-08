@@ -5,8 +5,8 @@ export const steel_drums: InstrumentDef = {
   name: "Steel pan",
   family: "metal-and-wood",
   voicing: "single",
-  elementaryModel: 8,
-  makeupGain: 0.6419,
+  
+  
   polyphony: 4,
   note: "Low-C tenor/lead steel pan, C4–E6; tuned octave and twelfth modes",
   acousticProfile: {

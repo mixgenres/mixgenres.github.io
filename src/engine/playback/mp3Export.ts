@@ -1,54 +1,27 @@
 import { createSongMixGraph, type SongMixGraph } from '../studio/dynamicMix/MixGraph';
 import { accumulatePortableMix, renderPortableAmbience } from '../studio/dynamicMix/PortableMixRuntime';
-import { createNoteTailResolver } from './noteLifetime';
-import { prepareNoteVoice, applyPhysicalController } from './performancePlan';
 import { checkAbort, encodeMp3, wavBlob, yieldToUI } from '../../export/audioEncoding';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
-import { computeTrackStemFingerprint, stemCache } from '../cache/stemCache.ts';
-import type { StemCacheEntry } from '../cache/stemCache';
-import { renderCompactTrack } from './compactInstrument';
-import type { Performance, PerfNote, PerfCC } from '../band/performanceData.ts';
-import { resolveTrackSound, resolveTrackGain } from './trackSound';
+import type { Performance, PerfNote } from '../band/performanceData.ts';
+import { resolveTrackSound } from './trackSound';
 import { createMasterChain, type MasterChain, type StudioMixState } from '../studio/mixer.ts';
 import { resolvePlaybackMix, ensembleHeadroom } from '../studio/masterSettings';
 import { measureAudio, type RenderDiagnostic } from '../studio/audioMetrics';
 import { reserveOutputHeadroom } from '../studio/outputHeadroom';
-import { FORM_BLUEPRINTS } from '../../data/genreForms';
-import { processOfflineAudioDSP } from '../studio/effects.ts';
 import { excerptMixTimeline } from '../studio/dynamicMix/MixAutomation';
-import { RenderQueue } from './renderQueue';
-import {
-  determineBusCategory,
-  type TrackParams,
-} from './elementaryEngine.ts';
+import { determineBusCategory } from './mixBus';
+import { SOUNDFONT_RELEASE_RESERVE } from './soundfont/release';
 
 export interface Mp3RenderOptions {
   selectedTrackIds?: string[];
-  /** Physical stems already rendered in workers, before any ensemble mastering. */
-  preparedStems?: Map<string, RenderedPerformanceAudio>;
   /** Render a short excerpt for auditions and diagnostic exports. */
   renderWindow?: { start: number; end: number };
-  /** Lower values run first. Evaluated again when a queued render is picked. */
-  renderPriority?: () => number;
   signal?: AbortSignal;
   format?: 'mp3' | 'wav';
   rawStem?: boolean;
-  /** Main-thread section PCM owns reuse; workers need not retain a second copy. */
-  cacheDSPStem?: boolean;
-  /** Mix preparation can consume cached sections without copying a whole part. */
-  sectionStems?: boolean;
-  /** Playback may stop section synthesis at its requested window's end. */
-  boundedStems?: boolean;
-  /** Internal: prepare reusable outgoing tails when transport has a reserve. */
-  stemLookaheadSeconds?: number;
-  /** Keep a favorite's prepared opening mix across browser sessions. */
-  persistMix?: boolean;
-  persistMixPriority?: 'favorite' | 'catalog';
-  /** Limit PCM output without changing note holds, releases or DSP state. */
+  /** Limit PCM output without changing note holds, releases or mix state. */
   maxDurationSeconds?: number;
-  /** Internal raw-section optimization: advance DSP normally, retain only this suffix. */
-  rawOutputStartSample?: number;
-  /** Workers have their own event loop; main-thread fallback yields for input. */
+  /** Let long exports yield so the browser stays responsive. */
   yieldForUI?: boolean;
   trackInstruments: Map<string, string>;
   trackRoles?: Map<string, string>;
@@ -60,42 +33,20 @@ export interface Mp3RenderOptions {
   onDiagnostics?: (event: RenderDiagnostic) => void;
 }
 
-
-function applyCCToParams(
-  params: TrackParams,
-  cc: number,
-  value: number,
-  trackMixVolume: number,
-  controllerGain: { volume: number; expression: number },
-) {
-  const norm = value / 127;
-  if (cc === 7 || cc === 11) {
-    if (cc === 7) controllerGain.volume = norm;
-    else controllerGain.expression = norm;
-    params.volume = resolveTrackGain(params, trackMixVolume, controllerGain.volume, controllerGain.expression);
-  } else if (cc === 10) params.pan = norm;
-  else applyPhysicalController(params, cc, value);
-}
-
 /** Float PCM shared by playback and export, without a WAV encode/decode round trip. */
 export interface RenderedPerformanceAudio {
   sampleRate: number;
   left: Float32Array;
   right: Float32Array;
   buffer?: AudioBuffer;
-  sections?: StemCacheEntry[];
 }
 
-// Serialize expensive renders so superseded edits and exports cannot allocate
-// several full-song graphs/buffers at once on memory-constrained devices.
-const renderQueue = new RenderQueue();
-
-export function renderPerformanceToMp3(perf: Performance, options: Mp3RenderOptions, onProgress?: (fraction: number) => void): Promise<Blob> {
-  return renderQueue.enqueue(() => renderPerformance(perf, options, onProgress, false) as Promise<Blob>, options.renderPriority, options.signal);
+export async function renderPerformanceToMp3(perf: Performance, options: Mp3RenderOptions, onProgress?: (fraction: number) => void): Promise<Blob> {
+  return await renderPerformance(perf, options, onProgress, false) as Blob;
 }
 
-export function renderPerformanceToAudio(perf: Performance, options: Mp3RenderOptions, onProgress?: (fraction: number) => void): Promise<RenderedPerformanceAudio> {
-  return renderQueue.enqueue(() => renderPerformance(perf, options, onProgress, true) as Promise<RenderedPerformanceAudio>, options.renderPriority, options.signal);
+export async function renderPerformanceToAudio(perf: Performance, options: Mp3RenderOptions, onProgress?: (fraction: number) => void): Promise<RenderedPerformanceAudio> {
+  return await renderPerformance(perf, options, onProgress, true) as RenderedPerformanceAudio;
 }
 
 async function renderPerformance(
@@ -112,31 +63,24 @@ async function renderPerformance(
   // Isolated playback parts must not pay for other parts' event scans, sound
   // resolution or decay tails. Keep the ensemble mix timeline for its headroom.
   perf = { ...perf, notes: perf.notes.filter(note => isActive(note.trackId)), ccs: perf.ccs.filter(cc => isActive(cc.trackId)) };
-  if (options.renderWindow) perf = performanceWindow(perf, options.renderWindow.start, options.renderWindow.end, createNoteTailResolver(perf, options));
+  if (options.renderWindow) perf = performanceWindow(perf, options.renderWindow.start, options.renderWindow.end, () => SOUNDFONT_RELEASE_RESERVE, true);
   const sampleRate = 44100;
-  const noteTail = createNoteTailResolver(perf, options);
+  const noteTail = (_note: PerfNote) => SOUNDFONT_RELEASE_RESERVE;
   // Match each note's end to its own lifetime, rather than adding the longest
   // instrument tail to the latest note in an unrelated part.
   const lastDecayEnd = perf.notes.reduce((end, note) => Math.max(end, note.time + note.dur + noteTail(note)), 0);
   const completeDuration = Math.max(1, perf.duration + (perf.tail ?? 3), lastDecayEnd);
-  const limit = options.maxDurationSeconds ?? (options.preparedStems && options.renderWindow ? perf.duration : undefined);
+  const limit = options.maxDurationSeconds;
   const duration = limit !== undefined && Number.isFinite(limit) && limit > 0
     ? Math.min(completeDuration, limit) : completeDuration;
   const totalSamples = Math.ceil(duration * sampleRate);
-  const outputStartSample = Math.max(0,Math.min(totalSamples-1,Math.floor(options.rawOutputStartSample ?? 0)));
-  if (outputStartSample && (!options.rawStem || options.onDiagnostics)) throw new Error('A cropped physical stem requires raw PCM without diagnostics.');
-  const outputSamples = totalSamples-outputStartSample;
-  const activeTrackIds = [...new Set([
-    ...perf.notes.map(n => n.trackId),
-    ...(options.preparedStems?.keys() ?? []),
-  ])];
+  const outputStartSample = 0;
+  const outputSamples = totalSamples;
+  const activeTrackIds = [...new Set(perf.notes.map(n => n.trackId))];
 
   if (!activeTrackIds.length && !options.rawStem) throw new Error('No audible notes in the selected tracks.');
   const notesByTrack = new Map<string, PerfNote[]>();
-  const ccsByTrack = new Map<string, PerfCC[]>();
   for (const note of perf.notes) { const bucket = notesByTrack.get(note.trackId) ?? []; bucket.push(note); notesByTrack.set(note.trackId, bucket); }
-  for (const cc of perf.ccs) { const bucket = ccsByTrack.get(cc.trackId) ?? []; bucket.push(cc); ccsByTrack.set(cc.trackId, bucket); }
-  for (const ccs of ccsByTrack.values()) ccs.sort((a, b) => a.time - b.time);
   if (onProgress) onProgress(0.02);
 
   const { mixCharacter, masterProfile: styleMaster, context: mixContext } = resolvePlaybackMix(options.worldId, options.styleId);
@@ -179,89 +123,40 @@ async function renderPerformance(
 
     const totalTracks = Math.max(1, activeTrackIds.length);
 
-    // Render each track in isolation (Stem-by-Stem Sequential Rendering)
+    // Render only the selected part, then route it through the shared mix.
     for (let tIdx = 0; tIdx < activeTrackIds.length; tIdx++) {
       checkAbort(options.signal);
       if (options.yieldForUI !== false) await yieldToUI();
       const trackId = activeTrackIds[tIdx];
       const trackNotes = notesByTrack.get(trackId) ?? [];
-      const prepared = options.preparedStems?.get(trackId);
-      if (trackNotes.length === 0 && !prepared?.sections?.length && !prepared?.left.length) continue;
+      if (trackNotes.length === 0) continue;
 
       const instrumentId = options.trackInstruments.get(trackId) || perf.trackInfo?.[trackId]?.instrumentId || trackId;
       const instDef = INSTRUMENTS_BY_ID[instrumentId];
       const params = resolveTrackSound(instrumentId, options.worldId ?? perf.worldId, options.styleId, options.trackRoles?.get(trackId) ?? perf.trackInfo?.[trackId]?.role);
       const trackMixVolume = options.mixState?.volume?.[trackId] ?? 1;
       const trackMixPan = options.mixState?.pan?.[trackId] ?? params.pan;
-      // Instrument physics and authored CCs render at unity, with the kit's
-      // own component placement. User balance belongs after this reusable PCM.
-      params.pan = .5;
-      const controllerGain = { volume: 1, expression: 1 };
-
-      // A playback window can contain only the release tail of a note attacked
-      // earlier. In that case prepared PCM defines the active sample span.
+      // Keep historical attacks in the excerpt so holds, bends and release tails
+      // are reconstructed by the sample player at the requested playhead.
       let minNoteTime = Infinity;
       for (const n of trackNotes) {
         if (n.time < minNoteTime) minNoteTime = n.time;
       }
-
-      const preparedSections = prepared?.sections ?? (prepared?.left.length
-        ? [{ left: prepared.left, right: prepared.right, startSample: 0 }] : []);
-      const trackStartSample = prepared ? 0 : Math.max(0, Math.floor(minNoteTime * sampleRate));
+      const trackStartSample = Math.max(0, Math.floor(minNoteTime * sampleRate));
       const noteEndSample = Math.ceil(trackNotes.reduce((end, note) => Math.max(end, note.time + note.dur + noteTail(note)), 0) * sampleRate);
-      const preparedEndSample = preparedSections.reduce((end, section) => Math.max(end, section.startSample + section.left.length), 0);
-      const trackEndSample = Math.min(totalSamples, Math.max(noteEndSample, preparedEndSample));
+      const trackEndSample = Math.min(totalSamples, noteEndSample);
       const trackSamples = trackEndSample - trackStartSample;
       if (trackSamples <= 0 || trackEndSample <= outputStartSample) continue;
       const retainedStart = Math.max(trackStartSample,outputStartSample);
-
-      const trackCCs = ccsByTrack.get(trackId) ?? [];
-      const controllerNumbers = [...new Set(trackCCs.map(cc => cc.cc))];
-
-      // Apply any initial CC values before track start
-      for (const cc of trackCCs) {
-        const s = Math.round(cc.time * sampleRate);
-        if (s <= trackStartSample) {
-          applyCCToParams(params, cc.cc, cc.value, 1, controllerGain);
-        }
-      }
-
-      // Check aggressive PCM stem cache (Tier 2 Performance Cell fingerprint)
-      const stemFingerprint = !prepared && options.cacheDSPStem !== false ? computeTrackStemFingerprint(
-        trackId,
-        instrumentId,
-        params,
-        1,
-        trackNotes,
-        trackCCs,
-        sampleRate,
-      ) : '';
-
-      const cacheKey = `${stemFingerprint}:${trackStartSample}:${trackSamples}:${outputStartSample}:compact-v3`;
-      if (prepared && prepared.sampleRate !== sampleRate) throw new Error('Prepared stem sample rate does not match the mix.');
-      let stem = prepared ? { left: prepared.left, right: prepared.right, startSample: 0 }
-        : options.cacheDSPStem === false ? undefined : stemCache.get(cacheKey);
-
-      if (!stem) {
-        const voices = trackNotes.map(note => prepareNoteVoice(note, params,
-          options.worldId ?? perf.worldId ?? '', options.styleId ?? '',
-          options.trackRoles?.get(trackId) ?? perf.trackInfo?.[trackId]?.role, controllerNumbers));
-        if (!instDef) throw new Error(`Unknown instrument: ${instrumentId}`);
-        stem = await renderCompactTrack(trackNotes, trackCCs, instDef, { ...params, volume: resolveTrackGain(params) },
-          retainedStart, trackEndSample, voices, options.signal, options.yieldForUI !== false);
-
-        if (options.cacheDSPStem !== false) stemCache.set(cacheKey, stem);
-      }
-
-      let chunks = prepared?.sections ?? [stem];
+      if (!instDef) throw new Error(`Unknown instrument: ${instrumentId}`);
+      const stem = await (await import('./soundfont/render')).renderSampleTrack(perf, options, trackId, retainedStart, trackEndSample);
+      let chunks = [stem];
       const applyBalance = !options.rawStem || !!options.mixState;
       const pan = Math.max(0, Math.min(1, trackMixPan));
       const gainL = applyBalance ? Math.cos(pan * Math.PI / 2) * Math.SQRT2 * trackMixVolume : 1;
       const gainR = applyBalance ? Math.sin(pan * Math.PI / 2) * Math.SQRT2 * trackMixVolume : 1;
       if (!masterContext && applyBalance) {
-        // Equal-power balance of the centred physical stem. This preserves kit
-        // spread and authored pan automation, and is identical for cached and
-        // freshly synthesized stems. Never mutate shared cached arrays.
+        // Apply fader and pan directly to this part's rendered sample buffer.
         chunks = chunks.map(chunk => {
           const left = new Float32Array(chunk.left.length), right = new Float32Array(chunk.right.length);
           for (let i = 0; i < left.length; i++) { left[i] = chunk.left[i]*gainL; right[i] = chunk.right[i]*gainR; }
@@ -281,12 +176,11 @@ async function renderPerformance(
         options.onDiagnostics({ stage: 'stem', id: trackId, instrumentId,
           bus: determineBusCategory(instDef?.acousticProfile?.role, instrumentId),
           metrics: measureAudio(left,right,sampleRate), trackLevel: trackMixVolume,
-          resolvedGain: resolveTrackGain(params,trackMixVolume,controllerGain.volume,controllerGain.expression) });
+          resolvedGain: params.roleGain ?? 1 });
       }
 
       if (directRaw) {
-        // Worker parts need physical PCM only. Avoid allocating three empty
-        // mix buses and another output copy around an already complete stem.
+        // An isolated part returns immediately without allocating mix buses.
         const single = chunks.length === 1 ? chunks[0] : undefined;
         if (activeTrackIds.length === 1 && single?.startSample === outputStartSample && single.left.length === outputSamples && single.right.length === outputSamples) {
           rawOutput = single;
@@ -305,8 +199,7 @@ async function renderPerformance(
         continue;
       }
       if (dynamicGraph && masterContext) {
-        // Keep cached sections intact. Native sources sum their complete tails
-        // into one continuous master, without a second full-part PCM copy.
+        // Native sources sum complete part tails into one continuous master.
         const split=masterContext.createChannelSplitter(2), merge=masterContext.createChannelMerger(2);
         const balanceL=masterContext.createGain(), balanceR=masterContext.createGain();
         balanceL.gain.value=gainL; balanceR.gain.value=gainR;
@@ -387,8 +280,6 @@ async function renderPerformance(
     }
     if (onProgress) onProgress(0.75);
 
-    const styleBlueprint = options.styleId ? FORM_BLUEPRINTS[options.styleId] : (options.worldId ? FORM_BLUEPRINTS[options.worldId] : undefined);
-
     // Node/CI environments do not expose Web Audio's OfflineAudioContext. Keep a
     // deterministic export path for isolated instrument validation: the exact same
     // shared instrument stems are emitted without pretending that the browser
@@ -401,7 +292,6 @@ async function renderPerformance(
         renderedLeft[i] = drumBusL[i] + subBusL[i] + instBusL[i];
         renderedRight[i] = drumBusR[i] + subBusR[i] + instBusR[i];
       }
-      if (!options.rawStem && styleBlueprint?.dspProfile) processOfflineAudioDSP(renderedLeft, renderedRight, styleBlueprint.dspProfile);
       if (!options.rawStem) reserveOutputHeadroom(renderedLeft, renderedRight);
       observeOutput(renderedLeft, renderedRight, false);
       checkAbort(options.signal);
@@ -450,9 +340,6 @@ async function renderPerformance(
     const renderedLeft = rendered.getChannelData(0);
     const renderedRight = rendered.numberOfChannels > 1 ? rendered.getChannelData(1) : renderedLeft;
 
-    if (!options.rawStem && styleBlueprint?.dspProfile) {
-      processOfflineAudioDSP(renderedLeft, renderedRight, styleBlueprint.dspProfile);
-    }
     if (!options.rawStem) reserveOutputHeadroom(renderedLeft, renderedRight);
 
     observeOutput(renderedLeft, renderedRight, true);
@@ -468,9 +355,11 @@ async function renderPerformance(
 
 /** Retain original attacks, bends and controller history when an excerpt starts
  * inside a held note or release. Negative times describe its existing age. */
-function performanceWindow(perf: Performance, start: number, end: number, tail: (note: PerfNote) => number): Performance {
+function performanceWindow(perf: Performance, start: number, end: number, tail: (note: PerfNote) => number, keepSampleHistory=false): Performance {
   const from = Math.round(Math.max(0, start) * 44100) / 44100, to = Math.max(from + 0.01, end);
-  const notes = perf.notes.filter(note => note.time < to && note.time + note.dur + tail(note) > from)
+  // A sample may remain held by the pedal long after its score note-off. Keep
+  // historical attacks for exact silent replay instead of guessing a tail.
+  const notes = perf.notes.filter(note => note.time < to && (keepSampleHistory || note.time + note.dur + tail(note) > from))
     .map(note => ({ ...note, time: (Math.round(note.time * 44100) - Math.round(from * 44100)) / 44100 }));
   // Keep earlier events at their original relative time: a canonical synthesis
   // block can begin just before the crop and must see the same controller state.

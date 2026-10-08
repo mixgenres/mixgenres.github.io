@@ -1,0 +1,375 @@
+{
+  "version": "mixgenres-sf-v4",
+  "sourceSha256": [
+    "9575028c7a1f589f5770fccc8cff2734566af40cd26ed836944e9a5152688cfe",
+    "c0ae2e0c4b3efb98b3af49ac553e2ab3bb23258bf4832c3146f94b26cd9236f1",
+    "11da2018b51a39f99f3cd1ee1880c510d4be8d22756853b56dbac03584dda060"
+  ],
+  "vcslCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+  "vcslSha256": {
+    "Cajon_hit1_mp_rr1.wav": "4103c4a847a8cc8860b9449ef26619b56825e972f1bfa0427bdd3f5e36ca81aa",
+    "Cajon_hit1_f_rr1.wav": "18241c7c9f73dc9edfe6402371fefba5584ed5f9bc6fe827d3bba945841301d6",
+    "Clap_rr1.wav": "4c9f3fe4a34733b9be6ed9ce5e5aad48b19c1029ae9c6dd1b96294a847539e3f",
+    "Cajon_hit2_mp_rr1.wav": "aa8836ba7ff3f79a4e6ce82b8a42e0c17321fd44300403a05a47012a5173bfc9",
+    "Cajon_hit2_f_rr1.wav": "ad85e345189439370fb54676813affba0e46f5d9f502aa63e995a2ea7a831960",
+    "Clap_rr2.wav": "5ae64e838b76d0658cc541f07c3c7dcfd4b08815a915f32843a8279bf2c33b9a",
+    "Cajon_hit3_mp_rr1.wav": "9ec7c1b08b7e93a7f117a752ae168e23824a7d6e88e36c9d9e20f4b6672542b0",
+    "Cajon_hit3_f_rr1.wav": "be3abbe090a25907177796579442823e9ebb84aab4d616339fb70660eaa43800",
+    "Clap_rr3.wav": "e8c13dc41f31b479f8e3ec49e9dfc49c17d299cce36eedb657fe170f0e6fcb44"
+  },
+  "packs": {
+    "keys": {
+      "bytes": 4060877,
+      "unpackedBytes": 4442684,
+      "sha256": "0eb42548341c536544b1afe20d66dec6f3dc99f73ee0919e6c53c5c3827902c2",
+      "unpackedSha256": "be050d9d7d99bea7a96affa1bcfc13d5abeddfd4d9636ccaa61be6775689ce1f",
+      "presets": [
+        "0:0:0",
+        "0:0:4",
+        "0:0:5",
+        "0:0:6",
+        "0:0:7",
+        "0:0:16",
+        "0:0:19",
+        "0:0:20",
+        "0:0:21",
+        "0:0:22",
+        "0:0:23"
+      ],
+      "samples": 110,
+      "format": "sf2"
+    },
+    "mallets": {
+      "bytes": 1671966,
+      "unpackedBytes": 1972934,
+      "sha256": "88d99b99ed6c979d7e32620c267404180e56d3c1ccb5ec927fdac980095f9c7c",
+      "unpackedSha256": "17f684b87a83b251cc7445a19ee17d82378e21ba53751e109b9f29313106be09",
+      "presets": [
+        "0:0:8",
+        "0:0:9",
+        "0:0:10",
+        "0:0:11",
+        "0:0:12",
+        "0:0:13",
+        "0:0:14",
+        "0:0:15",
+        "0:0:117"
+      ],
+      "samples": 42,
+      "format": "sf2"
+    },
+    "guitars": {
+      "bytes": 4606083,
+      "unpackedBytes": 5018994,
+      "sha256": "7d3fe87448ee900b062c08de6d762c8b900490a82e1371d0798e59f652bee128",
+      "unpackedSha256": "3e675ec1089d6600b7b974dda836385af0bf42ed0f9bb14117805f41a14a7417",
+      "presets": [
+        "0:0:24",
+        "0:0:25",
+        "0:0:26",
+        "0:0:27",
+        "0:0:28",
+        "0:0:29",
+        "0:0:30",
+        "0:0:31",
+        "0:0:32",
+        "0:0:33",
+        "0:0:34",
+        "0:0:35",
+        "0:0:36",
+        "0:0:38",
+        "0:0:46",
+        "0:0:104",
+        "0:0:105",
+        "0:0:106",
+        "0:0:107",
+        "0:0:108"
+      ],
+      "samples": 195,
+      "format": "sf2"
+    },
+    "strings": {
+      "bytes": 5207245,
+      "unpackedBytes": 5587544,
+      "sha256": "20fa6675e297edd128556a09e632dc0b3b6463b5e081cf9cf63757456a88c235",
+      "unpackedSha256": "ba7690358994ad8ba626e3a4e68e64258b648a8f4dc95cce374ed04239e2586c",
+      "presets": [
+        "0:0:40",
+        "0:0:41",
+        "0:0:42",
+        "0:0:43",
+        "0:0:45",
+        "0:0:48",
+        "0:0:49"
+      ],
+      "samples": 87,
+      "format": "sf2"
+    },
+    "winds": {
+      "bytes": 3741178,
+      "unpackedBytes": 3939328,
+      "sha256": "2d3e1244909b7b55ff387be069cfbeef324b8255da05eadafd2a6b76b276264c",
+      "unpackedSha256": "b56bc94974e09c07c8ebc62f3048ca5192bdc02bc4ddb5a4ed113c464cfc32df",
+      "presets": [
+        "0:0:64",
+        "0:0:65",
+        "0:0:66",
+        "0:0:67",
+        "0:0:68",
+        "0:0:69",
+        "0:0:70",
+        "0:0:71",
+        "0:0:72",
+        "0:0:73",
+        "0:0:74",
+        "0:0:75",
+        "0:0:77",
+        "0:0:78",
+        "0:0:79",
+        "0:0:109",
+        "0:0:111"
+      ],
+      "samples": 121,
+      "format": "sf2"
+    },
+    "brass": {
+      "bytes": 1707010,
+      "unpackedBytes": 1932142,
+      "sha256": "e4cc341437d400984331608e18084bd053fa9e02299f5e0960d75640201242f5",
+      "unpackedSha256": "a1397d8a6dc48fdbfd1ef34c5d1bb5ea84107d615aba7beca02c3297c080c744",
+      "presets": [
+        "0:0:56",
+        "0:0:57",
+        "0:0:58",
+        "0:0:59",
+        "0:0:60",
+        "0:0:61"
+      ],
+      "samples": 49,
+      "format": "sf2"
+    },
+    "electronic": {
+      "bytes": 4263880,
+      "unpackedBytes": 4377070,
+      "sha256": "3294948ad51622c2e7e824ccd0fee4d7c14d6cf477548fa8a4e53fc7c6c4e5d9",
+      "unpackedSha256": "0412b550f92e965d283846a3669c19a48f39489b4fbb41f0112997cc24de2402",
+      "presets": [
+        "0:0:52",
+        "0:0:53",
+        "0:0:80",
+        "0:0:81",
+        "0:0:88",
+        "0:0:89",
+        "0:0:98",
+        "0:0:120",
+        "0:0:121"
+      ],
+      "samples": 94,
+      "format": "sf2"
+    },
+    "percussion": {
+      "bytes": 2585979,
+      "unpackedBytes": 3712632,
+      "sha256": "3711f0d43c96740a150ceae1934dd1e3bab4d972e11554241b80136c598d7c2a",
+      "unpackedSha256": "5f6d34346c971dbf681236187285cd66403b554c37f667abbaeb7d7d22762894",
+      "presets": [
+        "0:66:0",
+        "0:66:1",
+        "DRUM:0"
+      ],
+      "samples": 74,
+      "format": "sf2"
+    },
+    "nylon": {
+      "bytes": 12182724,
+      "unpackedBytes": 22843482,
+      "sha256": "8efd66a69179029558cbdb7d69f8c8c18fb53fb1890ab64618bc94b9fd902adc",
+      "unpackedSha256": "377e97bab9a8af4b48cae188b5c2bff169b60486c22bc42bae25180fff1cbfdb",
+      "presets": [
+        "0:64:24",
+        "0:65:24",
+        "0:66:24"
+      ],
+      "samples": 24,
+      "format": "sf2"
+    },
+    "steel": {
+      "bytes": 18098240,
+      "unpackedBytes": 26369492,
+      "sha256": "eb88d3452e65e2b58d8621fdb8348e30f737918cf877bcfa14ad09d57b9ca477",
+      "unpackedSha256": "3176d79b873b3b3651de42f1c9c8c2b3f7b5907b29fd0602d915f95b4adf3583",
+      "presets": [
+        "0:64:25",
+        "0:65:25"
+      ],
+      "samples": 59,
+      "format": "sf2"
+    },
+    "piano": {
+      "bytes": 18943688,
+      "unpackedBytes": 19370642,
+      "sha256": "fa434d02539b0d96f26b46084f2675c77def89b690330d6cc6e9c62017b93429",
+      "unpackedSha256": "70173a28cf610318fc5cc414f12337292139feb183f1a978fb02e51b54e99599",
+      "presets": [
+        "0:64:0"
+      ],
+      "samples": 240,
+      "format": "sf3"
+    },
+    "bass": {
+      "bytes": 3891989,
+      "unpackedBytes": 4378234,
+      "sha256": "f7e9cc0ce6697251736abb9b32ddbd504a66a44d566c921f550d0be2087b2a66",
+      "unpackedSha256": "75429a516821868a7505741a39d84fcc94e3682bdaa8373d956c2aa66da4a67b",
+      "presets": [
+        "0:64:33",
+        "0:64:34"
+      ],
+      "samples": 13,
+      "format": "sf2"
+    },
+    "drumkit": {
+      "bytes": 14338533,
+      "unpackedBytes": 15047710,
+      "sha256": "34bc3f9b2b4434883842dd7afe309a2dfc0e39dc0ba833a3544174582d024388",
+      "unpackedSha256": "53421b5574fdbc305a070520126eaa5cac7841351ecbc309bebe136eba146d8d",
+      "presets": [
+        "0:67:0",
+        "0:68:0",
+        "0:67:1",
+        "0:68:1",
+        "0:67:2",
+        "0:68:2"
+      ],
+      "samples": 310,
+      "format": "sf3"
+    },
+    "electricClean": {
+      "bytes": 12956934,
+      "unpackedBytes": 13725152,
+      "sha256": "1fd7e55f57ce0c721f5b6bab10f320f0414e260e104eed672a40cf77ccfd4a66",
+      "unpackedSha256": "fee4920882c75405e6c56342a87e04f4cd11f3b2ce3efad4ac78b86e656e1da2",
+      "presets": [
+        "0:69:0",
+        "0:70:0",
+        "0:69:1",
+        "0:70:1",
+        "0:69:2",
+        "0:70:2"
+      ],
+      "samples": 182,
+      "format": "sf3"
+    },
+    "electricDrive": {
+      "bytes": 19084034,
+      "unpackedBytes": 20169646,
+      "sha256": "aa40da5473a478835cea433ff91d3dc41ee311a5885e66476cd6fdb7d93d08c3",
+      "unpackedSha256": "cf708792d4060b6ac3cb87ed0f9ce2054b80446f98143076c55f924bd7caaf05",
+      "presets": [
+        "0:71:0",
+        "0:72:0",
+        "0:71:1",
+        "0:72:1",
+        "0:71:2",
+        "0:72:2"
+      ],
+      "samples": 182,
+      "format": "sf3"
+    },
+    "bandoneon": {
+      "bytes": 2389561,
+      "unpackedBytes": 2467818,
+      "sha256": "d742830548c49aa2e3a1524982a9e3890381150c219d7024bbdd744004ebb954",
+      "unpackedSha256": "3ac3048ddc44004ca855eaca4bed4f14a40d6ace79e2d2e869b2c0e42efe3d13",
+      "presets": [
+        "0:73:0",
+        "0:74:0"
+      ],
+      "samples": 12,
+      "format": "sf2"
+    },
+    "upright": {
+      "bytes": 8160279,
+      "unpackedBytes": 9282368,
+      "sha256": "874ad302a320143d864f122a2781ea1e6d36c81989ee033af0e383712271e677",
+      "unpackedSha256": "2f919569e6fbf864a37d8a91d38e430cf78e59514bd131339ca7fa61cb6a304d",
+      "presets": [
+        "0:64:0",
+        "0:64:1",
+        "0:64:2",
+        "0:64:3",
+        "0:64:4",
+        "0:64:5"
+      ],
+      "samples": 272,
+      "format": "sf3"
+    }
+  },
+  "qualitySourceSha256": {
+    "piano": "712d0e681efbe5203a8014e9b3e84168f1908c82f2f6fb13bd2c77d6d72c70b7",
+    "drumkit": "fec611c55b5e1c53ea3e6df1e6779c9f18502fc6455ee45edc51d5a2b4881055",
+    "finger": "bd1332696f61c0cb254ce7f202fb6b945ff46ccb1dcdd62e345a50bde3afb165",
+    "pick": "b16f6666486f42c6c4bde19a62462f0cda8b0f1d0ce72ad8ec51a557118d03ae",
+    "electricClean": "e66351135ff7c06ca0fee799688e767c917a085988ff29691c02f72c0a4ddabe",
+    "electricDrive": "2859f619d97de590fe94bf57102b741eacefd2782de22a88b7e26a4de512d488",
+    "bandoneon": "673308190823ca601d616f8e052e5b47b0b36a9ad66afd1b155a5ace7ba85ceb",
+    "uprightPizz": "1cac0ffee2b9eb94efdac80e0e8dc21b0f7550119d6bf4afa119b534cccaf717",
+    "uprightArco": "d27f0d8bd11aa1db0ad278b5813533ff5490c1e192add2f2afd40ec10349a034"
+  },
+  "distillation": {
+    "piano": {
+      "velocityLayers": [
+        4,
+        8,
+        12,
+        16
+      ],
+      "maxDecaySeconds": 10,
+      "sampleRate": 44100,
+      "terminalFadeSeconds": 0.15,
+      "vorbisQuality": 6
+    },
+    "drumkit": {
+      "velocityLayers": 6,
+      "takes": 3,
+      "layout": "GM",
+      "sourceLayout": "chromatic C3-F#4",
+      "maxDecaySeconds": 8,
+      "terminalFadeSeconds": 0.15,
+      "vorbisQuality": 6
+    },
+    "electric": {
+      "recordedDynamics": 2,
+      "softMaxVelocity": 92,
+      "takes": 3,
+      "upperRangeDynamics": "source hard recordings where soft recordings are absent",
+      "maxDecaySeconds": 12,
+      "terminalFadeSeconds": 0.15,
+      "vorbisQuality": 6
+    },
+    "bandoneon": {
+      "recordedSource": "Jörg Bleymehl 1930 ELA bandoneon",
+      "recordedSamples": 12,
+      "presets": 2,
+      "direction": "open/close use the same samples with a modest close-reed filter/attack offset"
+    },
+    "uprightBass": {
+      "recordedSource": "D. Smolken 1958 Otto Rubner double bass, CGDA fifths tuning",
+      "sourceArchiveSha256": "380986bb52ee6b6469d28e9089792a3ed37cbd163fe5a19160bf4f98785e7ccb",
+      "presets": {
+        "pizzicato": 4,
+        "arco": 2
+      },
+      "roundRobin": "four pizzicato recordings, and separate down/up bow recordings",
+      "velocityLayers": {
+        "pizzicato": 3,
+        "arco": 5
+      },
+      "discarded": "unpitched noises and body-contact keys",
+      "sampleRate": 44100,
+      "maxSampleSeconds": 12,
+      "terminalFadeSeconds": 0.15,
+      "vorbisQuality": 6
+    }
+  }
+}

@@ -6,8 +6,8 @@ export const tin_whistle: InstrumentDef = {
   family: "winds",
   octave: 12,
   voicing: "single",
-  elementaryModel: 7,
-  makeupGain: 0.7395,
+  
+  
   polyphony: 4,
   note: "Whistle register with Celtic ornament rules",
   acousticProfile: {

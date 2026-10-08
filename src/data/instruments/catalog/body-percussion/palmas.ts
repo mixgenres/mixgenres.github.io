@@ -10,8 +10,8 @@ export const palmas: InstrumentDef = {
     high: 40
   },
   voicing: "unpitched",
-  elementaryModel: 18,
-  makeupGain: 6.4722,
+  
+  
   polyphony: 8,
   note: "Authentic flamenco handclapping ensemble capturing both hollow, deep, cupped Palmas Sordas (for cante jondo and Soleá) and sharp, cutting, dry Palmas Claras/Fuertes (for Bulerías, Alegrías, and remates)",
   acousticProfile: {
@@ -48,7 +48,7 @@ export const palmas: InstrumentDef = {
       strikeZones: ["center"],
       defaultPan: 0.15,
       gainTrimDb: 0,
-      synthesisNotes: "Cupped palms trapping an air pocket for low, hollow, muffled compás accompaniment"
+      
     },
     {
       id: "palmas-claras",
@@ -61,7 +61,7 @@ export const palmas: InstrumentDef = {
       strikeZones: ["edge"],
       defaultPan: 0.25,
       gainTrimDb: 1.5,
-      synthesisNotes: "Fingers striking flat palm firmly for bright, piercing, high-frequency remate accents"
+      
     }
   ],
   techniques: {
@@ -87,10 +87,7 @@ export const palmas: InstrumentDef = {
       transientSharpness: 0.95,
       damping: 0.85
     },
-    signalChain: ["preamp", "eq", "reverb"],
-    synthesisNotes: [
-      "Palmas sordas models the low-frequency acoustic cavity trapped between cupped palms.",
-      "Palmas claras models the ultra-fast high-frequency impact crack of fingers striking a firm palm."
-    ]
+    
+    
   }
 };

@@ -8,8 +8,8 @@ export const kalimba: InstrumentDef = {
   courses: 1,
   bodyConstruction: "wood-box",
   excitationType: "fingerpad",
-  elementaryModel: 8,
-  makeupGain: 0.649,
+  
+  
   polyphony: 4,
   note: "African thumb piano with staggered metal tines over wooden soundbox producing gentle bell resonance",
   acousticProfile: {

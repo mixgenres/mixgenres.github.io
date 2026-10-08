@@ -9,8 +9,8 @@ export const sitar: InstrumentDef = {
   bodyConstruction: "gourd",
   excitationType: "plectrum",
   sympatheticStrings: true,
-  elementaryModel: 0,
-  makeupGain: 0.7975,
+  
+  
   polyphony: 4,
   note: "Standard concert sitar voicing",
   acousticProfile: {

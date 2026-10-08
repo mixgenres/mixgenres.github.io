@@ -12,8 +12,8 @@ export const congas: InstrumentDef = {
   voicing: "unpitched",
   bodyConstruction: "skin-faced",
   excitationType: "fingerpad",
-  elementaryModel: 4,
-  makeupGain: 3.4202,
+  
+  
   polyphony: 12,
   note: "Afro-Cuban paired staved wooden barrel hand drums (Quinto, Conga, Tumba) with thick mule or steer skin heads, driving the complex marcha tumbao",
   acousticProfile: {
@@ -49,7 +49,7 @@ export const congas: InstrumentDef = {
       strikeZones: ["slap"],
       defaultPan: 0.38,
       gainTrimDb: 0,
-      synthesisNotes: "High-pitched explosive crack on small 11-inch Quinto drumhead"
+      
     },
     {
       id: "conga-open",
@@ -63,7 +63,7 @@ export const congas: InstrumentDef = {
       strikeZones: ["open", "edge"],
       defaultPan: 0.34,
       gainTrimDb: 0,
-      synthesisNotes: "Full resonant open tone played near rim with fingers bouncing off"
+      
     },
     {
       id: "conga-slap-tapao",
@@ -76,7 +76,7 @@ export const congas: InstrumentDef = {
       strikeZones: ["closed", "slap"],
       defaultPan: 0.34,
       gainTrimDb: -1,
-      synthesisNotes: "Dry, cupped finger slap holding contact against drumhead"
+      
     },
     {
       id: "tumba-open",
@@ -90,7 +90,7 @@ export const congas: InstrumentDef = {
       strikeZones: ["open", "bass"],
       defaultPan: 0.28,
       gainTrimDb: 1,
-      synthesisNotes: "Deep, resonant bass rumble on 12.5-inch Tumba barrel"
+      
     },
     {
       id: "conga-heel",
@@ -103,7 +103,7 @@ export const congas: InstrumentDef = {
       strikeZones: ["center"],
       defaultPan: 0.34,
       gainTrimDb: -5,
-      synthesisNotes: "Soft heel of hand palm strike in marching tumbao motion"
+      
     },
     {
       id: "conga-toe",
@@ -116,7 +116,7 @@ export const congas: InstrumentDef = {
       strikeZones: ["tip"],
       defaultPan: 0.34,
       gainTrimDb: -6,
-      synthesisNotes: "Fingertip tap completing heel-toe rocking cycle"
+      
     }
   ],
   performanceArticulations: {
@@ -162,11 +162,7 @@ export const congas: InstrumentDef = {
       transientSharpness: 0.88,
       bodyResonance: 0.8
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "Tono abierto (open tone) strikes edge with fingers for resonant pitch projection.",
-      "Slap (seco / tapao) cups fingers against center for explosive crack transient.",
-      "Manoteo (heel-toe rocking palm motion) creates continuous 8th-note momentum."
-    ]
+    
+    
   }
 };

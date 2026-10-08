@@ -7,8 +7,8 @@ export const bandoneon: InstrumentDef = {
   voicing: "chord",
   bodyConstruction: "wood-box",
   excitationType: "breath",
-  elementaryModel: 10,
-  makeupGain: 1.1,
+  
+  
   polyphony: 8,
   note: "142-tone Rheinische Tonlage bisonoric bandoneon model: 38 right + 33 left buttons with separate Zug/Druck pitches, dry 8′/4′ octave reeds and bellows pressure shaping. Synthesis approximation, not a recorded Alfred Arnold instrument.",
   acousticProfile: {
@@ -116,12 +116,7 @@ export const bandoneon: InstrumentDef = {
       stiffness: 0.82,
       nonlinearDrive: 0.65
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "Bisonoric zinc octave reed pairs deliver the characteristic dry bandoneon spectrum, with distinct timbre shifts between pushing (cerrar) and pulling (abrir).",
-      "The 142-tone Rheinische keyboard is physically mapped as 71 buttons x 2 bellows directions; the compiler must select a valid button/direction pair rather than treating direction as a free timbral control.",
-      "Violent knee-drops deliver sudden sharp explosive marcato transients with air compression overblown edge.",
-      "Slow opening air draw evokes sustained, weeping lyrical phrasing with controlled bellows pressure and restrained pallet/air noise."
-    ]
+    
+    
   }
 };

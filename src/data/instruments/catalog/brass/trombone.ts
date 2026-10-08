@@ -4,10 +4,10 @@ export const trombone: InstrumentDef = {
   id: "trombone",
   name: "Trombone",
   family: "brass",
-  brassSynthesis: { vibratoRateHz: 5.3, defaultNonlinearBlare: 0.72 },
+  
   voicing: "single",
-  elementaryModel: 15,
-  makeupGain: 0.8555,
+  
+  
   polyphony: 4,
   acousticProfile: {
     sustain: "blown",

@@ -5,8 +5,8 @@ export const marimba: InstrumentDef = {
   name: "Marimba",
   family: "metal-and-wood",
   voicing: "single",
-  elementaryModel: 8,
-  makeupGain: 1.000,
+  
+  
   polyphony: 4,
   acousticProfile: {
     sustain: "decaying",

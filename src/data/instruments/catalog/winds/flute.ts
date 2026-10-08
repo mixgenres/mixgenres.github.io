@@ -7,8 +7,8 @@ export const flute: InstrumentDef = {
   voicing: "single",
   bodyConstruction: "wood-box",
   excitationType: "breath",
-  elementaryModel: 7,
-  makeupGain: 0.6642,
+  
+  
   polyphony: 4,
   note: "Concert C silver transverse flute delivering silky breathy tones, rapid ornamentation, and soaring melodies",
   acousticProfile: {

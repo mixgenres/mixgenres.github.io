@@ -3,12 +3,12 @@ import assert from 'node:assert/strict';
 import { INSTRUMENTS_BY_ID } from '../src/data/instruments';
 import { GENRE_CONTRACTS } from '../src/data/styles/contracts';
 import { resolveTrackSound, resolveTrackGain } from '../src/engine/playback/trackSound';
-import { resolveVoiceParameters } from '../src/engine/playback/instrumentRegistry';
 import { getGenreDialect } from '../src/engine/band/instrumentGenreDialect';
 import { mergeDialectMetadata } from '../src/engine/style/contracts';
 import { resolveRenderGesture } from '../src/engine/playback/renderGesture';
 import { codeForGesture } from '../src/engine/band/gestures';
 import { getRoleGainLinear } from '../src/engine/studio/mixer';
+import { patchForInstrument } from '../src/engine/playback/soundfont/presets';
 
 const before = JSON.stringify(INSTRUMENTS_BY_ID);
 let combinations = 0;
@@ -18,13 +18,11 @@ for (const genre of Object.keys(GENRE_CONTRACTS)) {
   for (const def of Object.values(INSTRUMENTS_BY_ID)) {
     const params = resolveTrackSound(def.id, genre, '', 'lead');
     assert.deepEqual(resolveTrackSound(def.id, genre, '', 'lead'), params, 'resolution must not accumulate multipliers');
-    assert.equal(params.model, def.elementaryModel, 'genre production must preserve the physical model');
+    assert.equal(params.model, def.family, 'sound parameters use the instrument family, not renderer model indices');
     assert.equal(params.roleGain, getRoleGainLinear('lead', genre, def.id));
-    const resolved = resolveVoiceParameters({ id: 'note', note: 60, velocity: .7, gate: 1 }, params);
-    for (const value of [params.brightness, params.body, params.decay, resolved.attack, resolved.release, resolved.sustain, resolved.envDecay]) assert.ok(Number.isFinite(value), `${genre}/${def.id}`);
-    assert.equal(resolved.isDecayingInstrument, ['decaying', 'short', 'percussive'].includes(def.acousticProfile!.sustain));
-    const explicit = resolveVoiceParameters({ id: 'note', note: 60, velocity: .7, gate: 1, attack: .12, decay: .23, sustain: .34, release: .45 }, params);
-    assert.deepEqual([explicit.attack, explicit.envDecay, explicit.sustain, explicit.release], [.12, .23, .34, .45]);
+    for (const value of [params.brightness, params.body, params.decay, params.drive, params.roleGain]) assert.ok(Number.isFinite(value), `${genre}/${def.id}`);
+    const preset = patchForInstrument(def.id, !!def.kit || !!def.drum || def.voicing === 'unpitched');
+    assert.ok(preset.pack && Number.isInteger(preset.bank) && Number.isInteger(preset.program), `${genre}/${def.id} SoundFont assignment`);
     combinations++;
   }
 }
@@ -36,7 +34,7 @@ const patched = mergeDialectMetadata(inherited, { roleVariants: { lead: { decayM
 assert.equal(patched.roleVariants.lead.bodyMultiplier, 1.2);
 assert.equal(patched.roleVariants.lead.decayMultiplier, .7);
 assert.deepEqual(patched.allowedTechniques, inherited.allowedTechniques);
-console.log(`Sound metadata checks passed: ${combinations} genre/instrument combinations, assigned roles, stable resolution, sustain, explicit envelopes, excitation and partial metadata inheritance.`);
+console.log(`SoundFont metadata checks passed: ${combinations} genre/instrument combinations, stable sound resolution, preset assignment and technique excitation.`);
 
 const gainParams = resolveTrackSound('violin', 'tango', '', 'lead');
 assert.equal(resolveTrackGain(gainParams, 0), 0, 'zero user volume must survive note-on');

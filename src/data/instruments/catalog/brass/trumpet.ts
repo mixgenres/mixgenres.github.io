@@ -7,8 +7,8 @@ export const trumpet: InstrumentDef = {
   voicing: "single",
   bodyConstruction: "brass-tube",
   excitationType: "breath",
-  elementaryModel: 15,
-  makeupGain: 0.8068,
+  
+  
   polyphony: 4,
   note: "Bb brass trumpet with lip-reed excitation, cylindrical bore shockwave steepening, flaring bell radiation, salsa mambo stabs, screams, and cup-mute colors",
   acousticProfile: {
@@ -124,11 +124,7 @@ export const trumpet: InstrumentDef = {
       breathNoise: 0.08,
       transientSharpness: 0.90
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "Lip buzz excitation coupled with cylindrical tube impedance generates rich odd and even harmonics with non-linear shockwave distortion at high dynamics.",
-      "Mouthpiece cup (1.2kHz) and flaring bell (2.8kHz) formants shape the authentic cutting brass brilliance.",
-      "Realistic brass performance gestures include lip-trill shakes, throat growl FM, fall drops, doit rips, and half-valve scoops."
-    ]
+    
+    
   }
 };

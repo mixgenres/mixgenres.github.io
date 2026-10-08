@@ -10,8 +10,8 @@ export const cowbell: InstrumentDef = {
     high: 56
   },
   voicing: "unpitched",
-  elementaryModel: 18,
-  makeupGain: 0.285,
+  
+  
   polyphony: 8,
   note: "Clapperless steel bell struck with thick wooden stick; drives salsa bongo bell and rock downbeats",
   acousticProfile: {

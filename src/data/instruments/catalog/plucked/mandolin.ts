@@ -9,8 +9,8 @@ export const mandolin: InstrumentDef = {
   courses: 2,
   bodyConstruction: "wood-box",
   excitationType: "plectrum",
-  elementaryModel: 0,
-  makeupGain: 1.1839,
+  
+  
   polyphony: 4,
   note: "Bright tremolo/plucked folk color",
   acousticProfile: {

@@ -76,7 +76,7 @@ export function scoreDurationSeconds(score: { bars: BarTime[] }, bar: number, be
 }
 
 /** Composition has already selected every pitch, voicing and gesture. This
- * boundary records those decisions before any instrument renderer sees them. */
+ * boundary records those decisions before SoundFont sample routing sees them. */
 export function musicianScoreFromArrangement(sheet: Sheet, performance: Performance): MusicianScore {
   const bars = performance.bars.map(bar => ({ ...bar, chord: sheet.measures[bar.index]?.chord ?? '',
     section: sheet.regions.find(r => r.id === bar.regionId)?.name ?? bar.regionId }));

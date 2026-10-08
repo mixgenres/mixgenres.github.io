@@ -8,8 +8,8 @@ export const piano: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "hammer",
   sympatheticStrings: true,
-  elementaryModel: 11,
-  makeupGain: 2.1,
+  
+  
   polyphony: 16,
   note: "Concert grand piano with multi-string unisons, velocity-sensitive felt hammers, cast-iron frame duplex scale chime, and comprehensive support for Tango techniques (marcato en 4, arrastre drag, Pugliese yumba clusters, chapa damping, Salgán campana stabs, and pesada sub-octaves)",
   acousticProfile: {
@@ -119,11 +119,7 @@ export const piano: InstrumentDef = {
       transientSharpness: 0.92,
       damping: 0.35
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "Triple unison detuning in upper register with single/double wound copper strings in lower register.",
-      "Non-linear felt compression transitioning dynamically from warm mellow pp to bright percussive ff attack.",
-      "Acoustic spruce soundboard plate mode (120Hz) and cross-grain modal resonance (240Hz)."
-    ]
+    
+    
   }
 };

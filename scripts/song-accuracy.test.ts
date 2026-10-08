@@ -8,8 +8,9 @@ import { createPhraseState, realizeMidi, type PhraseContext } from '../src/engin
 import { GESTURE_NAMES } from '../src/engine/band/gestures';
 import { PATTERNS_BY_ID } from '../src/data/genres';
 import { sliceBarNative } from '../src/engine/sheet/grid';
-import { resolveVoiceParameters, getInstrumentModule } from '../src/engine/playback/instrumentRegistry';
-import { resolveTrackSound } from '../src/engine/playback/trackSound';
+import { resolveRenderGesture } from '../src/engine/playback/renderGesture';
+import { codeForGesture } from '../src/engine/band/gestures';
+import { patchForInstrument } from '../src/engine/playback/soundfont/presets';
 import { ALL_STYLES } from '../src/engine/style';
 import { BANDONEON_142_BUTTONS } from '../src/engine/band/fingering/bandoneon';
 
@@ -78,11 +79,10 @@ test('tango variants use their actual meters and accompaniment cells', () => {
 });
 
 test('source-changing techniques do not alias a different excitation', () => {
-  const params = resolveTrackSound('upright-bass', 'tango');
-  assert.equal(resolveVoiceParameters({ id: 'v', note: 40, velocity: .8, gate: 1, action: 'arco' }, params).isDecayingInstrument, false);
-  assert.equal(resolveVoiceParameters({ id: 'v', note: 40, velocity: .8, gate: 1, action: 'pizzicato' }, params).isDecayingInstrument, true);
-  assert.equal(getInstrumentModule('celeste').id, 'marimba');
-  assert.equal(getInstrumentModule('music-box').id, 'marimba');
+  assert.equal(resolveRenderGesture('upright-bass', codeForGesture('arco')).mechanics.excitation, 'bow');
+  assert.equal(resolveRenderGesture('upright-bass', codeForGesture('pizzicato')).mechanics.pitchIdentity, 'pitched');
+  assert.deepEqual(patchForInstrument('celeste'), { bank: 0, program: 8, drum: false, pack: 'mallets' });
+  assert.deepEqual(patchForInstrument('music-box'), { bank: 0, program: 10, drum: false, pack: 'mallets' });
 });
 
 test('every tango bandoneon button agrees with the sounding pitch and bellows direction', () => {

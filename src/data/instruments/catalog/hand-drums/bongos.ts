@@ -12,8 +12,8 @@ export const bongos: InstrumentDef = {
   voicing: "unpitched",
   bodyConstruction: "skin-faced",
   excitationType: "fingerpad",
-  elementaryModel: 4,
-  makeupGain: 3.5775,
+  
+  
   polyphony: 12,
   note: "Small Afro-Cuban paired high-pitched wooden hand drums (Macho 7-inch, Hembra 8.5-inch) playing the driving martillo pattern",
   acousticProfile: {
@@ -48,7 +48,7 @@ export const bongos: InstrumentDef = {
       strikeZones: ["slap"],
       defaultPan: 0.48,
       gainTrimDb: 0,
-      synthesisNotes: "Crisp, piercing high-frequency slap on 7-inch Macho drum"
+      
     },
     {
       id: "hembra-open",
@@ -61,7 +61,7 @@ export const bongos: InstrumentDef = {
       strikeZones: ["open"],
       defaultPan: 0.42,
       gainTrimDb: 0,
-      synthesisNotes: "Warm resonant open tone on 8.5-inch Hembra drum"
+      
     },
     {
       id: "macho-finger-tap",
@@ -74,7 +74,7 @@ export const bongos: InstrumentDef = {
       strikeZones: ["tip"],
       defaultPan: 0.48,
       gainTrimDb: -4,
-      synthesisNotes: "Index finger edge stroke driving straight 8th-note martillo feel"
+      
     },
     {
       id: "macho-thumb",

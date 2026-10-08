@@ -146,11 +146,11 @@ function gestureSpec(d: InstrumentDef, id: string): GestureSpec {
   const explicitDampingFactor = explicit && 'dampingFactor' in explicit ? explicit.dampingFactor : undefined;
   const attack =
     explicitTransientSharpness ??
-    (d.dspProfile?.excitationDynamics.attackCollision ?? d.physicalModel?.parameters?.transientSharpness ?? 0.5);
+    (d.physicalModel?.parameters?.transientSharpness ?? 0.5);
   const damping =
     explicitDampingFactor ??
     (d.acousticProfile?.ring ? Math.max(0, Math.min(1, 1 - d.acousticProfile.ring / 5)) : 0.35);
-  const pressure = d.dspProfile?.excitationDynamics.pressureSensitivity ?? d.physicalModel?.parameters?.bowPressure ?? 0.5;
+  const pressure = d.physicalModel?.parameters?.bowPressure ?? 0.5;
   const pitchMotion = /arrastre|slide|bend|fall|doit|scoop|gliss|portamento/i.test(s) ? 1 : 0;
   const length = /ghost|staccato|slap|tap|chop|punct/i.test(s) ? 0.25 : /sustain|arco|legato|tenuto|open/i.test(s) ? 0.9 : 0.55;
   const fidelity = techniqueMechanics(d, id).fidelity;
@@ -252,11 +252,10 @@ function rolesForGenre(d: InstrumentDef, genre: string): string[] {
 
 function timingForGenre(genre: string, d: InstrumentDef) {
   const g = genre.toLowerCase();
-  const explicit = d.dspProfile?.genreDialects?.[g];
   const text = `${d.techniques.playingStyles.join(' ')} ${(d.techniques.genreTechniques?.[g] ?? []).join(' ')}`.toLowerCase();
   const push = /anticip|push|ahead|driving/.test(text);
   const lay = /laid|behind|layback|swing|blues|jazz/.test(text) || /jazz|swing|blues/.test(g);
-  const offset = explicit?.attack !== undefined ? (explicit.attack - 1) * 12 : push ? -10 : lay ? 10 : 0;
+  const offset = push ? -10 : lay ? 10 : 0;
   const feel: 'push' | 'layback' | 'neutral' = push ? 'push' : lay ? 'layback' : 'neutral';
   const swing = /swing|blues|jazz|shuffle/.test(g) ? 0.58 : 0.5;
   return { feel, offsetMs: offset, swing };
@@ -350,10 +349,10 @@ export const INSTRUMENT_PERFORMANCE_PROFILES: Record<string, InstrumentPerforman
         roles: Array.from(new Set(Object.values(genres).flatMap(g => g.roles))),
         primaryGenres: primaries,
         authoredTechniqueCount: d.techniques.articulations.length,
-        hasPhysicalModel: Boolean(d.dspProfile || d.physicalModel || d.luthierPhysics),
+        hasPhysicalModel: Boolean(d.physicalModel || d.luthierPhysics),
       },
       evidence: {
-        physical: d.dspProfile || d.physicalModel || d.luthierPhysics ? 'authored' : 'missing',
+        physical: d.physicalModel || d.luthierPhysics ? 'authored' : 'missing',
         range: d.tuningAndMechanics?.keyRange || (d.acousticProfile?.low !== undefined && d.acousticProfile?.high !== undefined) ? 'authored' : 'derived',
         techniques: d.techniques.articulations.length ? 'authored' : 'missing',
         genres: authoredGenres.length ? 'authored' : 'derived',

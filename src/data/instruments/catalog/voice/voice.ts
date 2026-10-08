@@ -6,8 +6,8 @@ export const voice: InstrumentDef = {
   family: "voice",
   octave: 12,
   voicing: "single",
-  elementaryModel: 12,
-  makeupGain: 0.455,
+  
+  
   polyphony: 4,
   note: "Synth voice tone",
   acousticProfile: {

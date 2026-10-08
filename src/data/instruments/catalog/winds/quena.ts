@@ -6,8 +6,8 @@ export const quena: InstrumentDef = {
   family: "winds",
   octave: 12,
   voicing: "single",
-  elementaryModel: 7,
-  makeupGain: 0.8337,
+  
+  
   polyphony: 4,
   acousticProfile: {
     sustain: "blown",

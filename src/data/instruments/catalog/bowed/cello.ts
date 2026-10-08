@@ -8,8 +8,8 @@ export const cello: InstrumentDef = {
   voicing: "single",
   bodyConstruction: "wood-box",
   excitationType: "bow",
-  elementaryModel: 6,
-  makeupGain: 0.1932,
+  
+  
   polyphony: 4,
   note: "Acoustic violoncello with resonant spruce body, deep wound steel string inertia, 110Hz Helmholtz air bloom, 180Hz corpus wood mode, 1.55kHz bridge hill, expressive arrastre, and rich cantabile phrasing",
   acousticProfile: {
@@ -145,11 +145,7 @@ export const cello: InstrumentDef = {
       transientSharpness: 0.82,
       stiffness: 0.75
     },
-    signalChain: ["preamp", "eq", "reverb"],
-    synthesisNotes: [
-      "Estimated bowed source/filter and plucked delay-loop responses, not a nonlinear stick-slip waveguide or measured settling model.",
-      "Estimated large wooden corpus mode (180Hz) and air mode (110Hz) provide low-register coloration.",
-      "Arrastre adds bow energy through authored approach pitches; separate afterlength rasp, strappata bow-bounce, damped pizzicato, and body contacts."
-    ]
+    
+    
   }
 };

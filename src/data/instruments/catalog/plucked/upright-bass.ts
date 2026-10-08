@@ -8,8 +8,8 @@ export const upright_bass: InstrumentDef = {
   bodyConstruction: "wood-box",
   excitationType: "fingerpad",
   sympatheticStrings: true,
-  elementaryModel: 3,
-  makeupGain: 1.3636,
+  
+  
   polyphony: 4,
   note: "Acoustic double bass with estimated plucked/bowed source and body responses; separate tango arrastre, strappata bow-bounce, tambor damped pizzicato, lija rasp, and golpe-caja body contact",
   acousticProfile: {
@@ -145,11 +145,7 @@ export const upright_bass: InstrumentDef = {
       transientSharpness: 0.85,
       damping: 0.45
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "42Hz Helmholtz internal air cavity resonance paired with 65Hz main carved spruce soundboard mode.",
-      "Estimated plucked delay-loop and bowed source/filter paths; separate muted-string, bow-bounce and body percussion.",
-      "Approximate tango mechanisms: arrastre energy swell, strappata bow-bounce roll, tambor damped pizzicato, golpe-caja body strike, and lija bow rasp."
-    ]
+    
+    
   }
 };

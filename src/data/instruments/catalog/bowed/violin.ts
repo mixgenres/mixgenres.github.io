@@ -8,8 +8,8 @@ export const violin: InstrumentDef = {
   voicing: "single",
   bodyConstruction: "wood-box",
   excitationType: "bow",
-  elementaryModel: 6,
-  makeupGain: 0.1791,
+  
+  
   polyphony: 4,
   note: "Acoustic orchestral, chamber, and folk violin with estimated bowed source/filter and corpus responses, bridge hill presence, and distinct tango string, afterlength, and body contacts",
   acousticProfile: {
@@ -142,11 +142,7 @@ export const violin: InstrumentDef = {
       transientSharpness: 0.85,
       stiffness: 0.88
     },
-    signalChain: ["preamp", "eq", "reverb"],
-    synthesisNotes: [
-      "A saw-based source/filter approximation with bow controls; not a nonlinear stick-slip waveguide.",
-      "Dual corpus body modes (A0 air mode at 280Hz, wood mode at 460Hz, and singing bridge hill at 3.1kHz) provide estimated body coloration; coefficients are not measurement calibrated.",
-      "Approximate tango chicharra afterlength rasp, latigo glissando, tambor damped pizzicato, and separate golpe-caja body percussion."
-    ]
+    
+    
   }
 };

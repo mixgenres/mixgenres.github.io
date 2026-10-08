@@ -1,7 +1,7 @@
 import { resolveTrackSound } from './trackSound';
 import type { PerfNote } from '../band/performanceData';
-import type { TrackParams, VoiceState } from './elementaryEngine';
-import { midiToFreq } from './elementaryEngine';
+import type { TrackParams, VoiceState } from './soundTypes';
+import { midiToFreq } from './soundParameters';
 import { resolveRenderGesture } from './renderGesture';
 import { resolveDialect } from '../band/genreDialect';
 import { contentKey } from '../cache/contentKey';

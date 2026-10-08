@@ -6,8 +6,8 @@ export const hichiriki: InstrumentDef = {
   family: "winds",
   octave: 12,
   voicing: "single",
-  elementaryModel: 7,
-  makeupGain: 1.0071,
+  
+  
   polyphony: 4,
   note: "Short double-reed bamboo flute of Japanese Gagaku with piercing volume and heavy microtonal enbai pitch bends",
   acousticProfile: {

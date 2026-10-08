@@ -5,8 +5,8 @@ export const concertina: InstrumentDef = {
   name: "Concertina",
   family: "bellows-and-keys",
   voicing: "chord",
-  elementaryModel: 10,
-  makeupGain: 1.0859,
+  
+  
   polyphony: 8,
   note: "Hexagonal Anglo-Celtic concertina with bright reedy punch and lively dance ornamentation",
   acousticProfile: {

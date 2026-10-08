@@ -8,8 +8,8 @@ export const shamisen: InstrumentDef = {
   courses: 1,
   bodyConstruction: "skin-faced",
   excitationType: "plectrum",
-  elementaryModel: 0,
-  makeupGain: 1.1521,
+  
+  
   polyphony: 4,
   note: "Japanese three-string color",
   acousticProfile: {

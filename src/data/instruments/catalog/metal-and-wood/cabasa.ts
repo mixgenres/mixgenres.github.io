@@ -10,8 +10,8 @@ export const cabasa: InstrumentDef = {
     high: 69
   },
   voicing: "unpitched",
-  elementaryModel: 17,
-  makeupGain: 12.080,
+  
+  
   polyphony: 8,
   note: "Loops of steel bead chains wrapped around corrugated steel cylinder; creates metallic scrapings and crisp shakes",
   acousticProfile: {

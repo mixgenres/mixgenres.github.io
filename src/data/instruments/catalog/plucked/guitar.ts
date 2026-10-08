@@ -8,8 +8,8 @@ export const guitar: InstrumentDef = {
   courses: 1,
   bodyConstruction: "wood-box",
   excitationType: "fingerpad",
-  elementaryModel: 0,
-  makeupGain: 1.9742,
+  
+  
   polyphony: 8,
   acousticProfile: {
     sustain: "decaying",

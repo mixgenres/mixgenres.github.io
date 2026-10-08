@@ -17,6 +17,8 @@ export interface RecordingArrangement {
   /** Explicit section personnel; omitted sections retain the complete ensemble. */
   sectionInstruments?: Record<string, string[]>;
   solos?: Record<string, string>;
+  /** Instrument -> style-owned cell shortName for this exact sample section. */
+  patternAssignments?: Record<string, Record<string, string>>;
   note: string;
   source?: string;
 }
@@ -31,6 +33,58 @@ const loop = (chords: string[]) => ({ _: chords });
  * Every catalog recording has an explicit full form and harmonic plan.
  */
 const DETAILED_RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = {
+  'arabic::takht': song(84, 'taqsim:16:1,intro:16:2,verse:32:3,response:16:2,verse:32:4,solo:16:2,refrain:32:4,cadence:8:1',
+    'Score adaptation for a small takht: expose the ney in the taqsim, give the oud a later accompanied feature, and keep the ney, violin, oud, qanun and riqq in distinct phrase roles.',
+    loop(['G5','G5','C5','G5']), {
+      instruments: ['ney','violin','oud','qanun','riq'], lead: 'ney',
+      sectionInstruments: {
+        taqsim: ['ney'],
+        intro: ['ney','violin','oud','qanun','riq'],
+        verse: ['ney','violin','oud','qanun','riq'],
+        response: ['ney','violin','oud','qanun','riq'],
+        solo: ['ney','violin','oud','qanun','riq'],
+        refrain: ['ney','violin','oud','qanun','riq'],
+        cadence: ['ney','violin','oud','qanun','riq'],
+      },
+      solos: { taqsim: 'ney', solo: 'oud' },
+      patternAssignments: {
+        taqsim: { ney: 'takht ney taqsim breath phrase' },
+        intro: {
+          ney: 'takht heterophonic oud qanun and ney ney statement',
+          violin: 'takht heterophonic oud qanun and ney violin statement',
+          oud: 'oud foundation pulse study', qanun: 'qanun foundation pulse study', riq: 'riq foundation pulse study',
+        },
+        verse: {
+          ney: 'ney opening-motif development variation',
+          violin: 'violin opening-motif development variation',
+          oud: 'takht oud phrase-led plucked support',
+          qanun: 'qanun opening-motif development variation',
+          riq: 'riq opening-motif development variation',
+        },
+        response: {
+          ney: 'takht ney answering ornament', violin: 'takht violin maqam response',
+          oud: 'takht oud instrumental answer', qanun: 'takht qanun ornamented phrase reply',
+          riq: 'takht heterophonic oud qanun and ney riq pulse',
+        },
+        solo: {
+          ney: 'takht ney breath response to oud', violin: 'takht violin maqam response',
+          oud: 'oud phrase answer study', qanun: 'takht qanun ornamented phrase reply',
+          riq: 'takht heterophonic oud qanun and ney riq pulse',
+        },
+        refrain: {
+          ney: 'ney opening-motif development variation', violin: 'takht violin maqam response',
+          oud: 'takht oud phrase-led plucked support', qanun: 'takht qanun ornamented phrase reply',
+          riq: 'riq opening-motif development variation',
+        },
+        cadence: {
+          ney: 'takht heterophonic oud qanun and ney ney cadence fill',
+          violin: 'takht heterophonic oud qanun and ney violin cadence fill',
+          oud: 'takht heterophonic oud qanun and ney oud cadence fill',
+          qanun: 'takht heterophonic oud qanun and ney qanun cadence fill',
+          riq: 'takht heterophonic oud qanun and ney riq cadence fill',
+        },
+      },
+    }),
   'tango::golden-age': song(124, 'intro:4:3,A:16:3,B:16:3,A:16:4,variacion:16:5,cierre:4:3', 'Orquesta típica conversation; bandoneón variation after the returning theme.'),
   'tango::troilo': song(124, 'intro:4:3,A:16:3,B:16:3,A:16:4,variacion:16:5,cierre:4:3', 'Bandoneón feature and flexible cadential responses.'),
   'tango::canyengue': song(116, 'intro:4:2,A:16:3,B:16:3,A:16:3,trio:16:4,A:16:3,cierre:2:2', 'Early dance-tango strains, compact attacks, lighter ensemble.'),
@@ -126,3 +180,40 @@ export const RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = Obje
     return [key, { ...recording, chords }] as const;
   }),
 ]);
+
+/** Section-specific sample-score cells for styles whose form needs explicit
+ * phrase development. These remain local to the exact recorded style sample. */
+const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Pick<RecordingArrangement, 'patternAssignments' | 'sectionInstruments'>> = {
+  'flamenco::sevillanas': {
+    patternAssignments: { link: { cajon: 'Sevillanas cajón link remate' } },
+  },
+  'cinematic::modern-score': {
+    sectionInstruments: { release: ['piano'], outro: ['piano'] },
+    patternAssignments: {
+      ostinato: { synth: 'modern score synth ostinato and resolution lift' },
+      build: { synth: 'modern score synth ostinato and resolution lift' },
+      climax: { synth: 'synth opening-motif development variation' },
+    },
+  },
+  'pop::power-pop': {
+    patternAssignments: { chorus: { synth: 'power-pop chorus pad bloom' } },
+  },
+  'tango::chacarera-crossover': {
+    patternAssignments: {
+      response: { 'bombo-leguero': 'bombo-leguero response cross-accent' },
+      interlude: {
+        violin: 'chacarera violin interlude variation',
+        'bombo-leguero': 'bombo-leguero response cross-accent',
+      },
+    },
+  },
+};
+for (const [key, changes] of Object.entries(SAMPLE_PATTERN_ASSIGNMENTS)) {
+  const arrangement = RECORDING_ARRANGEMENTS[key];
+  if (!arrangement) throw new Error(`Missing sample arrangement for section pattern assignments: ${key}`);
+  RECORDING_ARRANGEMENTS[key] = {
+    ...arrangement,
+    ...(changes.sectionInstruments ? { sectionInstruments: { ...arrangement.sectionInstruments, ...changes.sectionInstruments } } : {}),
+    ...(changes.patternAssignments ? { patternAssignments: { ...arrangement.patternAssignments, ...changes.patternAssignments } } : {}),
+  };
+}

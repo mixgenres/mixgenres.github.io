@@ -10,8 +10,8 @@ export const claves: InstrumentDef = {
     high: 75
   },
   voicing: "unpitched",
-  elementaryModel: 18,
-  makeupGain: 0.7186,
+  
+  
   polyphony: 8,
   note: "Pair of resonant rosewood or grenadilla wooden pegs providing the structural timeline of Afro-Cuban music",
   acousticProfile: {

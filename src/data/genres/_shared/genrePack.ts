@@ -3,6 +3,7 @@ import type { MixOverride, MixContract } from '../../sound/schema/dynamicMix';
 import { INSTRUMENTS_BY_ID } from '../../instruments';
 import { INSTRUMENT_PERFORMANCE_PROFILES } from '../../performance/instrumentPerformanceProfiles';
 import { GESTURE_HINT_ALIASES } from '../../performance/gestureHintAliases';
+import { authorSampleSongDevelopment } from './sampleSongDevelopment';
 
 /** Authored beat positions, in quarter-note units; no style-name hashing. */
 export interface AuthoredCell {
@@ -413,6 +414,20 @@ function playableGestures(style: GenreStyleDefinition, instrumentId: string): st
   return [...resolved];
 }
 
+/** Move a source motif into the opposite half of its cycle when deriving an
+ * answer/variation. Clamping to the nearest legal start is important for long
+ * phrases; if that clamp collapses back onto the source, choose another legal
+ * displacement so a new pattern ID always represents audible notation change. */
+function contrastingMotifStart(first: number, span: number, cycleBeats: number, duration: number): number {
+  const maxStart = Math.max(0, cycleBeats - span - Math.min(duration, 0.25));
+  const half = cycleBeats / 2;
+  const preferred = first <= half ? Math.min(maxStart, half + 0.25) : Math.max(0, first - half - 0.25);
+  if (Math.abs(preferred - first) >= 0.125) return preferred;
+  const earlier = Math.max(0, first - 0.5);
+  if (Math.abs(earlier - first) >= 0.125) return earlier;
+  return Math.min(maxStart, first + 0.5);
+}
+
 /**
  * Expand a local source cell into short instrument lessons. Reductions retain
  * the source's own accents and pitches; answers reuse its final motif; phrase
@@ -479,7 +494,8 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
       const [numerator, denominator] = style.preferredMeters[0].split('/').map(Number);
       const cycleBeats = numerator * 4 / denominator * (source.cycleLength ?? 1);
       const span = Math.max(0, last - first);
-      const start = Math.max(0, Math.min(cycleBeats / 2, cycleBeats - span - 0.125));
+      const start = contrastingMotifStart(first, span, cycleBeats,
+        Math.min(...selected.map(event => event.duration ?? 0.25)));
       studies.push({
         ...source,
         name: `${instrumentId} phrase answer study`,
@@ -511,7 +527,8 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
       const [numerator, denominator] = style.preferredMeters[0].split('/').map(Number);
       const cycleBeats = numerator * 4 / denominator * (source.cycleLength ?? 1);
       const span = Math.max(0, last - first);
-      const start = Math.max(0, Math.min(cycleBeats / 2, cycleBeats - span - 0.125));
+      const start = contrastingMotifStart(first, span, cycleBeats,
+        Math.min(...motif.map(event => event.duration ?? 0.25)));
       studies.push({
         ...source,
         name: `${instrumentId} opening-motif development variation`,
@@ -566,6 +583,7 @@ function closingEvents(pattern: MusicalPattern, ending: MusicalPattern): Pattern
 }
 
 export function createGenreWorld(input: GenrePackInput): GenreWorld {
+  input = authorSampleSongDevelopment(input);
   const styles = input.styles.map(item => styleDefinition(input, item));
   const patternItems = styles.flatMap((style, i) => {
     const authoredCells = input.styles[i].cells;

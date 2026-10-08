@@ -6,8 +6,8 @@ export const oboe: InstrumentDef = {
   family: "winds",
   octave: 12,
   voicing: "single",
-  elementaryModel: 16,
-  makeupGain: 1.0018,
+  
+  
   polyphony: 4,
   acousticProfile: {
     sustain: "blown",

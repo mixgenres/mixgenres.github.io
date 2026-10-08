@@ -4,10 +4,10 @@ export const bagpipes: InstrumentDef = {
   id: "bagpipes",
   name: "Great Highland Bagpipes",
   family: "winds",
-  pipeSynthesis: { droneRatios: [0.5, 1, 1.5, 2] },
+  
   voicing: "single",
-  elementaryModel: 16,
-  makeupGain: 0.4693,
+  
+  
   polyphony: 4,
   note: "Iconic Scottish Highland bagpipes with mouth-blown airtight bag, three continuous bass and tenor drones, and a piercing conical double-reed chanter built for thunderous outdoor projection",
   acousticProfile: {
@@ -73,11 +73,7 @@ export const bagpipes: InstrumentDef = {
       breathNoise: 0.12,
       transientSharpness: 0.72
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "Continuous unbroken airflow from the squeezed bag eliminates rests and silences.",
-      "All note articulations must be accomplished via gracenotes, strikes, and multi-note cuts.",
-      "Fixed non-tempered Mixolydian scale with high pitch center (~476-482 Hz)."
-    ]
+    
+    
   }
 };

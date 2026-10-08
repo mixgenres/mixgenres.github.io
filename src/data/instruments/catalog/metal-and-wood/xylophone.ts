@@ -5,8 +5,8 @@ export const xylophone: InstrumentDef = {
   name: "Xylophone",
   family: "metal-and-wood",
   voicing: "single",
-  elementaryModel: 8,
-  makeupGain: 2.397,
+  
+  
   polyphony: 4,
   acousticProfile: {
     sustain: "decaying",

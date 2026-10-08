@@ -12,8 +12,8 @@ export const tabla: InstrumentDef = {
   voicing: "unpitched",
   bodyConstruction: "skin-faced",
   excitationType: "fingerpad",
-  elementaryModel: 4,
-  makeupGain: 1.014,
+  
+  
   polyphony: 8,
   note: "North Indian classical hand drum pair consisting of wooden Dayān (treble drum with black Syāhī paste) and metal Bayān (bass drum with pitch bends)",
   acousticProfile: {
@@ -48,7 +48,7 @@ export const tabla: InstrumentDef = {
       strikeZones: ["edge"],
       defaultPan: 0.25,
       gainTrimDb: 0,
-      synthesisNotes: "Pure resonant ringing bell-like fundamental on Dayān edge"
+      
     },
     {
       id: "dayan-tun",
@@ -73,7 +73,7 @@ export const tabla: InstrumentDef = {
       strikeZones: ["closed"],
       defaultPan: 0.25,
       gainTrimDb: -3,
-      synthesisNotes: "Muted dry slap on central iron-dust paste patch"
+      
     },
     {
       id: "bayan-ghe",
@@ -86,7 +86,7 @@ export const tabla: InstrumentDef = {
       strikeZones: ["bass", "open"],
       defaultPan: -0.15,
       gainTrimDb: 1,
-      synthesisNotes: "Resonant metal kettle bass drum tone"
+      
     },
     {
       id: "bayan-meend",
@@ -99,7 +99,7 @@ export const tabla: InstrumentDef = {
       strikeZones: ["bass"],
       defaultPan: -0.15,
       gainTrimDb: 1,
-      synthesisNotes: "Wrist palm sliding across skin to swoop low bass pitch upward"
+      
     }
   ],
   performanceArticulations: {

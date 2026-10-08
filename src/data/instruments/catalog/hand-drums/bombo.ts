@@ -10,8 +10,8 @@ export const bombo: InstrumentDef = {
     high: 38
   },
   voicing: "unpitched",
-  elementaryModel: 4,
-  makeupGain: 0.8484,
+  
+  
   polyphony: 8,
   note: "Large South American wooden bass drum with sheepskin head delivering deep, resonant ceremonial pulses",
   acousticProfile: {

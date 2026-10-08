@@ -5,8 +5,8 @@ export const tubular_bells: InstrumentDef = {
   name: "Tubular bells",
   family: "metal-and-wood",
   voicing: "single",
-  elementaryModel: 8,
-  makeupGain: 0.702,
+  
+  
   polyphony: 4,
   acousticProfile: {
     sustain: "decaying",

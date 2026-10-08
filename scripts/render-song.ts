@@ -3,7 +3,7 @@
 // the browser. Usage: npm run render-song -- tango /tmp/tango.mp3 20
 // Options: --style=ID --instrumental --start=SECONDS
 //          --duration=SECONDS --format=mp3|wav --report=FILE
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { getCanonicalStyle } from '../src/engine/style';
 import { compileWholeSong } from '../src/engine/band/arrangeBand.ts';
@@ -15,6 +15,7 @@ import type { RenderDiagnostic } from '../src/engine/studio/audioMetrics';
 import { reportMetadata } from './lib/auditReport';
 import { audioRenderFingerprint } from './lib/audioRenderFingerprint';
 import { chooseAudioWindows } from './lib/audioExcerpt';
+import { setSoundfontBankReader } from '../src/engine/playback/soundfont/banks';
 
 async function main() {
   const metadata = reportMetadata();
@@ -23,6 +24,9 @@ async function main() {
   const value = (flag: string) => args.find(arg => arg.startsWith(`${flag}=`))?.slice(flag.length + 1);
   const genreId = positional[0] || 'salsa';
   const format = value('--format') ?? 'mp3';
+  setSoundfontBankReader(async id=>{
+    const data=readFileSync(`src/assets/soundfonts/${id}.sfpack`);return data.buffer.slice(data.byteOffset,data.byteOffset+data.byteLength);
+  });
   if (format !== 'mp3' && format !== 'wav') throw new Error('Format must be mp3 or wav');
   const outPath = positional[1] || `/tmp/${genreId}.${format}`;
   const maxSeconds = Number(value('--duration') ?? positional[2] ?? 0);
@@ -67,7 +71,7 @@ async function main() {
     mkdirSync(dirname(report), { recursive: true });
     writeFileSync(report, JSON.stringify({ ...metadata, audioFingerprint, audioSourcesChangedDuringRender: audioFingerprint !== audioRenderFingerprint(),
       sourcesChangedDuringRender: metadata.sourceFingerprint !== reportMetadata().sourceFingerprint,
-      genreId, styleId: sheet.styleId, catalogId: sheet.catalogId,
+      genreId, playbackEngine: 'soundfont', styleId: sheet.styleId, catalogId: sheet.catalogId,
       windowSelection: args.includes('--ensemble') ? 'ensemble' : 'specified',
       bpm: sheet.bpm, meter: sheet.timeSignature, instrumental: args.includes('--instrumental'), start, end,
       tracks: sheet.tracks.map(t => ({ id: t.id, instrumentId: t.instrumentId, role: t.role, selected: !selectedTrackIds || selectedTrackIds.includes(t.id) })),

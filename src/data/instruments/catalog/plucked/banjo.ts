@@ -8,8 +8,8 @@ export const banjo: InstrumentDef = {
   courses: 1,
   bodyConstruction: "skin-faced",
   excitationType: "hard-pick",
-  elementaryModel: 0,
-  makeupGain: 2.5095,
+  
+  
   polyphony: 8,
   attackProfile: { chordAttack: 'rolled', rolledChordSpreadSeconds: 0.011 },
   note: "American 5-string banjo with brass tone ring and mylar head stretched over a maple rim, generating blistering high-speed rolls and crisp percussive projection",
@@ -60,11 +60,7 @@ export const banjo: InstrumentDef = {
       membraneTension: 0.75,
       transientSharpness: 0.88
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "High-tension drumhead radiates explosive pluck transients with rapid decay.",
-      "High 5th drone string (thumb-picked) anchors syncope-heavy bluegrass rolls.",
-      "Metal fingerpicks striking steel strings create a signature metallic zing."
-    ]
+    
+    
   }
 };

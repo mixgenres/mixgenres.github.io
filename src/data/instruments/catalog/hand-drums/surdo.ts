@@ -10,8 +10,8 @@ export const surdo: InstrumentDef = {
     high: 43
   },
   voicing: "unpitched",
-  elementaryModel: 4,
-  makeupGain: 0.701,
+  
+  
   polyphony: 8,
   acousticProfile: {
     sustain: "percussive",

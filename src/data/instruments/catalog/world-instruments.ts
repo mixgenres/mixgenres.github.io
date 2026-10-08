@@ -11,7 +11,7 @@ function define(s: Spec): InstrumentDef {
   const sustain = s.family === 'winds' ? 'blown' : s.family === 'bowed' ? 'sustained' : s.family === 'hand-drums' || s.family === 'metal-and-wood' ? 'percussive' : 'decaying';
   return {
     id: s.id, name: s.name, family: s.family, voicing: s.voicing, note: s.note,
-    bodyConstruction: s.construction, excitationType: s.excitation, elementaryModel: s.model, makeupGain: 3.0938,
+    bodyConstruction: s.construction, excitationType: s.excitation,  
     polyphony: s.family === 'plucked' ? 8 : s.family === 'bowed' ? 6 : s.family === 'winds' ? 4 : 12,
     acousticProfile: { sustain, role: s.role, centre: (s.low + s.high) / 2, low: s.low, high: s.high, pan: 0, trim: 0, space: 0.24, ring: s.decay },
     luthierPhysics: { category: s.category, materialDensity: s.density, tension: s.tension, bodyResonanceVolume: s.body,

@@ -10,8 +10,8 @@ export const agogo: InstrumentDef = {
     high: 67
   },
   voicing: "unpitched",
-  elementaryModel: 18,
-  makeupGain: 0.7136,
+  
+  
   polyphony: 8,
   note: "Two pitched steel conical bells joined by a flexible handle struck with wooden stick in samba and capoeira",
   acousticProfile: {

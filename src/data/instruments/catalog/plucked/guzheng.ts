@@ -8,8 +8,8 @@ export const guzheng: InstrumentDef = {
   courses: 1,
   bodyConstruction: "board",
   excitationType: "nail",
-  elementaryModel: 0,
-  makeupGain: 0.9245,
+  
+  
   polyphony: 4,
   note: "Chinese long zither",
   acousticProfile: {

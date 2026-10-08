@@ -7,10 +7,14 @@ const chord: NonNullable<AuthoredCell['pitches']>[number] = { voicing: 'chord' }
 function guitar(name: string, onsets: number[], articulation: string[], options: {
   durations?: number[]; accents?: number[]; pitches?: Array<NonNullable<AuthoredCell['pitches']>[number]>;
   notations?: Array<NonNullable<AuthoredCell['notations']>[number]>; cycleLength?: number; phraseEnd?: boolean;
+  sectionUsage?: AuthoredCell['sectionUsage']; difficulty?: number; pedagogicalStudy?: AuthoredCell['pedagogicalStudy'];
+  supportedEnergy?: AuthoredCell['supportedEnergy']; description?: string;
 } = {}): AuthoredCell {
   return { name, role: 'lead', instruments: ['guitar'], onsets, articulations: articulation,
     durations: options.durations, accents: options.accents, pitches: options.pitches,
-    notations: options.notations, cycleLength: options.cycleLength ?? 1, phraseEnd: options.phraseEnd };
+    notations: options.notations, cycleLength: options.cycleLength ?? 1, phraseEnd: options.phraseEnd,
+    sectionUsage: options.sectionUsage, difficulty: options.difficulty, pedagogicalStudy: options.pedagogicalStudy,
+    supportedEnergy: options.supportedEnergy, description: options.description };
 }
 
 const COMPAS_12 = [0, .5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5];
@@ -19,17 +23,40 @@ const SOLEA_BEATS = [0, 1.5, 3, 4, 5];
 
 function flamencoLead(id: string): AuthoredCell[] {
   if (id === 'solea') return [
-    guitar('Soleá compás: bass-string pickup, syncopated rasgueado and golpe',
-      [0, .5, 1.5, 2.5, 3, 4, 4.5, 5],
-      ['picado', 'rasgueado', 'rasgueado', 'golpe', 'rasgueado', 'picado', 'rasgueado', 'alzapua'],
-      { durations: [.28, .22, .38, .18, .3, .24, .18, .42],
-        accents: [1, .4, .84, .68, .95, .5, .68, 1],
-        pitches: [pitch(1, 45), chord, chord, chord, chord, pitch(5, 57), chord, chord],
-        notations: [
-          { fingering: 'p' }, { stroke: 'down', fingering: 'i' }, { stroke: 'down', fingering: 'a' },
-          { bodyTechnique: 'golpe', stroke: 'down' }, { stroke: 'up', fingering: 'i' }, { fingering: 'p' },
-          { stroke: 'down', fingering: 'm' }, { stroke: 'up', fingering: 'p' },
-        ] }),
+    guitar('Soleá compás: thumb bass, restrained rasgueado and cierre accents',
+      [0, 1.5, 3, 4, 5], ['thumb', 'rasgueado', 'golpe', 'thumb', 'rasgueado'],
+      { durations: [.72, .42, .18, .55, .36], accents: [1, .7, .95, .58, .92],
+        pitches: [pitch(1, 45), chord, chord, pitch(5, 45), chord],
+        sectionUsage: ['verse', 'chorus'], difficulty: 2, supportedEnergy: [1, 2, 3, 4],
+        notations: [{ fingering: 'p' }, { stroke: 'down', fingering: 'i' },
+          { bodyTechnique: 'golpe', stroke: 'down' }, { fingering: 'p' }, { stroke: 'up', fingering: 'a' }] }),
+    { name: 'Soleá falseta: tremolo melody with thumb anchor', role: 'lead', instruments: ['guitar'],
+      cycleLength: 2, onsets: [0, .2, .4, .6, .8, 6, 6.2, 6.4, 6.6, 6.8],
+      durations: [.2, .2, .2, .2, .2, .2, .2, .2, .2, .2],
+      accents: [1, .55, .65, .7, .6, .9, .55, .65, .7, .6],
+      articulations: ['thumb', 'tremolo', 'tremolo', 'tremolo', 'tremolo', 'thumb', 'tremolo', 'tremolo', 'tremolo', 'tremolo'],
+      pitches: [pitch(1, 45), pitch(3, 64), pitch(2, 64), pitch(3, 65), pitch(5, 67),
+        pitch(1, 48), pitch(3, 65), pitch(4, 67), pitch(3, 65), pitch(1, 64)],
+      notations: ['p', 'i', 'a', 'm', 'i', 'p', 'i', 'a', 'm', 'i'].map(fingering => ({ fingering })),
+      sectionUsage: ['solo'], difficulty: 3, pedagogicalStudy: 'technique', supportedEnergy: [2, 3, 4],
+      description: 'Original two-bar falseta study: anchor each five-note tremolo group with the thumb, shape a small rising-and-returning melody, then leave the following compás free for the ensemble.' },
+    { name: 'Soleá llamada: open chord summons the next letra', role: 'lead', instruments: ['guitar'],
+      cycleLength: 1, onsets: [0, 1.5, 2, 2.5, 3, 4, 5], durations: [.6, .3, .22, .3, .5, .55, .35],
+      accents: [1, .62, .85, .55, .95, .68, 1], articulations: ['thumb', 'rasgueado', 'rasgueado', 'rasgueado', 'golpe', 'thumb', 'rasgueado'],
+      pitches: [pitch(1, 45), chord, chord, chord, chord, pitch(5, 45), chord],
+      notations: [{ fingering: 'p' }, { stroke: 'down', fingering: 'i' }, { stroke: 'up', fingering: 'i' },
+        { stroke: 'down', fingering: 'a' }, { bodyTechnique: 'golpe', stroke: 'down' }, { fingering: 'p' }, { stroke: 'down', fingering: 'i' }],
+      sectionUsage: ['llamada'], difficulty: 3, supportedEnergy: [2, 3, 4],
+      description: 'Original llamada study: build from a thumbed bass into a short rasgueado and golpe cue; reserve the final chord for a vocal entrance or section handoff.' },
+    guitar('Soleá falseta response: picado answer over an Andalusian cadence',
+      [0, .5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5],
+      ['picado', 'picado', 'picado', 'picado', 'picado', 'picado', 'picado', 'picado', 'thumb', 'rasgueado', 'rasgueado'],
+      { cycleLength: 2, durations: [.22, .18, .2, .24, .2, .18, .25, .22, .65, .35, .5],
+        accents: [1, .54, .7, .48, .82, .55, .9, .62, 1, .7, 1],
+        pitches: [pitch(1, 62), pitch(2, 64), pitch(3, 65), pitch(5, 67), pitch(4, 65), pitch(3, 64), pitch(2, 62), pitch(1, 60), pitch(1, 45), chord, chord],
+        notations: ['i', 'm', 'i', 'm', 'i', 'm', 'i', 'm', 'p', 'i', 'a'].map(fingering => ({ fingering })),
+        sectionUsage: ['solo'], difficulty: 2, supportedEnergy: [2, 3, 4],
+        description: 'Original two-bar falseta response study: an even picado line descends to the low thumb and resolves in a compact rasgueado chord.' }),
   ];
   if (id === 'bulerias') return [
     guitar('Bulerías llamada and contratiempo rasgueado', [0, .5, 1, 1.5, 2.5, 3, 3.5, 4, 5],

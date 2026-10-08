@@ -1,89 +1,40 @@
-# Music engine and preparation cache
+# Music and audio pipeline
 
-The song editor compiles four explicit musical layers. `compileSongPipeline` is the entry point; `arrangeBand` provides the performance projection used by composition callers. The compiled pipeline retains notation, interpretation, transitions and sound controls for inspection and export.
+The editor compiles a song into a musical performance once, then builds a small sample-event plan for its parts. The live player schedules that plan in an AudioWorklet; export renders selected parts directly through the same SoundFont sample runtime. Both paths feed the shared mixer and master.
 
 ```mermaid
 flowchart LR
-  UI[Song editor] --> N[1. Written notation]
-  N --> B[2. Band interpretation]
-  B --> P[3. Instrument mechanics]
-  P --> S[Cached section DSP audio]
-  S --> M[4. Continuous ensemble mix]
-  M --> A[Prepared transport AudioBuffers]
-  A --> T[Play / pause / seek]
+  UI[Song editor] --> N[Written notation]
+  N --> B[Band interpretation]
+  B --> P[Technique, phrasing and tuning]
+  P --> E[Per-part SoundFont event plan]
+  E --> W[Live AudioWorklet or direct part renderer]
+  W --> M[Ensemble mix and mastering]
+  M --> A[MP3 / WAV]
 ```
 
-## 1. Written notation
+## Musical preparation
 
-`score/notatedScore.ts` produces a compact `NotatedScore`: player/section cells, bar-relative fractional beats, written lengths, rests, pitch descriptors, techniques, variations and optional fingering. Quarter-note fractions retain tuplets and fine authored positions. Expressive microtiming is a separate field.
+`score/notatedScore.ts` builds players and sections, fractional beats, note lengths, rests, pitches, techniques and optional fingering. `band/interpretBand.ts` resolves phrase grammar, harmony, register, voice leading and ensemble development. Interactions, solos and section transitions are decided before playback. Written and interpreted attacks preserve score timing, tuning and articulation.
 
-A pitch is an absolute note/chord, a harmony-relative degree, a named drum component, or an explicit lead-sheet instruction such as improvisation or chord voicing. An improvisation instruction is not presented as a completed written melody. The band layer must resolve it before sound preparation.
+`sound/transformMusicians.ts` resolves instrument mechanics, articulation, sound parameters and tuning into physical note data. This is the musical and performance description of what to play; it does not synthesize audio.
 
-Genre and instrument rules live in `data/notation/rules.ts` and instrument definitions. Flamenco vocabulary includes compás, falseta, rasgueado, alzapúa, picado and remate. Written guitar string/fret directions use declared tuning and determine the sounding pitch; inconsistent literal pitches are rejected. Instruments without declared string-number rules must not acquire guessed fingering. Drum notation has distinct kit components, lanes, staff coordinates and noteheads.
+## SoundFont playback and mix
 
-## 2. Band interpretation
+`playback/soundfont/plan.ts` maps those notes to bank, preset, key, velocity, controller and bend events. `soundfont/player.ts` schedules the plan in the live AudioWorklet. `soundfont/render.ts` interprets the same plan for export and analysis. The plan is cheap to rebuild when the musical content changes, and no audio is pre-rendered for playback.
 
-`band/interpretBand.ts` consumes those written cells. Existing genre/style phrase grammars, harmony, scale language, register, voice leading, solo policies and ensemble development remain in this layer. Literal pitches and explicitly written techniques survive phrase development. Written ties merge into a single physical attack and require a contiguous matching pitch.
+`playback/mp3Export.ts` renders requested parts on demand, then applies track balance, bus routing, scene automation and the shared studio master. MP3 encoding streams bounded blocks; WAV and MP3 share the same rendered mix.
 
-`band/interactions.ts` makes relationships such as call/answer, following, mirroring, reinforcing and leaving space explicit. Responses consider actual preceding notes and local harmony; they cannot rewrite literal score pitches. `band/transitions.ts` records the chosen written boundary, chords, tempo, incoming held notes, bellows/button state and authored fill/rest/sustain. Transition fills come from the selected genre's catalog and policies; the planner does not add an arbitrary fill merely because a section ends.
+## Reuse and asset caching
 
-The realized `MusicianScore` contains every final concert pitch, target frequency, velocity, technique and exact written beat. Gate ratios and expressive offsets remain separate. Playback projection makes no further pitch or arrangement choices. MusicXML preserves polyphonic voices, rests, ties, cents and drum identities. Authored TAB is exported when complete; otherwise standard notation is retained. MIDI and GP5 interchange still have their format-specific quantization and instrument limitations.
-
-## 3. Instrument mechanics and DSP
-
-`sound/transformMusicians.ts` materializes excitation, contact, pressure, envelope/release budgets, mutes, instrument/style parameters and instrument-specific mechanics. Notes retain this prepared physical state. Renderers consume it instead of reinterpreting the arrangement.
-
-`playback/dspSections.ts` partitions DSP work by **attack ownership**, not by slicing notes or finished waveforms. The section that starts a note renders its entire hold and release, even across the next boundary. Initial controller values carry into each section; later changes remain active while its owned notes ring. Outgoing audio and the next section overlap naturally.
-
-The compact model retains bandoneon reed/register and bellows response, brass formants and pitch gestures, distinct percussion stroke/resonance modes, piano hammer/string damping, bowed body/bridge spectra and pizzicato, and guitar variants, excitation, muted decay, harmonics and repeated brush/picking gestures. Genre interpretation and authored playing decisions remain upstream. The current instrument models remain approximations. Separating and caching their controls does not itself make the bandoneon, violin or piano sound like a measured acoustic instrument. Timbre quality still needs model-specific work and listening against recordings.
-
-## 4. Continuous ensemble mix
-
-`playback/renderSongMix.ts` shares preparation between the player, auditions and audio exports. Instrument audio is independent of user faders, pan, mute and solo. These controls act once at the mix stage; authored musical expression controllers remain part of the physical stem. The ensemble retains its section automation, masking, foreground, room and master processing.
-
-The browser sums cached section sources, including overlapping tails, through the native offline master. Playback prepares sample-aligned transport chunks with master pre/post-roll; complete exports render the complete mix. Prepared sections enter directly, avoiding duplicate whole-instrument PCM arrays. Physical jobs use the shared compact acoustic renderer: generated band-limited spectra, decaying resonant modes and deterministic excitation. Instrument calculations run at 22.05 kHz and reconstruct 44.1 kHz output on every device, including exports. No per-voice WASM graph or distributed sound bank is required. The older Elementary models remain available for reference probes; they do not render production playback or exports.
-
-`SongPlayer.configure` starts preparation after an edit. Play waits for the current chunk and, under measured rendering pressure, a short reserve. A timer schedules consecutive `AudioBufferSourceNode`s at sample-aligned boundaries and wraps at the exact loop duration. Seek promotes preparation near the new position; pause cancels pending starts and scheduled sources. A low-latency output context and short gain ramps reduce startup delay and clicks.
-
-During a live edit, the audible performance retains its scheduler revision, cancellation signal and buffer map. The replacement compiles and prepares a separate reserve while current playback takes priority. Under synthesis pressure, it stages a future reserve and waits for the old audio clock to reach it; fader edits reuse the current physical state. Once ready, it installs its own buffers and timer, fades the old sources, and resumes at the current musical bar and fractional beat. Rapid edits cancel obsolete replacement jobs. Pause/stop during preparation cannot restart playback. The public `composition` identifies the performance actually installed, so an export cannot pair a pending edit with the previous score.
-
-Physical section plans and hashes are computed once per immutable performance and sound configuration. Transport windows select overlapping prepared sections; faders reuse those same identities. A weak cache with eight configurations per player releases replaced songs with garbage collection; a 30-player ensemble cannot evict its first player simply by preparing its ninth. Worker section payloads contain physical events, controllers, bars and sound identities; whole-song interpretation traces and inspector metadata remain with the compiled song.
-
-## Cache dependencies
-
-| Cache | Identity and invalidation | Bound |
-|---|---|---|
-| Written player/section | Pattern events, role, instrument, meter and notation rules | 2,048 cells |
-| Base band player/section | Written cell, harmony, tempo, phrase context, solo/lens policy and relevant next chord | 2,048 cells |
-| Realized ensemble | All musical inputs and relationships; excludes faders/pan/mute/solo | 16 songs |
-| Part transition | Boundary events, outgoing/incoming harmony, tempo, policy and actual held/mechanical state | 2,048 transitions |
-| Physical player/section | Interpreted notes, physical controller identities, instrument/style and incoming transition | 2,048 cells |
-| Raw DSP section PCM | Exact timed notes and controllers, instrument/role/style, hold/tail window | 24–48 MiB RAM; 192–512 MiB IndexedDB |
-| Mixed PCM / native transport buffers | Active players, section identities, user balance, musical mix timeline and window | 4–12 MiB mix cache; 6–12 MiB transport buffers |
-
-Caches use deterministic content identities and bounded LRU eviction. A changed boundary invalidates dependent interpretation/physical state. A local interior edit reuses unaffected player/sections. Mix-only edits preserve physical PCM. Simultaneous requests share preparation jobs; cancelling one subscriber does not cancel another. Main-thread PCM survives worker reassignment. Workers do not keep a duplicate DSP stem cache for these jobs.
-
-Prepared PCM is generated from DSP after editing; it is not a distributed SoundFont or instrument bank. Musical/RAM caches are session-local; physical section PCM and opening mixes may persist in versioned IndexedDB. Large entries beyond a cache's byte budget are played but not retained. Initial cold synthesis can still take significant time; there is no claim of instant first-load sound. During song playback the native output reads prepared buffers; workers prepare the upcoming reserve as needed. Optional `?dev=audio` diagnostics measure click-to-signal at the player's output separately from hardware latency.
-
-## Verification
-
-- `npm run test:score`: first-pass notation, pitch/beat preservation, ties, drum notation, fingering, interactions, transition invalidation and preparation contracts.
-- `npm run audit:accuracy`: all catalog styles through notation, interpretation and physical controls; saves complete review data.
-- `npm run check:audio`: structural/behavior checks, PCM regressions, instrument mechanisms and ensemble excerpts.
-- `node --import tsx scripts/benchmark-dsp-cache.ts`: complete 40-bar Golden Age tango; compares cold preparation, replay, mixer edits and a one-bar edit, and asserts rendering does not mutate notes.
-- Browser player and native-master passes verify actual transport and output. Numerical and structural checks do not certify perceptual authenticity.
-
-## Golden Age comparison
-
-The Golden Age example uses its complete recording arrangement. Exact player, bar and note counts depend on the selected style and edits; the benchmark reports the current example counts. Caching must preserve those musical events and sentences.
-
-The existing Golden Age calibration reference is Aníbal Troilo's **Quejas de bandoneón**. [Todo Tango documents the 27 September 1944 recording](https://www.todotango.com/musica/tema/691/Quejas-de-bandoneon/). [Arranger Korey Ireland describes his work from that recording and orchestra manuscripts](https://www.communitytangoorchestra.org/arrangement/quejas-de-bandoneon/), and highlights its [low-register trio shared between bandoneon and piano, and demanding variation](https://www.communitytangoorchestra.org/arrangements/new-arrangement-quejas-de-bandoneon/).
-
-| Reference property | Current study / engine |
+| Reused or cached item | Why it remains |
 |---|---|
-| A composed lower-register trio and distinctive variation | Separate sections and player sentences exist; short catalog motifs are not a transcription of that melodic development |
-| Bandoneon/piano sharing and ensemble response | Explicit player relationships, harmonic interpretation and authored patterns; four-part ensemble is smaller than an orquesta típica |
-| Sustained lyrical arcs alongside articulated dance rhythm | Exact written lengths, gate expression, techniques and continuous release tails survive the cache |
-| Acoustic timbre, collective phrasing and recorded orchestral depth | Current DSP cores remain approximations; cache integrity is not evidence of matching the recording |
+| Notation, interpreted score and physical-part cells | Avoids repeating expensive musical decisions when only presentation or downstream mix settings change. |
+| Resolved style and mix contracts | Reuses small deterministic metadata calculations. |
+| Compressed SoundFont banks | Hash-verified downloads are reused across sessions; the browser cache is bounded. |
 
-The comparison establishes a musical reference and exposes remaining composition/timbre gaps. It does not claim an audio listening verdict or equivalence to Troilo's recording.
+Rendered sample PCM, stems and complete mixes are not cached. Offline export and live playback render from the event plan when requested. Faders and scene automation are applied in the shared downstream mixer, so changing them never requires invalidating sample audio.
+
+## Developer checks
+
+`npm run test:soundfont` exercises presets, sample data, technique routing and event ownership. `npm run test:mix` covers shared bus and scene behavior. `npm run check` runs structural and behavior gates; `npm run check:audio` adds targeted sample rendering and export checks. See [SoundFont playback](./soundfont-playback.md) for live constraints, evidence and limitations.

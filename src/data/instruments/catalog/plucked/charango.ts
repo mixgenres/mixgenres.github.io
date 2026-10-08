@@ -9,8 +9,8 @@ export const charango: InstrumentDef = {
   courses: 2,
   bodyConstruction: "wood-box",
   excitationType: "nail",
-  elementaryModel: 0,
-  makeupGain: 2.509,
+  
+  
   polyphony: 8,
   note: "Ten-string Andean small lute with doubled courses and vibrant, bright, high-pitched rapid strums",
   acousticProfile: {

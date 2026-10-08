@@ -67,6 +67,8 @@ export interface CustomProgression {
 
 export interface Sheet extends Song {
   arrangement: Arrangement;
+  /** Catalog reference arrangements may pin an authored instrument/section cell. */
+  lockedPatternAssignments?: Record<string, Record<string, string>>;
   energies?: Record<string, Record<string, SectionEnergy>>;
   worldId: string;
   patternMemory?: Record<string, Record<string, string>>;
@@ -276,12 +278,14 @@ function calibratedTrackVolume(genreId: string, instrumentId: string, role: stri
 function canonicalPatternSection(sectionKind?: string): string | undefined {
   const k = String(sectionKind ?? '').toLowerCase();
   if (!k) return undefined;
-  if (/intro|introduc|salida|opening/.test(k)) return 'intro';
-  if (/chorus|coro|refrain|hook|montuno|remate|return|reprise|climax/.test(k)) return 'chorus';
-  if (/verse|verso|tema|letra|preg|cycle|theme|strophe|narration|jinyangjo|jungmori|jajinmori|hwimori|youngnam|honam|jungbu|a$|b$/.test(k)) return 'verse';
-  if (/solo|trading|instrumental|falseta|variaci|variation|descarga|mambo|development|improvis|alap|tanam|jhala|\bgat\b|jangdan/.test(k)) return 'solo';
-  if (/bridge|puente|break|drop|breakdown|exchange/.test(k)) return 'bridge';
-  if (/coda|cierre|outro|ending|tag|final|closing|cadence/.test(k)) return 'ending';
+  if (/intro|introduc|salida|opening|buka|attack/.test(k)) return 'intro';
+  if (/coda|cierre|outro|ending|tag|final|closing|cadence|release|dissolve|decay|void|suwuk|sacrificial-dance|\bstop\b|\bcut\b/.test(k)) return 'ending';
+  if (/bridge|puente|break|drop|breakdown|exchange|rupture|transition|texture-shift|descent|\bfall\b/.test(k)) return 'bridge';
+  if (/chorus|coro|refrain|hook|montuno|remate|return|reprise|climax|eruption|battle/.test(k)) return 'chorus';
+  if (/solo|trading|instrumental|falseta|variaci|variation|descarga|mambo|development|evolution|improvis|alap|tanam|jhala|\bgat\b|jangdan|transformation|spectrum/.test(k)) return 'solo';
+  if (/sonata[-\s]?[ivx]+/.test(k)) return 'verse';
+  if (/interlude[-\s]?[ivx]+/.test(k)) return 'bridge';
+  if (/verse|verso|tema|letra|preg|cycle|theme|strophe|narration|jinyangjo|jungmori|jajinmori|hwimori|youngnam|honam|jungbu|main-cycle|\bloop\b|\btexture\b|fragments|matrix|ritual|groove|pulse|section-[ivx]+|\ba$|\bb$/.test(k)) return 'verse';
   return k;
 }
 
@@ -795,7 +799,7 @@ export function rebuild(sheet: Sheet): Sheet {
   for (const r of regions) {
     const chords = r.chords?.length ? r.chords : ['Am'];
     const bars = r.end - r.start;
-    const byTrack = sheet.arrangement[r.id] ?? {};
+      const byTrack = sheet.arrangement[r.id] ?? {};
     const interaction = arrangementContext[r.id];
 
     // Compute or retrieve cached pattern details for each track in this region
@@ -812,7 +816,8 @@ export function rebuild(sheet: Sheet): Sheet {
       const partEnergy: SectionEnergy = clampEnergy(interaction?.energyByTrack[track.id] ?? energies[r.id]?.[track.id] ?? energyOf(r));
 
       const cellKey = `${r.id}:${track.id}`;
-      const cellFp = `${r.id}:${track.id}:${track.instrumentId}:${track.role}:${r.genre ?? sheet.worldId}:${getSectionStyleId(sheet, r)}:${bars}:${r.kind}:${r.formKey}:${chords.join(',')}:${basePatternId}:${partEnergy}:${sheet.generationSeed ?? 0}:${JSON.stringify(sheet.partLens?.[r.id]?.[track.id] ?? '')}:${interaction?.energyByTrack?.[track.id] ?? ''}`;
+      const patternLocked = sheet.lockedPatternAssignments?.[r.id]?.[track.id] === basePatternId;
+      const cellFp = `${r.id}:${track.id}:${track.instrumentId}:${track.role}:${r.genre ?? sheet.worldId}:${getSectionStyleId(sheet, r)}:${bars}:${r.kind}:${r.formKey}:${chords.join(',')}:${basePatternId}:${partEnergy}:${patternLocked}:${sheet.generationSeed ?? 0}:${JSON.stringify(sheet.partLens?.[r.id]?.[track.id] ?? '')}:${interaction?.energyByTrack?.[track.id] ?? ''}`;
 
       const cached = arrangementCellDetailsCache.get(cellKey);
       if (cached && cached.fingerprint === cellFp && cached.detailsByBar.length === bars) {
@@ -831,7 +836,7 @@ export function rebuild(sheet: Sheet): Sheet {
         // its base pattern, even deep into a long sample song.
         const phrase = Math.floor(index / phraseSpanBars(getResolvedSectionStyle(sheet, r).contract.cycleLength));
         let patternId = basePatternId;
-        if (phrase > 0) {
+        if (phrase > 0 && !patternLocked) {
           const cacheKey = `${basePatternId}:${r.genre ?? sheet.worldId}:${track.id}:${r.id}:${phrase}`;
           const cachedPat = phrasePatternCache.get(cacheKey);
           if (cachedPat !== undefined) {

@@ -4,9 +4,9 @@ Updated 2026-10-07. This pilot builds a style-local evidence set for the 18 Flam
 
 ## Current inventory and acquisition scope
 
-The existing local inventory contains 17 Flamenco matches: one for 17 styles and none for Seguiriya. Reaching four per style requires 55 new MP3s (72 total). The current 17 MP3s occupy 93.6 MiB, averaging 5.51 MiB. At that observed size, the initial acquisition is about 303 MiB of new MP3s; the fifth-reference ceiling would add another 18 files, about 99 MiB. Actual size depends on duration and encoding. `references.json` records the per-style backlog, the local files, and their current verification limits.
+The local inventory now contains 20 Flamenco matches. Soleá is the first style brought to four complementary references; the other 17 styles retain their pre-pass counts, including zero local Seguiriya references. Reaching four per style requires 52 more MP3s (72 total). The original 17 files occupied 93.6 MiB, averaging 5.51 MiB; at that size the remaining acquisition is about 286 MiB. A fifth reference for every style would add another 18 files, about 99 MiB. Actual size depends on duration and encoding. `references.json` records the per-style backlog, local hashes, and verification state.
 
-The working volume reports 7.0 GiB free. The genre-fidelity spec calls for retaining the larger of 5 GiB or 10% of the volume; 10% here is about 22.8 GiB, so the volume is already below that reserve. The spec also says to surface a necessary budget increase before consuming it. The MP3 additions are within the normal 1 GiB retained-audio ceiling, but that ceiling does not override the free-space reserve. Downloads and new separation work are held until free space is recovered or the user approves a bounded exception. No existing sample, accompaniment, model, or cache was removed to make room.
+The user approved an approximately 5 GiB storage budget for this style-by-style pass. Keep at least 5 GiB free, limit retained reference/review audio to 500 MiB, and keep peak temporary audio below 1 GiB. The most recent free-space check showed 21 GiB; recheck before each acquisition batch and separation. No existing sample, accompaniment, model, or cache was removed to make room. Original MP3s remain intact; separated accompaniments are bounded evidence and are not instrument stems.
 
 ## Selection rules
 
@@ -26,4 +26,4 @@ The MP3s do not train a statistical or machine-learning model in this repository
 
 ## Per-style backlog
 
-`references.json` is the machine-readable source of truth for current counts and local-file hashes. Current styles with one match need three additions; Seguiriya needs four. Source candidates and download states will be appended there only after the exact performance and provenance are verified.
+`references.json` is the machine-readable source of truth for current counts and local-file hashes. Soleá has four references; styles with one match need three additions, and Seguiriya needs four. Source candidates and download states will be appended there only after the exact performance and provenance are verified. The completed style dossier and coverage matrix will track separate evidence status for each remaining style; acquisition count alone does not pass a style.

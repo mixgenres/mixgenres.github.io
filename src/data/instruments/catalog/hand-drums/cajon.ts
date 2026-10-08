@@ -12,8 +12,8 @@ export const cajon: InstrumentDef = {
   voicing: "unpitched",
   bodyConstruction: "wood-box",
   excitationType: "fingerpad",
-  elementaryModel: 4,
-  makeupGain: 2.299,
+  
+  
   polyphony: 12,
   note: "Authentic Flamenco/Peruvian wooden box drum with thin resonant birch tapa, internal guitar string snare wires, deep 65Hz cavity bass thump (grave), crisp corner snare slap (agudo), open tones, and fingertip ghost taps",
   acousticProfile: {
@@ -53,7 +53,7 @@ export const cajon: InstrumentDef = {
       strikeZones: ["bass", "center"],
       defaultPan: 0.1,
       gainTrimDb: 1.5,
-      synthesisNotes: "Full palm strike in center of wooden front plate driving 65Hz internal air cavity resonance"
+      
     },
     {
       id: "cajon-slap",
@@ -67,7 +67,7 @@ export const cajon: InstrumentDef = {
       strikeZones: ["slap", "edge"],
       defaultPan: 0.1,
       gainTrimDb: 0.5,
-      synthesisNotes: "Relaxed finger slap on upper corner exciting internal guitar snare wire buzz at 3.5kHz"
+      
     },
     {
       id: "cajon-tip",
@@ -80,7 +80,7 @@ export const cajon: InstrumentDef = {
       strikeZones: ["tip"],
       defaultPan: 0.1,
       gainTrimDb: -4,
-      synthesisNotes: "Delicate ghost note fingertip touch on top wood plate"
+      
     },
     {
       id: "cajon-side",
@@ -93,7 +93,7 @@ export const cajon: InstrumentDef = {
       strikeZones: ["rim"],
       defaultPan: 0.1,
       gainTrimDb: -2,
-      synthesisNotes: "Knuckle tap against outer solid birch side panel"
+      
     }
   ],
   performanceArticulations: {
@@ -132,11 +132,7 @@ export const cajon: InstrumentDef = {
       transientSharpness: 0.92,
       damping: 0.65
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "Internal air chamber (65Hz) provides resonant bass thump when struck in the center.",
-      "Upper corner slaps excite internal snare wire tension generating bright crisp sizzle.",
-      "Delicate fingertip ghost notes maintain continuous compás subdivision."
-    ]
+    
+    
   }
 };

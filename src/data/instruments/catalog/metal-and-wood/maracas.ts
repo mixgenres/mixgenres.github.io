@@ -10,8 +10,8 @@ export const maracas: InstrumentDef = {
     high: 70
   },
   voicing: "unpitched",
-  elementaryModel: 17,
-  makeupGain: 11.7852,
+  
+  
   polyphony: 8,
   acousticProfile: {
     sustain: "percussive",

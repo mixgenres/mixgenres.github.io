@@ -10,8 +10,8 @@ export const foot_stomp: InstrumentDef = {
     high: 38
   },
   voicing: "unpitched",
-  elementaryModel: 0,
-  makeupGain: 1.27,
+  
+  
   polyphony: 8,
   note: "Acoustic wooden porch, stage, or clogging board foot stomp delivering heavy woody bass pulse",
   acousticProfile: {

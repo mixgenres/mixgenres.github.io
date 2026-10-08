@@ -10,8 +10,8 @@ export const repinique: InstrumentDef = {
     high: 66
   },
   voicing: "unpitched",
-  elementaryModel: 0,
-  makeupGain: 2.102,
+  
+  
   polyphony: 8,
   note: "high-pitched Brazilian samba drum; open calls and sharp rim attacks",
   acousticProfile: {

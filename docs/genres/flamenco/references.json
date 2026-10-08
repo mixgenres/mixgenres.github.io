@@ -5,11 +5,11 @@
   "targetPerStyle": 4,
   "sourceRule": "Each style owns its evidence. A reference can inform multiple styles only when the performance itself demonstrates each style; neighboring genres are not substitutes.",
   "storageGate": {
-    "volumeFreeBytesAtPlanning": null,
-    "preserveFreeBytes": null,
+    "volumeFreeBytesAtPlanning": 22908256000,
+    "preserveFreeBytes": 5368709120,
     "status": "active-style-by-style-ingest",
     "note": "User approved a bounded Flamenco-only storage exception, preserving about 5 GiB free. Continue one style at a time, use the existing Demucs environment, keep peak temporary audio within 1 GiB, retained reference/review audio within 500 MiB, and recheck free space before each style.",
-    "forecastNewMp3sAtObservedMean": "about 303 MiB for 55 added files, based on 17 existing Flamenco MP3s averaging 5.51 MiB each; actual duration/encoding may change this.",
+    "forecastNewMp3sAtObservedMean": "about 286 MiB for 52 added files, based on 17 existing Flamenco MP3s averaging 5.51 MiB each; actual duration/encoding may change this.",
     "forecastAtFivePerStyle": "about 402 MiB for 73 added files at the same observed mean.",
     "acquiredSoFarBytes": 24971507
   },
@@ -36,10 +36,20 @@
           "artist": "Camarón de la Isla",
           "title": "De tus ojos soy cautivo",
           "file": "samples/Camarón de la Isla - De tus ojos soy cautivo.mp3",
-          "state": "downloaded",
+          "youtubeUrl": "https://www.youtube.com/watch?v=DK6DX-QDuDI",
+          "youtubeTitle": "DE TUS OJOS SOY CAUTIVO ***** CAMARON DE LA ISLA",
+          "uploader": "Flamenco de la Historia",
+          "state": "verified",
           "bytes": 4666962,
           "sha256": "95461d43d10519893f6c0784d60ad1b499849260c26e06d30fd6b4dabf32b88a",
-          "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+          "provenance": "Local ID3 title matches the 1977 Castillo de Arena track. YouTube upload identifies the work; Fundación Paco de Lucía confirms A4 is a Soleá with Camarón and guitars by Paco de Lucía and Ramón de Algeciras. Exact mastering/copy match is unverified.",
+          "sourceEvidence": [
+            "https://www.youtube.com/watch?v=DK6DX-QDuDI",
+            "https://fundacionpacodelucia.com/discografia/castillo-de-arena-el-camaron-de-la-isla-con-la-colaboracion-especial-de-paco-de-lucia/"
+          ],
+          "source": "original-recording",
+          "separationState": "existing-verified-accompaniment",
+          "windowsSeconds": [67.9, 126.09]
         },
         {
           "id": "flamenco-solea-fernanda-1991",

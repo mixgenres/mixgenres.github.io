@@ -29,7 +29,10 @@ stems = [d for d in render['diagnostics'] if d['stage'] == 'stem' and d['metrics
 loudest = max((s['metrics']['rmsDbfs'] for s in stems), default=-120)
 buried = [{'instrumentId': s['instrumentId'], 'trackId': s['id'], 'differenceDb': s['metrics']['rmsDbfs'] - loudest}
           for s in stems if s['metrics']['rmsDbfs'] < loudest - 18]
-report = {'referenceFile': str(reference_path), 'referenceSource': reference_source, 'generatedFile': args.generated, 'generated': generated,
+report = {'referenceFile': str(reference_path),
+          'referenceAudioFile': reference.get('accompanimentFile', str(reference_path)),
+          'referenceSource': reference_source, 'generatedFile': args.generated,
+          'playbackEngine': render.get('playbackEngine', 'unknown'), 'generated': generated,
           'windows': windows, 'stemBalanceWarnings': buried,
           'audioFingerprint': render['audioFingerprint'], 'sourcesChangedDuringRender': render['audioSourcesChangedDuringRender'],
           'evidence': 'Original album mixes may contain vocals. Generated instrumental studies are not transcriptions. Stem RMS differences may reflect rests; review musical role and activity before changing gain.'}

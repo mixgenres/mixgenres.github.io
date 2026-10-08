@@ -5,7 +5,7 @@ import { beatValue } from '../src/engine/score/musicianScore';
 import { ALL_STYLES } from '../src/engine/style';
 import { INSTRUMENTS_BY_ID } from '../src/engine/lookup/instruments';
 import { getInstrumentPerformanceProfile } from '../src/engine/lookup/performance';
-import { getInstrumentModule } from '../src/engine/playback/instrumentRegistry';
+import { patchForInstrument } from '../src/engine/playback/soundfont/presets';
 import { GESTURE_NAMES } from '../src/engine/band/gestures';
 import { PATTERNS_BY_ID } from '../src/data/genres';
 import { reportMetadata, writeReport, printFindings, type Finding } from './lib/auditReport';
@@ -57,7 +57,8 @@ for (const style of ALL_STYLES) {
           'technique-substitution', id, `Bar ${note.bar + 1}: ${technique} became ${GESTURE_NAMES[note.gestureCode]}`);
       }
     }
-    return { instrumentId: id, role: track.role, synthesisModule: getInstrumentModule(id).id, physicalRange: [profile.capabilities.lowMidi, profile.capabilities.highMidi],
+    const samplePreset = patchForInstrument(id, !!def.kit || !!def.drum || def.voicing === 'unpitched');
+    return { instrumentId: id, role: track.role, samplePreset, physicalRange: [profile.capabilities.lowMidi, profile.capabilities.highMidi],
       playedRange: notes.length ? [Math.min(...notes.map(n => n.midi)), Math.max(...notes.map(n => n.midi))] : [], notes: notes.length,
       techniques: [...new Set(notes.map(n => GESTURE_NAMES[n.gestureCode]))],
       authoredPitchNotes: notes.filter(n => n.authoredPitch).length,

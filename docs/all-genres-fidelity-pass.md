@@ -1,6 +1,6 @@
 # All-genres fidelity and sample-song pass
 
-Updated 2026-10-07. This pass covers 55 genre folders, 420 song styles and 420 shipped sample songs. It follows the genre validation guidance and keeps genre-owned vocabulary local to its style.
+Updated 2026-10-07. This pass covers 55 genre folders, 420 song styles and 420 shipped sample songs. It follows the genre validation guidance and keeps genre-owned vocabulary local to its style. The current song-by-song roster and reference crosswalk is in [genre-verification-implementation-audit.md](./genre-verification-implementation-audit.md).
 
 ## Changes
 
@@ -12,12 +12,14 @@ Updated 2026-10-07. This pass covers 55 genre folders, 420 song styles and 420 s
 ## Validation
 
 - All 420 songs compiled with zero failures. The catalog audit now measures 2,190 instrument lanes: 63 use a single selected pattern, 158 use one pattern for at least 80% of measures, and the mean is 4.78 selected IDs per lane. The earlier baseline was 124 single-pattern lanes, 349 dominant lanes, and 3.93 IDs per lane. These counts measure pattern selection, not perceived musical variation.
-- The all-reference audio sweep is recorded under `audit/all-samples/deep-pass-2026-10-final-all/` and compares two-second generated ensemble excerpts against voice-removed accompaniment windows where available, falling back to the exact local album mix otherwise. Existing accompaniment was measured for 314 recordings. The searchable review player is `audit/all-samples/listen.html`.
-- Reference coverage is 409 local recording files, exact matches for 387 styles, separated-accompaniment profiles for 309 styles, 33 styles without an exact local match, and 111 without separated-accompaniment profiles. The Chinese pass added a verified suona-and-orchestra recording and an explicit Chinese-title alias for Jiangnan Sizhu; neither original recording is treated as voice-removed mix evidence.
+- The SoundFont playback path uses 17 selectively distilled, demand-loaded banks totaling 131.5 MiB compressed. The catalog roster audit confirms 5–8 distinct instruments for all 420 sample songs and bandoneon on all 17 Tango songs. SoundFont is the only playback engine; rendered audio is produced per part on demand.
+- The 5–8 count is a user-directed sample-catalog rule. A few sparse styles use quiet, score-backed sample-only support parts; that roster does not claim every added player belongs to the historical reference ensemble, and needs listening review for musical fit.
+- The current inventory has 407 local MP3s, exact style links for 387 styles, 33 catalog styles without an exact local MP3, and measured accompaniment features for 314 links. Local `voiced/` files supply the separated-mix evidence where available; they are not isolated instrument stems. The current 8-second SoundFont comparison is being recorded under `audit/all-samples/soundfont-v3-all-genres/`; every row remains a timbre/mix screen for musical review, not a note-for-note or perceptual match claim.
+- The Chinese pass added a verified suona-and-orchestra recording and an explicit Chinese-title alias for Jiangnan Sizhu; neither original recording is treated as voice-removed mix evidence.
 - The current source/technique audit is in [`genre-pedagogy-audit.md`](genre-pedagogy-audit.md), with style-by-style pattern and mix evidence in the ignored `audit/technique-coverage/report.json`.
 
 ## Remaining review
 
 The catalog still has 29 instrument/style pairs without a folder-authored body cell and 1,904 with only one. Generated variations improve song use but do not replace original instrument-specific teaching material. The gesture audit also retains 76 technique or phrase cues without a named renderer gesture; mapped playable gestures all have a local pattern example. These are the next data-authoring priorities.
 
-The two-second sweep is a screening pass, not human listening or a musical authenticity certification. Each matched style remains marked for musical review; the render player lets a reviewer compare the reference and generated excerpts at matched playback level.
+The eight-second SoundFont sweep is a screening pass, not human listening or a musical authenticity certification. Each matched style remains marked for musical review; compare the generated excerpt with its exact voiced reference where the inventory identifies one.

@@ -4,12 +4,12 @@ export const harmonica: InstrumentDef = {
   id: "harmonica",
   name: "Blues Harmonica",
   family: "winds",
-  freeReedSynthesis: { fundamentalGain: 0.58, upperPartialGain: 0.24, upperPartialRatio: 2.01, breathNoiseCutoffHz: 2600, transientClickGain: 0.12, attackSeconds: 0.025, bendDepth: 0.035, handWah: true },
+  
   voicing: "single",
   bodyConstruction: "wood-box",
   excitationType: "breath",
-  elementaryModel: 10,
-  makeupGain: 0.8413,
+  
+  
   polyphony: 4,
   note: "10-hole diatonic blues harp with brass reeds, draw reed bending, tongue-blocking, and hand wah",
   acousticProfile: {

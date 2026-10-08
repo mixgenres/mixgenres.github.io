@@ -4,9 +4,9 @@ import { codeForGesture } from '../src/engine/band/gestures';
 import { resolveRenderGesture } from '../src/engine/playback/renderGesture';
 import { prepareNoteVoice } from '../src/engine/playback/performancePlan';
 import { resolveTrackSound } from '../src/engine/playback/trackSound';
-import { getInstrumentModule, resolveVoiceParameters } from '../src/engine/playback/instrumentRegistry';
 import { realizeTechniquePerformance } from '../src/engine/band/techniquePerformance';
-import { voiceTailSeconds } from '../src/engine/playback/voiceAllocation';
+import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
+import { patchForInstrument } from '../src/engine/playback/soundfont/presets';
 import { makeSheet, rebuild } from '../src/engine/sheet/sheet';
 import { compileSongPipeline } from '../src/engine/pipeline/compileSong';
 import { exportMusicXml } from '../src/engine/score/musicXml';
@@ -51,8 +51,8 @@ test('tango bow percussion, damped pizzicato, body strike and bass slap have sep
   assert.equal(gesture('violin', 'tambor').excitationType, 'fingerpad');
   assert.equal(gesture('violin', 'golpe-caja').mechanics.surface, 'soundboard');
   assert.equal(gesture('violin', 'chicharra').mechanics.surface, 'afterlength');
-  assert.equal(getInstrumentModule('bass').id, 'bass');
-  assert.equal(getInstrumentModule('upright-bass').id, 'upright-bass');
+  assert.equal(resolveRenderGesture('bass', codeForGesture('tone')).action, 'tone');
+  assert.equal(resolveRenderGesture('upright-bass', codeForGesture('tone')).action, 'tone');
 });
 
 test('up/down chord sweeps preserve pitches and written rhythm with exactly one simultaneous golpe', () => {
@@ -77,7 +77,7 @@ test('unpitched actions produce one contact rather than a body strike per inferr
     assert.equal(perf.notes[0].pitchIdentity, 'unpitched');
     const params = resolveTrackSound(instrument);
     const voice = prepareNoteVoice(perf.notes[0], params, '', '');
-    assert.ok(voiceTailSeconds(params, voice) <= .5, `${instrument}/${technique} must not reserve long bowed/plucked tails`);
+    assert.equal(voice.mechanics?.pitchIdentity, 'unpitched', `${instrument}/${technique} stays a body/contact sound`);
   }
 });
 
@@ -86,11 +86,13 @@ test('scraper metadata identifies an unpitched friction source', () => {
     const def = INSTRUMENTS_BY_ID[id];
     assert.ok(def, `${id} is represented in the instrument catalog`);
     assert.equal(def.luthierPhysics?.category, 'scraped_friction', `${id} uses a frictional source`);
-    assert.equal(def.dspProfile?.familyModel, 'scrape', `${id} is not modeled as a membrane/struck note`);
+    assert.equal(def.family, 'metal-and-wood', `${id} remains in the authored scraped-instrument family`);
+    assert.ok(patchForInstrument(id, true).pack, `${id} has an explicit sample bank route`);
   }
   for (const id of ['shaker', 'maracas']) {
     assert.equal(INSTRUMENTS_BY_ID[id]?.luthierPhysics?.category, 'body_impact');
-    assert.equal(INSTRUMENTS_BY_ID[id]?.dspProfile?.familyModel, 'shaker');
+    assert.equal(INSTRUMENTS_BY_ID[id]?.family, 'metal-and-wood');
+    assert.ok(patchForInstrument(id, true).pack);
   }
 });
 
@@ -98,28 +100,39 @@ test('physical categories resolve to the source mechanism across idiophones and 
   for (const id of ['bones', 'gongs', 'cowbell', 'agogo', 'claves', 'triangle', 'tambourine', 'castanets', 'kane', 'zapateado', 'qraqeb', 'foot-stomp', 'hand-percussion', 'palmas']) {
     const def = INSTRUMENTS_BY_ID[id];
     assert.ok(def, `${id} is represented in the instrument catalog`);
-    assert.equal(def.dspProfile?.familyModel, 'impact', `${id} uses a struck/body-contact source`);
+    assert.ok(patchForInstrument(id, true).pack, `${id} has a sample bank route`);
   }
   for (const id of ['frame-drum', 'riq']) {
     const def = INSTRUMENTS_BY_ID[id];
     assert.equal(def?.luthierPhysics?.category, 'membrane_tension_2d', `${id} has a real tensioned head`);
-    assert.equal(def?.dspProfile?.familyModel, 'membrane');
+    assert.equal(def?.family, 'hand-drums');
   }
   const logDrum = INSTRUMENTS_BY_ID['log-drum'];
   assert.equal(logDrum?.luthierPhysics?.category, 'resonator_struck_metal_wood');
-  assert.equal(logDrum?.dspProfile?.familyModel, 'mallet');
+  assert.equal(logDrum?.family, 'hand-drums');
 });
 
-test('arco is held, pizzicato decays, and palm muting shortens physical string decay', () => {
+test('bow, pizzicato and muted strings route to sample articulations', () => {
   for (const instrument of ['violin', 'viola', 'cello', 'upright-bass']) {
     const params = resolveTrackSound(instrument);
-    assert.equal(resolveVoiceParameters(prepareNoteVoice(note('arco'), params, '', ''), params).isDecayingInstrument, false);
-    assert.equal(resolveVoiceParameters(prepareNoteVoice(note('pizzicato'), params, '', ''), params).isDecayingInstrument, true);
+    const arco = prepareNoteVoice(note('arco'), params, '', '');
+    const pizz = prepareNoteVoice(note('pizzicato'), params, '', '');
+    assert.equal(arco.mechanics?.excitation, 'bow');
+    assert.equal(pizz.mechanics?.pitchIdentity, 'pitched');
   }
-  const params = resolveTrackSound('guitar');
-  const open = resolveVoiceParameters(prepareNoteVoice(note('fingerstyle'), params, '', ''), params);
-  const mute = resolveVoiceParameters(prepareNoteVoice(note('palm-mute'), params, '', ''), params);
-  assert.ok(mute.decayTime < open.decayTime * .4);
+  const sampledPlan = (instrument: string, technique: string) => {
+    const params = resolveTrackSound(instrument);
+    const physical = performance(instrument, [note(technique)]);
+    physical.worldId = 'flamenco';
+    physical.trackInfo = { p: { instrumentId: instrument, role: 'lead' } };
+    physical.notes[0].physical = { key: 'gesture-fixture', voice: prepareNoteVoice(physical.notes[0], params, 'flamenco', ''), tailSeconds: 6 };
+    return compileSamplePlan(physical, { trackInstruments: new Map([['p', instrument]]), worldId: 'flamenco' });
+  };
+  const open = sampledPlan('guitar', 'fingerstyle'), mute = sampledPlan('guitar', 'palm-mute');
+  assert.equal(open.events.find(event => event.type === 'on')?.patch.bank, 64);
+  assert.equal(mute.events.find(event => event.type === 'on')?.patch.bank, 65);
+  const pizzicato = sampledPlan('cello', 'pizzicato');
+  assert.equal(pizzicato.events.find(event => event.type === 'on')?.patch.program, 45);
   assert.equal(gesture('bass', 'pop').mechanics.pitchIdentity, 'pitched');
 });
 

@@ -8,8 +8,8 @@ export const pipa: InstrumentDef = {
   courses: 1,
   bodyConstruction: "wood-box",
   excitationType: "nail",
-  elementaryModel: 0,
-  makeupGain: 1.4193,
+  
+  
   polyphony: 4,
   note: "Chinese four-string pear-shaped vertical lute with 24-30 frets, capable of delicate lyrical poetry, lightning five-finger wheel tremolos, and explosive martial clatter",
   acousticProfile: {
@@ -75,11 +75,7 @@ export const pipa: InstrumentDef = {
       bodyResonance: 0.78,
       transientSharpness: 0.86
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "Bamboo frets on arched soundboard project bright, dry, percussive transients.",
-      "Lunzhi wheel technique uses all five fingers sequentially to sustain continuous melodic lines.",
-      "Snapping strings against frets produces gunshot-like martial drama."
-    ]
+    
+    
   }
 };

@@ -12,8 +12,8 @@ export const timbales: InstrumentDef = {
   voicing: "unpitched",
   bodyConstruction: "skin-faced",
   excitationType: "stick",
-  elementaryModel: 4,
-  makeupGain: 1.540,
+  
+  
   polyphony: 12,
   note: "Single-headed metal shell drums (Macho 13-inch, Hembra 14-inch) played with wooden dowels for explosive cáscara shell tapping and mambo bell riffs",
   acousticProfile: {
@@ -49,7 +49,7 @@ export const timbales: InstrumentDef = {
       strikeZones: ["rim"],
       defaultPan: -0.34,
       gainTrimDb: -2,
-      synthesisNotes: "Sharp wood stick tapping rhythmically against brass/steel shell"
+      
     },
     {
       id: "macho-open",
@@ -62,7 +62,7 @@ export const timbales: InstrumentDef = {
       strikeZones: ["open"],
       defaultPan: -0.36,
       gainTrimDb: 0,
-      synthesisNotes: "Ringing metallic head strike on 13-inch Macho drum"
+      
     },
     {
       id: "hembra-open",
@@ -75,7 +75,7 @@ export const timbales: InstrumentDef = {
       strikeZones: ["open"],
       defaultPan: -0.3,
       gainTrimDb: 0,
-      synthesisNotes: "Resonant low head strike on 14-inch Hembra drum"
+      
     },
     {
       id: "mambo-bell-mouth",
@@ -88,7 +88,7 @@ export const timbales: InstrumentDef = {
       strikeZones: ["open"],
       defaultPan: -0.28,
       gainTrimDb: 1,
-      synthesisNotes: "Heavy brass cowbell mouth strike for driving mambo chorus section"
+      
     },
     {
       id: "cha-cha-bell",
@@ -101,7 +101,7 @@ export const timbales: InstrumentDef = {
       strikeZones: ["closed"],
       defaultPan: -0.28,
       gainTrimDb: -1,
-      synthesisNotes: "High dry bell tap on closed neck"
+      
     }
   ],
   performanceArticulations: {

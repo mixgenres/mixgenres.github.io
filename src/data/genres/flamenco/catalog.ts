@@ -73,7 +73,7 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
-        "guitar": ["accent", "rasgueado", "golpe", "picado", "alzapua", "tremolo", "staccato", "legato", "vibrato"],
+        "guitar": ["accent", "thumb", "fingerstyle", "rasgueado", "golpe", "picado", "alzapua", "tremolo", "staccato", "legato", "vibrato"],
         "palmas": ["accent", "palmas-sordas", "palmas-claras", "palmas-fuertes", "ghost", "open"],
         "cajon": ["accent", "golpe", "slap", "ghost", "roll", "open"]
       },
@@ -83,8 +83,8 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
           "defaultTechnique": "accent"
         },
         "guitar:lead": {
-          "allowedTechniques": ["accent", "rasgueado", "golpe", "picado", "alzapua", "tremolo", "staccato", "legato", "vibrato"],
-          "defaultTechnique": "accent",
+          "allowedTechniques": ["accent", "thumb", "fingerstyle", "rasgueado", "golpe", "picado", "alzapua", "tremolo", "staccato", "legato", "vibrato"],
+          "defaultTechnique": "fingerstyle",
           "variantId": "nylon"
         },
         "palmas:percussion": {

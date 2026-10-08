@@ -11,7 +11,7 @@ Neither playback nor export chooses musical priorities from measured audio.
 `WorldContract.timbreSpace.mix`; `mixCharacter` remains supported. Song styles and
 human-readable starter profiles use recursive `MixOverride<MixContract>` values.
 Nested partials inherit sibling fields. Arrays replace; zero and false are real
-values. Invalid DSP numbers and malformed scalar values inherit safe values.
+values. Invalid mix numbers and malformed scalar values inherit safe values.
 
 Precedence is safe defaults, genre, parent styles in order, applicable sound
 influences, the selected style, and user `sound.mix` overrides. Rhythm or melody
@@ -24,9 +24,9 @@ Tango is enabled and calibrated structurally for Tradicional, Guardia Vieja,
 Troilo, Pugliese, Milonga, Vals, Nuevo, Piazzolla, Canción and Electrónico. Guardia
 Vieja and Piazzolla now have explicit selectable musical style seeds, rather than
 unreachable starter profiles. Values are engineering starting points pending
-listening/render validation. Worlds without authored dynamic contracts remain
-disabled and follow the existing renderer. Set `sound.mix.enabled` to false to
-retain the baseline mix for a style.
+listening/render validation. Worlds without authored dynamic contracts resolve to
+neutral mix targets. Set `sound.mix.enabled` to false to retain the baseline mix
+for a style.
 
 ## Compilation
 
@@ -60,20 +60,19 @@ changes crossfade permanent routing gains. Web Audio ramps execute a common
 seek time and schedules remaining points; transport loops restart the same lanes.
 The master output ceiling remains in the common mastering chain.
 
-The primary `SongPlayer` and MP3/WAV exports both call `renderPerformance` and use
-the same native offline graph and timeline. The worklet transport also consumes
-that timeline through the same `MixGraph`. Only composition changes can change
-renderer output topology. Fader updates reuse the compiled performance; dynamic
-mixing happens after the PCM stem cache, so automation cannot contaminate cached
-instrument stems. Raw-stem exports intentionally omit scene and bus processing.
-Ensemble headroom is compiled once and shared by both consumers. Render excerpts
-retain the original ramps and interpolate their starting state. Selected-track
-exports retain the song's authored timeline rather than replanning
-hierarchy based on which tracks were selected.
+MP3/WAV exports render through the same offline graph and timeline. The live
+worklet transport also consumes that timeline through the same `MixGraph`.
+Composition changes determine active-track routing; fader updates reuse the
+compiled performance. Export renders each requested part on demand, then applies
+track balance, buses and scene automation. Raw-part exports intentionally omit
+scene and bus processing. Ensemble headroom is compiled once and shared by both
+consumers. Render excerpts retain the original ramps and interpolate their
+starting state. Selected-track exports retain the song's authored timeline
+rather than replanning hierarchy based on selected tracks.
 
 Node environments and explicit master bypass use a portable symbolic-mix runtime
 for gain, stereo, EQ and bounded ambience. It consumes identical automation
-targets and leaves cached stems untouched. It does not emulate browser mastering
+targets and leaves the source part buffers untouched. It does not emulate browser mastering
 or promise sample-identical reverb/compression with Web Audio. Diagnostics continue
 to report whether browser mastering ran. Native track-strip renders report stem
 and output PCM metrics; they do not label unused accumulation buffers as measured
@@ -93,16 +92,14 @@ foreground owners, anchors, masking requests, scene offsets and the complete
 resolution trace. The runtime does not log automatically or expose DSP controls
 in the product UI.
 
-New coverage lives in `scripts/dynamic-mix.test.ts`, included in `test:mix` and the
-system regression stage. It covers recursive inheritance, provenance, safe values,
-style/influence precedence, override-cache invalidation, Tango differentiation,
-role/solo interpretation, shared foreground, temporal masking, chord attacks,
-sustains, neutral fallback, deterministic scenes, automation seeks, persistent
-graphs, live/offline scheduling parity, and cached-stem immutability.
+Coverage in `scripts/dynamic-mix.test.ts` includes recursive inheritance,
+provenance, safe values, style/influence precedence, override-cache invalidation,
+Tango differentiation, role/solo interpretation, shared foreground, temporal
+masking, chord attacks, sustains, neutral fallback, deterministic scenes,
+automation seeks, persistent graphs, live/offline scheduling parity, and part
+buffer immutability.
 
-**No validation commands were run during implementation, by user request.**
-For the revision/validation pass, run the new mix tests, TypeScript checks, the
-system checks, browser/audio render tests and static build:
+Run the focused mix tests, type and API checks, behavior checks and static build:
 
 ```sh
 npm run test:mix

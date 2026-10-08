@@ -374,42 +374,6 @@ export interface PhysicalModelProfile {
     pluckPosition?: number; pluckHardness?: number; reedStiffness?: number; breathNoise?: number;
     transientSharpness?: number; noiseAmount?: number; stereoWidth?: number;
   };
-  signalChain: Array<'preamp' | 'eq' | 'compressor' | 'distortion' | 'filter' | 'chorus' | 'delay' | 'reverb' | 'cabinet' | 'tape' | 'spring' | 'dub-send'>;
-  synthesisNotes: string[];
-}
-
-/** Renderer voicing controls for the shared free-reed synthesis module. */
-export interface FreeReedSynthesisProfile {
-  fundamentalGain: number;
-  upperPartialGain: number;
-  upperPartialRatio: number;
-  breathNoiseCutoffHz: number;
-  transientClickGain: number;
-  attackSeconds: number;
-  bendDepth: number;
-  chamberResonances?: Array<{ frequencyHz: number; q: number; gain: number }>;
-  chamberFrequencyMultiple?: number;
-  chamberQ?: number;
-  handWah?: boolean;
-}
-
-export interface PipeSynthesisProfile {
-  droneRatios: number[];
-}
-
-export interface BrassSynthesisProfile {
-  muted?: boolean;
-  vibratoRateHz?: number;
-  defaultNonlinearBlare?: number;
-  cutoffScale?: number;
-}
-
-export interface ArticulationModel {
-  id: string;
-  method: string;
-  synthesis: 'physical' | 'sample' | 'hybrid' | 'event';
-  parameters: Record<string, number | string | boolean>;
-  genreUse?: Record<string, string[]>;
 }
 
 export interface InstrumentTechniqueProfile {
@@ -458,7 +422,6 @@ export interface SynthPatch {
   unison?: number;
   saturation?: number;
   noise?: number;
-  signalChain?: PhysicalModelProfile['signalChain'];
 }
 
 export interface InstrumentDef {
@@ -478,8 +441,6 @@ export interface InstrumentDef {
 
   acousticProfile?: AcousticProfile;
   luthierPhysics?: LuthierPhysicsProfile;
-  elementaryModel?: number;
-  makeupGain?: number;
   polyphony?: number;
   /** Performance layout hints consumed by generic arrangement algorithms. */
   attackProfile?: { chordAttack?: 'block' | 'rolled'; rolledChordSpreadSeconds?: number };
@@ -512,12 +473,6 @@ export interface InstrumentDef {
   /** Electronic timbres available on Synth; never top-level instrument IDs. */
   patches?: SynthPatch[];
   physicalModel?: PhysicalModelProfile;
-  freeReedSynthesis?: FreeReedSynthesisProfile;
-  pipeSynthesis?: PipeSynthesisProfile;
-  brassSynthesis?: BrassSynthesisProfile;
-  /** First-class instrument physics used by the live/offline renderer. */
-  dspProfile?: import('../../sound/schema/dsp-profile').InstrumentDSPProfile;
-  articulationModels?: ArticulationModel[];
   /** Style-level performance constraints and idiomatic patterns. */
   genrePerformanceProfiles?: Record<string, { role: string; articulations: string[]; patternRules: string[]; forbidden?: string[] }>;
 }

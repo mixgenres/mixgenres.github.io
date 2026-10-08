@@ -5,8 +5,8 @@ export const glockenspiel: InstrumentDef = {
   name: "Glockenspiel",
   family: "metal-and-wood",
   voicing: "single",
-  elementaryModel: 8,
-  makeupGain: 0.7623,
+  
+  
   polyphony: 4,
   note: "Tuned steel bar bells struck with hard mallets producing pure, bright, piercing high tones",
   acousticProfile: {

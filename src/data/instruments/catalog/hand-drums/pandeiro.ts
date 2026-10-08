@@ -11,8 +11,8 @@ export const pandeiro: InstrumentDef = {
   },
   voicing: "unpitched",
   bodyConstruction: "skin-faced",
-  elementaryModel: 4,
-  makeupGain: 1.9767,
+  
+  
   polyphony: 8,
   note: "Brazilian national frame drum with thin natural goatskin head and cupped metal platinelas (jingles) with internal dampening washers, capable of emulating an entire samba percussion section",
   acousticProfile: {
@@ -58,11 +58,7 @@ export const pandeiro: InstrumentDef = {
       transientSharpness: 0.88,
       bodyResonance: 0.75
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "Interlocking metal platinelas have central damping plates to prevent uncontrolled sustained wash.",
-      "Thumb strikes center for deep surdo-like bass tone (sub-bass pop).",
-      "Rocking wrist rotation between thumb, heel of palm, and fingertips produces continuous 16th-note samba."
-    ]
+    
+    
   }
 };

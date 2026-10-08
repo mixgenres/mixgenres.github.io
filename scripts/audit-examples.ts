@@ -1,4 +1,4 @@
-import { catalogIdForStyle, createCatalogSong } from '../src/engine/sheet/songCatalog';
+import { auditCatalogSongInstruments, catalogIdForStyle, createCatalogSong } from '../src/engine/sheet/songCatalog';
 import { compileWholeSong } from '../src/engine/band/arrangeBand';
 import { ALL_STYLES, resolveStyle } from '../src/engine/style';
 import { GENRE_WORLDS_BY_ID, PATTERNS_BY_ID } from '../src/data/genres';
@@ -16,6 +16,7 @@ const placeholder = /style-specific|style-defined|style-appropriate|pitch vocabu
 for (const style of selection) {
   try {
     const sheet = createCatalogSong(catalogIdForStyle(style.id));
+    const sampleSupportIds = new Set(auditCatalogSongInstruments(catalogIdForStyle(style.id)).supportInstruments);
     const resolved = resolveStyle({ genreId: style.primaryGenre, styleId: style.id, userOverrides: sheet.styleOverrides });
     const seed = GENRE_WORLDS_BY_ID[style.primaryGenre].styleDefinitions.find(s => s.id === style.id)!;
     check(!placeholder.test(JSON.stringify(seed.calibration)), 'placeholder', style.id, 'Musical calibration contains placeholder vocabulary');
@@ -30,7 +31,12 @@ for (const style of selection) {
       const scope = `${style.id}/${track.id}/${track.instrumentId}`;
       check(INSTRUMENTS_BY_ID[track.instrumentId!], 'instrument', scope, 'Unresolved physical instrument');
       check(active.has(track.id), 'silent-part', scope, 'Authored instrument never plays');
-      check(genreTechniquesForInstrument(track.instrumentId!, style.id).length, 'techniques', scope, 'No physically feasible technique in style vocabulary');
+      const techniques = sampleSupportIds.has(track.instrumentId!)
+        ? INSTRUMENTS_BY_ID[track.instrumentId!]!.techniques.articulations
+        : genreTechniquesForInstrument(track.instrumentId!, style.id);
+      check(techniques.length, 'techniques', scope, sampleSupportIds.has(track.instrumentId!)
+        ? 'Sample-only support instrument has no playable physical articulation'
+        : 'No physically feasible technique in style vocabulary');
       const sound = resolveTrackSound(track.instrumentId!, style.primaryGenre, style.id, track.role);
       check(Number.isFinite(sound.roleGain), 'sound-gain', scope, 'Invalid resolved sound gain');
       check(Number.isFinite(track.volume) && track.volume > 0 && track.volume <= 1, 'track-level', scope, 'Invalid example track level');

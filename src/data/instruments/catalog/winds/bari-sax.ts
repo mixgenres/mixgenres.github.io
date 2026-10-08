@@ -5,8 +5,8 @@ export const bari_sax: InstrumentDef = {
   name: "Baritone Saxophone",
   family: "winds",
   voicing: "bass",
-  elementaryModel: 16,
-  makeupGain: 0.9652,
+  
+  
   polyphony: 4,
   note: "Massive E-flat low brass saxophone with coiled neck tube, delivering guttural earth-shaking low A/B-flat fundamentals, snappy funk horn punches, and motoring bass lines",
   acousticProfile: {
@@ -71,11 +71,7 @@ export const bari_sax: InstrumentDef = {
       breathNoise: 0.25,
       transientSharpness: 0.78
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "Huge single cane reed requires firm breath support to initiate massive low column vibrations.",
-      "Fast key action provides percussive mechanical pad slaps that enhance the attack transient.",
-      "Rich in low-mid rasp, locking together with bass guitar and kick drum."
-    ]
+    
+    
   }
 };

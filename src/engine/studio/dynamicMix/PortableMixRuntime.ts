@@ -24,7 +24,7 @@ class StereoEQ {
   }
 }
 
-/** The planner supplies all targets. This runtime only executes DSP on cached, unmodified stems. */
+/** The planner supplies all targets; this runtime mixes the rendered part buffers. */
 export function accumulatePortableMix(timeline: MixSceneTimeline, trackId: string, left: Float32Array, right: Float32Array,
   startSample: number, sampleRate: number, outputL: Float32Array, outputR: Float32Array,
   roomL: Float32Array, roomR: Float32Array, echoL: Float32Array, echoR: Float32Array) {

@@ -2,8 +2,7 @@ import ts from 'typescript';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
-// This complements tsc: strict mode alone permits explicit escape hatches and
-// the dependency's renderer declarations contain loose parameters.
+// This complements tsc with product-boundary checks.
 const violations: string[] = [];
 let files = 0;
 const sources: string[] = [];
@@ -16,8 +15,6 @@ function collect(directory: string) {
 }
 collect('src'); collect('scripts'); sources.push('vite.config.ts');
 const privateMembers = new Set(['_renderer', '_native', '_module', '_delegate', '_sendMessage', '_nextRefId', 'nodeMap', 'postMessageBatch', 'ElementaryAudioProcessor', 'HEAPU8']);
-const allowedCore = new Set(['el', 'ElemNode', 'NodeRepr_t']);
-const allowedOfflineRendererMethods = new Set(['initialize', 'render', 'process', 'gc', 'reset']);
 const moduleNames = (node: ts.Node): string[] => {
   if (ts.isStringLiteral(node)) return [node.text];
   if (ts.isLiteralTypeNode(node) && ts.isStringLiteral(node.literal)) return [node.literal.text];
@@ -32,25 +29,10 @@ for (const file of sources) {
   };
   const checkElementaryModule = (node: ts.Node, module: string) => {
     if (!module.startsWith('@elemaudio/')) return;
-    if (module === '@elemaudio/core' && (ts.isImportDeclaration(node) || ts.isImportEqualsDeclaration(node))) {
-      const clause = ts.isImportDeclaration(node) ? node.importClause : undefined;
-      const bindings = clause?.namedBindings;
-      if (!bindings || !ts.isNamedImports(bindings) || clause?.name) report(node, 'Import only typed Elementary standard-library exports');
-      else for (const item of bindings.elements) {
-        if (!allowedCore.has(item.propertyName?.text ?? item.name.text)) report(item, 'Use the documented standard library instead of graph/compiler internals');
-      }
-      return;
-    }
-    if (module === '@elemaudio/offline-renderer' && file === 'src/engine/playback/offlineRenderer.ts' && ts.isImportDeclaration(node)) return;
-    report(node, 'Renderer calls must use the typed public API boundary');
+    report(node, 'Retired DSP playback dependency must not be reintroduced');
   };
   const visit = (node: ts.Node) => {
     if (node.kind === ts.SyntaxKind.AnyKeyword) report(node, 'Explicit loose type is forbidden; use a domain type or validate unknown data');
-    if (file === 'src/engine/playback/offlineRenderer.ts' && ts.isCallExpression(node) && ts.isPropertyAccessExpression(node.expression)
-      && ts.isPropertyAccessExpression(node.expression.expression) && node.expression.expression.expression.kind === ts.SyntaxKind.ThisKeyword
-      && node.expression.expression.name.text === 'core' && !allowedOfflineRendererMethods.has(node.expression.name.text)) {
-      report(node, 'Use only the reviewed public OfflineRenderer methods');
-    }
     if (ts.isPropertyAccessExpression(node) && privateMembers.has(node.name.text)) report(node, 'Private member access is forbidden');
     if (ts.isElementAccessExpression(node) && node.argumentExpression && ts.isStringLiteral(node.argumentExpression) && privateMembers.has(node.argumentExpression.text)) {
       report(node, 'Private member access is forbidden');

@@ -5,8 +5,8 @@ export const string_ensemble: InstrumentDef = {
   name: "String Ensemble",
   family: "bowed",
   voicing: "chord",
-  elementaryModel: 6,
-  makeupGain: 1.0296,
+  
+  
   polyphony: 8,
   acousticProfile: {
     sustain: "sustained",

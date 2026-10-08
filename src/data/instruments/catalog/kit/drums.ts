@@ -13,8 +13,8 @@ export const drums: InstrumentDef = {
   voicing: "unpitched",
   bodyConstruction: "wood-box",
   excitationType: "stick",
-  elementaryModel: 4,
-  makeupGain: 1.2845,
+  
+  
   polyphony: 16,
   note: "Studio acoustic drum kit featuring punchy 22-inch maple kick, crisp 14-inch maple snare with 20-strand snare wires, rack/floor toms, and hammered B20 bronze cymbals",
   acousticProfile: {
@@ -51,7 +51,7 @@ export const drums: InstrumentDef = {
       strikeZones: ["center"],
       defaultPan: 0,
       gainTrimDb: 2,
-      synthesisNotes: "Deep sub thump (55 Hz fundamental) with punchy beater click at 3.2 kHz"
+      
     },
     {
       id: "snare-center",
@@ -65,7 +65,7 @@ export const drums: InstrumentDef = {
       strikeZones: ["center"],
       defaultPan: -0.05,
       gainTrimDb: 1,
-      synthesisNotes: "Solid acoustic snare crack with bottom wire sizzle buzz"
+      
     },
     {
       id: "snare-rimshot",
@@ -79,7 +79,7 @@ export const drums: InstrumentDef = {
       strikeZones: ["rim", "center"],
       defaultPan: -0.05,
       gainTrimDb: 2.5,
-      synthesisNotes: "High-velocity simultaneous head and metal counterhoop strike"
+      
     },
     {
       id: "snare-cross-stick",
@@ -93,7 +93,7 @@ export const drums: InstrumentDef = {
       strikeZones: ["rim"],
       defaultPan: -0.05,
       gainTrimDb: -1,
-      synthesisNotes: "Dry, woody rim tap with stick resting on drumhead"
+      
     },
     {
       id: "snare-ghost",
@@ -107,7 +107,7 @@ export const drums: InstrumentDef = {
       strikeZones: ["center"],
       defaultPan: -0.05,
       gainTrimDb: -8,
-      synthesisNotes: "Low-velocity syncopated inner groove tap"
+      
     },
     { id: "tom-extra-low", name: "14-inch Low Rack Tom", midi: 41, physicalType: "membrane", tuningHz: 100, decayTimeSec: 0.75, damping: 0.28, shellResonance: 0.88, strikeZones: ["center"], defaultPan: 0.22, gainTrimDb: 0 },
     { id: "tom-extra-high", name: "12-inch High Rack Tom", midi: 48, physicalType: "membrane", tuningHz: 145, decayTimeSec: 0.62, damping: 0.30, shellResonance: 0.85, strikeZones: ["center"], defaultPan: -0.10, gainTrimDb: 0 },
@@ -129,7 +129,7 @@ export const drums: InstrumentDef = {
       strikeZones: ["bow", "closed"],
       defaultPan: 0.3,
       gainTrimDb: -3,
-      synthesisNotes: "Tight metallic stick tick with heavy foot pedal pressure"
+      
     },
     {
       id: "hihat-open",
@@ -142,7 +142,7 @@ export const drums: InstrumentDef = {
       strikeZones: ["edge", "open"],
       defaultPan: 0.3,
       gainTrimDb: -2,
-      synthesisNotes: "Sizzling bronze wash with open top cymbal vibration"
+      
     },
     {
       id: "hihat-pedal",
@@ -155,7 +155,7 @@ export const drums: InstrumentDef = {
       strikeZones: ["closed"],
       defaultPan: 0.3,
       gainTrimDb: -4,
-      synthesisNotes: "Snappy foot pedal closure without stick strike"
+      
     },
     {
       id: "tom-high",
@@ -270,11 +270,7 @@ export const drums: InstrumentDef = {
       transientSharpness: 0.92,
       bodyResonance: 0.75
     },
-    signalChain: ["preamp", "eq", "compressor", "reverb"],
-    synthesisNotes: [
-      "Kick combines low fundamental sub thump (55-65 Hz) with crisp beater click (3-4 kHz).",
-      "Snare couples top head acoustic crack with bottom snare wire sizzling buzz.",
-      "Hi-hats and cymbals deliver shimmering metallic stick definition and wash."
-    ]
+    
+    
   }
 };

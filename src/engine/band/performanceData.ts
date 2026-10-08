@@ -23,7 +23,7 @@ export interface PerfNote {
   pitchIdentity?: 'pitched' | 'unpitched';
   /** A simultaneous body strike is owned once by the musical attack. */
   bodyAttack?: boolean;
-  /** Layer 3 output, prepared once on composition edits and consumed by renderers. */
+  /** Physical performance controls resolved with the score and consumed by playback. */
   physical?: import('../sound/transformMusicians').PhysicalNote;
   musicianNotation?: import('../../data/schema').PatternEvent['notation'];
   percussion?: import('../score/percussionNotation').NotatedDrum;

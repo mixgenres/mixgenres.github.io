@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { makeSheet, rebuild } from '../src/engine/sheet/sheet';
+import { createCatalogSong } from '../src/engine/sheet/songCatalog';
 import { composeMusicianScore, compileWholeSong } from '../src/engine/band/arrangeBand';
 import { beatFraction, beatValue, compileMusicianScore, musicianScoreFromArrangement, scoreNoteSegments, scoreRests, type MusicianScore, type ScoreNote } from '../src/engine/score/musicianScore';
 import { exportMusicXml } from '../src/engine/score/musicXml';
@@ -24,6 +25,56 @@ function note(overrides: Partial<ScoreNote> = {}): ScoreNote {
     expression: { offsetSeconds: -.013, gateRatio: .85 }, source: { pitch: 'written', rhythm: 'written', technique: 'written', derived: false },
     playback: { gestureCode: codeForGesture('legato'), hitFunctionCode: 0, accent: .75 }, ...overrides };
 }
+
+test('Arabic Takht sample gives taqsim a solo voice and distinct section cells to its ensemble', () => {
+  const song = createCatalogSong('arabic-takht_song');
+  const taqsim = song.regions.find(region => region.kind === 'taqsim')!;
+  assert.deepEqual(taqsim.activeInstrumentIds, ['ney']);
+  const pattern = (instrumentId: string, section: string) => {
+    const track = song.tracks.find(part => part.instrumentId === instrumentId)!;
+    const region = song.regions.find(part => part.kind === section)!;
+    return song.arrangement[region.id][track.id];
+  };
+  assert.notEqual(pattern('ney', 'intro'), pattern('ney', 'response'));
+  assert.notEqual(pattern('violin', 'intro'), pattern('violin', 'response'));
+  assert.notEqual(pattern('oud', 'verse'), pattern('oud', 'response'));
+  assert.notEqual(pattern('qanun', 'verse'), pattern('qanun', 'response'));
+});
+
+test('reference score section assignments preserve their intended instrument cells across long phrases', () => {
+  const verify = (styleId: string, instrumentId: string, section: string, expectedName: string) => {
+    const song = createCatalogSong(`${styleId}_song`);
+    const region = song.regions.find(part => part.kind === section);
+    assert.ok(region, `${styleId} has a ${section} section`);
+    const track = song.tracks.find(part => part.instrumentId === instrumentId);
+    assert.ok(track, `${styleId} includes ${instrumentId}`);
+    const names = [...new Set(song.measures.filter(measure => measure.regionId === region.id)
+      .map(measure => PATTERNS_BY_ID[measure.patternDetailsByTrack?.[track.id]?.patternId ?? '']?.shortName)
+      .filter((name): name is string => !!name))];
+    assert.deepEqual(names, [expectedName], `${styleId}/${section}/${instrumentId} keeps its section-authored pattern`);
+  };
+
+  verify('flamenco-sevillanas', 'cajon', 'link', 'Sevillanas cajón link remate');
+  verify('cinematic-modern-score', 'synth', 'ostinato', 'modern score synth ostinato and resolution lift');
+  verify('cinematic-modern-score', 'synth', 'build', 'modern score synth ostinato and resolution lift');
+  verify('pop-power-pop', 'synth', 'chorus', 'power-pop chorus pad bloom');
+  verify('tango-chacarera-crossover', 'violin', 'interlude', 'chacarera violin interlude variation');
+});
+
+test('sample-only ensemble support parts use two local section cells instead of a generic one-pattern placeholder', () => {
+  for (const styleId of ['blues-piedmont', 'flamenco-tonas-martinetes', 'persian-radif', 'ambient-drone']) {
+    const song = createCatalogSong(`${styleId}_song`);
+    const supportTrackIds = new Set(Object.values(song.lockedPatternAssignments ?? {}).flatMap(assignments =>
+      Object.keys(assignments).filter(trackId => song.tracks.some(track => track.id === trackId
+        && PATTERNS_BY_ID[assignments[trackId]]?.sourceLevel === 'sample-support'))));
+    assert.ok(supportTrackIds.size > 0, `${styleId} has sample-only support parts`);
+    for (const trackId of supportTrackIds) {
+      const assigned = [...new Set(song.measures.map(measure => measure.patternDetailsByTrack?.[trackId]?.patternId).filter(Boolean))];
+      assert.ok(assigned.length >= 2, `${styleId}/${trackId} has contrasting section patterns`);
+      assert.ok(assigned.every(patternId => PATTERNS_BY_ID[patternId!]?.sourceLevel === 'sample-support'));
+    }
+  }
+});
 
 test('score fractions retain tuplets and fine authored positions', () => {
   assert.deepEqual(beatFraction(1 / 3), { numerator: 1, denominator: 3 });

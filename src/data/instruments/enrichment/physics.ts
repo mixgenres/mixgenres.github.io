@@ -1,4 +1,3 @@
-import { buildInstrumentDSPProfile } from '../../sound/dsp/profileBuilders';
 import type { InstrumentDef, TransitionMechanics, EnvironmentalReactivity, SpatialRadiation } from '../schema/instrument-def';
 
 export function enrichInstrumentPhysics(d: InstrumentDef): InstrumentDef {
@@ -74,10 +73,8 @@ export function enrichInstrumentPhysics(d: InstrumentDef): InstrumentDef {
     noiseAmount: isPerc || isWind ? 0.22 : 0.06,
   };
   const cleanParameters = Object.fromEntries(Object.entries(parameters).filter(([, v]) => v !== undefined)) as Record<string, number>;
-  const articulations = d.techniques.articulations;
   return {
     ...d,
-    dspProfile: d.dspProfile ?? buildInstrumentDSPProfile(d),
     bodyConstruction: d.bodyConstruction ?? bodyConstruction,
     drum: d.drum ?? drum,
     transitionMechanics,
@@ -85,12 +82,6 @@ export function enrichInstrumentPhysics(d: InstrumentDef): InstrumentDef {
     spatialRadiation,
     physicalModel: d.physicalModel ?? {
       model, parameters: cleanParameters,
-      signalChain: d.family === 'electronic' ? ['preamp', 'filter', 'compressor', 'delay', 'reverb'] : ['preamp', 'eq', 'compressor', 'reverb'],
-      synthesisNotes: ['Use velocity as excitation energy, not only loudness.', 'Preserve articulation-specific transients and release tails.', 'Apply style profile before humanization; never randomize idiomatic accents.']
     },
-    articulationModels: d.articulationModels ?? articulations.map(a => ({
-      id: a, method: a, synthesis: 'hybrid' as const,
-      parameters: { intensity: 0.65, durationScale: 1, noiseMix: a.includes('ghost') || a.includes('breath') ? 0.3 : 0.08 }
-    }))
   };
 }

@@ -1,6 +1,6 @@
 import { ENRICHED_INSTRUMENT_CATALOG as INSTRUMENT_CATALOG } from '../../src/engine/lookup/instruments';
 import { ALL_STYLES, resolveStyle } from '../../src/engine/style';
-import { getInstrumentModule } from '../../src/engine/playback/instrumentRegistry';
+import { patchForInstrument } from '../../src/engine/playback/soundfont/presets';
 import { resolveTrackSound } from '../../src/engine/playback/trackSound';
 import { resolveMasterSettings } from '../../src/engine/studio/masterSettings';
 
@@ -23,10 +23,10 @@ function cover<T>(items: T[], features: (item: T) => string[]) {
 }
 export function instrumentMechanisms(def: typeof INSTRUMENT_CATALOG[number]) {
   const params = resolveTrackSound(def.id);
-  const module = getInstrumentModule(def.id);
-  return [`module:${module.id}`, `model:${params.model}`, `excitation:${params.excitationType}`,
+  const patch = patchForInstrument(def.id, !!def.kit || !!def.drum || def.voicing === 'unpitched');
+  return [`bank:${patch.pack}`, `preset:${patch.pack}/${patch.bank}/${patch.program}/${patch.drum ? 'drum' : 'melodic'}`,
+    `family:${def.family}`, `model:${params.model}`, `excitation:${params.excitationType}`,
     `sustain:${def.acousticProfile?.sustain}`,
-    ...(module.specializedInstrumentIds?.includes(def.id) ? [`specialized:${def.id}`] : []),
     ...(def.kitComponents ?? []).map(component => `kit:${def.family}/${component.physicalType}`)];
 }
 export function selectInstruments(id?: string) {

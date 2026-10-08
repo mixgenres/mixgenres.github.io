@@ -16,6 +16,7 @@ const option = (flag: string) => args.find(arg => arg.startsWith(`${flag}=`))?.s
 const genres = option('--genres')?.split(',');
 const selectedStyles = option('--styles')?.split(',');
 const jobs = Number(option('--jobs') ?? 2), seconds = Number(option('--seconds') ?? 8);
+const engine = 'soundfont';
 if (!Number.isInteger(jobs) || jobs < 1 || jobs > 4 || !Number.isFinite(seconds) || seconds <= 0) throw new Error('Invalid jobs or seconds');
 const phase = option('--phase') ?? 'screened';
 if (!/^[a-z0-9-]+$/.test(phase)) throw new Error('Invalid phase');
@@ -34,9 +35,19 @@ const queue = [...grouped.values()];
 const folder = resolve('audit/all-samples', phase); mkdirSync(folder, { recursive: true });
 const python = resolve('.demucs-mps-venv/bin/python');
 const patterns = readReferencePatterns();
+const referenceSourceByFile = new Map<string, string>();
+for (const entry of inventory.entries) {
+  const featurePath = resolve('audit/all-samples/features', `${createHash('sha256').update(entry.file).digest('hex').slice(0, 16)}.json`);
+  const feature = existsSync(featurePath) ? readObject(featurePath) : null;
+  const measured = Array.isArray(feature?.accompanimentWindows)
+    && feature.accompanimentWindows.some((window: unknown) => !!window && typeof window === 'object' && (window as { status?: string }).status === 'measured');
+  referenceSourceByFile.set(entry.file, measured ? 'voiced accompaniment' : 'original album mix');
+}
 const results: Array<Record<string, unknown>> = [];
 let screenedReferences = 0;
-const save = () => writeFileSync(resolve(folder, 'summary.json'), JSON.stringify({ phase, seconds, genres, results, missing: inventory.missing.filter(match => !genres || genres.includes(match.genre)) }, null, 2) + '\n');
+const save = () => writeFileSync(resolve(folder, 'summary.json'), JSON.stringify({ phase, seconds, engine,
+  referencePolicy: 'Compare against voiced accompaniment features when present; otherwise retain the album-mix screen and label it.',
+  genres, results, missing: inventory.missing.filter(match => !genres || genres.includes(match.genre)) }, null, 2) + '\n');
 async function run(command: string, commandArgs: string[], log: string) {
   const fd = openSync(log, 'a');
   try { return await new Promise<number | null>((res, rej) => {
@@ -57,7 +68,7 @@ await Promise.all(Array.from({ length: jobs }, async () => {
     try {
       const prior = existsSync(report) ? readObject(report) : null;
       const reusable = args.includes('--resume') && existsSync(mp3) && prior?.audioFingerprint === audioRenderFingerprint()
-        && !prior.audioSourcesChangedDuringRender && prior.windowSelection === 'ensemble'
+        && prior.playbackEngine === engine && !prior.audioSourcesChangedDuringRender && prior.windowSelection === 'ensemble'
         && typeof prior.end === 'number' && typeof prior.start === 'number' && prior.end - prior.start === seconds && prior.instrumental === true;
       if (!reusable && await run(process.execPath, ['--import', 'tsx', 'scripts/render-song.ts', genre, mp3, String(seconds),
         `--style=${styleId}`, '--instrumental', '--bounded', '--ensemble', `--report=${report}`], log) !== 0) throw new Error('Rendering failed');
@@ -67,7 +78,8 @@ await Promise.all(Array.from({ length: jobs }, async () => {
         try {
           if (await run(python, ['scripts/compare-all-reference-windows.py', '--reference', reference.file, '--generated', mp3,
             '--render-report', report, '--seconds', String(seconds), '--output', comparison], log) !== 0) throw new Error('Comparison failed');
-          results.push({ genre, styleId, name: reference.name, file: reference.file, comparison, status: 'needs-musical-review' });
+          results.push({ genre, styleId, name: reference.name, file: reference.file, comparison, engine,
+            referenceSource: referenceSourceByFile.get(reference.file) ?? 'original album mix', status: 'needs-musical-review' });
         } catch (error) { results.push({ genre, styleId, name: reference.name, file: reference.file, status: 'failed', reason: String(error), log }); }
         screenedReferences += 1; save();
         if (screenedReferences % 10 === 0) console.log(`Screened ${screenedReferences}/${inventory.entries.reduce((sum, e) => sum + e.matches.length, 0)} references`);
@@ -78,5 +90,5 @@ await Promise.all(Array.from({ length: jobs }, async () => {
     }
   }
 }));
-save(); console.log(JSON.stringify({ styles: grouped.size, references: results.length, failed: results.filter(r => r.status === 'failed').length }));
+save(); console.log(JSON.stringify({ styles: grouped.size, references: results.length, engine, failed: results.filter(r => r.status === 'failed').length }));
 if (results.some(r => r.status === 'failed')) process.exitCode = 1;

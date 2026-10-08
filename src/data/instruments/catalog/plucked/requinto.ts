@@ -9,8 +9,8 @@ export const requinto: InstrumentDef = {
   courses: 1,
   bodyConstruction: "wood-box",
   excitationType: "plectrum",
-  elementaryModel: 0,
-  makeupGain: 2.1896,
+  
+  
   polyphony: 4,
   note: "Authentic Latin/Mexican 6-string Requinto guitar tuned a fourth higher (A2-D3-G3-C4-E4-A4), with 535mm scale, deep 115mm wooden body, crystalline mordiente snap, fast picado scales, tremolo, and alzapúa",
   acousticProfile: {
@@ -145,11 +145,7 @@ export const requinto: InstrumentDef = {
       transientSharpness: 0.92,
       stiffness: 0.88
     },
-    signalChain: ["preamp", "eq", "reverb"],
-    synthesisNotes: [
-      "High-tension nylon string waveguide tuned a fourth higher with shorter scale length produces rapid transient attack and crystalline high-frequency snap.",
-      "Acoustic body model couples 148Hz Helmholtz cavity with 330Hz solid spruce resonance and 2.8kHz mordiente presence peak.",
-      "Faithfully articulates Trio Romántico lead picado scales, fast tremolo falsetas, alzapúa sweeps, and apagado muted comping."
-    ]
+    
+    
   }
 };

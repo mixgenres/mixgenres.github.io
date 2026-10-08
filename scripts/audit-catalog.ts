@@ -10,9 +10,9 @@ import { songCatalog } from '../src/data/songs/catalog';
 import { RECORDING_ARRANGEMENTS } from '../src/data/songs/recordingArrangements';
 import { ALL_STYLES, ALL_STYLES_BY_ID, resolveStyle } from '../src/engine/style';
 import { StyleRuntime } from '../src/engine/style/runtime';
-import { getInstrumentModule, resolveVoiceParameters } from '../src/engine/playback/instrumentRegistry';
+import { patchForInstrument } from '../src/engine/playback/soundfont/presets';
 import { resolveTrackSound } from '../src/engine/playback/trackSound';
-import { determineBusCategory } from '../src/engine/playback/elementaryEngine';
+import { determineBusCategory } from '../src/engine/playback/mixBus';
 import { resolveRenderGesture } from '../src/engine/playback/renderGesture';
 import { resolveInstrumentKitComponent } from '../src/engine/lookup/instrument-components';
 import { getInstrumentPerformanceProfile } from '../src/engine/lookup/performance';
@@ -89,10 +89,10 @@ for (const world of GENRE_WORLDS) {
 for (const def of ENRICHED_INSTRUMENT_CATALOG) {
   inspect(def, `physical/${def.id}`);
   try {
-    getInstrumentModule(def.id);
+    const samplePatch = patchForInstrument(def.id, !!def.kit || !!def.drum || def.voicing === 'unpitched');
+    check(Number.isInteger(samplePatch.bank) && Number.isInteger(samplePatch.program) && !!samplePatch.pack, def.id, 'No SoundFont preset mapping');
     const profile = getInstrumentPerformanceProfile(def.id);
     inspect(profile, `performance/${def.id}`);
-    check(def.dspProfile?.familyModel && def.dspProfile.excitationDynamics && def.dspProfile.articulationPhysics, def.id, 'Incomplete physical DSP profile');
     check(def.acousticProfile, def.id, 'Missing acoustic metadata');
     if (def.acousticProfile?.role === 'percussion') check(determineBusCategory(def.acousticProfile.role, def.id) === 'drums', def.id, 'Percussion routed outside drum bus');
     for (const articulation of def.techniques.articulations) check(resolveRenderGesture(def.id, codeForGesture(articulation)).name === articulation, def.id, `Articulation ${articulation} fails round trip`);
@@ -128,7 +128,6 @@ for (const style of ALL_STYLES) {
       for (const instrumentId of part.instrumentIds) {
         const params = resolveTrackSound(instrumentId, style.primaryGenre, style.id, part.role);
         inspect(params, `sound/${style.id}/${instrumentId}/${part.role}`);
-        inspect(resolveVoiceParameters({ id: 'audit', note: 60, velocity: .7, gate: 1 }, params), `voice/${style.id}/${instrumentId}/${part.role}`);
       }
     }
     instrumentRefs(resolved.sound.instrumentPalette.map(x => x.value), style.id);
