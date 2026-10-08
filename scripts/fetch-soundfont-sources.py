@@ -14,7 +14,7 @@ import urllib.request
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = json.loads((ROOT / 'src/assets/soundfonts/manifest.json').read_text())
 args = [arg for arg in sys.argv[1:] if not arg.startswith('--')]
-DEST = Path(args[0]).resolve() if args else ROOT / 'audit/soundfont-sources'
+DEST = Path(args[0]).resolve() if args else ROOT / '.cache/soundfont-sources'
 DEST.mkdir(parents=True, exist_ok=True)
 GENERAL_COMMIT = '684543d5e5efaef08d02be50dcda8d552478fa60'
 

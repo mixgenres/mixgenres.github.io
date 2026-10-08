@@ -2,7 +2,7 @@
 // -> renderPerformanceToMp3), so it can be sanity-checked/listened to outside
 // the browser. Usage: npm run render-song -- tango /tmp/tango.mp3 20
 // Options: --style=ID --instrumental --start=SECONDS
-//          --duration=SECONDS --format=mp3|wav --report=FILE
+//          --duration=SECONDS --format=mp3|wav
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { getCanonicalStyle } from '../src/engine/style';
@@ -12,14 +12,10 @@ import { songMixOptions } from '../src/engine/playback/renderSongMix';
 import { catalogIdForStyle, createCatalogSong } from '../src/engine/sheet/songCatalog';
 import { INSTRUMENTS_BY_ID } from '../src/engine/lookup/instruments';
 import type { RenderDiagnostic } from '../src/engine/studio/audioMetrics';
-import { reportMetadata } from './lib/auditReport';
-import { audioRenderFingerprint } from './lib/audioRenderFingerprint';
 import { chooseAudioWindows } from './lib/audioExcerpt';
 import { setSoundfontBankReader } from '../src/engine/playback/soundfont/banks';
 
 async function main() {
-  const metadata = reportMetadata();
-  const audioFingerprint = audioRenderFingerprint();
   const args = process.argv.slice(2), positional = args.filter(arg => !arg.startsWith('--'));
   const value = (flag: string) => args.find(arg => arg.startsWith(`${flag}=`))?.slice(flag.length + 1);
   const genreId = positional[0] || 'salsa';
@@ -66,17 +62,6 @@ async function main() {
 
   const buf = Buffer.from(await blob.arrayBuffer());
   mkdirSync(dirname(outPath), { recursive: true }); writeFileSync(outPath, buf);
-  const report = value('--report');
-  if (report) {
-    mkdirSync(dirname(report), { recursive: true });
-    writeFileSync(report, JSON.stringify({ ...metadata, audioFingerprint, audioSourcesChangedDuringRender: audioFingerprint !== audioRenderFingerprint(),
-      sourcesChangedDuringRender: metadata.sourceFingerprint !== reportMetadata().sourceFingerprint,
-      genreId, playbackEngine: 'soundfont', styleId: sheet.styleId, catalogId: sheet.catalogId,
-      windowSelection: args.includes('--ensemble') ? 'ensemble' : 'specified',
-      bpm: sheet.bpm, meter: sheet.timeSignature, instrumental: args.includes('--instrumental'), start, end,
-      tracks: sheet.tracks.map(t => ({ id: t.id, instrumentId: t.instrumentId, role: t.role, selected: !selectedTrackIds || selectedTrackIds.includes(t.id) })),
-      sections: sheet.regions.map(r => ({ kind: r.kind, start: r.start, end: r.end })), diagnostics }, null, 2) + '\n');
-  }
   console.error(`[${genreId}] wrote ${outPath} (${(buf.length / 1024).toFixed(0)} KB)`);
 }
 

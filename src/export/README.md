@@ -30,6 +30,6 @@ MIDI bends are channel-wide, so overlapping per-note bends may not match the sou
 - Rendered part buffers are short-lived export inputs; no stem or complete-mix PCM cache is maintained.
 - Export implementation loads on demand when the user downloads.
 
-Run `npm run test:exports`. Tests cover selected parts, tempo mapping, score ties/percussion/TAB, archive output, GP5 selection restrictions, cancellation, on-demand sample rendering and MP3 encoding. Fixtures in `/tmp/mix-export-fixtures` can be checked independently with PyGuitarPro, mido, lxml and ffprobe. These are optional validation tools, not application runtime dependencies.
+`npm test` covers export part selection, tempo mapping, notation ties and percussion, archive output, cancellation, on-demand sample rendering and MP3 encoding. External score readers are optional and are not application dependencies.
 
 Format references: [MusicXML notation and TAB](https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/tutorial-tablature/), [Logic MIDI support](https://support.apple.com/en-kw/guide/logicpro/lgcpdf6a3851/mac), [Ableton MIDI interchange](https://help.ableton.com/hc/en-us/articles/209068169-Understanding-MIDI-files), [GP5 binary structure](https://github.com/TadaoYamaoka/gp5_file_format).

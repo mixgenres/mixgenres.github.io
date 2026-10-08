@@ -48,7 +48,6 @@ export interface CalibratedStyleInput {
   bassMotion: string;
   bassAnticipationBeats?: number[];
   mix: MixOverride<MixContract>;
-  referenceAudio?: import('./referenceMix').ReferenceMixEvidence;
   name: string;
   id: string;
   description: string;
@@ -320,7 +319,7 @@ function styleDefinition(input: GenrePackInput, item: CalibratedStyleInput): Gen
     arrangementSections: sectionsForStyle,
     instrumentDialects: item.instrumentDialects, harmonyModel: item.harmonyModel, bassMotion: item.bassMotion,
     calibration: {
-      roles, referenceAudio: item.referenceAudio, instrumentTechniques: item.instrumentTechniques, techniques: Object.fromEntries(Object.keys(styleRoles).map(role => [role, list(...styleRoles[role].map(id => item.instrumentTechniques[id] ?? []))])),
+      roles, instrumentTechniques: item.instrumentTechniques, techniques: Object.fromEntries(Object.keys(styleRoles).map(role => [role, list(...styleRoles[role].map(id => item.instrumentTechniques[id] ?? []))])),
       techniqueScopes: Object.fromEntries(list(styleTechniques, Object.values(item.instrumentTechniques).flat())
         .map(technique => [technique, scopesForTechnique(technique)])),
       patterns: { families: stylePatterns, interaction: list(stylePatterns.filter(x => /answer|call|interlock|response|counter|gear|clave|compas/i.test(x))),

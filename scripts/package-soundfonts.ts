@@ -16,7 +16,7 @@ if(!vorbisEncoder&&!execFileSync('ffmpeg',['-hide_banner','-encoders'],{encoding
 const inputs = sources.slice(0,3).map(path => readFileSync(path));
 const banks = inputs.map(data => SoundBankLoader.fromArrayBuffer(data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength)));
 const output = 'src/assets/soundfonts'; mkdirSync(output, { recursive: true });
-const staging='audit/soundfont-package';mkdirSync(staging,{recursive:true});
+const staging='.cache/soundfont-package';mkdirSync(staging,{recursive:true});
 const releases:Record<string,number>={};
 const manifest: Record<string, { bytes: number; unpackedBytes: number; sha256: string; unpackedSha256:string; presets: string[]; samples: number; format:'sf2'|'sf3' }> = {};
 for (const [id, programs] of Object.entries(BANK_PROGRAMS)) {

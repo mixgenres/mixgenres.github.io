@@ -265,7 +265,6 @@ export interface GenreStyleDefinition {
 }
 
 export interface StyleCalibration {
-  referenceAudio?: import('./genres/_shared/referenceMix').ReferenceMixEvidence;
   instrumentTechniques?: Record<string, string[]>;
   roles: Record<string, { preferredInstruments: string[]; required?: boolean; register?: [number, number]; mixFunction?: string }>;
   techniques: Record<string, string[]>;

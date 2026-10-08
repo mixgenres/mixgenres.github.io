@@ -46,7 +46,7 @@ Reproduce from downloaded, hash-verified inputs:
 python3 scripts/fetch-soundfont-sources.py
 ```
 
-Requires Python 3, `bsdtar`, `ffmpeg` and installed npm dependencies. Source downloads stay under ignored `audit/soundfont-sources/`. Changed source hashes stop the script rather than silently replacing the instrument media.
+Requires Python 3, `bsdtar`, `ffmpeg` and installed npm dependencies. Source downloads stay under ignored `.cache/soundfont-sources/`. Changed source hashes stop the script rather than silently replacing the instrument media.
 
 To rebuild from existing files:
 

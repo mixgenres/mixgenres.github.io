@@ -1,424 +1,168 @@
 {
   "genreId": "tango",
-  "created": "2026-10-08",
-  "purpose": "Style-local reference collection for orchestration, articulation, phrasing, mix, and student-example review.",
-  "targetPerStyle": 3,
-  "sourceRule": "Each style owns its evidence. A reference may inform more than one style only when that performance demonstrates each style; adjacent traditions are not substitutes.",
-  "storageGate": {
-    "status": "no-retained-separated-audio",
-    "note": "Keep canonical original recordings under samples/. Voice-removed derivatives are temporary measurement inputs and are deleted after compact evidence is recorded; review only one additional track per slot after duration validation."
-  },
-  "summary": {
-    "styleCount": 17,
-    "existingFiles": 19,
-    "targetFiles": 51,
-    "newFilesNeeded": 32,
-    "exactMatchedStyles": 17,
-    "zeroReferenceStyles": []
-  },
-  "styles": [
+  "references": [
     {
       "styleId": "tango-golden-age",
-      "styleName": "Golden Age",
-      "targetReferences": 3,
-      "currentCount": 1,
-      "addCount": 2,
       "references": [
         {
-          "id": "tango-golden-age-053ba2c3cf",
           "artist": "Aníbal Troilo",
-          "title": "Quejas de Bandoneón",
-          "file": "samples/Aníbal Troilo - Quejas de Bandoneón.mp3",
-          "state": "local-match-source-review-pending",
-          "performance": "Existing local sample-song reference; verify exact upload/master and passage map during musical review.",
-          "sourceVerification": "Local file path is retained and mapped to this style in the sample-song inventory. External upload/master identity and passage-level listening remain unverified.",
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "not-run"
+          "title": "Quejas de Bandoneón"
         }
       ]
     },
     {
       "styleId": "tango-canyengue",
-      "styleName": "Canyengue",
-      "targetReferences": 3,
-      "currentCount": 1,
-      "addCount": 2,
       "references": [
         {
-          "id": "tango-canyengue-114acc13bc",
           "artist": "Francisco Canaro",
-          "title": "El Chamuyo",
-          "file": "samples/Francisco Canaro - El Chamuyo.mp3",
-          "state": "local-match-source-review-pending",
-          "performance": "Existing local sample-song reference; verify exact upload/master and passage map during musical review.",
-          "sourceVerification": "Local file path is retained and mapped to this style in the sample-song inventory. External upload/master identity and passage-level listening remain unverified.",
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "not-run"
+          "title": "El Chamuyo"
         }
       ]
     },
     {
       "styleId": "tango-guardia-nueva-de-caro",
-      "styleName": "Guardia Nueva / De Caro",
-      "targetReferences": 3,
-      "currentCount": 1,
-      "addCount": 2,
       "references": [
         {
-          "id": "tango-guardia-nueva-de-caro-167c340d97",
           "artist": "Julio De Caro",
-          "title": "Boedo",
-          "file": "samples/Julio De Caro - Boedo.mp3",
-          "state": "local-match-source-review-pending",
-          "performance": "Existing local sample-song reference; verify exact upload/master and passage map during musical review.",
-          "sourceVerification": "Local file path is retained and mapped to this style in the sample-song inventory. External upload/master identity and passage-level listening remain unverified.",
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "not-run"
+          "title": "Boedo"
         }
       ]
     },
     {
       "styleId": "tango-canaro",
-      "styleName": "Canaro",
-      "targetReferences": 3,
-      "currentCount": 2,
-      "addCount": 1,
       "references": [
         {
-          "id": "tango-canaro-65327805b1",
           "artist": "Francisco Canaro",
-          "title": "Poema",
-          "file": "samples/Francisco Canaro - Poema.mp3",
-          "state": "local-match-source-review-pending",
-          "performance": "Existing local sample-song reference; verify exact upload/master and passage map during musical review.",
-          "sourceVerification": "Local file path is retained and mapped to this style in the sample-song inventory. External upload/master identity and passage-level listening remain unverified.",
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "not-run"
+          "title": "Poema"
         },
         {
-          "id": "tango-canaro-a7b44f0105",
           "artist": "Francisco Canaro & Charlo",
           "title": "Tiempos Viejos",
-          "youtubeUrl": "https://www.youtube.com/watch?v=2wK9IwPP5W0",
-          "youtubeTitle": "FRANCISCO CANARO & CHARLO: TIEMPOS VIEJOS (TANGO CON LETRA DETALLADA)",
-          "uploader": "argentinatangodj",
-          "performance": "Supplemental artist/style reference; source recording identity and musical role review remain separate from the student arrangement.",
-          "file": "samples/Francisco Canaro - Tiempos Viejos (Charlo 1931).mp3",
-          "state": "duration-gated-source-checked",
-          "bytes": 4607274,
-          "durationSeconds": 187.361814,
-          "sampleRateHz": 44100,
-          "channels": 2,
-          "sha256": "e8f66ee38f87d25fbd25c856fae09ab09a56a296191f5213fbb9fc5f55eaf877",
-          "sourceVerification": "MediaHuman resolved the title and 3:07 duration; local MP3 decodes with ffprobe. The upload identifies the Canaro orchestra and Charlo; exact master and reported 1931 date are not independently confirmed. Passage-level listening remains pending.",
-          "sourceEvidence": [
-            "https://www.youtube.com/watch?v=2wK9IwPP5W0",
-            "https://www.tangopoetryproject.com/orchestras/canaro"
-          ],
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "pending"
+          "youtube": "https://www.youtube.com/watch?v=2wK9IwPP5W0",
+          "appleMusic": "https://music.apple.com/no/song/256602304?l=nb"
         }
       ]
     },
     {
       "styleId": "tango-darienzo",
-      "styleName": "D'Arienzo",
-      "targetReferences": 3,
-      "currentCount": 1,
-      "addCount": 2,
       "references": [
         {
-          "id": "tango-darienzo-fcd120ebd1",
           "artist": "Juan D'Arienzo",
-          "title": "La Cumparsita",
-          "file": "samples/Juan D'Arienzo - La Cumparsita.mp3",
-          "state": "local-match-source-review-pending",
-          "performance": "Existing local sample-song reference; verify exact upload/master and passage map during musical review.",
-          "sourceVerification": "Local file path is retained and mapped to this style in the sample-song inventory. External upload/master identity and passage-level listening remain unverified.",
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "not-run"
+          "title": "La Cumparsita"
         }
       ]
     },
     {
       "styleId": "tango-di-sarli",
-      "styleName": "Di Sarli",
-      "targetReferences": 3,
-      "currentCount": 2,
-      "addCount": 1,
       "references": [
         {
-          "id": "tango-di-sarli-394d9c47e7",
           "artist": "Carlos Di Sarli",
-          "title": "Bahía Blanca",
-          "file": "samples/Carlos Di Sarli - Bahía Blanca.mp3",
-          "state": "local-match-source-review-pending",
-          "performance": "Existing local sample-song reference; verify exact upload/master and passage map during musical review.",
-          "sourceVerification": "Local file path is retained and mapped to this style in the sample-song inventory. External upload/master identity and passage-level listening remain unverified.",
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "not-run"
+          "title": "Bahía Blanca"
         },
         {
-          "id": "tango-di-sarli-dfad1320f8",
           "artist": "Carlos Di Sarli",
           "title": "El Ingeniero",
-          "youtubeUrl": "https://www.youtube.com/watch?v=Q4fgMUKWHXg",
-          "youtubeTitle": "El Ingeniero (instrumental) - 1955 Argentine Tango",
-          "uploader": "Tangonaut",
-          "performance": "Supplemental artist/style reference; source recording identity and musical role review remain separate from the student arrangement.",
-          "file": "samples/Carlos Di Sarli - El Ingeniero (instrumental, 1955).mp3",
-          "state": "duration-gated-source-checked",
-          "bytes": 4719531,
-          "durationSeconds": 196.138957,
-          "sampleRateHz": 44100,
-          "channels": 2,
-          "sha256": "3469b8a2847d0d5c2e8166d02e2d31030afb5138fbf8bb19123e8884d33eeaba",
-          "sourceVerification": "MediaHuman resolved the title and 3:16 duration; local MP3 decodes with ffprobe. TangoTube metadata conflicts on date (the video title says 1955 while its page lists a 1945 recording date); exact version/master and musical passage review remain pending.",
-          "sourceEvidence": [
-            "https://www.youtube.com/watch?v=Q4fgMUKWHXg",
-            "https://tangotube.tv/watch?v=Q4fgMUKWHXg"
-          ],
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "pending"
+          "youtube": "https://www.youtube.com/watch?v=Q4fgMUKWHXg",
+          "appleMusic": "https://music.apple.com/us/song/525092153"
         }
       ]
     },
     {
       "styleId": "tango-troilo",
-      "styleName": "Troilo",
-      "targetReferences": 3,
-      "currentCount": 1,
-      "addCount": 2,
       "references": [
         {
-          "id": "tango-troilo-053ba2c3cf",
           "artist": "Aníbal Troilo",
-          "title": "Quejas de Bandoneón",
-          "file": "samples/Aníbal Troilo - Quejas de Bandoneón.mp3",
-          "state": "local-match-source-review-pending",
-          "performance": "Existing local sample-song reference; verify exact upload/master and passage map during musical review.",
-          "sourceVerification": "Local file path is retained and mapped to this style in the sample-song inventory. External upload/master identity and passage-level listening remain unverified.",
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "not-run"
+          "title": "Quejas de Bandoneón"
         }
       ]
     },
     {
       "styleId": "tango-pugliese",
-      "styleName": "Pugliese",
-      "targetReferences": 3,
-      "currentCount": 1,
-      "addCount": 2,
       "references": [
         {
-          "id": "tango-pugliese-0ee1482564",
           "artist": "Osvaldo Pugliese",
-          "title": "La Yumba",
-          "file": "samples/Osvaldo Pugliese - La Yumba.mp3",
-          "state": "local-match-source-review-pending",
-          "performance": "Existing local sample-song reference; verify exact upload/master and passage map during musical review.",
-          "sourceVerification": "Local file path is retained and mapped to this style in the sample-song inventory. External upload/master identity and passage-level listening remain unverified.",
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "not-run"
+          "title": "La Yumba"
         }
       ]
     },
     {
       "styleId": "tango-salgan",
-      "styleName": "Salgán",
-      "targetReferences": 3,
-      "currentCount": 1,
-      "addCount": 2,
       "references": [
         {
-          "id": "tango-salgan-77789d7aef",
           "artist": "Horacio Salgán",
-          "title": "A Fuego Lento",
-          "file": "samples/Horacio Salgán - A Fuego Lento.mp3",
-          "state": "local-match-source-review-pending",
-          "performance": "Existing local sample-song reference; verify exact upload/master and passage map during musical review.",
-          "sourceVerification": "Local file path is retained and mapped to this style in the sample-song inventory. External upload/master identity and passage-level listening remain unverified.",
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "not-run"
+          "title": "A Fuego Lento"
         }
       ]
     },
     {
       "styleId": "tango-tango-cancion",
-      "styleName": "Tango Canción",
-      "targetReferences": 3,
-      "currentCount": 1,
-      "addCount": 2,
       "references": [
         {
-          "id": "tango-tango-cancion-97cb2e11d3",
           "artist": "Carlos Gardel",
-          "title": "Mi Buenos Aires Querido",
-          "file": "samples/Carlos Gardel - Mi Buenos Aires Querido.mp3",
-          "state": "local-match-source-review-pending",
-          "performance": "Existing local sample-song reference; verify exact upload/master and passage map during musical review.",
-          "sourceVerification": "Local file path is retained and mapped to this style in the sample-song inventory. External upload/master identity and passage-level listening remain unverified.",
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "not-run"
+          "title": "Mi Buenos Aires Querido"
         }
       ]
     },
     {
       "styleId": "tango-milonga",
-      "styleName": "Milonga",
-      "targetReferences": 3,
-      "currentCount": 1,
-      "addCount": 2,
       "references": [
         {
-          "id": "tango-milonga-6db7157e1c",
           "artist": "Francisco Canaro",
-          "title": "Milonga Sentimental",
-          "file": "samples/Francisco Canaro - Milonga Sentimental.mp3",
-          "state": "local-match-source-review-pending",
-          "performance": "Existing local sample-song reference; verify exact upload/master and passage map during musical review.",
-          "sourceVerification": "Local file path is retained and mapped to this style in the sample-song inventory. External upload/master identity and passage-level listening remain unverified.",
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "not-run"
+          "title": "Milonga Sentimental"
         }
       ]
     },
     {
       "styleId": "tango-vals",
-      "styleName": "Vals",
-      "targetReferences": 3,
-      "currentCount": 1,
-      "addCount": 2,
       "references": [
         {
-          "id": "tango-vals-2b810a2aab",
           "artist": "Francisco Canaro",
-          "title": "Desde el Alma",
-          "file": "samples/Francisco Canaro - Desde el Alma.mp3",
-          "state": "local-match-source-review-pending",
-          "performance": "Existing local sample-song reference; verify exact upload/master and passage map during musical review.",
-          "sourceVerification": "Local file path is retained and mapped to this style in the sample-song inventory. External upload/master identity and passage-level listening remain unverified.",
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "not-run"
+          "title": "Desde el Alma"
         }
       ]
     },
     {
       "styleId": "tango-piazzolla-nuevo-tango",
-      "styleName": "Piazzolla / Nuevo Tango",
-      "targetReferences": 3,
-      "currentCount": 1,
-      "addCount": 2,
       "references": [
         {
-          "id": "tango-piazzolla-nuevo-tango-e8132c6231",
           "artist": "Astor Piazzolla",
-          "title": "Libertango",
-          "file": "samples/Astor Piazzolla - Libertango.mp3",
-          "state": "local-match-source-review-pending",
-          "performance": "Existing local sample-song reference; verify exact upload/master and passage map during musical review.",
-          "sourceVerification": "Local file path is retained and mapped to this style in the sample-song inventory. External upload/master identity and passage-level listening remain unverified.",
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "not-run"
+          "title": "Libertango"
         }
       ]
     },
     {
       "styleId": "tango-electrotango-gotan",
-      "styleName": "Electrotango / Gotan",
-      "targetReferences": 3,
-      "currentCount": 1,
-      "addCount": 2,
       "references": [
         {
-          "id": "tango-electrotango-gotan-0e13adea50",
           "artist": "Gotan Project",
-          "title": "Santa María (del Buen Ayre)",
-          "file": "samples/Gotan Project - Santa María (del Buen Ayre).mp3",
-          "state": "local-match-source-review-pending",
-          "performance": "Existing local sample-song reference; verify exact upload/master and passage map during musical review.",
-          "sourceVerification": "Local file path is retained and mapped to this style in the sample-song inventory. External upload/master identity and passage-level listening remain unverified.",
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "not-run"
+          "title": "Santa María (del Buen Ayre)"
         }
       ]
     },
     {
       "styleId": "tango-electro-rock-bajofondo",
-      "styleName": "Electro-Rock / Bajofondo",
-      "targetReferences": 3,
-      "currentCount": 1,
-      "addCount": 2,
       "references": [
         {
-          "id": "tango-electro-rock-bajofondo-c9240d3b49",
           "artist": "Bajofondo",
-          "title": "Pa' Bailar",
-          "file": "samples/Bajofondo - Pa' Bailar.mp3",
-          "state": "local-match-source-review-pending",
-          "performance": "Existing local sample-song reference; verify exact upload/master and passage map during musical review.",
-          "sourceVerification": "Local file path is retained and mapped to this style in the sample-song inventory. External upload/master identity and passage-level listening remain unverified.",
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "not-run"
+          "title": "Pa' Bailar"
         }
       ]
     },
     {
       "styleId": "tango-modern-orquesta",
-      "styleName": "Modern Orquesta",
-      "targetReferences": 3,
-      "currentCount": 1,
-      "addCount": 2,
       "references": [
         {
-          "id": "tango-modern-orquesta-1456e8a2cb",
           "artist": "Orquesta Típica Fernández Fierro",
-          "title": "La Maza",
-          "file": "samples/Orquesta Típica Fernández Fierro - La Maza.mp3",
-          "state": "local-match-source-review-pending",
-          "performance": "Existing local sample-song reference; verify exact upload/master and passage map during musical review.",
-          "sourceVerification": "Local file path is retained and mapped to this style in the sample-song inventory. External upload/master identity and passage-level listening remain unverified.",
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "not-run"
+          "title": "La Maza"
         }
       ]
     },
     {
       "styleId": "tango-chacarera-crossover",
-      "styleName": "Chacarera Crossover",
-      "targetReferences": 3,
-      "currentCount": 1,
-      "addCount": 2,
       "references": [
         {
-          "id": "tango-chacarera-crossover-44c7d310e8",
           "artist": "Mercedes Sosa",
-          "title": "Chacarera de las Piedras",
-          "file": "samples/Mercedes Sosa - Chacarera de las Piedras.mp3",
-          "state": "local-match-source-review-pending",
-          "performance": "Existing local sample-song reference; verify exact upload/master and passage map during musical review.",
-          "sourceVerification": "Local file path is retained and mapped to this style in the sample-song inventory. External upload/master identity and passage-level listening remain unverified.",
-          "source": "original-recording",
-          "windowsSeconds": [],
-          "separationState": "not-run"
+          "title": "Chacarera de las Piedras"
         }
       ]
     }

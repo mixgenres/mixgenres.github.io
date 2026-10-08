@@ -202,17 +202,6 @@ export function StyleInspector({ song, onClose }: StyleInspectorProps) {
               <div>Dynamic Lift: <span className="font-bold">{resolved.sound.masterProfile?.lift ?? 0.5}</span></div>
             </div>
 
-            {resolved.calibration?.referenceAudio && (
-              <div className="p-2 rounded bg-black/5 dark:bg-white/5 space-y-1">
-                <div className="font-bold text-[10px] uppercase opacity-60">Reference Mix Calibration</div>
-                <div>{resolved.calibration.referenceAudio.recording}</div>
-                <div>Source: <span className="opacity-75">{resolved.calibration.referenceAudio.source === 'separated-accompaniment' ? 'voice-removed accompaniment; measurements retained' : 'original mix with vocals; evidence only'}</span></div>
-                <div>Measured windows: <span className="opacity-75">{resolved.calibration.referenceAudio.windowsSeconds.map(value => `${value.toFixed(1)}s`).join(', ')}</span></div>
-                <div className="opacity-75">RMS {resolved.calibration.referenceAudio.targets.rmsDbfs} dBFS · crest {resolved.calibration.referenceAudio.targets.crestDb} dB · side/mid {resolved.calibration.referenceAudio.targets.sideMidRmsRatio}</div>
-                <div className="opacity-60">Spectral mix cues guide this style's balance; separated-audio level is not used as the song's loudness target.</div>
-              </div>
-            )}
-
             {resolved.arrangement.ensemble && resolved.arrangement.ensemble.length > 0 && (
               <div className="p-2 rounded bg-black/5 dark:bg-white/5 space-y-1">
                 <div className="font-bold text-[10px] uppercase opacity-60">Ensemble Configuration</div>

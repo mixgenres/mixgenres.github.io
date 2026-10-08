@@ -1,7 +1,7 @@
-import { applyReferenceMix } from '../_shared/referenceMix';
-import { REFERENCE_MIX } from './referenceMix';
+import { applyMixCalibration } from '../_shared/mixCalibration';
+import { MIX_CALIBRATION } from './mixCalibration';
 import { createGenreWorld } from '../_shared/genrePack';
 import { GENRE_PACK } from './catalog';
 
-export const GENRE_WORLD = createGenreWorld(applyReferenceMix(GENRE_PACK, REFERENCE_MIX));
+export const GENRE_WORLD = createGenreWorld(applyMixCalibration(GENRE_PACK, MIX_CALIBRATION));
 export const AndeanGenre = GENRE_WORLD;

@@ -128,7 +128,6 @@ test('all catalog mixes and vocabulary reach calibration directly from metadata'
     for (const seed of world.styleDefinitions) {
       const style = getStyle(seed.id)!;
       assert.deepEqual(style.calibration!.mix, seed.calibration?.mix);
-      assert.deepEqual(style.calibration!.referenceAudio, seed.calibration?.referenceAudio);
       assert.deepEqual(style.calibration!.patterns.families, seed.calibration?.patterns.families);
       assert.deepEqual(style.calibration!.harmony.chordQualities, seed.calibration?.harmony.chordQualities);
     }

@@ -18,9 +18,9 @@ for(const count of [12,15,30] as const) {
   const at=performance.now(),pcm=await renderPerformanceToAudio(perf,options),renderMs=performance.now()-at;
   if(!pcm.left.every(Number.isFinite)||!pcm.right.every(Number.isFinite))throw new Error('Non-finite sample output');
   const encoded=performance.now(),blob=await encodeMp3(pcm.left,pcm.right,pcm.sampleRate),mp3Ms=performance.now()-encoded;
-  mkdirSync('audit/soundfont-review',{recursive:true});
-  if(count===30)writeFileSync('audit/soundfont-review/30-players.mp3',Buffer.from(await blob.arrayBuffer()));
+  mkdirSync('.cache/soundfont-review',{recursive:true});
+  if(count===30)writeFileSync('.cache/soundfont-review/30-players.mp3',Buffer.from(await blob.arrayBuffer()));
   const result={count,notes:perf.notes.length,channels:plan.channels,banks:plan.banks,compiledMs,plannedMs,duration:pcm.left.length/44100,renderMs,mp3Ms,mp3Bytes:blob.size,metrics:measureAudio(pcm.left,pcm.right,44100)};
   results.push(result);console.log(JSON.stringify(result));
 }
-writeFileSync('audit/soundfont-review/benchmark.json',JSON.stringify({createdAt:new Date().toISOString(),engine:'soundfont',bankContentKey:SOUNDFONT_CONTENT_KEY,environment:'Node portable studio master; desktop CPU',banks:soundfontBankStats(),results},null,2)+'\n');
+writeFileSync('.cache/soundfont-review/benchmark.json',JSON.stringify({createdAt:new Date().toISOString(),engine:'soundfont',bankContentKey:SOUNDFONT_CONTENT_KEY,environment:'Node portable studio master; desktop CPU',banks:soundfontBankStats(),results},null,2)+'\n');
