@@ -6,7 +6,7 @@ import { resolveTrackSound } from '../trackSound';
 import { resolveSampleGesture } from './gestures';
 import { patchForInstrument, NYLON_PATCH, STEEL_PATCH, SAMPLED_KIT_KEYS, type BankId, type SamplePatch } from './presets';
 import { SOUNDFONT_RELEASE_RESERVE } from './release';
-import { PERCUSSION_SAMPLE_KEYS } from './percussion';
+import { PERCUSSION_SAMPLE_KEYS, RECORDED_PERCUSSION_ALIASES, RECORDED_PERCUSSION_PATCHES, recordedPercussionKey } from './percussion';
 
 export { SOUNDFONT_RELEASE_RESERVE as SAMPLE_RELEASE_RESERVE } from './release';
 
@@ -33,7 +33,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
     const def = INSTRUMENTS_BY_ID[instrumentId];
     if (!def) throw new Error(`Unknown sampled instrument: ${instrumentId}`);
     const params = resolveTrackSound(instrumentId, options.worldId ?? performance.worldId, options.styleId, options.trackRoles?.get(id));
-    const percussion = !!def.kit || !!def.drum || def.voicing === 'unpitched';
+    const percussion = instrumentId !== 'timpani' && (!!def.kit || !!def.drum || def.voicing === 'unpitched');
     const base = patchForInstrument(instrumentId, percussion);
     const contextSounds = new Map<string, ReturnType<typeof resolveTrackSound>>();
     const soundFor = (worldId: string, styleId: string, role?: string) => {
@@ -49,7 +49,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
     const hasReleaseController = performance.ccs.some(cc => cc.trackId === id && cc.cc === 72);
     // Hi-hat exclusivity is channel-local in SF2. Reserve one hat channel so
     // a closed/pedal hit chokes an open hat even while its release is ringing.
-    const hatChannel = !!def.kit && notes.some(note=>[42,44,46].includes(Math.round(note.midi)));
+    const hatChannel = !!def.kit && instrumentId !== 'timpani' && notes.some(note=>[42,44,46].includes(Math.round(note.midi)));
     if(hatChannel)occupied.push(new Map());
     for (const note of notes) {
       if (!Number.isFinite(note.time + note.dur + note.vel + note.midi) || note.dur <= 0) throw new Error('Invalid sample note timing or velocity.');
@@ -96,7 +96,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       }
       // Compiled body contacts on pitched instruments must not turn back into
       // string/wind notes. Scraped contacts use a friction approximation.
-      if (!percussion && gesture.pitchIdentity === 'unpitched') {
+      if (instrumentId !== 'timpani' && !percussion && gesture.pitchIdentity === 'unpitched') {
         patch = /scrap|chicharra|friction/.test(action)
           ? {bank:0,program:0,drum:true,pack:'percussion'}
           : { bank: 66, program: 0, drum: false, pack: 'percussion' };
@@ -104,10 +104,17 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       }
       // Kit score pitches already identify individual GM components. Applying
       // the three-contact mapping here turns kicks/snares/hats into toms.
-      if (percussion && def.drum && !def.kit) key = percussionKey(instrumentId, note.midi, def.drum, action);
+      if (percussion && def.drum && !def.kit) {
+        const canonical=RECORDED_PERCUSSION_ALIASES[instrumentId]??instrumentId;
+        const recorded=RECORDED_PERCUSSION_PATCHES[canonical];
+        if(recorded) {
+          patch={bank:66,program:recorded.program+stableTake(note)%recorded.takes,drum:false,pack:'percussion'};
+          key=recordedPercussionKey(instrumentId,note.midi,def.drum,action);
+        } else key=percussionKey(instrumentId, note.midi, def.drum, action);
+      }
       if(instrumentId==='palmas') {patch={bank:66,program:1,drum:false,pack:'percussion'};key=38+stableTake(note)%3;}
       if(instrumentId==='cajon') {patch={bank:66,program:0,drum:false,pack:'percussion'};key=/slap|rim|tip/.test(action)?37:key===36?35:36;}
-      if(def.kit) {
+      if(def.kit && instrumentId !== 'timpani') {
         if(key===42&&action==='open')key=46;
         if(key===38&&/rimshot/.test(action))key=40;
         if((SAMPLED_KIT_KEYS as readonly number[]).includes(key))patch={bank:/choke/.test(action)?68:67,program:stableTake(note)%3,drum:false,pack:'drumkit'};

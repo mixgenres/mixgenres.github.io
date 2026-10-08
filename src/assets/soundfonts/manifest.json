@@ -1,5 +1,5 @@
 {
-  "version": "mixgenres-sf-v4",
+  "version": "mixgenres-sf-v6",
   "sourceSha256": [
     "9575028c7a1f589f5770fccc8cff2734566af40cd26ed836944e9a5152688cfe",
     "c0ae2e0c4b3efb98b3af49ac553e2ab3bb23258bf4832c3146f94b26cd9236f1",
@@ -17,14 +17,96 @@
     "Cajon_hit3_f_rr1.wav": "be3abbe090a25907177796579442823e9ebb84aab4d616339fb70660eaa43800",
     "Clap_rr3.wav": "e8c13dc41f31b479f8e3ec49e9dfc49c17d299cce36eedb657fe170f0e6fcb44"
   },
+  "vcslPercussionSha256": {
+    "congas-2-0-35-1-Tumba_HitN_v2_rr1_Sum": "c61f662c8af0dc95fcfca81d8a319b71bafd6e4c59a168dceec799fbb7963a47",
+    "congas-3-1-35-1-Tumba_HitN_v2_rr2_Sum": "9092f501109e11c07a62503d1e69c53efb6fb9060376d491c57cf3c037199519",
+    "congas-2-0-38-1-Tumba_HitFM_v2_rr1_Sum": "4922a55ed8fe85b274d186bd3a3b946743c099b045f129f9031c9ab3f04a6a2b",
+    "congas-3-1-38-1-Tumba_HitFM_v2_rr2_Sum": "4036f87cf824ebb85246eb30c0f10b11e191bf0ffdf806701ee686125ca1e581",
+    "congas-2-0-36-1-Conga_HitN_v2_rr1_Sum": "13d322c0e7a830cdbcbdc5a6e05566dfe3f5a073b7b82a3262d3f6fc10f96764",
+    "congas-3-1-36-1-Conga_HitN_v2_rr2_Sum": "4f52f6619fd12d1d0e1e942e67cdf77fcad06fef6de44eba8bab6df99ade4acd",
+    "congas-2-0-39-1-Conga_HitFM_v2_rr1_Sum": "1a24a11a7dae6fdc05405a706768a5b6d96ad534c95bee5d451aa49eedd84855",
+    "congas-3-1-39-1-Conga_HitFM_v2_rr2_Sum": "f1d21c33c0cf8a5f22c18376c4bae481345b12177a243fc5571591ef7d29b51b",
+    "congas-2-0-37-1-Quinto_HitN_v2_rr1_Sum": "ccbc9514d58b0a18af1aff2cabd29be7516ecb5790c9bcb707be67a374829e4b",
+    "congas-3-1-37-1-Quinto_HitN_v2_rr2_Sum": "24130dab5ff65095dcd6ac41c8c2e7d3b5abb675067cb08e973bbc72302a50dc",
+    "congas-2-0-40-1-Quinto_HitFM1_v2_rr1_Sum": "92f9d0ea6694eadedd1ee55495a794fba5a3fe9b228c7d7d5c787f3c03690051",
+    "congas-3-1-40-1-Quinto_HitFM1_v2_rr2_Sum": "baede37228560f89bbddb5ee4b99a4d69d750fab7d17dd9c7d0944507f8cdca7",
+    "bongos-4-0-35-1-BongoL_Hit1_v2_rr1_Mid": "0ee22ac30a27a1e91fbba58e0c4b36b28ea6c508dad5f11b10bdb9db07f2b443",
+    "bongos-5-1-35-1-BongoL_Hit1_v2_rr2_Mid": "0933627d939145e57ff95e93ce3618b0c35f8de6ed6f0f4bfad42f8dd66f8fa5",
+    "bongos-4-0-37-1-BongoL_HitMuted2_v2_rr1_Mid": "fad3522ab6ecf20c458469ad76cce43876be4b90f82fdc6944458b7ab91919f1",
+    "bongos-5-1-37-1-BongoL_HitMuted2_v2_rr2_Mid": "46178c9f093afff957c62bbbf665aeaa2ecba5dc0f4d9118523446881aff0f1d",
+    "bongos-4-0-36-1-BongoH_Hit1_v2_rr1_Mid": "dd9b6239a151702966a995937f74ac022c9bb950c967277fbd16beaced0c9e1a",
+    "bongos-5-1-36-1-BongoH_Hit1_v2_rr2_Mid": "03d4653d70e2180643872da4ebb94845f4da81b8d8f9ba2c7df3a611bd9d65ac",
+    "bongos-4-0-38-1-BongoH_HitMuted1_v2_rr1_Mid": "a247267b703a17d7f70190178b3b15ba030a9097b4b6a05a8e476e5733673b6b",
+    "bongos-5-1-38-1-BongoH_HitMuted1_v2_rr2_Mid": "c593cd3c010bdecb6c3b346d3335b9653d6aba04724e8427e9b6e328d2ba0b34",
+    "darbuka-6-0-35-1-Darbuka_1_hit_vl1_rr1": "8cebede6dbb3927a740e14e4a1eb76f6731892acc51dcda56308736372abb3fe",
+    "darbuka-7-1-35-1-Darbuka_1_hit_vl1_rr2": "c0884077c0e6e588b54514307d0ed220fcf606a08bca8cb89f3b7f5a800eb7b7",
+    "darbuka-6-0-35-79-Darbuka_1_hit_vl2_rr1": "9775c01e17a2713c239c552b63c3b6e9068f782c70128737390f8508f14cffb0",
+    "darbuka-7-1-35-79-Darbuka_1_hit_vl2_rr2": "1044ea2a44041d10c319c93a476232d86129b62e325ca544f93a50ebad8fd863",
+    "darbuka-6-0-36-1-Darbuka_2_hit_vl1_rr1": "34071020cd809365b706e121f5fd6b29e1c3208dd5a995b39c5f540c19693538",
+    "darbuka-7-1-36-1-Darbuka_2_hit_vl1_rr2": "f7aba2fb1ee750152b91b440348e52b0920210b603a60eca52183538462b2d93",
+    "darbuka-6-0-36-79-Darbuka_2_hit_vl2_rr1": "86aab33549dc1225ab3d2158675b0abfa76279274e453602bb80c3b88640558b",
+    "darbuka-7-1-36-79-Darbuka_2_hit_vl2_rr2": "e5311a8560dea027a3fdb1719fa6f257aaf3969fd5b7980c22700bccdfa7461e",
+    "darbuka-6-0-37-1-Darbuka_3_hit_vl1_rr1": "bf17760d121507998b70b7ad49f77740ca981faf0821d7003771224690e0efcb",
+    "darbuka-7-1-37-1-Darbuka_3_hit_vl1_rr2": "e84226f80f3618b16135fe027c3ca646f233eae85c3be3b5c71218c6131cd33b",
+    "darbuka-6-0-37-79-Darbuka_3_hit_vl2_rr1": "ba755558fc30e112808a57543c8ae5d25bc09b1db3244d789fa898ff1eda0cb5",
+    "darbuka-7-1-37-79-Darbuka_3_hit_vl2_rr2": "e896e57f35f497b6d00438f78343bdab2d7a655c7c179d24563edeebede6b6e3",
+    "darbuka-6-0-38-1-Darbuka_4_hit_vl1_rr1": "782dbf065d6689dfe7820f8eade6c9ccde6bcc15a8baef473206462e600db011",
+    "darbuka-7-1-38-1-Darbuka_4_hit_vl1_rr2": "c420c680045ad6ecd3df5d01679ed280cbd0938b63b5c8c3cd740a7b6566bad5",
+    "darbuka-6-0-38-79-Darbuka_4_hit_vl2_rr1": "6d6c6cb0898490532dadba6ec4a7f2440f8de6c94192f77af53a86878f0c562c",
+    "darbuka-7-1-38-79-Darbuka_4_hit_vl2_rr2": "e0545bd20823bfcbf45a4fcf2a0973bb88a5a6897908f04942267cc6b3fe2826",
+    "darbuka-6-0-39-1-Darbuka_5_hit_vl1_rr1": "d06ff1c19c18909147d872e108dc82847f7dce3aa30db60537475d5e0b37ca88",
+    "darbuka-7-1-39-1-Darbuka_5_hit_vl1_rr2": "9bb1b75fcbee2fc7cd61e0e462f20e21fee182d1086f90a650b571f21a938ad5",
+    "darbuka-6-0-39-79-Darbuka_5_hit_vl2_rr1": "ab61a720980c838d84909626ad4aa5216ef80d76e3a29f38df9fb03ea8e2b142",
+    "darbuka-7-1-39-79-Darbuka_5_hit_vl2_rr2": "93687d27113db3bd3aed93dd71d8a7e4e57385d8e420bd40d5eb24cac6a770fa",
+    "frame-drum-8-0-35-1-HDrumS_Hand_v1_rr1_Sum": "5d8d963ee3487725097c82cb0f4f485ade3423e75541cedc32de2ed6ec6f61ce",
+    "frame-drum-8-0-36-1-HDrumS_Hit_v2_rr1_Sum": "ee6c1a45edae6466ae806084a8f7502f8e47bc6b8540baafe55716049a70a67f",
+    "frame-drum-8-0-36-79-HDrumS_Hit_v3_rr1_Sum": "09721cec12ab8d2336cddd60953a2505ea1c8c8324d0b4ed245b9c5ea4561c33",
+    "frame-drum-8-0-37-1-HDrumS_HitMuted_v2_rr1_Sum": "e13d6fb8f9bd089f134957c8532aafaa789fba8fbfe8bf829d224e0fa3c9d29e",
+    "frame-drum-8-0-37-79-HDrumS_HitMuted_v3_rr1_Sum": "9ac5fae877b90f0f354766efe8dc813be87eeb31e6b52fe8750fa0528c2c16c4",
+    "frame-drum-9-1-36-1-HDrumS_Hit_v2_rr2_Sum": "fa0a802cbed2646b569a9f05a3cb7f6dd96a3a439ad90970a4fd5dff1afea695",
+    "frame-drum-9-1-36-79-HDrumS_Hit_v3_rr2_Sum": "fb7dc925c96079cd14c3b88374dad46b4b31648db6799ac8ec685a983b9e7182",
+    "frame-drum-9-1-37-1-HDrumS_HitMuted_v2_rr2_Sum": "5955c77d2f7124be528030a71437c352e551ba232c6ddde6e4e78ad48129198e",
+    "frame-drum-9-1-37-79-HDrumS_HitMuted_v3_rr2_Sum": "91f7adbfc782956ff39092724b97188c4c5561be9e703f015d76e9c57bec6161",
+    "guiro-10-0-35-1-Guiro_Fast_rr1_Mid": "fb601ba7bf1decb62c6cbe38f4f74807e4067dcdcc967e028bd0ec75053c2c28",
+    "guiro-10-0-37-1-Guiro_Med_rr1_Mid": "b32a7fd5b8a9971ebe85313df3e7be72134c2c1eaf243d21a28dc48b77deb44c",
+    "guiro-10-0-38-1-Guiro_Slow_rr2_Mid": "4097a3437503d6a98fa7f0c1070bcc6a0516b834eaa8a999a1f745428544680d",
+    "guiro-10-0-36-1-Guiro_Hit_rr1_Mid": "e7d4bf1c28521e3410d710688a576f2fe5f6c5339e754417ae3c1a46a386cf42",
+    "guiro-11-1-37-1-Guiro_Med_rr1_Mid": "b32a7fd5b8a9971ebe85313df3e7be72134c2c1eaf243d21a28dc48b77deb44c",
+    "guiro-11-1-38-1-Guiro_Slow_rr2_Mid": "4097a3437503d6a98fa7f0c1070bcc6a0516b834eaa8a999a1f745428544680d",
+    "guiro-11-1-36-1-Guiro_Hit_rr2_Mid": "499ccec0034748c4c7995133be0c9960787ec8f604c8aa98cd4edd28515af7d8",
+    "claves-12-0-35-1-Claves1_Hit_v1_rr1_Mid": "19379cc794b9e50d4dc55200238e27091bedab63b7370eb625490c7a96631b34",
+    "claves-12-0-35-61-Claves1_Hit_v2_rr1_Mid": "bcabe27330761309eb4b4f6207e6e3b4be59815df86449ac05bfb9b81f19efc9",
+    "claves-12-0-35-101-Claves1_Hit_v3_rr1_Mid": "12285f65ed125f4140d1e8a86b2d6a08bf3283b7bf30c10d68290b8e8230a927",
+    "agogo-13-0-35-1-Agogo_Low_v1_rr1_Mid": "7f113910f75c61825c56ee464b30cc582f915c795668e71058ede66cd842834c",
+    "agogo-13-0-35-73-Agogo_Low_v2_rr1_Mid": "36fb0e28c0ba39336082902d299a5b2d20b9f5f0cb448cb64e4b13837b896eea",
+    "agogo-13-0-36-1-Agogo_High_v1_rr1_Mid": "a319d68b2e38304d063531b2a152194871623bbce0dc55a870c0ab45570cbbdf",
+    "agogo-13-0-36-46-Agogo_High_v2_rr1_Mid": "f74a3100634a4372f2e2f81adf2f6a7839861ec4dcf13291001a3268e37806de",
+    "agogo-13-0-36-91-Agogo_High_v3_rr1_Mid": "c7f0d2b70c6cee34beea62d7566227da2687ca5c87d72d1245f444fbe2c76b43",
+    "cowbell-14-0-35-1-Cowbell1_Hit_v2_rr1_Mid": "6820d8f2abebe1d3e4dba262ad628d833ab04ade72dd2711b0cf4d2a58fa780d",
+    "cowbell-14-0-35-81-Cowbell1_Hit_v3_rr1_Mid": "36e9243e18b299bde0ebbb108c65846ddb5d46b35a61655fa18a0327e3390e87",
+    "cowbell-14-0-36-1-Cowbell1_Muted_v2_rr1_Mid": "efc17778d7cd4468f73b16842beef740fd64e046ce4dccf927c7c1fb230e6ef6",
+    "cowbell-14-0-36-81-Cowbell1_Muted_v3_rr1_Mid": "aeac086aae2ebe56ec5bcf13dac8cfb4fa76666678bd4267149517c548cafe9a",
+    "cowbell-14-0-37-1-Cowbell1_Normal_v2_rr1_Mid": "d1f89cb17fe60091deca7ae689009ff03ed79b061b74cd3f6ef5373b5999612c",
+    "cowbell-14-0-37-81-Cowbell1_Normal_v3_rr1_Mid": "e212cc27b3490d7927d41508bd7e90d6e09b0b8da169f0357341d3057c4910c4",
+    "shaker-15-0-35-1-Mid_ShakerDouble_Down_rr1": "0df7c271e1dba4de7304f7df81886390dd9ae698bfdd6df570026af4f2223574",
+    "shaker-15-0-36-1-Mid_ShakerDouble_Up_rr1": "69a10776db0b838bc6555be2dbdb41e1521bb28bba2e89963d1bf779bfb5b61f",
+    "tambourine-17-0-35-1-tambourine_down_rr1": "6e5d21c9aceacef3d603a07c165af6fe4c630a5a31f5450f17abdeb67d18f58a",
+    "tambourine-17-0-36-1-tambourine_up_rr1": "2ff7d8c8e16001098782d97a1f10bda40644549f45a3c2b8c0bdeb9c3f7e1a7e",
+    "shaker-16-1-35-1-Mid_ShakerDouble_Down_rr2": "1bf11b6a055ace8b6fbe2c158f7bea449c91e4d72f97b9464b4856184aaf186d",
+    "shaker-16-1-36-1-Mid_ShakerDouble_Up_rr2": "661f7591bf5fc77d8b69c61bd52425af20d0f5692bdd2f68c74a684c5f02d26d",
+    "tambourine-18-1-35-1-tambourine_down_rr2": "4f95f9a1ab13b6db943a7248a271f3dede354d4aba71968e003f2cdfb4c038fd",
+    "tambourine-18-1-36-1-tambourine_up_rr2": "f6da925833702df36bd9735bbe9becb0f907af193e2493451d857acc5cd1f79f",
+    "gongs-19-0-35-1-gong_p": "3d103e1a7af12eeb17e0c5488f11933ca92b9fbdefa39b8020b64238da2db0d0",
+    "gongs-19-0-35-66-gong_mf": "7e520ad14acda55db7906984f7efc2430961419435d951f55c8cdd9cd7a71108",
+    "gongs-19-0-35-106-gong_f": "348226a7aceea02fa2d508f329283ea0329d76d21afa6f5a56af95bfaa037048"
+  },
   "packs": {
     "keys": {
-      "bytes": 4060877,
-      "unpackedBytes": 4442684,
-      "sha256": "0eb42548341c536544b1afe20d66dec6f3dc99f73ee0919e6c53c5c3827902c2",
-      "unpackedSha256": "be050d9d7d99bea7a96affa1bcfc13d5abeddfd4d9636ccaa61be6775689ce1f",
+      "bytes": 347658,
+      "unpackedBytes": 718562,
+      "sha256": "5bf14c22677466fdadb1075f9e9026e8c6b6291f1cbe1ae1b7df0b45731d6dc6",
+      "unpackedSha256": "0a73fe61f4f9ece8aa457bf006e551f4027b95e71ca47bf4358cca227014b9fd",
       "presets": [
-        "0:0:0",
         "0:0:4",
         "0:0:5",
         "0:0:6",
@@ -33,17 +115,16 @@
         "0:0:19",
         "0:0:20",
         "0:0:21",
-        "0:0:22",
-        "0:0:23"
+        "0:0:22"
       ],
-      "samples": 110,
-      "format": "sf2"
+      "samples": 93,
+      "format": "sf3"
     },
     "mallets": {
-      "bytes": 1671966,
-      "unpackedBytes": 1972934,
-      "sha256": "88d99b99ed6c979d7e32620c267404180e56d3c1ccb5ec927fdac980095f9c7c",
-      "unpackedSha256": "17f684b87a83b251cc7445a19ee17d82378e21ba53751e109b9f29313106be09",
+      "bytes": 287088,
+      "unpackedBytes": 456260,
+      "sha256": "0045628face679c3d683a8b5e678014ec757a86253bdf16bd8e0cf94d7840485",
+      "unpackedSha256": "4cc74f9f5e7c590ac794c73f52c2742b5919930e18925150a8bdb6e3b0ceb0df",
       "presets": [
         "0:0:8",
         "0:0:9",
@@ -56,25 +137,20 @@
         "0:0:117"
       ],
       "samples": 42,
-      "format": "sf2"
+      "format": "sf3"
     },
     "guitars": {
-      "bytes": 4606083,
-      "unpackedBytes": 5018994,
-      "sha256": "7d3fe87448ee900b062c08de6d762c8b900490a82e1371d0798e59f652bee128",
-      "unpackedSha256": "3e675ec1089d6600b7b974dda836385af0bf42ed0f9bb14117805f41a14a7417",
+      "bytes": 433188,
+      "unpackedBytes": 945254,
+      "sha256": "f5fffb11055023ebf8f40f78d416744f0b28be6651f23705a767bbbb0f81bcef",
+      "unpackedSha256": "d3a86b01034110f178a1890c533a1d5f0093bcddacf14e4fc30aa20c63fdff3b",
       "presets": [
         "0:0:24",
         "0:0:25",
         "0:0:26",
-        "0:0:27",
         "0:0:28",
-        "0:0:29",
-        "0:0:30",
         "0:0:31",
         "0:0:32",
-        "0:0:33",
-        "0:0:34",
         "0:0:35",
         "0:0:36",
         "0:0:38",
@@ -85,31 +161,30 @@
         "0:0:107",
         "0:0:108"
       ],
-      "samples": 195,
-      "format": "sf2"
+      "samples": 134,
+      "format": "sf3"
     },
     "strings": {
-      "bytes": 5207245,
-      "unpackedBytes": 5587544,
-      "sha256": "20fa6675e297edd128556a09e632dc0b3b6463b5e081cf9cf63757456a88c235",
-      "unpackedSha256": "ba7690358994ad8ba626e3a4e68e64258b648a8f4dc95cce374ed04239e2586c",
+      "bytes": 970229,
+      "unpackedBytes": 1289158,
+      "sha256": "e31df381b3b230fb2cda70004778840acaccbfa74186b87dbd5abb06e47f8979",
+      "unpackedSha256": "5a5c3b1c5870a9766ea520cf87ef63dff03136d0ae5d63b2cf40809525d0e1ea",
       "presets": [
         "0:0:40",
         "0:0:41",
         "0:0:42",
-        "0:0:43",
         "0:0:45",
         "0:0:48",
         "0:0:49"
       ],
-      "samples": 87,
-      "format": "sf2"
+      "samples": 80,
+      "format": "sf3"
     },
     "winds": {
-      "bytes": 3741178,
-      "unpackedBytes": 3939328,
-      "sha256": "2d3e1244909b7b55ff387be069cfbeef324b8255da05eadafd2a6b76b276264c",
-      "unpackedSha256": "b56bc94974e09c07c8ebc62f3048ca5192bdc02bc4ddb5a4ed113c464cfc32df",
+      "bytes": 702929,
+      "unpackedBytes": 1182388,
+      "sha256": "905a188b8b9c4c775025891d940fb4fbf9be6363b468343f9b0f832dd2edde3b",
+      "unpackedSha256": "c3cdd80cf9366b7af9ab4f72755d1577690c070c56e5d366b49275640a5e7f12",
       "presets": [
         "0:0:64",
         "0:0:65",
@@ -130,13 +205,13 @@
         "0:0:111"
       ],
       "samples": 121,
-      "format": "sf2"
+      "format": "sf3"
     },
     "brass": {
-      "bytes": 1707010,
-      "unpackedBytes": 1932142,
-      "sha256": "e4cc341437d400984331608e18084bd053fa9e02299f5e0960d75640201242f5",
-      "unpackedSha256": "a1397d8a6dc48fdbfd1ef34c5d1bb5ea84107d615aba7beca02c3297c080c744",
+      "bytes": 355858,
+      "unpackedBytes": 541504,
+      "sha256": "30c53149951e62b9d41cdf756fcaaff1a5f1406bab4caae2cd7f35ef99a31527",
+      "unpackedSha256": "2c94ca06808c39d8dcd30ef3b2716daa4a51c8ac9cf2a3eea366dc8f0fe4b1b4",
       "presets": [
         "0:0:56",
         "0:0:57",
@@ -146,13 +221,13 @@
         "0:0:61"
       ],
       "samples": 49,
-      "format": "sf2"
+      "format": "sf3"
     },
     "electronic": {
-      "bytes": 4263880,
-      "unpackedBytes": 4377070,
-      "sha256": "3294948ad51622c2e7e824ccd0fee4d7c14d6cf477548fa8a4e53fc7c6c4e5d9",
-      "unpackedSha256": "0412b550f92e965d283846a3669c19a48f39489b4fbb41f0112997cc24de2402",
+      "bytes": 773300,
+      "unpackedBytes": 1141862,
+      "sha256": "e8992fd428e4e7eaaf02b6793a47273cfb0999b3ae007705ebbfe922f9b1437f",
+      "unpackedSha256": "f64f118cbd1384cd88c29b96eedd5b1628a6f75af8a94847a0f052cad5e9f54b",
       "presets": [
         "0:0:52",
         "0:0:53",
@@ -165,51 +240,70 @@
         "0:0:121"
       ],
       "samples": 94,
-      "format": "sf2"
+      "format": "sf3"
     },
     "percussion": {
-      "bytes": 2585979,
-      "unpackedBytes": 3712632,
-      "sha256": "3711f0d43c96740a150ceae1934dd1e3bab4d972e11554241b80136c598d7c2a",
-      "unpackedSha256": "5f6d34346c971dbf681236187285cd66403b554c37f667abbaeb7d7d22762894",
+      "bytes": 2166134,
+      "unpackedBytes": 2789222,
+      "sha256": "ccf8bd59819fc8bc6d0a161103a1888feda498f90824eeb94219ecd29b99a9d3",
+      "unpackedSha256": "f9d3fa46730cb7f6c1470e7f627488ddaea48b7ecfda9a1db9c52bed34cc8a50",
       "presets": [
         "0:66:0",
         "0:66:1",
+        "0:66:2",
+        "0:66:3",
+        "0:66:4",
+        "0:66:5",
+        "0:66:6",
+        "0:66:7",
+        "0:66:8",
+        "0:66:9",
+        "0:66:10",
+        "0:66:11",
+        "0:66:12",
+        "0:66:13",
+        "0:66:14",
+        "0:66:15",
+        "0:66:16",
+        "0:66:17",
+        "0:66:18",
+        "0:66:19",
+        "0:0:47",
         "DRUM:0"
       ],
-      "samples": 74,
-      "format": "sf2"
+      "samples": 158,
+      "format": "sf3"
     },
     "nylon": {
-      "bytes": 12182724,
-      "unpackedBytes": 22843482,
-      "sha256": "8efd66a69179029558cbdb7d69f8c8c18fb53fb1890ab64618bc94b9fd902adc",
-      "unpackedSha256": "377e97bab9a8af4b48cae188b5c2bff169b60486c22bc42bae25180fff1cbfdb",
+      "bytes": 2646166,
+      "unpackedBytes": 2687316,
+      "sha256": "33559a737f4d0da410c4552fb0a417611406ce13ac156722f869745dc3844f22",
+      "unpackedSha256": "8161f88d023a997cf31719f0192187194ad418a84cdba8a0f2ea205646fb4c4b",
       "presets": [
         "0:64:24",
         "0:65:24",
         "0:66:24"
       ],
       "samples": 24,
-      "format": "sf2"
+      "format": "sf3"
     },
     "steel": {
-      "bytes": 18098240,
-      "unpackedBytes": 26369492,
-      "sha256": "eb88d3452e65e2b58d8621fdb8348e30f737918cf877bcfa14ad09d57b9ca477",
-      "unpackedSha256": "3176d79b873b3b3651de42f1c9c8c2b3f7b5907b29fd0602d915f95b4adf3583",
+      "bytes": 2553428,
+      "unpackedBytes": 2778276,
+      "sha256": "af4b020f59da5c6c2d0291fe82cc20ba6d47a28dd192085d96730e0f8b0e851e",
+      "unpackedSha256": "54490172ca44d06b51d30913c84d86b39cc80a18b76a770fdb5b246d02791535",
       "presets": [
         "0:64:25",
         "0:65:25"
       ],
       "samples": 59,
-      "format": "sf2"
+      "format": "sf3"
     },
     "piano": {
       "bytes": 18943688,
       "unpackedBytes": 19370642,
-      "sha256": "fa434d02539b0d96f26b46084f2675c77def89b690330d6cc6e9c62017b93429",
-      "unpackedSha256": "70173a28cf610318fc5cc414f12337292139feb183f1a978fb02e51b54e99599",
+      "sha256": "bb0c8f763be67cece0c296060b8fc58c31f3902addc1d40600a105edf2dfeee5",
+      "unpackedSha256": "20de7b3d8c21474bc4371523867cbdbbf91319b0939c1b3d446e78c8b373b09a",
       "presets": [
         "0:64:0"
       ],
@@ -217,22 +311,22 @@
       "format": "sf3"
     },
     "bass": {
-      "bytes": 3891989,
-      "unpackedBytes": 4378234,
-      "sha256": "f7e9cc0ce6697251736abb9b32ddbd504a66a44d566c921f550d0be2087b2a66",
-      "unpackedSha256": "75429a516821868a7505741a39d84fcc94e3682bdaa8373d956c2aa66da4a67b",
+      "bytes": 441695,
+      "unpackedBytes": 469158,
+      "sha256": "25499a03ae9c2ff3c92e66fe4005ae663f804d22154e17c7e98510811fc391a1",
+      "unpackedSha256": "da04f2e2ee0fe3b1c085dc407ff2e3efbfc243c27566b7b6d25a08d3ae427d58",
       "presets": [
         "0:64:33",
         "0:64:34"
       ],
       "samples": 13,
-      "format": "sf2"
+      "format": "sf3"
     },
     "drumkit": {
       "bytes": 14338533,
       "unpackedBytes": 15047710,
-      "sha256": "34bc3f9b2b4434883842dd7afe309a2dfc0e39dc0ba833a3544174582d024388",
-      "unpackedSha256": "53421b5574fdbc305a070520126eaa5cac7841351ecbc309bebe136eba146d8d",
+      "sha256": "f8e7817a03692122cf63bb3bed41cd4fa23e0b826f62f5014d3ba67c94af67f4",
+      "unpackedSha256": "97cf45c6776c69c55311086b41ba0bc13f49268e211270162eb485be3f4ce9e8",
       "presets": [
         "0:67:0",
         "0:68:0",
@@ -247,8 +341,8 @@
     "electricClean": {
       "bytes": 12956934,
       "unpackedBytes": 13725152,
-      "sha256": "1fd7e55f57ce0c721f5b6bab10f320f0414e260e104eed672a40cf77ccfd4a66",
-      "unpackedSha256": "fee4920882c75405e6c56342a87e04f4cd11f3b2ce3efad4ac78b86e656e1da2",
+      "sha256": "a2edbf399d82c3e12352a18f7440c46a2c2aee13873c29444facf8d7b4d697a0",
+      "unpackedSha256": "e27f69ebf598c7e2db75fc40d0dbd7d3546202d403fb548fb7ed4fe6d2f15fce",
       "presets": [
         "0:69:0",
         "0:70:0",
@@ -263,8 +357,8 @@
     "electricDrive": {
       "bytes": 19084034,
       "unpackedBytes": 20169646,
-      "sha256": "aa40da5473a478835cea433ff91d3dc41ee311a5885e66476cd6fdb7d93d08c3",
-      "unpackedSha256": "cf708792d4060b6ac3cb87ed0f9ce2054b80446f98143076c55f924bd7caaf05",
+      "sha256": "48a9aed34355cd6898a8b221e6ba6eef2a8e99d347e9fbc8ae1d3506458ef512",
+      "unpackedSha256": "b8451fd066cf8d5919a5373ae8c8bf2dff1cd54a5c2798ccfcc3f741e048f6e3",
       "presets": [
         "0:71:0",
         "0:72:0",
@@ -277,22 +371,22 @@
       "format": "sf3"
     },
     "bandoneon": {
-      "bytes": 2389561,
-      "unpackedBytes": 2467818,
-      "sha256": "d742830548c49aa2e3a1524982a9e3890381150c219d7024bbdd744004ebb954",
-      "unpackedSha256": "3ac3048ddc44004ca855eaca4bed4f14a40d6ace79e2d2e869b2c0e42efe3d13",
+      "bytes": 370177,
+      "unpackedBytes": 417960,
+      "sha256": "216e825bb68e1e56d07ee526d1522e8b314b78cbddbdfdf76f368ded560f2e85",
+      "unpackedSha256": "0fb078525d15827c9f9543ec02df8e609b69d773a2e77f536e5c73d39b697b30",
       "presets": [
         "0:73:0",
         "0:74:0"
       ],
       "samples": 12,
-      "format": "sf2"
+      "format": "sf3"
     },
     "upright": {
       "bytes": 8160279,
       "unpackedBytes": 9282368,
-      "sha256": "874ad302a320143d864f122a2781ea1e6d36c81989ee033af0e383712271e677",
-      "unpackedSha256": "2f919569e6fbf864a37d8a91d38e430cf78e59514bd131339ca7fa61cb6a304d",
+      "sha256": "eb6de3a6aa112c2b74f6477c70eac26bcd03010811d5288124a5e64a986bb2c0",
+      "unpackedSha256": "6ad3cc7e98b912cd4cbe1a02558fd54caf9faf67df1d511dda7b1b3161ea36dd",
       "presets": [
         "0:64:0",
         "0:64:1",
@@ -316,7 +410,15 @@
     "uprightPizz": "1cac0ffee2b9eb94efdac80e0e8dc21b0f7550119d6bf4afa119b534cccaf717",
     "uprightArco": "d27f0d8bd11aa1db0ad278b5813533ff5490c1e192add2f2afd40ec10349a034"
   },
+  "extraSourceSha256": {
+    "museScoreGeneral": "ee51d2c4b1525e70f19a45909c4fd7a2e26d91d115fa89dbf5a6bc413d8b9bf3"
+  },
   "distillation": {
+    "allBanks": {
+      "format": "SF3",
+      "codec": "Ogg Vorbis",
+      "quality": 6
+    },
     "piano": {
       "velocityLayers": [
         4,
@@ -346,6 +448,63 @@
       "maxDecaySeconds": 12,
       "terminalFadeSeconds": 0.15,
       "vorbisQuality": 6
+    },
+    "recordedPercussion": {
+      "congas": {
+        "program": 2,
+        "takes": 2,
+        "source": "VCSL CC0"
+      },
+      "bongos": {
+        "program": 4,
+        "takes": 2,
+        "source": "VCSL CC0"
+      },
+      "darbuka": {
+        "program": 6,
+        "takes": 2,
+        "source": "VCSL CC0"
+      },
+      "frame-drum": {
+        "program": 8,
+        "takes": 2,
+        "source": "VCSL CC0"
+      },
+      "guiro": {
+        "program": 10,
+        "takes": 2,
+        "source": "VCSL CC0"
+      },
+      "claves": {
+        "program": 12,
+        "takes": 1,
+        "source": "VCSL CC0"
+      },
+      "agogo": {
+        "program": 13,
+        "takes": 1,
+        "source": "VCSL CC0"
+      },
+      "cowbell": {
+        "program": 14,
+        "takes": 1,
+        "source": "VCSL CC0"
+      },
+      "shaker": {
+        "program": 15,
+        "takes": 2,
+        "source": "VCSL CC0"
+      },
+      "tambourine": {
+        "program": 17,
+        "takes": 2,
+        "source": "VCSL CC0"
+      },
+      "gongs": {
+        "program": 19,
+        "takes": 1,
+        "source": "VCSL CC0"
+      }
     },
     "bandoneon": {
       "recordedSource": "Jörg Bleymehl 1930 ELA bandoneon",

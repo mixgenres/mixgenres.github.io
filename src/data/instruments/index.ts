@@ -341,6 +341,15 @@ for (const [id, sourceId, note] of instrumentAliases) {
   INSTRUMENT_CATALOG.push({ ...structuredClone(source), id, name: id.replace(/-/g, ' '), note });
 }
 
+// Timpani have definite pitch and a dedicated chromatic SoundFont patch. They
+// share the drum articulation vocabulary, but must not inherit kit routing.
+const timpani = INSTRUMENT_CATALOG.find(instrument => instrument.id === 'timpani');
+if (timpani) {
+  timpani.kit = false;
+  timpani.drum = { low: 47, mid: 50, high: 53 };
+  timpani.voicing = 'unpitched';
+}
+
 // These regional names share a starting point with a nearby instrument, but
 // their physical excitation still needs to resolve to the right family model.
 for (const id of ['frame-drum', 'riq']) {

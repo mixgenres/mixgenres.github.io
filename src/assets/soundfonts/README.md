@@ -11,7 +11,7 @@ These are selectively rebuilt SF2 banks compressed with gzip. The `.sfpack` exte
 | winds | 3.57 | 17 | 121 |
 | brass | 1.63 | 6 | 49 |
 | electronic | 4.07 | 9 | 94 |
-| percussion | 2.47 | 3 | 74 |
+| percussion | 2.82 | 4 | 77 |
 | nylon | 11.62 | 3 | 24 |
 | steel | 17.26 | 2 | 59 |
 | piano | 18.07 | 1 | 240 |
@@ -24,11 +24,12 @@ These are selectively rebuilt SF2 banks compressed with gzip. The `.sfpack` exte
 
 Total: **131.5 MiB, 116 presets and 2,066 samples** across 17 banks. Presets are selected by the app's instrument and technique routing rather than shipping the entire GeneralUser bank. The nylon pack keeps three source variants; the steel and electric packs include recorded takes and programmed damped versions. The Salamander piano preserves four recorded dynamics and stereo pairs. Piano, kit and electric-guitar samples use Vorbis compression inside the SF3 banks; other banks retain PCM.
 
-Tango routes to the dedicated Jörg Bleymehl bandoneon. Bank 73 is bellows-open and bank 74 bellows-close; both use the same twelve recorded notes, with a modest close-direction filter/attack change. This does not claim separate recorded bellows-direction samples.
+Tango routes to the dedicated Jörg Bleymehl bandoneon. Bank 73 is bellows-open and bank 74 bellows-close; both use the same twelve recorded notes, with a modest close-direction filter/attack change. This does not claim separate recorded bellows-direction samples. Orchestral timpani use the chromatic Timpani preset from MuseScore General, rather than a drum-kit key.
 
 Sources:
 
 - [GeneralUser GS](https://github.com/mrbumpy409/GeneralUser-GS), S. Christian Collins, source commit `684543d5e5efaef08d02be50dcda8d552478fa60`. The SF2 identifies itself as “GeneralUser GS 2.0.3 BETA”. Its embedded notices remain in the rebuilt banks and `notices/GeneralUser-GS.txt`.
+- [MuseScore General](https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/), MuseScore General v0.2. Only the chromatic Timpani preset is retained in the percussion pack.
 - [FreePats Spanish classical guitar](https://freepats.zenvoid.org/Guitar/acoustic-guitar.html), Roberto, SF2 release 2019-06-18. Dedicated Spanish nylon samples, CC0.
 - [FreePats FSS steel-string guitar](https://freepats.zenvoid.org/Guitar/steel-acoustic-guitar.html), Gary Campion / FlameStudios, assembled by Roberto, small SF2 release 2020-05-21. GPL-3 with the upstream composition exception retained.
 - [Salamander Grand Piano](https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html), FreePats, version 3+, 240 retained stereo samples from the four selected recorded dynamics.

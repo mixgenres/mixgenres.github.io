@@ -1,5 +1,5 @@
 /** Reproducible offline distillation. Downloads live outside the repository.
- * Usage: npm run soundfonts:package -- <general.sf2> <ichiyanagi.sf2> <steel.sf2> <vcsl-dir> <quality-source-dir> */
+ * Usage: npm run soundfonts:package -- <general.sf2> <ichiyanagi.sf2> <steel.sf2> <vcsl-dir> <quality-source-dir> <musescore-general.sf2> */
 import { readFileSync, writeFileSync, mkdirSync, renameSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
@@ -7,14 +7,18 @@ import { basename, join } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { BasicSoundBank, BasicPreset, BasicInstrument, EmptySample, SoundBankLoader, SpessaLog, GeneratorTypes } from 'spessasynth_core';
 import { BANK_PROGRAMS, SOUNDFONT_VERSION } from '../src/engine/playback/soundfont/presets';
+import { RECORDED_PERCUSSION_PATCHES } from '../src/engine/playback/soundfont/percussion';
 import { qualityPiano, qualityBass, qualityDrumKit, qualityElectric, qualityBandoneon, qualityUprightBass, QUALITY_SOURCES } from './lib/qualitySoundfonts';
 SpessaLog.setLogLevel(false, true, false);
 const sources = process.argv.slice(2);
-if (sources.length !== 5) throw new Error('Supply GeneralUser, Ichiyanagi and full FSS steel SF2 source paths, the selected VCSL WAV directory and quality source directory.');
+if (sources.length !== 6) throw new Error('Supply GeneralUser, Ichiyanagi and full FSS steel SF2 source paths, the selected VCSL WAV directory, quality source directory and MuseScore General SF2.');
 const vorbisEncoder=process.env.MIXGENRES_VORBIS_ENCODER;
 if(!vorbisEncoder&&!execFileSync('ffmpeg',['-hide_banner','-encoders'],{encoding:'utf8'}).includes('libvorbis'))throw new Error('Use ffmpeg with libvorbis, or supply MIXGENRES_VORBIS_ENCODER compiled from scripts/lib/encode-vorbis.c.');
 const inputs = sources.slice(0,3).map(path => readFileSync(path));
 const banks = inputs.map(data => SoundBankLoader.fromArrayBuffer(data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength)));
+const timpaniData=readFileSync(sources[5]);
+const timpaniBank=SoundBankLoader.fromArrayBuffer(timpaniData.buffer.slice(timpaniData.byteOffset,timpaniData.byteOffset+timpaniData.byteLength));
+const percussionSources=JSON.parse(readFileSync('scripts/lib/percussion-sources.json','utf8')) as {vcslCommit:string;samples:Array<{id:string;file:string;path:string;sha256:string;instrument:string;program:number;take:number;key:number;minVelocity:number;maxVelocity:number}>};
 const output = 'src/assets/soundfonts'; mkdirSync(output, { recursive: true });
 const staging='.cache/soundfont-package';mkdirSync(staging,{recursive:true});
 const releases:Record<string,number>={};
@@ -68,6 +72,35 @@ for (const [id, programs] of Object.entries(BANK_PROGRAMS)) {
       }
       preset.createZone(instrument); bank.addInstruments(instrument); bank.addPresets(preset);
     }
+    const timpani=timpaniBank.presets.find(preset=>preset.program===47&&!preset.isDrum);
+    if(!timpani)throw new Error('MuseScore General source has no chromatic timpani preset.');
+    bank.clonePreset(timpani);
+    const sampleCache=new Map<string,EmptySample>();
+    for(const [instrumentId,route] of Object.entries(RECORDED_PERCUSSION_PATCHES)) {
+      for(let take=0;take<route.takes;take++) {
+        const preset=new BasicPreset(bank);preset.name=`MixGenres recorded ${instrumentId}${route.takes>1?` take ${take+1}`:''}`;
+        preset.bankMSB=66;preset.bankLSB=0;preset.program=route.program+take;
+        const instrument=new BasicInstrument();instrument.name=preset.name;
+        const rows=percussionSources.samples.filter(row=>row.instrument===instrumentId&&row.take===take);
+        if(!rows.length)throw new Error(`No pinned recordings for ${instrumentId} take ${take+1}.`);
+        for(const row of rows) {
+          let sample=sampleCache.get(row.file);
+          if(!sample) {
+            const file=join(sources[4],'vcsl-curated',row.file);
+            const pcm=execFileSync('ffmpeg',['-v','error','-i',file,'-f','f32le','-ac','1','-ar','44100','pipe:1'],{maxBuffer:16*1024*1024});
+            const decoded=new Float32Array(pcm.buffer.slice(pcm.byteOffset,pcm.byteOffset+pcm.byteLength));
+            let last=decoded.length-1;while(last>0&&Math.abs(decoded[last])<.0001)last--;
+            const audio=decoded.slice(0,Math.min(decoded.length,last+220));
+            for(let frame=Math.max(0,audio.length-220);frame<audio.length;frame++)audio[frame]*=(audio.length-frame)/220;
+            sample=new EmptySample();sample.name=row.id.slice(0,20);sample.originalKey=row.key;sample.setAudioData(audio,44100);
+            sampleCache.set(row.file,sample);bank.addSamples(sample);
+          }
+          const zone=instrument.createZone(sample);zone.keyRange={min:row.key,max:row.key};
+          zone.velRange={min:row.minVelocity,max:row.maxVelocity};
+        }
+        preset.createZone(instrument);bank.addInstruments(instrument);bank.addPresets(preset);
+      }
+    }
   }
   bank.removeUnusedElements(); bank.flush();
   bank.soundBankInfo.name = `MixGenres ${id} (${SOUNDFONT_VERSION})`;
@@ -78,7 +111,7 @@ for (const [id, programs] of Object.entries(BANK_PROGRAMS)) {
     }
     releases[`${preset.bankMSB}:${preset.program}:${preset.isGMGSDrum}`]=release;
   }
-  const compressed=id==='piano'||id==='drumkit'||id==='electricClean'||id==='electricDrive'||id==='upright';
+  const compressed=true;
   if(compressed)for(const sample of bank.samples)await sample.compressSample(async(audio,sampleRate)=>{
     const ogg=execFileSync(vorbisEncoder??'ffmpeg',vorbisEncoder?[String(sampleRate)]:['-v','error','-fflags','+bitexact','-f','f32le','-ar',String(sampleRate),'-ac','1','-i','pipe:0',
       '-c:a','libvorbis','-q:a','6','-flags:a','+bitexact','-f','ogg','pipe:1'],{input:Buffer.from(audio.buffer,audio.byteOffset,audio.byteLength),maxBuffer:8*1024*1024});
@@ -96,15 +129,18 @@ const contentKey = createHash('sha256').update(SOUNDFONT_VERSION+JSON.stringify(
 writeFileSync('src/engine/playback/soundfont/bankIdentity.ts', `// Generated by scripts/package-soundfonts.ts; invalidates every physical sample cache.\nexport const SOUNDFONT_CONTENT_KEY = '${contentKey}';\nexport const SAMPLE_RELEASES:Readonly<Record<string,number>> = ${JSON.stringify(releases)};\nexport const BANK_FILES = ${JSON.stringify(Object.fromEntries(Object.entries(manifest).map(([id,{bytes,unpackedBytes,sha256,unpackedSha256}])=>[id,{bytes,unpackedBytes,sha256,unpackedSha256}])))};\n`);
 const vcslSha256=Object.fromEntries(Array.from({length:3},(_,i)=>[`Cajon_hit${i+1}_mp_rr1.wav`,`Cajon_hit${i+1}_f_rr1.wav`,`Clap_rr${i+1}.wav`]).flat().map(file=>[file,createHash('sha256').update(readFileSync(join(sources[3],file))).digest('hex')]));
 writeFileSync(`${output}/manifest.json`, JSON.stringify({ version: SOUNDFONT_VERSION,
-  sourceSha256: inputs.map(data => createHash('sha256').update(data).digest('hex')), vcslCommit:'c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e',vcslSha256, packs: manifest }, null, 2) + '\n');
+  sourceSha256: inputs.map(data => createHash('sha256').update(data).digest('hex')), vcslCommit:percussionSources.vcslCommit,vcslSha256,
+  vcslPercussionSha256:Object.fromEntries(percussionSources.samples.map(row=>[row.id,createHash('sha256').update(readFileSync(join(sources[4],'vcsl-curated',row.file))).digest('hex')])),packs:manifest }, null, 2) + '\n');
 const qualitySourceSha256=Object.fromEntries(Object.entries(QUALITY_SOURCES).map(([id,path])=>[id,createHash('sha256').update(readFileSync(join(sources[4],path))).digest('hex')]));
 const completeManifest=JSON.parse(readFileSync(`${output}/manifest.json`,'utf8'));
 completeManifest.qualitySourceSha256=qualitySourceSha256;
-completeManifest.distillation={piano:{velocityLayers:[4,8,12,16],maxDecaySeconds:10,sampleRate:44100,terminalFadeSeconds:.15,vorbisQuality:6},drumkit:{velocityLayers:6,takes:3,layout:'GM',sourceLayout:'chromatic C3-F#4',maxDecaySeconds:8,terminalFadeSeconds:.15,vorbisQuality:6},electric:{recordedDynamics:2,softMaxVelocity:92,takes:3,upperRangeDynamics:'source hard recordings where soft recordings are absent',maxDecaySeconds:12,terminalFadeSeconds:.15,vorbisQuality:6}};
+completeManifest.extraSourceSha256={museScoreGeneral:createHash('sha256').update(timpaniData).digest('hex')};
+completeManifest.distillation={allBanks:{format:'SF3',codec:'Ogg Vorbis',quality:6},piano:{velocityLayers:[4,8,12,16],maxDecaySeconds:10,sampleRate:44100,terminalFadeSeconds:.15,vorbisQuality:6},drumkit:{velocityLayers:6,takes:3,layout:'GM',sourceLayout:'chromatic C3-F#4',maxDecaySeconds:8,terminalFadeSeconds:.15,vorbisQuality:6},electric:{recordedDynamics:2,softMaxVelocity:92,takes:3,upperRangeDynamics:'source hard recordings where soft recordings are absent',maxDecaySeconds:12,terminalFadeSeconds:.15,vorbisQuality:6},recordedPercussion:Object.fromEntries(Object.entries(RECORDED_PERCUSSION_PATCHES).map(([id,route])=>[id,{program:route.program,takes:route.takes,source:'VCSL CC0'}]))};
 completeManifest.distillation.bandoneon={recordedSource:'Jörg Bleymehl 1930 ELA bandoneon',recordedSamples:12,presets:2,direction:'open/close use the same samples with a modest close-reed filter/attack offset'};
 completeManifest.distillation.uprightBass={recordedSource:'D. Smolken 1958 Otto Rubner double bass, CGDA fifths tuning',sourceArchiveSha256:'380986bb52ee6b6469d28e9089792a3ed37cbd163fe5a19160bf4f98785e7ccb',presets:{pizzicato:4,arco:2},roundRobin:'four pizzicato recordings, and separate down/up bow recordings',velocityLayers:{pizzicato:3,arco:5},discarded:'unpitched noises and body-contact keys',sampleRate:44100,maxSampleSeconds:12,terminalFadeSeconds:.15,vorbisQuality:6};
 writeFileSync(`${output}/manifest.json`,JSON.stringify(completeManifest,null,2)+'\n');
 writeFileSync(`${output}/notices/GeneralUser-GS.txt`,`${banks[0].soundBankInfo.name}\n${banks[0].soundBankInfo.copyright}\n\n${banks[0].soundBankInfo.comment}\n`);
+writeFileSync(`${output}/notices/MuseScore-General.txt`,`${timpaniBank.soundBankInfo.name}\n${timpaniBank.soundBankInfo.copyright}\n\n${timpaniBank.soundBankInfo.comment}\n\nSource: https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General.sf2\n`);
 writeFileSync(`${output}/notices/Ichiyanagi.txt`,readFileSync(join(sources[4],'Ichiyanagi_license.txt'),'utf8')+'\n'+readFileSync(join(sources[4],'CL_Guitar_Release.txt'),'utf8'));
 writeFileSync(`${output}/notices/Salamander.txt`,readFileSync(join(sources[4],'SalamanderGrandPiano-SF2-V3+20200602/readme.txt'),'utf8'));
 writeFileSync(`${output}/notices/Muldjord.txt`,readFileSync(join(sources[4],'MuldjordKit-SF2-20201018/README.txt'),'utf8'));
@@ -113,4 +149,4 @@ writeFileSync(`${output}/notices/Bleymehl-bandoneon.txt`,`${qualityBandoneon(sou
 writeFileSync(`${output}/notices/FSBS-electric.txt`,readFileSync(join(sources[4],'EGuitarFSBS-clean SF2-20260807/README.txt'),'utf8')+'\n'+readFileSync(join(sources[4],'EGuitarFSBS-dist2 SF2-20220911/README.txt'),'utf8'));
 writeFileSync(`${output}/notices/D-Smolken-double-bass.txt`,readFileSync(join(sources[4],'dsmolken_double_bass/LICENSE'),'utf8')+'\n\n'+readFileSync(join(sources[4],'dsmolken_double_bass/readme.txt'),'utf8')+'\n\nSource: https://github.com/sfzinstruments/dsmolken.double-bass\n');
 mkdirSync('public',{recursive:true});
-writeFileSync('public/soundfont-notices.txt', 'MixGenres distilled SoundFont banks\n\n'+['GeneralUser-GS.txt','Ichiyanagi.txt','FSS-steel-guitar.txt','Salamander.txt','Muldjord.txt','YR-bass.txt','FSBS-electric.txt','Bleymehl-bandoneon.txt','D-Smolken-double-bass.txt','VCSL.txt','GPL-3.txt','CC0.txt'].map(name=>`${name}\n\n${readFileSync(`${output}/notices/${name}`,'utf8')}`).join('\n\n')+'\n\nSpessaSynth core 4.3.22, Apache-2.0\n'+readFileSync('node_modules/spessasynth_core/LICENSE','utf8')+'\n\nstb-vorbis 0.0.6\n'+readFileSync('node_modules/stb-vorbis/LICENSE','utf8'));
+writeFileSync('public/soundfont-notices.txt', 'MixGenres distilled SoundFont banks\n\n'+['GeneralUser-GS.txt','MuseScore-General.txt','Ichiyanagi.txt','FSS-steel-guitar.txt','Salamander.txt','Muldjord.txt','YR-bass.txt','FSBS-electric.txt','Bleymehl-bandoneon.txt','D-Smolken-double-bass.txt','VCSL.txt','GPL-3.txt','CC0.txt'].map(name=>`${name}\n\n${readFileSync(`${output}/notices/${name}`,'utf8')}`).join('\n\n')+'\n\nSpessaSynth core 4.3.22, Apache-2.0\n'+readFileSync('node_modules/spessasynth_core/LICENSE','utf8')+'\n\nstb-vorbis 0.0.6\n'+readFileSync('node_modules/stb-vorbis/LICENSE','utf8'));

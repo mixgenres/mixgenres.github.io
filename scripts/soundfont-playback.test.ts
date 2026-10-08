@@ -9,7 +9,7 @@ import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { SampleRuntime } from '../src/engine/playback/soundfont/runtime';
 import { setSoundfontBankReader, loadSoundfontBank, soundfontBankStats } from '../src/engine/playback/soundfont/banks';
 import { patchForInstrument, type BankId } from '../src/engine/playback/soundfont/presets';
-import { PERCUSSION_KIT_IDS, PERCUSSION_SAMPLE_KEYS } from '../src/engine/playback/soundfont/percussion';
+import { PERCUSSION_KIT_IDS, PERCUSSION_SAMPLE_KEYS, RECORDED_PERCUSSION_ALIASES, RECORDED_PERCUSSION_KEYS, RECORDED_PERCUSSION_PATCHES } from '../src/engine/playback/soundfont/percussion';
 import { codeForGesture } from '../src/engine/band/gestures';
 import { performanceFixture, noteFixture } from './lib/playbackFixtures';
 import { densePlaybackFixture } from './lib/densePlaybackFixture';
@@ -44,10 +44,37 @@ test('unpitched catalog instruments have explicit playable SoundFont key maps wi
   for(const def of Object.values(INSTRUMENTS_BY_ID)) {
     if(!(def.kit||def.drum||def.voicing==='unpitched'))continue;
     if(PERCUSSION_KIT_IDS.has(def.id))continue;
+    if(def.id==='timpani')continue;
+    if(RECORDED_PERCUSSION_KEYS.has(RECORDED_PERCUSSION_ALIASES[def.id]??def.id))continue;
     const keys=PERCUSSION_SAMPLE_KEYS[def.id];assert(keys,`${def.id} needs an explicit sample key map`);
     for(const key of keys)assert(kit.getVoiceParameters(key,100).length>0,`${def.id} key ${key} must play a sample`);
   }
   assert.throws(()=>patchForInstrument('unmapped-drum',true),/explicit SoundFont percussion mapping/);
+});
+test('timpani use the dedicated chromatic timpani preset rather than kit samples',()=>{
+  const patch=patchForInstrument('timpani',true);
+  assert.deepEqual(patch,{bank:0,program:47,drum:false,pack:'percussion'});
+  const plan=compileSamplePlan(performanceFixture({notes:[noteFixture({midi:50})]}),
+    {...options,trackInstruments:new Map([['keys','timpani']])});
+  const event=plan.events.find(item=>item.type==='on');
+  assert(event&&event.type==='on');assert.deepEqual(event.patch,patch);assert.equal(event.key,50);
+  const bank=load('percussion'),preset=bank.presets.find(item=>item.program===47&&!item.isDrum);
+  assert(preset);assert.equal(preset.name,'Timpani');assert(preset.zones.length>1);
+});
+test('named percussion routes use their recorded VCSL tones and every take has playable zones',()=>{
+  const bank=load('percussion');
+  const presetFor=(program:number)=>bank.presets.find(preset=>preset.bankMSB===66&&preset.program===program&&!preset.isDrum);
+  for(const [id,route] of Object.entries(RECORDED_PERCUSSION_PATCHES))for(let take=0;take<route.takes;take++) {
+    const preset=presetFor(route.program+take);assert(preset,`${id} take ${take+1} is packaged`);
+    const keys=new Set(preset.zones.flatMap(zone=>zone.instrument.zones.map(zone=>zone.keyRange.min)));
+    assert(keys.size>0,`${id} take ${take+1} has recorded keys`);
+    for(const key of keys)assert(preset.getVoiceParameters(key,90).length>0,`${id} take ${take+1} key ${key} plays`);
+  }
+  for(const [alias,canonical] of Object.entries(RECORDED_PERCUSSION_ALIASES)) {
+    const patch=patchForInstrument(alias,true),route=RECORDED_PERCUSSION_PATCHES[canonical];
+    assert(route,`${alias} has a recorded tone route`);assert.deepEqual(patch,{bank:66,program:route.program,drum:false,pack:'percussion'});
+  }
+  assert.equal(bank.presets.filter(preset=>preset.bankMSB===66).length,20,'ship only the two custom body samples and eighteen dedicated VCSL presets');
 });
 test('tango bandoneon push and pull route through the dedicated recorded bank',()=>{
   const p=performanceFixture({notes:[

@@ -56,6 +56,9 @@ def archive_source(url, archive_name, relative, expected):
 general = DEST / 'GeneralUser-GS.sf2'
 download(f'https://raw.githubusercontent.com/mrbumpy409/GeneralUser-GS/{GENERAL_COMMIT}/GeneralUser-GS.sf2',
          general, MANIFEST['sourceSha256'][0])
+muse_score = DEST / 'MuseScore_General.sf2'
+download('https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General.sf2',
+         muse_score, 'ee51d2c4b1525e70f19a45909c4fd7a2e26d91d115fa89dbf5a6bc413d8b9bf3')
 nylon = archive_source('https://drive.google.com/uc?export=download&id=1Wib1vV4PRNOhjXg0KAR7s-OQLsT3SE_0',
                        'ichiyanagi-v1_03.zip', 'Classical-Guitar_Ichiyanagi-v1_03.sf2', MANIFEST['sourceSha256'][1])
 steel = archive_source('https://freepats.zenvoid.org/Guitar/FSS-SteelStringGuitar/FSS-SteelStringGuitar-SF2-20200521.tar.xz',
@@ -77,7 +80,10 @@ for id, url, archive, relative in [
     ('bandoneon', 'https://raw.githubusercontent.com/jebentancour/Bandonberry/master/bandoneon_v2.sf2',
      'bandoneon_v2.sf2', 'bandoneon_v2.sf2'),
 ]:
-    archive_source(url, archive, relative, MANIFEST['qualitySourceSha256'][id])
+    if archive == relative:
+        download(url, DEST / relative, MANIFEST['qualitySourceSha256'][id])
+    else:
+        archive_source(url, archive, relative, MANIFEST['qualitySourceSha256'][id])
 
 upright_archive = DEST / 'DSmolken.double_bass.v1.001.zip'
 download('https://github.com/sfzinstruments/dsmolken.double-bass/releases/download/v1.001/DSmolken.double_bass.v1.001.zip',
@@ -99,7 +105,15 @@ for name, expected in MANIFEST['vcslSha256'].items():
     path = urllib.parse.quote(f'Idiophones/Struck Idiophones/{folder}/{name}')
     download(f"https://raw.githubusercontent.com/sgossner/VCSL/{MANIFEST['vcslCommit']}/{path}", vcsl / name, expected)
 
+percussion_sources = json.loads((ROOT / 'scripts/lib/percussion-sources.json').read_text())
+curated_vcsl = DEST / 'vcsl-curated'
+curated_vcsl.mkdir(exist_ok=True)
+for sample in percussion_sources['samples']:
+    path = urllib.parse.quote(sample['path'])
+    download(f"https://raw.githubusercontent.com/sgossner/VCSL/{percussion_sources['vcslCommit']}/{path}",
+             curated_vcsl / sample['file'], sample['sha256'])
+
 if '--verify-only' in sys.argv:
-    print('All pinned SoundFont and WAV sources match the manifest.')
+    print('All pinned SoundFont and WAV sources match the manifests.')
 else:
-    subprocess.run(['npm', 'run', 'soundfonts:package', '--', str(general), str(nylon), str(steel), str(vcsl), str(DEST)], cwd=ROOT, check=True)
+    subprocess.run(['npm', 'run', 'soundfonts:package', '--', str(general), str(nylon), str(steel), str(vcsl), str(DEST), str(muse_score)], cwd=ROOT, check=True)
