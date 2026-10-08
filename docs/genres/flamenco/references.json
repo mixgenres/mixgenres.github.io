@@ -23,6 +23,18 @@
           "artist": "Paco de Lucía",
           "title": "Soleá Niño Ricardo - Solo De Guitarra",
           "youtube": "https://www.youtube.com/watch?v=9AzmoKW4aPQ"
+        },
+        {
+          "artist": "Paco de Lucía and Camarón de la Isla",
+          "title": "Entrada por Soleá",
+          "youtube": "https://www.youtube.com/watch?v=fD4wIipRYiE",
+          "timecode": "A sung entrance with Paco de Lucía's guitar response."
+        },
+        {
+          "artist": "Pituquete",
+          "title": "Soleá (Studio Live, 2024)",
+          "youtube": "https://www.youtube.com/watch?v=x8D4p4TLU9M",
+          "timecode": "Full live studio performance; a contemporary solo-guitar contrast."
         }
       ]
     },
@@ -47,6 +59,17 @@
           "artist": "Perla de Cádiz",
           "title": "Bulerías",
           "youtube": "https://www.youtube.com/watch?v=mXxv8Gd6vjM"
+        },
+        {
+          "artist": "Camarón de la Isla and Paco de Lucía",
+          "title": "Bulerías (Castillo de Arena, 1977)",
+          "youtube": "https://www.youtube.com/watch?v=TBS_IbQt9FQ"
+        },
+        {
+          "artist": "Camarón de la Isla and Paco de Lucía",
+          "title": "Bulerías (live)",
+          "youtube": "https://www.youtube.com/watch?v=YSAq2oJB53E",
+          "timecode": "Live cante and guitar exchange."
         }
       ]
     },
@@ -66,6 +89,22 @@
           "artist": "Chano Lobato",
           "title": "Alegrías (Al Buen Compás, 1990)",
           "youtube": "https://www.youtube.com/watch?v=WpighLFNLto"
+        },
+        {
+          "artist": "Chano Lobato",
+          "title": "Alegrías (Noche Flamenca, 1996)",
+          "youtube": "https://www.youtube.com/watch?v=dS6RJ_kJutQ"
+        },
+        {
+          "artist": "Paco de Lucía",
+          "title": "Alegrías (En Vivo Desde El Teatro Real, 1975)",
+          "youtube": "https://www.youtube.com/watch?v=IbAFvJ9pgcE"
+        },
+        {
+          "artist": "Camarón de la Isla and Tomatito",
+          "title": "Alegrías (Montreux, 1991)",
+          "youtube": "https://www.youtube.com/watch?v=UY-eVOkuyuU",
+          "timecode": "Live voice and guitar performance; compare its concert pacing with the studio references."
         }
       ]
     },
@@ -164,11 +203,65 @@
       ]
     },
     {
-      "styleId": "flamenco-granaina-malaguena",
+      "styleId": "flamenco-granaina",
       "references": [
         {
           "artist": "Camarón",
-          "title": "Que he dejao de quererte"
+          "title": "Que he dejao de quererte (Granaína)",
+          "youtube": "https://www.youtube.com/watch?v=Sht0la5TgH4",
+          "timecode": "Full cante; listen for the free phrase lengths and guitar responses."
+        },
+        {
+          "artist": "Paco de Lucía",
+          "title": "Reflejo de Luna (Granaína)",
+          "youtube": "https://www.youtube.com/watch?v=YQHYD6AiQI4"
+        },
+        {
+          "artist": "Antonio Chacón",
+          "title": "Granaína",
+          "youtube": "https://www.youtube.com/watch?v=EBvy5Q0o2lI"
+        },
+        {
+          "artist": "Enrique Morente",
+          "title": "Rosa si no te cogí (Granaínas de Chacón)",
+          "youtube": "https://www.youtube.com/watch?v=NmWnsILm7DA"
+        },
+        {
+          "artist": "Paco de Lucía",
+          "title": "Generalife Bajo la Luna (Granaína), guitar lesson excerpt",
+          "youtube": "https://www.youtube.com/watch?v=iLIGn4pkkt8",
+          "timecode": "A single arpeggio study from the piece; use alongside the full recording."
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-malaguena",
+      "references": [
+        {
+          "artist": "Enrique Morente",
+          "title": "Malagueñas",
+          "youtube": "https://www.youtube.com/watch?v=iFGFy-7XbNA",
+          "timecode": "Starts at 0:30; voice and two guitars, followed by further cante."
+        },
+        {
+          "artist": "Antonia Contreras",
+          "title": "Malagueña de La Trini (2009)",
+          "youtube": "https://www.youtube.com/watch?v=YZdxJATv48o"
+        },
+        {
+          "artist": "Antonio Chacón",
+          "title": "Malagueña de Chacón",
+          "youtube": "https://www.youtube.com/watch?v=T3CSA6DfqD4"
+        },
+        {
+          "artist": "Antonio Mairena",
+          "title": "Malagueña del Mellizo (Rito y Geografía del Cante)",
+          "youtube": "https://www.youtube.com/watch?v=AEHUsSd_GYk"
+        },
+        {
+          "artist": "Pepe de Campillos and Pepe Reina",
+          "title": "Malagueña de La Trini",
+          "youtube": "https://www.youtube.com/watch?v=N_YeOtac7hE"
         }
       ]
     },

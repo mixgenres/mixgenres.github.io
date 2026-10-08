@@ -28,7 +28,7 @@ export const CANONICAL_GENRE_PATTERNS: MusicalPattern[] = [
   // previously missing a dedicated part pattern. These are deliberately
   // explicit so the selector cannot transfer a drum/guitar cell onto a pitched
   // voice simply because it has the right genre/style tag.
-  P('jazz-horn-swing-phrase', 'jazz', 'Jazz Horn Swing Phrase', 'Breathy swing horn phrase with space between attacks and a phrase-end pickup.', [0,3,6,8,11,14], ['melody','lead'], ['jazz','horn','swing','phrase'], ['accented'], ['tenor-sax','alto-sax','soprano-sax','trumpet','trombone'], ['jazz-bebop','jazz-jazz-fusion']),
+  P('jazz-horn-swing-phrase', 'jazz', 'Swing Horn Phrase', 'Breathy swing horn phrase with space between attacks and a phrase-end pickup.', [0,3,6,8,11,14], ['melody','lead'], ['jazz','horn','swing','phrase'], ['accented'], ['tenor-sax','alto-sax','soprano-sax','trumpet','trombone'], ['jazz-bebop','jazz-jazz-fusion']),
   P('country-fiddle-answer', 'country', 'Country Fiddle Answer', 'Two-bar-friendly fiddle answer cell with pickup, held space, and a descending turn rather than a fixed chicken-pick contour.', [0,2,5,7,8,10,12,15], ['melody','lead'], ['country','violin','shuffle','answer'], ['accented'], ['violin','violin'], ['country-honky-tonk','country-americana']),
   P('country-banjo-roll', 'country', 'Country Banjo Roll', 'Forward-moving Scruggs-style roll cell with alternating thumb/inner-string space.', [0,2,4,5,7,9,11,13,15], ['melody','harmony','comp'], ['country','banjo','roll','bluegrass'], ['accented'], ['banjo'], ['country-bluegrass','country-americana','country-honky-tonk']),
   P('country-steel-answer', 'country', 'Country Steel Answer', 'Pedal-steel answer cell with sustained gaps and phrase-ending approach.', [0,3,7,8,11,14], ['melody','lead','harmony'], ['country','steel','answer','slide'], ['legato'], ['resonator-guitar'], ['country-honky-tonk','country-americana']),
@@ -40,7 +40,7 @@ export const CANONICAL_GENRE_PATTERNS: MusicalPattern[] = [
   P('elec-breakbeat-response', 'electronic', 'Electronic Breakbeat Response', 'Breakbeat response cell alternating dense drums with a short synth answer.', [0,3,5,7,8,11,13,15], ['drums','percussion','lead'], ['breakbeat','response','electronic']),
   P('gospel-shout-vamp', 'gospel', 'Gospel Shout Vamp', 'Repeating dominant/tonic vamp that intensifies through choir answers and organ accents.', [0,3,4,7,8,11,12,15], ['harmony','voice','rhythm'], ['shout-vamp','church-backbeat','gospel']),
   P('gospel-organ-response', 'gospel', 'Gospel Organ Response', 'Organ chord swell or pickup between vocal statements.', [3,7,11,15], ['harmony','comp'], ['organ-response','gospel','call-response']),
-  P('industrial-ebm-pulse-native', 'industrial', 'Industrial EBM 16th Pulse', 'Rigid electronic 16th-note motor with heavy downbeat emphasis and hard stop at the bar turn.', [0,2,4,6,8,10,12,14], ['bass','rhythm','drums'], ['EBM-pulse','mechanical-stop','industrial']),
+  P('industrial-ebm-pulse-native', 'industrial', 'EBM 16th Pulse', 'Rigid electronic 16th-note motor with heavy downbeat emphasis and hard stop at the bar turn.', [0,2,4,6,8,10,12,14], ['bass','rhythm','drums'], ['EBM-pulse','mechanical-stop','industrial']),
   P('industrial-four-native', 'industrial', 'Industrial Four Pulse', 'Relentless quarter-note pulse with metallic punctuation at the phrase end.', [0,4,8,12,15], ['drums','rhythm','percussion'], ['industrial-four','mechanical-stop','industrial']),
   // Brazilian: distinguish samba/bossa/choro vocabulary instead of borrowing a generic source rhythm.
   P('brz-samba-batucada', 'brazilian', 'Samba Batucada', 'Syncopated 2/4-derived samba grid with surdo foundation and interlocking caixa/tamborim space.', [0,2,4,6,8,10,12,14], ['rhythm','percussion'], ['samba','batucada','surdo','caixa']),
@@ -58,7 +58,7 @@ export const CANONICAL_GENRE_PATTERNS: MusicalPattern[] = [
   P('gospel-church-shuffle', 'gospel', 'Church Shuffle Pocket', 'Moderate shuffle with a deep backbeat and phrase-level space for choir responses.', [0,3,4,7,8,11,12,15], ['rhythm','drums'], ['shuffle','church-pocket','backbeat']),
   P('gospel-organ-bubble', 'gospel', 'Organ Bubble', 'Left-hand pulse with offbeat upper-organ answers, leaving the vocal on top.', [0,2,4,6,8,10,12,14], ['harmony','comp'], ['organ','bubble','response']),
   P('gospel-tambourine-backbeat', 'gospel', 'Gospel Tambourine Backbeat', 'Strong 2-and-4 tambourine with selective fills at phrase boundaries.', [4,12,14], ['percussion','rhythm'], ['tambourine','2-and-4','fill']),
-  P('gospel-choir-response', 'gospel', 'Choir Call and Response', 'Short answer cells that occupy the gaps left by a lead statement.', [6,7,14,15], ['lead','voice','harmony'], ['call-response','choir','answer']),
+  P('gospel-choir-response', 'gospel', 'Choir Response', 'Short answer cells that occupy the gaps left by a lead statement.', [6,7,14,15], ['lead','voice','harmony'], ['call-response','choir','answer']),
 
   // House: club grid, syncopated bass, chord-stab architecture.
   P('house-four-floor', 'house', 'House Four-on-the-Floor', 'Steady quarter-note kick with minimal variation so syncopation can live above the pulse.', [0,4,8,12], ['drums','rhythm','pulse'], ['four-on-floor','house','kick']),

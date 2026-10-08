@@ -64,12 +64,16 @@ export function RoleSettings({ role, onRole, roleScope, onRoleScope, silentInPar
       </div>
       <div className="grid grid-cols-3 gap-1">
         <button type="button" aria-pressed={silentInPart} onClick={onTogglePartSilence}
-          aria-label={silentInPart ? 'Restore instrument' : 'Silence instrument'}
-          title={silentInPart ? 'Restore instrument' : 'Silence instrument'}
+          aria-label={silentInPart
+            ? `Unmute ${roleScope === 'song' ? 'song' : 'this part'}`
+            : `Mute ${roleScope === 'song' ? 'song' : 'this part'}`}
+          title={silentInPart
+            ? `Unmute ${roleScope === 'song' ? 'song' : 'this part'}`
+            : `Mute ${roleScope === 'song' ? 'song' : 'this part'}`}
           className="flex flex-col items-center gap-1 p-2 rounded-sm text-[10px] cursor-pointer hover:opacity-70"
           style={{ background: silentInPart ? 'color-mix(in srgb, var(--ink) 12%, transparent)' : 'transparent' }}>
           {silentInPart ? <VolumeX size={16} aria-hidden="true" /> : <Volume2 size={16} aria-hidden="true" />}
-          Silent
+          {silentInPart ? 'Unmute' : 'Mute'}
         </button>
         {roles.map(r => <button key={r.id} type="button" aria-pressed={current?.id === r.id}
           onClick={() => onRole(r.id, roleScope)}

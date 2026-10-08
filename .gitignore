@@ -1,5 +1,4 @@
 samples/
-voiced/
 node_modules/
 .demucs-*/
 __pycache__/

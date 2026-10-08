@@ -9,6 +9,7 @@ import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { SampleRuntime } from '../src/engine/playback/soundfont/runtime';
 import { setSoundfontBankReader, loadSoundfontBank, soundfontBankStats } from '../src/engine/playback/soundfont/banks';
 import { patchForInstrument, type BankId } from '../src/engine/playback/soundfont/presets';
+import { PERCUSSION_KIT_IDS, PERCUSSION_SAMPLE_KEYS } from '../src/engine/playback/soundfont/percussion';
 import { codeForGesture } from '../src/engine/band/gestures';
 import { performanceFixture, noteFixture } from './lib/playbackFixtures';
 import { densePlaybackFixture } from './lib/densePlaybackFixture';
@@ -37,6 +38,16 @@ test('every catalog instrument maps to a shipped playable sample preset',()=>{
     if(!banks.has(patch.pack))banks.set(patch.pack,load(patch.pack));
     assert(banks.get(patch.pack)!.presets.some(p=>p.program===patch.program&&p.bankMSB===patch.bank&&p.isGMGSDrum===patch.drum),def.id);
   }
+});
+test('unpitched catalog instruments have explicit playable SoundFont key maps with no tom default',()=>{
+  const bank=load('percussion'),kit=bank.presets.find(p=>p.isGMGSDrum&&p.bankMSB===0)!;
+  for(const def of Object.values(INSTRUMENTS_BY_ID)) {
+    if(!(def.kit||def.drum||def.voicing==='unpitched'))continue;
+    if(PERCUSSION_KIT_IDS.has(def.id))continue;
+    const keys=PERCUSSION_SAMPLE_KEYS[def.id];assert(keys,`${def.id} needs an explicit sample key map`);
+    for(const key of keys)assert(kit.getVoiceParameters(key,100).length>0,`${def.id} key ${key} must play a sample`);
+  }
+  assert.throws(()=>patchForInstrument('unmapped-drum',true),/explicit SoundFont percussion mapping/);
 });
 test('tango bandoneon push and pull route through the dedicated recorded bank',()=>{
   const p=performanceFixture({notes:[

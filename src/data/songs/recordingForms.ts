@@ -135,7 +135,6 @@ flamenco::fandangos|90|intro:8:1,copla:12:2,response:4:2,copla:12:3,falseta:8:2,
 flamenco::rumba|108|intro:8:2,A:32:3,solo:32:3,solo:32:4,B:16:3,solo:32:5,A:16:4,outro:8:2|_=Em,Am,B7,Em
 flamenco::tonas-martinetes|54|temple:8:1,martinete:24:2,pause:4:1,debla:32:3,cadence:8:1|_=D5,D5,D5,D5
 flamenco::taranta|54|opening:8:1,lower-register:16:2,falseta:24:3,upper-register:16:4,return:16:2,cadence:8:1|_=F#7,G,F#7,F#7
-flamenco::granaina-malaguena|60|intro:8:1,verse:24:2,response:8:1,verse:24:3,melisma:16:4,cadence:8:1|_=Em,C,B7,Em
 flamenco::guajira|144|intro:8:2,A:16:3,falseta:16:3,B:16:4,A:16:3,falseta:24:4,remate:4:2|_=A,E7,A,D,E7,A
 flamenco::farruca|112|intro:8:2,A:16:3,falseta:16:3,A:16:4,escobilla:24:4,falseta:16:5,remate:4:3|_=Am,Dm,E7,Am
 flamenco::sevillanas|150|intro:4:2,copla-1:24:3,link:4:2,copla-2:24:3,link:4:2,copla-3:24:4,link:4:2,copla-4:24:4,remate:4:2|_=Am,G,F,E

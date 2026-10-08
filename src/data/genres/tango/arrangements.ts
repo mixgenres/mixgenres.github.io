@@ -45,6 +45,7 @@ const pedagogy: Record<string, { description: string; patterns: string[] }> = {
 };
 
 function conciseCellLabel(id: string, item: AuthoredCell): string {
+  if (item.shortName && item.shortName.trim().split(/\s+/).length <= 3) return item.shortName.trim();
   const instrument = item.instruments?.[0] ?? '';
   if (item.phraseEnd) return 'Cadence fill';
   if (item.role === 'lead') {
@@ -112,7 +113,23 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
         urgent ? 'staccato' : lyrical ? 'tenuto' : 'marcato'),
         line('violin', lyrical ? 'Long bowed countermelody' : 'Bowed answering phrase',
           lyrical ? [0, 2, 4, 6] : [1.5, 3, 4.5, 5, 6, 7], lyrical ? [5, 3, 4, 2] : [5, 3, 4, 3, 2, 1],
-          lyrical ? [1.8, 1.8, 1.8, 1.8] : [1.25, .75, .4, .75, .75, .75])];
+        lyrical ? [1.8, 1.8, 1.8, 1.8] : [1.25, .75, .4, .75, .75, .75])];
+    }
+    if (id === 'canaro') {
+      const refrain = line('bandoneon', 'Canaro refrain motif', [0, .5, 1.5, 2, 3, 3.5], [1, 3, 5, 4, 2, 1], [.3, .3, .6, .3, .3, .5], 'staccato', 1);
+      refrain.shortName = 'Bandoneon refrain';
+      lines.push(refrain);
+      const violinRefrain = line('violin', 'Canaro violin refrain', [0, 1, 2, 3], [5, 3, 4, 1], [.9, .75, .75, 1], 'legato', 1);
+      violinRefrain.shortName = 'Violin refrain';
+      lines.push(violinRefrain);
+    }
+    if (id === 'di-sarli') {
+      const violinReturn = line('violin', 'Di Sarli violin return', [0, 1.5, 2.5, 4, 5.5, 6.5], [5, 6, 5, 3, 2, 1], [1.4, .8, 1.2, 1.1, .8, 1.2], 'tenuto', 2);
+      violinReturn.shortName = 'Violin return';
+      lines.push(violinReturn);
+      const bandoneonAnswer = line('bandoneon', 'Di Sarli bandoneon answer', [1, 2.5, 4, 5.5], [3, 5, 4, 1], [.8, .7, 1.1, 1.3], 'tenuto', 2);
+      bandoneonAnswer.shortName = 'Bandoneon answer';
+      lines.push(bandoneonAnswer);
     }
     let accompaniment: AuthoredCell[];
     if (beats === 2) accompaniment = [...(style.roles.harmony ?? []).map(instrument => habanera(instrument, 'harmony')), habanera('upright-bass', 'bass')];
@@ -123,6 +140,12 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
       piano.articulations = ['yumba', 'staccato', 'yumba', 'staccato'];
       piano.durations = [.7, .2, .7, .2];
       accompaniment = [piano, bass([0, 2], [.8, .8], [1, 1])];
+    } else if (id === 'di-sarli') {
+      // Di Sarli's piano should carry a smooth, even current beneath the
+      // violin line, rather than the harder marcato used by dance-forward
+      // orquestas. The lighter half-note bass leaves that piano motion clear.
+      accompaniment = [cell('Rolling piano chords', 'harmony', 'piano', [0, 1, 2, 3], [.62, .42, .62, .42], 'tenuto',
+        [chord, chord, chord, chord], [.84, .58, .78, .58]), bass([0, 2], [.62, .62], [1, 5])];
     } else if (id === 'salgan') {
       accompaniment = [cell('Umpa-umpa left-hand bass and right-hand offbeat chords', 'harmony', 'piano', [0, .5, 1, 1.5, 2, 2.5, 3, 3.5],
         [.3, .25, .3, .25, .3, .25, .3, .25], 'staccato', [pitch(1, 45), chord, pitch(5, 45), chord, pitch(1, 45), chord, pitch(5, 45), chord]), bass()];
@@ -134,7 +157,19 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
     else if (id === 'chacarera-crossover') accompaniment = [cell('Guitar hemiola against compound bombo', 'harmony', 'guitar', [0, 1, 2], [.4, .4, .4], 'staccato', [chord, chord, chord]),
       { ...bass([0, 1.5], [.7, .7], [1, 5], 'bass'), articulation: 'staccato' }, cell('Bombo compound pulse and cross-accent', 'percussion', 'bombo-leguero', [0, .5, 1, 1.5, 2, 2.5], [.15, .15, .15, .15, .15, .15], 'accent', undefined, [1, .45, .8, 1, .8, .45])];
     else accompaniment = [marcato('piano', id === 'darienzo' ? [1, .9, 1, .9] : id === 'golden-age' ? [1, .62, .94, .62] : undefined), bass()];
-    if (['golden-age', 'guardia-nueva-de-caro', 'canaro', 'darienzo', 'di-sarli', 'troilo', 'modern-orquesta'].includes(id)) {
+    if (id === 'canaro') {
+      const pickup = cell('Canaro piano pickup', 'harmony', 'piano', [0, 1.5, 2.5, 3.5], [.55, .4, .4, .3], 'staccato',
+        [chord, chord, chord, chord], [1, .65, .8, .55]);
+      pickup.shortName = 'Piano pickup';
+      accompaniment.push(pickup);
+    }
+    if (id === 'di-sarli') {
+      const pickup = cell('Di Sarli piano pickup', 'harmony', 'piano', [0, 1, 2.5, 3.5], [.85, .65, .8, .45], 'tenuto',
+        [chord, chord, chord, chord], [.82, .55, .74, .48]);
+      pickup.shortName = 'Piano pickup';
+      accompaniment.push(pickup);
+    }
+    if (['golden-age', 'guardia-nueva-de-caro', 'canaro', 'darienzo', 'troilo', 'modern-orquesta'].includes(id)) {
       // Keep the piano's marcato downbeats crisp while a picked/arco bass
       // articulates the beat instead of only reinforcing half-note anchors.
       const low = accompaniment.find(c => c.role === 'bass' && c.instruments?.[0] === 'upright-bass');
@@ -144,7 +179,9 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
         low.accents = [1, .58, .9, .62];
       }
     }
-    const techniques = { ...style.instrumentTechniques, piano: [...new Set([...(style.instrumentTechniques.piano ?? []), 'yumba'])] };
+    const techniques = { ...style.instrumentTechniques,
+      ...(id === 'pugliese' ? { piano: [...new Set([...(style.instrumentTechniques.piano ?? []), 'yumba'])] } : {}),
+    };
     const dialects = { ...style.instrumentDialects };
     if (dialects['piano:harmony']) dialects['piano:harmony'] = { ...dialects['piano:harmony'], allowedTechniques: techniques.piano };
     const cells = [...lines, ...accompaniment].map(item => ({ ...item, shortName: conciseCellLabel(id, item) }));

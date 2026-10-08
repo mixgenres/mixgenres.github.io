@@ -1,5 +1,5 @@
 import { Sheet } from '../sheet/sheet.ts';
-import type { MusicalPattern, Role } from '../../types';
+import type { MusicalPattern } from '../../types';
 import type { Region } from '../../types';
 import { PATTERNS_BY_ID } from '../../data/genres';
 import { beatsPerBarOf, culturalCyclePosition, type TransitionEvent } from '../sheet/grid.ts';
@@ -152,14 +152,12 @@ function energyForRegion(region: Region): 1 | 2 | 3 | 4 | 5 {
   return energyOf(region);
 }
 
-function authoredTransitionPattern(style: import('../../data/styles/schema').ResolvedStyle, worldId: string, role: string): MusicalPattern | undefined {
+function authoredTransitionPattern(style: import('../../data/styles/schema').ResolvedStyle, worldId: string): MusicalPattern | undefined {
   if (!style?.contract?.transitionGrammar?.authoredPriority) return undefined;
   const candidates = Object.values(PATTERNS_BY_ID);
   return candidates
     .filter(p => p.worldId === worldId)
     .filter(p => p.category === 'fill' || p.category === 'transition' || p.tags?.some((t: string) => /fill|transition/i.test(t)))
-    .filter(p => !p.roles?.length || p.roles.includes(role as Role) || (role === 'percussion' && p.roles.includes('drums')))
-    .filter(p => !style.patterns?.allowed?.length || style.patterns.allowed.includes(p.id))
     .sort((a, b) => {
       const af = a.category === 'fill' || a.tags?.some((t: string) => /fill/i.test(t)) ? 1 : 0;
       const bf = b.category === 'fill' || b.tags?.some((t: string) => /fill/i.test(t)) ? 1 : 0;
@@ -186,12 +184,12 @@ export function buildTransitionEvents(sheet: Sheet): Map<number, TransitionEvent
     const authoredByRole: Record<string, string | undefined> = {};
     if (type === 'fill') {
       for (const r of roles) {
-        const p = authoredTransitionPattern(style, current.genre ?? sheet.worldId, r);
+        const p = authoredTransitionPattern(style, current.genre ?? sheet.worldId);
         if (p) authoredByRole[r] = p.id;
       }
     }
     const authored = authoredByRole['drums'] ?? (type === 'fill'
-      ? authoredTransitionPattern(style, current.genre ?? sheet.worldId, 'drums')?.id
+      ? authoredTransitionPattern(style, current.genre ?? sheet.worldId)?.id
       : undefined);
     const bar = current.end - 1;
     if (bar < finalStart) continue;

@@ -6,6 +6,7 @@ import { resolveTrackSound, resolveTrackGain } from '../src/engine/playback/trac
 import { getGenreDialect } from '../src/engine/band/instrumentGenreDialect';
 import { mergeDialectMetadata } from '../src/engine/style/contracts';
 import { resolveSampleGesture } from '../src/engine/playback/soundfont/gestures';
+import { PERCUSSION_SAMPLE_KEYS } from '../src/engine/playback/soundfont/percussion';
 import { codeForGesture } from '../src/engine/band/gestures';
 import { getRoleGainLinear } from '../src/engine/studio/mixer';
 import { patchForInstrument } from '../src/engine/playback/soundfont/presets';
@@ -24,6 +25,14 @@ for (const genre of Object.keys(GENRE_CONTRACTS)) {
     const preset = patchForInstrument(def.id, !!def.kit || !!def.drum || def.voicing === 'unpitched');
     assert.ok(preset.pack && Number.isInteger(preset.bank) && Number.isInteger(preset.program), `${genre}/${def.id} SoundFont assignment`);
     combinations++;
+  }
+}
+for (const def of Object.values(INSTRUMENTS_BY_ID)) {
+  if ((def.kit || def.drum || def.voicing === 'unpitched') && !def.kit) {
+    const keys = PERCUSSION_SAMPLE_KEYS[def.id];
+    assert.ok(keys, `${def.id} has explicit low, mid and high SoundFont note assignments`);
+    assert.equal(keys.length, 3);
+    assert.ok(keys.every(key => Number.isInteger(key) && key >= 0 && key <= 127));
   }
 }
 assert.equal(JSON.stringify(INSTRUMENTS_BY_ID), before, 'resolution must never mutate authored metadata');

@@ -75,6 +75,12 @@ test('tango variants use their actual meters and accompaniment cells', () => {
   };
   assert.ok(cells('pugliese').some(p => p.name.includes('Yumba') && p.events?.filter(e => e.articulation === 'yumba').map(e => e.position).join(',') === '0,2'));
   assert.ok(cells('milonga').some(p => p.name.includes('Habanera') && p.events?.map(e => e.position).join(',') === '0,0.75,1,1.5'));
+  assert.ok(cells('canaro').some(p => p.shortName === 'Four-beat marcato' && p.events?.length === 4));
+  assert.ok(cells('di-sarli').some(p => p.shortName === 'Rolling piano'
+    && p.events?.map(event => event.position).join(',') === '0,1,2,3'
+    && p.events.every(event => event.articulation === 'tenuto')));
+  assert.equal(cells('di-sarli').some(p => p.shortName === 'piano yumba'), false,
+    'Pugliese yumba should not become a technique pattern in every tango style');
   const vals = makeSheet('tango', 'tango-vals');
   assert.equal(vals.timeSignature, '3/4');
   assert.ok(cells('piazzolla-nuevo-tango').some(p => p.name.includes('3+3+2')));

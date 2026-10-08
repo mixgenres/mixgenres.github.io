@@ -36,26 +36,31 @@ export function authorFlamencoStudies(pack: GenrePackInput): GenrePackInput {
         allowedTechniques: style.instrumentTechniques.cajon, defaultTechnique: 'accent' };
     }
 
-    if (style.id === 'taranta' || style.id === 'granaina-malaguena') {
+    if (style.id === 'taranta' || style.id === 'granaina' || style.id === 'malaguena') {
       if (!roles.lead.includes('voice')) roles.lead = ['voice', ...roles.lead];
       instrumentDialects['voice:lead'] = { ...instrumentDialects['voice:lead'],
         allowedTechniques: style.instrumentTechniques.voice, defaultTechnique: 'legato' };
-      const granaina = style.id === 'granaina-malaguena';
+      const granaina = style.id === 'granaina';
+      const malaguena = style.id === 'malaguena';
       additions.push(
         {
-          name: granaina ? 'Granaína cante held-note and melisma phrase' : 'Taranta cante opening and descending release',
+          name: granaina ? 'Granaína cante held-note and melisma phrase'
+            : malaguena ? 'Malagueña cante opening and descending release' : 'Taranta cante opening and descending release',
           role: 'lead', instruments: ['voice'], cycleLength: 1,
           onsets: granaina ? [0, .75, 1.75, 2.75, 3.5] : [0, 1, 2, 3.25],
           durations: granaina ? [1.2, .8, .85, .6, .42] : [1.15, .95, .75, .5],
-          pitches: (granaina ? [1, 3, 5, 4, 1] : [1, 2, 4, 1]).map(degree => note(degree)),
+          pitches: (granaina ? [1, 3, 5, 4, 1] : malaguena ? [1, 2, 3, 1] : [1, 2, 4, 1]).map(degree => note(degree)),
           accents: granaina ? [1, .58, .72, .62, .9] : [1, .62, .72, .88], articulation: 'legato',
           difficulty: 2, supportedEnergy: [1, 2, 3], sectionUsage: ['verse', 'solo'],
           description: granaina
             ? 'Free Granaína cante study: sustain the modal phrase, rise to the upper color tone, then release toward the tonic above the guitar cadence.'
-            : 'Free Taranta cante study: shape a long opening tone into a descending modal release, leaving the guitar answer space.',
+            : malaguena
+              ? 'Free Malagueña cante study: shape a long opening tone into a descending release, leaving the guitar a measured answer before the next copla.'
+              : 'Free Taranta cante study: shape a long opening tone into a descending modal release, leaving the guitar answer space.',
         },
         {
-          name: granaina ? 'Granaína cante cadence and breath release' : 'Taranta cante short response',
+          name: granaina ? 'Granaína cante cadence and breath release'
+            : malaguena ? 'Malagueña cante cadence and breath release' : 'Taranta cante short response',
           role: 'lead', instruments: ['voice'], cycleLength: 1, phraseEnd: true,
           onsets: [3, 3.5, 3.75], durations: [.48, .28, .2],
           pitches: [3, 2, 1].map(degree => note(degree)), articulations: ['legato', 'vibrato', 'staccato'],

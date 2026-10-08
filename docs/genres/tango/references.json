@@ -33,13 +33,30 @@
       "references": [
         {
           "artist": "Francisco Canaro",
-          "title": "Poema"
+          "title": "Poema (Roberto Maida, 1935)",
+          "youtube": "https://www.youtube.com/watch?v=kiTCTaV2hxw",
+          "timecode": "Full recording; compact vocal refrain and dance phrasing."
         },
         {
           "artist": "Francisco Canaro & Charlo",
           "title": "Tiempos Viejos",
           "youtube": "https://www.youtube.com/watch?v=2wK9IwPP5W0",
           "appleMusic": "https://music.apple.com/no/song/256602304?l=nb"
+        },
+        {
+          "artist": "Francisco Canaro",
+          "title": "El Chamuyo (instrumental, 1933)",
+          "youtube": "https://www.youtube.com/watch?v=KVeG2-9Zig0"
+        },
+        {
+          "artist": "Francisco Canaro",
+          "title": "Milonga Sentimental (Angel Ramos, 1933)",
+          "youtube": "https://www.youtube.com/watch?v=kAQiyya9rsA"
+        },
+        {
+          "artist": "Francisco Canaro",
+          "title": "Canaro en París (instrumental)",
+          "youtube": "https://www.youtube.com/watch?v=-Y0v8_UZ0oM"
         }
       ]
     },
@@ -64,6 +81,26 @@
           "title": "El Ingeniero",
           "youtube": "https://www.youtube.com/watch?v=Q4fgMUKWHXg",
           "appleMusic": "https://music.apple.com/us/song/525092153"
+        },
+        {
+          "artist": "Carlos Di Sarli",
+          "title": "Una Fija (instrumental, 1958)",
+          "youtube": "https://www.youtube.com/watch?v=1Ha4Xdt1c1A"
+        },
+        {
+          "artist": "Carlos Di Sarli",
+          "title": "El Abrojo (instrumental, 1958)",
+          "youtube": "https://www.youtube.com/watch?v=NUpsGmrYl4k"
+        },
+        {
+          "artist": "Carlos Di Sarli",
+          "title": "Champagne Tango (instrumental, 1958)",
+          "youtube": "https://www.youtube.com/watch?v=TTlDwrLpp1A"
+        },
+        {
+          "artist": "Carlos Di Sarli",
+          "title": "A la gran muñeca (instrumental, 1951)",
+          "youtube": "https://www.youtube.com/watch?v=coVy25CcPzA"
         }
       ]
     },

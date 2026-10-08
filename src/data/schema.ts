@@ -224,6 +224,8 @@ export interface MusicalPattern {
   danceTags?: DanceTag[];
   tuningSystem?: TuningSystemTag;
   difficulty?: number;
+  /** Local student exercise generated from an authored source cell. */
+  pedagogicalStudy?: 'reduction' | 'answer' | 'technique' | 'variation';
   weight?: number;
   enabled?: boolean;
 }

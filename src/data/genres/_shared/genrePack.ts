@@ -302,7 +302,13 @@ function styleDefinition(input: GenrePackInput, item: CalibratedStyleInput): Gen
   const bassNoteRules = list([input.bassChordInteraction], styleHarmony.filter(value => /bass.?note|bass line|chromatic bass|pedal|root|fifth|anticipat|walking bass|tumbao|drone/i.test(value)));
   const styleRoles = rolesForStyle(input, item);
   const sectionsForStyle = sections(input, styleRoles, item);
-  const description = item.description;
+  // Older catalogs appended this same sentence to every style. It adds no
+  // student-facing guidance and makes otherwise specific descriptions read
+  // like generated metadata.
+  const description = item.description.replace(
+    /\s*The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells\.?$/i,
+    '',
+  ).trim();
   const roles = Object.fromEntries(Object.entries(styleRoles).map(([role, instruments]) => [role, {
     preferredInstruments: instruments, required: role === 'lead' || role === 'bass',
     mixFunction: role === 'lead' || role === 'voice' ? 'foreground' : role === 'bass' ? 'low-anchor' : role === 'percussion' ? 'pulse-anchor' : 'harmonic-support',
@@ -345,6 +351,41 @@ function styleDefinition(input: GenrePackInput, item: CalibratedStyleInput): Gen
   };
 }
 
+function studentCellName(style: GenreStyleDefinition, cell: AuthoredCell): string {
+  const instrument = (cell.instruments?.[0] ?? '').replaceAll('-', ' ');
+  const compact = (value: string) => value.trim().split(/\s+/).length <= 3 ? value.trim() : '';
+  if (cell.shortName && compact(cell.shortName)) return cell.shortName;
+  const signature = style.signatureCell?.trim();
+  const withoutSignature = signature && cell.name.toLowerCase().startsWith(`${signature.toLowerCase()} `)
+    ? cell.name.slice(signature.length).trim()
+    : cell.name;
+  const withoutStyle = withoutSignature.toLowerCase().startsWith(`${style.name.toLowerCase()} `)
+    ? withoutSignature.slice(style.name.length).trim()
+    : withoutSignature;
+  const lowerName = cell.name.toLowerCase();
+  const compactConcept = lowerName.includes('ostinato') ? `${instrument || 'Style'} ostinato`
+    : /call.?and.?response|call.?response/.test(lowerName) ? 'Call and response'
+      : /answer|response/.test(lowerName) ? `${instrument || 'Lead'} answer`
+        : /hook/.test(lowerName) ? `${instrument || 'Lead'} hook`
+          : /swell|bloom|lift/.test(lowerName) ? `${instrument || 'Pad'} swell`
+            : /pulse|groove/.test(lowerName) ? `${instrument || 'Part'} pulse`
+              : /cadence|cierre|remate/.test(lowerName) ? `${instrument || 'Phrase'} cadence` : '';
+  const label = compact(withoutStyle) || (cell.phraseEnd
+    ? `${instrument || 'Phrase'} cadence`
+    : compactConcept || (cell.role === 'lead' || cell.role === 'voice' ? `${instrument === 'voice' ? 'Vocal' : instrument || 'Lead'} phrase`
+      : cell.role === 'bass' ? `${instrument || 'Bass'} pulse`
+        : cell.role === 'percussion' ? `${instrument || 'Percussion'} groove`
+          : cell.role === 'texture' ? `${instrument || 'Sound'} texture`
+            : `${instrument || 'Chord'} comping`));
+  return label.charAt(0).toLocaleUpperCase() + label.slice(1);
+}
+
+function studentInstrumentLabel(instrumentId: string): string {
+  const fullName = INSTRUMENTS_BY_ID[instrumentId]?.name ?? instrumentId.replaceAll('-', ' ');
+  const words = fullName.trim().split(/\s+/);
+  return words.length > 2 ? words.slice(-2).join(' ') : fullName;
+}
+
 function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cell: AuthoredCell, index: number): MusicalPattern {
   const id = `${style.id}-pattern-${index}-${slug(cell.name)}`;
   const meter = style.preferredMeters[0];
@@ -362,9 +403,10 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
     // individual attacks would change both its ratio and its finger order.
     ...(cell.phraseEnd ? { condition: { phrasePosition: ['cadence', 'transition'] }, probability: cell.notations?.[i]?.tuplet ? 1 : .85 } : {}),
   }));
+  const shortName = studentCellName(style, cell);
   return {
-    id, worldId: input.id, styleIds: [style.id], name: `${style.name}: ${cell.shortName ?? cell.name}`, shortName: cell.shortName ?? cell.name,
-    family: cell.shortName ?? cell.name, category: cell.phraseEnd ? (/cadence|cierre|remate|ending|closing/i.test(cell.name) ? 'cadence' : 'fill')
+    id, worldId: input.id, styleIds: [style.id], name: `${style.name}: ${shortName}`, shortName,
+    family: shortName, category: cell.phraseEnd ? (/cadence|cierre|remate|ending|closing/i.test(cell.name) ? 'cadence' : 'fill')
       : cell.pedagogicalStudy && (cell.role === 'bass' || cell.role === 'percussion' || cell.role === 'lead' || cell.role === 'voice' || cell.role === 'harmony')
         ? cell.role === 'bass' ? 'bass' : cell.role === 'percussion' ? 'percussion' : cell.role === 'harmony' ? 'comping' : 'melodic'
         : cell.role === 'bass' ? 'bass' : cell.role === 'percussion' ? 'percussion'
@@ -385,6 +427,7 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
     ...(cell.pedagogicalStudy ? { sectionUsage: cell.sectionUsage ?? (cell.pedagogicalStudy === 'technique' ? ['solo']
       : cell.pedagogicalStudy === 'answer' ? ['solo', 'bridge'] : cell.pedagogicalStudy === 'variation' ? ['verse', 'chorus', 'bridge', 'solo'] : ['intro', 'verse']) } : {}),
     ...(cell.difficulty ? { difficulty: cell.difficulty } : {}),
+    ...(cell.pedagogicalStudy ? { pedagogicalStudy: cell.pedagogicalStudy } : {}),
     provenance: cell.pedagogicalStudy
       ? `Local ${cell.pedagogicalStudy} practice study derived from this style's folder-authored source cell; quarter-note beat positions and phrase conditions.`
       : 'Folder-authored role cell; quarter-note beat positions and phrase conditions.',
@@ -455,7 +498,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
     // catalog ordering often places a short opening cue before the main part.
     const source = cells.reduce((best, candidate) => candidate.onsets.length > best.onsets.length ? candidate : best);
     const instrumentId = source.instruments![0];
-    const instrumentLabel = instrumentId.replaceAll('-', ' ');
+    const instrumentLabel = studentInstrumentLabel(instrumentId);
     const originalEvents = source.onsets.map((position, index) => ({
       position,
       duration: source.durations?.[index],
@@ -635,7 +678,7 @@ export function createGenreWorld(input: GenrePackInput): GenreWorld {
       const parent = pattern.cycleLength === 1 ? { ...pattern, cycleLength,
         events: [...pattern.events!, ...pattern.events!.map(event => ({ ...event, position: event.position + beats }))] } : pattern;
       const events = closingEvents(parent, ending).map(({ condition: _condition, probability: _probability, ...event }) => event);
-      const turnaroundSubject = pattern.instruments?.[0]?.replaceAll('-', ' ')
+      const turnaroundSubject = (pattern.instruments?.[0] && studentInstrumentLabel(pattern.instruments[0]))
         ?? pattern.shortName?.split(/\s+/).slice(0, 2).join(' ')
         ?? 'phrase';
       return [{ ...pattern, id: `${pattern.id}-turnaround-study`, name: `${pattern.name}: turnaround study`,

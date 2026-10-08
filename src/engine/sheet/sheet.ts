@@ -350,7 +350,8 @@ export function affinity(
   const p = PATTERNS_BY_ID[patternId];
   if (!p) return Number.NEGATIVE_INFINITY;
 
-  if (p.sourceLevel === 'style-authored' && (!p.roles.includes(voice.role) || !p.instruments?.includes(voice.instrumentId))) return Number.NEGATIVE_INFINITY;
+  const authoredMismatch = p.sourceLevel === 'style-authored'
+    && (!p.roles.includes(voice.role) || !p.instruments?.includes(voice.instrumentId));
   const sFit = styleId ? patternStyleFit(p, styleId, worldId, adventure) : 0;
 
   const kinds = new Set(instrumentPatternKinds(voice.instrumentId));
@@ -365,6 +366,10 @@ export function affinity(
 
   if (vocalMismatch) score -= 50;
   if (explicitMismatch) score -= p.canCrossRole ? 85 : 140;
+  if (authoredMismatch) score -= 20;
+  // Generated exercises remain available in every picker, but automatic song
+  // choices should prefer the style's main playing cells over isolated drills.
+  if (p.pedagogicalStudy) score -= 64;
   if (instrumentMatch) score += 30;
   if (roleMatch) score += 14;
   else if (p.roles.length) score -= 10;
@@ -645,12 +650,11 @@ export function suggestPattern(
   // Deliberate user edits/influences can still introduce other material.
   const curated = resolved?.patterns?.allowed?.length ? resolved.patterns.allowed : undefined;
   const worldWide = (PATTERNS_BY_WORLD[worldId] || []).map(p => p.id);
-  const candidateIds = curated ?? worldWide;
-  const scored = candidateIds
+  const candidateIds = curated ? [...new Set([...curated, ...worldWide])] : worldWide;
+  const candidatePatterns = candidateIds
     .map(id => PATTERNS_BY_ID[id])
-    .filter((p): p is MusicalPattern => !!p && p.enabled !== false && p.worldId === worldId)
-    .filter(p => !p.sectionUsage?.length || p.sectionUsage.some(section => canonicalPatternSection(section) === patternSection))
-    .filter(p => !['fill', 'cadence', 'transition'].includes(p.category) || !!p.sectionUsage?.some(section => canonicalPatternSection(section) === patternSection))
+    .filter((p): p is MusicalPattern => !!p && p.enabled !== false && p.worldId === worldId);
+  const scored = candidatePatterns
     .map(p => {
       let n = affinity(p.id, voice, worldId, styleId);
       const behavioralFit = approachFit(p, approach);
@@ -658,6 +662,7 @@ export function suggestPattern(
       if (!Number.isFinite(n)) return { id: p.id, n: -999 };
       if (p.id === DEFAULT_PATTERN_PREFERENCES[worldId]?.[voice.instrumentId]) n += 8;
       if (styleId && p.styleIds?.includes(styleId)) n += 30;
+      if (curated?.includes(p.id) === false) n -= 18;
       if (resolved?.contract.timelineRequired && resolved.contract.timelineGrid.length) {
         const authored = new Set(p.onsetGrid ?? []);
         const overlap = resolved.contract.timelineGrid.filter(x => authored.has(x)).length / resolved.contract.timelineGrid.length;
@@ -680,24 +685,23 @@ export function suggestPattern(
     })
     .sort((a, b) => b.n - a.n);
 
-  const viable = scored.filter(x => x.n > -150);
-  if (!viable.length) return undefined;
-  const best = viable[0].n;
-  const window = viable.filter(x => x.n >= best - 25).slice(0, 10);
+  if (!scored.length) return undefined;
+  const best = scored[0].n;
+  const window = scored.filter(x => x.n >= best - 25).slice(0, 10);
   return window[Math.floor(hash(`pick:${worldId}:${voice.instrumentId}:${sectionKind ?? 'body'}`, salt) * window.length)]?.id
     ?? window[0].id;
 }
 
 /** A missing context match remains a rest; never fill it from another genre. */
 function localPatternFallback(voice: Voice, worldId: string, sectionKind: string, styleId?: string): string | undefined {
-  const resolved = styleId ? resolveStyle({ genreId: worldId, styleId }) : undefined;
-  const allowed = resolved?.patterns?.allowed?.length ? new Set(resolved.patterns.allowed) : undefined;
-  return (PATTERNS_BY_WORLD[worldId] ?? []).find(pattern => pattern.enabled !== false
-    && (!allowed || allowed.has(pattern.id))
-    && Number.isFinite(affinity(pattern.id, voice, worldId, styleId))
-    && (!pattern.sectionUsage?.length || pattern.sectionUsage.some(section => canonicalPatternSection(section) === canonicalPatternSection(sectionKind)))
-    && (!['fill', 'cadence', 'transition'].includes(pattern.category)
-      || pattern.sectionUsage?.some(section => canonicalPatternSection(section) === canonicalPatternSection(sectionKind))))?.id;
+  return (PATTERNS_BY_WORLD[worldId] ?? [])
+    .filter(pattern => pattern.enabled !== false)
+    .sort((a, b) => {
+      const sectionScore = (pattern: MusicalPattern) => pattern.sectionUsage?.some(section =>
+        canonicalPatternSection(section) === canonicalPatternSection(sectionKind)) ? 12 : 0;
+      return affinity(b.id, voice, worldId, styleId) + sectionScore(b)
+        - affinity(a.id, voice, worldId, styleId) - sectionScore(a);
+    })[0]?.id;
 }
 
 /**
@@ -843,20 +847,11 @@ export function rebuild(sheet: Sheet): Sheet {
             patternId = cachedPat;
           } else {
             const base = PATTERNS_BY_ID[basePatternId];
-            const resolvedForPatterns = getResolvedSectionStyle(sheet, r);
-            const styleId = resolvedForPatterns.id;
-            const allowedIds = resolvedForPatterns?.patterns?.allowed?.length ? new Set(resolvedForPatterns.patterns.allowed) : undefined;
             const candidates = (PATTERNS_BY_WORLD[r.genre ?? sheet.worldId] || [])
-              .filter(p => !allowedIds || allowedIds.has(p.id))
               .filter(p => p.enabled !== false)
+              .filter(p => !p.pedagogicalStudy)
               .filter(p => !p.sectionUsage?.length || p.sectionUsage.some(section => canonicalPatternSection(section) === canonicalPatternSection(r.kind)))
               .filter(p => !base || p.family === base.family || p.category === base.category)
-              .filter(p => {
-                if (!styleId) return true;
-                const ids = p.styleIds ?? [];
-                const baseIds = base?.styleIds ?? [];
-                return ids.length === 0 || ids.includes(styleId) || (baseIds.includes(styleId) && ids.some(id => baseIds.includes(id)));
-              })
               .map(p => {
                 let score = affinity(p.id, track as Voice, r.genre ?? sheet.worldId, getSectionStyleId(sheet, r));
                 if (p.id === basePatternId) score += 4;
@@ -1231,12 +1226,13 @@ export function setInstrument(sheet: Sheet, trackId: string, instrumentId: strin
   
   const tracks = sheet.tracks.map(t => t.id === trackId ? newVoice : t) as Voice[];
   const arrangement = { ...sheet.arrangement };
-  
+
   for (const [ri, region] of sheet.regions.entries()) {
     const current = arrangement[region.id]?.[trackId];
-    if (current && current !== 'silent') {
+    // Swapping the sound source should not overwrite a student's explicit
+    // rhythm choice. Only fill an unassigned part; an intentional mute stays.
+    if (!current) {
       const used = new Set(Object.values(arrangement[region.id] ?? {}));
-      used.delete(current);
       const energy = sheet.energies?.[region.id]?.[trackId] ?? region.energy ?? 3;
       const p = suggestPattern(newVoice, region.genre ?? sheet.worldId, ri * 31 + 17, String(region.kind), used, energy, getSectionStyleId(sheet, region));
       if (p) {
@@ -1318,24 +1314,18 @@ function patternCandidatesForVoice(
   const want = partEnergy ?? SECTION_ENERGY_DEFAULT[sectionKind];
   const previous = previousPatternId ? PATTERNS_BY_ID[previousPatternId] : undefined;
   const resolvedForPatterns = styleId ? resolveStyle({ genreId: worldId, styleId }) : undefined;
-  const allowedIds = resolvedForPatterns?.patterns?.allowed?.length ? new Set(resolvedForPatterns.patterns.allowed) : undefined;
   const approach = approachForVoice(voice, worldId, styleId);
-  const pool = (PATTERNS_BY_WORLD[worldId] || [])
-    .filter(p => !allowedIds || allowedIds.has(p.id));
+  const pool = PATTERNS_BY_WORLD[worldId] || [];
   return pool
     .filter(p => p.enabled !== false)
-    .filter(p => !p.sectionUsage?.length || p.sectionUsage.some(section => canonicalPatternSection(section) === canonicalPatternSection(sectionKind)))
-    .filter(p => !['fill', 'cadence', 'transition'].includes(p.category)
-      || p.sectionUsage?.some(section => canonicalPatternSection(section) === canonicalPatternSection(sectionKind)))
     .map(p => {
       let n = affinity(p.id, voice, worldId, styleId);
       const behavioralFit = approachFit(p, approach);
       if (approach && behavioralFit > 0) n += behavioralFit;
       if (!Number.isFinite(n)) return { p, score: -999 };
-      if (p.sectionUsage?.includes(sectionKind)) n += 11;
-      if (allowedIds) {
-        if (allowedIds.has(p.id)) n += 20;
-        else n -= 15;
+      if (p.sectionUsage?.some(section => canonicalPatternSection(section) === canonicalPatternSection(sectionKind))) n += 11;
+      if (resolvedForPatterns?.patterns?.allowed?.includes(p.id)) {
+        n += 20;
       }
       if (partEnergy) {
         if (p.supportedEnergy?.includes(partEnergy)) n += 15;
@@ -1870,14 +1860,15 @@ export function addVoice(
   sheet: Sheet,
   instrumentId: string,
   regionId?: string,
-  scope: 'section' | 'song' = 'section'
+  scope: 'section' | 'song' = 'section',
+  options: { role?: string; patternId?: string } = {},
 ): Sheet {
   const def = instrument(instrumentId);
   let id = `v${sheet.tracks.length}`;
   while (sheet.tracks.some(t => t.id === id)) id = `v${sheet.tracks.length + 1}`;
   const voice: Voice = {
     id, instrumentId, name: def.name, instrument: def.name,
-    role: roleForInstrument(instrumentId), kind: instrumentId,
+    role: options.role ?? roleForInstrument(instrumentId), kind: instrumentId,
     muted: false, volume: 0.85, lensIds: [],
   };
   const arrangement = { ...sheet.arrangement };
@@ -1889,19 +1880,21 @@ export function addVoice(
   if (scope === 'section' && regionId) {
     const targetRegion = sheet.regions.find(r => r.id === regionId) ?? sheet.regions[0];
     const taken = new Set(Object.values(arrangement[targetRegion.id] ?? {}));
-    const p = suggestPattern(voice, targetRegion.genre ?? sheet.worldId, sheet.tracks.length * 19 + 7, String(targetRegion.kind), taken, 3, getSectionStyleId(sheet, targetRegion));
+    const p = options.patternId ?? suggestPattern(voice, targetRegion.genre ?? sheet.worldId, sheet.tracks.length * 19 + 7, String(targetRegion.kind), taken, 3, getSectionStyleId(sheet, targetRegion));
 
     for (const r of sheet.regions) {
       if (r.id === targetRegion.id) {
         arrangement[r.id] = { ...(arrangement[r.id] ?? {}), [id]: p ?? 'silent' };
       } else {
-        arrangement[r.id] = { ...(arrangement[r.id] ?? {}), [id]: 'silent' };
+        const section = { ...(arrangement[r.id] ?? {}) };
+        delete section[id];
+        arrangement[r.id] = section;
       }
     }
   } else {
     for (const [ri, r] of sheet.regions.entries()) {
       const taken = new Set(Object.values(arrangement[r.id] ?? {}));
-      const p = suggestPattern(voice, r.genre ?? sheet.worldId, ri * 31 + sheet.tracks.length * 13 + 7, String(r.kind), taken, 3, getSectionStyleId(sheet, r));
+      const p = options.patternId ?? suggestPattern(voice, r.genre ?? sheet.worldId, ri * 31 + sheet.tracks.length * 13 + 7, String(r.kind), taken, 3, getSectionStyleId(sheet, r));
       if (p) arrangement[r.id] = { ...(arrangement[r.id] ?? {}), [id]: p };
     }
   }

@@ -95,13 +95,44 @@ const DETAILED_RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = {
     solos: { violin: 'violin' },
     sectionInstruments: { dialogo: ['bandoneon','violin','piano','upright-bass'] },
   }),
-  'tango::canaro': song(112, 'intro:4:2,tema:16:3,refrain:16:4,tema:16:3,interlude:8:2,refrain:16:4,cierre:4:2', 'Canaro score: short, regular dance strains and a clear refrain, with a brief instrumental link instead of a long solo episode.'),
+  'tango::canaro': song(112, 'intro:4:2,tema:16:3,refrain:16:4,tema:16:3,interlude:8:2,refrain:16:4,cierre:4:2', 'Canaro score adaptation: compact bandoneon statements give way to a violin-led refrain, then a short instrumental link returns to the dance pulse.', undefined, {
+    sectionInstruments: {
+      intro: ['bandoneon','piano','upright-bass'],
+      refrain: ['violin','piano','upright-bass'],
+      interlude: ['bandoneon','piano','upright-bass'],
+    },
+    patternAssignments: {
+      intro: { bandoneon: 'Bandoneon phrase', piano: 'Four-beat marcato', 'upright-bass': 'Root–fifth bass' },
+      tema: { bandoneon: 'Bandoneon phrase', violin: 'Violin answer', piano: 'Four-beat marcato', 'upright-bass': 'Root–fifth bass' },
+      refrain: { violin: 'Violin refrain', piano: 'Four-beat marcato', 'upright-bass': 'Root–fifth bass' },
+      interlude: { bandoneon: 'Bandoneon refrain', piano: 'Piano pickup', 'upright-bass': 'Root–fifth bass' },
+      cierre: { bandoneon: 'Bandoneon phrase', violin: 'Violin answer', piano: 'Four-beat marcato', 'upright-bass': 'Root–fifth bass' },
+    },
+  }),
+  'flamenco::granaina': song(60, 'salida:8:1,cante:24:2,falseta:16:3,cante:24:3,cadence:8:1', 'Free-time Granaína score adaptation: the voice shapes the long copla, the guitar takes one exposed falseta, and the cadence follows the final vocal release.', {
+    _: ['Bm','A','G','F#'], falseta: ['Bm','A','G','F#'],
+  }, {
+    instruments: ['voice','guitar'], lead: 'voice', solos: { salida: 'guitar', falseta: 'guitar' },
+    sectionInstruments: { salida: ['guitar'], cante: ['voice','guitar'], falseta: ['guitar'], cadence: ['voice','guitar'] },
+  }),
+  'flamenco::malaguena': song(56, 'salida:8:1,cante:24:2,guitar-answer:12:2,cante:24:3,cadence:8:1', 'Free-time Malagueña score adaptation: let the singer set the phrase lengths, answer with a spacious arpeggio, then close after the cante settles.', {
+    _: ['Am','G','F','E'], 'guitar-answer': ['Am','G','F','E'],
+  }, {
+    instruments: ['voice','guitar'], lead: 'voice', solos: { salida: 'guitar', 'guitar-answer': 'guitar' },
+    sectionInstruments: { salida: ['guitar'], cante: ['voice','guitar'], 'guitar-answer': ['guitar'], cadence: ['voice','guitar'] },
+  }),
   'tango::d-arienzo': song(132, 'intro:4:3,tema:16:4,break:2:1,tema:16:4,contraste:16:3,tema:16:5,variacion:16:5,cierre:2:4', 'D’Arienzo score: hard marcato drives repeated theme statements, cut by a stop-time break and a lower-energy contrast before the final push.', undefined, {
     sectionInstruments: { break: ['piano','upright-bass'], contraste: ['violin','piano','upright-bass'] },
   }),
-  'tango::di-sarli': song(118, 'piano:8:2,tema:32:3,contraste:16:2,tema:32:4,violin:16:4,tema:16:5,coda:4:2', 'Di Sarli score: rolling piano leads into long violin arcs; a quiet middle strain leaves space before the broad return.', undefined, {
+  'tango::di-sarli': song(118, 'piano:8:2,tema:32:3,contraste:16:2,tema:32:4,violin:16:4,tema:16:5,coda:4:2', 'Di Sarli score adaptation: rolling piano opens the piece, long violin lines carry the themes, and a quieter piano pickup clears space for the featured return.', undefined, {
     solos: { violin: 'violin' },
     sectionInstruments: { piano: ['piano','upright-bass'], contraste: ['violin','piano','upright-bass'] },
+    patternAssignments: {
+      piano: { piano: 'Rolling piano', 'upright-bass': 'Root–fifth bass' },
+      contraste: { violin: 'Lyrical violin', piano: 'Piano pickup', 'upright-bass': 'Root–fifth bass' },
+      violin: { violin: 'Violin return', piano: 'Rolling piano', 'upright-bass': 'Root–fifth bass' },
+      coda: { violin: 'Lyrical violin', piano: 'Piano pickup', 'upright-bass': 'Root–fifth bass' },
+    },
   }),
   'tango::pugliese': song(118, 'yumba:8:3,tema:16:4,silencio:4:1,contraste:16:2,crescendo:16:4,tema:16:5,variacion:16:5,coda:4:3', 'Pugliese score: weighted yumba attacks frame a real drop in density, then a long crescendo and forceful return.', undefined, {
     solos: { variacion: 'bandoneon' },

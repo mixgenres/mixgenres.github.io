@@ -7,6 +7,7 @@ import { beatFraction, beatValue, compileMusicianScore, musicianScoreFromArrange
 import { exportMusicXml } from '../src/engine/score/musicXml';
 import { codeForGesture } from '../src/engine/band/gestures';
 import { PATTERNS_BY_ID } from '../src/data/genres';
+import { getStyle } from '../src/engine/style/registry';
 import { sliceBarNative } from '../src/engine/sheet/grid';
 import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import type { MusicalPattern } from '../src/types';
@@ -53,26 +54,25 @@ test('reference score section assignments preserve their intended instrument cel
     assert.deepEqual(names, [expectedName], `${styleId}/${section}/${instrumentId} keeps its section-authored pattern`);
   };
 
-  verify('flamenco-sevillanas', 'cajon', 'link', 'Sevillanas cajón link remate');
-  verify('cinematic-modern-score', 'synth', 'ostinato', 'modern score synth ostinato and resolution lift');
-  verify('cinematic-modern-score', 'synth', 'build', 'modern score synth ostinato and resolution lift');
-  verify('pop-power-pop', 'synth', 'chorus', 'power-pop chorus pad bloom');
-  verify('tango-chacarera-crossover', 'violin', 'interlude', 'chacarera violin interlude variation');
+  verify('flamenco-sevillanas', 'cajon', 'link', 'Cajón link remate');
+  verify('cinematic-modern-score', 'synth', 'ostinato', 'Synth ostinato');
+  verify('cinematic-modern-score', 'synth', 'build', 'Synth ostinato');
+  verify('pop-power-pop', 'synth', 'chorus', 'Synth swell');
+  verify('tango-chacarera-crossover', 'violin', 'interlude', 'Violin interlude');
 });
 
-test('sample-only ensemble support parts use two local section cells instead of a generic one-pattern placeholder', () => {
-  for (const styleId of ['blues-piedmont', 'flamenco-tonas-martinetes', 'persian-radif', 'ambient-drone']) {
+test('catalog songs do not invent support instruments outside the authored style roster', () => {
+  for (const styleId of ['blues-piedmont', 'persian-radif', 'ambient-drone']) {
     const song = createCatalogSong(`${styleId}_song`);
-    const supportTrackIds = new Set(Object.values(song.lockedPatternAssignments ?? {}).flatMap(assignments =>
-      Object.keys(assignments).filter(trackId => song.tracks.some(track => track.id === trackId
-        && PATTERNS_BY_ID[assignments[trackId]]?.sourceLevel === 'sample-support'))));
-    assert.ok(supportTrackIds.size > 0, `${styleId} has sample-only support parts`);
-    for (const trackId of supportTrackIds) {
-      const assigned = [...new Set(song.measures.map(measure => measure.patternDetailsByTrack?.[trackId]?.patternId).filter(Boolean))];
-      assert.ok(assigned.length >= 2, `${styleId}/${trackId} has contrasting section patterns`);
-      assert.ok(assigned.every(patternId => PATTERNS_BY_ID[patternId!]?.sourceLevel === 'sample-support'));
-    }
+    const authoredIds = new Set(getStyle(styleId)!.arrangement!.ensemble!.flatMap(part => part.instrumentIds));
+    const songIds = new Set(song.tracks.map(track => track.instrumentId!));
+    assert.deepEqual(songIds, authoredIds, `${styleId} keeps its complete authored roster`);
+    assert.equal(Object.values(song.lockedPatternAssignments ?? {}).flatMap(Object.values)
+      .some(patternId => PATTERNS_BY_ID[patternId]?.sourceLevel === 'sample-support'), false);
   }
+  const tonas = createCatalogSong('flamenco-tonas-martinetes_song');
+  assert.deepEqual(tonas.tracks.map(track => track.instrumentId), ['voice'],
+    'unaccompanied tonás should not gain an invented accompaniment ensemble');
 });
 
 test('score fractions retain tuplets and fine authored positions', () => {

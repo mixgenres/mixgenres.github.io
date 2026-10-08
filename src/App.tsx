@@ -6,7 +6,7 @@ import './index.css';
 import { Glyph, PlayIcon, PauseIcon } from './ui/Glyph';
 import { Sheet, NoteCard, NoteMark } from './ui/Sheet';
 import { noteTags } from './ui/noteTags';
-import { WorldSheet, InstrumentSheet, PatternSheet, SectionSheet, SectionGenreSheet, TempoSheet, EnergySheet, DownloadSheet, StartOverModal, RandomizeSheet, ChordSheet } from './ui/sheets';
+import { WorldSheet, InstrumentSheet, AddInstrumentSheet, PatternSheet, SectionSheet, SectionGenreSheet, TempoSheet, EnergySheet, DownloadSheet, StartOverModal, RandomizeSheet, ChordSheet } from './ui/sheets';
 import { StyleSheetModal } from './ui/StyleSheet';
 import { StyleInspector } from './ui/StyleInspector';
 import { RoleIcon, RoleSettings } from './ui/RoleControl';
@@ -21,7 +21,6 @@ import {
   duplicateSection, addSensibleSectionAfter, removeSection, setInstrument, setPattern, addVoice, removeVoice,
   isVoiceSilentInSection, isVoiceSilentInAll, silenceVoiceInSection, silenceVoiceInAll,
   unsilenceVoiceInSection, unsilenceVoiceInAll,
-  silenceAllVoicesInSection, unsilenceAllVoicesInSection,
   setTrackRole, getTrackRole, setSectionSolo, getResolvedSectionStyle,
   getEffectiveBpm, setSectionTempoShift, setSongTempoShift, setSongBpm, setSectionBpm, setSectionEnergy,
 } from './engine/sheet/index.ts';
@@ -877,6 +876,9 @@ export default function App() {
             const p = patternOf(t.id);
             const isSilentHere = isVoiceSilentInSection(song, t.id, region.id);
             const isSilentInAll = isVoiceSilentInAll(song, t.id);
+            const patternHere = arrangementHere[t.id];
+            const isExplicitlyMutedHere = t.muted || patternHere === 'silent';
+            const isExplicitlyMutedAll = t.muted || song.regions.every(part => song.arrangement[part.id]?.[t.id] === 'silent');
             const soloPlan = song.arrangementContext?.[region.id]?.solo;
             const restsForSolo = !!soloPlan && (!supportsSolo(soloPlan, t, soloistAtBar(soloPlan, region, shownMeasure?.index ?? region.start, sectionStyle?.contract.cycleLength)) ||
               (soloPlan.mode === 'trading' && soloPlan.trackIds.includes(t.id) &&
@@ -916,7 +918,7 @@ export default function App() {
                       <Pencil size={10} strokeWidth={2} style={{ opacity: 0.45, flexShrink: 0 }} />
                     </button>
 
-                    {isSilentHere && <span className="text-[11px] opacity-60">silent</span>}
+                    {isSilentHere && <span className="text-[11px] opacity-60">{isExplicitlyMutedHere ? 'muted' : 'not in this part'}</span>}
                   </div>
 
                   {/* Right Column: Pattern Name & Actions */}
@@ -934,14 +936,14 @@ export default function App() {
                       }}
                       title={
                         isSilentInAll
-                          ? 'Pick a rhythm to play in the whole song'
+                          ? 'Choose a pattern for the whole song'
                           : isSilentHere
-                          ? `Pick a rhythm to play in ${partName}`
+                          ? `Choose a pattern for ${partName}`
                           : `Change rhythm for ${partName}`
                       }
                     >
                       <span className="truncate max-w-[140px] sm:max-w-[200px]">
-                        {isSilentInAll ? 'silent in all' : isSilentHere ? '+ pick rhythm' : p ? cleanPatternName(p.name, p.shortName) : 'silent'}
+                        {isExplicitlyMutedAll ? 'muted for song' : isExplicitlyMutedHere ? 'muted · choose to restore' : isSilentHere ? '+ add to this part' : p ? cleanPatternName(p.name, p.shortName) : '+ choose pattern'}
                       </span>
                       <Pencil size={10} strokeWidth={2} style={{ opacity: 0.45, flexShrink: 0 }} />
                     </button>
@@ -995,7 +997,7 @@ export default function App() {
                         className="absolute text-[10px] micro tracking-wider opacity-50 select-none"
                         style={{ color: 'var(--ink)' }}
                       >
-                        {isSilentInAll ? '— silent in all parts —' : `— silent in ${partName} —`}
+                        {isExplicitlyMutedAll ? '— muted for song · click to restore —' : isExplicitlyMutedHere ? `— muted in ${partName} · click to restore —` : `— not in ${partName} · click to add —`}
                       </span>
                     </div>
                   ) : (
@@ -1254,8 +1256,6 @@ export default function App() {
           }
           showToast(`Deleted ${partName}`);
         }}
-        onSilenceAllInSection={() => edit(s => silenceAllVoicesInSection(s, region.id))}
-        onPlayAllInSection={() => edit(s => unsilenceAllVoicesInSection(s, region.id))}
         songFeelName={songFeel.name}
         currentWorldId={song.worldId}
         onGenre={handleSelectSectionGenre}
@@ -1406,12 +1406,6 @@ export default function App() {
         title={song.tracks.find(t => t.id === instrFor)?.name ?? 'Instrument'}
         sectionKind={partName}
         current={(song.tracks.find(t => t.id === instrFor) as Voice | undefined)?.instrumentId}
-        isSilentPart={instrFor ? isVoiceSilentInSection(song, instrFor, region.id) : false}
-        onSilencePart={() => instrFor && edit(s => silenceVoiceInSection(s, instrFor, region.id))}
-        onPlayPart={() => instrFor && edit(s => unsilenceVoiceInSection(s, instrFor, region.id))}
-        isSilentAll={instrFor ? isVoiceSilentInAll(song, instrFor) : false}
-        onSilenceAll={() => instrFor && edit(s => silenceVoiceInAll(s, instrFor))}
-        onPlayAll={() => instrFor && edit(s => unsilenceVoiceInAll(s, instrFor))}
         onPick={id => instrFor && edit(s => setInstrument(s, instrFor, id))}
         onRemove={() => {
           if (instrFor) {
@@ -1422,20 +1416,17 @@ export default function App() {
         }}
       />)}
 
-      {(addingVoice) && (<InstrumentSheet
+      {(addingVoice) && (<AddInstrumentSheet
         open={addingVoice} onClose={() => setAddingVoice(false)}
-        title="Add an instrument"
+        worldId={song.worldId} styleId={song.styleId}
         sectionKind={partName}
-        onPickWithScope={(id, scope) => edit(s => addVoice(s, id, region.id, scope))}
+        onAdd={(instrumentId, role, patternId, scope) => edit(s => addVoice(s, instrumentId, region.id, scope, { role, patternId }))}
       />)}
 
       {(!!patternFor) && (<PatternSheet
         open={!!patternFor} onClose={() => setPatternFor(null)}
-        voice={patternVoice ?? null} worldId={song.worldId}
+        voice={patternVoice ?? null} worldId={song.worldId} styleId={song.styleId}
         current={patternFor ? arrangementHere[patternFor] : undefined}
-        isSilentAll={patternFor ? isVoiceSilentInAll(song, patternFor) : false}
-        onSilence={() => patternFor && edit(s => silenceVoiceInSection(s, patternFor, region.id))}
-        onSilenceAll={() => patternFor && edit(s => silenceVoiceInAll(s, patternFor))}
         onPick={id => patternFor && edit(s => setPattern(s, patternFor, region.id, id, 'section'))}
         onPickEverywhere={id => patternFor && edit(s => setPattern(s, patternFor, region.id, id, 'song'))}
       />)}

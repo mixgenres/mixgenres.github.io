@@ -64,11 +64,21 @@ export function compileNotatedScore(sheet: Sheet): NotatedScore {
                 || (pattern?.instruments?.includes('drums') || pattern?.family?.toLowerCase().includes('drum') ? `${pattern.id} ${pattern.name}` : undefined);
               const hit = notatedHit(pattern, index, native?.hitTypes?.[index] || detail?.hitTypes?.[index]);
               let value = native?.pitches?.[index];
-              const directions = native?.notations?.[index];
-              if (directions?.bodyTechnique && !(def.id === 'guitar' || def.id === 'upright-bass' || def.family === 'bowed')) throw new Error(`No body-strike renderer for ${def.id}`);
+              let directions = native?.notations?.[index];
               if (directions?.tuplet && (!Number.isInteger(directions.tuplet.actual) || directions.tuplet.actual < 1 || !Number.isInteger(directions.tuplet.normal) || directions.tuplet.normal < 1)) throw new Error('Invalid written tuplet');
               if (directions?.string !== undefined && (!Number.isInteger(directions.string) || directions.string < 1)) throw new Error('Invalid written string number');
               if (directions?.fret !== undefined && (!Number.isInteger(directions.fret) || directions.fret < 0)) throw new Error('Invalid written fret');
+              // A pattern can move between instruments in the free-form
+              // editor. Keep its playable attack and omit notation mechanics
+              // that the selected instrument cannot perform.
+              if (directions?.bodyTechnique && !(def.id === 'guitar' || def.id === 'upright-bass' || def.family === 'bowed')) {
+                const { bodyTechnique: _unsupportedBody, ...playableDirections } = directions;
+                directions = playableDirections;
+              }
+              if (directions?.string !== undefined && !rules.openStrings?.[directions.string - 1]) {
+                const { string: _unsupportedString, fret: _unsupportedFret, ...playableDirections } = directions;
+                directions = playableDirections;
+              }
               if (directions?.string && directions.fret !== undefined) {
                 const string = rules.openStrings?.[directions.string-1];
                 if (!string) throw new Error(`No authored tuning for ${def.id} string ${directions.string}`);

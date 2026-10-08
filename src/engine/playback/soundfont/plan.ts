@@ -6,6 +6,7 @@ import { resolveTrackSound } from '../trackSound';
 import { resolveSampleGesture } from './gestures';
 import { patchForInstrument, NYLON_PATCH, STEEL_PATCH, SAMPLED_KIT_KEYS, type BankId, type SamplePatch } from './presets';
 import { SOUNDFONT_RELEASE_RESERVE } from './release';
+import { PERCUSSION_SAMPLE_KEYS } from './percussion';
 
 export { SOUNDFONT_RELEASE_RESERVE as SAMPLE_RELEASE_RESERVE } from './release';
 
@@ -162,14 +163,9 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
 }
 
 function patchForProgram(program: number, pack: BankId): SamplePatch { return { bank:0, program, drum:false, pack }; }
-const DRUM_KEYS: Record<string, [number,number,number]> = {
-  palmas:[39,39,39], 'hand-percussion':[39,54,69], 'foot-stomp':[35,36,37], cajon:[36,38,37], zapateado:[36,37,76],
-  castanets:[75,76,77], congas:[64,63,62], bongos:[61,60,60], cuica:[78,79,79], cowbell:[56,56,56], agogo:[67,68,68],
-  claves:[75,75,75], woodblock:[76,77,77], triangle:[80,81,81], maracas:[70,70,70], shaker:[70,69,70], guiro:[73,74,74], guira:[73,74,74], guacharaca:[73,74,74],
-  cabasa:[69,69,69], tambourine:[54,54,54], timbales:[65,66,37], gongs:[51,49,57], kane:[53,51,81], bones:[75,76,77], dikanza:[73,74,74], washboard:[73,74,74],
-};
 function percussionKey(id: string, midi: number, source: {low:number;mid:number;high:number}, action: string) {
-  const keys = DRUM_KEYS[id] ?? [45,47,50];
+  const keys = PERCUSSION_SAMPLE_KEYS[id];
+  if (!keys) throw new Error(`No explicit SoundFont rhythm mapping for ${id}`);
   if (id==='congas') return /slap|mute|heel/.test(action) ? 62 : /tumba/.test(action) ? 64 : 63;
   return keys[midi===source.low ? 0 : midi===source.high ? 2 : 1];
 }

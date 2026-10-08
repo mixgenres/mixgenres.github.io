@@ -32,7 +32,8 @@ const STYLE_DESCRIPTIONS: Record<string, string> = {
   rumba: 'A syncopated dance groove led by continuous abanico strum, moving bass, and lively hand percussion.',
   'tonas-martinetes': 'Unaccompanied cante with free breathing and stark modal lines; do not impose a fixed compás or ensemble pulse.',
   taranta: 'Free-rhythm cante with an expressive guitar salida, flexible pauses, and a modal response and cadence.',
-  'granaina-malaguena': 'Granaína and Malagueña share free cante space here but need their own guitar cadences and harmonic color.',
+  granaina: 'Free-time cante and guitar exchange open phrases, bright upper-register falsetas, and a Granada-style cadence.',
+  malaguena: 'Free-time cante leads; the guitar answers with spacious arpeggios and a measured Andalusian cadence.',
   guajira: 'A bright major-key 12-count palo with a Cuban-derived lilt, guitar strums, and a long refrain.',
   farruca: 'A minor-mode duple dance palo led by a firm guitar ostinato, measured footwork, and a dramatic cierre.',
   sevillanas: 'A dance in four linked coplas; each cycles through its refrain and closes with a clear remate.',
@@ -53,7 +54,8 @@ const STYLE_PATTERNS: Record<string, string[]> = {
   rumba: ['Abanico strum', 'Syncopated bass', 'Cajón groove', 'Guitar hook'],
   'tonas-martinetes': ['Free cante', 'Martinete line', 'Breath cadence'],
   taranta: ['Free cante', 'Taranta falseta', 'Rubato response', 'Modal cadence'],
-  'granaina-malaguena': ['Free cante', 'Upper falseta', 'Granaína cadence', 'Malagueña cadence'],
+  granaina: ['Free cante', 'Upper falseta', 'Granada cadence'],
+  malaguena: ['Free cante', 'Arpeggio answer', 'Andalusian cadence'],
   guajira: ['Guajira compás', 'Habanera sway', 'Major refrain', 'Rasgueado'],
   farruca: ['Minor ostinato', 'Duple compás', 'Footwork accents', 'Cierre'],
   sevillanas: ['3/4 compás', 'Four coplas', 'Refrain strum', 'Final desplante'],
@@ -123,6 +125,49 @@ function flamencoLead(id: string): AuthoredCell[] {
         sectionUsage: ['solo'], difficulty: 2, supportedEnergy: [2, 3, 4],
         description: 'Original two-bar falseta response study: an even picado line descends to the low thumb and resolves in a compact rasgueado chord.' }),
   ];
+  if (id === 'taranta') return [
+    guitar('Taranta salida arpeggio', [0, .75, 1.5, 2.5, 3.5],
+      ['thumb', 'fingerstyle', 'fingerstyle', 'fingerstyle', 'rasgueado'],
+      { durations: [1, .55, .7, .5, .45], accents: [1, .42, .62, .48, .88],
+        pitches: [pitch(1, 45), pitch(3, 57), pitch(5, 64), pitch(3, 65), chord],
+        notations: ['p', 'i', 'a', 'm', 'i'].map(fingering => ({ fingering })),
+        sectionUsage: ['intro', 'verse'], difficulty: 2,
+        description: 'Original free-time salida study: let the bass note ring, roll the upper arpeggio without a metronomic pulse, then wait for the singer before the cadence.' }),
+    guitar('Taranta falseta response', [0, .5, 1.25, 2, 3, 4],
+      ['picado', 'picado', 'fingerstyle', 'thumb', 'rasgueado', 'rasgueado'],
+      { durations: [.3, .28, .65, .8, .35, .5], accents: [1, .62, .5, .8, .72, 1],
+        pitches: [pitch(1, 64), pitch(2, 65), pitch(4, 67), pitch(1, 45), chord, chord],
+        sectionUsage: ['solo'], difficulty: 3,
+        description: 'Original free-time response study: shape a short upper-register answer, return to the low thumb, and settle the cadence with two unhurried chord attacks.' }),
+  ];
+  if (id === 'granaina') return [
+    guitar('Granaína upper falseta', [0, .5, 1.25, 2, 3, 4],
+      ['thumb', 'fingerstyle', 'fingerstyle', 'picado', 'picado', 'rasgueado'],
+      { durations: [.9, .45, .55, .3, .35, .55], accents: [1, .42, .58, .72, .82, .95],
+        pitches: [pitch(1, 45), pitch(3, 64), pitch(5, 67), pitch(6, 69), pitch(5, 67), chord],
+        sectionUsage: ['solo'], difficulty: 3,
+        description: 'Original free-time falseta study: rise into the upper register, answer with a short picado turn, and leave a full breath before the cadence.' }),
+    guitar('Granaína cadence answer', [0, 1, 2, 3.5],
+      ['thumb', 'fingerstyle', 'rasgueado', 'rasgueado'],
+      { durations: [.8, .55, .4, .65], accents: [1, .5, .76, 1],
+        pitches: [pitch(1, 45), pitch(5, 64), chord, chord], sectionUsage: ['verse', 'cierre'], difficulty: 2,
+        description: 'Original free-time cadence study: place the bass and upper answer by ear, then broaden the final two chords into the singer’s release.' }),
+  ];
+  if (id === 'malaguena') return [
+    guitar('Malagueña opening arpeggio', [0, .75, 1.5, 2.5, 3.5],
+      ['thumb', 'fingerstyle', 'fingerstyle', 'fingerstyle', 'thumb'],
+      { durations: [1, .6, .7, .6, .8], accents: [1, .4, .54, .48, .76],
+        pitches: [pitch(1, 45), pitch(3, 57), pitch(5, 64), pitch(3, 67), pitch(1, 48)],
+        notations: ['p', 'i', 'a', 'm', 'p'].map(fingering => ({ fingering })),
+        sectionUsage: ['intro', 'verse'], difficulty: 2,
+        description: 'Original free-time opening study: sustain the bass beneath a broad arpeggio and let the singer determine the spacing of the next phrase.' }),
+    guitar('Malagueña cadence falseta', [0, .5, 1, 2, 3, 4],
+      ['picado', 'picado', 'fingerstyle', 'thumb', 'rasgueado', 'rasgueado'],
+      { durations: [.28, .32, .6, .8, .35, .65], accents: [1, .65, .5, .78, .72, 1],
+        pitches: [pitch(3, 64), pitch(5, 67), pitch(4, 65), pitch(1, 45), chord, chord],
+        sectionUsage: ['solo', 'cierre'], difficulty: 3,
+        description: 'Original free-time falseta study: answer the voice with a compact rising line, return to the bass, and reserve the cadence for the singer’s final release.' }),
+  ];
   if (id === 'bulerias') return [
     guitar('Bulerías llamada and contratiempo rasgueado', [0, .5, 1, 1.5, 2.5, 3, 3.5, 4, 5],
       ['rasgueado', 'picado', 'rasgueado', 'rasgueado', 'alzapua', 'rasgueado', 'rasgueado', 'picado', 'rasgueado'],
@@ -164,7 +209,7 @@ function flamencoLead(id: string): AuthoredCell[] {
       { durations: Array(8).fill(.24), accents: [.82, .45, .96, .48, .9, .45, 1, .52], pitches: Array(8).fill(chord),
         notations: [0,1,2,3,4,5,6,7].map(i => ({ stroke: i % 2 ? 'up' : 'down', ...(i === 4 ? { bodyTechnique: 'golpe' as const } : {}) })) }),
   ];
-  if (id === 'taranta' || id === 'granaina-malaguena' || id === 'tonas-martinetes') return [];
+  if (id === 'tonas-martinetes') return [];
   if (id === 'farruca') return [
     guitar('Farruca minor duple thumb bass, arpeggio and firm cierre', [0, .75, 1.5, 2, 2.75, 3.5],
       ['thumb', 'fingerstyle', 'rasgueado', 'picado', 'rasgueado', 'alzapua'],
@@ -194,21 +239,30 @@ function flamencoLead(id: string): AuthoredCell[] {
 
 /** Give each palo its own compás and let solo guitar references stay exposed. */
 export function authorFlamencoArrangements(input: GenrePackInput): GenrePackInput {
-  return { ...input, styles: input.styles.map(style => {
+  const expanded = input.styles.flatMap(style => style.id === 'granaina-malaguena'
+    ? [
+      { ...style, id: 'granaina', name: 'Granaína', meter: '4/4', tempo: [56, 72] as [number, number],
+        groove: { ...style.groove, microtimingFeel: 'rubato' as const, humanizeJitterMs: 10 },
+        form: [{ label: 'salida', bars: 8 }, { label: 'cante', bars: 24 }, { label: 'falseta', bars: 16, soloInstrumentId: 'guitar', soloMode: 'accompanied' as const }, { label: 'cante', bars: 24 }, { label: 'cadence', bars: 8 }] },
+      { ...style, id: 'malaguena', name: 'Malagueña', meter: '4/4', tempo: [52, 68] as [number, number],
+        groove: { ...style.groove, microtimingFeel: 'rubato' as const, humanizeJitterMs: 12 },
+        form: [{ label: 'salida', bars: 8 }, { label: 'cante', bars: 24 }, { label: 'guitar answer', bars: 12 }, { label: 'cante', bars: 24 }, { label: 'cadence', bars: 8 }] },
+    ]
+    : [style]);
+  return { ...input, styles: expanded.map(style => {
     const id = style.id;
     const curated = { ...style, description: STYLE_DESCRIPTIONS[id] ?? style.description,
       patterns: STYLE_PATTERNS[id] ?? style.patterns };
     const lead = flamencoLead(id);
     const cells = style.cells.filter(cell => !(lead.length && !cell.phraseEnd && cell.role === 'lead' && cell.instruments?.includes('guitar')));
     cells.unshift(...lead);
-    const soloGuitar = ['taranta', 'granaina-malaguena'].includes(id);
+    const freeCante = ['taranta', 'granaina', 'malaguena'].includes(id);
     const soleVoice = ['tonas-martinetes'].includes(id);
-    if (soloGuitar || soleVoice) {
-      cells.splice(0, cells.length, ...cells.filter(cell => cell.role === 'lead' && cell.instruments?.some(instrument =>
-        soloGuitar ? instrument === 'guitar' : instrument === 'voice')));
+    if (freeCante || soleVoice) {
+      cells.splice(0, cells.length, ...(freeCante ? lead : cells.filter(cell => cell.role === 'lead' && cell.instruments?.includes('voice'))));
       const labeledCells = cells.map(cell => ({ ...cell, shortName: flamencoCellLabel(id, cell) }));
-      if (soloGuitar) return { ...curated, roles: { lead: ['guitar'] }, cells: labeledCells,
-        form: style.form.map(section => ({ ...section, instruments: ['guitar'], leadInstrumentId: 'guitar' })) };
+      if (freeCante) return { ...curated, roles: { lead: ['voice', 'guitar'] }, cells: labeledCells,
+        form: style.form.map(section => ({ ...section, instruments: ['voice', 'guitar'], leadInstrumentId: 'guitar' })) };
       return { ...curated, roles: { lead: ['voice'] }, cells: labeledCells,
         form: style.form.map(section => ({ ...section, instruments: ['voice'], leadInstrumentId: 'voice' })) };
     }

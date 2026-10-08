@@ -325,14 +325,26 @@ export const STYLE_REFERENCES = {
       "rubato without conventional groove"
     ]
   },
-  "flamenco::granaina-malaguena": {
-    "credit": "Camarón",
+  "flamenco::granaina": {
+    "credit": "Camarón de la Isla",
     "recording": "“Que he dejao de quererte”",
     "qualities": [
-      "Free cante",
+      "Free-time cante",
       "long melismas",
+      "upper-register guitar falsetas",
       "flexible cadence placement",
-      "guitar follows singer rather than grid"
+      "guitar follows singer rather than a bar grid"
+    ]
+  },
+  "flamenco::malaguena": {
+    "credit": "Enrique Morente",
+    "recording": "“Malagueñas”",
+    "qualities": [
+      "Free-time cante",
+      "solemn, sustained vocal phrases",
+      "spacious guitar arpeggios",
+      "measured Andalusian cadence",
+      "guitar answers rather than marks a fixed cycle"
     ]
   },
   "flamenco::guajira": {

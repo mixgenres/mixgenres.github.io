@@ -198,8 +198,8 @@ test('authored flamenco fingers and simultaneous body strokes reach score and Mu
   const solea = compileSongPipeline(makeSheet('flamenco', 'flamenco-solea'));
   const tremolo = solea.interpretation.notes.filter(n => n.technique === 'tremolo');
   assert.ok(tremolo.length >= 5);
-  assert.deepEqual(tremolo.slice(1, 6).map(n => n.playback.musicianNotation?.fingering), ['p', 'i', 'a', 'm', 'i'],
-    'the low thumb bass note precedes the five-note tremolo picking cycle');
+  assert.deepEqual(tremolo.slice(0, 5).map(n => n.playback.musicianNotation?.fingering), ['p', 'i', 'a', 'm', 'i'],
+    'the low thumb bass note begins the five-note tremolo picking cycle');
   assert.ok(tremolo[0].midi < tremolo[1].midi);
   assert.ok(exportMusicXml(solea.interpretation).includes('<actual-notes>5</actual-notes>'));
 });
@@ -242,9 +242,13 @@ test('an unfamiliar pattern technique is retained in notation and adapted to the
   assert.notEqual(gestureName, 'rasgueado', 'an unavailable source action cannot leak into the piano renderer');
 });
 
-test('written mechanics reject unsupported body companions and invalid tuplet ratios', () => {
-  assert.throws(() => writtenFixture('piano', [{ kind: 'attack', position: 0, duration: 1,
-    pitch: { midi: 60 }, notation: { bodyTechnique: 'golpe' } }]), /No body-strike renderer/);
+test('written mechanics adapt unsupported body companions and reject invalid tuplet ratios', () => {
+  const adapted = writtenFixture('piano', [{ kind: 'attack', position: 0, duration: 1,
+    pitch: { midi: 60 }, notation: { bodyTechnique: 'golpe' } }]);
+  const written = adapted.notation.sections.flatMap(section => Object.values(section.cells))
+    .flatMap(cell => cell.bars).flatMap(bar => bar.attacks)[0];
+  assert.ok(adapted.performance.notes.length, 'the piano still plays the authored note');
+  assert.equal(written.notation?.bodyTechnique, undefined, 'unsupported body mechanics are omitted from the piano notation');
   assert.throws(() => writtenFixture('guitar', [{ kind: 'attack', position: 0, duration: 1,
     pitch: { midi: 60 }, notation: { tuplet: { actual: 0, normal: 4 } } }]), /Invalid written tuplet/);
 });

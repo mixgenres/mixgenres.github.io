@@ -1,3 +1,5 @@
+import { PERCUSSION_KIT_IDS, PERCUSSION_SAMPLE_KEYS } from './percussion';
+
 /** Zero-based General MIDI programs. World instruments with no sampled match
  * use an explicit family approximation, exposed in the bank coverage report. */
 export const SOUNDFONT_VERSION = 'mixgenres-sf-v4';
@@ -51,7 +53,12 @@ export function patchForInstrument(id: string, percussion = false): SamplePatch 
   if (id === 'bass') return {bank:64,program:33,drum:false,pack:'bass'};
   if (id === 'bandoneon') return {bank:73,program:0,drum:false,pack:'bandoneon'};
   if (id === 'upright-bass') return {bank:64,program:0,drum:false,pack:'upright'};
-  if (percussion) return { bank: 0, program: 0, drum: true, pack: 'percussion' };
+  if (percussion) {
+    if (!PERCUSSION_KIT_IDS.has(id) && !PERCUSSION_SAMPLE_KEYS[id]) {
+      throw new Error(`No explicit SoundFont percussion mapping for ${id}`);
+    }
+    return { bank: 0, program: 0, drum: true, pack: 'percussion' };
+  }
   const program = ids[id];
   if (program === undefined) throw new Error(`No SoundFont patch mapping for ${id}`);
   const pack = (Object.entries(BANK_PROGRAMS) as Array<[BankId, readonly number[]]>).find(([, programs]) => programs.includes(program))?.[0];

@@ -5,7 +5,7 @@ import { Glyph } from './Glyph';
 import { GENRE_PLATES, plateFor } from './worlds';
 import { INSTRUMENT_CATALOG, FAMILY_LABELS, FAMILY_ORDER, instrument } from '../engine/lookup/instruments';
 import { ALL_PATTERNS, GENRE_WORLDS_BY_ID, cleanPatternName, FEEL_ORDER, FEEL_LABELS, feelsForPattern, PatternFeel } from '../data/genres';
-import { Voice, toBar, getGenreForm, parseChord } from '../engine/sheet/index.ts';
+import { Voice, affinity, roleForInstrument, toBar, getGenreForm, parseChord } from '../engine/sheet/index.ts';
 import { BAR_CHOICES } from '../data/barChoices';
 import { FEELS } from '../data/tempoFeels';
 import { genreCategoryId } from '../data/genreCategories';
@@ -112,20 +112,12 @@ export function WorldSheet({
 /* ========================================================================== */
 export function InstrumentSheet({
   open, onClose, current, onPick, onPickWithScope, onRemove,
-  onSilencePart, onPlayPart, isSilentPart,
-  onSilenceAll, onPlayAll, isSilentAll,
   title = 'Instruments', sectionKind,
 }: {
   open: boolean; onClose: () => void; current?: string;
   onPick?: (id: string) => void;
   onPickWithScope?: (id: string, scope: 'section' | 'song') => void;
   onRemove?: () => void;
-  onSilencePart?: () => void;
-  onPlayPart?: () => void;
-  isSilentPart?: boolean;
-  onSilenceAll?: () => void;
-  onPlayAll?: () => void;
-  isSilentAll?: boolean;
   title?: string;
   sectionKind?: string;
 }) {
@@ -150,66 +142,11 @@ export function InstrumentSheet({
   return (
     <Sheet open={open} onClose={onClose} title={title} kicker={sectionKind ? `This part · ${sectionKind}` : undefined}>
 
-      {(onRemove || onSilenceAll || onPlayAll || onSilencePart || onPlayPart) && (
+      {onRemove && (
         <div className="flex items-center justify-between flex-wrap gap-2 py-3.5 mb-4" style={{ borderTop: '1px solid color-mix(in srgb, var(--ink) 18%, transparent)' }}>
-          {(onSilencePart || onSilenceAll || onPlayPart || onPlayAll) && (
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs opacity-75">silent in</span>
-              <div className="flex items-center gap-1.5">
-                {(onSilencePart || onPlayPart) && (
-                  <Chip
-                    active={Boolean(isSilentPart && !isSilentAll)}
-                    onClick={() => {
-                      if (isSilentPart && !isSilentAll) {
-                        onPlayPart?.();
-                      } else {
-                        if (isSilentAll) onPlayAll?.();
-                        onSilencePart?.();
-                      }
-                      onClose();
-                    }}
-                  >
-                    part
-                  </Chip>
-                )}
-                {(onSilenceAll || onPlayAll) && (
-                  <Chip
-                    active={Boolean(isSilentAll)}
-                    onClick={() => {
-                      if (isSilentAll) {
-                        onPlayAll?.();
-                      } else {
-                        onSilenceAll?.();
-                      }
-                      onClose();
-                    }}
-                  >
-                    song
-                  </Chip>
-                )}
-                {(isSilentPart || isSilentAll) && onPlayAll && (
-                  <>
-                    <span className="opacity-35 select-none text-xs mx-0.5">|</span>
-                    <Chip
-                      onClick={() => {
-                        onPlayAll();
-                        onClose();
-                      }}
-                    >
-                      on for song
-                    </Chip>
-                  </>
-                )}
-              </div>
-            </div>
-          )}
-          {onRemove && (
-            <Chip onClick={() => { onRemove(); onClose(); }}>
-              <span className="text-red-600 font-semibold">
-                Delete instrument
-              </span>
-            </Chip>
-          )}
+          <Chip onClick={() => { onRemove(); onClose(); }}>
+            <span className="text-red-600 font-semibold">Delete instrument</span>
+          </Chip>
         </div>
       )}
       {onPickWithScope && (
@@ -263,6 +200,114 @@ export function InstrumentSheet({
   );
 }
 
+const ADD_ROLE_OPTIONS = [
+  ['melody', 'Melody'], ['lead', 'Lead'], ['harmony', 'Harmony'], ['bass', 'Bass'],
+  ['pulse', 'Pulse'], ['percussion', 'Percussion'], ['texture', 'Texture'], ['voice', 'Voice'], ['counterline', 'Counterline'],
+] as const;
+
+/** Add a part with an audible job and a pattern picked before it enters the song. */
+export function AddInstrumentSheet({
+  open, onClose, worldId, styleId, sectionKind, onAdd,
+}: {
+  open: boolean; onClose: () => void; worldId: string; styleId?: string; sectionKind?: string;
+  onAdd: (instrumentId: string, role: string, patternId: string, scope: 'section' | 'song') => void;
+}) {
+  const [query, setQuery] = useState('');
+  const [instrumentId, setInstrumentId] = useState<string | null>(null);
+  const [role, setRole] = useState('');
+  const [patternId, setPatternId] = useState('');
+  const [scope, setScope] = useState<'section' | 'song'>('song');
+  const [patternScope, setPatternScope] = useState<'recommended' | 'genre' | 'all'>('recommended');
+  const [patternQuery, setPatternQuery] = useState('');
+  const filtered = useMemo(() => INSTRUMENT_CATALOG
+    .filter(item => item.id !== 'silence' && (!query.trim()
+      || item.name.toLowerCase().includes(query.trim().toLowerCase())))
+    .sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })), [query]);
+  const selectedInstrument = instrumentId ? INSTRUMENT_CATALOG.find(item => item.id === instrumentId) : undefined;
+  const effectiveRole = role || (instrumentId ? roleForInstrument(instrumentId) : '');
+  const voice = selectedInstrument ? {
+    id: 'new-instrument-preview', instrumentId: selectedInstrument.id, name: selectedInstrument.name,
+    instrument: selectedInstrument.name, role: effectiveRole, kind: selectedInstrument.id,
+    muted: false, volume: 0.85, lensIds: [],
+  } as Voice : null;
+  const rankedPatterns = useMemo(() => {
+    if (!voice) return [];
+    return ALL_PATTERNS.filter(pattern => pattern.enabled !== false)
+      .map(pattern => ({ pattern, score: affinity(pattern.id, voice, worldId, styleId) }))
+      .filter(item => Number.isFinite(item.score))
+      .filter(item => patternScope !== 'genre' || item.pattern.worldId === worldId)
+      .filter(item => !patternQuery.trim() || [item.pattern.name, item.pattern.family, item.pattern.description,
+        ...item.pattern.tags].some(value => value.toLowerCase().includes(patternQuery.trim().toLowerCase())))
+      .sort((a, b) => patternScope === 'all'
+        ? a.pattern.name.localeCompare(b.pattern.name, undefined, { sensitivity: 'base' })
+        : b.score - a.score);
+  }, [voice?.instrumentId, effectiveRole, worldId, styleId, patternScope, patternQuery]);
+  const patterns = rankedPatterns.map(item => item.pattern);
+  const selectedPatternId = patterns.some(pattern => pattern.id === patternId) ? patternId : patterns[0]?.id ?? '';
+
+  return <Sheet open={open} onClose={onClose} title="Add an instrument" kicker={sectionKind ? `Build a part · ${sectionKind}` : 'Build a new part'}>
+    <div className="micro mb-2">1. Choose an instrument</div>
+    <input value={query} onChange={event => setQuery(event.target.value)} placeholder="Search instruments…"
+      className="w-full mb-3" style={{ background: 'transparent', padding: '6px 0', fontSize: 15,
+        borderBottom: '1px solid color-mix(in srgb, var(--ink) 25%, transparent)', outline: 'none' }} />
+    <div className="flex flex-wrap gap-1.5 mb-4 overflow-y-auto" style={{ maxHeight: 180 }}>
+      {filtered.map(item => <Chip key={item.id} active={item.id === instrumentId}
+        onClick={() => { setInstrumentId(item.id); setRole(roleForInstrument(item.id)); setPatternId(''); }}>
+        {item.name}
+      </Chip>)}
+      {!filtered.length && <div className="micro py-2">No instruments match “{query.trim()}”.</div>}
+    </div>
+
+    {selectedInstrument && <>
+      <div className="micro mb-2">2. Give it a role</div>
+      <div className="flex flex-wrap gap-1.5 mb-4">
+        {ADD_ROLE_OPTIONS.map(([id, label]) => <Chip key={id} active={effectiveRole === id}
+          onClick={() => { setRole(id); setPatternId(''); }}>{label}</Chip>)}
+      </div>
+
+      <div className="micro mb-2">3. Pick a pattern</div>
+      <div className="flex flex-wrap gap-1.5 mb-2">
+        <Chip active={patternScope === 'recommended'} onClick={() => setPatternScope('recommended')}>Recommended</Chip>
+        <Chip active={patternScope === 'genre'} onClick={() => setPatternScope('genre')}>{plateFor(worldId).short}</Chip>
+        <Chip active={patternScope === 'all'} onClick={() => setPatternScope('all')}>Every genre</Chip>
+      </div>
+      <input value={patternQuery} onChange={event => setPatternQuery(event.target.value)} placeholder="Search any pattern…"
+        className="w-full mb-2" style={{ background: 'transparent', padding: '6px 0', fontSize: 14,
+          borderBottom: '1px solid color-mix(in srgb, var(--ink) 25%, transparent)', outline: 'none' }} />
+      <div className="flex flex-col mb-4 overflow-y-auto" style={{ borderTop: '1px solid color-mix(in srgb, var(--ink) 14%, transparent)', maxHeight: 280 }}>
+        {patterns.map(pattern => <button key={pattern.id} type="button" onClick={() => setPatternId(pattern.id)}
+          className="text-left py-2.5 flex items-center gap-2.5 w-full"
+          style={{ borderBottom: '1px solid color-mix(in srgb, var(--ink) 12%, transparent)',
+            background: selectedPatternId === pattern.id ? 'color-mix(in srgb, var(--ink) 7%, transparent)' : 'transparent' }}>
+          <span style={{ width: 4, alignSelf: 'stretch', background: plateFor(worldId).signal, opacity: selectedPatternId === pattern.id ? 1 : .45 }} />
+          <span className="shrink-0" style={{ flex: '0 0 76px' }}><Glyph {...previewOf(pattern)} height={22} /></span>
+          <span className="min-w-0 flex-1">
+            <span className="truncate block" style={{ fontSize: 14, fontWeight: selectedPatternId === pattern.id ? 600 : 400 }}>
+              {cleanPatternName(pattern.name, pattern.shortName)}
+            </span>
+            <span className="micro truncate block">{pattern.description}</span>
+          </span>
+        </button>)}
+        {!patterns.length && <div className="micro py-3">No patterns match that search.</div>}
+      </div>
+
+      <div className="micro mb-2">Add it to</div>
+      <div className="flex gap-1.5 mb-4">
+        <Chip active={scope === 'song'} onClick={() => setScope('song')}>Whole song</Chip>
+        <Chip active={scope === 'section'} onClick={() => setScope('section')}>{sectionKind ? `This part (${sectionKind})` : 'This part'}</Chip>
+      </div>
+      <button type="button" disabled={!selectedPatternId} onClick={() => {
+        if (!instrumentId || !selectedPatternId) return;
+        onAdd(instrumentId, effectiveRole, selectedPatternId, scope);
+        onClose();
+      }} className="w-full py-2.5 font-semibold text-sm disabled:opacity-40 cursor-pointer"
+        style={{ color: 'var(--ground)', background: 'var(--ink)', border: 'none' }}>
+        Add {selectedInstrument.name} · {ADD_ROLE_OPTIONS.find(item => item[0] === effectiveRole)?.[1] ?? effectiveRole}
+      </button>
+    </>}
+  </Sheet>;
+}
+
 /* ========================================================================== */
 /*  Patterns — chosen by shape. Nothing here is locked to an instrument.       */
 /* ========================================================================== */
@@ -273,15 +318,14 @@ function previewOf(p: { onsetGrid: number[]; accentProfile?: number[]; subdivisi
 }
 
 export function PatternSheet({
-  open, onClose, voice, worldId, current, onPick, onPickEverywhere, onSilence, onSilenceAll, isSilentAll,
+  open, onClose, voice, worldId, styleId, current, onPick, onPickEverywhere,
 }: {
-  open: boolean; onClose: () => void; voice: Voice | null; worldId: string;
+  open: boolean; onClose: () => void; voice: Voice | null; worldId: string; styleId?: string;
   current?: string; onPick: (id: string) => void; onPickEverywhere: (id: string) => void;
-  onSilence?: () => void; onSilenceAll?: () => void; isSilentAll?: boolean;
 }) {
   const [scope, setScope] = useState<'fits' | 'world' | 'all'>('fits');
   const [q, setQ] = useState('');
-  const [everywhere, setEverywhere] = useState(false);
+  const [applyToSong, setApplyToSong] = useState(false);
   const [feel, setFeel] = useState<PatternFeel | null>(null);
   const [category, setCategory] = useState<string | null>(null);
 
@@ -314,7 +358,9 @@ export function PatternSheet({
         p.family.toLowerCase().includes(s) ||
         p.tags.some(t => t.toLowerCase().includes(s)));
     }
-    if (scope === 'fits' || scope === 'all') {
+    if (scope === 'fits' && voice) {
+      items = [...items].sort((a, b) => affinity(b.id, voice, worldId, styleId) - affinity(a.id, voice, worldId, styleId));
+    } else if (scope === 'fits' || scope === 'all') {
       items = [...items].sort((a, b) => {
         const ga = plateFor(a.worldId).short || GENRE_WORLDS_BY_ID[a.worldId]?.name || a.worldId;
         const gb = plateFor(b.worldId).short || GENRE_WORLDS_BY_ID[b.worldId]?.name || b.worldId;
@@ -326,7 +372,7 @@ export function PatternSheet({
       items = [...items].sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
     }
     return items;
-  }, [scope, feel, category, q, voice, worldId]);
+  }, [scope, feel, category, q, voice, worldId, styleId]);
 
   return (
     <Sheet
@@ -334,34 +380,10 @@ export function PatternSheet({
       onClose={onClose}
       title="Rhythms"
     >
-      {(onSilence || onSilenceAll) && (
-        <div className="mb-3.5 pb-2.5 flex items-center gap-2 flex-wrap" style={{ borderBottom: '1px solid color-mix(in srgb, var(--ink) 15%, transparent)' }}>
-          <span className="text-xs opacity-75">silent in</span>
-          <div className="flex items-center gap-1.5">
-            {onSilence && (
-              <Chip
-                active={current === 'silent' && !isSilentAll}
-                onClick={() => { onSilence(); onClose(); }}
-              >
-                part
-              </Chip>
-            )}
-            {onSilenceAll && (
-              <Chip
-                active={Boolean(isSilentAll)}
-                onClick={() => { onSilenceAll(); onClose(); }}
-              >
-                song
-              </Chip>
-            )}
-          </div>
-        </div>
-      )}
-
       <div className="flex items-center gap-1.5 mb-3 flex-wrap">
-        <Chip active={scope === 'fits'} onClick={() => setScope('fits')}>Suits this instrument</Chip>
-        <Chip active={scope === 'world'} onClick={() => setScope('world')}>This genre</Chip>
-        <Chip active={scope === 'all'} onClick={() => setScope('all')}>Everything</Chip>
+        <Chip active={scope === 'fits'} onClick={() => setScope('fits')}>Recommended</Chip>
+        <Chip active={scope === 'world'} onClick={() => setScope('world')}>{plateFor(worldId).short}</Chip>
+        <Chip active={scope === 'all'} onClick={() => setScope('all')}>Every genre</Chip>
       </div>
 
       <div className="micro mb-2">Feel</div>
@@ -396,8 +418,8 @@ export function PatternSheet({
       />
 
       <label className="flex items-center gap-2 mb-3.5 text-xs select-none cursor-pointer">
-        <input type="checkbox" checked={everywhere} onChange={e => setEverywhere(e.target.checked)} />
-        <span>Apply to all parts</span>
+        <input type="checkbox" checked={applyToSong} onChange={e => setApplyToSong(e.target.checked)} />
+        <span>Use in every song section</span>
       </label>
 
       {list.length === 0 && (
@@ -446,7 +468,7 @@ export function PatternSheet({
                 </div>
               )}
               <button
-                onClick={() => { (everywhere ? onPickEverywhere : onPick)(p.id); onClose(); }}
+                onClick={() => { (applyToSong ? onPickEverywhere : onPick)(p.id); onClose(); }}
                 className="text-left py-2.5 flex items-center gap-2.5 sm:gap-3 w-full overflow-hidden"
                 style={{ borderTop: showGenreHeader ? 'none' : '1px solid color-mix(in srgb, var(--ink) 12%, transparent)' }}
               >
@@ -803,7 +825,6 @@ export function ChordSheet({
 export function SectionSheet({
   open, onClose, region, index, count, onBars, onKind, onMove, onDuplicate, onRemove,
   onNewPart,
-  onSilenceAllInSection, onPlayAllInSection,
   songFeelName, onTempoShift,
   onChords,
   onGenre,
@@ -824,7 +845,6 @@ export function SectionSheet({
   onBars: (n: number) => void; onKind: (k: string) => void; onMove: (d: number) => void;
   onDuplicate: () => void; onRemove: () => void;
   onNewPart?: () => void;
-  onSilenceAllInSection?: () => void; onPlayAllInSection?: () => void;
   songFeelName?: string; onTempoShift?: (shift?: string) => void;
   onChords?: (chords: string[]) => void;
   onGenre?: (genreId: string) => void;
@@ -1015,24 +1035,6 @@ export function SectionSheet({
         </>
       )}
 
-      {/* BAND */}
-      {(onSilenceAllInSection || onPlayAllInSection) && (
-        <>
-          <div className="micro mb-2">Band</div>
-          <div className="flex flex-wrap gap-1.5">
-            {onSilenceAllInSection && (
-              <Chip onClick={() => { onSilenceAllInSection(); onClose(); }}>
-                Silence all
-              </Chip>
-            )}
-            {onPlayAllInSection && (
-              <Chip onClick={() => { onPlayAllInSection(); onClose(); }}>
-                Play all
-              </Chip>
-            )}
-          </div>
-        </>
-      )}
     </Sheet>
   );
 }
