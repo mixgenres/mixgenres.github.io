@@ -33,6 +33,6 @@ export const sho: InstrumentDef = {
   techniques: {
     articulations: ["accent", "staccato", "legato", "tenuto"],
     techniqueMethods: ["velocity-shaped attack", "fingered chord voicing", "register coupling"],
-    playingStyles: ["folk", "pop", "world"]
+    playingStyles: ["gagaku", "Japanese traditional", "contemporary"]
   }
 };

@@ -43,7 +43,7 @@ export const bouzouki: InstrumentDef = {
       "fast octave glissandi shifts",
       "syncopated rhythmic strumming with muted strikes"
     ],
-    playingStyles: ["celtic", "greek-rebetiko", "folk", "balkan", "world"],
+    playingStyles: ["Celtic folk", "Greek rebetiko", "Balkan folk"],
     genreTechniques: {
       celtic: ["legato", "accent", "tremolo", "tenuto"],
       "greek-rebetiko": ["tremolo", "accent", "staccato"],

@@ -36,7 +36,7 @@ export const repinique: InstrumentDef = {
   techniques: {
     articulations: ["accent", "open", "ghost", "rimshot", "roll"],
     techniqueMethods: ["open head call", "rim attack", "ghosted support stroke", "rearticulated roll"],
-    playingStyles: ["samba-regional", "samba-enredo", "pagode", "genre-native performance"],
+    playingStyles: ["samba-enredo", "pagode", "batucada"],
     genreTechniques: {}
   }
 };

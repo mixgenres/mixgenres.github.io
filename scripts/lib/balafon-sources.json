@@ -1,0 +1,149 @@
+{
+  "vcslCommit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+  "samples": [
+    {
+      "file": "EthnicXylo_tradM_C#3_vl1_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_C#3_vl1_rr1_Mid.wav",
+      "sha256": "8177a3f7dedf6092df7bf216f0c83cb3bb4f0b0bd8eada67112fb541ce88bfea",
+      "key": 49,
+      "minVelocity": 1,
+      "maxVelocity": 42
+    },
+    {
+      "file": "EthnicXylo_tradM_C#3_vl2_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_C#3_vl2_rr1_Mid.wav",
+      "sha256": "2ad3726362537a27dfa0670872d77dd70e8717f4b573a8360c685b1df5e457b4",
+      "key": 49,
+      "minVelocity": 43,
+      "maxVelocity": 83
+    },
+    {
+      "file": "EthnicXylo_tradM_C#3_vl3_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_C#3_vl3_rr1_Mid.wav",
+      "sha256": "5f4d9baadf92e87b43af519e02fab1df0e7129acfdaf00989f242f4c3c96aa87",
+      "key": 49,
+      "minVelocity": 84,
+      "maxVelocity": 127
+    },
+    {
+      "file": "EthnicXylo_tradM_F3_vl1_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_F3_vl1_rr1_Mid.wav",
+      "sha256": "360a249827d34259ef73acdc210903252384fe7d7fb0cddd250c5a995d396ac3",
+      "key": 53,
+      "minVelocity": 1,
+      "maxVelocity": 42
+    },
+    {
+      "file": "EthnicXylo_tradM_F3_vl2_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_F3_vl2_rr1_Mid.wav",
+      "sha256": "1614d9afbcae4157d05e3b54facbcdb0c1b703e29ecbc3ac0d90070709664d04",
+      "key": 53,
+      "minVelocity": 43,
+      "maxVelocity": 83
+    },
+    {
+      "file": "EthnicXylo_tradM_F3_vl3_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_F3_vl3_rr1_Mid.wav",
+      "sha256": "6763439e2c2570a96814bab429e62134f1c122a799c115f6946f08b4970cacba",
+      "key": 53,
+      "minVelocity": 84,
+      "maxVelocity": 127
+    },
+    {
+      "file": "EthnicXylo_tradM_C4_vl1_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_C4_vl1_rr1_Mid.wav",
+      "sha256": "d4f587e3550eda06c81f1c8222bffc5f0fe218ecbb860f78848825caeab3b56f",
+      "key": 60,
+      "minVelocity": 1,
+      "maxVelocity": 42
+    },
+    {
+      "file": "EthnicXylo_tradM_C4_vl2_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_C4_vl2_rr1_Mid.wav",
+      "sha256": "57a9ad683fffce4c3f1deb5e03c75665176e7601ed5f629bf6f81a6f9eabf7c5",
+      "key": 60,
+      "minVelocity": 43,
+      "maxVelocity": 83
+    },
+    {
+      "file": "EthnicXylo_tradM_C4_vl3_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_C4_vl3_rr1_Mid.wav",
+      "sha256": "049c4e67f93353d5e38e29d4886a8f4af82cc40d84267ec9262eb569172e4bf5",
+      "key": 60,
+      "minVelocity": 84,
+      "maxVelocity": 127
+    },
+    {
+      "file": "EthnicXylo_tradM_F4_vl1_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_F4_vl1_rr1_Mid.wav",
+      "sha256": "08302894daabdb2732855ba08eca4140b5503f0348d0ed2b24c582f0714951b7",
+      "key": 65,
+      "minVelocity": 1,
+      "maxVelocity": 42
+    },
+    {
+      "file": "EthnicXylo_tradM_F4_vl2_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_F4_vl2_rr1_Mid.wav",
+      "sha256": "13f46593250052a14d72fb708cd855d8a2da67bbc417e4524e8f6e8afc5473f9",
+      "key": 65,
+      "minVelocity": 43,
+      "maxVelocity": 83
+    },
+    {
+      "file": "EthnicXylo_tradM_F4_vl3_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_F4_vl3_rr1_Mid.wav",
+      "sha256": "7981fcb2d43ac8413eb78c082244a10f4e720a6841eb50137028670bde44b8c7",
+      "key": 65,
+      "minVelocity": 84,
+      "maxVelocity": 127
+    },
+    {
+      "file": "EthnicXylo_tradM_C5_vl1_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_C5_vl1_rr1_Mid.wav",
+      "sha256": "9f55a74d04c66d6fd233ff5313734e272f6746578178f1e736d1a16c9c7256ae",
+      "key": 72,
+      "minVelocity": 1,
+      "maxVelocity": 42
+    },
+    {
+      "file": "EthnicXylo_tradM_C5_vl2_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_C5_vl2_rr1_Mid.wav",
+      "sha256": "ddd0ca9f4f3b43ebcc37932aa50fd7482643e6d98f55b45c78f441e8e0b18905",
+      "key": 72,
+      "minVelocity": 43,
+      "maxVelocity": 83
+    },
+    {
+      "file": "EthnicXylo_tradM_C5_vl3_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_C5_vl3_rr1_Mid.wav",
+      "sha256": "af44b4e0abd8ad91b889804b8744fc71e6556f3777e3fb1f475aedab04eb1129",
+      "key": 72,
+      "minVelocity": 84,
+      "maxVelocity": 127
+    },
+    {
+      "file": "EthnicXylo_tradM_F5_vl1_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_F5_vl1_rr1_Mid.wav",
+      "sha256": "4ffffb5e50a311814ea3db67ab537b70ad8e11aee0d0cb653e35c0820c2d2bea",
+      "key": 77,
+      "minVelocity": 1,
+      "maxVelocity": 42
+    },
+    {
+      "file": "EthnicXylo_tradM_F5_vl2_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_F5_vl2_rr1_Mid.wav",
+      "sha256": "d8eb07a8bdaae429517de4141893c2780a324b67899c5405333d633f4901a9d4",
+      "key": 77,
+      "minVelocity": 43,
+      "maxVelocity": 83
+    },
+    {
+      "file": "EthnicXylo_tradM_F5_vl3_rr1_Mid.wav",
+      "path": "Idiophones/Struck Idiophones/Balafon/Traditional Mallet/EthnicXylo_tradM_F5_vl3_rr1_Mid.wav",
+      "sha256": "28823f883231fdc81dbaca0420c7574eb1cdb8187b15eb931672ed0c165104e7",
+      "key": 77,
+      "minVelocity": 84,
+      "maxVelocity": 127
+    }
+  ]
+}

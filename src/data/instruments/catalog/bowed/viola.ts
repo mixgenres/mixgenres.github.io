@@ -41,6 +41,6 @@ export const viola: InstrumentDef = {
   techniques: {
     articulations: ["accent", "legato", "portato", "tremolo", "pizzicato"],
     techniqueMethods: ["arco", "detaché", "legato bow", "pizzicato"],
-    playingStyles: ["folk", "orchestral", "world"]
+    playingStyles: ["classical", "chamber", "orchestral", "folk"]
   }
 };

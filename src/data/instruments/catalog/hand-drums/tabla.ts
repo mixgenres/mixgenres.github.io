@@ -120,7 +120,7 @@ export const tabla: InstrumentDef = {
       "bayan wrist pressure pitch swoop",
       "ti-re-ki-te fast finger rolls"
     ],
-    playingStyles: ["hindustani-classical", "fusion", "world", "ambient"],
+    playingStyles: ["Hindustani classical", "qawwali", "Bollywood", "fusion"],
     genreTechniques: {
       "hindustani-classical": ["open", "meend", "accent", "staccato"],
       fusion: ["open", "meend", "slap"]

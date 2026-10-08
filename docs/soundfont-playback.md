@@ -6,7 +6,7 @@ SoundFont is the app's only instrument playback engine. Live playback schedules 
 
 Genre data selects instrument roles and musical techniques. The planner maps those parts to packaged presets and note events. Articulations are expressed in the score and routed to alternate patches, note lengths, bends, or controllers where the bank supports them. Tango bandoneon uses dedicated samples with separate push/pull presets built from the available recorded notes.
 
-The app packages 17 selectively built banks, about 131.5 MiB compressed. Banks load on demand. Spanish guitar, piano, bass, electric guitar, percussion, and bandoneon use dedicated material; other instruments use the closest available family preset. Some regional instruments and techniques remain approximations. A preset mapping does not prove acoustic authenticity.
+The app packages 17 selectively built banks, about 81.6 MiB compressed. Banks load on demand. Spanish guitar, piano, bass, electric guitar, bandoneon, timpani, and twelve percussion families use dedicated recordings. Other instruments use the closest available named GM tone. Some regional instruments and techniques remain approximations; a preset mapping does not prove acoustic authenticity. Unused GM programs are omitted, and every bank uses the same q6 SF3 encoding.
 
 ## Live playback and export
 

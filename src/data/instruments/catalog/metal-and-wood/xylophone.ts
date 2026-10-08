@@ -30,6 +30,6 @@ export const xylophone: InstrumentDef = {
   techniques: {
     articulations: ["accent", "staccato", "roll"],
     techniqueMethods: ["hard mallet attack", "damped note release", "alternating mallet roll"],
-    playingStyles: ["orchestral", "march", "folk", "jazz", "world"]
+    playingStyles: ["orchestral", "march", "ragtime", "concert band"]
   }
 };

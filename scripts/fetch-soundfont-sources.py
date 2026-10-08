@@ -64,6 +64,10 @@ nylon = archive_source('https://drive.google.com/uc?export=download&id=1Wib1vV4P
 steel = archive_source('https://freepats.zenvoid.org/Guitar/FSS-SteelStringGuitar/FSS-SteelStringGuitar-SF2-20200521.tar.xz',
                        'FSS-SteelStringGuitar-SF2-20200521.tar.xz',
                        'FSS-SteelStringGuitar-SF2-20200521/FSS-SteelStringGuitar-20200521.sf2', MANIFEST['sourceSha256'][2])
+jaw_harp = archive_source('https://freepats.zenvoid.org/Ethnic/JawHarp-SF2-20200606.tar.bz2',
+                          'JawHarp-SF2-20200606.tar.bz2',
+                          'JawHarp-SF2-20200606/JawHarp-20200606.sf2',
+                          'd1b45d2fb1d439a4e0be610a032cfefd68f033b8d3d73094b86031ee49961884')
 for id, url, archive, relative in [
     ('piano', 'https://freepats.zenvoid.org/Piano/SalamanderGrandPiano/SalamanderGrandPiano-SF2-V3%2B20200602.tar.xz',
      'SalamanderGrandPiano-SF2-V3+20200602.tar.xz', 'SalamanderGrandPiano-SF2-V3+20200602/SalamanderGrandPiano-V3+20200602.sf2'),
@@ -113,7 +117,21 @@ for sample in percussion_sources['samples']:
     download(f"https://raw.githubusercontent.com/sgossner/VCSL/{percussion_sources['vcslCommit']}/{path}",
              curated_vcsl / sample['file'], sample['sha256'])
 
+balafon_sources = json.loads((ROOT / 'scripts/lib/balafon-sources.json').read_text())
+balafon_dir = vcsl / 'balafon'
+balafon_dir.mkdir(exist_ok=True)
+for name, expected in MANIFEST['balafonSha256'].items():
+    path = urllib.parse.quote(f'Idiophones/Struck Idiophones/Balafon/Traditional Mallet/{name}')
+    download(f"https://raw.githubusercontent.com/sgossner/VCSL/{balafon_sources['vcslCommit']}/{path}",
+             balafon_dir / name, expected)
+
+turntable_dir = DEST / 'turntable'
+turntable_dir.mkdir(exist_ok=True)
+turntable = turntable_dir / 'Vinyl-Scratch-6.wav'
+download('https://bigsoundbank.com/UPLOAD/bwf-en/2863.wav', turntable,
+         '7a1f58bc2b52b1797febe1b6313f8c631f73b8cc6b40bb6c55bcfb53163e718c')
+
 if '--verify-only' in sys.argv:
     print('All pinned SoundFont and WAV sources match the manifests.')
 else:
-    subprocess.run(['npm', 'run', 'soundfonts:package', '--', str(general), str(nylon), str(steel), str(vcsl), str(DEST), str(muse_score)], cwd=ROOT, check=True)
+    subprocess.run(['npm', 'run', 'soundfonts:package', '--', str(general), str(nylon), str(steel), str(vcsl), str(DEST), str(muse_score), str(jaw_harp), str(turntable)], cwd=ROOT, check=True)

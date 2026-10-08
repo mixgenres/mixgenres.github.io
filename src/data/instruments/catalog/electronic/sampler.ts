@@ -31,7 +31,7 @@ export const sampler: InstrumentDef = {
   techniques: {
     articulations: ["accent", "staccato", "legato"],
     techniqueMethods: ["sample-selection attack", "one-shot transient shaping", "looped sustain and release"],
-    playingStyles: ["genre-native performance"],
+    playingStyles: ["hip-hop", "electronic", "pop", "musique concrète"],
     genreTechniques: {}
   }
 };

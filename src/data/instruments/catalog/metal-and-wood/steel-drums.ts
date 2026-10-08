@@ -31,7 +31,7 @@ export const steel_drums: InstrumentDef = {
   techniques: {
     articulations: ["accent", "staccato", "legato", "roll"],
     techniqueMethods: ["rubber-tipped mallet attack", "controlled roll reiteration", "damped note release", "register-aware voicing"],
-    playingStyles: ["soca", "calypso", "steelband", "reggae", "genre-native performance"],
+    playingStyles: ["soca", "calypso", "steelband", "reggae"],
     genreTechniques: {}
   }
 };

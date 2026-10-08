@@ -36,7 +36,7 @@ export const washboard: InstrumentDef = {
   techniques: {
     articulations: ["accent", "ghost", "brushed", "staccato"],
     techniqueMethods: ["thimble or brush scrape", "short up/down wash", "accented scrape catch", "continuous subdivision texture"],
-    playingStyles: ["zydeco", "blues", "jug-band", "country", "roots", "genre-native performance"],
+    playingStyles: ["zydeco", "jug band", "blues", "old-time"],
     genreTechniques: {}
   }
 };

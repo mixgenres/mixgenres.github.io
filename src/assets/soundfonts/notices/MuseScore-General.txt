@@ -1,0 +1,6 @@
+MuseScore_General v0.2
+Frank Wen 2000-02, Michael Cowgill 2014-17, S. Christian Collins 2018-20
+
+Released under the MIT license. Please see "MuseScore_General-License.md" for more information.
+
+Source: https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General.sf2

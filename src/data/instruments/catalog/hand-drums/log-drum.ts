@@ -41,7 +41,7 @@ export const log_drum: InstrumentDef = {
       "wooden box resonance decay",
       "alternating pitch tongue patterns"
     ],
-    playingStyles: ["african-traditional", "tribal", "cinematic", "ambient", "world"],
+    playingStyles: ["West African traditional", "ambient", "cinematic"],
     genreTechniques: {
       "african-traditional": ["accent", "staccato", "open", "roll"],
       ambient: ["open", "ghost", "staccato"]

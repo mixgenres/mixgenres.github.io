@@ -98,7 +98,7 @@ export const bata: InstrumentDef = {
       "sacred toque ostinatos",
       "muffled hand presses"
     ],
-    playingStyles: ["santeria", "rumba", "latin-jazz", "world"],
+    playingStyles: ["Santería", "Cuban rumba", "Latin jazz"],
     genreTechniques: {
       santeria: ["open", "chachá", "accent", "staccato"]
     }

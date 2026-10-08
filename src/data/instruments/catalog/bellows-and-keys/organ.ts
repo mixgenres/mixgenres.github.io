@@ -33,6 +33,6 @@ export const organ: InstrumentDef = {
   techniques: {
     articulations: ["accent", "staccato", "legato", "tenuto", "crescendo"],
     techniqueMethods: ["velocity-shaped attack", "fingered chord voicing", "register coupling"],
-    playingStyles: ["folk", "pop", "world"]
+    playingStyles: ["gospel", "church", "rock", "classical"]
   }
 };

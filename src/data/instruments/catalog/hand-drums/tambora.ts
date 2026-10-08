@@ -36,6 +36,6 @@ export const tambora: InstrumentDef = {
   techniques: {
     articulations: ["accent", "ghost", "flam", "drag", "roll"],
     techniqueMethods: ["open tone", "bass tone", "slap", "finger/hand stroke", "roll"],
-    playingStyles: ["world", "dance", "folk"]
+    playingStyles: ["merengue típico", "cumbia", "vallenato"]
   }
 };

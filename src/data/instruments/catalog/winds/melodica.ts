@@ -39,6 +39,6 @@ export const melodica: InstrumentDef = {
   techniques: {
     articulations: ["accent", "staccato", "legato", "portamento", "vibrato", "breath"],
     techniqueMethods: ["tongued attack", "legato air", "breath phrasing", "vibrato"],
-    playingStyles: ["folk", "jazz", "world"]
+    playingStyles: ["ska", "reggae", "pop"]
   }
 };

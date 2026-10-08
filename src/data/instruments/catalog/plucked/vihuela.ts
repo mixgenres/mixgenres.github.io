@@ -38,6 +38,6 @@ export const vihuela: InstrumentDef = {
   techniques: {
     articulations: ["accent", "staccato", "legato", "palm-mute"],
     techniqueMethods: ["fingerstyle", "pick", "muting", "alternating attack"],
-    playingStyles: ["folk", "pop", "world"]
+    playingStyles: ["mariachi", "son jalisciense", "ranchera", "Mexican folk"]
   }
 };

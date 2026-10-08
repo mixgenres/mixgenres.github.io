@@ -45,6 +45,6 @@ export const ocarina: InstrumentDef = {
   techniques: {
     articulations: ["accent", "staccato", "legato", "portamento", "vibrato", "breath"],
     techniqueMethods: ["tongued attack", "legato air", "breath phrasing", "vibrato"],
-    playingStyles: ["folk", "jazz", "world"]
+    playingStyles: ["Andean folk", "traditional folk", "game music"]
   }
 };

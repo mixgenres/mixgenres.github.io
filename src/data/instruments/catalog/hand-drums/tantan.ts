@@ -36,7 +36,7 @@ export const tantan: InstrumentDef = {
   techniques: {
     articulations: ["low-tone", "open", "ghost", "accent", "roll"],
     techniqueMethods: ["open low tone", "damped syncopation", "muted finger/hand stroke", "pagode bass punctuation"],
-    playingStyles: ["pagode", "samba", "partido-alto", "genre-native performance"],
+    playingStyles: ["pagode", "samba", "partido-alto"],
     genreTechniques: {}
   }
 };

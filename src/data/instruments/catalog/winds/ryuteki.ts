@@ -39,6 +39,6 @@ export const ryuteki: InstrumentDef = {
   techniques: {
     articulations: ["accent", "staccato", "legato", "portamento", "vibrato", "breath"],
     techniqueMethods: ["tongued attack", "legato air", "breath phrasing", "vibrato"],
-    playingStyles: ["folk", "jazz", "world"]
+    playingStyles: ["gagaku", "Japanese traditional"]
   }
 };

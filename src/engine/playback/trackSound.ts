@@ -32,8 +32,8 @@ export function resolveTrackSound(instrumentId: string, worldId = '', styleId = 
     : (physical?.harmonicRichness ?? 0.5) * 0.08));
   if (dialect?.drive !== undefined) drive = Math.max(drive, dialect.drive);
   return {
-    pan: new StereoFieldManager().resolveInstrumentPanNormalized(instrumentId),
-    roleGain: getRoleGainLinear(assignedRole, worldId || 'default', instrumentId, styleId),
+    pan: Math.max(0, Math.min(1, new StereoFieldManager().resolveInstrumentPanNormalized(instrumentId) + (def.acousticProfile?.pan ?? 0) * 0.5)),
+    roleGain: getRoleGainLinear(assignedRole, worldId || 'default', instrumentId, styleId) * 10 ** ((def.acousticProfile?.trim ?? 0) / 20),
     drive,
     mute: dialect?.muteType && dialect.muteType !== 'open' ? 0.82 : 0,
     variantId: variant?.id,

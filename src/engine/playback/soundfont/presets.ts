@@ -28,9 +28,9 @@ const ids: Record<string, number> = {};
 function assign(program: number, instruments: string) { for (const id of instruments.split(' ')) ids[id] = program; }
 assign(0, 'piano'); assign(4, 'rhodes'); assign(5, 'fm-ep'); assign(6, 'harpsichord'); assign(7, 'clavinet');
 assign(8, 'celeste'); assign(9, 'glockenspiel'); assign(10, 'music-box'); assign(11, 'vibraphone');
-assign(12, 'marimba balafon marimba-de-chonta gamelan-metallophone bonang'); assign(13, 'xylophone');
+assign(12, 'marimba marimba-de-chonta'); assign(13, 'xylophone');
 assign(14, 'tubular-bells'); assign(117, 'steel-drums'); assign(15, 'dulcimer santur qanun'); assign(16, 'organ');
-assign(20, 'harmonium sho khomus'); assign(21, 'accordion concertina melodica'); assign(22, 'harmonica'); assign(23, 'bandoneon');
+assign(20, 'harmonium sho'); assign(21, 'accordion concertina melodica'); assign(22, 'harmonica'); assign(23, 'bandoneon');
 assign(24, 'guitar requinto cuatro cavaquinho charango tres jarana vihuela krar');
 assign(25, 'resonator-guitar bajo-sexto'); assign(26, 'pedal-steel lap-steel');
 assign(32, 'upright-bass guitarron guembri'); assign(33, 'bass'); assign(38, 'synth-bass');
@@ -42,10 +42,10 @@ assign(64, 'soprano-sax'); assign(65, 'alto-sax'); assign(66, 'tenor-sax'); assi
 assign(68, 'oboe hichiriki'); assign(69, 'english-horn duduk'); assign(70, 'bassoon'); assign(71, 'clarinet');
 assign(72, 'piccolo'); assign(73, 'flute ney bansuri quena xiao dizi ryuteki'); assign(74, 'recorder');
 assign(75, 'pan-flute siku'); assign(77, 'shakuhachi'); assign(78, 'tin-whistle low-whistle'); assign(79, 'ocarina');
-assign(81, 'synth sampler'); assign(98, 'crystal'); assign(109, 'bagpipes uilleann-pipes'); assign(111, 'suona zurna');
+assign(81, 'synth'); assign(98, 'crystal'); assign(109, 'bagpipes uilleann-pipes'); assign(111, 'suona zurna');
 assign(104, 'sitar tanpura rudra-veena veena'); assign(105, 'banjo');
 assign(106, 'shamisen biwa oud bouzouki mandolin bandola-llanera baglama dombra setar tar');
-assign(107, 'koto gayageum guqin pipa guzheng'); assign(108, 'kalimba berimbau'); assign(120, 'turntable');
+assign(107, 'koto gayageum guqin pipa guzheng'); assign(108, 'kalimba berimbau');
 export const INSTRUMENT_PROGRAMS: Readonly<Record<string, number>> = ids;
 
 export function patchForInstrument(id: string, percussion = false): SamplePatch {
@@ -53,6 +53,11 @@ export function patchForInstrument(id: string, percussion = false): SamplePatch 
   if (id === 'bass') return {bank:64,program:33,drum:false,pack:'bass'};
   if (id === 'bandoneon') return {bank:73,program:0,drum:false,pack:'bandoneon'};
   if (id === 'upright-bass') return {bank:64,program:0,drum:false,pack:'upright'};
+  if (id === 'khomus') return {bank:66,program:22,drum:false,pack:'percussion'};
+  if (id === 'balafon') return {bank:66,program:23,drum:false,pack:'mallets'};
+  if (id === 'gamelan-metallophone' || id === 'bonang') return {bank:0,program:14,drum:false,pack:'mallets'};
+  if (id === 'sampler') return {bank:0,program:81,drum:false,pack:'electronic'};
+  if (id === 'turntable') return {bank:66,program:24,drum:false,pack:'electronic'};
   // MuseScore General's dedicated chromatic timpani patch is sampled as a
   // pitched instrument; don't route this orchestral instrument through a kit.
   if (id === 'timpani') return {bank:0,program:47,drum:false,pack:'percussion'};

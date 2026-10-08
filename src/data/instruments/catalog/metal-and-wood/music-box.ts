@@ -30,6 +30,6 @@ export const music_box: InstrumentDef = {
   techniques: {
     articulations: ["accent", "staccato", "legato"],
     techniqueMethods: ["pin-pluck transient", "mechanism-limited note sustain", "register-sensitive phrasing"],
-    playingStyles: ["music-box", "folk", "cinematic", "world"]
+    playingStyles: ["classical", "cinematic", "ambient", "children's music"]
   }
 };

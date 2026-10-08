@@ -20,7 +20,7 @@ for (const genre of Object.keys(GENRE_CONTRACTS)) {
     const params = resolveTrackSound(def.id, genre, '', 'lead');
     assert.deepEqual(resolveTrackSound(def.id, genre, '', 'lead'), params, 'resolution must not accumulate multipliers');
     assert.equal(params.pan >= 0 && params.pan <= 1, true);
-    assert.equal(params.roleGain, getRoleGainLinear('lead', genre, def.id));
+    assert.equal(params.roleGain, getRoleGainLinear('lead', genre, def.id) * 10 ** ((def.acousticProfile?.trim ?? 0) / 20));
     for (const value of [params.pan, params.drive, params.mute, params.roleGain]) assert.ok(Number.isFinite(value), `${genre}/${def.id}`);
     const preset = patchForInstrument(def.id, !!def.kit || !!def.drum || def.voicing === 'unpitched');
     assert.ok(preset.pack && Number.isInteger(preset.bank) && Number.isInteger(preset.program), `${genre}/${def.id} SoundFont assignment`);

@@ -51,6 +51,6 @@ export const xiao: InstrumentDef = {
   techniques: {
     articulations: ["accent", "staccato", "legato", "portamento", "vibrato", "breath"],
     techniqueMethods: ["tongued attack", "legato air", "breath phrasing", "vibrato"],
-    playingStyles: ["folk", "jazz", "world"]
+    playingStyles: ["Chinese traditional", "Chinese classical", "ambient"]
   }
 };

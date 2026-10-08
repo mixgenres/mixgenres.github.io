@@ -30,10 +30,10 @@ export const RECORDED_PERCUSSION_PATCHES: Readonly<Record<string,{program:number
   congas:{program:2,takes:2}, bongos:{program:4,takes:2}, darbuka:{program:6,takes:2},
   'frame-drum':{program:8,takes:2}, guiro:{program:10,takes:2}, claves:{program:12,takes:1},
   agogo:{program:13,takes:1}, cowbell:{program:14,takes:1}, shaker:{program:15,takes:2},
-  tambourine:{program:17,takes:2}, gongs:{program:19,takes:1},
+  tambourine:{program:17,takes:2}, gongs:{program:19,takes:1}, 'log-drum':{program:20,takes:3},
 };
 export const RECORDED_PERCUSSION_KEYS = new Set([
-  'congas','bongos','darbuka','frame-drum','guiro','claves','agogo','cowbell','shaker','tambourine','gongs',
+  'congas','bongos','darbuka','frame-drum','guiro','claves','agogo','cowbell','shaker','tambourine','gongs','log-drum',
 ]);
 export function recordedPercussionKey(id:string,midi:number,source:{low:number;mid:number;high:number},action:string) {
   const instrument=RECORDED_PERCUSSION_ALIASES[id]??id;
@@ -47,5 +47,6 @@ export function recordedPercussionKey(id:string,midi:number,source:{low:number;m
   if(instrument==='cowbell')return /double/.test(action)?37:/mute|choke/.test(action)?36:35;
   if(instrument==='shaker')return /up|reverse|pickup/.test(action)?36:35;
   if(instrument==='tambourine')return /up|reverse|pickup/.test(action)?36:35;
+  if(instrument==='log-drum')return high||midi>source.mid?50:47;
   return 35;
 }

@@ -30,6 +30,6 @@ export const marimba: InstrumentDef = {
   techniques: {
     articulations: ["accent", "staccato", "legato", "roll"],
     techniqueMethods: ["soft mallet attack", "hard mallet attack", "damped release", "alternating or double-stroke roll"],
-    playingStyles: ["classical", "contemporary", "latin", "jazz", "world"]
+    playingStyles: ["classical", "contemporary", "Latin American folk", "jazz"]
   }
 };

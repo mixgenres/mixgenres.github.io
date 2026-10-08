@@ -1,5 +1,5 @@
 import type { InstrumentDef } from './schema/instrument-def';
-import { pedalSteel, lapSteel, resonatorGuitar, guira, djembe, shekere, talkingDrum, balafon, qanun, ney, duduk, bansuri, tanpura, sarangi, gayageum, haegeum, janggu, gamelanMetallophone, kendang, bandolaLlanera, marimbaDeChonta } from './catalog/world-instruments';
+import { pedalSteel, lapSteel, resonatorGuitar, guira, djembe, shekere, talkingDrum, balafon, khomus, qanun, ney, duduk, bansuri, tanpura, sarangi, gayageum, haegeum, janggu, gamelanMetallophone, kendang, bandolaLlanera, marimbaDeChonta } from './catalog/world-instruments';
 
 import { bandoneon } from './catalog/bellows-and-keys/bandoneon';
 import { accordion } from './catalog/bellows-and-keys/accordion';
@@ -163,6 +163,7 @@ export const INSTRUMENT_CATALOG: InstrumentDef[] = [
   vibraphone,
   marimba,
   balafon,
+  khomus,
   marimbaDeChonta,
   gamelanMetallophone,
   music_box,
@@ -314,7 +315,6 @@ const instrumentAliases: Array<[string, string, string]> = [
   ['frame-drum','tambourine','Frame drum, modeled from the frame-percussion profile.'],
   ['guembri','bass','Gnawa low plucked lute, modeled from the bass-string profile.'],
   ['kebero','djembe','Ethiopian double-headed drum, modeled from the hand-drum profile.'],
-  ['khomus','kalimba','Jaw harp, modeled from a plucked resonator profile.'],
   ['krar','kora','Ethiopian lyre, modeled from a plucked African harp profile.'],
   ['masenqo','violin','Ethiopian one-string bowed fiddle, modeled from the bowed-string profile.'],
   ['morin-khuur','cello','Mongolian horsehead fiddle, modeled from the low bowed-string profile.'],

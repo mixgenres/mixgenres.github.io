@@ -9,7 +9,7 @@ import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { SampleRuntime } from '../src/engine/playback/soundfont/runtime';
 import { setSoundfontBankReader, loadSoundfontBank, soundfontBankStats } from '../src/engine/playback/soundfont/banks';
 import { patchForInstrument, type BankId } from '../src/engine/playback/soundfont/presets';
-import { PERCUSSION_KIT_IDS, PERCUSSION_SAMPLE_KEYS, RECORDED_PERCUSSION_ALIASES, RECORDED_PERCUSSION_KEYS, RECORDED_PERCUSSION_PATCHES } from '../src/engine/playback/soundfont/percussion';
+import { PERCUSSION_KIT_IDS, PERCUSSION_SAMPLE_KEYS, RECORDED_PERCUSSION_ALIASES, RECORDED_PERCUSSION_KEYS, RECORDED_PERCUSSION_PATCHES, recordedPercussionKey } from '../src/engine/playback/soundfont/percussion';
 import { codeForGesture } from '../src/engine/band/gestures';
 import { performanceFixture, noteFixture } from './lib/playbackFixtures';
 import { densePlaybackFixture } from './lib/densePlaybackFixture';
@@ -38,6 +38,27 @@ test('every catalog instrument maps to a shipped playable sample preset',()=>{
     if(!banks.has(patch.pack))banks.set(patch.pack,load(patch.pack));
     assert(banks.get(patch.pack)!.presets.some(p=>p.program===patch.program&&p.bankMSB===patch.bank&&p.isGMGSDrum===patch.drum),def.id);
   }
+});
+test('khomus has its own recorded jaw harp patch, with its narrow sample range safely playable',()=>{
+  const patch=patchForInstrument('khomus');
+  assert.deepEqual(patch,{bank:66,program:22,drum:false,pack:'percussion'});
+  const preset=load('percussion').presets.find(item=>item.bankMSB===66&&item.program===22);
+  assert(preset);assert.match(preset.name,/jaw harp/i);
+  for(const key of [48,60,72,83])assert(preset.getVoiceParameters(key,90).length>0,`key ${key} must play the recorded tongue sample`);
+});
+test('balafon uses its own six-root, three-dynamic VCSL mallet patch',()=>{
+  const patch=patchForInstrument('balafon');
+  assert.deepEqual(patch,{bank:66,program:23,drum:false,pack:'mallets'});
+  const preset=load('mallets').presets.find(item=>item.bankMSB===66&&item.program===23);
+  assert(preset);assert.equal(preset.zones.length,1);assert.equal(preset.zones[0].instrument.zones.length,18);
+  for(const [key,velocity] of [[49,30],[53,60],[60,100],[77,115]] as const)assert(preset.getVoiceParameters(key,velocity).length>0,`${key}/${velocity} must reach a recorded root and dynamic layer`);
+});
+test('turntable uses the sampled vinyl-scratch effect preset',()=>{
+  const patch=patchForInstrument('turntable');
+  assert.deepEqual(patch,{bank:66,program:24,drum:false,pack:'electronic'});
+  const preset=load('electronic').presets.find(item=>item.bankMSB===66&&item.program===24);
+  assert(preset);assert.match(preset.name,/vinyl scratch/i);
+  for(const key of [36,60,90])assert(preset.getVoiceParameters(key,90).length>0,`scratch sample plays at key ${key}`);
 });
 test('unpitched catalog instruments have explicit playable SoundFont key maps with no tom default',()=>{
   const bank=load('percussion'),kit=bank.presets.find(p=>p.isGMGSDrum&&p.bankMSB===0)!;
@@ -74,7 +95,9 @@ test('named percussion routes use their recorded VCSL tones and every take has p
     const patch=patchForInstrument(alias,true),route=RECORDED_PERCUSSION_PATCHES[canonical];
     assert(route,`${alias} has a recorded tone route`);assert.deepEqual(patch,{bank:66,program:route.program,drum:false,pack:'percussion'});
   }
-  assert.equal(bank.presets.filter(preset=>preset.bankMSB===66).length,20,'ship only the two custom body samples and eighteen dedicated VCSL presets');
+  assert.equal(bank.presets.filter(preset=>preset.bankMSB===66).length,24,'ship the jaw harp, custom body samples and dedicated VCSL percussion presets');
+  assert.equal(patchForInstrument('log-drum',true).program,20);
+  assert.deepEqual([47,48,50].map(midi=>recordedPercussionKey('log-drum',midi,{low:47,mid:48,high:50},'open')),[47,47,50]);
 });
 test('tango bandoneon push and pull route through the dedicated recorded bank',()=>{
   const p=performanceFixture({notes:[
