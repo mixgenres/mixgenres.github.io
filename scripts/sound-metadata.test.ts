@@ -5,7 +5,7 @@ import { GENRE_CONTRACTS } from '../src/data/styles/contracts';
 import { resolveTrackSound, resolveTrackGain } from '../src/engine/playback/trackSound';
 import { getGenreDialect } from '../src/engine/band/instrumentGenreDialect';
 import { mergeDialectMetadata } from '../src/engine/style/contracts';
-import { resolveRenderGesture } from '../src/engine/playback/renderGesture';
+import { resolveSampleGesture } from '../src/engine/playback/soundfont/gestures';
 import { codeForGesture } from '../src/engine/band/gestures';
 import { getRoleGainLinear } from '../src/engine/studio/mixer';
 import { patchForInstrument } from '../src/engine/playback/soundfont/presets';
@@ -18,17 +18,17 @@ for (const genre of Object.keys(GENRE_CONTRACTS)) {
   for (const def of Object.values(INSTRUMENTS_BY_ID)) {
     const params = resolveTrackSound(def.id, genre, '', 'lead');
     assert.deepEqual(resolveTrackSound(def.id, genre, '', 'lead'), params, 'resolution must not accumulate multipliers');
-    assert.equal(params.model, def.family, 'sound parameters use the instrument family, not renderer model indices');
+    assert.equal(params.pan >= 0 && params.pan <= 1, true);
     assert.equal(params.roleGain, getRoleGainLinear('lead', genre, def.id));
-    for (const value of [params.brightness, params.body, params.decay, params.drive, params.roleGain]) assert.ok(Number.isFinite(value), `${genre}/${def.id}`);
+    for (const value of [params.pan, params.drive, params.mute, params.roleGain]) assert.ok(Number.isFinite(value), `${genre}/${def.id}`);
     const preset = patchForInstrument(def.id, !!def.kit || !!def.drum || def.voicing === 'unpitched');
     assert.ok(preset.pack && Number.isInteger(preset.bank) && Number.isInteger(preset.program), `${genre}/${def.id} SoundFont assignment`);
     combinations++;
   }
 }
 assert.equal(JSON.stringify(INSTRUMENTS_BY_ID), before, 'resolution must never mutate authored metadata');
-assert.equal(resolveRenderGesture('violin', codeForGesture('fingerstyle')).excitationOverride, 'bow');
-assert.equal(resolveRenderGesture('violin', codeForGesture('pizzicato')).excitationOverride, 'fingerpad');
+assert.equal(resolveSampleGesture('violin', codeForGesture('fingerstyle'), 80).action, 'arco');
+assert.equal(resolveSampleGesture('violin', codeForGesture('pizzicato'), 80).action, 'pluck');
 const inherited = { brightnessMultiplier: 1.1, roleVariants: { lead: { decayMultiplier: .8, bodyMultiplier: 1.2 } }, allowedTechniques: ['arco', 'pizzicato'] };
 const patched = mergeDialectMetadata(inherited, { roleVariants: { lead: { decayMultiplier: .7 } } } as Partial<typeof inherited>);
 assert.equal(patched.roleVariants.lead.bodyMultiplier, 1.2);

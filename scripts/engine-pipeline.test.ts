@@ -12,16 +12,16 @@ import type { PerfNote } from '../src/engine/band/performanceData';
 import { codeForGesture } from '../src/engine/band/gestures';
 import { resolveWrittenTies } from '../src/engine/band/writtenTies';
 
-test('four layers are explicit and unchanged musical sections retain their cached notation and physics', () => {
+test('notation and interpretation are reused while sample events stay out of the song pipeline', () => {
   const song = makeSheet('tango', 'tango-golden-age'), first = compileSongPipeline(song);
   assert.equal(first.performance.pipeline?.version, 1);
-  assert.ok(first.sound.cells.every(cell => cell.notes.every(n => n.voice.frequencyHz! > 0 && n.tailSeconds > 0)));
+  assert.equal(first.performance.scoreVersion, 1);
+  assert.ok(first.performance.notes.every(note => !('physical' in note) && Number.isFinite(note.frequencyHz)));
+  assert.ok(!('sound' in first.trace), 'the pipeline does not cache per-note synthesis preparation');
   const mixerEdit = compileSongPipeline({ ...song, tracks: song.tracks.map(t => ({ ...t, volume: .17, pan: .1, muted: true })) });
   assert.equal(first.trace.interpretation, mixerEdit.trace.interpretation);
-  assert.deepEqual(first.trace.sound, mixerEdit.trace.sound);
   assert.equal(first.trace.mix, mixerEdit.trace.mix);
   assert.strictEqual(first.notation.sections[0].cells[song.tracks[0].id], mixerEdit.notation.sections[0].cells[song.tracks[0].id]);
-  assert.strictEqual(first.sound.cells[0], mixerEdit.sound.cells[0]);
   const edited = structuredClone(song), region = edited.regions[1], track = edited.tracks[0];
   const measure = edited.measures[region.start+2], perf = measure.patternDetailsByTrack![track.id].perf!;
   perf.accents[0] *= .81;
@@ -30,7 +30,6 @@ test('four layers are explicit and unchanged musical sections retain their cache
   assert.ok(after.hits>before.hits, 'other sections reuse interpreted parts');
   assert.strictEqual(first.notation.sections[0].cells[track.id], changed.notation.sections[0].cells[track.id]);
   assert.notEqual(first.notation.sections[1].cells[track.id].key, changed.notation.sections[1].cells[track.id].key);
-  assert.strictEqual(first.sound.cells.find(c => c.sectionId===song.regions[0].id && c.trackId===track.id), changed.sound.cells.find(c => c.sectionId===song.regions[0].id && c.trackId===track.id));
 });
 
 test('harmonic boundary edits invalidate their incoming/outgoing transitions and dependent interpretation', () => {

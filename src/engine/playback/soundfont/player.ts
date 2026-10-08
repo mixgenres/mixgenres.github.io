@@ -21,8 +21,7 @@ interface LiveGraph {
   plan?:SamplePlan;
   strips:Map<string,{gain:GainNode;pan:StereoPannerNode}>; nodes:AudioNode[]; banks:Set<string>;
 }
-/** Live-first sample player. Transport and mixer changes never wait for
- * prepared export PCM or a mastered audio chunk. */
+/** Live-first sample player; it schedules SoundFont events without pre-rendering audio. */
 export class SoundfontSongPlayer {
   private state:PlayerState={status:'idle',progress:0};
   private song?:Sheet;

@@ -1,14 +1,20 @@
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { ALL_STYLES } from '../src/engine/style';
 import { catalogIdForStyle, createCatalogSong } from '../src/engine/sheet/songCatalog';
 import { compileWholeSong } from '../src/engine/band/arrangeBand';
 import { renderPerformanceToMp3 } from '../src/engine/playback/mp3Export';
+import { setSoundfontBankReader } from '../src/engine/playback/soundfont/banks';
 import { measureAudio } from '../src/engine/studio/audioMetrics';
 import type { RenderDiagnostic } from '../src/engine/studio/audioMetrics';
 import { excerptPerformance, chooseAudioWindows } from './lib/audioExcerpt';
 import { selectStyles, styleMechanisms } from './lib/audioSelection';
 import { measureEncodedAudio } from './lib/encodedAudio';
 import { reportMetadata, writeReport, summarizeFindings, printFindings, type Finding } from './lib/auditReport';
+
+setSoundfontBankReader(async id => {
+  const bytes = readFileSync(`src/assets/soundfonts/${id}.sfpack`);
+  return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+});
 
 const styleId = process.argv.find(a => a.startsWith('--style='))?.slice(8);
 const genreId = process.argv.find(a => a.startsWith('--genre='))?.slice(8);

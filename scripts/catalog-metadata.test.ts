@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { GENRE_WORLDS, ALL_PATTERNS } from '../src/data/genres';
+import { GENRE_WORLDS, ALL_PATTERNS, PATTERNS_BY_ID } from '../src/data/genres';
 import { ALL_STYLES, getStyle } from '../src/engine/style/registry';
 import { songCatalog } from '../src/data/songs/catalog';
 import { STYLE_REFERENCES } from '../src/data/styles/styleReferences';
@@ -76,7 +76,16 @@ test('full-song harmony preserves modal bridges and instruments are never substi
     const entry = songCatalog.find(s => s.referenceKey === key)!;
     const song = createCatalogSong(entry.id);
     for (const id of Object.values(RECORDING_ARRANGEMENTS[key].solos ?? {})) assert.ok(song.tracks.some(t => t.instrumentId === id));
-    if (key.startsWith('qawwali')) assert.deepEqual(song.tracks.map(t => t.instrumentId), ['voice', 'synth']);
+    if (key.startsWith('qawwali')) {
+      const instruments = song.tracks.map(track => track.instrumentId);
+      assert.ok(instruments.includes('voice') && instruments.includes('synth'), 'the reference singer and drone remain present');
+      assert.ok(instruments.length >= 5 && instruments.length <= 8, 'the example keeps a playable support ensemble');
+      const declared = new Set(RECORDING_ARRANGEMENTS[key].instruments ?? []);
+      const supportTrackIds = new Set(Object.values(song.lockedPatternAssignments ?? {}).flatMap(assignments =>
+        Object.keys(assignments).filter(trackId => song.tracks.some(track => track.id === trackId
+          && !declared.has(track.instrumentId!) && PATTERNS_BY_ID[assignments[trackId]]?.sourceLevel === 'sample-support'))));
+      assert.equal(supportTrackIds.size, instruments.length - declared.size, 'added players use authored sample-support cells');
+    }
   }
 });
 

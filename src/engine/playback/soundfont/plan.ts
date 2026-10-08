@@ -3,7 +3,7 @@ import type { Performance, PerfNote } from '../../band/performanceData';
 import type { Mp3RenderOptions } from '../mp3Export';
 import { INSTRUMENTS_BY_ID } from '../../lookup/instruments';
 import { resolveTrackSound } from '../trackSound';
-import { prepareNoteVoice } from '../performancePlan';
+import { resolveSampleGesture } from './gestures';
 import { patchForInstrument, NYLON_PATCH, STEEL_PATCH, SAMPLED_KIT_KEYS, type BankId, type SamplePatch } from './presets';
 import { SOUNDFONT_RELEASE_RESERVE } from './release';
 
@@ -34,20 +34,31 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
     const params = resolveTrackSound(instrumentId, options.worldId ?? performance.worldId, options.styleId, options.trackRoles?.get(id));
     const percussion = !!def.kit || !!def.drum || def.voicing === 'unpitched';
     const base = patchForInstrument(instrumentId, percussion);
+    const contextSounds = new Map<string, ReturnType<typeof resolveTrackSound>>();
+    const soundFor = (worldId: string, styleId: string, role?: string) => {
+      const key = `${worldId}\0${styleId}\0${role ?? ''}`;
+      let sound = contextSounds.get(key);
+      if (!sound) { sound = resolveTrackSound(instrumentId, worldId, styleId, role); contextSounds.set(key, sound); }
+      return sound;
+    };
     const occupied: Array<Map<number,number>> = [];
     const track: SampleTrack = { id, instrumentId, gain: params.roleGain ?? .7, channels: [], pan: params.pan };
     const pedal=performance.ccs.filter(cc=>cc.trackId===id&&cc.cc===64).sort((a,b)=>a.time-b.time);
     const notes = performance.notes.filter(note => note.trackId === id).sort((a,b) => a.time-b.time || a.midi-b.midi);
+    const hasReleaseController = performance.ccs.some(cc => cc.trackId === id && cc.cc === 72);
     // Hi-hat exclusivity is channel-local in SF2. Reserve one hat channel so
     // a closed/pedal hit chokes an open hat even while its release is ringing.
     const hatChannel = !!def.kit && notes.some(note=>[42,44,46].includes(Math.round(note.midi)));
     if(hatChannel)occupied.push(new Map());
-    const ccNumbers = [...new Set(performance.ccs.filter(cc=>cc.trackId===id).map(cc=>cc.cc))];
     for (const note of notes) {
       if (!Number.isFinite(note.time + note.dur + note.vel + note.midi) || note.dur <= 0) throw new Error('Invalid sample note timing or velocity.');
-      const voice = prepareNoteVoice(note, params, options.worldId ?? performance.worldId ?? '', options.styleId ?? '', options.trackRoles?.get(id), ccNumbers);
-      const action = voice.action ?? 'tone';
-      const sound = voice.soundParams ?? params;
+      const gesture = resolveSampleGesture(instrumentId, note.gestureCode, note.vel, note.pitchIdentity);
+      const action = gesture.action;
+      const context = note.soundContext;
+      const sound = context && (context.worldId !== (options.worldId ?? performance.worldId ?? '')
+        || context.styleId !== (options.styleId ?? '') || context.role !== (options.trackRoles?.get(id) ?? performance.trackInfo?.[id]?.role))
+        ? soundFor(context.worldId, context.styleId, context.role)
+        : params;
       let patch = base;
       let key = Math.max(0, Math.min(127, Math.round(note.midi)));
       if(instrumentId==='bandoneon')patch={...patch,bank:note.bellowsDirectionCode===2?74:73,pack:'bandoneon'};
@@ -84,7 +95,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       }
       // Compiled body contacts on pitched instruments must not turn back into
       // string/wind notes. Scraped contacts use a friction approximation.
-      if (!percussion && (note.pitchIdentity === 'unpitched' || voice.mechanics?.pitchIdentity === 'unpitched')) {
+      if (!percussion && gesture.pitchIdentity === 'unpitched') {
         patch = /scrap|chicharra|friction/.test(action)
           ? {bank:0,program:0,drum:true,pack:'percussion'}
           : { bank: 66, program: 0, drum: false, pack: 'percussion' };
@@ -111,7 +122,8 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       const end=note.time+note.dur;
       const down=pedal.filter(cc=>cc.time<=end).at(-1)?.value ?? 0;
       const pedalEnd=down>=64 ? pedal.find(cc=>cc.time>end&&cc.value<64)?.time ?? performance.duration : end;
-      const releaseEnd=Math.max(end,pedalEnd)+(ccNumbers.includes(72)?SOUNDFONT_RELEASE_RESERVE:SAMPLE_RELEASES[`${patch.bank}:${patch.program}:${patch.drum}`] ?? SOUNDFONT_RELEASE_RESERVE);
+      const releaseEnd=Math.max(end,pedalEnd)+(hasReleaseController ? SOUNDFONT_RELEASE_RESERVE
+        : SAMPLE_RELEASES[`${patch.bank}:${patch.program}:${patch.drum}`] ?? SOUNDFONT_RELEASE_RESERVE);
       occupied[lane].set(key,releaseEnd);soundingEnd=Math.max(soundingEnd,releaseEnd);
       if (!track.channels.includes(channel)) track.channels.push(channel);
       channels = Math.max(channels, channel + 1);
@@ -119,7 +131,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       const hold = shortened ? Math.min(note.dur, .12) : note.dur;
       const cents = patch.drum ? 0 : pitch(note);
       if (!Number.isFinite(cents)) throw new Error('Invalid sampled note tuning.');
-      events.push({ time: note.time, type: 'on', channel, key, velocity: Math.max(1, Math.min(127, Math.round((voice.velocity ?? note.vel/127)*127))),
+      events.push({ time: note.time, type: 'on', channel, key, velocity: gesture.velocity,
         patch, gain: track.gain, cents });
       events.push({ time: note.time + hold, type: 'off', channel, key });
       for (const bend of note.pitchBend ?? []) if (bend.offset >= 0 && bend.offset < hold) {
@@ -148,6 +160,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
   for (const event of events) event.time -= origin;
   return { tracks, events, banks:[...banks], duration:soundingEnd-origin, channels, origin };
 }
+
 function patchForProgram(program: number, pack: BankId): SamplePatch { return { bank:0, program, drum:false, pack }; }
 const DRUM_KEYS: Record<string, [number,number,number]> = {
   palmas:[39,39,39], 'hand-percussion':[39,54,69], 'foot-stomp':[35,36,37], cajon:[36,38,37], zapateado:[36,37,76],

@@ -37,7 +37,7 @@ export function createSongMixGraph(ctx: BaseAudioContext, master: MasterChain, t
     automate(compressor.ratio, scene => 1 + scene.buses[id].compressionAmount * (scene.buses[id].compressionRatio - 1));
     buses.set(id, input);
   }
-  // Dedicated sends replace the master's legacy all-instrument feed only for calibrated timelines.
+  // Dedicated sends replace the default all-instrument feed only for calibrated timelines.
   master.setFallbackSendsEnabled(true);
   const tracks = new Map<string, { input: GainNode }>();
   for (const id of trackIds) {

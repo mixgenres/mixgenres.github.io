@@ -355,7 +355,7 @@ async function renderPerformance(
 
 /** Retain original attacks, bends and controller history when an excerpt starts
  * inside a held note or release. Negative times describe its existing age. */
-function performanceWindow(perf: Performance, start: number, end: number, tail: (note: PerfNote) => number, keepSampleHistory=false): Performance {
+export function performanceWindow(perf: Performance, start: number, end: number, tail: (note: PerfNote) => number, keepSampleHistory=false): Performance {
   const from = Math.round(Math.max(0, start) * 44100) / 44100, to = Math.max(from + 0.01, end);
   // A sample may remain held by the pedal long after its score note-off. Keep
   // historical attacks for exact silent replay instead of guessing a tail.

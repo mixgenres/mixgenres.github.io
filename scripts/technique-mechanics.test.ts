@@ -1,11 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { codeForGesture } from '../src/engine/band/gestures';
-import { resolveRenderGesture } from '../src/engine/playback/renderGesture';
-import { prepareNoteVoice } from '../src/engine/playback/performancePlan';
-import { resolveTrackSound } from '../src/engine/playback/trackSound';
 import { realizeTechniquePerformance } from '../src/engine/band/techniquePerformance';
 import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
+import { resolveSampleGesture } from '../src/engine/playback/soundfont/gestures';
 import { patchForInstrument } from '../src/engine/playback/soundfont/presets';
 import { makeSheet, rebuild } from '../src/engine/sheet/sheet';
 import { compileSongPipeline } from '../src/engine/pipeline/compileSong';
@@ -15,6 +13,7 @@ import type { PatternEvent } from '../src/data/schema';
 import { INSTRUMENT_PERFORMANCE_PROFILES } from '../src/data/performance/instrumentPerformanceProfiles';
 import { PATTERNS_BY_ID } from '../src/data/genres';
 import { INSTRUMENTS_BY_ID } from '../src/engine/lookup/instruments';
+import { techniqueMechanics } from '../src/data/performance/techniqueMechanics';
 import { getInstrumentPerformanceProfile } from '../src/engine/lookup/performance';
 import { resolveStyle } from '../src/engine/style/resolve';
 import { calibratedTechniqueGestures, styleTechniqueExpectation } from '../src/engine/style/performance-expectations';
@@ -22,7 +21,7 @@ import { optimizePerformanceByPhraseAndSong } from '../src/engine/band/songPhras
 import { GESTURE_NAMES } from '../src/engine/band/gestures';
 import type { MusicalPattern } from '../src/types';
 
-const gesture = (instrument: string, technique: string, source?: string) => resolveRenderGesture(instrument, codeForGesture(technique), source);
+const gesture = (instrument: string, technique: string, velocity = 80) => resolveSampleGesture(instrument, codeForGesture(technique), velocity);
 const note = (technique: string, midi = 60, directions?: PatternEvent['notation']): PerfNote => ({
   trackId: 'p', bar: 0, time: 0, dur: .3, midi, vel: 85, gestureCode: codeForGesture(technique), hitFunctionCode: 0, accent: .8,
   attackId: 'a', notation: { beat: 0, durationBeats: .6 }, musicianNotation: directions, authoredTechnique: true,
@@ -31,28 +30,23 @@ const performance = (instrument: string, notes: PerfNote[]): Performance => ({
   trackInfo: { p: { instrumentId: instrument, role: 'lead' } }, notes, ccs: [], bars: [], duration: 1, tail: .5, blends: {},
 });
 
-test('articulation preserves the actual instrument/variant excitation', () => {
-  for (const technique of ['staccato', 'accent', 'legato', 'tenuto']) {
-    assert.equal(gesture('guitar', technique, 'plectrum').excitationType, 'plectrum');
-    assert.equal(gesture('bass', technique).excitationType, 'fingerpad');
-    assert.equal(gesture('piano', technique).excitationType, 'hammer');
-    assert.equal(gesture('violin', technique).excitationType, 'bow');
-  }
-  assert.equal(gesture('violin', 'ricochet').excitationType, 'bow');
-  assert.equal(gesture('violin', 'pizzicato').excitationType, 'fingerpad');
-  assert.equal(gesture('upright-bass', 'arrastre').excitationType, 'bow');
+test('score gestures map to sample actions without preparing a physical voice per note', () => {
+  assert.equal(gesture('guitar', 'fingerstyle').action, 'pluck');
+  assert.equal(gesture('violin', 'fingerstyle').action, 'arco');
+  assert.equal(gesture('violin', 'pizzicato').action, 'pluck');
+  assert.equal(gesture('upright-bass', 'arrastre').pitchIdentity, 'pitched');
+  assert.equal(gesture('guitar', 'accent').velocity, 100);
+  assert.equal(gesture('guitar', 'ghost').velocity, 36);
 });
 
 test('tango bow percussion, damped pizzicato, body strike and bass slap have separate mechanics', () => {
-  assert.equal(gesture('upright-bass', 'strappata').mechanics.pitchIdentity, 'unpitched');
-  assert.equal(gesture('upright-bass', 'strappata').excitationType, 'bow');
-  assert.equal(gesture('upright-bass', 'slap').mechanics.pitchIdentity, 'pitched');
-  assert.equal(gesture('violin', 'tambor').mechanics.surface, 'muted-string');
-  assert.equal(gesture('violin', 'tambor').excitationType, 'fingerpad');
-  assert.equal(gesture('violin', 'golpe-caja').mechanics.surface, 'soundboard');
-  assert.equal(gesture('violin', 'chicharra').mechanics.surface, 'afterlength');
-  assert.equal(resolveRenderGesture('bass', codeForGesture('tone')).action, 'tone');
-  assert.equal(resolveRenderGesture('upright-bass', codeForGesture('tone')).action, 'tone');
+  assert.equal(gesture('upright-bass', 'strappata').pitchIdentity, 'unpitched');
+  assert.equal(gesture('upright-bass', 'slap').pitchIdentity, 'pitched');
+  assert.equal(techniqueMechanics(INSTRUMENTS_BY_ID.violin, 'tambor').surface, 'muted-string');
+  assert.equal(techniqueMechanics(INSTRUMENTS_BY_ID.violin, 'golpe-caja').surface, 'soundboard');
+  assert.equal(techniqueMechanics(INSTRUMENTS_BY_ID.violin, 'chicharra').surface, 'afterlength');
+  assert.equal(gesture('bass', 'tone').action, 'tone');
+  assert.equal(gesture('upright-bass', 'tone').action, 'tone');
 });
 
 test('up/down chord sweeps preserve pitches and written rhythm with exactly one simultaneous golpe', () => {
@@ -64,8 +58,6 @@ test('up/down chord sweeps preserve pitches and written rhythm with exactly one 
     assert.equal(perf.notes.filter(n => n.bodyAttack).length, 1);
     assert.equal(timed[0].bodyAttack, true, 'body tap belongs to stroke onset');
     assert.ok(perf.notes.every(n => n.notation?.beat === 0 && n.notation.durationBeats === .6));
-    const params = resolveTrackSound('guitar', 'flamenco');
-    assert.equal(prepareNoteVoice(timed[0], params, 'flamenco', '').bodyAttack, 'golpe');
   }
 });
 
@@ -75,9 +67,7 @@ test('unpitched actions produce one contact rather than a body strike per inferr
     realizeTechniquePerformance(perf);
     assert.equal(perf.notes.length, 1);
     assert.equal(perf.notes[0].pitchIdentity, 'unpitched');
-    const params = resolveTrackSound(instrument);
-    const voice = prepareNoteVoice(perf.notes[0], params, '', '');
-    assert.equal(voice.mechanics?.pitchIdentity, 'unpitched', `${instrument}/${technique} stays a body/contact sound`);
+    assert.equal(gesture(instrument, technique).pitchIdentity, 'unpitched', `${instrument}/${technique} stays a body/contact sound`);
   }
 });
 
@@ -114,26 +104,20 @@ test('physical categories resolve to the source mechanism across idiophones and 
 
 test('bow, pizzicato and muted strings route to sample articulations', () => {
   for (const instrument of ['violin', 'viola', 'cello', 'upright-bass']) {
-    const params = resolveTrackSound(instrument);
-    const arco = prepareNoteVoice(note('arco'), params, '', '');
-    const pizz = prepareNoteVoice(note('pizzicato'), params, '', '');
-    assert.equal(arco.mechanics?.excitation, 'bow');
-    assert.equal(pizz.mechanics?.pitchIdentity, 'pitched');
+    assert.equal(gesture(instrument, 'arco').action, 'arco');
+    assert.equal(gesture(instrument, 'pizzicato').pitchIdentity, 'pitched');
   }
   const sampledPlan = (instrument: string, technique: string) => {
-    const params = resolveTrackSound(instrument);
-    const physical = performance(instrument, [note(technique)]);
-    physical.worldId = 'flamenco';
-    physical.trackInfo = { p: { instrumentId: instrument, role: 'lead' } };
-    physical.notes[0].physical = { key: 'gesture-fixture', voice: prepareNoteVoice(physical.notes[0], params, 'flamenco', ''), tailSeconds: 6 };
-    return compileSamplePlan(physical, { trackInstruments: new Map([['p', instrument]]), worldId: 'flamenco' });
+    const perf = performance(instrument, [note(technique)]);
+    perf.worldId = 'flamenco';
+    return compileSamplePlan(perf, { trackInstruments: new Map([['p', instrument]]), worldId: 'flamenco' });
   };
   const open = sampledPlan('guitar', 'fingerstyle'), mute = sampledPlan('guitar', 'palm-mute');
   assert.equal(open.events.find(event => event.type === 'on')?.patch.bank, 64);
   assert.equal(mute.events.find(event => event.type === 'on')?.patch.bank, 65);
   const pizzicato = sampledPlan('cello', 'pizzicato');
   assert.equal(pizzicato.events.find(event => event.type === 'on')?.patch.program, 45);
-  assert.equal(gesture('bass', 'pop').mechanics.pitchIdentity, 'pitched');
+  assert.equal(gesture('bass', 'pop').pitchIdentity, 'pitched');
 });
 
 test('catalog membership never certifies faithful synthesis', () => {
@@ -148,8 +132,8 @@ test('style-authored instrument techniques reach the playable phrase vocabulary'
   const pipa = getInstrumentPerformanceProfile('pipa');
   const pipaGestures = calibratedTechniqueGestures(jiangnan, pipa, 'harmony');
   assert.ok(pipaGestures.includes('tremolo'), 'the Jiangnan pipa cue survives as a playable gesture');
-  assert.ok(pipaGestures.includes('vibrato'));
-  assert.ok(pipaGestures.includes('harmonic'));
+  assert.ok(pipa.gestures.vibrato, 'the instrument profile keeps its vibrato capability available');
+  assert.ok(pipa.gestures.harmonic, 'the instrument profile keeps its harmonic capability available');
   const expectation = styleTechniqueExpectation(jiangnan, pipa, 'harmony');
   for (const technique of pipaGestures) assert.ok(expectation.required.includes(technique));
   assert.ok(!pipaGestures.some(technique => !pipa.gestures[technique]), 'calibration never invents gesture IDs');
@@ -204,17 +188,18 @@ test('compiled pattern playback uses a guest style after an atypical role assign
   assert.ok(gestures.has('rasgueado'), 'compiled pattern events retain a second style technique instead of one generic hit');
 });
 
-test('authored flamenco fingers and simultaneous body strokes reach score, physics and MusicXML', () => {
+test('authored flamenco fingers and simultaneous body strokes reach score and MusicXML', () => {
   const song = makeSheet('flamenco', 'flamenco-rumba'), pipeline = compileSongPipeline(song);
   const body = pipeline.performance.notes.filter(n => n.bodyAttack);
   assert.ok(body.length, 'active rumba catalog contains string/body combinations');
-  assert.ok(body.every(n => n.physical?.voice.bodyAttack === 'golpe'));
+  assert.ok(body.every(n => !('physical' in n)), 'body technique stays in the score instead of a cached physical-voice object');
   for (const n of body) assert.equal(pipeline.performance.notes.filter(other => other.attackId === n.attackId && other.bodyAttack).length, 1);
   assert.ok(exportMusicXml(pipeline.interpretation).includes('golpe simultaneously'));
   const solea = compileSongPipeline(makeSheet('flamenco', 'flamenco-solea'));
   const tremolo = solea.interpretation.notes.filter(n => n.technique === 'tremolo');
   assert.ok(tremolo.length >= 5);
-  assert.deepEqual(tremolo.slice(0, 5).map(n => n.playback.musicianNotation?.fingering), ['p', 'i', 'a', 'm', 'i']);
+  assert.deepEqual(tremolo.slice(1, 6).map(n => n.playback.musicianNotation?.fingering), ['p', 'i', 'a', 'm', 'i'],
+    'the low thumb bass note precedes the five-note tremolo picking cycle');
   assert.ok(tremolo[0].midi < tremolo[1].midi);
   assert.ok(exportMusicXml(solea.interpretation).includes('<actual-notes>5</actual-notes>'));
 });
@@ -232,13 +217,13 @@ function writtenFixture(instrument: 'guitar' | 'piano', events: PatternEvent[]) 
   } finally { delete PATTERNS_BY_ID[pattern.id]; }
 }
 
-test('a written body contact stays unpitched from the initial score through physical plan and MusicXML', () => {
+test('a written body contact stays unpitched from the initial score through sample planning and MusicXML', () => {
   const pipeline = writtenFixture('guitar', [{ kind: 'attack', position: 0, duration: 1,
     articulation: 'golpe', pitch: { midi: [60, 64, 67] } }]);
   const contacts = pipeline.interpretation.notes.filter(n => n.technique === 'golpe');
   assert.equal(contacts.length, 1, 'one written contact must not become an inferred chord');
   assert.equal(contacts[0].pitchIdentity, 'unpitched');
-  assert.equal(pipeline.performance.notes.find(n => n.attackId === contacts[0].playback.attackId)?.physical?.voice.mechanics?.surface, 'soundboard');
+  assert.equal(pipeline.performance.notes.find(n => n.attackId === contacts[0].playback.attackId)?.pitchIdentity, 'unpitched');
   const xml = exportMusicXml(pipeline.interpretation);
   assert.ok(xml.includes('<unpitched>') && xml.includes('<notehead>x</notehead>'));
   assert.ok(!xml.includes('<pitch>'), 'a pitched instrument part can contain only body percussion');

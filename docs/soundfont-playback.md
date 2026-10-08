@@ -4,9 +4,9 @@ SoundFont is the only instrument playback engine. The editor's play control crea
 
 ## Per-part rendering
 
-The score compiler owns notation, interpretation, technique decisions, transitions, phrasing and tuning. `transformMusicians.ts` turns that performance into playable note data, and `soundfont/plan.ts` resolves each part's notes to bank, preset, key, velocity, controller and bend events. The live AudioWorklet schedules those events directly. Export renders each requested part through `SampleRuntime`, then sends the result through the shared mix and master.
+The score compiler owns notation, interpretation, technique decisions, transitions, phrasing and tuning. `soundfont/plan.ts` resolves each requested part's notes directly to bank, preset, key, velocity, controller and bend events. The live AudioWorklet schedules those events directly. Export renders each requested part through `SampleRuntime`, then sends the result through the shared mix and master.
 
-The engine does not pre-render songs or retain rendered PCM stems. It computes a musical performance and a compact event plan, then renders the needed parts when playback or export requests them. Notation, score interpretation and physical-part results may be reused because they avoid repeating musical decisions; no cache stores audio.
+The engine does not pre-render songs or retain rendered PCM stems. It computes the musical performance and only plans the requested parts when playback or export needs them. Notation and score interpretation may be reused because they avoid repeating musical decisions; no note-by-note physical voice layer or audio cache sits between the score and sample plan.
 
 The browser downloads only banks used by the current parts. Downloads are hash-checked and kept as compressed assets in the bounded browser cache. The live graph decodes only required banks and owns its sample data for the session. This asset cache avoids repeated large downloads without adding PCM cache invalidation or mix identity layers.
 

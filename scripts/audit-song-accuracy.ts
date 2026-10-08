@@ -25,8 +25,8 @@ for (const style of ALL_STYLES) {
   check(pipeline.notation.sections.length === song.regions.length && pipeline.notation.sections.every(section =>
     song.tracks.every(track => section.cells[track.id]?.bars.length === section.end-section.start)),
     'notation-coverage', 'ensemble', 'First-pass notation is missing a player/section');
-  check(performance.notes.every(note => !!note.physical && note.physical.voice.frequencyHz === note.frequencyHz),
-    'physical-boundary', 'ensemble', 'Playback bypassed the prepared instrument-physics layer');
+  check(performance.scoreVersion === 1 && performance.notes.every(note => note.pitchIdentity && GESTURE_NAMES[note.gestureCode] !== undefined),
+    'sample-input', 'ensemble', 'Playback events lost score pitch identity or technique before sample planning');
   const parts = song.tracks.map(track => {
     const id = track.instrumentId!; instruments.add(id);
     const def = INSTRUMENTS_BY_ID[id], profile = getInstrumentPerformanceProfile(id);
@@ -73,6 +73,6 @@ for (const style of ALL_STYLES) {
 }
 const coverage = { genres: new Set(ALL_STYLES.map(s => s.primaryGenre)).size, styles: cases.length, instrumentsUsed: instruments.size };
 writeReport('song-accuracy', { ...reportMetadata(), status: findings.length ? 'FAIL' : 'PASS', coverage,
-  evidence: 'All styles pass through complete first-pass notation, band interpretation and prepared physical controls before playback. Checks cover written rhythm, ensemble, range and technique data; pitch provenance distinguishes written patterns from composition. Not perceptual certification or a historical transcription audit.', findings, cases });
+  evidence: 'All styles pass through complete notation and band interpretation before SoundFont events are planned per part. Checks cover written rhythm, ensemble, range, pitch identity and technique data; pitch provenance distinguishes written patterns from composition. Not perceptual certification or a historical transcription audit.', findings, cases });
 if (saveScores) writeSongReview(cases);
 printFindings('song-accuracy', findings, coverage);

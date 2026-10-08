@@ -13,7 +13,7 @@ import { StyleRuntime } from '../src/engine/style/runtime';
 import { patchForInstrument } from '../src/engine/playback/soundfont/presets';
 import { resolveTrackSound } from '../src/engine/playback/trackSound';
 import { determineBusCategory } from '../src/engine/playback/mixBus';
-import { resolveRenderGesture } from '../src/engine/playback/renderGesture';
+import { resolveSampleGesture } from '../src/engine/playback/soundfont/gestures';
 import { resolveInstrumentKitComponent } from '../src/engine/lookup/instrument-components';
 import { getInstrumentPerformanceProfile } from '../src/engine/lookup/performance';
 import { getGenreTheory } from '../src/engine/lookup/theory';
@@ -21,7 +21,7 @@ import { codeForGesture } from '../src/engine/band/gestures';
 import { resolveMasterSettings } from '../src/engine/studio/masterSettings';
 import { reportMetadata, writeReport, summarizeFindings, printFindings, type Finding } from './lib/auditReport';
 
-// Inspect data and resolved contracts, without generating songs or building DSP graphs.
+// Inspect metadata and resolved contracts without rendering audio.
 const findings: Finding[] = [];
 const seen = new WeakSet<object>();
 let properties = 0, dataFiles = 0, dialects = 0;
@@ -95,7 +95,7 @@ for (const def of ENRICHED_INSTRUMENT_CATALOG) {
     inspect(profile, `performance/${def.id}`);
     check(def.acousticProfile, def.id, 'Missing acoustic metadata');
     if (def.acousticProfile?.role === 'percussion') check(determineBusCategory(def.acousticProfile.role, def.id) === 'drums', def.id, 'Percussion routed outside drum bus');
-    for (const articulation of def.techniques.articulations) check(resolveRenderGesture(def.id, codeForGesture(articulation)).name === articulation, def.id, `Articulation ${articulation} fails round trip`);
+    for (const articulation of def.techniques.articulations) check(resolveSampleGesture(def.id, codeForGesture(articulation), 64).name === articulation, def.id, `Articulation ${articulation} fails round trip`);
     for (const component of def.kitComponents ?? []) check(resolveInstrumentKitComponent(def.id, component.midi, component.id)?.id === component.id, def.id, `Kit component ${component.id} fails lookup`);
     dialects += Object.keys(profile.genreProfiles).length;
     check(Object.keys(profile.gestures).length && profile.capabilities.polyphony > 0, def.id, 'Missing playable gestures or polyphony');

@@ -25,7 +25,7 @@ export function instrumentMechanisms(def: typeof INSTRUMENT_CATALOG[number]) {
   const params = resolveTrackSound(def.id);
   const patch = patchForInstrument(def.id, !!def.kit || !!def.drum || def.voicing === 'unpitched');
   return [`bank:${patch.pack}`, `preset:${patch.pack}/${patch.bank}/${patch.program}/${patch.drum ? 'drum' : 'melodic'}`,
-    `family:${def.family}`, `model:${params.model}`, `excitation:${params.excitationType}`,
+    `family:${def.family}`, `excitation:${params.excitationType ?? def.excitationType ?? def.luthierPhysics?.excitationType ?? 'unspecified'}`,
     `sustain:${def.acousticProfile?.sustain}`,
     ...(def.kitComponents ?? []).map(component => `kit:${def.family}/${component.physicalType}`)];
 }

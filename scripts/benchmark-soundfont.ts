@@ -13,7 +13,7 @@ setSoundfontBankReader(async id=>{const f=readFileSync(`src/assets/soundfonts/${
 const results=[];
 for(const count of [12,15,30] as const) {
   const song=densePlaybackFixture(count),start=performance.now(),perf=arrangeBand(song),compiledMs=performance.now()-start;
-  const options={...songMixOptions(song),renderWindow:{start:0,end:8},yieldForUI:false};
+  const options={...songMixOptions(song),renderWindow:{start:0,end:8},maxDurationSeconds:8,yieldForUI:false};
   const planned=performance.now(),plan=compileSamplePlan(perf,options),plannedMs=performance.now()-planned;
   const at=performance.now(),pcm=await renderPerformanceToAudio(perf,options),renderMs=performance.now()-at;
   if(!pcm.left.every(Number.isFinite)||!pcm.right.every(Number.isFinite))throw new Error('Non-finite sample output');

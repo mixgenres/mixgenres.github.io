@@ -6,10 +6,10 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 
 - Sample song rosters: **420/420** within 5–8 distinct instrument IDs; 0 violations.
 - Tango: **17/17** songs include bandoneon.
-- SoundFont asset set: **16** lazy banks, 123.7 MiB compressed.
-- SoundFont comparison phase `soundfont-v3-all-genres`: 163/163 rows complete, 0 failed; 131 rows draw on voiced-feature references.
-- A Node offline stress benchmark rendered an 8-second 30-player mix in 7.275263083000001 s, reused the warm mix in 38.8 ms, and encoded MP3 in 0.5240217919999995 s. This measures offline throughput, not browser audio-start latency.
-- Across 486 measured windows (393 from separated accompaniment), median spectral distance was 0.529, low-body energy ratio 0.53, generated/reference centroid ratio 1.54, and RMS difference -4.0 dB. These aggregate screens diagnose timbre and balance; they are not a perceptual similarity score.
+- SoundFont asset set: **17** demand-loaded banks, 131.5 MiB compressed.
+- SoundFont comparison phase `soundfont-v3-all-genres`: 390/390 rows complete, 0 failed; 310 rows draw on voiced-feature references.
+- A Node offline benchmark rendered an 8-second 30-player mix in 7.001437125000001 s and encoded MP3 in 0.39208516699999746 s. This measures offline throughput, not browser audio-start latency.
+- Across 1167 measured windows (930 from separated accompaniment), median spectral distance was 0.542, low-body energy ratio 0.53, generated/reference centroid ratio 1.50, and RMS difference -3.8 dB. These aggregate screens diagnose timbre and balance; they are not a perceptual similarity score.
 - The reference screen renders an 8-second dense ensemble excerpt. It uses voiced accompaniment measurements where available and labels album-mix fallback. Spectral similarity is a mix/timbre screen; it does not prove note-for-note similarity or musical authenticity.
 
 ## Genre crosswalk
@@ -18,18 +18,18 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 |---|---:|---:|---|---:|---:|---:|---:|
 | afrobeat | 7 | 7/7 | 5×1, 6×1, 7×1, 8×4 | 1 | 7 | 5 | 5 |
 | afrobeats | 5 | 5/5 | 5×1, 6×4 | 0 | 5 | 5 | 5 |
-| amapiano | 7 | 7/7 | 5×1, 6×6 | 1 | 5 | 5 | 5 |
-| ambient | 9 | 9/9 | 5×9 | 9 | 7 | 6 | 6 |
+| amapiano | 7 | 7/7 | 5×1, 6×6 | 1 | 7 | 5 | 5 |
+| ambient | 9 | 9/9 | 5×9 | 9 | 8 | 6 | 7 |
 | andean | 7 | 7/7 | 5×6, 6×1 | 0 | 7 | 6 | 6 |
-| arabic | 5 | 5/5 | 5×2, 6×2, 7×1 | 1 | 4 | 3 | 3 |
+| arabic | 5 | 5/5 | 5×2, 6×2, 7×1 | 1 | 5 | 4 | 4 |
 | bachata | 8 | 8/8 | 6×6, 7×1, 8×1 | 0 | 8 | 5 | 5 |
-| bass | 10 | 10/10 | 5×10 | 10 | 9 | 9 | 9 |
+| bass | 10 | 10/10 | 5×10 | 10 | 10 | 9 | 9 |
 | blues | 8 | 8/8 | 5×2, 6×6 | 2 | 8 | 7 | 7 |
 | bollywood | 6 | 6/6 | 7×6 | 0 | 6 | 6 | 6 |
 | brazilian | 11 | 11/11 | 6×6, 7×5 | 0 | 11 | 9 | 9 |
 | chinese | 8 | 8/8 | 5×8 | 8 | 8 | 4 | 4 |
 | cinematic | 6 | 6/6 | 6×6 | 0 | 6 | 5 | 5 |
-| classical | 7 | 7/7 | 5×7 | 2 | 1 | 1 | 1 |
+| classical | 7 | 7/7 | 5×7 | 2 | 5 | 1 | 1 |
 | country | 7 | 7/7 | 5×5, 6×1, 7×1 | 0 | 7 | 7 | 7 |
 | dangdut | 4 | 4/4 | 6×4 | 0 | 4 | 4 | 4 |
 | desert-blues | 4 | 4/4 | 5×4 | 1 | 4 | 3 | 3 |
@@ -37,93 +37,100 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 | ethiopian | 5 | 5/5 | 5×2, 6×3 | 2 | 5 | 4 | 4 |
 | flamenco | 18 | 18/18 | 5×16, 6×2 | 14 | 20 | 13 | 11 |
 | folk | 6 | 6/6 | 5×6 | 5 | 6 | 6 | 6 |
-| funk | 9 | 9/9 | 5×1, 6×7, 7×1 | 1 | 8 | 7 | 7 |
+| funk | 9 | 9/9 | 5×1, 6×7, 7×1 | 1 | 9 | 7 | 7 |
 | gamelan | 4 | 4/4 | 5×4 | 1 | 3 | 2 | 2 |
 | gnawa | 4 | 4/4 | 5×4 | 2 | 4 | 4 | 4 |
 | gospel | 5 | 5/5 | 5×1, 7×4 | 0 | 5 | 4 | 4 |
-| hip-hop | 9 | 9/9 | 5×8, 6×1 | 1 | 8 | 8 | 8 |
+| hip-hop | 9 | 9/9 | 5×8, 6×1 | 1 | 9 | 8 | 8 |
 | house | 7 | 7/7 | 5×7 | 7 | 7 | 6 | 6 |
-| indian-classical | 8 | 8/8 | 5×8 | 8 | 4 | 2 | 2 |
-| industrial | 5 | 5/5 | 5×3, 6×2 | 3 | 4 | 2 | 2 |
+| indian-classical | 8 | 8/8 | 5×8 | 8 | 7 | 2 | 2 |
+| industrial | 5 | 5/5 | 5×3, 6×2 | 3 | 5 | 3 | 3 |
 | japanese | 5 | 5/5 | 5×5 | 4 | 5 | 4 | 4 |
-| jazz | 9 | 9/9 | 5×7, 6×1, 8×1 | 2 | 9 | 7 | 7 |
+| jazz | 9 | 9/9 | 5×7, 6×1, 8×1 | 2 | 10 | 7 | 7 |
 | kizomba | 7 | 7/7 | 6×7 | 0 | 7 | 5 | 5 |
 | korean | 5 | 5/5 | 5×5 | 5 | 5 | 4 | 4 |
-| latin | 12 | 12/12 | 5×5, 6×6, 7×1 | 0 | 11 | 9 | 9 |
+| latin | 12 | 12/12 | 5×5, 6×6, 7×1 | 0 | 12 | 10 | 10 |
 | mbalax | 4 | 4/4 | 6×4 | 0 | 4 | 4 | 4 |
 | metal | 7 | 7/7 | 5×7 | 7 | 7 | 5 | 5 |
 | mexican | 10 | 10/10 | 5×5, 6×5 | 3 | 10 | 6 | 6 |
-| persian | 5 | 5/5 | 5×5 | 5 | 4 | 2 | 2 |
+| persian | 5 | 5/5 | 5×5 | 5 | 5 | 2 | 2 |
 | pop | 9 | 9/9 | 5×3, 6×6 | 0 | 9 | 7 | 7 |
 | punk | 5 | 5/5 | 5×5 | 5 | 5 | 4 | 4 |
 | qawwali | 4 | 4/4 | 5×4 | 1 | 4 | 4 | 4 |
-| r-and-b | 9 | 9/9 | 5×9 | 0 | 9 | 6 | 6 |
+| r-and-b | 9 | 9/9 | 5×9 | 0 | 12 | 6 | 6 |
 | reggae | 7 | 7/7 | 5×1, 6×4, 7×2 | 1 | 7 | 5 | 5 |
 | reggaeton | 6 | 6/6 | 5×6 | 6 | 6 | 5 | 5 |
-| rock | 10 | 10/10 | 5×10 | 10 | 9 | 6 | 6 |
+| rock | 10 | 10/10 | 5×10 | 10 | 10 | 6 | 6 |
 | salsa | 16 | 16/16 | 7×4, 8×12 | 0 | 15 | 13 | 13 |
 | soukous | 5 | 5/5 | 5×5 | 0 | 5 | 4 | 4 |
-| steppe | 6 | 6/6 | 5×6 | 5 | 5 | 5 | 5 |
+| steppe | 6 | 6/6 | 5×6 | 5 | 6 | 5 | 5 |
 | swing | 7 | 7/7 | 5×1, 6×6 | 0 | 7 | 5 | 5 |
 | taarab | 5 | 5/5 | 5×1, 6×4 | 0 | 5 | 5 | 5 |
 | tango | 17 | 17/17 | 5×16, 7×1 | 13 | 17 | 13 | 13 |
 | timba | 12 | 12/12 | 8×12 | 0 | 12 | 11 | 11 |
 | turkish | 5 | 5/5 | 5×5 | 4 | 5 | 4 | 4 |
-| weird | 16 | 16/16 | 5×16 | 16 | 10 | 8 | 8 |
-| zouk | 10 | 10/10 | 6×9, 7×1 | 0 | 9 | 6 | 6 |
+| weird | 16 | 16/16 | 5×16 | 16 | 14 | 9 | 10 |
+| zouk | 10 | 10/10 | 6×9, 7×1 | 0 | 13 | 7 | 7 |
 
 ## SoundFont comparison medians by genre
 
 | Genre | Windows | Voiced accompaniment | Median spectral distance | Median low/body energy ratio | Median centroid ratio | Median RMS difference, dB |
 |---|---:|---:|---:|---:|---:|---:|
-| afrobeat | 12 | 9 | 0.460 | 0.55 | 1.92 | -1.8 |
-| afrobeats | 6 | 6 | 0.470 | 0.43 | 1.85 | -9.2 |
-| amapiano | 6 | 6 | 0.627 | 0.49 | 2.44 | -10.2 |
-| ambient | 9 | 9 | 0.601 | 0.74 | 1.21 | -6.9 |
-| andean | 3 | 3 | 0.878 | 0.16 | 7.29 | 1.3 |
-| bachata | 12 | 9 | 0.489 | 0.75 | 1.02 | 3.7 |
-| bass | 9 | 9 | 0.494 | 0.34 | 1.01 | -6.5 |
-| blues | 9 | 9 | 0.561 | 0.32 | 1.98 | -7.7 |
-| bollywood | 12 | 12 | 0.638 | 0.41 | 2.63 | 1.9 |
-| brazilian | 12 | 9 | 0.559 | 1.65 | 0.62 | -3.0 |
-| chinese | 9 | 6 | 0.677 | 0.00 | 3.45 | -1.3 |
-| cinematic | 6 | 6 | 0.589 | 0.90 | 1.74 | 2.0 |
-| country | 12 | 12 | 0.426 | 0.77 | 1.75 | 0.7 |
-| desert-blues | 3 | 0 | 0.592 | 0.74 | 1.70 | -1.3 |
-| electronic | 9 | 9 | 0.447 | 0.59 | 1.94 | -6.3 |
-| ethiopian | 6 | 3 | 0.403 | 4.53 | 1.41 | -8.1 |
-| flamenco | 30 | 18 | 0.457 | 1.15 | 0.62 | -0.0 |
-| folk | 6 | 6 | 0.452 | 1.00 | 2.66 | 1.2 |
-| funk | 9 | 6 | 0.459 | 0.29 | 1.38 | -2.6 |
+| afrobeat | 21 | 15 | 0.473 | 0.56 | 1.93 | -2.3 |
+| afrobeats | 15 | 15 | 0.570 | 0.42 | 2.50 | -11.3 |
+| amapiano | 15 | 15 | 0.575 | 0.56 | 2.29 | -9.4 |
+| ambient | 21 | 18 | 0.607 | 0.74 | 1.26 | -8.1 |
+| andean | 21 | 18 | 0.724 | 0.24 | 1.87 | -3.6 |
+| arabic | 12 | 9 | 0.597 | 2.37 | 0.67 | -1.4 |
+| bachata | 24 | 15 | 0.482 | 0.73 | 1.25 | 1.7 |
+| bass | 27 | 27 | 0.536 | 0.35 | 1.28 | -8.1 |
+| blues | 24 | 21 | 0.560 | 0.30 | 2.16 | -5.6 |
+| bollywood | 18 | 18 | 0.633 | 0.40 | 2.48 | 2.3 |
+| brazilian | 33 | 27 | 0.555 | 1.35 | 0.64 | -3.8 |
+| chinese | 24 | 12 | 0.613 | 2.03 | 1.73 | -0.7 |
+| cinematic | 18 | 15 | 0.639 | 0.27 | 2.69 | -1.9 |
+| classical | 3 | 3 | 0.681 | 0.01 | 2.13 | 10.9 |
+| country | 21 | 21 | 0.400 | 0.80 | 1.45 | 0.4 |
+| dangdut | 12 | 12 | 0.588 | 0.52 | 1.89 | -1.7 |
+| desert-blues | 12 | 9 | 0.537 | 0.56 | 1.79 | -5.0 |
+| electronic | 24 | 21 | 0.460 | 0.63 | 2.44 | -7.4 |
+| ethiopian | 15 | 12 | 0.469 | 1.03 | 2.03 | -7.6 |
+| flamenco | 57 | 33 | 0.427 | 1.03 | 0.66 | 1.3 |
+| folk | 18 | 18 | 0.493 | 0.82 | 2.51 | 1.6 |
+| funk | 24 | 21 | 0.563 | 0.30 | 1.79 | -2.6 |
 | gamelan | 9 | 6 | 0.620 | 5.07 | 0.50 | -2.7 |
-| gnawa | 3 | 3 | 0.541 | 0.44 | 2.20 | -5.5 |
-| gospel | 6 | 6 | 0.524 | 0.84 | 2.47 | -7.3 |
-| hip-hop | 15 | 15 | 0.642 | 0.39 | 1.56 | -9.3 |
-| house | 9 | 9 | 0.643 | 0.35 | 3.24 | -10.0 |
-| indian-classical | 3 | 3 | 0.551 | 2.29 | 1.21 | -2.4 |
-| jazz | 12 | 9 | 0.400 | 1.17 | 1.49 | 2.4 |
-| kizomba | 15 | 15 | 0.556 | 0.49 | 1.03 | -5.7 |
-| korean | 3 | 0 | 0.730 | 5.61 | 0.37 | 3.6 |
-| latin | 9 | 3 | 0.477 | 0.30 | 1.18 | -10.1 |
-| mbalax | 6 | 6 | 0.679 | 2.13 | 0.54 | 4.1 |
-| metal | 9 | 6 | 0.466 | 0.32 | 1.79 | -3.1 |
-| mexican | 9 | 6 | 0.513 | 0.85 | 1.56 | -0.5 |
-| persian | 3 | 0 | 0.567 | 1.88 | 1.36 | -17.8 |
-| pop | 15 | 15 | 0.513 | 0.42 | 1.00 | -7.8 |
-| punk | 6 | 3 | 0.440 | 0.36 | 1.62 | -3.9 |
-| r-and-b | 18 | 12 | 0.582 | 0.31 | 1.84 | -4.9 |
-| reggae | 15 | 9 | 0.534 | 0.33 | 1.91 | -7.8 |
-| reggaeton | 12 | 12 | 0.546 | 0.45 | 0.94 | -6.2 |
-| rock | 9 | 6 | 0.429 | 0.45 | 1.90 | -5.3 |
-| salsa | 27 | 21 | 0.551 | 0.55 | 1.56 | -7.3 |
-| soukous | 6 | 3 | 0.592 | 0.30 | 2.77 | -2.8 |
-| swing | 15 | 9 | 0.489 | 0.77 | 1.82 | -3.8 |
-| taarab | 9 | 9 | 0.639 | 1.57 | 2.43 | -6.5 |
-| tango | 33 | 33 | 0.475 | 0.05 | 1.87 | 4.6 |
-| timba | 12 | 12 | 0.497 | 0.28 | 2.28 | -8.8 |
-| turkish | 3 | 3 | 0.471 | 0.45 | 1.60 | -9.5 |
-| weird | 9 | 6 | 0.610 | 0.75 | 2.54 | -8.8 |
-| zouk | 6 | 6 | 0.668 | 0.28 | 1.78 | -7.9 |
+| gnawa | 12 | 12 | 0.658 | 0.88 | 1.78 | -8.7 |
+| gospel | 15 | 12 | 0.539 | 0.60 | 2.51 | -3.5 |
+| hip-hop | 24 | 24 | 0.615 | 0.40 | 1.73 | -11.4 |
+| house | 21 | 18 | 0.565 | 0.48 | 1.59 | -9.4 |
+| indian-classical | 12 | 6 | 0.569 | 8.61 | 1.13 | -2.3 |
+| industrial | 12 | 6 | 0.534 | 0.39 | 1.66 | 0.8 |
+| japanese | 15 | 12 | 0.744 | 4.16 | 1.22 | 3.8 |
+| jazz | 27 | 21 | 0.417 | 0.47 | 1.75 | 1.6 |
+| kizomba | 21 | 15 | 0.553 | 0.58 | 1.11 | -12.4 |
+| korean | 15 | 12 | 0.641 | 1.98 | 1.08 | 1.0 |
+| latin | 33 | 27 | 0.496 | 0.72 | 0.75 | -7.7 |
+| mbalax | 12 | 12 | 0.589 | 1.79 | 0.63 | -2.2 |
+| metal | 21 | 15 | 0.473 | 0.33 | 1.79 | 0.0 |
+| mexican | 30 | 18 | 0.495 | 0.76 | 1.44 | -8.7 |
+| persian | 12 | 6 | 0.676 | 7.04 | 1.40 | -13.4 |
+| pop | 27 | 21 | 0.513 | 0.35 | 1.08 | -6.0 |
+| punk | 15 | 12 | 0.380 | 0.51 | 1.74 | -1.5 |
+| qawwali | 12 | 12 | 0.567 | 0.84 | 1.89 | -7.3 |
+| r-and-b | 27 | 18 | 0.533 | 0.34 | 1.75 | -4.1 |
+| reggae | 21 | 15 | 0.548 | 0.35 | 1.88 | -7.5 |
+| reggaeton | 18 | 15 | 0.544 | 0.43 | 1.23 | -7.8 |
+| rock | 27 | 18 | 0.475 | 0.30 | 2.48 | -2.2 |
+| salsa | 45 | 39 | 0.493 | 0.55 | 1.56 | -5.9 |
+| soukous | 15 | 12 | 0.592 | 0.29 | 2.54 | -2.2 |
+| steppe | 15 | 15 | 0.545 | 0.31 | 1.56 | -3.8 |
+| swing | 21 | 15 | 0.479 | 0.75 | 1.81 | -3.4 |
+| taarab | 15 | 15 | 0.600 | 0.83 | 2.64 | -7.2 |
+| tango | 51 | 39 | 0.518 | 0.05 | 1.91 | 4.3 |
+| timba | 36 | 33 | 0.481 | 0.29 | 1.73 | -7.2 |
+| turkish | 15 | 12 | 0.580 | 2.40 | 1.40 | -9.5 |
+| weird | 30 | 24 | 0.594 | 1.01 | 0.86 | -7.0 |
+| zouk | 27 | 18 | 0.477 | 0.39 | 0.97 | -6.7 |
 
 ## Song-by-song sample roster
 
@@ -145,8 +152,8 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 | amapiano | amapiano-private-school | 6 | synth, log-drum, drums, shaker, piano, rhodes | — | voiced |
 | amapiano | amapiano-vocal | 6 | voice, log-drum, drums, shaker, piano, synth | — | voiced |
 | amapiano | amapiano-log-drum-heavy | 6 | synth, log-drum, drums, shaker, piano, rhodes | — | voiced |
-| amapiano | amapiano-bacardi | 6 | synth, log-drum, drums, shaker, piano, rhodes | — | no exact local MP3 |
-| amapiano | amapiano-gqom-crossover | 5 | synth, drums, sampler, piano, log-drum | piano, log-drum | no exact local MP3 |
+| amapiano | amapiano-bacardi | 6 | synth, log-drum, drums, shaker, piano, rhodes | — | album mix |
+| amapiano | amapiano-gqom-crossover | 5 | synth, drums, sampler, piano, log-drum | piano, log-drum | album mix |
 | amapiano | amapiano-kwaito-crossover | 6 | synth, log-drum, drums, shaker, piano, rhodes | — | voiced |
 | ambient | ambient-atmospheric | 5 | synth, piano, string-ensemble, guitar, drums | guitar, drums | voiced |
 | ambient | ambient-drone | 5 | synth, piano, string-ensemble, guitar, drums | piano, string-ensemble, guitar, drums | voiced |
@@ -154,7 +161,7 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 | ambient | ambient-organic-ambient | 5 | guitar, flute, string-ensemble, synth, piano | synth, piano | voiced |
 | ambient | ambient-neo-classical-ambient | 5 | piano, synth, string-ensemble, guitar, drums | guitar, drums | voiced |
 | ambient | ambient-glitch-ambient | 5 | piano, sampler, synth, string-ensemble, guitar | string-ensemble, guitar | album mix |
-| ambient | ambient-generative-ambient | 5 | synth, piano, string-ensemble, guitar, drums | piano, string-ensemble, guitar, drums | no exact local MP3 |
+| ambient | ambient-generative-ambient | 5 | synth, piano, string-ensemble, guitar, drums | piano, string-ensemble, guitar, drums | album mix |
 | ambient | ambient-cinematic-ambient | 5 | piano, synth, string-ensemble, guitar, drums | guitar, drums | voiced |
 | ambient | ambient-downtempo-ambient | 5 | piano, synth, drums, rhodes, string-ensemble | string-ensemble | voiced |
 | andean | andean-huayno | 5 | quena, siku, bombo-andino, charango, guitar | — | voiced |
@@ -168,7 +175,7 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 | arabic | arabic-takht | 5 | ney, oud, violin, riq, qanun | — | voiced |
 | arabic | arabic-muwashshah | 6 | voice, ney, riq, darbuka, oud, qanun | — | album mix |
 | arabic | arabic-instrumental-maqam | 5 | oud, qanun, ney, riq, darbuka | qanun, ney, riq, darbuka | voiced |
-| arabic | arabic-modern-arabic-orchestra | 7 | voice, ney, riq, darbuka, oud, qanun, string-ensemble | — | no exact local MP3 |
+| arabic | arabic-modern-arabic-orchestra | 7 | voice, ney, riq, darbuka, oud, qanun, string-ensemble | — | voiced |
 | bachata | bachata-dominican | 6 | voice, requinto, bass, bongos, guira, guitar | — | voiced |
 | bachata | bachata-amargue | 6 | voice, requinto, bass, bongos, guira, guitar | — | album mix |
 | bachata | bachata-traditional-bolero-bachata | 6 | voice, requinto, bass, bongos, guira, guitar | — | voiced |
@@ -178,7 +185,7 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 | bachata | bachata-urban | 7 | voice, requinto, synth, bongos, guira, drums, guitar | — | voiced |
 | bachata | bachata-fusion | 6 | voice, requinto, bass, bongos, guira, guitar | — | album mix |
 | bass | bass-drum-and-bass | 5 | synth, drums, sampler, bass, organ | bass, organ | voiced |
-| bass | bass-jungle | 5 | synth, drums, sampler, bass, organ | bass, organ | no exact local MP3 |
+| bass | bass-jungle | 5 | synth, drums, sampler, bass, organ | bass, organ | album mix |
 | bass | bass-liquid | 5 | synth, drums, sampler, bass, organ | bass, organ | voiced |
 | bass | bass-neurofunk | 5 | synth, drums, sampler, bass, organ | bass, organ | voiced |
 | bass | bass-uk-garage | 5 | synth, drums, sampler, bass, organ | bass, organ | voiced |
@@ -226,13 +233,13 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 | cinematic | cinematic-hybrid | 6 | piano, french-horn, cello, timpani, string-ensemble, synth | — | voiced |
 | cinematic | cinematic-epic | 6 | piano, french-horn, cello, timpani, string-ensemble, synth | — | voiced |
 | cinematic | cinematic-ambient-score | 6 | piano, french-horn, cello, timpani, string-ensemble, synth | — | voiced |
-| classical | classical-classical-orchestra | 5 | violin, flute, cello, timpani, string-ensemble | — | no exact local MP3 |
+| classical | classical-classical-orchestra | 5 | violin, flute, cello, timpani, string-ensemble | — | album mix |
 | classical | classical-baroque | 5 | violin, flute, cello, harpsichord, timpani | timpani | voiced |
-| classical | classical-romantic | 5 | violin, flute, cello, timpani, string-ensemble | — | no exact local MP3 |
-| classical | classical-impressionist | 5 | violin, flute, cello, timpani, string-ensemble | — | no exact local MP3 |
+| classical | classical-romantic | 5 | violin, flute, cello, timpani, string-ensemble | — | album mix |
+| classical | classical-impressionist | 5 | violin, flute, cello, timpani, string-ensemble | — | album mix |
 | classical | classical-modernist | 5 | violin, flute, cello, timpani, string-ensemble | — | no exact local MP3 |
 | classical | classical-minimalist | 5 | violin, flute, cello, timpani, string-ensemble | — | no exact local MP3 |
-| classical | classical-chamber | 5 | violin, cello, viola, flute, timpani | flute, timpani | no exact local MP3 |
+| classical | classical-chamber | 5 | violin, cello, viola, flute, timpani | flute, timpani | album mix |
 | country | country-honky-tonk | 5 | voice, pedal-steel, bass, drums, guitar | — | voiced |
 | country | country-bluegrass | 6 | voice, violin, banjo, upright-bass, guitar, mandolin | — | voiced |
 | country | country-bakersfield | 5 | voice, pedal-steel, bass, drums, guitar | — | voiced |
@@ -291,7 +298,7 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 | funk | funk-jazz-funk | 7 | synth, voice, trumpet, bass, drums, guitar, clavinet | — | album mix |
 | funk | funk-minneapolis | 5 | voice, synth, drums, guitar, bass | bass | voiced |
 | funk | funk-disco | 6 | voice, bass, drums, guitar, piano, string-ensemble | — | voiced |
-| funk | funk-philly-disco | 6 | voice, bass, drums, guitar, piano, string-ensemble | — | no exact local MP3 |
+| funk | funk-philly-disco | 6 | voice, bass, drums, guitar, piano, string-ensemble | — | album mix |
 | funk | funk-boogie | 6 | voice, synth, bass, drums, guitar, rhodes | — | voiced |
 | funk | funk-hi-nrg | 6 | voice, synth, bass, drums, guitar, rhodes | — | voiced |
 | gamelan | gamelan-javanese | 5 | gamelan-metallophone, rebab, kendang, gongs, bonang | — | no exact local MP3 |
@@ -314,7 +321,7 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 | hip-hop | hip-hop-trap | 5 | voice, synth, drums, sampler, rhodes | — | voiced |
 | hip-hop | hip-hop-drill | 5 | voice, synth, drums, sampler, rhodes | — | voiced |
 | hip-hop | hip-hop-jazz-rap | 6 | voice, upright-bass, drums, turntable, piano, tenor-sax | — | voiced |
-| hip-hop | hip-hop-abstract | 5 | voice, synth, drums, sampler, rhodes | — | no exact local MP3 |
+| hip-hop | hip-hop-abstract | 5 | voice, synth, drums, sampler, rhodes | — | album mix |
 | hip-hop | hip-hop-lo-fi | 5 | piano, bass, drums, turntable, rhodes | — | voiced |
 | house | house-deep-house | 5 | synth, drums, shaker, rhodes, piano | piano | voiced |
 | house | house-chicago-house | 5 | synth, drums, shaker, rhodes, piano | piano | voiced |
@@ -323,15 +330,15 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 | house | house-tech-house | 5 | synth, drums, shaker, rhodes, piano | piano | voiced |
 | house | house-progressive-house | 5 | synth, drums, shaker, rhodes, piano | piano | voiced |
 | house | house-afro-house | 5 | synth, drums, shaker, rhodes, piano | piano | voiced |
-| indian-classical | indian-classical-hindustani-khayal | 5 | voice, sarangi, tabla, tanpura, pakhawaj | pakhawaj | no exact local MP3 |
-| indian-classical | indian-classical-dhrupad | 5 | voice, rudra-veena, pakhawaj, tanpura, tabla | tabla | no exact local MP3 |
+| indian-classical | indian-classical-hindustani-khayal | 5 | voice, sarangi, tabla, tanpura, pakhawaj | pakhawaj | album mix |
+| indian-classical | indian-classical-dhrupad | 5 | voice, rudra-veena, pakhawaj, tanpura, tabla | tabla | album mix |
 | indian-classical | indian-classical-instrumental-gat | 5 | sitar, tabla, tanpura, voice, sarangi | voice, sarangi | album mix |
 | indian-classical | indian-classical-thumri | 5 | voice, sarangi, tabla, tanpura, pakhawaj | pakhawaj | voiced |
 | indian-classical | indian-classical-carnatic-kriti | 5 | voice, sarangi, tabla, tanpura, pakhawaj | pakhawaj | album mix |
-| indian-classical | indian-classical-ragam-tanam-pallavi | 5 | voice, sarangi, tabla, tanpura, pakhawaj | pakhawaj | no exact local MP3 |
+| indian-classical | indian-classical-ragam-tanam-pallavi | 5 | voice, sarangi, tabla, tanpura, pakhawaj | pakhawaj | album mix |
 | indian-classical | indian-classical-varnam | 5 | voice, sarangi, tabla, tanpura, pakhawaj | pakhawaj | no exact local MP3 |
 | indian-classical | indian-classical-tillana | 5 | voice, sarangi, tabla, tanpura, pakhawaj | pakhawaj | voiced |
-| industrial | industrial-ebm | 5 | synth, drums, sampler, guitar, bass | guitar, bass | no exact local MP3 |
+| industrial | industrial-ebm | 5 | synth, drums, sampler, guitar, bass | guitar, bass | voiced |
 | industrial | industrial-early-industrial | 5 | synth, drums, sampler, guitar, bass | guitar, bass | album mix |
 | industrial | industrial-industrial-dance | 5 | synth, drums, sampler, guitar, bass | guitar, bass | album mix |
 | industrial | industrial-industrial-rock | 6 | voice, guitar, bass, drums, sampler, synth | — | voiced |
@@ -348,7 +355,7 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 | jazz | jazz-post-bop | 5 | trumpet, tenor-sax, upright-bass, drums, piano | — | album mix |
 | jazz | jazz-big-band | 8 | trumpet, trombone, alto-sax, tenor-sax, upright-bass, drums, piano, guitar | — | album mix |
 | jazz | jazz-gypsy-jazz | 5 | guitar, violin, upright-bass, drums, piano | drums, piano | voiced |
-| jazz | jazz-jazz-fusion | 6 | guitar, tenor-sax, bass, drums, rhodes, synth | — | voiced |
+| jazz | jazz-jazz-fusion | 6 | guitar, tenor-sax, bass, drums, rhodes, synth | — | voiced, album mix |
 | jazz | jazz-free-jazz | 5 | trumpet, tenor-sax, upright-bass, drums, piano | — | voiced |
 | kizomba | kizomba-traditional | 6 | voice, bass, drums, dikanza, guitar, synth | — | voiced |
 | kizomba | kizomba-semba-derived | 6 | voice, bass, drums, dikanza, guitar, synth | — | voiced |
@@ -363,7 +370,7 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 | korean | korean-samulnori | 5 | gongs, janggu, buk, gayageum, voice | gayageum, voice | voiced |
 | korean | korean-minyo | 5 | voice, janggu, gayageum, buk, gongs | buk, gongs | voiced |
 | latin | latin-cumbia | 6 | voice, accordion, bass, cumbia-drum, guiro, guitar | — | voiced |
-| latin | latin-merengue | 6 | voice, accordion, bass, tambora, guira, piano | — | no exact local MP3 |
+| latin | latin-merengue | 6 | voice, accordion, bass, tambora, guira, piano | — | voiced |
 | latin | latin-vallenato | 5 | voice, accordion, bass, guacharaca, bongos | — | voiced |
 | latin | latin-bolero | 6 | voice, upright-bass, bongos, maracas, guitar, piano | — | voiced |
 | latin | latin-chicha | 5 | guitar, bass, cumbia-drum, guiro, organ | — | voiced |
@@ -398,7 +405,7 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 | persian | persian-dastgah | 5 | voice, tar, tombak, santur, setar | setar | voiced |
 | persian | persian-radif | 5 | setar, santur, tombak, tar, voice | tar, voice | album mix |
 | persian | persian-avaz | 5 | voice, tar, santur, tombak, setar | santur, tombak, setar | album mix |
-| persian | persian-instrumental-ensemble | 5 | voice, tar, tombak, santur, setar | setar | no exact local MP3 |
+| persian | persian-instrumental-ensemble | 5 | voice, tar, tombak, santur, setar | setar | album mix |
 | persian | persian-modern-persian | 5 | voice, tar, tombak, santur, setar | setar | voiced |
 | pop | pop-contemporary | 6 | voice, bass, drums, guitar, piano, synth | — | voiced |
 | pop | pop-dance-pop | 5 | voice, synth, drums, sampler, piano | — | voiced |
@@ -426,7 +433,7 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 | r-and-b | r-and-b-quiet-storm | 5 | voice, bass, drums, rhodes, guitar | — | voiced |
 | r-and-b | r-and-b-new-jack-swing | 5 | voice, bass, drums, rhodes, guitar | — | voiced |
 | r-and-b | r-and-b-neo-soul | 5 | voice, bass, drums, rhodes, guitar | — | album mix |
-| r-and-b | r-and-b-alternative-randb | 5 | voice, bass, drums, rhodes, guitar | — | album mix |
+| r-and-b | r-and-b-alternative-randb | 5 | voice, bass, drums, rhodes, guitar | — | album mix, album mix, album mix, album mix |
 | reggae | reggae-roots | 6 | voice, bass, drums, shaker, guitar, organ | — | voiced |
 | reggae | reggae-one-drop | 6 | voice, bass, drums, shaker, guitar, organ | — | voiced |
 | reggae | reggae-rockers | 6 | voice, bass, drums, shaker, guitar, organ | — | voiced |
@@ -445,7 +452,7 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 | rock | rock-classic-rock | 5 | voice, guitar, bass, drums, organ | organ | voiced |
 | rock | rock-hard-rock | 5 | guitar, voice, bass, drums, organ | organ | album mix |
 | rock | rock-psychedelic | 5 | guitar, voice, bass, drums, organ | organ | voiced |
-| rock | rock-progressive | 5 | voice, guitar, bass, drums, organ | organ | album mix |
+| rock | rock-progressive | 5 | voice, guitar, bass, drums, organ | organ | album mix, album mix |
 | rock | rock-indie | 5 | guitar, voice, bass, drums, organ | organ | album mix |
 | rock | rock-shoegaze | 5 | voice, guitar, bass, drums, organ | organ | voiced |
 | rock | rock-post-rock | 5 | voice, guitar, bass, drums, organ | organ | no exact local MP3 |
@@ -475,7 +482,7 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 | steppe | steppe-khoomei | 5 | voice, morin-khuur, guitar, drums, dombra | guitar, drums, dombra | voiced |
 | steppe | steppe-sygyt | 5 | voice, morin-khuur, guitar, drums, dombra | guitar, drums, dombra | voiced |
 | steppe | steppe-kargyraa | 5 | voice, morin-khuur, guitar, drums, dombra | guitar, drums, dombra | voiced |
-| steppe | steppe-dombra | 5 | dombra, morin-khuur, voice, guitar, drums | morin-khuur, voice, guitar, drums | no exact local MP3 |
+| steppe | steppe-dombra | 5 | dombra, morin-khuur, voice, guitar, drums | morin-khuur, voice, guitar, drums | album mix |
 | steppe | steppe-folk-rock-fusion | 5 | voice, morin-khuur, bass, drums, guitar | — | voiced |
 | swing | swing-west-coast-swing | 6 | trumpet, tenor-sax, upright-bass, drums, piano, guitar | — | voiced |
 | swing | swing-lindy-hop | 6 | trumpet, tenor-sax, upright-bass, drums, piano, guitar | — | album mix |
@@ -528,24 +535,24 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 | weird | weird-piano | 5 | piano, synth, sampler, drums, bass | synth, sampler, drums, bass | no exact local MP3 |
 | weird | weird-glitch | 5 | synth, sampler, piano, drums, bass | piano, drums, bass | album mix |
 | weird | weird-microsound | 5 | synth, sampler, piano, drums, bass | piano, drums, bass | voiced |
-| weird | weird-process-generative | 5 | synth, sampler, piano, drums, bass | piano, drums, bass | no exact local MP3 |
-| weird | weird-phase | 5 | piano, sampler, synth, drums, bass | drums, bass | no exact local MP3 |
-| weird | weird-microtonal | 5 | synth, sampler, piano, drums, bass | piano, drums, bass | no exact local MP3 |
+| weird | weird-process-generative | 5 | synth, sampler, piano, drums, bass | piano, drums, bass | album mix |
+| weird | weird-phase | 5 | piano, sampler, synth, drums, bass | drums, bass | voiced |
+| weird | weird-microtonal | 5 | synth, sampler, piano, drums, bass | piano, drums, bass | album mix |
 | weird | weird-free-improvisation | 5 | piano, sampler, synth, drums, bass | drums, bass | no exact local MP3 |
 | weird | weird-noise | 5 | synth, sampler, piano, drums, bass | piano, drums, bass | voiced |
 | weird | weird-drone | 5 | synth, sampler, piano, drums, bass | piano, drums, bass | voiced |
-| weird | weird-spectral | 5 | synth, sampler, piano, drums, bass | piano, drums, bass | no exact local MP3 |
+| weird | weird-spectral | 5 | synth, sampler, piano, drums, bass | piano, drums, bass | album mix |
 | weird | weird-no-wave | 5 | voice, guitar, bass, drums, synth | synth | album mix |
 | weird | weird-zeuhl | 5 | voice, bass, drums, piano, synth | synth | voiced |
 | weird | weird-polymetric | 5 | piano, sampler, synth, drums, bass | drums, bass | voiced |
 | weird | weird-circuit-bent-broken-electronics | 5 | synth, sampler, piano, drums, bass | piano, drums, bass | voiced |
-| zouk | zouk-zouk-love | 6 | voice, bass, drums, shaker, guitar, synth | — | voiced |
+| zouk | zouk-zouk-love | 6 | voice, bass, drums, shaker, guitar, synth | — | album mix, album mix, voiced |
 | zouk | zouk-zouk-beton | 6 | voice, bass, drums, shaker, guitar, synth | — | album mix |
 | zouk | zouk-orchestral-zouk-love | 6 | voice, bass, drums, shaker, guitar, synth | — | album mix |
 | zouk | zouk-cabo-zouk | 6 | voice, bass, drums, shaker, guitar, synth | — | voiced |
 | zouk | zouk-ghetto-zouk | 6 | voice, bass, drums, shaker, guitar, synth | — | album mix |
-| zouk | zouk-zouk-randb | 6 | voice, bass, drums, shaker, guitar, synth | — | voiced |
-| zouk | zouk-afro-zouk | 6 | voice, bass, drums, shaker, guitar, synth | — | no exact local MP3 |
+| zouk | zouk-zouk-randb | 6 | voice, bass, drums, shaker, guitar, synth | — | album mix, voiced |
+| zouk | zouk-afro-zouk | 6 | voice, bass, drums, shaker, guitar, synth | — | voiced |
 | zouk | zouk-kompa-crossover | 6 | voice, bass, drums, shaker, guitar, synth | — | voiced |
 | zouk | zouk-zouk-fusion | 6 | voice, bass, drums, shaker, guitar, synth | — | voiced |
 | zouk | zouk-lambazouk-oriented | 7 | voice, accordion, bass, drums, shaker, guitar, synth | — | voiced |
@@ -553,9 +560,9 @@ Updated 2026-10-08. This is a catalog and implementation crosswalk for the 55 ge
 ## Implementation and evidence notes
 
 - Sample-only support parts are added in the score builder when the authored recording roster has fewer than five instruments. They use sparse same-genre score grammar, run at reduced level, and enter from energy level 2 so the quietest introductions stay sparse. They do not modify the reusable genre style templates. Roster reductions above eight preserve melody, bass and percussion priorities first.
-- All SoundFont and legacy rendering share the song compiler, cache identities and export/mix pipeline; the live browser default is SoundFont while Legacy DSP remains selectable.
+- Live playback and export use the SoundFont event plan and shared mix. Sample audio is rendered when requested; the browser reuses only compressed bank assets.
 - Tango’s bandoneon uses the dedicated Jörg Bleymehl recording in both bellows directions. The two directions share one sparse 12-note source and use small preset differences; they are not separate recorded open/close samples. The bandoneon output is deliberately retained alongside piano, strings, and bass.
-- Reference inventory has 407 local MP3s, 390 exact style/reference links, 33 styles without an exact local MP3, 315 voiced files, and 310 style links with measured voiced features. A measured separated mix is still not an isolated instrument stem.
+- Reference inventory has 423 local MP3s, 421 exact style/reference links, 10 styles without an exact local MP3, 315 voiced files, and 317 style links with measured voiced features. A measured separated mix is still not an isolated instrument stem.
 - The current style/song dossier at [all-genres-fidelity-pass.md](./all-genres-fidelity-pass.md) should be read with this crosswalk. The detailed human-listening verdict remains open; this automated pass cannot certify “almost identical.”
 
 Machine-readable report: `audit/all-samples/instrument-ensemble-audit.json`. Rebuild with `npm run audit:sample-ensembles`.

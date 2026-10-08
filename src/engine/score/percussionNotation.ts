@@ -15,7 +15,7 @@ export function notatedDrum(instrumentId: string, midi: number): NotatedDrum {
   return { midi, componentId: id, name: component?.name ?? def?.name ?? instrumentId, ...staff,
     ...(id.includes('open') && id.includes('hihat') ? { notehead: 'circle-x' as const } : {}) };
 }
-/** Resolve the actual kit voice once, upstream of band/DSP compilation. */
+/** Resolve the actual kit voice once, upstream of band interpretation. */
 export function resolveNotatedDrum(instrumentId: string, sourceHit: string | undefined, hit: HitFunction, index: number): NotatedDrum {
   const def = INSTRUMENTS_BY_ID[instrumentId], components = def?.kitComponents ?? [], raw = String(sourceHit ?? '').toLowerCase();
   for (const [pattern, ids] of KIT_COMPONENT_MIDI_ALIASES) if (pattern.test(raw)) {

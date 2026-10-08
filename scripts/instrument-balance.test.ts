@@ -1,9 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { renderPerformanceToAudio } from '../src/engine/playback/mp3Export';
+import { setSoundfontBankReader } from '../src/engine/playback/soundfont/banks';
 import { measureAudio } from '../src/engine/studio/audioMetrics';
 import { reserveOutputHeadroom } from '../src/engine/studio/outputHeadroom';
 import type { Performance } from '../src/engine/band/performanceData';
+
+setSoundfontBankReader(async id => {
+  const bytes = readFileSync(`src/assets/soundfonts/${id}.sfpack`);
+  return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+});
 
 async function probe(instrumentId: string, midi: number, velocity = 80) {
   const performance: Performance = { notes: [{ trackId: 'probe', time: 0, dur: .4, midi, vel: velocity,

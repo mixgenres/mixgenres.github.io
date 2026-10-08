@@ -8,8 +8,8 @@ import { createPhraseState, realizeMidi, type PhraseContext } from '../src/engin
 import { GESTURE_NAMES } from '../src/engine/band/gestures';
 import { PATTERNS_BY_ID } from '../src/data/genres';
 import { sliceBarNative } from '../src/engine/sheet/grid';
-import { resolveRenderGesture } from '../src/engine/playback/renderGesture';
 import { codeForGesture } from '../src/engine/band/gestures';
+import { resolveSampleGesture } from '../src/engine/playback/soundfont/gestures';
 import { patchForInstrument } from '../src/engine/playback/soundfont/presets';
 import { ALL_STYLES } from '../src/engine/style';
 import { BANDONEON_142_BUTTONS } from '../src/engine/band/fingering/bandoneon';
@@ -33,7 +33,9 @@ test('authored tango phrases keep their articulations and fractional note length
       if (!native || !notes.length) continue;
       for (const note of notes) {
         const index = Number(note.attackId!.split(':').at(-1));
-        assert.equal(GESTURE_NAMES[note.gestureCode], native.articulations[index]);
+        if (note.authoredTechnique) assert.equal(GESTURE_NAMES[note.gestureCode], native.articulations[index]);
+        else assert.ok(getInstrumentPerformanceProfile(track.instrumentId!).gestures[GESTURE_NAMES[note.gestureCode]],
+          'style adaptation resolves to a technique supported by the player');
         const expected = native.durations[index] / native.stepsPerBar * bar.beatsPerBar * 60 / bar.bpm;
         assert.ok(Math.abs(note.dur - expected) < .002, `${track.instrumentId}/${bar.index}: ${note.dur} vs ${expected}`);
       }
@@ -79,8 +81,8 @@ test('tango variants use their actual meters and accompaniment cells', () => {
 });
 
 test('source-changing techniques do not alias a different excitation', () => {
-  assert.equal(resolveRenderGesture('upright-bass', codeForGesture('arco')).mechanics.excitation, 'bow');
-  assert.equal(resolveRenderGesture('upright-bass', codeForGesture('pizzicato')).mechanics.pitchIdentity, 'pitched');
+  assert.equal(resolveSampleGesture('upright-bass', codeForGesture('arco'), 80).action, 'arco');
+  assert.equal(resolveSampleGesture('upright-bass', codeForGesture('pizzicato'), 80).pitchIdentity, 'pitched');
   assert.deepEqual(patchForInstrument('celeste'), { bank: 0, program: 8, drum: false, pack: 'mallets' });
   assert.deepEqual(patchForInstrument('music-box'), { bank: 0, program: 10, drum: false, pack: 'mallets' });
 });

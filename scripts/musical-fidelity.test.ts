@@ -5,16 +5,17 @@ import { makeSheet, toBar } from '../src/engine/sheet/sheet';
 import { VoiceLeadingResolver } from '../src/engine/band/voiceLeading';
 import { createPhraseState, realizeMidi, type PhraseContext } from '../src/engine/band/phrasePerformance';
 import { arrangeBand } from '../src/engine/band/arrangeBand';
-import type { PerfNote } from '../src/engine/band/performanceData';
+import type { PerfNote, Performance } from '../src/engine/band/performanceData';
 import { getInstrumentPerformanceProfile } from '../src/engine/lookup/performance';
 import { getGenreTheory } from '../src/engine/lookup/theory';
-import { prepareNoteVoice } from '../src/engine/playback/performancePlan';
-import { resolveTrackSound } from '../src/engine/playback/trackSound';
+import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { resolveTuningSystem } from '../src/engine/sheet/tuning';
 import { parseChord } from '../src/engine/sheet/musicTheory';
 
 const note = (time = 0, midi = 60): PerfNote => ({ time, dur: 0.1, midi, vel: 80, trackId: 'keys', bar: 0,
   gestureCode: 0, hitFunctionCode: 0, accent: 0.8 });
+const samplePerformance = (instrumentId: string, notes: PerfNote[]): Performance => ({ notes, ccs: [], bars: [],
+  duration: 1, tail: .5, blends: {}, trackInfo: { keys: { instrumentId, role: 'harmony' } }, worldId: 'folk' });
 
 test('authored harmonic sentences retain repetitions and incomplete cycles', () => {
   const sentence = ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim', 'C'];
@@ -92,11 +93,15 @@ test('final tuning follows phrase-shaped pitches and chord/phrase attacks stay c
   }
 });
 
-test('section sound identity crosses preparation and physical controllers retain ownership', () => {
-  const params = resolveTrackSound('guitar', 'folk', '', 'harmony');
-  const authored: PerfNote = { ...note(), soundContext: { worldId: 'metal', styleId: 'metal-heavy-metal', role: 'lead' } };
-  const voice = prepareNoteVoice(authored, params, 'folk', '', 'harmony', [74]);
-  assert.equal(voice.soundParams?.genreId, 'metal');
-  assert.equal(voice.soundParams?.dialect, resolveTrackSound('guitar', 'metal', 'metal-heavy-metal', 'lead').dialect);
-  assert.deepEqual(voice.controllerKeys, ['brightness']);
+test('section sound identity and per-part pitch bends reach sample planning directly', () => {
+  const authored: PerfNote = { ...note(), soundContext: { worldId: 'metal', styleId: 'metal-heavy-metal', role: 'lead' },
+    pitchBend: [{ offset: .05, value: 9000 }] };
+  const options = { trackInstruments: new Map([['keys', 'guitar']]), worldId: 'folk', trackRoles: new Map([['keys', 'harmony']]) };
+  const withContext = compileSamplePlan(samplePerformance('guitar', [authored]), options);
+  const explicitContext = compileSamplePlan(samplePerformance('guitar', [{ ...authored, soundContext: undefined }]),
+    { ...options, worldId: 'metal', styleId: 'metal-heavy-metal', trackRoles: new Map([['keys', 'lead']]) });
+  const attack = (plan: ReturnType<typeof compileSamplePlan>) => plan.events.find(event => event.type === 'on');
+  assert.deepEqual(attack(withContext)?.type === 'on' ? attack(withContext)?.patch : undefined,
+    attack(explicitContext)?.type === 'on' ? attack(explicitContext)?.patch : undefined);
+  assert.ok(withContext.events.some(event => event.type === 'bend' && event.cents > 0), 'the part keeps its authored bend trajectory');
 });

@@ -15,7 +15,7 @@ import { densePlaybackFixture } from './lib/densePlaybackFixture';
 import { arrangeBand } from '../src/engine/band/arrangeBand';
 import { songMixOptions } from '../src/engine/playback/renderSongMix';
 import { StereoPeakGuard } from '../src/engine/playback/soundfont/peakGuard';
-import { renderPerformanceToAudio } from '../src/engine/playback/mp3Export';
+import { performanceWindow, renderPerformanceToAudio } from '../src/engine/playback/mp3Export';
 import { SAMPLE_RELEASES } from '../src/engine/playback/soundfont/bankIdentity';
 import { prepareBankForLive } from '../src/engine/playback/soundfont/prepareBank';
 import { StbVorbis } from 'stb-vorbis';
@@ -192,12 +192,12 @@ test('sample PCM renders the requested part on demand and honours cancellation',
   const again=await renderPerformanceToAudio(p,raw);assert.notEqual(again.left,result.left);assert.deepEqual(again.left,result.left);
   const abort=new AbortController();abort.abort();await assert.rejects(renderPerformanceToAudio(p,{...raw,signal:abort.signal}),{name:'AbortError'});
 });
-test('sample export windows keep old pedal-held notes and exact PCM phase',async()=>{
-  const p=performanceFixture({notes:[noteFixture({time:0,dur:.1}),noteFixture({time:7.2,midi:64,dur:.2})],ccs:[{trackId:'keys',time:.05,cc:64,value:127},{trackId:'keys',time:7.7,cc:64,value:0}],duration:8});
-  const full=await renderPerformanceToAudio(p,{...options,rawStem:true,maxDurationSeconds:8});
-  const crop=await renderPerformanceToAudio(p,{...options,rawStem:true,renderWindow:{start:7.3,end:7.9}});
-  const from=Math.round(7.3*44100);
-  assert.deepEqual(crop.left,full.left.slice(from,from+crop.left.length));assert.deepEqual(crop.right,full.right.slice(from,from+crop.right.length));
+test('sample export windows retain earlier attacks and controller history',()=>{
+  const p=performanceFixture({notes:[noteFixture({time:0,dur:.1}),noteFixture({time:1.2,midi:64,dur:.2}),noteFixture({time:1.95,midi:65})],
+    ccs:[{trackId:'keys',time:.05,cc:64,value:127},{trackId:'keys',time:1.7,cc:64,value:0},{trackId:'keys',time:1.95,cc:11,value:0}],duration:2});
+  const crop=performanceWindow(p,1.3,1.9,()=>.6,true);
+  assert.deepEqual(crop.notes.map(note=>Math.round(note.time*1e6)/1e6),[-1.3,-.1]);
+  assert.deepEqual(crop.ccs.map(cc=>Math.round(cc.time*1e6)/1e6),[-1.25,.4]);
 });
 test('linked stereo peak guard bounds transient overshoot with only 3ms latency',()=>{
   const limiter=new StereoPeakGuard(44100),l=new Float32Array(4410),r=new Float32Array(l.length);

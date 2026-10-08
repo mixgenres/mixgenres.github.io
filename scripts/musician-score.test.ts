@@ -8,8 +8,7 @@ import { exportMusicXml } from '../src/engine/score/musicXml';
 import { codeForGesture } from '../src/engine/band/gestures';
 import { PATTERNS_BY_ID } from '../src/data/genres';
 import { sliceBarNative } from '../src/engine/sheet/grid';
-import { prepareNoteVoice } from '../src/engine/playback/performancePlan';
-import { resolveTrackSound } from '../src/engine/playback/trackSound';
+import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import type { MusicalPattern } from '../src/types';
 
 function fixture(): MusicianScore {
@@ -95,8 +94,11 @@ test('score projection keeps exact pitch, technique and notation distinct from e
   assert.equal(event.notation!.beat, 1 / 3);
   score.bars[0].chord = 'F#7';
   assert.deepEqual(compileMusicianScore(score).notes, performance.notes, 'clock compilation cannot reinterpret harmony');
-  const prepared = prepareNoteVoice(event, resolveTrackSound('piano', 'tango'), 'tango', '');
-  assert.equal(prepared.frequencyHz, event.frequencyHz, 'DSP preparation cannot replace score tuning');
+  const samples = compileSamplePlan(performance, { trackInstruments: new Map([['p', 'piano']]), worldId: 'tango' });
+  const sampledAttack = samples.events.find(sample => sample.type === 'on');
+  assert.equal(sampledAttack?.type === 'on' ? sampledAttack.key : -1, 69);
+  assert.ok(Math.abs((sampledAttack?.type === 'on' ? sampledAttack.cents : 0) - 23) < 1e-8,
+    'sample planning preserves the score tuning without per-note voice preparation');
   assert.throws(() => compileMusicianScore({ ...score, notes: [note({ midi: 69.5 })] }), /Unresolved/);
 });
 

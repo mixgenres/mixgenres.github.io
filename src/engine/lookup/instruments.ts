@@ -1,33 +1,16 @@
 export { FAMILY_LABELS, FAMILY_ORDER, WORLD_INSTRUMENT_HINTS } from '../../data/instruments/families';
 import { enrichInstrumentPhysics } from '../../data/instruments/enrichment/physics';
 import type { InstrumentDef, InstrumentTechniqueProfile, AcousticFormantProfile, BowedResonanceProfile } from '../../data/instruments/schema/instrument-def';
-import type { LuthierPhysicalParameters } from '../../data/instruments/schema/luthier';
-import type { PluckedPreset } from '../../data/instruments/schema/plucked-preset';
 import { INSTRUMENT_CATALOG } from '../../data/instruments';
 import { INSTRUMENT_PATTERN_KIND_RULES } from '../../data/instruments/patternKinds';
 import { GENRE_WORLDS } from '../../data/genres';
 export { INSTRUMENT_CATALOG } from '../../data/instruments';
 export type { InstrumentDef, InstrumentFamily, DrumVoice, InstrumentTechniqueProfile } from '../../data/instruments/schema/instrument-def';
-/** Engine-side physics enrichment and runtime instrument queries. */
-/**
- * Engine-facing realism layer. Every catalog entry receives explicit physical
- * assumptions, signal-chain intent, and articulation synthesis metadata.
- */
+/** SoundFont routing and performance metadata used by the musical score. */
+/** Instrument enrichment supplies ranges, techniques and acoustic context; the sample engine owns playback. */
 export const ENRICHED_INSTRUMENT_CATALOG = INSTRUMENT_CATALOG.map(enrichInstrumentPhysics);
 
 export const INSTRUMENTS_BY_ID: Record<string, InstrumentDef> = Object.fromEntries(ENRICHED_INSTRUMENT_CATALOG.map(i => [i.id, i]));
-
-export const EXACT_PLUCKED_PRESETS: Record<string, PluckedPreset> = {};
-for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
-  if (def.family === 'plucked' || def.courses || def.bodyConstruction || def.excitationType) {
-    EXACT_PLUCKED_PRESETS[id] = {
-      courses: def.courses ?? def.luthierPhysics?.courses ?? 1,
-      bodyConstruction: def.bodyConstruction ?? def.luthierPhysics?.bodyConstruction ?? 'wood-box',
-      excitationType: def.excitationType ?? def.luthierPhysics?.excitationType ?? 'fingerpad',
-      sympatheticStrings: def.sympatheticStrings ?? def.luthierPhysics?.sympatheticStrings ?? false,
-    };
-  }
-}
 
 export const WIND_BRASS_REED_FORMANTS: Record<string, AcousticFormantProfile> = {};
 for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
@@ -40,13 +23,6 @@ export const BOWED_RESONANCES: Record<string, BowedResonanceProfile> = {};
 for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
   if (def.bowedResonance) {
     BOWED_RESONANCES[id] = def.bowedResonance;
-  }
-}
-
-export const LUTHIER_INSTRUMENT_MAP: Record<string, LuthierPhysicalParameters> = {};
-for (const [id, def] of Object.entries(INSTRUMENTS_BY_ID)) {
-  if (def.luthierPhysics) {
-    LUTHIER_INSTRUMENT_MAP[id] = def.luthierPhysics;
   }
 }
 

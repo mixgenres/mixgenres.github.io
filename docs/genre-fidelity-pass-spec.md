@@ -58,12 +58,12 @@ Build an architecture map with these four layers:
 | --- | --- | --- |
 | Written notation | `src/engine/score/notatedScore.ts`; `src/data/schema.ts`; genre-owned cells | Exact meter, beat units, rests, pitches, durations, ties, articulations, and written directions. |
 | Band interpretation | `src/engine/band/interpretBand.ts`, `interactions.ts`, `transitions.ts`; style contracts | Harmony, voicing, roles, phrase development, solo policies, ensemble timing, and boundaries. |
-| Instrument and sample routing | `src/engine/sound/transformMusicians.ts`; `src/data/instruments/`; `src/data/performance/`; `src/engine/playback/soundfont/presets.ts`; `soundfont/plan.ts` | Playable ranges, performer actions, note controls, preset zones, sample choice, pitch, attacks, sustain, and release. |
+| Instrument and sample routing | `src/data/instruments/`; `src/data/performance/`; `src/engine/playback/trackSound.ts`; `src/engine/playback/soundfont/presets.ts`; `soundfont/plan.ts` | Playable ranges, score techniques, sample routing, pitch, attacks, sustain, and release. |
 | Ensemble mix and output | `src/engine/playback/renderSongMix.ts`; `src/engine/studio/dynamicMix/`; genre mix calibration | Stage, balance, foreground handoffs, room, processing, headroom, playback/export agreement. |
 
 Save the baseline before changing data: source fingerprint, selected style IDs, deterministic seed/settings, complete realized scores, one full example per style, and focused exposed passages. Identify the baseline's listening status honestly. If no listening capability is available, retain the audio for review and mark listening as unperformed.
 
-**Exit gate:** every existing style has a coverage row; the actual data-to-score-to-physical-control-to-render path is known; baseline artifacts exist or each unavailable artifact has a specific failure recorded.
+**Exit gate:** every existing style has a coverage row; the actual data-to-score-to-sample-event path is known; baseline artifacts exist or each unavailable artifact has a specific failure recorded.
 
 ## Phase 1 — establish musical scope and evidence
 

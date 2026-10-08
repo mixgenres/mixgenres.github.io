@@ -23,8 +23,6 @@ export interface PerfNote {
   pitchIdentity?: 'pitched' | 'unpitched';
   /** A simultaneous body strike is owned once by the musical attack. */
   bodyAttack?: boolean;
-  /** Physical performance controls resolved with the score and consumed by playback. */
-  physical?: import('../sound/transformMusicians').PhysicalNote;
   musicianNotation?: import('../../data/schema').PatternEvent['notation'];
   percussion?: import('../score/percussionNotation').NotatedDrum;
   notationEventId?: string;
@@ -58,7 +56,7 @@ export interface PerfNote {
   hitFunctionCode: number;
   /** Resolved accent strength from the song/section groove plan. */
   accent: number;
-  /** Precompiled bellows movement: 1 opening, 2 closing. */
+  /** Score-planned bellows movement: 1 opening, 2 closing. */
   bellowsDirectionCode?: 1 | 2;
   /** Physical Rheinische 142 button selected by the compiler (e.g. 1/1, 0/0, *). */
   bandoneonButtonId?: string;
