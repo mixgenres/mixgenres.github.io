@@ -21,7 +21,7 @@
         250
       ],
       "exactLocalInventoryMatches": [],
-      "assessment": "Local file verified and measured; source remains descriptive evidence. Full player/timecode listening review pending.",
+      "assessment": "Canonical source retained; voice-removed measurement derivative deleted after analysis. Full player/timecode listening review pending.",
       "candidateLocalRecordings": []
     },
     {
@@ -42,7 +42,7 @@
         305.98
       ],
       "exactLocalInventoryMatches": [],
-      "assessment": "Local file verified and measured; source remains descriptive evidence. Full player/timecode listening review pending.",
+      "assessment": "Canonical source retained; voice-removed measurement derivative deleted after analysis. Full player/timecode listening review pending.",
       "candidateLocalRecordings": []
     },
     {
@@ -63,7 +63,7 @@
         163.89
       ],
       "exactLocalInventoryMatches": [],
-      "assessment": "Local file verified and measured; source remains descriptive evidence. Full player/timecode listening review pending.",
+      "assessment": "Canonical source retained; voice-removed measurement derivative deleted after analysis. Full player/timecode listening review pending.",
       "candidateLocalRecordings": []
     },
     {
@@ -84,14 +84,14 @@
         289.24
       ],
       "exactLocalInventoryMatches": [],
-      "assessment": "Local file verified and measured; source remains descriptive evidence. Full player/timecode listening review pending.",
+      "assessment": "Canonical source retained; voice-removed measurement derivative deleted after analysis. Full player/timecode listening review pending.",
       "candidateLocalRecordings": []
     },
     {
       "styleId": "chinese-jingju",
       "recording": "Mei Lanfang - The Drunken Concubine",
       "source": "separated-accompaniment",
-      "audio": "voiced/Mei Lanfang - The Drunken Concubine.mp3",
+      "audio": "samples/Mei Lanfang - The Drunken Concubine.mp3",
       "exists": true,
       "targets": {
         "rmsDbfs": -23.307,
@@ -105,14 +105,14 @@
         102.91
       ],
       "exactLocalInventoryMatches": [],
-      "assessment": "Local file verified and measured; source remains descriptive evidence. Full player/timecode listening review pending.",
+      "assessment": "Canonical source retained; voice-removed measurement derivative deleted after analysis. Full player/timecode listening review pending.",
       "candidateLocalRecordings": []
     },
     {
       "styleId": "chinese-cantonese-ensemble",
       "recording": "Cantonese music ensemble - Bu Bu Gao",
       "source": "separated-accompaniment",
-      "audio": "voiced/Cantonese music ensemble - Bu Bu Gao.mp3",
+      "audio": "samples/Cantonese music ensemble - Bu Bu Gao.mp3",
       "exists": true,
       "targets": {
         "rmsDbfs": -18.358,
@@ -126,14 +126,14 @@
         127.35
       ],
       "exactLocalInventoryMatches": [],
-      "assessment": "Local file verified and measured; source remains descriptive evidence. Full player/timecode listening review pending.",
+      "assessment": "Canonical source retained; voice-removed measurement derivative deleted after analysis. Full player/timecode listening review pending.",
       "candidateLocalRecordings": []
     },
     {
       "styleId": "chinese-chaozhou",
       "recording": "Chaozhou String Ensemble - Han Ya Xi Shui",
       "source": "separated-accompaniment",
-      "audio": "voiced/Chaozhou String Ensemble - Han Ya Xi Shui.mp3",
+      "audio": "samples/Chaozhou String Ensemble - Han Ya Xi Shui.mp3",
       "exists": true,
       "targets": {
         "rmsDbfs": -32.753,
@@ -147,7 +147,7 @@
         289.48
       ],
       "exactLocalInventoryMatches": [],
-      "assessment": "Local file verified and measured; source remains descriptive evidence. Full player/timecode listening review pending.",
+      "assessment": "Canonical source retained; voice-removed measurement derivative deleted after analysis. Full player/timecode listening review pending.",
       "candidateLocalRecordings": []
     },
     {

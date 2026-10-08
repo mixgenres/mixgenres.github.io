@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "blues-slow-blues": {
     "recording": "Albert King - As the Years Go Passing By",
-    "audio": "voiced/Albert King - As the Years Go Passing By.mp3",
+    "audio": "samples/Albert King - As the Years Go Passing By.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 18882512,
-    "audioModifiedNs": 1791152726746571818,
     "windowsSeconds": [
       165.2,
       306.8
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "blues-modern-blues": {
     "recording": "B.B. King - The Thrill Is Gone",
-    "audio": "voiced/B.B. King - The Thrill Is Gone.mp3",
+    "audio": "samples/B.B. King - The Thrill Is Gone.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 26629374,
-    "audioModifiedNs": 1791102895508282178,
     "windowsSeconds": [
       232.98,
       432.69
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "blues-piedmont": {
     "recording": "Blind Blake - West Coast Blues",
-    "audio": "voiced/Blind Blake - West Coast Blues.mp3",
+    "audio": "samples/Blind Blake - West Coast Blues.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 5533906,
-    "audioModifiedNs": 1791139800076760526,
     "windowsSeconds": [
       48.4,
       89.89
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "blues-blues-fusion": {
     "recording": "Marian Hill - Down",
-    "audio": "voiced/Marian Hill - Down.mp3",
+    "audio": "samples/Marian Hill - Down.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8315418,
-    "audioModifiedNs": 1791094944033317591,
     "windowsSeconds": [
       72.73,
       135.07
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "blues-chicago": {
     "recording": "Muddy Waters - Hoochie Coochie Man",
-    "audio": "voiced/Muddy Waters - Hoochie Coochie Man.mp3",
+    "audio": "samples/Muddy Waters - Hoochie Coochie Man.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9043828,
-    "audioModifiedNs": 1791099519597486563,
     "windowsSeconds": [
       79.11,
       146.91
@@ -96,8 +86,6 @@ export const REFERENCE_MIX = {
     "recording": "R.L. Burnside - It's Bad You Know",
     "audio": "samples/R.L. Burnside - It's Bad You Know.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 6803731,
-    "audioModifiedNs": 1791077026906644595,
     "windowsSeconds": [
       99.03,
       183.91
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "blues-delta": {
     "recording": "Robert Johnson - Cross Road Blues",
-    "audio": "voiced/Robert Johnson - Cross Road Blues.mp3",
+    "audio": "samples/Robert Johnson - Cross Road Blues.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 5952032,
-    "audioModifiedNs": 1791158076946284628,
     "windowsSeconds": [
       52.06,
       96.68
@@ -130,10 +116,8 @@ export const REFERENCE_MIX = {
   },
   "blues-texas": {
     "recording": "Stevie Ray Vaughan - Pride and Joy",
-    "audio": "voiced/Stevie Ray Vaughan - Pride and Joy.mp3",
+    "audio": "samples/Stevie Ray Vaughan - Pride and Joy.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9650854,
-    "audioModifiedNs": 1791085367435915602,
     "windowsSeconds": [
       84.42,
       156.79

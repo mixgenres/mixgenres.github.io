@@ -2,32 +2,29 @@
   "genreId": "flamenco",
   "created": "2026-10-07",
   "purpose": "Genre-local reference expansion pilot for mix, instrumentation, technique, articulation, and pattern review.",
-  "targetPerStyle": 4,
+  "targetPerStyle": 3,
   "sourceRule": "Each style owns its evidence. A reference can inform multiple styles only when the performance itself demonstrates each style; neighboring genres are not substitutes.",
   "storageGate": {
     "volumeFreeBytesAtPlanning": 22908256000,
     "preserveFreeBytes": 5368709120,
     "status": "active-style-by-style-ingest",
-    "note": "User approved a bounded Flamenco-only storage exception, preserving about 5 GiB free. Continue one style at a time, use the existing Demucs environment, keep peak temporary audio within 1 GiB, retained reference/review audio within 500 MiB, and recheck free space before each style.",
-    "forecastNewMp3sAtObservedMean": "about 286 MiB for 52 added files, based on 17 existing Flamenco MP3s averaging 5.51 MiB each; actual duration/encoding may change this.",
-    "forecastAtFivePerStyle": "about 402 MiB for 73 added files at the same observed mean.",
-    "acquiredSoFarBytes": 24971507
+    "note": "Maintain at least 5 GiB free. Keep retained references/review audio below 500 MiB and peak temporary audio below 1 GiB; check free space before each batch and separation. Three references per style is the requested baseline.",
+    "forecastNewMp3sAtObservedMean": "about 116 MiB for 21 remaining style-reference slots at a provisional 5.8 MiB mean; measured sizes vary by duration and encoding.",
+    "acquiredSoFarBytes": 207747789
   },
   "summary": {
     "styleCount": 18,
-    "existingFiles": 20,
-    "targetFiles": 72,
-    "newFilesNeeded": 52,
-    "exactMatchedStyles": 17,
-    "zeroReferenceStyles": [
-      "flamenco-seguiriya"
-    ]
+    "existingFiles": 33,
+    "targetFiles": 54,
+    "newFilesNeeded": 21,
+    "exactMatchedStyles": 18,
+    "zeroReferenceStyles": []
   },
   "styles": [
     {
       "styleId": "flamenco-solea",
       "styleName": "Soleá",
-      "targetReferences": 4,
+      "targetReferences": 3,
       "currentCount": 4,
       "addCount": 0,
       "references": [
@@ -49,7 +46,10 @@
           ],
           "source": "original-recording",
           "separationState": "existing-verified-accompaniment",
-          "windowsSeconds": [67.9, 126.09]
+          "windowsSeconds": [
+            67.9,
+            126.09
+          ]
         },
         {
           "id": "flamenco-solea-fernanda-1991",
@@ -127,9 +127,9 @@
     {
       "styleId": "flamenco-bulerias",
       "styleName": "Bulerías",
-      "targetReferences": 4,
-      "currentCount": 1,
-      "addCount": 3,
+      "targetReferences": 3,
+      "currentCount": 4,
+      "addCount": 0,
       "references": [
         {
           "id": "flamenco-bulerias-existing-paco-de-luc-a-almoraima",
@@ -140,15 +140,85 @@
           "bytes": 7037669,
           "sha256": "fa61156e45036984d1a3bd6f58f0b2bc4f7d6cd32132ca04cb965a3e21129848",
           "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        },
+        {
+          "id": "flamenco-bulerias-bernarda-fernanda-canal-sur-1990",
+          "artist": "Bernarda and Fernanda de Utrera",
+          "title": "Bulerías (Lo Flamenco, 1990)",
+          "file": "samples/Bernarda y Fernanda de Utrera - Bulerías (Canal Sur 1990).mp3",
+          "youtubeUrl": "https://www.youtube.com/watch?v=QlQ2N34Xv6c",
+          "youtubeTitle": "Más Flamenco | Las bulerías de Bernarda y Fernanda de Utrera",
+          "uploader": "Canal Sur (verified official channel)",
+          "performance": "Canal Sur documents a 1990 Lo Flamenco performance by sisters Bernarda and Fernanda de Utrera. A second ensemble-led cante reference to contrast with the existing Paco de Lucía guitar-led Almoraima recording.",
+          "state": "verified",
+          "bytes": 9188193,
+          "durationSeconds": 380.969796,
+          "sampleRateHz": 44100,
+          "channels": 2,
+          "sha256": "9b21bbed17caa06fb4b92c66fdbdd551641f9d17c39b32e18047c210df8849d8",
+          "sourceVerification": "Official Canal Sur result identifies the performers, palo and 1990 programme. MediaHuman resolved the matching title and 6:21 duration; local MP3 decodes with ffprobe. Listening/timecode map remains pending.",
+          "sourceEvidence": [
+            "https://www.youtube.com/watch?v=QlQ2N34Xv6c"
+          ],
+          "source": "original-recording",
+          "separationState": "pending",
+          "windowsSeconds": []
+        },
+        {
+          "id": "flamenco-bulerias-fernanda-canal-sur",
+          "artist": "Fernanda de Utrera",
+          "title": "Cante por bulerías (Flamenco en Canal Sur)",
+          "file": "samples/Fernanda de Utrera - Bulerías (Canal Sur live).mp3",
+          "youtubeUrl": "https://www.youtube.com/watch?v=oEfBCVLJ7e4",
+          "youtubeTitle": "Fernanda de Utrera: cante por bulerías | Flamenco en Canal Sur",
+          "uploader": "Canal Sur",
+          "performance": "Canal Sur video of Fernanda de Utrera singing por bulerías; the programme description notes a second vocal passage by Bernarda. This contrasts the guitar-led Almoraima and the sisters’ 1990 performance already in the set.",
+          "state": "verified",
+          "bytes": 11543346,
+          "durationSeconds": 480.420862,
+          "sampleRateHz": 44100,
+          "channels": 2,
+          "sha256": "56dbf5cbbabc918551de98f2fc5cde4d694e762477d1cc0e2e4beb9808f5bcf6",
+          "sourceVerification": "MediaHuman resolved the title and 8:00 duration; the video title and programme description identify Fernanda de Utrera and the bulerías performance. Local MP3 decodes with ffprobe. Listening/timecode map remains pending.",
+          "sourceEvidence": [
+            "https://www.youtube.com/watch?v=oEfBCVLJ7e4"
+          ],
+          "source": "original-recording",
+          "separationState": "pending",
+          "windowsSeconds": []
+        },
+        {
+          "id": "flamenco-bulerias-perla-de-cadiz",
+          "artist": "Perla de Cádiz",
+          "title": "Bulerías",
+          "file": "samples/Perla de Cádiz - Bulerías.mp3",
+          "youtubeTitle": "Bulerías — Perla de Cádiz",
+          "uploader": "Source upload identity pending direct verification",
+          "performance": "A second-generation Cádiz cante reference from Perla de Cádiz, complementing the guitar-led Paco de Lucía and the two Utrera performances already in the set.",
+          "state": "source-identity-review-pending",
+          "bytes": 4234513,
+          "durationSeconds": 175.961882,
+          "sampleRateHz": 44100,
+          "channels": 2,
+          "sha256": "a6282a3cde90ffe65bcaafbf2022d12a1634b6e5dd6dc7338511184787a304af",
+          "sourceVerification": "Local MP3 decodes with ffprobe at 44.1 kHz stereo; the source/video title resolved in MediaHuman. Listening and timecode mapping remain pending. A University of Seville flamenco study indexes this exact video under Perla de Cádiz-Bulerías.",
+          "sourceEvidence": [
+            "https://www.youtube.com/watch?v=mXxv8Gd6vjM",
+            "https://idus.us.es/bitstreams/93c2e691-54d2-45ce-9cb3-d445194e3f4a/download"
+          ],
+          "source": "original-recording",
+          "separationState": "pending",
+          "windowsSeconds": [],
+          "youtubeUrl": "https://www.youtube.com/watch?v=mXxv8Gd6vjM"
         }
       ]
     },
     {
       "styleId": "flamenco-alegrias",
       "styleName": "Alegrías",
-      "targetReferences": 4,
-      "currentCount": 1,
-      "addCount": 3,
+      "targetReferences": 3,
+      "currentCount": 3,
+      "addCount": 0,
       "references": [
         {
           "id": "flamenco-alegrias-existing-camar-n-de-la-isla-bah-a-de-c-diz",
@@ -159,15 +229,62 @@
           "bytes": 4234679,
           "sha256": "4729e3f9809a95fdd8478314028221a74b58ad823f761ee6d7586643b38a0849",
           "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        },
+        {
+          "id": "flamenco-alegrias-pericon-a-treinta-barcos",
+          "artist": "Pericón de Cádiz",
+          "title": "A treinta barcos de guerra (Alegrías)",
+          "file": "samples/Pericón de Cádiz - A treinta barcos de guerra (Alegrías).mp3",
+          "youtubeUrl": "https://www.youtube.com/watch?v=lahWeNbhk7o",
+          "youtubeTitle": "Pericón de Cádiz - A Treinta Barcos de Guerra (Alegrías) (Flamenco Masters)",
+          "uploader": "Flamenco Masters (channel identity pending direct verification)",
+          "performance": "Pericón de Cádiz in a Cádiz Alegrías; the source describes him as a master of the Cádiz school. Contrasts Camarón’s studio performance with an older cante lineage.",
+          "state": "source-identity-review-pending",
+          "bytes": 4809856,
+          "durationSeconds": 197.892086,
+          "sampleRateHz": 44100,
+          "channels": 2,
+          "sha256": "221f7c381d8cc2131dd00f342a104c79a4506cc840ff5aa1d2d71ed0ec43e56f",
+          "sourceVerification": "MediaHuman resolved the title, artist and 3:18 duration; local MP3 decodes with ffprobe. Search result describes the performer and Cádiz school; uploader identity and listening/timecode map still need direct review.",
+          "sourceEvidence": [
+            "https://www.youtube.com/watch?v=lahWeNbhk7o"
+          ],
+          "source": "original-recording",
+          "separationState": "pending",
+          "windowsSeconds": []
+        },
+        {
+          "id": "flamenco-alegrias-chano-lobato-1990",
+          "artist": "Chano Lobato",
+          "title": "Alegrías (Al Buen Compás, 1990)",
+          "file": "samples/Chano Lobato - Alegrías (1990).mp3",
+          "youtubeTitle": "Alegrías. Chano Lobato. 1990",
+          "uploader": "Canal Andalucia Flamenco (verified)",
+          "guitarist": "José Luis Postigo",
+          "performance": "1990 Al Buen Compás performance by Cádiz cantaor Chano Lobato with José Luis Postigo on guitar. This adds a clear singer-led reference distinct from Camarón and Pericón de Cádiz.",
+          "state": "verified",
+          "bytes": 11780736,
+          "durationSeconds": 490.405442,
+          "sampleRateHz": 44100,
+          "channels": 2,
+          "sha256": "6da6e773b63a6b9fb93ada440104c4da8f7de0164f2e4670ebbbd082d3e00075",
+          "sourceVerification": "Verified Canal Andalucia Flamenco source identifies the palo, cantaor, guitarist, and Al Buen Compás (1990). MediaHuman resolved the title and 8:10 duration; local MP3 decodes with ffprobe. Listening/timecode map remains pending.",
+          "sourceEvidence": [
+            "https://www.youtube.com/watch?v=WpighLFNLto"
+          ],
+          "source": "original-recording",
+          "separationState": "pending",
+          "windowsSeconds": [],
+          "youtubeUrl": "https://www.youtube.com/watch?v=WpighLFNLto"
         }
       ]
     },
     {
       "styleId": "flamenco-tangos",
       "styleName": "Tangos",
-      "targetReferences": 4,
-      "currentCount": 1,
-      "addCount": 3,
+      "targetReferences": 3,
+      "currentCount": 2,
+      "addCount": 1,
       "references": [
         {
           "id": "flamenco-tangos-existing-camar-n-de-la-isla-como-el-agua",
@@ -178,23 +295,72 @@
           "bytes": 5344055,
           "sha256": "472855029d8cd98ddd82d62202be2d08c8cb8a1b720648cae966100adcd6c841",
           "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        },
+        {
+          "id": "flamenco-tangos-fosforito",
+          "artist": "Fosforito",
+          "title": "Tangos",
+          "file": "samples/Fosforito - Tangos.mp3",
+          "youtubeTitle": "Fosforito por Tangos",
+          "uploader": "Source upload identity pending direct verification",
+          "performance": "Tangos sung by Fosforito, bringing a more traditional cante-and-guitar approach alongside the existing Camarón reference.",
+          "state": "source-identity-review-pending",
+          "bytes": 1985422,
+          "durationSeconds": 82.268299,
+          "sampleRateHz": 44100,
+          "channels": 2,
+          "sha256": "32450ab43b09cc26409076902ac8728d4cd72d449151f5916045f9b0c72c986b",
+          "sourceVerification": "Local MP3 decodes with ffprobe at 44.1 kHz stereo; the source/video title resolved in MediaHuman. Listening and timecode mapping remain pending. A University of Seville flamenco study indexes this video as Fosforito por tangos.",
+          "sourceEvidence": [
+            "https://www.youtube.com/watch?v=szh_IDEVxYE",
+            "https://idus.us.es/bitstreams/93c2e691-54d2-45ce-9cb3-d445194e3f4a/download"
+          ],
+          "source": "original-recording",
+          "separationState": "pending",
+          "windowsSeconds": [],
+          "youtubeUrl": "https://www.youtube.com/watch?v=szh_IDEVxYE"
         }
       ]
     },
     {
       "styleId": "flamenco-seguiriya",
       "styleName": "Seguiriya",
-      "targetReferences": 4,
-      "currentCount": 0,
-      "addCount": 4,
-      "references": []
+      "targetReferences": 3,
+      "currentCount": 1,
+      "addCount": 2,
+      "references": [
+        {
+          "id": "flamenco-seguiriya-antonio-mairena-seguiriyas",
+          "artist": "Antonio Mairena",
+          "title": "Seguiriyas",
+          "file": "samples/Antonio Mairena - Seguiriyas.mp3",
+          "youtubeUrl": "https://www.youtube.com/watch?v=T2Kfn4g1ipw",
+          "youtubeTitle": "Antonio Mairena - Seguiriyas",
+          "uploader": "Source upload identity pending direct verification",
+          "performance": "A distinct cante por seguiriyas performance by Antonio Mairena. Source is listed as an Antonio Mairena-Seguiriyas example in a University of Seville flamenco study appendix.",
+          "state": "source-identity-review-pending",
+          "bytes": 10443373,
+          "durationSeconds": 434.783107,
+          "sampleRateHz": 44100,
+          "channels": 2,
+          "sha256": "98233e8099d91a641dce4c2e3b52c4ff8bf6dfba6793ba4f65242b0e47d4aa1f",
+          "sourceVerification": "MediaHuman resolved the title and 7:15 duration; the local MP3 decodes with ffprobe. The University of Seville study lists this video as Antonio Mairena-Seguiriyas. Uploader, exact historical recording, and listening/timecode map remain pending.",
+          "sourceEvidence": [
+            "https://www.youtube.com/watch?v=T2Kfn4g1ipw",
+            "https://idus.us.es/bitstreams/93c2e691-54d2-45ce-9cb3-d445194e3f4a/download"
+          ],
+          "source": "original-recording",
+          "separationState": "pending",
+          "windowsSeconds": []
+        }
+      ]
     },
     {
       "styleId": "flamenco-tientos",
       "styleName": "Tientos",
-      "targetReferences": 4,
-      "currentCount": 1,
-      "addCount": 3,
+      "targetReferences": 3,
+      "currentCount": 2,
+      "addCount": 1,
       "references": [
         {
           "id": "flamenco-tientos-existing-camar-n-mora-to-como-un-lirio",
@@ -205,15 +371,39 @@
           "bytes": 6469411,
           "sha256": "0db13c817fb3e2bee47010fa434f9a69bbd6f7cb92e084fe7aa02b8fbcf56c78",
           "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        },
+        {
+          "id": "flamenco-tientos-gaspar-de-utrera-1989",
+          "artist": "Gaspar de Utrera",
+          "title": "Tientos (Noche Flamenca, 1989)",
+          "file": "samples/Gaspar de Utrera - Tientos (1989).mp3",
+          "youtubeUrl": "https://www.youtube.com/watch?v=vHAuK5pYlwA",
+          "youtubeTitle": "Tientos. Gaspar de Utrera. 1989",
+          "uploader": "Canal Andalucia Flamenco (verified)",
+          "guitarist": "José Luis Postigo",
+          "performance": "1989 Noche Flamenca Tientos performance with Gaspar de Utrera and guitarist José Luis Postigo; adds a traditional cante-led ensemble reference alongside the existing Camarón recording.",
+          "state": "verified",
+          "bytes": 6336899,
+          "durationSeconds": 261.735329,
+          "sampleRateHz": 44100,
+          "channels": 2,
+          "sha256": "013cb8b6eacf33b5d3e6bae3fb00bda863d1d4bc7f62444dc352fa2103d1c51f",
+          "sourceVerification": "Verified Canal Andalucia Flamenco page identifies the palo, cantaor, guitarist, and Noche Flamenca (1989). MediaHuman resolved the matching title and 4:22 duration; local MP3 decodes with ffprobe. Listening/timecode map remains pending.",
+          "sourceEvidence": [
+            "https://www.youtube.com/watch?v=vHAuK5pYlwA"
+          ],
+          "source": "original-recording",
+          "separationState": "pending",
+          "windowsSeconds": []
         }
       ]
     },
     {
       "styleId": "flamenco-fandangos",
       "styleName": "Fandangos",
-      "targetReferences": 4,
-      "currentCount": 1,
-      "addCount": 3,
+      "targetReferences": 3,
+      "currentCount": 3,
+      "addCount": 0,
       "references": [
         {
           "id": "flamenco-fandangos-existing-camar-n-salud-antes-que-dinero",
@@ -224,15 +414,63 @@
           "bytes": 4162924,
           "sha256": "5e8df34589f401916fc3594b0b1e6724d43b6c071ae6f0d4340c1fdc303aa6af",
           "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        },
+        {
+          "id": "flamenco-fandangos-paco-toronjo-1991",
+          "artist": "Paco Toronjo",
+          "title": "Fandangos de Huelva (1991)",
+          "file": "samples/Paco Toronjo - Fandangos de Huelva (1991).mp3",
+          "youtubeUrl": "https://www.youtube.com/watch?v=USmEZQBFCow",
+          "youtubeTitle": "PACO TORONJO: FANDANGOS DE HUELVA",
+          "uploader": "DesdeLoJondo",
+          "guitarist": "José María de Lepe",
+          "performance": "1991 cante por fandangos de Huelva by Paco Toronjo with José María de Lepe on guitar. This adds an exposed Huelva lineage and guitar/cante relation alongside Camarón’s existing recording.",
+          "state": "verified",
+          "bytes": 5270468,
+          "durationSeconds": 217.338776,
+          "sampleRateHz": 44100,
+          "channels": 2,
+          "sha256": "ab7f9286c61697dd3cfa71ca1f51fc238b182b75441370d5da302e95755861c3",
+          "sourceVerification": "The video page identifies the 1991 recording, cantaor, guitarist, and Paco Toronjo’s specialization in fandangos de Huelva. MediaHuman resolved the title and 3:37 duration; local MP3 decodes with ffprobe. Listening/timecode map remains pending.",
+          "sourceEvidence": [
+            "https://www.youtube.com/watch?v=USmEZQBFCow"
+          ],
+          "source": "original-recording",
+          "separationState": "pending",
+          "windowsSeconds": []
+        },
+        {
+          "id": "flamenco-fandangos-paco-toronjo-2-2",
+          "artist": "Paco Toronjo",
+          "title": "Fandangos de Huelva (2/2)",
+          "file": "samples/Manuel Torres - Fandangos de Huelva (Paco Toronjo).mp3",
+          "youtubeTitle": "PACO TORONJO-FANDANGOS DE HUELVA 2/2",
+          "uploader": "Manuel Torres (as shown in MediaHuman; channel identity pending direct verification)",
+          "performance": "Additional Fandangos de Huelva reference associated with Paco Toronjo by a University of Seville study; use as a second Toronjo passage only after listening confirms performer and distinct performance.",
+          "state": "source-identity-review-pending",
+          "bytes": 9041398,
+          "durationSeconds": 376.170703,
+          "sampleRateHz": 44100,
+          "channels": 2,
+          "sha256": "9c9967367e1a10e08b48b6f95f46eb19bddf036f7e4e1d9392b742d193f95a36",
+          "sourceVerification": "Local MP3 decodes with ffprobe at 44.1 kHz stereo; the source/video title resolved in MediaHuman. Listening and timecode mapping remain pending. The university source index identifies this URL as Paco Toronjo-Fandangos de Huelva; the uploader/performer attribution needs direct review.",
+          "sourceEvidence": [
+            "https://www.youtube.com/watch?v=mMOes2RtxNI",
+            "https://idus.us.es/bitstreams/93c2e691-54d2-45ce-9cb3-d445194e3f4a/download"
+          ],
+          "source": "original-recording",
+          "separationState": "pending",
+          "windowsSeconds": [],
+          "youtubeUrl": "https://www.youtube.com/watch?v=mMOes2RtxNI"
         }
       ]
     },
     {
       "styleId": "flamenco-rumba",
       "styleName": "Rumba",
-      "targetReferences": 4,
+      "targetReferences": 3,
       "currentCount": 1,
-      "addCount": 3,
+      "addCount": 2,
       "references": [
         {
           "id": "flamenco-rumba-existing-paco-de-luc-a-entre-dos-aguas",
@@ -249,9 +487,9 @@
     {
       "styleId": "flamenco-tonas-martinetes",
       "styleName": "Tonás / Martinetes",
-      "targetReferences": 4,
-      "currentCount": 1,
-      "addCount": 3,
+      "targetReferences": 3,
+      "currentCount": 2,
+      "addCount": 1,
       "references": [
         {
           "id": "flamenco-tonas-martinetes-existing-antonio-mairena-martinete-y-debla",
@@ -262,15 +500,39 @@
           "bytes": 7121167,
           "sha256": "118a852e5f6b5dfaea4c6f58aa4389529e752ef85d33a4762a7fa1a0168f718b",
           "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        },
+        {
+          "id": "flamenco-tonas-martinetes-fosforito-martinete",
+          "artist": "A. Fernández “Fosforito”",
+          "title": "Martinete (1969)",
+          "file": "samples/A. Fernandez Fosforito - Martinete (1969).mp3",
+          "youtubeUrl": "https://www.youtube.com/watch?v=ZabPPGMtcMo",
+          "youtubeTitle": "A. Fernandez \"Fosforito\" - Martinete (1969)",
+          "uploader": "Source upload identity pending direct verification",
+          "performance": "Fosforito singing a Martinete, a toná family style performed without guitar accompaniment; expands the existing Antonio Mairena Tonás/Martinetes reference with another major cantaor.",
+          "state": "source-identity-review-pending",
+          "bytes": 1766745,
+          "durationSeconds": 73.142857,
+          "sampleRateHz": 44100,
+          "channels": 2,
+          "sha256": "2585b6cf4587ebe1c3cc43e8a128c7729037d5912a711a14b02c0aab2ba29240",
+          "sourceVerification": "MediaHuman resolved the titled Martinete performance and 1:13 duration; local MP3 decodes with ffprobe. A University of Seville study appendix lists this source under A. Fernández “Fosforito”-Martinete. Exact upload identity and listening/timecode map remain pending.",
+          "sourceEvidence": [
+            "https://www.youtube.com/watch?v=ZabPPGMtcMo",
+            "https://idus.us.es/bitstreams/93c2e691-54d2-45ce-9cb3-d445194e3f4a/download"
+          ],
+          "source": "original-recording",
+          "separationState": "not-needed-vocal-solo",
+          "windowsSeconds": []
         }
       ]
     },
     {
       "styleId": "flamenco-taranta",
       "styleName": "Taranta",
-      "targetReferences": 4,
-      "currentCount": 1,
-      "addCount": 3,
+      "targetReferences": 3,
+      "currentCount": 2,
+      "addCount": 1,
       "references": [
         {
           "id": "flamenco-taranta-existing-paco-de-luc-a-t-o-sabas",
@@ -281,15 +543,39 @@
           "bytes": 7462207,
           "sha256": "b7d87315d39470b483101a16a51cc53c1f87395fb20087e1357e6568c9b39f6d",
           "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        },
+        {
+          "id": "flamenco-taranta-nino-de-almaden",
+          "artist": "Niño de Almadén",
+          "title": "Taranta",
+          "file": "samples/Niño de Almadén - Taranta.mp3",
+          "youtubeTitle": "Niño de Almadén - Taranta",
+          "uploader": "Source upload identity pending direct verification",
+          "performance": "A traditional cante minero interpretation by Niño de Almadén, adding a vocal-led counterpoint to Paco de Lucía’s instrumental Taranta.",
+          "state": "source-identity-review-pending",
+          "bytes": 3077230,
+          "durationSeconds": 127.89551,
+          "sampleRateHz": 44100,
+          "channels": 2,
+          "sha256": "0aab80f97d60234fa9ce39d38b68be5ee17f79d1da49295c222fb16ff0f71635",
+          "sourceVerification": "Local MP3 decodes with ffprobe at 44.1 kHz stereo; the source/video title resolved in MediaHuman. Listening and timecode mapping remain pending. A University of Seville flamenco study indexes this source as Niño de Almadén-Taranta.",
+          "sourceEvidence": [
+            "https://www.youtube.com/watch?v=yZzP9keGoD0",
+            "https://idus.us.es/bitstreams/93c2e691-54d2-45ce-9cb3-d445194e3f4a/download"
+          ],
+          "source": "original-recording",
+          "separationState": "pending",
+          "windowsSeconds": [],
+          "youtubeUrl": "https://www.youtube.com/watch?v=yZzP9keGoD0"
         }
       ]
     },
     {
       "styleId": "flamenco-granaina-malaguena",
       "styleName": "Granaína / Malagueña",
-      "targetReferences": 4,
+      "targetReferences": 3,
       "currentCount": 1,
-      "addCount": 3,
+      "addCount": 2,
       "references": [
         {
           "id": "flamenco-granaina-malaguena-existing-camar-n-que-he-dejao-de-quererte",
@@ -306,9 +592,9 @@
     {
       "styleId": "flamenco-guajira",
       "styleName": "Guajira",
-      "targetReferences": 4,
+      "targetReferences": 3,
       "currentCount": 1,
-      "addCount": 3,
+      "addCount": 2,
       "references": [
         {
           "id": "flamenco-guajira-existing-paco-de-luc-a-guajiras-de-luc-a",
@@ -325,9 +611,9 @@
     {
       "styleId": "flamenco-farruca",
       "styleName": "Farruca",
-      "targetReferences": 4,
-      "currentCount": 1,
-      "addCount": 3,
+      "targetReferences": 3,
+      "currentCount": 2,
+      "addCount": 1,
       "references": [
         {
           "id": "flamenco-farruca-existing-sabicas-farruca",
@@ -338,15 +624,38 @@
           "bytes": 6689390,
           "sha256": "861caf0db3977cf80512b256d71b20a3b7da2979dd80059354bdc7bb9d3730e2",
           "provenance": "Local MP3 is present and decodable in the current sample inventory; original YouTube URL, uploader, version/timecodes, and musical review still need verification."
+        },
+        {
+          "id": "flamenco-farruca-sabicas-bienal-1986",
+          "artist": "Sabicas",
+          "title": "Farruca (IV Bienal de Sevilla, 1986)",
+          "file": "samples/Sabicas - Farruca (Canal Andalucia 1986).mp3",
+          "youtubeUrl": "https://www.youtube.com/watch?v=DgwoD2ywSOU",
+          "youtubeTitle": "Farruca. Sabicas. 1986",
+          "uploader": "Canal Andalucia Flamenco (verified)",
+          "performance": "Solo-guitar performance by Sabicas, recorded at the IV Bienal de Sevilla in 1986 and broadcast in La Puerta del Cante (1990). Use for farruca phrase shape, attack, register, dance pulse, and cierre; not for ensemble balance.",
+          "state": "verified",
+          "bytes": 5099498,
+          "durationSeconds": 210.651429,
+          "sampleRateHz": 44100,
+          "channels": 2,
+          "sha256": "2bf6693f7f9195268c29b06e72070af8f4dfb01af01fb911ebef68739f4593c4",
+          "sourceVerification": "The official Canal Andalucia Flamenco source identifies the palo, Sabicas, broadcast programme, and 1986 Bienal performance. MediaHuman resolved the matching title and 3:31 duration; the local MP3 decodes at 44.1 kHz stereo. Listening and timecode mapping remain pending.",
+          "sourceEvidence": [
+            "https://www.youtube.com/watch?v=DgwoD2ywSOU"
+          ],
+          "source": "original-recording",
+          "separationState": "not-needed-instrumental",
+          "windowsSeconds": []
         }
       ]
     },
     {
       "styleId": "flamenco-sevillanas",
       "styleName": "Sevillanas",
-      "targetReferences": 4,
+      "targetReferences": 3,
       "currentCount": 1,
-      "addCount": 3,
+      "addCount": 2,
       "references": [
         {
           "id": "flamenco-sevillanas-existing-paco-de-luc-a-el-cobre",
@@ -363,9 +672,9 @@
     {
       "styleId": "flamenco-nuevo-flamenco",
       "styleName": "Nuevo Flamenco",
-      "targetReferences": 4,
+      "targetReferences": 3,
       "currentCount": 1,
-      "addCount": 3,
+      "addCount": 2,
       "references": [
         {
           "id": "flamenco-nuevo-flamenco-existing-camar-n-la-leyenda-del-tiempo",
@@ -382,9 +691,9 @@
     {
       "styleId": "flamenco-flamenco-jazz",
       "styleName": "Flamenco Jazz",
-      "targetReferences": 4,
+      "targetReferences": 3,
       "currentCount": 1,
-      "addCount": 3,
+      "addCount": 2,
       "references": [
         {
           "id": "flamenco-flamenco-jazz-existing-paco-de-luc-a-zyryab",
@@ -401,9 +710,9 @@
     {
       "styleId": "flamenco-flamenco-rock",
       "styleName": "Flamenco Rock",
-      "targetReferences": 4,
+      "targetReferences": 3,
       "currentCount": 1,
-      "addCount": 3,
+      "addCount": 2,
       "references": [
         {
           "id": "flamenco-flamenco-rock-existing-pata-negra-blues-de-la-frontera",
@@ -420,9 +729,9 @@
     {
       "styleId": "flamenco-urban-experimental",
       "styleName": "Urban / Experimental",
-      "targetReferences": 4,
+      "targetReferences": 3,
       "currentCount": 1,
-      "addCount": 3,
+      "addCount": 2,
       "references": [
         {
           "id": "flamenco-urban-experimental-existing-rosal-a-malamente",
@@ -436,5 +745,6 @@
         }
       ]
     }
-  ]
+  ],
+  "updated": "2026-10-08"
 }

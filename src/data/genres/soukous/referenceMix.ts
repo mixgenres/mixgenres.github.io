@@ -6,8 +6,6 @@ export const REFERENCE_MIX = {
     "recording": "Awilo Longomba - Coupé Bibamba",
     "audio": "samples/Awilo Longomba - Coupé Bibamba.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 6164301,
-    "audioModifiedNs": 1791077573292903289,
     "windowsSeconds": [
       89.71,
       166.61
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "soukous-congolese-rumba": {
     "recording": "Franco & TPOK Jazz - Mario",
-    "audio": "voiced/Franco & TPOK Jazz - Mario.mp3",
+    "audio": "samples/Franco & TPOK Jazz - Mario.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 34522529,
-    "audioModifiedNs": 1791100541385829041,
     "windowsSeconds": [
       302.05,
       560.95
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "soukous-soukous": {
     "recording": "Kanda Bongo Man - Monie",
-    "audio": "voiced/Kanda Bongo Man - Monie.mp3",
+    "audio": "samples/Kanda Bongo Man - Monie.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7574617,
-    "audioModifiedNs": 1791107810172021306,
     "windowsSeconds": [
       66.26,
       123.05
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "soukous-kwassa-kwassa": {
     "recording": "Kanda Bongo Man - Sai",
-    "audio": "voiced/Kanda Bongo Man - Sai.mp3",
+    "audio": "samples/Kanda Bongo Man - Sai.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 15328776,
-    "audioModifiedNs": 1791089950072729180,
     "windowsSeconds": [
       134.1,
       249.04
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "soukous-sebene": {
     "recording": "Zaïko Langa Langa - Sentiment Awa",
-    "audio": "voiced/Zaïko Langa Langa - Sentiment Awa.mp3",
+    "audio": "samples/Zaïko Langa Langa - Sentiment Awa.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8532763,
-    "audioModifiedNs": 1791148412084099438,
     "windowsSeconds": [
       74.64,
       138.62

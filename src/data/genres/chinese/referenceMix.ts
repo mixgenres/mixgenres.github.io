@@ -6,8 +6,6 @@ export const REFERENCE_MIX = {
     "recording": "Shanghai Conservatory Professor Jiangnan Sizhu Research Group - Huanle Ge",
     "audio": "samples/上海音乐学院教授丝竹研究组 - 欢乐歌.mp3",
     "source": "original-recording",
-    "audioBytes": 8196209,
-    "audioModifiedNs": 1791140277851610066,
     "windowsSeconds": [75, 150, 250],
     "targets": {
       "rmsDbfs": -19.4947,
@@ -19,10 +17,8 @@ export const REFERENCE_MIX = {
   },
   "chinese-cantonese-ensemble": {
     "recording": "Cantonese music ensemble - Bu Bu Gao",
-    "audio": "voiced/Cantonese music ensemble - Bu Bu Gao.mp3",
+    "audio": "samples/Cantonese music ensemble - Bu Bu Gao.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7840051,
-    "audioModifiedNs": 1791091359360347057,
     "windowsSeconds": [
       68.58,
       127.35
@@ -37,10 +33,8 @@ export const REFERENCE_MIX = {
   },
   "chinese-chaozhou": {
     "recording": "Chaozhou String Ensemble - Han Ya Xi Shui",
-    "audio": "voiced/Chaozhou String Ensemble - Han Ya Xi Shui.mp3",
+    "audio": "samples/Chaozhou String Ensemble - Han Ya Xi Shui.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 17816768,
-    "audioModifiedNs": 1791085007416779978,
     "windowsSeconds": [
       155.88,
       289.48
@@ -57,8 +51,6 @@ export const REFERENCE_MIX = {
     "recording": "Guan Pinghu - Liu Shui",
     "audio": "samples/Guan Pinghu - Liu Shui.mp3",
     "source": "original-recording",
-    "audioBytes": 11394384,
-    "audioModifiedNs": 1791077061342470843,
     "windowsSeconds": [
       164.76,
       305.98
@@ -73,10 +65,8 @@ export const REFERENCE_MIX = {
   },
   "chinese-jingju": {
     "recording": "Mei Lanfang - The Drunken Concubine",
-    "audio": "voiced/Mei Lanfang - The Drunken Concubine.mp3",
+    "audio": "samples/Mei Lanfang - The Drunken Concubine.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6335385,
-    "audioModifiedNs": 1791081377428650507,
     "windowsSeconds": [
       55.41,
       102.91
@@ -93,8 +83,6 @@ export const REFERENCE_MIX = {
     "recording": "Traditional - Ambush from Ten Sides",
     "audio": "samples/Traditional - Ambush from Ten Sides.mp3",
     "source": "original-recording",
-    "audioBytes": 10695759,
-    "audioModifiedNs": 1791077062349234716,
     "windowsSeconds": [
       155.75,
       289.24
@@ -111,8 +99,6 @@ export const REFERENCE_MIX = {
     "recording": "Traditional - Fisherman's Song at Eventide",
     "audio": "samples/Traditional - Fisherman's Song at Eventide.mp3",
     "source": "original-recording",
-    "audioBytes": 6104597,
-    "audioModifiedNs": 1791077057165632603,
     "windowsSeconds": [
       88.25,
       163.89
@@ -129,8 +115,6 @@ export const REFERENCE_MIX = {
     "recording": "Bai Niao Chao Feng — suona and orchestra (2022 National Orchestra New Year Concert; orchestral adaptation)",
     "audio": "samples/Ren Tongxiang - Bai Niao Chao Feng.mp3",
     "source": "original-recording",
-    "audioBytes": 11342563,
-    "audioModifiedNs": 1791391568101723933,
     "windowsSeconds": [0, 164.67, 305.82],
     "targets": {
       "rmsDbfs": -29.707,

@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "r-and-b-contemporary-randb": {
     "recording": "Aaliyah - One in a Million",
-    "audio": "voiced/Aaliyah - One in a Million.mp3",
+    "audio": "samples/Aaliyah - One in a Million.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 12203601,
-    "audioModifiedNs": 1791106201571395587,
     "windowsSeconds": [
       106.76,
       198.26
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "r-and-b-quiet-storm": {
     "recording": "Anita Baker - Sweet Love",
-    "audio": "voiced/Anita Baker - Sweet Love.mp3",
+    "audio": "samples/Anita Baker - Sweet Love.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10650806,
-    "audioModifiedNs": 1791093798144377375,
     "windowsSeconds": [
       93.17,
       173.03
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "r-and-b-memphis-soul": {
     "recording": "Ann Peebles - I Can't Stand the Rain",
-    "audio": "voiced/Ann Peebles - I Can't Stand the Rain.mp3",
+    "audio": "samples/Ann Peebles - I Can't Stand the Rain.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6020933,
-    "audioModifiedNs": 1791086638550417826,
     "windowsSeconds": [
       52.65,
       97.79
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "r-and-b-new-jack-swing": {
     "recording": "Bobby Brown - My Prerogative",
-    "audio": "voiced/Bobby Brown - My Prerogative.mp3",
+    "audio": "samples/Bobby Brown - My Prerogative.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11808615,
-    "audioModifiedNs": 1791160478065010811,
     "windowsSeconds": [
       103.3,
       191.85
@@ -78,8 +70,6 @@ export const REFERENCE_MIX = {
     "recording": "D'Angelo - Brown Sugar",
     "audio": "samples/D'Angelo - Brown Sugar.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 6637647,
-    "audioModifiedNs": 1791077522742859059,
     "windowsSeconds": [
       95.74,
       177.8
@@ -96,8 +86,6 @@ export const REFERENCE_MIX = {
     "recording": "Frank Ocean - Pyramids",
     "audio": "samples/Frank Ocean - Pyramids.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 14265685,
-    "audioModifiedNs": 1791139597895794190,
     "windowsSeconds": [
       207.52,
       385.4
@@ -114,8 +102,6 @@ export const REFERENCE_MIX = {
     "recording": "Marvin Gaye - I Heard It Through the Grapevine",
     "audio": "samples/Marvin Gaye - I Heard It Through the Grapevine.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 4794814,
-    "audioModifiedNs": 1791077510183744674,
     "windowsSeconds": [
       68.83,
       127.82
@@ -130,10 +116,8 @@ export const REFERENCE_MIX = {
   },
   "r-and-b-southern-soul": {
     "recording": "Otis Redding - Try a Little Tenderness",
-    "audio": "voiced/Otis Redding - Try a Little Tenderness.mp3",
+    "audio": "samples/Otis Redding - Try a Little Tenderness.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8037588,
-    "audioModifiedNs": 1791087851055066472,
     "windowsSeconds": [
       70.31,
       130.57
@@ -148,10 +132,8 @@ export const REFERENCE_MIX = {
   },
   "r-and-b-philly-soul": {
     "recording": "The O'Jays - Love Train",
-    "audio": "voiced/The O'Jays - Love Train.mp3",
+    "audio": "samples/The O'Jays - Love Train.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7285246,
-    "audioModifiedNs": 1791080742632832918,
     "windowsSeconds": [
       63.72,
       118.34

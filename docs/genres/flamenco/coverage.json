@@ -1,31 +1,171 @@
 {
   "genreId": "flamenco",
-  "updated": "2026-10-07",
-  "note": "Working matrix for the style-by-style pass. A status records audited evidence, not a schema or feature-presence check. Only Soleá has begun the deep cross-layer audit; remaining rows are explicit backlog.",
+  "updated": "2026-10-08",
+  "note": "Working matrix for the style-by-style pass. The requested reference baseline is three recordings per style. A status records audited evidence, not a schema or feature-presence check. Counts sync to references.json; source identity, listening, and timecode checks remain separate.",
   "styles": [
-    { "styleId": "flamenco-solea", "status": "in-progress", "references": 4, "coverage": [
-      { "role": "lead", "instrument": "voice", "function": "cante statement, melisma and phrase cadence", "layers": { "notation": "baseline-cell-present; phrase-level source review pending", "band": "form separation present; section assignment to verify", "mechanics": "legato/vibrato cues present; source articulation audit pending", "mix": "multi-reference comparison pending" } },
-      { "role": "lead", "instrument": "guitar", "function": "compás thumb bass and rasgueado", "layers": { "notation": "expanded into separate authored cell", "band": "section placement to verify in realized score", "mechanics": "fingering/stroke/golpe cues authored; rendered controls to verify", "mix": "three ensemble sources pending robust profile" } },
-      { "role": "lead", "instrument": "guitar", "function": "falseta tremolo and picado response", "layers": { "notation": "two original multi-bar studies added", "band": "solo-region use to verify in realized score", "mechanics": "tremolo p-i-a-m-i and alternating picado fingers authored; rendered controls to verify", "mix": "solo guitar retained for technique only; ensemble balance excluded" } },
-      { "role": "lead", "instrument": "guitar", "function": "llamada and section handoff", "layers": { "notation": "distinct entrance cue added", "band": "intro/bridge use to verify in realized score", "mechanics": "thumb, rasgueado direction, golpe authored; rendered controls to verify", "mix": "ensemble transient and foreground review pending" } },
-      { "role": "percussion", "instrument": "palmas", "function": "twelve-count accent support and cadence", "layers": { "notation": "baseline accent cell present", "band": "alignment with cante/guitar phrase pending", "mechanics": "palmas articulation vocabulary present; attack differentiation pending", "mix": "transient support/proximity review pending" } }
-    ] },
-    { "styleId": "flamenco-bulerias", "status": "not-started", "references": 1, "coverage": [] },
-    { "styleId": "flamenco-alegrias", "status": "not-started", "references": 1, "coverage": [] },
-    { "styleId": "flamenco-tangos", "status": "not-started", "references": 1, "coverage": [] },
-    { "styleId": "flamenco-seguiriya", "status": "not-started", "references": 0, "coverage": [] },
-    { "styleId": "flamenco-tientos", "status": "not-started", "references": 1, "coverage": [] },
-    { "styleId": "flamenco-fandangos", "status": "not-started", "references": 1, "coverage": [] },
-    { "styleId": "flamenco-rumba", "status": "not-started", "references": 1, "coverage": [] },
-    { "styleId": "flamenco-tonas-martinetes", "status": "not-started", "references": 1, "coverage": [] },
-    { "styleId": "flamenco-taranta", "status": "not-started", "references": 1, "coverage": [] },
-    { "styleId": "flamenco-granaina-malaguena", "status": "not-started", "references": 1, "coverage": [] },
-    { "styleId": "flamenco-guajira", "status": "not-started", "references": 1, "coverage": [] },
-    { "styleId": "flamenco-farruca", "status": "not-started", "references": 1, "coverage": [] },
-    { "styleId": "flamenco-sevillanas", "status": "not-started", "references": 1, "coverage": [] },
-    { "styleId": "flamenco-nuevo-flamenco", "status": "not-started", "references": 1, "coverage": [] },
-    { "styleId": "flamenco-flamenco-jazz", "status": "not-started", "references": 1, "coverage": [] },
-    { "styleId": "flamenco-flamenco-rock", "status": "not-started", "references": 1, "coverage": [] },
-    { "styleId": "flamenco-urban-experimental", "status": "not-started", "references": 1, "coverage": [] }
+    {
+      "styleId": "flamenco-solea",
+      "status": "reference-acquisition-in-progress",
+      "references": 4,
+      "coverage": [
+        {
+          "role": "lead",
+          "instrument": "voice",
+          "function": "cante statement, melisma and phrase cadence",
+          "layers": {
+            "notation": "baseline-cell-present; phrase-level source review pending",
+            "band": "form separation present; section assignment to verify",
+            "mechanics": "legato/vibrato cues present; source articulation audit pending",
+            "mix": "multi-reference comparison pending"
+          }
+        },
+        {
+          "role": "lead",
+          "instrument": "guitar",
+          "function": "compás thumb bass and rasgueado",
+          "layers": {
+            "notation": "expanded into separate authored cell",
+            "band": "section placement to verify in realized score",
+            "mechanics": "fingering/stroke/golpe cues authored; rendered controls to verify",
+            "mix": "three ensemble sources pending robust profile"
+          }
+        },
+        {
+          "role": "lead",
+          "instrument": "guitar",
+          "function": "falseta tremolo and picado response",
+          "layers": {
+            "notation": "two original multi-bar studies added",
+            "band": "solo-region use to verify in realized score",
+            "mechanics": "tremolo p-i-a-m-i and alternating picado fingers authored; rendered controls to verify",
+            "mix": "solo guitar retained for technique only; ensemble balance excluded"
+          }
+        },
+        {
+          "role": "lead",
+          "instrument": "guitar",
+          "function": "llamada and section handoff",
+          "layers": {
+            "notation": "distinct entrance cue added",
+            "band": "intro/bridge use to verify in realized score",
+            "mechanics": "thumb, rasgueado direction, golpe authored; rendered controls to verify",
+            "mix": "ensemble transient and foreground review pending"
+          }
+        },
+        {
+          "role": "percussion",
+          "instrument": "palmas",
+          "function": "twelve-count accent support and cadence",
+          "layers": {
+            "notation": "baseline accent cell present",
+            "band": "alignment with cante/guitar phrase pending",
+            "mechanics": "palmas articulation vocabulary present; attack differentiation pending",
+            "mix": "transient support/proximity review pending"
+          }
+        }
+      ]
+    },
+    {
+      "styleId": "flamenco-bulerias",
+      "status": "reference-acquisition-in-progress",
+      "references": 4,
+      "coverage": []
+    },
+    {
+      "styleId": "flamenco-alegrias",
+      "status": "reference-acquisition-in-progress",
+      "references": 3,
+      "coverage": []
+    },
+    {
+      "styleId": "flamenco-tangos",
+      "status": "reference-acquisition-in-progress",
+      "references": 2,
+      "coverage": []
+    },
+    {
+      "styleId": "flamenco-seguiriya",
+      "status": "reference-acquisition-in-progress",
+      "references": 1,
+      "coverage": []
+    },
+    {
+      "styleId": "flamenco-tientos",
+      "status": "reference-acquisition-in-progress",
+      "references": 2,
+      "coverage": []
+    },
+    {
+      "styleId": "flamenco-fandangos",
+      "status": "reference-acquisition-in-progress",
+      "references": 3,
+      "coverage": []
+    },
+    {
+      "styleId": "flamenco-rumba",
+      "status": "reference-acquisition-in-progress",
+      "references": 1,
+      "coverage": []
+    },
+    {
+      "styleId": "flamenco-tonas-martinetes",
+      "status": "reference-acquisition-in-progress",
+      "references": 2,
+      "coverage": []
+    },
+    {
+      "styleId": "flamenco-taranta",
+      "status": "reference-acquisition-in-progress",
+      "references": 2,
+      "coverage": []
+    },
+    {
+      "styleId": "flamenco-granaina-malaguena",
+      "status": "reference-acquisition-in-progress",
+      "references": 1,
+      "coverage": []
+    },
+    {
+      "styleId": "flamenco-guajira",
+      "status": "reference-acquisition-in-progress",
+      "references": 1,
+      "coverage": []
+    },
+    {
+      "styleId": "flamenco-farruca",
+      "status": "reference-acquisition-in-progress",
+      "references": 2,
+      "coverage": []
+    },
+    {
+      "styleId": "flamenco-sevillanas",
+      "status": "reference-acquisition-in-progress",
+      "references": 1,
+      "coverage": []
+    },
+    {
+      "styleId": "flamenco-nuevo-flamenco",
+      "status": "reference-acquisition-in-progress",
+      "references": 1,
+      "coverage": []
+    },
+    {
+      "styleId": "flamenco-flamenco-jazz",
+      "status": "reference-acquisition-in-progress",
+      "references": 1,
+      "coverage": []
+    },
+    {
+      "styleId": "flamenco-flamenco-rock",
+      "status": "reference-acquisition-in-progress",
+      "references": 1,
+      "coverage": []
+    },
+    {
+      "styleId": "flamenco-urban-experimental",
+      "status": "reference-acquisition-in-progress",
+      "references": 1,
+      "coverage": []
+    }
   ]
 }

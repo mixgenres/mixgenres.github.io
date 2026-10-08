@@ -456,7 +456,7 @@ export function PatternSheet({
                 </span>
                 <span style={{ minWidth: 0, flex: 1, overflow: 'hidden' }}>
                   <span className="truncate block" style={{ fontSize: 14, fontWeight: active ? 600 : 400, lineHeight: 1.2 }}>
-                    {cleanPatternName(p.name)}
+                    {cleanPatternName(p.name, p.shortName)}
                   </span>
                   <span className="micro truncate block">{p.family} · {p.meter}</span>
                 </span>

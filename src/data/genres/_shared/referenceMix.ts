@@ -2,10 +2,9 @@ import type { GenrePackInput } from './genrePack';
 
 export interface ReferenceMixEvidence {
   recording: string;
+  /** Canonical source recording; mix targets may have been measured from a separated accompaniment. */
   audio: string;
   source: 'separated-accompaniment' | 'original-with-vocals' | 'original-recording';
-  audioBytes: number;
-  audioModifiedNs: number;
   windowsSeconds: number[];
   targets: { rmsDbfs: number; crestDb: number; lowEnergyShare: number; highEnergyShare: number; sideMidRmsRatio: number };
 }

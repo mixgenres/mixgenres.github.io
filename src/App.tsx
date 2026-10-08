@@ -941,14 +941,14 @@ export default function App() {
                       }
                     >
                       <span className="truncate max-w-[140px] sm:max-w-[200px]">
-                        {isSilentInAll ? 'silent in all' : isSilentHere ? '+ pick rhythm' : p ? cleanPatternName(p.name) : 'silent'}
+                        {isSilentInAll ? 'silent in all' : isSilentHere ? '+ pick rhythm' : p ? cleanPatternName(p.name, p.shortName) : 'silent'}
                       </span>
                       <Pencil size={10} strokeWidth={2} style={{ opacity: 0.45, flexShrink: 0 }} />
                     </button>
 
                     {p && !isSilentHere && (
                       <NoteMark onClick={() => setNote({
-                        title: cleanPatternName(p.name),
+                        title: cleanPatternName(p.name, p.shortName),
                         body: p.description,
                         tags: noteTags(p),
                       })} />

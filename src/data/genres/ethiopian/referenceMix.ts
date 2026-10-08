@@ -6,8 +6,6 @@ export const REFERENCE_MIX = {
     "recording": "Asnakech Worku - Tizita",
     "audio": "samples/Asnakech Worku - Tizita.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 11358271,
-    "audioModifiedNs": 1791077190299602021,
     "windowsSeconds": [
       164.62,
       305.73
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "ethiopian-ethiopian-funk": {
     "recording": "Hailu Mergia - Musicawi Silt",
-    "audio": "voiced/Hailu Mergia - Musicawi Silt.mp3",
+    "audio": "samples/Hailu Mergia - Musicawi Silt.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9175430,
-    "audioModifiedNs": 1791137270428235673,
     "windowsSeconds": [
       80.26,
       149.05
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "ethiopian-tizita": {
     "recording": "Mahmoud Ahmed - Tizita",
-    "audio": "voiced/Mahmoud Ahmed - Tizita.mp3",
+    "audio": "samples/Mahmoud Ahmed - Tizita.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 21543876,
-    "audioModifiedNs": 1791091193668376723,
     "windowsSeconds": [
       188.49,
       350.04
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "ethiopian-modern-ethio-jazz": {
     "recording": "Mulatu Astatke & The Heliocentrics - Cha Cha",
-    "audio": "voiced/Mulatu Astatke & The Heliocentrics - Cha Cha.mp3",
+    "audio": "samples/Mulatu Astatke & The Heliocentrics - Cha Cha.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11166029,
-    "audioModifiedNs": 1791139301772269396,
     "windowsSeconds": [
       97.68,
       181.4
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "ethiopian-ethio-jazz": {
     "recording": "Mulatu Astatke - Yèkèrmo Sèw",
-    "audio": "voiced/Mulatu Astatke - Yèkèrmo Sèw.mp3",
+    "audio": "samples/Mulatu Astatke - Yèkèrmo Sèw.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10244392,
-    "audioModifiedNs": 1791082438234263426,
     "windowsSeconds": [
       89.62,
       166.43

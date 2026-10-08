@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "salsa-son-montuno": {
     "recording": "Arsenio Rodríguez - Fuego en el 23",
-    "audio": "voiced/Arsenio Rodríguez - Fuego en el 23.mp3",
+    "audio": "samples/Arsenio Rodríguez - Fuego en el 23.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8558986,
-    "audioModifiedNs": 1791083008759599257,
     "windowsSeconds": [
       74.87,
       139.04
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "salsa-son": {
     "recording": "Buena Vista Social Club - Chan Chan",
-    "audio": "voiced/Buena Vista Social Club - Chan Chan.mp3",
+    "audio": "samples/Buena Vista Social Club - Chan Chan.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10439712,
-    "audioModifiedNs": 1791153584334566798,
     "windowsSeconds": [
       91.32,
       169.6
@@ -42,8 +38,6 @@ export const REFERENCE_MIX = {
     "recording": "Cachao - Descarga Cubana",
     "audio": "samples/Cachao - Descarga Cubana.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 4325067,
-    "audioModifiedNs": 1791077552777475994,
     "windowsSeconds": [
       62.9,
       116.81
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "salsa-guaguanco-salsa": {
     "recording": "Celia Cruz & Johnny Pacheco - Quimbara",
-    "audio": "voiced/Celia Cruz & Johnny Pacheco - Quimbara.mp3",
+    "audio": "samples/Celia Cruz & Johnny Pacheco - Quimbara.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11705087,
-    "audioModifiedNs": 1791136772433109701,
     "windowsSeconds": [
       102.39,
       190.16
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "salsa-salsa-jazz": {
     "recording": "Eddie Palmieri - Azúcar",
-    "audio": "voiced/Eddie Palmieri - Azúcar.mp3",
+    "audio": "samples/Eddie Palmieri - Azúcar.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 22880262,
-    "audioModifiedNs": 1791086983613081431,
     "windowsSeconds": [
       200.18,
       371.76
@@ -96,8 +86,6 @@ export const REFERENCE_MIX = {
     "recording": "Eddie Santiago - Lluvia",
     "audio": "samples/Eddie Santiago - Lluvia.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 9294584,
-    "audioModifiedNs": 1791077561235189396,
     "windowsSeconds": [
       135.38,
       251.43
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "salsa-puerto-rican-salsa": {
     "recording": "El Gran Combo - Un Verano en Nueva York",
-    "audio": "voiced/El Gran Combo - Un Verano en Nueva York.mp3",
+    "audio": "samples/El Gran Combo - Un Verano en Nueva York.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11732255,
-    "audioModifiedNs": 1791084746691811888,
     "windowsSeconds": [
       102.63,
       190.6
@@ -130,10 +116,8 @@ export const REFERENCE_MIX = {
   },
   "salsa-cha-cha-cha": {
     "recording": "Enrique Jorrín - La Engañadora",
-    "audio": "voiced/Enrique Jorrín - La Engañadora.mp3",
+    "audio": "samples/Enrique Jorrín - La Engañadora.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7366766,
-    "audioModifiedNs": 1791158191100962613,
     "windowsSeconds": [
       64.44,
       119.67
@@ -148,10 +132,8 @@ export const REFERENCE_MIX = {
   },
   "salsa-salsa-calena": {
     "recording": "Grupo Niche - Cali Pachanguero",
-    "audio": "voiced/Grupo Niche - Cali Pachanguero.mp3",
+    "audio": "samples/Grupo Niche - Cali Pachanguero.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11641340,
-    "audioModifiedNs": 1791140668141846120,
     "windowsSeconds": [
       101.84,
       189.12
@@ -166,10 +148,8 @@ export const REFERENCE_MIX = {
   },
   "salsa-boogaloo": {
     "recording": "Joe Cuba Sextet - Bang Bang",
-    "audio": "voiced/Joe Cuba Sextet - Bang Bang.mp3",
+    "audio": "samples/Joe Cuba Sextet - Bang Bang.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 12776192,
-    "audioModifiedNs": 1791137810062880168,
     "windowsSeconds": [
       111.77,
       207.57
@@ -184,10 +164,8 @@ export const REFERENCE_MIX = {
   },
   "salsa-pachanga": {
     "recording": "Joe Quijano - La Pachanga Se Baila Así",
-    "audio": "voiced/Joe Quijano - La Pachanga Se Baila Así.mp3",
+    "audio": "samples/Joe Quijano - La Pachanga Se Baila Así.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7352137,
-    "audioModifiedNs": 1791152122975694049,
     "windowsSeconds": [
       64.31,
       119.43
@@ -202,10 +180,8 @@ export const REFERENCE_MIX = {
   },
   "salsa-charanga": {
     "recording": "Orquesta Aragón - El Bodeguero",
-    "audio": "voiced/Orquesta Aragón - El Bodeguero.mp3",
+    "audio": "samples/Orquesta Aragón - El Bodeguero.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 14776116,
-    "audioModifiedNs": 1791087208410746685,
     "windowsSeconds": [
       129.27,
       240.07
@@ -220,10 +196,8 @@ export const REFERENCE_MIX = {
   },
   "salsa-mambo": {
     "recording": "Tito Puente - Ran Kan Kan",
-    "audio": "voiced/Tito Puente - Ran Kan Kan.mp3",
+    "audio": "samples/Tito Puente - Ran Kan Kan.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 14613025,
-    "audioModifiedNs": 1791153297391357690,
     "windowsSeconds": [
       127.84,
       237.42
@@ -238,10 +212,8 @@ export const REFERENCE_MIX = {
   },
   "salsa-salsa-dura": {
     "recording": "Willie Colón & Héctor Lavoe - Che Che Colé",
-    "audio": "voiced/Willie Colón & Héctor Lavoe - Che Che Colé.mp3",
+    "audio": "samples/Willie Colón & Héctor Lavoe - Che Che Colé.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9656065,
-    "audioModifiedNs": 1791102115804765031,
     "windowsSeconds": [
       84.47,
       156.87
@@ -256,10 +228,8 @@ export const REFERENCE_MIX = {
   },
   "salsa-cumbia-crossover": {
     "recording": "Wilson Choperena & La Sonora Dinamita - La Pollera Colorá",
-    "audio": "voiced/Wilson Choperena & La Sonora Dinamita - La Pollera Colorá.mp3",
+    "audio": "samples/Wilson Choperena & La Sonora Dinamita - La Pollera Colorá.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8784744,
-    "audioModifiedNs": 1791153432766668425,
     "windowsSeconds": [
       76.84,
       142.7

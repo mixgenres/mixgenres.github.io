@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "afrobeats-afrofusion": {
     "recording": "Burna Boy - Anybody",
-    "audio": "voiced/Burna Boy - Anybody.mp3",
+    "audio": "samples/Burna Boy - Anybody.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7810733,
-    "audioModifiedNs": 1791137359794562667,
     "windowsSeconds": [
       68.32,
       126.89
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "afrobeats-afropop": {
     "recording": "Davido - Fall",
-    "audio": "voiced/Davido - Fall.mp3",
+    "audio": "samples/Davido - Fall.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10301764,
-    "audioModifiedNs": 1791099966010907119,
     "windowsSeconds": [
       90.12,
       167.36
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "afrobeats-alte": {
     "recording": "Santi - Rapid Fire",
-    "audio": "voiced/Santi - Rapid Fire.mp3",
+    "audio": "samples/Santi - Rapid Fire.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7784752,
-    "audioModifiedNs": 1791088958486328844,
     "windowsSeconds": [
       68.09,
       126.45
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "afrobeats-randb-afrobeats": {
     "recording": "Tems - Free Mind",
-    "audio": "voiced/Tems - Free Mind.mp3",
+    "audio": "samples/Tems - Free Mind.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9907854,
-    "audioModifiedNs": 1791156042270448788,
     "windowsSeconds": [
       86.67,
       160.96
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "afrobeats-contemporary-afrobeats": {
     "recording": "Wizkid - Ojuelegba",
-    "audio": "voiced/Wizkid - Ojuelegba.mp3",
+    "audio": "samples/Wizkid - Ojuelegba.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8932000,
-    "audioModifiedNs": 1791089601883305869,
     "windowsSeconds": [
       78.13,
       145.1

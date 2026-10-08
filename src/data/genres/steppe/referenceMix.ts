@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "steppe-khoomei": {
     "recording": "Huun-Huur-Tu - Orphan's Lament",
-    "audio": "voiced/Huun-Huur-Tu - Orphan's Lament.mp3",
+    "audio": "samples/Huun-Huur-Tu - Orphan's Lament.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 20385035,
-    "audioModifiedNs": 1791157239806807358,
     "windowsSeconds": [
       178.34,
       331.21
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "steppe-sygyt": {
     "recording": "Huun-Huur-Tu - Sygyt",
-    "audio": "voiced/Huun-Huur-Tu - Sygyt.mp3",
+    "audio": "samples/Huun-Huur-Tu - Sygyt.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6452429,
-    "audioModifiedNs": 1791157328513617036,
     "windowsSeconds": [
       56.43,
       104.8
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "steppe-kargyraa": {
     "recording": "Kaigal-ool Khovalyg - Khovu Kargyraa",
-    "audio": "voiced/Kaigal-ool Khovalyg - Khovu Kargyraa.mp3",
+    "audio": "samples/Kaigal-ool Khovalyg - Khovu Kargyraa.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10204626,
-    "audioModifiedNs": 1791095053207277533,
     "windowsSeconds": [
       89.26,
       165.78
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "steppe-morin-khuur": {
     "recording": "Mongolian State Morin Khuur Ensemble - Jonon Khar",
-    "audio": "voiced/Mongolian State Morin Khuur Ensemble - Jonon Khar.mp3",
+    "audio": "samples/Mongolian State Morin Khuur Ensemble - Jonon Khar.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10611169,
-    "audioModifiedNs": 1791098467536293548,
     "windowsSeconds": [
       92.83,
       172.39
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "steppe-folk-rock-fusion": {
     "recording": "The Hu - Yuve Yuve Yu",
-    "audio": "voiced/The Hu - Yuve Yuve Yu.mp3",
+    "audio": "samples/The Hu - Yuve Yuve Yu.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 14089527,
-    "audioModifiedNs": 1791153752185970084,
     "windowsSeconds": [
       123.26,
       228.91

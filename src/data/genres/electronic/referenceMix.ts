@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "electronic-idm": {
     "recording": "Aphex Twin - Xtal",
-    "audio": "voiced/Aphex Twin - Xtal.mp3",
+    "audio": "samples/Aphex Twin - Xtal.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11773082,
-    "audioModifiedNs": 1791155283115430106,
     "windowsSeconds": [
       102.99,
       191.27
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "electronic-detroit-techno": {
     "recording": "Derrick May - Strings of Life",
-    "audio": "voiced/Derrick May - Strings of Life.mp3",
+    "audio": "samples/Derrick May - Strings of Life.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 18371539,
-    "audioModifiedNs": 1791098665709474248,
     "windowsSeconds": [
       160.72,
       298.49
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "electronic-trance": {
     "recording": "Energy 52 - Café del Mar",
-    "audio": "voiced/Energy 52 - Café del Mar.mp3",
+    "audio": "samples/Energy 52 - Café del Mar.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9310277,
-    "audioModifiedNs": 1791151515901233129,
     "windowsSeconds": [
       81.44,
       151.25
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "electronic-techno": {
     "recording": "Jeff Mills - The Bells",
-    "audio": "voiced/Jeff Mills - The Bells.mp3",
+    "audio": "samples/Jeff Mills - The Bells.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11571417,
-    "audioModifiedNs": 1791103341863715389,
     "windowsSeconds": [
       101.22,
       187.98
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "electronic-melodic-electronic": {
     "recording": "Jon Hopkins - Open Eye Signal",
-    "audio": "voiced/Jon Hopkins - Open Eye Signal.mp3",
+    "audio": "samples/Jon Hopkins - Open Eye Signal.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 19288947,
-    "audioModifiedNs": 1791147077468047837,
     "windowsSeconds": [
       168.75,
       313.4
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "electronic-synthwave": {
     "recording": "Kavinsky - Nightcall",
-    "audio": "voiced/Kavinsky - Nightcall.mp3",
+    "audio": "samples/Kavinsky - Nightcall.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10276693,
-    "audioModifiedNs": 1791139591006859089,
     "windowsSeconds": [
       89.9,
       166.96
@@ -114,8 +102,6 @@ export const REFERENCE_MIX = {
     "recording": "Kraftwerk - Numbers",
     "audio": "samples/Kraftwerk - Numbers.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 4823007,
-    "audioModifiedNs": 1791077165325936978,
     "windowsSeconds": [
       70.16,
       130.29
@@ -130,10 +116,8 @@ export const REFERENCE_MIX = {
   },
   "electronic-minimal": {
     "recording": "Robert Hood - Minus",
-    "audio": "voiced/Robert Hood - Minus.mp3",
+    "audio": "samples/Robert Hood - Minus.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 12976708,
-    "audioModifiedNs": 1791090677497589675,
     "windowsSeconds": [
       113.52,
       210.82

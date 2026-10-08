@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "bollywood-folk-cinematic": {
     "recording": "A.R. Rahman - Chaiyya Chaiyya",
-    "audio": "voiced/A.R. Rahman - Chaiyya Chaiyya.mp3",
+    "audio": "samples/A.R. Rahman - Chaiyya Chaiyya.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 16261917,
-    "audioModifiedNs": 1791156976764143497,
     "windowsSeconds": [
       142.26,
       264.2
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "bollywood-modern": {
     "recording": "A.R. Rahman - Jai Ho",
-    "audio": "voiced/A.R. Rahman - Jai Ho.mp3",
+    "audio": "samples/A.R. Rahman - Jai Ho.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7193301,
-    "audioModifiedNs": 1791086109008362960,
     "windowsSeconds": [
       62.92,
       116.85
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "bollywood-romantic": {
     "recording": "Arijit Singh - Tum Hi Ho",
-    "audio": "voiced/Arijit Singh - Tum Hi Ho.mp3",
+    "audio": "samples/Arijit Singh - Tum Hi Ho.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10685345,
-    "audioModifiedNs": 1791086467030141671,
     "windowsSeconds": [
       93.48,
       173.6
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "bollywood-disco-bollywood": {
     "recording": "Bappi Lahiri - I Am a Disco Dancer",
-    "audio": "voiced/Bappi Lahiri - I Am a Disco Dancer.mp3",
+    "audio": "samples/Bappi Lahiri - I Am a Disco Dancer.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 18001767,
-    "audioModifiedNs": 1791360673284481373,
     "windowsSeconds": [
       157.49,
       292.49
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "bollywood-golden-age": {
     "recording": "Lata Mangeshkar - Pyar Kiya To Darna Kya",
-    "audio": "voiced/Lata Mangeshkar - Pyar Kiya To Darna Kya.mp3",
+    "audio": "samples/Lata Mangeshkar - Pyar Kiya To Darna Kya.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10036571,
-    "audioModifiedNs": 1791096938037356405,
     "windowsSeconds": [
       87.8,
       163.05
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "bollywood-electronic-club": {
     "recording": "Vishal-Shekhar - Sheila Ki Jawani",
-    "audio": "voiced/Vishal-Shekhar - Sheila Ki Jawani.mp3",
+    "audio": "samples/Vishal-Shekhar - Sheila Ki Jawani.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10806469,
-    "audioModifiedNs": 1791091475871166893,
     "windowsSeconds": [
       94.53,
       175.55

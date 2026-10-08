@@ -42,7 +42,7 @@ for result in summary['results']:
     if comparison:
         if comparison.get('referenceSource') == 'separated accompaniment':
             accompaniment = entry.get('accompanimentFile')
-            if accompaniment:
+            if accompaniment and Path(accompaniment).is_file():
                 players += player('Voice-removed accompaniment', accompaniment, windows[1]['start'] if len(windows) > 1 else 0)
         players += player('Generated ensemble study', generated, seconds=comparison['generated']['durationSeconds'])
         if (root / 'audit/all-samples/gain-ab' / f'{genre}-before.mp3').exists():

@@ -29,8 +29,9 @@ stems = [d for d in render['diagnostics'] if d['stage'] == 'stem' and d['metrics
 loudest = max((s['metrics']['rmsDbfs'] for s in stems), default=-120)
 buried = [{'instrumentId': s['instrumentId'], 'trackId': s['id'], 'differenceDb': s['metrics']['rmsDbfs'] - loudest}
           for s in stems if s['metrics']['rmsDbfs'] < loudest - 18]
+accompaniment_file = reference.get('accompanimentFile')
 report = {'referenceFile': str(reference_path),
-          'referenceAudioFile': reference.get('accompanimentFile', str(reference_path)),
+          'referenceAudioFile': accompaniment_file if accompaniment_file and Path(accompaniment_file).is_file() else str(reference_path),
           'referenceSource': reference_source, 'generatedFile': args.generated,
           'playbackEngine': render.get('playbackEngine', 'unknown'), 'generated': generated,
           'windows': windows, 'stemBalanceWarnings': buried,

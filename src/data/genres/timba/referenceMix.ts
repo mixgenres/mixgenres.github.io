@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "timba-bamboleo": {
     "recording": "Bamboleo - Yo No Me Parezco a Nadie",
-    "audio": "voiced/Bamboleo - Yo No Me Parezco a Nadie.mp3",
+    "audio": "samples/Bamboleo - Yo No Me Parezco a Nadie.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 12479353,
-    "audioModifiedNs": 1791147228444820108,
     "windowsSeconds": [
       109.17,
       202.75
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "timba-international-modern-timba": {
     "recording": "Calle Real - Ábreme la Puerta",
-    "audio": "voiced/Calle Real - Ábreme la Puerta.mp3",
+    "audio": "samples/Calle Real - Ábreme la Puerta.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 15788578,
-    "audioModifiedNs": 1791096281405785267,
     "windowsSeconds": [
       138.13,
       256.52
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "timba-timba-funk": {
     "recording": "Cimafunk - Me Voy",
-    "audio": "voiced/Cimafunk - Me Voy.mp3",
+    "audio": "samples/Cimafunk - Me Voy.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9884905,
-    "audioModifiedNs": 1791140795761760703,
     "windowsSeconds": [
       86.47,
       160.59
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "timba-havana-dprimera": {
     "recording": "Havana D'Primera - Pasaporte",
-    "audio": "voiced/Havana D'Primera - Pasaporte.mp3",
+    "audio": "samples/Havana D'Primera - Pasaporte.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 13428207,
-    "audioModifiedNs": 1791159095896310783,
     "windowsSeconds": [
       117.48,
       218.17
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "timba-irakere-jazz-funk-precursor": {
     "recording": "Irakere - Bacalao con Pan",
-    "audio": "voiced/Irakere - Bacalao con Pan.mp3",
+    "audio": "samples/Irakere - Bacalao con Pan.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9098053,
-    "audioModifiedNs": 1791090048059854850,
     "windowsSeconds": [
       79.58,
       147.8
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "timba-classic-timba": {
     "recording": "La Charanga Habanera - Me Sube la Fiebre",
-    "audio": "voiced/La Charanga Habanera - Me Sube la Fiebre.mp3",
+    "audio": "samples/La Charanga Habanera - Me Sube la Fiebre.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 13511830,
-    "audioModifiedNs": 1791096588163747548,
     "windowsSeconds": [
       118.21,
       219.53
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "timba-charanga-habanera": {
     "recording": "La Charanga Habanera - Nube Pasajera",
-    "audio": "voiced/La Charanga Habanera - Nube Pasajera.mp3",
+    "audio": "samples/La Charanga Habanera - Nube Pasajera.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 13292285,
-    "audioModifiedNs": 1791148565944118237,
     "windowsSeconds": [
       116.28,
       215.96
@@ -130,10 +116,8 @@ export const REFERENCE_MIX = {
   },
   "timba-songo": {
     "recording": "Los Van Van - Sandunguera",
-    "audio": "voiced/Los Van Van - Sandunguera.mp3",
+    "audio": "samples/Los Van Van - Sandunguera.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 16323554,
-    "audioModifiedNs": 1791157990904079719,
     "windowsSeconds": [
       142.81,
       265.21
@@ -150,8 +134,6 @@ export const REFERENCE_MIX = {
     "recording": "Manolín - La Bola",
     "audio": "samples/Manolín - La Bola.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 7724593,
-    "audioModifiedNs": 1791077784219012925,
     "windowsSeconds": [
       112.48,
       208.89
@@ -166,10 +148,8 @@ export const REFERENCE_MIX = {
   },
   "timba-maykel-blanco": {
     "recording": "Maykel Blanco - Anda y Pégate",
-    "audio": "voiced/Maykel Blanco - Anda y Pégate.mp3",
+    "audio": "samples/Maykel Blanco - Anda y Pégate.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11725994,
-    "audioModifiedNs": 1791157766094637005,
     "windowsSeconds": [
       102.58,
       190.5
@@ -184,10 +164,8 @@ export const REFERENCE_MIX = {
   },
   "timba-ng-la-banda-early-timba": {
     "recording": "NG La Banda - Santa Palabra",
-    "audio": "voiced/NG La Banda - Santa Palabra.mp3",
+    "audio": "samples/NG La Banda - Santa Palabra.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 24028702,
-    "audioModifiedNs": 1791158778198120220,
     "windowsSeconds": [
       210.23,
       390.42
@@ -202,10 +180,8 @@ export const REFERENCE_MIX = {
   },
   "timba-paulito-fg": {
     "recording": "Paulito FG - Te Deseo Suerte",
-    "audio": "voiced/Paulito FG - Te Deseo Suerte.mp3",
+    "audio": "samples/Paulito FG - Te Deseo Suerte.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8989507,
-    "audioModifiedNs": 1791090775183657696,
     "windowsSeconds": [
       78.64,
       146.04

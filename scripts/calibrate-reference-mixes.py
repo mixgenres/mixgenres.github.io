@@ -48,10 +48,10 @@ def inspect(entry):
     }
     return entry, {
         'recording': entry.get('name', original.stem),
-        'audio': str(source.relative_to(ROOT)),
+        # Keep the canonical, reusable recording as the data path. A temporary
+        # separated file may be used to measure the mix, but it is disposable.
+        'audio': str(original.relative_to(ROOT)),
         'source': 'separated-accompaniment' if separated else 'original-with-vocals',
-        'audioBytes': source.stat().st_size,
-        'audioModifiedNs': source.stat().st_mtime_ns,
         'windowsSeconds': [w['start'] for w in windows],
         'targets': summary,
     }
@@ -81,7 +81,7 @@ def main():
     for genre, profiles in genres.items():
         target = ROOT / 'src/data/genres' / genre / 'referenceMix.ts'
         target.write_text("import type { ReferenceMixCatalog } from '../_shared/referenceMix';\n\n"
-            + '/** Local recording measurements; original mixes may still contain vocals. */\n'
+            + '/** Source recordings and compact mix measurements; separated measurement audio is disposable. */\n'
             + 'export const REFERENCE_MIX = ' + json.dumps(profiles, indent=2, ensure_ascii=False)
             + ' satisfies ReferenceMixCatalog;\n')
         index_path = target.with_name('index.ts')

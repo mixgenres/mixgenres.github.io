@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "gospel-gospel-soul": {
     "recording": "Aretha Franklin - Amazing Grace",
-    "audio": "voiced/Aretha Franklin - Amazing Grace.mp3",
+    "audio": "samples/Aretha Franklin - Amazing Grace.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 25957488,
-    "audioModifiedNs": 1791083962215343949,
     "windowsSeconds": [
       227.1,
       421.76
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "gospel-choir-gospel": {
     "recording": "Edwin Hawkins Singers - Oh Happy Day",
-    "audio": "voiced/Edwin Hawkins Singers - Oh Happy Day.mp3",
+    "audio": "samples/Edwin Hawkins Singers - Oh Happy Day.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 12287190,
-    "audioModifiedNs": 1791099422193276528,
     "windowsSeconds": [
       107.49,
       199.62
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "gospel-contemporary": {
     "recording": "Kirk Franklin - Stomp",
-    "audio": "voiced/Kirk Franklin - Stomp.mp3",
+    "audio": "samples/Kirk Franklin - Stomp.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 12324791,
-    "audioModifiedNs": 1791147514835204901,
     "windowsSeconds": [
       107.82,
       200.24
@@ -60,8 +54,6 @@ export const REFERENCE_MIX = {
     "recording": "Mahalia Jackson - Move On Up a Little Higher",
     "audio": "samples/Mahalia Jackson - Move On Up a Little Higher.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 7752933,
-    "audioModifiedNs": 1791077260787052208,
     "windowsSeconds": [
       112.9,
       209.68
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "gospel-quartet": {
     "recording": "The Soul Stirrers - Touch the Hem of His Garment",
-    "audio": "voiced/The Soul Stirrers - Touch the Hem of His Garment.mp3",
+    "audio": "samples/The Soul Stirrers - Touch the Hem of His Garment.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 4870527,
-    "audioModifiedNs": 1791161590039310268,
     "windowsSeconds": [
       42.59,
       79.1

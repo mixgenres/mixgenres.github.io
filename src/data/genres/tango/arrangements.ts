@@ -24,6 +24,63 @@ const habanera = (instrument: string, role: string) => cell('Habanera dotted eig
   [0, .75, 1, 1.5], [.62, .18, .35, .35], instrument === 'upright-bass' ? 'pizzicato' : 'staccato',
   role === 'bass' ? [1, 1, 5, 5].map(degree => pitch(degree, 40)) : [chord, chord, chord, chord], [1, .58, .82, .65]);
 
+const pedagogy: Record<string, { description: string; patterns: string[] }> = {
+  'golden-age': { description: 'Dance-orchestra tango: keep marcato en cuatro steady, let violin and bandoneon trade the tune, and save a short variation for the close.', patterns: ['Marcato en cuatro', 'Violin answer', 'Bandoneon variation'] },
+  canyengue: { description: 'Early tango in a clipped two-beat feel: keep the attacks dry, the bass bouncing, and the phrases compact.', patterns: ['Canyengue bounce', 'Clipped phrase', 'Habanera bass'] },
+  'guardia-nueva-de-caro': { description: 'De Caro opens the ensemble texture: the violin carries independent counterlines while piano and bandoneon answer between phrases.', patterns: ['Violin counterline', 'Bandoneon answer', 'Chromatic link'] },
+  canaro: { description: 'Canaro favors clear dance strains, an even pulse and direct melodic returns; keep fills short so the refrain stays easy to follow.', patterns: ['Dance marcato', 'Clear refrain', 'Short fill'] },
+  darienzo: { description: 'D’Arienzo turns the pulse into propulsion: hard piano marcato, clipped bandoneon attacks and sharp stop-time breaks.', patterns: ['Hard marcato', 'Staccato bandoneon', 'Stop-time break'] },
+  'di-sarli': { description: 'Di Sarli pairs a rolling, even piano pulse with broad violin melody; preserve the legato line and leave the accompaniment settled underneath.', patterns: ['Lyrical violin', 'Rolling piano', 'Even bass'] },
+  troilo: { description: 'Troilo gives the bandoneon a vocal, breathing line; use flexible phrase endings and let the violin answer rather than doubling every note.', patterns: ['Singing bandoneon', 'Violin answer', 'Flexible ending'] },
+  pugliese: { description: 'Pugliese shapes time with weighted yumba attacks, meaningful silences and a slow ensemble crescendo into the returning theme.', patterns: ['Yumba', 'Dramatic rest', 'Long crescendo'] },
+  salgan: { description: 'Salgán builds a dancing piano groove with umpa-umpa bass, syncopated inner voices and a piano-led feature.', patterns: ['Umpa-umpa piano', 'Inner counterpoint', 'Piano feature'] },
+  'tango-cancion': { description: 'Tango canción puts the sung line first: use sparse chords under the verse and answer the vocal cadence with bandoneon.', patterns: ['Vocal phrase', 'Sparse chords', 'Bandoneon reply'] },
+  milonga: { description: 'Milonga moves in quick two-beat phrases over a habanera-derived bass; keep the groove light and the refrain returns clear.', patterns: ['Habanera bass', 'Two-beat bounce', 'Short refrain'] },
+  vals: { description: 'Tango vals turns in three, with bass–chord–chord support and melodies that sweep across the bar line.', patterns: ['Three-beat bass', 'Waltz sweep', 'Violin answer'] },
+  'piazzolla-nuevo-tango': { description: 'Nuevo tango sets angular melodies against a persistent 3+3+2 ostinato, then opens space for a bandoneon feature.', patterns: ['3+3+2 ostinato', 'Angular melody', 'Bandoneon feature'] },
+  'electrotango-gotan': { description: 'Electrotango layers a restrained electronic pulse under a recurring tango hook; pull the beat back for a breakdown, then let bandoneon return.', patterns: ['Tango loop', 'Bandoneon hook', 'Beat breakdown'] },
+  'electro-rock-bajofondo': { description: 'Electro-rock tango combines a firm rock backbeat with tango syncopation; separate distorted low-end riffs from the bandoneon answers.', patterns: ['Rock backbeat', 'Tango syncopation', 'Distorted riff'] },
+  'modern-orquesta': { description: 'Modern orquesta contrasts broad ensemble attacks with quiet melodic replies; move from spacious strains to a strong collective return.', patterns: ['Ensemble attack', 'Lyrical reply', 'Dynamic return'] },
+  'chacarera-crossover': { description: 'This crossover is chacarera-led: guitar and bombo mark the 6/8–3/4 hemiola, with voice and violin answering across the cycle.', patterns: ['6/8–3/4 pulse', 'Guitar copla', 'Bombo answer'] },
+};
+
+function conciseCellLabel(id: string, item: AuthoredCell): string {
+  const instrument = item.instruments?.[0] ?? '';
+  if (item.phraseEnd) return 'Cadence fill';
+  if (item.role === 'lead') {
+    if (id === 'tango-cancion' && instrument === 'voice') return 'Vocal phrase';
+    if (id === 'chacarera-crossover' && instrument === 'voice') return 'Chacarera copla';
+    if (id === 'vals') return instrument === 'violin' ? 'Violin sweep' : 'Vals melody';
+    if (id === 'piazzolla-nuevo-tango') return instrument === 'violin' ? 'Sustained counterline' : '3+3+2 hook';
+    if (id === 'electrotango-gotan' || id === 'electro-rock-bajofondo') return 'Bandoneon hook';
+    if (id === 'guardia-nueva-de-caro') return instrument === 'violin' ? 'Violin counterline' : 'Bandoneon answer';
+    if (id === 'di-sarli') return instrument === 'violin' ? 'Lyrical violin' : 'Bandoneon phrase';
+    if (id === 'troilo') return instrument === 'violin' ? 'Violin answer' : 'Singing bandoneon';
+    if (id === 'milonga') return instrument === 'violin' ? 'Milonga answer' : 'Milonga phrase';
+    if (id === 'canyengue') return instrument === 'violin' ? 'Clipped answer' : 'Canyengue phrase';
+    if (instrument === 'voice') return 'Vocal phrase';
+    if (instrument === 'violin') return 'Violin answer';
+    return 'Bandoneon phrase';
+  }
+  if (item.role === 'bass') {
+    if (id === 'vals') return 'Three-beat bass';
+    if (id === 'milonga' || id === 'canyengue') return 'Habanera bass';
+    if (id === 'pugliese') return 'Yumba bass';
+    return 'Root–fifth bass';
+  }
+  if (item.role === 'percussion') return id === 'chacarera-crossover' ? 'Bombo accents' : 'Percussion pulse';
+  if (id === 'pugliese') return 'Yumba';
+  if (id === 'salgan') return 'Umpa-umpa piano';
+  if (id === 'di-sarli') return 'Rolling piano';
+  if (id === 'darienzo') return 'Hard marcato';
+  if (id === 'milonga' || id === 'canyengue') return 'Habanera chords';
+  if (id === 'vals') return 'Waltz chords';
+  if (id === 'piazzolla-nuevo-tango') return '3+3+2 chords';
+  if (id === 'electrotango-gotan' || id === 'electro-rock-bajofondo') return instrument === 'synth' ? 'Synth answer' : 'Offbeat chords';
+  if (id === 'chacarera-crossover') return 'Guitar hemiola';
+  return 'Four-beat marcato';
+}
+
 export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
   return { ...input, styles: input.styles.map(style => {
     const id = style.id;
@@ -90,7 +147,10 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
     const techniques = { ...style.instrumentTechniques, piano: [...new Set([...(style.instrumentTechniques.piano ?? []), 'yumba'])] };
     const dialects = { ...style.instrumentDialects };
     if (dialects['piano:harmony']) dialects['piano:harmony'] = { ...dialects['piano:harmony'], allowedTechniques: techniques.piano };
-    return { ...style, cells: [...lines, ...accompaniment], instrumentTechniques: techniques, instrumentDialects: dialects,
+    const cells = [...lines, ...accompaniment].map(item => ({ ...item, shortName: conciseCellLabel(id, item) }));
+    const authored = pedagogy[id];
+    return { ...style, ...(authored ? { description: authored.description, patterns: authored.patterns } : {}),
+      cells, instrumentTechniques: techniques, instrumentDialects: dialects,
       bassMotion: 'root-fifth', groove: { ...style.groove, swingPercentage: 50 } };
   }) };
 }

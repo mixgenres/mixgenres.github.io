@@ -1,5 +1,5 @@
 /** Inventory every local recording, retaining all exact catalog matches. */
-import { readdirSync, mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, mkdirSync, writeFileSync } from 'node:fs';
 import { resolve, extname } from 'node:path';
 import { songCatalog } from '../src/data/songs/catalog';
 const clean = (text: string) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -46,10 +46,38 @@ const localAliases = new Map<string, string[]>([
   [clean('Beethoven - String Quartet No. 14 Op. 131'), ['classical-chamber_song']],
   [clean('T. N. Krishnan - Ragam Tanam Pallavi'), ['indian-classical-ragam-tanam-pallavi_song']],
 ]);
+// Genre-local reference dossiers may contain several performances for the same
+// sample-song style. Index each original recording against that style so the
+// comparison and ensemble audits can see the complete reference set.
+const referenceAliases = new Map<string, string[]>();
+for (const genre of readdirSync('docs/genres', { withFileTypes: true }).filter(entry => entry.isDirectory())) {
+  const path = resolve('docs/genres', genre.name, 'references.json');
+  if (!existsSync(path)) continue;
+  try {
+    const dossier = JSON.parse(readFileSync(path, 'utf8')) as {
+      styles?: Array<{ styleId?: string; references?: Array<{ file?: string; audio?: string }> }>;
+      references?: Array<{ styleId?: string; file?: string; audio?: string }>;
+    };
+    const rows = [
+      ...(dossier.styles ?? []).flatMap(style => (style.references ?? []).map(reference => ({ ...reference, styleId: style.styleId }))),
+      ...(dossier.references ?? []),
+    ];
+    for (const reference of rows) {
+      const localPath = reference.file ?? reference.audio;
+      const styleSong = songCatalog.find(song => song.styleId === reference.styleId);
+      if (!localPath || !styleSong || !localPath.startsWith('samples/')) continue;
+      const fileName = localPath.split('/').pop()!;
+      const key = clean(fileName.replace(/\.[^.]+$/, ''));
+      referenceAliases.set(key, [...new Set([...(referenceAliases.get(key) ?? []), styleSong.id])]);
+    }
+  } catch (error) {
+    console.warn(`Could not read genre reference dossier ${path}: ${String(error)}`);
+  }
+}
 const files = readdirSync('samples').filter(file => /\.(mp3|wav|flac|m4a|ogg|aiff?)$/i.test(file)).sort();
 const entries = files.map(file => {
   const name = file.slice(0, -extname(file).length);
-  const aliasSongIds = localAliases.get(clean(name));
+  const aliasSongIds = referenceAliases.get(clean(name)) ?? localAliases.get(clean(name));
   return { file: resolve('samples', file), name,
     matches: songCatalog.filter(song => aliasSongIds ? aliasSongIds.includes(song.id)
       : clean(`${song.artist} - ${song.track}`) === clean(name))

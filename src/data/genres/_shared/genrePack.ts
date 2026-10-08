@@ -8,6 +8,8 @@ import { authorSampleSongDevelopment } from './sampleSongDevelopment';
 /** Authored beat positions, in quarter-note units; no style-name hashing. */
 export interface AuthoredCell {
   name: string;
+  /** Concise student-facing label; the full source name and technique stay in description. */
+  shortName?: string;
   role: string;
   instruments?: string[];
   onsets: number[];
@@ -362,15 +364,15 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
     ...(cell.phraseEnd ? { condition: { phrasePosition: ['cadence', 'transition'] }, probability: cell.notations?.[i]?.tuplet ? 1 : .85 } : {}),
   }));
   return {
-    id, worldId: input.id, styleIds: [style.id], name: `${style.name}: ${cell.name}`, shortName: cell.name,
-    family: cell.name, category: cell.phraseEnd ? (/cadence|cierre|remate|ending|closing/i.test(cell.name) ? 'cadence' : 'fill')
+    id, worldId: input.id, styleIds: [style.id], name: `${style.name}: ${cell.shortName ?? cell.name}`, shortName: cell.shortName ?? cell.name,
+    family: cell.shortName ?? cell.name, category: cell.phraseEnd ? (/cadence|cierre|remate|ending|closing/i.test(cell.name) ? 'cadence' : 'fill')
       : cell.pedagogicalStudy && (cell.role === 'bass' || cell.role === 'percussion' || cell.role === 'lead' || cell.role === 'voice' || cell.role === 'harmony')
         ? cell.role === 'bass' ? 'bass' : cell.role === 'percussion' ? 'percussion' : cell.role === 'harmony' ? 'comping' : 'melodic'
         : cell.role === 'bass' ? 'bass' : cell.role === 'percussion' ? 'percussion'
           : cell.role === 'lead' || cell.role === 'voice' ? 'melodic'
             : /break|dropout|silence/i.test(cell.name) ? 'break'
               : /transition|pickup|turnaround/i.test(cell.name) ? 'transition' : 'comping',
-    description: cell.description ?? `${cell.name}. ${style.description}`, tags: [input.id, style.id, cell.role, slug(cell.name)],
+    description: cell.description ?? `${cell.name}. ${style.description}`, tags: [input.id, style.id, cell.role, slug(cell.name), cell.name],
     scopes: cell.phraseEnd ? ['phrase'] : ['measure', 'phrase'], roles: [cell.role] as MusicalPattern['roles'],
     instruments: instruments as MusicalPattern['instruments'], canCrossRole: false, sourceLevel: 'style-authored',
     meter, cycleLength, subdivisions: beats * stepsPerBeat * cycleLength,
@@ -454,6 +456,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
     // catalog ordering often places a short opening cue before the main part.
     const source = cells.reduce((best, candidate) => candidate.onsets.length > best.onsets.length ? candidate : best);
     const instrumentId = source.instruments![0];
+    const instrumentLabel = instrumentId.replaceAll('-', ' ');
     const originalEvents = source.onsets.map((position, index) => ({
       position,
       duration: source.durations?.[index],
@@ -471,6 +474,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
       studies.push({
         ...source,
         name: `${instrumentId} foundation pulse study`,
+        shortName: `${instrumentLabel} pulse`,
         onsets: selected.map(event => event.position),
         durations: selected.map(event => event.duration ?? 0.25),
         accents: selected.map(event => event.accent ?? 0.65),
@@ -499,6 +503,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
       studies.push({
         ...source,
         name: `${instrumentId} phrase answer study`,
+        shortName: `${instrumentLabel} answer`,
         onsets: selected.map(event => start + event.position - first),
         durations: selected.map(event => event.duration ?? 0.25),
         accents: selected.map(event => event.accent ?? 0.65),
@@ -532,6 +537,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
       studies.push({
         ...source,
         name: `${instrumentId} opening-motif development variation`,
+        shortName: `${instrumentLabel} variation`,
         onsets: motif.map(event => start + event.position - first),
         durations: motif.map(event => event.duration ?? 0.25),
         accents: motif.map(event => event.accent ?? 0.65),
@@ -559,6 +565,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
       studies.push({
         ...source,
         name: `${instrumentId} ${gesture} technique study`,
+        shortName: `${instrumentLabel} ${gesture}`,
         articulation: undefined,
         articulations: source.onsets.map(() => gesture),
         difficulty,
@@ -617,7 +624,7 @@ export function createGenreWorld(input: GenrePackInput): GenreWorld {
         pattern.events = pattern.events!.map(({ condition: _condition, probability: _probability, ...event }) => event);
         return pattern;
       });
-    const studyNames = new Set(cells.filter(cell => cell.pedagogicalStudy).map(cell => cell.name));
+    const studyNames = new Set(cells.filter(cell => cell.pedagogicalStudy).flatMap(cell => [cell.name, cell.shortName ?? cell.name]));
     const phrases = patterns.filter(pattern => !studyNames.has(pattern.shortName ?? '')).flatMap(pattern => {
       const ending = endings.find(candidate => candidate.roles[0] === pattern.roles[0]
         && candidate.instruments?.join('|') === pattern.instruments?.join('|'));
@@ -629,8 +636,11 @@ export function createGenreWorld(input: GenrePackInput): GenreWorld {
       const parent = pattern.cycleLength === 1 ? { ...pattern, cycleLength,
         events: [...pattern.events!, ...pattern.events!.map(event => ({ ...event, position: event.position + beats }))] } : pattern;
       const events = closingEvents(parent, ending).map(({ condition: _condition, probability: _probability, ...event }) => event);
+      const turnaroundSubject = pattern.instruments?.[0]?.replaceAll('-', ' ')
+        ?? pattern.shortName?.split(/\s+/).slice(0, 2).join(' ')
+        ?? 'phrase';
       return [{ ...pattern, id: `${pattern.id}-turnaround-study`, name: `${pattern.name}: turnaround study`,
-        shortName: `${pattern.shortName}: turnaround`, cycleLength, subdivisions: beats * 4 * cycleLength,
+        shortName: `${turnaroundSubject} turnaround`, cycleLength, subdivisions: beats * 4 * cycleLength,
         events, onsetGrid: events.map(event => Math.round(event.position * 4)),
         durationGrid: events.map(event => Math.max(1, Math.round(event.duration! * 4))),
         accentProfile: events.map(event => event.accent!), velocityProfile: events.map(event => event.velocity!),

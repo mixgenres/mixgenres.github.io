@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "arabic-takht": {
     "recording": "Mohamed Abdel Wahab - Ya Msafer Wahdak",
-    "audio": "voiced/Mohamed Abdel Wahab - Ya Msafer Wahdak.mp3",
+    "audio": "samples/Mohamed Abdel Wahab - Ya Msafer Wahdak.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 17716479,
-    "audioModifiedNs": 1791142555987024398,
     "windowsSeconds": [
       155.0,
       287.85
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "arabic-instrumental-maqam": {
     "recording": "Munir Bashir - Taqsim Maqam Rast",
-    "audio": "voiced/Munir Bashir - Taqsim Maqam Rast.mp3",
+    "audio": "samples/Munir Bashir - Taqsim Maqam Rast.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 15685107,
-    "audioModifiedNs": 1791083247817748754,
     "windowsSeconds": [
       137.22,
       254.84
@@ -42,8 +38,6 @@ export const REFERENCE_MIX = {
     "recording": "Sabah Fakhri - Lamma Bada Yatathanna",
     "audio": "samples/Sabah Fakhri - Lamma Bada Yatathanna.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 5725699,
-    "audioModifiedNs": 1791076972662057950,
     "windowsSeconds": [
       83.16,
       154.45
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "arabic-tarab": {
     "recording": "Umm Kulthum - Enta Omri",
-    "audio": "voiced/Umm Kulthum - Enta Omri.mp3",
+    "audio": "samples/Umm Kulthum - Enta Omri.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 22209561,
-    "audioModifiedNs": 1791093330988560205,
     "windowsSeconds": [
       194.31,
       360.86

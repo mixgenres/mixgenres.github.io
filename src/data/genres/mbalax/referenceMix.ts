@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "mbalax-electronic-fusion": {
     "recording": "Baaba Maal - Fulani Rock",
-    "audio": "voiced/Baaba Maal - Fulani Rock.mp3",
+    "audio": "samples/Baaba Maal - Fulani Rock.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11351901,
-    "audioModifiedNs": 1791080330343170154,
     "windowsSeconds": [
       99.31,
       184.43
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "mbalax-sabar-heavy": {
     "recording": "Doudou N'Diaye Rose - Rose Rhythm",
-    "audio": "voiced/Doudou N'Diaye Rose - Rose Rhythm.mp3",
+    "audio": "samples/Doudou N'Diaye Rose - Rose Rhythm.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10222407,
-    "audioModifiedNs": 1791099628928796185,
     "windowsSeconds": [
       89.43,
       166.08
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "mbalax-pop-mbalax": {
     "recording": "Youssou N'Dour & Neneh Cherry - 7 Seconds",
-    "audio": "voiced/Youssou N'Dour & Neneh Cherry - 7 Seconds.mp3",
+    "audio": "samples/Youssou N'Dour & Neneh Cherry - 7 Seconds.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10843055,
-    "audioModifiedNs": 1791138682912240036,
     "windowsSeconds": [
       94.85,
       176.16
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "mbalax-classic": {
     "recording": "Youssou N'Dour - Birima",
-    "audio": "voiced/Youssou N'Dour - Birima.mp3",
+    "audio": "samples/Youssou N'Dour - Birima.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 14652822,
-    "audioModifiedNs": 1791105023759600240,
     "windowsSeconds": [
       128.19,
       238.06

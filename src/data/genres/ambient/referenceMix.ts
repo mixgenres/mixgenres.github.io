@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "ambient-downtempo-ambient": {
     "recording": "Bonobo - Kiara",
-    "audio": "voiced/Bonobo - Kiara.mp3",
+    "audio": "samples/Bonobo - Kiara.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 12118842,
-    "audioModifiedNs": 1791093928298042481,
     "windowsSeconds": [
       106.01,
       196.88
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "ambient-atmospheric": {
     "recording": "Brian Eno - An Ending (Ascent)",
-    "audio": "voiced/Brian Eno - An Ending (Ascent).mp3",
+    "audio": "samples/Brian Eno - An Ending (Ascent).mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10455381,
-    "audioModifiedNs": 1791087593000205219,
     "windowsSeconds": [
       91.46,
       169.85
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "ambient-cinematic-ambient": {
     "recording": "Hammock - Turn Away and Return",
-    "audio": "voiced/Hammock - Turn Away and Return.mp3",
+    "audio": "samples/Hammock - Turn Away and Return.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 12523234,
-    "audioModifiedNs": 1791148153184472257,
     "windowsSeconds": [
       109.55,
       203.45
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "ambient-organic-ambient": {
     "recording": "Jon Hassell - Last Night the Moon Came",
-    "audio": "voiced/Jon Hassell - Last Night the Moon Came.mp3",
+    "audio": "samples/Jon Hassell - Last Night the Moon Came.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 20891821,
-    "audioModifiedNs": 1791081979321479521,
     "windowsSeconds": [
       182.78,
       339.44
@@ -78,8 +70,6 @@ export const REFERENCE_MIX = {
     "recording": "Oval - Do While",
     "audio": "samples/Oval - Do While.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 34805233,
-    "audioModifiedNs": 1791140347597120101,
     "windowsSeconds": [
       505.71,
       939.18
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "ambient-drone": {
     "recording": "Stars of the Lid - Requiem for Dying Mothers, Pt. 2",
-    "audio": "voiced/Stars of the Lid - Requiem for Dying Mothers, Pt. 2.mp3",
+    "audio": "samples/Stars of the Lid - Requiem for Dying Mothers, Pt. 2.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 18289066,
-    "audioModifiedNs": 1791156770079346987,
     "windowsSeconds": [
       160.0,
       297.15
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "ambient-neo-classical-ambient": {
     "recording": "Ólafur Arnalds - Near Light",
-    "audio": "voiced/Ólafur Arnalds - Near Light.mp3",
+    "audio": "samples/Ólafur Arnalds - Near Light.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8361403,
-    "audioModifiedNs": 1791098246190641179,
     "windowsSeconds": [
       73.13,
       135.82

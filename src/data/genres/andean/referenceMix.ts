@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "andean-andean-fusion": {
     "recording": "Chancha Vía Circuito - Ilaló",
-    "audio": "voiced/Chancha Vía Circuito - Ilaló.mp3",
+    "audio": "samples/Chancha Vía Circuito - Ilaló.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11678015,
-    "audioModifiedNs": 1791151407475050371,
     "windowsSeconds": [
       102.16,
       189.72
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "andean-nueva-cancion": {
     "recording": "Inti-Illimani - El Pueblo Unido",
-    "audio": "voiced/Inti-Illimani - El Pueblo Unido.mp3",
+    "audio": "samples/Inti-Illimani - El Pueblo Unido.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10308205,
-    "audioModifiedNs": 1791084352336591135,
     "windowsSeconds": [
       90.17,
       167.46
@@ -42,8 +38,6 @@ export const REFERENCE_MIX = {
     "recording": "Los Incas - El Humahuaqueño",
     "audio": "samples/Los Incas - El Humahuaqueño.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 7583234,
-    "audioModifiedNs": 1791076960525289785,
     "windowsSeconds": [
       108.15,
       200.85
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "andean-saya": {
     "recording": "Los Kjarkas - Llorando Se Fue",
-    "audio": "voiced/Los Kjarkas - Llorando Se Fue.mp3",
+    "audio": "samples/Los Kjarkas - Llorando Se Fue.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 12547358,
-    "audioModifiedNs": 1791088270161160776,
     "windowsSeconds": [
       109.76,
       203.85
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "andean-tinku": {
     "recording": "Los Kjarkas - Tuna Papita",
-    "audio": "voiced/Los Kjarkas - Tuna Papita.mp3",
+    "audio": "samples/Los Kjarkas - Tuna Papita.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9477441,
-    "audioModifiedNs": 1791161780213871835,
     "windowsSeconds": [
       82.9,
       153.96
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "andean-huayno": {
     "recording": "Pastorita Huaracina - Mujer Andina",
-    "audio": "voiced/Pastorita Huaracina - Mujer Andina.mp3",
+    "audio": "samples/Pastorita Huaracina - Mujer Andina.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6861981,
-    "audioModifiedNs": 1791087375471578928,
     "windowsSeconds": [
       60.01,
       111.45
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "andean-sanjuanito": {
     "recording": "Ñanda Mañachi - Pobre Corazón",
-    "audio": "voiced/Ñanda Mañachi - Pobre Corazón.mp3",
+    "audio": "samples/Ñanda Mañachi - Pobre Corazón.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9220469,
-    "audioModifiedNs": 1791155717064283566,
     "windowsSeconds": [
       80.66,
       149.79

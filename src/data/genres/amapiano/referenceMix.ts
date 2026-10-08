@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "amapiano-vocal": {
     "recording": "DJ Maphorisa & Kabza De Small feat. Samthing Soweto - Amantombazane",
-    "audio": "voiced/DJ Maphorisa & Kabza De Small feat. Samthing Soweto - Amantombazane.mp3",
+    "audio": "samples/DJ Maphorisa & Kabza De Small feat. Samthing Soweto - Amantombazane.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 14405218,
-    "audioModifiedNs": 1791085520929086894,
     "windowsSeconds": [
       126.02,
       234.03
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "amapiano-log-drum-heavy": {
     "recording": "Focalistic - Ke Star",
-    "audio": "voiced/Focalistic - Ke Star.mp3",
+    "audio": "samples/Focalistic - Ke Star.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10803322,
-    "audioModifiedNs": 1791142233953769300,
     "windowsSeconds": [
       94.51,
       175.51
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "amapiano-classic": {
     "recording": "Kabza De Small - Sponono",
-    "audio": "voiced/Kabza De Small - Sponono.mp3",
+    "audio": "samples/Kabza De Small - Sponono.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 16022738,
-    "audioModifiedNs": 1791102574174952346,
     "windowsSeconds": [
       140.17,
       260.32
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "amapiano-private-school": {
     "recording": "Kelvin Momo - Abantu",
-    "audio": "voiced/Kelvin Momo - Abantu.mp3",
+    "audio": "samples/Kelvin Momo - Abantu.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 20748719,
-    "audioModifiedNs": 1791161532021562978,
     "windowsSeconds": [
       181.53,
       337.12
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "amapiano-kwaito-crossover": {
     "recording": "M'Du - Umazola",
-    "audio": "voiced/M'Du - Umazola.mp3",
+    "audio": "samples/M'Du - Umazola.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 14002791,
-    "audioModifiedNs": 1791094854130259322,
     "windowsSeconds": [
       122.5,
       227.5

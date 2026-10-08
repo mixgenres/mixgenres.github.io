@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "house-afro-house": {
     "recording": "Black Coffee - We Dance Again",
-    "audio": "voiced/Black Coffee - We Dance Again.mp3",
+    "audio": "samples/Black Coffee - We Dance Again.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11257976,
-    "audioModifiedNs": 1791161946689076416,
     "windowsSeconds": [
       98.48,
       182.9
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "house-chicago-house": {
     "recording": "Frankie Knuckles - Your Love",
-    "audio": "voiced/Frankie Knuckles - Your Love.mp3",
+    "audio": "samples/Frankie Knuckles - Your Love.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 16516832,
-    "audioModifiedNs": 1791084240305971471,
     "windowsSeconds": [
       144.49,
       268.35
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "house-tech-house": {
     "recording": "Green Velvet - Flash",
-    "audio": "voiced/Green Velvet - Flash.mp3",
+    "audio": "samples/Green Velvet - Flash.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 17204367,
-    "audioModifiedNs": 1791142868236406044,
     "windowsSeconds": [
       150.51,
       279.52
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "house-deep-house": {
     "recording": "Mr. Fingers - Can You Feel It",
-    "audio": "voiced/Mr. Fingers - Can You Feel It.mp3",
+    "audio": "samples/Mr. Fingers - Can You Feel It.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 13824130,
-    "audioModifiedNs": 1791095537044876986,
     "windowsSeconds": [
       120.93,
       224.59
@@ -78,8 +70,6 @@ export const REFERENCE_MIX = {
     "recording": "Phuture - Acid Tracks",
     "audio": "samples/Phuture - Acid Tracks.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 17802738,
-    "audioModifiedNs": 1791139929122292179,
     "windowsSeconds": [
       258.87,
       480.76
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "house-garage-piano-house": {
     "recording": "Robin S. - Show Me Love",
-    "audio": "voiced/Robin S. - Show Me Love.mp3",
+    "audio": "samples/Robin S. - Show Me Love.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9591242,
-    "audioModifiedNs": 1791080582512452953,
     "windowsSeconds": [
       83.9,
       155.81
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "house-progressive-house": {
     "recording": "Sasha - Xpander",
-    "audio": "voiced/Sasha - Xpander.mp3",
+    "audio": "samples/Sasha - Xpander.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 16246288,
-    "audioModifiedNs": 1791137536764902923,
     "windowsSeconds": [
       142.13,
       263.96

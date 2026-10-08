@@ -6,8 +6,6 @@ export const REFERENCE_MIX = {
     "recording": "Antonio Mairena - Martinete y Debla",
     "audio": "samples/Antonio Mairena - Martinete y Debla.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 7121167,
-    "audioModifiedNs": 1791077202419050944,
     "windowsSeconds": [
       101.74,
       188.94
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "flamenco-nuevo-flamenco": {
     "recording": "Camarón - La Leyenda del Tiempo",
-    "audio": "voiced/Camarón - La Leyenda del Tiempo.mp3",
+    "audio": "samples/Camarón - La Leyenda del Tiempo.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8849380,
-    "audioModifiedNs": 1791158321197281867,
     "windowsSeconds": [
       77.41,
       143.75
@@ -42,8 +38,6 @@ export const REFERENCE_MIX = {
     "recording": "Camarón - Moraíto como un lirio",
     "audio": "samples/Camarón - Moraíto como un lirio.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 6469411,
-    "audioModifiedNs": 1791077195831445698,
     "windowsSeconds": [
       94.2,
       174.94
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "flamenco-granaina-malaguena": {
     "recording": "Camarón - Que he dejao de quererte",
-    "audio": "voiced/Camarón - Que he dejao de quererte.mp3",
+    "audio": "samples/Camarón - Que he dejao de quererte.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 4842199,
-    "audioModifiedNs": 1791156537786586694,
     "windowsSeconds": [
       42.35,
       78.64
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "flamenco-fandangos": {
     "recording": "Camarón - Salud antes que dinero",
-    "audio": "voiced/Camarón - Salud antes que dinero.mp3",
+    "audio": "samples/Camarón - Salud antes que dinero.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6922589,
-    "audioModifiedNs": 1791097326119044828,
     "windowsSeconds": [
       60.55,
       112.45
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "flamenco-alegrias": {
     "recording": "Camarón de la Isla - Bahía de Cádiz",
-    "audio": "voiced/Camarón de la Isla - Bahía de Cádiz.mp3",
+    "audio": "samples/Camarón de la Isla - Bahía de Cádiz.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7043789,
-    "audioModifiedNs": 1791090536104615326,
     "windowsSeconds": [
       61.61,
       114.41
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "flamenco-tangos": {
     "recording": "Camarón de la Isla - Como el Agua",
-    "audio": "voiced/Camarón de la Isla - Como el Agua.mp3",
+    "audio": "samples/Camarón de la Isla - Como el Agua.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8891178,
-    "audioModifiedNs": 1791138508368054632,
     "windowsSeconds": [
       77.77,
       144.43
@@ -130,10 +116,8 @@ export const REFERENCE_MIX = {
   },
   "flamenco-solea": {
     "recording": "Camarón de la Isla - De tus ojos soy cautivo",
-    "audio": "voiced/Camarón de la Isla - De tus ojos soy cautivo.mp3",
+    "audio": "samples/Camarón de la Isla - De tus ojos soy cautivo.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7762688,
-    "audioModifiedNs": 1791102004409009909,
     "windowsSeconds": [
       67.9,
       126.09
@@ -150,8 +134,6 @@ export const REFERENCE_MIX = {
     "recording": "Paco de Lucía - Almoraima",
     "audio": "samples/Paco de Lucía - Almoraima.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 7037669,
-    "audioModifiedNs": 1791077189935108893,
     "windowsSeconds": [
       102.5,
       190.35
@@ -168,8 +150,6 @@ export const REFERENCE_MIX = {
     "recording": "Paco de Lucía - El Cobre",
     "audio": "samples/Paco de Lucía - El Cobre.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 4622516,
-    "audioModifiedNs": 1791077201941997127,
     "windowsSeconds": [
       67.24,
       124.88
@@ -184,10 +164,8 @@ export const REFERENCE_MIX = {
   },
   "flamenco-rumba": {
     "recording": "Paco de Lucía - Entre dos aguas",
-    "audio": "voiced/Paco de Lucía - Entre dos aguas.mp3",
+    "audio": "samples/Paco de Lucía - Entre dos aguas.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 12964293,
-    "audioModifiedNs": 1791160715249593017,
     "windowsSeconds": [
       113.41,
       210.62
@@ -202,10 +180,8 @@ export const REFERENCE_MIX = {
   },
   "flamenco-guajira": {
     "recording": "Paco de Lucía - Guajiras de Lucía",
-    "audio": "voiced/Paco de Lucía - Guajiras de Lucía.mp3",
+    "audio": "samples/Paco de Lucía - Guajiras de Lucía.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8172287,
-    "audioModifiedNs": 1791148865395667866,
     "windowsSeconds": [
       71.48,
       132.76
@@ -220,10 +196,8 @@ export const REFERENCE_MIX = {
   },
   "flamenco-taranta": {
     "recording": "Paco de Lucía - Tío Sabas",
-    "audio": "voiced/Paco de Lucía - Tío Sabas.mp3",
+    "audio": "samples/Paco de Lucía - Tío Sabas.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 12219204,
-    "audioModifiedNs": 1791082915903395199,
     "windowsSeconds": [
       106.89,
       198.52
@@ -238,10 +212,8 @@ export const REFERENCE_MIX = {
   },
   "flamenco-flamenco-jazz": {
     "recording": "Paco de Lucía - Zyryab",
-    "audio": "voiced/Paco de Lucía - Zyryab.mp3",
+    "audio": "samples/Paco de Lucía - Zyryab.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 15095806,
-    "audioModifiedNs": 1791086030827522892,
     "windowsSeconds": [
       132.07,
       245.27
@@ -258,8 +230,6 @@ export const REFERENCE_MIX = {
     "recording": "Pata Negra - Blues de la Frontera",
     "audio": "samples/Pata Negra - Blues de la Frontera.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 6155719,
-    "audioModifiedNs": 1791139895208673633,
     "windowsSeconds": [
       88.72,
       164.77
@@ -276,8 +246,6 @@ export const REFERENCE_MIX = {
     "recording": "Rosalía - Malamente",
     "audio": "samples/Rosalía - Malamente.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 4111913,
-    "audioModifiedNs": 1791077207724392685,
     "windowsSeconds": [
       58.85,
       109.29
@@ -292,10 +260,8 @@ export const REFERENCE_MIX = {
   },
   "flamenco-farruca": {
     "recording": "Sabicas - Farruca",
-    "audio": "voiced/Sabicas - Farruca.mp3",
+    "audio": "samples/Sabicas - Farruca.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11036420,
-    "audioModifiedNs": 1791092701148809275,
     "windowsSeconds": [
       96.55,
       179.3

@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "cinematic-golden-age": {
     "recording": "Erich Wolfgang Korngold - The Sea Hawk",
-    "audio": "voiced/Erich Wolfgang Korngold - The Sea Hawk.mp3",
+    "audio": "samples/Erich Wolfgang Korngold - The Sea Hawk.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 21269058,
-    "audioModifiedNs": 1791137150451094873,
     "windowsSeconds": [
       186.08,
       345.59
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "cinematic-modern-score": {
     "recording": "Hans Zimmer - Time",
-    "audio": "voiced/Hans Zimmer - Time.mp3",
+    "audio": "samples/Hans Zimmer - Time.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10996638,
-    "audioModifiedNs": 1791082629788372290,
     "windowsSeconds": [
       96.2,
       178.65
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "cinematic-epic": {
     "recording": "Howard Shore - The Bridge of Khazad-dûm",
-    "audio": "voiced/Howard Shore - The Bridge of Khazad-dûm.mp3",
+    "audio": "samples/Howard Shore - The Bridge of Khazad-dûm.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8082422,
-    "audioModifiedNs": 1791159248172010104,
     "windowsSeconds": [
       70.7,
       131.3
@@ -60,8 +54,6 @@ export const REFERENCE_MIX = {
     "recording": "Jóhann Jóhannsson - The Beast",
     "audio": "samples/Jóhann Jóhannsson - The Beast.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 3773381,
-    "audioModifiedNs": 1791077066429741331,
     "windowsSeconds": [
       52.96,
       98.36
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "cinematic-hybrid": {
     "recording": "Trent Reznor & Atticus Ross - Hand Covers Bruise",
-    "audio": "voiced/Trent Reznor & Atticus Ross - Hand Covers Bruise.mp3",
+    "audio": "samples/Trent Reznor & Atticus Ross - Hand Covers Bruise.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10558958,
-    "audioModifiedNs": 1791136895521931241,
     "windowsSeconds": [
       92.36,
       171.53
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "cinematic-ambient-score": {
     "recording": "Vangelis - Blade Runner Blues",
-    "audio": "voiced/Vangelis - Blade Runner Blues.mp3",
+    "audio": "samples/Vangelis - Blade Runner Blues.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 24754822,
-    "audioModifiedNs": 1791144894599166825,
     "windowsSeconds": [
       216.58,
       402.21

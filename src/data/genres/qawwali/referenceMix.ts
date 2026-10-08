@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "qawwali-contemporary-fusion": {
     "recording": "Nusrat Fateh Ali Khan & Michael Brook - Night Song",
-    "audio": "voiced/Nusrat Fateh Ali Khan & Michael Brook - Night Song.mp3",
+    "audio": "samples/Nusrat Fateh Ali Khan & Michael Brook - Night Song.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 29476737,
-    "audioModifiedNs": 1791089271294296630,
     "windowsSeconds": [
       257.9,
       478.95
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "qawwali-traditional": {
     "recording": "Nusrat Fateh Ali Khan - Allah Hoo",
-    "audio": "voiced/Nusrat Fateh Ali Khan - Allah Hoo.mp3",
+    "audio": "samples/Nusrat Fateh Ali Khan - Allah Hoo.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 35328236,
-    "audioModifiedNs": 1791106021367372287,
     "windowsSeconds": [
       309.09,
       574.03
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "qawwali-hamd-naat": {
     "recording": "Nusrat Fateh Ali Khan - Wohi Khuda Hai",
-    "audio": "voiced/Nusrat Fateh Ali Khan - Wohi Khuda Hai.mp3",
+    "audio": "samples/Nusrat Fateh Ali Khan - Wohi Khuda Hai.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 14510638,
-    "audioModifiedNs": 1791160975508199820,
     "windowsSeconds": [
       126.95,
       235.76
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "qawwali-ghazal-qawwali": {
     "recording": "Sabri Brothers - Bhar Do Jholi Meri",
-    "audio": "voiced/Sabri Brothers - Bhar Do Jholi Meri.mp3",
+    "audio": "samples/Sabri Brothers - Bhar Do Jholi Meri.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 48160659,
-    "audioModifiedNs": 1791101191384738134,
     "windowsSeconds": [
       421.38,
       782.57

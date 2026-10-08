@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "weird-circuit-bent-broken-electronics": {
     "recording": "Brian Charette Circuit Bent Organ Trio - Doll Fin",
-    "audio": "voiced/Brian Charette Circuit Bent Organ Trio - Doll Fin.mp3",
+    "audio": "samples/Brian Charette Circuit Bent Organ Trio - Doll Fin.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 19445681,
-    "audioModifiedNs": 1791095742465059448,
     "windowsSeconds": [
       170.13,
       315.95
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "weird-deconstructed": {
     "recording": "Captain Beefheart - Frownland",
-    "audio": "voiced/Captain Beefheart - Frownland.mp3",
+    "audio": "samples/Captain Beefheart - Frownland.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 4063739,
-    "audioModifiedNs": 1791108102157986841,
     "windowsSeconds": [
       35.54,
       65.99
@@ -42,8 +38,6 @@ export const REFERENCE_MIX = {
     "recording": "DNA - You & You",
     "audio": "samples/DNA - You & You.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 3063351,
-    "audioModifiedNs": 1791077846396685131,
     "windowsSeconds": [
       44.51,
       82.66
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "weird-zeuhl": {
     "recording": "Magma - De Futura",
-    "audio": "voiced/Magma - De Futura.mp3",
+    "audio": "samples/Magma - De Futura.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 42237068,
-    "audioModifiedNs": 1791094383976493048,
     "windowsSeconds": [
       369.55,
       686.31
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "weird-noise": {
     "recording": "Merzbow - Woodpecker No. 1",
-    "audio": "voiced/Merzbow - Woodpecker No. 1.mp3",
+    "audio": "samples/Merzbow - Woodpecker No. 1.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 16203374,
-    "audioModifiedNs": 1791147829804423664,
     "windowsSeconds": [
       141.75,
       263.25
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "weird-polymetric": {
     "recording": "Meshuggah - Bleed",
-    "audio": "voiced/Meshuggah - Bleed.mp3",
+    "audio": "samples/Meshuggah - Bleed.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 12007134,
-    "audioModifiedNs": 1791138378165311657,
     "windowsSeconds": [
       105.04,
       195.08
@@ -114,8 +102,6 @@ export const REFERENCE_MIX = {
     "recording": "Oval - Do While",
     "audio": "samples/Oval - Do While.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 34805233,
-    "audioModifiedNs": 1791140347597120101,
     "windowsSeconds": [
       505.71,
       939.18
@@ -130,10 +116,8 @@ export const REFERENCE_MIX = {
   },
   "weird-musique-concrete": {
     "recording": "Pierre Schaeffer - Étude aux chemins de fer",
-    "audio": "voiced/Pierre Schaeffer - Étude aux chemins de fer.mp3",
+    "audio": "samples/Pierre Schaeffer - Étude aux chemins de fer.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6943587,
-    "audioModifiedNs": 1791082055292326241,
     "windowsSeconds": [
       60.73,
       112.79
@@ -148,10 +132,8 @@ export const REFERENCE_MIX = {
   },
   "weird-microsound": {
     "recording": "Ryoji Ikeda - data.matrix",
-    "audio": "voiced/Ryoji Ikeda - data.matrix.mp3",
+    "audio": "samples/Ryoji Ikeda - data.matrix.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 24047408,
-    "audioModifiedNs": 1791085262699735048,
     "windowsSeconds": [
       210.39,
       390.72
@@ -166,10 +148,8 @@ export const REFERENCE_MIX = {
   },
   "weird-drone": {
     "recording": "Sunn O))) - It Took the Night to Believe",
-    "audio": "voiced/Sunn O))) - It Took the Night to Believe.mp3",
+    "audio": "samples/Sunn O))) - It Took the Night to Believe.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 14269361,
-    "audioModifiedNs": 1791153027123851601,
     "windowsSeconds": [
       124.83,
       231.83

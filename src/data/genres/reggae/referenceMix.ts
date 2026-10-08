@@ -6,8 +6,6 @@ export const REFERENCE_MIX = {
     "recording": "Alton Ellis - Girl I've Got a Date",
     "audio": "samples/Alton Ellis - Girl I've Got a Date.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 3523881,
-    "audioModifiedNs": 1791077527388039306,
     "windowsSeconds": [
       50.67,
       94.1
@@ -24,8 +22,6 @@ export const REFERENCE_MIX = {
     "recording": "Augustus Pablo  King Tubby - King Tubby Meets Rockers Uptown",
     "audio": "samples/Augustus Pablo  King Tubby - King Tubby Meets Rockers Uptown.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 3704708,
-    "audioModifiedNs": 1791077524148786882,
     "windowsSeconds": [
       53.85,
       100.01
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "reggae-roots": {
     "recording": "Bob Marley & The Wailers - Three Little Birds",
-    "audio": "voiced/Bob Marley & The Wailers - Three Little Birds.mp3",
+    "audio": "samples/Bob Marley & The Wailers - Three Little Birds.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7689551,
-    "audioModifiedNs": 1791106711580110520,
     "windowsSeconds": [
       67.26,
       124.9
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "reggae-one-drop": {
     "recording": "Bob Marley - Natural Mystic",
-    "audio": "voiced/Bob Marley - Natural Mystic.mp3",
+    "audio": "samples/Bob Marley - Natural Mystic.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8397974,
-    "audioModifiedNs": 1791156380477004865,
     "windowsSeconds": [
       73.46,
       136.42
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "reggae-rockers": {
     "recording": "Burning Spear - Marcus Garvey",
-    "audio": "voiced/Burning Spear - Marcus Garvey.mp3",
+    "audio": "samples/Burning Spear - Marcus Garvey.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8262160,
-    "audioModifiedNs": 1791092022399868006,
     "windowsSeconds": [
       72.27,
       134.21
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "reggae-dancehall": {
     "recording": "Sister Nancy - Bam Bam",
-    "audio": "voiced/Sister Nancy - Bam Bam.mp3",
+    "audio": "samples/Sister Nancy - Bam Bam.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8015629,
-    "audioModifiedNs": 1791140531282447367,
     "windowsSeconds": [
       70.11,
       130.21
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "reggae-ska": {
     "recording": "The Skatalites - Guns of Navarone",
-    "audio": "voiced/The Skatalites - Guns of Navarone.mp3",
+    "audio": "samples/The Skatalites - Guns of Navarone.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 15250420,
-    "audioModifiedNs": 1791149609105609646,
     "windowsSeconds": [
       133.41,
       247.77

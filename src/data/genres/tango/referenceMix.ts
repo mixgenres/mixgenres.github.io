@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "tango-golden-age": {
     "recording": "Aníbal Troilo - Quejas de Bandoneón",
-    "audio": "voiced/Aníbal Troilo - Quejas de Bandoneón.mp3",
+    "audio": "samples/Aníbal Troilo - Quejas de Bandoneón.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6313431,
-    "audioModifiedNs": 1791101812500678412,
     "windowsSeconds": [
       55.22,
       102.55
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "tango-troilo": {
     "recording": "Aníbal Troilo - Quejas de Bandoneón",
-    "audio": "voiced/Aníbal Troilo - Quejas de Bandoneón.mp3",
+    "audio": "samples/Aníbal Troilo - Quejas de Bandoneón.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6313431,
-    "audioModifiedNs": 1791101812500678412,
     "windowsSeconds": [
       55.22,
       102.55
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "tango-piazzolla-nuevo-tango": {
     "recording": "Astor Piazzolla - Libertango",
-    "audio": "voiced/Astor Piazzolla - Libertango.mp3",
+    "audio": "samples/Astor Piazzolla - Libertango.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 13728099,
-    "audioModifiedNs": 1791092581601265336,
     "windowsSeconds": [
       120.1,
       223.04
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "tango-electro-rock-bajofondo": {
     "recording": "Bajofondo - Pa' Bailar",
-    "audio": "voiced/Bajofondo - Pa' Bailar.mp3",
+    "audio": "samples/Bajofondo - Pa' Bailar.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9298794,
-    "audioModifiedNs": 1791086739243885566,
     "windowsSeconds": [
       81.34,
       151.07
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "tango-di-sarli": {
     "recording": "Carlos Di Sarli - Bahía Blanca",
-    "audio": "voiced/Carlos Di Sarli - Bahía Blanca.mp3",
+    "audio": "samples/Carlos Di Sarli - Bahía Blanca.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6875670,
-    "audioModifiedNs": 1791160801416373305,
     "windowsSeconds": [
       60.14,
       111.69
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "tango-tango-cancion": {
     "recording": "Carlos Gardel - Mi Buenos Aires Querido",
-    "audio": "voiced/Carlos Gardel - Mi Buenos Aires Querido.mp3",
+    "audio": "samples/Carlos Gardel - Mi Buenos Aires Querido.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6394916,
-    "audioModifiedNs": 1791097008655805369,
     "windowsSeconds": [
       55.93,
       103.87
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "tango-vals": {
     "recording": "Francisco Canaro - Desde el Alma",
-    "audio": "voiced/Francisco Canaro - Desde el Alma.mp3",
+    "audio": "samples/Francisco Canaro - Desde el Alma.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7292477,
-    "audioModifiedNs": 1791083328950687229,
     "windowsSeconds": [
       63.78,
       118.46
@@ -130,10 +116,8 @@ export const REFERENCE_MIX = {
   },
   "tango-canyengue": {
     "recording": "Francisco Canaro - El Chamuyo",
-    "audio": "voiced/Francisco Canaro - El Chamuyo.mp3",
+    "audio": "samples/Francisco Canaro - El Chamuyo.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7804582,
-    "audioModifiedNs": 1791141344575832496,
     "windowsSeconds": [
       68.27,
       126.78
@@ -148,10 +132,8 @@ export const REFERENCE_MIX = {
   },
   "tango-milonga": {
     "recording": "Francisco Canaro - Milonga Sentimental",
-    "audio": "voiced/Francisco Canaro - Milonga Sentimental.mp3",
+    "audio": "samples/Francisco Canaro - Milonga Sentimental.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7646949,
-    "audioModifiedNs": 1791099073343127853,
     "windowsSeconds": [
       66.89,
       124.22
@@ -166,10 +148,8 @@ export const REFERENCE_MIX = {
   },
   "tango-canaro": {
     "recording": "Francisco Canaro - Poema",
-    "audio": "voiced/Francisco Canaro - Poema.mp3",
+    "audio": "samples/Francisco Canaro - Poema.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8307062,
-    "audioModifiedNs": 1791081756154721971,
     "windowsSeconds": [
       72.67,
       134.95
@@ -184,10 +164,8 @@ export const REFERENCE_MIX = {
   },
   "tango-electrotango-gotan": {
     "recording": "Gotan Project - Santa María (del Buen Ayre)",
-    "audio": "voiced/Gotan Project - Santa María (del Buen Ayre).mp3",
+    "audio": "samples/Gotan Project - Santa María (del Buen Ayre).mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 14946448,
-    "audioModifiedNs": 1791149131252073482,
     "windowsSeconds": [
       130.76,
       242.83
@@ -202,10 +180,8 @@ export const REFERENCE_MIX = {
   },
   "tango-salgan": {
     "recording": "Horacio Salgán - A Fuego Lento",
-    "audio": "voiced/Horacio Salgán - A Fuego Lento.mp3",
+    "audio": "samples/Horacio Salgán - A Fuego Lento.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9207867,
-    "audioModifiedNs": 1791142065333185985,
     "windowsSeconds": [
       80.55,
       149.59
@@ -222,8 +198,6 @@ export const REFERENCE_MIX = {
     "recording": "Juan D'Arienzo - La Cumparsita",
     "audio": "samples/Juan D'Arienzo - La Cumparsita.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 10319717,
-    "audioModifiedNs": 1791077635005446913,
     "windowsSeconds": [
       150.31,
       279.14
@@ -240,8 +214,6 @@ export const REFERENCE_MIX = {
     "recording": "Julio De Caro - Boedo",
     "audio": "samples/Julio De Caro - Boedo.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 4342570,
-    "audioModifiedNs": 1791077627546374702,
     "windowsSeconds": [
       63.15,
       117.29
@@ -256,10 +228,8 @@ export const REFERENCE_MIX = {
   },
   "tango-chacarera-crossover": {
     "recording": "Mercedes Sosa - Chacarera de las Piedras",
-    "audio": "voiced/Mercedes Sosa - Chacarera de las Piedras.mp3",
+    "audio": "samples/Mercedes Sosa - Chacarera de las Piedras.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 5349062,
-    "audioModifiedNs": 1791096341252895314,
     "windowsSeconds": [
       46.78,
       86.88
@@ -276,8 +246,6 @@ export const REFERENCE_MIX = {
     "recording": "Orquesta Típica Fernández Fierro - La Maza",
     "audio": "samples/Orquesta Típica Fernández Fierro - La Maza.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 2742092,
-    "audioModifiedNs": 1791077645666184091,
     "windowsSeconds": [
       36.82,
       68.39
@@ -294,8 +262,6 @@ export const REFERENCE_MIX = {
     "recording": "Osvaldo Pugliese - La Yumba",
     "audio": "samples/Osvaldo Pugliese - La Yumba.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 4045744,
-    "audioModifiedNs": 1791077633175298351,
     "windowsSeconds": [
       58.81,
       109.23

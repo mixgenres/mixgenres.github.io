@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "kizomba-semba-derived": {
     "recording": "Bonga - Mona Ki Ngi Xica",
-    "audio": "voiced/Bonga - Mona Ki Ngi Xica.mp3",
+    "audio": "samples/Bonga - Mona Ki Ngi Xica.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11811652,
-    "audioModifiedNs": 1791161108100109226,
     "windowsSeconds": [
       103.33,
       191.9
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "kizomba-urban-kiz": {
     "recording": "DJ Snakes feat. Puto X - Memories",
-    "audio": "voiced/DJ Snakes feat. Puto X - Memories.mp3",
+    "audio": "samples/DJ Snakes feat. Puto X - Memories.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8933005,
-    "audioModifiedNs": 1791157453126899471,
     "windowsSeconds": [
       78.14,
       145.12
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "kizomba-tarraxinha": {
     "recording": "DJ Znobia - Marimba",
-    "audio": "voiced/DJ Znobia - Marimba.mp3",
+    "audio": "samples/DJ Znobia - Marimba.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9367733,
-    "audioModifiedNs": 1791141555760412408,
     "windowsSeconds": [
       81.94,
       152.18
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "kizomba-fusion-kiz": {
     "recording": "David Carreira feat. Snoop Dogg - A Força Está em Nós",
-    "audio": "voiced/David Carreira feat. Snoop Dogg - A Força Está em Nós.mp3",
+    "audio": "samples/David Carreira feat. Snoop Dogg - A Força Está em Nós.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7837939,
-    "audioModifiedNs": 1791080830015706762,
     "windowsSeconds": [
       68.56,
       127.32
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "kizomba-traditional": {
     "recording": "Eduardo Paim - Rosa Baila",
-    "audio": "voiced/Eduardo Paim - Rosa Baila.mp3",
+    "audio": "samples/Eduardo Paim - Rosa Baila.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 13117870,
-    "audioModifiedNs": 1791104496137064271,
     "windowsSeconds": [
       114.76,
       213.13
@@ -96,8 +86,6 @@ export const REFERENCE_MIX = {
     "recording": "Matias Damásio - Loucos",
     "audio": "samples/Matias Damásio - Loucos.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 6526406,
-    "audioModifiedNs": 1791077395745768252,
     "windowsSeconds": [
       93.38,
       173.43
@@ -114,8 +102,6 @@ export const REFERENCE_MIX = {
     "recording": "Nelson Freitas - Rebound Chick",
     "audio": "samples/Nelson Freitas - Rebound Chick.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 6814236,
-    "audioModifiedNs": 1791139674790934516,
     "windowsSeconds": [
       97.08,
       180.29

@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "folk-folk-revival": {
     "recording": "Bob Dylan - Don't Think Twice, It's All Right",
-    "audio": "voiced/Bob Dylan - Don't Think Twice, It's All Right.mp3",
+    "audio": "samples/Bob Dylan - Don't Think Twice, It's All Right.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8761616,
-    "audioModifiedNs": 1791147347181474217,
     "windowsSeconds": [
       76.64,
       142.33
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "folk-appalachian": {
     "recording": "Doc Watson - Shady Grove",
-    "audio": "voiced/Doc Watson - Shady Grove.mp3",
+    "audio": "samples/Doc Watson - Shady Grove.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7361449,
-    "audioModifiedNs": 1791091274467897377,
     "windowsSeconds": [
       64.39,
       119.57
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "folk-contemporary-folk": {
     "recording": "Joni Mitchell - Both Sides, Now",
-    "audio": "voiced/Joni Mitchell - Both Sides, Now.mp3",
+    "audio": "samples/Joni Mitchell - Both Sides, Now.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 13171075,
-    "audioModifiedNs": 1791103536032369378,
     "windowsSeconds": [
       115.22,
       213.99
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "folk-singer-songwriter": {
     "recording": "Nick Drake - Pink Moon",
-    "audio": "voiced/Nick Drake - Pink Moon.mp3",
+    "audio": "samples/Nick Drake - Pink Moon.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9807629,
-    "audioModifiedNs": 1791086572055301026,
     "windowsSeconds": [
       85.8
     ],
@@ -75,10 +67,8 @@ export const REFERENCE_MIX = {
   },
   "folk-celtic": {
     "recording": "The Chieftains - The Morning Dew",
-    "audio": "voiced/The Chieftains - The Morning Dew.mp3",
+    "audio": "samples/The Chieftains - The Morning Dew.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8773190,
-    "audioModifiedNs": 1791085758667504376,
     "windowsSeconds": [
       76.74,
       142.52
@@ -93,10 +83,8 @@ export const REFERENCE_MIX = {
   },
   "folk-old-time": {
     "recording": "Tommy Jarrell - Sail Away Ladies",
-    "audio": "voiced/Tommy Jarrell - Sail Away Ladies.mp3",
+    "audio": "samples/Tommy Jarrell - Sail Away Ladies.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 5393990,
-    "audioModifiedNs": 1791147585880173081,
     "windowsSeconds": [
       47.18,
       87.61

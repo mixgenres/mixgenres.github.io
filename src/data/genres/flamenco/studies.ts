@@ -1,5 +1,6 @@
 import type { AuthoredCell, GenrePackInput } from '../_shared/genrePack';
 import type { PatternEvent } from '../../schema';
+import { flamencoCellLabel } from './arrangements';
 
 const note = (degree: number, register = 62): PatternEvent['pitch'] => ({ degree, register, voicing: 'single' });
 const cajonParts: Record<string, Pick<AuthoredCell, 'onsets' | 'accents' | 'articulations'>> = {
@@ -65,8 +66,9 @@ export function authorFlamencoStudies(pack: GenrePackInput): GenrePackInput {
     }
 
     if (!additions.length) return style;
-    const patternNames = additions.map(cell => cell.name);
-    return { ...style, roles, instrumentDialects, cells: [...additions, ...cells],
+    const labeledAdditions = additions.map(cell => ({ ...cell, shortName: flamencoCellLabel(style.id, cell) }));
+    const patternNames = labeledAdditions.map(cell => cell.shortName!);
+    return { ...style, roles, instrumentDialects, cells: [...labeledAdditions, ...cells],
       patterns: [...new Set([...style.patterns, ...patternNames])] };
   }) };
 }

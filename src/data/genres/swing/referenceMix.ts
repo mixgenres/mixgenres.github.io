@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "swing-balboa": {
     "recording": "Artie Shaw - Begin the Beguine",
-    "audio": "voiced/Artie Shaw - Begin the Beguine.mp3",
+    "audio": "samples/Artie Shaw - Begin the Beguine.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7927790,
-    "audioModifiedNs": 1791155922954393777,
     "windowsSeconds": [
       69.34,
       128.78
@@ -24,8 +22,6 @@ export const REFERENCE_MIX = {
     "recording": "Billie Eilish - bad guy",
     "audio": "samples/Billie Eilish - bad guy.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 4992069,
-    "audioModifiedNs": 1791077593500748931,
     "windowsSeconds": [
       72.07,
       133.85
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "swing-electro-swing": {
     "recording": "Caravan Palace - Lone Digger",
-    "audio": "voiced/Caravan Palace - Lone Digger.mp3",
+    "audio": "samples/Caravan Palace - Lone Digger.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6804505,
-    "audioModifiedNs": 1791080660508834181,
     "windowsSeconds": [
       59.51,
       110.53
@@ -60,8 +54,6 @@ export const REFERENCE_MIX = {
     "recording": "Count Basie - Jumpin' at the Woodside",
     "audio": "samples/Count Basie - Jumpin' at the Woodside.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 5414334,
-    "audioModifiedNs": 1791077588609480106,
     "windowsSeconds": [
       78.63,
       146.02
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "swing-slow-swing": {
     "recording": "Duke Ellington - In a Sentimental Mood",
-    "audio": "voiced/Duke Ellington - In a Sentimental Mood.mp3",
+    "audio": "samples/Duke Ellington - In a Sentimental Mood.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10348825,
-    "audioModifiedNs": 1791158906891526781,
     "windowsSeconds": [
       90.53,
       168.12
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "swing-charleston": {
     "recording": "James P. Johnson - Charleston",
-    "audio": "voiced/James P. Johnson - Charleston.mp3",
+    "audio": "samples/James P. Johnson - Charleston.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 4327153,
-    "audioModifiedNs": 1791150057503994786,
     "windowsSeconds": [
       37.84,
       70.27
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "swing-west-coast-swing": {
     "recording": "Jordan Davis - Slow Dance in a Parking Lot",
-    "audio": "voiced/Jordan Davis - Slow Dance in a Parking Lot.mp3",
+    "audio": "samples/Jordan Davis - Slow Dance in a Parking Lot.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9645597,
-    "audioModifiedNs": 1791098351908742800,
     "windowsSeconds": [
       84.38,
       156.7

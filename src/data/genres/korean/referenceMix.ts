@@ -6,8 +6,6 @@ export const REFERENCE_MIX = {
     "recording": "Ahn Sook-sun - Chunhyangga",
     "audio": "samples/Ahn Sook-sun - Chunhyangga.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 8108405,
-    "audioModifiedNs": 1791077402274313851,
     "windowsSeconds": [
       116.8,
       216.92
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "korean-sanjo": {
     "recording": "Kim Chuk-p'a - Gayageum Sanjo",
-    "audio": "voiced/Kim Chuk-p'a - Gayageum Sanjo.mp3",
+    "audio": "samples/Kim Chuk-p'a - Gayageum Sanjo.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 34696043,
-    "audioModifiedNs": 1791151271351647165,
     "windowsSeconds": [
       303.57,
       563.77
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "korean-jeongak": {
     "recording": "National Gugak Center - Sujecheon",
-    "audio": "voiced/National Gugak Center - Sujecheon.mp3",
+    "audio": "samples/National Gugak Center - Sujecheon.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 43292351,
-    "audioModifiedNs": 1791081306061263162,
     "windowsSeconds": [
       378.78,
       703.46
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "korean-samulnori": {
     "recording": "SamulNori - Samdo Nongak Garak",
-    "audio": "voiced/SamulNori - Samdo Nongak Garak.mp3",
+    "audio": "samples/SamulNori - Samdo Nongak Garak.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 47213889,
-    "audioModifiedNs": 1791146844040444803,
     "windowsSeconds": [
       413.1,
       767.18
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "korean-minyo": {
     "recording": "Traditional - Arirang",
-    "audio": "voiced/Traditional - Arirang.mp3",
+    "audio": "samples/Traditional - Arirang.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 5981209,
-    "audioModifiedNs": 1791087050023162355,
     "windowsSeconds": [
       52.31,
       97.15

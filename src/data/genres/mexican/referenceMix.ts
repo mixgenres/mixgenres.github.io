@@ -6,8 +6,6 @@ export const REFERENCE_MIX = {
     "recording": "Banda El Recodo - Te Presumo",
     "audio": "samples/Banda El Recodo - Te Presumo.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 4641882,
-    "audioModifiedNs": 1791077456623525136,
     "windowsSeconds": [
       66.71,
       123.88
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "mexican-tierra-caliente": {
     "recording": "Beto y sus Canarios - Está Llorando Mi Corazón",
-    "audio": "voiced/Beto y sus Canarios - Está Llorando Mi Corazón.mp3",
+    "audio": "samples/Beto y sus Canarios - Está Llorando Mi Corazón.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7429413,
-    "audioModifiedNs": 1791099206043016760,
     "windowsSeconds": [
       64.98,
       120.68
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "mexican-conjunto": {
     "recording": "Flaco Jiménez - Ay Te Dejo en San Antonio",
-    "audio": "voiced/Flaco Jiménez - Ay Te Dejo en San Antonio.mp3",
+    "audio": "samples/Flaco Jiménez - Ay Te Dejo en San Antonio.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6913193,
-    "audioModifiedNs": 1791139408800371332,
     "windowsSeconds": [
       60.47,
       112.3
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "mexican-bolero-ranchero": {
     "recording": "Javier Solís - Sombras",
-    "audio": "voiced/Javier Solís - Sombras.mp3",
+    "audio": "samples/Javier Solís - Sombras.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7115981,
-    "audioModifiedNs": 1791090458477074588,
     "windowsSeconds": [
       62.24,
       115.6
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "mexican-ranchera": {
     "recording": "Jorge Negrete - México Lindo y Querido",
-    "audio": "voiced/Jorge Negrete - México Lindo y Querido.mp3",
+    "audio": "samples/Jorge Negrete - México Lindo y Querido.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8595471,
-    "audioModifiedNs": 1791092115237445713,
     "windowsSeconds": [
       75.19,
       139.63
@@ -96,8 +86,6 @@ export const REFERENCE_MIX = {
     "recording": "Los Tigres del Norte - Contrabando y Traición",
     "audio": "samples/Los Tigres del Norte - Contrabando y Traición.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 5047446,
-    "audioModifiedNs": 1791077451936620487,
     "windowsSeconds": [
       72.19,
       134.06
@@ -114,8 +102,6 @@ export const REFERENCE_MIX = {
     "recording": "Los Tigres del Norte - Jefe de Jefes",
     "audio": "samples/Los Tigres del Norte - Jefe de Jefes.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 5275554,
-    "audioModifiedNs": 1791077458445209352,
     "windowsSeconds": [
       76.09,
       141.32
@@ -130,10 +116,8 @@ export const REFERENCE_MIX = {
   },
   "mexican-mariachi": {
     "recording": "Mariachi Vargas de Tecalitlán - El Son de la Negra",
-    "audio": "voiced/Mariachi Vargas de Tecalitlán - El Son de la Negra.mp3",
+    "audio": "samples/Mariachi Vargas de Tecalitlán - El Son de la Negra.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8510930,
-    "audioModifiedNs": 1791105199371606959,
     "windowsSeconds": [
       74.44,
       138.25
@@ -148,10 +132,8 @@ export const REFERENCE_MIX = {
   },
   "mexican-son-jarocho": {
     "recording": "Traditional - La Bamba",
-    "audio": "voiced/Traditional - La Bamba.mp3",
+    "audio": "samples/Traditional - La Bamba.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6525623,
-    "audioModifiedNs": 1791161666266188070,
     "windowsSeconds": [
       57.08,
       106.0
@@ -168,8 +150,6 @@ export const REFERENCE_MIX = {
     "recording": "Trío Los Camperos de Valles - El Querreque",
     "audio": "samples/Trío Los Camperos de Valles - El Querreque.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 3874578,
-    "audioModifiedNs": 1791077457286164119,
     "windowsSeconds": [
       54.84,
       101.84

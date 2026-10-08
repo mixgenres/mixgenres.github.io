@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "taarab-zanzibar": {
     "recording": "Bi Kidude - Muhogo wa Jang'ombe",
-    "audio": "voiced/Bi Kidude - Muhogo wa Jang'ombe.mp3",
+    "audio": "samples/Bi Kidude - Muhogo wa Jang'ombe.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11420927,
-    "audioModifiedNs": 1791108016575204727,
     "windowsSeconds": [
       99.91,
       185.54
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "taarab-swahili-orchestra": {
     "recording": "Black Star Musical Club - Chozi Lanitoka",
-    "audio": "voiced/Black Star Musical Club - Chozi Lanitoka.mp3",
+    "audio": "samples/Black Star Musical Club - Chozi Lanitoka.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7817123,
-    "audioModifiedNs": 1791095137903853237,
     "windowsSeconds": [
       68.37,
       126.98
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "taarab-classical-orchestra": {
     "recording": "Culture Musical Club of Zanzibar - Sibadili",
-    "audio": "voiced/Culture Musical Club of Zanzibar - Sibadili.mp3",
+    "audio": "samples/Culture Musical Club of Zanzibar - Sibadili.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11428289,
-    "audioModifiedNs": 1791145069422713867,
     "windowsSeconds": [
       99.97,
       185.66
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "taarab-kidumbak": {
     "recording": "Makame Faki - Kula Muhogo",
-    "audio": "voiced/Makame Faki - Kula Muhogo.mp3",
+    "audio": "samples/Makame Faki - Kula Muhogo.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6829650,
-    "audioModifiedNs": 1791095818061266810,
     "windowsSeconds": [
       59.73,
       110.93
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "taarab-modern-taarab": {
     "recording": "Mzee Yusuph - Mpenzi Chocolate",
-    "audio": "voiced/Mzee Yusuph - Mpenzi Chocolate.mp3",
+    "audio": "samples/Mzee Yusuph - Mpenzi Chocolate.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 36072192,
-    "audioModifiedNs": 1791088872663817170,
     "windowsSeconds": [
       315.61,
       586.14

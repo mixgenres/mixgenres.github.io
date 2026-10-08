@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "zouk-kompa-crossover": {
     "recording": "Carimi - Kompa Mato",
-    "audio": "voiced/Carimi - Kompa Mato.mp3",
+    "audio": "samples/Carimi - Kompa Mato.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10862880,
-    "audioModifiedNs": 1791097978343674191,
     "windowsSeconds": [
       95.03,
       176.48
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "zouk-zouk-fusion": {
     "recording": "Disclosure feat. Sam Smith - Latch",
-    "audio": "voiced/Disclosure feat. Sam Smith - Latch.mp3",
+    "audio": "samples/Disclosure feat. Sam Smith - Latch.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10280889,
-    "audioModifiedNs": 1791083520520431868,
     "windowsSeconds": [
       89.94,
       167.03
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "zouk-lambazouk-oriented": {
     "recording": "Kaoma - Lambada",
-    "audio": "voiced/Kaoma - Lambada.mp3",
+    "audio": "samples/Kaoma - Lambada.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8280006,
-    "audioModifiedNs": 1791150878848610684,
     "windowsSeconds": [
       72.43,
       134.51
@@ -60,8 +54,6 @@ export const REFERENCE_MIX = {
     "recording": "Kassav' - Zouk la sé sèl médikaman nou ni",
     "audio": "samples/Kassav' - Zouk la sé sèl médikaman nou ni.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 8552519,
-    "audioModifiedNs": 1791077876121223018,
     "windowsSeconds": [
       124.54,
       231.29
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "zouk-zouk-randb": {
     "recording": "Kaysha - One Love",
-    "audio": "voiced/Kaysha - One Love.mp3",
+    "audio": "samples/Kaysha - One Love.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9498334,
-    "audioModifiedNs": 1791090877279332721,
     "windowsSeconds": [
       83.09,
       154.31
@@ -96,8 +86,6 @@ export const REFERENCE_MIX = {
     "recording": "Nelson Freitas - Rebound Chick",
     "audio": "samples/Nelson Freitas - Rebound Chick.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 6814236,
-    "audioModifiedNs": 1791139674790934516,
     "windowsSeconds": [
       97.08,
       180.29
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "zouk-zouk-love": {
     "recording": "Patrick Saint-Éloi - West Indies",
-    "audio": "voiced/Patrick Saint-Éloi - West Indies.mp3",
+    "audio": "samples/Patrick Saint-Éloi - West Indies.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 13882658,
-    "audioModifiedNs": 1791090280807989048,
     "windowsSeconds": [
       121.45,
       225.56
@@ -130,10 +116,8 @@ export const REFERENCE_MIX = {
   },
   "zouk-cabo-zouk": {
     "recording": "Suzanna Lubrano - Tudo Pa Bo",
-    "audio": "voiced/Suzanna Lubrano - Tudo Pa Bo.mp3",
+    "audio": "samples/Suzanna Lubrano - Tudo Pa Bo.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9475256,
-    "audioModifiedNs": 1791098990654393073,
     "windowsSeconds": [
       82.88,
       153.93
@@ -150,8 +134,6 @@ export const REFERENCE_MIX = {
     "recording": "Édith Lefel - La Sirène",
     "audio": "samples/Édith Lefel - La Sirène.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 6117159,
-    "audioModifiedNs": 1791077877590725927,
     "windowsSeconds": [
       89.04,
       165.37

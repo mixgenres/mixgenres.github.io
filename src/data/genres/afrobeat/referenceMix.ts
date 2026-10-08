@@ -6,8 +6,6 @@ export const REFERENCE_MIX = {
     "recording": "Antibalas - Dirty Money",
     "audio": "samples/Antibalas - Dirty Money.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 5503473,
-    "audioModifiedNs": 1791076906901982099,
     "windowsSeconds": [
       78.82,
       146.38
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "afrobeat-highlife": {
     "recording": "E.T. Mensah - All for You",
-    "audio": "voiced/E.T. Mensah - All for You.mp3",
+    "audio": "samples/E.T. Mensah - All for You.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6412773,
-    "audioModifiedNs": 1791084817783122298,
     "windowsSeconds": [
       56.08,
       104.16
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "afrobeat-classic-afrobeat": {
     "recording": "Fela Kuti - Water No Get Enemy",
-    "audio": "voiced/Fela Kuti - Water No Get Enemy.mp3",
+    "audio": "samples/Fela Kuti - Water No Get Enemy.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 23750662,
-    "audioModifiedNs": 1791102385350533686,
     "windowsSeconds": [
       207.79,
       385.9
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "afrobeat-funk-heavy-afrobeat": {
     "recording": "Fela Kuti - Zombie",
-    "audio": "voiced/Fela Kuti - Zombie.mp3",
+    "audio": "samples/Fela Kuti - Zombie.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 30076463,
-    "audioModifiedNs": 1791152023405496326,
     "windowsSeconds": [
       263.15,
       488.7
@@ -78,8 +70,6 @@ export const REFERENCE_MIX = {
     "recording": "King Sunny Adé - Ja Funmi",
     "audio": "samples/King Sunny Adé - Ja Funmi.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 10376920,
-    "audioModifiedNs": 1791076906414533078,
     "windowsSeconds": [
       151.15,
       280.71
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "afrobeat-palm-wine": {
     "recording": "S.E. Rogie - My Lovely Elizabeth",
-    "audio": "voiced/S.E. Rogie - My Lovely Elizabeth.mp3",
+    "audio": "samples/S.E. Rogie - My Lovely Elizabeth.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7488895,
-    "audioModifiedNs": 1791083411067468720,
     "windowsSeconds": [
       65.51,
       121.66
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "afrobeat-jazz-heavy-afrobeat": {
     "recording": "Tony Allen - Ariya",
-    "audio": "voiced/Tony Allen - Ariya.mp3",
+    "audio": "samples/Tony Allen - Ariya.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 21018331,
-    "audioModifiedNs": 1791097553580138040,
     "windowsSeconds": [
       183.89,
       341.51

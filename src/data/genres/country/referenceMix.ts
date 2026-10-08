@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "country-bluegrass": {
     "recording": "Bill Monroe - Blue Moon of Kentucky",
-    "audio": "voiced/Bill Monroe - Blue Moon of Kentucky.mp3",
+    "audio": "samples/Bill Monroe - Blue Moon of Kentucky.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7238325,
-    "audioModifiedNs": 1791089781749172188,
     "windowsSeconds": [
       63.31,
       117.58
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "country-western-swing": {
     "recording": "Bob Wills - San Antonio Rose",
-    "audio": "voiced/Bob Wills - San Antonio Rose.mp3",
+    "audio": "samples/Bob Wills - San Antonio Rose.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 5294742,
-    "audioModifiedNs": 1791084620113200764,
     "windowsSeconds": [
       46.31,
       86.0
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "country-bakersfield": {
     "recording": "Buck Owens - Act Naturally",
-    "audio": "voiced/Buck Owens - Act Naturally.mp3",
+    "audio": "samples/Buck Owens - Act Naturally.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 5662420,
-    "audioModifiedNs": 1791141428211885947,
     "windowsSeconds": [
       49.52,
       91.97
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "country-honky-tonk": {
     "recording": "Hank Williams - Honky Tonkin'",
-    "audio": "voiced/Hank Williams - Honky Tonkin'.mp3",
+    "audio": "samples/Hank Williams - Honky Tonkin'.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6527701,
-    "audioModifiedNs": 1791102970658056401,
     "windowsSeconds": [
       57.09,
       106.03
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "country-americana": {
     "recording": "Jason Isbell - Cover Me Up",
-    "audio": "voiced/Jason Isbell - Cover Me Up.mp3",
+    "audio": "samples/Jason Isbell - Cover Me Up.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 13144976,
-    "audioModifiedNs": 1791082328858165380,
     "windowsSeconds": [
       115.0,
       213.57
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "country-country-pop": {
     "recording": "Shania Twain - Man! I Feel Like a Woman!",
-    "audio": "voiced/Shania Twain - Man! I Feel Like a Woman!.mp3",
+    "audio": "samples/Shania Twain - Man! I Feel Like a Woman!.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9401089,
-    "audioModifiedNs": 1791081568822427134,
     "windowsSeconds": [
       82.23,
       152.72
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "country-outlaw": {
     "recording": "Willie Nelson - Whiskey River",
-    "audio": "voiced/Willie Nelson - Whiskey River.mp3",
+    "audio": "samples/Willie Nelson - Whiskey River.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6894497,
-    "audioModifiedNs": 1791137624623925077,
     "windowsSeconds": [
       60.3,
       111.99

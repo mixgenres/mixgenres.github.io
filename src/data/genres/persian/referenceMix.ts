@@ -6,8 +6,6 @@ export const REFERENCE_MIX = {
     "recording": "Dariush Tala'i - Dastgah-e Shur: Daramad",
     "audio": "samples/Dariush Tala'i - Dastgah-e Shur: Daramad.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 8923830,
-    "audioModifiedNs": 1791077467570427918,
     "windowsSeconds": [
       129.67,
       240.82
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "persian-modern-persian": {
     "recording": "Kayhan Kalhor - Silent City",
-    "audio": "voiced/Kayhan Kalhor - Silent City.mp3",
+    "audio": "samples/Kayhan Kalhor - Silent City.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 22386043,
-    "audioModifiedNs": 1791097250060546364,
     "windowsSeconds": [
       195.86,
       363.74
@@ -42,8 +38,6 @@ export const REFERENCE_MIX = {
     "recording": "Mohammad Reza Shajarian - Avaz-e Abu Ata",
     "audio": "samples/Mohammad Reza Shajarian - Avaz-e Abu Ata.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 18161752,
-    "audioModifiedNs": 1791077477442546532,
     "windowsSeconds": [
       264.61,
       491.43
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "persian-dastgah": {
     "recording": "Mohammad Reza Shajarian - Morgh-e Sahar",
-    "audio": "voiced/Mohammad Reza Shajarian - Morgh-e Sahar.mp3",
+    "audio": "samples/Mohammad Reza Shajarian - Morgh-e Sahar.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 12595368,
-    "audioModifiedNs": 1791105446412595876,
     "windowsSeconds": [
       110.18,
       204.62

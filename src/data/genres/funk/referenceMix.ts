@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "funk-disco": {
     "recording": "Chic - Good Times",
-    "audio": "voiced/Chic - Good Times.mp3",
+    "audio": "samples/Chic - Good Times.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 20111294,
-    "audioModifiedNs": 1791156280709313033,
     "windowsSeconds": [
       175.95,
       326.76
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "funk-boogie": {
     "recording": "D-Train - You're the One for Me",
-    "audio": "voiced/D-Train - You're the One for Me.mp3",
+    "audio": "samples/D-Train - You're the One for Me.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 17004895,
-    "audioModifiedNs": 1791161297725645647,
     "windowsSeconds": [
       148.76,
       276.28
@@ -42,8 +38,6 @@ export const REFERENCE_MIX = {
     "recording": "Herbie Hancock - Chameleon",
     "audio": "samples/Herbie Hancock - Chameleon.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 22776752,
-    "audioModifiedNs": 1791139944705308044,
     "windowsSeconds": [
       329.48,
       611.88
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "funk-james-brown-the-one": {
     "recording": "James Brown - Cold Sweat",
-    "audio": "voiced/James Brown - Cold Sweat.mp3",
+    "audio": "samples/James Brown - Cold Sweat.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 17864854,
-    "audioModifiedNs": 1791097743310963656,
     "windowsSeconds": [
       156.29,
       290.25
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "funk-funk": {
     "recording": "James Brown - Get Up (I Feel Like Being a) Sex Machine",
-    "audio": "voiced/James Brown - Get Up (I Feel Like Being a) Sex Machine.mp3",
+    "audio": "samples/James Brown - Get Up (I Feel Like Being a) Sex Machine.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 13128215,
-    "audioModifiedNs": 1791103721317530739,
     "windowsSeconds": [
       114.85,
       213.29
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "funk-p-funk": {
     "recording": "Parliament - Give Up the Funk",
-    "audio": "voiced/Parliament - Give Up the Funk.mp3",
+    "audio": "samples/Parliament - Give Up the Funk.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 13844108,
-    "audioModifiedNs": 1791148312976929091,
     "windowsSeconds": [
       121.11,
       224.92
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "funk-minneapolis": {
     "recording": "Prince - Kiss",
-    "audio": "voiced/Prince - Kiss.mp3",
+    "audio": "samples/Prince - Kiss.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9409438,
-    "audioModifiedNs": 1791089703894258168,
     "windowsSeconds": [
       82.31,
       152.85
@@ -130,10 +116,8 @@ export const REFERENCE_MIX = {
   },
   "funk-hi-nrg": {
     "recording": "Sylvester - You Make Me Feel (Mighty Real)",
-    "audio": "voiced/Sylvester - You Make Me Feel (Mighty Real).mp3",
+    "audio": "samples/Sylvester - You Make Me Feel (Mighty Real).mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9382282,
-    "audioModifiedNs": 1791096443620043555,
     "windowsSeconds": [
       82.07,
       152.42

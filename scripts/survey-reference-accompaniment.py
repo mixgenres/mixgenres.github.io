@@ -14,6 +14,9 @@ survey = json.loads(source.read_text())
 def inspect(entry):
     accompaniment = root / 'voiced' / Path(entry['file']).name
     if not accompaniment.is_file():
+        # Keep previously measured windows as analysis evidence, but do not
+        # leave a path to a disposable derivative that no longer exists.
+        entry.pop('accompanimentFile', None)
         return entry
     entry['accompanimentFile'] = str(accompaniment)
     entry['accompanimentWindows'] = []
@@ -36,6 +39,9 @@ with concurrent.futures.ThreadPoolExecutor(2) as pool:
         if len(entries) % 25 == 0:
             print(f'Checked {len(entries)}/369 accompaniment paths', flush=True)
 survey['entries'] = entries
-survey['accompanimentCount'] = sum('accompanimentFile' in entry for entry in entries)
+survey['accompanimentMeasurementCount'] = sum(
+    any(window.get('status') == 'measured' for window in entry.get('accompanimentWindows', []))
+    for entry in entries
+)
 source.write_text(json.dumps(survey, indent=2, allow_nan=False) + '\n')
-print(f"Measured existing accompaniment for {survey['accompanimentCount']} recordings", flush=True)
+print(f"Retained accompaniment measurements for {survey['accompanimentMeasurementCount']} recordings", flush=True)

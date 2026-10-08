@@ -21,6 +21,71 @@ const COMPAS_12 = [0, .5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5];
 const COMPAS_ACCENTS = [1, .3, .45, .8, .35, .45, .92, .32, .72, .3, .82, .38];
 const SOLEA_BEATS = [0, 1.5, 3, 4, 5];
 
+const STYLE_DESCRIPTIONS: Record<string, string> = {
+  solea: 'A grave 12-count palo: give cante and guitar room, mark the compás clearly, and resolve with the Andalusian cadence.',
+  bulerias: 'A fast 12-count fiesta palo built from flexible compás, llamadas, falsetas, jaleos, and decisive remates.',
+  alegrias: 'A bright Cádiz cantiña that balances major-mode coplas, guitar responses, escobilla energy, and a clear cierre.',
+  tangos: 'A grounded duple palo with a steady guitar-and-palmas pocket, short cante phrases, and a compact remate.',
+  seguiriya: 'A grave cante palo whose uneven accent cycle shapes sparse guitar answers and long, tense releases.',
+  tientos: 'A slow, spacious duple palo: weight the accents, leave room around the cante, and let the rhythm rise toward tangos.',
+  fandangos: 'Huelva fandangos pair a ternary guitar pattern with coplas that alternate cante and guitar response.',
+  rumba: 'A syncopated dance groove led by continuous abanico strum, moving bass, and lively hand percussion.',
+  'tonas-martinetes': 'Unaccompanied cante with free breathing and stark modal lines; do not impose a fixed compás or ensemble pulse.',
+  taranta: 'Free-rhythm cante with an expressive guitar salida, flexible pauses, and a modal response and cadence.',
+  'granaina-malaguena': 'Granaína and Malagueña share free cante space here but need their own guitar cadences and harmonic color.',
+  guajira: 'A bright major-key 12-count palo with a Cuban-derived lilt, guitar strums, and a long refrain.',
+  farruca: 'A minor-mode duple dance palo led by a firm guitar ostinato, measured footwork, and a dramatic cierre.',
+  sevillanas: 'A dance in four linked coplas; each cycles through its refrain and closes with a clear remate.',
+  'nuevo-flamenco': 'Flamenco guitar and cante meet a pop song form; keep the palo-specific compás audible beneath the hook.',
+  'flamenco-jazz': 'Flamenco compás meets extended jazz harmony, with room for developed solos and countermelody.',
+  'flamenco-rock': 'Flamenco guitar and palmas share a rock backbeat; give the riff, vocal chorus, and guitar solo distinct jobs.',
+  'urban-experimental': 'Fragment cante, compás, and electronic low-end across changing sections, with deliberate space between hits.',
+};
+
+const STYLE_PATTERNS: Record<string, string[]> = {
+  solea: ['12-count compás', 'Thumb rasgueado', 'Tremolo falseta', 'Picado answer', 'Cierre'],
+  bulerias: ['Bulería compás', 'Contratiempo', 'Alzapúa', 'Llamada', 'Remate'],
+  alegrias: ['Cantiñas compás', 'Major llamada', 'Guitar answer', 'Escobilla', 'Cierre'],
+  tangos: ['Duple compás', 'Weighted backbeat', 'Rasgueado', 'Cante answer'],
+  seguiriya: ['Seguiriya compás', 'Uneven accents', 'Sparse cante', 'Guitar answer', 'Remate'],
+  tientos: ['Slow compás', 'Heavy rasgueado', 'Cante space', 'Tangos subida'],
+  fandangos: ['Ternary compás', 'Huelva copla', 'Guitar answer', 'Remate'],
+  rumba: ['Abanico strum', 'Syncopated bass', 'Cajón groove', 'Guitar hook'],
+  'tonas-martinetes': ['Free cante', 'Martinete line', 'Breath cadence'],
+  taranta: ['Free cante', 'Taranta falseta', 'Rubato response', 'Modal cadence'],
+  'granaina-malaguena': ['Free cante', 'Upper falseta', 'Granaína cadence', 'Malagueña cadence'],
+  guajira: ['Guajira compás', 'Habanera sway', 'Major refrain', 'Rasgueado'],
+  farruca: ['Minor ostinato', 'Duple compás', 'Footwork accents', 'Cierre'],
+  sevillanas: ['3/4 compás', 'Four coplas', 'Refrain strum', 'Final desplante'],
+  'nuevo-flamenco': ['Pop-flamenco hook', 'Cajón backbeat', 'Guitar falseta', 'Vocal refrain'],
+  'flamenco-jazz': ['Jazz voicings', 'Flamenco compás', 'Solo chorus', 'Counterline'],
+  'flamenco-rock': ['Guitar riff', 'Rock backbeat', 'Palmas accents', 'Guitar solo'],
+  'urban-experimental': ['Fragmented compás', 'Sub pulse', 'Vocal chops', 'Electronic breaks'],
+};
+
+/** Concise picker labels; the complete rhythmic/technical instruction remains in cell.description. */
+export function flamencoCellLabel(styleId: string, cell: AuthoredCell): string {
+  if (cell.shortName) return cell.shortName;
+  const instrument = cell.instruments?.[0] ?? '';
+  const text = `${cell.name} ${cell.articulation ?? ''} ${(cell.articulations ?? []).join(' ')}`.toLowerCase();
+  if (cell.phraseEnd) return instrument === 'voice' ? 'Cante cierre'
+    : instrument === 'palmas' ? 'Palmas remate'
+      : instrument === 'cajon' ? 'Cajón fill' : 'Guitar cierre';
+  if (instrument === 'voice') return 'Cante phrase';
+  if (instrument === 'palmas') return 'Palmas compás';
+  if (instrument === 'cajon') return 'Cajón pulse';
+  if (text.includes('tremolo')) return 'Tremolo falseta';
+  if (text.includes('picado')) return 'Picado line';
+  if (text.includes('llamada')) return 'Guitar llamada';
+  if (text.includes('abanico')) return 'Abanico groove';
+  if (text.includes('alzapua')) return 'Alzapúa compás';
+  if (text.includes('fandangos')) return 'Ternary guitar';
+  if (text.includes('compas') || text.includes('rasgueado') || text.includes('thumb')) return 'Guitar compás';
+  if (styleId === 'flamenco-jazz') return 'Jazz guitar';
+  if (styleId === 'flamenco-rock') return 'Rock guitar';
+  return 'Guitar phrase';
+}
+
 function flamencoLead(id: string): AuthoredCell[] {
   if (id === 'solea') return [
     guitar('Soleá compás: thumb bass, restrained rasgueado and cierre accents',
@@ -131,6 +196,8 @@ function flamencoLead(id: string): AuthoredCell[] {
 export function authorFlamencoArrangements(input: GenrePackInput): GenrePackInput {
   return { ...input, styles: input.styles.map(style => {
     const id = style.id;
+    const curated = { ...style, description: STYLE_DESCRIPTIONS[id] ?? style.description,
+      patterns: STYLE_PATTERNS[id] ?? style.patterns };
     const lead = flamencoLead(id);
     const cells = style.cells.filter(cell => !(lead.length && !cell.phraseEnd && cell.role === 'lead' && cell.instruments?.includes('guitar')));
     cells.unshift(...lead);
@@ -139,9 +206,10 @@ export function authorFlamencoArrangements(input: GenrePackInput): GenrePackInpu
     if (soloGuitar || soleVoice) {
       cells.splice(0, cells.length, ...cells.filter(cell => cell.role === 'lead' && cell.instruments?.some(instrument =>
         soloGuitar ? instrument === 'guitar' : instrument === 'voice')));
-      if (soloGuitar) return { ...style, roles: { lead: ['guitar'] }, cells,
+      const labeledCells = cells.map(cell => ({ ...cell, shortName: flamencoCellLabel(id, cell) }));
+      if (soloGuitar) return { ...curated, roles: { lead: ['guitar'] }, cells: labeledCells,
         form: style.form.map(section => ({ ...section, instruments: ['guitar'], leadInstrumentId: 'guitar' })) };
-      return { ...style, roles: { lead: ['voice'] }, cells,
+      return { ...curated, roles: { lead: ['voice'] }, cells: labeledCells,
         form: style.form.map(section => ({ ...section, instruments: ['voice'], leadInstrumentId: 'voice' })) };
     }
     // The old shared scaffold declared both palmas and cajón on every palo.
@@ -168,7 +236,6 @@ export function authorFlamencoArrangements(input: GenrePackInput): GenrePackInpu
     } else if (cajon) {
       for (const cell of [...cells]) if (cell.instruments?.[0] === 'cajon') cells.splice(cells.indexOf(cell), 1);
     }
-    return { ...style, cells,
-      description: `${style.description} Guitar compás, bass-string punctuation, rasgueado, picado and phrase-ending gestures are authored for this palo.` };
+    return { ...curated, cells: cells.map(cell => ({ ...cell, shortName: flamencoCellLabel(id, cell) })) };
   }) };
 }

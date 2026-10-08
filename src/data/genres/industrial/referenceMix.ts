@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "industrial-industrial-metal": {
     "recording": "Ministry - Just One Fix",
-    "audio": "voiced/Ministry - Just One Fix.mp3",
+    "audio": "samples/Ministry - Just One Fix.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11322732,
-    "audioModifiedNs": 1791152505601811286,
     "windowsSeconds": [
       99.05,
       183.95
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "industrial-industrial-rock": {
     "recording": "Nine Inch Nails - Wish",
-    "audio": "voiced/Nine Inch Nails - Wish.mp3",
+    "audio": "samples/Nine Inch Nails - Wish.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8996788,
-    "audioModifiedNs": 1791159572759148602,
     "windowsSeconds": [
       78.7,
       146.16
@@ -42,8 +38,6 @@ export const REFERENCE_MIX = {
     "recording": "Nitzer Ebb - Join in the Chant",
     "audio": "samples/Nitzer Ebb - Join in the Chant.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 6552429,
-    "audioModifiedNs": 1791077331179323283,
     "windowsSeconds": [
       95.46,
       177.28
@@ -60,8 +54,6 @@ export const REFERENCE_MIX = {
     "recording": "Throbbing Gristle - Hamburger Lady",
     "audio": "samples/Throbbing Gristle - Hamburger Lady.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 6147533,
-    "audioModifiedNs": 1791139685712871663,
     "windowsSeconds": [
       87.17,
       161.88

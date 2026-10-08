@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "bachata-bachata-mambo": {
     "recording": "Antony Santos - El Baile del Perrito",
-    "audio": "voiced/Antony Santos - El Baile del Perrito.mp3",
+    "audio": "samples/Antony Santos - El Baile del Perrito.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 19542865,
-    "audioModifiedNs": 1791084560939521377,
     "windowsSeconds": [
       170.97,
       317.52
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "bachata-dominican": {
     "recording": "Antony Santos - Voy Pa'llá",
-    "audio": "voiced/Antony Santos - Voy Pa'llá.mp3",
+    "audio": "samples/Antony Santos - Voy Pa'llá.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9001944,
-    "audioModifiedNs": 1791081666244006073,
     "windowsSeconds": [
       78.74,
       146.24
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "bachata-moderna": {
     "recording": "Aventura - Obsesión",
-    "audio": "voiced/Aventura - Obsesión.mp3",
+    "audio": "samples/Aventura - Obsesión.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10210884,
-    "audioModifiedNs": 1791085868730133224,
     "windowsSeconds": [
       89.32,
       165.89
@@ -60,8 +54,6 @@ export const REFERENCE_MIX = {
     "recording": "Daniel Santacruz - Lento",
     "audio": "samples/Daniel Santacruz - Lento.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 6542923,
-    "audioModifiedNs": 1791076992003337893,
     "windowsSeconds": [
       93.14,
       172.97
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "bachata-traditional-bolero-bachata": {
     "recording": "José Manuel Calderón - Borracho de Amor",
-    "audio": "voiced/José Manuel Calderón - Borracho de Amor.mp3",
+    "audio": "samples/José Manuel Calderón - Borracho de Amor.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6554788,
-    "audioModifiedNs": 1791082511423334498,
     "windowsSeconds": [
       57.33,
       106.47
@@ -96,8 +86,6 @@ export const REFERENCE_MIX = {
     "recording": "Luis Segura - Pena por Ti",
     "audio": "samples/Luis Segura - Pena por Ti.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 4393269,
-    "audioModifiedNs": 1791076983865249930,
     "windowsSeconds": [
       62.55,
       116.17
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "bachata-urban": {
     "recording": "Prince Royce - Stand by Me",
-    "audio": "voiced/Prince Royce - Stand by Me.mp3",
+    "audio": "samples/Prince Royce - Stand by Me.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8984253,
-    "audioModifiedNs": 1791149231566542422,
     "windowsSeconds": [
       78.59,
       145.95
@@ -132,8 +118,6 @@ export const REFERENCE_MIX = {
     "recording": "Romeo Santos - Propuesta Indecente",
     "audio": "samples/Romeo Santos - Propuesta Indecente.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 6502703,
-    "audioModifiedNs": 1791077000468554923,
     "windowsSeconds": [
       93.81,
       174.23

@@ -6,8 +6,6 @@ export const REFERENCE_MIX = {
     "recording": "Bomba Estéreo - Fuego",
     "audio": "samples/Bomba Estéreo - Fuego.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 4747573,
-    "audioModifiedNs": 1791077432930232409,
     "windowsSeconds": [
       68.95,
       128.05
@@ -24,8 +22,6 @@ export const REFERENCE_MIX = {
     "recording": "Damas Gratis - Se Te Ve la Tanga",
     "audio": "samples/Damas Gratis - Se Te Ve la Tanga.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 6301629,
-    "audioModifiedNs": 1791077434296685854,
     "windowsSeconds": [
       91.38,
       169.71
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "latin-vallenato": {
     "recording": "Diomedes Díaz - Bonita",
-    "audio": "voiced/Diomedes Díaz - Bonita.mp3",
+    "audio": "samples/Diomedes Díaz - Bonita.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 12181638,
-    "audioModifiedNs": 1791154557580061440,
     "windowsSeconds": [
       106.56,
       197.9
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "latin-chicha": {
     "recording": "Los Mirlos - La Danza de los Mirlos",
-    "audio": "voiced/Los Mirlos - La Danza de los Mirlos.mp3",
+    "audio": "samples/Los Mirlos - La Danza de los Mirlos.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8366681,
-    "audioModifiedNs": 1791087299627581675,
     "windowsSeconds": [
       73.19,
       135.92
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "latin-bolero": {
     "recording": "Los Panchos - Sabor a Mí",
-    "audio": "voiced/Los Panchos - Sabor a Mí.mp3",
+    "audio": "samples/Los Panchos - Sabor a Mí.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6768980,
-    "audioModifiedNs": 1791139706227417797,
     "windowsSeconds": [
       59.21,
       109.95
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "latin-sonidera": {
     "recording": "Los Ángeles Azules - Cómo Te Voy a Olvidar",
-    "audio": "voiced/Los Ángeles Azules - Cómo Te Voy a Olvidar.mp3",
+    "audio": "samples/Los Ángeles Azules - Cómo Te Voy a Olvidar.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10737517,
-    "audioModifiedNs": 1791092816477655069,
     "windowsSeconds": [
       93.93,
       174.44
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "latin-latin-funk": {
     "recording": "Mandrill - Fencewalk",
-    "audio": "voiced/Mandrill - Fencewalk.mp3",
+    "audio": "samples/Mandrill - Fencewalk.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 13303845,
-    "audioModifiedNs": 1791080475748466143,
     "windowsSeconds": [
       116.39,
       216.15
@@ -130,10 +116,8 @@ export const REFERENCE_MIX = {
   },
   "latin-latin-fusion": {
     "recording": "Quantic & His Combo Bárbaro - Un Canto a Mi Tierra",
-    "audio": "voiced/Quantic & His Combo Bárbaro - Un Canto a Mi Tierra.mp3",
+    "audio": "samples/Quantic & His Combo Bárbaro - Un Canto a Mi Tierra.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9628866,
-    "audioModifiedNs": 1791099735214766279,
     "windowsSeconds": [
       84.23,
       156.43
@@ -148,10 +132,8 @@ export const REFERENCE_MIX = {
   },
   "latin-latin-pop": {
     "recording": "Shakira - Ojos Así",
-    "audio": "voiced/Shakira - Ojos Así.mp3",
+    "audio": "samples/Shakira - Ojos Así.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9451316,
-    "audioModifiedNs": 1791159737704005130,
     "windowsSeconds": [
       82.68,
       153.54
@@ -166,10 +148,8 @@ export const REFERENCE_MIX = {
   },
   "latin-cumbia": {
     "recording": "Totó la Momposina - El Pescador",
-    "audio": "voiced/Totó la Momposina - El Pescador.mp3",
+    "audio": "samples/Totó la Momposina - El Pescador.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10286216,
-    "audioModifiedNs": 1791104750605309071,
     "windowsSeconds": [
       89.98,
       167.11
@@ -184,10 +164,8 @@ export const REFERENCE_MIX = {
   },
   "latin-tropical": {
     "recording": "Víctor Manuelle - Que Suenen los Tambores",
-    "audio": "voiced/Víctor Manuelle - Que Suenen los Tambores.mp3",
+    "audio": "samples/Víctor Manuelle - Que Suenen los Tambores.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11445004,
-    "audioModifiedNs": 1791094706231831356,
     "windowsSeconds": [
       100.12,
       185.93

@@ -1,14 +1,14 @@
 # Genre pedagogy and instrument-data audit
 
-Generated 2026-10-07T16:21:17.332Z. Scope: 420 styles across 55 genre folders and 2078 instrument/style pairs.
+Generated 2026-10-08T07:30:05.848Z. Scope: 420 styles across 55 genre folders and 2078 instrument/style pairs.
 
 ## Findings
 
-- 0 instrument/style pairs have no local body pattern; 0 have one; 5 have two; 2073 have at least three. Cadences and turnarounds are excluded from this count.
-- 16184 local body studies have 15339 distinct event shapes, with technique, energy, difficulty and section information listed per pattern in the JSON report.
-- Source-authored body material is reported separately from generated exercises: 2230 source cells across 145 instrument/style pairs with two or more cells, 1904 with one, and 29 with none. 197 source patterns include explicit pitch data; 13948 local reductions, answers, phrase-development variations and technique drills are not counted as source repertoire.
-- 0 mapped playable gestures have no explicit local pattern example; this should be zero. 76 non-section cues have no named renderer gesture: 22 note-level technique cues and 54 motif/phrase vocabulary cues.
-- 408 local recordings map to 385 styles; 309 styles have separated-accompaniment calibration profiles and 35 have no exact local reference.
+- 0 instrument/style pairs have no local body pattern; 0 have one; 2 have two; 2076 have at least three. Cadences and turnarounds are excluded from this count.
+- 16291 local body studies have 15649 distinct event shapes, with technique, energy, difficulty and section information listed per pattern in the JSON report.
+- Source-authored body material is reported separately from generated exercises: 2232 source cells across 146 instrument/style pairs with two or more cells, 1903 with one, and 29 with none. 199 source patterns include explicit pitch data; 14053 local reductions, answers, phrase-development variations and technique drills are not counted as source repertoire.
+- 0 mapped playable gestures have no explicit local pattern example; this should be zero. 78 non-section cues have no named renderer gesture: 24 note-level technique cues and 54 motif/phrase vocabulary cues.
+- 438 local recordings map to 413 styles; 309 styles have separated-accompaniment calibration profiles and 7 have no exact local reference.
 
 A pattern counts as local only when its world and style IDs match and its instrument list names the instrument. Repetition is valid musical form; this audit counts the authored vocabulary available to teach the part, not how frequently an arrangement repeats a cell. Similarity is an audit prompt, not an authenticity score.
 
@@ -18,6 +18,7 @@ Reference RMS and crest factor are recorded for comparison, but separated audio 
 
 | Genre / style | Instrument | Source cells | Distinct source shapes | With pitch | Derived drills | Missing playable gesture examples | Cues without renderer mapping |
 |---|---:|---:|---:|---:|---:|---|---|
+| arabic / arabic-takht | violin | 1 | 1 | 0 | 7 | — | microtonal-inflection |
 | brazilian / brazilian-samba | bass | 1 | 1 | 0 | 5 | — | fingerstyle |
 | brazilian / brazilian-pagode | bass | 1 | 1 | 0 | 5 | — | fingerstyle |
 | brazilian / brazilian-partido-alto | bass | 1 | 1 | 0 | 5 | — | fingerstyle |
@@ -35,6 +36,7 @@ Reference RMS and crest factor are recorded for comparison, but separated audio 
 | country / country-western-swing | violin | 1 | 1 | 0 | 6 | — | shuffle-bow, drone-double-stop, double-stop |
 | country / country-americana | violin | 1 | 1 | 0 | 6 | — | shuffle-bow, drone-double-stop, double-stop |
 | country / country-country-pop | bass | 1 | 1 | 0 | 7 | — | fingerstyle |
+| flamenco / flamenco-solea | guitar | 3 | 3 | 3 | 10 | — | thumb |
 | flamenco / flamenco-rumba | guitar | 1 | 1 | 1 | 11 | — | abanico |
 | flamenco / flamenco-rumba | cajon | 1 | 1 | 0 | 9 | — | bass |
 | folk / folk-contemporary-folk | violin | 1 | 1 | 0 | 6 | — | shuffle-bow, drone-double-stop, double-stop |
@@ -43,9 +45,6 @@ Reference RMS and crest factor are recorded for comparison, but separated audio 
 | folk / folk-appalachian | violin | 1 | 1 | 0 | 6 | — | shuffle-bow, drone-double-stop, double-stop |
 | folk / folk-celtic | violin | 1 | 1 | 0 | 6 | — | shuffle-bow, drone-double-stop, double-stop |
 | folk / folk-folk-revival | violin | 1 | 1 | 0 | 6 | — | shuffle-bow, drone-double-stop, double-stop |
-| gamelan / gamelan-javanese | gongs | 1 | 1 | 0 | 1 | — | — |
-| gamelan / gamelan-balinese-gong-kebyar | gongs | 1 | 1 | 0 | 1 | — | — |
-| gamelan / gamelan-degung | gongs | 1 | 1 | 0 | 1 | — | — |
 | gamelan / gamelan-gamelan-angklung | gongs | 1 | 1 | 0 | 1 | — | — |
 | japanese / japanese-gagaku | taiko | 1 | 1 | 0 | 1 | — | — |
 | jazz / jazz-big-band | guitar | 1 | 1 | 0 | 5 | — | comping |
@@ -84,42 +83,42 @@ Reference RMS and crest factor are recorded for comparison, but separated audio 
 |---|---:|---:|---:|
 | afrobeat | 7 | 7 | 5 |
 | afrobeats | 5 | 5 | 5 |
-| amapiano | 7 | 5 | 5 |
-| ambient | 9 | 7 | 6 |
+| amapiano | 7 | 7 | 5 |
+| ambient | 9 | 8 | 6 |
 | andean | 7 | 7 | 6 |
-| arabic | 5 | 4 | 3 |
+| arabic | 5 | 5 | 3 |
 | bachata | 8 | 8 | 5 |
-| bass | 10 | 9 | 9 |
+| bass | 10 | 10 | 9 |
 | blues | 8 | 8 | 7 |
 | bollywood | 6 | 6 | 6 |
 | brazilian | 11 | 11 | 9 |
-| chinese | 8 | 6 | 3 |
+| chinese | 8 | 8 | 3 |
 | cinematic | 6 | 6 | 5 |
-| classical | 7 | 1 | 1 |
+| classical | 7 | 7 | 1 |
 | country | 7 | 7 | 7 |
 | dangdut | 4 | 4 | 4 |
 | desert-blues | 4 | 4 | 3 |
 | electronic | 8 | 8 | 7 |
 | ethiopian | 5 | 5 | 4 |
-| flamenco | 18 | 17 | 11 |
+| flamenco | 18 | 18 | 11 |
 | folk | 6 | 6 | 6 |
-| funk | 9 | 8 | 7 |
+| funk | 9 | 9 | 7 |
 | gamelan | 4 | 3 | 2 |
 | gnawa | 4 | 4 | 4 |
 | gospel | 5 | 5 | 4 |
-| hip-hop | 9 | 8 | 8 |
+| hip-hop | 9 | 9 | 8 |
 | house | 7 | 7 | 6 |
-| indian-classical | 8 | 4 | 2 |
-| industrial | 5 | 4 | 2 |
+| indian-classical | 8 | 7 | 2 |
+| industrial | 5 | 5 | 2 |
 | japanese | 5 | 5 | 4 |
 | jazz | 9 | 9 | 7 |
 | kizomba | 7 | 7 | 5 |
 | korean | 5 | 5 | 4 |
-| latin | 12 | 11 | 9 |
+| latin | 12 | 12 | 9 |
 | mbalax | 4 | 4 | 4 |
 | metal | 7 | 7 | 5 |
 | mexican | 10 | 10 | 6 |
-| persian | 5 | 4 | 2 |
+| persian | 5 | 5 | 2 |
 | pop | 9 | 9 | 7 |
 | punk | 5 | 5 | 4 |
 | qawwali | 4 | 4 | 4 |
@@ -129,14 +128,14 @@ Reference RMS and crest factor are recorded for comparison, but separated audio 
 | rock | 10 | 9 | 6 |
 | salsa | 16 | 15 | 13 |
 | soukous | 5 | 5 | 4 |
-| steppe | 6 | 5 | 5 |
+| steppe | 6 | 6 | 5 |
 | swing | 7 | 7 | 5 |
 | taarab | 5 | 5 | 5 |
 | tango | 17 | 17 | 13 |
 | timba | 12 | 12 | 11 |
 | turkish | 5 | 5 | 4 |
-| weird | 16 | 10 | 8 |
-| zouk | 10 | 9 | 6 |
+| weird | 16 | 14 | 8 |
+| zouk | 10 | 10 | 6 |
 
 ## Catalog pass order: source-cell depth and references
 
@@ -144,60 +143,60 @@ Low multi-cell coverage means students have fewer than two authored playable bod
 
 | Priority | Genre | Styles | Instrument/style pairs | Zero source cells | One source cell | Two or more | Exact local references |
 |---:|---|---:|---:|---:|---:|---:|---:|
-| 1 | classical | 7 | 32 | 0 | 32 | 0 | 1 |
-| 2 | indian-classical | 8 | 31 | 0 | 31 | 0 | 4 |
-| 3 | weird | 16 | 38 | 2 | 35 | 1 | 10 |
-| 4 | amapiano | 7 | 39 | 2 | 36 | 1 | 5 |
-| 5 | arabic | 5 | 25 | 0 | 25 | 0 | 4 |
-| 6 | persian | 5 | 17 | 0 | 17 | 0 | 4 |
-| 7 | steppe | 6 | 13 | 0 | 13 | 0 | 5 |
-| 8 | gamelan | 4 | 19 | 0 | 18 | 1 | 3 |
-| 9 | funk | 9 | 54 | 0 | 54 | 0 | 8 |
-| 10 | zouk | 10 | 60 | 2 | 58 | 0 | 9 |
-| 11 | hip-hop | 9 | 45 | 1 | 43 | 1 | 8 |
-| 12 | salsa | 16 | 145 | 3 | 142 | 0 | 15 |
-| 13 | flamenco | 18 | 70 | 0 | 70 | 0 | 17 |
-| 14 | afrobeat | 7 | 52 | 0 | 52 | 0 | 7 |
-| 15 | afrobeats | 5 | 29 | 0 | 29 | 0 | 5 |
-| 16 | andean | 7 | 35 | 0 | 35 | 0 | 7 |
-| 17 | blues | 8 | 40 | 1 | 39 | 0 | 8 |
-| 18 | bollywood | 6 | 42 | 0 | 42 | 0 | 6 |
-| 19 | brazilian | 11 | 71 | 0 | 71 | 0 | 11 |
-| 20 | cinematic | 6 | 36 | 0 | 36 | 0 | 6 |
-| 21 | country | 7 | 38 | 0 | 38 | 0 | 7 |
-| 22 | dangdut | 4 | 24 | 1 | 23 | 0 | 4 |
-| 23 | ethiopian | 5 | 26 | 0 | 26 | 0 | 5 |
-| 24 | folk | 6 | 23 | 0 | 23 | 0 | 6 |
-| 25 | gnawa | 4 | 16 | 0 | 16 | 0 | 4 |
-| 26 | gospel | 5 | 33 | 0 | 33 | 0 | 5 |
-| 27 | kizomba | 7 | 42 | 4 | 38 | 0 | 7 |
-| 28 | mbalax | 4 | 24 | 1 | 23 | 0 | 4 |
-| 29 | mexican | 10 | 51 | 1 | 50 | 0 | 10 |
-| 30 | qawwali | 4 | 20 | 0 | 20 | 0 | 4 |
-| 31 | r-and-b | 9 | 45 | 0 | 45 | 0 | 9 |
-| 32 | reggae | 7 | 40 | 2 | 38 | 0 | 7 |
-| 33 | swing | 7 | 41 | 0 | 41 | 0 | 7 |
-| 34 | taarab | 5 | 29 | 0 | 29 | 0 | 5 |
-| 35 | timba | 12 | 108 | 3 | 105 | 0 | 12 |
-| 36 | turkish | 5 | 20 | 0 | 20 | 0 | 5 |
-| 37 | latin | 12 | 66 | 1 | 61 | 4 | 11 |
-| 38 | jazz | 9 | 46 | 0 | 45 | 1 | 9 |
-| 39 | industrial | 5 | 21 | 0 | 18 | 3 | 4 |
-| 40 | tango | 17 | 74 | 0 | 71 | 3 | 17 |
-| 41 | pop | 9 | 51 | 3 | 45 | 3 | 9 |
-| 42 | japanese | 5 | 14 | 0 | 13 | 1 | 5 |
-| 43 | korean | 5 | 13 | 0 | 12 | 1 | 5 |
-| 44 | ambient | 9 | 22 | 1 | 16 | 5 | 7 |
-| 45 | desert-blues | 4 | 18 | 0 | 15 | 3 | 4 |
+| 1 | gamelan | 4 | 19 | 0 | 18 | 1 | 3 |
+| 2 | indian-classical | 8 | 31 | 0 | 31 | 0 | 7 |
+| 3 | weird | 16 | 38 | 2 | 35 | 1 | 14 |
+| 4 | salsa | 16 | 145 | 3 | 142 | 0 | 15 |
+| 5 | afrobeat | 7 | 52 | 0 | 52 | 0 | 7 |
+| 6 | afrobeats | 5 | 29 | 0 | 29 | 0 | 5 |
+| 7 | andean | 7 | 35 | 0 | 35 | 0 | 7 |
+| 8 | arabic | 5 | 25 | 0 | 25 | 0 | 5 |
+| 9 | blues | 8 | 40 | 1 | 39 | 0 | 8 |
+| 10 | bollywood | 6 | 42 | 0 | 42 | 0 | 6 |
+| 11 | brazilian | 11 | 71 | 0 | 71 | 0 | 11 |
+| 12 | cinematic | 6 | 36 | 0 | 36 | 0 | 6 |
+| 13 | classical | 7 | 32 | 0 | 32 | 0 | 7 |
+| 14 | country | 7 | 38 | 0 | 38 | 0 | 7 |
+| 15 | dangdut | 4 | 24 | 1 | 23 | 0 | 4 |
+| 16 | ethiopian | 5 | 26 | 0 | 26 | 0 | 5 |
+| 17 | folk | 6 | 23 | 0 | 23 | 0 | 6 |
+| 18 | funk | 9 | 54 | 0 | 54 | 0 | 9 |
+| 19 | gnawa | 4 | 16 | 0 | 16 | 0 | 4 |
+| 20 | gospel | 5 | 33 | 0 | 33 | 0 | 5 |
+| 21 | kizomba | 7 | 42 | 4 | 38 | 0 | 7 |
+| 22 | mbalax | 4 | 24 | 1 | 23 | 0 | 4 |
+| 23 | mexican | 10 | 51 | 1 | 50 | 0 | 10 |
+| 24 | persian | 5 | 17 | 0 | 17 | 0 | 5 |
+| 25 | qawwali | 4 | 20 | 0 | 20 | 0 | 4 |
+| 26 | r-and-b | 9 | 45 | 0 | 45 | 0 | 9 |
+| 27 | reggae | 7 | 40 | 2 | 38 | 0 | 7 |
+| 28 | steppe | 6 | 13 | 0 | 13 | 0 | 6 |
+| 29 | swing | 7 | 41 | 0 | 41 | 0 | 7 |
+| 30 | taarab | 5 | 29 | 0 | 29 | 0 | 5 |
+| 31 | timba | 12 | 108 | 3 | 105 | 0 | 12 |
+| 32 | turkish | 5 | 20 | 0 | 20 | 0 | 5 |
+| 33 | zouk | 10 | 60 | 2 | 58 | 0 | 10 |
+| 34 | flamenco | 18 | 70 | 0 | 69 | 1 | 18 |
+| 35 | jazz | 9 | 46 | 0 | 45 | 1 | 9 |
+| 36 | hip-hop | 9 | 45 | 1 | 43 | 1 | 9 |
+| 37 | amapiano | 7 | 39 | 2 | 36 | 1 | 7 |
+| 38 | tango | 17 | 74 | 0 | 71 | 3 | 17 |
+| 39 | pop | 9 | 51 | 3 | 45 | 3 | 9 |
+| 40 | latin | 12 | 66 | 1 | 61 | 4 | 12 |
+| 41 | japanese | 5 | 14 | 0 | 13 | 1 | 5 |
+| 42 | korean | 5 | 13 | 0 | 12 | 1 | 5 |
+| 43 | industrial | 5 | 21 | 0 | 18 | 3 | 5 |
+| 44 | desert-blues | 4 | 18 | 0 | 15 | 3 | 4 |
+| 45 | ambient | 9 | 22 | 1 | 16 | 5 | 8 |
 | 46 | rock | 10 | 40 | 0 | 30 | 10 | 9 |
 | 47 | punk | 5 | 20 | 0 | 16 | 4 | 5 |
 | 48 | soukous | 5 | 25 | 0 | 20 | 5 | 5 |
 | 49 | house | 7 | 26 | 1 | 19 | 6 | 7 |
 | 50 | metal | 7 | 28 | 0 | 21 | 7 | 7 |
 | 51 | reggaeton | 6 | 24 | 0 | 18 | 6 | 6 |
-| 52 | bass | 10 | 30 | 0 | 20 | 10 | 9 |
+| 52 | bass | 10 | 30 | 0 | 20 | 10 | 10 |
 | 53 | electronic | 8 | 16 | 0 | 8 | 8 | 8 |
 | 54 | bachata | 8 | 50 | 0 | 10 | 40 | 8 |
-| 55 | chinese | 8 | 21 | 0 | 0 | 21 | 6 |
+| 55 | chinese | 8 | 21 | 0 | 0 | 21 | 8 |
 
 The full pattern names, articulation gestures, sections, energy bands, instrument pairs, raw technique cues and per-style mix evidence are in [`audit/technique-coverage/report.json`](../audit/technique-coverage/report.json).

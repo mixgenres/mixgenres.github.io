@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "classical-baroque": {
     "recording": "J.S. Bach - Brandenburg Concerto No. 3",
-    "audio": "voiced/J.S. Bach - Brandenburg Concerto No. 3.mp3",
+    "audio": "samples/J.S. Bach - Brandenburg Concerto No. 3.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 25062042,
-    "audioModifiedNs": 1791141234318710049,
     "windowsSeconds": [
       219.27,
       407.22

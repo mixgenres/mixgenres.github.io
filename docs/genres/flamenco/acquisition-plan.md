@@ -1,14 +1,16 @@
 # Flamenco multi-reference pilot
 
-Updated 2026-10-07. This pilot builds a style-local evidence set for the 18 Flamenco styles already in the app. The initial working target is four verified MP3 recordings per style; add a fifth when it contributes a distinct performer, period, ensemble, or production context. This is a reference set for score, technique, articulation, and mix review, not a request to create four sample songs per style.
+Updated 2026-10-08. This pilot builds a style-local evidence set for the 18 Flamenco styles already in the app. The working target is three verified MP3 recordings per style. Choose complementary performers, periods, ensembles, and production contexts; do not pad the set with near-duplicates. This is a reference set for score, technique, articulation, and mix review, not a request to create three sample songs per style.
 
 ## Current inventory and acquisition scope
 
-The local inventory now contains 20 Flamenco matches. Soleá is the first style brought to four complementary references; the other 17 styles retain their pre-pass counts, including zero local Seguiriya references. Reaching four per style requires 52 more MP3s (72 total). The original 17 files occupied 93.6 MiB, averaging 5.51 MiB; at that size the remaining acquisition is about 286 MiB. A fifth reference for every style would add another 18 files, about 99 MiB. Actual size depends on duration and encoding. `references.json` records the per-style backlog, local hashes, and verification state.
+The collection now has 33 local performances across all 18 Flamenco styles. Soleá (4), Bulerías (4), Alegrías (3), and Fandangos (3) meet the three-reference baseline; 21 additional style-reference slots remain across 14 styles. Every style has at least one mapped recording. `references.json` records per-style counts, local hashes, source URLs, and verification state. Source identity or listening review remains pending for several new recordings, so acquisition coverage is not an authenticity pass.
 
-The user approved an approximately 5 GiB storage budget for this style-by-style pass. Keep at least 5 GiB free, limit retained reference/review audio to 500 MiB, and keep peak temporary audio below 1 GiB. The most recent free-space check showed 21 GiB; recheck before each acquisition batch and separation. No existing sample, accompaniment, model, or cache was removed to make room. Original MP3s remain intact; separated accompaniments are bounded evidence and are not instrument stems.
+The user approved an approximately 5 GiB storage budget for this style-by-style pass. Keep at least 5 GiB free, limit retained reference/review audio to 500 MiB, and keep peak temporary audio below 1 GiB. A recent free-space check showed about 10 GiB; recheck before each acquisition batch and separation. No existing sample, accompaniment, model, or cache was removed to make room. Original MP3s remain intact; separated accompaniments are bounded evidence and are not instrument stems.
 
 ## Selection rules
+
+Before clicking download, run `npm run check:reference-candidate -- --title="<resolved title>" --duration-seconds=<seconds>`. The gate blocks collection-style titles and items at least one hour, caps ordinary references at 15 minutes, and requires a documented single-work reason for longer recordings.
 
 - Keep each source attached only to the style or styles the actual performance demonstrates. A shared recording must have evidence for each style association; neighboring genres are not stand-ins.
 - Prefer complementary examples from at least two performers or ensembles. Include the style's defining personnel and contrasting phrase jobs, not just another rendition of the same hook.
@@ -26,4 +28,4 @@ The MP3s do not train a statistical or machine-learning model in this repository
 
 ## Per-style backlog
 
-`references.json` is the machine-readable source of truth for current counts and local-file hashes. Soleá has four references; styles with one match need three additions, and Seguiriya needs four. Source candidates and download states will be appended there only after the exact performance and provenance are verified. The completed style dossier and coverage matrix will track separate evidence status for each remaining style; acquisition count alone does not pass a style.
+`references.json` is the machine-readable source of truth for current counts and local-file hashes. Soleá and Bulerías each have four references; Alegrías and Fandangos meet the three-reference baseline. Fourteen styles remain below target, with 21 style-reference slots outstanding. All styles now have at least one mapped performance. Source candidates and download states will be appended there only after the exact performance and provenance are verified. The completed style dossier and coverage matrix will track separate evidence status for each remaining style; acquisition count alone does not pass a style.

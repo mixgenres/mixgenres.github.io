@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "gnawa-gnawa-rock": {
     "recording": "Hoba Hoba Spirit - Bienvenue à Casa",
-    "audio": "voiced/Hoba Hoba Spirit - Bienvenue à Casa.mp3",
+    "audio": "samples/Hoba Hoba Spirit - Bienvenue à Casa.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 16252587,
-    "audioModifiedNs": 1791141933596674370,
     "windowsSeconds": [
       142.18,
       264.05
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "gnawa-gnawa-jazz": {
     "recording": "Majid Bekkas - Aicha",
-    "audio": "voiced/Majid Bekkas - Aicha.mp3",
+    "audio": "samples/Majid Bekkas - Aicha.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 29985659,
-    "audioModifiedNs": 1791139131090546561,
     "windowsSeconds": [
       262.35,
       487.23
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "gnawa-lila-trance": {
     "recording": "Maâlem Hamid El Kasri - Sandiya",
-    "audio": "voiced/Maâlem Hamid El Kasri - Sandiya.mp3",
+    "audio": "samples/Maâlem Hamid El Kasri - Sandiya.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11171212,
-    "audioModifiedNs": 1791154035943185449,
     "windowsSeconds": [
       97.73,
       181.49
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "gnawa-traditional": {
     "recording": "Maâlem Mahmoud Guinia - Bala Matinba",
-    "audio": "voiced/Maâlem Mahmoud Guinia - Bala Matinba.mp3",
+    "audio": "samples/Maâlem Mahmoud Guinia - Bala Matinba.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 26302356,
-    "audioModifiedNs": 1791088135972014252,
     "windowsSeconds": [
       230.12,
       427.37

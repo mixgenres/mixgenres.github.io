@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "turkish-anatolian-rock": {
     "recording": "Erkin Koray - Cemalim",
-    "audio": "voiced/Erkin Koray - Cemalim.mp3",
+    "audio": "samples/Erkin Koray - Cemalim.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 19045499,
-    "audioModifiedNs": 1791100170477342184,
     "windowsSeconds": [
       166.62,
       309.44
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "turkish-turkish-folk": {
     "recording": "Neşet Ertaş - Neredesin Sen",
-    "audio": "voiced/Neşet Ertaş - Neredesin Sen.mp3",
+    "audio": "samples/Neşet Ertaş - Neredesin Sen.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 13105241,
-    "audioModifiedNs": 1791085663429355524,
     "windowsSeconds": [
       114.64,
       212.91
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "turkish-arabesque": {
     "recording": "Orhan Gencebay - Batsın Bu Dünya",
-    "audio": "voiced/Orhan Gencebay - Batsın Bu Dünya.mp3",
+    "audio": "samples/Orhan Gencebay - Batsın Bu Dünya.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 13470949,
-    "audioModifiedNs": 1791162121031283190,
     "windowsSeconds": [
       117.85,
       218.86
@@ -60,8 +54,6 @@ export const REFERENCE_MIX = {
     "recording": "Selim Sesler - Keşan'a Giden Yollar",
     "audio": "samples/Selim Sesler - Keşan'a Giden Yollar.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 7270663,
-    "audioModifiedNs": 1791077800693563754,
     "windowsSeconds": [
       104.46,
       194.01
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "turkish-ottoman-classical": {
     "recording": "Tanburi Cemil Bey - Hicaz Taksim",
-    "audio": "voiced/Tanburi Cemil Bey - Hicaz Taksim.mp3",
+    "audio": "samples/Tanburi Cemil Bey - Hicaz Taksim.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8252878,
-    "audioModifiedNs": 1791148962154393696,
     "windowsSeconds": [
       72.19,
       134.07

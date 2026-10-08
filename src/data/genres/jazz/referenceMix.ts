@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "jazz-hard-bop": {
     "recording": "Art Blakey - Moanin'",
-    "audio": "voiced/Art Blakey - Moanin'.mp3",
+    "audio": "samples/Art Blakey - Moanin'.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 23284650,
-    "audioModifiedNs": 1791104188290663895,
     "windowsSeconds": [
       203.72,
       378.33
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "jazz-bebop": {
     "recording": "Charlie Parker - Ko-Ko",
-    "audio": "voiced/Charlie Parker - Ko-Ko.mp3",
+    "audio": "samples/Charlie Parker - Ko-Ko.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7205832,
-    "audioModifiedNs": 1791091932564437061,
     "windowsSeconds": [
       63.02,
       117.05
@@ -42,8 +38,6 @@ export const REFERENCE_MIX = {
     "recording": "Count Basie - One O'Clock Jump",
     "audio": "samples/Count Basie - One O'Clock Jump.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 4308017,
-    "audioModifiedNs": 1791077382460548560,
     "windowsSeconds": [
       62.68,
       116.4
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "jazz-gypsy-jazz": {
     "recording": "Django Reinhardt - Minor Swing",
-    "audio": "voiced/Django Reinhardt - Minor Swing.mp3",
+    "audio": "samples/Django Reinhardt - Minor Swing.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7843148,
-    "audioModifiedNs": 1791137939998382326,
     "windowsSeconds": [
       68.6,
       127.4
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "jazz-cool": {
     "recording": "Miles Davis - Boplicity",
-    "audio": "voiced/Miles Davis - Boplicity.mp3",
+    "audio": "samples/Miles Davis - Boplicity.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7312414,
-    "audioModifiedNs": 1791087763244574185,
     "windowsSeconds": [
       63.96,
       118.78
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "jazz-modal": {
     "recording": "Miles Davis - So What",
-    "audio": "voiced/Miles Davis - So What.mp3",
+    "audio": "samples/Miles Davis - So What.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 22545894,
-    "audioModifiedNs": 1791096830437161372,
     "windowsSeconds": [
       197.25,
       366.32
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "jazz-free-jazz": {
     "recording": "Ornette Coleman - Lonely Woman",
-    "audio": "voiced/Ornette Coleman - Lonely Woman.mp3",
+    "audio": "samples/Ornette Coleman - Lonely Woman.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 12116768,
-    "audioModifiedNs": 1791100671788072009,
     "windowsSeconds": [
       106.0,
       196.85
@@ -132,8 +118,6 @@ export const REFERENCE_MIX = {
     "recording": "Wayne Shorter - Footprints",
     "audio": "samples/Wayne Shorter - Footprints.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 10807682,
-    "audioModifiedNs": 1791077386192062812,
     "windowsSeconds": [
       157.47,
       292.44
@@ -148,10 +132,8 @@ export const REFERENCE_MIX = {
   },
   "jazz-jazz-fusion": {
     "recording": "Weather Report - Birdland",
-    "audio": "voiced/Weather Report - Birdland.mp3",
+    "audio": "samples/Weather Report - Birdland.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 17834538,
-    "audioModifiedNs": 1791093087920629810,
     "windowsSeconds": [
       156.03,
       289.77

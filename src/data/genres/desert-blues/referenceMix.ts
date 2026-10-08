@@ -6,8 +6,6 @@ export const REFERENCE_MIX = {
     "recording": "Ali Farka Touré - Savane",
     "audio": "samples/Ali Farka Touré - Savane.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 11352028,
-    "audioModifiedNs": 1791077155083382499,
     "windowsSeconds": [
       163.16,
       303.01
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "desert-blues-psychedelic-desert": {
     "recording": "Mdou Moctar - Afrique Victime",
-    "audio": "voiced/Mdou Moctar - Afrique Victime.mp3",
+    "audio": "samples/Mdou Moctar - Afrique Victime.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11522229,
-    "audioModifiedNs": 1791152375894050803,
     "windowsSeconds": [
       100.8,
       187.2
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "desert-blues-acoustic-tuareg": {
     "recording": "Tinariwen - Imidiwan Ma Tenam",
-    "audio": "voiced/Tinariwen - Imidiwan Ma Tenam.mp3",
+    "audio": "samples/Tinariwen - Imidiwan Ma Tenam.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11245416,
-    "audioModifiedNs": 1791148698324680696,
     "windowsSeconds": [
       98.37,
       182.69
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "desert-blues-tishoumaren": {
     "recording": "Tinariwen - Sastanàqqàm",
-    "audio": "voiced/Tinariwen - Sastanàqqàm.mp3",
+    "audio": "samples/Tinariwen - Sastanàqqàm.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8117939,
-    "audioModifiedNs": 1791103179749282618,
     "windowsSeconds": [
       71.01,
       131.87

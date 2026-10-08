@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "reggaeton-experimental": {
     "recording": "Arca feat. Rosalía - KLK",
-    "audio": "voiced/Arca feat. Rosalía - KLK.mp3",
+    "audio": "samples/Arca feat. Rosalía - KLK.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9101198,
-    "audioModifiedNs": 1791092434841586780,
     "windowsSeconds": [
       79.61,
       147.85
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "reggaeton-latin-trap-crossover": {
     "recording": "Bad Bunny - Soy Peor",
-    "audio": "voiced/Bad Bunny - Soy Peor.mp3",
+    "audio": "samples/Bad Bunny - Soy Peor.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10767795,
-    "audioModifiedNs": 1791147981900721647,
     "windowsSeconds": [
       94.19,
       174.93
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "reggaeton-playero-underground": {
     "recording": "Daddy Yankee & DJ Playero - Yamilet",
-    "audio": "voiced/Daddy Yankee & DJ Playero - Yamilet.mp3",
+    "audio": "samples/Daddy Yankee & DJ Playero - Yamilet.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7632047,
-    "audioModifiedNs": 1791090131317173785,
     "windowsSeconds": [
       66.76,
       123.98
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "reggaeton-classic": {
     "recording": "Daddy Yankee - Gasolina",
-    "audio": "voiced/Daddy Yankee - Gasolina.mp3",
+    "audio": "samples/Daddy Yankee - Gasolina.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10158730,
-    "audioModifiedNs": 1791107161118342189,
     "windowsSeconds": [
       88.86,
       165.03
@@ -78,8 +70,6 @@ export const REFERENCE_MIX = {
     "recording": "Rauw Alejandro - Todo de Ti",
     "audio": "samples/Rauw Alejandro - Todo de Ti.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 5153101,
-    "audioModifiedNs": 1791077531687041638,
     "windowsSeconds": [
       74.01,
       137.45
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "reggaeton-neoperreo": {
     "recording": "Tomasa del Real - Barre con el Pelo",
-    "audio": "voiced/Tomasa del Real - Barre con el Pelo.mp3",
+    "audio": "samples/Tomasa del Real - Barre con el Pelo.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8102292,
-    "audioModifiedNs": 1791138065452214296,
     "windowsSeconds": [
       70.87,
       131.62

@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "pop-indie-pop": {
     "recording": "Alvvays - Archie, Marry Me",
-    "audio": "voiced/Alvvays - Archie, Marry Me.mp3",
+    "audio": "samples/Alvvays - Archie, Marry Me.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7800384,
-    "audioModifiedNs": 1791099291094483276,
     "windowsSeconds": [
       68.23,
       126.71
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "pop-power-pop": {
     "recording": "Big Star - September Gurls",
-    "audio": "voiced/Big Star - September Gurls.mp3",
+    "audio": "samples/Big Star - September Gurls.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7037515,
-    "audioModifiedNs": 1791149787100848753,
     "windowsSeconds": [
       61.56,
       114.32
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "pop-dream-pop": {
     "recording": "Cocteau Twins - Heaven or Las Vegas",
-    "audio": "voiced/Cocteau Twins - Heaven or Las Vegas.mp3",
+    "audio": "samples/Cocteau Twins - Heaven or Las Vegas.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9225634,
-    "audioModifiedNs": 1791098082233535712,
     "windowsSeconds": [
       80.7,
       149.87
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "pop-synth-pop": {
     "recording": "Depeche Mode - Enjoy the Silence",
-    "audio": "voiced/Depeche Mode - Enjoy the Silence.mp3",
+    "audio": "samples/Depeche Mode - Enjoy the Silence.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11203530,
-    "audioModifiedNs": 1791099853930377437,
     "windowsSeconds": [
       98.0,
       182.01
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "pop-contemporary": {
     "recording": "Dua Lipa - Levitating",
-    "audio": "voiced/Dua Lipa - Levitating.mp3",
+    "audio": "samples/Dua Lipa - Levitating.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9208916,
-    "audioModifiedNs": 1791086208368959777,
     "windowsSeconds": [
       80.55,
       149.6
@@ -96,8 +86,6 @@ export const REFERENCE_MIX = {
     "recording": "Kate Bush - Running Up That Hill",
     "audio": "samples/Kate Bush - Running Up That Hill.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 7144269,
-    "audioModifiedNs": 1791077489176420122,
     "windowsSeconds": [
       103.82,
       192.81
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "pop-dance-pop": {
     "recording": "Madonna - Into the Groove",
-    "audio": "voiced/Madonna - Into the Groove.mp3",
+    "audio": "samples/Madonna - Into the Groove.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9251746,
-    "audioModifiedNs": 1791090380878315236,
     "windowsSeconds": [
       80.93,
       150.3
@@ -130,10 +116,8 @@ export const REFERENCE_MIX = {
   },
   "pop-maximal-idol-pop": {
     "recording": "SHINee - Lucifer",
-    "audio": "voiced/SHINee - Lucifer.mp3",
+    "audio": "samples/SHINee - Lucifer.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9528542,
-    "audioModifiedNs": 1791157592390019920,
     "windowsSeconds": [
       83.35,
       154.79
@@ -150,8 +134,6 @@ export const REFERENCE_MIX = {
     "recording": "Tatsuro Yamashita - Sparkle",
     "audio": "samples/Tatsuro Yamashita - Sparkle.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 6222271,
-    "audioModifiedNs": 1791139624404810228,
     "windowsSeconds": [
       89.72,
       166.63

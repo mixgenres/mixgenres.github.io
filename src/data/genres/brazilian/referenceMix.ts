@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "brazilian-partido-alto": {
     "recording": "Candeia - Testamento de Partideiro",
-    "audio": "voiced/Candeia - Testamento de Partideiro.mp3",
+    "audio": "samples/Candeia - Testamento de Partideiro.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6630111,
-    "audioModifiedNs": 1791096114132393663,
     "windowsSeconds": [
       57.99,
       107.69
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "brazilian-samba": {
     "recording": "Cartola - O Mundo É um Moinho",
-    "audio": "voiced/Cartola - O Mundo É um Moinho.mp3",
+    "audio": "samples/Cartola - O Mundo É um Moinho.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9364507,
-    "audioModifiedNs": 1791084064845904064,
     "windowsSeconds": [
       81.92,
       152.13
@@ -42,8 +38,6 @@ export const REFERENCE_MIX = {
     "recording": "Fundo de Quintal - A amizade",
     "audio": "samples/Fundo de Quintal - A amizade.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 4664300,
-    "audioModifiedNs": 1791140192719628915,
     "windowsSeconds": [
       66.81,
       124.08
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "brazilian-mpb": {
     "recording": "Gilberto Gil - Expresso 2222",
-    "audio": "voiced/Gilberto Gil - Expresso 2222.mp3",
+    "audio": "samples/Gilberto Gil - Expresso 2222.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6406399,
-    "audioModifiedNs": 1791089342457620461,
     "windowsSeconds": [
       56.03,
       104.06
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "brazilian-samba-rock": {
     "recording": "Jorge Ben Jor - País Tropical",
-    "audio": "voiced/Jorge Ben Jor - País Tropical.mp3",
+    "audio": "samples/Jorge Ben Jor - País Tropical.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 14619414,
-    "audioModifiedNs": 1791155569447447822,
     "windowsSeconds": [
       127.89,
       237.52
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "brazilian-bossa-nova": {
     "recording": "João Gilberto - Chega de Saudade",
-    "audio": "voiced/João Gilberto - Chega de Saudade.mp3",
+    "audio": "samples/João Gilberto - Chega de Saudade.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8004135,
-    "audioModifiedNs": 1791154148256024540,
     "windowsSeconds": [
       70.01,
       130.03
@@ -114,8 +102,6 @@ export const REFERENCE_MIX = {
     "recording": "Luiz Gonzaga - Asa Branca",
     "audio": "samples/Luiz Gonzaga - Asa Branca.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 8185976,
-    "audioModifiedNs": 1791077049306860274,
     "windowsSeconds": [
       118.67,
       220.39
@@ -130,10 +116,8 @@ export const REFERENCE_MIX = {
   },
   "brazilian-baiao": {
     "recording": "Luiz Gonzaga - Baião",
-    "audio": "voiced/Luiz Gonzaga - Baião.mp3",
+    "audio": "samples/Luiz Gonzaga - Baião.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6649956,
-    "audioModifiedNs": 1791098155660862244,
     "windowsSeconds": [
       58.16,
       108.02
@@ -148,10 +132,8 @@ export const REFERENCE_MIX = {
   },
   "brazilian-xote": {
     "recording": "Luiz Gonzaga - Xote das Meninas",
-    "audio": "voiced/Luiz Gonzaga - Xote das Meninas.mp3",
+    "audio": "samples/Luiz Gonzaga - Xote das Meninas.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6169336,
-    "audioModifiedNs": 1791148770394772178,
     "windowsSeconds": [
       53.96,
       100.2
@@ -166,10 +148,8 @@ export const REFERENCE_MIX = {
   },
   "brazilian-samba-reggae": {
     "recording": "Olodum - Faraó",
-    "audio": "voiced/Olodum - Faraó.mp3",
+    "audio": "samples/Olodum - Faraó.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9328080,
-    "audioModifiedNs": 1791155828985636825,
     "windowsSeconds": [
       81.6,
       151.54
@@ -184,10 +164,8 @@ export const REFERENCE_MIX = {
   },
   "brazilian-samba-de-roda": {
     "recording": "Samba de Roda de Dona Dalva - Beira Mar",
-    "audio": "voiced/Samba de Roda de Dona Dalva - Beira Mar.mp3",
+    "audio": "samples/Samba de Roda de Dona Dalva - Beira Mar.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9257977,
-    "audioModifiedNs": 1791091575586985820,
     "windowsSeconds": [
       80.98,
       150.39

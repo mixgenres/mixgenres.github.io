@@ -6,8 +6,6 @@ export const REFERENCE_MIX = {
     "recording": "ACDC - Back in Black",
     "audio": "samples/ACDC - Back in Black.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 6252668,
-    "audioModifiedNs": 1791077536507485179,
     "windowsSeconds": [
       88.86,
       165.03
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "rock-japanese-melodic-rock": {
     "recording": "Asian Kung-Fu Generation - Rewrite",
-    "audio": "voiced/Asian Kung-Fu Generation - Rewrite.mp3",
+    "audio": "samples/Asian Kung-Fu Generation - Rewrite.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9094928,
-    "audioModifiedNs": 1791088367896640293,
     "windowsSeconds": [
       79.56,
       147.75
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "rock-rock-and-roll": {
     "recording": "Chuck Berry - Johnny B. Goode",
-    "audio": "voiced/Chuck Berry - Johnny B. Goode.mp3",
+    "audio": "samples/Chuck Berry - Johnny B. Goode.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6506846,
-    "audioModifiedNs": 1791083078923637267,
     "windowsSeconds": [
       56.91,
       105.69
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "rock-psychedelic": {
     "recording": "Jimi Hendrix - Purple Haze",
-    "audio": "voiced/Jimi Hendrix - Purple Haze.mp3",
+    "audio": "samples/Jimi Hendrix - Purple Haze.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 6898652,
-    "audioModifiedNs": 1791152830342924594,
     "windowsSeconds": [
       60.33,
       112.05
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "rock-classic-rock": {
     "recording": "Led Zeppelin - Ramble On",
-    "audio": "voiced/Led Zeppelin - Ramble On.mp3",
+    "audio": "samples/Led Zeppelin - Ramble On.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 10962243,
-    "audioModifiedNs": 1791097860349685099,
     "windowsSeconds": [
       95.9,
       178.1
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "rock-shoegaze": {
     "recording": "My Bloody Valentine - Only Shallow",
-    "audio": "voiced/My Bloody Valentine - Only Shallow.mp3",
+    "audio": "samples/My Bloody Valentine - Only Shallow.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8946645,
-    "audioModifiedNs": 1791158443838156689,
     "windowsSeconds": [
       78.25,
       145.33
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "rock-alternative": {
     "recording": "Radiohead - Just",
-    "audio": "voiced/Radiohead - Just.mp3",
+    "audio": "samples/Radiohead - Just.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9788722,
-    "audioModifiedNs": 1791107658294771318,
     "windowsSeconds": [
       85.63,
       159.03
@@ -132,8 +118,6 @@ export const REFERENCE_MIX = {
     "recording": "The Strokes - Last Nite",
     "audio": "samples/The Strokes - Last Nite.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 4900842,
-    "audioModifiedNs": 1791077540997344071,
     "windowsSeconds": [
       70.53,
       130.98
@@ -150,8 +134,6 @@ export const REFERENCE_MIX = {
     "recording": "Yes - Roundabout",
     "audio": "samples/Yes - Roundabout.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 12534154,
-    "audioModifiedNs": 1791077541738420219,
     "windowsSeconds": [
       181.27,
       336.65

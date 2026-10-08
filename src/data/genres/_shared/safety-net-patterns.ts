@@ -113,7 +113,7 @@ export const CANONICAL_GENRE_PATTERNS: MusicalPattern[] = [
 
 
   P('hiphop-pocket-percussion', 'hip-hop', 'Hip-Hop Pocket Percussion', 'Sparse auxiliary percussion with ghosted subdivision and strong sample-pocket accents.', [3,7,11,15], ['percussion','rhythm'], ['hip-hop','sample-pocket','ghost']),
-  P('tango-yumba', 'tango', 'Yumba / Heavy Tango Accent', 'Heavy first/strong-beat tango punctuation with space around the impact so bass, piano and bandoneon can articulate the same large pulse as a phrase-level event.', [0,8], ['bass','harmony','lead','pulse'], ['tango','yumba','marcato','heavy-accent']),
+  P('tango-yumba', 'tango', 'Yumba Accent', 'Heavy first/strong-beat tango punctuation with space around the impact so bass, piano and bandoneon can articulate the same large pulse as a phrase-level event.', [0,8], ['bass','harmony','lead','pulse'], ['tango','yumba','marcato','heavy-accent']),
   P('tango-percussion-candombe', 'tango', 'Tango Percussive Accent', 'Discrete percussive punctuation used to support marcato/sincopa without becoming a drum-kit backbeat.', [0,5,8,13], ['percussion'], ['tango','marcato','sincopa','percussion']),
   // Punk / hardcore: downpicked 8ths, D-beat, halftime breakdown, power-chord unity.
   P('punk-downpick-eighths', 'punk-hardcore', 'Punk Downpick Eighths', 'Continuous downpicked eighth-note guitar/bass drive with accents at phrase boundaries.', [0,2,4,6,8,10,12,14], ['harmony','bass','rhythm'], ['punk','downpick','eighths']),

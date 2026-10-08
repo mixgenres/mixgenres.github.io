@@ -6,8 +6,6 @@ export const REFERENCE_MIX = {
     "recording": "Balinese gamelan angklung ensembles - Sekar Muncerat",
     "audio": "samples/Balinese gamelan angklung ensembles - Sekar Muncerat.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 8671668,
-    "audioModifiedNs": 1791077244957848122,
     "windowsSeconds": [
       122.66,
       227.79
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "gamelan-degung": {
     "recording": "Gamelan Degung of Bandung - Ujung Laut",
-    "audio": "voiced/Gamelan Degung of Bandung - Ujung Laut.mp3",
+    "audio": "samples/Gamelan Degung of Bandung - Ujung Laut.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7583013,
-    "audioModifiedNs": 1791138185525450573,
     "windowsSeconds": [
       66.32,
       123.17
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "gamelan-balinese-gong-kebyar": {
     "recording": "Gong Kebyar of Peliatan - Sekar Djepun",
-    "audio": "voiced/Gong Kebyar of Peliatan - Sekar Djepun.mp3",
+    "audio": "samples/Gong Kebyar of Peliatan - Sekar Djepun.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 20742431,
-    "audioModifiedNs": 1791098886528702645,
     "windowsSeconds": [
       181.48,
       337.03

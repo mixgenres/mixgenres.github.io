@@ -90,7 +90,7 @@ function supportPattern(
     worldId: genreId,
     styleIds: [styleId],
     name: `Sample ${genreId} ${instrumentId} core accompaniment`,
-    shortName: `${instrumentId} sample core cell`,
+    shortName: `${instrumentId} support`,
     family: `${genreId}-sample-support`,
     category: role === 'bass' ? 'bass' : role === 'lead' ? 'lead' : role === 'percussion' ? 'groove' : role === 'texture' ? 'texture' : 'accompaniment',
     description: `Quiet ${role} sample accompaniment for ${instrumentId}, derived from ${source?.shortName ?? 'the style-local score'}; use as supporting ensemble vocabulary, not as a historical transcription.`,
@@ -142,7 +142,7 @@ function supportPattern(
     ...base,
     id: variationId,
     name: `Sample ${genreId} ${instrumentId} phrase response`,
-    shortName: `${instrumentId} sample phrase response`,
+    shortName: `${instrumentId} answer`,
     family: `${genreId}-sample-support-${instrumentId}`,
     onsetGrid: responseOnsets,
     durationGrid: responseEvents.map(event => Math.max(1, Math.round((event.duration ?? 0.2) * 4))),
@@ -372,7 +372,11 @@ export function createCatalogSong(id: string): Sheet {
       if (!track) throw new Error(`Recording ${id} assigns a pattern to absent instrument ${instrumentId}`);
       const patternId = (style.patterns?.allowed ?? []).find(candidateId => {
         const pattern = PATTERNS_BY_ID[candidateId];
-        return pattern?.shortName === shortName && pattern.instruments?.includes(instrumentId);
+        // Keep existing recording assignments valid when a cell gains a concise
+        // student-facing label; its source name remains searchable in tags.
+        return (pattern?.shortName === shortName || pattern?.family === shortName || pattern?.name.endsWith(`: ${shortName}`)
+          || pattern?.tags.includes(shortName))
+          && pattern.instruments?.includes(instrumentId);
       });
       if (!patternId) throw new Error(`Recording ${id} cannot resolve ${instrumentId} pattern ${shortName}`);
       arrangement[region.id][track.id] = patternId;

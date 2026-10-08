@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "japanese-gagaku": {
     "recording": "Imperial Household Agency - Etenraku",
-    "audio": "voiced/Imperial Household Agency - Etenraku.mp3",
+    "audio": "samples/Imperial Household Agency - Etenraku.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 23193847,
-    "audioModifiedNs": 1791095388129380724,
     "windowsSeconds": [
       202.92,
       376.86
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "japanese-shakuhachi": {
     "recording": "Katsuya Yokoyama - Shika no Tōne",
-    "audio": "voiced/Katsuya Yokoyama - Shika no Tōne.mp3",
+    "audio": "samples/Katsuya Yokoyama - Shika no Tōne.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 22816525,
-    "audioModifiedNs": 1791150785360223790,
     "windowsSeconds": [
       199.62,
       370.72
@@ -42,8 +38,6 @@ export const REFERENCE_MIX = {
     "recording": "Kodo - O-Daiko",
     "audio": "samples/Kodo - O-Daiko.mp3",
     "source": "original-with-vocals",
-    "audioBytes": 12117349,
-    "audioModifiedNs": 1791077373541594401,
     "windowsSeconds": [
       176.52,
       327.82
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "japanese-koto-sankyoku": {
     "recording": "Michio Miyagi - Haru no Umi",
-    "audio": "voiced/Michio Miyagi - Haru no Umi.mp3",
+    "audio": "samples/Michio Miyagi - Haru no Umi.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 18726843,
-    "audioModifiedNs": 1791094584907802924,
     "windowsSeconds": [
       163.83,
       304.26
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "japanese-shamisen-minyo": {
     "recording": "Takio Ito - Soran Bushi",
-    "audio": "voiced/Takio Ito - Soran Bushi.mp3",
+    "audio": "samples/Takio Ito - Soran Bushi.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7477435,
-    "audioModifiedNs": 1791090960281288417,
     "windowsSeconds": [
       65.41,
       121.47

@@ -4,10 +4,8 @@ import type { ReferenceMixCatalog } from '../_shared/referenceMix';
 export const REFERENCE_MIX = {
   "bass-2-step": {
     "recording": "Artful Dodger - Movin' Too Fast",
-    "audio": "voiced/Artful Dodger - Movin' Too Fast.mp3",
+    "audio": "samples/Artful Dodger - Movin' Too Fast.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9455431,
-    "audioModifiedNs": 1791140925212756827,
     "windowsSeconds": [
       82.71,
       153.61
@@ -22,10 +20,8 @@ export const REFERENCE_MIX = {
   },
   "bass-future-garage": {
     "recording": "Burial - Archangel",
-    "audio": "voiced/Burial - Archangel.mp3",
+    "audio": "samples/Burial - Archangel.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9543173,
-    "audioModifiedNs": 1791091679383264663,
     "windowsSeconds": [
       83.48,
       155.03
@@ -40,10 +36,8 @@ export const REFERENCE_MIX = {
   },
   "bass-drum-and-bass": {
     "recording": "Goldie - Inner City Life",
-    "audio": "voiced/Goldie - Inner City Life.mp3",
+    "audio": "samples/Goldie - Inner City Life.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8869331,
-    "audioModifiedNs": 1791093426820455491,
     "windowsSeconds": [
       77.58,
       144.08
@@ -58,10 +52,8 @@ export const REFERENCE_MIX = {
   },
   "bass-liquid": {
     "recording": "High Contrast - If We Ever",
-    "audio": "voiced/High Contrast - If We Ever.mp3",
+    "audio": "samples/High Contrast - If We Ever.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 12801189,
-    "audioModifiedNs": 1791141707899825298,
     "windowsSeconds": [
       111.99,
       207.98
@@ -76,10 +68,8 @@ export const REFERENCE_MIX = {
   },
   "bass-uk-garage": {
     "recording": "MJ Cole - Sincere",
-    "audio": "voiced/MJ Cole - Sincere.mp3",
+    "audio": "samples/MJ Cole - Sincere.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 11680012,
-    "audioModifiedNs": 1791151653648844783,
     "windowsSeconds": [
       102.17,
       189.75
@@ -94,10 +84,8 @@ export const REFERENCE_MIX = {
   },
   "bass-neurofunk": {
     "recording": "Noisia - Stigma",
-    "audio": "voiced/Noisia - Stigma.mp3",
+    "audio": "samples/Noisia - Stigma.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 15354985,
-    "audioModifiedNs": 1791083684952668960,
     "windowsSeconds": [
       134.33,
       249.47
@@ -112,10 +100,8 @@ export const REFERENCE_MIX = {
   },
   "bass-dubstep": {
     "recording": "Skream - Midnight Request Line",
-    "audio": "voiced/Skream - Midnight Request Line.mp3",
+    "audio": "samples/Skream - Midnight Request Line.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 9478401,
-    "audioModifiedNs": 1791101299382199636,
     "windowsSeconds": [
       82.92,
       153.99
@@ -130,10 +116,8 @@ export const REFERENCE_MIX = {
   },
   "bass-breakbeat": {
     "recording": "The Chemical Brothers - Block Rockin' Beats",
-    "audio": "voiced/The Chemical Brothers - Block Rockin' Beats.mp3",
+    "audio": "samples/The Chemical Brothers - Block Rockin' Beats.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 8272695,
-    "audioModifiedNs": 1791081466963376827,
     "windowsSeconds": [
       72.36,
       134.39
@@ -148,10 +132,8 @@ export const REFERENCE_MIX = {
   },
   "bass-grime": {
     "recording": "Wiley - Wot Do U Call It?",
-    "audio": "voiced/Wiley - Wot Do U Call It?.mp3",
+    "audio": "samples/Wiley - Wot Do U Call It?.mp3",
     "source": "separated-accompaniment",
-    "audioBytes": 7985375,
-    "audioModifiedNs": 1791087682476283135,
     "windowsSeconds": [
       69.85,
       129.72

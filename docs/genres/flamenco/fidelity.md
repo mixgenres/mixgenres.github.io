@@ -1,43 +1,46 @@
-# Flamenco fidelity pass
+# Flamenco sample audit
 
-Updated 2026-10-07. This is the working evidence dossier for the style-by-style pass. It does not certify the genre. `references.json` is the acquisition/provenance source of truth and `coverage.json` records the implementation status. A reference count or successful render is not an authenticity verdict.
+Updated 2026-10-08. This is an evidence dossier, not an authenticity certificate. `references.json` holds source identity, local media metadata, and unresolved checks. `coverage.json` tracks implementation coverage. Counts alone do not certify musical fit.
 
-## Audit order and status
+## Current status
 
-The audit starts with Soleá because the previous data supplied one primary guitar pattern across an entire song. Soleá now has four local references: a cante-led studio track, two live cante/guitar/palmas performances, and an exposed solo-guitar recording. Only three ensemble recordings are relevant to ensemble mix, which is deferred in this pass. The solo guitar is retained for technique, articulation, and register study.
+The local set has 33 performances mapped across 18 Flamenco styles. Four styles meet the requested three-reference baseline; 14 remain below it, with 21 additional style-reference slots outstanding. The manifest has 10 source-verified items, 16 local files whose exact source still needs verification, and 7 items awaiting source-identity review. Listening maps remain pending for the newly acquired recordings.
 
-| Style | References | Deep audit | Next action |
-| --- | ---: | --- | --- |
-| Soleá | 4 | In progress | Verify separated files, map passages, compare generated patterns/mix, then close evidence findings. |
-| Bulerías | 1 | Not started | Add complementary performers/ensemble contexts and audit guitar/palmas/cajón remates. |
-| Alegrías | 1 | Not started | Add contrasting cante/guitar/dance contexts; inspect major-color harmony and llamada/cierre. |
-| Tangos | 1 | Not started | Add references; distinguish groove density and transition roles from Tientos. |
-| Seguiriya | 0 | Not started | Acquire style-specific evidence before implementation claims. |
-| Tientos | 1 | Not started | Add references; audit slow pulse, cante space, and any transition into Tangos. |
-| Fandangos | 1 | Not started | Identify the exact regional form of the current reference; audit ternary response and harmonic variants. |
-| Rumba | 1 | Not started | Add ensemble contexts; audit rasgueado, bass, and any percussion as version-specific. |
-| Tonás/Martinetes | 1 | Not started | Audit unaccompanied cante/free timing, including forms with forge ambience only when audible. |
-| Taranta | 1 | Not started | Audit free-rhythm guitar/cante exchange and taranta harmonic center independently. |
-| Granaína/Malagueña | 1 | Not started | Split style-specific evidence if the shared catalog identity conceals distinct behaviors. |
-| Guajira | 1 | Not started | Add references; audit compound/cuban-derived rhythm and bright major-color behavior. |
-| Farruca | 1 | Not started | Add references; verify minor duple feel and guitar/dance phrase roles. |
-| Sevillanas | 1 | Not started | Add dance/cante reference; check four coplas and ternary accompaniment. |
-| Nuevo Flamenco | 1 | Not started | Add references; explicitly document pop/electronic fusion boundaries. |
-| Flamenco Jazz | 1 | Not started | Add references; distinguish jazz harmony/comping from traditional palo cells. |
-| Flamenco Rock | 1 | Not started | Add ensemble references and document amplified backbeat as fusion vocabulary. |
-| Urban/Experimental | 1 | Not started | Verify the performance-specific sound palette before assigning electronic patterns. |
+| Style | Local refs | Status and next musical check |
+| --- | ---: | --- |
+| Soleá | 4 | Compare cante/guitar/palmas ensemble passages; solo guitar is technique-only evidence. |
+| Bulerías | 4 | Check performer contrast, contratiempo, llamadas, jaleos, and remates. |
+| Alegrías | 3 | Check Cádiz major color, llamada, escobilla, and cierre. |
+| Tangos | 2 | Add one distinct performance; compare groove density with Tientos. |
+| Seguiriya | 1 | Add two distinct cante/guitar contexts; verify the long-short accent and breath pattern. |
+| Tientos | 2 | Add one reference; check heavy slow pulse and transition into tangos. |
+| Fandangos | 3 | Replace neither count nor tradition: inspect the two Toronjo items for overlap and map Huelva copla/response. |
+| Rumba | 1 | Add two ensemble or guitar-led contexts; check abanico, bass, and version-specific percussion. |
+| Tonás / Martinetes | 2 | Add one cante source; preserve free breathing and avoid a forced accompaniment pulse. |
+| Taranta | 2 | Add one source; audit free guitar/cante exchange and the local harmonic center. |
+| Granaína / Malagueña | 1 | Add two references; keep the two guitar cadences distinct within the combined catalog style. |
+| Guajira | 1 | Add two sources; audit the Cuban-derived lilt and major-key refrain. |
+| Farruca | 2 | Add one source; compare Sabicas studio and 1986 Bienal guitar phrasing and dance pulse. |
+| Sevillanas | 1 | Add two dance/cante sources; verify four coplas and 3/4 accompaniment. |
+| Nuevo Flamenco | 1 | Add two sources; document pop/fusion boundaries and keep compás audible. |
+| Flamenco Jazz | 1 | Add two sources; separate jazz harmony and solo phrasing from palo cells. |
+| Flamenco Rock | 1 | Add two ensemble references; verify riff, backbeat, palmas, and guitar-solo roles. |
+| Urban / Experimental | 1 | Add two sources; verify the particular cante, rhythm, and electronic palette before generalizing. |
 
-## Soleá findings and acceptance conditions
+## Score and UX findings
 
-| ID | Severity | Finding | Correction/acceptance condition |
-| --- | --- | --- | --- |
-| FLA-SOL-PAT-01 | P1 | The style-owned arrangement layer replaced guitar cells with one recurring 12-count groove; arrangement vocabulary did not separate compás, falseta, llamada, and response. | Added independent thumb/rasgueado compás, two falseta studies (tremolo and picado), and a called entrance. Generated score must expose distinct material in the intro/bridge, vocal compás, guitar solo, and cadence instead of repeating one cell over every region. |
-| FLA-SOL-INS-01 | P1 | Guitar attacks were coded as technique labels, but there was not enough authored variation to teach the different physical gestures in context. | Check score/control output for alternating thumb bass, rasgueado stroke direction, picado fingering, tremolo p-i-a-m-i sequence, and golpe. All gestures must reach supported guitar controls and sound distinctly in the rendered sample. |
-| FLA-SOL-MIX-01 | P1 | Mix evidence is still based on a single separated accompaniment. | Deferred by current scope. A later playback pass should compare the ensemble recordings independently before changing any mix contract. |
-| FLA-SOL-REF-01 | P1 | Local sample filenames alone do not establish performance identity or useful passage locations. | Record video/source identity, performer/version, exact musical windows, decoding and hashes, source-separation model/settings/hash, and any unresolved provenance. Review claims separately against original and accompaniment. |
+The 18 catalog songs compile, use 5–8 instruments, and keep pattern selections inside their own style. Tango is also structurally sound: all 17 examples compile with bandoneon. The 5–8 instrument rule is user-directed; quiet score-backed support parts in sparse Flamenco forms are catalog scaffolding and are not claims about a historical ensemble roster.
 
-The newly authored studies are original exercises, not transcriptions. Compás positions preserve a 12-count cycle expressed as six quarter-note beat units. The falseta studies introduce technique vocabulary and melody motion, but their note choices and timing are hypotheses until compared with the identified passages. A separated mixture can inform ensemble density and spectral balance; it cannot prove an isolated instrument's tone or clean technique mechanics.
+The sample-song form layer is already differentiated: Soleá uses temple/letra/falseta/llamada/remate; Bulerías includes compás returns and multiple falsetas; Alegrías has an escobilla and bulería section; Tientos rises into tangos; Sevillanas has four coplas; and the fusion styles use pop, jazz, rock, or electronic forms. The separate style-template layer previously reused generic descriptions and overlong pattern names. It now has concise style notes and compact student-facing rhythm labels while retaining technique details in each cell's description.
 
-## Review protocol
+Granaína and Malagueña still share one style ID despite distinct harmonic colors and cadence behavior. The pattern vocabulary now names both cadences, but their song grammar and harmony should be separated in a later catalog migration.
 
-For this above-playback pass, inspect the written events, instrument/role cells, technique vocabulary, section assignment, phrase boundaries, and realized pattern IDs. Audio rendering, source-separation comparison, mix assessment, and listening are deferred. Findings close only when the score-level evidence and acceptance condition are both satisfied.
+## Playback and mix evidence
+
+The SoundFont sweep rendered all 18 sample songs. Existing comparisons use one short excerpt and one reference per style, so they are useful for flagging gross spectral or level mismatch, not for calibrating a robust mix. Current Flamenco mix targets do not aggregate multiple verified recordings. The new Sabicas 1986 Farruca is an instrumental technique reference and is not used as ensemble-balance evidence.
+
+For each verified recording, the next evidence step is to mark an exposed entrance, developed phrase, role handoff, and ending when present. Compare cante, guitar technique, compás, palmas/cajón, register, density, and intentional space. For mix calibration, compare separated accompaniment only where useful and keep the original master for phrasing and production. Voice separation is not an instrument stem; don't treat it as clean solo guitar or percussion ground truth.
+
+## Acceptance conditions
+
+A style closes only after the source and performance are identified, useful timecodes are recorded, the generated score exposes its defining gestures in the right sections, and the SoundFont rendering is compared against the same musical role and phrase at matched listening level. Automated waveform fingerprints are prompts for review; they cannot certify that the mix sounds right. The 21 outstanding references, source-identity checks, phrase maps, and human listening decisions remain open.
