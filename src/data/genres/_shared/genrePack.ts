@@ -382,7 +382,8 @@ function studentCellName(style: GenreStyleDefinition, cell: AuthoredCell): strin
 }
 
 function studentInstrumentLabel(instrumentId: string): string {
-  const fullName = INSTRUMENTS_BY_ID[instrumentId]?.name ?? instrumentId.replaceAll('-', ' ');
+  const fullName = (INSTRUMENTS_BY_ID[instrumentId]?.name ?? instrumentId.replaceAll('-', ' '))
+    .split(/\s*\/\s*/)[0].trim();
   const words = fullName.trim().split(/\s+/);
   return words.length > 2 ? words.slice(-2).join(' ') : fullName;
 }
@@ -517,7 +518,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
       studies.push({
         ...source,
         name: `${instrumentId} foundation pulse study`,
-        shortName: `${instrumentLabel} pulse`,
+        shortName: `${instrumentLabel} basics`,
         onsets: selected.map(event => event.position),
         durations: selected.map(event => event.duration ?? 0.25),
         accents: selected.map(event => event.accent ?? 0.65),
@@ -546,7 +547,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
       studies.push({
         ...source,
         name: `${instrumentId} phrase answer study`,
-        shortName: `${instrumentLabel} answer`,
+        shortName: `${instrumentLabel} reply`,
         onsets: selected.map(event => start + event.position - first),
         durations: selected.map(event => event.duration ?? 0.25),
         accents: selected.map(event => event.accent ?? 0.65),

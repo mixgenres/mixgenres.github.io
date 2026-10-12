@@ -33,6 +33,7 @@ Style overrides include acoustic Delta/Piedmont blues, Bluegrass, Bossa Nova, ch
 - Log-drum takes moved to bank 66/programs 25–27, eliminating the program 22 collision with the jaw harp.
 - Recorded percussion uses compact unique names for plain SF2 reader compatibility. The bundled library preserves extended names; the preparation regression checks its sample identity directly.
 - Fingerstyle and picked bass waveforms keep separate source identities. Previously equal note names caused picked samples to be replaced during packaging. The highest source zones extend to MIDI 55 so authored upper bass notes remain audible; these notes transpose an existing recording.
+- The sample-song part audit covers all 421 styles and 2,191 instrument/role combinations. Every part has at least two style-owned playable patterns, a cell-derived practice study, and distinct concise picker labels. Practice studies remain optional, so the recording-style arrangement continues to use its authored phrase cells.
 
 Playback and browser export retain the same SoundFont event plan and mix graph. Parts render on demand. No audio caches, second instrument engine, compatibility gates, or instrument substitutions were added.
 

@@ -271,6 +271,82 @@ export const ALL_PATTERNS: MusicalPattern[] = [...uniquePatterns.values()].map(p
   return { ...pattern, name: pattern.name.toLowerCase().startsWith(prefix.toLowerCase()) ? pattern.name : `${prefix}${pattern.name}` };
 });
 
+/** Pattern pickers show shortName, so deduplicate that visible label within
+ * each style/instrument/role context as well as the longer search name. */
+function disambiguateChoiceLabels(patterns: MusicalPattern[]): MusicalPattern[] {
+  const labels = new Map(patterns.map(pattern => [pattern.id, pattern.shortName || pattern.name]));
+  const stopWords = new Set(['a','an','and','at','for','from','in','into','of','on','or','over','the','to','under','with','pattern','study','cell']);
+  const title = (value: string) => value.charAt(0).toLocaleUpperCase() + value.slice(1);
+  const instrumentLabel = (pattern: MusicalPattern) => {
+    const id = pattern.instruments?.[0] ?? 'part';
+    return id.split('-').map(title).join(' ');
+  };
+  const sourceWords = (pattern: MusicalPattern) => {
+    const source = pattern.tags?.at(-1) ?? pattern.family ?? pattern.name;
+    return source.match(/[A-Za-zÀ-ž0-9]+/g) ?? [];
+  };
+  const normalized = (value: string) => value.toLocaleLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+  const contextKeys = (pattern: MusicalPattern) => (pattern.styleIds ?? []).flatMap(styleId =>
+    (pattern.roles ?? []).flatMap(role => (pattern.instruments ?? []).map(instrument => `${styleId}|${role}|${instrument}`)));
+  const contexts = new Map<string, MusicalPattern[]>();
+  for (const pattern of patterns) for (const key of contextKeys(pattern)) {
+    contexts.set(key, [...(contexts.get(key) ?? []), pattern]);
+  }
+
+  for (const group of contexts.values()) {
+    const byLabel = new Map<string, MusicalPattern[]>();
+    for (const pattern of group) {
+      const key = normalized(labels.get(pattern.id) ?? pattern.name);
+      byLabel.set(key, [...(byLabel.get(key) ?? []), pattern]);
+    }
+    for (const duplicates of byLabel.values()) {
+      if (duplicates.length < 2) continue;
+      const baseLabel = labels.get(duplicates[0].id) ?? duplicates[0].name;
+      const groupIds = new Set(duplicates.map(pattern => pattern.id));
+      const reserved = new Set(group.filter(pattern => !groupIds.has(pattern.id))
+        .map(pattern => normalized(labels.get(pattern.id) ?? pattern.name)));
+      const baseWords = new Set(normalized(baseLabel).match(/[a-z0-9]+/g) ?? []);
+      const descriptorWords = duplicates.map(pattern => new Set(sourceWords(pattern).map(normalized)));
+      const ordered = [...duplicates].sort((a, b) => {
+        const studyOrder: Record<string, number> = { reduction: 0, answer: 1, variation: 2, technique: 3 };
+        return (studyOrder[a.pedagogicalStudy ?? ''] ?? -1) - (studyOrder[b.pedagogicalStudy ?? ''] ?? -1);
+      });
+      const used = new Set<string>();
+
+      for (const pattern of ordered) {
+        const current = labels.get(pattern.id) ?? pattern.name;
+        let candidate = current;
+        if (used.has(normalized(candidate)) || (pattern !== ordered[0] && normalized(candidate) === normalized(baseLabel))) {
+          const instrument = instrumentLabel(pattern);
+          const shortInstrument = instrument.split(/\s+/).at(-1) ?? instrument;
+          const studyWord: Record<string, string> = { reduction: 'basics', answer: 'reply', variation: 'variation', technique: 'technique' };
+          const studyCandidate = pattern.pedagogicalStudy ? `${shortInstrument} ${studyWord[pattern.pedagogicalStudy]}` : '';
+          const tokens = sourceWords(pattern).filter(word => {
+            const key = normalized(word);
+            if (key.length < 3 || stopWords.has(key) || baseWords.has(key)) return false;
+            const instrumentWords: string[] = normalized(instrument).match(/[a-z0-9]+/g) ?? [];
+            if (instrumentWords.includes(key)) return false;
+            return descriptorWords.filter(words => words.has(key)).length === 1;
+          });
+          const ordinal = pattern.name.match(/variation\s+(\d+)/i)?.[1];
+          const options = [...tokens.map(word => `${instrument} ${title(word)}`), studyCandidate,
+            ...(ordinal ? [`${shortInstrument} option ${ordinal}`] : []), `${shortInstrument} option 2`, `${shortInstrument} option 3`]
+            .filter(Boolean);
+          candidate = options.find(option => !used.has(normalized(option))
+            && !reserved.has(normalized(option)) && (option.split(/\s+/).length <= 3)) ?? `${shortInstrument} option 4`;
+        }
+        labels.set(pattern.id, candidate);
+        used.add(normalized(candidate));
+      }
+    }
+  }
+
+  return patterns.map(pattern => ({ ...pattern, shortName: labels.get(pattern.id) ?? pattern.shortName }));
+}
+
+const deduplicatedChoiceLabels = disambiguateChoiceLabels(ALL_PATTERNS);
+ALL_PATTERNS.splice(0, ALL_PATTERNS.length, ...deduplicatedChoiceLabels);
+
 export const PATTERNS_BY_ID: Record<string, MusicalPattern> = Object.fromEntries(
   ALL_PATTERNS.map(pattern => [pattern.id, pattern])
 );

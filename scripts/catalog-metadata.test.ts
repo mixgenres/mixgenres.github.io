@@ -48,10 +48,30 @@ test('student-facing catalog labels stay concise and descriptions avoid shared f
   for (const pattern of ALL_PATTERNS) {
     const label = pattern.shortName ?? pattern.name;
     assert.ok(label.trim().split(/\s+/).length <= 3, `${pattern.worldId}/${label}`);
+    assert.doesNotMatch(label.trim(), /^[\W_]/, `${pattern.worldId}/${pattern.id} should start with a readable name`);
   }
   for (const world of GENRE_WORLDS) for (const style of world.styleDefinitions) {
     assert.doesNotMatch(style.description, /The lead leaves space for instrumental replies/,
       `${world.id}/${style.id} should explain its own musical character`);
+  }
+});
+
+test('every sample song part has distinct style-local teaching patterns', () => {
+  for (const entry of songCatalog) {
+    const audit = auditCatalogSongInstruments(entry.id);
+    const style = getStyle(entry.styleId)!;
+    const allowed = (style.patterns?.allowed ?? []).map(id => PATTERNS_BY_ID[id]).filter(Boolean);
+    let checkedParts = 0;
+    for (const part of style.arrangement?.ensemble ?? []) for (const instrument of part.instrumentIds) {
+      if (!audit.instruments.includes(instrument)) continue;
+      const choices = allowed.filter(pattern => pattern.instruments?.includes(instrument) && pattern.roles?.includes(part.role));
+      const labels = choices.map(pattern => (pattern.shortName ?? pattern.name).toLocaleLowerCase());
+      assert.ok(choices.length >= 2, `${entry.styleId}/${instrument} needs multiple playable patterns`);
+      assert.ok(choices.some(pattern => pattern.pedagogicalStudy), `${entry.styleId}/${instrument} needs a local practice study`);
+      assert.equal(new Set(labels).size, labels.length, `${entry.styleId}/${instrument} needs distinct visible pattern labels`);
+      checkedParts++;
+    }
+    assert.ok(checkedParts > 0, `${entry.styleId} has no audited song parts`);
   }
 });
 

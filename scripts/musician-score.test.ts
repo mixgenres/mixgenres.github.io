@@ -55,8 +55,8 @@ test('reference score section assignments preserve their intended instrument cel
   };
 
   verify('flamenco-sevillanas', 'cajon', 'link', 'Cajón link remate');
-  verify('cinematic-modern-score', 'synth', 'ostinato', 'Synth ostinato');
-  verify('cinematic-modern-score', 'synth', 'build', 'Synth ostinato');
+  verify('cinematic-modern-score', 'synth', 'ostinato', 'Synth Resolution');
+  verify('cinematic-modern-score', 'synth', 'build', 'Synth Resolution');
   verify('pop-power-pop', 'synth', 'chorus', 'Synth swell');
   verify('tango-chacarera-crossover', 'violin', 'interlude', 'Violin interlude');
 });
