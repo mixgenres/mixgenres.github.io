@@ -8,7 +8,7 @@ import { INSTRUMENTS_BY_ID } from '../src/engine/lookup/instruments';
 import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { SampleRuntime } from '../src/engine/playback/soundfont/runtime';
 import { setSoundfontBankReader, loadSoundfontBank, soundfontBankStats } from '../src/engine/playback/soundfont/banks';
-import { patchForInstrument, type BankId } from '../src/engine/playback/soundfont/presets';
+import { patchForInstrument, SAMPLED_KIT_KEYS, type BankId } from '../src/engine/playback/soundfont/presets';
 import { PERCUSSION_KIT_IDS, PERCUSSION_SAMPLE_KEYS, RECORDED_PERCUSSION_ALIASES, RECORDED_PERCUSSION_KEYS, RECORDED_PERCUSSION_PATCHES, recordedPercussionKey } from '../src/engine/playback/soundfont/percussion';
 import { codeForGesture } from '../src/engine/band/gestures';
 import { performanceFixture, noteFixture } from './lib/playbackFixtures';
@@ -20,6 +20,12 @@ import { performanceWindow, renderPerformanceToAudio } from '../src/engine/playb
 import { SAMPLE_RELEASES } from '../src/engine/playback/soundfont/bankIdentity';
 import { prepareBankForLive } from '../src/engine/playback/soundfont/prepareBank';
 import { StbVorbis } from 'stb-vorbis';
+import { ALL_STYLES } from '../src/engine/style';
+import { makeSheet } from '../src/engine/sheet/sheet';
+import { resolveTrackSound } from '../src/engine/playback/trackSound';
+import { ELECTRONIC_KIT_PROGRAMS } from '../src/data/sound/playback/electronicKits';
+import { SYNTH_SAMPLE_PROGRAMS } from '../src/engine/playback/soundfont/presets';
+import { synth } from '../src/data/instruments/catalog/electronic/synth';
 await StbVorbis.ready;
 SpessaLog.setLogLevel(false,false,false);
 const diskBank=async(id:BankId)=>{const data=readFileSync(`src/assets/soundfonts/${id}.sfpack`);return data.buffer.slice(data.byteOffset,data.byteOffset+data.byteLength);};
@@ -60,6 +66,93 @@ test('turntable uses the sampled vinyl-scratch effect preset',()=>{
   assert(preset);assert.match(preset.name,/vinyl scratch/i);
   for(const key of [36,60,90])assert(preset.getVoiceParameters(key,90).length>0,`scratch sample plays at key ${key}`);
 });
+test('sampler uses the packaged one-shot palette for every MIDI pitch',()=>{
+  const patch=patchForInstrument('sampler');
+  assert.deepEqual(patch,{bank:67,program:0,drum:false,pack:'drumkit'});
+  const plan=compileSamplePlan(performanceFixture({notes:[
+    noteFixture({midi:24,time:0}),noteFixture({midi:60,time:.5}),noteFixture({midi:91,time:1}),
+  ]}),{...options,trackInstruments:new Map([['keys','sampler']])});
+  const events=plan.events.filter(event=>event.type==='on');
+  assert.equal(plan.banks.includes('drumkit'),true);
+  assert(events.length===3);
+  for(const event of events)if(event.type==='on') {
+    assert.equal(event.patch.pack,'drumkit');assert.equal(event.patch.drum,false);
+    assert((SAMPLED_KIT_KEYS as readonly number[]).includes(event.key));
+  }
+  const bank=load('drumkit');
+  for(const event of events)if(event.type==='on') {
+    const preset=bank.presets.find(item=>item.bankMSB===67&&item.program===event.patch.program&&!item.isGMGSDrum);
+    assert(preset?.getVoiceParameters(event.key,event.velocity).length,`sample note ${event.key} must play`);
+  }
+});
+test('reggaeton arrangements use authored electronic kits and bounded sampler palettes',()=>{
+  const bank=load('percussion');
+  for(const style of ALL_STYLES.filter(style=>style.primaryGenre==='reggaeton')) {
+    const sheet=makeSheet('reggaeton',style.id),performance=arrangeBand(sheet);
+    const plan=compileSamplePlan(performance,songMixOptions(sheet));
+    for(const instrumentId of ['drums','sampler']) {
+      const sound=resolveTrackSound(instrumentId,'reggaeton',style.id,'percussion');
+      const program=ELECTRONIC_KIT_PROGRAMS[sound.variantId!];assert.notEqual(program,undefined,style.id);
+      const trackIds=new Set(sheet.tracks.filter(track=>track.instrumentId===instrumentId).map(track=>track.id));
+      const channels=new Set(plan.tracks.filter(track=>trackIds.has(track.id)).flatMap(track=>track.channels));
+      const ons=plan.events.filter(event=>event.type==='on'&&channels.has(event.channel));
+      assert(ons.length>0,`${style.id}: ${instrumentId} plays`);
+      for(const event of ons)if(event.type==='on') {
+        assert.deepEqual(event.patch,{bank:0,program,drum:true,pack:'percussion'},`${style.id}: ${instrumentId}`);
+        assert(bank.presets.find(p=>p.bankMSB===0&&p.program===program&&p.isGMGSDrum)?.getVoiceParameters(event.key,event.velocity).length);
+        if(instrumentId==='sampler')assert(sound.samplePalette!.includes(event.key),`${style.id}: bounded one-shot palette`);
+      }
+    }
+  }
+});
+test('every style example reaches playable sample zones and retains its authored kit and synth choices',()=>{
+  const banks=new Map<BankId,ReturnType<typeof load>>();
+  const checked=new Set<string>();
+  const missing=new Set<string>();
+  for(const style of ALL_STYLES) {
+    const sheet=makeSheet(style.primaryGenre,style.id),performance=arrangeBand(sheet);
+    const plan=compileSamplePlan(performance,songMixOptions(sheet));
+    assert(plan.events.some(event=>event.type==='on'),`${style.id} is audible`);
+    for(const event of plan.events)if(event.type==='on') {
+      const id=`${event.patch.pack}:${event.patch.bank}:${event.patch.program}:${event.patch.drum}:${event.key}:${event.velocity}`;
+      if(checked.has(id))continue;checked.add(id);
+      if(!banks.has(event.patch.pack))banks.set(event.patch.pack,load(event.patch.pack));
+      const preset=banks.get(event.patch.pack)!.presets.find(p=>p.bankMSB===event.patch.bank&&p.program===event.patch.program&&p.isGMGSDrum===event.patch.drum);
+      if(!preset?.getVoiceParameters(event.key,event.velocity).length)missing.add(`${style.id}: ${event.patch.pack}:${event.patch.bank}:${event.patch.program}:${event.key}`);
+    }
+    for(const track of plan.tracks.filter(track=>track.instrumentId==='drums'||track.instrumentId==='synth')) {
+      const role=sheet.tracks.find(t=>t.id===track.id)!.role;
+      const sound=resolveTrackSound(track.instrumentId,style.primaryGenre,style.id,role);
+      const on=plan.events.find(event=>event.type==='on'&&track.channels.includes(event.channel));
+      if(!on||on.type!=='on')continue;
+      if(track.instrumentId==='drums') {
+        const program=ELECTRONIC_KIT_PROGRAMS[sound.variantId!];
+        if(program!==undefined)assert.deepEqual(on.patch,{bank:0,program,drum:true,pack:'percussion'},style.id);
+      } else if(sound.synthPatchId) {
+        assert.equal(on.patch.bank,75,style.id);assert.equal(on.patch.program,SYNTH_SAMPLE_PROGRAMS[sound.synthPatchId],style.id);
+      }
+    }
+  }
+  assert.deepEqual([...missing],[],'all authored pitches must reach a sample zone');
+});
+test('sampled synth filters and envelopes remain distinct after packaging and render audible PCM',async()=>{
+  const bank=load('electronic');
+  for(const [id,program] of Object.entries(SYNTH_SAMPLE_PROGRAMS)) {
+    const patch=synth.patches!.find(p=>p.id===id)!;
+    const preset=bank.presets.find(p=>p.bankMSB===75&&p.program===program)!;assert(preset,id);
+    for(const key of [36,48,60])for(const voice of preset.getVoiceParameters(key,90)) {
+      assert.equal(voice.generators[GeneratorTypes.initialFilterFc],Math.round(1200*Math.log2(patch.cutoffHz/8.176)),id);
+      assert.equal(voice.generators[GeneratorTypes.attackVolEnv],Math.round(1200*Math.log2(patch.attackSeconds)),id);
+      assert.equal(voice.generators[GeneratorTypes.releaseVolEnv],Math.round(1200*Math.log2(patch.releaseSeconds)),id);
+    }
+    const plan=compileSamplePlan(performanceFixture({notes:[noteFixture({midi:48,dur:.4})]}),options);
+    for(const event of plan.events)if(event.type==='on')event.patch={bank:75,program,drum:false,pack:'electronic'};
+    plan.banks=['electronic'];
+    const runtime=await runtimeFor(plan),left=new Float32Array(44100),right=new Float32Array(44100);
+    try {runtime.render(left,right);assert(left.every(Number.isFinite));assert(left.some(value=>Math.abs(value)>.001),`${id} audible`);}
+    finally{runtime.destroy();}
+  }
+});
 test('unpitched catalog instruments have explicit playable SoundFont key maps with no tom default',()=>{
   const bank=load('percussion'),kit=bank.presets.find(p=>p.isGMGSDrum&&p.bankMSB===0)!;
   for(const def of Object.values(INSTRUMENTS_BY_ID)) {
@@ -96,7 +189,7 @@ test('named percussion routes use their recorded VCSL tones and every take has p
     assert(route,`${alias} has a recorded tone route`);assert.deepEqual(patch,{bank:66,program:route.program,drum:false,pack:'percussion'});
   }
   assert.equal(bank.presets.filter(preset=>preset.bankMSB===66).length,24,'ship the jaw harp, custom body samples and dedicated VCSL percussion presets');
-  assert.equal(patchForInstrument('log-drum',true).program,20);
+  assert.equal(patchForInstrument('log-drum',true).program,25);
   assert.deepEqual([47,48,50].map(midi=>recordedPercussionKey('log-drum',midi,{low:47,mid:48,high:50},'open')),[47,47,50]);
 });
 test('tango bandoneon push and pull route through the dedicated recorded bank',()=>{
@@ -121,6 +214,8 @@ test('pack hashes, sizes and SF2 sample links match the distillation manifest',(
     assert.equal(createHash('sha256').update(data).digest('hex'),meta.sha256);
     assert.equal(gunzipSync(data).byteLength,meta.unpackedBytes);
     const bank=load(id as BankId);
+    const addresses=bank.presets.map(p=>`${p.bankMSB}:${p.bankLSB}:${p.program}:${p.isGMGSDrum}`);
+    assert.equal(new Set(addresses).size,addresses.length,`${id} preset addresses must be unique`);
     for(const p of bank.presets)for(const z of p.zones)for(const sample of z.instrument.zones){assert(sample.sample.getAudioData().length>0);assert(sample.sample.loopEnd<=sample.sample.getAudioData().length);}
   }
 });
@@ -159,6 +254,12 @@ test('Salamander covers the full keyboard with distinct recorded dynamics and st
 });
 test('finger and pick bass use distinct recordings while slap and fretless keep their own patches',()=>{
   const bank=load('bass');assert.equal(bank.presets.length,2);
+  for(let key=28;key<=55;key++) {
+    const finger=bank.presets[0].getVoiceParameters(key,90),pick=bank.presets[1].getVoiceParameters(key,90);
+    assert(finger.length&&pick.length,`bass key ${key} plays both sources`);
+    assert.notEqual(finger[0].sample.name,pick[0].sample.name,`bass key ${key} retains distinct recordings`);
+    assert.notDeepEqual(finger[0].sample.getAudioData(),pick[0].sample.getAudioData());
+  }
   assert.notEqual(bank.presets[0].getVoiceParameters(40,90)[0].sample.name,bank.presets[1].getVoiceParameters(40,90)[0].sample.name);
   const plan=compileSamplePlan(performanceFixture({notes:[noteFixture({gestureCode:codeForGesture('slap')})]}),
     {...options,trackInstruments:new Map([['keys','bass']])});
@@ -201,6 +302,20 @@ test('live bank preparation retains every requested shared patch and removes unu
         assert(error<=1/32768,'preparation only quantizes to SF2 PCM precision');
       }
     }
+  }
+});
+test('prepared percussion retains distinct instrument names, gestures and takes',async()=>{
+  const file=gunzipSync(readFileSync('src/assets/soundfonts/percussion.sfpack'));
+  const source=file.buffer.slice(file.byteOffset,file.byteOffset+file.byteLength),bank=SoundBankLoader.fromArrayBuffer(source);
+  const attacks=bank.presets.flatMap(p=>[...new Set(p.zones.flatMap(z=>z.instrument.zones.map(z=>z.keyRange.min)))].map(key=>({
+    patch:{bank:p.bankMSB,program:p.program,drum:p.isGMGSDrum,pack:'percussion' as const},key,velocity:90,
+  })));
+  const prepared=SoundBankLoader.fromArrayBuffer(await prepareBankForLive(source,attacks));
+  for(const attack of attacks) {
+    const before=bank.presets.find(p=>p.bankMSB===attack.patch.bank&&p.program===attack.patch.program&&p.isGMGSDrum===attack.patch.drum)!;
+    const after=prepared.presets.find(p=>p.bankMSB===attack.patch.bank&&p.program===attack.patch.program&&p.isGMGSDrum===attack.patch.drum)!;
+    const signature=(p:typeof before)=>p.getVoiceParameters(attack.key,attack.velocity).map(v=>[v.sample.name,v.generators[GeneratorTypes.overridingRootKey]]);
+    assert.deepEqual(signature(after),signature(before),`${before.name}: ${attack.key}`);
   }
 });
 test('cropped sample PCM keeps sample age, bends, controller history and releases exactly',async()=>{

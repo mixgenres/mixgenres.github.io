@@ -251,11 +251,25 @@
       "format": "sf3"
     },
     "electronic": {
-      "bytes": 786989,
-      "unpackedBytes": 1165188,
-      "sha256": "67782d022aa29de57698104daccd3b2c985a04ee04186dd758f6d12844721863",
-      "unpackedSha256": "f9d9c667ed44601c2ebd1ca2b5a3342e9db0be627344f2d7e4b9a6050cecdd0a",
+      "bytes": 953525,
+      "unpackedBytes": 1514822,
+      "sha256": "e9bc3554016f9aaf0db943d4c9dc0f00fa4af4e6b28cddb5c40ced6c9c03eca2",
+      "unpackedSha256": "9225b53c9ae4a170b04ff39c78aa2839adbf7b86e8db39a80c3653ebe5455c2f",
       "presets": [
+        "0:75:0",
+        "0:75:1",
+        "0:75:2",
+        "0:75:3",
+        "0:75:4",
+        "0:75:5",
+        "0:75:6",
+        "0:75:7",
+        "0:75:8",
+        "0:75:9",
+        "0:75:10",
+        "0:75:11",
+        "0:75:12",
+        "0:75:13",
         "0:66:24",
         "0:0:52",
         "0:0:53",
@@ -267,14 +281,14 @@
         "0:0:120",
         "0:0:121"
       ],
-      "samples": 95,
+      "samples": 133,
       "format": "sf3"
     },
     "percussion": {
-      "bytes": 2779157,
-      "unpackedBytes": 3620090,
-      "sha256": "bacedd5469ccaabc669cf61bc1476313f004d8361c27e155c97e3150b2478f06",
-      "unpackedSha256": "bbf859d4422d72d46ec91af03690b6ea2e6c97ba8cac7b24bd2cc6eccb1a3b94",
+      "bytes": 2861412,
+      "unpackedBytes": 3830250,
+      "sha256": "d0d5009ea8f1950b5fea213895e60eaabb8f6e205d975607543ded1550b21caf",
+      "unpackedSha256": "73d5c24feda0f5406e2b1dbb27552c99f748b2a58aa1cb1d9c929713254ef86d",
       "presets": [
         "0:66:0",
         "0:66:1",
@@ -296,14 +310,17 @@
         "0:66:17",
         "0:66:18",
         "0:66:19",
-        "0:66:20",
-        "0:66:21",
         "0:66:22",
-        "0:66:22",
+        "0:66:25",
+        "0:66:26",
+        "0:66:27",
         "0:0:47",
-        "DRUM:0"
+        "DRUM:0",
+        "DRUM:24",
+        "DRUM:25",
+        "DRUM:26"
       ],
-      "samples": 212,
+      "samples": 242,
       "format": "sf3"
     },
     "nylon": {
@@ -343,15 +360,15 @@
       "format": "sf3"
     },
     "bass": {
-      "bytes": 441698,
-      "unpackedBytes": 469158,
-      "sha256": "552f12c208a04df7a7f3aeae39a7d18fc46988966438c3df87e7b23a997e636e",
-      "unpackedSha256": "e6f3ccfe4cebf6e187c4c7fc140ab6bc250ca235767e0c0d6eec4bc191b2a538",
+      "bytes": 796684,
+      "unpackedBytes": 861260,
+      "sha256": "a19bbf0044a30c23b7a28c1fd964d3dd485a7580897fcf194b06d8cf3ccf50f8",
+      "unpackedSha256": "adb6310586bef275c71b5f28eb7f785c2f6e1b73dcd76f1a27516443c55df501",
       "presets": [
         "0:64:33",
         "0:64:34"
       ],
-      "samples": 13,
+      "samples": 25,
       "format": "sf3"
     },
     "drumkit": {
@@ -540,7 +557,7 @@
         "source": "VCSL CC0"
       },
       "log-drum": {
-        "program": 20,
+        "program": 25,
         "takes": 3,
         "source": "VCSL CC0"
       }
@@ -550,6 +567,44 @@
       "recordedSamples": 12,
       "presets": 2,
       "direction": "open/close use the same samples with a modest close-reed filter/attack offset"
+    },
+    "electronicKits": {
+      "source": "GeneralUser GS",
+      "bank": 0,
+      "drum": true,
+      "programs": {
+        "electronic-kit": 24,
+        "808-kit": 25,
+        "dance-kit": 26
+      },
+      "layout": "GM component keys"
+    },
+    "synthPatches": {
+      "source": "GeneralUser GS waveforms",
+      "bank": 75,
+      "programs": {
+        "sub-bass": 0,
+        "bass-lead": 1,
+        "polysynth": 2,
+        "saw-lead": 3,
+        "square-lead": 4,
+        "warm-pad": 5,
+        "halo-pad": 6,
+        "sweep-pad": 7,
+        "breathing-pad": 8,
+        "synth-strings": 9,
+        "synth-brass": 10,
+        "acid-sequencer": 11,
+        "ambient-drone": 12,
+        "noise-transition": 13
+      },
+      "parameters": "authored lowpass filter and volume envelope; shared waveform PCM, distinct instrument zones"
+    },
+    "electricBass": {
+      "source": "YR fingerstyle and picked recordings",
+      "sampleIdentity": "separate source names prevent cross-source deduplication",
+      "upperKey": 55,
+      "upperRange": "extend the highest source zone by transposing its recorded waveform; not additional recorded notes"
     },
     "uprightBass": {
       "recordedSource": "D. Smolken 1958 Otto Rubner double bass, CGDA fifths tuning",

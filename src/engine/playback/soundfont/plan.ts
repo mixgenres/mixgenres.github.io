@@ -4,9 +4,9 @@ import type { Mp3RenderOptions } from '../mp3Export';
 import { INSTRUMENTS_BY_ID } from '../../lookup/instruments';
 import { resolveTrackSound } from '../trackSound';
 import { resolveSampleGesture } from './gestures';
-import { patchForInstrument, NYLON_PATCH, STEEL_PATCH, SAMPLED_KIT_KEYS, type BankId, type SamplePatch } from './presets';
+import { patchForInstrument, electronicKitPatch, SYNTH_SAMPLE_PROGRAMS, NYLON_PATCH, STEEL_PATCH, SAMPLED_KIT_KEYS, type BankId, type SamplePatch } from './presets';
 import { SOUNDFONT_RELEASE_RESERVE } from './release';
-import { PERCUSSION_SAMPLE_KEYS, RECORDED_PERCUSSION_ALIASES, RECORDED_PERCUSSION_PATCHES, recordedPercussionKey } from './percussion';
+import { PERCUSSION_SAMPLE_KEYS, RECORDED_PERCUSSION_ALIASES, RECORDED_PERCUSSION_PATCHES, recordedPercussionKey, recordedPercussionTake } from './percussion';
 
 export { SOUNDFONT_RELEASE_RESERVE as SAMPLE_RELEASE_RESERVE } from './release';
 
@@ -49,7 +49,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
     const hasReleaseController = performance.ccs.some(cc => cc.trackId === id && cc.cc === 72);
     // Hi-hat exclusivity is channel-local in SF2. Reserve one hat channel so
     // a closed/pedal hit chokes an open hat even while its release is ringing.
-    const hatChannel = !!def.kit && instrumentId !== 'timpani' && notes.some(note=>[42,44,46].includes(Math.round(note.midi)));
+    const hatChannel = instrumentId==='sampler' || !!def.kit && instrumentId !== 'timpani' && notes.some(note=>[42,44,46].includes(Math.round(note.midi)));
     if(hatChannel)occupied.push(new Map());
     for (const note of notes) {
       if (!Number.isFinite(note.time + note.dur + note.vel + note.midi) || note.dur <= 0) throw new Error('Invalid sample note timing or velocity.');
@@ -84,9 +84,18 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       else if(instrumentId==='bass'&&/fretless/.test(sound.variantId??''))patch=patchForProgram(35,'guitars');
       else if(instrumentId==='bass'&&/pick/.test(sound.excitationType??''))patch={bank:64,program:34,drum:false,pack:'bass'};
       if(instrumentId==='organ'&&/pipe|church/.test(sound.variantId??''))patch=patchForProgram(19,'keys');
-      if (instrumentId==='synth'||instrumentId==='sampler'||instrumentId==='synth-bass') {
+      if (instrumentId==='sampler') {
+        // Sampler notes select from the packaged one-shot palette. Fold any
+        // authored MIDI pitch onto a real sample key so it stays playable in
+        // every role and genre, including scores authored outside drum range.
+        patch=electronicKitPatch(sound.variantId) ?? {bank:67,program:stableTake(note)%3,drum:false,pack:'drumkit'};
+        const palette=sound.samplePalette ?? SAMPLED_KIT_KEYS;
+        if (!palette.length || palette.some(key=>!Number.isInteger(key)||key<0||key>127)) throw new Error('Invalid sampler palette.');
+        key=palette[((Math.round(note.midi)-36)%palette.length+palette.length)%palette.length];
+      } else if (instrumentId==='synth'||instrumentId==='synth-bass') {
         const name=sound.synthPatchId??sound.synthPatch?.id??'';
-        if(/sub|bass|acid/.test(name))patch=patchForProgram(38,'guitars');
+        if(SYNTH_SAMPLE_PROGRAMS[name]!==undefined)patch={bank:75,program:SYNTH_SAMPLE_PROGRAMS[name],drum:false,pack:'electronic'};
+        else if(/sub|bass|acid/.test(name))patch=patchForProgram(38,'guitars');
         else if(/square/.test(name))patch=patchForProgram(80,'electronic');
         else if(/noise/.test(name))patch=patchForProgram(121,'electronic');
         else if(/halo/.test(name))patch=patchForProgram(89,'electronic');
@@ -96,7 +105,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       }
       // Compiled body contacts on pitched instruments must not turn back into
       // string/wind notes. Scraped contacts use a friction approximation.
-      if (instrumentId !== 'timpani' && !percussion && gesture.pitchIdentity === 'unpitched') {
+      if (instrumentId !== 'timpani' && instrumentId !== 'sampler' && !percussion && gesture.pitchIdentity === 'unpitched') {
         patch = /scrap|chicharra|friction/.test(action)
           ? {bank:0,program:0,drum:true,pack:'percussion'}
           : { bank: 66, program: 0, drum: false, pack: 'percussion' };
@@ -108,8 +117,8 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
         const canonical=RECORDED_PERCUSSION_ALIASES[instrumentId]??instrumentId;
         const recorded=RECORDED_PERCUSSION_PATCHES[canonical];
         if(recorded) {
-          patch={bank:66,program:recorded.program+stableTake(note)%recorded.takes,drum:false,pack:'percussion'};
           key=recordedPercussionKey(instrumentId,note.midi,def.drum,action);
+          patch={bank:66,program:recorded.program+recordedPercussionTake(instrumentId,key,stableTake(note)),drum:false,pack:'percussion'};
         } else key=percussionKey(instrumentId, note.midi, def.drum, action);
       }
       if(instrumentId==='palmas') {patch={bank:66,program:1,drum:false,pack:'percussion'};key=38+stableTake(note)%3;}
@@ -117,7 +126,9 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       if(def.kit && instrumentId !== 'timpani') {
         if(key===42&&action==='open')key=46;
         if(key===38&&/rimshot/.test(action))key=40;
-        if((SAMPLED_KIT_KEYS as readonly number[]).includes(key))patch={bank:/choke/.test(action)?68:67,program:stableTake(note)%3,drum:false,pack:'drumkit'};
+        const electronic=electronicKitPatch(sound.variantId);
+        if(electronic)patch=electronic;
+        else if((SAMPLED_KIT_KEYS as readonly number[]).includes(key))patch={bank:/choke/.test(action)?68:67,program:stableTake(note)%3,drum:false,pack:'drumkit'};
       }
       banks.add(patch.pack);
       const hat = hatChannel && [42,44,46].includes(key);

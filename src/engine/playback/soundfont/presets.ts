@@ -1,4 +1,6 @@
 import { PERCUSSION_KIT_IDS, PERCUSSION_SAMPLE_KEYS, RECORDED_PERCUSSION_ALIASES, RECORDED_PERCUSSION_PATCHES } from './percussion';
+import { ELECTRONIC_KIT_PROGRAMS } from '../../../data/sound/playback/electronicKits';
+import { SAMPLED_SYNTH_PATCHES } from '../../../data/sound/playback/sampledSynthPatches';
 
 /** Zero-based General MIDI programs. World instruments with no sampled match
  * use an explicit family approximation, exposed in the bank coverage report. */
@@ -24,6 +26,11 @@ export const BANK_PROGRAMS = {
 } as const;
 export type BankId = keyof typeof BANK_PROGRAMS;
 export interface SamplePatch { bank: number; program: number; drum: boolean; pack: BankId }
+export function electronicKitPatch(variantId?: string): SamplePatch | undefined {
+  const program = variantId ? ELECTRONIC_KIT_PROGRAMS[variantId] : undefined;
+  return program === undefined ? undefined : { bank: 0, program, drum: true, pack: 'percussion' };
+}
+export const SYNTH_SAMPLE_PROGRAMS: Readonly<Record<string, number>> = Object.fromEntries(Object.entries(SAMPLED_SYNTH_PATCHES).map(([id,patch])=>[id,patch.program]));
 const ids: Record<string, number> = {};
 function assign(program: number, instruments: string) { for (const id of instruments.split(' ')) ids[id] = program; }
 assign(0, 'piano'); assign(4, 'rhodes'); assign(5, 'fm-ep'); assign(6, 'harpsichord'); assign(7, 'clavinet');
@@ -49,6 +56,7 @@ assign(107, 'koto gayageum guqin pipa guzheng'); assign(108, 'kalimba berimbau')
 export const INSTRUMENT_PROGRAMS: Readonly<Record<string, number>> = ids;
 
 export function patchForInstrument(id: string, percussion = false): SamplePatch {
+  if (id === 'synth' || id === 'synth-bass') return {bank:75,program:id==='synth-bass'?0:3,drum:false,pack:'electronic'};
   if (id === 'piano') return {bank:64,program:0,drum:false,pack:'piano'};
   if (id === 'bass') return {bank:64,program:33,drum:false,pack:'bass'};
   if (id === 'bandoneon') return {bank:73,program:0,drum:false,pack:'bandoneon'};
@@ -56,7 +64,9 @@ export function patchForInstrument(id: string, percussion = false): SamplePatch 
   if (id === 'khomus') return {bank:66,program:22,drum:false,pack:'percussion'};
   if (id === 'balafon') return {bank:66,program:23,drum:false,pack:'mallets'};
   if (id === 'gamelan-metallophone' || id === 'bonang') return {bank:0,program:14,drum:false,pack:'mallets'};
-  if (id === 'sampler') return {bank:0,program:81,drum:false,pack:'electronic'};
+  // Sampler is a playable multisample palette, not the generic synth patch.
+  // Notes select individual recorded kit hits in the pitched MIDI range.
+  if (id === 'sampler') return {bank:67,program:0,drum:false,pack:'drumkit'};
   if (id === 'turntable') return {bank:66,program:24,drum:false,pack:'electronic'};
   // MuseScore General's dedicated chromatic timpani patch is sampled as a
   // pitched instrument; don't route this orchestral instrument through a kit.

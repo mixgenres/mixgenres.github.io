@@ -30,8 +30,15 @@ export const RECORDED_PERCUSSION_PATCHES: Readonly<Record<string,{program:number
   congas:{program:2,takes:2}, bongos:{program:4,takes:2}, darbuka:{program:6,takes:2},
   'frame-drum':{program:8,takes:2}, guiro:{program:10,takes:2}, claves:{program:12,takes:1},
   agogo:{program:13,takes:1}, cowbell:{program:14,takes:1}, shaker:{program:15,takes:2},
-  tambourine:{program:17,takes:2}, gongs:{program:19,takes:1}, 'log-drum':{program:20,takes:3},
+  tambourine:{program:17,takes:2}, gongs:{program:19,takes:1}, 'log-drum':{program:25,takes:3},
 };
+/** Only the recorded takes of a gesture are eligible; these source gestures
+ * have one recording even though other gestures of the instrument have two. */
+export function recordedPercussionTake(id:string,key:number,take:number):number {
+  const instrument=RECORDED_PERCUSSION_ALIASES[id]??id;
+  if(instrument==='frame-drum'&&key===35 || instrument==='guiro'&&[35,37,38].includes(key))return 0;
+  return take%RECORDED_PERCUSSION_PATCHES[instrument].takes;
+}
 export const RECORDED_PERCUSSION_KEYS = new Set([
   'congas','bongos','darbuka','frame-drum','guiro','claves','agogo','cowbell','shaker','tambourine','gongs','log-drum',
 ]);

@@ -16,6 +16,7 @@ export interface TrackSound {
   excitationType?: string;
   synthPatchId?: string;
   synthPatch?: SynthPatch;
+  samplePalette?: number[];
 }
 
 /** Resolve one part's sample and mixer choices from instrument/style metadata. */
@@ -41,6 +42,7 @@ export function resolveTrackSound(instrumentId: string, worldId = '', styleId = 
     excitationType: dialect?.excitationType ?? variant?.excitationType ?? physical?.excitationType ?? def.excitationType,
     synthPatchId: dialect?.patchId,
     synthPatch: def.patches?.find(item => item.id === dialect?.patchId),
+    samplePalette: dialect?.samplePalette,
   };
 }
 

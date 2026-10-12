@@ -27,6 +27,7 @@ export function mergeMixOverrides<T extends object>(base: T, patch?: MixOverride
 }
 
 const numericKeys = new Set(['dryness', 'bassForward', 'width', 'brightness', 'compressionRatio', 'subHarmonics',
+  'compressionAttackSeconds', 'compressionReleaseSeconds', 'drumSaturation', 'drumParallelCompression', 'subEnhancement',
   'transientSnap', 'sidechainDucking', 'delaySend', 'delayTimeSeconds', 'delayFeedback', 'delayToneHz',
   'depthRange', 'foregroundContrastDb', 'maxTrackBoostDb', 'maxTrackCutDb', 'ensembleBreathing', 'crescendoExpansion',
   'silenceContrast', 'peakSectionHeadroomDb', 'busCompressionAmount', 'busCompressionRatio', 'densityCompensation',
@@ -61,6 +62,8 @@ function safeValue(path: string, value: unknown): unknown {
   if (key === 'preDelayMs') max = 200;
   if (/Ratio$/.test(key)) { min = 1; max = 8; }
   if (key === 'delayTimeSeconds') { min = .04; max = 1.5; }
+  if (key === 'compressionAttackSeconds') { min = .003; max = .1; }
+  if (key === 'compressionReleaseSeconds') { min = .04; max = .8; }
   if (key === 'delayToneHz') { min = 500; max = 12000; }
   if (key === 'delayFeedback') max = .82;
   if (path.includes('.rolePan.')) min = -1;

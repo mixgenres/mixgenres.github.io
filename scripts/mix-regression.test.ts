@@ -2,7 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { ALL_STYLES } from '../src/engine/style';
 import { createMasterChain } from '../src/engine/studio/mixer';
-import { resolvePlaybackMix } from '../src/engine/studio/masterSettings';
+import { resolvePlaybackMix, resolveMasterSettings } from '../src/engine/studio/masterSettings';
+import { resolveStyle } from '../src/engine/style';
+import { GENRE_WORLDS } from '../src/data/genres';
+import { GENRE_PRODUCTION, STYLE_PRODUCTION } from '../src/data/genres/_shared/production';
 import { measureAudio } from '../src/engine/studio/audioMetrics';
 import { excerptPerformance } from './lib/audioExcerpt';
 import type { Performance } from '../src/engine/band/performanceData';
@@ -47,18 +50,62 @@ test('fresh and updated master graphs match for every catalog style, including t
   chain.dispose(); assert.ok(live.nodes.every(n => n.disconnected));
 });
 
-test('ducking controls supply unity at rest without an additive bass boost; enhancement follows ducking', () => {
+test('reggaeton production profiles retain mono bass and independent transient controls', () => {
+  const profiles = ALL_STYLES.filter(style => style.primaryGenre === 'reggaeton').map(style => {
+    const mix = resolveStyle({genreId:'reggaeton',styleId:style.id}).resolvedMix.contract;
+    assert.equal(mix.roles.bass.width,0,style.id);assert.equal(mix.stage.roleWidth.bass,0,style.id);
+    const settings=resolveMasterSettings(mix.character,style.id);
+    assert.equal(settings.subEnhancement,0,style.id);
+    assert.equal(settings.glue.attack,mix.character.compressionAttackSeconds);
+    assert.equal(settings.glue.release,mix.character.compressionReleaseSeconds);
+    assert.equal(settings.drumKnock,mix.character.drumSaturation);
+    assert.equal(settings.drumParallelCompression,mix.character.drumParallelCompression);
+    assert.equal(resolveMasterSettings({...mix.character,bassForward:0}).drumKnock,settings.drumKnock);
+    const graph=context(),chain=createMasterChain(graph.ctx,mix.character,style.id);
+    assert.equal(chain.dynamicParameters.glueAttack.value,settings.glue.attack);
+    assert.equal(chain.dynamicParameters.drumParallel.value,settings.drumParallelCompression);
+    assert.equal(chain.dynamicParameters.subEnhancement.value,0);chain.dispose();
+    return JSON.stringify(settings);
+  });
+  assert.equal(new Set(profiles).size,6,'each style has a distinct production profile');
+});
+
+test('ducking preserves full dry tone at rest and subtracts only the detected low band', () => {
   const graph = context(); const chain = createMasterChain(graph.ctx);
-  const control = graph.nodes.find(n => n.kind === 'shaper' && n.curve?.[512] === 1)!;
+  const control = graph.nodes.find(n => n.kind === 'shaper' && n.curve?.[512] === 0 && n.curve?.[1024] === -1)!;
   assert.ok(control);
-  const targets = control.connections.filter(n => n instanceof Param) as Param[];
+  const depth = control.connections[0] as Node;
+  assert.equal(depth.gain,chain.dynamicParameters.duckDepth);
+  const targets = depth.connections.filter(n => n instanceof Param) as Param[];
   assert.equal(targets.length, 2);
-  for (const target of targets) assert.equal(target.value + control.curve![512], 1);
+  assert.equal(targets[0].value,0);assert.equal(targets[1].value,1);
+  assert.equal(control.curve![0],0,'no attenuation for negative detector noise');
+  assert.ok((chain.instBus as unknown as Node).connections.some(n=>n instanceof Node&&n.kind==='gain'),'full dry instrument route survives');
   const subDuck = graph.nodes.find(n => n.gain === targets[1])!;
   const subBus = chain.subBus as unknown as Node;
   assert.ok(subBus.connections.includes(subDuck));
   assert.equal(subBus.connections.length, 1, 'sub signal must not bypass ducking');
   chain.dispose();
+});
+
+test('all worlds and styles have explicit production controls and style targets resolve',()=>{
+  assert.equal(GENRE_WORLDS.length,55);
+  for(const world of GENRE_WORLDS)assert(GENRE_PRODUCTION[world.id],world.id);
+  for(const id of Object.keys(STYLE_PRODUCTION))assert(ALL_STYLES.some(style=>style.id===id),id);
+  for(const style of ALL_STYLES) {
+    const mix=resolveStyle({genreId:style.primaryGenre,styleId:style.id}).resolvedMix.contract;
+    for(const key of ['compressionAttackSeconds','compressionReleaseSeconds','drumSaturation','drumParallelCompression','subEnhancement'] as const)
+      assert(Number.isFinite(mix.character[key]),`${style.id}: ${key}`);
+    assert.equal(mix.character.subEnhancement,0,style.id);
+    assert.equal(resolveMasterSettings(mix.character,style.id).glue.ratio,mix.character.compressionRatio,`${style.id}: authored compression wins`);
+  }
+  for(const saturationType of ['tube','tape','hard-clip'] as const) {
+    const graph=context(),mix=resolvePlaybackMix('jazz','jazz-cool');
+    const chain=createMasterChain(graph.ctx,{...mix.mixCharacter!,drumSaturation:0,saturationType});
+    assert.equal(chain.dynamicParameters.drumDry.value,1,'zero saturation preserves the full dry signal');
+    assert.equal(chain.dynamicParameters.drumWet.value,0,'zero saturation bypasses waveshaper clipping');
+    chain.dispose();
+  }
 });
 
 test('all saturation modes preserve exact silence', () => {

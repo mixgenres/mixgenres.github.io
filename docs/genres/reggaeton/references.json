@@ -1,0 +1,277 @@
+{
+  "reviewed": "2026-10-08",
+  "status": "Catalog identities and streaming links researched; audio comparison and timecodes pending. These are comparison seeds, not evidence of mix matching.",
+  "source": "Apple Music track pages and public Apple catalog search metadata. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "reggaeton-classic",
+      "compare": [
+        "kick/snare separation",
+        "short synth replies",
+        "lead versus beat level"
+      ],
+      "recordings": [
+        {
+          "title": "Gasolina",
+          "artist": "Daddy Yankee",
+          "url": "https://music.apple.com/us/song/1786000124",
+          "timecodes": []
+        },
+        {
+          "title": "Lo Que Pasó, Pasó",
+          "artist": "Daddy Yankee",
+          "url": "https://music.apple.com/us/song/1786000220",
+          "timecodes": []
+        },
+        {
+          "title": "Yo Voy (feat. Daddy Yankee)",
+          "artist": "Zion & Lennox",
+          "url": "https://music.apple.com/us/song/862710010",
+          "timecodes": []
+        },
+        {
+          "title": "Rakata",
+          "artist": "Wisin & Yandel",
+          "url": "https://music.apple.com/us/song/1467933609",
+          "timecodes": []
+        },
+        {
+          "title": "Quiero Bailar",
+          "artist": "Ivy Queen",
+          "url": "https://music.apple.com/us/song/1293625635",
+          "timecodes": []
+        },
+        {
+          "title": "Pa’ Que Retozen",
+          "artist": "Tego Calderón",
+          "url": "https://music.apple.com/us/song/535880843",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "reggaeton-playero-underground",
+      "compare": [
+        "dry machine drums",
+        "sample reply length",
+        "narrow stage"
+      ],
+      "recordings": [
+        {
+          "title": "Funeral",
+          "artist": "Daddy Yankee & Mexicano",
+          "url": "https://music.apple.com/us/song/1616242028",
+          "timecodes": []
+        },
+        {
+          "title": "Yo Nunca Me Quedo Atrás",
+          "artist": "Daddy Yankee & Mexicano",
+          "url": "https://music.apple.com/us/song/1616242033",
+          "timecodes": []
+        },
+        {
+          "title": "Quién Eres Tú",
+          "artist": "Rey Pirin & Don Chezina",
+          "url": "https://music.apple.com/us/song/1616242034",
+          "timecodes": []
+        },
+        {
+          "title": "No Te Canses",
+          "artist": "Daddy Yankee & Playero",
+          "url": "https://music.apple.com/us/song/1618046847",
+          "timecodes": []
+        },
+        {
+          "title": "Donde Mí No Vengas",
+          "artist": "Daddy Yankee & Playero",
+          "url": "https://music.apple.com/us/song/1618046851",
+          "timecodes": []
+        },
+        {
+          "title": "Pasando el Tiempo",
+          "artist": "Don Chezina & Playero",
+          "url": "https://music.apple.com/us/song/1618046849",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "reggaeton-melodic",
+      "compare": [
+        "lead space",
+        "chord attack versus release",
+        "echo versus dry percussion"
+      ],
+      "recordings": [
+        {
+          "title": "Tattoo (Remix with Camilo)",
+          "artist": "Rauw Alejandro & Camilo",
+          "url": "https://music.apple.com/us/song/1520712876",
+          "timecodes": []
+        },
+        {
+          "title": "Fantasías",
+          "artist": "Rauw Alejandro & Farruko",
+          "url": "https://music.apple.com/us/song/1476338343",
+          "timecodes": []
+        },
+        {
+          "title": "Enchule",
+          "artist": "Rauw Alejandro",
+          "url": "https://music.apple.com/us/song/1536862161",
+          "timecodes": []
+        },
+        {
+          "title": "Algo Mágico",
+          "artist": "Rauw Alejandro",
+          "url": "https://music.apple.com/us/song/1536862273",
+          "timecodes": []
+        },
+        {
+          "title": "El Efecto",
+          "artist": "Rauw Alejandro & Chencho Corleone",
+          "url": "https://music.apple.com/us/song/1455400735",
+          "timecodes": []
+        },
+        {
+          "title": "BESO",
+          "artist": "ROSALÍA & Rauw Alejandro",
+          "url": "https://music.apple.com/us/song/1676343411",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "reggaeton-neoperreo",
+      "compare": [
+        "distortion versus transient definition",
+        "sparse bass pocket",
+        "abrupt texture changes"
+      ],
+      "recordings": [
+        {
+          "title": "Perra del Futuro",
+          "artist": "Tomasa del Real",
+          "url": "https://music.apple.com/us/song/1387146165",
+          "timecodes": []
+        },
+        {
+          "title": "Bellaca del Año",
+          "artist": "Tomasa del Real",
+          "url": "https://music.apple.com/us/song/1387146168",
+          "timecodes": []
+        },
+        {
+          "title": "Barre con el Pelo (feat. Dj Blass)",
+          "artist": "Tomasa del Real",
+          "url": "https://music.apple.com/us/song/1387146161",
+          "timecodes": []
+        },
+        {
+          "title": "Tamos Redy (feat. Chico Sonido)",
+          "artist": "Tomasa del Real",
+          "url": "https://music.apple.com/us/song/1096503841",
+          "timecodes": []
+        },
+        {
+          "title": "Tu Señora (feat. Talisto)",
+          "artist": "Tomasa del Real",
+          "url": "https://music.apple.com/us/song/1096503838",
+          "timecodes": []
+        },
+        {
+          "title": "La Vampira",
+          "artist": "Tomasa del Real",
+          "url": "https://music.apple.com/us/song/1096503837",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "reggaeton-latin-trap-crossover",
+      "compare": [
+        "half-time backbeat",
+        "bass sustain and glide",
+        "hat brightness versus lead"
+      ],
+      "recordings": [
+        {
+          "title": "Soy Peor",
+          "artist": "Bad Bunny",
+          "url": "https://music.apple.com/us/song/1470492107",
+          "timecodes": []
+        },
+        {
+          "title": "Chambea",
+          "artist": "Bad Bunny",
+          "url": "https://music.apple.com/us/song/1470498412",
+          "timecodes": []
+        },
+        {
+          "title": "Diles",
+          "artist": "Bad Bunny, Ozuna & Farruko",
+          "url": "https://music.apple.com/us/song/1470490146",
+          "timecodes": []
+        },
+        {
+          "title": "Solita (feat. Bad Bunny, Wisin & Almighty)",
+          "artist": "Ozuna, Mambo Kingz & DJ Luian",
+          "url": "https://music.apple.com/us/song/1336752455",
+          "timecodes": []
+        },
+        {
+          "title": "Me Mata (feat. Arcángel, Almighty, Bryant Myers, Noriel, Baby Rasta & Brytiago)",
+          "artist": "Bad Bunny, Mambo Kingz & DJ Luian",
+          "url": "https://music.apple.com/us/song/1225663087",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "reggaeton-experimental",
+      "compare": [
+        "dembow fragment spacing",
+        "low-anchor stability",
+        "contrast between texture and percussion"
+      ],
+      "recordings": [
+        {
+          "title": "Rakata",
+          "artist": "Arca",
+          "url": "https://music.apple.com/us/song/1585538720",
+          "timecodes": []
+        },
+        {
+          "title": "KLK (feat. ROSALÍA)",
+          "artist": "Arca",
+          "url": "https://music.apple.com/us/song/1511122591",
+          "timecodes": []
+        },
+        {
+          "title": "Prada",
+          "artist": "Arca",
+          "url": "https://music.apple.com/us/song/1585538716",
+          "timecodes": []
+        },
+        {
+          "title": "Tiro",
+          "artist": "Arca",
+          "url": "https://music.apple.com/us/song/1585538721",
+          "timecodes": []
+        },
+        {
+          "title": "Riquiquí",
+          "artist": "Arca",
+          "url": "https://music.apple.com/us/song/1511122568",
+          "timecodes": []
+        },
+        {
+          "title": "Mequetrefe",
+          "artist": "Arca",
+          "url": "https://music.apple.com/us/song/1511122264",
+          "timecodes": []
+        }
+      ]
+    }
+  ]
+}

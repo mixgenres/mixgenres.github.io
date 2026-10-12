@@ -1,6 +1,6 @@
 # Distilled SoundFont assets
 
-These are selectively rebuilt SF2 banks compressed with gzip. The `.sfpack` extension prevents static servers from treating the file as HTTP Content-Encoding and silently decoding it twice. The loader also accepts transparently decoded SF2. SoundFont sample loops, velocity/key zones, generators, modulators and stereo links survive repackaging; there is no lossy audio codec.
+These are selectively rebuilt SF3 banks with Ogg Vorbis samples, then compressed with gzip. The `.sfpack` extension prevents static servers from treating the file as HTTP Content-Encoding and silently decoding it twice. The loader also accepts transparently decoded banks. SoundFont sample loops, velocity/key zones, generators, modulators and stereo links survive repackaging; waveform compression uses Ogg Vorbis at quality 6.
 
 | Pack | Compressed MiB | Presets | Samples |
 | --- | ---: | ---: | ---: |
@@ -10,25 +10,27 @@ These are selectively rebuilt SF2 banks compressed with gzip. The `.sfpack` exte
 | strings | 0.93 | 6 | 80 |
 | winds | 0.67 | 17 | 121 |
 | brass | 0.34 | 6 | 49 |
-| electronic | 0.75 | 10 | 95 |
-| percussion | 2.65 | 26 | 212 |
+| electronic | 0.91 | 24 | 133 |
+| percussion | 2.73 | 29 | 242 |
 | nylon | 2.52 | 3 | 24 |
 | steel | 2.44 | 2 | 59 |
 | piano | 18.07 | 1 | 240 |
-| bass | 0.42 | 2 | 13 |
+| bass | 0.76 | 2 | 25 |
 | drumkit | 13.67 | 6 | 310 |
 | electricClean | 12.36 | 6 | 182 |
 | electricDrive | 18.20 | 6 | 182 |
 | bandoneon | 0.35 | 2 | 12 |
 | upright | 7.78 | 6 | 272 |
 
-Total: **82.3 MiB, 133 presets and 2,138 samples** across 17 on-demand banks, 49.3 MiB smaller than the previous set. The packaging list now omits 18 unused GM programs while retaining every direct instrument route and technique patch. All banks use SF3/Ogg Vorbis at quality 6. The piano preserves four recorded dynamics and stereo microphone pairs; the drum kit and electric guitars retain their recorded takes and velocity layers.
+Total: **82.9 MiB, 150 presets and 2,218 samples** across 17 on-demand banks, 48.7 MiB smaller than the previous set. The packaging list now omits 18 unused GM programs while retaining every direct instrument route and technique patch. All banks use SF3/Ogg Vorbis at quality 6. The piano preserves four recorded dynamics and stereo microphone pairs; the drum kit and electric guitars retain their recorded takes and velocity layers.
 
 Tango routes to the dedicated Jörg Bleymehl bandoneon. Bank 73 is bellows-open and bank 74 bellows-close; both use the same twelve recorded notes, with a modest close-direction filter/attack change. This does not claim separate recorded bellows-direction samples. Orchestral timpani use the chromatic Timpani preset from MuseScore General, rather than a drum-kit key. VCSL recordings give congas, bongos, darbuka, frame drum, guiro-family scrapers, claves, agogo, cowbell, shaker, tambourine, gong, and slit log drum distinct recorded presets and round robins where the source has them. The curated sample list and individual hashes are kept in `scripts/lib/percussion-sources.json`.
 
 Khomus uses its own bank 66/program 22 patch from the FreePats jaw harp recordings, rather than the kalimba preset. The notes trigger the recorded tongue timbre across its playable range; pitch transposition is a teaching approximation because a jaw harp player's mouth changes the overtone series continuously while the sample set captures a finite set of gestures.
 
 Balafon uses a VCSL traditional-mallet patch at bank 66/program 23 with six recorded roots and three velocity layers. Turntable uses the CC0 BigSoundBank “Vinyl Scratch #6” one-shot at bank 66/program 24. Its note pitch controls playback speed; the single sample does not represent a full scratch articulation library.
+
+Reggaeton selects the GeneralUser Electronic, 808/909, or Dance kits by authored instrument variant, preserving GM component keys. All fourteen synth patches use distinct bank 75 presets with authored volume envelopes and SF2 lowpass treatments. GeneralUser waveforms supply the sources; highpass, bandpass, and ladder filter identities remain approximations. Their GeneralUser waveform samples remain shared, while instrument zones have unique names so packaging cannot collapse the different envelopes. These are sample treatments, not claims of original hardware capture or full synthesis of every patch parameter. Recorded percussion presets use compact unique names for compatibility with readers that omit extended-name metadata. The bundled library preserves extended names. The three log-drum takes occupy bank 66/programs 25–27, separate from the jaw harp at program 22. Gestures with one recorded take always select that recording.
 
 Sources:
 
@@ -38,7 +40,7 @@ Sources:
 - [FreePats FSS steel-string guitar](https://freepats.zenvoid.org/Guitar/steel-acoustic-guitar.html), Gary Campion / FlameStudios, assembled by Roberto, small SF2 release 2020-05-21. GPL-3 with the upstream composition exception retained.
 - [Salamander Grand Piano](https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html), FreePats, version 3+, 240 retained stereo samples from the four selected recorded dynamics.
 - [MuldjordKit](https://github.com/freepats/muldjordkit), FreePats, 2020-10-18. Three recorded takes and six velocity layers are repacked into a GM drum layout.
-- [YR electric bass](https://github.com/freepats/electric-bass-YR), FreePats, 2019-09-30. Fingerstyle and picked recordings remain separate presets.
+- [YR electric bass](https://github.com/freepats/electric-bass-YR), FreePats, 2019-09-30. Fingerstyle and picked recordings remain separate presets with source-specific sample names; equal note names cannot merge their different recordings. The top sample zones extend to MIDI 55 by transposing the highest recorded root, rather than adding new recordings.
 - [FSBS clean and driven electric guitars](https://github.com/freepats), FreePats, pinned 2026-08-07 and 2022-09-11 recordings. Three takes and two recorded dynamics are retained; upper notes without soft recordings use the source hard sample.
 - [Jörg Bleymehl bandoneon v2](https://github.com/jebentancour/Bandonberry/blob/master/bandoneon_v2.sf2), recorded on a 1930 ELA bandoneon. The source notice allows private and commercial music use.
 - [FreePats Jaw Harp](https://freepats.zenvoid.org/Ethnic/jaw-harp.html), version 2020-06-06, CC0. Its FreePats note identifies the Nivkh performers and recording conditions.
@@ -69,5 +71,7 @@ npm run soundfonts:package -- \
   /path/JawHarp-20200606.sf2 \
   /path/Vinyl-Scratch-6.wav
 ```
+
+Append `--packs=percussion,electronic` to rebuild only those packs while retaining other shipped banks and release metadata. The same eight source paths remain required.
 
 Changing the selection in `soundfont/presets.ts` requires repackaging and running `npm run test:soundfont`. The bank source hashes and exact `spessasynth_core` dependency are pinned. SF2 metadata is retained, including source creation dates, so rebuilding the same inputs produces the same bank payloads.

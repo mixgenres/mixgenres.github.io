@@ -10,6 +10,12 @@ export const drums: InstrumentDef = {
     high: 42
   },
   kit: true,
+  variants: [
+    { id: 'acoustic-kit', name: 'Acoustic Kit' },
+    { id: 'electronic-kit', name: 'Electronic Kit' },
+    { id: '808-kit', name: '808 / 909 Kit' },
+    { id: 'dance-kit', name: 'Dance Kit' },
+  ],
   voicing: "unpitched",
   bodyConstruction: "wood-box",
   excitationType: "stick",

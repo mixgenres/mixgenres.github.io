@@ -879,7 +879,7 @@
     },
     {
       "instrument": "log-drum",
-      "program": 20,
+      "program": 25,
       "take": 0,
       "key": 47,
       "minVelocity": 1,
@@ -891,7 +891,7 @@
     },
     {
       "instrument": "log-drum",
-      "program": 20,
+      "program": 25,
       "take": 0,
       "key": 50,
       "minVelocity": 1,
@@ -903,7 +903,7 @@
     },
     {
       "instrument": "log-drum",
-      "program": 21,
+      "program": 26,
       "take": 1,
       "key": 47,
       "minVelocity": 1,
@@ -915,7 +915,7 @@
     },
     {
       "instrument": "log-drum",
-      "program": 21,
+      "program": 26,
       "take": 1,
       "key": 50,
       "minVelocity": 1,
@@ -927,7 +927,7 @@
     },
     {
       "instrument": "log-drum",
-      "program": 22,
+      "program": 27,
       "take": 2,
       "key": 47,
       "minVelocity": 1,
@@ -939,7 +939,7 @@
     },
     {
       "instrument": "log-drum",
-      "program": 22,
+      "program": 27,
       "take": 2,
       "key": 50,
       "minVelocity": 1,

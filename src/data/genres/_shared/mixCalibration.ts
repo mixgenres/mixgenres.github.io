@@ -23,10 +23,10 @@ export function applyMixCalibration(pack: GenrePackInput, calibration: MixCalibr
     const widthScale = width / authoredWidth;
     const scaleWidths = (values?: Record<string, number | undefined>) => values && Object.fromEntries(
       Object.entries(values).filter((entry): entry is [string, number] => typeof entry[1] === 'number')
-        .map(([role, value]) => [role, clamp(value * widthScale, 0.04, 0.95)]),
+        .map(([role, value]) => [role, value === 0 ? 0 : clamp(value * widthScale, 0.04, 0.95)]),
     );
     const roles = style.mix.roles && Object.fromEntries(Object.entries(style.mix.roles).map(([role, policy]) => [role, {
-      ...(policy ?? {}), ...(policy?.width !== undefined ? { width: clamp(policy.width * widthScale, 0.04, 0.95) } : {}),
+      ...(policy ?? {}), ...(policy?.width !== undefined ? { width: policy.width === 0 ? 0 : clamp(policy.width * widthScale, 0.04, 0.95) } : {}),
     }]));
     const sections = style.mix.sections && Object.fromEntries(Object.entries(style.mix.sections).map(([section, policy]) => [section, {
       ...(policy ?? {}), ...(policy?.width !== undefined ? { width: clamp(policy.width * widthScale, 0.04, 0.95) } : {}),

@@ -67,7 +67,8 @@ export interface MasterChain {
   dynamicParameters: {
     low: AudioParam; presence: AudioParam; air: AudioParam; width: AudioParam; roomReturn: AudioParam;
     fallbackAmbience: AudioParam; delayTime: AudioParam; delayFeedback: AudioParam; delayTone: AudioParam;
-    glueThreshold: AudioParam; glueRatio: AudioParam;
+    glueThreshold: AudioParam; glueRatio: AudioParam; glueAttack: AudioParam; glueRelease: AudioParam; drumParallel: AudioParam; subEnhancement: AudioParam; duckDepth: AudioParam;
+    drumDry: AudioParam; drumWet: AudioParam;
   };
   setFallbackSendsEnabled(enabled: boolean): void;
   tap: GainNode;
@@ -85,6 +86,7 @@ function saturationCurve(drive: number, type: 'tape' | 'tube' | 'hard-clip' = 't
 
   for (let i = 0; i < n; i++) {
     const x = (i * 2) / (n - 1) - 1;
+    if (amount === 0) { curve[i] = x; continue; }
     if (type === 'hard-clip') {
       const thresh = 1.0 - amount * 0.4;
       curve[i] = Math.max(-thresh, Math.min(thresh, x * (1 + amount * 1.5)));
@@ -123,8 +125,12 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   const drumShaper = ctx.createWaveShaper();
   const initialKnock = settings.drumKnock;
   const initialSatType = settings.saturationType;
-  drumShaper.curve = saturationCurve(initialKnock, initialSatType);
+  drumShaper.curve = saturationCurve(1, initialSatType);
   drumShaper.oversample = '2x';
+  // A real dry path preserves transients above +/-1 when saturation is zero.
+  // WaveShaper identity curves still clamp inputs outside their table range.
+  const drumDry = ctx.createGain(), drumWet = ctx.createGain();
+  drumDry.gain.value = 1 - initialKnock; drumWet.gain.value = initialKnock;
 
   // 2b. Studio-style parallel drum bus compression. Real acoustic kits are
   // commonly captured through close mics + room mics and then glued on a drum
@@ -137,7 +143,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   drumParallelComp.attack.value = 0.025;
   drumParallelComp.release.value = 0.16;
   const drumParallelWet = ctx.createGain();
-  drumParallelWet.gain.value = 0.18;
+  drumParallelWet.gain.value = settings.drumParallelCompression;
   drumBus.connect(drumParallelComp);
   drumParallelComp.connect(drumParallelWet);
 
@@ -150,7 +156,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   subFilter.Q.value = 0.7;
 
   const subEnhanceGain = ctx.createGain();
-  subEnhanceGain.gain.value = MASTER_MIX_DEFAULTS.subEnhancement;
+  subEnhanceGain.gain.value = settings.subEnhancement;
 
   // 4. Real kick -> low-end ducking.  Web Audio has no sidechain input on
   // DynamicsCompressorNode, so build a small audio-rate envelope detector:
@@ -177,47 +183,41 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   kickEnvelope.Q.value = 0.5;
 
   const kickDuckCurve = ctx.createWaveShaper();
-  const duckDepth = settings.duckDepth;
   const duckCurve = new Float32Array(1025);
   for (let i = 0; i < duckCurve.length; i++) {
     const x = (i / (duckCurve.length - 1)) * 2 - 1;
     const level = Math.max(0, Math.min(1, x));
-    // Never duck below 55% of the low-end signal.  The curve is deliberately
-    // gentle for acoustic tango, stronger for electrotango/electronic styles.
-    duckCurve[i] = 1 - duckDepth * level;
+    duckCurve[i] = level===0?0:-level;
   }
   kickDuckCurve.curve = duckCurve;
   kickDuckCurve.oversample = '2x';
+  const kickDuckDepth = ctx.createGain();
+  kickDuckDepth.gain.value = settings.duckDepth;
+  kickDuckCurve.connect(kickDuckDepth);
 
   drumBus.connect(kickFilter);
   kickFilter.connect(kickAbs);
   kickAbs.connect(kickEnvelope);
   kickEnvelope.connect(kickDuckCurve);
 
-  // The low band of the instrument/sub mix is ducked; the mid/high band is
-  // untouched.  This keeps kick clarity without pumping piano/bandoneon
-  // transients or removing an acoustic bass's harmonic identity.
+  // Subtract only the ducked low band from the full dry instrument signal.
+  // At rest the correction is exactly zero, so no crossover alters the tone.
   const instLow = ctx.createBiquadFilter();
   instLow.type = 'lowpass';
   instLow.frequency.value = 145;
   instLow.Q.value = 0.65;
-  const instHigh = ctx.createBiquadFilter();
-  instHigh.type = 'highpass';
-  instHigh.frequency.value = 115;
-  instHigh.Q.value = 0.65;
   const lowDuckGain = ctx.createGain();
-  lowDuckGain.gain.value = 0; // AudioParam inputs add to this intrinsic value.
+  lowDuckGain.gain.value = 0;
   const lowDuckWet = ctx.createGain();
   lowDuckWet.gain.value = 1.0;
-  kickDuckCurve.connect(lowDuckGain.gain);
+  kickDuckDepth.connect(lowDuckGain.gain);
   instBus.connect(instLow);
-  instBus.connect(instHigh);
   instLow.connect(lowDuckGain);
   lowDuckGain.connect(lowDuckWet);
 
   const subDuckingGain = ctx.createGain();
-  subDuckingGain.gain.value = 0; // The control curve already supplies unity at rest.
-  kickDuckCurve.connect(subDuckingGain.gain);
+  subDuckingGain.gain.value = 1;
+  kickDuckDepth.connect(subDuckingGain.gain);
   subBus.connect(subDuckingGain);
 
   subDuckingGain.connect(subFilter);
@@ -293,7 +293,8 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   masterSum.gain.value = 1.0;
 
   drumBus.connect(drumShaper);
-  drumShaper.connect(masterSum);
+  drumShaper.connect(drumWet); drumWet.connect(masterSum);
+  drumBus.connect(drumDry); drumDry.connect(masterSum);
   drumParallelWet.connect(masterSum);
 
   // Preserve the full-range sub bus and add only a small controlled low-end enhancement.
@@ -302,7 +303,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   subDuckingGain.connect(masterSum);
   subEnhanceGain.connect(masterSum);
   lowDuckWet.connect(masterSum);
-  instHigh.connect(masterSum);
+  instBus.connect(masterSum);
 
   // Feed the shared stereo room from instruments and drums.
   const fallbackAmbienceFeed = ctx.createGain();
@@ -446,7 +447,9 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
     roomDelayTimes: roomDelays.map(room => room.delay.delayTime),
     dynamicParameters: { low: low.gain, presence: pres.gain, air: air.gain, width: sideGain.gain, roomReturn: revMix.gain,
       fallbackAmbience: fallbackAmbienceFeed.gain, delayTime: delay.delayTime, delayFeedback: delayFeedback.gain,
-      delayTone: delayTone.frequency, glueThreshold: glue.threshold, glueRatio: glue.ratio },
+      delayTone: delayTone.frequency, glueThreshold: glue.threshold, glueRatio: glue.ratio,
+      glueAttack: glue.attack, glueRelease: glue.release, drumParallel: drumParallelWet.gain, subEnhancement: subEnhanceGain.gain, duckDepth: kickDuckDepth.gain,
+      drumDry: drumDry.gain, drumWet: drumWet.gain },
     setFallbackSendsEnabled(enabled: boolean) { fallbackAmbienceFeed.gain.value = enabled ? 0 : 1; },
     tap,
     setVolume(v: number) {
@@ -484,19 +487,15 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
       low.gain.setTargetAtTime(next.lowDb, now, 0.05);
       pres.gain.setTargetAtTime(next.presenceDb, now, 0.05);
       air.gain.setTargetAtTime(next.airDb, now, 0.05);
-      const duckDepth = next.duckDepth;
-      const nextDuckCurve = new Float32Array(1025);
-      for (let i = 0; i < nextDuckCurve.length; i++) {
-        const x = (i / (nextDuckCurve.length - 1)) * 2 - 1;
-        nextDuckCurve[i] = 1 - duckDepth * Math.max(0, Math.min(1, x));
-      }
-      kickDuckCurve.curve = nextDuckCurve;
+      kickDuckDepth.gain.setTargetAtTime(next.duckDepth, now, .05);
 
       glue.threshold.setTargetAtTime(next.glue.threshold, now, 0.05);
       glue.knee.setTargetAtTime(next.glue.knee, now, 0.05);
       glue.ratio.setTargetAtTime(next.glue.ratio, now, 0.05);
       glue.attack.setTargetAtTime(next.glue.attack, now, 0.05);
       glue.release.setTargetAtTime(next.glue.release, now, 0.05);
+      drumParallelWet.gain.setTargetAtTime(next.drumParallelCompression, now, .05);
+      subEnhanceGain.gain.setTargetAtTime(next.subEnhancement, now, .05);
       roomPreDelay.delayTime.setTargetAtTime(.012, now, .05);
       roomSizeGain.gain.setTargetAtTime(1, now, .05);
       roomDelays.forEach((room, index) => room.delay.delayTime.setTargetAtTime([.013, .019, .029, .037, .053, .071][index], now, .05));
@@ -507,7 +506,9 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
       delay.delayTime.setTargetAtTime(next.delayTimeSeconds, now, 0.05);
       delayFeedback.gain.setTargetAtTime(next.delayFeedback, now, 0.05);
       delayTone.frequency.setTargetAtTime(next.delayToneHz, now, 0.05);
-      drumShaper.curve = saturationCurve(next.drumKnock, next.saturationType);
+      drumShaper.curve = saturationCurve(1, next.saturationType);
+      drumDry.gain.setTargetAtTime(1-next.drumKnock,now,.05);
+      drumWet.gain.setTargetAtTime(next.drumKnock,now,.05);
       sideGain.gain.setTargetAtTime(next.widthGain, now, 0.05);
     },
     dispose() {
@@ -517,6 +518,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
         instBus.disconnect();
         subBus.disconnect();
         drumShaper.disconnect();
+        drumDry.disconnect(); drumWet.disconnect();
         subFilter.disconnect();
         subEnhanceGain.disconnect();
         drumParallelComp.disconnect();
@@ -526,7 +528,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
         kickEnvelope.disconnect();
         kickDuckCurve.disconnect();
         instLow.disconnect();
-        instHigh.disconnect();
+        kickDuckDepth.disconnect();
         lowDuckGain.disconnect();
         lowDuckWet.disconnect();
         subDuckingGain.disconnect();

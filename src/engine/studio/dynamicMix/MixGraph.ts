@@ -83,6 +83,13 @@ export function createSongMixGraph(ctx: BaseAudioContext, master: MasterChain, t
   automate(masterParams.delayTone, scene => settings(scene).delayToneHz, 'spectral');
   automate(masterParams.glueThreshold, scene => settings(scene).glue.threshold);
   automate(masterParams.glueRatio, scene => settings(scene).glue.ratio);
+  automate(masterParams.glueAttack, scene => settings(scene).glue.attack);
+  automate(masterParams.glueRelease, scene => settings(scene).glue.release);
+  automate(masterParams.drumParallel, scene => settings(scene).drumParallelCompression);
+  automate(masterParams.subEnhancement, scene => settings(scene).subEnhancement);
+  automate(masterParams.duckDepth, scene => settings(scene).duckDepth);
+  automate(masterParams.drumDry, scene => 1-settings(scene).drumKnock);
+  automate(masterParams.drumWet, scene => settings(scene).drumKnock);
   const roomTimes = [.013, .019, .029, .037, .053, .071];
   master.roomDelayTimes.forEach((param, index) => automate(param,
     scene => roomTimes[index] * (scene.enabled ? .6 + scene.resolvedMix.contract.ambience.roomSize * 1.2 : 1), 'spatial'));

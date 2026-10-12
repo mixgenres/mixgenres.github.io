@@ -7,10 +7,18 @@ import { basename, join } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { BasicSoundBank, BasicPreset, BasicInstrument, EmptySample, SoundBankLoader, SpessaLog, GeneratorTypes } from 'spessasynth_core';
 import { BANK_PROGRAMS, SOUNDFONT_VERSION } from '../src/engine/playback/soundfont/presets';
+import { SYNTH_SAMPLE_PROGRAMS } from '../src/engine/playback/soundfont/presets';
+import { SAMPLE_RELEASES } from '../src/engine/playback/soundfont/bankIdentity';
+import { ELECTRONIC_KIT_PROGRAMS } from '../src/data/sound/playback/electronicKits';
+import { synth } from '../src/data/instruments/catalog/electronic/synth';
+import { SAMPLED_SYNTH_PATCHES } from '../src/data/sound/playback/sampledSynthPatches';
 import { RECORDED_PERCUSSION_PATCHES } from '../src/engine/playback/soundfont/percussion';
 import { qualityPiano, qualityBass, qualityDrumKit, qualityElectric, qualityBandoneon, qualityUprightBass, QUALITY_SOURCES } from './lib/qualitySoundfonts';
 SpessaLog.setLogLevel(false, true, false);
-const sources = process.argv.slice(2);
+const args = process.argv.slice(2);
+const sources = args.filter(arg=>!arg.startsWith('--'));
+const requestedPacks=args.find(arg=>arg.startsWith('--packs='))?.slice(8).split(',');
+if(requestedPacks?.some(id=>!Object.hasOwn(BANK_PROGRAMS,id)))throw new Error('Unknown requested SoundFont pack.');
 if (sources.length !== 8) throw new Error('Supply GeneralUser, Ichiyanagi and full FSS steel SF2 source paths, the selected VCSL WAV directory, quality source directory, MuseScore General SF2, FreePats Jaw Harp SF2 and CC0 vinyl scratch WAV.');
 const vorbisEncoder=process.env.MIXGENRES_VORBIS_ENCODER;
 if(!vorbisEncoder&&!execFileSync('ffmpeg',['-hide_banner','-encoders'],{encoding:'utf8'}).includes('libvorbis'))throw new Error('Use ffmpeg with libvorbis, or supply MIXGENRES_VORBIS_ENCODER compiled from scripts/lib/encode-vorbis.c.');
@@ -24,14 +32,17 @@ const percussionSources=JSON.parse(readFileSync('scripts/lib/percussion-sources.
 const balafonSources=JSON.parse(readFileSync('scripts/lib/balafon-sources.json','utf8')) as {vcslCommit:string;samples:Array<{file:string;path:string;sha256:string;key:number;minVelocity:number;maxVelocity:number}>};
 const output = 'src/assets/soundfonts'; mkdirSync(output, { recursive: true });
 const staging='.cache/soundfont-package';mkdirSync(staging,{recursive:true});
-const releases:Record<string,number>={};
-const manifest: Record<string, { bytes: number; unpackedBytes: number; sha256: string; unpackedSha256:string; presets: string[]; samples: number; format:'sf2'|'sf3' }> = {};
+const releases:Record<string,number>=requestedPacks?{...SAMPLE_RELEASES}:{};
+const manifest: Record<string, { bytes: number; unpackedBytes: number; sha256: string; unpackedSha256:string; presets: string[]; samples: number; format:'sf2'|'sf3' }> = requestedPacks?JSON.parse(readFileSync(`${output}/manifest.json`,'utf8')).packs:{};
+const changedPacks:string[]=[];
 for (const [id, programs] of Object.entries(BANK_PROGRAMS)) {
+  if(requestedPacks&&!requestedPacks.includes(id))continue;
+  changedPacks.push(id);
   const quality=id==='piano'?qualityPiano(sources[4]):id==='bass'?qualityBass(sources[4]):id==='drumkit'?qualityDrumKit(sources[4]):id==='electricClean'||id==='electricDrive'?qualityElectric(sources[4],id):id==='bandoneon'?qualityBandoneon(sources[4]):id==='upright'?qualityUprightBass(sources[4]):undefined;
   const source = banks[id === 'nylon' ? 1 : id === 'steel' ? 2 : 0];
   const selected = source.presets.filter(preset => id === 'nylon' || id === 'steel'
     ? !preset.isDrum && (id==='nylon'?[0,4,24].includes(preset.bankMSB):preset.bankMSB === 0)
-    : id === 'percussion' ? preset.isGMGSDrum && preset.program === 0
+    : id === 'percussion' ? preset.isGMGSDrum && [0,...Object.values(ELECTRONIC_KIT_PROGRAMS)].includes(preset.program)
       : !preset.isDrum && preset.bankMSB === 0 && preset.bankLSB === 0 && (programs as readonly number[]).includes(preset.program));
   if (!selected.length&&!quality) throw new Error(`Empty pack: ${id}`);
   const bank = quality??new BasicSoundBank(); if(!quality)bank.soundBankInfo = { ...source.soundBankInfo };
@@ -85,7 +96,9 @@ for (const [id, programs] of Object.entries(BANK_PROGRAMS)) {
     const sampleCache=new Map<string,EmptySample>();
     for(const [instrumentId,route] of Object.entries(RECORDED_PERCUSSION_PATCHES)) {
       for(let take=0;take<route.takes;take++) {
-        const preset=new BasicPreset(bank);preset.name=`MixGenres recorded ${instrumentId}${route.takes>1?` take ${take+1}`:''}`;
+        // Compact unique names also stay distinct in plain SF2 readers that
+        // do not support the library's extended-name metadata.
+        const preset=new BasicPreset(bank);preset.name=`MG ${instrumentId} ${take+1}`;
         preset.bankMSB=66;preset.bankLSB=0;preset.program=route.program+take;
         const instrument=new BasicInstrument();instrument.name=preset.name;
         const rows=percussionSources.samples.filter(row=>row.instrument===instrumentId&&row.take===take);
@@ -129,6 +142,34 @@ for (const [id, programs] of Object.entries(BANK_PROGRAMS)) {
     preset.createZone(instrument);bank.addInstruments(instrument);bank.addPresets(preset);
   }
   if(id==='electronic') {
+    // Distinct sampled synth patches preserve the authored filter/envelope.
+    // A generic GM bass or slow pad cannot supply a clean sub or short chord stab.
+    for(const [patchId,program] of Object.entries(SYNTH_SAMPLE_PROGRAMS)) {
+      const patch=synth.patches!.find(item=>item.id===patchId)!;
+      const input=source.presets.find(p=>!p.isDrum&&p.bankMSB===0&&p.program===SAMPLED_SYNTH_PATCHES[patchId].sourceProgram);
+      if(!input)throw new Error(`Missing source for synth patch ${patchId}`);
+      const isolated=new BasicSoundBank();isolated.clonePreset(input);
+      const preset=isolated.presets[0];preset.bankMSB=75;preset.bankLSB=0;preset.program=program;preset.name=`MG ${patch.id}`;
+      // cloneInstrument deduplicates by name. Keep each envelope/filter distinct
+      // while allowing the underlying waveform samples to remain shared.
+      isolated.instruments.forEach((instrument,index)=>{instrument.name=`MG synth ${program}:${index}`;});
+      const timecents=(seconds:number)=>Math.round(1200*Math.log2(Math.max(.001,seconds)));
+      const parameters=[
+        [GeneratorTypes.initialFilterFc,Math.round(1200*Math.log2(patch.cutoffHz/8.176))],
+        [GeneratorTypes.initialFilterQ,Math.round(patch.resonance*160)],
+        [GeneratorTypes.attackVolEnv,timecents(patch.attackSeconds)],
+        [GeneratorTypes.decayVolEnv,timecents(patch.decaySeconds)],
+        [GeneratorTypes.sustainVolEnv,Math.round(-200*Math.log10(Math.max(.001,patch.sustain)))],
+        [GeneratorTypes.releaseVolEnv,timecents(patch.releaseSeconds)],
+        [GeneratorTypes.modEnvToFilterFc,0],
+      ] as const;
+      for(const [generator,value] of parameters) {
+        preset.globalZone.setGenerator(generator,0,false);
+        for(const zone of preset.zones)zone.setGenerator(generator,0,false);
+        for(const instrument of isolated.instruments)for(const zone of instrument.zones)zone.setGenerator(generator,value,false);
+      }
+      bank.clonePreset(preset);
+    }
     const file=sources[7];
     const pcm=execFileSync('ffmpeg',['-v','error','-i',file,'-f','f32le','-ac','1','-ar','44100','pipe:1']);
     const decoded=new Float32Array(pcm.buffer.slice(pcm.byteOffset,pcm.byteOffset+pcm.byteLength));
@@ -162,7 +203,7 @@ for (const [id, programs] of Object.entries(BANK_PROGRAMS)) {
     sha256: createHash('sha256').update(packed).digest('hex'), unpackedSha256:createHash('sha256').update(new Uint8Array(sf2)).digest('hex'), presets: bank.presets.map(p=>p.toMIDIString()), samples: bank.samples.length,format:compressed?'sf3':'sf2' };
   console.log(`${id}: ${(packed.length/1048576).toFixed(2)} MiB, ${bank.presets.length} presets, ${bank.samples.length} samples`);
 }
-for(const id of Object.keys(manifest))renameSync(`${staging}/${id}.sfpack`,`${output}/${id}.sfpack`);
+for(const id of changedPacks)renameSync(`${staging}/${id}.sfpack`,`${output}/${id}.sfpack`);
 const contentKey = createHash('sha256').update(SOUNDFONT_VERSION+JSON.stringify(manifest)).digest('hex').slice(0, 16);
 writeFileSync('src/engine/playback/soundfont/bankIdentity.ts', `// Generated by scripts/package-soundfonts.ts; invalidates every physical sample cache.\nexport const SOUNDFONT_CONTENT_KEY = '${contentKey}';\nexport const SAMPLE_RELEASES:Readonly<Record<string,number>> = ${JSON.stringify(releases)};\nexport const BANK_FILES = ${JSON.stringify(Object.fromEntries(Object.entries(manifest).map(([id,{bytes,unpackedBytes,sha256,unpackedSha256}])=>[id,{bytes,unpackedBytes,sha256,unpackedSha256}])))};\n`);
 const vcslSha256=Object.fromEntries(Array.from({length:3},(_,i)=>[`Cajon_hit${i+1}_mp_rr1.wav`,`Cajon_hit${i+1}_f_rr1.wav`,`Clap_rr${i+1}.wav`]).flat().map(file=>[file,createHash('sha256').update(readFileSync(join(sources[3],file))).digest('hex')]));
@@ -176,6 +217,9 @@ completeManifest.qualitySourceSha256=qualitySourceSha256;
 completeManifest.extraSourceSha256={museScoreGeneral:createHash('sha256').update(timpaniData).digest('hex'),jawHarp:createHash('sha256').update(jawHarpData).digest('hex'),turntable:createHash('sha256').update(readFileSync(sources[7])).digest('hex')};
 completeManifest.distillation={allBanks:{format:'SF3',codec:'Ogg Vorbis',quality:6},piano:{velocityLayers:[4,8,12,16],maxDecaySeconds:10,sampleRate:44100,terminalFadeSeconds:.15,vorbisQuality:6},drumkit:{velocityLayers:6,takes:3,layout:'GM',sourceLayout:'chromatic C3-F#4',maxDecaySeconds:8,terminalFadeSeconds:.15,vorbisQuality:6},electric:{recordedDynamics:2,softMaxVelocity:92,takes:3,upperRangeDynamics:'source hard recordings where soft recordings are absent',maxDecaySeconds:12,terminalFadeSeconds:.15,vorbisQuality:6},recordedPercussion:Object.fromEntries(Object.entries(RECORDED_PERCUSSION_PATCHES).map(([id,route])=>[id,{program:route.program,takes:route.takes,source:'VCSL CC0'}]))};
 completeManifest.distillation.bandoneon={recordedSource:'Jörg Bleymehl 1930 ELA bandoneon',recordedSamples:12,presets:2,direction:'open/close use the same samples with a modest close-reed filter/attack offset'};
+completeManifest.distillation.electronicKits={source:'GeneralUser GS',bank:0,drum:true,programs:ELECTRONIC_KIT_PROGRAMS,layout:'GM component keys'};
+completeManifest.distillation.synthPatches={source:'GeneralUser GS waveforms',bank:75,programs:SYNTH_SAMPLE_PROGRAMS,parameters:'authored lowpass filter and volume envelope; shared waveform PCM, distinct instrument zones'};
+completeManifest.distillation.electricBass={source:'YR fingerstyle and picked recordings',sampleIdentity:'separate source names prevent cross-source deduplication',upperKey:55,upperRange:'extend the highest source zone by transposing its recorded waveform; not additional recorded notes'};
 completeManifest.distillation.uprightBass={recordedSource:'D. Smolken 1958 Otto Rubner double bass, CGDA fifths tuning',sourceArchiveSha256:'380986bb52ee6b6469d28e9089792a3ed37cbd163fe5a19160bf4f98785e7ccb',presets:{pizzicato:4,arco:2},roundRobin:'four pizzicato recordings, and separate down/up bow recordings',velocityLayers:{pizzicato:3,arco:5},discarded:'unpitched noises and body-contact keys',sampleRate:44100,maxSampleSeconds:12,terminalFadeSeconds:.15,vorbisQuality:6};
 writeFileSync(`${output}/manifest.json`,JSON.stringify(completeManifest,null,2)+'\n');
 writeFileSync(`${output}/notices/GeneralUser-GS.txt`,`${banks[0].soundBankInfo.name}\n${banks[0].soundBankInfo.copyright}\n\n${banks[0].soundBankInfo.comment}\n`);

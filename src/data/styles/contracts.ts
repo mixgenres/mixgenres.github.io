@@ -29,6 +29,8 @@ export interface InstrumentDialect {
   /** A physical setup or electronic patch selected within the canonical instrument. */
   variantId?: string;
   patchId?: string;
+  /** One-shot selection keys for a sampler layer; kit scores retain their written component keys. */
+  samplePalette?: number[];
   /** Weighted preference strengths; unsupported physical techniques are filtered. */
   techniquePreferences?: Record<string, number>;
   forbiddenTechniques?: string[];
@@ -123,8 +125,13 @@ export interface MixCharacter {
   width: number;        // 0..1, overall stereo spread
   brightness: number;   // 0..1, overall top-end lift
   compressionRatio?: number; // e.g. 1.2 .. 8.0
+  compressionAttackSeconds?: number;
+  compressionReleaseSeconds?: number;
+  drumSaturation?: number; // 0..1, independent of the bass balance
+  drumParallelCompression?: number; // 0..1
   saturationType?: 'tape' | 'tube' | 'hard-clip';
   subHarmonics?: number; // 0..1
+  subEnhancement?: number; // 0..1, parallel low-band gain
   transientSnap?: number; // 0..1
   sidechainDucking?: number; // 0..1, genre-specific kick/bass ducking depth
   delaySend?: number; // 0..1, production send to the echo return
@@ -596,8 +603,13 @@ for (const world of GENRE_WORLDS) {
       width: authoredMix.width ?? inheritedMix.width,
       brightness: authoredMix.brightness ?? inheritedMix.brightness,
       compressionRatio: authoredMix.compressionRatio ?? inheritedMix.compressionRatio,
+      compressionAttackSeconds: authoredMix.compressionAttackSeconds ?? inheritedMix.compressionAttackSeconds,
+      compressionReleaseSeconds: authoredMix.compressionReleaseSeconds ?? inheritedMix.compressionReleaseSeconds,
+      drumSaturation: authoredMix.drumSaturation ?? inheritedMix.drumSaturation,
+      drumParallelCompression: authoredMix.drumParallelCompression ?? inheritedMix.drumParallelCompression,
       saturationType: authoredMix.saturationType ?? inheritedMix.saturationType,
       subHarmonics: authoredMix.subHarmonics ?? inheritedMix.subHarmonics,
+      subEnhancement: authoredMix.subEnhancement ?? inheritedMix.subEnhancement,
       transientSnap: authoredMix.transientSnap ?? inheritedMix.transientSnap,
       sidechainDucking: authoredMix.sidechainDucking ?? inheritedMix.sidechainDucking,
       delaySend: authoredMix.delaySend ?? inheritedMix.delaySend,

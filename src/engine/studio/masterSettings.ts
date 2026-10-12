@@ -13,14 +13,16 @@ export function resolveMasterSettings(char?: MixCharacter, context = '') {
   const dry = char?.dryness ?? MASTER_MIX_DEFAULTS.dryness;
   const ratio = char?.compressionRatio ?? MASTER_GLUE_PROFILES.gentle.ratio;
   const salsa = SALSA_GENRE_PATTERN.test(context);
-  const glue = salsa ? { ...MASTER_GLUE_PROFILES.salsa }
-    : ratio <= 2 ? { ...MASTER_GLUE_PROFILES.gentle, ratio: Math.max(1.1, ratio) }
+  const glue = salsa ? { ...MASTER_GLUE_PROFILES.salsa, ratio: char?.compressionRatio ?? MASTER_GLUE_PROFILES.salsa.ratio }
+    : ratio <= 2 ? { ...MASTER_GLUE_PROFILES.gentle, ratio: Math.max(1, ratio) }
       : { ...MASTER_GLUE_PROFILES.punchy, ratio, attack: Math.max(0.003, 0.03 * (1 - (char?.transientSnap ?? 0.3))) };
+  if(char?.compressionAttackSeconds!==undefined)glue.attack=clamp(char.compressionAttackSeconds,.003,.1);
+  if(char?.compressionReleaseSeconds!==undefined)glue.release=clamp(char.compressionReleaseSeconds,.04,.8);
   return {
     lowDb: (bass - 0.5) * 4,
     presenceDb: (dry - 0.5) * 3,
     airDb: ((char?.brightness ?? MASTER_MIX_DEFAULTS.brightness) - 0.5) * 5,
-    roomDepth: salsa ? SALSA_MASTER_ROOM_DEPTH : (1 - dry) * MASTER_MIX_DEFAULTS.roomScale,
+    roomDepth: salsa && char?.dryness === undefined ? SALSA_MASTER_ROOM_DEPTH : (1 - dry) * MASTER_MIX_DEFAULTS.roomScale,
     springReverbMix: char?.reverbType === 'spring' ? clamp((1 - dry) * 0.38, 0.04, 0.32) : 0,
     delaySend: clamp(char?.delaySend ?? 0, 0, 0.8),
     delayTimeSeconds: clamp(char?.delayTimeSeconds ?? 0.32, 0.04, 1.5),
@@ -29,7 +31,9 @@ export function resolveMasterSettings(char?: MixCharacter, context = '') {
     duckDepth: char?.sidechainDucking !== undefined ? clamp(char.sidechainDucking * .45, 0, .45) : ELECTRONIC_MIX_PATTERN.test(context) ? ELECTRONIC_MASTER_SIDECHAIN_DEPTH
       : TANGO_PATTERN.test(context) ? TANGO_MASTER_SIDECHAIN_DEPTH
         : clamp((char?.sidechainDucking ?? 0.12) * 0.45, 0.08, 0.45),
-    drumKnock: clamp((bass - 0.3) * 1.2, 0.05, 0.85),
+    drumKnock: clamp(char?.drumSaturation ?? (bass - 0.3) * 1.2, 0, .85),
+    drumParallelCompression: clamp(char?.drumParallelCompression ?? .18,0,1),
+    subEnhancement: clamp(char?.subEnhancement ?? MASTER_MIX_DEFAULTS.subEnhancement,0,1),
     saturationType: char?.saturationType ?? 'tape',
     widthGain: clamp(0.2 + (char?.width ?? MASTER_MIX_DEFAULTS.width) * 1.6, 0, 1.8),
     glue,

@@ -4,6 +4,7 @@ import { INSTRUMENTS_BY_ID } from '../../instruments';
 import { INSTRUMENT_PERFORMANCE_PROFILES } from '../../performance/instrumentPerformanceProfiles';
 import { GESTURE_HINT_ALIASES } from '../../performance/gestureHintAliases';
 import { authorSampleSongDevelopment } from './sampleSongDevelopment';
+import { authorGenreProduction } from './production';
 
 /** Authored beat positions, in quarter-note units; no style-name hashing. */
 export interface AuthoredCell {
@@ -632,6 +633,7 @@ function closingEvents(pattern: MusicalPattern, ending: MusicalPattern): Pattern
 }
 
 export function createGenreWorld(input: GenrePackInput): GenreWorld {
+  input = authorGenreProduction(input);
   input = authorSampleSongDevelopment(input);
   const styles = input.styles.map(item => styleDefinition(input, item));
   const patternItems = styles.flatMap((style, i) => {

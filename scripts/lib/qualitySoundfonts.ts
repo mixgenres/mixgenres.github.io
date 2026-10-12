@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
 import { BasicSoundBank, BasicPreset, BasicInstrument, EmptySample, SoundBankLoader, GeneratorTypes } from 'spessasynth_core';
+import { bass } from '../../src/data/instruments/catalog/plucked/bass';
 
 export const QUALITY_SOURCES = {
   piano: 'SalamanderGrandPiano-SF2-V3+20200602/SalamanderGrandPiano-V3+20200602.sf2',
@@ -53,6 +54,16 @@ export function qualityBass(root:string) {
   for(const [kind,program] of [['finger',33],['pick',34]] as const) {
     const source=load(join(root,QUALITY_SOURCES[kind]));
     const preset=source.presets[0];preset.bankMSB=64;preset.program=program;
+    // Both sources call their samples E, F, etc. Name-based bank cloning must
+    // not replace the picked recordings with the fingerstyle waveforms.
+    source.samples.forEach((sample,index)=>{sample.name=`YR ${kind} ${index}`;});
+    source.instruments.forEach((instrument,index)=>{instrument.name=`YR ${kind} ${index}`;});
+    const high=bass.acousticProfile!.high;
+    for(const zone of preset.zones)zone.keyRange={...zone.keyRange,max:high};
+    for(const instrument of source.instruments) {
+      const edge=Math.max(...instrument.zones.map(zone=>zone.keyRange.max));
+      for(const zone of instrument.zones)if(zone.keyRange.max===edge)zone.keyRange={...zone.keyRange,max:high};
+    }
     preset.name=`MixGenres YR ${kind} bass`;bank.clonePreset(preset);
   }
   return bank;
