@@ -217,6 +217,11 @@ test('new instruments receive an audible pattern and can be added with a chosen 
     'changing the sound source should preserve the student’s pattern choice');
   assert.ok(arrangeBand(swapped).notes.some(note => note.trackId === selectedTrack.id),
     'the preserved pattern should remain playable after an instrument swap');
+
+  const fragmentedTracks = base.tracks.slice(0, 4).map((track, index) => ({ ...track, id: ['v0', 'v3', 'v4', 'v5'][index] }));
+  const fragmented = { ...base, tracks: fragmentedTracks, arrangement: Object.fromEntries(base.regions.map(region => [region.id, {}])) };
+  const recovered = addVoice(fragmented, 'flute', undefined, 'song');
+  assert.equal(recovered.tracks.at(-1)?.id, 'v6', 'adding after track deletions must find the next free ID instead of looping on one collision');
 });
 
 test('free-time Granaína and Malagueña samples retain cante, guitar answers and distinct features', () => {

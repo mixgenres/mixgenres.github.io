@@ -224,24 +224,33 @@ export class SoundfontSongPlayer {
   position(){return this.offset;}
   locate(seconds:number) {
     const target=Math.max(0,Math.min(this.prepared ? this.preparedDuration : Infinity,Number.isFinite(seconds)?seconds:0));
-    const request=++this.seekRequest;
     this.offset=target;this.onPosition(target);
+    // Pointer movement updates the visible playhead immediately. Defer sample
+    // replay until release so a fast drag cannot flood the worklet with seeks.
+    if(this.scrubbing)return;
+    const request=++this.seekRequest;
     const graph=this.graph;
     if(graph) {
       const playing=this.wantsPlayback&&!this.scrubbing;
       if(playing)this.publish({status:'seeking'});
-      graph.output.gain.setTargetAtTime(0,this.ctx!.currentTime,.003);
+      graph.output.gain.setTargetAtTime(0,this.ctx!.currentTime,.01);
       void this.context().resume().then(()=>{
         if(request!==this.seekRequest||this.disposed)return;
-        return this.command(graph,{type:'seek',position:target,playing:this.wantsPlayback&&!this.scrubbing});
+        const resume=this.wantsPlayback&&!this.scrubbing;
+        return this.command(graph,{type:'seek',position:target,playing:resume,...(resume?{catchUpTime:this.ctx!.currentTime}:{})});
       }).then(()=>{
-        if(!this.disposed&&request===this.seekRequest&&graph===this.graph){this.offset=graph.position;graph.scenes?.schedule(this.ctx!.currentTime,this.offset);if(this.wantsPlayback&&!this.scrubbing)graph.output.gain.setTargetAtTime(1,this.ctx!.currentTime,.003);this.publish({status:this.wantsPlayback&&!this.scrubbing?'playing':'paused'});}
+        if(!this.disposed&&request===this.seekRequest&&!this.scrubbing&&graph===this.graph){
+          this.offset=this.wantsPlayback?graph.position:target;
+          graph.scenes?.schedule(this.ctx!.currentTime,this.offset);
+          if(this.wantsPlayback){graph.output.gain.setTargetAtTime(1,this.ctx!.currentTime,.012);this.animate();}
+          this.publish({status:this.wantsPlayback?'playing':'paused'});
+        }
       }).catch(error=>{if(!this.disposed&&request===this.seekRequest)this.fail(error);});
     }
   }
-  beginScrub(){this.resumeScrub=this.wantsPlayback;this.scrubbing=true;this.pause();}
-  endScrub(){this.scrubbing=false;if(this.resumeScrub)void this.play();this.resumeScrub=false;}
-  pause(){this.wantsPlayback=false;++this.playRequest;if(this.raf)cancelAnimationFrame(this.raf);if(this.graph&&this.ctx){const now=this.ctx.currentTime;this.graph.output.gain.setTargetAtTime(0,now,.003);void this.command(this.graph,{type:'pause',when:now+.015}).catch(()=>{});}this.publish({status:this.prepared?'paused':'idle'});}
+  beginScrub(){if(this.scrubbing)return;this.resumeScrub=this.wantsPlayback;this.scrubbing=true;this.pause();}
+  endScrub(){if(!this.scrubbing)return;const resume=this.resumeScrub;this.scrubbing=false;this.resumeScrub=false;if(resume){this.wantsPlayback=true;if(!this.graph){void this.play();return;}}else this.wantsPlayback=false;this.locate(this.offset);}
+  pause(){this.wantsPlayback=false;++this.playRequest;if(this.raf)cancelAnimationFrame(this.raf);if(this.graph&&this.ctx){const now=this.ctx.currentTime;this.graph.output.gain.setTargetAtTime(0,now,.008);void this.command(this.graph,{type:'pause',when:now+.015}).catch(()=>{});}this.publish({status:this.prepared?'paused':'idle'});}
   stop(){this.pause();++this.seekRequest;this.offset=0;this.onPosition(0);if(this.graph)void this.command(this.graph,{type:'seek',position:0,playing:false}).catch(()=>{});this.publish({status:this.prepared?'ready':'idle'});}
   toggle(inputTime?:number){if(this.wantsPlayback)this.pause();else void this.play(inputTime);}
   private observeSignal(){

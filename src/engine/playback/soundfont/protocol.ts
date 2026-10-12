@@ -3,7 +3,7 @@ import type { BankId } from './presets';
 export type SampleCommand =
   | { type:'bank'; request:number; id:BankId; buffer:ArrayBuffer }
   | { type:'plan'; request:number; plan:SamplePlan; position:number; playing:boolean; catchUpTime?:number }
-  | { type:'seek'; request:number; position:number; playing:boolean }
+  | { type:'seek'; request:number; position:number; playing:boolean; catchUpTime?:number }
   | { type:'play'; request:number }
   | { type:'pause'; request:number; when?:number }
   | { type:'dispose'; request:number };

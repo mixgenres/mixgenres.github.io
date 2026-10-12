@@ -1817,8 +1817,9 @@ export function addVoice(
   options: { role?: string; patternId?: string } = {},
 ): Sheet {
   const def = instrument(instrumentId);
-  let id = `v${sheet.tracks.length}`;
-  while (sheet.tracks.some(t => t.id === id)) id = `v${sheet.tracks.length + 1}`;
+  let trackNumber = sheet.tracks.length;
+  while (sheet.tracks.some(t => t.id === `v${trackNumber}`)) trackNumber++;
+  const id = `v${trackNumber}`;
   const voice: Voice = {
     id, instrumentId, name: def.name, instrument: def.name,
     role: options.role ?? roleForInstrument(instrumentId), kind: instrumentId,

@@ -15,7 +15,7 @@ function deferred(){let resolve!:()=>void;const promise=new Promise<void>(yes=>{
 type Command=SampleCommand extends infer C?C extends SampleCommand?Omit<C,'request'>:never:never;
 interface Graph {plan?:SamplePlan;position:number;level:number;output:GainNode;scenes?:undefined}
 // Test-owned player seams; sample synthesis itself is tested against real banks.
-interface Harness extends Pick<SoundfontSongPlayer,'play'|'configure'|'pause'|'stop'|'snapshot'|'dispose'|'position'> {
+interface Harness extends Pick<SoundfontSongPlayer,'play'|'configure'|'pause'|'stop'|'snapshot'|'dispose'|'position'|'locate'|'beginScrub'|'endScrub'> {
   song:Sheet;activeSong:Sheet;prepared:{performance:Performance;plan:SamplePlan;song:Sheet};
   preparedKey:string;preparing:Promise<void>;controller:AbortController;graph:Graph;ctx:AudioContext;
   wantsPlayback:boolean;offset:number;
@@ -68,5 +68,36 @@ test('Stop during a staged replacement preserves zero and discards an obsolete s
     assert(staged);f.player.stop();gate.resolve();await f.player.preparing;
     assert.equal(f.player.position(),0);assert.equal(staged.level,0);
     assert(f.commands.some(c=>c.graph===staged&&c.command.type==='seek'&&c.command.position===0&&!c.command.playing));
+  }finally{f.cleanup();}
+});
+test('slider drags coalesce worklet seeks and resume from the final position smoothly',async()=>{
+  const f=fixture();try {
+    f.player.wantsPlayback=true;
+    f.player.beginScrub();
+    f.player.locate(4.25);f.player.locate(8.5);f.player.locate(12.75);
+    assert.equal(f.commands.filter(c=>c.command.type==='seek').length,0,'scrubbing moves only the playhead, not the sample runtime');
+    assert.equal(f.player.position(),12.75);
+    f.player.endScrub();
+    for(let i=0;i<10&&!f.commands.some(c=>c.command.type==='seek');i++)await flush();
+    const seeks=f.commands.filter(c=>c.command.type==='seek');
+    assert.equal(seeks.length,1,'release sends one final seek');
+    const seek=seeks[0].command;
+    if(seek.type!=='seek')throw new Error('expected a seek command');
+    assert.equal(seek.position,12.75);
+    assert.equal(seek.playing,true);
+    assert.equal(seek.catchUpTime,0,'a playing seek resumes from the current audio clock');
+    assert.equal(f.player.snapshot.status,'playing');
+  }finally{f.cleanup();}
+});
+test('paused slider scrubbing seeks once without starting playback',async()=>{
+  const f=fixture();try {
+    f.player.beginScrub();f.player.locate(6.5);f.player.locate(9.25);f.player.endScrub();
+    for(let i=0;i<10&&!f.commands.some(c=>c.command.type==='seek');i++)await flush();
+    const seeks=f.commands.filter(c=>c.command.type==='seek');
+    assert.equal(seeks.length,1);
+    const seek=seeks[0].command;
+    if(seek.type!=='seek')throw new Error('expected a seek command');
+    assert.equal(seek.position,9.25);assert.equal(seek.playing,false);
+    assert.equal(f.player.snapshot.status,'paused');
   }finally{f.cleanup();}
 });

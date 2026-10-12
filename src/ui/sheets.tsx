@@ -6,6 +6,7 @@ import { GENRE_PLATES, plateFor } from './worlds';
 import { INSTRUMENT_CATALOG, FAMILY_LABELS, FAMILY_ORDER, instrument } from '../engine/lookup/instruments';
 import { ALL_PATTERNS, GENRE_WORLDS_BY_ID, cleanPatternName, FEEL_ORDER, FEEL_LABELS, feelsForPattern, PatternFeel } from '../data/genres';
 import { Voice, affinity, roleForInstrument, toBar, getGenreForm, parseChord } from '../engine/sheet/index.ts';
+import { patternsForPickerVoice } from '../engine/sheet/patternPicker';
 import { BAR_CHOICES } from '../data/barChoices';
 import { FEELS } from '../data/tempoFeels';
 import { genreCategoryId } from '../data/genreCategories';
@@ -219,6 +220,7 @@ export function AddInstrumentSheet({
   const [scope, setScope] = useState<'section' | 'song'>('song');
   const [patternScope, setPatternScope] = useState<'recommended' | 'genre' | 'all'>('recommended');
   const [patternQuery, setPatternQuery] = useState('');
+  const [patternPage, setPatternPage] = useState(0);
   const filtered = useMemo(() => INSTRUMENT_CATALOG
     .filter(item => item.id !== 'silence' && (!query.trim()
       || item.name.toLowerCase().includes(query.trim().toLowerCase())))
@@ -232,7 +234,7 @@ export function AddInstrumentSheet({
   } as Voice : null;
   const rankedPatterns = useMemo(() => {
     if (!voice) return [];
-    return ALL_PATTERNS.filter(pattern => pattern.enabled !== false)
+    return patternsForPickerVoice(ALL_PATTERNS.filter(pattern => pattern.enabled !== false), voice.instrumentId, voice.role)
       .map(pattern => ({ pattern, score: affinity(pattern.id, voice, worldId, styleId) }))
       .filter(item => Number.isFinite(item.score))
       .filter(item => patternScope !== 'genre' || item.pattern.worldId === worldId)
@@ -243,7 +245,11 @@ export function AddInstrumentSheet({
         : b.score - a.score);
   }, [voice?.instrumentId, effectiveRole, worldId, styleId, patternScope, patternQuery]);
   const patterns = rankedPatterns.map(item => item.pattern);
+  useEffect(() => setPatternPage(0), [instrumentId, effectiveRole, patternScope, patternQuery]);
   const selectedPatternId = patterns.some(pattern => pattern.id === patternId) ? patternId : patterns[0]?.id ?? '';
+  const patternPageCount = Math.max(1, Math.ceil(patterns.length / 36));
+  const currentPatternPage = Math.min(patternPage, patternPageCount - 1);
+  const visiblePatterns = patterns.slice(currentPatternPage * 36, (currentPatternPage + 1) * 36);
 
   return <Sheet open={open} onClose={onClose} title="Add an instrument" kicker={sectionKind ? `Build a part · ${sectionKind}` : 'Build a new part'}>
     <div className="micro mb-2">1. Choose an instrument</div>
@@ -274,8 +280,9 @@ export function AddInstrumentSheet({
       <input value={patternQuery} onChange={event => setPatternQuery(event.target.value)} placeholder="Search any pattern…"
         className="w-full mb-2" style={{ background: 'transparent', padding: '6px 0', fontSize: 14,
           borderBottom: '1px solid color-mix(in srgb, var(--ink) 25%, transparent)', outline: 'none' }} />
+      <div className="micro mb-1" aria-live="polite">Page {currentPatternPage + 1} of {patternPageCount} · {patterns.length} playable patterns</div>
       <div className="flex flex-col mb-4 overflow-y-auto" style={{ borderTop: '1px solid color-mix(in srgb, var(--ink) 14%, transparent)', maxHeight: 280 }}>
-        {patterns.map(pattern => <button key={pattern.id} type="button" onClick={() => setPatternId(pattern.id)}
+        {visiblePatterns.map(pattern => <button key={pattern.id} type="button" onClick={() => setPatternId(pattern.id)}
           className="text-left py-2.5 flex items-center gap-2.5 w-full"
           style={{ borderBottom: '1px solid color-mix(in srgb, var(--ink) 12%, transparent)',
             background: selectedPatternId === pattern.id ? 'color-mix(in srgb, var(--ink) 7%, transparent)' : 'transparent' }}>
@@ -290,6 +297,12 @@ export function AddInstrumentSheet({
         </button>)}
         {!patterns.length && <div className="micro py-3">No patterns match that search.</div>}
       </div>
+      {patternPageCount > 1 && <div className="flex justify-between gap-2 mb-4">
+        <button type="button" className="micro cursor-pointer disabled:opacity-40" disabled={currentPatternPage === 0}
+          onClick={() => setPatternPage(page => Math.max(0, page - 1))}>Previous patterns</button>
+        <button type="button" className="micro cursor-pointer disabled:opacity-40" disabled={currentPatternPage >= patternPageCount - 1}
+          onClick={() => setPatternPage(page => Math.min(patternPageCount - 1, page + 1))}>Next patterns</button>
+      </div>}
 
       <div className="micro mb-2">Add it to</div>
       <div className="flex gap-1.5 mb-4">
@@ -328,6 +341,7 @@ export function PatternSheet({
   const [applyToSong, setApplyToSong] = useState(false);
   const [feel, setFeel] = useState<PatternFeel | null>(null);
   const [category, setCategory] = useState<string | null>(null);
+  const [patternPage, setPatternPage] = useState(0);
 
   const categoryOptions = useMemo(() => {
     const labels: Record<string, string> = {
@@ -373,6 +387,10 @@ export function PatternSheet({
     }
     return items;
   }, [scope, feel, category, q, voice, worldId, styleId]);
+  useEffect(() => setPatternPage(0), [scope, feel, category, q, voice?.instrumentId, voice?.role]);
+  const patternPageCount = Math.max(1, Math.ceil(list.length / 48));
+  const currentPatternPage = Math.min(patternPage, patternPageCount - 1);
+  const visiblePatterns = list.slice(currentPatternPage * 48, (currentPatternPage + 1) * 48);
 
   return (
     <Sheet
@@ -422,15 +440,17 @@ export function PatternSheet({
         <span>Use in every song section</span>
       </label>
 
+      <div className="micro mb-1" aria-live="polite">Page {currentPatternPage + 1} of {patternPageCount} · {list.length} patterns</div>
+
       {list.length === 0 && (
         <div className="micro py-4">No rhythms match. Try clearing a filter.</div>
       )}
 
       <div className="flex flex-col">
-        {list.map((p, idx) => {
+        {visiblePatterns.map((p, idx) => {
           const active = p.id === current;
           const plate = plateFor(p.worldId);
-          const prevP = idx > 0 ? list[idx - 1] : null;
+          const prevP = idx > 0 ? visiblePatterns[idx - 1] : null;
           const showGenreHeader = (scope === 'all' || scope === 'fits') && (!prevP || prevP.worldId !== p.worldId);
           const genreName = plate.short || GENRE_WORLDS_BY_ID[p.worldId]?.name || p.worldId;
 
@@ -487,6 +507,12 @@ export function PatternSheet({
           );
         })}
       </div>
+      {patternPageCount > 1 && <div className="flex justify-between gap-2 mt-2">
+        <button type="button" className="micro cursor-pointer disabled:opacity-40" disabled={currentPatternPage === 0}
+          onClick={() => setPatternPage(page => Math.max(0, page - 1))}>Previous patterns</button>
+        <button type="button" className="micro cursor-pointer disabled:opacity-40" disabled={currentPatternPage >= patternPageCount - 1}
+          onClick={() => setPatternPage(page => Math.min(patternPageCount - 1, page + 1))}>Next patterns</button>
+      </div>}
     </Sheet>
   );
 }

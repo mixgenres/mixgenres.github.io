@@ -27,7 +27,7 @@ class MixGenresSampleProcessor extends AudioWorkletProcessor {
       try {
         if(data.type==='bank') this.runtime.addBank(data.id,data.buffer);
         else if(data.type==='plan') { this.runtime.setPlan(data.plan); this.runtime.seek(data.position); this.playing=data.playing;this.stopAt=Infinity;this.catchUp=data.catchUpTime===undefined?undefined:{time:data.catchUpTime,position:data.position}; }
-        else if(data.type==='seek') { this.runtime.seek(data.position); this.playing=data.playing;this.stopAt=Infinity;this.catchUp=undefined; }
+        else if(data.type==='seek') { this.runtime.seek(data.position); this.playing=data.playing;this.stopAt=Infinity;this.catchUp=data.catchUpTime===undefined?undefined:{time:data.catchUpTime,position:data.position}; }
         else if(data.type==='play') {this.playing=true;this.stopAt=Infinity;}
         else if(data.type==='pause') {this.stopAt=data.when??currentTime;this.catchUp=undefined;if(this.stopAt<=currentTime)this.playing=false;}
         else if(data.type==='dispose') {this.playing=false;this.alive=false;this.runtime.destroy();}
