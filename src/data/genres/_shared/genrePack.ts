@@ -99,6 +99,69 @@ function sections(_input: GenrePackInput, styleRoles: Record<string, string[]>, 
 
 function rolesForStyle(_input: GenrePackInput, style: CalibratedStyleInput) { return style.roles; }
 
+const GENERIC_CLOSE_ARTICULATIONS = new Set(['ornament', 'roll']);
+const GENERIC_CLOSE_HITS = ['tom', 'snare', 'snare'];
+
+/**
+ * Many styles inherited the same three-attack placeholder as a phrase end,
+ * including one identical tom/snare/snare hit grid. It can teach timing, but
+ * without local melodic or articulation detail it is not a style cadence.
+ */
+function isGenericPhraseClose(cell: AuthoredCell, meter: string): boolean {
+  const hasGenericCloseHits = cell.hits?.length === GENERIC_CLOSE_HITS.length
+    && cell.hits.every((hit, index) => hit === GENERIC_CLOSE_HITS[index]);
+  if (!cell.phraseEnd || cell.pitches?.length || cell.notations?.length
+    || (cell.hits?.length && !hasGenericCloseHits) || cell.sectionUsage?.length) return false;
+  if (cell.onsets.length !== 3) return false;
+  const [numerator, denominator] = meter.split('/').map(Number);
+  if (!numerator || !denominator) return false;
+  const cycleBeats = numerator * 4 / denominator * (cell.cycleLength ?? 1);
+  const expected = [cycleBeats - 1, cycleBeats - 0.5, cycleBeats - 0.25];
+  if (!cell.onsets.every((onset, index) => Math.abs(onset - expected[index]) < 0.001)) return false;
+  const articulations = cell.articulations?.length ? cell.articulations : [cell.articulation ?? ''];
+  return articulations.every(articulation => GENERIC_CLOSE_ARTICULATIONS.has(articulation));
+}
+
+const GENERIC_DESCRIPTION_TECHNIQUES = new Set([
+  'accent', 'staccato', 'legato', 'tenuto', 'open', 'ghost', 'ghost-note', 'roll', 'vibrato',
+]);
+
+function listForSentence(values: string[]): string {
+  const unique = [...new Set(values.filter(Boolean))];
+  if (unique.length < 2) return unique[0] ?? '';
+  if (unique.length === 2) return `${unique[0]} and ${unique[1]}`;
+  return `${unique.slice(0, -1).join(', ')}, and ${unique.at(-1)}`;
+}
+
+function studentStyleDescription(item: CalibratedStyleInput): string {
+  const center = item.patterns[0]?.replace(/[.!?]+$/, '') || item.name;
+  const leadInstruments = item.roles.lead ?? item.roles.voice ?? Object.values(item.roles)[0] ?? [];
+  const leadNames = leadInstruments.slice(0, 2).map(id => id === 'voice' ? 'vocal line' : studentInstrumentLabel(id));
+  const leadLabel = listForSentence(leadNames) || 'the lead part';
+  const supportId = [...(item.roles.harmony ?? []), ...(item.roles.percussion ?? [])]
+    .find(id => !leadInstruments.includes(id));
+  const supportLabel = supportId ? studentInstrumentLabel(supportId) : 'the ensemble';
+  const leadTechniques = leadInstruments.flatMap(id => item.instrumentTechniques[id] ?? [])
+    .filter(value => !GENERIC_DESCRIPTION_TECHNIQUES.has(value.toLowerCase()))
+    .slice(0, 3);
+  const techniques = listForSentence(leadTechniques);
+  const microtimingFeel = item.groove.microtimingFeel ?? 'straight';
+  const feelText = `${microtimingFeel} ${item.patterns.join(' ')}`;
+  const grooveName = /swing|shuffle|triplet/i.test(feelText) || (item.groove.swingPercentage ?? 50) >= 58 ? 'swung'
+    : /free|rubato/i.test(microtimingFeel) ? 'elastic'
+      : /straight|quantized/i.test(microtimingFeel) ? 'straight' : 'flexible';
+  const bassMotion = ({
+    'root-fifth': 'root-and-fifth bass motion', tumbao: 'tumbao bass', riff: 'riff-driven bass',
+    walking: 'walking bass', pedal: 'pedal bass',
+  } as Record<string, string>)[item.bassMotion] ?? `${item.bassMotion.replaceAll('-', ' ')} bass motion`;
+  const formLabels = [...new Set(item.form.map(step => step.label.toLowerCase()))].slice(0, 5);
+  const form = formLabels.length > 1 ? ` The form moves through ${formLabels.join(' → ')}.` : '';
+  const techniqueSentence = techniques
+    ? ` Practice ${techniques} in the lead phrase.`
+    : ` Keep ${supportLabel} distinct from the lead.`;
+  return `${item.name} centers ${center}. A ${grooveName} ${item.meter} pulse at ${item.tempo[0]}–${item.tempo[1]} BPM puts ${leadLabel} against ${supportLabel}, with ${bassMotion}.${techniqueSentence}${form}`;
+}
+
 function scopesForTechnique(value: string): Array<'note'|'motif'|'phrase'|'section'|'song'> {
   const term = value.toLowerCase();
   if (/section|gear|drop|crescendo|orchestrat|transition|density|climax|filter.?sweep|automation|modulation|patch.?change/.test(term)) return ['section'];
@@ -306,10 +369,14 @@ function styleDefinition(input: GenrePackInput, item: CalibratedStyleInput): Gen
   // Older catalogs appended this same sentence to every style. It adds no
   // student-facing guidance and makes otherwise specific descriptions read
   // like generated metadata.
-  const description = item.description.replace(
+  const cleanedDescription = item.description.replace(
     /\s*The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells\.?$/i,
     '',
   ).trim();
+  const stubDescription = `${item.name}: ${item.patterns[0] ?? item.name}`.replace(/[.!?]+$/, '').toLocaleLowerCase();
+  const description = cleanedDescription.replace(/[.!?]+$/, '').toLocaleLowerCase() === stubDescription
+    ? studentStyleDescription(item)
+    : cleanedDescription;
   const roles = Object.fromEntries(Object.entries(styleRoles).map(([role, instruments]) => [role, {
     preferredInstruments: instruments, required: role === 'lead' || role === 'bass',
     mixFunction: role === 'lead' || role === 'voice' ? 'foreground' : role === 'bass' ? 'low-anchor' : role === 'percussion' ? 'pulse-anchor' : 'harmonic-support',
@@ -391,6 +458,7 @@ function studentInstrumentLabel(instrumentId: string): string {
 function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cell: AuthoredCell, index: number): MusicalPattern {
   const id = `${style.id}-pattern-${index}-${slug(cell.name)}`;
   const meter = style.preferredMeters[0];
+  const genericPhraseClose = isGenericPhraseClose(cell, meter);
   const [n, d] = meter.split('/').map(Number);
   const beats = n * 4 / d;
   const stepsPerBeat = 4;
@@ -405,7 +473,9 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
     // individual attacks would change both its ratio and its finger order.
     ...(cell.phraseEnd ? { condition: { phrasePosition: ['cadence', 'transition'] }, probability: cell.notations?.[i]?.tuplet ? 1 : .85 } : {}),
   }));
-  const shortName = studentCellName(style, cell);
+  const shortName = genericPhraseClose
+    ? `${studentInstrumentLabel(instruments[0] ?? cell.role)} close`
+    : studentCellName(style, cell);
   return {
     id, worldId: input.id, styleIds: [style.id], name: `${style.name}: ${shortName}`, shortName,
     family: shortName, category: cell.phraseEnd ? (/cadence|cierre|remate|ending|closing/i.test(cell.name) ? 'cadence' : 'fill')
@@ -415,7 +485,9 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
           : cell.role === 'lead' || cell.role === 'voice' ? 'melodic'
             : /break|dropout|silence/i.test(cell.name) ? 'break'
               : /transition|pickup|turnaround/i.test(cell.name) ? 'transition' : 'comping',
-    description: cell.description ?? `${cell.name}. ${style.description}`, tags: [input.id, style.id, cell.role, slug(cell.name), cell.name],
+    description: genericPhraseClose
+      ? `Three quick end-of-cycle attacks make a neutral ${studentInstrumentLabel(instruments[0] ?? cell.role)} timing exercise. Practice the close deliberately; this is not a style-specific fill.`
+      : cell.description ?? `${cell.name}. ${style.description}`, tags: [input.id, style.id, cell.role, slug(cell.name), cell.name],
     scopes: cell.phraseEnd ? ['phrase'] : ['measure', 'phrase'], roles: [cell.role] as MusicalPattern['roles'],
     instruments: instruments as MusicalPattern['instruments'], canCrossRole: false, sourceLevel: 'style-authored',
     meter, cycleLength, subdivisions: beats * stepsPerBeat * cycleLength,
@@ -426,11 +498,14 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
     supportedEnergy: cell.supportedEnergy ?? [1,2,3,4,5],
     sectionUsage: cell.sectionUsage ?? (cell.phraseEnd ? ['ending'] : undefined),
     phrasePosition: cell.phraseEnd ? ['end'] : ['start','middle','end','any'], variants: [],
-    ...(cell.pedagogicalStudy ? { sectionUsage: cell.sectionUsage ?? (cell.pedagogicalStudy === 'technique' ? ['solo']
+    ...((cell.pedagogicalStudy || genericPhraseClose) ? { sectionUsage: cell.sectionUsage ?? (genericPhraseClose ? ['solo', 'ending']
+      : cell.pedagogicalStudy === 'technique' ? ['solo']
       : cell.pedagogicalStudy === 'answer' ? ['solo', 'bridge'] : cell.pedagogicalStudy === 'variation' ? ['verse', 'chorus', 'bridge', 'solo'] : ['intro', 'verse']) } : {}),
     ...(cell.difficulty ? { difficulty: cell.difficulty } : {}),
-    ...(cell.pedagogicalStudy ? { pedagogicalStudy: cell.pedagogicalStudy } : {}),
-    provenance: cell.pedagogicalStudy
+    ...((cell.pedagogicalStudy || genericPhraseClose) ? { pedagogicalStudy: cell.pedagogicalStudy ?? ('technique' as const) } : {}),
+    provenance: genericPhraseClose
+      ? 'Generic phrase-close timing exercise retained for deliberate practice; not used as an automatic style cadence.'
+      : cell.pedagogicalStudy
       ? `Local ${cell.pedagogicalStudy} practice study derived from this style's folder-authored source cell; quarter-note beat positions and phrase conditions.`
       : 'Folder-authored role cell; quarter-note beat positions and phrase conditions.',
     authenticityTags: [input.id, style.id, slug(cell.name)], tuningSystem: input.pitchSystem, enabled: true, weight: cell.phraseEnd ? .4 : 1,
@@ -647,7 +722,8 @@ export function createGenreWorld(input: GenrePackInput): GenreWorld {
     const regular = cells.filter(cell => !cell.phraseEnd && style.calibration!.roles[cell.role]);
     const patterns = regular.map((cell, index) => {
       const pattern = patternFromCell(input, style, cell, index);
-      const fill = authoredCells.find(candidate => candidate.phraseEnd && candidate.role === cell.role && candidate.instruments?.[0] === cell.instruments?.[0]);
+      const fill = authoredCells.find(candidate => candidate.phraseEnd && !isGenericPhraseClose(candidate, style.preferredMeters[0])
+        && candidate.role === cell.role && candidate.instruments?.[0] === cell.instruments?.[0]);
       if (fill) {
         const fillPattern = patternFromCell(input, style, fill, index);
         const events = closingEvents(pattern, fillPattern);
@@ -671,7 +747,7 @@ export function createGenreWorld(input: GenrePackInput): GenreWorld {
       });
     const studyNames = new Set(cells.filter(cell => cell.pedagogicalStudy).flatMap(cell => [cell.name, cell.shortName ?? cell.name]));
     const phrases = patterns.filter(pattern => !studyNames.has(pattern.shortName ?? '')).flatMap(pattern => {
-      const ending = endings.find(candidate => candidate.roles[0] === pattern.roles[0]
+      const ending = endings.find(candidate => !candidate.pedagogicalStudy && candidate.roles[0] === pattern.roles[0]
         && candidate.instruments?.join('|') === pattern.instruments?.join('|'));
       // Do not turn drones/long processes into arbitrarily chopped grooves.
       if (!ending || pattern.cycleLength > 2 || ending.cycleLength > pattern.cycleLength || pattern.events!.length > 32) return [];
@@ -690,7 +766,9 @@ export function createGenreWorld(input: GenrePackInput): GenreWorld {
         durationGrid: events.map(event => Math.max(1, Math.round(event.duration! * 4))),
         accentProfile: events.map(event => event.accent!), velocityProfile: events.map(event => event.velocity!),
         hitGrid: undefined, category: 'transition', variants: [], sectionUsage: ['solo', 'ending', 'outro', 'coda'] as MusicalPattern['sectionUsage'],
-        description: `Two-bar study: ${pattern.shortName}, followed by ${ending.shortName}. Practice the change into the local ending; use the regular cell to accompany the main statement.`,
+        pedagogicalStudy: 'variation' as const,
+        difficulty: Math.min(5, Math.max(2, (pattern.difficulty ?? 2) + 1)),
+        description: `Two-bar ${studentInstrumentLabel(pattern.instruments?.[0] ?? pattern.roles[0])} study: ${pattern.shortName}, followed by ${ending.shortName}. Practice the change into the local ending; use the regular cell to accompany the main statement.`,
         provenance: `Recomposition of ${pattern.id} and ${ending.id} within ${input.id}; not a recording transcription.`,
       }];
     });

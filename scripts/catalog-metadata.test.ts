@@ -53,6 +53,10 @@ test('student-facing catalog labels stay concise and descriptions avoid shared f
   for (const world of GENRE_WORLDS) for (const style of world.styleDefinitions) {
     assert.doesNotMatch(style.description, /The lead leaves space for instrumental replies/,
       `${world.id}/${style.id} should explain its own musical character`);
+    const sourceStub = `${style.name}: ${style.rhythmicGrammar?.[0] ?? style.coreConcepts?.[0] ?? ''}`.replace(/[.!?]+$/, '').toLocaleLowerCase();
+    if (style.description.replace(/[.!?]+$/, '').toLocaleLowerCase() === sourceStub) {
+      assert.match(style.description, /\bcenters\b.*\bBPM\b/i, `${world.id}/${style.id} needs a usable style identity description`);
+    }
   }
 });
 
@@ -92,6 +96,17 @@ test('practice studies stay selectable but do not replace authored song phrase c
     'a student can still deliberately use a practice pattern in every section');
   assert.ok(arrangeBand(experiment).notes.some(note => note.trackId === added.id),
     'the deliberate practice pattern still reaches playback');
+
+  const turnarounds = ALL_PATTERNS.filter(pattern => pattern.id.endsWith('-turnaround-study'));
+  assert.ok(turnarounds.length, 'local two-bar phrase studies remain available');
+  assert.ok(turnarounds.every(pattern => pattern.pedagogicalStudy === 'variation'),
+    'turnaround lessons are identified as practice material so automatic arrangement cannot mistake them for core phrases');
+  const genericClosers = ALL_PATTERNS.filter(pattern => pattern.description?.includes('this is not a style-specific fill'));
+  assert.ok(genericClosers.length, 'neutral phrase-close timing exercises remain available to students');
+  assert.ok(genericClosers.every(pattern => pattern.pedagogicalStudy === 'technique' && !pattern.variants?.some(variant => variant.variationType === 'cadence')),
+    'generic timing placeholders stay selectable but do not drive automatic phrase cadences');
+  assert.ok(genericClosers.some(pattern => JSON.stringify(pattern.hitGrid) === JSON.stringify(['tom', 'snare', 'snare'])),
+    'the shared drum placeholder is also retained only as a clearly labeled timing study');
 });
 
 test('repeated instrument roles remain separate tracks and survive score projection', () => {

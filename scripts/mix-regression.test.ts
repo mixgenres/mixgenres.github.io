@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { ALL_STYLES } from '../src/engine/style';
 import { createMasterChain } from '../src/engine/studio/mixer';
-import { resolvePlaybackMix, resolveMasterSettings } from '../src/engine/studio/masterSettings';
+import { ensembleHeadroom, resolvePlaybackMix, resolveMasterSettings } from '../src/engine/studio/masterSettings';
+import { MASTER_MIX_DEFAULTS } from '../src/data/sound/mix/masterProfiles';
 import { resolveStyle } from '../src/engine/style';
 import { GENRE_WORLDS } from '../src/data/genres';
 import { GENRE_PRODUCTION, STYLE_PRODUCTION } from '../src/data/genres/_shared/production';
@@ -39,6 +40,9 @@ function context() {
 
 test('fresh and updated master graphs match for every catalog style, including transitions', () => {
   const live = context(); const chain = createMasterChain(live.ctx);
+  const makeup = 10 ** (MASTER_MIX_DEFAULTS.programMakeupDb / 40);
+  assert.equal(live.nodes.filter(n => n.kind === 'gain' && Math.abs(n.gain.value - makeup) < 1e-9).length, 2,
+    'half of the program gain drives the style glue and half restores post-compressor level');
   for (const style of ALL_STYLES) {
     const mix = resolvePlaybackMix(style.primaryGenre, style.id);
     assert.ok(mix.mixCharacter, style.id);
@@ -48,6 +52,10 @@ test('fresh and updated master graphs match for every catalog style, including t
     other.dispose(); assert.ok(fresh.nodes.every(n => n.disconnected), 'all graph nodes must be disposed');
   }
   chain.dispose(); assert.ok(live.nodes.every(n => n.disconnected));
+});
+
+test('arrangement track count does not attenuate the whole program before shared mastering', () => {
+  for (const trackCount of [1, 4, 8, 16, 32]) assert.equal(ensembleHeadroom(trackCount), 1);
 });
 
 test('reggaeton production profiles retain mono bass and independent transient controls', () => {

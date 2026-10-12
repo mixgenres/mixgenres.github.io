@@ -16,6 +16,7 @@ import { densePlaybackFixture } from './lib/densePlaybackFixture';
 import { arrangeBand } from '../src/engine/band/arrangeBand';
 import { songMixOptions } from '../src/engine/playback/renderSongMix';
 import { StereoPeakGuard } from '../src/engine/playback/soundfont/peakGuard';
+import { OUTPUT_SAMPLE_PEAK_CEILING } from '../src/engine/studio/outputHeadroom';
 import { performanceWindow, renderPerformanceToAudio } from '../src/engine/playback/mp3Export';
 import { SAMPLE_RELEASES } from '../src/engine/playback/soundfont/bankIdentity';
 import { prepareBankForLive } from '../src/engine/playback/soundfont/prepareBank';
@@ -191,6 +192,14 @@ test('named percussion routes use their recorded VCSL tones and every take has p
   assert.equal(bank.presets.filter(preset=>preset.bankMSB===66).length,24,'ship the jaw harp, custom body samples and dedicated VCSL percussion presets');
   assert.equal(patchForInstrument('log-drum',true).program,25);
   assert.deepEqual([47,48,50].map(midi=>recordedPercussionKey('log-drum',midi,{low:47,mid:48,high:50},'open')),[47,47,50]);
+  for(const [id,route] of Object.entries(RECORDED_PERCUSSION_PATCHES))for(let take=0;take<route.takes;take++) {
+    const preset=presetFor(route.program+take)!;
+    const samples=new Set(preset.zones.flatMap(zone=>zone.instrument.zones.map(zone=>zone.sample)));
+    let peak=0;
+    for(const sample of samples)for(const value of sample.getAudioData())peak=Math.max(peak,Math.abs(value));
+    const peakDb=20*Math.log10(peak);
+    assert(peakDb>-16&&peakDb<-8,`${id} take ${take+1} should be gain-staged evenly, got ${peakDb.toFixed(1)} dBFS`);
+  }
 });
 test('tango bandoneon push and pull route through the dedicated recorded bank',()=>{
   const p=performanceFixture({notes:[
@@ -380,7 +389,7 @@ test('linked stereo peak guard bounds transient overshoot with only 3ms latency'
   for(let i=0;i<l.length;i++){l[i]=i%160===0?4:Math.sin(i/10)*.4;r[i]=Math.cos(i/7)*2;}
   l[200]=NaN;r[300]=Infinity;
   const a=new Float32Array(l.length),b=new Float32Array(l.length);limiter.process(l,r,a,b);
-  assert(a.every(Number.isFinite)&&b.every(Number.isFinite));assert(Math.max(...a.map(Math.abs),...b.map(Math.abs))<=.920001);
+  assert(a.every(Number.isFinite)&&b.every(Number.isFinite));assert(Math.max(...a.map(Math.abs),...b.map(Math.abs))<=OUTPUT_SAMPLE_PEAK_CEILING+1e-6);
   assert.equal(a.findIndex(v=>v!==0),limiter.latencyFrames);assert(limiter.latencyFrames/44100<=.0031);
 });
 test('corrupt bank reads cannot poison shared storage; cancelling one consumer preserves another',async()=>{

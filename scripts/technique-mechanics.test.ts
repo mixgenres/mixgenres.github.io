@@ -195,8 +195,13 @@ test('authored flamenco fingers and simultaneous body strokes reach score and Mu
   assert.ok(body.every(n => !('physical' in n)), 'body technique stays in the score instead of a cached physical-voice object');
   for (const n of body) assert.equal(pipeline.performance.notes.filter(other => other.attackId === n.attackId && other.bodyAttack).length, 1);
   assert.ok(exportMusicXml(pipeline.interpretation).includes('golpe simultaneously'));
-  const solea = compileSongPipeline(makeSheet('flamenco', 'flamenco-solea'));
-  const tremolo = solea.interpretation.notes.filter(n => n.technique === 'tremolo');
+  const soleaSheet = makeSheet('flamenco', 'flamenco-solea');
+  for (const patternId of Object.values(soleaSheet.arrangement).flatMap(parts => Object.values(parts))) {
+    assert.equal(PATTERNS_BY_ID[patternId]?.pedagogicalStudy, undefined,
+      'the default song arrangement uses authored song cells, not selectable two-bar practice studies');
+  }
+  const solea = compileSongPipeline(soleaSheet);
+  const tremolo = solea.interpretation.notes.filter(n => n.technique === 'tremolo' && n.playback.authoredTechnique);
   assert.ok(tremolo.length >= 5);
   assert.deepEqual(tremolo.slice(0, 5).map(n => n.playback.musicianNotation?.fingering), ['p', 'i', 'a', 'm', 'i'],
     'the low thumb bass note begins the five-note tremolo picking cycle');

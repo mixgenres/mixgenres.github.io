@@ -7,7 +7,7 @@ import { resolveTrackSound } from './trackSound';
 import { createMasterChain, type MasterChain, type StudioMixState } from '../studio/mixer.ts';
 import { resolvePlaybackMix, ensembleHeadroom } from '../studio/masterSettings';
 import { measureAudio, type RenderDiagnostic } from '../studio/audioMetrics';
-import { reserveOutputHeadroom } from '../studio/outputHeadroom';
+import { applyProgramMakeup, reserveOutputHeadroom } from '../studio/outputHeadroom';
 import { excerptMixTimeline } from '../studio/dynamicMix/MixAutomation';
 import { determineBusCategory } from './mixBus';
 import { SOUNDFONT_RELEASE_RESERVE } from './soundfont/release';
@@ -292,7 +292,10 @@ async function renderPerformance(
         renderedLeft[i] = drumBusL[i] + subBusL[i] + instBusL[i];
         renderedRight[i] = drumBusR[i] + subBusR[i] + instBusR[i];
       }
-      if (!options.rawStem) reserveOutputHeadroom(renderedLeft, renderedRight);
+      if (!options.rawStem) {
+        applyProgramMakeup(renderedLeft, renderedRight);
+        reserveOutputHeadroom(renderedLeft, renderedRight);
+      }
       observeOutput(renderedLeft, renderedRight, false);
       checkAbort(options.signal);
       if (pcm) { onProgress?.(1); return { sampleRate, left: renderedLeft, right: renderedRight }; }

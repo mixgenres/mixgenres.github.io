@@ -14,6 +14,7 @@ import { synth } from '../src/data/instruments/catalog/electronic/synth';
 import { SAMPLED_SYNTH_PATCHES } from '../src/data/sound/playback/sampledSynthPatches';
 import { RECORDED_PERCUSSION_PATCHES } from '../src/engine/playback/soundfont/percussion';
 import { qualityPiano, qualityBass, qualityDrumKit, qualityElectric, qualityBandoneon, qualityUprightBass, QUALITY_SOURCES } from './lib/qualitySoundfonts';
+import { recordedGroupGainLinear } from './lib/recordedGroupGain';
 SpessaLog.setLogLevel(false, true, false);
 const args = process.argv.slice(2);
 const sources = args.filter(arg=>!arg.startsWith('--'));
@@ -30,6 +31,32 @@ const jawHarpData=readFileSync(sources[6]);
 const jawHarpBank=SoundBankLoader.fromArrayBuffer(jawHarpData.buffer.slice(jawHarpData.byteOffset,jawHarpData.byteOffset+jawHarpData.byteLength));
 const percussionSources=JSON.parse(readFileSync('scripts/lib/percussion-sources.json','utf8')) as {vcslCommit:string;samples:Array<{id:string;file:string;path:string;sha256:string;instrument:string;program:number;take:number;key:number;minVelocity:number;maxVelocity:number}>};
 const balafonSources=JSON.parse(readFileSync('scripts/lib/balafon-sources.json','utf8')) as {vcslCommit:string;samples:Array<{file:string;path:string;sha256:string;key:number;minVelocity:number;maxVelocity:number}>};
+
+type RecordedWave = { audio: Float32Array; peak: number };
+const recordedWaveCache = new Map<string, RecordedWave>();
+function readRecordedWave(file: string, maxBuffer = 16 * 1024 * 1024): RecordedWave {
+  const pcm = execFileSync('ffmpeg',['-v','error','-i',file,'-f','f32le','-ac','1','-ar','44100','pipe:1'],{maxBuffer});
+  const decoded = new Float32Array(pcm.buffer.slice(pcm.byteOffset,pcm.byteOffset+pcm.byteLength));
+  let last = decoded.length - 1;
+  while (last > 0 && Math.abs(decoded[last]) < .0001) last--;
+  const audio = decoded.slice(0,Math.min(decoded.length,last+220));
+  for (let frame = Math.max(0,audio.length-220);frame<audio.length;frame++) audio[frame] *= (audio.length-frame)/220;
+  let peak = 0;
+  for (const value of audio) peak = Math.max(peak,Math.abs(value));
+  return {audio,peak};
+}
+function recordedWave(file: string, maxBuffer?: number): RecordedWave {
+  let wave = recordedWaveCache.get(file);
+  if (!wave) { wave = readRecordedWave(file,maxBuffer); recordedWaveCache.set(file,wave); }
+  return wave;
+}
+const percussionTakePeaks = new Map<string,number>();
+for (const row of percussionSources.samples) {
+  const wave = recordedWave(join(sources[4],'vcsl-curated',row.file));
+  const group = `${row.instrument}:${row.take}`;
+  percussionTakePeaks.set(group,Math.max(percussionTakePeaks.get(group)??0,wave.peak));
+}
+const percussionTakeGains = new Map([...percussionTakePeaks].map(([group,peak])=>[group,recordedGroupGainLinear(peak)]));
 const output = 'src/assets/soundfonts'; mkdirSync(output, { recursive: true });
 const staging='.cache/soundfont-package';mkdirSync(staging,{recursive:true});
 const releases:Record<string,number>=requestedPacks?{...SAMPLE_RELEASES}:{};
@@ -104,16 +131,16 @@ for (const [id, programs] of Object.entries(BANK_PROGRAMS)) {
         const rows=percussionSources.samples.filter(row=>row.instrument===instrumentId&&row.take===take);
         if(!rows.length)throw new Error(`No pinned recordings for ${instrumentId} take ${take+1}.`);
         for(const row of rows) {
-          let sample=sampleCache.get(row.file);
+          const group = `${instrumentId}:${take}`;
+          const groupGain = percussionTakeGains.get(group);
+          if(groupGain===undefined)throw new Error(`No recording gain for ${group}`);
+          const wave = recordedWave(join(sources[4],'vcsl-curated',row.file));
+          const cacheKey = `${row.file}:${groupGain.toFixed(6)}`;
+          let sample=sampleCache.get(cacheKey);
           if(!sample) {
-            const file=join(sources[4],'vcsl-curated',row.file);
-            const pcm=execFileSync('ffmpeg',['-v','error','-i',file,'-f','f32le','-ac','1','-ar','44100','pipe:1'],{maxBuffer:16*1024*1024});
-            const decoded=new Float32Array(pcm.buffer.slice(pcm.byteOffset,pcm.byteOffset+pcm.byteLength));
-            let last=decoded.length-1;while(last>0&&Math.abs(decoded[last])<.0001)last--;
-            const audio=decoded.slice(0,Math.min(decoded.length,last+220));
-            for(let frame=Math.max(0,audio.length-220);frame<audio.length;frame++)audio[frame]*=(audio.length-frame)/220;
+            const audio = groupGain === 1 ? wave.audio : Float32Array.from(wave.audio,value=>value*groupGain);
             sample=new EmptySample();sample.name=row.id.slice(0,20);sample.originalKey=row.key;sample.setAudioData(audio,44100);
-            sampleCache.set(row.file,sample);bank.addSamples(sample);
+            sampleCache.set(cacheKey,sample);bank.addSamples(sample);
           }
           const zone=instrument.createZone(sample);zone.keyRange={min:row.key,max:row.key};
           zone.velRange={min:row.minVelocity,max:row.maxVelocity};

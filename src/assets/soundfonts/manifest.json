@@ -285,10 +285,10 @@
       "format": "sf3"
     },
     "percussion": {
-      "bytes": 2861412,
-      "unpackedBytes": 3830250,
-      "sha256": "d0d5009ea8f1950b5fea213895e60eaabb8f6e205d975607543ded1550b21caf",
-      "unpackedSha256": "73d5c24feda0f5406e2b1dbb27552c99f748b2a58aa1cb1d9c929713254ef86d",
+      "bytes": 2865551,
+      "unpackedBytes": 3834172,
+      "sha256": "506c40d9f75969aa8b33d61334d96ba5b6df448f5d6eb38e20d221a63a299291",
+      "unpackedSha256": "c1154f3ea6d539041c5b745307a4e6233182a5af3b09d06ad82e3262751ab018",
       "presets": [
         "0:66:0",
         "0:66:1",

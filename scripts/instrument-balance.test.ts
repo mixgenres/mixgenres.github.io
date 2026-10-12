@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { renderPerformanceToAudio } from '../src/engine/playback/mp3Export';
 import { setSoundfontBankReader } from '../src/engine/playback/soundfont/banks';
 import { measureAudio } from '../src/engine/studio/audioMetrics';
-import { reserveOutputHeadroom } from '../src/engine/studio/outputHeadroom';
+import { applyProgramMakeup, OUTPUT_SAMPLE_PEAK_CEILING, reserveOutputHeadroom } from '../src/engine/studio/outputHeadroom';
 import type { Performance } from '../src/engine/band/performanceData';
 
 setSoundfontBankReader(async id => {
@@ -37,14 +37,15 @@ test('upright bass remains audible alongside the violin without isolated overloa
   assert.ok(Math.abs(bass.rmsDbfs! - violin.rmsDbfs!) < 15, `${bass.rmsDbfs} versus ${violin.rmsDbfs}`);
 });
 
-test('program lift uses one stereo gain, preserves silence and leaves peak headroom', () => {
+test('program lift preserves stereo and the final linked trim enforces the shared ceiling', () => {
   const left = new Float32Array([.1, -.2]), right = new Float32Array([.05, -.1]);
+  applyProgramMakeup(left, right);
   reserveOutputHeadroom(left, right);
-  assert.ok(left[0] > .15 && left[0] < .17);
+  assert.ok(left[0] > .24 && left[0] < .26);
   assert.ok(Math.abs(left[0] / right[0] - 2) < 1e-6);
-  const loud = new Float32Array([2, -1]); reserveOutputHeadroom(loud, loud);
-  assert.ok(Math.abs(loud[0] - .98) < 1e-6);
-  assert.ok(Math.abs(loud[1] + .49) < 1e-6);
+  const loud = new Float32Array([2, -1]); applyProgramMakeup(loud, loud); reserveOutputHeadroom(loud, loud);
+  assert.ok(Math.abs(loud[0] - OUTPUT_SAMPLE_PEAK_CEILING) < 1e-6);
+  assert.ok(Math.abs(loud[1] + OUTPUT_SAMPLE_PEAK_CEILING / 2) < 1e-6);
   const silence = new Float32Array(10); reserveOutputHeadroom(silence, silence);
   assert.ok(silence.every(value => value === 0));
 });

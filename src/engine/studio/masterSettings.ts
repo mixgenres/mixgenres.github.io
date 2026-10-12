@@ -58,5 +58,10 @@ export function resolvePlaybackMix(worldId = '', styleId = '') {
 }
 
 export function ensembleHeadroom(trackCount: number, lift = 0.5) {
-  return Math.min(1, MASTER_MIX_DEFAULTS.headroomNumerator / Math.sqrt(Math.max(1, trackCount)) * (0.94 + lift * 0.12));
+  // Track count is not a reliable peak estimate. Attenuating every part by
+  // 1/sqrt(N) made larger arrangements needlessly quiet; the shared master
+  // compressor and output peak guard own summing headroom instead.
+  void trackCount;
+  void lift;
+  return 1;
 }

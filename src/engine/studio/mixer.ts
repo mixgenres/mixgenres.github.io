@@ -345,16 +345,23 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   glue.attack.value = settings.glue.attack;
   glue.release.value = settings.glue.release;
 
+  // The program lift is split around the authored glue profile. The first
+  // half brings quiet SoundFont sources into the compressor's working range;
+  // the second recovers level after gentle compression.
+  const makeupStageGain = 10 ** (MASTER_MIX_DEFAULTS.programMakeupDb / 40);
+  const glueDrive = ctx.createGain();
+  glueDrive.gain.value = makeupStageGain;
+
   // 9. Transparent Limiter & Output
   const limiter = ctx.createDynamicsCompressor();
-  limiter.threshold.value = -0.8;
+  limiter.threshold.value = -1.2;
   limiter.knee.value = 2.0;
   limiter.ratio.value = 8;
   limiter.attack.value = 0.001;
   limiter.release.value = 0.05;
 
   const makeup = ctx.createGain();
-  makeup.gain.value = 1;
+  makeup.gain.value = makeupStageGain;
 
   const tap = ctx.createGain();
   tap.gain.value = 1;
@@ -419,7 +426,8 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   hp.connect(low);
   low.connect(pres);
   pres.connect(air);
-  air.connect(glue);
+  air.connect(glueDrive);
+  glueDrive.connect(glue);
   glue.connect(makeup);
   makeup.connect(limiter);
   limiter.connect(tap);
@@ -573,6 +581,7 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
         pres.disconnect();
         air.disconnect();
         glue.disconnect();
+        glueDrive.disconnect();
         makeup.disconnect();
         limiter.disconnect();
         tap.disconnect();

@@ -1,3 +1,5 @@
+import { OUTPUT_SAMPLE_PEAK_CEILING } from '../../studio/outputHeadroom';
+
 /** Linked stereo lookahead limiter, O(1) per frame, with no callback allocation.
  * The monotonic queue finds the peak from the delayed frame through its future. */
 export class StereoPeakGuard {
@@ -12,7 +14,7 @@ export class StereoPeakGuard {
   private head=0;
   private tail=0;
   private gain=1;
-  constructor(sampleRate:number,private readonly ceiling=.92) {
+  constructor(sampleRate:number,private readonly ceiling=OUTPUT_SAMPLE_PEAK_CEILING) {
     this.latencyFrames=Math.ceil(sampleRate*.003);
     const size=2**Math.ceil(Math.log2(this.latencyFrames+2));this.mask=size-1;
     this.left=new Float32Array(size);this.right=new Float32Array(size);

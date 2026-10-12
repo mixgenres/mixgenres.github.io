@@ -392,17 +392,9 @@ export function affinity(
  * user's section dial both override it.
  */
 /**
- * Roughly two thirds of the catalog's patterns have no authored
- * cadence/fill/phraseEnd or transition/phraseStart variant at all (some
- * genre files — bossa nova among them — have none whatsoever). Without one,
- * every 4-bar phrase boundary plays the exact same bar it always does, which
- * is what reads to the ear as an "abrupt" cut rather than a turnaround.
- *
- * This synthesizes a light, deterministic boundary gesture straight from the
- * pattern's own onsetGrid/accentProfile whenever no authored variant exists,
- * so every genre gets *some* lead-in/lead-out at phrase boundaries. It is a
- * safety net, not a replacement for hand-authored variants — an authored
- * cadence/transition variant, when present, always wins (see call site).
+ * Only explicit style mechanics may add a generated boundary variant. A
+ * generic onset-grid nudge has no style-specific playing information, so
+ * patterns without a written transition stay intact.
  */
 function synthesizeBoundaryVariant(
   p: MusicalPattern,
@@ -424,12 +416,6 @@ function synthesizeBoundaryVariant(
 
   // Apply probabilistically
   if (hash(`synthBoundaryApply:${seed}`, 3) > 0.65) return undefined;
-
-  const onsets = [...baseOnsets];
-  const accents = p.accentProfile ? [...p.accentProfile] : onsets.map(() => 0.75);
-  const durations = p.durationGrid ? [...p.durationGrid] : undefined;
-  const sub = p.subdivisions || 16;
-  const roll = hash(`synthBoundaryShape:${seed}`, 5);
 
   // Dembow fill gesture
   if (phraseRole === 'cadence' && gestures['dembow-fill']?.probability) {
@@ -475,40 +461,7 @@ function synthesizeBoundaryVariant(
     };
   }
 
-  if (phraseRole === 'cadence') {
-    // Open a little space before the close, then land a soft pickup a step
-    // or two before the bar ends — a miniature turnaround instead of a
-    // mid-groove truncation.
-    if (onsets.length > 2 && roll > 0.4) {
-      onsets.pop(); accents.pop(); durations?.pop();
-    }
-    const pickupStep = Math.max(0, sub - (sub >= 12 ? 2 : 1));
-    if (!onsets.includes(pickupStep)) {
-      onsets.push(pickupStep);
-      accents.push(Math.min(1, (accents[accents.length - 1] ?? 0.75) * 0.85));
-      durations?.push(1);
-    }
-    if (accents.length) accents[accents.length - 1] = Math.max(0.3, accents[accents.length - 1] * 0.8);
-    return {
-      id: `${p.id}-auto-cadence`, parentPatternId: p.id,
-      name: `${p.name} — auto cadence`, variationType: 'cadence', probability: 1,
-      description: 'Algorithmically softened phrase ending; add an authored cadence variant to replace this.',
-      onsetGrid: onsets, accentProfile: accents, durationGrid: durations,
-    };
-  }
-
-  // transition: thin/nudge the very first attack so the new phrase doesn't
-  // land as an exact carbon copy of the downbeat that just played.
-  if (onsets.length > 1 && onsets[0] === 0 && roll > 0.35) {
-    onsets[0] = sub >= 12 ? 1 : 1;
-  }
-  if (accents.length) accents[0] = Math.max(0.55, accents[0] * 0.9);
-  return {
-    id: `${p.id}-auto-transition`, parentPatternId: p.id,
-    name: `${p.name} — auto transition`, variationType: 'transition', probability: 1,
-    description: 'Algorithmically softened phrase entry; add an authored transition variant to replace this.',
-    onsetGrid: onsets, accentProfile: accents, durationGrid: durations,
-  };
+  return undefined;
 }
 
 /** Project an authored event pattern into the legacy grid arrays at the render
