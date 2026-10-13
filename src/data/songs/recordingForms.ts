@@ -37,7 +37,7 @@ afrobeat::highlife|112|intro:8:2,head:16:3,verse:16:3,chorus:16:4,verse:16:3,sol
  andean::andean-fusion|90|opening:16:1,A:16:2,groove:32:3,B:16:4,breakdown:16:1,A:16:3,B:32:4,dissolve:16:1|_=Dm,Bb,F,C
  arabic::tarab|76|prelude:64:2,A:64:3,response:32:3,B:64:4,response:32:3,C:64:4,solo:32:2,C:64:5,return:32:3,cadence:16:2|_=D5,D5,G5,D5
  arabic::takht|84|taqsim:16:1,intro:16:2,verse:32:3,response:16:2,verse:32:4,solo:16:2,refrain:32:4,cadence:8:1|_=G5,G5,C5,G5
- arabic::muwashshah|96|intro:10:2,A:20:3,B:20:3,A:20:4,response:10:2,B:20:4,A:20:5,cadence:10:2|_=D5,D5,A5,D5
+ arabic::muwashshah|96|prelude:8:2,stanza:16:3,refrain:16:4,taqsim:8:2,stanza:16:3,refrain:16:5,coda:8:2|_=D5,D5,A5,D5
  arabic::instrumental-maqam|54|lower-register:16:1,exploration:24:2,upper-register:24:3,modulation:16:2,return:16:2,cadence:8:1|_=C5,C5,G5,C5
  arabic::modern-arabic-orchestra|88|prelude:32:2,A:32:3,B:32:4,solo:24:2,C:32:4,A:32:5,coda:16:2|_=Dm,Gm,A7,Dm
  bachata::dominican|132|intro:8:3,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,mambo:32:5,chorus:16:4,cierre:4:3|_=A,D,E7,A
@@ -97,13 +97,13 @@ afrobeat::highlife|112|intro:8:2,head:16:3,verse:16:3,chorus:16:4,verse:16:3,sol
  classical::modernist|126|introduction:48:1,augurs:48:4,abduction:32:5,rounds:48:3,rival-tribes:32:5,procession:24:4,earth-dance:32:5,introduction:48:1,circles:48:3,glorification:32:5,evocation:24:3,ritual:48:4,sacrificial-dance:64:5|_=E5,F5,Eb5,E5
  classical::minimalist|120|pulses:32:1,section-i:64:2,section-ii:64:3,section-iii:64:3,section-iv:64:4,section-v:64:3,section-vi:64:4,section-vii:64:3,section-viii:64:4,section-ix:64:3,section-x:64:4,section-xi:64:3,pulses:32:1|_=Dmaj7,Bm7,Emaj7,C#m7,Amaj7,F#m7,Bmaj7,G#m7,Emaj7,C#m7,F#maj7
  classical::chamber|72|fugue:64:2,allegro:64:3,transition:8:1,variations:96:3,presto:64:4,adagio:24:1,finale:96:5,coda:16:2|_=C#m,G#7,C#m,F#m;allegro=D,A7,D,G;variations=A,E7,F#m,D;presto=E,B7,E,A
- country::honky-tonk|148|intro:4:2,verse:16:3,chorus:16:4,solo:16:3,verse:16:3,chorus:16:4,tag:4:2|_=E,A,E,B7
- country::bluegrass|180|intro:8:2,verse:16:2,chorus:16:3,solo:16:4,verse:16:3,chorus:16:4,solo:16:5,tag:4:2|_=Bb,Eb,Bb,F7
+ country::honky-tonk|112|intro:4:2,verse:16:3,chorus:16:4,solo:16:3,verse:16:3,chorus:16:4,tag:4:2|_=E,A,E,B7
+ country::bluegrass|152|intro:8:2,verse:16:2,chorus:16:3,banjo-break:16:4,verse:16:3,chorus:16:4,fiddle-break:16:5,tag:4:2|_=Bb,Eb,Bb,F7
  country::bakersfield|116|intro:4:3,verse:16:3,chorus:8:4,solo:16:4,verse:16:3,chorus:16:4,tag:4:2|_=G,C,D7,G
- country::outlaw|112|intro:8:2,chorus:16:3,verse:16:3,chorus:16:4,solo:24:4,chorus:16:5,outro:8:3|_=C,F,C,G7
- country::western-swing|150|intro:8:2,head:32:3,solo:32:3,head:32:3,solo:32:4,head:32:5,tag:8:2|_=D,G,A7,D;solo=D,D,G,G,E7,A7,D,A7
- country::americana|78|intro:8:1,verse:16:2,chorus:16:3,verse:16:2,chorus:16:4,bridge:8:3,chorus:16:5,outro:8:1|_=D,G,D,A;chorus=Bm,G,D,A
- country::country-pop|125|intro:8:3,verse:16:3,prechorus:8:3,chorus:16:5,verse:16:3,chorus:16:5,solo:8:4,chorus:32:5,outro:8:3|_=Bb,Eb,F,Bb
+ country::outlaw|100|intro:8:2,chorus:16:3,verse:16:3,chorus:16:4,solo:16:4,steel-break:8:4,chorus:16:5,outro:8:3|_=C,F,C,G7
+ country::western-swing|140|intro:8:2,head:32:3,solo:32:3,head:32:3,solo:32:4,head:32:5,tag:8:2|_=D,G,A7,D;solo=D,D,G,G,E7,A7,D,A7
+ country::americana|88|intro:8:1,verse:16:2,chorus:16:3,verse:16:2,chorus:16:4,bridge:8:3,chorus:16:5,outro:8:1|_=D,G,D,A;chorus=Bm,G,D,A
+ country::country-pop|116|intro:8:3,verse:16:3,prechorus:8:3,chorus:16:5,verse:16:3,chorus:16:5,solo:8:4,chorus:32:5,outro:8:3|_=Bb,Eb,F,Bb
  dangdut::classic|120|intro:8:2,verse:16:3,refrain:16:4,interlude:16:3,verse:16:3,refrain:32:5,coda:8:2|_=Am,G,F,E7
  dangdut::koplo|150|intro:8:3,verse:16:3,chorus:16:4,break:8:2,verse:16:4,chorus:16:5,kendang:16:5,chorus:16:4,coda:4:3|_=C,G,Am,F
  dangdut::rock-dangdut|132|intro:16:4,verse:16:3,chorus:16:5,solo:16:4,verse:16:3,chorus:16:5,solo:16:5,coda:8:3|_=Em,D,C,B7
@@ -256,7 +256,7 @@ punk::pop-punk|176|intro:8:2,verse:16:2,chorus:16:4,verse:16:3,chorus:16:4,bridg
 punk::noise-punk|184|intro:4:3,A:8:4,B:8:5,A:8:4,break:2:1,C:16:5,A:8:5,coda:4:3|_=E5,F5,Bb5,E5
 qawwali::traditional|96|harmonium:16:1,invocation:32:2,refrain:32:3,verse:48:3,response:32:4,verse:48:4,refrain:64:5,cadence:16:2|_=D5,D5,D5,D5
 qawwali::hamd-naat|84|prelude:16:1,verse:32:2,refrain:24:3,verse:48:3,refrain:32:4,adlib:48:4,refrain:48:5,cadence:8:2|_=G5,G5,G5,G5
-qawwali::ghazal-qawwali|92|prelude:24:1,verse:48:2,refrain:32:3,verse:48:3,response:32:4,adlib:64:4,refrain:64:5,cadence:16:2|_=Dm,Gm,A7,Dm
+qawwali::ghazal-qawwali|92|prelude:24:1,verse:48:2,refrain:32:3,verse:48:3,response:32:4,adlib:64:4,refrain:64:5,cadence:16:2|_=D5,D5,D5,D5
 r-and-b::contemporary-r-b|94|intro:8:1,verse:16:2,prechorus:8:3,chorus:16:4,verse:16:2,chorus:16:4,bridge:16:2,chorus:32:5,outro:8:1|_=Dm7,Gm7,Am7,Dm7
 r-and-b::motown|118|intro:8:2,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,bridge:8:3,chorus:32:5,outro:8:2|_=Ebm,Abm,Bb7,Ebm
 r-and-b::memphis-soul|82|intro:4:1,verse:16:2,chorus:8:3,verse:16:2,chorus:8:4,bridge:8:2,chorus:16:4,outro:8:1|_=Fm,Bbm,C7,Fm

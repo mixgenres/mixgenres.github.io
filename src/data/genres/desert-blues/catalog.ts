@@ -29,7 +29,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "tishoumaren",
       "name": "Tishoumaren",
-      "description": "Tishoumaren: Tishoumaren guitar ostinato and sung response. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Tishoumaren: lock two electric-guitar parts into a repeating pulse, then trade short sung and guitar responses without disturbing the cycle.",
       "patterns": ["Tishoumaren guitar ostinato and sung response"],
       "techniques": ["hammer-on", "pull-off", "slide", "muted-strum", "call-response", "bend", "accent", "staccato", "legato", "vibrato", "strum", "ghost", "open", "roll"],
       "harmony": ["Am", "G"],
@@ -127,7 +127,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "sahel-guitar",
       "name": "Sahel Guitar",
-      "description": "Sahel Guitar: Sahel guitar syncopation and melodic bass. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Sahel Guitar: let syncopated guitar phrases and a mobile bass line answer one another over a relaxed, steady hand-percussion pulse.",
       "patterns": ["Sahel guitar syncopation and melodic bass"],
       "techniques": ["hammer-on", "pull-off", "slide", "muted-strum", "call-response", "bend", "accent", "staccato", "legato", "vibrato", "strum", "ghost", "open", "roll"],
       "harmony": ["Am", "G"],
@@ -225,7 +225,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "acoustic-tuareg",
       "name": "Acoustic Tuareg",
-      "description": "Acoustic Tuareg: acoustic Tuareg thumb bass and guitar ornaments. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Acoustic Tuareg: keep a ringing acoustic-guitar cycle under the vocal, using brief fingerstyle ornaments and hand percussion while leaving room between phrases.",
       "patterns": ["acoustic Tuareg thumb bass and guitar ornaments"],
       "techniques": ["hammer-on", "pull-off", "slide", "muted-strum", "call-response", "bend", "accent", "staccato", "legato", "vibrato", "strum", "ghost", "roll", "open"],
       "harmony": ["Am", "G"],
@@ -266,7 +266,7 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
-        "guitar": ["bend", "hammer-on", "pull-off", "slide", "strum", "muted-strum", "accent", "staccato", "legato", "vibrato"],
+        "guitar": ["fingerstyle", "hammer-on", "pull-off", "slide", "strum", "accent", "staccato", "legato"],
         "hand-percussion": ["accent", "ghost", "roll", "open"]
       },
       "instrumentDialects": {
@@ -275,9 +275,9 @@ export const GENRE_PACK: GenrePackInput = {
           "defaultTechnique": "accent"
         },
         "guitar:lead": {
-          "allowedTechniques": ["bend", "hammer-on", "pull-off", "slide", "strum", "muted-strum", "accent", "staccato", "legato", "vibrato"],
-          "defaultTechnique": "bend",
-          "variantId": "solid-electric"
+          "allowedTechniques": ["fingerstyle", "hammer-on", "pull-off", "slide", "strum", "accent", "staccato", "legato"],
+          "defaultTechnique": "fingerstyle",
+          "variantId": "steel-acoustic"
         },
         "hand-percussion:percussion": {
           "allowedTechniques": ["accent", "ghost", "roll", "open"],
@@ -286,11 +286,11 @@ export const GENRE_PACK: GenrePackInput = {
       },
       "mix": {
         "enabled": true,
-        "character": {"dryness":0.64,"bassForward":0.46,"width":0.48,"brightness":0.6,"compressionRatio":1.45,"transientSnap":0.72,"subHarmonics":0,"sidechainDucking":0,"delaySend":0.05,"reverbType":"room","saturationType":"tape"},
+        "character": {"dryness":0.72,"bassForward":0.48,"width":0.48,"brightness":0.55,"compressionRatio":1.3,"transientSnap":0.8,"subHarmonics":0,"sidechainDucking":0,"delaySend":0.02,"delayTimeSeconds":0.28,"delayFeedback":0.18,"reverbType":"room","saturationType":"tape"},
         "stage": {"width":0.48,"depthRange":0.38,"centerAnchorRoles":["percussion"],"rolePan":{"lead":0,"percussion":0.12},"roleWidth":{"lead":0.16,"percussion":0.34},"preserveNaturalStage":true},
         "dynamics": {"foregroundContrastDb":2.8,"maxTrackBoostDb":3,"maxTrackCutDb":-6,"ensembleBreathing":0.48,"crescendoExpansion":0.45,"silenceContrast":0.72,"peakSectionHeadroomDb":3,"busCompressionAmount":0.22,"busCompressionRatio":1.7,"densityCompensation":0.34,"sharedForeground":true},
         "masking": {"enabled":true,"minOverlap":0.2,"minPriorityDifference":0.14,"maxPresenceCutDb":2.2,"maxBodyCutDb":0.9,"maxGainCutDb":0.8,"amount":0.52,"preserveCounterpoint":true},
-        "ambience": {"roomSize":0.4,"foregroundDepthDifference":0.34,"reverbSend":0.08,"delaySend":0.03,"bloom":0.3,"preDelayMs":12},
+        "ambience": {"roomSize":0.28,"foregroundDepthDifference":0.25,"reverbSend":0.055,"delaySend":0.015,"bloom":0.22,"preDelayMs":9},
         "roles": {"lead":{"mixFunctions":["foreground"],"priority":0.9,"gainDb":0.8,"foregroundGainDb":1.4,"supportGainDb":-0.2,"presenceDb":0.8,"bodyDb":0,"width":0.16,"transientEmphasis":0.15,"maskingPriority":0.95,"ambienceSend":0.1,"protectLowEnd":false,"protectRhythmicDefinition":false,"mayYieldSpectrally":false,"mayYieldInGain":false,"depth":0.2},"percussion":{"mixFunctions":["pulse-anchor","rhythmic-support"],"priority":0.72,"gainDb":-1.2,"foregroundGainDb":0,"supportGainDb":-1,"presenceDb":0.25,"bodyDb":0,"width":0.34,"transientEmphasis":0.6,"maskingPriority":0.72,"ambienceSend":0.16,"protectLowEnd":false,"protectRhythmicDefinition":true,"mayYieldSpectrally":true,"mayYieldInGain":true,"depth":0.48}},
         "sections": {"intro":{"gainDb":-1,"depth":0.46,"width":0.39359999999999995},"breakdown":{"gainDb":-1.5,"ambience":1.12},"chorus":{"gainDb":0.7,"width":0.5376000000000001,"foregroundContrast":1.1},"climax":{"gainDb":0.8,"width":0.5568,"foregroundContrast":1.2}},
         "transitions": {"attackMs":120,"releaseMs":480,"sectionTransitionMs":640,"foregroundHandoffMs":320,"spectralRampMs":240,"lookaheadMs":100},
@@ -300,7 +300,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "psychedelic-desert",
       "name": "Psychedelic Desert",
-      "description": "Psychedelic Desert: psychedelic desert repeating guitar and long echoes. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Psychedelic Desert: hold a repeating electric-guitar riff against bass and drums; stretch lead notes and use echo on phrase ends to widen the build.",
       "patterns": ["psychedelic desert repeating guitar and long echoes"],
       "techniques": ["hammer-on", "pull-off", "slide", "muted-strum", "call-response", "bend", "accent", "staccato", "legato", "vibrato", "strum", "ghost", "open", "roll"],
       "harmony": ["Am", "G"],
@@ -384,11 +384,11 @@ export const GENRE_PACK: GenrePackInput = {
       },
       "mix": {
         "enabled": true,
-        "character": {"dryness":0.64,"bassForward":0.46,"width":0.48,"brightness":0.6,"compressionRatio":1.45,"transientSnap":0.72,"subHarmonics":0,"sidechainDucking":0,"delaySend":0.05,"reverbType":"room","saturationType":"tape"},
+        "character": {"dryness":0.62,"bassForward":0.5,"width":0.58,"brightness":0.58,"compressionRatio":1.55,"transientSnap":0.72,"subHarmonics":0,"sidechainDucking":0,"delaySend":0.22,"delayTimeSeconds":0.38,"delayFeedback":0.32,"delayToneHz":3800,"reverbType":"room","saturationType":"tape"},
         "stage": {"width":0.48,"depthRange":0.38,"centerAnchorRoles":["bass","percussion"],"rolePan":{"lead":0,"harmony":-0.12,"bass":0,"percussion":0.12},"roleWidth":{"lead":0.16,"harmony":0.62,"bass":0.16,"percussion":0.34},"preserveNaturalStage":true},
         "dynamics": {"foregroundContrastDb":2.8,"maxTrackBoostDb":3,"maxTrackCutDb":-6,"ensembleBreathing":0.48,"crescendoExpansion":0.45,"silenceContrast":0.72,"peakSectionHeadroomDb":3,"busCompressionAmount":0.22,"busCompressionRatio":1.7,"densityCompensation":0.34,"sharedForeground":true},
         "masking": {"enabled":true,"minOverlap":0.2,"minPriorityDifference":0.14,"maxPresenceCutDb":2.2,"maxBodyCutDb":0.9,"maxGainCutDb":0.8,"amount":0.52,"preserveCounterpoint":true},
-        "ambience": {"roomSize":0.4,"foregroundDepthDifference":0.34,"reverbSend":0.08,"delaySend":0.03,"bloom":0.3,"preDelayMs":12},
+        "ambience": {"roomSize":0.4,"foregroundDepthDifference":0.34,"reverbSend":0.08,"delaySend":0.18,"bloom":0.3,"preDelayMs":12},
         "roles": {"lead":{"mixFunctions":["foreground"],"priority":0.9,"gainDb":0.8,"foregroundGainDb":1.4,"supportGainDb":-0.2,"presenceDb":0.8,"bodyDb":0,"width":0.16,"transientEmphasis":0.15,"maskingPriority":0.95,"ambienceSend":0.1,"protectLowEnd":false,"protectRhythmicDefinition":false,"mayYieldSpectrally":false,"mayYieldInGain":false,"depth":0.2},"harmony":{"mixFunctions":["harmonic-support"],"priority":0.55,"gainDb":-1.2,"foregroundGainDb":0,"supportGainDb":-1,"presenceDb":-0.15,"bodyDb":0.2,"width":0.62,"transientEmphasis":0.15,"maskingPriority":0.52,"ambienceSend":0.16,"protectLowEnd":false,"protectRhythmicDefinition":false,"mayYieldSpectrally":true,"mayYieldInGain":true,"depth":0.48},"bass":{"mixFunctions":["low-anchor"],"priority":0.82,"gainDb":0.4,"foregroundGainDb":0.5,"supportGainDb":-1,"presenceDb":-0.15,"bodyDb":0.55,"width":0.16,"transientEmphasis":0.3,"maskingPriority":0.86,"ambienceSend":0.16,"protectLowEnd":true,"protectRhythmicDefinition":true,"mayYieldSpectrally":false,"mayYieldInGain":false,"depth":0.3},"percussion":{"mixFunctions":["pulse-anchor","rhythmic-support"],"priority":0.72,"gainDb":-1.2,"foregroundGainDb":0,"supportGainDb":-1,"presenceDb":0.25,"bodyDb":0,"width":0.34,"transientEmphasis":0.6,"maskingPriority":0.72,"ambienceSend":0.16,"protectLowEnd":false,"protectRhythmicDefinition":true,"mayYieldSpectrally":true,"mayYieldInGain":true,"depth":0.48}},
         "sections": {"intro":{"gainDb":-1,"depth":0.46,"width":0.39359999999999995},"breakdown":{"gainDb":-1.5,"ambience":1.12},"chorus":{"gainDb":0.7,"width":0.5376000000000001,"foregroundContrast":1.1},"climax":{"gainDb":0.8,"width":0.5568,"foregroundContrast":1.2}},
         "transitions": {"attackMs":120,"releaseMs":480,"sectionTransitionMs":640,"foregroundHandoffMs":320,"spectralRampMs":240,"lookaheadMs":100},

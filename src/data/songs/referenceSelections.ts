@@ -53,6 +53,7 @@ indian-classical::thumri|Girija Devi|Babul Mora Naihar Chhooto Jaye
 indian-classical::ragam-tanam-pallavi|T.N. Krishnan|Ragam Tanam Pallavi (Shankarabharanam, Todi, Kalyani, Atana)
 indian-classical::varnam|Lalgudi Jayaraman|Innam En Manam
 indian-classical::tillana|Lalgudi Jayaraman|Mohanakalyani Tillana
+qawwali::traditional|Nusrat Fateh Ali Khan|Allah Hoo Allah Hoo
 qawwali::hamd-naat|Nusrat Fateh Ali Khan|Wohi Khuda Hai
 qawwali::ghazal-qawwali|Sabri Brothers|Bhar Do Jholi Meri
 bollywood::golden-age|Lata Mangeshkar|Pyar Kiya To Darna Kya

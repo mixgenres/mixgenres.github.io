@@ -1,6 +1,6 @@
 import { resolveSoloPlan } from './solo';
 import type { SoloAssignment } from '../../data/styles/schema';
-import type { Song, Region, Track, Measure, SectionType, PatternVariant, MusicalPattern, SectionEnergy, GuestLens } from '../../types';
+import type { Song, Region, Track, Measure, SectionType, PatternVariant, MusicalPattern, SectionEnergy, GuestLens, Role } from '../../types';
 import { GENRE_WORLDS_BY_ID, PATTERNS_BY_ID, PATTERNS_BY_WORLD } from '../../data/genres';
 import { INSTRUMENTS_BY_ID, INSTRUMENT_CATALOG, instrument, instrumentPatternKinds } from '../../engine/lookup/instruments';
 import { sliceBarNative } from './grid.ts';
@@ -57,6 +57,30 @@ export function getResolvedSectionStyle(sheet: Sheet, region: Region): ReturnTyp
 
 export function getSectionStyleId(sheet: Sheet, region: Region): string {
   return getResolvedSectionStyle(sheet, region).id;
+}
+
+/** Return an explicit part lens or infer one from an intentionally assigned cell. */
+export function partLensForPattern(sheet: Sheet, region: Region, trackId: string, patternId?: string): GuestLens | undefined {
+  const explicit = sheet.partLens?.[region.id]?.[trackId];
+  if (explicit) return explicit;
+  const id = patternId ?? sheet.arrangement[region.id]?.[trackId];
+  const pattern = id && id !== 'silent' ? PATTERNS_BY_ID[id] : undefined;
+  if (!pattern) return undefined;
+
+  const patternStyle = pattern.styleIds?.map(styleId => getStyle(styleId))
+    .find(style => style && (style.primaryGenre === pattern.worldId || style.genres.includes(pattern.worldId)));
+  const hostGenre = region.genre ?? sheet.worldId;
+  const hostStyleId = getSectionStyleId(sheet, region);
+  if (pattern.worldId === hostGenre && (!patternStyle || patternStyle.id === hostStyleId)) return undefined;
+  try {
+    return {
+      genreId: pattern.worldId,
+      styleId: patternStyle?.id ?? getCanonicalStyle(pattern.worldId).id,
+      weight: 0.72,
+    };
+  } catch {
+    return undefined;
+  }
 }
 
 export interface CustomProgression {
@@ -485,7 +509,11 @@ function projectPatternEvents(
   // actual instrument and the part's host/guest technique vocabularies. Clearing
   // it here used to erase cross-role adaptation before the renderer could act.
   const chosen = events.map((event, eventIndex) => ({ event, eventIndex })).filter(({ event, eventIndex }) => {
-    if (event.condition?.role && event.condition.role !== role) return false;
+    if (event.condition?.role && event.condition.role !== role) {
+      const conditionBelongsToSourcePart = pattern.roles.includes(event.condition.role as Role)
+        || pattern.compatibleRoles?.includes(event.condition.role as Role);
+      if (!conditionBelongsToSourcePart && !pattern.canCrossRole) return false;
+    }
     if (event.condition?.section?.length && !event.condition.section.includes(sectionName)) return false;
     if (event.condition?.phrasePosition?.length && !event.condition.phrasePosition.includes(phraseRole)) return false;
     if (event.condition?.energy?.length && !event.condition.energy.includes(energy)) return false;
@@ -594,33 +622,56 @@ export function suggestPattern(
   sectionKind?: string, taken?: Set<string>,
   partEnergy?: SectionEnergy,
   styleId?: string,
+  lens?: GuestLens,
 ): string | undefined {
   const patternSection = canonicalPatternSection(sectionKind);
   const want = partEnergy ?? (sectionKind ? SECTION_ENERGY_DEFAULT[sectionKind] : undefined);
   const resolved = styleId ? resolveStyle({ genreId: worldId, styleId }) : undefined;
   const approach = approachForVoice(voice, worldId, styleId);
-  // Automatic arrangements are closed over this style's owned vocabulary.
-  // Deliberate user edits/influences can still introduce other material.
   const curated = resolved?.patterns?.allowed?.length ? resolved.patterns.allowed : undefined;
-  const worldWide = (PATTERNS_BY_WORLD[worldId] || []).map(p => p.id);
-  const candidateIds = curated ? [...new Set([...curated, ...worldWide])] : worldWide;
+  const guestWeight = lens ? Math.max(0, Math.min(1, lens.weight)) : 0;
+  let guestStyle: ReturnType<typeof resolveStyle> | undefined;
+  if (lens && guestWeight > 0) {
+    try {
+      guestStyle = resolveStyle({ genreId: lens.genreId, styleId: lens.styleId ?? getCanonicalStyle(lens.genreId).id });
+    } catch { guestStyle = undefined; }
+  }
+  const guestCurated = guestStyle?.patterns?.allowed?.length ? guestStyle.patterns.allowed : undefined;
+  const candidateIds = [...new Set([
+    ...(curated ?? []),
+    ...(PATTERNS_BY_WORLD[worldId] ?? []).map(p => p.id),
+    ...(guestCurated ?? []),
+    ...(guestWeight > 0 && lens ? (PATTERNS_BY_WORLD[lens.genreId] ?? []).map(p => p.id) : []),
+  ])];
   const candidatePatterns = candidateIds
     .map(id => PATTERNS_BY_ID[id])
-    .filter((p): p is MusicalPattern => !!p && p.enabled !== false && p.worldId === worldId);
+    .filter((p): p is MusicalPattern => !!p && p.enabled !== false && (guestWeight > 0 || p.worldId === worldId));
   const scored = candidatePatterns
     .map(p => {
-      let n = affinity(p.id, voice, worldId, styleId);
-      const behavioralFit = approachFit(p, approach);
-      if (approach && behavioralFit > 0) n += behavioralFit;
+      const hostFit = affinity(p.id, voice, worldId, styleId);
+      const guestFit = guestWeight > 0 && lens
+        ? affinity(p.id, voice, lens.genreId, guestStyle?.id, guestWeight)
+        : hostFit;
+      let n = hostFit * (1 - guestWeight) + guestFit * guestWeight;
+      const guestApproach = guestWeight > 0 && lens ? approachForVoice(voice, lens.genreId, guestStyle?.id) : undefined;
+      const behavioralFit = approachFit(p, approach) * (1 - guestWeight)
+        + approachFit(p, guestApproach) * guestWeight;
+      if ((approach || guestApproach) && behavioralFit > 0) n += behavioralFit;
       if (!Number.isFinite(n)) return { id: p.id, n: -999 };
       if (p.id === DEFAULT_PATTERN_PREFERENCES[worldId]?.[voice.instrumentId]) n += 8;
-      if (styleId && p.styleIds?.includes(styleId)) n += 30;
-      if (curated?.includes(p.id) === false) n -= 18;
-      if (resolved?.contract.timelineRequired && resolved.contract.timelineGrid.length) {
+      if (styleId && p.styleIds?.includes(styleId)) n += 30 * (1 - guestWeight);
+      if (lens?.styleId && p.styleIds?.includes(lens.styleId)) n += 30 * guestWeight;
+      if (curated?.includes(p.id) === false) n -= 18 * (1 - guestWeight);
+      if (guestCurated?.includes(p.id) === false) n -= 18 * guestWeight;
+      const timelineFit = (style: typeof resolved, weight: number) => {
+        if (!style?.contract.timelineRequired || !style.contract.timelineGrid.length) return 0;
         const authored = new Set(p.onsetGrid ?? []);
-        const overlap = resolved.contract.timelineGrid.filter(x => authored.has(x)).length / resolved.contract.timelineGrid.length;
-        n += overlap * 18;
-        if (overlap < 0.2 && p.category !== 'melody' && p.category !== 'texture') n -= 20;
+        const overlap = style.contract.timelineGrid.filter(x => authored.has(x)).length / style.contract.timelineGrid.length;
+        return overlap * 18 * weight - (overlap < 0.2 && p.category !== 'melody' && p.category !== 'texture' ? 20 * weight : 0);
+      };
+      n += timelineFit(resolved, 1 - guestWeight) + timelineFit(guestStyle, guestWeight);
+      if (!Number.isFinite(n)) {
+        return { id: p.id, n: -999 };
       }
       if (sectionKind) {
         const usesSection = !!patternSection && p.sectionUsage?.some(u => canonicalPatternSection(u) === patternSection);
@@ -641,7 +692,7 @@ export function suggestPattern(
   if (!scored.length) return undefined;
   const best = scored[0].n;
   const window = scored.filter(x => x.n >= best - 25).slice(0, 10);
-  return window[Math.floor(hash(`pick:${worldId}:${voice.instrumentId}:${sectionKind ?? 'body'}`, salt) * window.length)]?.id
+  return window[Math.floor(hash(`pick:${worldId}:${lens?.genreId ?? ''}:${lens?.styleId ?? ''}:${voice.instrumentId}:${sectionKind ?? 'body'}`, salt) * window.length)]?.id
     ?? window[0].id;
 }
 
@@ -771,10 +822,19 @@ export function rebuild(sheet: Sheet): Sheet {
       }
 
       const partEnergy: SectionEnergy = clampEnergy(interaction?.energyByTrack[track.id] ?? energies[r.id]?.[track.id] ?? energyOf(r));
+      const basePattern = PATTERNS_BY_ID[basePatternId];
+      const partLens = partLensForPattern(sheet, r, track.id, basePattern?.id);
+      const lensWeight = partLens ? Math.max(0, Math.min(1, partLens.weight)) : 0;
+      let guestStyle: ReturnType<typeof resolveStyle> | undefined;
+      if (partLens && lensWeight > 0) {
+        try {
+          guestStyle = resolveStyle({ genreId: partLens.genreId, styleId: partLens.styleId ?? getCanonicalStyle(partLens.genreId).id });
+        } catch { guestStyle = undefined; }
+      }
 
       const cellKey = `${r.id}:${track.id}`;
       const patternLocked = sheet.lockedPatternAssignments?.[r.id]?.[track.id] === basePatternId;
-      const cellFp = `${r.id}:${track.id}:${track.instrumentId}:${track.role}:${r.genre ?? sheet.worldId}:${getSectionStyleId(sheet, r)}:${bars}:${r.kind}:${r.formKey}:${chords.join(',')}:${basePatternId}:${partEnergy}:${patternLocked}:${sheet.generationSeed ?? 0}:${JSON.stringify(sheet.partLens?.[r.id]?.[track.id] ?? '')}:${interaction?.energyByTrack?.[track.id] ?? ''}`;
+      const cellFp = `${r.id}:${track.id}:${track.instrumentId}:${track.role}:${r.genre ?? sheet.worldId}:${getSectionStyleId(sheet, r)}:${bars}:${r.kind}:${r.formKey}:${chords.join(',')}:${basePatternId}:${partEnergy}:${patternLocked}:${sheet.generationSeed ?? 0}:${JSON.stringify(partLens ?? '')}:${interaction?.energyByTrack?.[track.id] ?? ''}`;
 
       const cached = arrangementCellDetailsCache.get(cellKey);
       if (cached && cached.fingerprint === cellFp && cached.detailsByBar.length === bars) {
@@ -794,23 +854,39 @@ export function rebuild(sheet: Sheet): Sheet {
         const phrase = Math.floor(index / phraseSpanBars(getResolvedSectionStyle(sheet, r).contract.cycleLength));
         let patternId = basePatternId;
         if (phrase > 0 && !patternLocked) {
-          const cacheKey = `${basePatternId}:${r.genre ?? sheet.worldId}:${track.id}:${r.id}:${phrase}`;
+          const cacheKey = `${basePatternId}:${r.genre ?? sheet.worldId}:${track.id}:${r.id}:${phrase}:${JSON.stringify(partLens ?? '')}`;
           const cachedPat = phrasePatternCache.get(cacheKey);
           if (cachedPat !== undefined) {
             patternId = cachedPat;
           } else {
             const base = PATTERNS_BY_ID[basePatternId];
-            const candidates = (PATTERNS_BY_WORLD[r.genre ?? sheet.worldId] || [])
+            const candidateIds = new Set([
+              ...(PATTERNS_BY_WORLD[r.genre ?? sheet.worldId] ?? []).map(candidate => candidate.id),
+              ...(lensWeight > 0 && partLens ? (PATTERNS_BY_WORLD[partLens.genreId] ?? []).map(candidate => candidate.id) : []),
+              ...(guestStyle?.patterns?.allowed ?? []),
+            ]);
+            const candidates = [...candidateIds].map(id => PATTERNS_BY_ID[id]).filter((candidate): candidate is MusicalPattern => !!candidate)
               .filter(p => p.enabled !== false)
               .filter(p => !p.pedagogicalStudy)
               .filter(p => !p.sectionUsage?.length || p.sectionUsage.some(section => canonicalPatternSection(section) === canonicalPatternSection(r.kind)))
-              .filter(p => !base || p.family === base.family || p.category === base.category)
+              .filter(p => !base || p.family === base.family || p.category === base.category
+                || (lensWeight > 0 && partLens && (
+                  p.worldId === partLens.genreId || p.styleIds?.includes(guestStyle?.id ?? '')
+                  || guestStyle?.patterns?.allowed?.includes(p.id)
+                )))
               .map(p => {
-                let score = affinity(p.id, track as Voice, r.genre ?? sheet.worldId, getSectionStyleId(sheet, r));
+                const hostGenre = r.genre ?? sheet.worldId;
+                const hostStyle = getSectionStyleId(sheet, r);
+                const hostFit = affinity(p.id, track as Voice, hostGenre, hostStyle);
+                const guestFit = lensWeight > 0 && partLens
+                  ? affinity(p.id, track as Voice, partLens.genreId, guestStyle?.id, lensWeight)
+                  : hostFit;
+                let score = hostFit * (1 - lensWeight) + guestFit * lensWeight;
                 if (p.id === basePatternId) score += 4;
                 else score += 14;
-                if (base && p.family === base.family) score += 12;
-                if (base && p.category === base.category) score += 6;
+                if (base && p.family === base.family) score += 12 * (1 - lensWeight);
+                if (base && p.category === base.category) score += 6 * (1 - lensWeight);
+                if (lensWeight > 0 && partLens?.styleId && p.styleIds?.includes(partLens.styleId)) score += 12 * lensWeight;
                 if (p.sectionUsage?.includes(r.kind)) score += 5;
                 if (p.phrasePosition?.includes((i % phraseSpanBars(getResolvedSectionStyle(sheet, r).contract.cycleLength)) === 0 ? 'start' : 'middle')) score += 2;
                 return { p, score: score + hash(`${basePatternId}:${p.id}:${r.id}`, phrase) * 3 };
@@ -881,8 +957,7 @@ export function rebuild(sheet: Sheet): Sheet {
           useEventProjection ? eventProjection.notations : undefined,
         );
 
-        const explicitLens = sheet.partLens?.[r.id]?.[track.id];
-        const lens = explicitLens && explicitLens.weight > 0 ? explicitLens : undefined;
+        const lens = partLens && partLens.weight > 0 ? partLens : undefined;
 
         detailsByBar.push({
           patternId: p.id,
@@ -1187,7 +1262,7 @@ export function setInstrument(sheet: Sheet, trackId: string, instrumentId: strin
     if (!current) {
       const used = new Set(Object.values(arrangement[region.id] ?? {}));
       const energy = sheet.energies?.[region.id]?.[trackId] ?? region.energy ?? 3;
-      const p = suggestPattern(newVoice, region.genre ?? sheet.worldId, ri * 31 + 17, String(region.kind), used, energy, getSectionStyleId(sheet, region));
+      const p = suggestPattern(newVoice, region.genre ?? sheet.worldId, ri * 31 + 17, String(region.kind), used, energy, getSectionStyleId(sheet, region), partLensForPattern(sheet, region, trackId));
       if (p) {
         arrangement[region.id] = { ...(arrangement[region.id] ?? {}), [trackId]: p };
       }
@@ -1658,7 +1733,7 @@ export function unsilenceVoiceInSection(sheet: Sheet, trackId: string, regionId:
   if (!pId) {
     const region = sheet.regions.find(r => r.id === regionId);
     const taken = new Set(Object.values(sheet.arrangement[regionId] ?? {}));
-    pId = suggestPattern(voice, region?.genre ?? sheet.worldId, sheet.tracks.length * 17 + 5, String(region?.kind ?? 'verse'), taken, sheet.energies?.[regionId]?.[voice.id], region ? getSectionStyleId(sheet, region) : undefined)
+    pId = suggestPattern(voice, region?.genre ?? sheet.worldId, sheet.tracks.length * 17 + 5, String(region?.kind ?? 'verse'), taken, sheet.energies?.[regionId]?.[voice.id], region ? getSectionStyleId(sheet, region) : undefined, region ? partLensForPattern(sheet, region, trackId) : undefined)
       ?? localPatternFallback(voice, region?.genre ?? sheet.worldId, String(region?.kind ?? 'verse'), region ? getSectionStyleId(sheet, region) : undefined);
   }
   const arrangement = { ...sheet.arrangement };
@@ -1678,7 +1753,7 @@ export function unsilenceVoiceInAll(sheet: Sheet, trackId: string): Sheet {
     let pId = remembered && remembered !== 'silent' ? remembered : undefined;
     if (!pId) {
       const taken = new Set(Object.values(arrangement[r.id] ?? {}));
-      pId = suggestPattern(voice, r.genre ?? sheet.worldId, ri * 31 + sheet.tracks.length * 13 + 7, String(r.kind), taken, sheet.energies?.[r.id]?.[voice.id], getSectionStyleId(sheet, r))
+      pId = suggestPattern(voice, r.genre ?? sheet.worldId, ri * 31 + sheet.tracks.length * 13 + 7, String(r.kind), taken, sheet.energies?.[r.id]?.[voice.id], getSectionStyleId(sheet, r), partLensForPattern(sheet, r, trackId))
         ?? localPatternFallback(voice, r.genre ?? sheet.worldId, String(r.kind), getSectionStyleId(sheet, r));
     }
     if (pId) arrangement[r.id] = { ...(arrangement[r.id] ?? {}), [trackId]: pId };
@@ -1735,6 +1810,7 @@ export function setSectionEnergy(sheet: Sheet, regionId: string, energy: Section
           taken,
           next,
           getSectionStyleId(sheet, region),
+          partLensForPattern(sheet, region, track.id, current),
         );
         if (p) {
           arrangement[regionId] = { ...(arrangement[regionId] ?? {}), [track.id]: p };
@@ -1773,6 +1849,7 @@ export function setPartEnergy(sheet: Sheet, regionId: string, trackId: string, e
         used,
         energy,
         getSectionStyleId(sheet, region),
+        partLensForPattern(sheet, region, trackId, current),
       );
       if (p) {
         arrangement[regionId] = { ...(arrangement[regionId] ?? {}), [trackId]: p };
@@ -1783,13 +1860,37 @@ export function setPartEnergy(sheet: Sheet, regionId: string, trackId: string, e
   return rebuild({ ...sheet, energies, arrangement });
 }
 
-/** Set a part's playing style. Weight 0 pins it to the host and suppresses inference. */
-export function setPartLens(sheet: Sheet, regionId: string, trackId: string, lens?: GuestLens): Sheet {
+/** Set one voice's style blend in a section or throughout the song. */
+export function setPartLens(
+  sheet: Sheet,
+  regionId: string,
+  trackId: string,
+  lens?: GuestLens,
+  scope: 'section' | 'song' = 'section',
+): Sheet {
+  if (lens) {
+    try {
+      resolveStyle({ genreId: lens.genreId, styleId: lens.styleId ?? getCanonicalStyle(lens.genreId).id });
+    } catch { return sheet; }
+  }
   const partLens = { ...(sheet.partLens ?? {}) };
-  const inner = { ...(partLens[regionId] ?? {}) };
-  if (lens) inner[trackId] = lens;
-  else delete inner[trackId];
-  partLens[regionId] = inner;
+  const regionIds = scope === 'song' ? sheet.regions.map(region => region.id) : [regionId];
+  for (const id of regionIds) {
+    const inner = { ...(partLens[id] ?? {}) };
+    if (lens) {
+      const region = sheet.regions.find(item => item.id === id);
+      if (!GENRE_WORLDS_BY_ID[lens.genreId]) return sheet;
+      if (scope === 'song' && lens.weight <= 0 && region) {
+        const hostGenre = region.genre ?? sheet.worldId;
+        inner[trackId] = { genreId: hostGenre, styleId: getSectionStyleId(sheet, region), weight: 0 };
+      } else {
+        inner[trackId] = { ...lens, weight: Math.max(0, Math.min(1, lens.weight)) };
+      }
+    }
+    else delete inner[trackId];
+    if (Object.keys(inner).length) partLens[id] = inner;
+    else delete partLens[id];
+  }
   return rebuild({ ...sheet, partLens });
 }
 
@@ -2158,7 +2259,7 @@ export function switchSectionWorld(sheet: Sheet, regionId: string, worldId: stri
 
   const taken = new Set<string>();
   for (const [i, v] of (sheet.tracks as Voice[]).entries()) {
-    const p = suggestPattern(v, worldId, regionIndex * 31 + i * 13 + 7, String(r.kind), taken, sheet.energies?.[regionId]?.[v.id], targetStyleId);
+    const p = suggestPattern(v, worldId, regionIndex * 31 + i * 13 + 7, String(r.kind), taken, sheet.energies?.[regionId]?.[v.id], targetStyleId, sheet.partLens?.[regionId]?.[v.id]);
     if (p) {
       arrangement[regionId][v.id] = p;
       taken.add(p);

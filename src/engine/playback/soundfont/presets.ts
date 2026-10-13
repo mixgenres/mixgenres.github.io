@@ -57,6 +57,10 @@ export const INSTRUMENT_PROGRAMS: Readonly<Record<string, number>> = ids;
 
 export function patchForInstrument(id: string, percussion = false): SamplePatch {
   if (id === 'synth' || id === 'synth-bass') return {bank:75,program:id==='synth-bass'?0:3,drum:false,pack:'electronic'};
+  // The GM Jazz Guitar patch is a poor pedal-steel stand-in. These use the
+  // packaged clean electric recordings; plan.ts may select the driven bank
+  // when a style explicitly calls for more edge.
+  if (id === 'pedal-steel' || id === 'lap-steel') return {bank:69,program:0,drum:false,pack:'electricClean'};
   if (id === 'piano') return {bank:64,program:0,drum:false,pack:'piano'};
   if (id === 'bass') return {bank:64,program:33,drum:false,pack:'bass'};
   if (id === 'bandoneon') return {bank:73,program:0,drum:false,pack:'bandoneon'};

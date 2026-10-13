@@ -4,8 +4,12 @@ export class StereoFieldManager {
   /** Returns a conventional Web Audio StereoPanner value (-1..1). */
   public resolveInstrumentPan(instrument: string): number {
     const key = (instrument || '').toLowerCase();
+    const normalized = key.replaceAll('-', '_').replaceAll(' ', '_');
+    const exact = PAN_MAP[normalized] ?? PAN_MAP[key];
+    if (exact !== undefined) return exact;
     for (const [k, v] of Object.entries(PAN_MAP)) {
-      if (key.includes(k)) return v;
+      const alias = k.toLowerCase().replaceAll('-', '_').replaceAll(' ', '_');
+      if (normalized.includes(alias)) return v;
     }
     return PAN_MAP[instrument] || 0.0;
   }

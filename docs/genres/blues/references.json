@@ -1,0 +1,328 @@
+{
+  "genreId": "blues",
+  "reviewed": "2026-10-12",
+  "status": "Five streaming recording candidates selected per style. Audio audition, timecodes, and mix comparison are pending; these links do not claim sonic matching.",
+  "source": "Apple Music track pages and catalog metadata. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "modern-blues",
+      "compare": [
+        "lead phrasing and bends",
+        "guitar, bass, and drum pocket",
+        "vocal and solo level against the band"
+      ],
+      "recordings": [
+        {
+          "title": "Damn Right, I've Got the Blues",
+          "artist": "Buddy Guy",
+          "url": "https://music.apple.com/us/song/164155888",
+          "timecodes": []
+        },
+        {
+          "title": "Bright Lights",
+          "artist": "Gary Clark Jr.",
+          "url": "https://music.apple.com/us/song/560652769",
+          "timecodes": []
+        },
+        {
+          "title": "When My Train Pulls In",
+          "artist": "Gary Clark Jr.",
+          "url": "https://music.apple.com/us/song/560639559",
+          "timecodes": []
+        },
+        {
+          "title": "Better Man",
+          "artist": "Keb' Mo'",
+          "url": "https://music.apple.com/us/song/1629773605",
+          "timecodes": []
+        },
+        {
+          "title": "Still Got the Blues (Single Version)",
+          "artist": "Gary Moore",
+          "url": "https://music.apple.com/us/song/724493483",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "delta",
+      "compare": [
+        "alternating-thumb bass against treble phrases",
+        "slide articulation and vocal space",
+        "solo recording balance and room/noise character"
+      ],
+      "recordings": [
+        {
+          "title": "Cross Road Blues",
+          "artist": "Robert Johnson",
+          "url": "https://music.apple.com/us/song/634139950",
+          "timecodes": []
+        },
+        {
+          "title": "Hellhound on My Trail",
+          "artist": "Robert Johnson",
+          "url": "https://music.apple.com/us/song/217292994",
+          "timecodes": []
+        },
+        {
+          "title": "Sweet Home Chicago",
+          "artist": "Robert Johnson",
+          "url": "https://music.apple.com/us/song/217292876",
+          "timecodes": []
+        },
+        {
+          "title": "Love in Vain",
+          "artist": "Robert Johnson",
+          "url": "https://music.apple.com/us/song/193896896",
+          "timecodes": []
+        },
+        {
+          "title": "I Believe I'll Dust My Broom",
+          "artist": "Robert Johnson",
+          "url": "https://music.apple.com/us/song/217292818",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "chicago",
+      "compare": [
+        "amplified guitar and harmonica placement",
+        "shuffle drive and backbeat",
+        "vocal grit against piano, bass, and drums"
+      ],
+      "recordings": [
+        {
+          "title": "Mannish Boy",
+          "artist": "Muddy Waters",
+          "url": "https://music.apple.com/us/song/198155375",
+          "timecodes": []
+        },
+        {
+          "title": "(I'm Your) Hoochie Coochie Man",
+          "artist": "Muddy Waters",
+          "url": "https://music.apple.com/us/song/1442742532",
+          "timecodes": []
+        },
+        {
+          "title": "Smokestack Lightnin'",
+          "artist": "Howlin' Wolf",
+          "url": "https://music.apple.com/us/song/1439120473",
+          "timecodes": []
+        },
+        {
+          "title": "Killing Floor",
+          "artist": "Howlin' Wolf",
+          "url": "https://music.apple.com/us/song/1439120775",
+          "timecodes": []
+        },
+        {
+          "title": "My Babe",
+          "artist": "Little Walter",
+          "url": "https://music.apple.com/us/song/1443861927",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "texas",
+      "compare": [
+        "guitar attack, bends, and vibrato",
+        "shuffle subdivisions and kick/bass lock",
+        "lead sustain against a compact rhythm section"
+      ],
+      "recordings": [
+        {
+          "title": "Pride and Joy",
+          "artist": "Stevie Ray Vaughan & Double Trouble",
+          "url": "https://music.apple.com/us/song/592756953",
+          "timecodes": []
+        },
+        {
+          "title": "Texas Flood",
+          "artist": "Stevie Ray Vaughan & Double Trouble",
+          "url": "https://music.apple.com/us/song/930561285",
+          "timecodes": []
+        },
+        {
+          "title": "Cold Shot",
+          "artist": "Stevie Ray Vaughan & Double Trouble",
+          "url": "https://music.apple.com/us/song/930563075",
+          "timecodes": []
+        },
+        {
+          "title": "The Sky Is Crying (1984 Version)",
+          "artist": "Stevie Ray Vaughan & Double Trouble",
+          "url": "https://music.apple.com/us/song/930748671",
+          "timecodes": []
+        },
+        {
+          "title": "Love Struck Baby",
+          "artist": "Stevie Ray Vaughan & Double Trouble",
+          "url": "https://music.apple.com/us/song/592756952",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "piedmont",
+      "compare": [
+        "alternating bass with syncopated treble",
+        "ragtime swing and chord changes",
+        "acoustic string attack and vocal phrasing"
+      ],
+      "recordings": [
+        {
+          "title": "Statesboro Blues",
+          "artist": "Blind Willie McTell",
+          "url": "https://music.apple.com/us/song/255931809",
+          "timecodes": []
+        },
+        {
+          "title": "Bell Street Lightnin'",
+          "artist": "Blind Willie McTell",
+          "url": "https://music.apple.com/us/song/80223043",
+          "timecodes": []
+        },
+        {
+          "title": "Lonesome Day Blues",
+          "artist": "Blind Willie McTell",
+          "url": "https://music.apple.com/us/song/255932325",
+          "timecodes": []
+        },
+        {
+          "title": "Diddie Wa Diddie",
+          "artist": "Blind Blake",
+          "url": "https://music.apple.com/us/song/1569161884",
+          "timecodes": []
+        },
+        {
+          "title": "Police Dog Blues",
+          "artist": "Blind Blake",
+          "url": "https://music.apple.com/us/song/382454156",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "hill-country",
+      "compare": [
+        "repeating one-chord groove and pulse",
+        "guitar ostinato, vocal phrasing, and small variations",
+        "raw room feel and drum/stomp weight"
+      ],
+      "recordings": [
+        {
+          "title": "Shake 'Em on Down",
+          "artist": "R.L. Burnside",
+          "url": "https://music.apple.com/us/song/1093176385",
+          "timecodes": []
+        },
+        {
+          "title": "Meet Me in the City",
+          "artist": "Junior Kimbrough",
+          "url": "https://music.apple.com/us/song/1560912939",
+          "timecodes": []
+        },
+        {
+          "title": "All Night Long",
+          "artist": "Junior Kimbrough",
+          "url": "https://music.apple.com/us/song/1560912942",
+          "timecodes": []
+        },
+        {
+          "title": "You Gotta Move",
+          "artist": "Mississippi Fred McDowell",
+          "url": "https://music.apple.com/us/song/262236577",
+          "timecodes": []
+        },
+        {
+          "title": "Hill Stomp",
+          "artist": "Robert Belfour",
+          "url": "https://music.apple.com/ie/song/1069815114",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "slow-blues",
+      "compare": [
+        "triplet subdivision and laid-back pocket",
+        "sustain, bends, and space between lead phrases",
+        "vocal and guitar foreground over a restrained rhythm section"
+      ],
+      "recordings": [
+        {
+          "title": "The Thrill Is Gone",
+          "artist": "B.B. King",
+          "url": "https://music.apple.com/us/song/1469584492",
+          "timecodes": []
+        },
+        {
+          "title": "Sweet Little Angel",
+          "artist": "B.B. King",
+          "url": "https://music.apple.com/us/song/1541092591",
+          "timecodes": []
+        },
+        {
+          "title": "As the Years Go Passing By",
+          "artist": "Albert King",
+          "url": "https://music.apple.com/us/song/1469546931",
+          "timecodes": []
+        },
+        {
+          "title": "I'll Play the Blues for You, Pts. 1 & 2",
+          "artist": "Albert King",
+          "url": "https://music.apple.com/us/song/1443072696",
+          "timecodes": []
+        },
+        {
+          "title": "I Can't Quit You Baby",
+          "artist": "Otis Rush",
+          "url": "https://music.apple.com/us/song/1527487289",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "blues-fusion",
+      "compare": [
+        "blues phrases over extended rock/funk grooves",
+        "lead dynamics and effects against bass/drums",
+        "transitions between riff, vocal, and solo sections"
+      ],
+      "recordings": [
+        {
+          "title": "Red House",
+          "artist": "The Jimi Hendrix Experience",
+          "url": "https://music.apple.com/us/song/357225613",
+          "timecodes": []
+        },
+        {
+          "title": "Voodoo Child (Slight Return)",
+          "artist": "Stevie Ray Vaughan & Double Trouble",
+          "url": "https://music.apple.com/us/song/402039125",
+          "timecodes": []
+        },
+        {
+          "title": "Crossfire",
+          "artist": "Stevie Ray Vaughan & Double Trouble",
+          "url": "https://music.apple.com/us/song/929845595",
+          "timecodes": []
+        },
+        {
+          "title": "Little Wing",
+          "artist": "Stevie Ray Vaughan & Double Trouble",
+          "url": "https://music.apple.com/us/song/192753454",
+          "timecodes": []
+        },
+        {
+          "title": "Blues at Sunrise (Remastered 2024)",
+          "artist": "Albert King & Stevie Ray Vaughan",
+          "url": "https://music.apple.com/us/song/1764155495",
+          "timecodes": []
+        }
+      ]
+    }
+  ]
+}

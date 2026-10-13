@@ -31,7 +31,10 @@ export function resolveTrackSound(instrumentId: string, worldId = '', styleId = 
   let drive = Math.max(0, Math.min(1, electric
     ? 0.15 + (physical?.harmonicRichness ?? 0.5) * 0.55
     : (physical?.harmonicRichness ?? 0.5) * 0.08));
-  if (dialect?.drive !== undefined) drive = Math.max(drive, dialect.drive);
+  // A style's authored drive is a destination, not a minimum. A clean
+  // Bakersfield setup must be able to select its clean sampled amp bank even
+  // when the generic guitar physics profile is harmonically rich.
+  if (dialect?.drive !== undefined) drive = Math.max(0, Math.min(1, dialect.drive));
   return {
     pan: Math.max(0, Math.min(1, new StereoFieldManager().resolveInstrumentPanNormalized(instrumentId) + (def.acousticProfile?.pan ?? 0) * 0.5)),
     roleGain: getRoleGainLinear(assignedRole, worldId || 'default', instrumentId, styleId) * 10 ** ((def.acousticProfile?.trim ?? 0) / 20),

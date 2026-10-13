@@ -1,8 +1,9 @@
 {
   "genreId": "flamenco",
+  "status": "Existing video links are un-auditioned candidates; coverage is incomplete until each style has five linked recordings and listening notes.",
   "references": [
     {
-      "styleId": "flamenco-solea",
+      "styleId": "solea",
       "references": [
         {
           "artist": "Camarón de la Isla",
@@ -39,7 +40,7 @@
       ]
     },
     {
-      "styleId": "flamenco-bulerias",
+      "styleId": "bulerias",
       "references": [
         {
           "artist": "Paco de Lucía",
@@ -74,7 +75,7 @@
       ]
     },
     {
-      "styleId": "flamenco-alegrias",
+      "styleId": "alegrias",
       "references": [
         {
           "artist": "Camarón de la Isla",
@@ -109,7 +110,7 @@
       ]
     },
     {
-      "styleId": "flamenco-tangos",
+      "styleId": "tangos",
       "references": [
         {
           "artist": "Camarón de la Isla",
@@ -123,7 +124,7 @@
       ]
     },
     {
-      "styleId": "flamenco-seguiriya",
+      "styleId": "seguiriya",
       "references": [
         {
           "artist": "Antonio Mairena",
@@ -133,7 +134,7 @@
       ]
     },
     {
-      "styleId": "flamenco-tientos",
+      "styleId": "tientos",
       "references": [
         {
           "artist": "Camarón",
@@ -147,7 +148,7 @@
       ]
     },
     {
-      "styleId": "flamenco-fandangos",
+      "styleId": "fandangos",
       "references": [
         {
           "artist": "Camarón",
@@ -166,7 +167,7 @@
       ]
     },
     {
-      "styleId": "flamenco-rumba",
+      "styleId": "rumba",
       "references": [
         {
           "artist": "Paco de Lucía",
@@ -175,7 +176,7 @@
       ]
     },
     {
-      "styleId": "flamenco-tonas-martinetes",
+      "styleId": "tonas-martinetes",
       "references": [
         {
           "artist": "Antonio Mairena",
@@ -189,7 +190,7 @@
       ]
     },
     {
-      "styleId": "flamenco-taranta",
+      "styleId": "taranta",
       "references": [
         {
           "artist": "Paco de Lucía",
@@ -203,7 +204,12 @@
       ]
     },
     {
-      "styleId": "flamenco-granaina",
+      "styleId": "granaina",
+      "compare": [
+        "free cante phrase length and guitar response",
+        "upper-register falseta articulation",
+        "Granada cadence and room between phrases"
+      ],
       "references": [
         {
           "artist": "Camarón",
@@ -235,7 +241,12 @@
       ]
     },
     {
-      "styleId": "flamenco-malaguena",
+      "styleId": "malaguena",
+      "compare": [
+        "rubato cante against spacious guitar arpeggios",
+        "phrase-ending cadence and breath",
+        "natural decay and intimate guitar/vocal balance"
+      ],
       "references": [
         {
           "artist": "Enrique Morente",
@@ -266,7 +277,7 @@
       ]
     },
     {
-      "styleId": "flamenco-guajira",
+      "styleId": "guajira",
       "references": [
         {
           "artist": "Paco de Lucía",
@@ -275,7 +286,7 @@
       ]
     },
     {
-      "styleId": "flamenco-farruca",
+      "styleId": "farruca",
       "references": [
         {
           "artist": "Sabicas",
@@ -289,7 +300,7 @@
       ]
     },
     {
-      "styleId": "flamenco-sevillanas",
+      "styleId": "sevillanas",
       "references": [
         {
           "artist": "Paco de Lucía",
@@ -298,7 +309,7 @@
       ]
     },
     {
-      "styleId": "flamenco-nuevo-flamenco",
+      "styleId": "nuevo-flamenco",
       "references": [
         {
           "artist": "Camarón",
@@ -307,7 +318,7 @@
       ]
     },
     {
-      "styleId": "flamenco-flamenco-jazz",
+      "styleId": "flamenco-jazz",
       "references": [
         {
           "artist": "Paco de Lucía",
@@ -316,7 +327,7 @@
       ]
     },
     {
-      "styleId": "flamenco-flamenco-rock",
+      "styleId": "flamenco-rock",
       "references": [
         {
           "artist": "Pata Negra",
@@ -325,7 +336,7 @@
       ]
     },
     {
-      "styleId": "flamenco-urban-experimental",
+      "styleId": "urban-experimental",
       "references": [
         {
           "artist": "Rosalía",

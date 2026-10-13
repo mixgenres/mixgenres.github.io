@@ -60,6 +60,24 @@ test('student-facing catalog labels stay concise and descriptions avoid shared f
   }
 });
 
+test('country pedal-steel studies expose each playable gesture with readable labels', () => {
+  const styles = ['honky-tonk', 'bakersfield', 'outlaw', 'western-swing', 'country-pop'];
+  const gestures = ['pedal-bend', 'knee-lever-bend', 'chordal-glissando', 'volume-swell'];
+  for (const styleId of styles) {
+    const studies = ALL_PATTERNS.filter(pattern => pattern.id.startsWith(`country-${styleId}-`)
+      && pattern.instruments?.includes('pedal-steel') && pattern.pedagogicalStudy
+      && pattern.events?.some(event => gestures.includes(event.articulation ?? '')));
+    for (const gesture of gestures) {
+      const study = studies.find(pattern => pattern.events?.some(event => event.articulation === gesture));
+      assert.ok(study, `${styleId} needs a selectable ${gesture} study`);
+      const label = study.shortName ?? study.name;
+      assert.ok(label.trim().split(/\s+/).length <= 3, `${styleId}/${label} should stay concise`);
+      assert.doesNotMatch(label, /knee-lever-bend|chordal-glissando|volume-swell|pedal-bend/,
+        `${styleId}/${label} should use a student-facing name`);
+    }
+  }
+});
+
 test('every sample song part has distinct style-local teaching patterns', () => {
   for (const entry of songCatalog) {
     const audit = auditCatalogSongInstruments(entry.id);

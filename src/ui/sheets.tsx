@@ -6,7 +6,6 @@ import { GENRE_PLATES, plateFor } from './worlds';
 import { INSTRUMENT_CATALOG, FAMILY_LABELS, FAMILY_ORDER, instrument } from '../engine/lookup/instruments';
 import { ALL_PATTERNS, GENRE_WORLDS_BY_ID, cleanPatternName, FEEL_ORDER, FEEL_LABELS, feelsForPattern, PatternFeel } from '../data/genres';
 import { Voice, affinity, roleForInstrument, toBar, getGenreForm, parseChord } from '../engine/sheet/index.ts';
-import { patternsForPickerVoice } from '../engine/sheet/patternPicker';
 import { BAR_CHOICES } from '../data/barChoices';
 import { FEELS } from '../data/tempoFeels';
 import { genreCategoryId } from '../data/genreCategories';
@@ -234,12 +233,13 @@ export function AddInstrumentSheet({
   } as Voice : null;
   const rankedPatterns = useMemo(() => {
     if (!voice) return [];
-    return patternsForPickerVoice(ALL_PATTERNS.filter(pattern => pattern.enabled !== false), voice.instrumentId, voice.role)
-      .map(pattern => ({ pattern, score: affinity(pattern.id, voice, worldId, styleId) }))
+    const query = patternQuery.trim().toLowerCase();
+    return ALL_PATTERNS.filter(pattern => pattern.enabled !== false)
+      .filter(pattern => patternScope !== 'genre' || pattern.worldId === worldId)
+      .filter(pattern => !query || [pattern.name, pattern.family, pattern.description,
+        ...pattern.tags].some(value => value.toLowerCase().includes(query)))
+      .map(pattern => ({ pattern, score: patternScope === 'all' ? 0 : affinity(pattern.id, voice, worldId, styleId) }))
       .filter(item => Number.isFinite(item.score))
-      .filter(item => patternScope !== 'genre' || item.pattern.worldId === worldId)
-      .filter(item => !patternQuery.trim() || [item.pattern.name, item.pattern.family, item.pattern.description,
-        ...item.pattern.tags].some(value => value.toLowerCase().includes(patternQuery.trim().toLowerCase())))
       .sort((a, b) => patternScope === 'all'
         ? a.pattern.name.localeCompare(b.pattern.name, undefined, { sensitivity: 'base' })
         : b.score - a.score);
@@ -280,7 +280,7 @@ export function AddInstrumentSheet({
       <input value={patternQuery} onChange={event => setPatternQuery(event.target.value)} placeholder="Search any pattern…"
         className="w-full mb-2" style={{ background: 'transparent', padding: '6px 0', fontSize: 14,
           borderBottom: '1px solid color-mix(in srgb, var(--ink) 25%, transparent)', outline: 'none' }} />
-      <div className="micro mb-1" aria-live="polite">Page {currentPatternPage + 1} of {patternPageCount} · {patterns.length} playable patterns</div>
+      <div className="micro mb-1" aria-live="polite">Page {currentPatternPage + 1} of {patternPageCount} · {patterns.length} patterns</div>
       <div className="flex flex-col mb-4 overflow-y-auto" style={{ borderTop: '1px solid color-mix(in srgb, var(--ink) 14%, transparent)', maxHeight: 280 }}>
         {visiblePatterns.map(pattern => <button key={pattern.id} type="button" onClick={() => setPatternId(pattern.id)}
           className="text-left py-2.5 flex items-center gap-2.5 w-full"

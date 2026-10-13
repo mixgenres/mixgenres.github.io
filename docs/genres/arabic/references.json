@@ -1,0 +1,101 @@
+{
+  "genreId": "arabic",
+  "reviewed": "2026-10-12",
+  "status": "Five or more linked recording candidates selected per style. Listening, section timecodes, and sound comparisons are still pending; this file does not claim sonic matching.",
+  "source": "Apple Music track pages. No reference audio downloaded.",
+  "research": [
+    {
+      "title": "Maqam World: Sama'i Thaqil 10/8",
+      "url": "https://www.maqamworld.com/en/iqaa/samai_thaqil.php",
+      "note": "Documents the 10/8 cycle as both a common muwashshah accompaniment and the defining rhythm of instrumental sama'i, with examples of sung muwashshahat."
+    },
+    {
+      "title": "Open University: Taqsim and composition",
+      "url": "https://www.open.edu/openlearn/history-the-arts/introduction-music-theory-2-pitch-and-notation/content-section-8.2",
+      "note": "Explains taqsim as a maqam improvisation and directs listeners to a performance by the Classical Arabic Orchestra of Aleppo."
+    },
+    {
+      "title": "Cambridge: Takht chamber ensemble and orchestral expansion",
+      "url": "https://www.cambridge.org/core/journals/international-journal-of-middle-east-studies/article/revisiting-the-heritagization-of-arab-music-in-postcolonial-cairo/78CFD06FC4DD5654E0063A018C46EAEF",
+      "note": "Historical context for the small takht ensemble and its later expansion into a larger Arabic orchestra."
+    }
+  ],
+  "styles": [
+    {
+      "styleId": "tarab",
+      "compare": [
+        "ornamented lead-vocal phrasing and breath",
+        "instrumental replies around the singer",
+        "rubato entrances, pulse settling, and long-form build"
+      ],
+      "recordings": [
+        {"title": "Anta Oumri", "artist": "Umm Kulthum", "url": "https://music.apple.com/us/song/423864309", "timecodes": []},
+        {"title": "El Atlal (Remastered)", "artist": "Umm Kulthum", "url": "https://music.apple.com/us/song/922760209", "timecodes": []},
+        {"title": "Alf Leila We Leila (Studio Recording)", "artist": "Umm Kulthum", "url": "https://music.apple.com/us/song/1612442735", "timecodes": []},
+        {"title": "Daret El Ayam (Live from Kuwait)", "artist": "George Wassouf", "url": "https://music.apple.com/us/song/1842947170", "timecodes": []},
+        {"title": "Al Atlal", "artist": "George Wassouf", "url": "https://music.apple.com/us/song/713514375", "timecodes": []}
+      ]
+    },
+    {
+      "styleId": "takht",
+      "compare": [
+        "small ensemble balance and acoustic separation",
+        "related but non-identical melodic lines",
+        "oud, qanun, nay, and riq articulation"
+      ],
+      "recordings": [
+        {"title": "Bayaty for the Oud, Kanan, and Nai", "artist": "Traditional Arab Musicians", "url": "https://music.apple.com/us/album/bayaty-for-the-oud-kanan-and-nai/474700557?i=474700629", "timecodes": []},
+        {"title": "Bayaty for the Nai and Kanun", "artist": "Traditional Arab Musicians", "url": "https://music.apple.com/us/album/bayaty-for-the-nai-and-kanun/474700557?i=474700568", "timecodes": []},
+        {"title": "Samaie Thakiel Bayaty", "artist": "Traditional Arab Musicians", "url": "https://music.apple.com/us/album/samaie-thakiel-bayaty/474700557?i=474700566", "timecodes": []},
+        {"title": "Tahmila", "artist": "Traditional Arab Musicians", "url": "https://music.apple.com/us/album/tahmila/474700557?i=474700633", "timecodes": []},
+        {"title": "Bayaty El Erian", "artist": "Traditional Arab Musicians", "url": "https://music.apple.com/us/song/474700632", "timecodes": []}
+      ]
+    },
+    {
+      "styleId": "muwashshah",
+      "compare": [
+        "stanza and refrain distinction",
+        "lead voice and ensemble response",
+        "ornamented cadence against the chosen rhythm"
+      ],
+      "recordings": [
+        {"title": "Muwashshah: Qultu Lamma", "artist": "Sabri Moudallal et Son Ensemble", "url": "https://music.apple.com/us/song/166249561", "timecodes": []},
+        {"title": "Muwashshah: Mawlaya Salli Wa-Sallim Da'iman Abadan", "artist": "Shyakh Hamza Shakkur & Ensemble Al-Kindi", "url": "https://music.apple.com/us/song/1226688421", "timecodes": []},
+        {"title": "Suite de muwashshah-s et de qadd-s", "artist": "Shyakh Hamza Shakkur & Ensemble Al-Kindi", "url": "https://music.apple.com/us/song/1226689058", "timecodes": []},
+        {"title": "Lamma Bada Yatathanna (Andalusian Muwashshah)", "artist": "Petros Tabouris", "url": "https://music.apple.com/us/song/1789230999", "timecodes": []},
+        {"title": "Lamma Bada Yatathana (Andalusian Muwashshah)", "artist": "Wassim Ibrahim", "url": "https://music.apple.com/us/song/1824514870", "timecodes": []}
+      ]
+    },
+    {
+      "styleId": "instrumental-maqam",
+      "compare": [
+        "modal exposition and return",
+        "register expansion and phrase development",
+        "rubato, ornament, and sparse accompaniment"
+      ],
+      "recordings": [
+        {"title": "Maqam Nahawand", "artist": "Ali Jihad Racy / Simon Shaheen", "url": "https://music.apple.com/us/song/49310368", "timecodes": []},
+        {"title": "Traditional Taqsim on the Qanoun", "artist": "Smithsonian Folkways recording", "url": "https://music.apple.com/us/album/traditional-taqsim-on-the-qanoun/264370733?i=264370736", "timecodes": []},
+        {"title": "Taqsim en maqam: Awj", "artist": "Munir Bashir", "url": "https://music.apple.com/us/song/466434869", "timecodes": []},
+        {"title": "Taqasim Maqam Ajam", "artist": "Saif Al-khayyat", "url": "https://music.apple.com/us/song/1774568423", "timecodes": []},
+        {"title": "Taqsim Maqam Ajam", "artist": "Rahim Alhaj & Souhail Kaspar", "url": "https://music.apple.com/us/song/270713600", "timecodes": []},
+        {"title": "Taqsim Maqam Ajam, Pt. 2", "artist": "Omar Bashir", "url": "https://music.apple.com/us/song/571501487", "timecodes": []}
+      ]
+    },
+    {
+      "styleId": "modern-arabic-orchestra",
+      "compare": [
+        "sectional orchestral build and contrast",
+        "vocal level against strings and plucked instruments",
+        "pulse, low-end support, and arranged responses"
+      ],
+      "recordings": [
+        {"title": "Enta Omri", "artist": "The Arab Orchestra of Nazareth & Lubna Salame", "url": "https://music.apple.com/us/song/1543489898", "timecodes": []},
+        {"title": "Alf Leila We Leila", "artist": "The Arab Orchestra of Nazareth & Lubna Salame", "url": "https://music.apple.com/us/song/1543489650", "timecodes": []},
+        {"title": "W'daret El - Ayyam", "artist": "The Arab Orchestra of Nazareth & Lubna Salame", "url": "https://music.apple.com/us/song/1543489897", "timecodes": []},
+        {"title": "Habibi Yis'id Awqatub", "artist": "The Arab Orchestra of Nazareth & Lubna Salame", "url": "https://music.apple.com/us/song/1543489899", "timecodes": []},
+        {"title": "Habaytak", "artist": "The Arab Orchestra of Nazareth", "url": "https://music.apple.com/us/song/316727238", "timecodes": []}
+      ]
+    }
+  ]
+}

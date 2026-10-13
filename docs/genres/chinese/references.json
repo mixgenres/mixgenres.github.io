@@ -1,37 +1,96 @@
 {
   "genreId": "chinese",
-  "references": [
+  "reviewed": "2026-10-12",
+  "status": "Five linked recording candidates per style. Audio audition, timecodes, and comparison notes are pending; this list does not claim sonic matching.",
+  "source": "Apple Music track pages. No reference audio downloaded.",
+  "styles": [
     {
-      "styleId": "chinese-jiangnan-sizhu",
-      "title": "Shanghai Conservatory Professor Jiangnan Sizhu Research Group - Huanle Ge"
+      "styleId": "jiangnan-sizhu",
+      "compare": ["silk-and-bamboo chamber balance", "ornamented melodic exchange", "flexible phrase timing"],
+      "recordings": [
+        {"title": "Yue Luo", "artist": "Lingling Yu & Guo Gan", "url": "https://music.apple.com/us/album/yue-luo-the-moon-sets-la-lune-se-couche/525622449?i=525622691", "timecodes": []},
+        {"title": "Zhonghua Liuban", "artist": "Lingling Yu & Guo Gan", "url": "https://music.apple.com/us/song/525622693", "timecodes": []},
+        {"title": "Man Long Hu Dou", "artist": "Lingling Yu & Guo Gan", "url": "https://music.apple.com/us/song/525622695", "timecodes": []},
+        {"title": "Xiao Nishang Qu", "artist": "Lingling Yu & Guo Gan", "url": "https://music.apple.com/us/album/xiao-nishang-qu-melody-of-the-rainbow-colored/525622449?i=525622699", "timecodes": []},
+        {"title": "Huanle Ge", "artist": "Lingling Yu & Guo Gan", "url": "https://music.apple.com/ch/song/525622701", "timecodes": []}
+      ]
     },
     {
-      "styleId": "chinese-guqin",
-      "title": "Guan Pinghu - Liu Shui"
+      "styleId": "guqin",
+      "compare": ["solo guqin decay and touch", "harmonics and left-hand pitch inflection", "rubato phrase shaping"],
+      "recordings": [
+        {"title": "Flowing Water (Liu Shui)", "artist": "Guan Pinghu", "url": "https://music.apple.com/us/song/268782722", "timecodes": []},
+        {"title": "Guangling Tune", "artist": "Guan Pinghu", "url": "https://music.apple.com/us/song/184219940", "timecodes": []},
+        {"title": "Eighteen Beats from the Tartar Reed Flute", "artist": "Guan Pinghu", "url": "https://music.apple.com/us/song/213154579", "timecodes": []},
+        {"title": "Guangling San", "artist": "Shuishan Yu", "url": "https://music.apple.com/us/song/569614205", "timecodes": []},
+        {"title": "Yang Guan San Die", "artist": "Master Zhongxian Wu", "url": "https://music.apple.com/us/song/198246520", "timecodes": []}
+      ]
     },
     {
-      "styleId": "chinese-guzheng",
-      "title": "Traditional - Fisherman's Song at Eventide"
+      "styleId": "guzheng",
+      "compare": ["right-hand pluck and tremolo", "left-hand bends and vibrato", "solo resonance and phrase pacing"],
+      "recordings": [
+        {"title": "Fighting the Typhoon", "artist": "Wang Changyuan", "url": "https://music.apple.com/us/song/114257234", "timecodes": []},
+        {"title": "A Night Tune by the Window", "artist": "Liu Tianyi", "url": "https://music.apple.com/us/song/211820236", "timecodes": []},
+        {"title": "Fisherman's Song at Dusk", "artist": "Cao Zheng", "url": "https://music.apple.com/us/song/211819747", "timecodes": []},
+        {"title": "Jackdaws Playing in the Water", "artist": "Xiang Sihua", "url": "https://music.apple.com/us/song/213154589", "timecodes": []},
+        {"title": "Fisherman Singing at Dusk", "artist": "Haiqiong Deng", "url": "https://music.apple.com/us/song/711943074", "timecodes": []}
+      ]
     },
     {
-      "styleId": "chinese-pipa",
-      "title": "Traditional - Ambush from Ten Sides"
+      "styleId": "pipa",
+      "compare": ["pipa pick attack and tremolo", "solo virtuosity and phrase contrast", "instrument resonance without ensemble masking"],
+      "recordings": [
+        {"title": "Ambush on All Sides", "artist": "Deng Jiandong & Wang Jianhua", "url": "https://music.apple.com/us/song/1606675266", "timecodes": []},
+        {"title": "Autumn Moon over Han Palace", "artist": "Wu Man", "url": "https://music.apple.com/us/song/635814348", "timecodes": []},
+        {"title": "Flute and Drum at Sunset", "artist": "Cheng Yu", "url": "https://music.apple.com/us/song/261271182", "timecodes": []},
+        {"title": "Dance of the Yi People", "artist": "Cheng Yu", "url": "https://music.apple.com/us/song/261271023", "timecodes": []},
+        {"title": "White Snow in Early Spring", "artist": "Chinese Pipa Musician", "url": "https://music.apple.com/us/song/1439274811", "timecodes": []}
+      ]
     },
     {
-      "styleId": "chinese-jingju",
-      "title": "Mei Lanfang - The Drunken Concubine"
+      "styleId": "jingju",
+      "compare": ["jinghu-led pitch support", "sung line against percussion cues", "opera ensemble balance and dramatic pacing"],
+      "recordings": [
+        {"title": "The Drunken Concubine", "artist": "Mei Lanfang", "url": "https://music.apple.com/us/song/598363963", "timecodes": []},
+        {"title": "The Drunken Concubine", "artist": "Du Jinfang", "url": "https://music.apple.com/us/song/598327431", "timecodes": []},
+        {"title": "Mu Guiying Takes Command", "artist": "Mei Lanfang", "url": "https://music.apple.com/us/song/598363539", "timecodes": []},
+        {"title": "Female Prisoner: Aria A", "artist": "Mei Lanfang & Xiao Changhua", "url": "https://music.apple.com/us/song/268774759", "timecodes": []},
+        {"title": "The Ice Wheel on the Island Starts Turning (Live)", "artist": "National Centre for the Performing Arts", "url": "https://music.apple.com/us/song/1781199790", "timecodes": []}
+      ]
     },
     {
-      "styleId": "chinese-cantonese-ensemble",
-      "title": "Cantonese music ensemble - Bu Bu Gao"
+      "styleId": "cantonese-ensemble",
+      "compare": ["Cantonese ensemble timbres and role balance", "bright melodic lead against plucked accompaniment", "ornamented phrases and rhythmic lift"],
+      "recordings": [
+        {"title": "The Lion Dance", "artist": "Guangdong Music ensemble", "url": "https://music.apple.com/us/song/1080734514", "timecodes": []},
+        {"title": "Rising Higher Step by Step", "artist": "Guangdong Music ensemble", "url": "https://music.apple.com/us/song/1602363799", "timecodes": []},
+        {"title": "Peacock Spreading the Tail", "artist": "Guangdong Music ensemble", "url": "https://music.apple.com/us/album/peacock-spreading-the-tail/1601216906?i=1601218452", "timecodes": []},
+        {"title": "Colourful Clouds Chasing the Moon", "artist": "Cantonese music ensemble", "url": "https://music.apple.com/us/song/1656196958", "timecodes": []},
+        {"title": "Dragon Boat", "artist": "Xu Zhengyin & Zhang Wei-Liang", "url": "https://music.apple.com/us/song/111902458", "timecodes": []}
+      ]
     },
     {
-      "styleId": "chinese-chaozhou",
-      "title": "Chaozhou String Ensemble - Han Ya Xi Shui"
+      "styleId": "chaozhou",
+      "compare": ["Chaozhou xianshi string-ensemble texture", "regional zheng and bowed timbres", "ornamentation and light/heavy mode inflection"],
+      "recordings": [
+        {"title": "Jackdaw Playing in the Water (Chaozhou Music)", "artist": "Chen Qijun", "url": "https://music.apple.com/us/song/1602338794", "timecodes": []},
+        {"title": "Song of Riding the Donkey (Chaozhou Music)", "artist": "Huang Guanying", "url": "https://music.apple.com/us/song/1602339187", "timecodes": []},
+        {"title": "Memorial Temple of Fude (Chaozhou Music)", "artist": "Chaozhou ensemble", "url": "https://music.apple.com/us/song/1601219164", "timecodes": []},
+        {"title": "Welcoming the Immortals (Chaozhou String Music)", "artist": "Chaozhou ensemble", "url": "https://music.apple.com/us/song/1601217207", "timecodes": []},
+        {"title": "Icing on the Cake (Chaozhou Music)", "artist": "Chaozhou ensemble", "url": "https://music.apple.com/us/album/icing-on-the-cake-chaozhou-music/1601216909?i=1601218452", "timecodes": []}
+      ]
     },
     {
-      "styleId": "chinese-suona-chuida",
-      "title": "Bai Niao Chao Feng — suona and orchestra (orchestral adaptation; 2022 National Orchestra New Year Concert)"
+      "styleId": "suona-chuida",
+      "compare": ["suona reed edge and breath phrasing", "suona against percussion and ensemble", "festival chuida energy and dynamic control"],
+      "recordings": [
+        {"title": "General's Command (Suona Music)", "artist": "Chinese ensemble", "url": "https://music.apple.com/us/song/1606675553", "timecodes": []},
+        {"title": "A Hundred Birds Paying Tribute to the Phoenix", "artist": "Ren Tongxiang", "url": "https://music.apple.com/us/song/211824092", "timecodes": []},
+        {"title": "Da Kai Men", "artist": "Liu Wenwen & Shanghai Philharmonic Orchestra", "url": "https://music.apple.com/us/song/1668277899", "timecodes": []},
+        {"title": "Joy of Emancipation (Suona Music)", "artist": "Chinese ensemble", "url": "https://music.apple.com/us/song/1599114857", "timecodes": []},
+        {"title": "Calling for Phoenix (Suona Concerto)", "artist": "Chinese orchestra", "url": "https://music.apple.com/us/song/1239844895", "timecodes": []}
+      ]
     }
   ]
 }

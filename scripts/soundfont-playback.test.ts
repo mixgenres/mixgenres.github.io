@@ -46,6 +46,41 @@ test('every catalog instrument maps to a shipped playable sample preset',()=>{
     assert(banks.get(patch.pack)!.presets.some(p=>p.program===patch.program&&p.bankMSB===patch.bank&&p.isGMGSDrum===patch.drum),def.id);
   }
 });
+test('pedal and lap steel use the recorded clean-electric source, not the jazz guitar preset',()=>{
+  const bank=load('electricClean');
+  for(const instrumentId of ['pedal-steel','lap-steel']) {
+    const plan=compileSamplePlan(performanceFixture({notes:[noteFixture({midi:60})]}),
+      {...options,trackInstruments:new Map([['keys',instrumentId]]),worldId:'country',styleId:'country-honky-tonk'});
+    const event=plan.events.find(item=>item.type==='on');
+    assert(event&&event.type==='on');
+    assert.equal(event.patch.pack,'electricClean',instrumentId);
+    assert.equal(event.patch.bank,69,instrumentId);
+    const preset=bank.presets.find(item=>item.bankMSB===69&&item.program===event.patch.program);
+    assert(preset?.getVoiceParameters(event.key,event.velocity).length,`${instrumentId} reaches a recorded clean-electric zone`);
+  }
+});
+test('country pedal steel compiles independent pedal, lever, chord-glide and volume-swell gestures',()=>{
+  const makePlan=(gesture:string)=>compileSamplePlan(performanceFixture({notes:[noteFixture({dur:1.2,gestureCode:codeForGesture(gesture)})]}),
+    {...options,trackInstruments:new Map([['keys','pedal-steel']]),worldId:'country',styleId:'country-honky-tonk'});
+  const bends=(gesture:string)=>makePlan(gesture).events.filter(event=>event.type==='bend');
+  const raised=bends('pedal-bend').map(event=>event.cents);
+  assert(Math.max(...raised)>199&&Math.max(...raised)<201,'pedal raises reach one whole tone');
+  assert(Math.abs(raised.at(-1)!)<1,'pedal returns to the written pitch');
+  const lowered=bends('knee-lever-bend').map(event=>event.cents);
+  assert(Math.min(...lowered)<-99&&Math.min(...lowered)>-101,'knee lever lowers one semitone');
+  assert(Math.abs(lowered.at(-1)!)<1,'knee lever returns to the written pitch');
+  const glide=bends('chordal-glissando').map(event=>event.cents);
+  assert(glide[0]<-199&&glide[0]>-201,'chord glide begins below the written landing pitch');
+  assert(Math.abs(glide.at(-1)!)<1,'chord glide lands on the written pitch');
+  const swell=makePlan('volume-swell'),on=swell.events.find(event=>event.type==='on');
+  assert(on&&on.type==='on');
+  const expression=swell.events.filter(event=>event.type==='cc'&&event.cc===11);
+  assert(expression.length>=10,'volume pedal has a continuous expression ramp');
+  assert(expression.every(event=>event.type==='cc'&&event.channels.length===1&&event.channels[0]===on.channel),
+    'one steel note swell cannot attenuate another part');
+  assert.equal(expression[0].type==='cc'?expression[0].value:127,16);
+  assert.equal(expression.at(-1)?.type==='cc'?(expression.at(-1) as Extract<(typeof swell.events)[number],{type:'cc'}>).value:0,127);
+});
 test('khomus has its own recorded jaw harp patch, with its narrow sample range safely playable',()=>{
   const patch=patchForInstrument('khomus');
   assert.deepEqual(patch,{bank:66,program:22,drum:false,pack:'percussion'});

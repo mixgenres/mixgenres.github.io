@@ -48,40 +48,30 @@ const DETAILED_RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = {
       },
       solos: { taqsim: 'ney', solo: 'oud' },
       patternAssignments: {
-        taqsim: { ney: 'takht ney taqsim breath phrase' },
+        taqsim: { ney: 'Ney breath-phrase' },
         intro: {
-          ney: 'takht heterophonic oud qanun and ney ney statement',
-          violin: 'takht heterophonic oud qanun and ney violin statement',
-          oud: 'oud foundation pulse study', qanun: 'qanun foundation pulse study', riq: 'riq foundation pulse study',
+          ney: 'Ney statement', violin: 'Violin statement',
+          oud: 'Oud accompaniment', qanun: 'Qanun accompaniment', riq: 'Riq pulse',
         },
         verse: {
-          ney: 'ney opening-motif development variation',
-          violin: 'violin opening-motif development variation',
-          oud: 'takht oud phrase-led plucked support',
-          qanun: 'qanun opening-motif development variation',
-          riq: 'riq opening-motif development variation',
+          ney: 'Ney variation', violin: 'Violin variation', oud: 'Oud variation',
+          qanun: 'Qanun variation', riq: 'riq variation',
         },
         response: {
-          ney: 'takht ney answering ornament', violin: 'takht violin maqam response',
-          oud: 'takht oud instrumental answer', qanun: 'takht qanun ornamented phrase reply',
-          riq: 'takht heterophonic oud qanun and ney riq pulse',
+          ney: 'Ney answering ornament', violin: 'Violin maqam response',
+          oud: 'Oud instrumental answer', qanun: 'Qanun comping', riq: 'Riq pulse',
         },
         solo: {
-          ney: 'takht ney breath response to oud', violin: 'takht violin maqam response',
-          oud: 'oud phrase answer study', qanun: 'takht qanun ornamented phrase reply',
-          riq: 'takht heterophonic oud qanun and ney riq pulse',
+          ney: 'Ney phrase', violin: 'Violin maqam response',
+          oud: 'Oud instrumental answer', qanun: 'Qanun comping', riq: 'Riq pulse',
         },
         refrain: {
-          ney: 'ney opening-motif development variation', violin: 'takht violin maqam response',
-          oud: 'takht oud phrase-led plucked support', qanun: 'takht qanun ornamented phrase reply',
-          riq: 'riq opening-motif development variation',
+          ney: 'Ney variation', violin: 'Violin maqam response',
+          oud: 'Oud comping', qanun: 'Qanun comping', riq: 'riq variation',
         },
         cadence: {
-          ney: 'takht heterophonic oud qanun and ney ney cadence fill',
-          violin: 'takht heterophonic oud qanun and ney violin cadence fill',
-          oud: 'takht heterophonic oud qanun and ney oud cadence fill',
-          qanun: 'takht heterophonic oud qanun and ney qanun cadence fill',
-          riq: 'takht heterophonic oud qanun and ney riq cadence fill',
+          ney: 'Ney close', violin: 'Violin close', oud: 'Oud close',
+          qanun: 'Qanun close', riq: 'riq close',
         },
       },
     }),
@@ -197,7 +187,7 @@ const DETAILED_RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = {
   'afrobeat::classic-afrobeat': song(104, 'intro:16:2,groove:32:3,head:32:4,solo:64:3,verse:32:3,coro:32:4,solo:32:4,coro:32:5,outro:16:3', 'Long interlocking band opening before vocals; horns, keys and percussion retain independent roles.'),
   'afrobeat::funk-heavy-afrobeat': song(116, 'intro:16:2,groove:32:3,head:32:4,solo:64:4,verse:32:3,coro:32:4,verse:32:4,coro:64:5,outro:16:3', 'Extended ostinato, late vocal entrance, repeated responses and horn punches.'),
   'mbalax::sabar-heavy': song(130, 'intro:10:2,groove:12:3,A:80:5,breakdown:15:3,solo:19:4,cierre:8:5', 'Sabar solo opening, Kaolack accompaniment, unison bàkk, short repeated rhythm and closing unison. Bar counts approximate the documented time landmarks.', undefined, { source: 'https://ocw.mit.edu/courses/21m-030-introduction-to-world-music-spring-2013/8af86ec7c48ba70e22026d9f02a3248c_MIT21M_030S13_listnsabar.pdf' }),
-  'qawwali::contemporary-fusion': song(72, 'opening:16:1,verse:24:2,response:24:2,verse:24:3,cadence:16:1', 'The title track is voice over drone and keyboards, without the drum/guitar ensemble of other album tracks.', undefined, { instruments: ['voice','synth'], lead: 'voice', source: 'https://realworldrecords.com/releases/night-song/' }),
+  'qawwali::contemporary-fusion': song(72, 'opening:16:1,verse:24:2,response:24:2,verse:24:3,cadence:16:1', 'The title track opens on its keyboard drone before the voice enters; this teaching adaptation omits the drum/guitar ensemble of other album tracks.', undefined, { instruments: ['voice','synth'], source: 'https://realworldrecords.com/releases/night-song/' }),
   'cinematic::modern-score': song(60, 'opening:8:1,ostinato:16:2,build:16:3,climax:16:5,release:8:2,outro:8:1', 'Four-chord ostinato grows from piano to full ensemble, then returns to exposed piano.', loop(['Am','Em','G','D'])),
   'cinematic::hybrid': song(72, 'opening:8:1,A:16:2,evolution:16:2,A:16:3,dissolve:8:1', 'Sparse repeated piano gesture above a slowly changing electronic bed.'),
   'cinematic::ambient-score': song(54, 'opening:16:1,A:32:2,solo:32:3,A:32:2,dissolve:16:1', 'Expressive synthesized lead over very slow sustained harmony; no dance climax.'),
@@ -236,28 +226,202 @@ export const RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = Obje
 
 /** Section-specific sample-score cells for styles whose form needs explicit
  * phrase development. These remain local to the exact recorded style sample. */
-const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Pick<RecordingArrangement, 'patternAssignments' | 'sectionInstruments'>> = {
+const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Pick<RecordingArrangement, 'patternAssignments' | 'sectionInstruments' | 'solos'>> = {
+  'country::honky-tonk': {
+    solos: { solo: 'pedal-steel' },
+    sectionInstruments: {
+      intro: ['pedal-steel','guitar','piano','upright-bass','drums'],
+      solo: ['pedal-steel','guitar','piano','upright-bass','drums'],
+    },
+    patternAssignments: {
+      intro: { voice: 'Voice statement', 'pedal-steel': 'Pedal-steel statement', guitar: 'Guitar accompaniment', piano: 'Piano two-beat comp', 'upright-bass': 'Low anchor', drums: 'Kit' },
+      verse: { voice: 'Vocal breath phrase', 'pedal-steel': 'Steel answer', guitar: 'Boom-chick guitar', piano: 'Piano two-beat comp', 'upright-bass': 'Two-beat bass', drums: 'Two-step backbeat' },
+      chorus: { voice: 'Voice statement', 'pedal-steel': 'Steel answer', guitar: 'Boom-chick guitar', piano: 'Piano two-beat comp', 'upright-bass': 'Two-beat bass', drums: 'Two-step backbeat' },
+      solo: { 'pedal-steel': 'Steel break phrase', guitar: 'Boom-chick guitar', piano: 'Piano two-beat comp', 'upright-bass': 'Two-beat bass', drums: 'Two-step backbeat' },
+      tag: { voice: 'Vocal close', 'pedal-steel': 'Pedal steel close', guitar: 'Guitar close', piano: 'Piano turnaround pickup', 'upright-bass': 'Low anchor', drums: 'Drum kit close' },
+    },
+  },
+  'country::bluegrass': {
+    solos: { 'banjo-break': 'banjo', 'fiddle-break': 'violin' },
+    sectionInstruments: {
+      intro: ['banjo','guitar','mandolin','upright-bass'],
+      verse: ['voice','violin','banjo','guitar','mandolin','upright-bass'],
+      chorus: ['voice','violin','banjo','guitar','mandolin','upright-bass'],
+      'banjo-break': ['banjo','guitar','mandolin','upright-bass'],
+      'fiddle-break': ['violin','guitar','mandolin','upright-bass'],
+      tag: ['voice','violin','banjo','guitar','mandolin','upright-bass'],
+    },
+    patternAssignments: {
+      intro: { banjo: 'Banjo forward roll', guitar: 'Alternating-bass guitar', mandolin: 'Mandolin chop', 'upright-bass': 'Upright two-beat' },
+      verse: { voice: 'Vocal verse line', violin: 'Fiddle vocal answer', banjo: 'Banjo forward roll', guitar: 'Alternating-bass guitar', mandolin: 'Mandolin chop', 'upright-bass': 'Upright two-beat' },
+      chorus: { voice: 'Voice statement', violin: 'Fiddle vocal answer', banjo: 'Banjo forward roll', guitar: 'Alternating-bass guitar', mandolin: 'Mandolin chop', 'upright-bass': 'Upright two-beat' },
+      'banjo-break': { banjo: 'Banjo forward roll', guitar: 'Alternating-bass guitar', mandolin: 'Mandolin chop', 'upright-bass': 'Upright two-beat' },
+      'fiddle-break': { violin: 'Fiddle shuffle', guitar: 'Alternating-bass guitar', mandolin: 'Mandolin chop', 'upright-bass': 'Upright two-beat' },
+      tag: { voice: 'Voice statement', violin: 'Fiddle vocal answer', banjo: 'Banjo forward roll', guitar: 'Alternating-bass guitar', mandolin: 'Mandolin chop', 'upright-bass': 'Upright two-beat' },
+    },
+  },
+  'country::bakersfield': {
+    solos: { solo: 'pedal-steel' },
+    sectionInstruments: {
+      intro: ['pedal-steel','guitar','bass','drums'],
+      solo: ['pedal-steel','guitar','bass','drums'],
+    },
+    patternAssignments: {
+      intro: { voice: 'Voice statement', 'pedal-steel': 'Pedal-steel statement', guitar: 'Guitar accompaniment', bass: 'Low anchor', drums: 'Kit' },
+      verse: { voice: 'Voice statement', 'pedal-steel': 'Steel turnaround' },
+      chorus: { voice: 'Vocal refrain lift', 'pedal-steel': 'Steel turnaround', guitar: 'Telecaster backbeat', bass: 'Bass fifth approach', drums: 'Crisp snare backbeat' },
+      solo: { 'pedal-steel': 'Steel break phrase', guitar: 'Telecaster backbeat', bass: 'Bass fifth approach', drums: 'Crisp snare backbeat' },
+      tag: { voice: 'Vocal close', 'pedal-steel': 'Pedal steel close', guitar: 'Guitar close', bass: 'Bass close', drums: 'Drum kit close' },
+    },
+  },
+  'country::outlaw': {
+    solos: { solo: 'guitar', 'steel-break': 'pedal-steel' },
+    sectionInstruments: {
+      intro: ['pedal-steel','guitar','bass','drums'],
+      solo: ['pedal-steel','guitar','bass','drums'],
+      'steel-break': ['pedal-steel','guitar','bass','drums'],
+    },
+    patternAssignments: {
+      intro: { 'pedal-steel': 'Pedal steel pulse', guitar: 'Telecaster rhythm pulse', bass: 'Spacious bass pickup', drums: 'Restrained backbeat' },
+      verse: { voice: 'Conversational vocal', guitar: 'Telecaster rhythm pulse', bass: 'Spacious bass pickup', drums: 'Restrained backbeat' },
+      chorus: { voice: 'Vocal variation', 'pedal-steel': 'Long steel response', guitar: 'Telecaster rhythm pulse', bass: 'Bass pulse', drums: 'Restrained backbeat' },
+      solo: { 'pedal-steel': 'Long steel response', guitar: 'Telecaster answer lick', bass: 'Spacious bass pickup', drums: 'Restrained backbeat' },
+      'steel-break': { 'pedal-steel': 'Steel feature phrase', guitar: 'Telecaster rhythm pulse', bass: 'Spacious bass pickup', drums: 'Restrained backbeat' },
+      outro: { voice: 'Vocal close', 'pedal-steel': 'Pedal steel close', guitar: 'Guitar close', bass: 'Bass pulse', drums: 'Drum kit close' },
+    },
+  },
+  'country::western-swing': {
+    solos: { solo: 'violin' },
+    sectionInstruments: {
+      intro: ['violin','pedal-steel','guitar','piano','upright-bass','drums'],
+      solo: ['violin','pedal-steel','guitar','piano','upright-bass','drums'],
+    },
+    patternAssignments: {
+      intro: { voice: 'Voice statement', violin: 'Violin statement', 'pedal-steel': 'Pedal-steel statement', guitar: 'Guitar accompaniment', piano: 'Piano accompaniment', 'upright-bass': 'Low anchor', drums: 'Kit' },
+      head: { voice: 'Vocal head phrase', violin: 'Fiddle head answer', 'pedal-steel': 'Steel chord answer', guitar: 'Swing guitar comp', piano: 'Piano four-beat comp', 'upright-bass': 'Walking bass line', drums: 'Ride swing groove' },
+      solo: { violin: 'Swing fiddle line', 'pedal-steel': 'Steel chord answer', guitar: 'Swing guitar comp', piano: 'Piano four-beat comp', 'upright-bass': 'Walking bass line', drums: 'Ride swing groove' },
+      tag: { voice: 'Voice statement', violin: 'Violin statement', 'pedal-steel': 'Pedal-steel statement', guitar: 'Guitar accompaniment', piano: 'Piano accompaniment', 'upright-bass': 'Low anchor', drums: 'Kit' },
+    },
+  },
+  'country::americana': {
+    solos: { bridge: 'violin' },
+    sectionInstruments: {
+      intro: ['guitar','upright-bass'],
+      verse: ['voice','violin','guitar','resonator-guitar','upright-bass'],
+      chorus: ['voice','violin','guitar','resonator-guitar','upright-bass','drums'],
+      bridge: ['violin','guitar','resonator-guitar','upright-bass','drums'],
+      outro: ['voice','guitar','upright-bass'],
+    },
+    patternAssignments: {
+      intro: { guitar: 'Guitar accompaniment', 'upright-bass': 'Low anchor' },
+      verse: { voice: 'Vocal held verse', guitar: 'Alternating-bass pick', 'resonator-guitar': 'Dobro slide reply', 'upright-bass': 'Sparse root fifth' },
+      chorus: { guitar: 'Open chorus strum', 'upright-bass': 'Sparse root fifth', drums: 'Roots backbeat' },
+      bridge: { violin: 'Fiddle phrase answer', guitar: 'Alternating-bass pick', 'resonator-guitar': 'Dobro slide reply', 'upright-bass': 'Sparse root fifth', drums: 'Drum kit variation' },
+      outro: { voice: 'Voice statement', guitar: 'Guitar accompaniment', 'upright-bass': 'Low anchor' },
+    },
+  },
+  'country::country-pop': {
+    solos: { solo: 'pedal-steel' },
+    sectionInstruments: {
+      intro: ['pedal-steel','guitar','bass','drums'],
+      solo: ['pedal-steel','guitar','bass','drums'],
+    },
+    patternAssignments: {
+      intro: { voice: 'Voice statement', 'pedal-steel': 'Pedal-steel statement', guitar: 'Guitar accompaniment', bass: 'Low anchor', drums: 'Kit' },
+      verse: { voice: 'Vocal verse phrase', 'pedal-steel': 'Pedal-steel statement', guitar: 'Acoustic pop strum', bass: 'Low anchor', drums: 'Kit' },
+      prechorus: { voice: 'Voice statement', 'pedal-steel': 'Pedal-steel statement', guitar: 'Acoustic pop strum', bass: 'Low anchor', drums: 'Pop backbeat' },
+      chorus: { voice: 'Vocal chorus hook', 'pedal-steel': 'Steel chorus lift', guitar: 'Acoustic pop strum', bass: 'Chorus bass drive', drums: 'Pop backbeat' },
+      solo: { 'pedal-steel': 'Steel break phrase', guitar: 'Acoustic pop strum', bass: 'Chorus bass drive', drums: 'Pop backbeat' },
+      outro: { voice: 'Voice statement', 'pedal-steel': 'Steel chorus lift', guitar: 'Acoustic pop strum', bass: 'Low anchor', drums: 'Kit' },
+    },
+  },
   'flamenco::sevillanas': {
-    patternAssignments: { link: { cajon: 'Sevillanas cajón link remate' } },
+    patternAssignments: { link: { cajon: 'Cajón link remate' } },
   },
   'cinematic::modern-score': {
     sectionInstruments: { release: ['piano'], outro: ['piano'] },
     patternAssignments: {
-      ostinato: { synth: 'modern score synth ostinato and resolution lift' },
-      build: { synth: 'modern score synth ostinato and resolution lift' },
-      climax: { synth: 'synth opening-motif development variation' },
+      ostinato: { synth: 'Synth Resolution' },
+      build: { synth: 'Synth Resolution' },
+      climax: { synth: 'Synthesizer variation' },
     },
   },
   'pop::power-pop': {
-    patternAssignments: { chorus: { synth: 'power-pop chorus pad bloom' } },
+    patternAssignments: { chorus: { synth: 'Synth swell' } },
   },
   'tango::chacarera-crossover': {
     patternAssignments: {
-      response: { 'bombo-leguero': 'bombo-leguero response cross-accent' },
+      response: { 'bombo-leguero': 'Bombo cross-accent' },
       interlude: {
-        violin: 'chacarera violin interlude variation',
-        'bombo-leguero': 'bombo-leguero response cross-accent',
+        violin: 'Violin interlude',
+        'bombo-leguero': 'Bombo cross-accent',
       },
+    },
+  },
+  'qawwali::traditional': {
+    sectionInstruments: {
+      harmonium: ['harmonium'],
+      invocation: ['voice','harmonium'],
+      refrain: ['voice','choir','harmonium','dholak','hand-percussion'],
+      verse: ['voice','harmonium','dholak'],
+      response: ['voice','choir','harmonium','dholak','hand-percussion'],
+      cadence: ['voice','harmonium','dholak'],
+    },
+    patternAssignments: {
+      harmonium: { harmonium: 'Harmonium drone' },
+      invocation: { voice: 'Lead call', harmonium: 'Harmonium drone' },
+      refrain: { voice: 'Lead call', choir: 'Group refrain', harmonium: 'Harmonium pulse', dholak: 'Dholak cycle', 'hand-percussion': 'Cycle claps' },
+      verse: { voice: 'Lead call', harmonium: 'Harmonium pulse', dholak: 'Dholak cycle' },
+      response: { voice: 'Lead call', choir: 'Group refrain', harmonium: 'Harmonium reply', dholak: 'Dholak fill', 'hand-percussion': 'Cycle claps' },
+      cadence: { voice: 'Vocal close', harmonium: 'Harmonium reply', dholak: 'Dholak fill' },
+    },
+  },
+  'qawwali::hamd-naat': {
+    sectionInstruments: {
+      prelude: ['harmonium'],
+      verse: ['voice','harmonium','dholak'],
+      refrain: ['voice','choir','harmonium','dholak','hand-percussion'],
+      adlib: ['voice','harmonium','dholak'],
+      cadence: ['voice','harmonium'],
+    },
+    patternAssignments: {
+      prelude: { harmonium: 'Harmonium drone' },
+      verse: { voice: 'Devotional line', harmonium: 'Harmonium drone', dholak: 'Light dholak' },
+      refrain: { voice: 'Devotional line', choir: 'Quiet refrain', harmonium: 'Harmonium reply', dholak: 'Light dholak', 'hand-percussion': 'Refrain claps' },
+      adlib: { voice: 'Devotional line', harmonium: 'Harmonium reply', dholak: 'Light dholak' },
+      cadence: { voice: 'Vocal close', harmonium: 'Harmonium drone' },
+    },
+  },
+  'qawwali::ghazal-qawwali': {
+    sectionInstruments: {
+      prelude: ['harmonium'],
+      verse: ['voice','harmonium','dholak'],
+      refrain: ['voice','choir','harmonium','dholak','hand-percussion'],
+      response: ['voice','harmonium','dholak','hand-percussion'],
+      adlib: ['voice','harmonium','dholak'],
+      cadence: ['voice','harmonium'],
+    },
+    patternAssignments: {
+      prelude: { harmonium: 'Harmonium bed' },
+      verse: { voice: 'Long couplet', harmonium: 'Harmonium bed', dholak: 'Soft dholak' },
+      refrain: { voice: 'Long couplet', choir: 'Couplet refrain', harmonium: 'Harmonium bed', dholak: 'Soft dholak', 'hand-percussion': 'Refrain claps' },
+      response: { voice: 'Long couplet', harmonium: 'Couplet reply', dholak: 'Soft dholak', 'hand-percussion': 'Refrain claps' },
+      adlib: { voice: 'Long couplet', harmonium: 'Couplet reply', dholak: 'Soft dholak' },
+      cadence: { voice: 'Vocal close', harmonium: 'Couplet reply' },
+    },
+  },
+  'qawwali::contemporary-fusion': {
+    sectionInstruments: {
+      opening: ['synth'],
+      verse: ['voice','synth'],
+      response: ['voice','synth'],
+      cadence: ['voice','synth'],
+    },
+    patternAssignments: {
+      opening: { synth: 'Drone bed' },
+      verse: { voice: 'Melisma line', synth: 'Drone bed' },
+      response: { voice: 'Melisma line', synth: 'Keyboard lift' },
+      cadence: { voice: 'Melisma line', synth: 'Drone bed' },
     },
   },
 };
@@ -267,6 +431,7 @@ for (const [key, changes] of Object.entries(SAMPLE_PATTERN_ASSIGNMENTS)) {
   RECORDING_ARRANGEMENTS[key] = {
     ...arrangement,
     ...(changes.sectionInstruments ? { sectionInstruments: { ...arrangement.sectionInstruments, ...changes.sectionInstruments } } : {}),
+    ...(changes.solos ? { solos: { ...arrangement.solos, ...changes.solos } } : {}),
     ...(changes.patternAssignments ? { patternAssignments: { ...arrangement.patternAssignments, ...changes.patternAssignments } } : {}),
   };
 }

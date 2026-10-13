@@ -21,7 +21,7 @@ export const GENRE_PACK: GenrePackInput = {
   "harmonicRhythm": "static",
   "cadences": ["D5"],
   "bassChordInteraction": "Sustain the modal center beneath the decorated melody.",
-  "patternFamilies": ["tarab vocal melisma and oud answer", "takht heterophonic oud qanun and ney", "muwashshah ten-beat samai cycle", "maqam taqsim with sparse accompaniment", "orchestral unison maqam theme"],
+  "patternFamilies": ["tarab vocal melisma and oud answer", "takht heterophonic oud qanun and ney", "muwashshah strophic vocal line with selected sama'i thaqil 10/8 rhythm", "maqam taqsim with sparse accompaniment", "orchestral unison maqam theme"],
   "techniques": ["microtonal-inflection", "ornament", "tremolo", "trill", "breath-phrase", "glissando"],
   "forbiddenPatterns": ["patterns owned by another genre", "generic four-on-the-floor unless the selected style specifies it"],
   "styles": [
@@ -209,11 +209,11 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "muwashshah",
       "name": "Muwashshah",
-      "description": "Muwashshah: muwashshah ten-beat samai cycle. Melodic and rhythmic study over a modal center; chord symbols are playback anchors, not a Western chord progression.",
-      "patterns": ["muwashshah ten-beat samai cycle"],
+      "description": "Muwashshah: strophic vocal phrases over a selected 10/8 Sama'i Thaqil cycle. Muwashshah settings use several awzan, so this is one rhythm study, not a rule for every song. Chord symbols are playback anchors, not a Western progression.",
+      "patterns": ["muwashshah stanzas with sama'i thaqil 10/8"],
       "techniques": ["microtonal-inflection", "ornament", "tremolo", "trill", "breath-phrase", "glissando", "accent", "staccato", "legato", "vibrato", "ghost", "roll", "open", "slap"],
       "harmony": ["D5"],
-      "meter": "10/4",
+      "meter": "10/8",
       "tempo": [78, 94],
       "scale": "phrygian-dominant",
       "roles": {
@@ -222,8 +222,9 @@ export const GENRE_PACK: GenrePackInput = {
         "percussion": ["riq", "darbuka"]
       },
       "progressions": {
-        "bashraf": ["D5", "D5"],
-        "theme": ["D5", "D5"],
+        "prelude": ["D5", "D5"],
+        "stanza": ["D5", "D5"],
+        "refrain": ["D5", "D5"],
         "taqsim": ["D5", "D5"],
         "coda": ["D5"]
       },
@@ -232,26 +233,28 @@ export const GENRE_PACK: GenrePackInput = {
       "harmonyModel": "modal-drone",
       "bassMotion": "root-fifth",
       "form": [
-        {"label": "bashraf", "bars": 4},
-        {"label": "theme", "bars": 8},
-        {"label": "taqsim", "bars": 8, "soloInstrumentId": "ney", "soloMode": "unaccompanied"},
-        {"label": "theme", "bars": 8},
+        {"label": "prelude", "bars": 4},
+        {"label": "stanza", "bars": 8},
+        {"label": "refrain", "bars": 8},
+        {"label": "taqsim", "bars": 4, "soloInstrumentId": "ney", "soloMode": "unaccompanied"},
+        {"label": "stanza", "bars": 8},
+        {"label": "refrain", "bars": 8},
         {"label": "coda", "bars": 4}
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "muwashshah ten-beat samai cycle voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "muwashshah ten-beat samai cycle voice cadence fill", "role": "lead", "onsets": [9.0, 9.5, 9.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "muwashshah ten-beat samai cycle ney statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["ney"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "muwashshah ten-beat samai cycle ney cadence fill", "role": "lead", "onsets": [9.0, 9.5, 9.75], "instruments": ["ney"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "muwashshah ten-beat samai cycle oud accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["oud"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "muwashshah ten-beat samai cycle oud cadence fill", "role": "harmony", "onsets": [9.0, 9.5, 9.75], "instruments": ["oud"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "muwashshah ten-beat samai cycle qanun accompaniment", "role": "harmony", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["qanun"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "muwashshah ten-beat samai cycle qanun cadence fill", "role": "harmony", "onsets": [9.0, 9.5, 9.75], "instruments": ["qanun"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "muwashshah ten-beat samai cycle riq pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["riq"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "muwashshah ten-beat samai cycle riq cadence fill", "role": "percussion", "onsets": [9.0, 9.5, 9.75], "instruments": ["riq"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "muwashshah ten-beat samai cycle darbuka pulse", "role": "percussion", "onsets": [0, 1, 2, 3], "instruments": ["darbuka"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "muwashshah ten-beat samai cycle darbuka cadence fill", "role": "percussion", "onsets": [9.0, 9.5, 9.75], "instruments": ["darbuka"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "muwashshah strophic vocal line over 10/8 sama'i thaqil voice stanza", "shortName": "Vocal stanza", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato", "description": "Sing a short, connected strophic phrase; leave room for the percussion cycle and the instrumental answer."},
+        {"name": "muwashshah strophic vocal line over 10/8 sama'i thaqil voice cadence", "shortName": "Vocal cadence", "role": "lead", "onsets": [4.0, 4.5, 4.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "sectionUsage": ["cadence"], "articulation": "ornament", "description": "Shape a short ornamented cadence in the final 10/8 subdivision."},
+        {"name": "muwashshah strophic vocal line over 10/8 sama'i thaqil ney answer", "shortName": "Ney answer", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["ney"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato", "description": "Answer the vocal phrase with a breath-shaped ney line, using the same modal center."},
+        {"name": "muwashshah strophic vocal line over 10/8 sama'i thaqil ney cadence", "shortName": "Ney cadence", "role": "lead", "onsets": [4.0, 4.5, 4.75], "instruments": ["ney"], "cycleLength": 1, "phraseEnd": true, "sectionUsage": ["cadence"], "articulation": "ornament", "description": "Close the answer with a light ornament; keep the breath and final note clear."},
+        {"name": "muwashshah strophic vocal line over 10/8 sama'i thaqil oud cycle accents", "shortName": "Oud cycle accents", "role": "harmony", "onsets": [0, 1.5, 2.5, 3.5], "instruments": ["oud"], "cycleLength": 1, "durations": [0.7, 0.4, 0.4, 0.7], "articulation": "staccato", "description": "Mark the four unequal group starts with concise plucked support; do not sustain Western chord changes."},
+        {"name": "muwashshah strophic vocal line over 10/8 sama'i thaqil oud cadence", "shortName": "Oud cadence", "role": "harmony", "onsets": [4.0, 4.5, 4.75], "instruments": ["oud"], "cycleLength": 1, "phraseEnd": true, "sectionUsage": ["cadence"], "articulation": "ornament"},
+        {"name": "muwashshah strophic vocal line over 10/8 sama'i thaqil qanun punctuation", "shortName": "Qanun punctuation", "role": "harmony", "onsets": [0.5, 1.5, 2.5, 4.0], "instruments": ["qanun"], "cycleLength": 1, "durations": [0.3, 0.3, 0.3, 0.3], "articulation": "trill", "description": "Add brief qanun punctuation between the vocal attacks; keep ornaments subordinate to the sung line."},
+        {"name": "muwashshah strophic vocal line over 10/8 sama'i thaqil qanun cadence", "shortName": "Qanun cadence", "role": "harmony", "onsets": [4.0, 4.5, 4.75], "instruments": ["qanun"], "cycleLength": 1, "phraseEnd": true, "sectionUsage": ["cadence"], "articulation": "ornament"},
+        {"name": "muwashshah strophic vocal line over 10/8 sama'i thaqil riq subdivisions", "shortName": "Riq subdivisions", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5], "instruments": ["riq"], "cycleLength": 1, "articulations": ["accent", "ghost", "ghost", "accent", "ghost", "accent", "ghost", "accent", "ghost", "accent"], "description": "Keep the riq subdivisions light and let the main cycle accents stay audible."},
+        {"name": "muwashshah strophic vocal line over 10/8 sama'i thaqil riq cadence", "shortName": "Riq cadence", "role": "percussion", "onsets": [4.0, 4.5, 4.75], "instruments": ["riq"], "cycleLength": 1, "phraseEnd": true, "sectionUsage": ["cadence"], "articulation": "roll"},
+        {"name": "muwashshah strophic vocal line over 10/8 sama'i thaqil darbuka pattern", "shortName": "Darbuka Sama'i Thaqil", "role": "percussion", "onsets": [0, 1.5, 2.5, 3.5, 4.5], "instruments": ["darbuka"], "cycleLength": 1, "hits": ["dum", "tak", "dum", "tak", "tak"], "articulations": ["open", "slap", "open", "slap", "slap"], "accents": [1, 0.55, 0.85, 0.55, 0.55], "description": "Play the five pulse attacks of the 10/8 Sama'i Thaqil cycle (Dum–Tak–Dum–Tak–Tak)."},
+        {"name": "muwashshah strophic vocal line over 10/8 sama'i thaqil darbuka cadence", "shortName": "Darbuka cadence", "role": "percussion", "onsets": [4.0, 4.5, 4.75], "instruments": ["darbuka"], "cycleLength": 1, "phraseEnd": true, "sectionUsage": ["cadence"], "articulation": "roll"}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],

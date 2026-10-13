@@ -4,6 +4,7 @@ export const GENRE_MIX_OFFSETS: Record<string, Record<string, number>> = {
   electronic: { bass: 3.0, lead: 0.0, comp: -1.5, pad: 1.0 },
   jazz: { lead: 1.0, bass: 1.0, comp: -0.5, pad: -3.0 },
   rock: { comp: 2.0, bass: 1.5, lead: 1.0, pad: -2.0 },
+  country: { bass: 3.0 },
   orchestral: { pad: 2.0, lead: 0.0, comp: 0.0, bass: 0.0 },
 };
 
@@ -12,6 +13,9 @@ export const GENRE_INSTRUMENT_MIX_OFFSETS: Record<string, Record<string, number>
   // Developed Dominican reference/render: the bongo formerly exceeded bass
   // by 17 dB and güira by 22 dB. Restore the low floor and continuous rasp.
   bachata: { bass: 8, guira: 10, bongos: -5, guitar: 1.5 },
+  // Country examples rely on audible two-beat/quarter-note bass, and the
+  // fiddle must carry the bluegrass and western-swing breaks over guitar.
+  country: { 'upright-bass': 5, violin: 3 },
   tango: { violin: 6, bandoneon: 2, 'upright-bass': -4 },
   flamenco: { guitar: 3 },
   salsa: { trumpet: 3, trombone: 3 },

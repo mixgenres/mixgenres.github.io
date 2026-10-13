@@ -1,0 +1,75 @@
+{
+  "genreId": "qawwali",
+  "reviewed": "2026-10-12",
+  "status": "At least five streaming recording candidates selected per style. The recordings have not been auditioned here; listening notes and timecodes remain pending, so sonic matching is not claimed.",
+  "source": "Apple Music track pages, Smithsonian Folkways, and Real World Records. No reference audio downloaded.",
+  "researchNotes": [
+    "Smithsonian Folkways documents a ten-musician Sabri Brothers ensemble with lead vocals, harmonium, flute, tanpura, and percussion, and its program includes Ghazal, Naat Sharif, and Hamd: https://folkways.si.edu/pakistan-the-music-of-the-qawal/world/music/album/smithsonian",
+    "The Chishty Sufi Sama Ensemble performance credits separately identify solo voice, chorus/clapping, harmonium, tabla, and dholak: https://asia-archive.si.edu/podcast/sufi-music-from-india-the-chishty-sufi-sama-ensemble/",
+    "Night Song’s official credits document different personnel by track, including voice, harmonium, tabla, drums, bass, keyboards, and production/mixing by Michael Brook and Ben Findlay: https://realworldrecords.com/releases/night-song/",
+    "The bundled bank does not contain dedicated qawwali singer, group-vocal, or dholak multisamples. Voice and choir use GM vocal patches; dholak uses the nearest available kit timbres. These remain audible-source limits even when the parts and mix are arranged more carefully."
+  ],
+  "styles": [
+    {
+      "styleId": "traditional",
+      "compare": [
+        "solo call against a repeated group refrain",
+        "harmonium support and phrase replies",
+        "dholak cycle, backbeat handclaps, and gradual ensemble lift"
+      ],
+      "recordings": [
+        {"title":"Allah Hoo Allah Hoo (Complete Original Recording)","artist":"Nusrat Fateh Ali Khan","url":"https://music.apple.com/us/song/1783559448","timecodes":[]},
+        {"title":"Allah-Hu","artist":"Nusrat Fateh Ali Khan","url":"https://music.apple.com/us/song/1776081854","timecodes":[]},
+        {"title":"Allah-hoo, allah-hoo, allah-hoo","artist":"Nusrat Fateh Ali Khan & Ustad Sultan Khan","url":"https://music.apple.com/us/song/405763570","timecodes":[]},
+        {"title":"Man Kunto Maula","artist":"Aziz Mian, Nusrat Fateh Ali Khan & Sabri Brothers","url":"https://music.apple.com/us/song/259796607","timecodes":[]},
+        {"title":"Bhar Do Jholi Meri","artist":"Sabri Brothers & Nusrat Fateh Ali Khan","url":"https://music.apple.com/us/song/291081015","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "hamd-naat",
+      "compare": [
+        "text-led devotional verse and measured refrain",
+        "spare harmonium opening before percussion joins",
+        "gradual intensification that preserves the words"
+      ],
+      "recordings": [
+        {"title":"Hamd","artist":"The Sabri Brothers","url":"https://folkways.si.edu/the-sabri-brothers/hamd/music/track/smithsonian","timecodes":[]},
+        {"title":"Wohi Khuda Hai","artist":"Nusrat Fateh Ali Khan","url":"https://music.apple.com/us/song/1783561845","timecodes":[]},
+        {"title":"Naat","artist":"Asif Ali Khan, Manzoor Hussain Santoo Khan & Party","url":"https://music.apple.com/us/song/516076291","timecodes":[]},
+        {"title":"Hamd","artist":"M. Siddiq Awan & Abdul Ghafoor","url":"https://music.apple.com/us/album/hamd/1784495031?i=1784495038","timecodes":[]},
+        {"title":"Naat","artist":"M. Siddiq Awan","url":"https://music.apple.com/us/song/1784268942","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "ghazal-qawwali",
+      "compare": [
+        "long couplet phrasing and lyric-forward lead",
+        "harmonium answers in vocal gaps",
+        "a more measured drum and clap layer than the full refrain drive"
+      ],
+      "recordings": [
+        {"title":"Pakistan: Ghazal (Excerpt)","artist":"Sabri Brothers","url":"https://music.apple.com/us/song/858618085","timecodes":[]},
+        {"title":"Yeh Jo Halka Halka","artist":"Nusrat Fateh Ali Khan","url":"https://music.apple.com/us/song/1564561574","timecodes":[]},
+        {"title":"Tumhe Dillagi Bhool Jani Padegi","artist":"Nusrat Fateh Ali Khan","url":"https://music.apple.com/us/song/910383694","timecodes":[]},
+        {"title":"Kinna Sohna Tainu","artist":"Rahat Fateh Ali Khan","url":"https://music.apple.com/us/song/630576126","timecodes":[]},
+        {"title":"Sanson Ki Mala Pey","artist":"Nusrat Fateh Ali Khan & Party","url":"https://music.apple.com/us/song/1653513535","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "contemporary-fusion",
+      "compare": [
+        "vocal foreground against layered studio texture",
+        "keyboard drone and sustained electronic color",
+        "track-specific arrangement rather than a default traditional drum ensemble"
+      ],
+      "recordings": [
+        {"title":"Intoxicated","artist":"Nusrat Fateh Ali Khan & Michael Brook","url":"https://music.apple.com/us/song/1653540941","timecodes":[]},
+        {"title":"Lament","artist":"Nusrat Fateh Ali Khan & Michael Brook","url":"https://music.apple.com/us/song/1653541186","timecodes":[]},
+        {"title":"My Comfort Remains","artist":"Nusrat Fateh Ali Khan & Michael Brook","url":"https://music.apple.com/us/song/1653541324","timecodes":[]},
+        {"title":"Sweet Pain","artist":"Nusrat Fateh Ali Khan & Michael Brook","url":"https://music.apple.com/us/song/1653541210","timecodes":[]},
+        {"title":"Longing","artist":"Nusrat Fateh Ali Khan & Michael Brook","url":"https://music.apple.com/us/song/1653541195","timecodes":[]},
+        {"title":"Night Song","artist":"Nusrat Fateh Ali Khan & Michael Brook","url":"https://music.apple.com/us/song/1653541339","timecodes":[]}
+      ]
+    }
+  ]
+}

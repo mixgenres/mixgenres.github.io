@@ -11,8 +11,9 @@ function lerp(a: number, b: number, t: number): number {
 }
 
 /**
- * Combines host and guest performance grammars based on explicit performance aspect weights.
- * Host structural constraints, timelines, cycles, and forbidden interpretations are preserved authoritative.
+ * Combines host and guest playing grammars for one part. The song owns its
+ * section clock and meter; the part blend may supply its own subdivisions,
+ * articulation vocabulary, and phrase behavior inside that shared timeline.
  */
 export function resolveHybridGrammar(
   host: PerformanceGrammar,
@@ -33,13 +34,10 @@ export function resolveHybridGrammar(
     return custom !== undefined ? clamp01(custom) : baseW;
   };
 
-  // 1. Structural aspect: timeline & rhythm preservation remains host-biased
+  // The shared section clock and meter live outside this grammar. Let the
+  // guest fully influence how this part subdivides and develops its cell.
   const timelineW = getW('timeline');
-  const preserveAuthoredRhythm = lerp(
-    host.preserveAuthoredRhythm,
-    guest.preserveAuthoredRhythm,
-    timelineW * 0.35 // Host remains structurally authoritative
-  );
+  const preserveAuthoredRhythm = lerp(host.preserveAuthoredRhythm, guest.preserveAuthoredRhythm, timelineW);
 
   // 2. Subdivision aspect
   const subW = getW('subdivision');
@@ -51,7 +49,7 @@ export function resolveHybridGrammar(
   const allowDerivedAttacks = lerp(
     host.allowDerivedAttacks,
     guest.allowDerivedAttacks,
-    subW * 0.75
+    subW
   );
 
   // 3. Pitch decoration aspect
@@ -59,7 +57,7 @@ export function resolveHybridGrammar(
   const allowDerivedPitch = lerp(
     host.allowDerivedPitch,
     guest.allowDerivedPitch,
-    pitchW * 0.6
+    pitchW
   );
 
   // 4. Density aspect
@@ -91,11 +89,10 @@ export function resolveHybridGrammar(
     cadenceProbability: lerp(hDev.cadenceProbability, gDev.cadenceProbability, phraseW),
   };
 
-  // 6. Articulation & variation vocabularies: union filtered by host forbidden
-  const forbiddenSet = new Set([
-    ...(host.forbiddenInterpretations ?? []),
-    ...hostForbidden,
-  ]);
+  // Negative vocabulary belongs to each style. A host rule must not erase the
+  // guest articulation or variation that the student explicitly imports.
+  const hostForbiddenSet = new Set([...(host.forbiddenInterpretations ?? []), ...hostForbidden]);
+  const guestForbiddenSet = new Set(guest.forbiddenInterpretations ?? []);
 
   const mergedArticulations: Record<string, string[]> = {};
   const artRoles = new Set([
@@ -105,8 +102,11 @@ export function resolveHybridGrammar(
   for (const role of artRoles) {
     const hList = host.articulationVocabulary?.[role] ?? [];
     const gList = guest.articulationVocabulary?.[role] ?? [];
-    const combined = Array.from(new Set([...hList, ...(getW('articulation') > 0.2 ? gList : [])]));
-    mergedArticulations[role] = combined.filter(a => !forbiddenSet.has(a));
+    const combined = [
+      ...hList.filter(item => !hostForbiddenSet.has(item)),
+      ...(getW('articulation') > 0.2 ? gList.filter(item => !guestForbiddenSet.has(item)) : []),
+    ];
+    mergedArticulations[role] = Array.from(new Set(combined));
   }
 
   const mergedVariations: Record<string, string[]> = {};
@@ -117,9 +117,39 @@ export function resolveHybridGrammar(
   for (const role of varRoles) {
     const hList = host.variationVocabulary?.[role] ?? [];
     const gList = guest.variationVocabulary?.[role] ?? [];
-    const combined = Array.from(new Set([...hList, ...(baseW > 0.2 ? gList : [])]));
-    mergedVariations[role] = combined.filter(v => !forbiddenSet.has(v));
+    const combined = [
+      ...hList.filter(item => !hostForbiddenSet.has(item)),
+      ...(baseW > 0.2 ? gList.filter(item => !guestForbiddenSet.has(item)) : []),
+    ];
+    mergedVariations[role] = Array.from(new Set(combined));
   }
+
+  const mergedSubdivisions: Record<string, number[]> = {};
+  const subdivisionRoles = new Set([
+    ...Object.keys(host.subdivisionVocabulary ?? {}),
+    ...Object.keys(guest.subdivisionVocabulary ?? {}),
+  ]);
+  for (const role of subdivisionRoles) {
+    const hostSteps = host.subdivisionVocabulary?.[role] ?? [];
+    const guestSteps = guest.subdivisionVocabulary?.[role] ?? [];
+    mergedSubdivisions[role] = Array.from(new Set([
+      ...hostSteps,
+      ...(subW > 0.2 ? guestSteps : []),
+    ])).sort((a, b) => a - b);
+  }
+
+  const mergedInteractions: Record<string, string[]> = {};
+  const interactionRoles = new Set([
+    ...Object.keys(host.interactionVocabulary ?? {}),
+    ...Object.keys(guest.interactionVocabulary ?? {}),
+  ]);
+  for (const role of interactionRoles) {
+    mergedInteractions[role] = Array.from(new Set([
+      ...(host.interactionVocabulary?.[role] ?? []),
+      ...(getW('interaction') > 0.2 ? guest.interactionVocabulary?.[role] ?? [] : []),
+    ]));
+  }
+  const activeForbidden = baseW >= 0.5 ? guestForbiddenSet : hostForbiddenSet;
 
   // 7. Microtiming
   const microW = getW('microtiming');
@@ -134,16 +164,16 @@ export function resolveHybridGrammar(
     worldId: host.worldId ?? guest?.worldId,
     styleId: host.styleId ?? guest?.styleId,
     densityByRole: mergedDensityByRole,
-    subdivisionVocabulary: host.subdivisionVocabulary ?? guest.subdivisionVocabulary,
+    subdivisionVocabulary: mergedSubdivisions,
     variationVocabulary: mergedVariations,
     articulationVocabulary: mergedArticulations,
     phraseDevelopment: mergedPhraseDev,
-    interactionVocabulary: host.interactionVocabulary ?? guest.interactionVocabulary,
+    interactionVocabulary: mergedInteractions,
     preserveAuthoredRhythm,
     allowDerivedAttacks,
     allowDerivedPitch,
     allowCrossStyleSubdivision,
-    forbiddenInterpretations: Array.from(forbiddenSet),
+    forbiddenInterpretations: Array.from(activeForbidden),
     microtiming: mergedMicrotiming,
   };
 }

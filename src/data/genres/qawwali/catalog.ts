@@ -28,7 +28,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "traditional",
       "name": "Traditional",
-      "description": "Traditional: qawwali lead chorus response and handclap cycle. Melodic and rhythmic study over a modal center; chord symbols are playback anchors, not a Western chord progression.",
+      "description": "Traditional qawwali: an improvising lead call trades with a repeated group refrain over harmonium, handclaps, and dholak or tabla. Build force through returning verses and refrains; keep the modal center steady.",
       "patterns": ["qawwali lead chorus response and handclap cycle"],
       "techniques": ["melisma", "call-response", "ornament", "legato", "roll", "accent", "vibrato", "staccato", "tenuto", "open", "slap", "ghost"],
       "harmony": ["D5"],
@@ -51,13 +51,13 @@ export const GENRE_PACK: GenrePackInput = {
       "harmonyModel": "modal-drone",
       "bassMotion": "root-fifth",
       "form": [
-        {"label": "instrumental opening", "bars": 4},
-        {"label": "hamd", "bars": 8},
-        {"label": "lead verse", "bars": 8},
+        {"label": "harmonium", "bars": 4},
+        {"label": "invocation", "bars": 8},
+        {"label": "refrain", "bars": 8},
+        {"label": "verse", "bars": 8},
         {"label": "response", "bars": 8},
-        {"label": "improvisation", "bars": 8},
-        {"label": "climax", "bars": 8},
-        {"label": "closing", "bars": 4}
+        {"label": "refrain return", "bars": 8},
+        {"label": "cadence", "bars": 4}
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
@@ -117,7 +117,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "hamd-naat",
       "name": "Hamd / Naat",
-      "description": "Hamd / Naat: hamd naat devotional verse and restrained response. Melodic and rhythmic study over a modal center; chord symbols are playback anchors, not a Western chord progression.",
+      "description": "Hamd / Naat: keep the devotional text and sustained lead phrase in front. Begin with a spare harmonium prelude; add the measured group refrain, claps, and a light dholak pulse as the song returns to its refrain.",
       "patterns": ["hamd naat devotional verse and restrained response"],
       "techniques": ["melisma", "call-response", "ornament", "legato", "roll", "accent", "vibrato", "staccato", "tenuto", "open", "slap", "ghost"],
       "harmony": ["D5"],
@@ -140,13 +140,13 @@ export const GENRE_PACK: GenrePackInput = {
       "harmonyModel": "modal-drone",
       "bassMotion": "root-fifth",
       "form": [
-        {"label": "instrumental opening", "bars": 4},
-        {"label": "hamd", "bars": 8},
-        {"label": "lead verse", "bars": 8},
-        {"label": "response", "bars": 8},
-        {"label": "improvisation", "bars": 8},
-        {"label": "climax", "bars": 8},
-        {"label": "closing", "bars": 4}
+        {"label": "prelude", "bars": 4},
+        {"label": "verse", "bars": 8},
+        {"label": "refrain", "bars": 8},
+        {"label": "verse return", "bars": 8},
+        {"label": "refrain return", "bars": 8},
+        {"label": "adlib", "bars": 8},
+        {"label": "cadence", "bars": 4}
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
@@ -206,7 +206,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "ghazal-qawwali",
       "name": "Ghazal-Qawwali",
-      "description": "Ghazal-Qawwali: ghazal qawwali long vocal line and harmonium answer. Melodic and rhythmic study over a modal center; chord symbols are playback anchors, not a Western chord progression.",
+      "description": "Ghazal-Qawwali: longer poetic couplets sit over measured ensemble support, with harmonium replies in the gaps and a restrained refrain pulse. Let lyrical phrasing shape the energy before the group returns.",
       "patterns": ["ghazal qawwali long vocal line and harmonium answer"],
       "techniques": ["melisma", "call-response", "ornament", "legato", "roll", "accent", "vibrato", "staccato", "tenuto", "open", "slap", "ghost"],
       "harmony": ["D5"],
@@ -229,13 +229,14 @@ export const GENRE_PACK: GenrePackInput = {
       "harmonyModel": "modal-drone",
       "bassMotion": "root-fifth",
       "form": [
-        {"label": "instrumental opening", "bars": 4},
-        {"label": "hamd", "bars": 8},
-        {"label": "lead verse", "bars": 8},
+        {"label": "prelude", "bars": 4},
+        {"label": "verse", "bars": 8},
+        {"label": "refrain", "bars": 8},
+        {"label": "verse return", "bars": 8},
         {"label": "response", "bars": 8},
-        {"label": "improvisation", "bars": 8},
-        {"label": "climax", "bars": 8},
-        {"label": "closing", "bars": 4}
+        {"label": "adlib", "bars": 8},
+        {"label": "refrain return", "bars": 8},
+        {"label": "cadence", "bars": 4}
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
@@ -295,7 +296,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "contemporary-fusion",
       "name": "Contemporary Fusion",
-      "description": "Contemporary Fusion: fusion qawwali band groove under melismatic response. Melodic and rhythmic study over a modal center; chord symbols are playback anchors, not a Western chord progression.",
+      "description": "Contemporary fusion: a qawwali lead is layered with studio keyboards, electronic production, and sometimes a wider band. This sample follows the Night Song title-track adaptation, which keeps the voice over a keyboard drone and leaves the traditional drum ensemble out.",
       "patterns": ["fusion qawwali band groove under melismatic response"],
       "techniques": ["melisma", "call-response", "ornament", "legato", "roll", "accent", "vibrato", "staccato", "tenuto", "open", "slap", "ghost"],
       "harmony": ["D5"],
@@ -318,13 +319,11 @@ export const GENRE_PACK: GenrePackInput = {
       "harmonyModel": "modal-drone",
       "bassMotion": "root-fifth",
       "form": [
-        {"label": "instrumental opening", "bars": 4},
-        {"label": "hamd", "bars": 8},
-        {"label": "lead verse", "bars": 8},
+        {"label": "opening", "bars": 4},
+        {"label": "verse", "bars": 8},
         {"label": "response", "bars": 8},
-        {"label": "improvisation", "bars": 8},
-        {"label": "climax", "bars": 8},
-        {"label": "closing", "bars": 4}
+        {"label": "verse return", "bars": 8},
+        {"label": "cadence", "bars": 4}
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [

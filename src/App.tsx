@@ -12,16 +12,17 @@ import { StyleInspector } from './ui/StyleInspector';
 import { RoleIcon, RoleSettings } from './ui/RoleControl';
 import { supportsSolo, soloistAtBar } from './engine/sheet/solo';
 import { plateFor, applyPlate } from './ui/worlds';
-import { resolveStyle, getCanonicalStyle } from './engine/style';
+import { resolveStyle, getCanonicalStyle, getStylesForGenre } from './engine/style';
+import { GENRE_NAMES } from './data/genres';
 import {
-  Sheet as SongSheet, Voice, switchLensOnly, switchSectionWorld,
+  Sheet as SongSheet, Voice, switchLensOnly, switchSectionWorld, partLensForPattern,
   setBars, setKind, setSectionTitle, moveSection, setSectionChords, getSectionGenre,
   randomizeInstruments, addRandomInstrument, removeAllInstruments, randomizePatternsForSection, randomizePatternsForSong,
   randomizeChordsForSection, randomizeChordsForSong, randomizeEverythingForSong, randomizeEverythingForSection,
   duplicateSection, addSensibleSectionAfter, removeSection, setInstrument, setPattern, addVoice, removeVoice,
   isVoiceSilentInSection, isVoiceSilentInAll, silenceVoiceInSection, silenceVoiceInAll,
   unsilenceVoiceInSection, unsilenceVoiceInAll,
-  setTrackRole, getTrackRole, setSectionSolo, getResolvedSectionStyle,
+  setTrackRole, getTrackRole, setPartLens, setSectionSolo, getResolvedSectionStyle,
   getEffectiveBpm, setSectionTempoShift, setSongTempoShift, setSongBpm, setSectionBpm, setSectionEnergy,
 } from './engine/sheet/index.ts';
 import { FEELS } from './data/tempoFeels';
@@ -38,6 +39,10 @@ function playbackTime(seconds: number) {
   const whole = Math.max(0, Math.floor(seconds));
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}`;
 }
+
+const PART_STYLE_GENRES = Object.entries(GENRE_NAMES).map(([id, name]) => ({
+  id, name, canonicalStyleId: getCanonicalStyle(id).id,
+}));
 
 function loadInitialSong(): { song: SongSheet; isNew: boolean } {
   const params = new URLSearchParams(window.location.search);
@@ -357,6 +362,10 @@ export default function App() {
   const sectionGenreId = getSectionGenre(song, region?.id);
   const sectionPlate = plateFor(sectionGenreId);
   const isPartGenreSame = !region?.genre || region.genre === song.worldId;
+  const rolePatternId = roleFor && region ? song.arrangement[region.id]?.[roleFor] : undefined;
+  const selectedPartLens = roleFor && region
+    ? partLensForPattern(song, region, roleFor, rolePatternId)
+    : undefined;
 
   const handleSelectSectionGenre = (genreId: string) => {
     if (!region) return;
@@ -1359,6 +1368,12 @@ export default function App() {
             roleScope={roleScope}
             onRoleScope={setRoleScope}
             onRole={(role, scope) => edit(s => setTrackRole(s, roleFor!, region.id, role, scope))}
+            hostGenre={sectionGenreId}
+            hostStyleId={sectionStyle?.id ?? song.styleId ?? getCanonicalStyle(sectionGenreId).id}
+            partLens={selectedPartLens}
+            genreOptions={PART_STYLE_GENRES}
+            styleOptions={getStylesForGenre(selectedPartLens?.genreId ?? sectionGenreId).map(style => ({ id: style.id, name: style.name }))}
+            onPartLens={lens => edit(s => setPartLens(s, region.id, roleFor!, lens, roleScope))}
             silentInPart={roleScope === 'song'
               ? isVoiceSilentInAll(song, roleFor!)
               : isVoiceSilentInSection(song, roleFor!, region.id)}

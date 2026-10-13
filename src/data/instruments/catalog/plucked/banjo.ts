@@ -36,7 +36,7 @@ export const banjo: InstrumentDef = {
     excitationType: "hard-pick"
   },
   techniques: {
-    articulations: ["accent", "staccato", "legato", "slide", "tenuto", "ghost", "harmonic"],
+    articulations: ["accent", "staccato", "legato", "slide", "tenuto", "ghost", "harmonic", "fingerstyle", "roll"],
     techniqueMethods: [
       "Scruggs three-finger roll patterns (T-I-M)",
       "clawhammer downward index nail frailing",
@@ -51,6 +51,7 @@ export const banjo: InstrumentDef = {
       country: ["accent", "slide", "staccato"]
     }
   },
+  physicalTechniques: ["fingerstyle", "roll", "slide", "accent", "staccato", "legato", "tenuto", "ghost", "harmonic"],
   physicalModel: {
     model: "plucked-string",
     parameters: {

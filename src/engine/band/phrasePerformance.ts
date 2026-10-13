@@ -415,7 +415,7 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
   return scored[0]?.g ?? fallback;
 }
 
-export function buildHybridGrammar(_hostStyleId: string | undefined, sourceGenre: string, hostStyle: import('../../data/styles/schema').ResolvedStyle, lensWeight = 0.5, sourceStyleId?: string): { host: PerformanceGrammar; source: PerformanceGrammar; hybrid: PerformanceGrammar } {
+export function buildHybridGrammar(hostStyleId: string | undefined, sourceGenre: string, hostStyle: import('../../data/styles/schema').ResolvedStyle, lensWeight = 0.5, sourceStyleId?: string): { host: PerformanceGrammar; source: PerformanceGrammar; hybrid: PerformanceGrammar } {
   const host = getPerformanceGrammar(hostStyle ?? {});
   let source = host;
   try {
@@ -425,7 +425,8 @@ export function buildHybridGrammar(_hostStyleId: string | undefined, sourceGenre
   } catch {
     source = host;
   }
-  const weight = sourceGenre === hostStyle?.primaryGenre ? 0 : Math.max(0, Math.min(1, lensWeight));
+  const sameStyle = (source.styleId ?? sourceStyleId ?? sourceGenre) === (hostStyleId ?? hostStyle?.id);
+  const weight = sameStyle ? 0 : Math.max(0, Math.min(1, lensWeight));
   const hybrid = resolveHybridGrammar(host, source, { sourceStyleId: source.styleId ?? sourceGenre, weight }, hostStyle?.contract?.forbidden ?? []);
   return { host, source, hybrid };
 }

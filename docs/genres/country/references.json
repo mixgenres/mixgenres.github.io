@@ -1,0 +1,288 @@
+{
+  "genreId": "country",
+  "reviewed": "2026-10-12",
+  "status": "Five streaming recording candidates selected per style. Audio audition and comparison notes are pending; this list does not claim sonic matching.",
+  "source": "Apple Music track pages. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "honky-tonk",
+      "compare": [
+        "two-beat shuffle feel",
+        "vocal and steel phrasing",
+        "small-band balance"
+      ],
+      "recordings": [
+        {
+          "title": "Hey, Good Lookin'",
+          "artist": "Hank Williams & The Drifting Cowboys",
+          "url": "https://music.apple.com/us/song/1607416428",
+          "timecodes": []
+        },
+        {
+          "title": "Crazy Arms",
+          "artist": "Ray Price",
+          "url": "https://music.apple.com/us/song/192926753",
+          "timecodes": []
+        },
+        {
+          "title": "Honky Tonkin'",
+          "artist": "Hank Williams",
+          "url": "https://music.apple.com/us/song/1436015673",
+          "timecodes": []
+        },
+        {
+          "title": "White Lightning",
+          "artist": "George Jones",
+          "url": "https://music.apple.com/us/song/1434897410",
+          "timecodes": []
+        },
+        {
+          "title": "Walking the Floor Over You",
+          "artist": "Ernest Tubb",
+          "url": "https://music.apple.com/ca/song/296421733",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "bluegrass",
+      "compare": [
+        "banjo roll continuity",
+        "mandolin backbeat chop",
+        "vocal harmony and acoustic ensemble separation"
+      ],
+      "recordings": [
+        {
+          "title": "Blue Moon of Kentucky",
+          "artist": "Bill Monroe and His Bluegrass Boys",
+          "url": "https://music.apple.com/us/song/170580678",
+          "timecodes": []
+        },
+        {
+          "title": "Foggy Mountain Breakdown",
+          "artist": "Flatt & Scruggs",
+          "url": "https://music.apple.com/us/song/911789093",
+          "timecodes": []
+        },
+        {
+          "title": "I'm a Man of Constant Sorrow",
+          "artist": "The Stanley Brothers",
+          "url": "https://music.apple.com/us/song/520511641",
+          "timecodes": []
+        },
+        {
+          "title": "Little Maggie",
+          "artist": "Ralph Stanley",
+          "url": "https://music.apple.com/us/song/1766165191",
+          "timecodes": []
+        },
+        {
+          "title": "Clinch Mountain Backstep",
+          "artist": "The Stanley Brothers",
+          "url": "https://music.apple.com/us/song/211728851",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "bakersfield",
+      "compare": [
+        "bright electric-guitar attack",
+        "crisp backbeat",
+        "steel fills against the lead vocal"
+      ],
+      "recordings": [
+        {
+          "title": "Together Again",
+          "artist": "Buck Owens & His Buckaroos",
+          "url": "https://music.apple.com/us/song/1470179327",
+          "timecodes": []
+        },
+        {
+          "title": "Mama Tried",
+          "artist": "Merle Haggard & The Strangers",
+          "url": "https://music.apple.com/us/song/1583654513",
+          "timecodes": []
+        },
+        {
+          "title": "Guitars, Cadillacs",
+          "artist": "Dwight Yoakam",
+          "url": "https://music.apple.com/us/song/358059690",
+          "timecodes": []
+        },
+        {
+          "title": "Workin' Man Blues",
+          "artist": "Merle Haggard & The Strangers",
+          "url": "https://music.apple.com/us/song/714830980",
+          "timecodes": []
+        },
+        {
+          "title": "I've Got a Tiger by the Tail",
+          "artist": "Buck Owens & His Buckaroos",
+          "url": "https://music.apple.com/us/song/1470164611",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "outlaw",
+      "compare": [
+        "dry, direct vocal presence",
+        "bass and drum pocket",
+        "guitar and steel restraint"
+      ],
+      "recordings": [
+        {
+          "title": "Are You Sure Hank Done It This Way",
+          "artist": "Waylon Jennings",
+          "url": "https://music.apple.com/us/song/1436914594",
+          "timecodes": []
+        },
+        {
+          "title": "Blue Eyes Crying in the Rain",
+          "artist": "Willie Nelson",
+          "url": "https://music.apple.com/us/song/422030176",
+          "timecodes": []
+        },
+        {
+          "title": "Good Hearted Woman",
+          "artist": "Waylon Jennings & Willie Nelson",
+          "url": "https://music.apple.com/us/song/385558982",
+          "timecodes": []
+        },
+        {
+          "title": "Family Tradition",
+          "artist": "Hank Williams, Jr.",
+          "url": "https://music.apple.com/us/song/308883012",
+          "timecodes": []
+        },
+        {
+          "title": "Luckenbach, Texas (Back to the Basics of Love)",
+          "artist": "Waylon Jennings",
+          "url": "https://music.apple.com/us/song/303088040",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "western-swing",
+      "compare": [
+        "swinging fiddle lead",
+        "four-beat bass and piano",
+        "steel and guitar comping balance"
+      ],
+      "recordings": [
+        {
+          "title": "New San Antonio Rose",
+          "artist": "Bob Wills and His Texas Playboys",
+          "url": "https://music.apple.com/us/song/170580392",
+          "timecodes": []
+        },
+        {
+          "title": "Stay a Little Longer",
+          "artist": "Bob Wills and His Texas Playboys",
+          "url": "https://music.apple.com/us/song/257836275",
+          "timecodes": []
+        },
+        {
+          "title": "Shame on You",
+          "artist": "Spade Cooley",
+          "url": "https://music.apple.com/us/song/1549220091",
+          "timecodes": []
+        },
+        {
+          "title": "Steel Guitar Rag",
+          "artist": "Spade Cooley",
+          "url": "https://music.apple.com/us/song/1881249787",
+          "timecodes": []
+        },
+        {
+          "title": "Take Me Back to Tulsa",
+          "artist": "Bob Wills",
+          "url": "https://music.apple.com/us/song/1473174376",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "americana",
+      "compare": [
+        "acoustic instrument detail",
+        "vocal phrasing",
+        "roots-band dynamics and arrangement growth"
+      ],
+      "recordings": [
+        {
+          "title": "Copperhead Road",
+          "artist": "Steve Earle",
+          "url": "https://music.apple.com/us/song/1440869858",
+          "timecodes": []
+        },
+        {
+          "title": "Look at Miss Ohio",
+          "artist": "Gillian Welch",
+          "url": "https://music.apple.com/us/song/79759074",
+          "timecodes": []
+        },
+        {
+          "title": "Angel From Montgomery",
+          "artist": "John Prine",
+          "url": "https://music.apple.com/us/song/1018524564",
+          "timecodes": []
+        },
+        {
+          "title": "Cover Me Up",
+          "artist": "Jason Isbell",
+          "url": "https://music.apple.com/us/song/1760726190",
+          "timecodes": []
+        },
+        {
+          "title": "L.A. Freeway",
+          "artist": "Guy Clark",
+          "url": "https://music.apple.com/us/song/1790548087",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "country-pop",
+      "compare": [
+        "vocal hook level",
+        "acoustic/electric layering",
+        "chorus lift and low-end control"
+      ],
+      "recordings": [
+        {
+          "title": "Any Man of Mine",
+          "artist": "Shania Twain",
+          "url": "https://music.apple.com/us/song/1526202031",
+          "timecodes": []
+        },
+        {
+          "title": "Man! I Feel Like a Woman!",
+          "artist": "Shania Twain",
+          "url": "https://music.apple.com/us/song/1697411261",
+          "timecodes": []
+        },
+        {
+          "title": "Breathe",
+          "artist": "Faith Hill",
+          "url": "https://music.apple.com/us/song/1807498531",
+          "timecodes": []
+        },
+        {
+          "title": "Somebody Like You",
+          "artist": "Keith Urban",
+          "url": "https://music.apple.com/us/song/1703838945",
+          "timecodes": []
+        },
+        {
+          "title": "Before He Cheats",
+          "artist": "Carrie Underwood",
+          "url": "https://music.apple.com/us/song/1837980977",
+          "timecodes": []
+        }
+      ]
+    }
+  ]
+}

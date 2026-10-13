@@ -68,7 +68,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
         patch={bank:64,program:(arco?4:0)+stableTake(note)%(arco?2:4),drum:false,pack:'upright'};
       }
       const world = note.soundContext?.worldId ?? options.worldId ?? performance.worldId ?? '';
-      const guitar = /^(guitar|requinto|resonator-guitar|bajo-sexto)$/.test(instrumentId);
+      const guitar = /^(guitar|requinto|resonator-guitar|bajo-sexto|pedal-steel|lap-steel)$/.test(instrumentId);
       if (guitar) {
         const electric = sound.bodyConstruction === 'solid-electric' || /electric|distort|overdrive/.test(sound.variantId ?? '');
         if (electric) patch = /archtop/.test(sound.variantId??'') ? patchForProgram(26,'guitars') : {bank:sound.drive>.4?71:69,program:stableTake(note)%3,drum:false,pack:sound.drive>.4?'electricDrive':'electricClean'};
@@ -150,8 +150,9 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       const hold = shortened ? Math.min(note.dur, .12) : note.dur;
       const cents = patch.drum ? 0 : pitch(note);
       if (!Number.isFinite(cents)) throw new Error('Invalid sampled note tuning.');
+      const initialBend = instrumentId==='pedal-steel' && action==='chordal-glissando' && !note.pitchBend?.length ? -200 : 0;
       events.push({ time: note.time, type: 'on', channel, key, velocity: gesture.velocity,
-        patch, gain: track.gain, cents });
+        patch, gain: track.gain, cents:cents+initialBend });
       events.push({ time: note.time + hold, type: 'off', channel, key });
       for (const bend of note.pitchBend ?? []) if (bend.offset >= 0 && bend.offset < hold) {
         events.push({ time: note.time + bend.offset, type: 'bend', channel, key, cents: cents + (bend.value-8192)/8192*200 });
@@ -159,6 +160,30 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       if (/fall|doit|slide|arrastre/.test(action) && !note.pitchBend?.length && !patch.drum) {
         const direction = /fall/.test(action) ? -1 : 1;
         for (let point=0;point<=12;point++) events.push({ time: note.time+hold*(.65+.34*point/12), type:'bend', channel, key, cents:cents+direction*200*point/12 });
+      }
+      if (instrumentId==='pedal-steel' && !note.pitchBend?.length && !patch.drum) {
+        const gestureBend = action==='pedal-bend' ? {from:0,to:200,shape:'return'}
+          : action==='knee-lever-bend' ? {from:0,to:-100,shape:'return'}
+            : action==='chordal-glissando' ? {from:-200,to:0,shape:'land'} : undefined;
+        if (gestureBend) {
+          const start = gestureBend.shape==='land' ? gestureBend.from : 0;
+          for (let point=0;point<=12;point++) {
+            const t=point/12;
+            const offset=gestureBend.shape==='land' ? hold*(.02+.72*t) : hold*(.2+.42*t);
+            events.push({time:note.time+offset,type:'bend',channel,key,cents:cents+start+(gestureBend.to-start)*t});
+          }
+          if (gestureBend.shape==='return') for (let point=1;point<=8;point++) {
+            const t=point/8;
+            events.push({time:note.time+hold*(.72+.25*t),type:'bend',channel,key,cents:cents+gestureBend.to*(1-t)});
+          }
+        }
+        if (action==='volume-swell') {
+          for (let point=0;point<=10;point++) {
+            const t=point/10;
+            events.push({time:note.time+hold*.62*t,type:'cc',channels:[channel],cc:11,value:Math.round(16+111*t)});
+          }
+          events.push({time:note.time+hold,type:'cc',channels:[channel],cc:11,value:127});
+        }
       }
       if (/vibrato|shake/.test(action) && !note.pitchBend?.length && !patch.drum) {
         for (let t=.12;t<hold;t+=.025) events.push({ time:note.time+t,type:'bend',channel,key,cents:cents+Math.sin(t*Math.PI*10)*(/shake/.test(action)?65:18) });

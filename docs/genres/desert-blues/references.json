@@ -1,0 +1,172 @@
+{
+  "genreId": "desert-blues",
+  "reviewed": "2026-10-12",
+  "status": "Five streaming recording candidates selected per style. Audio audition, timecodes, and mix comparison are pending; these links do not claim sonic matching.",
+  "source": "Apple Music and Spotify track pages, plus Apple Music album notes and credits. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "tishoumaren",
+      "compare": [
+        "interlocking electric-guitar ostinati and small phrase changes",
+        "lead vocal and group-response placement",
+        "steady cyclical pulse and uncluttered bass/percussion support",
+        "guitar attack, sustain, and mix space"
+      ],
+      "recordings": [
+        {
+          "title": "Sastanàqqàm",
+          "artist": "Tinariwen",
+          "url": "https://music.apple.com/us/song/1821326151",
+          "timecodes": []
+        },
+        {
+          "title": "Cler Achel",
+          "artist": "Tinariwen",
+          "url": "https://music.apple.com/us/song/1458138458",
+          "timecodes": []
+        },
+        {
+          "title": "Tenere Taqhim Tossam",
+          "artist": "Tinariwen",
+          "url": "https://music.apple.com/fr/song/1818632662",
+          "timecodes": []
+        },
+        {
+          "title": "Tiwàyyen",
+          "artist": "Tinariwen",
+          "url": "https://music.apple.com/us/song/1821326150",
+          "timecodes": []
+        },
+        {
+          "title": "Nànnuflày",
+          "artist": "Tinariwen",
+          "url": "https://music.apple.com/us/song/1821326160",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "sahel-guitar",
+      "compare": [
+        "repeating guitar figure with conversational melodic answers",
+        "bass movement against the guitar pulse",
+        "relaxed syncopation and phrase-to-phrase variation",
+        "natural ensemble balance without a rock backbeat imposed over the groove"
+      ],
+      "recordings": [
+        {
+          "title": "Savane",
+          "artist": "Ali Farka Touré",
+          "url": "https://music.apple.com/us/song/1766096832",
+          "timecodes": []
+        },
+        {
+          "title": "Ai Du (with Ry Cooder)",
+          "artist": "Ali Farka Touré",
+          "url": "https://music.apple.com/us/song/1528519981",
+          "timecodes": []
+        },
+        {
+          "title": "Gomni (with Ry Cooder)",
+          "artist": "Ali Farka Touré",
+          "url": "https://music.apple.com/us/song/1528519973",
+          "timecodes": []
+        },
+        {
+          "title": "Penda Yoro",
+          "artist": "Ali Farka Touré",
+          "url": "https://music.apple.com/us/song/1766096900",
+          "timecodes": []
+        },
+        {
+          "title": "Soya (2019 Remaster)",
+          "artist": "Ali Farka Touré",
+          "url": "https://music.apple.com/us/song/1469369038",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "acoustic-tuareg",
+      "compare": [
+        "acoustic-string attack and natural decay",
+        "handclaps/percussion against open guitar cycles",
+        "vocal chorus blend and space between phrases",
+        "intimate room/stereo image rather than amplified sustain"
+      ],
+      "recordings": [
+        {
+          "title": "Walla Illa",
+          "artist": "Tinariwen",
+          "url": "https://music.apple.com/in/song/945092269",
+          "timecodes": []
+        },
+        {
+          "title": "Tameyawt",
+          "artist": "Tinariwen",
+          "url": "https://music.apple.com/gb/song/945092270",
+          "timecodes": []
+        },
+        {
+          "title": "Imidiwan Win Sahara",
+          "artist": "Tinariwen & Tunde Adebimpe",
+          "url": "https://open.spotify.com/track/19PXuVJGKcyVouoJUM2KuX",
+          "timecodes": []
+        },
+        {
+          "title": "Tamiditin Tan Ufrawan",
+          "artist": "Tinariwen",
+          "url": "https://music.apple.com/ca/song/1818632667",
+          "timecodes": []
+        },
+        {
+          "title": "Tenere Taqhim Tossam",
+          "artist": "Tinariwen",
+          "url": "https://music.apple.com/fr/song/1818632662",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "psychedelic-desert",
+      "compare": [
+        "repeating riff, sustained lead tone, and controlled feedback/echo",
+        "guitar density against bass and drum definition",
+        "vocal placement within a loud electric ensemble",
+        "recorded distortion and stereo width without masking the cyclical groove"
+      ],
+      "recordings": [
+        {
+          "title": "Chismiten",
+          "artist": "Mdou Moctar",
+          "url": "https://music.apple.com/us/song/1586466701",
+          "timecodes": []
+        },
+        {
+          "title": "Afrique Victime",
+          "artist": "Mdou Moctar",
+          "url": "https://music.apple.com/us/song/1586464412",
+          "timecodes": []
+        },
+        {
+          "title": "Imouhar",
+          "artist": "Mdou Moctar",
+          "url": "https://music.apple.com/us/song/1729580079",
+          "timecodes": []
+        },
+        {
+          "title": "Sousoume Tamacheq",
+          "artist": "Mdou Moctar",
+          "url": "https://music.apple.com/us/song/1729580397",
+          "timecodes": []
+        },
+        {
+          "title": "Amidinine",
+          "artist": "Bombino",
+          "url": "https://music.apple.com/us/song/604342556",
+          "timecodes": []
+        }
+      ]
+    }
+  ]
+}

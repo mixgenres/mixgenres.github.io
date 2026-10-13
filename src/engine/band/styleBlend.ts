@@ -94,7 +94,7 @@ export function blendPartStyle(
   lens: GuestLens | undefined,
   role: string,
 ): BlendedPartStyle {
-  if (!lens || lens.weight <= 0.02 || lens.genreId === host.primaryGenre) {
+  if (!lens || lens.weight <= 0.02) {
     return {
       style: host,
       report: {
@@ -127,6 +127,22 @@ export function blendPartStyle(
     };
     blendCache.set(key, passthrough);
     return passthrough;
+  }
+
+  if (guest.id === host.id) {
+    const unchanged: BlendedPartStyle = {
+      style: host,
+      report: {
+        hostStyleId: host.id,
+        guestStyleId: guest.id,
+        weight: 0,
+        applied: [],
+        violations: [],
+        summary: `${host.name} throughout`,
+      },
+    };
+    blendCache.set(key, unchanged);
+    return unchanged;
   }
 
   const w = Math.max(0, Math.min(1, lens.weight));

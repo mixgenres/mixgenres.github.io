@@ -4,7 +4,7 @@ export const GENRE_PACK: GenrePackInput = {
   "id": "country",
   "name": "Country",
   "family": "United States / Appalachia",
-  "color": "#e909c2",
+  "color": "#b7792f",
   "description": "Country is an independent musical world. United States / Appalachia idioms, style-owned pattern grammar, performance vocabulary, harmony, instrumentation, arrangement, and production are resolved from the selected style.",
   "defaultStyle": "Honky-Tonk",
   "meter": "4/4",
@@ -22,24 +22,24 @@ export const GENRE_PACK: GenrePackInput = {
   "harmonicRhythm": "bar",
   "cadences": ["D7"],
   "bassChordInteraction": "Anchor chord roots, answer the lead in phrase gaps, and approach the next chord at the turnaround.",
-  "patternFamilies": ["honky-tonk boom chick and steel answers", "bluegrass banjo roll and mandolin chop", "Bakersfield twang guitar and crisp backbeat", "outlaw low guitar riff and restrained snare", "Western Swing fiddle line and walking bass", "Americana fingerpicked verse and fiddle response", "country pop chorus lift and acoustic strum"],
-  "techniques": ["fingerstyle", "double-stop", "slide", "hammer-on", "pull-off", "shuffle-bow", "brush"],
+  "patternFamilies": ["honky-tonk boom chick and steel answers", "bluegrass banjo roll and mandolin chop", "Bakersfield twang guitar and crisp backbeat", "outlaw Telecaster pulse and spacious steel replies", "Western Swing fiddle line and walking bass", "Americana fingerpicked verse and fiddle response", "country pop chorus lift and acoustic strum"],
+  "techniques": ["fingerstyle", "double-stop", "slide", "hammer-on", "pull-off", "shuffle-bow", "brush", "pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell"],
   "forbiddenPatterns": ["patterns owned by another genre", "generic four-on-the-floor unless the selected style specifies it"],
   "styles": [
     {
       "id": "honky-tonk",
       "name": "Honky-Tonk",
       "description": "Honky-Tonk: honky-tonk boom chick and steel answers. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
-      "patterns": ["Weeping steel guitar slide leading into twin fiddle turnaround over two-step bass", "honky-tonk boom chick and steel answers"],
-      "techniques": ["fingerstyle", "double-stop", "slide", "hammer-on", "pull-off", "shuffle-bow", "brush", "twin fiddle leads", "steely weeping slide licks", "honky-tonk upright piano tinkle", "unflinching heartbreak lyricism", "accent", "staccato", "legato", "vibrato", "ghost", "open", "roll"],
+      "patterns": ["Honky-tonk piano offbeat comp with two-step bass and steel answers", "honky-tonk boom chick and steel answers"],
+      "techniques": ["fingerstyle", "double-stop", "slide", "hammer-on", "pull-off", "shuffle-bow", "brush", "twin fiddle leads", "steely weeping slide licks", "honky-tonk upright piano tinkle", "unflinching heartbreak lyricism", "accent", "staccato", "legato", "vibrato", "ghost", "open", "roll", "pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell"],
       "harmony": ["G", "C", "D7", "Em"],
       "meter": "4/4",
       "tempo": [100, 116],
       "scale": "major",
       "roles": {
         "lead": ["voice", "pedal-steel"],
-        "harmony": ["guitar"],
-        "bass": ["bass"],
+        "harmony": ["guitar", "piano"],
+        "bass": ["upright-bass"],
         "percussion": ["drums"]
       },
       "progressions": {
@@ -68,16 +68,17 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "honky-tonk boom chick and steel answers pedal-steel cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["pedal-steel"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "honky-tonk boom chick and steel answers guitar accompaniment", "role": "harmony", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "honky-tonk boom chick and steel answers guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "honky-tonk boom chick and steel answers low anchor", "role": "bass", "onsets": [0, 2], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
-        {"name": "honky-tonk boom chick and steel answers bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "honky-tonk boom chick and steel answers low anchor", "role": "bass", "onsets": [0, 2], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
+        {"name": "honky-tonk boom chick and steel answers bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["upright-bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "honky-tonk boom chick and steel answers kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
         {"name": "honky-tonk boom chick and steel answers drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
-        "pedal-steel": ["vibrato"],
-        "guitar": ["hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
-        "bass": ["slide", "hammer-on", "pull-off", "fingerstyle", "accent", "staccato", "legato"],
+        "pedal-steel": ["pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell", "vibrato"],
+        "guitar": ["flatpick", "hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
+        "upright-bass": ["fingerstyle", "accent", "staccato", "legato", "tenuto"],
+        "piano": ["accent", "staccato", "legato", "tenuto"],
         "drums": ["accent", "ghost", "open", "roll"]
       },
       "instrumentDialects": {
@@ -86,17 +87,21 @@ export const GENRE_PACK: GenrePackInput = {
           "defaultTechnique": "accent"
         },
         "pedal-steel:lead": {
-          "allowedTechniques": ["vibrato"],
+          "allowedTechniques": ["pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell", "vibrato"],
           "defaultTechnique": "vibrato"
         },
         "guitar:harmony": {
-          "allowedTechniques": ["hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
-          "defaultTechnique": "hammer-on",
+          "allowedTechniques": ["flatpick", "hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
+          "defaultTechnique": "flatpick",
           "variantId": "steel-acoustic"
         },
-        "bass:bass": {
-          "allowedTechniques": ["slide", "hammer-on", "pull-off", "fingerstyle", "accent", "staccato", "legato"],
-          "defaultTechnique": "slide"
+        "upright-bass:bass": {
+          "allowedTechniques": ["fingerstyle", "accent", "staccato", "legato", "tenuto"],
+          "defaultTechnique": "fingerstyle"
+        },
+        "piano:harmony": {
+          "allowedTechniques": ["accent", "staccato", "legato", "tenuto"],
+          "defaultTechnique": "staccato"
         },
         "drums:percussion": {
           "allowedTechniques": ["accent", "ghost", "open", "roll"],
@@ -169,8 +174,8 @@ export const GENRE_PACK: GenrePackInput = {
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
         "violin": ["shuffle-bow", "drone-double-stop", "ornamented-slide", "double-stop", "accent", "staccato", "legato", "vibrato"],
-        "banjo": ["slide", "accent", "staccato", "legato", "tenuto"],
-        "guitar": ["hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
+        "banjo": ["fingerstyle", "roll", "slide", "accent", "staccato", "legato", "tenuto"],
+        "guitar": ["flatpick", "hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
         "mandolin": ["accent", "staccato", "legato"],
         "upright-bass": ["accent", "staccato", "legato", "tenuto"]
       },
@@ -184,12 +189,12 @@ export const GENRE_PACK: GenrePackInput = {
           "defaultTechnique": "shuffle-bow"
         },
         "banjo:lead": {
-          "allowedTechniques": ["slide", "accent", "staccato", "legato", "tenuto"],
-          "defaultTechnique": "slide"
+          "allowedTechniques": ["fingerstyle", "roll", "slide", "accent", "staccato", "legato", "tenuto"],
+          "defaultTechnique": "fingerstyle"
         },
         "guitar:harmony": {
-          "allowedTechniques": ["hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
-          "defaultTechnique": "hammer-on",
+          "allowedTechniques": ["flatpick", "hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
+          "defaultTechnique": "flatpick",
           "variantId": "steel-acoustic"
         },
         "mandolin:harmony": {
@@ -219,7 +224,7 @@ export const GENRE_PACK: GenrePackInput = {
       "name": "Bakersfield",
       "description": "Bakersfield: Bakersfield twang guitar and crisp backbeat. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
       "patterns": ["Treble-heavy Telecaster twang lick backed by snappy drum rimshots", "Bakersfield twang guitar and crisp backbeat"],
-      "techniques": ["fingerstyle", "double-stop", "slide", "hammer-on", "pull-off", "shuffle-bow", "brush", "snappy treble-boosted Fender Telecaster twang", "driving rock-influenced drum backbeat", "pedal steel harmony fills", "punchy straightforward vocal delivery", "accent", "staccato", "legato", "vibrato", "ghost", "open", "roll"],
+      "techniques": ["fingerstyle", "double-stop", "slide", "hammer-on", "pull-off", "shuffle-bow", "brush", "snappy treble-boosted Fender Telecaster twang", "driving rock-influenced drum backbeat", "pedal steel harmony fills", "punchy straightforward vocal delivery", "accent", "staccato", "legato", "vibrato", "ghost", "open", "roll", "pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell"],
       "harmony": ["G", "C", "D7", "Em"],
       "meter": "4/4",
       "tempo": [108, 124],
@@ -264,8 +269,8 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
-        "pedal-steel": ["vibrato"],
-        "guitar": ["hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
+        "pedal-steel": ["pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell", "vibrato"],
+        "guitar": ["flatpick", "hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
         "bass": ["slide", "hammer-on", "pull-off", "fingerstyle", "accent", "staccato", "legato"],
         "drums": ["accent", "ghost", "open", "roll"]
       },
@@ -275,17 +280,20 @@ export const GENRE_PACK: GenrePackInput = {
           "defaultTechnique": "accent"
         },
         "pedal-steel:lead": {
-          "allowedTechniques": ["vibrato"],
+          "allowedTechniques": ["pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell", "vibrato"],
           "defaultTechnique": "vibrato"
         },
         "guitar:harmony": {
-          "allowedTechniques": ["hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
-          "defaultTechnique": "hammer-on",
-          "variantId": "steel-acoustic"
+          "allowedTechniques": ["flatpick", "hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
+          "defaultTechnique": "flatpick",
+          "variantId": "solid-electric",
+          "bodyConstruction": "solid-electric",
+          "excitationType": "hard-pick",
+          "drive": 0.18
         },
         "bass:bass": {
           "allowedTechniques": ["slide", "hammer-on", "pull-off", "fingerstyle", "accent", "staccato", "legato"],
-          "defaultTechnique": "slide"
+          "defaultTechnique": "fingerstyle"
         },
         "drums:percussion": {
           "allowedTechniques": ["accent", "ghost", "open", "roll"],
@@ -308,9 +316,9 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "outlaw",
       "name": "Outlaw",
-      "description": "Outlaw: outlaw low guitar riff and restrained snare. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
-      "patterns": ["Phaser-soaked electric guitar chug locked with driving four-on-the-floor kick", "outlaw low guitar riff and restrained snare"],
-      "techniques": ["fingerstyle", "double-stop", "slide", "hammer-on", "pull-off", "shuffle-bow", "brush", "driving four-on-the-floor rock beat", "phaser-drenched Telecaster rhythm", "nylon-string trigger acoustic leads", "rebellious narrative lyrics", "accent", "staccato", "legato", "vibrato", "ghost", "open", "roll"],
+      "description": "Outlaw: a conversational lead, picked electric-guitar pulse and relaxed kit leave room for long pedal-steel replies.",
+      "patterns": ["Picked electric-guitar pulse with spacious pedal-steel replies", "Laid-back country-rock backbeat"],
+      "techniques": ["flatpicked electric-guitar pulse", "pedal-steel vibrato", "double-stop", "slide", "hammer-on", "pull-off", "conversational vocal phrasing", "laid-back backbeat", "root-fifth bass", "accent", "staccato", "legato", "vibrato", "ghost", "open", "roll", "pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell"],
       "harmony": ["G", "C", "D7", "Em"],
       "meter": "4/4",
       "tempo": [88, 104],
@@ -342,21 +350,21 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "outlaw low guitar riff and restrained snare voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "outlaw low guitar riff and restrained snare voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "outlaw low guitar riff and restrained snare pedal-steel statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["pedal-steel"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "outlaw low guitar riff and restrained snare pedal-steel cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["pedal-steel"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "outlaw low guitar riff and restrained snare guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "outlaw low guitar riff and restrained snare guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "outlaw low guitar riff and restrained snare low anchor", "role": "bass", "onsets": [0, 2.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
-        {"name": "outlaw low guitar riff and restrained snare bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "outlaw low guitar riff and restrained snare kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "outlaw low guitar riff and restrained snare drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "outlaw Telecaster pulse and steel replies voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
+        {"name": "outlaw Telecaster pulse and steel replies voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "outlaw Telecaster pulse and steel replies pedal-steel statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["pedal-steel"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
+        {"name": "outlaw Telecaster pulse and steel replies pedal-steel cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["pedal-steel"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "outlaw Telecaster pulse and steel replies guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "outlaw Telecaster pulse and steel replies guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "outlaw Telecaster pulse and steel replies low anchor", "role": "bass", "onsets": [0, 2.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
+        {"name": "outlaw Telecaster pulse and steel replies bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "outlaw Telecaster pulse and steel replies kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
+        {"name": "outlaw Telecaster pulse and steel replies drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
-        "pedal-steel": ["vibrato"],
-        "guitar": ["hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
+        "pedal-steel": ["pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell", "vibrato"],
+        "guitar": ["hammer-on", "pull-off", "slide", "flatpick", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
         "bass": ["slide", "hammer-on", "pull-off", "fingerstyle", "accent", "staccato", "legato"],
         "drums": ["accent", "ghost", "open", "roll"]
       },
@@ -366,17 +374,20 @@ export const GENRE_PACK: GenrePackInput = {
           "defaultTechnique": "accent"
         },
         "pedal-steel:lead": {
-          "allowedTechniques": ["vibrato"],
+          "allowedTechniques": ["pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell", "vibrato"],
           "defaultTechnique": "vibrato"
         },
         "guitar:harmony": {
-          "allowedTechniques": ["hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
-          "defaultTechnique": "hammer-on",
-          "variantId": "steel-acoustic"
+          "allowedTechniques": ["flatpick", "hammer-on", "pull-off", "slide", "double-stop", "accent", "staccato", "legato", "vibrato"],
+          "defaultTechnique": "flatpick",
+          "variantId": "solid-electric",
+          "bodyConstruction": "solid-electric",
+          "excitationType": "hard-pick",
+          "drive": 0.16
         },
         "bass:bass": {
           "allowedTechniques": ["slide", "hammer-on", "pull-off", "fingerstyle", "accent", "staccato", "legato"],
-          "defaultTechnique": "slide"
+          "defaultTechnique": "fingerstyle"
         },
         "drums:percussion": {
           "allowedTechniques": ["accent", "ghost", "open", "roll"],
@@ -401,7 +412,7 @@ export const GENRE_PACK: GenrePackInput = {
       "name": "Western Swing",
       "description": "Western Swing: Western Swing fiddle line and walking bass. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
       "patterns": ["Triple fiddle swinging harmonization over walking bass and hot steel guitar riff", "Western Swing fiddle line and walking bass"],
-      "techniques": ["fingerstyle", "double-stop", "slide", "hammer-on", "pull-off", "shuffle-bow", "brush", "twin and triple fiddle jazz harmonies", "swinging lap steel improvisation", "jazz chord substitutions (diminished/augmented)", "driving 4-beat swing rhythm", "accent", "staccato", "legato", "vibrato", "drone-double-stop", "ornamented-slide", "tenuto", "ghost", "open", "roll"],
+      "techniques": ["fingerstyle", "double-stop", "slide", "hammer-on", "pull-off", "shuffle-bow", "brush", "twin and triple fiddle jazz harmonies", "swinging lap steel improvisation", "jazz chord substitutions (diminished/augmented)", "driving 4-beat swing rhythm", "accent", "staccato", "legato", "vibrato", "drone-double-stop", "ornamented-slide", "tenuto", "ghost", "open", "roll", "pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell"],
       "harmony": ["G", "C", "D7", "Em"],
       "meter": "4/4",
       "tempo": [128, 144],
@@ -451,8 +462,8 @@ export const GENRE_PACK: GenrePackInput = {
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
         "violin": ["shuffle-bow", "drone-double-stop", "ornamented-slide", "double-stop", "accent", "staccato", "legato", "vibrato"],
-        "pedal-steel": ["vibrato"],
-        "guitar": ["hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
+        "pedal-steel": ["pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell", "vibrato"],
+        "guitar": ["flatpick", "hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
         "piano": ["accent", "staccato", "legato", "tenuto"],
         "upright-bass": ["accent", "staccato", "legato", "tenuto"],
         "drums": ["accent", "ghost", "open", "roll"]
@@ -467,13 +478,15 @@ export const GENRE_PACK: GenrePackInput = {
           "defaultTechnique": "shuffle-bow"
         },
         "pedal-steel:lead": {
-          "allowedTechniques": ["vibrato"],
+          "allowedTechniques": ["pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell", "vibrato"],
           "defaultTechnique": "vibrato"
         },
         "guitar:harmony": {
-          "allowedTechniques": ["hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
-          "defaultTechnique": "hammer-on",
-          "variantId": "steel-acoustic"
+          "allowedTechniques": ["flatpick", "hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
+          "defaultTechnique": "flatpick",
+          "variantId": "archtop-electric",
+          "bodyConstruction": "wood-box",
+          "excitationType": "plectrum"
         },
         "piano:harmony": {
           "allowedTechniques": ["accent", "staccato", "legato", "tenuto"],
@@ -514,7 +527,8 @@ export const GENRE_PACK: GenrePackInput = {
       "roles": {
         "lead": ["voice", "violin"],
         "harmony": ["guitar", "resonator-guitar"],
-        "bass": ["upright-bass"]
+        "bass": ["upright-bass"],
+        "percussion": ["drums"]
       },
       "progressions": {
         "intro": ["Am", "F", "C", "G"],
@@ -551,9 +565,10 @@ export const GENRE_PACK: GenrePackInput = {
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
         "violin": ["shuffle-bow", "drone-double-stop", "ornamented-slide", "double-stop", "accent", "staccato", "legato", "vibrato"],
-        "guitar": ["hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
+        "guitar": ["flatpick", "hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
         "resonator-guitar": ["slide", "fingerstyle", "double-stop"],
-        "upright-bass": ["accent", "staccato", "legato", "tenuto"]
+        "upright-bass": ["accent", "staccato", "legato", "tenuto"],
+        "drums": ["accent", "ghost", "open", "roll"]
       },
       "instrumentDialects": {
         "voice:lead": {
@@ -565,8 +580,8 @@ export const GENRE_PACK: GenrePackInput = {
           "defaultTechnique": "shuffle-bow"
         },
         "guitar:harmony": {
-          "allowedTechniques": ["hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
-          "defaultTechnique": "hammer-on",
+          "allowedTechniques": ["flatpick", "hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
+          "defaultTechnique": "fingerstyle",
           "variantId": "steel-acoustic"
         },
         "resonator-guitar:harmony": {
@@ -575,6 +590,10 @@ export const GENRE_PACK: GenrePackInput = {
         },
         "upright-bass:bass": {
           "allowedTechniques": ["accent", "staccato", "legato", "tenuto"],
+          "defaultTechnique": "accent"
+        },
+        "drums:percussion": {
+          "allowedTechniques": ["accent", "ghost", "open", "roll"],
           "defaultTechnique": "accent"
         }
       },
@@ -596,7 +615,7 @@ export const GENRE_PACK: GenrePackInput = {
       "name": "Country Pop",
       "description": "Country Pop: country pop chorus lift and acoustic strum. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
       "patterns": ["country pop chorus lift and acoustic strum"],
-      "techniques": ["fingerstyle", "double-stop", "slide", "hammer-on", "pull-off", "shuffle-bow", "brush", "accent", "staccato", "legato", "vibrato", "ghost", "open", "roll"],
+      "techniques": ["fingerstyle", "double-stop", "slide", "hammer-on", "pull-off", "shuffle-bow", "brush", "accent", "staccato", "legato", "vibrato", "ghost", "open", "roll", "pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell"],
       "harmony": ["G", "C", "D7", "Em"],
       "meter": "4/4",
       "tempo": [104, 120],
@@ -640,8 +659,8 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
-        "pedal-steel": ["vibrato"],
-        "guitar": ["hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
+        "pedal-steel": ["pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell", "vibrato"],
+        "guitar": ["flatpick", "hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
         "bass": ["slide", "hammer-on", "pull-off", "fingerstyle", "accent", "staccato", "legato"],
         "drums": ["accent", "ghost", "open", "roll"]
       },
@@ -651,17 +670,17 @@ export const GENRE_PACK: GenrePackInput = {
           "defaultTechnique": "accent"
         },
         "pedal-steel:lead": {
-          "allowedTechniques": ["vibrato"],
+          "allowedTechniques": ["pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell", "vibrato"],
           "defaultTechnique": "vibrato"
         },
         "guitar:harmony": {
-          "allowedTechniques": ["hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
-          "defaultTechnique": "hammer-on",
+          "allowedTechniques": ["flatpick", "hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
+          "defaultTechnique": "flatpick",
           "variantId": "steel-acoustic"
         },
         "bass:bass": {
           "allowedTechniques": ["slide", "hammer-on", "pull-off", "fingerstyle", "accent", "staccato", "legato"],
-          "defaultTechnique": "slide"
+          "defaultTechnique": "fingerstyle"
         },
         "drums:percussion": {
           "allowedTechniques": ["accent", "ghost", "open", "roll"],

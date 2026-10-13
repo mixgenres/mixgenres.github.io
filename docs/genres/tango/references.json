@@ -1,8 +1,9 @@
 {
   "genreId": "tango",
+  "status": "Existing links are un-auditioned candidates; coverage is incomplete until each style has five linked recordings and listening notes.",
   "references": [
     {
-      "styleId": "tango-golden-age",
+      "styleId": "golden-age",
       "references": [
         {
           "artist": "Aníbal Troilo",
@@ -11,7 +12,7 @@
       ]
     },
     {
-      "styleId": "tango-canyengue",
+      "styleId": "canyengue",
       "references": [
         {
           "artist": "Francisco Canaro",
@@ -20,7 +21,7 @@
       ]
     },
     {
-      "styleId": "tango-guardia-nueva-de-caro",
+      "styleId": "guardia-nueva-de-caro",
       "references": [
         {
           "artist": "Julio De Caro",
@@ -29,7 +30,7 @@
       ]
     },
     {
-      "styleId": "tango-canaro",
+      "styleId": "canaro",
       "references": [
         {
           "artist": "Francisco Canaro",
@@ -58,19 +59,91 @@
           "title": "Canaro en París (instrumental)",
           "youtube": "https://www.youtube.com/watch?v=-Y0v8_UZ0oM"
         }
+      ],
+      "compare": [
+        "vocal delivery and orchestral responses",
+        "dance pulse, bass weight and phrase transitions"
+      ],
+      "recordings": [
+        {
+          "title": "Margo",
+          "artist": "Francisco Canaro y Su Orquestra & Homero Exposito",
+          "url": "https://music.apple.com/us/song/325143066",
+          "timecodes": []
+        },
+        {
+          "title": "Nada más",
+          "artist": "Ada Falcón & Orquesta Francisco Canaro",
+          "url": "https://music.apple.com/us/song/1068465559",
+          "timecodes": []
+        },
+        {
+          "title": "Poema (feat. Roberto Maida)",
+          "artist": "Francisco Canaro",
+          "url": "https://music.apple.com/us/song/1071888211",
+          "timecodes": []
+        },
+        {
+          "title": "La Cumparsita (Tango) (Vocal: Marino Alonso)",
+          "artist": "Francisco Canaro y Su Orquesta Típica Argentina",
+          "url": "https://music.apple.com/us/song/350514002",
+          "timecodes": []
+        },
+        {
+          "title": "Tiempos Viejos",
+          "artist": "Francisco Canaro & Charlo",
+          "url": "https://music.apple.com/no/song/256602304?l=nb",
+          "timecodes": []
+        }
       ]
     },
     {
-      "styleId": "tango-darienzo",
+      "styleId": "darienzo",
       "references": [
         {
           "artist": "Juan D'Arienzo",
           "title": "La Cumparsita"
         }
+      ],
+      "compare": [
+        "attack and accent clarity in the dance pulse",
+        "bass and bandoneon balance, tempo and phrase drive"
+      ],
+      "recordings": [
+        {
+          "title": "Don Juan",
+          "artist": "Juan D'Arienzo",
+          "url": "https://music.apple.com/us/song/401946069",
+          "timecodes": []
+        },
+        {
+          "title": "La puñalada",
+          "artist": "Orquesta Juan D'Arienzo",
+          "url": "https://music.apple.com/us/song/387292605",
+          "timecodes": []
+        },
+        {
+          "title": "La Cumparsita (Instrumental)",
+          "artist": "Juan D'Arienzo",
+          "url": "https://music.apple.com/us/song/958451006",
+          "timecodes": []
+        },
+        {
+          "title": "El Huracan",
+          "artist": "Juan D'Arienzo",
+          "url": "https://music.apple.com/us/song/387279953",
+          "timecodes": []
+        },
+        {
+          "title": "El Choclo",
+          "artist": "Juan D'Arienzo y Su Orquesta",
+          "url": "https://music.apple.com/us/song/565900214",
+          "timecodes": []
+        }
       ]
     },
     {
-      "styleId": "tango-di-sarli",
+      "styleId": "di-sarli",
       "references": [
         {
           "artist": "Carlos Di Sarli",
@@ -102,28 +175,136 @@
           "title": "A la gran muñeca (instrumental, 1951)",
           "youtube": "https://www.youtube.com/watch?v=coVy25CcPzA"
         }
+      ],
+      "compare": [
+        "piano and bandoneon prominence",
+        "string connection, bass weight and dynamic shape"
+      ],
+      "recordings": [
+        {
+          "title": "Champagne Tango",
+          "artist": "Orquesta Carlos Di Sarli",
+          "url": "https://music.apple.com/us/song/1130051197",
+          "timecodes": []
+        },
+        {
+          "title": "Don Juan",
+          "artist": "Carlos Di Sarli",
+          "url": "https://music.apple.com/us/song/527188822",
+          "timecodes": []
+        },
+        {
+          "title": "Bahía Blanca",
+          "artist": "Carlos Di Sarli",
+          "url": "https://music.apple.com/us/song/401152151",
+          "timecodes": []
+        },
+        {
+          "title": "Indio Manso",
+          "artist": "Carlos Di Sarli",
+          "url": "https://music.apple.com/us/song/527589248",
+          "timecodes": []
+        },
+        {
+          "title": "Cachivache",
+          "artist": "Carlos Di Sarli",
+          "url": "https://music.apple.com/us/song/931567822",
+          "timecodes": []
+        }
       ]
     },
     {
-      "styleId": "tango-troilo",
+      "styleId": "troilo",
       "references": [
         {
           "artist": "Aníbal Troilo",
           "title": "Quejas de Bandoneón"
         }
+      ],
+      "compare": [
+        "bandoneon lead and string answers",
+        "vocal/orchestra balance, accents and room sound"
+      ],
+      "recordings": [
+        {
+          "title": "Quejas de Bandoneón",
+          "artist": "Aníbal Troilo",
+          "url": "https://music.apple.com/us/song/384632717",
+          "timecodes": []
+        },
+        {
+          "title": "Marioneta",
+          "artist": "Aníbal Troilo Pichuco & Floreal Ruíz",
+          "url": "https://music.apple.com/us/song/1698581045",
+          "timecodes": []
+        },
+        {
+          "title": "Milongueando en el cuarenta",
+          "artist": "Orquesta Anibal Troilo",
+          "url": "https://music.apple.com/us/song/1077016179",
+          "timecodes": []
+        },
+        {
+          "title": "Garúa",
+          "artist": "Aníbal Troilo & Roberto Goyeneche",
+          "url": "https://music.apple.com/us/song/1740157010",
+          "timecodes": []
+        },
+        {
+          "title": "Toda Mi Vida",
+          "artist": "Aníbal Troilo",
+          "url": "https://music.apple.com/us/song/401943538",
+          "timecodes": []
+        }
       ]
     },
     {
-      "styleId": "tango-pugliese",
+      "styleId": "pugliese",
       "references": [
         {
           "artist": "Osvaldo Pugliese",
           "title": "La Yumba"
         }
+      ],
+      "compare": [
+        "accent placement, space and phrase elasticity",
+        "piano/bass low-end weight and ensemble density"
+      ],
+      "recordings": [
+        {
+          "title": "La Yumba",
+          "artist": "Osvaldo Pugliese & His Orchestra",
+          "url": "https://music.apple.com/us/song/344350140",
+          "timecodes": []
+        },
+        {
+          "title": "Gallo Ciego",
+          "artist": "Osvaldo Pugliese",
+          "url": "https://music.apple.com/us/song/429501437",
+          "timecodes": []
+        },
+        {
+          "title": "N.N.",
+          "artist": "Osvaldo Pugliese y Su Orquesta",
+          "url": "https://music.apple.com/us/song/537373021",
+          "timecodes": []
+        },
+        {
+          "title": "Sin Lágrimas",
+          "artist": "Osvaldo Pugliese & Roberto Chanel",
+          "url": "https://music.apple.com/us/song/579194068",
+          "timecodes": []
+        },
+        {
+          "title": "Desde El Alma - Instrumental",
+          "artist": "Osvaldo Pugliese",
+          "url": "https://music.apple.com/us/song/1796190842",
+          "timecodes": []
+        }
       ]
     },
     {
-      "styleId": "tango-salgan",
+      "styleId": "salgan",
       "references": [
         {
           "artist": "Horacio Salgán",
@@ -132,7 +313,7 @@
       ]
     },
     {
-      "styleId": "tango-tango-cancion",
+      "styleId": "tango-cancion",
       "references": [
         {
           "artist": "Carlos Gardel",
@@ -141,7 +322,7 @@
       ]
     },
     {
-      "styleId": "tango-milonga",
+      "styleId": "milonga",
       "references": [
         {
           "artist": "Francisco Canaro",
@@ -150,7 +331,7 @@
       ]
     },
     {
-      "styleId": "tango-vals",
+      "styleId": "vals",
       "references": [
         {
           "artist": "Francisco Canaro",
@@ -159,7 +340,7 @@
       ]
     },
     {
-      "styleId": "tango-piazzolla-nuevo-tango",
+      "styleId": "piazzolla-nuevo-tango",
       "references": [
         {
           "artist": "Astor Piazzolla",
@@ -168,7 +349,7 @@
       ]
     },
     {
-      "styleId": "tango-electrotango-gotan",
+      "styleId": "electrotango-gotan",
       "references": [
         {
           "artist": "Gotan Project",
@@ -177,7 +358,7 @@
       ]
     },
     {
-      "styleId": "tango-electro-rock-bajofondo",
+      "styleId": "electro-rock-bajofondo",
       "references": [
         {
           "artist": "Bajofondo",
@@ -186,7 +367,7 @@
       ]
     },
     {
-      "styleId": "tango-modern-orquesta",
+      "styleId": "modern-orquesta",
       "references": [
         {
           "artist": "Orquesta Típica Fernández Fierro",
@@ -195,7 +376,7 @@
       ]
     },
     {
-      "styleId": "tango-chacarera-crossover",
+      "styleId": "chacarera-crossover",
       "references": [
         {
           "artist": "Mercedes Sosa",
@@ -203,5 +384,8 @@
         }
       ]
     }
-  ]
+  ],
+  "reviewed": "2026-10-12",
+  "source": "Direct Apple Music track pages added for Canaro, D’Arienzo, Di Sarli, Troilo and Pugliese; no reference audio downloaded.",
+  "status": "Five streaming comparison candidates added for five styles. Candidate links have not been auditioned; audio comparison and timecodes are pending."
 }

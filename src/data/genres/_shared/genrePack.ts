@@ -423,14 +423,11 @@ function studentCellName(style: GenreStyleDefinition, cell: AuthoredCell): strin
   const instrument = (cell.instruments?.[0] ?? '').replaceAll('-', ' ');
   const compact = (value: string) => value.trim().split(/\s+/).length <= 3 ? value.trim() : '';
   if (cell.shortName && compact(cell.shortName)) return cell.shortName;
-  const signature = style.signatureCell?.trim();
-  const withoutSignature = signature && cell.name.toLowerCase().startsWith(`${signature.toLowerCase()} `)
-    ? cell.name.slice(signature.length).trim()
-    : cell.name;
-  const withoutStyle = withoutSignature.toLowerCase().startsWith(`${style.name.toLowerCase()} `)
-    ? withoutSignature.slice(style.name.length).trim()
-    : withoutSignature;
-  const lowerName = cell.name.toLowerCase();
+  const prefixes = [...(style.calibration?.patterns?.families ?? []), style.signatureCell ?? '', style.name]
+    .filter(Boolean).sort((a, b) => b.length - a.length);
+  const prefix = prefixes.find(value => cell.name.toLowerCase().startsWith(`${value.toLowerCase()} `));
+  const withoutStyle = prefix ? cell.name.slice(prefix.length).trim() : cell.name;
+  const lowerName = withoutStyle.toLowerCase();
   const compactConcept = lowerName.includes('ostinato') ? `${instrument || 'Style'} ostinato`
     : /call.?and.?response|call.?response/.test(lowerName) ? 'Call and response'
       : /answer|response/.test(lowerName) ? `${instrument || 'Lead'} answer`
@@ -449,10 +446,37 @@ function studentCellName(style: GenreStyleDefinition, cell: AuthoredCell): strin
 }
 
 function studentInstrumentLabel(instrumentId: string): string {
+  const studentLabels: Record<string, string> = {
+    voice: 'Vocal', 'pedal-steel': 'Pedal steel', 'upright-bass': 'Upright bass',
+    piano: 'Piano', drums: 'Drum kit',
+  };
+  if (studentLabels[instrumentId]) return studentLabels[instrumentId];
   const fullName = (INSTRUMENTS_BY_ID[instrumentId]?.name ?? instrumentId.replaceAll('-', ' '))
     .split(/\s*\/\s*/)[0].trim();
   const words = fullName.trim().split(/\s+/);
   return words.length > 2 ? words.slice(-2).join(' ') : fullName;
+}
+
+function studentTechniqueLabel(technique: string): string {
+  const labels: Record<string, string> = {
+    'pedal-bend': 'pedal raise',
+    'knee-lever-bend': 'knee lever lower',
+    'chordal-glissando': 'chord glide',
+    'volume-swell': 'volume pedal swell',
+  };
+  const key = technique.toLowerCase().replaceAll('_', '-');
+  return labels[key] ?? technique.replaceAll('-', ' ').replaceAll('_', ' ');
+}
+
+function studentTechniqueShortLabel(technique: string): string {
+  const labels: Record<string, string> = {
+    'pedal-bend': 'pedal raise',
+    'knee-lever-bend': 'lever lower',
+    'chordal-glissando': 'chord glide',
+    'volume-swell': 'volume swell',
+  };
+  const key = technique.toLowerCase().replaceAll('_', '-');
+  return labels[key] ?? studentTechniqueLabel(technique);
 }
 
 function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cell: AuthoredCell, index: number): MusicalPattern {
@@ -679,18 +703,25 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
       if ([...alreadyDemonstrated].some(existing => techniqueGestureMatches(gesture, existing))) continue;
       const cue = (style.calibration?.instrumentTechniques?.[instrumentId] ?? [])
         .find(value => techniqueGestureMatches(gesture, value)) ?? gesture;
+      const friendlySteelGesture = instrumentId==='pedal-steel'
+        && ['pedal-bend','knee-lever-bend','chordal-glissando','volume-swell'].includes(gesture);
+      const label = friendlySteelGesture ? studentTechniqueLabel(gesture) : gesture;
+      const shortLabel = friendlySteelGesture ? studentTechniqueShortLabel(gesture) : gesture;
+      const cueLabel = friendlySteelGesture ? studentTechniqueLabel(cue) : cue;
       const difficulty = /tremolo|harmonic|gliss|portamento|double.?stop|hammer|pull.?off|rasgue|alzap[uú]a|picado|taan|melisma|roll/i.test(gesture) ? 4
         : /vibrato|bend|slide|ghost|slap|ornament|trill|fall|marcato/i.test(gesture) ? 3 : 2;
       studies.push({
         ...source,
-        name: `${instrumentId} ${gesture} technique study`,
-        shortName: `${instrumentLabel} ${gesture}`,
+        name: friendlySteelGesture ? `${instrumentLabel} ${label} technique study` : `${instrumentId} ${gesture} technique study`,
+        shortName: friendlySteelGesture ? `Steel ${shortLabel}` : `${instrumentLabel} ${gesture}`,
         articulation: undefined,
         articulations: source.onsets.map(() => gesture),
         difficulty,
         pedagogicalStudy: 'technique',
         supportedEnergy: difficulty >= 4 ? [3, 4, 5] : [1, 2, 3, 4],
-        description: `${style.name} ${instrumentId} ${cue} study. Practice this playable gesture on the ${source.name} rhythm from this style; the note grid and phrase shape stay local to the selected reference family.`
+        description: friendlySteelGesture
+          ? `${style.name} ${instrumentLabel.toLowerCase()} ${cueLabel} study. Practice this playable gesture on the ${source.name} rhythm from this style; the note grid and phrase shape stay local to the selected reference family.`
+          : `${style.name} ${instrumentId} ${cue} study. Practice this playable gesture on the ${source.name} rhythm from this style; the note grid and phrase shape stay local to the selected reference family.`
       });
     }
   }
