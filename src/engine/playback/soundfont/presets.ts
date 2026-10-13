@@ -4,7 +4,7 @@ import { SAMPLED_SYNTH_PATCHES } from '../../../data/sound/playback/sampledSynth
 
 /** Zero-based General MIDI programs. World instruments with no sampled match
  * use an explicit family approximation, exposed in the bank coverage report. */
-export const SOUNDFONT_VERSION = 'mixgenres-sf-v6';
+export const SOUNDFONT_VERSION = 'mixgenres-sf-v7';
 export const BANK_PROGRAMS = {
   keys: [4, 5, 6, 7, 16, 19, 20, 21, 22],
   mallets: [8, 9, 10, 11, 12, 13, 14, 15, 117],
@@ -51,16 +51,21 @@ assign(72, 'piccolo'); assign(73, 'flute ney bansuri quena xiao dizi ryuteki'); 
 assign(75, 'pan-flute siku'); assign(77, 'shakuhachi'); assign(78, 'tin-whistle low-whistle'); assign(79, 'ocarina');
 assign(81, 'synth'); assign(98, 'crystal'); assign(109, 'bagpipes uilleann-pipes'); assign(111, 'suona zurna');
 assign(104, 'sitar tanpura rudra-veena veena'); assign(105, 'banjo');
-assign(106, 'shamisen biwa oud bouzouki mandolin bandola-llanera baglama dombra setar tar');
+assign(106, 'shamisen biwa oud bouzouki bandola-llanera baglama dombra setar tar');
 assign(107, 'koto gayageum guqin pipa guzheng'); assign(108, 'kalimba berimbau');
 export const INSTRUMENT_PROGRAMS: Readonly<Record<string, number>> = ids;
 
 export function patchForInstrument(id: string, percussion = false): SamplePatch {
   if (id === 'synth' || id === 'synth-bass') return {bank:75,program:id==='synth-bass'?0:3,drum:false,pack:'electronic'};
+  // GeneralUser GS includes an actual mandolin in its GS variation bank. The
+  // GM slot used by the old mapping is Shamisen, which is the wrong timbre for
+  // country bluegrass chop parts.
+  if (id === 'mandolin') return {bank:16,program:25,drum:false,pack:'guitars'};
   // The GM Jazz Guitar patch is a poor pedal-steel stand-in. These use the
   // packaged clean electric recordings; plan.ts may select the driven bank
   // when a style explicitly calls for more edge.
   if (id === 'pedal-steel' || id === 'lap-steel') return {bank:69,program:0,drum:false,pack:'electricClean'};
+  if (id === 'harmonium') return {bank:66,program:28,drum:false,pack:'keys'};
   if (id === 'piano') return {bank:64,program:0,drum:false,pack:'piano'};
   if (id === 'bass') return {bank:64,program:33,drum:false,pack:'bass'};
   if (id === 'bandoneon') return {bank:73,program:0,drum:false,pack:'bandoneon'};

@@ -1,5 +1,5 @@
 /** Reproducible offline distillation. Downloads live outside the repository.
- * Usage: npm run soundfonts:package -- <general.sf2> <ichiyanagi.sf2> <steel.sf2> <vcsl-dir> <quality-source-dir> <musescore-general.sf2> */
+ * Usage: npm run soundfonts:package -- <general.sf2> <ichiyanagi.sf2> <steel.sf2> <vcsl-dir> <quality-source-dir> <musescore-general.sf2> <jaw-harp.sf2> <turntable.wav> <harmonium-dir> */
 import { readFileSync, writeFileSync, mkdirSync, renameSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
@@ -20,7 +20,7 @@ const args = process.argv.slice(2);
 const sources = args.filter(arg=>!arg.startsWith('--'));
 const requestedPacks=args.find(arg=>arg.startsWith('--packs='))?.slice(8).split(',');
 if(requestedPacks?.some(id=>!Object.hasOwn(BANK_PROGRAMS,id)))throw new Error('Unknown requested SoundFont pack.');
-if (sources.length !== 8) throw new Error('Supply GeneralUser, Ichiyanagi and full FSS steel SF2 source paths, the selected VCSL WAV directory, quality source directory, MuseScore General SF2, FreePats Jaw Harp SF2 and CC0 vinyl scratch WAV.');
+if (sources.length !== 9) throw new Error('Supply GeneralUser, Ichiyanagi and full FSS steel SF2 source paths, the selected VCSL WAV directory, quality source directory, MuseScore General SF2, FreePats Jaw Harp SF2, CC0 vinyl scratch WAV and the pinned harmonium WAV directory.');
 const vorbisEncoder=process.env.MIXGENRES_VORBIS_ENCODER;
 if(!vorbisEncoder&&!execFileSync('ffmpeg',['-hide_banner','-encoders'],{encoding:'utf8'}).includes('libvorbis'))throw new Error('Use ffmpeg with libvorbis, or supply MIXGENRES_VORBIS_ENCODER compiled from scripts/lib/encode-vorbis.c.');
 const inputs = sources.slice(0,3).map(path => readFileSync(path));
@@ -31,6 +31,7 @@ const jawHarpData=readFileSync(sources[6]);
 const jawHarpBank=SoundBankLoader.fromArrayBuffer(jawHarpData.buffer.slice(jawHarpData.byteOffset,jawHarpData.byteOffset+jawHarpData.byteLength));
 const percussionSources=JSON.parse(readFileSync('scripts/lib/percussion-sources.json','utf8')) as {vcslCommit:string;samples:Array<{id:string;file:string;path:string;sha256:string;instrument:string;program:number;take:number;key:number;minVelocity:number;maxVelocity:number}>};
 const balafonSources=JSON.parse(readFileSync('scripts/lib/balafon-sources.json','utf8')) as {vcslCommit:string;samples:Array<{file:string;path:string;sha256:string;key:number;minVelocity:number;maxVelocity:number}>};
+const harmoniumSources=JSON.parse(readFileSync('scripts/lib/harmonium-sources.json','utf8')) as {commit:string;samples:Array<{file:string;key:number;sha256:string}>};
 
 type RecordedWave = { audio: Float32Array; peak: number };
 const recordedWaveCache = new Map<string, RecordedWave>();
@@ -67,10 +68,12 @@ for (const [id, programs] of Object.entries(BANK_PROGRAMS)) {
   changedPacks.push(id);
   const quality=id==='piano'?qualityPiano(sources[4]):id==='bass'?qualityBass(sources[4]):id==='drumkit'?qualityDrumKit(sources[4]):id==='electricClean'||id==='electricDrive'?qualityElectric(sources[4],id):id==='bandoneon'?qualityBandoneon(sources[4]):id==='upright'?qualityUprightBass(sources[4]):undefined;
   const source = banks[id === 'nylon' ? 1 : id === 'steel' ? 2 : 0];
-  const selected = source.presets.filter(preset => id === 'nylon' || id === 'steel'
-    ? !preset.isDrum && (id==='nylon'?[0,4,24].includes(preset.bankMSB):preset.bankMSB === 0)
-    : id === 'percussion' ? preset.isGMGSDrum && [0,...Object.values(ELECTRONIC_KIT_PROGRAMS)].includes(preset.program)
-      : !preset.isDrum && preset.bankMSB === 0 && preset.bankLSB === 0 && (programs as readonly number[]).includes(preset.program));
+  const selected = source.presets.filter(preset => {
+    if(id==='nylon'||id==='steel')return !preset.isDrum&&(id==='nylon'?[0,4,24].includes(preset.bankMSB):preset.bankMSB===0);
+    if(id==='percussion')return preset.isGMGSDrum&&[0,...Object.values(ELECTRONIC_KIT_PROGRAMS)].includes(preset.program);
+    if(id==='guitars'&&!preset.isDrum&&preset.bankMSB===16&&preset.bankLSB===0&&preset.program===25)return true;
+    return !preset.isDrum&&preset.bankMSB===0&&preset.bankLSB===0&&(programs as readonly number[]).includes(preset.program);
+  });
   if (!selected.length&&!quality) throw new Error(`Empty pack: ${id}`);
   const bank = quality??new BasicSoundBank(); if(!quality)bank.soundBankInfo = { ...source.soundBankInfo };
   if(!quality)for (const preset of selected) bank.clonePreset(preset);
@@ -90,6 +93,25 @@ for (const [id, programs] of Object.entries(BANK_PROGRAMS)) {
     muted.globalZone.setGenerator(GeneratorTypes.initialFilterFc,muted.globalZone.getGenerator(GeneratorTypes.initialFilterFc,0)-3600,false);
     muted.globalZone.setGenerator(GeneratorTypes.releaseVolEnv,muted.globalZone.getGenerator(GeneratorTypes.releaseVolEnv,0)-3600,false);
     bank.clonePreset(muted);
+  }
+  if(id==='keys') {
+    const preset=new BasicPreset(bank);preset.name='MixGenres Indian harmonium';preset.bankMSB=66;preset.bankLSB=0;preset.program=28;
+    const instrument=new BasicInstrument();instrument.name=preset.name;
+    const rows=[...harmoniumSources.samples].sort((a,b)=>a.key-b.key);
+    if(rows.length<30||new Set(rows.map(row=>row.key)).size!==rows.length)throw new Error('Pinned harmonium source set is incomplete or has duplicate roots.');
+    for(let index=0;index<rows.length;index++) {
+      const row=rows[index],file=join(sources[8],row.file),source=readFileSync(file);
+      if(createHash('sha256').update(source).digest('hex')!==row.sha256)throw new Error(`Harmonium source hash changed: ${row.file}`);
+      const wave=recordedWave(file);
+      if(!wave.audio.length||wave.peak<.05)throw new Error(`Harmonium sample is silent: ${row.file}`);
+      const sample=new EmptySample();sample.name=`Harmonium ${row.key}`;sample.originalKey=row.key;sample.setAudioData(wave.audio,44100);
+      const minKey=Math.max(36,index===0?36:Math.floor((rows[index-1].key+row.key)/2)+1);
+      const maxKey=Math.min(84,index===rows.length-1?84:Math.floor((row.key+rows[index+1].key)/2));
+      const zone=instrument.createZone(sample);zone.keyRange={min:minKey,max:maxKey};zone.velRange={min:1,max:127};
+      zone.setGenerator(GeneratorTypes.releaseVolEnv,Math.round(1200*Math.log2(.35)));
+      bank.addSamples(sample);
+    }
+    preset.createZone(instrument);bank.addInstruments(instrument);bank.addPresets(preset);
   }
   if (id === 'percussion') {
     const jawHarp=jawHarpBank.presets.find(preset=>preset.program===0&&!preset.isDrum);
@@ -246,8 +268,11 @@ completeManifest.distillation={allBanks:{format:'SF3',codec:'Ogg Vorbis',quality
 completeManifest.distillation.bandoneon={recordedSource:'Jörg Bleymehl 1930 ELA bandoneon',recordedSamples:12,presets:2,direction:'open/close use the same samples with a modest close-reed filter/attack offset'};
 completeManifest.distillation.electronicKits={source:'GeneralUser GS',bank:0,drum:true,programs:ELECTRONIC_KIT_PROGRAMS,layout:'GM component keys'};
 completeManifest.distillation.synthPatches={source:'GeneralUser GS waveforms',bank:75,programs:SYNTH_SAMPLE_PROGRAMS,parameters:'authored lowpass filter and volume envelope; shared waveform PCM, distinct instrument zones'};
+completeManifest.distillation.countryMandolin={source:'GeneralUser GS',bank:16,program:25,sourcePreset:'Mandolin',replacesWrongGmSlot:'bank 0/program 106 Shamisen'};
 completeManifest.distillation.electricBass={source:'YR fingerstyle and picked recordings',sampleIdentity:'separate source names prevent cross-source deduplication',upperKey:55,upperRange:'extend the highest source zone by transposing its recorded waveform; not additional recorded notes'};
 completeManifest.distillation.uprightBass={recordedSource:'D. Smolken 1958 Otto Rubner double bass, CGDA fifths tuning',sourceArchiveSha256:'380986bb52ee6b6469d28e9089792a3ed37cbd163fe5a19160bf4f98785e7ccb',presets:{pizzicato:4,arco:2},roundRobin:'four pizzicato recordings, and separate down/up bow recordings',velocityLayers:{pizzicato:3,arco:5},discarded:'unpitched noises and body-contact keys',sampleRate:44100,maxSampleSeconds:12,terminalFadeSeconds:.15,vorbisQuality:6};
+completeManifest.harmoniumSourceSha256=Object.fromEntries(harmoniumSources.samples.map(row=>[row.file,createHash('sha256').update(readFileSync(join(sources[8],row.file))).digest('hex')]));
+completeManifest.distillation.harmonium={recordedSource:'donyaquick, Freesound 330410, via tonejs-instruments',sourceCommit:harmoniumSources.commit,samples:harmoniumSources.samples.length,sourceRange:'C2-D5',playableRange:'C2-C6',bank:66,program:28,license:'CC BY 3.0',sampleRate:44100,terminalFadeSeconds:.005,releaseSeconds:.35,vorbisQuality:6};
 writeFileSync(`${output}/manifest.json`,JSON.stringify(completeManifest,null,2)+'\n');
 writeFileSync(`${output}/notices/GeneralUser-GS.txt`,`${banks[0].soundBankInfo.name}\n${banks[0].soundBankInfo.copyright}\n\n${banks[0].soundBankInfo.comment}\n`);
 writeFileSync(`${output}/notices/MuseScore-General.txt`,`${timpaniBank.soundBankInfo.name}\n${timpaniBank.soundBankInfo.copyright}\n\n${timpaniBank.soundBankInfo.comment}\n\nSource: https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General.sf2\n`);
@@ -260,5 +285,6 @@ writeFileSync(`${output}/notices/YR-bass.txt`,readFileSync(join(sources[4],'Fing
 writeFileSync(`${output}/notices/Bleymehl-bandoneon.txt`,`${qualityBandoneon(sources[4]).soundBankInfo.name}\n${qualityBandoneon(sources[4]).soundBankInfo.copyright}\n\n${qualityBandoneon(sources[4]).soundBankInfo.comment}\n\nSource: https://github.com/jebentancour/Bandonberry/blob/master/bandoneon_v2.sf2\n`);
 writeFileSync(`${output}/notices/FSBS-electric.txt`,readFileSync(join(sources[4],'EGuitarFSBS-clean SF2-20260807/README.txt'),'utf8')+'\n'+readFileSync(join(sources[4],'EGuitarFSBS-dist2 SF2-20220911/README.txt'),'utf8'));
 writeFileSync(`${output}/notices/D-Smolken-double-bass.txt`,readFileSync(join(sources[4],'dsmolken_double_bass/LICENSE'),'utf8')+'\n\n'+readFileSync(join(sources[4],'dsmolken_double_bass/readme.txt'),'utf8')+'\n\nSource: https://github.com/sfzinstruments/dsmolken.double-bass\n');
+writeFileSync(`${output}/notices/Tonejs-harmonium.txt`,'Indian harmonium samples by donyaquick, Freesound sound 330410, distributed in tonejs-instruments.\nSource sample: https://freesound.org/people/donyaquick/sounds/330410/\nSource library: https://github.com/nbrosowsky/tonejs-instruments/tree/622c2f1c32c8cfce4158ddc3eb26e518ddef37e5/samples/harmonium\nThe tonejs-instruments sample license is Creative Commons Attribution 3.0: https://creativecommons.org/licenses/by/3.0/\nThe samples are trimmed, converted to mono 44.1 kHz, given a short terminal fade and encoded to Ogg Vorbis in the distributed SF3 bank.\n');
 mkdirSync('public',{recursive:true});
-writeFileSync('public/soundfont-notices.txt', 'MixGenres distilled SoundFont banks\n\n'+['GeneralUser-GS.txt','MuseScore-General.txt','Jaw-Harp.txt','Vinyl-Scratch.txt','Ichiyanagi.txt','FSS-steel-guitar.txt','Salamander.txt','Muldjord.txt','YR-bass.txt','FSBS-electric.txt','Bleymehl-bandoneon.txt','D-Smolken-double-bass.txt','VCSL.txt','GPL-3.txt','CC0.txt'].map(name=>`${name}\n\n${readFileSync(`${output}/notices/${name}`,'utf8')}`).join('\n\n')+'\n\nSpessaSynth core 4.3.22, Apache-2.0\n'+readFileSync('node_modules/spessasynth_core/LICENSE','utf8')+'\n\nstb-vorbis 0.0.6\n'+readFileSync('node_modules/stb-vorbis/LICENSE','utf8'));
+writeFileSync('public/soundfont-notices.txt', 'MixGenres distilled SoundFont banks\n\n'+['GeneralUser-GS.txt','MuseScore-General.txt','Jaw-Harp.txt','Vinyl-Scratch.txt','Ichiyanagi.txt','FSS-steel-guitar.txt','Salamander.txt','Muldjord.txt','YR-bass.txt','FSBS-electric.txt','Bleymehl-bandoneon.txt','D-Smolken-double-bass.txt','Tonejs-harmonium.txt','VCSL.txt','GPL-3.txt','CC0.txt'].map(name=>`${name}\n\n${readFileSync(`${output}/notices/${name}`,'utf8')}`).join('\n\n')+'\n\nSpessaSynth core 4.3.22, Apache-2.0\n'+readFileSync('node_modules/spessasynth_core/LICENSE','utf8')+'\n\nstb-vorbis 0.0.6\n'+readFileSync('node_modules/stb-vorbis/LICENSE','utf8'));

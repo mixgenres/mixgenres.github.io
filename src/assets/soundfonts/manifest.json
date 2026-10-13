@@ -1,5 +1,5 @@
 {
-  "version": "mixgenres-sf-v6",
+  "version": "mixgenres-sf-v7",
   "sourceSha256": [
     "9575028c7a1f589f5770fccc8cff2734566af40cd26ed836944e9a5152688cfe",
     "c0ae2e0c4b3efb98b3af49ac553e2ab3bb23258bf4832c3146f94b26cd9236f1",
@@ -128,10 +128,10 @@
   },
   "packs": {
     "keys": {
-      "bytes": 347658,
-      "unpackedBytes": 718562,
-      "sha256": "5bf14c22677466fdadb1075f9e9026e8c6b6291f1cbe1ae1b7df0b45731d6dc6",
-      "unpackedSha256": "0a73fe61f4f9ece8aa457bf006e551f4027b95e71ca47bf4358cca227014b9fd",
+      "bytes": 4608010,
+      "unpackedBytes": 5411972,
+      "sha256": "2e2b321b782f7198a4381b184c4e9cfb027b95320484e88f8627fe035ccba984",
+      "unpackedSha256": "de67eefa3ad0c04062b21e244fedf4ac4b948824f168d3d2076fb3a06733ebf7",
       "presets": [
         "0:0:4",
         "0:0:5",
@@ -141,9 +141,10 @@
         "0:0:19",
         "0:0:20",
         "0:0:21",
-        "0:0:22"
+        "0:0:22",
+        "0:66:28"
       ],
-      "samples": 93,
+      "samples": 131,
       "format": "sf3"
     },
     "mallets": {
@@ -167,13 +168,14 @@
       "format": "sf3"
     },
     "guitars": {
-      "bytes": 433188,
-      "unpackedBytes": 945254,
-      "sha256": "f5fffb11055023ebf8f40f78d416744f0b28be6651f23705a767bbbb0f81bcef",
-      "unpackedSha256": "d3a86b01034110f178a1890c533a1d5f0093bcddacf14e4fc30aa20c63fdff3b",
+      "bytes": 437818,
+      "unpackedBytes": 954844,
+      "sha256": "28d426e153897abc5b7eb4c9d558afed88c1162372a3a3d1ae8f744fdaef1a86",
+      "unpackedSha256": "77d6edc86dccd6ad501e753e08002bf9af89003aeae79df28dc1bf48b9503460",
       "presets": [
         "0:0:24",
         "0:0:25",
+        "0:16:25",
         "0:0:26",
         "0:0:28",
         "0:0:31",
@@ -188,7 +190,7 @@
         "0:0:107",
         "0:0:108"
       ],
-      "samples": 134,
+      "samples": 136,
       "format": "sf3"
     },
     "strings": {
@@ -600,6 +602,13 @@
       },
       "parameters": "authored lowpass filter and volume envelope; shared waveform PCM, distinct instrument zones"
     },
+    "countryMandolin": {
+      "source": "GeneralUser GS",
+      "bank": 16,
+      "program": 25,
+      "sourcePreset": "Mandolin",
+      "replacesWrongGmSlot": "bank 0/program 106 Shamisen"
+    },
     "electricBass": {
       "source": "YR fingerstyle and picked recordings",
       "sampleIdentity": "separate source names prevent cross-source deduplication",
@@ -623,6 +632,60 @@
       "maxSampleSeconds": 12,
       "terminalFadeSeconds": 0.15,
       "vorbisQuality": 6
+    },
+    "harmonium": {
+      "recordedSource": "donyaquick, Freesound 330410, via tonejs-instruments",
+      "sourceCommit": "622c2f1c32c8cfce4158ddc3eb26e518ddef37e5",
+      "samples": 38,
+      "sourceRange": "C2-D5",
+      "playableRange": "C2-C6",
+      "bank": 66,
+      "program": 28,
+      "license": "CC BY 3.0",
+      "sampleRate": 44100,
+      "terminalFadeSeconds": 0.005,
+      "releaseSeconds": 0.35,
+      "vorbisQuality": 6
     }
+  },
+  "harmoniumSourceSha256": {
+    "A2.wav": "8827022150f0ce2daad6d90706a76705b00fcd43dc47530d05394ac0cc908c0c",
+    "A3.wav": "2610383aba1382b3c18a322ab20e1828faadb89301f2698d8ba713876a8e2231",
+    "A4.wav": "bfb1802891a5a5af671016100f0795f58f6f1739383b47d033ab038513d847a8",
+    "As2.wav": "46537799425bc7d28836f6bab882926c9e65e6d12725fd8aa7165d80170f2e3f",
+    "As3.wav": "1402c4e53751d3ec1c4230c7558f2ce405119d83f14298b3035a8d2eb2c4e1ca",
+    "As4.wav": "77f7d79f451c550428333346c19f493a7f5d5f5271bf5e271b54cd888bd35e3c",
+    "B2.wav": "fda678ca8fee721099ed990b747ed74c880f669d1ad60ddc294c9c9e82c794d0",
+    "B3.wav": "9c84fe97dd9e44a1c44ebd693ff2c8ac35c5d16d8f022cabbbccfec3d8a2cbc5",
+    "B4.wav": "4793294e08c7193fe09cfeebf10ec4037176efa9df1d98468520ed2b96f08e5a",
+    "C2.wav": "6f9f71e8f4babdc0ec1ece438c7d7a38b5fbd3330ca674168ccf402961c74402",
+    "C3.wav": "282bd24bfbfd68b7f609272da7b0c5f406de72b4741c5b5c51f5451a50dfcc3c",
+    "C4.wav": "aee5e70b43e8b241fe1f48446243a0f718915e12c3b921a790d1bff0884907b9",
+    "C5.wav": "173d05c404c832fa51030795f9b12325762dbbdcc4ec5d3875bd3afbbdd31540",
+    "Cs2.wav": "4723d9d5de59d450d942c26eb02c789d9e5dbc59ae7b47d007f9726b2bf5c942",
+    "Cs3.wav": "936b0878446db4d075f6167c416aed4b90f01fbb58169a118703f27c69169f79",
+    "Cs4.wav": "681af0f5f84f19e44f44439910a0dbd67b3f5e244eb37378f5ddf18e4618ba54",
+    "Cs5.wav": "e0ec8497dbdd824d61621b6b8c8efd3aa712d37ebf379ea51bfaa0a419551de8",
+    "D2.wav": "3f5d0388a9d32e6fc8f8566683feff48b5cc02882f83e3520545d2c469c11895",
+    "D3.wav": "32017bec88a9f3ebd66f7c52a1e27a6e66a310e99fd0f05f85fbbe725602da58",
+    "D4.wav": "d30f6603662a38b5c9796783feae53134a8c2e800e312f32098ceec108d0a965",
+    "D5.wav": "0e8f3b67dcc0dd811ae00f5d3c81512fea7dc43261804fa24b50b266f61c1085",
+    "Ds2.wav": "c8734cf63e5956631b3b51056b3f44b89505b70df80ba52a976e60819761eced",
+    "Ds3.wav": "e9809c98babe334e6f64c2d8eef3c23156c68582ff6ed03729a6ca764d7e8c3e",
+    "Ds4.wav": "71037fe4d733b2d777b51bbb93f6d889d26a2533b021336c7955a0a65b1ef9c8",
+    "E2.wav": "728e5ef2a804287b4bf2f90c3e0b4f9519696b022a9311a3f6a5d02fb1c487fc",
+    "E3.wav": "aee6771544ba291fd7cebb68c0f32621c8debea14f88dc704a294a4f50f83295",
+    "E4.wav": "b3c8de3d9d40130a821913dceef6d13624d3d7fc643cdcba113e8f477767b025",
+    "F2.wav": "89653420b592782e2e7d93692a67070d3a91d6adc463e0e887ce9510aab208f6",
+    "F3.wav": "80008cf0980aa96938686ec5d991bd1b5325300208bdea3ded7f99907fffb66c",
+    "F4.wav": "e63223c76b93f2ccee844dca2303f2f839a030639cd423a03c9429b5803197c6",
+    "Fs2.wav": "1aa3430351921a91ea46266d89ba3dd751d7770764248ceda94abd17eac123d6",
+    "Fs3.wav": "eb02f94958526ae608b9d2107badd9820c8a3ac56bc4e91b6c0982a597197967",
+    "G2.wav": "ea267962b5f43002acb5de8d4666d1c30f8235b43e267eeccd943bef87625db0",
+    "G3.wav": "3c11ec2b2c85762b2dfcf7805e1e45991a9ae18e5cbbe162caaf66141e713f60",
+    "G4.wav": "1d72a1c3711c89221b96d4d1de336111d7492a0a27335fccedabfdf670b4cf73",
+    "Gs2.wav": "11e399ba89c5ac62651d6cd91046a9a7aeda324c2203bf8979b90e37f5c719fe",
+    "Gs3.wav": "60dbe56b67caa78298f0b0da63bae255b1591ad9d0fd3b5c230865c3009e3ef8",
+    "Gs4.wav": "137f794c133b8b3fd41cc31ba235b68d0ad7c9c21a4d52cef30b8af052fcea51"
   }
 }

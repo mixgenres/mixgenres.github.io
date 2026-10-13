@@ -1,0 +1,195 @@
+{
+  "commit": "622c2f1c32c8cfce4158ddc3eb26e518ddef37e5",
+  "samples": [
+    {
+      "file": "A2.wav",
+      "key": 45,
+      "sha256": "8827022150f0ce2daad6d90706a76705b00fcd43dc47530d05394ac0cc908c0c"
+    },
+    {
+      "file": "A3.wav",
+      "key": 57,
+      "sha256": "2610383aba1382b3c18a322ab20e1828faadb89301f2698d8ba713876a8e2231"
+    },
+    {
+      "file": "A4.wav",
+      "key": 69,
+      "sha256": "bfb1802891a5a5af671016100f0795f58f6f1739383b47d033ab038513d847a8"
+    },
+    {
+      "file": "As2.wav",
+      "key": 46,
+      "sha256": "46537799425bc7d28836f6bab882926c9e65e6d12725fd8aa7165d80170f2e3f"
+    },
+    {
+      "file": "As3.wav",
+      "key": 58,
+      "sha256": "1402c4e53751d3ec1c4230c7558f2ce405119d83f14298b3035a8d2eb2c4e1ca"
+    },
+    {
+      "file": "As4.wav",
+      "key": 70,
+      "sha256": "77f7d79f451c550428333346c19f493a7f5d5f5271bf5e271b54cd888bd35e3c"
+    },
+    {
+      "file": "B2.wav",
+      "key": 47,
+      "sha256": "fda678ca8fee721099ed990b747ed74c880f669d1ad60ddc294c9c9e82c794d0"
+    },
+    {
+      "file": "B3.wav",
+      "key": 59,
+      "sha256": "9c84fe97dd9e44a1c44ebd693ff2c8ac35c5d16d8f022cabbbccfec3d8a2cbc5"
+    },
+    {
+      "file": "B4.wav",
+      "key": 71,
+      "sha256": "4793294e08c7193fe09cfeebf10ec4037176efa9df1d98468520ed2b96f08e5a"
+    },
+    {
+      "file": "C2.wav",
+      "key": 36,
+      "sha256": "6f9f71e8f4babdc0ec1ece438c7d7a38b5fbd3330ca674168ccf402961c74402"
+    },
+    {
+      "file": "C3.wav",
+      "key": 48,
+      "sha256": "282bd24bfbfd68b7f609272da7b0c5f406de72b4741c5b5c51f5451a50dfcc3c"
+    },
+    {
+      "file": "C4.wav",
+      "key": 60,
+      "sha256": "aee5e70b43e8b241fe1f48446243a0f718915e12c3b921a790d1bff0884907b9"
+    },
+    {
+      "file": "C5.wav",
+      "key": 72,
+      "sha256": "173d05c404c832fa51030795f9b12325762dbbdcc4ec5d3875bd3afbbdd31540"
+    },
+    {
+      "file": "Cs2.wav",
+      "key": 37,
+      "sha256": "4723d9d5de59d450d942c26eb02c789d9e5dbc59ae7b47d007f9726b2bf5c942"
+    },
+    {
+      "file": "Cs3.wav",
+      "key": 49,
+      "sha256": "936b0878446db4d075f6167c416aed4b90f01fbb58169a118703f27c69169f79"
+    },
+    {
+      "file": "Cs4.wav",
+      "key": 61,
+      "sha256": "681af0f5f84f19e44f44439910a0dbd67b3f5e244eb37378f5ddf18e4618ba54"
+    },
+    {
+      "file": "Cs5.wav",
+      "key": 73,
+      "sha256": "e0ec8497dbdd824d61621b6b8c8efd3aa712d37ebf379ea51bfaa0a419551de8"
+    },
+    {
+      "file": "D2.wav",
+      "key": 38,
+      "sha256": "3f5d0388a9d32e6fc8f8566683feff48b5cc02882f83e3520545d2c469c11895"
+    },
+    {
+      "file": "D3.wav",
+      "key": 50,
+      "sha256": "32017bec88a9f3ebd66f7c52a1e27a6e66a310e99fd0f05f85fbbe725602da58"
+    },
+    {
+      "file": "D4.wav",
+      "key": 62,
+      "sha256": "d30f6603662a38b5c9796783feae53134a8c2e800e312f32098ceec108d0a965"
+    },
+    {
+      "file": "D5.wav",
+      "key": 74,
+      "sha256": "0e8f3b67dcc0dd811ae00f5d3c81512fea7dc43261804fa24b50b266f61c1085"
+    },
+    {
+      "file": "Ds2.wav",
+      "key": 39,
+      "sha256": "c8734cf63e5956631b3b51056b3f44b89505b70df80ba52a976e60819761eced"
+    },
+    {
+      "file": "Ds3.wav",
+      "key": 51,
+      "sha256": "e9809c98babe334e6f64c2d8eef3c23156c68582ff6ed03729a6ca764d7e8c3e"
+    },
+    {
+      "file": "Ds4.wav",
+      "key": 63,
+      "sha256": "71037fe4d733b2d777b51bbb93f6d889d26a2533b021336c7955a0a65b1ef9c8"
+    },
+    {
+      "file": "E2.wav",
+      "key": 40,
+      "sha256": "728e5ef2a804287b4bf2f90c3e0b4f9519696b022a9311a3f6a5d02fb1c487fc"
+    },
+    {
+      "file": "E3.wav",
+      "key": 52,
+      "sha256": "aee6771544ba291fd7cebb68c0f32621c8debea14f88dc704a294a4f50f83295"
+    },
+    {
+      "file": "E4.wav",
+      "key": 64,
+      "sha256": "b3c8de3d9d40130a821913dceef6d13624d3d7fc643cdcba113e8f477767b025"
+    },
+    {
+      "file": "F2.wav",
+      "key": 41,
+      "sha256": "89653420b592782e2e7d93692a67070d3a91d6adc463e0e887ce9510aab208f6"
+    },
+    {
+      "file": "F3.wav",
+      "key": 53,
+      "sha256": "80008cf0980aa96938686ec5d991bd1b5325300208bdea3ded7f99907fffb66c"
+    },
+    {
+      "file": "F4.wav",
+      "key": 65,
+      "sha256": "e63223c76b93f2ccee844dca2303f2f839a030639cd423a03c9429b5803197c6"
+    },
+    {
+      "file": "Fs2.wav",
+      "key": 42,
+      "sha256": "1aa3430351921a91ea46266d89ba3dd751d7770764248ceda94abd17eac123d6"
+    },
+    {
+      "file": "Fs3.wav",
+      "key": 54,
+      "sha256": "eb02f94958526ae608b9d2107badd9820c8a3ac56bc4e91b6c0982a597197967"
+    },
+    {
+      "file": "G2.wav",
+      "key": 43,
+      "sha256": "ea267962b5f43002acb5de8d4666d1c30f8235b43e267eeccd943bef87625db0"
+    },
+    {
+      "file": "G3.wav",
+      "key": 55,
+      "sha256": "3c11ec2b2c85762b2dfcf7805e1e45991a9ae18e5cbbe162caaf66141e713f60"
+    },
+    {
+      "file": "G4.wav",
+      "key": 67,
+      "sha256": "1d72a1c3711c89221b96d4d1de336111d7492a0a27335fccedabfdf670b4cf73"
+    },
+    {
+      "file": "Gs2.wav",
+      "key": 44,
+      "sha256": "11e399ba89c5ac62651d6cd91046a9a7aeda324c2203bf8979b90e37f5c719fe"
+    },
+    {
+      "file": "Gs3.wav",
+      "key": 56,
+      "sha256": "60dbe56b67caa78298f0b0da63bae255b1591ad9d0fd3b5c230865c3009e3ef8"
+    },
+    {
+      "file": "Gs4.wav",
+      "key": 68,
+      "sha256": "137f794c133b8b3fd41cc31ba235b68d0ad7c9c21a4d52cef30b8af052fcea51"
+    }
+  ]
+}

@@ -2,14 +2,14 @@ import type { InstrumentDef } from '../../schema/instrument-def';
 
 export const voice: InstrumentDef = {
   id: "voice",
-  name: "Synth voice",
+  name: "Vocal guide (oohs)",
   family: "voice",
   octave: 12,
   voicing: "single",
   
   
   polyphony: 4,
-  note: "Synth voice tone",
+  note: "General MIDI Voice Oohs guide tone; it follows the melody but is not a recorded singer.",
   acousticProfile: {
     sustain: "sustained",
     role: "lead",

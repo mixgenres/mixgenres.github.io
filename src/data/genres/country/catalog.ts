@@ -60,7 +60,7 @@ export const GENRE_PACK: GenrePackInput = {
         {"label": "chorus", "bars": 8},
         {"label": "tag", "bars": 4}
       ],
-      "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
+      "groove": {"swingPercentage": 58, "anticipationOffsetSteps": 0, "microtimingFeel": "swung", "humanizeJitterMs": 7},
       "cells": [
         {"name": "honky-tonk boom chick and steel answers voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "honky-tonk boom chick and steel answers voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
@@ -348,7 +348,7 @@ export const GENRE_PACK: GenrePackInput = {
         {"label": "chorus", "bars": 8},
         {"label": "tag", "bars": 4}
       ],
-      "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
+      "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "laid-back", "humanizeJitterMs": 9},
       "cells": [
         {"name": "outlaw Telecaster pulse and steel replies voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "outlaw Telecaster pulse and steel replies voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
@@ -549,7 +549,7 @@ export const GENRE_PACK: GenrePackInput = {
         {"label": "chorus", "bars": 8},
         {"label": "tag", "bars": 4}
       ],
-      "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
+      "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "laid-back", "humanizeJitterMs": 9},
       "cells": [
         {"name": "Americana fingerpicked verse and fiddle response voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "Americana fingerpicked verse and fiddle response voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},

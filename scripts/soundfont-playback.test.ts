@@ -46,6 +46,32 @@ test('every catalog instrument maps to a shipped playable sample preset',()=>{
     assert(banks.get(patch.pack)!.presets.some(p=>p.program===patch.program&&p.bankMSB===patch.bank&&p.isGMGSDrum===patch.drum),def.id);
   }
 });
+test('country mandolin resolves to the actual GS mandolin variation, not the GM shamisen slot',()=>{
+  const patch=patchForInstrument('mandolin');
+  assert.deepEqual(patch,{bank:16,program:25,drum:false,pack:'guitars'});
+  const preset=load('guitars').presets.find(item=>item.bankMSB===16&&item.bankLSB===0&&item.program===25);
+  assert(preset);assert.match(preset.name,/mandolin/i);
+  assert(preset.getVoiceParameters(60,90).length,'middle C must reach the mandolin sample zone');
+  const plan=compileSamplePlan(performanceFixture({notes:[noteFixture({midi:60})]}),
+    {...options,trackInstruments:new Map([['keys','mandolin']]),worldId:'country',styleId:'country-bluegrass'});
+  const event=plan.events.find(item=>item.type==='on');
+  assert(event&&event.type==='on');assert.deepEqual(event.patch,patch);
+});
+test('Qawwali harmonium uses the recorded multisample bank across its full playable range',()=>{
+  const patch=patchForInstrument('harmonium');
+  assert.deepEqual(patch,{bank:66,program:28,drum:false,pack:'keys'});
+  const bank=load('keys'),preset=bank.presets.find(item=>item.bankMSB===66&&item.program===28);
+  assert(preset);assert.match(preset.name,/harmonium/i);
+  const zones=preset.zones.flatMap(zone=>zone.instrument.zones);
+  assert.equal(zones.length,38,'retain each source recording as its own sample zone');
+  assert.equal(new Set(zones.map(zone=>zone.sample.originalKey)).size,38,'keep the recorded roots distinct');
+  assert(Math.abs(SAMPLE_RELEASES['66:28:false'] - 0.35) < 0.005, 'the preset release follows the authored 0.35-second envelope');
+  for(let key=36;key<=84;key++)assert(preset.getVoiceParameters(key,90).length>0,`harmonium key ${key} must reach a recorded zone`);
+  const plan=compileSamplePlan(performanceFixture({notes:[noteFixture({midi:66})]}),
+    {...options,trackInstruments:new Map([['keys','harmonium']]),worldId:'qawwali',styleId:'qawwali-traditional'});
+  const attack=plan.events.find(event=>event.type==='on');
+  assert(attack&&attack.type==='on');assert.deepEqual(attack.patch,patch);assert(plan.banks.includes('keys'));
+});
 test('pedal and lap steel use the recorded clean-electric source, not the jazz guitar preset',()=>{
   const bank=load('electricClean');
   for(const instrumentId of ['pedal-steel','lap-steel']) {

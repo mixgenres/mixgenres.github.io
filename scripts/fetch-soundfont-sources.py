@@ -131,7 +131,14 @@ turntable = turntable_dir / 'Vinyl-Scratch-6.wav'
 download('https://bigsoundbank.com/UPLOAD/bwf-en/2863.wav', turntable,
          '7a1f58bc2b52b1797febe1b6313f8c631f73b8cc6b40bb6c55bcfb53163e718c')
 
+harmonium_sources = json.loads((ROOT / 'scripts/lib/harmonium-sources.json').read_text())
+harmonium_dir = DEST / 'harmonium'
+harmonium_dir.mkdir(exist_ok=True)
+for sample in harmonium_sources['samples']:
+    url = f"https://raw.githubusercontent.com/nbrosowsky/tonejs-instruments/{harmonium_sources['commit']}/samples/harmonium/{urllib.parse.quote(sample['file'])}"
+    download(url, harmonium_dir / sample['file'], sample['sha256'])
+
 if '--verify-only' in sys.argv:
     print('All pinned SoundFont and WAV sources match the manifests.')
 else:
-    subprocess.run(['npm', 'run', 'soundfonts:package', '--', str(general), str(nylon), str(steel), str(vcsl), str(DEST), str(muse_score), str(jaw_harp), str(turntable)], cwd=ROOT, check=True)
+    subprocess.run(['npm', 'run', 'soundfonts:package', '--', str(general), str(nylon), str(steel), str(vcsl), str(DEST), str(muse_score), str(jaw_harp), str(turntable), str(harmonium_dir)], cwd=ROOT, check=True)

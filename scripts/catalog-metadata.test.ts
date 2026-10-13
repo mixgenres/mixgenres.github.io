@@ -78,6 +78,18 @@ test('country pedal-steel studies expose each playable gesture with readable lab
   }
 });
 
+test('country style groove contracts match their authored pocket language', () => {
+  const honkyTonk = getStyle('country-honky-tonk')!.rhythm!;
+  assert.equal(honkyTonk.swingPercentage, 58, 'honky-tonk two-step/shuffle eighths need a light swing');
+  assert.equal(honkyTonk.microtimingFeel, 'swung');
+  assert.equal(getStyle('country-bluegrass')!.rhythm!.microtimingFeel, 'straight', 'bluegrass drive keeps even eighths');
+  assert.equal(getStyle('country-western-swing')!.rhythm!.microtimingFeel, 'swung');
+  assert.equal(getStyle('country-outlaw')!.rhythm!.microtimingFeel, 'laid-back');
+  assert.equal(getStyle('country-americana')!.rhythm!.microtimingFeel, 'laid-back');
+  assert.equal(getStyle('country-bakersfield')!.rhythm!.microtimingFeel, 'straight');
+  assert.equal(getStyle('country-country-pop')!.rhythm!.microtimingFeel, 'straight');
+});
+
 test('every sample song part has distinct style-local teaching patterns', () => {
   for (const entry of songCatalog) {
     const audit = auditCatalogSongInstruments(entry.id);

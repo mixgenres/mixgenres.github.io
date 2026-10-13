@@ -7,7 +7,7 @@
     "Smithsonian Folkways documents a ten-musician Sabri Brothers ensemble with lead vocals, harmonium, flute, tanpura, and percussion, and its program includes Ghazal, Naat Sharif, and Hamd: https://folkways.si.edu/pakistan-the-music-of-the-qawal/world/music/album/smithsonian",
     "The Chishty Sufi Sama Ensemble performance credits separately identify solo voice, chorus/clapping, harmonium, tabla, and dholak: https://asia-archive.si.edu/podcast/sufi-music-from-india-the-chishty-sufi-sama-ensemble/",
     "Night Song’s official credits document different personnel by track, including voice, harmonium, tabla, drums, bass, keyboards, and production/mixing by Michael Brook and Ben Findlay: https://realworldrecords.com/releases/night-song/",
-    "The bundled bank does not contain dedicated qawwali singer, group-vocal, or dholak multisamples. Voice and choir use GM vocal patches; dholak uses the nearest available kit timbres. These remain audible-source limits even when the parts and mix are arranged more carefully."
+    "The bundled bank now uses a 38-note recorded harmonium patch from the attributed CC BY 3.0 tonejs-instruments sample set. It still has no dedicated qawwali singer, group-vocal, or dholak multisamples: voice and choir use GM vocal patches, and dholak uses the nearest available kit timbres."
   ],
   "styles": [
     {
