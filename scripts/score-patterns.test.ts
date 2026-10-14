@@ -31,7 +31,8 @@ test('default ambient has independent overlapping registers and flamenco opens w
 test('salsa late bass attack anticipates the next root while clave retains its written timeline', () => {
   const sheet = makeSheet('salsa');
   const bass = sheet.tracks.find(t => t.instrumentId === 'bass')!;
-  const tumbao = PATTERNS_BY_ID['salsa-salsa-dura-pattern-5-salsa-dura-brass-punches-over-son-clave-low-anchor'];
+  const tumbao = Object.values(PATTERNS_BY_ID).find(pattern => pattern.styleIds?.includes('salsa-salsa-dura')
+    && pattern.shortName === 'Bass tumbao' && pattern.instruments?.includes('bass'));
   assert.ok(tumbao, 'the authored two-bar tumbao cell is available');
   for (const region of sheet.regions) sheet.arrangement[region.id][bass.id] = tumbao.id;
   const performance = compileSongPipeline(rebuild(sheet)).performance;

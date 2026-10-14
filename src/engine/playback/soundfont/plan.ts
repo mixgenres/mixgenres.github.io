@@ -127,7 +127,8 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
         if(key===42&&action==='open')key=46;
         if(key===38&&/rimshot/.test(action))key=40;
         const electronic=electronicKitPatch(sound.variantId);
-        if(electronic)patch=electronic;
+        if(sound.variantId==='brush-kit')patch={bank:67,program:3,drum:false,pack:'drumkit'};
+        else if(electronic)patch=electronic;
         else if((SAMPLED_KIT_KEYS as readonly number[]).includes(key))patch={bank:/choke/.test(action)?68:67,program:stableTake(note)%3,drum:false,pack:'drumkit'};
       }
       banks.add(patch.pack);

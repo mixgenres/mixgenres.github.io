@@ -46,7 +46,7 @@ export interface ArrangementContext {
 export interface ArrangementDecision {
   /** does this voice play in this section at all? */
   plays: boolean;
-  /** multiplier on velocity, 0..1.4 */
+  /** section-activity lift, bounded around authored velocity dynamics */
   drive: number;
   /** semitone register shift, usually 0 or ±12 */
   register: number;

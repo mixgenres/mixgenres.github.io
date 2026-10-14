@@ -72,7 +72,7 @@ export function qualityBass(root:string) {
 /** The upstream SF2 uses a chromatic keyboard layout, not GM drum keys, and
  * bakes different takes into neighboring MIDI velocities. Distill six recorded
  * dynamics and three nearby takes into explicit presets with a GM layout. */
-export function qualityDrumKit(root:string) {
+export function qualityDrumKit(root:string, generalUser:BasicSoundBank) {
   const source=load(join(root,QUALITY_SOURCES.drumkit)),bank=new BasicSoundBank();
   bank.soundBankInfo={...source.soundBankInfo};
   const input=source.instruments[0];
@@ -108,6 +108,15 @@ export function qualityDrumKit(root:string) {
     preset.globalZone.setGenerator(GeneratorTypes.releaseVolEnv,-12000,false);
     bank.clonePreset(preset);
   }
+  const brushSource=generalUser.presets.find(preset=>preset.bankMSB===0&&preset.bankLSB===0&&preset.program===40&&preset.isGMGSDrum);
+  if(!brushSource)throw new Error('GeneralUser GS bank is missing its bank 0/program 40 Brush Kit.');
+  const brushSamples=new Set(brushSource.zones.flatMap(zone=>zone.instrument.zones.map(zone=>zone.sample)));
+  [...brushSamples].forEach((sample,index)=>{sample.name=`MixGenres GeneralUser brush ${index+1} ${sample.name}`;});
+  const brushInstruments=new Set(brushSource.zones.map(zone=>zone.instrument));
+  [...brushInstruments].forEach((instrument,index)=>{instrument.name=`MixGenres GeneralUser brush ${index+1}`;});
+  const brush=bank.clonePreset(brushSource);brush.name='MixGenres GeneralUser Brush Kit';brush.bankMSB=67;brush.bankLSB=0;brush.program=3;brush.isGMGSDrum=false;
+  const brushChoke=bank.clonePreset(brushSource);brushChoke.name='MixGenres GeneralUser Brush Kit choke';brushChoke.bankMSB=68;brushChoke.bankLSB=0;brushChoke.program=3;brushChoke.isGMGSDrum=false;
+  brushChoke.globalZone.setGenerator(GeneratorTypes.releaseVolEnv,-12000,false);
   for(const sample of bank.samples) {
     const original=sample.getAudioData(),limit=Math.min(original.length,Math.round(sample.sampleRate*8));
     if(limit===original.length)continue;

@@ -615,11 +615,12 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
             const gestureCode = codeForGesture(gestureName);
             const hitFunctionCode = Math.max(0, HIT_FUNCTIONS.indexOf(onset.hit));
             const accent = clamp(onset.accent * (0.72 + energy * 0.34) * developmentAccentScale);
-            // Give section energy a real dynamic span while retaining accent contrast.
-            // Energy 1 lives roughly in the quiet/mid range; energy 5 can reach the
-            // normal forte ceiling without forcing every note above 100.
-            const brightnessLift = 0.88 + Math.max(0, Math.min(127, decision.brightness)) / 127 * 0.24;
-            const vel = Math.max(1, Math.min(127, Math.round(velocityForEnergy(energy, onset.velocity, sharedHostProfile.density.accentContrast) * decision.drive * brightnessLift)));
+            // Section energy owns the broad dynamic arc. Activity and brightness
+            // add only a restrained lift; multiplying both directly used to push
+            // most strong notes into MIDI 127 and erase their accent differences.
+            const driveLift = 0.94 + clamp((decision.drive - 0.45) / 0.95) * 0.06;
+            const brightnessLift = 0.96 + Math.max(0, Math.min(127, decision.brightness)) / 127 * 0.08;
+            const vel = Math.max(1, Math.min(127, Math.round(velocityForEnergy(energy, onset.velocity, sharedHostProfile.density.accentContrast) * driveLift * brightnessLift)));
             const time = Math.max(0, grooveTime(bt, onset, i, lane.groove));
             const pv = voiceProfile(track.instrumentId);
             const nextPosition = rhythm.onsets[i + 1]?.position ?? (onset.position + onset.duration / bt.beatsPerBar);

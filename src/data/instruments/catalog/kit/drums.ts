@@ -12,6 +12,7 @@ export const drums: InstrumentDef = {
   kit: true,
   variants: [
     { id: 'acoustic-kit', name: 'Acoustic Kit' },
+    { id: 'brush-kit', name: 'Brush Kit' },
     { id: 'electronic-kit', name: 'Electronic Kit' },
     { id: '808-kit', name: '808 / 909 Kit' },
     { id: 'dance-kit', name: 'Dance Kit' },

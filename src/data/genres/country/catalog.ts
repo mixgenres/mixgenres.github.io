@@ -124,7 +124,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "bluegrass",
       "name": "Bluegrass",
-      "description": "Bluegrass: bluegrass banjo roll and mandolin chop. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Bluegrass centers a forward three-finger banjo roll over alternating-bass guitar, short mandolin chops on beats two and four, and upright bass on one and three. Vocal lines hand phrases to fiddle and banjo breaks.",
       "patterns": ["Rapid 3-finger banjo roll erupting into syncopated mandolin chop on the backbeat", "bluegrass banjo roll and mandolin chop"],
       "techniques": ["fingerstyle", "double-stop", "slide", "hammer-on", "pull-off", "shuffle-bow", "brush", "three-finger Scruggs banjo rolls", "percussive mandolin backbeat chop", "high lonesome tenor harmonies", "blistering acoustic solo trades", "accent", "staccato", "legato", "vibrato", "drone-double-stop", "ornamented-slide", "tenuto"],
       "harmony": ["G", "C", "D7", "Em"],
@@ -164,11 +164,11 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "bluegrass banjo roll and mandolin chop violin cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["violin"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "bluegrass banjo roll and mandolin chop banjo statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["banjo"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "bluegrass banjo roll and mandolin chop banjo cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["banjo"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "bluegrass banjo roll and mandolin chop guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "bluegrass alternating-bass guitar strum", "shortName": "Alternating-bass guitar", "role": "harmony", "onsets": [0, 1, 2, 3], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.38, 0.24, 0.38, 0.24], "accents": [0.9, 0.56, 0.82, 0.56], "articulation": "flatpick", "description": "Strike bass strings on beats one and three, then answer with short chord strokes on beats two and four."},
         {"name": "bluegrass banjo roll and mandolin chop guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "bluegrass banjo roll and mandolin chop mandolin accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["mandolin"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "bluegrass mandolin backbeat chop", "shortName": "Mandolin chop", "role": "harmony", "onsets": [1, 3], "instruments": ["mandolin"], "cycleLength": 1, "durations": [0.16, 0.16], "accents": [0.58, 0.7], "articulation": "staccato", "description": "Mute each compact chord immediately after beats two and four; the short chop supplies the backbeat without masking the roll."},
         {"name": "bluegrass banjo roll and mandolin chop mandolin cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["mandolin"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "bluegrass banjo roll and mandolin chop low anchor", "role": "bass", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.5]},
+        {"name": "bluegrass upright two-beat anchor", "shortName": "Upright two-beat", "role": "bass", "onsets": [0, 2], "instruments": ["upright-bass"], "cycleLength": 1, "accents": [0.9, 0.78], "articulation": "accent", "durations": [0.72, 0.72], "description": "Alternate root and fifth on beats one and three; let each pizzicato note ring through its written length."},
         {"name": "bluegrass banjo roll and mandolin chop upright-bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["upright-bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"}
       ],
       "instrumentTechniques": {

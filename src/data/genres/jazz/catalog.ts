@@ -31,7 +31,7 @@ export const GENRE_PACK: GenrePackInput = {
       "name": "Hard Bop",
       "description": "Hard Bop: hard bop blues horn head and ride comping. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
       "patterns": ["Art Blakey explosive drum press-roll erupting into soulful minor-blues horn unison", "hard bop blues horn head and ride comping"],
-      "techniques": ["legato", "staccato", "chromatic-approach", "walking", "comping", "ghost-note", "brush", "vibrato", "heavy gospel and blues chord inflections", "Art Blakey driving press-rolls and thunderous hi-hat snaps on 2 and 4", "earthy memorable horn themes", "funky walking basslines", "accent", "tenuto", "ghost", "roll", "open"],
+      "techniques": ["legato", "staccato", "chromatic-approach", "walking", "comping", "ghost-note", "vibrato", "heavy gospel and blues chord inflections", "Art Blakey driving press-rolls and thunderous hi-hat snaps on 2 and 4", "earthy memorable horn themes", "funky walking basslines", "accent", "tenuto", "ghost", "roll", "open"],
       "harmony": ["Dm7", "G7", "Cmaj7", "A7", "Fm7", "Bb7", "Ebmaj7", "A7b9"],
       "meter": "4/4",
       "tempo": [142, 158],
@@ -66,11 +66,11 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "hard bop blues horn head and ride comping trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "hard bop blues horn head and ride comping tenor-sax statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["tenor-sax"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "hard bop blues horn head and ride comping tenor-sax cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["tenor-sax"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "hard bop blues horn head and ride comping piano accompaniment", "role": "harmony", "onsets": [0.5, 1.6666666666666665, 3], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "hard bop blues horn head and ride comping piano accompaniment", "role": "harmony", "onsets": [0.5, 1.75, 3], "instruments": ["piano"], "cycleLength": 1, "durations": [0.22, 0.22, 0.25], "articulation": "staccato"},
         {"name": "hard bop blues horn head and ride comping piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "hard bop blues horn head and ride comping low anchor", "role": "bass", "onsets": [0, 1, 2, 3], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6]},
         {"name": "hard bop blues horn head and ride comping upright-bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["upright-bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "hard bop blues horn head and ride comping kit", "role": "percussion", "onsets": [0, 0, 1, 1.5, 1.6666666666666665, 2, 2, 3, 3.6666666666666665, 3.75], "instruments": ["drums"], "hits": ["ride", "kick", "ride", "snare", "ride", "ride", "kick", "ride", "ride", "snare"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85]},
+        {"name": "hard bop blues horn head and ride comping kit", "role": "percussion", "onsets": [0, 0, 0.6666666666666666, 1, 1, 1.6666666666666665, 2, 2, 2.6666666666666665, 3, 3, 3.6666666666666665], "instruments": ["drums"], "hits": ["ride", "kick", "ride", "ride", "hat", "ride", "ride", "kick", "ride", "ride", "hat", "ride"], "cycleLength": 1, "accents": [0.4, 0.48, 0.48, 0.42, 0.62, 0.48, 0.4, 0.48, 0.48, 0.42, 0.62, 0.48]},
         {"name": "hard bop blues horn head and ride comping drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
       ],
       "instrumentTechniques": {
@@ -120,7 +120,7 @@ export const GENRE_PACK: GenrePackInput = {
       "name": "Bebop",
       "description": "Bebop: bebop chromatic head with walking bass. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
       "patterns": ["Rapid chromatic enclosure lick landing on #11 upper chord extension with ride cymbal drive", "bebop chromatic head with walking bass"],
-      "techniques": ["legato", "staccato", "chromatic-approach", "walking", "comping", "ghost-note", "brush", "vibrato", "lightning-fast chromatic approach notes and enclosures", "extended upper chord tones (9ths, 11ths, b13ths, #11ths)", "snappy ii-V-I substitutions and tritone subs", "unison trumpet/alto horn heads and blistering solos", "accent", "tenuto", "ghost", "open", "roll"],
+      "techniques": ["legato", "staccato", "chromatic-approach", "walking", "comping", "ghost-note", "vibrato", "lightning-fast chromatic approach notes and enclosures", "extended upper chord tones (9ths, 11ths, b13ths, #11ths)", "snappy ii-V-I substitutions and tritone subs", "unison trumpet/alto horn heads and blistering solos", "accent", "tenuto", "ghost", "open", "roll"],
       "harmony": ["Dm7", "G7", "Cmaj7", "A7", "Fm7", "Bb7", "Ebmaj7", "A7b9"],
       "meter": "4/4",
       "tempo": [182, 198],
@@ -155,11 +155,11 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "bebop chromatic head with walking bass trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "bebop chromatic head with walking bass tenor-sax statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["tenor-sax"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "bebop chromatic head with walking bass tenor-sax cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["tenor-sax"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "bebop chromatic head with walking bass piano accompaniment", "role": "harmony", "onsets": [0.5, 1.6666666666666665, 3], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "bebop chromatic head with walking bass piano accompaniment", "role": "harmony", "onsets": [0.75, 1.75, 3.25], "instruments": ["piano"], "cycleLength": 1, "durations": [0.2, 0.2, 0.18], "articulation": "staccato"},
         {"name": "bebop chromatic head with walking bass piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "bebop chromatic head with walking bass low anchor", "role": "bass", "onsets": [0, 1, 2, 3], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6]},
         {"name": "bebop chromatic head with walking bass upright-bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["upright-bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "bebop chromatic head with walking bass kit", "role": "percussion", "onsets": [0, 0, 1, 1.5, 1.6666666666666665, 2, 2, 3, 3.6666666666666665, 3.75], "instruments": ["drums"], "hits": ["ride", "kick", "ride", "snare", "ride", "ride", "kick", "ride", "ride", "snare"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85]},
+        {"name": "bebop chromatic head with walking bass kit", "role": "percussion", "onsets": [0, 0, 0.6666666666666666, 1.5, 1.6666666666666665, 2, 2.5, 2.6666666666666665, 3, 3.5, 3.6666666666666665], "instruments": ["drums"], "hits": ["ride", "kick", "ride", "snare", "ride", "ride", "snare", "ride", "ride", "snare", "ride"], "cycleLength": 1, "accents": [0.42, 0.38, 0.46, 0.58, 0.44, 0.42, 0.56, 0.46, 0.42, 0.52, 0.44]},
         {"name": "bebop chromatic head with walking bass drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
       ],
       "instrumentTechniques": {
@@ -207,15 +207,15 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "cool",
       "name": "Cool",
-      "description": "Cool: cool restrained horn with brushed comping. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
-      "patterns": ["Miles Davis Harmon-muted trumpet line whispering gently over brushed snare and cool bass", "cool restrained horn with brushed comping"],
+      "description": "Cool Jazz pairs a softly swung rhythm section with restrained, muted-trumpet phrasing and arranged horn replies. Use light brush strokes under the walking bass and keep the piano comp brief so the counterlines stay clear.",
+      "patterns": ["Miles Davis Harmon-muted trumpet line over brushed snare and cool bass", "cool restrained horn with brushed comping"],
       "techniques": ["legato", "staccato", "chromatic-approach", "walking", "comping", "ghost-note", "brush", "vibrato", "subtle breathy tone with minimal vibrato (Miles Harmon mute)", "intricate contrapuntal horn arrangements", "relaxed laid-back swing feel", "understated lyrical melodic purity", "ghost", "accent", "tenuto", "open", "roll"],
       "harmony": ["Dm7", "G7", "Cmaj7", "A7", "Fm7", "Bb7", "Ebmaj7", "A7b9"],
       "meter": "4/4",
       "tempo": [108, 124],
       "scale": "dorian",
       "roles": {
-        "lead": ["alto-sax"],
+        "lead": ["trumpet", "alto-sax"],
         "harmony": ["piano"],
         "bass": ["upright-bass"],
         "percussion": ["drums"]
@@ -233,29 +233,36 @@ export const GENRE_PACK: GenrePackInput = {
       "form": [
         {"label": "intro", "bars": 4},
         {"label": "head", "bars": 8},
-        {"label": "solo", "bars": 8, "soloInstrumentId": "alto-sax", "soloMode": "accompanied"},
+        {"label": "solo", "bars": 8, "soloInstrumentId": "trumpet", "soloMode": "accompanied"},
         {"label": "trading", "bars": 8},
         {"label": "head", "bars": 8},
         {"label": "tag", "bars": 4}
       ],
       "groove": {"swingPercentage": 60, "anticipationOffsetSteps": 0, "microtimingFeel": "swung", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "cool restrained horn with brushed comping alto-sax statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["alto-sax"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
+        {"name": "cool restrained horn with brushed comping trumpet statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.5, 0.35, 0.55], "articulation": "legato"},
+        {"name": "cool restrained horn with brushed comping trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "cool restrained horn with brushed comping alto-sax statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["alto-sax"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "cool restrained horn with brushed comping alto-sax cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["alto-sax"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "cool restrained horn with brushed comping piano accompaniment", "role": "harmony", "onsets": [0.5, 1.6666666666666665, 3], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "cool restrained horn with brushed comping piano accompaniment", "role": "harmony", "onsets": [1.5, 3], "instruments": ["piano"], "cycleLength": 1, "durations": [0.24, 0.24], "articulation": "staccato"},
         {"name": "cool restrained horn with brushed comping piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "cool restrained horn with brushed comping low anchor", "role": "bass", "onsets": [0, 1, 2, 3], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6]},
         {"name": "cool restrained horn with brushed comping upright-bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["upright-bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "cool restrained horn with brushed comping kit", "role": "percussion", "onsets": [0, 0, 1, 1.5, 1.6666666666666665, 2, 2, 3, 3.6666666666666665, 3.75], "instruments": ["drums"], "hits": ["ride", "kick", "ride", "snare", "ride", "ride", "kick", "ride", "ride", "snare"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85]},
+        {"name": "cool restrained horn with brushed comping kit", "role": "percussion", "onsets": [0, 0, 1, 1.6666666666666665, 2, 2, 3], "instruments": ["drums"], "hits": ["ride", "kick", "ride", "snare", "ride", "kick", "ride"], "cycleLength": 1, "accents": [0.4, 0.32, 0.38, 0.3, 0.4, 0.3, 0.36]},
         {"name": "cool restrained horn with brushed comping drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
       ],
       "instrumentTechniques": {
+        "trumpet": ["staccato", "legato", "vibrato", "accent", "tenuto"],
         "alto-sax": ["staccato", "legato", "ghost", "vibrato", "accent", "tenuto"],
         "piano": ["staccato", "legato", "accent", "tenuto"],
         "upright-bass": ["staccato", "legato", "ghost", "accent", "tenuto"],
-        "drums": ["ghost", "staccato", "accent", "open", "roll"]
+        "drums": ["brush", "ghost", "staccato", "accent", "open", "roll"]
       },
       "instrumentDialects": {
+        "trumpet:lead": {
+          "allowedTechniques": ["staccato", "legato", "vibrato", "accent", "tenuto"],
+          "defaultTechnique": "staccato"
+        },
         "alto-sax:lead": {
           "allowedTechniques": ["staccato", "legato", "ghost", "vibrato", "accent", "tenuto"],
           "defaultTechnique": "staccato"
@@ -269,8 +276,9 @@ export const GENRE_PACK: GenrePackInput = {
           "defaultTechnique": "staccato"
         },
         "drums:percussion": {
-          "allowedTechniques": ["ghost", "staccato", "accent", "open", "roll"],
-          "defaultTechnique": "ghost"
+          "allowedTechniques": ["brush", "ghost", "staccato", "accent", "open", "roll"],
+          "defaultTechnique": "ghost",
+          "variantId": "brush-kit"
         }
       },
       "mix": {
@@ -291,7 +299,7 @@ export const GENRE_PACK: GenrePackInput = {
       "name": "Modal",
       "description": "Modal: modal long Dorian vamp and quartal space. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
       "patterns": ["modal long Dorian vamp and quartal space"],
-      "techniques": ["legato", "staccato", "chromatic-approach", "walking", "comping", "ghost-note", "brush", "vibrato", "accent", "tenuto", "ghost", "open", "roll"],
+      "techniques": ["legato", "staccato", "chromatic-approach", "walking", "comping", "ghost-note", "vibrato", "accent", "tenuto", "ghost", "open", "roll"],
       "harmony": ["Dm7", "Ebm7"],
       "meter": "4/4",
       "tempo": [116, 132],
@@ -324,11 +332,11 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "modal long Dorian vamp and quartal space trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "modal long Dorian vamp and quartal space tenor-sax statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["tenor-sax"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "modal long Dorian vamp and quartal space tenor-sax cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["tenor-sax"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "modal long Dorian vamp and quartal space piano accompaniment", "role": "harmony", "onsets": [0.5, 1.6666666666666665, 3], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "modal long Dorian vamp and quartal space piano accompaniment", "role": "harmony", "onsets": [1.5, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.42, 0.28], "articulation": "staccato"},
         {"name": "modal long Dorian vamp and quartal space piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "modal long Dorian vamp and quartal space low anchor", "role": "bass", "onsets": [0, 1, 2, 3], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6]},
+        {"name": "modal long Dorian vamp and quartal space low anchor", "role": "bass", "onsets": [0], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "tenuto", "durations": [3.8]},
         {"name": "modal long Dorian vamp and quartal space upright-bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["upright-bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "modal long Dorian vamp and quartal space kit", "role": "percussion", "onsets": [0, 0, 1, 1.5, 1.6666666666666665, 2, 2, 3, 3.6666666666666665, 3.75], "instruments": ["drums"], "hits": ["ride", "kick", "ride", "snare", "ride", "ride", "kick", "ride", "ride", "snare"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85]},
+        {"name": "modal long Dorian vamp and quartal space kit", "role": "percussion", "onsets": [0, 0, 1, 2, 2, 3], "instruments": ["drums"], "hits": ["ride", "kick", "ride", "ride", "kick", "ride"], "cycleLength": 1, "accents": [0.46, 0.3, 0.36, 0.42, 0.28, 0.32]},
         {"name": "modal long Dorian vamp and quartal space drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
       ],
       "instrumentTechniques": {
@@ -378,7 +386,7 @@ export const GENRE_PACK: GenrePackInput = {
       "name": "Post-Bop",
       "description": "Post-Bop: post bop angular head and shifting harmonic color. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
       "patterns": ["post bop angular head and shifting harmonic color"],
-      "techniques": ["legato", "staccato", "chromatic-approach", "walking", "comping", "ghost-note", "brush", "vibrato", "accent", "tenuto", "ghost", "open", "roll"],
+      "techniques": ["legato", "staccato", "chromatic-approach", "walking", "comping", "ghost-note", "vibrato", "accent", "tenuto", "ghost", "open", "roll"],
       "harmony": ["Dm9", "Ebmaj7", "Fmaj7", "G7", "Fm7", "Bb7", "A7alt"],
       "meter": "4/4",
       "tempo": [136, 152],
@@ -411,11 +419,11 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "post bop angular head and shifting harmonic color trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "post bop angular head and shifting harmonic color tenor-sax statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["tenor-sax"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "post bop angular head and shifting harmonic color tenor-sax cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["tenor-sax"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "post bop angular head and shifting harmonic color piano accompaniment", "role": "harmony", "onsets": [0.5, 1.6666666666666665, 3], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "post bop angular head and shifting harmonic color piano accompaniment", "role": "harmony", "onsets": [0.75, 2.25, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.18, 0.24, 0.2], "articulation": "staccato"},
         {"name": "post bop angular head and shifting harmonic color piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "post bop angular head and shifting harmonic color low anchor", "role": "bass", "onsets": [0, 1, 2, 3], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6]},
         {"name": "post bop angular head and shifting harmonic color upright-bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["upright-bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "post bop angular head and shifting harmonic color kit", "role": "percussion", "onsets": [0, 0, 1, 1.5, 1.6666666666666665, 2, 2, 3, 3.6666666666666665, 3.75], "instruments": ["drums"], "hits": ["ride", "kick", "ride", "snare", "ride", "ride", "kick", "ride", "ride", "snare"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85]},
+        {"name": "post bop angular head and shifting harmonic color kit", "role": "percussion", "onsets": [0, 0, 0.6666666666666666, 1.5, 2, 2, 2.6666666666666665, 3.25, 3.6666666666666665], "instruments": ["drums"], "hits": ["ride", "kick", "ride", "snare", "ride", "kick", "ride", "snare", "ride"], "cycleLength": 1, "accents": [0.42, 0.36, 0.44, 0.52, 0.4, 0.3, 0.45, 0.52, 0.42]},
         {"name": "post bop angular head and shifting harmonic color drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
       ],
       "instrumentTechniques": {
@@ -465,7 +473,7 @@ export const GENRE_PACK: GenrePackInput = {
       "name": "Big Band",
       "description": "Big Band: big band brass reed call and ensemble shout. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
       "patterns": ["big band brass reed call and ensemble shout"],
-      "techniques": ["legato", "staccato", "chromatic-approach", "walking", "comping", "ghost-note", "brush", "vibrato", "accent", "tenuto", "ghost", "legato-single-note", "open", "roll"],
+      "techniques": ["legato", "staccato", "chromatic-approach", "walking", "comping", "ghost-note", "vibrato", "accent", "tenuto", "ghost", "legato-single-note", "open", "roll"],
       "harmony": ["Dm7", "G7", "Cmaj7", "A7", "Fm7", "Bb7", "Ebmaj7", "A7b9"],
       "meter": "4/4",
       "tempo": [148, 164],
@@ -505,13 +513,13 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "big band brass reed call and ensemble shout alto-sax cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["alto-sax"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "big band brass reed call and ensemble shout tenor-sax statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["tenor-sax"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "big band brass reed call and ensemble shout tenor-sax cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["tenor-sax"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "big band brass reed call and ensemble shout piano accompaniment", "role": "harmony", "onsets": [0.5, 1.6666666666666665, 3], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "big band brass reed call and ensemble shout piano accompaniment", "role": "harmony", "onsets": [0.75, 2.5, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.25, 0.3, 0.25], "articulation": "staccato"},
         {"name": "big band brass reed call and ensemble shout piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "big band brass reed call and ensemble shout guitar accompaniment", "role": "harmony", "onsets": [0.5, 1.6666666666666665, 3], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "big band brass reed call and ensemble shout guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "big band brass reed call and ensemble shout low anchor", "role": "bass", "onsets": [0, 1, 2, 3], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6]},
         {"name": "big band brass reed call and ensemble shout upright-bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["upright-bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "big band brass reed call and ensemble shout kit", "role": "percussion", "onsets": [0, 0, 1, 1.5, 1.6666666666666665, 2, 2, 3, 3.6666666666666665, 3.75], "instruments": ["drums"], "hits": ["ride", "kick", "ride", "snare", "ride", "ride", "kick", "ride", "ride", "snare"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85]},
+        {"name": "big band brass reed call and ensemble shout kit", "role": "percussion", "onsets": [0, 0, 0.6666666666666666, 1, 1, 1.6666666666666665, 2, 2, 2.6666666666666665, 3, 3, 3.6666666666666665], "instruments": ["drums"], "hits": ["ride", "kick", "ride", "ride", "snare", "ride", "ride", "kick", "ride", "ride", "snare", "ride"], "cycleLength": 1, "accents": [0.45, 0.5, 0.48, 0.44, 0.72, 0.48, 0.43, 0.5, 0.48, 0.44, 0.72, 0.48]},
         {"name": "big band brass reed call and ensemble shout drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
       ],
       "instrumentTechniques": {
@@ -577,7 +585,7 @@ export const GENRE_PACK: GenrePackInput = {
       "name": "Gypsy Jazz",
       "description": "Gypsy Jazz: gypsy jazz la pompe rhythm and guitar run. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
       "patterns": ["Crisp percussive La Pompe guitar chop driving blinding chromatic Django acoustic guitar arpeggio", "gypsy jazz la pompe rhythm and guitar run"],
-      "techniques": ["legato", "staccato", "chromatic-approach", "walking", "comping", "ghost-note", "brush", "vibrato", "\"La Pompe\" percussive acoustic guitar rhythm strumming on 2 and 4", "virtuosic chromatic Selmer acoustic guitar runs", "sweet singing Grappelli-style violin glissandi and vibrato", "driving bass pulse without drums", "strum", "legato-single-note", "accent", "folk-vibrato", "ghost", "tenuto"],
+      "techniques": ["legato", "staccato", "chromatic-approach", "walking", "comping", "ghost-note", "vibrato", "\"La Pompe\" percussive acoustic guitar rhythm strumming on 2 and 4", "virtuosic chromatic Selmer acoustic guitar runs", "sweet singing Grappelli-style violin glissandi and vibrato", "driving bass pulse without drums", "strum", "legato-single-note", "accent", "folk-vibrato", "ghost", "tenuto"],
       "harmony": ["Dm7", "G7", "Cmaj7", "A7", "Fm7", "Bb7", "Ebmaj7", "A7b9"],
       "meter": "4/4",
       "tempo": [168, 184],
@@ -659,7 +667,7 @@ export const GENRE_PACK: GenrePackInput = {
       "name": "Jazz Fusion",
       "description": "Jazz Fusion: fusion electric bass ostinato and straight-eighth solo. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
       "patterns": ["fusion electric bass ostinato and straight-eighth solo"],
-      "techniques": ["legato", "staccato", "chromatic-approach", "walking", "comping", "ghost-note", "brush", "vibrato", "legato-single-note", "accent", "tenuto", "ghost", "open", "roll"],
+      "techniques": ["legato", "staccato", "chromatic-approach", "walking", "comping", "ghost-note", "vibrato", "legato-single-note", "accent", "tenuto", "ghost", "open", "roll"],
       "harmony": ["Dm7", "G7", "Cmaj7", "A7", "Fm7", "Bb7", "Ebmaj7", "A7b9"],
       "meter": "4/4",
       "tempo": [108, 124],
@@ -757,7 +765,7 @@ export const GENRE_PACK: GenrePackInput = {
       "name": "Free Jazz",
       "description": "Free Jazz: free jazz fragmented phrases and collective response. Melodic and rhythmic study over a modal center; chord symbols are playback anchors, not a Western chord progression.",
       "patterns": ["High multiphonic saxophone shriek erupting over frantic multidirectional free drum flurry", "free jazz fragmented phrases and collective response"],
-      "techniques": ["legato", "staccato", "chromatic-approach", "walking", "comping", "ghost-note", "brush", "vibrato", "abandonment of preset chord changes and fixed meters", "overblowing, multiphonics, and screeches on horns", "intense collective improvisation and energy waves", "free harmonic and microtonal exploration", "accent", "tenuto", "ghost", "harmonic", "open", "roll"],
+      "techniques": ["legato", "staccato", "chromatic-approach", "walking", "comping", "ghost-note", "vibrato", "abandonment of preset chord changes and fixed meters", "overblowing, multiphonics, and screeches on horns", "intense collective improvisation and energy waves", "free harmonic and microtonal exploration", "accent", "tenuto", "ghost", "harmonic", "open", "roll"],
       "harmony": ["D5", "Eb5"],
       "meter": "4/4",
       "tempo": [96, 112],
@@ -792,7 +800,7 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "free jazz fragmented phrases and collective response piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "free jazz fragmented phrases and collective response low anchor", "role": "bass", "onsets": [0], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "staccato", "durations": [2]},
         {"name": "free jazz fragmented phrases and collective response upright-bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["upright-bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "free jazz fragmented phrases and collective response kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
+        {"name": "free jazz fragmented phrases and collective response kit", "role": "percussion", "onsets": [0, 0.75, 1.5, 2.75, 3.5], "instruments": ["drums"], "hits": ["ride", "snare", "tom", "kick", "ride"], "cycleLength": 1, "accents": [0.56, 0.62, 0.48, 0.66, 0.52]},
         {"name": "free jazz fragmented phrases and collective response drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
       ],
       "instrumentTechniques": {

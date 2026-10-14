@@ -5,7 +5,14 @@ function clamp(value: number, min = 0, max = 1): number {
 /** Convert normalized energy (0.2..1) and pattern velocity to MIDI velocity. */
 export function velocityForEnergy(energy: number, onsetVelocity: number, accentContrast: number): number {
   const level = clamp(energy) * 5;
-  const floor = 0.28 + (level - 1) * 0.105;
-  const ceiling = 0.52 + (level - 1) * 0.115;
-  return Math.round(clamp(floor + onsetVelocity * (ceiling - floor) * accentContrast, 0.18, 0.94) * 127);
+  // Keep quiet sections playable, but leave a broad, nonlinear-feeling range
+  // for authored accents and SoundFont velocity layers. The previous curve
+  // allowed ordinary high-energy notes to reach 120 before activity and
+  // brightness were applied, so a large share of a song flattened at MIDI
+  // 127. Clamp the accent input before shaping it; don't squash every strong
+  // attack against a global full-scale ceiling.
+  const floor = 0.24 + (level - 1) * 0.11;
+  const ceiling = 0.46 + (level - 1) * 0.095;
+  const accent = clamp(onsetVelocity * accentContrast);
+  return Math.round(clamp(floor + (ceiling - floor) * accent, 0.18, 0.84) * 127);
 }

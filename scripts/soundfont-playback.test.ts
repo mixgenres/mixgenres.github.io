@@ -161,6 +161,26 @@ test('sampler uses the packaged one-shot palette for every MIDI pitch',()=>{
     assert(preset?.getVoiceParameters(event.key,event.velocity).length,`sample note ${event.key} must play`);
   }
 });
+test('Cool Jazz selects the recorded GeneralUser Brush Kit through the shared sample plan',()=>{
+  const sound=resolveTrackSound('drums','jazz','jazz-cool','percussion');
+  assert.equal(sound.variantId,'brush-kit');
+  const plan=compileSamplePlan(performanceFixture({notes:[38,40,42,46,51].map((midi,index)=>noteFixture({midi,time:index*.25}))}),{
+    ...options,
+    trackInstruments:new Map([['keys','drums']]),
+    trackRoles:new Map([['keys','percussion']]),
+    worldId:'jazz',styleId:'jazz-cool',
+  });
+  const attacks=plan.events.filter(event=>event.type==='on');
+  assert.equal(attacks.length,5);
+  assert(attacks.every(event=>event.type==='on'&&event.patch.bank===67&&event.patch.program===3&&!event.patch.drum));
+  const brush=load('drumkit').presets.find(preset=>preset.bankMSB===67&&preset.program===3);
+  assert(brush);assert.equal(brush.isGMGSDrum,false);assert.match(brush.name,/Brush Kit/i);
+  for(const key of [38,40,42,44,46,51]) {
+    const voices=brush.getVoiceParameters(key,90);
+    assert(voices.length,`brush key ${key} has a playable sample`);
+    assert(voices.some(voice=>/MixGenres GeneralUser brush/.test(voice.sample.name)),`key ${key} comes from the recorded GeneralUser brush source`);
+  }
+});
 test('reggaeton arrangements use authored electronic kits and bounded sampler palettes',()=>{
   const bank=load('percussion');
   for(const style of ALL_STYLES.filter(style=>style.primaryGenre==='reggaeton')) {
@@ -312,7 +332,7 @@ test('standard kit preserves kick, snare, hats, toms and cymbal score identities
 test('recorded kit layout preserves drum pitch, stereo layers, takes and hat exclusivity',()=>{
   const bank=load('drumkit');
   for(const key of [35,36,38,40,41,42,43,46,47,48,49,50,51,52,53,57,59])for(const velocity of [15,45,65,85,110,125]) {
-    const takes=bank.presets.filter(p=>p.bankMSB===67).map(p=>p.getVoiceParameters(key,velocity));
+    const takes=bank.presets.filter(p=>p.bankMSB===67&&p.program<3).map(p=>p.getVoiceParameters(key,velocity));
     for(const voices of takes){assert.equal(voices.length,2,`${key}/${velocity}`);for(const voice of voices){
       assert.equal(voice.generators[GeneratorTypes.overridingRootKey],key);
       assert(voice.sample.isLinked,'recorded stereo links survive');

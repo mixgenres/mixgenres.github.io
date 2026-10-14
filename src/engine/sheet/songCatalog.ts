@@ -2,7 +2,7 @@ import { SONGS_BY_ID } from '../../data/songs/catalog';
 import { RECORDING_ARRANGEMENTS, parseRecordingForm } from '../../data/songs/recordingArrangements';
 import { PATTERNS_BY_ID } from '../../data/genres';
 import { getStyle } from '../style/registry';
-import { createSheet, rebuild, type Sheet } from './sheet';
+import { patternAvailableInSection, createSheet, rebuild, type Sheet } from './sheet';
 import type { FormStepTemplate, SongStyle } from '../../data/styles/schema';
 
 type EnsembleParts = NonNullable<NonNullable<SongStyle['arrangement']>['ensemble']>;
@@ -135,7 +135,18 @@ export function createCatalogSong(id: string): Sheet {
       });
       if (!patternId) throw new Error(`Recording ${id} cannot resolve ${instrumentId} pattern ${shortName}`);
       arrangement[region.id][track.id] = patternId;
-      lockedPatternAssignments[region.id][track.id] = patternId;
+      const basePattern = PATTERNS_BY_ID[patternId];
+      const hasPhraseVariation = (style.patterns?.allowed ?? []).some(candidateId => {
+        const candidate = PATTERNS_BY_ID[candidateId];
+        return candidate?.arrangementVariation === true
+          && candidate.category === basePattern?.category
+          && candidate.roles.some(role => basePattern.roles.includes(role))
+          && candidate.instruments?.includes(instrumentId)
+          && patternAvailableInSection(candidate, region.kind);
+      });
+      // The explicit cell remains the section's opening pattern. Do not freeze
+      // it for the whole form when this style has a compatible phrase lesson.
+      if (!hasPhraseVariation) lockedPatternAssignments[region.id][track.id] = patternId;
     }
   }
   const arranged = rebuild({ ...sheet, arrangement, lockedPatternAssignments });

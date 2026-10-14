@@ -192,6 +192,7 @@ export function authorSampleSongDevelopment(pack: GenrePackInput): GenrePackInpu
     const cells: AuthoredCell[] = additions.map(({ sections, ...addition }) => ({
       ...addition, instruments: [addition.instrument], sectionUsage: sections,
       difficulty: 2, supportedEnergy: [2, 3, 4], pedagogicalStudy: 'variation',
+      arrangementVariation: !addition.phraseEnd,
     }));
     return { ...style, cells: [...style.cells, ...cells] };
   }) };

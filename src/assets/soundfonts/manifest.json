@@ -1,5 +1,5 @@
 {
-  "version": "mixgenres-sf-v8",
+  "version": "mixgenres-sf-v9",
   "sourceSha256": [
     "9575028c7a1f589f5770fccc8cff2734566af40cd26ed836944e9a5152688cfe",
     "c0ae2e0c4b3efb98b3af49ac553e2ab3bb23258bf4832c3146f94b26cd9236f1",
@@ -375,19 +375,21 @@
       "format": "sf3"
     },
     "drumkit": {
-      "bytes": 14338533,
-      "unpackedBytes": 15047710,
-      "sha256": "f8e7817a03692122cf63bb3bed41cd4fa23e0b826f62f5014d3ba67c94af67f4",
-      "unpackedSha256": "97cf45c6776c69c55311086b41ba0bc13f49268e211270162eb485be3f4ce9e8",
+      "bytes": 14808841,
+      "unpackedBytes": 15760668,
+      "sha256": "35c72b3e951ab7b060ac97ba7338553eb3b4e9fd4760b9c6b8d210b8d1f3f25c",
+      "unpackedSha256": "d9be6b217c924f8bc46a853521794eced4404515c654acc71094d960fa7b62a9",
       "presets": [
         "0:67:0",
         "0:68:0",
         "0:67:1",
         "0:68:1",
         "0:67:2",
-        "0:68:2"
+        "0:68:2",
+        "0:67:3",
+        "0:68:3"
       ],
-      "samples": 310,
+      "samples": 374,
       "format": "sf3"
     },
     "electricClean": {
@@ -490,6 +492,10 @@
       "takes": 3,
       "layout": "GM",
       "sourceLayout": "chromatic C3-F#4",
+      "brushKit": {
+        "source": "GeneralUser GS bank 0/program 40",
+        "program": 3
+      },
       "maxDecaySeconds": 8,
       "terminalFadeSeconds": 0.15,
       "vorbisQuality": 6

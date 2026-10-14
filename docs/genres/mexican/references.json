@@ -1,0 +1,158 @@
+{
+  "genreId": "mexican",
+  "reviewed": "2026-10-14",
+  "status": "Five streaming recording candidates collected for each style. Listening, timecodes, and mix comparisons are pending; these links do not claim sonic matching.",
+  "source": "Apple Music streaming track pages. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "mariachi",
+      "compare": [
+        "violin melody and trumpet answer placement across repeated strains",
+        "vihuela and guitar strum articulation against the guitarrón anchor",
+        "ensemble dynamics into the closing cadence"
+      ],
+      "recordings": [
+        { "title": "El son de la negra", "artist": "Mariachi Vargas de Tecalitlán", "url": "https://music.apple.com/us/song/1713711807", "timecodes": [] },
+        { "title": "El Son de la Negra", "artist": "Mariachi Internacional Guadalajara", "url": "https://music.apple.com/us/song/1554717420", "timecodes": [] },
+        { "title": "El Tecalitleco", "artist": "Mariachi Vargas de Tecalitlán", "url": "https://music.apple.com/us/song/321428794", "timecodes": [] },
+        { "title": "Tecalitlan", "artist": "Mariachi Vargas de Tecalitlán", "url": "https://music.apple.com/us/song/358354131", "timecodes": [] },
+        { "title": "El Mariachi (canción)", "artist": "Mariachi Vargas de Tecalitlán", "url": "https://music.apple.com/us/song/1508957345", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "ranchera",
+      "compare": [
+        "lead-vocal phrasing and the length of the mariachi replies",
+        "three-beat sway versus a firm duple ranchera pulse",
+        "how strings and brass open up at the refrain and cadence"
+      ],
+      "recordings": [
+        { "title": "El Rey", "artist": "Vicente Fernández", "url": "https://music.apple.com/us/song/1656796795", "timecodes": [] },
+        { "title": "Camino de Guanajuato", "artist": "José Alfredo Jiménez", "url": "https://music.apple.com/us/song/932986143", "timecodes": [] },
+        { "title": "Camino de Guanajuato", "artist": "Mariachi Mexico Jalisco", "url": "https://music.apple.com/us/song/272798778", "timecodes": [] },
+        { "title": "La Malagueña", "artist": "Mariachi Vargas de Tecalitlán", "url": "https://music.apple.com/us/song/1444201018", "timecodes": [] },
+        { "title": "La Malagueña", "artist": "Mariachi Nuevo Tecalitlán", "url": "https://music.apple.com/us/song/1853147690", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "norteno",
+      "compare": [
+        "accordion pickup figures against clipped bajo-sexto chords",
+        "polka/two-step bass and drum lock, especially at phrase turns",
+        "vocal storytelling space and compact accordion turnarounds"
+      ],
+      "recordings": [
+        { "title": "El Corrido", "artist": "Los Tigres del Norte", "url": "https://music.apple.com/us/song/1403566164", "timecodes": [] },
+        { "title": "Contrabando y Traición", "artist": "Los Tigres del Norte", "url": "https://music.apple.com/us/song/1473296373", "timecodes": [] },
+        { "title": "La Puerta Negra", "artist": "Los Tigres del Norte", "url": "https://music.apple.com/us/song/1440763149", "timecodes": [] },
+        { "title": "La Banda del Carro Rojo", "artist": "Los Tigres del Norte", "url": "https://music.apple.com/us/song/1403595737", "timecodes": [] },
+        { "title": "La Camioneta Gris", "artist": "Los Tigres del Norte", "url": "https://music.apple.com/us/song/1473296990", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "banda",
+      "compare": [
+        "tuba pulse against kick/snare and low-brass weight",
+        "clarinet and trumpet articulation in unison and response figures",
+        "section lifts, horn blocks, and vocal space in a dense ensemble"
+      ],
+      "recordings": [
+        { "title": "El Sinaloense", "artist": "Banda El Recodo", "url": "https://music.apple.com/us/song/1590568011", "timecodes": [] },
+        { "title": "Te Presumo", "artist": "Banda El Recodo", "url": "https://music.apple.com/us/song/1596508528", "timecodes": [] },
+        { "title": "Mi Gusto Es", "artist": "Banda El Recodo", "url": "https://music.apple.com/us/song/1458119876", "timecodes": [] },
+        { "title": "Juan Colorado", "artist": "Banda El Recodo de Cruz Lizárraga", "url": "https://music.apple.com/us/song/1570550271", "timecodes": [] },
+        { "title": "El Sinaloense (feat. Banda el Recodo)", "artist": "Juan Gabriel", "url": "https://music.apple.com/us/song/254826705", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "son-jarocho",
+      "compare": [
+        "jarana strumming pattern and sesquialtera cycle",
+        "lead/copla phrases, instrumental breaks, and response timing",
+        "dance pulse and how ensemble layers rise and fall through a son"
+      ],
+      "recordings": [
+        { "title": "La Bamba", "artist": "José Gutiérrez & Los Hermanos Ochoa", "url": "https://music.apple.com/us/song/84099842", "timecodes": [] },
+        { "title": "La Bamba (Live)", "artist": "Los Cojolites", "url": "https://music.apple.com/us/song/1458158421", "timecodes": [] },
+        { "title": "La Bruja (Son Jarocho Tradicional)", "artist": "Migrante", "url": "https://music.apple.com/us/song/1072353301", "timecodes": [] },
+        { "title": "El Cascabel (Son Jarocho, México)", "artist": "Los Folkloristas", "url": "https://music.apple.com/us/song/184735469", "timecodes": [] },
+        { "title": "El Cascabel", "artist": "Conjunto Jarocho Lindo Veracruz", "url": "https://music.apple.com/us/song/1495494088", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "son-huasteco",
+      "compare": [
+        "huapango pulse and the relationship between violin and string accompaniment",
+        "falsetto vocal entries and instrumental answers",
+        "ternary groove articulation, dynamics, and phrase cadence"
+      ],
+      "recordings": [
+        { "title": "El Querreque", "artist": "Los Camperos de Valles", "url": "https://music.apple.com/us/song/1817731189", "timecodes": [] },
+        { "title": "El Fandanguito", "artist": "Los Camperos de Valles", "url": "https://music.apple.com/us/song/495477516", "timecodes": [] },
+        { "title": "La Huasanga", "artist": "Internacional Trio Camperos de Valles", "url": "https://music.apple.com/us/song/1810963386", "timecodes": [] },
+        { "title": "El Gusto", "artist": "Los Camperos de Valles", "url": "https://music.apple.com/us/song/263173691", "timecodes": [] },
+        { "title": "El Querreque", "artist": "Trío Camalote", "url": "https://music.apple.com/us/song/1759180666", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "corrido",
+      "compare": [
+        "narrative vocal delivery over a stable two-step or polka pattern",
+        "accordion/bajo-sexto transitions between story verses",
+        "arrangement restraint under lyrics and instrumental fills between stanzas"
+      ],
+      "recordings": [
+        { "title": "El Corrido", "artist": "Los Tigres del Norte", "url": "https://music.apple.com/us/song/1403566164", "timecodes": [] },
+        { "title": "Contrabando y Traición", "artist": "Los Tigres del Norte", "url": "https://music.apple.com/us/song/1473296373", "timecodes": [] },
+        { "title": "La Camioneta Gris", "artist": "Los Tigres del Norte", "url": "https://music.apple.com/us/song/1473296990", "timecodes": [] },
+        { "title": "La Banda del Carro Rojo", "artist": "Los Tigres del Norte", "url": "https://music.apple.com/us/song/1403595737", "timecodes": [] },
+        { "title": "El Corrido de Flaco Jimenez", "artist": "Conjunto San Antonio", "url": "https://music.apple.com/us/song/256445660", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "tierra-caliente",
+      "compare": [
+        "regional dance pulse and melodic pickup placement",
+        "bass and percussion weight under bright lead lines",
+        "how the arrangement trades vocal and instrumental sections"
+      ],
+      "recordings": [
+        { "title": "El Calentano", "artist": "Arkangel Musical de Tierra Caliente", "url": "https://music.apple.com/us/song/1617709606", "timecodes": [] },
+        { "title": "El calentano", "artist": "Banda Tierra Caliente de Rosendo Barrera La Peseta", "url": "https://music.apple.com/us/song/1849648573", "timecodes": [] },
+        { "title": "Serás Tú (Romántica)", "artist": "Arkangel Musical de Tierra Caliente", "url": "https://music.apple.com/us/song/1734674500", "timecodes": [] },
+        { "title": "Soy de Tierra Caliente", "artist": "Tierra Caliente Music & Arkangel Musical de Tierra Caliente", "url": "https://music.apple.com/us/song/1806524426", "timecodes": [] },
+        { "title": "El Guachito", "artist": "Juan Reynoso", "url": "https://music.apple.com/us/song/1140156840", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "conjunto",
+      "compare": [
+        "button-accordion melody and bajo-sexto chord strokes in the two-step",
+        "bass lock and drum pocket beneath polka versus slower song forms",
+        "accordion fills trading with bajo-sexto lead phrases"
+      ],
+      "recordings": [
+        { "title": "Ay Te Dejo en San Antonio", "artist": "Dwayne & The TexMeXplosion", "url": "https://music.apple.com/us/song/395138767", "timecodes": [] },
+        { "title": "Bajo Sexto y Acordeón", "artist": "Flaco Jimenez", "url": "https://music.apple.com/us/song/869319533", "timecodes": [] },
+        { "title": "Lollipop Polka", "artist": "Los Texmaniacs", "url": "https://music.apple.com/us/song/317457902", "timecodes": [] },
+        { "title": "Marina (Canción-polka)", "artist": "Los Texmaniacs", "url": "https://music.apple.com/us/album/marina-marina-canci%C3%B3n-polka/317457827?i=317457858", "timecodes": [] },
+        { "title": "Los Amores de Flaco", "artist": "Flaco Jimenez", "url": "https://music.apple.com/us/song/1626837187", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "bolero-ranchero",
+      "compare": [
+        "close vocal tone and measured phrasing over guitar and mariachi color",
+        "space between lyric lines, held harmony, and trumpet/violin replies",
+        "slow sway and dynamic expansion into the refrain"
+      ],
+      "recordings": [
+        { "title": "Sombras", "artist": "Javier Solís", "url": "https://music.apple.com/us/song/322273008", "timecodes": [] },
+        { "title": "Sombras (with Javier Solís)", "artist": "Los Panchos", "url": "https://music.apple.com/us/song/1217913413", "timecodes": [] },
+        { "title": "Cenizas", "artist": "Javier Solís & Los Panchos", "url": "https://music.apple.com/us/song/380237759", "timecodes": [] },
+        { "title": "Esclavo y Amo", "artist": "Javier Solís", "url": "https://music.apple.com/us/song/1308583423", "timecodes": [] },
+        { "title": "Payaso", "artist": "Javier Solís", "url": "https://music.apple.com/us/song/1217913256", "timecodes": [] }
+      ]
+    }
+  ]
+}

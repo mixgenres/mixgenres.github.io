@@ -4,7 +4,7 @@ import { SAMPLED_SYNTH_PATCHES } from '../../../data/sound/playback/sampledSynth
 
 /** Zero-based General MIDI programs. World instruments with no sampled match
  * use an explicit family approximation, exposed in the bank coverage report. */
-export const SOUNDFONT_VERSION = 'mixgenres-sf-v8';
+export const SOUNDFONT_VERSION = 'mixgenres-sf-v9';
 export const BANK_PROGRAMS = {
   keys: [4, 5, 6, 7, 16, 19, 20, 21, 22],
   mallets: [8, 9, 10, 11, 12, 13, 14, 15, 117],

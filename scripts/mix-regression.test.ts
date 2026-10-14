@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { ALL_STYLES } from '../src/engine/style';
-import { createMasterChain } from '../src/engine/studio/mixer';
+import { createMasterChain, getRoleGainLinear } from '../src/engine/studio/mixer';
 import { ensembleHeadroom, resolvePlaybackMix, resolveMasterSettings } from '../src/engine/studio/masterSettings';
 import { MASTER_MIX_DEFAULTS } from '../src/data/sound/mix/masterProfiles';
 import { resolveStyle } from '../src/engine/style';
@@ -56,6 +56,42 @@ test('fresh and updated master graphs match for every catalog style, including t
 
 test('arrangement track count does not attenuate the whole program before shared mastering', () => {
   for (const trackCount of [1, 4, 8, 16, 32]) assert.equal(ensembleHeadroom(trackCount), 1);
+});
+
+test('country anchor gains leave room for picked strings and section-led fiddle breaks', () => {
+  const guitar = getRoleGainLinear('harmony', 'country', 'guitar', 'country-bluegrass');
+  const upright = getRoleGainLinear('bass', 'country', 'upright-bass', 'country-bluegrass');
+  const fiddle = getRoleGainLinear('lead', 'country', 'violin', 'country-bluegrass');
+  const db = (linear: number) => 20 * Math.log10(linear);
+  assert.ok(db(upright) - db(guitar) > 7 && db(upright) - db(guitar) < 10,
+    'Bluegrass upright bass compensates for its quiet recorded source and stays below the chord attacks');
+  assert.ok(db(fiddle) - db(guitar) < 4,
+    'fiddle remains prominent while the break arrangement, not a global trim, moves it forward');
+});
+
+test('Salsa groove percussion receives source-level compensation in its own genre', () => {
+  const db = (linear: number) => 20 * Math.log10(linear);
+  const piano = db(getRoleGainLinear('harmony', 'salsa', 'piano', 'salsa-salsa-dura'));
+  const congas = db(getRoleGainLinear('percussion', 'salsa', 'congas', 'salsa-salsa-dura'));
+  const claves = db(getRoleGainLinear('percussion', 'salsa', 'claves', 'salsa-salsa-dura'));
+  const timbales = db(getRoleGainLinear('percussion', 'salsa', 'timbales', 'salsa-salsa-dura'));
+  assert.ok(congas > piano + 12, 'the quiet recorded conga source needs additional track gain to stay audible');
+  assert.ok(claves > piano + 6 && timbales > piano + 4,
+    'clave and timbales should read clearly as the pocket rather than disappearing behind piano');
+  assert.ok(Math.abs(db(getRoleGainLinear('bass', 'jazz', 'upright-bass', 'jazz-big-band')
+    / getRoleGainLinear('bass', 'jazz', 'upright-bass')) - 15) < 1e-9,
+  'big-band walk compensates for its quiet low-register take');
+  assert.ok(Math.abs(db(getRoleGainLinear('bass', 'mexican', 'tuba', 'mexican-banda')
+    / getRoleGainLinear('bass', 'mexican', 'tuba')) - 8) < 1e-9,
+  'banda tuba remains an audible dance anchor');
+});
+
+test('synthetic vowel guides sit behind the ensemble in every genre', () => {
+  const guide = getRoleGainLinear('voice', 'country', 'voice');
+  const lead = getRoleGainLinear('lead', 'country', 'guitar');
+  const db = (linear: number) => 20 * Math.log10(linear);
+  assert.ok(db(guide) <= db(lead) - 5,
+    'the Voice Oohs stand-in should guide the melody without masking the band');
 });
 
 test('reggaeton production profiles retain mono bass and independent transient controls', () => {

@@ -1,0 +1,27 @@
+{
+  "genreId": "salsa",
+  "reviewed": "2026-10-14",
+  "status": "Eight streaming recording candidates selected for Salsa Dura. Listening, timecodes, and mix comparisons are pending; these links do not claim sonic matching.",
+  "source": "Apple Music streaming track pages. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "salsa-dura",
+      "compare": [
+        "how the fixed clave direction coordinates piano montuno, bass anticipation, and percussion",
+        "the bongo-to-campana change as the arrangement enters the montuno",
+        "short brass punches and trombone responses against the vocal and coro",
+        "how the rhythm section and horn sections build energy into mambo and closing hits"
+      ],
+      "recordings": [
+        { "title": "Ché Ché Colé", "artist": "Willie Colón & Héctor Lavoe", "url": "https://music.apple.com/us/song/1682395296", "timecodes": [] },
+        { "title": "La Murga", "artist": "Willie Colón & Héctor Lavoe", "url": "https://music.apple.com/us/song/1774135412", "timecodes": [] },
+        { "title": "Calle Luna Calle Sol", "artist": "Willie Colón & Héctor Lavoe", "url": "https://music.apple.com/us/song/1784537139", "timecodes": [] },
+        { "title": "El Día De Mi Suerte", "artist": "Willie Colón & Héctor Lavoe", "url": "https://music.apple.com/us/song/1464272393", "timecodes": [] },
+        { "title": "Indestructible", "artist": "Ray Barretto", "url": "https://music.apple.com/us/song/1718162370", "timecodes": [] },
+        { "title": "Químbara", "artist": "Johnny Pacheco & Celia Cruz", "url": "https://music.apple.com/us/song/1464289216", "timecodes": [] },
+        { "title": "Mi Gente (Remastered 2023)", "artist": "Héctor Lavoe", "url": "https://music.apple.com/us/album/mi-gente-remastered-2023/1691096142?i=1691096585", "timecodes": [] },
+        { "title": "Pedro Navaja", "artist": "Willie Colón & Rubén Blades", "url": "https://music.apple.com/us/song/1710680504", "timecodes": [] }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "genreId": "jazz",
+  "reviewed": "2026-10-14",
+  "status": "Five streaming recording candidates selected per style. Listening, timecodes, and mix comparisons are pending; these links do not claim sonic matching.",
+  "source": "Apple Music streaming track and album pages. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "hard-bop",
+      "compare": [
+        "ride and backbeat relationship with blues and gospel inflection",
+        "piano comping placement against the horn theme",
+        "phrase answers and drum accents without a constant rock backbeat",
+        "small-combo balance and dynamic lift into solos"
+      ],
+      "recordings": [
+        { "title": "Moanin'", "artist": "Art Blakey & The Jazz Messengers", "url": "https://music.apple.com/us/song/266291643", "timecodes": [] },
+        { "title": "The Sidewinder", "artist": "Lee Morgan", "url": "https://music.apple.com/us/song/715867531", "timecodes": [] },
+        { "title": "Song for My Father", "artist": "Horace Silver", "url": "https://music.apple.com/us/song/1471085189", "timecodes": [] },
+        { "title": "The Preacher", "artist": "Horace Silver", "url": "https://music.apple.com/us/song/715557331", "timecodes": [] },
+        { "title": "Dat Dere", "artist": "Art Blakey & The Jazz Messengers", "url": "https://music.apple.com/us/song/1442927518", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "bebop",
+      "compare": [
+        "fast walking-bass pulse and ride-cymbal articulation",
+        "horn phrase density, enclosures, and unison-head precision",
+        "piano comping that leaves room for fast solo lines",
+        "short fills and clear handoffs between head and improvisation"
+      ],
+      "recordings": [
+        { "title": "Ornithology", "artist": "Charlie Parker", "url": "https://music.apple.com/us/song/1439632157", "timecodes": [] },
+        { "title": "Salt Peanuts", "artist": "Dizzy Gillespie and His Quintet", "url": "https://music.apple.com/us/song/1444207651", "timecodes": [] },
+        { "title": "Ko-Ko", "artist": "Charlie Parker", "url": "https://music.apple.com/us/song/1664603116", "timecodes": [] },
+        { "title": "A Night in Tunisia", "artist": "Dizzy Gillespie, Charlie Parker, Bud Powell, Charles Mingus & Max Roach", "url": "https://music.apple.com/us/song/878500718", "timecodes": [] },
+        { "title": "Bird and Diz (Expanded Edition)", "artist": "Dizzy Gillespie & Charlie Parker", "url": "https://music.apple.com/us/album/bird-and-diz-expanded-edition/1435957132", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "cool",
+      "compare": [
+        "restrained attacks and lower dynamic pressure",
+        "space between horn phrases and accompaniment responses",
+        "close ensemble voicing, light bass, and controlled cymbal detail",
+        "intimate tone and room balance instead of hard-bop drive"
+      ],
+      "recordings": [
+        { "title": "Boplicity", "artist": "Miles Davis", "url": "https://music.apple.com/us/song/1440952352", "timecodes": [] },
+        { "title": "Take Five", "artist": "The Dave Brubeck Quartet", "url": "https://music.apple.com/us/song/193085790", "timecodes": [] },
+        { "title": "My Funny Valentine", "artist": "Chet Baker", "url": "https://music.apple.com/us/song/1442963863", "timecodes": [] },
+        { "title": "Line for Lyons", "artist": "Gerry Mulligan & Paul Desmond", "url": "https://music.apple.com/us/song/1444174323", "timecodes": [] },
+        { "title": "Bernie's Tune", "artist": "Gerry Mulligan Quartet", "url": "https://music.apple.com/us/song/723734767", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "modal",
+      "compare": [
+        "long harmonic stays and the amount of space around chord changes",
+        "voicing color and melodic development over a stable mode",
+        "bass and drum restraint beneath changing solo intensity",
+        "contrast between meditative passages and brighter ensemble statements"
+      ],
+      "recordings": [
+        { "title": "So What", "artist": "Miles Davis", "url": "https://music.apple.com/us/song/300865220", "timecodes": [] },
+        { "title": "Maiden Voyage", "artist": "Herbie Hancock", "url": "https://music.apple.com/us/song/153624191", "timecodes": [] },
+        { "title": "Impressions", "artist": "John Coltrane", "url": "https://music.apple.com/us/song/1440955163", "timecodes": [] },
+        { "title": "Footprints", "artist": "Wayne Shorter", "url": "https://music.apple.com/us/song/715539172", "timecodes": [] },
+        { "title": "Peace Piece", "artist": "Bill Evans", "url": "https://music.apple.com/us/song/1440926603", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "post-bop",
+      "compare": [
+        "motivic interplay against flexible pulse and changing harmonic centers",
+        "how rhythm-section accents follow the soloist rather than a fixed loop",
+        "layered voicings and shifting foreground roles",
+        "arrangement movement between composed themes and open solo sections"
+      ],
+      "recordings": [
+        { "title": "Speak No Evil", "artist": "Wayne Shorter", "url": "https://music.apple.com/us/song/1414679339", "timecodes": [] },
+        { "title": "Nefertiti", "artist": "Miles Davis", "url": "https://music.apple.com/us/song/169899672", "timecodes": [] },
+        { "title": "E.S.P. (2022 Remaster)", "artist": "Miles Davis", "url": "https://music.apple.com/us/album/e-s-p-2022-remaster/203773370", "timecodes": [] },
+        { "title": "Miles Smiles", "artist": "Miles Davis Quintet", "url": "https://music.apple.com/us/album/miles-smiles/209407331", "timecodes": [] },
+        { "title": "Maiden Voyage", "artist": "Herbie Hancock", "url": "https://music.apple.com/us/song/153624191", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "big-band",
+      "compare": [
+        "reed and brass section voicing, articulation, and register balance",
+        "riff exchanges, ensemble hits, and shout-chorus contrast",
+        "rhythm-section drive under arranged figures",
+        "phrase transitions and the shift between full-band and solo passages"
+      ],
+      "recordings": [
+        { "title": "B D B", "artist": "Duke Ellington & Count Basie", "url": "https://music.apple.com/us/song/999652680", "timecodes": [] },
+        { "title": "Basie Boogie", "artist": "The Count Basie Orchestra", "url": "https://music.apple.com/us/song/572282261", "timecodes": [] },
+        { "title": "Take the A Train", "artist": "Duke Ellington and His Orchestra", "url": "https://music.apple.com/us/song/358641739", "timecodes": [] },
+        { "title": "In the Mood", "artist": "Glenn Miller and His Orchestra", "url": "https://music.apple.com/us/song/286732384", "timecodes": [] },
+        { "title": "Sing, Sing, Sing", "artist": "Benny Goodman and His Orchestra", "url": "https://music.apple.com/us/song/255340992", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "gypsy-jazz",
+      "compare": [
+        "short la-pompe chord strokes and their placement against the pulse",
+        "acoustic-guitar attack, alternating bass, and fiddle or guitar leads",
+        "two- and four-bar melodic answers with compact phrase endings",
+        "natural acoustic ensemble balance without a drum-kit backbeat"
+      ],
+      "recordings": [
+        { "title": "Minor Swing", "artist": "Django Reinhardt & Stéphane Grappelli", "url": "https://music.apple.com/us/song/299671237", "timecodes": [] },
+        { "title": "Daphne", "artist": "Django Reinhardt & The Quintet of the Hot Club of France", "url": "https://music.apple.com/us/song/298440215", "timecodes": [] },
+        { "title": "Nuages", "artist": "Django Reinhardt & Ses Rythmes", "url": "https://music.apple.com/us/song/1443282006", "timecodes": [] },
+        { "title": "Manoir de Mes Rêves", "artist": "Django Reinhardt", "url": "https://music.apple.com/us/song/1635447860", "timecodes": [] },
+        { "title": "Belleville", "artist": "Django Reinhardt and His Orchestra", "url": "https://music.apple.com/us/album/belleville/692330078?i=692331019", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "jazz-fusion",
+      "compare": [
+        "electric-bass tone, articulation, and interaction with the kick",
+        "electric keys, guitar, and saxophone roles across the arrangement",
+        "layered percussion and energy shifts without losing rhythmic definition",
+        "recorded effects, stereo width, and density between sections"
+      ],
+      "recordings": [
+        { "title": "Birdland", "artist": "Weather Report", "url": "https://music.apple.com/us/song/158746815", "timecodes": [] },
+        { "title": "Bitches Brew", "artist": "Miles Davis", "url": "https://music.apple.com/us/song/387786128", "timecodes": [] },
+        { "title": "Chameleon", "artist": "Herbie Hancock", "url": "https://music.apple.com/us/song/203941686", "timecodes": [] },
+        { "title": "Meeting of the Spirits", "artist": "Mahavishnu Orchestra", "url": "https://music.apple.com/us/song/691323292", "timecodes": [] },
+        { "title": "Spain", "artist": "Chick Corea & Return to Forever", "url": "https://music.apple.com/us/song/1443203937", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "free-jazz",
+      "compare": [
+        "collective interaction and textural density rather than a fixed chord loop",
+        "fragmented motifs, rests, and ensemble responses",
+        "how pulse is implied or abandoned across each phrase",
+        "dynamic range, register separation, and controlled dissonant density"
+      ],
+      "recordings": [
+        { "title": "Lonely Woman", "artist": "Ornette Coleman", "url": "https://music.apple.com/us/song/50234205", "timecodes": [] },
+        { "title": "Free Jazz (Parts 1 & 2)", "artist": "Ornette Coleman", "url": "https://music.apple.com/us/song/1186719412", "timecodes": [] },
+        { "title": "Ascension, Edition II, Pt. 1", "artist": "John Coltrane", "url": "https://music.apple.com/us/song/1443121469", "timecodes": [] },
+        { "title": "Ghosts", "artist": "Albert Ayler & Don Cherry", "url": "https://music.apple.com/us/song/137248201", "timecodes": [] },
+        { "title": "Unit Structures", "artist": "Cecil Taylor", "url": "https://music.apple.com/us/album/unit-structures/724608454", "timecodes": [] }
+      ]
+    }
+  ]
+}

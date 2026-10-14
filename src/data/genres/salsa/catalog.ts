@@ -29,8 +29,8 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "salsa-dura",
       "name": "Salsa Dura",
-      "description": "Salsa Dura: salsa dura brass punches over son clave. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
-      "patterns": ["Aggressive dual trombone fanfare over thunderous campana bell and piano guajeo", "salsa dura brass punches over son clave", "hard 2-3/3-2 clave", "aggressive montuno", "trombone mambo", "mambo horn blocks", "coro/pregón over the montuno", "campana bell enters for montuno and mambo sections"],
+      "description": "Salsa Dura drives a piano montuno and anticipated bass against the son clave, with congas and bongó supporting the vocal coro. The bongosero changes to campana for the montuno; tight trombone and trumpet figures lift the mambo before the band closes together.",
+      "patterns": ["3-2 son clave with piano montuno and bass tumbao", "short brass punches against the clave", "bongó martillo in the verse", "campana bell in the montuno and mambo", "coro and pregón over the rhythm section", "trombone-led mambo figures"],
       "techniques": ["montuno", "short-chord-stab", "open-tone", "slap", "roll", "scrape", "staccato", "brass stabs/falls", "strong cowbell", "dense percussion fills", "aggressive dual-trombone arrangements", "driving 3-2 / 2-3 son clave and bongo campana bell", "percussive piano guajeos", "gritty barrio storytelling", "fall", "accent", "legato", "vibrato", "tenuto", "campana", "guajeo", "open", "slap-tapao", "quinto-slap", "ghost", "cowbell open and damped strokes", "brass shakes, falls and doits", "vocal soneo and coro response"],
       "harmony": ["Dm7", "G7", "C6", "A7", "F", "dominant sevenths/ninths", "chromatic turnarounds", "modal vamp sections"],
       "meter": "4/4",
@@ -38,7 +38,7 @@ export const GENRE_PACK: GenrePackInput = {
       "scale": "major",
       "roles": {
         "lead": ["voice", "trumpet", "trombone"],
-        "harmony": ["piano", "tres"],
+        "harmony": ["piano"],
         "bass": ["bass"],
         "percussion": ["congas", "bongos", "timbales", "claves", "cowbell"]
       },
@@ -64,34 +64,31 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "salsa dura brass punches over son clave voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 2, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
+        {"name": "salsa dura brass punches over son clave voice statement", "shortName": "Vocal guide phrase", "description": "Use this light guide to learn the verse entrance. The lead line should leave room for the brass response.", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 2, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "salsa dura brass punches over son clave voice cadence fill", "role": "lead", "onsets": [7.0, 7.5, 7.75], "instruments": ["voice"], "cycleLength": 2, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "salsa dura brass punches over son clave trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 2, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
+        {"name": "salsa dura brass punches over son clave trumpet statement", "shortName": "Trumpet phrase", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 2, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "salsa dura brass punches over son clave trumpet cadence fill", "role": "lead", "onsets": [7.0, 7.5, 7.75], "instruments": ["trumpet"], "cycleLength": 2, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "salsa dura brass punches over son clave trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 2, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
+        {"name": "salsa dura brass punches over son clave trombone statement", "shortName": "Trombone phrase", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 2, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "salsa dura brass punches over son clave trombone cadence fill", "role": "lead", "onsets": [7.0, 7.5, 7.75], "instruments": ["trombone"], "cycleLength": 2, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "salsa dura brass punches over son clave piano accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.5, 4.5, 5.25, 6, 7.5], "instruments": ["piano"], "cycleLength": 2, "durations": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5], "articulation": "staccato", "pitches": [{"degree": 1, "register": 52, "voicing": "single"}, {"degree": 3, "register": 52, "voicing": "single"}, {"degree": 5, "register": 52, "voicing": "single"}, {"degree": 3, "register": 52, "voicing": "single"}, {"degree": 1, "register": 52, "voicing": "single"}, {"degree": 5, "register": 52, "voicing": "single"}, {"degree": 3, "register": 52, "voicing": "single"}, {"degree": 5, "register": 52, "voicing": "single"}, {"degree": 1, "register": 52, "voicing": "single"}]},
+        {"name": "salsa dura brass punches over son clave piano accompaniment", "shortName": "Piano montuno", "description": "Play clipped chord voicings in this two-bar guajeo; keep its syncopation locked to the clave and leave space for bass and conga answers.", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.5, 4.5, 5.25, 6, 7.5], "instruments": ["piano"], "cycleLength": 2, "durations": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5], "articulation": "staccato", "pitches": [{"degree": 1, "register": 52, "voicing": "chord"}, {"degree": 3, "register": 52, "voicing": "chord"}, {"degree": 5, "register": 52, "voicing": "chord"}, {"degree": 3, "register": 52, "voicing": "chord"}, {"degree": 1, "register": 52, "voicing": "chord"}, {"degree": 5, "register": 52, "voicing": "chord"}, {"degree": 3, "register": 52, "voicing": "chord"}, {"degree": 5, "register": 52, "voicing": "chord"}, {"degree": 1, "register": 52, "voicing": "chord"}]},
         {"name": "salsa dura brass punches over son clave piano cadence fill", "role": "harmony", "onsets": [7.0, 7.5, 7.75], "instruments": ["piano"], "cycleLength": 2, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "salsa dura brass punches over son clave tres accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.5, 4.5, 5.25, 6, 7.5], "instruments": ["tres"], "cycleLength": 2, "durations": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5], "articulation": "staccato", "pitches": [{"degree": 1, "register": 60, "voicing": "single"}, {"degree": 3, "register": 60, "voicing": "single"}, {"degree": 5, "register": 60, "voicing": "single"}, {"degree": 3, "register": 60, "voicing": "single"}, {"degree": 1, "register": 60, "voicing": "single"}, {"degree": 5, "register": 60, "voicing": "single"}, {"degree": 3, "register": 60, "voicing": "single"}, {"degree": 5, "register": 60, "voicing": "single"}, {"degree": 1, "register": 60, "voicing": "single"}]},
-        {"name": "salsa dura brass punches over son clave tres cadence fill", "role": "harmony", "onsets": [7.0, 7.5, 7.75], "instruments": ["tres"], "cycleLength": 2, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "salsa dura brass punches over son clave low anchor", "role": "bass", "onsets": [1.5, 3.5, 5.5, 7.5], "instruments": ["bass"], "cycleLength": 2, "articulation": "legato", "durations": [1.4, 1.4, 1.4, 1.4]},
+        {"name": "salsa dura brass punches over son clave low anchor", "shortName": "Bass tumbao", "description": "Stay off the downbeat. Play the anticipated chord tones on the and of two and the and of four, keeping the line short and settled against the clave.", "role": "bass", "onsets": [1.5, 3.5, 5.5, 7.5], "instruments": ["bass"], "cycleLength": 2, "articulation": "staccato", "durations": [0.42, 0.42, 0.42, 0.42]},
         {"name": "salsa dura brass punches over son clave bass cadence fill", "role": "bass", "onsets": [7.0, 7.5, 7.75], "instruments": ["bass"], "cycleLength": 2, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "salsa dura brass punches over son clave congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5], "instruments": ["congas"], "cycleLength": 2, "articulation": "accent", "articulations": ["ghost", "ghost", "slap", "ghost", "ghost", "ghost", "open", "open", "ghost", "ghost", "slap", "ghost", "ghost", "ghost", "open", "open"], "accents": [0.3, 0.35, 0.85, 0.35, 0.3, 0.35, 0.9, 0.8, 0.3, 0.35, 0.85, 0.35, 0.3, 0.35, 0.9, 0.8]},
+        {"name": "salsa dura brass punches over son clave congas pulse", "shortName": "Conga tumbao", "description": "A foundation two-bar tumbao: dry slaps on counts two and six, then open tones on four and eight. Keep the four strokes distinct and even.", "role": "percussion", "onsets": [1, 3, 5, 7], "instruments": ["congas"], "cycleLength": 2, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "accent", "articulations": ["slap", "open", "slap", "open"], "accents": [0.82, 0.78, 0.82, 0.78], "difficulty": 1, "supportedEnergy": [2, 3]},
         {"name": "salsa dura brass punches over son clave congas cadence fill", "role": "percussion", "onsets": [7.0, 7.5, 7.75], "instruments": ["congas"], "cycleLength": 2, "phraseEnd": true, "articulation": "roll"},
-        {"name": "salsa dura brass punches over son clave bongos pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5], "instruments": ["bongos"], "cycleLength": 2, "articulation": "accent", "articulations": ["open", "ghost", "slap", "ghost", "open", "ghost", "slap", "ghost", "open", "ghost", "slap", "ghost", "open", "ghost", "slap", "ghost"], "accents": [0.65, 0.3, 0.7, 0.3, 0.65, 0.3, 0.7, 0.3, 0.65, 0.3, 0.7, 0.3, 0.65, 0.3, 0.7, 0.3]},
+        {"name": "salsa dura brass punches over son clave bongos pulse", "shortName": "Bongó martillo", "description": "Keep light even eighths through the verse. Let the hand-to-hand pulse carry time without competing with the vocal and conga accents.", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5], "instruments": ["bongos"], "cycleLength": 2, "articulation": "accent", "articulations": ["open", "ghost", "slap", "ghost", "open", "ghost", "slap", "ghost", "open", "ghost", "slap", "ghost", "open", "ghost", "slap", "ghost"], "accents": [0.65, 0.3, 0.7, 0.3, 0.65, 0.3, 0.7, 0.3, 0.65, 0.3, 0.7, 0.3, 0.65, 0.3, 0.7, 0.3]},
         {"name": "salsa dura brass punches over son clave bongos cadence fill", "role": "percussion", "onsets": [7.0, 7.5, 7.75], "instruments": ["bongos"], "cycleLength": 2, "phraseEnd": true, "articulation": "roll"},
         {"name": "salsa dura brass punches over son clave timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1.5, 2, 2.5, 3.5, 4, 4.5, 5.5, 6, 7], "instruments": ["timbales"], "cycleLength": 2, "articulation": "staccato", "accents": [0.7, 0.4, 0.65, 0.5, 0.7, 0.5, 0.7, 0.4, 0.7, 0.5, 0.65]},
         {"name": "salsa dura brass punches over son clave timbales cadence fill", "role": "percussion", "onsets": [7.0, 7.5, 7.75], "instruments": ["timbales"], "cycleLength": 2, "phraseEnd": true, "articulation": "roll"},
-        {"name": "salsa dura brass punches over son clave claves pulse", "role": "percussion", "onsets": [0, 1.5, 3, 5, 6], "instruments": ["claves"], "cycleLength": 2, "articulation": "accent"},
-        {"name": "Salsa dura campana pulse over the two-bar clave", "role": "percussion", "instruments": ["cowbell"], "cycleLength": 2, "onsets": [0, 1, 2, 3, 4, 5, 6, 7], "hits": ["bell", "bell", "bell", "bell", "bell", "bell", "bell", "bell"], "accents": [0.8, 0.5, 0.8, 0.5, 0.8, 0.5, 0.8, 0.5], "articulation": "accent"}
+        {"name": "salsa dura brass punches over son clave claves pulse", "shortName": "Son clave 3–2", "description": "Count two bars: strike one, the and of two, and four; then strike two and three. Keep the clave direction steady beneath the ensemble.", "role": "percussion", "onsets": [0, 1.5, 3, 5, 6], "instruments": ["claves"], "cycleLength": 2, "articulation": "accent", "difficulty": 1},
+        {"name": "Salsa dura campana pulse over the two-bar clave", "shortName": "Campana in montuno", "description": "Move from bongó time to a bright cowbell pulse when the montuno opens; keep the beat clear beneath coro and horn hits.", "role": "percussion", "instruments": ["cowbell"], "cycleLength": 2, "onsets": [0, 1, 2, 3, 4, 5, 6, 7], "hits": ["bell", "bell", "bell", "bell", "bell", "bell", "bell", "bell"], "accents": [0.8, 0.5, 0.8, 0.5, 0.8, 0.5, 0.8, 0.5], "articulation": "accent", "sectionUsage": ["chorus", "solo"], "difficulty": 2, "supportedEnergy": [3, 4, 5]}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "fall", "accent", "legato", "vibrato"],
         "trumpet": ["staccato", "fall", "accent", "legato", "tenuto", "vibrato"],
         "trombone": ["staccato", "fall", "accent", "legato"],
-        "piano": ["staccato", "campana", "montuno", "accent", "legato", "tenuto"],
-        "tres": ["staccato", "guajeo", "accent", "legato"],
-        "bass": ["staccato", "slap", "accent", "legato"],
+        "piano": ["staccato", "montuno", "accent", "legato", "tenuto"],
+        "bass": ["staccato", "accent", "legato"],
         "congas": ["open", "staccato", "slap", "slap-tapao", "quinto-slap", "accent", "ghost"],
         "bongos": ["open", "slap", "staccato", "accent", "ghost"],
         "timbales": ["open", "staccato", "roll", "accent"],
@@ -112,15 +109,11 @@ export const GENRE_PACK: GenrePackInput = {
           "defaultTechnique": "staccato"
         },
         "piano:harmony": {
-          "allowedTechniques": ["staccato", "campana", "montuno", "accent", "legato", "tenuto"],
-          "defaultTechnique": "staccato"
-        },
-        "tres:harmony": {
-          "allowedTechniques": ["staccato", "guajeo", "accent", "legato"],
+          "allowedTechniques": ["staccato", "montuno", "accent", "legato", "tenuto"],
           "defaultTechnique": "staccato"
         },
         "bass:bass": {
-          "allowedTechniques": ["staccato", "slap", "accent", "legato"],
+          "allowedTechniques": ["staccato", "accent", "legato"],
           "defaultTechnique": "staccato"
         },
         "congas:percussion": {

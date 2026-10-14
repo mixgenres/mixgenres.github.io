@@ -16,7 +16,7 @@ These are selectively rebuilt SF3 banks with Ogg Vorbis samples, then compressed
 | steel | 2.44 | 2 | 59 |
 | piano | 18.07 | 1 | 240 |
 | bass | 0.76 | 2 | 25 |
-| drumkit | 13.67 | 6 | 310 |
+| drumkit | 14.12 | 8 | 374 |
 | electricClean | 12.36 | 6 | 182 |
 | electricDrive | 18.20 | 6 | 182 |
 | bandoneon | 0.35 | 2 | 12 |
@@ -62,7 +62,7 @@ python3 scripts/fetch-soundfont-sources.py
 
 Requires Python 3, `bsdtar`, `ffmpeg` and installed npm dependencies. Source downloads stay under ignored `.cache/soundfont-sources/`. Changed source hashes stop the script rather than silently replacing the instrument media.
 
-The package step requires an ffmpeg build with `libvorbis`. If the system ffmpeg lacks that encoder, compile `scripts/lib/encode-vorbis.c` against libvorbis and libogg, then set `MIXGENRES_VORBIS_ENCODER` to the compiled executable when running `soundfonts:package`.
+The drumkit pack includes three Muldjord stick-kit takes and the GeneralUser GS Brush Kit on a dedicated preset; Cool Jazz selects the brush preset through its style dialect. The package step requires an ffmpeg build with `libvorbis`. If the system ffmpeg lacks that encoder, compile `scripts/lib/encode-vorbis.c` against libvorbis and libogg, then set `MIXGENRES_VORBIS_ENCODER` to the compiled executable when running `soundfonts:package`.
 
 To rebuild from existing files:
 

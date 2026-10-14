@@ -31,6 +31,8 @@ export interface AuthoredCell {
   difficulty?: number;
   /** Generated from a folder-authored cell; kept distinct from source and cadence cells. */
   pedagogicalStudy?: 'reduction' | 'answer' | 'technique' | 'variation';
+  /** A source-faithful practice variation that may also develop a song phrase. */
+  arrangementVariation?: boolean;
 }
 export interface CalibratedStyleInput {
   instrumentDialects: Record<string, Partial<import('../../styles/contracts').InstrumentDialect>>;
@@ -527,6 +529,7 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
       : cell.pedagogicalStudy === 'answer' ? ['solo', 'bridge'] : cell.pedagogicalStudy === 'variation' ? ['verse', 'chorus', 'bridge', 'solo'] : ['intro', 'verse']) } : {}),
     ...(cell.difficulty ? { difficulty: cell.difficulty } : {}),
     ...((cell.pedagogicalStudy || genericPhraseClose) ? { pedagogicalStudy: cell.pedagogicalStudy ?? ('technique' as const) } : {}),
+    ...(cell.arrangementVariation ? { arrangementVariation: true } : {}),
     provenance: genericPhraseClose
       ? 'Generic phrase-close timing exercise retained for deliberate practice; not used as an automatic style cadence.'
       : cell.pedagogicalStudy
@@ -656,6 +659,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
         articulations: selected.map(event => event.articulation ?? ''),
         difficulty: 2,
         pedagogicalStudy: 'answer',
+        arrangementVariation: true,
         supportedEnergy: [2, 3],
         description: `Phrase-answer study for ${style.name} ${instrumentId}: reposition the local cell's closing motif within the measure, keeping its own interval shape.`
       });
@@ -690,10 +694,59 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
         articulations: motif.map(event => event.articulation ?? ''),
         difficulty: 2,
         pedagogicalStudy: 'variation',
+        arrangementVariation: true,
         sectionUsage: ['verse', 'chorus', 'bridge', 'solo'],
         supportedEnergy: [2, 3],
         description: `${style.name} ${instrumentId} development study: restate the opening motif from ${source.name} later in the cycle, retaining its local contour, rhythm, and playing technique.`,
       });
+    }
+
+    // Several regional, orchestral and electronic catalogs intentionally give
+    // an anchor part only one authored attack. For short lead/bass anchors,
+    // make a second playable cell by reusing that same note and technique at a
+    // contrasting point in the cycle. This adds phrase movement without
+    // fabricating pitches or importing a groove from another style. Long
+    // drones, pads, voices and ceremonial time-markers stay untouched.
+    const [anchorNumerator, anchorDenominator] = style.preferredMeters[0].split('/').map(Number);
+    const anchorCycleBeats = anchorNumerator * 4 / anchorDenominator * (source.cycleLength ?? 1);
+    const anchorDuration = originalEvents[0]?.duration ?? 0.25;
+    const shortAnchor = originalEvents.length === 1 && anchorDuration < anchorCycleBeats * 0.6;
+    const developingRole = source.role === 'lead' || source.role === 'bass';
+    const sustainedOrVocal = instrumentId === 'voice' || source.role === 'texture' || source.role === 'harmony';
+    if (shortAnchor && developingRole && !sustainedOrVocal) {
+      const original = originalEvents[0];
+      const reentryPosition = source.role === 'bass'
+        ? (original.position <= anchorCycleBeats / 2 ? anchorCycleBeats / 2 : 0)
+        : Math.min(anchorCycleBeats - 0.25, Math.max(anchorCycleBeats / 2 + 0.25, original.position + anchorDuration + 0.25));
+      if (Math.abs(reentryPosition - original.position) >= 0.5) {
+        const sourceEvents = [
+          { ...original, accent: original.accent ?? 0.86 },
+          { ...original, position: reentryPosition, duration: Math.min(anchorDuration, 0.35), accent: (original.accent ?? 0.86) * 0.72 },
+        ].sort((a, b) => a.position - b.position);
+        // A bass anchor authored late in the bar becomes the softer answer;
+        // seed its complementary downbeat first so the phrase stays ordered.
+        if (source.role === 'bass' && reentryPosition < original.position) {
+          sourceEvents[0].accent = original.accent ?? 0.86;
+          sourceEvents[1].accent = (original.accent ?? 0.86) * 0.72;
+        }
+        studies.push({
+          ...source,
+          name: `${instrumentId} anchor re-entry study`,
+          shortName: `${instrumentLabel} re-entry`,
+          onsets: sourceEvents.map(event => event.position),
+          durations: sourceEvents.map(event => event.duration ?? 0.25),
+          accents: sourceEvents.map(event => event.accent ?? 0.65),
+          pitches: sourceEvents.map(event => event.pitch),
+          notations: sourceEvents.map(event => event.notation),
+          hits: sourceEvents.map(event => event.hit),
+          articulations: sourceEvents.map(event => event.articulation ?? ''),
+          difficulty: 2,
+          pedagogicalStudy: 'variation',
+          arrangementVariation: true,
+          supportedEnergy: [2, 3],
+          description: `${style.name} ${instrumentLabel.toLowerCase()} re-entry study: reuse the local ${source.name} anchor at a complementary point in the cycle, keeping its note, hit type and playing gesture. Shape the answer lighter; this is a spacing exercise, not a recording transcription.`,
+        });
+      }
     }
 
     const alreadyDemonstrated = new Set(cells.flatMap(cell => cell.onsets.map((_, index) =>

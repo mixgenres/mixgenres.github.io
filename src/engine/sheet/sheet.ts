@@ -299,18 +299,30 @@ function calibratedTrackVolume(genreId: string, instrumentId: string, role: stri
  * phrasing that makes it sound intentional rather than mistaken.
  */
 
-function canonicalPatternSection(sectionKind?: string): string | undefined {
+export function canonicalPatternSection(sectionKind?: string): string | undefined {
   const k = String(sectionKind ?? '').toLowerCase();
   if (!k) return undefined;
   if (/intro|introduc|salida|opening|buka|attack/.test(k)) return 'intro';
   if (/coda|cierre|outro|ending|tag|final|closing|cadence|release|dissolve|decay|void|suwuk|sacrificial-dance|\bstop\b|\bcut\b/.test(k)) return 'ending';
   if (/bridge|puente|break|drop|breakdown|exchange|rupture|transition|texture-shift|descent|\bfall\b/.test(k)) return 'bridge';
-  if (/chorus|coro|refrain|hook|montuno|remate|return|reprise|climax|eruption|battle/.test(k)) return 'chorus';
-  if (/solo|trading|instrumental|falseta|variaci|variation|descarga|mambo|development|evolution|improvis|alap|tanam|jhala|\bgat\b|jangdan|transformation|spectrum/.test(k)) return 'solo';
+  if (/chorus|coro|estribillo|refrain|response|hook|montuno|remate|return|reprise|climax|eruption|battle|mukhda|pallavi|anupallavi/.test(k)) return 'chorus';
+  if (/solo|soli|trading|instrumental|falseta|variaci|variation|descarga|mambo|development|evolution|improvis|alap|tanam|jhala|\bgat\b|jangdan|transformation|spectrum/.test(k)) return 'solo';
   if (/sonata[-\s]?[ivx]+/.test(k)) return 'verse';
   if (/interlude[-\s]?[ivx]+/.test(k)) return 'bridge';
-  if (/verse|verso|tema|letra|preg|cycle|theme|strophe|narration|jinyangjo|jungmori|jajinmori|hwimori|youngnam|honam|jungbu|main-cycle|\bloop\b|\btexture\b|fragments|matrix|ritual|groove|pulse|section-[ivx]+|\ba$|\bb$/.test(k)) return 'verse';
+  if (/verse|verso|tema|copla|call|head|charanam|antara|letra|preg|cycle|theme|strophe|narration|jinyangjo|jungmori|jajinmori|hwimori|youngnam|honam|jungbu|main-cycle|\bloop\b|\btexture\b|fragments|matrix|ritual|groove|pulse|section-[ivx]+|\ba$|\bb$/.test(k)) return 'verse';
   return k;
+}
+
+/** Generic phrase lessons span any statement/return/contrast region, including
+ * tradition-specific form names not covered by the common section aliases.
+ * Explicitly section-scoped variations keep their authored limits. */
+export function patternAvailableInSection(pattern: MusicalPattern, sectionKind?: string): boolean {
+  if (!pattern.sectionUsage?.length) return true;
+  const canonical = canonicalPatternSection(sectionKind);
+  if (canonical && pattern.sectionUsage.some(section => canonicalPatternSection(section) === canonical)) return true;
+  const broadPhraseLesson = pattern.arrangementVariation === true
+    && ['verse', 'chorus', 'bridge', 'solo'].every(section => pattern.sectionUsage!.includes(section as NonNullable<MusicalPattern['sectionUsage']>[number]));
+  return broadPhraseLesson;
 }
 
 export function patternStyleFit(
@@ -391,8 +403,8 @@ export function affinity(
   if (vocalMismatch) score -= 50;
   if (explicitMismatch) score -= p.canCrossRole ? 85 : 140;
   if (authoredMismatch) score -= 20;
-  // Generated exercises remain available in every picker, but automatic song
-  // choices should prefer the style's main playing cells over isolated drills.
+  // Keep the opening pattern on the authored core cell. Arrangement-aware
+  // studies are promoted only by the phrase-development selector below.
   if (p.pedagogicalStudy) score -= 64;
   if (instrumentMatch) score += 30;
   if (roleMatch) score += 14;
@@ -865,23 +877,40 @@ export function rebuild(sheet: Sheet): Sheet {
               ...(lensWeight > 0 && partLens ? (PATTERNS_BY_WORLD[partLens.genreId] ?? []).map(candidate => candidate.id) : []),
               ...(guestStyle?.patterns?.allowed ?? []),
             ]);
+            const hostGenre = r.genre ?? sheet.worldId;
+            const hostStyle = getSectionStyleId(sheet, r);
+            const guestStyleId = guestStyle?.id ?? partLens?.styleId;
             const candidates = [...candidateIds].map(id => PATTERNS_BY_ID[id]).filter((candidate): candidate is MusicalPattern => !!candidate)
               .filter(p => p.enabled !== false)
-              .filter(p => !p.pedagogicalStudy)
-              .filter(p => !p.sectionUsage?.length || p.sectionUsage.some(section => canonicalPatternSection(section) === canonicalPatternSection(r.kind)))
+              .filter(p => p.sourceLevel !== 'style-authored' || (
+                !!track.instrumentId && !!p.instruments?.includes(track.instrumentId)
+                && (p.styleIds?.includes(hostStyle)
+                  || (lensWeight > 0 && !!guestStyleId && p.styleIds?.includes(guestStyleId)))
+              ))
+              .filter(p => !p.pedagogicalStudy || p.arrangementVariation)
+              .filter(p => patternAvailableInSection(p, r.kind))
               .filter(p => !base || p.family === base.family || p.category === base.category
+                || (p.arrangementVariation && p.sourceLevel === 'style-authored'
+                  && !!track.instrumentId && p.instruments?.includes(track.instrumentId)
+                  && p.roles?.includes(track.role)
+                  && (p.styleIds?.includes(hostStyle)
+                    || (lensWeight > 0 && !!guestStyleId && p.styleIds?.includes(guestStyleId))))
                 || (lensWeight > 0 && partLens && (
                   p.worldId === partLens.genreId || p.styleIds?.includes(guestStyle?.id ?? '')
                   || guestStyle?.patterns?.allowed?.includes(p.id)
                 )))
               .map(p => {
-                const hostGenre = r.genre ?? sheet.worldId;
-                const hostStyle = getSectionStyleId(sheet, r);
                 const hostFit = affinity(p.id, track as Voice, hostGenre, hostStyle);
                 const guestFit = lensWeight > 0 && partLens
                   ? affinity(p.id, track as Voice, partLens.genreId, guestStyle?.id, lensWeight)
                   : hostFit;
-                let score = hostFit * (1 - lensWeight) + guestFit * lensWeight;
+                // A source-derived variation deliberately has a different
+                // teaching family/category from the core cell it develops.
+                // Give a section-compatible one enough weight to beat the
+                // base pattern's same-family bonus once a new phrase begins.
+                const phraseVariationFit = p.arrangementVariation ? 90 : 0;
+                let score = (hostFit + phraseVariationFit) * (1 - lensWeight)
+                  + (guestFit + phraseVariationFit) * lensWeight;
                 if (p.id === basePatternId) score += 4;
                 else score += 14;
                 if (base && p.family === base.family) score += 12 * (1 - lensWeight);
@@ -896,7 +925,7 @@ export function rebuild(sheet: Sheet): Sheet {
 
             const devHashKey = isRhythm ? `develop:rhythm:${r.id}` : `develop:${track.id}:${r.id}`;
             const pickHashKey = isRhythm ? `rhythm:${r.id}` : `${track.id}:${r.id}`;
-            const moves = hash(devHashKey, phrase) < 0.45;
+            const moves = hash(devHashKey, phrase) < 0.65;
             if (candidates.length && moves) {
               const reach = Math.max(1, Math.round(1 + 0.45 * 6));
               const top = candidates.slice(0, Math.min(reach, candidates.length));

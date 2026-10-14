@@ -10,6 +10,7 @@ import { PATTERNS_BY_ID } from '../src/data/genres';
 import { getStyle } from '../src/engine/style/registry';
 import { sliceBarNative } from '../src/engine/sheet/grid';
 import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
+import { velocityForEnergy } from '../src/engine/band/velocity';
 import type { MusicalPattern } from '../src/types';
 
 function fixture(): MusicianScore {
@@ -26,6 +27,17 @@ function note(overrides: Partial<ScoreNote> = {}): ScoreNote {
     playback: { gestureCode: codeForGesture('legato'), hitFunctionCode: 0, accent: .75 }, ...overrides };
 }
 
+test('section dynamics preserve soft attacks, accent contrast, and a non-saturated forte ceiling', () => {
+  const quiet = velocityForEnergy(0.2, 0.8, 1);
+  const mid = velocityForEnergy(0.6, 0.8, 1);
+  const peak = velocityForEnergy(1, 1, 1.6);
+  const softAccent = velocityForEnergy(0.8, 0.2, 1);
+  const strongAccent = velocityForEnergy(0.8, 0.9, 1);
+  assert.ok(quiet < mid && mid < peak, `${quiet} < ${mid} < ${peak}`);
+  assert.ok(softAccent < strongAccent, `${softAccent} < ${strongAccent}`);
+  assert.ok(peak <= 107, `forte ceiling should leave headroom below MIDI 127, got ${peak}`);
+});
+
 test('Arabic Takht sample gives taqsim a solo voice and distinct section cells to its ensemble', () => {
   const song = createCatalogSong('arabic-takht_song');
   const taqsim = song.regions.find(region => region.kind === 'taqsim')!;
@@ -41,17 +53,16 @@ test('Arabic Takht sample gives taqsim a solo voice and distinct section cells t
   assert.notEqual(pattern('qanun', 'verse'), pattern('qanun', 'response'));
 });
 
-test('reference score section assignments preserve their intended instrument cells across long phrases', () => {
+test('reference score sections begin with their authored instrument cells', () => {
   const verify = (styleId: string, instrumentId: string, section: string, expectedName: string) => {
     const song = createCatalogSong(`${styleId}_song`);
     const region = song.regions.find(part => part.kind === section);
     assert.ok(region, `${styleId} has a ${section} section`);
     const track = song.tracks.find(part => part.instrumentId === instrumentId);
     assert.ok(track, `${styleId} includes ${instrumentId}`);
-    const names = [...new Set(song.measures.filter(measure => measure.regionId === region.id)
-      .map(measure => PATTERNS_BY_ID[measure.patternDetailsByTrack?.[track.id]?.patternId ?? '']?.shortName)
-      .filter((name): name is string => !!name))];
-    assert.deepEqual(names, [expectedName], `${styleId}/${section}/${instrumentId} keeps its section-authored pattern`);
+    const patternId = song.arrangement[region.id]?.[track.id];
+    assert.equal(PATTERNS_BY_ID[patternId ?? '']?.shortName, expectedName,
+      `${styleId}/${section}/${instrumentId} starts from its section-authored pattern`);
   };
 
   verify('flamenco-sevillanas', 'cajon', 'link', 'Cajón link remate');
@@ -59,6 +70,21 @@ test('reference score section assignments preserve their intended instrument cel
   verify('cinematic-modern-score', 'synth', 'build', 'Synth Resolution');
   verify('pop-power-pop', 'synth', 'chorus', 'Synth swell');
   verify('tango-chacarera-crossover', 'violin', 'interlude', 'Violin interlude');
+});
+
+test('country sample phrases develop through same-instrument teaching variations', () => {
+  const song = createCatalogSong('country-bluegrass_song');
+  const verse = song.regions.find(region => region.kind === 'verse')!;
+  const banjo = song.tracks.find(track => track.instrumentId === 'banjo')!;
+  const ids = [...new Set(song.measures.filter(measure => measure.regionId === verse.id)
+    .map(measure => measure.patternDetailsByTrack?.[banjo.id]?.patternId).filter((id): id is string => !!id))];
+  assert.ok(ids.length > 1, 'the bluegrass banjo line should change within a long verse');
+  for (const id of ids) {
+    const pattern = PATTERNS_BY_ID[id]!;
+    assert.ok(pattern.instruments?.includes('banjo'), `${pattern.shortName} must remain playable on banjo`);
+    assert.ok(pattern.sourceLevel !== 'style-authored' || pattern.styleIds?.includes('country-bluegrass'),
+      `${pattern.shortName} must remain inside the selected bluegrass style`);
+  }
 });
 
 test('catalog songs do not invent support instruments outside the authored style roster', () => {

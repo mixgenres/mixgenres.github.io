@@ -226,6 +226,8 @@ export interface MusicalPattern {
   difficulty?: number;
   /** Local student exercise generated from an authored source cell. */
   pedagogicalStudy?: 'reduction' | 'answer' | 'technique' | 'variation';
+  /** A source-faithful practice variation that may also develop a song phrase. */
+  arrangementVariation?: boolean;
   weight?: number;
   enabled?: boolean;
 }

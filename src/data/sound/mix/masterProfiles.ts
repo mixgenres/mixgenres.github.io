@@ -2,7 +2,11 @@
 export const MASTER_MIX_DEFAULTS = {
   bassForward: 0.5, brightness: 0.5, dryness: 0.5, width: 0.5,
   roomScale: 0.34, subEnhancement: 0.16, outputGain: 1,
-  programMakeupDb: 8,
+  // Bring quiet SoundFont parts into the glue stage's working range and
+  // recover level after compression. Sparse rendered pop passages were still
+  // peaking 8 dB below the shared ceiling at +12 dB; the linked -2 dBFS reserve
+  // and live lookahead guard catch dense sections after this additional lift.
+  programMakeupDb: 18,
 };
 export const MASTER_GLUE_PROFILES = {
   salsa: { threshold: -12, knee: 12, ratio: 3, attack: 0.01, release: 0.15 },
