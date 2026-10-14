@@ -72,6 +72,7 @@ for (const [id, programs] of Object.entries(BANK_PROGRAMS)) {
     if(id==='nylon'||id==='steel')return !preset.isDrum&&(id==='nylon'?[0,4,24].includes(preset.bankMSB):preset.bankMSB===0);
     if(id==='percussion')return preset.isGMGSDrum&&[0,...Object.values(ELECTRONIC_KIT_PROGRAMS)].includes(preset.program);
     if(id==='guitars'&&!preset.isDrum&&preset.bankMSB===16&&preset.bankLSB===0&&preset.program===25)return true;
+    if(id==='winds'&&!preset.isDrum&&preset.bankMSB===24&&preset.bankLSB===0&&preset.program===75)return true;
     return !preset.isDrum&&preset.bankMSB===0&&preset.bankLSB===0&&(programs as readonly number[]).includes(preset.program);
   });
   if (!selected.length&&!quality) throw new Error(`Empty pack: ${id}`);
@@ -269,6 +270,7 @@ completeManifest.distillation.bandoneon={recordedSource:'Jörg Bleymehl 1930 ELA
 completeManifest.distillation.electronicKits={source:'GeneralUser GS',bank:0,drum:true,programs:ELECTRONIC_KIT_PROGRAMS,layout:'GM component keys'};
 completeManifest.distillation.synthPatches={source:'GeneralUser GS waveforms',bank:75,programs:SYNTH_SAMPLE_PROGRAMS,parameters:'authored lowpass filter and volume envelope; shared waveform PCM, distinct instrument zones'};
 completeManifest.distillation.countryMandolin={source:'GeneralUser GS',bank:16,program:25,sourcePreset:'Mandolin',replacesWrongGmSlot:'bank 0/program 106 Shamisen'};
+completeManifest.distillation.tinWhistle={source:'GeneralUser GS',bank:24,program:75,sourcePreset:'Tin Whistle',recordedRoots:5,lowWhistle:'shares this whistle set in its lower written range'};
 completeManifest.distillation.electricBass={source:'YR fingerstyle and picked recordings',sampleIdentity:'separate source names prevent cross-source deduplication',upperKey:55,upperRange:'extend the highest source zone by transposing its recorded waveform; not additional recorded notes'};
 completeManifest.distillation.uprightBass={recordedSource:'D. Smolken 1958 Otto Rubner double bass, CGDA fifths tuning',sourceArchiveSha256:'380986bb52ee6b6469d28e9089792a3ed37cbd163fe5a19160bf4f98785e7ccb',presets:{pizzicato:4,arco:2},roundRobin:'four pizzicato recordings, and separate down/up bow recordings',velocityLayers:{pizzicato:3,arco:5},discarded:'unpitched noises and body-contact keys',sampleRate:44100,maxSampleSeconds:12,terminalFadeSeconds:.15,vorbisQuality:6};
 completeManifest.harmoniumSourceSha256=Object.fromEntries(harmoniumSources.samples.map(row=>[row.file,createHash('sha256').update(readFileSync(join(sources[8],row.file))).digest('hex')]));

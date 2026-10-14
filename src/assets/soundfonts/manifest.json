@@ -1,5 +1,5 @@
 {
-  "version": "mixgenres-sf-v7",
+  "version": "mixgenres-sf-v8",
   "sourceSha256": [
     "9575028c7a1f589f5770fccc8cff2734566af40cd26ed836944e9a5152688cfe",
     "c0ae2e0c4b3efb98b3af49ac553e2ab3bb23258bf4832c3146f94b26cd9236f1",
@@ -210,10 +210,10 @@
       "format": "sf3"
     },
     "winds": {
-      "bytes": 702929,
-      "unpackedBytes": 1182388,
-      "sha256": "905a188b8b9c4c775025891d940fb4fbf9be6363b468343f9b0f832dd2edde3b",
-      "unpackedSha256": "c3cdd80cf9366b7af9ab4f72755d1577690c070c56e5d366b49275640a5e7f12",
+      "bytes": 721705,
+      "unpackedBytes": 1214846,
+      "sha256": "ca0cdfc5e1089f4aad62d010bbe46ac16af3d3acacb85bd30622b1954b699bea",
+      "unpackedSha256": "b6a8f5019bba334a4fad784c417850604e4230683ccd9966a3cbb0a5be77be75",
       "presets": [
         "0:0:64",
         "0:0:65",
@@ -227,13 +227,14 @@
         "0:0:73",
         "0:0:74",
         "0:0:75",
+        "0:24:75",
         "0:0:77",
         "0:0:78",
         "0:0:79",
         "0:0:109",
         "0:0:111"
       ],
-      "samples": 121,
+      "samples": 126,
       "format": "sf3"
     },
     "brass": {
@@ -608,6 +609,14 @@
       "program": 25,
       "sourcePreset": "Mandolin",
       "replacesWrongGmSlot": "bank 0/program 106 Shamisen"
+    },
+    "tinWhistle": {
+      "source": "GeneralUser GS",
+      "bank": 24,
+      "program": 75,
+      "sourcePreset": "Tin Whistle",
+      "recordedRoots": 5,
+      "lowWhistle": "shares this whistle set in its lower written range"
     },
     "electricBass": {
       "source": "YR fingerstyle and picked recordings",

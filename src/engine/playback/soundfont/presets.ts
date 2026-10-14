@@ -4,7 +4,7 @@ import { SAMPLED_SYNTH_PATCHES } from '../../../data/sound/playback/sampledSynth
 
 /** Zero-based General MIDI programs. World instruments with no sampled match
  * use an explicit family approximation, exposed in the bank coverage report. */
-export const SOUNDFONT_VERSION = 'mixgenres-sf-v7';
+export const SOUNDFONT_VERSION = 'mixgenres-sf-v8';
 export const BANK_PROGRAMS = {
   keys: [4, 5, 6, 7, 16, 19, 20, 21, 22],
   mallets: [8, 9, 10, 11, 12, 13, 14, 15, 117],
@@ -48,7 +48,7 @@ assign(58, 'tuba'); assign(60, 'french-horn'); assign(61, 'horn-section');
 assign(64, 'soprano-sax'); assign(65, 'alto-sax'); assign(66, 'tenor-sax'); assign(67, 'bari-sax');
 assign(68, 'oboe hichiriki'); assign(69, 'english-horn duduk'); assign(70, 'bassoon'); assign(71, 'clarinet');
 assign(72, 'piccolo'); assign(73, 'flute ney bansuri quena xiao dizi ryuteki'); assign(74, 'recorder');
-assign(75, 'pan-flute siku'); assign(77, 'shakuhachi'); assign(78, 'tin-whistle low-whistle'); assign(79, 'ocarina');
+assign(75, 'pan-flute siku'); assign(77, 'shakuhachi'); assign(79, 'ocarina');
 assign(81, 'synth'); assign(98, 'crystal'); assign(109, 'bagpipes uilleann-pipes'); assign(111, 'suona zurna');
 assign(104, 'sitar tanpura rudra-veena veena'); assign(105, 'banjo');
 assign(106, 'shamisen biwa oud bouzouki bandola-llanera baglama dombra setar tar');
@@ -61,6 +61,10 @@ export function patchForInstrument(id: string, percussion = false): SamplePatch 
   // GM slot used by the old mapping is Shamisen, which is the wrong timbre for
   // country bluegrass chop parts.
   if (id === 'mandolin') return {bank:16,program:25,drum:false,pack:'guitars'};
+  // The source bank has five recorded whistle roots in its GS variation bank.
+  // Low whistle shares these recordings in a lower written register; a
+  // dedicated low-whistle multisample set is still needed.
+  if (id === 'tin-whistle' || id === 'low-whistle') return {bank:24,program:75,drum:false,pack:'winds'};
   // The GM Jazz Guitar patch is a poor pedal-steel stand-in. These use the
   // packaged clean electric recordings; plan.ts may select the driven bank
   // when a style explicitly calls for more edge.

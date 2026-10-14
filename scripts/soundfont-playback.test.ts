@@ -57,6 +57,20 @@ test('country mandolin resolves to the actual GS mandolin variation, not the GM 
   const event=plan.events.find(item=>item.type==='on');
   assert(event&&event.type==='on');assert.deepEqual(event.patch,patch);
 });
+test('tin and low whistle use the recorded GeneralUser whistle set instead of GM ocarina',()=>{
+  const patch=patchForInstrument('tin-whistle');
+  assert.deepEqual(patch,{bank:24,program:75,drum:false,pack:'winds'});
+  assert.deepEqual(patchForInstrument('low-whistle'),patch,'low whistle uses the same recordings in its lower written register');
+  const preset=load('winds').presets.find(item=>item.bankMSB===24&&item.bankLSB===0&&item.program===75);
+  assert(preset);assert.match(preset.name,/tin whistle/i);
+  const zones=preset.zones.flatMap(zone=>zone.instrument.zones);
+  assert.equal(new Set(zones.map(zone=>zone.sample.name)).size,5,'retain all five recorded whistle roots');
+  for(const key of [48,60,72,84,96])assert(preset.getVoiceParameters(key,90).length>0,`whistle key ${key} reaches a sample zone`);
+  const plan=compileSamplePlan(performanceFixture({notes:[noteFixture({midi:78})]}),
+    {...options,trackInstruments:new Map([['keys','tin-whistle']]),worldId:'folk',styleId:'folk-folk-revival'});
+  const event=plan.events.find(item=>item.type==='on');
+  assert(event&&event.type==='on');assert.deepEqual(event.patch,patch);
+});
 test('Qawwali harmonium uses the recorded multisample bank across its full playable range',()=>{
   const patch=patchForInstrument('harmonium');
   assert.deepEqual(patch,{bank:66,program:28,drum:false,pack:'keys'});
