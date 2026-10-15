@@ -16,6 +16,7 @@ export const GENRE_PACK: GenrePackInput = authorChineseStudies({
     "harmony": ["pipa", "guzheng"]
   },
   "pitchSystem": "traditional pentatonic/modal tuning",
+  "tuningSystem": "12-tet",
   "scales": ["major-pentatonic"],
   "chordQualities": ["D5"],
   "harmonicRhythm": "static",

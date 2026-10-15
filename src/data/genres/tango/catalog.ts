@@ -18,6 +18,7 @@ export const GENRE_PACK: GenrePackInput = authorChacareraPiano(authorTangoArrang
     "bass": ["upright-bass"]
   },
   "pitchSystem": "12-tet",
+  "tuningSystem": "12-tet",
   "scales": ["harmonic-minor"],
   "chordQualities": ["Am", "Dm", "E7", "C", "G7", "D", "A7", "G"],
   "harmonicRhythm": "bar",

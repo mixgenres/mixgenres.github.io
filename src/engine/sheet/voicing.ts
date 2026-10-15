@@ -178,17 +178,14 @@ export function voiceChord(req: VoicingRequest): number[] {
   const isReggaeOrSka = VOICING_CLASSIFIERS.reggaeOrSka.test(styleStr);
   const isSkankRole = profile.role === 'comp' || (profile.role as string) === 'harmony';
   if (isReggaeOrSka && isSkankRole) {
-    // Force skipRoot = true; use 3 notes maximum (triads or 3-note 7th shells)
-    const third = chord.intervals.find(x => x === 3 || x === 4 || x === 2 || x === 5) ?? 4;
+    // Use only written chord tones; a missing third/fifth must not turn a sus
+    // chord into a major triad or a diminished chord into a perfect fifth.
+    const third = chord.intervals.find(x => x === 2 || x === 3 || x === 4 || x === 5);
     const seventh = chord.intervals.find(x => x === 10 || x === 11 || x === 9);
-    const fifth = chord.intervals.find(x => x === 6 || x === 7 || x === 8) ?? 7;
+    const fifth = chord.intervals.find(x => x === 6 || x === 7 || x === 8);
 
-    const candidateIntervals: number[] = [];
-    if (seventh !== undefined) {
-      candidateIntervals.push(third, seventh, fifth);
-    } else {
-      candidateIntervals.push(third, fifth, third + 12);
-    }
+    const candidateIntervals = [third, seventh, fifth].filter(iv => iv !== undefined);
+    if (!candidateIntervals.length) throw new Error(`No authored skank tones for ${chord.symbol}`);
 
     const skankPcs = candidateIntervals.slice(0, 3).map(iv => pcOf(chord.rootPc + iv));
     const targetRef = previous.length
@@ -226,15 +223,13 @@ export function voiceChord(req: VoicingRequest): number[] {
       highestTensionIv = t11 % 12;
     } else if (t9 !== undefined) {
       highestTensionIv = t9 % 12;
-    } else if (chord.quality === 'dominant' || chord.symbol.includes('7')) {
-      highestTensionIv = 2; // Classic James Brown E9 style tension
     }
 
-    const third = chord.intervals.find(x => x === 3 || x === 4 || x === 2 || x === 5) ?? 4;
-    const seventh = chord.intervals.find(x => x === 10 || x === 11 || x === 9) ?? 10;
+    const third = chord.intervals.find(x => x === 3 || x === 4 || x === 2 || x === 5);
+    const seventh = chord.intervals.find(x => x === 10 || x === 11 || x === 9);
     const prevTop = previous.length ? previous[previous.length - 1] : 75;
 
-    if (highestTensionIv !== undefined) {
+    if (highestTensionIv !== undefined && third !== undefined && seventh !== undefined) {
       const topPc = pcOf(chord.rootPc + highestTensionIv);
       let topNote = nearestPc(topPc, Math.min(78, Math.max(71, prevTop)));
       while (topNote < 71) topNote += 12;
@@ -261,15 +256,6 @@ export function voiceChord(req: VoicingRequest): number[] {
       }
     }
 
-    // Fallback tight 3-note shell in 65-79
-    const shellPcs = [pcOf(chord.rootPc + third), pcOf(chord.rootPc + seventh)];
-    const notes = shellPcs.map(pc => {
-      let n = nearestPc(pc, 72);
-      while (n < 65) n += 12;
-      while (n > 79) n -= 12;
-      return n;
-    }).sort((a, b) => a - b);
-    return dedupe(notes);
   }
 
   // 3. Modal Jazz "Quartal" Voicings (Stacked Fourths)
@@ -354,18 +340,13 @@ export function voiceChord(req: VoicingRequest): number[] {
   const isNeoSoulOrGospel = VOICING_CLASSIFIERS.neoSoulOrGospel.test(styleStr);
   const isNeoKeys = /piano|rhodes|organ|keys|keyboard|wurlitzer/i.test(profile.id || '');
 
-  if (isNeoSoulOrGospel && isNeoKeys) {
-    // 1. Identify highest tension (9, 11, or 13)
-    const allIntervals = [...chord.tensions, ...chord.intervals];
-    let topTensionIv = 2; // Default to 9th (standard neo-soul colour)
-
-    if (allIntervals.some(iv => iv === 21 || iv === 20 || (iv === 9 && chord.intervals.includes(10)))) {
-      topTensionIv = allIntervals.find(iv => iv === 21 || iv === 20 || iv === 9)! % 12;
-    } else if (allIntervals.some(iv => iv === 17 || iv === 18 || (iv === 5 && chord.intervals.includes(10)))) {
-      topTensionIv = allIntervals.find(iv => iv === 17 || iv === 18 || iv === 5)! % 12;
-    } else if (allIntervals.some(iv => iv === 14 || iv === 13 || iv === 15 || iv === 2 || iv === 1 || iv === 3)) {
-      topTensionIv = allIntervals.find(iv => iv === 14 || iv === 13 || iv === 15 || iv === 2 || iv === 1 || iv === 3)! % 12;
-    }
+  const explicitExtension = chord.tensions.slice().sort((a, b) => b - a)[0];
+  const neoThird = chord.intervals.find(x => x === 3 || x === 4);
+  const neoSeventh = chord.intervals.find(x => x === 10 || x === 11);
+  const neoFifth = chord.intervals.find(x => x === 6 || x === 7 || x === 8);
+  if (isNeoSoulOrGospel && isNeoKeys && explicitExtension !== undefined
+    && neoThird !== undefined && neoSeventh !== undefined && neoFifth !== undefined) {
+    const topTensionIv = explicitExtension % 12;
 
     // 2. Place highest tension at top of right hand strictly within MIDI 72–80
     const topPc = pcOf(chord.rootPc + topTensionIv);
@@ -375,9 +356,9 @@ export function voiceChord(req: VoicingRequest): number[] {
     if (topNote < 72) topNote += 12;
 
     // 3. Build right hand downward
-    const third = chord.intervals.find(x => x === 3 || x === 4 || x === 2 || x === 5) ?? 4;
-    const seventh = chord.intervals.find(x => x === 10 || x === 11 || x === 9) ?? 10;
-    const fifth = chord.intervals.find(x => x === 6 || x === 7 || x === 8) ?? 7;
+    const third = neoThird;
+    const seventh = neoSeventh;
+    const fifth = neoFifth;
 
     const rhCandidates = [seventh, third, fifth].filter(iv => (iv % 12) !== topTensionIv);
     const rhNotes: number[] = [topNote];
@@ -409,15 +390,16 @@ export function voiceChord(req: VoicingRequest): number[] {
   // Dynamic Voicing Expansion for Keyboards (Prompt 9)
   const isKeyboard = VOICING_CLASSIFIERS.piano.test(profile.id || '');
   if (isKeyboard && intensity > 0.8) {
-    // Split chord: Root and 5th in LH (low octave), 3rd, 7th, and tensions in RH
+    // Split the actual chord tones across the keyboard; do not add a fifth the
+    // written harmony does not contain.
     const rootLh = nearestPc(chord.rootPc, profile.centre - 16);
-    const fifthLh = nearestPc((chord.rootPc + 7) % 12, rootLh + 7);
+    const fifth = chord.intervals.find(iv => iv === 6 || iv === 7 || iv === 8);
     
     const wanted = priorityIntervals(chord, req.bassCovered, intensity, isJazzFunkNeo);
     const rhIntervals = wanted.filter(iv => iv !== 0 && iv !== 7);
     const rhNotes = rhIntervals.map(iv => nearestPc(pcOf(chord.rootPc + iv), profile.centre + 4));
     
-    let notes = [rootLh, fifthLh, ...rhNotes].sort((a, b) => a - b);
+    let notes = [rootLh, ...(fifth === undefined ? [] : [nearestPc((chord.rootPc + fifth) % 12, rootLh + fifth)]), ...rhNotes].sort((a, b) => a - b);
     return dedupe(notes.map(n => clampRange(n, profile)));
   }
 
@@ -431,11 +413,7 @@ export function voiceChord(req: VoicingRequest): number[] {
     requestedSize = Math.max(5, requestedSize);
   }
 
-  const chosen = wanted.slice(0, requestedSize);
-
-  while (chosen.length < requestedSize && wanted.length) {
-    chosen.push(wanted[chosen.length % wanted.length] + 12 * Math.floor(chosen.length / wanted.length));
-  }
+  const chosen = wanted.slice(0, Math.min(requestedSize, wanted.length));
 
   const anchors = previous.length ? previous : defaultAnchors(profile, chosen.length, req.style);
   const pcs = chosen.map(iv => pcOf(chord.rootPc + iv));
@@ -648,36 +626,37 @@ export function styleFor(
   intensity: number,
   resolved: ResolvedStyle,
 ): { style: VoicingStyle; size: number } {
-  const calibratedSize = (style: VoicingStyle, fallback: number) => {
-    const role = String(profile.role ?? 'harmony');
-    const [min, max] = resolved.harmony.voicingTonesByRole?.[role]
-      ?? resolved.harmony.preferredVoicingTones
-      ?? [fallback, fallback];
-    return { style, size: Math.max(1, Math.round(min + (max - min) * Math.max(0, Math.min(1, intensity)))) };
+  const calibratedSize = (style: VoicingStyle) => {
+    const melodicRole = /^(lead|melody|voice|bass|low-anchor)$/i.test(String(profile.role ?? ''));
+    const authoredChordTones = new Set([
+      ...chord.intervals,
+      ...(intensity > 0.75 ? chord.tensions : []),
+    ]).size;
+    return { style, size: melodicRole ? 1 : Math.max(1, authoredChordTones) };
   };
   if (chord.isPower) return { style: 'power', size: 3 };
 
   const id = instrumentId;
   if (profile.role === 'pad' || VOICING_CLASSIFIERS.pad.test(id)) {
-    return calibratedSize('spread', intensity > 0.6 ? 5 : 4);
+    return calibratedSize('spread');
   }
   if (VOICING_CLASSIFIERS.organ.test(id)) {
-    return calibratedSize('close', intensity > 0.6 ? 4 : 3);
+    return calibratedSize('close');
   }
   if (VOICING_CLASSIFIERS.powerAmp.test(id)) {
     return { style: 'power', size: 3 };
   }
   if (VOICING_CLASSIFIERS.guitarFamily.test(id)) {
-    return calibratedSize(intensity > 0.55 ? 'close' : 'shell', intensity > 0.55 ? 4 : 3);
+    return calibratedSize(intensity > 0.55 ? 'close' : 'shell');
   }
   if (VOICING_CLASSIFIERS.pianoInstrument.test(id)) {
     const jazzy = resolved.contract.harmonyModel === 'functional' && VOICING_CLASSIFIERS.salsaFunk.test(resolved.name + ' ' + resolved.contract.harmonyVocabulary.join(' '));
-    if (jazzy && intensity < 0.55) return calibratedSize('shell', 3);
-    if (jazzy && intensity > 0.82) return calibratedSize('spread', 8);
-    return calibratedSize('drop2', jazzy ? 5 : (intensity > 0.7 ? 4 : 3));
+    if (jazzy && intensity < 0.55) return calibratedSize('shell');
+    if (jazzy && intensity > 0.82) return calibratedSize('spread');
+    return calibratedSize('drop2');
   }
   if (VOICING_CLASSIFIERS.horn.test(id)) {
-    return calibratedSize('close', intensity > 0.6 ? 4 : 3);
+    return calibratedSize('close');
   }
-  return calibratedSize('close', 3);
+  return calibratedSize('close');
 }

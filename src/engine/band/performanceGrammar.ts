@@ -1,6 +1,14 @@
 import type { ResolvedStyle } from '../../data/styles/schema';
-import { DEFAULT_PHRASE_DEVELOPMENT, DEFAULT_PERFORMANCE_GRAMMAR } from '../../data/performance/performanceGrammar';
 import type { PerformanceAspect, PerformanceInfluence, PhraseDevelopmentProbabilities, PerformanceGrammar } from '../../data/performance/schema/performance-grammar';
+
+const EMPTY_PHRASE_DEVELOPMENT: PhraseDevelopmentProbabilities = {
+  repeatProbability: 0,
+  variationProbability: 0,
+  answerProbability: 0,
+  fillProbability: 0,
+  restProbability: 0,
+  cadenceProbability: 0,
+};
 
 function clamp01(v: number): number {
   return Math.max(0, Math.min(1, v));
@@ -13,7 +21,7 @@ function clamp01(v: number): number {
  * grammar quietly inherited the same interpretation as every other style.
  */
 function phraseDevelopmentForStyle(style: ResolvedStyle): PhraseDevelopmentProbabilities {
-  const result = { ...DEFAULT_PHRASE_DEVELOPMENT };
+  const result = { ...EMPTY_PHRASE_DEVELOPMENT };
   const motifOps = (style.melody?.motifOps ?? []).map(value => value.toLowerCase());
   const contour = (style.melody?.contourArchetypes ?? []).map(value => value.toLowerCase());
   const formLanguage = (style.form?.templates ?? []).flatMap(template => template.value.map(section => `${section.kind} ${section.label}`));
@@ -57,10 +65,12 @@ function phraseDevelopmentForStyle(style: ResolvedStyle): PhraseDevelopmentProba
   }
 
   for (const key of Object.keys(result) as Array<keyof PhraseDevelopmentProbabilities>) {
-    result[key] = Math.max(0.005, result[key]);
+    result[key] = Math.max(0, result[key]);
   }
   const total = Object.values(result).reduce((sum, value) => sum + value, 0);
-  for (const key of Object.keys(result) as Array<keyof PhraseDevelopmentProbabilities>) result[key] /= total;
+  if (total > 0) {
+    for (const key of Object.keys(result) as Array<keyof PhraseDevelopmentProbabilities>) result[key] /= total;
+  }
   return result;
 }
 
@@ -126,26 +136,29 @@ export function resolveHybridGrammar(
     ...Object.keys(guest.densityByRole ?? {}),
   ]);
   for (const role of allRoles) {
-    const hD = host.densityByRole?.[role] ?? { min: 2, max: 8 };
-    const gD = guest.densityByRole?.[role] ?? hD;
-    mergedDensityByRole[role] = {
-      min: Math.round(lerp(hD.min, gD.min, densityW)),
-      max: Math.round(lerp(hD.max, gD.max, densityW)),
-    };
+    const hD = host.densityByRole?.[role];
+    const gD = guest.densityByRole?.[role];
+    if (hD && gD) {
+      mergedDensityByRole[role] = {
+        min: Math.round(lerp(hD.min, gD.min, densityW)),
+        max: Math.round(lerp(hD.max, gD.max, densityW)),
+      };
+    } else if (hD) mergedDensityByRole[role] = { ...hD };
+    else if (gD && densityW > 0) mergedDensityByRole[role] = { ...gD };
   }
 
   // 5. Phrase development aspect
   const phraseW = getW('phraseDevelopment');
-  const hDev = host.phraseDevelopment ?? DEFAULT_PHRASE_DEVELOPMENT;
-  const gDev = guest.phraseDevelopment ?? hDev;
-  const mergedPhraseDev: PhraseDevelopmentProbabilities = {
+  const hDev = host.phraseDevelopment;
+  const gDev = guest.phraseDevelopment;
+  const mergedPhraseDev: PhraseDevelopmentProbabilities | undefined = hDev && gDev ? {
     repeatProbability: lerp(hDev.repeatProbability, gDev.repeatProbability, phraseW),
     variationProbability: lerp(hDev.variationProbability, gDev.variationProbability, phraseW),
     answerProbability: lerp(hDev.answerProbability, gDev.answerProbability, phraseW),
     fillProbability: lerp(hDev.fillProbability, gDev.fillProbability, phraseW),
     restProbability: lerp(hDev.restProbability, gDev.restProbability, phraseW),
     cadenceProbability: lerp(hDev.cadenceProbability, gDev.cadenceProbability, phraseW),
-  };
+  } : hDev ?? (phraseW > 0 ? gDev : undefined);
 
   // Negative vocabulary belongs to each style. A host rule must not erase the
   // guest articulation or variation that the student explicitly imports.
@@ -211,12 +224,13 @@ export function resolveHybridGrammar(
 
   // 7. Microtiming
   const microW = getW('microtiming');
-  const hMicro = host.microtiming ?? { amount: 0.015, tendency: 'straight' };
-  const gMicro = guest.microtiming ?? hMicro;
-  const mergedMicrotiming = {
-    amount: lerp(hMicro.amount, gMicro.amount, microW),
-    tendency: microW > 0.5 ? gMicro.tendency ?? hMicro.tendency : hMicro.tendency,
-  };
+  const hMicro = host.microtiming;
+  const gMicro = guest.microtiming;
+  const mergedMicrotiming = hMicro && gMicro
+    ? { amount: lerp(hMicro.amount, gMicro.amount, microW), tendency: microW > 0.5 ? gMicro.tendency : hMicro.tendency }
+    : hMicro ? { ...hMicro }
+      : gMicro && microW > 0 ? { ...gMicro, amount: gMicro.amount * microW }
+        : undefined;
 
   return {
     worldId: host.worldId ?? guest?.worldId,
@@ -247,7 +261,6 @@ type PerformanceGrammarSource = Pick<import('../../engine/style/contracts').Worl
  * Extracts or constructs a PerformanceGrammar from a style specification.
  */
 export function getPerformanceGrammar(style: ResolvedStyle | PerformanceGrammarSource, _role?: string): PerformanceGrammar {
-  if (!style) return DEFAULT_PERFORMANCE_GRAMMAR;
   const isResolvedStyle = 'contract' in style;
   const source = isResolvedStyle ? style.contract : style;
   const rhythm = isResolvedStyle ? style.rhythm : undefined;
@@ -256,24 +269,23 @@ export function getPerformanceGrammar(style: ResolvedStyle | PerformanceGrammarS
   const styleId = isResolvedStyle ? style.id : ('styleId' in source ? source.styleId : undefined);
 
   const baseGrammar: PerformanceGrammar = source.performanceGrammar ?? {
-    ...DEFAULT_PERFORMANCE_GRAMMAR,
-    preserveAuthoredRhythm: source.pulseModel === 'timeline-cycle' ? 0.95 : 0.85,
-    allowDerivedAttacks: source.pulseModel === 'machine-grid' ? 0.15 : 0.35,
-    allowDerivedPitch: source.harmonyModel === 'blues-form' ? 0.45 : 0.25,
-    allowCrossStyleSubdivision: 0.15,
+    preserveAuthoredRhythm: 1,
+    allowDerivedAttacks: 0,
+    allowDerivedPitch: 0,
+    allowCrossStyleSubdivision: 0,
   };
   const phraseDevelopment = source.performanceGrammar?.phraseDevelopment
-    ?? (isResolvedStyle ? phraseDevelopmentForStyle(style) : DEFAULT_PHRASE_DEVELOPMENT);
+    ?? (isResolvedStyle ? phraseDevelopmentForStyle(style) : EMPTY_PHRASE_DEVELOPMENT);
 
   const forbidden = Array.isArray(source.forbidden) ? source.forbidden : [];
   const mergedForbidden = Array.from(new Set([...(baseGrammar.forbiddenInterpretations ?? []), ...forbidden]));
 
   // Microtiming
-  const microTendency = rhythm?.microtimingFeel ?? source.groove?.name?.toLowerCase() ?? 'straight';
-  const microtiming = {
-    amount: (rhythm?.humanizeJitterMs ?? source.groove?.humanizeMs ?? 7) / 1000,
-    tendency: microTendency,
-  };
+  const microTendency = rhythm?.microtimingFeel ?? source.groove?.name?.toLowerCase();
+  const jitterMs = rhythm?.humanizeJitterMs ?? source.groove?.humanizeMs;
+  const microtiming = baseGrammar.microtiming ?? (jitterMs !== undefined || microTendency !== undefined
+    ? { amount: (jitterMs ?? 0) / 1000, ...(microTendency ? { tendency: microTendency } : {}) }
+    : undefined);
 
   // Articulations from style if available
   const styleArt = articulationGrammar ?? {};

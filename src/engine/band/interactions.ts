@@ -24,7 +24,10 @@ export function interpretRelationships(notes: PerfNote[], sheet: Sheet, region: 
       }
       if (note.authoredPitch || note.percussion || !/lead|melody|counterline|voice/.test(note.soundContext?.role ?? track.role)) continue;
       if (!/answer|response|follow|mirror|complement|counter/.test(kind)) continue;
-      const chord = parseChord(sheet.measures[note.bar].chord), pcs = new Set((chord.intervals ?? [0,4,7]).map(i => ((chord.rootPc ?? 0) + i) % 12));
+      const measureChord = sheet.measures.find(measure => measure.index === note.bar)?.chord;
+      const harmonicChord = note.harmonicChord ?? measureChord;
+      if (!harmonicChord) throw new Error(`Response note ${note.attackId ?? note.trackId} has no resolved harmony in bar ${note.bar + 1}`);
+      const chord = parseChord(harmonicChord), pcs = new Set(chord.intervals.map(i => (chord.rootPc + i) % 12));
       const candidates: number[] = [];
       for (let midi = profile.capabilities.comfortableLowMidi; midi <= profile.capabilities.comfortableHighMidi; midi++) {
         if (pcs.has(midi % 12) && (!/complement|counter/.test(kind) || midi % 12 !== call.midi % 12)) candidates.push(midi);

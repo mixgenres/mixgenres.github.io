@@ -10,7 +10,8 @@ export interface InstrumentDialect {
   instrumentId: string;
   name: string;
   family: string;
-  performanceMode: PerformanceMode;
+  /** Omitted for context-free instrument-native playback; genre contracts supply it when known. */
+  performanceMode?: PerformanceMode;
   defaultTechnique: string;
   allowedTechniques: string[];
   pluckPositionOverride?: number;
@@ -23,8 +24,8 @@ export interface InstrumentDialect {
   micProximityPreset?: 'close-mic' | 'room-ambient' | 'direct-box' | 'hall-stage';
   bendGlideMs?: number;
   courses?: number;
-  bodyConstruction?: 'wood-box' | 'gourd' | 'skin-faced' | 'board' | 'solid-electric';
-  excitationType?: 'plectrum' | 'nail' | 'fingerpad' | 'hard-pick' | 'hammer';
+  bodyConstruction?: 'wood-box' | 'gourd' | 'skin-faced' | 'board' | 'solid-electric' | 'metal-shell' | 'brass-tube';
+  excitationType?: 'plectrum' | 'nail' | 'fingerpad' | 'hard-pick' | 'hammer' | 'stick' | 'mallet' | 'breath' | 'bow';
   sympatheticStrings?: boolean;
   /** A physical setup or electronic patch selected within the canonical instrument. */
   variantId?: string;
@@ -208,7 +209,7 @@ function base(
   forbidden: string[],
   groove: WorldContract['groove'],
   percussion: PercussionDialect,
-  opts: Partial<Pick<WorldContract,'cycleLength'|'subdivision'|'timelineRequired'|'harmonicRhythm'|'harmonyVocabulary'|'accentGrammar'|'articulationGrammar'|'microtiming'|'interactionModel' | 'energyMappings' | 'transitionGrammar' | 'approaches' | 'performanceIdioms' | 'improvisationGrammar' | 'instrumentDialects'>> & { mixCharacter?: MixCharacter } = {},
+  opts: Partial<Pick<WorldContract,'cycleLength'|'subdivision'|'timelineRequired'|'timelineGrid'|'harmonicRhythm'|'harmonyVocabulary'|'accentGrammar'|'articulationGrammar'|'microtiming'|'interactionModel' | 'energyMappings' | 'transitionGrammar' | 'approaches' | 'performanceIdioms' | 'improvisationGrammar' | 'instrumentDialects' | 'performanceMode'>> & { mixCharacter?: MixCharacter } = {},
 ): WorldContract {
   const pm = pitchModel.toLowerCase();
   const pitchIntervals = pm.includes('pentatonic') ? [0,2,4,7,9]
@@ -217,14 +218,11 @@ function base(
     : pm.includes('mixolydian') ? [0,2,4,5,7,9,10]
     : pm.includes('minor') ? [0,2,3,5,7,8,10]
     : [0,2,4,5,7,9,11];
-  const accentMap = Array.from({length: Math.max(8, opts.subdivision ?? 16)}, (_, i) => {
-    if (timeline !== 'none' && (timeline.includes('clave') || timeline.includes('3+3+2'))) {
-      const grid = timeline.includes('3+3+2') ? [0,3,6,8] : [0,2,5,8,10,12,14];
-      return grid.includes(i) ? 1 : 0.58;
-    }
-    if (i % Math.max(1, Math.round((opts.subdivision ?? 16) / 4)) === 0) return 1;
-    return i % 2 === 0 ? 0.72 : 0.52;
-  });
+  const authoredTimelineGrid = opts.timelineGrid
+    ?? (timeline.includes('clave') ? [0,2,5,8,10,12,14]
+      : timeline.includes('3+3+2') ? [0,3,6,8] : []);
+  const accentMap = Array.from({ length: Math.max(8, opts.subdivision ?? 16) }, (_, i) =>
+    authoredTimelineGrid.length ? (authoredTimelineGrid.includes(i) ? 1 : 0.58) : 1);
   const transitionGrammar = opts.transitionGrammar ?? { byDelta: { build: ['fill'], drop: ['drop-out'], hold: [] }, types: ['fill', 'drop-out'], onEnergyRise: 'fill', onEnergyFall: 'drop-out', authoredPriority: true };
   const approaches = opts.approaches ?? {
       bass: { id: bass.style === 'walking' ? 'walking' : bass.style, tags: [bass.style, 'bass'] },
@@ -242,7 +240,7 @@ function base(
   };
   return {
     pulseModel, meter, cycleLength: opts.cycleLength ?? 1, energyMappings, subdivision: opts.subdivision ?? 16,
-    timeline, timelineGrid: timeline === 'none' ? [] : (timeline.includes('clave') ? [0,2,5,8,10,12,14] : timeline.includes('3+3+2') ? [0,3,6,8] : []), timelineRequired: opts.timelineRequired ?? false,
+    timeline, timelineGrid: opts.timelineGrid ?? authoredTimelineGrid, timelineRequired: opts.timelineRequired ?? false,
     microtiming: opts.microtiming ?? {
       referenceTempo: 100, beatRelative: true,
       byRole: { bass: groove.roleLean.bass ? [groove.roleLean.bass] : [0], comp: [groove.roleLean.comp ?? 0], lead: [groove.roleLean.lead ?? 0], percussion: [groove.roleLean.perc ?? 0] },
@@ -279,6 +277,7 @@ function base(
       mixCharacter: opts.mixCharacter ?? { dryness: 0.6, bassForward: 0.5, width: 0.5, brightness: 0.5, saturationType: 'tape', compressionRatio: 2.0, subHarmonics: 0.0, transientSnap: 0.3 },
     },
     instrumentDialects: opts.instrumentDialects ?? {},
+    performanceMode: opts.performanceMode,
     forbidden,
     groove,
     percussion,
@@ -397,22 +396,6 @@ G['japanese-rock'] = simple('japanese-rock','4/4','metric-hierarchical','driving
 // Explicit Cultural Overrides for Mastering & Spatialization
 // Traditional instrument worlds use the same resolved SongStyle contract as
 // the western genre set, so physical instrument dialects remain authoritative.
-for (const [id, palette, production] of [
-  ['arabic', ['oud', 'qanun', 'ney', 'darbuka'], 'modal ensemble with ornamented melodic lines'],
-  ['armenian', ['duduk', 'qanun', 'violin', 'darbuka'], 'warm double reed and bowed melody'],
-  ['indian-classical', ['tanpura', 'sarangi', 'bansuri', 'tabla'], 'tonic drone with ornamented melodic lead'],
-  ['korean-traditional', ['gayageum', 'haegeum', 'janggu'], 'heterophonic zither and bowed lead'],
-  ['gamelan', ['gamelan-metallophone', 'kendang', 'gongs'], 'paired non-equal-tempered metallophones'],
-  ['west-african', ['djembe', 'shekere', 'talking-drum', 'balafon', 'kora'], 'interlocking drum and tuned-bar ensemble'],
-  ['afro-colombian', ['marimba-de-chonta', 'guacharaca', 'tambora', 'congas'], 'currulao marimba and interlocking percussion'],
-] as const) {
-  const seed = G.folk ?? G.jazz;
-  G[id] = {
-    ...seed,
-    ensemble: { motor: palette.slice(0, 3).join(' + '), lead: palette[0], support: palette.slice(1).join(' + ') },
-    timbreSpace: { ...seed.timbreSpace, palette: [...palette], production },
-  };
-}
 G['reggae-dub'] = {
   ...G.reggae,
   timbreSpace: {
@@ -552,90 +535,136 @@ for (const [genreId, definition] of Object.entries(GENRE_SOLO_DEFINITIONS)) {
   if (G[genreId]) G[genreId].soloDefinition = definition;
 }
 
-// Genre folders own the public taxonomy. Older curated contracts remain the
-// richer override where present; this materializes a complete safe contract
-// for every folder-discovered world without a parallel handwritten ID list.
+interface CatalogContractProfile {
+  pulseModel: PulseModel;
+  interactionModel: InteractionModel;
+  bassStyle: BassDialect['style'];
+  cycleLength: number;
+  timelineRequired: boolean;
+  timelineGrid: number[];
+  performanceMode: PerformanceMode;
+  forbidWesternBackbeat: boolean;
+}
+
+// Worlds without a hand-authored contract declare these core identities here.
+// The rest is compiled from that world's selected style and local patterns;
+// no other genre is used as a template.
+const CATALOG_CONTRACT_PROFILES: Record<string, CatalogContractProfile> = {
+  afrobeat: { pulseModel:'timeline-cycle', interactionModel:'interlock', bassStyle:'rootFifth', cycleLength:2, timelineRequired:true, timelineGrid:[0,3,6,8], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:false },
+  amapiano: { pulseModel:'machine-grid', interactionModel:'interlock', bassStyle:'sub', cycleLength:4, timelineRequired:false, timelineGrid:[], performanceMode:'hybrid', forbidWesternBackbeat:false },
+  ambient: { pulseModel:'free-rubato', interactionModel:'counterpoint', bassStyle:'rootFifth', cycleLength:4, timelineRequired:false, timelineGrid:[], performanceMode:'hybrid', forbidWesternBackbeat:false },
+  andean: { pulseModel:'timeline-cycle', interactionModel:'interlock', bassStyle:'rootFifth', cycleLength:2, timelineRequired:false, timelineGrid:[], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:true },
+  arabic: { pulseModel:'long-cycle', interactionModel:'counterpoint', bassStyle:'rootFifth', cycleLength:2, timelineRequired:false, timelineGrid:[], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:true },
+  bass: { pulseModel:'machine-grid', interactionModel:'unison', bassStyle:'sub', cycleLength:2, timelineRequired:false, timelineGrid:[], performanceMode:'programmed-electronic', forbidWesternBackbeat:false },
+  bollywood: { pulseModel:'metric-hierarchical', interactionModel:'homophonic', bassStyle:'rootFifth', cycleLength:4, timelineRequired:false, timelineGrid:[], performanceMode:'hybrid', forbidWesternBackbeat:false },
+  chinese: { pulseModel:'long-cycle', interactionModel:'counterpoint', bassStyle:'root', cycleLength:2, timelineRequired:false, timelineGrid:[], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:true },
+  cinematic: { pulseModel:'free-rubato', interactionModel:'counterpoint', bassStyle:'rootFifth', cycleLength:4, timelineRequired:false, timelineGrid:[], performanceMode:'hybrid', forbidWesternBackbeat:false },
+  classical: { pulseModel:'metric-hierarchical', interactionModel:'counterpoint', bassStyle:'rootFifth', cycleLength:4, timelineRequired:false, timelineGrid:[], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:false },
+  dangdut: { pulseModel:'timeline-cycle', interactionModel:'interlock', bassStyle:'tumbao', cycleLength:2, timelineRequired:true, timelineGrid:[0,4,8,12], performanceMode:'hybrid', forbidWesternBackbeat:false },
+  'desert-blues': { pulseModel:'metric-hierarchical', interactionModel:'counterpoint', bassStyle:'rootFifth', cycleLength:2, timelineRequired:false, timelineGrid:[], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:false },
+  ethiopian: { pulseModel:'timeline-cycle', interactionModel:'interlock', bassStyle:'rootFifth', cycleLength:2, timelineRequired:true, timelineGrid:[0,3,6,8], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:false },
+  gamelan: { pulseModel:'long-cycle', interactionModel:'interlock', bassStyle:'root', cycleLength:4, timelineRequired:true, timelineGrid:[0,4,8,12], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:true },
+  gnawa: { pulseModel:'timeline-cycle', interactionModel:'interlock', bassStyle:'root', cycleLength:2, timelineRequired:true, timelineGrid:[0,4,8,12], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:false },
+  'indian-classical': { pulseModel:'long-cycle', interactionModel:'counterpoint', bassStyle:'root', cycleLength:4, timelineRequired:true, timelineGrid:[0,4,8,12], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:true },
+  japanese: { pulseModel:'long-cycle', interactionModel:'counterpoint', bassStyle:'root', cycleLength:2, timelineRequired:true, timelineGrid:[0,4,8,12], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:true },
+  korean: { pulseModel:'long-cycle', interactionModel:'counterpoint', bassStyle:'root', cycleLength:2, timelineRequired:true, timelineGrid:[0,4,8,12], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:true },
+  latin: { pulseModel:'timeline-cycle', interactionModel:'interlock', bassStyle:'tumbao', cycleLength:2, timelineRequired:true, timelineGrid:[0,2,5,8,10,12,14], performanceMode:'hybrid', forbidWesternBackbeat:false },
+  mbalax: { pulseModel:'timeline-cycle', interactionModel:'interlock', bassStyle:'rootFifth', cycleLength:2, timelineRequired:true, timelineGrid:[0,3,6,8], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:false },
+  mexican: { pulseModel:'metric-hierarchical', interactionModel:'homophonic', bassStyle:'rootFifth', cycleLength:3, timelineRequired:false, timelineGrid:[], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:false },
+  persian: { pulseModel:'long-cycle', interactionModel:'counterpoint', bassStyle:'root', cycleLength:2, timelineRequired:true, timelineGrid:[0,4,8,12], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:true },
+  pop: { pulseModel:'metric-hierarchical', interactionModel:'homophonic', bassStyle:'rootFifth', cycleLength:4, timelineRequired:false, timelineGrid:[], performanceMode:'hybrid', forbidWesternBackbeat:false },
+  punk: { pulseModel:'machine-grid', interactionModel:'unison', bassStyle:'riff', cycleLength:1, timelineRequired:false, timelineGrid:[], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:false },
+  qawwali: { pulseModel:'long-cycle', interactionModel:'interlock', bassStyle:'rootFifth', cycleLength:4, timelineRequired:true, timelineGrid:[0,4,8,12], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:false },
+  soukous: { pulseModel:'timeline-cycle', interactionModel:'interlock', bassStyle:'rootFifth', cycleLength:2, timelineRequired:true, timelineGrid:[0,3,6,8], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:false },
+  steppe: { pulseModel:'long-cycle', interactionModel:'counterpoint', bassStyle:'root', cycleLength:2, timelineRequired:true, timelineGrid:[0,4,8,12], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:true },
+  taarab: { pulseModel:'timeline-cycle', interactionModel:'interlock', bassStyle:'rootFifth', cycleLength:2, timelineRequired:true, timelineGrid:[0,2,5,8,10,12,14], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:false },
+  turkish: { pulseModel:'additive', interactionModel:'interlock', bassStyle:'rootFifth', cycleLength:1, timelineRequired:true, timelineGrid:[0,3,6,8], performanceMode:'acoustic-ensemble', forbidWesternBackbeat:false },
+  weird: { pulseModel:'free-rubato', interactionModel:'counterpoint', bassStyle:'rootFifth', cycleLength:4, timelineRequired:false, timelineGrid:[], performanceMode:'hybrid', forbidWesternBackbeat:false },
+};
+
 for (const world of GENRE_WORLDS) {
   if (G[world.id]) continue;
-  const seed = world.styleDefinitions.find(style => style.id === world.homeStyleId) ?? world.styleDefinitions[0];
+  const profile = CATALOG_CONTRACT_PROFILES[world.id];
+  if (!profile) throw new Error(`Missing authored contract profile for ${world.id}`);
+  const seed = world.styleDefinitions.find(style => style.id === world.homeStyleId);
   const calibration = seed?.calibration;
-  if (!seed || !calibration) continue;
-  const electronic = /house|electronic|ambient|bass|industrial|hip-hop|weird|cinematic|reggaeton|amapiano/i.test(world.id);
-  const template = G[electronic ? 'electronic' : /salsa|timba|latin|brazilian|bachata|zouk|kizomba/i.test(world.id) ? 'salsa' : /jazz|swing|blues/i.test(world.id) ? 'jazz' : 'folk'];
-  const contract = structuredClone(template);
-  const meter = seed.preferredMeters[0] ?? '4/4';
-  const machine = /house|electronic|ambient|bass|industrial|hip-hop|weird|cinematic|reggaeton|amapiano/i.test(world.id);
-  const bassStyle: BassDialect['style'] = /salsa|timba|latin|bachata|kizomba|zouk/i.test(world.id) ? 'tumbao'
-    : /jazz|swing|blues/i.test(world.id) ? 'walking'
-      : /house/i.test(world.id) ? 'house'
-        : /reggaeton/i.test(world.id) ? 'dembow'
-          : machine ? 'sub' : 'riff';
-  contract.pulseModel = machine ? 'machine-grid'
-    : /tango|flamenco|salsa|timba|gamelan|indian|arabic|taarab/i.test(world.id) ? 'timeline-cycle'
-      : /ambient|weird|cinematic/i.test(world.id) ? 'free-rubato' : 'metric-hierarchical';
-  contract.meter = meter;
-  contract.subdivision = /12\/8|12-count/i.test(meter) ? 12 : /2\/4/.test(meter) ? 8 : 16;
-  contract.cycleLength = /clave|compás|compas|tala|gamelan/i.test(seed.signatureCell ?? '') ? 2 : 1;
-  contract.timeline = seed.signatureCell ?? 'style-owned phrase grammar';
-  contract.timelineRequired = /clave|compás|compas|timeline|tala|gamelan|cycle/i.test(contract.timeline);
-  contract.timelineGrid = contract.timelineRequired ? Array.from({ length: contract.subdivision }, (_, index) => index)
-    .filter(index => index === 0 || index % 3 === 0) : [];
-  contract.harmonyModel = !calibration.harmony.requiresChords ? 'modal-drone'
-    : /power chord|riff/i.test(calibration.harmony.chordQualities.join(' ')) ? 'power-riff'
-      : /blues/i.test(`${world.id} ${seed.name}`) ? 'blues-form' : 'functional';
-  contract.harmonyVocabulary = calibration.harmony.chordQualities;
-  contract.harmonicRhythm = calibration.harmony.harmonicRhythm;
-  contract.pitchModel = calibration.harmony.scales.join(' / ') || seed.scaleMode || 'style-defined';
-  contract.tuningSystem = calibration.harmony.pitchSystem || seed.tuningSystem || world.tuningSystem || '12-tet';
-  contract.bass = { ...contract.bass, style: bassStyle, rhythmJob: calibration.harmony.bassChordInteraction,
-    pitchJob: calibration.harmony.scales.join(', '), articulation: calibration.techniques.bass ?? [] };
-  contract.form = seed.arrangementSections?.map(section => section.label) ?? ['intro', 'theme', 'development', 'return', 'coda'];
-  contract.ensemble = Object.fromEntries(Object.entries(calibration.roles).map(([role, preference]) => [role, preference.preferredInstruments.join(' / ')]));
-  contract.timbreSpace.palette = seed.characteristicInstruments;
-  contract.timbreSpace.production = `${seed.name}: ${seed.description}`;
-  const inheritedMix = contract.timbreSpace.mixCharacter ?? { dryness: .6, bassForward: .5, width: .5, brightness: .5 };
-  const authoredMix = calibration.mix.character;
-  contract.timbreSpace.mixCharacter = {
-    ...inheritedMix,
-    ...(authoredMix ? {
-      dryness: authoredMix.dryness ?? inheritedMix.dryness,
-      bassForward: authoredMix.bassForward ?? inheritedMix.bassForward,
-      width: authoredMix.width ?? inheritedMix.width,
-      brightness: authoredMix.brightness ?? inheritedMix.brightness,
-      compressionRatio: authoredMix.compressionRatio ?? inheritedMix.compressionRatio,
-      compressionAttackSeconds: authoredMix.compressionAttackSeconds ?? inheritedMix.compressionAttackSeconds,
-      compressionReleaseSeconds: authoredMix.compressionReleaseSeconds ?? inheritedMix.compressionReleaseSeconds,
-      drumSaturation: authoredMix.drumSaturation ?? inheritedMix.drumSaturation,
-      drumParallelCompression: authoredMix.drumParallelCompression ?? inheritedMix.drumParallelCompression,
-      saturationType: authoredMix.saturationType ?? inheritedMix.saturationType,
-      subHarmonics: authoredMix.subHarmonics ?? inheritedMix.subHarmonics,
-      subEnhancement: authoredMix.subEnhancement ?? inheritedMix.subEnhancement,
-      transientSnap: authoredMix.transientSnap ?? inheritedMix.transientSnap,
-      sidechainDucking: authoredMix.sidechainDucking ?? inheritedMix.sidechainDucking,
-      delaySend: authoredMix.delaySend ?? inheritedMix.delaySend,
-      delayTimeSeconds: authoredMix.delayTimeSeconds ?? inheritedMix.delayTimeSeconds,
-      delayFeedback: authoredMix.delayFeedback ?? inheritedMix.delayFeedback,
-      delayToneHz: authoredMix.delayToneHz ?? inheritedMix.delayToneHz,
-      reverbType: authoredMix.reverbType ?? inheritedMix.reverbType,
-    } : {}),
+  if (!seed || !calibration || !seed.arrangementSections?.length) throw new Error(`Incomplete genre contract source: ${world.id}`);
+  const sourceTuningSystem = seed.tuningSystem ?? world.tuningSystem;
+  const rawMixCharacter = calibration.mix.character;
+  if (!sourceTuningSystem || !calibration.harmony.scales.length || !rawMixCharacter
+    || rawMixCharacter.dryness === undefined || rawMixCharacter.bassForward === undefined
+    || rawMixCharacter.width === undefined || rawMixCharacter.brightness === undefined || !seed.scaleMode) {
+    throw new Error(`Incomplete authored harmony, tuning, or mix for ${world.id}/${seed.id}`);
+  }
+  const mixCharacter: MixCharacter = rawMixCharacter as MixCharacter;
+  const meter = seed.preferredMeters[0];
+  const subdivision = /12\/8|12-count/i.test(meter) ? 12 : /2\/4/.test(meter) ? 8 : 16;
+  const homePatterns = world.patterns.filter(pattern => pattern.styleIds?.includes(seed.id));
+  if (!homePatterns.length) throw new Error(`No authored patterns for ${world.id}/${seed.id}`);
+  const percussionInstruments = calibration.roles.percussion?.preferredInstruments ?? [];
+  const hitTypes = [...new Set(homePatterns.flatMap(pattern => [
+    ...(pattern.hitGrid ?? []), ...(pattern.events ?? []).map(event => event.hitType ?? ''),
+  ]).filter(Boolean))];
+  const localTransitions: TransitionType[] = [];
+  if (homePatterns.some(pattern => ['fill','cadence'].includes(pattern.category))) localTransitions.push('fill');
+  if (homePatterns.some(pattern => pattern.category === 'transition')) localTransitions.push('turnaround');
+  if (homePatterns.some(pattern => pattern.category === 'break')) localTransitions.push('drop-out');
+  if (homePatterns.some(pattern => pattern.tags?.some(tag => /arrastre/i.test(tag)))) localTransitions.push('arrastre');
+  if (homePatterns.some(pattern => pattern.tags?.some(tag => /corte/i.test(tag)))) localTransitions.push('corte');
+  const transitionGrammar: TransitionGrammar = {
+    byDelta: {
+      build: localTransitions.filter(type => ['fill','turnaround','arrastre'].includes(type)),
+      drop: localTransitions.filter(type => ['drop-out','corte'].includes(type)),
+      hold: [],
+    },
+    types: localTransitions,
+    authoredPriority: true,
   };
-  contract.forbidden = calibration.patterns.forbidden ?? [];
-  contract.instrumentDialects = {};
-  contract.articulationGrammar = Object.fromEntries(Object.entries(calibration.techniques));
-  contract.groove = { ...contract.groove,
-    swing: (seed.grooveMechanics?.swingPercentage ?? 50) / 100,
-    anticipationMs: (seed.grooveMechanics?.anticipationOffsetSteps ?? 0) * 12,
-  };
-  contract.percussion = { ...contract.percussion,
-    kitMode: /machine|electronic|drum|percussion/i.test(`${world.id} ${seed.name}`) ? 'hybrid' : 'none',
-    forbidWesternBackbeat: /flamenco|tango|indian-classical|gamelan|chinese|japanese|korean|arabic|persian/i.test(world.id),
-    forbidSectionCrash: true,
-  };
-  contract.soloDefinition = structuredClone(GENRE_SOLO_DEFINITIONS.folk);
-  contract.soloDefinition.modes.accompanied.name = `${world.name} featured passage`;
-  contract.soloDefinition.modes.accompanied.description = `A featured line follows the selected ${seed.name} style over its authored accompaniment.`;
-  contract.soloDefinition.modes.unaccompanied.description = `The selected ${seed.name} style carries a solo passage without ensemble backing.`;
-  contract.soloDefinition.modes.trading.description = `Featured parts exchange phrases within the selected ${seed.name} style.`;
+  const approaches = Object.fromEntries(Object.keys(calibration.roles).map(role => {
+    const local = homePatterns.filter(pattern => pattern.roles.some(item => String(item).toLowerCase() === role.toLowerCase()));
+    const tags = [...new Set(local.flatMap(pattern => pattern.tags ?? []))];
+    return [role, { id: `${world.id}-${role}`, tags: tags.length ? tags : [seed.id, role] }];
+  }));
+  const accentGrammar = Object.fromEntries(Object.keys(calibration.roles).map(role => {
+    const names = homePatterns.filter(pattern => pattern.roles.some(item => String(item).toLowerCase() === role.toLowerCase()))
+      .map(pattern => pattern.shortName ?? pattern.name).slice(0, 4);
+    return names.length ? [role, names.join(' / ')] : [];
+  }));
+  const mechanics = seed.grooveMechanics;
+  const soloDefinition = GENRE_SOLO_DEFINITIONS[world.id];
+  if (!soloDefinition) throw new Error(`Missing authored solo definition for ${world.id}`);
+  const tuningSystem = seed.tuningSystem ?? world.tuningSystem;
+  if (!tuningSystem) throw new Error(`Missing authored tuning system for ${world.id}/${seed.id}`);
+  if (!seed.harmonyModel) throw new Error(`Missing authored harmony model for ${world.id}/${seed.id}`);
+  const contract = base(profile.pulseModel, meter, seed.signatureCell ?? 'none', seed.harmonyModel,
+    calibration.harmony.scales.join(' / '), tuningSystem,
+    { style: profile.bassStyle, rhythmJob: calibration.harmony.bassChordInteraction,
+      pitchJob: calibration.harmony.scales.join(', '), articulation: calibration.techniques.bass ?? [] },
+    seed.arrangementSections.map(section => section.label),
+    Object.fromEntries(Object.entries(calibration.roles).map(([role, value]) => [role, value.preferredInstruments.join(' / ')])),
+    [...seed.characteristicInstruments], `${seed.name}: ${seed.description}`,
+    [...(calibration.patterns.forbidden ?? [])],
+    { name: mechanics?.microtimingFeel ?? seed.name, swing: (mechanics?.swingPercentage ?? 50) / 100,
+      swingUnit: subdivision === 12 ? 8 : 16, lean: 0, roleLean: {}, humanizeMs: mechanics?.humanizeJitterMs ?? 0,
+      humanizeVel: 0, accentDepth: 0, pocket: z(subdivision), anticipationMs: (mechanics?.anticipationOffsetSteps ?? 0) * 12, dynamicRange: 1 },
+    { kitMode: percussionInstruments.includes('drums') ? 'full' : 'none', allowedHitTypes: hitTypes,
+      forbidWesternBackbeat: profile.forbidWesternBackbeat, forbidSectionCrash: !hitTypes.some(hit => /crash/i.test(hit)),
+      allowTomFills: hitTypes.some(hit => /tom|roll/i.test(hit)), ride: hitTypes.some(hit => /ride/i.test(hit)) },
+    { cycleLength: profile.cycleLength, subdivision, timelineRequired: profile.timelineRequired,
+      timelineGrid: profile.timelineGrid, harmonicRhythm: calibration.harmony.harmonicRhythm,
+      harmonyVocabulary: [...calibration.harmony.chordQualities], accentGrammar,
+      articulationGrammar: Object.fromEntries(Object.entries(calibration.techniques)), interactionModel: profile.interactionModel,
+      transitionGrammar, approaches, instrumentDialects: seed.instrumentDialects,
+      improvisationGrammar: {
+        scaleMode: seed.scaleMode,
+        targetToneStrategy: calibration.harmony.requiresChords ? 'chord-tone-led phrase' : 'tonic-and-drone anchor',
+        phraseStages: ['state','rest'], phraseBars: soloDefinition.modes.accompanied.phraseBars,
+      },
+      microtiming: { referenceTempo: Math.round((seed.tempoRange[0] + seed.tempoRange[1]) / 2), beatRelative: true,
+        byRole: {}, jitterMs: mechanics?.humanizeJitterMs ?? 0 },
+      performanceIdioms: { bluesRockLeadMinorThirdBend: false, dropPortamento: false, leadRubato: false },
+      performanceMode: profile.performanceMode, mixCharacter });
+  contract.soloDefinition = GENRE_SOLO_DEFINITIONS[world.id];
   G[world.id] = contract;
 }
 
@@ -663,7 +692,7 @@ dialectsFor('drum-and-bass', { 'synth:bass': { patchId: 'bass-lead' }, 'synth:pa
 dialectsFor('industrial', { 'synth:lead': { patchId: 'square-lead' }, 'synth:pad': { patchId: 'noise-transition' }, guitar: { variantId: 'solid-electric', drive: 0.85 } });
 dialectsFor('indian-classical', { tanpura: { allowedTechniques: ['cyclic-drone','jawari-pluck','tuning-to-tonic'] }, sarangi: { allowedTechniques: ['meend','gamaka','bowed-ornament','sympathetic-resonance'] }, 'synth:pad': { patchId: 'ambient-drone' } });
 dialectsFor('arabic', { qanun: { allowedTechniques: ['tremolo','trill','glissando','ornament','microtonal-inflection'] }, ney: { allowedTechniques: ['breath-phrase','microtonal-inflection','ornament','glissando'] } });
-dialectsFor('korean-traditional', { gayageum: { allowedTechniques: ['vibrato','bend','glissando','plucked-ornament'] }, haegeum: { allowedTechniques: ['continuous-pitch','vibrato','ornament','glissando'] } });
+dialectsFor('korean', { gayageum: { allowedTechniques: ['vibrato','bend','glissando','plucked-ornament'] }, haegeum: { allowedTechniques: ['continuous-pitch','vibrato','ornament','glissando'] } });
 dialectsFor('gamelan', { 'gamelan-metallophone': { allowedTechniques: ['damping','interlocking-pattern','ornament','paired-tuning'] }, kendang: { allowedTechniques: ['open-tone','damped-tone','slap','roll','tempo-cue'] } });
 dialectsFor('west-african', { djembe: { allowedTechniques: ['bass','tone','slap','flam','roll'] }, shekere: { allowedTechniques: ['shake','wrist-flick','slap','roll'] }, 'talking-drum': { allowedTechniques: ['pressure-bend','speech-contour','slap','roll'] }, balafon: { allowedTechniques: ['alternating-mallets','roll','damping','ostinato'] } });
 dialectsFor('afro-colombian', { 'marimba-de-chonta': { allowedTechniques: ['interlocking-pattern','roll','damping','call-response'], techniquePreferences: { 'interlocking-pattern': 1, 'call-response': 0.85 } }, guacharaca: { allowedTechniques: ['scrape','accent'] } });
@@ -678,22 +707,11 @@ for (const world of GENRE_WORLDS) {
   const seed = world.styleDefinitions.find(style => style.id === world.homeStyleId);
   if (!seed?.calibration || !seed.arrangementSections?.length) throw new Error(`Incomplete genre contract source: ${world.id}`);
   if (!G[world.id]) {
-    G[world.id] = base('metric-hierarchical', seed.preferredMeters[0], seed.signatureCell ?? 'none',
-      seed.harmonyModel ?? 'functional', seed.scaleMode ?? seed.calibration.harmony.scales.join(' / '), seed.tuningSystem ?? world.tuningSystem ?? '12-tet',
-      { style: seed.bassMotion as BassDialect['style'], rhythmJob: seed.calibration.harmony.bassChordInteraction,
-        pitchJob: seed.calibration.harmony.scales.join(', '), articulation: seed.calibration.techniques.bass ?? [] },
-      seed.arrangementSections.map(section => section.label),
-      Object.fromEntries(Object.entries(seed.calibration.roles).map(([role, value]) => [role, value.preferredInstruments.join(' / ')])),
-      [...seed.characteristicInstruments], seed.description, [...seed.calibration.patterns.forbidden ?? []],
-      { name: seed.grooveMechanics?.microtimingFeel ?? 'straight', swing: (seed.grooveMechanics?.swingPercentage ?? 50) / 100,
-        swingUnit: 16, lean: 0, roleLean: {}, humanizeMs: seed.grooveMechanics?.humanizeJitterMs ?? 0,
-        humanizeVel: .1, accentDepth: .8, pocket: z(), anticipationMs: 0, dynamicRange: 1 },
-      { kitMode: 'full', allowedHitTypes: [], forbidWesternBackbeat: false, forbidSectionCrash: true, allowTomFills: false, ride: false },
-      { harmonyVocabulary: [...seed.calibration.harmony.chordQualities], harmonicRhythm: seed.calibration.harmony.harmonicRhythm,
-        articulationGrammar: seed.calibration.techniques, instrumentDialects: seed.instrumentDialects,
-        mixCharacter: { dryness: .6, bassForward: .5, width: .5, brightness: .5, ...seed.calibration.mix.character } });
+    throw new Error(`Missing authored contract for ${world.id}`);
   }
-  G[world.id].performanceMode = programmedWorlds.has(world.id) ? 'programmed-electronic'
+  const profile = CATALOG_CONTRACT_PROFILES[world.id];
+  if (profile) G[world.id].performanceMode = profile.performanceMode;
+  else G[world.id].performanceMode = programmedWorlds.has(world.id) ? 'programmed-electronic'
     : hybridWorlds.has(world.id) ? 'hybrid' : 'acoustic-ensemble';
 }
 

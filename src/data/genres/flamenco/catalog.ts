@@ -18,6 +18,7 @@ export const GENRE_PACK: GenrePackInput = authorFlamencoStudies(authorFlamencoAr
     "percussion": ["palmas", "cajon"]
   },
   "pitchSystem": "flamenco Phrygian",
+  "tuningSystem": "12-tet",
   "scales": ["phrygian", "major", "minor"],
   "chordQualities": ["Am", "G", "F", "E", "C", "Bb", "A", "Dm", "Gm", "B7", "E7", "G7"],
   "harmonicRhythm": "bar",

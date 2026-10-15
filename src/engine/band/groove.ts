@@ -32,6 +32,7 @@ export interface GrooveProfile {
   /** how strongly the metric hierarchy is expressed. 0 = flat, 1 = very shaped */
   accentDepth: number;
   accentMap?: number[];
+  timelineRequired: boolean;
   /** 16-slot template of extra ms offsets, indexed by position in the bar.
    *  This is where a genre's signature limp lives (the dembow lurch, the
    *  hip-hop drag on 2 and 4, the tango drag into beat 4). */
@@ -65,6 +66,7 @@ export function grooveForStyle(style: ResolvedStyle): GrooveProfile {
     humanizeVel: g.humanizeVel,
     accentDepth: g.accentDepth,
     accentMap: [...c.accentMap],
+    timelineRequired: c.timelineRequired,
     pocket: [...g.pocket],
     anticipationMs: g.anticipationMs,
     dynamicRange: g.dynamicRange,
@@ -72,22 +74,6 @@ export function grooveForStyle(style: ResolvedStyle): GrooveProfile {
     subdivision: c.subdivision,
     cycleLength: c.cycleLength,
   };
-}
-
-/* --- Metric accent --- */
-export function metricWeight(beatInBar: number, beatsPerBar: number): number {
-  const eps = 1e-6;
-  const frac = beatInBar - Math.floor(beatInBar + eps);
-  const whole = Math.floor(beatInBar + eps);
-
-  if (Math.abs(frac) < 0.02) {
-    if (whole === 0) return 1.0;                                  // the one
-    if (beatsPerBar >= 4 && whole === Math.floor(beatsPerBar / 2)) return 0.9; // the three
-    return 0.82;                                                  // other beats
-  }
-  if (Math.abs(frac - 0.5) < 0.03) return 0.68;                   // eighths
-  if (Math.abs(frac - 1 / 3) < 0.04 || Math.abs(frac - 2 / 3) < 0.04) return 0.66; // triplets
-  return 0.58;                                                     // sixteenths
 }
 
 /* --- Swing calculation --- */
@@ -147,13 +133,13 @@ export interface FeelOutput {
 export function grooveVelocityMultiplier(g: GrooveProfile, input: FeelInput): number {
   const slots = Math.max(1, g.subdivision ?? 16);
   const slot = Math.round((input.beatInBar / Math.max(1e-6, input.beatsPerBar)) * slots) % slots;
-  // Authored cells already carry their style's accent hierarchy. The generic
-  // contract map is for fallback grids only; multiplying it into every authored
-  // style used to lay the same one-and-three pulse under the entire catalog.
-  const useFallbackAccent = !input.authoredTimingOnly && !input.patternAccentAuthored;
-  const metric = useFallbackAccent ? metricWeight(input.beatInBar, input.beatsPerBar) : 1;
-  const contractAccent = useFallbackAccent ? g.accentMap?.[slot] ?? 1 : 1;
-  const shaped = (1 - g.accentDepth * (1 - metric)) * (0.72 + contractAccent * 0.28);
+  // Articulation accents come from written events. A declared timeline can
+  // reinforce its own cycle; never apply a shared meter template to every
+  // genre as a substitute for the pattern's phrasing.
+  const useTimelineAccent = !input.authoredTimingOnly && !input.patternAccentAuthored
+    && g.timelineRequired && Boolean(g.accentMap?.length);
+  const timelineAccent = useTimelineAccent ? g.accentMap?.[slot] ?? 1 : 1;
+  const shaped = 1 - g.accentDepth * (1 - timelineAccent);
   const authored = Math.pow(Math.max(0.05, input.accent), g.dynamicRange);
   const smoothVelDrift = noise1D(input.beatInBar / 8 + (input.seed % 100), 202);
   const velWobble = 1 + smoothVelDrift * g.humanizeVel * 0.6;

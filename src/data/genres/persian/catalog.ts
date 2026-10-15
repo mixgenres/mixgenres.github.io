@@ -16,6 +16,7 @@ export const GENRE_PACK: GenrePackInput = {
     "percussion": ["tombak"]
   },
   "pitchSystem": "dastgah / radif modal tuning",
+  "tuningSystem": "12-tet",
   "scales": ["harmonic-minor"],
   "chordQualities": ["D5"],
   "harmonicRhythm": "static",

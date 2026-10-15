@@ -18,6 +18,7 @@ export const GENRE_PACK: GenrePackInput = authorBachataStudies({
     "percussion": ["bongos", "guira"]
   },
   "pitchSystem": "12-tet",
+  "tuningSystem": "12-tet",
   "scales": ["minor"],
   "chordQualities": ["Am", "F", "C", "G", "Dm", "E7", "Fm", "Db", "Ab", "Eb", "Dbmaj7", "Cm"],
   "harmonicRhythm": "bar",

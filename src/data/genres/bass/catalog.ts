@@ -17,6 +17,7 @@ export const GENRE_PACK: GenrePackInput = {
     "percussion": ["drums", "sampler"]
   },
   "pitchSystem": "12-tet",
+  "tuningSystem": "12-tet",
   "scales": ["minor"],
   "chordQualities": ["Am7", "Fmaj7", "G"],
   "harmonicRhythm": "bar",

@@ -92,10 +92,10 @@ export const GENRE_PLATES: Record<string, Plate> = Object.fromEntries(
   Object.entries(PLATES).filter(([id]) => genreCategoryId(id) === id)
 );
 
-export const FALLBACK_PLATE: Plate = PLATES.tango;
-
 export function plateFor(worldId: string): Plate {
-  return PLATES[genreCategoryId(worldId)] ?? FALLBACK_PLATE;
+  const plate = PLATES[genreCategoryId(worldId)];
+  if (!plate) throw new Error(`No authored visual identity for genre ${worldId}`);
+  return plate;
 }
 
 /** Paint the plate onto the document so CSS variables carry it everywhere. */

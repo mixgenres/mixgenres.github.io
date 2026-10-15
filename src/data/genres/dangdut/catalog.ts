@@ -17,6 +17,7 @@ export const GENRE_PACK: GenrePackInput = {
     "percussion": ["kendang", "drums"]
   },
   "pitchSystem": "12-tet",
+  "tuningSystem": "12-tet",
   "scales": ["harmonic-minor"],
   "chordQualities": ["Am", "G", "F", "E7", "Dm"],
   "harmonicRhythm": "bar",

@@ -5,7 +5,7 @@ import { Glyph } from './Glyph';
 import { GENRE_PLATES, plateFor } from './worlds';
 import { INSTRUMENT_CATALOG, FAMILY_LABELS, FAMILY_ORDER, instrument } from '../engine/lookup/instruments';
 import { ALL_PATTERNS, GENRE_WORLDS_BY_ID, cleanPatternName, FEEL_ORDER, FEEL_LABELS, feelsForPattern, PatternFeel } from '../data/genres';
-import { Voice, affinity, roleForInstrument, toBar, getGenreForm, parseChord } from '../engine/sheet/index.ts';
+import { Voice, affinity, roleForInstrument, toBar, getGenreForm, validateChordSymbol } from '../engine/sheet/index.ts';
 import { BAR_CHOICES } from '../data/barChoices';
 import { FEELS } from '../data/tempoFeels';
 import { genreCategoryId } from '../data/genreCategories';
@@ -562,6 +562,8 @@ export function ChordsControl({
   const [browseMood, setBrowseMood] = useState<ChordMood | null>(null);
 
   if (!onChords) return null;
+  const genreId = region.genre ?? currentWorldId;
+  if (!genreId) throw new Error(`Chord editor has no genre identity for section ${region.id}`);
   const currentProgStr = (region.chords ?? []).join(' ');
 
   return (
@@ -633,7 +635,7 @@ export function ChordsControl({
             <button
               onClick={() => {
                 const chords = customChordInput.trim().split(/\s+/).filter(Boolean);
-                const invalid = chords.filter(ch => { try { const p = parseChord(ch); return !/^[A-G](?:#|b)?/.test(p.symbol) || p.intervals.length < 2; } catch { return true; } });
+                const invalid = chords.filter(ch => !validateChordSymbol(ch).valid);
                 const name = customNameInput.trim() || 'Custom';
                 if (chords.length > 0 && invalid.length === 0) {
                   if (editingProgressionId) {
@@ -718,7 +720,6 @@ export function ChordsControl({
 
       {/* Suggested for this style */}
       {(() => {
-        const genreId = region.genre ?? currentWorldId ?? 'tango';
         const suggested = suggestedPaletteForStyle(styleId, genreId);
         return (
           <>
@@ -836,6 +837,8 @@ export function ChordSheet({
   onDeleteCustomChords?: (id: string) => void;
 }) {
   if (!region) return null;
+  const genreId = region.genre ?? currentWorldId;
+  if (!genreId) throw new Error(`Chord sheet has no genre identity for section ${region.id}`);
   const bars = region.end - region.start;
   const currentChords = (region.chords || []).join(' – ');
 
@@ -903,6 +906,8 @@ export function SectionSheet({
   onSelectRegion?: (regionId: string) => void;
 }) {
   if (!region) return null;
+  const genreId = region.genre ?? currentWorldId;
+  if (!genreId) throw new Error(`Section editor has no genre identity for section ${region.id}`);
   const bars = region.end - region.start;
 
   return (
@@ -969,7 +974,7 @@ export function SectionSheet({
       {/* SECTION TYPE */}
       <div className="micro mb-2">Part type</div>
       <div className="grid grid-cols-3 sm:grid-cols-4 gap-1.5 mb-5">
-        {getGenreForm(currentWorldId ?? 'rock').steps.map(step => (
+        {getGenreForm(genreId).steps.map(step => (
           <Chip key={step.key} active={step.key === (region.formKey ?? region.kind)} onClick={() => onKind(step.key)}>{step.label}</Chip>
         ))}
       </div>
@@ -1066,10 +1071,10 @@ export function SectionSheet({
         <>
           <div className="micro mb-2">Part genre</div>
           <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mb-5">
-            {Object.entries(GENRE_PLATES).map(([genreId, p]) => {
-              const active = genreCategoryId(region.genre ?? currentWorldId ?? 'tango') === genreId;
+            {Object.entries(GENRE_PLATES).map(([categoryId, p]) => {
+              const active = genreCategoryId(region.genre ?? genreId) === categoryId;
               return (
-                <GenreTile key={genreId} id={genreId} p={p} active={active} onClick={() => onGenre(genreId)} compact />
+                <GenreTile key={categoryId} id={categoryId} p={p} active={active} onClick={() => onGenre(categoryId)} compact />
               );
             })}
           </div>

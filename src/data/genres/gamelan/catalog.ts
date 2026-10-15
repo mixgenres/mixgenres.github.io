@@ -16,6 +16,7 @@ export const GENRE_PACK: GenrePackInput = {
     "percussion": ["kendang", "gongs"]
   },
   "pitchSystem": "traditional pentatonic/modal tuning",
+  "tuningSystem": "gamelan-slendro",
   "scales": ["major-pentatonic"],
   "chordQualities": ["D5"],
   "harmonicRhythm": "static",

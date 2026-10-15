@@ -55,6 +55,7 @@ export function compileNotatedScore(sheet: Sheet): NotatedScore {
         if (!cell) {
           const bars = measures.map(({ pattern: selected, detail }, bar): WrittenBar => {
             const patternId = selected ?? detail?.patternId ?? 'silent', pattern = PATTERNS_BY_ID[patternId];
+            if (patternId !== 'silent' && !pattern) throw new Error(`Unknown written pattern ${patternId} for ${region.id}/${track.id}`);
             const native = detail?.perf as NativeSlice | undefined;
             const onsets = patternId === 'silent' ? [] : native?.onsets ?? detail?.onsetGrid ?? [];
             const steps = native?.stepsPerBar ?? 16;
@@ -100,7 +101,7 @@ export function compileNotatedScore(sheet: Sheet): NotatedScore {
               }
               return attack;
             });
-            return { bar, patternId, patternName: pattern?.name ?? 'Silent', variation: detail?.variationType, attacks, rests: [] };
+            return { bar, patternId, patternName: pattern ? pattern.name : 'Silent', variation: detail?.variationType, attacks, rests: [] };
           });
           // Rest coverage includes notes sustained from earlier measures.
           const spans = bars.flatMap(b => b.attacks.map(a => ({ start: b.bar * beats + beatValue(a.position), end: b.bar * beats + beatValue(a.position) + beatValue(a.duration) }))).sort((a,b) => a.start-b.start);

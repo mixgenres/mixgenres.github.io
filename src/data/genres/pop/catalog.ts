@@ -18,6 +18,7 @@ export const GENRE_PACK: GenrePackInput = {
     "texture": ["synth"]
   },
   "pitchSystem": "12-tet",
+  "tuningSystem": "12-tet",
   "scales": ["major"],
   "chordQualities": ["C", "G", "Am", "F", "Em", "Dm9", "G13", "Cmaj9", "A7b9", "Fmaj7", "Em7", "Dm7"],
   "harmonicRhythm": "bar",

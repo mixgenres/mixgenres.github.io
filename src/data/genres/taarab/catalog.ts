@@ -17,6 +17,7 @@ export const GENRE_PACK: GenrePackInput = {
     "percussion": ["riq"]
   },
   "pitchSystem": "maqam / microtonal inflection",
+  "tuningSystem": "12-tet",
   "scales": ["harmonic-minor"],
   "chordQualities": ["Dm", "Gm", "A7", "F", "C7"],
   "harmonicRhythm": "bar",

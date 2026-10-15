@@ -8,7 +8,8 @@ import type { ChordQuality } from '../../data/musicTheory/schema/chord-quality';
 
 export function scalePcsForMode(mode: string, tonicPc: number): number[] {
   const normalized = String(mode ?? 'major').toLowerCase().trim();
-  const intervals = SCALE_MODE_INTERVALS[normalized] ?? SCALE_MODE_INTERVALS.major;
+  const intervals = SCALE_MODE_INTERVALS[normalized];
+  if (!intervals) throw new Error(`Unsupported scale mode "${mode}"`);
   return intervals.map(iv => ((tonicPc + iv) % 12 + 12) % 12);
 }
 
@@ -66,15 +67,22 @@ export function parseChord(symbol: string): ParsedChord {
 export function validateChordSymbol(symbol: string): { valid: boolean; error?: string } {
   const raw = String(symbol ?? '').trim();
   if (!raw) return { valid: false, error: 'empty chord symbol' };
-  return { valid: true };
+  try {
+    doParse(raw);
+    return { valid: true };
+  } catch (error) {
+    return { valid: false, error: error instanceof Error ? error.message : String(error) };
+  }
 }
 
-export function assertValidChordProgression(chords: string[], _context = 'progression'): void {
-  if (!Array.isArray(chords) || !chords.length) return;
+export function assertValidChordProgression(chords: string[], context = 'progression'): void {
+  if (!Array.isArray(chords) || !chords.length) throw new Error(`${context} must contain at least one authored chord`);
+  chords.forEach((chord, index) => assertValidChordSymbol(chord, `${context} chord ${index + 1}`));
 }
 
-export function assertValidChordSymbol(_symbol: string): void {
-  return;
+export function assertValidChordSymbol(symbol: string, context = 'chord'): void {
+  const result = validateChordSymbol(symbol);
+  if (!result.valid) throw new Error(`Invalid ${context} "${symbol}": ${result.error}`);
 }
 
 export function canonicalChordKey(chord: ParsedChord): string {
@@ -84,22 +92,7 @@ export function canonicalChordKey(chord: ParsedChord): string {
 
 function doParse(symbolRaw: string): ParsedChord {
   const symbol = (symbolRaw ?? '').trim();
-  if (!symbol) {
-    return {
-      symbol: '',
-      rootPc: 0,
-      rootName: 'C',
-      quality: 'major',
-      intervals: [0, 7, 12],
-      guideTones: [0, 7],
-      tensions: [],
-      bassPc: 0,
-      isPower: false,
-      scale: [0, 2, 4, 5, 7, 9, 11],
-      tension: 0.1,
-      harmony: { root: 0, quality: 'major', extensions: [], alterations: [], bass: 0 },
-    };
-  }
+  if (!symbol) throw new Error('Chord symbol is empty');
 
   // slash bass
   let body = symbol;
@@ -108,31 +101,19 @@ function doParse(symbolRaw: string): ParsedChord {
   if (slash) {
     body = slash[1];
     bassPc = PITCH_CLASS[slash[2]] ?? -1;
+    if (bassPc < 0) throw new Error(`Unsupported slash-bass note in "${symbol}"`);
   }
 
   const rootMatch = body.match(/^([A-G](?:#|b)?)/);
-  const rootName = rootMatch ? rootMatch[1] : 'C';
-  const rootPc = PITCH_CLASS[rootName] ?? 0;
+  if (!rootMatch) throw new Error(`Chord "${symbol}" must start with a note name A–G`);
+  const rootName = rootMatch[1];
+  const rootPc = PITCH_CLASS[rootName];
+  if (rootPc === undefined) throw new Error(`Unsupported root note "${rootName}" in "${symbol}"`);
   const effectiveBass = bassPc >= 0 ? bassPc : rootPc;
-
-  const neutralFallback: ParsedChord = {
-    symbol,
-    rootPc,
-    rootName,
-    quality: 'major',
-    intervals: [0, 7, 12],
-    guideTones: [0, 7],
-    tensions: [],
-    bassPc: effectiveBass,
-    isPower: false,
-    scale: [0, 2, 4, 5, 7, 9, 11],
-    tension: 0.2,
-    harmony: { root: rootPc, quality: 'major', extensions: [], alterations: [], bass: effectiveBass },
-  };
-
-  try {
-    let rest = body.slice(rootMatch ? rootMatch[1].length : 0);
-    rest = rest.replace(/^-/, 'm').replace(/Δ/g, 'maj').replace(/ø/g, 'm7b5').replace(/°/g, 'dim');
+  let rest = body.slice(rootMatch[1].length);
+  rest = rest.replace(/^-/, 'm').replace(/Δ/g, 'maj').replace(/ø/g, 'm7b5').replace(/°/g, 'dim');
+  rest = rest.replace(/M(?=\d)/g, 'maj');
+  validateChordSuffix(rest, symbol);
     const has = (re: RegExp) => re.test(rest);
 
     const isPower = /^5(?![0-9])/.test(rest) || /^\(?no3\)?/.test(rest);
@@ -233,8 +214,16 @@ function doParse(symbolRaw: string): ParsedChord {
         bass: effectiveBass,
       },
     };
-  } catch {
-    return neutralFallback;
+}
+
+/** Reject unrecognized quality text instead of quietly voicing it as major. */
+function validateChordSuffix(suffix: string, symbol: string): void {
+  let remaining = suffix;
+  const token = /^(?:\s+|minor|major|min|maj|ma|m|dim|o|aug|\+|sus2|sus4|sus|no3|alt(?:ered)?|add(?:b|#)?(?:2|4|9|11|13)|6\/9|[b#](?:5|9|11|13)|(?:5|6|7|9|11|13)|[()])/i;
+  while (remaining.length) {
+    const match = remaining.match(token);
+    if (!match) throw new Error(`Unsupported chord quality "${suffix}" in "${symbol}"`);
+    remaining = remaining.slice(match[0].length);
   }
 }
 
@@ -291,6 +280,9 @@ export interface KeyInfo {
 
 /** Infer a practical major/minor key from chord roots and chord tones. */
 export function inferKey(chords: string[]): KeyInfo {
+  if (!Array.isArray(chords) || chords.length === 0) {
+    throw new Error('Cannot infer a key without an authored chord progression');
+  }
   let best: KeyInfo | null = null;
   let bestScore = -Infinity;
 
@@ -320,7 +312,8 @@ export function inferKey(chords: string[]): KeyInfo {
       }
     }
   }
-  return best ?? { tonicPc: 9, minor: true, pcs: MINOR_KEY_INTERVALS.map(s => (9 + s) % 12), name: 'Am' };
+  if (!best) throw new Error('Key inference produced no candidate for the authored progression');
+  return best;
 }
 
 /** Semitone distance from a chord root to the next chord root, shortest way. */

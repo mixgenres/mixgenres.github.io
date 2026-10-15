@@ -1,5 +1,4 @@
 import type { GenreWorld, MusicalPattern } from '../schema';
-import { CANONICAL_GENRE_PATTERNS } from './canonicalPatterns';
 
 // Keep this registry explicit so it can be loaded by both Vite and Node-based checks.
 import { GENRE_WORLD as AfrobeatWorld } from './afrobeat';
@@ -129,17 +128,13 @@ function isGenreWorld(value: unknown): value is GenreWorld {
 
 /** Every public genre is defined by its own folder and world definition. */
 export const GENRE_WORLDS: GenreWorld[] = discoveredWorlds.map(world => {
-  const native = CANONICAL_GENRE_PATTERNS.filter(pattern => pattern.worldId === world.id);
-  const patterns = new Map((world.patterns ?? [])
-    .filter(pattern => pattern.worldId === world.id)
-    .map(pattern => [pattern.id, pattern]));
-  for (const pattern of native) patterns.set(pattern.id, pattern);
+  const patterns = (world.patterns ?? []).filter(pattern => pattern.worldId === world.id);
   const homeStyleId = world.styleDefinitions.some(style => style.id === world.homeStyleId)
     ? world.homeStyleId
     : world.styleDefinitions[0]?.id;
   return {
     ...world,
-    patterns: [...patterns.values()],
+    patterns,
     // Capture the authored default on the world itself so later sorting or UI
     // presentation cannot silently change the default song style.
     homeStyleId,

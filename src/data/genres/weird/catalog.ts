@@ -16,6 +16,7 @@ export const GENRE_PACK: GenrePackInput = {
     "texture": ["synth"]
   },
   "pitchSystem": "xenharmonic / freely selected",
+  "tuningSystem": "12-tet",
   "scales": ["chromatic"],
   "chordQualities": ["D5", "Eb5"],
   "harmonicRhythm": "bar",

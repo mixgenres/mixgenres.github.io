@@ -9,6 +9,8 @@ export interface Measure {
   label?: string;
   regionId: string;
   chord: string;
+  /** Genre/style-authored changes within this measure, at quarter-note beat offsets. */
+  harmonyEvents?: Array<{ beat: number; chord: string }>;
   root: string;
   patternByTrack: Record<string, string>;
   patternDetailsByTrack?: Record<string, {

@@ -17,6 +17,7 @@ export const GENRE_PACK: GenrePackInput = {
     "percussion": ["surdo", "pandeiro", "tamborim"]
   },
   "pitchSystem": "12-tet",
+  "tuningSystem": "12-tet",
   "scales": ["major"],
   "chordQualities": ["C6", "A7", "Dm7", "G7", "Fmaj7", "E7", "Am7", "D7", "Cmaj7", "A7b9", "Gmaj7", "C7"],
   "harmonicRhythm": "bar",

@@ -81,12 +81,12 @@ export function pitchApproachFor(options: {
   let pitchModel = '';
   let harmonyModel = '';
   let bassModel = '';
-  try {
-    const resolved = resolveStyle({ styleId: options.styleId ?? '' });
+  if (options.styleId) {
+    const resolved = resolveStyle({ genreId: options.genreId, styleId: options.styleId });
     pitchModel = resolved.contract.pitchModel.toLowerCase();
     harmonyModel = resolved.contract.harmonyModel.toLowerCase();
     bassModel = resolved.contract.bass.style.toLowerCase();
-  } catch {}
+  }
 
   if (PITCH_APPROACH_CLASSIFIERS.ragaText.test(text) || PITCH_APPROACH_CLASSIFIERS.ragaModel.test(pitchModel)) return 'raga';
   if (PITCH_APPROACH_CLASSIFIERS.modalText.test(text) || PITCH_APPROACH_CLASSIFIERS.modalModel.test(pitchModel)) return 'modal';

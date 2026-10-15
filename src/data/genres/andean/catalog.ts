@@ -16,6 +16,7 @@ export const GENRE_PACK: GenrePackInput = {
     "percussion": ["bombo-andino"]
   },
   "pitchSystem": "12-tet",
+  "tuningSystem": "12-tet",
   "scales": ["minor-pentatonic"],
   "chordQualities": ["Am", "C", "G", "E7"],
   "harmonicRhythm": "bar",

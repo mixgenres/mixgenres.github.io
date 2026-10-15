@@ -27,7 +27,19 @@ export type StylePerformanceSchema = {
 
 function referenceFor(style: ResolvedStyle): StyleReferenceExpectation {
   const id = style.primaryGenre === R_AND_B_GENRE_ID ? R_AND_B_GENRE_ID : style.primaryGenre;
-  const base = REFERENCE_EXPECTATIONS[id] ?? REFERENCE_EXPECTATIONS.rock;
+  const authored = REFERENCE_EXPECTATIONS[id];
+  const calibration = style.calibration;
+  if (!authored && !calibration) throw new Error(`No authored performance expectations for ${style.primaryGenre}/${style.id}`);
+  const roleExpectations = Object.fromEntries(Object.entries(calibration?.techniques ?? {}).map(([role, values]) => [
+    normalizeRole(role), values,
+  ]));
+  const base: StyleReferenceExpectation = authored ?? {
+    representativeWorks: [],
+    rhythm: calibration!.patterns.families,
+    articulation: Object.values(calibration!.instrumentTechniques ?? {}).flat(),
+    techniques: Object.values(calibration!.techniques).flat(),
+    roleExpectations,
+  };
   const name = style.name.toLowerCase();
   const techniques = [...base.techniques];
   const articulation = [...base.articulation];
@@ -84,6 +96,8 @@ export function styleTechniqueExpectation(
   partStyleWeight = 0,
 ): TechniqueExpectation {
   const ref = referenceFor(style);
+  const genreProfile = profile.genreProfiles[style.primaryGenre];
+  if (!genreProfile) throw new Error(`No ${style.primaryGenre} instrument profile for ${profile.instrumentId}`);
   const styleArt = style.sound?.articulations?.[profile.instrumentId] ?? '';
   const roleRef = ref.roleExpectations[normalizeRole(role)] ?? [];
   const hostCalibrated = calibratedTechniqueGestures(style, profile, role);
@@ -97,7 +111,7 @@ export function styleTechniqueExpectation(
     ...guestReference,
     ...ref.articulation,
     ...roleRef,
-    ...(profile.genreProfiles[style.primaryGenre]?.preferredGestures ?? []),
+    ...genreProfile.preferredGestures,
     ...String(styleArt).split(/[ ,|/]+/).filter(Boolean),
   ]));
   const available = new Set(Object.keys(profile.gestures));
@@ -106,7 +120,7 @@ export function styleTechniqueExpectation(
     ...preferred.filter(x => available.has(x)),
   ])).filter(x => available.has(x));
   const forbidden = Array.from(new Set([
-    ...(profile.genreProfiles[style.primaryGenre]?.forbiddenGestures ?? []),
+    ...genreProfile.forbiddenGestures,
     ...(style.rules?.forbid ?? []).map(x => x.tag),
   ]));
   return { required, preferred, forbidden };

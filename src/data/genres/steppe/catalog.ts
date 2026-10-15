@@ -14,6 +14,7 @@ export const GENRE_PACK: GenrePackInput = {
     "lead": ["morin-khuur"]
   },
   "pitchSystem": "12-tet",
+  "tuningSystem": "12-tet",
   "scales": ["major-pentatonic"],
   "chordQualities": ["D5", "D", "G", "A", "Bm"],
   "harmonicRhythm": "static",

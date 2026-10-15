@@ -20,8 +20,13 @@ function canonical(raw: string): string {
 export function getGenreDialect(params: GenreDialectContext): GenreDialect {
   // Genre ids and explicit dialect ids are complete identifiers. Substring
   // matching lets "reggaeton" resolve as "reggae" and "neurofunk" as "funk".
-  const explicit = canonical(params.dialect || '');
-  const id = PROFILES[explicit] ? explicit : canonical(params.genreId || explicit);
-  const p = PROFILES[id] ?? PROFILES.folk;
+  // Instrument-scoped identifiers such as "flute:tango" resolve through
+  // their explicit genre segment. The prefix is metadata, not a new dialect.
+  const explicitId = canonical(params.dialect || '');
+  const explicit = explicitId.includes(':') ? canonical(explicitId.split(':').at(-1)!) : explicitId;
+  if (params.dialect && !PROFILES[explicit]) throw new Error(`No authored instrument dialect profile for ${explicit}`);
+  const id = explicit || canonical(params.genreId || '');
+  const p = PROFILES[id];
+  if (!p) throw new Error(`No authored instrument dialect profile for ${id || '(empty genre)'}`);
   return { id, ...p };
 }

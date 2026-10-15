@@ -186,6 +186,8 @@ export const TUNING_SYSTEMS: Record<string, TuningSystem> = {
   },
 };
 
-export function resolveTuningSystem(systemId = '12-tet'): TuningSystem {
-  return TUNING_SYSTEMS[systemId] ?? TUNING_SYSTEMS['12-tet'];
+export function resolveTuningSystem(systemId: string): TuningSystem {
+  const system = TUNING_SYSTEMS[systemId];
+  if (!system) throw new Error(`Unsupported tuning system "${systemId}"`);
+  return system;
 }

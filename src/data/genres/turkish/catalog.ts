@@ -15,6 +15,7 @@ export const GENRE_PACK: GenrePackInput = {
     "percussion": ["frame-drum"]
   },
   "pitchSystem": "maqam / microtonal inflection",
+  "tuningSystem": "12-tet",
   "scales": ["harmonic-minor"],
   "chordQualities": ["D5"],
   "harmonicRhythm": "static",

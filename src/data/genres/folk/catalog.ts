@@ -16,6 +16,7 @@ export const GENRE_PACK: GenrePackInput = {
     "bass": ["upright-bass"]
   },
   "pitchSystem": "12-tet",
+  "tuningSystem": "12-tet",
   "scales": ["major", "mixolydian", "dorian"],
   "chordQualities": ["G", "C", "D", "Em", "A", "E"],
   "harmonicRhythm": "bar",

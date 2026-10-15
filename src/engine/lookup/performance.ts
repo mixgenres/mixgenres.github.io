@@ -1,10 +1,10 @@
 export type { GenreDialectTarget } from '../../data/performance/genreDialectTargets';
 export type { InstrumentPerformanceProfile, GenrePerformanceProfile } from '../../data/performance/instrumentPerformanceProfiles';
-import { GENRE_DIALECT_TARGETS, COMMON_DIALECT_TARGET } from '../../data/performance/genreDialectTargets';
+import { GENRE_DIALECT_TARGETS } from '../../data/performance/genreDialectTargets';
 import type { GenreDialectTarget } from '../../data/performance/genreDialectTargets';
 
-export function genreDialectTarget(genre: string): GenreDialectTarget {
-  return GENRE_DIALECT_TARGETS[genre] ?? COMMON_DIALECT_TARGET;
+export function genreDialectTarget(genre: string): GenreDialectTarget | undefined {
+  return GENRE_DIALECT_TARGETS[genre];
 }
 
 import { INSTRUMENT_PERFORMANCE_PROFILES } from '../../data/performance/instrumentPerformanceProfiles';
@@ -18,5 +18,7 @@ export function getInstrumentPerformanceProfile(id: string): InstrumentPerforman
 
 export function resolveGenreProfile(id: string, genre: string): GenrePerformanceProfile {
   const p = getInstrumentPerformanceProfile(id);
-  return p.genreProfiles[genre] ?? p.genreProfiles[p.primaryGenres[0] ?? 'jazz'];
+  const profile = p.genreProfiles[genre];
+  if (!profile) throw new Error(`No ${genre} performance profile for instrument "${id}"`);
+  return profile;
 }

@@ -16,6 +16,7 @@ export const GENRE_PACK: GenrePackInput = {
     "percussion": ["riq", "darbuka"]
   },
   "pitchSystem": "maqam / microtonal inflection",
+  "tuningSystem": "maqam-bayati",
   "scales": ["phrygian-dominant"],
   "chordQualities": ["D5"],
   "harmonicRhythm": "static",

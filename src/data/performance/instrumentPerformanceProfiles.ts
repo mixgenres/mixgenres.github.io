@@ -2,6 +2,7 @@ import {
   INSTRUMENT_CATALOG,
   WORLD_INSTRUMENT_HINTS,
 } from '../instruments';
+import { GENRE_IDS } from '../genres/ids';
 import type { InstrumentDef } from '../instruments/types';
 import { techniqueMechanics } from './techniqueMechanics';
 
@@ -74,7 +75,7 @@ export interface InstrumentPerformanceProfile {
   };
 }
 
-const GENRES = [...Object.keys(WORLD_INSTRUMENT_HINTS), 'milonga'];
+const GENRES = [...GENRE_IDS, 'milonga'];
 
 function familyOf(d: InstrumentDef): PerformanceFamily {
   const f = d.family;

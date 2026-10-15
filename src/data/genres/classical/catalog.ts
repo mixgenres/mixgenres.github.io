@@ -17,6 +17,7 @@ export const GENRE_PACK: GenrePackInput = {
     "percussion": ["timpani"]
   },
   "pitchSystem": "12-tet",
+  "tuningSystem": "12-tet",
   "scales": ["major", "whole-tone", "chromatic"],
   "chordQualities": ["C", "F", "G7", "Am", "Dm", "Cmaj9", "D9", "E9", "Abmaj7", "Bb9"],
   "harmonicRhythm": "bar",

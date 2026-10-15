@@ -84,7 +84,8 @@ test('final tuning follows phrase-shaped pitches and chord/phrase attacks stay c
     for (const n of perf.notes) {
       const region = sheet.regions.find(r => r.id === perf.bars[n.bar].regionId)!;
       // These genres default to 12-tet; the assertion still verifies final MIDI/frequency consistency.
-      const expected = resolveTuningSystem('12-tet').getFrequencyHz(n.midi, parseChord(sheet.measures[n.bar].chord || 'C').rootPc);
+      assert.ok(n.harmonicChord, `${genre}/${region.id}/${n.midi} has harmony identity`);
+      const expected = resolveTuningSystem('12-tet').getFrequencyHz(n.midi, parseChord(n.harmonicChord).rootPc);
       assert.ok(Math.abs(n.frequencyHz! - expected) < 1e-6, `${genre}/${region.id}/${n.midi}`);
       assert.ok(n.phraseId && n.attackId);
       const group = attacks.get(n.attackId!) ?? []; group.push(n); attacks.set(n.attackId!, group);

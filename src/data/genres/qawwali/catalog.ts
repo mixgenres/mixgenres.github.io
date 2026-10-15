@@ -16,6 +16,7 @@ export const GENRE_PACK: GenrePackInput = {
     "percussion": ["dholak", "hand-percussion"]
   },
   "pitchSystem": "raga / shruti inflection",
+  "tuningSystem": "12-tet",
   "scales": ["mixolydian"],
   "chordQualities": ["D5"],
   "harmonicRhythm": "static",

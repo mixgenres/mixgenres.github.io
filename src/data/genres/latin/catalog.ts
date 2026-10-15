@@ -17,6 +17,7 @@ export const GENRE_PACK: GenrePackInput = {
     "percussion": ["cumbia-drum", "guiro"]
   },
   "pitchSystem": "12-tet",
+  "tuningSystem": "12-tet",
   "scales": ["minor"],
   "chordQualities": ["Am", "Dm", "E7", "C", "F", "G7"],
   "harmonicRhythm": "bar",

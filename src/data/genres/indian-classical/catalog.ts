@@ -16,6 +16,7 @@ export const GENRE_PACK: GenrePackInput = {
     "percussion": ["tabla"]
   },
   "pitchSystem": "raga / shruti inflection",
+  "tuningSystem": "12-tet",
   "scales": ["major"],
   "chordQualities": ["D5"],
   "harmonicRhythm": "static",

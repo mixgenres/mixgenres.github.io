@@ -14,7 +14,6 @@ import { resolveStyle } from '../../engine/style/resolve';
 import { getCanonicalStyle } from '../../engine/style/registry';
 import { getPerformanceGrammar, resolveHybridGrammar } from './performanceGrammar.ts';
 import type { PerformanceGrammar } from '../../data/performance/schema/performance-grammar';
-import { DEFAULT_PHRASE_DEVELOPMENT } from '../../data/performance/performanceGrammar';
 import type { ImprovisationGrammar } from '../../data/styles/schema';
 
 export interface PhraseState {
@@ -78,7 +77,7 @@ function stableHash(text: string): number {
   return (h >>> 0) / 4294967296;
 }
 
-function rootPc(chord: string): number { return parseChord(chord).rootPc ?? 0; }
+function rootPc(chord: string): number { return parseChord(chord).rootPc; }
 
 function chordScaleKey(quality: ChordQuality): keyof GenreTheoryProfile['chordScales'] | undefined {
   if (quality === 'halfDiminished') return 'half-diminished';
@@ -90,25 +89,31 @@ function chordScaleKey(quality: ChordQuality): keyof GenreTheoryProfile['chordSc
 function degreePc(chord: string, degree: number, theory: GenreTheoryProfile): number {
   const parsed = parseChord(chord);
   const key = chordScaleKey(parsed.quality as ChordQuality);
-  const mode = (key ? theory.chordScales[key] : undefined) ?? theory.defaultScale;
+  const mode = key ? theory.chordScales[key]
+    : parsed.quality === 'diminished' ? 'locrian'
+      : parsed.quality === 'augmented' ? 'whole-tone' : theory.defaultScale;
+  if (!mode) throw new Error(`No authored ${parsed.quality} scale for ${chord}`);
   const pcs = scalePcsForMode(mode, parsed.rootPc);
   const idx = ((Math.round(degree) - 1) % pcs.length + pcs.length) % pcs.length;
-  return pcs[idx] ?? parsed.rootPc;
+  const pitchClass = pcs[idx];
+  if (pitchClass === undefined) throw new Error(`No ${degree} scale degree for ${chord}`);
+  return pitchClass;
 }
 
 function chordScalePcs(chord: string, theory: GenreTheoryProfile): number[] {
   const parsed = parseChord(chord);
   const quality = parsed.quality as ChordQuality;
   const key = chordScaleKey(quality);
-  const mode = (key ? theory.chordScales[key] : undefined) ?? theory.defaultScale;
+  const mode = key ? theory.chordScales[key]
+    : quality === 'diminished' ? 'locrian'
+      : quality === 'augmented' ? 'whole-tone' : theory.defaultScale;
+  if (!mode) throw new Error(`No authored ${quality} scale for ${chord}`);
   return scalePcsForMode(mode, parsed.rootPc);
 }
 
 function chordTonePcsWithQuality(chord: string): number[] {
   const c = parseChord(chord);
-  const root = c.rootPc ?? 0;
-  const intervals = c.intervals?.length ? c.intervals : [0, 4, 7];
-  return Array.from(new Set(intervals.map((n: number) => (root + n + 120) % 12)));
+  return Array.from(new Set(c.intervals.map((n: number) => (c.rootPc + n + 120) % 12)));
 }
 
 function nearestMidi(pc: number, target: number, low: number, high: number): number {
@@ -319,7 +324,10 @@ export function realizeMidi(ctx: PhraseContext, index: number, total: number, st
 }
 
 export function shouldDevelopPhrase(ctx: PhraseContext): 'repeat' | 'variation' | 'answer' | 'fill' | 'rest' | 'cadence' {
-  const p = ctx.hybridGrammar.phraseDevelopment ?? DEFAULT_PHRASE_DEVELOPMENT;
+  const p = ctx.hybridGrammar.phraseDevelopment ?? {
+    repeatProbability: 0, variationProbability: 0, answerProbability: 0,
+    fillProbability: 0, restProbability: 0, cadenceProbability: 0,
+  };
   // Decide once for the whole player phrase. Hashing bar/onset here used to
   // make a single line jump between unrelated development labels note by note,
   // while the hard-coded 0.7 threshold ignored each style's repeat and
@@ -426,20 +434,18 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
     score += ((selector + ctx.onsetIndex * 13 + ctx.barIndex * 7) % 11) / 100;
     return { g, score };
   }).sort((a,b)=>b.score-a.score || a.g.localeCompare(b.g));
-  const fallback = Object.keys(ctx.profile.gestures)[0] ?? 'accent';
-  return scored[0]?.g ?? fallback;
+  const selected = scored[0]?.g;
+  if (!selected) {
+    throw new Error(`No playable gesture for ${ctx.profile.instrumentId}/${ctx.regionStyleId ?? ctx.hostGenre}/${ctx.role}/${hit}`);
+  }
+  return selected;
 }
 
 export function buildHybridGrammar(hostStyleId: string | undefined, sourceGenre: string, hostStyle: import('../../data/styles/schema').ResolvedStyle, lensWeight = 0.5, sourceStyleId?: string): { host: PerformanceGrammar; source: PerformanceGrammar; hybrid: PerformanceGrammar } {
   const host = getPerformanceGrammar(hostStyle ?? {});
-  let source = host;
-  try {
-    const canonical = getCanonicalStyle(sourceGenre);
-    const resolvedSource = resolveStyle({ genreId: sourceGenre, styleId: sourceStyleId ?? canonical.id });
-    source = getPerformanceGrammar(resolvedSource);
-  } catch {
-    source = host;
-  }
+  const canonical = getCanonicalStyle(sourceGenre);
+  const resolvedSource = resolveStyle({ genreId: sourceGenre, styleId: sourceStyleId ?? canonical.id });
+  const source = getPerformanceGrammar(resolvedSource);
   const sameStyle = (source.styleId ?? sourceStyleId ?? sourceGenre) === (hostStyleId ?? hostStyle?.id);
   const weight = sameStyle ? 0 : Math.max(0, Math.min(1, lensWeight));
   const hybrid = resolveHybridGrammar(host, source, { sourceStyleId: source.styleId ?? sourceGenre, weight }, hostStyle?.contract?.forbidden ?? []);

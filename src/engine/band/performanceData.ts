@@ -36,6 +36,8 @@ export interface PerfNote {
   phraseId?: string;
   /** Preserve the performing section's sound identity across the engine boundary. */
   soundContext?: { worldId: string; styleId: string; role: string };
+  /** Harmony active at the written attack, including changes within a bar. */
+  harmonicChord?: string;
   /** seconds from the start of the song */
   time: number;
   /** seconds */

@@ -17,6 +17,7 @@ export const GENRE_PACK: GenrePackInput = {
     "percussion": ["congas", "bongos", "timbales", "claves", "cowbell"]
   },
   "pitchSystem": "12-tet",
+  "tuningSystem": "12-tet",
   "scales": ["major"],
   "chordQualities": ["Dm", "A7", "Gm", "C", "F", "Bb", "Dm7", "G7", "C6", "D7", "Cm", "Am", "G", "E7", "Dm9", "G13", "Cmaj9", "A7alt", "Cmaj7", "A7b9"],
   "harmonicRhythm": "bar",

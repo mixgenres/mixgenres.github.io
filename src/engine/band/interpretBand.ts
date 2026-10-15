@@ -2,16 +2,16 @@ import { beatsPerBarOf } from '../sheet/grid';
 import { supportsSolo, soloistAtBar } from '../sheet/solo';
 import { GENRE_ID_ALIASES } from '../../data/performance/genreAliases';
 import { KIT_COMPONENT_MIDI_ALIASES } from '../../data/instruments/kitComponentAliases';
-import { KIT_HIT_INTENT_FALLBACK, KIT_HIT_INTENT_RULES, KIT_HIT_OPEN_PATTERN } from '../../data/performance/kitHitRules';
+import { kitHitIntent } from '../../data/performance/kitHitRules';
 import { PATTERN_GESTURE_HINT_RULES } from '../../data/performance/patternGestureRules';
-import type { GuestLens, Region, MusicalPattern, Role } from '../../types';
+import type { GuestLens, Region, MusicalPattern } from '../../types';
 import type { Sheet, Voice } from '../sheet/sheet.ts';
 import type { InstrumentDef } from '../../data/instruments/schema/instrument-def';
 import type { ResolvedStyle } from '../../data/styles/schema';
-import { PATTERNS_BY_ID, PATTERNS_BY_WORLD } from '../../data/genres';
+import { PATTERNS_BY_ID } from '../../data/genres';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { getInstrumentPerformanceProfile, resolveGenreProfile, type InstrumentPerformanceProfile } from '../../engine/lookup/performance';
-import { getGenreTheory, styleTheoryFor, blendGenreTheory } from '../../engine/lookup/theory';
+import { styleTheoryFor, blendGenreTheory } from '../../engine/lookup/theory';
 import { getResolvedSectionStyle, partLensForPattern, phraseBarsForStyle } from '../sheet/sheet.ts';
 import { getCanonicalStyle, getStyle } from '../../engine/style/registry';
 import { calibratedTechniqueGestures } from '../../engine/style/performance-expectations';
@@ -210,21 +210,18 @@ function resolveLens(sheet: Sheet, region: Region, track: Voice, selectedPattern
   const hostStyle = getResolvedSectionStyle(sheet, styleRegion(region));
   const selectedLens = partLensForPattern(sheet, region, track.id, selectedPattern?.id);
   if (selectedLens) {
-    try {
-      const source = selectedLens.genreId;
-      const sourceStyleId = selectedLens.styleId ?? getCanonicalStyle(source).id;
-      const style = getStyle(sourceStyleId);
-      if (!style || (style.primaryGenre !== source && !style.genres.includes(source))) throw new Error('Part style does not belong to its source genre');
-      const weight = clamp(selectedLens.weight);
-      const provenanceKey = explicit ? 'part-lens' : 'assigned-pattern';
-      return {
-        hostGenre: host, sourceGenre: source, sourceStyleId, weight,
-        provenance: [`host:${host}`, `${provenanceKey}:${source}/${sourceStyleId}:${weight.toFixed(3)}`],
-      };
-    } catch {
-      const sourceStyleId = hostStyle?.id ?? getCanonicalStyle(host).id;
-      return { hostGenre: host, sourceGenre: host, sourceStyleId, weight: 0, provenance: [`host:${host}`, 'invalid-part-lens:ignored'] };
+    const source = selectedLens.genreId;
+    const sourceStyleId = selectedLens.styleId ?? getCanonicalStyle(source).id;
+    const style = getStyle(sourceStyleId);
+    if (!style || (style.primaryGenre !== source && !style.genres.includes(source))) {
+      throw new Error(`Part style ${sourceStyleId} does not belong to source genre ${source}`);
     }
+    const weight = clamp(selectedLens.weight);
+    const provenanceKey = explicit ? 'part-lens' : 'assigned-pattern';
+    return {
+      hostGenre: host, sourceGenre: source, sourceStyleId, weight,
+      provenance: [`host:${host}`, `${provenanceKey}:${source}/${sourceStyleId}:${weight.toFixed(3)}`],
+    };
   }
 
   const sourceStyleId = hostStyle?.id ?? getCanonicalStyle(host).id;
@@ -235,32 +232,11 @@ function chooseRhythm(sheet: Sheet, region: Region, track: Voice, style?: Resolv
   const measure = sheet.measures.find(x => x.regionId === region.id && (x.patternByTrack?.[track.id] || x.patternDetailsByTrack?.[track.id]));
   const pid = measure?.patternByTrack?.[track.id] ?? measure?.patternDetailsByTrack?.[track.id]?.patternId;
   const g = region.genre ?? sheet.worldId;
-  if (pid && PATTERNS_BY_ID[pid]) {
-    const assigned = PATTERNS_BY_ID[pid];
-    return rhythmIdeaFromPattern(assigned, assigned.worldId || g, beatsPerBarOf(sheet.timeSignature));
-  }
-  const role = voiceProfile(track.instrumentId).role;
-  const styleText = `${style?.id ?? ''} ${style?.name ?? ''} ${(style?.rhythm?.signatureCell ?? '')} ${(style?.signatureTraits ?? []).join(' ')}`.toLowerCase();
-  const candidates = Object.values(PATTERNS_BY_ID).filter(p =>
-    p.enabled !== false && p.worldId === g &&
-    (!p.roles?.length || p.roles.includes(track.role) || p.roles.includes(role as Role) || p.canCrossRole)
-  );
-  const theory = getGenreTheory(g);
-  const score = (p: MusicalPattern) => {
-    const text = `${p.id ?? ''} ${p.name ?? ''} ${p.family ?? ''} ${(p.tags ?? []).join(' ')} ${(p.approaches ?? []).join(' ')} ${(p.authenticityTags ?? []).join(' ')}`.toLowerCase();
-    let v = 0;
-    if (p.worldId === g) v += 8;
-    if (p.styleIds?.some((id: string) => styleText.includes(id.toLowerCase()) || id.toLowerCase().includes(String(style?.id ?? '').toLowerCase()))) v += 7;
-    if (p.roles?.includes(track.role) || p.roles?.includes(role)) v += 6;
-    for (const sig of theory.rhythm.signature) if (text.includes(sig.toLowerCase().replace(/[^a-z0-9]+/g, ' '))) v += 2;
-    for (const tag of [theory.bass.style, theory.rhythm.subdivision + 'ths', ...theory.rhythm.signature]) if (text.includes(String(tag).toLowerCase())) v += 1;
-    if (styleText && styleText.split(/\s+/).some((w:string) => w.length > 4 && text.includes(w))) v += 1.5;
-    return v;
-  };
-  const p = candidates.sort((a,b) => score(b) - score(a) || a.id.localeCompare(b.id))[0]
-    ?? (PATTERNS_BY_WORLD[g] ?? []).filter(pattern => pattern.enabled !== false).sort((a,b) => a.id.localeCompare(b.id))[0];
-  if (!p) throw new Error('No rhythm definitions available');
-  return rhythmIdeaFromPattern(p, g, beatsPerBarOf(sheet.timeSignature));
+  if (!pid) throw new Error(`No authored rhythm assignment for ${g}/${style?.id ?? 'missing-style'}/${region.id}/${track.id}`);
+  const assigned = PATTERNS_BY_ID[pid];
+  if (!assigned) throw new Error(`Unknown assigned rhythm pattern ${pid} in ${region.id}/${track.id}`);
+  if (!assigned.worldId) throw new Error(`Assigned pattern ${pid} has no genre identity`);
+  return rhythmIdeaFromPattern(assigned, assigned.worldId, beatsPerBarOf(sheet.timeSignature));
 }
 
 function patternGestureHint(pattern: MusicalPattern, instrumentId: string, styleId: string | undefined): string | undefined {
@@ -274,15 +250,15 @@ function patternGestureHint(pattern: MusicalPattern, instrumentId: string, style
 }
 
 function rhythmicIntentForKit(sourceHit: string | undefined, hit: HitFunction): RhythmicIntent {
-  const raw = String(sourceHit ?? '').toLowerCase();
-  const rule = KIT_HIT_INTENT_RULES.find(candidate => candidate.pattern.test(raw) || candidate.hits?.includes(hit));
-  if (!rule) return KIT_HIT_INTENT_FALLBACK;
-  return rule.dynamicOpen && KIT_HIT_OPEN_PATTERN.test(raw) ? 'open' : rule.intent;
+  return kitHitIntent(sourceHit, hit);
 }
 
 function kitComponentMidi(def: InstrumentDef, sourceHit: string | undefined, hit: HitFunction, index: number): number {
   const comps = def?.kitComponents ?? [];
-  if (!comps.length) return def?.drum?.mid ?? 60;
+  if (!comps.length) {
+    if (def?.drum?.mid !== undefined) return def.drum.mid;
+    throw new Error(`No drum note mapping is authored for ${def?.id ?? 'unknown instrument'}`);
+  }
   const raw = String(sourceHit ?? '').trim().toLowerCase();
   const exactAliases = KIT_COMPONENT_MIDI_ALIASES;
   for (const [rx, ids] of exactAliases) {
@@ -295,7 +271,7 @@ function kitComponentMidi(def: InstrumentDef, sourceHit: string | undefined, hit
   }
   const preferred = findKitComponent(def.id, rhythmicIntentForKit(sourceHit, hit), undefined, index);
   if (preferred) return preferred.midi;
-  return comps[index % comps.length].midi;
+  throw new Error(`No ${hit} kit component is authored for ${def.id}${sourceHit ? ` (${sourceHit})` : ''}`);
 }
 
 function baseMidiForPattern(def: InstrumentDef, onset: RhythmOnset, index: number): number[] {
@@ -316,10 +292,22 @@ function updatePhraseState(state: PhraseState, notes: PerfNote[], ctx: PhraseCon
   state.contour = Math.max(-1, Math.min(1, (last.midi - (state.lastStrongMidi ?? last.midi)) / 12));
 }
 
-function chordForBar(sheet: Sheet, bar: number): string {
-  const chord = sheet.measures[bar]?.chord;
-  if (!chord) throw new Error(`Missing authored harmony at bar ${bar + 1}`);
-  return chord;
+function harmonyEventsAt(sheet: Sheet, bar: number): NonNullable<Sheet['measures'][number]['harmonyEvents']> {
+  const events = sheet.measures[bar]?.harmonyEvents;
+  if (!events?.length) throw new Error(`Missing authored harmony events at bar ${bar + 1}`);
+  return events;
+}
+
+function chordAtBeat(sheet: Sheet, bar: number, beat: number): string {
+  const events = harmonyEventsAt(sheet, bar);
+  const active = events.filter(event => event.beat <= beat + 1e-8).at(-1);
+  if (!active) throw new Error(`No harmony event at beat ${beat} in bar ${bar + 1}`);
+  return active.chord;
+}
+
+function nextChordAtBeat(sheet: Sheet, bar: number, beat: number): string | undefined {
+  const next = harmonyEventsAt(sheet, bar).find(event => event.beat > beat + 1e-8);
+  return next?.chord ?? sheet.measures[bar + 1]?.harmonyEvents?.[0]?.chord;
 }
 
 function derivePassingMidi(state: PhraseState, current: number, ctx: PhraseContext): number | undefined {
@@ -549,7 +537,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
           if (soloPlan?.mode === 'trading' && soloCandidates.includes(track.id) && !soloist) continue;
           const bt = bars[bar];
           const measure = sheet.measures[bar];
-          if (!bt || !measure) continue;
+          if (!bt || !measure) throw new Error(`Missing rebuilt measure/time data at bar ${bar + 1}`);
           if (measure.patternByTrack?.[track.id] === 'silent') continue;
           const detail = measure.patternDetailsByTrack?.[track.id];
           const writtenBar = cell.bars[bar - region.start];
@@ -564,8 +552,6 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
               sourceGenre: PATTERNS_BY_ID[writtenBar.patternId]?.worldId ?? lane.rhythm.sourceGenre,
             })) };
           if (!rhythm.onsets.length) continue;
-          const chord = chordForBar(sheet, bar);
-          const nextChord = sheet.measures[bar + 1]?.chord;
           const energy = activityFor(regionStyle.contract, decision.sectionEnergy);
           const phrasePosition = ((bar - phraseStart) + 0.5) / Math.max(1, phraseEnd - phraseStart);
           const phraseStage = soloGrammar?.phraseStages?.length
@@ -574,7 +560,10 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
           const grammarBundle = buildHybridGrammar(regionStyle.id, lane.lens.sourceGenre, regionStyle, lane.lens.weight, lane.lens.sourceStyleId);
           const sharedHostProfile = resolveGenreProfile(track.instrumentId, lane.lens.hostGenre);
           const sharedSourceProfile = resolveGenreProfile(track.instrumentId, lane.lens.sourceGenre);
-          const sourceStyle = getStyle(lane.lens.sourceStyleId) ?? getCanonicalStyle(lane.lens.sourceGenre);
+          const sourceStyle = getStyle(lane.lens.sourceStyleId);
+          if (!sourceStyle || (sourceStyle.primaryGenre !== lane.lens.sourceGenre && !sourceStyle.genres.includes(lane.lens.sourceGenre))) {
+            throw new Error(`Missing authored source style ${lane.lens.sourceStyleId} for ${lane.lens.sourceGenre}`);
+          }
           const hostTechniqueGestures = calibratedTechniqueGestures(regionStyle, profile, track.role);
           const sourceTechniqueGestures = calibratedTechniqueGestures(sourceStyle, profile, track.role);
           const hostTheory = styleTheoryFor(regionStyle.id, lane.lens.hostGenre);
@@ -585,7 +574,10 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
           for (let i = 0; i < rhythm.onsets.length; i++) {
             const onset = rhythm.onsets[i];
             if (!onset.pitch && soloist && phraseStage === 'rest' && phrasePosition >= 0.38 && phrasePosition <= 0.62) continue;
-          const ctx: PhraseContext = {
+            const onsetBeat = onset.position * bt.beatsPerBar;
+            const chord = chordAtBeat(sheet, bar, onsetBeat);
+            const nextChord = nextChordAtBeat(sheet, bar, onsetBeat);
+            const ctx: PhraseContext = {
               sheetWorldId: sheet.worldId,
               hostGenre: lane.lens.hostGenre,
               sourceGenre: lane.lens.sourceGenre,
@@ -681,7 +673,9 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
             const dur = Math.max(onset.durationAuthored ? 0.000001 : 0.028,
               scoreDurationSeconds({ bars }, bar, onset.position * bt.beatsPerBar, writtenDuration)
               * (onset.durationAuthored ? 1 : 0.82 + ctx.hostProfile.phrase.sustain * 0.32));
-            const tuning = resolveTuningSystem(regionStyle.harmony?.tuningSystem ?? '12-tet');
+            const tuningSystem = regionStyle.harmony.tuningSystem;
+            if (!tuningSystem) throw new Error(`No authored tuning system for ${regionStyle.primaryGenre}/${regionStyle.id}`);
+            const tuning = resolveTuningSystem(tuningSystem);
             const genericGesture = Boolean(authoredGesture && ['accent','staccato','legato','tenuto'].includes(authoredGesture.toLowerCase()));
             const roleClass = techniqueRoleClass(track.role);
             const hostRoles = sharedHostProfile.roles.map(techniqueRoleClass);
@@ -714,8 +708,9 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
                 notation: { bar, beat: onset.position * bt.beatsPerBar, durationBeats: writtenDuration },
                 exactPitch,
                 tuningCents: onset.pitch?.cents,
+                harmonicChord: chord,
                 midi,
-                frequencyHz: tuning.getFrequencyHz(midi, parseChord(chord).rootPc ?? 0),
+                frequencyHz: tuning.getFrequencyHz(midi, parseChord(chord).rootPc),
                 vel: Math.max(1, Math.min(127, vel - (stagger ? mi * 4 : 0))),
                 trackId: track.id,
                 bar,
@@ -757,7 +752,8 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
                     time: passTime,
                     dur: Math.min(0.16, gap * 0.42),
                     midi: passing,
-                    frequencyHz: tuning.getFrequencyHz(passing, parseChord(chord).rootPc ?? 0),
+                    harmonicChord: chord,
+                    frequencyHz: tuning.getFrequencyHz(passing, parseChord(chord).rootPc),
                     vel: passVel,
                     trackId: track.id,
                     bar,
@@ -915,8 +911,12 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
     const genre = region.genre ?? sheet.worldId;
     if (!note.exactPitch) note.midi = foldToRange(note.midi, voiceProfile(track.instrumentId, genre));
     const style = getResolvedSectionStyle(sheet, region);
-    note.frequencyHz = resolveTuningSystem(style.harmony?.tuningSystem ?? '12-tet')
-      .getFrequencyHz(note.midi, parseChord(chordForBar(sheet, note.bar)).rootPc) * 2 ** ((note.tuningCents ?? 0) / 1200);
+    const harmonicChord = note.harmonicChord;
+    if (!harmonicChord) throw new Error(`Pitched note ${note.attackId ?? note.trackId} has no resolved harmony`);
+    const tuningSystem = style.harmony.tuningSystem;
+    if (!tuningSystem) throw new Error(`No authored tuning system for ${style.primaryGenre}/${style.id}`);
+    note.frequencyHz = resolveTuningSystem(tuningSystem)
+      .getFrequencyHz(note.midi, parseChord(harmonicChord).rootPc) * 2 ** ((note.tuningCents ?? 0) / 1200);
   }
   realizeTechniquePerformance(performance);
   return performance;

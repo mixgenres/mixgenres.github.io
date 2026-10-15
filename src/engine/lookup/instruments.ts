@@ -41,8 +41,7 @@ export function instrument(id: string): InstrumentDef {
  * (e.g. "keys", "guitar", "percussion") rather than catalog IDs. Keep that
  * vocabulary separate from the concrete GeneralUser patch selected by a track. */
 export function instrumentPatternKinds(id: string): string[] {
-  const d = INSTRUMENTS_BY_ID[id];
-  if (!d) return [];
+  const d = instrument(id);
   const out = new Set<string>([id]);
   for (const rule of INSTRUMENT_PATTERN_KIND_RULES) {
     const matchesVoicing = rule.voicing !== undefined && d.voicing === rule.voicing;

@@ -119,18 +119,20 @@ export function exportMusicXml(score: MusicianScore, tablature = false): string 
           if (event.start > cursor + 1e-9) output.push(rest(event.start - cursor));
           for (const [tone, segment] of event.segments.entries()) {
             const note = segment.note, pitch = scorePitch(note.midi, bar.chord);
-            const drum = note.playback.percussion ?? notatedDrum(part.instrumentId, note.midi), directions = note.playback.musicianNotation;
+            const drum = part.percussion ? note.playback.percussion : undefined;
+            if (part.percussion && !drum) throw new Error(`Missing authored percussion notation for ${part.instrumentId}/${note.midi}`);
+            const directions = note.playback.musicianNotation;
             const cents = scoreTuningCents(note.midi, note.frequencyHz);
             const alteration = pitch.alter + (Math.abs(cents) > 1e-6 ? cents / 100 : 0);
             const unpitched = part.percussion || note.pitchIdentity === 'unpitched';
-            const content = unpitched ? `<unpitched><display-step>${part.percussion ? drum.step : 'C'}</display-step><display-octave>${part.percussion ? drum.octave : 5}</display-octave></unpitched>`
+            const content = unpitched ? `<unpitched><display-step>${part.percussion ? drum!.step : 'C'}</display-step><display-octave>${part.percussion ? drum!.octave : 5}</display-octave></unpitched>`
               : `<pitch><step>${pitch.step}</step>${alteration ? `<alter>${decimal(alteration)}</alter>` : ''}<octave>${pitch.octave}</octave></pitch>`;
             const ties = `${segment.tieIn ? '<tie type="stop"/>' : ''}${segment.tieOut ? '<tie type="start"/>' : ''}`;
             const tied = `${segment.tieIn ? '<tied type="stop"/>' : ''}${segment.tieOut ? '<tied type="start"/>' : ''}`;
             const technicalDirections = `${directions?.string ? `<string>${directions.string}</string>` : ''}${directions?.fret !== undefined ? `<fret>${directions.fret}</fret>` : ''}${directions?.fingering ? `<fingering>${escapeXml(directions.fingering)}</fingering>` : ''}${directions?.bowing ? `<${directions.bowing}-bow/>` : ''}${directions?.stroke ? `<other-technical>${directions.stroke} stroke</other-technical>` : ''}`;
             const technique = segment.tieIn ? '' : `<technical><other-technical>${escapeXml(note.technique)}</other-technical>${note.playback.bodyAttack ? `<other-technical>${escapeXml(directions?.bodyTechnique ?? '')} simultaneously</other-technical>` : ''}${technicalDirections}</technical>`;
             const instrument = part.percussion ? `<instrument id="${part.xmlId}-I${note.midi}"/>` : '';
-            output.push(`<note dynamics="${decimal(note.velocity * 100 / 90)}">${tone ? '<chord/>' : ''}${content}<duration>${duration(segment.duration)}</duration>${ties}${instrument}<voice>${voiceNumber}</voice>${noteType(segment.duration, directions?.tuplet)}${unpitched ? `<notehead>${part.percussion ? drum.notehead : 'x'}</notehead>` : ''}<notations>${tied}${technique}</notations></note>`);
+            output.push(`<note dynamics="${decimal(note.velocity * 100 / 90)}">${tone ? '<chord/>' : ''}${content}<duration>${duration(segment.duration)}</duration>${ties}${instrument}<voice>${voiceNumber}</voice>${noteType(segment.duration, directions?.tuplet)}${unpitched ? `<notehead>${part.percussion ? drum!.notehead : 'x'}</notehead>` : ''}<notations>${tied}${technique}</notations></note>`);
           }
           cursor = event.end;
         }

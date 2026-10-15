@@ -15,32 +15,30 @@ export function contractForGenre(genreId: string, style?: SongStyle): WorldContr
   if (!baseContract) throw new Error(`Missing authored genre contract: ${genreId}`);
   let out = cloneDeep(baseContract);
   const world = ownerWorld;
-  const seed = world?.styleDefinitions.find(item => item.id === style?.id)
-    ?? world?.styleDefinitions.find(item => item.id === world.homeStyleId)
-    ?? world?.styleDefinitions[0];
+  const seed = style
+    ? world.styleDefinitions.find(item => item.id === style.id)
+    : world.styleDefinitions.find(item => item.id === world.homeStyleId);
+  // Resolved extension/user styles can carry sound-only metadata without being
+  // duplicated in the genre's static catalog. Their explicit mix is resolved
+  // in the mix layer; keep genre musical identity unchanged in that case.
+  if (!seed && style) return out;
+  if (!seed) throw new Error(`No authored style ${world.homeStyleId} in genre ${genreId}`);
   const calibration = style?.calibration ?? seed?.calibration;
   if (seed && calibration) {
     const meter = style?.rhythm?.meter ?? seed.preferredMeters[0] ?? out.meter;
-    const isMachine = out.performanceMode === 'programmed-electronic';
     out.meter = meter;
     out.subdivision = /12\/8|12-count/i.test(meter) ? 12 : /2\/4/.test(meter) ? 8 : 16;
     out.form = seed.arrangementSections?.map(section => section.label) ?? out.form;
     out.timeline = seed.signatureCell ?? out.timeline;
-    out.timelineRequired = /clave|compás|compas|timeline|tala|gamelan|cycle/i.test(out.timeline);
-    out.timelineGrid = out.timelineRequired ? Array.from({ length: out.subdivision }, (_, index) => index)
-      .filter(index => index === 0 || index % 3 === 0) : [];
     out.harmonyModel = calibration.harmony.requiresChords === false ? 'modal-drone'
       : /heterophonic|raga|maqam|dastgah/i.test(calibration.harmony.pitchSystem) ? 'heterophonic'
         : /power.?chord|riff/i.test(calibration.harmony.chordQualities.join(' ')) ? 'power-riff' : 'functional';
     out.harmonyVocabulary = [...calibration.harmony.chordQualities];
     out.harmonicRhythm = calibration.harmony.harmonicRhythm;
     out.pitchModel = calibration.harmony.scales.join(' / ') || seed.scaleMode || 'style-defined';
-    out.tuningSystem = calibration.harmony.pitchSystem || seed.tuningSystem || world?.tuningSystem || out.tuningSystem;
+    out.tuningSystem = style?.harmony?.tuningSystem ?? seed.tuningSystem ?? world?.tuningSystem ?? out.tuningSystem;
+    if (!out.tuningSystem) throw new Error(`Missing concrete tuning system for ${genreId}/${seed.id}`);
     out.bass = { ...out.bass,
-      style: /tumbao|clave|tumbao/i.test(calibration.harmony.bassChordInteraction) ? 'tumbao'
-        : /dembow/i.test(calibration.harmony.bassChordInteraction) ? 'dembow'
-          : /house/i.test(`${genreId} ${seed.name}`) ? 'house'
-            : isMachine ? 'sub' : out.bass.style,
       rhythmJob: calibration.harmony.bassChordInteraction,
       pitchJob: calibration.harmony.scales.join(', '),
       articulation: calibration.techniques.bass ?? [],
@@ -104,7 +102,15 @@ export function contractForGenre(genreId: string, style?: SongStyle): WorldContr
   if (style?.harmony) {
     out.harmonyModel = style.harmony.model ?? out.harmonyModel;
     out.tuningSystem = style.harmony.tuningSystem ?? out.tuningSystem;
-    if (style.harmony.bassMotion) out.bass.style = style.harmony.bassMotion as BassDialect['style'];
+    if (style.harmony.bassMotion) {
+      const bassStyles = new Set<BassDialect['style']>(['root','rootFifth','walking','tumbao','octave','riff','sub','dembow','cumbia','reggae','samba','house']);
+      const explicitAliases: Record<string, BassDialect['style']> = { 'root-fifth': 'rootFifth', pedal: 'root' };
+      const resolvedBassStyle = explicitAliases[style.harmony.bassMotion] ?? style.harmony.bassMotion;
+      if (!bassStyles.has(resolvedBassStyle as BassDialect['style'])) {
+        throw new Error(`Unsupported bass motion "${style.harmony.bassMotion}" for ${style.id}`);
+      }
+      out.bass.style = resolvedBassStyle as BassDialect['style'];
+    }
     out.harmonyVocabulary = Array.from(new Set([...out.harmonyVocabulary, ...(style.harmony.chordVocabulary ?? [])]));
   }
   if (style?.arrangement?.soloDefinition) out.soloDefinition = cloneDeep(style.arrangement.soloDefinition);

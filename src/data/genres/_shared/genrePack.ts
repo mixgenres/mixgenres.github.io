@@ -16,6 +16,7 @@ export interface AuthoredCell {
   onsets: number[];
   durations?: number[];
   accents?: number[];
+  velocities?: number[];
   /** Authored per-event pocket in milliseconds; positive is late, negative is early. */
   microtiming?: number[];
   hits?: PatternEvent['hitType'][];
@@ -40,6 +41,8 @@ export interface CalibratedStyleInput {
   instrumentDialects: Record<string, Partial<import('../../styles/contracts').InstrumentDialect>>;
   meter: string;
   tempo: [number, number];
+  /** Concrete tuning engine ID; pitchSystem remains descriptive theory metadata. */
+  tuningSystem?: string;
   scale: string;
   roles: Record<string, string[]>;
   progressions: Record<string, string[]>;
@@ -72,6 +75,8 @@ export interface GenrePackInput {
   instruments: string[];
   roles: Record<string, string[]>;
   pitchSystem: string;
+  /** Concrete tuning runtime inherited by styles unless a style overrides it. */
+  tuningSystem: string;
   scales: string[];
   chordQualities: string[];
   harmonicRhythm: string;
@@ -390,7 +395,7 @@ function styleDefinition(input: GenrePackInput, item: CalibratedStyleInput): Gen
     characteristicInstruments: Object.values(styleRoles).flat() as GenreStyleDefinition['characteristicInstruments'],
     preferredMeters: [meter === 'free / cycle' || meter === 'free / 4/4' ? '4/4' : meter], tempoRange: tempo, keySubstyles: [item.name], coreConcepts: list(stylePatterns, styleTechniques),
     rhythmicGrammar: [...stylePatterns], scaleMode,
-    tuningSystem: input.pitchSystem, signatureCell: stylePatterns[0] ?? input.patternFamilies[0],
+    tuningSystem: input.tuningSystem, signatureCell: stylePatterns[0] ?? input.patternFamilies[0],
     grooveMechanics: item.groove,
     prominentChords: styleHarmony,
     sectionProgressions: styleProgressions,
@@ -495,10 +500,7 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
   const events: PatternEvent[] = cell.onsets.map((position, i) => ({
     position, duration: cell.durations?.[i] ?? (cell.role === 'harmony' ? .35 : .2),
     kind: cell.phraseEnd ? 'fill' : 'attack',
-    // Keep the absence of authored accent data visible to the performance
-    // layer. A profile fallback is still emitted for legacy grid consumers,
-    // but it must not masquerade as a style-written event accent.
-    accent: cell.accents?.[i], velocity: i === 0 ? .85 : .7,
+    accent: cell.accents?.[i], velocity: cell.velocities?.[i],
     articulation: cell.articulations?.[i] ?? cell.articulation, hitType: cell.hits?.[i], pitch: cell.pitches?.[i], notation: cell.notations?.[i], microtiming: cell.microtiming?.[i],
     // A notated tuplet/fingering sequence is one coherent gesture. Dropping
     // individual attacks would change both its ratio and its finger order.
@@ -524,14 +526,17 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
     meter, cycleLength, subdivisions: beats * stepsPerBeat * cycleLength,
     onsetGrid: cell.onsets.map(position => Math.round(position * stepsPerBeat)),
     durationGrid: events.map(event => Math.max(1, Math.round(event.duration! * stepsPerBeat))),
-    accentProfile: events.map((event, eventIndex) => event.accent ?? (eventIndex === 0 ? .9 : .65)), velocityProfile: events.map(event => event.velocity!),
+    ...(events.every(event => event.accent !== undefined) ? { accentProfile: events.map(event => event.accent!) } : {}),
+    ...(events.every(event => event.velocity !== undefined) ? { velocityProfile: events.map(event => event.velocity!) } : {}),
     ...(cell.hits ? { hitGrid: cell.hits.filter((hit): hit is string => typeof hit === 'string') } : {}), events,
     supportedEnergy: cell.supportedEnergy ?? [1,2,3,4,5],
     sectionUsage: cell.sectionUsage ?? (cell.phraseEnd ? ['ending'] : undefined),
     phrasePosition: cell.phraseEnd ? ['end'] : ['start','middle','end','any'], variants: [],
     ...((cell.pedagogicalStudy || genericPhraseClose) ? { sectionUsage: cell.sectionUsage ?? (genericPhraseClose ? ['solo', 'ending']
       : cell.pedagogicalStudy === 'technique' ? ['solo']
-      : cell.pedagogicalStudy === 'answer' ? ['solo', 'bridge'] : cell.pedagogicalStudy === 'variation' ? ['verse', 'chorus', 'bridge', 'solo'] : ['intro', 'verse']) } : {}),
+        : cell.pedagogicalStudy === 'answer' ? ['solo', 'bridge']
+          : cell.pedagogicalStudy === 'variation' ? ['verse', 'chorus', 'bridge', 'solo']
+            : ['intro', 'verse']) } : {}),
     ...(cell.difficulty ? { difficulty: cell.difficulty } : {}),
     ...((cell.pedagogicalStudy || genericPhraseClose) ? { pedagogicalStudy: cell.pedagogicalStudy ?? ('technique' as const) } : {}),
     ...(cell.arrangementVariation ? { arrangementVariation: true } : {}),
@@ -540,7 +545,7 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
       : cell.pedagogicalStudy
       ? `Local ${cell.pedagogicalStudy} practice study derived from this style's folder-authored source cell; quarter-note beat positions and phrase conditions.`
       : 'Folder-authored role cell; quarter-note beat positions and phrase conditions.',
-    authenticityTags: [input.id, style.id, slug(cell.name)], tuningSystem: input.pitchSystem, enabled: true, weight: cell.phraseEnd ? .4 : 1,
+    authenticityTags: [input.id, style.id, slug(cell.name)], tuningSystem: input.tuningSystem, enabled: true, weight: cell.phraseEnd ? .4 : 1,
   };
 }
 
@@ -629,7 +634,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
         shortName: `${instrumentLabel} basics`,
         onsets: selected.map(event => event.position),
         durations: selected.map(event => event.duration ?? 0.25),
-        accents: selected.map(event => event.accent ?? 0.65),
+        accents: selected.some(event => event.accent !== undefined) ? selected.map(event => event.accent ?? 0.6) : undefined,
         microtiming: selected.map(event => event.microtiming ?? 0),
         pitches: selected.map(event => event.pitch),
         notations: selected.map(event => event.notation),
@@ -659,7 +664,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
         shortName: `${instrumentLabel} reply`,
         onsets: selected.map(event => start + event.position - first),
         durations: selected.map(event => event.duration ?? 0.25),
-        accents: selected.map(event => event.accent ?? 0.65),
+        accents: selected.some(event => event.accent !== undefined) ? selected.map(event => event.accent ?? 0.6) : undefined,
         microtiming: selected.map(event => event.microtiming ?? 0),
         pitches: selected.map(event => event.pitch),
         notations: selected.map(event => event.notation),
@@ -695,7 +700,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
         shortName: `${instrumentLabel} variation`,
         onsets: motif.map(event => start + event.position - first),
         durations: motif.map(event => event.duration ?? 0.25),
-        accents: motif.map(event => event.accent ?? 0.65),
+        accents: motif.some(event => event.accent !== undefined) ? motif.map(event => event.accent ?? 0.6) : undefined,
         microtiming: motif.map(event => event.microtiming ?? 0),
         pitches: motif.map(event => event.pitch),
         notations: motif.map(event => event.notation),
@@ -729,14 +734,14 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
         : Math.min(anchorCycleBeats - 0.25, Math.max(anchorCycleBeats / 2 + 0.25, original.position + anchorDuration + 0.25));
       if (Math.abs(reentryPosition - original.position) >= 0.5) {
         const sourceEvents = [
-          { ...original, accent: original.accent ?? 0.86 },
-          { ...original, position: reentryPosition, duration: Math.min(anchorDuration, 0.35), accent: (original.accent ?? 0.86) * 0.72 },
+        { ...original, accent: original.accent },
+        { ...original, position: reentryPosition, duration: Math.min(anchorDuration, 0.35), accent: original.accent === undefined ? undefined : original.accent * 0.72 },
         ].sort((a, b) => a.position - b.position);
         // A bass anchor authored late in the bar becomes the softer answer;
         // seed its complementary downbeat first so the phrase stays ordered.
         if (source.role === 'bass' && reentryPosition < original.position) {
-          sourceEvents[0].accent = original.accent ?? 0.86;
-          sourceEvents[1].accent = (original.accent ?? 0.86) * 0.72;
+          sourceEvents[0].accent = original.accent;
+          sourceEvents[1].accent = original.accent === undefined ? undefined : original.accent * 0.72;
         }
         studies.push({
           ...source,
@@ -744,7 +749,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
           shortName: `${instrumentLabel} re-entry`,
           onsets: sourceEvents.map(event => event.position),
           durations: sourceEvents.map(event => event.duration ?? 0.25),
-          accents: sourceEvents.map(event => event.accent ?? 0.65),
+          accents: sourceEvents.map((event, index) => event.accent ?? (index === 0 ? 0.78 : 0.52)),
           pitches: sourceEvents.map(event => event.pitch),
           notations: sourceEvents.map(event => event.notation),
           hits: sourceEvents.map(event => event.hit),
@@ -808,9 +813,7 @@ export function createGenreWorld(input: GenrePackInput): GenreWorld {
   const patternItems = styles.flatMap((style, i) => {
     const authoredCells = input.styles[i].cells;
     const cells = [...authoredCells, ...instrumentStudyCells(style, authoredCells)];
-    // Packs without authored cells still use their genre-level canonical
-    // patterns. Keep them loadable; a missing optional style overlay must not
-    // crash the entire genre registry (and therefore the player app).
+    // A style without authored playable cells has no automatic pattern source.
     if (!cells?.length) return [];
     const regular = cells.filter(cell => !cell.phraseEnd && style.calibration!.roles[cell.role]);
     const patterns = regular.map((cell, index) => {
@@ -828,7 +831,8 @@ export function createGenreWorld(input: GenrePackInput): GenreWorld {
           name: `${cell.name} cadence`, variationType: 'cadence', probability: 1,
           onsetGrid: events.map(event => Math.round(event.position * 4)),
           durationGrid: events.map(event => Math.max(1, Math.round(event.duration! * 4))),
-          accentProfile: events.map(event => event.accent ?? .65), velocityProfile: events.map(event => event.velocity!), events,
+          ...(events.some(event => event.accent !== undefined) ? { accentProfile: events.map(event => event.accent ?? .6) } : {}),
+          ...(events.some(event => event.velocity !== undefined) ? { velocityProfile: events.map(event => event.velocity ?? .72) } : {}), events,
         }];
       }
       return pattern;
@@ -861,7 +865,8 @@ export function createGenreWorld(input: GenrePackInput): GenreWorld {
         shortName: `${turnaroundSubject} turnaround`, cycleLength, subdivisions: beats * 4 * cycleLength,
         events, onsetGrid: events.map(event => Math.round(event.position * 4)),
         durationGrid: events.map(event => Math.max(1, Math.round(event.duration! * 4))),
-        accentProfile: events.map(event => event.accent ?? .65), velocityProfile: events.map(event => event.velocity!),
+        ...(events.some(event => event.accent !== undefined) ? { accentProfile: events.map(event => event.accent ?? .6) } : {}),
+        ...(events.some(event => event.velocity !== undefined) ? { velocityProfile: events.map(event => event.velocity ?? .72) } : {}),
         hitGrid: undefined, category: 'transition', variants: [], sectionUsage: ['solo', 'ending', 'outro', 'coda'] as MusicalPattern['sectionUsage'],
         pedagogicalStudy: 'variation' as const,
         difficulty: Math.min(5, Math.max(2, (pattern.difficulty ?? 2) + 1)),
@@ -878,7 +883,7 @@ export function createGenreWorld(input: GenrePackInput): GenreWorld {
     styleDefinitions: styles, substyles: styles.map(style => style.name), artists: [],
     concepts: list(input.patternFamilies, input.techniques, input.cadences),
     roles: Object.fromEntries(Object.entries(input.roles).map(([role, instruments]) => [toRole(role), instruments])),
-    patterns: patternItems, tuningSystem: input.pitchSystem, signatureCell: styles[0]?.signatureCell,
+    patterns: patternItems, tuningSystem: input.tuningSystem, signatureCell: styles[0]?.signatureCell,
     prominentChords: input.chordQualities,
     rhythm: { syncopation: .5, swing: .5, pocket: 'ahead', pocketDepth: 0 },
   };

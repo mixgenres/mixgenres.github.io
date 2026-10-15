@@ -4,7 +4,7 @@ import { getStyle, getCanonicalStyle } from './registry';
 import { genreDialectTarget } from '../lookup/performance';
 import type { GenreDialectTarget } from '../../data/performance/genreDialectTargets';
 
-export interface StyleCalibrationTarget extends GenreDialectTarget {
+export interface StyleCalibrationTarget extends Partial<GenreDialectTarget> {
   styleId: string;
   styleName: string;
   genreId: string;
@@ -28,9 +28,9 @@ export interface StyleCalibrationTarget extends GenreDialectTarget {
 export function styleCalibrationTarget(genreId: string, styleId?: string, style?: SongStyle): StyleCalibrationTarget {
   const resolvedStyle = style ?? (styleId ? getStyle(styleId) : getCanonicalStyle(genreId));
   if (!resolvedStyle || resolvedStyle.primaryGenre !== genreId) throw new Error(`Invalid calibration style: ${styleId}`);
-  const base = genreDialectTarget(genreId);
+  const base = genreDialectTarget(genreId) ?? {};
   const reference = resolvedStyle.reference;
-  const referenceSong = reference ? `${reference.credit}${reference.recording ? ` — ${reference.recording}` : ''}` : base.reference;
+  const referenceSong = reference ? `${reference.credit}${reference.recording ? ` — ${reference.recording}` : ''}` : base.reference ?? '';
   const qualities = resolvedStyle.calibrationQualities ?? [];
   return {
     ...base,

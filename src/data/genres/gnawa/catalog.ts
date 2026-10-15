@@ -16,6 +16,7 @@ export const GENRE_PACK: GenrePackInput = {
     "percussion": ["qraqeb"]
   },
   "pitchSystem": "modal / drone-centered",
+  "tuningSystem": "12-tet",
   "scales": ["minor-pentatonic"],
   "chordQualities": ["D5", "Dm7", "Gm7"],
   "harmonicRhythm": "static",

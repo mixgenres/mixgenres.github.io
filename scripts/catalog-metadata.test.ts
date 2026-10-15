@@ -12,7 +12,6 @@ import { styleCalibrationTarget } from '../src/engine/style/performance-schema';
 import { compileNotatedScore } from '../src/engine/score/notatedScore';
 import { arrangeBand, composeMusicianScore } from '../src/engine/band/arrangeBand';
 import { compileMusicianScore } from '../src/engine/score/musicianScore';
-import { CANONICAL_GENRE_PATTERNS } from '../src/data/genres/_shared/safety-net-patterns';
 
 test('every full song has valid explicit metadata and retains the original reference label', () => {
   assert.equal(songCatalog.length, ALL_STYLES.length);
@@ -186,14 +185,14 @@ test('Jazz core cells make each rhythm section teach its own pocket', () => {
   assert.equal(cool.instrumentDialects?.['drums:percussion']?.variantId, 'brush-kit');
 });
 
-test('country safety patterns only offer the instrument and styles they name', () => {
-  const patterns = new Map(CANONICAL_GENRE_PATTERNS.filter(pattern => pattern.worldId === 'country').map(pattern => [pattern.id, pattern]));
-  assert.deepEqual(patterns.get('country-fiddle-answer')?.instruments, ['violin']);
-  assert.deepEqual(patterns.get('country-fiddle-answer')?.styleIds, ['country-bluegrass', 'country-western-swing', 'country-americana']);
-  assert.deepEqual(patterns.get('country-banjo-roll')?.styleIds, ['country-bluegrass']);
-  assert.deepEqual(patterns.get('country-steel-answer')?.instruments, ['pedal-steel']);
-  assert.deepEqual(patterns.get('country-steel-answer')?.styleIds,
-    ['country-honky-tonk', 'country-bakersfield', 'country-outlaw', 'country-western-swing', 'country-country-pop']);
+test('country teaching patterns come from their own genre and style catalogs', () => {
+  const country = GENRE_WORLDS.find(world => world.id === 'country')!;
+  for (const instrument of ['violin', 'banjo', 'pedal-steel']) {
+    const patterns = country.patterns.filter(pattern => pattern.instruments?.includes(instrument));
+    assert.ok(patterns.length >= 2, `${instrument} needs multiple country-authored patterns`);
+    assert.ok(patterns.every(pattern => pattern.worldId === 'country' && pattern.sourceLevel === 'style-authored'));
+    assert.ok(patterns.some(pattern => pattern.pedagogicalStudy), `${instrument} needs a local practice study`);
+  }
 });
 
 test('every sample song part has distinct style-local teaching patterns', () => {

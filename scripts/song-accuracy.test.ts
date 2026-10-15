@@ -1621,8 +1621,8 @@ test('authored groove accents are not overlaid with a shared one-and-three pulse
   const fallbackThree = grooveVelocityMultiplier(groove, { ...base, beatInBar: 2 });
   assert.equal(authoredOne, authoredThree,
     'the authored event accent controls the sound without a second global meter accent');
-  assert.notEqual(fallbackOne, fallbackThree,
-    'generic fallback grids keep the neutral meter accent for notes without authored accent data');
+  assert.equal(fallbackOne, fallbackThree,
+    'notes without event accents do not acquire a shared meter pulse in an authored groove');
 });
 
 test('missing harmony resolves from its own section style, never the old Am/Tango fallback', () => {

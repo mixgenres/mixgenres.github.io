@@ -63,6 +63,18 @@ export const PREFERRED_KIT_COMPONENTS: Record<string, Record<RhythmicIntent, str
     bell: ['cajon-side'], slap: ['cajon-slap'], pluck: ['cajon-tip'], sustain: ['cajon-bass'],
     mute: ['cajon-side'], scrape: ['cajon-side'],
   },
+  palmas: {
+    low: ['palmas-sordas'], backbeat: ['palmas-claras', 'palmas-sordas'], offbeat: ['palmas-claras'],
+    ghost: ['palmas-sordas'], accent: ['palmas-claras'], roll: ['palmas-claras'], open: ['palmas-claras'],
+    rim: ['palmas-claras'], bell: ['palmas-claras'], slap: ['palmas-claras'], pluck: ['palmas-sordas'],
+    sustain: ['palmas-sordas'], mute: ['palmas-sordas'], scrape: ['palmas-sordas'],
+  },
+  zapateado: {
+    low: ['zapateado-planta'], backbeat: ['zapateado-tacon'], offbeat: ['zapateado-punta'],
+    ghost: ['zapateado-punta'], accent: ['zapateado-tacon'], roll: ['zapateado-punta'], open: ['zapateado-planta'],
+    rim: ['zapateado-tacon'], bell: ['zapateado-tacon'], slap: ['zapateado-tacon'], pluck: ['zapateado-punta'],
+    sustain: ['zapateado-planta'], mute: ['zapateado-punta'], scrape: ['zapateado-punta'],
+  },
 };
 export const STANDARD_DRUM_KIT_IDS = ['drums', 'drum-kit', 'acoustic-drums'];
 export const KIT_INSTRUMENT_ID_MATCHERS = [
@@ -72,4 +84,6 @@ export const KIT_INSTRUMENT_ID_MATCHERS = [
   { idFragment: 'tabla', key: 'tabla' },
   { idFragment: 'bata', key: 'bata' },
   { idFragment: 'cajon', key: 'cajon' },
+  { idFragment: 'palmas', key: 'palmas' },
+  { idFragment: 'zapateado', key: 'zapateado' },
 ];

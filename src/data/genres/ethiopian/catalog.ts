@@ -17,6 +17,7 @@ export const GENRE_PACK: GenrePackInput = {
     "percussion": ["drums", "kebero"]
   },
   "pitchSystem": "modal / drone-centered",
+  "tuningSystem": "12-tet",
   "scales": ["minor-pentatonic"],
   "chordQualities": ["Dm7", "Gm7"],
   "harmonicRhythm": "bar",

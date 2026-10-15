@@ -3,8 +3,24 @@ import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { getCanonicalStyle, getStyle } from '../../engine/style/registry';
 
 import type { InstrumentDialect, PerformanceMode } from '../../data/styles/contracts';
-import { DEFAULT_DIALECT_SHAPE } from '../../data/performance/dialects';
 import { RELATED_DIALECT_INSTRUMENTS } from '../../data/performance/dialects/inheritance';
+
+function instrumentNativeDialect(instrumentId: string, worldId: string, styleId: string): InstrumentDialect {
+  const definition = INSTRUMENTS_BY_ID[instrumentId];
+  if (!definition) throw new Error(`Unknown dialect instrument: ${instrumentId}`);
+  const allowedTechniques = definition.physicalTechniques
+    ?? definition.luthierPhysics?.articulationCapabilities
+    ?? definition.techniques.articulations;
+  if (!allowedTechniques.length) throw new Error(`Instrument ${instrumentId} has no authored playable techniques`);
+  return {
+    id: `${instrumentId}:native`, instrumentId, name: definition.name, family: definition.family,
+    ...(worldId ? { performanceMode: performanceModeForContext(worldId, styleId) } : {}),
+    defaultTechnique: definition.techniques.articulations[0] ?? allowedTechniques[0],
+    allowedTechniques: [...allowedTechniques], brightnessMultiplier: 1, decayMultiplier: 1,
+    bodyConstruction: definition.bodyConstruction, excitationType: definition.excitationType,
+    courses: definition.courses, sympatheticStrings: definition.luthierPhysics?.sympatheticStrings,
+  };
+}
 
 export function resolveDialect(
   instrumentId: string,
@@ -66,9 +82,10 @@ export function resolveDialect(
     }
   }
   if (authored || Object.keys(weightedPreferences).length) {
-    const inherited = resolveDialect(instrumentId, worldId, '', role);
-    const merged = mergeDialectMetadata({ ...DEFAULT_DIALECT_SHAPE, ...inherited,
-      id: `${normId}:${styleId || worldId || 'generic'}`, instrumentId: normId, name: `${normId} (${styleId || worldId || 'generic'})`,
+    const inherited = resolveDialect(instrumentId, worldId, '', role)
+      ?? instrumentNativeDialect(instrumentId, worldId, styleId);
+    const merged = mergeDialectMetadata({ ...inherited,
+      id: `${normId}:${styleId || worldId}`, instrumentId: normId, name: `${INSTRUMENTS_BY_ID[normId].name} (${styleId || worldId})`,
     }, authored ?? {});
     if (Object.keys(weightedPreferences).length) {
       merged.techniquePreferences = weightedPreferences;
@@ -86,10 +103,9 @@ export function resolveDialect(
         const exact = (role ? contract.instrumentDialects[`${normId}:${role}`] : undefined) || contract.instrumentDialects[normId] || contract.instrumentDialects[instrumentId];
         if (exact) {
           return resolveVariants({
-            ...DEFAULT_DIALECT_SHAPE,
+            ...instrumentNativeDialect(normId, worldId, styleId),
             id: `${normId}:${worldId}`,
-            instrumentId: normId,
-            name: `${normId} (${worldId})`,
+            name: `${INSTRUMENTS_BY_ID[normId].name} (${worldId})`,
             ...exact,
           });
         }
@@ -104,10 +120,9 @@ export function resolveDialect(
           const matched = contract.instrumentDialects[rel];
           if (matched) {
             return resolveVariants({
-              ...DEFAULT_DIALECT_SHAPE,
+              ...instrumentNativeDialect(normId, worldId, styleId),
               id: `${normId}:${worldId}`,
-              instrumentId: normId,
-              name: `${normId} (${worldId})`,
+              name: `${INSTRUMENTS_BY_ID[normId].name} (${worldId})`,
               ...matched,
             });
           }
@@ -117,9 +132,8 @@ export function resolveDialect(
         const def = INSTRUMENTS_BY_ID[normId] || INSTRUMENTS_BY_ID[instrumentId];
         if (def && contract.instrumentDialects[def.family]) {
           return resolveVariants({
-            ...DEFAULT_DIALECT_SHAPE,
+            ...instrumentNativeDialect(normId, worldId, styleId),
             id: `${def.family}:${worldId}`,
-            instrumentId: normId,
             name: `${def.name} (${worldId} ${def.family})`,
             family: def.family,
             ...contract.instrumentDialects[def.family],
@@ -129,21 +143,15 @@ export function resolveDialect(
     }
   }
 
-  const def = INSTRUMENTS_BY_ID[normId] || INSTRUMENTS_BY_ID[instrumentId];
-  return resolveVariants({
-    ...DEFAULT_DIALECT_SHAPE,
-    id: `${normId}:generic`,
-    instrumentId: normId,
-    name: `${def?.name ?? normId} (generic)`,
-    family: def?.family ?? DEFAULT_DIALECT_SHAPE.family,
-    performanceMode: performanceModeForContext(worldId, styleId),
-  });
+  return resolveVariants(instrumentNativeDialect(normId, worldId, styleId));
 }
 
 /** Production mode comes from the authored world contract, never a name regex. */
 export function performanceModeForContext(worldId = '', styleId = ''): PerformanceMode {
-  if (!worldId) return DEFAULT_DIALECT_SHAPE.performanceMode;
+  if (!worldId) throw new Error('A genre is required to resolve a genre-specific performance mode');
   const style = styleId ? getStyle(styleId) : undefined;
   if (styleId && !style) throw new Error(`Unknown performance style: ${styleId}`);
-  return contractForGenre(worldId, style).performanceMode ?? DEFAULT_DIALECT_SHAPE.performanceMode;
+  const mode = contractForGenre(worldId, style).performanceMode;
+  if (!mode) throw new Error(`Missing authored performance mode for ${worldId}/${styleId || 'home style'}`);
+  return mode;
 }

@@ -24,5 +24,5 @@ export function resolveInstrumentKitComponent(
   ];
   const match = selector.find(([actionPattern]) => actionPattern.test(actionText));
   if (!match) return matches[0];
-  return matches.find(component => match[1].test(component.id.toLowerCase())) ?? matches[0];
+  return matches.find(component => match[1].test(component.id.toLowerCase()));
 }

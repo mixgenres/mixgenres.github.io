@@ -40,25 +40,28 @@ function phraseLengthFor(style: ResolvedStyle): number {
 }
 
 function preferredGestureSet(profile: InstrumentPerformanceProfile, genre: string): string[] {
-  const gp = profile.genreProfiles[genre] ?? profile.genreProfiles[Object.keys(profile.genreProfiles)[0] ?? ''];
-  const ids = gp?.preferredGestures ?? [];
+  const gp = profile.genreProfiles[genre];
+  if (!gp) throw new Error(`No ${genre} gesture profile for ${profile.instrumentId}`);
+  const ids = gp.preferredGestures;
   return Array.from(new Set(ids.filter(id => Boolean(profile.gestures[id]))));
 }
 
 function chordTonePcs(chord: string): number[] {
   const c = parseChord(chord);
-  const root = c.rootPc ?? 0;
-  const intervals = c.intervals?.length ? c.intervals : [0, 4, 7];
-  return Array.from(new Set(intervals.map((n: number) => (root + n + 120) % 12)));
+  return Array.from(new Set(c.intervals.map((n: number) => (c.rootPc + n + 120) % 12)));
 }
 
 function phrasePosition(n: PerfNote, phraseStart: number, phraseEnd: number): number {
   return clamp(((n.bar - phraseStart) + 0.5) / Math.max(1, phraseEnd - phraseStart));
 }
 
-function rootRatio(notes: PerfNote[], sheet: Sheet): number {
+function rootRatio(notes: PerfNote[]): number {
   let roots = 0, tonal = 0;
-  for (const n of notes) { const chord = sheet.measures[n.bar]?.chord; if (!chord) continue; tonal++; if ((n.midi % 12 + 12) % 12 === (parseChord(chord).rootPc ?? 0)) roots++; }
+  for (const n of notes) {
+    if (!n.harmonicChord) throw new Error(`Note ${n.attackId ?? n.trackId} has no resolved harmony`);
+    tonal++;
+    if ((n.midi % 12 + 12) % 12 === parseChord(n.harmonicChord).rootPc) roots++;
+  }
   return tonal ? roots / tonal : 0;
 }
 
@@ -78,13 +81,14 @@ function phraseTechniqueBudget(role: string, family: string, genre: string, note
   return DEFAULT_PHRASE_TECHNIQUE_BUDGET;
 }
 
-function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: InstrumentPerformanceProfile, genre: string, style: ResolvedStyle, target: StyleCalibrationTarget, phraseStart: number, phraseEnd: number, partStyle?: SongStyle, partStyleWeight = 0) {
+function optimizePhrase(notes: PerfNote[], track: Voice, profile: InstrumentPerformanceProfile, genre: string, style: ResolvedStyle, target: StyleCalibrationTarget, phraseStart: number, phraseEnd: number, partStyle?: SongStyle, partStyleWeight = 0) {
   if (!notes.length) return { rootHeavy: false, beforeGestures: new Set<string>(), afterGestures: new Set<string>() };
   const beforeGestures = new Set(notes.map(n => GESTURE_NAMES[n.gestureCode] ?? String(n.gestureCode)));
   const role = String(track.role ?? profile.genreProfiles[genre]?.roles?.[0] ?? 'harmony').toLowerCase();
   const prefs = preferredGestureSet(profile, genre);
-  const rootShare = rootRatio(notes, sheet);
-  const rootHeavy = /bass|comp|harmony/.test(role) && notes.length >= 4 && rootShare > target.maxBassRootRatio;
+  const rootShare = rootRatio(notes);
+  const rootHeavy = target.maxBassRootRatio !== undefined && /bass|comp|harmony/.test(role)
+    && notes.length >= 4 && rootShare > target.maxBassRootRatio;
   const family = profile.family;
   // Chord tones belong to one musical attack. Technique and density decisions
   // must not change just because a pianist adds another extension.
@@ -96,7 +100,10 @@ function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: 
   }
   const attackGroups = [...attacks.values()];
   const density = Math.max(0.45, Math.min(1.0, attackGroups.length / Math.max(4, (phraseEnd - phraseStart) * 2)));
-  const desiredTechniqueCount = Math.max(0, Math.floor(attackGroups.length * Math.max(target.techniqueLandmarkRatio, phraseTechniqueBudget(role, family, genre, attackGroups.map(group => group[0])))));
+  const desiredTechniqueCount = Math.max(0, Math.floor(attackGroups.length * Math.max(
+    target.techniqueLandmarkRatio ?? 0,
+    phraseTechniqueBudget(role, family, genre, attackGroups.map(group => group[0])),
+  )));
 
   // Keep authored note accents intact here. Phrase dynamics are shaped once by
   // the style-aware performer; applying this same sine swell to every track
@@ -111,8 +118,10 @@ function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: 
     // would duplicate inner voices and destroy an intentional chord/inversion.
     // Bass: structural roots remain roots; inner attacks can outline the harmony.
     if (!n.authoredPitch && /bass/.test(role) && rootShare > 0.78 && pos > 0.16 && pos < 0.82 && i % 4 === 2) {
-      const chord = sheet.measures[n.bar]?.chord, parsed = chord ? parseChord(chord) : undefined;
-      if (parsed) { const candidate = nearestNonRootChordTone(n.midi, chordTonePcs(chord!), parsed.rootPc ?? 0); if (candidate !== n.midi && Math.abs(candidate - n.midi) <= 7) n.midi = candidate; }
+      if (!n.harmonicChord) throw new Error(`Note ${n.attackId ?? n.trackId} has no resolved harmony`);
+      const parsed = parseChord(n.harmonicChord);
+      const candidate = nearestNonRootChordTone(n.midi, chordTonePcs(n.harmonicChord), parsed.rootPc);
+      if (candidate !== n.midi && Math.abs(candidate - n.midi) <= 7) n.midi = candidate;
     }
   }
 
@@ -199,7 +208,7 @@ export function optimizePerformanceByPhraseAndSong(sheet: Sheet, perf: Performan
         const phrase = trackNotes.filter(n => id ? n.phraseId === id : n.bar >= start && n.bar < end);
         if (!phrase.length) continue;
         phrases++;
-        const result = optimizePhrase(phrase, sheet, { ...track, role: getTrackRole(sheet, track.id, region.id) }, profile, genre, style, target, start, end, partStyle, partStyleWeight);
+        const result = optimizePhrase(phrase, { ...track, role: getTrackRole(sheet, track.id, region.id) }, profile, genre, style, target, start, end, partStyle, partStyleWeight);
         if (result.rootHeavy) rootHeavyPhrases++;
         result.beforeGestures.forEach(x => before.add(x));
         result.afterGestures.forEach(x => after.add(x));
@@ -220,7 +229,9 @@ export function optimizePerformanceByPhraseAndSong(sheet: Sheet, perf: Performan
         const forward = mc?.bassForward ?? 0.5;
         const density = trackNotes.length / Math.max(1, (region.end - region.start) * 4);
         const densityTrim = density > 0.42 ? Math.min(2.5, (density - 0.42) * 8) : 0;
-        bassTrimDb = target.bassTrimDb - densityTrim + (forward > 0.80 ? 0.75 : 0);
+        bassTrimDb = target.bassTrimDb === undefined
+          ? undefined
+          : target.bassTrimDb - densityTrim + (forward > 0.80 ? 0.75 : 0);
       }
       if (bassTrimDb) {
         const g = dbToLinear(bassTrimDb);

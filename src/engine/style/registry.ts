@@ -185,5 +185,7 @@ export function getCanonicalStyle(genreId: string): SongStyle {
       `Unknown genre "${genreId}". Known genres: ${Object.keys(STYLES_BY_GENRE).filter(g => STYLES_BY_GENRE[g].length).join(', ')}`,
     );
   }
-  return styles.find(s => s.canonical) ?? styles[0];
+  const canonical = styles.find(s => s.canonical);
+  if (!canonical) throw new Error(`Genre "${genreId}" has no authored canonical style`);
+  return canonical;
 }

@@ -16,6 +16,7 @@ export const GENRE_PACK: GenrePackInput = authorAmbientStudies({
     "texture": ["synth", "string-ensemble"]
   },
   "pitchSystem": "12-tet",
+  "tuningSystem": "12-tet",
   "scales": ["major-pentatonic"],
   "chordQualities": ["D5", "Dmaj7", "Gmaj7"],
   "harmonicRhythm": "bar",

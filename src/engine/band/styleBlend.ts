@@ -75,13 +75,9 @@ function lensKey(hostStyleId: string, lens: GuestLens, role: string): string {
   return `${hostStyleId}|${lens.genreId}|${lens.styleId ?? ''}|${lens.weight.toFixed(2)}|${role}`;
 }
 
-export function resolveGuestStyle(lens: GuestLens): ResolvedStyle | undefined {
-  try {
-    const styleId = lens.styleId ?? getCanonicalStyle(lens.genreId).id;
-    return resolveStyle({ genreId: lens.genreId, styleId });
-  } catch {
-    return undefined;
-  }
+export function resolveGuestStyle(lens: GuestLens): ResolvedStyle {
+  const styleId = lens.styleId ?? getCanonicalStyle(lens.genreId).id;
+  return resolveStyle({ genreId: lens.genreId, styleId });
 }
 
 /**
@@ -113,22 +109,6 @@ export function blendPartStyle(
   if (cached) return cached;
 
   const guest = resolveGuestStyle(lens);
-  if (!guest) {
-    const passthrough: BlendedPartStyle = {
-      style: host,
-      report: {
-        hostStyleId: host.id,
-        guestStyleId: lens.styleId ?? lens.genreId,
-        weight: 0,
-        applied: [],
-        violations: [{ aspect: 'style', reason: `Unknown guest style ${lens.styleId ?? lens.genreId}` }],
-        summary: `${host.name} (guest style unavailable)`,
-      },
-    };
-    blendCache.set(key, passthrough);
-    return passthrough;
-  }
-
   if (guest.id === host.id) {
     const unchanged: BlendedPartStyle = {
       style: host,

@@ -8,6 +8,16 @@ import { CHORD_PALETTE, CHORD_MOOD_ORDER_RAW } from '../../data/chordPalette';
 import type { ChordMood, ChordOption } from '../../data/chordPalette';
 import { GENRE_WORLDS_BY_ID } from '../../data/genres';
 
+function rhythmRate(value: string): GenreTheoryProfile['harmonicRhythm'] {
+  const rhythm = value.trim().toLowerCase().replace(/\s+/g, '-');
+  if (['static', 'beat', 'half-bar', 'bar', '1-bar', 'two-bar', '2-bar', 'phrase'].includes(rhythm)) {
+    if (rhythm === '1-bar') return 'bar';
+    if (rhythm === '2-bar') return 'two-bar';
+    return rhythm as GenreTheoryProfile['harmonicRhythm'];
+  }
+  throw new Error(`Unsupported authored harmonic rhythm "${value}"`);
+}
+
 export function getGenreTheory(genreId: string): GenreTheoryProfile {
   const profile = GENRE_THEORY[genreId];
   if (!profile) throw new Error(`No theory profile for ${genreId}; no genre folder exports this world.`);
@@ -61,6 +71,8 @@ export function styleTheoryFor(styleId: string | undefined, genreId: string): Ge
   const base = getGenreTheory(genreId);
   const scaleFromWords = (value: string): GenreTheoryProfile['defaultScale'] => {
     const term = value.toLowerCase();
+    if (term === 'major') return 'ionian';
+    if (term === 'minor') return 'aeolian';
     if (/phrygian.?dominant|hijaz/.test(term)) return 'phrygian-dominant';
     if (/phrygian/.test(term)) return 'phrygian';
     if (/dorian/.test(term)) return 'dorian';
@@ -75,18 +87,25 @@ export function styleTheoryFor(styleId: string | undefined, genreId: string): Ge
     if (/chromatic/.test(term)) return 'chromatic';
     if (/aeolian|minor/.test(term)) return 'aeolian';
     if (/locrian/.test(term)) return 'locrian';
-    return 'ionian';
+    throw new Error(`Unsupported authored scale "${value}" for ${genreId}/${styleId}`);
   };
   if (!styleId) return base;
   const out: GenreTheoryProfile = structuredClone(base);
   const world = GENRE_WORLDS_BY_ID[genreId];
   const style = world?.styleDefinitions.find(candidate => candidate.id === styleId);
-  const calibration = style?.calibration;
-  if (style && calibration) {
+  if (!style) throw new Error(`No authored ${genreId} style named ${styleId}`);
+  const calibration = style.calibration;
+  if (!calibration) throw new Error(`No authored performance calibration for ${genreId}/${styleId}`);
+  {
     const harmony = calibration.harmony;
     if (harmony.bassAnticipationBeats !== undefined) out.bass.anticipationBeats = [...harmony.bassAnticipationBeats];
-    out.meter = style.preferredMeters[0] ?? out.meter;
-    out.defaultScale = harmony.scales[0] ? scaleFromWords(harmony.scales[0]) : out.defaultScale;
+    if (harmony.harmonicRhythm) out.harmonicRhythm = rhythmRate(harmony.harmonicRhythm);
+    const meter = style.preferredMeters[0];
+    if (!meter) throw new Error(`No authored meter for ${genreId}/${styleId}`);
+    const scale = harmony.scales[0];
+    if (!scale) throw new Error(`No authored scale for ${genreId}/${styleId}`);
+    out.meter = meter;
+    out.defaultScale = scaleFromWords(scale);
     // A song's pitch language does not turn a major chord into a minor chord.
     // Keep third/seventh quality when deriving chord-relative notes. Modal
     // and non-functional traditions retain their authored pitch collection.
@@ -131,7 +150,8 @@ export function suggestedPaletteForGenre(genreId: string): ChordOption[] {
   return exact.slice(0, 8);
 }
 export function suggestedPaletteForStyle(styleId?: string, genreId?: string): ChordOption[] {
-  const g = genreId ?? 'rock';
+  if (!genreId) throw new Error('A genre is required to suggest style chords');
+  const g = genreId;
   const base = suggestedPaletteForGenre(g);
   if (!styleId) return base;
   const n = styleId.toLowerCase();
