@@ -1,7 +1,5 @@
 import { Activity, AudioLines, Layers, Mic, Music2, Drum, Waves, Star, GitBranch, Users, UserRound, Check, Volume2, VolumeX, type LucideIcon } from 'lucide-react';
-import { useEffect, useState } from 'react';
 import type { GenreSoloDefinition, SoloMode } from '../data/styles/schema';
-import type { GuestLens } from '../types';
 
 const roles: Array<{ id: string; label: string; icon: LucideIcon; aliases?: string[] }> = [
   { id: 'melody', label: 'Melody', icon: Music2, aliases: ['melodic-guitar', 'violin', 'brass', 'horn-section'] },
@@ -37,7 +35,6 @@ export function RoleIcon({ instrumentName, role, solo, onClick }: {
 }
 
 export function RoleSettings({ role, onRole, roleScope, onRoleScope, silentInPart, onTogglePartSilence, solo, soloMode, soloistCount, definition, onSolo, onMode,
-  hostGenre, hostStyleId, partLens, genreOptions, styleOptions, onPartLens,
 }: {
   role: string;
   onRole: (role: string, scope: 'section' | 'song') => void;
@@ -51,25 +48,9 @@ export function RoleSettings({ role, onRole, roleScope, onRoleScope, silentInPar
   definition?: GenreSoloDefinition;
   onSolo: () => void;
   onMode: (mode: SoloMode | 'genre') => void;
-  hostGenre: string;
-  hostStyleId: string;
-  partLens?: GuestLens;
-  genreOptions: Array<{ id: string; name: string; canonicalStyleId: string }>;
-  styleOptions: Array<{ id: string; name: string }>;
-  onPartLens: (lens?: GuestLens) => void;
 }) {
   const current = roles.find(r => r.id === role || r.aliases?.includes(role));
   const selectedPolicy = definition?.modes[soloMode === 'genre' ? definition.defaultMode : soloMode];
-  const selectedGenre = partLens?.genreId ?? hostGenre;
-  const selectedStyle = partLens?.styleId ?? hostStyleId;
-  const [draftWeight, setDraftWeight] = useState(partLens?.weight ?? 0.65);
-  useEffect(() => setDraftWeight(partLens?.weight ?? 0.65), [partLens?.weight]);
-  const withLens = (patch: Partial<GuestLens>) => onPartLens({
-    genreId: partLens?.genreId ?? hostGenre,
-    styleId: partLens?.styleId ?? hostStyleId,
-    weight: partLens?.weight ?? 0.65,
-    ...patch,
-  });
   return <div className="mb-5" onKeyDown={event => {
     if (['Space', 'ArrowLeft', 'ArrowRight'].includes(event.code)) event.stopPropagation();
   }}>
@@ -101,35 +82,6 @@ export function RoleSettings({ role, onRole, roleScope, onRoleScope, silentInPar
           style={{ background: current?.id === r.id ? 'color-mix(in srgb, var(--ink) 12%, transparent)' : 'transparent' }}>
           <r.icon size={16} aria-hidden="true" />{r.label}
         </button>)}
-      </div>
-      <div className="mt-3 pt-3" style={{ borderTop: '1px solid color-mix(in srgb, var(--ink) 20%, transparent)' }}>
-        <p className="text-xs font-semibold mb-1">Part style</p>
-        <p className="text-[11px] leading-relaxed opacity-70 mb-2">Blend this instrument's phrasing and groove with another style while the song keeps its section timing.</p>
-        <label className="block text-[11px] mb-1" htmlFor="part-lens-genre">Style source</label>
-        <select id="part-lens-genre" value={selectedGenre} onChange={event => {
-          const genreId = event.currentTarget.value;
-          const option = genreOptions.find(item => item.id === genreId);
-          withLens({ genreId, styleId: genreId === selectedGenre ? selectedStyle : option?.canonicalStyleId ?? hostStyleId });
-        }} className="w-full mb-2 px-2 py-1.5 text-xs">
-          {genreOptions.map(option => <option key={option.id} value={option.id}>{option.name}</option>)}
-        </select>
-        <label className="block text-[11px] mb-1" htmlFor="part-lens-style">Song style</label>
-        <select id="part-lens-style" value={selectedStyle} onChange={event => withLens({ styleId: event.currentTarget.value })}
-          className="w-full mb-2 px-2 py-1.5 text-xs">
-          {styleOptions.map(option => <option key={option.id} value={option.id}>{option.name}</option>)}
-        </select>
-        <label className="flex items-center gap-2 text-[11px] mb-2">
-          <span className="shrink-0">Fusion amount</span>
-          <input type="range" min="0" max="1" step="0.05" value={draftWeight} disabled={!partLens}
-            onChange={event => setDraftWeight(Number(event.currentTarget.value))}
-            onPointerUp={() => withLens({ weight: draftWeight })}
-            onKeyUp={() => withLens({ weight: draftWeight })}
-            className="min-w-0 flex-1" />
-          <span className="w-8 text-right">{Math.round((partLens ? draftWeight : 0) * 100)}%</span>
-        </label>
-        {partLens && <button type="button" onClick={() => onPartLens({ genreId: hostGenre, styleId: hostStyleId, weight: 0 })}
-          className="text-[11px] underline cursor-pointer">Use the song's style for this part</button>}
-        <p className="micro mt-1">Applies to {roleScope === 'song' ? 'this instrument in every section' : 'this section'}.</p>
       </div>
       {definition && <div className="mt-3 pt-2" style={{ borderTop: '1px solid color-mix(in srgb, var(--ink) 20%, transparent)' }}>
         <button type="button" onClick={onSolo} aria-pressed={solo} className="flex items-center gap-2 text-xs py-2 w-full cursor-pointer">

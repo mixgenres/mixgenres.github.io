@@ -5,7 +5,7 @@ import { Glyph } from './Glyph';
 import { GENRE_PLATES, plateFor } from './worlds';
 import { INSTRUMENT_CATALOG, FAMILY_LABELS, FAMILY_ORDER, instrument } from '../engine/lookup/instruments';
 import { ALL_PATTERNS, GENRE_WORLDS_BY_ID, cleanPatternName, FEEL_ORDER, FEEL_LABELS, feelsForPattern, PatternFeel } from '../data/genres';
-import { Voice, affinity, roleForInstrument, toBar, getGenreForm, validateChordSymbol } from '../engine/sheet/index.ts';
+import { Voice, affinity, toBar, getGenreForm, validateChordSymbol } from '../engine/sheet/index.ts';
 import { BAR_CHOICES } from '../data/barChoices';
 import { FEELS } from '../data/tempoFeels';
 import { genreCategoryId } from '../data/genreCategories';
@@ -200,139 +200,35 @@ export function InstrumentSheet({
   );
 }
 
-const ADD_ROLE_OPTIONS = [
-  ['melody', 'Melody'], ['lead', 'Lead'], ['harmony', 'Harmony'], ['bass', 'Bass'],
-  ['pulse', 'Pulse'], ['percussion', 'Percussion'], ['texture', 'Texture'], ['voice', 'Voice'], ['counterline', 'Counterline'],
-] as const;
-
-/** Add a part with an audible job and a pattern picked before it enters the song. */
-export function AddInstrumentSheet({
-  open, onClose, worldId, styleId, sectionKind, onAdd,
-}: {
-  open: boolean; onClose: () => void; worldId: string; styleId?: string; sectionKind?: string;
-  onAdd: (instrumentId: string, role: string, patternId: string, scope: 'section' | 'song') => void;
+/** Pick an instrument; its role and playable song-specific patterns are assigned by the music engine. */
+export function AddInstrumentSheet({ open, onClose, onAdd }: {
+  open: boolean; onClose: () => void; onAdd: (instrumentId: string) => void;
 }) {
   const [query, setQuery] = useState('');
-  const [instrumentId, setInstrumentId] = useState<string | null>(null);
-  const [role, setRole] = useState('');
-  const [patternId, setPatternId] = useState('');
-  const [scope, setScope] = useState<'section' | 'song'>('song');
-  const [patternScope, setPatternScope] = useState<'recommended' | 'genre' | 'all'>('recommended');
-  const [patternQuery, setPatternQuery] = useState('');
-  const [patternPage, setPatternPage] = useState(0);
   const filtered = useMemo(() => INSTRUMENT_CATALOG
     .filter(item => item.id !== 'silence' && (!query.trim()
       || item.name.toLowerCase().includes(query.trim().toLowerCase())))
     .sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })), [query]);
-  const selectedInstrument = instrumentId ? INSTRUMENT_CATALOG.find(item => item.id === instrumentId) : undefined;
-  const effectiveRole = role || (instrumentId ? roleForInstrument(instrumentId) : '');
-  const voice = selectedInstrument ? {
-    id: 'new-instrument-preview', instrumentId: selectedInstrument.id, name: selectedInstrument.name,
-    instrument: selectedInstrument.name, role: effectiveRole, kind: selectedInstrument.id,
-    muted: false, volume: 0.85, lensIds: [],
-  } as Voice : null;
-  const rankedPatterns = useMemo(() => {
-    if (!voice) return [];
-    const query = patternQuery.trim().toLowerCase();
-    return ALL_PATTERNS.filter(pattern => pattern.enabled !== false)
-      .filter(pattern => patternScope !== 'genre' || pattern.worldId === worldId)
-      .filter(pattern => !query || [pattern.name, pattern.family, pattern.description,
-        ...pattern.tags].some(value => value.toLowerCase().includes(query)))
-      .map(pattern => ({ pattern, score: patternScope === 'all' ? 0 : affinity(pattern.id, voice, worldId, styleId) }))
-      .filter(item => Number.isFinite(item.score))
-      .sort((a, b) => patternScope === 'all'
-        ? a.pattern.name.localeCompare(b.pattern.name, undefined, { sensitivity: 'base' })
-        : b.score - a.score);
-  }, [voice?.instrumentId, effectiveRole, worldId, styleId, patternScope, patternQuery]);
-  const patterns = rankedPatterns.map(item => item.pattern);
-  useEffect(() => setPatternPage(0), [instrumentId, effectiveRole, patternScope, patternQuery]);
-  const selectedPatternId = patterns.some(pattern => pattern.id === patternId) ? patternId : patterns[0]?.id ?? '';
-  const patternPageCount = Math.max(1, Math.ceil(patterns.length / 36));
-  const currentPatternPage = Math.min(patternPage, patternPageCount - 1);
-  const visiblePatterns = patterns.slice(currentPatternPage * 36, (currentPatternPage + 1) * 36);
-
   return <Sheet open={open} onClose={onClose} title="Add an instrument" wide
-    kicker={sectionKind ? `Build a part · ${sectionKind}` : 'Build a new part'}>
-    <div className="grid gap-6 lg:grid-cols-[minmax(300px,0.85fr)_minmax(0,1.15fr)]">
-      <section aria-labelledby="add-instrument-heading" className="min-w-0">
-        <div id="add-instrument-heading" className="micro mb-2">1. Choose an instrument</div>
-        <input value={query} onChange={event => setQuery(event.target.value)} placeholder="Search instruments…"
-          aria-label="Search instruments" className="w-full mb-3" style={{ background: 'transparent', padding: '8px 0', fontSize: 15,
-            borderBottom: '1px solid color-mix(in srgb, var(--ink) 25%, transparent)', outline: 'none' }} />
-        <div className="grid grid-cols-2 xl:grid-cols-3 gap-2 overflow-y-auto pr-1" style={{ maxHeight: 'min(62vh, 620px)' }}>
-          {filtered.map(item => <button key={item.id} type="button" aria-pressed={item.id === instrumentId}
-            title={item.name} onClick={() => { setInstrumentId(item.id); setRole(roleForInstrument(item.id)); setPatternId(''); }}
-            className="min-w-0 text-left px-3 py-2.5 transition-colors"
-            style={{ border: `1px solid color-mix(in srgb, var(--ink) ${item.id === instrumentId ? 55 : 17}%, transparent)`,
-              background: item.id === instrumentId ? 'color-mix(in srgb, var(--signal) 12%, transparent)' : 'transparent' }}>
-            <span className="block truncate" style={{ fontSize: 13.5, fontWeight: item.id === instrumentId ? 650 : 500 }}>{item.name}</span>
-            <span className="micro block truncate">{FAMILY_LABELS[item.family] ?? item.family}</span>
-          </button>)}
-          {!filtered.length && <div className="micro py-2 col-span-full">No instruments match “{query.trim()}”.</div>}
-        </div>
-      </section>
-
-      {selectedInstrument ? <section aria-label="Part setup" className="min-w-0 lg:border-l lg:pl-6"
-        style={{ borderColor: 'color-mix(in srgb, var(--ink) 16%, transparent)' }}>
-        <div className="micro mb-2">2. Give it a role</div>
-        <div className="flex flex-wrap gap-1.5 mb-5">
-          {ADD_ROLE_OPTIONS.map(([id, label]) => <Chip key={id} active={effectiveRole === id}
-            onClick={() => { setRole(id); setPatternId(''); }}>{label}</Chip>)}
-        </div>
-
-        <div className="micro mb-2">3. Pick a pattern</div>
-        <div className="flex flex-wrap gap-1.5 mb-2">
-          <Chip active={patternScope === 'recommended'} onClick={() => setPatternScope('recommended')}>Recommended</Chip>
-          <Chip active={patternScope === 'genre'} onClick={() => setPatternScope('genre')}>{plateFor(worldId).short}</Chip>
-          <Chip active={patternScope === 'all'} onClick={() => setPatternScope('all')}>Every genre</Chip>
-        </div>
-        <input value={patternQuery} onChange={event => setPatternQuery(event.target.value)} placeholder="Search patterns…"
-          aria-label="Search patterns" className="w-full mb-2" style={{ background: 'transparent', padding: '8px 0', fontSize: 14,
-            borderBottom: '1px solid color-mix(in srgb, var(--ink) 25%, transparent)', outline: 'none' }} />
-        <div className="micro mb-1" aria-live="polite">Page {currentPatternPage + 1} of {patternPageCount} · {patterns.length} patterns</div>
-        <div className="flex flex-col mb-3 overflow-y-auto" style={{ borderTop: '1px solid color-mix(in srgb, var(--ink) 14%, transparent)', maxHeight: 'min(44vh, 480px)' }}>
-          {visiblePatterns.map(pattern => <button key={pattern.id} type="button" aria-pressed={selectedPatternId === pattern.id} onClick={() => setPatternId(pattern.id)}
-            className="text-left py-2.5 flex items-center gap-2.5 w-full"
-            style={{ borderBottom: '1px solid color-mix(in srgb, var(--ink) 12%, transparent)',
-              background: selectedPatternId === pattern.id ? 'color-mix(in srgb, var(--ink) 7%, transparent)' : 'transparent' }}>
-            <span style={{ width: 4, alignSelf: 'stretch', flexShrink: 0, background: plateFor(worldId).signal, opacity: selectedPatternId === pattern.id ? 1 : .45 }} />
-            <span className="shrink-0" style={{ flex: '0 0 76px' }}><Glyph {...previewOf(pattern)} height={22} /></span>
-            <span className="min-w-0 flex-1">
-              <span className="truncate block" style={{ fontSize: 14, fontWeight: selectedPatternId === pattern.id ? 600 : 400 }}>
-                {cleanPatternName(pattern.name, pattern.shortName)}
-              </span>
-              <span className="micro truncate block">{pattern.description}</span>
-            </span>
-          </button>)}
-          {!patterns.length && <div className="micro py-3">No patterns match that search.</div>}
-        </div>
-        {patternPageCount > 1 && <div className="flex justify-between gap-2 mb-3">
-          <button type="button" className="micro cursor-pointer disabled:opacity-40" disabled={currentPatternPage === 0}
-            onClick={() => setPatternPage(page => Math.max(0, page - 1))}>Previous patterns</button>
-          <button type="button" className="micro cursor-pointer disabled:opacity-40" disabled={currentPatternPage >= patternPageCount - 1}
-            onClick={() => setPatternPage(page => Math.min(patternPageCount - 1, page + 1))}>Next patterns</button>
-        </div>}
-
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
-          <span className="micro">Add it to</span>
-          <div className="flex gap-1.5">
-            <Chip active={scope === 'song'} onClick={() => setScope('song')}>Whole song</Chip>
-            <Chip active={scope === 'section'} onClick={() => setScope('section')}>{sectionKind ? `This part (${sectionKind})` : 'This part'}</Chip>
-          </div>
-        </div>
-        <button type="button" disabled={!selectedPatternId} onClick={() => {
-          if (!instrumentId || !selectedPatternId) return;
-          onAdd(instrumentId, effectiveRole, selectedPatternId, scope);
-          onClose();
-        }} className="w-full py-3 font-semibold text-sm disabled:opacity-40 cursor-pointer"
-          style={{ color: 'var(--ground)', background: 'var(--ink)', border: 'none' }}>
-          Add {selectedInstrument.name} · {ADD_ROLE_OPTIONS.find(item => item[0] === effectiveRole)?.[1] ?? effectiveRole}
-        </button>
-      </section> : <div className="min-h-48 flex items-center justify-center border border-dashed px-5 text-center"
-        style={{ borderColor: 'color-mix(in srgb, var(--ink) 18%, transparent)' }}>
-        <div className="micro">Choose an instrument to set its musical role and preview playable patterns.</div>
-      </div>}
-    </div>
+    kicker="Choose one to add it throughout the song">
+    <section aria-labelledby="add-instrument-heading" className="min-w-0">
+      <h3 id="add-instrument-heading" className="micro mb-2">Available instruments</h3>
+      <input value={query} onChange={event => setQuery(event.target.value)} placeholder="Search instruments…"
+        aria-label="Search instruments" className="w-full mb-3" style={{ background: 'transparent', padding: '8px 0', fontSize: 15,
+          borderBottom: '1px solid color-mix(in srgb, var(--ink) 25%, transparent)', outline: 'none' }} />
+      <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-2 overflow-y-auto pr-1"
+        style={{ maxHeight: 'min(72vh, 760px)' }}>
+        {filtered.map(item => <button key={item.id} type="button" title={`Add ${item.name} throughout the song`}
+          onClick={() => { onAdd(item.id); onClose(); }}
+          className="min-w-0 text-left px-3 py-3 transition-opacity hover:opacity-75"
+          style={{ border: '1px solid color-mix(in srgb, var(--ink) 17%, transparent)', background: 'transparent' }}>
+          <span className="block truncate" style={{ fontSize: 13.5, fontWeight: 550 }}>{item.name}</span>
+          <span className="micro block truncate">{FAMILY_LABELS[item.family] ?? item.family}</span>
+        </button>)}
+        {!filtered.length && <div className="micro py-2 col-span-full">No instruments match “{query.trim()}”.</div>}
+      </div>
+      <p className="micro mt-3">The song picks a fitting role and playable part for each section. You can change the rhythm afterward.</p>
+    </section>
   </Sheet>;
 }
 
