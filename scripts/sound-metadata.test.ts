@@ -10,12 +10,11 @@ import { PERCUSSION_SAMPLE_KEYS } from '../src/engine/playback/soundfont/percuss
 import { codeForGesture } from '../src/engine/band/gestures';
 import { getRoleGainLinear } from '../src/engine/studio/mixer';
 import { patchForInstrument } from '../src/engine/playback/soundfont/presets';
+import { PROFILES as AUTHORED_GENRE_DIALECTS } from '../src/data/performance/genreDialectProfiles';
 
 const before = JSON.stringify(INSTRUMENTS_BY_ID);
 let combinations = 0;
 for (const genre of Object.keys(GENRE_CONTRACTS)) {
-  const canonicalGenre = genre === 'r-and-b' ? 'rnb' : genre === 'punk' ? 'punk-hardcore' : genre;
-  assert.equal(getGenreDialect({ genreId: genre, dialect: `flute:${genre}` }).id, canonicalGenre);
   for (const def of Object.values(INSTRUMENTS_BY_ID)) {
     const params = resolveTrackSound(def.id, genre, '', 'lead');
     assert.deepEqual(resolveTrackSound(def.id, genre, '', 'lead'), params, 'resolution must not accumulate multipliers');
@@ -26,6 +25,10 @@ for (const genre of Object.keys(GENRE_CONTRACTS)) {
     assert.ok(preset.pack && Number.isInteger(preset.bank) && Number.isInteger(preset.program), `${genre}/${def.id} SoundFont assignment`);
     combinations++;
   }
+}
+for (const genre of Object.keys(AUTHORED_GENRE_DIALECTS)) {
+  const canonicalGenre = genre === 'r-and-b' ? 'rnb' : genre === 'punk' ? 'punk-hardcore' : genre;
+  assert.equal(getGenreDialect({ genreId: genre, dialect: `flute:${genre}` }).id, canonicalGenre);
 }
 for (const def of Object.values(INSTRUMENTS_BY_ID)) {
   if ((def.kit || def.drum || def.voicing === 'unpitched') && !def.kit) {

@@ -130,6 +130,23 @@ export const TUNING_SYSTEMS: Record<string, TuningSystem> = {
     },
   },
 
+  'persian-shur': {
+    id: TUNING_SYSTEM_DATA['persian-shur'].id,
+    name: TUNING_SYSTEM_DATA['persian-shur'].name,
+    description: TUNING_SYSTEM_DATA['persian-shur'].description,
+    getFrequencyHz(midiNote, tonicPc = TUNING_SYSTEM_DATA['persian-shur'].defaultTonicPc, options) {
+      const cents = this.getCentsOffset(midiNote, tonicPc, options);
+      const baseHz = 440 * Math.pow(2, (midiNote - 69) / 12);
+      return baseHz * Math.pow(2, cents / 1200);
+    },
+    getCentsOffset(midiNote, tonicPc = TUNING_SYSTEM_DATA['persian-shur'].defaultTonicPc, options) {
+      const pc = (midiNote % 12 - tonicPc + 12) % 12;
+      const { halfFlatPitchClasses, halfFlatCents } = TUNING_SYSTEM_DATA['persian-shur'];
+      const baseCents = halfFlatPitchClasses.includes(pc) ? halfFlatCents : 0;
+      return applyTuningConstraints(baseCents, midiNote, options);
+    },
+  },
+
   'blues-continuum': {
     id: TUNING_SYSTEM_DATA['blues-continuum'].id,
     name: TUNING_SYSTEM_DATA['blues-continuum'].name,

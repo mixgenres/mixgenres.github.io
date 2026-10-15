@@ -5,7 +5,7 @@ import { gunzipSync } from 'node:zlib';
 import { createHash } from 'node:crypto';
 import { SoundBankLoader, SpessaLog, GeneratorTypes } from 'spessasynth_core';
 import { INSTRUMENTS_BY_ID } from '../src/engine/lookup/instruments';
-import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
+import { compileSamplePlan, SAMPLE_RELEASE_RESERVE } from '../src/engine/playback/soundfont/plan';
 import { SampleRuntime } from '../src/engine/playback/soundfont/runtime';
 import { setSoundfontBankReader, loadSoundfontBank, soundfontBankStats } from '../src/engine/playback/soundfont/banks';
 import { patchForInstrument, SAMPLED_KIT_KEYS, type BankId } from '../src/engine/playback/soundfont/presets';
@@ -18,15 +18,17 @@ import { songMixOptions } from '../src/engine/playback/renderSongMix';
 import { StereoPeakGuard } from '../src/engine/playback/soundfont/peakGuard';
 import { OUTPUT_SAMPLE_PEAK_CEILING } from '../src/engine/studio/outputHeadroom';
 import { performanceWindow, renderPerformanceToAudio } from '../src/engine/playback/mp3Export';
-import { SAMPLE_RELEASES } from '../src/engine/playback/soundfont/bankIdentity';
+import { SAMPLE_RELEASES_BY_PATCH, SAMPLE_RELEASE_PROFILES } from '../src/engine/playback/soundfont/bankIdentity';
 import { prepareBankForLive } from '../src/engine/playback/soundfont/prepareBank';
 import { StbVorbis } from 'stb-vorbis';
 import { ALL_STYLES } from '../src/engine/style';
 import { makeSheet } from '../src/engine/sheet/sheet';
 import { resolveTrackSound } from '../src/engine/playback/trackSound';
+import { resolveDialect } from '../src/engine/band/genreDialect';
 import { ELECTRONIC_KIT_PROGRAMS } from '../src/data/sound/playback/electronicKits';
 import { SYNTH_SAMPLE_PROGRAMS } from '../src/engine/playback/soundfont/presets';
 import { synth } from '../src/data/instruments/catalog/electronic/synth';
+import { sliceBarNative } from '../src/engine/sheet/grid';
 await StbVorbis.ready;
 SpessaLog.setLogLevel(false,false,false);
 const diskBank=async(id:BankId)=>{const data=readFileSync(`src/assets/soundfonts/${id}.sfpack`);return data.buffer.slice(data.byteOffset,data.byteOffset+data.byteLength);};
@@ -38,6 +40,27 @@ async function runtimeFor(plan:ReturnType<typeof compileSamplePlan>) {
   for(const bank of plan.banks){const f=gunzipSync(readFileSync(`src/assets/soundfonts/${bank}.sfpack`));r.addBank(bank,f.buffer.slice(f.byteOffset,f.byteOffset+f.byteLength));}
   await r.synth.processorInitialized;r.setPlan(plan);return r;
 }
+test('the shared sample plan sizes dense playback and export for its simultaneous recorded zones',async()=>{
+  const performance=performanceFixture({notes:Array.from({length:400},()=>noteFixture({midi:60,time:0,dur:1})),duration:1.2});
+  const plan=compileSamplePlan(performance,options);
+  assert.equal(plan.voiceDemand.length,400);
+  const bankData=gunzipSync(readFileSync('src/assets/soundfonts/piano.sfpack'));
+  const runtime=new SampleRuntime(44100,350);
+  try {
+    runtime.addBank('piano',bankData.buffer.slice(bankData.byteOffset,bankData.byteOffset+bankData.byteLength));
+    await runtime.synth.processorInitialized;
+    const attack=plan.events.find(event=>event.type==='on');assert(attack&&attack.type==='on');
+    const preset=load('piano').presets.find(candidate=>candidate.bankMSB===attack.patch.bank
+      &&candidate.program===attack.patch.program&&candidate.isGMGSDrum===attack.patch.drum);
+    assert(preset);
+    const zoneCount=preset.getVoiceParameters(attack.key,attack.velocity).length;
+    const expected=Math.ceil(400*zoneCount*1.2)+16;
+    runtime.setPlan(plan);
+    assert.equal(runtime.voiceCapacity,expected,'capacity is based on concurrent sample zones with release headroom');
+    assert.equal(runtime.synth.systemParameters.autoAllocateVoices,false,
+      'the exact score capacity is allocated before rendering, avoiding worklet-time allocation');
+  } finally {runtime.destroy();}
+});
 test('every catalog instrument maps to a shipped playable sample preset',()=>{
   const banks=new Map<BankId,ReturnType<typeof load>>();
   for(const def of Object.values(INSTRUMENTS_BY_ID)) {
@@ -57,6 +80,43 @@ test('country mandolin resolves to the actual GS mandolin variation, not the GM 
   const event=plan.events.find(item=>item.type==='on');
   assert(event&&event.type==='on');assert.deepEqual(event.patch,patch);
 });
+test('oud uses the available warm lute-like pluck instead of the bright Shamisen patch',()=>{
+  const patch=patchForInstrument('oud');
+  assert.deepEqual(patch,{bank:64,program:24,drum:false,pack:'nylon'});
+  const plan=compileSamplePlan(performanceFixture({notes:[noteFixture({midi:52})]}),
+    {...options,trackInstruments:new Map([['keys','oud']]),worldId:'arabic'});
+  const event=plan.events.find(item=>item.type==='on');
+  assert(event&&event.type==='on');assert.deepEqual(event.patch,patch);
+});
+test('regional lutes use the nearest matching sampled attack family instead of an unrelated Shamisen or dulcimer',()=>{
+  const mandolinLike=patchForInstrument('bouzouki');
+  assert.deepEqual(mandolinLike,{bank:16,program:25,drum:false,pack:'guitars'});
+  assert.deepEqual(patchForInstrument('dombra'),mandolinLike);
+  const longNeck=patchForInstrument('setar');
+  assert.deepEqual(longNeck,{bank:0,program:104,drum:false,pack:'guitars'});
+  assert.deepEqual(patchForInstrument('tar'),longNeck);
+  assert.deepEqual(patchForInstrument('baglama'),longNeck);
+  const qanun=patchForInstrument('qanun');
+  assert.deepEqual(qanun,{bank:0,program:107,drum:false,pack:'guitars'});
+  assert.notDeepEqual(qanun,patchForInstrument('santur'),
+    'the plucked qanun does not inherit santur’s hammered dulcimer sample');
+});
+test('pipa and end-blown flutes use closer bundled source families',()=>{
+  const pipa=patchForInstrument('pipa');
+  assert.deepEqual(pipa,{bank:16,program:25,drum:false,pack:'guitars'});
+  assert(load('guitars').presets.find(p=>p.bankMSB===16&&p.program===25)?.getVoiceParameters(60,90).length);
+  for(const id of ['ney','xiao','quena']) {
+    assert.deepEqual(patchForInstrument(id),{bank:0,program:77,drum:false,pack:'winds'},id);
+  }
+  assert(load('winds').presets.find(p=>p.bankMSB===0&&p.program===77)?.getVoiceParameters(60,90).length);
+  assert.deepEqual(patchForInstrument('siku'),{bank:0,program:75,drum:false,pack:'winds'},'panpipes keep the pan-flute source');
+});
+test('projected event gates keep mixed authored and performer-derived lengths distinct',()=>{
+  const slice=sliceBarNative([0,4],undefined,undefined,[1,2],undefined,undefined,16,1,0,
+    undefined,undefined,undefined,undefined,[false,true]);
+  assert.deepEqual(slice.durationAuthoredByOnset,[false,true]);
+  assert.equal(slice.durationsAuthored,false,'mixed authored gates are not treated as a fully authored grid');
+});
 test('tin and low whistle use the recorded GeneralUser whistle set instead of GM ocarina',()=>{
   const patch=patchForInstrument('tin-whistle');
   assert.deepEqual(patch,{bank:24,program:75,drum:false,pack:'winds'});
@@ -71,6 +131,15 @@ test('tin and low whistle use the recorded GeneralUser whistle set instead of GM
   const event=plan.events.find(item=>item.type==='on');
   assert(event&&event.type==='on');assert.deepEqual(event.patch,patch);
 });
+test('country and folk violin parts select the dedicated GM fiddle variation',()=>{
+  const plan=compileSamplePlan(performanceFixture({worldId:'country',notes:[noteFixture({trackId:'fiddle',midi:72})]}),
+    {...options,trackInstruments:new Map([['fiddle','violin']]),worldId:'country',styleId:'country-bluegrass'});
+  const event=plan.events.find(item=>item.type==='on');
+  assert(event&&event.type==='on');
+  assert.deepEqual(event.patch,{bank:0,program:110,drum:false,pack:'strings'});
+  const bank=load('strings');
+  assert(bank.presets.some(preset=>preset.program===110&&preset.bankMSB===0&&/fiddle/i.test(preset.name)));
+});
 test('Qawwali harmonium uses the recorded multisample bank across its full playable range',()=>{
   const patch=patchForInstrument('harmonium');
   assert.deepEqual(patch,{bank:66,program:28,drum:false,pack:'keys'});
@@ -79,7 +148,7 @@ test('Qawwali harmonium uses the recorded multisample bank across its full playa
   const zones=preset.zones.flatMap(zone=>zone.instrument.zones);
   assert.equal(zones.length,38,'retain each source recording as its own sample zone');
   assert.equal(new Set(zones.map(zone=>zone.sample.originalKey)).size,38,'keep the recorded roots distinct');
-  assert(Math.abs(SAMPLE_RELEASES['66:28:false'] - 0.35) < 0.005, 'the preset release follows the authored 0.35-second envelope');
+  assert(Math.abs(SAMPLE_RELEASES_BY_PATCH['keys:66:28:false'] - 0.35) < 0.005, 'the preset release follows the authored 0.35-second envelope');
   for(let key=36;key<=84;key++)assert(preset.getVoiceParameters(key,90).length>0,`harmonium key ${key} must reach a recorded zone`);
   const plan=compileSamplePlan(performanceFixture({notes:[noteFixture({midi:66})]}),
     {...options,trackInstruments:new Map([['keys','harmonium']]),worldId:'qawwali',styleId:'qawwali-traditional'});
@@ -120,6 +189,24 @@ test('country pedal steel compiles independent pedal, lever, chord-glide and vol
     'one steel note swell cannot attenuate another part');
   assert.equal(expression[0].type==='cc'?expression[0].value:127,16);
   assert.equal(expression.at(-1)?.type==='cc'?(expression.at(-1) as Extract<(typeof swell.events)[number],{type:'cc'}>).value:0,127);
+});
+test('sampled synth filter-sweep cues produce one shared cutoff gesture per channel',()=>{
+  const makePlan=(instrumentId:string,gesture:string)=>compileSamplePlan(
+    performanceFixture({notes:[
+      noteFixture({trackId:'synth',midi:48,time:0,dur:.5,gestureCode:codeForGesture(gesture)}),
+      noteFixture({trackId:'synth',midi:55,time:0,dur:.5,gestureCode:codeForGesture(gesture)}),
+    ]}),
+    {...options,trackInstruments:new Map([['synth',instrumentId]]),trackRoles:new Map([['synth','lead']]),
+      worldId:'electronic',styleId:'electronic-techno'});
+  const sweep=makePlan('synth','filter-sweep');
+  const on=sweep.events.find(event=>event.type==='on');assert(on&&on.type==='on');
+  const controls=sweep.events.filter(event=>event.type==='cc'&&event.cc===74);
+  assert.deepEqual(controls.map(event=>event.type==='cc'?event.value:null),[52,78,64]);
+  assert(controls.every(event=>event.type==='cc'&&event.channels.length===1&&event.channels[0]===on.channel),
+    'simultaneous chord tones share one sweep instead of fighting over controller values');
+  const ordinary=makePlan('synth','tone');assert.equal(ordinary.events.filter(event=>event.type==='cc'&&event.cc===74).length,0);
+  const piano=makePlan('piano','filter-sweep');assert.equal(piano.events.filter(event=>event.type==='cc'&&event.cc===74).length,0,
+    'filter sweep stays a synth control rather than affecting sampled acoustic instruments');
 });
 test('khomus has its own recorded jaw harp patch, with its narrow sample range safely playable',()=>{
   const patch=patchForInstrument('khomus');
@@ -349,12 +436,14 @@ test('recorded kit layout preserves drum pitch, stereo layers, takes and hat exc
 test('Salamander covers the full keyboard with distinct recorded dynamics and stereo microphones',()=>{
   const bank=load('piano'),preset=bank.presets[0];
   assert.equal(bank.samples.length,240,'only selected recordings are shipped');
+  let longestSampleFrames=0;
   for(const key of [21,36,60,84,108]) {
     const layers=[20,60,90,120].map(v=>preset.getVoiceParameters(key,v));
     for(const layer of layers){assert.equal(layer.length,2);assert(layer.every(v=>v.sample.isLinked));}
     assert.equal(new Set(layers.map(v=>v[0].sample.name)).size,4);
-    assert(layers.every(v=>v.every(s=>s.sample.getAudioData().length<=441000)));
+    for(const layer of layers)for(const voice of layer)longestSampleFrames=Math.max(longestSampleFrames,voice.sample.getAudioData().length);
   }
+  assert(longestSampleFrames>441000,'recorded piano decays beyond ten seconds are preserved');
 });
 test('finger and pick bass use distinct recordings while slap and fretless keep their own patches',()=>{
   const bank=load('bass');assert.equal(bank.presets.length,2);
@@ -431,13 +520,50 @@ test('cropped sample PCM keeps sample age, bends, controller history and release
   assert.deepEqual(cropped,l.slice(Math.round(.327*44100),Math.round(.327*44100)+10000));assert.deepEqual(cr,rr.slice(Math.round(.327*44100),Math.round(.327*44100)+10000));r.destroy();
 });
 test('new same-pitch attacks and simultaneous bends have separate ownership',()=>{
-  const p=performanceFixture({notes:[noteFixture({time:0}),noteFixture({time:.01,pitchBend:[{offset:0,value:10000}]}),noteFixture({time:0,midi:64})]});
+  const p=performanceFixture({notes:[noteFixture({time:0}),noteFixture({time:.01,pitchBend:[{offset:0,value:10000}]}),noteFixture({time:0,midi:64}),noteFixture({time:.6})]});
   const plan=compileSamplePlan(p,options),ons=plan.events.filter(e=>e.type==='on');
   assert.notEqual(ons[0].channel,ons.find(n=>n.time===.01)!.channel);assert.equal(ons[0].channel,ons.find(n=>n.key===64)!.channel);
+  assert.equal(ons[0].channel,ons.find(n=>n.time===.6)!.channel,'same-pitch notes can share a lane after note-off while the static release rings');
 });
 test('live loop duration retains sample release after a short score with no declared tail',()=>{
   const p=performanceFixture({notes:[noteFixture({dur:.1})],duration:.4,tail:0}),plan=compileSamplePlan(p,options);
-  assert(plan.duration+plan.origin>=.1+SAMPLE_RELEASES['64:0:false']);
+  const profile=SAMPLE_RELEASE_PROFILES['piano:64:0:false:60'];
+  assert(profile);
+  assert(plan.noteLifetimes[0].end>=.1+profile[0],'the selected piano key keeps its own release metadata');
+  assert(plan.duration+plan.origin>=plan.noteLifetimes[0].end);
+});
+test('a missing per-key profile cannot inherit a drum bank’s unrelated 100-second release',()=>{
+  const p=performanceFixture({notes:[noteFixture({trackId:'kit',midi:127,dur:.1})],duration:.05,tail:0,worldId:'rock'});
+  const plan=compileSamplePlan(p,{...options,trackInstruments:new Map([['kit','drums']]),trackRoles:new Map([['kit','percussion']]),worldId:'rock',styleId:'rock-hard-rock'});
+  const profile=SAMPLE_RELEASE_PROFILES['percussion:0:0:true:127'];
+  assert.equal(profile,undefined,'the out-of-zone key has no recorded sample profile');
+  assert.equal(plan.noteLifetimes[0].end,.1+SAMPLE_RELEASE_RESERVE);
+  assert.equal(plan.duration,.1+SAMPLE_RELEASE_RESERVE,'the invalid zone cannot hold the transport open for the patch-wide maximum');
+});
+test('sample tail metadata distinguishes SoundFont packs that reuse the same MIDI patch address',()=>{
+  const piano=SAMPLE_RELEASE_PROFILES['piano:64:0:false:60'];
+  const upright=SAMPLE_RELEASE_PROFILES['upright:64:0:false:60'];
+  assert(piano&&upright);
+  assert.notDeepEqual(piano,upright,'piano and upright bass have separate sample lifetime profiles');
+  assert.notEqual(SAMPLE_RELEASES_BY_PATCH['piano:64:0:false'],SAMPLE_RELEASES_BY_PATCH['upright:64:0:false']);
+});
+test('Muldjord ride samples retain their recorded decay in playback and sample-plan lifetime',async()=>{
+  const note=noteFixture({trackId:'kit',midi:51,dur:.1,vel:100});
+  const performance=performanceFixture({notes:[note],duration:.2,tail:0,worldId:'rock'});
+  const renderOptions={...options,trackInstruments:new Map([['kit','drums']]),worldId:'rock',styleId:'rock-hard-rock'};
+  const plan=compileSamplePlan(performance,renderOptions);
+  const attack=plan.events.find(event=>event.type==='on');assert(attack&&attack.type==='on');
+  const profile=SAMPLE_RELEASE_PROFILES[`drumkit:67:${attack.patch.program}:false:51`];
+  assert(profile,`Muldjord ride profile exists for take ${attack.patch.program}`);
+  assert(profile[1]>8,'the source ride recording is no longer cropped at the old 8-second boundary');
+  assert(plan.noteLifetimes[0].end-note.time>8,'the planner reserves through the one-shot ride sample decay');
+  const runtime=await runtimeFor(plan),frames=9*44100,left=new Float32Array(frames),right=new Float32Array(frames);
+  try {
+    runtime.render(left,right);
+    let lateEnergy=0;
+    for(let frame=8*44100;frame<9*44100;frame++)lateEnergy+=left[frame]**2+right[frame]**2;
+    assert(lateEnergy>1e-8,'offline playback keeps the recorded ride audible beyond 8 seconds');
+  } finally {runtime.destroy();}
 });
 test('Spanish guitar mute/harmonics/body and bowed pizzicato select distinct sample programs',()=>{
   const p=performanceFixture({notes:['tone','mute','harmonic','golpe'].map((action,i)=>noteFixture({time:i*.3,gestureCode:codeForGesture(action),pitchIdentity:action==='golpe'?'unpitched':'pitched'}))});
@@ -447,6 +573,39 @@ test('Spanish guitar mute/harmonics/body and bowed pizzicato select distinct sam
   assert.equal(bowed.events.find(e=>e.type==='on')?.patch.program,45);
   const body=compileSamplePlan(performanceFixture({notes:[noteFixture({gestureCode:codeForGesture('body-hit'),pitchIdentity:'unpitched'})]}),{...options,trackInstruments:new Map([['keys','upright-bass']])});
   assert.equal(body.events.find(e=>e.type==='on')?.patch.pack,'percussion');
+});
+test('sample event plan preserves compiled staccato gates without a fixed wall-clock cap',()=>{
+  const durations=[.09,.25,.6,1.2];
+  const notes=durations.map((dur,index)=>noteFixture({
+    time:index*2,dur,gestureCode:codeForGesture('staccato'),midi:60+index,
+  }));
+  const plan=compileSamplePlan(performanceFixture({notes}),options);
+  const releases=plan.events.filter(event=>event.type==='off').map(event=>event.time);
+  assert.deepEqual(releases,durations.map((dur,index)=>index*2+dur),
+    'the compiled performance gate reaches the SoundFont note-off unchanged at every duration');
+});
+test('Metal style defaults keep open guitar parts out of the damped bank',()=>{
+  const technique=(styleId:string,role:'lead'|'harmony')=>resolveDialect('guitar','metal',styleId,role)!.defaultTechnique;
+  assert.equal(technique('metal-heavy-metal','lead'),'pick');
+  assert.equal(technique('metal-heavy-metal','harmony'),'legato');
+  assert.equal(technique('metal-doom','lead'),'legato');
+  assert.equal(technique('metal-black','lead'),'tremolo');
+  assert.equal(technique('metal-death','lead'),'tremolo');
+  assert.equal(technique('metal-thrash','lead'),'palm-mute');
+  const open=compileSamplePlan(performanceFixture({worldId:'metal',notes:[noteFixture({
+    trackId:'guitar',gestureCode:codeForGesture('tremolo'),
+  })]}),{...options,trackInstruments:new Map([['guitar','guitar']]),trackRoles:new Map([['guitar','lead']]),
+    worldId:'metal',styleId:'metal-black'});
+  const openPatch=open.events.find(event=>event.type==='on');
+  assert(openPatch&&openPatch.type==='on');
+  assert.equal(openPatch.patch.bank,71,'tremolo uses the sustained drive source');
+  const muted=compileSamplePlan(performanceFixture({worldId:'metal',notes:[noteFixture({
+    trackId:'guitar',gestureCode:codeForGesture('palm-mute'),
+  })]}),{...options,trackInstruments:new Map([['guitar','guitar']]),trackRoles:new Map([['guitar','lead']]),
+    worldId:'metal',styleId:'metal-thrash'});
+  const mutedPatch=muted.events.find(event=>event.type==='on');
+  assert(mutedPatch&&mutedPatch.type==='on');
+  assert.equal(mutedPatch.patch.bank,72,'explicit palm muting still uses the damped drive source');
 });
 test('damped steel preset shortens release smoothly; nylon retains source mute/harmonic patches',()=>{
   for(const id of ['steel'] as const){const bank=load(id),base=bank.presets.find(p=>p.bankMSB===64)!,muted=bank.presets.find(p=>p.bankMSB===65)!;

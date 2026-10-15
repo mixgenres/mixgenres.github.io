@@ -5,7 +5,7 @@
   "source": "Apple Music streaming track and album pages. No reference audio downloaded.",
   "styles": [
     {
-      "styleId": "hard-bop",
+      "styleId": "jazz-hard-bop",
       "compare": [
         "ride and backbeat relationship with blues and gospel inflection",
         "piano comping placement against the horn theme",
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "styleId": "bebop",
+      "styleId": "jazz-bebop",
       "compare": [
         "fast walking-bass pulse and ride-cymbal articulation",
         "horn phrase density, enclosures, and unison-head precision",
@@ -38,7 +38,7 @@
       ]
     },
     {
-      "styleId": "cool",
+      "styleId": "jazz-cool",
       "compare": [
         "restrained attacks and lower dynamic pressure",
         "space between horn phrases and accompaniment responses",
@@ -54,7 +54,7 @@
       ]
     },
     {
-      "styleId": "modal",
+      "styleId": "jazz-modal",
       "compare": [
         "long harmonic stays and the amount of space around chord changes",
         "voicing color and melodic development over a stable mode",
@@ -70,7 +70,7 @@
       ]
     },
     {
-      "styleId": "post-bop",
+      "styleId": "jazz-post-bop",
       "compare": [
         "motivic interplay against flexible pulse and changing harmonic centers",
         "how rhythm-section accents follow the soloist rather than a fixed loop",
@@ -86,7 +86,7 @@
       ]
     },
     {
-      "styleId": "big-band",
+      "styleId": "jazz-big-band",
       "compare": [
         "reed and brass section voicing, articulation, and register balance",
         "riff exchanges, ensemble hits, and shout-chorus contrast",
@@ -102,7 +102,7 @@
       ]
     },
     {
-      "styleId": "gypsy-jazz",
+      "styleId": "jazz-gypsy-jazz",
       "compare": [
         "short la-pompe chord strokes and their placement against the pulse",
         "acoustic-guitar attack, alternating bass, and fiddle or guitar leads",
@@ -118,7 +118,7 @@
       ]
     },
     {
-      "styleId": "jazz-fusion",
+      "styleId": "jazz-jazz-fusion",
       "compare": [
         "electric-bass tone, articulation, and interaction with the kick",
         "electric keys, guitar, and saxophone roles across the arrangement",
@@ -134,7 +134,7 @@
       ]
     },
     {
-      "styleId": "free-jazz",
+      "styleId": "jazz-free-jazz",
       "compare": [
         "collective interaction and textural density rather than a fixed chord loop",
         "fragmented motifs, rests, and ensemble responses",

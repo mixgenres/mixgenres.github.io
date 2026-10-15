@@ -1,4 +1,4 @@
-import { SAMPLE_RELEASES } from './bankIdentity';
+import { SAMPLE_RELEASE_PROFILES } from './bankIdentity';
 import type { Performance, PerfNote } from '../../band/performanceData';
 import type { Mp3RenderOptions } from '../mp3Export';
 import { INSTRUMENTS_BY_ID } from '../../lookup/instruments';
@@ -16,7 +16,18 @@ export type SampleEvent =
   | { time: number; type: 'bend'; channel: number; key: number; cents: number }
   | { time: number; type: 'cc'; channels: number[]; cc: number; value: number };
 export interface SampleTrack { id: string; instrumentId: string; gain: number; channels: number[]; pan: number }
-export interface SamplePlan { tracks: SampleTrack[]; events: SampleEvent[]; banks: BankId[]; duration: number; channels: number; origin: number }
+export interface SamplePlan {
+  tracks: SampleTrack[];
+  events: SampleEvent[];
+  banks: BankId[];
+  duration: number;
+  channels: number;
+  origin: number;
+  noteLifetimes: Array<{ note: PerfNote; end: number }>;
+  /** Expected simultaneous SF2 sample zones; used to size the synth before audio starts. */
+  voiceDemand: Array<{ start: number; end: number; patch: SamplePatch; key: number; velocity: number }>;
+}
+interface KeyReservation { holdEnd: number; soundingEnd: number; cents: number; pitchMotion: boolean }
 const pitch = (note: PerfNote) => note.frequencyHz !== undefined
   ? 1200 * Math.log2(note.frequencyHz / (440 * 2 ** ((note.midi - 69) / 12))) : note.tuningCents ?? 0;
 
@@ -24,7 +35,12 @@ const pitch = (note: PerfNote) => note.frequencyHz !== undefined
  * separate score events; adding another burst here would double their rhythm. */
 export function compileSamplePlan(performance: Performance, options: Mp3RenderOptions): SamplePlan {
   const trackIds = options.selectedTrackIds ?? [...options.trackInstruments.keys()];
+  const worldId = options.worldId ?? performance.worldId;
+  if (trackIds.length && !worldId) throw new Error('Sample playback requires an authored genre context.');
   const events: SampleEvent[] = [], banks = new Set<BankId>();
+  const noteLifetimes: SamplePlan['noteLifetimes'] = [];
+  const voiceDemand: SamplePlan['voiceDemand'] = [];
+  const synthFilterSweeps: Array<{ channel: number; start: number; end: number }> = [];
   const tracks: SampleTrack[] = [];
   let channels = 1;
   let soundingEnd=Math.max(.1,performance.duration+(performance.tail??0));
@@ -33,7 +49,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
     const def = INSTRUMENTS_BY_ID[instrumentId];
     if (!def) throw new Error(`Unknown sampled instrument: ${instrumentId}`);
     const trackRole = options.trackRoles?.get(id) ?? performance.trackInfo?.[id]?.role;
-    const params = resolveTrackSound(instrumentId, options.worldId ?? performance.worldId, options.styleId, trackRole);
+    const params = resolveTrackSound(instrumentId, worldId!, options.styleId, trackRole);
     const percussion = instrumentId !== 'timpani' && (!!def.kit || !!def.drum || def.voicing === 'unpitched');
     const base = patchForInstrument(instrumentId, percussion);
     const contextSounds = new Map<string, ReturnType<typeof resolveTrackSound>>();
@@ -43,11 +59,10 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       if (!sound) { sound = resolveTrackSound(instrumentId, worldId, styleId, role); contextSounds.set(key, sound); }
       return sound;
     };
-    const occupied: Array<Map<number,number>> = [];
+    const occupied: Array<Map<number,KeyReservation[]>> = [];
     const track: SampleTrack = { id, instrumentId, gain: params.roleGain ?? .7, channels: [], pan: params.pan };
     const pedal=performance.ccs.filter(cc=>cc.trackId===id&&cc.cc===64).sort((a,b)=>a.time-b.time);
     const notes = performance.notes.filter(note => note.trackId === id).sort((a,b) => a.time-b.time || a.midi-b.midi);
-    const hasReleaseController = performance.ccs.some(cc => cc.trackId === id && cc.cc === 72);
     // Hi-hat exclusivity is channel-local in SF2. Reserve one hat channel so
     // a closed/pedal hit chokes an open hat even while its release is ringing.
     const hatChannel = instrumentId==='sampler' || !!def.kit && instrumentId !== 'timpani' && notes.some(note=>[42,44,46].includes(Math.round(note.midi)));
@@ -57,7 +72,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       const gesture = resolveSampleGesture(instrumentId, note.gestureCode, note.vel, note.pitchIdentity);
       const action = gesture.action;
       const context = note.soundContext;
-      const sound = context && (context.worldId !== (options.worldId ?? performance.worldId ?? '')
+      const sound = context && (context.worldId !== (worldId ?? '')
         || context.styleId !== (options.styleId ?? '') || context.role !== trackRole)
         ? soundFor(context.worldId, context.styleId, context.role)
         : params;
@@ -69,6 +84,13 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
         patch={bank:64,program:(arco?4:0)+stableTake(note)%(arco?2:4),drum:false,pack:'upright'};
       }
       const world = note.soundContext?.worldId ?? options.worldId ?? performance.worldId ?? '';
+      const soundStyle = note.soundContext?.styleId ?? options.styleId ?? '';
+      if (instrumentId === 'violin' && /country|bluegrass|folk|western-swing|old-time/i.test(`${world} ${soundStyle}`)) {
+        // Use the source bank's folk-fiddle variation where the arrangement
+        // calls for a country/folk fiddle; classical and orchestral violin keep
+        // the standard violin patch.
+        patch = patchForProgram(110, 'strings');
+      }
       const guitar = /^(guitar|requinto|resonator-guitar|bajo-sexto|pedal-steel|lap-steel)$/.test(instrumentId);
       if (guitar) {
         const electric = sound.bodyConstruction === 'solid-electric' || /electric|distort|overdrive/.test(sound.variantId ?? '');
@@ -133,29 +155,69 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
         else if((SAMPLED_KIT_KEYS as readonly number[]).includes(key))patch={bank:/choke/.test(action)?68:67,program:stableTake(note)%3,drum:false,pack:'drumkit'};
       }
       banks.add(patch.pack);
+      const cents = patch.drum ? 0 : pitch(note);
+      if (!Number.isFinite(cents)) throw new Error('Invalid sampled note tuning.');
+      const initialBend = instrumentId==='pedal-steel' && action==='chordal-glissando' && !note.pitchBend?.length ? -200 : 0;
+      const onsetCents=cents+initialBend;
+      const hasGestureBend=!patch.drum&&(/fall|doit|slide|arrastre|vibrato|shake/.test(action)
+        ||instrumentId==='pedal-steel'&&['pedal-bend','knee-lever-bend','chordal-glissando'].includes(action));
+      const hasPitchMotion=!patch.drum&&(!!note.pitchBend?.length||hasGestureBend);
       const hat = hatChannel && [42,44,46].includes(key);
-      let lane = hat ? 0 : occupied.findIndex((keys,lane) => (!hatChannel||lane>0) && (keys.get(key) ?? -Infinity) <= note.time);
+      let lane = hat ? 0 : occupied.findIndex((keys,lane) => {
+        if(hatChannel&&lane===0)return false;
+        const reservations=(keys.get(key)??[]).filter(reservation=>reservation.soundingEnd>note.time);
+        keys.set(key,reservations);
+        return reservations.every(reservation=>reservation.holdEnd<=note.time
+          &&!reservation.pitchMotion&&!hasPitchMotion&&Math.abs(reservation.cents-onsetCents)<.01);
+      });
       if (lane < 0) lane = occupied.length;
-      // Independent channels isolate simultaneous bends/tuning, same-key note
-      // ownership and instrument changes through release tails.
+      // Share a channel with an already-released same-key voice only when both
+      // attacks keep the same pitch and neither bends. Held notes and notes
+      // with pitch motion retain independent same-key ownership.
       const channel = index + lane * Math.max(1, trackIds.length);
       occupied[lane] ??= new Map();
       const end=note.time+note.dur;
       const down=pedal.filter(cc=>cc.time<=end).at(-1)?.value ?? 0;
       const pedalEnd=down>=64 ? pedal.find(cc=>cc.time>end&&cc.value<64)?.time ?? performance.duration : end;
-      const releaseEnd=Math.max(end,pedalEnd)+(hasReleaseController ? SOUNDFONT_RELEASE_RESERVE
-        : SAMPLE_RELEASES[`${patch.bank}:${patch.program}:${patch.drum}`] ?? SOUNDFONT_RELEASE_RESERVE);
-      occupied[lane].set(key,releaseEnd);soundingEnd=Math.max(soundingEnd,releaseEnd);
+      const releaseStart=Math.max(end,pedalEnd);
+      const profile=SAMPLE_RELEASE_PROFILES[`${patch.pack}:${patch.bank}:${patch.program}:${patch.drum}:${key}`];
+      const loopTail=profile&&profile[2]>.0011?Math.max(.015625,profile[2]):0;
+      const estimatedTail=profile
+        ?Math.max(loopTail,Math.min(Math.max(.015625,profile[0]),Math.max(0,profile[1]-(releaseStart-note.time))))
+        // Patch-wide release is the maximum across every key and velocity.
+        // It is not a safe estimate for a missing key profile: drum presets in
+        // particular contain very long release values on unrelated zones.
+        :SOUNDFONT_RELEASE_RESERVE;
+      const releaseEnd=releaseStart+estimatedTail;
+      const reservations=(occupied[lane].get(key)??[]).filter(reservation=>reservation.soundingEnd>note.time);
+      reservations.push({holdEnd:releaseStart,soundingEnd:releaseEnd,cents:onsetCents,pitchMotion:hasPitchMotion});
+      occupied[lane].set(key,reservations);soundingEnd=Math.max(soundingEnd,releaseEnd);
       if (!track.channels.includes(channel)) track.channels.push(channel);
       channels = Math.max(channels, channel + 1);
-      const shortened = /staccato|spiccato|seco|choke|chapa/.test(action);
-      const hold = shortened ? Math.min(note.dur, .12) : note.dur;
-      const cents = patch.drum ? 0 : pitch(note);
-      if (!Number.isFinite(cents)) throw new Error('Invalid sampled note tuning.');
-      const initialBend = instrumentId==='pedal-steel' && action==='chordal-glissando' && !note.pitchBend?.length ? -200 : 0;
-      events.push({ time: note.time, type: 'on', channel, key, velocity: gesture.velocity,
+      // PerfNote.dur is the compiled musical gate. Pattern authoring and the
+      // performer have already applied instrument-aware articulation; a fixed
+      // wall-clock staccato cap here clipped slow notes and ignored tempo.
+      const hold = note.dur;
+      // SoundFont velocity often selects a different recorded dynamic layer as
+      // well as level. Apply the small authored timbre bias here, after gesture
+      // dynamics, so a bright/dark instrument setup reaches its recorded layer
+      // without flattening the player's accent and ghost-note range.
+      const timbreVelocity = Math.max(1, Math.min(127, Math.round(
+        gesture.velocity * Math.max(0.88, Math.min(1.12, 1 + (sound.brightnessMultiplier - 1) * 0.2)),
+      )));
+      noteLifetimes.push({note,end:releaseEnd});
+      voiceDemand.push({start:note.time,end:releaseEnd,patch,key,velocity:timbreVelocity});
+      events.push({ time: note.time, type: 'on', channel, key, velocity: timbreVelocity,
         patch, gain: track.gain, cents:cents+initialBend });
       events.push({ time: note.time + hold, type: 'off', channel, key });
+      // Filter sweep is a real synth gesture, not a note-length hint. CC 74 is
+      // bipolar in the shipped SoundFont engine: 64 leaves the authored patch
+      // cutoff unchanged, while lower and higher values move it down/up.
+      // Defer the envelope until channel allocation is complete so a chord
+      // shares one sweep instead of sending a controller ramp per chord tone.
+      if ((instrumentId === 'synth' || instrumentId === 'synth-bass') && action === 'filter-sweep') {
+        synthFilterSweeps.push({ channel, start: note.time, end: note.time + hold });
+      }
       for (const bend of note.pitchBend ?? []) if (bend.offset >= 0 && bend.offset < hold) {
         events.push({ time: note.time + bend.offset, type: 'bend', channel, key, cents: cents + (bend.value-8192)/8192*200 });
       }
@@ -199,12 +261,33 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
     }
     tracks.push(track);
   });
+  const sweepsByChannel = new Map<number, Array<{ start: number; end: number }>>();
+  for (const { channel, start, end } of synthFilterSweeps) {
+    const sweeps = sweepsByChannel.get(channel) ?? [];
+    sweeps.push({ start, end });
+    sweepsByChannel.set(channel, sweeps);
+  }
+  for (const [channel, rawSweeps] of sweepsByChannel) {
+    const byStart = new Map<number, number>();
+    for (const sweep of rawSweeps) byStart.set(sweep.start, Math.max(byStart.get(sweep.start) ?? sweep.end, sweep.end));
+    const sweeps = [...byStart].map(([start, end]) => ({ start, end })).sort((a, b) => a.start - b.start);
+    sweeps.forEach((sweep, index) => {
+      const nextStart = sweeps[index + 1]?.start ?? Infinity;
+      const end = Math.min(sweep.end, nextStart);
+      const span = Math.max(0, end - sweep.start);
+      const channels = [channel];
+      events.push({ time: sweep.start, type: 'cc', channels, cc: 74, value: 52 });
+      if (span > 0.015) events.push({ time: sweep.start + span * 0.68, type: 'cc', channels, cc: 74, value: 78 });
+      if (nextStart >= sweep.end) events.push({ time: sweep.end, type: 'cc', channels, cc: 74, value: 64 });
+    });
+  }
   if (channels > 2048) throw new Error('This score exceeds the sample channel budget. Reduce overlapping sustained notes.');
   const order = { cc: 0, off: 1, on: 2, bend: 3 };
   events.sort((a,b)=>a.time-b.time || order[a.type]-order[b.type]);
   const origin = performance.notes.reduce((from,n)=>trackIds.includes(n.trackId)?Math.min(from,n.time):from,0);
   for (const event of events) event.time -= origin;
-  return { tracks, events, banks:[...banks], duration:soundingEnd-origin, channels, origin };
+  for (const demand of voiceDemand) { demand.start -= origin; demand.end -= origin; }
+  return { tracks, events, banks:[...banks], duration:soundingEnd-origin, channels, origin, noteLifetimes, voiceDemand };
 }
 
 function patchForProgram(program: number, pack: BankId): SamplePatch { return { bank:0, program, drum:false, pack }; }

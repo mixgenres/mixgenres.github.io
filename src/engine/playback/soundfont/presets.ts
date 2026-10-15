@@ -9,7 +9,7 @@ export const BANK_PROGRAMS = {
   keys: [4, 5, 6, 7, 16, 19, 20, 21, 22],
   mallets: [8, 9, 10, 11, 12, 13, 14, 15, 117],
   guitars: [24, 25, 26, 28, 31, 32, 35, 36, 38, 46, 104, 105, 106, 107, 108],
-  strings: [40, 41, 42, 45, 48, 49],
+  strings: [40, 41, 42, 45, 48, 49, 110],
   winds: [64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 77, 78, 79, 109, 111],
   brass: [56, 57, 58, 59, 60, 61],
   electronic: [52, 53, 80, 81, 88, 89, 98, 120, 121],
@@ -33,6 +33,7 @@ export function electronicKitPatch(variantId?: string): SamplePatch | undefined 
 export const SYNTH_SAMPLE_PROGRAMS: Readonly<Record<string, number>> = Object.fromEntries(Object.entries(SAMPLED_SYNTH_PATCHES).map(([id,patch])=>[id,patch.program]));
 const ids: Record<string, number> = {};
 function assign(program: number, instruments: string) { for (const id of instruments.split(' ')) ids[id] = program; }
+function patchForProgram(program: number, pack: BankId): SamplePatch { return { bank: 0, program, drum: false, pack }; }
 assign(0, 'piano'); assign(4, 'rhodes'); assign(5, 'fm-ep'); assign(6, 'harpsichord'); assign(7, 'clavinet');
 assign(8, 'celeste'); assign(9, 'glockenspiel'); assign(10, 'music-box'); assign(11, 'vibraphone');
 assign(12, 'marimba marimba-de-chonta'); assign(13, 'xylophone');
@@ -61,6 +62,31 @@ export function patchForInstrument(id: string, percussion = false): SamplePatch 
   // GM slot used by the old mapping is Shamisen, which is the wrong timbre for
   // country bluegrass chop parts.
   if (id === 'mandolin') return {bank:16,program:25,drum:false,pack:'guitars'};
+  // Keep other bright folk lutes on the actual GS mandolin variation, rather
+  // than the Japanese Shamisen patch that is a poor fit for their attack.
+  if (id === 'bouzouki' || id === 'dombra') return {bank:16,program:25,drum:false,pack:'guitars'};
+  // Setar/tar/baglama are long-neck plucked lutes. The available GS sitar is
+  // still an approximation, but its sustained buzz/twang is a closer source
+  // family than the default Shamisen sample.
+  if (id === 'setar' || id === 'tar' || id === 'baglama') return patchForProgram(104, 'guitars');
+  // No dedicated kamancheh multisample is packaged yet. Keep it in the bowed
+  // strings bank with the violin proxy, rather than failing playback or
+  // silently selecting a plucked-string patch.
+  if (id === 'kamancheh') return patchForProgram(40, 'strings');
+  // Qanun is a plucked zither; the GS Koto zone has a more appropriate pluck
+  // than the hammered dulcimer patch shared with santur.
+  if (id === 'qanun') return patchForProgram(107, 'guitars');
+  // Pipa is a fretted plucked lute, not a zither. The GS mandolin variation
+  // gives it a closer bright, course-like attack than the Koto patch; it is
+  // still a family approximation rather than a dedicated pipa recording.
+  if (id === 'pipa') return { bank: 16, program: 25, drum: false, pack: 'guitars' };
+  // Ney, xiao, and quena are end-blown flutes. The breathier GS shakuhachi
+  // variation is a closer source family than the straight concert-flute patch.
+  if (id === 'ney' || id === 'xiao' || id === 'quena') return patchForProgram(77, 'winds');
+  // Oud is a short-necked gut-string lute; the GM Shamisen slot is a bright
+  // Japanese plucked-string patch and reads as the wrong instrument. The
+  // curated nylon-guitar source is the closer available warm, rounded pluck.
+  if (id === 'oud') return {bank:64,program:24,drum:false,pack:'nylon'};
   // The source bank has five recorded whistle roots in its GS variation bank.
   // Low whistle shares these recordings in a lower written register; a
   // dedicated low-whistle multisample set is still needed.

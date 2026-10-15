@@ -5,7 +5,7 @@
   "source": "Apple Music streaming track pages. No reference audio downloaded.",
   "styles": [
     {
-      "styleId": "funk",
+      "styleId": "funk-funk",
       "compare": [
         "the hard downbeat against the loose, syncopated bass and guitar attacks",
         "how short rests and ghosted subdivisions define pocket without filling every beat",
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "styleId": "jazz-funk",
+      "styleId": "funk-jazz-funk",
       "compare": [
         "repeating bass ostinato against extended Rhodes or electric-keyboard chords",
         "how horn or keyboard phrases enter after the rhythm-section downbeat",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "styleId": "minneapolis",
+      "styleId": "funk-minneapolis",
       "compare": [
         "the drum-machine backbeat against short, tightly muted guitar attacks",
         "how synth hooks answer the vocal while low-end remains intentionally lean",
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "styleId": "disco",
+      "styleId": "funk-disco",
       "compare": [
         "four-on-the-floor kick against bass-guitar pulse and open-hat subdivisions",
         "the short, even rhythm-guitar strokes and their placement around the beat",
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "styleId": "philly-disco",
+      "styleId": "funk-philly-disco",
       "compare": [
         "the string-section swell and chord punctuation against the drum and bass dance frame",
         "how piano and rhythm guitar reinforce the vocal without thickening every subdivision",
@@ -85,7 +85,7 @@
       ]
     },
     {
-      "styleId": "boogie",
+      "styleId": "funk-boogie",
       "compare": [
         "octave synth-bass or electric-bass attacks against the kick pattern",
         "offbeat electric-piano stabs and their chord-release length",
@@ -101,7 +101,7 @@
       ]
     },
     {
-      "styleId": "hi-nrg",
+      "styleId": "funk-hi-nrg",
       "compare": [
         "relentless four-on-the-floor kick against octave-pulsing synth bass",
         "offbeat hats, sustained synth hook, and high-register vocal energy",
@@ -117,7 +117,7 @@
       ]
     },
     {
-      "styleId": "p-funk",
+      "styleId": "funk-p-funk",
       "compare": [
         "the weight and attack envelope of the elastic bass hook against the drum downbeat",
         "how synth and keyboard answers occupy the gaps around the bass and chant",
@@ -133,7 +133,7 @@
       ]
     },
     {
-      "styleId": "james-brown-the-one",
+      "styleId": "funk-james-brown-the-one",
       "compare": [
         "short riff attacks and horn hits against the deliberate spaces between them",
         "the bass and kick locking into a firm, repeated downbeat",

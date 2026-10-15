@@ -4,7 +4,7 @@
   "source": "Apple Music track pages and public Apple catalog search metadata. No reference audio downloaded.",
   "styles": [
     {
-      "styleId": "classic",
+      "styleId": "reggaeton-classic",
       "compare": [
         "kick/snare separation",
         "short synth replies",
@@ -50,7 +50,7 @@
       ]
     },
     {
-      "styleId": "playero-underground",
+      "styleId": "reggaeton-playero-underground",
       "compare": [
         "dry machine drums",
         "sample reply length",
@@ -96,7 +96,7 @@
       ]
     },
     {
-      "styleId": "melodic",
+      "styleId": "reggaeton-melodic",
       "compare": [
         "lead space",
         "chord attack versus release",
@@ -142,7 +142,7 @@
       ]
     },
     {
-      "styleId": "neoperreo",
+      "styleId": "reggaeton-neoperreo",
       "compare": [
         "distortion versus transient definition",
         "sparse bass pocket",
@@ -188,7 +188,7 @@
       ]
     },
     {
-      "styleId": "latin-trap-crossover",
+      "styleId": "reggaeton-latin-trap-crossover",
       "compare": [
         "half-time backbeat",
         "bass sustain and glide",
@@ -228,7 +228,7 @@
       ]
     },
     {
-      "styleId": "experimental",
+      "styleId": "reggaeton-experimental",
       "compare": [
         "dembow fragment spacing",
         "low-anchor stability",

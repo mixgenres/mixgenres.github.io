@@ -68,9 +68,10 @@ arabic::takht|Mohamed Abdel Wahab|Ya Msafer Wahdak
 arabic::instrumental-maqam|Munir Bashir|Taqsim Maqam Rast
 arabic::modern-arabic-orchestra|Mohamed Abdel Wahab|Al Nahr Al Khalid
 persian::dastgah|Mohammad Reza Shajarian|Morgh-e Sahar
-persian::radif|Dariush Tala'i|Dastgah-e Shur: Daramad
-persian::avaz|Mohammad Reza Shajarian|Avaz-e Abu Ata
-persian::modern-persian|Kayhan Kalhor|Silent City
+persian::radif-on-setar|Dariush Tala'i|Dastgah-e Shur: Daramad
+persian::avaz-e-dashti|Mohammad Reza Shajarian|Avaz-e Abu Ata
+persian::persian-instrumental-ensemble|Hossein Alizadeh & Ensemble|Pishdaramad (Dastgah-e Shur)
+persian::contemporary-persian-chamber|Kayhan Kalhor & Brooklyn Rider|Silent City
 turkish::ottoman-classical|Tanburi Cemil Bey|Hicaz Taksim
 turkish::roman-halk|Selim Sesler|Keşan'a Giden Yollar
 steppe::morin-khuur|Mongolian State Morin Khuur Ensemble|Jonon Khar

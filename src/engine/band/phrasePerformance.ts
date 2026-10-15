@@ -52,6 +52,8 @@ export interface PhraseContext {
   phraseEnd: number;
   phrasePosition: number;
   phraseIndex: number;
+  /** Zero-based attack number across the whole authored phrase, not just this bar. */
+  phraseAttackIndex?: number;
   onsetIndex: number;
   onsetPosition: number;
   hit: HitFunction;
@@ -126,6 +128,19 @@ function nearestMidi(pc: number, target: number, low: number, high: number): num
     if (d < bestDist) { best = m; bestDist = d; }
   }
   return best;
+}
+
+/** Choose the next scale tone toward the authored target instead of imposing a shared rising contour. */
+function approachTargetPc(previousMidi: number, targetPc: number, scale: number[], low: number, high: number): number {
+  const targetMidi = nearestMidi(targetPc, previousMidi, low, high);
+  const direction = Math.sign(targetMidi - previousMidi);
+  if (!direction) return targetPc;
+  for (let candidate = previousMidi + direction; candidate >= low && candidate <= high; candidate += direction) {
+    const pc = ((candidate % 12) + 12) % 12;
+    if (scale.includes(pc)) return pc;
+    if (candidate === targetMidi) break;
+  }
+  return targetPc;
 }
 
 function approachPc(targetPc: number, currentPc: number, chromatic: boolean): number {
@@ -276,7 +291,6 @@ export function realizeMidi(ctx: PhraseContext, index: number, total: number, st
   const scale = ctx.soloist && ctx.soloGrammar?.scaleMode
     ? scalePcsForMode(ctx.soloGrammar.scaleMode, rootPc(ctx.chord))
     : chordScalePcs(ctx.chord, ctx.hybridTheory);
-  const chordTones = chordTonePcsWithQuality(ctx.chord);
   const idiomaticDegrees = IDIOMATIC_DEGREE_RULES.find(rule => rule.genrePattern.test(ctx.hostGenre) && rule.instrumentPattern.test(d))?.degrees;
   const stage = ctx.soloist && ctx.soloGrammar?.phraseStages?.length
     ? ctx.soloGrammar.phraseStages[ctx.phraseIndex % ctx.soloGrammar.phraseStages.length]
@@ -285,9 +299,10 @@ export function realizeMidi(ctx: PhraseContext, index: number, total: number, st
   const grammarDegree = targetStrategy.includes('root-or-fifth')
     ? ((ctx.barIndex + index) % 2 ? 5 : 1)
     : targetStrategy.includes('root') ? 1 : undefined;
+  const phraseAttackIndex = ctx.phraseAttackIndex ?? index;
   const targetDegree = grammarDegree ?? (idiomaticDegrees
-    ? idiomaticDegrees[(ctx.barIndex * 2 + index) % idiomaticDegrees.length]
-    : (ctx.hybridTheory.melody.targetDegrees[index % ctx.hybridTheory.melody.targetDegrees.length] ?? 1));
+    ? idiomaticDegrees[phraseAttackIndex % idiomaticDegrees.length]
+    : (ctx.hybridTheory.melody.targetDegrees[phraseAttackIndex % ctx.hybridTheory.melody.targetDegrees.length] ?? 1));
   const targetPc = ctx.soloist && scale.length
     ? scale[(targetDegree - 1 + scale.length * 2) % scale.length]
     : degreePc(ctx.chord, targetDegree, ctx.hybridTheory);
@@ -303,14 +318,14 @@ export function realizeMidi(ctx: PhraseContext, index: number, total: number, st
     const at = Math.max(0, scale.indexOf(prevPc));
     pc = scale[(at + (index % 5 < 3 ? 1 : -1) + scale.length) % scale.length] ?? targetPc;
   } else if (!strong) {
-    const prevPc = state.previousMidi !== undefined ? state.previousMidi % 12 : targetPc;
-    const idx = scale.indexOf(prevPc);
-    const contour = ctx.hybridTheory.melody.contour[(ctx.phraseIndex + ctx.barIndex + index) % Math.max(1, ctx.hybridTheory.melody.contour.length)] ?? 'motif';
-    const step = contour.includes('descending') || contour.includes('space') ? -1 : 1;
-    pc = scale[(idx >= 0 ? idx + step : index + step + scale.length) % scale.length] ?? scale[index % scale.length];
-    if (chordTones.includes(pc) === false && ctx.hybridTheory.melody.approachDegrees.length) {
-      const approachDegree = ctx.hybridTheory.melody.approachDegrees[index % ctx.hybridTheory.melody.approachDegrees.length];
-      pc = degreePc(ctx.chord, approachDegree, ctx.hybridTheory);
+    // `melody.contour` contains descriptive labels such as "pickup", "answer",
+    // and "montuno". Treating those words as a binary up/down command sent
+    // nearly every undocumented label upward, giving unrelated genres the same
+    // scalar climb. Let the actual phrase target and previous played pitch set
+    // the direction; the authored contour labels remain descriptive metadata.
+    if (state.previousMidi !== undefined) {
+      pc = approachTargetPc(state.previousMidi, targetPc, scale,
+        ctx.profile.capabilities.lowMidi, ctx.profile.capabilities.highMidi);
     }
   }
   if (ctx.nextChord && ctx.phrasePosition > 0.8 && ctx.hybridTheory.bass.chromaticApproach) {
@@ -357,7 +372,11 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
   if (desired && allowed(desired)) return desired;
   const hostPreferred = new Set(ctx.hostProfile.preferredGestures);
   const sourcePreferred = new Set(ctx.sourceProfile.preferredGestures);
-  const percussiveRole = /percussion|drum|pulse/i.test(ctx.role);
+  const instrumentDefinition = INSTRUMENTS_BY_ID[ctx.profile.instrumentId];
+  const percussiveRole = /percussion|drum|pulse/i.test(ctx.role)
+    || instrumentDefinition?.voicing === 'unpitched'
+    || instrumentDefinition?.drum !== undefined
+    || instrumentDefinition?.kit === true;
   const text = `${ctx.pattern?.id ?? ''} ${ctx.pattern?.name ?? ''} ${ctx.regionStyleId ?? ''}`.toLowerCase();
   const sourceHit = String(ctx.measureDetails?.hitTypes?.[ctx.onsetIndex] ?? '').toLowerCase();
 
@@ -442,7 +461,7 @@ export function preferredGesture(ctx: PhraseContext, hit: HitFunction, authored?
 }
 
 export function buildHybridGrammar(hostStyleId: string | undefined, sourceGenre: string, hostStyle: import('../../data/styles/schema').ResolvedStyle, lensWeight = 0.5, sourceStyleId?: string): { host: PerformanceGrammar; source: PerformanceGrammar; hybrid: PerformanceGrammar } {
-  const host = getPerformanceGrammar(hostStyle ?? {});
+  const host = getPerformanceGrammar(hostStyle);
   const canonical = getCanonicalStyle(sourceGenre);
   const resolvedSource = resolveStyle({ genreId: sourceGenre, styleId: sourceStyleId ?? canonical.id });
   const source = getPerformanceGrammar(resolvedSource);

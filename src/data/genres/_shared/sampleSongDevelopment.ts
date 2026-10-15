@@ -98,6 +98,13 @@ const DEVELOPMENTS: Record<string, Array<{
     {instrument:'kendang',role:'percussion',name:'Javanese kendang suwuk close',shortName:'Suwuk close',onsets:[0],durations:[0.18],articulation:'tempo-cue',sections:['suwuk'],phraseEnd:true,description:'Land the final cue with the ensemble, then stop the drum and let the closing gong ring.'},
     {instrument:'gongs',role:'percussion',name:'Javanese gong suwuk close',shortName:'Suwuk close',onsets:[0],durations:[3.8],articulation:'accent',sections:['suwuk'],phraseEnd:true,description:'Strike the final gong with the ensemble and let its full tail ring through the closing bar.'},
   ],
+  'afrobeat-palm-wine': [
+    {instrument:'guitar',role:'harmony',name:'Palm-wine guitar four-bar cadence',shortName:'Guitar close',onsets:[0,4,8,12],durations:[2.6,1.8,2.8,3.6],accents:[.92,.58,.74,1],articulation:'fingerstyle',sections:['outro'],cycleLength:4,phraseEnd:true,description:'Carry the fingerpicked pulse through four measured bars, then let the final chord ring as the response cycle closes.'},
+  ],
+  'gnawa-lila-trance': [
+    {instrument:'guembri',role:'bass',name:'Gnawa lila final guembri cadence',shortName:'guembri close',onsets:[0],durations:[1.8],articulation:'damping',sections:['cadence'],phraseEnd:true,description:'Land one low guembri cadence stroke with the final qraqeb response, then let the lila cycle stop cleanly.'},
+    {instrument:'qraqeb',role:'percussion',name:'Gnawa lila final qraqeb cadence',shortName:'qraqeb close',onsets:[0],durations:[0.18],articulation:'accent',sections:['cadence'],phraseEnd:true,description:'Make one coordinated closing qraqeb attack with the guembri, then release together instead of continuing the cycle.'},
+  ],
   'gamelan-balinese-gong-kebyar': [
     {instrument:'gamelan-metallophone',role:'lead',name:'Gong Kebyar buka ensemble flare',shortName:'Buka flare',onsets:[0],durations:[0.2],articulation:'accent',sections:['buka'],description:'Strike the opening attack together with the other parts, then let the bronze ring. This is a one-hit opening study, not a transcription.'},
     {instrument:'gamelan-metallophone',role:'harmony',name:'Gong Kebyar buka support flare',shortName:'Buka support',onsets:[0],durations:[0.2],articulation:'accent',sections:['buka'],description:'Join the lead on the opening attack, then leave the space open so the ensemble flare reads as one event.'},

@@ -152,7 +152,10 @@ function rhythmIdeaFromPattern(p: MusicalPattern, sourceGenre: string, beatsPerB
     duration: Math.max(0.001, Number(p.durationGrid?.[i] ?? 1) / sub * beatsPerBar),
     durationAuthored: Array.isArray(p.durationGrid),
     hit: hitFrom(p, i),
-    sourceHit: p.hitGrid?.[i] ?? (p.instruments?.includes('drums') || p.family?.toLowerCase().includes('drum') ? `${p.id} ${p.name}` : undefined),
+    // A pattern's display name is not a struck drum surface. Pass only an
+    // authored per-event hit label; otherwise the explicit hit function below
+    // carries the event's rhythmic meaning.
+    sourceHit: p.hitGrid?.[i],
     sourceGenre: p.worldId || sourceGenre,
   }));
   return {
@@ -351,7 +354,7 @@ function applyPhraseBandInteraction(
 ): void {
   const model = style?.contract?.interactionModel ?? 'interlock';
   const theory = styleTheoryFor(style?.id, region.genre ?? sheet.worldId);
-  const roles = new Map((sheet.tracks as Voice[]).map(t => [t.id, String(sheet.partRoles?.[region.id]?.[t.id] ?? t.role ?? 'harmony').toLowerCase()]));
+  const roles = new Map((sheet.tracks as Voice[]).map(t => [t.id, String(sheet.partRoles?.[region.id]?.[t.id] ?? t.role).toLowerCase()]));
   const regionNotes = notes.filter(n => n.bar >= region.start && n.bar < region.end);
   if (!regionNotes.length) return;
 
@@ -366,7 +369,8 @@ function applyPhraseBandInteraction(
     const near = (a: PerfNote, b: PerfNote) => a.trackId !== b.trackId && Math.abs(a.time - b.time) <= 0.030;
 
     for (const n of phrase) {
-      const role = roles.get(n.trackId) ?? 'harmony';
+      const role = roles.get(n.trackId);
+      if (!role) throw new Error(`No authored role for track ${n.trackId} in section ${region.id}`);
       const mixKey = /lead|melody|voice/.test(role) ? 'lead' : /bass/.test(role) ? 'bass' : /perc|drum/.test(role) ? 'percussion' : /pad/.test(role) ? 'pad' : /comp|harmony|piano|guitar/.test(role) ? 'harmony' : role;
       const feature = theory.mixFocus[mixKey] ?? theory.mixFocus.melody ?? .5;
       const featureGain = 0.93 + Math.max(0, Math.min(1, feature)) * 0.14;
@@ -493,6 +497,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
       let carriedBassMidi: number | undefined;
       let carriedBassTime: number | undefined;
       let carriedVoicing: number[] | undefined;
+      let carriedMelodyMidi: number | undefined;
       const dialect = resolveDialect(track.instrumentId, region.genre ?? sheet.worldId, regionStyle.id, track.role, decision.sectionEnergy);
       const partDialect = lane.lens.weight > 0
         ? resolveDialect(track.instrumentId, lane.lens.sourceGenre, lane.lens.sourceStyleId, track.role, decision.sectionEnergy)
@@ -520,14 +525,19 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
         };
         phrases.push(phrase);
         const state = createPhraseState(phraseIndex);
-        // Phrase-local contour resets are useful for melodic development, but
-        // a walking bass or comp voicing must keep its physical voice-leading
-        // memory across the boundary. Resetting every four bars made chord
-        // changes repeatedly jump back to the same stock register.
+        // Phrase-local contour decisions reset, while physical voice-leading
+        // memory for bass, chord voicings, and derived melodies carries across
+        // the boundary. This preserves sentence shape without register jumps.
         if (carriesBassLine) {
           state.previousMidi = carriedBassMidi;
           state.previousTime = carriedBassTime;
         }
+        // Phrase boundaries shape the melody; they should not teleport an
+        // automatically realized line back to its default register. Explicit
+        // score pitches still pass through unchanged, so authored octave
+        // shifts remain available where the part actually writes one.
+        if (!carriesBassLine && /^(lead|melody|counterline|voice)$/i.test(String(track.role ?? '')))
+          state.previousMidi = carriedMelodyMidi;
         if (carriesChordVoicing && carriedVoicing?.length) state.previousVoicing = carriedVoicing.slice();
         const phraseNotes: PerfNote[] = [];
         for (let bar = phraseStart; bar < phraseEnd; bar++) {
@@ -554,6 +564,8 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
           if (!rhythm.onsets.length) continue;
           const energy = activityFor(regionStyle.contract, decision.sectionEnergy);
           const phrasePosition = ((bar - phraseStart) + 0.5) / Math.max(1, phraseEnd - phraseStart);
+          const phraseAttackOffset = cell.bars.slice(phraseStart - region.start, bar - region.start)
+            .reduce((count, phraseBar) => count + phraseBar.attacks.length, 0);
           const phraseStage = soloGrammar?.phraseStages?.length
             ? soloGrammar.phraseStages[phraseIndex % soloGrammar.phraseStages.length]
             : undefined;
@@ -599,6 +611,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
               phraseEnd,
               phrasePosition,
               phraseIndex,
+              phraseAttackIndex: phraseAttackOffset + i,
               onsetIndex: i,
               onsetPosition: onset.position,
               authoredPitch: onset.pitch,
@@ -670,9 +683,12 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
             const gapBeats = Math.max(localGapBeats, onset.hit === 'sustain' ? 1.0 : 0.18);
             const durBeats = noteLengthBeats(pv, authoredBeats, Math.max(gapBeats, onset.durationAuthored ? authoredBeats : 0) * (onset.hit === 'sustain' ? 3.5 : 1.7), gestureName);
             const writtenDuration = onset.durationAuthored ? authoredBeats : durBeats;
+            // An authored gate is already a deliberate rhythmic decision. Use
+            // articulation-scaled duration only when a pattern leaves the gate
+            // to the performer; multiplying an authored staccato/legato gate a
+            // second time changes the written phrase and can break cadences.
             const dur = Math.max(onset.durationAuthored ? 0.000001 : 0.028,
-              scoreDurationSeconds({ bars }, bar, onset.position * bt.beatsPerBar, writtenDuration)
-              * (onset.durationAuthored ? 1 : 0.82 + ctx.hostProfile.phrase.sustain * 0.32));
+              scoreDurationSeconds({ bars }, bar, onset.position * bt.beatsPerBar, writtenDuration));
             const tuningSystem = regionStyle.harmony.tuningSystem;
             if (!tuningSystem) throw new Error(`No authored tuning system for ${regionStyle.primaryGenre}/${regionStyle.id}`);
             const tuning = resolveTuningSystem(tuningSystem);
@@ -750,7 +766,10 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
                     attackId: `${track.id}:${region.id}:${bar}:${i}:passing`,
                     phraseId,
                     time: passTime,
-                    dur: Math.min(0.16, gap * 0.42),
+                    // The passing tone occupies a fixed share of its available
+                    // gap; a 160 ms ceiling made it unnaturally tiny at slow
+                    // tempos.
+                    dur: gap * 0.42,
                     midi: passing,
                     harmonicChord: chord,
                     frequencyHz: tuning.getFrequencyHz(passing, parseChord(chord).rootPc),
@@ -783,6 +802,8 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
           carriedBassMidi = state.previousMidi;
           carriedBassTime = state.previousTime;
         }
+        if (!carriesBassLine && /^(lead|melody|counterline|voice)$/i.test(String(track.role ?? '')))
+          carriedMelodyMidi = state.previousMidi;
         if (carriesChordVoicing && state.previousVoicing?.length) carriedVoicing = state.previousVoicing.slice();
         notes.push(...phraseNotes);
       }

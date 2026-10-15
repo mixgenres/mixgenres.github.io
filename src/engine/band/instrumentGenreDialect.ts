@@ -24,9 +24,12 @@ export function getGenreDialect(params: GenreDialectContext): GenreDialect {
   // their explicit genre segment. The prefix is metadata, not a new dialect.
   const explicitId = canonical(params.dialect || '');
   const explicit = explicitId.includes(':') ? canonical(explicitId.split(':').at(-1)!) : explicitId;
-  if (params.dialect && !PROFILES[explicit]) throw new Error(`No authored instrument dialect profile for ${explicit}`);
   const id = explicit || canonical(params.genreId || '');
-  const p = PROFILES[id];
+  // Afrobeat is the genre identity used by the catalog; the authored dialect
+  // profile is shared with its modern afrobeats family entry.
+  const profileId = id === 'afrobeat' ? 'afrobeats' : id;
+  if (params.dialect && !PROFILES[profileId]) throw new Error(`No authored instrument dialect profile for ${id}`);
+  const p = PROFILES[profileId];
   if (!p) throw new Error(`No authored instrument dialect profile for ${id || '(empty genre)'}`);
   return { id, ...p };
 }

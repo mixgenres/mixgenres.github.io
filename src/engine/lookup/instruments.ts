@@ -81,7 +81,7 @@ export function cleanInstrumentName(name: string): string {
  * Instruments a world tends to reach for first, by world id.
  * Maps to canonical 32 genre baseline instrumentation.
  */
-/** Return the authored technique profile for an instrument, with a safe fallback. */
+/** Return the catalog-authored technique profile for an instrument. */
 export function techniqueProfile(id: string): InstrumentTechniqueProfile {
   const def = INSTRUMENTS_BY_ID[id];
   if (!def) {
@@ -105,11 +105,14 @@ export function genreTechniquesForInstrument(
   const cached = resolvedTechniqueCache.get(cacheKey);
   if (cached) return cached;
   const match = calibratedStylesById.get(key);
-  const world = match?.world;
-  const style = match?.style;
-  if (world && style?.calibration) {
+  if (!match) throw new Error(`Unknown authored instrument style: ${styleId}`);
+  const { world, style } = match;
+  if (!style.calibration) throw new Error(`Style ${styleId} has no authored technique calibration`);
+  {
     const authored = style.calibration.instrumentTechniques?.[id]
-      ?? Object.values(style.calibration.techniques).flat();
+      ?? Object.entries(style.calibration.roles)
+        .filter(([, role]) => role.preferredInstruments.includes(id))
+        .flatMap(([role]) => style.calibration!.techniques[role] ?? []);
     const scoped = authored
       .filter(term => !scope || !style.calibration?.techniqueScopes?.[term] || style.calibration.techniqueScopes[term]!.includes(scope));
     const wanted = scoped.map(value => value.toLowerCase());
@@ -134,10 +137,4 @@ export function genreTechniquesForInstrument(
     resolvedTechniqueCache.set(cacheKey, []);
     return [];
   }
-  for (const [style, arts] of Object.entries(p.genreTechniques ?? {})) {
-    if (key === style || key.includes(style) || style.includes(key)) return arts.filter(a => p.articulations.includes(a));
-  }
-  const result = p.articulations;
-  resolvedTechniqueCache.set(cacheKey, result);
-  return result;
 }

@@ -5,7 +5,7 @@
   "source": "Apple Music and Spotify track pages, plus Apple Music album notes and credits. No reference audio downloaded.",
   "styles": [
     {
-      "styleId": "tishoumaren",
+      "styleId": "desert-blues-tishoumaren",
       "compare": [
         "interlocking electric-guitar ostinati and small phrase changes",
         "lead vocal and group-response placement",
@@ -46,7 +46,7 @@
       ]
     },
     {
-      "styleId": "sahel-guitar",
+      "styleId": "desert-blues-sahel-guitar",
       "compare": [
         "repeating guitar figure with conversational melodic answers",
         "bass movement against the guitar pulse",
@@ -87,7 +87,7 @@
       ]
     },
     {
-      "styleId": "acoustic-tuareg",
+      "styleId": "desert-blues-acoustic-tuareg",
       "compare": [
         "acoustic-string attack and natural decay",
         "handclaps/percussion against open guitar cycles",
@@ -128,7 +128,7 @@
       ]
     },
     {
-      "styleId": "psychedelic-desert",
+      "styleId": "desert-blues-psychedelic-desert",
       "compare": [
         "repeating riff, sustained lead tone, and controlled feedback/echo",
         "guitar density against bass and drum definition",

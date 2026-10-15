@@ -51,6 +51,7 @@ export const DRUM_STAFF: NonNullable<NotationRules['percussion']> = {
   'zapateado-planta': { step: 'A', octave: 4, notehead: 'normal' },
   'zapateado-punta': { step: 'F', octave: 5, notehead: 'x' },
   'snare-center': { step: 'C', octave: 5, notehead: 'normal' },
+  'hand-clap': { step: 'C', octave: 5, notehead: 'x' },
   'snare-rimshot': { step: 'D', octave: 5, notehead: 'x' },
   'snare-cross-stick': { step: 'B', octave: 4, notehead: 'x' },
   'snare-ghost': { step: 'A', octave: 4, notehead: 'normal' },

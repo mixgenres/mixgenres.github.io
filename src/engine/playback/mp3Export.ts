@@ -11,6 +11,7 @@ import { applyProgramMakeup, reserveOutputHeadroom } from '../studio/outputHeadr
 import { excerptMixTimeline } from '../studio/dynamicMix/MixAutomation';
 import { determineBusCategory } from './mixBus';
 import { SOUNDFONT_RELEASE_RESERVE } from './soundfont/release';
+import { compileSamplePlan, type SamplePlan } from './soundfont/plan';
 
 export interface Mp3RenderOptions {
   selectedTrackIds?: string[];
@@ -65,10 +66,16 @@ async function renderPerformance(
   perf = { ...perf, notes: perf.notes.filter(note => isActive(note.trackId)), ccs: perf.ccs.filter(cc => isActive(cc.trackId)) };
   if (options.renderWindow) perf = performanceWindow(perf, options.renderWindow.start, options.renderWindow.end, () => SOUNDFONT_RELEASE_RESERVE, true);
   const sampleRate = 44100;
-  const noteTail = (_note: PerfNote) => SOUNDFONT_RELEASE_RESERVE;
+  const activeTrackIds = [...new Set(perf.notes.map(n => n.trackId))];
+  const trackPlans = new Map<string, SamplePlan>();
+  for (const trackId of activeTrackIds) {
+    const plan = compileSamplePlan(perf, { ...options, selectedTrackIds: [trackId] });
+    trackPlans.set(trackId, plan);
+  }
   // Match each note's end to its own lifetime, rather than adding the longest
   // instrument tail to the latest note in an unrelated part.
-  const lastDecayEnd = perf.notes.reduce((end, note) => Math.max(end, note.time + note.dur + noteTail(note)), 0);
+  const lastDecayEnd = [...trackPlans.values()].flatMap(plan => plan.noteLifetimes)
+    .reduce((end, lifetime) => Math.max(end, lifetime.end), 0);
   const completeDuration = Math.max(1, perf.duration + (perf.tail ?? 3), lastDecayEnd);
   const limit = options.maxDurationSeconds;
   const duration = limit !== undefined && Number.isFinite(limit) && limit > 0
@@ -76,14 +83,14 @@ async function renderPerformance(
   const totalSamples = Math.ceil(duration * sampleRate);
   const outputStartSample = 0;
   const outputSamples = totalSamples;
-  const activeTrackIds = [...new Set(perf.notes.map(n => n.trackId))];
-
   if (!activeTrackIds.length && !options.rawStem) throw new Error('No audible notes in the selected tracks.');
+  const worldId = options.worldId ?? perf.worldId;
+  if (activeTrackIds.length && !worldId) throw new Error('Audio rendering requires an authored genre context.');
   const notesByTrack = new Map<string, PerfNote[]>();
   for (const note of perf.notes) { const bucket = notesByTrack.get(note.trackId) ?? []; bucket.push(note); notesByTrack.set(note.trackId, bucket); }
   if (onProgress) onProgress(0.02);
 
-  const { mixCharacter, masterProfile: styleMaster, context: mixContext } = resolvePlaybackMix(options.worldId, options.styleId);
+  const { mixCharacter, masterProfile: styleMaster, context: mixContext } = resolvePlaybackMix(worldId, options.styleId);
   const observeOutput = (left: Float32Array, right: Float32Array, browserMasterApplied: boolean) => {
     if (!options.onDiagnostics) return;
     const metrics = measureAudio(left, right, sampleRate);
@@ -133,7 +140,7 @@ async function renderPerformance(
 
       const instrumentId = options.trackInstruments.get(trackId) || perf.trackInfo?.[trackId]?.instrumentId || trackId;
       const instDef = INSTRUMENTS_BY_ID[instrumentId];
-      const params = resolveTrackSound(instrumentId, options.worldId ?? perf.worldId, options.styleId, options.trackRoles?.get(trackId) ?? perf.trackInfo?.[trackId]?.role);
+      const params = resolveTrackSound(instrumentId, worldId!, options.styleId, options.trackRoles?.get(trackId) ?? perf.trackInfo?.[trackId]?.role);
       const trackMixVolume = options.mixState?.volume?.[trackId] ?? 1;
       const trackMixPan = options.mixState?.pan?.[trackId] ?? params.pan;
       // Keep historical attacks in the excerpt so holds, bends and release tails
@@ -143,13 +150,14 @@ async function renderPerformance(
         if (n.time < minNoteTime) minNoteTime = n.time;
       }
       const trackStartSample = Math.max(0, Math.floor(minNoteTime * sampleRate));
-      const noteEndSample = Math.ceil(trackNotes.reduce((end, note) => Math.max(end, note.time + note.dur + noteTail(note)), 0) * sampleRate);
+      const plan = trackPlans.get(trackId)!;
+      const noteEndSample = Math.ceil(Math.max(0, ...plan.noteLifetimes.map(lifetime => lifetime.end)) * sampleRate);
       const trackEndSample = Math.min(totalSamples, noteEndSample);
       const trackSamples = trackEndSample - trackStartSample;
       if (trackSamples <= 0 || trackEndSample <= outputStartSample) continue;
       const retainedStart = Math.max(trackStartSample,outputStartSample);
       if (!instDef) throw new Error(`Unknown instrument: ${instrumentId}`);
-      const stem = await (await import('./soundfont/render')).renderSampleTrack(perf, options, trackId, retainedStart, trackEndSample);
+      const stem = await (await import('./soundfont/render')).renderSampleTrack(perf, options, trackId, retainedStart, trackEndSample, plan);
       let chunks = [stem];
       const applyBalance = !options.rawStem || !!options.mixState;
       const pan = Math.max(0, Math.min(1, trackMixPan));

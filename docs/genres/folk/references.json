@@ -1,0 +1,104 @@
+{
+  "genreId": "folk",
+  "reviewed": "2026-10-15",
+  "status": "Five distinct streaming candidates are collected for each style. Listening comparisons and useful timecodes remain pending; these are candidates, not verified sonic matches.",
+  "source": "Apple Music track pages. Track and performer metadata checked; reference audio has not been auditioned or downloaded.",
+  "styles": [
+    {
+      "styleId": "folk-contemporary-folk",
+      "compare": [
+        "how the acoustic groove and vocal phrasing breathe through verse and refrain",
+        "instrumental color and harmony layers entering over the song rather than repeating one loop",
+        "foreground vocal intelligibility against guitar, strings, and percussion",
+        "changes in density, stereo width, and energy between intimate and expanded sections"
+      ],
+      "recordings": [
+        { "title": "Ragged Wood", "artist": "Fleet Foxes", "url": "https://music.apple.com/us/song/1434594003", "timecodes": [] },
+        { "title": "Everything Is Free", "artist": "Gillian Welch", "url": "https://music.apple.com/us/song/79765100", "timecodes": [] },
+        { "title": "Naked As We Came", "artist": "Iron & Wine", "url": "https://music.apple.com/us/song/5644874", "timecodes": [] },
+        { "title": "Mykonos", "artist": "Fleet Foxes", "url": "https://music.apple.com/us/song/313390450", "timecodes": [] },
+        { "title": "Sophia", "artist": "Laura Marling", "url": "https://music.apple.com/us/song/1574203101", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "folk-old-time",
+      "compare": [
+        "the fiddle's dance pulse, bow accent, and tune-specific lift",
+        "open-string drones and banjo or guitar rhythm supporting a repeating dance form",
+        "small melodic variations between tune passes without pop-style chord-cycle development",
+        "raw ensemble balance and room sound in field and revival-era recordings"
+      ],
+      "recordings": [
+        { "title": "Piney Woods Gal", "artist": "Tommy Jarrell", "url": "https://music.apple.com/us/song/219725333", "timecodes": [] },
+        { "title": "Sugar Hill", "artist": "Fred Cockerham, Oscar Jenkins & Tommy Jarrell", "url": "https://music.apple.com/us/song/111347491", "timecodes": [] },
+        { "title": "Sally Ann", "artist": "Tommy Jarrell", "url": "https://music.apple.com/us/song/119246893", "timecodes": [] },
+        { "title": "Wednesday Night Waltz", "artist": "Clark Kessinger", "url": "https://music.apple.com/us/song/219720860", "timecodes": [] },
+        { "title": "Give the Fiddler a Dram", "artist": "Bill Hicks", "url": "https://music.apple.com/us/song/219720957", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "folk-appalachian",
+      "compare": [
+        "modal melody and drone notes against the tune's harmonic center",
+        "flatpicked guitar, banjo, and fiddle taking turns in the foreground",
+        "vocal or instrumental phrases answering one another instead of doubling every line",
+        "the mix of blues inflection, open-string resonance, and dance rhythm"
+      ],
+      "recordings": [
+        { "title": "Black Mountain Rag", "artist": "Doc Watson", "url": "https://music.apple.com/us/song/803873003", "timecodes": [] },
+        { "title": "Deep River Blues", "artist": "Doc Watson", "url": "https://music.apple.com/us/song/714373772", "timecodes": [] },
+        { "title": "Shady Grove", "artist": "Mark O'Connor", "url": "https://music.apple.com/us/song/1485653917", "timecodes": [] },
+        { "title": "Shady Grove", "artist": "Norman Blake", "url": "https://music.apple.com/us/song/1738246954", "timecodes": [] },
+        { "title": "June Apple", "artist": "Butch Baldassari & David Schnaufer", "url": "https://music.apple.com/us/song/399194526", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "folk-celtic",
+      "compare": [
+        "reel or jig lift, compound-meter feel, and phrase pickup",
+        "ornamented melody and the variation of repeated tune strains",
+        "unison, octave, and heterophonic ensemble textures across fiddle, pipes, harp, and plucked strings",
+        "tune-to-tune transitions and how the ensemble creates momentum without a drum-kit backbeat"
+      ],
+      "recordings": [
+        { "title": "The Kesh Jig / Give Us a Drink of Water / The Famous Ballymote", "artist": "The Bothy Band", "url": "https://music.apple.com/us/song/275956544", "timecodes": [] },
+        { "title": "The Blacksmith", "artist": "Planxty", "url": "https://music.apple.com/us/song/1565031894", "timecodes": [] },
+        { "title": "Planxty Hewlett", "artist": "Anne-Marie O'Farrell", "url": "https://music.apple.com/us/song/320508483", "timecodes": [] },
+        { "title": "Medley: The Hens March Through the Midden / The Four Poster Bed / The Lark in the Morning / Rakish Paddy / Foxhunters' Jig / Toss the Feathers (Live)", "artist": "Fairport Convention & Sandy Denny", "url": "https://music.apple.com/us/song/1110141077", "timecodes": [] },
+        { "title": "The Wise Maid - Farewell To Erin - The Boys of Malin (Reels) [Live]", "artist": "The Drowsy Lads", "url": "https://music.apple.com/us/song/421242857", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "folk-singer-songwriter",
+      "compare": [
+        "lyric-led phrasing, breath, and flexible line length",
+        "how a guitar, piano, or small band supports rather than competes with the vocal story",
+        "harmonic turns and melodic lift that make each refrain feel earned",
+        "dynamic builds, instrumental replies, and cadences across the complete song"
+      ],
+      "recordings": [
+        { "title": "Both Sides, Now", "artist": "Joni Mitchell", "url": "https://music.apple.com/us/song/128076651", "timecodes": [] },
+        { "title": "Fire and Rain", "artist": "James Taylor", "url": "https://music.apple.com/us/song/1502475455", "timecodes": [] },
+        { "title": "Angel From Montgomery", "artist": "John Prine", "url": "https://music.apple.com/us/song/1018524564", "timecodes": [] },
+        { "title": "Pancho and Lefty", "artist": "Townes Van Zandt", "url": "https://music.apple.com/us/song/1182567495", "timecodes": [] },
+        { "title": "The Circle Game (Take One)", "artist": "Tom Rush", "url": "https://music.apple.com/us/song/279688464", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "folk-folk-revival",
+      "compare": [
+        "plain acoustic accompaniment and how the lyric remains central",
+        "shared vocal harmony, unison, and audience or group response",
+        "strumming, banjo, and guitar patterns that shape a communal pulse",
+        "the shift between solo testimony and collective chorus across different performers"
+      ],
+      "recordings": [
+        { "title": "If I Had a Hammer", "artist": "Peter, Paul & Mary", "url": "https://music.apple.com/us/song/302102908", "timecodes": [] },
+        { "title": "Blowin' In the Wind", "artist": "Joan Baez", "url": "https://music.apple.com/us/song/712159510", "timecodes": [] },
+        { "title": "Where Have All the Flowers Gone", "artist": "The Kingston Trio", "url": "https://music.apple.com/us/song/1801041518", "timecodes": [] },
+        { "title": "This Land Is Your Land", "artist": "Woody Guthrie", "url": "https://music.apple.com/us/song/278341654", "timecodes": [] },
+        { "title": "Come and Go with Me to That Land (Live at Newport)", "artist": "Peter, Paul & Mary with Joan Baez, Odetta, Theodore Bikel & Pete Seeger", "url": "https://music.apple.com/us/album/come-and-go-with-me-to-that-land-feat-joan-baez/1475706964?i=1475707029", "timecodes": [] }
+      ]
+    }
+  ]
+}

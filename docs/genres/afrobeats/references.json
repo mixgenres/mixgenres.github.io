@@ -5,7 +5,7 @@
   "source": "Apple Music individual streaming-track pages. No reference audio downloaded.",
   "styles": [
     {
-      "styleId": "contemporary-afrobeats",
+      "styleId": "afrobeats-contemporary-afrobeats",
       "compare": [
         "the shaker subdivision against clipped offbeat guitar and the kick-snare pocket",
         "how the bass anchors the vocal hook and answers in phrase gaps",
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "styleId": "afropop",
+      "styleId": "afrobeats-afropop",
       "compare": [
         "bright refrain melody over a syncopated, forward-moving bass line",
         "how short guitar, keyboard, and percussion responses frame the lead vocal",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "styleId": "afrofusion",
+      "styleId": "afrobeats-afrofusion",
       "compare": [
         "how the cross-rhythm hook combines with a stable bass-and-drum center",
         "which local rhythmic and timbral layers remain audible through global pop production",
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "styleId": "alte",
+      "styleId": "afrobeats-alte",
       "compare": [
         "sparse, displaced backbeat and negative space around the vocal",
         "the character of nonstandard synth, guitar, and sampled timbres",
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "styleId": "randb-afrobeats",
+      "styleId": "afrobeats-randb-afrobeats",
       "compare": [
         "melismatic lead phrases and breaths against short guitar or keyboard replies",
         "the relationship between sub-bass, kick, and the lighter syncopated percussion",

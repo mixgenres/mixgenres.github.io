@@ -1,6 +1,10 @@
 export const BLUES_CENTS_BY_PITCH_CLASS: Record<number, number> = { 3: 35, 6: -20 };
 export const WERCKMEISTER_CENTS_OFFSETS = [0, -10, -8, -6, -10, -2, -12, -4, -12, -8, -4, -10];
 export const MAQAM_NEUTRAL_SECOND_PITCH_CLASSES: number[] = [1, 2];
+/** Shur's common koron degrees, represented as approximate 12-TET pitch
+ * classes plus cents. Persian practice uses context-dependent intervals, so
+ * this is a teaching approximation rather than a fixed tuning prescription. */
+export const PERSIAN_SHUR_HALF_FLAT_PITCH_CLASSES: number[] = [2, 7];
 
 export const TUNING_SYSTEM_DATA = {
   '12-tet': {
@@ -17,6 +21,11 @@ export const TUNING_SYSTEM_DATA = {
     id: 'maqam-bayati', name: 'Arabic Maqam Bayati',
     description: 'Bayati ajnas featuring quarter-tone neutral second (-50 cents on 2nd degree)',
     defaultTonicPc: 2, neutralSecondPitchClasses: MAQAM_NEUTRAL_SECOND_PITCH_CLASSES, neutralSecondCents: -50,
+  },
+  'persian-shur': {
+    id: 'persian-shur', name: 'Persian Shur (koron approximation)',
+    description: 'Shur-centered tuning with common koron degrees lowered by 50 cents; use melodic context for variable degrees.',
+    defaultTonicPc: 0, halfFlatPitchClasses: PERSIAN_SHUR_HALF_FLAT_PITCH_CLASSES, halfFlatCents: -50,
   },
   'blues-continuum': {
     id: 'blues-continuum', name: 'Blues Neutral Third & Slur',

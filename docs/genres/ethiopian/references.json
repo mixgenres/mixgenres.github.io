@@ -5,7 +5,7 @@
   "source": "Apple Music individual track pages and artist/release metadata. Reference audio has not been downloaded or auditioned.",
   "styles": [
     {
-      "styleId": "ethio-jazz",
+      "styleId": "ethiopian-ethio-jazz",
       "compare": [
         "the horn line's pentatonic phrases against syncopated organ chords",
         "how bass and drum kit make the groove feel buoyant without flattening the melody",
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "styleId": "tizita",
+      "styleId": "ethiopian-tizita",
       "compare": [
         "slow, ornamented pentatonic vocal phrasing and the breath between lines",
         "masenqo response against the lead, when present",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "styleId": "ethiopian-funk",
+      "styleId": "ethiopian-ethiopian-funk",
       "compare": [
         "clipped horn attacks and their placement against the bass figure",
         "the pocket made by bass, kit, and kebero rather than a straight rock backbeat",
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "styleId": "traditional-modal",
+      "styleId": "ethiopian-traditional-modal",
       "compare": [
         "modal vocal calls and instrumental answers across phrase gaps",
         "the lead role shared by voice and masenqo without constant doubling",
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "styleId": "modern-ethio-jazz",
+      "styleId": "ethiopian-modern-ethio-jazz",
       "compare": [
         "electric-keyboard layers against a grounded bass-and-drum pocket",
         "horn exchange and instrumental handoffs rather than continuous unison melody",

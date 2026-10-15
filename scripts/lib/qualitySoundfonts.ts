@@ -18,8 +18,7 @@ export const QUALITY_SOURCES = {
 const load=(path:string)=>{const data=readFileSync(path);return SoundBankLoader.fromArrayBuffer(data.buffer.slice(data.byteOffset,data.byteOffset+data.byteLength));};
 
 /** Keep four recorded piano dynamics and both microphones across the full
- * keyboard. Preserve attacks and ten seconds of each natural decay; fade only
- * the cropped terminal 150ms. This is an explicit browser-size tradeoff. */
+ * keyboard. Preserve the source sample through its recorded natural decay. */
 export function qualityPiano(root:string) {
   const source=load(join(root,QUALITY_SOURCES.piano));
   const layers=new Map([[4,[1,50]],[8,[51,75]],[12,[76,105]],[16,[106,127]]]);
@@ -35,11 +34,10 @@ export function qualityPiano(root:string) {
   bank.clonePreset(source.presets[0]);bank.removeUnusedElements();bank.flush();
   for(const sample of bank.samples) {
     const data=sample.getAudioData();
-    const raw=Buffer.from(data.buffer,data.byteOffset,Math.min(data.length,Math.round(sample.sampleRate*10))*4);
+    const raw=Buffer.from(data.buffer,data.byteOffset,data.byteLength);
     const pcm=execFileSync('ffmpeg',['-v','error','-f','f32le','-ar',String(sample.sampleRate),'-ac','1','-i','pipe:0',
       '-ar','44100','-f','f32le','pipe:1'],{input:raw,maxBuffer:8*1024*1024});
     const audio=new Float32Array(pcm.buffer.slice(pcm.byteOffset,pcm.byteOffset+pcm.byteLength));
-    if(data.length/sample.sampleRate>10)for(let f=Math.max(0,audio.length-6615);f<audio.length;f++)audio[f]*=(audio.length-f)/6615;
     const rateScale=44100/sample.sampleRate;
     sample.loopStart=Math.min(audio.length-1,Math.round(sample.loopStart*rateScale));
     sample.loopEnd=Math.min(audio.length,Math.round(sample.loopEnd*rateScale));
@@ -117,14 +115,6 @@ export function qualityDrumKit(root:string, generalUser:BasicSoundBank) {
   const brush=bank.clonePreset(brushSource);brush.name='MixGenres GeneralUser Brush Kit';brush.bankMSB=67;brush.bankLSB=0;brush.program=3;brush.isGMGSDrum=false;
   const brushChoke=bank.clonePreset(brushSource);brushChoke.name='MixGenres GeneralUser Brush Kit choke';brushChoke.bankMSB=68;brushChoke.bankLSB=0;brushChoke.program=3;brushChoke.isGMGSDrum=false;
   brushChoke.globalZone.setGenerator(GeneratorTypes.releaseVolEnv,-12000,false);
-  for(const sample of bank.samples) {
-    const original=sample.getAudioData(),limit=Math.min(original.length,Math.round(sample.sampleRate*8));
-    if(limit===original.length)continue;
-    const audio=original.slice(0,limit),fade=Math.round(sample.sampleRate*.15);
-    for(let f=audio.length-fade;f<audio.length;f++)audio[f]*=(audio.length-f)/fade;
-    sample.loopStart=Math.min(audio.length-1,sample.loopStart);sample.loopEnd=Math.min(audio.length,sample.loopEnd);
-    sample.setAudioData(audio,sample.sampleRate);
-  }
   return bank;
 }
 
@@ -154,17 +144,6 @@ export function qualityElectric(root:string,kind:'electricClean'|'electricDrive'
     preset.bankMSB=normalBank+1;preset.name+=' damped';
     preset.globalZone.setGenerator(GeneratorTypes.initialFilterFc,-2400,false);
     preset.globalZone.setGenerator(GeneratorTypes.releaseVolEnv,-3600,false);bank.clonePreset(preset);
-  }
-  for(const sample of bank.samples) {
-    const original=sample.getAudioData(),limit=Math.min(original.length,Math.round(sample.sampleRate*12));
-    if(limit===original.length)continue;
-    // These sources use one-shot decays. Reject a future active-loop source
-    // rather than trimming through a sustaining loop without preserving it.
-    if(bank.instruments.some(i=>i.zones.some(z=>z.sample===sample&&(z.getGenerator(GeneratorTypes.sampleModes,0)&1))))throw new Error('FSBS source unexpectedly uses active loops');
-    const audio=original.slice(0,limit),fade=Math.round(sample.sampleRate*.15);
-    for(let f=audio.length-fade;f<audio.length;f++)audio[f]*=(audio.length-f)/fade;
-    sample.loopStart=Math.min(audio.length-1,sample.loopStart);sample.loopEnd=Math.min(audio.length,sample.loopEnd);
-    sample.setAudioData(audio,sample.sampleRate);
   }
   return bank;
 }
@@ -232,12 +211,7 @@ export function qualityUprightBass(root:string) {
         if(!sample) {
           const path=join(root,'dsmolken_double_bass',original.sample);
           const pcm=execFileSync('ffmpeg',['-v','error','-i',path,'-f','f32le','-ac','1','-ar','44100','pipe:1'],{maxBuffer:16*1024*1024});
-          let audio=new Float32Array(pcm.buffer.slice(pcm.byteOffset,pcm.byteOffset+pcm.byteLength));
-          const limit=44100*12;
-          if(audio.length>limit) {
-            audio=audio.slice(0,limit);const fade=Math.min(6615,audio.length);
-            for(let i=audio.length-fade;i<audio.length;i++)audio[i]*=(audio.length-i)/fade;
-          }
+          const audio=new Float32Array(pcm.buffer.slice(pcm.byteOffset,pcm.byteOffset+pcm.byteLength));
           sample=new EmptySample();
           sample.name=original.sample.split('/').at(-1)!.replace(/\.wav$/i,'').slice(0,20);
           sample.originalKey=original.root;sample.setAudioData(audio,44100);loaded.set(original.sample,sample);

@@ -1,0 +1,110 @@
+{
+  "genreId": "bollywood",
+  "reviewed": "2026-10-15",
+  "status": "Six Bollywood styles now have five linked streaming candidates each. Listening comparisons and useful timecodes remain pending; candidates are not verified sonic matches.",
+  "source": "Apple Music streaming song and album pages. Titles and credited performers were checked on the linked pages. No reference audio downloaded or auditioned.",
+  "styles": [
+    {
+      "styleId": "bollywood-modern",
+      "compare": [
+        "how a short vocal hook is introduced, repeated with changed backing, and handed to an instrumental response",
+        "the balance between lead vocal, string or wind answers, bass movement, tabla color, and modern kit weight",
+        "how the prelude, mukhda, antara, instrumental passage, and coda change density instead of looping one backing cell",
+        "how ornaments and phrase-end fills lead into the next section without crowding the sung line",
+        "the contrast between cinematic scale and a clearly articulated dance pulse"
+      ],
+      "recordings": [
+        { "title": "Jai Ho", "artist": "A.R. Rahman, Sukhwinder Singh, Tanvi Shah, Mahalakshmi Iyer", "url": "https://music.apple.com/us/song/1443885535", "timecodes": [] },
+        { "title": "Masakali", "artist": "Mohit Chauhan", "url": "https://music.apple.com/us/song/1159292145", "timecodes": [] },
+        { "title": "Agar Tum Saath Ho", "artist": "Alka Yagnik, Arijit Singh", "url": "https://music.apple.com/us/song/1071074558", "timecodes": [] },
+        { "title": "Kar Har Maidaan Fateh", "artist": "Sukhwinder Singh, Shreya Ghoshal", "url": "https://music.apple.com/us/song/1447877704", "timecodes": [] },
+        { "title": "Jab Tak", "artist": "Armaan Malik", "url": "https://music.apple.com/us/song/1158884518", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "bollywood-golden-age",
+      "compare": [
+        "a singable foreground melody supported by acoustic orchestra colors rather than a modern four-on-the-floor production bed",
+        "short instrumental replies between vocal clauses and the way those replies vary on later returns",
+        "how strings, flute, or plucked colors support the melody without masking its consonants and pitch bends",
+        "the weight and timing of bass and percussion around lyric phrases, cadences, and pickups",
+        "recording-era ensemble balance and natural dynamic shape across contrasting song moods"
+      ],
+      "recordings": [
+        { "title": "Awaara Hoon", "artist": "Mukesh", "url": "https://music.apple.com/us/song/1375030172", "timecodes": [] },
+        { "title": "Pyar Hua Iqrar Hua", "artist": "Manna Dey, Lata Mangeshkar, Shailendra", "url": "https://music.apple.com/us/song/1626042883", "timecodes": [] },
+        { "title": "Man Dole Mera Tan Dole", "artist": "Ravi, Kalyanji, Lata Mangeshkar", "url": "https://music.apple.com/us/song/1282286570", "timecodes": [] },
+        { "title": "Suhana Safar Aur Yeh Mausam", "artist": "Mukesh", "url": "https://music.apple.com/us/song/1575995570", "timecodes": [] },
+        { "title": "Aaj Phir Jeene Ki Tamanna Hai", "artist": "Lata Mangeshkar, Shailendra", "url": "https://music.apple.com/us/song/1852179890", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "bollywood-disco-bollywood",
+      "compare": [
+        "a firm dance-floor kick and bass relationship, including octave motion and rhythmic gaps rather than one repeated low-note pattern",
+        "how synth, string, or brass-like riffs answer the singer and reappear with added weight at refrain returns",
+        "the placement of handclaps, fills, and instrumental breaks around the vocal rather than on every subdivision",
+        "how arrangement layers build and drop through the song while keeping the pulse steady",
+        "the difference between Bollywood disco's orchestral and melodic phrasing and a generic contemporary club loop"
+      ],
+      "recordings": [
+        { "title": "I Am A Disco Dancer", "artist": "Vijay Benedict", "url": "https://music.apple.com/us/song/1364954823", "timecodes": [] },
+        { "title": "Jimmy Jimmy Jimmy Aaja", "artist": "Parvati Khan", "url": "https://music.apple.com/us/song/1364954990", "timecodes": [] },
+        { "title": "Yaad Aa Raha Hai", "artist": "Bappi Lahiri", "url": "https://music.apple.com/us/song/1364954997", "timecodes": [] },
+        { "title": "Auva Auva Koi Yahan Nache", "artist": "Usha Uthup, Bappi Lahiri", "url": "https://music.apple.com/us/song/1364955000", "timecodes": [] },
+        { "title": "Aap Jaisa Koi", "artist": "Nazia Hassan", "url": "https://music.apple.com/us/song/1689857206", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "bollywood-romantic",
+      "compare": [
+        "how the melody breathes across long lines and how pickups, held notes, and cadences carry emotional direction",
+        "the balance of duet partners or solo vocal against strings, keyboard, and guitar without an overbearing accompaniment",
+        "dynamic restraint in the verse and a broader but still lyrical refrain, with instrumental responses occupying vocal gaps",
+        "how harmony changes support the lyric arc instead of repeating the same chord accent at every bar",
+        "the contrast between intimate openings, full refrain arrivals, and softened phrase endings"
+      ],
+      "recordings": [
+        { "title": "Pehla Nasha", "artist": "Udit Narayan, Sadhana Sargam", "url": "https://music.apple.com/us/song/1340749968", "timecodes": [] },
+        { "title": "Tujhe Dekha To", "artist": "Lata Mangeshkar, Kumar Sanu", "url": "https://music.apple.com/us/song/1352484512", "timecodes": [] },
+        { "title": "Tum Hi Ho", "artist": "Arijit Singh", "url": "https://music.apple.com/us/song/1321918444", "timecodes": [] },
+        { "title": "Aankhon Ki Gustakhiyan", "artist": "Kumar Sanu, Kavita Krishnamurthy", "url": "https://music.apple.com/us/song/1120781026", "timecodes": [] },
+        { "title": "Kal Ho Naa Ho", "artist": "Sonu Nigam", "url": "https://music.apple.com/us/song/261308968", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "bollywood-folk-cinematic",
+      "compare": [
+        "the specific folk-derived rhythmic cycle and percussion timbre, with dhol and claps making different contributions",
+        "call-and-response between lead vocals, group answers, and melodic instruments",
+        "how repeated folk hooks gain lift through orchestration and section changes rather than accumulating a constant drum wash",
+        "phrase accents, pickups, and stop or turnaround gestures that make the dance feel communal and embodied",
+        "how local melodic and vocal gestures remain audible inside a large cinematic arrangement"
+      ],
+      "recordings": [
+        { "title": "Chaiyya Chaiyya", "artist": "Sukhwinder Singh, Sapna Awasthi", "url": "https://music.apple.com/us/song/1130322151", "timecodes": [] },
+        { "title": "Genda Phool", "artist": "Rekha Bhardwaj", "url": "https://music.apple.com/us/song/1131692274", "timecodes": [] },
+        { "title": "Dholi Taro Dhol Baaje", "artist": "Kavita Krishnamurthy, Vinod Rathod, Karsan Sargathia", "url": "https://music.apple.com/us/song/1784676713", "timecodes": [] },
+        { "title": "Nagada Sang Dhol", "artist": "Sanjay Leela Bhansali, Shreya Ghoshal, Osman Mir", "url": "https://music.apple.com/us/song/1842063594", "timecodes": [] },
+        { "title": "Man Mohini", "artist": "Shankar Mahadevan", "url": "https://music.apple.com/us/song/1784676631", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "bollywood-electronic-club",
+      "compare": [
+        "kick, bass, and synth interlock and low-frequency separation through drops and returns",
+        "short hook and vocal-chop placement, with clear space for the lead rather than sustained choir-like layers",
+        "how a build changes density and anticipation before the drop instead of merely increasing every part's loudness",
+        "the production balance between electronic drums, acoustic or South Asian percussion colors, and melodic accompaniment",
+        "phrase-level variation in the repeated club groove and the transition from verse to hook"
+      ],
+      "recordings": [
+        { "title": "Badtameez Dil", "artist": "Pritam, Benny Dayal, Shefali Alvares", "url": "https://music.apple.com/us/song/1070912803", "timecodes": [] },
+        { "title": "Baby Doll", "artist": "Meet Bros Anjjan, Kanika Kapoor", "url": "https://music.apple.com/us/song/1272729077", "timecodes": [] },
+        { "title": "Kala Chashma", "artist": "Amar Arshi, Badshah, Neha Kakkar, Indeep Bakshi", "url": "https://music.apple.com/us/song/1810439905", "timecodes": [] },
+        { "title": "Nashe Si Chadh Gayi", "artist": "Arijit Singh", "url": "https://music.apple.com/us/song/1183308041", "timecodes": [] },
+        { "title": "Ghungroo", "artist": "Arijit Singh, Shilpa Rao", "url": "https://music.apple.com/us/song/1808664663", "timecodes": [] }
+      ]
+    }
+  ]
+}

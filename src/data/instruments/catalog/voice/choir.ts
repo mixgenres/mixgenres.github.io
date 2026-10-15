@@ -2,13 +2,13 @@ import type { InstrumentDef } from '../../schema/instrument-def';
 
 export const choir: InstrumentDef = {
   id: "choir",
-  name: "Full Vocal Choir",
+  name: "Choir guide (GM aahs)",
   family: "voice",
   voicing: "chord",
   
   
   polyphony: 8,
-  note: "Polyphonic acoustic choral ensemble combining soprano, alto, tenor, and bass vocalists singing sustained vowel sonorities with expansive cathedral acoustic bloom",
+  note: "General MIDI Choir Aahs pad used as a harmony guide; it is not a sampled SATB ensemble and does not include a cathedral recording",
   acousticProfile: {
     sustain: "sustained",
     role: "comp",
@@ -33,10 +33,9 @@ export const choir: InstrumentDef = {
     articulations: ["tenuto", "legato", "crescendo", "diminuendo", "accent", "portato"],
     techniqueMethods: [
       "polyphonic SATB voice leading and suspensions",
-      "seamless staggered breathing for infinite sustains",
-      "dynamic choral swells (messa di voce)",
-      "gentle vocal onset without harsh consonants",
-      "cathedral acoustic release decay"
+      "sustained vowel-patch harmony",
+      "voiced chord changes with clean releases",
+      "soft dynamic shaping on held guide notes"
     ],
     playingStyles: ["choral", "cinematic", "classical", "gospel", "ambient"],
     genreTechniques: {

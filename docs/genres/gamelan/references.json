@@ -5,7 +5,7 @@
   "source": "Apple Music individual track pages and release metadata. Reference audio has not been downloaded or auditioned.",
   "styles": [
     {
-      "styleId": "javanese",
+      "styleId": "gamelan-javanese",
       "compare": [
         "the gong-chime cycle and how the kenong and gong mark its larger divisions",
         "balungan melody against saron, bonang, gender, and rebab elaboration",
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "styleId": "balinese-gong-kebyar",
+      "styleId": "gamelan-balinese-gong-kebyar",
       "compare": [
         "kotekan interlock between paired metallophones and the combined attack of their paired tuning",
         "sudden, coordinated shifts in tempo, dynamics, and ensemble density",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "styleId": "degung",
+      "styleId": "gamelan-degung",
       "compare": [
         "Sundanese degung's gentle, cyclical pace and gong punctuation",
         "suling flute ornaments and kacapi or bonang support against the metallophone line",
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "styleId": "gamelan-angklung",
+      "styleId": "gamelan-gamelan-angklung",
       "compare": [
         "the compact Balinese angklung ensemble's interlocking metallophone and gong parts",
         "shorter, quicker phrase cycles and the dry, bright attack of the tuned bronze instruments",

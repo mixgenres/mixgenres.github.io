@@ -1,0 +1,224 @@
+{
+  "genreId": "mbalax",
+  "reviewed": "2026-10-15",
+  "status": "Six or more linked streaming recording candidates are listed for each of the four Mbalax styles. Listening comparisons and useful timecodes remain pending; candidates are not verified sonic matches.",
+  "source": "Apple Music streaming track and album pages. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "mbalax-classic",
+      "compare": [
+        "how vocal calls and refrain returns are answered by sabar and tama speech accents",
+        "the interlock between syncopated electric bass, guitar responses, and the percussion ensemble",
+        "sabar and talking-drum phrase endings, breaks, and re-entries instead of an unchanging pulse loop",
+        "the mix balance between lead voice, bright guitar, low bass, and sharply articulated hand drums",
+        "how traditional Senegalese rhythmic language meets band arrangement and popular-song form"
+      ],
+      "recordings": [
+        {
+          "title": "M'Badane (feat. Youssou N'Dour)",
+          "artist": "Étoile de Dakar",
+          "url": "https://music.apple.com/us/song/1287514449",
+          "timecodes": []
+        },
+        {
+          "title": "Sabar",
+          "artist": "Youssou N'Dour & Super Etoile de Dakar",
+          "url": "https://music.apple.com/us/song/1800688967",
+          "timecodes": []
+        },
+        {
+          "title": "Immigrés / Bitim Rew",
+          "artist": "Youssou N'Dour, Étoile de Dakar",
+          "url": "https://music.apple.com/us/song/202088808",
+          "timecodes": []
+        },
+        {
+          "title": "Taaw",
+          "artist": "Youssou N'Dour",
+          "url": "https://music.apple.com/us/song/202089074",
+          "timecodes": []
+        },
+        {
+          "title": "Boul Bayékou",
+          "artist": "Youssou N'Dour",
+          "url": "https://music.apple.com/us/song/266711843",
+          "timecodes": []
+        },
+        {
+          "title": "Sopekou",
+          "artist": "Thione Seck",
+          "url": "https://music.apple.com/us/song/536434493",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "mbalax-sabar-heavy",
+      "compare": [
+        "distinct high, low, open, and slap tones in the sabar ensemble rather than a single generic drum sound",
+        "leader cues, ensemble answers, changing density, and held breaks across the rhythmic phrase",
+        "how talking-drum speech contours answer or contrast with the sabar calls",
+        "accent displacement, repeated figures, and cadence rolls as separate gestures with different weight",
+        "clear attack and decay between interlocking drums while preserving the ensemble's natural dynamics"
+      ],
+      "recordings": [
+        {
+          "title": "Rose Rhythm",
+          "artist": "Doudou Ndiaye Rose",
+          "url": "https://music.apple.com/us/song/1653300592",
+          "timecodes": []
+        },
+        {
+          "title": "Sidati Aidara",
+          "artist": "Doudou Ndiaye Rose",
+          "url": "https://music.apple.com/us/song/1653300597",
+          "timecodes": []
+        },
+        {
+          "title": "Walo",
+          "artist": "Doudou Ndiaye Rose",
+          "url": "https://music.apple.com/us/song/1653300919",
+          "timecodes": []
+        },
+        {
+          "title": "Khine Sine",
+          "artist": "Doudou Ndiaye Rose",
+          "url": "https://music.apple.com/us/song/1653300609",
+          "timecodes": []
+        },
+        {
+          "title": "Ligueyou Ndeye",
+          "artist": "Doudou Ndiaye Rose",
+          "url": "https://music.apple.com/us/song/1653300192",
+          "timecodes": []
+        },
+        {
+          "title": "Toco",
+          "artist": "The Doudou Ndiaye Rose Family",
+          "url": "https://music.apple.com/us/song/1634494327",
+          "timecodes": []
+        },
+        {
+          "title": "Ardin",
+          "artist": "The Doudou Ndiaye Rose Family",
+          "url": "https://music.apple.com/us/song/1634494044",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "mbalax-pop-mbalax",
+      "compare": [
+        "lead vocal refrains, response vocals, and instrumental hooks across verse and refrain changes",
+        "how sabar and tama punctuation supports a clear pop backbeat without erasing the local groove",
+        "the bass and guitar relationship under the vocal, including pickups and space between phrases",
+        "modern ensemble density and polished production while keeping hand percussion articulate",
+        "phrase-level variation and builds between vocal sections rather than a single repeated backing pattern"
+      ],
+      "recordings": [
+        {
+          "title": "Bamba Touba",
+          "artist": "Wally B. Seck",
+          "url": "https://music.apple.com/us/song/926324210",
+          "timecodes": []
+        },
+        {
+          "title": "Pas le choix",
+          "artist": "Viviane Chidid",
+          "url": "https://music.apple.com/us/song/1444467428",
+          "timecodes": []
+        },
+        {
+          "title": "Wa Lii",
+          "artist": "Wally B. Seck",
+          "url": "https://music.apple.com/us/song/1782395876",
+          "timecodes": []
+        },
+        {
+          "title": "Choix (feat. Wally B. Seck)",
+          "artist": "Mia Guisse",
+          "url": "https://music.apple.com/us/song/1783544538",
+          "timecodes": []
+        },
+        {
+          "title": "Mama Africa",
+          "artist": "Youssou N'Dour",
+          "url": "https://music.apple.com/us/song/1594852933",
+          "timecodes": []
+        },
+        {
+          "title": "Wolou",
+          "artist": "Omar Pene",
+          "url": "https://music.apple.com/us/song/1574528843",
+          "timecodes": []
+        },
+        {
+          "title": "Sopekou",
+          "artist": "Thione Seck",
+          "url": "https://music.apple.com/us/song/536434493",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "mbalax-electronic-fusion",
+      "compare": [
+        "how programmed low end and electronic textures sit with live or sampled sabar language",
+        "the balance between drum-machine transients and the changing accents of hand percussion",
+        "sample cuts, filters, and drops used as phrase punctuation rather than constant decoration",
+        "how an electronic bass groove makes room for vocal calls and talking-drum responses",
+        "contrast between club-oriented production and the less quantized movement of the source rhythms"
+      ],
+      "recordings": [
+        {
+          "title": "Drum 'N' Mbalax - EP",
+          "artist": "Guiss Guiss Bou Bess",
+          "url": "https://music.apple.com/us/album/drum-n-mbalax-ep/1709993680",
+          "timecodes": []
+        },
+        {
+          "title": "Leumbeul",
+          "artist": "Guiss Guiss Bou Bess",
+          "url": "https://music.apple.com/us/song/1709993936",
+          "timecodes": []
+        },
+        {
+          "title": "Touss Lamb",
+          "artist": "Guiss Guiss Bou Bess",
+          "url": "https://music.apple.com/us/song/1709994752",
+          "timecodes": []
+        },
+        {
+          "title": "Ça rigole pas",
+          "artist": "Guiss Guiss Bou Bess",
+          "url": "https://music.apple.com/in/song/1709994121",
+          "timecodes": []
+        },
+        {
+          "title": "Jolof Bass Music - EP",
+          "artist": "Guiss Guiss Bou Bess",
+          "url": "https://music.apple.com/us/album/jolof-bass-music-ep/1687144638",
+          "timecodes": []
+        },
+        {
+          "title": "Hello (Remix Mbalax)",
+          "artist": "Youssou N'Dour & Super Etoile de Dakar",
+          "url": "https://music.apple.com/us/song/1801935166",
+          "timecodes": []
+        },
+        {
+          "title": "Mbalax Rekk (feat. Ben Aylon)",
+          "artist": "Angata",
+          "url": "https://music.apple.com/fr/album/mbalax-rekk-feat-ben-aylon-single/1535013697",
+          "timecodes": []
+        },
+        {
+          "title": "E'mma Africa",
+          "artist": "Touré Kunda",
+          "url": "https://music.apple.com/us/album/emma-africa/1566692061",
+          "timecodes": []
+        }
+      ]
+    }
+  ]
+}

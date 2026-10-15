@@ -85,7 +85,8 @@ test('selected styles win over sound influences; rhythm influences do not import
 });
 
 test('extends metadata merges through resolveStyle and user edits with the same keys invalidate its cache', () => {
-  const parent = { ...ALL_STYLES_BY_ID['tango-troilo'], id: 'test-mix-parent', sound: { mix: { ambience: { roomSize: .7 } } } };
+  const source = ALL_STYLES_BY_ID['tango-troilo'];
+  const parent = { ...source, id: 'test-mix-parent', sound: { ...source.sound, mix: { ...source.sound?.mix, ambience: { ...source.sound?.mix?.ambience, roomSize: .7 } } } };
   const child = { ...ALL_STYLES_BY_ID['tango-golden-age'], id: 'test-mix-child', extends: parent.id,
     sound: { mix: { dynamics: { foregroundContrastDb: 2.6 } } } };
   ALL_STYLES_BY_ID[parent.id] = parent; ALL_STYLES_BY_ID[child.id] = child;

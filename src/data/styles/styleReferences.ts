@@ -3296,7 +3296,7 @@ export const STYLE_REFERENCES = {
   },
   "indian-classical::thumri": {
     "credit": "Girija Devi",
-    "recording": "thumri repertoire",
+    "recording": "Pilu thumri repertoire",
     "qualities": [
       "Romantic text",
       "flexible raga rules",
@@ -3306,7 +3306,7 @@ export const STYLE_REFERENCES = {
   },
   "indian-classical::carnatic-kriti": {
     "credit": "M.S. Subbulakshmi",
-    "recording": "“Vatapi Ganapatim”",
+    "recording": "“Vatapi Ganapatim” in Hamsadhwani",
     "qualities": [
       "Composed melodic structure",
       "Carnatic ornament",
@@ -3315,8 +3315,8 @@ export const STYLE_REFERENCES = {
     ]
   },
   "indian-classical::ragam-tanam-pallavi": {
-    "credit": "T.N. Krishnan / major Carnatic concert references",
-    "recording": "",
+    "credit": "D. Balakrishna",
+    "recording": "Ragam Tanam Pallavi - Kalyani - Adi",
     "qualities": [
       "Extended raga improvisation",
       "rhythmic development",
@@ -3324,8 +3324,8 @@ export const STYLE_REFERENCES = {
     ]
   },
   "indian-classical::varnam": {
-    "credit": "Lalgudi Jayaraman",
-    "recording": "varnams",
+    "credit": "Bharat Sundar",
+    "recording": "Varnam - Sahana - Adi",
     "qualities": [
       "Structured melodic/rhythmic study",
       "repeated sections",
@@ -3333,8 +3333,8 @@ export const STYLE_REFERENCES = {
     ]
   },
   "indian-classical::tillana": {
-    "credit": "Lalgudi Jayaraman",
-    "recording": "tillana repertoire",
+    "credit": "Veenai Jayanthi",
+    "recording": "Thillana - Behag / Thisra Aadhi",
     "qualities": [
       "Fast rhythmic syllables",
       "energetic tala",
@@ -3742,7 +3742,7 @@ export const STYLE_REFERENCES = {
       "santur/tar/kamancheh"
     ]
   },
-  "persian::radif": {
+  "persian::radif-on-setar": {
     "credit": "Dariush Tala'i",
     "recording": "Radif repertoire",
     "qualities": [
@@ -3751,29 +3751,30 @@ export const STYLE_REFERENCES = {
       "sparse accompaniment"
     ]
   },
-  "persian::avaz": {
-    "credit": "Shajarian",
-    "recording": "avaz passages",
+  "persian::avaz-e-dashti": {
+    "credit": "Mohammad-Reza Shajarian",
+    "recording": "Avaz-e Abu Ata",
     "qualities": [
       "Free meter",
       "highly ornamented voice",
       "text-led pacing"
     ]
   },
-  "persian::instrumental-ensemble": {
+  "persian::persian-instrumental-ensemble": {
     "credit": "Hossein Alizadeh",
-    "recording": "“Neynava” / instrumental repertoire",
+    "recording": "Pishdaramad (Dastgah-e Shur)",
     "qualities": [
       "Tar/setar/kamancheh interplay",
       "composed development + modal improvisation"
     ]
   },
-  "persian::modern-persian": {
+  "persian::contemporary-persian-chamber": {
     "credit": "Kayhan Kalhor",
-    "recording": "contemporary ensemble work",
+    "recording": "Silent City with Brooklyn Rider",
     "qualities": [
-      "Persian modal language with chamber/global instrumentation",
-      "long textural development. ---"
+      "Kamancheh and setar with string quartet",
+      "Long chamber development",
+      "Modal instrumental dialogue"
     ]
   },
   "turkish::turkish-folk": {

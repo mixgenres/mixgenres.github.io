@@ -108,6 +108,7 @@ export type InteractionRelationship =
 export type TuningSystemTag =
   | '12-tet'
   | 'maqam'
+  | 'persian-shur'
   | 'gamelan-pelog'
   | 'gamelan-slendro'
   | 'just-intonation'
@@ -420,6 +421,8 @@ export interface PatternPerformanceDetails {
   microtiming: number[];
   fractionalPositions: number[];
   durationsAuthored: boolean;
+  /** Per-attack authored gate flags when projected pattern events mix explicit and inferred lengths. */
+  durationAuthoredByOnset?: boolean[];
 }
 
 export type SamplerTimbreControl = Record<string, unknown>;

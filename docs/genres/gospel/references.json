@@ -1,0 +1,88 @@
+{
+  "genreId": "gospel",
+  "reviewed": "2026-10-15",
+  "status": "Five streaming recording candidates are listed for all five Gospel styles. Listening comparisons and useful timecodes remain pending; these are research candidates, not verified sonic matches.",
+  "source": "Apple Music individual track and album pages with displayed artist/release metadata. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "gospel-choir-gospel",
+      "compare": [
+        "choir call-and-response, the lead-to-choir handoff, and how long the choir sustains its answer",
+        "organ and piano voicings, shout-vamp intensity, and their balance against the voices",
+        "gospel harmony movement and the lift into the refrain or climactic vamp",
+        "drum, handclap, and tambourine accents, including phrase changes and dynamic build"
+      ],
+      "recordings": [
+        { "title": "Oh Happy Day", "artist": "The Edwin Hawkins Singers", "url": "https://music.apple.com/us/song/1437294447", "timecodes": [] },
+        { "title": "Total Praise", "artist": "Richard Smallwood", "url": "https://music.apple.com/us/song/382742045", "timecodes": [] },
+        { "title": "The Battle Is the Lord’s", "artist": "Yolanda Adams", "url": "https://music.apple.com/us/song/281167258", "timecodes": [] },
+        { "title": "Worth (Full Version)", "artist": "Anthony Brown & group therAPy", "url": "https://music.apple.com/us/song/1009515095", "timecodes": [] },
+        { "title": "I Need You to Survive", "artist": "Hezekiah Walker & The Love Fellowship Choir", "url": "https://music.apple.com/us/song/264090190", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "gospel-traditional",
+      "compare": [
+        "lead-vocal timbre, ornament and flexible timing against the piano or organ support",
+        "handclap and response placement, with space left around the lead phrases",
+        "harmonic cadence, repeated refrain shape, and the way intensity grows through a verse",
+        "the balance of room, vocal presence, and sparse accompaniment in the recording"
+      ],
+      "recordings": [
+        { "title": "How I Got Over", "artist": "Mahalia Jackson", "url": "https://music.apple.com/us/song/163296782", "timecodes": [] },
+        { "title": "Take My Hand, Precious Lord", "artist": "Mahalia Jackson", "url": "https://music.apple.com/us/song/1032611726", "timecodes": [] },
+        { "title": "I Will Move On Up a Little Higher", "artist": "Mahalia Jackson", "url": "https://music.apple.com/us/song/169693915", "timecodes": [] },
+        { "title": "Didn’t It Rain", "artist": "Mahalia Jackson", "url": "https://music.apple.com/us/album/didnt-it-rain/1032611117?i=1032611122", "timecodes": [] },
+        { "title": "Trouble of the World", "artist": "Mahalia Jackson", "url": "https://music.apple.com/us/song/193889947", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "gospel-quartet",
+      "compare": [
+        "lead-tenor placement and the chord-by-chord movement of the stacked vocal response",
+        "bass vocal or instrumental foundation against the lighter upper harmony parts",
+        "phrase overlap, held cadences, and the handoff between solo lead and group reply",
+        "how a compact vocal ensemble creates lift and rhythmic propulsion without a large band"
+      ],
+      "recordings": [
+        { "title": "Touch the Hem of His Garment", "artist": "The Soul Stirrers", "url": "https://music.apple.com/us/song/1568231759", "timecodes": [] },
+        { "title": "Jesus Gave Me Water", "artist": "Sam Cooke / The Soul Stirrers", "url": "https://music.apple.com/us/song/1440773326", "timecodes": [] },
+        { "title": "The Last Mile of the Way", "artist": "The Soul Stirrers & Sam Cooke", "url": "https://music.apple.com/us/song/293735956", "timecodes": [] },
+        { "title": "Keep Me Near the Cross (Servant’s Prayer)", "artist": "Fairfield Four", "url": "https://music.apple.com/us/song/1168630930", "timecodes": [] },
+        { "title": "Move On Up a Little Higher", "artist": "The Dixie Hummingbirds", "url": "https://music.apple.com/us/song/1205070255", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "gospel-gospel-soul",
+      "compare": [
+        "soul lead-vocal phrasing and melisma against organ, piano, and choir responses",
+        "backbeat weight and the relationship between bass, drums, and handclaps",
+        "the shift between restrained verse, instrumental response, and full gospel release",
+        "how horns, guitar, and keyboard accents support rather than crowd the vocal"
+      ],
+      "recordings": [
+        { "title": "Amazing Grace (Live at New Temple Missionary Baptist Church, Los Angeles, January 13, 1972)", "artist": "Aretha Franklin", "url": "https://music.apple.com/us/song/284526120", "timecodes": [] },
+        { "title": "Mary, Don’t You Weep", "artist": "Aretha Franklin", "url": "https://music.apple.com/us/song/1055462078", "timecodes": [] },
+        { "title": "I’ll Take You There", "artist": "The Staple Singers", "url": "https://music.apple.com/us/song/1488850508", "timecodes": [] },
+        { "title": "Respect Yourself", "artist": "The Staple Singers", "url": "https://music.apple.com/us/song/1488850321", "timecodes": [] },
+        { "title": "Precious Lord (Live at New Bethel Baptist Church, Detroit 1956)", "artist": "Aretha Franklin", "url": "https://music.apple.com/us/song/1455570934", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "gospel-contemporary",
+      "compare": [
+        "modern programmed and live drum layers, syncopated bass, and their relationship to the choir",
+        "piano, organ, and synth colors across the verse, lift, and chorus",
+        "lead-vocal and choir exchanges, including where the arrangement leaves deliberate gaps",
+        "low-end control, vocal foreground, and section builds in a polished contemporary mix"
+      ],
+      "recordings": [
+        { "title": "Stomp", "artist": "God’s Property & Kirk Franklin", "url": "https://music.apple.com/us/song/423931491", "timecodes": [] },
+        { "title": "Shackles (Praise You)", "artist": "Mary Mary", "url": "https://music.apple.com/us/song/517898617", "timecodes": [] },
+        { "title": "Break Every Chain", "artist": "Tasha Cobbs Leonard", "url": "https://music.apple.com/us/song/796521875", "timecodes": [] },
+        { "title": "Never Would Have Made It", "artist": "Marvin Sapp", "url": "https://music.apple.com/us/song/258503371", "timecodes": [] },
+        { "title": "Nobody Greater", "artist": "VaShawn Mitchell", "url": "https://music.apple.com/us/song/1462808872", "timecodes": [] }
+      ]
+    }
+  ]
+}

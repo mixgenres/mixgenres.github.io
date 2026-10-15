@@ -95,7 +95,7 @@ brazilian::samba-rock|112|intro:4:3,verse:8:3,chorus:8:4,verse:8:3,chorus:8:4,so
  classical::romantic|108|adagio:32:1,theme-a:48:3,transition:24:4,theme-b:64:2,development:96:5,recapitulation:64:4,theme-b:64:3,coda:32:2|_=Bm,F#7,Bm,Em;theme-b=D,A7,D,G
  classical::impressionist|84|dawn:48:1,sea:64:3,noon:48:5,waves:64:3,dialogue:96:4,storm:64:5,coda:32:3|_=Dbmaj7,Abmaj7,Gbmaj7,Dbmaj7;waves=Emaj7,C#m7,Amaj7,B;storm=D5,Eb5,Ab5,Db5
  classical::modernist|126|introduction:48:1,augurs:48:4,abduction:32:5,rounds:48:3,rival-tribes:32:5,procession:24:4,earth-dance:32:5,introduction:48:1,circles:48:3,glorification:32:5,evocation:24:3,ritual:48:4,sacrificial-dance:64:5|_=E5,F5,Eb5,E5
- classical::minimalist|120|pulses:32:1,section-i:64:2,section-ii:64:3,section-iii:64:3,section-iv:64:4,section-v:64:3,section-vi:64:4,section-vii:64:3,section-viii:64:4,section-ix:64:3,section-x:64:4,section-xi:64:3,pulses:32:1|_=Dmaj7,Bm7,Emaj7,C#m7,Amaj7,F#m7,Bmaj7,G#m7,Emaj7,C#m7,F#maj7
+ classical::minimalist|120|pulse:4:1,additive-entry:4:2,phase-overlap:8:3,full-ensemble:4:4,release:4:2,coda:4:1|pulse=C;additive-entry=F;phase-overlap=G7,C;full-ensemble=Am;release=F;coda=C
  classical::chamber|72|fugue:64:2,allegro:64:3,transition:8:1,variations:96:3,presto:64:4,adagio:24:1,finale:96:5,coda:16:2|_=C#m,G#7,C#m,F#m;allegro=D,A7,D,G;variations=A,E7,F#m,D;presto=E,B7,E,A
  country::honky-tonk|112|intro:4:2,verse:16:3,chorus:16:4,fiddle-break:4:4,fiddle-return:4:4,steel-break:8:4,verse:16:3,chorus:16:4,tag:4:2|_=E,A,E,B7
  country::bluegrass|152|intro:8:2,verse:16:2,chorus:16:3,banjo-break:16:4,verse:16:3,chorus:16:4,fiddle-break:16:5,tag:4:2|_=Bb,Eb,Bb,F7
@@ -172,7 +172,7 @@ funk::hi-nrg|133|intro:16:2,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,breakd
  hip-hop::jazz-rap|94|intro:8:2,verse:24:3,hook:8:3,verse:24:3,hook:8:4,verse:24:4,hook:16:4,outro:8:2|_=Dm7,Dm7,Gm7,Dm7
  hip-hop::abstract|88|intro:8:1,verse:32:3,hook:8:3,verse:32:3,hook:8:4,interlude:8:2,verse:16:3,outro:8:1|_=Cm7,Fm7,Bb7,Ebmaj7
  hip-hop::lo-fi|90|intro:8:1,verse:24:2,hook:8:3,verse:24:2,hook:8:3,verse:24:3,hook:16:4,outro:8:1|_=Am7,Dm7,G7,Cmaj7
- house::deep-house|117|intro:32:1,bass-entry:32:2,chords:64:3,breakdown:32:1,chords:64:4,variation:32:4,outro:32:2|_=Am7,Dm7,Am7,Em7
+house::deep-house|117|intro:16:1,bass-entry:16:2,chords:48:3,breakdown:16:1,chords:48:4,variation:16:4,outro:16:2|_=Am7,Dm7,Am7,Em7
  house::chicago-house|120|intro:32:1,arpeggio:32:2,bass-entry:32:3,verse:32:3,chorus:32:4,breakdown:16:1,chorus:64:5,outro:32:2|_=Am,F,G,Am
  house::garage-piano-house|123|intro:16:2,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,breakdown:16:1,build:8:3,chorus:32:5,outro:16:2|_=Fm7,Bbm7,Eb7,Abmaj7
  house::acid-house|122|intro:32:1,acid-entry:32:2,groove:64:3,filter-rise:64:4,breakdown:16:1,acid-peak:96:5,groove:32:3,outro:32:1|_=C5,C5,C5,C5
@@ -243,10 +243,10 @@ mexican::tierra-caliente|126|intro:8:3,verse:16:3,chorus:16:4,solo:16:4,verse:16
 mexican::conjunto|116|intro:8:2,A:16:3,B:16:3,solo:16:4,A:16:3,B:16:4,solo:16:5,tag:4:2|_=G,C,D7,G
 mexican::bolero-ranchero|88|intro:8:1,verse:16:2,bridge:16:3,verse:16:2,interlude:8:2,bridge:16:4,verse:16:3,cierre:4:1|_=Am,Dm,E7,Am
 persian::dastgah|72|prelude:16:1,verse:32:2,response:16:2,verse:32:3,solo:24:2,verse:32:4,cadence:8:1|_=D5,D5,G5,D5
-persian::radif|48|daramad:8:1,lower-gusheh:8:2,development:8:2,forud:8:1|_=D5,D5,D5,D5
-persian::avaz|54|opening:16:1,verse:24:2,response:8:1,gusheh:32:3,return:16:2,forud:8:1|_=D5,D5,G5,D5
-persian::instrumental-ensemble|72|prelude:32:1,theme:32:2,solo:48:3,development:48:4,theme:32:4,coda:16:1|_=D5,D5,G5,D5
-persian::modern-persian|60|opening:64:1,lament:96:2,dialogue:64:3,build:64:4,climax:48:5,release:32:2,dissolve:32:1|_=D5,D5,C5,D5
+persian::radif-on-setar|48|daramad:8:1,lower-gusheh:8:2,development:8:2,forud:8:1|_=D5,D5,D5,D5
+persian::avaz-e-dashti|54|opening:16:1,verse:24:2,response:8:1,gusheh:32:3,return:16:2,forud:8:1|_=D5,D5,G5,D5
+persian::persian-instrumental-ensemble|72|prelude:32:1,theme:32:2,solo:48:3,development:48:4,theme:32:4,coda:16:1|_=D5,D5,G5,D5
+persian::contemporary-persian-chamber|60|opening:4:1,lament:8:2,dialogue:8:3,build:8:4,climax:8:5,release:4:2,dissolve:4:1|_=D5
 pop::dance-pop|116|intro:8:2,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,bridge:16:2,chorus:32:5,outro:16:3|_=Cm,Ab,Bb,Cm
 pop::city-pop|104|intro:16:2,verse:16:3,chorus:16:4,verse:16:3,solo:24:4,chorus:16:5,outro:16:3|_=Dmaj7,Bm7,Em7,A7
 pop::indie-pop|120|intro:8:2,verse:16:3,chorus:8:4,verse:16:3,chorus:8:4,bridge:8:2,chorus:16:5,outro:8:3|_=D,G,A,D

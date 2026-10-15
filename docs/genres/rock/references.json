@@ -5,7 +5,7 @@
   "source": "Apple Music individual streaming-track pages. No reference audio downloaded or auditioned.",
   "styles": [
     {
-      "styleId": "alternative",
+      "styleId": "rock-alternative",
       "compare": [
         "how a compact guitar hook, bass movement, and vocal phrase answer one another",
         "the contrast between restrained verses and wider, louder choruses",
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "styleId": "rock-and-roll",
+      "styleId": "rock-rock-and-roll",
       "compare": [
         "the swung or shuffled subdivision and the placement of the backbeat",
         "how piano or guitar comping leaves room for the vocal and lead fills",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "styleId": "classic-rock",
+      "styleId": "rock-classic-rock",
       "compare": [
         "the signature riff's articulation and relationship to the bass line",
         "how lead guitar phrases answer, extend, or interrupt the vocal",
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "styleId": "hard-rock",
+      "styleId": "rock-hard-rock",
       "compare": [
         "the weight, muting, and attack of the main power riff",
         "kick and snare impact against sustained or doubled rhythm guitars",
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "styleId": "psychedelic",
+      "styleId": "rock-psychedelic",
       "compare": [
         "modal or repeating harmony and the way small changes keep the vamp moving",
         "guitar sustain, bends, effects, and echo against the rhythm-section pulse",
@@ -85,7 +85,7 @@
       ]
     },
     {
-      "styleId": "progressive",
+      "styleId": "rock-progressive",
       "compare": [
         "meter and phrase lengths, especially where accents make the pulse legible",
         "how bass, drums, and guitar coordinate changing riffs and sectional transitions",
@@ -101,7 +101,7 @@
       ]
     },
     {
-      "styleId": "indie",
+      "styleId": "rock-indie",
       "compare": [
         "interlocking guitar parts and melodic bass movement rather than one doubled riff",
         "the contrast between dry, close verses and wider chorus or refrain textures",
@@ -117,7 +117,7 @@
       ]
     },
     {
-      "styleId": "shoegaze",
+      "styleId": "rock-shoegaze",
       "compare": [
         "the balance between the sustained guitar wash and clearly articulated bass and drums",
         "how lead melody stays perceptible inside dense reverb, modulation, and distortion",
@@ -133,7 +133,7 @@
       ]
     },
     {
-      "styleId": "post-rock",
+      "styleId": "rock-post-rock",
       "compare": [
         "how a sparse motif accumulates new layers and rhythmic force over time",
         "the dynamics and drum entrance that turn a gradual build into a clear arrival",
@@ -149,7 +149,7 @@
       ]
     },
     {
-      "styleId": "japanese-melodic-rock",
+      "styleId": "rock-japanese-melodic-rock",
       "compare": [
         "rapid chord changes and tight ensemble accents under a prominent singing guitar line",
         "how bass movement and kick placement keep fast passages forceful and clear",

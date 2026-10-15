@@ -75,6 +75,18 @@ export const drums: InstrumentDef = {
       
     },
     {
+      id: "hand-clap",
+      name: "Hand Clap",
+      midi: 39,
+      physicalType: "membrane",
+      tuningHz: 1800,
+      decayTimeSec: 0.1,
+      damping: 0.9,
+      strikeZones: ["center"],
+      defaultPan: 0,
+      gainTrimDb: 0,
+    },
+    {
       id: "snare-rimshot",
       name: "14-inch Snare Rimshot",
       midi: 40,

@@ -5,7 +5,7 @@
   "source": "Apple Music individual track pages and displayed artist/release metadata, plus the official Antibalas Bandcamp stream for one Modern Revival candidate. These are listening candidates, not verified note-for-note transcriptions.",
   "styles": [
     {
-      "styleId": "classic-afrobeat",
+      "styleId": "afrobeat-classic-afrobeat",
       "compare": [
         "how guitar, bass, drum kit, and hand percussion interlock without masking one another",
         "how the groove develops before and under the horn theme",
@@ -47,7 +47,7 @@
       ]
     },
     {
-      "styleId": "highlife",
+      "styleId": "afrobeat-highlife",
       "compare": [
         "the bright guitar cross accents against the steady bell timeline",
         "how bass and hand percussion keep the dance pulse buoyant",
@@ -88,7 +88,7 @@
       ]
     },
     {
-      "styleId": "palm-wine",
+      "styleId": "afrobeat-palm-wine",
       "compare": [
         "the fingerpicked guitar figure, its chord changes, and answering fills",
         "how the voice and guitar trade phrases without crowding one another",
@@ -129,7 +129,7 @@
       ]
     },
     {
-      "styleId": "juju",
+      "styleId": "afrobeat-juju",
       "compare": [
         "the interlocking lead and rhythm guitar phrases, including high-register replies",
         "how the bass locks to a buoyant percussion pulse without flattening the guitar motion",
@@ -171,7 +171,7 @@
       ]
     },
     {
-      "styleId": "funk-heavy-afrobeat",
+      "styleId": "afrobeat-funk-heavy-afrobeat",
       "compare": [
         "the dry, clipped guitar and tight bass/kick lock",
         "how drum kit, congas, and shekere keep separate interlocking motions",
@@ -213,7 +213,7 @@
       ]
     },
     {
-      "styleId": "jazz-heavy-afrobeat",
+      "styleId": "afrobeat-jazz-heavy-afrobeat",
       "compare": [
         "the way extended harmony sits over a stable, cyclical bass-and-drum ostinato",
         "the electric piano’s comping and phrase answers around the horn head",
@@ -255,7 +255,7 @@
       ]
     },
     {
-      "styleId": "modern-revival",
+      "styleId": "afrobeat-modern-revival",
       "compare": [
         "how a compact bass-and-drum figure expands into a layered ensemble arrangement",
         "the punch, width, and balance of modern horn and rhythm-section production",

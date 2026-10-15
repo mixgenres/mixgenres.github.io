@@ -130,8 +130,8 @@
     "keys": {
       "bytes": 4608010,
       "unpackedBytes": 5411972,
-      "sha256": "2e2b321b782f7198a4381b184c4e9cfb027b95320484e88f8627fe035ccba984",
-      "unpackedSha256": "de67eefa3ad0c04062b21e244fedf4ac4b948824f168d3d2076fb3a06733ebf7",
+      "sha256": "4cab2131dcb3f2d0083e5f5cdd351deb024a23621bb8c7ecda5e8910f308cc1d",
+      "unpackedSha256": "6a761230026274015201b3930a5afbd2ed66ffbb6a22326136e4a2ee13556f2d",
       "presets": [
         "0:0:4",
         "0:0:5",
@@ -150,8 +150,8 @@
     "mallets": {
       "bytes": 419952,
       "unpackedBytes": 665770,
-      "sha256": "0b5db410f3f8b7973b181fc14af94d44f0e9dabcd375ddf38a1cbf2546949ddc",
-      "unpackedSha256": "0b3a7cc6bcba3bd518f6d80470df5d3b518ea26ee8cb2ca64644077b81034fdb",
+      "sha256": "dc58d656d0c72e0791a0b3c5b97308e1adc2eee4aacd70cb76f9243d46f4755d",
+      "unpackedSha256": "b3ddc407678fb56abcb57aff9f4faf2a5de2c48d2519b8147b8aabbe33b2957a",
       "presets": [
         "0:0:8",
         "0:0:9",
@@ -170,8 +170,8 @@
     "guitars": {
       "bytes": 437818,
       "unpackedBytes": 954844,
-      "sha256": "28d426e153897abc5b7eb4c9d558afed88c1162372a3a3d1ae8f744fdaef1a86",
-      "unpackedSha256": "77d6edc86dccd6ad501e753e08002bf9af89003aeae79df28dc1bf48b9503460",
+      "sha256": "8e213bc77e351e783202937ef379fc78da297660932edccede7c5d27740529e8",
+      "unpackedSha256": "b5a7765b2e815b9c96d58a40f436c631debdcb2874bec24f6dc6168ac508a080",
       "presets": [
         "0:0:24",
         "0:0:25",
@@ -194,17 +194,18 @@
       "format": "sf3"
     },
     "strings": {
-      "bytes": 970229,
-      "unpackedBytes": 1289158,
-      "sha256": "e31df381b3b230fb2cda70004778840acaccbfa74186b87dbd5abb06e47f8979",
-      "unpackedSha256": "5a5c3b1c5870a9766ea520cf87ef63dff03136d0ae5d63b2cf40809525d0e1ea",
+      "bytes": 970332,
+      "unpackedBytes": 1289492,
+      "sha256": "883c057cc0ab84c75fdefc2b125f0cff445de2a2f136824804a853e1a8fee61d",
+      "unpackedSha256": "69532adc6fa154f79c185ab960022377892c4528d9ad5448d203efca8e5040a8",
       "presets": [
         "0:0:40",
         "0:0:41",
         "0:0:42",
         "0:0:45",
         "0:0:48",
-        "0:0:49"
+        "0:0:49",
+        "0:0:110"
       ],
       "samples": 80,
       "format": "sf3"
@@ -212,8 +213,8 @@
     "winds": {
       "bytes": 721705,
       "unpackedBytes": 1214846,
-      "sha256": "ca0cdfc5e1089f4aad62d010bbe46ac16af3d3acacb85bd30622b1954b699bea",
-      "unpackedSha256": "b6a8f5019bba334a4fad784c417850604e4230683ccd9966a3cbb0a5be77be75",
+      "sha256": "cbb3b5d391749bbb0f169203acbe383a2d7d14a61a750be7728c742f643ba30f",
+      "unpackedSha256": "b00dbb47753894f3c566b90694ca8b29d55fe54d4f7599d605938589c7ebf117",
       "presets": [
         "0:0:64",
         "0:0:65",
@@ -240,8 +241,8 @@
     "brass": {
       "bytes": 355858,
       "unpackedBytes": 541504,
-      "sha256": "30c53149951e62b9d41cdf756fcaaff1a5f1406bab4caae2cd7f35ef99a31527",
-      "unpackedSha256": "2c94ca06808c39d8dcd30ef3b2716daa4a51c8ac9cf2a3eea366dc8f0fe4b1b4",
+      "sha256": "5fc770c7246280890294eb8daefaaf2c9a9e22c708e3705daf42fc7c9687dedf",
+      "unpackedSha256": "be4ff1f09318808d6ed7e02f398c31ae9be98029c1dc7ae9e53bf4e1be0f9b2c",
       "presets": [
         "0:0:56",
         "0:0:57",
@@ -256,8 +257,8 @@
     "electronic": {
       "bytes": 953525,
       "unpackedBytes": 1514822,
-      "sha256": "e9bc3554016f9aaf0db943d4c9dc0f00fa4af4e6b28cddb5c40ced6c9c03eca2",
-      "unpackedSha256": "9225b53c9ae4a170b04ff39c78aa2839adbf7b86e8db39a80c3653ebe5455c2f",
+      "sha256": "29d3a0f539df846b2fac59b532e53c0181d2eb273439792d9df5889184c02a97",
+      "unpackedSha256": "264a351a9ad6ca7b99e999104c7e4d2c02adc2baa97121f197a1f95ccdc5090b",
       "presets": [
         "0:75:0",
         "0:75:1",
@@ -290,8 +291,8 @@
     "percussion": {
       "bytes": 2865551,
       "unpackedBytes": 3834172,
-      "sha256": "506c40d9f75969aa8b33d61334d96ba5b6df448f5d6eb38e20d221a63a299291",
-      "unpackedSha256": "c1154f3ea6d539041c5b745307a4e6233182a5af3b09d06ad82e3262751ab018",
+      "sha256": "fd2ba010e388102a25e224c93b4488ac0fdeade71918a12177fac0ff6645326b",
+      "unpackedSha256": "6b75e112cee0262871fb7597ec2476ea085c26ff9a2cc0cbad8c2d8bcf7b64be",
       "presets": [
         "0:66:0",
         "0:66:1",
@@ -327,10 +328,10 @@
       "format": "sf3"
     },
     "nylon": {
-      "bytes": 2646166,
+      "bytes": 2646167,
       "unpackedBytes": 2687316,
-      "sha256": "33559a737f4d0da410c4552fb0a417611406ce13ac156722f869745dc3844f22",
-      "unpackedSha256": "8161f88d023a997cf31719f0192187194ad418a84cdba8a0f2ea205646fb4c4b",
+      "sha256": "0c29daa03c62ae1176849d953df67c1793a814f165aa37ca4411f2eb05d2f28d",
+      "unpackedSha256": "44d53412f9d85160a1e897b6e0176d765d33e1e9c9b4f85d81086f58d03d5f72",
       "presets": [
         "0:64:24",
         "0:65:24",
@@ -342,8 +343,8 @@
     "steel": {
       "bytes": 2553428,
       "unpackedBytes": 2778276,
-      "sha256": "af4b020f59da5c6c2d0291fe82cc20ba6d47a28dd192085d96730e0f8b0e851e",
-      "unpackedSha256": "54490172ca44d06b51d30913c84d86b39cc80a18b76a770fdb5b246d02791535",
+      "sha256": "c7e67b53fa89a987bbce42a0573bfa8b57006980e7be69a6284a9002aed3b08f",
+      "unpackedSha256": "defbc0d11d7bf36641b76e32d6c92e47af5d58976b3a26c2392f6f5984a9b1ae",
       "presets": [
         "0:64:25",
         "0:65:25"
@@ -352,10 +353,10 @@
       "format": "sf3"
     },
     "piano": {
-      "bytes": 18943688,
-      "unpackedBytes": 19370642,
-      "sha256": "670436b97d916afabbafb469a95c7430000343ea445c83c31ba37e27f8a6f8a2",
-      "unpackedSha256": "84ea7767e1693456609bf61ebd7489a947acc7b4694dfe42855feb0520baf615",
+      "bytes": 30225719,
+      "unpackedBytes": 30703224,
+      "sha256": "6222690eb7f787a0079cb3c536c07d4a09ec60d76cc6b6e9fb6383f1b7a3e43c",
+      "unpackedSha256": "7b499dc70b53d3d36dbd401cc3defae6528346f335c666bc42fe65e3d6d38576",
       "presets": [
         "0:64:0"
       ],
@@ -365,8 +366,8 @@
     "bass": {
       "bytes": 796684,
       "unpackedBytes": 861260,
-      "sha256": "a19bbf0044a30c23b7a28c1fd964d3dd485a7580897fcf194b06d8cf3ccf50f8",
-      "unpackedSha256": "adb6310586bef275c71b5f28eb7f785c2f6e1b73dcd76f1a27516443c55df501",
+      "sha256": "4b30ae30000ace62426174e983b39b1a529f8850c570357a94b35d1fae2acd89",
+      "unpackedSha256": "39e6b42b4360ddf07c67993bf35b4ad459c050ae7e3200eef5c57151b69b6d21",
       "presets": [
         "0:64:33",
         "0:64:34"
@@ -375,10 +376,10 @@
       "format": "sf3"
     },
     "drumkit": {
-      "bytes": 14808841,
-      "unpackedBytes": 15760668,
-      "sha256": "35c72b3e951ab7b060ac97ba7338553eb3b4e9fd4760b9c6b8d210b8d1f3f25c",
-      "unpackedSha256": "d9be6b217c924f8bc46a853521794eced4404515c654acc71094d960fa7b62a9",
+      "bytes": 19425393,
+      "unpackedBytes": 20391512,
+      "sha256": "a3e76c061fc9e3d4a510b40c9a487793d57f4f051ce07c922f9932dbe9150478",
+      "unpackedSha256": "56c7ae848a4054d8115be6033c001f7bb224db434e01b6fe0f349257ee8218a8",
       "presets": [
         "0:67:0",
         "0:68:0",
@@ -393,10 +394,10 @@
       "format": "sf3"
     },
     "electricClean": {
-      "bytes": 12956934,
-      "unpackedBytes": 13725152,
-      "sha256": "a2edbf399d82c3e12352a18f7440c46a2c2aee13873c29444facf8d7b4d697a0",
-      "unpackedSha256": "e27f69ebf598c7e2db75fc40d0dbd7d3546202d403fb548fb7ed4fe6d2f15fce",
+      "bytes": 24999469,
+      "unpackedBytes": 26063838,
+      "sha256": "6fe7bcb0c7fb25442a86b84ccc228c84030103b5b5271e586ec6248df210e417",
+      "unpackedSha256": "e77b8b85777e90f1d6b2efb7244bc2f2cc9dc566842616bbdada591ba870c30e",
       "presets": [
         "0:69:0",
         "0:70:0",
@@ -409,10 +410,10 @@
       "format": "sf3"
     },
     "electricDrive": {
-      "bytes": 19084034,
-      "unpackedBytes": 20169646,
-      "sha256": "48a9aed34355cd6898a8b221e6ba6eef2a8e99d347e9fbc8ae1d3506458ef512",
-      "unpackedSha256": "b8451fd066cf8d5919a5373ae8c8bf2dff1cd54a5c2798ccfcc3f741e048f6e3",
+      "bytes": 28186629,
+      "unpackedBytes": 29548620,
+      "sha256": "b3932b8e1c72b081b6c8fb4d7d5f6d0c5114dd05241668992b1adaabe97f2062",
+      "unpackedSha256": "3268719d9c9bc174ce35e552acfd69265f173c6ed6fdf42b9361f2e4a903390d",
       "presets": [
         "0:71:0",
         "0:72:0",
@@ -427,8 +428,8 @@
     "bandoneon": {
       "bytes": 370177,
       "unpackedBytes": 417960,
-      "sha256": "216e825bb68e1e56d07ee526d1522e8b314b78cbddbdfdf76f368ded560f2e85",
-      "unpackedSha256": "0fb078525d15827c9f9543ec02df8e609b69d773a2e77f536e5c73d39b697b30",
+      "sha256": "9241087ba9652d3124805c473f82fd73ab4488b11bebcf85ca00d96ba4d96b6f",
+      "unpackedSha256": "efb6721eb8756c8ab799b47756b8224e0df8d7b08cd8f4bfb8a356baacdb7700",
       "presets": [
         "0:73:0",
         "0:74:0"
@@ -439,8 +440,8 @@
     "upright": {
       "bytes": 8160279,
       "unpackedBytes": 9282368,
-      "sha256": "320a560c7d23fff7c118ec1c0463d2eaf78993473cd47843e56eae6dea7e8b02",
-      "unpackedSha256": "1aae6cfcca1c360f2d53ba04d399b7942a5fcf057ef1884402d5e9ccc43862d2",
+      "sha256": "5449bc4bdb4aa915251b15b314d53d7712311e1be4d791cf7d56ebe0e49a81e5",
+      "unpackedSha256": "02028f49c367c5f4bcaffe1b1dfe582ee8bb108f9b580d6d84e78a3a715de98e",
       "presets": [
         "0:64:0",
         "0:64:1",
@@ -482,9 +483,8 @@
         12,
         16
       ],
-      "maxDecaySeconds": 10,
       "sampleRate": 44100,
-      "terminalFadeSeconds": 0.15,
+      "recordedDecay": "complete source sample",
       "vorbisQuality": 6
     },
     "drumkit": {
@@ -496,8 +496,7 @@
         "source": "GeneralUser GS bank 0/program 40",
         "program": 3
       },
-      "maxDecaySeconds": 8,
-      "terminalFadeSeconds": 0.15,
+      "recordedDecay": "complete source sample",
       "vorbisQuality": 6
     },
     "electric": {
@@ -505,8 +504,7 @@
       "softMaxVelocity": 92,
       "takes": 3,
       "upperRangeDynamics": "source hard recordings where soft recordings are absent",
-      "maxDecaySeconds": 12,
-      "terminalFadeSeconds": 0.15,
+      "recordedDecay": "complete source sample",
       "vorbisQuality": 6
     },
     "recordedPercussion": {
@@ -644,8 +642,7 @@
       },
       "discarded": "unpitched noises and body-contact keys",
       "sampleRate": 44100,
-      "maxSampleSeconds": 12,
-      "terminalFadeSeconds": 0.15,
+      "recordedDecay": "complete source sample",
       "vorbisQuality": 6
     },
     "harmonium": {

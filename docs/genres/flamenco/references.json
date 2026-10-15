@@ -3,7 +3,7 @@
   "status": "Five linked candidates are collected for all 19 styles. Audio comparison and timecodes remain pending, and candidates are not yet verified sonic matches.",
   "references": [
     {
-      "styleId": "solea",
+      "styleId": "flamenco-solea",
       "references": [
         {
           "artist": "Camarón de la Isla",
@@ -84,7 +84,7 @@
       ]
     },
     {
-      "styleId": "bulerias",
+      "styleId": "flamenco-bulerias",
       "references": [
         {
           "artist": "Paco de Lucía",
@@ -157,7 +157,7 @@
       ]
     },
     {
-      "styleId": "alegrias",
+      "styleId": "flamenco-alegrias",
       "references": [
         {
           "artist": "Camarón de la Isla",
@@ -230,7 +230,7 @@
       ]
     },
     {
-      "styleId": "tangos",
+      "styleId": "flamenco-tangos",
       "compare": [
         "the grounded four-beat compás and its cycle accents, distinct from Argentine tango",
         "palmas and guitar rasgueado locking to the groove while cante shifts across the beat",
@@ -282,7 +282,7 @@
       ]
     },
     {
-      "styleId": "seguiriya",
+      "styleId": "flamenco-seguiriya",
       "compare": [
         "the weight and asymmetrical feel of the seguiriya compás, especially the accented resolution points",
         "how cante stretches across the cycle and how guitar answers preserve its tension",
@@ -330,7 +330,7 @@
       ]
     },
     {
-      "styleId": "tientos",
+      "styleId": "flamenco-tientos",
       "compare": [
         "the slow, weighty four-beat tread and the way accents keep it from feeling square",
         "restrained guitar strums and bass-note changes below ornamented cante",
@@ -382,7 +382,7 @@
       ]
     },
     {
-      "styleId": "fandangos",
+      "styleId": "flamenco-fandangos",
       "compare": [
         "the flexible vocal line resolving against the guitar's recurring harmonic cadence",
         "regional melodic turns and differences between Huelva and other fandango forms",
@@ -439,7 +439,7 @@
       ]
     },
     {
-      "styleId": "rumba",
+      "styleId": "flamenco-rumba",
       "compare": [
         "the repeating rumba guitar rasgueado against bass and hand-percussion placement",
         "how a compact refrain opens into guitar or vocal fills without losing the dance pulse",
@@ -486,7 +486,7 @@
       ]
     },
     {
-      "styleId": "tonas-martinetes",
+      "styleId": "flamenco-tonas-martinetes",
       "compare": [
         "a palo seco: exposed voice without guitar harmony supplying a pulse",
         "the singer's breath, timbre, and phrase length carrying the whole arrangement",
@@ -538,7 +538,7 @@
       ]
     },
     {
-      "styleId": "taranta",
+      "styleId": "flamenco-taranta",
       "compare": [
         "free-tempo, mining-song cante against guitar's exposed arpeggios and held cadences",
         "the taranta's tense dissonant color and open phrase timing",
@@ -590,7 +590,7 @@
       ]
     },
     {
-      "styleId": "granaina",
+      "styleId": "flamenco-granaina",
       "compare": [
         "free, rubato phrase lengths without a repeating dance compás, with guitar following the singer’s breath",
         "the spacious guitar introduction and unhurried answers between cante phrases",
@@ -666,7 +666,7 @@
       ]
     },
     {
-      "styleId": "malaguena",
+      "styleId": "flamenco-malaguena",
       "compare": [
         "rubato cante against spacious guitar arpeggios, with no fixed dance groove",
         "phrase-ending cadence, breath, and guitar response after each vocal line",
@@ -735,7 +735,7 @@
       ]
     },
     {
-      "styleId": "guajira",
+      "styleId": "flamenco-guajira",
       "compare": [
         "the guajira's lilting compound/duple pull and the way guitar marks its underlying cycle",
         "guitar rasgueado, melodic picado, and phrase-ending falseta handoffs",
@@ -782,7 +782,7 @@
       ]
     },
     {
-      "styleId": "farruca",
+      "styleId": "flamenco-farruca",
       "compare": [
         "the square, driving pulse and how heelwork-style accents articulate its four-beat frame",
         "minor-key guitar figures, clipped rasgueado, and the shift into lyrical falsetas",
@@ -834,7 +834,7 @@
       ]
     },
     {
-      "styleId": "sevillanas",
+      "styleId": "flamenco-sevillanas",
       "compare": [
         "the four coplas' repeated dance structure and clearly marked transitions",
         "guitar strumming, palmas, and voice locking together without flattening the accents",
@@ -881,7 +881,7 @@
       ]
     },
     {
-      "styleId": "nuevo-flamenco",
+      "styleId": "flamenco-nuevo-flamenco",
       "references": [
         {
           "artist": "Camarón",
@@ -928,7 +928,7 @@
       ]
     },
     {
-      "styleId": "flamenco-jazz",
+      "styleId": "flamenco-flamenco-jazz",
       "references": [
         {
           "artist": "Paco de Lucía",
@@ -975,7 +975,7 @@
       ]
     },
     {
-      "styleId": "flamenco-rock",
+      "styleId": "flamenco-flamenco-rock",
       "references": [
         {
           "artist": "Pata Negra",
@@ -1022,7 +1022,7 @@
       ]
     },
     {
-      "styleId": "urban-experimental",
+      "styleId": "flamenco-urban-experimental",
       "references": [
         {
           "artist": "Rosalía",

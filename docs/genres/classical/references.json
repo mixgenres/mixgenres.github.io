@@ -1,0 +1,338 @@
+{
+  "genreId": "classical",
+  "reviewed": "2026-10-15",
+  "status": "Seven Classical styles now have at least five linked streaming recording candidates each. Listening comparisons and useful timecodes remain pending; candidates are not verified sonic matches.",
+  "source": "Apple Music streaming track and album pages. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "classical-classical-orchestra",
+      "compare": [
+        "how a theme changes between exposition, development, return, and coda rather than sitting on one repeated accompaniment loop",
+        "violin and flute foreground handoffs against the string section's shorter answering figures",
+        "how cello roots and fifths support harmonic turns without making every beat equally heavy",
+        "timpani restraint, rolls, and accents at structural arrivals rather than a constant drum pulse",
+        "ensemble depth, section balance, and dynamic contrast across different orchestras and recording eras"
+      ],
+      "recordings": [
+        {
+          "title": "Symphony No. 5 in C Minor, Op. 67",
+          "artist": "Boston Symphony Orchestra, Charles Munch",
+          "url": "https://music.apple.com/us/song/352712313",
+          "timecodes": []
+        },
+        {
+          "title": "Symphony No. 40 in G Minor, K. 550 (Bruno Walter reading)",
+          "artist": "New York Philharmonic, Bruno Walter",
+          "url": "https://classical.music.apple.com/us/recording/wolfgang-amadeus-mozart-1756-pp105-947936588",
+          "timecodes": []
+        },
+        {
+          "title": "Symphony No. 94 in G Major, Hob. I:94, 'Surprise'",
+          "artist": "Wiener Akademie, Martin Haselböck",
+          "url": "https://classical.music.apple.com/us/recording/joseph-haydn-1732-pp132-329435306",
+          "timecodes": []
+        },
+        {
+          "title": "Symphony No. 7 in A Major, Op. 92: II. Allegretto",
+          "artist": "London Symphony Orchestra, Antal Doráti",
+          "url": "https://music.apple.com/us/song/1802110519",
+          "timecodes": []
+        },
+        {
+          "title": "Symphony No. 40 in G Minor, K. 550 (Josef Krips reading)",
+          "artist": "Royal Concertgebouw Orchestra, Josef Krips",
+          "url": "https://classical.music.apple.com/us/recording/wolfgang-amadeus-mozart-1756-pp105-1452448354",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "classical-baroque",
+      "compare": [
+        "how contrapuntal string parts exchange foreground roles while the ensemble keeps a shared pulse",
+        "flute or recorder articulation and ornament against strings and continuo in suite movements",
+        "harpsichord attack and cello bass clarity without turning continuo into an even block-chord beat",
+        "the different dance characters, phrase pickups, cadences, and returns across an overture suite",
+        "period-instrument color, ensemble balance, room depth, and natural dynamic contrast across recordings"
+      ],
+      "recordings": [
+        {
+          "title": "Brandenburg Concerto No. 3 in G Major, BWV 1048",
+          "artist": "Orchestra Mozart, Claudio Abbado",
+          "url": "https://classical.music.apple.com/sb/recording/johann-sebastian-bach-1685-pp25-1467916686",
+          "timecodes": []
+        },
+        {
+          "title": "Bach, J.S.: Concertos & Orchestral Suites (Brandenburg Concerto No. 3)",
+          "artist": "The English Concert, Trevor Pinnock",
+          "url": "https://music.apple.com/us/album/bach-j-s-concertos-orchestral-suites/1452402035",
+          "timecodes": []
+        },
+        {
+          "title": "Orchestral Suite No. 2 in B Minor, BWV 1067",
+          "artist": "Barocksolisten München, Dorothea Seel",
+          "url": "https://classical.music.apple.com/us/recording/johann-sebastian-bach-1685-pp2-1114947842",
+          "timecodes": []
+        },
+        {
+          "title": "Telemann: Suite in A Minor for Recorder, Strings & Continuo, TWV 55:A2",
+          "artist": "Giovanni Antonini, Il Giardino Armonico",
+          "url": "https://music.apple.com/us/album/telemann/1574327415",
+          "timecodes": []
+        },
+        {
+          "title": "Corelli: Concerto Grosso No. 8 in G Minor, Op. 6/8",
+          "artist": "I Musici",
+          "url": "https://classical.music.apple.com/us/recording/arcangelo-corelli-1653-pp49-1452217182",
+          "timecodes": []
+        },
+        {
+          "title": "Handel: Water Music, Suite No. 1 in F Major, HWV 348: V. Air",
+          "artist": "Ton Koopman, Amsterdam Baroque Orchestra",
+          "url": "https://music.apple.com/us/song/1491257969",
+          "timecodes": []
+        },
+        {
+          "title": "Handel: Music for the Royal Fireworks, HWV 351: La Réjouissance",
+          "artist": "The English Concert, Trevor Pinnock",
+          "url": "https://music.apple.com/us/song/1452210092",
+          "timecodes": []
+        },
+        {
+          "title": "Vivaldi: The Four Seasons, Spring (La Primavera), Op. 8 No. 1",
+          "artist": "Pinchas Zukerman, The Saint Paul Chamber Orchestra",
+          "url": "https://music.apple.com/us/album/vivaldi-the-four-seasons/351405227",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "classical-romantic",
+      "compare": [
+        "long melodic arcs, expressive timing, and phrase breathing without losing the underlying pulse",
+        "how violin and flute lines swell, taper, and yield to one another over sustained strings",
+        "cello motion through harmonic changes and how it shapes the arrival of a cadence",
+        "timpani and orchestral weight saved for climaxes instead of repeated as a steady beat",
+        "the contrast between intimate solo rubato and full-ensemble expansion across different Romantic forms"
+      ],
+      "recordings": [
+        {
+          "title": "Violin Concerto in E Minor, Op. 64",
+          "artist": "Yehudi Menuhin, London Symphony Orchestra, Sir Adrian Boult",
+          "url": "https://classical.music.apple.com/us/recording/felix-mendelssohn-1809-pp54-693414873",
+          "timecodes": []
+        },
+        {
+          "title": "Symphony No. 9 in E Minor, Op. 95, 'From the New World'",
+          "artist": "Chicago Symphony Orchestra, James Levine",
+          "url": "https://music.apple.com/us/song/378465712",
+          "timecodes": []
+        },
+        {
+          "title": "Symphony No. 6 in B Minor, Op. 74, 'Pathétique': IV. Adagio lamentoso",
+          "artist": "Günter Wand, NDR Symphony Orchestra",
+          "url": "https://music.apple.com/us/song/378472787",
+          "timecodes": []
+        },
+        {
+          "title": "Symphony No. 3 in F Major, Op. 90: III. Poco allegretto",
+          "artist": "Berlin Philharmonic, Herbert von Karajan",
+          "url": "https://music.apple.com/us/song/1440800914",
+          "timecodes": []
+        },
+        {
+          "title": "Nocturne No. 2 in E-Flat Major, Op. 9 No. 2",
+          "artist": "Arthur Rubinstein",
+          "url": "https://music.apple.com/us/song/1009363111",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "classical-impressionist",
+      "compare": [
+        "color harmony and parallel chord motion that avoid forcing every passage into a major-key cadence",
+        "woodwind and violin solo colors emerging from and receding into the ensemble",
+        "register, articulation, and orchestral spacing as the main ways a texture changes",
+        "the shifts between suspended, quiet passages and denser swells without a regular drum-like pulse",
+        "soft attack, sustain, room depth, and layered orchestral color across different recording balances"
+      ],
+      "recordings": [
+        {
+          "title": "Nocturnes: I. Nuages",
+          "artist": "Cleveland Orchestra, Pierre Boulez",
+          "url": "https://music.apple.com/us/song/1452567027",
+          "timecodes": []
+        },
+        {
+          "title": "Daphnis et Chloé, Suite No. 2",
+          "artist": "Royal Philharmonic Orchestra, Paavo Järvi",
+          "url": "https://classical.music.apple.com/us/recording/maurice-ravel-1875-pp19-1616714282?l=fr",
+          "timecodes": []
+        },
+        {
+          "title": "Prélude à l'après-midi d'un faune",
+          "artist": "London Symphony Orchestra, Michael Tilson Thomas",
+          "url": "https://music.apple.com/us/song/334732863",
+          "timecodes": []
+        },
+        {
+          "title": "Pavane pour une infante défunte",
+          "artist": "Cleveland Orchestra, Pierre Boulez",
+          "url": "https://music.apple.com/us/song/1452160563",
+          "timecodes": []
+        },
+        {
+          "title": "La Mer: I. De l'aube à midi sur la mer",
+          "artist": "Orchestre Suisse Romande, Ernest Ansermet",
+          "url": "https://music.apple.com/us/song/1385295522",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "classical-modernist",
+      "compare": [
+        "asymmetric accent groupings and displaced attacks that make the meter audible without a generic backbeat",
+        "chromatic lines and sharply contrasting cells instead of predictable functional chord loops",
+        "timpani and other percussion used as color and structural impact, not a continuous pulse layer",
+        "timbre handoffs between bowed strings, winds, and percussion, including exposed solo lines",
+        "sudden changes in density, articulation, register, and dynamics that keep the phrase unpredictable"
+      ],
+      "recordings": [
+        {
+          "title": "The Rite of Spring",
+          "artist": "San Francisco Symphony, Esa-Pekka Salonen",
+          "url": "https://music.apple.com/us/album/stravinsky-the-rite-of-spring/1696933217",
+          "timecodes": []
+        },
+        {
+          "title": "Le Sacre du printemps, Pt. 1: The Adoration of the Earth",
+          "artist": "Chicago Symphony Orchestra, Sir Georg Solti",
+          "url": "https://music.apple.com/us/album/stravinsky-the-rite-of-spring/1452322840",
+          "timecodes": []
+        },
+        {
+          "title": "Concerto for Orchestra, BB 123",
+          "artist": "Los Angeles Philharmonic, Esa-Pekka Salonen",
+          "url": "https://classical.music.apple.com/us/recording/bela-bartok-1881-pp24-263086364",
+          "timecodes": []
+        },
+        {
+          "title": "Music for Strings, Percussion and Celesta, BB 114",
+          "artist": "New York Philharmonic, Leonard Bernstein",
+          "url": "https://classical.music.apple.com/us/recording/bela-bartok-1881-pp22-350198689",
+          "timecodes": []
+        },
+        {
+          "title": "Chamber Symphony No. 1 in E Major, Op. 9",
+          "artist": "Berlin Philharmonic, Kirill Petrenko",
+          "url": "https://classical.music.apple.com/us/recording/arnold-schoenberg-1874-pp9-1835310272",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "classical-minimalist",
+      "compare": [
+        "how a short cell changes through repetition, addition, omission, and phase displacement",
+        "which instrument owns the pulse and how the foreground moves between mallet, keyboard, and bowed parts",
+        "entrance and release timing: allow the texture to accumulate, breathe, and thin rather than keeping every part active",
+        "the difference between a mallet ostinato and an actual drum-kit or timpani beat",
+        "natural ensemble dynamics, attack balance, sustain, and room depth without flattening every repeated note"
+      ],
+      "recordings": [
+        {
+          "title": "Music for 18 Musicians",
+          "artist": "Steve Reich Ensemble",
+          "url": "https://music.apple.com/us/album/music-for-18-musicians/79577274",
+          "timecodes": []
+        },
+        {
+          "title": "Music for Mallet Instruments, Voices and Organ",
+          "artist": "Steve Reich and Musicians",
+          "url": "https://music.apple.com/us/song/355027696",
+          "timecodes": []
+        },
+        {
+          "title": "Six Pianos",
+          "artist": "Steve Chambers, James Preiss, Russ Hartenberger, Bob Becker, Steve Reich & Glen Velez",
+          "url": "https://music.apple.com/us/song/1438816670",
+          "timecodes": []
+        },
+        {
+          "title": "In C (Remastered 2009)",
+          "artist": "Terry Riley & Members of the Creative & Performing Arts at SUNY-Buffalo",
+          "url": "https://music.apple.com/us/song/307565028",
+          "timecodes": []
+        },
+        {
+          "title": "Opening",
+          "artist": "Philip Glass, The Philip Glass Ensemble & Michael Riesman",
+          "url": "https://music.apple.com/us/song/203258554",
+          "timecodes": []
+        },
+        {
+          "title": "Metamorphosis: Metamorphosis Two",
+          "artist": "Philip Glass",
+          "url": "https://music.apple.com/us/song/267427370",
+          "timecodes": []
+        },
+        {
+          "title": "Shaker Loops: II. Hymning Slews",
+          "artist": "John Adams & Orchestra of St. Luke's",
+          "url": "https://music.apple.com/us/song/1632478329",
+          "timecodes": []
+        },
+        {
+          "title": "Clapping Music (1972)",
+          "artist": "Steve Reich & Russ Hartenberger",
+          "url": "https://music.apple.com/us/song/79577198",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "classical-chamber",
+      "compare": [
+        "audible conversation as violin, viola, and cello trade a phrase instead of layering one lead over a static pad",
+        "the viola's inner voice and independent counterline rather than treating it as generic chord fill",
+        "bow articulation, attack matching, and dynamic balance among four equal string players",
+        "contrasting theme, dialogue, development, return, and coda through changing roles and phrase shapes",
+        "natural ensemble blend and room sound while keeping each part distinct enough to follow"
+      ],
+      "recordings": [
+        {
+          "title": "String Quartet No. 14 in C-Sharp Minor, Op. 131",
+          "artist": "Alban Berg Quartett",
+          "url": "https://classical.music.apple.com/us/recording/ludwig-van-beethoven-1770-pp89-1500020421",
+          "timecodes": []
+        },
+        {
+          "title": "String Quartet No. 12 in F Major, B 179, Op. 96, 'American'",
+          "artist": "Guarneri Quartet",
+          "url": "https://classical.music.apple.com/us/recording/antonin-dvorak-1841-pp98-1452500139",
+          "timecodes": []
+        },
+        {
+          "title": "String Quartet in D Minor, Hob. III/76, Op. 76 No. 2",
+          "artist": "The Lindsays",
+          "url": "https://classical.music.apple.com/us/recording/joseph-haydn-1732-pp1574-1452658867",
+          "timecodes": []
+        },
+        {
+          "title": "String Quartet in F Major, M. 35",
+          "artist": "Guarneri Quartet",
+          "url": "https://classical.music.apple.com/us/recording/maurice-ravel-1875-pp29-1801557647?l=en-US",
+          "timecodes": []
+        },
+        {
+          "title": "String Quartet No. 19 in C Major, K. 465, 'Dissonance'",
+          "artist": "Smetana Quartet",
+          "url": "https://classical.music.apple.com/us/recording/wolfgang-amadeus-mozart-1756-pp311-1808361537",
+          "timecodes": []
+        }
+      ]
+    }
+  ]
+}

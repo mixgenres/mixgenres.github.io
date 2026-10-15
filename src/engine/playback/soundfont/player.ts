@@ -123,7 +123,7 @@ export class SoundfontSongPlayer {
         await ctx.audioWorklet.addModule(workletURL);
         if(signal.aborted)throw new DOMException('Sample preparation cancelled','AbortError');
         const node=new AudioWorkletNode(ctx,'mixgenres-soundfont',{numberOfInputs:0,numberOfOutputs:Math.max(1,plan.tracks.length),
-          outputChannelCount:Array(Math.max(1,plan.tracks.length)).fill(2),processorOptions:{voiceCap:512}});
+          outputChannelCount:Array(Math.max(1,plan.tracks.length)).fill(2)});
         node.onprocessorerror=()=>this.fail(new Error('The sample audio processor failed. Reload the page to try again.'));
         const mix=resolvePlaybackMix(song.worldId,song.styleId);
         const master=createMasterChain(ctx,mix.mixCharacter,mix.context);

@@ -136,23 +136,27 @@ export function getEffectiveBpm(
   sheet: Sheet,
   regionId?: string
 ): { bpm: number; feel: TempoFeel; isSectionOverride: boolean } {
-  const defaultFeel = FEELS.find(f => f.id === 'as-written') ?? FEELS[3];
-  const songFeel = FEELS.find(f => f.id === sheet.tempoShift) ?? defaultFeel;
+  const defaultFeel = FEELS.find(f => f.id === 'as-written');
+  if (!defaultFeel) throw new Error('Tempo catalog is missing its as-written feel');
+  const songFeel = sheet.tempoShift
+    ? FEELS.find(f => f.id === sheet.tempoShift)
+    : defaultFeel;
+  if (!songFeel) throw new Error(`Unknown song tempo feel: ${sheet.tempoShift}`);
 
   if (regionId) {
     const region = sheet.regions.find(r => r.id === regionId);
-    if (region) {
-      if (region.bpm || region.tempoShift) {
-        const baseBpm = region.bpm ?? sheet.bpm;
-        const sectionFeel = region.tempoShift
-          ? (FEELS.find(f => f.id === region.tempoShift) ?? defaultFeel)
-          : songFeel;
-        return {
-          bpm: Math.round(baseBpm * sectionFeel.mult),
-          feel: sectionFeel,
-          isSectionOverride: true,
-        };
-      }
+    if (!region) throw new Error(`Unknown section in tempo lookup: ${regionId}`);
+    if (region.bpm !== undefined || region.tempoShift !== undefined) {
+      const baseBpm = region.bpm ?? sheet.bpm;
+      const sectionFeel = region.tempoShift
+        ? FEELS.find(f => f.id === region.tempoShift)
+        : songFeel;
+      if (!sectionFeel) throw new Error(`Unknown section tempo feel: ${region.tempoShift}`);
+      return {
+        bpm: Math.round(baseBpm * sectionFeel.mult),
+        feel: sectionFeel,
+        isSectionOverride: true,
+      };
     }
   }
 
@@ -497,18 +501,24 @@ function projectPatternEvents(
     if (event.condition?.energy?.length && !event.condition.energy.includes(energy)) return false;
     return hash(`${seed}:event:${eventIndex}`, 913) < (event.probability ?? 1);
   }).sort((a, b) => a.event.position - b.event.position);
-  const result = { onsets: [] as number[], accents: [] as number[], velocities: [] as number[], durations: [] as number[],
+  const result = { onsets: [] as number[], accents: [] as number[], velocities: [] as number[], durations: [] as number[], durationAuthoredByOnset: [] as boolean[],
     microtiming: [] as number[], hitTypes: [] as string[], articulations: [] as string[], fractionalSteps: [] as number[], pitches: [] as Array<import('../../data/schema').PatternEvent['pitch']>, notations: [] as Array<import('../../data/schema').PatternEvent['notation']> };
   let priorBeat = 0;
   for (const { event } of chosen) {
     if (event.kind === 'rest') {
-      if (result.durations.length) result.durations[result.durations.length - 1] = Math.max(0.000001,
-        Math.min(result.durations.at(-1)!, (event.position - priorBeat) * stepsPerBeat));
+      if (result.durations.length) {
+        result.durations[result.durations.length - 1] = Math.max(0.000001,
+          Math.min(result.durations.at(-1)!, (event.position - priorBeat) * stepsPerBeat));
+        result.durationAuthoredByOnset[result.durationAuthoredByOnset.length - 1] = true;
+      }
       continue;
     }
     if (event.kind === 'tie') {
-      if (result.durations.length) result.durations[result.durations.length - 1] = Math.max(result.durations.at(-1)!,
-        (event.position + (event.duration ?? .25) - priorBeat) * stepsPerBeat);
+      if (result.durations.length) {
+        result.durations[result.durations.length - 1] = Math.max(result.durations.at(-1)!,
+          (event.position + (event.duration ?? .25) - priorBeat) * stepsPerBeat);
+        result.durationAuthoredByOnset[result.durationAuthoredByOnset.length - 1] = true;
+      }
       continue;
     }
     const cycleBeats = quarterBeats * Math.max(1, pattern.cycleLength || 1);
@@ -523,6 +533,7 @@ function projectPatternEvents(
     result.velocities.push(event.velocity ?? .72);
     if (event.duration !== undefined && !(Number.isFinite(event.duration) && event.duration > 0)) throw new Error(`Invalid written duration in ${pattern.id}`);
     result.durations.push(Math.max(0.000001, (event.duration ?? .25) * stepsPerBeat));
+    result.durationAuthoredByOnset.push(event.duration !== undefined);
     result.microtiming.push(event.microtiming ?? 0);
     result.hitTypes.push(event.hitType ?? '');
     result.articulations.push(event.articulation ?? '');
@@ -833,9 +844,12 @@ export function rebuild(sheet: Sheet): Sheet {
         const phrase = Math.floor(i / phraseBars);
         let patternId = basePatternId;
         if (phrase > 0 && !patternLocked) {
-          const cacheKey = `phrase-v2:${basePatternId}:${r.genre ?? sheet.worldId}:${track.id}:${r.id}:${phrase}:${JSON.stringify(partLens ?? '')}`;
+          const cacheKey = `phrase-v3:${basePatternId}:${r.genre ?? sheet.worldId}:${track.id}:${r.id}:${phrase}:${JSON.stringify(partLens ?? '')}`;
           const cachedPat = phrasePatternCache.get(cacheKey);
-          if (cachedPat !== undefined) {
+            // A prior short-form build may have cached the base cell for this
+            // phrase before the section was expanded. Re-evaluate the planned
+            // third-phrase variation when that cached value would erase it.
+            if (cachedPat !== undefined && !(phrase === 2 && cachedPat === basePatternId)) {
             patternId = cachedPat;
           } else {
             const base = PATTERNS_BY_ID[basePatternId];
@@ -892,8 +906,15 @@ export function rebuild(sheet: Sheet): Sheet {
 
             const devHashKey = isRhythm ? `develop:rhythm:${r.id}` : `develop:${track.id}:${r.id}`;
             const pickHashKey = isRhythm ? `rhythm:${r.id}` : `${track.id}:${r.id}`;
-            const moves = hash(devHashKey, phrase) < phraseDevelopment.variationProbability;
-            if (candidates.length && moves) {
+            const authoredVariations = candidates.filter(x => x.p.arrangementVariation === true && x.p.id !== basePatternId);
+            // The first full variation phrase should be audible when a style
+            // has authored, same-instrument teaching material for it. Random
+            // phrase rolls could otherwise leave long sections on one cell.
+            const scheduledVariation = phrase === 2 && authoredVariations.length > 0;
+            const moves = scheduledVariation || hash(devHashKey, phrase) < phraseDevelopment.variationProbability;
+            if (scheduledVariation) {
+              patternId = authoredVariations[Math.floor(hash(pickHashKey, phrase) * authoredVariations.length)].p.id;
+            } else if (candidates.length && moves) {
               const reach = Math.max(1, Math.round(1 + 0.45 * 6));
               const top = candidates.slice(0, Math.min(reach, candidates.length));
               patternId = top[Math.floor(hash(pickHashKey, phrase) * top.length)].p.id;
@@ -942,6 +963,7 @@ export function rebuild(sheet: Sheet): Sheet {
           useEventProjection && eventProjection.fractionalSteps.length ? eventProjection.fractionalSteps : undefined,
           useEventProjection ? eventProjection.pitches : undefined,
           useEventProjection ? eventProjection.notations : undefined,
+          useEventProjection ? eventProjection.durationAuthoredByOnset : undefined,
         );
 
         const lens = partLens && partLens.weight > 0 ? partLens : undefined;
@@ -2040,7 +2062,11 @@ export function setSectionSolo(sheet: Sheet, regionId: string, solo: SoloAssignm
 }
 
 export function getTrackRole(sheet: Sheet, trackId: string, regionId: string): string {
-  return sheet.partRoles?.[regionId]?.[trackId] ?? sheet.tracks.find(t => t.id === trackId)?.role ?? 'harmony';
+  const track = sheet.tracks.find(candidate => candidate.id === trackId);
+  if (!track) throw new Error(`Unknown track role lookup: ${trackId}`);
+  const role = sheet.partRoles?.[regionId]?.[trackId] ?? track.role;
+  if (!role?.trim()) throw new Error(`Track ${trackId} has no authored role in section ${regionId}`);
+  return role;
 }
 
 export function setTrackRole(sheet: Sheet, trackId: string, regionId: string, role: string, scope: 'section' | 'song' = 'section'): Sheet {
@@ -2067,26 +2093,6 @@ export function setTrackRole(sheet: Sheet, trackId: string, regionId: string, ro
 
 
 
-
-/**
- * The meter the world's patterns are actually written in.
- *
- * Traditional Styles declare the meter a musicologist would name — tango as 2/4,
- * flamenco as 12/8, math rock as 7/8 — but the patterns themselves are almost
- * always authored as one 4/4 bar, with the compás expressed as a 12- or
- * 14-step subdivision inside it. Taking the style's meter literally made
- * every tango bar half the length its patterns expected, so the grooves ran at
- * double speed. Trust what the patterns say.
- */
-export function dominantMeter(worldId: string): string {
-  const world = GENRE_WORLDS_BY_ID[worldId];
-  if (!world) throw new Error(`Cannot resolve meter for unknown genre "${worldId}"`);
-  const counts: Record<string, number> = {};
-  for (const p of world.patterns) counts[p.meter] = (counts[p.meter] ?? 0) + 1;
-  const best = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
-  if (!best) throw new Error(`Genre "${worldId}" has no authored pattern meter`);
-  return best[0];
-}
 
 /** Build a complete, already-playing song in a world. Never an empty canvas. */
 export function makeSheet(
@@ -2191,7 +2197,7 @@ export function makeSheet(
   }
 
   const effectiveBpm = runtime.getTempo(0.5);
-  const effectiveMeter = runtime.getMeter() || dominantMeter(genreId);
+  const effectiveMeter = runtime.getMeter();
 
   return rebuild({
     id: 'sheet', title: TITLES[genreId] ?? 'Untitled',

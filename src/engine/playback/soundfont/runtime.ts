@@ -15,7 +15,7 @@ export class SampleRuntime {
   private seeking = false;
   private targetFrame = 0;
   readonly loadedBanks = new Set<BankId>();
-  constructor(readonly sampleRate: number, voiceCap = 512) {
+  constructor(readonly sampleRate: number, voiceCap = 350) {
     SpessaLog.setLogLevel(false, true, false);
     this.synth = new SpessaSynthProcessor(sampleRate, { maxBufferSize:128, effectsEnabled:false, eventsEnabled:false });
     this.synth.setSystemParameter('voiceCap', voiceCap);
@@ -31,9 +31,41 @@ export class SampleRuntime {
   }
   setPlan(plan: SamplePlan) {
     this.plan = plan;
+    // Playback and export use the same planned sample-zone count. A fixed
+    // 350/512 voice pool silently stole active notes in dense arrangements;
+    // size once, after the plan's banks are loaded, before the first render.
+    // Keep some room for release overlap and zones that share envelope timing.
+    const required = this.requiredVoices(plan);
+    const planned = Math.ceil(required * 1.2) + 16;
+    this.synth.setSystemParameter('voiceCap', Math.max(this.synth.systemParameters.voiceCap, planned));
     this.quantum=Array.from({length:Math.max(1,plan.tracks.length)},()=>[new Float32Array(128),new Float32Array(128)]);
     while (this.synth.midiChannels.length < plan.channels) this.synth.createMIDIChannel();
     this.rewind();
+  }
+  get voiceCapacity() { return this.synth.systemParameters.voiceCap; }
+  private requiredVoices(plan: SamplePlan) {
+    const presets = new Map<string, (typeof this.synth.soundBankManager.soundBankList)[number]['soundBank']['presets'][number]>();
+    for (const entry of this.synth.soundBankManager.soundBankList) for (const preset of entry.soundBank.presets) {
+      presets.set(`${entry.id}:${preset.bankMSB}:${preset.program}:${preset.isGMGSDrum}`, preset);
+    }
+    const zoneCounts = new Map<string, number>();
+    const edges: Array<{ time: number; count: number }> = [];
+    for (const demand of plan.voiceDemand) {
+      const zoneKey = `${demand.patch.pack}:${demand.patch.bank}:${demand.patch.program}:${demand.patch.drum}:${demand.key}:${demand.velocity}`;
+      let voices = zoneCounts.get(zoneKey);
+      if (voices === undefined) {
+        const preset = presets.get(`${demand.patch.pack}:${demand.patch.bank}:${demand.patch.program}:${demand.patch.drum}`);
+        voices = preset?.getVoiceParameters(demand.key, demand.velocity).length ?? 1;
+        zoneCounts.set(zoneKey, voices);
+      }
+      edges.push({ time: demand.start, count: voices }, { time: demand.end, count: -voices });
+    }
+    // Note-offs/release completions at a shared instant free their zones before
+    // the next attack at that instant, matching the event order in the plan.
+    edges.sort((a, b) => a.time - b.time || a.count - b.count);
+    let active = 0, peak = 0;
+    for (const edge of edges) { active += edge.count; peak = Math.max(peak, active); }
+    return peak;
   }
   private rewind() {
     this.synth.stopAllChannels(true); this.synth.reset(); this.synth.keyModifierManager.clearMappings();

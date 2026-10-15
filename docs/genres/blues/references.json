@@ -5,7 +5,7 @@
   "source": "Apple Music track pages and catalog metadata. No reference audio downloaded.",
   "styles": [
     {
-      "styleId": "modern-blues",
+      "styleId": "blues-modern-blues",
       "compare": [
         "lead phrasing and bends",
         "guitar, bass, and drum pocket",
@@ -45,7 +45,7 @@
       ]
     },
     {
-      "styleId": "delta",
+      "styleId": "blues-delta",
       "compare": [
         "alternating-thumb bass against treble phrases",
         "slide articulation and vocal space",
@@ -85,7 +85,7 @@
       ]
     },
     {
-      "styleId": "chicago",
+      "styleId": "blues-chicago",
       "compare": [
         "amplified guitar and harmonica placement",
         "shuffle drive and backbeat",
@@ -125,7 +125,7 @@
       ]
     },
     {
-      "styleId": "texas",
+      "styleId": "blues-texas",
       "compare": [
         "guitar attack, bends, and vibrato",
         "shuffle subdivisions and kick/bass lock",
@@ -165,7 +165,7 @@
       ]
     },
     {
-      "styleId": "piedmont",
+      "styleId": "blues-piedmont",
       "compare": [
         "alternating bass with syncopated treble",
         "ragtime swing and chord changes",
@@ -205,7 +205,7 @@
       ]
     },
     {
-      "styleId": "hill-country",
+      "styleId": "blues-hill-country",
       "compare": [
         "repeating one-chord groove and pulse",
         "guitar ostinato, vocal phrasing, and small variations",
@@ -245,7 +245,7 @@
       ]
     },
     {
-      "styleId": "slow-blues",
+      "styleId": "blues-slow-blues",
       "compare": [
         "triplet subdivision and laid-back pocket",
         "sustain, bends, and space between lead phrases",
@@ -285,7 +285,7 @@
       ]
     },
     {
-      "styleId": "blues-fusion",
+      "styleId": "blues-blues-fusion",
       "compare": [
         "blues phrases over extended rock/funk grooves",
         "lead dynamics and effects against bass/drums",

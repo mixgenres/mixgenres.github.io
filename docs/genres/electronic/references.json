@@ -1,0 +1,136 @@
+{
+  "genreId": "electronic",
+  "reviewed": "2026-10-15",
+  "status": "Five streaming recording candidates are listed for each of the eight Electronic styles. Listening comparisons and useful timecodes remain pending; these are candidates, not verified sonic matches.",
+  "source": "Apple Music individual track and album pages with displayed artist and release metadata. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "electronic-techno",
+      "compare": [
+        "weight and transient shape of the four-on-the-floor kick against the bass and low synth",
+        "how a compact sequence gains tension through filter, register, and texture changes",
+        "offbeat open hats and other percussion accents relative to the steady kick",
+        "long-form energy changes made by adding and removing parts instead of frequent chord changes"
+      ],
+      "recordings": [
+        { "title": "The Bells", "artist": "Jeff Mills", "url": "https://music.apple.com/us/album/the-bells-single/1808928565", "timecodes": [] },
+        { "title": "Energy Flash", "artist": "Joey Beltram", "url": "https://music.apple.com/us/song/1105041157", "timecodes": [] },
+        { "title": "Crispy Bacon", "artist": "Laurent Garnier", "url": "https://music.apple.com/us/song/276302653", "timecodes": [] },
+        { "title": "Spastik", "artist": "Plastikman", "url": "https://music.apple.com/us/song/1508239038", "timecodes": [] },
+        { "title": "Badger Bite (2014 Remaster)", "artist": "Surgeon", "url": "https://music.apple.com/us/song/1285551694", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "electronic-detroit-techno",
+      "compare": [
+        "syncopated machine chords and melodic bass figures against a firm straight pulse",
+        "warm, human harmonic voicings and melodic lines within the electronic arrangement",
+        "kick, clap, and hat character and their balance against the melodic machine parts",
+        "how a DJ-length arrangement evolves while preserving a recognizable hook"
+      ],
+      "recordings": [
+        { "title": "Strings of Life", "artist": "Rhythim Is Rhythim", "url": "https://music.apple.com/us/song/1831059987", "timecodes": [] },
+        { "title": "Nude Photo", "artist": "Derrick May", "url": "https://music.apple.com/us/song/1678920667", "timecodes": [] },
+        { "title": "Clear", "artist": "Cybotron", "url": "https://music.apple.com/us/song/1533732263", "timecodes": [] },
+        { "title": "Classics", "artist": "Model 500", "url": "https://music.apple.com/us/album/classics/1559801771", "timecodes": [] },
+        { "title": "Big Fun (12'' Mix)", "artist": "Inner City", "url": "https://music.apple.com/us/song/714777002", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "electronic-electro",
+      "compare": [
+        "broken kick and snare-machine placement rather than an unvaried four-on-the-floor beat",
+        "syncopated bass and drum accents that leave space for the backbeat",
+        "robotic vocal or synth phrases and how their short responses shape the groove",
+        "the dry, punchy machine transients against sampled or sequenced melodic hooks"
+      ],
+      "recordings": [
+        { "title": "Planet Rock", "artist": "Afrika Bambaataa & Soulsonic Force", "url": "https://music.apple.com/us/song/1604623228", "timecodes": [] },
+        { "title": "Clear", "artist": "Cybotron", "url": "https://music.apple.com/us/song/1533732263", "timecodes": [] },
+        { "title": "Looking for the Perfect Beat", "artist": "Afrika Bambaataa & Soulsonic Force", "url": "https://music.apple.com/us/song/708798094", "timecodes": [] },
+        { "title": "Jam On It", "artist": "Newcleus", "url": "https://music.apple.com/us/song/257435414", "timecodes": [] },
+        { "title": "Al-Naafiysh (The Soul)", "artist": "Hashim", "url": "https://music.apple.com/us/song/202157158", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "electronic-trance",
+      "compare": [
+        "kick and offbeat bass continuity beneath long, sustained harmonic layers",
+        "arpeggio and lead-register development through the build and breakdown",
+        "the length and shape of pauses before a returning kick, bass, and hook",
+        "how filter, reverb, and stereo width expand without obscuring the pulse"
+      ],
+      "recordings": [
+        { "title": "Children", "artist": "Robert Miles", "url": "https://music.apple.com/us/song/164147361", "timecodes": [] },
+        { "title": "Saltwater (feat. Moya Brennan)", "artist": "Chicane", "url": "https://music.apple.com/us/song/552020020", "timecodes": [] },
+        { "title": "Café Del Mar (Three 'N One Radio Edit)", "artist": "Energy 52", "url": "https://music.apple.com/us/song/1703077503", "timecodes": [] },
+        { "title": "The Age of Love (Jam & Spoon Watch out for Stella Radio Edit)", "artist": "Age of Love", "url": "https://music.apple.com/us/song/1718275771", "timecodes": [] },
+        { "title": "For an Angel", "artist": "Paul van Dyk", "url": "https://music.apple.com/us/album/for-an-angel/1605918438", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "electronic-idm",
+      "compare": [
+        "broken-beat placement, displaced accents, and purposeful rests around the pulse",
+        "how sample edits and changing timbres create phrase variation instead of a fixed loop",
+        "the contrast between a memorable melodic or harmonic fragment and denser rhythmic detail",
+        "low-end definition and transient control when the beat becomes irregular or fast"
+      ],
+      "recordings": [
+        { "title": "Xtal", "artist": "Aphex Twin", "url": "https://music.apple.com/us/song/1668862649", "timecodes": [] },
+        { "title": "Bike", "artist": "Autechre", "url": "https://music.apple.com/us/song/281042843", "timecodes": [] },
+        { "title": "Roygbiv", "artist": "Boards of Canada", "url": "https://music.apple.com/us/song/281116081", "timecodes": [] },
+        { "title": "Hasty Boom Alert", "artist": "µ-Ziq", "url": "https://music.apple.com/us/song/724922943", "timecodes": [] },
+        { "title": "Hard Normal Daddy", "artist": "Squarepusher", "url": "https://music.apple.com/us/album/hard-normal-daddy/78495631", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "electronic-minimal",
+      "compare": [
+        "the small number of active parts and the exact placement of clicks, rims, and hats",
+        "tiny changes in timing, filter, or tone that keep a sparse loop moving",
+        "space between events and the contrast between a dry attack and a long decay",
+        "how bass and kick share the low end while the mix remains open and restrained"
+      ],
+      "recordings": [
+        { "title": "Minus", "artist": "Robert Hood", "url": "https://music.apple.com/us/song/1621738415", "timecodes": [] },
+        { "title": "Spastik", "artist": "Plastikman", "url": "https://music.apple.com/us/song/1508239038", "timecodes": [] },
+        { "title": "Phylyps Trak - EP", "artist": "Basic Channel", "url": "https://music.apple.com/us/album/phylyps-trak-ep/277093544", "timecodes": [] },
+        { "title": "The Wipe (Edit Select 2014 Edit)", "artist": "Teste", "url": "https://music.apple.com/us/song/1131311108", "timecodes": [] },
+        { "title": "Quo Vadis", "artist": "G-Man", "url": "https://music.apple.com/us/album/quo-vadis-single/1206970531", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "electronic-synthwave",
+      "compare": [
+        "eighth-note bass motion and kick alignment beneath a broad, melodic synth lead",
+        "gated snare length, backbeat weight, and the contrast between dry drums and large reverb",
+        "analog-style pad, lead, and arpeggio layers as the song moves between sections",
+        "saturation, stereo placement, and low-end weight without masking the main hook"
+      ],
+      "recordings": [
+        { "title": "Nightcall", "artist": "Kavinsky", "url": "https://music.apple.com/us/song/1442447970", "timecodes": [] },
+        { "title": "A Real Hero (feat. Electric Youth)", "artist": "College", "url": "https://music.apple.com/us/song/347480516", "timecodes": [] },
+        { "title": "Turbo Killer", "artist": "Carpenter Brut", "url": "https://music.apple.com/us/song/1440894872", "timecodes": [] },
+        { "title": "Complete Domination (feat. Carpenter Brut)", "artist": "Perturbator", "url": "https://music.apple.com/us/song/865453716", "timecodes": [] },
+        { "title": "Days of Thunder", "artist": "The Midnight", "url": "https://music.apple.com/us/song/1758760036", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "electronic-melodic-electronic",
+      "compare": [
+        "how a recurring melodic hook develops through layered arpeggios and changing timbres",
+        "the breathing space between kick and bass and the way percussion fills the gaps",
+        "organic or sampled texture against clean synthesizer layers and a club pulse",
+        "section-to-section contrast in density, harmony, and stereo width rather than a single unchanging loop"
+      ],
+      "recordings": [
+        { "title": "Glue", "artist": "Bicep", "url": "https://music.apple.com/us/song/1683290904", "timecodes": [] },
+        { "title": "Two Thousand and Seventeen", "artist": "Four Tet", "url": "https://music.apple.com/us/song/1288804817", "timecodes": [] },
+        { "title": "A Moment Apart", "artist": "ODESZA", "url": "https://music.apple.com/us/song/1240362777", "timecodes": [] },
+        { "title": "Kerala", "artist": "Bonobo", "url": "https://music.apple.com/us/song/1169246072", "timecodes": [] },
+        { "title": "Open Eye Signal (Remaster 2023)", "artist": "Jon Hopkins", "url": "https://music.apple.com/us/song/1688995997", "timecodes": [] }
+      ]
+    }
+  ]
+}

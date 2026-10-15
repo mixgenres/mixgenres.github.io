@@ -1,0 +1,278 @@
+{
+  "genreId": "soukous",
+  "reviewed": "2026-10-15",
+  "status": "Six or more linked streaming recording candidates are listed for all five Soukous styles. Listening comparisons and useful timecodes remain pending; candidates are not verified sonic matches.",
+  "source": "Apple Music streaming track and album pages. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "soukous-soukous",
+      "compare": [
+        "how lead and rhythm guitars interlock around the vocal line instead of doubling a single chord strum",
+        "the relationship between buoyant electric bass, dance percussion, and bright guitar articulation",
+        "how vocal phrases and instrumental replies shape the verse-to-dance-section transition",
+        "the mix space needed to keep multiple guitar lines clear while the rhythm section remains energetic",
+        "how arrangements vary their instrumental energy and phrase length across a full song"
+      ],
+      "recordings": [
+        {
+          "title": "Hip hop soukouss",
+          "artist": "Aurlus Mabele",
+          "url": "https://music.apple.com/us/song/921921582",
+          "timecodes": []
+        },
+        {
+          "title": "Africa mousso",
+          "artist": "Aurlus Mabele",
+          "url": "https://music.apple.com/us/song/673415843",
+          "timecodes": []
+        },
+        {
+          "title": "Evelyne",
+          "artist": "Aurlus Mabele",
+          "url": "https://music.apple.com/us/song/679799291",
+          "timecodes": []
+        },
+        {
+          "title": "Embargo (feat. Loketo)",
+          "artist": "Aurlus Mabele",
+          "url": "https://music.apple.com/us/song/673520395",
+          "timecodes": []
+        },
+        {
+          "title": "Soukouss trouble (feat. Aurlus Mabélé)",
+          "artist": "Loketo",
+          "url": "https://music.apple.com/us/song/679797954",
+          "timecodes": []
+        },
+        {
+          "title": "Laissez passer",
+          "artist": "Diblo Dibala",
+          "url": "https://music.apple.com/us/song/1659452527",
+          "timecodes": []
+        },
+        {
+          "title": "Muchana",
+          "artist": "Kanda Bongo Man",
+          "url": "https://music.apple.com/us/song/1439822695",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "soukous-congolese-rumba",
+      "compare": [
+        "the slower, lyrical guitar-led verse and how it opens into a more animated instrumental passage",
+        "distinct rhythm-guitar accompaniment beneath a singing lead-guitar melody",
+        "bass movement, hand-percussion accents, and vocal delivery supporting a relaxed dance pulse",
+        "long-form verse, refrain, instrumental exchange, and cadence rather than a short loop repeated unchanged",
+        "recording balance that lets interlocking guitars remain warm and individually audible"
+      ],
+      "recordings": [
+        {
+          "title": "La Rumba O.K.",
+          "artist": "Franco",
+          "url": "https://music.apple.com/us/song/376170368",
+          "timecodes": []
+        },
+        {
+          "title": "Malabi Ya Bolingo",
+          "artist": "Franco & Ok Jazz Band",
+          "url": "https://music.apple.com/us/song/974214763",
+          "timecodes": []
+        },
+        {
+          "title": "Kinshasa",
+          "artist": "Tabu Ley Rochereau",
+          "url": "https://music.apple.com/us/song/1244770905",
+          "timecodes": []
+        },
+        {
+          "title": "Christina",
+          "artist": "Tabu Ley Rochereau & L'Orchestre Afrisa International",
+          "url": "https://music.apple.com/us/song/1443763842",
+          "timecodes": []
+        },
+        {
+          "title": "Longo (feat. Kale, Pepe Ndombe & L'African Fiesta National)",
+          "artist": "Tabu Ley Rochereau",
+          "url": "https://music.apple.com/us/song/1180055879",
+          "timecodes": []
+        },
+        {
+          "title": "Lisanga bambanda",
+          "artist": "Mbilia Bel, Tabu Ley Rochereau & L'Afrisa International",
+          "url": "https://music.apple.com/us/song/1242088185",
+          "timecodes": []
+        },
+        {
+          "title": "Mokitani Ya Wendo (feat. Dr Nico) [Instrumental]",
+          "artist": "Tabu Ley Rochereau & African Fiesta",
+          "url": "https://music.apple.com/us/song/1122034507",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "soukous-sebene",
+      "compare": [
+        "the handoff from vocal verse into an extended instrumental dance section",
+        "two guitar roles: a repeating rhythmic foundation and a faster, higher-register lead line",
+        "how the lead guitar varies and answers its own figure while the bass holds the groove together",
+        "small ensemble cues, repeated motifs, and phrase extensions that sustain energy without a new chord every beat",
+        "clear pick attack, note sustain, stereo placement, and room around fast interlocking guitar parts"
+      ],
+      "recordings": [
+        {
+          "title": "Laissez passer",
+          "artist": "Diblo Dibala",
+          "url": "https://music.apple.com/us/song/1659452527",
+          "timecodes": []
+        },
+        {
+          "title": "Super K (Bonus)",
+          "artist": "Diblo & Loketo",
+          "url": "https://music.apple.com/us/song/679807209",
+          "timecodes": []
+        },
+        {
+          "title": "Sai (feat. Diblo & Lokassa)",
+          "artist": "Kanda Bongo Man",
+          "url": "https://music.apple.com/us/song/1439651675",
+          "timecodes": []
+        },
+        {
+          "title": "Liza (feat. Diblo & Lokassa)",
+          "artist": "Kanda Bongo Man",
+          "url": "https://music.apple.com/us/song/1439651952",
+          "timecodes": []
+        },
+        {
+          "title": "Lowazo (feat. Diblo & Lokassa)",
+          "artist": "Kanda Bongo Man",
+          "url": "https://music.apple.com/us/album/lowazo-feat-diblo-lokassa/1439651674?i=1439651678",
+          "timecodes": []
+        },
+        {
+          "title": "Bedy (feat. Diblo & Lokassa)",
+          "artist": "Kanda Bongo Man",
+          "url": "https://music.apple.com/us/song/1439651680",
+          "timecodes": []
+        },
+        {
+          "title": "Lela-Lela (feat. Diblo & Lokassa)",
+          "artist": "Kanda Bongo Man",
+          "url": "https://music.apple.com/us/song/1439651679",
+          "timecodes": []
+        },
+        {
+          "title": "Naloti (feat. Diblo & Lokassa)",
+          "artist": "Kanda Bongo Man",
+          "url": "https://music.apple.com/ch/song/162577115",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "soukous-kwassa-kwassa",
+      "compare": [
+        "the brisk dance pulse and buoyant bass under the quick lead-guitar figures associated with Kanda Bongo Man's band sound",
+        "short rhythm-guitar patterns that make room for the brighter lead line",
+        "repeated guitar motifs, pickups, and response figures through long instrumental sections",
+        "how the groove intensifies and then turns over at vocal returns, breaks, and endings",
+        "production that keeps the percussion tight while preserving the lively, ringing guitar tone"
+      ],
+      "recordings": [
+        {
+          "title": "Kwassa Kwassa",
+          "artist": "Kanda Bongo Man",
+          "url": "https://music.apple.com/us/album/kwassa-kwassa/1439651674",
+          "timecodes": []
+        },
+        {
+          "title": "Sai (feat. Diblo & Lokassa)",
+          "artist": "Kanda Bongo Man",
+          "url": "https://music.apple.com/us/song/1439651675",
+          "timecodes": []
+        },
+        {
+          "title": "Liza (feat. Diblo & Lokassa)",
+          "artist": "Kanda Bongo Man",
+          "url": "https://music.apple.com/us/song/1439651952",
+          "timecodes": []
+        },
+        {
+          "title": "Lowazo (feat. Diblo & Lokassa)",
+          "artist": "Kanda Bongo Man",
+          "url": "https://music.apple.com/us/album/lowazo-feat-diblo-lokassa/1439651674?i=1439651678",
+          "timecodes": []
+        },
+        {
+          "title": "Lela-Lela (feat. Diblo & Lokassa)",
+          "artist": "Kanda Bongo Man",
+          "url": "https://music.apple.com/us/song/1439651679",
+          "timecodes": []
+        },
+        {
+          "title": "Bedy (feat. Diblo & Lokassa)",
+          "artist": "Kanda Bongo Man",
+          "url": "https://music.apple.com/us/song/1439651680",
+          "timecodes": []
+        },
+        {
+          "title": "Naloti (feat. Diblo & Lokassa)",
+          "artist": "Kanda Bongo Man",
+          "url": "https://music.apple.com/ch/song/162577115",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "soukous-ndombolo",
+      "compare": [
+        "the stronger, denser dance groove and how bass, drums, and guitar maintain motion under the vocal",
+        "bass bounce, drum accents, and fast guitar responses working together rather than repeating a stock rock backbeat",
+        "breaks, vocal entrances, and instrumental builds that shape high-energy dance sections",
+        "how keyboard or electronic layers reinforce the ensemble without burying the acoustic guitar and percussion detail",
+        "low-end weight and transient clarity that keep a dense arrangement punchy and playable"
+      ],
+      "recordings": [
+        {
+          "title": "Ndombolo (feat. Papa Wemba)",
+          "artist": "JB Mpiana, Wenge Musica BCBG",
+          "url": "https://music.apple.com/us/song/1441470718",
+          "timecodes": []
+        },
+        {
+          "title": "Tolinga Congo",
+          "artist": "Werrason",
+          "url": "https://music.apple.com/us/album/tolinga-congo-single/1720400254",
+          "timecodes": []
+        },
+        {
+          "title": "Lokoso",
+          "artist": "Werrason",
+          "url": "https://music.apple.com/us/song/1514176577",
+          "timecodes": []
+        },
+        {
+          "title": "Toukou Toukou",
+          "artist": "Koffi Olomidé",
+          "url": "https://music.apple.com/us/song/1800351295",
+          "timecodes": []
+        },
+        {
+          "title": "Danao",
+          "artist": "Koffi Olomidé",
+          "url": "https://music.apple.com/us/song/817142454",
+          "timecodes": []
+        },
+        {
+          "title": "Code pin",
+          "artist": "Koffi Olomidé",
+          "url": "https://music.apple.com/us/song/817142437",
+          "timecodes": []
+        }
+      ]
+    }
+  ]
+}

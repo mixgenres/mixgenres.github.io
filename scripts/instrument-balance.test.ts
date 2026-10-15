@@ -13,12 +13,12 @@ setSoundfontBankReader(async id => {
   return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
 });
 
-async function probe(instrumentId: string, midi: number, velocity = 80) {
+async function probe(instrumentId: string, midi: number, velocity = 80, role = 'comp') {
   const performance: Performance = { notes: [{ trackId: 'probe', time: 0, dur: .4, midi, vel: velocity,
     bar: 0, gestureCode: 0, hitFunctionCode: 0, accent: 1 }], ccs: [], bars: [], duration: .5, tail: 0,
-    blends: {}, trackInfo: { probe: { instrumentId, role: 'comp' } } };
+    blends: {}, worldId: 'country', trackInfo: { probe: { instrumentId, role } } };
   const audio = await renderPerformanceToAudio(performance, { trackInstruments: new Map([['probe', instrumentId]]),
-    trackRoles: new Map([['probe', 'comp']]), rawStem: true, maxDurationSeconds: .5 });
+    trackRoles: new Map([['probe', role]]), worldId: 'country', styleId: 'country-bluegrass', rawStem: true, maxDurationSeconds: .5 });
   return measureAudio(audio.left, audio.right, audio.sampleRate);
 }
 
@@ -32,7 +32,7 @@ test('calibrated guitar no longer masks a same-register horn by tens of decibels
 });
 
 test('upright bass remains audible alongside the violin without isolated overload', async () => {
-  const bass = await probe('upright-bass', 48), violin = await probe('violin', 60);
+  const bass = await probe('upright-bass', 48, 80, 'bass'), violin = await probe('violin', 60, 80, 'lead');
   assert.equal(bass.nonFiniteSamples + violin.nonFiniteSamples, 0);
   assert.ok(bass.samplePeak < 1 && violin.samplePeak < 1);
   assert.ok(Math.abs(bass.rmsDbfs! - violin.rmsDbfs!) < 15, `${bass.rmsDbfs} versus ${violin.rmsDbfs}`);

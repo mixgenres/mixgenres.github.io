@@ -5,7 +5,7 @@
   "source": "Apple Music individual track pages and release metadata. Reference audio has not been downloaded or auditioned.",
   "styles": [
     {
-      "styleId": "gagaku",
+      "styleId": "japanese-gagaku",
       "compare": [
         "shō aitake chord clusters held beneath the independent hichiriki and ryūteki lines",
         "the bends and ornamental attacks of hichiriki against the flute's breath-shaped phrases",
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "styleId": "shakuhachi",
+      "styleId": "japanese-shakuhachi",
       "compare": [
         "breath-shaped phrase lengths and intentional ma between calls",
         "meri and kari pitch inflections, vibrato, and breath noise on sustained tones",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "styleId": "shamisen-minyo",
+      "styleId": "japanese-shamisen-minyo",
       "compare": [
         "Tsugaru shamisen's forceful bachi attacks and melodic variation against the more regular folk-song pulse",
         "vocal calls, shamisen answers, and the space between sung lines",
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "styleId": "koto-sankyoku",
+      "styleId": "japanese-koto-sankyoku",
       "compare": [
         "koto pluck decay, sliding ornaments, and phrase-end flourishes",
         "koto and shamisen roles against shakuhachi responses in chamber repertory",
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "styleId": "taiko",
+      "styleId": "japanese-taiko",
       "compare": [
         "odaiko's low, long-decay strokes against tighter chū-daiko and kane attacks",
         "unison hits, interlocking cells, and the cues that organize ensemble changes",

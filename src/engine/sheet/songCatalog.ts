@@ -8,6 +8,11 @@ import type { FormStepTemplate, SongStyle } from '../../data/styles/schema';
 type EnsembleParts = NonNullable<NonNullable<SongStyle['arrangement']>['ensemble']>;
 
 const RECORDING_SECTION_LABELS: Record<string, string> = {
+  pulse: 'exposed violin cell',
+  'additive-entry': 'cello and marimba enter',
+  'phase-overlap': 'marimba phase shift',
+  'full-ensemble': 'full ensemble',
+  release: 'texture retreat',
   dialogo: 'diálogo',
   introduccion: 'introducción',
   variacion: 'variación',
@@ -217,17 +222,19 @@ export function createCatalogSong(id: string): Sheet {
       const role = roleSeparator > 0 ? target.slice(roleSeparator + 1) : undefined;
       const track = sheet.tracks.find(part => part.instrumentId === instrumentId && (!role || part.role === role));
       if (!track) throw new Error(`Recording ${id} assigns a pattern to absent instrument target ${target}`);
-      const patternId = (style.patterns?.allowed ?? []).find(candidateId => {
-        const pattern = PATTERNS_BY_ID[candidateId];
-        // Keep existing recording assignments valid when a cell gains a concise
-        // student-facing label; its source name remains searchable in tags.
-        const key = shortName.toLocaleLowerCase();
-        return (pattern?.shortName?.toLocaleLowerCase() === key || pattern?.family?.toLocaleLowerCase() === key
-          || pattern?.name.toLocaleLowerCase().endsWith(`: ${key}`)
-          || pattern?.tags.some(tag => tag.toLocaleLowerCase() === key))
-          && pattern.instruments?.includes(instrumentId)
-          && (!role || pattern.roles.includes(role));
-      });
+      const key = shortName.toLocaleLowerCase();
+      const eligiblePatterns = (style.patterns?.allowed ?? [])
+        .map(candidateId => PATTERNS_BY_ID[candidateId])
+        .filter((pattern): pattern is NonNullable<typeof pattern> => !!pattern
+          && pattern.instruments?.includes(instrumentId) === true
+          && (!role || pattern.roles.includes(role)));
+      // Prefer the visible teaching label over descriptive source tags. Tags
+      // often mention a related phrase or instrument and must not redirect an
+      // exact closing-cell assignment to a generic source cell.
+      const patternId = eligiblePatterns.find(pattern => pattern.shortName?.toLocaleLowerCase() === key)?.id
+        ?? eligiblePatterns.find(pattern => pattern.name.toLocaleLowerCase().endsWith(`: ${key}`))?.id
+        ?? eligiblePatterns.find(pattern => pattern.family?.toLocaleLowerCase() === key)?.id
+        ?? eligiblePatterns.find(pattern => pattern.tags.some(tag => tag.toLocaleLowerCase() === key))?.id;
       if (!patternId) throw new Error(`Recording ${id} cannot resolve ${instrumentId} pattern ${shortName}`);
       arrangement[region.id][track.id] = patternId;
       const basePattern = PATTERNS_BY_ID[patternId];

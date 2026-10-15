@@ -4,7 +4,7 @@
   "source": "Apple Music individual track pages were checked for candidate metadata. Reference audio was not downloaded or auditioned.",
   "references": [
     {
-      "styleId": "roots",
+      "styleId": "reggae-roots",
       "compare": [
         "one-drop pulse, bass melody, and the balance between kick and rim/snare",
         "organ bubble and clipped guitar skank in the offbeat pocket",
@@ -20,7 +20,7 @@
       ]
     },
     {
-      "styleId": "one-drop",
+      "styleId": "reggae-one-drop",
       "compare": [
         "the defining kick and rim/snare landing on beat three, with space on beat one",
         "bass placement against the one-drop drum hit and guitar/keyboard upbeats",
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "styleId": "rockers",
+      "styleId": "reggae-rockers",
       "compare": [
         "the steady kick foundation against the one-drop's beat-three emphasis",
         "bass-drum lock and the weight of the repeated groove",
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "styleId": "dub",
+      "styleId": "reggae-dub",
       "compare": [
         "how the rhythm section remains legible while instruments drop out and return",
         "spring-reverb and tape-echo throws, their timing, and how long their tails linger",
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "styleId": "rocksteady",
+      "styleId": "reggae-rocksteady",
       "compare": [
         "the slower, laid-back pulse and melodic bass movement",
         "light guitar or piano offbeats and restrained drum accents",
@@ -85,7 +85,7 @@
       ]
     },
     {
-      "styleId": "ska",
+      "styleId": "reggae-ska",
       "compare": [
         "brisk offbeat guitar and piano against the walking bass and busy ride pattern",
         "how horns trade short riffs and lead solos over the steady dance pulse",
@@ -102,7 +102,7 @@
       ]
     },
     {
-      "styleId": "dancehall",
+      "styleId": "reggae-dancehall",
       "compare": [
         "the riddim's bass and drum identity, including how much the kick pattern shifts",
         "deejay toast phrasing, vocal cadence, and call-and-response arrangement",

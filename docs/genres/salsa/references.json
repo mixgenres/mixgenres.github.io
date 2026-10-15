@@ -5,7 +5,7 @@
   "source": "Apple Music streaming track pages. Candidate selections include adjacent crossover examples where a style blends traditions; no reference audio downloaded.",
   "styles": [
     {
-      "styleId": "salsa-dura",
+      "styleId": "salsa-salsa-dura",
       "compare": [
         "how the fixed clave direction coordinates piano montuno, bass anticipation, and percussion",
         "the bongo-to-campana change as the arrangement enters the montuno",
@@ -64,7 +64,7 @@
       ]
     },
     {
-      "styleId": "son",
+      "styleId": "salsa-son",
       "compare": [
         "tres/guitar ostinato against anticipated bass tumbao",
         "the lift into repeated coro and how the singer leaves space for instrumental answers",
@@ -104,7 +104,7 @@
       ]
     },
     {
-      "styleId": "son-montuno",
+      "styleId": "salsa-son-montuno",
       "compare": [
         "piano montuno and tres guajeo interlock under a steady son clave",
         "lead/coro call-and-response and the expansion into a longer montuno",
@@ -144,7 +144,7 @@
       ]
     },
     {
-      "styleId": "mambo",
+      "styleId": "salsa-mambo",
       "compare": [
         "short, sharply coordinated horn riffs and ensemble punches",
         "big-band brass voicing against piano/bass tumbao and bell-driven percussion",
@@ -184,7 +184,7 @@
       ]
     },
     {
-      "styleId": "cha-cha-cha",
+      "styleId": "salsa-cha-cha-cha",
       "compare": [
         "even cha-cha pulse and the guiro's audible scrape pattern",
         "light charanga flute/strings against bass and restrained percussion",
@@ -224,7 +224,7 @@
       ]
     },
     {
-      "styleId": "charanga",
+      "styleId": "salsa-charanga",
       "compare": [
         "flute lead against violin section responses over a light charanga rhythm section",
         "how the piano and bass keep the dance pulse buoyant without crowding the flute",
@@ -264,7 +264,7 @@
       ]
     },
     {
-      "styleId": "pachanga",
+      "styleId": "salsa-pachanga",
       "compare": [
         "buoyant flute-and-violin charanga texture over the dance rhythm",
         "forward-moving bass and percussion with lively, short vocal refrains",
@@ -304,7 +304,7 @@
       ]
     },
     {
-      "styleId": "boogaloo",
+      "styleId": "salsa-boogaloo",
       "compare": [
         "Latin percussion against a firm R&B and soul backbeat",
         "compact piano, bass and horn hooks with call-and-response vocals",
@@ -344,7 +344,7 @@
       ]
     },
     {
-      "styleId": "descarga",
+      "styleId": "salsa-descarga",
       "compare": [
         "the vamp and bass foundation holding steady as soloists improvise",
         "how piano, horns and percussion leave room for each solo handoff",
@@ -384,7 +384,7 @@
       ]
     },
     {
-      "styleId": "guaguanco-salsa",
+      "styleId": "salsa-guaguanco-salsa",
       "compare": [
         "the clave and rumba-derived conga conversation against a salsa bass and piano foundation",
         "how a lead pregón leaves clear gaps for coro, horns, and quinto replies",
@@ -424,7 +424,7 @@
       ]
     },
     {
-      "styleId": "salsa-romantica",
+      "styleId": "salsa-salsa-romantica",
       "compare": [
         "the smoother, sustained vocal phrasing and lyric-forward balance against the more percussive salsa styles",
         "how keyboard and horn layers add lift between vocal lines without filling every gap",
@@ -464,7 +464,7 @@
       ]
     },
     {
-      "styleId": "puerto-rican-salsa",
+      "styleId": "salsa-puerto-rican-salsa",
       "compare": [
         "the ensemble conversation between Puerto Rican sonero phrasing, coro, brass, piano, and percussion",
         "how orchestral hits and the bass tumbao keep a large band nimble and danceable",
@@ -504,7 +504,7 @@
       ]
     },
     {
-      "styleId": "salsa-calena",
+      "styleId": "salsa-salsa-calena",
       "compare": [
         "the bright, high-energy Colombian brass and piano drive and its relationship to the dance-floor pulse",
         "how the bass, piano, and percussion maintain propulsion while hooks and coro lines rotate",
@@ -544,7 +544,7 @@
       ]
     },
     {
-      "styleId": "salsa-jazz",
+      "styleId": "salsa-salsa-jazz",
       "compare": [
         "the balance between a locked salsa dance groove and jazz solo space, harmonic color, and longer instrumental forms",
         "how piano, bass, horns, and Afro-Cuban percussion leave room for improvised lead lines",
@@ -584,7 +584,7 @@
       ]
     },
     {
-      "styleId": "merengue-crossover",
+      "styleId": "salsa-merengue-crossover",
       "compare": [
         "how the fast tambora-and-güira drive changes when pop phrasing, salsa-style horns, or a crossover vocal hook is added",
         "whether piano, bass, and percussion stay distinct and buoyant instead of becoming a generic dance loop",
@@ -624,7 +624,7 @@
       ]
     },
     {
-      "styleId": "cumbia-crossover",
+      "styleId": "salsa-cumbia-crossover",
       "compare": [
         "the swaying cumbia pulse, guiro pattern, and bass movement when arranged alongside salsa piano and brass",
         "how accordion or keyboard hooks answer the vocal and change the texture between phrases",

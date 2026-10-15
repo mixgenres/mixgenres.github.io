@@ -11,6 +11,8 @@ export interface TrackSound {
   roleGain: number;
   drive: number;
   mute: number;
+  /** SoundFont velocity-layer bias from the authored instrument setup. */
+  brightnessMultiplier: number;
   variantId?: string;
   bodyConstruction?: string;
   excitationType?: string;
@@ -20,10 +22,12 @@ export interface TrackSound {
 }
 
 /** Resolve one part's sample and mixer choices from instrument/style metadata. */
-export function resolveTrackSound(instrumentId: string, worldId = '', styleId = '', role?: string): TrackSound {
+export function resolveTrackSound(instrumentId: string, worldId: string, styleId = '', role?: string): TrackSound {
   const def = INSTRUMENTS_BY_ID[instrumentId];
   if (!def) throw new Error(`Unknown sampled instrument: ${instrumentId}`);
-  const assignedRole = role ?? def.acousticProfile?.role ?? 'comp';
+  if (typeof worldId !== 'string' || !worldId.trim()) throw new Error(`Sampled instrument ${instrumentId} has no genre mix context`);
+  const assignedRole = role ?? def.acousticProfile?.role;
+  if (!assignedRole) throw new Error(`Sampled instrument ${instrumentId} has no authored mix role`);
   const dialect = resolveDialect(instrumentId, worldId, styleId, assignedRole);
   const variant = def.variants?.find(item => item.id === dialect?.variantId);
   const physical = def.luthierPhysics;
@@ -35,11 +39,14 @@ export function resolveTrackSound(instrumentId: string, worldId = '', styleId = 
   // Bakersfield setup must be able to select its clean sampled amp bank even
   // when the generic guitar physics profile is harmonically rich.
   if (dialect?.drive !== undefined) drive = Math.max(0, Math.min(1, dialect.drive));
+  const authoredBrightness = dialect?.brightnessMultiplier;
   return {
     pan: Math.max(0, Math.min(1, new StereoFieldManager().resolveInstrumentPanNormalized(instrumentId) + (def.acousticProfile?.pan ?? 0) * 0.5)),
-    roleGain: getRoleGainLinear(assignedRole, worldId || 'default', instrumentId, styleId) * 10 ** ((def.acousticProfile?.trim ?? 0) / 20),
+    roleGain: getRoleGainLinear(assignedRole, worldId, instrumentId, styleId) * 10 ** ((def.acousticProfile?.trim ?? 0) / 20),
     drive,
     mute: dialect?.muteType && dialect.muteType !== 'open' ? 0.82 : 0,
+    brightnessMultiplier: Number.isFinite(authoredBrightness)
+      ? Math.max(0.35, Math.min(1.5, authoredBrightness!)) : 1,
     variantId: variant?.id,
     bodyConstruction: dialect?.bodyConstruction ?? variant?.bodyConstruction ?? physical?.bodyConstruction ?? def.bodyConstruction,
     excitationType: dialect?.excitationType ?? variant?.excitationType ?? physical?.excitationType ?? def.excitationType,

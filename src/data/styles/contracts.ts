@@ -223,7 +223,7 @@ function base(
       : timeline.includes('3+3+2') ? [0,3,6,8] : []);
   const accentMap = Array.from({ length: Math.max(8, opts.subdivision ?? 16) }, (_, i) =>
     authoredTimelineGrid.length ? (authoredTimelineGrid.includes(i) ? 1 : 0.58) : 1);
-  const transitionGrammar = opts.transitionGrammar ?? { byDelta: { build: ['fill'], drop: ['drop-out'], hold: [] }, types: ['fill', 'drop-out'], onEnergyRise: 'fill', onEnergyFall: 'drop-out', authoredPriority: true };
+  const transitionGrammar = opts.transitionGrammar ?? { byDelta: { build: [], drop: [], hold: [] }, types: [], authoredPriority: false };
   const approaches = opts.approaches ?? {
       bass: { id: bass.style === 'walking' ? 'walking' : bass.style, tags: [bass.style, 'bass'] },
       pulse: { id: bass.style === 'dembow' ? 'dembow-bass' : bass.style, tags: [bass.style, 'pulse', 'bass'] },

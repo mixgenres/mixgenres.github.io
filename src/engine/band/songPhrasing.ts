@@ -84,7 +84,7 @@ function phraseTechniqueBudget(role: string, family: string, genre: string, note
 function optimizePhrase(notes: PerfNote[], track: Voice, profile: InstrumentPerformanceProfile, genre: string, style: ResolvedStyle, target: StyleCalibrationTarget, phraseStart: number, phraseEnd: number, partStyle?: SongStyle, partStyleWeight = 0) {
   if (!notes.length) return { rootHeavy: false, beforeGestures: new Set<string>(), afterGestures: new Set<string>() };
   const beforeGestures = new Set(notes.map(n => GESTURE_NAMES[n.gestureCode] ?? String(n.gestureCode)));
-  const role = String(track.role ?? profile.genreProfiles[genre]?.roles?.[0] ?? 'harmony').toLowerCase();
+  const role = String(track.role).toLowerCase();
   const prefs = preferredGestureSet(profile, genre);
   const rootShare = rootRatio(notes);
   const rootHeavy = target.maxBassRootRatio !== undefined && /bass|comp|harmony/.test(role)
@@ -192,6 +192,7 @@ export function optimizePerformanceByPhraseAndSong(sheet: Sheet, perf: Performan
       const partStyleWeight = lens ? clamp(lens.weight) : 0;
       const trackNotes = regionNotes.filter(n => n.trackId === track.id);
       if (!trackNotes.length) continue;
+      const role = getTrackRole(sheet, track.id, region.id);
       let rootHeavyPhrases = 0;
       const before = new Set<string>();
       const after = new Set<string>();
@@ -208,23 +209,23 @@ export function optimizePerformanceByPhraseAndSong(sheet: Sheet, perf: Performan
         const phrase = trackNotes.filter(n => id ? n.phraseId === id : n.bar >= start && n.bar < end);
         if (!phrase.length) continue;
         phrases++;
-        const result = optimizePhrase(phrase, { ...track, role: getTrackRole(sheet, track.id, region.id) }, profile, genre, style, target, start, end, partStyle, partStyleWeight);
+        const result = optimizePhrase(phrase, { ...track, role }, profile, genre, style, target, start, end, partStyle, partStyleWeight);
         if (result.rootHeavy) rootHeavyPhrases++;
         result.beforeGestures.forEach(x => before.add(x));
         result.afterGestures.forEach(x => after.add(x));
       }
 
-      ensureRegionTechnique(trackNotes, profile, genre, style, getTrackRole(sheet, track.id, region.id), partStyle, partStyleWeight);
+      ensureRegionTechnique(trackNotes, profile, genre, style, role, partStyle, partStyleWeight);
 
-      const role = String(track.role ?? profile.genreProfiles[genre]?.roles?.[0] ?? 'harmony').toLowerCase();
+      const normalizedRole = role.toLowerCase();
       const scopeWarnings: string[] = [];
-      if (track.role && !profile.genreProfiles[genre]?.roles?.some(r => r === track.role || r === role)) scopeWarnings.push('track role is outside instrument genre scope');
+      if (!profile.genreProfiles[genre]?.roles?.some(r => r === track.role || r === normalizedRole)) scopeWarnings.push('track role is outside instrument genre scope');
       const outOfRange = trackNotes.filter(n => n.midi < profile.capabilities.lowMidi || n.midi > profile.capabilities.highMidi).length;
       if (outOfRange) scopeWarnings.push(`${outOfRange} notes outside authored instrument range`);
       if (profile.capabilities.polyphony < 2 && trackNotes.some(n => n.dur > 0.15)) scopeWarnings.push('monophonic physical model is receiving sustained overlap candidates');
       if (scopeWarnings.length) warnings.push(`${target.styleId}:${track.instrumentId}: ${scopeWarnings.join('; ')}`);
       let bassTrimDb: number | undefined;
-      if (/bass/.test(role)) {
+      if (/bass/.test(normalizedRole)) {
         const mc = contractForGenre(genre, style).timbreSpace.mixCharacter;
         const forward = mc?.bassForward ?? 0.5;
         const density = trackNotes.length / Math.max(1, (region.end - region.start) * 4);

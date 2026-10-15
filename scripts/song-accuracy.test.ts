@@ -26,6 +26,56 @@ test('silent arrangement parts never acquire fallback attacks', () => {
   assert.ok(!compileWholeSong(sheet).notes.some(n => n.trackId === track.id && n.bar >= region.start && n.bar < region.end));
 });
 
+test('Classical Minimalist keeps its mallet pulse pitched and has no drum part', () => {
+  const sheet = createCatalogSong('classical-minimalist_song');
+  assert.ok(!sheet.tracks.some(track => track.role === 'percussion' || track.instrumentId === 'timpani' || track.instrumentId === 'drums'));
+  const marimba = sheet.tracks.find(track => track.instrumentId === 'marimba');
+  assert.ok(marimba);
+  const patternFor = (kind: string) => {
+    const section = sheet.regions.find(region => region.kind === kind);
+    assert.ok(section, `Minimalist score contains ${kind}`);
+    const id = sheet.arrangement[section.id]?.[marimba.id];
+    assert.ok(id, `${kind} assigns the mallet part`);
+    return PATTERNS_BY_ID[id];
+  };
+  const cell = patternFor('additive-entry');
+  assert.equal(cell.shortName, 'Marimba chord-tone cell');
+  assert.deepEqual(cell.events?.map(event => event.pitch?.degree), [1, 3, 5, 3]);
+  assert.ok(cell.events?.every(event => event.pitch?.voicing === 'single'), 'each marimba attack is one pitched note, not a chord hit');
+  const phase = patternFor('phase-overlap');
+  assert.equal(phase.shortName, 'Marimba phase shift');
+  assert.deepEqual(phase.events?.map(event => event.position), [0, 1, 2, 3, 4.5, 5.5, 6.5, 7.5]);
+  assert.ok(phase.events?.every(event => event.pitch?.voicing === 'single'));
+});
+
+test('Soukous family samples keep distinct authored kit grooves and phrase turns', () => {
+  const styles = [
+    ['soukous', 'Soukous guitar pulse'],
+    ['congolese-rumba', 'Rumba verse kit'],
+    ['sebene', 'Sebene ride drive'],
+    ['kwassa-kwassa', 'Kwassa bounce kit'],
+    ['ndombolo', 'Ndombolo dance drive'],
+  ] as const;
+  const signatures: string[] = [];
+  for (const [style, expectedName] of styles) {
+    const song = createCatalogSong(`soukous-${style}_song`);
+    const drums = song.tracks.find(track => track.instrumentId === 'drums');
+    assert.ok(drums, `${style} sample includes its kit part`);
+    const intro = song.regions.find(region => region.kind === 'intro');
+    assert.ok(intro, `${style} sample includes an introduction`);
+    const patternId = song.arrangement[intro.id]?.[drums.id];
+    assert.ok(patternId, `${style} introduction assigns the kit`);
+    const pattern = PATTERNS_BY_ID[patternId];
+    assert.equal(pattern?.shortName, expectedName, `${style} shows its own student-facing kit name`);
+    assert.ok(pattern?.events?.length, `${style} has an authored kit cell`);
+    assert.ok(pattern.variants?.some(variant => variant.variationType === 'cadence'),
+      `${style} kit cell has a phrase-end variation`);
+    signatures.push(pattern.events!.map(event => `${event.position}:${event.hitType}`).join('|'));
+  }
+  assert.equal(new Set(signatures).size, styles.length,
+    'the five related styles do not collapse to one shared backbeat');
+});
+
 test('authored tango phrases keep their articulations and fractional note lengths', () => {
   const sheet = makeSheet('tango', 'tango-golden-age');
   const perf = compileWholeSong(sheet);
@@ -70,6 +120,27 @@ test('authored descending motifs resolve downward instead of wrapping upward', (
   const ctx = { profile: getInstrumentPerformanceProfile('bandoneon'), chord: 'Am', hybridTheory: styleTheoryFor('tango-golden-age', 'tango') } as PhraseContext;
   const line = [5, 3, 2, 1].map(degree => realizeMidi({ ...ctx, authoredPitch: { degree, register: 65 } }, 0, 1, createPhraseState())[0]);
   assert.ok(line.every((midi, i) => !i || midi < line[i - 1]), String(line));
+});
+
+test('generated weak melody attacks approach their target instead of inheriting an upward contour', () => {
+  const theory = styleTheoryFor('latin-cumbia', 'latin');
+  const ctx = { profile: getInstrumentPerformanceProfile('flute'), role: 'lead', chord: 'C',
+    phrasePosition: .25, phraseIndex: 0, onsetIndex: 1, hit: 'tone', pattern: { roles: ['lead'] },
+    hybridTheory: { ...theory, melody: { ...theory.melody, targetDegrees: [1], contour: ['pickup'] } } } as PhraseContext;
+  const state = createPhraseState();
+  state.previousMidi = 76; // E5; the authored C target lies below it.
+  assert.equal(realizeMidi(ctx, 1, 4, state)[0], 74, 'the approach moves down to the next scale tone, D5');
+});
+
+test('generated melody target degrees continue through the full phrase across bar boundaries', () => {
+  const theory = styleTheoryFor('latin-cumbia', 'latin');
+  const ctx = { profile: getInstrumentPerformanceProfile('flute'), role: 'lead', chord: 'C', phraseIndex: 0,
+    phrasePosition: .4, onsetIndex: 0, phraseAttackIndex: 2, hit: 'tone', pattern: { roles: ['lead'] },
+    hybridTheory: { ...theory, melody: { ...theory.melody, targetDegrees: [1, 3, 5, 1] } } } as PhraseContext;
+  const state = createPhraseState();
+  state.previousMidi = 60;
+  assert.equal(realizeMidi(ctx, 0, 4, state)[0] % 12, 7,
+    'the third written attack in the phrase uses its authored fifth-degree target rather than bar-local tonic');
 });
 
 test('tango variants use their actual meters and accompaniment cells', () => {
@@ -1510,7 +1581,7 @@ test('Bass samples develop their role cells and name each style-specific groove 
   const signatures = [
     ['bass-drum-and-bass_song','drop','break + sub drop 1','synth','bass','Synthesizer variation'],
     ['bass-jungle_song','drop','chopped-break return 1','synth','bass','Synthesizer bend'],
-    ['bass-liquid_song','theme','liquid melody 1','synth','harmony','Synthesizer legato'],
+    ['bass-liquid_song','theme','liquid melody 1','synth','harmony','Synth accompaniment'],
     ['bass-neurofunk_song','drop','modulated-bass drop 1','synth','bass','Synthesizer variation'],
     ['bass-uk-garage_song','B','bassline exchange B 1','synth','lead','Synthesizer variation'],
     ['bass-2-step_song','chorus','lifted two-step chorus 1','synth','harmony','Synthesizer accent'],

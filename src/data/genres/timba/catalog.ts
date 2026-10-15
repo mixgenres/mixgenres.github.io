@@ -65,24 +65,374 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 1, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "timba piano tumbao and bass gear changes voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "timba piano tumbao and bass gear changes voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "timba piano tumbao and bass gear changes trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "timba piano tumbao and bass gear changes trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "timba piano tumbao and bass gear changes trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "timba piano tumbao and bass gear changes trombone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trombone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "timba piano tumbao and bass gear changes piano accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "timba piano tumbao and bass gear changes piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "timba piano tumbao and bass gear changes low anchor", "role": "bass", "onsets": [1.5, 2.5, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.5]},
-        {"name": "timba piano tumbao and bass gear changes bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "timba piano tumbao and bass gear changes congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "timba piano tumbao and bass gear changes congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "timba piano tumbao and bass gear changes timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["timbales"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "timba piano tumbao and bass gear changes timbales cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timbales"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "timba piano tumbao and bass gear changes kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "timba piano tumbao and bass gear changes drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "timba piano tumbao and bass gear changes cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cowbell"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "timba piano tumbao and bass gear changes cowbell cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cowbell"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {
+          "name": "timba piano tumbao and bass gear changes voice statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.75,
+            1.5
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "timba piano tumbao and bass gear changes voice cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "timba piano tumbao and bass gear changes trumpet statement",
+          "role": "lead",
+          "onsets": [
+            2,
+            2.75,
+            3.5
+          ],
+          "instruments": [
+            "trumpet"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "timba piano tumbao and bass gear changes trumpet cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "trumpet"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "timba piano tumbao and bass gear changes trombone statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.75,
+            1.5
+          ],
+          "instruments": [
+            "trombone"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "timba piano tumbao and bass gear changes trombone cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "trombone"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "timba piano tumbao and bass gear changes piano accompaniment",
+          "role": "harmony",
+          "onsets": [
+            0,
+            0.75,
+            1.5,
+            2.5,
+            3.25,
+            3.5
+          ],
+          "instruments": [
+            "piano"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "timba piano tumbao and bass gear changes piano cadence fill",
+          "role": "harmony",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "piano"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "timba piano tumbao and bass gear changes low anchor",
+          "role": "bass",
+          "onsets": [
+            1.5,
+            2.5,
+            3.5
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "articulation": "staccato",
+          "durations": [
+            0.6,
+            0.6,
+            0.5
+          ]
+        },
+        {
+          "name": "timba piano tumbao and bass gear changes bass cadence fill",
+          "role": "bass",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "timba piano tumbao and bass gear changes congas pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "congas"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent",
+          "hits": [
+            "open",
+            "ghost",
+            "slap",
+            "ghost",
+            "open",
+            "ghost",
+            "slap",
+            "ghost"
+          ]
+        },
+        {
+          "name": "timba piano tumbao and bass gear changes congas cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "congas"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        },
+        {
+          "name": "timba piano tumbao and bass gear changes timbales pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "timbales"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent"
+        },
+        {
+          "name": "timba piano tumbao and bass gear changes timbales cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "timbales"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        },
+        {
+          "name": "timba piano tumbao and bass gear changes kit",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0,
+            0.5,
+            1,
+            1,
+            1.5,
+            2,
+            2,
+            2.5,
+            3,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "hits": [
+            "hat",
+            "kick",
+            "hat",
+            "hat",
+            "snare",
+            "hat",
+            "hat",
+            "kick",
+            "hat",
+            "hat",
+            "snare",
+            "hat"
+          ],
+          "cycleLength": 1,
+          "accents": [
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45
+          ]
+        },
+        {
+          "name": "timba piano tumbao and bass gear changes drums cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll",
+          "hits": [
+            "tom",
+            "snare",
+            "snare"
+          ]
+        },
+        {
+          "name": "timba piano tumbao and bass gear changes cowbell pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "cowbell"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent",
+          "hits": [
+            "bell",
+            "bell",
+            "bell",
+            "bell",
+            "bell",
+            "bell",
+            "bell",
+            "bell"
+          ]
+        },
+        {
+          "name": "timba piano tumbao and bass gear changes cowbell cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "cowbell"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        }
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -421,24 +771,362 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 1, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "NG La Banda dense horn bloques and bass tumbao voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "NG La Banda dense horn bloques and bass tumbao voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "NG La Banda dense horn bloques and bass tumbao trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "NG La Banda dense horn bloques and bass tumbao trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "NG La Banda dense horn bloques and bass tumbao trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "NG La Banda dense horn bloques and bass tumbao trombone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trombone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "NG La Banda dense horn bloques and bass tumbao piano accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "NG La Banda dense horn bloques and bass tumbao piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "NG La Banda dense horn bloques and bass tumbao low anchor", "role": "bass", "onsets": [1.5, 2.5, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.5]},
-        {"name": "NG La Banda dense horn bloques and bass tumbao bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "NG La Banda dense horn bloques and bass tumbao congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "NG La Banda dense horn bloques and bass tumbao congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "NG La Banda dense horn bloques and bass tumbao timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["timbales"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "NG La Banda dense horn bloques and bass tumbao timbales cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timbales"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "NG La Banda dense horn bloques and bass tumbao kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "NG La Banda dense horn bloques and bass tumbao drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "NG La Banda dense horn bloques and bass tumbao cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cowbell"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "NG La Banda dense horn bloques and bass tumbao cowbell cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cowbell"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao voice statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.75,
+            1.5
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao voice cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao trumpet statement",
+          "shortName": "Bb Trumpet accent",
+          "role": "lead",
+          "onsets": [
+            0,
+            1.5,
+            2.75,
+            3.5
+          ],
+          "instruments": [
+            "trumpet"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.28,
+            0.28,
+            0.28,
+            0.28
+          ],
+          "articulation": "accent"
+        },
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao trumpet cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "trumpet"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao trombone statement",
+          "shortName": "Trombone accent",
+          "role": "lead",
+          "onsets": [
+            0,
+            1.5,
+            2.75,
+            3.5
+          ],
+          "instruments": [
+            "trombone"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.28,
+            0.28,
+            0.28,
+            0.28
+          ],
+          "articulation": "accent"
+        },
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao trombone cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "trombone"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao piano accompaniment",
+          "role": "harmony",
+          "onsets": [
+            0,
+            0.75,
+            1.25,
+            2,
+            2.75,
+            3.5
+          ],
+          "instruments": [
+            "piano"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.2,
+            0.2,
+            0.2,
+            0.2,
+            0.2,
+            0.2
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao piano cadence fill",
+          "role": "harmony",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "piano"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao low anchor",
+          "role": "bass",
+          "onsets": [
+            1.5,
+            2.5,
+            3.5
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "articulation": "staccato",
+          "durations": [
+            0.6,
+            0.6,
+            0.5
+          ]
+        },
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao bass cadence fill",
+          "role": "bass",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao congas pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "congas"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent"
+        },
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao congas cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "congas"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        },
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao timbales pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "timbales"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent"
+        },
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao timbales cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "timbales"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        },
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao kit",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0,
+            0.5,
+            1,
+            1,
+            1.5,
+            2,
+            2,
+            2.5,
+            3,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "hits": [
+            "hat",
+            "kick",
+            "hat",
+            "hat",
+            "snare",
+            "hat",
+            "hat",
+            "kick",
+            "hat",
+            "hat",
+            "snare",
+            "hat"
+          ],
+          "cycleLength": 1,
+          "accents": [
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45
+          ]
+        },
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao drums cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll",
+          "hits": [
+            "tom",
+            "snare",
+            "snare"
+          ]
+        },
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao cowbell pulse",
+          "role": "percussion",
+          "onsets": [
+            0.5,
+            1.5,
+            2.5,
+            3.5
+          ],
+          "instruments": [
+            "cowbell"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent",
+          "hits": [
+            "bell",
+            "bell",
+            "bell",
+            "bell"
+          ]
+        },
+        {
+          "name": "NG La Banda dense horn bloques and bass tumbao cowbell cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "cowbell"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        }
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -785,24 +1473,358 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 1, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "Paulito FG coro development and gear shifts voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Paulito FG coro development and gear shifts voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Paulito FG coro development and gear shifts trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Paulito FG coro development and gear shifts trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Paulito FG coro development and gear shifts trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Paulito FG coro development and gear shifts trombone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trombone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Paulito FG coro development and gear shifts piano accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Paulito FG coro development and gear shifts piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Paulito FG coro development and gear shifts low anchor", "role": "bass", "onsets": [1.5, 2.5, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.5]},
-        {"name": "Paulito FG coro development and gear shifts bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Paulito FG coro development and gear shifts congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Paulito FG coro development and gear shifts congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "Paulito FG coro development and gear shifts timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["timbales"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Paulito FG coro development and gear shifts timbales cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timbales"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "Paulito FG coro development and gear shifts kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "Paulito FG coro development and gear shifts drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "Paulito FG coro development and gear shifts cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cowbell"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Paulito FG coro development and gear shifts cowbell cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cowbell"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {
+          "name": "Paulito FG coro development and gear shifts voice statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            1.25,
+            2.5
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.8,
+            0.65,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "Paulito FG coro development and gear shifts voice cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Paulito FG coro development and gear shifts trumpet statement",
+          "role": "lead",
+          "onsets": [
+            2,
+            2.75,
+            3.5
+          ],
+          "instruments": [
+            "trumpet"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "Paulito FG coro development and gear shifts trumpet cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "trumpet"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Paulito FG coro development and gear shifts trombone statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.75,
+            1.5
+          ],
+          "instruments": [
+            "trombone"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "Paulito FG coro development and gear shifts trombone cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "trombone"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Paulito FG coro development and gear shifts piano accompaniment",
+          "role": "harmony",
+          "onsets": [
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3.25,
+            3.75
+          ],
+          "instruments": [
+            "piano"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3,
+            0.3
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "Paulito FG coro development and gear shifts piano cadence fill",
+          "role": "harmony",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "piano"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Paulito FG coro development and gear shifts low anchor",
+          "role": "bass",
+          "onsets": [
+            0,
+            1.5,
+            2.5,
+            3.5
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "articulation": "staccato",
+          "durations": [
+            0.4,
+            0.65,
+            0.45,
+            0.38
+          ]
+        },
+        {
+          "name": "Paulito FG coro development and gear shifts bass cadence fill",
+          "role": "bass",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Paulito FG coro development and gear shifts congas pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "congas"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent"
+        },
+        {
+          "name": "Paulito FG coro development and gear shifts congas cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "congas"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        },
+        {
+          "name": "Paulito FG coro development and gear shifts timbales pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "timbales"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent"
+        },
+        {
+          "name": "Paulito FG coro development and gear shifts timbales cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "timbales"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        },
+        {
+          "name": "Paulito FG coro development and gear shifts kit",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0,
+            0.5,
+            1,
+            1,
+            1.5,
+            2,
+            2,
+            2.5,
+            3,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "hits": [
+            "hat",
+            "kick",
+            "hat",
+            "hat",
+            "snare",
+            "hat",
+            "hat",
+            "kick",
+            "hat",
+            "hat",
+            "snare",
+            "hat"
+          ],
+          "cycleLength": 1,
+          "accents": [
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45
+          ]
+        },
+        {
+          "name": "Paulito FG coro development and gear shifts drums cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll",
+          "hits": [
+            "tom",
+            "snare",
+            "snare"
+          ]
+        },
+        {
+          "name": "Paulito FG coro development and gear shifts cowbell pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "cowbell"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent"
+        },
+        {
+          "name": "Paulito FG coro development and gear shifts cowbell cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "cowbell"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        }
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -904,24 +1926,365 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 1, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "Manolin chant coro and percussion breaks voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Manolin chant coro and percussion breaks voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Manolin chant coro and percussion breaks trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Manolin chant coro and percussion breaks trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Manolin chant coro and percussion breaks trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Manolin chant coro and percussion breaks trombone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trombone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Manolin chant coro and percussion breaks piano accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Manolin chant coro and percussion breaks piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Manolin chant coro and percussion breaks low anchor", "role": "bass", "onsets": [1.5, 2.5, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.5]},
-        {"name": "Manolin chant coro and percussion breaks bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Manolin chant coro and percussion breaks congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Manolin chant coro and percussion breaks congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "Manolin chant coro and percussion breaks timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["timbales"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Manolin chant coro and percussion breaks timbales cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timbales"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "Manolin chant coro and percussion breaks kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "Manolin chant coro and percussion breaks drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "Manolin chant coro and percussion breaks cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cowbell"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Manolin chant coro and percussion breaks cowbell cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cowbell"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {
+          "name": "Manolin chant coro and percussion breaks voice statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.5,
+            1.75
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.28,
+            0.28,
+            0.55
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "Manolin chant coro and percussion breaks voice cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Manolin chant coro and percussion breaks trumpet statement",
+          "role": "lead",
+          "onsets": [
+            2,
+            2.75,
+            3.5
+          ],
+          "instruments": [
+            "trumpet"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "Manolin chant coro and percussion breaks trumpet cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "trumpet"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Manolin chant coro and percussion breaks trombone statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.75,
+            1.5
+          ],
+          "instruments": [
+            "trombone"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "Manolin chant coro and percussion breaks trombone cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "trombone"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Manolin chant coro and percussion breaks piano accompaniment",
+          "role": "harmony",
+          "onsets": [
+            0,
+            0.75,
+            1.5,
+            2.5,
+            3.25,
+            3.5
+          ],
+          "instruments": [
+            "piano"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "Manolin chant coro and percussion breaks piano cadence fill",
+          "role": "harmony",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "piano"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Manolin chant coro and percussion breaks low anchor",
+          "role": "bass",
+          "onsets": [
+            1.5,
+            2.5,
+            3.5
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "articulation": "staccato",
+          "durations": [
+            0.6,
+            0.6,
+            0.5
+          ]
+        },
+        {
+          "name": "Manolin chant coro and percussion breaks bass cadence fill",
+          "role": "bass",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Manolin chant coro and percussion breaks congas pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.75,
+            1.25,
+            2,
+            2.75,
+            3.5
+          ],
+          "instruments": [
+            "congas"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent",
+          "hits": [
+            "open",
+            "ghost",
+            "slap",
+            "open",
+            "ghost",
+            "slap"
+          ]
+        },
+        {
+          "name": "Manolin chant coro and percussion breaks congas cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "congas"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        },
+        {
+          "name": "Manolin chant coro and percussion breaks timbales pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "timbales"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent"
+        },
+        {
+          "name": "Manolin chant coro and percussion breaks timbales cadence fill",
+          "role": "percussion",
+          "onsets": [
+            2.5,
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "timbales"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll",
+          "hits": [
+            "rim",
+            "rim",
+            "bell",
+            "bell"
+          ]
+        },
+        {
+          "name": "Manolin chant coro and percussion breaks kit",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0,
+            0.5,
+            1,
+            1,
+            1.5,
+            2,
+            2,
+            2.5,
+            3,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "hits": [
+            "hat",
+            "kick",
+            "hat",
+            "hat",
+            "snare",
+            "hat",
+            "hat",
+            "kick",
+            "hat",
+            "hat",
+            "snare",
+            "hat"
+          ],
+          "cycleLength": 1,
+          "accents": [
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45
+          ]
+        },
+        {
+          "name": "Manolin chant coro and percussion breaks drums cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll",
+          "hits": [
+            "tom",
+            "snare",
+            "snare"
+          ]
+        },
+        {
+          "name": "Manolin chant coro and percussion breaks cowbell pulse",
+          "role": "percussion",
+          "onsets": [
+            1.5,
+            3.5
+          ],
+          "instruments": [
+            "cowbell"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent",
+          "hits": [
+            "bell",
+            "bell"
+          ]
+        },
+        {
+          "name": "Manolin chant coro and percussion breaks cowbell cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "cowbell"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        }
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -1023,24 +2386,358 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 1, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "Havana D Primera melodic trumpet and vocal coro voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Havana D Primera melodic trumpet and vocal coro voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Havana D Primera melodic trumpet and vocal coro trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Havana D Primera melodic trumpet and vocal coro trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Havana D Primera melodic trumpet and vocal coro trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Havana D Primera melodic trumpet and vocal coro trombone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trombone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Havana D Primera melodic trumpet and vocal coro piano accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Havana D Primera melodic trumpet and vocal coro piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Havana D Primera melodic trumpet and vocal coro low anchor", "role": "bass", "onsets": [1.5, 2.5, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.5]},
-        {"name": "Havana D Primera melodic trumpet and vocal coro bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Havana D Primera melodic trumpet and vocal coro congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Havana D Primera melodic trumpet and vocal coro congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "Havana D Primera melodic trumpet and vocal coro timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["timbales"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Havana D Primera melodic trumpet and vocal coro timbales cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timbales"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "Havana D Primera melodic trumpet and vocal coro kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "Havana D Primera melodic trumpet and vocal coro drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "Havana D Primera melodic trumpet and vocal coro cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cowbell"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Havana D Primera melodic trumpet and vocal coro cowbell cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cowbell"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro voice statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.75,
+            1.5
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro voice cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro trumpet statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            2,
+            2.75,
+            3.25
+          ],
+          "instruments": [
+            "trumpet"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.25,
+            0.45,
+            0.65,
+            0.25,
+            0.4
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro trumpet cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "trumpet"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro trombone statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.75,
+            1.5
+          ],
+          "instruments": [
+            "trombone"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro trombone cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "trombone"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro piano accompaniment",
+          "role": "harmony",
+          "onsets": [
+            0.5,
+            1.5,
+            2.5,
+            3.5
+          ],
+          "instruments": [
+            "piano"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.28,
+            0.28,
+            0.28,
+            0.28
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro piano cadence fill",
+          "role": "harmony",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "piano"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro low anchor",
+          "role": "bass",
+          "onsets": [
+            0,
+            1.5,
+            2.25,
+            3.5
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "articulation": "staccato",
+          "durations": [
+            0.78,
+            0.35,
+            0.65,
+            0.32
+          ]
+        },
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro bass cadence fill",
+          "role": "bass",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro congas pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "congas"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent"
+        },
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro congas cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "congas"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        },
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro timbales pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "timbales"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent"
+        },
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro timbales cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "timbales"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        },
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro kit",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0,
+            0.5,
+            1,
+            1,
+            1.5,
+            2,
+            2,
+            2.5,
+            3,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "hits": [
+            "hat",
+            "kick",
+            "hat",
+            "hat",
+            "snare",
+            "hat",
+            "hat",
+            "kick",
+            "hat",
+            "hat",
+            "snare",
+            "hat"
+          ],
+          "cycleLength": 1,
+          "accents": [
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45
+          ]
+        },
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro drums cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll",
+          "hits": [
+            "tom",
+            "snare",
+            "snare"
+          ]
+        },
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro cowbell pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "cowbell"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent"
+        },
+        {
+          "name": "Havana D Primera melodic trumpet and vocal coro cowbell cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "cowbell"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        }
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -1142,24 +2839,357 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 1, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "Maykel Blanco percussive piano and sharp bloques voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Maykel Blanco percussive piano and sharp bloques voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Maykel Blanco percussive piano and sharp bloques trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Maykel Blanco percussive piano and sharp bloques trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Maykel Blanco percussive piano and sharp bloques trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Maykel Blanco percussive piano and sharp bloques trombone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trombone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Maykel Blanco percussive piano and sharp bloques piano accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Maykel Blanco percussive piano and sharp bloques piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Maykel Blanco percussive piano and sharp bloques low anchor", "role": "bass", "onsets": [1.5, 2.5, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.5]},
-        {"name": "Maykel Blanco percussive piano and sharp bloques bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Maykel Blanco percussive piano and sharp bloques congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Maykel Blanco percussive piano and sharp bloques congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "Maykel Blanco percussive piano and sharp bloques timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["timbales"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Maykel Blanco percussive piano and sharp bloques timbales cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timbales"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "Maykel Blanco percussive piano and sharp bloques kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "Maykel Blanco percussive piano and sharp bloques drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "Maykel Blanco percussive piano and sharp bloques cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cowbell"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Maykel Blanco percussive piano and sharp bloques cowbell cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cowbell"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques voice statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.75,
+            1.5
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques voice cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques trumpet statement",
+          "role": "lead",
+          "onsets": [
+            2,
+            2.75,
+            3.5
+          ],
+          "instruments": [
+            "trumpet"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques trumpet cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "trumpet"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques trombone statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.75,
+            1.5
+          ],
+          "instruments": [
+            "trombone"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques trombone cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "trombone"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques piano accompaniment",
+          "role": "harmony",
+          "onsets": [
+            0,
+            0.5,
+            1.5,
+            2,
+            2.75,
+            3.5
+          ],
+          "instruments": [
+            "piano"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.2,
+            0.2,
+            0.2,
+            0.2,
+            0.2,
+            0.2
+          ],
+          "articulation": "accent"
+        },
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques piano cadence fill",
+          "role": "harmony",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "piano"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques low anchor",
+          "role": "bass",
+          "onsets": [
+            1.5,
+            2.5,
+            3.5
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "articulation": "staccato",
+          "durations": [
+            0.6,
+            0.6,
+            0.5
+          ]
+        },
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques bass cadence fill",
+          "role": "bass",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques congas pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "congas"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent"
+        },
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques congas cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "congas"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        },
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques timbales pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "timbales"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent"
+        },
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques timbales cadence fill",
+          "role": "percussion",
+          "onsets": [
+            2.75,
+            3,
+            3.25,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "timbales"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll",
+          "hits": [
+            "rim",
+            "rim",
+            "bell",
+            "rim",
+            "bell"
+          ]
+        },
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques kit",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0,
+            0.75,
+            1,
+            1.5,
+            1.75,
+            2,
+            2.75,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "hits": [
+            "hat",
+            "kick",
+            "snare",
+            "hat",
+            "kick",
+            "snare",
+            "hat",
+            "kick",
+            "snare",
+            "hat"
+          ],
+          "cycleLength": 1,
+          "accents": [
+            0.35,
+            0.98,
+            0.9,
+            0.35,
+            0.85,
+            0.92,
+            0.35,
+            0.9,
+            0.92,
+            0.38
+          ]
+        },
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques drums cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll",
+          "hits": [
+            "tom",
+            "snare",
+            "snare"
+          ]
+        },
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques cowbell pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "cowbell"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent"
+        },
+        {
+          "name": "Maykel Blanco percussive piano and sharp bloques cowbell cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "cowbell"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        }
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -1381,24 +3411,370 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 1, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "modern timba layered coro and band breaks voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "modern timba layered coro and band breaks voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "modern timba layered coro and band breaks trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "modern timba layered coro and band breaks trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "modern timba layered coro and band breaks trombone statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["trombone"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "modern timba layered coro and band breaks trombone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trombone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "modern timba layered coro and band breaks piano accompaniment", "role": "harmony", "onsets": [0, 0.75, 1.5, 2.5, 3.25, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "modern timba layered coro and band breaks piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "modern timba layered coro and band breaks low anchor", "role": "bass", "onsets": [1.5, 2.5, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.5]},
-        {"name": "modern timba layered coro and band breaks bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "modern timba layered coro and band breaks congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "modern timba layered coro and band breaks congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "modern timba layered coro and band breaks timbales pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["timbales"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "modern timba layered coro and band breaks timbales cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timbales"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
-        {"name": "modern timba layered coro and band breaks kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "modern timba layered coro and band breaks drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "modern timba layered coro and band breaks cowbell pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cowbell"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "modern timba layered coro and band breaks cowbell cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["cowbell"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {
+          "name": "modern timba layered coro and band breaks voice statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.75,
+            1.5
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "modern timba layered coro and band breaks voice cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "modern timba layered coro and band breaks trumpet statement",
+          "role": "lead",
+          "onsets": [
+            2,
+            2.75,
+            3.5
+          ],
+          "instruments": [
+            "trumpet"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "modern timba layered coro and band breaks trumpet cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "trumpet"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "modern timba layered coro and band breaks trombone statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.75,
+            1.5
+          ],
+          "instruments": [
+            "trombone"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "modern timba layered coro and band breaks trombone cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "trombone"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "modern timba layered coro and band breaks piano accompaniment",
+          "role": "harmony",
+          "onsets": [
+            0,
+            0.5,
+            1.25,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "piano"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.28,
+            0.22,
+            0.28,
+            0.22,
+            0.28,
+            0.22,
+            0.28
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "modern timba layered coro and band breaks piano cadence fill",
+          "role": "harmony",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "piano"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "modern timba layered coro and band breaks low anchor",
+          "role": "bass",
+          "onsets": [
+            1.5,
+            2.5,
+            3.5
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "articulation": "staccato",
+          "durations": [
+            0.6,
+            0.6,
+            0.5
+          ]
+        },
+        {
+          "name": "modern timba layered coro and band breaks bass cadence fill",
+          "role": "bass",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "modern timba layered coro and band breaks congas pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1.25,
+            1.5,
+            2,
+            2.5,
+            3.25,
+            3.5
+          ],
+          "instruments": [
+            "congas"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent",
+          "hits": [
+            "open",
+            "ghost",
+            "slap",
+            "ghost",
+            "open",
+            "ghost",
+            "slap",
+            "ghost"
+          ]
+        },
+        {
+          "name": "modern timba layered coro and band breaks congas cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "congas"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        },
+        {
+          "name": "modern timba layered coro and band breaks timbales pulse",
+          "role": "percussion",
+          "onsets": [
+            0.5,
+            1.5,
+            2.5,
+            3.25,
+            3.75
+          ],
+          "instruments": [
+            "timbales"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent",
+          "hits": [
+            "rim",
+            "bell",
+            "rim",
+            "fill",
+            "bell"
+          ]
+        },
+        {
+          "name": "modern timba layered coro and band breaks timbales cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "timbales"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        },
+        {
+          "name": "modern timba layered coro and band breaks kit",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0,
+            0.5,
+            1,
+            1,
+            1.5,
+            2,
+            2,
+            2.5,
+            3,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "hits": [
+            "hat",
+            "kick",
+            "hat",
+            "hat",
+            "snare",
+            "hat",
+            "hat",
+            "kick",
+            "hat",
+            "hat",
+            "snare",
+            "hat"
+          ],
+          "cycleLength": 1,
+          "accents": [
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45,
+            0.45,
+            0.85,
+            0.45
+          ]
+        },
+        {
+          "name": "modern timba layered coro and band breaks drums cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll",
+          "hits": [
+            "tom",
+            "snare",
+            "snare"
+          ]
+        },
+        {
+          "name": "modern timba layered coro and band breaks cowbell pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "cowbell"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent"
+        },
+        {
+          "name": "modern timba layered coro and band breaks cowbell cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "cowbell"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        }
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],

@@ -131,10 +131,28 @@ export const GENRE_PACK: GenrePackInput = {
         "percussion": ["bombo-andino"]
       },
       "progressions": {
-        "introduccion": ["Am", "C", "G", "Am"],
-        "tema": ["Am", "C", "G", "Am"],
-        "instrumental": ["C", "G", "E7", "Am"],
-        "coda": ["Am", "Am"]
+        "introduccion": [
+          "Am",
+          "G",
+          "Am",
+          "G"
+        ],
+        "tema": [
+          "Am",
+          "G",
+          "Am",
+          "E7"
+        ],
+        "instrumental": [
+          "C",
+          "G",
+          "Am",
+          "E7"
+        ],
+        "coda": [
+          "Am",
+          "Am"
+        ]
       },
       "requiresChords": true,
       "harmonicRhythm": "bar",
@@ -150,16 +168,181 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "sanjuanito even duple flute and charango quena statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["quena"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "sanjuanito even duple flute and charango quena cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["quena"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "sanjuanito even duple flute and charango siku statement", "role": "lead", "onsets": [0], "instruments": ["siku"], "cycleLength": 1, "durations": [0.45], "articulation": "legato"},
-        {"name": "sanjuanito even duple flute and charango siku cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["siku"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "sanjuanito even duple flute and charango charango accompaniment", "role": "harmony", "onsets": [0.5, 1.5], "instruments": ["charango"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "sanjuanito even duple flute and charango charango cadence fill", "role": "harmony", "onsets": [1.0, 1.5, 1.75], "instruments": ["charango"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "sanjuanito even duple flute and charango guitar accompaniment", "role": "harmony", "onsets": [0.5, 1.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "sanjuanito even duple flute and charango guitar cadence fill", "role": "harmony", "onsets": [1.0, 1.5, 1.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "sanjuanito even duple flute and charango bombo-andino pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5], "instruments": ["bombo-andino"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "sanjuanito even duple flute and charango bombo-andino cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["bombo-andino"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {
+          "name": "sanjuanito even duple flute and charango quena statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5
+          ],
+          "instruments": [
+            "quena"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.3,
+            0.3,
+            0.3,
+            0.3
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "sanjuanito even duple flute and charango quena cadence fill",
+          "role": "lead",
+          "onsets": [
+            0.5,
+            1,
+            1.5,
+            1.75
+          ],
+          "instruments": [
+            "quena"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "sanjuanito even duple flute and charango siku statement",
+          "role": "lead",
+          "onsets": [
+            0.75,
+            1.25,
+            1.75
+          ],
+          "instruments": [
+            "siku"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.35,
+            0.35,
+            0.35
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "sanjuanito even duple flute and charango siku cadence fill",
+          "role": "lead",
+          "onsets": [
+            1,
+            1.5,
+            1.75
+          ],
+          "instruments": [
+            "siku"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "sanjuanito even duple flute and charango charango accompaniment",
+          "role": "harmony",
+          "onsets": [
+            0,
+            0.75,
+            1,
+            1.75
+          ],
+          "instruments": [
+            "charango"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.24,
+            0.24,
+            0.24,
+            0.24
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "sanjuanito even duple flute and charango charango cadence fill",
+          "role": "harmony",
+          "onsets": [
+            1,
+            1.5,
+            1.75
+          ],
+          "instruments": [
+            "charango"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "sanjuanito even duple flute and charango guitar accompaniment",
+          "role": "harmony",
+          "onsets": [
+            0.5,
+            1.5
+          ],
+          "instruments": [
+            "guitar"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.4,
+            0.4
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "sanjuanito even duple flute and charango guitar cadence fill",
+          "role": "harmony",
+          "onsets": [
+            1,
+            1.5,
+            1.75
+          ],
+          "instruments": [
+            "guitar"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "sanjuanito even duple flute and charango bombo-andino pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.75,
+            1,
+            1.5
+          ],
+          "instruments": [
+            "bombo-andino"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent",
+          "accents": [
+            1,
+            0.38,
+            0.86,
+            0.4
+          ]
+        },
+        {
+          "name": "sanjuanito even duple flute and charango bombo-andino cadence fill",
+          "role": "percussion",
+          "onsets": [
+            1,
+            1.5,
+            1.75
+          ],
+          "instruments": [
+            "bombo-andino"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        }
       ],
       "instrumentTechniques": {
         "quena": ["accent", "breath", "staccato", "legato", "vibrato"],
@@ -310,10 +493,28 @@ export const GENRE_PACK: GenrePackInput = {
         "percussion": ["bombo-andino"]
       },
       "progressions": {
-        "introduccion": ["Am", "C", "G", "Am"],
-        "tema": ["Am", "C", "G", "Am"],
-        "instrumental": ["C", "G", "E7", "Am"],
-        "coda": ["Am", "Am"]
+        "introduccion": [
+          "Am",
+          "C",
+          "Dm",
+          "Am"
+        ],
+        "tema": [
+          "Am",
+          "G",
+          "F",
+          "E7"
+        ],
+        "instrumental": [
+          "Dm",
+          "C",
+          "G",
+          "E7"
+        ],
+        "coda": [
+          "Am",
+          "E7"
+        ]
       },
       "requiresChords": true,
       "harmonicRhythm": "bar",
@@ -329,16 +530,177 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "tinku heavy duple accents quena statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["quena"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "tinku heavy duple accents quena cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["quena"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "tinku heavy duple accents siku statement", "role": "lead", "onsets": [0], "instruments": ["siku"], "cycleLength": 1, "durations": [0.45], "articulation": "legato"},
-        {"name": "tinku heavy duple accents siku cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["siku"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "tinku heavy duple accents charango accompaniment", "role": "harmony", "onsets": [0.5, 1.5], "instruments": ["charango"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "tinku heavy duple accents charango cadence fill", "role": "harmony", "onsets": [1.0, 1.5, 1.75], "instruments": ["charango"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "tinku heavy duple accents guitar accompaniment", "role": "harmony", "onsets": [0.5, 1.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "tinku heavy duple accents guitar cadence fill", "role": "harmony", "onsets": [1.0, 1.5, 1.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "tinku heavy duple accents bombo-andino pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5], "instruments": ["bombo-andino"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "tinku heavy duple accents bombo-andino cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["bombo-andino"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {
+          "name": "tinku heavy duple accents quena statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.75,
+            1,
+            1.5
+          ],
+          "instruments": [
+            "quena"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "articulation": "accent"
+        },
+        {
+          "name": "tinku heavy duple accents quena cadence fill",
+          "role": "lead",
+          "onsets": [
+            1,
+            1.5,
+            1.75
+          ],
+          "instruments": [
+            "quena"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "tinku heavy duple accents siku statement",
+          "role": "lead",
+          "onsets": [
+            0
+          ],
+          "instruments": [
+            "siku"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "tinku heavy duple accents siku cadence fill",
+          "role": "lead",
+          "onsets": [
+            1,
+            1.5,
+            1.75
+          ],
+          "instruments": [
+            "siku"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "tinku heavy duple accents charango accompaniment",
+          "role": "harmony",
+          "onsets": [
+            0.5,
+            1.25,
+            1.5
+          ],
+          "instruments": [
+            "charango"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.3,
+            0.3,
+            0.3
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "tinku heavy duple accents charango cadence fill",
+          "role": "harmony",
+          "onsets": [
+            1,
+            1.5,
+            1.75
+          ],
+          "instruments": [
+            "charango"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "tinku heavy duple accents guitar accompaniment",
+          "role": "harmony",
+          "onsets": [
+            0.5,
+            1.5
+          ],
+          "instruments": [
+            "guitar"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.4,
+            0.4
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "tinku heavy duple accents guitar cadence fill",
+          "role": "harmony",
+          "onsets": [
+            1,
+            1.5,
+            1.75
+          ],
+          "instruments": [
+            "guitar"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "tinku heavy duple accents bombo-andino pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.75,
+            1,
+            1.25,
+            1.75
+          ],
+          "instruments": [
+            "bombo-andino"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent",
+          "accents": [
+            1,
+            0.38,
+            0.96,
+            0.44,
+            0.8
+          ]
+        },
+        {
+          "name": "tinku heavy duple accents bombo-andino cadence fill",
+          "role": "percussion",
+          "onsets": [
+            1,
+            1.25,
+            1.5,
+            1.75
+          ],
+          "instruments": [
+            "bombo-andino"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "accent"
+        }
       ],
       "instrumentTechniques": {
         "quena": ["accent", "breath", "staccato", "legato", "vibrato"],
@@ -399,10 +761,28 @@ export const GENRE_PACK: GenrePackInput = {
         "percussion": ["bombo-andino"]
       },
       "progressions": {
-        "introduccion": ["Am", "C", "G", "Am"],
-        "tema": ["Am", "C", "G", "Am"],
-        "instrumental": ["C", "G", "E7", "Am"],
-        "coda": ["Am", "Am"]
+        "introduccion": [
+          "C",
+          "G",
+          "Am",
+          "G"
+        ],
+        "tema": [
+          "Am",
+          "C",
+          "G",
+          "Am"
+        ],
+        "instrumental": [
+          "C",
+          "G",
+          "E7",
+          "Am"
+        ],
+        "coda": [
+          "Am",
+          "Am"
+        ]
       },
       "requiresChords": true,
       "harmonicRhythm": "bar",
@@ -418,16 +798,176 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "carnavalito charango dance ostinato quena statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["quena"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "carnavalito charango dance ostinato quena cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["quena"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "carnavalito charango dance ostinato siku statement", "role": "lead", "onsets": [0], "instruments": ["siku"], "cycleLength": 1, "durations": [0.45], "articulation": "legato"},
-        {"name": "carnavalito charango dance ostinato siku cadence fill", "role": "lead", "onsets": [1.0, 1.5, 1.75], "instruments": ["siku"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "carnavalito charango dance ostinato charango accompaniment", "role": "harmony", "onsets": [0.5, 1.5], "instruments": ["charango"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "carnavalito charango dance ostinato charango cadence fill", "role": "harmony", "onsets": [1.0, 1.5, 1.75], "instruments": ["charango"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "carnavalito charango dance ostinato guitar accompaniment", "role": "harmony", "onsets": [0.5, 1.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "carnavalito charango dance ostinato guitar cadence fill", "role": "harmony", "onsets": [1.0, 1.5, 1.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "carnavalito charango dance ostinato bombo-andino pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.5], "instruments": ["bombo-andino"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "carnavalito charango dance ostinato bombo-andino cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["bombo-andino"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {
+          "name": "carnavalito charango dance ostinato quena statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5
+          ],
+          "instruments": [
+            "quena"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.32,
+            0.32,
+            0.32,
+            0.32
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "carnavalito charango dance ostinato quena cadence fill",
+          "role": "lead",
+          "onsets": [
+            1,
+            1.5,
+            1.75
+          ],
+          "instruments": [
+            "quena"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "carnavalito charango dance ostinato siku statement",
+          "role": "lead",
+          "onsets": [
+            0
+          ],
+          "instruments": [
+            "siku"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "carnavalito charango dance ostinato siku cadence fill",
+          "role": "lead",
+          "onsets": [
+            1,
+            1.5,
+            1.75
+          ],
+          "instruments": [
+            "siku"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "carnavalito charango dance ostinato charango accompaniment",
+          "role": "harmony",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5
+          ],
+          "instruments": [
+            "charango"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.28,
+            0.28,
+            0.28,
+            0.28
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "carnavalito charango dance ostinato charango cadence fill",
+          "role": "harmony",
+          "onsets": [
+            0.5,
+            0.75,
+            1.25,
+            1.5,
+            1.75
+          ],
+          "instruments": [
+            "charango"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "carnavalito charango dance ostinato guitar accompaniment",
+          "role": "harmony",
+          "onsets": [
+            0.5,
+            1.5
+          ],
+          "instruments": [
+            "guitar"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.4,
+            0.4
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "carnavalito charango dance ostinato guitar cadence fill",
+          "role": "harmony",
+          "onsets": [
+            1,
+            1.5,
+            1.75
+          ],
+          "instruments": [
+            "guitar"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "carnavalito charango dance ostinato bombo-andino pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            1,
+            1.5
+          ],
+          "instruments": [
+            "bombo-andino"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent",
+          "accents": [
+            0.95,
+            0.68,
+            0.44
+          ]
+        },
+        {
+          "name": "carnavalito charango dance ostinato bombo-andino cadence fill",
+          "role": "percussion",
+          "onsets": [
+            1,
+            1.5,
+            1.75
+          ],
+          "instruments": [
+            "bombo-andino"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        }
       ],
       "instrumentTechniques": {
         "quena": ["accent", "breath", "staccato", "legato", "vibrato"],

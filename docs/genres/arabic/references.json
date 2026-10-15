@@ -22,7 +22,7 @@
   ],
   "styles": [
     {
-      "styleId": "tarab",
+      "styleId": "arabic-tarab",
       "compare": [
         "ornamented lead-vocal phrasing and breath",
         "instrumental replies around the singer",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "styleId": "takht",
+      "styleId": "arabic-takht",
       "compare": [
         "small ensemble balance and acoustic separation",
         "related but non-identical melodic lines",
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "styleId": "muwashshah",
+      "styleId": "arabic-muwashshah",
       "compare": [
         "stanza and refrain distinction",
         "lead voice and ensemble response",
@@ -67,7 +67,7 @@
       ]
     },
     {
-      "styleId": "instrumental-maqam",
+      "styleId": "arabic-instrumental-maqam",
       "compare": [
         "modal exposition and return",
         "register expansion and phrase development",
@@ -83,7 +83,7 @@
       ]
     },
     {
-      "styleId": "modern-arabic-orchestra",
+      "styleId": "arabic-modern-arabic-orchestra",
       "compare": [
         "sectional orchestral build and contrast",
         "vocal level against strings and plucked instruments",

@@ -1,0 +1,354 @@
+{
+  "genreId": "indian-classical",
+  "reviewed": "2026-10-15",
+  "status": "Five or six linked streaming candidates are collected for each of the eight styles. Listening comparisons and useful timecodes remain pending; these are candidates, not verified sonic matches.",
+  "source": "Apple Music track pages and release metadata. Search metadata was checked, but reference audio has not been auditioned or downloaded.",
+  "styles": [
+    {
+      "styleId": "indian-classical-hindustani-khayal",
+      "compare": [
+        "the vilambit bandish's spacious bol-alap development over tanpura before tabla establishes the tala",
+        "how bol-taan and sargam speed up while preserving the raga's phrase grammar and landing at sam",
+        "the contrast between slow Ektaal and quicker Teentaal or drut passages",
+        "voice-to-sarangi response, breath, meend, ornament density, and natural concert dynamics"
+      ],
+      "recordings": [
+        {
+          "title": "Raga Nat Bhairav: Vilambit Khayal in Ek Taal",
+          "artist": "Malini Rajurkar, Subhash Kamat & Arvind Thatte",
+          "url": "https://music.apple.com/us/song/1153689726",
+          "timecodes": []
+        },
+        {
+          "title": "Raga Bihag - Vilambit Khayal - Kaise Sukh Sowe - Ektaal",
+          "artist": "Veena Sahasrabuddhe, Bharat Kamat & Pramod Marathe",
+          "url": "https://music.apple.com/us/song/1129822723",
+          "timecodes": []
+        },
+        {
+          "title": "Vilambit Khayal & Drut Khayal (Darbari Kanada)",
+          "artist": "Rashid Khan",
+          "url": "https://music.apple.com/us/song/1809447237",
+          "timecodes": []
+        },
+        {
+          "title": "Raga Ahir Bhairav (Khayal in Vilambit Teentaal)",
+          "artist": "Ashwini Bhide Deshpande, Vishwanath Shirodkar, Mohan Bhide & Uma Mehta",
+          "url": "https://music.apple.com/us/song/1767802020",
+          "timecodes": []
+        },
+        {
+          "title": "Jin Ke Man Ram Biraaje - Raga Malkauns: Vilambit and Drut Khayal",
+          "artist": "Rajan Mishra & Sajan Mishra",
+          "url": "https://music.apple.com/us/song/1132610816",
+          "timecodes": []
+        },
+        {
+          "title": "Raga Todi: Vilambit Khayal in Jhoomra Taal",
+          "artist": "Ulhas Kashalkar",
+          "url": "https://music.apple.com/us/album/raga-todi-vilambit-khayal-in-jhoomra-taal-baajo-re/1860569698?i=1860569987",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "indian-classical-dhrupad",
+      "compare": [
+        "the unmetered alap's slow register expansion and long vowel or nom-tom phrases over tanpura",
+        "the formal entry of pakhawaj only with the composed section and its relation to chautal or dhamar tala",
+        "the austere ornament, resonance, and broad phrase lengths distinct from khayal taan display",
+        "how alap, jor, composition, and cadence accumulate intensity without a chord loop"
+      ],
+      "recordings": [
+        {
+          "title": "Raga Multani: Alap",
+          "artist": "Dagar Brothers",
+          "url": "https://music.apple.com/us/song/1725453791",
+          "timecodes": []
+        },
+        {
+          "title": "Raga Adana: Alap",
+          "artist": "The Gundecha Brothers",
+          "url": "https://music.apple.com/us/song/1676208508",
+          "timecodes": []
+        },
+        {
+          "title": "Raga Charukeshi (Dhrupad)",
+          "artist": "The Gundecha Brothers",
+          "url": "https://music.apple.com/us/song/1768140894",
+          "timecodes": []
+        },
+        {
+          "title": "Raga Shree - Dhamar",
+          "artist": "Uday Bhawalkar & Manik Munde",
+          "url": "https://music.apple.com/us/song/1487432173",
+          "timecodes": []
+        },
+        {
+          "title": "Raga Puriya - Dhrupad",
+          "artist": "Uday Bhawalkar",
+          "url": "https://music.apple.com/us/song/406806258",
+          "timecodes": []
+        },
+        {
+          "title": "Raga Yaman (Dhrupad)",
+          "artist": "The Gundecha Brothers",
+          "url": "https://music.apple.com/us/song/1768140890",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "indian-classical-instrumental-gat",
+      "compare": [
+        "sitar or sarod alap and jor developing into a fixed gat against tabla rather than starting with a full groove",
+        "the distinction between vilambit and drut gat, the tala's theka, and clear return to sam",
+        "plucked-string sustain, sympathetic resonance, jawari brightness, and the increasing jhala density",
+        "tabla response and tihai cadence as coordinated phrases rather than generic fills"
+      ],
+      "recordings": [
+        {
+          "title": "Raga Jog - Gat in Ektaal",
+          "artist": "Shahid Parvez and Kumar Bose",
+          "url": "https://music.apple.com/us/song/42268615",
+          "timecodes": []
+        },
+        {
+          "title": "Raag Bageshri Vilambit Gat",
+          "artist": "Buddhadev DasGupta",
+          "url": "https://music.apple.com/us/song/1532845575",
+          "timecodes": []
+        },
+        {
+          "title": "Raga Desh (Drut Gat in Teentaal, Sarod)",
+          "artist": "Ustad Amjad Ali Khan, Ustad Rashid Mustafa, Mamta Baxi & Pandit Fateh Singh Gangani",
+          "url": "https://music.apple.com/us/song/1768138161",
+          "timecodes": []
+        },
+        {
+          "title": "Raga Darbari Kanhra: Vilambit Gat",
+          "artist": "Gopal Shankar Misra",
+          "url": "https://music.apple.com/us/song/1653610255",
+          "timecodes": []
+        },
+        {
+          "title": "Bhatiyar (Vilambit Gat in Teen Tal)",
+          "artist": "Ravi Shankar & Kumar Bose",
+          "url": "https://music.apple.com/us/song/1734430664",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "indian-classical-thumri",
+      "compare": [
+        "Purab-ang lyric-led bol-banav, expressive text repetition, and flexible phrase length",
+        "lighter or shifting tala support and how tabla or harmonium yields to the voice",
+        "ornament and note inflection following the lyric's emotional stress rather than strict khayal exposition",
+        "the loose cadence, pickup, and rubato around the return of a refrain"
+      ],
+      "recordings": [
+        {
+          "title": "Jab Se Shyam Sidhare (Thumri)",
+          "artist": "Begum Akhtar",
+          "url": "https://music.apple.com/us/song/1810525693",
+          "timecodes": []
+        },
+        {
+          "title": "Babul Mora - Thumri",
+          "artist": "Girija Devi",
+          "url": "https://music.apple.com/us/song/1656267504",
+          "timecodes": []
+        },
+        {
+          "title": "Jhama Jham - Thumri",
+          "artist": "Girija Devi, Pandit Kishan Maharaj & Ramesh Mishra",
+          "url": "https://music.apple.com/us/song/153014177",
+          "timecodes": []
+        },
+        {
+          "title": "Hamri Atariya Pe Aaja Re Thumri - Raga Sindh Bhairavi",
+          "artist": "Shobha Gurtu",
+          "url": "https://music.apple.com/us/song/593138442",
+          "timecodes": []
+        },
+        {
+          "title": "Thumri: Aaye Na Balam",
+          "artist": "Raza Ali Khan & Ustad Munawar Ali Khan",
+          "url": "https://music.apple.com/us/song/395408967",
+          "timecodes": []
+        },
+        {
+          "title": "Pilu Thumri",
+          "artist": "Ustad Shahid Parvez Khan",
+          "url": "https://music.apple.com/us/song/1277257742",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "indian-classical-carnatic-kriti",
+      "compare": [
+        "pallavi, anupallavi, and charanam as composed sections with a recognizable return to the refrain",
+        "Carnatic gamaka shaped by the raga and lyric rather than generic scalar runs",
+        "mridangam and tala articulation supporting the composition and making space for sangatis",
+        "the distinction between composed kriti statements and optional neraval or kalpana-swara expansion"
+      ],
+      "recordings": [
+        {
+          "title": "Kriti Vatapi Ganapatim",
+          "artist": "Seeta Doraiswamy",
+          "url": "https://music.apple.com/us/song/392463070",
+          "timecodes": []
+        },
+        {
+          "title": "Endaro Mahanubhavulu",
+          "artist": "Sri Chembai Vaidyanatha Bagavathar",
+          "url": "https://music.apple.com/us/song/1531187731",
+          "timecodes": []
+        },
+        {
+          "title": "Brochevarevarura",
+          "artist": "Sankaran Namboothiri",
+          "url": "https://music.apple.com/us/song/1642125980",
+          "timecodes": []
+        },
+        {
+          "title": "Rama Nee Samanamevaru - Kharaharapriya - Rupakam (Live)",
+          "artist": "Semmangudi Srinivasa Iyer, Lalgudi G. Jayaraman & Vellore G. Ramabhadran",
+          "url": "https://music.apple.com/us/song/1007095739",
+          "timecodes": []
+        },
+        {
+          "title": "Nagumomu Kanaleni - Aabheri - Adi",
+          "artist": "Dr. M. Balamurali Krishna",
+          "url": "https://music.apple.com/us/song/1042285531",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "indian-classical-ragam-tanam-pallavi",
+      "compare": [
+        "ragam alapana without tala, followed by tanam's pulsed rhythmic development and pallavi entry",
+        "the pallavi's composed line, tala cycle, eduppu, and exact return to its starting point",
+        "neraval and kalpana-swara exchanges building rhythmic complexity while resolving to the tala",
+        "instrumental or vocal lead handoffs and the concert ensemble's coordinated tani or cadence"
+      ],
+      "recordings": [
+        {
+          "title": "Ragam - Tanam - Pallavi",
+          "artist": "M. L. Vasanthakumari, A. Kanyakumari & Mannargudi Easwaran",
+          "url": "https://music.apple.com/us/song/481747445",
+          "timecodes": []
+        },
+        {
+          "title": "Ragam / Tanam / Pallavi",
+          "artist": "T. N. Krishnan",
+          "url": "https://music.apple.com/us/song/210597497",
+          "timecodes": []
+        },
+        {
+          "title": "Ragam Tanam Pallavi - Dharmavati - Adi",
+          "artist": "Sikkil Gurucharan, Anil Srinivasan, Sumesh Narayanan & Raghavan Manian",
+          "url": "https://music.apple.com/us/song/1603260553",
+          "timecodes": []
+        },
+        {
+          "title": "Ragam Thanam Pallavi (Raga: Nata) [Live]",
+          "artist": "Ramakrishnan Murthy, Kamalakiran Vinjamuri & Rohan Krishnamurthy",
+          "url": "https://music.apple.com/us/song/1655269129",
+          "timecodes": []
+        },
+        {
+          "title": "Ragam Tanam Pallavi",
+          "artist": "Ganesh - Kumaresh",
+          "url": "https://music.apple.com/us/song/329589404",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "indian-classical-varnam",
+      "compare": [
+        "the varnam's pallavi, anupallavi, muktayi swara, charanam, and chitta-swara sequence",
+        "sahitya and swara passages alternating over a stable tala cycle",
+        "how the opening is rendered at a measured pace and then accelerated without losing articulation",
+        "violin and mridangam support beneath the repeated melodic architecture"
+      ],
+      "recordings": [
+        {
+          "title": "Varnam - Sahana - Adi",
+          "artist": "Bharat Sundar, Tanjore K. Muruga Boopathi, B. U. Ganesh Prasad & Sree Sundar Kumar",
+          "url": "https://music.apple.com/us/song/1589995372",
+          "timecodes": []
+        },
+        {
+          "title": "Chalamela - Varnam - Natakurunji - Adi",
+          "artist": "Kalyani Shankar",
+          "url": "https://music.apple.com/us/song/890140777",
+          "timecodes": []
+        },
+        {
+          "title": "Varnam - Kalyani - Adi",
+          "artist": "Dr. R. Ganesh, Bhakthavalsalam, G. Harishankar & E. M. Subramanyam",
+          "url": "https://music.apple.com/us/song/1131652299",
+          "timecodes": []
+        },
+        {
+          "title": "Sarasijanabha - Kambhoji - Ata Tala Varnam (Live)",
+          "artist": "Malladi Brothers, Embar S. Kannan, Trichy Sankaran & Alathur T. Rajaganesh",
+          "url": "https://music.apple.com/us/song/1541156302",
+          "timecodes": []
+        },
+        {
+          "title": "Varnam - Sree - Adi",
+          "artist": "Lalgudi G. Jayaraman, Palghat Mani Iyer & T. R. Rajamani",
+          "url": "https://music.apple.com/us/song/1406355302",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "indian-classical-tillana",
+      "compare": [
+        "rhythmic syllable patterns and sollukattu-like articulation balanced with the melodic line",
+        "brisk tala drive, phrase endings, and any change from pure jati to a short lyrical passage",
+        "the interplay between lead, violin response, and mridangam strokes",
+        "a dance-like build and decisive cadential korvai resolving together on sam"
+      ],
+      "recordings": [
+        {
+          "title": "Thillana (Lalgudi)",
+          "artist": "Lalgudi Jayaraman",
+          "url": "https://music.apple.com/us/song/442729804",
+          "timecodes": []
+        },
+        {
+          "title": "Thillana Madhuvanthi Adi Lalgudi G Jayaraman (Live)",
+          "artist": "Flute Jayanth, S. Varadarajan, Neyveli Venkatesh & K. V. Gopalakrishnan",
+          "url": "https://music.apple.com/us/song/1484614090",
+          "timecodes": []
+        },
+        {
+          "title": "Tillana - Brindavana Saranga - Adi - Lalgudi G. Jayaraman",
+          "artist": "V. Pradeep Kumar",
+          "url": "https://music.apple.com/us/song/381041464",
+          "timecodes": []
+        },
+        {
+          "title": "Thillana - Behag - Thisra Aadhi",
+          "artist": "Veenai Jayanthi",
+          "url": "https://music.apple.com/us/song/153024817",
+          "timecodes": []
+        },
+        {
+          "title": "Tillana - Sindubhairavi - Adi",
+          "artist": "Dr. Umayalpuram K. Sivaraman",
+          "url": "https://music.apple.com/us/song/1078561435",
+          "timecodes": []
+        }
+      ]
+    }
+  ]
+}

@@ -3,7 +3,7 @@
   "status": "Five linked streaming candidates are collected for all 17 catalog Tango styles. Listening comparison and timecodes remain pending; candidates are not yet verified sonic matches.",
   "references": [
     {
-      "styleId": "golden-age",
+      "styleId": "tango-golden-age",
       "compare": [
         "marcato four accents against sustained melody phrases",
         "bandoneon and violin phrase handoffs",
@@ -44,7 +44,7 @@
       ]
     },
     {
-      "styleId": "canyengue",
+      "styleId": "tango-canyengue",
       "compare": [
         "short 2/4 bounce and clipped bandoneon articulations",
         "habanera bass anticipation and piano attacks",
@@ -85,7 +85,7 @@
       ]
     },
     {
-      "styleId": "guardia-nueva-de-caro",
+      "styleId": "tango-guardia-nueva-de-caro",
       "references": [
         {
           "artist": "Julio De Caro",
@@ -107,7 +107,7 @@
       ]
     },
     {
-      "styleId": "canaro",
+      "styleId": "tango-canaro",
       "references": [
         {
           "artist": "Francisco Canaro",
@@ -175,7 +175,7 @@
       ]
     },
     {
-      "styleId": "darienzo",
+      "styleId": "tango-darienzo",
       "references": [
         {
           "artist": "Juan D'Arienzo",
@@ -221,7 +221,7 @@
       ]
     },
     {
-      "styleId": "di-sarli",
+      "styleId": "tango-di-sarli",
       "references": [
         {
           "artist": "Carlos Di Sarli",
@@ -292,7 +292,7 @@
       ]
     },
     {
-      "styleId": "troilo",
+      "styleId": "tango-troilo",
       "references": [
         {
           "artist": "Aníbal Troilo",
@@ -338,7 +338,7 @@
       ]
     },
     {
-      "styleId": "pugliese",
+      "styleId": "tango-pugliese",
       "references": [
         {
           "artist": "Osvaldo Pugliese",
@@ -384,7 +384,7 @@
       ]
     },
     {
-      "styleId": "salgan",
+      "styleId": "tango-salgan",
       "references": [
         {
           "artist": "Horacio Salgán",
@@ -429,7 +429,7 @@
       ]
     },
     {
-      "styleId": "tango-cancion",
+      "styleId": "tango-tango-cancion",
       "references": [
         {
           "artist": "Carlos Gardel",
@@ -452,7 +452,7 @@
       ]
     },
     {
-      "styleId": "milonga",
+      "styleId": "tango-milonga",
       "references": [
         {
           "artist": "Francisco Canaro",
@@ -474,7 +474,7 @@
       ]
     },
     {
-      "styleId": "vals",
+      "styleId": "tango-vals",
       "references": [
         {
           "artist": "Francisco Canaro",
@@ -496,7 +496,7 @@
       ]
     },
     {
-      "styleId": "piazzolla-nuevo-tango",
+      "styleId": "tango-piazzolla-nuevo-tango",
       "references": [
         {
           "artist": "Astor Piazzolla",
@@ -541,7 +541,7 @@
       ]
     },
     {
-      "styleId": "electrotango-gotan",
+      "styleId": "tango-electrotango-gotan",
       "references": [
         {
           "artist": "Gotan Project",
@@ -563,7 +563,7 @@
       ]
     },
     {
-      "styleId": "electro-rock-bajofondo",
+      "styleId": "tango-electro-rock-bajofondo",
       "references": [
         {
           "artist": "Bajofondo",
@@ -585,7 +585,7 @@
       ]
     },
     {
-      "styleId": "modern-orquesta",
+      "styleId": "tango-modern-orquesta",
       "references": [
         {
           "artist": "Orquesta Típica Fernández Fierro",
@@ -609,7 +609,7 @@
       ]
     },
     {
-      "styleId": "chacarera-crossover",
+      "styleId": "tango-chacarera-crossover",
       "references": [
         {
           "artist": "Mercedes Sosa",

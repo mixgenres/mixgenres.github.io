@@ -51,7 +51,7 @@ export const GENRE_PACK: GenrePackInput = {
       "requiresChords": true,
       "harmonicRhythm": "bar",
       "harmonyModel": "functional",
-      "bassMotion": "root-fifth",
+      "bassMotion": "sub",
       "form": [
         {"label": "intro", "bars": 4},
         {"label": "verse", "bars": 8},
@@ -156,16 +156,195 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 3},
       "cells": [
-        {"name": "Playero underground raw dembow and sample chop voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Playero underground raw dembow and sample chop voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Playero underground raw dembow and sample chop synth accompaniment", "role": "harmony", "onsets": [0.75, 1.5, 2.75, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Playero underground raw dembow and sample chop synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Playero underground raw dembow and sample chop low anchor", "role": "bass", "onsets": [0, 1.5, 2, 3.5], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.5]},
-        {"name": "Playero underground raw dembow and sample chop synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Playero underground raw dembow and sample chop kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "snare", "hat", "kick", "hat", "hat", "snare", "hat", "snare"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.85, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.85]},
-        {"name": "Playero underground raw dembow and sample chop drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "Playero underground raw dembow and sample chop sampler pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["sampler"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Playero underground raw dembow and sample chop sampler cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["sampler"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {
+          "name": "Playero underground raw dembow and sample chop voice statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.75,
+            1.5
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "Playero underground raw dembow and sample chop voice cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Playero underground raw dembow and sample chop synth accompaniment",
+          "role": "harmony",
+          "onsets": [
+            0.75,
+            1.5,
+            2.75,
+            3.5
+          ],
+          "instruments": [
+            "synth"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.4,
+            0.4,
+            0.4,
+            0.4
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "Playero underground raw dembow and sample chop synth cadence fill",
+          "role": "harmony",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "synth"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Playero underground raw dembow and sample chop low anchor",
+          "role": "bass",
+          "onsets": [
+            0,
+            1.5,
+            2.75
+          ],
+          "instruments": [
+            "synth"
+          ],
+          "cycleLength": 1,
+          "articulation": "staccato",
+          "durations": [
+            0.8,
+            0.45,
+            0.55
+          ]
+        },
+        {
+          "name": "Playero underground raw dembow and sample chop synth cadence fill",
+          "role": "bass",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "synth"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "Playero underground raw dembow and sample chop kit",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.75,
+            3.5
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "hits": [
+            "kick",
+            "hat",
+            "snare",
+            "hat",
+            "kick",
+            "snare",
+            "snare"
+          ],
+          "cycleLength": 1,
+          "accents": [
+            0.95,
+            0.35,
+            0.85,
+            0.38,
+            0.78,
+            0.82,
+            0.88
+          ]
+        },
+        {
+          "name": "Playero underground raw dembow and sample chop drums cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll",
+          "hits": [
+            "tom",
+            "snare",
+            "snare"
+          ]
+        },
+        {
+          "name": "Playero underground raw dembow and sample chop sampler pulse",
+          "role": "percussion",
+          "onsets": [
+            0.5,
+            1.25,
+            2.75,
+            3.75
+          ],
+          "instruments": [
+            "sampler"
+          ],
+          "cycleLength": 1,
+          "articulation": "staccato"
+        },
+        {
+          "name": "Playero underground raw dembow and sample chop sampler cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "sampler"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        }
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -225,7 +404,7 @@ export const GENRE_PACK: GenrePackInput = {
       "scale": "minor",
       "roles": {
         "lead": ["voice"],
-        "harmony": ["synth"],
+        "harmony": ["guitar", "synth"],
         "bass": ["synth"],
         "percussion": ["drums", "sampler"]
       },
@@ -251,17 +430,20 @@ export const GENRE_PACK: GenrePackInput = {
       "cells": [
         {"name": "melodic reggaeton vocal over guitar arpeggio voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "melodic reggaeton vocal over guitar arpeggio voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "melodic reggaeton vocal over guitar arpeggio synth accompaniment", "role": "harmony", "onsets": [0.75, 1.5, 2.75, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "melodic reggaeton vocal over guitar arpeggio synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "Melodic reggaeton guitar arpeggio statement", "role": "harmony", "onsets": [0, 1, 2, 3], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.28, 0.28, 0.28, 0.28], "articulation": "arpeggio"},
+        {"name": "Melodic reggaeton guitar arpeggio cadence", "role": "harmony", "onsets": [2.5, 3.25, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "arpeggio"},
+        {"name": "Melodic reggaeton soft chord bed", "role": "harmony", "onsets": [0, 2], "instruments": ["synth"], "cycleLength": 1, "durations": [1.6, 1.6], "articulation": "legato"},
+        {"name": "Melodic reggaeton chord-bed release", "role": "harmony", "onsets": [3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4], "phraseEnd": true, "articulation": "staccato"},
         {"name": "melodic reggaeton vocal over guitar arpeggio low anchor", "role": "bass", "onsets": [0, 1.5, 2, 3.5], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.5]},
         {"name": "melodic reggaeton vocal over guitar arpeggio synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "melodic reggaeton vocal over guitar arpeggio kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "snare", "hat", "kick", "hat", "hat", "snare", "hat", "snare"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.85, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.85]},
+        {"name": "Melodic reggaeton light dembow pocket", "role": "percussion", "onsets": [0, 0.75, 1, 1.5, 2, 3], "instruments": ["drums"], "hits": ["kick", "hat", "snare", "hat", "kick", "snare"], "cycleLength": 1, "accents": [0.9, 0.38, 0.82, 0.4, 0.72, 0.82]},
         {"name": "melodic reggaeton vocal over guitar arpeggio drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
         {"name": "melodic reggaeton vocal over guitar arpeggio sampler pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["sampler"], "cycleLength": 1, "articulation": "accent"},
         {"name": "melodic reggaeton vocal over guitar arpeggio sampler cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["sampler"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
+        "guitar": ["arpeggio", "fingerstyle", "legato", "staccato", "accent"],
         "synth": ["staccato", "bend", "accent", "legato", "vibrato"],
         "drums": ["ghost", "staccato", "roll", "accent", "open"],
         "sampler": ["staccato", "accent"]
@@ -270,6 +452,11 @@ export const GENRE_PACK: GenrePackInput = {
         "voice:lead": {
           "allowedTechniques": ["staccato", "accent", "legato", "vibrato"],
           "defaultTechnique": "staccato"
+        },
+        "guitar:harmony": {
+          "allowedTechniques": ["arpeggio", "fingerstyle", "legato", "staccato", "accent"],
+          "defaultTechnique": "arpeggio",
+          "variantId": "solid-electric"
         },
         "synth:harmony": {
           "allowedTechniques": ["staccato", "bend", "accent", "legato", "vibrato"],
@@ -342,16 +529,174 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 3},
       "cells": [
-        {"name": "neoperreo distorted sparse dembow and synth jab voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "neoperreo distorted sparse dembow and synth jab voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "neoperreo distorted sparse dembow and synth jab synth accompaniment", "role": "harmony", "onsets": [0.75, 1.5, 2.75, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "neoperreo distorted sparse dembow and synth jab synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "neoperreo distorted sparse dembow and synth jab low anchor", "role": "bass", "onsets": [0, 1.5, 2, 3.5], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.5]},
-        {"name": "neoperreo distorted sparse dembow and synth jab synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "neoperreo distorted sparse dembow and synth jab kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "snare", "hat", "kick", "hat", "hat", "snare", "hat", "snare"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.85, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.85]},
-        {"name": "neoperreo distorted sparse dembow and synth jab drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "neoperreo distorted sparse dembow and synth jab sampler pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["sampler"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "neoperreo distorted sparse dembow and synth jab sampler cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["sampler"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {
+          "name": "neoperreo distorted sparse dembow and synth jab voice statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            1.5
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.28,
+            0.28
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "neoperreo distorted sparse dembow and synth jab voice cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "neoperreo distorted sparse dembow and synth jab synth accompaniment",
+          "role": "harmony",
+          "onsets": [
+            0.75,
+            3.25
+          ],
+          "instruments": [
+            "synth"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.22,
+            0.22
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "neoperreo distorted sparse dembow and synth jab synth cadence fill",
+          "role": "harmony",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "synth"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "neoperreo distorted sparse dembow and synth jab low anchor",
+          "role": "bass",
+          "onsets": [
+            0,
+            2.75
+          ],
+          "instruments": [
+            "synth"
+          ],
+          "cycleLength": 1,
+          "articulation": "staccato",
+          "durations": [
+            1.8,
+            0.38
+          ]
+        },
+        {
+          "name": "neoperreo distorted sparse dembow and synth jab synth cadence fill",
+          "role": "bass",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "synth"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "neoperreo distorted sparse dembow and synth jab kit",
+          "role": "percussion",
+          "onsets": [
+            0,
+            1.5,
+            2.75
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "hits": [
+            "kick",
+            "snare",
+            "kick"
+          ],
+          "cycleLength": 1,
+          "accents": [
+            0.98,
+            0.84,
+            0.76
+          ]
+        },
+        {
+          "name": "neoperreo distorted sparse dembow and synth jab drums cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll",
+          "hits": [
+            "tom",
+            "snare",
+            "snare"
+          ]
+        },
+        {
+          "name": "neoperreo distorted sparse dembow and synth jab sampler pulse",
+          "role": "percussion",
+          "onsets": [
+            0.5,
+            2.25,
+            3.75
+          ],
+          "instruments": [
+            "sampler"
+          ],
+          "cycleLength": 1,
+          "articulation": "staccato"
+        },
+        {
+          "name": "neoperreo distorted sparse dembow and synth jab sampler cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "sampler"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        }
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],

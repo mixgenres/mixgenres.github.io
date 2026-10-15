@@ -23,6 +23,11 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: b
   if (!seed.calibration || !seed.arrangementSections?.length || !Object.keys(seed.sectionProgressions ?? {}).length) {
     throw new Error(`Incomplete authored style metadata: ${seed.id}`);
   }
+  const groove = seed.grooveMechanics;
+  if (!groove || groove.swingPercentage === undefined || groove.anticipationOffsetSteps === undefined
+    || !groove.microtimingFeel || groove.humanizeJitterMs === undefined) {
+    throw new Error(`Incomplete authored groove mechanics: ${worldId}/${seed.id}`);
+  }
   const instruments = [...seed.characteristicInstruments];
   const assertInstrument = (id: string) => {
     if (!INSTRUMENTS_BY_ID[id]) throw new Error(`Style ${seed.id} names unknown instrument ${id}`);
@@ -101,18 +106,18 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: b
       meter:seed.preferredMeters?.[0] ?? contract.meter,
       tempoRange:seed.tempoRange as [number,number],
       defaultBpm:Math.round((seed.tempoRange[0] + seed.tempoRange[1]) / 2),
-      feel:seed.grooveMechanics?.microtimingFeel ?? contract.groove.name,
-      swingPercentage:seed.grooveMechanics?.swingPercentage ?? contract.groove.swing * 100,
-      anticipationOffsetSteps:seed.grooveMechanics?.anticipationOffsetSteps ?? 0,
-      microtimingFeel: seed.grooveMechanics?.microtimingFeel === 'quantized' ? 'straight' : (seed.grooveMechanics?.microtimingFeel ?? (contract.groove.swing > .57 ? 'swung' : 'straight')),
-      humanizeJitterMs:seed.grooveMechanics?.humanizeJitterMs ?? contract.groove.humanizeMs,
+      feel:groove.microtimingFeel,
+      swingPercentage:groove.swingPercentage,
+      anticipationOffsetSteps:groove.anticipationOffsetSteps,
+      microtimingFeel: groove.microtimingFeel === 'quantized' ? 'straight' : groove.microtimingFeel,
+      humanizeJitterMs:groove.humanizeJitterMs,
       timelineClave:contract.timeline === 'none' ? undefined : contract.timeline,
       signatureCell:seed.signatureCell ?? contract.timeline,
       grooveMechanics:{
-        swingPercentage:seed.grooveMechanics?.swingPercentage ?? contract.groove.swing * 100,
-        anticipationOffsetSteps:seed.grooveMechanics?.anticipationOffsetSteps ?? 0,
-        microtimingFeel: seed.grooveMechanics?.microtimingFeel ?? 'straight',
-        humanizeJitterMs:seed.grooveMechanics?.humanizeJitterMs ?? contract.groove.humanizeMs,
+        swingPercentage:groove.swingPercentage,
+        anticipationOffsetSteps:groove.anticipationOffsetSteps,
+        microtimingFeel: groove.microtimingFeel,
+        humanizeJitterMs:groove.humanizeJitterMs,
       },
     },
     melody:{

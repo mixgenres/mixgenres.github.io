@@ -5,7 +5,7 @@
   "source": "Apple Music individual track pages. No reference audio downloaded.",
   "styles": [
     {
-      "styleId": "heavy-metal",
+      "styleId": "metal-heavy-metal",
       "compare": [
         "eighth-plus-two-sixteenth gallop between bass and guitar",
         "twin-guitar harmony and the separation of the two guitar lines",
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "styleId": "thrash",
+      "styleId": "metal-thrash",
       "compare": [
         "palm-muted sixteenth-note picking and synchronized bass attack",
         "kick/snare skank beat and fast cymbal pulse",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "styleId": "doom",
+      "styleId": "metal-doom",
       "compare": [
         "slow low-string attack, chord sustain, and deliberate muting",
         "kick and snare spacing that gives the riff weight",
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "styleId": "death",
+      "styleId": "metal-death",
       "compare": [
         "tremolo-picked guitar line against the low-string bass anchor",
         "kick/snare blast coordination and cymbal subdivision",
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "styleId": "black",
+      "styleId": "metal-black",
       "compare": [
         "continuous tremolo-picked melody and its sustained harmony bed",
         "blast-beat cymbal wash, snare definition, and changing density",
@@ -85,7 +85,7 @@
       ]
     },
     {
-      "styleId": "progressive-metal",
+      "styleId": "metal-progressive-metal",
       "compare": [
         "seven-eighth grouping and the audible 2+2+3 accent map",
         "guitar/bass unison against independent kick/snare placement",
@@ -101,7 +101,7 @@
       ]
     },
     {
-      "styleId": "industrial-metal",
+      "styleId": "metal-industrial-metal",
       "compare": [
         "machine-tight guitar/bass unison and clipped mute length",
         "kick/snare weight and how the cymbals avoid softening the attack",

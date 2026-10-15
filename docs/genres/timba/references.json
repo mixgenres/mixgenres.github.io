@@ -5,7 +5,7 @@
   "source": "Apple Music and Amazon Music streaming track/single pages were checked for candidate metadata. Reference audio was not downloaded or auditioned; listening and timecodes remain pending.",
   "styles": [
     {
-      "styleId": "irakere-jazz-funk-precursor",
+      "styleId": "timba-irakere-jazz-funk-precursor",
       "compare": [
         "the balance between the electric bass, piano, brass, and Afro-Cuban percussion",
         "where the tune opens into jazz solo space and how the rhythm section holds the groove",
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "styleId": "ng-la-banda-early-timba",
+      "styleId": "timba-ng-la-banda-early-timba",
       "compare": [
         "the density and articulation of the horn bloques against the tumbao",
         "how the piano and bass change their cells as the coro intensifies",
@@ -99,7 +99,7 @@
       ]
     },
     {
-      "styleId": "bamboleo",
+      "styleId": "timba-bamboleo",
       "compare": [
         "the smoother funk bass pocket under the vocal-led sections",
         "how piano and brass support the vocal response without crowding it",
@@ -146,7 +146,7 @@
       ]
     },
     {
-      "styleId": "classic-timba",
+      "styleId": "timba-classic-timba",
       "compare": [
         "how piano, electric bass, drums, and hand percussion lock while the bass line stays melodic",
         "how the arrangement opens into a coro, then changes gear with bass and percussion together",
@@ -187,7 +187,7 @@
       ]
     },
     {
-      "styleId": "charanga-habanera",
+      "styleId": "timba-charanga-habanera",
       "compare": [
         "the piano tumbao against any separate synthesizer counterline",
         "how bass and percussion shift together between gears",
@@ -228,7 +228,7 @@
       ]
     },
     {
-      "styleId": "maykel-blanco",
+      "styleId": "timba-maykel-blanco",
       "compare": [
         "the bass and kick weight against the interlocking hand percussion",
         "short horn bloques and the gaps immediately before and after them",
@@ -269,7 +269,7 @@
       ]
     },
     {
-      "styleId": "songo",
+      "styleId": "timba-songo",
       "compare": [
         "the hybrid drum-kit and timbales vocabulary interlocking with congas instead of a standard salsa backbeat",
         "bass displacement against the kit and the way the groove stays danceable through syncopation",
@@ -310,7 +310,7 @@
       ]
     },
     {
-      "styleId": "paulito-fg",
+      "styleId": "timba-paulito-fg",
       "compare": [
         "the relationship between Paulo FG’s clipped, conversational lead and the answering coro",
         "how piano guajeos, bass gear shifts, and percussion breaks raise intensity between verse and coro",
@@ -351,7 +351,7 @@
       ]
     },
     {
-      "styleId": "manolin",
+      "styleId": "timba-manolin",
       "compare": [
         "the hook-first coro and conversational lead delivery over a lean, direct dance groove",
         "how repeated vocal phrases gain momentum through bass and percussion changes",
@@ -392,7 +392,7 @@
       ]
     },
     {
-      "styleId": "havana-dprimera",
+      "styleId": "timba-havana-dprimera",
       "compare": [
         "Alexander Abreu’s melodic trumpet lead and vocal coro handoffs over a polished modern tumbao",
         "how the horns widen and the rhythm section increases drive through each gear change",
@@ -433,7 +433,7 @@
       ]
     },
     {
-      "styleId": "timba-funk",
+      "styleId": "timba-timba-funk",
       "compare": [
         "funk-style bass articulation and syncopated horn attacks while percussion continues to mark Cuban clave",
         "how a groove can move from a tight funk vamp into son-derived call-and-response",
@@ -474,7 +474,7 @@
       ]
     },
     {
-      "styleId": "international-modern-timba",
+      "styleId": "timba-international-modern-timba",
       "compare": [
         "how modern timba retains Cuban gear changes and coro/response while adopting wider international production palettes",
         "the placement of synth, brass, and backing-vocal layers around the core piano, bass, and percussion groove",

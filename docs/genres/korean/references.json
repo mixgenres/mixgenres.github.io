@@ -1,0 +1,89 @@
+{
+  "genreId": "korean",
+  "reviewed": "2026-10-15",
+  "status": "Five or six linked streaming candidates are collected for each Korean style. Listening comparisons and useful timecodes remain pending; these are candidates, not verified sonic matches.",
+  "source": "Apple Music track pages and release metadata. Search metadata was checked, but reference audio has not been auditioned or downloaded.",
+  "styles": [
+    {
+      "styleId": "korean-jeongak",
+      "compare": [
+        "long breath-led melodic arcs and slow jangdan phrasing without a regular pop backbeat",
+        "heterophonic ornament between haegeum, piri or other winds, and gayageum",
+        "how court wind and string timbres sustain through the cycle and answer at cadence points",
+        "gong and janggu punctuation, room depth, and the ensemble's unhurried dynamic shape"
+      ],
+      "recordings": [
+        { "title": "Sujecheon", "artist": "National Gugak Center", "url": "https://music.apple.com/us/song/1462391568", "timecodes": [] },
+        { "title": "Sujecheon Chapter 1, 4", "artist": "The National Center For Korean Traditional Performing Arts", "url": "https://music.apple.com/us/song/333622189", "timecodes": [] },
+        { "title": "Jongmyo Jeryeak Jung Huimun", "artist": "National Gugak Center", "url": "https://music.apple.com/us/song/1462391565", "timecodes": [] },
+        { "title": "Pyo Jung Man Bang Jigok - Woodwind Music", "artist": "National Classical Music Institute Orchestra of Korea", "url": "https://music.apple.com/us/song/268550388", "timecodes": [] },
+        { "title": "Soo Ryong Um - Saenghwang and Tanso", "artist": "National Classical Music Institute Orchestra of Korea", "url": "https://music.apple.com/us/song/268550341", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "korean-pansori",
+      "compare": [
+        "one singer's dramatic shift between speech-like delivery, sustained sori, and ornamented melisma",
+        "the buk player's sparse narrative cues and responsive rhythmic support, including breath and silence",
+        "rubato and changdan changing with the dramatic scene instead of locking to a constant pulse",
+        "vocal grain, projected dynamics, and the contrast between exposed voice and ensemble support"
+      ],
+      "recordings": [
+        { "title": "Chunhyang's Song (Jeokseung Song)", "artist": "Sung Changsoon", "url": "https://music.apple.com/us/song/1598797329", "timecodes": [] },
+        { "title": "P'ansori Shimch'ongga", "artist": "Korean Folk Music Ensemble", "url": "https://music.apple.com/us/song/292787695", "timecodes": [] },
+        { "title": "Pansori, Heungboga: The Swallow's Journey", "artist": "Lee Seonghyeon, KBS Traditional Music Orchestra & Park Sanghu", "url": "https://music.apple.com/us/song/1696248160", "timecodes": [] },
+        { "title": "Chunhyang-ga: Jeokseong Song through Love Song", "artist": "Seong Chang Sun", "url": "https://music.apple.com/jp/song/333644244", "timecodes": [] },
+        { "title": "Chunhyang-ga: Chunhyang's Mother Meets the Royal Inspector", "artist": "Oh Jeong-Suk", "url": "https://music.apple.com/ca/song/333519293", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "korean-sanjo",
+      "compare": [
+        "solo gayageum tone, bending, vibrato, plucked attacks, and ornamental decay",
+        "the janggu's conversational support and how it leaves the solo line room to breathe",
+        "slow jinyangjo opening expanding through jungmori and jajinmori toward fast hwimori",
+        "how each school shapes melodic turns, phrase extensions, and cadence without a chord-loop feel"
+      ],
+      "recordings": [
+        { "title": "Shin Kwae-dong School of Gayageum Sanjo - Jungjungmori", "artist": "Park Se-youn", "url": "https://music.apple.com/us/song/1821636068", "timecodes": [] },
+        { "title": "Neujeun Jajinmori", "artist": "Kim Hae-Sook & Yoon Ho-Se", "url": "https://music.apple.com/us/song/608295551", "timecodes": [] },
+        { "title": "Gayageum Sanjo - a Style of Park, Sang Geun", "artist": "The National Center For Korean Traditional Performing Arts", "url": "https://music.apple.com/us/song/333522928", "timecodes": [] },
+        { "title": "Hwimori", "artist": "Seon Young-Suk", "url": "https://music.apple.com/us/song/1565286403", "timecodes": [] },
+        { "title": "Hwimori", "artist": "Lim Dokyung", "url": "https://music.apple.com/us/song/1698652954", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "korean-samulnori",
+      "compare": [
+        "the distinct attack and decay of kkwaenggwari, jing, janggu, and buk rather than a drum-kit substitute",
+        "interlocking jangdan cycles, regional rhythmic vocabulary, and the ensemble's coordinated accents",
+        "leader-led calls, group responses, density changes, and accelerando into climactic exchanges",
+        "live ensemble balance and shared dynamic breathing across the four percussion roles"
+      ],
+      "recordings": [
+        { "title": "Samdo Seoljanggo Garak", "artist": "Kim Duk Soo Samulnolri", "url": "https://music.apple.com/us/song/1684922354", "timecodes": [] },
+        { "title": "Utdari Pungmul Garak", "artist": "Kim Duk-soo, Kim Gilok, Lee Yoongu, Kim Bokman & Seo Yongseok", "url": "https://music.apple.com/us/song/1602537941", "timecodes": [] },
+        { "title": "Utdari Pungmul Garak (Gyeonggi-Chungcheong Nongak)", "artist": "JEON JIHWAN / JA brang ggaeng'e", "url": "https://music.apple.com/us/song/1723298770", "timecodes": [] },
+        { "title": "Honam Udo Kut", "artist": "National Gugak Center", "url": "https://music.apple.com/us/song/332018145", "timecodes": [] },
+        { "title": "Honam Udo Kut", "artist": "Bang SeungWhan, Choi ByungSam, Kim YongBae, Nam KiMun & Park EunHa", "url": "https://music.apple.com/kr/song/353475074", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "korean-minyo",
+      "compare": [
+        "regional folk-song inflection, including the contrast between Gyeonggi and southern vocal colors",
+        "ornamented vocal turns, breath-led phrase length, and expressive pitch bends",
+        "how janggu or other accompaniment answers the singer instead of imposing an even beat",
+        "the shift between refrain, verse, and response and the balance of voice with accompaniment"
+      ],
+      "recordings": [
+        { "title": "Arirang (Minyo)", "artist": "Kim Young Im", "url": "https://music.apple.com/us/song/434559533", "timecodes": [] },
+        { "title": "Hanobaeknyeon (Minyo)", "artist": "Kim Young Im", "url": "https://music.apple.com/us/song/434559531", "timecodes": [] },
+        { "title": "Arirang", "artist": "Lee Eunju", "url": "https://music.apple.com/us/song/1593075981", "timecodes": [] },
+        { "title": "ChangBu Taryeong", "artist": "Go Geumsung & Kim Boyeon", "url": "https://music.apple.com/us/song/1589402303", "timecodes": [] },
+        { "title": "Kkaturitaryeong", "artist": "SEO EuiChul Ga_Dan", "url": "https://music.apple.com/us/song/1790839844", "timecodes": [] },
+        { "title": "Korea Gyeonggi-do Traditional Folk Song Arirang", "artist": "Kim Young & Ahn Hyungsoo", "url": "https://music.apple.com/us/song/1501295272", "timecodes": [] }
+      ]
+    }
+  ]
+}

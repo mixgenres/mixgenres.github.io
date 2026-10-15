@@ -34,6 +34,9 @@ export class StyleRuntime {
     if (!Array.isArray(target) || target.length === 0) {
       throw new Error('Cannot sample an empty weighted distribution');
     }
+    if (!Number.isFinite(roll) || roll < 0 || roll > 1) {
+      throw new Error(`Style ${this.resolved.id} received an invalid selection value`);
+    }
 
     // Filter by condition if provided
     let candidates = target;
@@ -45,21 +48,28 @@ export class StyleRuntime {
         if (ctx.barPosition && item.when.barPosition && item.when.barPosition !== ctx.barPosition) return false;
         return true;
       });
-      if (candidates.length === 0) candidates = target;
+      if (candidates.length === 0) {
+        throw new Error(`No ${this.resolved.id} choice matches the requested section, energy, and bar context`);
+      }
     }
 
-    const totalWeight = candidates.reduce((sum, c) => sum + (c.w ?? 1), 0);
-    if (totalWeight <= 0) return candidates[0].value;
+    if (candidates.some(choice => !Number.isFinite(choice.w) || choice.w < 0)) {
+      throw new Error(`Style ${this.resolved.id} has an invalid choice weight`);
+    }
+    const totalWeight = candidates.reduce((sum, c) => sum + c.w, 0);
+    if (!Number.isFinite(totalWeight) || totalWeight <= 0) {
+      throw new Error(`Style ${this.resolved.id} has no positive weight for a matching choice`);
+    }
 
     let acc = 0;
     const threshold = roll * totalWeight;
     for (const item of candidates) {
-      acc += (item.w ?? 1);
+      acc += item.w;
       if (acc >= threshold) {
         return item.value;
       }
     }
-    return candidates[candidates.length - 1].value;
+    throw new Error(`Style ${this.resolved.id} choice weights did not cover the selected value`);
   }
 
   /**
@@ -69,9 +79,12 @@ export class StyleRuntime {
     if (typeof val === 'number') return val;
     if (Array.isArray(val) && val.length === 2 && typeof val[0] === 'number') {
       const roll = typeof rngOrSeed === 'function' ? rngOrSeed() : (typeof rngOrSeed === 'number' ? (rngOrSeed > 1 ? rand01(rngOrSeed) : rngOrSeed) : 0.5);
+      if (!Number.isFinite(val[0]) || !Number.isFinite(val[1]) || val[0] > val[1]) {
+        throw new Error(`Style ${this.resolved.id} has an invalid numeric range`);
+      }
       return Math.round(val[0] + (val[1] - val[0]) * roll);
     }
-    return 0;
+    throw new Error(`Style ${this.resolved.id} has no authored numeric value or range`);
   }
 
   /**
@@ -99,10 +112,9 @@ export class StyleRuntime {
    * Returns the form step templates for the style.
    */
   public getFormTemplate(seed: number = 42): FormStepTemplate[] {
-    if (this.resolved.form?.templates?.length) {
-      return this.pick(this.resolved.form.templates, seed);
-    }
-    return [];
+    const templates = this.resolved.form?.templates;
+    if (!templates?.length) throw new Error(`Style ${this.resolved.id} has no authored form templates`);
+    return this.pick(templates, seed);
   }
 
   /**
@@ -124,42 +136,52 @@ export class StyleRuntime {
   public getTempo(seed: number = 0.5): number {
     if (this.resolved.rhythm?.defaultBpm) return this.resolved.rhythm.defaultBpm;
     if (this.resolved.rhythm?.tempoRange) return this.num(this.resolved.rhythm.tempoRange, seed);
-    return 110;
+    throw new Error(`Style ${this.resolved.id} has no authored tempo`);
   }
 
   /**
    * Returns default meter string.
    */
   public getMeter(): string {
-    return this.resolved.rhythm?.meter || '4/4';
+    const meter = this.resolved.rhythm?.meter?.trim();
+    if (!meter) throw new Error(`Style ${this.resolved.id} has no authored meter`);
+    return meter;
   }
 
   /**
    * Returns humanize jitter in ms.
    */
   public getHumanizeJitter(): number {
-    return this.resolved.rhythm?.humanizeJitterMs ?? 8;
+    const value = this.resolved.rhythm?.humanizeJitterMs;
+    if (value === undefined) throw new Error(`Style ${this.resolved.id} has no authored timing variation`);
+    return value;
   }
 
   /**
    * Returns microtiming feel.
    */
   public getMicrotimingFeel(): string {
-    return this.resolved.rhythm?.microtimingFeel ?? 'straight';
+    const value = this.resolved.rhythm?.microtimingFeel;
+    if (!value) throw new Error(`Style ${this.resolved.id} has no authored microtiming feel`);
+    return value;
   }
 
   /**
    * Returns swing percentage.
    */
   public getSwing(): number {
-    return this.resolved.rhythm?.swingPercentage ?? 50;
+    const value = this.resolved.rhythm?.swingPercentage;
+    if (value === undefined) throw new Error(`Style ${this.resolved.id} has no authored swing amount`);
+    return value;
   }
 
   /**
    * Returns the dominant instrument IDs for the style.
    */
   public getInstrumentPalette(): string[] {
-    return (this.resolved.sound?.instrumentPalette ?? []).map(p => p.value);
+    const palette = this.resolved.sound?.instrumentPalette;
+    if (!palette?.length) throw new Error(`Style ${this.resolved.id} has no authored instrument palette`);
+    return palette.map(p => p.value);
   }
 
   /**

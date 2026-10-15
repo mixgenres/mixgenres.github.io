@@ -5,7 +5,7 @@
   "source": "Apple Music streaming track pages. No reference audio downloaded.",
   "styles": [
     {
-      "styleId": "mariachi",
+      "styleId": "mexican-mariachi",
       "compare": [
         "violin melody and trumpet answer placement across repeated strains",
         "vihuela and guitar strum articulation against the guitarrón anchor",
@@ -20,7 +20,7 @@
       ]
     },
     {
-      "styleId": "ranchera",
+      "styleId": "mexican-ranchera",
       "compare": [
         "lead-vocal phrasing and the length of the mariachi replies",
         "three-beat sway versus a firm duple ranchera pulse",
@@ -35,7 +35,7 @@
       ]
     },
     {
-      "styleId": "norteno",
+      "styleId": "mexican-norteno",
       "compare": [
         "accordion pickup figures against clipped bajo-sexto chords",
         "polka/two-step bass and drum lock, especially at phrase turns",
@@ -50,7 +50,7 @@
       ]
     },
     {
-      "styleId": "banda",
+      "styleId": "mexican-banda",
       "compare": [
         "tuba pulse against kick/snare and low-brass weight",
         "clarinet and trumpet articulation in unison and response figures",
@@ -65,7 +65,7 @@
       ]
     },
     {
-      "styleId": "son-jarocho",
+      "styleId": "mexican-son-jarocho",
       "compare": [
         "jarana strumming pattern and sesquialtera cycle",
         "lead/copla phrases, instrumental breaks, and response timing",
@@ -80,7 +80,7 @@
       ]
     },
     {
-      "styleId": "son-huasteco",
+      "styleId": "mexican-son-huasteco",
       "compare": [
         "huapango pulse and the relationship between violin and string accompaniment",
         "falsetto vocal entries and instrumental answers",
@@ -95,7 +95,7 @@
       ]
     },
     {
-      "styleId": "corrido",
+      "styleId": "mexican-corrido",
       "compare": [
         "narrative vocal delivery over a stable two-step or polka pattern",
         "accordion/bajo-sexto transitions between story verses",
@@ -110,7 +110,7 @@
       ]
     },
     {
-      "styleId": "tierra-caliente",
+      "styleId": "mexican-tierra-caliente",
       "compare": [
         "regional dance pulse and melodic pickup placement",
         "bass and percussion weight under bright lead lines",
@@ -125,7 +125,7 @@
       ]
     },
     {
-      "styleId": "conjunto",
+      "styleId": "mexican-conjunto",
       "compare": [
         "button-accordion melody and bajo-sexto chord strokes in the two-step",
         "bass lock and drum pocket beneath polka versus slower song forms",
@@ -140,7 +140,7 @@
       ]
     },
     {
-      "styleId": "bolero-ranchero",
+      "styleId": "mexican-bolero-ranchero",
       "compare": [
         "close vocal tone and measured phrasing over guitar and mariachi color",
         "space between lyric lines, held harmony, and trumpet/violin replies",

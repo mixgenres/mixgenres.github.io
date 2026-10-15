@@ -1,0 +1,375 @@
+{
+  "genreId": "r-and-b",
+  "status": "Five linked Apple Music recording candidates are listed for all 9 catalog R&B styles. These are source-researched candidates, not yet auditioned against the generated songs; listening notes and timecodes remain pending.",
+  "references": [
+    {
+      "styleId": "r-and-b-contemporary-randb",
+      "compare": [
+        "sub-bass syncopation against a sparse kick/snare grid",
+        "vocal phrase space and instrumental replies",
+        "how verse/refrain layers change without a constant loop",
+        "low-end weight and transient clarity"
+      ],
+      "recordings": [
+        {
+          "title": "No Scrubs",
+          "artist": "TLC",
+          "url": "https://music.apple.com/us/song/1516001301",
+          "timecodes": []
+        },
+        {
+          "title": "Say My Name",
+          "artist": "Destiny's Child",
+          "url": "https://music.apple.com/us/song/266809802",
+          "timecodes": []
+        },
+        {
+          "title": "Are You That Somebody?",
+          "artist": "Aaliyah",
+          "url": "https://music.apple.com/us/song/1816084628",
+          "timecodes": []
+        },
+        {
+          "title": "U Remind Me",
+          "artist": "USHER",
+          "url": "https://music.apple.com/us/song/1789000159",
+          "timecodes": []
+        },
+        {
+          "title": "We Belong Together",
+          "artist": "Mariah Carey",
+          "url": "https://music.apple.com/us/song/1476731889",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "r-and-b-motown",
+      "compare": [
+        "melodic bass counterline against the kick",
+        "backbeat and tambourine subdivision",
+        "piano/guitar replies and string lift at the refrain",
+        "group-vocal call and response"
+      ],
+      "recordings": [
+        {
+          "title": "My Girl (Single Version)",
+          "artist": "The Temptations",
+          "url": "https://music.apple.com/us/song/1444963309",
+          "timecodes": []
+        },
+        {
+          "title": "Ain't No Mountain High Enough",
+          "artist": "Marvin Gaye & Tammi Terrell",
+          "url": "https://music.apple.com/us/song/1472134759",
+          "timecodes": []
+        },
+        {
+          "title": "I Heard It Through the Grapevine",
+          "artist": "Marvin Gaye",
+          "url": "https://music.apple.com/us/song/1464881155",
+          "timecodes": []
+        },
+        {
+          "title": "Reach Out I'll Be There",
+          "artist": "Four Tops",
+          "url": "https://music.apple.com/us/song/1464881133",
+          "timecodes": []
+        },
+        {
+          "title": "You Can't Hurry Love",
+          "artist": "The Supremes",
+          "url": "https://music.apple.com/us/song/1434908688",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "r-and-b-southern-soul",
+      "compare": [
+        "gospel call-and-response timing",
+        "shuffle/lilt against kick and snare",
+        "organ and horn replies in vocal gaps",
+        "build from restrained verse to full-band shout"
+      ],
+      "recordings": [
+        {
+          "title": "In the Midnight Hour",
+          "artist": "Wilson Pickett",
+          "url": "https://music.apple.com/us/song/266635736",
+          "timecodes": []
+        },
+        {
+          "title": "Mustang Sally (Single Version)",
+          "artist": "Wilson Pickett",
+          "url": "https://music.apple.com/us/song/1268873871",
+          "timecodes": []
+        },
+        {
+          "title": "Hold On, I'm Comin'",
+          "artist": "Sam & Dave",
+          "url": "https://music.apple.com/us/song/1336900000",
+          "timecodes": []
+        },
+        {
+          "title": "When a Man Loves a Woman",
+          "artist": "Percy Sledge",
+          "url": "https://music.apple.com/us/song/1664415383",
+          "timecodes": []
+        },
+        {
+          "title": "I Can't Turn You Loose",
+          "artist": "Otis Redding",
+          "url": "https://music.apple.com/us/song/1348248931",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "r-and-b-memphis-soul",
+      "compare": [
+        "dry backbeat and compact drum fills",
+        "bass/kick lock and clipped guitar attack",
+        "organ bed versus short horn punctuation",
+        "vocal phrase gaps and restrained arrangement"
+      ],
+      "recordings": [
+        {
+          "title": "Green Onions",
+          "artist": "Booker T. & The M.G.s",
+          "url": "https://music.apple.com/us/song/1351273645",
+          "timecodes": []
+        },
+        {
+          "title": "Soul Man",
+          "artist": "Sam & Dave",
+          "url": "https://music.apple.com/us/song/1177687002",
+          "timecodes": []
+        },
+        {
+          "title": "Knock On Wood",
+          "artist": "Eddie Floyd",
+          "url": "https://music.apple.com/us/song/1351261304",
+          "timecodes": []
+        },
+        {
+          "title": "(Sittin' On) The Dock of the Bay",
+          "artist": "Otis Redding",
+          "url": "https://music.apple.com/us/song/321007175",
+          "timecodes": []
+        },
+        {
+          "title": "In the Midnight Hour",
+          "artist": "Wilson Pickett",
+          "url": "https://music.apple.com/us/song/266635736",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "r-and-b-philly-soul",
+      "compare": [
+        "string-section sustain and refrain lift",
+        "steady dance-floor backbeat under orchestral layers",
+        "conga/bongo motion against bass and kick",
+        "horn punctuation and vocal-group harmony"
+      ],
+      "recordings": [
+        {
+          "title": "Back Stabbers",
+          "artist": "The O’Jays",
+          "url": "https://music.apple.com/us/song/192830671",
+          "timecodes": []
+        },
+        {
+          "title": "When Will I See You Again",
+          "artist": "The Three Degrees",
+          "url": "https://music.apple.com/us/song/429846642",
+          "timecodes": []
+        },
+        {
+          "title": "Love Train",
+          "artist": "The O’Jays",
+          "url": "https://music.apple.com/us/song/192830664",
+          "timecodes": []
+        },
+        {
+          "title": "TSOP (The Sound of Philadelphia) [12-inch Version]",
+          "artist": "MFSB",
+          "url": "https://music.apple.com/us/song/1588438099",
+          "timecodes": []
+        },
+        {
+          "title": "I'll Be Around",
+          "artist": "The Spinners",
+          "url": "https://music.apple.com/us/song/1387428832",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "r-and-b-quiet-storm",
+      "compare": [
+        "long vocal phrasing and breath space",
+        "slow bass sustain against a sparse backbeat",
+        "electric-piano voicing and restrained string/pad bloom",
+        "mix depth, stereo width, and reverb decay"
+      ],
+      "recordings": [
+        {
+          "title": "Never Too Much",
+          "artist": "Luther Vandross",
+          "url": "https://music.apple.com/us/song/1568610694",
+          "timecodes": []
+        },
+        {
+          "title": "Smooth Operator (Single Version)",
+          "artist": "Sade",
+          "url": "https://music.apple.com/us/song/1108212652",
+          "timecodes": []
+        },
+        {
+          "title": "Sweet Love",
+          "artist": "Anita Baker",
+          "url": "https://music.apple.com/us/song/1268817516",
+          "timecodes": []
+        },
+        {
+          "title": "Love T.K.O.",
+          "artist": "Teddy Pendergrass",
+          "url": "https://music.apple.com/us/song/1472639377",
+          "timecodes": []
+        },
+        {
+          "title": "No Ordinary Love",
+          "artist": "Sade",
+          "url": "https://music.apple.com/us/song/401035119",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "r-and-b-new-jack-swing",
+      "compare": [
+        "swung sixteenth-note machine groove",
+        "kick/snare displacement and short drum fills",
+        "synth-bass bounce and keyboard punches",
+        "vocal pickups against the fixed machine pulse"
+      ],
+      "recordings": [
+        {
+          "title": "Poison",
+          "artist": "Bell Biv DeVoe",
+          "url": "https://music.apple.com/us/song/1440828729",
+          "timecodes": []
+        },
+        {
+          "title": "My Prerogative",
+          "artist": "Bobby Brown",
+          "url": "https://music.apple.com/us/song/1440773584",
+          "timecodes": []
+        },
+        {
+          "title": "Groove Me",
+          "artist": "Guy",
+          "url": "https://music.apple.com/us/song/1444082180",
+          "timecodes": []
+        },
+        {
+          "title": "Rub You the Right Way",
+          "artist": "Johnny Gill",
+          "url": "https://music.apple.com/us/song/1440829174",
+          "timecodes": []
+        },
+        {
+          "title": "Every Little Step",
+          "artist": "Bobby Brown",
+          "url": "https://music.apple.com/us/song/1452867483",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "r-and-b-neo-soul",
+      "compare": [
+        "behind-the-beat placement in voice, bass, and drums",
+        "ghost-note pocket with shifting bass answers",
+        "extended Rhodes voicings and guitar color",
+        "dynamic phrase variation rather than a repeated full-bar loop"
+      ],
+      "recordings": [
+        {
+          "title": "On & On",
+          "artist": "Erykah Badu",
+          "url": "https://music.apple.com/us/song/1440837273",
+          "timecodes": []
+        },
+        {
+          "title": "Untitled (How Does It Feel)",
+          "artist": "D’Angelo",
+          "url": "https://music.apple.com/us/song/1587068336",
+          "timecodes": []
+        },
+        {
+          "title": "A Long Walk",
+          "artist": "Jill Scott",
+          "url": "https://music.apple.com/us/song/1422013650",
+          "timecodes": []
+        },
+        {
+          "title": "Ascension (Don’t Ever Wonder)",
+          "artist": "Maxwell",
+          "url": "https://music.apple.com/us/song/197994658",
+          "timecodes": []
+        },
+        {
+          "title": "You Got Me (feat. Erykah Badu & Eve)",
+          "artist": "The Roots, Erykah Badu & Tariq Trotter",
+          "url": "https://music.apple.com/us/song/1440633299",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "r-and-b-alternative-randb",
+      "compare": [
+        "fragmented entrances and intentional silence",
+        "sub-bass independence from the kick",
+        "textural production and changing density between sections",
+        "vocal intimacy versus rhythm-track presence"
+      ],
+      "recordings": [
+        {
+          "title": "Thinkin Bout You",
+          "artist": "Frank Ocean",
+          "url": "https://music.apple.com/us/song/1445147130",
+          "timecodes": []
+        },
+        {
+          "title": "Cranes in the Sky",
+          "artist": "Solange",
+          "url": "https://music.apple.com/us/song/1159507287",
+          "timecodes": []
+        },
+        {
+          "title": "The Weekend",
+          "artist": "SZA",
+          "url": "https://music.apple.com/us/song/1239977718",
+          "timecodes": []
+        },
+        {
+          "title": "Two Weeks",
+          "artist": "FKA twigs",
+          "url": "https://music.apple.com/us/song/1546107585",
+          "timecodes": []
+        },
+        {
+          "title": "Charcoal Baby",
+          "artist": "Blood Orange",
+          "url": "https://music.apple.com/us/song/1413782541",
+          "timecodes": []
+        }
+      ]
+    }
+  ]
+}

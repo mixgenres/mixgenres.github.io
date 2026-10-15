@@ -3,7 +3,7 @@
   "status": "These are streaming-track candidates for a first review pass, not verified sonic matches. No reference audio has been downloaded; all listening notes and timecodes remain pending.",
   "references": [
     {
-      "styleId": "atmospheric",
+      "styleId": "ambient-atmospheric",
       "compare": [
         "long pad and piano envelopes, with the melody emerging from the bed rather than sitting like a pop lead",
         "slow changes in register, harmony, and density across a long phrase",
@@ -19,7 +19,7 @@
       ]
     },
     {
-      "styleId": "drone",
+      "styleId": "ambient-drone",
       "compare": [
         "slow timbral change inside sustained pitches rather than a chord loop that implies a beat",
         "very long attack and release shapes, low-register stability, and careful level balance",
@@ -35,7 +35,7 @@
       ]
     },
     {
-      "styleId": "dark-ambient",
+      "styleId": "ambient-dark-ambient",
       "compare": [
         "deep drone weight against isolated metallic or noisy events, with no continuous beat filling every gap",
         "the contrast between dark low layers and narrow, distant upper-register detail",
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "styleId": "organic-ambient",
+      "styleId": "ambient-organic-ambient",
       "compare": [
         "recognizable acoustic attacks and finger or bow detail inside long reverberant tails",
         "how guitar, harp-like plucks, piano, and sustained strings share a soft foreground",
@@ -67,7 +67,7 @@
       ]
     },
     {
-      "styleId": "neo-classical-ambient",
+      "styleId": "ambient-neo-classical-ambient",
       "compare": [
         "piano or chamber-string motif phrasing, voicing, and touch",
         "how repetition grows through register and orchestration rather than extra busy fills",
@@ -82,7 +82,7 @@
       ]
     },
     {
-      "styleId": "glitch-ambient",
+      "styleId": "ambient-glitch-ambient",
       "compare": [
         "recognizable source fragments against granular or digital break-up",
         "irregular micro-events and interruptions against longer held beds",
@@ -97,7 +97,7 @@
       ]
     },
     {
-      "styleId": "generative-ambient",
+      "styleId": "ambient-generative-ambient",
       "compare": [
         "short cells that keep running while their alignment and density change gradually",
         "repetition without a conventional verse-chorus hook or continuously introduced new material",
@@ -113,7 +113,7 @@
       ]
     },
     {
-      "styleId": "cinematic-ambient",
+      "styleId": "ambient-cinematic-ambient",
       "compare": [
         "a recurring motif gaining scale through register, orchestration, and dynamic build",
         "foreground piano or strings against a wide, slow-moving synthetic bed",
@@ -128,7 +128,7 @@
       ]
     },
     {
-      "styleId": "downtempo-ambient",
+      "styleId": "ambient-downtempo-ambient",
       "compare": [
         "a restrained beat and rounded low end under patient melodic phrases",
         "how the drums feel human and present without dominating the sound bed",

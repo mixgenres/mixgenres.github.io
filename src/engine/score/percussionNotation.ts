@@ -32,9 +32,17 @@ export function resolveNotatedDrum(instrumentId: string, sourceHit: string | und
   for (const [pattern, ids] of KIT_COMPONENT_MIDI_ALIASES) if (pattern.test(raw)) {
     for (const id of ids) { const component = components.find(c => c.id === id); if (component) return notatedDrum(instrumentId, component.midi); }
   }
+  if (instrumentId === 'hand-percussion' && /\bclap\b|\bhand.?clap\b/.test(raw)) {
+    return notatedDrum(instrumentId, 39);
+  }
   const intent = kitHitIntent(sourceHit, hit);
   if (!components.length) {
-    if (def.drum?.mid !== undefined) return notatedDrum(instrumentId, def.drum.mid);
+    const midi = intent === 'low'
+      ? def.drum?.low
+      : ['slap', 'rim', 'bell', 'accent'].includes(intent)
+        ? def.drum?.high
+        : def.drum?.mid;
+    if (midi !== undefined) return notatedDrum(instrumentId, midi);
     throw new Error(`No drum note mapping is authored for ${instrumentId}`);
   }
   const preferred = findKitComponent(instrumentId, intent, undefined, index);

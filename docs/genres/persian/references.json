@@ -1,0 +1,88 @@
+{
+  "genreId": "persian",
+  "reviewed": "2026-10-15",
+  "status": "Five linked streaming candidates are collected for each of the five styles. Listening comparisons and useful timecodes remain pending; these are candidates, not verified sonic matches.",
+  "source": "Apple Music track and album pages. Release and track metadata checked; reference audio has not been auditioned or downloaded.",
+  "styles": [
+    {
+      "styleId": "persian-dastgah",
+      "compare": [
+        "pishdaramad and daramad as distinct ensemble and melodic openings",
+        "gushe development around a modal center rather than a chord loop",
+        "the move into avaz or instrumental chaharmezrab and return through forud",
+        "tar, voice, santur, and tombak balance, ornament, and phrase handoff"
+      ],
+      "recordings": [
+        { "title": "Dastgah Shur", "artist": "Nonesuch Explorer Series", "url": "https://music.apple.com/us/song/169505793", "timecodes": [] },
+        { "title": "Dastgah Chahargah: Zabol", "artist": "Moluk Zarrabi, Morteza Neydavud & Musa Neydavud", "url": "https://music.apple.com/us/album/dastgah-chahargah-zabol-feat-morteza-neydavud-musa/1495013960?i=1495013962", "timecodes": [] },
+        { "title": "Dastgah Mahur", "artist": "Zohre Karimnia, Nasrin Hashemi, Shahu Andalibi, Majid Derakhshani & ensemble", "url": "https://music.apple.com/us/song/1076983717", "timecodes": [] },
+        { "title": "Dastgah Mahur: Saghinameh & Sufinameh", "artist": "Sima Bina", "url": "https://music.apple.com/us/song/1086934707", "timecodes": [] },
+        { "title": "Dastgah-e Segah II", "artist": "Javad Badizade, Esma'il Mehrtash, Abolhasan Saba & Farhad Mo'tamed", "url": "https://music.apple.com/us/album/dastgah-e-segah-ii-feat-esmail-mehrtash-abolhasan-saba/1860062609?i=1860062618", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "persian-radif",
+      "compare": [
+        "short gusheh statements and their relationship within a dastgah rather than verse/chorus form",
+        "the change in contour, register, and ornament from one named gusheh to the next",
+        "tar or setar articulation, resonance, and motif recall",
+        "how a return or forud closes a sequence without imposing a fixed pop pulse"
+      ],
+      "recordings": [
+        { "title": "Radif of Persian Music on Tar, Vol. 1 (Shur and Abuata gusheh sequence)", "artist": "Morteza Neydavud", "url": "https://music.apple.com/us/album/radif-of-persian-music-on-tar-vol-1/1566847815", "timecodes": [] },
+        { "title": "Bayat-e Tork: Mehdi-Zarrabi", "artist": "Morteza Neydavud", "url": "https://music.apple.com/us/song/1566997775", "timecodes": [] },
+        { "title": "Chahargah: Muye", "artist": "Morteza Neydavud", "url": "https://music.apple.com/us/album/chahargah-muye/1566997766?i=1566997862", "timecodes": [] },
+        { "title": "Chahargah: Hodi", "artist": "Morteza Neydavud", "url": "https://music.apple.com/us/album/chahargah-hodi/1566997766?i=1566997864", "timecodes": [] },
+        { "title": "Avaz-e Bayat-e Tork: Bardasht", "artist": "Ali-Akbar Shahnazi", "url": "https://music.apple.com/us/album/avaz-e-bayat-e-tork-bardasht/1855700616?i=1855700656", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "persian-avaz",
+      "compare": [
+        "rubato and free vocal pacing against any accompaniment that does enter",
+        "text-led breath, melisma, and phrase length rather than a repeated bar grid",
+        "instrumental response and the space left between vocal phrases",
+        "modal arrival and forud return without turning the improvisation into a regular chorus"
+      ],
+      "recordings": [
+        { "title": "Persian Traditional Avaz-e Dashti", "artist": "Kayhan Kalhor, Siamak Jahangiri & Siamak Aghaei", "url": "https://music.apple.com/us/song/564088729", "timecodes": [] },
+        { "title": "Avaz of Dashti (Secondary Dastgah of Shour)", "artist": "Ahmad Ebadi", "url": "https://music.apple.com/us/song/279012766", "timecodes": [] },
+        { "title": "Avaz-e Dashti: Deylaman, Sarang", "artist": "Hossein Omoumi & Madjid Khaladj", "url": "https://music.apple.com/us/song/1085153183", "timecodes": [] },
+        { "title": "Avaz Dashti, Hengame Mey", "artist": "Mohsen Keramati", "url": "https://music.apple.com/us/song/1240520072", "timecodes": [] },
+        { "title": "Avaz Dashti", "artist": "Majid Kiani", "url": "https://music.apple.com/us/song/1210875130", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "persian-instrumental-ensemble",
+      "compare": [
+        "the contrast between composed pishdaramad, melodic development, and chaharmezrab lift",
+        "tar, setar, santur, kamancheh, ney, and tombak trading foreground space",
+        "ensemble responses that support the lead without doubling every phrase",
+        "a coordinated transition and cadence rather than a generic drum fill"
+      ],
+      "recordings": [
+        { "title": "Pishdaramad (Dastgah-e Shur)", "artist": "Hossein Alizadeh & Ensemble", "url": "https://music.apple.com/us/song/1771151605", "timecodes": [] },
+        { "title": "Sama", "artist": "Hossein Alizadeh & Hamavayan Ensemble", "url": "https://music.apple.com/us/song/1635728969", "timecodes": [] },
+        { "title": "Masnavi", "artist": "Hossein Alizadeh & Hamavayan Ensemble", "url": "https://music.apple.com/us/song/1635728970", "timecodes": [] },
+        { "title": "Tar Solo - Tar Improvisation", "artist": "Hossein Alizadeh & Raha with Hamavayan Ensemble", "url": "https://music.apple.com/us/song/408928232", "timecodes": [] },
+        { "title": "Naqmeh", "artist": "Hossein Alizadeh, Khosro Soltani & Hamavayan Ensemble", "url": "https://music.apple.com/us/song/950930609", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "persian-modern-persian",
+      "compare": [
+        "Persian modal melody and ornament alongside chamber or cross-cultural ensemble color",
+        "long textural growth and changing instrumental roles instead of a repeated accompaniment loop",
+        "the relationship between setar or kamancheh foreground and strings, bass, or percussion support",
+        "dynamic space, phrase handoffs, and the contrast between acoustic attacks and sustained ensemble beds"
+      ],
+      "recordings": [
+        { "title": "Silent City", "artist": "Kayhan Kalhor & Brooklyn Rider", "url": "https://music.apple.com/us/song/586281675", "timecodes": [] },
+        { "title": "Parvaz", "artist": "Kayhan Kalhor & Brooklyn Rider", "url": "https://music.apple.com/us/song/586281677", "timecodes": [] },
+        { "title": "Silence of the Night", "artist": "Kayhan Kalhor & Mohammad-Reza Shajarian", "url": "https://music.apple.com/us/song/60928075", "timecodes": [] },
+        { "title": "Desert", "artist": "Kayhan Kalhor & Mohammad-Reza Shajarian", "url": "https://music.apple.com/us/song/60928088", "timecodes": [] },
+        { "title": "Whereto", "artist": "Kayhan Kalhor & Toumani Diabate", "url": "https://music.apple.com/us/song/1678928679", "timecodes": [] }
+      ]
+    }
+  ]
+}

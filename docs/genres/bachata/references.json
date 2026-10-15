@@ -5,7 +5,7 @@
   "source": "Apple Music streaming track pages and its Bachata Urbana editorial description. Candidate lists are for review; no reference audio downloaded.",
   "styles": [
     {
-      "styleId": "dominican",
+      "styleId": "bachata-dominican",
       "compare": [
         "the tightly interlocked derecho guitar, bass, bongó martillo, and güira pulse",
         "the distinct high requinto answer against the lower segunda rhythm part",
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "styleId": "amargue",
+      "styleId": "bachata-amargue",
       "compare": [
         "the plaintive vocal contour and expressive held or bent phrase endings",
         "the requinto's answering lament and how it avoids doubling every vocal note",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "styleId": "traditional-bolero-bachata",
+      "styleId": "bachata-traditional-bolero-bachata",
       "compare": [
         "the bolero-influenced broken-chord guitar support under a long melodic line",
         "the slower harmonic pacing and clear cadence before requinto responses",
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "styleId": "moderna",
+      "styleId": "bachata-moderna",
       "compare": [
         "the modern segunda's clipped or muted rhythm against a bright, sustained requinto hook",
         "the contrast between intimate verse texture and open, singable chorus",
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "styleId": "sensual",
+      "styleId": "bachata-sensual",
       "compare": [
         "the sustained, legato lead and the longer gaps left for a soft guitar answer",
         "the lighter percussion and smoother dynamic shape compared with a driving derecho",
@@ -85,7 +85,7 @@
       ]
     },
     {
-      "styleId": "bachata-mambo",
+      "styleId": "bachata-bachata-mambo",
       "compare": [
         "the transition from the steady chorus groove into a more active requinto feature",
         "short picked runs, slides, and call-and-response figures that resolve back to the vocal hook",
@@ -101,7 +101,7 @@
       ]
     },
     {
-      "styleId": "urban",
+      "styleId": "bachata-urban",
       "compare": [
         "how R&B-influenced melody, backing vocals, or rap sit over the bachata guitar pulse",
         "the interaction between requinto syncopation and programmed or pop-oriented drums",
@@ -117,7 +117,7 @@
       ]
     },
     {
-      "styleId": "fusion",
+      "styleId": "bachata-fusion",
       "compare": [
         "which outside style is introduced and whether the core bachata guitar pattern remains identifiable",
         "how contrasting timbres or harmonic colors enter and leave across sections",

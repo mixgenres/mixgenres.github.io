@@ -1,0 +1,88 @@
+{
+  "genreId": "industrial",
+  "reviewed": "2026-10-15",
+  "status": "Five streaming recording candidates are listed for all five Industrial styles. Listening comparisons and useful timecodes remain pending; these are research candidates, not verified sonic matches.",
+  "source": "Apple Music individual track pages and displayed artist/release metadata. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "industrial-ebm",
+      "compare": [
+        "rigid kick and sequenced bass lock, with accents that reinforce the machine pulse",
+        "dry, repetitive synth-bass cells and how their timbre changes between sections",
+        "commanding chant phrasing, short response figures, and deliberate gaps",
+        "the balance of low-end impact, metallic percussion, and restrained harmonic layers"
+      ],
+      "recordings": [
+        { "title": "Headhunter V1.0", "artist": "Front 242", "url": "https://music.apple.com/us/song/1562773953", "timecodes": [] },
+        { "title": "Join in the Chant", "artist": "Nitzer Ebb", "url": "https://music.apple.com/us/song/1444130121", "timecodes": [] },
+        { "title": "Murderous", "artist": "Nitzer Ebb", "url": "https://music.apple.com/us/song/1444130025", "timecodes": [] },
+        { "title": "No Shuffle (Remastered)", "artist": "Front 242", "url": "https://music.apple.com/us/song/1180628275", "timecodes": [] },
+        { "title": "Der Mussolini", "artist": "DAF", "url": "https://music.apple.com/us/song/1355199972", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "industrial-early-industrial",
+      "compare": [
+        "found-object and metallic percussion textures against tape noise, feedback, and unstable pulse",
+        "abrupt edits, interruptions, and uneven phrase lengths instead of a continuous backbeat",
+        "how raw recording space and distortion carry form without conventional chord changes",
+        "the contrast between noisy events and the sparse moments left around them"
+      ],
+      "recordings": [
+        { "title": "Hamburger Lady", "artist": "Throbbing Gristle", "url": "https://music.apple.com/us/song/1286357290", "timecodes": [] },
+        { "title": "Nag Nag Nag", "artist": "Cabaret Voltaire", "url": "https://music.apple.com/us/song/825382009", "timecodes": [] },
+        { "title": "Yü-gung (Fütter mein Ego)", "artist": "Einstürzende Neubauten", "url": "https://music.apple.com/us/song/1438435291", "timecodes": [] },
+        { "title": "Metal Dance", "artist": "SPK", "url": "https://music.apple.com/us/song/543096211", "timecodes": [] },
+        { "title": "Warm Leatherette", "artist": "The Normal", "url": "https://music.apple.com/us/song/828252957", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "industrial-industrial-dance",
+      "compare": [
+        "hard kick and syncopated bass or sample loops that keep a dance floor pulse",
+        "riff and hook placement against noisy or distorted production layers",
+        "the way a repeated groove changes through dropouts, breakdowns, and returns",
+        "foreground vocal or sampled phrases with enough space to remain forceful"
+      ],
+      "recordings": [
+        { "title": "Stigmata", "artist": "Ministry", "url": "https://music.apple.com/us/song/59390360", "timecodes": [] },
+        { "title": "Closer", "artist": "Nine Inch Nails", "url": "https://music.apple.com/us/song/1440837621", "timecodes": [] },
+        { "title": "Juke-Joint Jezebel", "artist": "KMFDM", "url": "https://music.apple.com/us/song/413176799", "timecodes": [] },
+        { "title": "A Daisy Chain 4 Satan (Acid and Flowers Mix)", "artist": "My Life With the Thrill Kill Kult", "url": "https://music.apple.com/us/song/1461308184", "timecodes": [] },
+        { "title": "Golgotha Tenement Blues", "artist": "Machines of Loving Grace", "url": "https://music.apple.com/us/song/322025465", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "industrial-industrial-rock",
+      "compare": [
+        "distorted guitar riff and bass against a machine-like backbeat or programmed percussion",
+        "riff stops, syncopations, and drum fills that shift phrase energy",
+        "vocal delivery and instrumental answers across verse and refrain",
+        "how the mix preserves guitar attack, drum punch, and vocal definition in dense distortion"
+      ],
+      "recordings": [
+        { "title": "March of the Pigs", "artist": "Nine Inch Nails", "url": "https://music.apple.com/us/song/1440837539", "timecodes": [] },
+        { "title": "Head Like a Hole", "artist": "Nine Inch Nails", "url": "https://music.apple.com/us/song/1440934933", "timecodes": [] },
+        { "title": "Save Yourself", "artist": "Stabbing Westward", "url": "https://music.apple.com/us/song/209776628", "timecodes": [] },
+        { "title": "A Drug Against War", "artist": "KMFDM", "url": "https://music.apple.com/us/song/413187435", "timecodes": [] },
+        { "title": "Jesus Built My Hotrod", "artist": "Ministry", "url": "https://music.apple.com/us/song/1684501818", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "industrial-industrial-metal",
+      "compare": [
+        "palm-muted guitar and bass chugs locked to the kick, including double-kick density",
+        "machine-tight riff attacks against live drum transients and cymbal decay",
+        "the contrast between mechanical repetition, vocal emphasis, and riff variation",
+        "low-end weight and guitar separation without masking the snare or the vocal"
+      ],
+      "recordings": [
+        { "title": "N.W.O.", "artist": "Ministry", "url": "https://music.apple.com/us/song/1448844679", "timecodes": [] },
+        { "title": "Du hast", "artist": "Rammstein", "url": "https://music.apple.com/us/song/1682941083", "timecodes": [] },
+        { "title": "Replica", "artist": "Fear Factory", "url": "https://music.apple.com/us/song/305684955", "timecodes": [] },
+        { "title": "Push It", "artist": "Static-X", "url": "https://music.apple.com/us/song/302200755", "timecodes": [] },
+        { "title": "Dragula", "artist": "Rob Zombie", "url": "https://music.apple.com/us/song/1440915969", "timecodes": [] }
+      ]
+    }
+  ]
+}

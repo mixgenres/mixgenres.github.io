@@ -1,4 +1,3 @@
-import { arrangeBand } from '../band/arrangeBand';
 import type { Performance } from '../band/performanceData';
 import type { Sheet } from '../sheet/sheet';
 
@@ -6,11 +5,14 @@ import type { Sheet } from '../sheet/sheet';
 export async function compilePerformance(sheet: Sheet, signal: AbortSignal): Promise<Performance> {
   const cancelled = () => new DOMException('Score calculation superseded', 'AbortError');
   if (signal.aborted) throw cancelled();
-  if (typeof Worker === 'undefined') return arrangeBand(sheet);
+  if (typeof Worker === 'undefined') throw new Error('This browser cannot compile playback in a worker.');
   return new Promise((resolve, reject) => {
     let worker: Worker;
     try { worker = new Worker(new URL('./compositionWorker.ts', import.meta.url), { type: 'module' }); }
-    catch { resolve(arrangeBand(sheet)); return; }
+    catch (error) {
+      reject(new Error(`Could not start playback compilation worker: ${error instanceof Error ? error.message : String(error)}`));
+      return;
+    }
     const cleanup = () => {
       signal.removeEventListener('abort', abort);
       worker.onmessage = null; worker.onerror = null; worker.onmessageerror = null;
@@ -24,9 +26,15 @@ export async function compilePerformance(sheet: Sheet, signal: AbortSignal): Pro
       else if (data.performance) resolve(data.performance);
       else reject(new Error(data.error ?? 'Compilation failed'));
     };
-    worker.onerror = event => { event.preventDefault(); cleanup(); try { resolve(arrangeBand(sheet)); } catch(error) { reject(error); } };
-    worker.onmessageerror = () => { cleanup(); try { resolve(arrangeBand(sheet)); } catch(error) { reject(error); } };
+    worker.onerror = event => {
+      event.preventDefault(); cleanup();
+      reject(new Error(event.message || 'Playback compilation worker failed'));
+    };
+    worker.onmessageerror = () => { cleanup(); reject(new Error('Playback compilation worker returned an unreadable result')); };
     try { worker.postMessage(sheet); }
-    catch { cleanup(); try { resolve(arrangeBand(sheet)); } catch(error) { reject(error); } }
+    catch (error) {
+      cleanup();
+      reject(new Error(`Could not send song to playback compilation worker: ${error instanceof Error ? error.message : String(error)}`));
+    }
   });
 }

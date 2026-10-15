@@ -10,12 +10,17 @@ import { getInstrumentPerformanceProfile } from '../src/engine/lookup/performanc
 import { getGenreTheory } from '../src/engine/lookup/theory';
 import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { resolveTuningSystem } from '../src/engine/sheet/tuning';
-import { parseChord } from '../src/engine/sheet/musicTheory';
+import { parseChord, scalePcsForMode } from '../src/engine/sheet/musicTheory';
 
 const note = (time = 0, midi = 60): PerfNote => ({ time, dur: 0.1, midi, vel: 80, trackId: 'keys', bar: 0,
   gestureCode: 0, hitFunctionCode: 0, accent: 0.8 });
 const samplePerformance = (instrumentId: string, notes: PerfNote[]): Performance => ({ notes, ccs: [], bars: [],
   duration: 1, tail: .5, blends: {}, trackInfo: { keys: { instrumentId, role: 'harmony' } }, worldId: 'folk' });
+
+test('plain minor solo-scale name resolves to natural minor', () => {
+  assert.deepEqual(scalePcsForMode('minor', 9), [9, 11, 0, 2, 4, 5, 7]);
+  assert.deepEqual(scalePcsForMode('minor', 9), scalePcsForMode('natural-minor', 9));
+});
 
 test('authored harmonic sentences retain repetitions and incomplete cycles', () => {
   const sentence = ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim', 'C'];

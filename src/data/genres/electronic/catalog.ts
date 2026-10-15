@@ -30,7 +30,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "techno",
       "name": "Techno",
-      "description": "Techno: techno steady kick and looping synth pulse. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "A four-on-the-floor kick anchors a repeating synth ostinato. Build tension with filter movement, sparse accents, and gradual subtraction while keeping harmonic motion restrained.",
       "patterns": ["Pounding 909 kick drum on all 4 beats with driving offbeat open hi-hat sizzle", "techno steady kick and looping synth pulse"],
       "techniques": ["staccato", "glide", "filter-sweep", "arpeggio", "roll", "pitch-bend", "heavy Roland TR-909 kick drum on every beat", "offbeat open hi-hat sizzle", "hypnotic repetitive modular synth sequence", "industrial tension and release", "bend", "accent", "legato", "vibrato", "open", "ghost"],
       "harmony": ["Am", "F", "G"],
@@ -65,13 +65,13 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 3},
       "cells": [
         {"name": "techno steady kick and looping synth pulse synth statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "techno steady kick and looping synth pulse synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "techno steady kick and looping synth pulse synth cadence fill", "role": "lead", "onsets": [3.5], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "filter-sweep"},
         {"name": "techno steady kick and looping synth pulse synth accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "techno steady kick and looping synth pulse synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "techno steady kick and looping synth pulse synth cadence fill", "role": "harmony", "onsets": [2.5], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "staccato"},
         {"name": "techno steady kick and looping synth pulse low anchor", "role": "bass", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.5]},
-        {"name": "techno steady kick and looping synth pulse synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "techno steady kick and looping synth pulse kit", "role": "percussion", "onsets": [0, 0.5, 1, 1, 1.5, 2, 2.5, 3, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "openHat", "kick", "snare", "openHat", "kick", "openHat", "kick", "snare", "openHat"], "cycleLength": 1, "accents": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85]},
-        {"name": "techno steady kick and looping synth pulse drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "techno steady kick and looping synth pulse synth cadence fill", "role": "bass", "onsets": [3.5], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "staccato"},
+        {"name": "techno steady kick and looping synth pulse kit", "role": "percussion", "onsets": [0, 0.5, 1, 1, 1.5, 2, 2.5, 3, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "openHat", "kick", "snare", "openHat", "kick", "openHat", "kick", "snare", "openHat"], "cycleLength": 1, "accents": [0.98, 0.42, 0.84, 0.68, 0.42, 0.94, 0.45, 0.78, 0.72, 0.5]},
+        {"name": "techno steady kick and looping synth pulse drums cadence fill", "role": "percussion", "onsets": [3, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "hits": ["tom", "snare"]}
       ],
       "instrumentTechniques": {
         "synth": ["staccato", "bend", "filter-sweep", "accent", "legato", "vibrato"],
@@ -114,7 +114,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "detroit-techno",
       "name": "Detroit Techno",
-      "description": "Detroit Techno: Detroit syncopated machine chords and bass. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Syncopated machine chords and a melodic bass figure answer a firm pulse. Warm voicings, offbeat accents, and evolving sequences carry the long arrangement.",
       "patterns": ["Detroit syncopated machine chords and bass"],
       "techniques": ["staccato", "glide", "filter-sweep", "arpeggio", "roll", "pitch-bend", "bend", "accent", "legato", "vibrato", "ghost", "open"],
       "harmony": ["Am", "F", "G"],
@@ -149,13 +149,13 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 3},
       "cells": [
         {"name": "Detroit syncopated machine chords and bass synth statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Detroit syncopated machine chords and bass synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "Detroit syncopated machine chords and bass synth cadence fill", "role": "lead", "onsets": [2.75, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "filter-sweep"},
         {"name": "Detroit syncopated machine chords and bass synth accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Detroit syncopated machine chords and bass synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "Detroit syncopated machine chords and bass synth cadence fill", "role": "harmony", "onsets": [1.5, 3.5], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "staccato"},
         {"name": "Detroit syncopated machine chords and bass low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
-        {"name": "Detroit syncopated machine chords and bass synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Detroit syncopated machine chords and bass kit", "role": "percussion", "onsets": [0, 0.5, 1, 1, 1.5, 2, 2.5, 3, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "openHat", "kick", "snare", "openHat", "kick", "openHat", "kick", "snare", "openHat"], "cycleLength": 1, "accents": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85]},
-        {"name": "Detroit syncopated machine chords and bass drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "Detroit syncopated machine chords and bass synth cadence fill", "role": "bass", "onsets": [3.5], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "staccato"},
+        {"name": "Detroit syncopated machine chords and bass kit", "role": "percussion", "onsets": [0, 0.5, 1, 1, 1.5, 2, 2.5, 2.75, 3, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "openHat", "kick", "snare", "openHat", "kick", "openHat", "kick", "kick", "snare", "openHat"], "cycleLength": 1, "accents": [0.98, 0.48, 0.82, 0.72, 0.5, 0.95, 0.48, 0.68, 0.82, 0.72, 0.52]},
+        {"name": "Detroit syncopated machine chords and bass drums cadence fill", "role": "percussion", "onsets": [2.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "hits": ["snare", "openHat"]}
       ],
       "instrumentTechniques": {
         "synth": ["staccato", "bend", "filter-sweep", "accent", "legato", "vibrato"],
@@ -198,7 +198,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "electro",
       "name": "Electro",
-      "description": "Electro: electro broken drum machine and robotic bass. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "A broken kick-and-snare machine groove supports springy syncopated bass and clipped robotic hooks. Short rests and displaced accents keep the parts interlocked.",
       "patterns": ["electro broken drum machine and robotic bass"],
       "techniques": ["staccato", "glide", "filter-sweep", "arpeggio", "roll", "pitch-bend", "bend", "accent", "legato", "vibrato", "ghost", "open"],
       "harmony": ["Am", "F", "G"],
@@ -233,13 +233,13 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 3},
       "cells": [
         {"name": "electro broken drum machine and robotic bass synth statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "electro broken drum machine and robotic bass synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "electro broken drum machine and robotic bass synth cadence fill", "role": "lead", "onsets": [2.5, 3.25, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "glide"},
         {"name": "electro broken drum machine and robotic bass synth accompaniment", "role": "harmony", "onsets": [0.5, 1.5, 3.25], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "electro broken drum machine and robotic bass synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "electro broken drum machine and robotic bass low anchor", "role": "bass", "onsets": [0, 1.75, 2.5], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6]},
-        {"name": "electro broken drum machine and robotic bass synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "electro broken drum machine and robotic bass kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "electro broken drum machine and robotic bass drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "electro broken drum machine and robotic bass synth cadence fill", "role": "harmony", "onsets": [3.5], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "staccato"},
+        {"name": "electro broken drum machine and robotic bass low anchor", "role": "bass", "onsets": [0, 0.75, 1.75, 2.5, 2.75, 3.75], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.55, 0.22, 0.22, 0.45, 0.2, 0.2]},
+        {"name": "electro broken drum machine and robotic bass synth cadence fill", "role": "bass", "onsets": [1.75, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "filter-sweep"},
+        {"name": "electro broken drum machine and robotic bass kit", "role": "percussion", "onsets": [0, 0.5, 0.75, 1, 1.5, 1.75, 2, 2.5, 2.75, 3, 3.5, 3.75], "instruments": ["drums"], "hits": ["kick", "hat", "kick", "hat", "snare", "hat", "kick", "hat", "kick", "snare", "hat", "kick"], "cycleLength": 1, "accents": [0.98, 0.46, 0.72, 0.42, 0.92, 0.4, 0.86, 0.46, 0.72, 0.9, 0.44, 0.66]},
+        {"name": "electro broken drum machine and robotic bass drums cadence fill", "role": "percussion", "onsets": [2.75, 3.25, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "hits": ["tom", "snare", "openHat"]}
       ],
       "instrumentTechniques": {
         "synth": ["staccato", "bend", "filter-sweep", "accent", "legato", "vibrato"],
@@ -282,7 +282,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "trance",
       "name": "Trance",
-      "description": "Trance: trance arpeggio build and sustained pad release. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "A steady kick and offbeat bass carry arpeggios and sustained pads through long builds and breakdowns. Leave a clear breath before the hook and low end return.",
       "patterns": ["trance arpeggio build and sustained pad release"],
       "techniques": ["staccato", "glide", "filter-sweep", "arpeggio", "roll", "pitch-bend", "bend", "accent", "legato", "vibrato", "ghost", "open"],
       "harmony": ["Am", "F", "G"],
@@ -317,13 +317,13 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 3},
       "cells": [
         {"name": "trance arpeggio build and sustained pad release synth statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "trance arpeggio build and sustained pad release synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "trance arpeggio build and sustained pad release synth cadence fill", "role": "lead", "onsets": [2.5, 3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "arpeggio"},
         {"name": "trance arpeggio build and sustained pad release synth accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "trance arpeggio build and sustained pad release synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "trance arpeggio build and sustained pad release low anchor", "role": "bass", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.5]},
-        {"name": "trance arpeggio build and sustained pad release synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "trance arpeggio build and sustained pad release kit", "role": "percussion", "onsets": [0, 0.5, 1, 1, 1.5, 2, 2.5, 3, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "openHat", "kick", "snare", "openHat", "kick", "openHat", "kick", "snare", "openHat"], "cycleLength": 1, "accents": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85]},
-        {"name": "trance arpeggio build and sustained pad release drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "trance arpeggio build and sustained pad release synth cadence fill", "role": "harmony", "onsets": [3.5], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "legato"},
+        {"name": "trance arpeggio build and sustained pad release low anchor", "role": "bass", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.42, 0.42, 0.42, 0.38]},
+        {"name": "trance arpeggio build and sustained pad release synth cadence fill", "role": "bass", "onsets": [3.5], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "staccato"},
+        {"name": "trance arpeggio build and sustained pad release kit", "role": "percussion", "onsets": [0, 0.5, 1, 1, 1.5, 2, 2.5, 3, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "hat", "kick", "snare", "hat", "kick", "hat", "kick", "snare", "openHat"], "cycleLength": 1, "accents": [0.98, 0.44, 0.82, 0.68, 0.44, 0.96, 0.46, 0.8, 0.72, 0.56]},
+        {"name": "trance arpeggio build and sustained pad release drums cadence fill", "role": "percussion", "onsets": [2, 2.5, 3, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "hits": ["snare", "snare", "snare", "snare", "snare"]}
       ],
       "instrumentTechniques": {
         "synth": ["staccato", "bend", "filter-sweep", "accent", "legato", "vibrato"],
@@ -366,7 +366,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "idm",
       "name": "IDM",
-      "description": "IDM: IDM displaced drum fragments and rests. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Displaced break fragments and sudden rests offset a warm melodic motif. Change the drum phrase and sample texture in irregular groups instead of laying down a dance backbeat.",
       "patterns": ["Micro-edited 64th-note glitch drum roll juxtaposed with warm melancholic synth chord", "IDM displaced drum fragments and rests"],
       "techniques": ["staccato", "glide", "filter-sweep", "arpeggio", "roll", "pitch-bend", "micro-edited drum glitching (Amen chop)", "haunting analog synth nostalgia", "irregular rhythmic drill rolls", "unexpected harmonic detuning", "bend", "accent", "legato", "vibrato", "ghost", "open"],
       "harmony": ["Am", "F", "G"],
@@ -399,14 +399,14 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 3},
       "cells": [
-        {"name": "IDM displaced drum fragments and rests synth statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "IDM displaced drum fragments and rests synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "IDM displaced drum fragments and rests synth accompaniment", "role": "harmony", "onsets": [0.5, 1.5, 3.25], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "IDM displaced drum fragments and rests synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "IDM displaced drum fragments and rests low anchor", "role": "bass", "onsets": [0, 1.75, 2.5], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6]},
-        {"name": "IDM displaced drum fragments and rests synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "IDM displaced drum fragments and rests kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
-        {"name": "IDM displaced drum fragments and rests drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "IDM displaced drum fragments and rests synth statement", "role": "lead", "onsets": [0, 0.75, 1.75, 2.5, 3.25], "instruments": ["synth"], "cycleLength": 1, "durations": [0.42, 0.2, 0.42, 0.2, 0.35], "articulation": "legato"},
+        {"name": "IDM displaced drum fragments and rests synth cadence fill", "role": "lead", "onsets": [0.5, 1.75, 2.5, 3.25], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "IDM displaced drum fragments and rests synth accompaniment", "role": "harmony", "onsets": [0.25, 1.75, 2.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.25, 0.4], "articulation": "staccato"},
+        {"name": "IDM displaced drum fragments and rests synth cadence fill", "role": "harmony", "onsets": [1.25, 3.25], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "staccato"},
+        {"name": "IDM displaced drum fragments and rests low anchor", "role": "bass", "onsets": [0, 1.25, 2.5, 3.25], "instruments": ["synth"], "cycleLength": 1, "articulation": "accent", "durations": [0.8, 0.25, 0.5, 0.25]},
+        {"name": "IDM displaced drum fragments and rests synth cadence fill", "role": "bass", "onsets": [2.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "staccato"},
+        {"name": "IDM displaced drum fragments and rests kit", "role": "percussion", "onsets": [0, 0.25, 0.75, 1.25, 1.5, 2.25, 2.5, 2.75, 3.25, 3.75], "instruments": ["drums"], "hits": ["kick", "hat", "snare", "hat", "kick", "hat", "snare", "tom", "hat", "kick"], "cycleLength": 1, "accents": [0.98, 0.3, 0.76, 0.38, 0.82, 0.35, 0.72, 0.52, 0.34, 0.86]},
+        {"name": "IDM displaced drum fragments and rests drums cadence fill", "role": "percussion", "onsets": [0, 0.75, 2.5, 3.25, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "hits": ["kick", "snare", "hat", "tom", "snare"]}
       ],
       "instrumentTechniques": {
         "synth": ["staccato", "bend", "filter-sweep", "accent", "legato", "vibrato"],
@@ -449,7 +449,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "minimal",
       "name": "Minimal",
-      "description": "Minimal: minimal sparse machine clicks and bass. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "A sparse kick, bass tone, and a few dry clicks leave room for silence. Small shifts in placement and timbre create movement; avoid busy fills and constant chord changes.",
       "patterns": ["minimal sparse machine clicks and bass"],
       "techniques": ["staccato", "glide", "filter-sweep", "arpeggio", "roll", "pitch-bend", "bend", "accent", "legato", "vibrato", "ghost", "open"],
       "harmony": ["Am", "F", "G"],
@@ -483,14 +483,14 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 3},
       "cells": [
-        {"name": "minimal sparse machine clicks and bass synth statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["synth"], "cycleLength": 1, "durations": [1.5, 1.5, 1.5], "articulation": "legato"},
-        {"name": "minimal sparse machine clicks and bass synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "minimal sparse machine clicks and bass synth statement", "role": "lead", "onsets": [0, 1.75, 3], "instruments": ["synth"], "cycleLength": 1, "durations": [1.5, 0.75, 0.5], "articulation": "legato"},
+        {"name": "minimal sparse machine clicks and bass synth cadence fill", "role": "lead", "onsets": [2.5], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "staccato"},
         {"name": "minimal sparse machine clicks and bass synth accompaniment", "role": "harmony", "onsets": [0, 2.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4], "articulation": "staccato"},
-        {"name": "minimal sparse machine clicks and bass synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "minimal sparse machine clicks and bass low anchor", "role": "bass", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [2]},
-        {"name": "minimal sparse machine clicks and bass synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "minimal sparse machine clicks and bass kit", "role": "percussion", "onsets": [0, 0.5, 1, 1, 1.5, 2, 2.5, 3, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "openHat", "kick", "snare", "openHat", "kick", "openHat", "kick", "snare", "openHat"], "cycleLength": 1, "accents": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85]},
-        {"name": "minimal sparse machine clicks and bass drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "minimal sparse machine clicks and bass synth cadence fill", "role": "harmony", "onsets": [3.5], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "staccato"},
+        {"name": "minimal sparse machine clicks and bass low anchor", "role": "bass", "onsets": [0], "instruments": ["synth"], "cycleLength": 1, "articulation": "legato", "durations": [2]},
+        {"name": "minimal sparse machine clicks and bass synth cadence fill", "role": "bass", "onsets": [3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "staccato"},
+        {"name": "minimal sparse machine clicks and bass kit", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "kick", "hat", "kick", "kick", "hat"], "cycleLength": 1, "accents": [0.98, 0.62, 0.3, 0.92, 0.58, 0.28]},
+        {"name": "minimal sparse machine clicks and bass drums cadence fill", "role": "percussion", "onsets": [3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "hits": ["hat"]}
       ],
       "instrumentTechniques": {
         "synth": ["staccato", "bend", "filter-sweep", "accent", "legato", "vibrato"],
@@ -533,7 +533,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "synthwave",
       "name": "Synthwave",
-      "description": "Synthwave: synthwave eighth-note bass and gated backbeat. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "A rock-leaning backbeat, pulsing synth bass, and broad lead melody frame the gated snare. Build a verse-to-chorus lift with changing layers and long, controlled tails.",
       "patterns": ["Driving 16th-note analog synth bass arp driving into massive gated reverb snare", "synthwave eighth-note bass and gated backbeat"],
       "techniques": ["staccato", "glide", "filter-sweep", "arpeggio", "roll", "pitch-bend", "relentless 16th-note bass arpeggios", "gated reverb snare hits", "soaring lead synthesizer melodies", "80s action film nostalgic mood", "bend", "accent", "legato", "vibrato", "ghost", "open"],
       "harmony": ["Am", "F", "G"],
@@ -567,14 +567,14 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 3},
       "cells": [
-        {"name": "synthwave eighth-note bass and gated backbeat synth statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "synthwave eighth-note bass and gated backbeat synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "synthwave eighth-note bass and gated backbeat synth statement", "role": "lead", "onsets": [0, 0.75, 1.5, 2.5, 3.25], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.25, 0.55, 0.35, 0.45], "articulation": "legato"},
+        {"name": "synthwave eighth-note bass and gated backbeat synth cadence fill", "role": "lead", "onsets": [2.5, 3, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "synthwave eighth-note bass and gated backbeat synth accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "synthwave eighth-note bass and gated backbeat synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "synthwave eighth-note bass and gated backbeat low anchor", "role": "bass", "onsets": [0, 2.5], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
-        {"name": "synthwave eighth-note bass and gated backbeat synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "synthwave eighth-note bass and gated backbeat kit", "role": "percussion", "onsets": [0, 0.5, 1, 1, 1.5, 2, 2.5, 3, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "openHat", "kick", "snare", "openHat", "kick", "openHat", "kick", "snare", "openHat"], "cycleLength": 1, "accents": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85]},
-        {"name": "synthwave eighth-note bass and gated backbeat drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "synthwave eighth-note bass and gated backbeat synth cadence fill", "role": "harmony", "onsets": [3.5], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "filter-sweep"},
+        {"name": "synthwave eighth-note bass and gated backbeat low anchor", "role": "bass", "onsets": [0, 0.5, 1.5, 2, 3], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.55, 0.35, 0.45, 0.55, 0.3]},
+        {"name": "synthwave eighth-note bass and gated backbeat synth cadence fill", "role": "bass", "onsets": [3], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "staccato"},
+        {"name": "synthwave eighth-note bass and gated backbeat kit", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "snare", "hat", "kick", "snare", "openHat"], "cycleLength": 1, "accents": [0.98, 0.9, 0.4, 0.86, 0.92, 0.56]},
+        {"name": "synthwave eighth-note bass and gated backbeat drums cadence fill", "role": "percussion", "onsets": [2, 2.5, 3, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "hits": ["kick", "tom", "snare", "snare", "openHat"]}
       ],
       "instrumentTechniques": {
         "synth": ["staccato", "bend", "filter-sweep", "accent", "legato", "vibrato"],
@@ -617,7 +617,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "melodic-electronic",
       "name": "Melodic Electronic",
-      "description": "Melodic Electronic: melodic electronic layered arpeggio and hook. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Layered hooks and arpeggios develop over a lighter, syncopated club pocket. Let bass and percussion breathe around the melody, then widen the return through arrangement changes.",
       "patterns": ["melodic electronic layered arpeggio and hook"],
       "techniques": ["staccato", "glide", "filter-sweep", "arpeggio", "roll", "pitch-bend", "bend", "accent", "legato", "vibrato", "ghost", "open"],
       "harmony": ["Am", "F", "G"],
@@ -651,14 +651,14 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 3},
       "cells": [
-        {"name": "melodic electronic layered arpeggio and hook synth statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "melodic electronic layered arpeggio and hook synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "melodic electronic layered arpeggio and hook synth accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "melodic electronic layered arpeggio and hook synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "melodic electronic layered arpeggio and hook low anchor", "role": "bass", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.5]},
-        {"name": "melodic electronic layered arpeggio and hook synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "melodic electronic layered arpeggio and hook kit", "role": "percussion", "onsets": [0, 0.5, 1, 1, 1.5, 2, 2.5, 3, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "openHat", "kick", "snare", "openHat", "kick", "openHat", "kick", "snare", "openHat"], "cycleLength": 1, "accents": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85]},
-        {"name": "melodic electronic layered arpeggio and hook drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]}
+        {"name": "melodic electronic layered arpeggio and hook synth statement", "role": "lead", "onsets": [0, 0.5, 1.25, 2, 2.5, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.35, 0.24, 0.4, 0.5, 0.35, 0.45], "articulation": "legato"},
+        {"name": "melodic electronic layered arpeggio and hook synth cadence fill", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "melodic electronic layered arpeggio and hook synth accompaniment", "role": "harmony", "onsets": [0, 1.25, 2.5, 3.25], "instruments": ["synth"], "cycleLength": 1, "durations": [0.5, 0.4, 0.5, 0.3], "articulation": "staccato"},
+        {"name": "melodic electronic layered arpeggio and hook synth cadence fill", "role": "harmony", "onsets": [3.5], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "staccato"},
+        {"name": "melodic electronic layered arpeggio and hook low anchor", "role": "bass", "onsets": [0, 1.5, 2.5, 3.25], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.55, 0.45, 0.5, 0.3]},
+        {"name": "melodic electronic layered arpeggio and hook synth cadence fill", "role": "bass", "onsets": [3.25], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "staccato"},
+        {"name": "melodic electronic layered arpeggio and hook kit", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "hat", "snare", "hat", "kick", "hat", "snare", "openHat"], "cycleLength": 1, "accents": [0.98, 0.42, 0.78, 0.38, 0.86, 0.44, 0.82, 0.58]},
+        {"name": "melodic electronic layered arpeggio and hook drums cadence fill", "role": "percussion", "onsets": [2.5, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "hits": ["kick", "snare", "openHat"]}
       ],
       "instrumentTechniques": {
         "synth": ["staccato", "bend", "filter-sweep", "accent", "legato", "vibrato"],

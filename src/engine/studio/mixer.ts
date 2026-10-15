@@ -19,7 +19,8 @@ export interface StudioMixState {
 // Genre-specific mixing rules to properly balance out-of-genre instruments.
 // Ensures a synth dropped into Flamenco sits correctly in the acoustic space,
 // or an orchestral string in Electronic EDM doesn't get buried.
-export function getRoleGainLinear(role: string, genre: string = 'default', instrumentId?: string, styleId = ''): number {
+export function getRoleGainLinear(role: string, genre: string, instrumentId?: string, styleId = ''): number {
+  if (!genre.trim()) throw new Error(`Mix gain for ${role || '(empty role)'} requires an authored genre context`);
   const r = (role || '').toLowerCase();
   const baseDb = ROLE_DB_PROFILES[r] ?? -3.0;
   const genreOffsets = GENRE_MIX_OFFSETS[genre.toLowerCase()] || {};
@@ -67,11 +68,10 @@ export interface MasterChain {
   roomDelayTimes: AudioParam[];
   dynamicParameters: {
     low: AudioParam; presence: AudioParam; air: AudioParam; width: AudioParam; roomReturn: AudioParam;
-    fallbackAmbience: AudioParam; delayTime: AudioParam; delayFeedback: AudioParam; delayTone: AudioParam;
+    delayTime: AudioParam; delayFeedback: AudioParam; delayTone: AudioParam;
     glueThreshold: AudioParam; glueRatio: AudioParam; glueAttack: AudioParam; glueRelease: AudioParam; drumParallel: AudioParam; subEnhancement: AudioParam; duckDepth: AudioParam;
     drumDry: AudioParam; drumWet: AudioParam;
   };
-  setFallbackSendsEnabled(enabled: boolean): void;
   tap: GainNode;
   setVolume(v: number): void;
   setPlaybackEnabled(enabled: boolean): void;
@@ -306,12 +306,6 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
   lowDuckWet.connect(masterSum);
   instBus.connect(masterSum);
 
-  // Feed the shared stereo room from instruments and drums.
-  const fallbackAmbienceFeed = ctx.createGain();
-  instBus.connect(fallbackAmbienceFeed);
-  drumBus.connect(fallbackAmbienceFeed);
-  fallbackAmbienceFeed.connect(roomInput);
-  fallbackAmbienceFeed.connect(delaySend);
   revMix.connect(masterSum);
   springWet.connect(masterSum);
   delayReturn.connect(masterSum);
@@ -455,11 +449,10 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
     roomPreDelay: roomPreDelay.delayTime,
     roomDelayTimes: roomDelays.map(room => room.delay.delayTime),
     dynamicParameters: { low: low.gain, presence: pres.gain, air: air.gain, width: sideGain.gain, roomReturn: revMix.gain,
-      fallbackAmbience: fallbackAmbienceFeed.gain, delayTime: delay.delayTime, delayFeedback: delayFeedback.gain,
+      delayTime: delay.delayTime, delayFeedback: delayFeedback.gain,
       delayTone: delayTone.frequency, glueThreshold: glue.threshold, glueRatio: glue.ratio,
       glueAttack: glue.attack, glueRelease: glue.release, drumParallel: drumParallelWet.gain, subEnhancement: subEnhanceGain.gain, duckDepth: kickDuckDepth.gain,
       drumDry: drumDry.gain, drumWet: drumWet.gain },
-    setFallbackSendsEnabled(enabled: boolean) { fallbackAmbienceFeed.gain.value = enabled ? 0 : 1; },
     tap,
     setVolume(v: number) {
       output.gain.setTargetAtTime(Math.max(0, Math.min(1.5, v * MASTER_MIX_DEFAULTS.outputGain)), ctx.currentTime, 0.02);
@@ -543,7 +536,6 @@ export function createMasterChain(ctx: BaseAudioContext, initialMixCharacter?: M
         subDuckingGain.disconnect();
         masterSum.disconnect();
         roomInput.disconnect();
-        fallbackAmbienceFeed.disconnect();
         roomSizeGain.disconnect();
         playbackGate.disconnect();
         roomPreDelay.disconnect();

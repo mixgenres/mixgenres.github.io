@@ -11,7 +11,7 @@
   ],
   "styles": [
     {
-      "styleId": "traditional",
+      "styleId": "qawwali-traditional",
       "compare": [
         "solo call against a repeated group refrain",
         "harmonium support and phrase replies",
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "styleId": "hamd-naat",
+      "styleId": "qawwali-hamd-naat",
       "compare": [
         "text-led devotional verse and measured refrain",
         "spare harmonium opening before percussion joins",
@@ -41,7 +41,7 @@
       ]
     },
     {
-      "styleId": "ghazal-qawwali",
+      "styleId": "qawwali-ghazal-qawwali",
       "compare": [
         "long couplet phrasing and lyric-forward lead",
         "harmonium answers in vocal gaps",
@@ -56,7 +56,7 @@
       ]
     },
     {
-      "styleId": "contemporary-fusion",
+      "styleId": "qawwali-contemporary-fusion",
       "compare": [
         "vocal foreground against layered studio texture",
         "keyboard drone and sustained electronic color",

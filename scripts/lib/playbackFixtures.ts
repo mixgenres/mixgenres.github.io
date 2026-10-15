@@ -2,7 +2,7 @@ import type { Performance, PerfNote } from '../../src/engine/band/performanceDat
 import { makeSheet, type Sheet } from '../../src/engine/sheet/sheet';
 
 export function performanceFixture(patch: Partial<Performance> = {}): Performance {
-  return { duration: 1, tail: 0, notes: [], ccs: [], bars: [], blends: {}, ...patch };
+  return { duration: 1, tail: 0, notes: [], ccs: [], bars: [], blends: {}, worldId: 'tango', ...patch };
 }
 export function noteFixture(patch: Partial<PerfNote> = {}): PerfNote {
   return { trackId: 'keys', midi: 60, time: 0, dur: .5, vel: 80, bar: 0,

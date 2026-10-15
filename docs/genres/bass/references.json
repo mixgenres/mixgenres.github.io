@@ -4,7 +4,7 @@
   "source": "Apple Music track pages; no reference audio downloaded.",
   "references": [
     {
-      "styleId": "drum-and-bass",
+      "styleId": "bass-drum-and-bass",
       "compare": [
         "fast two-step kick and snare against the chopped break",
         "sub-bass weight and phrase gaps under the break edits",
@@ -20,7 +20,7 @@
       ]
     },
     {
-      "styleId": "jungle",
+      "styleId": "bass-jungle",
       "compare": [
         "chopped break edits and how the kick/snare pattern breathes",
         "ragga vocal calls, sample punctuation, and the response space",
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "styleId": "liquid",
+      "styleId": "bass-liquid",
       "compare": [
         "smooth breakbeat and bass pocket without losing forward motion",
         "long pad or chord sustain against short drum and bass events",
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "styleId": "neurofunk",
+      "styleId": "bass-neurofunk",
       "compare": [
         "tight break transients against syncopated bass phrases",
         "staccato versus sustained or bent bass gestures",
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "styleId": "uk-garage",
+      "styleId": "bass-uk-garage",
       "compare": [
         "shuffled kick placement and clipped, offbeat chord stabs",
         "bassline syncopation and how it answers the vocal phrase",
@@ -84,7 +84,7 @@
       ]
     },
     {
-      "styleId": "2-step",
+      "styleId": "bass-2-step",
       "compare": [
         "skipping kick and broken two-step placement around the snare backbeat",
         "vocal hook phrasing against negative space in the drums",
@@ -100,7 +100,7 @@
       ]
     },
     {
-      "styleId": "dubstep",
+      "styleId": "bass-dubstep",
       "compare": [
         "half-time kick/snare weight and the gap between backbeats",
         "sub length, bass-note movement, and the physical impact of the drop",
@@ -116,7 +116,7 @@
       ]
     },
     {
-      "styleId": "grime",
+      "styleId": "bass-grime",
       "compare": [
         "sparse square-wave hooks and the deliberate space between stabs",
         "hard, dry drum-machine attacks against the vocal cadence",
@@ -132,7 +132,7 @@
       ]
     },
     {
-      "styleId": "future-garage",
+      "styleId": "bass-future-garage",
       "compare": [
         "late, ghosted two-step percussion against rounded sub notes",
         "chord fragments, room tone, and reverb tails carrying the atmosphere",
@@ -148,7 +148,7 @@
       ]
     },
     {
-      "styleId": "breakbeat",
+      "styleId": "bass-breakbeat",
       "compare": [
         "looped break chops, syncopated kick placement, and snare transients",
         "sampled riff hooks against bass and drum fills",

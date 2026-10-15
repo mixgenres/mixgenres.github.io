@@ -1,7 +1,7 @@
 export const TUNING_CONSTRAINTS = {
   fixedPitchInstrumentPattern: /piano|rhodes|vibraphone|harpsichord|vibes|fm-ep|clav/i,
   werckmeisterMarker: 'werckmeister',
-  bowedOrVoicePattern: /string|violin|viola|cello|fiddle|strings|choir|voice|vocal/i,
+  bowedOrVoicePattern: /string|violin|viola|cello|fiddle|kamancheh|strings|choir|voice|vocal/i,
   bowedChordOffsetsCents: { 4: -13.7, 10: -31.0 },
   classicalJazzGenrePattern: /classical|jazz|swing|chamber|orchestra/i,
   leadingTonePitchClass: 11,

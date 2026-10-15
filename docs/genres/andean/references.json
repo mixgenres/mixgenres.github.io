@@ -3,7 +3,7 @@
   "status": "Listening candidates only; none of these recordings have been auditioned or timecoded in this pass.",
   "references": [
     {
-      "styleId": "huayno",
+      "styleId": "andean-huayno",
       "compare": ["duple dance pulse and charango/guitar attack", "quena statement-to-response spacing", "phrase-end fills", "how the fuga lifts the final stretch"],
       "recordings": [
         {"title":"Quisiera Olvidarte","artist":"La Pastorita Huaracina","url":"https://music.apple.com/us/song/1037973842","timecodes":[]},
@@ -14,7 +14,7 @@
       ]
     },
     {
-      "styleId": "sanjuanito",
+      "styleId": "andean-sanjuanito",
       "compare": ["even duple dance feel", "flute and plucked-string phrase handoffs", "compact instrumental breaks", "cadence and return of the A strain"],
       "recordings": [
         {"title":"Pobre Corazón (Sanjuanito Version)","artist":"Rumiñahui","url":"https://music.apple.com/us/album/pobre-coraz%C3%B3n-sanjuanito-version/484875086?i=484875528","timecodes":[]},
@@ -25,7 +25,7 @@
       ]
     },
     {
-      "styleId": "saya",
+      "styleId": "andean-saya",
       "compare": ["bombo-led groove and subdivision", "percussion-to-flute call and answer", "vocal space and response length", "instrument balance during full refrains"],
       "recordings": [
         {"title":"Llorando Se Fue","artist":"Los Kjarkas","url":"https://music.apple.com/pe/song/640062996","timecodes":[]},
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "styleId": "tinku",
+      "styleId": "andean-tinku",
       "compare": ["heavy bombo accents and dancer-like stomp", "charango and flute against the drum anchor", "break-to-ensemble return", "recorded band energy and low-end weight"],
       "recordings": [
         {"title":"Tinku","artist":"Los Kjarkas","url":"https://music.apple.com/us/song/1512844554","timecodes":[]},
@@ -49,7 +49,7 @@
       ]
     },
     {
-      "styleId": "carnavalito",
+      "styleId": "andean-carnavalito",
       "compare": ["repeating charango dance figure", "quena/siku alternate phrases", "bombo weight under the group dance", "phrase variation without losing the cycle"],
       "recordings": [
         {"title":"El Humahuaqueño","artist":"Tomás Lipán","url":"https://music.apple.com/us/song/1753103656","timecodes":[]},
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "styleId": "nueva-cancion",
+      "styleId": "andean-nueva-cancion",
       "compare": ["lyric-led verse phrasing and acoustic accompaniment", "instrumental replies between vocal lines", "chorus lift and collective refrain", "arrangement restraint and dynamic build"],
       "recordings": [
         {"title":"Gracias a la vida","artist":"Violeta Parra","url":"https://music.apple.com/us/song/1717666323","timecodes":[]},
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "styleId": "andean-fusion",
+      "styleId": "andean-andean-fusion",
       "compare": ["electronic cumbia pocket against the Andean melodic phrase", "bass placement and drum backbeat", "organic instruments against synth color", "foreground clarity in vocal and instrumental sections"],
       "recordings": [
         {"title":"Ilaló (feat. Mateo Kingman)","artist":"Chancha Vía Circuito","url":"https://music.apple.com/us/album/ilal%C3%B3-feat-mateo-kingman-single/1645654420","timecodes":[]},

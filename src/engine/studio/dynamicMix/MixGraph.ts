@@ -37,8 +37,6 @@ export function createSongMixGraph(ctx: BaseAudioContext, master: MasterChain, t
     automate(compressor.ratio, scene => 1 + scene.buses[id].compressionAmount * (scene.buses[id].compressionRatio - 1));
     buses.set(id, input);
   }
-  // Dedicated sends replace the default all-instrument feed only for calibrated timelines.
-  master.setFallbackSendsEnabled(true);
   const tracks = new Map<string, { input: GainNode }>();
   for (const id of trackIds) {
     const input = gain(), body = filter('lowshelf', 280), presence = filter('peaking', 2600), level = gain();
@@ -77,7 +75,6 @@ export function createSongMixGraph(ctx: BaseAudioContext, master: MasterChain, t
   automate(masterParams.air, scene => settings(scene).airDb, 'spectral');
   automate(masterParams.width, scene => scene.enabled ? .2 + scene.master.width * 1.6 : settings(scene).widthGain, 'spatial');
   automate(masterParams.roomReturn, scene => settings(scene).roomDepth, 'spatial');
-  automate(masterParams.fallbackAmbience, scene => scene.enabled ? 0 : 1);
   automate(masterParams.delayTime, scene => settings(scene).delayTimeSeconds, 'spatial');
   automate(masterParams.delayFeedback, scene => settings(scene).delayFeedback);
   automate(masterParams.delayTone, scene => settings(scene).delayToneHz, 'spectral');
@@ -105,7 +102,6 @@ export function createSongMixGraph(ctx: BaseAudioContext, master: MasterChain, t
       const now = ctx.currentTime;
       for (const lane of automation) lane.param.cancelScheduledValues(now);
       for (const node of nodes) node.disconnect();
-      master.setFallbackSendsEnabled(false);
     },
   };
 }

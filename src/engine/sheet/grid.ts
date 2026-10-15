@@ -21,7 +21,10 @@ export interface RhythmicContext {
 }
 
 export function culturalCyclePosition(barIndex: number, cycleLength: number): number {
-  const n = Math.max(1, Math.round(cycleLength || 1));
+  if (!Number.isInteger(barIndex) || !Number.isInteger(cycleLength) || cycleLength < 1) {
+    throw new Error(`Invalid authored cycle position: bar=${barIndex}, cycle=${cycleLength}`);
+  }
+  const n = cycleLength;
   return ((barIndex % n) + n) % n;
 }
 
@@ -42,6 +45,8 @@ export interface NativeSlice {
   fractionalPositions: number[];
   /** Whether durations came from authored pattern data rather than the default one-step fill. */
   durationsAuthored: boolean;
+  /** Per-attack authored gate flags when a pattern mixes explicit and inferred lengths. */
+  durationAuthoredByOnset: boolean[];
 }
 
 export function sliceBarNative(
@@ -58,19 +63,25 @@ export function sliceBarNative(
   fractionalSteps?: number[],
   pitches?: Array<PatternEvent['pitch']>,
   notations?: Array<PatternEvent['notation']>,
+  durationAuthoredByOnset?: boolean[],
 ): NativeSlice {
-  const declared = Math.max(1, subdivisions || 16);
+  if (!Number.isInteger(subdivisions) || subdivisions < 1
+    || !Number.isInteger(cycleLength) || cycleLength < 1
+    || !Number.isInteger(barInCycle) || barInCycle < 0) {
+    throw new Error(`Invalid authored pattern grid: subdivisions=${subdivisions}, cycle=${cycleLength}, bar=${barInCycle}`);
+  }
+  const declared = subdivisions;
   const authoredMax = onsets.length ? Math.max(...onsets.map((onset, i) => fractionalSteps?.[i] ?? onset)) : -1;
   const total = authoredMax >= declared ? Math.floor(authoredMax) + 1 : declared;
 
-  let cycleBars = Math.max(1, Math.round(cycleLength || 1));
+  let cycleBars = cycleLength;
   if (total > declared) cycleBars = Math.max(cycleBars, Math.ceil(total / declared));
   const stepsPerBar = Math.max(1, Math.round(total / cycleBars));
 
   const from = (barInCycle % cycleBars) * stepsPerBar;
   const keepP: Array<PatternEvent['pitch']> = [];
   const keepN: Array<PatternEvent['notation']> = [];
-  const keepO: number[] = [], keepA: number[] = [], keepV: number[] = [], keepD: number[] = [], keepM: number[] = [], keepH: string[] = [], keepT: string[] = [], keepF: number[] = [];
+  const keepO: number[] = [], keepA: number[] = [], keepV: number[] = [], keepD: number[] = [], keepM: number[] = [], keepH: string[] = [], keepT: string[] = [], keepF: number[] = [], keepDA: boolean[] = [];
 
   onsets.forEach((o, i) => {
     const exactStep = fractionalSteps?.[i] ?? o;
@@ -84,6 +95,7 @@ export function sliceBarNative(
     keepA.push(accents?.[i] ?? 0.78);
     keepV.push(velocities?.[i] ?? 0.78);
     keepD.push(durations?.[i] ?? 1);
+    keepDA.push(durationAuthoredByOnset?.[i] ?? (durations !== undefined));
     keepM.push(micro?.[i] ?? 0);
     keepH.push(hitTypes?.[i] ?? '');
     keepT.push(articulations?.[i] ?? '');
@@ -91,16 +103,19 @@ export function sliceBarNative(
     keepN.push(notations?.[i]);
   });
 
-  return { onsets: keepO, accents: keepA, velocities: keepV, durations: keepD, microtiming: keepM, hitTypes: keepH, articulations: keepT, pitches: keepP, notations: keepN, stepsPerBar, fractionalPositions: keepF, durationsAuthored: durations !== undefined };
+  return { onsets: keepO, accents: keepA, velocities: keepV, durations: keepD, microtiming: keepM, hitTypes: keepH, articulations: keepT, pitches: keepP, notations: keepN, stepsPerBar, fractionalPositions: keepF, durationsAuthored: keepDA.length > 0 && keepDA.every(Boolean), durationAuthoredByOnset: keepDA };
 }
 
 /** Quarter-note beats in one bar of the given time signature. */
 export function beatsPerBarOf(timeSignature: string): number {
-  const m = /^(\d+)\s*\/\s*(\d+)$/.exec((timeSignature || '4/4').trim());
-  if (!m) return 4;
+  if (typeof timeSignature !== 'string') throw new Error(`Missing authored time signature: ${String(timeSignature)}`);
+  const m = /^(\d+)\s*\/\s*(\d+)$/.exec(timeSignature.trim());
+  if (!m) throw new Error(`Invalid authored time signature: ${timeSignature}`);
   const num = parseInt(m[1], 10);
   const den = parseInt(m[2], 10);
-  if (!num || !den) return 4;
+  if (!Number.isInteger(num) || !Number.isInteger(den) || num < 1 || den < 1) {
+    throw new Error(`Invalid authored time signature: ${timeSignature}`);
+  }
   // compound meters are counted in dotted beats, which is how they are felt
   if (den === 8 && num % 3 === 0 && num > 3) return num / 2;
   return (num * 4) / den;

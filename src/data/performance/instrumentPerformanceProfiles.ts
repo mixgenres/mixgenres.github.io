@@ -285,7 +285,13 @@ function profileFor(d: InstrumentDef, genre: string, authored: boolean): GenrePe
     idiomatic: authored,
     roles,
     gestureIds: selected,
-    preferredGestures: (preferred.length ? preferred : selected).slice(0, Math.min(8, (preferred.length ? preferred : selected).length)),
+    // Physical capability is not a genre preference. A derived profile may
+    // expose every playable gesture, but only authored/curated genre cues are
+    // preferred during performance.
+    // Keep every authored/curated genre cue in the preference set. Truncating
+    // this list to eight silently demoted later instrument techniques in
+    // phrase selection even though they remained physically playable.
+    preferredGestures: preferred,
     density: { min: isPerc ? 0.4 : 0.18, max: densityMax, accentContrast: /marcato|funk|salsa|timba|tango/.test(`${genre} ${selected.join(' ')}`) ? 1.35 : 1.18 },
     timing,
     register: {

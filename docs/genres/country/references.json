@@ -3,7 +3,7 @@
   "status": "Five or more streaming candidates are listed for every catalog Country style. Listening comparison and timecodes are pending for all styles; these links are not an audition record.",
   "references": [
     {
-      "styleId": "bluegrass",
+      "styleId": "country-bluegrass",
       "compare": [
         "forward, forward-reverse and alternating-thumb banjo rolls, including T/I/M picking order",
         "mandolin chop attack on beats two and four against guitar boom-chuck",
@@ -45,7 +45,7 @@
       ]
     },
     {
-      "styleId": "honky-tonk",
+      "styleId": "country-honky-tonk",
       "compare": [
         "shuffle bass-and-snare pocket and the amount of swing in the subdivision",
         "Ray Price’s Crazy Arms: Tommy Jackson’s fiddle intro, Buddy Killen’s four-beat bass, and the later Ray Price 4/4 shuffle",
@@ -62,7 +62,7 @@
       ]
     },
     {
-      "styleId": "bakersfield",
+      "styleId": "country-bakersfield",
       "compare": [
         "bright, clipped electric-guitar attacks and the backbeat’s snare weight",
         "fiddle and steel answering in short gaps around the lead vocal",
@@ -79,7 +79,7 @@
       ]
     },
     {
-      "styleId": "outlaw",
+      "styleId": "country-outlaw",
       "compare": [
         "loose live-band pocket, especially the relationship between kick, snare and bass",
         "electric-guitar and steel-guitar tone, sustain and placement around the vocal",
@@ -96,7 +96,7 @@
       ]
     },
     {
-      "styleId": "western-swing",
+      "styleId": "country-western-swing",
       "compare": [
         "four-beat swing bounce and the walking or two-beat bass underneath it",
         "fiddle and steel trading lead phrases instead of doubling every melody",
@@ -113,7 +113,7 @@
       ]
     },
     {
-      "styleId": "americana",
+      "styleId": "country-americana",
       "compare": [
         "roots-band instrumentation and the amount of space left around the lyric",
         "organic drum and bass weight, room sound, and how the mix handles dynamic builds",
@@ -130,7 +130,7 @@
       ]
     },
     {
-      "styleId": "country-pop",
+      "styleId": "country-country-pop",
       "compare": [
         "layered vocal production and how the lead stays clear over the chorus stack",
         "kick and snare impact, bass support and contrast between verse and chorus density",

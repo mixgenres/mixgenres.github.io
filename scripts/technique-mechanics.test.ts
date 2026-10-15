@@ -15,6 +15,7 @@ import { PATTERNS_BY_ID } from '../src/data/genres';
 import { INSTRUMENTS_BY_ID } from '../src/engine/lookup/instruments';
 import { techniqueMechanics } from '../src/data/performance/techniqueMechanics';
 import { getInstrumentPerformanceProfile } from '../src/engine/lookup/performance';
+import { noteLengthBeats, voiceProfile } from '../src/engine/sheet/instrumentRoles';
 import { resolveStyle } from '../src/engine/style/resolve';
 import { calibratedTechniqueGestures, styleTechniqueExpectation } from '../src/engine/style/performance-expectations';
 import { optimizePerformanceByPhraseAndSong } from '../src/engine/band/songPhrasing';
@@ -28,6 +29,27 @@ const note = (technique: string, midi = 60, directions?: PatternEvent['notation'
 });
 const performance = (instrument: string, notes: PerfNote[]): Performance => ({
   trackInfo: { p: { instrumentId: instrument, role: 'lead' } }, notes, ccs: [], bars: [], duration: 1, tail: .5, blends: {},
+});
+
+test('descriptive ring metadata does not cap generated note gates', () => {
+  const piano = voiceProfile('piano');
+  const timbales = voiceProfile('timbales');
+  assert.equal(piano.ring, 3.2);
+  assert.equal(timbales.ring, 0.7);
+  assert.ok(Math.abs(noteLengthBeats(piano, 6, 10, 'tenuto') - 7.8) < 1e-9,
+    'a long, held piano phrase reaches its articulation-scaled written length');
+  assert.ok(Math.abs(noteLengthBeats(timbales, 1, 1.7, 'tone') - 1) < 1e-9,
+    'a percussive note gate follows its written beat length rather than a generic ring ceiling');
+  assert.ok(Math.abs(noteLengthBeats(piano, 1, 1.7, 'staccato') - 0.42) < 1e-9,
+    'explicit short articulation remains effective after removing the ring ceiling');
+  assert.ok(Math.abs(noteLengthBeats(piano, 1, 1.7, 'legato') - 1.3) < 1e-9,
+    'legato keeps its authored overlap length');
+  for (const nonLengthGesture of ['bachi', 'alternate-pluck', 'accent', 'marcato', 'heavy', 'mute', 'muted', 'cup-mute', 'palm-mute']) {
+    assert.equal(noteLengthBeats(piano, 0.75, 2, nonLengthGesture), 0.75,
+      `${nonLengthGesture} changes attack, color, or energy without silently shortening the note`);
+  }
+  assert.equal(noteLengthBeats(piano, 0.75, 2, 'damp'), 0.315,
+    'an explicit damping articulation can still shorten the key hold');
 });
 
 test('score gestures map to sample actions without preparing a physical voice per note', () => {
@@ -163,7 +185,7 @@ test('playback adapts style techniques through a part lens and atypical role', (
   });
   const notes = Array.from({ length: 16 }, (_, i): PerfNote => ({
     trackId: guitar.id, bar: region.start + Math.floor(i / 4), time: i * .12, dur: .2,
-    midi: 60 + i % 5, vel: 70, gestureCode: codeForGesture('tone'), hitFunctionCode: 0,
+    midi: 60 + i % 5, vel: 70, harmonicChord: 'C', gestureCode: codeForGesture('tone'), hitFunctionCode: 0,
     accent: .6, authoredTechnique: false, attackId: `lens-${i}`,
   }));
   const perf: Performance = { trackInfo: { [guitar.id]: { instrumentId: 'guitar', role: 'lead' } }, notes,

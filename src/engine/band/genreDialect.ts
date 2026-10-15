@@ -4,6 +4,40 @@ import { getCanonicalStyle, getStyle } from '../../engine/style/registry';
 
 import type { InstrumentDialect, PerformanceMode } from '../../data/styles/contracts';
 import { RELATED_DIALECT_INSTRUMENTS } from '../../data/performance/dialects/inheritance';
+import { DIALECTS } from '../../data/performance/dialects';
+
+const SOUND_DIALECT_FIELDS = [
+  'pluckPositionOverride', 'bowPressureOverride', 'contactPointOverride', 'decayMultiplier',
+  'brightnessMultiplier', 'bodyMultiplier', 'micProximityPreset', 'bendGlideMs', 'courses',
+  'sympatheticStrings', 'bodyConstruction', 'excitationType', 'variantId', 'patchId',
+  'samplePalette', 'muteType', 'registration', 'rotary', 'drive',
+] as const satisfies readonly (keyof InstrumentDialect)[];
+
+/**
+ * Older authored sound setups remain useful where a catalog style has not yet
+ * replaced them. Only carry sound/timbre metadata forward: their old technique
+ * allow-lists must not gate a newer style's playable teaching material.
+ */
+function legacySoundDialect(instrumentId: string, worldId: string, styleId: string): Partial<InstrumentDialect> {
+  const world = worldId.toLowerCase();
+  const style = styleId.toLowerCase();
+  const entries = Object.entries(DIALECTS).flatMap(([key, dialect]) => {
+    const prefix = `${instrumentId}:`;
+    if (!key.startsWith(prefix)) return [];
+    const context = key.slice(prefix.length).toLowerCase();
+    const score = context === style ? 0
+      : context === world ? 1
+        : style.startsWith(`${context}-`) || style.includes(`-${context}-`) || style.endsWith(`-${context}`) ? 2
+          : context.startsWith(`${world}-`) ? 3
+            : world === 'indian-classical' && context === 'hindustani' ? 3
+              : -1;
+    return score < 0 ? [] : [{ dialect, score }];
+  }).sort((a, b) => a.score - b.score);
+  const source = entries[0]?.dialect;
+  if (!source) return {};
+  return Object.fromEntries(SOUND_DIALECT_FIELDS.flatMap(field =>
+    source[field] === undefined ? [] : [[field, source[field]]])) as Partial<InstrumentDialect>;
+}
 
 function instrumentNativeDialect(instrumentId: string, worldId: string, styleId: string): InstrumentDialect {
   const definition = INSTRUMENTS_BY_ID[instrumentId];
@@ -59,6 +93,7 @@ export function resolveDialect(
     return resolved;
   };
   const style = styleId ? getStyle(styleId) as (ReturnType<typeof getStyle> & { instrumentDialects?: Record<string, Partial<InstrumentDialect>> }) | undefined : undefined;
+  const legacySound = legacySoundDialect(normId, worldId, styleId);
   let authored = (role ? style?.instrumentDialects?.[`${normId}:${role}`] : undefined) ?? style?.instrumentDialects?.[normId] ?? style?.instrumentDialects?.[instrumentId];
   const weightedPreferences: Record<string, number> = {};
   for (const [technique, strength] of Object.entries(authored?.techniquePreferences ?? {})) weightedPreferences[technique] = strength;
@@ -84,7 +119,7 @@ export function resolveDialect(
   if (authored || Object.keys(weightedPreferences).length) {
     const inherited = resolveDialect(instrumentId, worldId, '', role)
       ?? instrumentNativeDialect(instrumentId, worldId, styleId);
-    const merged = mergeDialectMetadata({ ...inherited,
+    const merged = mergeDialectMetadata({ ...inherited, ...legacySound,
       id: `${normId}:${styleId || worldId}`, instrumentId: normId, name: `${INSTRUMENTS_BY_ID[normId].name} (${styleId || worldId})`,
     }, authored ?? {});
     if (Object.keys(weightedPreferences).length) {
@@ -106,6 +141,7 @@ export function resolveDialect(
             ...instrumentNativeDialect(normId, worldId, styleId),
             id: `${normId}:${worldId}`,
             name: `${INSTRUMENTS_BY_ID[normId].name} (${worldId})`,
+            ...legacySound,
             ...exact,
           });
         }
@@ -123,6 +159,7 @@ export function resolveDialect(
               ...instrumentNativeDialect(normId, worldId, styleId),
               id: `${normId}:${worldId}`,
               name: `${INSTRUMENTS_BY_ID[normId].name} (${worldId})`,
+              ...legacySound,
               ...matched,
             });
           }
@@ -136,6 +173,7 @@ export function resolveDialect(
             id: `${def.family}:${worldId}`,
             name: `${def.name} (${worldId} ${def.family})`,
             family: def.family,
+            ...legacySound,
             ...contract.instrumentDialects[def.family],
           });
         }
@@ -143,7 +181,7 @@ export function resolveDialect(
     }
   }
 
-  return resolveVariants(instrumentNativeDialect(normId, worldId, styleId));
+  return resolveVariants({ ...instrumentNativeDialect(normId, worldId, styleId), ...legacySound });
 }
 
 /** Production mode comes from the authored world contract, never a name regex. */

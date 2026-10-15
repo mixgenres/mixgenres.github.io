@@ -27,16 +27,22 @@ import { FORM_INTENSITY_TO_ENERGY, ENERGY_TO_FORM_INTENSITY, ENERGY_LABELS } fro
  */
 
 export function energyForFormIntensity(intensity: FormIntensity | undefined): SectionEnergy {
-  return FORM_INTENSITY_TO_ENERGY[intensity ?? 'medium'] ?? 3;
+  if (!intensity || FORM_INTENSITY_TO_ENERGY[intensity] === undefined) {
+    throw new Error(`Missing or unknown authored form intensity: ${String(intensity)}`);
+  }
+  return FORM_INTENSITY_TO_ENERGY[intensity];
 }
 
 export function formIntensityForEnergy(energy: SectionEnergy | undefined): FormIntensity {
-  return ENERGY_TO_FORM_INTENSITY[clampEnergy(energy ?? 3)];
+  if (energy === undefined || ENERGY_TO_FORM_INTENSITY[energy] === undefined) {
+    throw new Error(`Missing or invalid section energy: ${String(energy)}`);
+  }
+  return ENERGY_TO_FORM_INTENSITY[energy];
 }
 
-export function clampEnergy(value: number | undefined): SectionEnergy {
-  const n = Math.round(Number(value));
-  if (!Number.isFinite(n)) return 3;
+export function clampEnergy(value: number): SectionEnergy {
+  if (!Number.isFinite(value)) throw new Error(`Cannot clamp invalid section energy: ${String(value)}`);
+  const n = Math.round(value);
   return Math.max(1, Math.min(5, n)) as SectionEnergy;
 }
 
@@ -44,9 +50,14 @@ export function clampEnergy(value: number | undefined): SectionEnergy {
  * The authoritative read of a section's weight. `energy` wins; `intensity` is
  * only consulted for songs written before the migration.
  */
-export function energyOf(region: Region | undefined): SectionEnergy {
-  if (!region) return 3;
-  if (region.energy !== undefined) return clampEnergy(region.energy);
+export function energyOf(region: Region): SectionEnergy {
+  if (region.energy !== undefined) {
+    if (!Number.isInteger(region.energy) || region.energy < 1 || region.energy > 5) {
+      throw new Error(`Section ${region.id} has invalid authored energy: ${region.energy}`);
+    }
+    return region.energy;
+  }
+  if (!region.intensity) throw new Error(`Section ${region.id} has no authored energy or legacy intensity`);
   return energyForFormIntensity(region.intensity);
 }
 
@@ -54,12 +65,14 @@ export function energyOf(region: Region | undefined): SectionEnergy {
  * A 0..1 scalar for the parts of the engine that want a continuous shape
  * (section curves, drive, thinning). Derived — never stored.
  */
-export function shapeScalarOf(region: Region | undefined): number {
+export function shapeScalarOf(region: Region): number {
   return (energyOf(region) - 1) / 4;
 }
 
 export function energyMappingFor(contract: WorldContract, energy: SectionEnergy): EnergyMapping {
-  return contract.energyMappings[clampEnergy(energy)] ?? contract.energyMappings[3];
+  const mapping = contract.energyMappings[energy];
+  if (!mapping) throw new Error(`World contract is missing energy mapping ${energy}`);
+  return mapping;
 }
 
 /**
@@ -75,13 +88,15 @@ export function activityFor(contract: WorldContract, energy: SectionEnergy): num
 export function energyForActivity(contract: WorldContract, activity: number): SectionEnergy {
   const target = Math.max(0, Math.min(1, activity));
   const levels: SectionEnergy[] = [1, 2, 3, 4, 5];
-  return levels
+  const match = levels
     .slice()
     .sort(
       (a, b) =>
         Math.abs(energyMappingFor(contract, a).activity - target) -
         Math.abs(energyMappingFor(contract, b).activity - target),
-    )[0] ?? 3;
+    )[0];
+  if (match === undefined) throw new Error('No authored energy level can represent the requested activity');
+  return match;
 }
 
 

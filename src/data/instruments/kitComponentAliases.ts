@@ -1,4 +1,5 @@
 export const KIT_COMPONENT_MIDI_ALIASES: Array<[RegExp, string[]]> = [
+  [/\bclap\b|\bhand.?clap\b/, ['hand-clap']],
   [/kick|bass.?drum|\bbd\b|bombo|grave/, ['kick']],
   [/snare|\bsd\b|backbeat/, ['snare-center', 'snare']],
   [/rimshot/, ['snare-rimshot']],

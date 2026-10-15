@@ -5,7 +5,7 @@
   "source": "Apple Music track pages. No reference audio downloaded.",
   "styles": [
     {
-      "styleId": "jiangnan-sizhu",
+      "styleId": "chinese-jiangnan-sizhu",
       "compare": ["silk-and-bamboo chamber balance", "ornamented melodic exchange", "flexible phrase timing"],
       "recordings": [
         {"title": "Yue Luo", "artist": "Lingling Yu & Guo Gan", "url": "https://music.apple.com/us/album/yue-luo-the-moon-sets-la-lune-se-couche/525622449?i=525622691", "timecodes": []},
@@ -16,7 +16,7 @@
       ]
     },
     {
-      "styleId": "guqin",
+      "styleId": "chinese-guqin",
       "compare": ["solo guqin decay and touch", "harmonics and left-hand pitch inflection", "rubato phrase shaping"],
       "recordings": [
         {"title": "Flowing Water (Liu Shui)", "artist": "Guan Pinghu", "url": "https://music.apple.com/us/song/268782722", "timecodes": []},
@@ -27,7 +27,7 @@
       ]
     },
     {
-      "styleId": "guzheng",
+      "styleId": "chinese-guzheng",
       "compare": ["right-hand pluck and tremolo", "left-hand bends and vibrato", "solo resonance and phrase pacing"],
       "recordings": [
         {"title": "Fighting the Typhoon", "artist": "Wang Changyuan", "url": "https://music.apple.com/us/song/114257234", "timecodes": []},
@@ -38,7 +38,7 @@
       ]
     },
     {
-      "styleId": "pipa",
+      "styleId": "chinese-pipa",
       "compare": ["pipa pick attack and tremolo", "solo virtuosity and phrase contrast", "instrument resonance without ensemble masking"],
       "recordings": [
         {"title": "Ambush on All Sides", "artist": "Deng Jiandong & Wang Jianhua", "url": "https://music.apple.com/us/song/1606675266", "timecodes": []},
@@ -49,7 +49,7 @@
       ]
     },
     {
-      "styleId": "jingju",
+      "styleId": "chinese-jingju",
       "compare": ["jinghu-led pitch support", "sung line against percussion cues", "opera ensemble balance and dramatic pacing"],
       "recordings": [
         {"title": "The Drunken Concubine", "artist": "Mei Lanfang", "url": "https://music.apple.com/us/song/598363963", "timecodes": []},
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "styleId": "cantonese-ensemble",
+      "styleId": "chinese-cantonese-ensemble",
       "compare": ["Cantonese ensemble timbres and role balance", "bright melodic lead against plucked accompaniment", "ornamented phrases and rhythmic lift"],
       "recordings": [
         {"title": "The Lion Dance", "artist": "Guangdong Music ensemble", "url": "https://music.apple.com/us/song/1080734514", "timecodes": []},
@@ -71,7 +71,7 @@
       ]
     },
     {
-      "styleId": "chaozhou",
+      "styleId": "chinese-chaozhou",
       "compare": ["Chaozhou xianshi string-ensemble texture", "regional zheng and bowed timbres", "ornamentation and light/heavy mode inflection"],
       "recordings": [
         {"title": "Jackdaw Playing in the Water (Chaozhou Music)", "artist": "Chen Qijun", "url": "https://music.apple.com/us/song/1602338794", "timecodes": []},
@@ -82,7 +82,7 @@
       ]
     },
     {
-      "styleId": "suona-chuida",
+      "styleId": "chinese-suona-chuida",
       "compare": ["suona reed edge and breath phrasing", "suona against percussion and ensemble", "festival chuida energy and dynamic control"],
       "recordings": [
         {"title": "General's Command (Suona Music)", "artist": "Chinese ensemble", "url": "https://music.apple.com/us/song/1606675553", "timecodes": []},

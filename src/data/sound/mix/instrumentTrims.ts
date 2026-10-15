@@ -3,7 +3,7 @@ export const INSTRUMENT_MIX_TRIMS: Record<string, { electronic?: number; acousti
   // This compact SoundFont patch is a sustained vowel guide, not a recorded
   // singer. Keep it behind the band so the groove remains present while the
   // user follows the lead melody.
-  voice: { electronic: -5.5, acoustic: -5.5 },
+  voice: { electronic: -10.5, acoustic: -10.5 },
   'upright-bass': { electronic: 0, acoustic: -2.5 },
   bass: { electronic: 0, acoustic: -1.25 },
   piano: { acoustic: -0.8 },

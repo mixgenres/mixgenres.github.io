@@ -71,6 +71,10 @@ export function styleTheoryFor(styleId: string | undefined, genreId: string): Ge
   const base = getGenreTheory(genreId);
   const scaleFromWords = (value: string): GenreTheoryProfile['defaultScale'] => {
     const term = value.toLowerCase();
+    const ragaScale = term.match(/raga-(todi|yaman|jog|pilu|hamsadhwani|kalyani|sahana|behag)/)?.[0];
+    if (ragaScale) return ragaScale as GenreTheoryProfile['defaultScale'];
+    if (/dastgah.?shur/.test(term)) return 'dastgah-shur';
+    if (/avaz.?dashti/.test(term)) return 'avaz-dashti';
     if (term === 'major') return 'ionian';
     if (term === 'minor') return 'aeolian';
     if (/phrygian.?dominant|hijaz/.test(term)) return 'phrygian-dominant';

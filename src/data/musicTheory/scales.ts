@@ -5,6 +5,7 @@ export const MINOR_KEY_INTERVALS = [0, 2, 3, 5, 7, 8, 10];
 export const SCALE_MODE_INTERVALS: Record<string, number[]> = {
   'major': [0, 2, 4, 5, 7, 9, 11],
   'ionian': [0, 2, 4, 5, 7, 9, 11],
+  'minor': MINOR_KEY_INTERVALS,
   'natural-minor': [0, 2, 3, 5, 7, 8, 10],
   'aeolian': [0, 2, 3, 5, 7, 8, 10],
   'harmonic-minor': [0, 2, 3, 5, 7, 8, 11],
@@ -28,6 +29,21 @@ export const SCALE_MODE_INTERVALS: Record<string, number[]> = {
   'whole-tone': [0, 2, 4, 6, 8, 10],
   'chromatic': Array.from({ length: 12 }, (_, i) => i),
   'chromatic-enclosure': Array.from({ length: 12 }, (_, i) => i),
+  // Representative raga pitch collections used by the authored Indian
+  // Classical studies. These are note inventories; phrase grammar and
+  // gamaka/meend still determine how the notes should be approached.
+  'raga-todi': [0, 1, 3, 6, 7, 8, 11],
+  'raga-yaman': [0, 2, 4, 6, 7, 9, 11],
+  'raga-jog': [0, 3, 4, 5, 7, 10],
+  'raga-pilu': [0, 2, 3, 4, 5, 7, 8, 9, 10, 11],
+  'raga-hamsadhwani': [0, 2, 4, 7, 11],
+  'raga-kalyani': [0, 2, 4, 6, 7, 9, 11],
+  'raga-sahana': [0, 2, 4, 5, 7, 9, 10],
+  'raga-behag': [0, 2, 4, 5, 6, 7, 9, 11],
+  // Integer MIDI note inventories; Persian koron intervals are supplied by
+  // each style's tuning system, not flattened into these semitone collections.
+  'dastgah-shur': [0, 2, 3, 5, 7, 8, 10],
+  'avaz-dashti': [0, 2, 3, 5, 7, 8, 10],
 };
 
 export const IONIAN     = [0, 2, 4, 5, 7, 9, 11];

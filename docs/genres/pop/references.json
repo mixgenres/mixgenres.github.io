@@ -1,0 +1,152 @@
+{
+  "genreId": "pop",
+  "reviewed": "2026-10-15",
+  "status": "Five distinct streaming recording candidates are listed for all nine Pop styles. Listening comparisons and useful timecodes remain pending; these are research candidates, not verified sonic matches.",
+  "source": "Apple Music individual track pages and displayed artist/release metadata. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "pop-contemporary",
+      "compare": [
+        "how the verse builds toward a clear pre-chorus and chorus lift",
+        "lead-vocal phrasing, doubles and response layers against the instrumental hook",
+        "the balance between programmed and live-feeling drums, bass, guitars and keys",
+        "section changes, fills and dropouts that keep the arrangement moving"
+      ],
+      "recordings": [
+        { "title": "Anti-Hero", "artist": "Taylor Swift", "url": "https://music.apple.com/us/song/1689131533", "timecodes": [] },
+        { "title": "Blinding Lights", "artist": "The Weeknd", "url": "https://music.apple.com/us/song/1550877898", "timecodes": [] },
+        { "title": "As It Was", "artist": "Harry Styles", "url": "https://music.apple.com/us/song/1615585008", "timecodes": [] },
+        { "title": "Levitating (feat. DaBaby)", "artist": "Dua Lipa", "url": "https://music.apple.com/us/song/1552269087", "timecodes": [] },
+        { "title": "Flowers", "artist": "Miley Cyrus", "url": "https://music.apple.com/us/song/1702906535", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "pop-dance-pop",
+      "compare": [
+        "four-on-the-floor kick weight and how bass locks to the dance pulse",
+        "the contrast between clipped verse parts and wide, stacked chorus hooks",
+        "synth, string and vocal layers arranged around a strong central groove",
+        "pre-chorus tension, chorus release and instrumental transitions"
+      ],
+      "recordings": [
+        { "title": "Vogue", "artist": "Madonna", "url": "https://music.apple.com/us/song/160382540", "timecodes": [] },
+        { "title": "Toxic", "artist": "Britney Spears", "url": "https://music.apple.com/us/song/337999738", "timecodes": [] },
+        { "title": "Poker Face", "artist": "Lady Gaga", "url": "https://music.apple.com/us/song/1582544785", "timecodes": [] },
+        { "title": "We Found Love (feat. Calvin Harris)", "artist": "Rihanna", "url": "https://music.apple.com/us/song/1440758945", "timecodes": [] },
+        { "title": "Don't Start Now", "artist": "Dua Lipa", "url": "https://music.apple.com/us/song/1826561634", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "pop-synth-pop",
+      "compare": [
+        "sequenced bass ostinato against the drum machine and live percussion accents",
+        "bright, identifiable synthesizer hooks and chord voicings",
+        "how the vocal melody sits above the repeating synth figures without being masked",
+        "changes in density, register and texture between verse, chorus and instrumental hook"
+      ],
+      "recordings": [
+        { "title": "Take On Me", "artist": "a-ha", "url": "https://music.apple.com/us/song/1843380378", "timecodes": [] },
+        { "title": "Don't You Want Me", "artist": "The Human League", "url": "https://music.apple.com/us/song/1443149553", "timecodes": [] },
+        { "title": "West End Girls", "artist": "Pet Shop Boys", "url": "https://music.apple.com/us/song/1321155903", "timecodes": [] },
+        { "title": "Just Can't Get Enough", "artist": "Depeche Mode", "url": "https://music.apple.com/us/song/665413042", "timecodes": [] },
+        { "title": "The Mother We Share", "artist": "CHVRCHES", "url": "https://music.apple.com/us/song/1771703112", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "pop-indie-pop",
+      "compare": [
+        "guitar-hook articulation and how the arrangement balances rough edges with pop clarity",
+        "bass and drum interplay beneath a compact, singable vocal melody",
+        "small instrumental variations and fills that keep repeated sections lively",
+        "dynamic contrast between restrained verses and larger choruses"
+      ],
+      "recordings": [
+        { "title": "Electric Feel", "artist": "MGMT", "url": "https://music.apple.com/us/song/1566940163", "timecodes": [] },
+        { "title": "Pumped Up Kicks", "artist": "Foster the People", "url": "https://music.apple.com/us/song/1739141546", "timecodes": [] },
+        { "title": "Royals", "artist": "Lorde", "url": "https://music.apple.com/us/song/1443285533", "timecodes": [] },
+        { "title": "A-Punk", "artist": "Vampire Weekend", "url": "https://music.apple.com/us/song/270425151", "timecodes": [] },
+        { "title": "Lisztomania", "artist": "Phoenix", "url": "https://music.apple.com/us/song/1771709876", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "pop-dream-pop",
+      "compare": [
+        "the balance of blurred, sustained guitar texture against a distinct pulse and bass foundation",
+        "vocal distance, layered harmony and how the melody stays intelligible in the ambient field",
+        "long decays and swells that build atmosphere without masking attacks or low-end motion",
+        "how phrase density and instrumental weight change across the song"
+      ],
+      "recordings": [
+        { "title": "Heaven or Las Vegas", "artist": "Cocteau Twins", "url": "https://music.apple.com/us/song/258200075", "timecodes": [] },
+        { "title": "Space Song", "artist": "Beach House", "url": "https://music.apple.com/us/song/997914096", "timecodes": [] },
+        { "title": "Alison", "artist": "Slowdive", "url": "https://music.apple.com/us/song/433401786", "timecodes": [] },
+        { "title": "Fade Into You", "artist": "Mazzy Star", "url": "https://music.apple.com/us/song/1764990162", "timecodes": [] },
+        { "title": "For Love", "artist": "Lush", "url": "https://music.apple.com/us/song/311188082", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "pop-city-pop",
+      "compare": [
+        "electric-piano and guitar chord color, including extensions and smooth voice leading",
+        "melodic bass movement under a relaxed, tightly played drum groove",
+        "the placement of guitar, keys and vocal phrases in the stereo field",
+        "instrumental fills and arrangement changes that support the song's long-form flow"
+      ],
+      "recordings": [
+        { "title": "Plastic Love", "artist": "Mariya Takeuchi", "url": "https://music.apple.com/us/song/1591437487", "timecodes": [] },
+        { "title": "Mayonaka No Door ~Stay with Me", "artist": "Miki Matsubara", "url": "https://music.apple.com/us/song/1859518368", "timecodes": [] },
+        { "title": "Tokai", "artist": "Taeko Onuki", "url": "https://music.apple.com/us/song/1481224001", "timecodes": [] },
+        { "title": "Remember Summer Days (Bonus Track)", "artist": "Anri", "url": "https://music.apple.com/us/song/283306782", "timecodes": [] },
+        { "title": "Summer Connection", "artist": "Taeko Onuki", "url": "https://music.apple.com/us/song/1481223998", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "pop-art-pop",
+      "compare": [
+        "uneven or shifting phrase lengths and the space created by unexpected rests",
+        "color-chord movement and unusual timbres that make each section change feel intentional",
+        "dramatic growth and release across verse, bridge and chorus instead of a uniform loop",
+        "lead-vocal phrasing and instrumental replies sharing the foreground"
+      ],
+      "recordings": [
+        { "title": "Running Up That Hill (A Deal With God) [2018 Remaster]", "artist": "Kate Bush", "url": "https://music.apple.com/us/song/1675560578", "timecodes": [] },
+        { "title": "Hyperballad", "artist": "Björk", "url": "https://music.apple.com/us/song/262483634", "timecodes": [] },
+        { "title": "Life on Mars? (2015 Remaster)", "artist": "David Bowie", "url": "https://music.apple.com/us/song/1016484812", "timecodes": [] },
+        { "title": "Los Ageless", "artist": "St. Vincent", "url": "https://music.apple.com/us/song/1440947068", "timecodes": [] },
+        { "title": "Paper Bag", "artist": "Fiona Apple", "url": "https://music.apple.com/us/song/270026040", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "pop-power-pop",
+      "compare": [
+        "bright, ringing guitar hooks and crunchy chord attacks that stay distinct from the vocal",
+        "driving bass and drums that push the chorus without flattening the verse dynamics",
+        "vocal doubles and harmonies that widen the hook while keeping its words clear",
+        "short forms, fills and turnarounds that give repeated hooks forward motion"
+      ],
+      "recordings": [
+        { "title": "September Gurls", "artist": "Big Star", "url": "https://music.apple.com/us/song/1469585306", "timecodes": [] },
+        { "title": "Go All The Way", "artist": "Raspberries", "url": "https://music.apple.com/us/song/1704757412", "timecodes": [] },
+        { "title": "Surrender", "artist": "Cheap Trick", "url": "https://music.apple.com/us/song/300109384", "timecodes": [] },
+        { "title": "My Sharona", "artist": "The Knack", "url": "https://music.apple.com/us/song/716268684", "timecodes": [] },
+        { "title": "Stacy's Mom", "artist": "Fountains of Wayne", "url": "https://music.apple.com/us/song/712721787", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "pop-maximal-idol-pop",
+      "compare": [
+        "dense, tightly separated synth hooks and programmed rhythm layers without masking the lead",
+        "the handoff between rap-like verse delivery and sung or stacked chorus vocals",
+        "abrupt section, texture and register changes, including dance-break dropouts and returns",
+        "group-vocal doubles, unison accents and backing responses against bass and drum impact"
+      ],
+      "recordings": [
+        { "title": "Lucifer", "artist": "SHINee", "url": "https://music.apple.com/us/song/854892275", "timecodes": [] },
+        { "title": "I Got a Boy", "artist": "Girls' Generation", "url": "https://music.apple.com/us/song/905850558", "timecodes": [] },
+        { "title": "BANG BANG BANG", "artist": "BIGBANG", "url": "https://music.apple.com/us/song/1314237014", "timecodes": [] },
+        { "title": "FANCY", "artist": "TWICE", "url": "https://music.apple.com/us/song/1555390187", "timecodes": [] },
+        { "title": "Idol", "artist": "YOASOBI", "url": "https://music.apple.com/us/song/1707581765", "timecodes": [] }
+      ]
+    }
+  ]
+}

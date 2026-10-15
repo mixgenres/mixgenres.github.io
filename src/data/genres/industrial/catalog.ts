@@ -30,7 +30,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "ebm",
       "name": "EBM",
-      "description": "EBM: EBM rigid sequenced bass and drum machine. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "EBM builds its force from a locked kick, dry sequenced bass, and short machine chords beneath a repeated chant. Keep the pulse precise, then create movement with clipped accents, held gaps, and changes in layer density.",
       "patterns": ["EBM rigid sequenced bass and drum machine"],
       "techniques": ["palm-mute", "staccato", "distortion", "roll", "pitch-bend", "filter-sweep", "bend", "accent", "legato", "vibrato", "ghost", "open"],
       "harmony": ["E5", "G5", "F5"],
@@ -114,7 +114,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "early-industrial",
       "name": "Early Industrial",
-      "description": "Early Industrial: early industrial metallic pulses and tape interruptions. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Early Industrial makes form from scraped metal, tape noise, and unstable low pulses. Let interruptions, rough recording space, and sudden texture changes carry the phrase instead of filling every gap with a steady dance beat.",
       "patterns": ["early industrial metallic pulses and tape interruptions"],
       "techniques": ["palm-mute", "staccato", "distortion", "roll", "pitch-bend", "filter-sweep", "bend", "accent", "legato", "vibrato", "ghost", "open"],
       "harmony": ["E5", "G5", "F5"],
@@ -198,7 +198,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "industrial-dance",
       "name": "Industrial Dance",
-      "description": "Industrial Dance: industrial dance hard machine kick and stab. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Industrial Dance drives a hard four-on-the-floor kick and syncopated bass through riff and stab cycles. Change the repeated groove with noise or sample breaks, short hook phrases, and decisive drops.",
       "patterns": ["industrial dance hard machine kick and stab"],
       "techniques": ["palm-mute", "staccato", "distortion", "roll", "pitch-bend", "filter-sweep", "bend", "accent", "legato", "vibrato", "ghost", "open"],
       "harmony": ["E5", "G5", "F5"],
@@ -282,7 +282,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "industrial-rock",
       "name": "Industrial Rock",
-      "description": "Industrial Rock: industrial rock distorted riff and machine backbeat. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Industrial Rock pairs a distorted guitar-and-bass riff with a forceful kit and machine percussion. Alternate clipped stop-start figures with wider sustained hooks, using vocal gaps for mechanical fills and responses.",
       "patterns": ["industrial rock distorted riff and machine backbeat"],
       "techniques": ["palm-mute", "staccato", "distortion", "roll", "pitch-bend", "filter-sweep", "accent", "legato", "vibrato", "bend", "tight-palm-mute", "ghost", "open"],
       "harmony": ["E5", "G5", "F5"],
@@ -382,7 +382,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "industrial-metal",
       "name": "Industrial Metal",
-      "description": "Industrial Metal: industrial metal chug and mechanical double kick. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Industrial Metal locks palm-muted guitar and bass to a forceful kick and mechanical double-kick drive. Vary the chug with stops, unison accents, and riff changes; use synth and noise as pressure and texture rather than a constant melody loop.",
       "patterns": ["industrial metal chug and mechanical double kick"],
       "techniques": ["palm-mute", "staccato", "distortion", "roll", "pitch-bend", "filter-sweep", "accent", "legato", "vibrato", "bend", "tight-palm-mute", "ghost", "open"],
       "harmony": ["E5", "G5", "F5"],

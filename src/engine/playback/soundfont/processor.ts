@@ -22,7 +22,7 @@ class MixGenresSampleProcessor extends AudioWorkletProcessor {
   private alive = true;
   constructor(options?: AudioWorkletNodeOptions) {
     super(options);
-    this.runtime=new SampleRuntime(sampleRate, options?.processorOptions?.voiceCap ?? 512);
+    this.runtime=new SampleRuntime(sampleRate);
     this.port.onmessage=({data}:MessageEvent<SampleCommand>)=>{
       try {
         if(data.type==='bank') this.runtime.addBank(data.id,data.buffer);

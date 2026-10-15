@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { existsSync, readFileSync } from 'node:fs';
 import { GENRE_WORLDS, ALL_PATTERNS, PATTERNS_BY_ID } from '../src/data/genres';
 import { ALL_STYLES, getStyle } from '../src/engine/style/registry';
 import { songCatalog } from '../src/data/songs/catalog';
@@ -27,6 +28,40 @@ test('every full song has valid explicit metadata and retains the original refer
   }
   assert.deepEqual(parseRecordingForm('intro:4:1,verse:4:2').map(section => section.energy), [1, 2]);
   for (const form of ['intro:4:NaN', 'intro:4:2.5', 'intro:4:3:extra']) assert.throws(() => parseRecordingForm(form));
+});
+
+test('existing streaming reference lists use canonical catalog style IDs and distinct links', () => {
+  for (const world of GENRE_WORLDS) {
+    const path = `docs/genres/${world.id}/references.json`;
+    if (!existsSync(path)) continue;
+    const document = JSON.parse(readFileSync(path, 'utf8')) as {
+      styles?: Array<{ styleId: string; recordings?: Array<{ url: string }> }>;
+      references?: Array<{ styleId: string; recordings?: Array<{ url: string }> }>;
+    };
+    const rows = document.styles ?? document.references ?? [];
+    const catalogStyleIds = new Set(world.styleDefinitions.map(style => style.id));
+    for (const row of rows) {
+      assert.ok(catalogStyleIds.has(row.styleId), `${world.id}/${row.styleId} must match the canonical style ID`);
+      const urls = (row.recordings ?? []).map(recording => recording.url);
+      assert.ok(urls.length >= 5 && urls.length <= 8, `${world.id}/${row.styleId} needs 5–8 linked recordings`);
+      assert.equal(new Set(urls).size, urls.length, `${world.id}/${row.styleId} recordings must use distinct links`);
+    }
+  }
+});
+
+test('catalog cells without authored durations keep performer-derived gates',()=>{
+  const pattern=PATTERNS_BY_ID['afrobeat-classic-afrobeat-pattern-8-interlocking-guitar-and-horn-vamp-kit'];
+  assert(pattern,'the Afrobeat kit source cell remains in the pattern catalog');
+  assert.equal(pattern.durationGrid,undefined,
+    'an omitted duration is not converted into a synthetic one-step note-off');
+  assert(pattern.events?.every(event=>event.duration===undefined),
+    'pattern event metadata stays honest when no gate was authored');
+  const study=PATTERNS_BY_ID['afrobeat-classic-afrobeat-pattern-49-drums-foundation-pulse-study'];
+  assert(study,'the local foundation study is retained');
+  assert.equal(study.durationGrid,undefined,
+    'a derived pedagogy cell preserves the source cell’s missing gate instead of authoring a quarter-beat cap');
+  assert(study.events?.every(event=>event.duration===undefined),
+    'derived event metadata keeps gates performer-derived');
 });
 
 test('registry preserves complete cues, traits, meters, ownership and pattern events', () => {
@@ -214,6 +249,48 @@ test('every sample song part has distinct style-local teaching patterns', () => 
   }
 });
 
+test('Celtic jig patterns honor 6/8 tune phrasing and keep the bodhrán under the melody', () => {
+  const styleId = 'folk-celtic';
+  const source = (shortName: string, instrumentId: string) => {
+    const pattern = ALL_PATTERNS.find(candidate => candidate.shortName === shortName
+      && candidate.styleIds?.includes(styleId) && candidate.instruments?.includes(instrumentId));
+    assert.ok(pattern, `${instrumentId} needs the Celtic ${shortName} study`);
+    assert.equal(pattern.meter, '6/8');
+    assert.ok(pattern.events?.length, `${instrumentId}/${shortName} must retain its authored attacks`);
+    return pattern;
+  };
+
+  const violin = source('Jig eighths', 'violin');
+  const whistle = source('Whistle unison', 'tin-whistle');
+  const jigGrid = [0, 2, 4, 6, 8, 10];
+  assert.deepEqual(violin.onsetGrid, jigGrid, 'the fiddle plays all six eighth-note positions');
+  assert.deepEqual(whistle.onsetGrid, jigGrid, 'the whistle can double the fiddle tune in unison');
+
+  const guitar = source('Guitar pulse', 'guitar');
+  assert.deepEqual(guitar.onsetGrid, [0, 6], 'guitar marks the two dotted-quarter pulses instead of a constant offbeat loop');
+  const bouzouki = source('Bouzouki drone', 'bouzouki');
+  assert.deepEqual(bouzouki.onsetGrid, [0], 'bouzouki holds a quiet open-string color without doubling every guitar stroke');
+
+  const bodhran = source('Bodhrán pulse', 'bodhran');
+  assert.deepEqual(bodhran.onsetGrid, jigGrid);
+  assert.ok(bodhran.accentProfile, 'bodhrán dynamics need an authored two-pulse accent profile');
+  assert.ok(bodhran.accentProfile[0] > 0.85 && bodhran.accentProfile[3] > 0.75);
+  for (const index of [1, 2, 4, 5]) assert.ok(bodhran.accentProfile[index] < 0.6,
+    'the four connecting strokes remain light so they do not obscure the tune');
+
+  const turns = [
+    ['Fiddle turn', 'violin', 'ending'], ['Whistle pickup', 'tin-whistle', 'ending'],
+    ['Guitar pickup', 'guitar', 'transition'], ['Bouzouki answer', 'bouzouki', 'ending'],
+    ['Bodhrán roll', 'bodhran', 'ending'],
+  ] as const;
+  for (const [name, instrument, usage] of turns) {
+    const turn = source(name, instrument);
+    assert.ok(turn.sectionUsage?.includes(usage),
+      `${name} is a local strain or cadence gesture, not the same three-hit close on every part`);
+    assert.ok(!turn.description?.includes('neutral '), `${name} keeps its style-specific teaching description`);
+  }
+});
+
 test('phrase variations can develop arrangements while isolated drills remain teaching-only', () => {
   const variation = ALL_PATTERNS.find(pattern => pattern.styleIds?.includes('tango-canaro')
     && pattern.pedagogicalStudy === 'variation' && pattern.arrangementVariation);
@@ -274,6 +351,13 @@ test('short source anchors gain phrase re-entry variations while sustained beds 
     assert.ok(pattern.events![1].accent! < pattern.events![0].accent!,
       `${styleId}/${instrument} should keep the later re-entry secondary`);
   }
+
+  const industrialSynth = ALL_PATTERNS.find(pattern => pattern.styleIds?.includes('industrial-early-industrial')
+    && pattern.instruments?.includes('synth') && pattern.pedagogicalStudy === 'variation'
+    && pattern.shortName?.endsWith('re-entry'));
+  assert(industrialSynth, 'the Industrial synth keeps its local anchor re-entry study');
+  assert.deepEqual(industrialSynth.events?.map(event => event.duration), [2, 2],
+    'a re-entry retains its source note length instead of receiving a fixed 0.35-beat gate');
 
   for (const [styleId, instrument, role] of [
     ['ambient-organic-ambient', 'string-ensemble', 'texture'],

@@ -1,2 +1,2 @@
-/** Maximum tail budget used when selecting and caching SoundFont audio windows. */
-export const SOUNDFONT_RELEASE_RESERVE = 6;
+/** Small fallback when a note has no packaged per-key tail metadata. */
+export const SOUNDFONT_RELEASE_RESERVE = 0.05;

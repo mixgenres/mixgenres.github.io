@@ -131,7 +131,10 @@ export function buildStylePerformanceSchema(style: ResolvedStyle, instruments: s
   const out: Record<string, TechniqueExpectation> = {};
   for (const instrumentId of instruments) {
     const profile = getInstrumentPerformanceProfile(instrumentId);
-    out[instrumentId] = styleTechniqueExpectation(style, profile, profile.genreProfiles[style.primaryGenre]?.roles?.[0] ?? 'comp');
+    const role = Object.entries(style.calibration?.roles ?? {})
+      .find(([, assignment]) => assignment.preferredInstruments.includes(instrumentId))?.[0];
+    if (!role) throw new Error(`No authored ${style.id} role for performance instrument ${instrumentId}`);
+    out[instrumentId] = styleTechniqueExpectation(style, profile, role);
   }
   return {
     styleId: style.id,

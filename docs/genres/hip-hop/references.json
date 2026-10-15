@@ -1,0 +1,150 @@
+{
+  "genreId": "hip-hop",
+  "status": "Five streaming recording candidates are listed for each catalog Hip-Hop style. Listening comparison and useful timecodes are pending; these links are candidates, not an audition record.",
+  "references": [
+    {
+      "styleId": "hip-hop-boom-bap",
+      "compare": [
+        "kick/snare break placement and the pocket's swing against the bass line",
+        "sample-loop texture, chopped phrase edits and how the groove breathes between vocal bars",
+        "lead, scratches and instrumental replies taking turns without filling every gap",
+        "dry transient punch and a solid low end without flattening the break"
+      ],
+      "recordings": [
+        { "title": "Mass Appeal", "artist": "Gang Starr", "url": "https://music.apple.com/us/song/1440898125", "timecodes": [] },
+        { "title": "N.Y. State of Mind", "artist": "Nas", "url": "https://music.apple.com/us/song/869256495", "timecodes": [] },
+        { "title": "C.R.E.A.M. (Cash Rules Everything Around Me)", "artist": "Wu-Tang Clan", "url": "https://music.apple.com/us/song/269843734", "timecodes": [] },
+        { "title": "Sound of da Police", "artist": "KRS-One", "url": "https://music.apple.com/us/song/267252035", "timecodes": [] },
+        { "title": "They Reminisce Over You (T.R.O.Y.)", "artist": "Pete Rock & C.L. Smooth", "url": "https://music.apple.com/us/song/80450001", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "hip-hop-golden-age",
+      "compare": [
+        "multi-source sample collage, repeated loop edits and the balance of low-end and midrange",
+        "crew call-and-response, ad-libs and changes in vocal density across the form",
+        "breakbeat pocket, scratch accents and the way instrumental drops mark phrase boundaries",
+        "distinctive group character rather than one lead voice over an unchanging loop"
+      ],
+      "recordings": [
+        { "title": "Scenario", "artist": "A Tribe Called Quest", "url": "https://music.apple.com/us/song/1000799047", "timecodes": [] },
+        { "title": "Stakes Is High", "artist": "De La Soul", "url": "https://music.apple.com/us/song/1664601181", "timecodes": [] },
+        { "title": "Rebel Without a Pause", "artist": "Public Enemy", "url": "https://music.apple.com/us/song/1443639711", "timecodes": [] },
+        { "title": "Paid In Full", "artist": "Eric B. & Rakim", "url": "https://music.apple.com/us/song/1558765225", "timecodes": [] },
+        { "title": "The Bridge Is Over", "artist": "Boogie Down Productions", "url": "https://music.apple.com/us/song/1098851790", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "hip-hop-g-funk",
+      "compare": [
+        "elastic bass and relaxed kick/snare placement, including how the backbeat sits behind the beat",
+        "long portamento synth whistle phrases against clipped keyboard and guitar accents",
+        "sung hooks, stacked vocal replies and the open space around the lead rap",
+        "warm, wide synth layers over a centered, weighty bass foundation"
+      ],
+      "recordings": [
+        { "title": "Nuthin’ But a 'G' Thang", "artist": "Dr. Dre & Snoop Dogg", "url": "https://music.apple.com/us/song/1676313477", "timecodes": [] },
+        { "title": "Regulate (feat. Nate Dogg)", "artist": "Warren G", "url": "https://music.apple.com/us/song/1676298793", "timecodes": [] },
+        { "title": "Gin and Juice", "artist": "Snoop Dogg", "url": "https://music.apple.com/us/song/1683195628", "timecodes": [] },
+        { "title": "Let’s Play House", "artist": "Tha Dogg Pound", "url": "https://music.apple.com/us/song/1676264870", "timecodes": [] },
+        { "title": "I Get Around (feat. Digital Underground)", "artist": "2Pac", "url": "https://music.apple.com/us/song/1669626157", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "hip-hop-southern",
+      "compare": [
+        "regional pocket differences across Memphis, Houston and Atlanta rather than one generic Southern beat",
+        "bass weight, drawled vocal placement and the relationship between the groove and the lyric",
+        "soul, funk and sparse keyboard/sample colors, with space around the low end",
+        "section lifts, guest-verse exchanges and hook changes within each regional arrangement"
+      ],
+      "recordings": [
+        { "title": "Mind Playing Tricks on Me", "artist": "Geto Boys", "url": "https://music.apple.com/us/song/1813058696", "timecodes": [] },
+        { "title": "Space Age Pimpin’", "artist": "8Ball & MJG", "url": "https://music.apple.com/us/song/333894126", "timecodes": [] },
+        { "title": "Int’l Players Anthem (I Choose You) [feat. OutKast]", "artist": "UGK", "url": "https://music.apple.com/us/song/836469501", "timecodes": [] },
+        { "title": "Stay Fly", "artist": "Three 6 Mafia", "url": "https://music.apple.com/us/song/215759223", "timecodes": [] },
+        { "title": "Rosa Parks", "artist": "OutKast", "url": "https://music.apple.com/us/song/256461798", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "hip-hop-trap",
+      "compare": [
+        "808 length, pitch movement and kick interaction, especially the low-end envelope between hits",
+        "hi-hat subdivisions and rolls as phrase accents instead of a constant surface layer",
+        "sparse melodic hooks, vocal rhythms and deliberate dropouts around the lead",
+        "hard transient impact and dense modern low end while retaining space for the vocal"
+      ],
+      "recordings": [
+        { "title": "What You Know", "artist": "T.I.", "url": "https://music.apple.com/us/song/1258980494", "timecodes": [] },
+        { "title": "Lemonade", "artist": "Gucci Mane", "url": "https://music.apple.com/us/song/1839924768", "timecodes": [] },
+        { "title": "Mask Off", "artist": "Future", "url": "https://music.apple.com/us/song/1205690479", "timecodes": [] },
+        { "title": "Bad and Boujee (feat. Lil Uzi Vert)", "artist": "Migos", "url": "https://music.apple.com/us/song/1615489987", "timecodes": [] },
+        { "title": "Digits", "artist": "Young Thug", "url": "https://music.apple.com/us/song/1807527402", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "hip-hop-drill",
+      "compare": [
+        "Chicago, Brooklyn and UK drill accents kept distinct in snare placement, subdivision and vocal delivery",
+        "sliding sub movement and the spaces it leaves for counter-snare and kick attacks",
+        "dark repeating motifs, abrupt stops and restrained changes across repeated phrases",
+        "dense, aggressive low end with the vocal clearly separated from the sliding bass"
+      ],
+      "recordings": [
+        { "title": "I Don’t Like (feat. Lil Reese)", "artist": "Chief Keef", "url": "https://music.apple.com/us/song/1688251583", "timecodes": [] },
+        { "title": "Dior", "artist": "Pop Smoke", "url": "https://music.apple.com/us/song/1835993742", "timecodes": [] },
+        { "title": "Ain’t It Different (feat. AJ Tracey, Stormzy & Onefour)", "artist": "Headie One", "url": "https://music.apple.com/us/album/aint-it-different-feat-aj-tracey-stormzy-onefour-single/1533059554", "timecodes": [] },
+        { "title": "Homerton B", "artist": "Unknown T", "url": "https://music.apple.com/us/song/1436711482", "timecodes": [] },
+        { "title": "Big Drip", "artist": "Fivio Foreign", "url": "https://music.apple.com/us/song/1556576240", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "hip-hop-jazz-rap",
+      "compare": [
+        "played or sampled jazz color, bass movement and drum swing without smoothing away the hip-hop backbeat",
+        "rimshot, brushed or sampled percussion against the vocal's conversational pocket",
+        "horn, keyboard and bass phrases answering the rapper rather than continuously doubling them",
+        "warm ensemble tone, stereo depth and a clear foreground for the vocal"
+      ],
+      "recordings": [
+        { "title": "Jazz (We’ve Got)", "artist": "A Tribe Called Quest", "url": "https://music.apple.com/us/song/253697057", "timecodes": [] },
+        { "title": "Rebirth Of Slick (Cool Like Dat)", "artist": "Digable Planets", "url": "https://music.apple.com/us/song/725211798", "timecodes": [] },
+        { "title": "Loungin’", "artist": "Guru", "url": "https://music.apple.com/us/song/723627329", "timecodes": [] },
+        { "title": "Proceed", "artist": "The Roots", "url": "https://music.apple.com/us/song/1274785805", "timecodes": [] },
+        { "title": "Resurrection", "artist": "Common", "url": "https://music.apple.com/us/song/272152276", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "hip-hop-abstract",
+      "compare": [
+        "uneven sample cuts, noise and negative space as part of the rhythm rather than decorative layers",
+        "asymmetric phrase lengths and vocal rhythms that resist a predictable two-bar loop",
+        "contrast between abrasive sound design and a clearly intelligible foreground voice",
+        "how tension, silence and timbral shifts create form without a conventional hook cycle"
+      ],
+      "recordings": [
+        { "title": "8 Steps to Perfection", "artist": "Company Flow", "url": "https://music.apple.com/us/song/1675275210", "timecodes": [] },
+        { "title": "None Shall Pass", "artist": "Aesop Rock", "url": "https://music.apple.com/us/song/1623682046", "timecodes": [] },
+        { "title": "Accordion", "artist": "Madvillain", "url": "https://music.apple.com/us/song/887699511", "timecodes": [] },
+        { "title": "Nothing is Safe", "artist": "clipping.", "url": "https://music.apple.com/us/song/1473856276", "timecodes": [] },
+        { "title": "Ever Somber", "artist": "Dälek", "url": "https://music.apple.com/us/album/ever-somber/1891426590?i=1891426854", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "hip-hop-lo-fi",
+      "compare": [
+        "softened sample texture and drum transients while preserving a clear, stable pulse",
+        "small timing imperfections, swing and phrase variation without making every bar identical",
+        "warm bass and keyboard color balanced against the softened high end",
+        "changes in loop texture and density that keep the arrangement from becoming Muzak"
+      ],
+      "recordings": [
+        { "title": "Feather (feat. Cise Starr & Akin)", "artist": "Nujabes", "url": "https://music.apple.com/us/song/1445812701", "timecodes": [] },
+        { "title": "Don’t Cry", "artist": "J Dilla", "url": "https://music.apple.com/us/song/108232756", "timecodes": [] },
+        { "title": "Time: The Donut of the Heart", "artist": "J Dilla", "url": "https://music.apple.com/us/song/108232662", "timecodes": [] },
+        { "title": "Aruarian Dance", "artist": "Nujabes", "url": "https://music.apple.com/us/song/1721843001", "timecodes": [] },
+        { "title": "Affection", "artist": "Jinsang", "url": "https://music.apple.com/us/song/1860643762", "timecodes": [] }
+      ]
+    }
+  ]
+}

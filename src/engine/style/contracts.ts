@@ -104,7 +104,16 @@ export function contractForGenre(genreId: string, style?: SongStyle): WorldContr
     out.tuningSystem = style.harmony.tuningSystem ?? out.tuningSystem;
     if (style.harmony.bassMotion) {
       const bassStyles = new Set<BassDialect['style']>(['root','rootFifth','walking','tumbao','octave','riff','sub','dembow','cumbia','reggae','samba','house']);
-      const explicitAliases: Record<string, BassDialect['style']> = { 'root-fifth': 'rootFifth', pedal: 'root' };
+      // Catalog styles can describe a bass part at a more specific teaching
+      // level than the shared performance dialect. Keep those authored labels
+      // in the catalog, then resolve their broad playback mechanic here; the
+      // actual style-specific cells still determine the notes and phrasing.
+      const explicitAliases: Record<string, BassDialect['style']> = {
+        'root-fifth': 'rootFifth', pedal: 'root',
+        'syncopated-sub': 'sub', 'fragmented-sub': 'sub', 'synth-bass-bounce': 'sub',
+        countermelody: 'rootFifth', counterline: 'rootFifth', 'gospel-answer': 'rootFifth',
+        'riff-root': 'riff', 'orchestral-lift': 'root', 'sustained-root': 'root',
+      };
       const resolvedBassStyle = explicitAliases[style.harmony.bassMotion] ?? style.harmony.bassMotion;
       if (!bassStyles.has(resolvedBassStyle as BassDialect['style'])) {
         throw new Error(`Unsupported bass motion "${style.harmony.bassMotion}" for ${style.id}`);

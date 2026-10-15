@@ -1,10 +1,7 @@
 import { Sheet } from '../sheet/sheet.ts';
-import type { MusicalPattern } from '../../types';
 import type { Region } from '../../types';
-import { PATTERNS_BY_ID } from '../../data/genres';
-import { beatsPerBarOf, culturalCyclePosition, type TransitionEvent } from '../sheet/grid.ts';
+import { beatsPerBarOf } from '../sheet/grid.ts';
 import { getEffectiveBpm } from '../sheet/sheet.ts';
-import { getResolvedSectionStyle } from '../sheet/sheet.ts';
 import { energyOf } from '../sheet/sectionEnergy.ts';
 import { BlendReport } from './styleBlend.ts';
 import { INTENSITY_LEVEL } from '../../data/performance/intensityLevels';
@@ -136,9 +133,9 @@ export function buildBarTimes(sheet: Sheet): BarTime[] {
   let t = 0;
   sheet.measures.forEach((m, i) => {
     const { bpm } = getEffectiveBpm(sheet, m.regionId);
-    const safeBpm = Number.isFinite(bpm) && bpm > 0 ? bpm : 110;
-    const dur = (beatsPerBar * 60) / safeBpm;
-    bars.push({ index: i, start: t, end: t + dur, bpm: safeBpm, beatsPerBar, regionId: m.regionId });
+    if (!Number.isFinite(bpm) || bpm <= 0) throw new Error(`Invalid authored tempo at measure ${i + 1}: ${bpm}`);
+    const dur = (beatsPerBar * 60) / bpm;
+    bars.push({ index: i, start: t, end: t + dur, bpm, beatsPerBar, regionId: m.regionId });
     t += dur;
   });
   return bars;
@@ -146,69 +143,11 @@ export function buildBarTimes(sheet: Sheet): BarTime[] {
 
 /* --- section intensity ---------------------------------------------------- */
 
-export function intensityOf(region: Region | undefined): number {
-  return INTENSITY_LEVEL[String(region?.intensity ?? 'medium')] ?? 0.55;
-}
-
-function energyForRegion(region: Region): 1 | 2 | 3 | 4 | 5 {
-  return energyOf(region);
-}
-
-function authoredTransitionPattern(style: import('../../data/styles/schema').ResolvedStyle, worldId: string): MusicalPattern | undefined {
-  if (!style?.contract?.transitionGrammar?.authoredPriority) return undefined;
-  const candidates = Object.values(PATTERNS_BY_ID);
-  return candidates
-    .filter(p => p.worldId === worldId)
-    .filter(p => p.category === 'fill' || p.category === 'transition' || p.tags?.some((t: string) => /fill|transition/i.test(t)))
-    .sort((a, b) => {
-      const af = a.category === 'fill' || a.tags?.some((t: string) => /fill/i.test(t)) ? 1 : 0;
-      const bf = b.category === 'fill' || b.tags?.some((t: string) => /fill/i.test(t)) ? 1 : 0;
-      return bf - af;
-    })[0];
-}
-
-export function buildTransitionEvents(sheet: Sheet): Map<number, TransitionEvent> {
-  const out = new Map<number, TransitionEvent>();
-  for (let i = 0; i < sheet.regions.length - 1; i++) {
-    const current = sheet.regions[i];
-    const next = sheet.regions[i + 1];
-    const style = getResolvedSectionStyle(sheet, current);
-    const fromEnergy = energyForRegion(current);
-    const toEnergy = energyForRegion(next);
-    if (fromEnergy === toEnergy) continue;
-    const grammar = style.contract.transitionGrammar;
-    const type = (toEnergy > fromEnergy ? grammar.onEnergyRise : grammar.onEnergyFall) ??
-      (toEnergy > fromEnergy ? 'fill' : 'drop-out');
-    if (!grammar.types.includes(type)) continue;
-    const cycleLength = Math.max(1, Math.round(style.contract.cycleLength || 1));
-    const finalStart = Math.max(current.start, current.end - cycleLength);
-    const roles = Array.from(new Set(['drums', 'percussion', 'bass', 'harmony', 'comp', 'lead', 'texture', 'pad', 'voice', ...(sheet.tracks ?? []).map(t => t.role)]));
-    const authoredByRole: Record<string, string | undefined> = {};
-    if (type === 'fill') {
-      for (const r of roles) {
-        const p = authoredTransitionPattern(style, current.genre ?? sheet.worldId);
-        if (p) authoredByRole[r] = p.id;
-      }
-    }
-    const authored = authoredByRole['drums'] ?? (type === 'fill'
-      ? authoredTransitionPattern(style, current.genre ?? sheet.worldId)?.id
-      : undefined);
-    const bar = current.end - 1;
-    if (bar < finalStart) continue;
-    {
-      out.set(bar, {
-        type,
-        fromEnergy,
-        toEnergy,
-        cyclePosition: culturalCyclePosition(bar - current.start, cycleLength),
-        cycleLength,
-        authored: Object.keys(authoredByRole).length > 0 || !!authored,
-        patternId: authoredByRole['drums'] ?? authored,
-        authoredByRole,
-      });
-    }
-  }
-  return out;
+export function intensityOf(region: Region): number {
+  if (!region.intensity) throw new Error(`Section ${region.id} has no authored intensity`);
+  const intensity = INTENSITY_LEVEL[String(region.intensity)];
+  if (intensity === undefined) throw new Error(`Section ${region.id} has an unknown intensity: ${region.intensity}`);
+  return intensity;
 }
 
 /** True when the next section is heavier than this one. */

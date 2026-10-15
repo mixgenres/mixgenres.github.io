@@ -40,14 +40,50 @@ type CompleteStyle = SongStyle & {
 };
 
 function completeStyle(style: SongStyle): CompleteStyle {
+  const requireValue = <T>(value: T | undefined, path: string): T => {
+    if (value === undefined || value === null) {
+      throw new Error(`Incomplete style ${style.id}: missing authored ${path}`);
+    }
+    return value;
+  };
+  const requireList = <T>(value: T[] | undefined, path: string): T[] => {
+    const list = requireValue(value, path);
+    if (!list.length) throw new Error(`Incomplete style ${style.id}: authored ${path} is empty`);
+    return list;
+  };
+  const form = requireValue(style.form, 'form');
+  const harmony = requireValue(style.harmony, 'harmony');
+  const rhythm = requireValue(style.rhythm, 'rhythm');
+  const melody = requireValue(style.melody, 'melody');
+  const arrangement = requireValue(style.arrangement, 'arrangement');
+  const sound = requireValue(style.sound, 'sound');
+  const tempoRange = requireValue(rhythm.tempoRange, 'rhythm.tempoRange');
+  if (tempoRange.length !== 2 || tempoRange.some(value => !Number.isFinite(value) || value <= 0)
+    || tempoRange[0] > tempoRange[1]) {
+    throw new Error(`Incomplete style ${style.id}: invalid authored rhythm.tempoRange`);
+  }
+  const defaultBpm = requireValue(rhythm.defaultBpm, 'rhythm.defaultBpm');
+  if (!Number.isFinite(defaultBpm) || defaultBpm <= 0) {
+    throw new Error(`Incomplete style ${style.id}: invalid authored rhythm.defaultBpm`);
+  }
   return {
     ...style,
-    form: { ...style.form, sectionVocab: style.form?.sectionVocab ?? [], templates: style.form?.templates ?? [], preferredMeters: style.form?.preferredMeters ?? [] },
-    harmony: { ...style.harmony, model: style.harmony?.model ?? 'functional', modePolicy: style.harmony?.modePolicy ?? 'major', progressionTemplates: style.harmony?.progressionTemplates ?? [], chordVocabulary: style.harmony?.chordVocabulary ?? [] },
-    rhythm: { ...style.rhythm, meter: style.rhythm?.meter ?? '4/4', tempoRange: style.rhythm?.tempoRange ?? [80, 140], defaultBpm: style.rhythm?.defaultBpm ?? 110, feel: style.rhythm?.feel ?? 'style-native', swingPercentage: style.rhythm?.swingPercentage ?? 50, anticipationOffsetSteps: style.rhythm?.anticipationOffsetSteps ?? 0, microtimingFeel: style.rhythm?.microtimingFeel ?? 'straight', humanizeJitterMs: style.rhythm?.humanizeJitterMs ?? 8 },
-    melody: { ...style.melody, scaleMode: style.melody?.scaleMode ?? 'major' },
-    arrangement: { ...style.arrangement, ensemble: style.arrangement?.ensemble ?? [] },
-    sound: { ...style.sound, instrumentPalette: style.sound?.instrumentPalette ?? [], masterProfile: { ...DEFAULT_STYLE_MASTER_PROFILE, ...(style.sound?.masterProfile ?? {}) } },
+    form: { ...form, sectionVocab: requireList(form.sectionVocab, 'form.sectionVocab'), templates: requireList(form.templates, 'form.templates'), preferredMeters: requireList(form.preferredMeters, 'form.preferredMeters') },
+    harmony: { ...harmony, model: requireValue(harmony.model, 'harmony.model'), modePolicy: requireValue(harmony.modePolicy, 'harmony.modePolicy'), progressionTemplates: requireList(harmony.progressionTemplates, 'harmony.progressionTemplates'), chordVocabulary: requireList(harmony.chordVocabulary, 'harmony.chordVocabulary') },
+    rhythm: {
+      ...rhythm,
+      meter: requireValue(rhythm.meter, 'rhythm.meter'),
+      tempoRange,
+      defaultBpm,
+      feel: requireValue(rhythm.feel, 'rhythm.feel'),
+      swingPercentage: requireValue(rhythm.swingPercentage, 'rhythm.swingPercentage'),
+      anticipationOffsetSteps: requireValue(rhythm.anticipationOffsetSteps, 'rhythm.anticipationOffsetSteps'),
+      microtimingFeel: requireValue(rhythm.microtimingFeel, 'rhythm.microtimingFeel'),
+      humanizeJitterMs: requireValue(rhythm.humanizeJitterMs, 'rhythm.humanizeJitterMs'),
+    },
+    melody: { ...melody, scaleMode: requireValue(melody.scaleMode, 'melody.scaleMode') },
+    arrangement: { ...arrangement, ensemble: requireList(arrangement.ensemble, 'arrangement.ensemble') },
+    sound: { ...sound, instrumentPalette: requireList(sound.instrumentPalette, 'sound.instrumentPalette'), masterProfile: { ...DEFAULT_STYLE_MASTER_PROFILE, ...(sound.masterProfile ?? {}) } },
     gestures: { ...(style.gestures ?? {}) },
     rules: { require: [], forbid: [], ...(style.rules ?? {}) },
   };
@@ -120,19 +156,19 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
   const extendsChain: string[] = [];
   const visited = new Set<string>();
 
-  // 1. Build inheritance chain (cycle-safe)
+  // 1. Build a complete, cycle-free inheritance chain.
   let curr: SongStyle | undefined = targetStyle;
   const hierarchy: SongStyle[] = [];
   while (curr) {
     if (visited.has(curr.id)) {
-      console.warn(`Cycle detected in style extends chain for ${curr.id}`);
-      break;
+      throw new Error(`Cycle detected in style extends chain for ${curr.id}`);
     }
     visited.add(curr.id);
     hierarchy.unshift(curr); // parent first, child overrides
     if (curr.extends) {
       extendsChain.push(curr.extends);
       curr = getStyle(curr.extends);
+      if (!curr) throw new Error(`SongStyle ${hierarchy.at(-1)!.id} extends unknown style ${extendsChain.at(-1)}`);
     } else {
       break;
     }
@@ -156,8 +192,7 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
   let merged: CompleteStyle = completeStyle(structuredClone(hierarchy[0]));
   recordDecision('id', merged.id, 'style', merged.id);
 
-  // Coverage must include defaults inserted by completeStyle. Trace required
-  // leaves against the authored base before the defaults make them look real.
+  // Trace each complete required leaf against the declared source metadata.
   const authoredBase = hierarchy[0] as Partial<CompleteStyle>;
   const requiredLeaves: Array<[Aspect, string[]]> = [
     ['form', ['sectionVocab', 'templates', 'preferredMeters']],
@@ -299,7 +334,10 @@ export function resolveStyle(opts: ResolveStyleOptions): ResolvedStyle {
       ? getCanonicalStyle(inf.source.genreId)
       : undefined;
 
-    if (!infStyle) continue;
+    if (!infStyle) {
+      const source = inf.source.styleId ?? inf.source.genreId ?? '(missing source)';
+      throw new Error(`SongStyle ${targetStyle.id} references unknown influence ${source}`);
+    }
     const w = Math.max(0, Math.min(1, inf.weight));
     if (w <= 0) continue;
 

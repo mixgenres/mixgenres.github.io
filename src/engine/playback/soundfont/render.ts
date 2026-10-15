@@ -1,16 +1,16 @@
 import type { Performance } from '../../band/performanceData';
 import type { Mp3RenderOptions } from '../mp3Export';
 import { checkAbort, yieldToUI } from '../../../export/audioEncoding';
-import { compileSamplePlan } from './plan';
+import { compileSamplePlan, type SamplePlan } from './plan';
 import { loadSoundfontBank } from './banks';
 import { SampleRuntime } from './runtime';
 
 /** Direct Node/offline part rendering, shared with the live event interpreter. Studio
  * mastering and MP3 encoding remain in the existing export pipeline. */
 export async function renderSampleTrack(performance: Performance, options: Mp3RenderOptions,
-  trackId: string, startSample: number, endSample: number): Promise<{ left: Float32Array; right: Float32Array; startSample: number }> {
+  trackId: string, startSample: number, endSample: number, compiledPlan?: SamplePlan): Promise<{ left: Float32Array; right: Float32Array; startSample: number }> {
   const sampleRate=44100;
-  const plan=compileSamplePlan(performance,{...options,selectedTrackIds:[trackId]});
+  const plan=compiledPlan??compileSamplePlan(performance,{...options,selectedTrackIds:[trackId]});
   const runtime=new SampleRuntime(sampleRate);
   const scratchL=new Float32Array(128), scratchR=new Float32Array(128);
   try {

@@ -456,7 +456,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "minimalist",
       "name": "Minimalist",
-      "description": "Minimalist: Minimalist repeated pulse with additive entries. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Minimalist: repeating cells build by adding parts, then thin back into a quiet close. The mallet pulse and bowed lines interlock instead of leaning on a drum beat.",
       "patterns": ["Minimalist repeated pulse with additive entries"],
       "techniques": ["legato", "staccato", "trill", "tremolo", "pizzicato", "arco", "vibrato", "folk-vibrato", "accent", "tenuto", "ghost", "open", "roll"],
       "harmony": ["C", "F", "G7", "Am", "Dm"],
@@ -465,9 +465,9 @@ export const GENRE_PACK: GenrePackInput = {
       "scale": "major",
       "roles": {
         "lead": ["violin", "flute"],
-        "harmony": ["string-ensemble"],
+        "harmony": ["string-ensemble", "marimba"],
         "bass": ["cello"],
-        "percussion": ["timpani"]
+        "percussion": []
       },
       "progressions": {
         "exposition": ["C", "F", "G7", "C"],
@@ -476,34 +476,36 @@ export const GENRE_PACK: GenrePackInput = {
         "coda": ["C", "C"]
       },
       "requiresChords": true,
-      "harmonicRhythm": "bar",
+      "harmonicRhythm": "phrase",
       "harmonyModel": "functional",
       "bassMotion": "root-fifth",
       "form": [
-        {"label": "exposition", "bars": 4},
-        {"label": "development", "bars": 8},
-        {"label": "recapitulation", "bars": 8},
-        {"label": "coda", "bars": 4}
+        {"label": "exposition", "bars": 4, "instruments": ["violin"]},
+        {"label": "development", "bars": 8, "instruments": ["violin", "cello", "marimba"]},
+        {"label": "recapitulation", "bars": 8, "instruments": ["violin", "flute", "string-ensemble", "cello", "marimba"]},
+        {"label": "coda", "bars": 4, "instruments": ["violin", "string-ensemble", "cello", "marimba"]}
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "Minimalist repeated pulse with additive entries violin statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["violin"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
+        {"name": "Minimalist two-bar violin seed cell", "shortName": "Violin seed cell", "description": "Repeat a two-bar four-note cell with a small changed ending on its second pass. Keep the quarter-note landmarks steady; the marimba's later phase shift supplies the moving layer, so the violin does not fill every eighth note.", "role": "lead", "onsets": [0, 1, 2, 3, 4, 5, 6, 7], "instruments": ["violin"], "cycleLength": 2, "durations": [0.78, 0.56, 0.9, 0.48, 0.78, 0.56, 0.9, 0.48], "pitches": [{"degree": 1, "register": 72}, {"degree": 3, "register": 72}, {"degree": 5, "register": 72}, {"degree": 3, "register": 72}, {"degree": 1, "register": 72}, {"degree": 3, "register": 72}, {"degree": 5, "register": 72}, {"degree": 2, "register": 72}], "accents": [0.9, 0.58, 0.82, 0.62, 0.84, 0.55, 0.78, 0.72], "articulation": "legato", "sectionUsage": ["pulse", "additive-entry", "release"]},
+        {"name": "Minimalist violin additive phase variation", "shortName": "Violin additive variation", "description": "Add one eighth-note pickup to the seed cell and alter its closing degree while the mallet pattern shifts against it. This teaches additive process and phase listening without turning the bowed line into a constant eighth-note wash.", "role": "lead", "onsets": [0, 1, 1.5, 2.5, 3.5, 4, 5, 6, 7], "instruments": ["violin"], "cycleLength": 2, "durations": [0.72, 0.42, 0.34, 0.72, 0.38, 0.72, 0.5, 0.86, 0.42], "pitches": [{"degree": 1, "register": 72}, {"degree": 3, "register": 72}, {"degree": 5, "register": 72}, {"degree": 3, "register": 72}, {"degree": 2, "register": 72}, {"degree": 1, "register": 72}, {"degree": 3, "register": 72}, {"degree": 5, "register": 72}, {"degree": 1, "register": 72}], "accents": [0.9, 0.55, 0.7, 0.8, 0.58, 0.86, 0.56, 0.78, 0.95], "articulation": "legato", "sectionUsage": ["phase-overlap", "full-ensemble"], "pedagogicalStudy": "variation", "arrangementVariation": true},
         {"name": "Minimalist repeated pulse with additive entries violin cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["violin"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Minimalist repeated pulse with additive entries flute statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["flute"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
+        {"name": "Minimalist repeated pulse with additive entries flute answering line", "role": "lead", "onsets": [0.75, 2.25, 3.25], "instruments": ["flute"], "cycleLength": 1, "durations": [0.9, 0.8, 0.6], "articulation": "legato"},
         {"name": "Minimalist repeated pulse with additive entries flute cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["flute"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Minimalist repeated pulse with additive entries string-ensemble accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["string-ensemble"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "Minimalist repeated pulse with additive entries string-ensemble cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["string-ensemble"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Minimalist repeated pulse with additive entries low anchor", "role": "bass", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["cello"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.5]},
+        {"name": "Minimalist repeating chord-tone marimba cell", "shortName": "Marimba chord-tone cell", "role": "harmony", "onsets": [0, 1, 2, 3], "instruments": ["marimba"], "cycleLength": 1, "durations": [0.46, 0.34, 0.46, 0.34], "accents": [0.92, 0.5, 0.74, 0.52], "velocities": [0.84, 0.58, 0.74, 0.6], "pitches": [{"degree": 1, "register": 72, "voicing": "single"}, {"degree": 3, "register": 72, "voicing": "single"}, {"degree": 5, "register": 72, "voicing": "single"}, {"degree": 3, "register": 72, "voicing": "single"}], "articulation": "staccato", "description": "Play one mallet note at a time through a repeating tonic–third–fifth–third cell. Keep the quarter-note pulse steady, bring out the first note, and let the lighter inner attacks make a pitched line rather than block-chord thumps."},
+        {"name": "Minimalist two-bar marimba phase shift", "shortName": "Marimba phase shift", "role": "harmony", "onsets": [0, 1, 2, 3, 4.5, 5.5, 6.5, 7.5], "instruments": ["marimba"], "cycleLength": 2, "durations": [0.46, 0.34, 0.46, 0.34, 0.46, 0.34, 0.46, 0.34], "accents": [0.92, 0.5, 0.74, 0.52, 0.82, 0.46, 0.68, 0.48], "velocities": [0.84, 0.58, 0.74, 0.6, 0.78, 0.54, 0.68, 0.56], "pitches": [{"degree": 1, "register": 72, "voicing": "single"}, {"degree": 3, "register": 72, "voicing": "single"}, {"degree": 5, "register": 72, "voicing": "single"}, {"degree": 3, "register": 72, "voicing": "single"}, {"degree": 1, "register": 72, "voicing": "single"}, {"degree": 3, "register": 72, "voicing": "single"}, {"degree": 5, "register": 72, "voicing": "single"}, {"degree": 3, "register": 72, "voicing": "single"}], "articulation": "staccato", "sectionUsage": ["phase-overlap", "full-ensemble"], "pedagogicalStudy": "variation", "arrangementVariation": true, "description": "Play the same single-note chord-tone cell twice, shifting its second statement one eighth later. Keep the accents intact so you can hear the bowed line and marimba drift in and out of alignment."},
+        {"name": "Minimalist repeated pulse with additive entries low anchor", "role": "bass", "onsets": [0, 2], "instruments": ["cello"], "cycleLength": 1, "articulation": "arco", "durations": [1.8, 1.8]},
         {"name": "Minimalist repeated pulse with additive entries cello cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["cello"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Minimalist repeated pulse with additive entries timpani pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["timpani"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Minimalist repeated pulse with additive entries timpani cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["timpani"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Minimalist cello cadence pedal", "shortName": "Cello cadence pedal", "role": "bass", "onsets": [0], "instruments": ["cello"], "cycleLength": 1, "phraseEnd": true, "articulation": "tenuto", "durations": [3.5], "sectionUsage": ["ending"]}
       ],
       "instrumentTechniques": {
         "violin": ["staccato", "legato", "tremolo", "pizzicato", "vibrato", "arco", "folk-vibrato", "accent"],
         "flute": ["staccato", "legato", "vibrato", "accent", "tenuto"],
         "string-ensemble": ["legato", "tremolo", "pizzicato", "staccato", "accent"],
         "cello": ["arco", "pizzicato", "legato", "staccato", "tremolo", "vibrato", "tenuto", "accent"],
-        "timpani": ["staccato", "accent", "ghost", "open", "roll"]
+        "marimba": ["staccato", "accent", "legato", "roll"]
       },
       "instrumentDialects": {
         "violin:lead": {
@@ -522,8 +524,8 @@ export const GENRE_PACK: GenrePackInput = {
           "allowedTechniques": ["arco", "pizzicato", "legato", "staccato", "tremolo", "vibrato", "tenuto", "accent"],
           "defaultTechnique": "arco"
         },
-        "timpani:percussion": {
-          "allowedTechniques": ["staccato", "accent", "ghost", "open", "roll"],
+        "marimba:harmony": {
+          "allowedTechniques": ["staccato", "accent", "legato", "roll"],
           "defaultTechnique": "staccato"
         }
       },

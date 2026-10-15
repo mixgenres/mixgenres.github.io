@@ -89,19 +89,19 @@ export const GENRE_PACK: GenrePackInput = {
         },
         "guitar:lead": {
           "allowedTechniques": ["palm-mute", "tremolo", "bend", "vibrato", "double-stop", "power-chord", "riff", "pick", "tight-palm-mute", "alternate-picking", "gallop", "accent", "staccato", "legato"],
-          "defaultTechnique": "palm-mute",
+          "defaultTechnique": "pick",
           "variantId": "solid-electric",
           "drive": 0.8
         },
         "guitar:harmony": {
           "allowedTechniques": ["palm-mute", "tremolo", "bend", "vibrato", "double-stop", "power-chord", "riff", "pick", "tight-palm-mute", "alternate-picking", "gallop", "accent", "staccato", "legato"],
-          "defaultTechnique": "palm-mute",
+          "defaultTechnique": "legato",
           "variantId": "solid-electric",
           "drive": 0.8
         },
         "bass:bass": {
           "allowedTechniques": ["palm-mute", "pick", "accent", "staccato", "legato"],
-          "defaultTechnique": "palm-mute"
+          "defaultTechnique": "pick"
         },
         "drums:percussion": {
           "allowedTechniques": ["roll", "accent", "ghost", "open"],
@@ -188,13 +188,13 @@ export const GENRE_PACK: GenrePackInput = {
         },
         "guitar:harmony": {
           "allowedTechniques": ["palm-mute", "tremolo", "bend", "vibrato", "double-stop", "pick", "tight-palm-mute", "alternate-picking", "chug", "accent", "staccato", "legato"],
-          "defaultTechnique": "palm-mute",
+          "defaultTechnique": "staccato",
           "variantId": "solid-electric",
           "drive": 0.8
         },
         "bass:bass": {
           "allowedTechniques": ["palm-mute", "pick", "accent", "staccato", "legato"],
-          "defaultTechnique": "palm-mute"
+          "defaultTechnique": "pick"
         },
         "drums:percussion": {
           "allowedTechniques": ["roll", "accent", "ghost", "open"],
@@ -275,19 +275,19 @@ export const GENRE_PACK: GenrePackInput = {
         },
         "guitar:lead": {
           "allowedTechniques": ["palm-mute", "tremolo", "bend", "vibrato", "double-stop", "riff", "pick", "tight-palm-mute", "alternate-picking", "accent", "staccato", "legato"],
-          "defaultTechnique": "palm-mute",
+          "defaultTechnique": "legato",
           "variantId": "solid-electric",
           "drive": 0.8
         },
         "guitar:harmony": {
           "allowedTechniques": ["palm-mute", "tremolo", "bend", "vibrato", "double-stop", "riff", "pick", "tight-palm-mute", "alternate-picking", "accent", "staccato", "legato"],
-          "defaultTechnique": "palm-mute",
+          "defaultTechnique": "legato",
           "variantId": "solid-electric",
           "drive": 0.8
         },
         "bass:bass": {
           "allowedTechniques": ["palm-mute", "pick", "accent", "staccato", "legato"],
-          "defaultTechnique": "palm-mute"
+          "defaultTechnique": "legato"
         },
         "drums:percussion": {
           "allowedTechniques": ["roll", "accent", "ghost", "open"],
@@ -368,19 +368,19 @@ export const GENRE_PACK: GenrePackInput = {
         },
         "guitar:lead": {
           "allowedTechniques": ["palm-mute", "tremolo", "bend", "vibrato", "double-stop", "riff", "pick", "tight-palm-mute", "alternate-picking", "accent", "staccato", "legato"],
-          "defaultTechnique": "palm-mute",
+          "defaultTechnique": "tremolo",
           "variantId": "solid-electric",
           "drive": 0.8
         },
         "guitar:harmony": {
           "allowedTechniques": ["palm-mute", "tremolo", "bend", "vibrato", "double-stop", "riff", "pick", "tight-palm-mute", "alternate-picking", "accent", "staccato", "legato"],
-          "defaultTechnique": "palm-mute",
+          "defaultTechnique": "staccato",
           "variantId": "solid-electric",
           "drive": 0.8
         },
         "bass:bass": {
           "allowedTechniques": ["palm-mute", "pick", "accent", "staccato", "legato"],
-          "defaultTechnique": "palm-mute"
+          "defaultTechnique": "pick"
         },
         "drums:percussion": {
           "allowedTechniques": ["roll", "accent", "ghost", "open"],
@@ -461,19 +461,19 @@ export const GENRE_PACK: GenrePackInput = {
         },
         "guitar:lead": {
           "allowedTechniques": ["palm-mute", "tremolo", "bend", "vibrato", "double-stop", "pick", "tight-palm-mute", "alternate-picking", "accent", "staccato", "legato"],
-          "defaultTechnique": "palm-mute",
+          "defaultTechnique": "tremolo",
           "variantId": "solid-electric",
           "drive": 0.8
         },
         "guitar:harmony": {
           "allowedTechniques": ["palm-mute", "tremolo", "bend", "vibrato", "double-stop", "pick", "tight-palm-mute", "alternate-picking", "accent", "staccato", "legato"],
-          "defaultTechnique": "palm-mute",
+          "defaultTechnique": "legato",
           "variantId": "solid-electric",
           "drive": 0.8
         },
         "bass:bass": {
           "allowedTechniques": ["palm-mute", "pick", "accent", "staccato", "legato"],
-          "defaultTechnique": "palm-mute"
+          "defaultTechnique": "pick"
         },
         "drums:percussion": {
           "allowedTechniques": ["roll", "accent", "ghost", "open"],
@@ -561,13 +561,13 @@ export const GENRE_PACK: GenrePackInput = {
         },
         "guitar:harmony": {
           "allowedTechniques": ["palm-mute", "tremolo", "bend", "vibrato", "double-stop", "pick", "tight-palm-mute", "alternate-picking", "chug", "accent", "staccato", "legato"],
-          "defaultTechnique": "palm-mute",
+          "defaultTechnique": "staccato",
           "variantId": "solid-electric",
           "drive": 0.8
         },
         "bass:bass": {
           "allowedTechniques": ["palm-mute", "pick", "accent", "staccato", "legato"],
-          "defaultTechnique": "palm-mute"
+          "defaultTechnique": "pick"
         },
         "drums:percussion": {
           "allowedTechniques": ["roll", "accent", "ghost", "open"],
@@ -654,7 +654,7 @@ export const GENRE_PACK: GenrePackInput = {
         },
         "guitar:harmony": {
           "allowedTechniques": ["palm-mute", "tremolo", "bend", "vibrato", "double-stop", "pick", "tight-palm-mute", "alternate-picking", "accent", "staccato", "legato"],
-          "defaultTechnique": "palm-mute",
+          "defaultTechnique": "staccato",
           "variantId": "solid-electric",
           "drive": 0.8
         },

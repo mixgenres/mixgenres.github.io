@@ -35,15 +35,3 @@ export const DIALECTS: Record<string, InstrumentDialect> = Object.fromEntries([
   bachata.ENTRY_19,
   kizomba.ENTRY_20
 ]);
-
-export const DEFAULT_DIALECT_SHAPE: InstrumentDialect = {
-  id: 'generic:dialect',
-  instrumentId: '',
-  name: 'Acoustic Dialect',
-  family: 'plucked',
-  performanceMode: 'acoustic-ensemble',
-  defaultTechnique: 'default',
-  allowedTechniques: ['default'],
-  brightnessMultiplier: 1.0,
-  decayMultiplier: 1.0,
-};

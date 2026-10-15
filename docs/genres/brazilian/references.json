@@ -5,7 +5,7 @@
   "source": "Apple Music individual track pages and displayed artist/release metadata. These are listening candidates, not verified note-for-note transcriptions.",
   "styles": [
     {
-      "styleId": "samba",
+      "styleId": "brazilian-samba",
       "compare": [
         "how the surdo gives the groove a firm, warm floor while pandeiro and tamborim supply crisp, separate subdivisions",
         "the bright cavaquinho attacks against the guitar and bass, with each part leaving room for the others",
@@ -22,7 +22,7 @@
       ]
     },
     {
-      "styleId": "bossa-nova",
+      "styleId": "brazilian-bossa-nova",
       "compare": [
         "the guitar's soft, sharply voiced syncopation and the independent two-beat bass motion",
         "how chord anticipation creates forward motion while the vocal stays relaxed and close",
@@ -38,7 +38,7 @@
       ]
     },
     {
-      "styleId": "pagode",
+      "styleId": "brazilian-pagode",
       "compare": [
         "the interlocking tantã, repique de mão, pandeiro, and banjo/cavaquinho parts, each with its own attack and register",
         "the bass's buoyant syncopation against the hand percussion's sharper responses",
@@ -55,7 +55,7 @@
       ]
     },
     {
-      "styleId": "partido-alto",
+      "styleId": "brazilian-partido-alto",
       "compare": [
         "the repeating partido-alto rhythmic cell and the variation singers lay over it",
         "call-and-response placement, including the space between a lead verse and group answer",
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "styleId": "samba-de-roda",
+      "styleId": "brazilian-samba-de-roda",
       "compare": [
         "the circle's claps and hand percussion carrying a flexible, communal pulse",
         "the lead chula and group response, with breaths and repeated lines that invite participation",
@@ -89,7 +89,7 @@
       ]
     },
     {
-      "styleId": "forro",
+      "styleId": "brazilian-forro",
       "compare": [
         "the accordion's bright melodic lead and short pickup phrases against the zabumba's low/high dance pattern",
         "the triangle's crisp subdivisions and how its accents lift the groove without masking the accordion",
@@ -106,7 +106,7 @@
       ]
     },
     {
-      "styleId": "baiao",
+      "styleId": "brazilian-baiao",
       "compare": [
         "the alternation of low zabumba strokes and bright beater answers that makes the baião pulse immediately recognizable",
         "how bass reinforces the low drum without smearing the high syncopated replies",
@@ -123,7 +123,7 @@
       ]
     },
     {
-      "styleId": "xote",
+      "styleId": "brazilian-xote",
       "compare": [
         "the relaxed two-step sway: broad zabumba beats with a lighter, less continuous triangle part than fast forró",
         "the accordion's lyrical pickup and response phrases around the vocal",
@@ -140,7 +140,7 @@
       ]
     },
     {
-      "styleId": "mpb",
+      "styleId": "brazilian-mpb",
       "compare": [
         "how Brazilian rhythmic foundations meet pop song form, electric/acoustic colors, and richer chord movement",
         "the bass line's melodic replies and its role in giving the arrangement forward motion",
@@ -157,7 +157,7 @@
       ]
     },
     {
-      "styleId": "samba-reggae",
+      "styleId": "brazilian-samba-reggae",
       "compare": [
         "the large surdo ensemble's interlocking low calls and high replies, with different drum groups retaining distinct accents",
         "the forward reggae-influenced pocket and the tension between straight pulse and syncopated percussion",
@@ -174,7 +174,7 @@
       ]
     },
     {
-      "styleId": "samba-rock",
+      "styleId": "brazilian-samba-rock",
       "compare": [
         "the clipped guitar syncopation against the warmer, more forceful funk-style bass and drum pocket",
         "how pandeiro and percussion add a Brazilian lilt while kit backbeat and guitar make the groove hit hard",

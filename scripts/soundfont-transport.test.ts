@@ -1,4 +1,4 @@
-import test from 'node:test';
+import test, { after } from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {SoundfontSongPlayer} from '../src/engine/playback/soundfont/player';
@@ -11,6 +11,21 @@ import type {Performance} from '../src/engine/band/performanceData';
 import type {SampleCommand} from '../src/engine/playback/soundfont/protocol';
 setSoundfontBankReader(async id=>{const d=readFileSync(`src/assets/soundfonts/${id}.sfpack`);return d.buffer.slice(d.byteOffset,d.byteOffset+d.byteLength);});
 const flush=()=>new Promise<void>(resolve=>setImmediate(resolve));
+const originalWorker=globalThis.Worker;
+class CompositionWorkerStub {
+  onmessage: ((event: MessageEvent) => void) | null = null;
+  onerror: ((event: ErrorEvent) => void) | null = null;
+  onmessageerror: (() => void) | null = null;
+  postMessage(sheet: Sheet) {
+    queueMicrotask(() => {
+      try { this.onmessage?.({ data: { performance: arrangeBand(sheet) } } as MessageEvent); }
+      catch (error) { this.onmessage?.({ data: { error: error instanceof Error ? error.message : String(error) } } as MessageEvent); }
+    });
+  }
+  terminate() {}
+}
+Object.defineProperty(globalThis,'Worker',{configurable:true,value:CompositionWorkerStub});
+after(()=>{Object.defineProperty(globalThis,'Worker',{configurable:true,value:originalWorker});});
 function deferred(){let resolve!:()=>void;const promise=new Promise<void>(yes=>{resolve=yes;});return {promise,resolve};}
 type Command=SampleCommand extends infer C?C extends SampleCommand?Omit<C,'request'>:never:never;
 interface Graph {plan?:SamplePlan;position:number;level:number;output:GainNode;scenes?:undefined}

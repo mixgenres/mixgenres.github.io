@@ -63,18 +63,238 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "roots bass melody and organ bubble voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "roots bass melody and organ bubble voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "roots bass melody and organ bubble guitar accompaniment", "shortName": "Offbeat guitar skank", "description": "Strike clipped chords on beats two and four; keep the voicing light, the decay short, and beat one open for bass and drums.", "role": "harmony", "onsets": [1, 3], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.22, 0.22], "articulation": "staccato"},
-        {"name": "roots bass melody and organ bubble guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "roots bass melody and organ bubble organ accompaniment", "shortName": "Organ 2/4 chop", "description": "Double the light guitar chop on beats two and four; keep this right-hand stab clear while the separate low bubble pattern occupies the upbeats.", "role": "harmony", "onsets": [1, 3], "instruments": ["organ"], "cycleLength": 1, "durations": [0.22, 0.22], "articulation": "staccato"},
-        {"name": "roots bass melody and organ bubble organ cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["organ"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "roots bass melody and organ bubble low anchor", "role": "bass", "onsets": [0.5, 1.75, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.25]},
-        {"name": "roots bass melody and organ bubble bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "roots bass melody and organ bubble kit", "shortName": "One-drop drums", "description": "Keep beat one empty; land kick and snare together on beat three, with light hats around the offbeat guitar and bass.", "role": "percussion", "onsets": [0.5, 1.5, 2, 2, 2.5, 3.5], "instruments": ["drums"], "hits": ["hat", "hat", "kick", "snare", "hat", "hat"], "cycleLength": 1, "accents": [0.45, 0.45, 0.9, 0.88, 0.45, 0.45]},
-        {"name": "roots bass melody and organ bubble drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "roots bass melody and organ bubble shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "roots bass melody and organ bubble shaker cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["shaker"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {
+          "name": "roots bass melody and organ bubble voice statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.75,
+            1.5
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "roots bass melody and organ bubble voice cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "roots bass melody and organ bubble guitar accompaniment",
+          "shortName": "Offbeat guitar skank",
+          "description": "Strike clipped chords on beats two and four; keep the voicing light, the decay short, and beat one open for bass and drums.",
+          "role": "harmony",
+          "onsets": [
+            1,
+            3
+          ],
+          "instruments": [
+            "guitar"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.22,
+            0.22
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "roots bass melody and organ bubble guitar cadence fill",
+          "role": "harmony",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "guitar"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "roots bass melody and organ bubble organ accompaniment",
+          "shortName": "Organ 2/4 chop",
+          "description": "Double the light guitar chop on beats two and four; keep this right-hand stab clear while the separate low bubble pattern occupies the upbeats.",
+          "role": "harmony",
+          "onsets": [
+            0.5,
+            1.5,
+            2.5,
+            3.5
+          ],
+          "instruments": [
+            "organ"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.18,
+            0.18,
+            0.18,
+            0.18
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "roots bass melody and organ bubble organ cadence fill",
+          "role": "harmony",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "organ"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "roots bass melody and organ bubble low anchor",
+          "role": "bass",
+          "onsets": [
+            0,
+            1.25,
+            2,
+            2.75,
+            3.5
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "articulation": "legato",
+          "durations": [
+            0.8,
+            0.35,
+            0.72,
+            0.3,
+            0.42
+          ]
+        },
+        {
+          "name": "roots bass melody and organ bubble bass cadence fill",
+          "role": "bass",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "roots bass melody and organ bubble kit",
+          "shortName": "One-drop drums",
+          "description": "Keep beat one empty; land kick and snare together on beat three, with light hats around the offbeat guitar and bass.",
+          "role": "percussion",
+          "onsets": [
+            0.5,
+            1.5,
+            2,
+            2,
+            2.5,
+            3.5
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "hits": [
+            "hat",
+            "hat",
+            "kick",
+            "snare",
+            "hat",
+            "hat"
+          ],
+          "cycleLength": 1,
+          "accents": [
+            0.42,
+            0.38,
+            0.98,
+            0.84,
+            0.4,
+            0.38
+          ]
+        },
+        {
+          "name": "roots bass melody and organ bubble drums cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll",
+          "hits": [
+            "tom",
+            "snare",
+            "snare"
+          ]
+        },
+        {
+          "name": "roots bass melody and organ bubble shaker pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "shaker"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent"
+        },
+        {
+          "name": "roots bass melody and organ bubble shaker cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "shaker"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        }
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],
@@ -160,18 +380,232 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "one drop kick rim on beat three voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "one drop kick rim on beat three voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "one drop kick rim on beat three guitar accompaniment", "shortName": "Offbeat guitar skank", "description": "Strike clipped chords on beats two and four; keep the voicing light, the decay short, and beat one open for bass and drums.", "role": "harmony", "onsets": [1, 3], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.22, 0.22], "articulation": "staccato"},
-        {"name": "one drop kick rim on beat three guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "one drop kick rim on beat three organ accompaniment", "shortName": "Organ 2/4 chop", "description": "Double the light guitar chop on beats two and four; keep this right-hand stab clear while the separate low bubble pattern occupies the upbeats.", "role": "harmony", "onsets": [1, 3], "instruments": ["organ"], "cycleLength": 1, "durations": [0.22, 0.22], "articulation": "staccato"},
-        {"name": "one drop kick rim on beat three organ cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["organ"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "one drop kick rim on beat three low anchor", "role": "bass", "onsets": [0.5, 1.75, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.25]},
-        {"name": "one drop kick rim on beat three bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "one drop kick rim on beat three kit", "shortName": "One-drop drums", "description": "Keep beat one empty; land kick and snare together on beat three, with light hats around the offbeat guitar and bass.", "role": "percussion", "onsets": [0.5, 1.5, 2, 2, 2.5, 3.5], "instruments": ["drums"], "hits": ["hat", "hat", "kick", "snare", "hat", "hat"], "cycleLength": 1, "accents": [0.45, 0.45, 0.9, 0.88, 0.45, 0.45]},
-        {"name": "one drop kick rim on beat three drums cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["drums"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll", "hits": ["tom", "snare", "snare"]},
-        {"name": "one drop kick rim on beat three shaker pulse", "role": "percussion", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["shaker"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "one drop kick rim on beat three shaker cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["shaker"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {
+          "name": "one drop kick rim on beat three voice statement",
+          "role": "lead",
+          "onsets": [
+            0,
+            0.75,
+            1.5
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "articulation": "legato"
+        },
+        {
+          "name": "one drop kick rim on beat three voice cadence fill",
+          "role": "lead",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "voice"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "one drop kick rim on beat three guitar accompaniment",
+          "shortName": "Offbeat guitar skank",
+          "description": "Strike clipped chords on beats two and four; keep the voicing light, the decay short, and beat one open for bass and drums.",
+          "role": "harmony",
+          "onsets": [
+            1,
+            3
+          ],
+          "instruments": [
+            "guitar"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.16,
+            0.16
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "one drop kick rim on beat three guitar cadence fill",
+          "role": "harmony",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "guitar"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "one drop kick rim on beat three organ accompaniment",
+          "shortName": "Organ 2/4 chop",
+          "description": "Double the light guitar chop on beats two and four; keep this right-hand stab clear while the separate low bubble pattern occupies the upbeats.",
+          "role": "harmony",
+          "onsets": [
+            0.5,
+            2.5
+          ],
+          "instruments": [
+            "organ"
+          ],
+          "cycleLength": 1,
+          "durations": [
+            0.22,
+            0.22
+          ],
+          "articulation": "staccato"
+        },
+        {
+          "name": "one drop kick rim on beat three organ cadence fill",
+          "role": "harmony",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "organ"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "one drop kick rim on beat three low anchor",
+          "role": "bass",
+          "onsets": [
+            0,
+            1.5,
+            2,
+            3.5
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "articulation": "staccato",
+          "durations": [
+            0.9,
+            0.35,
+            0.82,
+            0.35
+          ]
+        },
+        {
+          "name": "one drop kick rim on beat three bass cadence fill",
+          "role": "bass",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "bass"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "ornament"
+        },
+        {
+          "name": "one drop kick rim on beat three kit",
+          "shortName": "One-drop drums",
+          "description": "Keep beat one empty; land kick and snare together on beat three, with light hats around the offbeat guitar and bass.",
+          "role": "percussion",
+          "onsets": [
+            0.5,
+            1.5,
+            2,
+            2,
+            2.5,
+            3.5
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "hits": [
+            "hat",
+            "hat",
+            "kick",
+            "snare",
+            "hat",
+            "hat"
+          ],
+          "cycleLength": 1,
+          "accents": [
+            0.45,
+            0.45,
+            0.9,
+            0.88,
+            0.45,
+            0.45
+          ]
+        },
+        {
+          "name": "one drop kick rim on beat three drums cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "drums"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll",
+          "hits": [
+            "tom",
+            "snare",
+            "snare"
+          ]
+        },
+        {
+          "name": "one drop kick rim on beat three shaker pulse",
+          "role": "percussion",
+          "onsets": [
+            0,
+            0.5,
+            1,
+            1.5,
+            2,
+            2.5,
+            3,
+            3.5
+          ],
+          "instruments": [
+            "shaker"
+          ],
+          "cycleLength": 1,
+          "articulation": "accent"
+        },
+        {
+          "name": "one drop kick rim on beat three shaker cadence fill",
+          "role": "percussion",
+          "onsets": [
+            3,
+            3.5,
+            3.75
+          ],
+          "instruments": [
+            "shaker"
+          ],
+          "cycleLength": 1,
+          "phraseEnd": true,
+          "articulation": "roll"
+        }
       ],
       "instrumentTechniques": {
         "voice": ["vibrato", "accent", "staccato", "legato"],

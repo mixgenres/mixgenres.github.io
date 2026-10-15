@@ -303,6 +303,7 @@ export const INSTRUMENT_CATALOG: InstrumentDef[] = [
 const instrumentAliases: Array<[string, string, string]> = [
   ['suona','oboe','Chinese conical double-reed shawm; approximated with the double-reed physical model.'],
   ['gaohu','erhu','Cantonese high-register bowed fiddle; approximated with the erhu physical model.'],
+  ['kamancheh','violin','Persian spiked fiddle, currently modeled from the bowed-string/violin profile rather than a dedicated kamancheh sample.'],
   ['ajaeng','cello','Korean bowed zither modeled from the low bowed-string profile.'],
   ['baglama','bouzouki','Long-necked saz-family lute, modeled from a plucked fretted lute.'],
   ['bajo-sexto','guitar','Mexican twelve-string bass-register guitar, modeled from guitar.'],
@@ -343,6 +344,8 @@ for (const [id, sourceId, note] of instrumentAliases) {
 }
 const reyong = INSTRUMENT_CATALOG.find(instrument => instrument.id === 'reyong');
 if (reyong) reyong.name = 'Reyong';
+const kamancheh = INSTRUMENT_CATALOG.find(instrument => instrument.id === 'kamancheh');
+if (kamancheh) kamancheh.name = 'Kamancheh';
 
 // Timpani have definite pitch and a dedicated chromatic SoundFont patch. They
 // share the drum articulation vocabulary, but must not inherit kit routing.

@@ -5,7 +5,7 @@
   "source": "Apple Music streaming track pages. Candidate lists are for review; no reference audio downloaded.",
   "styles": [
     {
-      "styleId": "west-coast-swing",
+      "styleId": "swing-west-coast-swing",
       "compare": [
         "the relaxed swung pocket and clear backbeat at social-dance tempo",
         "how bass and drums keep the groove grounded while guitar, keys, or vocal phrases stretch and compress",
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "styleId": "lindy-hop",
+      "styleId": "swing-lindy-hop",
       "compare": [
         "four-to-the-bar swing rhythm and a clearly walking bass line",
         "riff-based horn phrases, breaks, and the lift into a shout chorus",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "styleId": "balboa",
+      "styleId": "swing-balboa",
       "compare": [
         "fast continuous swing pulse with compact, tightly articulated phrases",
         "walking bass and ride definition when horn lines become busy",
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "styleId": "charleston",
+      "styleId": "swing-charleston",
       "compare": [
         "the buoyant two-beat feel and ragtime-derived syncopation",
         "short, bright piano and horn accents that create a danceable lilt",
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "styleId": "slow-swing",
+      "styleId": "swing-slow-swing",
       "compare": [
         "wide phrase spacing, soft brush detail, and a relaxed pulse",
         "how a walking or lightly marked bass supports longer melodic notes",
@@ -85,7 +85,7 @@
       ]
     },
     {
-      "styleId": "electro-swing",
+      "styleId": "swing-electro-swing",
       "compare": [
         "the relationship between a looped electronic kick/bass pulse and sampled or played swing phrases",
         "how breaks, edits, and drops mark form instead of continuous acoustic ride playing",
@@ -101,7 +101,7 @@
       ]
     },
     {
-      "styleId": "fusion-swing",
+      "styleId": "swing-fusion-swing",
       "compare": [
         "how a swung or triplet-derived phrase sits against electric bass and contemporary drums",
         "the role of electric keys and guitar in building harmonic density",

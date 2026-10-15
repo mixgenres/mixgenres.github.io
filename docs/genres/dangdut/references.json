@@ -4,7 +4,7 @@
   "source": "Apple Music individual track pages were checked for candidate metadata. Reference audio was not downloaded or auditioned.",
   "references": [
     {
-      "styleId": "classic",
+      "styleId": "dangdut-classic",
       "compare": [
         "the Melayu melodic line and its relationship to the repeating bass figure",
         "kendang or tabla-like percussion, kick placement, and the dance pulse",
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "styleId": "koplo",
+      "styleId": "dangdut-koplo",
       "compare": [
         "kendang's rapid fills and phrase-ending rolls against the stable dance pulse",
         "the groove's push-and-pull, including how fills lead into the vocal hook",
@@ -38,7 +38,7 @@
       ]
     },
     {
-      "styleId": "rock-dangdut",
+      "styleId": "dangdut-rock-dangdut",
       "compare": [
         "distorted or overdriven electric-guitar riff and lead phrases against dangdut percussion",
         "rock backbeat weight versus the characteristic kendang accents and bass motion",
@@ -54,7 +54,7 @@
       ]
     },
     {
-      "styleId": "electronic-dangdut",
+      "styleId": "dangdut-electronic-dangdut",
       "compare": [
         "programmed kick and sub-bass against the kendang-derived rhythmic accents",
         "synth hooks, keyboard fills, and the arrangement's repeated dance sections",

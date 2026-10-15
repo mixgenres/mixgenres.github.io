@@ -5,7 +5,7 @@
   "source": "Apple Music artist, release, and track metadata were used to collect streaming candidates. Reference audio was not downloaded; sonic comparison and timecodes remain pending.",
   "styles": [
     {
-      "styleId": "traditional",
+      "styleId": "gnawa-traditional",
       "compare": [
         "the guembri’s repeated modal anchor and its plucked/slapped tone",
         "how qraqeb subdivisions interlock with the guembri cycle",
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "styleId": "lila-trance",
+      "styleId": "gnawa-lila-trance",
       "compare": [
         "how the invocation introduces the guembri cycle before the full chant texture",
         "short chant calls and answering phrases rather than continuous vocal doubling",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "styleId": "gnawa-jazz",
+      "styleId": "gnawa-gnawa-jazz",
       "compare": [
         "the guembri vamp’s relationship to saxophone improvisation",
         "how qraqeb keeps a compound pulse while the lead phrases stretch",
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "styleId": "gnawa-rock",
+      "styleId": "gnawa-gnawa-rock",
       "compare": [
         "the guembri riff’s low-end attack against electric guitar and bass-range instruments",
         "the contrast between drumless or sparse openings and the full rock groove",

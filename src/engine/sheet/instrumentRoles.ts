@@ -57,22 +57,28 @@ export function noteLengthBeats(
 ): number {
   const art = articulation ?? '';
   let mult = 1;
-  if (/staccato|seco|picado|damp|mute|bachi|alternate-pluck/i.test(art)) mult = 0.42;
-  else if (/marcato|accent/i.test(art)) mult = 0.7;
+  // Only articulations that explicitly describe note length may shorten its gate.
+  // Attack methods (bachi, alternate picking/plucking) and dynamics (accent,
+  // marcato, heavy) do not imply a shorter note; mute often selects a timbre,
+  // and the sample's muted envelope already expresses its decay. Those gestures
+  // must not silently replace the written duration with a global gate ratio.
+  if (/staccato|seco|picado|damp|choke|chapa/i.test(art)) mult = 0.42;
   else if (/legato|ligado|tenuto|sostenuto/i.test(art)) mult = 1.3;
-  else if (/pesado|heavy/i.test(art)) mult = 1.15;
 
   const gap = Math.max(0.05, gapBeats);
   const targetBeats = authoredBeats * mult;
 
   switch (p.sustain) {
     case 'percussive':
-      return Math.min(0.25, Math.min(gap * 0.9, targetBeats));
+      // The SoundFont's recorded envelope and patch-specific release metadata
+      // own resonance. `ring` is instrument metadata, not a MIDI key-hold cap.
+      return Math.min(gap * 0.9, targetBeats);
     case 'short':
       return Math.max(0.05, Math.min(gap * 0.8, targetBeats));
     case 'decaying':
-      // Decaying notes (piano, guitar) fade naturally but shouldn't be forced to ring forever if the pattern has short notes
-      return Math.min(p.ring, Math.min(gap * 0.95, targetBeats));
+      // Let the recorded decay continue for the authored phrase length. A
+      // fixed beat ceiling sent note-off early on slow, sustained phrases.
+      return Math.min(gap * 0.95, targetBeats);
     case 'blown':
       // Winds/brass sustain with breath, respect authored length tightly with a tiny release gap
       return Math.max(0.08, Math.min(gap * 0.9, targetBeats));

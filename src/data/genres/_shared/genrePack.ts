@@ -14,7 +14,7 @@ export interface AuthoredCell {
   role: string;
   instruments?: string[];
   onsets: number[];
-  durations?: number[];
+  durations?: Array<number | undefined>;
   accents?: number[];
   velocities?: number[];
   /** Authored per-event pocket in milliseconds; positive is late, negative is early. */
@@ -395,7 +395,7 @@ function styleDefinition(input: GenrePackInput, item: CalibratedStyleInput): Gen
     characteristicInstruments: Object.values(styleRoles).flat() as GenreStyleDefinition['characteristicInstruments'],
     preferredMeters: [meter === 'free / cycle' || meter === 'free / 4/4' ? '4/4' : meter], tempoRange: tempo, keySubstyles: [item.name], coreConcepts: list(stylePatterns, styleTechniques),
     rhythmicGrammar: [...stylePatterns], scaleMode,
-    tuningSystem: input.tuningSystem, signatureCell: stylePatterns[0] ?? input.patternFamilies[0],
+    tuningSystem: item.tuningSystem ?? input.tuningSystem, signatureCell: stylePatterns[0] ?? input.patternFamilies[0],
     grooveMechanics: item.groove,
     prominentChords: styleHarmony,
     sectionProgressions: styleProgressions,
@@ -456,7 +456,7 @@ function studentCellName(style: GenreStyleDefinition, cell: AuthoredCell): strin
 
 function studentInstrumentLabel(instrumentId: string): string {
   const studentLabels: Record<string, string> = {
-    voice: 'Vocal', 'pedal-steel': 'Pedal steel', 'upright-bass': 'Upright bass',
+    voice: 'Vocal', choir: 'Choir', 'pedal-steel': 'Pedal steel', 'upright-bass': 'Upright bass',
     piano: 'Piano', drums: 'Drum kit',
   };
   if (studentLabels[instrumentId]) return studentLabels[instrumentId];
@@ -498,7 +498,7 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
   const cycleLength = cell.cycleLength ?? 1;
   const instruments = cell.instruments ?? style.calibration!.roles[cell.role]?.preferredInstruments ?? [];
   const events: PatternEvent[] = cell.onsets.map((position, i) => ({
-    position, duration: cell.durations?.[i] ?? (cell.role === 'harmony' ? .35 : .2),
+    position, duration: cell.durations?.[i],
     kind: cell.phraseEnd ? 'fill' : 'attack',
     accent: cell.accents?.[i], velocity: cell.velocities?.[i],
     articulation: cell.articulations?.[i] ?? cell.articulation, hitType: cell.hits?.[i], pitch: cell.pitches?.[i], notation: cell.notations?.[i], microtiming: cell.microtiming?.[i],
@@ -525,7 +525,8 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
     instruments: instruments as MusicalPattern['instruments'], canCrossRole: false, sourceLevel: 'style-authored',
     meter, cycleLength, subdivisions: beats * stepsPerBeat * cycleLength,
     onsetGrid: cell.onsets.map(position => Math.round(position * stepsPerBeat)),
-    durationGrid: events.map(event => Math.max(1, Math.round(event.duration! * stepsPerBeat))),
+    ...(cell.durations?.length === cell.onsets.length && cell.durations.every((duration): duration is number => duration !== undefined && Number.isFinite(duration))
+      ? { durationGrid: cell.durations.map(duration => Math.max(1, Math.round(duration * stepsPerBeat))) } : {}),
     ...(events.every(event => event.accent !== undefined) ? { accentProfile: events.map(event => event.accent!) } : {}),
     ...(events.every(event => event.velocity !== undefined) ? { velocityProfile: events.map(event => event.velocity!) } : {}),
     ...(cell.hits ? { hitGrid: cell.hits.filter((hit): hit is string => typeof hit === 'string') } : {}), events,
@@ -545,7 +546,7 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
       : cell.pedagogicalStudy
       ? `Local ${cell.pedagogicalStudy} practice study derived from this style's folder-authored source cell; quarter-note beat positions and phrase conditions.`
       : 'Folder-authored role cell; quarter-note beat positions and phrase conditions.',
-    authenticityTags: [input.id, style.id, slug(cell.name)], tuningSystem: input.tuningSystem, enabled: true, weight: cell.phraseEnd ? .4 : 1,
+    authenticityTags: [input.id, style.id, slug(cell.name)], tuningSystem: style.tuningSystem ?? input.tuningSystem, enabled: true, weight: cell.phraseEnd ? .4 : 1,
   };
 }
 
@@ -633,7 +634,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
         name: `${instrumentId} foundation pulse study`,
         shortName: `${instrumentLabel} basics`,
         onsets: selected.map(event => event.position),
-        durations: selected.map(event => event.duration ?? 0.25),
+        durations: selected.map(event => event.duration),
         accents: selected.some(event => event.accent !== undefined) ? selected.map(event => event.accent ?? 0.6) : undefined,
         microtiming: selected.map(event => event.microtiming ?? 0),
         pitches: selected.map(event => event.pitch),
@@ -663,7 +664,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
         name: `${instrumentId} phrase answer study`,
         shortName: `${instrumentLabel} reply`,
         onsets: selected.map(event => start + event.position - first),
-        durations: selected.map(event => event.duration ?? 0.25),
+        durations: selected.map(event => event.duration),
         accents: selected.some(event => event.accent !== undefined) ? selected.map(event => event.accent ?? 0.6) : undefined,
         microtiming: selected.map(event => event.microtiming ?? 0),
         pitches: selected.map(event => event.pitch),
@@ -699,7 +700,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
         name: `${instrumentId} opening-motif development variation`,
         shortName: `${instrumentLabel} variation`,
         onsets: motif.map(event => start + event.position - first),
-        durations: motif.map(event => event.duration ?? 0.25),
+        durations: motif.map(event => event.duration),
         accents: motif.some(event => event.accent !== undefined) ? motif.map(event => event.accent ?? 0.6) : undefined,
         microtiming: motif.map(event => event.microtiming ?? 0),
         pitches: motif.map(event => event.pitch),
@@ -735,7 +736,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
       if (Math.abs(reentryPosition - original.position) >= 0.5) {
         const sourceEvents = [
         { ...original, accent: original.accent },
-        { ...original, position: reentryPosition, duration: Math.min(anchorDuration, 0.35), accent: original.accent === undefined ? undefined : original.accent * 0.72 },
+        { ...original, position: reentryPosition, duration: original.duration, accent: original.accent === undefined ? undefined : original.accent * 0.72 },
         ].sort((a, b) => a.position - b.position);
         // A bass anchor authored late in the bar becomes the softer answer;
         // seed its complementary downbeat first so the phrase stays ordered.
@@ -748,7 +749,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
           name: `${instrumentId} anchor re-entry study`,
           shortName: `${instrumentLabel} re-entry`,
           onsets: sourceEvents.map(event => event.position),
-          durations: sourceEvents.map(event => event.duration ?? 0.25),
+          durations: sourceEvents.map(event => event.duration),
           accents: sourceEvents.map((event, index) => event.accent ?? (index === 0 ? 0.78 : 0.52)),
           pitches: sourceEvents.map(event => event.pitch),
           notations: sourceEvents.map(event => event.notation),

@@ -1,8 +1,12 @@
 import type { RhythmicIntent } from './schema/rhythmic-intent';
 import type { HitFunction } from './hitFunctions';
 export const KIT_HIT_INTENT_RULES: Array<{ pattern: RegExp; intent: RhythmicIntent; hits?: HitFunction[]; dynamicOpen?: boolean }> = [
+  { pattern: /\bdum\b|\bdoum\b/, intent: 'low', hits: ['downbeat', 'bass-tone'] },
+  { pattern: /\btak\b|\btek\b|\bka\b/, intent: 'slap', hits: ['slap'] },
+  { pattern: /\bclap\b|\bhandclap\b/, intent: 'backbeat', hits: ['tone'] },
   { pattern: /kick|bass-drum|bombo|grave/, intent: 'low', hits: ['downbeat', 'bass-tone'] },
   { pattern: /snare|backbeat/, intent: 'backbeat' },
+  { pattern: /tom/, intent: 'accent' },
   { pattern: /ride.*bell|bell/, intent: 'bell' },
   { pattern: /crash/, intent: 'accent' },
   { pattern: /ride|hat|hihat|hi-hat|cymbal/, intent: 'offbeat', dynamicOpen: true },

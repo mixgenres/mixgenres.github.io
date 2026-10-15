@@ -1,0 +1,120 @@
+{
+  "genreId": "house",
+  "reviewed": "2026-10-15",
+  "status": "Five streaming recording candidates are listed for each of the seven House styles. Listening comparisons and useful timecodes remain pending; these are candidates, not verified sonic matches.",
+  "source": "Apple Music individual track and album pages with displayed artist/release metadata. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "house-deep-house",
+      "compare": [
+        "warm, jazz- and soul-colored chord voicings against a deep, restrained bass line",
+        "how the groove keeps its pulse while bass, chord and melodic phrases breathe independently",
+        "subtle timing, sample texture and room character rather than bright, rigid impact",
+        "small changes in harmony and instrumental layers across a long club arrangement"
+      ],
+      "recordings": [
+        { "title": "Can You Feel It", "artist": "Mr. Fingers", "url": "https://music.apple.com/us/album/amnesia/1272313113", "timecodes": [] },
+        { "title": "Mystery of Love", "artist": "Mr. Fingers", "url": "https://music.apple.com/us/song/1272313508", "timecodes": [] },
+        { "title": "Altered States", "artist": "Ron Trent", "url": "https://music.apple.com/us/song/290667776", "timecodes": [] },
+        { "title": "Shades of Jae", "artist": "Moodymann", "url": "https://music.apple.com/us/song/1114488818", "timecodes": [] },
+        { "title": "Bar a Thym", "artist": "Kerri Chandler", "url": "https://music.apple.com/us/song/1729987415", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "house-chicago-house",
+      "compare": [
+        "drum-machine pulse and programmed accents against soulful vocal or spoken phrases",
+        "organ and piano stabs as rhythmic hooks rather than a continuous chord pad",
+        "the relationship between a straight club pulse and human, gospel- or disco-derived phrasing",
+        "raw machine timbres, sampled details and gradual DJ-friendly arrangement changes"
+      ],
+      "recordings": [
+        { "title": "Your Love", "artist": "Frankie Knuckles", "url": "https://music.apple.com/us/song/1601915661", "timecodes": [] },
+        { "title": "Move Your Body", "artist": "Marshall Jefferson", "url": "https://music.apple.com/us/song/726972502", "timecodes": [] },
+        { "title": "Love Can't Turn Around", "artist": "Farley \"Jackmaster\" Funk & Jesse Saunders", "url": "https://music.apple.com/us/song/354668159", "timecodes": [] },
+        { "title": "Jack Your Body (Original Club Mix)", "artist": "Steve \"Silk\" Hurley", "url": "https://music.apple.com/us/song/333765969", "timecodes": [] },
+        { "title": "Can You Feel It", "artist": "Mr. Fingers", "url": "https://music.apple.com/us/album/amnesia/1272313113", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "house-garage-piano-house",
+      "compare": [
+        "piano chord attacks, octave hooks and fills against a steady dance-floor foundation",
+        "soulful lead vocals and response phrases, with space between vocal lines",
+        "gospel- and disco-colored harmony that builds energy without a constant synth wash",
+        "busy piano, bass and percussion parts staying distinct in a bright, punchy mix"
+      ],
+      "recordings": [
+        { "title": "Show Me Love", "artist": "Robin S.", "url": "https://music.apple.com/us/song/1645048553", "timecodes": [] },
+        { "title": "Gypsy Woman (La Da Dee) [7\" Version]", "artist": "Crystal Waters", "url": "https://music.apple.com/us/song/1645557265", "timecodes": [] },
+        { "title": "Finally", "artist": "CeCe Peniston", "url": "https://music.apple.com/us/song/1443769846", "timecodes": [] },
+        { "title": "Ride On Time", "artist": "Black Box", "url": "https://music.apple.com/us/song/690357445", "timecodes": [] },
+        { "title": "Too Blind to See It", "artist": "Kym Sims", "url": "https://music.apple.com/us/song/574686362", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "house-acid-house",
+      "compare": [
+        "a monophonic, resonant squelch line with slides, accents and rests that make the phrase move",
+        "filter and resonance changes creating development from a compact repeating sequence",
+        "raw drum-machine sounds and the contrast between the bass sequence and open sections",
+        "how other parts leave room for the acid line instead of doubling its rhythm"
+      ],
+      "recordings": [
+        { "title": "Acid Tracks", "artist": "Phuture", "url": "https://music.apple.com/us/album/acid-tracks-ep/1601915448", "timecodes": [] },
+        { "title": "Voodoo Ray", "artist": "A Guy Called Gerald", "url": "https://music.apple.com/us/song/6762979445", "timecodes": [] },
+        { "title": "Pacific State (Mixed)", "artist": "808 State", "url": "https://music.apple.com/us/song/1674286372", "timecodes": [] },
+        { "title": "Acperience 1 (Original Version)", "artist": "Hardfloor", "url": "https://music.apple.com/us/song/484913534", "timecodes": [] },
+        { "title": "Phuture Jacks", "artist": "Phuture", "url": "https://music.apple.com/us/song/1601915549", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "house-tech-house",
+      "compare": [
+        "tight, dry kick and percussion with bass syncopations that do not simply double every kick",
+        "short, distinctive hook fragments and rhythmic edits instead of a broad chord progression",
+        "small changes in drum density, texture and bass articulation across repeated sections",
+        "controlled low-end weight, sharp transients and room around the midrange hook"
+      ],
+      "recordings": [
+        { "title": "Losing It", "artist": "FISHER", "url": "https://music.apple.com/us/song/1408454985", "timecodes": [] },
+        { "title": "La La Land", "artist": "Green Velvet", "url": "https://music.apple.com/us/song/64919292", "timecodes": [] },
+        { "title": "Turn off the Lights", "artist": "Chris Lake & Alexis Roberts", "url": "https://music.apple.com/us/song/1772333125", "timecodes": [] },
+        { "title": "Buggin' (feat. Jem Cooke)", "artist": "Hot Since 82", "url": "https://music.apple.com/us/song/1399096194", "timecodes": [] },
+        { "title": "La Danza", "artist": "John Summit", "url": "https://music.apple.com/us/song/1783986855", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "house-progressive-house",
+      "compare": [
+        "long-form tension from gradual addition and removal of parts rather than constant full-density looping",
+        "evolving arpeggios and chord changes whose register and voicing develop over a long arc",
+        "breakdown and return transitions, including how the kick and bass re-enter",
+        "wide melodic layers balanced against centered kick and bass without losing punch"
+      ],
+      "recordings": [
+        { "title": "Xpander", "artist": "Sasha", "url": "https://music.apple.com/us/song/1308821701", "timecodes": [] },
+        { "title": "Heaven Scent", "artist": "Bedrock", "url": "https://music.apple.com/us/song/596783330", "timecodes": [] },
+        { "title": "Opus", "artist": "Eric Prydz", "url": "https://music.apple.com/us/song/1440851025", "timecodes": [] },
+        { "title": "Strobe", "artist": "deadmau5", "url": "https://music.apple.com/us/song/1824106741", "timecodes": [] },
+        { "title": "I Remember", "artist": "Kaskade & deadmau5", "url": "https://music.apple.com/us/song/1821960365", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "house-afro-house",
+      "compare": [
+        "layered hand percussion and syncopated patterns around a grounded house pulse",
+        "call-and-response between vocal or melodic hooks and percussion phrases",
+        "bass and log-drum-like low figures moving with the groove rather than a generic sub pulse",
+        "organic rhythmic detail and open space in a deep, wide club mix"
+      ],
+      "recordings": [
+        { "title": "Superman", "artist": "Black Coffee", "url": "https://music.apple.com/us/song/1440870001", "timecodes": [] },
+        { "title": "Move", "artist": "Adam Port, Stryv & Malachiii", "url": "https://music.apple.com/us/song/1749043132", "timecodes": [] },
+        { "title": "Yamore (feat. Cesária Evora, Benja (NL) & Franc Fala)", "artist": "MoBlack & Salif Keïta", "url": "https://music.apple.com/us/song/1861566560", "timecodes": [] },
+        { "title": "Fefe (U Lost) [feat. Fi-Fi]", "artist": "Caiiro", "url": "https://music.apple.com/us/song/1776958928", "timecodes": [] },
+        { "title": "We Dance Again (feat. Nakhane Toure)", "artist": "Black Coffee", "url": "https://music.apple.com/us/album/we-dance-again-feat-nakhane-toure-single/1445036051", "timecodes": [] }
+      ]
+    }
+  ]
+}

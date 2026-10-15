@@ -61,8 +61,7 @@ export function compileNotatedScore(sheet: Sheet): NotatedScore {
             const steps = native?.stepsPerBar ?? 16;
             const attacks = onsets.flatMap((onset, index): WrittenAttack | WrittenAttack[] => {
               const position = (native?.fractionalPositions?.[index] ?? onset / steps) * beats + (pattern?.anticipationOffset ?? 0) / steps * beats;
-              const sourceHit = native?.hitTypes?.[index] || detail?.hitTypes?.[index] || pattern?.hitGrid?.[index]
-                || (pattern?.instruments?.includes('drums') || pattern?.family?.toLowerCase().includes('drum') ? `${pattern.id} ${pattern.name}` : undefined);
+              const sourceHit = native?.hitTypes?.[index] || detail?.hitTypes?.[index] || pattern?.hitGrid?.[index];
               const hit = notatedHit(pattern, index, native?.hitTypes?.[index] || detail?.hitTypes?.[index]);
               let value = native?.pitches?.[index];
               let directions = native?.notations?.[index];
@@ -95,7 +94,8 @@ export function compileNotatedScore(sheet: Sheet): NotatedScore {
                 pitchIdentity: technique ? techniqueMechanics(def, technique).pitchIdentity : undefined,
                 velocity: native?.velocities?.[index] ?? pattern?.velocityProfile?.[index] ?? .72, accent: native?.accents?.[index] ?? detail?.accentProfile?.[index] ?? .72,
                 hit, sourceHit, technique,
-                microtiming: { value: native?.microtiming?.[index] ?? 0, unit: Math.abs(native?.microtiming?.[index] ?? 0) > .5 ? 'milliseconds' : 'grid' }, durationAuthored: native?.durationsAuthored ?? Boolean(detail?.durationGrid), notation: directions };
+                microtiming: { value: native?.microtiming?.[index] ?? 0, unit: Math.abs(native?.microtiming?.[index] ?? 0) > .5 ? 'milliseconds' : 'grid' },
+                durationAuthored: native?.durationAuthoredByOnset?.[index] ?? native?.durationsAuthored ?? Boolean(detail?.durationGrid), notation: directions };
               if (percussion && Array.isArray(value?.midi)) {
                 return value.midi.map(midi => ({ ...attack, pitch: { kind: 'drum', drum: notatedDrum(def.id, midi) } }));
               }
