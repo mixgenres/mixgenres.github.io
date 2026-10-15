@@ -12,13 +12,13 @@ export const GENRE_MIX_OFFSETS: Record<string, Record<string, number>> = {
 
 /** Context trims after shared source calibration: stage prominence belongs to the ensemble. */
 export const GENRE_INSTRUMENT_MIX_OFFSETS: Record<string, Record<string, number>> = {
-  // Developed Dominican reference/render: the bongo formerly exceeded bass
-  // by 17 dB and güira by 22 dB. Restore the low floor and continuous rasp.
-  bachata: { bass: 8, guira: 10, bongos: -5, guitar: 1.5 },
+  // The rendered bachata bongo and güira anchors sat 18–27 dB below the
+  // requinto/bass in active passages. Restore a readable dance pulse.
+  bachata: { bass: 8, guira: 20, bongos: 11, guitar: 1.5 },
   // Keep the bass and fiddle clear in the ensemble. Section/lead automation
   // carries fiddle breaks, while a shared static lift used to bury the chops.
   country: { 'upright-bass': 1.5, violin: 1.5 },
-  tango: { violin: 6, bandoneon: 2, 'upright-bass': -4 },
+  tango: { violin: 6, bandoneon: 2, 'upright-bass': 22 },
   flamenco: { guitar: 3 },
   // The VCSL one-shot conga, clave and bell recordings sit well below the
   // melodic bank at the same MIDI velocity. These salsa-only trims put the
@@ -32,7 +32,16 @@ export const STYLE_INSTRUMENT_MIX_OFFSETS: Record<string, Record<string, number>
   // Upright-bass attacks were 14 dB below guitar peaks in the Bluegrass
   // sample, and 29 dB below the big-band horns in this low, soft walk.
   'country-bluegrass': { 'upright-bass': 8 },
+  // The western-swing walking line remained far below the band in the stem audit.
+  'country-western-swing': { 'upright-bass': 10 },
+  // Restore the walking pulse under the horns in these quieter small-combo styles.
+  'jazz-hard-bop': { 'upright-bass': 22 },
+  'jazz-bebop': { 'upright-bass': 22 },
   'jazz-big-band': { 'upright-bass': 15 },
+  // The log drum is the defining pitched low-end voice of this amapiano sample.
+  'amapiano-private-school': { 'log-drum': 18 },
+  // The darbuka carries the phrase pulse in this tarab arrangement.
+  'arabic-tarab': { darbuka: 12 },
   // The banda tuba anchors the ensemble; its recorded bank sat about 12 dB
   // below the trumpet in the same passage.
   'mexican-banda': { tuba: 8 },

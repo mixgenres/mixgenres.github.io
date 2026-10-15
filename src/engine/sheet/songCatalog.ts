@@ -254,6 +254,47 @@ export function createCatalogSong(id: string): Sheet {
       }
     }
   }
+  // Give returning form sections a written development cell when the style
+  // already teaches one for that exact instrument and role. Preserve all
+  // explicitly assigned/locked recording cells; this only changes repeats
+  // that would otherwise copy the same opening cell verbatim.
+  const firstCellBySection = new Map<string, string>();
+  const sectionOccurrence = new Map<string, number>();
+  for (const region of sheet.regions) {
+    for (const track of sheet.tracks) {
+      const instrumentId = track.instrumentId;
+      if (!instrumentId || !region.activeInstrumentIds?.includes(instrumentId)) continue;
+      const basePatternId = arrangement[region.id]?.[track.id];
+      if (!basePatternId || basePatternId === 'silent') continue;
+      const sectionTrackKey = `${region.kind}:${track.id}`;
+      const occurrence = sectionOccurrence.get(sectionTrackKey) ?? 0;
+      const explicitTarget = [instrumentId, `${instrumentId}:${track.role}`];
+      const explicitlyAssigned = explicitTarget.some(target =>
+        Object.hasOwn(playableRecording.patternAssignments?.[region.kind] ?? {}, target));
+      const explicitlyLocked = (playableRecording.lockPatternAssignments?.[region.kind] ?? [])
+        .some(target => explicitTarget.includes(target));
+      const originalPatternId = firstCellBySection.get(sectionTrackKey);
+      if (occurrence > 0 && basePatternId === originalPatternId && !explicitlyAssigned && !explicitlyLocked) {
+        const variations = (style.patterns?.allowed ?? [])
+          .map(candidateId => PATTERNS_BY_ID[candidateId])
+          .filter((pattern): pattern is NonNullable<typeof pattern> => !!pattern
+            && pattern.id !== basePatternId
+            && pattern.enabled !== false
+            && pattern.arrangementVariation === true
+            && pattern.sourceLevel === 'style-authored'
+            && pattern.styleIds?.includes(style.id) === true
+            && pattern.instruments?.includes(instrumentId) === true
+            && pattern.roles.includes(track.role)
+            && patternAvailableInSection(pattern, region.kind));
+        if (variations.length) {
+          const variation = variations[(occurrence - 1) % variations.length];
+          arrangement[region.id][track.id] = variation.id;
+        }
+      }
+      if (occurrence === 0) firstCellBySection.set(sectionTrackKey, basePatternId);
+      sectionOccurrence.set(sectionTrackKey, occurrence + 1);
+    }
+  }
   const arranged = rebuild({ ...sheet, arrangement, lockedPatternAssignments });
   return { ...arranged, title: entry.styleName, catalogId: id, bpm: recording.bpm };
 }

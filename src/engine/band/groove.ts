@@ -119,6 +119,8 @@ export interface FeelInput {
   patternAccentAuthored?: boolean;
   /** Shared band-breath seed. Roles get small independent deviations around this common motion. */
   ensembleSeed?: number;
+  /** Position in the current phrase, in beats. Keeps the shared breath moving across bar lines. */
+  ensemblePosition?: number;
 }
 
 export interface FeelOutput {
@@ -141,8 +143,10 @@ export function grooveVelocityMultiplier(g: GrooveProfile, input: FeelInput): nu
   const timelineAccent = useTimelineAccent ? g.accentMap?.[slot] ?? 1 : 1;
   const shaped = 1 - g.accentDepth * (1 - timelineAccent);
   const authored = Math.pow(Math.max(0.05, input.accent), g.dynamicRange);
-  const smoothVelDrift = noise1D(input.beatInBar / 8 + (input.seed % 100), 202);
-  const velWobble = 1 + smoothVelDrift * g.humanizeVel * 0.6;
+  const phraseBeat = input.ensemblePosition ?? input.beatInBar;
+  const sharedBreath = noise1D(phraseBeat / 8, seedOf(input.ensembleSeed ?? input.seed, 202));
+  const playerExpression = noise1D(phraseBeat / 8, seedOf(input.seed, 203));
+  const velWobble = 1 + sharedBreath * g.humanizeVel * 0.48 + playerExpression * g.humanizeVel * 0.12;
   return Math.max(0.05, authored * shaped * velWobble);
 }
 

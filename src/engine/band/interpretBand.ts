@@ -345,6 +345,37 @@ function grooveTime(
   return bt.start + beat * beatSec + groove.offsetMs / 1000 + anticipation + swingDelta + microSec;
 }
 
+export interface BandInteractionCues {
+  leadOverlap: boolean;
+  leadAttack: boolean;
+  pulseAttack: boolean;
+  harmonyAttack: boolean;
+  unisonAttack: boolean;
+}
+
+/** Small role-aware gain moves for the style's declared ensemble grammar. */
+export function roleInteractionMultiplier(
+  model: string,
+  role: string,
+  cues: BandInteractionCues,
+): number {
+  const normalized = role.toLowerCase();
+  if (model === 'homophonic') {
+    if (/harmony|comp|keyboard|guitar/.test(normalized) && cues.leadOverlap) return 0.84;
+    if (/lead|melody|voice/.test(normalized) && cues.harmonyAttack) return 1.035;
+  } else if (model === 'interlock') {
+    if (/harmony|comp|piano|guitar/.test(normalized) && cues.pulseAttack) return 0.84;
+    if (/bass|percussion|drum|pulse/.test(normalized) && cues.harmonyAttack) return 1.03;
+    if (/lead|melody|voice/.test(normalized) && cues.pulseAttack) return 1.04;
+  } else if (model === 'unison' && cues.unisonAttack) {
+    return 1.03;
+  } else if (model === 'counterpoint') {
+    if (/lead|melody|voice/.test(normalized) && cues.pulseAttack) return 1.02;
+    if (/bass/.test(normalized) && cues.leadAttack) return 1.015;
+  }
+  return 1;
+}
+
 
 function applyPhraseBandInteraction(
   notes: PerfNote[],
@@ -374,31 +405,20 @@ function applyPhraseBandInteraction(
       const mixKey = /lead|melody|voice/.test(role) ? 'lead' : /bass/.test(role) ? 'bass' : /perc|drum/.test(role) ? 'percussion' : /pad/.test(role) ? 'pad' : /comp|harmony|piano|guitar/.test(role) ? 'harmony' : role;
       const feature = theory.mixFocus[mixKey] ?? theory.mixFocus.melody ?? .5;
       const featureGain = 0.93 + Math.max(0, Math.min(1, feature)) * 0.14;
-      const leadOverlap = leads.some(x => near(n, x));
+      const overlapsInRegister = (other: PerfNote) => n.trackId !== other.trackId
+        && Math.abs(n.midi - other.midi) <= 18
+        && Math.min(n.time + n.dur, other.time + other.dur) - Math.max(n.time, other.time) > 0.015;
+      const leadOverlap = leads.some(overlapsInRegister);
+      const leadAttack = leads.some(x => near(n, x));
       const pulseOverlap = pulse.some(x => near(n, x));
       const harmonyOverlap = harmony.some(x => near(n, x));
+      const unisonAttack = phrase.some(x => near(n, x) && Math.abs(n.midi - x.midi) <= 12);
 
       n.vel = Math.max(1, Math.min(127, Math.round(n.vel * featureGain)));
-      if (model === 'homophonic') {
-        if (/harmony|comp|keyboard|guitar/.test(role) && leadOverlap) {
-          n.vel = Math.max(1, Math.round(n.vel * 0.90));
-        }
-        if (/lead|melody|voice/.test(role) && harmonyOverlap) n.vel = Math.min(127, Math.round(n.vel * 1.025));
-      } else if (model === 'interlock') {
-        if (/harmony|comp|piano|guitar/.test(role) && pulseOverlap) {
-          n.vel = Math.max(1, Math.round(n.vel * 0.92));
-        }
-        if (/bass|percussion|drum|pulse/.test(role) && harmonyOverlap) n.vel = Math.min(127, Math.round(n.vel * 1.025));
-        if (/lead|melody|voice/.test(role) && pulseOverlap) n.vel = Math.min(127, Math.round(n.vel * 1.035));
-      } else if (model === 'unison') {
-        const companions = phrase.filter(x => near(n, x));
-        if (companions.length) n.vel = Math.min(127, Math.round(n.vel * 1.03));
-      } else if (model === 'counterpoint') {
-        if (/lead|melody|voice/.test(role) && pulseOverlap) {
-          n.vel = Math.min(127, Math.round(n.vel * 1.02));
-        }
-        if (/bass/.test(role) && leadOverlap) n.vel = Math.min(127, Math.round(n.vel * 1.015));
-      }
+      const interactionGain = roleInteractionMultiplier(model, role, {
+        leadOverlap, leadAttack, pulseAttack: pulseOverlap, harmonyAttack: harmonyOverlap, unisonAttack,
+      });
+      n.vel = Math.max(1, Math.min(127, Math.round(n.vel * interactionGain)));
 
       // Four-bar breathing: phrase-final attacks get a controlled release rather
       // than a hard clip, while the preceding bar stays slightly more open.
@@ -668,7 +688,8 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
               seed: seedOf(track.id, region.id, bar, i),
               bpm: bt.bpm,
               intensity: energy,
-              ensembleSeed: seedOf(region.id, phraseStart, track.instrumentId),
+              ensembleSeed: seedOf(region.id, phraseStart),
+              ensemblePosition: (bar - phraseStart) * bt.beatsPerBar + onset.position * bt.beatsPerBar,
               patternAccentAuthored: ctx.pattern.events?.some(event => event.accent !== undefined) ?? false,
             });
             const grooveLift = clamp(1 + (feelVelocity - 0.72) * 0.55, 0.82, 1.16);

@@ -12,6 +12,7 @@ import { sliceBarNative } from '../src/engine/sheet/grid';
 import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { velocityForEnergy } from '../src/engine/band/velocity';
 import { grooveVelocityMultiplier, grooveForStyle } from '../src/engine/band/groove';
+import { roleInteractionMultiplier } from '../src/engine/band/interpretBand';
 import { resolveStyle } from '../src/engine/style/resolve';
 import type { MusicalPattern } from '../src/types';
 
@@ -49,6 +50,44 @@ test('style groove carries written accents into a stable, bounded velocity conto
   assert.ok(strong > soft * 2, `${strong} should articulate more than ${soft}`);
   assert.equal(grooveVelocityMultiplier(groove, { ...input, accent: 1 }), strong,
     'the phrase contour is seeded, not re-randomized on each render');
+});
+
+test('phrase dynamics share a stable band breath with small player-specific expression', () => {
+  const groove = grooveForStyle(resolveStyle({ genreId: 'country', styleId: 'country-honky-tonk' }));
+  const common = { beatInBar: 1.5, beatsPerBar: 4, accent: 0.72, bpm: 112, intensity: 0.7,
+    ensembleSeed: 918, ensemblePosition: 9.5 };
+  const piano = grooveVelocityMultiplier(groove, { ...common, role: 'comp', seed: 104 });
+  const bass = grooveVelocityMultiplier(groove, { ...common, role: 'bass', seed: 807 });
+  assert.ok(Math.abs(piano - bass) < 0.08, `${piano} and ${bass} should breathe together`);
+  assert.equal(grooveVelocityMultiplier(groove, { ...common, role: 'comp', seed: 104 }), piano,
+    'phrase breathing stays deterministic for playback and export');
+});
+
+test('band interaction models balance roles without flattening counterpoint', () => {
+  const simultaneous = { leadOverlap: true, leadAttack: true, pulseAttack: true, harmonyAttack: true, unisonAttack: true };
+  assert.equal(roleInteractionMultiplier('homophonic', 'harmony', simultaneous), 0.84,
+    'homophonic accompaniment yields when it masks the lead');
+  assert.equal(roleInteractionMultiplier('interlock', 'comp', simultaneous), 0.84,
+    'interlocking comping yields on a pulse attack');
+  assert.equal(roleInteractionMultiplier('unison', 'lead', simultaneous), 1.03,
+    'unison ensemble attacks reinforce one another');
+  assert.equal(roleInteractionMultiplier('counterpoint', 'harmony', simultaneous), 1,
+    'counterpoint lines are not ducked by a generic overlap rule');
+});
+
+test('returning blues verses use an existing same-style teaching variation', () => {
+  const song = createCatalogSong('blues-modern-blues_song');
+  const verses = song.regions.filter(region => region.kind === 'verse');
+  assert.ok(verses.length >= 2);
+  const guitar = song.tracks.find(track => track.instrumentId === 'guitar')!;
+  const first = song.arrangement[verses[0].id][guitar.id];
+  const returned = song.arrangement[verses[1].id][guitar.id];
+  const variation = PATTERNS_BY_ID[returned];
+  assert.notEqual(returned, first, 'the return should develop instead of photocopying the opening cell');
+  assert.equal(variation?.arrangementVariation, true);
+  assert.ok(variation?.styleIds?.includes(song.styleId!));
+  assert.ok(variation?.instruments?.includes('guitar'));
+  assert.ok(variation?.roles.includes(guitar.role));
 });
 
 test('Arabic Takht sample gives taqsim a solo voice and distinct section cells to its ensemble', () => {
