@@ -117,7 +117,6 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: b
     },
     melody:{
       scaleMode:seed.scaleMode ?? contract.pitchModel,
-      phraseLengthsBars:[4,8],
       chordToneTargeting:contract.harmonyModel === 'functional',
       callAndResponse:/call|answer|coro|response/i.test(contract.ensemble.lead ?? '') || /call|response/i.test(contract.ensemble.interaction ?? ''),
       ornamentVocabulary:Object.values(contract.articulationGrammar).flat(),

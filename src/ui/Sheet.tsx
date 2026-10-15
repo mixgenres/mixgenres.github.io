@@ -4,7 +4,7 @@ import { Pencil } from 'lucide-react';
 
 /** Everything that isn't the song happens on a sheet that slides over it. */
 export function Sheet({
-  open, onClose, title, kicker, onTitleChange, onStartEditingTitle, children,
+  open, onClose, title, kicker, onTitleChange, onStartEditingTitle, children, wide = false,
 }: {
   open: boolean;
   onClose: () => void;
@@ -13,6 +13,8 @@ export function Sheet({
   onTitleChange?: (newTitle: string) => void;
   onStartEditingTitle?: () => void;
   children: React.ReactNode;
+  /** Give multi-step workflows room to show their choices and preview together. */
+  wide?: boolean;
 }) {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
 
@@ -31,13 +33,17 @@ export function Sheet({
             style={{ background: 'color-mix(in srgb, var(--ink) 35%, transparent)' }}
           />
           <motion.div
-            initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
+            initial={wide ? { opacity: 0, y: 18 } : { y: '100%' }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={wide ? { opacity: 0, y: 18 } : { y: '100%' }}
             transition={{ type: 'spring', stiffness: 420, damping: 38 }}
-            className="fixed inset-x-0 bottom-0 z-50 flex flex-col mx-auto max-w-[580px] w-full"
-            style={{ background: 'var(--tone)', maxHeight: '86vh' }}
+            className={`fixed inset-x-0 bottom-0 z-50 flex flex-col mx-auto w-full ${wide
+              ? 'top-0 rounded-t-xl sm:inset-4 sm:rounded-xl'
+              : 'max-w-[580px]'}`}
+            style={{ background: 'var(--tone)', maxWidth: wide ? '1120px' : '580px', maxHeight: wide ? '100dvh' : '86vh' }}
           >
             <div style={{ height: 4, background: 'var(--signal)' }} />
-            <div className="flex items-end justify-between px-6 sm:px-7 pt-4 pb-3">
+            <div className="flex items-end justify-between px-4 sm:px-7 pt-4 pb-3 shrink-0">
               <div className="min-w-0 flex-1 mr-3">
                 {kicker && <div className="micro">{kicker}</div>}
                 {onTitleChange ? (
@@ -71,7 +77,7 @@ export function Sheet({
               </div>
               <button onClick={onClose} className="slab shrink-0" style={{ fontSize: 20, opacity: 0.6 }} aria-label="Close">×</button>
             </div>
-            <div className="overflow-y-auto hide-scrollbar px-6 sm:px-7 pb-10">{children}</div>
+            <div className={`flex-1 min-h-0 overflow-y-auto hide-scrollbar ${wide ? 'px-4 sm:px-7 pb-4 sm:pb-6' : 'px-6 sm:px-7 pb-10'}`}>{children}</div>
           </motion.div>
         </>
       )}

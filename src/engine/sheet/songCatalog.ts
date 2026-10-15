@@ -37,6 +37,8 @@ const RECORDING_SECTION_LABELS: Record<string, string> = {
   'tenor-sax-trading': 'tenor sax four-bar trade',
   'irama-change': 'kendang cue · irama shift',
   'irama-II': 'irama II · dense bonang over slow balungan',
+  tihai: 'tihai · threefold cadence',
+  sam: 'sam · shared landing',
 };
 const recordingSectionLabel = (kind: string, styleId: string) => {
   const bassLabels: Record<string, Record<string, string>> = {

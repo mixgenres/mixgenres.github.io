@@ -14,6 +14,7 @@ import { resolveStyle } from '../../engine/style/resolve';
 import { getCanonicalStyle } from '../../engine/style/registry';
 import { getPerformanceGrammar, resolveHybridGrammar } from './performanceGrammar.ts';
 import type { PerformanceGrammar } from '../../data/performance/schema/performance-grammar';
+import { DEFAULT_PHRASE_DEVELOPMENT } from '../../data/performance/performanceGrammar';
 import type { ImprovisationGrammar } from '../../data/styles/schema';
 
 export interface PhraseState {
@@ -318,13 +319,27 @@ export function realizeMidi(ctx: PhraseContext, index: number, total: number, st
 }
 
 export function shouldDevelopPhrase(ctx: PhraseContext): 'repeat' | 'variation' | 'answer' | 'fill' | 'rest' | 'cadence' {
-  const p = ctx.hybridGrammar.phraseDevelopment;
-  const x = stableHash(`${ctx.sheetWorldId}:${ctx.profile.instrumentId}:${ctx.barIndex}:${ctx.onsetIndex}:${ctx.phraseIndex}`);
-  if (ctx.phrasePosition > 0.86 && x < (p?.cadenceProbability ?? 0.1)) return 'cadence';
-  if (x < (p?.restProbability ?? 0.03)) return 'rest';
-  if (x < (p?.restProbability ?? 0.03) + (p?.fillProbability ?? 0.08)) return 'fill';
-  if (x < (p?.restProbability ?? 0.03) + (p?.fillProbability ?? 0.08) + (p?.answerProbability ?? 0.12)) return 'answer';
-  if (x < 0.7) return 'variation';
+  const p = ctx.hybridGrammar.phraseDevelopment ?? DEFAULT_PHRASE_DEVELOPMENT;
+  // Decide once for the whole player phrase. Hashing bar/onset here used to
+  // make a single line jump between unrelated development labels note by note,
+  // while the hard-coded 0.7 threshold ignored each style's repeat and
+  // variation probabilities entirely.
+  const x = stableHash(`${ctx.sheetWorldId}:${ctx.hostGenre}:${ctx.regionStyleId ?? ''}:${ctx.sourceGenre}:${ctx.profile.instrumentId}:${ctx.phraseStart}:${ctx.phraseEnd}:${ctx.phraseIndex}`);
+  const actions = [
+    ['repeat', p.repeatProbability],
+    ['variation', p.variationProbability],
+    ['answer', p.answerProbability],
+    ['fill', p.fillProbability],
+    ['rest', p.restProbability],
+    ['cadence', p.cadenceProbability],
+  ] as const;
+  const total = actions.reduce((sum, [, weight]) => sum + Math.max(0, weight), 0);
+  if (!total) return 'repeat';
+  let cursor = x * total;
+  for (const [action, weight] of actions) {
+    cursor -= Math.max(0, weight);
+    if (cursor < 0) return action;
+  }
   return 'repeat';
 }
 

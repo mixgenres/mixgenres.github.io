@@ -1,7 +1,7 @@
 import type { Sheet, Voice } from '../sheet/sheet.ts';
 import type { ResolvedStyle } from '../../data/styles/schema';
 import type { Performance, PerfNote } from '../band/performanceData.ts';
-import { getResolvedSectionStyle, getTrackRole, phraseSpanBars } from '../sheet/sheet.ts';
+import { getResolvedSectionStyle, getTrackRole, phraseBarsForStyle } from '../sheet/sheet.ts';
 import { contractForGenre } from '../../engine/style/contracts';
 import { getInstrumentPerformanceProfile, type InstrumentPerformanceProfile } from '../../engine/lookup/performance';
 import { GESTURE_CODES, GESTURE_NAMES } from './gestures.ts';
@@ -35,12 +35,8 @@ export interface PhraseOptimizationReport {
 function clamp(v: number, lo = 0, hi = 1) { return Math.max(lo, Math.min(hi, v)); }
 function dbToLinear(db: number) { return Math.pow(10, db / 20); }
 
-function phraseLengthFor(style: ResolvedStyle, genre: string): number {
-  const contract = contractForGenre(genre, style);
-  const cycle = Math.max(1, Number(contract.cycleLength ?? 1));
-  const authored = (style?.melody?.phraseLengthsBars ?? []).map((x: number) => Math.round(Number(x))).filter((x: number) => Number.isFinite(x) && x > 0);
-  const compatible = authored.filter((x: number) => x % cycle === 0);
-  return compatible[0] ?? phraseSpanBars(cycle);
+function phraseLengthFor(style: ResolvedStyle): number {
+  return phraseBarsForStyle(style, 1);
 }
 
 function preferredGestureSet(profile: InstrumentPerformanceProfile, genre: string): string[] {
@@ -102,12 +98,13 @@ function optimizePhrase(notes: PerfNote[], sheet: Sheet, track: Voice, profile: 
   const density = Math.max(0.45, Math.min(1.0, attackGroups.length / Math.max(4, (phraseEnd - phraseStart) * 2)));
   const desiredTechniqueCount = Math.max(0, Math.floor(attackGroups.length * Math.max(target.techniqueLandmarkRatio, phraseTechniqueBudget(role, family, genre, attackGroups.map(group => group[0])))));
 
-  // One phrase-level dynamic sentence: establish -> develop -> cadence.
+  // Keep authored note accents intact here. Phrase dynamics are shaped once by
+  // the style-aware performer; applying this same sine swell to every track
+  // again at the song-level pass used to make unrelated genres breathe alike.
   for (let i = 0; i < notes.length; i++) {
     const n = notes[i], pos = phrasePosition(n, phraseStart, phraseEnd);
-    const arc = 1 - target.phraseDynamicRange * 0.5 + target.phraseDynamicRange * Math.sin(Math.PI * pos);
     const roleGain = /bass/.test(role) ? 0.96 : /comp|harmony/.test(role) ? 0.98 : /lead|melody|voice/.test(role) ? 1.01 : 1;
-    n.vel = Math.max(1, Math.min(127, Math.round(n.vel * arc * (pos > 0.82 ? 0.98 : 1) * roleGain)));
+    n.vel = Math.max(1, Math.min(127, Math.round(n.vel * roleGain)));
     if (/bass/.test(role) && n.midi < profile.capabilities.comfortableLowMidi && n.hitFunctionCode !== 0) n.vel = Math.max(1, Math.round(n.vel * 0.88));
 
     // Harmony is voiced as a unit upstream. Replacing individual roots here
@@ -175,7 +172,7 @@ export function optimizePerformanceByPhraseAndSong(sheet: Sheet, perf: Performan
     const style = getResolvedSectionStyle(sheet, region);
     const genre = region.genre ?? sheet.worldId;
     const target = styleCalibrationTarget(genre, style?.id, style);
-    const phraseBars = phraseLengthFor(style, genre);
+    const phraseBars = phraseLengthFor(style);
     const regionNotes = notes.filter(n => n.bar >= region.start && n.bar < region.end);
     for (const track of sheet.tracks as Voice[]) {
       const profile = getInstrumentPerformanceProfile(track.instrumentId);
@@ -267,7 +264,7 @@ export function optimizePerformanceByPhraseAndSong(sheet: Sheet, perf: Performan
     report: {
       genre: sheet.worldId,
       styleId: sheet.styleId,
-      phraseBars: Math.max(...sheet.regions.map(r => phraseLengthFor(getResolvedSectionStyle(sheet, r), r.genre ?? sheet.worldId))),
+      phraseBars: Math.max(...sheet.regions.map(r => phraseLengthFor(getResolvedSectionStyle(sheet, r)))),
       trackReports,
       warnings,
     },

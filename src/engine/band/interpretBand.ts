@@ -12,7 +12,7 @@ import { PATTERNS_BY_ID, PATTERNS_BY_WORLD } from '../../data/genres';
 import { INSTRUMENTS_BY_ID } from '../../engine/lookup/instruments';
 import { getInstrumentPerformanceProfile, resolveGenreProfile, type InstrumentPerformanceProfile } from '../../engine/lookup/performance';
 import { getGenreTheory, styleTheoryFor, blendGenreTheory } from '../../engine/lookup/theory';
-import { getResolvedSectionStyle, partLensForPattern } from '../sheet/sheet.ts';
+import { getResolvedSectionStyle, partLensForPattern, phraseBarsForStyle } from '../sheet/sheet.ts';
 import { getCanonicalStyle, getStyle } from '../../engine/style/registry';
 import { calibratedTechniqueGestures } from '../../engine/style/performance-expectations';
 import { parseChord } from '../sheet/musicTheory.ts';
@@ -173,24 +173,31 @@ function styleRegion(region: Region): Region {
   return region.genre && Object.hasOwn(GENRE_ID_ALIASES, region.genre) ? { ...region, genre: GENRE_ID_ALIASES[region.genre], styleId: region.styleId } : region;
 }
 
+function phraseDevelopmentGain(
+  development: ReturnType<typeof shouldDevelopPhrase>,
+  position: number,
+  styleDynamicRange: number,
+): number {
+  const depth = clamp(styleDynamicRange * 0.1, 0.05, 0.16);
+  if (development === 'variation') return 1 + depth * Math.sin(Math.PI * position);
+  if (development === 'answer') return 1 - depth * 0.55 + depth * position;
+  if (development === 'fill') return position >= 0.72 ? 1 + depth : 1;
+  if (development === 'rest') return position >= 0.35 && position <= 0.65 ? 1 - depth * 1.5 : 1;
+  if (development === 'cadence') return position >= 0.8 ? 1 + depth : 1;
+  return 1;
+}
+
 function buildSongPlan(sheet: Sheet, bars: BarTime[]): SongPlan {
   const sections = sheet.regions.map(r => ({ regionId: r.id, genre: r.genre ?? sheet.worldId, start: r.start, end: r.end }));
   const energy = sheet.measures.map(m => clamp((sheet.regions.find(r => r.id === m.regionId)?.energy ?? 3) / 5));
-  const tempoMap = bars.map((b, i) => {
-    const r = sheet.regions.find(x => x.id === b.regionId)!;
-    const style = getResolvedSectionStyle(sheet, styleRegion(r));
-    const strict = Boolean(style?.contract?.groove?.name && /strict|quant/i.test(style.contract.groove.name));
-    const cycle = Math.max(1, Number(style?.contract?.cycleLength ?? 1));
-    const phraseBars = Math.max(cycle, Number(style?.melody?.phraseLengthsBars?.find((x: number) => x % cycle === 0) ?? cycle));
-    const phrasePos = i % phraseBars;
-    const phraseCurve = strict ? 0 : (phrasePos === 3 ? -0.025 : phrasePos === 0 ? 0.01 : 0);
-    return { bar: i, bpm: Math.round(b.bpm * (1 + phraseCurve) * 1000) / 1000, reason: strict ? 'style-strict' : 'phrase-feel' };
-  });
+  // Tempo comes from the authored section map. The old shared phrase curve
+  // nudged every non-strict style up on phrase starts and down on every fourth
+  // bar, imposing the same audible lilt on otherwise unrelated genres.
+  const tempoMap = bars.map(b => ({ bar: b.index, bpm: b.bpm, reason: 'section-tempo' }));
   const phraseBoundaries = Array.from(new Set([0, ...sheet.regions.flatMap(r => {
     const xs: number[] = [r.end];
     const style = getResolvedSectionStyle(sheet, styleRegion(r));
-    const cycle = Math.max(1, Number(style?.contract?.cycleLength ?? 1));
-    const phraseBars = Math.max(cycle, Number(style?.melody?.phraseLengthsBars?.find((x: number) => x % cycle === 0) ?? cycle));
+    const phraseBars = phraseBarsForStyle(style);
     for (let b = r.start + phraseBars; b < r.end; b += phraseBars) xs.push(b);
     return xs;
   })])).sort((a, b) => a - b);
@@ -309,6 +316,12 @@ function updatePhraseState(state: PhraseState, notes: PerfNote[], ctx: PhraseCon
   state.contour = Math.max(-1, Math.min(1, (last.midi - (state.lastStrongMidi ?? last.midi)) / 12));
 }
 
+function chordForBar(sheet: Sheet, bar: number): string {
+  const chord = sheet.measures[bar]?.chord;
+  if (!chord) throw new Error(`Missing authored harmony at bar ${bar + 1}`);
+  return chord;
+}
+
 function derivePassingMidi(state: PhraseState, current: number, ctx: PhraseContext): number | undefined {
   if (state.previousMidi === undefined) return undefined;
   if (Math.abs(current - state.previousMidi) < 3) return undefined;
@@ -354,8 +367,7 @@ function applyPhraseBandInteraction(
   const regionNotes = notes.filter(n => n.bar >= region.start && n.bar < region.end);
   if (!regionNotes.length) return;
 
-  const cycle = Math.max(1, Number(style?.contract?.cycleLength ?? 1));
-  const phraseBars = Math.max(cycle, Number(style?.melody?.phraseLengthsBars?.find((x: number) => x % cycle === 0) ?? cycle));
+  const phraseBars = phraseBarsForStyle(style);
   for (let phraseStart = region.start; phraseStart < region.end; phraseStart += phraseBars) {
     const phraseEnd = Math.min(region.end, phraseStart + phraseBars);
     const phrase = regionNotes.filter(n => n.bar >= phraseStart && n.bar < phraseEnd);
@@ -488,6 +500,11 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
       const firstNote = notes.length, firstPhrase = phrases.length;
       const profile = getInstrumentPerformanceProfile(track.instrumentId);
       const grooveRole = voiceProfile(track.instrumentId).role;
+      const carriesBassLine = /bass|low-anchor/.test(String(track.role ?? '')) || grooveRole === 'bass';
+      const carriesChordVoicing = !/lead|melody|voice/.test(String(track.role ?? '')) && profile.capabilities.polyphony > 1;
+      let carriedBassMidi: number | undefined;
+      let carriedBassTime: number | undefined;
+      let carriedVoicing: number[] | undefined;
       const dialect = resolveDialect(track.instrumentId, region.genre ?? sheet.worldId, regionStyle.id, track.role, decision.sectionEnergy);
       const partDialect = lane.lens.weight > 0
         ? resolveDialect(track.instrumentId, lane.lens.sourceGenre, lane.lens.sourceStyleId, track.role, decision.sectionEnergy)
@@ -502,8 +519,9 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
         phraseBars: soloPlan.policy.phraseBars,
       } : undefined;
       const authoredPhraseBars = soloCandidates.includes(track.id) ? soloGrammar?.phraseBars : undefined;
-      const preferredPhraseBars = authoredPhraseBars ?? regionStyle?.melody?.phraseLengthsBars?.find((x: number) => x % cycle === 0) ?? cycle;
-      const phraseBars = Math.max(cycle, Math.ceil(Number(preferredPhraseBars) / cycle) * cycle);
+      const phraseBars = authoredPhraseBars
+        ? Math.max(cycle, Math.ceil(Number(authoredPhraseBars) / cycle) * cycle)
+        : phraseBarsForStyle(regionStyle, lane.rhythm.pattern?.cycleLength ?? cycle);
       for (let phraseStart = region.start, phraseIndex = 0; phraseStart < region.end; phraseStart += phraseBars, phraseIndex++) {
         const phraseEnd = Math.min(region.end, phraseStart + phraseBars);
         const phraseId = `${track.id}:${region.id}:${phraseIndex}`;
@@ -514,6 +532,15 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
         };
         phrases.push(phrase);
         const state = createPhraseState(phraseIndex);
+        // Phrase-local contour resets are useful for melodic development, but
+        // a walking bass or comp voicing must keep its physical voice-leading
+        // memory across the boundary. Resetting every four bars made chord
+        // changes repeatedly jump back to the same stock register.
+        if (carriesBassLine) {
+          state.previousMidi = carriedBassMidi;
+          state.previousTime = carriedBassTime;
+        }
+        if (carriesChordVoicing && carriedVoicing?.length) state.previousVoicing = carriedVoicing.slice();
         const phraseNotes: PerfNote[] = [];
         for (let bar = phraseStart; bar < phraseEnd; bar++) {
           const currentSoloists = soloPlan ? soloistAtBar(soloPlan, region, bar, cycle) : [];
@@ -537,7 +564,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
               sourceGenre: PATTERNS_BY_ID[writtenBar.patternId]?.worldId ?? lane.rhythm.sourceGenre,
             })) };
           if (!rhythm.onsets.length) continue;
-          const chord = measure.chord || 'C';
+          const chord = chordForBar(sheet, bar);
           const nextChord = sheet.measures[bar + 1]?.chord;
           const energy = activityFor(regionStyle.contract, decision.sectionEnergy);
           const phrasePosition = ((bar - phraseStart) + 0.5) / Math.max(1, phraseEnd - phraseStart);
@@ -612,7 +639,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
             const development = authoredVariation.includes('cadence') ? 'cadence'
               : authoredVariation.includes('transition') ? 'variation'
               : shouldDevelopPhrase(ctx);
-            const developmentAccentScale = development === 'cadence' ? 1.08 : development === 'answer' ? 0.92 : development === 'fill' ? 1.04 : development === 'rest' ? 0.82 : development === 'variation' ? 0.97 : 1;
+            const developmentAccentScale = phraseDevelopmentGain(development, phrasePosition, styleGroove.dynamicRange);
 
             const kitMidis = onset.percussion ? [onset.percussion.midi] : baseMidiForPattern(INSTRUMENTS_BY_ID[track.instrumentId], onset, i);
             const midis = onset.pitch?.midi !== undefined || !kitMidis.length ? realizeMidi(ctx, i, rhythm.onsets.length, state) : kitMidis;
@@ -637,6 +664,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
               bpm: bt.bpm,
               intensity: energy,
               ensembleSeed: seedOf(region.id, phraseStart, track.instrumentId),
+              patternAccentAuthored: ctx.pattern.events?.some(event => event.accent !== undefined) ?? false,
             });
             const grooveLift = clamp(1 + (feelVelocity - 0.72) * 0.55, 0.82, 1.16);
             const vel = Math.max(1, Math.min(127, Math.round(velocityForEnergy(energy, onset.velocity, sharedHostProfile.density.accentContrast) * driveLift * brightnessLift * grooveLift)));
@@ -755,6 +783,11 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
 
           phraseNotes.push(...barNotes);
         }
+        if (carriesBassLine) {
+          carriedBassMidi = state.previousMidi;
+          carriedBassTime = state.previousTime;
+        }
+        if (carriesChordVoicing && state.previousVoicing?.length) carriedVoicing = state.previousVoicing.slice();
         notes.push(...phraseNotes);
       }
       partInterpretations.set(partKey, {
@@ -883,7 +916,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
     if (!note.exactPitch) note.midi = foldToRange(note.midi, voiceProfile(track.instrumentId, genre));
     const style = getResolvedSectionStyle(sheet, region);
     note.frequencyHz = resolveTuningSystem(style.harmony?.tuningSystem ?? '12-tet')
-      .getFrequencyHz(note.midi, parseChord(sheet.measures[note.bar]?.chord || 'C').rootPc) * 2 ** ((note.tuningCents ?? 0) / 1200);
+      .getFrequencyHz(note.midi, parseChord(chordForBar(sheet, note.bar)).rootPc) * 2 ** ((note.tuningCents ?? 0) / 1200);
   }
   realizeTechniquePerformance(performance);
   return performance;

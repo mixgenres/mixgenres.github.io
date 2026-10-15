@@ -115,7 +115,7 @@ export class StyleRuntime {
     if (this.resolved.harmony?.progressionTemplates?.length) {
       return this.pick(this.resolved.harmony.progressionTemplates, seed);
     }
-    return ['Am', 'Dm', 'E7', 'Am'];
+    throw new Error(`Style ${this.resolved.id} has no authored harmonic progression`);
   }
 
   /**

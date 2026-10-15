@@ -10,10 +10,11 @@ import { SHARP_NAMES } from '../../data/musicTheory/pitchClasses';
 import { voiceProfile } from '../sheet/instrumentRoles.ts';
 import { resolveStyle, StyleRuntime, StyleInfluence, SongStyle, getCanonicalStyle, getStyle } from '../../engine/style';
 import { contractForGenre, type ApproachSpec } from '../../engine/style/contracts';
-import { suggestedPaletteForGenre } from '../../engine/lookup/theory';
+import { styleTheoryFor, suggestedPaletteForGenre } from '../../engine/lookup/theory';
 import { clampEnergy, energyForFormIntensity, energyOf, formIntensityForEnergy } from './sectionEnergy.ts';
 import { FEELS, type TempoFeel } from '../../data/tempoFeels';
 import { SECTION_ENERGY_DEFAULT } from '../../data/performance/sectionEnergyDefaults';
+import { getPerformanceGrammar } from '../band/performanceGrammar.ts';
 import { BASS_INSTRUMENT_ROLE_PATTERN, VOICE_INSTRUMENT_ROLE_PATTERN, VOICE_FAMILY_ROLE_PATTERN } from '../../data/instruments/roleAssignmentPatterns';
 import { ELECTRONIC_TRACK_GENRE_PATTERN, ACOUSTIC_BASS_TRACK_VOLUME_STEPS, ELECTRONIC_BASS_TRACK_VOLUME_STEPS, FIXED_INSTRUMENT_TRACK_VOLUME, TRACK_VOLUME_BY_ROLE, DEFAULT_TRACK_VOLUME } from '../../data/sound/mix/trackVolume';
 
@@ -37,6 +38,32 @@ export function clearPersistentPhrasePatternCache(): void {
 export function phraseSpanBars(cycleLength: number): number {
   const cycle = Math.max(1, Math.round(cycleLength || 1));
   return Math.max(cycle, cycle * Math.max(1, Math.ceil(4 / cycle)));
+}
+
+const phraseTheoryCache = new Map<string, { cycleBars: number; phraseBars: number[] }>();
+const gcd = (a: number, b: number): number => b ? gcd(b, a % b) : a;
+
+/** Align phrase decisions to the style's own cycle and its selected teaching cell. */
+export function phraseBarsForStyle(style: ReturnType<typeof resolveStyle>, patternCycleLength = 1): number {
+  const genreId = style.primaryGenre ?? style.genres[0];
+  const key = `${genreId ?? ''}:${style.id}`;
+  let theory = phraseTheoryCache.get(key);
+  if (!theory && genreId) {
+    const profile = styleTheoryFor(style.id, genreId);
+    theory = {
+      cycleBars: Math.max(1, Math.round(profile.cycleBars || style.contract.cycleLength || 1)),
+      phraseBars: profile.melody.phraseBars.map(value => Math.round(Number(value)))
+        .filter(value => Number.isFinite(value) && value > 0),
+    };
+    phraseTheoryCache.set(key, theory);
+  }
+  const authored = (style.melody.phraseLengthsBars ?? []).map(value => Math.round(Number(value)))
+    .filter(value => Number.isFinite(value) && value > 0);
+  const choices = (authored.length ? authored : theory?.phraseBars ?? []).sort((a, b) => a - b);
+  const cycle = Math.max(1, theory?.cycleBars ?? Math.round(style.contract.cycleLength || 1));
+  const cellCycle = Math.max(1, Math.round(patternCycleLength || 1));
+  const alignment = cycle / gcd(cycle, cellCycle) * cellCycle;
+  return choices.find(value => value >= alignment && value % alignment === 0) ?? alignment;
 }
 
 
@@ -581,6 +608,7 @@ function choosePatternVariant(
   phraseRole: 'body' | 'transition' | 'cadence',
   seed: string,
   partEnergy: SectionEnergy = 3,
+  phraseDevelopment: NonNullable<ReturnType<typeof getPerformanceGrammar>['phraseDevelopment']>,
 ): PatternVariant | undefined {
   if (!variants?.length) return undefined;
   const eligible = variants.filter(v => {
@@ -608,11 +636,17 @@ function choosePatternVariant(
   };
 
   const totalVariantsWeight = eligible.reduce((sum, v) => sum + variantWeight(v), 0);
-  const dev = 0.45;
-  const energyBias = partEnergy >= 5 ? 0.35 : partEnergy <= 2 ? 0.15 : 0;
-  // A high canonical weight means "keep playing the cell as written".
-  // Development lowers it proportionally to variant weights, so the part develops organically.
-  const canonicalWeight = Math.max(0.05, totalVariantsWeight * Math.max(0.08, 1.15 - dev * 1.45 - energyBias));
+  const developmentProbability = phraseRole === 'cadence'
+    ? phraseDevelopment.cadenceProbability + phraseDevelopment.fillProbability
+    : phraseRole === 'transition'
+      ? phraseDevelopment.variationProbability + phraseDevelopment.answerProbability
+      : phraseDevelopment.variationProbability;
+  const dev = Math.max(0.04, Math.min(0.82, developmentProbability * (partEnergy >= 5 ? 1.3 : partEnergy <= 2 ? 0.7 : 1)));
+  // The style's own phrase grammar controls how often the authored variant is
+  // used. A shared fixed .45 development value made every catalog style switch
+  // at the same rate, regardless of whether it is a vamp, call/response, or
+  // phrase-led acoustic performance.
+  const canonicalWeight = totalVariantsWeight * (1 - dev) / dev;
   const total = canonicalWeight + totalVariantsWeight;
   const roll = hash(`variant:${seed}`, 0) * total;
   if (roll < canonicalWeight) return undefined;
@@ -817,10 +851,14 @@ export function rebuild(sheet: Sheet): Sheet {
 
   const measures: Measure[] = [];
   for (const r of regions) {
-    const chords = r.chords?.length ? r.chords : ['Am'];
+    const chords = r.chords?.length ? r.chords : authoredProgressionForRegion(
+      r.genre ?? sheet.worldId, getSectionStyleId(sheet, r), r.formKey, r.kind,
+    );
     const bars = r.end - r.start;
       const byTrack = sheet.arrangement[r.id] ?? {};
     const interaction = arrangementContext[r.id];
+    const resolvedStyle = getResolvedSectionStyle(sheet, r);
+    const phraseDevelopment = getPerformanceGrammar(resolvedStyle).phraseDevelopment!;
 
     // Compute or retrieve cached pattern details for each track in this region
     const trackBarDetails = new Map<string, (PatternDetails | undefined)[]>();
@@ -860,13 +898,14 @@ export function rebuild(sheet: Sheet): Sheet {
 
       for (let i = 0; i < bars; i++) {
         const index = r.start + i;
-        // Keep phrase development continuous across short sections. Resetting
-        // this at each region made every region shorter than one cycle repeat
-        // its base pattern, even deep into a long sample song.
-        const phrase = Math.floor(index / phraseSpanBars(getResolvedSectionStyle(sheet, r).contract.cycleLength));
+        // Start each section with its authored pattern. Carrying the song-wide
+        // phrase counter across regions replaced the first phrase of many
+        // later sections before their own arrangement cell could be heard.
+        const phraseBars = phraseBarsForStyle(resolvedStyle, basePattern?.cycleLength ?? 1);
+        const phrase = Math.floor(i / phraseBars);
         let patternId = basePatternId;
         if (phrase > 0 && !patternLocked) {
-          const cacheKey = `${basePatternId}:${r.genre ?? sheet.worldId}:${track.id}:${r.id}:${phrase}:${JSON.stringify(partLens ?? '')}`;
+          const cacheKey = `phrase-v2:${basePatternId}:${r.genre ?? sheet.worldId}:${track.id}:${r.id}:${phrase}:${JSON.stringify(partLens ?? '')}`;
           const cachedPat = phrasePatternCache.get(cacheKey);
           if (cachedPat !== undefined) {
             patternId = cachedPat;
@@ -917,7 +956,7 @@ export function rebuild(sheet: Sheet): Sheet {
                 if (base && p.category === base.category) score += 6 * (1 - lensWeight);
                 if (lensWeight > 0 && partLens?.styleId && p.styleIds?.includes(partLens.styleId)) score += 12 * lensWeight;
                 if (p.sectionUsage?.includes(r.kind)) score += 5;
-                if (p.phrasePosition?.includes((i % phraseSpanBars(getResolvedSectionStyle(sheet, r).contract.cycleLength)) === 0 ? 'start' : 'middle')) score += 2;
+                if (p.phrasePosition?.includes((i % phraseBars) === 0 ? 'start' : 'middle')) score += 2;
                 return { p, score: score + hash(`${basePatternId}:${p.id}:${r.id}`, phrase) * 3 };
               })
               .filter(x => x.score > 20)
@@ -925,7 +964,7 @@ export function rebuild(sheet: Sheet): Sheet {
 
             const devHashKey = isRhythm ? `develop:rhythm:${r.id}` : `develop:${track.id}:${r.id}`;
             const pickHashKey = isRhythm ? `rhythm:${r.id}` : `${track.id}:${r.id}`;
-            const moves = hash(devHashKey, phrase) < 0.65;
+            const moves = hash(devHashKey, phrase) < phraseDevelopment.variationProbability;
             if (candidates.length && moves) {
               const reach = Math.max(1, Math.round(1 + 0.45 * 6));
               const top = candidates.slice(0, Math.min(reach, candidates.length));
@@ -942,7 +981,7 @@ export function rebuild(sheet: Sheet): Sheet {
           continue;
         }
 
-        const cycleBars = phraseSpanBars(getResolvedSectionStyle(sheet, r).contract.cycleLength);
+        const cycleBars = phraseBarsForStyle(resolvedStyle, p.cycleLength ?? 1);
         const atPhraseStart = i % cycleBars === 0;
         const atPhraseEnd = (i + 1) % cycleBars === 0;
         const hasCadenceVariant = (p.variants ?? []).some(v => ['cadence', 'fill', 'phraseEnd'].includes(v.variationType));
@@ -953,7 +992,7 @@ export function rebuild(sheet: Sheet): Sheet {
 
         const variantSeed = isRhythm ? `rhythm:${r.id}:${index}` : `${patternId}:${r.id}:${index}`;
         let v = choosePatternVariant(
-          p.variants, phraseRole, variantSeed, partEnergy,
+              p.variants, phraseRole, variantSeed, partEnergy, phraseDevelopment,
         );
         const styleIdForRegion = getSectionStyleId(sheet, r);
         if (!v && phraseRole === 'cadence' && !hasCadenceVariant && !p.events?.length) {
@@ -1187,10 +1226,7 @@ export function addSensibleSectionAfter(sheet: Sheet, regionId: string): { sheet
   const energy: SectionEnergy = intensity === 'low' ? 1 : (intensity === 'medium' ? 3 : (intensity === 'high' ? 4 : 5));
 
   const sectionChords = (resolved.harmony?.sectionProgressions as Record<string, string[]>) ?? {};
-  const chordsFallback = (resolved.harmony?.progressionTemplates?.[0]?.value as string[] | undefined)
-    ?? (suggestedPaletteForGenre(worldId)[0]?.chords as string[] | undefined)
-    ?? PROGRESSIONS[worldId]
-    ?? PROGRESSIONS.tango;
+  const chordsFallback = authoredProgressionForRegion(worldId, styleId, key, kind);
   const pickedChords = progressionForSection(sectionChords, key, kind, chordsFallback);
 
   let id = `r${sheet.regions.length}`;
@@ -1534,6 +1570,21 @@ function chordTemplatesForRegion(worldId: string, _region: Region, styleId?: str
   return suggestedPaletteForGenre(worldId).map(cell => cell.chords as string[]);
 }
 
+/** Resolve a missing chord cell inside its own style/world, never through a tango-shaped global default. */
+function authoredProgressionForRegion(worldId: string, styleId?: string, formKey?: string, kind?: string): string[] {
+  const resolved = resolveStyle({ genreId: worldId, styleId: styleId ?? getCanonicalStyle(worldId).id });
+  const sectionProgressions = (resolved.harmony?.sectionProgressions ?? {}) as Record<string, string[]>;
+  const section = (formKey && sectionProgressions[formKey]) ?? (kind && sectionProgressions[kind]);
+  if (section?.length) return [...section];
+  const styleTemplate = resolved.harmony?.progressionTemplates?.find(template => Array.isArray(template.value) && template.value.length)?.value as string[] | undefined;
+  if (styleTemplate?.length) return [...styleTemplate];
+  const genrePalette = suggestedPaletteForGenre(worldId).find(cell => Array.isArray(cell.chords) && cell.chords.length)?.chords as string[] | undefined;
+  if (genrePalette?.length) return [...genrePalette];
+  const genreProgression = PROGRESSIONS[worldId];
+  if (genreProgression?.length) return [...genreProgression];
+  throw new Error(`No authored chord progression for ${worldId}/${resolved.id}`);
+}
+
 function transposeChordSymbol(symbol: string, delta: number): string {
   const match = String(symbol ?? '').trim().match(/^([A-G](?:#|b)?)(.*?)(?:\/([A-G](?:#|b)?))?$/);
   if (!match) return symbol;
@@ -1587,9 +1638,10 @@ export function randomizeChordsForSection(sheet: Sheet, regionId: string): Sheet
   if (!region) return sheet;
   const worldId = region.genre ?? sheet.worldId;
   const allCurrent = sheet.regions.flatMap(r => r.chords ?? []);
-  const key = inferKey(allCurrent.length ? allCurrent : ((suggestedPaletteForGenre(worldId)[0]?.chords as string[]) ?? PROGRESSIONS[worldId] ?? PROGRESSIONS.tango));
+  const fallback = authoredProgressionForRegion(worldId, getSectionStyleId(sheet, region), region.formKey, region.kind);
+  const key = inferKey(allCurrent.length ? allCurrent : fallback);
   const targetKey = key.name;
-  const current = region.chords ?? ((suggestedPaletteForGenre(worldId)[0]?.chords as string[]) ?? PROGRESSIONS[worldId] ?? PROGRESSIONS.tango);
+  const current = region.chords?.length ? region.chords : fallback;
   const currentStr = current.join(',');
   const templates = chordTemplatesForRegion(worldId, region, getSectionStyleId(sheet, region))
     .map(t => chordTemplateInKey(t, targetKey))
@@ -1613,7 +1665,11 @@ export function randomizeChordsForSection(sheet: Sheet, regionId: string): Sheet
  */
 export function randomizeChordsForSong(sheet: Sheet): Sheet {
   const allCurrent = sheet.regions.flatMap(r => r.chords ?? []);
-  const inferred = inferKey(allCurrent.length ? allCurrent : (PROGRESSIONS[sheet.worldId] ?? PROGRESSIONS.tango));
+  if (!sheet.regions.length) return sheet;
+  const firstRegion = sheet.regions[0];
+  const firstFallback = authoredProgressionForRegion(firstRegion.genre ?? sheet.worldId,
+    getSectionStyleId(sheet, firstRegion), firstRegion.formKey, firstRegion.kind);
+  const inferred = inferKey(allCurrent.length ? allCurrent : firstFallback);
   const targetKey = inferred.name;
   const repeated: Record<string, string[]> = {};
   const chosen: Region[] = [];
@@ -1627,7 +1683,9 @@ export function randomizeChordsForSong(sheet: Sheet): Sheet {
       continue;
     }
 
-    const current = region.chords ?? PROGRESSIONS[region.genre ?? sheet.worldId] ?? PROGRESSIONS.tango;
+    const current = region.chords?.length ? region.chords : authoredProgressionForRegion(
+      region.genre ?? sheet.worldId, getSectionStyleId(sheet, region), region.formKey, region.kind,
+    );
     const currentStr = current.join(',');
     const worldId = region.genre ?? sheet.worldId;
     const candidates = chordTemplatesForRegion(worldId, region, getSectionStyleId(sheet, region))
@@ -2259,26 +2317,20 @@ export function switchSectionWorld(sheet: Sheet, regionId: string, worldId: stri
 
   const canonical = getCanonicalStyle(worldId);
   const targetStyleId = styleId ?? canonical.id;
-  const resolved = resolveStyle({ genreId: worldId, styleId: targetStyleId });
 
-  // Resolve harmonic material from the section style before using genre defaults.
-  const styleChordCells = (resolved.harmony?.progressionTemplates ?? [])
-    .map(x => x.value as string[])
-    .filter(x => Array.isArray(x) && x.length);
-  const newChords = styleChordCells[0]
-    ?? (suggestedPaletteForGenre(worldId)[0]?.chords as string[])
-    ?? PROGRESSIONS[worldId]
-    ?? PROGRESSIONS.tango;
+  // Resolve harmonic material from the section's assigned style and form role.
+  const targetStep = getFormStep(String(r.formKey ?? r.kind), worldId);
+  const newChords = authoredProgressionForRegion(worldId, targetStyleId,
+    targetStep?.key ?? r.formKey ?? r.kind, targetStep?.kind ?? r.kind);
   const regions = sheet.regions.map(reg => {
     if (reg.id !== regionId) return reg;
-    const formStep = getFormStep(String(reg.formKey ?? reg.kind), worldId);
     return {
       ...reg,
       genre: worldId,
       styleId: targetStyleId,
-      formKey: formStep?.key ?? reg.formKey ?? reg.kind,
-      formLabel: formStep?.label ?? reg.formLabel ?? reg.name,
-      intensity: formStep?.intensity ?? reg.intensity,
+      formKey: targetStep?.key ?? reg.formKey ?? reg.kind,
+      formLabel: targetStep?.label ?? reg.formLabel ?? reg.name,
+      intensity: targetStep?.intensity ?? reg.intensity,
       chords: newChords,
     };
   });

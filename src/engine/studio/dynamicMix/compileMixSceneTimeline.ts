@@ -30,10 +30,10 @@ export function compileMixSceneTimeline(sheet: Sheet, performance: Performance):
     if (startBar >= endBar) continue;
     const style = getResolvedSectionStyle(sheet, region), mix = style.resolvedMix.contract;
     const cycle = Math.max(1, Math.round(style.contract.cycleLength));
-    const phraseBars = Math.max(cycle, style.melody.phraseLengthsBars?.find(n => Number.isFinite(n) && n > 0 && n % cycle === 0) ?? 4);
     const solo = sheet.arrangementContext?.[region.id]?.solo ?? resolveSoloPlan(region, sheet.tracks, style.contract, sheet.tracks.map(t => t.id));
     const boundaries = new Set([startBar, endBar]);
-    for (let b = startBar + phraseBars; b < endBar; b += phraseBars) boundaries.add(b);
+    // The performer already compiled style-specific phrase spans. Reuse them
+    // instead of cutting every mix timeline on a second, generic four-bar grid.
     for (const phrase of performance.phrases ?? []) if (phrase.regionId === region.id) {
       if (phrase.startBar > startBar && phrase.startBar < endBar) boundaries.add(phrase.startBar);
       if (phrase.endBar > startBar && phrase.endBar < endBar) boundaries.add(phrase.endBar);

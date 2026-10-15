@@ -129,6 +129,8 @@ export interface FeelInput {
   pocketAmount?: number;
   /** Traditional contexts may preserve authored phrase timing instead of imposing a generic Western metric template. */
   authoredTimingOnly?: boolean;
+  /** The selected pattern contains its own event accents; do not add the shared fallback meter accent over them. */
+  patternAccentAuthored?: boolean;
   /** Shared band-breath seed. Roles get small independent deviations around this common motion. */
   ensembleSeed?: number;
 }
@@ -145,9 +147,12 @@ export interface FeelOutput {
 export function grooveVelocityMultiplier(g: GrooveProfile, input: FeelInput): number {
   const slots = Math.max(1, g.subdivision ?? 16);
   const slot = Math.round((input.beatInBar / Math.max(1e-6, input.beatsPerBar)) * slots) % slots;
-  // Traditional contexts preserve the written pattern's own accent hierarchy.
-  const metric = input.authoredTimingOnly ? 1 : metricWeight(input.beatInBar, input.beatsPerBar);
-  const contractAccent = g.accentMap?.[slot] ?? 1;
+  // Authored cells already carry their style's accent hierarchy. The generic
+  // contract map is for fallback grids only; multiplying it into every authored
+  // style used to lay the same one-and-three pulse under the entire catalog.
+  const useFallbackAccent = !input.authoredTimingOnly && !input.patternAccentAuthored;
+  const metric = useFallbackAccent ? metricWeight(input.beatInBar, input.beatsPerBar) : 1;
+  const contractAccent = useFallbackAccent ? g.accentMap?.[slot] ?? 1 : 1;
   const shaped = (1 - g.accentDepth * (1 - metric)) * (0.72 + contractAccent * 0.28);
   const authored = Math.pow(Math.max(0.05, input.accent), g.dynamicRange);
   const smoothVelDrift = noise1D(input.beatInBar / 8 + (input.seed % 100), 202);

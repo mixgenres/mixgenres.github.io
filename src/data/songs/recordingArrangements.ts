@@ -551,7 +551,7 @@ const DETAILED_RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = {
   'cinematic::ambient-score': song(54, 'opening:16:1,A:32:2,solo:32:3,A:32:2,dissolve:16:1', 'Expressive synthesized lead over very slow sustained harmony; no dance climax.'),
   'ambient::generative-ambient': song(60, 'opening:32:1,evolution:128:2,texture-shift:128:2,evolution:128:3,dissolve:32:1', 'Long gradual process, continuing cells and minimal dynamic steps.'),
   'weird::process-generative': song(60, 'opening:32:1,evolution:128:2,texture-shift:128:2,evolution:128:3,dissolve:32:1', 'Long-form process adaptation using the existing generative pattern vocabulary.'),
-  'indian-classical::instrumental-gat': song(72, 'alap:32:1,jod:32:2,jhala:24:3,gat:64:3,solo:64:4,jhala:32:5,cadence:8:2', 'Sitar development, pulse entrance, tabla gat and accelerating jhala; free sections are approximated on the score grid.'),
+  'indian-classical::instrumental-gat': song(72, 'alap:32:1,jod:32:2,jhala:24:3,gat:64:3,solo:64:4,jhala:32:5,cadence:8:2,tihai:4:5,sam:1:5', 'Sitar development moves from the open alap into a pulsed gat and faster jhala. A four-bar study closes with three matching sitar and tabla phrases, then a shared tonic landing on sam. The fixed-grid timing makes the form playable; it is not a transcription.'),
   'indian-classical::dhrupad': song(48, 'alap:64:1,jor:48:2,nom-tom:32:3,dhrupad:64:3,cadence:8:1', 'Drone persists through unmetered voice development; pakhawaj enters only with the composition.'),
   'gamelan::javanese': song(64, 'buka:4:1,main-cycle:16:3,irama-change:1:2,irama-II:24:3,main-cycle:16:4,suwuk:1:1', 'Javanese teaching score: the kendang signals an irama shift, the balungan opens into a slower pulse while bonang fills four subdivisions per note, then the main pulse returns before a single sustained suwuk close. The fixed grid demonstrates ensemble roles; it is not a transcription.', undefined, {
     source: 'https://academic.oup.com/book/35097/chapter-abstract/299163245',
@@ -955,6 +955,19 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       instrumental: { guitar: 'Guitar variation', organ: 'Low organ bubble', bass: 'Bass variation', drums: 'One-drop drums', shaker: 'Shaker variation' },
       outro: { guitar: 'Guitar close', organ: 'Tonewheel organ close', bass: 'Bass close', drums: 'Drum kit close', shaker: 'Shaker close' },
     },
+  },
+  'indian-classical::instrumental-gat': {
+    note: 'Instrumental-gat teaching score: develop from the alap through a pulsed gat and faster jhala, then play one four-bar tihai and resolve together on sam. In this 16-beat practice cycle, the sitar repeats the same short descent three times while the tabla moves from a light theka into the matching answers. This fixed-grid study is not a transcription.',
+    sectionBpm: { jhala: 96, cadence: 80, tihai: 96, sam: 96 },
+    sectionInstruments: {
+      tihai: ['sitar','tabla','tanpura'],
+      sam: ['sitar','tabla','tanpura'],
+    },
+    patternAssignments: {
+      tihai: { sitar: 'Sitar tihai phrase', tabla: 'Tabla tihai accents', tanpura: 'Tanpura accompaniment' },
+      sam: { sitar: 'Sam landing', tabla: 'Sam landing', tanpura: 'Tanpura accompaniment' },
+    },
+    lockPatternAssignments: { tihai: ['sitar','tabla'], sam: ['sitar','tabla'] },
   },
   'reggae::dub': {
     note: 'Dub teaching score: short offbeat chords and a one-drop foundation give the delay room to answer; bass-and-drum dropouts expose the melodica echo phrase before the full riddim returns.',

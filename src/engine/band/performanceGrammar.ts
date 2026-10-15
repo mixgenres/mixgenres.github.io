@@ -6,6 +6,64 @@ function clamp01(v: number): number {
   return Math.max(0, Math.min(1, v));
 }
 
+/**
+ * Phrase behavior is inferred from each resolved style's authored motif,
+ * response, fill, and break vocabulary. The old fallback reused one exact
+ * repeat/variation/answer/rest mix for every genre, so a style with no extra
+ * grammar quietly inherited the same interpretation as every other style.
+ */
+function phraseDevelopmentForStyle(style: ResolvedStyle): PhraseDevelopmentProbabilities {
+  const result = { ...DEFAULT_PHRASE_DEVELOPMENT };
+  const motifOps = (style.melody?.motifOps ?? []).map(value => value.toLowerCase());
+  const contour = (style.melody?.contourArchetypes ?? []).map(value => value.toLowerCase());
+  const formLanguage = (style.form?.templates ?? []).flatMap(template => template.value.map(section => `${section.kind} ${section.label}`));
+  const patternLanguage = [
+    ...(style.patterns?.require ?? []), ...(style.patterns?.preferred ?? []), ...(style.patterns?.allowed ?? []),
+  ];
+  // Genre pack styles carry their strongest identity in core concepts,
+  // signature cells, authored form labels, and named local patterns. Their
+  // older SongStyle projections do not populate motifOps/contourArchetypes,
+  // so those fields alone would silently send the entire catalog to defaults.
+  const identityText = `${style.rhythm?.signatureCell ?? ''} ${(style.signatureTraits ?? []).slice(0, 3).join(' ')} ${formLanguage.join(' ')} ${patternLanguage.join(' ')}`.toLowerCase();
+  const hasMotif = (pattern: RegExp) => motifOps.some(value => pattern.test(value));
+
+  if (style.melody?.callAndResponse || /call.?and.?response|call.?response|antiphon|answer|response|trading/.test(identityText)) {
+    result.answerProbability += 0.12;
+    result.repeatProbability -= 0.06;
+  }
+  if (hasMotif(/sequence|transpose|invert|retrograde|develop|vary|ornament/)
+      || contour.length >= 3
+      || /sequence|chromatic|lick|run|motif|variation|ornament|syncopa|sincopa|falseta|tihai|jhala|solo/.test(identityText)) {
+    result.variationProbability += 0.10;
+    result.repeatProbability -= 0.07;
+  }
+  if (hasMotif(/repeat|ostinato|vamp/)
+      || /machine-grid|loop|ostinato|vamp|riddim|cycle|riff/.test(`${style.contract.pulseModel} ${identityText}`)) {
+    result.repeatProbability += 0.10;
+    result.variationProbability -= 0.04;
+  }
+  if (/pause|rest|silence|silencio|respiro|parada|corte|break|stop.?time|suwuk|angsel|ma\b/.test(identityText)) {
+    result.restProbability += 0.12;
+    result.repeatProbability -= 0.06;
+  }
+  if (Object.keys(style.rhythm?.fillGrammar ?? {}).length
+      || /fill|roll|pickup|turnaround|shout|jhala|ornament|run|break/.test(identityText)) {
+    result.fillProbability += 0.09;
+    result.repeatProbability -= 0.04;
+  }
+  if (style.form?.outros?.length || /cadence|coda|ending|close|closing|chan.?chan|sam|suwuk|tag/.test(identityText)) {
+    result.cadenceProbability += 0.08;
+    result.repeatProbability -= 0.02;
+  }
+
+  for (const key of Object.keys(result) as Array<keyof PhraseDevelopmentProbabilities>) {
+    result[key] = Math.max(0.005, result[key]);
+  }
+  const total = Object.values(result).reduce((sum, value) => sum + value, 0);
+  for (const key of Object.keys(result) as Array<keyof PhraseDevelopmentProbabilities>) result[key] /= total;
+  return result;
+}
+
 function lerp(a: number, b: number, t: number): number {
   return a + (b - a) * clamp01(t);
 }
@@ -204,6 +262,8 @@ export function getPerformanceGrammar(style: ResolvedStyle | PerformanceGrammarS
     allowDerivedPitch: source.harmonyModel === 'blues-form' ? 0.45 : 0.25,
     allowCrossStyleSubdivision: 0.15,
   };
+  const phraseDevelopment = source.performanceGrammar?.phraseDevelopment
+    ?? (isResolvedStyle ? phraseDevelopmentForStyle(style) : DEFAULT_PHRASE_DEVELOPMENT);
 
   const forbidden = Array.isArray(source.forbidden) ? source.forbidden : [];
   const mergedForbidden = Array.from(new Set([...(baseGrammar.forbiddenInterpretations ?? []), ...forbidden]));
@@ -228,6 +288,7 @@ export function getPerformanceGrammar(style: ResolvedStyle | PerformanceGrammarS
 
   const result: PerformanceGrammar = {
     ...baseGrammar,
+    phraseDevelopment,
     worldId,
     styleId,
     articulationVocabulary: mergedArticulations,

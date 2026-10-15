@@ -495,7 +495,10 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
   const events: PatternEvent[] = cell.onsets.map((position, i) => ({
     position, duration: cell.durations?.[i] ?? (cell.role === 'harmony' ? .35 : .2),
     kind: cell.phraseEnd ? 'fill' : 'attack',
-    accent: cell.accents?.[i] ?? (i === 0 ? .9 : .65), velocity: i === 0 ? .85 : .7,
+    // Keep the absence of authored accent data visible to the performance
+    // layer. A profile fallback is still emitted for legacy grid consumers,
+    // but it must not masquerade as a style-written event accent.
+    accent: cell.accents?.[i], velocity: i === 0 ? .85 : .7,
     articulation: cell.articulations?.[i] ?? cell.articulation, hitType: cell.hits?.[i], pitch: cell.pitches?.[i], notation: cell.notations?.[i], microtiming: cell.microtiming?.[i],
     // A notated tuplet/fingering sequence is one coherent gesture. Dropping
     // individual attacks would change both its ratio and its finger order.
@@ -521,7 +524,7 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
     meter, cycleLength, subdivisions: beats * stepsPerBeat * cycleLength,
     onsetGrid: cell.onsets.map(position => Math.round(position * stepsPerBeat)),
     durationGrid: events.map(event => Math.max(1, Math.round(event.duration! * stepsPerBeat))),
-    accentProfile: events.map(event => event.accent!), velocityProfile: events.map(event => event.velocity!),
+    accentProfile: events.map((event, eventIndex) => event.accent ?? (eventIndex === 0 ? .9 : .65)), velocityProfile: events.map(event => event.velocity!),
     ...(cell.hits ? { hitGrid: cell.hits.filter((hit): hit is string => typeof hit === 'string') } : {}), events,
     supportedEnergy: cell.supportedEnergy ?? [1,2,3,4,5],
     sectionUsage: cell.sectionUsage ?? (cell.phraseEnd ? ['ending'] : undefined),
@@ -814,14 +817,18 @@ export function createGenreWorld(input: GenrePackInput): GenreWorld {
       const pattern = patternFromCell(input, style, cell, index);
       const fill = authoredCells.find(candidate => candidate.phraseEnd && !isGenericPhraseClose(candidate, style.preferredMeters[0])
         && candidate.role === cell.role && candidate.instruments?.[0] === cell.instruments?.[0]);
-      if (fill) {
+      // A short section cadence is a useful variation for compact grooves, but
+      // it must not replace the closing measure of a longer authored cycle.
+      // That final measure may contain the actual teaching phrase (for example
+      // a tihai); its separate ending belongs in the song form after the cycle.
+      if (fill && !pattern.pedagogicalStudy && pattern.cycleLength <= 2) {
         const fillPattern = patternFromCell(input, style, fill, index);
         const events = closingEvents(pattern, fillPattern);
         pattern.variants = [{ id: `${pattern.id}-cadence`, parentPatternId: pattern.id,
           name: `${cell.name} cadence`, variationType: 'cadence', probability: 1,
           onsetGrid: events.map(event => Math.round(event.position * 4)),
           durationGrid: events.map(event => Math.max(1, Math.round(event.duration! * 4))),
-          accentProfile: events.map(event => event.accent!), velocityProfile: events.map(event => event.velocity!), events,
+          accentProfile: events.map(event => event.accent ?? .65), velocityProfile: events.map(event => event.velocity!), events,
         }];
       }
       return pattern;
@@ -854,7 +861,7 @@ export function createGenreWorld(input: GenrePackInput): GenreWorld {
         shortName: `${turnaroundSubject} turnaround`, cycleLength, subdivisions: beats * 4 * cycleLength,
         events, onsetGrid: events.map(event => Math.round(event.position * 4)),
         durationGrid: events.map(event => Math.max(1, Math.round(event.duration! * 4))),
-        accentProfile: events.map(event => event.accent!), velocityProfile: events.map(event => event.velocity!),
+        accentProfile: events.map(event => event.accent ?? .65), velocityProfile: events.map(event => event.velocity!),
         hitGrid: undefined, category: 'transition', variants: [], sectionUsage: ['solo', 'ending', 'outro', 'coda'] as MusicalPattern['sectionUsage'],
         pedagogicalStudy: 'variation' as const,
         difficulty: Math.min(5, Math.max(2, (pattern.difficulty ?? 2) + 1)),

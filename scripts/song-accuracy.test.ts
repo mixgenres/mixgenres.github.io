@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { makeSheet } from '../src/engine/sheet/sheet';
+import { makeSheet, rebuild } from '../src/engine/sheet/sheet';
 import { compileWholeSong } from '../src/engine/band/arrangeBand';
 import { createCatalogSong } from '../src/engine/sheet/songCatalog';
 import { SONGS_BY_ID } from '../src/data/songs/catalog';
@@ -16,6 +16,7 @@ import { patchForInstrument, SYNTH_SAMPLE_PROGRAMS } from '../src/engine/playbac
 import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { ALL_STYLES } from '../src/engine/style';
 import { BANDONEON_142_BUTTONS } from '../src/engine/band/fingering/bandoneon';
+import { grooveFor, grooveVelocityMultiplier } from '../src/engine/band/groove';
 
 test('silent arrangement parts never acquire fallback attacks', () => {
   const sheet = makeSheet('tango');
@@ -1565,4 +1566,78 @@ test('every tango bandoneon button agrees with the sounding pitch and bellows di
       assert.equal(note.midi, note.bellowsDirectionCode === 1 ? button.open : button.close, `${style.id}/${note.midi}/${button.id}`);
     }
   }
+});
+
+test('Hindustani gat sample plays a three-part tihai into a shared sam landing', () => {
+  const sheet = createCatalogSong('indian-classical-instrumental-gat_song');
+  const performance = compileWholeSong(sheet);
+  const tihai = sheet.regions.find(region => region.kind === 'tihai');
+  const sam = sheet.regions.find(region => region.kind === 'sam');
+  assert.ok(tihai && sam, 'the sample names its tihai and sam sections');
+  assert.equal(tihai.bars, 4, 'the phrase fills one 16-beat practice cycle');
+  assert.equal(sam.formLabel, 'sam · shared landing');
+  assert.deepEqual(new Set(tihai.activeInstrumentIds), new Set(['sitar','tabla','tanpura']));
+  assert.deepEqual(new Set(sam.activeInstrumentIds), new Set(['sitar','tabla','tanpura']));
+
+  const trackFor = (instrument: string) => {
+    const track = sheet.tracks.find(item => item.instrumentId === instrument);
+    assert.ok(track, `${instrument} has a dedicated part`);
+    return track;
+  };
+  const patternFor = (region: typeof tihai, instrument: string) => {
+    const track = trackFor(instrument);
+    const pattern = PATTERNS_BY_ID[sheet.arrangement[region.id]?.[track.id] ?? ''];
+    assert.ok(pattern, `${instrument} has a named part in ${region.kind}`);
+    return pattern;
+  };
+  const sitar = patternFor(tihai, 'sitar');
+  const tabla = patternFor(tihai, 'tabla');
+  assert.equal(sitar.shortName, 'Sitar tihai phrase');
+  assert.equal(tabla.shortName, 'Tabla tihai accents');
+  assert.deepEqual(sitar.events?.map(event => event.position), [12.25,12.5,12.75,13,13.75,14,14.25,14.5,15.25,15.5,15.75]);
+  assert.deepEqual(sitar.events?.map(event => event.pitch?.degree), [5,4,3,1,5,4,3,1,5,4,3]);
+  assert.deepEqual(tabla.events?.slice(-11).map(event => event.position), [12.25,12.5,12.75,13,13.75,14,14.25,14.5,15.25,15.5,15.75]);
+  assert.equal(patternFor(sam, 'sitar').shortName, 'Sam landing');
+  assert.equal(patternFor(sam, 'tabla').shortName, 'Sam landing');
+
+  const sitarTrack = trackFor('sitar'), tablaTrack = trackFor('tabla');
+  const samBar = performance.bars.find(bar => bar.index === sam.start)!;
+  const finalSitarNote = performance.notes.filter(note => note.trackId === sitarTrack.id && note.bar === tihai.start + 3)
+    .sort((a, b) => a.time - b.time).at(-1)!;
+  assert.ok(Math.abs(finalSitarNote.time + finalSitarNote.dur - samBar.start) < .03,
+    'the third sitar phrase resolves into the sam boundary');
+  const samNotes = performance.notes.filter(note => note.bar === sam.start
+    && [sitarTrack.id, tablaTrack.id].includes(note.trackId));
+  assert.deepEqual(new Set(samNotes.map(note => note.trackId)), new Set([sitarTrack.id, tablaTrack.id]),
+    'sitar and tabla strike the sam together in the compiled performance');
+});
+
+test('authored groove accents are not overlaid with a shared one-and-three pulse', () => {
+  const groove = { ...grooveFor('jazz'), humanizeVel: 0 };
+  const base = { beatsPerBar: 4, role: 'bass' as const, accent: 0.7, seed: 17 };
+  const authoredOne = grooveVelocityMultiplier(groove, { ...base, beatInBar: 0, patternAccentAuthored: true });
+  const authoredThree = grooveVelocityMultiplier(groove, { ...base, beatInBar: 2, patternAccentAuthored: true });
+  const fallbackOne = grooveVelocityMultiplier(groove, { ...base, beatInBar: 0 });
+  const fallbackThree = grooveVelocityMultiplier(groove, { ...base, beatInBar: 2 });
+  assert.equal(authoredOne, authoredThree,
+    'the authored event accent controls the sound without a second global meter accent');
+  assert.notEqual(fallbackOne, fallbackThree,
+    'generic fallback grids keep the neutral meter accent for notes without authored accent data');
+});
+
+test('missing harmony resolves from its own section style, never the old Am/Tango fallback', () => {
+  const sheet = makeSheet('country', 'country-bluegrass');
+  const target = sheet.regions[1];
+  const authored = target.chords?.slice() ?? [];
+  const bars = target.bars;
+  assert.ok(authored.length, 'the selected Country style has authored harmony');
+  assert.ok(Number.isInteger(bars), 'the section has an authored bar count');
+  const withoutSectionHarmony = {
+    ...sheet,
+    regions: sheet.regions.map(region => region.id === target.id ? { ...region, chords: [] } : region),
+  };
+  const repaired = rebuild(withoutSectionHarmony);
+  const actual = repaired.measures.slice(target.start, target.end).map(measure => measure.chord);
+  assert.deepEqual(actual, Array.from({ length: bars! }, (_, index) => authored[index % authored.length]));
+  assert.notEqual(actual[0], 'Am', 'a missing Country cell cannot silently become the generic minor fallback');
 });
