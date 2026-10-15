@@ -1,0 +1,88 @@
+{
+  "genreId": "ethiopian",
+  "reviewed": "2026-10-14",
+  "status": "Five distinct streaming candidates are collected for each of the five Ethiopian styles. Listening comparison and timecodes remain pending; these are candidates, not verified sonic matches.",
+  "source": "Apple Music individual track pages and artist/release metadata. Reference audio has not been downloaded or auditioned.",
+  "styles": [
+    {
+      "styleId": "ethio-jazz",
+      "compare": [
+        "the horn line's pentatonic phrases against syncopated organ chords",
+        "how bass and drum kit make the groove feel buoyant without flattening the melody",
+        "short horn replies and rests between longer instrumental phrases",
+        "the balance of jazz phrasing, Ethiopian modal color, and dance-band pulse"
+      ],
+      "recordings": [
+        { "title": "Yèkèrmo Sèw (A Man of Experience and Wisdom)", "artist": "Mulatu Astatke", "url": "https://music.apple.com/us/song/78928215", "timecodes": [] },
+        { "title": "Yègellé Tezeta (My Own Memory)", "artist": "Mulatu Astatke", "url": "https://music.apple.com/us/song/78928266", "timecodes": [] },
+        { "title": "Dèwèl (Bell)", "artist": "Mulatu Astatke", "url": "https://music.apple.com/us/album/d%C3%A8w%C3%A8l-bell/78928362?i=78928347", "timecodes": [] },
+        { "title": "Mascaram Setaba (Stereo Master)", "artist": "Mulatu Astatke", "url": "https://music.apple.com/us/song/1225953455", "timecodes": [] },
+        { "title": "Sintayehu", "artist": "Hailu Mergia & Dahlak Band", "url": "https://music.apple.com/in/song/1106553959", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "tizita",
+      "compare": [
+        "slow, ornamented pentatonic vocal phrasing and the breath between lines",
+        "masenqo response against the lead, when present",
+        "the krar's sparse support and the kebero pulse",
+        "how the lament sustains intensity without turning into a dense dance groove"
+      ],
+      "recordings": [
+        { "title": "Tizita", "artist": "Aster Aweke", "url": "https://music.apple.com/us/song/128190394", "timecodes": [] },
+        { "title": "Tizita (Memories)", "artist": "Abyssinia Band", "url": "https://music.apple.com/us/song/392005008", "timecodes": [] },
+        { "title": "Tizita (feat. Etsegenet Mekonnen)", "artist": "Kibrom Birhane", "url": "https://music.apple.com/us/song/1382925427", "timecodes": [] },
+        { "title": "Tizita", "artist": "Bezawork Asfaw", "url": "https://music.apple.com/us/song/1560483363", "timecodes": [] },
+        { "title": "Tizita (Instrumental Mix)", "artist": "Daniel Wolde Gabriel", "url": "https://music.apple.com/us/song/1435678922", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "ethiopian-funk",
+      "compare": [
+        "clipped horn attacks and their placement against the bass figure",
+        "the pocket made by bass, kit, and kebero rather than a straight rock backbeat",
+        "organ or guitar comping that leaves space for the horn riff",
+        "how a repeated dance groove gains energy through changes in ensemble density"
+      ],
+      "recordings": [
+        { "title": "Yètentu feqratchen", "artist": "Alemayehu Eshete", "url": "https://music.apple.com/us/song/264843914", "timecodes": [] },
+        { "title": "Addis Abeba Bete", "artist": "Alemayehu Eshete", "url": "https://music.apple.com/us/song/78937843", "timecodes": [] },
+        { "title": "Mascaram Setaba (Stereo Master)", "artist": "Mulatu Astatke", "url": "https://music.apple.com/us/song/1225953455", "timecodes": [] },
+        { "title": "Sintayehu", "artist": "Hailu Mergia & Dahlak Band", "url": "https://music.apple.com/in/song/1106553959", "timecodes": [] },
+        { "title": "Feqer Endè Krar (Yebèqagnal)", "artist": "Girma Beyene & Akalé Wubé", "url": "https://music.apple.com/us/song/1189068716", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "traditional-modal",
+      "compare": [
+        "modal vocal calls and instrumental answers across phrase gaps",
+        "the lead role shared by voice and masenqo without constant doubling",
+        "krar support under the melody and the weight of the kebero accents",
+        "how a sparse repeated center supports melodic variation instead of Western chord changes"
+      ],
+      "recordings": [
+        { "title": "Ethiopia", "artist": "Woretaw Wubet", "url": "https://music.apple.com/us/song/265091717", "timecodes": [] },
+        { "title": "Oromigna", "artist": "Krar Collective", "url": "https://music.apple.com/us/song/1304842327", "timecodes": [] },
+        { "title": "Guragigna", "artist": "Krar Collective", "url": "https://music.apple.com/us/song/1304842326", "timecodes": [] },
+        { "title": "Abet Abet", "artist": "Asnakech Worku", "url": "https://music.apple.com/us/song/1690472267", "timecodes": [] },
+        { "title": "Bati", "artist": "Asnakech Worku & Getamesay Abebe", "url": "https://music.apple.com/us/song/1717423974", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "modern-ethio-jazz",
+      "compare": [
+        "electric-keyboard layers against a grounded bass-and-drum pocket",
+        "horn exchange and instrumental handoffs rather than continuous unison melody",
+        "how newer studio textures retain Ethiopian modal and rhythmic identity",
+        "the contrast in width, density, and energy between the theme and its breakdown or return"
+      ],
+      "recordings": [
+        { "title": "Yekatit", "artist": "Mulatu Astatke & Black Jesus Experience", "url": "https://music.apple.com/us/song/1136533950", "timecodes": [] },
+        { "title": "Sad Nile", "artist": "The Polyversal Souls feat. Hailu Mergia", "url": "https://music.apple.com/us/song/1002841177", "timecodes": [] },
+        { "title": "Sethed Seketelat (feat. Brodie West, Joost Buis, Xavier Charles & Colin McLean)", "artist": "The Ex & Getatchew Mekuria", "url": "https://music.apple.com/us/song/1733114653", "timecodes": [] },
+        { "title": "Ambassa Lemdi (feat. Mulatu Astatke & Black Jesus Experience)", "artist": "ASHk & Shaya Shoja", "url": "https://music.apple.com/us/album/ambassa-lemdi-feat-mulatu-astatke-black-jesus-experience/1727809338?i=1727809339", "timecodes": [] },
+        { "title": "Fruit from Heaven", "artist": "Kibrom Birhane", "url": "https://music.apple.com/us/song/1758057881", "timecodes": [] }
+      ]
+    }
+  ]
+}

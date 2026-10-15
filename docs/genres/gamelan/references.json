@@ -1,0 +1,72 @@
+{
+  "genreId": "gamelan",
+  "reviewed": "2026-10-14",
+  "status": "Five linked streaming candidates are collected for each of the four Gamelan styles. Listening comparison and timecodes remain pending; these are candidates, not verified sonic matches.",
+  "source": "Apple Music individual track pages and release metadata. Reference audio has not been downloaded or auditioned.",
+  "styles": [
+    {
+      "styleId": "javanese",
+      "compare": [
+        "the gong-chime cycle and how the kenong and gong mark its larger divisions",
+        "balungan melody against saron, bonang, gender, and rebab elaboration",
+        "the contrast between slendro and pelog color and pathet-specific melodic emphasis",
+        "kendhang-led changes of density, tempo, and vocal or instrumental texture"
+      ],
+      "recordings": [
+        { "title": "Music Part: Talu (Ayak-ayakan 〜 Srepegan 〜 Sampak), slendro manyura", "artist": "Lambangsari", "url": "https://music.apple.com/us/song/1610440787", "timecodes": [] },
+        { "title": "Ketawang: Puspawarna", "artist": "Various Artists / Explorer Series", "url": "https://music.apple.com/us/song/128048667", "timecodes": [] },
+        { "title": "Gendhing Sumyar", "artist": "Java Court Gamelan", "url": "https://music.apple.com/us/song/128052429", "timecodes": [] },
+        { "title": "Gendhing Marasanja slendro nem", "artist": "Karawitan Raras Raos Irama", "url": "https://music.apple.com/us/song/1562925547", "timecodes": [] },
+        { "title": "LADRANG WILUJENG", "artist": "Gendingan Jawa", "url": "https://music.apple.com/us/song/1687951425", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "balinese-gong-kebyar",
+      "compare": [
+        "kotekan interlock between paired metallophones and the combined attack of their paired tuning",
+        "sudden, coordinated shifts in tempo, dynamics, and ensemble density",
+        "the contrast between fast gangsa figures and the slower gong-cycle punctuation",
+        "dance repertoire such as Baris, Oleg, and Kebyar Duduk and the articulation each asks from the ensemble"
+      ],
+      "recordings": [
+        { "title": "Gamelan Gong Kebyar: Baris/Gambang Betjak", "artist": "Baris Bicakci & Gambang Betjak", "url": "https://music.apple.com/us/song/73248440", "timecodes": [] },
+        { "title": "Kebyar Duduk", "artist": "Bali Gamelan Sound", "url": "https://music.apple.com/us/song/1622747377", "timecodes": [] },
+        { "title": "Gamelan Gong Kebyar Tinggi Seni Indonesia, Den Pasar (Baris)", "artist": "Gamelan & Kecak", "url": "https://music.apple.com/us/song/98284875", "timecodes": [] },
+        { "title": "Gamelan Gong Kebjar: Oleg Tumbelilingan (Bumblebee)", "artist": "Various Artists / Explorer Series", "url": "https://music.apple.com/us/song/129627038", "timecodes": [] },
+        { "title": "Jaya Semara", "artist": "Darma Santi Gong Kebyar", "url": "https://music.apple.com/us/song/1752431530", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "degung",
+      "compare": [
+        "Sundanese degung's gentle, cyclical pace and gong punctuation",
+        "suling flute ornaments and kacapi or bonang support against the metallophone line",
+        "kendang signals that shape phrase starts, transitions, and cadence",
+        "the balance between instrumental degung texture and sung Sundanese repertoire"
+      ],
+      "recordings": [
+        { "title": "Sabilulungan", "artist": "L.S. Kancana Sari", "url": "https://music.apple.com/us/song/924884296", "timecodes": [] },
+        { "title": "Sangkala", "artist": "Gamelan Degung", "url": "https://music.apple.com/us/song/460874067", "timecodes": [] },
+        { "title": "Gara Gara Cinta", "artist": "Gamelan Degung", "url": "https://music.apple.com/us/song/460874070", "timecodes": [] },
+        { "title": "Ayun Ambing", "artist": "Suara Parahiangan, Indonesian Ethnic & Degung", "url": "https://music.apple.com/us/song/1828619155", "timecodes": [] },
+        { "title": "Sabilulungan", "artist": "Degung Orchestra", "url": "https://music.apple.com/us/song/460884719", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "gamelan-angklung",
+      "compare": [
+        "the compact Balinese angklung ensemble's interlocking metallophone and gong parts",
+        "shorter, quicker phrase cycles and the dry, bright attack of the tuned bronze instruments",
+        "how village ensembles coordinate accents and cadences without a drum-kit backbeat",
+        "regional and ceremonial repertoire across the Ketewel, Peliatan, Mas, and Pemogan recordings"
+      ],
+      "recordings": [
+        { "title": "Gamelan Angklung", "artist": "Gamelan Angklung", "url": "https://music.apple.com/us/song/49331979", "timecodes": [] },
+        { "title": "Hujan Mas", "artist": "gamelan angklung, Ketewel village", "url": "https://music.apple.com/us/song/426197739", "timecodes": [] },
+        { "title": "Galang Kangin", "artist": "gamelan angklung, Peliatan village (Banjar Tengah)", "url": "https://music.apple.com/us/song/426197687", "timecodes": [] },
+        { "title": "Godeg Miring", "artist": "gamelan angklung, Mas village", "url": "https://music.apple.com/us/song/426197695", "timecodes": [] },
+        { "title": "Sekar Jepun", "artist": "Gamelan Angklung of Pemogan, Denpasar", "url": "https://music.apple.com/us/song/1049385306", "timecodes": [] }
+      ]
+    }
+  ]
+}

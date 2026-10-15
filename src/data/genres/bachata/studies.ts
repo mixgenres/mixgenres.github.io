@@ -9,6 +9,68 @@ function cell(name: string, role: string, instrument: string, onsets: number[], 
 }
 const eighths = [0, .5, 1, 1.5, 2, 2.5, 3, 3.5];
 const length = (onsets: number[], duration: number) => Array.from({ length: onsets.length }, () => duration);
+const vocalPhrasing: Record<string, {
+  verseOnsets: number[]; verseDurations: number[]; verseDegrees: number[];
+  refrainOnsets: number[]; refrainDurations: number[]; refrainDegrees: number[];
+  verseRegister: number; refrainRegister: number; verseDescription: string; refrainDescription: string;
+}> = {
+  dominican: {
+    verseOnsets: [0, .75, 1.5, 2.5, 4, 5, 6.25], verseDurations: [.55, .5, .8, .8, .55, .6, 1.1], verseDegrees: [3, 3, 5, 4, 3, 2, 1],
+    refrainOnsets: [0, .5, 1.5, 2.5, 3, 4, 5.5, 6.5], refrainDurations: [.45, .45, .75, .45, .75, .45, .6, 1.1], refrainDegrees: [5, 5, 6, 5, 3, 5, 4, 1],
+    verseRegister: 62, refrainRegister: 64,
+    verseDescription: 'Sing a short, stepwise derecho verse and release its cadence so the requinto can answer.',
+    refrainDescription: 'Lift the chorus to a brighter chord tone, hold the landing, and leave a clear gap for the guitar response.',
+  },
+  amargue: {
+    verseOnsets: [0, 1, 2, 3, 4, 5.5, 6.5], verseDurations: [.9, .7, .9, .6, 1, .7, .9], verseDegrees: [5, 4, 3, 2, 3, 2, 1],
+    refrainOnsets: [0, .5, 1.5, 2.5, 4, 5, 6.25], refrainDurations: [.7, .55, .8, .8, .8, .8, 1], refrainDegrees: [3, 5, 6, 5, 4, 3, 1],
+    verseRegister: 61, refrainRegister: 63,
+    verseDescription: 'Shape the lament as a descending line with space around its held notes; keep the cadence plaintive and controlled.',
+    refrainDescription: 'Rise briefly above the verse, then settle by step instead of filling the vocal gaps with extra notes.',
+  },
+  'traditional-bolero-bachata': {
+    verseOnsets: [0, .75, 1.5, 2.5, 4, 4.75, 6], verseDurations: [1.25, .8, 1.25, 1.1, 1.1, .8, 1.5], verseDegrees: [1, 3, 5, 4, 3, 2, 1],
+    refrainOnsets: [0, 1, 2, 3, 4, 5, 6], refrainDurations: [1, .8, 1.2, .8, 1.1, .8, 1.2], refrainDegrees: [3, 4, 5, 6, 5, 3, 1],
+    verseRegister: 61, refrainRegister: 63,
+    verseDescription: 'Trace the bolero arpeggio with a long, connected vocal line and let the cadence breathe over the broken chords.',
+    refrainDescription: 'Open the bridge by rising through chord tones, then resolve into a sustained note with room for requinto.',
+  },
+  moderna: {
+    verseOnsets: [0, .5, 1.5, 2, 2.75, 4, 5, 6.5], verseDurations: [.45, .6, .55, .7, .45, .5, .6, 1], verseDegrees: [3, 2, 3, 5, 4, 3, 2, 1],
+    refrainOnsets: [0, .75, 1.5, 2.5, 3.25, 4, 5.25, 6.5], refrainDurations: [.55, .55, .65, .7, .4, .75, .65, 1], refrainDegrees: [5, 5, 6, 5, 3, 5, 4, 1],
+    verseRegister: 62, refrainRegister: 64,
+    verseDescription: 'Use light syllabic pickups before longer melody notes; keep the verse clear of the requinto answer.',
+    refrainDescription: 'Give the refrain a wider melodic lift and a held landing, keeping the second-guitar rhythm crisp underneath.',
+  },
+  sensual: {
+    verseOnsets: [0, .75, 1.5, 3, 4, 5.5, 6.5], verseDurations: [1, .8, 1.1, .7, 1.2, .6, 1.1], verseDegrees: [3, 4, 5, 4, 3, 2, 1],
+    refrainOnsets: [0, 1, 2.25, 3.5, 4, 5.5, 6.5], refrainDurations: [1.1, .6, .9, .5, 1.1, .6, 1.1], refrainDegrees: [5, 5, 6, 5, 3, 2, 1],
+    verseRegister: 62, refrainRegister: 64,
+    verseDescription: 'Stretch only the arrival notes; leave the longer spaces open for the sparse guitar answer.',
+    refrainDescription: 'Sustain the hook tones across the pulse, then release before the next phrase instead of adding a constant vocal pad.',
+  },
+  'bachata-mambo': {
+    verseOnsets: [0, .75, 1.5, 2.25, 4, 4.75, 5.5, 6.5], verseDurations: [.45, .45, .65, .55, .45, .5, .65, .9], verseDegrees: [3, 3, 5, 4, 3, 2, 3, 1],
+    refrainOnsets: [0, .5, 1.5, 2, 3, 4, 5.5, 6.5], refrainDurations: [.4, .4, .6, .5, .6, .4, .55, .9], refrainDegrees: [5, 5, 6, 5, 3, 5, 4, 1],
+    verseRegister: 62, refrainRegister: 64,
+    verseDescription: 'Keep the verse calls compact so each cadence leaves space for the requinto and bongó fills.',
+    refrainDescription: 'Use a short lifted refrain and stop singing through the mambo feature; let the picked run take over.',
+  },
+  urban: {
+    verseOnsets: [0, .5, 1.25, 2, 2.5, 4, 5, 6.25, 7], verseDurations: [.35, .35, .5, .55, .4, .4, .5, .35, .8], verseDegrees: [3, 3, 5, 4, 3, 2, 3, 2, 1],
+    refrainOnsets: [0, .5, 1.5, 2.25, 3, 4, 5.25, 6.5], refrainDurations: [.4, .4, .7, .45, .65, .4, .6, 1], refrainDegrees: [5, 5, 6, 5, 3, 5, 4, 1],
+    verseRegister: 62, refrainRegister: 64,
+    verseDescription: 'Place the syncopated pickups cleanly against the programmed backbeat, then leave a pocket at the cadence.',
+    refrainDescription: 'Make the refrain hook easy to follow above the R&B rhythm; leave the requinto solo without a vocal guide.',
+  },
+  fusion: {
+    verseOnsets: [0, .75, 1.5, 2.5, 4, 4.75, 6.25], verseDurations: [.8, .55, .8, .7, .65, .55, 1], verseDegrees: [1, 3, 5, 4, 3, 2, 1],
+    refrainOnsets: [0, .5, 1.5, 2.5, 3.5, 4, 5.5, 6.5], refrainDurations: [.55, .45, .7, .6, .4, .75, .6, 1], refrainDegrees: [5, 5, 6, 5, 4, 5, 3, 1],
+    verseRegister: 62, refrainRegister: 64,
+    verseDescription: 'Connect the smooth melody through the chord changes, then leave the crossover interlude open for instrumental exchange.',
+    refrainDescription: 'Lift the sung hook across the fusion harmony and resolve with a held tonic rather than another continuous fill.',
+  },
+};
 
 /** Original teaching cells based on the folder's reference repertoire and
  * instrument practice. These are not transcriptions of the reference hooks.
@@ -24,9 +86,16 @@ export function authorBachataStudies(pack: GenrePackInput): GenrePackInput {
     const leadRegister = bolero || lament ? 64 : 69;
     const guitarOnsets = bolero ? [0, .5, 1, 1.5, 2, 2.5, 3, 3.5] : [.5, 1, 1.5, 2.5, 3, 3.5];
     const harmonyPitch = bolero ? [1, 3, 5, 3, 1, 3, 5, 3].map(d => note(d, 55)) : guitarOnsets.map(() => chord);
+    const voice = vocalPhrasing[style.id];
+    const versePhrase = cell('Bachata vocal verse phrase study', 'lead', 'voice', voice.verseOnsets, voice.verseDurations, 'legato',
+      { cycleLength: 2, pitches: voice.verseDegrees.map(d => note(d, voice.verseRegister)), sectionUsage: ['verse'],
+        shortName: 'Vocal verse phrase', difficulty: 1, description: voice.verseDescription });
+    const refrainPhrase = cell('Bachata vocal refrain lift study', 'lead', 'voice', voice.refrainOnsets, voice.refrainDurations, 'legato',
+      { cycleLength: 2, pitches: voice.refrainDegrees.map(d => note(d, voice.refrainRegister)), sectionUsage: ['chorus', 'prechorus', 'bridge'],
+        shortName: 'Vocal refrain lift', difficulty: 2, description: voice.refrainDescription });
     const studies: AuthoredCell[] = [
-      cell('Vocal two-bar statement', 'lead', 'voice', [0, .75, 1.5, 2.5, 4, 5, 6], [.6, .6, .8, 1, .8, .8, 1.5], 'legato',
-        { cycleLength: 2, pitches: [3, 3, 5, 4, 3, 2, 1].map(d => note(d, 62)), sectionUsage: ['verse', 'chorus'] }),
+      versePhrase,
+      refrainPhrase,
       cell('Requinto answering thirds', 'lead', 'requinto', [2, 2.5, 3, 3.5, 6, 6.5, 7], [.3, .3, .3, .4, .3, .3, .7], 'legato',
         { cycleLength: 2, pitches: [3, 5, 6, 5, 4, 2, 1].map(d => note(d, leadRegister)),
           articulations: ['accent', 'legato', 'hammer-on', 'pull-off', 'accent', 'legato', 'legato'], sectionUsage: ['verse'] }),

@@ -308,6 +308,7 @@ const instrumentAliases: Array<[string, string, string]> = [
   ['bajo-sexto','guitar','Mexican twelve-string bass-register guitar, modeled from guitar.'],
   ['biwa','pipa','Japanese short-necked lute, modeled from the pipa profile.'],
   ['bonang','gamelan-metallophone','Gamelan kettle-gong row, modeled from the gamelan metallophone profile.'],
+  ['reyong','gamelan-metallophone','Balinese kettle-gong rack, currently modeled from the gamelan metallophone profile.'],
   ['buk','janggu','Korean barrel drum, modeled from the janggu drum profile.'],
   ['dholak','tabla','Double-headed folk drum, modeled from the tabla percussion profile.'],
   ['dombra','mandolin','Central Asian long-necked plucked lute, modeled from a bright plucked-string profile.'],
@@ -340,6 +341,8 @@ for (const [id, sourceId, note] of instrumentAliases) {
   if (!source || INSTRUMENT_CATALOG.some(instrument => instrument.id === id)) continue;
   INSTRUMENT_CATALOG.push({ ...structuredClone(source), id, name: id.replace(/-/g, ' '), note });
 }
+const reyong = INSTRUMENT_CATALOG.find(instrument => instrument.id === 'reyong');
+if (reyong) reyong.name = 'Reyong';
 
 // Timpani have definite pitch and a dedicated chromatic SoundFont patch. They
 // share the drum articulation vocabulary, but must not inherit kit routing.

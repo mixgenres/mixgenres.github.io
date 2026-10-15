@@ -1,4 +1,5 @@
 import type { AuthoredCell, GenrePackInput } from '../_shared/genrePack';
+import type { MixContract, MixOverride } from '../../sound/schema/dynamicMix';
 
 const chord = (degree: number, register: number) => ({ degree, register, voicing: 'chord' as const });
 
@@ -6,6 +7,44 @@ const chord = (degree: number, register: number) => ({ degree, register, voicing
  * slow, long-envelope vocabulary of this style instead of borrowing a groove. */
 export function authorAmbientStudies(pack: GenrePackInput): GenrePackInput {
   return { ...pack, styles: pack.styles.map(style => {
+    if (style.id === 'dark-ambient') {
+      const roles = { ...style.roles, percussion: [...new Set([...(style.roles.percussion ?? []), 'sampler'])] };
+      const cells: AuthoredCell[] = [
+        {
+          name: 'Dark ambient ride-bell toll', shortName: 'Ride-bell toll', role: 'percussion', instruments: ['sampler'], cycleLength: 16,
+          onsets: [7.5, 15.5], durations: [.3, .3], accents: [.55, .7], articulation: 'accent',
+          pitches: [{ midi: [36] }, { midi: [36] }], sectionUsage: ['descent', 'climax'], supportedEnergy: [1, 2, 3, 4], difficulty: 2,
+          description: 'Place a sampled ride bell late in the long phrase, then answer near its end; leave the drone exposed between attacks.',
+        },
+        {
+          name: 'Dark ambient china-cymbal bloom', shortName: 'China-cymbal bloom', role: 'percussion', instruments: ['sampler'], cycleLength: 16,
+          onsets: [11.5], durations: [.6], accents: [.42], articulation: 'accent',
+          pitches: [{ midi: [37] }], sectionUsage: ['ritual', 'climax'], supportedEnergy: [2, 3, 4], difficulty: 3,
+          description: 'Use one quiet sampled china-cymbal bloom as a distant metallic color; keep it isolated from the low drone.',
+        },
+      ];
+      const instrumentDialects = { ...style.instrumentDialects,
+        'sampler:percussion': { allowedTechniques: ['accent', 'staccato'], defaultTechnique: 'accent', samplePalette: [53, 52] },
+      };
+      const instrumentTechniques = { ...style.instrumentTechniques, sampler: ['accent', 'staccato'] };
+      const mix: MixOverride<MixContract> = {
+        ...style.mix,
+        stage: style.mix.stage ? { ...style.mix.stage,
+          rolePan: { ...style.mix.stage.rolePan, percussion: .08 }, roleWidth: { ...style.mix.stage.roleWidth, percussion: .16 },
+        } : undefined,
+        roles: { ...style.mix.roles, percussion: {
+          mixFunctions: ['rhythmic-support'], priority: .4, gainDb: -2, foregroundGainDb: -1, supportGainDb: -1,
+          presenceDb: .3, bodyDb: -.3, depth: .3, width: .16, transientEmphasis: .65,
+          protectLowEnd: false, protectRhythmicDefinition: false, mayYieldSpectrally: true,
+          mayYieldInGain: true, maskingPriority: .42, ambienceSend: .08,
+        } },
+        buses: style.mix.buses ? { ...style.mix.buses,
+          roleBus: { ...style.mix.buses.roleBus, percussion: 'percussion' },
+        } : undefined,
+      };
+      return { ...style, roles, cells: [...cells, ...style.cells], instrumentDialects, instrumentTechniques,
+        mix, patterns: [...new Set([...style.patterns, ...cells.map(cell => cell.name)])] };
+    }
     if (style.id !== 'atmospheric') return style;
     const roles = {
       ...style.roles,

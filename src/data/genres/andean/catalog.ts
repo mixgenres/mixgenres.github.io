@@ -9,7 +9,7 @@ export const GENRE_PACK: GenrePackInput = {
   "defaultStyle": "Huayno",
   "meter": "2/4",
   "tempo": [104, 120],
-  "instruments": ["quena", "siku", "charango", "guitar", "bombo-andino"],
+  "instruments": ["quena", "siku", "charango", "guitar", "bombo-andino", "bass", "drums", "synth"],
   "roles": {
     "lead": ["quena", "siku"],
     "harmony": ["charango", "guitar"],
@@ -21,7 +21,7 @@ export const GENRE_PACK: GenrePackInput = {
   "harmonicRhythm": "bar",
   "cadences": ["Am"],
   "bassChordInteraction": "Anchor chord roots, answer the lead in phrase gaps, and approach the next chord at the turnaround.",
-  "patternFamilies": ["huayno duple dance and quena reply", "sanjuanito even duple flute and charango", "saya drum and vocal response", "tinku heavy duple accents", "carnavalito charango dance ostinato", "nueva canción acoustic verse and instrumental reply", "Andean flute hook over modern backbeat"],
+  "patternFamilies": ["huayno duple dance and quena reply", "sanjuanito even duple flute and charango", "saya drum and vocal response", "tinku heavy duple accents", "carnavalito charango dance ostinato", "nueva canción acoustic verse and instrumental reply", "Andean flute hook over digital cumbia shuffle"],
   "techniques": ["breath-phrase", "trill", "tremolo", "strum", "call-response", "accent"],
   "forbiddenPatterns": ["patterns owned by another genre", "generic four-on-the-floor unless the selected style specifies it"],
   "styles": [
@@ -563,8 +563,8 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "andean-fusion",
       "name": "Andean Fusion",
-      "description": "Andean Fusion: Andean flute hook over modern backbeat. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
-      "patterns": ["Andean flute hook over modern backbeat"],
+      "description": "Andean Fusion: quena and siku phrases ride a loping digital cumbia shuffle, with a syncopated low anchor, compact kit backbeat and clipped synth color. Keep the electronic bed punchy and let the Andean melody and charango stay in front.",
+      "patterns": ["Andean flute hook over digital cumbia shuffle"],
       "techniques": ["breath-phrase", "trill", "tremolo", "strum", "call-response", "accent", "breath", "staccato", "legato", "vibrato", "tenuto", "muted-strum", "ghost", "roll", "open"],
       "harmony": ["Am", "C", "G", "E7"],
       "meter": "4/4",
@@ -573,7 +573,9 @@ export const GENRE_PACK: GenrePackInput = {
       "roles": {
         "lead": ["quena", "siku"],
         "harmony": ["charango", "guitar"],
-        "percussion": ["bombo-andino"]
+        "bass": ["bass"],
+        "percussion": ["bombo-andino", "drums"],
+        "texture": ["synth"]
       },
       "progressions": {
         "introduccion": ["Am", "C", "G", "Am"],
@@ -595,23 +597,29 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "Andean flute hook over modern backbeat quena statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["quena"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Andean flute hook over modern backbeat quena cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["quena"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Andean flute hook over modern backbeat siku statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["siku"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
-        {"name": "Andean flute hook over modern backbeat siku cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["siku"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Andean flute hook over modern backbeat charango accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5, 3.5], "instruments": ["charango"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Andean flute hook over modern backbeat charango cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["charango"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Andean flute hook over modern backbeat guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Andean flute hook over modern backbeat guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Andean flute hook over modern backbeat bombo-andino pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["bombo-andino"], "cycleLength": 1, "articulation": "accent"},
-        {"name": "Andean flute hook over modern backbeat bombo-andino cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["bombo-andino"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "Andean flute hook over digital cumbia shuffle quena statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["quena"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
+        {"name": "Andean flute hook over digital cumbia shuffle quena cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["quena"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "Andean flute hook over digital cumbia shuffle siku statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["siku"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
+        {"name": "Andean flute hook over digital cumbia shuffle siku cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["siku"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "Andean flute hook over digital cumbia shuffle charango accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5, 3.5], "instruments": ["charango"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "Andean flute hook over digital cumbia shuffle charango cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["charango"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "Andean flute hook over digital cumbia shuffle guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "Andean flute hook over digital cumbia shuffle guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "Andean flute hook over digital cumbia shuffle bombo-andino pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["bombo-andino"], "cycleLength": 1, "articulation": "accent"},
+        {"name": "Andean flute hook over digital cumbia shuffle bombo-andino cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["bombo-andino"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
+        {"name": "Andean flute hook over digital cumbia shuffle syncopated bass", "role": "bass", "onsets": [0, 1.5, 2, 3.5], "instruments": ["bass"], "cycleLength": 1, "durations": [0.8, 0.35, 0.7, 0.35], "articulations": ["accent", "staccato", "accent", "staccato"], "arrangementVariation": true},
+        {"name": "Andean flute hook over digital cumbia shuffle kit backbeat", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "hat", "hat", "snare", "kick", "hat", "hat", "snare"], "cycleLength": 1, "accents": [0.9, 0.35, 0.4, 0.8, 0.7, 0.35, 0.4, 0.8], "arrangementVariation": true},
+        {"name": "Andean flute hook over digital cumbia shuffle synth chord jab", "role": "texture", "onsets": [0.5, 2.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.35, 0.35], "articulation": "staccato", "arrangementVariation": true}
       ],
       "instrumentTechniques": {
         "quena": ["accent", "breath", "staccato", "legato", "vibrato"],
         "siku": ["accent", "breath", "staccato", "legato", "vibrato"],
         "charango": ["accent", "tremolo", "staccato", "legato", "tenuto"],
         "guitar": ["accent", "tremolo", "strum", "muted-strum", "staccato", "legato", "vibrato"],
-        "bombo-andino": ["accent", "ghost", "roll", "open"]
+        "bombo-andino": ["accent", "ghost", "roll", "open"],
+        "bass": ["accent", "ghost", "legato", "staccato"],
+        "drums": ["accent", "ghost", "roll", "open"],
+        "synth": ["accent", "legato", "staccato", "vibrato"]
       },
       "instrumentDialects": {
         "quena:lead": {
@@ -634,6 +642,19 @@ export const GENRE_PACK: GenrePackInput = {
         "bombo-andino:percussion": {
           "allowedTechniques": ["accent", "ghost", "roll", "open"],
           "defaultTechnique": "accent"
+        },
+        "bass:bass": {
+          "allowedTechniques": ["accent", "ghost", "legato", "staccato"],
+          "defaultTechnique": "accent"
+        },
+        "drums:percussion": {
+          "allowedTechniques": ["accent", "ghost", "roll", "open"],
+          "defaultTechnique": "accent"
+        },
+        "synth:texture": {
+          "allowedTechniques": ["accent", "legato", "staccato", "vibrato"],
+          "defaultTechnique": "staccato",
+          "patchId": "polysynth"
         }
       },
       "mix": {

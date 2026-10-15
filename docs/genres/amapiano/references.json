@@ -1,0 +1,85 @@
+{
+  "genreId": "amapiano",
+  "reviewed": "2026-10-14",
+  "status": "Five streaming recording candidates selected per style. Audio audition and comparison notes are pending; this list does not claim sonic matching.",
+  "source": "Apple Music track pages. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "classic",
+      "compare": ["piano-stab to log-drum call-and-response", "sub-bass weight without masking the kick", "gradual DJ-style layering and drop contrast"],
+      "recordings": [
+        {"title":"Sponono (feat. Wizkid, Burna Boy, Cassper Nyovest & Madumane)","artist":"Kabza De Small","url":"https://music.apple.com/us/song/1680728759","timecodes":[]},
+        {"title":"Asibe Happy","artist":"Kabza De Small, DJ Maphorisa & Ami Faku","url":"https://music.apple.com/us/song/1594850581","timecodes":[]},
+        {"title":"Abalele","artist":"Kabza De Small, DJ Maphorisa & Ami Faku","url":"https://music.apple.com/us/song/1585843153","timecodes":[]},
+        {"title":"Imithandazo (Radio Edit)","artist":"Kabza De Small & Mthunzi","url":"https://music.apple.com/us/song/1736948488","timecodes":[]},
+        {"title":"Adiwele (feat. Kabza De Small & DJ Maphorisa)","artist":"Young Stunna","url":"https://music.apple.com/us/song/1590848587","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "private-school",
+      "compare": ["jazzy Rhodes voicings and live-instrument feel", "spacious chord rhythm", "restrained log-drum and percussion weight"],
+      "recordings": [
+        {"title":"Ufunani (feat. Aymos, Kelvin Momo & Jay Sax)","artist":"Kabza De Small","url":"https://music.apple.com/us/song/1688706874","timecodes":[]},
+        {"title":"Sengizwile (feat. Aymos & Young Stunna)","artist":"Mas Musiq","url":"https://music.apple.com/us/song/1586593572","timecodes":[]},
+        {"title":"Gwinya Lam (feat. Snenaah & Sino Msolo)","artist":"Mas Musiq & Musa Keys","url":"https://music.apple.com/us/song/1586593475","timecodes":[]},
+        {"title":"Inhliziyo (feat. Babalwa M)","artist":"Mas Musiq","url":"https://music.apple.com/us/song/1586593455","timecodes":[]},
+        {"title":"Vuma","artist":"Felo Le Tee, Mellow & Sleazy & Chley","url":"https://music.apple.com/us/song/1680164371","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "vocal",
+      "compare": ["short vocal phrases answered by instruments", "log-drum groove under the vocal", "contrast between sung hook and instrumental drop"],
+      "recordings": [
+        {"title":"Mnike (Radio Edit)","artist":"Tyler ICU & Tumelo.za","url":"https://music.apple.com/us/song/1690176556","timecodes":[]},
+        {"title":"Dali Nguwe","artist":"Wanitwa Mos & Master KG","url":"https://music.apple.com/us/song/1639033147","timecodes":[]},
+        {"title":"Abalele","artist":"Kabza De Small, DJ Maphorisa & Ami Faku","url":"https://music.apple.com/us/song/1585843153","timecodes":[]},
+        {"title":"Asibe Happy","artist":"Kabza De Small, DJ Maphorisa & Ami Faku","url":"https://music.apple.com/us/song/1594850581","timecodes":[]},
+        {"title":"Imithandazo (Radio Edit)","artist":"Kabza De Small & Mthunzi","url":"https://music.apple.com/us/song/1736948488","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "log-drum-heavy",
+      "compare": ["pitched log-drum pickup clusters", "kick and sub separation at high playback level", "short rhythmic motifs that change across phrases"],
+      "recordings": [
+        {"title":"iLog Drum (feat. Daliwonga)","artist":"Kabza De Small","url":"https://music.apple.com/us/song/1680729505","timecodes":[]},
+        {"title":"Nkao Tempela","artist":"Ch’cco & Mellow & Sleazy","url":"https://music.apple.com/us/song/1639214894","timecodes":[]},
+        {"title":"Banyana","artist":"DJ Maphorisa & Tyler ICU","url":"https://music.apple.com/us/song/1679914108","timecodes":[]},
+        {"title":"Khuza Gogo","artist":"DBN Gogo, Blaqnick & MasterBlaq","url":"https://music.apple.com/us/song/1559195730","timecodes":[]},
+        {"title":"Tshwala Bam","artist":"TitoM & Yuppe","url":"https://music.apple.com/us/song/1741824557","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "bacardi",
+      "compare": ["busy Bacardi percussion with clear dance pulse", "whistle-like lead answers", "tight, dry low end and abrupt phrase accents"],
+      "recordings": [
+        {"title":"Khuza Gogo","artist":"DBN Gogo, Blaqnick & MasterBlaq","url":"https://music.apple.com/us/song/1559195730","timecodes":[]},
+        {"title":"Nkao Tempela","artist":"Ch’cco & Mellow & Sleazy","url":"https://music.apple.com/us/song/1639214894","timecodes":[]},
+        {"title":"Abo Mvelo","artist":"Daliwonga","url":"https://music.apple.com/us/song/1614646814","timecodes":[]},
+        {"title":"John Vuli Gate","artist":"Mapara A Jazz","url":"https://music.apple.com/us/song/1536935706","timecodes":[]},
+        {"title":"Vuma","artist":"Felo Le Tee, Mellow & Sleazy & Chley","url":"https://music.apple.com/us/song/1680164371","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "gqom-crossover",
+      "compare": ["broken Gqom kick placement", "dark, sparse low-register parts", "percussion impact against Amapiano log-drum phrasing"],
+      "recordings": [
+        {"title":"iPlan (feat. Zaba & Sykes)","artist":"Dlala Thukzin","url":"https://music.apple.com/us/song/1707025087","timecodes":[]},
+        {"title":"Khuza Gogo","artist":"DBN Gogo, Blaqnick & MasterBlaq","url":"https://music.apple.com/us/song/1559195730","timecodes":[]},
+        {"title":"Nkao Tempela","artist":"Ch’cco & Mellow & Sleazy","url":"https://music.apple.com/us/song/1639214894","timecodes":[]},
+        {"title":"John Vuli Gate","artist":"Mapara A Jazz","url":"https://music.apple.com/us/song/1536935706","timecodes":[]},
+        {"title":"Vuma","artist":"Felo Le Tee, Mellow & Sleazy & Chley","url":"https://music.apple.com/us/song/1680164371","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "kwaito-crossover",
+      "compare": ["offbeat chant-like hook", "warm, simple bass line", "laid-back pocket and buoyant percussion"],
+      "recordings": [
+        {"title":"John Vuli Gate","artist":"Mapara A Jazz","url":"https://music.apple.com/us/song/1536935706","timecodes":[]},
+        {"title":"Sponono (feat. Wizkid, Burna Boy, Cassper Nyovest & Madumane)","artist":"Kabza De Small","url":"https://music.apple.com/us/song/1680728759","timecodes":[]},
+        {"title":"Asibe Happy","artist":"Kabza De Small, DJ Maphorisa & Ami Faku","url":"https://music.apple.com/us/song/1594850581","timecodes":[]},
+        {"title":"Abo Mvelo","artist":"Daliwonga","url":"https://music.apple.com/us/song/1614646814","timecodes":[]},
+        {"title":"Adiwele (feat. Kabza De Small & DJ Maphorisa)","artist":"Young Stunna","url":"https://music.apple.com/us/song/1590848587","timecodes":[]}
+      ]
+    }
+  ]
+}

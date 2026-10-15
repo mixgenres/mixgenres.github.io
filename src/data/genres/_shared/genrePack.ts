@@ -16,6 +16,8 @@ export interface AuthoredCell {
   onsets: number[];
   durations?: number[];
   accents?: number[];
+  /** Authored per-event pocket in milliseconds; positive is late, negative is early. */
+  microtiming?: number[];
   hits?: PatternEvent['hitType'][];
   cycleLength?: number;
   articulation?: string;
@@ -494,7 +496,7 @@ function patternFromCell(input: GenrePackInput, style: GenreStyleDefinition, cel
     position, duration: cell.durations?.[i] ?? (cell.role === 'harmony' ? .35 : .2),
     kind: cell.phraseEnd ? 'fill' : 'attack',
     accent: cell.accents?.[i] ?? (i === 0 ? .9 : .65), velocity: i === 0 ? .85 : .7,
-    articulation: cell.articulations?.[i] ?? cell.articulation, hitType: cell.hits?.[i], pitch: cell.pitches?.[i], notation: cell.notations?.[i],
+    articulation: cell.articulations?.[i] ?? cell.articulation, hitType: cell.hits?.[i], pitch: cell.pitches?.[i], notation: cell.notations?.[i], microtiming: cell.microtiming?.[i],
     // A notated tuplet/fingering sequence is one coherent gesture. Dropping
     // individual attacks would change both its ratio and its finger order.
     ...(cell.phraseEnd ? { condition: { phrasePosition: ['cadence', 'transition'] }, probability: cell.notations?.[i]?.tuplet ? 1 : .85 } : {}),
@@ -607,6 +609,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
       position,
       duration: source.durations?.[index],
       accent: source.accents?.[index],
+      microtiming: source.microtiming?.[index],
       pitch: source.pitches?.[index],
       notation: source.notations?.[index],
       hit: source.hits?.[index],
@@ -624,6 +627,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
         onsets: selected.map(event => event.position),
         durations: selected.map(event => event.duration ?? 0.25),
         accents: selected.map(event => event.accent ?? 0.65),
+        microtiming: selected.map(event => event.microtiming ?? 0),
         pitches: selected.map(event => event.pitch),
         notations: selected.map(event => event.notation),
         hits: selected.map(event => event.hit),
@@ -653,6 +657,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
         onsets: selected.map(event => start + event.position - first),
         durations: selected.map(event => event.duration ?? 0.25),
         accents: selected.map(event => event.accent ?? 0.65),
+        microtiming: selected.map(event => event.microtiming ?? 0),
         pitches: selected.map(event => event.pitch),
         notations: selected.map(event => event.notation),
         hits: selected.map(event => event.hit),
@@ -688,6 +693,7 @@ function instrumentStudyCells(style: GenreStyleDefinition, authored: AuthoredCel
         onsets: motif.map(event => start + event.position - first),
         durations: motif.map(event => event.duration ?? 0.25),
         accents: motif.map(event => event.accent ?? 0.65),
+        microtiming: motif.map(event => event.microtiming ?? 0),
         pitches: motif.map(event => event.pitch),
         notations: motif.map(event => event.notation),
         hits: motif.map(event => event.hit),

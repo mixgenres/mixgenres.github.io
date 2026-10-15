@@ -76,7 +76,7 @@ export function patchForInstrument(id: string, percussion = false): SamplePatch 
   if (id === 'upright-bass') return {bank:64,program:0,drum:false,pack:'upright'};
   if (id === 'khomus') return {bank:66,program:22,drum:false,pack:'percussion'};
   if (id === 'balafon') return {bank:66,program:23,drum:false,pack:'mallets'};
-  if (id === 'gamelan-metallophone' || id === 'bonang') return {bank:0,program:14,drum:false,pack:'mallets'};
+  if (id === 'gamelan-metallophone' || id === 'bonang' || id === 'reyong') return {bank:0,program:14,drum:false,pack:'mallets'};
   // Sampler is a playable multisample palette, not the generic synth patch.
   // Notes select individual recorded kit hits in the pitched MIDI range.
   if (id === 'sampler') return {bank:67,program:0,drum:false,pack:'drumkit'};

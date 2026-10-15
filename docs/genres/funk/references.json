@@ -1,0 +1,152 @@
+{
+  "genreId": "funk",
+  "reviewed": "2026-10-14",
+  "status": "Five linked streaming-track candidates are collected for all nine Funk styles. Listening, useful timecodes, and mix comparisons remain pending; candidate links do not establish sonic matching.",
+  "source": "Apple Music streaming track pages. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "funk",
+      "compare": [
+        "the hard downbeat against the loose, syncopated bass and guitar attacks",
+        "how short rests and ghosted subdivisions define pocket without filling every beat",
+        "the relative weight of kick, snare, bass, and clipped chord attacks",
+        "how riffs and ensemble accents change the phrase while the groove remains stable"
+      ],
+      "recordings": [
+        { "title": "Cissy Strut", "artist": "The Meters", "url": "https://music.apple.com/us/song/1188230343", "timecodes": [] },
+        { "title": "Superstition", "artist": "Stevie Wonder", "url": "https://music.apple.com/us/song/1440808985", "timecodes": [] },
+        { "title": "What Is Hip?", "artist": "Tower of Power", "url": "https://music.apple.com/us/song/1558166227", "timecodes": [] },
+        { "title": "Thank You (Falettinme Be Mice Elf Agin) [Single Version]", "artist": "Sly & The Family Stone", "url": "https://music.apple.com/us/song/659323759", "timecodes": [] },
+        { "title": "Papa's Got A Brand New Bag", "artist": "James Brown", "url": "https://music.apple.com/us/song/1426946366", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "jazz-funk",
+      "compare": [
+        "repeating bass ostinato against extended Rhodes or electric-keyboard chords",
+        "how horn or keyboard phrases enter after the rhythm-section downbeat",
+        "the balance of straight pocket, syncopation, and improvisational phrase variation",
+        "how long groove sections create space for instrumental features without losing forward motion"
+      ],
+      "recordings": [
+        { "title": "Chameleon", "artist": "Herbie Hancock", "url": "https://music.apple.com/us/song/158571527", "timecodes": [] },
+        { "title": "Hang Up Your Hang Ups", "artist": "Herbie Hancock", "url": "https://music.apple.com/us/song/741227176", "timecodes": [] },
+        { "title": "Running Away", "artist": "Roy Ayers Ubiquity", "url": "https://music.apple.com/us/song/1444205627", "timecodes": [] },
+        { "title": "Street Lady", "artist": "Donald Byrd", "url": "https://music.apple.com/us/song/724581404", "timecodes": [] },
+        { "title": "Everybody Loves the Sunshine", "artist": "Roy Ayers Ubiquity", "url": "https://music.apple.com/us/song/1469585198", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "minneapolis",
+      "compare": [
+        "the drum-machine backbeat against short, tightly muted guitar attacks",
+        "how synth hooks answer the vocal while low-end remains intentionally lean",
+        "the precise timing and transient shape of the machine pulse",
+        "how sparse verses open into larger hooks through arrangement and timbre"
+      ],
+      "recordings": [
+        { "title": "Kiss", "artist": "Prince & The Revolution", "url": "https://music.apple.com/us/song/260336471", "timecodes": [] },
+        { "title": "1999", "artist": "Prince", "url": "https://music.apple.com/us/song/1544301209", "timecodes": [] },
+        { "title": "Jungle Love (Single Version)", "artist": "The Time", "url": "https://music.apple.com/us/song/1599319639", "timecodes": [] },
+        { "title": "The Glamorous Life (Club Edit)", "artist": "Sheila E.", "url": "https://music.apple.com/us/song/124888149", "timecodes": [] },
+        { "title": "Oh Sheila", "artist": "Ready for the World", "url": "https://music.apple.com/us/song/1452677851", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "disco",
+      "compare": [
+        "four-on-the-floor kick against bass-guitar pulse and open-hat subdivisions",
+        "the short, even rhythm-guitar strokes and their placement around the beat",
+        "how strings and vocals widen the chorus while the dance pulse stays steady",
+        "the long-form build, breakdown, and return of the full ensemble"
+      ],
+      "recordings": [
+        { "title": "Le Freak", "artist": "Chic", "url": "https://music.apple.com/us/song/266705551", "timecodes": [] },
+        { "title": "Good Times", "artist": "Chic", "url": "https://music.apple.com/us/song/734292146", "timecodes": [] },
+        { "title": "He's the Greatest Dancer", "artist": "Sister Sledge", "url": "https://music.apple.com/us/song/1829751979", "timecodes": [] },
+        { "title": "Stayin' Alive", "artist": "Bee Gees", "url": "https://music.apple.com/us/song/1622736120", "timecodes": [] },
+        { "title": "I Feel Love", "artist": "Donna Summer", "url": "https://music.apple.com/us/song/1423304604", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "philly-disco",
+      "compare": [
+        "the string-section swell and chord punctuation against the drum and bass dance frame",
+        "how piano and rhythm guitar reinforce the vocal without thickening every subdivision",
+        "the shift from restrained verse texture to orchestral refrain",
+        "the band’s fills, breaks, and extended dance-floor development"
+      ],
+      "recordings": [
+        { "title": "T.S.O.P. (The Sound of Philadelphia) [feat. The Three Degrees]", "artist": "MFSB", "url": "https://music.apple.com/us/song/192771196", "timecodes": [] },
+        { "title": "Love Train", "artist": "The O'Jays", "url": "https://music.apple.com/us/song/192830664", "timecodes": [] },
+        { "title": "I Love Music", "artist": "The O'Jays", "url": "https://music.apple.com/us/song/282176983", "timecodes": [] },
+        { "title": "Bad Luck (feat. Teddy Pendergrass)", "artist": "Harold Melvin & The Blue Notes", "url": "https://music.apple.com/us/song/1226779208", "timecodes": [] },
+        { "title": "Don't Leave Me This Way (feat. Teddy Pendergrass)", "artist": "Harold Melvin & The Blue Notes", "url": "https://music.apple.com/us/song/1549956766", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "boogie",
+      "compare": [
+        "octave synth-bass or electric-bass attacks against the kick pattern",
+        "offbeat electric-piano stabs and their chord-release length",
+        "the handclap/snare backbeat and its contrast with machine percussion",
+        "how synth, vocal hook, and bass change density from verse to chorus"
+      ],
+      "recordings": [
+        { "title": "You're the One for Me", "artist": "D Train", "url": "https://music.apple.com/us/song/280459068", "timecodes": [] },
+        { "title": "I'm In Love", "artist": "Evelyn 'Champagne' King", "url": "https://music.apple.com/us/song/1268964118", "timecodes": [] },
+        { "title": "A Lover's Holiday", "artist": "Change", "url": "https://music.apple.com/us/song/1612422383", "timecodes": [] },
+        { "title": "Cutie Pie", "artist": "One Way", "url": "https://music.apple.com/us/song/1445743874", "timecodes": [] },
+        { "title": "Forget Me Nots (Single Version)", "artist": "Patrice Rushen", "url": "https://music.apple.com/us/song/1570392478", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "hi-nrg",
+      "compare": [
+        "relentless four-on-the-floor kick against octave-pulsing synth bass",
+        "offbeat hats, sustained synth hook, and high-register vocal energy",
+        "how arrangement density and sustained notes build over the fixed dance pulse",
+        "the production balance between bass drive, bright upper synths, and lead vocal"
+      ],
+      "recordings": [
+        { "title": "You Spin Me Round (Like a Record)", "artist": "Dead or Alive", "url": "https://music.apple.com/us/song/331128230", "timecodes": [] },
+        { "title": "Native Love (Step By Step)", "artist": "Divine", "url": "https://music.apple.com/us/song/321140554", "timecodes": [] },
+        { "title": "Menergy", "artist": "Patrick Cowley", "url": "https://music.apple.com/us/song/282041391", "timecodes": [] },
+        { "title": "Do You Wanna Funk? (feat. Sylvester)", "artist": "Patrick Cowley", "url": "https://music.apple.com/us/song/280376277", "timecodes": [] },
+        { "title": "Searchin' (I Gotta Find a Man)", "artist": "Hazell Dean", "url": "https://music.apple.com/us/song/1504434123", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "p-funk",
+      "compare": [
+        "the weight and attack envelope of the elastic bass hook against the drum downbeat",
+        "how synth and keyboard answers occupy the gaps around the bass and chant",
+        "the call-and-response balance between chant, band answers, and instrumental space",
+        "how the arrangement sustains a vamp, opens a breakdown, and restores the full groove"
+      ],
+      "recordings": [
+        { "title": "Mothership Connection (Star Child)", "artist": "Parliament", "url": "https://music.apple.com/us/song/1434908808", "timecodes": [] },
+        { "title": "Give up the Funk (Tear the Roof Off the Sucker)", "artist": "Parliament", "url": "https://music.apple.com/us/song/1440838031", "timecodes": [] },
+        { "title": "P-Funk (Wants to Get Funked Up)", "artist": "Parliament", "url": "https://music.apple.com/us/song/1440837687", "timecodes": [] },
+        { "title": "Aqua Boogie (A Psychoalphadiscobetabioaquadoloop)", "artist": "Parliament", "url": "https://music.apple.com/us/song/1443816459", "timecodes": [] },
+        { "title": "Dr. Funkenstein", "artist": "Parliament", "url": "https://music.apple.com/us/song/1444533041", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "james-brown-the-one",
+      "compare": [
+        "short riff attacks and horn hits against the deliberate spaces between them",
+        "the bass and kick locking into a firm, repeated downbeat",
+        "vocal calls, shouts, and band replies without filling every gap",
+        "how breaks hand the groove between the rhythm section, horns, and lead voice"
+      ],
+      "recordings": [
+        { "title": "Papa's Got A Brand New Bag", "artist": "James Brown", "url": "https://music.apple.com/us/song/1426946366", "timecodes": [] },
+        { "title": "Cold Sweat", "artist": "James Brown", "url": "https://music.apple.com/us/song/1469584356", "timecodes": [] },
+        { "title": "Funky Drummer", "artist": "James Brown", "url": "https://music.apple.com/us/song/1434917897", "timecodes": [] },
+        { "title": "Get Up I Feel Like Being Like A Sex Machine, Pts. 1 & 2 (feat. The Original J.B.s)", "artist": "James Brown", "url": "https://music.apple.com/us/song/1423294599", "timecodes": [] },
+        { "title": "The Payback", "artist": "James Brown", "url": "https://music.apple.com/us/song/1469584363", "timecodes": [] }
+      ]
+    }
+  ]
+}

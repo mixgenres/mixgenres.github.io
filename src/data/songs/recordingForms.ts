@@ -68,17 +68,17 @@ afrobeat::highlife|112|intro:8:2,head:16:3,verse:16:3,chorus:16:4,verse:16:3,sol
  bollywood::romantic|94|intro:8:1,verse:16:2,chorus:16:3,interlude:8:2,verse:16:3,chorus:16:4,bridge:8:2,chorus:16:5,coda:8:1|_=Fm,Db,Eb,Cm
  bollywood::folk-cinematic|94|intro:16:2,refrain:16:4,verse:32:3,refrain:16:4,interlude:16:4,verse:32:3,refrain:32:5,coda:8:3|_=Dm,Dm,C,Dm
  bollywood::electronic-club|129|intro:8:2,hook:16:4,verse:16:3,chorus:16:5,verse:16:3,breakdown:8:1,build:8:3,chorus:32:5,outro:8:2|_=Em,C,D,Em
- brazilian::samba|84|intro:8:1,verse:16:2,bridge:16:3,verse:16:2,solo:16:2,bridge:16:3,verse:16:3,coda:4:1|_=Cmaj7,Am7,Dm7,G7;bridge=Em7,A7,Dm7,G7
- brazilian::bossa-nova|136|intro:8:1,A:32:2,B:32:3,A:32:2,B:32:3,coda:8:1|intro=Dm,E7,Am7,D7,Gm7,C7,Fmaj7,A7;coda=Dm,A7,Dm,Dm;A=Dm,E7,Am7,D7,Gm7,C7,Fmaj7,A7;B=Dmaj7,B7,Em7,A7,F#m7,B7,Em7,A7
- brazilian::pagode|100|intro:8:2,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,solo:16:3,chorus:32:5,coda:4:2|_=Cmaj7,A7,Dm7,G7
- brazilian::partido-alto|104|intro:8:2,refrain:16:3,verse:16:3,refrain:16:4,verse:16:3,solo:16:4,refrain:32:5,coda:8:2|_=G,D7,G,C,D7,G
- brazilian::samba-de-roda|110|call:8:1,response:8:2,verse:16:3,response:16:3,solo:16:4,verse:16:3,response:32:5,coda:4:2|_=G,C,D7,G
- brazilian::forro|116|intro:8:2,A:16:3,B:16:3,A:16:3,solo:16:4,B:16:4,A:16:4,coda:8:2|_=G,C,G,D7
- brazilian::baiao|132|intro:8:3,verse:16:3,refrain:8:4,verse:16:3,solo:16:4,refrain:16:5,coda:4:2|_=D,G,D,A7
- brazilian::xote|100|intro:8:2,verse:16:3,chorus:16:3,verse:16:3,solo:16:4,chorus:16:4,coda:4:2|_=G,D7,G,C,D7,G
- brazilian::mpb|110|intro:8:2,verse:16:3,refrain:8:4,verse:16:3,interlude:16:3,verse:16:4,refrain:16:5,coda:8:2|_=A7,D7,A7,E7
- brazilian::samba-reggae|108|intro:16:2,chant:16:3,verse:16:4,chorus:16:5,break:8:2,verse:16:4,chorus:32:5,coda:8:3|_=Dm,Bb,C,Dm
- brazilian::samba-rock|112|intro:8:3,verse:16:3,chorus:8:4,verse:16:3,chorus:8:4,solo:16:4,chorus:32:5,outro:8:2|_=G,C,G,D7
+ brazilian::samba|104|intro:4:2,tema:8:3,verse:8:3,refrain:8:4,instrumental:8:4,refrain:8:5,coda:4:2|_=Cmaj7,Am7,Dm7,G7;refrain=Fmaj7,E7,Am7,D7
+ brazilian::bossa-nova|84|intro:4:1,A:8:2,B:8:3,A:8:2,solo:8:3,A:8:4,coda:4:1|intro=Dm,E7,Am7,D7,Gm7,C7,Fmaj7,A7;coda=Dm,A7,Dm,Dm;A=Dm,E7,Am7,D7,Gm7,C7,Fmaj7,A7;B=Dmaj7,B7,Em7,A7,F#m7,B7,Em7,A7;solo=Dmaj7,B7,Em7,A7,F#m7,B7,Em7,A7
+brazilian::pagode|100|intro:4:2,verse:8:3,chorus:8:4,verse:8:3,chorus:8:4,solo:8:4,chorus:16:5,coda:4:2|_=Cmaj7,A7,Dm7,G7
+brazilian::partido-alto|104|intro:4:2,refrain:8:3,verse:8:3,refrain:8:4,verse:8:3,solo:8:4,refrain:16:5,coda:4:2|_=G,D7,G,C,D7,G
+brazilian::samba-de-roda|104|call:4:1,response:4:2,verse:8:3,response:8:3,solo:8:4,verse:8:3,response:16:5,coda:4:2|_=G,C,D7,G
+brazilian::forro|116|intro:4:2,A:8:3,B:8:3,A:8:3,solo:8:4,B:8:4,A:8:4,coda:4:2|_=G,C,G,D7
+brazilian::baiao|116|intro:4:3,verse:8:3,refrain:8:4,verse:8:3,solo:8:4,refrain:16:5,coda:4:2|_=D,G,D,A7
+brazilian::xote|92|intro:4:2,verse:8:3,chorus:8:3,verse:8:3,solo:8:4,chorus:8:4,coda:4:2|_=G,D7,G,C,D7,G
+brazilian::mpb|92|intro:4:2,verse:8:3,refrain:8:4,verse:8:3,interlude:8:3,verse:8:4,refrain:16:5,coda:4:2|_=A7,D7,A7,E7
+brazilian::samba-reggae|108|intro:8:2,chant:8:3,verse:8:4,chorus:8:5,break:4:2,verse:8:4,chorus:16:5,coda:4:3|_=Dm,Bb,C,Dm
+brazilian::samba-rock|112|intro:4:3,verse:8:3,chorus:8:4,verse:8:3,chorus:8:4,solo:8:4,chorus:16:5,outro:4:2|_=G,C,G,D7
  chinese::jiangnan-sizhu|80|opening:8:1,A:16:2,B:16:3,C:16:3,A:16:3,variation:32:4,cadence:8:1|_=D5,D5,A5,D5
  chinese::guqin|48|opening:16:1,stream:24:2,rapids:32:3,falls:24:4,return:16:2,silence:8:1|_=D5,D5,D5,D5
  chinese::guzheng|72|opening:8:1,theme:16:2,variation:24:3,build:16:4,theme:16:2,cadence:8:1|_=G5,G5,D5,G5
@@ -97,7 +97,7 @@ afrobeat::highlife|112|intro:8:2,head:16:3,verse:16:3,chorus:16:4,verse:16:3,sol
  classical::modernist|126|introduction:48:1,augurs:48:4,abduction:32:5,rounds:48:3,rival-tribes:32:5,procession:24:4,earth-dance:32:5,introduction:48:1,circles:48:3,glorification:32:5,evocation:24:3,ritual:48:4,sacrificial-dance:64:5|_=E5,F5,Eb5,E5
  classical::minimalist|120|pulses:32:1,section-i:64:2,section-ii:64:3,section-iii:64:3,section-iv:64:4,section-v:64:3,section-vi:64:4,section-vii:64:3,section-viii:64:4,section-ix:64:3,section-x:64:4,section-xi:64:3,pulses:32:1|_=Dmaj7,Bm7,Emaj7,C#m7,Amaj7,F#m7,Bmaj7,G#m7,Emaj7,C#m7,F#maj7
  classical::chamber|72|fugue:64:2,allegro:64:3,transition:8:1,variations:96:3,presto:64:4,adagio:24:1,finale:96:5,coda:16:2|_=C#m,G#7,C#m,F#m;allegro=D,A7,D,G;variations=A,E7,F#m,D;presto=E,B7,E,A
- country::honky-tonk|112|intro:4:2,verse:16:3,chorus:16:4,solo:16:3,verse:16:3,chorus:16:4,tag:4:2|_=E,A,E,B7
+ country::honky-tonk|112|intro:4:2,verse:16:3,chorus:16:4,fiddle-break:4:4,fiddle-return:4:4,steel-break:8:4,verse:16:3,chorus:16:4,tag:4:2|_=E,A,E,B7
  country::bluegrass|152|intro:8:2,verse:16:2,chorus:16:3,banjo-break:16:4,verse:16:3,chorus:16:4,fiddle-break:16:5,tag:4:2|_=Bb,Eb,Bb,F7
  country::bakersfield|116|intro:4:3,verse:16:3,chorus:8:4,solo:16:4,verse:16:3,chorus:16:4,tag:4:2|_=G,C,D7,G
  country::outlaw|100|intro:8:2,chorus:16:3,verse:16:3,chorus:16:4,solo:16:4,steel-break:8:4,chorus:16:5,outro:8:3|_=C,F,C,G7
@@ -126,14 +126,14 @@ afrobeat::highlife|112|intro:8:2,head:16:3,verse:16:3,chorus:16:4,verse:16:3,sol
  ethiopian::traditional-modal|66|opening:8:1,verse:16:2,response:8:1,verse:24:2,solo:16:2,verse:16:3,cadence:8:1|_=D5,D5,D5,D5
  ethiopian::modern-ethio-jazz|108|intro:16:2,head:32:3,groove:32:4,solo:48:3,breakdown:16:1,head:32:4,climax:32:5,outro:16:2|_=Cm7,Fm7,Cm7,G7
 flamenco::solea|72|temple:8:1,verse:12:2,falseta:8:3,verse:12:3,llamada:4:4,verse:12:3,remate:4:2|_=Am,G,F,E;falseta=F,E,F,E
-flamenco::bulerias|210|intro:8:2,compas:16:3,falseta:16:4,compas:8:3,falseta:24:4,llamada:4:5,compas:16:4,remate:4:5|_=Bb,A,Bb,A;falseta=Dm,C,Bb,A
-flamenco::alegrias|144|intro:8:2,verse:16:3,response:8:2,verse:16:3,silencio:8:1,escobilla:16:4,bulerias:16:5,remate:4:3|_=C,G7,C,F,G7,C
+flamenco::bulerias|210|intro:8:2,compas:16:3,falseta:16:4,compas:8:3,falseta:24:4,llamada:1:4,compas:16:4,remate:1:5|_=Bb,A,Bb,A;falseta=Dm,C,Bb,A
+flamenco::alegrias|144|intro:8:2,verse:16:3,response:8:2,verse:16:3,silencio:4:1,silencio-answer:4:1,escobilla:16:4,bulerias:16:5,remate:4:3|_=C,G7,C,F,G7,C;silencio=Am,G,F,E;silencio-answer=Am,G,F,E
 flamenco::tangos|112|intro:8:2,verse:16:3,chorus:8:4,verse:16:3,falseta:16:4,chorus:16:4,remate:4:3|_=Dm,C,Bb,A
 flamenco::seguiriya|64|temple:8:1,verse:12:2,response:8:2,verse:16:3,falseta:8:2,verse:16:4,remate:4:2|_=Bb,A,Bb,A
 flamenco::tientos|76|intro:8:1,verse:16:2,falseta:8:3,verse:16:3,tangos:24:4,remate:4:2|_=Dm,C,Bb,A
 flamenco::fandangos|90|intro:8:1,copla:12:2,response:4:2,copla:12:3,falseta:8:2,copla:12:4,remate:4:2|copla=C,F,C,G7,C,F,E;_=Am,G,F,E
 flamenco::rumba|108|intro:8:2,A:32:3,solo:32:3,solo:32:4,B:16:3,solo:32:5,A:16:4,outro:8:2|_=Em,Am,B7,Em
-flamenco::tonas-martinetes|54|temple:8:1,martinete:24:2,pause:4:1,debla:32:3,cadence:8:1|_=D5,D5,D5,D5
+flamenco::tonas-martinetes|54|temple:8:1,martinete:24:2,pause:1:1,debla:32:3,cadence:8:1|_=D5,D5,D5,D5
 flamenco::taranta|54|opening:8:1,lower-register:16:2,falseta:24:3,upper-register:16:4,return:16:2,cadence:8:1|_=F#7,G,F#7,F#7
 flamenco::guajira|144|intro:8:2,A:16:3,falseta:16:3,B:16:4,A:16:3,falseta:24:4,remate:4:2|_=A,E7,A,D,E7,A
 flamenco::farruca|112|intro:8:2,A:16:3,falseta:16:3,A:16:4,escobilla:24:4,falseta:16:5,remate:4:3|_=Am,Dm,E7,Am
@@ -153,7 +153,7 @@ funk::disco|110|intro:16:3,chorus:16:4,verse:16:3,chorus:16:4,verse:16:3,breakdo
 funk::philly-disco|116|intro:16:2,theme:32:3,groove:32:4,solo:32:3,breakdown:16:1,theme:32:4,solo:48:5,outro:16:2|_=Cm7,Fm7,Bb7,Ebmaj7
 funk::boogie|120|intro:16:2,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,breakdown:16:1,solo:32:4,chorus:32:5,outro:16:2|_=Fm7,Bbm7,Eb7,Abmaj7
 funk::hi-nrg|133|intro:16:2,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,breakdown:32:2,build:16:3,chorus:64:5,outro:16:2|_=F,Bb,C,F
- gamelan::balinese-gong-kebyar|144|buka:8:2,kebyar:16:5,theme:32:3,kotekan:32:4,break:4:1,kebyar:16:5,theme:32:4,kotekan:48:5,suwuk:8:2|_=D5,D5,D5,D5
+ gamelan::balinese-gong-kebyar|132|buka:1:4,kebyar:16:5,theme:32:3,kotekan:32:4,angsel:1:4,kebyar:16:5,theme:32:4,kotekan-fast:48:5,suwuk:8:2|_=D5,D5,D5,D5
  gamelan::degung|72|buka:8:1,A:32:2,B:32:3,flute:32:3,A:32:3,suwuk:8:1|_=D5,D5,A5,D5
  gamelan::gamelan-angklung|108|buka:8:1,cycle:32:2,variation:32:3,cycle:32:3,variation:48:4,suwuk:8:1|_=D5,D5,D5,D5
  gnawa::traditional|102|opening:16:1,call:32:2,response:32:3,cycle:64:3,call:32:4,response:64:5,cycle:64:4,cadence:16:2|_=D5,D5,D5,D5
@@ -190,11 +190,11 @@ funk::hi-nrg|133|intro:16:2,verse:16:3,chorus:16:4,verse:16:3,chorus:16:4,breakd
  industrial::industrial-dance|124|intro:16:2,chant:16:3,groove:32:4,chant:16:4,break:8:1,groove:32:5,chant:32:5,outro:16:2|_=F5,F5,F5,F5
  industrial::industrial-rock|135|intro:8:2,verse:16:3,chorus:16:5,verse:16:3,chorus:16:5,breakdown:8:1,build:8:4,chorus:16:5,outro:8:3|_=D5,D5,F5,C5
  industrial::industrial-metal|134|intro:16:2,riff:16:4,verse:16:3,chorus:16:5,verse:16:3,chorus:16:5,breakdown:16:1,riff:32:5,outro:16:3|_=E5,E5,G5,A5
- japanese::gagaku|48|opening:16:1,jo:32:2,ha:64:3,kyu:32:4,cadence:16:1|_=E5,E5,B5,E5
- japanese::shakuhachi|48|opening-call:16:1,response:16:2,development:32:3,duet:32:3,return:16:2,cadence:8:1|_=D5,D5,D5,D5
+ japanese::gagaku|56|opening:16:1,jo:32:2,ha:64:3,kyu:32:4,cadence:16:1|_=E5,E5,B5,E5
+japanese::shakuhachi|48|opening-call:16:1,response:16:2,ma:1:1,development:32:3,duet:32:3,return:16:2,cadence:8:1|_=D5,D5,D5,D5
  japanese::shamisen-min-yo|108|intro:8:2,verse:16:3,response:8:3,verse:16:3,solo:16:4,verse:16:4,response:16:5,cadence:4:2|_=D5,D5,A5,D5
  japanese::koto-sankyoku|84|opening:8:1,A:24:2,B:32:3,C:24:4,A:24:3,cadence:8:1|_=D5,D5,A5,D5
- japanese::taiko|80|silence:4:1,solo:32:2,build:32:3,ensemble:32:4,break:4:1,solo:32:4,climax:32:5,cadence:8:2|_=D5,D5,D5,D5
+japanese::taiko|120|silence:1:1,solo:32:2,build:32:3,ensemble:32:4,break:1:1,solo:32:4,climax:32:5,cadence:8:2|_=D5,D5,D5,D5
  jazz::bebop|240|intro:8:3,head:64:4,solo:128:3,drum-solo:32:4,head:64:5,tag:8:3|_=Bbmaj7,Bbmaj7,Fm7,Bb7,Ebmaj7,Ab7,Bbmaj7,G7,Cm7,F7,Bbmaj7,F7
  jazz::cool|136|intro:8:1,head:32:2,solo:32:3,solo:32:3,head:32:3,tag:8:1|_=Fmaj7,Dm7,Gm7,C7;solo=Bbmaj7,Eb7,Am7,D7,Gm7,C7,Fmaj7,Fmaj7
  jazz::big-band|176|intro:12:2,piano:24:3,sax:24:3,trumpet:24:4,ensemble:24:4,shout:24:5,tag:4:3|_=F7,F7,F7,F7,Bb7,Bb7,F7,F7,C7,Bb7,F7,C7
@@ -314,10 +314,10 @@ swing::fusion-swing|135|intro:8:1,verse:16:2,chorus:16:3,verse:16:2,chorus:16:4,
  tango::chacarera-crossover|168|intro:8:2,copla:16:3,response:8:3,copla:16:3,interlude:8:2,copla:16:4,response:8:4,copla:16:4,cierre:4:2|_=Am,G,F,E7
  timba::classic-timba|104|intro:16:2,verse:24:3,chorus:16:4,verse:24:3,coro:32:4,bomba:16:5,mambo:16:5,breakdown:8:1,coro:48:5,cierre:8:3|_=Am,Dm,E7,Am
  timba::songo|102|intro:8:2,A:24:3,verse:24:3,coro:32:4,mambo:16:4,solo:32:4,coro:48:5,cierre:8:3|_=Cm,Fm,G7,Cm
- timba::irakere-jazz-funk-precursor|112|intro:16:2,riff:16:4,head:32:4,solo:64:3,mambo:32:5,solo:48:4,head:32:5,cierre:8:3|_=Dm7,G7,Dm7,A7;solo=Em7b5,A7b9,Dm9,G13
- timba::ng-la-banda-early-timba|108|intro:16:3,verse:32:3,chorus:16:4,coro:32:4,mambo:24:5,bomba:16:5,solo:32:4,coro:48:5,cierre:8:3|_=Cm7,Fm7,G7,Cm7
+ timba::irakere-jazz-funk-precursor|112|intro:8:2,riff:8:4,head:16:4,solo:24:3,mambo:12:5,solo:12:4,head:16:5,cierre:4:3|_=Dm7,G7,Dm7,A7;solo=Em7b5,A7b9,Dm9,G13
+ timba::ng-la-banda-early-timba|108|intro:8:2,verse:12:3,chorus:16:4,coro:16:4,bloque:2:5,bomba:8:4,silencio:1:1,mambo:16:5,coro-final:24:5,cierre:4:3|_=Cm7,Fm7,G7,Cm7;bloque=G7,G7;bomba=Cm7,Cm7,Fm7,G7
  timba::charanga-habanera|110|intro:16:2,verse:24:3,chorus:16:4,verse:24:3,coro:32:4,bomba:16:5,break:4:1,mambo:24:5,coro:48:5,cierre:8:3|_=Am,Dm,E7,Am
- timba::bamboleo|104|intro:16:2,verse:32:3,prechorus:8:3,chorus:16:4,coro:32:4,solo:32:3,mambo:24:5,coro:48:5,cierre:8:3|_=Fm9,Bbm9,C7b9,Fm9
+ timba::bamboleo|104|intro:8:2,verse:16:3,prechorus:8:3,chorus:16:4,coro:16:4,solo:16:3,mambo:12:5,coro-final:16:5,cierre:4:3|_=Fm9,Bbm9,C7b9,Fm9
  timba::paulito-fg|102|intro:16:1,verse:32:2,chorus:16:3,verse:24:3,coro:32:4,bomba:16:5,mambo:16:5,coro:48:5,cierre:8:2|_=Dm7,Gm7,A7,Dm7
  timba::manolin|108|intro:8:2,hook:16:4,verse:24:3,coro:32:4,mambo:16:5,bomba:16:5,coro:64:5,cierre:8:3|_=Am,Dm,E7,Am
  timba::havana-d-primera|102|intro:16:2,verse:32:3,chorus:16:4,verse:32:3,coro:32:4,mambo:24:5,solo:24:4,coro:48:5,cierre:8:3|_=Cm7,Fm7,G7,Cm7

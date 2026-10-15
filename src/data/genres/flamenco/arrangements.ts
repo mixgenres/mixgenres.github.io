@@ -168,20 +168,52 @@ function flamencoLead(id: string): AuthoredCell[] {
         sectionUsage: ['solo', 'cierre'], difficulty: 3,
         description: 'Original free-time falseta study: answer the voice with a compact rising line, return to the bass, and reserve the cadence for the singer’s final release.' }),
   ];
-  if (id === 'bulerias') return [
-    guitar('Bulerías llamada and contratiempo rasgueado', [0, .5, 1, 1.5, 2.5, 3, 3.5, 4, 5],
+  if (id === 'bulerias') {
+    const llamada = guitar('Bulerías llamada: rasgueado cue before the returning cante', [0, .5, 1, 1.5, 2.5, 3, 3.5, 4, 5],
       ['rasgueado', 'picado', 'rasgueado', 'rasgueado', 'alzapua', 'rasgueado', 'rasgueado', 'picado', 'rasgueado'],
       { durations: [.18, .16, .2, .24, .18, .2, .16, .22, .32], accents: [1, .45, .72, .9, .48, .95, .4, .8, 1],
         pitches: [chord, pitch(3, 64), chord, chord, chord, pitch(1, 57), chord, pitch(5, 64), chord],
-        notations: [0,1,2,3,4,5,6,7,8].map(i => ({ stroke: i % 2 ? 'up' : 'down', ...(i === 5 ? { bodyTechnique: 'golpe' as const } : {}) })) }),
-  ];
-  if (id === 'alegrias' || id === 'guajira') return [
-    guitar(`${id} bright compás with answering thumb and abanico`, [0, .5, 1.5, 2.5, 3, 4, 4.5, 5.5],
+        notations: [0,1,2,3,4,5,6,7,8].map(i => ({ stroke: i % 2 ? 'up' : 'down', ...(i === 5 ? { bodyTechnique: 'golpe' as const } : {}) })),
+        sectionUsage: ['llamada'], difficulty: 3,
+        description: 'Original one-compás llamada study: use a compact rasgueado and golpe cue to signal the returning cante, then release cleanly.' });
+    llamada.shortName = 'Guitar llamada';
+    const remate = guitar('Bulerías remate: late rasgueado and golpe close', [4.5, 5, 5.5],
+      ['rasgueado', 'golpe', 'rasgueado'],
+      { durations: [.18, .14, .22], accents: [.72, .9, 1], pitches: [chord, chord, chord],
+        notations: [{ stroke: 'down' }, { bodyTechnique: 'golpe', stroke: 'down' }, { stroke: 'down' }],
+        sectionUsage: ['remate'], difficulty: 3,
+        description: 'Original one-compás closing study: place three concise accents late in the 12-count cycle, then leave the final space open for the dancer’s punctuation.' });
+    remate.shortName = 'Guitar remate';
+    return [llamada, remate];
+  }
+  if (id === 'alegrias' || id === 'guajira') {
+    const brightCompas = guitar(`${id} bright compás with answering thumb and abanico`, [0, .5, 1.5, 2.5, 3, 4, 4.5, 5.5],
       ['rasgueado', 'picado', 'rasgueado', 'abanico', 'golpe', 'rasgueado', 'picado', 'alzapua'],
       { durations: [.24, .22, .32, .18, .2, .28, .18, .38], accents: [1, .42, .8, .68, .95, .62, .45, 1],
         pitches: [chord, pitch(3, 64), chord, chord, chord, pitch(5, 57), pitch(1, 65), chord],
-        notations: [0,1,2,3,4,5,6,7].map(i => ({ stroke: i % 2 ? 'up' : 'down', ...(i === 4 ? { bodyTechnique: 'golpe' as const } : {}) })) }),
-  ];
+        notations: [0,1,2,3,4,5,6,7].map(i => ({ stroke: i % 2 ? 'up' : 'down', ...(i === 4 ? { bodyTechnique: 'golpe' as const } : {}) })) });
+    if (id === 'guajira') return [brightCompas];
+    const silencio = guitar('Alegrías silencio: minor-mode lyrical falseta',
+      [0, 1.5, 3, 4.5, 6, 7.5, 9, 10.5],
+      ['thumb', 'fingerstyle', 'fingerstyle', 'fingerstyle', 'picado', 'fingerstyle', 'picado', 'rasgueado'],
+      { cycleLength: 2, durations: [1.1, .85, .9, 1.05, .55, .9, .55, .7],
+        accents: [1, .46, .58, .5, .72, .48, .76, .9],
+        pitches: [pitch(1, 45), pitch(3, 60), pitch(5, 64), pitch(6, 67), pitch(5, 64), pitch(4, 62), pitch(2, 59), chord],
+        sectionUsage: ['silencio'], difficulty: 3,
+        description: 'Original two-compás silencio study in the relative-minor passage: sustain a low thumb note, unfold a slow arpeggiated melody, and leave space between the short picado replies.' });
+    silencio.shortName = 'Silencio falseta';
+    const silencioAnswer = guitar('Alegrías silencio: upper-register answer and cadence',
+      [0, 1, 2.5, 3.5, 4.5, 6, 7, 8.5, 10, 11],
+      ['thumb', 'fingerstyle', 'fingerstyle', 'picado', 'fingerstyle', 'thumb', 'fingerstyle', 'picado', 'fingerstyle', 'rasgueado'],
+      { cycleLength: 2, durations: [.85, .7, .8, .42, .95, .85, .7, .4, .8, .7],
+        accents: [.95, .48, .62, .78, .5, .9, .48, .72, .58, 1],
+        pitches: [pitch(1, 45), pitch(5, 64), pitch(6, 67), pitch(5, 69), pitch(4, 67), pitch(3, 64), pitch(2, 62), pitch(1, 60), pitch(7, 59), chord],
+        sectionUsage: ['silencio-answer'], difficulty: 3, pedagogicalStudy: 'variation',
+        description: 'A contrasting two-compás answer for the Alegrías silencio: move the melody into the upper register, descend by short picado pairs, and broaden the final chord before the compás returns.' });
+    silencioAnswer.shortName = 'Silencio answer';
+    silencioAnswer.arrangementVariation = true;
+    return [brightCompas, silencio, silencioAnswer];
+  }
   if (id === 'seguiriya') return [
     guitar('Seguiriya asymmetric pulse, low thumb and restrained cierre', [0, .5, 1.5, 2, 3, 3.5, 4.5, 5],
       ['thumb', 'rasgueado', 'golpe', 'rasgueado', 'picado', 'rasgueado', 'alzapua', 'rasgueado'],
@@ -256,6 +288,20 @@ export function authorFlamencoArrangements(input: GenrePackInput): GenrePackInpu
     const lead = flamencoLead(id);
     const cells = style.cells.filter(cell => !(lead.length && !cell.phraseEnd && cell.role === 'lead' && cell.instruments?.includes('guitar')));
     cells.unshift(...lead);
+    if (id === 'bulerias') cells.push(
+      { name: 'Bulerías remate palmas: spaced compás accents and clean release', shortName: 'Palmas remate',
+        role: 'percussion', instruments: ['palmas'], onsets: [0, 3, 4.5, 5.5], cycleLength: 1,
+        durations: [.12, .12, .12, .12], accents: [.48, .68, .84, 1],
+        articulations: ['palmas-sordas', 'palmas-claras', 'palmas-fuertes', 'palmas-fuertes'],
+        sectionUsage: ['remate'], difficulty: 2,
+        description: 'Keep palmas sparse beneath the closing guitar cue; give the final compás accent room to land.' },
+      { name: 'Bulerías remate cajón: bass, slap and final bass', shortName: 'Cajón remate',
+        role: 'percussion', instruments: ['cajon'], onsets: [0, 3, 5.5], cycleLength: 1,
+        durations: [.14, .14, .14], accents: [.72, .58, 1],
+        articulations: ['center-bass', 'edge-slap', 'center-bass'],
+        sectionUsage: ['remate'], difficulty: 2,
+        description: 'Answer the closing rasgueado with a light bass-and-slap cue, then reinforce the final compás accent without filling the release.' },
+    );
     const freeCante = ['taranta', 'granaina', 'malaguena'].includes(id);
     const soleVoice = ['tonas-martinetes'].includes(id);
     if (freeCante || soleVoice) {

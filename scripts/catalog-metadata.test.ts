@@ -460,6 +460,49 @@ test('free-time Granaína and Malagueña samples retain cante, guitar answers an
   }
 });
 
+test('Amapiano examples change section cells and let crossover synth roles play independently', () => {
+  const amapianoExamples = songCatalog.filter(entry => entry.genreId === 'amapiano');
+  assert.equal(amapianoExamples.length, 7);
+  for (const entry of amapianoExamples) {
+    const recording = RECORDING_ARRANGEMENTS[entry.referenceKey];
+    assert.ok(Object.keys(recording.patternAssignments ?? {}).length >= 5, `${entry.referenceKey} needs developed section cells`);
+    createCatalogSong(entry.id);
+  }
+
+  const entry = amapianoExamples.find(example => example.styleId === 'amapiano-gqom-crossover')!;
+  const song = createCatalogSong(entry.id);
+  const drop = song.regions.find(region => region.kind === 'drop')!;
+  const lead = song.tracks.find(track => track.instrumentId === 'synth' && track.role === 'lead')!;
+  const bass = song.tracks.find(track => track.instrumentId === 'synth' && track.role === 'bass')!;
+  const leadPatternId = song.arrangement[drop.id][lead.id];
+  const bassPatternId = song.arrangement[drop.id][bass.id];
+  assert.equal(PATTERNS_BY_ID[leadPatternId].shortName, 'Synthesizer variation');
+  assert.equal(PATTERNS_BY_ID[bassPatternId].shortName, 'Low anchor');
+  assert.notEqual(leadPatternId, bassPatternId);
+});
+
+test('Ambient examples develop their own sections and Dark Ambient keeps its sparse metallic part', () => {
+  const ambientExamples = songCatalog.filter(entry => entry.genreId === 'ambient');
+  assert.equal(ambientExamples.length, 9);
+  for (const entry of ambientExamples) {
+    const recording = RECORDING_ARRANGEMENTS[entry.referenceKey];
+    assert.ok(Object.keys(recording.patternAssignments ?? {}).length >= 4, `${entry.referenceKey} needs section-specific parts`);
+    createCatalogSong(entry.id);
+  }
+
+  const darkStyle = getStyle('ambient-dark-ambient')!;
+  assert.deepEqual(darkStyle.instrumentDialects?.['sampler:percussion']?.samplePalette, [53, 52]);
+  const dark = createCatalogSong('ambient-dark-ambient_song');
+  const descent = dark.regions.find(region => region.kind === 'descent')!;
+  const ritual = dark.regions.find(region => region.kind === 'ritual')!;
+  const voidSection = dark.regions.find(region => region.kind === 'void')!;
+  const sampler = dark.tracks.find(track => track.instrumentId === 'sampler')!;
+  assert.ok(sampler);
+  assert.equal(PATTERNS_BY_ID[dark.arrangement[descent.id][sampler.id]]?.shortName, 'Ride-bell toll');
+  assert.equal(PATTERNS_BY_ID[dark.arrangement[ritual.id][sampler.id]]?.shortName, 'China-cymbal bloom');
+  assert.equal(dark.arrangement[voidSection.id][sampler.id], 'silent', 'the metallic part leaves the void exposed');
+});
+
 test('every style has one complete example and removed examples cannot be loaded', () => {
   assert.equal(songCatalog.length, ALL_STYLES.length);
   assert.equal(new Set(songCatalog.map(entry => entry.styleId)).size, ALL_STYLES.length);

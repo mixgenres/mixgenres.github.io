@@ -32,7 +32,8 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
     const instrumentId = options.trackInstruments.get(id) ?? performance.trackInfo?.[id]?.instrumentId ?? id;
     const def = INSTRUMENTS_BY_ID[instrumentId];
     if (!def) throw new Error(`Unknown sampled instrument: ${instrumentId}`);
-    const params = resolveTrackSound(instrumentId, options.worldId ?? performance.worldId, options.styleId, options.trackRoles?.get(id));
+    const trackRole = options.trackRoles?.get(id) ?? performance.trackInfo?.[id]?.role;
+    const params = resolveTrackSound(instrumentId, options.worldId ?? performance.worldId, options.styleId, trackRole);
     const percussion = instrumentId !== 'timpani' && (!!def.kit || !!def.drum || def.voicing === 'unpitched');
     const base = patchForInstrument(instrumentId, percussion);
     const contextSounds = new Map<string, ReturnType<typeof resolveTrackSound>>();
@@ -57,7 +58,7 @@ export function compileSamplePlan(performance: Performance, options: Mp3RenderOp
       const action = gesture.action;
       const context = note.soundContext;
       const sound = context && (context.worldId !== (options.worldId ?? performance.worldId ?? '')
-        || context.styleId !== (options.styleId ?? '') || context.role !== (options.trackRoles?.get(id) ?? performance.trackInfo?.[id]?.role))
+        || context.styleId !== (options.styleId ?? '') || context.role !== trackRole)
         ? soundFor(context.worldId, context.styleId, context.role)
         : params;
       let patch = base;

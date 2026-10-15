@@ -9,7 +9,7 @@ export const GENRE_PACK: GenrePackInput = {
   "defaultStyle": "Funk",
   "meter": "4/4",
   "tempo": [96, 112],
-  "instruments": ["voice", "trumpet", "guitar", "clavinet", "bass", "drums", "synth", "rhodes", "piano", "string-ensemble"],
+  "instruments": ["voice", "trumpet", "guitar", "clavinet", "bass", "synth-bass", "drums", "synth", "rhodes", "piano", "string-ensemble", "tenor-sax"],
   "roles": {
     "lead": ["voice", "trumpet"],
     "harmony": ["guitar", "clavinet"],
@@ -335,8 +335,8 @@ export const GENRE_PACK: GenrePackInput = {
       "tempo": [104, 120],
       "scale": "dorian",
       "roles": {
-        "lead": ["voice", "trumpet", "synth"],
-        "harmony": ["guitar", "clavinet"],
+        "lead": ["voice", "trumpet", "tenor-sax", "synth"],
+        "harmony": ["guitar", "clavinet", "rhodes"],
         "bass": ["bass"],
         "percussion": ["drums"]
       },
@@ -378,6 +378,8 @@ export const GENRE_PACK: GenrePackInput = {
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
         "trumpet": ["staccato", "accent", "legato", "tenuto", "vibrato"],
+        "tenor-sax": ["staccato", "accent", "legato", "tenuto", "vibrato"],
+        "rhodes": ["staccato", "ghost", "accent", "legato", "tenuto"],
         "guitar": ["staccato", "strum", "short-chord-stab", "muted-strum", "accent", "legato", "vibrato"],
         "clavinet": ["staccato", "ghost", "accent"],
         "bass": ["staccato", "ghost-note", "slap", "pop", "ghost", "accent", "legato"],
@@ -392,6 +394,10 @@ export const GENRE_PACK: GenrePackInput = {
           "allowedTechniques": ["staccato", "accent", "legato", "tenuto", "vibrato"],
           "defaultTechnique": "staccato"
         },
+        "tenor-sax:lead": {
+          "allowedTechniques": ["staccato", "accent", "legato", "tenuto", "vibrato"],
+          "defaultTechnique": "staccato"
+        },
         "guitar:harmony": {
           "allowedTechniques": ["staccato", "strum", "short-chord-stab", "muted-strum", "accent", "legato", "vibrato"],
           "defaultTechnique": "staccato",
@@ -399,6 +405,10 @@ export const GENRE_PACK: GenrePackInput = {
         },
         "clavinet:harmony": {
           "allowedTechniques": ["staccato", "ghost", "accent"],
+          "defaultTechnique": "staccato"
+        },
+        "rhodes:harmony": {
+          "allowedTechniques": ["staccato", "ghost", "accent", "legato", "tenuto"],
           "defaultTechnique": "staccato"
         },
         "bass:bass": {
@@ -426,7 +436,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "minneapolis",
       "name": "Minneapolis",
-      "description": "Minneapolis: Minneapolis drum machine and clipped synth guitar. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Minneapolis Sound pairs a clipped electric-guitar attack with a rigid electronic backbeat, a lean bass pocket and bright synth hooks. The teaching score leaves gaps between these parts so their attack shapes remain distinct.",
       "patterns": ["Minneapolis drum machine and clipped synth guitar"],
       "techniques": ["muted-strum", "short-chord-stab", "slap", "pop", "ghost-note", "staccato", "call-response", "accent", "legato", "vibrato", "strum", "ghost", "tenuto", "open", "roll"],
       "harmony": ["Em7", "Am7", "B7"],
@@ -507,7 +517,8 @@ export const GENRE_PACK: GenrePackInput = {
         },
         "drums:percussion": {
           "allowedTechniques": ["ghost", "staccato", "accent", "open", "roll"],
-          "defaultTechnique": "ghost"
+          "defaultTechnique": "staccato",
+          "variantId": "808-kit"
         }
       },
       "mix": {
@@ -734,7 +745,7 @@ export const GENRE_PACK: GenrePackInput = {
       "roles": {
         "lead": ["voice", "synth"],
         "harmony": ["guitar", "rhodes"],
-        "bass": ["bass"],
+        "bass": ["bass", "synth-bass"],
         "percussion": ["drums"]
       },
       "progressions": {
@@ -834,7 +845,7 @@ export const GENRE_PACK: GenrePackInput = {
       "roles": {
         "lead": ["voice", "synth"],
         "harmony": ["guitar", "rhodes"],
-        "bass": ["bass"],
+        "bass": ["bass", "synth-bass"],
         "percussion": ["drums"]
       },
       "progressions": {

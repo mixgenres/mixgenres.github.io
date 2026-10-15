@@ -1,0 +1,88 @@
+{
+  "genreId": "japanese",
+  "reviewed": "2026-10-14",
+  "status": "Five linked streaming candidates are collected for each of the five Japanese styles. Listening comparison and timecodes remain pending; these are candidates, not verified sonic matches.",
+  "source": "Apple Music individual track pages and release metadata. Reference audio has not been downloaded or auditioned.",
+  "styles": [
+    {
+      "styleId": "gagaku",
+      "compare": [
+        "shō aitake chord clusters held beneath the independent hichiriki and ryūteki lines",
+        "the bends and ornamental attacks of hichiriki against the flute's breath-shaped phrases",
+        "slow, spacious jo passages compared with measured ha and quicker kyū movements where present",
+        "how taiko and kakko punctuation supports the ensemble without becoming a Western backbeat"
+      ],
+      "recordings": [
+        { "title": "Gagaku: Etenraku", "artist": "Music Section of Imperial Household Agency", "url": "https://music.apple.com/us/song/920474497", "timecodes": [] },
+        { "title": "Etenraku (Hyoujou)", "artist": "Tokyo Gakuso", "url": "https://music.apple.com/us/song/1699536625", "timecodes": [] },
+        { "title": "Kangen: Hyojo No Netori", "artist": "Tokyo Gakuso", "url": "https://music.apple.com/us/song/201378484", "timecodes": [] },
+        { "title": "Sandaien Ichigu: Ha", "artist": "Reigakusha", "url": "https://music.apple.com/us/album/sandaien-ichigu-ha/286631220?i=286631538", "timecodes": [] },
+        { "title": "Etenraku", "artist": "Kyoto Imperial Court Music Orchestra", "url": "https://music.apple.com/us/song/49356301", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "shakuhachi",
+      "compare": [
+        "breath-shaped phrase lengths and intentional ma between calls",
+        "meri and kari pitch inflections, vibrato, and breath noise on sustained tones",
+        "how honkyoku openings and cadences leave room for silence and resonance",
+        "differences in solo and duet phrasing across schools and performers"
+      ],
+      "recordings": [
+        { "title": "Kyorei _ Fudai-ji Temple", "artist": "Keisuke Zenyoji", "url": "https://music.apple.com/us/song/1794310637", "timecodes": [] },
+        { "title": "Sokaku-Reibo (Depicting the Cranes in Their Nest)", "artist": "Goro Yamaguchi", "url": "https://music.apple.com/us/song/250293397", "timecodes": [] },
+        { "title": "Shika no Tone", "artist": "Reibo Aoki & Katsuya Yokoyama", "url": "https://music.apple.com/us/song/1772584857", "timecodes": [] },
+        { "title": "Kyorei", "artist": "Kifu Mitsuhashi", "url": "https://music.apple.com/us/song/201377269", "timecodes": [] },
+        { "title": "Shika No Tone (The Distant Calling of Deer)", "artist": "Masayuki Koga", "url": "https://music.apple.com/us/song/286631782", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "shamisen-minyo",
+      "compare": [
+        "Tsugaru shamisen's forceful bachi attacks and melodic variation against the more regular folk-song pulse",
+        "vocal calls, shamisen answers, and the space between sung lines",
+        "Soran-bushi's accented work-song character against Tsugaru jongara's instrumental virtuosity",
+        "how ensemble backing changes the sound from solo or small-group min'yō performance"
+      ],
+      "recordings": [
+        { "title": "Tsugaru Jongara-Bushi (Kyu-Bushi)", "artist": "Hiromitsu Agatsuma", "url": "https://music.apple.com/us/song/716147587", "timecodes": [] },
+        { "title": "Tsugaru Jongarabushi Aomoriken Minyo", "artist": "Michiya Mihashi & Tokyo Cuban Boys", "url": "https://music.apple.com/us/song/1839098260", "timecodes": [] },
+        { "title": "Soran Bushi", "artist": "Minyo Crusaders", "url": "https://music.apple.com/us/song/1713526741", "timecodes": [] },
+        { "title": "Soran Bushi", "artist": "Akiko Kanazawa", "url": "https://music.apple.com/us/song/1004249852", "timecodes": [] },
+        { "title": "Soran-Bushi", "artist": "Yonekawa Toshiko", "url": "https://music.apple.com/us/song/1565884644", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "koto-sankyoku",
+      "compare": [
+        "koto pluck decay, sliding ornaments, and phrase-end flourishes",
+        "koto and shamisen roles against shakuhachi responses in chamber repertory",
+        "how vocal lines sit within jiuta and sankyoku performances when present",
+        "the contrast between solo koto forms such as Rokudan and multi-instrument arrangements"
+      ],
+      "recordings": [
+        { "title": "Rokudan No Shirabe", "artist": "Tadao Sawai", "url": "https://music.apple.com/us/song/1732061471", "timecodes": [] },
+        { "title": "Haru No Umi", "artist": "Kifu Mitsuhashi, Nanae Yoshimura & Satomi Fukami", "url": "https://music.apple.com/us/song/276199164", "timecodes": [] },
+        { "title": "Haru no Umi (Sea in the Spring)", "artist": "Kiyoko Miyagi & Reibo Aoki", "url": "https://music.apple.com/us/song/771554206", "timecodes": [] },
+        { "title": "Chidori no Kyoku (Plover Song)", "artist": "Satomi Fukami, Hiroe Yonekawa & Neptune Kaizan", "url": "https://music.apple.com/us/song/773171570", "timecodes": [] },
+        { "title": "Chidori no Kyoku (The Song of the Plover)", "artist": "Ayako Hotta-Lister", "url": "https://music.apple.com/us/song/703715267", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "taiko",
+      "compare": [
+        "odaiko's low, long-decay strokes against tighter chū-daiko and kane attacks",
+        "unison hits, interlocking cells, and the cues that organize ensemble changes",
+        "dynamic builds and ensemble breaks, including the release into silence",
+        "regional rhythmic identity across Yatai-bayashi, Hachijō, and festival-bayashi examples"
+      ],
+      "recordings": [
+        { "title": "O-Daiko", "artist": "KODO", "url": "https://music.apple.com/us/song/254828273", "timecodes": [] },
+        { "title": "Yatai-Bayashi", "artist": "KODO", "url": "https://music.apple.com/us/song/1711743730", "timecodes": [] },
+        { "title": "Yatai-Bayashi", "artist": "Ondekoza, Mami Kawaguchi & Teizan Matsuda", "url": "https://music.apple.com/us/song/1707517465", "timecodes": [] },
+        { "title": "Yatai Bayashi '04 [Soten]", "artist": "Ondekoza / Kazutoki Umezu", "url": "https://music.apple.com/us/song/699613649", "timecodes": [] },
+        { "title": "Hachijo Taiko Bayashi", "artist": "Takaishi Tomoya & The Natasha Seven", "url": "https://music.apple.com/us/song/720411721", "timecodes": [] }
+      ]
+    }
+  ]
+}

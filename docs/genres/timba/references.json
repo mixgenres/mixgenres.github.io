@@ -1,0 +1,518 @@
+{
+  "genreId": "timba",
+  "reviewed": "2026-10-14",
+  "status": "Five or more streaming recording candidates are collected for all 12 Timba styles. Listening, timecodes, and mix comparisons remain pending; candidates are not verified sonic matches.",
+  "source": "Apple Music and Amazon Music streaming track/single pages were checked for candidate metadata. Reference audio was not downloaded or auditioned; listening and timecodes remain pending.",
+  "styles": [
+    {
+      "styleId": "irakere-jazz-funk-precursor",
+      "compare": [
+        "the balance between the electric bass, piano, brass, and Afro-Cuban percussion",
+        "where the tune opens into jazz solo space and how the rhythm section holds the groove",
+        "how horn hits and piano montuno figures answer each other",
+        "the shifts between jazz harmony, funk articulation, and the dance pulse"
+      ],
+      "recordings": [
+        {
+          "title": "Bacalao con pan (Remasterizado)",
+          "artist": "Irakere",
+          "url": "https://music.apple.com/us/song/1286056002",
+          "timecodes": []
+        },
+        {
+          "title": "Aguanile Bonko",
+          "artist": "Irakere",
+          "url": "https://music.apple.com/us/song/1712042121",
+          "timecodes": []
+        },
+        {
+          "title": "Valle de Picadura",
+          "artist": "Irakere",
+          "url": "https://music.apple.com/us/song/1712042119",
+          "timecodes": []
+        },
+        {
+          "title": "Bailando Así",
+          "artist": "Irakere",
+          "url": "https://music.apple.com/us/song/1712042126",
+          "timecodes": []
+        },
+        {
+          "title": "Misa Negra",
+          "artist": "Irakere & Chucho Valdés",
+          "url": "https://music.apple.com/us/song/1002890961",
+          "timecodes": []
+        },
+        {
+          "title": "Dile a Catalina",
+          "artist": "Chucho Valdés & Irakere",
+          "url": "https://music.apple.com/us/song/1005422130",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "ng-la-banda-early-timba",
+      "compare": [
+        "the density and articulation of the horn bloques against the tumbao",
+        "how the piano and bass change their cells as the coro intensifies",
+        "where bomba-style and stop-time spaces make room for the next full-band hit",
+        "the balance between lead vocal guide, chorus, brass, and percussion"
+      ],
+      "recordings": [
+        {
+          "title": "La Expresiva",
+          "artist": "NG La Banda",
+          "url": "https://music.apple.com/us/song/208256798",
+          "timecodes": []
+        },
+        {
+          "title": "Los Sitios Enteros",
+          "artist": "NG La Banda",
+          "url": "https://music.apple.com/us/song/1594693295",
+          "timecodes": []
+        },
+        {
+          "title": "Échale Limón",
+          "artist": "José Luis Cortés y NG la Banda",
+          "url": "https://music.apple.com/us/song/256769281",
+          "timecodes": []
+        },
+        {
+          "title": "Como pantera",
+          "artist": "José Luis Cortés & NG La Banda",
+          "url": "https://music.apple.com/us/song/640534038",
+          "timecodes": []
+        },
+        {
+          "title": "Conga Negro Cansao (Remastered)",
+          "artist": "NG La Banda & José Luis Cortés",
+          "url": "https://music.apple.com/us/song/662031302",
+          "timecodes": []
+        },
+        {
+          "title": "El Trágico (Remastered)",
+          "artist": "NG La Banda & José Luis Cortés",
+          "url": "https://music.apple.com/us/song/662031672",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "bamboleo",
+      "compare": [
+        "the smoother funk bass pocket under the vocal-led sections",
+        "how piano and brass support the vocal response without crowding it",
+        "where the groove opens into the more forceful mambo section",
+        "the difference in density between verse, chorus, and final coro"
+      ],
+      "recordings": [
+        {
+          "title": "Yo No Me Parezco a Nadie",
+          "artist": "Bamboleo",
+          "url": "https://music.apple.com/us/song/172983823",
+          "timecodes": []
+        },
+        {
+          "title": "Con un Canto en el Pecho",
+          "artist": "Bamboleo",
+          "url": "https://music.apple.com/us/song/133662268",
+          "timecodes": []
+        },
+        {
+          "title": "Ya No Hace Falta",
+          "artist": "Bamboleo",
+          "url": "https://music.apple.com/us/song/256198153",
+          "timecodes": []
+        },
+        {
+          "title": "No Puedo Estar Sin el",
+          "artist": "Bamboleo",
+          "url": "https://music.apple.com/us/song/122674785",
+          "timecodes": []
+        },
+        {
+          "title": "La Negra Tiene Boom Boom",
+          "artist": "Bamboleo",
+          "url": "https://music.apple.com/us/song/122674788",
+          "timecodes": []
+        },
+        {
+          "title": "Caramelo con picante",
+          "artist": "Bamboleo",
+          "url": "https://music.apple.com/us/song/1015333448",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "classic-timba",
+      "compare": [
+        "how piano, electric bass, drums, and hand percussion lock while the bass line stays melodic",
+        "how the arrangement opens into a coro, then changes gear with bass and percussion together",
+        "when the bell enters, how the piano and horns answer, and where the full band leaves space",
+        "the contrast between a stripped bomba, horn mambo, and the final coro"
+      ],
+      "recordings": [
+        {
+          "title": "Temba, Tumba y Timba",
+          "artist": "Los Van Van",
+          "url": "https://music.apple.com/us/song/86967264",
+          "timecodes": []
+        },
+        {
+          "title": "Me Gustas",
+          "artist": "Juan Formell y Los Van Van",
+          "url": "https://music.apple.com/us/song/1543443141",
+          "timecodes": []
+        },
+        {
+          "title": "De la Habana a Matanzas",
+          "artist": "Juan Formell y Los Van Van",
+          "url": "https://music.apple.com/us/song/1009752376",
+          "timecodes": []
+        },
+        {
+          "title": "El Danzonete",
+          "artist": "Juan Formell y Los Van Van",
+          "url": "https://music.apple.com/us/song/1453175751",
+          "timecodes": []
+        },
+        {
+          "title": "Cuéntame",
+          "artist": "Juan Formell y Los Van Van",
+          "url": "https://music.apple.com/us/song/457735735",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "charanga-habanera",
+      "compare": [
+        "the piano tumbao against any separate synthesizer counterline",
+        "how bass and percussion shift together between gears",
+        "abrupt ensemble cuts and the hit that launches the next section",
+        "the balance between lead voice, brass replies, bell, piano, and bass"
+      ],
+      "recordings": [
+        {
+          "title": "Sube y Baja",
+          "artist": "Charanga Habanera",
+          "url": "https://music.apple.com/us/song/284361431",
+          "timecodes": []
+        },
+        {
+          "title": "Nube pasajera",
+          "artist": "David Calzado & Charanga Habanera",
+          "url": "https://music.apple.com/us/song/639921971",
+          "timecodes": []
+        },
+        {
+          "title": "La entrevista",
+          "artist": "David Calzado y Su Charanga Habanera",
+          "url": "https://music.apple.com/us/song/656760973",
+          "timecodes": []
+        },
+        {
+          "title": "Lola, Lola",
+          "artist": "David Calzado y Su Charanga Habanera",
+          "url": "https://music.apple.com/us/song/216289803",
+          "timecodes": []
+        },
+        {
+          "title": "Señora",
+          "artist": "Charanga Habanera",
+          "url": "https://music.apple.com/us/song/284361874",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "maykel-blanco",
+      "compare": [
+        "the bass and kick weight against the interlocking hand percussion",
+        "short horn bloques and the gaps immediately before and after them",
+        "how the piano gets more percussive as the coro and mambo build",
+        "the rise from verse to bomba, instrumental mambo, and final coro"
+      ],
+      "recordings": [
+        {
+          "title": "Anda y Pégate (New Mix 2008)",
+          "artist": "Maykel Blanco y su Salsa Mayor",
+          "url": "https://music.apple.com/us/song/289295556",
+          "timecodes": []
+        },
+        {
+          "title": "Recoge y Vete",
+          "artist": "Maikel Blanco y Su Salsamayor",
+          "url": "https://music.apple.com/us/song/1541771407",
+          "timecodes": []
+        },
+        {
+          "title": "Quítate Que Vengo Volao",
+          "artist": "Maikel Blanco y Su Salsamayor",
+          "url": "https://music.apple.com/pe/song/324196443",
+          "timecodes": []
+        },
+        {
+          "title": "Qué Tiene Que Te Mueve",
+          "artist": "Maykel Blanco y su Salsa Mayor",
+          "url": "https://music.apple.com/us/song/1456482084",
+          "timecodes": []
+        },
+        {
+          "title": "Bájate de las Nubes",
+          "artist": "Maykel Blanco y su Salsa Mayor",
+          "url": "https://music.apple.com/us/song/1448897141",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "songo",
+      "compare": [
+        "the hybrid drum-kit and timbales vocabulary interlocking with congas instead of a standard salsa backbeat",
+        "bass displacement against the kit and the way the groove stays danceable through syncopation",
+        "when the bell and percussion density change between song sections",
+        "short fills and instrumental replies that keep the pulse moving without a timba-style horn bloques build"
+      ],
+      "recordings": [
+        {
+          "title": "Sandunguera",
+          "artist": "Juan Formell & Los Van Van",
+          "url": "https://music.apple.com/us/song/263014321",
+          "timecodes": []
+        },
+        {
+          "title": "El Baile del Buey Cansao",
+          "artist": "Los Van Van",
+          "url": "https://music.apple.com/us/song/987390309",
+          "timecodes": []
+        },
+        {
+          "title": "Cuéntame",
+          "artist": "Los Van Van",
+          "url": "https://music.apple.com/us/song/87065122",
+          "timecodes": []
+        },
+        {
+          "title": "El Negro Está Cocinando",
+          "artist": "Los Van Van",
+          "url": "https://music.apple.com/us/song/252786096",
+          "timecodes": []
+        },
+        {
+          "title": "Chirrín Chirran",
+          "artist": "Los Van Van & Juan Formell",
+          "url": "https://music.apple.com/us/song/279252729",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "paulito-fg",
+      "compare": [
+        "the relationship between Paulo FG’s clipped, conversational lead and the answering coro",
+        "how piano guajeos, bass gear shifts, and percussion breaks raise intensity between verse and coro",
+        "the dense horn punches and rests that set up the next vocal phrase",
+        "the contrast between early, aggressive timba and later smoother crossover production"
+      ],
+      "recordings": [
+        {
+          "title": "Sofocación",
+          "artist": "Paulo FG y su Élite",
+          "url": "https://music.apple.com/us/song/211120803",
+          "timecodes": []
+        },
+        {
+          "title": "Fue un Error",
+          "artist": "Paulo FG",
+          "url": "https://music.apple.com/us/song/1763276744",
+          "timecodes": []
+        },
+        {
+          "title": "Que Manía",
+          "artist": "Paulo FG",
+          "url": "https://music.apple.com/us/song/1763276845",
+          "timecodes": []
+        },
+        {
+          "title": "El Tumbao de Lola",
+          "artist": "Paulo FG",
+          "url": "https://music.apple.com/us/song/1763276745",
+          "timecodes": []
+        },
+        {
+          "title": "A Mi Tiempo (2017 Remasterizado)",
+          "artist": "Paulo FG",
+          "url": "https://music.apple.com/us/song/1200571964",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "manolin",
+      "compare": [
+        "the hook-first coro and conversational lead delivery over a lean, direct dance groove",
+        "how repeated vocal phrases gain momentum through bass and percussion changes",
+        "the timing of piano and horn responses around the chant rather than constant accompaniment",
+        "the playful, street-facing arrangement compared with the larger horn and gear-change vocabulary of other timba bands"
+      ],
+      "recordings": [
+        {
+          "title": "Una aventura loca",
+          "artist": "Manolín, El Médico de La Salsa",
+          "url": "https://music.apple.com/us/song/945724093",
+          "timecodes": []
+        },
+        {
+          "title": "La Bola (Versión Remasterizada)",
+          "artist": "Manolín, El Médico de La Salsa",
+          "url": "https://music.apple.com/us/song/1118525142",
+          "timecodes": []
+        },
+        {
+          "title": "Somos lo que hay",
+          "artist": "Manolín, El Médico de La Salsa",
+          "url": "https://music.apple.com/us/song/319980133",
+          "timecodes": []
+        },
+        {
+          "title": "No lo comentes",
+          "artist": "Manolín, El Médico de La Salsa",
+          "url": "https://music.apple.com/us/song/827668025",
+          "timecodes": []
+        },
+        {
+          "title": "Pelo Suelto y Carretera",
+          "artist": "Manolín, El Médico de La Salsa",
+          "url": "https://music.apple.com/us/song/1809327997",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "havana-dprimera",
+      "compare": [
+        "Alexander Abreu’s melodic trumpet lead and vocal coro handoffs over a polished modern tumbao",
+        "how the horns widen and the rhythm section increases drive through each gear change",
+        "the balance between tightly arranged horn blocks, open vocal space, and the forward bass line",
+        "subtle modern production width and low-end weight while keeping the Cuban percussion crisp"
+      ],
+      "recordings": [
+        {
+          "title": "Me Dicen Cuba",
+          "artist": "Alexander Abreu & Havana D'Primera",
+          "url": "https://music.apple.com/us/song/1868256981",
+          "timecodes": []
+        },
+        {
+          "title": "Pastilla de Menta",
+          "artist": "Alexander Abreu & Havana D'Primera",
+          "url": "https://music.apple.com/us/song/1858386962",
+          "timecodes": []
+        },
+        {
+          "title": "Al Final de la Vida",
+          "artist": "Alexander Abreu & Havana D'Primera",
+          "url": "https://music.apple.com/us/song/1858009861",
+          "timecodes": []
+        },
+        {
+          "title": "Pa' mi Gente",
+          "artist": "Alexander Abreu & Havana D'Primera",
+          "url": "https://music.apple.com/us/song/1858009859",
+          "timecodes": []
+        },
+        {
+          "title": "Pura Imagen",
+          "artist": "Alexander Abreu & Havana D'Primera",
+          "url": "https://music.apple.com/us/song/1888751270",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "timba-funk",
+      "compare": [
+        "funk-style bass articulation and syncopated horn attacks while percussion continues to mark Cuban clave",
+        "how a groove can move from a tight funk vamp into son-derived call-and-response",
+        "the attack, muting, and sustain of electric bass and guitar against piano tumbao and hand percussion",
+        "the added space and backbeat weight of funk fusion compared with the denser horn bloques of classic timba"
+      ],
+      "recordings": [
+        {
+          "title": "Baila Mi Ritmo (Versión Timbafunk)",
+          "artist": "Leonardo Milano De Cuba, Alejandro Falcón, Alexander Abreu, Cimafunk & Los Herederos",
+          "url": "https://music.apple.com/us/song/1606942584",
+          "timecodes": []
+        },
+        {
+          "title": "Timba Funk",
+          "artist": "CSAN-II",
+          "url": "https://music.amazon.com/albums/B0BKYRL2XQ",
+          "timecodes": []
+        },
+        {
+          "title": "El Tren del Sabor",
+          "artist": "Tony Succar, Cimafunk & Havana D'Primera",
+          "url": "https://music.apple.com/us/song/1489267085",
+          "timecodes": []
+        },
+        {
+          "title": "Te Quema la Bemba",
+          "artist": "Cimafunk",
+          "url": "https://music.apple.com/us/song/1581144852",
+          "timecodes": []
+        },
+        {
+          "title": "Playa Noche",
+          "artist": "Cimafunk, Michaël Brun & Keyon Harrold",
+          "url": "https://music.apple.com/us/song/1747829067",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "international-modern-timba",
+      "compare": [
+        "how modern timba retains Cuban gear changes and coro/response while adopting wider international production palettes",
+        "the placement of synth, brass, and backing-vocal layers around the core piano, bass, and percussion groove",
+        "section contrast between open verses, repeated coro, bomba breaks, and high-pressure final montuno",
+        "how tighter low-end and stereo width support an ensemble groove without smoothing away its syncopation"
+      ],
+      "recordings": [
+        {
+          "title": "Una Aventura Loca",
+          "artist": "Alexander Abreu & Havana D'Primera",
+          "url": "https://music.apple.com/us/song/1888751268",
+          "timecodes": []
+        },
+        {
+          "title": "Nube Pasajera",
+          "artist": "Alexander Abreu & Havana D'Primera",
+          "url": "https://music.apple.com/us/song/1888751279",
+          "timecodes": []
+        },
+        {
+          "title": "Secuestro",
+          "artist": "Alexander Abreu & Havana D'Primera",
+          "url": "https://music.apple.com/us/song/1852755518",
+          "timecodes": []
+        },
+        {
+          "title": "Será Que Se Acabó",
+          "artist": "Alexander Abreu & Havana D'Primera",
+          "url": "https://music.apple.com/us/song/1888751286",
+          "timecodes": []
+        },
+        {
+          "title": "Venenosa",
+          "artist": "Alexander Abreu & Havana D'Primera",
+          "url": "https://music.apple.com/us/song/1850590365",
+          "timecodes": []
+        }
+      ]
+    }
+  ]
+}

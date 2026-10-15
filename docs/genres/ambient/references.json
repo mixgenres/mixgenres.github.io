@@ -1,0 +1,146 @@
+{
+  "genreId": "ambient",
+  "status": "These are streaming-track candidates for a first review pass, not verified sonic matches. No reference audio has been downloaded; all listening notes and timecodes remain pending.",
+  "references": [
+    {
+      "styleId": "atmospheric",
+      "compare": [
+        "long pad and piano envelopes, with the melody emerging from the bed rather than sitting like a pop lead",
+        "slow changes in register, harmony, and density across a long phrase",
+        "how much attack detail stays audible without introducing a regular drum groove"
+      ],
+      "recordings": [
+        { "title": "An Ending (Ascent)", "artist": "Brian Eno", "url": "https://music.apple.com/us/song/1462266178", "timecodes": [] },
+        { "title": "1/1", "artist": "Brian Eno", "url": "https://music.apple.com/us/song/724436237", "timecodes": [] },
+        { "title": "First Light", "artist": "Brian Eno & Harold Budd", "url": "https://music.apple.com/us/song/724653244", "timecodes": [] },
+        { "title": "Requiem for Dying Mothers, Pt. 2", "artist": "Stars of the Lid", "url": "https://music.apple.com/us/song/40886780", "timecodes": [] },
+        { "title": "#3", "artist": "Aphex Twin", "url": "https://music.apple.com/us/song/1749665548", "timecodes": [] },
+        { "title": "Xtal", "artist": "Aphex Twin", "url": "https://music.apple.com/us/song/1668862649", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "drone",
+      "compare": [
+        "slow timbral change inside sustained pitches rather than a chord loop that implies a beat",
+        "very long attack and release shapes, low-register stability, and careful level balance",
+        "how small spectral events create motion while the drone remains the focus"
+      ],
+      "recordings": [
+        { "title": "Structures from Silence", "artist": "Steve Roach", "url": "https://music.apple.com/us/song/606596368", "timecodes": [] },
+        { "title": "Reflections in Suspension", "artist": "Steve Roach", "url": "https://music.apple.com/us/song/606596366", "timecodes": [] },
+        { "title": "Void Memory One", "artist": "Steve Roach", "url": "https://music.apple.com/us/song/109157909", "timecodes": [] },
+        { "title": "Infinite Shore", "artist": "Steve Roach", "url": "https://music.apple.com/us/song/109157964", "timecodes": [] },
+        { "title": "Adnos I", "artist": "Éliane Radigue", "url": "https://music.apple.com/us/song/1664224636", "timecodes": [] },
+        { "title": "Dlp 1.1", "artist": "William Basinski", "url": "https://music.apple.com/us/song/908005352", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "dark-ambient",
+      "compare": [
+        "deep drone weight against isolated metallic or noisy events, with no continuous beat filling every gap",
+        "the contrast between dark low layers and narrow, distant upper-register detail",
+        "how loud impacts bloom and decay without masking the underlying texture"
+      ],
+      "recordings": [
+        { "title": "Virginal II", "artist": "Tim Hecker", "url": "https://music.apple.com/us/song/699512248", "timecodes": [] },
+        { "title": "In the Fog III", "artist": "Tim Hecker", "url": "https://music.apple.com/us/song/411842915", "timecodes": [] },
+        { "title": "Venter", "artist": "Ben Frost", "url": "https://music.apple.com/us/song/843666414", "timecodes": [] },
+        { "title": "Dark Companion", "artist": "Lustmord", "url": "https://music.apple.com/us/song/429464256", "timecodes": [] },
+        { "title": "Godeater", "artist": "Lustmord", "url": "https://music.apple.com/us/song/664856027", "timecodes": [] },
+        { "title": "Prime", "artist": "Lustmord & Zola Jesus", "url": "https://music.apple.com/us/song/1604964713", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "organic-ambient",
+      "compare": [
+        "recognizable acoustic attacks and finger or bow detail inside long reverberant tails",
+        "how guitar, harp-like plucks, piano, and sustained strings share a soft foreground",
+        "natural timing and phrase asymmetry against the continuous ambient sustain"
+      ],
+      "recordings": [
+        { "title": "Ambre", "artist": "Nils Frahm", "url": "https://music.apple.com/us/song/1451164643", "timecodes": [] },
+        { "title": "Clouds", "artist": "Gigi Masin", "url": "https://music.apple.com/us/song/1790536393", "timecodes": [] },
+        { "title": "Meditation No. 1", "artist": "Laraaji", "url": "https://music.apple.com/us/song/714416730", "timecodes": [] },
+        { "title": "Pine Trees", "artist": "Mary Lattimore", "url": "https://music.apple.com/us/album/pine-trees/1518708337?i=1518708338", "timecodes": [] },
+        { "title": "The Four Sleeping Princesses", "artist": "Mary Lattimore", "url": "https://music.apple.com/us/album/the-four-sleeping-princesses/1843854211?i=1843854495", "timecodes": [] },
+        { "title": "Glass", "artist": "Hania Rani", "url": "https://music.apple.com/us/song/1578451932", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "neo-classical-ambient",
+      "compare": [
+        "piano or chamber-string motif phrasing, voicing, and touch",
+        "how repetition grows through register and orchestration rather than extra busy fills",
+        "the balance of close acoustic detail, room tail, and broad string sustain"
+      ],
+      "recordings": [
+        { "title": "saman", "artist": "Ólafur Arnalds", "url": "https://music.apple.com/us/song/1390704156", "timecodes": [] },
+        { "title": "On the Nature of Daylight", "artist": "Max Richter", "url": "https://music.apple.com/us/song/1480784971", "timecodes": [] },
+        { "title": "Flight from the City (Edit)", "artist": "Jóhann Jóhannsson", "url": "https://music.apple.com/us/song/1452680691", "timecodes": [] },
+        { "title": "We Move Lightly", "artist": "Dustin O’Halloran", "url": "https://music.apple.com/us/song/1680109483", "timecodes": [] },
+        { "title": "Glass", "artist": "Hania Rani", "url": "https://music.apple.com/us/song/1578451932", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "glitch-ambient",
+      "compare": [
+        "recognizable source fragments against granular or digital break-up",
+        "irregular micro-events and interruptions against longer held beds",
+        "how the sound stays spacious when the surface becomes brittle or busy"
+      ],
+      "recordings": [
+        { "title": "Do While", "artist": "Oval", "url": "https://music.apple.com/us/song/5506827", "timecodes": [] },
+        { "title": "Sleep Dealer", "artist": "Oneohtrix Point Never", "url": "https://music.apple.com/us/song/1731378495", "timecodes": [] },
+        { "title": "Rivers of Sand", "artist": "Fennesz", "url": "https://music.apple.com/us/album/rivers-of-sand/77854229?i=77854194", "timecodes": [] },
+        { "title": "Xerrox Monophaser 1", "artist": "Alva Noto", "url": "https://music.apple.com/us/song/1511954774", "timecodes": [] },
+        { "title": "Xtal", "artist": "Aphex Twin", "url": "https://music.apple.com/us/song/1668862649", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "generative-ambient",
+      "compare": [
+        "short cells that keep running while their alignment and density change gradually",
+        "repetition without a conventional verse-chorus hook or continuously introduced new material",
+        "the way variation can come from independent part timing and slow phase drift"
+      ],
+      "recordings": [
+        { "title": "1/1", "artist": "Brian Eno", "url": "https://music.apple.com/us/song/724436237", "timecodes": [] },
+        { "title": "2/1", "artist": "Brian Eno", "url": "https://music.apple.com/us/song/724436318", "timecodes": [] },
+        { "title": "In C", "artist": "Terry Riley & Members of the Creative and Performing Arts at SUNY-Buffalo", "url": "https://music.apple.com/us/album/terry-riley-in-c/307564987", "timecodes": [] },
+        { "title": "Dlp 1.1", "artist": "William Basinski", "url": "https://music.apple.com/us/song/908005352", "timecodes": [] },
+        { "title": "Cascade", "artist": "William Basinski", "url": "https://music.apple.com/us/song/1683860966", "timecodes": [] },
+        { "title": "Meditation No. 1", "artist": "Laraaji", "url": "https://music.apple.com/us/song/714416730", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "cinematic-ambient",
+      "compare": [
+        "a recurring motif gaining scale through register, orchestration, and dynamic build",
+        "foreground piano or strings against a wide, slow-moving synthetic bed",
+        "how the climax releases and leaves a quieter, recognizable motif return"
+      ],
+      "recordings": [
+        { "title": "saman", "artist": "Ólafur Arnalds", "url": "https://music.apple.com/us/song/1390704156", "timecodes": [] },
+        { "title": "On the Nature of Daylight", "artist": "Max Richter", "url": "https://music.apple.com/us/song/1480784971", "timecodes": [] },
+        { "title": "Flight from the City (Edit)", "artist": "Jóhann Jóhannsson", "url": "https://music.apple.com/us/song/1452680691", "timecodes": [] },
+        { "title": "We Move Lightly", "artist": "Dustin O’Halloran", "url": "https://music.apple.com/us/song/1680109483", "timecodes": [] },
+        { "title": "Inception: Time (Orchestra Version, Live)", "artist": "Hans Zimmer & Vienna Radio Symphony Orchestra", "url": "https://music.apple.com/us/song/1477236065", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "downtempo-ambient",
+      "compare": [
+        "a restrained beat and rounded low end under patient melodic phrases",
+        "how the drums feel human and present without dominating the sound bed",
+        "sectional changes in bass, percussion, and texture that create a real groove arc"
+      ],
+      "recordings": [
+        { "title": "A Walk", "artist": "Tycho", "url": "https://music.apple.com/us/song/679251628", "timecodes": [] },
+        { "title": "Kiara", "artist": "Bonobo", "url": "https://music.apple.com/us/song/416292278", "timecodes": [] },
+        { "title": "Dayvan Cowboy", "artist": "Boards of Canada", "url": "https://music.apple.com/us/song/81696232", "timecodes": [] },
+        { "title": "Two Thousand and Seventeen", "artist": "Four Tet", "url": "https://music.apple.com/us/song/1288804817", "timecodes": [] },
+        { "title": "The Sea", "artist": "Morcheeba", "url": "https://music.apple.com/us/song/79671687", "timecodes": [] }
+      ]
+    }
+  ]
+}

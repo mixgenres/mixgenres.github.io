@@ -1,0 +1,88 @@
+{
+  "genreId": "afrobeats",
+  "reviewed": "2026-10-14",
+  "status": "Five linked streaming-track candidates are collected for all five Afrobeats styles. Listening, useful timecodes, and mix comparisons remain pending; candidate links do not establish sonic matching.",
+  "source": "Apple Music individual streaming-track pages. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "contemporary-afrobeats",
+      "compare": [
+        "the shaker subdivision against clipped offbeat guitar and the kick-snare pocket",
+        "how the bass anchors the vocal hook and answers in phrase gaps",
+        "vocal call-and-response, cadence ornaments, and the space left between them",
+        "how the refrain gains energy through added layers and phrase variation rather than constant density"
+      ],
+      "recordings": [
+        { "title": "Last Last", "artist": "Burna Boy", "url": "https://music.apple.com/us/song/1690132188", "timecodes": [] },
+        { "title": "Essence (feat. Tems)", "artist": "Wizkid", "url": "https://music.apple.com/us/song/1531532767", "timecodes": [] },
+        { "title": "Calm Down", "artist": "Rema", "url": "https://music.apple.com/us/song/1817652942", "timecodes": [] },
+        { "title": "Fall", "artist": "Davido", "url": "https://music.apple.com/us/song/1243164657", "timecodes": [] },
+        { "title": "Rush", "artist": "Ayra Starr", "url": "https://music.apple.com/us/song/1671674046", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "afropop",
+      "compare": [
+        "bright refrain melody over a syncopated, forward-moving bass line",
+        "how short guitar, keyboard, and percussion responses frame the lead vocal",
+        "the balance of buoyant pulse and relaxed vocal phrasing",
+        "how verse and hook change texture while keeping the dance groove clear"
+      ],
+      "recordings": [
+        { "title": "African Queen", "artist": "2Baba", "url": "https://music.apple.com/us/song/1638736953", "timecodes": [] },
+        { "title": "Johnny", "artist": "Yemi Alade", "url": "https://music.apple.com/us/song/1459277612", "timecodes": [] },
+        { "title": "Leg Over", "artist": "Mr Eazi", "url": "https://music.apple.com/us/song/1618091383", "timecodes": [] },
+        { "title": "Personally", "artist": "P-Square", "url": "https://music.apple.com/us/song/1616502820", "timecodes": [] },
+        { "title": "All Over", "artist": "Tiwa Savage", "url": "https://music.apple.com/us/song/1224996746", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "afrofusion",
+      "compare": [
+        "how the cross-rhythm hook combines with a stable bass-and-drum center",
+        "which local rhythmic and timbral layers remain audible through global pop production",
+        "how lead and response parts trade across contrasting sections",
+        "how bass, percussion, and chord attacks create forward motion without flattening the groove"
+      ],
+      "recordings": [
+        { "title": "Ye", "artist": "Burna Boy", "url": "https://music.apple.com/us/song/1695119253", "timecodes": [] },
+        { "title": "On the Low", "artist": "Burna Boy", "url": "https://music.apple.com/us/song/1471446273", "timecodes": [] },
+        { "title": "BROWN SKIN GIRL", "artist": "Beyoncé, SAINt JHN, Wizkid & Blue Ivy Carter", "url": "https://music.apple.com/us/song/1473487588", "timecodes": [] },
+        { "title": "Love Nwantiti (Ah Ah Ah)", "artist": "CKay", "url": "https://music.apple.com/us/song/1750479990", "timecodes": [] },
+        { "title": "Suzanna", "artist": "Sauti Sol", "url": "https://music.apple.com/us/song/1515392336", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "alte",
+      "compare": [
+        "sparse, displaced backbeat and negative space around the vocal",
+        "the character of nonstandard synth, guitar, and sampled timbres",
+        "how small production details replace a continuously busy accompaniment",
+        "section-to-section shifts in density, register, and vocal delivery"
+      ],
+      "recordings": [
+        { "title": "SAD GIRLZ LUV MONEY (feat. Moliy)", "artist": "Amaarae", "url": "https://music.apple.com/us/song/1534617610", "timecodes": [] },
+        { "title": "divine (feat. Davido)", "artist": "Odunsi (The Engine)", "url": "https://music.apple.com/us/song/1438442063", "timecodes": [] },
+        { "title": "Rapid Fire (feat. Shane Eagle, Amaarae & Tomi Agape)", "artist": "Santi", "url": "https://music.apple.com/us/song/1462393336", "timecodes": [] },
+        { "title": "Cash", "artist": "Lady Donli", "url": "https://music.apple.com/us/song/1504273548", "timecodes": [] },
+        { "title": "Angels in Tibet", "artist": "Amaarae", "url": "https://music.apple.com/us/song/1687186555", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "randb-afrobeats",
+      "compare": [
+        "melismatic lead phrases and breaths against short guitar or keyboard replies",
+        "the relationship between sub-bass, kick, and the lighter syncopated percussion",
+        "how vocal layers widen the refrain while the verse remains intimate",
+        "the use of held tones, runs, and deliberate gaps without overfilling the groove"
+      ],
+      "recordings": [
+        { "title": "Essence (feat. Tems)", "artist": "Wizkid", "url": "https://music.apple.com/us/song/1531532767", "timecodes": [] },
+        { "title": "KU LO SA", "artist": "Oxlade", "url": "https://music.apple.com/us/song/1649742695", "timecodes": [] },
+        { "title": "Peru", "artist": "Fireboy DML", "url": "https://music.apple.com/us/song/1633282378", "timecodes": [] },
+        { "title": "Free Mind", "artist": "Tems", "url": "https://music.apple.com/us/song/1532252603", "timecodes": [] },
+        { "title": "Damages", "artist": "Tems", "url": "https://music.apple.com/us/song/1532252919", "timecodes": [] }
+      ]
+    }
+  ]
+}

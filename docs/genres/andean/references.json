@@ -1,0 +1,90 @@
+{
+  "genreId": "andean",
+  "status": "Listening candidates only; none of these recordings have been auditioned or timecoded in this pass.",
+  "references": [
+    {
+      "styleId": "huayno",
+      "compare": ["duple dance pulse and charango/guitar attack", "quena statement-to-response spacing", "phrase-end fills", "how the fuga lifts the final stretch"],
+      "recordings": [
+        {"title":"Quisiera Olvidarte","artist":"La Pastorita Huaracina","url":"https://music.apple.com/us/song/1037973842","timecodes":[]},
+        {"title":"Río de Paria","artist":"El Jilguero de Huascaran","url":"https://music.apple.com/us/song/1037973826","timecodes":[]},
+        {"title":"Urpichallay","artist":"Conjunto Los Chancas De Apurimac","url":"https://music.apple.com/us/song/1037974114","timecodes":[]},
+        {"title":"Mis Quejas","artist":"Conjunto Los Chancas De Apurimac","url":"https://music.apple.com/us/song/1037974117","timecodes":[]},
+        {"title":"Carnaval Cristalchay","artist":"Conjunto Musical Amauta","url":"https://music.apple.com/us/song/1037974087","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "sanjuanito",
+      "compare": ["even duple dance feel", "flute and plucked-string phrase handoffs", "compact instrumental breaks", "cadence and return of the A strain"],
+      "recordings": [
+        {"title":"Pobre Corazón (Sanjuanito Version)","artist":"Rumiñahui","url":"https://music.apple.com/us/album/pobre-coraz%C3%B3n-sanjuanito-version/484875086?i=484875528","timecodes":[]},
+        {"title":"Longuita Imbabureña (Sanjuanito Version)","artist":"Rumiñahui","url":"https://music.apple.com/us/album/longuita-imbabure%C3%B1a-sanjuanito-version/484875086?i=484875522","timecodes":[]},
+        {"title":"Carabuela (Sanjuanito Version)","artist":"Rumiñahui","url":"https://music.apple.com/us/album/carabuela-sanjuanito-version/484875086?i=484875779","timecodes":[]},
+        {"title":"Ponchito Negro (Sanjuanito)","artist":"Los Huayanay","url":"https://music.apple.com/us/song/405518789","timecodes":[]},
+        {"title":"Sanjuanito de Pujili","artist":"Arturo y Ricardo Aguirre y Jorge Yepez","url":"https://music.apple.com/us/song/251328389","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "saya",
+      "compare": ["bombo-led groove and subdivision", "percussion-to-flute call and answer", "vocal space and response length", "instrument balance during full refrains"],
+      "recordings": [
+        {"title":"Llorando Se Fue","artist":"Los Kjarkas","url":"https://music.apple.com/pe/song/640062996","timecodes":[]},
+        {"title":"Saya Sensual","artist":"Los Kjarkas","url":"https://music.apple.com/us/song/1548608177","timecodes":[]},
+        {"title":"Saya Morena","artist":"Los Kjarkas","url":"https://music.apple.com/us/song/1166233058","timecodes":[]},
+        {"title":"Saya Cordillera","artist":"Los Kjarkas","url":"https://music.apple.com/us/song/1523889235","timecodes":[]},
+        {"title":"Saya Bonita","artist":"Los Kjarkas","url":"https://music.apple.com/us/song/1521760897","timecodes":[]},
+        {"title":"Saya de San Andrés","artist":"Los Kjarkas","url":"https://music.apple.com/us/song/1225384591","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "tinku",
+      "compare": ["heavy bombo accents and dancer-like stomp", "charango and flute against the drum anchor", "break-to-ensemble return", "recorded band energy and low-end weight"],
+      "recordings": [
+        {"title":"Tinku","artist":"Los Kjarkas","url":"https://music.apple.com/us/song/1512844554","timecodes":[]},
+        {"title":"Tinku","artist":"Bolivian Jazz","url":"https://music.apple.com/us/song/1288204081","timecodes":[]},
+        {"title":"Tinku","artist":"Les Groupes Folkloriques De Musique Des Andes","url":"https://music.apple.com/bo/song/216277714","timecodes":[]},
+        {"title":"Tinku Huacha Calla (Tinku)","artist":"Grupo Lasser","url":"https://music.apple.com/bo/song/1601449742","timecodes":[]},
+        {"title":"Ñañitay (Tinku)","artist":"Grupo Raq'aypampa","url":"https://music.apple.com/us/song/1777600024","timecodes":[]},
+        {"title":"Tuna Papita","artist":"Los Kjarkas","url":"https://music.apple.com/us/song/1548643091","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "carnavalito",
+      "compare": ["repeating charango dance figure", "quena/siku alternate phrases", "bombo weight under the group dance", "phrase variation without losing the cycle"],
+      "recordings": [
+        {"title":"El Humahuaqueño","artist":"Tomás Lipán","url":"https://music.apple.com/us/song/1753103656","timecodes":[]},
+        {"title":"Carnavalito","artist":"Los Incas","url":"https://music.apple.com/us/song/647430758","timecodes":[]},
+        {"title":"CARNAVALITO / EL HUMAHUAQUEÑO","artist":"Los Atipak","url":"https://music.apple.com/us/song/1250364017","timecodes":[]},
+        {"title":"El Humahuaqueño (Carnavalito)","artist":"Los Angeles Del Paraguay","url":"https://music.apple.com/es/song/1397946296","timecodes":[]},
+        {"title":"El huamahuaqueño (Carnavalito)","artist":"Conjunto Folklorico Peruano, Yma Sumac & Moises Vivanco","url":"https://music.apple.com/cl/song/1521529523","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "nueva-cancion",
+      "compare": ["lyric-led verse phrasing and acoustic accompaniment", "instrumental replies between vocal lines", "chorus lift and collective refrain", "arrangement restraint and dynamic build"],
+      "recordings": [
+        {"title":"Gracias a la vida","artist":"Violeta Parra","url":"https://music.apple.com/us/song/1717666323","timecodes":[]},
+        {"title":"Te Recuerdo Amanda","artist":"Victor Jara","url":"https://music.apple.com/us/song/570834014","timecodes":[]},
+        {"title":"El pueblo unido jamás será vencido","artist":"Quilapayún","url":"https://music.apple.com/us/song/51233098","timecodes":[]},
+        {"title":"Plegaria a un Labrador","artist":"Quilapayún","url":"https://music.apple.com/us/song/1138777551","timecodes":[]},
+        {"title":"La Muralla","artist":"Quilapayún","url":"https://music.apple.com/us/song/1822604612","timecodes":[]},
+        {"title":"Alturas","artist":"Inti-Illimani","url":"https://music.apple.com/us/song/216458181","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "andean-fusion",
+      "compare": ["electronic cumbia pocket against the Andean melodic phrase", "bass placement and drum backbeat", "organic instruments against synth color", "foreground clarity in vocal and instrumental sections"],
+      "recordings": [
+        {"title":"Ilaló (feat. Mateo Kingman)","artist":"Chancha Vía Circuito","url":"https://music.apple.com/us/album/ilal%C3%B3-feat-mateo-kingman-single/1645654420","timecodes":[]},
+        {"title":"La Victoria (feat. Lido Pimienta & Manu Ranks)","artist":"Chancha Vía Circuito","url":"https://music.apple.com/us/song/1645654597","timecodes":[]},
+        {"title":"Coplita","artist":"Chancha Vía Circuito & Miriam García","url":"https://music.apple.com/us/song/911592480","timecodes":[]},
+        {"title":"Kawa Kawa (feat. Kaleema)","artist":"Chancha Vía Circuito","url":"https://music.apple.com/us/song/1645654598","timecodes":[]},
+        {"title":"Sueño en Paraguay","artist":"Chancha Vía Circuito","url":"https://music.apple.com/us/song/911592476","timecodes":[]},
+        {"title":"Jardines","artist":"Chancha Vía Circuito & Lido Pimienta","url":"https://music.apple.com/us/song/911592477","timecodes":[]}
+      ]
+    }
+  ],
+  "reviewed": "2026-10-14",
+  "source": "Apple Music track pages and artist/album metadata were checked for candidate identity. The technical/source notes in this audit informed the style distinctions. Audio has not been downloaded or auditioned, and no timecodes are claimed.",
+  "status": "Six or more linked listening candidates are recorded for each of the seven Andean styles. Listening, timecodes and final sample comparison remain pending."
+}

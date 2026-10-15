@@ -1,0 +1,300 @@
+{
+  "genreId": "afrobeat",
+  "reviewed": "2026-10-14",
+  "status": "Five distinct streaming track candidates are collected for all seven Afrobeat styles. Listening, useful timecodes, and mix comparisons remain pending; candidates are not verified sonic matches, and no reference audio was downloaded.",
+  "source": "Apple Music individual track pages and displayed artist/release metadata, plus the official Antibalas Bandcamp stream for one Modern Revival candidate. These are listening candidates, not verified note-for-note transcriptions.",
+  "styles": [
+    {
+      "styleId": "classic-afrobeat",
+      "compare": [
+        "how guitar, bass, drum kit, and hand percussion interlock without masking one another",
+        "how the groove develops before and under the horn theme",
+        "the contrast between instrumental lead passages and vocal call-and-response",
+        "the weight and attack of the bass and kick against the clipped guitar and organ parts",
+        "how horn and rhythm-section figures mark transitions while preserving the long groove"
+      ],
+      "recordings": [
+        {
+          "title": "Gentleman",
+          "artist": "Fela Kuti",
+          "url": "https://music.apple.com/us/song/1783205716",
+          "timecodes": []
+        },
+        {
+          "title": "Expensive Shit",
+          "artist": "Fela Kuti & Africa 70",
+          "url": "https://music.apple.com/us/song/1535125268",
+          "timecodes": []
+        },
+        {
+          "title": "Zombie",
+          "artist": "Fela Kuti & Afrika 70",
+          "url": "https://music.apple.com/us/song/1783188085",
+          "timecodes": []
+        },
+        {
+          "title": "Sorrow Tears and Blood",
+          "artist": "Fela Kuti",
+          "url": "https://music.apple.com/us/song/550743475",
+          "timecodes": []
+        },
+        {
+          "title": "Shakara (Oloje)",
+          "artist": "Fela Kuti & Afrika 70",
+          "url": "https://music.apple.com/us/song/1783198583",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "highlife",
+      "compare": [
+        "the bright guitar cross accents against the steady bell timeline",
+        "how bass and hand percussion keep the dance pulse buoyant",
+        "the balance between horn statements, vocal phrases, and instrumental replies",
+        "how repeated figures change at phrase boundaries without losing the lilt"
+      ],
+      "recordings": [
+        {
+          "title": "All for You",
+          "artist": "E.T. Mensah & The Tempos",
+          "url": "https://music.apple.com/us/song/953680259",
+          "timecodes": []
+        },
+        {
+          "title": "Makoma",
+          "artist": "E.T. Mensah & The Tempos",
+          "url": "https://music.apple.com/gb/song/953680225",
+          "timecodes": []
+        },
+        {
+          "title": "Joromi",
+          "artist": "Sir Victor Uwaifo",
+          "url": "https://music.apple.com/us/song/314253686",
+          "timecodes": []
+        },
+        {
+          "title": "So Ala Temen",
+          "artist": "Cardinal Rex Jim Lawson",
+          "url": "https://music.apple.com/us/song/176644335",
+          "timecodes": []
+        },
+        {
+          "title": "Adwoa Yankey",
+          "artist": "C.K. Mann",
+          "url": "https://music.apple.com/us/song/1755549614",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "palm-wine",
+      "compare": [
+        "the fingerpicked guitar figure, its chord changes, and answering fills",
+        "how the voice and guitar trade phrases without crowding one another",
+        "the gentle, danceable pulse from bass and hand percussion",
+        "how a repeated guitar groove changes under the storyteller's verses"
+      ],
+      "recordings": [
+        {
+          "title": "My Lovely Elizabeth",
+          "artist": "S.E. Rogie",
+          "url": "https://music.apple.com/tz/song/1653166029",
+          "timecodes": []
+        },
+        {
+          "title": "Recipe for Truth and Lasting Happiness",
+          "artist": "S.E. Rogie",
+          "url": "https://music.apple.com/us/song/428954489",
+          "timecodes": []
+        },
+        {
+          "title": "Adowa Palm-Wine Set",
+          "artist": "Koo Nimo",
+          "url": "https://music.apple.com/gh/song/1270298907",
+          "timecodes": []
+        },
+        {
+          "title": "Integrity (The Cat and the Dog)",
+          "artist": "Koo Nimo",
+          "url": "https://music.apple.com/gb/song/536622061",
+          "timecodes": []
+        },
+        {
+          "title": "Dabre Obia Awuo",
+          "artist": "Koo Nimo",
+          "url": "https://music.apple.com/us/song/118683749",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "juju",
+      "compare": [
+        "the interlocking lead and rhythm guitar phrases, including high-register replies",
+        "how the bass locks to a buoyant percussion pulse without flattening the guitar motion",
+        "the distinct talking-drum conversation and its phrase-ending fills",
+        "how vocal phrases leave room for instrumental and talking-drum answers",
+        "how the band opens up and closes a long dance groove"
+      ],
+      "recordings": [
+        {
+          "title": "Ja Funmi",
+          "artist": "King Sunny Ade",
+          "url": "https://music.apple.com/us/song/1631642983",
+          "timecodes": []
+        },
+        {
+          "title": "Synchro System",
+          "artist": "King Sunny Ade",
+          "url": "https://music.apple.com/us/song/1631642978",
+          "timecodes": []
+        },
+        {
+          "title": "365 Is My Number / The Message",
+          "artist": "King Sunny Ade",
+          "url": "https://music.apple.com/us/song/1442454450",
+          "timecodes": []
+        },
+        {
+          "title": "Sunny Ti De Ariya",
+          "artist": "King Sunny Ade",
+          "url": "https://music.apple.com/us/song/1631642994",
+          "timecodes": []
+        },
+        {
+          "title": "Ma Jaiye Oni",
+          "artist": "King Sunny Ade",
+          "url": "https://music.apple.com/us/song/1631643003",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "funk-heavy-afrobeat",
+      "compare": [
+        "the dry, clipped guitar and tight bass/kick lock",
+        "how drum kit, congas, and shekere keep separate interlocking motions",
+        "the horn theme’s short ensemble attacks and instrumental feature handoffs",
+        "how the vocal rests against a persistent groove rather than covering every phrase",
+        "the rise from pocket to horn chorus and the force of the final return"
+      ],
+      "recordings": [
+        {
+          "title": "Expensive Shit",
+          "artist": "Fela Kuti & Africa 70",
+          "url": "https://music.apple.com/us/song/1535125268",
+          "timecodes": []
+        },
+        {
+          "title": "Roforofo Fight",
+          "artist": "Fela Kuti",
+          "url": "https://music.apple.com/us/album/roforofo-fight/1783205871?i=1783205894",
+          "timecodes": []
+        },
+        {
+          "title": "Yellow Fever",
+          "artist": "Fela Kuti & Afrika 70",
+          "url": "https://music.apple.com/us/song/1783175061",
+          "timecodes": []
+        },
+        {
+          "title": "I.T.T. (International Thief Thief) [Edit]",
+          "artist": "Fela Kuti",
+          "url": "https://music.apple.com/us/song/1783176806",
+          "timecodes": []
+        },
+        {
+          "title": "Let’s Start (Live)",
+          "artist": "Fela Kuti",
+          "url": "https://music.apple.com/us/song/1783198880",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "jazz-heavy-afrobeat",
+      "compare": [
+        "the way extended harmony sits over a stable, cyclical bass-and-drum ostinato",
+        "the electric piano’s comping and phrase answers around the horn head",
+        "independent saxophone and trumpet lead phrases over the same groove",
+        "the density and articulation of the layered percussion",
+        "how a short rhythm-section break clears the texture before the head returns"
+      ],
+      "recordings": [
+        {
+          "title": "Confusion (Parts 1 & 2)",
+          "artist": "Fela Kuti & Afrika 70",
+          "url": "https://felakuti.bandcamp.com/track/confusion-parts-1-2",
+          "timecodes": []
+        },
+        {
+          "title": "He Miss Road",
+          "artist": "Fela Kuti",
+          "url": "https://music.apple.com/us/song/738946074",
+          "timecodes": []
+        },
+        {
+          "title": "Monday Morning In Lagos",
+          "artist": "Fela Kuti",
+          "url": "https://music.apple.com/us/song/738946079",
+          "timecodes": []
+        },
+        {
+          "title": "Gentleman",
+          "artist": "Fela Kuti",
+          "url": "https://music.apple.com/us/song/1783205716",
+          "timecodes": []
+        },
+        {
+          "title": "Let’s Start (Live)",
+          "artist": "Fela Kuti",
+          "url": "https://music.apple.com/us/song/1783198880",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "modern-revival",
+      "compare": [
+        "how a compact bass-and-drum figure expands into a layered ensemble arrangement",
+        "the punch, width, and balance of modern horn and rhythm-section production",
+        "the contrast between the lean vocal verse and the wider chorus",
+        "how organ, guitar, and percussion add syncopation without masking the bass line",
+        "the return of the main figure and the shape of the closing section"
+      ],
+      "recordings": [
+        {
+          "title": "Government Magic",
+          "artist": "Antibalas",
+          "url": "https://music.apple.com/us/song/435774127",
+          "timecodes": []
+        },
+        {
+          "title": "War Is a Crime",
+          "artist": "Antibalas",
+          "url": "https://music.apple.com/us/song/1315069085",
+          "timecodes": []
+        },
+        {
+          "title": "La Ceiba",
+          "artist": "Antibalas",
+          "url": "https://music.apple.com/us/song/1837240784",
+          "timecodes": []
+        },
+        {
+          "title": "Uprising",
+          "artist": "Antibalas",
+          "url": "https://music.apple.com/us/song/416337293",
+          "timecodes": []
+        },
+        {
+          "title": "Dirt and Blood",
+          "artist": "Antibalas",
+          "url": "https://antibalas.bandcamp.com/track/dirt-and-blood",
+          "timecodes": []
+        }
+      ]
+    }
+  ]
+}

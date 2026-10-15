@@ -26,13 +26,13 @@ const habanera = (instrument: string, role: string) => cell('Habanera dotted eig
 
 const pedagogy: Record<string, { description: string; patterns: string[] }> = {
   'golden-age': { description: 'Dance-orchestra tango: keep marcato en cuatro steady, let violin and bandoneon trade the tune, and save a short variation for the close.', patterns: ['Marcato en cuatro', 'Violin answer', 'Bandoneon variation'] },
-  canyengue: { description: 'Early tango in a clipped two-beat feel: keep the attacks dry, the bass bouncing, and the phrases compact.', patterns: ['Canyengue bounce', 'Clipped phrase', 'Habanera bass'] },
+  canyengue: { description: 'Early tango in a clipped two-beat feel: keep the attacks dry, the bass bouncing, the bandoneon phrases compact, and drag the low note into the closing tonic.', patterns: ['Canyengue phrase', 'Clipped phrase', 'Habanera bass', 'Bass drag'] },
   'guardia-nueva-de-caro': { description: 'De Caro opens the ensemble texture: the violin carries independent counterlines while piano and bandoneon answer between phrases.', patterns: ['Violin counterline', 'Bandoneon answer', 'Chromatic link'] },
   canaro: { description: 'Canaro favors clear dance strains, an even pulse and direct melodic returns; keep fills short so the refrain stays easy to follow.', patterns: ['Dance marcato', 'Clear refrain', 'Short fill'] },
-  darienzo: { description: 'D’Arienzo turns the pulse into propulsion: hard piano marcato, clipped bandoneon attacks and sharp stop-time breaks.', patterns: ['Hard marcato', 'Staccato bandoneon', 'Stop-time break'] },
+  darienzo: { description: 'D’Arienzo turns the pulse into propulsion: hard piano marcato, clipped bandoneon attacks and sharp parada stops.', patterns: ['Hard marcato', 'Staccato bandoneon', 'Parada'] },
   'di-sarli': { description: 'Di Sarli pairs a rolling, even piano pulse with broad violin melody; preserve the legato line and leave the accompaniment settled underneath.', patterns: ['Lyrical violin', 'Rolling piano', 'Even bass'] },
-  troilo: { description: 'Troilo gives the bandoneon a vocal, breathing line; use flexible phrase endings and let the violin answer rather than doubling every note.', patterns: ['Singing bandoneon', 'Violin answer', 'Flexible ending'] },
-  pugliese: { description: 'Pugliese shapes time with weighted yumba attacks, meaningful silences and a slow ensemble crescendo into the returning theme.', patterns: ['Yumba', 'Dramatic rest', 'Long crescendo'] },
+  troilo: { description: 'Troilo gives the bandoneon a vocal, breathing line; leave a clear breath at the end of the phrase and let the violin answer rather than doubling every note.', patterns: ['Singing bandoneon', 'Bandoneon breath', 'Violin answer'] },
+  pugliese: { description: 'Pugliese shapes time with weighted yumba attacks, meaningful silences and a slow ensemble crescendo, then separates the two closing hits with a final pocket of air.', patterns: ['Yumba', 'Dramatic rest', 'Long crescendo', 'Chan-chan close'] },
   salgan: { description: 'Salgán builds a dancing piano groove with umpa-umpa bass, syncopated inner voices and a piano-led feature.', patterns: ['Umpa-umpa piano', 'Inner counterpoint', 'Piano feature'] },
   'tango-cancion': { description: 'Tango canción puts the sung line first: use sparse chords under the verse and answer the vocal cadence with bandoneon.', patterns: ['Vocal phrase', 'Sparse chords', 'Bandoneon reply'] },
   milonga: { description: 'Milonga moves in quick two-beat phrases over a habanera-derived bass; keep the groove light and the refrain returns clear.', patterns: ['Habanera bass', 'Two-beat bounce', 'Short refrain'] },
@@ -88,6 +88,7 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
     const beats = Number(style.meter.split('/')[0]) * 4 / Number(style.meter.split('/')[1]);
     const electronic = id === 'electrotango-gotan' || id === 'electro-rock-bajofondo';
     let lines: AuthoredCell[];
+    let canyengueDrag: AuthoredCell | undefined;
     if (beats === 2) {
       lines = [line('bandoneon', 'Clipped two-bar milonga motif', [0, .5, .75, 1.5, 2, 2.75, 3, 3.5], [1, 3, 5, 3, 4, 3, 2, 1], [.35, .18, .55, .35, .55, .18, .35, .35], 'staccato'),
         line('violin', 'Milonga violin answer', [1, 1.5, 2.5, 3, 3.5], [5, 3, 4, 2, 1], [.35, .35, .35, .35, .35], 'staccato')];
@@ -106,14 +107,73 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
     } else {
       const lyrical = ['di-sarli', 'troilo', 'guardia-nueva-de-caro'].includes(id);
       const urgent = id === 'darienzo';
-      lines = [line('bandoneon', lyrical ? 'Singing bandoneon sentence' : 'Marcato motif with a contrasting answer',
+      const bandoneonPhrase = line('bandoneon', lyrical ? 'Singing bandoneon sentence' : 'Marcato motif with a contrasting answer',
         lyrical ? [0, 1.5, 2, 3, 4, 5.5, 6.5, 7] : [0, .5, 1, 2, 2.5, 3, 4, 5.5, 6, 7],
         lyrical ? [1, 3, 5, 3, 4, 3, 2, 1] : [1, 3, 5, 4, 3, 2, 5, 4, 2, 1],
         lyrical ? [1.3, .4, .8, .8, 1.3, .8, .4, .8] : [.35, .35, .75, .35, .35, .7, 1.25, .35, .75, .75],
-        urgent ? 'staccato' : lyrical ? 'tenuto' : 'marcato'),
+        urgent ? 'staccato' : lyrical ? 'tenuto' : 'marcato');
+      if (id === 'troilo') {
+        // A little written push and pull gives the cantando line expressive
+        // fraseo while piano and bass keep the dance pulse underneath it.
+        bandoneonPhrase.microtiming = [0, 24, -12, 32, -18, 22, -8, 10];
+        bandoneonPhrase.description = 'Shape the two-bar cantando phrase with a gentle push and pull against the steadier piano and bass; keep the notes connected, then leave room for the violin answer.';
+      }
+      lines = [bandoneonPhrase,
         line('violin', lyrical ? 'Long bowed countermelody' : 'Bowed answering phrase',
           lyrical ? [0, 2, 4, 6] : [1.5, 3, 4.5, 5, 6, 7], lyrical ? [5, 3, 4, 2] : [5, 3, 4, 3, 2, 1],
         lyrical ? [1.8, 1.8, 1.8, 1.8] : [1.25, .75, .4, .75, .75, .75])];
+    }
+    if (id === 'troilo') {
+      const breath = line('bandoneon', 'Troilo line-ending breath', [0, 1.5, 2, 3, 4, 5.5, 6.5],
+        [1, 3, 5, 3, 4, 3, 2], [1.3, .4, .8, .8, 1.3, .8, .38], 'tenuto');
+      breath.microtiming = [0, 24, -12, 32, -18, 22, -8];
+      breath.shortName = 'Bandoneon breath';
+      breath.difficulty = 2;
+      breath.description = 'Shape the two-bar cantando line with a gentle push and pull, then release the last tone early and leave the final beat open before the next phrase.';
+      lines.push(breath);
+    }
+    if (id === 'milonga') {
+      // A short double-time turn makes this sample demonstrate traspié as an
+      // optional phrase interpretation while the habanera accompaniment keeps
+      // the underlying milonga pulse clear. It is a playable study gesture,
+      // not a fixed transcription or a replacement for the main melody.
+      const traspie = line('bandoneon', 'Milonga traspié double-time turn',
+        [0, .5, 1, 1.25, 1.5, 2, 2.5, 3, 3.25, 3.5],
+        [1, 3, 5, 4, 3, 4, 2, 5, 3, 1],
+        [.34, .28, .18, .16, .3, .34, .28, .18, .16, .3], 'staccato');
+      traspie.shortName = 'Milonga traspié';
+      traspie.sectionUsage = ['traspie'];
+      traspie.difficulty = 2;
+      traspie.description = 'Keep the habanera pulse steady underneath; add a brief double-time pickup on the second beat, then settle back into the regular milonga phrase.';
+      traspie.accents = [1, .55, .82, .48, .72, 1, .55, .82, .48, .72];
+      lines.push(traspie);
+    }
+    if (id === 'canyengue') {
+      const phrase = line('bandoneon', 'Canyengue clipped two-bar call', [0, .5, 1, 1.5, 2, 2.5, 3, 3.5],
+        [1, 5, 3, 1, 4, 2, 5, 1], [.22, .28, .42, .22, .22, .38, .22, .42], 'staccato');
+      phrase.shortName = 'Canyengue phrase';
+      phrase.description = 'Shape four clipped calls over two 2/4 bars, alternating a strong downbeat with short pickup strokes; keep the small-group bounce dry.';
+      const clipped = line('bandoneon', 'Canyengue syncopated phrase turn', [0, .75, 1.5, 2, 2.75, 3.5],
+        [1, 3, 5, 4, 2, 1], [.26, .2, .42, .26, .2, .48], 'staccato');
+      clipped.shortName = 'Clipped phrase';
+      clipped.description = 'Use a six-note syncopated turn to vary the main call; accent the long chord tone and leave the last pickup light.';
+      const drag = cell('Canyengue bass arrastre into tonic', 'bass', 'upright-bass', [1.75], [.25],
+        'arrastre', [pitch(7, 40)], [1]);
+      drag.shortName = 'Bass drag';
+      drag.difficulty = 2;
+      drag.description = 'On the last sixteenth of the 2/4 bar, draw the dominant leading tone into the next downbeat; keep the gesture short and let the tonic land cleanly.';
+      lines = [phrase, clipped, ...lines.filter(item => item.instruments?.[0] !== 'bandoneon')];
+      canyengueDrag = drag;
+    }
+    if (id === 'piazzolla-nuevo-tango') {
+      // One accented leading tone drags into the returning hook. The sample
+      // assigns this cell only to its one-bar transition, not every phrase.
+      const pickup = cell('Nuevo tango bandoneon arrastre pickup', 'lead', 'bandoneon', [3.75], [.25],
+        'arrastre', [pitch(7, 65)], [1]);
+      pickup.shortName = 'Bandoneon drag';
+      pickup.difficulty = 3;
+      pickup.description = 'Play one accented leading tone on the last sixteenth, sliding into the next bar’s returning hook.';
+      lines.push(pickup);
     }
     if (id === 'canaro') {
       const refrain = line('bandoneon', 'Canaro refrain motif', [0, .5, 1.5, 2, 3, 3.5], [1, 3, 5, 4, 2, 1], [.3, .3, .6, .3, .3, .5], 'staccato', 1);
@@ -157,6 +217,15 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
     else if (id === 'chacarera-crossover') accompaniment = [cell('Guitar hemiola against compound bombo', 'harmony', 'guitar', [0, 1, 2], [.4, .4, .4], 'staccato', [chord, chord, chord]),
       { ...bass([0, 1.5], [.7, .7], [1, 5], 'bass'), articulation: 'staccato' }, cell('Bombo compound pulse and cross-accent', 'percussion', 'bombo-leguero', [0, .5, 1, 1.5, 2, 2.5], [.15, .15, .15, .15, .15, .15], 'accent', undefined, [1, .45, .8, 1, .8, .45])];
     else accompaniment = [marcato('piano', id === 'darienzo' ? [1, .9, 1, .9] : id === 'golden-age' ? [1, .62, .94, .62] : undefined), bass()];
+    if (canyengueDrag) accompaniment.push(canyengueDrag);
+    if (id === 'piazzolla-nuevo-tango') {
+      const bassPickup = cell('Nuevo tango bass arrastre pickup', 'bass', 'upright-bass', [3.75], [.25],
+        'arrastre', [pitch(7, 40)], [1]);
+      bassPickup.shortName = 'Bass drag';
+      bassPickup.difficulty = 3;
+      bassPickup.description = 'Drag one accented leading tone into the next bar’s downbeat; keep it to the written transition.';
+      accompaniment.push(bassPickup);
+    }
     if (id === 'canaro') {
       const pickup = cell('Canaro piano pickup', 'harmony', 'piano', [0, 1.5, 2.5, 3.5], [.55, .4, .4, .3], 'staccato',
         [chord, chord, chord, chord], [1, .65, .8, .55]);
@@ -168,6 +237,70 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
         [chord, chord, chord, chord], [.82, .55, .74, .48]);
       pickup.shortName = 'Piano pickup';
       accompaniment.push(pickup);
+    }
+    if (id === 'darienzo') {
+      const syncopaBurst = cell('D’Arienzo three-hit syncopa burst', 'lead', 'bandoneon',
+        [.75, 1.75, 2.75], [.22, .22, .22], 'staccato', [pitch(3, 65), pitch(4, 65), pitch(5, 65)], [1, .72, .9]);
+      syncopaBurst.shortName = 'Síncopa burst';
+      syncopaBurst.sectionUsage = ['syncopa-burst'];
+      syncopaBurst.difficulty = 2;
+      syncopaBurst.description = 'Play three crisp offbeat attacks against the steady four-beat marcato; release each pickup cleanly so the following downbeat stays clear.';
+      lines.push(syncopaBurst);
+
+      const parada = (instrument: string, role: string, note: PatternEvent['pitch']): AuthoredCell => {
+        const hit = cell('D’Arienzo parada: clipped downbeat then rest', role, instrument, [0], [.18], 'staccato', [note], [1]);
+        hit.shortName = 'Parada hit';
+        hit.sectionUsage = ['parada'];
+        hit.difficulty = 1;
+        hit.description = 'Strike one short, accented downbeat with the ensemble, release it cleanly, and keep the remaining beats empty until the next theme enters.';
+        return hit;
+      };
+      // A parada is a punctuated stop: the orchestra lands together, then the
+      // notated space carries the tension. It is distinct from Pugliese’s bar
+      // of complete silence and keeps a playable ensemble cue in this sample.
+      lines.push(parada('bandoneon', 'lead', pitch(1, 65)), parada('violin', 'lead', pitch(1, 74)));
+      accompaniment.push(parada('piano', 'harmony', chord), parada('upright-bass', 'bass', pitch(1, 40)));
+    }
+    if (id === 'pugliese') {
+      // The sample's last bar is a separated two-hit signoff. Keep this cue
+      // local to the ending so its long silence does not become a looped groove.
+      const cadenceLine = (instrument: string, degrees: number[], durations: number[]) => {
+        const close = line(instrument, 'Pugliese chan-chan close: two separated attacks', [0, 2.5], degrees, durations, 'staccato', 1);
+        close.shortName = 'Chan-chan close';
+        close.difficulty = 2;
+        close.description = 'Land the tonic close in two short ensemble attacks, then leave the remaining beat empty; make the space between hits audible.';
+        close.accents = [1, .58];
+        close.articulations = ['marcato', 'staccato'];
+        return close;
+      };
+      lines.push(cadenceLine('bandoneon', [5, 1], [.48, .28]));
+      lines.push(cadenceLine('violin', [7, 1], [.48, .28]));
+      const pianoClose = cell('Pugliese chan-chan close: two separated attacks', 'harmony', 'piano', [0, 2.5], [.48, .28], 'staccato', [chord, chord], [1, .58]);
+      pianoClose.shortName = 'Chan-chan close';
+      pianoClose.difficulty = 2;
+      pianoClose.description = 'Strike a weighty first chord, answer it softly after the long gap, and release into the final silence.';
+      pianoClose.articulations = ['yumba', 'staccato'];
+      const bassClose = cell('Pugliese chan-chan close: two separated attacks', 'bass', 'upright-bass', [0, 2.5], [.38, .24], 'pizzicato',
+        [pitch(5, 40), pitch(1, 40)], [1, .58]);
+      bassClose.shortName = 'Chan-chan close';
+      bassClose.difficulty = 2;
+      bassClose.description = 'Anchor the two separated ensemble attacks on dominant then tonic; leave the final beat silent.';
+      accompaniment.push(pianoClose, bassClose);
+    }
+    if (id === 'modern-orquesta') {
+      const tuttiHit = (instrument: string, role: string, note: PatternEvent['pitch']) => {
+        const hit = cell('Modern orquesta coordinated tutti hit', role, instrument, [0], [.2], 'marcato', [note], [1]);
+        hit.shortName = 'Tutti hit';
+        hit.sectionUsage = ['tutti-hit'];
+        hit.difficulty = 2;
+        hit.description = 'Strike one short, accented tone or chord together after the full-bar corte, release cleanly, then open into the longer variation.';
+        return hit;
+      };
+      // The modern-orquesta sample uses the catalog's dynamic-block vocabulary:
+      // an actual full-ensemble cut, one coordinated re-entry, then a longer
+      // variation. Keep this attack local to its one-bar cue.
+      lines.push(tuttiHit('bandoneon', 'lead', pitch(1, 65)), tuttiHit('violin', 'lead', pitch(1, 74)));
+      accompaniment.push(tuttiHit('piano', 'harmony', chord), tuttiHit('upright-bass', 'bass', pitch(1, 40)));
     }
     if (['golden-age', 'guardia-nueva-de-caro', 'canaro', 'darienzo', 'troilo', 'modern-orquesta'].includes(id)) {
       // Keep the piano's marcato downbeats crisp while a picked/arco bass
@@ -186,8 +319,16 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
     if (dialects['piano:harmony']) dialects['piano:harmony'] = { ...dialects['piano:harmony'], allowedTechniques: techniques.piano };
     const cells = [...lines, ...accompaniment].map(item => ({ ...item, shortName: conciseCellLabel(id, item) }));
     const authored = pedagogy[id];
+    const mix = id === 'canyengue' ? {
+      ...style.mix,
+      character: { ...style.mix.character, dryness: .76, bassForward: .58, width: .34, transientSnap: .84 },
+      ...(style.mix.stage ? { stage: {
+        ...style.mix.stage, width: .34, depthRange: .28,
+        roleWidth: { ...style.mix.stage.roleWidth, lead: .14, harmony: .38, bass: .12 },
+      } } : {}),
+    } : style.mix;
     return { ...style, ...(authored ? { description: authored.description, patterns: authored.patterns } : {}),
-      cells, instrumentTechniques: techniques, instrumentDialects: dialects,
+      cells, instrumentTechniques: techniques, instrumentDialects: dialects, mix,
       bassMotion: 'root-fifth', groove: { ...style.groove, swingPercentage: 50 } };
   }) };
 }

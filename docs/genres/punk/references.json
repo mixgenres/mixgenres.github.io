@@ -1,0 +1,88 @@
+{
+  "genreId": "punk",
+  "reviewed": "2026-10-14",
+  "status": "Five linked streaming-track candidates are collected for all five Punk styles. Listening, useful timecodes, and mix comparisons remain pending; candidate links do not establish sonic matching.",
+  "source": "Apple Music individual streaming-track pages. No reference audio downloaded or auditioned.",
+  "styles": [
+    {
+      "styleId": "punk",
+      "compare": [
+        "the insistent downstroke or eighth-note guitar against a steady, uncluttered backbeat",
+        "whether bass reinforces the riff or moves melodically between its chord roots",
+        "short song form, count-in or pickup, and abrupt phrase endings",
+        "raw band presence and clear separation of guitar, bass, drums, and vocal"
+      ],
+      "recordings": [
+        { "title": "Blitzkrieg Bop", "artist": "Ramones", "url": "https://music.apple.com/us/song/312355531", "timecodes": [] },
+        { "title": "White Riot", "artist": "The Clash", "url": "https://music.apple.com/us/song/647246440", "timecodes": [] },
+        { "title": "Ever Fallen In Love (With Someone You Shouldn't've)", "artist": "Buzzcocks", "url": "https://music.apple.com/us/song/1436345394", "timecodes": [] },
+        { "title": "Anarchy In the U.K.", "artist": "Sex Pistols", "url": "https://music.apple.com/us/song/266317279", "timecodes": [] },
+        { "title": "New Rose", "artist": "The Damned", "url": "https://music.apple.com/us/song/1452806565", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "hardcore",
+      "compare": [
+        "the speed and firmness of the downbeat while the guitar drives rapid subdivisions",
+        "brief transitions, stop-start accents, and any shift into a slower breakdown feel",
+        "how a forceful vocal stays intelligible over dense guitar and drum transients",
+        "raw room character and attack definition without smoothing away the performance"
+      ],
+      "recordings": [
+        { "title": "Rise Above", "artist": "Black Flag", "url": "https://music.apple.com/us/song/117017498", "timecodes": [] },
+        { "title": "Out of Step", "artist": "Minor Threat", "url": "https://music.apple.com/us/song/49249588", "timecodes": [] },
+        { "title": "Banned In D.C.", "artist": "Bad Brains", "url": "https://music.apple.com/us/song/1302288321", "timecodes": [] },
+        { "title": "Wild in the Streets", "artist": "Circle Jerks", "url": "https://music.apple.com/us/song/1711223553", "timecodes": [] },
+        { "title": "Victim in Pain", "artist": "Agnostic Front", "url": "https://music.apple.com/us/song/1609512834", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "post-hardcore",
+      "compare": [
+        "angular bass and guitar figures that shift around the beat instead of doubling one riff",
+        "dynamic drops, ensemble stops, and the timing of the band's return",
+        "how vocals, guitars, and drums trade foreground across contrasting sections",
+        "the balance of force and space in a longer, more developed song form"
+      ],
+      "recordings": [
+        { "title": "Waiting Room", "artist": "Fugazi", "url": "https://music.apple.com/us/song/49249816", "timecodes": [] },
+        { "title": "One Armed Scissor", "artist": "At the Drive-In", "url": "https://music.apple.com/us/song/516380117", "timecodes": [] },
+        { "title": "New Noise", "artist": "Refused", "url": "https://music.apple.com/us/song/1485027943", "timecodes": [] },
+        { "title": "Understanding In A Car Crash", "artist": "Thursday", "url": "https://music.apple.com/us/song/1770121370", "timecodes": [] },
+        { "title": "Fazer", "artist": "Quicksand", "url": "https://music.apple.com/us/song/1440923357", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "pop-punk",
+      "compare": [
+        "fast guitar drive supporting a clearly shaped, singable chorus melody",
+        "bass motion and kick/snare weight under vocal phrases and their gaps",
+        "how backing vocals, doubled guitars, or cymbal lifts enlarge the refrain",
+        "tight production that keeps each instrument's attack and the song's dynamics distinct"
+      ],
+      "recordings": [
+        { "title": "Basket Case", "artist": "Green Day", "url": "https://music.apple.com/us/song/1702071018", "timecodes": [] },
+        { "title": "All the Small Things", "artist": "blink-182", "url": "https://music.apple.com/us/song/1440840510", "timecodes": [] },
+        { "title": "Misery Business", "artist": "Paramore", "url": "https://music.apple.com/us/song/604804763", "timecodes": [] },
+        { "title": "The Middle", "artist": "Jimmy Eat World", "url": "https://music.apple.com/us/song/1542869594", "timecodes": [] },
+        { "title": "Hope", "artist": "Descendents", "url": "https://music.apple.com/us/song/1614602775", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "noise-punk",
+      "compare": [
+        "abrasive or dissonant guitar attacks and their contrast with the underlying pulse",
+        "sudden stops, clipped phrases, feedback, and rough transitions",
+        "how bass and drums remain forceful when guitar tone becomes intentionally unruly",
+        "the space between raw saturation, harsh upper mids, and an intelligible vocal or hook"
+      ],
+      "recordings": [
+        { "title": "Kerosene", "artist": "Big Black", "url": "https://music.apple.com/us/song/1120138371", "timecodes": [] },
+        { "title": "Sex Bomb", "artist": "Flipper", "url": "https://music.apple.com/us/song/299823329", "timecodes": [] },
+        { "title": "Mouth Breather", "artist": "The Jesus Lizard", "url": "https://music.apple.com/us/song/1120325633", "timecodes": [] },
+        { "title": "Release The Bats", "artist": "The Birthday Party", "url": "https://music.apple.com/us/song/1641277363", "timecodes": [] },
+        { "title": "Teen Love", "artist": "No Trend", "url": "https://music.apple.com/us/song/1499420438", "timecodes": [] }
+      ]
+    }
+  ]
+}

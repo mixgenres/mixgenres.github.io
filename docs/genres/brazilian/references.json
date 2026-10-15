@@ -1,0 +1,194 @@
+{
+  "genreId": "brazilian",
+  "reviewed": "2026-10-14",
+  "status": "Six streaming candidates are collected for each of the eleven Brazilian styles. Listening and useful timecodes remain pending; these are not verified sonic matches, and no reference audio was downloaded.",
+  "source": "Apple Music individual track pages and displayed artist/release metadata. These are listening candidates, not verified note-for-note transcriptions.",
+  "styles": [
+    {
+      "styleId": "samba",
+      "compare": [
+        "how the surdo gives the groove a firm, warm floor while pandeiro and tamborim supply crisp, separate subdivisions",
+        "the bright cavaquinho attacks against the guitar and bass, with each part leaving room for the others",
+        "the lift into chorus and instrumental replies, including short phrase-ending fills",
+        "the balance of vocal presence, low-end weight, and lively upper percussion"
+      ],
+      "recordings": [
+        { "title": "O Mundo É um Moinho", "artist": "Cartola", "url": "https://music.apple.com/us/song/713375535", "timecodes": [] },
+        { "title": "Pot-Pourri: O mundo é um moinho / As rosas não falam (Ao vivo)", "artist": "Beth Carvalho", "url": "https://music.apple.com/us/song/1300970837", "timecodes": [] },
+        { "title": "O Sol Nascerá", "artist": "Teresa Cristina", "url": "https://music.apple.com/us/song/1141522565", "timecodes": [] },
+        { "title": "As Rosas Não Falam (Ao Vivo)", "artist": "Elton Medeiros, Nelson Sargento & Galo Preto", "url": "https://music.apple.com/us/song/668054909", "timecodes": [] },
+        { "title": "Dia de Graça", "artist": "Candeia", "url": "https://music.apple.com/us/song/495578156", "timecodes": [] },
+        { "title": "Alvorada", "artist": "Cartola", "url": "https://music.apple.com/us/song/686575051", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "bossa-nova",
+      "compare": [
+        "the guitar's soft, sharply voiced syncopation and the independent two-beat bass motion",
+        "how chord anticipation creates forward motion while the vocal stays relaxed and close",
+        "the small dynamic shifts, breath, and instrumental answers that keep a restrained arrangement vivid",
+        "the clear separation between guitar, bass, voice, and restrained percussion"
+      ],
+      "recordings": [
+        { "title": "Chega de Saudade", "artist": "João Gilberto", "url": "https://music.apple.com/us/song/1604698432", "timecodes": [] },
+        { "title": "Desafinado", "artist": "João Gilberto", "url": "https://music.apple.com/us/song/1639382362", "timecodes": [] },
+        { "title": "Corcovado (Quiet Nights of Quiet Stars)", "artist": "Stan Getz, Astrud Gilberto, Antônio Carlos Jobim & João Gilberto", "url": "https://music.apple.com/us/song/1422656591", "timecodes": [] },
+        { "title": "The Girl from Ipanema", "artist": "Stan Getz & João Gilberto", "url": "https://music.apple.com/us/song/1422656474", "timecodes": [] },
+        { "title": "O Grande Amor", "artist": "Stan Getz & João Gilberto Quintet", "url": "https://music.apple.com/us/song/1693412510", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "pagode",
+      "compare": [
+        "the interlocking tantã, repique de mão, pandeiro, and banjo/cavaquinho parts, each with its own attack and register",
+        "the bass's buoyant syncopation against the hand percussion's sharper responses",
+        "how lead and group vocals trade phrases and build a chorus without covering the groove",
+        "the rhythmic and harmonic lift into refrain, turnaround, and ensemble breaks"
+      ],
+      "recordings": [
+        { "title": "A Amizade", "artist": "Fundo de Quintal", "url": "https://music.apple.com/us/song/1138754956", "timecodes": [] },
+        { "title": "O Show Tem Que Continuar (Ao Vivo)", "artist": "Fundo de Quintal", "url": "https://music.apple.com/us/song/1852277806", "timecodes": [] },
+        { "title": "Amizade / O Show Tem Que Continuar (Ao Vivo)", "artist": "Fundo de Quintal", "url": "https://music.apple.com/us/song/1319269568", "timecodes": [] },
+        { "title": "Lucidez", "artist": "Péricles", "url": "https://music.apple.com/us/song/1131140473", "timecodes": [] },
+        { "title": "Me Apaixonei Pela Pessoa Errada", "artist": "Exaltasamba", "url": "https://music.apple.com/us/song/723981949", "timecodes": [] },
+        { "title": "Deixa a Vida Me Levar", "artist": "Zeca Pagodinho", "url": "https://music.apple.com/us/song/1442439518", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "partido-alto",
+      "compare": [
+        "the repeating partido-alto rhythmic cell and the variation singers lay over it",
+        "call-and-response placement, including the space between a lead verse and group answer",
+        "how a grounded bass and percussion pocket supports lively, syncopated vocal phrasing",
+        "the handoff from sung exchange to instrumental turnaround and back"
+      ],
+      "recordings": [
+        { "title": "Seleção de Partido Alto", "artist": "Martinho da Vila", "url": "https://music.apple.com/us/song/1778767279", "timecodes": [] },
+        { "title": "Partido Alto", "artist": "Aniceto do Império", "url": "https://music.apple.com/us/song/1808950456", "timecodes": [] },
+        { "title": "Partido Alto do Antiga", "artist": "Martinho da Vila", "url": "https://music.apple.com/us/song/402174494", "timecodes": [] },
+        { "title": "Dia de Graça", "artist": "Candeia", "url": "https://music.apple.com/us/song/495578156", "timecodes": [] },
+        { "title": "Casa de Bamba", "artist": "Martinho da Vila", "url": "https://music.apple.com/us/song/1020826358", "timecodes": [] },
+        { "title": "Casa de Bamba (Ao Vivo)", "artist": "Jorge Aragão, Martinho da Vila & Fundo de Quintal", "url": "https://music.apple.com/us/song/1396342418", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "samba-de-roda",
+      "compare": [
+        "the circle's claps and hand percussion carrying a flexible, communal pulse",
+        "the lead chula and group response, with breaths and repeated lines that invite participation",
+        "the earthy contrast between voice, viola/guitar, and hand percussion",
+        "how the ensemble intensifies toward a refrain or dance response while preserving room for the circle"
+      ],
+      "recordings": [
+        { "title": "Balanço do mar (feat. Samba de Dona Dalva)", "artist": "Mestres Navegantes", "url": "https://music.apple.com/us/song/1534594300", "timecodes": [] },
+        { "title": "Samba de Roda Da Bahia", "artist": "Da Melhor Qualidade", "url": "https://music.apple.com/us/song/977410553", "timecodes": [] },
+        { "title": "Samba De Roda (Bahia)", "artist": "Grupo Ribeiro", "url": "https://music.apple.com/us/song/655393497", "timecodes": [] },
+        { "title": "Samba de Roda da Bahia No. 2", "artist": "Grupo Frente de Botequim", "url": "https://music.apple.com/us/song/361238268", "timecodes": [] },
+        { "title": "Samba de Roda (Quixabeira / A Massa / Flor de Laranjeira / Moinho da Bahia / Marinheiro Só / Adeus Adeus) [Ao Vivo]", "artist": "Sambaiana & Ju Moraes", "url": "https://music.apple.com/us/song/1766514447", "timecodes": [] },
+        { "title": "Samba de Roda Bahia", "artist": "Samba de Roda de Tubarão", "url": "https://music.apple.com/us/song/1815873564", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "forro",
+      "compare": [
+        "the accordion's bright melodic lead and short pickup phrases against the zabumba's low/high dance pattern",
+        "the triangle's crisp subdivisions and how its accents lift the groove without masking the accordion",
+        "the grounded bass pulse, vocal responses, and section changes that energize the dance",
+        "how a full band keeps the groove buoyant and punchy through instrumental breaks and returns"
+      ],
+      "recordings": [
+        { "title": "Asa Branca", "artist": "Luiz Gonzaga", "url": "https://music.apple.com/us/song/1669126709", "timecodes": [] },
+        { "title": "Pagode Russo", "artist": "Luiz Gonzaga", "url": "https://music.apple.com/us/song/699131609", "timecodes": [] },
+        { "title": "O Xote das Meninas", "artist": "Luiz Gonzaga", "url": "https://music.apple.com/us/song/881159525", "timecodes": [] },
+        { "title": "Baião", "artist": "Luiz Gonzaga", "url": "https://music.apple.com/us/song/881159515", "timecodes": [] },
+        { "title": "Qui Nem Jiló", "artist": "Luiz Gonzaga", "url": "https://music.apple.com/us/song/881159530", "timecodes": [] },
+        { "title": "Pout-Pourri: Numa Sala de Reboco / Quando Chega o Verão / Eu Só Quero um Xodó", "artist": "Dominguinhos", "url": "https://music.apple.com/us/song/578537520", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "baiao",
+      "compare": [
+        "the alternation of low zabumba strokes and bright beater answers that makes the baião pulse immediately recognizable",
+        "how bass reinforces the low drum without smearing the high syncopated replies",
+        "the accordion's short, forceful melodic hooks and pickups",
+        "the triangle's subdivision, dynamic lift into the refrain, and phrase-ending drum fills"
+      ],
+      "recordings": [
+        { "title": "Baião", "artist": "Luiz Gonzaga", "url": "https://music.apple.com/us/song/881159515", "timecodes": [] },
+        { "title": "Baião", "artist": "Dominguinhos", "url": "https://music.apple.com/us/song/1373763143", "timecodes": [] },
+        { "title": "Baião", "artist": "Dominguinhos, Sivuca & Oswaldinho", "url": "https://music.apple.com/us/song/889426689", "timecodes": [] },
+        { "title": "Baião (Ao Vivo)", "artist": "Luiz Gonzaga", "url": "https://music.apple.com/us/song/1642735778", "timecodes": [] },
+        { "title": "Baião de Dois", "artist": "Caetano Veloso", "url": "https://music.apple.com/us/song/1516040447", "timecodes": [] },
+        { "title": "Olha pro Céu", "artist": "Luiz Gonzaga & José Fernandes", "url": "https://music.apple.com/us/song/1478667999", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "xote",
+      "compare": [
+        "the relaxed two-step sway: broad zabumba beats with a lighter, less continuous triangle part than fast forró",
+        "the accordion's lyrical pickup and response phrases around the vocal",
+        "how bass and zabumba shape the dance without rushing the pocket",
+        "the rise from a spacious verse to a more animated refrain and instrumental turnaround"
+      ],
+      "recordings": [
+        { "title": "O Xote das Meninas", "artist": "Luiz Gonzaga", "url": "https://music.apple.com/us/song/881159525", "timecodes": [] },
+        { "title": "O Xote das Meninas", "artist": "Dominguinhos", "url": "https://music.apple.com/us/song/157221228", "timecodes": [] },
+        { "title": "Xote das Meninas", "artist": "William Sanfona", "url": "https://music.apple.com/us/song/1657879729", "timecodes": [] },
+        { "title": "Numa Sala de Reboco", "artist": "Trio Forrozão", "url": "https://music.apple.com/us/song/1517172151", "timecodes": [] },
+        { "title": "Sabiá / Numa Sala de Reboco / Xote das Meninas", "artist": "Dominguinhos, Sivuca & Oswaldinho", "url": "https://music.apple.com/us/song/889426737", "timecodes": [] },
+        { "title": "Olha pro Céu", "artist": "Luiz Gonzaga & José Fernandes", "url": "https://music.apple.com/us/song/1478667999", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "mpb",
+      "compare": [
+        "how Brazilian rhythmic foundations meet pop song form, electric/acoustic colors, and richer chord movement",
+        "the bass line's melodic replies and its role in giving the arrangement forward motion",
+        "distinct instrument handoffs, dynamic lifts, and textural changes between verse and refrain",
+        "how a polished band mix keeps the vocal clear while giving the rhythm section weight and the arrangement width"
+      ],
+      "recordings": [
+        { "title": "Expresso 2222", "artist": "Gilberto Gil", "url": "https://www.youtube.com/watch?v=qEr1mqDuAjE", "timecodes": [] },
+        { "title": "Expresso 2222", "artist": "Wilson Simonal", "url": "https://music.apple.com/us/song/1443099387", "timecodes": [] },
+        { "title": "Palco", "artist": "Gilberto Gil", "url": "https://music.apple.com/us/song/82480770", "timecodes": [] },
+        { "title": "Toda Menina Baiana", "artist": "Gilberto Gil", "url": "https://music.apple.com/us/song/1805242824", "timecodes": [] },
+        { "title": "Aquele Abraço", "artist": "Gilberto Gil", "url": "https://music.apple.com/us/song/493829210", "timecodes": [] },
+        { "title": "O Leãozinho", "artist": "Caetano Veloso", "url": "https://music.apple.com/us/song/279516854", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "samba-reggae",
+      "compare": [
+        "the large surdo ensemble's interlocking low calls and high replies, with different drum groups retaining distinct accents",
+        "the forward reggae-influenced pocket and the tension between straight pulse and syncopated percussion",
+        "how a massed percussion break opens into vocal call-and-response and a broad chorus",
+        "the weight, width, and transient clarity of the percussion against bass, guitar, and horns"
+      ],
+      "recordings": [
+        { "title": "Faraó (Divindade do Egito)", "artist": "Olodum & Macaco Gordo", "url": "https://music.apple.com/us/song/1790594995", "timecodes": [] },
+        { "title": "Faraó", "artist": "Olodum Mirim", "url": "https://music.apple.com/us/song/1578072369", "timecodes": [] },
+        { "title": "Requebra", "artist": "Olodum", "url": "https://music.apple.com/us/song/321727178", "timecodes": [] },
+        { "title": "Requebra", "artist": "Olodum", "url": "https://music.apple.com/us/song/40620574", "timecodes": [] },
+        { "title": "Samba Reggae", "artist": "Olodum", "url": "https://music.apple.com/us/song/325027160", "timecodes": [] },
+        { "title": "Ladeira do Pelô / Faraó / Protesto do Olodum", "artist": "Daniela Mercury", "url": "https://music.apple.com/us/song/963468342", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "samba-rock",
+      "compare": [
+        "the clipped guitar syncopation against the warmer, more forceful funk-style bass and drum pocket",
+        "how pandeiro and percussion add a Brazilian lilt while kit backbeat and guitar make the groove hit hard",
+        "the band's stop-start accents, repeated hooks, and rhythmic breaks",
+        "how the mix keeps guitar transients, bass punch, and vocals distinct through a lively chorus"
+      ],
+      "recordings": [
+        { "title": "País Tropical", "artist": "Jorge Ben Jor", "url": "https://music.apple.com/us/song/1717003711", "timecodes": [] },
+        { "title": "Chove Chuva", "artist": "Jorge Ben Jor", "url": "https://music.apple.com/us/album/chove-chuva/1443845510?i=1443845938", "timecodes": [] },
+        { "title": "Take It Easy My Brother Charles", "artist": "Jorge Ben Jor", "url": "https://music.apple.com/us/song/1413446559", "timecodes": [] },
+        { "title": "Coqueiro Verde", "artist": "Trio Mocotó", "url": "https://music.apple.com/us/song/1666632646", "timecodes": [] },
+        { "title": "Swinga Sambaby", "artist": "Trio Mocotó", "url": "https://music.apple.com/us/song/350545392", "timecodes": [] },
+        { "title": "O Telefone Tocou Novamente (feat. Trio Mocotó)", "artist": "Jorge Ben Jor", "url": "https://music.apple.com/us/song/1812506504", "timecodes": [] }
+      ]
+    }
+  ]
+}

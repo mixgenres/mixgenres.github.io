@@ -33,7 +33,8 @@
         { "title": "Salt Peanuts", "artist": "Dizzy Gillespie and His Quintet", "url": "https://music.apple.com/us/song/1444207651", "timecodes": [] },
         { "title": "Ko-Ko", "artist": "Charlie Parker", "url": "https://music.apple.com/us/song/1664603116", "timecodes": [] },
         { "title": "A Night in Tunisia", "artist": "Dizzy Gillespie, Charlie Parker, Bud Powell, Charles Mingus & Max Roach", "url": "https://music.apple.com/us/song/878500718", "timecodes": [] },
-        { "title": "Bird and Diz (Expanded Edition)", "artist": "Dizzy Gillespie & Charlie Parker", "url": "https://music.apple.com/us/album/bird-and-diz-expanded-edition/1435957132", "timecodes": [] }
+        { "title": "Bloomdido", "artist": "Charlie Parker & Dizzy Gillespie", "url": "https://music.apple.com/us/song/1435957226", "timecodes": [] },
+        { "title": "Anthropology (Take 1)", "artist": "Dizzy Gillespie, Milt Jackson, Al Haig, Bill DeArango, Ray Brown & J.C. Heard", "url": "https://music.apple.com/us/song/258589898", "timecodes": [] }
       ]
     },
     {
@@ -79,8 +80,8 @@
       "recordings": [
         { "title": "Speak No Evil", "artist": "Wayne Shorter", "url": "https://music.apple.com/us/song/1414679339", "timecodes": [] },
         { "title": "Nefertiti", "artist": "Miles Davis", "url": "https://music.apple.com/us/song/169899672", "timecodes": [] },
-        { "title": "E.S.P. (2022 Remaster)", "artist": "Miles Davis", "url": "https://music.apple.com/us/album/e-s-p-2022-remaster/203773370", "timecodes": [] },
-        { "title": "Miles Smiles", "artist": "Miles Davis Quintet", "url": "https://music.apple.com/us/album/miles-smiles/209407331", "timecodes": [] },
+        { "title": "E.S.P.", "artist": "Miles Davis", "url": "https://music.apple.com/us/song/205872035", "timecodes": [] },
+        { "title": "Orbits", "artist": "Miles Davis Quintet", "url": "https://music.apple.com/us/song/209407342", "timecodes": [] },
         { "title": "Maiden Voyage", "artist": "Herbie Hancock", "url": "https://music.apple.com/us/song/153624191", "timecodes": [] }
       ]
     },
@@ -145,7 +146,8 @@
         { "title": "Free Jazz (Parts 1 & 2)", "artist": "Ornette Coleman", "url": "https://music.apple.com/us/song/1186719412", "timecodes": [] },
         { "title": "Ascension, Edition II, Pt. 1", "artist": "John Coltrane", "url": "https://music.apple.com/us/song/1443121469", "timecodes": [] },
         { "title": "Ghosts", "artist": "Albert Ayler & Don Cherry", "url": "https://music.apple.com/us/song/137248201", "timecodes": [] },
-        { "title": "Unit Structures", "artist": "Cecil Taylor", "url": "https://music.apple.com/us/album/unit-structures/724608454", "timecodes": [] }
+        { "title": "Steps", "artist": "Cecil Taylor", "url": "https://music.apple.com/us/song/724608718", "timecodes": [] },
+        { "title": "Bells", "artist": "Albert Ayler", "url": "https://music.apple.com/us/album/bells-single/1233860738", "timecodes": [] }
       ]
     }
   ]

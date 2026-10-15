@@ -9,7 +9,7 @@ export const GENRE_PACK: GenrePackInput = {
   "defaultStyle": "Classic Timba",
   "meter": "4/4",
   "tempo": [100, 116],
-  "instruments": ["voice", "trumpet", "trombone", "piano", "bass", "congas", "timbales", "drums", "cowbell"],
+  "instruments": ["voice", "trumpet", "trombone", "piano", "synth", "bass", "congas", "timbales", "drums", "cowbell"],
   "roles": {
     "lead": ["voice", "trumpet", "trombone"],
     "harmony": ["piano"],
@@ -513,7 +513,7 @@ export const GENRE_PACK: GenrePackInput = {
       "scale": "minor",
       "roles": {
         "lead": ["voice", "trumpet", "trombone"],
-        "harmony": ["piano"],
+        "harmony": ["piano", "synth"],
         "bass": ["bass"],
         "percussion": ["congas", "timbales", "drums", "cowbell"]
       },
@@ -547,6 +547,7 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "Charanga Habanera synth piano and explosive breaks trombone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trombone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Charanga Habanera synth piano and explosive breaks piano accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "Charanga Habanera synth piano and explosive breaks piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "Charanga Habanera synth piano and explosive breaks synth countertumbao", "shortName": "Synth countertumbao", "role": "harmony", "onsets": [0.5, 1.75, 2.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "durations": [0.18, 0.18, 0.18, 0.18], "articulation": "staccato", "sectionUsage": ["coro", "mambo"]},
         {"name": "Charanga Habanera synth piano and explosive breaks low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
         {"name": "Charanga Habanera synth piano and explosive breaks bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Charanga Habanera synth piano and explosive breaks congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
@@ -563,6 +564,7 @@ export const GENRE_PACK: GenrePackInput = {
         "trumpet": ["staccato", "accent", "legato", "tenuto", "vibrato"],
         "trombone": ["staccato", "accent", "legato"],
         "piano": ["staccato", "montuno", "accent", "legato", "tenuto"],
+        "synth": ["staccato", "accent", "legato"],
         "bass": ["staccato", "ghost-note", "slap", "ghost", "accent", "legato"],
         "congas": ["open", "staccato", "slap", "ghost", "slap-tapao", "quinto-slap", "accent"],
         "timbales": ["open", "staccato", "roll", "accent"],
@@ -585,6 +587,11 @@ export const GENRE_PACK: GenrePackInput = {
         "piano:harmony": {
           "allowedTechniques": ["staccato", "montuno", "accent", "legato", "tenuto"],
           "defaultTechnique": "staccato"
+        },
+        "synth:harmony": {
+          "allowedTechniques": ["staccato", "accent", "legato"],
+          "defaultTechnique": "staccato",
+          "patchId": "polysynth"
         },
         "bass:bass": {
           "allowedTechniques": ["staccato", "ghost-note", "slap", "ghost", "accent", "legato"],

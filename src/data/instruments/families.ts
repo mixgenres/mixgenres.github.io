@@ -61,7 +61,7 @@ export const WORLD_INSTRUMENT_HINTS: Record<string, string[]> = {
   'armenian': ['duduk', 'qanun', 'violin', 'darbuka'],
   'indian-classical': ['tanpura', 'sarangi', 'bansuri', 'tabla', 'synth'],
   'korean-traditional': ['gayageum', 'haegeum', 'janggu'],
-  'gamelan': ['gamelan-metallophone', 'kendang', 'gongs', 'synth'],
+  'gamelan': ['gamelan-metallophone', 'bonang', 'reyong', 'kendang', 'gongs', 'synth'],
   'west-african': ['djembe', 'shekere', 'talking-drum', 'balafon', 'kora'],
   'afro-colombian': ['marimba-de-chonta', 'guacharaca', 'guitar', 'drums'],
   'japanese-pop': ['voice', 'piano', 'synth', 'guitar', 'bass', 'drums', 'string-ensemble', 'sampler'],

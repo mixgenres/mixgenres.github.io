@@ -141,6 +141,20 @@ export interface FeelOutput {
   velocityMult: number;
 }
 
+/** Style-authored accent, meter and slow velocity drift for one attack. */
+export function grooveVelocityMultiplier(g: GrooveProfile, input: FeelInput): number {
+  const slots = Math.max(1, g.subdivision ?? 16);
+  const slot = Math.round((input.beatInBar / Math.max(1e-6, input.beatsPerBar)) * slots) % slots;
+  // Traditional contexts preserve the written pattern's own accent hierarchy.
+  const metric = input.authoredTimingOnly ? 1 : metricWeight(input.beatInBar, input.beatsPerBar);
+  const contractAccent = g.accentMap?.[slot] ?? 1;
+  const shaped = (1 - g.accentDepth * (1 - metric)) * (0.72 + contractAccent * 0.28);
+  const authored = Math.pow(Math.max(0.05, input.accent), g.dynamicRange);
+  const smoothVelDrift = noise1D(input.beatInBar / 8 + (input.seed % 100), 202);
+  const velWobble = 1 + smoothVelDrift * g.humanizeVel * 0.6;
+  return Math.max(0.05, authored * shaped * velWobble);
+}
+
 function noise1D(x: number, seed: number = 42): number {
   const floorX = Math.floor(x);
   const fracX = x - floorX;
@@ -205,20 +219,10 @@ export function applyFeel(g: GrooveProfile, input: FeelInput): FeelOutput {
   const smoothDrift = noise1D(input.beatInBar / 4 + (input.seed % 100), 101);
   finalMs += smoothDrift * currentHumanizeMs * tightness * intensityTighten * humanizeScale * 0.5;
 
-  // 4. dynamics: metric hierarchy is disabled for authored traditional phrasing;
-  // the pattern's own accent profile should carry the musical hierarchy.
-  const metric = input.authoredTimingOnly ? 1 : metricWeight(input.beatInBar, input.beatsPerBar);
-  const contractAccent = g.accentMap?.[slot] ?? 1;
-  const shaped = (1 - g.accentDepth * (1 - metric)) * (0.72 + contractAccent * 0.28);
-  const authored = Math.pow(Math.max(0.05, input.accent), g.dynamicRange);
-
-  const smoothVelDrift = noise1D(input.beatInBar / 8 + (input.seed % 100), 202);
-  const velWobble = 1 + smoothVelDrift * g.humanizeVel * 0.6;
-
   return {
     offsetBeats: swingBeats,
     offsetMs: finalMs,
-    velocityMult: Math.max(0.05, authored * shaped * velWobble),
+    velocityMult: grooveVelocityMultiplier(g, input),
   };
 }
 

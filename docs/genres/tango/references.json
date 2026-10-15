@@ -1,22 +1,86 @@
 {
   "genreId": "tango",
-  "status": "Existing links are un-auditioned candidates; coverage is incomplete until each style has five linked recordings and listening notes.",
+  "status": "Five linked streaming candidates are collected for all 17 catalog Tango styles. Listening comparison and timecodes remain pending; candidates are not yet verified sonic matches.",
   "references": [
     {
       "styleId": "golden-age",
-      "references": [
+      "compare": [
+        "marcato four accents against sustained melody phrases",
+        "bandoneon and violin phrase handoffs",
+        "piano attack against the upright-bass pulse",
+        "variation-section energy and phrase-ending fills"
+      ],
+      "recordings": [
         {
+          "title": "Quejas de Bandoneón",
           "artist": "Aníbal Troilo",
-          "title": "Quejas de Bandoneón"
+          "url": "https://music.apple.com/us/song/384632717",
+          "timecodes": []
+        },
+        {
+          "title": "La Cumparsita",
+          "artist": "Juan D'Arienzo",
+          "url": "https://music.apple.com/us/song/1867802939",
+          "timecodes": []
+        },
+        {
+          "title": "Pa' Que Bailen los Muchachos",
+          "artist": "Aníbal Troilo",
+          "url": "https://music.apple.com/us/song/401943607",
+          "timecodes": []
+        },
+        {
+          "title": "El Choclo",
+          "artist": "Aníbal Troilo & Raúl Berón",
+          "url": "https://music.apple.com/us/song/1789318572",
+          "timecodes": []
+        },
+        {
+          "title": "Milongueando en el cuarenta",
+          "artist": "Orquesta Aníbal Troilo",
+          "url": "https://music.apple.com/us/song/1077016179",
+          "timecodes": []
         }
       ]
     },
     {
       "styleId": "canyengue",
-      "references": [
+      "compare": [
+        "short 2/4 bounce and clipped bandoneon articulations",
+        "habanera bass anticipation and piano attacks",
+        "small ensemble phrase lengths and dry note endings",
+        "bass drag into the closing cadence"
+      ],
+      "recordings": [
         {
+          "title": "El Chamuyo",
           "artist": "Francisco Canaro",
-          "title": "El Chamuyo"
+          "url": "https://music.apple.com/gb/song/909184038",
+          "timecodes": []
+        },
+        {
+          "title": "El Chamuyo",
+          "artist": "Edgardo Donato y Sus Muchachos",
+          "url": "https://music.apple.com/us/song/464279435",
+          "timecodes": []
+        },
+        {
+          "title": "El Entrerriano",
+          "artist": "Francisco Canaro y Su Orquesta Típica Argentina",
+          "url": "https://music.apple.com/us/song/442807779",
+          "timecodes": []
+        },
+        {
+          "title": "La Cumparsita",
+          "artist": "Roberto Firpo",
+          "url": "https://music.apple.com/us/song/734085693",
+          "timecodes": []
+        },
+        {
+          "title": "La Morocha",
+          "artist": "Orquesta Roberto Firpo",
+          "url": "https://music.apple.com/us/song/1224388525",
+          "timecodes": []
         }
       ]
     },
@@ -27,6 +91,19 @@
           "artist": "Julio De Caro",
           "title": "Boedo"
         }
+      ],
+      "compare": [
+        "independent violin and bandoneon lines instead of unison doubling",
+        "how the piano and bass connect the countermelodies while keeping a dance pulse",
+        "short answers, longer bowed phrases, and the handoff between lead voices",
+        "contrast between early De Caro sextet recordings and later orchestra takes of his repertoire"
+      ],
+      "recordings": [
+        { "title": "El Monito", "artist": "Julio De Caro y su Orquesta Típica", "url": "https://music.apple.com/us/song/471770944", "timecodes": [] },
+        { "title": "El Aquel Don Juan", "artist": "Julio De Caro", "url": "https://music.apple.com/us/song/1110920524", "timecodes": [] },
+        { "title": "Derecho Viejo", "artist": "Julio De Caro", "url": "https://music.apple.com/us/song/438968935", "timecodes": [] },
+        { "title": "Flores Negras (feat. Sexteto Julio De Caro)", "artist": "Julio De Caro", "url": "https://music.apple.com/us/song/877950891", "timecodes": [] },
+        { "title": "Loca Bohemia (feat. Sexteto Julio De Caro)", "artist": "Julio De Caro", "url": "https://music.apple.com/us/song/877950984", "timecodes": [] }
       ]
     },
     {
@@ -107,7 +184,8 @@
       ],
       "compare": [
         "attack and accent clarity in the dance pulse",
-        "bass and bandoneon balance, tempo and phrase drive"
+        "bass and bandoneon balance, tempo and phrase drive",
+        "the short ensemble parada hit, clean release, and silence across the rest of the bar"
       ],
       "recordings": [
         {
@@ -223,6 +301,7 @@
       ],
       "compare": [
         "bandoneon lead and string answers",
+        "cantando fraseo: the lead's elastic push and pull against a clearer accompaniment pulse",
         "vocal/orchestra balance, accents and room sound"
       ],
       "recordings": [
@@ -267,8 +346,9 @@
         }
       ],
       "compare": [
-        "accent placement, space and phrase elasticity",
-        "piano/bass low-end weight and ensemble density"
+        "accent placement, space and phrase elasticity, including full-bar ensemble silences",
+        "piano/bass low-end weight and ensemble density through the reduced return and crescendo",
+        "the separated chan-chan cadence attacks and the final pocket of air"
       ],
       "recordings": [
         {
@@ -310,6 +390,42 @@
           "artist": "Horacio Salgán",
           "title": "A Fuego Lento"
         }
+      ],
+      "compare": [
+        "syncopated piano pulse and independent inner-line motion",
+        "bass/piano interaction and phrase-to-phrase rhythmic variation"
+      ],
+      "recordings": [
+        {
+          "title": "A Fuego Lento",
+          "artist": "Horacio Salgán",
+          "url": "https://music.apple.com/us/song/321007794",
+          "timecodes": []
+        },
+        {
+          "title": "Don Agustín Bardi",
+          "artist": "Horacio Salgán y su Gran Orquesta Típica",
+          "url": "https://music.apple.com/us/song/643081182",
+          "timecodes": []
+        },
+        {
+          "title": "Mi Refugio",
+          "artist": "Horacio Salgán y Su Orquesta Típica",
+          "url": "https://music.apple.com/us/album/mi-refugio/415287529?i=415287713",
+          "timecodes": []
+        },
+        {
+          "title": "Las Mirlas",
+          "artist": "Angel Diaz & Horacio Salgán",
+          "url": "https://music.apple.com/do/song/321008025",
+          "timecodes": []
+        },
+        {
+          "title": "Gallo Ciego (Instrumental)",
+          "artist": "Horacio Salgán y Su Orquesta Típica",
+          "url": "https://music.apple.com/us/album/gallo-ciego-instrumental/1239986942?i=1239987480",
+          "timecodes": []
+        }
       ]
     },
     {
@@ -319,6 +435,20 @@
           "artist": "Carlos Gardel",
           "title": "Mi Buenos Aires Querido"
         }
+      ],
+      "compare": [
+        "how the singer shapes and releases the lyric at phrase ends",
+        "guitar or orchestra accompaniment density beneath the vocal",
+        "the full-bar respiro after a sung verse and before the refrain",
+        "instrumental replies and breathing space between vocal phrases",
+        "how refrain intensity changes the vocal delivery and ensemble support"
+      ],
+      "recordings": [
+        { "title": "Volver", "artist": "Carlos Gardel", "url": "https://music.apple.com/us/song/151526379", "timecodes": [] },
+        { "title": "Yira Yira", "artist": "Carlos Gardel", "url": "https://music.apple.com/us/song/435222185", "timecodes": [] },
+        { "title": "Mi Buenos Aires Querido", "artist": "Carlos Gardel", "url": "https://music.apple.com/us/song/321920495", "timecodes": [] },
+        { "title": "Mi Noche Triste", "artist": "Carlos Gardel", "url": "https://music.apple.com/us/song/435222122", "timecodes": [] },
+        { "title": "Cuesta Abajo", "artist": "Carlos Gardel", "url": "https://music.apple.com/us/song/689435062", "timecodes": [] }
       ]
     },
     {
@@ -328,6 +458,19 @@
           "artist": "Francisco Canaro",
           "title": "Milonga Sentimental"
         }
+      ],
+      "compare": [
+        "the light two-beat milonga bounce and its habanera-derived bass motion",
+        "how piano, guitar, and bandoneon articulate the beat without turning it into a straight tango march",
+        "vocal or melodic phrase length against the recurring bass pattern",
+        "the lift and release at refrain returns and closing cadence"
+      ],
+      "recordings": [
+        { "title": "Milonga Sentimental", "artist": "Francisco Canaro", "url": "https://music.apple.com/us/song/1115363150", "timecodes": [] },
+        { "title": "La Puñalada", "artist": "Juan D'Arienzo", "url": "https://music.apple.com/us/song/1324021806", "timecodes": [] },
+        { "title": "Milonga del 900", "artist": "Francisco Canaro", "url": "https://music.apple.com/us/song/975187472", "timecodes": [] },
+        { "title": "Milonga De Mis Amores", "artist": "Pedro Laurenz", "url": "https://music.apple.com/us/song/333932208", "timecodes": [] },
+        { "title": "Un Baile A Beneficio (Milonga)", "artist": "Osvaldo Pugliese", "url": "https://music.apple.com/us/song/321712188", "timecodes": [] }
       ]
     },
     {
@@ -337,6 +480,19 @@
           "artist": "Francisco Canaro",
           "title": "Desde el Alma"
         }
+      ],
+      "compare": [
+        "the three-beat bass–chord–chord pattern and its weight on beat one",
+        "melody phrases that cross the bar line against a stable waltz pulse",
+        "how violin, bandoneon, and voice share broad lyrical phrases",
+        "the contrast between repeated strains, a contrasting trio, and the final return"
+      ],
+      "recordings": [
+        { "title": "Desde el Alma (Vals)", "artist": "Nelly Omar & Francisco Canaro y Su Orquestra", "url": "https://music.apple.com/us/song/325271988", "timecodes": [] },
+        { "title": "Flor de Lino (Vals)", "artist": "Floreal Ruiz", "url": "https://music.apple.com/us/song/1449886547", "timecodes": [] },
+        { "title": "Romance de Barrio", "artist": "Aníbal Troilo & Floreal Ruiz", "url": "https://music.apple.com/us/song/321711148", "timecodes": [] },
+        { "title": "Palomita blanca (Waltz)", "artist": "Alfredo Marcucci & Baltazar Benítez", "url": "https://music.apple.com/us/song/1669537384", "timecodes": [] },
+        { "title": "Pedacito de Cielo", "artist": "Miguel Caló, Orquesta de Miguel Caló & Alberto Podestá", "url": "https://music.apple.com/us/album/pedacito-de-cielo-feat-orquesta-de-miguel-calo/976813905?i=976814604", "timecodes": [] }
       ]
     },
     {
@@ -345,6 +501,42 @@
         {
           "artist": "Astor Piazzolla",
           "title": "Libertango"
+        }
+      ],
+      "compare": [
+        "bandoneon articulation against the ensemble ostinato",
+        "rhythmic asymmetry, harmonic tension and the contrast between intimate and forceful sections"
+      ],
+      "recordings": [
+        {
+          "title": "Libertango",
+          "artist": "Astor Piazzolla",
+          "url": "https://music.apple.com/us/song/1329251107",
+          "timecodes": []
+        },
+        {
+          "title": "Michelangelo '70",
+          "artist": "Astor Piazzolla",
+          "url": "https://music.apple.com/us/song/79574629",
+          "timecodes": []
+        },
+        {
+          "title": "Milonga del Angel",
+          "artist": "Astor Piazzolla",
+          "url": "https://music.apple.com/us/song/79574618",
+          "timecodes": []
+        },
+        {
+          "title": "Concierto Para Quinteto",
+          "artist": "Astor Piazzolla",
+          "url": "https://music.apple.com/us/song/1789462072",
+          "timecodes": []
+        },
+        {
+          "title": "Cavalcata",
+          "artist": "Astor Piazzolla",
+          "url": "https://music.apple.com/us/song/73585006",
+          "timecodes": []
         }
       ]
     },
@@ -355,6 +547,19 @@
           "artist": "Gotan Project",
           "title": "Santa María (del Buen Ayre)"
         }
+      ],
+      "compare": [
+        "the relationship between a stable electronic pulse and tango-derived phrasing",
+        "how bandoneon, violin, and piano colors sit against programmed bass and percussion",
+        "loop repetition, instrumental breaks, and gradual arrangement changes",
+        "mix depth and low-end control without letting the beat erase the acoustic ensemble"
+      ],
+      "recordings": [
+        { "title": "Santa María (del Buen Ayre)", "artist": "Gotan Project", "url": "https://music.apple.com/us/song/278035379", "timecodes": [] },
+        { "title": "Época", "artist": "Gotan Project", "url": "https://music.apple.com/us/song/1588429831", "timecodes": [] },
+        { "title": "Diferente", "artist": "Gotan Project", "url": "https://music.apple.com/us/song/394876815", "timecodes": [] },
+        { "title": "Queremos Paz", "artist": "Gotan Project", "url": "https://music.apple.com/us/song/278035286", "timecodes": [] },
+        { "title": "Mi Confesión", "artist": "Gotan Project", "url": "https://music.apple.com/us/song/278298058", "timecodes": [] }
       ]
     },
     {
@@ -364,6 +569,19 @@
           "artist": "Bajofondo",
           "title": "Pa' Bailar"
         }
+      ],
+      "compare": [
+        "rock-kit and electric low-end weight against bandoneon and string attacks",
+        "distorted riff tone, transient clarity, and the amount of space left for tango accents",
+        "how vocal songs and instrumental tracks use breaks, builds, and returning hooks",
+        "the width and density of the full-band sections compared with the breakdowns"
+      ],
+      "recordings": [
+        { "title": "Pa' Bailar (Instrumental Album Versión)", "artist": "Bajofondo", "url": "https://music.apple.com/us/song/1442996173", "timecodes": [] },
+        { "title": "El Mareo (feat. Gustavo Cerati)", "artist": "Bajofondo & Gustavo Cerati", "url": "https://music.apple.com/us/song/1442964497", "timecodes": [] },
+        { "title": "Grand Guignol", "artist": "Bajofondo", "url": "https://music.apple.com/us/song/1442963821", "timecodes": [] },
+        { "title": "Infiltrado", "artist": "Bajofondo", "url": "https://music.apple.com/us/song/1526873319", "timecodes": [] },
+        { "title": "Milongon", "artist": "Bajofondo", "url": "https://music.apple.com/us/song/598796788", "timecodes": [] }
       ]
     },
     {
@@ -371,8 +589,23 @@
       "references": [
         {
           "artist": "Orquesta Típica Fernández Fierro",
-          "title": "La Maza"
+          "title": "Si Sos Brujo",
+          "source": "https://inmcv.cultura.gob.ar/media/uploads/site-32/multimedia/Musica%20e%20Investigacion/mei_20_2012/mei_20_2012_03_garciabrunelli_19-41.pdf",
+          "note": "Published discussion describes a string-only arrangement, an out-of-the-ordinary orchestral-family feature. Use it as an arrangement comparison point, not as a claim that these candidates are the same performance."
         }
+      ],
+      "compare": [
+        "hard ensemble attacks and strong dynamic blocks against exposed lyrical replies",
+        "Pugliese-derived rhythmic pressure, especially weight and placement of the accent",
+        "independent violin/bandoneon motion and the handoff into a raw collective unison",
+        "how modern arrangements create contrast through sparse or family-specific passages"
+      ],
+      "recordings": [
+        { "title": "Che Bandoneón", "artist": "Orquesta Típica Fernández Fierro", "url": "https://open.spotify.com/track/0FbrHksFIkwllJbox4lKqZ", "timecodes": [] },
+        { "title": "Maquillaje", "artist": "Orquesta Típica Fernández Fierro", "url": "https://music.apple.com/us/song/1141290904", "timecodes": [] },
+        { "title": "Infierno Porteño", "artist": "Orquesta Típica Fernández Fierro", "url": "https://music.apple.com/ar/song/1381408414", "timecodes": [] },
+        { "title": "Desierto (Live)", "artist": "Orquesta Típica Fernández Fierro", "url": "https://open.spotify.com/track/7MEIIDRpRFy8AnNIcI7iN2", "timecodes": [] },
+        { "title": "Demolición (Live)", "artist": "Orquesta Típica Fernández Fierro", "url": "https://open.spotify.com/track/259QOlHqV1iBbbEX7r5jkv", "timecodes": [] }
       ]
     },
     {
@@ -380,12 +613,26 @@
       "references": [
         {
           "artist": "Mercedes Sosa",
-          "title": "Chacarera de las Piedras"
+          "title": "Chacarera de las Piedras",
+          "url": "https://music.apple.com/us/song/1442407898"
         }
+      ],
+      "compare": [
+        "six eighth-note subdivisions against the three-beat accompaniment feel, with the hemiola remaining audible",
+        "guitar chord attacks and bass movement supporting the bombo's differentiated low and rim accents",
+        "copla phrases, instrumental replies, and short turnaround fills across the dance cycle",
+        "which arrangement layers are traditional chacarera anchors and which add the crossover color"
+      ],
+      "recordings": [
+        { "title": "La Sachapera", "artist": "Cuti y Roberto Carabajal", "url": "https://music.apple.com/us/song/277272468", "timecodes": [] },
+        { "title": "Juntito al Fogón", "artist": "La Chacarerata Santiagueña", "url": "https://music.apple.com/us/song/1604779559", "timecodes": [] },
+        { "title": "La Telesita", "artist": "Los Sacheros Santiagueños", "url": "https://music.apple.com/us/song/1016605323", "timecodes": [] },
+        { "title": "Añoranzas (Chacarera Doble)", "artist": "Cuti & Roberto Carabajal", "url": "https://music.apple.com/us/song/472592071", "timecodes": [] },
+        { "title": "Chacarera del Rancho", "artist": "Los Manseros Santiagueños", "url": "https://music.apple.com/us/song/321890454", "timecodes": [] }
       ]
     }
   ],
-  "reviewed": "2026-10-12",
-  "source": "Direct Apple Music track pages added for Canaro, D’Arienzo, Di Sarli, Troilo and Pugliese; no reference audio downloaded.",
-  "status": "Five streaming comparison candidates added for five styles. Candidate links have not been auditioned; audio comparison and timecodes are pending."
+  "reviewed": "2026-10-14",
+  "source": "Apple Music and Spotify track pages were checked for candidate metadata. The Fernández Fierro arrangement discussion is linked as context for modern orquesta. Reference audio has not been downloaded or auditioned.",
+  "status": "Five distinct linked streaming candidates are collected for all 17 styles. Audio comparison and timecodes remain pending; candidates are not yet verified sonic matches."
 }

@@ -1,0 +1,168 @@
+{
+  "genreId": "rock",
+  "reviewed": "2026-10-14",
+  "status": "Five linked streaming-track candidates are collected for all ten Rock styles. Listening, useful timecodes, and mix comparisons remain pending; candidate links do not establish sonic matching.",
+  "source": "Apple Music individual streaming-track pages. No reference audio downloaded or auditioned.",
+  "styles": [
+    {
+      "styleId": "alternative",
+      "compare": [
+        "how a compact guitar hook, bass movement, and vocal phrase answer one another",
+        "the contrast between restrained verses and wider, louder choruses",
+        "guitar tone changes, chord sustain, and drum weight across the arrangement",
+        "where the band leaves gaps or changes the riff to keep the hook from feeling looped"
+      ],
+      "recordings": [
+        { "title": "Smells Like Teen Spirit", "artist": "Nirvana", "url": "https://music.apple.com/us/song/1586895442", "timecodes": [] },
+        { "title": "Interstate Love Song", "artist": "Stone Temple Pilots", "url": "https://music.apple.com/us/song/3631594", "timecodes": [] },
+        { "title": "Creep", "artist": "Radiohead", "url": "https://music.apple.com/us/song/1097862231", "timecodes": [] },
+        { "title": "Where Is My Mind?", "artist": "Pixies", "url": "https://music.apple.com/us/song/1540673399?l=en-US", "timecodes": [] },
+        { "title": "Everlong", "artist": "Foo Fighters", "url": "https://music.apple.com/us/song/1650513642", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "rock-and-roll",
+      "compare": [
+        "the swung or shuffled subdivision and the placement of the backbeat",
+        "how piano or guitar comping leaves room for the vocal and lead fills",
+        "the bass-and-kick lock and the snap of snare, handclaps, or ride cymbal",
+        "short turnarounds, stop-time breaks, and phrase-ending fills"
+      ],
+      "recordings": [
+        { "title": "Tutti Frutti", "artist": "Little Richard", "url": "https://music.apple.com/us/song/1440938954", "timecodes": [] },
+        { "title": "Great Balls of Fire", "artist": "Jerry Lee Lewis", "url": "https://music.apple.com/us/song/1215406727", "timecodes": [] },
+        { "title": "Rock Around the Clock", "artist": "Bill Haley and His Comets", "url": "https://music.apple.com/us/song/1444105679", "timecodes": [] },
+        { "title": "Roll Over Beethoven", "artist": "Chuck Berry", "url": "https://music.apple.com/us/song/1425246200", "timecodes": [] },
+        { "title": "Blue Suede Shoes", "artist": "Carl Perkins", "url": "https://music.apple.com/us/song/1890306753", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "classic-rock",
+      "compare": [
+        "the signature riff's articulation and relationship to the bass line",
+        "how lead guitar phrases answer, extend, or interrupt the vocal",
+        "the balance of wide rhythm guitars, centered low end, and punchy drums",
+        "section changes, instrumental breaks, and dynamic lift into the chorus"
+      ],
+      "recordings": [
+        { "title": "Gimme Shelter", "artist": "The Rolling Stones", "url": "https://music.apple.com/us/song/1469559341", "timecodes": [] },
+        { "title": "Sultans of Swing", "artist": "Dire Straits", "url": "https://music.apple.com/us/song/1744310538", "timecodes": [] },
+        { "title": "Hotel California", "artist": "Eagles", "url": "https://music.apple.com/us/song/635770202", "timecodes": [] },
+        { "title": "Smoke On the Water", "artist": "Deep Purple", "url": "https://music.apple.com/us/song/1231449052", "timecodes": [] },
+        { "title": "More Than a Feeling", "artist": "Boston", "url": "https://music.apple.com/us/song/658983663", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "hard-rock",
+      "compare": [
+        "the weight, muting, and attack of the main power riff",
+        "kick and snare impact against sustained or doubled rhythm guitars",
+        "how bass reinforces the riff without disappearing under the guitars",
+        "the arrangement's breaks, held chords, vocal lift, and lead-guitar feature"
+      ],
+      "recordings": [
+        { "title": "Welcome to the Jungle", "artist": "Guns N' Roses", "url": "https://music.apple.com/us/song/95827906", "timecodes": [] },
+        { "title": "Back In Black", "artist": "AC/DC", "url": "https://music.apple.com/us/song/576003082", "timecodes": [] },
+        { "title": "Barracuda", "artist": "Heart", "url": "https://music.apple.com/us/song/278787653", "timecodes": [] },
+        { "title": "Dream On", "artist": "Aerosmith", "url": "https://music.apple.com/us/song/1822896806", "timecodes": [] },
+        { "title": "Immigrant Song", "artist": "Led Zeppelin", "url": "https://music.apple.com/us/song/1436728301", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "psychedelic",
+      "compare": [
+        "modal or repeating harmony and the way small changes keep the vamp moving",
+        "guitar sustain, bends, effects, and echo against the rhythm-section pulse",
+        "how instruments pan or occupy distinct registers as the texture widens",
+        "dynamic build, instrumental space, and transitions between stable groove and free phrasing"
+      ],
+      "recordings": [
+        { "title": "Purple Haze", "artist": "The Jimi Hendrix Experience", "url": "https://music.apple.com/us/song/344803080", "timecodes": [] },
+        { "title": "White Rabbit", "artist": "Jefferson Airplane", "url": "https://music.apple.com/us/song/251180422", "timecodes": [] },
+        { "title": "Tomorrow Never Knows", "artist": "The Beatles", "url": "https://music.apple.com/us/song/1468032218", "timecodes": [] },
+        { "title": "Astronomy Domine", "artist": "Pink Floyd", "url": "https://music.apple.com/us/song/1065975044", "timecodes": [] },
+        { "title": "Break On Through (To the Other Side)", "artist": "The Doors", "url": "https://music.apple.com/us/song/396504541", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "progressive",
+      "compare": [
+        "meter and phrase lengths, especially where accents make the pulse legible",
+        "how bass, drums, and guitar coordinate changing riffs and sectional transitions",
+        "keyboard and guitar timbres layered in distinct registers",
+        "the long-form build, instrumental feature, and return or transformation of earlier material"
+      ],
+      "recordings": [
+        { "title": "Roundabout", "artist": "Yes", "url": "https://music.apple.com/us/song/1049009209", "timecodes": [] },
+        { "title": "21st Century Schizoid Man (Radio Version)", "artist": "King Crimson", "url": "https://music.apple.com/us/song/918534782", "timecodes": [] },
+        { "title": "Tom Sawyer", "artist": "Rush", "url": "https://music.apple.com/us/song/305995678", "timecodes": [] },
+        { "title": "Supper's Ready", "artist": "Genesis", "url": "https://music.apple.com/us/song/309748164", "timecodes": [] },
+        { "title": "Karn Evil 9 1st Impression Pt. 1", "artist": "Emerson, Lake & Palmer", "url": "https://music.apple.com/us/song/1528518958", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "indie",
+      "compare": [
+        "interlocking guitar parts and melodic bass movement rather than one doubled riff",
+        "the contrast between dry, close verses and wider chorus or refrain textures",
+        "drum feel, cymbal density, and how much room the arrangement leaves around the vocal",
+        "small changes in guitar register, rhythmic density, and phrase endings between sections"
+      ],
+      "recordings": [
+        { "title": "Maps", "artist": "Yeah Yeah Yeahs", "url": "https://music.apple.com/us/song/1440917412", "timecodes": [] },
+        { "title": "Float On", "artist": "Modest Mouse", "url": "https://music.apple.com/us/song/1681209259", "timecodes": [] },
+        { "title": "Last Nite", "artist": "The Strokes", "url": "https://music.apple.com/us/song/1663033319", "timecodes": [] },
+        { "title": "Take Me Out", "artist": "Franz Ferdinand", "url": "https://music.apple.com/us/song/315844084", "timecodes": [] },
+        { "title": "Banquet", "artist": "Bloc Party", "url": "https://music.apple.com/us/song/49548344", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "shoegaze",
+      "compare": [
+        "the balance between the sustained guitar wash and clearly articulated bass and drums",
+        "how lead melody stays perceptible inside dense reverb, modulation, and distortion",
+        "stereo width and the contrast between blurred layers and close transient detail",
+        "gradual textural changes and releases of density across sections"
+      ],
+      "recordings": [
+        { "title": "Alison", "artist": "Slowdive", "url": "https://music.apple.com/us/song/433401786", "timecodes": [] },
+        { "title": "Only Shallow", "artist": "my bloody valentine", "url": "https://music.apple.com/us/song/1589230439", "timecodes": [] },
+        { "title": "When the Sun Hits", "artist": "Slowdive", "url": "https://music.apple.com/us/song/399211798", "timecodes": [] },
+        { "title": "Dreams Burn Down", "artist": "Ride", "url": "https://music.apple.com/us/song/608014383", "timecodes": [] },
+        { "title": "Sweetness and Light", "artist": "Lush", "url": "https://music.apple.com/us/song/273724479", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "post-rock",
+      "compare": [
+        "how a sparse motif accumulates new layers and rhythmic force over time",
+        "the dynamics and drum entrance that turn a gradual build into a clear arrival",
+        "how repeating figures evolve through register, articulation, and texture",
+        "the balance of spacious decay, deliberate silence, and full-band impact"
+      ],
+      "recordings": [
+        { "title": "Your Hand in Mine", "artist": "Explosions in the Sky", "url": "https://music.apple.com/us/song/318951791", "timecodes": [] },
+        { "title": "Mogwai Fear Satan", "artist": "Mogwai", "url": "https://music.apple.com/us/song/313441867", "timecodes": [] },
+        { "title": "Svefn-g-englar", "artist": "Sigur Rós", "url": "https://music.apple.com/us/song/1450189511", "timecodes": [] },
+        { "title": "TNT", "artist": "Tortoise", "url": "https://music.apple.com/us/song/314874301", "timecodes": [] },
+        { "title": "The Mighty Rio Grande", "artist": "This Will Destroy You", "url": "https://music.apple.com/us/song/1048300410", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "japanese-melodic-rock",
+      "compare": [
+        "rapid chord changes and tight ensemble accents under a prominent singing guitar line",
+        "how bass movement and kick placement keep fast passages forceful and clear",
+        "the contrast between high-energy verse drive and a broad, melodic chorus",
+        "lead-guitar phrasing, harmonized lines, and transitions into instrumental breaks"
+      ],
+      "recordings": [
+        { "title": "Silent Jealousy", "artist": "X JAPAN", "url": "https://music.apple.com/us/song/1536881372", "timecodes": [] },
+        { "title": "LOVE PHANTOM", "artist": "B'z", "url": "https://music.apple.com/us/song/1560085807", "timecodes": [] },
+        { "title": "Driver's High", "artist": "L'Arc-en-Ciel", "url": "https://music.apple.com/us/song/1536357551", "timecodes": [] },
+        { "title": "Haruka Kanata", "artist": "ASIAN KUNG-FU GENERATION", "url": "https://music.apple.com/us/song/1536362315", "timecodes": [] },
+        { "title": "READY STEADY GO", "artist": "L'Arc-en-Ciel", "url": "https://music.apple.com/us/song/1536363345", "timecodes": [] }
+      ]
+    }
+  ]
+}

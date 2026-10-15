@@ -29,15 +29,15 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "honky-tonk",
       "name": "Honky-Tonk",
-      "description": "Honky-Tonk: honky-tonk boom chick and steel answers. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
-      "patterns": ["Honky-tonk piano offbeat comp with two-step bass and steel answers", "honky-tonk boom chick and steel answers"],
+      "description": "Honky-Tonk pairs a buoyant two-step with clipped piano and guitar, a vocal or fiddle pickup, and answering fiddle or steel phrases. Short instrumental breaks hand the foreground between fiddle and steel.",
+      "patterns": ["Honky-tonk piano offbeat comp with two-step bass and steel answers", "honky-tonk boom chick and steel answers", "honky-tonk fiddle pickups and vocal-gap answers"],
       "techniques": ["fingerstyle", "double-stop", "slide", "hammer-on", "pull-off", "shuffle-bow", "brush", "twin fiddle leads", "steely weeping slide licks", "honky-tonk upright piano tinkle", "unflinching heartbreak lyricism", "accent", "staccato", "legato", "vibrato", "ghost", "open", "roll", "pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell"],
       "harmony": ["G", "C", "D7", "Em"],
       "meter": "4/4",
       "tempo": [100, 116],
       "scale": "major",
       "roles": {
-        "lead": ["voice", "pedal-steel"],
+        "lead": ["voice", "pedal-steel", "violin"],
         "harmony": ["guitar", "piano"],
         "bass": ["upright-bass"],
         "percussion": ["drums"]
@@ -66,6 +66,8 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "honky-tonk boom chick and steel answers voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "honky-tonk boom chick and steel answers pedal-steel statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["pedal-steel"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "honky-tonk boom chick and steel answers pedal-steel cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["pedal-steel"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "honky-tonk fiddle vocal-gap answer", "role": "lead", "onsets": [3, 3.5], "instruments": ["violin"], "cycleLength": 1, "durations": [0.3, 0.3], "articulation": "shuffle-bow"},
+        {"name": "honky-tonk fiddle phrase pickup", "role": "lead", "onsets": [2.5, 3, 3.5], "instruments": ["violin"], "cycleLength": 1, "durations": [0.25, 0.3, 0.3], "articulation": "shuffle-bow"},
         {"name": "honky-tonk boom chick and steel answers guitar accompaniment", "role": "harmony", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "honky-tonk boom chick and steel answers guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "honky-tonk boom chick and steel answers low anchor", "role": "bass", "onsets": [0, 2], "instruments": ["upright-bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6]},
@@ -76,6 +78,7 @@ export const GENRE_PACK: GenrePackInput = {
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
         "pedal-steel": ["pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell", "vibrato"],
+        "violin": ["shuffle-bow", "double-stop", "accent", "staccato", "legato", "vibrato"],
         "guitar": ["flatpick", "hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
         "upright-bass": ["fingerstyle", "accent", "staccato", "legato", "tenuto"],
         "piano": ["accent", "staccato", "legato", "tenuto"],
@@ -89,6 +92,10 @@ export const GENRE_PACK: GenrePackInput = {
         "pedal-steel:lead": {
           "allowedTechniques": ["pedal-bend", "knee-lever-bend", "chordal-glissando", "volume-swell", "vibrato"],
           "defaultTechnique": "vibrato"
+        },
+        "violin:lead": {
+          "allowedTechniques": ["shuffle-bow", "double-stop", "accent", "staccato", "legato", "vibrato"],
+          "defaultTechnique": "shuffle-bow"
         },
         "guitar:harmony": {
           "allowedTechniques": ["flatpick", "hammer-on", "pull-off", "slide", "fingerstyle", "double-stop", "accent", "staccato", "legato", "vibrato"],
@@ -165,7 +172,7 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "bluegrass banjo roll and mandolin chop banjo statement", "role": "lead", "onsets": [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5], "instruments": ["banjo"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "bluegrass banjo roll and mandolin chop banjo cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["banjo"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "bluegrass alternating-bass guitar strum", "shortName": "Alternating-bass guitar", "role": "harmony", "onsets": [0, 1, 2, 3], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.38, 0.24, 0.38, 0.24], "accents": [0.9, 0.56, 0.82, 0.56], "articulation": "flatpick", "description": "Strike bass strings on beats one and three, then answer with short chord strokes on beats two and four."},
-        {"name": "bluegrass banjo roll and mandolin chop guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "bluegrass guitar chord-change run", "shortName": "Guitar chord-change run", "role": "harmony", "onsets": [2.5, 3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.2, 0.2, 0.16, 0.12], "accents": [0.58, 0.72, 0.84, 0.94], "phraseEnd": true, "sectionUsage": ["banjo-break", "fiddle-break"], "articulation": "flatpick", "description": "Use a short picked walk into the next chord at the phrase edge; keep it out of the middle of the break so the featured banjo or fiddle stays clear."},
         {"name": "bluegrass mandolin backbeat chop", "shortName": "Mandolin chop", "role": "harmony", "onsets": [1, 3], "instruments": ["mandolin"], "cycleLength": 1, "durations": [0.16, 0.16], "accents": [0.58, 0.7], "articulation": "staccato", "description": "Mute each compact chord immediately after beats two and four; the short chop supplies the backbeat without masking the roll."},
         {"name": "bluegrass banjo roll and mandolin chop mandolin cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["mandolin"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "bluegrass upright two-beat anchor", "shortName": "Upright two-beat", "role": "bass", "onsets": [0, 2], "instruments": ["upright-bass"], "cycleLength": 1, "accents": [0.9, 0.78], "articulation": "accent", "durations": [0.72, 0.72], "description": "Alternate root and fifth on beats one and three; let each pizzicato note ring through its written length."},

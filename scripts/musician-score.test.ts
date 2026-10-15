@@ -11,6 +11,8 @@ import { getStyle } from '../src/engine/style/registry';
 import { sliceBarNative } from '../src/engine/sheet/grid';
 import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { velocityForEnergy } from '../src/engine/band/velocity';
+import { grooveVelocityMultiplier, grooveForStyle } from '../src/engine/band/groove';
+import { resolveStyle } from '../src/engine/style/resolve';
 import type { MusicalPattern } from '../src/types';
 
 function fixture(): MusicianScore {
@@ -36,6 +38,17 @@ test('section dynamics preserve soft attacks, accent contrast, and a non-saturat
   assert.ok(quiet < mid && mid < peak, `${quiet} < ${mid} < ${peak}`);
   assert.ok(softAccent < strongAccent, `${softAccent} < ${strongAccent}`);
   assert.ok(peak <= 107, `forte ceiling should leave headroom below MIDI 127, got ${peak}`);
+});
+
+test('style groove carries written accents into a stable, bounded velocity contour', () => {
+  const groove = grooveForStyle(resolveStyle({ genreId: 'country', styleId: 'country-honky-tonk' }));
+  const input = { beatInBar: 0, beatsPerBar: 4, role: 'comp' as const, seed: 481,
+    bpm: 112, intensity: 0.7, ensembleSeed: 72 };
+  const strong = grooveVelocityMultiplier(groove, { ...input, accent: 1 });
+  const soft = grooveVelocityMultiplier(groove, { ...input, accent: 0.3 });
+  assert.ok(strong > soft * 2, `${strong} should articulate more than ${soft}`);
+  assert.equal(grooveVelocityMultiplier(groove, { ...input, accent: 1 }), strong,
+    'the phrase contour is seeded, not re-randomized on each render');
 });
 
 test('Arabic Takht sample gives taqsim a solo voice and distinct section cells to its ensemble', () => {

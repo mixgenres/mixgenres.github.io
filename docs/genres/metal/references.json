@@ -1,0 +1,120 @@
+{
+  "genreId": "metal",
+  "reviewed": "2026-10-14",
+  "status": "Five streaming recording candidates are collected for each of the seven Metal styles. Listening comparison, useful timecodes, and mix notes remain pending; these are candidates, not verified sonic matches.",
+  "source": "Apple Music individual track pages. No reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "heavy-metal",
+      "compare": [
+        "eighth-plus-two-sixteenth gallop between bass and guitar",
+        "twin-guitar harmony and the separation of the two guitar lines",
+        "ride cymbal, kick/snare balance, and forward momentum",
+        "vocal gaps, guitar feature, and the return to the riff"
+      ],
+      "recordings": [
+        { "title": "The Trooper (2015 Remaster)", "artist": "Iron Maiden", "url": "https://music.apple.com/us/song/1713861908", "timecodes": [] },
+        { "title": "Aces High (2015 Remaster)", "artist": "Iron Maiden", "url": "https://music.apple.com/us/song/1713861279", "timecodes": [] },
+        { "title": "Holy Diver", "artist": "Dio", "url": "https://music.apple.com/us/song/373451154", "timecodes": [] },
+        { "title": "Breaking the Law", "artist": "Judas Priest", "url": "https://music.apple.com/us/song/207346225", "timecodes": [] },
+        { "title": "Sabbath Bloody Sabbath", "artist": "Black Sabbath", "url": "https://music.apple.com/us/song/785231829", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "thrash",
+      "compare": [
+        "palm-muted sixteenth-note picking and synchronized bass attack",
+        "kick/snare skank beat and fast cymbal pulse",
+        "riff stops and the contrast into a half-time passage",
+        "vocal phrasing and the lead guitar feature over the returning groove"
+      ],
+      "recordings": [
+        { "title": "Master of Puppets", "artist": "Metallica", "url": "https://music.apple.com/us/song/1275600554", "timecodes": [] },
+        { "title": "Angel of Death", "artist": "Slayer", "url": "https://music.apple.com/us/song/1733769074", "timecodes": [] },
+        { "title": "Holy Wars... The Punishment Due", "artist": "Megadeth", "url": "https://music.apple.com/us/song/725787936", "timecodes": [] },
+        { "title": "Caught in a Mosh", "artist": "Anthrax", "url": "https://music.apple.com/us/song/1443800920", "timecodes": [] },
+        { "title": "Into the Pit", "artist": "Testament", "url": "https://music.apple.com/us/song/1458859242", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "doom",
+      "compare": [
+        "slow low-string attack, chord sustain, and deliberate muting",
+        "kick and snare spacing that gives the riff weight",
+        "how bass reinforces the guitar without filling every gap",
+        "long-form build, contrasting vocal register, and ring-out"
+      ],
+      "recordings": [
+        { "title": "Solitude", "artist": "Candlemass", "url": "https://music.apple.com/us/song/410477889", "timecodes": [] },
+        { "title": "Dragonaut", "artist": "Sleep", "url": "https://music.apple.com/us/song/43358927", "timecodes": [] },
+        { "title": "Funeralopolis", "artist": "Electric Wizard", "url": "https://music.apple.com/us/song/965381929", "timecodes": [] },
+        { "title": "Born Too Late", "artist": "Saint Vitus", "url": "https://music.apple.com/us/song/117747946", "timecodes": [] },
+        { "title": "Sabbath Bloody Sabbath", "artist": "Black Sabbath", "url": "https://music.apple.com/us/song/785231829", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "death",
+      "compare": [
+        "tremolo-picked guitar line against the low-string bass anchor",
+        "kick/snare blast coordination and cymbal subdivision",
+        "chromatic riff changes, stop-start accents, and phrase-end fills",
+        "contrast between blast sections and the slower breakdown"
+      ],
+      "recordings": [
+        { "title": "Pull the Plug (Live in L.A. - 1998)", "artist": "Death", "url": "https://music.apple.com/us/song/485459513", "timecodes": [] },
+        { "title": "Immortal Rites", "artist": "Morbid Angel", "url": "https://music.apple.com/us/song/63616703", "timecodes": [] },
+        { "title": "Left Hand Path", "artist": "Entombed", "url": "https://music.apple.com/us/song/362543369", "timecodes": [] },
+        { "title": "Hammer Smashed Face", "artist": "Cannibal Corpse", "url": "https://music.apple.com/us/song/56584936", "timecodes": [] },
+        { "title": "Slowly We Rot", "artist": "Obituary", "url": "https://music.apple.com/us/song/214477938", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "black",
+      "compare": [
+        "continuous tremolo-picked melody and its sustained harmony bed",
+        "blast-beat cymbal wash, snare definition, and changing density",
+        "how the guitar register and vocal texture create cold distance",
+        "contrast from exposed opening to full riff and thinning outro"
+      ],
+      "recordings": [
+        { "title": "Freezing Moon", "artist": "Mayhem", "url": "https://music.apple.com/us/song/410477081", "timecodes": [] },
+        { "title": "Transilvanian Hunger", "artist": "Darkthrone", "url": "https://music.apple.com/us/song/948942601", "timecodes": [] },
+        { "title": "I Am the Black Wizards", "artist": "Emperor", "url": "https://music.apple.com/us/song/1670679973", "timecodes": [] },
+        { "title": "A Fine Day to Die", "artist": "Bathory", "url": "https://music.apple.com/us/song/1651442610", "timecodes": [] },
+        { "title": "At the Heart of Winter", "artist": "Immortal", "url": "https://music.apple.com/us/song/264855438", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "progressive-metal",
+      "compare": [
+        "seven-eighth grouping and the audible 2+2+3 accent map",
+        "guitar/bass unison against independent kick/snare placement",
+        "meter-aware phrasing across section changes",
+        "sparse-to-dense build, lead feature, and ensemble peak"
+      ],
+      "recordings": [
+        { "title": "Schism", "artist": "TOOL", "url": "https://music.apple.com/us/song/1474185654", "timecodes": [] },
+        { "title": "Metropolis - Part I (The Miracle and the Sleeper)", "artist": "Dream Theater", "url": "https://music.apple.com/us/song/1796368651", "timecodes": [] },
+        { "title": "Bleed", "artist": "Meshuggah", "url": "https://music.apple.com/us/song/1882049242", "timecodes": [] },
+        { "title": "Ghost of Perdition", "artist": "Opeth", "url": "https://music.apple.com/us/song/214473109", "timecodes": [] },
+        { "title": "CAFO", "artist": "Animals as Leaders", "url": "https://music.apple.com/us/song/1008505460", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "industrial-metal",
+      "compare": [
+        "machine-tight guitar/bass unison and clipped mute length",
+        "kick/snare weight and how the cymbals avoid softening the attack",
+        "use of programmed or sampled layers beside the live band",
+        "synchronized stop accents, negative space, and the riff re-entry"
+      ],
+      "recordings": [
+        { "title": "Stigmata", "artist": "Ministry", "url": "https://music.apple.com/us/song/59390360", "timecodes": [] },
+        { "title": "Wish", "artist": "Nine Inch Nails", "url": "https://music.apple.com/us/song/1440743815", "timecodes": [] },
+        { "title": "Du hast", "artist": "Rammstein", "url": "https://music.apple.com/us/song/1682941083", "timecodes": [] },
+        { "title": "Replica", "artist": "Fear Factory", "url": "https://music.apple.com/us/song/214477959", "timecodes": [] },
+        { "title": "Dragula", "artist": "Rob Zombie", "url": "https://music.apple.com/us/song/1440735957", "timecodes": [] }
+      ]
+    }
+  ]
+}

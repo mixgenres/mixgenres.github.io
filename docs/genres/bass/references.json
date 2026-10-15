@@ -1,0 +1,167 @@
+{
+  "genreId": "bass",
+  "status": "Five linked streaming-track candidates are collected for all 10 Bass styles. Listening comparison and timecodes remain pending; candidates are not yet verified sonic matches.",
+  "source": "Apple Music track pages; no reference audio downloaded.",
+  "references": [
+    {
+      "styleId": "drum-and-bass",
+      "compare": [
+        "fast two-step kick and snare against the chopped break",
+        "sub-bass weight and phrase gaps under the break edits",
+        "how pads, vocal layers, or a lead hook widen the breakdown",
+        "build rolls, drop impact, and the way the groove stays rolling"
+      ],
+      "recordings": [
+        { "title": "Inner City Life (2020 Remaster)", "artist": "Goldie", "url": "https://music.apple.com/us/album/inner-city-life-2020-remaster/1561942518?i=1561942875", "timecodes": [] },
+        { "title": "Brown Paper Bag", "artist": "Roni Size & Reprazent", "url": "https://music.apple.com/us/song/1669463175", "timecodes": [] },
+        { "title": "Up in Smoke", "artist": "Calibre", "url": "https://music.apple.com/us/song/1210359969", "timecodes": [] },
+        { "title": "Terminator II", "artist": "Rufige Kru", "url": "https://music.apple.com/us/song/286561797", "timecodes": [] },
+        { "title": "The Hidden Camera", "artist": "Photek", "url": "https://music.apple.com/us/song/724115831", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "jungle",
+      "compare": [
+        "chopped break edits and how the kick/snare pattern breathes",
+        "ragga vocal calls, sample punctuation, and the response space",
+        "syncopated sub placement under the break",
+        "how short fills and dropouts turn over a phrase"
+      ],
+      "recordings": [
+        { "title": "Original Nuttah", "artist": "UK Apachi", "url": "https://music.apple.com/us/song/219349890", "timecodes": [] },
+        { "title": "Valley of the Shadows", "artist": "Origin Unknown", "url": "https://music.apple.com/us/song/1409332709", "timecodes": [] },
+        { "title": "Incredible (feat. General Levy)", "artist": "M-Beat", "url": "https://music.apple.com/us/song/1770086874", "timecodes": [] },
+        { "title": "The Lighter", "artist": "DJ SS", "url": "https://music.apple.com/us/song/1452967484", "timecodes": [] },
+        { "title": "Super Sharp Shooter (Short & Sharp Version)", "artist": "DJ Zinc", "url": "https://music.apple.com/us/song/1786339043", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "liquid",
+      "compare": [
+        "smooth breakbeat and bass pocket without losing forward motion",
+        "long pad or chord sustain against short drum and bass events",
+        "melodic lead phrasing and vocal color across the breakdown",
+        "how the drop restores energy without turning harsh or overcrowded"
+      ],
+      "recordings": [
+        { "title": "If We Ever", "artist": "High Contrast", "url": "https://music.apple.com/us/song/318011669", "timecodes": [] },
+        { "title": "Even If", "artist": "Calibre", "url": "https://music.apple.com/us/song/904521534", "timecodes": [] },
+        { "title": "Just One Second (2018 Director's Cut)", "artist": "London Elektricity", "url": "https://music.apple.com/us/song/1686146101", "timecodes": [] },
+        { "title": "Atlantis (I Need You)", "artist": "LTJ Bukem", "url": "https://music.apple.com/us/song/1606365358", "timecodes": [] },
+        { "title": "Up in Smoke", "artist": "Calibre", "url": "https://music.apple.com/us/song/1210359969", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "neurofunk",
+      "compare": [
+        "tight break transients against syncopated bass phrases",
+        "staccato versus sustained or bent bass gestures",
+        "how distorted mid-bass layers stay separate from the clean sub",
+        "short snare builds, drop punctuation, and controlled high-frequency density"
+      ],
+      "recordings": [
+        { "title": "Stigma (Original)", "artist": "Noisia", "url": "https://music.apple.com/us/song/1129231128", "timecodes": [] },
+        { "title": "Bacteria", "artist": "Ed Rush & Optical", "url": "https://music.apple.com/us/song/1283409472", "timecodes": [] },
+        { "title": "The Sirens", "artist": "Mefjus", "url": "https://music.apple.com/us/song/1375360281", "timecodes": [] },
+        { "title": "Arrakis", "artist": "Black Sun Empire", "url": "https://music.apple.com/us/song/1647525227", "timecodes": [] },
+        { "title": "Brain Bucket", "artist": "Noisia, Ed Rush & Optical", "url": "https://music.apple.com/us/song/392283399", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "uk-garage",
+      "compare": [
+        "shuffled kick placement and clipped, offbeat chord stabs",
+        "bassline syncopation and how it answers the vocal phrase",
+        "swinging hats and ghost notes against the straight backbeat",
+        "small A/B arrangement changes that keep the dance pocket moving"
+      ],
+      "recordings": [
+        { "title": "Sincere", "artist": "MJ Cole", "url": "https://music.apple.com/us/song/1640047218", "timecodes": [] },
+        { "title": "Rewind", "artist": "Craig David", "url": "https://music.apple.com/us/song/1207938375", "timecodes": [] },
+        { "title": "Battle (feat. Lain)", "artist": "Wookie", "url": "https://music.apple.com/us/song/1278990273", "timecodes": [] },
+        { "title": "Movin' Too Fast", "artist": "Artful Dodger & Romina Johnson", "url": "https://music.apple.com/us/song/280183603", "timecodes": [] },
+        { "title": "Neighbourhood (El B Remix)", "artist": "Zed Bias & MC Rumpus", "url": "https://music.apple.com/us/song/1712181088", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "2-step",
+      "compare": [
+        "skipping kick and broken two-step placement around the snare backbeat",
+        "vocal hook phrasing against negative space in the drums",
+        "bassline replies and offbeat chord accents",
+        "how the chorus gains lift through pattern density rather than a four-on-the-floor kick"
+      ],
+      "recordings": [
+        { "title": "Flowers (Sunship Edit)", "artist": "Sweet Female Attitude", "url": "https://music.apple.com/us/song/358338788", "timecodes": [] },
+        { "title": "Do You Really Like It?", "artist": "DJ Pied Piper & The Masters of Ceremonies", "url": "https://music.apple.com/us/song/1474777003", "timecodes": [] },
+        { "title": "21 Seconds", "artist": "So Solid Crew", "url": "https://music.apple.com/us/song/1458134055", "timecodes": [] },
+        { "title": "Gotta Get Thru This (D'N'D Radio Edit)", "artist": "Daniel Bedingfield", "url": "https://music.apple.com/us/song/1569725083", "timecodes": [] },
+        { "title": "Hold On", "artist": "Groove Chronicles (Noodles)", "url": "https://music.apple.com/us/song/1151500594", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "dubstep",
+      "compare": [
+        "half-time kick/snare weight and the gap between backbeats",
+        "sub length, bass-note movement, and the physical impact of the drop",
+        "dub echo and filter movement around the low-frequency center",
+        "how the breakdown creates contrast before a full, uncluttered return"
+      ],
+      "recordings": [
+        { "title": "Midnight Request Line", "artist": "Skream", "url": "https://music.apple.com/us/song/1790762168", "timecodes": [] },
+        { "title": "Night", "artist": "Benga & Coki", "url": "https://music.apple.com/us/song/673091013", "timecodes": [] },
+        { "title": "Eastern Jam", "artist": "Chase & Status", "url": "https://music.apple.com/us/song/1527125161", "timecodes": [] },
+        { "title": "Cockney Thug", "artist": "Rusko", "url": "https://music.apple.com/us/song/1144072132", "timecodes": [] },
+        { "title": "26 Basslines", "artist": "Benga", "url": "https://music.apple.com/us/song/1790764642", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "grime",
+      "compare": [
+        "sparse square-wave hooks and the deliberate space between stabs",
+        "hard, dry drum-machine attacks against the vocal cadence",
+        "short bass notes and pitch-bent hook punctuation",
+        "how a minimal beat preserves urgency without filling every gap"
+      ],
+      "recordings": [
+        { "title": "I Luv U", "artist": "Dizzee Rascal", "url": "https://music.apple.com/us/song/1851553596", "timecodes": [] },
+        { "title": "Wot Do U Call It?", "artist": "Wiley", "url": "https://music.apple.com/us/song/1136793490", "timecodes": [] },
+        { "title": "That's Not Me (feat. Jme)", "artist": "Skepta", "url": "https://music.apple.com/us/song/1693703200", "timecodes": [] },
+        { "title": "Pow! (Forward) [Original]", "artist": "Lethal Bizzle", "url": "https://music.apple.com/us/song/724342120", "timecodes": [] },
+        { "title": "P's & Q's", "artist": "Kano", "url": "https://music.apple.com/us/song/1684377741", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "future-garage",
+      "compare": [
+        "late, ghosted two-step percussion against rounded sub notes",
+        "chord fragments, room tone, and reverb tails carrying the atmosphere",
+        "sample texture and vocal fragments used as color rather than a lead wall",
+        "how the A/B contrast comes from space, timbre, and small timing shifts"
+      ],
+      "recordings": [
+        { "title": "Archangel", "artist": "Burial", "url": "https://music.apple.com/us/song/893175788", "timecodes": [] },
+        { "title": "Near Dark", "artist": "Burial", "url": "https://music.apple.com/us/song/893175789", "timecodes": [] },
+        { "title": "Carbonated", "artist": "Mount Kimbie", "url": "https://music.apple.com/us/song/763146142", "timecodes": [] },
+        { "title": "Maybes", "artist": "Mount Kimbie", "url": "https://music.apple.com/us/song/763087917", "timecodes": [] },
+        { "title": "Night Air (Ramadanman Refix)", "artist": "Jamie Woon", "url": "https://music.apple.com/us/song/1445312464", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "breakbeat",
+      "compare": [
+        "looped break chops, syncopated kick placement, and snare transients",
+        "sampled riff hooks against bass and drum fills",
+        "filter and edit transitions that change energy without losing the groove",
+        "how the full beat punches back in after a stripped breakdown"
+      ],
+      "recordings": [
+        { "title": "Block Rockin' Beats", "artist": "The Chemical Brothers", "url": "https://music.apple.com/us/song/714366406", "timecodes": [] },
+        { "title": "Breathe", "artist": "The Prodigy", "url": "https://music.apple.com/us/song/1454134567", "timecodes": [] },
+        { "title": "Scram", "artist": "Plump DJs", "url": "https://music.apple.com/us/song/452474230", "timecodes": [] },
+        { "title": "Right Here, Right Now", "artist": "Fatboy Slim", "url": "https://music.apple.com/us/song/714928131", "timecodes": [] },
+        { "title": "The Rockafeller Skank", "artist": "Fatboy Slim", "url": "https://music.apple.com/us/song/714052794", "timecodes": [] }
+      ]
+    }
+  ]
+}

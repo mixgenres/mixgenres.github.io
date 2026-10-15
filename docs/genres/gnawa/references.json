@@ -1,0 +1,72 @@
+{
+  "genreId": "gnawa",
+  "reviewed": "2026-10-15",
+  "status": "Five linked streaming candidates are collected for each of the four Gnawa styles. Audio comparison and useful timecodes remain pending; candidates are not verified sonic matches.",
+  "source": "Apple Music artist, release, and track metadata were used to collect streaming candidates. Reference audio was not downloaded; sonic comparison and timecodes remain pending.",
+  "styles": [
+    {
+      "styleId": "traditional",
+      "compare": [
+        "the guembri’s repeated modal anchor and its plucked/slapped tone",
+        "how qraqeb subdivisions interlock with the guembri cycle",
+        "short lead calls against instrumental or group responses",
+        "changes in density across an extended cycle without chord changes"
+      ],
+      "recordings": [
+        { "title": "Sidi Mimoun Al Ghmami", "artist": "Gnawa from Marrakech", "url": "https://music.apple.com/us/song/287954639", "timecodes": [] },
+        { "title": "Gnawi Baba Mimoun", "artist": "Gnawa from Marrakech", "url": "https://music.apple.com/us/song/287954658", "timecodes": [] },
+        { "title": "Banya", "artist": "Gnawa from Marrakech", "url": "https://music.apple.com/us/song/287954626", "timecodes": [] },
+        { "title": "Hamouda", "artist": "Gnawa from Marrakech", "url": "https://music.apple.com/us/song/287954628", "timecodes": [] },
+        { "title": "La Ilaha Ila Allah Jilala", "artist": "Gnawa from Marrakech", "url": "https://music.apple.com/us/song/287954509", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "lila-trance",
+      "compare": [
+        "how the invocation introduces the guembri cycle before the full chant texture",
+        "short chant calls and answering phrases rather than continuous vocal doubling",
+        "how qraqeb density and tempo intensify across repeated cycles",
+        "the balance between sustained guembri repetition and changing vocal phrases"
+      ],
+      "recordings": [
+        { "title": "Aada", "artist": "Maalem Mahjoub & Gnawa de Marrakech", "url": "https://music.apple.com/us/song/314349830", "timecodes": [] },
+        { "title": "Salat al Nabi", "artist": "Maalem Mahjoub & Gnawa de Marrakech", "url": "https://music.apple.com/us/song/314349848", "timecodes": [] },
+        { "title": "Chalaba", "artist": "Maalem Mahjoub & Gnawa de Marrakech", "url": "https://music.apple.com/us/song/314349862", "timecodes": [] },
+        { "title": "Mimouna / Ghmami", "artist": "Maalem Mahjoub & Gnawa de Marrakech", "url": "https://music.apple.com/us/song/314349892", "timecodes": [] },
+        { "title": "Marhba / Gnawa Sidi Mimoun", "artist": "Maalem Mahjoub & Gnawa de Marrakech", "url": "https://music.apple.com/us/song/314349899", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "gnawa-jazz",
+      "compare": [
+        "the guembri vamp’s relationship to saxophone improvisation",
+        "how qraqeb keeps a compound pulse while the lead phrases stretch",
+        "the alternation between voice calls and instrumental answers",
+        "how percussion layers support the vamp without imposing a rock backbeat"
+      ],
+      "recordings": [
+        { "title": "Chabakrou", "artist": "Majid Bekkas", "url": "https://music.apple.com/us/song/1657480469", "timecodes": [] },
+        { "title": "Sidi Bouganga (with Hamid Drake)", "artist": "Majid Bekkas", "url": "https://music.apple.com/us/song/1803369079", "timecodes": [] },
+        { "title": "Daymallah", "artist": "Majid Bekkas", "url": "https://music.apple.com/us/song/564256977", "timecodes": [] },
+        { "title": "Galou", "artist": "Majid Bekkas", "url": "https://music.apple.com/us/song/564256979", "timecodes": [] },
+        { "title": "Boulila", "artist": "Majid Bekkas", "url": "https://music.apple.com/us/song/405383649", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "gnawa-rock",
+      "compare": [
+        "the guembri riff’s low-end attack against electric guitar and bass-range instruments",
+        "the contrast between drumless or sparse openings and the full rock groove",
+        "short vocal calls against guitar answers and longer instrumental lines",
+        "the lift from a reduced bridge or breakdown into a full chorus"
+      ],
+      "recordings": [
+        { "title": "Ida N'zour", "artist": "Hoba Hoba Spirit", "url": "https://music.apple.com/us/song/308615259", "timecodes": [] },
+        { "title": "Sabrina", "artist": "Gnawa Diffusion", "url": "https://music.apple.com/us/song/537800150", "timecodes": [] },
+        { "title": "El Hrig", "artist": "Hoba Hoba Spirit", "url": "https://music.apple.com/us/song/1707980337", "timecodes": [] },
+        { "title": "Charla Town", "artist": "Gnawa Diffusion", "url": "https://music.apple.com/us/song/537800126", "timecodes": [] },
+        { "title": "Fhamator", "artist": "Hoba Hoba Spirit", "url": "https://music.apple.com/us/song/308429999", "timecodes": [] }
+      ]
+    }
+  ]
+}

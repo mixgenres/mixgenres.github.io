@@ -9,7 +9,7 @@ export const GENRE_PACK: GenrePackInput = {
   "defaultStyle": "Salsa Dura",
   "meter": "4/4",
   "tempo": [96, 112],
-  "instruments": ["voice", "trumpet", "trombone", "piano", "tres", "bass", "congas", "bongos", "timbales", "claves", "cowbell", "maracas", "flute", "guiro", "violin", "tambora", "guira", "accordion", "cumbia-drum"],
+  "instruments": ["voice", "trumpet", "trombone", "piano", "tres", "bass", "congas", "bongos", "timbales", "claves", "cowbell", "maracas", "flute", "guiro", "violin", "tambora", "guira", "accordion", "cumbia-drum", "drums"],
   "roles": {
     "lead": ["voice", "trumpet", "trombone"],
     "harmony": ["piano", "tres"],
@@ -263,7 +263,7 @@ export const GENRE_PACK: GenrePackInput = {
         "lead": ["voice", "trumpet", "trombone"],
         "harmony": ["piano", "tres"],
         "bass": ["bass"],
-        "percussion": ["congas", "bongos", "timbales", "claves"]
+        "percussion": ["congas", "bongos", "timbales", "claves", "cowbell"]
       },
       "progressions": {
         "intro": ["C", "G7", "C", "G7"],
@@ -304,7 +304,8 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "son montuno coro and piano guajeo bongos cadence fill", "role": "percussion", "onsets": [7.0, 7.5, 7.75], "instruments": ["bongos"], "cycleLength": 2, "phraseEnd": true, "articulation": "roll"},
         {"name": "son montuno coro and piano guajeo timbales pulse", "role": "percussion", "onsets": [0, 1.5, 3, 5, 6], "instruments": ["timbales"], "cycleLength": 2, "articulation": "accent"},
         {"name": "son montuno coro and piano guajeo timbales cadence fill", "role": "percussion", "onsets": [7.0, 7.5, 7.75], "instruments": ["timbales"], "cycleLength": 2, "phraseEnd": true, "articulation": "roll"},
-        {"name": "son montuno coro and piano guajeo claves pulse", "role": "percussion", "onsets": [0, 1.5, 3, 5, 6], "instruments": ["claves"], "cycleLength": 2, "articulation": "accent"}
+        {"name": "son montuno coro and piano guajeo claves pulse", "role": "percussion", "onsets": [0, 1.5, 3, 5, 6], "instruments": ["claves"], "cycleLength": 2, "articulation": "accent"},
+        {"name": "son montuno campana over coro and piano guajeo", "shortName": "Son Montuno campana", "description": "Bring in the bongo bell as the montuno locks; keep its accents steady under the coro, piano guajeo and tres.", "role": "percussion", "onsets": [0, 1, 2, 3, 4, 5, 6, 7], "instruments": ["cowbell"], "cycleLength": 2, "hits": ["bell", "bell", "bell", "bell", "bell", "bell", "bell", "bell"], "accents": [0.8, 0.5, 0.8, 0.5, 0.8, 0.5, 0.8, 0.5], "articulation": "accent", "sectionUsage": ["chorus", "solo"], "difficulty": 2, "supportedEnergy": [3, 4, 5]}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
@@ -316,7 +317,8 @@ export const GENRE_PACK: GenrePackInput = {
         "congas": ["open", "staccato", "slap", "slap-tapao", "quinto-slap", "accent", "ghost"],
         "bongos": ["open", "slap", "staccato", "accent", "ghost"],
         "timbales": ["open", "staccato", "roll", "accent"],
-        "claves": ["staccato", "open", "accent"]
+        "claves": ["staccato", "open", "accent"],
+        "cowbell": ["open", "damped", "accent"]
       },
       "instrumentDialects": {
         "voice:lead": {
@@ -358,6 +360,10 @@ export const GENRE_PACK: GenrePackInput = {
         "claves:percussion": {
           "allowedTechniques": ["staccato", "open", "accent"],
           "defaultTechnique": "staccato"
+        },
+        "cowbell:percussion": {
+          "allowedTechniques": ["open", "damped", "accent"],
+          "defaultTechnique": "accent"
         }
       },
       "mix": {
@@ -387,7 +393,7 @@ export const GENRE_PACK: GenrePackInput = {
         "lead": ["voice", "trumpet", "trombone"],
         "harmony": ["piano", "tres"],
         "bass": ["bass"],
-        "percussion": ["congas", "bongos", "timbales", "claves"]
+        "percussion": ["congas", "bongos", "timbales", "claves", "cowbell"]
       },
       "progressions": {
         "intro": ["Gm", "D7", "Gm", "D7"],
@@ -427,7 +433,8 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "mambo brass riffs and bell drive bongos cadence fill", "role": "percussion", "onsets": [7.0, 7.5, 7.75], "instruments": ["bongos"], "cycleLength": 2, "phraseEnd": true, "articulation": "roll"},
         {"name": "mambo brass riffs and bell drive timbales pulse", "role": "percussion", "onsets": [0, 1.5, 3, 5, 6], "instruments": ["timbales"], "cycleLength": 2, "articulation": "accent"},
         {"name": "mambo brass riffs and bell drive timbales cadence fill", "role": "percussion", "onsets": [7.0, 7.5, 7.75], "instruments": ["timbales"], "cycleLength": 2, "phraseEnd": true, "articulation": "roll"},
-        {"name": "mambo brass riffs and bell drive claves pulse", "role": "percussion", "onsets": [0, 1.5, 3, 5, 6], "instruments": ["claves"], "cycleLength": 2, "articulation": "accent"}
+        {"name": "mambo brass riffs and bell drive claves pulse", "role": "percussion", "onsets": [0, 1.5, 3, 5, 6], "instruments": ["claves"], "cycleLength": 2, "articulation": "accent"},
+        {"name": "mambo campana drive under brass riffs", "shortName": "Mambo campana", "description": "Keep the cowbell driving through the mambo brass section, with alternating accents that stay clear of the horn punches.", "role": "percussion", "onsets": [0, 1, 2, 3, 4, 5, 6, 7], "instruments": ["cowbell"], "cycleLength": 2, "hits": ["bell", "bell", "bell", "bell", "bell", "bell", "bell", "bell"], "accents": [0.75, 0.45, 0.85, 0.45, 0.75, 0.45, 0.85, 0.45], "articulation": "accent", "sectionUsage": ["chorus", "solo"], "difficulty": 2, "supportedEnergy": [3, 4, 5]}
       ],
       "instrumentTechniques": {
         "voice": ["staccato", "fall", "accent", "legato", "vibrato"],
@@ -439,7 +446,8 @@ export const GENRE_PACK: GenrePackInput = {
         "congas": ["open", "staccato", "slap", "slap-tapao", "quinto-slap", "accent", "ghost"],
         "bongos": ["open", "slap", "staccato", "accent", "ghost"],
         "timbales": ["open", "staccato", "roll", "accent"],
-        "claves": ["staccato", "open", "accent"]
+        "claves": ["staccato", "open", "accent"],
+        "cowbell": ["open", "damped", "accent"]
       },
       "instrumentDialects": {
         "voice:lead": {
@@ -481,6 +489,10 @@ export const GENRE_PACK: GenrePackInput = {
         "claves:percussion": {
           "allowedTechniques": ["staccato", "open", "accent"],
           "defaultTechnique": "staccato"
+        },
+        "cowbell:percussion": {
+          "allowedTechniques": ["open", "damped", "accent"],
+          "defaultTechnique": "accent"
         }
       },
       "mix": {
@@ -836,7 +848,7 @@ export const GENRE_PACK: GenrePackInput = {
         "lead": ["voice", "trumpet", "trombone"],
         "harmony": ["piano", "tres"],
         "bass": ["bass"],
-        "percussion": ["congas", "bongos", "timbales", "claves"]
+        "percussion": ["congas", "bongos", "timbales", "claves", "drums"]
       },
       "progressions": {
         "intro": ["Dm7", "G7", "C6", "A7"],
@@ -859,6 +871,8 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
+        {"name": "boogaloo Latin soul kit backbeat", "shortName": "Boogaloo backbeat", "description": "Play the kick on beats one and three, snare on two and four, and an even eighth-note hi-hat. Keep the backbeat firm while Latin hand percussion adds its own syncopation.", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "hat", "snare", "hat", "kick", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.82, 0.38, 0.76, 0.38, 0.82, 0.38, 0.76, 0.38]},
+        {"name": "boogaloo kit phrase-end pickup", "shortName": "Boogaloo fill", "description": "Use a short tom-to-snare pickup only at the end of the phrase, then land back on the backbeat.", "role": "percussion", "onsets": [2.5, 3, 3.5, 3.75], "instruments": ["drums"], "hits": ["hat", "tom", "snare", "snare"], "cycleLength": 1, "phraseEnd": true, "accents": [0.38, 0.52, 0.68, 0.78]},
         {"name": "boogaloo backbeat and piano vocal response voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "boogaloo backbeat and piano vocal response voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "boogaloo backbeat and piano vocal response trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
@@ -889,6 +903,7 @@ export const GENRE_PACK: GenrePackInput = {
         "congas": ["open", "staccato", "slap", "slap-tapao", "quinto-slap", "accent", "ghost"],
         "bongos": ["open", "slap", "staccato", "accent", "ghost"],
         "timbales": ["open", "staccato", "roll", "accent"],
+        "drums": ["staccato", "accent", "ghost", "open", "roll"],
         "claves": ["staccato", "open", "accent"]
       },
       "instrumentDialects": {
@@ -927,6 +942,10 @@ export const GENRE_PACK: GenrePackInput = {
         "timbales:percussion": {
           "allowedTechniques": ["open", "staccato", "roll", "accent"],
           "defaultTechnique": "open"
+        },
+        "drums:percussion": {
+          "allowedTechniques": ["staccato", "accent", "ghost", "open", "roll"],
+          "defaultTechnique": "accent"
         },
         "claves:percussion": {
           "allowedTechniques": ["staccato", "open", "accent"],

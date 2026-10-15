@@ -24,7 +24,7 @@ export const GENRE_PACK: GenrePackInput = authorChacareraPiano(authorTangoArrang
   "cadences": ["E7"],
   "bassChordInteraction": "Anchor chord roots, answer the lead in phrase gaps, and approach the next chord at the turnaround.",
   "patternFamilies": ["Golden Age marcato four and violin answer", "balanced marcato/síncopa", "regular 4/8-bar phrases", "moderate fills", "canyengue heavy two-beat and clipped bandoneon", "habanera-derived bass", "2/4 bounce", "short repeated accompaniment cells", "De Caro contrapuntal violin and flexible phrasing", "independent countermelodies", "contrapuntal piano/bandoneón/violin movement", "Canaro simple dance marcato and melodic refrain", "direct marcato", "predictable phrase cadences", "vocal-supporting accompaniment", "D Arienzo urgent piano and staccato bandoneon", "hard four-beat marcato", "short síncopa cells", "rhythmic piano fills", "Di Sarli lyrical violin over steady piano bass", "stable pulse under long lyrical melody", "rolling piano transitions", "Troilo singing bandoneon and vocal space", "flexible bandoneón responses", "mixed marcato/síncopa", "melodic countermotion", "Pugliese yumba bass with dramatic rests", "yumba", "delayed bass attacks", "long crescendos", "large silences", "syncopated ensemble blocks", "Salgan syncopated piano and rich countermelody", "contrapuntal ostinati", "irregular accent layering", "independent inner figures", "tango cancion slow voice and bandoneon reply", "sparse accompaniment under voice", "instrumental answering phrase", "milonga habanera bass and short guitar chords", "habanera", "fast 2/4", "repeated bass cells", "light syncopation", "vals flowing ternary violin and bandoneon", "3/4 rotational bass", "1–2–3 sweeping accompaniment", "cross-bar melody", "nuevo tango angular 3 plus 3 plus 2 and chromatic line", "ostinati", "asymmetric meters", "additive rhythms", "contrapuntal bass", "Gotan electrotango loop and bandoneon hook", "downtempo breakbeat", "electronic kick/snare", "looped tango cells", "Bajofondo electronic rock groove and bandoneon answer", "rock backbeat + tango syncopation", "distorted bass ostinati", "modern orquesta alternating ensemble attacks and lyrical lines", "Golden-Age vocabulary with much larger dynamic blocks", "chacarera six-eight guitar and bombo cross accents", "6/8 against 3/4", "bombo accents", "guitar hemiola"],
-  "techniques": ["marcato", "staccato", "legato", "pizzicato", "arco", "bellows-accent", "portamento", "rubato"],
+  "techniques": ["marcato", "staccato", "legato", "pizzicato", "arco", "bellows-accent", "portamento", "rubato", "arrastre"],
   "forbiddenPatterns": ["patterns owned by another genre", "generic four-on-the-floor unless the selected style specifies it"],
   "styles": [
     {
@@ -110,9 +110,9 @@ export const GENRE_PACK: GenrePackInput = authorChacareraPiano(authorTangoArrang
     {
       "id": "canyengue",
       "name": "Canyengue",
-      "description": "Canyengue: canyengue heavy two-beat and clipped bandoneon. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
-      "patterns": ["canyengue heavy two-beat and clipped bandoneon", "habanera-derived bass", "2/4 bounce", "short repeated accompaniment cells"],
-      "techniques": ["marcato", "staccato", "legato", "pizzicato", "arco", "bellows-accent", "portamento", "rubato", "dry staccato", "lighter ensemble attacks", "minimal sustained strings", "accent", "legato_squeeze", "tenuto", "vibrato"],
+      "description": "Canyengue keeps a grounded 2/4 bounce: clipped bandoneon calls ride a habanera-derived bass, with the low line dragging into the final tonic rather than filling the close with another loop.",
+      "patterns": ["Clipped bandoneon call", "Habanera bass", "Canyengue phrase turn", "Bass arrastre pickup"],
+      "techniques": ["marcato", "staccato", "legato", "pizzicato", "arco", "bellows-accent", "portamento", "rubato", "dry staccato", "lighter ensemble attacks", "minimal sustained strings", "arrastre", "accent", "legato_squeeze", "tenuto", "vibrato"],
       "harmony": ["Am", "Dm", "E7", "C", "G7", "simpler tonic/dominant/subdominant motion", "fewer extensions", "modal/habanera color"],
       "meter": "2/4",
       "tempo": [104, 120],
@@ -154,7 +154,7 @@ export const GENRE_PACK: GenrePackInput = authorChacareraPiano(authorTangoArrang
         "bandoneon": ["accent", "staccato", "legato", "marcato", "legato_squeeze", "tenuto", "vibrato"],
         "violin": ["accent", "staccato", "legato", "pizzicato", "arco", "vibrato"],
         "piano": ["accent", "staccato", "legato", "marcato", "tenuto"],
-        "upright-bass": ["accent", "staccato", "legato", "pizzicato", "arco", "tenuto"]
+        "upright-bass": ["accent", "staccato", "legato", "pizzicato", "arco", "tenuto", "arrastre"]
       },
       "instrumentDialects": {
         "bandoneon:lead": {
@@ -170,7 +170,7 @@ export const GENRE_PACK: GenrePackInput = authorChacareraPiano(authorTangoArrang
           "defaultTechnique": "accent"
         },
         "upright-bass:bass": {
-          "allowedTechniques": ["accent", "staccato", "legato", "pizzicato", "arco", "tenuto"],
+          "allowedTechniques": ["accent", "staccato", "legato", "pizzicato", "arco", "tenuto", "arrastre"],
           "defaultTechnique": "accent"
         }
       },

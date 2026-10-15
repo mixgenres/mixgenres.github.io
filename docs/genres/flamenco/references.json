@@ -1,6 +1,6 @@
 {
   "genreId": "flamenco",
-  "status": "Existing video links are un-auditioned candidates; coverage is incomplete until each style has five linked recordings and listening notes.",
+  "status": "Five linked candidates are collected for all 19 styles. Audio comparison and timecodes remain pending, and candidates are not yet verified sonic matches.",
   "references": [
     {
       "styleId": "solea",
@@ -37,6 +37,50 @@
           "youtube": "https://www.youtube.com/watch?v=x8D4p4TLU9M",
           "timecode": "Full live studio performance; a contemporary solo-guitar contrast."
         }
+      ],
+      "compare": [
+        "the grave, spacious twelve-beat compás and its accented cadence, allowing the singer to stretch phrases without losing the cycle",
+        "how guitar falsetas answer cante, then leave air for the next vocal entrance",
+        "the weight of the bass notes, arpeggios, and rasgueado against a restrained voice-led texture",
+        "the expressive difference between Alcalá, Triana, Cádiz, and Jerez approaches to the soleá"
+      ],
+      "recordings": [
+        {
+          "title": "De tus ojos soy cautivo",
+          "artist": "Camarón de la Isla",
+          "url": "https://www.youtube.com/watch?v=DK6DX-QDuDI",
+          "timecodes": []
+        },
+        {
+          "title": "Soleá (Fiesta de la Bulería 1991)",
+          "artist": "Fernanda de Utrera",
+          "url": "https://www.youtube.com/watch?v=eTXQOcbSVJU",
+          "timecodes": []
+        },
+        {
+          "title": "Soleares de Joaquín el de la Paula y El Mellizo (La Soleá 1997)",
+          "artist": "Manuel Agujetas",
+          "url": "https://www.youtube.com/watch?v=avtXxxSkP5Y",
+          "timecodes": []
+        },
+        {
+          "title": "Soleá Niño Ricardo - Solo De Guitarra",
+          "artist": "Paco de Lucía",
+          "url": "https://www.youtube.com/watch?v=9AzmoKW4aPQ",
+          "timecodes": []
+        },
+        {
+          "title": "Entrada por Soleá",
+          "artist": "Paco de Lucía and Camarón de la Isla",
+          "url": "https://www.youtube.com/watch?v=fD4wIipRYiE",
+          "timecodes": []
+        },
+        {
+          "title": "Soleá (Studio Live, 2024)",
+          "artist": "Pituquete",
+          "url": "https://www.youtube.com/watch?v=x8D4p4TLU9M",
+          "timecodes": []
+        }
       ]
     },
     {
@@ -71,6 +115,44 @@
           "title": "Bulerías (live)",
           "youtube": "https://www.youtube.com/watch?v=YSAq2oJB53E",
           "timecode": "Live cante and guitar exchange."
+        }
+      ],
+      "compare": [
+        "the fast twelve-beat compás, accent map, and flexible placement of cante pickups",
+        "how palmas, jaleos, guitar rasgueado, and dancer-style footwork accents trade the lead",
+        "the lift from short cante lines into guitar answers and tightly placed remates",
+        "the way a bulería can stretch or compress locally while the ensemble keeps the cycle legible"
+      ],
+      "recordings": [
+        {
+          "title": "Bulerías (Lo Flamenco, 1990)",
+          "artist": "Bernarda and Fernanda de Utrera",
+          "url": "https://www.youtube.com/watch?v=QlQ2N34Xv6c",
+          "timecodes": []
+        },
+        {
+          "title": "Cante por bulerías (Flamenco en Canal Sur)",
+          "artist": "Fernanda de Utrera",
+          "url": "https://www.youtube.com/watch?v=oEfBCVLJ7e4",
+          "timecodes": []
+        },
+        {
+          "title": "Bulerías",
+          "artist": "Perla de Cádiz",
+          "url": "https://www.youtube.com/watch?v=mXxv8Gd6vjM",
+          "timecodes": []
+        },
+        {
+          "title": "Bulerías (Castillo de Arena, 1977)",
+          "artist": "Camarón de la Isla and Paco de Lucía",
+          "url": "https://www.youtube.com/watch?v=TBS_IbQt9FQ",
+          "timecodes": []
+        },
+        {
+          "title": "Bulerías (live)",
+          "artist": "Camarón de la Isla and Paco de Lucía",
+          "url": "https://www.youtube.com/watch?v=YSAq2oJB53E",
+          "timecodes": []
         }
       ]
     },
@@ -107,10 +189,54 @@
           "youtube": "https://www.youtube.com/watch?v=UY-eVOkuyuU",
           "timecode": "Live voice and guitar performance; compare its concert pacing with the studio references."
         }
+      ],
+      "compare": [
+        "the bright, buoyant twelve-beat compás and major-mode color that distinguish alegrías from the weightier soleá",
+        "how the singer and guitar shape short calls, silences, and cadential answers over palmas",
+        "the arrangement’s shifts among cante, falseta, escobilla-like drive, and remate",
+        "the balance between crisp dance accents and the relaxed lift of Cádiz phrasing"
+      ],
+      "recordings": [
+        {
+          "title": "A treinta barcos de guerra (Alegrías)",
+          "artist": "Pericón de Cádiz",
+          "url": "https://www.youtube.com/watch?v=lahWeNbhk7o",
+          "timecodes": []
+        },
+        {
+          "title": "Alegrías (Al Buen Compás, 1990)",
+          "artist": "Chano Lobato",
+          "url": "https://www.youtube.com/watch?v=WpighLFNLto",
+          "timecodes": []
+        },
+        {
+          "title": "Alegrías (Noche Flamenca, 1996)",
+          "artist": "Chano Lobato",
+          "url": "https://www.youtube.com/watch?v=dS6RJ_kJutQ",
+          "timecodes": []
+        },
+        {
+          "title": "Alegrías (En Vivo Desde El Teatro Real, 1975)",
+          "artist": "Paco de Lucía",
+          "url": "https://www.youtube.com/watch?v=IbAFvJ9pgcE",
+          "timecodes": []
+        },
+        {
+          "title": "Alegrías (Montreux, 1991)",
+          "artist": "Camarón de la Isla and Tomatito",
+          "url": "https://www.youtube.com/watch?v=UY-eVOkuyuU",
+          "timecodes": []
+        }
       ]
     },
     {
       "styleId": "tangos",
+      "compare": [
+        "the grounded four-beat compás and its cycle accents, distinct from Argentine tango",
+        "palmas and guitar rasgueado locking to the groove while cante shifts across the beat",
+        "short call-and-response guitar fills between vocal lines",
+        "how a basic dance pulse stays buoyant while the singer stretches or clips a phrase"
+      ],
       "references": [
         {
           "artist": "Camarón de la Isla",
@@ -121,20 +247,96 @@
           "title": "Tangos",
           "youtube": "https://www.youtube.com/watch?v=szh_IDEVxYE"
         }
+      ],
+      "recordings": [
+        {
+          "title": "Hasta el Reloj Se Me Para (Tangos Flamencos)",
+          "artist": "Fosforito & Paco de Lucía",
+          "url": "https://music.apple.com/us/song/156874889",
+          "timecodes": []
+        },
+        {
+          "title": "Libre Quiero Ser (Tangos)",
+          "artist": "Fosforito",
+          "url": "https://music.apple.com/us/song/220021203",
+          "timecodes": []
+        },
+        {
+          "title": "A Nadie Cuentes Tus Penas (Tangos Flamencos de Cádiz)",
+          "artist": "Fosforito",
+          "url": "https://music.apple.com/us/song/1445549986",
+          "timecodes": []
+        },
+        {
+          "title": "Tangos Extremeños",
+          "artist": "Porrina de Badajóz",
+          "url": "https://music.apple.com/us/song/480747412",
+          "timecodes": []
+        },
+        {
+          "title": "Tangos - Baile Flamenco",
+          "artist": "Rocío Segura",
+          "url": "https://music.apple.com/us/song/280474500",
+          "timecodes": []
+        }
       ]
     },
     {
       "styleId": "seguiriya",
+      "compare": [
+        "the weight and asymmetrical feel of the seguiriya compás, especially the accented resolution points",
+        "how cante stretches across the cycle and how guitar answers preserve its tension",
+        "bassless, voice-led passages versus denser guitar and footwork sections",
+        "the contrast between restrained openings, climbing phrases, and hard remates"
+      ],
       "references": [
         {
           "artist": "Antonio Mairena",
           "title": "Seguiriyas",
           "youtube": "https://www.youtube.com/watch?v=T2Kfn4g1ipw"
         }
+      ],
+      "recordings": [
+        {
+          "title": "Seguiriyas",
+          "artist": "Antonio Mairena",
+          "url": "https://music.apple.com/us/song/1508961299",
+          "timecodes": []
+        },
+        {
+          "title": "Seguiriyas",
+          "artist": "El Agujetas",
+          "url": "https://music.apple.com/us/song/266742842",
+          "timecodes": []
+        },
+        {
+          "title": "Reniego en Mi Sino (Seguiriyas)",
+          "artist": "El Chocolate",
+          "url": "https://music.apple.com/us/song/220162726",
+          "timecodes": []
+        },
+        {
+          "title": "Seguiriya",
+          "artist": "Sabicas",
+          "url": "https://music.apple.com/us/song/204711440",
+          "timecodes": []
+        },
+        {
+          "title": "Seguiriya",
+          "artist": "Carlos Montoya",
+          "url": "https://music.apple.com/us/song/384023477",
+          "timecodes": []
+        }
       ]
     },
     {
       "styleId": "tientos",
+      "compare": [
+        "the slow, weighty four-beat tread and the way accents keep it from feeling square",
+        "restrained guitar strums and bass-note changes below ornamented cante",
+        "phrase endings, breath spaces, and the lift when tientos turns toward tangos",
+        "the difference between an exposed cante/guitar texture and a full baile ensemble"
+      ],
       "references": [
         {
           "artist": "Camarón",
@@ -145,10 +347,48 @@
           "title": "Tientos (Noche Flamenca, 1989)",
           "youtube": "https://www.youtube.com/watch?v=vHAuK5pYlwA"
         }
+      ],
+      "recordings": [
+        {
+          "title": "Tientos (En Directo)",
+          "artist": "José Galván & Pastora Galván",
+          "url": "https://music.apple.com/us/song/658306410",
+          "timecodes": []
+        },
+        {
+          "title": "Tientos: Cante y Guitarra",
+          "artist": "El Trini & Victor M. Rosa",
+          "url": "https://music.apple.com/us/song/1636099058",
+          "timecodes": []
+        },
+        {
+          "title": "Yo No Sé Lo Que Me Dió (Tientos)",
+          "artist": "Enrique El Culata feat. Paquito Simón",
+          "url": "https://music.apple.com/us/song/581173383",
+          "timecodes": []
+        },
+        {
+          "title": "Poema del Tiempo (Tientos) [En Directo]",
+          "artist": "Enrique Morente",
+          "url": "https://music.apple.com/us/song/1442821012",
+          "timecodes": []
+        },
+        {
+          "title": "Llanto del Sacromonte: Tientos",
+          "artist": "Juanito Valderrama feat. Niño Ricardo",
+          "url": "https://music.apple.com/us/song/634416905",
+          "timecodes": []
+        }
       ]
     },
     {
       "styleId": "fandangos",
+      "compare": [
+        "the flexible vocal line resolving against the guitar's recurring harmonic cadence",
+        "regional melodic turns and differences between Huelva and other fandango forms",
+        "guitar response, falseta placement, and the way accompaniment yields to cante",
+        "the separation of fandango phrasing from a strict dance groove"
+      ],
       "references": [
         {
           "artist": "Camarón",
@@ -164,19 +404,95 @@
           "title": "Fandangos de Huelva (2/2)",
           "youtube": "https://www.youtube.com/watch?v=mMOes2RtxNI"
         }
+      ],
+      "recordings": [
+        {
+          "title": "Fandangos de Huelva",
+          "artist": "Hermanos Toronjo",
+          "url": "https://music.apple.com/us/song/875886268",
+          "timecodes": []
+        },
+        {
+          "title": "Calle Larga (Fandangos de Alosno)",
+          "artist": "Sebastián Cruz",
+          "url": "https://music.apple.com/us/song/511258499",
+          "timecodes": []
+        },
+        {
+          "title": "Fandangos (1)",
+          "artist": "Manolo Caracol & ensemble",
+          "url": "https://music.apple.com/us/song/281978822",
+          "timecodes": []
+        },
+        {
+          "title": "Fandangos de Huelva de la Paquera de Jerez",
+          "artist": "La Paquera de Jerez",
+          "url": "https://music.apple.com/us/song/590899722",
+          "timecodes": []
+        },
+        {
+          "title": "Fandango a Piano (Fandangos)",
+          "artist": "Antonio el Rubio feat. Diego Amador",
+          "url": "https://music.apple.com/us/song/1511731204",
+          "timecodes": []
+        }
       ]
     },
     {
       "styleId": "rumba",
+      "compare": [
+        "the repeating rumba guitar rasgueado against bass and hand-percussion placement",
+        "how a compact refrain opens into guitar or vocal fills without losing the dance pulse",
+        "the balance between dry guitar transients, warm low end, and layered palmas/percussion",
+        "traditional flamenco guitar phrasing compared with the brighter rumba catalana ensemble sound"
+      ],
       "references": [
         {
           "artist": "Paco de Lucía",
           "title": "Entre dos aguas"
         }
+      ],
+      "recordings": [
+        {
+          "title": "Entre Dos Aguas",
+          "artist": "Paco de Lucía",
+          "url": "https://music.apple.com/us/song/1451208220",
+          "timecodes": []
+        },
+        {
+          "title": "Bamboleo",
+          "artist": "Gipsy Kings",
+          "url": "https://music.apple.com/us/song/1440864030",
+          "timecodes": []
+        },
+        {
+          "title": "Djobi Djoba",
+          "artist": "Gipsy Kings",
+          "url": "https://music.apple.com/us/song/316136242",
+          "timecodes": []
+        },
+        {
+          "title": "No Estamos Lokos",
+          "artist": "Ketama",
+          "url": "https://music.apple.com/us/song/1444028480",
+          "timecodes": []
+        },
+        {
+          "title": "Baila Me",
+          "artist": "Gipsy Kings",
+          "url": "https://music.apple.com/us/song/31739295",
+          "timecodes": []
+        }
       ]
     },
     {
       "styleId": "tonas-martinetes",
+      "compare": [
+        "a palo seco: exposed voice without guitar harmony supplying a pulse",
+        "the singer's breath, timbre, and phrase length carrying the whole arrangement",
+        "short, forceful line endings and the charged silence before the next cante",
+        "martinete/deblas versus tonás, and the way a room or live audience changes the vocal space"
+      ],
       "references": [
         {
           "artist": "Antonio Mairena",
@@ -187,10 +503,48 @@
           "title": "Martinete (1969)",
           "youtube": "https://www.youtube.com/watch?v=ZabPPGMtcMo"
         }
+      ],
+      "recordings": [
+        {
+          "title": "Martinete, Toná y Debla de Triana",
+          "artist": "Antonio Mairena, Pepe Torres & Rosalía de Triana",
+          "url": "https://music.apple.com/us/song/283040469",
+          "timecodes": []
+        },
+        {
+          "title": "El Anillo Que Me Diste (Martinete)",
+          "artist": "El Chocolate",
+          "url": "https://music.apple.com/us/song/1457850197",
+          "timecodes": []
+        },
+        {
+          "title": "Mujer del Mundo (Martinete) [En Vivo]",
+          "artist": "Diego El Cigala feat. Diego del Morao",
+          "url": "https://music.apple.com/us/song/885411960",
+          "timecodes": []
+        },
+        {
+          "title": "El Calor de la Fragüa (Martinete)",
+          "artist": "Duquende",
+          "url": "https://music.apple.com/us/song/140829836",
+          "timecodes": []
+        },
+        {
+          "title": "Martinete y Debla: En el Barrio de Triana",
+          "artist": "Tomás Pavón feat. Melchor de Marchena",
+          "url": "https://music.apple.com/us/song/668340021",
+          "timecodes": []
+        }
       ]
     },
     {
       "styleId": "taranta",
+      "compare": [
+        "free-tempo, mining-song cante against guitar's exposed arpeggios and held cadences",
+        "the taranta's tense dissonant color and open phrase timing",
+        "guitar falseta/register changes as the singer's line ends and the instrumental solo begins",
+        "how a long, spacious melodic line can keep forward tension without a fixed dance pulse"
+      ],
       "references": [
         {
           "artist": "Paco de Lucía",
@@ -201,14 +555,47 @@
           "title": "Taranta",
           "youtube": "https://www.youtube.com/watch?v=yZzP9keGoD0"
         }
+      ],
+      "recordings": [
+        {
+          "title": "Taranta",
+          "artist": "Niño de Almadén",
+          "url": "https://music.apple.com/es/song/856116901",
+          "timecodes": []
+        },
+        {
+          "title": "Lamento Minero: Taranta",
+          "artist": "Niño de Almadén",
+          "url": "https://music.apple.com/us/song/1167522707",
+          "timecodes": []
+        },
+        {
+          "title": "En Tu Puerta Da la Luna (Taranto y Taranta Malagueña)",
+          "artist": "Camarón de la Isla feat. Paco de Lucía & Tomatito",
+          "url": "https://music.apple.com/us/song/1442729215",
+          "timecodes": []
+        },
+        {
+          "title": "Taranta",
+          "artist": "Ramón Montoya",
+          "url": "https://music.apple.com/us/song/567609383",
+          "timecodes": []
+        },
+        {
+          "title": "Taranta Para Paco",
+          "artist": "Mercedes Luján",
+          "url": "https://music.apple.com/us/song/1845102608",
+          "timecodes": []
+        }
       ]
     },
     {
       "styleId": "granaina",
       "compare": [
-        "free cante phrase length and guitar response",
-        "upper-register falseta articulation",
-        "Granada cadence and room between phrases"
+        "free, rubato phrase lengths without a repeating dance compás, with guitar following the singer’s breath",
+        "the spacious guitar introduction and unhurried answers between cante phrases",
+        "upper-register falseta articulation, arpeggio decay, and Granada-style cadential color",
+        "the contrast between solo guitar granaínas and voice-led granaína y media"
       ],
       "references": [
         {
@@ -238,14 +625,53 @@
           "youtube": "https://www.youtube.com/watch?v=iLIGn4pkkt8",
           "timecode": "A single arpeggio study from the piece; use alongside the full recording."
         }
+      ],
+      "recordings": [
+        {
+          "title": "Que he dejao de quererte (Granaína)",
+          "artist": "Camarón",
+          "url": "https://www.youtube.com/watch?v=Sht0la5TgH4",
+          "timecodes": []
+        },
+        {
+          "title": "Reflejo de Luna (Granaína)",
+          "artist": "Paco de Lucía",
+          "url": "https://www.youtube.com/watch?v=YQHYD6AiQI4",
+          "timecodes": []
+        },
+        {
+          "title": "Granaína",
+          "artist": "Antonio Chacón",
+          "url": "https://www.youtube.com/watch?v=EBvy5Q0o2lI",
+          "timecodes": []
+        },
+        {
+          "title": "Rosa si no te cogí (Granaínas de Chacón)",
+          "artist": "Enrique Morente",
+          "url": "https://www.youtube.com/watch?v=NmWnsILm7DA",
+          "timecodes": []
+        },
+        {
+          "title": "Generalife Bajo la Luna (Granaína), guitar lesson excerpt",
+          "artist": "Paco de Lucía",
+          "url": "https://www.youtube.com/watch?v=iLIGn4pkkt8",
+          "timecodes": []
+        },
+        {
+          "title": "Granainas (En Vivo Desde El Teatro Real 1975 / Remastered 2015)",
+          "artist": "Paco de Lucía",
+          "url": "https://music.apple.com/es/song/1443132216",
+          "timecodes": []
+        }
       ]
     },
     {
       "styleId": "malaguena",
       "compare": [
-        "rubato cante against spacious guitar arpeggios",
-        "phrase-ending cadence and breath",
-        "natural decay and intimate guitar/vocal balance"
+        "rubato cante against spacious guitar arpeggios, with no fixed dance groove",
+        "phrase-ending cadence, breath, and guitar response after each vocal line",
+        "natural note decay and intimate guitar/vocal balance in a sparse texture",
+        "the contrasting melodic turns associated with La Trini, El Mellizo, and Chacón"
       ],
       "references": [
         {
@@ -274,19 +700,95 @@
           "title": "Malagueña de La Trini",
           "youtube": "https://www.youtube.com/watch?v=N_YeOtac7hE"
         }
+      ],
+      "recordings": [
+        {
+          "title": "Malagueñas",
+          "artist": "Enrique Morente",
+          "url": "https://www.youtube.com/watch?v=iFGFy-7XbNA",
+          "timecodes": []
+        },
+        {
+          "title": "Malagueña de La Trini (2009)",
+          "artist": "Antonia Contreras",
+          "url": "https://www.youtube.com/watch?v=YZdxJATv48o",
+          "timecodes": []
+        },
+        {
+          "title": "Malagueña de Chacón",
+          "artist": "Antonio Chacón",
+          "url": "https://www.youtube.com/watch?v=T3CSA6DfqD4",
+          "timecodes": []
+        },
+        {
+          "title": "Malagueña del Mellizo (Rito y Geografía del Cante)",
+          "artist": "Antonio Mairena",
+          "url": "https://www.youtube.com/watch?v=AEHUsSd_GYk",
+          "timecodes": []
+        },
+        {
+          "title": "Malagueña de La Trini",
+          "artist": "Pepe de Campillos and Pepe Reina",
+          "url": "https://www.youtube.com/watch?v=N_YeOtac7hE",
+          "timecodes": []
+        }
       ]
     },
     {
       "styleId": "guajira",
+      "compare": [
+        "the guajira's lilting compound/duple pull and the way guitar marks its underlying cycle",
+        "guitar rasgueado, melodic picado, and phrase-ending falseta handoffs",
+        "vocal ornament and guitar response timing across the repeating verse pattern",
+        "bright major-mode color and Cuban-derived rhythmic character within flamenco articulation"
+      ],
       "references": [
         {
           "artist": "Paco de Lucía",
           "title": "Guajiras de Lucía"
         }
+      ],
+      "recordings": [
+        {
+          "title": "Guajiras De Lucía",
+          "artist": "Paco de Lucía",
+          "url": "https://music.apple.com/us/song/1840176812",
+          "timecodes": []
+        },
+        {
+          "title": "Guajira Flamenca",
+          "artist": "Ricardo Modrego & Paco de Lucía",
+          "url": "https://music.apple.com/us/song/1840176409",
+          "timecodes": []
+        },
+        {
+          "title": "Guajira",
+          "artist": "Naranjito de Triana",
+          "url": "https://music.apple.com/us/song/1721596218",
+          "timecodes": []
+        },
+        {
+          "title": "Guajira: Lloro por una Mujer",
+          "artist": "El Mochuelo",
+          "url": "https://music.apple.com/us/song/636474144",
+          "timecodes": []
+        },
+        {
+          "title": "Guajira",
+          "artist": "El Pili",
+          "url": "https://music.apple.com/us/song/1472302821",
+          "timecodes": []
+        }
       ]
     },
     {
       "styleId": "farruca",
+      "compare": [
+        "the square, driving pulse and how heelwork-style accents articulate its four-beat frame",
+        "minor-key guitar figures, clipped rasgueado, and the shift into lyrical falsetas",
+        "guitar attack and decay against space left for footwork and palmas",
+        "how the close intensifies through compás and remate rather than added layers"
+      ],
       "references": [
         {
           "artist": "Sabicas",
@@ -297,14 +799,84 @@
           "title": "Farruca (IV Bienal de Sevilla, 1986)",
           "youtube": "https://www.youtube.com/watch?v=DgwoD2ywSOU"
         }
+      ],
+      "recordings": [
+        {
+          "title": "Farruca",
+          "artist": "Sabicas",
+          "url": "https://music.apple.com/us/song/204711753",
+          "timecodes": []
+        },
+        {
+          "title": "Farruca de Lucía",
+          "artist": "Paco de Lucía",
+          "url": "https://music.apple.com/us/song/1840176299",
+          "timecodes": []
+        },
+        {
+          "title": "Farruca",
+          "artist": "Manitas de Plata",
+          "url": "https://music.apple.com/us/song/888099790",
+          "timecodes": []
+        },
+        {
+          "title": "Farruca",
+          "artist": "Paco Peña & Eliot Fisk",
+          "url": "https://music.apple.com/us/song/1105519647",
+          "timecodes": []
+        },
+        {
+          "title": "Farruca",
+          "artist": "Pepe de Badajoz",
+          "url": "https://music.apple.com/us/song/1130975733",
+          "timecodes": []
+        }
       ]
     },
     {
       "styleId": "sevillanas",
+      "compare": [
+        "the four coplas' repeated dance structure and clearly marked transitions",
+        "guitar strumming, palmas, and voice locking together without flattening the accents",
+        "how each copla changes melody or lyric while retaining the shared groove",
+        "the crisp cadence and pickup that announce each new copla"
+      ],
       "references": [
         {
           "artist": "Paco de Lucía",
           "title": "El Cobre"
+        }
+      ],
+      "recordings": [
+        {
+          "title": "Mírala Cara a Cara (Sevillanas)",
+          "artist": "Requiebros",
+          "url": "https://music.apple.com/us/song/461087986",
+          "timecodes": []
+        },
+        {
+          "title": "Sevillanas de Triana",
+          "artist": "Los Romeros de la Puebla",
+          "url": "https://music.apple.com/us/song/863031113",
+          "timecodes": []
+        },
+        {
+          "title": "Sevillanas del Siglo XVIII",
+          "artist": "Carmen Linares",
+          "url": "https://music.apple.com/us/song/1211757279",
+          "timecodes": []
+        },
+        {
+          "title": "Cántame",
+          "artist": "María del Monte",
+          "url": "https://music.apple.com/us/song/362776156",
+          "timecodes": []
+        },
+        {
+          "title": "El Adiós",
+          "artist": "Los Romeros de la Puebla",
+          "url": "https://music.apple.com/us/song/1721682707",
+          "timecodes": []
         }
       ]
     },
@@ -315,6 +887,44 @@
           "artist": "Camarón",
           "title": "La Leyenda del Tiempo"
         }
+      ],
+      "compare": [
+        "how traditional cante phrasing and guitar compás stay audible beneath pop, rock, or orchestral production",
+        "the shift from sparse, intimate verse textures to a wider chorus without flattening flamenco articulation",
+        "how bass, drums, and electric or sampled layers support the guitar rather than masking its attack",
+        "the different balance between early nuevo-flamenco songwriting and later polished crossover production"
+      ],
+      "recordings": [
+        {
+          "title": "La Leyenda del Tiempo",
+          "artist": "Camarón",
+          "url": "https://music.apple.com/us/song/1442411606",
+          "timecodes": []
+        },
+        {
+          "title": "Soy Gitano",
+          "artist": "Camarón & Royal Philharmonic Orchestra",
+          "url": "https://music.apple.com/us/song/1443635392",
+          "timecodes": []
+        },
+        {
+          "title": "Cai",
+          "artist": "Niña Pastori",
+          "url": "https://music.apple.com/us/song/280271006",
+          "timecodes": []
+        },
+        {
+          "title": "Vente pa Madrid",
+          "artist": "Ketama",
+          "url": "https://music.apple.com/us/song/1443295377",
+          "timecodes": []
+        },
+        {
+          "title": "No Estamos Lokos",
+          "artist": "Ketama",
+          "url": "https://music.apple.com/us/song/1444028480",
+          "timecodes": []
+        }
       ]
     },
     {
@@ -323,6 +933,44 @@
         {
           "artist": "Paco de Lucía",
           "title": "Zyryab"
+        }
+      ],
+      "compare": [
+        "flamenco compás and rasgueado interacting with swing, jazz harmony, and improvising solo lines",
+        "the conversational handoffs among guitar, piano, bass, and flute or saxophone",
+        "how syncopated accents and chord extensions add color while the flamenco pulse remains clear",
+        "the difference between a guitar-led ensemble and the more open piano-led flamenco-jazz texture"
+      ],
+      "recordings": [
+        {
+          "title": "Zyryab (Remastered 2014)",
+          "artist": "Paco de Lucía",
+          "url": "https://music.apple.com/us/song/1443132486",
+          "timecodes": []
+        },
+        {
+          "title": "Sólo Quiero Caminar",
+          "artist": "Jorge Pardo & Chano Domínguez feat. Javier Colina & Tino Di Geraldo",
+          "url": "https://music.apple.com/us/song/874975201",
+          "timecodes": []
+        },
+        {
+          "title": "Solea Blues",
+          "artist": "Chano Domínguez",
+          "url": "https://music.apple.com/us/song/501828263",
+          "timecodes": []
+        },
+        {
+          "title": "Blue Jazz",
+          "artist": "DJ Toner feat. Jorge Pardo",
+          "url": "https://music.apple.com/us/song/1107564437",
+          "timecodes": []
+        },
+        {
+          "title": "Chiquto",
+          "artist": "Jorge Pardo & Chano Domínguez",
+          "url": "https://music.apple.com/us/song/874975202",
+          "timecodes": []
         }
       ]
     },
@@ -333,6 +981,44 @@
           "artist": "Pata Negra",
           "title": "Blues de la Frontera"
         }
+      ],
+      "compare": [
+        "flamenco guitar rasgueado and cante-shaped phrasing against amplified bass, drum kit, keyboards, and electric guitar",
+        "the contrast between rock backbeat and flamenco phrasing, including where the band drops out or tightens for a remate",
+        "how much distortion, sustain, and room sound each arrangement uses without burying acoustic guitar transients",
+        "Andalusian progressive-rock arrangements compared with blues-rock and more direct rock-gitano bands"
+      ],
+      "recordings": [
+        {
+          "title": "El Garrotín",
+          "artist": "Smash",
+          "url": "https://music.apple.com/us/song/1446485356",
+          "timecodes": []
+        },
+        {
+          "title": "Abre la puerta",
+          "artist": "Triana",
+          "url": "https://music.apple.com/us/song/722305664",
+          "timecodes": []
+        },
+        {
+          "title": "Hijos del Agobio",
+          "artist": "Triana",
+          "url": "https://music.apple.com/us/song/128118684",
+          "timecodes": []
+        },
+        {
+          "title": "Camarón (Remasterizada 2007)",
+          "artist": "Pata Negra",
+          "url": "https://music.apple.com/us/song/1753055254",
+          "timecodes": []
+        },
+        {
+          "title": "Aires de la Alameda",
+          "artist": "Alameda",
+          "url": "https://music.apple.com/us/song/402066849",
+          "timecodes": []
+        }
       ]
     },
     {
@@ -342,7 +1028,47 @@
           "artist": "Rosalía",
           "title": "Malamente"
         }
+      ],
+      "compare": [
+        "how flamenco vocal ornaments and compás are reshaped by programmed drums, samples, and sub-bass",
+        "the deliberate contrast between close, dry vocal space and wide electronic or sampled backdrops",
+        "rhythmic hooks made from palmas, claps, vocal fragments, or nontraditional percussion",
+        "how sparse sections, abrupt drops, and production shifts create tension instead of a continuous strummed bed"
+      ],
+      "recordings": [
+        {
+          "title": "MALAMENTE (Cap.1: Augurio)",
+          "artist": "ROSALÍA",
+          "url": "https://music.apple.com/us/song/1436310304",
+          "timecodes": []
+        },
+        {
+          "title": "PIENSO EN TU MIRÁ (Cap.3: Celos)",
+          "artist": "ROSALÍA",
+          "url": "https://music.apple.com/us/album/pienso-en-tu-mir%C3%A1-cap-3-celos-single/1392446564",
+          "timecodes": []
+        },
+        {
+          "title": "BAGDAD (Cap.7: Liturgia)",
+          "artist": "ROSALÍA",
+          "url": "https://music.apple.com/us/music-video/bagdad-cap-7-liturgia/1445146439",
+          "timecodes": []
+        },
+        {
+          "title": "Un Veneno",
+          "artist": "C. Tangana & Niño de Elche",
+          "url": "https://music.apple.com/us/album/un-veneno-single/1442588163",
+          "timecodes": []
+        },
+        {
+          "title": "Tú Me Dejaste De Querer",
+          "artist": "C. Tangana, Niño de Elche & La Húngara",
+          "url": "https://music.apple.com/us/album/t%C3%BA-me-dejaste-de-querer-single/1536369641",
+          "timecodes": []
+        }
       ]
     }
-  ]
+  ],
+  "reviewed": "2026-10-14",
+  "source": "Apple Music track, single, album, and music-video pages were checked for candidate metadata. Existing YouTube performance links were also added for older palo forms. Reference audio has not been downloaded or auditioned; timecodes remain pending."
 }

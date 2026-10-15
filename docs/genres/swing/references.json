@@ -1,0 +1,120 @@
+{
+  "genreId": "swing",
+  "reviewed": "2026-10-14",
+  "status": "Five linked streaming candidates are collected for all 7 styles. Listening comparison and timecodes remain pending; candidates are not verified sonic matches.",
+  "source": "Apple Music streaming track pages. Candidate lists are for review; no reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "west-coast-swing",
+      "compare": [
+        "the relaxed swung pocket and clear backbeat at social-dance tempo",
+        "how bass and drums keep the groove grounded while guitar, keys, or vocal phrases stretch and compress",
+        "short blues or soul answers between the lead phrases",
+        "the difference between a WCS-friendly pop/R&B song and a traditional big-band swing arrangement"
+      ],
+      "recordings": [
+        { "title": "Ain't No Sunshine", "artist": "Bill Withers", "url": "https://music.apple.com/us/song/293521573", "timecodes": [] },
+        { "title": "Give Me One Reason", "artist": "Tracy Chapman", "url": "https://music.apple.com/us/song/293102967", "timecodes": [] },
+        { "title": "Son of a Preacher Man", "artist": "Dusty Springfield", "url": "https://music.apple.com/us/song/953436613", "timecodes": [] },
+        { "title": "Play That Funky Music", "artist": "Wild Cherry", "url": "https://music.apple.com/us/song/1695902788", "timecodes": [] },
+        { "title": "Ex's & Oh's", "artist": "Elle King", "url": "https://music.apple.com/us/song/941366737", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "lindy-hop",
+      "compare": [
+        "four-to-the-bar swing rhythm and a clearly walking bass line",
+        "riff-based horn phrases, breaks, and the lift into a shout chorus",
+        "ride-cymbal drive and energetic but distinct solo handoffs",
+        "how the rhythm section keeps the dance pulse audible beneath ensemble punches"
+      ],
+      "recordings": [
+        { "title": "One O'Clock Jump", "artist": "Count Basie and His Orchestra", "url": "https://music.apple.com/us/song/1434888983", "timecodes": [] },
+        { "title": "Jumpin' at the Woodside", "artist": "Count Basie and His Orchestra", "url": "https://music.apple.com/us/song/1427375683", "timecodes": [] },
+        { "title": "Shiny Stockings", "artist": "Count Basie and His Orchestra", "url": "https://music.apple.com/us/song/1425184639", "timecodes": [] },
+        { "title": "Sing, Sing, Sing", "artist": "Benny Goodman and His Orchestra", "url": "https://music.apple.com/us/song/255340992", "timecodes": [] },
+        { "title": "Flying Home", "artist": "Lionel Hampton and His Orchestra", "url": "https://music.apple.com/us/song/533935344", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "balboa",
+      "compare": [
+        "fast continuous swing pulse with compact, tightly articulated phrases",
+        "walking bass and ride definition when horn lines become busy",
+        "shorter phrase spacing and less open air than a slower Lindy Hop band arrangement",
+        "how the ensemble maintains clarity at brisk tempos without turning every part into a fill"
+      ],
+      "recordings": [
+        { "title": "Bugle Call Rag", "artist": "Benny Goodman and His Orchestra", "url": "https://music.apple.com/us/song/299542542", "timecodes": [] },
+        { "title": "King Porter Stomp", "artist": "Benny Goodman and His Orchestra", "url": "https://music.apple.com/us/song/255340494", "timecodes": [] },
+        { "title": "Lester Leaps In", "artist": "Count Basie & Kansas City Seven", "url": "https://music.apple.com/us/song/200308030", "timecodes": [] },
+        { "title": "China Boy", "artist": "Bix Beiderbecke & Paul Whiteman", "url": "https://music.apple.com/us/song/461683851", "timecodes": [] },
+        { "title": "Air Mail Special", "artist": "Benny Goodman", "url": "https://music.apple.com/us/song/724306037", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "charleston",
+      "compare": [
+        "the buoyant two-beat feel and ragtime-derived syncopation",
+        "short, bright piano and horn accents that create a danceable lilt",
+        "how breaks or ensemble hits punctuate a phrase before the pulse resumes",
+        "the compact early-jazz texture compared with later four-beat swing"
+      ],
+      "recordings": [
+        { "title": "The Charleston (Remastered)", "artist": "Paul Whiteman and His Orchestra", "url": "https://music.apple.com/us/album/the-charleston-remastered-single/493590928", "timecodes": [] },
+        { "title": "Black Bottom Stomp", "artist": "Jelly Roll Morton & His Red Hot Peppers", "url": "https://music.apple.com/us/song/302055845", "timecodes": [] },
+        { "title": "Dippermouth Blues", "artist": "King Oliver", "url": "https://music.apple.com/us/song/331349613", "timecodes": [] },
+        { "title": "Tiger Rag", "artist": "The Original Dixieland Jazz Band", "url": "https://music.apple.com/us/song/299610070", "timecodes": [] },
+        { "title": "Sugar Foot Strut", "artist": "The Charleston Chasers", "url": "https://music.apple.com/us/song/290692254", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "slow-swing",
+      "compare": [
+        "wide phrase spacing, soft brush detail, and a relaxed pulse",
+        "how a walking or lightly marked bass supports longer melodic notes",
+        "lush chord color and restrained accompaniment that leaves the lead exposed",
+        "dynamic contrast and elastic timing without losing the underlying swing"
+      ],
+      "recordings": [
+        { "title": "Body and Soul", "artist": "Coleman Hawkins", "url": "https://music.apple.com/us/song/167266098", "timecodes": [] },
+        { "title": "Misty", "artist": "Erroll Garner Trio", "url": "https://music.apple.com/us/song/306856024", "timecodes": [] },
+        { "title": "My Funny Valentine", "artist": "Chet Baker", "url": "https://music.apple.com/us/song/1442963863", "timecodes": [] },
+        { "title": "Mood Indigo", "artist": "Duke Ellington & Louis Armstrong", "url": "https://music.apple.com/us/song/696523097", "timecodes": [] },
+        { "title": "Stardust", "artist": "Hoagy Carmichael", "url": "https://music.apple.com/us/song/207551989", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "electro-swing",
+      "compare": [
+        "the relationship between a looped electronic kick/bass pulse and sampled or played swing phrases",
+        "how breaks, edits, and drops mark form instead of continuous acoustic ride playing",
+        "the balance between bright vintage-sounding horns and modern low-end weight",
+        "the production density and transient snap across the hook and breakdown"
+      ],
+      "recordings": [
+        { "title": "Booty Swing", "artist": "Parov Stelar", "url": "https://music.apple.com/us/song/807827818", "timecodes": [] },
+        { "title": "Catgroove", "artist": "Parov Stelar", "url": "https://music.apple.com/us/album/catgroove/1870691933?i=1870692143", "timecodes": [] },
+        { "title": "All Night", "artist": "Parov Stelar", "url": "https://music.apple.com/us/song/1870698829", "timecodes": [] },
+        { "title": "Jolie Coquine", "artist": "Caravan Palace", "url": "https://music.apple.com/us/song/293238702", "timecodes": [] },
+        { "title": "We No Speak Americano", "artist": "Yolanda Be Cool & DCUP", "url": "https://music.apple.com/us/song/1712042459", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "fusion-swing",
+      "compare": [
+        "how a swung or triplet-derived phrase sits against electric bass and contemporary drums",
+        "the role of electric keys and guitar in building harmonic density",
+        "section-level contrast, breaks, and dynamic rises rather than a constant big-band texture",
+        "the degree to which the band keeps swing articulation audible inside a modern fusion arrangement"
+      ],
+      "recordings": [
+        { "title": "Birdland", "artist": "Weather Report", "url": "https://music.apple.com/us/song/341777892", "timecodes": [] },
+        { "title": "Actual Proof", "artist": "Herbie Hancock", "url": "https://music.apple.com/us/song/201589756", "timecodes": [] },
+        { "title": "Birds of Fire", "artist": "Mahavishnu Orchestra", "url": "https://music.apple.com/us/song/158694244", "timecodes": [] },
+        { "title": "Lingus", "artist": "Snarky Puppy", "url": "https://music.apple.com/us/song/1322209832", "timecodes": [] },
+        { "title": "Hymn of the Seventh Galaxy", "artist": "Return to Forever", "url": "https://music.apple.com/us/song/1452874488", "timecodes": [] }
+      ]
+    }
+  ]
+}

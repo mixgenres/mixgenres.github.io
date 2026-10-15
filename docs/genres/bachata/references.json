@@ -1,0 +1,136 @@
+{
+  "genreId": "bachata",
+  "reviewed": "2026-10-14",
+  "status": "Five linked streaming candidates are collected for all 8 styles. Listening comparison and timecodes remain pending; candidates are not verified sonic matches.",
+  "source": "Apple Music streaming track pages and its Bachata Urbana editorial description. Candidate lists are for review; no reference audio downloaded.",
+  "styles": [
+    {
+      "styleId": "dominican",
+      "compare": [
+        "the tightly interlocked derecho guitar, bass, bongó martillo, and güira pulse",
+        "the distinct high requinto answer against the lower segunda rhythm part",
+        "how the singer's phrase ends open space for a guitar reply",
+        "the grounded dance pulse and small phrase variations across verse and refrain"
+      ],
+      "recordings": [
+        { "title": "Voy Pa' Lla", "artist": "Anthony Santos", "url": "https://music.apple.com/us/song/1121457098", "timecodes": [] },
+        { "title": "El Baile del Perrito", "artist": "Anthony Santos", "url": "https://music.apple.com/us/album/el-baile-del-perrito/1517903419?i=1517903422", "timecodes": [] },
+        { "title": "Medicina de Amor", "artist": "Raulin Rodriguez", "url": "https://music.apple.com/us/song/1735016153", "timecodes": [] },
+        { "title": "Loco de Amor", "artist": "Luis Vargas", "url": "https://music.apple.com/us/song/307254619", "timecodes": [] },
+        { "title": "El Verde de Tus Ojos", "artist": "Kiko Rodriguez", "url": "https://music.apple.com/us/song/1442898392", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "amargue",
+      "compare": [
+        "the plaintive vocal contour and expressive held or bent phrase endings",
+        "the requinto's answering lament and how it avoids doubling every vocal note",
+        "the bass pickup into chord changes beneath a relatively spare verse",
+        "the emotional lift into fuller refrains without turning every bar into a fill"
+      ],
+      "recordings": [
+        { "title": "Medicina de Amor", "artist": "Raulin Rodriguez", "url": "https://music.apple.com/us/song/1735016153", "timecodes": [] },
+        { "title": "Un Amor Que Se Va", "artist": "Raulin Rodriguez", "url": "https://music.apple.com/us/song/1735016183", "timecodes": [] },
+        { "title": "Yo Me Enamoré", "artist": "Raulin Rodriguez", "url": "https://music.apple.com/us/song/1589257389", "timecodes": [] },
+        { "title": "Me Enamoré", "artist": "Kiko Rodriguez", "url": "https://music.apple.com/us/song/1542675151", "timecodes": [] },
+        { "title": "Loco de Amor", "artist": "Luis Vargas", "url": "https://music.apple.com/us/song/307254619", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "traditional-bolero-bachata",
+      "compare": [
+        "the bolero-influenced broken-chord guitar support under a long melodic line",
+        "the slower harmonic pacing and clear cadence before requinto responses",
+        "how bass and percussion sustain the bachata pulse without crowding the vocal",
+        "the richer arranged colors around the guitar-led core in Juan Luis Guerra's bachata songs"
+      ],
+      "recordings": [
+        { "title": "Bachata Rosa", "artist": "Juan Luis Guerra 4.40", "url": "https://music.apple.com/us/song/1744022201", "timecodes": [] },
+        { "title": "Burbujas de Amor", "artist": "Juan Luis Guerra 4.40", "url": "https://music.apple.com/us/song/19468968", "timecodes": [] },
+        { "title": "Estrellitas y Duendes", "artist": "Juan Luis Guerra 4.40", "url": "https://music.apple.com/us/song/19468962", "timecodes": [] },
+        { "title": "Como Abeja Al Panal", "artist": "Juan Luis Guerra 4.40", "url": "https://music.apple.com/us/album/como-abeja-al-panal/19468976?i=19468958", "timecodes": [] },
+        { "title": "Bachata en Fukuoka", "artist": "Juan Luis Guerra", "url": "https://music.apple.com/us/song/1730090986", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "moderna",
+      "compare": [
+        "the modern segunda's clipped or muted rhythm against a bright, sustained requinto hook",
+        "the contrast between intimate verse texture and open, singable chorus",
+        "how bass, bongó, and güira stay distinct in a polished pop arrangement",
+        "the use of vocal harmony and guitar replies without masking the lead melody"
+      ],
+      "recordings": [
+        { "title": "Dos Locos", "artist": "Monchy & Alexandra", "url": "https://music.apple.com/us/album/dos-locos/22142035?i=22141980", "timecodes": [] },
+        { "title": "Hoja en Blanco", "artist": "Monchy & Alexandra", "url": "https://music.apple.com/us/song/288177422", "timecodes": [] },
+        { "title": "Te Quiero Igual Que Ayer", "artist": "Monchy & Alexandra", "url": "https://music.apple.com/us/album/te-quiero-igual-que-ayer/22142035?i=22141975", "timecodes": [] },
+        { "title": "Stand By Me", "artist": "Prince Royce", "url": "https://music.apple.com/us/song/578439622", "timecodes": [] },
+        { "title": "Corazón Sin Cara", "artist": "Prince Royce", "url": "https://music.apple.com/us/song/1768158482", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "sensual",
+      "compare": [
+        "the sustained, legato lead and the longer gaps left for a soft guitar answer",
+        "the lighter percussion and smoother dynamic shape compared with a driving derecho",
+        "how reverberant tails support the vocal while the rhythmic attacks stay clear",
+        "the balance between close vocal presence and an uncluttered low end"
+      ],
+      "recordings": [
+        { "title": "Bachata Sensual (feat. Korke y Judith)", "artist": "Dani J", "url": "https://music.apple.com/us/song/1468258179", "timecodes": [] },
+        { "title": "Tan Solo Tú (Bachata Version)", "artist": "Dani J & Dj León", "url": "https://music.apple.com/us/song/1727458634", "timecodes": [] },
+        { "title": "Me Emborracharé (Bachata Radio Edit)", "artist": "Grupo Extra", "url": "https://music.apple.com/us/song/1202997664", "timecodes": [] },
+        { "title": "La Carretera", "artist": "Prince Royce", "url": "https://music.apple.com/us/song/1768159073", "timecodes": [] },
+        { "title": "Darte un Beso", "artist": "Prince Royce", "url": "https://music.apple.com/us/song/1713533571", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "bachata-mambo",
+      "compare": [
+        "the transition from the steady chorus groove into a more active requinto feature",
+        "short picked runs, slides, and call-and-response figures that resolve back to the vocal hook",
+        "bongó fills that answer the lead phrase without filling every gap",
+        "how the band builds energy into the mambo and releases it cleanly on the chorus return"
+      ],
+      "recordings": [
+        { "title": "El Baile del Perrito", "artist": "Anthony Santos", "url": "https://music.apple.com/us/album/el-baile-del-perrito/1517903419?i=1517903422", "timecodes": [] },
+        { "title": "Voy Pa' Lla", "artist": "Anthony Santos", "url": "https://music.apple.com/us/song/1121457098", "timecodes": [] },
+        { "title": "Obsesion", "artist": "Aventura", "url": "https://music.apple.com/us/song/845483301", "timecodes": [] },
+        { "title": "Propuesta Indecente", "artist": "Romeo Santos", "url": "https://music.apple.com/us/song/1768158494", "timecodes": [] },
+        { "title": "El Verde de Tus Ojos", "artist": "Kiko Rodriguez", "url": "https://music.apple.com/us/song/1442898392", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "urban",
+      "compare": [
+        "how R&B-influenced melody, backing vocals, or rap sit over the bachata guitar pulse",
+        "the interaction between requinto syncopation and programmed or pop-oriented drums",
+        "the production contrast between a sparse verse and a wider, layered hook",
+        "which bachata roles remain audible when contemporary low-end and keyboards enter"
+      ],
+      "recordings": [
+        { "title": "Obsesion", "artist": "Aventura", "url": "https://music.apple.com/us/song/845483301", "timecodes": [] },
+        { "title": "Dile Al Amor", "artist": "Aventura", "url": "https://music.apple.com/us/song/314891177", "timecodes": [] },
+        { "title": "Tengo un Amor", "artist": "Toby Love", "url": "https://music.apple.com/us/song/263139190", "timecodes": [] },
+        { "title": "Te Extraño (Bachata Version)", "artist": "Xtreme", "url": "https://music.apple.com/us/song/1713990834", "timecodes": [] },
+        { "title": "Promise (feat. Usher)", "artist": "Romeo Santos", "url": "https://music.apple.com/us/song/568397554", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "fusion",
+      "compare": [
+        "which outside style is introduced and whether the core bachata guitar pattern remains identifiable",
+        "how contrasting timbres or harmonic colors enter and leave across sections",
+        "the exchange between requinto figures and the guest or crossover part",
+        "how the mix makes the bachata pulse legible through denser production"
+      ],
+      "recordings": [
+        { "title": "Propuesta Indecente", "artist": "Romeo Santos", "url": "https://music.apple.com/us/song/1768158494", "timecodes": [] },
+        { "title": "Promise (feat. Usher)", "artist": "Romeo Santos", "url": "https://music.apple.com/us/song/568397554", "timecodes": [] },
+        { "title": "Odio (feat. Drake)", "artist": "Romeo Santos", "url": "https://music.apple.com/us/song/804225719", "timecodes": [] },
+        { "title": "Bachata en Fukuoka", "artist": "Juan Luis Guerra", "url": "https://music.apple.com/us/song/1730090986", "timecodes": [] },
+        { "title": "La Bachata", "artist": "Manuel Turizo", "url": "https://music.apple.com/us/song/1674688995", "timecodes": [] }
+      ]
+    }
+  ]
+}

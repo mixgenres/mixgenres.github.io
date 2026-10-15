@@ -1,0 +1,73 @@
+{
+  "genreId": "dangdut",
+  "status": "Five linked streaming candidates are collected for all four catalog Dangdut styles. Listening comparison and timecodes remain pending; candidates are not yet verified sonic matches.",
+  "source": "Apple Music individual track pages were checked for candidate metadata. Reference audio was not downloaded or auditioned.",
+  "references": [
+    {
+      "styleId": "classic",
+      "compare": [
+        "the Melayu melodic line and its relationship to the repeating bass figure",
+        "kendang or tabla-like percussion, kick placement, and the dance pulse",
+        "electric guitar, organ, and vocal call-and-response in the ensemble texture",
+        "how instrumental replies connect vocal phrases without filling every gap"
+      ],
+      "recordings": [
+        { "title": "Begadang", "artist": "Rhoma Irama", "url": "https://music.apple.com/us/song/1745094370", "timecodes": [] },
+        { "title": "Darah Muda", "artist": "Rhoma Irama", "url": "https://music.apple.com/us/song/1557261222", "timecodes": [] },
+        { "title": "Adu Domba", "artist": "Rhoma Irama", "url": "https://music.apple.com/us/song/1188257588", "timecodes": [] },
+        { "title": "Terajana", "artist": "Rhoma Irama", "url": "https://music.apple.com/us/song/1188253013", "timecodes": [] },
+        { "title": "Penasaran", "artist": "Rhoma Irama", "url": "https://music.apple.com/us/song/1745095730", "timecodes": [] },
+        { "title": "Hayo (feat. Rita Sugiarto)", "artist": "Rhoma Irama", "url": "https://music.apple.com/id/song/1188257781?l=id", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "koplo",
+      "compare": [
+        "kendang's rapid fills and phrase-ending rolls against the stable dance pulse",
+        "the groove's push-and-pull, including how fills lead into the vocal hook",
+        "lead vocal, keyboard, and guitar responses through repeated chorus returns",
+        "live-band energy, section lift, and the clarity of low percussion in a dense mix"
+      ],
+      "recordings": [
+        { "title": "Sayang", "artist": "Via Vallen", "url": "https://music.apple.com/us/song/1861815683", "timecodes": [] },
+        { "title": "Bojo Galak", "artist": "Via Vallen", "url": "https://music.apple.com/us/song/1861699032", "timecodes": [] },
+        { "title": "Pikir Keri", "artist": "Via Vallen", "url": "https://music.apple.com/us/song/1489578544", "timecodes": [] },
+        { "title": "Pamer Bojo", "artist": "Via Vallen", "url": "https://music.apple.com/id/song/1861758400?l=id", "timecodes": [] },
+        { "title": "Salah Apa Aku (Koplo Version)", "artist": "Via Vallen", "url": "https://music.apple.com/us/song/1867194749", "timecodes": [] },
+        { "title": "Karna Su Sayang (Versi Dangdut Koplo)", "artist": "Via Vallen", "url": "https://music.apple.com/us/song/1446503787", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "rock-dangdut",
+      "compare": [
+        "distorted or overdriven electric-guitar riff and lead phrases against dangdut percussion",
+        "rock backbeat weight versus the characteristic kendang accents and bass motion",
+        "how electric-guitar fills answer the vocal and build into larger refrains",
+        "the mix balance between guitar sustain, vocal presence, and low percussion definition"
+      ],
+      "recordings": [
+        { "title": "Darah Muda", "artist": "Rhoma Irama", "url": "https://music.apple.com/us/song/1557261222", "timecodes": [] },
+        { "title": "Begadang", "artist": "Rhoma Irama", "url": "https://music.apple.com/us/song/1745094370", "timecodes": [] },
+        { "title": "Penasaran", "artist": "Rhoma Irama", "url": "https://music.apple.com/us/song/1745095730", "timecodes": [] },
+        { "title": "Adu Domba", "artist": "Rhoma Irama", "url": "https://music.apple.com/us/song/1188257588", "timecodes": [] },
+        { "title": "Judi", "artist": "Rhoma Irama", "url": "https://music.apple.com/us/song/1745095010", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "electronic-dangdut",
+      "compare": [
+        "programmed kick and sub-bass against the kendang-derived rhythmic accents",
+        "synth hooks, keyboard fills, and the arrangement's repeated dance sections",
+        "the balance between a polished pop vocal and rhythmic percussion details",
+        "how builds, drops, and short breaks create contrast over a recurring groove"
+      ],
+      "recordings": [
+        { "title": "Jaran Goyang", "artist": "Nella Kharisma", "url": "https://music.apple.com/us/song/1279939072", "timecodes": [] },
+        { "title": "Konco Mesra", "artist": "Nella Kharisma", "url": "https://music.apple.com/us/song/1236771731", "timecodes": [] },
+        { "title": "Meraih Bintang", "artist": "Via Vallen", "url": "https://music.apple.com/us/song/1861815577", "timecodes": [] },
+        { "title": "Lanange Jagat", "artist": "Nella Kharisma", "url": "https://music.apple.com/us/song/1750090300", "timecodes": [] },
+        { "title": "Tresno Tekane Mati", "artist": "Nella Kharisma & Yeni Inka", "url": "https://music.apple.com/us/song/1804953099", "timecodes": [] }
+      ]
+    }
+  ]
+}

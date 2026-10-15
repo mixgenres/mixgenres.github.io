@@ -9,7 +9,7 @@ export const GENRE_PACK: GenrePackInput = {
   "defaultStyle": "Javanese",
   "meter": "4/4",
   "tempo": [64, 80],
-  "instruments": ["gamelan-metallophone", "rebab", "bonang", "kendang", "gongs"],
+  "instruments": ["gamelan-metallophone", "rebab", "bonang", "reyong", "kendang", "gongs"],
   "roles": {
     "lead": ["gamelan-metallophone", "rebab"],
     "harmony": ["bonang"],
@@ -123,7 +123,7 @@ export const GENRE_PACK: GenrePackInput = {
       "scale": "major-pentatonic",
       "roles": {
         "lead": ["gamelan-metallophone"],
-        "harmony": ["gamelan-metallophone", "bonang"],
+        "harmony": ["gamelan-metallophone", "reyong"],
         "percussion": ["kendang", "gongs"]
       },
       "progressions": {
@@ -149,15 +149,15 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "Balinese kotekan interlock and abrupt ensemble cues gamelan-metallophone cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["gamelan-metallophone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Balinese kotekan interlock and abrupt ensemble cues gamelan-metallophone accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["gamelan-metallophone"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "Balinese kotekan interlock and abrupt ensemble cues gamelan-metallophone cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["gamelan-metallophone"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Balinese kotekan interlock and abrupt ensemble cues bonang accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["bonang"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Balinese kotekan interlock and abrupt ensemble cues bonang cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["bonang"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "Balinese kotekan interlock and abrupt ensemble cues reyong accompaniment", "role": "harmony", "onsets": [0, 1.5, 3], "instruments": ["reyong"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "Balinese kotekan interlock and abrupt ensemble cues reyong cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["reyong"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Balinese kotekan interlock and abrupt ensemble cues kendang pulse", "role": "percussion", "onsets": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75], "instruments": ["kendang"], "cycleLength": 1, "articulation": "accent"},
         {"name": "Balinese kotekan interlock and abrupt ensemble cues kendang cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["kendang"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "Balinese kotekan interlock and abrupt ensemble cues gongs pulse", "role": "percussion", "onsets": [3.5], "instruments": ["gongs"], "cycleLength": 1, "articulation": "accent"}
       ],
       "instrumentTechniques": {
         "gamelan-metallophone": ["damping", "interlocking-pattern", "paired-tuning"],
-        "bonang": ["damping", "interlocking-pattern", "paired-tuning"],
+        "reyong": ["damping", "interlocking-pattern", "paired-tuning"],
         "kendang": ["roll", "tempo-cue", "slap"],
         "gongs": ["roll", "accent"]
       },
@@ -170,7 +170,7 @@ export const GENRE_PACK: GenrePackInput = {
           "allowedTechniques": ["damping", "interlocking-pattern", "paired-tuning"],
           "defaultTechnique": "damping"
         },
-        "bonang:harmony": {
+        "reyong:harmony": {
           "allowedTechniques": ["damping", "interlocking-pattern", "paired-tuning"],
           "defaultTechnique": "damping"
         },

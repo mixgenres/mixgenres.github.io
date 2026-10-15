@@ -1,8 +1,8 @@
 {
   "genreId": "salsa",
   "reviewed": "2026-10-14",
-  "status": "Eight streaming recording candidates selected for Salsa Dura. Listening, timecodes, and mix comparisons are pending; these links do not claim sonic matching.",
-  "source": "Apple Music streaming track pages. No reference audio downloaded.",
+  "status": "Five streaming candidates are collected for each of the 16 catalog styles (eight for Salsa Dura). Listening, timecodes, and mix comparisons remain pending; candidate links do not claim sonic matching.",
+  "source": "Apple Music streaming track pages. Candidate selections include adjacent crossover examples where a style blends traditions; no reference audio downloaded.",
   "styles": [
     {
       "styleId": "salsa-dura",
@@ -13,14 +13,654 @@
         "how the rhythm section and horn sections build energy into mambo and closing hits"
       ],
       "recordings": [
-        { "title": "Ché Ché Colé", "artist": "Willie Colón & Héctor Lavoe", "url": "https://music.apple.com/us/song/1682395296", "timecodes": [] },
-        { "title": "La Murga", "artist": "Willie Colón & Héctor Lavoe", "url": "https://music.apple.com/us/song/1774135412", "timecodes": [] },
-        { "title": "Calle Luna Calle Sol", "artist": "Willie Colón & Héctor Lavoe", "url": "https://music.apple.com/us/song/1784537139", "timecodes": [] },
-        { "title": "El Día De Mi Suerte", "artist": "Willie Colón & Héctor Lavoe", "url": "https://music.apple.com/us/song/1464272393", "timecodes": [] },
-        { "title": "Indestructible", "artist": "Ray Barretto", "url": "https://music.apple.com/us/song/1718162370", "timecodes": [] },
-        { "title": "Químbara", "artist": "Johnny Pacheco & Celia Cruz", "url": "https://music.apple.com/us/song/1464289216", "timecodes": [] },
-        { "title": "Mi Gente (Remastered 2023)", "artist": "Héctor Lavoe", "url": "https://music.apple.com/us/album/mi-gente-remastered-2023/1691096142?i=1691096585", "timecodes": [] },
-        { "title": "Pedro Navaja", "artist": "Willie Colón & Rubén Blades", "url": "https://music.apple.com/us/song/1710680504", "timecodes": [] }
+        {
+          "title": "Ché Ché Colé",
+          "artist": "Willie Colón & Héctor Lavoe",
+          "url": "https://music.apple.com/us/song/1682395296",
+          "timecodes": []
+        },
+        {
+          "title": "La Murga",
+          "artist": "Willie Colón & Héctor Lavoe",
+          "url": "https://music.apple.com/us/song/1774135412",
+          "timecodes": []
+        },
+        {
+          "title": "Calle Luna Calle Sol",
+          "artist": "Willie Colón & Héctor Lavoe",
+          "url": "https://music.apple.com/us/song/1784537139",
+          "timecodes": []
+        },
+        {
+          "title": "El Día De Mi Suerte",
+          "artist": "Willie Colón & Héctor Lavoe",
+          "url": "https://music.apple.com/us/song/1464272393",
+          "timecodes": []
+        },
+        {
+          "title": "Indestructible",
+          "artist": "Ray Barretto",
+          "url": "https://music.apple.com/us/song/1718162370",
+          "timecodes": []
+        },
+        {
+          "title": "Químbara",
+          "artist": "Johnny Pacheco & Celia Cruz",
+          "url": "https://music.apple.com/us/song/1464289216",
+          "timecodes": []
+        },
+        {
+          "title": "Mi Gente (Remastered 2023)",
+          "artist": "Héctor Lavoe",
+          "url": "https://music.apple.com/us/album/mi-gente-remastered-2023/1691096142?i=1691096585",
+          "timecodes": []
+        },
+        {
+          "title": "Pedro Navaja",
+          "artist": "Willie Colón & Rubén Blades",
+          "url": "https://music.apple.com/us/song/1710680504",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "son",
+      "compare": [
+        "tres/guitar ostinato against anticipated bass tumbao",
+        "the lift into repeated coro and how the singer leaves space for instrumental answers",
+        "dry maracas, bongó and clave balance around a small acoustic ensemble"
+      ],
+      "recordings": [
+        {
+          "title": "Chan Chan",
+          "artist": "Buena Vista Social Club",
+          "url": "https://music.apple.com/us/album/chan-chan/1716598034?i=1716598344",
+          "timecodes": []
+        },
+        {
+          "title": "De Camino a la Vereda",
+          "artist": "Buena Vista Social Club",
+          "url": "https://music.apple.com/us/song/1716598348",
+          "timecodes": []
+        },
+        {
+          "title": "El Cuarto de Tula",
+          "artist": "Buena Vista Social Club",
+          "url": "https://music.apple.com/us/album/el-cuarto-de-tula/1716598034?i=1716598352",
+          "timecodes": []
+        },
+        {
+          "title": "El Carretero",
+          "artist": "Buena Vista Social Club",
+          "url": "https://music.apple.com/us/album/el-carretero/1716598034?i=1716598590",
+          "timecodes": []
+        },
+        {
+          "title": "Candela",
+          "artist": "Buena Vista Social Club",
+          "url": "https://music.apple.com/us/album/candela/1716598034?i=1716598595",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "son-montuno",
+      "compare": [
+        "piano montuno and tres guajeo interlock under a steady son clave",
+        "lead/coro call-and-response and the expansion into a longer montuno",
+        "bongó, conga, bass and brass accents support the repeating vamp"
+      ],
+      "recordings": [
+        {
+          "title": "Hachero pa' un palo (Son Montuno)",
+          "artist": "Arsenio Rodríguez",
+          "url": "https://music.apple.com/us/song/1372113543",
+          "timecodes": []
+        },
+        {
+          "title": "Bruca Maniguá (Remastered)",
+          "artist": "Arsenio Rodríguez",
+          "url": "https://music.apple.com/us/song/662040273",
+          "timecodes": []
+        },
+        {
+          "title": "Dundunbanza",
+          "artist": "Sierra Maestra",
+          "url": "https://music.apple.com/us/song/1716598713",
+          "timecodes": []
+        },
+        {
+          "title": "Hay Fuego en el 23",
+          "artist": "Arsenio Rodríguez",
+          "url": "https://music.apple.com/us/song/280524893",
+          "timecodes": []
+        },
+        {
+          "title": "Mami Me Gustó",
+          "artist": "Arsenio Rodríguez",
+          "url": "https://music.apple.com/us/song/280524900",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "mambo",
+      "compare": [
+        "short, sharply coordinated horn riffs and ensemble punches",
+        "big-band brass voicing against piano/bass tumbao and bell-driven percussion",
+        "the contrast between head, mambo section, solo chorus, and break"
+      ],
+      "recordings": [
+        {
+          "title": "Mambo No. 5 (Remastered)",
+          "artist": "Pérez Prado",
+          "url": "https://music.apple.com/us/song/841601079",
+          "timecodes": []
+        },
+        {
+          "title": "Marilyn Monroe Mambo",
+          "artist": "Dámaso Pérez Prado",
+          "url": "https://music.apple.com/us/song/816436191",
+          "timecodes": []
+        },
+        {
+          "title": "Mambo en Sax",
+          "artist": "Orquesta Pérez Prado",
+          "url": "https://music.apple.com/us/song/656546617",
+          "timecodes": []
+        },
+        {
+          "title": "Mambo Del Politécnico",
+          "artist": "Orquesta de Pérez Prado",
+          "url": "https://music.apple.com/us/song/792893602",
+          "timecodes": []
+        },
+        {
+          "title": "Mambo Jambo",
+          "artist": "The Perez Prado Orchestra",
+          "url": "https://music.apple.com/us/song/128311533",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "cha-cha-cha",
+      "compare": [
+        "even cha-cha pulse and the guiro's audible scrape pattern",
+        "light charanga flute/strings against bass and restrained percussion",
+        "the repeated refrain and the open flute-led instrumental passage"
+      ],
+      "recordings": [
+        {
+          "title": "El Bodeguero",
+          "artist": "Orquesta Aragón & Richard Egües",
+          "url": "https://music.apple.com/us/song/1380007356",
+          "timecodes": []
+        },
+        {
+          "title": "Que Viva el Cha Cha Chá (Remasterizado)",
+          "artist": "Orquesta Aragón",
+          "url": "https://music.apple.com/us/song/1268779735",
+          "timecodes": []
+        },
+        {
+          "title": "Rico Vacilón",
+          "artist": "Orquesta Aragón",
+          "url": "https://music.apple.com/us/song/1650430209",
+          "timecodes": []
+        },
+        {
+          "title": "La Engañadora",
+          "artist": "Orquesta América",
+          "url": "https://music.apple.com/us/song/951936063",
+          "timecodes": []
+        },
+        {
+          "title": "Pare Cochero",
+          "artist": "Orquesta Aragón",
+          "url": "https://music.apple.com/us/song/336252681",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "charanga",
+      "compare": [
+        "flute lead against violin section responses over a light charanga rhythm section",
+        "how the piano and bass keep the dance pulse buoyant without crowding the flute",
+        "short instrumental answers and orchestral handoffs between the lead and violins"
+      ],
+      "recordings": [
+        {
+          "title": "Acuyuye",
+          "artist": "Johnny Pacheco & Su Charanga",
+          "url": "https://music.apple.com/us/song/1390942561",
+          "timecodes": []
+        },
+        {
+          "title": "El Bodeguero",
+          "artist": "Orquesta Aragón & Richard Egües",
+          "url": "https://music.apple.com/us/song/1380007356",
+          "timecodes": []
+        },
+        {
+          "title": "La Engañadora",
+          "artist": "Orquesta América",
+          "url": "https://music.apple.com/us/song/1112308261",
+          "timecodes": []
+        },
+        {
+          "title": "Sabrosona",
+          "artist": "Charanga de la 4 & Richard Egues",
+          "url": "https://music.apple.com/us/song/333906721",
+          "timecodes": []
+        },
+        {
+          "title": "Charanga Pa Gozar",
+          "artist": "Lito Barrientos y Su Orquesta",
+          "url": "https://music.apple.com/us/song/1470991106",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "pachanga",
+      "compare": [
+        "buoyant flute-and-violin charanga texture over the dance rhythm",
+        "forward-moving bass and percussion with lively, short vocal refrains",
+        "how the ensemble sustains dance energy while the lead instruments trade phrases"
+      ],
+      "recordings": [
+        {
+          "title": "Acuyuye",
+          "artist": "Johnny Pacheco",
+          "url": "https://music.apple.com/us/song/1464289091",
+          "timecodes": []
+        },
+        {
+          "title": "Como Bailan La Pachanga",
+          "artist": "Charlie Palmieri",
+          "url": "https://music.apple.com/us/song/1464279204",
+          "timecodes": []
+        },
+        {
+          "title": "Bronx Pachanga U.S.A.",
+          "artist": "Charlie Palmieri",
+          "url": "https://music.apple.com/us/song/1464955123",
+          "timecodes": []
+        },
+        {
+          "title": "Pachanga Para Gozar",
+          "artist": "Charanga del 20",
+          "url": "https://music.apple.com/us/song/1651509903",
+          "timecodes": []
+        },
+        {
+          "title": "Sandunguera (Pachanga)",
+          "artist": "Charanga Almendra",
+          "url": "https://music.apple.com/us/song/392834843",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "boogaloo",
+      "compare": [
+        "Latin percussion against a firm R&B and soul backbeat",
+        "compact piano, bass and horn hooks with call-and-response vocals",
+        "the shift between dance groove, hook, and instrumental breaks"
+      ],
+      "recordings": [
+        {
+          "title": "I Like It Like That",
+          "artist": "Pete Rodríguez",
+          "url": "https://music.apple.com/us/song/1465814834",
+          "timecodes": []
+        },
+        {
+          "title": "Bang Bang",
+          "artist": "Joe Cuba",
+          "url": "https://music.apple.com/us/song/1464290374",
+          "timecodes": []
+        },
+        {
+          "title": "El Pito",
+          "artist": "Joe Cuba & Cheo Feliciano",
+          "url": "https://music.apple.com/us/song/1465814870",
+          "timecodes": []
+        },
+        {
+          "title": "Boogaloo Blues",
+          "artist": "Johnny Colon & Orchestra",
+          "url": "https://music.apple.com/us/song/1464273632",
+          "timecodes": []
+        },
+        {
+          "title": "Mira Ven Acá",
+          "artist": "Johnny Colon & Orchestra",
+          "url": "https://music.apple.com/us/song/1464273639",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "descarga",
+      "compare": [
+        "the vamp and bass foundation holding steady as soloists improvise",
+        "how piano, horns and percussion leave room for each solo handoff",
+        "short ensemble hits that frame the open solo choruses and ending"
+      ],
+      "recordings": [
+        {
+          "title": "Descarga General",
+          "artist": "Cachao y Su Orquesta",
+          "url": "https://music.apple.com/us/song/280224542",
+          "timecodes": []
+        },
+        {
+          "title": "La Malanga",
+          "artist": "Israel \"Cachao\" López",
+          "url": "https://music.apple.com/us/song/994526894",
+          "timecodes": []
+        },
+        {
+          "title": "Descarga Mambo",
+          "artist": "Cachao López",
+          "url": "https://music.apple.com/us/song/351606387",
+          "timecodes": []
+        },
+        {
+          "title": "Descarga Cachao",
+          "artist": "Tito Rodríguez",
+          "url": "https://music.apple.com/us/song/1466237400",
+          "timecodes": []
+        },
+        {
+          "title": "Descarga",
+          "artist": "Tito Puente",
+          "url": "https://music.apple.com/us/song/1443172475",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "guaguanco-salsa",
+      "compare": [
+        "the clave and rumba-derived conga conversation against a salsa bass and piano foundation",
+        "how a lead pregón leaves clear gaps for coro, horns, and quinto replies",
+        "short ensemble punches and phrase breaks that make the montuno feel alive rather than looped"
+      ],
+      "recordings": [
+        {
+          "title": "Vale Más Un Guaguancó",
+          "artist": "Ray Barretto",
+          "url": "https://music.apple.com/us/song/1712713759",
+          "timecodes": []
+        },
+        {
+          "title": "El Guaguancó Nació En La Habana",
+          "artist": "Sonora Ponceña",
+          "url": "https://music.apple.com/us/song/1464258576",
+          "timecodes": []
+        },
+        {
+          "title": "Guaguancó pa’l Que Sabe",
+          "artist": "Johnny Pacheco",
+          "url": "https://music.apple.com/us/song/1464289518",
+          "timecodes": []
+        },
+        {
+          "title": "Guaguancó para Los Soneros",
+          "artist": "Orquesta Harlow",
+          "url": "https://music.apple.com/us/song/1500484303",
+          "timecodes": []
+        },
+        {
+          "title": "Salsa Guaguancó",
+          "artist": "Los Megatones De Lucho",
+          "url": "https://music.apple.com/us/song/1587189420",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "salsa-romantica",
+      "compare": [
+        "the smoother, sustained vocal phrasing and lyric-forward balance against the more percussive salsa styles",
+        "how keyboard and horn layers add lift between vocal lines without filling every gap",
+        "the build from intimate verse to wider chorus and the restraint of the rhythm section"
+      ],
+      "recordings": [
+        {
+          "title": "Lluvia",
+          "artist": "Eddie Santiago",
+          "url": "https://music.apple.com/us/song/1804196215",
+          "timecodes": []
+        },
+        {
+          "title": "Amores Como el Nuestro",
+          "artist": "Jerry Rivera",
+          "url": "https://music.apple.com/us/song/192988811",
+          "timecodes": []
+        },
+        {
+          "title": "Y Hubo Alguien",
+          "artist": "Marc Anthony",
+          "url": "https://music.apple.com/us/song/1638223768",
+          "timecodes": []
+        },
+        {
+          "title": "Desnúdate Mujer",
+          "artist": "Frankie Ruiz",
+          "url": "https://music.apple.com/us/song/1619012518",
+          "timecodes": []
+        },
+        {
+          "title": "Yo No Sé Mañana",
+          "artist": "Luis Enrique",
+          "url": "https://music.apple.com/us/song/1781051966",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "puerto-rican-salsa",
+      "compare": [
+        "the ensemble conversation between Puerto Rican sonero phrasing, coro, brass, piano, and percussion",
+        "how orchestral hits and the bass tumbao keep a large band nimble and danceable",
+        "the range from tightly arranged horn figures to open montuno passages across different Puerto Rican bands"
+      ],
+      "recordings": [
+        {
+          "title": "El Comején",
+          "artist": "El Gran Combo de Puerto Rico",
+          "url": "https://music.apple.com/us/song/1140335789",
+          "timecodes": []
+        },
+        {
+          "title": "El Menú",
+          "artist": "El Gran Combo de Puerto Rico",
+          "url": "https://music.apple.com/us/song/1653402776",
+          "timecodes": []
+        },
+        {
+          "title": "Un Verano en Nueva York",
+          "artist": "El Gran Combo de Puerto Rico",
+          "url": "https://music.apple.com/us/song/285743051",
+          "timecodes": []
+        },
+        {
+          "title": "Azuquita Pa’l Cafe",
+          "artist": "El Gran Combo de Puerto Rico",
+          "url": "https://music.apple.com/us/song/278777748",
+          "timecodes": []
+        },
+        {
+          "title": "Trucutú (feat. Chamaco Ramírez)",
+          "artist": "Tommy Olivencia Y Su Orquesta",
+          "url": "https://music.apple.com/us/song/1837532595",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "salsa-calena",
+      "compare": [
+        "the bright, high-energy Colombian brass and piano drive and its relationship to the dance-floor pulse",
+        "how the bass, piano, and percussion maintain propulsion while hooks and coro lines rotate",
+        "the difference between Niche’s broad ensemble sound and Guayacán’s brass-and-vocal phrasing"
+      ],
+      "recordings": [
+        {
+          "title": "Cali Pachanguero",
+          "artist": "Grupo Niche",
+          "url": "https://music.apple.com/us/song/1712814540",
+          "timecodes": []
+        },
+        {
+          "title": "Gotas de Lluvia",
+          "artist": "Grupo Niche",
+          "url": "https://music.apple.com/us/song/321435846",
+          "timecodes": []
+        },
+        {
+          "title": "Buenaventura y Caney",
+          "artist": "Grupo Niche",
+          "url": "https://music.apple.com/us/song/1592838330",
+          "timecodes": []
+        },
+        {
+          "title": "Una Aventura",
+          "artist": "Grupo Niche",
+          "url": "https://music.apple.com/us/song/1862271669",
+          "timecodes": []
+        },
+        {
+          "title": "Oiga, Miré, Vea (Salsa)",
+          "artist": "Guayacán Orquesta",
+          "url": "https://music.apple.com/us/song/1735809124",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "salsa-jazz",
+      "compare": [
+        "the balance between a locked salsa dance groove and jazz solo space, harmonic color, and longer instrumental forms",
+        "how piano, bass, horns, and Afro-Cuban percussion leave room for improvised lead lines",
+        "the shift between repeated montuno, arranged punches, and open solo sections"
+      ],
+      "recordings": [
+        {
+          "title": "Acid",
+          "artist": "Ray Barretto",
+          "url": "https://music.apple.com/us/song/1465815466",
+          "timecodes": []
+        },
+        {
+          "title": "Vámonos pa’l Monte",
+          "artist": "Eddie Palmieri",
+          "url": "https://music.apple.com/us/song/1465963216",
+          "timecodes": []
+        },
+        {
+          "title": "Watermelon Man",
+          "artist": "Mongo Santamaria",
+          "url": "https://music.apple.com/us/song/1443147044",
+          "timecodes": []
+        },
+        {
+          "title": "Mambo Inn",
+          "artist": "Tito Puente",
+          "url": "https://music.apple.com/us/song/1481301300",
+          "timecodes": []
+        },
+        {
+          "title": "Sabor, Sabor (Live)",
+          "artist": "Poncho Sanchez",
+          "url": "https://music.apple.com/us/song/1798848362",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "merengue-crossover",
+      "compare": [
+        "how the fast tambora-and-güira drive changes when pop phrasing, salsa-style horns, or a crossover vocal hook is added",
+        "whether piano, bass, and percussion stay distinct and buoyant instead of becoming a generic dance loop",
+        "the use of short breaks and horn replies to create section contrast around the continuous merengue pulse"
+      ],
+      "recordings": [
+        {
+          "title": "La Bilirrubina",
+          "artist": "Juan Luis Guerra",
+          "url": "https://music.apple.com/us/song/1560870008",
+          "timecodes": []
+        },
+        {
+          "title": "Se Me Sube (Versión Merengue)",
+          "artist": "Manny Manuel",
+          "url": "https://music.apple.com/us/song/1443537505",
+          "timecodes": []
+        },
+        {
+          "title": "Pa Tipos Como Tu (Versión Merengue)",
+          "artist": "Chabelly",
+          "url": "https://music.apple.com/us/song/1676552568",
+          "timecodes": []
+        },
+        {
+          "title": "Si Quieres Tu Quiero Yo",
+          "artist": "Son Bukaro",
+          "url": "https://music.apple.com/us/song/1572681423",
+          "timecodes": []
+        },
+        {
+          "title": "Juliana",
+          "artist": "DLG",
+          "url": "https://music.apple.com/us/song/932985428",
+          "timecodes": []
+        }
+      ]
+    },
+    {
+      "styleId": "cumbia-crossover",
+      "compare": [
+        "the swaying cumbia pulse, guiro pattern, and bass movement when arranged alongside salsa piano and brass",
+        "how accordion or keyboard hooks answer the vocal and change the texture between phrases",
+        "where a track retains a cumbia groove and where salsa ensemble phrasing enters the arrangement"
+      ],
+      "recordings": [
+        {
+          "title": "A Bailar la Cumbia",
+          "artist": "Fruko y Sus Tesos",
+          "url": "https://music.apple.com/us/song/254603324",
+          "timecodes": []
+        },
+        {
+          "title": "La Joda",
+          "artist": "Sonora Carruseles",
+          "url": "https://music.apple.com/us/song/25515026",
+          "timecodes": []
+        },
+        {
+          "title": "Alay Cuy Cuy",
+          "artist": "Son Caribe",
+          "url": "https://music.apple.com/us/song/291196821",
+          "timecodes": []
+        },
+        {
+          "title": "El Africano (feat. 3BallMTY)",
+          "artist": "La Sonora Dinamita",
+          "url": "https://music.apple.com/us/song/1440890403",
+          "timecodes": []
+        },
+        {
+          "title": "Cumbia Mix",
+          "artist": "Super Grupo Colombia, Estrellas Colombianas, Klamato, Inspector de la Salsa & Magia Verde",
+          "url": "https://music.apple.com/us/song/305365374",
+          "timecodes": []
+        }
       ]
     }
   ]

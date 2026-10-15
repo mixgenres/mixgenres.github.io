@@ -69,8 +69,10 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "interlocking guitar and horn vamp tenor-sax statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["tenor-sax"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "interlocking guitar and horn vamp tenor-sax cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["tenor-sax"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "interlocking guitar and horn vamp guitar accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "interlocking guitar and horn vamp guitar sixteenth-note interlock", "shortName": "Guitar 16th-note interlock", "role": "harmony", "onsets": [0.25, 1.25, 2.25, 3.25], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.2, 0.2, 0.2, 0.2], "articulation": "muted-strum", "difficulty": 2, "description": "Play clipped guitar attacks just after each beat; keep the gaps open so the organ and percussion answer independently."},
         {"name": "interlocking guitar and horn vamp guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "interlocking guitar and horn vamp organ accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["organ"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "interlocking guitar and horn vamp organ offbeat stabs", "shortName": "Organ offbeat stabs", "role": "harmony", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["organ"], "cycleLength": 1, "durations": [0.28, 0.28, 0.28, 0.28], "articulation": "staccato", "difficulty": 2, "description": "Place short organ chords on the offbeats between the guitar attacks; release each chord quickly to keep the interlocking parts distinct."},
         {"name": "interlocking guitar and horn vamp organ cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["organ"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "interlocking guitar and horn vamp low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
         {"name": "interlocking guitar and horn vamp bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
@@ -79,6 +81,7 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "interlocking guitar and horn vamp congas pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["congas"], "cycleLength": 1, "articulation": "accent"},
         {"name": "interlocking guitar and horn vamp congas cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["congas"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "interlocking guitar and horn vamp shekere pulse", "role": "percussion", "onsets": [0, 0.5, 1, 1.75, 2, 2.75, 3, 3.5], "instruments": ["shekere"], "cycleLength": 1, "articulation": "accent"},
+        {"name": "interlocking guitar and horn vamp shekere eighth-note pulse", "shortName": "Shekere eighth-note pulse", "role": "percussion", "onsets": [0.25, 0.75, 1.25, 1.75, 2.25, 2.75, 3.25, 3.75], "instruments": ["shekere"], "cycleLength": 1, "articulation": "slap", "difficulty": 1, "description": "Keep an even, light eighth-note shake across the bar; let the conga accents carry the stronger hand-percussion calls."},
         {"name": "interlocking guitar and horn vamp shekere cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["shekere"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
       ],
       "instrumentTechniques": {
@@ -550,7 +553,7 @@ export const GENRE_PACK: GenrePackInput = {
       "scale": "dorian",
       "roles": {
         "lead": ["voice", "trumpet", "tenor-sax"],
-        "harmony": ["guitar", "organ"],
+        "harmony": ["guitar", "organ", "rhodes"],
         "bass": ["bass"],
         "percussion": ["drums", "congas", "shekere"]
       },
@@ -584,6 +587,8 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "jazz horn extensions over ostinato guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "jazz horn extensions over ostinato organ accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["organ"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "jazz horn extensions over ostinato organ cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["organ"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "jazz horn extensions over ostinato Rhodes syncopated piano chords", "role": "harmony", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["rhodes"], "cycleLength": 1, "durations": [0.45, 0.35, 0.45, 0.35], "articulation": "staccato"},
+        {"name": "jazz horn extensions over ostinato Rhodes phrase answer", "role": "harmony", "onsets": [1, 2.75, 3.5], "instruments": ["rhodes"], "cycleLength": 1, "durations": [0.7, 0.35, 0.5], "phraseEnd": true, "articulation": "tenuto"},
         {"name": "jazz horn extensions over ostinato low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
         {"name": "jazz horn extensions over ostinato bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "jazz horn extensions over ostinato kit", "role": "percussion", "onsets": [0.0, 0, 0.5, 1.0, 1, 1.5, 2.0, 2, 2.5, 3.0, 3, 3.5], "instruments": ["drums"], "hits": ["hat", "kick", "hat", "hat", "snare", "hat", "hat", "kick", "hat", "hat", "snare", "hat"], "cycleLength": 1, "accents": [0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45, 0.45, 0.85, 0.45]},
@@ -599,6 +604,7 @@ export const GENRE_PACK: GenrePackInput = {
         "tenor-sax": ["staccato", "accent", "legato", "tenuto", "vibrato"],
         "guitar": ["staccato", "strum", "short-chord-stab", "muted-strum", "accent", "legato", "vibrato"],
         "organ": ["staccato", "accent", "legato", "tenuto"],
+        "rhodes": ["staccato", "accent", "legato", "tenuto"],
         "bass": ["staccato", "ghost-note", "slap", "ghost", "accent", "legato"],
         "drums": ["ghost", "staccato", "accent", "open", "roll"],
         "congas": ["staccato", "slap", "ghost", "slap-tapao", "quinto-slap", "accent", "open"],
@@ -625,6 +631,11 @@ export const GENRE_PACK: GenrePackInput = {
         "organ:harmony": {
           "allowedTechniques": ["staccato", "accent", "legato", "tenuto"],
           "defaultTechnique": "staccato"
+        },
+        "rhodes:harmony": {
+          "allowedTechniques": ["staccato", "accent", "legato", "tenuto"],
+          "defaultTechnique": "staccato",
+          "variantId": "rhodes"
         },
         "bass:bass": {
           "allowedTechniques": ["staccato", "ghost-note", "slap", "ghost", "accent", "legato"],

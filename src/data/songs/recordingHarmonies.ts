@@ -5,7 +5,7 @@
 export const RECORDING_HARMONIES: Record<string, Record<string, string[]>> = Object.fromEntries(`
 tango::golden-age|_=Am,Dm,E7,Am;B=C,F,G7,C;variacion=Am,Dm,E7,Am,E7,Am
 tango::troilo|_=Am,Dm,E7,Am;B=C,F,G7,C;variacion=Am,Dm,E7,Am,E7,Am
-tango::canyengue|_=G,C,D7,G;trio=C,G7,C,C
+tango::canyengue|_=Am,Dm,E7,Am;trio=C,G7,C,C;arrastre=E7;cierre=Am,Am
 tango::guardia-nueva-de-caro|_=Gm,Cm,D7,Gm;B=Bb,Eb,F7,Bb;trio=Eb,Cm,D7,Gm
 tango::canaro|_=Fm,Bbm,C7,Fm;B=Ab,Db,Eb7,Ab;verse=Fm,Db,C7,Fm
 tango::d-arienzo|_=Gm,Cm,D7,Gm;B=Bb,Eb,F7,Bb;trio=G,C,D7,G
@@ -44,6 +44,9 @@ bachata::moderna|_=E,B,A,B
 reggae::dub|_=Dm,Gm,Dm,A7
 afrobeat::classic-afrobeat|_=Fm7,Fm7,Eb7,Fm7
 afrobeat::funk-heavy-afrobeat|_=Dm7,Dm7,Dm7,Dm7
+afrobeat::juju|_=Am7,Dm7,Am7,E7;response=Dm7,Am7,E7,Am7;talking-drum=Am7,Dm7,G7,Am7;outro=E7,Am7
+afrobeat::jazz-heavy-afrobeat|_=Dm7,G7,Dm7,Dm7;head=Dm7,G7,Dm7,G7;break=Gm7,Gm7,A7,A7
+afrobeat::modern-revival|_=Em7,Em7,A7,Em7;chorus=A7,Em7,D7,Em7;outro=D7,Em7
 mbalax::sabar-heavy|_=D5,D5,D5,D5
 qawwali::contemporary-fusion|_=D5,D5,D5,D5
 cinematic::hybrid|_=Dm,Dm,Bb,Dm

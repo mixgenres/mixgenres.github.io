@@ -1,0 +1,121 @@
+{
+  "genreId": "reggae",
+  "status": "Five distinct linked streaming candidates are collected for all seven catalog Reggae styles. Listening comparison and timecodes remain pending; candidates are not yet verified sonic matches.",
+  "source": "Apple Music individual track pages were checked for candidate metadata. Reference audio was not downloaded or auditioned.",
+  "references": [
+    {
+      "styleId": "roots",
+      "compare": [
+        "one-drop pulse, bass melody, and the balance between kick and rim/snare",
+        "organ bubble and clipped guitar skank in the offbeat pocket",
+        "lead vocal and harmony responses, including how much space the band leaves",
+        "roots-era production depth, percussion placement, and low-end weight"
+      ],
+      "recordings": [
+        { "title": "Natural Mystic", "artist": "Bob Marley & The Wailers", "url": "https://music.apple.com/us/song/1446929593", "timecodes": [] },
+        { "title": "Exodus", "artist": "Bob Marley & The Wailers", "url": "https://music.apple.com/us/song/1446929595", "timecodes": [] },
+        { "title": "Slavery Days", "artist": "Burning Spear", "url": "https://music.apple.com/us/song/1436091632", "timecodes": [] },
+        { "title": "Two Sevens Clash", "artist": "Culture", "url": "https://music.apple.com/us/song/1565501922", "timecodes": [] },
+        { "title": "Guess Who's Coming to Dinner", "artist": "Black Uhuru", "url": "https://music.apple.com/us/song/540227105", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "one-drop",
+      "compare": [
+        "the defining kick and rim/snare landing on beat three, with space on beat one",
+        "bass placement against the one-drop drum hit and guitar/keyboard upbeats",
+        "whether the groove stays deep and relaxed without losing forward motion",
+        "vocal phrasing and instrumental fills against the repeated riddim"
+      ],
+      "recordings": [
+        { "title": "One Drop", "artist": "Bob Marley & The Wailers", "url": "https://music.apple.com/us/song/1446343343", "timecodes": [] },
+        { "title": "Get Up, Stand Up", "artist": "Bob Marley & The Wailers", "url": "https://music.apple.com/us/song/1515706306", "timecodes": [] },
+        { "title": "Stir It Up", "artist": "Bob Marley & The Wailers", "url": "https://music.apple.com/us/song/1423269568", "timecodes": [] },
+        { "title": "Africa Unite", "artist": "Bob Marley & The Wailers", "url": "https://music.apple.com/us/song/1440811349", "timecodes": [] },
+        { "title": "Sun Is Shining", "artist": "Bob Marley & The Wailers", "url": "https://music.apple.com/us/song/1440811359", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "rockers",
+      "compare": [
+        "the steady kick foundation against the one-drop's beat-three emphasis",
+        "bass-drum lock and the weight of the repeated groove",
+        "organ/guitar skank placement, horn punctuations, and vocal-space choices",
+        "the section lift and small arrangement changes over an insistent riddim"
+      ],
+      "recordings": [
+        { "title": "Marcus Garvey", "artist": "Burning Spear", "url": "https://music.apple.com/us/song/1434881157", "timecodes": [] },
+        { "title": "Slavery Days", "artist": "Burning Spear", "url": "https://music.apple.com/us/song/1436091632", "timecodes": [] },
+        { "title": "Jah No Dead", "artist": "Burning Spear", "url": "https://music.apple.com/us/song/1434896230", "timecodes": [] },
+        { "title": "Hail H.I.M.", "artist": "Burning Spear", "url": "https://music.apple.com/us/song/691922542", "timecodes": [] },
+        { "title": "Guess Who's Coming to Dinner", "artist": "Black Uhuru", "url": "https://music.apple.com/us/song/540227105", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "dub",
+      "compare": [
+        "how the rhythm section remains legible while instruments drop out and return",
+        "spring-reverb and tape-echo throws, their timing, and how long their tails linger",
+        "bass and drum prominence, stereo placement, and the contrast between dry attacks and effects",
+        "mix-as-arrangement moves such as filter changes, abrupt mutes, and isolated fills"
+      ],
+      "recordings": [
+        { "title": "King Tubby's Meets Rockers Uptown", "artist": "Augustus Pablo", "url": "https://music.apple.com/us/song/1533707872", "timecodes": [] },
+        { "title": "African Roots", "artist": "King Tubby", "url": "https://music.apple.com/us/song/787464253", "timecodes": [] },
+        { "title": "Iyahta", "artist": "King Tubby", "url": "https://music.apple.com/us/song/150397558", "timecodes": [] },
+        { "title": "Invasion", "artist": "King Tubby", "url": "https://music.apple.com/us/song/787464330", "timecodes": [] },
+        { "title": "Flag Dub", "artist": "King Tubby", "url": "https://music.apple.com/us/song/1147412097", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "rocksteady",
+      "compare": [
+        "the slower, laid-back pulse and melodic bass movement",
+        "light guitar or piano offbeats and restrained drum accents",
+        "close vocal harmony, lead phrasing, and the way the band supports a lyric",
+        "the short string, horn, or keyboard answers between vocal lines"
+      ],
+      "recordings": [
+        { "title": "Girl I've Got a Date", "artist": "The Flames & Alton Ellis", "url": "https://music.apple.com/us/song/1456396665", "timecodes": [] },
+        { "title": "Rock Steady", "artist": "Alton Ellis", "url": "https://music.apple.com/us/song/1157744072", "timecodes": [] },
+        { "title": "Do the Rocksteady", "artist": "Alton Ellis", "url": "https://music.apple.com/us/song/432930032", "timecodes": [] },
+        { "title": "Perfidia", "artist": "Phyllis Dillon", "url": "https://music.apple.com/us/song/1612437807", "timecodes": [] },
+        { "title": "The Tide Is High", "artist": "The Paragons", "url": "https://music.apple.com/us/song/1058437725", "timecodes": [] },
+        { "title": "On the Beach", "artist": "The Paragons", "url": "https://music.apple.com/us/song/150380478", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "ska",
+      "compare": [
+        "brisk offbeat guitar and piano against the walking bass and busy ride pattern",
+        "how horns trade short riffs and lead solos over the steady dance pulse",
+        "the balance of horn section, guitar chop, bass, and drums in the mono-era sound",
+        "the turnaround, ensemble hits, and phrase lengths in instrumental ska"
+      ],
+      "recordings": [
+        { "title": "Guns of Navarone", "artist": "The Skatalites", "url": "https://music.apple.com/us/song/608538080", "timecodes": [] },
+        { "title": "Eastern Standard Time", "artist": "Don Drummond & The Skatalites", "url": "https://music.apple.com/us/song/1436157234", "timecodes": [] },
+        { "title": "Freedom Sounds", "artist": "The Skatalites", "url": "https://music.apple.com/us/song/1644389795", "timecodes": [] },
+        { "title": "James Bond", "artist": "The Skatalites", "url": "https://music.apple.com/us/song/453176096", "timecodes": [] },
+        { "title": "Ball of Fire", "artist": "Roland Alphonso & The Skatalites", "url": "https://music.apple.com/us/song/1050796687", "timecodes": [] },
+        { "title": "Man in the Street", "artist": "Don Drummond & The Skatalites", "url": "https://music.apple.com/us/song/413482072", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "dancehall",
+      "compare": [
+        "the riddim's bass and drum identity, including how much the kick pattern shifts",
+        "deejay toast phrasing, vocal cadence, and call-and-response arrangement",
+        "early digital or live-band production choices and their drum-machine or kit feel",
+        "hook placement, dropouts, and short fills that keep repeated riddims lively"
+      ],
+      "recordings": [
+        { "title": "Bam Bam", "artist": "Sister Nancy", "url": "https://music.apple.com/us/song/309416854", "timecodes": [] },
+        { "title": "Ring the Alarm", "artist": "Tenor Saw", "url": "https://music.apple.com/us/song/355225892", "timecodes": [] },
+        { "title": "Zungguzungguguzungguzeng", "artist": "Yellowman", "url": "https://music.apple.com/us/song/1175099392", "timecodes": [] },
+        { "title": "Murder She Wrote", "artist": "Chaka Demus & Pliers", "url": "https://music.apple.com/us/song/1443894212", "timecodes": [] },
+        { "title": "Ting-a-Ling", "artist": "Shabba Ranks", "url": "https://music.apple.com/us/song/169651608", "timecodes": [] }
+      ]
+    }
+  ]
+}

@@ -36,6 +36,8 @@ import { optimizePerformanceByPhraseAndSong } from './songPhrasing.ts';
 import { decide } from '../sheet/arrangementContext.ts';
 import { activityFor } from '../sheet/sectionEnergy.ts';
 import { velocityForEnergy } from './velocity.ts';
+import { grooveForStyle, grooveVelocityMultiplier } from './groove.ts';
+import { seedOf } from '../sheet/random.ts';
 import { resolveDialect } from './genreDialect.ts';
 import { scoreDurationSeconds, beatValue } from '../score/musicianScore';
 import type { NotatedScore } from '../score/notatedScore';
@@ -453,6 +455,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
 
   for (const region of sheet.regions) {
     const regionStyle = getResolvedSectionStyle(sheet, styleRegion(region));
+    const styleGroove = grooveForStyle(regionStyle);
     const context = sheet.arrangementContext?.[region.id];
     const sectionDecisions = new Map<string, ReturnType<typeof decide>>();
     for (const baseVoice of sheet.tracks as Voice[]) {
@@ -484,6 +487,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
       }
       const firstNote = notes.length, firstPhrase = phrases.length;
       const profile = getInstrumentPerformanceProfile(track.instrumentId);
+      const grooveRole = voiceProfile(track.instrumentId).role;
       const dialect = resolveDialect(track.instrumentId, region.genre ?? sheet.worldId, regionStyle.id, track.role, decision.sectionEnergy);
       const partDialect = lane.lens.weight > 0
         ? resolveDialect(track.instrumentId, lane.lens.sourceGenre, lane.lens.sourceStyleId, track.role, decision.sectionEnergy)
@@ -620,7 +624,22 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
             // most strong notes into MIDI 127 and erase their accent differences.
             const driveLift = 0.94 + clamp((decision.drive - 0.45) / 0.95) * 0.06;
             const brightnessLift = 0.96 + Math.max(0, Math.min(127, decision.brightness)) / 127 * 0.08;
-            const vel = Math.max(1, Math.min(127, Math.round(velocityForEnergy(energy, onset.velocity, sharedHostProfile.density.accentContrast) * driveLift * brightnessLift)));
+            // Bring the genre's written accents and metric hierarchy into the
+            // SoundFont velocity, where the sample layers can make them audible.
+            // Keep it centered around unity and bounded so strong hits stay punchy
+            // without flattening the section arc against the output limiter.
+            const feelVelocity = grooveVelocityMultiplier(styleGroove, {
+              beatInBar: onset.position * bt.beatsPerBar,
+              beatsPerBar: bt.beatsPerBar,
+              role: grooveRole,
+              accent: onset.accent,
+              seed: seedOf(track.id, region.id, bar, i),
+              bpm: bt.bpm,
+              intensity: energy,
+              ensembleSeed: seedOf(region.id, phraseStart, track.instrumentId),
+            });
+            const grooveLift = clamp(1 + (feelVelocity - 0.72) * 0.55, 0.82, 1.16);
+            const vel = Math.max(1, Math.min(127, Math.round(velocityForEnergy(energy, onset.velocity, sharedHostProfile.density.accentContrast) * driveLift * brightnessLift * grooveLift)));
             const time = Math.max(0, grooveTime(bt, onset, i, lane.groove));
             const pv = voiceProfile(track.instrumentId);
             const nextPosition = rhythm.onsets[i + 1]?.position ?? (onset.position + onset.duration / bt.beatsPerBar);
