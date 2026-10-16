@@ -9,12 +9,12 @@ export const GENRE_PACK: GenrePackInput = {
   "defaultStyle": "Samba",
   "meter": "2/4",
   "tempo": [96, 112],
-  "instruments": ["voice", "guitar", "cavaquinho", "bass", "surdo", "pandeiro", "tamborim", "flute", "piano", "upright-bass", "drums", "banjo", "tantan", "accordion", "zabumba", "triangle"],
+  "instruments": ["voice", "guitar", "cavaquinho", "bass", "surdo", "pandeiro", "tamborim", "agogo", "flute", "piano", "upright-bass", "drums", "banjo", "tantan", "accordion", "zabumba", "triangle"],
   "roles": {
     "lead": ["voice"],
     "harmony": ["guitar", "cavaquinho"],
     "bass": ["bass"],
-    "percussion": ["surdo", "pandeiro", "tamborim"]
+    "percussion": ["surdo", "pandeiro", "tamborim", "agogo"]
   },
   "pitchSystem": "12-tet",
   "tuningSystem": "12-tet",
@@ -41,7 +41,7 @@ export const GENRE_PACK: GenrePackInput = {
         "lead": ["voice"],
         "harmony": ["guitar", "cavaquinho"],
         "bass": ["bass"],
-        "percussion": ["surdo", "pandeiro", "tamborim"]
+        "percussion": ["surdo", "pandeiro", "tamborim", "agogo"]
       },
       "progressions": {
         "intro": ["C6", "A7", "Dm7", "G7"],
@@ -77,7 +77,9 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "samba surdo and cavaquinho interlock pandeiro pulse", "shortName": "Pandeiro sixteenths", "role": "percussion", "onsets": [0,0.25,0.5,0.75,1,1.25,1.5,1.75], "instruments": ["pandeiro"], "cycleLength": 1, "pitches": [{"midi":64},{"midi":63},{"midi":63},{"midi":62},{"midi":64},{"midi":63},{"midi":63},{"midi":62}], "accents": [0.9,0.42,0.68,0.48,0.88,0.4,0.7,0.46], "microtiming": [-4,-5,-3,-6,-4,-5,-3,-6], "articulations": ["open","ghost","slap","ghost","open","ghost","slap","ghost"], "description": "Keep a light sixteenth-note stream, accenting the first and last subdivision of each beat while the softer taps tuck between them. Nudge the frame-drum strokes ahead of the relaxed surdo."},
         {"name": "samba surdo and cavaquinho interlock pandeiro cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["pandeiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "samba surdo and cavaquinho interlock tamborim pulse", "shortName": "Tamborim offbeat answers", "role": "percussion", "onsets": [0.25,0.75,1.25,1.75], "instruments": ["tamborim"], "cycleLength": 1, "pitches": [{"midi":54},{"midi":69},{"midi":54},{"midi":69}], "accents": [0.55,0.9,0.62,0.82], "microtiming": [-6,-7,-6,-7], "articulation": "accent", "description": "Answer the grounded surdo with short, brighter syncopations between the main beats; leave the downbeat open instead of doubling the bass drum."},
-        {"name": "samba surdo and cavaquinho interlock tamborim cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["tamborim"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "samba surdo and cavaquinho interlock tamborim cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["tamborim"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
+        {"name": "samba surdo and cavaquinho interlock agogo low high weave", "shortName": "Agogô low-high weave", "role": "percussion", "onsets": [0.5, 1.25, 1.75], "instruments": ["agogo"], "cycleLength": 1, "pitches": [{"midi":68},{"midi":67},{"midi":68}], "accents": [0.64,0.78,0.52], "microtiming": [-3,-4,-2], "articulation": "open", "sectionUsage": ["tema", "verse"], "arrangementVariation": true, "description": "Alternate the two agogô bells in the gaps around the surdo. Keep the three-note hook light and slightly behind the tamborim so the bell color supports, rather than doubles, the groove."},
+        {"name": "samba surdo and cavaquinho interlock agogo refrain answer", "shortName": "Agogô refrain answer", "role": "percussion", "onsets": [0.75, 1.5], "instruments": ["agogo"], "cycleLength": 1, "pitches": [{"midi":67},{"midi":68}], "accents": [0.82,0.7], "microtiming": [-4,-3], "articulation": "accent", "sectionUsage": ["refrain", "instrumental"], "arrangementVariation": true, "description": "Use a two-bell answer only in the lifted refrain or instrumental passage. Leave the first downbeat open so surdo and voice keep the center of the samba."}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -86,7 +88,8 @@ export const GENRE_PACK: GenrePackInput = {
         "bass": ["slap", "fingerstyle", "accent", "staccato", "legato"],
         "surdo": ["accent", "ghost", "roll"],
         "pandeiro": ["slap", "open", "accent", "ghost", "roll"],
-        "tamborim": ["accent", "ghost", "roll"]
+        "tamborim": ["accent", "ghost", "roll"],
+        "agogo": ["accent", "staccato", "open", "low-tone"]
       },
       "instrumentDialects": {
         "voice:lead": {
@@ -117,6 +120,10 @@ export const GENRE_PACK: GenrePackInput = {
         "tamborim:percussion": {
           "allowedTechniques": ["accent", "ghost", "roll"],
           "defaultTechnique": "accent"
+        },
+        "agogo:percussion": {
+          "allowedTechniques": ["accent", "staccato", "open", "low-tone"],
+          "defaultTechnique": "open"
         }
       },
       "mix": {
@@ -340,7 +347,7 @@ export const GENRE_PACK: GenrePackInput = {
         "lead": ["voice"],
         "harmony": ["guitar", "cavaquinho"],
         "bass": ["bass"],
-        "percussion": ["surdo", "pandeiro", "tamborim"]
+        "percussion": ["surdo", "pandeiro", "tamborim", "agogo"]
       },
       "progressions": {
         "intro": ["C6", "A7", "Dm7", "G7"],
@@ -376,7 +383,9 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "partido alto syncopated sung exchange pandeiro pulse", "shortName": "Pandeiro call response", "role": "percussion", "onsets": [0,0.25,0.5,0.75,1,1.25,1.5,1.75], "instruments": ["pandeiro"], "cycleLength": 1, "pitches": [{"midi":64},{"midi":63},{"midi":62},{"midi":63},{"midi":64},{"midi":63},{"midi":62},{"midi":63}], "accents": [0.88,0.4,0.68,0.5,0.84,0.42,0.72,0.5], "microtiming": [-4,-5,-3,-6,-4,-5,-3,-6], "articulations": ["open","ghost","slap","ghost","open","ghost","slap","ghost"], "description": "Play the recurring pandeiro swing under the sung exchange, with firm frame-drum accents and lighter fingertip notes that keep room for the response."},
         {"name": "partido alto syncopated sung exchange pandeiro cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["pandeiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "partido alto syncopated sung exchange tamborim pulse", "shortName": "Tamborim refrain accents", "role": "percussion", "onsets": [0.5,0.75,1.5,1.75], "instruments": ["tamborim"], "cycleLength": 1, "pitches": [{"midi":69},{"midi":54},{"midi":69},{"midi":54}], "accents": [0.58,0.9,0.62,0.84], "microtiming": [-5,-7,-5,-7], "articulation": "accent", "description": "Add compact bright accents in the gaps around the two-beat hand-drum pattern. Keep the higher tamborim strokes as punctuation, not a second continuous pulse."},
-        {"name": "partido alto syncopated sung exchange tamborim cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["tamborim"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "partido alto syncopated sung exchange tamborim cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["tamborim"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
+        {"name": "partido alto syncopated sung exchange agogo call answer", "shortName": "Agogô call answer", "role": "percussion", "onsets": [0.75, 1.75], "instruments": ["agogo"], "cycleLength": 1, "pitches": [{"midi":67},{"midi":68}], "accents": [0.78,0.66], "microtiming": [-4,-2], "articulation": "open", "sectionUsage": ["verse", "solo"], "arrangementVariation": true, "description": "Answer the sung call only in its open spaces: one high bell after the first phrase and a lower bell at the turn. Keep the two hits independent of the pandeiro's continuous swing."},
+        {"name": "partido alto syncopated sung exchange agogo refrain lift", "shortName": "Agogô refrain lift", "role": "percussion", "onsets": [0.5, 1.25, 1.75], "instruments": ["agogo"], "cycleLength": 1, "pitches": [{"midi":68},{"midi":67},{"midi":68}], "accents": [0.62,0.84,0.72], "microtiming": [-3,-4,-2], "articulation": "accent", "sectionUsage": ["refrain"], "arrangementVariation": true, "description": "Lift the refrain with a compact low-high bell figure. Place its last hit before the bar turns, leaving the downbeat clear for the next sung response."}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -385,7 +394,8 @@ export const GENRE_PACK: GenrePackInput = {
         "bass": ["slap", "fingerstyle", "accent", "staccato", "legato"],
         "surdo": ["accent", "ghost", "roll"],
         "pandeiro": ["slap", "open", "accent", "ghost", "roll"],
-        "tamborim": ["accent", "ghost", "roll"]
+        "tamborim": ["accent", "ghost", "roll"],
+        "agogo": ["accent", "staccato", "open", "low-tone"]
       },
       "instrumentDialects": {
         "voice:lead": {
@@ -416,6 +426,10 @@ export const GENRE_PACK: GenrePackInput = {
         "tamborim:percussion": {
           "allowedTechniques": ["accent", "ghost", "roll"],
           "defaultTechnique": "accent"
+        },
+        "agogo:percussion": {
+          "allowedTechniques": ["accent", "staccato", "open", "low-tone"],
+          "defaultTechnique": "open"
         }
       },
       "mix": {
@@ -445,7 +459,7 @@ export const GENRE_PACK: GenrePackInput = {
         "lead": ["voice"],
         "harmony": ["guitar", "cavaquinho"],
         "bass": ["bass"],
-        "percussion": ["surdo", "pandeiro", "tamborim"]
+        "percussion": ["surdo", "pandeiro", "tamborim", "agogo"]
       },
       "progressions": {
         "intro": ["C6", "A7", "Dm7", "G7"],
@@ -481,7 +495,9 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "samba de roda palmas and responsorial verse pandeiro pulse", "shortName": "Pandeiro circle swing", "role": "percussion", "onsets": [0,0.5,0.75,1,1.5,1.75], "instruments": ["pandeiro"], "cycleLength": 1, "pitches": [{"midi":64},{"midi":63},{"midi":62},{"midi":64},{"midi":63},{"midi":62}], "accents": [0.86,0.48,0.68,0.82,0.46,0.72], "microtiming": [-4,-4,-6,-4,-4,-6], "articulations": ["open","ghost","slap","open","ghost","slap"], "description": "Rock the pandeiro between the sung calls with a light rolling subdivision; reserve the strongest open tones for the phrase anchors."},
         {"name": "samba de roda palmas and responsorial verse pandeiro cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["pandeiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "samba de roda palmas and responsorial verse tamborim pulse", "shortName": "Tamborim response", "role": "percussion", "onsets": [0.25,0.75,1.5], "instruments": ["tamborim"], "cycleLength": 1, "pitches": [{"midi":54},{"midi":69},{"midi":54}], "accents": [0.55,0.82,0.62], "microtiming": [-6,-7,-6], "articulation": "accent", "description": "Answer the singers with three short bright gestures and leave the first beat free for the vocal call and circle response."},
-        {"name": "samba de roda palmas and responsorial verse tamborim cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["tamborim"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "samba de roda palmas and responsorial verse tamborim cadence fill", "role": "percussion", "onsets": [1.0, 1.5, 1.75], "instruments": ["tamborim"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
+        {"name": "samba de roda palmas and responsorial verse agogo circle reply", "shortName": "Agogô circle reply", "role": "percussion", "onsets": [0.5, 1.5, 1.75], "instruments": ["agogo"], "cycleLength": 1, "pitches": [{"midi":68},{"midi":67},{"midi":68}], "accents": [0.64,0.78,0.66], "microtiming": [-3,-4,-2], "articulation": "open", "sectionUsage": ["response", "verse"], "arrangementVariation": true, "description": "Let the high bell answer the response after the vocal line, then use the low bell to turn back into the circle. Leave the call itself spacious and uncluttered."},
+        {"name": "samba de roda palmas and responsorial verse agogo call pickup", "shortName": "Agogô call pickup", "role": "percussion", "onsets": [1.75], "instruments": ["agogo"], "cycleLength": 1, "pitches": [{"midi":67}], "accents": [0.58], "microtiming": [-2], "articulation": "staccato", "sectionUsage": ["call", "coda"], "arrangementVariation": true, "description": "Use a single short high-bell pickup at the end of the call to cue the response. The bell should invite the next phrase without becoming a steady percussion loop."}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -490,7 +506,8 @@ export const GENRE_PACK: GenrePackInput = {
         "bass": ["slap", "fingerstyle", "accent", "staccato", "legato"],
         "surdo": ["accent", "ghost", "roll"],
         "pandeiro": ["slap", "open", "accent", "ghost", "roll"],
-        "tamborim": ["accent", "ghost", "roll"]
+        "tamborim": ["accent", "ghost", "roll"],
+        "agogo": ["accent", "staccato", "open", "low-tone"]
       },
       "instrumentDialects": {
         "voice:lead": {
@@ -521,6 +538,10 @@ export const GENRE_PACK: GenrePackInput = {
         "tamborim:percussion": {
           "allowedTechniques": ["accent", "ghost", "roll"],
           "defaultTechnique": "accent"
+        },
+        "agogo:percussion": {
+          "allowedTechniques": ["accent", "staccato", "open", "low-tone"],
+          "defaultTechnique": "open"
         }
       },
       "mix": {
@@ -942,7 +963,7 @@ export const GENRE_PACK: GenrePackInput = {
         "lead": ["voice"],
         "harmony": ["guitar", "cavaquinho"],
         "bass": ["bass"],
-        "percussion": ["surdo", "pandeiro", "tamborim"]
+        "percussion": ["surdo", "pandeiro", "tamborim", "agogo"]
       },
       "progressions": {
         "intro": ["C6", "A7", "Dm7", "G7"],
@@ -978,7 +999,9 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "samba reggae layered surdo accents pandeiro pulse", "shortName": "Samba-reggae pandeiro lift", "role": "percussion", "onsets": [0.5,1.5,2.5,3.5], "instruments": ["pandeiro"], "cycleLength": 1, "pitches": [{"midi":64},{"midi":62},{"midi":64},{"midi":62}], "accents": [0.72,0.58,0.74,0.62], "microtiming": [-4,-5,-4,-5], "articulations": ["open","slap","open","slap"], "description": "Lift between the surdo's quarter-note calls with a forward, syncopated pandeiro answer; keep the open frame-drum tones brighter than the bass strokes."},
         {"name": "samba reggae layered surdo accents pandeiro cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["pandeiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "samba reggae layered surdo accents tamborim pulse", "shortName": "Samba-reggae tamborim answers", "role": "percussion", "onsets": [0.75,1.75,2.75,3.75], "instruments": ["tamborim"], "cycleLength": 1, "pitches": [{"midi":54},{"midi":69},{"midi":54},{"midi":69}], "accents": [0.56,0.88,0.6,0.9], "microtiming": [-6,-7,-6,-7], "articulation": "accent", "description": "Place sharper tamborim replies on the offbeats, between the pandeiro lift and the broad surdo calls, rather than copying either part's rhythm."},
-        {"name": "samba reggae layered surdo accents tamborim cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["tamborim"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "samba reggae layered surdo accents tamborim cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["tamborim"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
+        {"name": "samba reggae layered surdo accents agogo cross rhythm", "shortName": "Agogô cross-rhythm", "role": "percussion", "onsets": [0.5, 1.25, 2.5, 3.25], "instruments": ["agogo"], "cycleLength": 1, "pitches": [{"midi":68},{"midi":67},{"midi":68},{"midi":67}], "accents": [0.62,0.82,0.64,0.84], "microtiming": [-3,-4,-3,-4], "articulation": "open", "sectionUsage": ["chant", "verse"], "arrangementVariation": true, "description": "Thread the paired bells across the surdo's quarter-note calls. This cross-rhythm lands in different gaps from the tamborim answers and stays out of the stripped break."},
+        {"name": "samba reggae layered surdo accents agogo block lift", "shortName": "Agogô block lift", "role": "percussion", "onsets": [0.75, 2.75, 3.5], "instruments": ["agogo"], "cycleLength": 1, "pitches": [{"midi":67},{"midi":67},{"midi":68}], "accents": [0.72,0.8,0.94], "microtiming": [-4,-3,-2], "articulation": "accent", "sectionUsage": ["chorus"], "arrangementVariation": true, "description": "Use a three-hit bell lift to underline the chorus block, with the last upper bell cueing the next downbeat. Keep the section break fully quiet except for its written surdo call."}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -987,7 +1010,8 @@ export const GENRE_PACK: GenrePackInput = {
         "bass": ["slap", "fingerstyle", "accent", "staccato", "legato"],
         "surdo": ["accent", "ghost", "roll"],
         "pandeiro": ["slap", "open", "accent", "ghost", "roll"],
-        "tamborim": ["accent", "ghost", "roll"]
+        "tamborim": ["accent", "ghost", "roll"],
+        "agogo": ["accent", "staccato", "open", "low-tone"]
       },
       "instrumentDialects": {
         "voice:lead": {
@@ -1018,6 +1042,10 @@ export const GENRE_PACK: GenrePackInput = {
         "tamborim:percussion": {
           "allowedTechniques": ["accent", "ghost", "roll"],
           "defaultTechnique": "accent"
+        },
+        "agogo:percussion": {
+          "allowedTechniques": ["accent", "staccato", "open", "low-tone"],
+          "defaultTechnique": "open"
         }
       },
       "mix": {
@@ -1047,7 +1075,7 @@ export const GENRE_PACK: GenrePackInput = {
         "lead": ["voice"],
         "harmony": ["guitar", "cavaquinho"],
         "bass": ["bass"],
-        "percussion": ["surdo", "pandeiro", "tamborim"]
+        "percussion": ["surdo", "pandeiro", "tamborim", "agogo"]
       },
       "progressions": {
         "intro": ["C6", "A7", "Dm7", "G7"],
@@ -1083,7 +1111,9 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "samba rock syncopated guitar backbeat pandeiro pulse", "shortName": "Samba-rock pandeiro backbeat", "role": "percussion", "onsets": [0.5,1.5,2.5,3.5], "instruments": ["pandeiro"], "cycleLength": 1, "pitches": [{"midi":64},{"midi":62},{"midi":64},{"midi":62}], "accents": [0.68,0.82,0.72,0.86], "microtiming": [-3,-4,-3,-4], "articulations": ["open","slap","open","slap"], "description": "Place crisp pandeiro answers on the offbeats under the syncopated guitar; keep the open/slap contrast short and danceable."},
         {"name": "samba rock syncopated guitar backbeat pandeiro cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["pandeiro"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "samba rock syncopated guitar backbeat tamborim pulse", "shortName": "Samba-rock tamborim fills", "role": "percussion", "onsets": [0.75,1.75,2.75,3.75], "instruments": ["tamborim"], "cycleLength": 1, "pitches": [{"midi":54},{"midi":69},{"midi":54},{"midi":69}], "accents": [0.56,0.82,0.6,0.88], "microtiming": [-5,-6,-5,-6], "articulation": "accent", "description": "Use a sparse high offbeat reply as a rhythmic accent; leave the backbeat and the heavier guitar syncopation in their own parts."},
-        {"name": "samba rock syncopated guitar backbeat tamborim cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["tamborim"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"}
+        {"name": "samba rock syncopated guitar backbeat tamborim cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["tamborim"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
+        {"name": "samba rock syncopated guitar backbeat agogo sparse backbeat accent", "shortName": "Agogô backbeat accents", "role": "percussion", "onsets": [1.5, 3.5], "instruments": ["agogo"], "cycleLength": 1, "pitches": [{"midi":68},{"midi":67}], "accents": [0.68,0.84], "microtiming": [-2,-3], "articulation": "staccato", "sectionUsage": ["chorus", "solo"], "arrangementVariation": true, "description": "Use two clipped bell hits as a light answer to the guitar hook. Keep the agogô away from the pandeiro's full backbeat so the chorus stays punchy instead of crowded."},
+        {"name": "samba rock syncopated guitar backbeat agogo turnaround reply", "shortName": "Agogô turnaround reply", "role": "percussion", "onsets": [2.75, 3.75], "instruments": ["agogo"], "cycleLength": 1, "pitches": [{"midi":67},{"midi":68}], "accents": [0.76,0.9], "microtiming": [-3,-2], "articulation": "accent", "sectionUsage": ["outro"], "arrangementVariation": true, "description": "Answer the end of the guitar figure with a short high-low turn. The final bell is a pickup into the outro landing, not another continuous beat."}
       ],
       "instrumentTechniques": {
         "voice": ["accent", "staccato", "legato", "vibrato"],
@@ -1092,7 +1122,8 @@ export const GENRE_PACK: GenrePackInput = {
         "bass": ["slap", "fingerstyle", "accent", "staccato", "legato"],
         "surdo": ["accent", "ghost", "roll"],
         "pandeiro": ["slap", "open", "accent", "ghost", "roll"],
-        "tamborim": ["accent", "ghost", "roll"]
+        "tamborim": ["accent", "ghost", "roll"],
+        "agogo": ["accent", "staccato", "open", "low-tone"]
       },
       "instrumentDialects": {
         "voice:lead": {
@@ -1123,6 +1154,10 @@ export const GENRE_PACK: GenrePackInput = {
         "tamborim:percussion": {
           "allowedTechniques": ["accent", "ghost", "roll"],
           "defaultTechnique": "accent"
+        },
+        "agogo:percussion": {
+          "allowedTechniques": ["accent", "staccato", "open", "low-tone"],
+          "defaultTechnique": "open"
         }
       },
       "mix": {

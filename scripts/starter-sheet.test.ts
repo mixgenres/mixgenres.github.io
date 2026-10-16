@@ -13,8 +13,8 @@ test('new starters retain the style-authored ensemble and only add audible, genr
     const starter = makeStarterSheet({ genreId, styleId });
     const originalIds = new Set(original.tracks.map(track => track.instrumentId));
     const allowed = new Set(resolveStyle({ genreId, styleId }).patterns?.allowed ?? []);
-    assert.ok(starter.tracks.length <= 8 || original.tracks.length >= 8,
-      `${styleId} should stay near the requested eight-track starter size`);
+    assert.ok(starter.tracks.length <= 8,
+      `${styleId} should stay within the requested eight-track starter size`);
     if (styleId === 'latin-tropical') {
       assert.equal(starter.tracks.length, 8,
         'a style with authored active variation parts expands its seven-part ensemble to eight');

@@ -1,4 +1,6 @@
 import { GENRE_WORLDS } from '../genres';
+import type { GenreStyleDefinition, GenreWorld } from '../schema';
+import { SCALE_MODE_INTERVALS } from './scales';
 
 export type ScaleName =
   | 'ionian' | 'dorian' | 'phrygian' | 'lydian' | 'mixolydian'
@@ -162,6 +164,75 @@ const rhythmRate = (value: string): GenreTheoryProfile['harmonicRhythm'] => {
   return /static|drone|none/.test(text) ? 'static' : /phrase|section|alap/.test(text) ? 'phrase'
     : /two|2-bar|slow/.test(text) ? 'two-bar' : /half|montuno|fast|compas|compás/.test(text) ? 'half-bar' : 'bar';
 };
+
+/** Catalog-backed theories are distinguishable from the hand-curated profiles. */
+export const CATALOG_INFERRED_THEORY_GENRES = new Set<string>();
+
+function authoredPitchDegreesForRoles(world: GenreWorld, style: GenreStyleDefinition, roles: Set<string>): number[] {
+  const authoredDegrees = world.patterns
+    .filter(pattern => pattern.enabled !== false
+      && pattern.sourceLevel === 'style-authored'
+      && pattern.styleIds?.includes(style.id) === true
+      && pattern.roles.some(role => roles.has(role)))
+    .flatMap(pattern => pattern.events ?? [])
+    .map(event => event.pitch?.degree)
+    .filter((degree): degree is number => typeof degree === 'number' && Number.isSafeInteger(degree) && degree > 0);
+  return Array.from(new Set(authoredDegrees)).slice(0, 12);
+}
+
+/**
+ * Choose generated melody anchors from the style's own authored pitch cells
+ * and harmony. The former shared [1,3,5,7] list made a generated phrase land
+ * on the same arpeggio in unrelated styles, including power-chord and modal
+ * material that did not author a seventh chord.
+ */
+export function melodyTargetsForAuthoredStyle(world: GenreWorld, style: GenreStyleDefinition): number[] {
+  const distinctDegrees = authoredPitchDegreesForRoles(world, style,
+    new Set(['lead', 'melody', 'voice', 'counterline']));
+  if (distinctDegrees.length) return distinctDegrees;
+
+  const harmony = style.calibration?.harmony;
+  if (!harmony) return [1, 3, 5];
+  if (harmony.requiresChords === false) {
+    const scale = scaleFromWords(harmony.scales);
+    // Modal and drone styles do not imply a triad. A fixed 1/3/5 target list
+    // discarded most of their authored scale (and turned chromatic material
+    // into whole-tone). Keep every degree available when no pitched phrase
+    // cell supplies a narrower, ordered vocabulary.
+    const degreeCount = SCALE_MODE_INTERVALS[scale]?.length ?? 7;
+    return Array.from({ length: degreeCount }, (_, index) => index + 1);
+  }
+  const chordSymbols = (harmony.progressionExamples ?? []).flat();
+  const powerChord = /^[A-G](?:#|b)?5$/i;
+  if (chordSymbols.length && chordSymbols.every(chord => powerChord.test(chord.trim()))) return [1, 5];
+
+  const authoredHarmony = `${harmony.chordQualities.join(' ')} ${chordSymbols.join(' ')}`;
+  const targets = [1, 3, 5];
+  const hasSeventhChord = chordSymbols.some(chord => /^[A-G](?:#|b)?(?:maj|min|m|dim|aug|sus|add)?7/i.test(chord.trim()));
+  if (hasSeventhChord || /seventh|ninth|eleventh|thirteenth/i.test(authoredHarmony)) targets.push(7);
+  const hasSixthChord = chordSymbols.some(chord => /^[A-G](?:#|b)?(?:maj|min|m|dim|aug|sus|add)?6/i.test(chord.trim()));
+  if (hasSixthChord || /sixth|\b6th\b/i.test(authoredHarmony)) targets.push(6);
+  return targets;
+}
+
+/** Bass anchors follow authored bass pitches, then the actual chord vocabulary. */
+export function bassTargetsForAuthoredStyle(world: GenreWorld, style: GenreStyleDefinition): number[] {
+  const authoredDegrees = authoredPitchDegreesForRoles(world, style, new Set(['bass', 'low-anchor']));
+  if (authoredDegrees.length) return authoredDegrees;
+
+  const harmony = style.calibration?.harmony;
+  if (!harmony || harmony.requiresChords === false) return [1, 5];
+  const chordSymbols = (harmony.progressionExamples ?? []).flat();
+  const powerChord = /^[A-G](?:#|b)?5$/i;
+  if (chordSymbols.length && chordSymbols.every(chord => powerChord.test(chord.trim()))) return [1, 5];
+
+  const authoredHarmony = `${harmony.chordQualities.join(' ')} ${chordSymbols.join(' ')}`;
+  const targets = [1, 5, 3];
+  const hasSeventhChord = chordSymbols.some(chord => /^[A-G](?:#|b)?(?:maj|min|m|dim|aug|sus|add)?7/i.test(chord.trim()));
+  if (hasSeventhChord || /seventh|ninth|eleventh|thirteenth/i.test(authoredHarmony)) targets.push(7);
+  return targets;
+}
+
 for (const world of GENRE_WORLDS) {
   // Curated theory profiles carry genre-specific harmony, bass movement and
   // phrase behavior. Derive from the home style only for worlds that do not
@@ -170,6 +241,7 @@ for (const world of GENRE_WORLDS) {
   const seed = world.styleDefinitions.find(style => style.id === world.homeStyleId) ?? world.styleDefinitions[0];
   const calibration = seed?.calibration;
   if (!seed || !calibration) continue;
+  CATALOG_INFERRED_THEORY_GENRES.add(world.id);
   const scales = calibration.harmony.scales;
   const scale = scaleFromWords(scales);
   const words = `${world.id} ${seed.name} ${calibration.harmony.chordQualities.join(' ')}`.toLowerCase();
@@ -185,7 +257,7 @@ for (const world of GENRE_WORLDS) {
     progressions: progressionExamples, cadences: calibration.harmony.cadences.map(cadence => [cadence]),
     harmonicRhythm: rhythmRate(calibration.harmony.harmonicRhythm),
     bass: { style: /tumbao|clave|tumbao/i.test(calibration.harmony.bassChordInteraction) ? 'tumbao' : /drone|pedal/i.test(calibration.harmony.bassChordInteraction) ? 'drone' : 'style-owned',
-      targetDegrees: [1,3,5,7], chromaticApproach: /chromatic|approach/i.test(calibration.harmony.bassChordInteraction),
+      targetDegrees: bassTargetsForAuthoredStyle(world, seed), chromaticApproach: /chromatic|approach/i.test(calibration.harmony.bassChordInteraction),
       passingProbability: /chromatic|approach/i.test(calibration.harmony.bassChordInteraction) ? .22 : .08,
       phraseFillProbability: .14, anticipationBeats: /anticip|tumbao|dembow/i.test(calibration.harmony.bassChordInteraction) ? [3.5] : [],
       silenceProbability: /sparse|rest|silence|drone/i.test(calibration.patterns.families.join(' ')) ? .25 : .06 },
@@ -193,7 +265,7 @@ for (const world of GENRE_WORLDS) {
       : /power.?chord|riff/i.test(words) ? 'power' : /jazz|extended|guide.?tone/i.test(words) ? 'guide-tone' : 'open',
       guideTonePriority: /jazz|extended|7|9|13|guide/i.test(words), upperStructure: /jazz|extended|9|11|13/i.test(words),
       maxLowDensity: /sub|bass|industrial|metal/i.test(words) ? .2 : .38 },
-    melody: { scale: [scale], targetDegrees: [1,3,5,7], approachDegrees: [2,4,6], phraseBars: [2,4,8],
+    melody: { scale: [scale], targetDegrees: melodyTargetsForAuthoredStyle(world, seed), approachDegrees: [2,4,6], phraseBars: [2,4,8],
       contour: calibration.patterns.phraseBehaviors ?? [], callResponse: calibration.patterns.interaction?.some(x => /call|answer|response/i.test(x)) ?? false,
       ornamentCap: /ornament|melisma|improvis/i.test(calibration.techniques.melody?.join(' ') ?? '') ? .28 : .12 },
     rhythm: { subdivision, swing: (seed.grooveMechanics?.swingPercentage ?? 50) / 100,

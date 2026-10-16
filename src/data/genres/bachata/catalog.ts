@@ -641,7 +641,7 @@ export const GENRE_PACK: GenrePackInput = authorBachataStudies({
       "roles": {
         "lead": ["voice", "requinto"],
         "harmony": ["guitar", "synth"],
-        "bass": ["synth"],
+        "bass": ["bass"],
         "percussion": ["bongos", "guira", "drums"]
       },
       "progressions": {
@@ -672,8 +672,8 @@ export const GENRE_PACK: GenrePackInput = authorBachataStudies({
         {"name": "urban dembow under requinto syncopation guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "urban dembow under requinto syncopation synth accompaniment", "role": "harmony", "onsets": [0.75, 1.5, 2.75, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "urban dembow under requinto syncopation synth cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "urban dembow under requinto syncopation low anchor", "role": "bass", "onsets": [0, 1.5, 2, 3.5], "instruments": ["synth"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.5]},
-        {"name": "urban dembow under requinto syncopation synth cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "Urban dembow bass tumbao", "role": "bass", "onsets": [0, 1.5, 2, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.5]},
+        {"name": "Urban bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "urban dembow under requinto syncopation bongos pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["bongos"], "cycleLength": 1, "articulation": "accent"},
         {"name": "urban dembow under requinto syncopation bongos cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["bongos"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "urban dembow under requinto syncopation guira pulse", "role": "percussion", "onsets": [0, 1, 1.5, 2, 3, 3.5], "instruments": ["guira"], "cycleLength": 1, "articulation": "accent"},
@@ -686,6 +686,7 @@ export const GENRE_PACK: GenrePackInput = authorBachataStudies({
         "requinto": ["tremolo", "slide", "hammer-on", "pull-off", "accent", "staccato", "legato"],
         "guitar": ["tremolo", "hammer-on", "pull-off", "slide", "strum", "arpeggio", "muted-strum", "accent", "staccato", "legato", "vibrato"],
         "synth": ["accent", "staccato", "legato", "vibrato"],
+        "bass": ["accent", "staccato", "legato", "ghost"],
         "bongos": ["accent", "open", "slap", "ghost"],
         "guira": ["scrape", "short-scrape", "long-scrape", "accent"],
         "drums": ["roll", "accent", "ghost", "open"]

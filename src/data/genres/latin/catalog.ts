@@ -596,7 +596,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "tropical",
       "name": "Tropical",
-      "description": "Tropical: tropical horn response over dance percussion. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Tropical: brass answers trade with the vocal call over congas, timbales and guiro. A strummed guitar and tambor llamador enter for the lifted refrain and mambo, then leave room for the coda.",
       "patterns": ["tropical horn response over dance percussion"],
       "techniques": ["strum", "arpeggio", "tremolo", "roll", "scrape", "short-chord-stab", "melisma", "accent", "staccato", "legato", "vibrato", "tenuto", "muted-strum", "ghost", "open"],
       "harmony": ["Am", "Dm", "E7", "C", "F", "G7"],
@@ -605,9 +605,9 @@ export const GENRE_PACK: GenrePackInput = {
       "scale": "minor",
       "roles": {
         "lead": ["voice", "horn-section"],
-        "harmony": ["piano"],
+        "harmony": ["piano", "guitar"],
         "bass": ["bass"],
-        "percussion": ["congas", "timbales", "guiro"]
+        "percussion": ["congas", "timbales", "guiro", "cumbia-drum"]
       },
       "progressions": {
         "intro": ["Am", "Dm", "E7", "Am"],

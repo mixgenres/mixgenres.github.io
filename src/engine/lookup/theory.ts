@@ -3,7 +3,7 @@ export { GENRE_THEORY } from '../../data/musicTheory/genreTheory';
 export { CHORD_PALETTE, CHORD_MOODS, CHORD_MOOD_ORDER, JAZZ_CHORD_LIBRARY } from '../../data/chordPalette';
 export type { ChordMood, ChordOption } from '../../data/chordPalette';
 import type { GenreTheoryProfile } from '../../data/musicTheory/genreTheory';
-import { GENRE_THEORY } from '../../data/musicTheory/genreTheory';
+import { bassTargetsForAuthoredStyle, CATALOG_INFERRED_THEORY_GENRES, GENRE_THEORY, melodyTargetsForAuthoredStyle } from '../../data/musicTheory/genreTheory';
 import { CHORD_PALETTE, CHORD_MOOD_ORDER_RAW } from '../../data/chordPalette';
 import type { ChordMood, ChordOption } from '../../data/chordPalette';
 import { GENRE_WORLDS_BY_ID } from '../../data/genres';
@@ -97,7 +97,7 @@ export function styleTheoryFor(styleId: string | undefined, genreId: string): Ge
   const out: GenreTheoryProfile = structuredClone(base);
   const world = GENRE_WORLDS_BY_ID[genreId];
   const style = world?.styleDefinitions.find(candidate => candidate.id === styleId);
-  if (!style) throw new Error(`No authored ${genreId} style named ${styleId}`);
+  if (!world || !style) throw new Error(`No authored ${genreId} style named ${styleId}`);
   const calibration = style.calibration;
   if (!calibration) throw new Error(`No authored performance calibration for ${genreId}/${styleId}`);
   {
@@ -134,6 +134,10 @@ export function styleTheoryFor(styleId: string | undefined, genreId: string): Ge
     out.rhythm.subdivision = /32nd|rapid.?roll|micro.?edit/i.test(calibration.patterns.families.join(' ')) ? 32
       : /12\/8|12.?beat|compound/i.test(`${out.meter} ${calibration.patterns.families.join(' ')}`) ? 12 : out.rhythm.subdivision;
     out.melody.scale = harmony.scales.length ? harmony.scales.map(scaleFromWords) : out.melody.scale;
+    if (CATALOG_INFERRED_THEORY_GENRES.has(genreId)) {
+      out.melody.targetDegrees = melodyTargetsForAuthoredStyle(world, style);
+      out.bass.targetDegrees = bassTargetsForAuthoredStyle(world, style);
+    }
     out.techniques = {
       bass: calibration.techniques.bass ?? [], harmony: calibration.techniques.harmony ?? [],
       melody: calibration.techniques.lead ?? calibration.techniques.voice ?? [],

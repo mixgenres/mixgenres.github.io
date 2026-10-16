@@ -909,7 +909,9 @@ test('Andean samples teach the fuga lift, flute handoffs, bombo break and electr
     'the four-bar stomp break keeps only the authored bombo part');
 
   const fusion = createCatalogSong('andean-andean-fusion_song');
-  for (const instrument of ['bass','drums','synth']) {
+  assert.equal(new Set(fusion.tracks.map(track => track.instrumentId)).size, 8,
+    'Andean Fusion uses its full eight-part authored ensemble');
+  for (const instrument of ['bass','drums','synth','guitar']) {
     assert.ok(fusion.tracks.some(track => track.instrumentId === instrument), `fusion sample includes ${instrument}`);
   }
   const groove = fusion.regions.find(region => region.kind === 'groove')!;
@@ -921,6 +923,8 @@ test('Andean samples teach the fuga lift, flute handoffs, bombo break and electr
   assert.equal(pattern('drums').shortName, 'Kit backbeat');
   assert.deepEqual(pattern('drums').events?.map(event => event.hitType), ['kick','hat','hat','snare','kick','hat','hat','snare']);
   assert.equal(pattern('synth').shortName, 'Synth chord jab');
+  assert.equal(pattern('guitar').shortName, 'Guitar variation',
+    'the guitar support uses the Andean Fusion style cell in the groove');
 
   const dissolve = fusion.regions.find(region => region.kind === 'dissolve')!;
   const synth = fusion.tracks.find(track => track.instrumentId === 'synth')!;
@@ -1046,6 +1050,43 @@ test('Bachata samples reserve vocals for sung sections and teach separate verse 
       }
     }
   }
+});
+
+test('Urban Bachata gives the dembow pocket a real bass part instead of doubling its synth patch', () => {
+  const song = createCatalogSong('bachata-urban_song');
+  const bass = song.tracks.find(track => track.instrumentId === 'bass' && track.role === 'bass');
+  assert.ok(bass, 'the Urban Bachata sample includes its authored bass instrument');
+  assert.ok(!song.tracks.some(track => track.instrumentId === 'synth' && track.role === 'bass'),
+    'the synth remains a chord color while the bass instrument carries the low anchor');
+  const verse = song.regions.find(region => region.kind === 'verse')!;
+  const pattern = PATTERNS_BY_ID[song.arrangement[verse.id][bass.id]]!;
+  assert.equal(pattern.shortName, 'Bass majao syncopation');
+  assert.ok(pattern.instruments?.includes('bass') && pattern.roles.includes('bass'));
+  assert.ok(pattern.events?.some(event => event.position === 1.5) && pattern.events?.some(event => event.position === 3.5),
+    'the bass cell keeps its offbeat dembow pickups instead of a generic root pulse');
+});
+
+test('Tropical Latin stages its full eight-part ensemble into the chorus and mambo', () => {
+  const song = createCatalogSong('latin-tropical_song');
+  assert.equal(new Set(song.tracks.map(track => track.instrumentId)).size, 8);
+  const trackFor = (instrument: string) => song.tracks.find(track => track.instrumentId === instrument)!;
+  const active = (kind: string, occurrence = 1) => song.regions.filter(region => region.kind === kind)[occurrence - 1]!;
+  const intro = active('intro');
+  const verse = active('verse');
+  const prechorus = active('prechorus');
+  const chorus = active('chorus');
+  const mambo = active('mambo');
+  const coda = active('coda');
+  assert.equal(intro.activeInstrumentIds?.includes('guitar'), false);
+  assert.equal(verse.activeInstrumentIds?.includes('cumbia-drum'), false);
+  assert.ok(prechorus.activeInstrumentIds?.includes('guitar') && prechorus.activeInstrumentIds?.includes('cumbia-drum'));
+  for (const region of [chorus, mambo]) {
+    assert.ok(region.activeInstrumentIds?.includes('guitar') && region.activeInstrumentIds?.includes('cumbia-drum'));
+  }
+  assert.equal(coda.activeInstrumentIds?.includes('cumbia-drum'), false,
+    'the added dance layer leaves space for the coda');
+  assert.equal(PATTERNS_BY_ID[song.arrangement[chorus.id][trackFor('guitar').id]]?.shortName, 'Guitar variation');
+  assert.equal(PATTERNS_BY_ID[song.arrangement[mambo.id][trackFor('cumbia-drum').id]]?.shortName, 'Tambor llamador reply');
 });
 
 test('Bulerías gives the cante a one-compás llamada and ends on a distinct remate', () => {
@@ -1947,6 +1988,24 @@ test('Brazilian samples assign playable, style-specific parts through their form
       }
     }
   }
+  for (const style of ['samba','partido-alto','samba-de-roda','samba-reggae','samba-rock']) {
+    const sheet = songs[style];
+    assert.equal(sheet.tracks.length, 8, `${style} sample exposes its eight-part authored ensemble`);
+    const agogo = sheet.tracks.find(track => track.instrumentId === 'agogo');
+    assert.ok(agogo, `${style} includes an Agogo bells track`);
+    const rendered = compileWholeSong(sheet).notes.filter(note => note.trackId === agogo.id);
+    assert.ok(rendered.length > 0, `${style} agogô part reaches the shared playback event plan`);
+  }
+  assert.equal(pattern(songs.samba, 'tema', 'agogo'), 'Agogô low-high weave');
+  assert.equal(pattern(songs.samba, 'refrain', 'agogo'), 'Agogô refrain answer');
+  assert.equal(pattern(songs['partido-alto'], 'verse', 'agogo'), 'Agogô call answer');
+  assert.equal(pattern(songs['partido-alto'], 'refrain', 'agogo'), 'Agogô refrain lift');
+  assert.equal(pattern(songs['samba-de-roda'], 'call', 'agogo'), 'Agogô call pickup');
+  assert.equal(pattern(songs['samba-de-roda'], 'response', 'agogo'), 'Agogô circle reply');
+  assert.equal(pattern(songs['samba-reggae'], 'chant', 'agogo'), 'Agogô cross-rhythm');
+  assert.equal(pattern(songs['samba-reggae'], 'chorus', 'agogo'), 'Agogô block lift');
+  assert.equal(pattern(songs['samba-rock'], 'chorus', 'agogo'), 'Agogô backbeat accents');
+  assert.equal(pattern(songs['samba-rock'], 'outro', 'agogo'), 'Agogô turnaround reply');
   assert.equal(pattern(songs.forro, 'intro', 'zabumba'), 'Zabumba pulse');
   assert.equal(pattern(songs.forro, 'solo', 'accordion'), 'Accordion variation');
   assert.ok(!region(songs.forro, 'solo').activeInstrumentIds?.includes('voice'), 'the forró instrumental break gives the accordion room');
@@ -1967,6 +2026,8 @@ test('Brazilian samples assign playable, style-specific parts through their form
   assert.ok(!region(songs.mpb, 'interlude').activeInstrumentIds?.includes('voice'), 'the MPB interlude leaves space for guitar');
   assert.equal(region(songs['samba-reggae'], 'break').formLabel, 'surdo-only break');
   assert.deepEqual(region(songs['samba-reggae'], 'break').activeInstrumentIds, ['surdo']);
+  assert.ok(!region(songs['samba-reggae'], 'break').activeInstrumentIds?.includes('agogo'),
+    'the agogô stays out of the deliberately stripped surdo break');
   assert.equal(pattern(songs['samba-rock'], 'intro', 'guitar'), 'Samba-rock backbeat');
   assert.equal(pattern(songs['samba-rock'], 'intro', 'pandeiro'), 'Samba-rock pandeiro backbeat');
   assert.ok(!region(songs.samba, 'instrumental').activeInstrumentIds?.includes('voice'), 'the samba instrumental block drops the synthetic vocal guide');

@@ -2359,7 +2359,8 @@ export function makeStarterSheet(
   influences?: StyleInfluence[],
   overrides?: Partial<SongStyle>,
 ): Sheet {
-  const base = makeSheet(worldOrOptions, explicitStyleId, influences, overrides);
+  const rawBase = makeSheet(worldOrOptions, explicitStyleId, influences, overrides);
+  const base = rawBase.tracks.length > 8 ? trimStarterToEight(rawBase) : rawBase;
   if (base.tracks.length >= 8) return base;
 
   const genreId = base.worldId;
@@ -2438,6 +2439,36 @@ export function makeStarterSheet(
 
   if (tracks.length === base.tracks.length) return base;
   return rebuild({ ...base, tracks, regions, arrangement, energies });
+}
+
+function trimStarterToEight(sheet: Sheet): Sheet {
+  const tracks = [...sheet.tracks];
+  const removedIds = new Set<string>();
+  while (tracks.length > 8) {
+    const removableIndex = tracks.findIndex(track => track.instrumentId === 'voice') >= 0
+      ? tracks.findIndex(track => track.instrumentId === 'voice')
+      : tracks.findIndex(track => !!track.instrumentId && ['choir','synth'].includes(track.instrumentId));
+    const index = removableIndex >= 0 ? removableIndex : tracks.length - 1;
+    removedIds.add(tracks[index].id);
+    tracks.splice(index, 1);
+  }
+  const keepTrack = (trackId: string) => !removedIds.has(trackId);
+  const arrangement = Object.fromEntries(Object.entries(sheet.arrangement).map(([regionId, cells]) => [
+    regionId, Object.fromEntries(Object.entries(cells).filter(([trackId]) => keepTrack(trackId))),
+  ]));
+  const energies = Object.fromEntries(Object.entries(sheet.energies ?? {}).map(([regionId, levels]) => [
+    regionId, Object.fromEntries(Object.entries(levels).filter(([trackId]) => keepTrack(trackId))),
+  ]));
+  const lockedPatternAssignments = sheet.lockedPatternAssignments
+    ? Object.fromEntries(Object.entries(sheet.lockedPatternAssignments).map(([regionId, locks]) => [
+      regionId, Object.fromEntries(Object.entries(locks).filter(([trackId]) => keepTrack(trackId))),
+    ]))
+    : undefined;
+  const activeInstruments = new Set(tracks.map(track => track.instrumentId));
+  const regions = sheet.regions.map(region => region.activeInstrumentIds
+    ? { ...region, activeInstrumentIds: region.activeInstrumentIds.filter(instrumentId => activeInstruments.has(instrumentId)) }
+    : region);
+  return rebuild({ ...sheet, tracks, regions, arrangement, energies, lockedPatternAssignments });
 }
 
 /**

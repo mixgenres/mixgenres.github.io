@@ -576,7 +576,7 @@ export const RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = Obje
  * phrase development. These remain local to the exact recorded style sample. */
 const bachataCoreInstrumentalParts = ['requinto','guitar','bass','bongos','guira'];
 const bachataModernInstrumentalParts = ['requinto','guitar','synth','bass','bongos','guira','drums'];
-const bachataUrbanInstrumentalParts = ['requinto','guitar','synth','bongos','guira','drums'];
+const bachataUrbanInstrumentalParts = ['requinto','guitar','synth','bass','bongos','guira','drums'];
 const bachataInstrumentalSections = (parts: string[], ...sections: string[]) =>
   Object.fromEntries(sections.map(section => [section, parts]));
 const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangement, 'instruments' | 'lead' | 'sectionLeads' | 'patternAssignments' | 'sectionInstruments' | 'solos' | 'soloModes' | 'lockPatternAssignments' | 'sectionBpm' | 'note' | 'source'>>> = {
@@ -1013,8 +1013,8 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
     sectionInstruments: bachataInstrumentalSections(bachataUrbanInstrumentalParts, 'intro', 'solo', 'outro'),
     solos: { solo: 'requinto' },
     patternAssignments: {
-      verse: { voice: 'Vocal verse phrase' },
-      chorus: { voice: 'Vocal refrain lift' } } },
+      verse: { voice: 'Vocal verse phrase', bass: 'Bass majao syncopation' },
+      chorus: { voice: 'Vocal refrain lift', bass: 'Bass majao syncopation' } } },
   'bachata::fusion': {
     note: 'Bachata fusion teaching score: separate the vocal hook from the instrumental exchange and mambo, preserving clear space for the crossover parts. Original study phrases, not a transcription.',
     sectionInstruments: bachataInstrumentalSections(bachataCoreInstrumentalParts, 'intro', 'interlude', 'mambo', 'cierre'),
@@ -1334,22 +1334,41 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       cierre: { quena: 'Quena reply' } },
     lockPatternAssignments: { 'chorus#2': ['quena'], 'chorus#3': ['quena'], cierre: ['quena'] } },
   'andean::andean-fusion': {
-    instruments: ['quena','siku','charango','bass','drums','bombo-andino','synth'],
-    note: 'Electronic Andean-cumbia adaptation: add the bass and concise kit shuffle under the flutes and charango, then strip back to acoustic fragments and synth tail.',
+    instruments: ['quena','siku','charango','guitar','bass','drums','bombo-andino','synth'],
+    note: 'Electronic Andean-cumbia teaching adaptation: the guitar and charango support the flute handoff, while bass, bombo and a concise kit shuffle lift the central groove before the acoustic breakdown and synth tail.',
     solos: { B: 'siku' },
     sectionInstruments: {
-      opening: ['quena','synth'], A: ['quena','charango','bass','drums','bombo-andino'],
-      groove: ['quena','charango','bass','drums','bombo-andino','synth'],
-      B: ['siku','charango','bass','drums','bombo-andino','synth'],
+      opening: ['quena','synth'], A: ['quena','charango','guitar','bass','drums','bombo-andino'],
+      groove: ['quena','charango','guitar','bass','drums','bombo-andino','synth'],
+      B: ['siku','charango','guitar','bass','drums','bombo-andino','synth'],
       breakdown: ['charango','bombo-andino','synth'], dissolve: ['synth'] },
     lockPatternAssignments: { groove: ['bass','drums'], B: ['bass','drums'], dissolve: ['synth'] },
     patternAssignments: {
       opening: { quena: 'Quena statement', synth: 'Synth chord jab' },
-      A: { quena: 'Quena statement', charango: 'Charango accompaniment', bass: 'Syncopated bass', drums: 'Kit backbeat', 'bombo-andino': 'Bombo-andino pulse' },
-      groove: { quena: 'Quena variation', charango: 'Charango variation', bass: 'Syncopated bass', drums: 'Kit backbeat', 'bombo-andino': 'Bombo andino variation', synth: 'Synth chord jab' },
-      B: { siku: 'Siku statement', charango: 'Charango variation', bass: 'Syncopated bass', drums: 'Kit backbeat', 'bombo-andino': 'Bombo andino variation', synth: 'Synth chord jab' },
+      A: { quena: 'Quena statement', charango: 'Charango accompaniment', guitar: 'Guitar accompaniment', bass: 'Syncopated bass', drums: 'Kit backbeat', 'bombo-andino': 'Bombo-andino pulse' },
+      groove: { quena: 'Quena variation', charango: 'Charango variation', guitar: 'Guitar variation', bass: 'Syncopated bass', drums: 'Kit backbeat', 'bombo-andino': 'Bombo andino variation', synth: 'Synth chord jab' },
+      B: { siku: 'Siku statement', charango: 'Charango variation', guitar: 'Guitar reply', bass: 'Syncopated bass', drums: 'Kit backbeat', 'bombo-andino': 'Bombo andino variation', synth: 'Synth chord jab' },
       breakdown: { charango: 'Charango tremolo', 'bombo-andino': 'Bombo andino ghost', synth: 'Synth chord jab' },
     dissolve: { synth: 'Synth coda tail' } } },
+  'latin::tropical': {
+    sectionInstruments: {
+      intro: ['horn-section','piano','bass','congas','timbales','guiro'],
+      verse: ['horn-section','piano','bass','congas','timbales','guiro'],
+      prechorus: ['horn-section','piano','guitar','bass','congas','timbales','guiro','cumbia-drum'],
+      chorus: ['horn-section','piano','guitar','bass','congas','timbales','guiro','cumbia-drum'],
+      'chorus#2': ['horn-section','piano','guitar','bass','congas','timbales','guiro','cumbia-drum'],
+      mambo: ['horn-section','piano','guitar','bass','congas','timbales','guiro','cumbia-drum'],
+      'chorus#3': ['horn-section','piano','guitar','bass','congas','timbales','guiro','cumbia-drum'],
+      coda: ['piano','bass','congas','timbales','guiro'],
+    },
+    patternAssignments: {
+      prechorus: { guitar: 'Guitar accompaniment', 'cumbia-drum': 'Tambor llamador basics' },
+      chorus: { guitar: 'Guitar variation', 'cumbia-drum': 'Tambor llamador variation' },
+      'chorus#2': { guitar: 'Guitar reply', 'cumbia-drum': 'Tambor llamador variation' },
+      mambo: { guitar: 'Guitar variation', 'cumbia-drum': 'Tambor llamador reply' },
+      'chorus#3': { guitar: 'Guitar variation', 'cumbia-drum': 'Tambor llamador variation' },
+    },
+  },
   'ambient::atmospheric': {
     sectionInstruments: {
       opening: ['synth','piano'], A: ['synth','piano','string-ensemble'], B: ['synth','piano','string-ensemble'],
@@ -2499,22 +2518,22 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       adlib: { voice: 'Long couplet', harmonium: 'Couplet reply', dholak: 'Soft dholak' },
       cadence: { harmonium: 'Couplet reply' } } },
   'brazilian::samba': {
-    instruments: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
+    instruments: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
     solos: { instrumental: 'cavaquinho' },
-    note: 'Instrumental breaks alternate with the sung refrain. Keep the surdo relaxed behind the forward pandeiro and bright tamborim answers; the short high vocal-guide patch appears only in verse and refrain sections.',
+    note: 'Instrumental breaks alternate with the sung refrain. Keep the surdo relaxed behind the forward pandeiro and tamborim; agogô enters in a light low-high weave, then answers more brightly in the refrain. The short vocal-guide patch appears only in verse and refrain sections.',
     sectionInstruments: {
       intro: ['cavaquinho','bass','surdo','pandeiro'],
-      tema: ['guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
-      verse: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
-      refrain: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
-      instrumental: ['guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
+      tema: ['guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
+      verse: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
+      refrain: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
+      instrumental: ['guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
       coda: ['guitar','cavaquinho','bass','surdo','pandeiro','tamborim'] },
     patternAssignments: {
       intro: { cavaquinho: 'Cavaquinho accompaniment', bass: 'Low anchor', surdo: 'Surdo beat anchor', pandeiro: 'Pandeiro sixteenths' },
-      tema: { guitar: 'Guitar accompaniment', cavaquinho: 'Cavaquinho accompaniment', bass: 'Low anchor', surdo: 'Surdo beat anchor', pandeiro: 'Pandeiro sixteenths', tamborim: 'Tamborim offbeat answers' },
-      verse: { voice: 'Voice statement', guitar: 'Guitar accompaniment', cavaquinho: 'Cavaquinho accompaniment', bass: 'Low anchor', surdo: 'Surdo beat anchor', pandeiro: 'Pandeiro sixteenths', tamborim: 'Tamborim offbeat answers' },
-      refrain: { voice: 'Vocal variation', guitar: 'Guitar variation', cavaquinho: 'Brazilian Cavaquinho variation', bass: 'Bass variation', surdo: 'Surdo beat anchor', pandeiro: 'Pandeiro variation', tamborim: 'Tamborim variation' },
-      instrumental: { guitar: 'Guitar accompaniment', cavaquinho: 'Brazilian Cavaquinho variation', bass: 'Low anchor', surdo: 'Surdo beat anchor', pandeiro: 'Pandeiro sixteenths', tamborim: 'Tamborim offbeat answers' },
+      tema: { guitar: 'Guitar accompaniment', cavaquinho: 'Cavaquinho accompaniment', bass: 'Low anchor', surdo: 'Surdo beat anchor', pandeiro: 'Pandeiro sixteenths', tamborim: 'Tamborim offbeat answers', agogo: 'Agogô low-high weave' },
+      verse: { voice: 'Voice statement', guitar: 'Guitar accompaniment', cavaquinho: 'Cavaquinho accompaniment', bass: 'Low anchor', surdo: 'Surdo beat anchor', pandeiro: 'Pandeiro sixteenths', tamborim: 'Tamborim offbeat answers', agogo: 'Agogô low-high weave' },
+      refrain: { voice: 'Vocal variation', guitar: 'Guitar variation', cavaquinho: 'Brazilian Cavaquinho variation', bass: 'Bass variation', surdo: 'Surdo beat anchor', pandeiro: 'Pandeiro variation', tamborim: 'Tamborim variation', agogo: 'Agogô refrain answer' },
+      instrumental: { guitar: 'Guitar accompaniment', cavaquinho: 'Brazilian Cavaquinho variation', bass: 'Low anchor', surdo: 'Surdo beat anchor', pandeiro: 'Pandeiro sixteenths', tamborim: 'Tamborim offbeat answers', agogo: 'Agogô refrain answer' },
       coda: { } } },
   'brazilian::bossa-nova': {
     instruments: ['flute','guitar','upright-bass','drums'],
@@ -2549,37 +2568,37 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       solo: { cavaquinho: 'Brazilian Cavaquinho variation', banjo: '5-String Banjo reply', bass: 'Bass reply', pandeiro: 'Pandeiro reply', tantan: 'Tantan reply' },
       coda: { } } },
   'brazilian::partido-alto': {
-    instruments: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
+    instruments: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
     solos: { solo: 'cavaquinho' },
-    note: 'Partido-alto teaching score: leave the opening instrumental, alternate a sung call with a short vocal reply, and feature cavaquinho in the solo. Keep surdo on the broad pulse while pandeiro and tamborim fill different rhythmic spaces.',
+    note: 'Partido-alto teaching score: leave the opening instrumental, alternate a sung call with a short vocal reply, and feature cavaquinho in the solo. Keep surdo on the broad pulse while pandeiro, tamborim and agogô answer in distinct rhythmic spaces; lift the refrain with a compact bell figure.',
     sectionInstruments: {
       intro: ['guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
-      refrain: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
-      verse: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
-      solo: ['guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
+      refrain: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
+      verse: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
+      solo: ['guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
       coda: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'] },
     patternAssignments: {
       intro: { guitar: 'Guitar accompaniment', cavaquinho: 'Cavaquinho accompaniment', bass: 'Low anchor', surdo: 'Surdo refrain anchor', pandeiro: 'Pandeiro call response', tamborim: 'Tamborim refrain accents' },
-      refrain: { voice: 'Voice statement', guitar: 'Guitar accompaniment', cavaquinho: 'Cavaquinho accompaniment', bass: 'Low anchor', surdo: 'Surdo refrain anchor', pandeiro: 'Pandeiro call response', tamborim: 'Tamborim refrain accents' },
-      verse: { voice: 'Vocal reply', guitar: 'Guitar variation', cavaquinho: 'Brazilian Cavaquinho reply', bass: 'Bass reply', surdo: 'Surdo refrain anchor', pandeiro: 'Pandeiro call response', tamborim: 'Tamborim reply' },
-      solo: { guitar: 'Guitar accompaniment', cavaquinho: 'Brazilian Cavaquinho variation', bass: 'Bass variation', surdo: 'Surdo refrain anchor', pandeiro: 'Pandeiro variation', tamborim: 'Tamborim variation' },
+      refrain: { voice: 'Voice statement', guitar: 'Guitar accompaniment', cavaquinho: 'Cavaquinho accompaniment', bass: 'Low anchor', surdo: 'Surdo refrain anchor', pandeiro: 'Pandeiro call response', tamborim: 'Tamborim refrain accents', agogo: 'Agogô refrain lift' },
+      verse: { voice: 'Vocal reply', guitar: 'Guitar variation', cavaquinho: 'Brazilian Cavaquinho reply', bass: 'Bass reply', surdo: 'Surdo refrain anchor', pandeiro: 'Pandeiro call response', tamborim: 'Tamborim reply', agogo: 'Agogô call answer' },
+      solo: { guitar: 'Guitar accompaniment', cavaquinho: 'Brazilian Cavaquinho variation', bass: 'Bass variation', surdo: 'Surdo refrain anchor', pandeiro: 'Pandeiro variation', tamborim: 'Tamborim variation', agogo: 'Agogô call answer' },
       coda: { } } },
   'brazilian::samba-de-roda': {
-    instruments: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
+    instruments: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
     solos: { solo: 'guitar' },
-    note: 'Samba de roda teaching arrangement: the voice calls and answers around the circle while pandeiro, surdo and tamborim hold separate jobs. Clear the singer for the short guitar feature, then bring the response back for the last refrain.',
+    note: 'Samba de roda teaching arrangement: the voice calls and answers around the circle while pandeiro, surdo and tamborim hold separate jobs. A few agogô pickups cue the response without filling the call. Clear the singer for the short guitar feature, then bring the response back for the last refrain.',
     sectionInstruments: {
-      call: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
-      response: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
-      verse: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
+      call: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
+      response: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
+      verse: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
       solo: ['guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
-      coda: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'] },
+      coda: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'] },
     patternAssignments: {
-      call: { voice: 'Voice statement', guitar: 'Guitar accompaniment', cavaquinho: 'Cavaquinho accompaniment', bass: 'Low anchor', surdo: 'Surdo circle anchor', pandeiro: 'Pandeiro circle swing', tamborim: 'Tamborim response' },
-      response: { voice: 'Vocal reply', guitar: 'Guitar reply', cavaquinho: 'Brazilian Cavaquinho reply', bass: 'Bass reply', surdo: 'Surdo circle anchor', pandeiro: 'Pandeiro reply', tamborim: 'Tamborim response' },
-      verse: { voice: 'Voice statement', guitar: 'Guitar accompaniment', cavaquinho: 'Cavaquinho accompaniment', bass: 'Low anchor', surdo: 'Surdo circle anchor', pandeiro: 'Pandeiro circle swing', tamborim: 'Tamborim response' },
+      call: { voice: 'Voice statement', guitar: 'Guitar accompaniment', cavaquinho: 'Cavaquinho accompaniment', bass: 'Low anchor', surdo: 'Surdo circle anchor', pandeiro: 'Pandeiro circle swing', tamborim: 'Tamborim response', agogo: 'Agogô call pickup' },
+      response: { voice: 'Vocal reply', guitar: 'Guitar reply', cavaquinho: 'Brazilian Cavaquinho reply', bass: 'Bass reply', surdo: 'Surdo circle anchor', pandeiro: 'Pandeiro reply', tamborim: 'Tamborim response', agogo: 'Agogô circle reply' },
+      verse: { voice: 'Voice statement', guitar: 'Guitar accompaniment', cavaquinho: 'Cavaquinho accompaniment', bass: 'Low anchor', surdo: 'Surdo circle anchor', pandeiro: 'Pandeiro circle swing', tamborim: 'Tamborim response', agogo: 'Agogô circle reply' },
       solo: { guitar: 'Guitar variation', cavaquinho: 'Brazilian Cavaquinho reply', bass: 'Bass reply', surdo: 'Surdo circle anchor', pandeiro: 'Pandeiro variation', tamborim: 'Tamborim variation' },
-      coda: { } } },
+      coda: { agogo: 'Agogô call pickup' } } },
   'brazilian::forro': {
     instruments: ['accordion','voice','zabumba','triangle'],
     solos: { solo: 'accordion' },
@@ -2646,38 +2665,38 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       interlude: { guitar: 'Guitar variation', piano: 'Piano reply', bass: 'Bass reply', drums: 'Drum kit ghost', pandeiro: 'Pandeiro reply' },
       coda: { } } },
   'brazilian::samba-reggae': {
-    instruments: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
-    note: 'Samba-reggae teaching arrangement: separate the surdo calls from the lighter pandeiro lift and high tamborim answers. Let the chant lead the sung blocks, then strip the break to surdo before the full bloco pattern returns.',
+    instruments: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
+    note: 'Samba-reggae teaching arrangement: separate the surdo calls from the lighter pandeiro lift, tamborim answers and agogô cross-rhythm. Let the chant lead the sung blocks, then strip the break to surdo before the full bloco pattern returns.',
     sectionInstruments: {
       intro: ['guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
-      chant: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
-      verse: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
-      chorus: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
+      chant: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
+      verse: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
+      chorus: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
       break: ['surdo'],
       coda: ['guitar','cavaquinho','bass','surdo','pandeiro','tamborim'] },
     patternAssignments: {
       intro: { guitar: 'Guitar accompaniment', cavaquinho: 'Cavaquinho accompaniment', bass: 'Low anchor', surdo: 'Samba-reggae surdo calls', pandeiro: 'Samba-reggae pandeiro lift', tamborim: 'Samba-reggae tamborim answers' },
-      chant: { voice: 'Voice statement', guitar: 'Guitar accompaniment', cavaquinho: 'Cavaquinho accompaniment', bass: 'Low anchor', surdo: 'Samba-reggae surdo calls', pandeiro: 'Samba-reggae pandeiro lift', tamborim: 'Samba-reggae tamborim answers' },
-      verse: { voice: 'Vocal reply', guitar: 'Guitar variation', cavaquinho: 'Brazilian Cavaquinho reply', bass: 'Bass reply', surdo: 'Surdo variation', pandeiro: 'Pandeiro variation', tamborim: 'Tamborim reply' },
-      chorus: { voice: 'Vocal variation', guitar: 'Guitar variation', cavaquinho: 'Brazilian Cavaquinho variation', bass: 'Bass variation', surdo: 'Samba-reggae surdo calls', pandeiro: 'Samba-reggae pandeiro lift', tamborim: 'Samba-reggae tamborim answers' },
+      chant: { voice: 'Voice statement', guitar: 'Guitar accompaniment', cavaquinho: 'Cavaquinho accompaniment', bass: 'Low anchor', surdo: 'Samba-reggae surdo calls', pandeiro: 'Samba-reggae pandeiro lift', tamborim: 'Samba-reggae tamborim answers', agogo: 'Agogô cross-rhythm' },
+      verse: { voice: 'Vocal reply', guitar: 'Guitar variation', cavaquinho: 'Brazilian Cavaquinho reply', bass: 'Bass reply', surdo: 'Surdo variation', pandeiro: 'Pandeiro variation', tamborim: 'Tamborim reply', agogo: 'Agogô cross-rhythm' },
+      chorus: { voice: 'Vocal variation', guitar: 'Guitar variation', cavaquinho: 'Brazilian Cavaquinho variation', bass: 'Bass variation', surdo: 'Samba-reggae surdo calls', pandeiro: 'Samba-reggae pandeiro lift', tamborim: 'Samba-reggae tamborim answers', agogo: 'Agogô block lift' },
       break: { surdo: 'Surdo variation' },
       coda: { } } },
   'brazilian::samba-rock': {
-    instruments: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
+    instruments: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
     solos: { solo: 'guitar' },
-    note: 'Samba-rock teaching arrangement: bring the syncopated guitar and pandeiro backbeat forward over bass drum and bass. The verse stays lean, the chorus adds brighter tamborim punctuation, and the guitar takes the short instrumental feature.',
+    note: 'Samba-rock teaching arrangement: bring the syncopated guitar and pandeiro backbeat forward over bass drum and bass. Keep agogô to clipped chorus accents and an outro turn; the verse stays lean, and the guitar takes the short instrumental feature.',
     sectionInstruments: {
       intro: ['guitar','cavaquinho','bass','surdo','pandeiro'],
       verse: ['voice','guitar','cavaquinho','bass','surdo','pandeiro'],
-      chorus: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
-      solo: ['guitar','cavaquinho','bass','surdo','pandeiro','tamborim'],
-      outro: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim'] },
+      chorus: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
+      solo: ['guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'],
+      outro: ['voice','guitar','cavaquinho','bass','surdo','pandeiro','tamborim','agogo'] },
     patternAssignments: {
       intro: { guitar: 'Samba-rock backbeat', cavaquinho: 'Cavaquinho accompaniment', bass: 'Low anchor', surdo: 'Samba-rock bass drum', pandeiro: 'Samba-rock pandeiro backbeat' },
       verse: { voice: 'Voice statement', guitar: 'Samba-rock backbeat', cavaquinho: 'Cavaquinho accompaniment', bass: 'Low anchor', surdo: 'Samba-rock bass drum', pandeiro: 'Samba-rock pandeiro backbeat' },
-      chorus: { voice: 'Vocal variation', guitar: 'Guitar variation', cavaquinho: 'Brazilian Cavaquinho variation', bass: 'Bass variation', surdo: 'Surdo variation', pandeiro: 'Pandeiro variation', tamborim: 'Samba-rock tamborim fills' },
-      solo: { guitar: 'Guitar variation', cavaquinho: 'Brazilian Cavaquinho reply', bass: 'Bass reply', surdo: 'Samba-rock bass drum', pandeiro: 'Samba-rock pandeiro backbeat', tamborim: 'Tamborim variation' },
-      outro: { } } },
+      chorus: { voice: 'Vocal variation', guitar: 'Guitar variation', cavaquinho: 'Brazilian Cavaquinho variation', bass: 'Bass variation', surdo: 'Surdo variation', pandeiro: 'Pandeiro variation', tamborim: 'Samba-rock tamborim fills', agogo: 'Agogô backbeat accents' },
+      solo: { guitar: 'Guitar variation', cavaquinho: 'Brazilian Cavaquinho reply', bass: 'Bass reply', surdo: 'Samba-rock bass drum', pandeiro: 'Samba-rock pandeiro backbeat', tamborim: 'Tamborim variation', agogo: 'Agogô backbeat accents' },
+      outro: { agogo: 'Agogô turnaround reply' } } },
   'persian::contemporary-persian-chamber': {
     note: 'Contemporary Persian chamber study: open with exposed kamancheh, bring in the setar as a distinct dialogue voice, then add the held string bed and cello for the build. The return thins again so long modal phrases and their rests stay audible.',
     sectionInstruments: {

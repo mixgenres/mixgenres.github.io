@@ -7,8 +7,9 @@ import { createPhraseState, realizeMidi, type PhraseContext } from '../src/engin
 import { arrangeBand } from '../src/engine/band/arrangeBand';
 import type { PerfNote, Performance } from '../src/engine/band/performanceData';
 import { getInstrumentPerformanceProfile } from '../src/engine/lookup/performance';
-import { getGenreTheory } from '../src/engine/lookup/theory';
+import { getGenreTheory, styleTheoryFor } from '../src/engine/lookup/theory';
 import { GENRE_WORLDS, GENRE_WORLDS_BY_ID } from '../src/data/genres';
+import { CATALOG_INFERRED_THEORY_GENRES } from '../src/data/musicTheory/genreTheory';
 import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { resolveTuningSystem } from '../src/engine/sheet/tuning';
 import { parseChord, scalePcsForMode } from '../src/engine/sheet/musicTheory';
@@ -33,6 +34,46 @@ test('phrase behavior metadata varies with authored style cells instead of a sha
     ['motif development', 'break and re-entry']);
   assert.ok(homeStyle('japanese').calibration?.patterns.phraseBehaviors?.includes('interlocking lines'));
   assert.ok(homeStyle('mexican').calibration?.patterns.phraseBehaviors?.includes('call-and-response'));
+});
+
+test('inferred melody and bass targets follow authored pitch cells and the style harmonic vocabulary', () => {
+  const homeStyle = (genreId: string) => {
+    const world = GENRE_WORLDS_BY_ID[genreId];
+    return world.styleDefinitions.find(style => style.id === world.homeStyleId)!;
+  };
+  const inferredStyles = GENRE_WORLDS
+    .filter(world => CATALOG_INFERRED_THEORY_GENRES.has(world.id))
+    .flatMap(world => world.styleDefinitions.map(style => styleTheoryFor(style.id, world.id)));
+  const distinctMelodyProfiles = new Set(inferredStyles.map(theory => JSON.stringify(theory.melody.targetDegrees)));
+  const distinctBassProfiles = new Set(inferredStyles.map(theory => JSON.stringify(theory.bass.targetDegrees)));
+  assert.ok(distinctMelodyProfiles.size >= 15, `expected authored melodic pitch/harmony targets; found ${distinctMelodyProfiles.size} profiles`);
+  assert.ok(distinctBassProfiles.size >= 4, `expected authored bass pitch/harmony targets; found ${distinctBassProfiles.size} profiles`);
+
+  const punkTheory = styleTheoryFor(homeStyle('punk').id, 'punk');
+  assert.deepEqual(punkTheory.melody.targetDegrees, [1, 5],
+    'power-chord styles anchor to the written root and fifth rather than an invented third/seventh arpeggio');
+  assert.deepEqual(punkTheory.bass.targetDegrees, [1, 5],
+    'power-chord bass motion does not inject a third or seventh absent from the riff');
+  assert.deepEqual(styleTheoryFor(homeStyle('amapiano').id, 'amapiano').bass.targetDegrees, [1, 5, 3, 7],
+    'Amapiano bass targets retain the tones in its authored seventh-chord vocabulary');
+  assert.deepEqual(styleTheoryFor(homeStyle('mexican').id, 'mexican').melody.targetDegrees, [1, 3, 5, 7],
+    'dominant-seventh targets stay when the style actually authors a seventh chord');
+  assert.deepEqual(styleTheoryFor(homeStyle('chinese').id, 'chinese').melody.targetDegrees, [1, 2, 3, 5, 4, 6],
+    'melodic targets preserve the ordered pitch vocabulary from the authored Jiangnan phrase cell');
+  assert.deepEqual(styleTheoryFor(homeStyle('weird').id, 'weird').melody.targetDegrees,
+    Array.from({ length: 12 }, (_, index) => index + 1),
+    'chromatic styles retain the full pitch collection instead of collapsing to every other semitone');
+  assert.deepEqual(styleTheoryFor('gamelan-javanese', 'gamelan').melody.targetDegrees, [1, 2, 3, 4, 5],
+    'chordless slendro/pentatonic material keeps its five-note inventory instead of implying a triad');
+  assert.deepEqual(styleTheoryFor('indian-classical-hindustani-khayal', 'indian-classical').melody.targetDegrees,
+    [1, 2, 3, 4, 5, 6, 7],
+    'a chordless raga exposes its full authored pitch inventory when no narrower phrase cell is written');
+  assert.deepEqual(styleTheoryFor('arabic-tarab', 'arabic').melody.targetDegrees,
+    [1, 2, 3, 4, 5, 6, 7],
+    'maqam-like chordless melodies are not reduced to triadic targets');
+  const curatedTango = getGenreTheory('tango').melody.targetDegrees;
+  assert.deepEqual(styleTheoryFor('tango-golden-age', 'tango').melody.targetDegrees, curatedTango,
+    'hand-authored genre profiles retain their explicit melodic targets');
 });
 
 test('plain minor solo-scale name resolves to natural minor', () => {
