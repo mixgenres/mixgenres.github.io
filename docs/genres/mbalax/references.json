@@ -3,7 +3,7 @@
   "reviewed": "2026-10-15",
   "status": "Six or more linked streaming recording candidates are listed for each of the four Mbalax styles. Listening comparisons and useful timecodes remain pending; candidates are not verified sonic matches.",
   "source": "Apple Music streaming track and album pages. No reference audio downloaded.",
-  "styles": [
+  "references": [
     {
       "styleId": "mbalax-classic",
       "compare": [

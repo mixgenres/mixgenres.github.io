@@ -3,7 +3,7 @@
   "reviewed": "2026-10-12",
   "status": "Five streaming recording candidates selected per style. Audio audition, timecodes, and mix comparison are pending; these links do not claim sonic matching.",
   "source": "Apple Music track pages and catalog metadata. No reference audio downloaded.",
-  "styles": [
+  "references": [
     {
       "styleId": "blues-modern-blues",
       "compare": [

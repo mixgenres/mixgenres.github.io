@@ -9,7 +9,7 @@
     "Night Song’s official credits document different personnel by track, including voice, harmonium, tabla, drums, bass, keyboards, and production/mixing by Michael Brook and Ben Findlay: https://realworldrecords.com/releases/night-song/",
     "The bundled bank now uses a 38-note recorded harmonium patch from the attributed CC BY 3.0 tonejs-instruments sample set. It still has no dedicated qawwali singer, group-vocal, or dholak multisamples: voice and choir use GM vocal patches, and dholak uses the nearest available kit timbres."
   ],
-  "styles": [
+  "references": [
     {
       "styleId": "qawwali-traditional",
       "compare": [

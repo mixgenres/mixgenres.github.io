@@ -3,7 +3,7 @@
   "reviewed": "2026-10-15",
   "status": "Five linked Apple Music candidates are collected for all five Taarab styles. The native Music app was locked during this pass, so listening comparisons and timecodes remain pending; these are candidates, not verified sonic matches.",
   "source": "Apple Music track pages located as listening candidates. No reference audio downloaded or processed.",
-  "styles": [
+  "references": [
     {
       "styleId": "taarab-zanzibar",
       "compare": ["how melodic instruments and voice share phrase foreground", "the rhythmic bed beneath long vocal lines", "ornament, cadential turns, and response between lines", "ensemble changes from verse to refrain and instrumental passages", "recorded balance between vocal presence and instrumental color"],

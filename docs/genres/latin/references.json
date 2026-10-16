@@ -3,7 +3,7 @@
   "reviewed": "2026-10-15",
   "status": "Five or six linked Apple Music candidates are collected for all 12 Latin styles. The native Music app was locked during this pass, so listening comparisons and timecodes remain pending; these are candidates, not verified sonic matches.",
   "source": "Apple Music track and album pages located as listening candidates. No reference audio downloaded or processed.",
-  "styles": [
+  "references": [
     {
       "styleId": "latin-cumbia",
       "compare": [

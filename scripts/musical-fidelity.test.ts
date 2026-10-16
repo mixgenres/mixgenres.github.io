@@ -8,6 +8,7 @@ import { arrangeBand } from '../src/engine/band/arrangeBand';
 import type { PerfNote, Performance } from '../src/engine/band/performanceData';
 import { getInstrumentPerformanceProfile } from '../src/engine/lookup/performance';
 import { getGenreTheory } from '../src/engine/lookup/theory';
+import { GENRE_WORLDS, GENRE_WORLDS_BY_ID } from '../src/data/genres';
 import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { resolveTuningSystem } from '../src/engine/sheet/tuning';
 import { parseChord, scalePcsForMode } from '../src/engine/sheet/musicTheory';
@@ -16,6 +17,23 @@ const note = (time = 0, midi = 60): PerfNote => ({ time, dur: 0.1, midi, vel: 80
   gestureCode: 0, hitFunctionCode: 0, accent: 0.8 });
 const samplePerformance = (instrumentId: string, notes: PerfNote[]): Performance => ({ notes, ccs: [], bars: [],
   duration: 1, tail: .5, blends: {}, trackInfo: { keys: { instrumentId, role: 'harmony' } }, worldId: 'folk' });
+
+test('phrase behavior metadata varies with authored style cells instead of a shared placeholder', () => {
+  const styles = GENRE_WORLDS.flatMap(world => world.styleDefinitions);
+  const phraseProfiles = new Set(styles.map(style => JSON.stringify(style.calibration?.patterns.phraseBehaviors ?? [])));
+  assert.ok(phraseProfiles.size >= 30, `expected style-specific phrase cues; found ${phraseProfiles.size} profiles`);
+  assert.equal(styles.filter(style => JSON.stringify(style.calibration?.patterns.phraseBehaviors)
+    === JSON.stringify(['pickup', 'phrase-end cadence', 'section variation'])).length, 0);
+
+  const homeStyle = (genreId: string) => {
+    const world = GENRE_WORLDS_BY_ID[genreId];
+    return world.styleDefinitions.find(style => style.id === world.homeStyleId)!;
+  };
+  assert.deepEqual(homeStyle('weird').calibration?.patterns.phraseBehaviors,
+    ['motif development', 'break and re-entry']);
+  assert.ok(homeStyle('japanese').calibration?.patterns.phraseBehaviors?.includes('interlocking lines'));
+  assert.ok(homeStyle('mexican').calibration?.patterns.phraseBehaviors?.includes('call-and-response'));
+});
 
 test('plain minor solo-scale name resolves to natural minor', () => {
   assert.deepEqual(scalePcsForMode('minor', 9), [9, 11, 0, 2, 4, 5, 7]);

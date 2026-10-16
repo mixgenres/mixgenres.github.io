@@ -3,7 +3,7 @@
   "reviewed": "2026-10-14",
   "status": "Five distinct streaming track candidates are collected for all seven Afrobeat styles. Listening, useful timecodes, and mix comparisons remain pending; candidates are not verified sonic matches, and no reference audio was downloaded.",
   "source": "Apple Music individual track pages and displayed artist/release metadata, plus the official Antibalas Bandcamp stream for one Modern Revival candidate. These are listening candidates, not verified note-for-note transcriptions.",
-  "styles": [
+  "references": [
     {
       "styleId": "afrobeat-classic-afrobeat",
       "compare": [

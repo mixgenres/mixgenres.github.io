@@ -3,7 +3,7 @@
   "reviewed": "2026-10-14",
   "status": "Five streaming recording candidates selected per style. Listening, timecodes, and mix comparisons are pending; these links do not claim sonic matching.",
   "source": "Apple Music streaming track and album pages. No reference audio downloaded.",
-  "styles": [
+  "references": [
     {
       "styleId": "jazz-hard-bop",
       "compare": [

@@ -3,7 +3,7 @@
   "reviewed": "2026-10-15",
   "status": "Five or six linked Apple Music candidates are collected for all five Turkish styles. The native Music app has just become available, but this file was prepared before audition; comparisons and timecodes remain pending until tracks are actually heard in the app.",
   "source": "Apple Music track pages located as listening candidates. No reference audio downloaded or processed.",
-  "styles": [
+  "references": [
     {
       "styleId": "turkish-turkish-folk",
       "compare": ["the saz/bağlama's rhythmic picking and melodic ornament", "asymmetric tune phrases and their dance or song pulse", "how vocal melody and instrumental response shape the line", "phrase breathing, pickups, and cadence", "plucked attack, resonance, and ensemble balance"],

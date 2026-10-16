@@ -2,7 +2,7 @@
   "reviewed": "2026-10-08",
   "status": "Catalog identities and streaming links researched; audio comparison and timecodes pending. These are comparison seeds, not evidence of mix matching.",
   "source": "Apple Music track pages and public Apple catalog search metadata. No reference audio downloaded.",
-  "styles": [
+  "references": [
     {
       "styleId": "reggaeton-classic",
       "compare": [

@@ -784,10 +784,9 @@ test('contrasting catalog studies render through the shared playback/export PCM 
     const entry = songCatalog.find(song => song.id === expected.id)!;
     const refsPath = new URL(`../docs/genres/${entry.genreId}/references.json`, import.meta.url);
     const referenceDoc = JSON.parse(readFileSync(refsPath, 'utf8')) as {
-      styles?: Array<{ styleId: string; recordings?: Array<{ url: string }> }>;
       references?: Array<{ styleId: string; recordings?: Array<{ url: string }> }>;
     };
-    const referenceRows = referenceDoc.styles ?? referenceDoc.references ?? [];
+    const referenceRows = referenceDoc.references ?? [];
     const reference = referenceRows.find(row => row.styleId === entry.styleId);
     assert.ok(reference, `${entry.styleId} has a documented reference set`);
     assert.ok(new Set(reference.recordings?.map(recording => recording.url)).size >= 5,

@@ -87,11 +87,11 @@ export class SoundfontSongPlayer {
         this.publish({progress:(i+1)/Math.max(1,plan.banks.length)});
       }
       const previous=this.state.performance;
+      const position=remapPosition(previous,performance,this.offset);
       this.prepared={performance,plan,song};this.preparedKey=musicalKey;
       if(playing&&this.wantsPlayback) {
         const graph=await this.ensureGraph(plan,song,controller.signal,true);
         if(controller.signal.aborted||revision!==this.revision){this.releaseGraph(graph);return;}
-        const position=remapPosition(previous,performance,this.offset);
         const seekRevision=this.seekRequest;
         await this.command(graph,{type:'plan',plan,position,playing:this.wantsPlayback,catchUpTime:this.wantsPlayback?this.ctx!.currentTime:undefined});graph.plan=plan;
         if(controller.signal.aborted||revision!==this.revision){this.releaseGraph(graph);return;}
@@ -102,7 +102,10 @@ export class SoundfontSongPlayer {
         graph.scenes?.schedule(this.ctx!.currentTime,this.offset);
         this.publish({performance,composition:song,progress:1,status:this.wantsPlayback?'playing':'paused'});
       } else {
-        this.activeSong=song;this.publish({performance,composition:song,progress:1,status:this.wantsPlayback?'starting':'ready'});
+        this.offset=position;
+        this.activeSong=song;
+        this.publish({performance,composition:song,progress:1,status:this.wantsPlayback?'starting':'ready'});
+        this.onPosition(position);
       }
     }).catch(error=>{if(!controller.signal.aborted)this.fail(error);});
   }

@@ -406,21 +406,28 @@ function developLeadPhrase(
     if (midi === undefined || midi === from.midi || midi === to.midi) continue;
     const time = restStart + beatSec * stepBeats;
     const remainingBeats = (restEnd - time) / beatSec;
-    const durationBeats = stepBeats * 0.75;
-    if (remainingBeats < durationBeats + 0.04) continue;
+    // Let this connective note use the gap the player actually has, reserving
+    // only a small breath before the next written attack. A fixed fraction of
+    // the subdivision made fills sound clipped at some tempos and detached at
+    // others.
+    // Keep this fine enough for expressive timing while making the written
+    // fraction stable through score/export round trips.
+    const durationBeats = Math.round((remainingBeats - 0.04) * 960) / 960;
+    if (durationBeats <= 0.04) continue;
     const fromBeat = from.notation?.beat ?? (from.time - bar.start) / beatSec;
     const fromDurationBeats = from.notation?.durationBeats ?? from.dur / beatSec;
+    const noteBeat = fromBeat + fromDurationBeats + stepBeats;
 
     const tuningSystem = style.harmony.tuningSystem;
     if (!tuningSystem) throw new Error(`No authored tuning system for ${style.primaryGenre}/${style.id}`);
     const tuning = resolveTuningSystem(tuningSystem);
-    const duration = beatSec * durationBeats;
+    const duration = scoreDurationSeconds({ bars }, from.bar, noteBeat, durationBeats);
     additions.push({
       soundContext,
       attackId: `${to.attackId ?? `${to.time}`}:performer-${additions.length}`,
       phraseId,
       time,
-      dur: Math.max(0.035, duration),
+      dur: duration,
       midi,
       harmonicChord: chord,
       frequencyHz: tuning.getFrequencyHz(midi, root),
@@ -437,7 +444,7 @@ function developLeadPhrase(
       authoredDuration: false,
       // Keep the performed offset separate from the written subdivision so a
       // score export/import round trip retains these derived pickups exactly.
-      notation: { bar: from.bar, beat: fromBeat + fromDurationBeats + stepBeats, durationBeats },
+      notation: { bar: from.bar, beat: noteBeat, durationBeats },
     });
   }
   return additions;
@@ -911,8 +918,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
             const authoredIsDefaultStep = onset.durationAuthored !== true;
             const sustainEligible = pv.sustain === 'sustained' || pv.sustain === 'blown' || pv.sustain === 'decaying';
             const authoredBeats = Math.max(onset.durationAuthored ? 0.000001 : 0.04, sustainEligible && authoredIsDefaultStep ? localGapBeats : onset.duration);
-            const gapBeats = Math.max(localGapBeats, onset.hit === 'sustain' ? 1.0 : 0.18);
-            const durBeats = noteLengthBeats(pv, authoredBeats, Math.max(gapBeats, onset.durationAuthored ? authoredBeats : 0) * (onset.hit === 'sustain' ? 3.5 : 1.7), gestureName);
+            const durBeats = noteLengthBeats(authoredBeats, gestureName);
             const writtenDuration = onset.durationAuthored ? authoredBeats : durBeats;
             // An authored gate is already a deliberate rhythmic decision. Use
             // articulation-scaled duration only when a pattern leaves the gate

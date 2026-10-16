@@ -3,7 +3,7 @@
   "reviewed": "2026-10-14",
   "status": "Five streaming recording candidates are collected for each of the seven Metal styles. Listening comparison, useful timecodes, and mix notes remain pending; these are candidates, not verified sonic matches.",
   "source": "Apple Music individual track pages. No reference audio downloaded.",
-  "styles": [
+  "references": [
     {
       "styleId": "metal-heavy-metal",
       "compare": [

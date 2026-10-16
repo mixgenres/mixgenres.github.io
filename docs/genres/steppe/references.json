@@ -3,7 +3,7 @@
   "reviewed": "2026-10-15",
   "status": "Five linked Apple Music candidates are collected for all six Steppe styles. The native Music app was locked during this pass, so listening comparisons and timecodes remain pending; candidates spanning Mongolia and Tuva are identified by their catalog metadata and are not claimed as equivalent traditions.",
   "source": "Apple Music track pages located as listening candidates. No reference audio downloaded or processed.",
-  "styles": [
+  "references": [
     {
       "styleId": "steppe-morin-khuur",
       "compare": ["bowed attack, pitch inflection, and the horsehead fiddle's register changes", "how melody and drone interact without a Western chord loop", "the length and contour of recurring tune phrases", "rhythmic lift in faster passages and releases into cadences", "natural resonance and ensemble space around the bowed instrument"],

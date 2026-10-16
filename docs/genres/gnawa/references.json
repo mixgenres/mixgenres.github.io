@@ -3,7 +3,7 @@
   "reviewed": "2026-10-15",
   "status": "Five linked streaming candidates are collected for each of the four Gnawa styles. Audio comparison and useful timecodes remain pending; candidates are not verified sonic matches.",
   "source": "Apple Music artist, release, and track metadata were used to collect streaming candidates. Reference audio was not downloaded; sonic comparison and timecodes remain pending.",
-  "styles": [
+  "references": [
     {
       "styleId": "gnawa-traditional",
       "compare": [

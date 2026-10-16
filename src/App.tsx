@@ -12,11 +12,13 @@ import { StyleInspector } from './ui/StyleInspector';
 import { RoleIcon, RoleSettings } from './ui/RoleControl';
 import { supportsSolo, soloistAtBar } from './engine/sheet/solo';
 import { plateFor, applyPlate } from './ui/worlds';
-import { resolveStyle, getCanonicalStyle } from './engine/style';
+import { resolveStyle, getCanonicalStyle, getStyle } from './engine/style';
 import {
-  Sheet as SongSheet, Voice, switchLensOnly, switchSectionWorld,
+  Sheet as SongSheet, Voice, switchLensOnly, switchSectionWorld, switchSongWorld,
+  makeStarterSheet,
   setBars, setKind, setSectionTitle, moveSection, setSectionChords, getSectionGenre,
   randomizeInstruments, addRandomInstrument, removeAllInstruments, randomizePatternsForSection, randomizePatternsForSong,
+  randomInstrumentCandidates,
   randomizeChordsForSection, randomizeChordsForSong, randomizeEverythingForSong, randomizeEverythingForSection,
   duplicateSection, addSensibleSectionAfter, removeSection, setInstrument, setPattern, addVoice, removeVoice,
   isVoiceSilentInSection, isVoiceSilentInAll, silenceVoiceInSection, silenceVoiceInAll,
@@ -54,8 +56,7 @@ function loadInitialSong(): { song: SongSheet; isNew: boolean } {
     }
     catch { /* An invalid review link falls back to the normal starter. */ }
   }
-  const styleId = getCanonicalStyle('tango').id;
-  return { song: createCatalogSong(catalogIdForStyle(styleId)), isNew: true };
+  return { song: makeStarterSheet('tango'), isNew: true };
 }
 
 export default function App() {
@@ -137,14 +138,27 @@ export default function App() {
     playerRef.current?.stop();
     const canonical = getCanonicalStyle(worldId);
     const targetStyleId = styleId ?? canonical.id;
-    const fresh = createCatalogSong(catalogIdForStyle(targetStyleId));
+    const fresh = makeStarterSheet({ genreId: worldId, styleId: targetStyleId });
     resetTransportForSong(fresh);
     showToast(`Started a new ${plateFor(worldId).short} song (${resolveStyle({ genreId: worldId, styleId: targetStyleId }).name})`);
   };
 
+  const handleSelectSongGenre = (worldId: string) => {
+    if (worldId === song.worldId) return;
+    try {
+      // A genre change replaces the musical material but keeps the transport
+      // anchored to the corresponding bar and within-bar position.
+      edit(s => switchSongWorld(s, worldId));
+      showToast(`Changed song genre to ${plateFor(worldId).short}`);
+    } catch (error) {
+      console.error('Unable to switch song genre', { worldId, error });
+      showToast(`Could not switch song to ${plateFor(worldId).short}`);
+    }
+  };
+
   const handleSelectStyle = (styleId: string) => {
     playerRef.current?.stop();
-    const next = createCatalogSong(catalogIdForStyle(styleId));
+    const next = makeStarterSheet({ genreId: getStyle(styleId)?.primaryGenre ?? song.worldId, styleId });
     resetTransportForSong(next);
     const targetName = resolveStyle({ genreId: next.worldId, styleId }).name;
     showToast(`Style set to ${targetName}`);
@@ -361,8 +375,10 @@ export default function App() {
 
   const handleSelectSectionGenre = (genreId: string) => {
     if (!region) return;
-    playerRef.current?.stop();
     try {
+      // configure() rebuilds the shared playback graph and remaps the current
+      // musical bar into the edited performance. Do not stop/reset transport
+      // for a section-level genre edit.
       edit(s => switchSectionWorld(s, region.id, genreId));
       showToast(`Switched ${partName} to ${plateFor(genreId).short}`);
     } catch (error) {
@@ -1114,7 +1130,7 @@ export default function App() {
         onClose={() => setStartOverOpen(false)}
         currentWorldId={song.worldId}
         onConfirmResetCurrent={() => handleStartOver(song.worldId, song.styleId)}
-        onSelectNewGenre={id => { handleStartOver(id); setStyleOpen(true); }}
+        onSelectNewGenre={id => handleSelectSongGenre(id)}
         isInitialLoad={initialData.isNew}
       />)}
 
@@ -1151,10 +1167,18 @@ export default function App() {
           showToast('Randomized instruments for the whole song');
         }}
         onAddRandomInstrumentToPart={region ? () => {
+          if (!randomInstrumentCandidates(song, region.id, 'section').length) {
+            showToast('No additional instruments are authored for this style');
+            return;
+          }
           edit(s => addRandomInstrument(s, region.id, 'section'));
           showToast(`Added a random instrument to ${partName}`);
         } : undefined}
         onAddRandomInstrumentToSong={() => {
+          if (!randomInstrumentCandidates(song, region?.id, 'song').length) {
+            showToast('No additional instruments are authored across these styles');
+            return;
+          }
           edit(s => addRandomInstrument(s, region?.id, 'song'));
           showToast('Added a random instrument to the whole song');
         }}
@@ -1174,7 +1198,7 @@ export default function App() {
           setWorldOpen(false);
         }}
         onPickSong={id => {
-          handleStartOver(id);
+          handleSelectSongGenre(id);
           setWorldOpen(false);
         }}
       />)}

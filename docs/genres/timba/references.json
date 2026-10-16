@@ -3,7 +3,7 @@
   "reviewed": "2026-10-14",
   "status": "Five or more streaming recording candidates are collected for all 12 Timba styles. Listening, timecodes, and mix comparisons remain pending; candidates are not verified sonic matches.",
   "source": "Apple Music and Amazon Music streaming track/single pages were checked for candidate metadata. Reference audio was not downloaded or auditioned; listening and timecodes remain pending.",
-  "styles": [
+  "references": [
     {
       "styleId": "timba-irakere-jazz-funk-precursor",
       "compare": [

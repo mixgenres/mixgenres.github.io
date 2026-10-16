@@ -114,6 +114,22 @@ function sections(_input: GenrePackInput, styleRoles: Record<string, string[]>, 
 
 function rolesForStyle(_input: GenrePackInput, style: CalibratedStyleInput) { return style.roles; }
 
+function phraseBehaviorsFor(patternFamilies: string[]): string[] {
+  const authored = patternFamilies.join(' ').toLowerCase();
+  const cues: Array<[string, RegExp]> = [
+    ['pickup', /\b(?:pickup|anacrusis)\b/],
+    ['call-and-response', /\b(?:call.*(?:responses?|answers?|repl(?:y|ies)|after)|(?:responses?|answers?|repl(?:y|ies)).*call|responses?|answers?|repl(?:y|ies))\b/],
+    ['phrase-end cadence', /\b(?:cadence\w*|cadential|turnaround|remate|cierre|coda)\b/],
+    ['motif development', /\b(?:motif\w*|theme development|sequences?|variations?|development|hooks?|ostinatos?|riffs?)\b/],
+    ['break and re-entry', /\b(?:breaks?|drops?|pauses?|rests?|silences?|stop.?time|parada|corte|suwuk|angsel|returns?)\b/],
+    ['ornamented phrase', /\b(?:ornament\w*|melismas?|meend|gamak|taans?|alap|taqsim|krintan|kampita)\b/],
+    ['interlocking lines', /\b(?:interlock\w*|heterophon\w*|counterpoint|counterline|exchange)\b/],
+    ['sustained phrasing', /\b(?:sustain|drone|long.?tone|overlap|breath)\b/],
+    ['build and release', /\b(?:build|rise|rising|crescendo|swell|escalat\w*|gear change)\b/],
+  ];
+  return cues.filter(([, cue]) => cue.test(authored)).map(([label]) => label);
+}
+
 const GENERIC_CLOSE_ARTICULATIONS = new Set(['ornament', 'roll']);
 const GENERIC_CLOSE_HITS = ['tom', 'snare', 'snare'];
 
@@ -412,7 +428,7 @@ function styleDefinition(input: GenrePackInput, item: CalibratedStyleInput): Gen
       techniqueScopes: Object.fromEntries(list(styleTechniques, Object.values(item.instrumentTechniques).flat())
         .map(technique => [technique, scopesForTechnique(technique)])),
       patterns: { families: stylePatterns, interaction: list(stylePatterns.filter(x => /answer|call|interlock|response|counter|gear|clave|compas/i.test(x))),
-        phraseBehaviors: ['pickup', 'phrase-end cadence', 'section variation'], forbidden: input.forbiddenPatterns,
+        phraseBehaviors: phraseBehaviorsFor(stylePatterns), forbidden: input.forbiddenPatterns,
         mappedFamilies: stylePatterns.map(name => {
           const category = patternCategory(name);
           const roles = patternRole(name, category, styleRoles);

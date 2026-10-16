@@ -109,11 +109,11 @@ test('streaming reference lists cover every catalog style with distinct linked c
     assert.ok(existsSync(path), `${world.id} needs a streaming reference list`);
     const document = JSON.parse(readFileSync(path, 'utf8')) as {
       genreId?: string;
-      styles?: Array<{ styleId: string; compare?: string[]; recordings?: Array<{ url: string }> }>;
       references?: Array<{ styleId: string; compare?: string[]; recordings?: Array<{ url: string }> }>;
     };
     assert.equal(document.genreId, world.id, `${world.id} reference list declares its genre`);
-    const rows = document.styles ?? document.references ?? [];
+    assert.ok(Array.isArray(document.references), `${world.id} uses the canonical references array`);
+    const rows = document.references;
     const catalogStyleIds = new Set(world.styleDefinitions.map(style => style.id));
     const coveredStyleIds = new Set<string>();
     for (const row of rows) {

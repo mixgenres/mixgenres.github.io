@@ -3,7 +3,7 @@
   "reviewed": "2026-10-15",
   "status": "Six Cinematic styles have five or six linked Apple Music recording candidates each. Native-app listening, useful timecodes, and sonic-match notes are still pending; these candidates are not verified matches.",
   "source": "Apple Music track and album pages located for comparison. No reference audio downloaded or processed.",
-  "styles": [
+  "references": [
     {
       "styleId": "cinematic-modern-score",
       "compare": [

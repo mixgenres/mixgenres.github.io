@@ -1,5 +1,7 @@
 import type { ResolvedStyle } from '../../data/styles/schema';
 import type { PerformanceAspect, PerformanceInfluence, PhraseDevelopmentProbabilities, PerformanceGrammar } from '../../data/performance/schema/performance-grammar';
+import type { MusicalPattern } from '../../data/schema';
+import { PATTERNS_BY_ID } from '../../data/genres/index';
 
 const EMPTY_PHRASE_DEVELOPMENT: PhraseDevelopmentProbabilities = {
   repeatProbability: 0,
@@ -9,6 +11,7 @@ const EMPTY_PHRASE_DEVELOPMENT: PhraseDevelopmentProbabilities = {
   restProbability: 0,
   cadenceProbability: 0,
 };
+const PHRASE_DEVELOPMENT_CACHE = new WeakMap<ResolvedStyle, PhraseDevelopmentProbabilities>();
 
 function clamp01(v: number): number {
   return Math.max(0, Math.min(1, v));
@@ -21,6 +24,8 @@ function clamp01(v: number): number {
  * grammar quietly inherited the same interpretation as every other style.
  */
 function phraseDevelopmentForStyle(style: ResolvedStyle): PhraseDevelopmentProbabilities {
+  const cached = PHRASE_DEVELOPMENT_CACHE.get(style);
+  if (cached) return { ...cached };
   const result = { ...EMPTY_PHRASE_DEVELOPMENT };
   const motifOps = (style.melody?.motifOps ?? []).map(value => value.toLowerCase());
   const contour = (style.melody?.contourArchetypes ?? []).map(value => value.toLowerCase());
@@ -28,6 +33,40 @@ function phraseDevelopmentForStyle(style: ResolvedStyle): PhraseDevelopmentProba
   const patternLanguage = [
     ...(style.patterns?.require ?? []), ...(style.patterns?.preferred ?? []), ...(style.patterns?.allowed ?? []),
   ];
+  // Keyword matches establish which phrase actions belong in the style, but
+  // they cannot express how much of each action the authored repertoire
+  // actually teaches. Use the style's own full pattern cells to weight those
+  // actions so broad vocabularies no longer collapse into a handful of
+  // nearly identical probability profiles.
+  const authoredPatterns = [...new Set(patternLanguage)]
+    .map(id => PATTERNS_BY_ID[id])
+    .filter((pattern): pattern is MusicalPattern => !!pattern
+      && pattern.enabled !== false
+      && pattern.sourceLevel === 'style-authored'
+      && pattern.styleIds?.includes(style.id) === true);
+  const phraseSignals = {
+    repeat: (pattern: MusicalPattern) => pattern.category === 'ostinato'
+      || /ostinato|vamp|loop|repeating|repeat/i.test(`${pattern.id} ${pattern.name} ${pattern.family} ${pattern.tags.join(' ')}`),
+    variation: (pattern: MusicalPattern) => pattern.arrangementVariation === true,
+    answer: (pattern: MusicalPattern) => /answer|response|reply|call.?and.?response|trading/i
+      .test(`${pattern.id} ${pattern.name} ${pattern.family} ${pattern.category} ${pattern.tags.join(' ')} ${pattern.approaches?.join(' ') ?? ''}`),
+    fill: (pattern: MusicalPattern) => pattern.category === 'fill'
+      || pattern.events?.some(event => event.kind === 'fill' || event.kind === 'pickup')
+      || pattern.variants?.some(variant => variant.variationType === 'fill'),
+    rest: (pattern: MusicalPattern) => {
+      const events = pattern.events ?? [];
+      return events.some(event => event.kind === 'rest')
+        || pattern.category === 'break' && events.length > 0 && events.every(event => event.kind === 'rest');
+    },
+    cadence: (pattern: MusicalPattern) => pattern.category === 'cadence'
+      || pattern.phrasePosition?.includes('end') === true
+        && /cadence|coda|close|ending|remate|sam/i.test(`${pattern.id} ${pattern.name} ${pattern.sectionUsage?.join(' ') ?? ''}`),
+  };
+  const evidenceWeight = (count: number) => 0.12 * (1 - Math.exp(-count / 3));
+  for (const [action, signal] of Object.entries(phraseSignals) as Array<[keyof typeof phraseSignals, (pattern: MusicalPattern) => boolean]>) {
+    const evidence = authoredPatterns.reduce((count, pattern) => count + Number(signal(pattern)), 0);
+    if (evidence) result[`${action}Probability` as keyof PhraseDevelopmentProbabilities] += evidenceWeight(evidence);
+  }
   // Genre pack styles carry their strongest identity in core concepts,
   // signature cells, authored form labels, and named local patterns. Their
   // older SongStyle projections do not populate motifOps/contourArchetypes,
@@ -50,12 +89,12 @@ function phraseDevelopmentForStyle(style: ResolvedStyle): PhraseDevelopmentProba
     result.repeatProbability += 0.10;
     result.variationProbability -= 0.04;
   }
-  if (/pause|rest|silence|silencio|respiro|parada|corte|break|stop.?time|suwuk|angsel|ma\b/.test(identityText)) {
+  if (/pause|rest|silence|silencio|respiro|parada|corte|stop.?time|suwuk|angsel|ma\b/.test(identityText)) {
     result.restProbability += 0.12;
     result.repeatProbability -= 0.06;
   }
   if (Object.keys(style.rhythm?.fillGrammar ?? {}).length
-      || /fill|roll|pickup|turnaround|shout|jhala|ornament|run|break/.test(identityText)) {
+      || /fill|roll|pickup|turnaround|shout|jhala|ornament|run/.test(identityText)) {
     result.fillProbability += 0.09;
     result.repeatProbability -= 0.04;
   }
@@ -71,6 +110,7 @@ function phraseDevelopmentForStyle(style: ResolvedStyle): PhraseDevelopmentProba
   if (total > 0) {
     for (const key of Object.keys(result) as Array<keyof PhraseDevelopmentProbabilities>) result[key] /= total;
   }
+  PHRASE_DEVELOPMENT_CACHE.set(style, { ...result });
   return result;
 }
 

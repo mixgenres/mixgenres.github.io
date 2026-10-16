@@ -3,7 +3,7 @@
   "reviewed": "2026-10-14",
   "status": "Five linked streaming candidates are collected for each of the five Japanese styles. Listening comparison and timecodes remain pending; these are candidates, not verified sonic matches.",
   "source": "Apple Music individual track pages and release metadata. Reference audio has not been downloaded or auditioned.",
-  "styles": [
+  "references": [
     {
       "styleId": "japanese-gagaku",
       "compare": [

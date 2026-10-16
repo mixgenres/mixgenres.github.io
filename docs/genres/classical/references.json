@@ -3,7 +3,7 @@
   "reviewed": "2026-10-15",
   "status": "Seven Classical styles now have at least five linked streaming recording candidates each. Listening comparisons and useful timecodes remain pending; candidates are not verified sonic matches.",
   "source": "Apple Music streaming track and album pages. No reference audio downloaded.",
-  "styles": [
+  "references": [
     {
       "styleId": "classical-classical-orchestra",
       "compare": [

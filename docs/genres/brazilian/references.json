@@ -3,7 +3,7 @@
   "reviewed": "2026-10-15",
   "status": "Six streaming candidates are collected for each of the eleven Brazilian styles. Listening and useful timecodes remain pending; these are not verified sonic matches, and no reference audio was downloaded.",
   "source": "Apple Music individual track pages and displayed artist/release metadata. These are listening candidates, not verified note-for-note transcriptions.",
-  "styles": [
+  "references": [
     {
       "styleId": "brazilian-samba",
       "compare": [

@@ -49,12 +49,7 @@ export function resolveTechniqueProfile(
   };
 }
 
-export function noteLengthBeats(
-  p: VoiceProfile,
-  authoredBeats: number,
-  gapBeats: number,
-  articulation?: string,
-): number {
+export function noteLengthBeats(authoredBeats: number, articulation?: string): number {
   const art = articulation ?? '';
   let mult = 1;
   // Only articulations that explicitly describe note length may shorten its gate.
@@ -65,28 +60,11 @@ export function noteLengthBeats(
   if (/staccato|seco|picado|damp|choke|chapa/i.test(art)) mult = 0.42;
   else if (/legato|ligado|tenuto|sostenuto/i.test(art)) mult = 1.3;
 
-  const gap = Math.max(0.05, gapBeats);
-  const targetBeats = authoredBeats * mult;
-
-  switch (p.sustain) {
-    case 'percussive':
-      // The SoundFont's recorded envelope and patch-specific release metadata
-      // own resonance. `ring` is instrument metadata, not a MIDI key-hold cap.
-      return Math.min(gap * 0.9, targetBeats);
-    case 'short':
-      return Math.max(0.05, Math.min(gap * 0.8, targetBeats));
-    case 'decaying':
-      // Let the recorded decay continue for the authored phrase length. A
-      // fixed beat ceiling sent note-off early on slow, sustained phrases.
-      return Math.min(gap * 0.95, targetBeats);
-    case 'blown':
-      // Winds/brass sustain with breath, respect authored length tightly with a tiny release gap
-      return Math.max(0.08, Math.min(gap * 0.9, targetBeats));
-    case 'sustained':
-    default:
-      // Sustained instruments (strings, organ) respect the authored note duration tightly
-      return Math.max(0.1, Math.min(gap * 0.95, targetBeats));
-  }
+  // Do not infer a note-off from the next onset. That global gap ceiling
+  // flattened instrument envelopes and cut off authored phrases differently
+  // at different tempos. The SoundFont release describes the patch; only an
+  // explicit length articulation changes the written/performed key hold here.
+  return authoredBeats * mult;
 }
 
 /** Fold a midi note into the instrument's comfortable range. */

@@ -3,7 +3,7 @@
   "reviewed": "2026-10-15",
   "status": "Five linked Apple Music track candidates are collected for each of the sixteen Weird styles below. Listening comparisons, useful timecodes, and mix notes remain pending; these are candidates, not verified sonic matches.",
   "source": "Apple Music individual track pages, track-specific album links, and album track listings. Candidate links were checked against Apple Music search results; reference audio was not downloaded.",
-  "styles": [
+  "references": [
     {
       "styleId": "weird-deconstructed",
       "compare": [

@@ -3,7 +3,7 @@
   "reviewed": "2026-10-12",
   "status": "Five linked recording candidates per style. Audio audition, timecodes, and comparison notes are pending; this list does not claim sonic matching.",
   "source": "Apple Music track pages. No reference audio downloaded.",
-  "styles": [
+  "references": [
     {
       "styleId": "chinese-jiangnan-sizhu",
       "compare": ["silk-and-bamboo chamber balance", "ornamented melodic exchange", "flexible phrase timing"],

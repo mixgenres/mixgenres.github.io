@@ -3,7 +3,7 @@
   "reviewed": "2026-10-15",
   "status": "Five streaming recording candidates are listed for each of the seven House styles. Listening comparisons and useful timecodes remain pending; these are candidates, not verified sonic matches.",
   "source": "Apple Music individual track and album pages with displayed artist/release metadata. No reference audio downloaded.",
-  "styles": [
+  "references": [
     {
       "styleId": "house-deep-house",
       "compare": [

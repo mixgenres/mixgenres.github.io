@@ -7,7 +7,7 @@ import { beatFraction, beatValue, compileMusicianScore, musicianScoreFromArrange
 import { exportMusicXml } from '../src/engine/score/musicXml';
 import { codeForGesture } from '../src/engine/band/gestures';
 import { PATTERNS_BY_ID } from '../src/data/genres';
-import { getStyle } from '../src/engine/style/registry';
+import { ALL_STYLES, getStyle } from '../src/engine/style/registry';
 import { sliceBarNative } from '../src/engine/sheet/grid';
 import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { velocityForEnergy } from '../src/engine/band/velocity';
@@ -97,6 +97,28 @@ test('performers enrich beginner guides with authored style phrasing and keep in
   assert.ok(lead.some(note => note.originCode === 1), 'the rendered player adds a small connection in a real melodic gap');
   assert.ok(new Set(lead.map(note => note.gestureCode)).size > 3,
     'generic beginner articulations are interpreted with the style’s playable touch vocabulary');
+});
+
+test('phrase development follows style-local arrangement cells across the catalog', () => {
+  const profiles = new Set(ALL_STYLES.map(style => {
+    const resolved = resolveStyle({ genreId: style.primaryGenre, styleId: style.id });
+    return JSON.stringify(getPerformanceGrammar(resolved).phraseDevelopment);
+  }));
+  assert.ok(profiles.size >= 100,
+    `421 styles should not collapse into a small set of phrase profiles (found ${profiles.size})`);
+
+  const afrobeat = getPerformanceGrammar(resolveStyle({ genreId: 'afrobeat', styleId: 'afrobeat-classic-afrobeat' })).phraseDevelopment!;
+  const minimalist = getPerformanceGrammar(resolveStyle({ genreId: 'classical', styleId: 'classical-minimalist' })).phraseDevelopment!;
+  const pugliese = getPerformanceGrammar(resolveStyle({ genreId: 'tango', styleId: 'tango-pugliese' })).phraseDevelopment!;
+  const drumAndBass = getPerformanceGrammar(resolveStyle({ genreId: 'bass', styleId: 'bass-drum-and-bass' })).phraseDevelopment!;
+  assert.ok(afrobeat.repeatProbability > 0,
+    'an authored cycle/ostinato vocabulary retains a repeat option');
+  assert.equal(minimalist.restProbability, 0,
+    'minimalist cells without authored rest events do not acquire generic phrase gaps');
+  assert.ok(pugliese.restProbability > minimalist.restProbability,
+    'Pugliese ensemble silences inform its own phrase actions');
+  assert.equal(drumAndBass.restProbability, 0,
+    'a breakbeat identity does not get a rest action from the word “break” alone');
 });
 
 test('band interaction models balance roles without flattening counterpoint', () => {

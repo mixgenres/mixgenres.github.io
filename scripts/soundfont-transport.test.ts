@@ -5,7 +5,7 @@ import {SoundfontSongPlayer} from '../src/engine/playback/soundfont/player';
 import {compileSamplePlan,type SamplePlan} from '../src/engine/playback/soundfont/plan';
 import {setSoundfontBankReader} from '../src/engine/playback/soundfont/banks';
 import {songMixOptions} from '../src/engine/playback/renderSongMix';
-import {makeSheet,setSongBpm,type Sheet} from '../src/engine/sheet/sheet';
+import {makeSheet,setSongBpm,switchSectionWorld,switchSongWorld,type Sheet} from '../src/engine/sheet/sheet';
 import {arrangeBand} from '../src/engine/band/arrangeBand';
 import type {Performance} from '../src/engine/band/performanceData';
 import type {SampleCommand} from '../src/engine/playback/soundfont/protocol';
@@ -83,6 +83,81 @@ test('Stop during a staged replacement preserves zero and discards an obsolete s
     assert(staged);f.player.stop();gate.resolve();await f.player.preparing;
     assert.equal(f.player.position(),0);assert.equal(staged.level,0);
     assert(f.commands.some(c=>c.graph===staged&&c.command.type==='seek'&&c.command.position===0&&!c.command.playing));
+  }finally{f.cleanup();}
+});
+test('changing one section genre keeps playback at the same musical bar and continues',async()=>{
+  const f=fixture();try {
+    await f.player.play();
+    const before=f.player.snapshot.performance;
+    assert(before);
+    const oldBar=before.bars[4];
+    assert(oldBar,'fixture has a bar to preserve');
+    const fraction=.37;
+    f.player.offset=oldBar.start+(oldBar.end-oldBar.start)*fraction;
+    f.original.position=f.player.offset;
+    const mixed=switchSectionWorld(f.song,f.song.regions[1].id,'ethiopian');
+    const after=arrangeBand(mixed).bars[4];
+    assert(after);
+    const expected=after.start+(after.end-after.start)*fraction;
+    f.player.configure(mixed);
+    await f.player.preparing;
+    assert.equal(f.player.snapshot.status,'playing');
+    assert(Math.abs(f.player.position()-expected)<1e-6,
+      `expected remapped position ${expected}, got ${f.player.position()}`);
+    const replacement=f.commands.filter(entry=>entry.command.type==='plan').at(-1)?.command;
+    assert(replacement&&replacement.type==='plan');
+    assert.equal(replacement.playing,true);
+    assert(Math.abs(replacement.position-expected)<1e-6);
+  }finally{f.cleanup();}
+});
+test('changing the whole-song genre keeps the current musical bar and continues',async()=>{
+  const f=fixture();try {
+    await f.player.play();
+    const before=f.player.snapshot.performance;
+    assert(before);
+    const oldBar=before.bars[4];
+    assert(oldBar,'fixture has a bar to preserve');
+    const fraction=.42;
+    f.player.offset=oldBar.start+(oldBar.end-oldBar.start)*fraction;
+    f.original.position=f.player.offset;
+    const mixed=switchSongWorld(f.song,'ethiopian');
+    const after=arrangeBand(mixed).bars[4];
+    assert(after);
+    const expected=after.start+(after.end-after.start)*fraction;
+    f.player.configure(mixed);
+    await f.player.preparing;
+    assert.equal(f.player.snapshot.status,'playing');
+    assert(Math.abs(f.player.position()-expected)<1e-6,
+      `expected remapped position ${expected}, got ${f.player.position()}`);
+    const replacement=f.commands.filter(entry=>entry.command.type==='plan').at(-1)?.command;
+    assert(replacement&&replacement.type==='plan');
+    assert.equal(replacement.playing,true);
+    assert(Math.abs(replacement.position-expected)<1e-6);
+  }finally{f.cleanup();}
+});
+test('changing the whole-song genre while paused remaps the playhead without resuming',async()=>{
+  const f=fixture();try {
+    await f.player.play();
+    const before=f.player.snapshot.performance;
+    assert(before);
+    const oldBar=before.bars[4];
+    assert(oldBar,'fixture has a bar to preserve');
+    const fraction=.63;
+    f.player.offset=oldBar.start+(oldBar.end-oldBar.start)*fraction;
+    f.original.position=f.player.offset;
+    f.player.pause();
+    const mixed=switchSongWorld(f.song,'ethiopian');
+    const after=arrangeBand(mixed).bars[4];
+    assert(after);
+    const expected=after.start+(after.end-after.start)*fraction;
+    f.player.configure(mixed);
+    await f.player.preparing;
+    assert.equal(f.player.snapshot.status,'ready');
+    assert(Math.abs(f.player.position()-expected)<1e-6,
+      `expected remapped position ${expected}, got ${f.player.position()}`);
+    assert.equal(f.player.wantsPlayback,false);
+    assert.equal(f.commands.some(entry=>entry.command.type==='plan'&&entry.command.playing),false,
+      'paused genre changes compile the new song without starting audio');
   }finally{f.cleanup();}
 });
 test('slider drags coalesce worklet seeks and resume from the final position smoothly',async()=>{

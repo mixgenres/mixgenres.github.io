@@ -3,7 +3,7 @@
   "reviewed": "2026-10-15",
   "status": "Five or six linked Apple Music candidates are listed for all ten Zouk styles. These are candidate recordings only; native Music playback can be cued here, but listening comparisons and timecodes remain pending until the audio is actually heard.",
   "source": "Apple Music track pages located as listening candidates. No reference audio downloaded or processed.",
-  "styles": [
+  "references": [
     {
       "styleId": "zouk-zouk-love",
       "compare": ["soft but forward 4/4 dance pulse and syncopated guitar/key attacks", "bass movement that supports close, unhurried partner-dance phrasing", "vocal breath, melisma, and instrumental replies", "how arrangement density opens into the refrain", "warm keyboard/string color without masking the voice"],

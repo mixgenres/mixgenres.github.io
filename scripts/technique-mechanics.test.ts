@@ -36,20 +36,22 @@ test('descriptive ring metadata does not cap generated note gates', () => {
   const timbales = voiceProfile('timbales');
   assert.equal(piano.ring, 3.2);
   assert.equal(timbales.ring, 0.7);
-  assert.ok(Math.abs(noteLengthBeats(piano, 6, 10, 'tenuto') - 7.8) < 1e-9,
+  assert.ok(Math.abs(noteLengthBeats(6, 'tenuto') - 7.8) < 1e-9,
     'a long, held piano phrase reaches its articulation-scaled written length');
-  assert.ok(Math.abs(noteLengthBeats(timbales, 1, 1.7, 'tone') - 1) < 1e-9,
+  assert.ok(Math.abs(noteLengthBeats(1, 'tone') - 1) < 1e-9,
     'a percussive note gate follows its written beat length rather than a generic ring ceiling');
-  assert.ok(Math.abs(noteLengthBeats(piano, 1, 1.7, 'staccato') - 0.42) < 1e-9,
+  assert.ok(Math.abs(noteLengthBeats(1, 'staccato') - 0.42) < 1e-9,
     'explicit short articulation remains effective after removing the ring ceiling');
-  assert.ok(Math.abs(noteLengthBeats(piano, 1, 1.7, 'legato') - 1.3) < 1e-9,
+  assert.ok(Math.abs(noteLengthBeats(1, 'legato') - 1.3) < 1e-9,
     'legato keeps its authored overlap length');
   for (const nonLengthGesture of ['bachi', 'alternate-pluck', 'accent', 'marcato', 'heavy', 'mute', 'muted', 'cup-mute', 'palm-mute']) {
-    assert.equal(noteLengthBeats(piano, 0.75, 2, nonLengthGesture), 0.75,
+    assert.equal(noteLengthBeats(0.75, nonLengthGesture), 0.75,
       `${nonLengthGesture} changes attack, color, or energy without silently shortening the note`);
   }
-  assert.equal(noteLengthBeats(piano, 0.75, 2, 'damp'), 0.315,
+  assert.equal(noteLengthBeats(0.75, 'damp'), 0.315,
     'an explicit damping articulation can still shorten the key hold');
+  assert.equal(noteLengthBeats(3.5, 'tone'), 3.5,
+    'a held event can continue beyond the next onset without an inferred global gate');
 });
 
 test('score gestures map to sample actions without preparing a physical voice per note', () => {

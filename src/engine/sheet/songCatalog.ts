@@ -239,7 +239,10 @@ export function createCatalogSong(id: string): Sheet {
   if (Object.values(sectionProgressions).some(chords => !chords.length)) throw new Error(`Incomplete harmonic plan: ${id}`);
   overrides.harmony = { ...style.harmony, sectionProgressions, progressionTemplates: [{ value: Object.values(sectionProgressions)[0], w: 1 }] };
   overrides.rhythm = { ...style.rhythm, defaultBpm: recording.bpm, tempoRange: [recording.bpm, recording.bpm] };
-  const sheet = createSheet({ genreId: entry.genreId, styleId: entry.styleId, overrides });
+  // A recording arrangement below has its own explicit opening cells, phrase
+  // tags, and return variations. Keep generic starter section selection out of
+  // that source-authored catalog path.
+  const sheet = createSheet({ genreId: entry.genreId, styleId: entry.styleId, overrides }, undefined, undefined, undefined, false);
   const samplePatternIds = Object.values(PATTERNS_BY_ID)
     .filter(pattern => pattern.styleIds?.includes(style.id))
     .map(pattern => pattern.id);

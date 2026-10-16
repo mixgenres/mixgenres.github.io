@@ -3,7 +3,7 @@
   "reviewed": "2026-10-14",
   "status": "Five linked streaming candidates are collected for all 7 styles. Listening comparison and timecodes remain pending; candidates are not verified sonic matches.",
   "source": "Apple Music streaming track pages. Candidate lists are for review; no reference audio downloaded.",
-  "styles": [
+  "references": [
     {
       "styleId": "swing-west-coast-swing",
       "compare": [

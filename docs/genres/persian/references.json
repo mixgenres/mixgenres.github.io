@@ -3,7 +3,7 @@
   "reviewed": "2026-10-15",
   "status": "Five linked streaming candidates are collected for each of the five styles. Listening comparisons and useful timecodes remain pending; these are candidates, not verified sonic matches.",
   "source": "Apple Music track and album pages. Release and track metadata checked; reference audio has not been auditioned or downloaded.",
-  "styles": [
+  "references": [
     {
       "styleId": "persian-dastgah",
       "compare": [

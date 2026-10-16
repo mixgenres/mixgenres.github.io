@@ -2,7 +2,7 @@ import { resolveSoloPlan } from './solo';
 import type { SoloAssignment } from '../../data/styles/schema';
 import type { Song, Region, Track, Measure, SectionType, PatternVariant, MusicalPattern, SectionEnergy, GuestLens, Role } from '../../types';
 import { GENRE_WORLDS_BY_ID, PATTERNS_BY_ID, PATTERNS_BY_WORLD } from '../../data/genres';
-import { INSTRUMENTS_BY_ID, INSTRUMENT_CATALOG, instrument, instrumentPatternKinds } from '../../engine/lookup/instruments';
+import { INSTRUMENTS_BY_ID, INSTRUMENT_CATALOG, WORLD_INSTRUMENT_HINTS, instrument, instrumentPatternKinds } from '../../engine/lookup/instruments';
 import { beatsPerBarOf, sliceBarNative } from './grid.ts';
 import { progressionForSection, buildArrangementContext, ArrangementContext } from './arrangementContext.ts';
 import { inferKey, parseChord, assertValidChordProgression } from './musicTheory.ts';
@@ -307,9 +307,10 @@ export function roleForInstrument(instrumentId: string): string {
   // Keep the composition role vocabulary aligned with instrumentProfile.
   if (VOICE_INSTRUMENT_ROLE_PATTERN.test(instrumentId) || VOICE_FAMILY_ROLE_PATTERN.test(def.family ?? '')) return 'voice';
   if (def.voicing === 'single') {
-    const role = voiceProfile(instrumentId).role;
-    // voiceProfile already maps single-voice melodic instruments to `lead`.
-    return role === 'perc' ? 'percussion' : role;
+    const role: string = voiceProfile(instrumentId).role;
+    // Normalize legacy profile labels at the assignment boundary so melodic
+    // parts always see the pattern catalog's `lead` role vocabulary.
+    return role === 'perc' ? 'percussion' : role === 'melody' ? 'lead' : role;
   }
   return 'harmony';
 }
@@ -439,16 +440,19 @@ export function affinity(
   const p = PATTERNS_BY_ID[patternId];
   if (!p) return Number.NEGATIVE_INFINITY;
 
+  const patternRole = voice.role === 'voice' ? 'lead' : voice.role;
   const authoredMismatch = p.sourceLevel === 'style-authored'
-    && (!p.roles.includes(voice.role) || !p.instruments?.includes(voice.instrumentId));
+    && (!p.roles.includes(patternRole) || !p.instruments?.includes(voice.instrumentId));
   const sFit = styleId ? patternStyleFit(p, styleId, worldId, adventure) : 0;
 
   const kinds = new Set(instrumentPatternKinds(voice.instrumentId));
   const explicitTargets = new Set([...(p.instruments ?? []).map(String), ...(p.compatibleInstruments ?? []).map(String)]);
   const instrumentMatch = [...explicitTargets].some(k => kinds.has(k));
   const explicitMismatch = explicitTargets.size > 0 && !instrumentMatch;
-  const roleMatch = p.roles.some(r => r === voice.role || p.compatibleRoles?.includes(voice.role) || kinds.has(r));
-  const vocalMismatch = kinds.has('voice') && !p.roles.includes('voice') && !p.canCrossRole;
+  const roleMatch = p.roles.some(r => r === voice.role || r === patternRole
+    || p.compatibleRoles?.includes(voice.role) || kinds.has(r));
+  const vocalMismatch = kinds.has('voice') && !p.roles.includes('voice')
+    && !p.roles.includes('lead') && !p.canCrossRole;
 
   const daring = Math.max(0, Math.min(1, adventure));
   let score = p.worldId === worldId ? 50 : -30 + daring * 50;
@@ -472,6 +476,25 @@ export function affinity(
   if (kinds.has('coro') && p.roles.includes('voice')) score += 8;
   if (kinds.has('drums') && p.roles.includes('drums')) score += 8;
   return score;
+}
+
+/** Automatic pattern selection is strict about the authored part role and
+ * instrument targets. Affinity orders eligible cells; it cannot turn an
+ * unrelated cell into a compatibility fallback. */
+function patternSupportsVoice(pattern: MusicalPattern, voice: Voice, allowInstrumentAdaptation = false): boolean {
+  const patternRole = voice.role === 'voice' ? 'lead' : voice.role;
+  const roleMatch = pattern.roles.includes(voice.role)
+    || pattern.roles.includes(patternRole)
+    || pattern.compatibleRoles?.includes(voice.role)
+    || pattern.compatibleRoles?.includes(patternRole)
+    || pattern.canCrossRole === true;
+  if (!roleMatch) return false;
+
+  if (allowInstrumentAdaptation) return true;
+  const targets = [...(pattern.instruments ?? []), ...(pattern.compatibleInstruments ?? [])].map(String);
+  if (!targets.length) return true;
+  const kinds = new Set(instrumentPatternKinds(voice.instrumentId));
+  return targets.some(target => kinds.has(target));
 }
 
 
@@ -630,6 +653,9 @@ export function suggestPattern(
   partEnergy?: SectionEnergy,
   styleId?: string,
   lens?: GuestLens,
+  allowInstrumentAdaptation = false,
+  preferSectionSpecificPatterns = false,
+  previousPatternId?: string,
 ): string | undefined {
   const patternSection = canonicalPatternSection(sectionKind);
   const want = partEnergy ?? (sectionKind ? SECTION_ENERGY_DEFAULT[sectionKind] : undefined);
@@ -642,16 +668,42 @@ export function suggestPattern(
     guestStyle = resolveStyle({ genreId: lens.genreId, styleId: lens.styleId ?? getCanonicalStyle(lens.genreId).id });
   }
   const guestCurated = guestStyle?.patterns?.allowed?.length ? guestStyle.patterns.allowed : undefined;
+  const hostPatterns = curated ?? (PATTERNS_BY_WORLD[worldId] ?? []).map(p => p.id);
+  const guestPatterns = guestWeight > 0 && lens
+    ? guestCurated ?? (PATTERNS_BY_WORLD[lens.genreId] ?? []).map(p => p.id)
+    : [];
   const candidateIds = [...new Set([
-    ...(curated ?? []),
-    ...(PATTERNS_BY_WORLD[worldId] ?? []).map(p => p.id),
-    ...(guestCurated ?? []),
-    ...(guestWeight > 0 && lens ? (PATTERNS_BY_WORLD[lens.genreId] ?? []).map(p => p.id) : []),
+    ...hostPatterns,
+    ...guestPatterns,
   ])];
   const candidatePatterns = candidateIds
     .map(id => PATTERNS_BY_ID[id])
-    .filter((p): p is MusicalPattern => !!p && automaticPatternCandidate(p) && (guestWeight > 0 || p.worldId === worldId));
-  const scored = candidatePatterns
+    .filter((p): p is MusicalPattern => !!p && automaticPatternCandidate(p)
+      && (guestWeight > 0 || p.worldId === worldId)
+      && patternSupportsVoice(p, voice, allowInstrumentAdaptation));
+  // An authored verse answer, solo phrase, or cadence belongs at the section
+  // it was written for. Previously it only received a score bonus, so a highly
+  // weighted statement cell could drown out the form-specific material and
+  // repeat unchanged through the whole starter song.
+  const sectionPatterns = preferSectionSpecificPatterns && patternSection
+    ? candidatePatterns.filter(p => p.sourceLevel === 'style-authored'
+      && !p.pedagogicalStudy
+      && !p.pedagogicalSourcePatternId
+      && p.sectionUsage?.some(section => canonicalPatternSection(section) === patternSection))
+    : [];
+  let preferredPatterns = sectionPatterns.length ? sectionPatterns : candidatePatterns;
+  if (preferSectionSpecificPatterns && previousPatternId) {
+    const previous = PATTERNS_BY_ID[previousPatternId];
+    const sectionAndGeneralPatterns = candidatePatterns.filter(pattern => !pattern.sectionUsage?.length
+      || pattern.sectionUsage.some(section => canonicalPatternSection(section) === patternSection));
+    const alternatives = sectionAndGeneralPatterns.filter(pattern => pattern.id !== previousPatternId
+      && pattern.sourceLevel === 'style-authored'
+      && !pattern.pedagogicalStudy
+      && !pattern.pedagogicalSourcePatternId
+      && (!previous?.category || pattern.category === previous.category));
+    if (alternatives.length) preferredPatterns = alternatives;
+  }
+  const scored = preferredPatterns
     .map(p => {
       const hostFit = affinity(p.id, voice, worldId, styleId);
       const guestFit = guestWeight > 0 && lens
@@ -1218,7 +1270,7 @@ export function addSensibleSectionAfter(sheet: Sheet, regionId: string): { sheet
     const d: SectionEnergy = sectionEnergy;
     energies[id][v.id] = d;
 
-    const p = suggestPattern(v, worldId, insertIndex * 31 + ti * 13 + 7, String(kind), taken, d, styleId);
+      const p = suggestPattern(v, worldId, insertIndex * 31 + ti * 13 + 7, String(kind), taken, d, styleId, undefined, true);
     if (p) {
       arrangement[id][v.id] = p;
       if (p) taken.add(p);
@@ -1282,7 +1334,7 @@ export function setInstrument(sheet: Sheet, trackId: string, instrumentId: strin
     if (!current) {
       const used = new Set(Object.values(arrangement[region.id] ?? {}));
       const energy = sheet.energies?.[region.id]?.[trackId] ?? region.energy ?? 3;
-      const p = suggestPattern(newVoice, region.genre ?? sheet.worldId, ri * 31 + 17, String(region.kind), used, energy, getSectionStyleId(sheet, region), partLensForPattern(sheet, region, trackId));
+      const p = suggestPattern(newVoice, region.genre ?? sheet.worldId, ri * 31 + 17, String(region.kind), used, energy, getSectionStyleId(sheet, region), partLensForPattern(sheet, region, trackId), true);
       if (p) {
         arrangement[region.id] = { ...(arrangement[region.id] ?? {}), [trackId]: p };
       }
@@ -1307,9 +1359,10 @@ const rankCache = new Map<string, string[]>();
 let rankCacheWorldId = '';
 
 /**
- * Find strong genre-native instrument choices for a slot. Genre hints get a
- * strong boost, but the broader catalog is searched too, so randomisation can
- * actually produce a new ensemble instead of shuffling the same five names.
+ * Find instruments with a part in this style's own allowed pattern vocabulary.
+ * A shared alias such as `guitar` or `lead` is not enough to make an unrelated
+ * instrument a genre fit; the style palette, genre hints, or a pattern naming
+ * the concrete instrument must authorize the choice.
  */
 function rankInstrumentsForWorld(worldId: string, targetRole?: string, styleId?: string): string[] {
   if (rankCacheWorldId !== worldId) {
@@ -1321,28 +1374,57 @@ function rankInstrumentsForWorld(worldId: string, targetRole?: string, styleId?:
     return rankCache.get(cacheKey)!;
   }
 
-  const hintIds: string[] = [];
+  const resolved = resolveStyle({ genreId: worldId, styleId: styleId ?? getCanonicalStyle(worldId).id });
+  const stylePalette = [...new Set((resolved.sound.instrumentPalette ?? []).map(item => item.value))];
+  const genreHints = WORLD_INSTRUMENT_HINTS[worldId] ?? [];
+  const preferredIds = new Set([...stylePalette, ...genreHints]);
+  const allowedIds = new Set(resolved.patterns?.allowed ?? []);
+  const stylePatterns = (PATTERNS_BY_WORLD[worldId] ?? [])
+    .filter(pattern => automaticPatternCandidate(pattern) && allowedIds.has(pattern.id));
   const scored = INSTRUMENT_CATALOG
     .filter(def => def.id !== 'silence' && !!INSTRUMENTS_BY_ID[def.id])
     .map(def => {
+      const instrumentRole = roleForInstrument(def.id);
+      const role = targetRole ?? instrumentRole;
       const fakeVoice = {
         id: 'candidate', instrumentId: def.id, name: def.name, instrument: def.name,
-        role: roleForInstrument(def.id), kind: def.id,
+        role, kind: def.id,
         muted: false, volume: 0.85, lensIds: [],
       } as Voice;
-      const best = (PATTERNS_BY_WORLD[worldId] || [])
-        .filter(automaticPatternCandidate)
-        .map(p => affinity(p.id, fakeVoice, worldId, styleId))
+      const kinds = new Set(instrumentPatternKinds(def.id));
+      const supported = stylePatterns.filter(pattern => {
+        const targets = new Set([...(pattern.instruments ?? []).map(String), ...(pattern.compatibleInstruments ?? []).map(String)]);
+        const targetMatch = [...targets].some(target => kinds.has(target));
+        const patternRole = role === 'voice' ? 'lead' : role;
+        // Candidate eligibility must use the role the new track will actually
+        // receive. An instrument alias like `bass` in log-drum's pattern kinds
+        // cannot turn its default percussion role into a bass part: that made
+        // the picker offer parts which addVoice could not place in the song.
+        const roleMatch = pattern.roles.includes(role) || pattern.roles.includes(patternRole)
+          || pattern.compatibleRoles?.includes(role) || pattern.compatibleRoles?.includes(patternRole)
+          || pattern.canCrossRole === true;
+        if (!roleMatch) return false;
+        if (targets.size && !targetMatch) return false;
+        // Broad pattern vocabulary can serve a named palette instrument, but
+        // only a concrete authored target can introduce an unlisted patch.
+        if (!preferredIds.has(def.id) && !targets.has(def.id)) return false;
+        return true;
+      });
+      if (!supported.length) return undefined;
+      const best = supported
+        .map(pattern => affinity(pattern.id, fakeVoice, worldId, styleId))
         .filter(Number.isFinite)
         .sort((a, b) => b - a)[0] ?? -100;
       let n = best * 0.55;
-      const hi = hintIds.indexOf(def.id);
-      if (hi >= 0) n += 48 - hi * 3;
-      if (targetRole && roleForInstrument(def.id) === targetRole) n += 18;
-      if (def.voicing === 'bass') n += targetRole === 'bass' ? 8 : 0;
-      if (def.voicing === 'unpitched') n += targetRole === 'percussion' ? 8 : 0;
+      const paletteIndex = stylePalette.indexOf(def.id);
+      const hintIndex = genreHints.indexOf(def.id);
+      if (paletteIndex >= 0) n += 60 - paletteIndex * 3;
+      else if (hintIndex >= 0) n += 42 - hintIndex * 3;
+      if (def.voicing === 'bass') n += role === 'bass' ? 8 : 0;
+      if (def.voicing === 'unpitched') n += role === 'percussion' ? 8 : 0;
       return { id: def.id, score: n };
     })
+    .filter((item): item is { id: string; score: number } => !!item)
     .sort((a, b) => b.score - a.score)
     .map(x => x.id);
   const result = uniqueInstrumentIds(scored, scored.length);
@@ -1365,7 +1447,7 @@ function patternCandidatesForVoice(
   const approach = approachForVoice(voice, worldId, styleId);
   const pool = PATTERNS_BY_WORLD[worldId] || [];
   return pool
-    .filter(automaticPatternCandidate)
+    .filter(pattern => automaticPatternCandidate(pattern) && patternSupportsVoice(pattern, voice))
     .map(p => {
       let n = affinity(p.id, voice, worldId, styleId);
       const behavioralFit = approachFit(p, approach);
@@ -1404,8 +1486,18 @@ export function randomizeInstruments(sheet: Sheet, repickPatterns = true): Sheet
     const role = (sheet.tracks[i] as Voice).role;
     const roleRanked = rankInstrumentsForWorld(worldId, role, styleId);
     const pool = roleRanked.filter(id => !selected.includes(id));
-    const candidates = (pool.length ? pool : roleRanked).slice(0, 10);
-    if (!candidates.length) throw new Error(`No authored ${role} instruments for ${worldId}/${styleId}`);
+    // When every style-authored choice is already assigned, retain this slot's
+    // current patch if it remains valid. Reusing the entire ranked list here
+    // silently reintroduced duplicates and defeated the distinct-part roster.
+    if (!pool.length) {
+      const currentId = current[i];
+      if (currentId && roleRanked.includes(currentId)) {
+        selected.push(currentId);
+        continue;
+      }
+      throw new Error(`No distinct authored ${role} instrument for ${worldId}/${styleId}`);
+    }
+    const candidates = pool.slice(0, 10);
     const nonCurrent = candidates.filter(id => id !== current[i]);
     const choices = nonCurrent.length ? nonCurrent : candidates;
     const roll = pickIndex(`instrument:${sheet.id}:${i}:${choices.join(',')}`, choices.length);
@@ -1415,7 +1507,7 @@ export function randomizeInstruments(sheet: Sheet, repickPatterns = true): Sheet
   const tracks = sheet.tracks.map((t, i) => {
     const id = selected[i];
     const def = instrument(id);
-    return { ...t, instrumentId: id, instrument: def.name, name: def.name, kind: id, role: roleForInstrument(id) };
+    return { ...t, instrumentId: id, instrument: def.name, name: def.name, kind: id };
   }) as Voice[];
 
   // Re-pick patterns after an instrument swap: a new instrument deserves its
@@ -1784,7 +1876,7 @@ export function unsilenceVoiceInSection(sheet: Sheet, trackId: string, regionId:
   let pId = remembered && remembered !== 'silent' ? remembered : undefined;
   if (!pId) {
     const taken = new Set(Object.values(sheet.arrangement[regionId] ?? {}));
-    pId = suggestPattern(voice, region?.genre ?? sheet.worldId, sheet.tracks.length * 17 + 5, String(region?.kind ?? 'verse'), taken, sheet.energies?.[regionId]?.[voice.id], region ? getSectionStyleId(sheet, region) : undefined, region ? partLensForPattern(sheet, region, trackId) : undefined)
+    pId = suggestPattern(voice, region?.genre ?? sheet.worldId, sheet.tracks.length * 17 + 5, String(region?.kind ?? 'verse'), taken, sheet.energies?.[regionId]?.[voice.id], region ? getSectionStyleId(sheet, region) : undefined, region ? partLensForPattern(sheet, region, trackId) : undefined, true)
       ;
   }
   if (!pId) return sheet;
@@ -1805,7 +1897,7 @@ export function unsilenceVoiceInAll(sheet: Sheet, trackId: string): Sheet {
     let pId = remembered && remembered !== 'silent' ? remembered : undefined;
     if (!pId) {
       const taken = new Set(Object.values(arrangement[r.id] ?? {}));
-      pId = suggestPattern(voice, r.genre ?? sheet.worldId, ri * 31 + sheet.tracks.length * 13 + 7, String(r.kind), taken, sheet.energies?.[r.id]?.[voice.id], getSectionStyleId(sheet, r), partLensForPattern(sheet, r, trackId))
+      pId = suggestPattern(voice, r.genre ?? sheet.worldId, ri * 31 + sheet.tracks.length * 13 + 7, String(r.kind), taken, sheet.energies?.[r.id]?.[voice.id], getSectionStyleId(sheet, r), partLensForPattern(sheet, r, trackId), true)
         ;
     }
     if (!pId) throw new Error(`No playable ${voice.instrumentId} pattern for ${r.genre ?? sheet.worldId}/${getSectionStyleId(sheet, r)}/${r.kind}`);
@@ -1864,6 +1956,7 @@ export function setSectionEnergy(sheet: Sheet, regionId: string, energy: Section
           next,
           getSectionStyleId(sheet, region),
           partLensForPattern(sheet, region, track.id, current),
+          true,
         );
         if (p) {
           arrangement[regionId] = { ...(arrangement[regionId] ?? {}), [track.id]: p };
@@ -1903,6 +1996,7 @@ export function setPartEnergy(sheet: Sheet, regionId: string, trackId: string, e
         energy,
         getSectionStyleId(sheet, region),
         partLensForPattern(sheet, region, trackId, current),
+        true,
       );
       if (p) {
         arrangement[regionId] = { ...(arrangement[regionId] ?? {}), [trackId]: p };
@@ -1966,7 +2060,7 @@ export function addVoice(
   instrumentId: string,
   regionId?: string,
   scope: 'section' | 'song' = 'section',
-  options: { role?: string; patternId?: string } = {},
+  options: { role?: string; patternId?: string; allowInstrumentAdaptation?: boolean } = {},
 ): Sheet {
   const def = instrument(instrumentId);
   let trackNumber = sheet.tracks.length;
@@ -1987,7 +2081,7 @@ export function addVoice(
     const targetRegion = sheet.regions.find(r => r.id === regionId);
     if (!targetRegion) throw new Error(`Cannot add ${instrumentId}: section ${regionId} does not exist`);
     const taken = new Set(Object.values(arrangement[targetRegion.id] ?? {}));
-    const p = options.patternId ?? suggestPattern(voice, targetRegion.genre ?? sheet.worldId, sheet.tracks.length * 19 + 7, String(targetRegion.kind), taken, 3, getSectionStyleId(sheet, targetRegion));
+    const p = options.patternId ?? suggestPattern(voice, targetRegion.genre ?? sheet.worldId, sheet.tracks.length * 19 + 7, String(targetRegion.kind), taken, 3, getSectionStyleId(sheet, targetRegion), undefined, options.allowInstrumentAdaptation ?? true);
     if (!p) throw new Error(`No authored ${targetRegion.genre ?? sheet.worldId} pattern for ${instrumentId}/${voice.role} in ${targetRegion.kind}`);
 
     for (const r of sheet.regions) {
@@ -2002,7 +2096,7 @@ export function addVoice(
   } else {
     for (const [ri, r] of sheet.regions.entries()) {
       const taken = new Set(Object.values(arrangement[r.id] ?? {}));
-      const p = options.patternId ?? suggestPattern(voice, r.genre ?? sheet.worldId, ri * 31 + sheet.tracks.length * 13 + 7, String(r.kind), taken, 3, getSectionStyleId(sheet, r));
+      const p = options.patternId ?? suggestPattern(voice, r.genre ?? sheet.worldId, ri * 31 + sheet.tracks.length * 13 + 7, String(r.kind), taken, 3, getSectionStyleId(sheet, r), undefined, options.allowInstrumentAdaptation ?? true);
       if (!p) throw new Error(`No authored ${r.genre ?? sheet.worldId} pattern for ${instrumentId}/${voice.role} in ${r.kind}`);
       arrangement[r.id] = { ...(arrangement[r.id] ?? {}), [id]: p };
     }
@@ -2012,23 +2106,44 @@ export function addVoice(
 }
 
 /** Add one fresh instrument, chosen at random from strong genre-native picks. */
+export function randomInstrumentCandidates(
+  sheet: Sheet,
+  regionId?: string,
+  scope: 'section' | 'song' = 'section'
+): string[] {
+  const targetRegions = scope === 'song'
+    ? sheet.regions
+    : regionId
+      ? sheet.regions.filter(region => region.id === regionId)
+      : [];
+  const contexts = targetRegions.length
+    ? targetRegions.map(region => ({
+      worldId: region.genre ?? sheet.worldId,
+      styleId: getSectionStyleId(sheet, region),
+    }))
+    : [{ worldId: sheet.worldId, styleId: sheet.styleId ?? getCanonicalStyle(sheet.worldId).id }];
+  const rankedByContext = contexts.map(context => new Set(
+    rankInstrumentsForWorld(context.worldId, undefined, context.styleId)
+  ));
+  const firstContext = rankedByContext[0] ?? new Set<string>();
+  const ranked = [...firstContext].filter(id => rankedByContext.every(available => available.has(id)));
+  const current = new Set(sheet.tracks.map(t => t.instrumentId));
+  return ranked.filter(id => !current.has(id)).slice(0, 10);
+}
+
 export function addRandomInstrument(
   sheet: Sheet,
   regionId?: string,
   scope: 'section' | 'song' = 'section'
 ): Sheet {
-  const worldId = sheet.worldId;
-  const styleId = sheet.styleId ?? getCanonicalStyle(worldId).id;
-  const ranked = rankInstrumentsForWorld(worldId, undefined, styleId);
-  const current = new Set(sheet.tracks.map(t => t.instrumentId));
-  const fresh = ranked.filter(id => !current.has(id));
-  const pool = fresh.length ? fresh : ranked;
-  if (!pool.length) throw new Error(`No instruments are authored for ${worldId}/${styleId}`);
-  const candidates = pool.slice(0, Math.min(10, pool.length));
+  const candidates = randomInstrumentCandidates(sheet, regionId, scope);
+  // An exhausted style vocabulary is a valid state; never invent a cross-genre
+  // substitute or silently add a duplicate just to make the button succeed.
+  if (!candidates.length) return sheet;
   const roll = pickIndex(`add-random:${sheet.id}:${regionId ?? 'song'}:${candidates.join(',')}`, candidates.length);
   const chosen = candidates[roll];
-  if (!chosen) throw new Error(`No instrument selected for ${worldId}/${styleId}`);
-  return addVoice(sheet, chosen, regionId, scope);
+  if (!chosen) return sheet;
+  return addVoice(sheet, chosen, regionId, scope, { allowInstrumentAdaptation: false });
 }
 
 export function removeVoice(sheet: Sheet, trackId: string): Sheet {
@@ -2109,7 +2224,8 @@ export function makeSheet(
   worldOrOptions: string | { genreId: string; styleId?: string; influences?: StyleInfluence[]; overrides?: Partial<SongStyle> },
   explicitStyleId?: string,
   influences?: StyleInfluence[],
-  overrides?: Partial<SongStyle>
+  overrides?: Partial<SongStyle>,
+  preferSectionSpecificPatterns = true,
 ): Sheet {
   const genreId = typeof worldOrOptions === 'string' ? worldOrOptions : worldOrOptions.genreId;
   const styleId = (typeof worldOrOptions === 'string' ? explicitStyleId : worldOrOptions.styleId) ?? getCanonicalStyle(genreId).id;
@@ -2181,6 +2297,7 @@ export function makeSheet(
 
   const arrangement: Arrangement = {};
   const energies: Record<string, Record<string, SectionEnergy>> = {};
+  const previousPatternByTrackSection = new Map<string, string>();
   
   for (const [ri, r] of regions.entries()) {
     arrangement[r.id] = {};
@@ -2198,10 +2315,17 @@ export function makeSheet(
         continue;
       }
 
-      const p = suggestPattern(v, genreId, ri * 31 + i * 13 + 7, String(r.kind), taken, d, resolved.id);
+      const p = suggestPattern(v, genreId, ri * 31 + i * 13 + 7, String(r.kind), taken, d, resolved.id,
+        undefined, false, preferSectionSpecificPatterns,
+        preferSectionSpecificPatterns
+          ? previousPatternByTrackSection.get(`${v.id}:${canonicalPatternSection(r.kind) ?? r.kind}`)
+          : undefined);
       if (p) {
         arrangement[r.id][v.id] = p;
         taken.add(p);
+        if (preferSectionSpecificPatterns) {
+          previousPatternByTrackSection.set(`${v.id}:${canonicalPatternSection(r.kind) ?? r.kind}`, p);
+        }
       }
     }
   }
@@ -2221,6 +2345,99 @@ export function makeSheet(
     styleInfluences: appliedInfluences,
     styleOverrides: appliedOverrides,
   });
+}
+
+/**
+ * Create a teaching starter with up to eight instruments when the selected
+ * style has additional playable, style-authored parts. Reference-song catalog
+ * arrangements keep their hand-picked ensembles; this expansion is only for
+ * newly generated starters and never borrows another style's material.
+ */
+export function makeStarterSheet(
+  worldOrOptions: string | { genreId: string; styleId?: string; influences?: StyleInfluence[]; overrides?: Partial<SongStyle> },
+  explicitStyleId?: string,
+  influences?: StyleInfluence[],
+  overrides?: Partial<SongStyle>,
+): Sheet {
+  const base = makeSheet(worldOrOptions, explicitStyleId, influences, overrides);
+  if (base.tracks.length >= 8) return base;
+
+  const genreId = base.worldId;
+  const styleId = base.styleId ?? getCanonicalStyle(genreId).id;
+  const resolved = resolveStyle({
+    genreId, styleId,
+    influences: base.styleInfluences,
+    userOverrides: base.styleOverrides,
+  });
+  const allowed = new Set(resolved.patterns?.allowed ?? []);
+  const existing = new Set(base.tracks.map(track => track.instrumentId));
+  const candidates = (PATTERNS_BY_WORLD[genreId] ?? [])
+    .filter(pattern => automaticPatternCandidate(pattern)
+      && pattern.sourceLevel === 'style-authored'
+      && pattern.styleIds?.includes(styleId)
+      && allowed.has(pattern.id)
+      // Only full authored arrangement variations can introduce a new part;
+      // reduction/technique drills stay out of the song.
+      && pattern.arrangementVariation === true)
+    .flatMap(pattern => (pattern.instruments ?? []).map(instrumentId => ({ pattern, instrumentId })))
+    .filter(({ pattern, instrumentId }) => {
+      if (existing.has(instrumentId) || !INSTRUMENTS_BY_ID[instrumentId]) return false;
+      const role = roleForInstrument(instrumentId);
+      return pattern.roles.includes(role);
+    });
+  const candidateInstrumentIds = [...new Set(candidates.map(candidate => candidate.instrumentId))];
+  const arrangement: Arrangement = { ...base.arrangement };
+  let energies: Sheet['energies'] = { ...base.energies };
+  const tracks: Voice[] = [...base.tracks] as Voice[];
+  let regions = base.regions.map(region => ({ ...region }));
+
+  for (const instrumentId of candidateInstrumentIds) {
+    if (tracks.length >= 8) break;
+    const def = instrument(instrumentId);
+    const role = roleForInstrument(instrumentId);
+    const partPatterns = candidates.filter(candidate => candidate.instrumentId === instrumentId).map(candidate => candidate.pattern);
+    let number = tracks.length;
+    while (tracks.some(track => track.id === `v${number}`)) number++;
+    const track: Voice = {
+      id: `v${number}`, instrumentId, name: def.name, instrument: def.name,
+      role, kind: instrumentId, muted: false,
+      volume: calibratedTrackVolume(genreId, instrumentId, role, styleId, resolved.contract.timbreSpace.mixCharacter?.bassForward),
+      lensIds: [],
+    };
+    const assigned: Record<string, string> = {};
+    const candidateEnergies: Sheet['energies'] = { ...energies };
+    const candidateRegions = regions.map(region => ({ ...region }));
+    let activeRegionCount = 0;
+    let complete = true;
+    for (const [regionIndex, region] of candidateRegions.entries()) {
+      candidateEnergies[region.id] = { ...(candidateEnergies[region.id] ?? {}), [track.id]: region.energy ?? 3 };
+      const inSection = partPatterns.filter(pattern => patternAvailableInSection(pattern, String(region.kind)));
+      if (!inSection.length) {
+        assigned[region.id] = 'silent';
+        continue;
+      }
+      const taken = new Set(Object.values(arrangement[region.id] ?? {}));
+      const available = inSection.filter(pattern => !taken.has(pattern.id));
+      if (!available.length) { assigned[region.id] = 'silent'; continue; }
+      const chosen = available[Math.floor(hash(`${styleId}:${instrumentId}:${region.formKey ?? region.kind}`, regionIndex + tracks.length * 13) * available.length)];
+      if (!chosen) { complete = false; break; }
+      assigned[region.id] = chosen.id;
+      activeRegionCount++;
+      if (region.activeInstrumentIds && !region.activeInstrumentIds.includes(instrumentId)) {
+        region.activeInstrumentIds = [...region.activeInstrumentIds, instrumentId];
+      }
+    }
+    if (!complete || activeRegionCount === 0) continue;
+    energies = candidateEnergies;
+    regions = candidateRegions;
+    tracks.push(track);
+    for (const region of regions) {
+      arrangement[region.id] = { ...(arrangement[region.id] ?? {}), [track.id]: assigned[region.id] };
+    }
+  }
+
+  if (tracks.length === base.tracks.length) return base;
+  return rebuild({ ...base, tracks, regions, arrangement, energies });
 }
 
 /**
@@ -2294,7 +2511,7 @@ export function switchSectionWorld(sheet: Sheet, regionId: string, worldId: stri
 
   const taken = new Set<string>();
   for (const [i, v] of (sheet.tracks as Voice[]).entries()) {
-    const p = suggestPattern(v, worldId, regionIndex * 31 + i * 13 + 7, String(r.kind), taken, sheet.energies?.[regionId]?.[v.id], targetStyleId, sheet.partLens?.[regionId]?.[v.id]);
+    const p = suggestPattern(v, worldId, regionIndex * 31 + i * 13 + 7, String(r.kind), taken, sheet.energies?.[regionId]?.[v.id], targetStyleId, sheet.partLens?.[regionId]?.[v.id], true);
     if (p) {
       arrangement[regionId][v.id] = p;
       taken.add(p);

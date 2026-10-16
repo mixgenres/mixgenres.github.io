@@ -3,7 +3,7 @@
   "reviewed": "2026-10-14",
   "status": "Five streaming recording candidates selected per style. Audio audition and comparison notes are pending; this list does not claim sonic matching.",
   "source": "Apple Music track pages. No reference audio downloaded.",
-  "styles": [
+  "references": [
     {
       "styleId": "amapiano-classic",
       "compare": ["piano-stab to log-drum call-and-response", "sub-bass weight without masking the kick", "gradual DJ-style layering and drop contrast"],

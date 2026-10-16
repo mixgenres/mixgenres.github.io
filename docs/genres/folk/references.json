@@ -3,7 +3,7 @@
   "reviewed": "2026-10-15",
   "status": "Five distinct streaming candidates are collected for each style. Listening comparisons and useful timecodes remain pending; these are candidates, not verified sonic matches.",
   "source": "Apple Music track pages. Track and performer metadata checked; reference audio has not been auditioned or downloaded.",
-  "styles": [
+  "references": [
     {
       "styleId": "folk-contemporary-folk",
       "compare": [
