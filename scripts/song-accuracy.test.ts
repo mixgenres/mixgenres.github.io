@@ -1268,11 +1268,21 @@ test('signature sample moments use distinct, style-authored parts and clear fore
     const sheet = createCatalogSong(songId);
     return sheet.regions.find(region => region.kind === section)?.activeInstrumentIds ?? [];
   };
-  const patternIn = (songId: string, section: string, instrument: string) => {
+  const patternIn = (songId: string, section: string, instrument: string, occurrence = 1) => {
     const sheet = createCatalogSong(songId);
-    const region = sheet.regions.find(item => item.kind === section)!;
+    const region = sheet.regions.filter(item => item.kind === section)[occurrence - 1]!;
     const track = sheet.tracks.find(item => item.instrumentId === instrument)!;
     return PATTERNS_BY_ID[sheet.arrangement[region.id]?.[track.id] ?? '']?.shortName;
+  };
+
+  const phraseCellsIn = (songId: string, section: string, instrument: string, occurrence = 1) => {
+    const sheet = createCatalogSong(songId);
+    const region = sheet.regions.filter(item => item.kind === section)[occurrence - 1]!;
+    const track = sheet.tracks.find(item => item.instrumentId === instrument)!;
+    return new Set(sheet.measures.slice(region.start, region.end)
+      .map(measure => measure.patternDetailsByTrack?.[track.id]?.patternId)
+      .filter((id): id is string => !!id)
+      .map(id => PATTERNS_BY_ID[id]?.shortName ?? id));
   };
 
   const funk = createCatalogSong('funk-james-brown-the-one_song');
@@ -1360,6 +1370,12 @@ test('signature sample moments use distinct, style-authored parts and clear fore
   assert.equal(patternIn('funk-p-funk_song', 'vamp', 'bass'), 'Bass bubble');
 
   assert.equal(patternIn('funk-funk_song', 'A', 'guitar'), 'Muted guitar scratch');
+  assert.equal(patternIn('funk-funk_song', 'A', 'guitar', 2), 'Guitar variation');
+  assert.equal(patternIn('funk-funk_song', 'A', 'guitar', 3), 'Guitar reply');
+  assert.ok(phraseCellsIn('funk-funk_song', 'A', 'guitar', 2).has('Guitar variation'),
+    'the second long vamp carries its reduced guitar cell into the generated score');
+  assert.ok(phraseCellsIn('funk-funk_song', 'A', 'guitar', 3).has('Guitar reply'),
+    'the final vamp carries its phrase-edge guitar answer into the generated score');
   assert.equal(patternIn('funk-funk_song', 'A', 'bass'), 'Bass pocket');
   assert.equal(patternIn('funk-james-brown-the-one_song', 'chorus', 'trumpet'), 'Horn response');
   assert.equal(patternIn('funk-james-brown-the-one_song', 'groove', 'drums'), 'One and backbeat');
@@ -1371,6 +1387,9 @@ test('signature sample moments use distinct, style-authored parts and clear fore
   assert.equal(patternIn('funk-jazz-funk_song', 'B', 'tenor-sax'), 'Horn exchange');
 
   assert.equal(patternIn('funk-minneapolis_song', 'verse', 'drums'), 'Machine backbeat');
+  assert.equal(patternIn('funk-minneapolis_song', 'bridge', 'guitar'), 'Guitar variation');
+  assert.ok(phraseCellsIn('funk-minneapolis_song', 'bridge', 'guitar').has('Guitar variation'),
+    'the bridge thins the guitar while the machine backbeat remains fixed');
   assert.equal(patternIn('funk-minneapolis_song', 'chorus', 'synth'), 'Synth hook');
   assert.equal(patternIn('funk-disco_song', 'chorus', 'bass'), 'Octave bass');
   assert.equal(patternIn('funk-disco_song', 'chorus', 'string-ensemble'), 'String stabs');
@@ -1381,10 +1400,14 @@ test('signature sample moments use distinct, style-authored parts and clear fore
   assert.ok(boogie.tracks.some(track => track.instrumentId === 'synth-bass'),
     'Boogie needs its named synthesizer-bass instrument, not only a generic electric bass');
   assert.equal(patternIn('funk-boogie_song', 'verse', 'synth-bass'), 'Synth-bass bounce');
+  assert.equal(patternIn('funk-boogie_song', 'breakdown', 'synth-bass'), 'synth bass variation');
+  assert.ok(phraseCellsIn('funk-boogie_song', 'breakdown', 'synth-bass').has('synth bass variation'));
   assert.equal(patternIn('funk-boogie_song', 'chorus', 'rhodes'), 'Rhodes stabs');
   assert.equal(patternIn('funk-boogie_song', 'chorus', 'drums'), 'Clap backbeat');
 
   assert.equal(patternIn('funk-hi-nrg_song', 'verse', 'synth-bass'), 'Octave synth bass');
+  assert.equal(patternIn('funk-hi-nrg_song', 'breakdown', 'synth-bass'), 'synth bass variation');
+  assert.ok(phraseCellsIn('funk-hi-nrg_song', 'breakdown', 'synth-bass').has('synth bass variation'));
   assert.equal(patternIn('funk-hi-nrg_song', 'chorus', 'synth'), 'Synth hook');
   assert.equal(patternIn('funk-hi-nrg_song', 'chorus', 'drums'), 'Hi-NRG drive');
 

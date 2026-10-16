@@ -1838,6 +1838,7 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       'tenor-sax-trading': { 'tenor-sax': 'Tenor Saxophone reply', piano: 'Piano reply', 'upright-bass': 'Upright bass basics', drums: 'Drum kit reply' },
       tag: { } } },
   'funk::funk': {
+    note: 'One-chord pocket, call-response and an extended band vamp. The first A states the scratch; the next A pares it back to a two-hit variation, and the last A answers at the phrase edge while bass and drums keep the pocket.',
     sectionInstruments: {
       intro: ['guitar','bass','drums'],
       breakdown: ['bass','drums'],
@@ -1846,12 +1847,12 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
     patternAssignments: {
       intro: { guitar: 'Muted guitar scratch', bass: 'Bass pocket', drums: 'Kit' },
       A: { voice: 'Voice statement', trumpet: 'Trumpet statement', guitar: 'Muted guitar scratch', clavinet: 'Clavinet accompaniment', bass: 'Bass pocket', drums: 'Kit' },
-      'A#2': { voice: 'Vocal variation', trumpet: 'Bb Trumpet variation' },
-      'A#3': { voice: 'Vocal reply', trumpet: 'Bb Trumpet reply' },
+      'A#2': { voice: 'Vocal variation', trumpet: 'Bb Trumpet variation', guitar: 'Guitar variation' },
+      'A#3': { voice: 'Vocal reply', trumpet: 'Bb Trumpet reply', guitar: 'Guitar reply' },
       breakdown: { bass: 'Low anchor', drums: 'Drum kit basics' },
       solo: { trumpet: 'Trumpet statement', guitar: 'Muted guitar scratch', bass: 'Bass pocket', drums: 'Kit' },
       outro: { guitar: 'Muted guitar scratch', bass: 'Bass pocket' } },
-    lockPatternAssignments: { A: ['guitar','bass'], solo: ['guitar','bass'] } },
+    lockPatternAssignments: { A: ['bass'], solo: ['guitar','bass'] } },
   'funk::james-brown-the-one': {
     patternAssignments: {
       intro: { trumpet: 'Trumpet statement', guitar: 'Guitar accompaniment', clavinet: 'Clavinet accompaniment', bass: 'Low anchor', drums: 'Kit' },
@@ -1891,6 +1892,7 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       outro: { } },
     lockPatternAssignments: { A: ['rhodes','bass'], B: ['rhodes','tenor-sax'], solo: ['rhodes','bass'] } },
   'funk::minneapolis': {
+    note: 'Lean Minneapolis guitar and drum-machine texture with a bright synth hook. Keep the machine backbeat fixed; thin the clipped guitar to a late two-hit answer in the bridge so the hook and bass space open up.',
     sectionInstruments: {
       intro: ['guitar','synth','drums'],
       verse: ['voice','guitar','synth','drums'],
@@ -1901,9 +1903,9 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       intro: { guitar: 'Clipped guitar', synth: 'Synth statement', drums: 'Machine backbeat' },
       verse: { voice: 'Voice statement', guitar: 'Clipped guitar', synth: 'Synth statement', drums: 'Machine backbeat' },
       chorus: { voice: 'Vocal variation', guitar: 'Clipped guitar', synth: 'Synth hook', drums: 'Machine backbeat' },
-      bridge: { guitar: 'Clipped guitar', synth: 'Synth hook', drums: 'Machine backbeat' },
+      bridge: { guitar: 'Guitar variation', synth: 'Synth hook', drums: 'Machine backbeat' },
       outro: { guitar: 'Clipped guitar', drums: 'Machine backbeat' } },
-    lockPatternAssignments: { verse: ['guitar','drums'], chorus: ['guitar','drums'], bridge: ['guitar','drums'] } },
+    lockPatternAssignments: { verse: ['drums'], chorus: ['drums'], bridge: ['drums'] } },
   'funk::disco': {
     sectionInstruments: {
       intro: ['guitar','bass','drums'],
@@ -1937,6 +1939,7 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       outro: { } },
     lockPatternAssignments: { theme: ['bass'], groove: ['bass'] } },
   'funk::boogie': {
+    note: 'Keep the octave synth-bass bounce and Rhodes/clap pocket through the hooks. Reduce the bass to its four-note syncopated variation in the breakdown, then restore the full bounce for the solo and final chorus.',
     sectionInstruments: {
       intro: ['synth-bass','rhodes','drums'],
       verse: ['voice','synth-bass','rhodes','drums'],
@@ -1950,11 +1953,12 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       chorus: { voice: 'Vocal variation', synth: 'Synthesizer variation', 'synth-bass': 'Synth-bass bounce', rhodes: 'Rhodes stabs', drums: 'Clap backbeat' },
       'chorus#2': { synth: 'Synthesizer reply' },
       'chorus#3': { synth: 'Synthesizer variation' },
-      breakdown: { 'synth-bass': 'Synth-bass bounce', drums: 'Drum kit basics' },
+      breakdown: { 'synth-bass': 'synth bass variation', drums: 'Drum kit basics' },
       solo: { synth: 'Synthesizer variation', 'synth-bass': 'Synth-bass bounce', rhodes: 'Rhodes stabs', drums: 'Clap backbeat' },
       outro: { 'synth-bass': 'Synth-bass bounce' } },
     lockPatternAssignments: { verse: ['synth-bass','rhodes'], chorus: ['synth-bass','rhodes'], solo: ['synth-bass'] } },
   'funk::hi-nrg': {
+    note: 'Drive the verse, chorus and build with the alternating octave bass and even kick pulse. The breakdown keeps the bass moving with a four-note syncopated answer, then restores the full eighth-note push for the build.',
     sectionInstruments: {
       intro: ['synth-bass','drums'],
       verse: ['voice','synth','synth-bass','drums'],
@@ -1966,7 +1970,7 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       intro: { 'synth-bass': 'Octave synth bass', drums: 'Hi-NRG drive' },
       verse: { voice: 'Voice statement', synth: 'Synth statement', 'synth-bass': 'Octave synth bass', drums: 'Hi-NRG drive' },
       chorus: { voice: 'Vocal variation', synth: 'Synth hook', 'synth-bass': 'Octave synth bass', drums: 'Hi-NRG drive' },
-      breakdown: { 'synth-bass': 'Octave synth bass', drums: 'Drum kit basics' },
+      breakdown: { 'synth-bass': 'synth bass variation', drums: 'Drum kit basics' },
       build: { synth: 'Synth hook', 'synth-bass': 'Octave synth bass', drums: 'Hi-NRG drive' },
       outro: { 'synth-bass': 'Octave synth bass' } },
     lockPatternAssignments: { verse: ['synth-bass','drums'], chorus: ['synth-bass','drums'], build: ['synth-bass','drums'] } },
