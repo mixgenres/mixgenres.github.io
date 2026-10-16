@@ -277,6 +277,52 @@ export function getPerformanceGrammar(style: ResolvedStyle | PerformanceGrammarS
   const phraseDevelopment = source.performanceGrammar?.phraseDevelopment
     ?? (isResolvedStyle ? phraseDevelopmentForStyle(style) : EMPTY_PHRASE_DEVELOPMENT);
 
+  // Beginner cells remain the written rhythmic anchors. When a style itself
+  // teaches melodic motion (ornament, slide, hammer/pull, grace notes, or an
+  // improvised run), its performer may connect those anchors inside genuine
+  // rests. Sparse/ambient/minimalist styles keep their space because they lack
+  // that authored vocabulary; no genre-wide fill probability is imposed.
+  const expressiveVocabulary = isResolvedStyle ? [
+    ...(style.melody?.ornamentVocabulary ?? []),
+    ...(style.melody?.motifOps ?? []),
+    ...Object.values(style.contract.articulationGrammar ?? {}).flat(),
+  ] : [];
+  const hasExpressiveMotion = expressiveVocabulary.some(value =>
+    /ornament|grace|turn|trill|mordent|hammer|pull.?off|slide|portamento|gliss|bend|run|picado|rasgueado|alzapua|falseta|jhala|tihai/i.test(value));
+  const hasImprovisedRun = isResolvedStyle
+    && style.contract.improvisationGrammar?.phraseStages.includes('rapid-run') === true;
+  const hasFineOrnament = hasImprovisedRun || expressiveVocabulary.some(value =>
+    /grace|ornament|trill|mordent|melisma|meend|gamak|taan|murki|picado|alzap[uú]a|hammer|pull.?off|tremolo|rapid.?run/i.test(value));
+  const intentionallySpacious = isResolvedStyle
+    && /minimal|ambient|drone|free.?time/.test(`${style.id} ${style.name} ${style.rhythm.feel}`.toLowerCase());
+  const harmonicLine = isResolvedStyle && style.melody.chordToneTargeting
+    && !/heterophonic|fixed.?cluster|modal.?drone/i.test(style.harmony.model);
+  const responsivePhrase = phraseDevelopment.answerProbability + phraseDevelopment.fillProbability
+    + phraseDevelopment.variationProbability > 0.3;
+  const canEmbellish = !intentionallySpacious
+    && (hasExpressiveMotion || hasImprovisedRun || (harmonicLine && responsivePhrase));
+  const allowedDevelopment = phraseDevelopment.variationProbability + phraseDevelopment.answerProbability
+    + phraseDevelopment.fillProbability;
+  const inferredDerivedAttacks = canEmbellish && allowedDevelopment > 0.08 ? 0.44 : 0;
+  const inferredDerivedPitch = canEmbellish && isResolvedStyle && style.melody.chordToneTargeting ? 0.4 : 0;
+  const inferredVocabulary: Record<string, string[]> = canEmbellish ? {
+    lead: ['scalar-connection', 'pickup', 'answer'],
+    melody: ['scalar-connection', 'pickup', 'answer'],
+    voice: ['scalar-connection', 'pickup', 'answer'],
+    counterline: ['scalar-connection', 'pickup', 'answer'],
+  } : {};
+  const inferredSubdivisions: Record<string, number[]> = canEmbellish
+    ? {
+      lead: hasFineOrnament ? [2, 4, 8] : [2, 4],
+      melody: hasFineOrnament ? [2, 4, 8] : [2, 4],
+      // A generic SoundFont vowel patch should not receive the same fast
+      // subdivisions as a plectrum, bow, reed, or hand technique. Explicit
+      // vocal ornament grammar can still add melismatic detail below.
+      voice: hasFineOrnament ? [2, 4, 8] : [2],
+      counterline: hasFineOrnament ? [2, 4, 8] : [2, 4],
+    }
+    : {};
+
   const forbidden = Array.isArray(source.forbidden) ? source.forbidden : [];
   const mergedForbidden = Array.from(new Set([...(baseGrammar.forbiddenInterpretations ?? []), ...forbidden]));
 
@@ -300,6 +346,12 @@ export function getPerformanceGrammar(style: ResolvedStyle | PerformanceGrammarS
 
   const result: PerformanceGrammar = {
     ...baseGrammar,
+    allowDerivedAttacks: source.performanceGrammar?.allowDerivedAttacks ?? inferredDerivedAttacks,
+    allowDerivedPitch: source.performanceGrammar?.allowDerivedPitch ?? inferredDerivedPitch,
+    subdivisionVocabulary: source.performanceGrammar?.subdivisionVocabulary ?? inferredSubdivisions,
+    variationVocabulary: source.performanceGrammar?.variationVocabulary ?? inferredVocabulary,
+    interactionVocabulary: source.performanceGrammar?.interactionVocabulary ?? (isResolvedStyle && style.melody.callAndResponse
+      ? { lead: ['answer'], harmony: ['leave-space'], bass: ['reinforce'] } : {}),
     phraseDevelopment,
     worldId,
     styleId,

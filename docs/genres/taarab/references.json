@@ -1,0 +1,63 @@
+{
+  "genreId": "taarab",
+  "reviewed": "2026-10-15",
+  "status": "Five linked Apple Music candidates are collected for all five Taarab styles. The native Music app was locked during this pass, so listening comparisons and timecodes remain pending; these are candidates, not verified sonic matches.",
+  "source": "Apple Music track pages located as listening candidates. No reference audio downloaded or processed.",
+  "styles": [
+    {
+      "styleId": "taarab-zanzibar",
+      "compare": ["how melodic instruments and voice share phrase foreground", "the rhythmic bed beneath long vocal lines", "ornament, cadential turns, and response between lines", "ensemble changes from verse to refrain and instrumental passages", "recorded balance between vocal presence and instrumental color"],
+      "recordings": [
+        { "title": "Mwambieni", "artist": "Culture Musical Club", "url": "https://music.apple.com/us/song/1631580349", "timecodes": [] },
+        { "title": "Jipeleleze", "artist": "Culture Musical Club", "url": "https://music.apple.com/us/song/1621376530", "timecodes": [] },
+        { "title": "Dhikrayat", "artist": "Culture Musical Club", "url": "https://music.apple.com/us/song/1631580348", "timecodes": [] },
+        { "title": "Chaguo (feat. Saada Mohd & Culture Musical Club)", "artist": "Zanzibar Taarab", "url": "https://music.apple.com/us/song/1773103090", "timecodes": [] },
+        { "title": "Mdhamini wa pendo (feat. Abdalla Issa & Culture Musical Club)", "artist": "Zanzibar Taarab", "url": "https://music.apple.com/us/song/1773103287", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "taarab-classical-orchestra",
+      "compare": ["how Swahili melodic phrasing is carried through orchestral arrangement", "the relationship between qanun, strings, voice, and percussion", "phrase length, ornament, and ensemble breathing at cadences", "how orchestral color supports the song without erasing the taarab source", "clarity and depth across a large acoustic ensemble"],
+      "recordings": [
+        { "title": "Nna Zama (with Maryam Said Hamdun, Mohammed Issa Matona Haji & Rajab Suleiman)", "artist": "The Norwegian Radio Orchestra", "url": "https://music.apple.com/us/song/811179918", "timecodes": [] },
+        { "title": "Afkari (with Maryam Said Hamdun, Mohammed Issa Matona Haji & Rajab Suleiman)", "artist": "The Norwegian Radio Orchestra", "url": "https://music.apple.com/us/song/811180890", "timecodes": [] },
+        { "title": "Jipeleze (with Maryam Said Hamdun, Mohammed Issa Matona Haji & Rajab Suleiman)", "artist": "The Norwegian Radio Orchestra", "url": "https://music.apple.com/us/song/811179897", "timecodes": [] },
+        { "title": "Aziza - Bashraf Subira (with Maryam Said Hamdun, Mohammed Issa Matona Haji & Rajab Suleiman)", "artist": "The Norwegian Radio Orchestra", "url": "https://music.apple.com/us/song/811179915", "timecodes": [] },
+        { "title": "Muhogo Wa Yang'ombe (with Maryam Said Hamdun, Mohammed Issa Matona Haji & Rajab Suleiman)", "artist": "The Norwegian Radio Orchestra", "url": "https://music.apple.com/us/song/811179907", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "taarab-modern-taarab",
+      "compare": ["how modern rhythm and amplified production support the taarab vocal style", "the roles of keyboards, bass, percussion, and instrumental replies", "hook placement, vocal pickups, and changes across sections", "arrangement density and rhythmic energy without an invariant loop", "low-end punch, vocal clarity, and separation of busy layers"],
+      "recordings": [
+        { "title": "Full Dose (feat. Mzee Yusuf & Malkia Leila Rashid)", "artist": "Jahazi Modern Taarab", "url": "https://music.apple.com/us/song/1551177404", "timecodes": [] },
+        { "title": "Penye Neema", "artist": "Jahazi Modern Taarab", "url": "https://music.apple.com/us/song/1574701261", "timecodes": [] },
+        { "title": "Mtaniona Hivi Hivi", "artist": "Jahazi Modern Taarab", "url": "https://music.apple.com/us/song/1574701255", "timecodes": [] },
+        { "title": "Ya Wenzenu Midomoni", "artist": "Jahazi Modern Taarab", "url": "https://music.apple.com/us/song/1572373938", "timecodes": [] },
+        { "title": "Yanga", "artist": "Mzee Yusuph", "url": "https://music.apple.com/us/song/1631892145", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "taarab-swahili-orchestra",
+      "compare": ["the Swahili lead and orchestra's call-and-response", "how instrumental lines answer rather than crowd the singer", "changes in rhythmic motion between vocal and instrumental passages", "how ornamented melody sits against the ensemble pulse", "balance, articulation, and timbral separation in the orchestra"],
+      "recordings": [
+        { "title": "Panya", "artist": "Mohamed Ilyas & Nyota Zameremeta Orchestra Of Zanzibar", "url": "https://music.apple.com/us/song/1621381304", "timecodes": [] },
+        { "title": "Bahati Haina Kwao", "artist": "Mohamed Ilyas & Nyota Zameremeta Orchestra Of Zanzibar", "url": "https://music.apple.com/us/song/1621381316", "timecodes": [] },
+        { "title": "Ewe Bibi Mwenye Enzi", "artist": "Mohamed Ilyas & Nyota Zameremeta Orchestra Of Zanzibar", "url": "https://music.apple.com/us/song/1621381779", "timecodes": [] },
+        { "title": "Hakika Nakupenda", "artist": "Mohamed Ilyas & Nyota Zameremeta Orchestra Of Zanzibar", "url": "https://music.apple.com/us/song/1621381324", "timecodes": [] },
+        { "title": "Watu Wananiuliza", "artist": "Mohamed Ilyas & Nyota Zameremeta Orchestra Of Zanzibar", "url": "https://music.apple.com/us/song/1621381321", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "taarab-kidumbak",
+      "compare": ["the lighter, more percussive dance pulse in Kidumbaki examples", "how voice, small percussion, and melodic accompaniment interlock", "short responses, refrains, and changes in ensemble density", "differences from the statelier orchestral taarab feel", "the transient character and natural balance of the percussion-led mix"],
+      "recordings": [
+        { "title": "Hisiya za Muungwana (Kidumbaki)", "artist": "Rajab Suleiman & Kithara", "url": "https://music.apple.com/us/song/765987082", "timecodes": [] },
+        { "title": "Kidumbaki 2: Tuheshimu Wazazi - Mama Wa Kambo - Kwa Heri Nakuaga", "artist": "Culture Musical Club", "url": "https://music.apple.com/us/song/586360049", "timecodes": [] },
+        { "title": "Kidumbaki (Medley)", "artist": "Sina Chuki Kidumbaki", "url": "https://music.apple.com/us/song/1206151968", "timecodes": [] },
+        { "title": "Kidumbaki", "artist": "Sina Chuki Kidumbaki", "url": "https://music.apple.com/us/song/875342142", "timecodes": [] },
+        { "title": "Kidumbak (feat. Maulidi Haji Mkadau)", "artist": "Rashid Makame", "url": "https://music.apple.com/us/song/1631580361", "timecodes": [] }
+      ]
+    }
+  ]
+}

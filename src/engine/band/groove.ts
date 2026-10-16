@@ -45,6 +45,8 @@ export interface GrooveProfile {
   /** how much a soft hit gets softened relative to a loud one. > 1 widens the
    *  dynamic range, which is most of what "played, not programmed" means. */
   dynamicRange: number;
+  /** Style-authored performance grain, kept separate from swing and note jitter. */
+  roughness?: number;
   description: string;
 }
 
@@ -70,6 +72,7 @@ export function grooveForStyle(style: ResolvedStyle): GrooveProfile {
     pocket: [...g.pocket],
     anticipationMs: g.anticipationMs,
     dynamicRange: g.dynamicRange,
+    roughness: Math.max(0, Math.min(1, style.rhythm.grooveMechanics?.roughness ?? 0)),
     description: `${style.name}: ${c.pulseModel}, ${c.timeline}`,
     subdivision: c.subdivision,
     cycleLength: c.cycleLength,
@@ -147,7 +150,10 @@ export function grooveVelocityMultiplier(g: GrooveProfile, input: FeelInput): nu
   const sharedBreath = noise1D(phraseBeat / 8, seedOf(input.ensembleSeed ?? input.seed, 202));
   const playerExpression = noise1D(phraseBeat / 8, seedOf(input.seed, 203));
   const velWobble = 1 + sharedBreath * g.humanizeVel * 0.48 + playerExpression * g.humanizeVel * 0.12;
-  return Math.max(0.05, authored * shaped * velWobble);
+  const roughness = Math.max(0, Math.min(1, g.roughness ?? 0));
+  const roughAccent = noise1D(phraseBeat / 4, seedOf(input.ensembleSeed ?? input.seed, 619)) * roughness * 0.075;
+  const attackGrain = (rand01(seedOf(input.seed, 617)) - 0.5) * roughness * 0.12;
+  return Math.max(0.05, authored * shaped * velWobble * (1 + roughAccent + attackGrain));
 }
 
 function noise1D(x: number, seed: number = 42): number {
@@ -188,19 +194,14 @@ export function applyFeel(g: GrooveProfile, input: FeelInput): FeelOutput {
     ? (input.authoredMs ?? 0)
     : (g.lean + (g.roleLean[input.role] ?? 0) + (g.pocket?.[slot] ?? 0) + roleMs + (input.anticipated ? g.anticipationMs : 0)) * scale + (input.authoredMs ?? 0);
 
-  let currentHumanizeMs = g.humanizeMs;
-  if (g.id?.includes('tango')) {
-    if (input.role === 'comp' || input.role === 'bass') {
-      currentHumanizeMs = 2;
-    } else if (input.role === 'lead') {
-      currentHumanizeMs = 12;
-    }
-  }
+  const roughness = Math.max(0, Math.min(1, g.roughness ?? 0));
+  const currentHumanizeMs = g.humanizeMs * (1 + roughness * 0.65);
 
   // A human ensemble does not independently jitter every player. There is a
   // shared breath/pocket plus a much smaller player-specific deviation. This
   // keeps the band coherent while avoiding quantized machine-gun alignment.
-  const ensemble = input.authoredTimingOnly ? 0 : noise1D(input.beatInBar / 2, input.ensembleSeed ?? input.seed) * currentHumanizeMs * 0.38;
+  const phraseBeat = input.ensemblePosition ?? input.beatInBar;
+  const ensemble = input.authoredTimingOnly ? 0 : noise1D(phraseBeat / 2, input.ensembleSeed ?? input.seed) * currentHumanizeMs * 0.38;
   let finalMs = ms + ensemble;
   // 3. Limit timing drift for styles whose phrasing depends on fixed placement.
   const tightness =
@@ -211,8 +212,19 @@ export function applyFeel(g: GrooveProfile, input: FeelInput): FeelOutput {
   const humanizeScale = input.authoredTimingOnly ? 0.18 : 1;
 
   // Use low-frequency Cosine-Interpolated noise to modulate timing and velocity curves over bars
-  const smoothDrift = noise1D(input.beatInBar / 4 + (input.seed % 100), 101);
+  const smoothDrift = noise1D(phraseBeat / 4 + (input.seed % 100), 101);
   finalMs += smoothDrift * currentHumanizeMs * tightness * intensityTighten * humanizeScale * 0.5;
+
+  // Mugre and related style-specific playing grain is correlated across a
+  // phrase, with a smaller per-player/attack deviation. This adds a human
+  // push/pull and uneven accent without turning authored rhythms into random
+  // timing or moving the whole band off its pocket.
+  if (roughness > 0 && !input.authoredTimingOnly) {
+    const phrasePush = noise1D(phraseBeat / 1.5, seedOf(input.ensembleSeed ?? input.seed, 611));
+    const attackGrain = rand01(seedOf(input.seed, 613)) - 0.5;
+    const grainMs = currentHumanizeMs * roughness * 2.4 * tightness * intensityTighten;
+    finalMs += phrasePush * grainMs * 0.55 + attackGrain * grainMs * 0.8;
+  }
 
   return {
     offsetBeats: swingBeats,

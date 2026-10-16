@@ -1,0 +1,107 @@
+{
+  "genreId": "cinematic",
+  "reviewed": "2026-10-15",
+  "status": "Six Cinematic styles have five or six linked Apple Music recording candidates each. Native-app listening, useful timecodes, and sonic-match notes are still pending; these candidates are not verified matches.",
+  "source": "Apple Music track and album pages located for comparison. No reference audio downloaded or processed.",
+  "styles": [
+    {
+      "styleId": "cinematic-modern-score",
+      "compare": [
+        "how a short motif grows into a full orchestral statement and then recedes",
+        "piano, string, horn, and synth entrance order and foreground handoffs",
+        "how the low end and timpani add weight only at structural arrivals",
+        "attack definition, orchestral width, depth, and crescendo headroom"
+      ],
+      "recordings": [
+        { "title": "Time", "artist": "Hans Zimmer", "url": "https://music.apple.com/us/song/380350246", "timecodes": [] },
+        { "title": "Flight", "artist": "Hans Zimmer", "url": "https://music.apple.com/us/song/1454398393", "timecodes": [] },
+        { "title": "The Night King", "artist": "Ramin Djawadi", "url": "https://music.apple.com/us/song/1464079003", "timecodes": [] },
+        { "title": "Journey to the Line", "artist": "Hans Zimmer", "url": "https://music.apple.com/us/song/212408687", "timecodes": [] },
+        { "title": "Interstellar (Original Motion Picture Soundtrack) [Expanded Edition]", "artist": "Hans Zimmer", "url": "https://music.apple.com/us/album/interstellar-original-motion-picture-soundtrack-expanded/1533983552", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "cinematic-golden-age",
+      "compare": [
+        "melodic brass fanfare and broad, singing string themes",
+        "orchestral counterlines, tonal movement, and theme-return structure",
+        "timpani rolls and accents at cadences instead of a continuous beat",
+        "natural section balance, room perspective, and the weight of a full symphonic ensemble"
+      ],
+      "recordings": [
+        { "title": "The Sea Hawk: Main Title", "artist": "Erich Wolfgang Korngold", "url": "https://music.apple.com/us/album/main-title/1443464684?i=1443464700", "timecodes": [] },
+        { "title": "The Adventures of Robin Hood (Original Score)", "artist": "Moscow Symphony Orchestra, William Stromberg & Erich Wolfgang Korngold", "url": "https://music.apple.com/us/album/the-adventures-of-robin-hood-original-score/987518874", "timecodes": [] },
+        { "title": "Duel, Victory and Epilogue (Re-record)", "artist": "Erich Wolfgang Korngold, Varujan Kojian & Utah Symphony", "url": "https://music.apple.com/us/song/1443459841", "timecodes": [] },
+        { "title": "Tara's Theme from Gone With the Wind", "artist": "John Williams, Itzhak Perlman & Boston Pops Orchestra", "url": "https://music.apple.com/us/song/250232584", "timecodes": [] },
+        { "title": "Prelude (From Ben Hur)", "artist": "Miklós Rózsa, Richard Muller-Lampertz & Hamburg Concert Orchestra and Chorus", "url": "https://music.apple.com/us/song/1452842657", "timecodes": [] },
+        { "title": "Parade of the Charioteers", "artist": "National Philharmonic Orchestra & Miklós Rózsa", "url": "https://music.apple.com/us/song/1452588675", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "cinematic-minimal-tension",
+      "compare": [
+        "how a narrow repeated cell accumulates tension through register, harmony, and density",
+        "semitone friction and changing layers over a stable pulse",
+        "the use of silence and exposed tones between gradual additions",
+        "controlled crescendo, distortion, and low-frequency restraint"
+      ],
+      "recordings": [
+        { "title": "Metamorphosis: Metamorphosis One", "artist": "Philip Glass", "url": "https://music.apple.com/us/song/267427345", "timecodes": [] },
+        { "title": "Hand Covers Bruise", "artist": "Trent Reznor & Atticus Ross", "url": "https://music.apple.com/us/song/395740925", "timecodes": [] },
+        { "title": "On the Nature of Daylight", "artist": "Max Richter, Louisa Fuller, Natalia Bonner, John Metcalfe, Philip Sheppard & Chris Worsey", "url": "https://music.apple.com/us/song/1480784971", "timecodes": [] },
+        { "title": "First Encounter", "artist": "Jóhann Jóhannsson", "url": "https://music.apple.com/us/song/1440758349", "timecodes": [] },
+        { "title": "Journey to the Line", "artist": "Hans Zimmer", "url": "https://music.apple.com/us/song/212408687", "timecodes": [] },
+        { "title": "Metamorphosis One (piano arrangement)", "artist": "Jeremy Limb", "url": "https://music.apple.com/us/song/510409871", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "cinematic-hybrid",
+      "compare": [
+        "how electronic pulse and sub-bass sit beside acoustic piano, strings, and percussion",
+        "the spacing and transient contrast between programmed impacts and orchestral attacks",
+        "layer dropouts and returns around a recurring piano hook",
+        "saturation, low-end control, stereo placement, and the clarity of the acoustic layer"
+      ],
+      "recordings": [
+        { "title": "Brothers in Arms", "artist": "Junkie XL", "url": "https://music.apple.com/us/song/1454323824", "timecodes": [] },
+        { "title": "Why So Serious?", "artist": "Hans Zimmer & James Newton Howard", "url": "https://music.apple.com/us/song/284530521", "timecodes": [] },
+        { "title": "Ripples in the Sand", "artist": "Hans Zimmer", "url": "https://music.apple.com/us/song/1583651917", "timecodes": [] },
+        { "title": "Dune: Paul's Dream (Live)", "artist": "Hans Zimmer & The Disruptive Collective", "url": "https://music.apple.com/us/song/1653547434", "timecodes": [] },
+        { "title": "Jack Sparrow", "artist": "Hans Zimmer", "url": "https://music.apple.com/us/song/1445882015", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "cinematic-epic",
+      "compare": [
+        "fast low ostinato and brass motif alignment at the chosen pulse",
+        "the contrast between full battle writing and a sustained chorale",
+        "ensemble stops, timpani re-entry, and the size of the final build",
+        "orchestral impact, cymbal and low-frequency headroom, and a clear decay after the climax"
+      ],
+      "recordings": [
+        { "title": "The Battle (From Gladiator Soundtrack)", "artist": "Gavin Greenaway, The Lyndhurst Orchestra & Lisa Gerrard", "url": "https://music.apple.com/us/song/1814423741", "timecodes": [] },
+        { "title": "Now We Are Free", "artist": "Lisa Gerrard, Gavin Greenaway, The Lyndhurst Orchestra & Hans Zimmer", "url": "https://music.apple.com/us/song/1440563274", "timecodes": [] },
+        { "title": "Parade of the Charioteers", "artist": "National Philharmonic Orchestra & Miklós Rózsa", "url": "https://music.apple.com/us/song/1452588675", "timecodes": [] },
+        { "title": "Jack Sparrow", "artist": "Hans Zimmer", "url": "https://music.apple.com/us/song/1445882015", "timecodes": [] },
+        { "title": "The Night King", "artist": "Ramin Djawadi", "url": "https://music.apple.com/us/song/1464079003", "timecodes": [] },
+        { "title": "Interstellar Suite: Part 2, No Time for Caution", "artist": "Hans Zimmer, Eliane Correa, Pedro Eustache, Gan-Ya Ben-Gur Akselrod, Aleksandra Šuklar, Odessa Orchestra & Friends & Gavin Greenaway", "url": "https://music.apple.com/us/song/1777827396", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "cinematic-ambient-score",
+      "compare": [
+        "long-tone phrasing, breath space, and the way a small motif changes without a drum pulse",
+        "the blend of synthetic lead, acoustic strings, cello weight, and occasional piano replies",
+        "slow harmonic motion and the timing of texture entries and exits",
+        "reverb depth, soft attack clarity, and a dissolve that does not force a climax"
+      ],
+      "recordings": [
+        { "title": "Hand Covers Bruise", "artist": "Trent Reznor & Atticus Ross", "url": "https://music.apple.com/us/song/395740925", "timecodes": [] },
+        { "title": "On the Nature of Daylight", "artist": "Max Richter, Louisa Fuller, Natalia Bonner, John Metcalfe, Philip Sheppard & Chris Worsey", "url": "https://music.apple.com/us/song/1480784971", "timecodes": [] },
+        { "title": "First Encounter", "artist": "Jóhann Jóhannsson", "url": "https://music.apple.com/us/song/1440758349", "timecodes": [] },
+        { "title": "Journey to the Line", "artist": "Hans Zimmer", "url": "https://music.apple.com/us/song/212408687", "timecodes": [] },
+        { "title": "Metamorphosis: Metamorphosis One", "artist": "Philip Glass", "url": "https://music.apple.com/us/song/267427345", "timecodes": [] }
+      ]
+    }
+  ]
+}

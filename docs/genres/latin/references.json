@@ -1,0 +1,213 @@
+{
+  "genreId": "latin",
+  "reviewed": "2026-10-15",
+  "status": "Five or six linked Apple Music candidates are collected for all 12 Latin styles. The native Music app was locked during this pass, so listening comparisons and timecodes remain pending; these are candidates, not verified sonic matches.",
+  "source": "Apple Music track and album pages located as listening candidates. No reference audio downloaded or processed.",
+  "styles": [
+    {
+      "styleId": "latin-cumbia",
+      "compare": [
+        "how the bass and low percussion establish the dance pulse without flattening the melodic groove",
+        "the interlocking motion of percussion, plucked strings, and melodic responses",
+        "lead phrase length, vocal or instrumental call-and-response, and the spaces between phrases",
+        "how arrangement density and instrumental color change between verse and refrain",
+        "recorded attack, low-end weight, stereo depth, and ensemble blend"
+      ],
+      "recordings": [
+        { "title": "El Pescador", "artist": "Totó La Momposina", "url": "https://music.apple.com/us/song/1653292968", "timecodes": [] },
+        { "title": "Yo Me Llamo Cumbia", "artist": "Totó La Momposina", "url": "https://music.apple.com/us/song/379661183", "timecodes": [] },
+        { "title": "La Cumbia Colombiana", "artist": "Lucho Bermúdez", "url": "https://music.apple.com/us/album/la-cumbia-colombiana/730027187?i=730027265", "timecodes": [] },
+        { "title": "Cumbia Cienaguera", "artist": "Alberto Pacheco", "url": "https://music.apple.com/us/album/cumbia-cienaguera/6785515872?i=6785516128", "timecodes": [] },
+        { "title": "Ave Pa’ Ve’", "artist": "Gabriel Romero", "url": "https://music.apple.com/us/album/ave-pa-ve/283725825?i=283726045", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "latin-merengue",
+      "compare": [
+        "the fast duple dance drive and the interplay of tambora, güira, bass, and piano",
+        "how brass or vocal phrases answer the groove and signal transitions",
+        "the difference between a steady underlying pulse and the busier percussion surface",
+        "phrase breaks, pickups, and refrain lift",
+        "recorded ensemble punch and the balance between percussion, bass, and bright melodic parts"
+      ],
+      "recordings": [
+        { "title": "Pídeme (Merengue)", "artist": "Milly Quezada", "url": "https://music.apple.com/us/song/321481387", "timecodes": [] },
+        { "title": "O Tu O Yo (Merengue)", "artist": "Johnny Ventura", "url": "https://music.apple.com/us/song/307225792", "timecodes": [] },
+        { "title": "El Turun Tun Tun", "artist": "Johnny Ventura", "url": "https://music.apple.com/us/song/1689204659", "timecodes": [] },
+        { "title": "Fiesta", "artist": "Wilfrido Vargas y su Orquesta", "url": "https://music.apple.com/us/song/1055271784", "timecodes": [] },
+        { "title": "Que Viva el Merengue", "artist": "Fernando Villalona", "url": "https://music.apple.com/us/song/1654738311", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "latin-vallenato",
+      "compare": [
+        "the accordion lead’s rhythmic attack, ornamentation, and phrase endings",
+        "bass and caja support against the guacharaca subdivision",
+        "vocal phrase shapes and instrumental answers between lines",
+        "how the arrangement shifts from verse storytelling into a more open refrain or parranda passage",
+        "the contrast between intimate acoustic texture and amplified ensemble weight"
+      ],
+      "recordings": [
+        { "title": "La Gota Fría", "artist": "Carlos Vives", "url": "https://music.apple.com/us/song/1056536346", "timecodes": [] },
+        { "title": "Diana", "artist": "Diomedes Díaz", "url": "https://music.apple.com/us/song/267955193", "timecodes": [] },
+        { "title": "Suena un Vallenato", "artist": "Jorge Celedón & Sergio Luis Rodríguez", "url": "https://music.apple.com/us/song/1513031362", "timecodes": [] },
+        { "title": "Ayúdeme Compadre", "artist": "Poncho Zuleta, Diomedes Díaz & Juancho Rois", "url": "https://music.apple.com/us/song/1527779592", "timecodes": [] },
+        { "title": "Compadre", "artist": "Los inquietos del vallenato", "url": "https://music.apple.com/us/song/1817217833", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "latin-bolero",
+      "compare": [
+        "the flexible vocal line against the gently articulated guitar or piano accompaniment",
+        "bass motion and percussion support that leaves room for the lyric phrase",
+        "how trio voices, requinto, or orchestral color answer and frame the singer",
+        "rubato, held cadences, and breath between vocal phrases",
+        "warmth, presence, and depth without burying the intimate lead"
+      ],
+      "recordings": [
+        { "title": "Sin Ti (Bolero)", "artist": "Los Panchos", "url": "https://music.apple.com/us/song/330801420", "timecodes": [] },
+        { "title": "Sombras", "artist": "Javier Solís", "url": "https://music.apple.com/us/song/322273008", "timecodes": [] },
+        { "title": "Miénteme", "artist": "Olga Guillot", "url": "https://music.apple.com/us/song/1061075082", "timecodes": [] },
+        { "title": "Historia De Un Amor (Bolero)", "artist": "Los Tres Diamantes", "url": "https://music.apple.com/us/song/324660557", "timecodes": [] },
+        { "title": "Historia de un amor", "artist": "Eydie Gorme & Los Panchos", "url": "https://music.apple.com/us/song/1142431527", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "latin-chicha",
+      "compare": [
+        "the relationship between electric-guitar melodic figures and the cumbia-derived dance pulse",
+        "the guitar tone, sustain, bends, and melodic fills across vocal gaps",
+        "bass and percussion interlock without turning the groove into a generic rock backbeat",
+        "how the vocal melody and instrumental hook trade foreground space",
+        "raw ensemble character, amplified texture, and balance between guitar edge and low-end weight"
+      ],
+      "recordings": [
+        { "title": "Kung Fu Chino", "artist": "Los Mirlos", "url": "https://music.apple.com/us/song/1714508882", "timecodes": [] },
+        { "title": "La Incógnita", "artist": "Juaneco Y Su Combo", "url": "https://music.apple.com/us/song/1436135197", "timecodes": [] },
+        { "title": "Otro Dueño", "artist": "Chacalón y la Nueva Crema", "url": "https://music.apple.com/us/song/1093454603", "timecodes": [] },
+        { "title": "Cumbia Samba", "artist": "Juaneco Y Su Combo", "url": "https://music.apple.com/us/song/1463692759", "timecodes": [] },
+        { "title": "La Ladrona", "artist": "Los Mirlos", "url": "https://music.apple.com/us/song/276002590", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "latin-sonidera",
+      "compare": [
+        "the regular cumbia dance pattern beneath the brighter sonidero keyboard or electronic hooks",
+        "how güiro, percussion, bass, and keys interlock rather than double the same accents",
+        "the role of spoken or sung calls and short melodic responses",
+        "section builds, stops, and transitions that keep the floor energy moving",
+        "the placement of low end, kick, and bright melodic parts in a dense dance mix"
+      ],
+      "recordings": [
+        { "title": "Cumbia Sonidera", "artist": "Grupo Sonador", "url": "https://music.apple.com/us/song/1090130808", "timecodes": [] },
+        { "title": "Cumbia Sonidera", "artist": "Grupo Karo's", "url": "https://music.apple.com/us/song/160305722", "timecodes": [] },
+        { "title": "Amor Regresa", "artist": "Los Askis", "url": "https://music.apple.com/us/song/1802657119", "timecodes": [] },
+        { "title": "Cumbia Sonidera", "artist": "Sonora Everest", "url": "https://music.apple.com/us/song/918364989", "timecodes": [] },
+        { "title": "Cumbia Sonidera", "artist": "Los HB", "url": "https://music.apple.com/us/song/1273593165", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "latin-cumbia-villera",
+      "compare": [
+        "the insistent keyboard hook and repetitive dance bass against the sharper güiro or percussion subdivision",
+        "the vocal’s conversational delivery, callouts, and phrase endings",
+        "how sparse accompaniment leaves room for the hook and lyrics",
+        "section breaks, pickups, and crowd-facing changes in intensity",
+        "the gritty, direct production balance and how kick, bass, keyboard, and voice remain distinct"
+      ],
+      "recordings": [
+        { "title": "Duraznito", "artist": "Los Pibes Chorros", "url": "https://music.apple.com/us/song/376501760", "timecodes": [] },
+        { "title": "Pibe Cantina", "artist": "Yerba Brava", "url": "https://music.apple.com/us/song/1617670661", "timecodes": [] },
+        { "title": "Se Te Ve la Tanga", "artist": "Damas Gratis", "url": "https://music.apple.com/us/song/1202346897", "timecodes": [] },
+        { "title": "Cumbia Villera", "artist": "Yerba Brava", "url": "https://music.apple.com/us/song/293307652", "timecodes": [] },
+        { "title": "La cumbia de los vagos", "artist": "made famous by flor de piedra", "url": "https://music.apple.com/us/song/398846533", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "latin-electrocumbia",
+      "compare": [
+        "the cumbia percussion foundation against a programmed kick and electronic bass",
+        "synth hooks, vocal phrases, and instrumental answers across sections",
+        "how electronic layers build and release without masking the groove",
+        "the timing and weight of kick, bass, güiro, and percussion",
+        "modern production width, transient clarity, and transition effects"
+      ],
+      "recordings": [
+        { "title": "Oye Mujer", "artist": "Raymix", "url": "https://music.apple.com/us/song/1594420825", "timecodes": [] },
+        { "title": "Tú Eres La Razón (Electrocumbia Remake)", "artist": "Raymix", "url": "https://music.apple.com/us/song/1594420830", "timecodes": [] },
+        { "title": "Primer Beso", "artist": "Raymix", "url": "https://music.apple.com/us/song/1575828085", "timecodes": [] },
+        { "title": "Tú Y Yo", "artist": "Raymix & Paulina Rubio", "url": "https://music.apple.com/us/song/1588121965", "timecodes": [] },
+        { "title": "Cumbia del Tren", "artist": "Dj cordero Electrocumbia", "url": "https://music.apple.com/us/song/1604625006", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "latin-latin-funk",
+      "compare": [
+        "the funk backbeat and bass pocket against clave-aware Latin percussion",
+        "how congas, timbales, and drum kit fill separate rhythmic roles",
+        "piano, guitar, and horn stabs and their syncopated placement",
+        "vocal or instrumental call-and-response and solo handoffs",
+        "band punch and low-end clarity without sacrificing percussion detail"
+      ],
+      "recordings": [
+        { "title": "Gypsy Woman", "artist": "Joe Bataan", "url": "https://music.apple.com/us/song/1774135127", "timecodes": [] },
+        { "title": "Acid", "artist": "Ray Barretto", "url": "https://music.apple.com/us/song/1465815466", "timecodes": [] },
+        { "title": "Spanish Grease", "artist": "Willie Bobo", "url": "https://music.apple.com/us/song/1434902168", "timecodes": [] },
+        { "title": "Watermelon Man", "artist": "Mongo Santamaria", "url": "https://music.apple.com/us/song/1443147044", "timecodes": [] },
+        { "title": "Ordinary Guy", "artist": "Joe Bataan", "url": "https://music.apple.com/us/song/1464957945", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "latin-latin-pop",
+      "compare": [
+        "the vocal hook’s contour, phrasing, and relationship to the instrumental response",
+        "how acoustic strumming, percussion, and bass contribute separate rhythmic layers",
+        "section contrast, chorus lift, and instrumental handoffs",
+        "the mix balance between voice, guitars, percussion, and bright production details",
+        "how Latin rhythmic identity stays present as the arrangement expands into pop production"
+      ],
+      "recordings": [
+        { "title": "La Camisa Negra", "artist": "Juanes", "url": "https://music.apple.com/us/song/1614000088", "timecodes": [] },
+        { "title": "Livin' la Vida Loca", "artist": "Ricky Martin", "url": "https://music.apple.com/us/song/1568797776", "timecodes": [] },
+        { "title": "Hips Don't Lie (feat. Wyclef Jean)", "artist": "Shakira", "url": "https://music.apple.com/us/song/1626143093", "timecodes": [] },
+        { "title": "Conga", "artist": "Gloria Estefan & Miami Sound Machine", "url": "https://music.apple.com/us/song/331127883", "timecodes": [] },
+        { "title": "A Dios Le Pido", "artist": "Juanes", "url": "https://music.apple.com/us/song/1730092243", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "latin-tropical",
+      "compare": [
+        "how bass, percussion, piano, and horns combine for a buoyant dance groove",
+        "the relationship between clave or subdivision patterns and the larger vocal phrasing",
+        "horn responses, vocal calls, and instrumental breaks",
+        "changes in ensemble density and rhythmic intensity across the form",
+        "recorded percussion detail, low-end impact, and brass presence"
+      ],
+      "recordings": [
+        { "title": "Rebelion", "artist": "Joe Arroyo", "url": "https://music.apple.com/us/song/285476495", "timecodes": [] },
+        { "title": "Quimbara (Remastered 2024)", "artist": "Celia Cruz & Johnny Pacheco", "url": "https://music.apple.com/us/song/1769530331", "timecodes": [] },
+        { "title": "Vivir Mi Vida", "artist": "Marc Anthony", "url": "https://music.apple.com/us/song/1059895878", "timecodes": [] },
+        { "title": "La Bilirrubina", "artist": "Juan Luis Guerra", "url": "https://music.apple.com/us/song/1560870008", "timecodes": [] },
+        { "title": "El Preso", "artist": "Fruko y Sus Tesos", "url": "https://music.apple.com/us/song/220361483", "timecodes": [] },
+        { "title": "Llorarás", "artist": "Oscar D'León", "url": "https://music.apple.com/us/song/1720296073", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "latin-latin-fusion",
+      "compare": [
+        "how Latin percussion maintains its own interlocking language under rock, jazz, or electronic layers",
+        "instrument roles trading between groove, riff, solo, and response",
+        "contrasts in meter feel, harmonic color, and phrase length across sections",
+        "the way a hybrid arrangement introduces and resolves each stylistic layer",
+        "mix translation between a rhythm section’s punch, percussion detail, and foreground lead"
+      ],
+      "recordings": [
+        { "title": "Oye Como Va", "artist": "Santana", "url": "https://music.apple.com/us/song/253462682", "timecodes": [] },
+        { "title": "Fuego (Maga Bo Remix)", "artist": "Bomba Estéreo", "url": "https://music.apple.com/us/song/1514424047", "timecodes": [] },
+        { "title": "Florecita Rockera", "artist": "Aterciopelados", "url": "https://music.apple.com/us/song/536786132", "timecodes": [] },
+        { "title": "Acid", "artist": "Ray Barretto", "url": "https://music.apple.com/us/song/1465815466", "timecodes": [] },
+        { "title": "Gypsy Woman", "artist": "Joe Bataan", "url": "https://music.apple.com/us/song/1774135127", "timecodes": [] }
+      ]
+    }
+  ]
+}

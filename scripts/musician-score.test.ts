@@ -11,8 +11,9 @@ import { getStyle } from '../src/engine/style/registry';
 import { sliceBarNative } from '../src/engine/sheet/grid';
 import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
 import { velocityForEnergy } from '../src/engine/band/velocity';
-import { grooveVelocityMultiplier, grooveForStyle } from '../src/engine/band/groove';
+import { applyFeel, grooveVelocityMultiplier, grooveForStyle } from '../src/engine/band/groove';
 import { roleInteractionMultiplier } from '../src/engine/band/interpretBand';
+import { getPerformanceGrammar } from '../src/engine/band/performanceGrammar';
 import { resolveStyle } from '../src/engine/style/resolve';
 import type { MusicalPattern } from '../src/types';
 
@@ -61,6 +62,41 @@ test('phrase dynamics share a stable band breath with small player-specific expr
   assert.ok(Math.abs(piano - bass) < 0.08, `${piano} and ${bass} should breathe together`);
   assert.equal(grooveVelocityMultiplier(groove, { ...common, role: 'comp', seed: 104 }), piano,
     'phrase breathing stays deterministic for playback and export');
+});
+
+test('performers enrich beginner guides with authored style phrasing and keep intentional space', () => {
+  const pugliese = resolveStyle({ genreId: 'tango', styleId: 'tango-pugliese' });
+  const electrotango = resolveStyle({ genreId: 'tango', styleId: 'tango-electrotango-gotan' });
+  assert.ok((pugliese.rhythm.grooveMechanics?.roughness ?? 0) > (electrotango.rhythm.grooveMechanics?.roughness ?? 0),
+    'dramatic acoustic tango gets more mugre than the loop-led electronic style');
+  const offsetSpan = (style: typeof pugliese) => {
+    const groove = grooveForStyle(style);
+    const offsets = Array.from({ length: 32 }, (_, i) => applyFeel(groove, {
+      beatInBar: i % 4, beatsPerBar: 4, role: 'lead', accent: i % 4 === 0 ? .9 : .5,
+      seed: 100 + i, bpm: 120, intensity: .8, ensembleSeed: 17, ensemblePosition: i * .5,
+    }).offsetMs);
+    return Math.max(...offsets) - Math.min(...offsets);
+  };
+  assert.ok(offsetSpan(pugliese) > offsetSpan(electrotango),
+    'mugre adds a bounded phrase and attack grain instead of a generic shuffle');
+
+  const expressive = getPerformanceGrammar(resolveStyle({ genreId: 'jazz', styleId: 'jazz-hard-bop' }));
+  const spacious = getPerformanceGrammar(resolveStyle({ genreId: 'classical', styleId: 'classical-minimalist' }));
+  assert.ok(expressive.allowDerivedAttacks > .28 && expressive.allowDerivedPitch > .2,
+    'a style with an authored rapid-run language can embellish a beginner cell');
+  assert.ok(expressive.subdivisionVocabulary?.lead?.includes(8),
+    'rapid-run styles permit their authored finer connection without imposing it on every genre');
+  assert.equal(spacious.allowDerivedAttacks, 0, 'minimalist cells keep their intentional space');
+
+  const hardBop = compileWholeSong(createCatalogSong('jazz-hard-bop_song'));
+  assert.ok(hardBop.notes.some(note => note.soundContext?.role === 'lead' && note.originCode === 1),
+    'the player adds a quiet style-authorized connection inside short gaps between the written guide attacks');
+
+  const canaro = compileWholeSong(createCatalogSong('tango-canaro_song'));
+  const lead = canaro.notes.filter(note => note.soundContext?.role === 'lead');
+  assert.ok(lead.some(note => note.originCode === 1), 'the rendered player adds a small connection in a real melodic gap');
+  assert.ok(new Set(lead.map(note => note.gestureCode)).size > 3,
+    'generic beginner articulations are interpreted with the style’s playable touch vocabulary');
 });
 
 test('band interaction models balance roles without flattening counterpoint', () => {
@@ -118,7 +154,7 @@ test('reference score sections begin with their authored instrument cells', () =
   };
 
   verify('flamenco-sevillanas', 'cajon', 'link', 'Cajón link remate');
-  verify('cinematic-modern-score', 'synth', 'ostinato', 'Synth Resolution');
+  verify('cinematic-modern-score', 'synth', 'ostinato', 'Synth ostinato');
   verify('cinematic-modern-score', 'synth', 'build', 'Synth Resolution');
   verify('pop-power-pop', 'synth', 'chorus', 'Synth swell');
   verify('tango-chacarera-crossover', 'violin', 'interlude', 'Violin interlude');
@@ -144,7 +180,8 @@ test('catalog songs do not invent support instruments outside the authored style
     const song = createCatalogSong(`${styleId}_song`);
     const authoredIds = new Set(getStyle(styleId)!.arrangement!.ensemble!.flatMap(part => part.instrumentIds));
     const songIds = new Set(song.tracks.map(track => track.instrumentId!));
-    assert.deepEqual(songIds, authoredIds, `${styleId} keeps its complete authored roster`);
+    const expectedIds = new Set([...authoredIds].filter(instrumentId => instrumentId !== 'voice'));
+    assert.deepEqual(songIds, expectedIds, `${styleId} keeps its assigned roster without an unrequested vowel lead`);
     assert.equal(Object.values(song.lockedPatternAssignments ?? {}).flatMap(Object.values)
       .some(patternId => PATTERNS_BY_ID[patternId]?.sourceLevel === 'sample-support'), false);
   }

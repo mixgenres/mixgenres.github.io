@@ -192,6 +192,8 @@ export interface MusicalPattern {
   canCrossRole?: boolean;
   /** Engine must keep this pattern's part when thinning an arrangement. */
   essential?: boolean;
+  /** Keep authored attack placement together for cues shared by an ensemble. */
+  timingLock?: 'ensemble';
 
   meter: string; // e.g. '4/4', '3/4', '6/8', '12/8'
   cycleLength: number; // in measures (usually 1 or 2)
@@ -229,6 +231,8 @@ export interface MusicalPattern {
   pedagogicalStudy?: 'reduction' | 'answer' | 'technique' | 'variation';
   /** A source-faithful practice variation that may also develop a song phrase. */
   arrangementVariation?: boolean;
+  /** Full style cell behind a reduction or technique drill; song examples use the full cell. */
+  pedagogicalSourcePatternId?: string;
   weight?: number;
   enabled?: boolean;
 }

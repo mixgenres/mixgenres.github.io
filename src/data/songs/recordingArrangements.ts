@@ -14,14 +14,21 @@ export interface RecordingArrangement {
   /** Restrict the existing style ensemble, retaining each part's authored role. */
   instruments?: string[];
   lead?: string;
-  /** Explicit section personnel; omitted sections retain the complete ensemble. */
+  /** Section (or `kind#N`) -> the part students should follow as the lead. */
+  sectionLeads?: Record<string, string>;
+  /** Explicit section personnel; omitted sections retain the complete ensemble. Keys may use `kind#N` to vary one occurrence. */
   sectionInstruments?: Record<string, string[]>;
+  /** Sections where the sample has a sung or spoken lead; other sections stay instrumental. */
+  vocalSections?: string[];
+  /** Section (or `kind#N`) -> featured instrument. */
   solos?: Record<string, string>;
-  /** Instrument (or instrument:role) -> style-owned cell shortName per section. */
+  /** Section (or `kind#N`) -> the featured passage's accompaniment mode. */
+  soloModes?: Record<string, 'accompanied' | 'unaccompanied' | 'trading'>;
+  /** Instrument (or instrument:role) -> style-owned cell shortName per section. Keys may use `kind#N` (one-based occurrence) to vary a specific return while inheriting the kind-level assignments. */
   patternAssignments?: Record<string, Record<string, string>>;
   /** Section-local tempo changes for forms whose named sections carry a tempo lift. */
   sectionBpm?: Record<string, number>;
-  /** Preserve authored cues in samples when an automatic phrase swap would change the gesture. */
+  /** Preserve authored cues in samples when an automatic phrase swap would change the gesture. Supports the same optional `kind#N` occurrence key. */
   lockPatternAssignments?: Record<string, string[]>;
   note: string;
   source?: string;
@@ -219,7 +226,15 @@ const DETAILED_RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = {
       solo: ['trumpet','guitar','clavinet','bass','drums'] } }),
   'funk::jazz-funk': song(100, 'intro:16:2,A:32:3,B:16:4,solo:64:3,B:32:4,solo:64:4,A:32:5,outro:16:2', 'Long bass/synth ostinato with keyboard features and a contrasting middle.', loop(['Bbm7','Eb7']), { solos: { solo: 'synth' } }),
   'funk::minneapolis': song(112, 'intro:4:2,verse:16:2,chorus:8:3,verse:16:2,chorus:8:4,bridge:8:2,chorus:16:4,outro:8:2', 'Lean guitar/drum texture; avoid filling the empty low-end space.', loop(['A7','A7','D7','A7','E7','D7','A7','E7']), { instruments: ['voice','guitar','synth','drums'] }),
-  'jazz::modal': song(136, 'intro:16:1,head:32:3,solo:64:3,solo:64:4,solo:64:3,head:32:3,tag:8:1', '32-bar AABA modal choruses: D Dorian, eight bars up a semitone, return.', { intro: ['Dm7'], head: [...Array(16).fill('Dm7'),...Array(8).fill('Ebm7'),...Array(8).fill('Dm7')], solo: [...Array(16).fill('Dm7'),...Array(8).fill('Ebm7'),...Array(8).fill('Dm7')], tag: ['Dm7'] }, { solos: { solo: 'trumpet' } }),
+  'jazz::modal': song(136, 'intro:16:1,head:32:3,solo:64:3,solo:64:4,solo:64:3,head:32:3,tag:8:1', '32-bar AABA modal choruses: D Dorian, eight bars up a semitone, return. The bass states a sparse four-bar motif under the heads, answers more actively beneath the second solo, then returns to the motif.', { intro: ['Dm7'], head: [...Array(16).fill('Dm7'),...Array(8).fill('Ebm7'),...Array(8).fill('Dm7')], solo: [...Array(16).fill('Dm7'),...Array(8).fill('Ebm7'),...Array(8).fill('Dm7')], tag: ['Dm7'] }, { solos: { solo: 'trumpet' }, patternAssignments: {
+    intro: { 'upright-bass': 'Low anchor' },
+    head: { 'upright-bass': 'Dorian bass motif' },
+    'solo#1': { 'upright-bass': 'Dorian bass motif' },
+    'solo#2': { 'upright-bass': 'Modal bass answer' },
+    'solo#3': { 'upright-bass': 'Dorian bass motif' },
+    'head#2': { 'upright-bass': 'Modal bass answer' },
+    tag: { 'upright-bass': 'Low anchor' },
+  } }),
   'jazz::hard-bop': song(126, 'intro:8:2,head:32:3,trumpet-solo:32:3,tenor-sax-solo:32:4,trumpet-trading:4:4,tenor-sax-trading:4:4,head:32:5,tag:8:2', 'Hard-bop score: state the blues head over ride and walking bass, give trumpet and tenor sax separate choruses, trade four-bar phrases over the rhythm section, then bring the head back.', undefined, {
     solos: {
       'trumpet-solo': 'trumpet', 'tenor-sax-solo': 'tenor-sax',
@@ -461,6 +476,55 @@ const DETAILED_RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = {
   'weird::process-generative': song(60, 'opening:32:1,evolution:128:2,texture-shift:128:2,evolution:128:3,dissolve:32:1', 'Long-form process adaptation using the existing generative pattern vocabulary.'),
   'indian-classical::instrumental-gat': song(72, 'alap:32:1,jod:32:2,jhala:24:3,gat:64:3,solo:64:4,jhala:32:5,cadence:8:2,tihai:4:5,sam:1:5', 'Sitar development moves from the open alap into a pulsed gat and faster jhala. A four-bar study closes with three matching sitar and tabla phrases, then a shared tonic landing on sam. The fixed-grid timing makes the form playable; it is not a transcription.'),
   'indian-classical::dhrupad': song(48, 'alap:64:1,jor:48:2,nom-tom:32:3,dhrupad:64:3,cadence:8:1', 'Drone persists through unmetered voice development; pakhawaj enters only with the composition.'),
+  'steppe::sygyt': song(60, 'drone:8:1,whistle:24:2,variation:24:3,whistle-return:24:2,cadence:8:1', 'Sygyt learning score: keep the morin-khuur drone exposed at the opening, bring in the vocal guide for a two-bar overtone phrase, change its contour for the variation and returning whistle, then release through a short descending cadence. The GM Voice Oohs patch is only a pitch guide; it does not reproduce Tuvan throat-singing timbre, and these cells are not a transcription.', {
+    drone: ['D5'], whistle: ['D5','D5','D5'], variation: ['D5','D5','D5'], 'whistle-return': ['D5','D5','D5'], cadence: ['D5'],
+  }, {
+    instruments: ['voice','morin-khuur'],
+    vocalSections: ['whistle','variation','whistle-return','cadence'],
+    sectionInstruments: {
+      drone: ['morin-khuur'],
+      whistle: ['voice','morin-khuur'],
+      variation: ['voice','morin-khuur'],
+      'whistle-return': ['voice','morin-khuur'],
+      cadence: ['voice','morin-khuur'],
+    },
+    patternAssignments: {
+      whistle: { voice: 'Sygyt overtone phrase' },
+      variation: { voice: 'Sygyt overtone variation' },
+      'whistle-return': { voice: 'Sygyt overtone phrase' },
+      cadence: { voice: 'Sygyt release' },
+    },
+    lockPatternAssignments: {
+      whistle: ['voice'], variation: ['voice'], 'whistle-return': ['voice'], cadence: ['voice'],
+    },
+  }),
+  'steppe::kargyraa': song(48, 'drone:8:1,phrase:12:2,response:12:3,return:8:2,cadence:4:1', 'Kargyraa learning score: establish the low morin-khuur drone, let a restrained low-register voice guide state and return to the phrase, and give the bowed instrument its own response before the close. Keep the guide sparse and low; GM Voice Oohs marks pitch and timing but does not reproduce the vocal subharmonics, roughness, or changing resonance. This is a playing study, not a transcription.', {
+    _: ['D5'],
+  }, {
+    instruments: ['voice','morin-khuur'],
+    vocalSections: ['phrase','return','cadence'],
+    sectionInstruments: {
+      drone: ['morin-khuur'],
+      phrase: ['voice','morin-khuur'],
+      response: ['morin-khuur'],
+      return: ['voice','morin-khuur'],
+      cadence: ['voice','morin-khuur'],
+    },
+    patternAssignments: {
+      drone: { 'morin-khuur': 'Low morin drone' },
+      phrase: { voice: 'Kargyraa low phrase', 'morin-khuur': 'Low morin drone' },
+      response: { 'morin-khuur': 'Morin khuur answer' },
+      return: { voice: 'Kargyraa low variation', 'morin-khuur': 'morin khuur reply' },
+      cadence: { voice: 'Kargyraa close', 'morin-khuur': 'Low morin drone' },
+    },
+    lockPatternAssignments: {
+      drone: ['morin-khuur'],
+      phrase: ['voice','morin-khuur'],
+      response: ['morin-khuur'],
+      return: ['voice','morin-khuur'],
+      cadence: ['voice','morin-khuur'],
+    },
+  }),
   'gamelan::javanese': song(64, 'buka:4:1,main-cycle:16:3,irama-change:1:2,irama-II:24:3,main-cycle:16:4,suwuk:1:1', 'Javanese teaching score: the kendang signals an irama shift, the balungan opens into a slower pulse while bonang fills four subdivisions per note, then the main pulse returns before a single sustained suwuk close. The fixed grid demonstrates ensemble roles; it is not a transcription.', undefined, {
     source: 'https://academic.oup.com/book/35097/chapter-abstract/299163245' }) };
 
@@ -496,7 +560,104 @@ const bachataModernInstrumentalParts = ['requinto','guitar','synth','bass','bong
 const bachataUrbanInstrumentalParts = ['requinto','guitar','synth','bongos','guira','drums'];
 const bachataInstrumentalSections = (parts: string[], ...sections: string[]) =>
   Object.fromEntries(sections.map(section => [section, parts]));
-const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangement, 'instruments' | 'lead' | 'patternAssignments' | 'sectionInstruments' | 'solos' | 'lockPatternAssignments' | 'sectionBpm' | 'note' | 'source'>>> = {
+const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangement, 'instruments' | 'lead' | 'sectionLeads' | 'patternAssignments' | 'sectionInstruments' | 'solos' | 'soloModes' | 'lockPatternAssignments' | 'sectionBpm' | 'note' | 'source'>>> = {
+  'blues::piedmont': {
+    note: 'Piedmont fingerstyle study: keep the alternating thumb and syncopated treble together through the A strain, shift the treble response for B, then let the guitar answer its own solo phrase before the theme returns. The score teaches a local playing pattern, not a transcription.',
+    patternAssignments: {
+      intro: { guitar: 'Guitar accompaniment' },
+      'A#1': { guitar: 'Guitar accompaniment' },
+      B: { guitar: 'Guitar variation' },
+      'A#2': { guitar: 'Guitar accompaniment' },
+      solo: { guitar: 'Guitar reply' },
+      'A#3': { guitar: 'Guitar variation' },
+      coda: { guitar: 'Guitar accompaniment' },
+    },
+    lockPatternAssignments: {
+      intro: ['guitar'], 'A#1': ['guitar'], B: ['guitar'], 'A#2': ['guitar'],
+      solo: ['guitar'], 'A#3': ['guitar'], coda: ['guitar'],
+    },
+  },
+  'arabic::instrumental-maqam': {
+    patternAssignments: {
+      exploration: { oud: 'Oud variation' },
+      'upper-register': { oud: 'Oud reply' },
+      modulation: { oud: 'Oud variation' },
+      return: { oud: 'Oud reply' } } },
+  'indian-classical::dhrupad': {
+    patternAssignments: {
+      jor: { 'rudra-veena': 'rudra veena variation' },
+      'nom-tom': { 'rudra-veena': 'rudra veena reply' },
+      dhrupad: { 'rudra-veena': 'rudra veena variation' },
+      cadence: { 'rudra-veena': 'rudra veena reply' } } },
+  'korean::pansori': {
+    patternAssignments: {
+      jinyangjo: { voice: 'Pansori Vocal' },
+      'narration#2': { voice: 'Vocal reply' },
+      jungmori: { voice: 'Vocal variation' },
+      jungjungmori: { voice: 'Vocal reply' },
+      jajinmori: { voice: 'Vocal variation' },
+      cadence: { voice: 'Vocal reply' } } },
+  'korean::samulnori': {
+    patternAssignments: {
+      opening: { gongs: 'Gongs basics' },
+      youngnam: { gongs: 'Gongs groove' },
+      honam: { gongs: 'Gongs variation' },
+      jungbu: { gongs: 'Gongs reply' },
+      exchange: { gongs: 'Gongs variation' },
+      climax: { gongs: 'Gongs roll' },
+      cadence: { gongs: 'Gongs basics' } } },
+  'persian::dastgah': {
+    instruments: ['voice','tar','santur','tombak'],
+    note: 'Dastgah Shur learning score: introduce the measured tar and santur, bring the voice in for a shaped daramad line, leave a tar-and-santur answer, then expose an unaccompanied avaz and tar chaharmezrab. The third verse returns instrumentally before a shared forud. The vowel patch is a restrained pitch guide, not a recorded singer.',
+    sectionLeads: { prelude: 'tar', verse: 'voice', response: 'tar', 'verse#2': 'voice', solo: 'tar', 'verse#3': 'tar', cadence: 'tar' },
+    sectionInstruments: {
+      prelude: ['tar','santur','tombak'],
+      verse: ['voice','tar','santur','tombak'],
+      response: ['tar','santur','tombak'],
+      'verse#2': ['voice'],
+      solo: ['tar'],
+      'verse#3': ['tar','santur','tombak'],
+      cadence: ['tar','santur','tombak'] },
+    solos: { 'verse#2': 'voice', solo: 'tar' },
+    soloModes: { 'verse#2': 'unaccompanied', solo: 'unaccompanied' },
+    patternAssignments: {
+      prelude: { tar: 'Tar reply', santur: 'Santur answer', tombak: 'Tombak cycle' },
+      verse: { voice: 'Vocal breath line', tar: 'Tar reply', santur: 'Santur answer', tombak: 'Tombak cycle' },
+      response: { tar: 'Tar reply', santur: 'santur reply', tombak: 'tombak reply' },
+      'verse#2': { voice: 'Vocal variation' },
+      solo: { tar: 'Tar chaharmezrab' },
+      'verse#3': { tar: 'Tar Phrase', santur: 'santur variation', tombak: 'tombak variation' },
+      cadence: { tar: 'Tar reply', santur: 'Santur answer', tombak: 'Tombak cycle' } },
+    lockPatternAssignments: {
+      prelude: ['tar','santur','tombak'], verse: ['voice','tar','santur','tombak'], response: ['tar','santur','tombak'],
+      'verse#2': ['voice'], solo: ['tar'], 'verse#3': ['tar','santur','tombak'], cadence: ['tar','santur','tombak'] } },
+  'persian::persian-instrumental-ensemble': {
+    lead: 'tar',
+    instruments: ['tar','santur','tombak'],
+    note: 'Persian instrumental ensemble study: open with the measured tar pishdaramad and quiet santur responses, then raise the tar into its gushe line. Clear santur and tombak for the unaccompanied chaharmezrab, restore the ensemble for a changed development phrase, and resolve together through forud. These are local style studies, not a transcription.',
+    sectionInstruments: {
+      prelude: ['tar','santur','tombak'],
+      theme: ['tar','santur','tombak'],
+      solo: ['tar'],
+      development: ['tar','santur','tombak'],
+      coda: ['tar','santur','tombak'] },
+    patternAssignments: {
+      prelude: { tar: 'Measured opening', santur: 'Santur reply', tombak: 'Tombak measured cycle' },
+      theme: { tar: 'Tar gushe phrase', santur: 'Santur reply', tombak: 'Tombak measured cycle' },
+      solo: { tar: 'Tar chaharmezrab' },
+      development: { tar: 'Tar gushe phrase', santur: 'Santur variation', tombak: 'tombak variation' },
+      'theme#2': { tar: 'Measured opening', santur: 'Santur Answer', tombak: 'tombak reply' },
+      coda: { tar: 'Tar forud', santur: 'Santur reply', tombak: 'Tombak measured cycle' } },
+    lockPatternAssignments: {
+      prelude: ['tar','santur','tombak'], theme: ['tar','santur','tombak'], solo: ['tar'],
+      development: ['tar','santur','tombak'], 'theme#2': ['tar','santur','tombak'], coda: ['tar','santur','tombak'] } },
+  'persian::avaz-e-dashti': {
+    patternAssignments: {
+      verse: { voice: 'Vocal variation' },
+      response: { voice: 'Vocal reply' },
+      gusheh: { voice: 'Vocal variation' },
+      return: { voice: 'Vocal reply' },
+      forud: { voice: 'Dashti forud' } } },
   'house::deep-house': {
     note: 'Deep-house arrangement study: start with a DJ-friendly percussion entrance, let the sub and warm Rhodes arrive in stages, then thin the breakdown before the groove returns with a changed keyboard and drum response. The long sections teach small, deliberate changes inside a steady pulse.',
     sectionInstruments: {
@@ -556,7 +717,7 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       piano: { piano: 'Piano variation', guitar: 'Guitar accompaniment', 'upright-bass': 'Low anchor', drums: 'Drum kit variation' },
       sax: { 'alto-sax': 'Alto-sax statement', 'tenor-sax': 'Tenor-sax statement', piano: 'Piano accompaniment', guitar: 'Guitar accompaniment', 'upright-bass': 'Low anchor', drums: 'Kit' },
       trumpet: { trumpet: 'Bb Trumpet variation', piano: 'Piano answer', guitar: 'Guitar accompaniment', 'upright-bass': 'Low anchor', drums: 'Drum kit variation' },
-      shout: { trumpet: 'Trumpet statement', trombone: 'Trombone staccato', 'alto-sax': 'Alto-sax statement', 'tenor-sax': 'Tenor-sax statement', piano: 'Piano answer', guitar: 'Guitar accompaniment', 'upright-bass': 'Low anchor', drums: 'Drum kit variation' } },
+      shout: { trumpet: 'Trumpet statement', trombone: 'Trombone staccato', 'alto-sax': 'Alto Saxophone variation', 'tenor-sax': 'Tenor Saxophone variation', piano: 'Piano answer', guitar: 'Guitar accompaniment', 'upright-bass': 'Low anchor', drums: 'Drum kit variation' } },
     lockPatternAssignments: { sax: ['alto-sax','tenor-sax'], shout: ['trumpet','trombone','alto-sax','tenor-sax'] } },
   'classical::minimalist': {
     note: 'Minimalist process study: expose a two-bar violin seed, add cello and marimba, add one violin pickup as the marimba shifts by an eighth, then strip back to the seed and a sustained close. The mallet and bowed lines carry the pulse; there is no drum beat underneath.',
@@ -573,7 +734,7 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       'phase-overlap': { violin: 'Violin additive variation', cello: 'Low anchor', marimba: 'Marimba phase shift', 'string-ensemble': 'String-ensemble accompaniment' },
       'full-ensemble': { violin: 'Violin additive variation', flute: 'Flute answering line', cello: 'Low anchor', marimba: 'Marimba chord-tone cell', 'string-ensemble': 'String-ensemble accompaniment' },
       release: { violin: 'Violin seed cell', cello: 'Low anchor' },
-      coda: { violin: 'Violin close', cello: 'Cello cadence pedal', 'string-ensemble': 'String-ensemble accompaniment' } },
+      coda: { violin: 'Violin seed cell', cello: 'Cello cadence pedal', 'string-ensemble': 'String-ensemble accompaniment' } },
     lockPatternAssignments: {
       pulse: ['violin'],
       'additive-entry': ['violin'],
@@ -581,6 +742,19 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       'full-ensemble': ['violin'],
       release: ['violin'],
       coda: ['violin','cello'] } },
+  'classical::impressionist': {
+    note: 'Impressionist color study: state the whole-tone phrase, shift it into a later-cycle variation, let the violin and flute answer one another in the dialogue, and return to the opening contour for the coda.',
+    patternAssignments: {
+      dawn: { violin: 'Impressionist Violin', flute: 'Impressionist Concert Flute' },
+      sea: { violin: 'Violin variation', flute: 'Concert Flute variation' },
+      noon: { violin: 'Impressionist Violin', flute: 'Impressionist Concert Flute' },
+      waves: { violin: 'Violin variation', flute: 'Concert Flute variation' },
+      dialogue: { violin: 'Violin reply', flute: 'Concert Flute reply' },
+      storm: { violin: 'Violin variation', flute: 'Concert Flute variation' },
+      coda: { violin: 'Impressionist Violin', flute: 'Impressionist Concert Flute' } },
+    lockPatternAssignments: {
+      dawn: ['violin','flute'], sea: ['violin','flute'], noon: ['violin','flute'],
+      waves: ['violin','flute'], dialogue: ['violin','flute'], storm: ['violin','flute'], coda: ['violin','flute'] } },
   'bass::drum-bass': {
     note: 'Drum & Bass study: bring the break in through the DJ intro, build tension with a rolling snare pickup, and make the drop hit with a firmer two-step kick/snare shape. The breakdown strips back to sub and atmosphere before the last drop; sections use the style’s existing role cells.',
     sectionInstruments: { intro: ['synth','drums','sampler'], breakdown: ['synth','sampler'], outro: ['synth','drums','sampler'] },
@@ -840,12 +1014,139 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
   'japanese::gagaku': {
     note: 'Gagaku jo–ha–kyū teaching score: the grid approximates a spacious jo, a measured ha, and a quicker kyū before settling for the cadence. Jo is traditionally free rhythm, and many pieces do not contain all three movements; this sample makes the formal idea playable on a fixed grid.',
     source: 'https://www2.ntj.jac.go.jp/dglib/contents/learn/edc22/en/category/bugaku/column.html',
-    sectionBpm: { jo: 56, ha: 64, kyu: 72, cadence: 56 } },
+    sectionBpm: { jo: 56, ha: 64, kyu: 72, cadence: 56 },
+    patternAssignments: {
+      opening: { hichiriki: 'Gagaku Hichiriki', ryuteki: 'Gagaku Ryuteki' },
+      jo: { hichiriki: 'Gagaku Hichiriki', ryuteki: 'Gagaku Ryuteki' },
+      ha: { hichiriki: 'Hichiriki re-entry', ryuteki: 'Ryuteki re-entry' },
+      kyu: { hichiriki: 'Hichiriki re-entry', ryuteki: 'Ryuteki re-entry' },
+      cadence: { hichiriki: 'Gagaku Hichiriki', ryuteki: 'Gagaku Ryuteki' } },
+    lockPatternAssignments: {
+      opening: ['hichiriki','ryuteki'], jo: ['hichiriki','ryuteki'], ha: ['hichiriki','ryuteki'],
+      kyu: ['hichiriki','ryuteki'], cadence: ['hichiriki','ryuteki'] } },
   'japanese::shakuhachi': {
     note: 'Shakuhachi honkyoku teaching score: leave one intentional ma after the response so its resonance can fade before the next breath-led phrase. This one-bar rest is a grid-based study of the space, not a fixed transcription of free-time timing.',
-    sectionInstruments: { ma: [] } },
+    sectionInstruments: { ma: [] },
+    patternAssignments: {
+      response: { shakuhachi: 'Shakuhachi reply' },
+      development: { shakuhachi: 'Shakuhachi variation' },
+      duet: { shakuhachi: 'Shakuhachi reply' },
+      return: { shakuhachi: 'Shakuhachi variation' },
+      cadence: { shakuhachi: 'Shakuhachi reply' } } },
   'chinese::guqin': {
-    note: 'Guqin teaching score: move from the flowing stream and rapid-water gestures into a restrained falling phrase, return to the opening material, then leave only a few exposed plucks and slides so each tone can decay. The timeline calls this a sparse resonance phrase; it is not a full ensemble mute.' },
+    note: 'Guqin teaching score: move from a flowing statement through left-hand pitch shading and a more active phrase, then let the falling line settle. Return to the opening gesture before leaving a few exposed plucks and slides to decay. The final section is sparse resonance, not a full mute or a transcription.',
+    patternAssignments: {
+      opening: { guqin: 'Guqin phrase' },
+      stream: { guqin: 'Left-hand pitch-shading response' },
+      rapids: { guqin: 'Guqin variation' },
+      falls: { guqin: 'Guqin reply' },
+      return: { guqin: 'Guqin phrase' },
+      silence: { guqin: 'Left-hand pitch-shading response' },
+    },
+    lockPatternAssignments: {
+      opening: ['guqin'], stream: ['guqin'], rapids: ['guqin'], falls: ['guqin'],
+      return: ['guqin'], silence: ['guqin'],
+    },
+  },
+  'chinese::guzheng': {
+    note: 'Guzheng teaching score: open with a localized yaozhi tremolo, expand into measured pentatonic plucks, and color selected arrivals with left-hand bends. Change the return phrase before settling on a long final tone; no Western chord backing is added.',
+    patternAssignments: {
+      opening: { guzheng: 'Guzheng phrase' },
+      'theme#1': { guzheng: 'Lyrical bend-and-release phrase' },
+      variation: { guzheng: 'Guzheng variation' },
+      build: { guzheng: 'Guzheng phrase' },
+      'theme#2': { guzheng: 'Guzheng reply' },
+      cadence: { guzheng: 'Lyrical bend-and-release phrase' },
+    },
+    lockPatternAssignments: {
+      opening: ['guzheng'], 'theme#1': ['guzheng'], variation: ['guzheng'],
+      build: ['guzheng'], 'theme#2': ['guzheng'], cadence: ['guzheng'],
+    },
+  },
+  'chinese::pipa': {
+    note: 'Pipa teaching score: establish the alternating tan-tiao motif, move through a measured foundation pattern, then reserve the five-finger lunzhi tremolo and sweeping accents for the battle passage. Thin the aftermath, answer the return phrase, and close on the motif’s held tone. This is a technique-led study, not a Ten Sides transcription.',
+    patternAssignments: {
+      muster: { pipa: 'Alternating tan-tiao motif' },
+      march: { pipa: 'Pipa basics' },
+      battle: { pipa: 'Pipa answer' },
+      aftermath: { pipa: 'Pipa variation' },
+      retreat: { pipa: 'Pipa reply' },
+      cadence: { pipa: 'Alternating tan-tiao motif' },
+    },
+    lockPatternAssignments: {
+      muster: ['pipa'], march: ['pipa'], battle: ['pipa'], aftermath: ['pipa'],
+      retreat: ['pipa'], cadence: ['pipa'],
+    },
+  },
+  'flamenco::taranta': {
+    note: 'Taranta guitar study: keep the free-time salida broad, let picado carry the falseta, then answer it with a shorter upper-register phrase before returning to the low thumb and a spacious cadence. The grid remains a flexible guide for free-time phrasing.',
+    patternAssignments: {
+      opening: { guitar: 'Guitar compás' },
+      'lower-register': { guitar: 'Guitar compás' },
+      falseta: { guitar: 'Picado line' },
+      'upper-register': { guitar: 'Guitar reply' },
+      return: { guitar: 'Guitar variation' },
+      cadence: { guitar: 'Guitar compás' },
+    },
+    lockPatternAssignments: {
+      opening: ['guitar'], 'lower-register': ['guitar'], falseta: ['guitar'],
+      'upper-register': ['guitar'], return: ['guitar'], cadence: ['guitar'],
+    },
+  },
+  'steppe::dombra': {
+    note: 'Dombra kui study: state the alternating plucked motif, reduce it for the A strain, vary its contour through B, and use a short answer in the contrasting C passage. Bring the main kui back for the final A and cadence. The modal center stays fixed; this is a learning arrangement, not a transcription.',
+    patternAssignments: {
+      intro: { dombra: 'Dombra dombra' },
+      'A#1': { dombra: 'dombra basics' },
+      B: { dombra: 'dombra variation' },
+      'A#2': { dombra: 'Dombra dombra' },
+      C: { dombra: 'dombra reply' },
+      'A#3': { dombra: 'dombra variation' },
+      cadence: { dombra: 'Dombra dombra' },
+    },
+    lockPatternAssignments: {
+      intro: ['dombra'], 'A#1': ['dombra'], B: ['dombra'], 'A#2': ['dombra'],
+      C: ['dombra'], 'A#3': ['dombra'], cadence: ['dombra'],
+    },
+  },
+  'weird::drone': {
+    note: 'Drone process study: keep the synth fundamental continuous while the sampler gradually changes its upper resonance, adds density at feedback, then withdraws before the final decay. The stable pitch is intentional; section change comes from texture and entrance density.',
+    sectionInstruments: {
+      opening: ['synth','sampler'], mass: ['synth','sampler'], resonance: ['synth','sampler'],
+      feedback: ['synth','sampler'], release: ['synth','sampler'], decay: ['synth'],
+    },
+    patternAssignments: {
+      opening: { synth: 'Sustained anchor', sampler: 'Upper resonance' },
+      mass: { sampler: 'Sampler pulse' },
+      resonance: { sampler: 'Sampler reply' },
+      feedback: { sampler: 'Sampler variation' },
+      release: { sampler: 'Sampler pulse' },
+      decay: { synth: 'Sustained anchor' },
+    },
+    lockPatternAssignments: {
+      opening: ['synth','sampler'], mass: ['synth','sampler'], resonance: ['synth','sampler'],
+      feedback: ['synth','sampler'], release: ['synth','sampler'], decay: ['synth'],
+    },
+  },
+  'weird::spectral': {
+    note: 'Spectral process study: retain one steady anchor while upper entries first brighten the spectrum, then shift their spacing and density through the transformation. Reintroduce the opening color before removing the sampler for the final decay; the phrase is a timbre process, not a chord progression.',
+    sectionInstruments: {
+      attack: ['synth','sampler'], spectrum: ['synth','sampler'], transformation: ['synth','sampler'],
+      noise: ['synth','sampler'], return: ['synth','sampler'], decay: ['synth'],
+    },
+    patternAssignments: {
+      attack: { synth: 'Spectrum anchor', sampler: 'Upper entries' },
+      spectrum: { sampler: 'Sampler variation' },
+      transformation: { sampler: 'Sampler reply' },
+      noise: { sampler: 'Sampler variation' },
+      return: { sampler: 'Upper entries' },
+      decay: { synth: 'Spectrum anchor' },
+    },
+    lockPatternAssignments: {
+      attack: ['synth','sampler'], spectrum: ['synth','sampler'], transformation: ['synth','sampler'],
+      noise: ['synth','sampler'], return: ['synth','sampler'], decay: ['synth'],
+    },
+  },
   'reggae::roots': {
     note: 'Original Roots Reggae teaching score: the one-drop anchors a beat-one pocket, short vocal phrases share space with the bass, and an instrumental section exposes the organ bubble before the fuller refrain returns.',
     sectionInstruments: {
@@ -910,8 +1211,11 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       intro: { siku: 'Siku statement', charango: 'Charango accompaniment', 'bombo-andino': 'Bombo-andino pulse' },
       A: { quena: 'Quena statement', charango: 'Charango accompaniment', 'bombo-andino': 'Bombo-andino pulse' },
       B: { siku: 'Siku statement', charango: 'Charango variation', guitar: 'Guitar accompaniment', 'bombo-andino': 'Bombo andino variation' },
+      'B#1': { siku: 'siku variation' },
+      'B#2': { siku: 'siku reply' },
       solo: { quena: 'Quena variation', charango: 'Charango accompaniment', 'bombo-andino': 'Bombo andino ghost' },
-      cierre: { } } },
+      cierre: { } },
+    lockPatternAssignments: { 'B#1': ['siku'], 'B#2': ['siku'] } },
   'andean::saya': {
     instruments: ['quena','siku','charango','guitar','bombo-andino'],
     note: 'Instrumental saya adaptation: the bombo pulse remains the anchor while quena and siku exchange short calls; no sustained vowel layer is added over the groove.',
@@ -925,19 +1229,24 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       verse: { quena: 'Quena statement', charango: 'Charango accompaniment', 'bombo-andino': 'Bombo andino basics' },
       chorus: { siku: 'Siku statement', charango: 'Charango variation', guitar: 'Guitar accompaniment', 'bombo-andino': 'Bombo andino variation' },
       interlude: { quena: 'Quena variation', charango: 'Charango reply', 'bombo-andino': 'Bombo andino reply' },
-      outro: { } } },
+      outro: { siku: 'siku reply' },
+      'chorus#2': { siku: 'siku variation' } },
+    lockPatternAssignments: { 'chorus#2': ['siku'], outro: ['siku'] } },
   'andean::tinku': {
     note: 'Heavy bombo accents frame a four-bar stomp break; the flutes and charango re-enter together for the final dance push.',
     sectionInstruments: {
       intro: ['quena','charango','bombo-andino'], A: ['quena','charango','guitar','bombo-andino'],
       B: ['siku','charango','guitar','bombo-andino'], break: ['bombo-andino'], cierre: ['quena','charango','bombo-andino'] },
-    lockPatternAssignments: { break: ['bombo-andino'] },
     patternAssignments: {
       intro: { quena: 'Quena statement', charango: 'Charango accompaniment', 'bombo-andino': 'Bombo-andino pulse' },
       A: { quena: 'Quena statement', charango: 'Charango accent', guitar: 'Guitar accompaniment', 'bombo-andino': 'Bombo andino variation' },
       B: { siku: 'Siku statement', charango: 'Charango variation', guitar: 'Guitar accent', 'bombo-andino': 'Bombo andino roll' },
+      'A#2': { quena: 'Quena variation' },
+      'A#3': { quena: 'Quena reply' },
+      'B#2': { siku: 'siku re-entry' },
       break: { 'bombo-andino': 'Bombo andino open' },
-      cierre: { } } },
+      cierre: { quena: 'Quena reply' } },
+    lockPatternAssignments: { break: ['bombo-andino'], 'A#2': ['quena'], 'A#3': ['quena'], 'B#2': ['siku'], cierre: ['quena'] } },
   'andean::carnavalito': {
     note: 'Quena and siku take turns carrying the dance figure while the charango keeps the repeating ostinato in view.',
     sectionInstruments: {
@@ -947,7 +1256,11 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       intro: { quena: 'Quena statement', charango: 'Charango accompaniment', 'bombo-andino': 'Bombo-andino pulse' },
       A: { quena: 'Quena statement', charango: 'Charango accompaniment', 'bombo-andino': 'Bombo andino ghost' },
       B: { siku: 'Siku statement', charango: 'Charango variation', guitar: 'Guitar accompaniment', 'bombo-andino': 'Bombo andino variation' },
-      cierre: { } } },
+      'A#2': { quena: 'Quena variation' },
+      'A#3': { quena: 'Quena reply' },
+      'B#2': { siku: 'siku re-entry' },
+      cierre: { quena: 'Quena reply', siku: 'siku re-entry' } },
+    lockPatternAssignments: { 'A#2': ['quena'], 'A#3': ['quena'], 'B#2': ['siku'], cierre: ['quena','siku'] } },
   'andean::nueva-cancion': {
     note: 'Acoustic verse texture gives way to flute replies in the refrain and bridge; the closing section reunites the plucked parts.',
     solos: { bridge: 'siku' },
@@ -960,7 +1273,10 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       verse: { guitar: 'Guitar accompaniment', charango: 'Charango accompaniment', 'bombo-andino': 'Bombo andino ghost' },
       chorus: { quena: 'Quena statement', guitar: 'Guitar variation', charango: 'Charango variation', 'bombo-andino': 'Bombo-andino pulse' },
       bridge: { siku: 'Siku statement', guitar: 'Guitar accompaniment', charango: 'Charango reply' },
-      cierre: { } } },
+      'chorus#2': { quena: 'Quena variation' },
+      'chorus#3': { quena: 'Quena reply' },
+      cierre: { quena: 'Quena reply' } },
+    lockPatternAssignments: { 'chorus#2': ['quena'], 'chorus#3': ['quena'], cierre: ['quena'] } },
   'andean::andean-fusion': {
     instruments: ['quena','siku','charango','bass','drums','bombo-andino','synth'],
     note: 'Electronic Andean-cumbia adaptation: add the bass and concise kit shuffle under the flutes and charango, then strip back to acoustic fragments and synth tail.',
@@ -970,14 +1286,14 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       groove: ['quena','charango','bass','drums','bombo-andino','synth'],
       B: ['siku','charango','bass','drums','bombo-andino','synth'],
       breakdown: ['charango','bombo-andino','synth'], dissolve: ['synth'] },
-    lockPatternAssignments: { groove: ['bass','drums'], B: ['bass','drums'] },
+    lockPatternAssignments: { groove: ['bass','drums'], B: ['bass','drums'], dissolve: ['synth'] },
     patternAssignments: {
       opening: { quena: 'Quena statement', synth: 'Synth chord jab' },
       A: { quena: 'Quena statement', charango: 'Charango accompaniment', bass: 'Syncopated bass', drums: 'Kit backbeat', 'bombo-andino': 'Bombo-andino pulse' },
       groove: { quena: 'Quena variation', charango: 'Charango variation', bass: 'Syncopated bass', drums: 'Kit backbeat', 'bombo-andino': 'Bombo andino variation', synth: 'Synth chord jab' },
       B: { siku: 'Siku statement', charango: 'Charango variation', bass: 'Syncopated bass', drums: 'Kit backbeat', 'bombo-andino': 'Bombo andino variation', synth: 'Synth chord jab' },
       breakdown: { charango: 'Charango tremolo', 'bombo-andino': 'Bombo andino ghost', synth: 'Synth chord jab' },
-      dissolve: { synth: 'Synth chord jab' } } },
+    dissolve: { synth: 'Synth coda tail' } } },
   'ambient::atmospheric': {
     sectionInstruments: {
       opening: ['synth','piano'], A: ['synth','piano','string-ensemble'], B: ['synth','piano','string-ensemble'],
@@ -1321,12 +1637,13 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
     solos: { arrastre: 'upright-bass' },
     sectionInstruments: { arrastre: ['upright-bass'] },
     patternAssignments: {
-      intro: { bandoneon: 'Canyengue phrase', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
+      intro: { bandoneon: 'Canyengue phrase', violin: 'Clipped answer', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
       estribillo: { bandoneon: 'Canyengue phrase', violin: 'Clipped answer', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
-      copla: { bandoneon: 'Clipped phrase', violin: 'Clipped answer', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
-      trio: { bandoneon: 'Canyengue phrase', violin: 'Clipped answer', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
+      copla: { bandoneon: 'Clipped phrase', violin: 'Violin variation', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
+      trio: { bandoneon: 'Canyengue phrase', violin: 'Violin reply', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
       arrastre: { 'upright-bass': 'Bass drag' },
-      cierre: { bandoneon: 'Canyengue phrase', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' } } },
+      cierre: { bandoneon: 'Canyengue phrase', violin: 'Violin reply', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' } },
+    lockPatternAssignments: { intro: ['violin'], estribillo: ['violin'], copla: ['violin'], trio: ['violin'], cierre: ['violin'] } },
   'tango::guardia-nueva-de-caro': {
     solos: { violin: 'violin' },
     patternAssignments: {
@@ -1389,12 +1706,13 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
   'tango::milonga': {
     sectionInstruments: { traspie: ['bandoneon','guitar','piano','upright-bass'] },
     patternAssignments: {
-      intro: { bandoneon: 'Milonga phrase', guitar: 'Habanera chords', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
+      intro: { bandoneon: 'Milonga phrase', violin: 'Milonga answer', guitar: 'Habanera chords', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
       estribillo: { bandoneon: 'Milonga phrase', violin: 'Milonga answer', guitar: 'Habanera chords', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
-      copla: { bandoneon: 'Milonga phrase', violin: 'Milonga answer', guitar: 'Habanera chords', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
+      copla: { bandoneon: 'Milonga phrase', violin: 'Violin variation', guitar: 'Habanera chords', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
       interlude: { guitar: 'Habanera chords', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
       traspie: { bandoneon: 'Milonga traspié', guitar: 'Habanera chords', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
-      cierre: { bandoneon: 'Milonga phrase', violin: 'Milonga answer', guitar: 'Habanera chords', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' } } },
+      cierre: { bandoneon: 'Milonga phrase', violin: 'Violin reply', guitar: 'Habanera chords', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' } },
+    lockPatternAssignments: { intro: ['violin'], estribillo: ['violin'], copla: ['violin'], cierre: ['violin'] } },
   'tango::vals': {
     patternAssignments: {
       intro: { bandoneon: 'Vals melody', violin: 'Violin sweep', piano: 'Waltz chords', 'upright-bass': 'Three-beat bass' },
@@ -1445,7 +1763,7 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       call: { voice: 'Voice statement', guembri: 'Low anchor', qraqeb: 'Qraqeb pulse' },
       response: { guembri: 'guembri reply', qraqeb: 'qraqeb reply' },
       cycle: { voice: 'Vocal reply', guembri: 'guembri variation', qraqeb: 'qraqeb variation' },
-      acceleration: { voice: 'Vocal accent', guembri: 'guembri slap', qraqeb: 'qraqeb roll' },
+      acceleration: { voice: 'Vocal accent', guembri: 'guembri reply', qraqeb: 'qraqeb roll' },
       cadence: { guembri: 'Guembri close', qraqeb: 'Qraqeb close' } } },
   'gnawa::lila-trance': {
     sectionInstruments: {
@@ -1464,7 +1782,7 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       'cycle-a': { guembri: 'guembri variation', qraqeb: 'qraqeb pulse' },
       'response-a': { voice: 'Vocal reply', guembri: 'guembri reply', qraqeb: 'qraqeb reply' },
       'cycle-b': { guembri: 'guembri slap', qraqeb: 'qraqeb variation' },
-      acceleration: { voice: 'Vocal accent', guembri: 'guembri slap', qraqeb: 'qraqeb roll' },
+      acceleration: { voice: 'Vocal accent', guembri: 'guembri reply', qraqeb: 'qraqeb variation' },
       solo: { guembri: 'guembri variation', qraqeb: 'qraqeb roll' },
       'final-response': { voice: 'Vocal variation', guembri: 'guembri reply', qraqeb: 'qraqeb open' },
       cadence: { guembri: 'guembri close', qraqeb: 'qraqeb close' } } },
@@ -1528,6 +1846,8 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
     patternAssignments: {
       intro: { guitar: 'Muted guitar scratch', bass: 'Bass pocket', drums: 'Kit' },
       A: { voice: 'Voice statement', trumpet: 'Trumpet statement', guitar: 'Muted guitar scratch', clavinet: 'Clavinet accompaniment', bass: 'Bass pocket', drums: 'Kit' },
+      'A#2': { voice: 'Vocal variation', trumpet: 'Bb Trumpet variation' },
+      'A#3': { voice: 'Vocal reply', trumpet: 'Bb Trumpet reply' },
       breakdown: { bass: 'Low anchor', drums: 'Drum kit basics' },
       solo: { trumpet: 'Trumpet statement', guitar: 'Muted guitar scratch', bass: 'Bass pocket', drums: 'Kit' },
       outro: { guitar: 'Muted guitar scratch', bass: 'Bass pocket' } },
@@ -1611,11 +1931,11 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
     patternAssignments: {
       intro: { piano: 'Piano accompaniment', bass: 'Low anchor', drums: 'Kit' },
       theme: { voice: 'Voice statement', piano: 'Piano accompaniment', bass: 'Dance bass', drums: 'Dance backbeat', 'string-ensemble': 'String swell' },
-      groove: { voice: 'Vocal variation', piano: 'Piano accompaniment', bass: 'Dance bass', drums: 'Dance backbeat', 'string-ensemble': 'String swell' },
-      solo: { piano: 'Piano variation', bass: 'Dance bass', drums: 'Dance backbeat', 'string-ensemble': 'String swell' },
+      groove: { voice: 'Vocal variation', piano: 'Piano accompaniment', bass: 'Dance bass', drums: 'Dance backbeat', 'string-ensemble': 'String Ensemble reply' },
+      solo: { piano: 'Piano variation', bass: 'Dance bass', drums: 'Dance backbeat', 'string-ensemble': 'String Ensemble accent' },
       breakdown: { bass: 'Low anchor', drums: 'Drum kit basics' },
       outro: { } },
-    lockPatternAssignments: { theme: ['bass','string-ensemble'], groove: ['bass','string-ensemble'], solo: ['string-ensemble'] } },
+    lockPatternAssignments: { theme: ['bass'], groove: ['bass'] } },
   'funk::boogie': {
     sectionInstruments: {
       intro: ['synth-bass','rhodes','drums'],
@@ -1628,6 +1948,8 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       intro: { 'synth-bass': 'Synth-bass bounce', rhodes: 'Rhodes stabs', drums: 'Kit' },
       verse: { voice: 'Voice statement', 'synth-bass': 'Synth-bass bounce', rhodes: 'Rhodes stabs', drums: 'Kit' },
       chorus: { voice: 'Vocal variation', synth: 'Synthesizer variation', 'synth-bass': 'Synth-bass bounce', rhodes: 'Rhodes stabs', drums: 'Clap backbeat' },
+      'chorus#2': { synth: 'Synthesizer reply' },
+      'chorus#3': { synth: 'Synthesizer variation' },
       breakdown: { 'synth-bass': 'Synth-bass bounce', drums: 'Drum kit basics' },
       solo: { synth: 'Synthesizer variation', 'synth-bass': 'Synth-bass bounce', rhodes: 'Rhodes stabs', drums: 'Clap backbeat' },
       outro: { 'synth-bass': 'Synth-bass bounce' } },
@@ -1675,6 +1997,8 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
     patternAssignments: {
       intro: { trumpet: 'Trumpet statement', tres: 'Tres accompaniment', bass: 'Low anchor', bongos: 'Bongos pulse', claves: 'Claves pulse', maracas: 'Maracas pulse' },
       verse: { voice: 'Voice statement', trumpet: 'Trumpet statement', tres: 'Tres accompaniment', bass: 'Low anchor', bongos: 'Bongos pulse', claves: 'Claves pulse', maracas: 'Maracas pulse' },
+      'verse#2': { voice: 'Vocal reply' },
+      'verse#3': { voice: 'Vocal variation' },
       interlude: { trumpet: 'Bb Trumpet variation', tres: 'Cuban Tres variation', bass: 'Bass variation', bongos: 'Bongos variation', claves: 'Claves variation', maracas: 'Maracas variation' },
       solo: { trumpet: 'Bb Trumpet variation', tres: 'Tres accompaniment', bass: 'Low anchor', bongos: 'Bongos pulse', claves: 'Claves pulse', maracas: 'Maracas pulse' },
       outro: { trumpet: 'Trumpet statement', tres: 'Tres accompaniment', bass: 'Low anchor', bongos: 'Bongos pulse', claves: 'Claves pulse', maracas: 'Maracas pulse' } } },
@@ -1797,7 +2121,11 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
     patternAssignments: {
       intro: { trumpet: 'Trumpet answer', clarinet: 'Clarinet answer', trombone: 'Trombone answer', tuba: 'Tuba answer', drums: 'Drums answer' },
       verse: { voice: 'Voice answer', trumpet: 'Trumpet answer', clarinet: 'Clarinet answer', trombone: 'Trombone answer', tuba: 'Tuba answer', drums: 'Drums answer' },
+      'verse#2': { voice: 'Vocal variation' },
       chorus: { voice: 'Voice answer', trumpet: 'Bb Trumpet re-entry', clarinet: 'Clarinet variation', trombone: 'Trombone variation', tuba: 'Tuba re-entry', drums: 'Drum kit variation' },
+      'chorus#1': { voice: 'Vocal reply' },
+      'chorus#2': { voice: 'Vocal variation' },
+      'chorus#3': { voice: 'Vocal reply' },
       interlude: { trumpet: 'Bb Trumpet re-entry', clarinet: 'Clarinet variation', trombone: 'Trombone answer', tuba: 'Tuba re-entry', drums: 'Drum kit variation' },
       cierre: { trumpet: 'Trumpet answer', clarinet: 'Clarinet answer', trombone: 'Trombone answer', tuba: 'Tuba answer', drums: 'Drums answer' } } },
   'mexican::son-huasteco': {
@@ -1925,19 +2253,140 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
   // These form labels mean actual ensemble rests; keeping a low-energy pattern
   // running through them erased the intended ma, breath and hard stop.
   'flamenco::tonas-martinetes': {
-    sectionInstruments: { pause: [] } },
+    sectionInstruments: { pause: [] },
+    patternAssignments: {
+      martinete: { voice: 'Vocal variation' },
+      debla: { voice: 'Vocal reply' },
+      cadence: { voice: 'Vocal variation' } } },
   'japanese::taiko': {
     sectionInstruments: { silence: [], break: [] } },
   'weird::musique-concrete': {
-    sectionInstruments: { stop: [] } },
+    sectionInstruments: { stop: [] },
+    patternAssignments: {
+      whistle: { sampler: 'Sound montage' },
+      wheels: { sampler: 'Sampler variation' },
+      cut: { sampler: 'Sampler accent' },
+      'rhythm-montage': { sampler: 'Sampler variation' },
+      steam: { sampler: 'Sampler reply' },
+      recall: { sampler: 'Cut-and-recall montage' } } },
   'weird::free-improvisation': {
     sectionInstruments: { silence: [], stop: [] } },
-  'cinematic::modern-score': {
-    sectionInstruments: { release: ['piano'], outro: ['piano'] },
+  'korean::sanjo': {
+    note: 'Sanjo study: keep the slow jinyangjo phrase open, move its motif through a later-cycle variation and reply as the jangdan quickens, then let the final phrase settle without a generic drum fill.',
     patternAssignments: {
-      ostinato: { synth: 'Synth Resolution' },
-      build: { synth: 'Synth Resolution' },
-      climax: { synth: 'Synthesizer variation' } } },
+      jinyangjo: { gayageum: 'Sanjo Gayageum' },
+      jungmori: { gayageum: 'Gayageum variation' },
+      jungjungmori: { gayageum: 'Gayageum reply' },
+      jajinmori: { gayageum: 'Gayageum variation' },
+      hwimori: { gayageum: 'Gayageum variation' },
+      cadence: { gayageum: 'Gayageum reply' } },
+    lockPatternAssignments: {
+      jinyangjo: ['gayageum'], jungmori: ['gayageum'], jungjungmori: ['gayageum'],
+      jajinmori: ['gayageum'], hwimori: ['gayageum'], cadence: ['gayageum'] } },
+  'turkish::ottoman-classical': {
+    note: 'Ottoman Classical study: introduce the ney and oud phrases in the daramad, exchange locally derived answers during development, and return to the opening material before the cadence. These cells are makam phrase guides, not a transcription.',
+    patternAssignments: {
+      daramad: { ney: 'Ottoman Classical Ney', oud: 'Ottoman Classical Oud' },
+      'lower-register': { ney: 'Ney variation', oud: 'Oud variation' },
+      development: { ney: 'Ney reply', oud: 'Oud reply' },
+      'upper-register': { ney: 'Ney variation', oud: 'Oud variation' },
+      return: { ney: 'Ottoman Classical Ney', oud: 'Ottoman Classical Oud' },
+      cadence: { ney: 'Ney reply', oud: 'Oud reply' } },
+    lockPatternAssignments: {
+      daramad: ['ney','oud'], 'lower-register': ['ney','oud'], development: ['ney','oud'],
+      'upper-register': ['ney','oud'], return: ['ney','oud'], cadence: ['ney','oud'] } },
+  'steppe::khoomei': {
+    note: 'Khöömei learning score: short voice-guide phrases sit above the morin-khuur, and the response changes from the held home pitch to a higher overtone focus. The GM Voice Oohs patch cues pitch only; it does not reproduce Tuvan throat-singing timbre, and this is not a transcription.',
+    sectionInstruments: {
+      opening: ['morin-khuur'], verse: ['voice','morin-khuur'], drone: ['morin-khuur'],
+      response: ['voice','morin-khuur'], cadence: ['morin-khuur'] },
+    patternAssignments: {
+      verse: { voice: 'Khöömei Vocal' },
+      response: { voice: 'Khoomei overtone answer' } },
+    lockPatternAssignments: { verse: ['voice'], response: ['voice'] } },
+  'cinematic::modern-score': {
+    lead: 'piano',
+    note: 'Modern score study: let the piano and a quiet synth establish the motif, add cello and strings before the horn, then reserve timpani for the full climax. The release drops to exposed piano.',
+    sectionInstruments: {
+      opening: ['piano','synth'],
+      ostinato: ['piano','string-ensemble','cello','synth'],
+      build: ['piano','french-horn','string-ensemble','cello','timpani','synth'],
+      climax: ['piano','french-horn','string-ensemble','cello','timpani','synth'],
+      release: ['piano'], outro: ['piano'] },
+    patternAssignments: {
+      opening: { piano: 'Piano statement', synth: 'Synth accompaniment' },
+      ostinato: { piano: 'Piano variation', 'string-ensemble': 'String Ensemble reply', cello: 'Cello re-entry', synth: 'Synth ostinato' },
+      build: { piano: 'Piano reply', 'french-horn': 'French horn reply', 'string-ensemble': 'String Ensemble variation', cello: 'Cello vibrato', timpani: 'timpani roll', synth: 'Synth Resolution' },
+      climax: { piano: 'Piano variation', 'french-horn': 'French horn variation', 'string-ensemble': 'String Ensemble accent', cello: 'Cello vibrato', timpani: 'timpani roll', synth: 'Synthesizer variation' } } },
+  'cinematic::golden-age': {
+    instruments: ['piano','french-horn','string-ensemble','cello','timpani'], lead: 'french-horn',
+    note: 'Golden Age score study: state a brass fanfare, broaden into a singing string theme, soften the second theme, and rebuild through development and battle passages. The reprise gathers the ensemble before a short orchestral coda.',
+    sectionInstruments: {
+      fanfare: ['french-horn','string-ensemble','cello','timpani'],
+      A: ['piano','french-horn','string-ensemble','cello','timpani'],
+      B: ['piano','french-horn','string-ensemble','cello'],
+      development: ['piano','french-horn','string-ensemble','cello','timpani'],
+      battle: ['piano','french-horn','string-ensemble','cello','timpani'],
+      coda: ['french-horn','string-ensemble','cello','timpani'] },
+    patternAssignments: {
+      fanfare: { 'french-horn': 'French horn marcato', 'string-ensemble': 'String Ensemble accent', cello: 'Cello tenuto', timpani: 'timpani roll' },
+      A: { piano: 'Piano sostenuto', 'french-horn': 'French horn variation', 'string-ensemble': 'String Ensemble legato', cello: 'Cello legato' },
+      B: { piano: 'Piano reply', 'french-horn': 'French horn tenuto', 'string-ensemble': 'String Ensemble tremolo', cello: 'Cello vibrato' },
+      development: { piano: 'Piano staccato', 'french-horn': 'French horn marcato', 'string-ensemble': 'String Ensemble variation', cello: 'Cello variation', timpani: 'timpani staccato' },
+      battle: { piano: 'Piano variation', 'french-horn': 'French horn variation', 'string-ensemble': 'String Ensemble accent', cello: 'Cello accent', timpani: 'timpani roll' },
+      coda: { 'french-horn': 'French horn tenuto', 'string-ensemble': 'String Ensemble legato', cello: 'Cello tenuto', timpani: 'timpani roll' } } },
+  'cinematic::minimal-tension': {
+    lead: 'piano',
+    note: 'Minimal tension study: begin with a bare piano-and-cello cell, let a displaced synth pulse appear, then add semitone color and a slowly widening string layer. The climax releases back to the exposed figure without a drum beat.',
+    sectionInstruments: {
+      opening: ['piano','cello'], pulse: ['piano','cello','synth'],
+      descent: ['piano','string-ensemble','cello','synth'],
+      build: ['piano','string-ensemble','cello','synth'],
+      climax: ['piano','string-ensemble','cello','synth'], release: ['piano','cello'] },
+    patternAssignments: {
+      opening: { piano: 'Piano staccato', cello: 'Cello basics' },
+      pulse: { piano: 'Piano variation', cello: 'Cello reply', synth: 'Displaced two-note pulse' },
+      descent: { piano: 'Piano reply', 'string-ensemble': 'String Ensemble variation', cello: 'Cello variation', synth: 'Synthesizer reply' },
+      build: { piano: 'Piano variation', 'string-ensemble': 'String Ensemble tremolo', cello: 'Cello legato', synth: 'Synthesizer accent' },
+      climax: { piano: 'Piano marcato', 'string-ensemble': 'String Ensemble accent', cello: 'Cello tremolo', synth: 'Synthesizer variation' },
+      release: { piano: 'Piano staccato', cello: 'Cello tenuto' } } },
+  'cinematic::hybrid': {
+    instruments: ['piano','string-ensemble','cello','timpani','synth'], lead: 'piano',
+    note: 'Hybrid score study: keep the opening hook dry and close, build a distinct low electronic pulse beneath it, then add short string and timpani impacts. Strip those layers before the hook returns and fades.',
+    sectionInstruments: {
+      opening: ['piano','synth'], A: ['piano','cello','synth'],
+      evolution: ['piano','string-ensemble','cello','timpani','synth'], dissolve: ['piano','synth'] },
+    patternAssignments: {
+      opening: { piano: 'Piano staccato', synth: 'Synth accompaniment' },
+      A: { piano: 'Piano reply', cello: 'Cello reply', synth: 'Synthesizer staccato' },
+      evolution: { piano: 'Piano marcato', 'string-ensemble': 'String Ensemble accent', cello: 'Cello accent', timpani: 'timpani roll', synth: 'Synthesizer accent' },
+      dissolve: { piano: 'Piano tenuto', synth: 'Synthesizer vibrato' } } },
+  'cinematic::epic': {
+    instruments: ['french-horn','string-ensemble','cello','timpani','synth'],
+    note: 'Epic score study: begin on the low ostinato, set the horn against the timpani in battle passages, open into a sustained chorale, and cut to full silence before the final build. Thin the low percussion under the closing fall.',
+    sectionInstruments: {
+      opening: ['cello','synth'], battle: ['french-horn','string-ensemble','cello','timpani','synth'],
+      chorale: ['french-horn','string-ensemble','cello','synth'], break: [],
+      climax: ['french-horn','string-ensemble','cello','timpani','synth'],
+      fall: ['french-horn','string-ensemble','cello'], coda: ['french-horn','string-ensemble','cello','timpani'] },
+    patternAssignments: {
+      opening: { cello: 'Cello basics', synth: 'Synth ostinato' },
+      battle: { 'french-horn': 'French horn marcato', 'string-ensemble': 'String Ensemble accent', cello: 'Cello basics', timpani: 'timpani roll', synth: 'Synth ostinato' },
+      chorale: { 'french-horn': 'French horn tenuto', 'string-ensemble': 'String Ensemble legato', cello: 'Cello tenuto', synth: 'Synthesizer vibrato' },
+      climax: { 'french-horn': 'French horn variation', 'string-ensemble': 'String Ensemble variation', cello: 'Cello variation', timpani: 'timpani roll', synth: 'Synthesizer variation' },
+      fall: { 'french-horn': 'French horn tenuto', 'string-ensemble': 'String Ensemble legato', cello: 'Cello tenuto' },
+      coda: { 'french-horn': 'French horn tenuto', 'string-ensemble': 'String Ensemble legato', cello: 'Cello vibrato', timpani: 'timpani open' } } },
+  'cinematic::ambient-score': {
+    instruments: ['synth','string-ensemble','cello','piano'],
+    note: 'Ambient score study: keep a quiet synthetic melody above slow strings, use piano replies to mark breaths, and bring cello forward only in the middle passage. Let the ending dissolve without a drum fill or forced climax.',
+    sectionInstruments: {
+      opening: ['synth','string-ensemble'], A: ['synth','string-ensemble','cello','piano'],
+      solo: ['synth','string-ensemble','cello'], dissolve: ['synth','string-ensemble'] },
+    patternAssignments: {
+      opening: { synth: 'Synth slow motif', 'string-ensemble': 'String Ensemble tremolo' },
+      A: { synth: 'Synth answering phrase', 'string-ensemble': 'String Ensemble tremolo', cello: 'Cello re-entry', piano: 'Piano breath reply' },
+      solo: { synth: 'Synth slow motif', 'string-ensemble': 'String Ensemble tremolo', cello: 'Cello vibrato' },
+      dissolve: { synth: 'Synth slow motif', 'string-ensemble': 'String Ensemble tremolo' } } },
   'pop::power-pop': {
     patternAssignments: { chorus: { synth: 'Synth swell' } } },
   'tango::chacarera-crossover': {
@@ -2020,7 +2469,7 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
     patternAssignments: {
       intro: { guitar: 'Bossa chord anticipations' },
       A: { guitar: 'Bossa chord anticipations', 'upright-bass': 'Bossa two-beat bass', drums: 'Soft bossa brushes' },
-      B: { flute: 'Concert Flute variation', guitar: 'Guitar variation', 'upright-bass': 'Upright bass variation', drums: 'Soft bossa brushes' },
+      B: { flute: 'Concert Flute variation', guitar: 'Guitar variation', 'upright-bass': 'Upright bass variation', drums: 'Drum kit variation' },
       solo: { flute: 'Flute statement', guitar: 'Bossa chord anticipations', 'upright-bass': 'Bossa two-beat bass', drums: 'Soft bossa brushes' },
       coda: { guitar: 'Bossa chord anticipations', 'upright-bass': 'Bossa two-beat bass' } } },
   'brazilian::pagode': {
@@ -2104,19 +2553,20 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       solo: { accordion: 'Accordion variation', zabumba: 'Zabumba reply', triangle: 'Triangle reply' },
       coda: { } } },
   'brazilian::xote': {
-    instruments: ['accordion','voice','guitar','bass','zabumba','triangle'],
+    instruments: ['accordion','guitar','bass','zabumba','triangle'],
+    lead: 'accordion',
     solos: { solo: 'accordion' },
-    note: 'Xote teaching arrangement: use the sanfona for a relaxed, singing dance melody over the soft two-beat zabumba and lightly marked triangle. Save the instrumental break for accordion, and let the sung chorus return afterward.',
+    note: 'Instrumental xote learning score: let the accordion carry the relaxed, singing melody over guitar, bass, soft two-beat zabumba and lightly marked triangle. Give the accordion the featured break and return with its varied refrain. No vocal part: the lyric-free Voice Oohs patch is omitted.',
     sectionInstruments: {
       intro: ['accordion','guitar','bass','zabumba','triangle'],
-      verse: ['accordion','voice','guitar','bass','zabumba','triangle'],
-      chorus: ['accordion','voice','guitar','bass','zabumba','triangle'],
+      verse: ['accordion','guitar','bass','zabumba','triangle'],
+      chorus: ['accordion','guitar','bass','zabumba','triangle'],
       solo: ['accordion','guitar','bass','zabumba','triangle'],
-      coda: ['accordion','voice','guitar','bass','zabumba','triangle'] },
+      coda: ['accordion','guitar','bass','zabumba','triangle'] },
     patternAssignments: {
       intro: { accordion: 'Accordion statement', guitar: 'Guitar accompaniment', bass: 'Low anchor', zabumba: 'Xote two-beat drum', triangle: 'Xote light triangle' },
-      verse: { accordion: 'Accordion statement', voice: 'Voice statement', guitar: 'Guitar accompaniment', bass: 'Low anchor', zabumba: 'Xote two-beat drum', triangle: 'Xote light triangle' },
-      chorus: { accordion: 'Accordion variation', voice: 'Vocal accent', guitar: 'Guitar variation', bass: 'Bass accent', zabumba: 'Zabumba variation', triangle: 'Triangle variation' },
+      verse: { accordion: 'Accordion statement', guitar: 'Guitar accompaniment', bass: 'Low anchor', zabumba: 'Xote two-beat drum', triangle: 'Xote light triangle' },
+      chorus: { accordion: 'Accordion variation', guitar: 'Guitar variation', bass: 'Bass accent', zabumba: 'Zabumba variation', triangle: 'Triangle variation' },
       solo: { accordion: 'Accordion marcato', guitar: 'Guitar reply', bass: 'Bass re-entry', zabumba: 'Zabumba reply', triangle: 'Triangle reply' },
       coda: { } } },
   'brazilian::mpb': {
@@ -2182,9 +2632,9 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       opening: { kamancheh: 'Kamancheh lament' },
       lament: { kamancheh: 'Kamancheh lament', cello: 'Cello pedal' },
       dialogue: { kamancheh: 'Kamancheh lament', setar: 'Setar dialogue' },
-      build: { kamancheh: 'Kamancheh lament', setar: 'Setar dialogue', 'string-ensemble': 'String swell', cello: 'Cello pedal' },
-      climax: { kamancheh: 'Kamancheh lament', setar: 'Setar dialogue', 'string-ensemble': 'String swell', cello: 'Cello pedal' },
-      release: { kamancheh: 'Kamancheh return', setar: 'Setar dialogue', cello: 'Cello pedal' },
+      build: { kamancheh: 'Kamancheh lament', setar: 'setar variation', 'string-ensemble': 'String swell', cello: 'Cello pedal' },
+      climax: { kamancheh: 'Kamancheh lament', setar: 'setar reply', 'string-ensemble': 'String swell', cello: 'Cello pedal' },
+      release: { kamancheh: 'Kamancheh return', setar: 'setar variation', cello: 'Cello pedal' },
       dissolve: { kamancheh: 'Kamancheh return' } },
     lockPatternAssignments: {
       dialogue: ['kamancheh','setar'],
@@ -2199,7 +2649,8 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
     patternAssignments: {
       opening: { synth: 'Drone bed' },
       verse: { voice: 'Melisma line', synth: 'Drone bed' },
-      response: { voice: 'Melisma line', synth: 'Keyboard lift' },
+      'verse#2': { voice: 'Vocal variation' },
+      response: { voice: 'Vocal reply', synth: 'Keyboard lift' },
       cadence: { voice: 'Melisma line', synth: 'Drone bed' } } } };
 for (const [key, changes] of Object.entries(SAMPLE_PATTERN_ASSIGNMENTS)) {
   const arrangement = RECORDING_ARRANGEMENTS[key];
@@ -2208,11 +2659,39 @@ for (const [key, changes] of Object.entries(SAMPLE_PATTERN_ASSIGNMENTS)) {
     ...arrangement,
     ...(changes.instruments ? { instruments: changes.instruments } : {}),
     ...(changes.lead ? { lead: changes.lead } : {}),
+    ...(changes.sectionLeads ? { sectionLeads: { ...arrangement.sectionLeads, ...changes.sectionLeads } } : {}),
     ...(changes.sectionInstruments ? { sectionInstruments: { ...arrangement.sectionInstruments, ...changes.sectionInstruments } } : {}),
     ...(changes.solos ? { solos: { ...arrangement.solos, ...changes.solos } } : {}),
+    ...(changes.soloModes ? { soloModes: { ...arrangement.soloModes, ...changes.soloModes } } : {}),
     ...(changes.patternAssignments ? { patternAssignments: { ...arrangement.patternAssignments, ...changes.patternAssignments } } : {}),
     ...(changes.lockPatternAssignments ? { lockPatternAssignments: { ...arrangement.lockPatternAssignments, ...changes.lockPatternAssignments } } : {}),
     ...(changes.sectionBpm ? { sectionBpm: { ...arrangement.sectionBpm, ...changes.sectionBpm } } : {}),
     ...(changes.note ? { note: changes.note } : {}),
     ...(changes.source ? { source: changes.source } : {}) };
+}
+
+// A style may offer a voice part without every example song using it. The
+// authored arrangement note is the cue for samples whose source description
+// explicitly calls for vocals; place that part only in sung form sections.
+// Structured voice assignments above take precedence, and explicit
+// instrumental notes (for example the bossa score) never acquire a voice.
+const VOCAL_CUE = /\b(?:vocal(?:s|ist|ly)?|voice|singer|singing|lyric(?:s|-centered)?|chant|choir|rap(?:ping)?|spoken|cante|coro|soneo|melisma|throat singing|overtone singing)\b/i;
+const INSTRUMENTAL_CUE = /\b(?:instrumental|omit(?:s|ted)?|without|no)\b.{0,45}\b(?:voice|vocal|vowel|sing(?:er|ing)?)\b|\b(?:voice|vocal|vowel)\b.{0,45}\b(?:omitted|absent|without)\b/i;
+const VOCAL_FORM_SECTION = /^(?:verse|pre-?chorus|chorus|refrain|stanza|response|call|coro|soneo|hook|chant|aria|recitative|nom-tom|dhrupad|gusheh|return|lead-adlib|jinyangjo|jungmori|jungjungmori|jajinmori|a|b|c)$/i;
+function hasStructuredVoice(recording: RecordingArrangement): boolean {
+  return recording.instruments?.includes('voice') === true
+    || recording.lead === 'voice'
+    || Object.values(recording.sectionInstruments ?? {}).some(instruments => instruments.includes('voice'))
+    || Object.values(recording.solos ?? {}).includes('voice')
+    || Object.values(recording.patternAssignments ?? {}).some(assignments => Object.keys(assignments).some(target => target === 'voice' || target.startsWith('voice:')))
+    || Object.values(recording.lockPatternAssignments ?? {}).some(assignments => assignments.some(target => target === 'voice' || target.startsWith('voice:')));
+}
+for (const recording of Object.values(RECORDING_ARRANGEMENTS)) {
+  if (hasStructuredVoice(recording) || !VOCAL_CUE.test(recording.note) || INSTRUMENTAL_CUE.test(recording.note)) continue;
+  const sections = [...new Set(parseRecordingForm(recording.form).map(section => section.kind)
+    .filter(kind => VOCAL_FORM_SECTION.test(kind)))];
+  // Bulerías' compás is where cante returns after the guitar falseta; llamada
+  // and remate remain instrumental cues.
+  if (/cante to return/i.test(recording.note)) sections.push('compas');
+  if (sections.length) recording.vocalSections = [...new Set(sections)];
 }

@@ -118,6 +118,7 @@ function styleFromSeed(worldId: string, seed: GenreStyleDefinition, canonical: b
         anticipationOffsetSteps:groove.anticipationOffsetSteps,
         microtimingFeel: groove.microtimingFeel,
         humanizeJitterMs:groove.humanizeJitterMs,
+        roughness:groove.roughness,
       },
     },
     melody:{

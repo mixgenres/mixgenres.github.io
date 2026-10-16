@@ -19,8 +19,8 @@ export const GENRE_PACK: GenrePackInput = {
   },
   "pitchSystem": "12-tet",
   "tuningSystem": "12-tet",
-  "scales": ["minor"],
-  "chordQualities": ["Dm", "Bb", "F", "C", "Gm", "A7"],
+  "scales": ["minor", "major"],
+  "chordQualities": ["Am", "Em", "G", "D", "Eb", "Ab", "Bb7", "Cm", "Fm", "G7", "D5", "Eb5", "C5", "F5", "Fmaj7", "Dm", "Bb", "Gm", "A", "F", "C", "Bm"],
   "harmonicRhythm": "bar",
   "cadences": ["Dm"],
   "bassChordInteraction": "Anchor chord roots, answer the lead in phrase gaps, and approach the next chord at the turnaround.",
@@ -31,12 +31,12 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "modern-score",
       "name": "Modern Score",
-      "description": "Modern Score: modern thematic piano and orchestral swell. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Modern Score builds a four-chord piano ostinato into a broad string-and-horn climax. Keep the synth bed quiet at first, add cello weight and orchestral color in stages, then remove the layers until the piano carries the release alone.",
       "patterns": ["modern thematic piano and orchestral swell"],
       "techniques": ["legato", "tremolo", "staccato", "volume-swell", "harmonics", "roll", "accent", "tenuto", "vibrato", "ghost", "open"],
-      "harmony": ["Dm", "Bb", "F", "C", "Gm", "A7"],
+      "harmony": ["Am", "Em", "G", "D"],
       "meter": "4/4",
-      "tempo": [76, 92],
+      "tempo": [56, 72],
       "scale": "minor",
       "roles": {
         "lead": ["piano", "french-horn"],
@@ -46,21 +46,23 @@ export const GENRE_PACK: GenrePackInput = {
         "texture": ["synth"]
       },
       "progressions": {
-        "opening": ["Dm", "Bb", "F", "C"],
-        "theme": ["Dm", "Bb", "F", "C"],
-        "development": ["Gm", "A7", "Dm", "Dm"],
-        "resolution": ["Dm", "Dm"]
+        "opening": ["Am"],
+        "ostinato": ["Am", "Em", "G", "D"],
+        "build": ["Am", "Em", "G", "D"],
+        "climax": ["Am", "Em", "G", "D"],
+        "resolution": ["Am"]
       },
       "requiresChords": true,
       "harmonicRhythm": "bar",
       "harmonyModel": "functional",
       "bassMotion": "root-fifth",
       "form": [
-        {"label": "opening", "bars": 4},
-        {"label": "theme", "bars": 8},
-        {"label": "development", "bars": 8},
-        {"label": "climax", "bars": 8},
-        {"label": "resolution", "bars": 4}
+        {"label": "opening", "bars": 8},
+        {"label": "ostinato", "bars": 16},
+        {"label": "build", "bars": 16},
+        {"label": "climax", "bars": 16},
+        {"label": "release", "bars": 8},
+        {"label": "outro", "bars": 8}
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
@@ -127,13 +129,13 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "golden-age",
       "name": "Golden Age",
-      "description": "Golden Age: Golden Age lyrical strings and brass cadence. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Golden Age score writing sets a clear brass fanfare against a broad, singing string theme. Let the second theme soften and turn harmonically, then use a denser development and battle passage to earn the full orchestral reprise and coda.",
       "patterns": ["Golden Age lyrical strings and brass cadence"],
       "techniques": ["legato", "tremolo", "staccato", "volume-swell", "harmonics", "roll", "accent", "tenuto", "vibrato", "ghost", "open"],
-      "harmony": ["Dm", "Bb", "F", "C", "Gm", "A7"],
+      "harmony": ["Eb", "Ab", "Bb7", "Cm", "Fm", "G7"],
       "meter": "4/4",
-      "tempo": [88, 104],
-      "scale": "minor",
+      "tempo": [116, 132],
+      "scale": "major",
       "roles": {
         "lead": ["piano", "french-horn"],
         "harmony": ["string-ensemble"],
@@ -142,21 +144,25 @@ export const GENRE_PACK: GenrePackInput = {
         "texture": ["synth"]
       },
       "progressions": {
-        "opening": ["Dm", "Bb", "F", "C"],
-        "theme": ["Dm", "Bb", "F", "C"],
-        "development": ["Gm", "A7", "Dm", "Dm"],
-        "resolution": ["Dm", "Dm"]
+        "fanfare": ["Eb", "Ab", "Bb7", "Eb"],
+        "A": ["Eb", "Ab", "Bb7", "Eb"],
+        "B": ["Cm", "Fm", "G7", "Cm"],
+        "development": ["Cm", "Fm", "G7", "Cm"],
+        "battle": ["Eb", "Ab", "Bb7", "Eb"],
+        "coda": ["Eb", "Eb"]
       },
       "requiresChords": true,
       "harmonicRhythm": "bar",
       "harmonyModel": "functional",
       "bassMotion": "root-fifth",
       "form": [
-        {"label": "opening", "bars": 4},
-        {"label": "theme", "bars": 8},
-        {"label": "development", "bars": 8},
-        {"label": "climax", "bars": 8},
-        {"label": "resolution", "bars": 4}
+        {"label": "fanfare", "bars": 16},
+        {"label": "A", "bars": 32},
+        {"label": "B", "bars": 24},
+        {"label": "development", "bars": 32},
+        {"label": "battle", "bars": 32},
+        {"label": "A", "bars": 32},
+        {"label": "coda", "bars": 16}
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
@@ -223,36 +229,38 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "minimal-tension",
       "name": "Minimal Tension",
-      "description": "Minimal Tension: minimal tension repeated short ostinato. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Minimal Tension grows from a narrow, repeated piano-and-cello figure with uneasy semitone color. Change one layer at a time through the long build; keep the pulse in the pitched parts, leave the timpani out, and let the release fall back to the bare cell.",
       "patterns": ["minimal tension repeated short ostinato"],
       "techniques": ["legato", "tremolo", "staccato", "volume-swell", "harmonics", "roll", "accent", "tenuto", "vibrato", "ghost", "open"],
-      "harmony": ["Dm", "Bb", "F", "C", "Gm", "A7"],
+      "harmony": ["D5", "Eb5", "C5", "F5"],
       "meter": "4/4",
-      "tempo": [80, 96],
+      "tempo": [56, 64],
       "scale": "minor",
       "roles": {
-        "lead": ["piano", "french-horn"],
+        "lead": ["piano"],
         "harmony": ["string-ensemble"],
         "bass": ["cello"],
-        "percussion": ["timpani"],
         "texture": ["synth"]
       },
       "progressions": {
-        "opening": ["Dm", "Bb", "F", "C"],
-        "theme": ["Dm", "Bb", "F", "C"],
-        "development": ["Gm", "A7", "Dm", "Dm"],
-        "resolution": ["Dm", "Dm"]
+        "opening": ["D5"],
+        "pulse": ["D5", "D5", "Eb5", "D5"],
+        "descent": ["D5", "C5", "Eb5", "D5"],
+        "build": ["D5", "Eb5", "D5", "C5"],
+        "climax": ["D5", "Eb5", "F5", "D5"],
+        "release": ["D5"]
       },
       "requiresChords": true,
       "harmonicRhythm": "bar",
-      "harmonyModel": "functional",
+      "harmonyModel": "modal-drone",
       "bassMotion": "root-fifth",
       "form": [
-        {"label": "opening", "bars": 4},
-        {"label": "theme", "bars": 8},
-        {"label": "development", "bars": 8},
-        {"label": "climax", "bars": 8},
-        {"label": "resolution", "bars": 4}
+        {"label": "opening", "bars": 16},
+        {"label": "pulse", "bars": 32},
+        {"label": "descent", "bars": 32},
+        {"label": "build", "bars": 48},
+        {"label": "climax", "bars": 32},
+        {"label": "release", "bars": 16}
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
@@ -319,12 +327,12 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "hybrid",
       "name": "Hybrid",
-      "description": "Hybrid: hybrid pulse and layered orchestral hits. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Hybrid score sets a dry piano hook against a low electronic pulse and granular synth color. Bring strings and timpani in as short impact layers, drop them before the hook returns, and keep the acoustic attacks distinct from the programmed low end.",
       "patterns": ["hybrid pulse and layered orchestral hits"],
       "techniques": ["legato", "tremolo", "staccato", "volume-swell", "harmonics", "roll", "accent", "tenuto", "vibrato", "ghost", "open"],
-      "harmony": ["Dm", "Bb", "F", "C", "Gm", "A7"],
+      "harmony": ["Am", "Fmaj7", "C", "G", "Em"],
       "meter": "4/4",
-      "tempo": [96, 112],
+      "tempo": [64, 80],
       "scale": "minor",
       "roles": {
         "lead": ["piano", "french-horn"],
@@ -334,21 +342,21 @@ export const GENRE_PACK: GenrePackInput = {
         "texture": ["synth"]
       },
       "progressions": {
-        "opening": ["Dm", "Bb", "F", "C"],
-        "theme": ["Dm", "Bb", "F", "C"],
-        "development": ["Gm", "A7", "Dm", "Dm"],
-        "resolution": ["Dm", "Dm"]
+        "opening": ["Am", "Fmaj7"],
+        "A": ["Am", "Fmaj7", "C", "G"],
+        "evolution": ["Am", "Fmaj7", "C", "Em"],
+        "dissolve": ["Am", "Fmaj7"]
       },
       "requiresChords": true,
       "harmonicRhythm": "bar",
       "harmonyModel": "functional",
       "bassMotion": "root-fifth",
       "form": [
-        {"label": "opening", "bars": 4},
-        {"label": "theme", "bars": 8},
-        {"label": "development", "bars": 8},
-        {"label": "climax", "bars": 8},
-        {"label": "resolution", "bars": 4}
+        {"label": "opening", "bars": 8},
+        {"label": "A", "bars": 16},
+        {"label": "evolution", "bars": 16},
+        {"label": "A", "bars": 16},
+        {"label": "dissolve", "bars": 8}
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
@@ -415,12 +423,12 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "epic",
       "name": "Epic",
-      "description": "Epic: epic low ostinato and brass climax. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Epic score carries a broad horn motif over a driving low ostinato and timpani. Alternate battle passages with a sustained chorale, cut the pulse for a real break, then bring the full ensemble back for the climax and let the final fall clear the low percussion.",
       "patterns": ["epic low ostinato and brass climax"],
       "techniques": ["legato", "tremolo", "staccato", "volume-swell", "harmonics", "roll", "accent", "tenuto", "vibrato", "ghost", "open"],
-      "harmony": ["Dm", "Bb", "F", "C", "Gm", "A7"],
+      "harmony": ["Dm", "Bb", "Gm", "A", "F", "C"],
       "meter": "4/4",
-      "tempo": [104, 120],
+      "tempo": [136, 148],
       "scale": "minor",
       "roles": {
         "lead": ["piano", "french-horn"],
@@ -430,21 +438,27 @@ export const GENRE_PACK: GenrePackInput = {
         "texture": ["synth"]
       },
       "progressions": {
-        "opening": ["Dm", "Bb", "F", "C"],
-        "theme": ["Dm", "Bb", "F", "C"],
-        "development": ["Gm", "A7", "Dm", "Dm"],
-        "resolution": ["Dm", "Dm"]
+        "opening": ["Dm", "Bb", "Gm", "A"],
+        "battle": ["Dm", "Bb", "Gm", "A"],
+        "chorale": ["F", "C", "Bb", "F"],
+        "break": ["Dm"],
+        "climax": ["Dm", "Bb", "Gm", "A"],
+        "fall": ["Bb", "A"],
+        "coda": ["Dm"]
       },
       "requiresChords": true,
       "harmonicRhythm": "bar",
       "harmonyModel": "functional",
       "bassMotion": "root-fifth",
       "form": [
-        {"label": "opening", "bars": 4},
-        {"label": "theme", "bars": 8},
-        {"label": "development", "bars": 8},
-        {"label": "climax", "bars": 8},
-        {"label": "resolution", "bars": 4}
+        {"label": "opening", "bars": 8},
+        {"label": "battle", "bars": 32},
+        {"label": "chorale", "bars": 16},
+        {"label": "battle", "bars": 32},
+        {"label": "break", "bars": 8},
+        {"label": "climax", "bars": 24},
+        {"label": "fall", "bars": 8},
+        {"label": "coda", "bars": 16}
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "straight", "humanizeJitterMs": 7},
       "cells": [
@@ -511,39 +525,41 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "ambient-score",
       "name": "Ambient Score",
-      "description": "Ambient Score: ambient score floating motif and long textures. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Ambient Score floats a soft synthesizer melody through long string and cello tones, with piano replies after each breath. Move the harmony slowly, keep percussion out, and dissolve the last phrase without forcing a dance pulse or a climactic drum hit.",
       "patterns": ["ambient score floating motif and long textures"],
       "techniques": ["legato", "tremolo", "staccato", "volume-swell", "harmonics", "roll", "accent", "tenuto", "vibrato", "ghost", "open"],
-      "harmony": ["Dm", "Bb", "F", "C", "Gm", "A7"],
+      "harmony": ["D5", "Bm", "G", "A"],
       "meter": "4/4",
-      "tempo": [56, 72],
-      "scale": "minor",
+      "tempo": [48, 64],
+      "scale": "major",
       "roles": {
-        "lead": ["piano", "french-horn"],
+        "lead": ["synth"],
         "harmony": ["string-ensemble"],
         "bass": ["cello"],
-        "percussion": ["timpani"],
-        "texture": ["synth"]
+        "texture": ["piano"]
       },
       "progressions": {
-        "opening": ["Dm", "Bb", "F", "C"],
-        "theme": ["Dm", "Bb", "F", "C"],
-        "development": ["Gm", "A7", "Dm", "Dm"],
-        "resolution": ["Dm", "Dm"]
+        "opening": ["D5"],
+        "A": ["D5", "Bm", "G", "A"],
+        "solo": ["D5", "Bm", "G", "A"],
+        "dissolve": ["D5"]
       },
       "requiresChords": true,
       "harmonicRhythm": "bar",
       "harmonyModel": "functional",
       "bassMotion": "root-fifth",
       "form": [
-        {"label": "opening", "bars": 4},
-        {"label": "theme", "bars": 8},
-        {"label": "development", "bars": 8},
-        {"label": "climax", "bars": 8},
-        {"label": "resolution", "bars": 4}
+        {"label": "opening", "bars": 16},
+        {"label": "A", "bars": 32},
+        {"label": "solo", "bars": 32},
+        {"label": "A", "bars": 32},
+        {"label": "dissolve", "bars": 16}
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
+        {"name": "ambient score synthetic long-tone lead motif", "shortName": "Synth slow motif", "description": "Play a beginner three-note contour with long, connected tones and a small breath before the next phrase. Let the performance layer vary register and note color without speeding up the calm pulse.", "role": "lead", "onsets": [0, 1.5, 2.75], "instruments": ["synth"], "cycleLength": 1, "durations": [1.2, 0.9, 1.0], "articulation": "legato", "pedagogicalStudy": "answer", "arrangementVariation": true},
+        {"name": "ambient score synthetic phrase answer", "shortName": "Synth answering phrase", "description": "Answer after the lead breath with two soft, connected notes. Keep the contour inside the same slow harmonic color and leave the bar line open.", "role": "lead", "onsets": [1.75, 3], "instruments": ["synth"], "cycleLength": 1, "durations": [0.65, 0.8], "articulation": "legato", "pedagogicalStudy": "answer", "arrangementVariation": true},
+        {"name": "ambient score soft piano breath reply", "shortName": "Piano breath reply", "description": "Place two quiet piano tones in the open space after the sustained lead. This beginner answer marks a breath without turning the piano into a regular beat.", "role": "texture", "onsets": [1.5, 3.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.45, 0.75], "articulation": "tenuto", "pedagogicalStudy": "answer", "arrangementVariation": true},
         {"name": "ambient score floating motif and long textures piano statement", "role": "lead", "onsets": [0], "instruments": ["piano"], "cycleLength": 1, "durations": [1.5], "articulation": "legato"},
         {"name": "ambient score floating motif and long textures piano cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "ambient score floating motif and long textures french-horn statement", "role": "lead", "onsets": [0], "instruments": ["french-horn"], "cycleLength": 1, "durations": [1.5], "articulation": "legato"},
@@ -565,6 +581,14 @@ export const GENRE_PACK: GenrePackInput = {
         "synth": ["staccato", "legato", "accent", "vibrato"]
       },
       "instrumentDialects": {
+        "synth:lead": {
+          "allowedTechniques": ["legato", "tenuto", "vibrato", "accent"],
+          "defaultTechnique": "legato"
+        },
+        "piano:texture": {
+          "allowedTechniques": ["legato", "tenuto", "accent"],
+          "defaultTechnique": "tenuto"
+        },
         "piano:lead": {
           "allowedTechniques": ["staccato", "legato", "accent", "tenuto"],
           "defaultTechnique": "staccato"

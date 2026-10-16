@@ -244,7 +244,7 @@ test('reference arrangements shape section entrances and instrument phrases inst
     'the breakdown opens space by removing the rhythm section and sub');
   assert.deepEqual(sectionParts(deepHouse, 'variation'), ['drums', 'rhodes', 'shaker', 'synth'],
     'the later groove restores the complete electronic and keyboard texture');
-  assert.equal(sectionPattern(deepHouse, 'bass-entry', 'synth', 'bass'), 'Synthesizer basics');
+  assert.equal(sectionPattern(deepHouse, 'bass-entry', 'synth', 'bass'), 'Low anchor');
   assert.equal(sectionPattern(deepHouse, 'chords', 'synth', 'bass'), 'Synthesizer variation');
   assert.equal(sectionPattern(deepHouse, 'breakdown', 'rhodes'), 'Electric Piano reply');
   assert.equal(sectionPattern(deepHouse, 'variation', 'shaker'), 'Shaker reply');
@@ -270,8 +270,22 @@ test('reference arrangements shape section entrances and instrument phrases inst
   assert.deepEqual(sectionParts(club, 'build'), ['bass', 'drums', 'synth']);
   assert.equal(sectionPattern(club, 'verse', 'synth'), 'Synthesizer reply');
   assert.equal(sectionPattern(club, 'chorus', 'synth'), 'Synthesizer variation');
-  assert.equal(sectionPattern(club, 'verse', 'drums'), 'Drum kit ghost');
+  assert.equal(sectionPattern(club, 'verse', 'drums'), 'Kit');
   assert.equal(sectionPattern(club, 'chorus', 'drums'), 'Drum kit variation');
+});
+
+test('Philly Disco strings move from their theme bed through replies into a source phrase', () => {
+  const philly = createCatalogSong('funk-philly-disco_song');
+  const strings = philly.tracks.find(track => track.instrumentId === 'string-ensemble');
+  assert.ok(strings, 'the orchestral string section remains part of the Philly Disco ensemble');
+  assert.equal(sectionPattern(philly, 'theme', 'string-ensemble'), 'String swell');
+  assert.equal(sectionPattern(philly, 'groove', 'string-ensemble'), 'String Ensemble reply');
+  assert.equal(sectionPattern(philly, 'solo', 'string-ensemble'), 'String swell');
+  const groove = philly.regions.find(region => region.kind === 'groove')!;
+  const grooveCells = new Set(philly.measures.slice(groove.start, groove.end)
+    .map(measure => measure.patternDetailsByTrack?.[strings.id]?.patternId).filter(Boolean));
+  assert.ok(grooveCells.size > 1,
+    'the unpinned string reply develops through its repeated groove phrases');
 });
 
 function regionAudioWindow(performance: Performance, regionId: string): { start: number; end: number } {
@@ -295,7 +309,7 @@ test('minimalist pulse and Persian chamber dialogue keep their authored breathin
   assert.equal(sectionPattern(minimalist, 'pulse', 'violin'), 'Violin seed cell');
   assert.equal(sectionPattern(minimalist, 'phase-overlap', 'violin'), 'Violin additive variation');
   assert.equal(sectionPattern(minimalist, 'phase-overlap', 'marimba'), 'Marimba phase shift');
-  assert.equal(sectionPattern(minimalist, 'coda', 'violin'), 'Violin close');
+  assert.equal(sectionPattern(minimalist, 'coda', 'violin'), 'Violin seed cell');
   const phase = minimalist.regions.find(region => region.kind === 'phase-overlap')!;
   const phaseWindow = regionAudioWindow(minimalistPerformance, phase.id);
   const phaseNotes = minimalistPerformance.notes.filter(note => note.trackId === violinTrack.id
@@ -451,10 +465,48 @@ test('Persian Shur tuning and instrumental sample identities survive catalog res
   assert.equal(shur.getCentsOffset(67, 2, { instrumentId: 'tar' }), 0,
     'stable modal degrees remain at their authored pitch');
 
+  const dastgah = createCatalogSong('persian-dastgah_song');
+  const verseSections = dastgah.regions.filter(region => region.kind === 'verse');
+  const dastgahVoice = dastgah.tracks.find(track => track.instrumentId === 'voice')!;
+  assert.equal(verseSections.length, 3);
+  assert.ok(verseSections[0].activeInstrumentIds?.includes('voice'));
+  assert.equal(verseSections[0].leadInstrumentId, 'voice', 'the first sung phrase is identified as the foreground');
+  assert.deepEqual(verseSections[1].activeInstrumentIds, ['voice'],
+    'the avaz return becomes a genuinely unaccompanied singer passage');
+  assert.deepEqual(verseSections[1].solo?.trackIds, [dastgahVoice.id]);
+  assert.equal(verseSections[1].solo?.mode, 'unaccompanied');
+  assert.equal(verseSections[1].leadInstrumentId, 'voice');
+  assert.equal(verseSections[2].activeInstrumentIds?.includes('voice'), false,
+    'the final verse gives the instruments room instead of extending the synthetic vocal layer');
+  assert.equal(verseSections[2].leadInstrumentId, 'tar', 'the instrumental return names its actual lead');
+  assert.equal(PATTERNS_BY_ID[dastgah.arrangement[verseSections[0].id]?.[dastgahVoice.id] ?? '']?.shortName, 'Vocal breath line');
+  assert.equal(PATTERNS_BY_ID[dastgah.arrangement[verseSections[1].id]?.[dastgahVoice.id] ?? '']?.shortName, 'Vocal variation');
+  const dastgahPerformance = compileWholeSong(dastgah);
+  assert.equal(dastgahPerformance.notes.some(note => note.trackId === dastgahVoice.id
+    && note.bar >= verseSections[2].start && note.bar < verseSections[2].end), false,
+  'the instrumental return has no hidden vowel attacks');
+
   const instrumental = createCatalogSong('persian-instrumental-ensemble_song');
   assert.ok(instrumental.tracks.some(track => track.instrumentId === 'tar'));
   assert.ok(instrumental.tracks.every(track => track.instrumentId !== 'voice'),
     'an instrumental ensemble never resolves the generic vocal lead track');
+  const partPattern = (kind: string, instrumentId: string) => {
+    const region = instrumental.regions.find(item => item.kind === kind);
+    assert.ok(region, `the instrumental score contains ${kind}`);
+    const track = instrumental.tracks.find(item => item.instrumentId === instrumentId);
+    assert.ok(track, `the instrumental score contains ${instrumentId}`);
+    const patternId = instrumental.arrangement[region.id]?.[track.id];
+    assert.ok(patternId, `${kind} assigns ${instrumentId}`);
+    return PATTERNS_BY_ID[patternId]?.shortName;
+  };
+  assert.equal(partPattern('prelude', 'tar'), 'Measured opening');
+  assert.equal(partPattern('theme', 'tar'), 'Tar gushe phrase');
+  assert.equal(partPattern('solo', 'tar'), 'Tar chaharmezrab');
+  assert.equal(partPattern('development', 'santur'), 'santur variation');
+  assert.equal(partPattern('theme', 'santur'), 'Santur reply');
+  assert.deepEqual(instrumental.regions.find(item => item.kind === 'solo')?.activeInstrumentIds, ['tar'],
+    'the chaharmezrab section is a real unaccompanied tar feature');
+  assert.equal(partPattern('coda', 'tar'), 'Tar forud');
   const instrumentalPerformance = compileWholeSong(instrumental);
   assert.ok(instrumentalPerformance.notes.length > 100);
   const tarTrackId = instrumental.tracks.find(track => track.instrumentId === 'tar')!.id;

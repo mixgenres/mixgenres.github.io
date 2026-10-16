@@ -13,6 +13,7 @@ const RECORDING_SECTION_LABELS: Record<string, string> = {
   'phase-overlap': 'marimba phase shift',
   'full-ensemble': 'full ensemble',
   release: 'texture retreat',
+  'whistle-return': 'returning sygyt whistle phrase',
   dialogo: 'diálogo',
   introduccion: 'introducción',
   variacion: 'variación',
@@ -105,6 +106,18 @@ function chooseCatalogEnsemble(
   const requestedIds = recording.instruments
     ? new Set(recording.instruments)
     : new Set(authoredEnsemble.flatMap(part => part.instrumentIds));
+  const voiceIsAssigned = recording.vocalSections?.length
+    || recording.lead === 'voice'
+    || recording.instruments?.includes('voice')
+    || Object.values(recording.sectionInstruments ?? {}).some(instruments => instruments.includes('voice'))
+    || Object.values(recording.solos ?? {}).includes('voice')
+    || Object.values(recording.patternAssignments ?? {}).some(assignments => Object.keys(assignments).some(target => target === 'voice' || target.startsWith('voice:')))
+    || Object.values(recording.lockPatternAssignments ?? {}).some(assignments => assignments.some(target => target === 'voice' || target.startsWith('voice:')));
+  // Voice is part of many style palettes, but the MIDI voice patch is a
+  // sustained-vowel approximation. Do not turn palette availability into an
+  // automatic vocal arrangement for every sample.
+  const hasNonVocalPart = authoredEnsemble.some(part => part.instrumentIds.some(instrumentId => instrumentId !== 'voice'));
+  if (!recording.instruments && !voiceIsAssigned && hasNonVocalPart) requestedIds.delete('voice');
   const ensemble = authoredEnsemble.map(part => ({
     ...part,
     instrumentIds: part.instrumentIds.filter(instrumentId => requestedIds.has(instrumentId)),
@@ -160,6 +173,9 @@ export function createCatalogSong(id: string): Sheet {
   const playableRecording = {
     ...recording,
     lead: recording.lead && selected.keptIds.has(recording.lead) ? recording.lead : undefined,
+    sectionLeads: recording.sectionLeads
+      ? Object.fromEntries(Object.entries(recording.sectionLeads).filter(([, instrument]) => selected.keptIds.has(instrument)))
+      : undefined,
     sectionInstruments: recording.sectionInstruments
       ? Object.fromEntries(Object.entries(recording.sectionInstruments).map(([kind, ids]) => [kind, ids.filter(instrument => selected.keptIds.has(instrument))]))
       : undefined,
@@ -182,12 +198,27 @@ export function createCatalogSong(id: string): Sheet {
   };
   if (playableRecording.lead) assertActiveMember(playableRecording.lead);
   const sections = parseRecordingForm(recording.form);
+  const vocalSections = playableRecording.vocalSections ? new Set(playableRecording.vocalSections) : undefined;
+  const formSectionOccurrences = new Map<string, number>();
   const form: FormStepTemplate[] = sections.map((part, index) => {
-    const sectionBase = playableRecording.sectionInstruments?.[part.kind] ?? baseInstrumentIds;
-    const active = [...new Set(sectionBase)];
+    const occurrence = (formSectionOccurrences.get(part.kind) ?? 0) + 1;
+    formSectionOccurrences.set(part.kind, occurrence);
+    const occurrenceKey = `${part.kind}#${occurrence}`;
+    const sectionBase = playableRecording.sectionInstruments?.[occurrenceKey]
+      ?? playableRecording.sectionInstruments?.[part.kind] ?? baseInstrumentIds;
+    const activeSet = new Set(sectionBase);
+    if (vocalSections) {
+      if (instruments.includes('voice') && vocalSections.has(part.kind)) activeSet.add('voice');
+      else activeSet.delete('voice');
+    }
+    const active = [...activeSet];
     active.forEach(assertActiveMember);
-    const solo = playableRecording.solos?.[part.kind];
-    const lead = solo ?? playableRecording.lead;
+    const solo = playableRecording.solos?.[occurrenceKey] ?? playableRecording.solos?.[part.kind];
+    const soloMode = playableRecording.soloModes?.[occurrenceKey]
+      ?? playableRecording.soloModes?.[part.kind]
+      ?? (part.kind.includes('trading') ? 'trading' as const : 'accompanied' as const);
+    const sectionLead = playableRecording.sectionLeads?.[occurrenceKey] ?? playableRecording.sectionLeads?.[part.kind];
+    const lead = solo ?? sectionLead ?? playableRecording.lead;
     for (const feature of [solo, lead]) {
       if (feature && !active.includes(feature)) throw new Error(`Recording ${id} features ${feature} in inactive section ${part.kind}`);
     }
@@ -196,7 +227,7 @@ export function createCatalogSong(id: string): Sheet {
       kind: part.kind, bars: part.bars, intensity: part.intensity,
       instrumentIds: [...active], ...(lead ? { leadInstrumentId: lead } : {}),
       ...(recording.sectionBpm?.[part.kind] ? { bpm: recording.sectionBpm[part.kind] } : {}),
-      ...(solo ? { soloInstrumentId: solo, soloMode: part.kind.includes('trading') ? 'trading' as const : 'accompanied' as const } : {}),
+      ...(solo ? { soloInstrumentId: solo, soloMode } : {}),
     };
   });
   const energyMappings = Object.fromEntries(form.map((f, index) => [f.key, sections[index].energy]));
@@ -209,11 +240,32 @@ export function createCatalogSong(id: string): Sheet {
   overrides.harmony = { ...style.harmony, sectionProgressions, progressionTemplates: [{ value: Object.values(sectionProgressions)[0], w: 1 }] };
   overrides.rhythm = { ...style.rhythm, defaultBpm: recording.bpm, tempoRange: [recording.bpm, recording.bpm] };
   const sheet = createSheet({ genreId: entry.genreId, styleId: entry.styleId, overrides });
+  const samplePatternIds = Object.values(PATTERNS_BY_ID)
+    .filter(pattern => pattern.styleIds?.includes(style.id))
+    .map(pattern => pattern.id);
+  const eligibleStylePatterns = [...new Set([...(style.patterns?.allowed ?? []), ...samplePatternIds])]
+    .map(patternId => PATTERNS_BY_ID[patternId])
+    .filter((pattern): pattern is NonNullable<typeof pattern> => !!pattern);
   const arrangement = { ...sheet.arrangement };
   const lockedPatternAssignments: NonNullable<typeof sheet.lockedPatternAssignments> = {};
+  const sectionOccurrences = new Map<string, number>();
+  const sectionOccurrenceKeys = new Map<string, string>();
   for (const region of sheet.regions) {
-    const requested = playableRecording.patternAssignments?.[region.kind];
-    if (!requested) continue;
+    const occurrence = (sectionOccurrences.get(region.kind) ?? 0) + 1;
+    sectionOccurrences.set(region.kind, occurrence);
+    sectionOccurrenceKeys.set(region.id, `${region.kind}#${occurrence}`);
+  }
+  const patternAssignmentsForRegion = (region: Sheet['regions'][number]) => ({
+    ...(playableRecording.patternAssignments?.[region.kind] ?? {}),
+    ...(playableRecording.patternAssignments?.[sectionOccurrenceKeys.get(region.id) ?? ''] ?? {}),
+  });
+  const lockTargetsForRegion = (region: Sheet['regions'][number]) => [...new Set([
+    ...(playableRecording.lockPatternAssignments?.[region.kind] ?? []),
+    ...(playableRecording.lockPatternAssignments?.[sectionOccurrenceKeys.get(region.id) ?? ''] ?? []),
+  ])];
+  for (const region of sheet.regions) {
+    const requested = patternAssignmentsForRegion(region);
+    if (!Object.keys(requested).length) continue;
     arrangement[region.id] = { ...(arrangement[region.id] ?? {}) };
     lockedPatternAssignments[region.id] ??= {};
     for (const [target, shortName] of Object.entries(requested)) {
@@ -222,20 +274,48 @@ export function createCatalogSong(id: string): Sheet {
       const role = roleSeparator > 0 ? target.slice(roleSeparator + 1) : undefined;
       const track = sheet.tracks.find(part => part.instrumentId === instrumentId && (!role || part.role === role));
       if (!track) throw new Error(`Recording ${id} assigns a pattern to absent instrument target ${target}`);
+      // Kind-level pattern assignments can flow to an occurrence whose
+      // section personnel intentionally removes that instrument. Keep the
+      // section's silent arrangement cell instead of restoring a hidden part.
+      if (region.activeInstrumentIds && !region.activeInstrumentIds.includes(instrumentId)) continue;
       const key = shortName.toLocaleLowerCase();
-      const eligiblePatterns = (style.patterns?.allowed ?? [])
-        .map(candidateId => PATTERNS_BY_ID[candidateId])
-        .filter((pattern): pattern is NonNullable<typeof pattern> => !!pattern
-          && pattern.instruments?.includes(instrumentId) === true
+      // Explicit sample arrangements may retain a stable, source-authored cell
+      // whose duplicate practice alias is hidden from free pattern choices.
+      // Keep resolving those exact written assignments while the phrase picker
+      // and improvising engine use only the enabled pattern set.
+      const eligiblePatterns = eligibleStylePatterns
+        .filter(pattern => pattern.instruments?.includes(instrumentId) === true
           && (!role || pattern.roles.includes(role)));
       // Prefer the visible teaching label over descriptive source tags. Tags
       // often mention a related phrase or instrument and must not redirect an
-      // exact closing-cell assignment to a generic source cell.
-      const patternId = eligiblePatterns.find(pattern => pattern.shortName?.toLocaleLowerCase() === key)?.id
+      // exact closing-cell assignment to a generic source cell. A trailing
+      // source-label match is retained for older recording assignments after
+      // generic visible names acquire their style cue.
+      let patternId = eligiblePatterns.find(pattern => pattern.shortName?.toLocaleLowerCase() === key)?.id
         ?? eligiblePatterns.find(pattern => pattern.name.toLocaleLowerCase().endsWith(`: ${key}`))?.id
+        ?? eligiblePatterns.find(pattern => pattern.tags.some(tag => tag.toLocaleLowerCase() === key || tag.toLocaleLowerCase().endsWith(` ${key}`)))?.id
         ?? eligiblePatterns.find(pattern => pattern.family?.toLocaleLowerCase() === key)?.id
         ?? eligiblePatterns.find(pattern => pattern.tags.some(tag => tag.toLocaleLowerCase() === key))?.id;
       if (!patternId) throw new Error(`Recording ${id} cannot resolve ${instrumentId} pattern ${shortName}`);
+      const requestedPattern = PATTERNS_BY_ID[patternId];
+      if ((requestedPattern?.pedagogicalStudy === 'reduction' || requestedPattern?.pedagogicalStudy === 'technique')
+        && requestedPattern.pedagogicalSourcePatternId) {
+        const sourcePattern = eligiblePatterns.find(pattern => pattern.id === requestedPattern.pedagogicalSourcePatternId
+          && pattern.instruments?.includes(instrumentId) === true
+          && (!role || pattern.roles.includes(role)));
+        if (!sourcePattern) throw new Error(`Recording ${id} maps practice-only ${shortName} to a missing full style source for ${instrumentId}`);
+        const occurrence = Number(sectionOccurrenceKeys.get(region.id)?.split('#').at(-1) ?? 1);
+        const developedSection = occurrence > 1 || (region.energy ?? 3) >= 4;
+        const phraseVariation = developedSection
+          ? eligiblePatterns.find(pattern => pattern.pedagogicalStudy === 'variation' && pattern.arrangementVariation === true
+            && pattern.instruments?.includes(instrumentId) === true
+            && pattern.roles.includes(track.role)
+            && patternAvailableInSection(pattern, region.kind))
+          : undefined;
+        patternId = phraseVariation?.id ?? sourcePattern.id;
+      } else if (requestedPattern?.provenance?.startsWith('Generic phrase-close')) {
+        throw new Error(`Recording ${id} assigns a neutral timing drill (${shortName}) as a style cadence for ${instrumentId}`);
+      }
       arrangement[region.id][track.id] = patternId;
       const basePattern = PATTERNS_BY_ID[patternId];
       const hasPhraseVariation = (style.patterns?.allowed ?? []).some(candidateId => {
@@ -248,7 +328,7 @@ export function createCatalogSong(id: string): Sheet {
       });
       // The explicit cell remains the section's opening pattern. Do not freeze
       // it for the whole form when this style has a compatible phrase lesson.
-      const lockTargets = playableRecording.lockPatternAssignments?.[region.kind] ?? [];
+      const lockTargets = lockTargetsForRegion(region);
       if (lockTargets.includes(instrumentId) || lockTargets.includes(target) || !hasPhraseVariation) {
         lockedPatternAssignments[region.id][track.id] = patternId;
       }
@@ -269,10 +349,9 @@ export function createCatalogSong(id: string): Sheet {
       const sectionTrackKey = `${region.kind}:${track.id}`;
       const occurrence = sectionOccurrence.get(sectionTrackKey) ?? 0;
       const explicitTarget = [instrumentId, `${instrumentId}:${track.role}`];
-      const explicitlyAssigned = explicitTarget.some(target =>
-        Object.hasOwn(playableRecording.patternAssignments?.[region.kind] ?? {}, target));
-      const explicitlyLocked = (playableRecording.lockPatternAssignments?.[region.kind] ?? [])
-        .some(target => explicitTarget.includes(target));
+      const regionAssignments = patternAssignmentsForRegion(region);
+      const explicitlyAssigned = explicitTarget.some(target => Object.hasOwn(regionAssignments, target));
+      const explicitlyLocked = lockTargetsForRegion(region).some(target => explicitTarget.includes(target));
       const originalPatternId = firstCellBySection.get(sectionTrackKey);
       if (occurrence > 0 && basePatternId === originalPatternId && !explicitlyAssigned && !explicitlyLocked) {
         const variations = (style.patterns?.allowed ?? [])

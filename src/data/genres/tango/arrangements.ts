@@ -44,6 +44,18 @@ const pedagogy: Record<string, { description: string; patterns: string[] }> = {
   'chacarera-crossover': { description: 'This crossover is chacarera-led: guitar and bombo mark the 6/8–3/4 hemiola, with voice and violin answering across the cycle.', patterns: ['6/8–3/4 pulse', 'Guitar copla', 'Bombo answer'] },
 };
 
+// Tango's mugre is not a generic shuffle or loose humanize switch. Each
+// orquesta gets a small amount of correlated push/pull and accent grain, with
+// a tighter pocket for styles whose identity depends on clean dance pulse.
+const MUGRE_BY_STYLE: Record<string, number> = {
+  'golden-age': .42, canyengue: .62, 'guardia-nueva-de-caro': .52,
+  canaro: .26, darienzo: .55, 'di-sarli': .2, troilo: .66,
+  pugliese: .82, salgan: .68, 'tango-cancion': .4, milonga: .38,
+  vals: .24, 'piazzolla-nuevo-tango': .58, 'electrotango-gotan': .08,
+  'electro-rock-bajofondo': .34, 'modern-orquesta': .46,
+  'chacarera-crossover': .32,
+};
+
 function conciseCellLabel(id: string, item: AuthoredCell): string {
   if (item.shortName && item.shortName.trim().split(/\s+/).length <= 3) return item.shortName.trim();
   const instrument = item.instruments?.[0] ?? '';
@@ -90,8 +102,10 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
     let lines: AuthoredCell[];
     let canyengueDrag: AuthoredCell | undefined;
     if (beats === 2) {
-      lines = [line('bandoneon', 'Clipped two-bar milonga motif', [0, .5, .75, 1.5, 2, 2.75, 3, 3.5], [1, 3, 5, 3, 4, 3, 2, 1], [.35, .18, .55, .35, .55, .18, .35, .35], 'staccato'),
-        line('violin', 'Milonga violin answer', [1, 1.5, 2.5, 3, 3.5], [5, 3, 4, 2, 1], [.35, .35, .35, .35, .35], 'staccato')];
+      const bandoneonName = id === 'canyengue' ? 'Canyengue clipped two-bar motif' : 'Milonga clipped two-bar motif';
+      const violinAnswerName = id === 'canyengue' ? 'Canyengue clipped violin answer' : 'Milonga violin answer';
+      lines = [line('bandoneon', bandoneonName, [0, .5, .75, 1.5, 2, 2.75, 3, 3.5], [1, 3, 5, 3, 4, 3, 2, 1], [.35, .18, .55, .35, .55, .18, .35, .35], 'staccato'),
+        line('violin', violinAnswerName, [1, 1.5, 2.5, 3, 3.5], [5, 3, 4, 2, 1], [.35, .35, .35, .35, .35], 'staccato')];
     } else if (id === 'vals') {
       lines = [line('bandoneon', 'Flowing ternary motif', [0, 1, 1.5, 2, 3, 4.5, 5], [1, 3, 4, 5, 6, 2, 1], [.9, .4, .4, .85, 1.35, .4, .85]),
         line('violin', 'Vals countermelody', [0, 2, 3, 4, 5], [5, 3, 4, 2, 1], [1.8, .9, .9, .9, .9])];
@@ -266,6 +280,7 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
       // local to the ending so its long silence does not become a looped groove.
       const cadenceLine = (instrument: string, degrees: number[], durations: number[]) => {
         const close = line(instrument, 'Pugliese chan-chan close: two separated attacks', [0, 2.5], degrees, durations, 'staccato', 1);
+        close.timingLock = 'ensemble';
         close.shortName = 'Chan-chan close';
         close.difficulty = 2;
         close.description = 'Land the tonic close in two short ensemble attacks, then leave the remaining beat empty; make the space between hits audible.';
@@ -276,12 +291,14 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
       lines.push(cadenceLine('bandoneon', [5, 1], [.48, .28]));
       lines.push(cadenceLine('violin', [7, 1], [.48, .28]));
       const pianoClose = cell('Pugliese chan-chan close: two separated attacks', 'harmony', 'piano', [0, 2.5], [.48, .28], 'staccato', [chord, chord], [1, .58]);
+      pianoClose.timingLock = 'ensemble';
       pianoClose.shortName = 'Chan-chan close';
       pianoClose.difficulty = 2;
       pianoClose.description = 'Strike a weighty first chord, answer it softly after the long gap, and release into the final silence.';
       pianoClose.articulations = ['yumba', 'staccato'];
       const bassClose = cell('Pugliese chan-chan close: two separated attacks', 'bass', 'upright-bass', [0, 2.5], [.38, .24], 'pizzicato',
         [pitch(5, 40), pitch(1, 40)], [1, .58]);
+      bassClose.timingLock = 'ensemble';
       bassClose.shortName = 'Chan-chan close';
       bassClose.difficulty = 2;
       bassClose.description = 'Anchor the two separated ensemble attacks on dominant then tonic; leave the final beat silent.';
@@ -329,6 +346,7 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
     } : style.mix;
     return { ...style, ...(authored ? { description: authored.description, patterns: authored.patterns } : {}),
       cells, instrumentTechniques: techniques, instrumentDialects: dialects, mix,
-      bassMotion: 'root-fifth', groove: { ...style.groove, swingPercentage: 50 } };
+      bassMotion: 'root-fifth', groove: { ...style.groove, swingPercentage: 50,
+        roughness: MUGRE_BY_STYLE[id] ?? .35 } };
   }) };
 }

@@ -1,0 +1,127 @@
+{
+  "genreId": "kizomba",
+  "reviewed": "2026-10-15",
+  "status": "Five linked Apple Music candidates are collected for all seven Kizomba styles. The native Music app was locked during this pass, so listening comparisons and timecodes remain pending; these are candidates, not verified sonic matches.",
+  "source": "Apple Music track pages located as listening candidates. No reference audio downloaded or processed.",
+  "styles": [
+    {
+      "styleId": "kizomba-traditional",
+      "compare": [
+        "how the Angolan guitar and bass phrases sit against the dance pulse",
+        "the shape and breath of the vocal lead and its instrumental responses",
+        "how percussion supports the groove without turning it into a generic backbeat",
+        "the way phrase endings, pickups, and section changes create forward motion",
+        "the balance of voice, guitar, bass, and percussion in the recorded ensemble"
+      ],
+      "recordings": [
+        { "title": "Casamento", "artist": "C4 Pedro", "url": "https://music.apple.com/us/song/1043940236", "timecodes": [] },
+        { "title": "Céu", "artist": "C4 Pedro", "url": "https://music.apple.com/us/song/1456619233", "timecodes": [] },
+        { "title": "Porquê?", "artist": "Matias Damásio", "url": "https://music.apple.com/us/song/358399987", "timecodes": [] },
+        { "title": "Não Me Toca", "artist": "Anselmo Ralph", "url": "https://music.apple.com/us/song/1043975699", "timecodes": [] },
+        { "title": "Xuxu", "artist": "Matias Damásio", "url": "https://music.apple.com/us/song/1352428541", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "kizomba-semba-derived",
+      "compare": [
+        "the more animated semba-derived guitar and bass movement",
+        "how the lead and instrumental replies trade phrases in a social dance feel",
+        "rhythmic lift and variation across repeated sections",
+        "the balance between a grounded low part and mobile upper-register figures",
+        "how ensemble timing stays buoyant without becoming a rigid loop"
+      ],
+      "recordings": [
+        { "title": "Semba Original", "artist": "Paulo Flores", "url": "https://music.apple.com/us/song/1545910242", "timecodes": [] },
+        { "title": "Kalumba", "artist": "Carlos Burity & Matias Damásio", "url": "https://music.apple.com/us/song/1605951509", "timecodes": [] },
+        { "title": "Potpourris do Semba", "artist": "Bonga", "url": "https://music.apple.com/us/song/480457295", "timecodes": [] },
+        { "title": "Kizomba Na Passada", "artist": "Livongh", "url": "https://music.apple.com/us/song/1436535817", "timecodes": [] },
+        { "title": "Loucos (feat. Héber Marques)", "artist": "Matias Damásio", "url": "https://music.apple.com/us/song/1153059150", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "kizomba-passada",
+      "compare": [
+        "the relaxed but propulsive passada pulse and the way bass pickups lead into changes",
+        "guitar or keyboard figures that answer the vocal instead of doubling it",
+        "small rhythmic and melodic changes between successive vocal lines",
+        "where the arrangement opens up or adds energy through the refrain",
+        "how soft attacks retain definition and dance-floor weight"
+      ],
+      "recordings": [
+        { "title": "Kizomba Na Passada", "artist": "Livongh", "url": "https://music.apple.com/us/song/1436535817", "timecodes": [] },
+        { "title": "Loucos (feat. Héber Marques)", "artist": "Matias Damásio", "url": "https://music.apple.com/us/song/1153059150", "timecodes": [] },
+        { "title": "Bo Tem Mel (feat. C4Pedro)", "artist": "Nelson Freitas", "url": "https://music.apple.com/us/song/960260398", "timecodes": [] },
+        { "title": "É Só Bo (feat. Nelson Freitas & Matias Damásio)", "artist": "Bruna Tatiana", "url": "https://music.apple.com/us/song/987378928", "timecodes": [] },
+        { "title": "Atrevimento (feat. Anselmo Ralph)", "artist": "Kataleya", "url": "https://music.apple.com/us/song/930274899", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "kizomba-tarraxinha",
+      "compare": [
+        "how reduced accompaniment makes each bass and percussion placement matter",
+        "the restraint of the pulse and the use of empty space between vocal phrases",
+        "subtle variation in repeated figures rather than continuous busy activity",
+        "how texture and intensity change around hooks and breakdowns",
+        "the definition of sub-bass and percussion without masking the intimate lead"
+      ],
+      "recordings": [
+        { "title": "Tarraxinha (Toda a Noite)", "artist": "DJ Joca Moreno & DJ Amorim", "url": "https://music.apple.com/us/song/1848374375", "timecodes": [] },
+        { "title": "Tarraxinha (feat. CEF Tanzy & Black Vision)", "artist": "Black Spygo", "url": "https://music.apple.com/us/song/1737841887", "timecodes": [] },
+        { "title": "Tarraxinha", "artist": "Lil Saint & Cef", "url": "https://music.apple.com/us/song/1115703806", "timecodes": [] },
+        { "title": "Tarraxinha (feat. Celia Flore)", "artist": "LA-MC Malcriado", "url": "https://music.apple.com/us/song/434382288", "timecodes": [] },
+        { "title": "No Teu Ritmo (Tarraxinha)", "artist": "Cantores Digitais de Angola", "url": "https://music.apple.com/us/song/1844951111", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "kizomba-urban-kiz",
+      "compare": [
+        "the contrast between electronic drop sections and more restrained vocal passages",
+        "how programmed percussion, bass, and melodic hooks occupy separate rhythmic roles",
+        "the transition cues and breaks that shape a modern dance arrangement",
+        "short syncopated phrases, stops, and returns across the form",
+        "the impact and clarity of the low end and transient detail in the mix"
+      ],
+      "recordings": [
+        { "title": "Bad News (Urban Kiz)", "artist": "Kaysha", "url": "https://music.apple.com/us/song/1389919681", "timecodes": [] },
+        { "title": "Kizz Me (Urban Kiz)", "artist": "Kaysha", "url": "https://music.apple.com/us/song/1389919682", "timecodes": [] },
+        { "title": "Urban Kiz 2.0", "artist": "Afro Connexion, Said & Oksana & Battle Kizz", "url": "https://music.apple.com/us/song/1739020745", "timecodes": [] },
+        { "title": "Shape of You (Kizomba Remix)", "artist": "Kaysha", "url": "https://music.apple.com/us/song/1234600860", "timecodes": [] },
+        { "title": "Comme ça", "artist": "Dj Snakes, Puto X & Pamela K.", "url": "https://music.apple.com/us/song/1814304876", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "kizomba-ghetto-zouk-crossover",
+      "compare": [
+        "the relationship between zouk-derived harmony, electronic bass, and Kizomba dance phrasing",
+        "how the vocal line and synth hooks hand off foreground space",
+        "the blend of programmed rhythm with guitar or other live-feeling parts",
+        "section contrast and transitions in a polished crossover production",
+        "low-end depth, vocal presence, and separation of bright melodic layers"
+      ],
+      "recordings": [
+        { "title": "Ghetto zouk 2 (feat. DJ Frej')", "artist": "Ghetto Zouk", "url": "https://music.apple.com/us/song/1834105837", "timecodes": [] },
+        { "title": "Bo Tem Mel (feat. C4Pedro)", "artist": "Nelson Freitas", "url": "https://music.apple.com/us/song/960260398", "timecodes": [] },
+        { "title": "Shape of You (Kizomba Remix)", "artist": "Kaysha", "url": "https://music.apple.com/us/song/1234600860", "timecodes": [] },
+        { "title": "Tarraxinha (feat. CEF Tanzy & Black Vision)", "artist": "Black Spygo", "url": "https://music.apple.com/us/song/1737841887", "timecodes": [] },
+        { "title": "Te Taraxo Ghetto Zouk Kizomba (feat. Ed Kulim)", "artist": "Sebastian Sf", "url": "https://music.apple.com/us/song/1593852595", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "kizomba-fusion-kiz",
+      "compare": [
+        "how the arrangement introduces and removes crossover layers around the Kizomba pulse",
+        "the distinct rhythmic job of electronic drums, bass, guitar, and lead hooks",
+        "phrase lengths and transition gestures across contrasting sections",
+        "whether the hybrid parts support a shared groove instead of stacking unrelated loops",
+        "production depth, transient shape, and clarity when the arrangement gets denser"
+      ],
+      "recordings": [
+        { "title": "Te Taraxo Ghetto Zouk Kizomba (feat. Ed Kulim)", "artist": "Sebastian Sf", "url": "https://music.apple.com/us/song/1593852595", "timecodes": [] },
+        { "title": "Sega (Instrumental Ghetto Zouk x Kizomba Zouk Love)", "artist": "Salomão Beatz", "url": "https://music.apple.com/us/song/1782619319", "timecodes": [] },
+        { "title": "Tarraxinha (feat. CEF Tanzy & Black Vision)", "artist": "Black Spygo", "url": "https://music.apple.com/us/song/1737841887", "timecodes": [] },
+        { "title": "Bo Tem Mel (feat. C4Pedro)", "artist": "Nelson Freitas", "url": "https://music.apple.com/us/song/960260398", "timecodes": [] },
+        { "title": "Urban Kiz 2.0", "artist": "Afro Connexion, Said & Oksana & Battle Kizz", "url": "https://music.apple.com/us/song/1739020745", "timecodes": [] }
+      ]
+    }
+  ]
+}

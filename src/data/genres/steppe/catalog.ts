@@ -115,6 +115,7 @@ export const GENRE_PACK: GenrePackInput = {
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
         {"name": "khoomei sustained fundamental and overtone melody voice statement", "role": "lead", "onsets": [0], "instruments": ["voice"], "cycleLength": 1, "durations": [1.5], "articulation": "legato"},
+        {"name": "Khoomei alternating fundamental and overtone focus", "shortName": "Khoomei overtone answer", "description": "Hold the home pitch, lift the guide to the fifth, then step down through the third and second before returning to the home pitch. The voice patch marks pitch focus only; it does not reproduce throat-singing timbre or simultaneous vocal harmonics.", "role": "lead", "onsets": [0, 1, 2.5, 3.25, 4, 5.5, 6.5, 7.5], "instruments": ["voice"], "cycleLength": 2, "durations": [1.1, 0.55, 0.62, 0.45, 0.9, 0.58, 0.48, 0.7], "pitches": [{"degree": 1, "register": 62}, {"degree": 4, "register": 62}, {"degree": 3, "register": 62}, {"degree": 2, "register": 62}, {"degree": 1, "register": 62}, {"degree": 4, "register": 62}, {"degree": 2, "register": 62}, {"degree": 1, "register": 62}], "accents": [0.9, 0.82, 0.62, 0.5, 0.86, 0.8, 0.54, 0.92], "articulation": "legato", "sectionUsage": ["response", "variation"], "pedagogicalStudy": "variation", "arrangementVariation": true},
         {"name": "khoomei sustained fundamental and overtone melody voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "khoomei sustained fundamental and overtone melody morin-khuur accompaniment", "role": "texture", "onsets": [0], "instruments": ["morin-khuur"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
@@ -178,8 +179,9 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "sygyt high overtone line above steady fundamental voice statement", "role": "lead", "onsets": [0], "instruments": ["voice"], "cycleLength": 1, "durations": [1.5], "articulation": "legato"},
-        {"name": "sygyt high overtone line above steady fundamental voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
+        {"name": "Sygyt overtone melody above a steady fundamental", "shortName": "Sygyt overtone phrase", "description": "Keep the morin-khuur's low fundamental steady while the vocal guide traces a clear high overtone path. Rise from the tonic through the fifth, return through the third, and leave a breath gap before the next two-bar phrase.", "role": "lead", "onsets": [0, 1, 1.75, 2.5, 3.25, 4.5, 5.25, 6.25, 7.25], "instruments": ["voice"], "cycleLength": 2, "durations": [0.72, 0.4, 0.4, 0.62, 0.44, 0.62, 0.42, 0.58, 0.52], "pitches": [{"degree": 1, "register": 74}, {"degree": 3, "register": 74}, {"degree": 4, "register": 74}, {"degree": 3, "register": 74}, {"degree": 2, "register": 74}, {"degree": 1, "register": 74}, {"degree": 3, "register": 74}, {"degree": 4, "register": 74}, {"degree": 1, "register": 74}], "accents": [0.9, 0.58, 0.78, 0.82, 0.56, 0.86, 0.58, 0.76, 0.92], "articulation": "legato"},
+        {"name": "Sygyt returning overtone variation", "shortName": "Sygyt overtone variation", "description": "Vary the returning whistle phrase with an earlier rise to the fifth and a descending answer. Keep each note separate enough for the high overtone to speak, then resolve to the same tonic over the unchanged drone.", "role": "lead", "onsets": [0, 0.75, 1.5, 2.25, 3, 4, 4.75, 5.5, 6.5, 7.25], "instruments": ["voice"], "cycleLength": 2, "durations": [0.5, 0.38, 0.48, 0.46, 0.68, 0.58, 0.4, 0.48, 0.54, 0.5], "pitches": [{"degree": 1, "register": 74}, {"degree": 3, "register": 74}, {"degree": 4, "register": 74}, {"degree": 3, "register": 74}, {"degree": 1, "register": 74}, {"degree": 4, "register": 74}, {"degree": 3, "register": 74}, {"degree": 2, "register": 74}, {"degree": 3, "register": 74}, {"degree": 1, "register": 74}], "accents": [0.86, 0.58, 0.8, 0.56, 0.92, 0.9, 0.62, 0.54, 0.7, 0.88], "articulation": "legato", "sectionUsage": ["whistle", "variation", "solo"], "pedagogicalStudy": "variation", "arrangementVariation": true},
+        {"name": "Sygyt descending phrase release", "shortName": "Sygyt release", "description": "Let the high overtone fall through the fifth and third to the tonic, then release the voice cleanly while the morin-khuur lets the fundamental ring into silence.", "role": "lead", "onsets": [0, 1, 2.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.82, 0.72, 1.05], "pitches": [{"degree": 4, "register": 74}, {"degree": 3, "register": 74}, {"degree": 1, "register": 74}], "accents": [0.82, 0.62, 0.92], "phraseEnd": true, "sectionUsage": ["cadence", "ending", "closing"], "articulation": "legato"},
         {"name": "sygyt high overtone line above steady fundamental morin-khuur accompaniment", "role": "texture", "onsets": [0], "instruments": ["morin-khuur"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
       ],
       "instrumentTechniques": {
@@ -212,9 +214,9 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "kargyraa",
       "name": "Kargyraa",
-      "description": "Kargyraa: kargyraa low throat drone and resonant overtones. Melodic and rhythmic study over a modal center; chord symbols are playback anchors, not a Western chord progression.",
+      "description": "Kargyraa: a low throat-sung fundamental with a rough, resonant subharmonic quality. Shape the vowel resonance around the low tone; do not turn it into the high whistle line associated with sygyt. This MIDI voice part is a low-pitch learning guide, not a throat-singing sound model.",
       "patterns": ["kargyraa low throat drone and resonant overtones"],
-      "techniques": ["harmonics", "arco", "tremolo", "ornament", "vibrato", "throat-singing", "overtones", "accent", "staccato", "legato", "tenuto"],
+      "techniques": ["arco", "throat-singing", "overtones", "accent", "legato", "tenuto"],
       "harmony": ["D5"],
       "meter": "4/4",
       "tempo": [48, 64],
@@ -242,18 +244,19 @@ export const GENRE_PACK: GenrePackInput = {
       ],
       "groove": {"swingPercentage": 50, "anticipationOffsetSteps": 0, "microtimingFeel": "rubato", "humanizeJitterMs": 7},
       "cells": [
-        {"name": "kargyraa low throat drone and resonant overtones voice statement", "role": "lead", "onsets": [0], "instruments": ["voice"], "cycleLength": 1, "durations": [1.5], "articulation": "legato"},
-        {"name": "kargyraa low throat drone and resonant overtones voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "kargyraa low throat drone and resonant overtones morin-khuur accompaniment", "role": "texture", "onsets": [0], "instruments": ["morin-khuur"], "cycleLength": 1, "durations": [4.0], "articulation": "legato"}
+        {"name": "kargyraa low throat drone and resonant overtones voice statement", "shortName": "Kargyraa low phrase", "description": "Keep the pitch guide in a low register. Let the fundamental settle, touch the fifth, and return with small breath gaps between long tones. The GM Voice Oohs patch only marks pitch and timing; it does not reproduce Kargyraa subharmonics or vocal roughness.", "role": "lead", "onsets": [0, 2.5, 4.5, 6.75], "instruments": ["voice"], "cycleLength": 2, "durations": [2.1, 1.45, 1.9, 1.0], "pitches": [{"degree": 1, "register": 38}, {"degree": 1, "register": 38}, {"degree": 5, "register": 38}, {"degree": 1, "register": 38}], "accents": [0.92, 0.66, 0.82, 0.94], "microtiming": [0, 14, -7, 20], "articulation": "legato"},
+        {"name": "kargyraa low fundamental and returning resonance variation", "shortName": "Kargyraa low variation", "description": "Vary the low line with one measured rise to the fifth and a descending return through the third. Keep the contour in the singer's low register, leave air after the held tones, and avoid a bright, high overtone whistle.", "role": "lead", "onsets": [0, 1.75, 3.5, 5.25, 7], "instruments": ["voice"], "cycleLength": 2, "durations": [1.5, 1.3, 1.25, 1.3, 0.75], "pitches": [{"degree": 1, "register": 38}, {"degree": 5, "register": 38}, {"degree": 3, "register": 38}, {"degree": 5, "register": 38}, {"degree": 1, "register": 38}], "accents": [0.9, 0.74, 0.58, 0.8, 0.96], "microtiming": [0, 12, -9, 16, -3], "articulation": "legato", "sectionUsage": ["return", "variation", "solo"], "pedagogicalStudy": "variation", "arrangementVariation": true},
+        {"name": "kargyraa low throat drone and resonant overtones voice cadence fill", "shortName": "Kargyraa close", "description": "Touch the fifth briefly, settle on the low home pitch, then leave the final resonance to ring. The phrase closes through sustained low tones rather than a quick ornamental run.", "role": "lead", "onsets": [0, 2.5], "instruments": ["voice"], "cycleLength": 1, "durations": [1.4, 1.8], "pitches": [{"degree": 5, "register": 38}, {"degree": 1, "register": 38}], "accents": [0.78, 1], "phraseEnd": true, "articulation": "legato"},
+        {"name": "kargyraa low throat drone and resonant overtones morin-khuur accompaniment", "shortName": "Low morin drone", "description": "Hold the low modal root beneath the voice and let it carry across the bar. The bowed instrument supports the singer; it does not imitate the throat-sung overtones.", "role": "texture", "onsets": [0], "instruments": ["morin-khuur"], "cycleLength": 1, "durations": [4.0], "pitches": [{"degree": 1, "register": 50}], "accents": [0.62], "articulation": "legato"}
       ],
       "instrumentTechniques": {
-        "voice": ["vibrato", "accent", "staccato", "legato"],
+        "voice": ["accent", "legato"],
         "morin-khuur": ["arco", "tremolo", "vibrato", "legato", "staccato", "tenuto", "accent"]
       },
       "instrumentDialects": {
         "voice:lead": {
-          "allowedTechniques": ["vibrato", "accent", "staccato", "legato"],
-          "defaultTechnique": "vibrato"
+          "allowedTechniques": ["accent", "legato"],
+          "defaultTechnique": "legato"
         },
         "morin-khuur:texture": {
           "allowedTechniques": ["arco", "tremolo", "vibrato", "legato", "staccato", "tenuto", "accent"],

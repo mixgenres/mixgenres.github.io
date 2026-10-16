@@ -98,4 +98,6 @@ export interface GrooveMechanics {
   anticipationOffsetSteps?: number;
   microtimingFeel?: 'straight' | 'swung' | 'laid-back' | 'pushed' | 'rubato' | 'atrasado' | 'drunk' | 'quantized';
   humanizeJitterMs?: number;
+  /** Controlled performance grain: small push/pull and accent irregularity, not random grid drift. */
+  roughness?: number;
 }

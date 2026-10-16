@@ -14,7 +14,10 @@ export const voice: InstrumentDef = {
     sustain: "sustained",
     role: "lead",
     centre: 64,
-    low: 52,
+    // Keep the guide's playable floor low enough for bass-register traditions
+    // such as Kargyraa. The standard MIDI vowel timbre remains only a pitch
+    // guide; the broader range models human access, not its missing timbre.
+    low: 38,
     high: 81,
     pan: 0,
     trim: -2,

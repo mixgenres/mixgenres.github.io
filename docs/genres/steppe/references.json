@@ -1,0 +1,74 @@
+{
+  "genreId": "steppe",
+  "reviewed": "2026-10-15",
+  "status": "Five linked Apple Music candidates are collected for all six Steppe styles. The native Music app was locked during this pass, so listening comparisons and timecodes remain pending; candidates spanning Mongolia and Tuva are identified by their catalog metadata and are not claimed as equivalent traditions.",
+  "source": "Apple Music track pages located as listening candidates. No reference audio downloaded or processed.",
+  "styles": [
+    {
+      "styleId": "steppe-morin-khuur",
+      "compare": ["bowed attack, pitch inflection, and the horsehead fiddle's register changes", "how melody and drone interact without a Western chord loop", "the length and contour of recurring tune phrases", "rhythmic lift in faster passages and releases into cadences", "natural resonance and ensemble space around the bowed instrument"],
+      "recordings": [
+        { "title": "Khulan, Fast Racer of the Gobi", "artist": "Morin Khuur Ensemble of Mongolia", "url": "https://music.apple.com/us/song/905207417", "timecodes": [] },
+        { "title": "Morin Khuur", "artist": "Sanchir Adiya-Khuu", "url": "https://music.apple.com/us/song/1648683241", "timecodes": [] },
+        { "title": "Tatlagiin Holboo", "artist": "Ch. Batsaikhan", "url": "https://music.apple.com/us/song/1206332435", "timecodes": [] },
+        { "title": "Tooraan Tsagaan (White Tooraan)", "artist": "Altai-Hangai", "url": "https://music.apple.com/us/song/358673561", "timecodes": [] },
+        { "title": "Galloping Stallions", "artist": "Mongolian Morin Khuur", "url": "https://music.apple.com/us/song/332900621", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "steppe-khoomei",
+      "compare": ["the balance of fundamental drone and overtone melody", "breath, onset, and vowel shifts through each sustained vocal tone", "how a solo voice or group changes density and register", "the relationship between throat singing, fiddle, and light percussion where present", "raw vocal resonance and the amount of room or ensemble support"],
+      "recordings": [
+        { "title": "Sygyt, Khoomei, Kargyraa (Styles of Throat-Singing)", "artist": "Shu-De", "url": "https://music.apple.com/us/song/1653883905", "timecodes": [] },
+        { "title": "Throat Singing Solo", "artist": "Shu-De", "url": "https://music.apple.com/us/song/281568107", "timecodes": [] },
+        { "title": "Throat Singing Duet", "artist": "Shu-De", "url": "https://music.apple.com/us/song/281568080", "timecodes": [] },
+        { "title": "Kongurei", "artist": "Huun-Huur-Tu", "url": "https://music.apple.com/us/song/1565041633", "timecodes": [] },
+        { "title": "Kulteginning Kyigyzy", "artist": "Tuva Ensemble", "url": "https://music.apple.com/us/song/1245622755", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "steppe-sygyt",
+      "compare": ["the bright overtone melody against a stable vocal fundamental", "the shape and speed of vowel-driven pitch movement", "how each singer sustains, ornaments, and releases the high line", "whether ensemble or instrumental accompaniment frames rather than masks the voice", "the tonal contrast and natural ambience of different performers"],
+      "recordings": [
+        { "title": "Sygyt (Style of Tuvian Throat Singing)", "artist": "Alash Ensemble", "url": "https://music.apple.com/us/song/1279852065", "timecodes": [] },
+        { "title": "Sygyt", "artist": "Tuvan National Orchestra", "url": "https://music.apple.com/us/song/1128314026", "timecodes": [] },
+        { "title": "Sygyt, Khoomei, Kargyraa (Styles of Throat-Singing)", "artist": "Shu-De", "url": "https://music.apple.com/us/song/1653883905", "timecodes": [] },
+        { "title": "Sygyt #1", "artist": "Oorzhak Khunashtaar-ool", "url": "https://music.apple.com/us/album/sygyt-1/1597078205?i=1597078811", "timecodes": [] },
+        { "title": "Sygyt and Kargyraa", "artist": "Gennadi Tumat", "url": "https://music.apple.com/us/song/348110596", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "steppe-kargyraa",
+      "compare": ["the low, resonant fundamental and its overtones", "breath-supported changes in tone and phrase length", "how low vocal energy is sustained without a drum-driven pulse", "differences between solo, ensemble, and accompanied examples", "low-frequency body and vocal intelligibility in the recording"],
+      "recordings": [
+        { "title": "Sygyt, Khoomei, Kargyraa (Styles of Throat-Singing)", "artist": "Shu-De", "url": "https://music.apple.com/us/song/1653883905", "timecodes": [] },
+        { "title": "Kargyraa", "artist": "Huun-Huur-Tu", "url": "https://music.apple.com/us/song/346993444", "timecodes": [] },
+        { "title": "Kargyraa", "artist": "Sevec Aldyn-ool", "url": "https://music.apple.com/us/song/348110536", "timecodes": [] },
+        { "title": "Kargyraa Rap", "artist": "Ondar", "url": "https://music.apple.com/us/song/595197918", "timecodes": [] },
+        { "title": "Sygyt and Kargyraa", "artist": "Gennadi Tumat", "url": "https://music.apple.com/us/song/348110596", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "steppe-dombra",
+      "compare": ["the alternation of bass-string pulse and nimble upper-string melody", "ornaments, tremolo, and the rhythmic shape of the kui", "phrase-level tempo and intensity changes", "how a solo plucked instrument carries both rhythmic and melodic roles", "attack, resonance, and room detail on the dombra"],
+      "recordings": [
+        { "title": "Qosbasar", "artist": "Maitres de la Dombra", "url": "https://music.apple.com/us/song/114094934", "timecodes": [] },
+        { "title": "<Song accompanied on dombra> Koshtaus", "artist": "Kulysheva Kapash", "url": "https://music.apple.com/us/album/song-accompanied-on-dombra-koshtaus/1653756849?i=1653756854", "timecodes": [] },
+        { "title": "<Song accompanied on dombra> Balkhadisha", "artist": "Baibosynov Kairat", "url": "https://music.apple.com/us/song/1653757399", "timecodes": [] },
+        { "title": "AKSAK KULAN", "artist": "Toktaganov Aitzhan", "url": "https://music.apple.com/us/song/1653757412", "timecodes": [] },
+        { "title": "Aksak Kulan", "artist": "Ercan Arkabay", "url": "https://music.apple.com/us/song/1760647729", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "steppe-folk-rock-fusion",
+      "compare": ["the relationship between steppe vocal or bowed timbres and amplified rhythm section", "how folk melody survives changes in meter, groove, and electric instrumentation", "section builds, riff returns, and instrumental transitions", "the separation of low-end drive, percussion, and traditional lead colors", "performance energy and the balance of raw ensemble character with studio production"],
+      "recordings": [
+        { "title": "Haar Hu", "artist": "Hanggai", "url": "https://music.apple.com/us/song/1305174438", "timecodes": [] },
+        { "title": "時來運轉", "artist": "Shi Yu & Hanggai", "url": "https://music.apple.com/us/song/1785566519", "timecodes": [] },
+        { "title": "輪迴", "artist": "Hanggai", "url": "https://music.apple.com/us/song/1743170261", "timecodes": [] },
+        { "title": "汗青格勒", "artist": "Hanggai", "url": "https://music.apple.com/us/song/1754375479", "timecodes": [] },
+        { "title": "Borulai's Lullaby", "artist": "Hanggai", "url": "https://music.apple.com/us/song/437558319", "timecodes": [] }
+      ]
+    }
+  ]
+}

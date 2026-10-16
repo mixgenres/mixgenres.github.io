@@ -1,0 +1,123 @@
+{
+  "genreId": "zouk",
+  "reviewed": "2026-10-15",
+  "status": "Five or six linked Apple Music candidates are listed for all ten Zouk styles. These are candidate recordings only; native Music playback can be cued here, but listening comparisons and timecodes remain pending until the audio is actually heard.",
+  "source": "Apple Music track pages located as listening candidates. No reference audio downloaded or processed.",
+  "styles": [
+    {
+      "styleId": "zouk-zouk-love",
+      "compare": ["soft but forward 4/4 dance pulse and syncopated guitar/key attacks", "bass movement that supports close, unhurried partner-dance phrasing", "vocal breath, melisma, and instrumental replies", "how arrangement density opens into the refrain", "warm keyboard/string color without masking the voice"],
+      "recordings": [
+        {"title":"Siwo","artist":"Jocelyne Béroard","url":"https://music.apple.com/us/song/349812656","timecodes":[]},
+        {"title":"Chabon","artist":"Patrick Saint-Eloi","url":"https://music.apple.com/us/song/1613940122","timecodes":[]},
+        {"title":"Si Se Oui","artist":"Patrick Saint-Eloi & Kassav'","url":"https://music.apple.com/us/song/1025970736","timecodes":[]},
+        {"title":"Let's Do It Now (Zouk Love Session, Vol. 2)","artist":"Stony feat. Nelson Freitas","url":"https://music.apple.com/us/song/958594815","timecodes":[]},
+        {"title":"Soukwé kow","artist":"Jocelyne Béroard, Jean-Claude Naimro & Jean-Paul Pognon","url":"https://music.apple.com/us/song/1479868477","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "zouk-zouk-beton",
+      "compare": ["the driving band groove and bass-to-drum lock", "bright guitar and keyboard rhythm against horn punches", "short breaks, pickups, and ensemble returns", "how the singer and instrumental riffs trade the foreground", "live-band punch and separation across the full arrangement"],
+      "recordings": [
+        {"title":"Zouk-la sé sel médikaman nou ni","artist":"Jacob Desvarieux, Kassav' & Georges Decimus","url":"https://music.apple.com/us/song/1055019839","timecodes":[]},
+        {"title":"Ba nou zouk la","artist":"Kassav'","url":"https://music.apple.com/us/song/1676625455","timecodes":[]},
+        {"title":"Djoni (Johny)","artist":"Kassav'","url":"https://music.apple.com/us/song/1676622922","timecodes":[]},
+        {"title":"Ou lé","artist":"Jacob Desvarieux, Kassav' & Toofan","url":"https://music.apple.com/us/song/1575336033","timecodes":[]},
+        {"title":"Woulé","artist":"Kassav'","url":"https://music.apple.com/us/song/1146114251","timecodes":[]},
+        {"title":"Ozon bizouk","artist":"Patrick Saint-Eloi & Kassav'","url":"https://music.apple.com/us/song/983214015","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "zouk-orchestral-zouk-love",
+      "compare": ["how the larger ensemble layers horns, keyboards, guitars, and backing vocals", "string or brass swells that lift rather than flatten the groove", "dynamic contrast between intimate verse and full refrain", "instrumental responses and transitions around vocal phrases", "width, depth, and low-end weight in a dense band mix"],
+      "recordings": [
+        {"title":"Souf' zouk / Ou Pa Ka Sav / Yélélé / An Ba Chen' La / Siwo / Mwen Malad Aw / Oh Madiana (Live)","artist":"Kassav'","url":"https://music.apple.com/us/song/1676625064","timecodes":[]},
+        {"title":"Zouk-la sé sel médikaman nou ni","artist":"Jacob Desvarieux, Kassav' & Georges Decimus","url":"https://music.apple.com/us/song/1055019839","timecodes":[]},
+        {"title":"Ozon bizouk","artist":"Patrick Saint-Eloi & Kassav'","url":"https://music.apple.com/us/song/983214015","timecodes":[]},
+        {"title":"Si Se Oui","artist":"Patrick Saint-Eloi & Kassav'","url":"https://music.apple.com/us/song/1025970736","timecodes":[]},
+        {"title":"Ba nou zouk la","artist":"Kassav'","url":"https://music.apple.com/us/song/1676625455","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "zouk-cabo-zouk",
+      "compare": ["Cape Verdean melodic and vocal inflection against the dance pulse", "guitar arpeggios and interlocking accompaniment", "bass anticipation and phrase-turnaround behavior", "how modern production balances intimate vocals with rhythmic detail", "variation between successive vocal and instrumental phrases"],
+      "recordings": [
+        {"title":"Bo É Kel Amjer","artist":"Nelson Freitas","url":"https://music.apple.com/us/song/992117525","timecodes":[]},
+        {"title":"Na Bô Kaza","artist":"Nelson Freitas","url":"https://music.apple.com/us/song/353756923","timecodes":[]},
+        {"title":"Amor","artist":"Mika Mendes","url":"https://music.apple.com/us/song/1887634071","timecodes":[]},
+        {"title":"Tempo","artist":"Mika Mendes","url":"https://music.apple.com/us/song/427760068","timecodes":[]},
+        {"title":"Comigo (feat. B.A.D.)","artist":"Mika Mendes","url":"https://music.apple.com/us/song/1176959557","timecodes":[]},
+        {"title":"Tetete (feat. Manecas Costa)","artist":"Nelson Freitas","url":"https://music.apple.com/us/song/1889942266","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "zouk-ghetto-zouk",
+      "compare": ["sparse electronic low end and the timing of bass pickups", "R&B vocal phrasing over a zouk-derived dance pulse", "space between programmed percussion and melodic hooks", "how sections build, drop out, and return", "sub-bass, vocal presence, and transient clarity"],
+      "recordings": [
+        {"title":"Ghetto zouk 2 (feat. DJ Frej')","artist":"Ghetto Zouk","url":"https://music.apple.com/us/song/1834105837","timecodes":[]},
+        {"title":"Te Taraxo Ghetto Zouk Kizomba (feat. Ed Kulim)","artist":"Sebastian Sf","url":"https://music.apple.com/us/song/1593852595","timecodes":[]},
+        {"title":"Se Yo (Ghetto Zouk)","artist":"Chris Oliver","url":"https://music.apple.com/us/song/1649467627","timecodes":[]},
+        {"title":"CALL ME (Ghetto Zouk Instrumental)","artist":"Salomão Beatz","url":"https://music.apple.com/us/song/1796512070","timecodes":[]},
+        {"title":"Sega (Instrumental Ghetto Zouk x Kizomba Zouk Love)","artist":"Salomão Beatz","url":"https://music.apple.com/us/song/1782619319","timecodes":[]},
+        {"title":"BOBO (Instrumental Ghetto Zouk)","artist":"Salomão Beatz","url":"https://music.apple.com/us/song/6773112057","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "zouk-zouk-randb",
+      "compare": ["R&B vocal runs and sustained notes over a zouk pulse", "syncopated bass and chord placement", "drum programming that retains dance lilt rather than a generic pop backbeat", "call-and-response between lead, backing vocals, and keyboard hooks", "mix balance among voice, low end, and high-frequency percussion"],
+      "recordings": [
+        {"title":"Envie (Zouk R'n'B)","artist":"L'vis Phirmis","url":"https://music.apple.com/us/song/980584891","timecodes":[]},
+        {"title":"La loi de l'amour (Zouk R&B)","artist":"L'vis Phirmis feat. Alibi Montana","url":"https://music.apple.com/us/song/511619114","timecodes":[]},
+        {"title":"Ou sé tout pou mwen (feat. Sir AS)","artist":"Léa Galva","url":"https://music.apple.com/us/song/1484943728","timecodes":[]},
+        {"title":"I'll Be There","artist":"Kaysha, Elizio & Soumia","url":"https://music.apple.com/us/song/1523991763","timecodes":[]},
+        {"title":"Je sais (feat. Kaysha)","artist":"Thayna","url":"https://music.apple.com/us/song/1218341114","timecodes":[]},
+        {"title":"One Love","artist":"Kaysha","url":"https://music.apple.com/us/song/979965514","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "zouk-afro-zouk",
+      "compare": ["Afro-pop and Caribbean rhythmic layers within the same groove", "guitar and percussion interlock beneath the vocal hook", "how African-derived rhythmic accents differ from a straight backbeat", "section lifts and instrumental handoffs", "percussion detail and vocal/low-end balance"],
+      "recordings": [
+        {"title":"C gâté","artist":"Koffi Olomidé & Thierry Cham","url":"https://music.apple.com/us/song/606203819","timecodes":[]},
+        {"title":"Chaleur africaine","artist":"M'Passi, Ben J & Werrason","url":"https://music.apple.com/us/song/606203956","timecodes":[]},
+        {"title":"Time to zouk","artist":"Nichols","url":"https://music.apple.com/us/song/606203756","timecodes":[]},
+        {"title":"Mowa","artist":"Mossia","url":"https://music.apple.com/us/song/1452044293","timecodes":[]},
+        {"title":"Fatou la malienne","artist":"Soulé Ngofo Man","url":"https://music.apple.com/us/song/504630190","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "zouk-kompa-crossover",
+      "compare": ["the guitar offbeat and bass continuity associated with kompa", "how zouk and kompa accents are combined across the groove", "percussion choices and phrase length", "vocal and instrumental replies through the form", "how the mix keeps the guitar attack and bass pulse distinct"],
+      "recordings": [
+        {"title":"Kompa (Z)","artist":"Zshea","url":"https://music.apple.com/us/song/349812473","timecodes":[]},
+        {"title":"Santiman","artist":"Zouk Love & Konpa Kreyol","url":"https://music.apple.com/us/song/1752956406","timecodes":[]},
+        {"title":"Zouk","artist":"Zo Konpa & Konpa Lakay","url":"https://music.apple.com/us/song/1662331409","timecodes":[]},
+        {"title":"KU LO SA (Konpa - Zouk)","artist":"Zo Konpa, Konpa Lakay & Zouk Machine","url":"https://music.apple.com/us/song/1678512157","timecodes":[]},
+        {"title":"Ouk li Jou","artist":"Zo Konpa, Zouk Machine & Konpa Lakay","url":"https://music.apple.com/us/song/1733476086","timecodes":[]},
+        {"title":"Kompa","artist":"Eye's Berg & DJ Kayz","url":"https://music.apple.com/us/song/1573937718","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "zouk-zouk-fusion",
+      "compare": ["which rhythmic elements remain zouk-led as other styles enter", "how live guitar, programmed drums, and synth hooks share the arrangement", "transitions between contrasting sections and textures", "instrument handoffs rather than stacked, unrelated loops", "low-end impact and clarity in a hybrid production"],
+      "recordings": [
+        {"title":"Go Down (feat. Emex) [Lil Maro Afrobeats Remix]","artist":"Monsieur De Shada, Kaysha & C-Mart","url":"https://music.apple.com/us/song/1553836233","timecodes":[]},
+        {"title":"African Girl (Mk-Prod Remix)","artist":"Kaysha & Patche Di Rima","url":"https://music.apple.com/us/song/1553836494","timecodes":[]},
+        {"title":"C gâté","artist":"Koffi Olomidé & Thierry Cham","url":"https://music.apple.com/us/song/606203819","timecodes":[]},
+        {"title":"Ou lé","artist":"Jacob Desvarieux, Kassav' & Toofan","url":"https://music.apple.com/us/song/1575336033","timecodes":[]},
+        {"title":"Bo Tem Mel (feat. C4Pedro)","artist":"Nelson Freitas","url":"https://music.apple.com/us/song/960260398","timecodes":[]}
+      ]
+    },
+    {
+      "styleId": "zouk-lambazouk-oriented",
+      "compare": ["lilting bass anticipation and acoustic hook placement", "the relationship between lambada-derived movement and zouk phrasing", "guitar articulation and dance-pulse continuity", "phrase turnarounds that cue the next partner-dance figure", "whether the rhythm keeps a supple forward pull without a rigid loop"],
+      "recordings": [
+        {"title":"Lambazouk","artist":"Gil Semedo","url":"https://music.apple.com/us/song/1455570485","timecodes":[]},
+        {"title":"Lambada","artist":"Kaoma","url":"https://music.apple.com/us/song/267982253","timecodes":[]},
+        {"title":"Dançando Lambada","artist":"Kaoma","url":"https://music.apple.com/us/song/321206605","timecodes":[]},
+        {"title":"Dancando Lambada","artist":"Tropical Lambadance Group","url":"https://music.apple.com/us/song/1618286609","timecodes":[]},
+        {"title":"Dancando Lambada","artist":"Luis Carlos Ferreira Lopes","url":"https://music.apple.com/us/song/372676802","timecodes":[]}
+      ]
+    }
+  ]
+}

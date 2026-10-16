@@ -1104,7 +1104,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "andean-fusion",
       "name": "Andean Fusion",
-      "description": "Andean Fusion: quena and siku phrases ride a loping digital cumbia shuffle, with a syncopated low anchor, compact kit backbeat and clipped synth color. Keep the electronic bed punchy and let the Andean melody and charango stay in front.",
+      "description": "Andean Fusion: quena and siku phrases ride a loping digital cumbia shuffle, with a syncopated low anchor, compact kit backbeat and clipped synth color. Keep the electronic bed punchy under the melody, then thin it to a descending held synth tail in the coda.",
       "patterns": ["Andean flute hook over digital cumbia shuffle"],
       "techniques": ["breath-phrase", "trill", "tremolo", "strum", "call-response", "accent", "breath", "staccato", "legato", "vibrato", "tenuto", "muted-strum", "ghost", "roll", "open"],
       "harmony": ["Am", "C", "G", "E7"],
@@ -1150,7 +1150,8 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "Andean flute hook over digital cumbia shuffle bombo-andino cadence fill", "role": "percussion", "onsets": [3.0, 3.5, 3.75], "instruments": ["bombo-andino"], "cycleLength": 1, "phraseEnd": true, "articulation": "roll"},
         {"name": "Andean flute hook over digital cumbia shuffle syncopated bass", "role": "bass", "onsets": [0, 1.5, 2, 3.5], "instruments": ["bass"], "cycleLength": 1, "durations": [0.8, 0.35, 0.7, 0.35], "articulations": ["accent", "staccato", "accent", "staccato"], "arrangementVariation": true},
         {"name": "Andean flute hook over digital cumbia shuffle kit backbeat", "role": "percussion", "onsets": [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5], "instruments": ["drums"], "hits": ["kick", "hat", "hat", "snare", "kick", "hat", "hat", "snare"], "cycleLength": 1, "accents": [0.9, 0.35, 0.4, 0.8, 0.7, 0.35, 0.4, 0.8], "arrangementVariation": true},
-        {"name": "Andean flute hook over digital cumbia shuffle synth chord jab", "role": "texture", "onsets": [0.5, 2.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.35, 0.35], "articulation": "staccato", "arrangementVariation": true}
+        {"name": "Andean flute hook over digital cumbia shuffle synth chord jab", "role": "texture", "onsets": [0.5, 2.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.35, 0.35], "articulation": "staccato", "arrangementVariation": true},
+        {"name": "Andean flute hook over digital cumbia shuffle synth coda tail", "shortName": "Synth coda tail", "description": "Across the sixteen-bar dissolve, strike a held chord on each bar line and gradually step the level down. Keep the release open so the electronic color recedes behind the final Andean phrase.", "role": "texture", "onsets": [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60], "durations": [3.75, 3.75, 3.75, 3.75, 3.75, 3.75, 3.75, 3.75, 3.75, 3.75, 3.75, 3.75, 3.75, 3.75, 3.75, 3.75], "velocities": [0.8, 0.76, 0.73, 0.69, 0.65, 0.62, 0.58, 0.54, 0.51, 0.47, 0.43, 0.4, 0.36, 0.32, 0.29, 0.25], "pitches": [{"voicing":"chord"},{"voicing":"chord"},{"voicing":"chord"},{"voicing":"chord"},{"voicing":"chord"},{"voicing":"chord"},{"voicing":"chord"},{"voicing":"chord"},{"voicing":"chord"},{"voicing":"chord"},{"voicing":"chord"},{"voicing":"chord"},{"voicing":"chord"},{"voicing":"chord"},{"voicing":"chord"},{"voicing":"chord"}], "instruments": ["synth"], "cycleLength": 16, "articulation": "tenuto", "sectionUsage": ["dissolve", "coda", "ending"], "supportedEnergy": [1, 2]}
       ],
       "instrumentTechniques": {
         "quena": ["accent", "breath", "staccato", "legato", "vibrato"],

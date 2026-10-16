@@ -8,7 +8,7 @@ import { STYLE_REFERENCES } from '../src/data/styles/styleReferences';
 import { RECORDING_ARRANGEMENTS, parseRecordingForm } from '../src/data/songs/recordingArrangements';
 import { assembleStylePatterns } from '../src/engine/style/catalog';
 import { auditCatalogSongInstruments, catalogIdForStyle, createCatalogSong } from '../src/engine/sheet/songCatalog';
-import { addVoice, canonicalPatternSection, createSheet, isVoiceSilentInAll, makeSheet, patternAvailableInSection, setInstrument } from '../src/engine/sheet/sheet';
+import { addVoice, canonicalPatternSection, createSheet, isVoiceSilentInAll, makeSheet, patternAvailableInSection, randomizePatternsForSong, setInstrument, suggestPattern } from '../src/engine/sheet/sheet';
 import { styleCalibrationTarget } from '../src/engine/style/performance-schema';
 import { compileNotatedScore } from '../src/engine/score/notatedScore';
 import { arrangeBand, composeMusicianScore } from '../src/engine/band/arrangeBand';
@@ -30,22 +30,86 @@ test('every full song has valid explicit metadata and retains the original refer
   for (const form of ['intro:4:NaN', 'intro:4:2.5', 'intro:4:3:extra']) assert.throws(() => parseRecordingForm(form));
 });
 
-test('existing streaming reference lists use canonical catalog style IDs and distinct links', () => {
+test('streaming reference lists cover every catalog style with distinct linked candidates', () => {
   for (const world of GENRE_WORLDS) {
     const path = `docs/genres/${world.id}/references.json`;
-    if (!existsSync(path)) continue;
+    assert.ok(existsSync(path), `${world.id} needs a streaming reference list`);
     const document = JSON.parse(readFileSync(path, 'utf8')) as {
-      styles?: Array<{ styleId: string; recordings?: Array<{ url: string }> }>;
-      references?: Array<{ styleId: string; recordings?: Array<{ url: string }> }>;
+      genreId?: string;
+      styles?: Array<{ styleId: string; compare?: string[]; recordings?: Array<{ url: string }> }>;
+      references?: Array<{ styleId: string; compare?: string[]; recordings?: Array<{ url: string }> }>;
     };
+    assert.equal(document.genreId, world.id, `${world.id} reference list declares its genre`);
     const rows = document.styles ?? document.references ?? [];
     const catalogStyleIds = new Set(world.styleDefinitions.map(style => style.id));
+    const coveredStyleIds = new Set<string>();
     for (const row of rows) {
       assert.ok(catalogStyleIds.has(row.styleId), `${world.id}/${row.styleId} must match the canonical style ID`);
+      assert.ok(!coveredStyleIds.has(row.styleId), `${world.id}/${row.styleId} must have one reference row`);
+      coveredStyleIds.add(row.styleId);
+      const compareCues = row.compare ?? [];
+      assert.ok(compareCues.length >= 3, `${world.id}/${row.styleId} needs at least three style-specific comparison cues`);
+      assert.ok(compareCues.every(cue => cue.trim()), `${world.id}/${row.styleId} comparison cues must be readable`);
+      assert.equal(new Set(compareCues.map(cue => cue.trim().toLocaleLowerCase())).size, compareCues.length,
+        `${world.id}/${row.styleId} comparison cues must be distinct`);
       const urls = (row.recordings ?? []).map(recording => recording.url);
       assert.ok(urls.length >= 5 && urls.length <= 8, `${world.id}/${row.styleId} needs 5–8 linked recordings`);
+      assert.ok(urls.every(url => /^https:\/\//.test(url)), `${world.id}/${row.styleId} links must be streaming URLs`);
       assert.equal(new Set(urls).size, urls.length, `${world.id}/${row.styleId} recordings must use distinct links`);
     }
+    assert.deepEqual([...coveredStyleIds].sort(), [...catalogStyleIds].sort(),
+      `${world.id} reference rows must cover every catalog style exactly once`);
+  }
+});
+
+test('generated reply and variation studies do not expose duplicate playable cells', () => {
+  const signature = (pattern: (typeof ALL_PATTERNS)[number]) => JSON.stringify({
+    meter: pattern.meter,
+    cycleLength: pattern.cycleLength,
+    category: pattern.category,
+    roles: pattern.roles,
+    instruments: pattern.instruments,
+    events: pattern.events?.map(event => [
+      event.position, event.duration, event.kind, event.hitType, event.accent, event.velocity,
+      event.articulation, event.microtiming, event.probability, event.condition, event.pitch,
+      event.notation, event.tuplet, event.polyrhythm, event.tieToNext,
+    ]),
+  });
+
+  for (const world of GENRE_WORLDS) {
+    for (const pattern of world.patterns.filter(candidate => candidate.enabled !== false
+      && (candidate.pedagogicalStudy === 'answer' || candidate.pedagogicalStudy === 'variation'))) {
+      const duplicate = world.patterns.find(candidate => candidate.id !== pattern.id
+        && candidate.enabled !== false
+        && candidate.styleIds?.some(styleId => pattern.styleIds?.includes(styleId))
+        && candidate.instruments?.join('|') === pattern.instruments?.join('|')
+        && candidate.roles.join('|') === pattern.roles.join('|')
+        && candidate.meter === pattern.meter
+        && candidate.cycleLength === pattern.cycleLength
+        && candidate.category === pattern.category
+        && (!candidate.sectionUsage?.length || !pattern.sectionUsage?.length
+          || candidate.sectionUsage.some(section => pattern.sectionUsage!.includes(section)))
+        && signature(candidate) === signature(pattern));
+      assert.equal(duplicate, undefined,
+        `${world.id}/${pattern.styleIds?.[0]}/${pattern.shortName ?? pattern.name} duplicates ${duplicate?.shortName ?? duplicate?.name}`);
+    }
+  }
+});
+
+test('source-derived drills point to a full cell and stay out of automatic song arrangements', () => {
+  const drills = ALL_PATTERNS.filter(pattern => pattern.pedagogicalSourcePatternId
+    && ['reduction', 'technique'].includes(pattern.pedagogicalStudy ?? ''));
+  assert.ok(drills.length > 0, 'the catalog retains explicit source-linked practice material');
+  for (const drill of drills) {
+    const source = PATTERNS_BY_ID[drill.pedagogicalSourcePatternId!];
+    assert.ok(source, `${drill.shortName ?? drill.name} points to a full source cell`);
+    assert.equal(source.worldId, drill.worldId, 'a practice drill cannot borrow a source from another genre');
+    assert.ok(source.styleIds?.some(styleId => drill.styleIds?.includes(styleId)),
+      `${drill.shortName ?? drill.name} keeps its source inside the same style`);
+    assert.ok(source.instruments?.some(instrument => drill.instruments?.includes(instrument)),
+      `${drill.shortName ?? drill.name} retains the studied instrument`);
+    assert.equal(drill.arrangementVariation, undefined,
+      `${drill.shortName ?? drill.name} cannot inherit arrangement eligibility from its source`);
   }
 });
 
@@ -93,6 +157,38 @@ test('student-facing catalog labels stay concise and descriptions avoid shared f
       assert.match(style.description, /\bcenters\b.*\bBPM\b/i, `${world.id}/${style.id} needs a usable style identity description`);
     }
   }
+});
+
+test('Weird style samples keep their own form, pitch logic, and playable source cells', () => {
+  const world = GENRE_WORLDS.find(candidate => candidate.id === 'weird')!;
+  const styles = world.styleDefinitions;
+  const forms = new Set(styles.map(style => JSON.stringify(style.arrangementSections?.map(section => [section.label, section.bars]))));
+  assert.equal(forms.size, styles.length, 'experimental substyles should not inherit one generic five-part form');
+  const progressions = new Set(styles.map(style => JSON.stringify(style.sectionProgressions)));
+  assert.ok(progressions.size >= 14, 'pitch plans should match the individual experimental process');
+  for (const style of styles) {
+    const source = ALL_PATTERNS.filter(pattern => pattern.styleIds?.includes(style.id)
+      && pattern.sourceLevel === 'style-authored' && !pattern.pedagogicalStudy);
+    assert.ok(source.length >= 2, `${style.id} needs multiple authored playable cells`);
+    const signatures = new Set(source.map(pattern => JSON.stringify(pattern.events?.map(event => [event.position, event.duration, event.hitType]))));
+    assert.ok(signatures.size >= 2, `${style.id} needs at least two distinct cells`);
+  }
+  assert.doesNotMatch(styles.find(style => style.id === 'weird-glitch')!.description, /gated fragments/i);
+  assert.match(styles.find(style => style.id === 'weird-piano')!.description, /sampled acoustic-piano bank/i,
+    'prepared piano must disclose that the current bank does not model physical preparations');
+  const microtonal = ALL_PATTERNS.find(pattern => pattern.styleIds?.includes('weird-microtonal')
+    && pattern.shortName === 'Quarter-tone cell')!;
+  assert.deepEqual(microtonal.events?.map(event => event.pitch?.cents), [undefined, -50, 50, undefined]);
+  const generative = ALL_PATTERNS.find(pattern => pattern.styleIds?.includes('weird-process-generative')
+    && pattern.shortName === 'Seed cell')!;
+  assert.ok(generative.events?.some(event => event.probability !== undefined && event.probability < 1),
+    'generative changes should come from authored conditional events, not an invented chord loop');
+  const kit = ALL_PATTERNS.find(pattern => pattern.styleIds?.includes('weird-no-wave')
+    && pattern.shortName === 'Uneven kit')!;
+  assert.deepEqual(kit.events?.map(event => event.hitType), ['kick', 'hat', 'snare', 'hat', 'kick', 'snare']);
+  assert.ok((styles.find(style => style.id === 'weird-drone')!.calibration?.mix?.character?.dryness ?? 1)
+    < (styles.find(style => style.id === 'weird-piano')!.calibration?.mix?.character?.dryness ?? 0),
+  'long drones need a spacious mix while the piano attacks remain dry');
 });
 
 test('country pedal-steel studies expose each playable gesture with readable labels', () => {
@@ -215,7 +311,7 @@ test('Jazz core cells make each rhythm section teach its own pocket', () => {
   const cool = getStyle('jazz-cool')!;
   const trumpet = core('jazz-cool', 'trumpet');
   assert.equal(cool.form?.templates?.[0]?.value.find(section => section.soloInstrumentId)?.soloInstrumentId, 'trumpet');
-  assert.equal(trumpet.shortName, 'Trumpet statement');
+  assert.equal(trumpet.shortName, 'Cool Trumpet');
   assert.ok(cool.calibration?.roles.lead?.preferredInstruments.includes('trumpet'));
   assert.equal(cool.instrumentDialects?.['drums:percussion']?.variantId, 'brush-kit');
 });
@@ -246,6 +342,55 @@ test('every sample song part has distinct style-local teaching patterns', () => 
       checkedParts++;
     }
     assert.ok(checkedParts > 0, `${entry.styleId} has no audited song parts`);
+  }
+});
+
+test('sample vocals are explicit and enter only in the sung sections', () => {
+  const modernBlues = createCatalogSong('blues-modern-blues_song');
+  assert.ok(!modernBlues.tracks.some(track => track.instrumentId === 'voice'),
+    'a guitar-led blues arrangement does not inherit a sustained-vowel lead from the style palette');
+
+  const bossa = createCatalogSong('brazilian-bossa-nova_song');
+  assert.ok(!bossa.tracks.some(track => track.instrumentId === 'voice'),
+    'the instrumental bossa score stays instrumental as its arrangement note specifies');
+
+  const muwashshah = createCatalogSong('arabic-muwashshah_song');
+  assert.ok(muwashshah.tracks.some(track => track.instrumentId === 'voice'));
+  const activeVocalSections = muwashshah.regions
+    .filter(region => region.activeInstrumentIds?.includes('voice'))
+    .map(region => region.kind);
+  assert.deepEqual(activeVocalSections, ['stanza', 'refrain', 'stanza', 'refrain'],
+    'the sung lines stay in the poem stanzas and group refrain, leaving the prelude, taqsim and coda instrumental');
+  assert.deepEqual(RECORDING_ARRANGEMENTS['arabic::muwashshah']?.vocalSections, ['stanza', 'refrain']);
+});
+
+test('cinematic sample scores stage distinct ensembles and section-specific cells', () => {
+  const samples = Object.fromEntries(songCatalog.filter(entry => entry.genreId === 'cinematic')
+    .map(entry => [entry.styleId, createCatalogSong(entry.id)]));
+  const active = (styleId: string, kind: string, occurrence = 0) => {
+    const regions = samples[styleId].regions.filter(region => region.kind === kind);
+    assert.ok(regions[occurrence], `${styleId} needs a ${kind} section`);
+    return regions[occurrence].activeInstrumentIds ?? [];
+  };
+  const roster = (styleId: string) => auditCatalogSongInstruments(`${styleId}_song`).instruments;
+
+  assert.deepEqual(roster('cinematic-golden-age').sort(), ['cello','french-horn','piano','string-ensemble','timpani']);
+  assert.deepEqual(roster('cinematic-hybrid').sort(), ['cello','piano','string-ensemble','synth','timpani']);
+  assert.deepEqual(roster('cinematic-epic').sort(), ['cello','french-horn','string-ensemble','synth','timpani']);
+  assert.ok(!roster('cinematic-minimal-tension').some(id => ['french-horn','timpani'].includes(id)));
+  assert.ok(!roster('cinematic-ambient-score').some(id => ['french-horn','timpani'].includes(id)));
+
+  assert.deepEqual(active('cinematic-modern-score', 'opening').sort(), ['piano','synth']);
+  assert.equal(active('cinematic-modern-score', 'climax').length, 6);
+  assert.ok(active('cinematic-golden-age', 'B').length < active('cinematic-golden-age', 'A').length);
+  assert.deepEqual(active('cinematic-epic', 'break'), [], 'the epic stop is a full-band rest');
+  assert.deepEqual(active('cinematic-ambient-score', 'opening').sort(), ['string-ensemble','synth']);
+
+  for (const [styleId, song] of Object.entries(samples)) {
+    const signatures = song.regions.map(region => Object.entries(song.arrangement[region.id] ?? {})
+      .filter(([, patternId]) => patternId !== 'silent')
+      .map(([trackId, patternId]) => `${song.tracks.find(track => track.id === trackId)?.instrumentId}:${PATTERNS_BY_ID[patternId]?.shortName ?? patternId}`).join('|'));
+    assert.ok(new Set(signatures).size > 1, `${styleId} changes its authored ensemble cells across sections`);
   }
 });
 
@@ -327,6 +472,22 @@ test('phrase variations can develop arrangements while isolated drills remain te
     'generic timing placeholders stay selectable but do not drive automatic phrase cadences');
   assert.ok(genericClosers.some(pattern => JSON.stringify(pattern.hitGrid) === JSON.stringify(['tom', 'snare', 'snare'])),
     'the shared drum placeholder is also retained only as a clearly labeled timing study');
+
+  const afrobeat = makeSheet('afrobeat', 'afrobeat-classic-afrobeat');
+  const afrobeatDrums = afrobeat.tracks.find(track => track.instrumentId === 'drums');
+  assert.ok(afrobeatDrums, 'the contrasting Afrobeat style has its authored kit part');
+  for (let salt = 0; salt < 32; salt++) {
+    const selectedId = suggestPattern(afrobeatDrums! as Parameters<typeof suggestPattern>[0], 'afrobeat', salt, 'solo', undefined, 5, 'afrobeat-classic-afrobeat');
+    const selected = selectedId ? PATTERNS_BY_ID[selectedId] : undefined;
+    assert.ok(!selected?.pedagogicalStudy || selected.arrangementVariation,
+      `automatic Afrobeat selection ${salt} must not turn a teaching drill into a song part`);
+  }
+  const randomizedAfrobeat = randomizePatternsForSong(afrobeat);
+  for (const [regionId, parts] of Object.entries(randomizedAfrobeat.arrangement)) for (const patternId of Object.values(parts)) {
+    const pattern = PATTERNS_BY_ID[patternId];
+    assert.ok(!pattern?.pedagogicalStudy || pattern.arrangementVariation,
+      `${regionId}/${patternId}: song-wide randomization must leave isolated teaching drills selectable but unused`);
+  }
 });
 
 test('short source anchors gain phrase re-entry variations while sustained beds stay intact', () => {
@@ -495,8 +656,10 @@ test('Canaro and Di Sarli examples develop through their own instrumental roles'
   for (const song of [canaro, diSarli]) {
     const selected = Object.values(song.arrangement).flatMap(parts => Object.values(parts))
       .filter(id => id !== 'silent').map(id => PATTERNS_BY_ID[id]);
-    assert.ok(selected.every(pattern => !pattern?.pedagogicalStudy),
-      'recording-score arrangements use core cells; practice drills remain user-selectable');
+    const studyVariations = selected.filter(pattern => pattern?.pedagogicalStudy);
+    assert.ok(studyVariations.every(pattern => pattern?.arrangementVariation === true
+      && pattern.sourceLevel === 'style-authored' && pattern.styleIds?.includes(song.styleId!)),
+    'only style-local variations explicitly marked for arrangement development can enter a returning section');
   }
 });
 
@@ -589,7 +752,20 @@ test('Ambient examples develop their own sections and Dark Ambient keeps its spa
 test('every style has one complete example and removed examples cannot be loaded', () => {
   assert.equal(songCatalog.length, ALL_STYLES.length);
   assert.equal(new Set(songCatalog.map(entry => entry.styleId)).size, ALL_STYLES.length);
-  for (const entry of songCatalog) assert.equal(catalogIdForStyle(entry.styleId), entry.id);
+  for (const entry of songCatalog) {
+    assert.equal(catalogIdForStyle(entry.styleId), entry.id);
+    const song = createCatalogSong(entry.id);
+    assert.ok(song, `${entry.styleId} example should build a playable catalog song`);
+    for (const [regionId, parts] of Object.entries(song.arrangement)) for (const patternId of Object.values(parts)) {
+      const pattern = PATTERNS_BY_ID[patternId];
+      assert.ok(!pattern?.pedagogicalSourcePatternId || pattern.arrangementVariation === true,
+        `${entry.styleId}/${regionId}/${pattern?.shortName ?? patternId}: song examples must use the full source phrase unless a derived cell is approved for arrangement`);
+      assert.ok(!pattern?.provenance?.startsWith('Generic phrase-close'),
+        `${entry.styleId}/${regionId}/${pattern?.shortName ?? patternId}: neutral timing drills must not become style cadences`);
+      assert.ok(!pattern?.provenance?.startsWith('Recomposition of'),
+        `${entry.styleId}/${regionId}/${pattern?.shortName ?? patternId}: private turnaround drills must not become complete sample sections`);
+    }
+  }
   assert.throws(() => createCatalogSong('tango-golden-age_starter'), /Unknown catalog song/);
 });
 

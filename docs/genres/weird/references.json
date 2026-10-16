@@ -1,0 +1,264 @@
+{
+  "genreId": "weird",
+  "reviewed": "2026-10-15",
+  "status": "Five linked Apple Music track candidates are collected for each of the sixteen Weird styles below. Listening comparisons, useful timecodes, and mix notes remain pending; these are candidates, not verified sonic matches.",
+  "source": "Apple Music individual track pages, track-specific album links, and album track listings. Candidate links were checked against Apple Music search results; reference audio was not downloaded.",
+  "styles": [
+    {
+      "styleId": "weird-deconstructed",
+      "compare": [
+        "where a cut interrupts a phrase and how silence changes the perceived pulse",
+        "how a small recognizable motif survives edits and reappears in a changed form",
+        "how transient, distorted, and vocal sounds occupy separate registers",
+        "whether sections reassemble from fragments instead of returning to a regular backbeat"
+      ],
+      "recordings": [
+        { "title": "Desafío", "artist": "Arca", "url": "https://music.apple.com/us/song/1203296308", "timecodes": [] },
+        { "title": "Faceshopping", "artist": "SOPHIE", "url": "https://music.apple.com/us/song/1709023357", "timecodes": [] },
+        { "title": "Chorus", "artist": "Holly Herndon", "url": "https://music.apple.com/us/song/972395125", "timecodes": [] },
+        { "title": "As a.W.O.L", "artist": "Amnesia Scanner", "url": "https://music.apple.com/us/song/1501436962", "timecodes": [] },
+        { "title": "Safe", "artist": "Visionist", "url": "https://music.apple.com/us/song/1501416979", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "weird-musique-concrete",
+      "compare": [
+        "how recorded environmental and mechanical sounds become phrase material",
+        "cuts between sound objects, register changes, and clear silences",
+        "the contrast between recognizable source sounds and transformed timbre",
+        "how a return or juxtaposition creates form without a repeated chord loop"
+      ],
+      "recordings": [
+        { "title": "Cinq etudes de bruits - Etude aux chemins de fer", "artist": "Pierre Schaeffer", "url": "https://music.apple.com/us/song/923421133", "timecodes": [] },
+        { "title": "Cinq Etudes de Bruits (Five Studies of Noises): Etude Violette", "artist": "Pierre Schaeffer", "url": "https://music.apple.com/us/song/1615466118", "timecodes": [] },
+        { "title": "Cinq Etudes de Bruits (Five Studies of Noises): Etude Noire", "artist": "Pierre Schaeffer", "url": "https://music.apple.com/us/song/1615466119", "timecodes": [] },
+        { "title": "Cinq etudes de bruits - Etude pathetique", "artist": "Pierre Schaeffer", "url": "https://music.apple.com/us/album/cinq-etudes-de-bruits-etude-pathetique/923417756?i=923421141", "timecodes": [] },
+        { "title": "Gesang Der Junglinge", "artist": "Karlheinz Stockhausen", "url": "https://music.apple.com/us/song/666520628", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "weird-piano",
+      "compare": [
+        "dry percussive attacks against natural piano resonance and decay",
+        "register jumps and repeated-note figures without an imposed drum pulse",
+        "small timing and velocity variations that keep the attack human",
+        "how solo piano texture changes across a phrase and then leaves space"
+      ],
+      "recordings": [
+        { "title": "Traffic", "artist": "Hauschka", "url": "https://music.apple.com/de/song/79262159", "timecodes": [] },
+        { "title": "Morning", "artist": "Hauschka", "url": "https://music.apple.com/us/song/945490383", "timecodes": [] },
+        { "title": "Kreuzung", "artist": "Hauschka", "url": "https://music.apple.com/jp/song/945490384", "timecodes": [] },
+        { "title": "Stumm (Kein Wort)", "artist": "Hauschka", "url": "https://music.apple.com/us/song/215661906", "timecodes": [] },
+        { "title": "Ashes", "artist": "Hilary Hahn & Hauschka", "url": "https://music.apple.com/us/song/1452289294", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "weird-glitch",
+      "compare": [
+        "stable pulse beneath edits, skips, and displaced sample attacks",
+        "how an edit breaks a sound while the next phrase remains rhythmically legible",
+        "transient density and spectral change across a long phrase",
+        "whether repeats feel intentionally edited rather than cut off by a playback gate"
+      ],
+      "recordings": [
+        { "title": "Do While", "artist": "Oval", "url": "https://music.apple.com/us/song/5506842", "timecodes": [] },
+        { "title": "Gantz Graf", "artist": "Autechre", "url": "https://music.apple.com/us/song/305116804", "timecodes": [] },
+        { "title": "Endless Summer", "artist": "Fennesz", "url": "https://music.apple.com/us/song/1799285053", "timecodes": [] },
+        { "title": "data.matrix", "artist": "Ryoji Ikeda", "url": "https://music.apple.com/us/song/1687772682", "timecodes": [] },
+        { "title": "Xerrox Monophaser 2", "artist": "Alva Noto", "url": "https://music.apple.com/us/song/1511954782", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "weird-microsound",
+      "compare": [
+        "tiny attacks and low-level detail against long, deliberate gaps",
+        "how near-silence, grain, clicks, and tones create a clear phrase",
+        "whether small events change timbre or position instead of becoming a beat loop",
+        "how restrained level and spectrum preserve the smallest details"
+      ],
+      "recordings": [
+        { "title": "One Minute", "artist": "Ryoji Ikeda", "url": "https://music.apple.com/us/song/293015764", "timecodes": [] },
+        { "title": "Recurrence.Expansion", "artist": "Richard Chartier", "url": "https://music.apple.com/us/song/1775485141", "timecodes": [] },
+        { "title": "on a continuous form 4", "artist": "Richard Chartier", "url": "https://music.apple.com/us/album/on-a-continuous-form-4/1693022627?i=1693022639", "timecodes": [] },
+        { "title": "Do While", "artist": "Oval", "url": "https://music.apple.com/us/song/5506842", "timecodes": [] },
+        { "title": "Melt (AGF/Delay Edit)", "artist": "Luomo", "url": "https://music.apple.com/us/song/1385130621", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "weird-process-generative",
+      "compare": [
+        "a rule or process that can be heard shaping the music over time",
+        "how independent parts enter, leave, and align without a fixed verse loop",
+        "the balance between a stable reference pulse and changing local patterns",
+        "how the ending follows the process rather than a generic cadence"
+      ],
+      "recordings": [
+        { "title": "1/1", "artist": "Brian Eno", "url": "https://music.apple.com/us/song/724436237", "timecodes": [] },
+        { "title": "In C", "artist": "Bang on a Can All-Stars", "url": "https://music.apple.com/us/song/410460715", "timecodes": [] },
+        { "title": "In C", "artist": "Terry Riley & Members of the Creative & Performing Arts at SUNY-Buffalo", "url": "https://music.apple.com/us/song/307565028", "timecodes": [] },
+        { "title": "Clapping Music", "artist": "Steve Reich & Kristjan Järvi", "url": "https://music.apple.com/us/song/1157058798", "timecodes": [] },
+        { "title": "Come Out", "artist": "Steve Reich", "url": "https://music.apple.com/us/song/193375667", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "weird-phase",
+      "compare": [
+        "identical short cells separating gradually through a small tempo difference or shifted entry",
+        "emergent accents and melodies as the repeated lines move out of alignment",
+        "how players maintain an even, unforced pulse while alignment changes",
+        "a process-led form rather than conventional fills or chord changes"
+      ],
+      "recordings": [
+        { "title": "Piano Phase", "artist": "Ensemble Avantgarde", "url": "https://music.apple.com/us/song/472609591", "timecodes": [] },
+        { "title": "Piano Phase", "artist": "Norrbotten NEO & Mårten Landström", "url": "https://music.apple.com/us/song/740198582", "timecodes": [] },
+        { "title": "Piano Phase", "artist": "Dennis Russell Davies & Maki Namekawa", "url": "https://music.apple.com/us/song/140158412", "timecodes": [] },
+        { "title": "Piano Phase", "artist": "Double Edge", "url": "https://classical.music.apple.com/us/recording/steve-reich-1936-pp4-1466467047", "timecodes": [] },
+        { "title": "Phase Patterns", "artist": "Steve Reich & Jon Gibson", "url": "https://music.apple.com/us/song/281572346", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "weird-microtonal",
+      "compare": [
+        "interval sizes and tuning relationships outside equal-tempered semitones",
+        "how instruments or voices make those intervals physically audible",
+        "the role of beating, resonance, and timbre in defining pitch",
+        "how melodic shape and harmony grow from the chosen tuning system"
+      ],
+      "recordings": [
+        { "title": "Daphne of the Dunes", "artist": "Harry Partch and Gate 5 Ensemble", "url": "https://music.apple.com/us/song/719342773", "timecodes": [] },
+        { "title": "Barstow. Eight Hitchhiker Inscriptions from a Highway Railing at Barstow, California", "artist": "Harry Partch and Gate 5 Ensemble", "url": "https://music.apple.com/us/song/719342791", "timecodes": [] },
+        { "title": "Sonata for Microtonal Piano: Movement I", "artist": "Robert Miller", "url": "https://music.apple.com/us/album/sonata-for-microtonal-piano-movement-i/392831741?i=392831762", "timecodes": [] },
+        { "title": "Sonata for Microtonal Piano: Movement IV", "artist": "Robert Miller", "url": "https://music.apple.com/us/song/392831765", "timecodes": [] },
+        { "title": "String Quartet No. 10: Brisk, intent", "artist": "Kepler Quartet", "url": "https://classical.music.apple.com/us/recording/ben-johnston-1926-pp45-1542684464", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "weird-free-improvisation",
+      "compare": [
+        "how players listen and respond without a fixed chord loop or beat grid",
+        "distinct individual gestures and the space left between them",
+        "how texture, density, and energy change through ensemble interaction",
+        "when an improvised statement resolves, hands off, or deliberately stays open"
+      ],
+      "recordings": [
+        { "title": "Four", "artist": "Derek Bailey & Evan Parker", "url": "https://music.apple.com/us/song/259021382", "timecodes": [] },
+        { "title": "D", "artist": "Derek Bailey", "url": "https://music.apple.com/us/song/453643780", "timecodes": [] },
+        { "title": "Untitled No. II", "artist": "Derek Bailey, Evan Parker, Hugh Davies, Jamie Muir & Christine Jeffrey", "url": "https://music.apple.com/us/song/1696075404", "timecodes": [] },
+        { "title": "Free Jazz (Parts 1 & 2)", "artist": "Ornette Coleman", "url": "https://music.apple.com/us/song/1186719412", "timecodes": [] },
+        { "title": "The Warning Track", "artist": "Derek Bailey, John Zorn & George Lewis", "url": "https://classical.music.apple.com/no/album/1720188776", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "weird-noise",
+      "compare": [
+        "how dense noise layers accumulate, thin, and change spectral balance",
+        "the difference between continuous distortion and articulated bursts",
+        "how abrupt rests, sustained feedback, and abrupt returns shape form",
+        "whether harsh energy keeps internal dynamics and phrase direction"
+      ],
+      "recordings": [
+        { "title": "Woodpecker No. 1", "artist": "Merzbow", "url": "https://music.apple.com/us/song/281914245", "timecodes": [] },
+        { "title": "Tardyon Storm", "artist": "Merzbow & Nordvargr", "url": "https://music.apple.com/us/song/503959031", "timecodes": [] },
+        { "title": "Munchen", "artist": "Merzbow", "url": "https://music.apple.com/us/song/1189655024", "timecodes": [] },
+        { "title": "Transmission", "artist": "Pharmakon", "url": "https://music.apple.com/us/song/1192466849", "timecodes": [] },
+        { "title": "Promotion Man", "artist": "Merzbow", "url": "https://music.apple.com/us/song/732097858", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "weird-drone",
+      "compare": [
+        "slow change in timbre, overtone balance, and register over a sustained tone",
+        "how long decay, amplifier feedback, or organ resonance shapes the space",
+        "the relation between gradual motion and the listener's sense of time",
+        "how layers breathe and evolve without a regular beat"
+      ],
+      "recordings": [
+        { "title": "It Took the Night to Believe", "artist": "sunn O)))", "url": "https://music.apple.com/us/song/1220538458", "timecodes": [] },
+        { "title": "1/1", "artist": "Brian Eno", "url": "https://music.apple.com/us/song/724436237", "timecodes": [] },
+        { "title": "Requiem for Dying Mothers, Pt. 1", "artist": "Stars of the Lid", "url": "https://music.apple.com/us/song/40886778", "timecodes": [] },
+        { "title": "Requiem for Dying Mothers, Pt. 2", "artist": "Stars of the Lid", "url": "https://music.apple.com/us/song/40886780", "timecodes": [] },
+        { "title": "Like Gold and Faceted", "artist": "Earth", "url": "https://music.apple.com/us/song/830789858", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "weird-spectral",
+      "compare": [
+        "how overtone spectra and acoustic resonance generate harmony",
+        "timbral transformation as a structural event rather than a surface effect",
+        "slow harmonic movement, beating partials, and changing register",
+        "how instrumental and electronic layers blend while preserving detail"
+      ],
+      "recordings": [
+        { "title": "Partiels (1975) pour 18 Musiciens", "artist": "Asko Ensemble", "url": "https://music.apple.com/us/song/1663457853", "timecodes": [] },
+        { "title": "Vortex temporum: II", "artist": "Tito Ceccherini & Risognanze Ensemble", "url": "https://music.apple.com/us/song/1178146578", "timecodes": [] },
+        { "title": "NoaNoa", "artist": "Camilla Hoitenga & Kaija Saariaho", "url": "https://music.apple.com/us/song/324927958", "timecodes": [] },
+        { "title": "Nymphea, Jardin secret III", "artist": "Kronos Quartet & Kaija Saariaho", "url": "https://music.apple.com/us/song/784754703", "timecodes": [] },
+        { "title": "Jardin secret I (electronic music)", "artist": "Kaija Saariaho", "url": "https://music.apple.com/ca/song/1727101216", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "weird-no-wave",
+      "compare": [
+        "raw, clipped guitar and bass figures interacting with dry, angular drums",
+        "uneven accents, abrupt stops, and short ensemble bursts",
+        "the balance between abrasive tone, groove, and deliberately awkward space",
+        "how a rough performance stays coordinated without smoothing out its edges"
+      ],
+      "recordings": [
+        { "title": "Lady Scarface", "artist": "Lydia Lunch", "url": "https://music.apple.com/us/song/258293824", "timecodes": [] },
+        { "title": "Contort Yourself", "artist": "James Chance & The Contortions", "url": "https://music.apple.com/us/song/1759309570", "timecodes": [] },
+        { "title": "You Can't Be Funky", "artist": "Bush Tetras", "url": "https://music.apple.com/us/song/1587755908", "timecodes": [] },
+        { "title": "Frankie Teardrop", "artist": "Suicide", "url": "https://music.apple.com/us/song/1438252165", "timecodes": [] },
+        { "title": "Death Valley '69 (with Lydia Lunch)", "artist": "Sonic Youth", "url": "https://music.apple.com/us/song/522275915", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "weird-zeuhl",
+      "compare": [
+        "insistent bass ostinato and forceful, ritual-like ensemble pulse",
+        "how chant-like vocal figures lock with angular instrumental riffs",
+        "sudden shifts in density and meter while the bass keeps the ensemble grounded",
+        "how sections intensify and release rather than cycling as a generic rock verse"
+      ],
+      "recordings": [
+        { "title": "Mekanik Destruktiw Kommandoh", "artist": "Magma", "url": "https://music.apple.com/us/song/157844707", "timecodes": [] },
+        { "title": "De futura (2020 Remastered Version)", "artist": "Magma", "url": "https://music.apple.com/us/song/1541003035", "timecodes": [] },
+        { "title": "Zombies (2020 Remastered Version)", "artist": "Magma", "url": "https://music.apple.com/us/song/1541003028", "timecodes": [] },
+        { "title": "Kobaia", "artist": "Magma", "url": "https://music.apple.com/us/song/202965794", "timecodes": [] },
+        { "title": "Vilna", "artist": "Weidorje", "url": "https://music.apple.com/us/song/344988715", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "weird-polymetric",
+      "compare": [
+        "how concurrent cycles or accent patterns imply different meters",
+        "whether the reference pulse remains audible while accents shift around it",
+        "how interlocking parts create tension without losing ensemble cohesion",
+        "how a phrase resolves when cycles realign or a section changes meter"
+      ],
+      "recordings": [
+        { "title": "Bleed", "artist": "Meshuggah", "url": "https://music.apple.com/us/song/1882049242", "timecodes": [] },
+        { "title": "Lateralus", "artist": "TOOL", "url": "https://music.apple.com/us/song/1474185845", "timecodes": [] },
+        { "title": "Frame By Frame", "artist": "King Crimson", "url": "https://music.apple.com/us/song/1090440360", "timecodes": [] },
+        { "title": "The Dance of Eternity", "artist": "Dream Theater", "url": "https://music.apple.com/us/song/282694497", "timecodes": [] },
+        { "title": "Take Five", "artist": "The Dave Brubeck Quartet", "url": "https://music.apple.com/us/song/193085790", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "weird-circuit-bent-broken-electronics",
+      "compare": [
+        "unstable oscillator and feedback behavior producing pitch and timbre changes",
+        "how irregular device pulses and accidental resonances become musical gestures",
+        "the difference between intentionally broken electronics and ordinary glitch edits",
+        "how a repeated cell changes when its source circuit or clock misbehaves"
+      ],
+      "recordings": [
+        { "title": "Circuit Bent", "artist": "STOMACH BOOK", "url": "https://music.apple.com/us/song/1790857606", "timecodes": [] },
+        { "title": "Circuit Bent", "artist": "Gaba Island", "url": "https://music.apple.com/us/album/circuit-bent-single/1438660664", "timecodes": [] },
+        { "title": "Jenghizkhan's Circuit Bent Symphony (St Celfer Remix)", "artist": "jenghizkhan", "url": "https://music.apple.com/us/album/jenghizkhans-circuit-bent-symphony-st-celfer-remix/1641956116?i=1641956121", "timecodes": [] },
+        { "title": "Ambiently Speaking", "artist": "Circuit Bent", "url": "https://music.apple.com/us/song/447051381", "timecodes": [] },
+        { "title": "Arachnid", "artist": "Circuit Bent", "url": "https://music.apple.com/us/song/1044219017", "timecodes": [] }
+      ]
+    }
+  ]
+}

@@ -49,10 +49,10 @@ afrobeat::jazz-heavy-afrobeat|_=Dm7,G7,Dm7,Dm7;head=Dm7,G7,Dm7,G7;break=Gm7,Gm7,
 afrobeat::modern-revival|_=Em7,Em7,A7,Em7;chorus=A7,Em7,D7,Em7;outro=D7,Em7
 mbalax::sabar-heavy|_=D5,D5,D5,D5
 qawwali::contemporary-fusion|_=D5,D5,D5,D5
-cinematic::hybrid|_=Dm,Dm,Bb,Dm
-cinematic::ambient-score|_=Cm7,Fm7,Cm7,Gm7
+cinematic::hybrid|_=Am,Fmaj7,C,G;evolution=Am,Fmaj7,C,Em
+cinematic::ambient-score|_=D5,Bm,G,A
 ambient::generative-ambient|_=D5,D5,A5,D5
-weird::process-generative|_=D5,D5,A5,D5
+weird::process-generative|_=D5;evolution=D5;texture-shift=Eb5;dissolve=D5
 indian-classical::instrumental-gat|_=D5,D5,D5,D5
 indian-classical::dhrupad|_=D5,D5,D5,D5
 gamelan::javanese|_=D5,D5,D5,D5

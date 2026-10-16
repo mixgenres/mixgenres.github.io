@@ -368,6 +368,15 @@ export function patternAvailableInSection(pattern: MusicalPattern, sectionKind?:
   return broadPhraseLesson;
 }
 
+/** Source-derived reduction/technique drills and neutral timing placeholders
+ * stay available for deliberate study, while full folder-authored cells can
+ * remain part of the automatic style vocabulary. */
+function automaticPatternCandidate(pattern: MusicalPattern): boolean {
+  if (pattern.enabled === false || pattern.provenance?.startsWith('Generic phrase-close')
+    || pattern.provenance?.startsWith('Recomposition of')) return false;
+  return !pattern.pedagogicalSourcePatternId || pattern.arrangementVariation === true;
+}
+
 export function patternStyleFit(
   pattern: MusicalPattern,
   styleId?: string,
@@ -640,7 +649,7 @@ export function suggestPattern(
   ])];
   const candidatePatterns = candidateIds
     .map(id => PATTERNS_BY_ID[id])
-    .filter((p): p is MusicalPattern => !!p && p.enabled !== false && (guestWeight > 0 || p.worldId === worldId));
+    .filter((p): p is MusicalPattern => !!p && automaticPatternCandidate(p) && (guestWeight > 0 || p.worldId === worldId));
   const scored = candidatePatterns
     .map(p => {
       const hostFit = affinity(p.id, voice, worldId, styleId);
@@ -1321,7 +1330,7 @@ function rankInstrumentsForWorld(worldId: string, targetRole?: string, styleId?:
         muted: false, volume: 0.85, lensIds: [],
       } as Voice;
       const best = (PATTERNS_BY_WORLD[worldId] || [])
-        .filter(p => p.enabled !== false)
+        .filter(automaticPatternCandidate)
         .map(p => affinity(p.id, fakeVoice, worldId, styleId))
         .filter(Number.isFinite)
         .sort((a, b) => b - a)[0] ?? -100;
@@ -1355,7 +1364,7 @@ function patternCandidatesForVoice(
   const approach = approachForVoice(voice, worldId, styleId);
   const pool = PATTERNS_BY_WORLD[worldId] || [];
   return pool
-    .filter(p => p.enabled !== false)
+    .filter(automaticPatternCandidate)
     .map(p => {
       let n = affinity(p.id, voice, worldId, styleId);
       const behavioralFit = approachFit(p, approach);

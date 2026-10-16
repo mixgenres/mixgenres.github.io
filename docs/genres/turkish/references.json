@@ -1,0 +1,64 @@
+{
+  "genreId": "turkish",
+  "reviewed": "2026-10-15",
+  "status": "Five or six linked Apple Music candidates are collected for all five Turkish styles. The native Music app has just become available, but this file was prepared before audition; comparisons and timecodes remain pending until tracks are actually heard in the app.",
+  "source": "Apple Music track pages located as listening candidates. No reference audio downloaded or processed.",
+  "styles": [
+    {
+      "styleId": "turkish-turkish-folk",
+      "compare": ["the saz/bağlama's rhythmic picking and melodic ornament", "asymmetric tune phrases and their dance or song pulse", "how vocal melody and instrumental response shape the line", "phrase breathing, pickups, and cadence", "plucked attack, resonance, and ensemble balance"],
+      "recordings": [
+        { "title": "Misket", "artist": "Mustafa Budan", "url": "https://music.apple.com/us/song/1452656980", "timecodes": [] },
+        { "title": "Misket", "artist": "Türkü", "url": "https://music.apple.com/us/song/6409004", "timecodes": [] },
+        { "title": "Misket / Çiçekdağı / Fidayda", "artist": "Murat Atmaca", "url": "https://music.apple.com/us/song/1553945351", "timecodes": [] },
+        { "title": "Çökertme", "artist": "Armağan Elçi", "url": "https://music.apple.com/us/song/1093468453", "timecodes": [] },
+        { "title": "Uzun Ince Bir Yoldayım", "artist": "Selda Bağcan", "url": "https://music.apple.com/us/song/1394858177", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "turkish-ottoman-classical",
+      "compare": ["makam contour and the unfolding logic of an instrumental taksim", "ornament, timing flexibility, and note connection on ney or tanbur", "the transition from free introduction into measured ensemble material", "how melodic tension is shaped without relying on chord-loop changes", "acoustic detail, sustain, and natural room around the soloist"],
+      "recordings": [
+        { "title": "Hicaz Taksim (Tanbur)", "artist": "Tanburi Cemil Bey", "url": "https://music.apple.com/us/song/1079562556", "timecodes": [] },
+        { "title": "Rast Taksim", "artist": "Masters of Classical Turkish Music & Yavuz Akalin", "url": "https://music.apple.com/us/song/1634011642", "timecodes": [] },
+        { "title": "Rast Taksim: Ney (feat. Ömer Erdoğdular)", "artist": "Ahmet Erdoğdular", "url": "https://music.apple.com/us/song/338321884", "timecodes": [] },
+        { "title": "Ney Taksimi", "artist": "Nevzad Atlig & Istanbul State Classical Turkish Music Choir", "url": "https://music.apple.com/us/song/1689194759", "timecodes": [] },
+        { "title": "Tanburla Hicaz Taksim", "artist": "Mesut Cemil", "url": "https://music.apple.com/us/song/939704603", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "turkish-anatolian-rock",
+      "compare": ["how folk-derived melody and ornament sit in an amplified rock arrangement", "the interaction of electric guitar, bağlama color, bass, and drums", "riff and vocal phrase lengths and their section-level changes", "dynamic builds, fills, and instrumental handoffs", "guitar sustain, drum punch, and separation in the band mix"],
+      "recordings": [
+        { "title": "Resimdeki Gözyaşları", "artist": "Cem Karaca", "url": "https://music.apple.com/us/song/1553015013", "timecodes": [] },
+        { "title": "Cemalim", "artist": "Erkin Koray", "url": "https://music.apple.com/us/song/1701826019", "timecodes": [] },
+        { "title": "Dönence", "artist": "Barış Manço", "url": "https://music.apple.com/us/song/1768312601", "timecodes": [] },
+        { "title": "Tamirci Çırağı (feat. Dervişan)", "artist": "Cem Karaca", "url": "https://music.apple.com/us/song/975492552", "timecodes": [] },
+        { "title": "Yuh Yuh", "artist": "Selda Bağcan", "url": "https://music.apple.com/us/song/1567082801", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "turkish-arabesque",
+      "compare": ["ornamented vocal delivery, sustained notes, and expressive phrase timing", "how strings, keyboard, and rhythm section intensify the vocal arc", "minor-mode melodic turns and cadences", "section contrast and instrumental answers around the singer", "vocal-forward balance, low-end weight, and emotional dynamic range"],
+      "recordings": [
+        { "title": "Batsın Bu Dünya", "artist": "Orhan Gencebay", "url": "https://music.apple.com/us/song/634437395", "timecodes": [] },
+        { "title": "Affet", "artist": "Müslüm Gürses", "url": "https://music.apple.com/us/song/659614353", "timecodes": [] },
+        { "title": "Mavi Mavi", "artist": "İbrahim Tatlıses", "url": "https://music.apple.com/us/song/1805186806", "timecodes": [] },
+        { "title": "Ömrüm", "artist": "Müslüm Gürses, Tüdanya & Hakkı Bulut", "url": "https://music.apple.com/us/song/1390887223", "timecodes": [] },
+        { "title": "Çeşme", "artist": "Ferdi Tayfur", "url": "https://music.apple.com/us/song/1701608400", "timecodes": [] },
+        { "title": "Dertler Benim Olsun", "artist": "Orhan Gencebay", "url": "https://music.apple.com/us/song/597188375", "timecodes": [] }
+      ]
+    },
+    {
+      "styleId": "turkish-roman-halk",
+      "compare": ["the lilt and accent pattern of Roman dance phrases", "how clarinet or other lead instruments ornament and answer", "the placement of drum and hand percussion accents around the dance pulse", "phrase breaks, pickups, and instrumental turnarounds", "lead articulation, percussion presence, and live ensemble energy"],
+      "recordings": [
+        { "title": "Bir Sarı Yılan", "artist": "Selim Sesler", "url": "https://music.apple.com/us/song/724986929", "timecodes": [] },
+        { "title": "Şehnaz Longa", "artist": "Selim Sesler", "url": "https://music.apple.com/us/song/1776173905", "timecodes": [] },
+        { "title": "Saniye'm", "artist": "Brenna Maccrimmon & Selim Sesler", "url": "https://music.apple.com/us/song/1001557446", "timecodes": [] },
+        { "title": "Trakya Roman Havası", "artist": "Sait Ağdaş", "url": "https://music.apple.com/us/song/1598113094", "timecodes": [] },
+        { "title": "Trakya Karşılaması (Roman Havası)", "artist": "Tekirdağlı By Tayfo", "url": "https://music.apple.com/us/song/1714032651", "timecodes": [] }
+      ]
+    }
+  ]
+}

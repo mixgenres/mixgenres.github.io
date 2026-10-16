@@ -1,6 +1,6 @@
 {
   "genreId": "brazilian",
-  "reviewed": "2026-10-14",
+  "reviewed": "2026-10-15",
   "status": "Six streaming candidates are collected for each of the eleven Brazilian styles. Listening and useful timecodes remain pending; these are not verified sonic matches, and no reference audio was downloaded.",
   "source": "Apple Music individual track pages and displayed artist/release metadata. These are listening candidates, not verified note-for-note transcriptions.",
   "styles": [
@@ -168,7 +168,7 @@
         { "title": "Faraó (Divindade do Egito)", "artist": "Olodum & Macaco Gordo", "url": "https://music.apple.com/us/song/1790594995", "timecodes": [] },
         { "title": "Faraó", "artist": "Olodum Mirim", "url": "https://music.apple.com/us/song/1578072369", "timecodes": [] },
         { "title": "Requebra", "artist": "Olodum", "url": "https://music.apple.com/us/song/321727178", "timecodes": [] },
-        { "title": "Requebra", "artist": "Olodum", "url": "https://music.apple.com/us/song/40620574", "timecodes": [] },
+        { "title": "Reggae dos Faraós", "artist": "Olodum", "url": "https://music.apple.com/us/song/1549645187", "timecodes": [] },
         { "title": "Samba Reggae", "artist": "Olodum", "url": "https://music.apple.com/us/song/325027160", "timecodes": [] },
         { "title": "Ladeira do Pelô / Faraó / Protesto do Olodum", "artist": "Daniela Mercury", "url": "https://music.apple.com/us/song/963468342", "timecodes": [] }
       ]

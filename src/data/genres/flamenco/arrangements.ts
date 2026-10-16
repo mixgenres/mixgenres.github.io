@@ -9,12 +9,13 @@ function guitar(name: string, onsets: number[], articulation: string[], options:
   notations?: Array<NonNullable<AuthoredCell['notations']>[number]>; cycleLength?: number; phraseEnd?: boolean;
   sectionUsage?: AuthoredCell['sectionUsage']; difficulty?: number; pedagogicalStudy?: AuthoredCell['pedagogicalStudy'];
   supportedEnergy?: AuthoredCell['supportedEnergy']; description?: string;
+  timingLock?: AuthoredCell['timingLock'];
 } = {}): AuthoredCell {
   return { name, role: 'lead', instruments: ['guitar'], onsets, articulations: articulation,
     durations: options.durations, accents: options.accents, pitches: options.pitches,
     notations: options.notations, cycleLength: options.cycleLength ?? 1, phraseEnd: options.phraseEnd,
     sectionUsage: options.sectionUsage, difficulty: options.difficulty, pedagogicalStudy: options.pedagogicalStudy,
-    supportedEnergy: options.supportedEnergy, description: options.description };
+    supportedEnergy: options.supportedEnergy, timingLock: options.timingLock, description: options.description };
 }
 
 const COMPAS_12 = [0, .5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5];
@@ -181,7 +182,7 @@ function flamencoLead(id: string): AuthoredCell[] {
       ['rasgueado', 'golpe', 'rasgueado'],
       { durations: [.18, .14, .22], accents: [.72, .9, 1], pitches: [chord, chord, chord],
         notations: [{ stroke: 'down' }, { bodyTechnique: 'golpe', stroke: 'down' }, { stroke: 'down' }],
-        sectionUsage: ['remate'], difficulty: 3,
+        sectionUsage: ['remate'], difficulty: 3, timingLock: 'ensemble',
         description: 'Original one-compás closing study: place three concise accents late in the 12-count cycle, then leave the final space open for the dancer’s punctuation.' });
     remate.shortName = 'Guitar remate';
     return [llamada, remate];
@@ -293,13 +294,13 @@ export function authorFlamencoArrangements(input: GenrePackInput): GenrePackInpu
         role: 'percussion', instruments: ['palmas'], onsets: [0, 3, 4.5, 5.5], cycleLength: 1,
         durations: [.12, .12, .12, .12], accents: [.48, .68, .84, 1],
         articulations: ['palmas-sordas', 'palmas-claras', 'palmas-fuertes', 'palmas-fuertes'],
-        sectionUsage: ['remate'], difficulty: 2,
+        sectionUsage: ['remate'], difficulty: 2, timingLock: 'ensemble',
         description: 'Keep palmas sparse beneath the closing guitar cue; give the final compás accent room to land.' },
       { name: 'Bulerías remate cajón: bass, slap and final bass', shortName: 'Cajón remate',
         role: 'percussion', instruments: ['cajon'], onsets: [0, 3, 5.5], cycleLength: 1,
         durations: [.14, .14, .14], accents: [.72, .58, 1],
         articulations: ['center-bass', 'edge-slap', 'center-bass'],
-        sectionUsage: ['remate'], difficulty: 2,
+        sectionUsage: ['remate'], difficulty: 2, timingLock: 'ensemble',
         description: 'Answer the closing rasgueado with a light bass-and-slap cue, then reinforce the final compás accent without filling the release.' },
     );
     const freeCante = ['taranta', 'granaina', 'malaguena'].includes(id);

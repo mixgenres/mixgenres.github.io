@@ -15,7 +15,7 @@ import { styleTheoryFor, blendGenreTheory } from '../../engine/lookup/theory';
 import { getResolvedSectionStyle, partLensForPattern, phraseBarsForStyle } from '../sheet/sheet.ts';
 import { getCanonicalStyle, getStyle } from '../../engine/style/registry';
 import { calibratedTechniqueGestures } from '../../engine/style/performance-expectations';
-import { parseChord } from '../sheet/musicTheory.ts';
+import { parseChord, scalePcsForMode } from '../sheet/musicTheory.ts';
 import { foldToRange, noteLengthBeats, voiceProfile } from '../sheet/instrumentRoles.ts';
 import { resolveTuningSystem } from '../sheet/tuning.ts';
 import { buildBarTimes, type BarTime, type Performance, type PerformancePhrase, type PerfNote, type PerfCC } from '../band/performanceData.ts';
@@ -36,7 +36,9 @@ import { optimizePerformanceByPhraseAndSong } from './songPhrasing.ts';
 import { decide } from '../sheet/arrangementContext.ts';
 import { activityFor } from '../sheet/sectionEnergy.ts';
 import { velocityForEnergy } from './velocity.ts';
-import { grooveForStyle, grooveVelocityMultiplier } from './groove.ts';
+import { applyFeel, grooveForStyle, grooveVelocityMultiplier, type GrooveProfile } from './groove.ts';
+import type { GrooveRole } from '../../data/instruments/schema/voice-profile';
+import { resolveStyle } from '../../engine/style/resolve';
 import { seedOf } from '../sheet/random.ts';
 import { resolveDialect } from './genreDialect.ts';
 import { scoreDurationSeconds, beatValue } from '../score/musicianScore';
@@ -322,9 +324,174 @@ function derivePassingMidi(state: PhraseState, current: number, ctx: PhraseConte
   return foldToRange(candidate, voiceProfile(ctx.profile.instrumentId));
 }
 
+function nextScaleTone(from: number, toward: number, scale: number[], low: number, high: number): number | undefined {
+  const direction = Math.sign(toward - from);
+  if (!direction || Math.abs(toward - from) < 3) return undefined;
+  for (let distance = 1; distance <= Math.abs(toward - from); distance++) {
+    const candidate = from + direction * distance;
+    if (candidate < low || candidate > high) break;
+    if (candidate !== toward && scale.includes(((candidate % 12) + 12) % 12)) return candidate;
+  }
+  return undefined;
+}
+
+/**
+ * Written cells are the student's rhythmic guide. A capable player may add a
+ * restrained scalar connection in an actual gap when that style allows runs,
+ * turns, slides, or other melodic development. Written pitches, rests,
+ * percussion, and the pattern's attack grid remain untouched.
+ */
+function developLeadPhrase(
+  phraseNotes: PerfNote[],
+  development: ReturnType<typeof shouldDevelopPhrase> | undefined,
+  grammar: ReturnType<typeof buildHybridGrammar>['hybrid'],
+  style: ResolvedStyle,
+  instrumentId: string,
+  trackId: string,
+  phraseId: string,
+  soundContext: PerfNote['soundContext'],
+  bars: BarTime[],
+): PerfNote[] {
+  if (!development || !['variation', 'answer', 'fill'].includes(development)) return [];
+  if (grammar.allowDerivedAttacks < 0.28 || grammar.allowDerivedPitch < 0.22) return [];
+  if (instrumentId === 'voice' || instrumentId === 'choir') {
+    const vocalTechniqueLanguage = [
+      ...Object.keys(style.calibration?.techniqueScopes ?? {}),
+      ...(style.calibration?.techniques?.lead ?? []),
+    ].join(' ');
+    // A sustained-vowel SoundFont cannot make every added scale tone read as
+    // a new lyric syllable. Add vocal ornaments only where the style explicitly
+    // teaches melisma, breath-phrasing, or a closely related vocal gesture.
+    if (!/melisma|meend|gamak|gamaka|taan|murki|soneo|falsetto|breath.?phrase|vocal.?ornament|ornament/i.test(vocalTechniqueLanguage)) return [];
+  }
+  const role = 'lead';
+  const vocabulary = grammar.variationVocabulary?.[role] ?? grammar.variationVocabulary?.melody ?? [];
+  if (!vocabulary.includes('scalar-connection')) return [];
+
+  const profile = getInstrumentPerformanceProfile(instrumentId);
+  const minMidi = profile.capabilities.lowMidi;
+  const maxMidi = profile.capabilities.highMidi;
+  const anchors = Array.from(new Map(phraseNotes
+    .filter(note => note.originCode === 0 && !note.percussion)
+    .sort((a, b) => a.time - b.time || a.midi - b.midi)
+    .map(note => [note.attackId ?? `${note.time}:${note.midi}`, note])).values());
+  if (anchors.length < 2) return [];
+
+  const subdivisions = grammar.subdivisionVocabulary?.[role] ?? grammar.subdivisionVocabulary?.melody ?? [];
+  if (!subdivisions.length) return [];
+  const stepBeats = 1 / Math.max(...subdivisions);
+  const maxAdds = Math.max(1, Math.min(4, Math.ceil(anchors.length * grammar.allowDerivedAttacks * 0.28)));
+  const additions: PerfNote[] = [];
+  for (let i = 0; i < anchors.length - 1 && additions.length < maxAdds; i++) {
+    const from = anchors[i], to = anchors[i + 1];
+    if (from.bar !== to.bar || from.harmonicChord === undefined || to.harmonicChord === undefined) continue;
+    const bar = bars[from.bar];
+    if (!bar) continue;
+    const beatSec = 60 / bar.bpm;
+    const restStart = from.time + from.dur;
+    const restEnd = to.time;
+    const rest = restEnd - restStart;
+    const restBeats = rest / beatSec;
+    // The old check added 80 ms to every required gap. A normal 0.30-beat
+    // opening between the shared beginner cells' notes therefore failed at
+    // every tempo, even when the style allowed a short 32nd-note connection.
+    // Keep the requirement musical (in beats) and reserve air before the next
+    // written attack so the guide stays audible and no note is clipped.
+    if (restBeats < Math.max(0.2, stepBeats * 1.7) || restBeats > 1.6) continue;
+
+    const chord = to.harmonicChord;
+    const root = parseChord(chord).rootPc;
+    const scale = scalePcsForMode(style.melody.scaleMode, root);
+    const midi = nextScaleTone(from.midi, to.midi, scale, minMidi, maxMidi);
+    if (midi === undefined || midi === from.midi || midi === to.midi) continue;
+    const time = restStart + beatSec * stepBeats;
+    const remainingBeats = (restEnd - time) / beatSec;
+    const durationBeats = stepBeats * 0.75;
+    if (remainingBeats < durationBeats + 0.04) continue;
+    const fromBeat = from.notation?.beat ?? (from.time - bar.start) / beatSec;
+    const fromDurationBeats = from.notation?.durationBeats ?? from.dur / beatSec;
+
+    const tuningSystem = style.harmony.tuningSystem;
+    if (!tuningSystem) throw new Error(`No authored tuning system for ${style.primaryGenre}/${style.id}`);
+    const tuning = resolveTuningSystem(tuningSystem);
+    const duration = beatSec * durationBeats;
+    additions.push({
+      soundContext,
+      attackId: `${to.attackId ?? `${to.time}`}:performer-${additions.length}`,
+      phraseId,
+      time,
+      dur: Math.max(0.035, duration),
+      midi,
+      harmonicChord: chord,
+      frequencyHz: tuning.getFrequencyHz(midi, root),
+      vel: Math.max(20, Math.round(Math.min(from.vel, to.vel) * (development === 'fill' ? 0.72 : 0.62))),
+      trackId,
+      bar: from.bar,
+      gestureCode: codeForGesture('legato'),
+      hitFunctionCode: HIT_FUNCTIONS.indexOf('tone'),
+      accent: 0.48,
+      originCode: 1,
+      exactPitch: false,
+      authoredTechnique: false,
+      authoredPitch: false,
+      authoredDuration: false,
+      // Keep the performed offset separate from the written subdivision so a
+      // score export/import round trip retains these derived pickups exactly.
+      notation: { bar: from.bar, beat: fromBeat + fromDurationBeats + stepBeats, durationBeats },
+    });
+  }
+  return additions;
+}
+
 function effectiveGesture(profile: InstrumentPerformanceProfile, ctx: PhraseContext, onset: RhythmOnset, authored?: string): string {
   const hint = patternGestureHint(ctx.pattern, profile.instrumentId, ctx.regionStyleId);
   return preferredGesture(ctx, onset.hit, authored ?? hint);
+}
+
+function performerArticulation(
+  ctx: PhraseContext,
+  base: string,
+  authored: string | undefined,
+  roughness: number,
+  seed: number,
+): string {
+  const generic = new Set(['accent', 'staccato', 'legato', 'tenuto']);
+  // A written articulation is part of the student's exercise. Generic authored
+  // cues may be adapted by the existing lens/role compatibility path, but the
+  // performer layer must not silently replace them while rendering that part.
+  if (authored || !generic.has(base.toLowerCase())) return base;
+  const role = techniqueRoleClass(ctx.role);
+  const profile = ctx.profile;
+  const candidates = Array.from(new Set([
+    ...(ctx.hybridGrammar.articulationVocabulary?.[role] ?? []),
+    ...ctx.hostTechniqueGestures,
+    ...(ctx.lensWeight >= 0.5 ? ctx.sourceTechniqueGestures : []),
+  ])).filter(gesture => Boolean(profile.gestures[gesture]) && !generic.has(gesture.toLowerCase()));
+  if (!candidates.length) return base;
+
+  // The beginner articulation remains the default. Phrase-level variation
+  // occasionally calls on another instrument-supported style technique; the
+  // tango mugre amount raises that chance and its contour without quantizing
+  // or randomly changing every stroke.
+  const chance = Math.min(0.64, 0.12 + ctx.hybridGrammar.allowDerivedAttacks * 0.12 + roughness * 0.42);
+  const draw = (seed >>> 0) / 4294967296;
+  if (draw >= chance) return base;
+  const index = Math.floor(((seedOf(seed, ctx.phraseIndex, ctx.onsetIndex) >>> 0) / 4294967296) * candidates.length);
+  return candidates[index] ?? base;
+}
+
+function grooveRoleFor(role: string, instrumentId: string): GrooveRole {
+  const value = role.toLowerCase();
+  if (/kick|bass-drum/.test(value)) return 'kick';
+  if (/snare|clap/.test(value)) return 'snare';
+  if (/hat|shaker|cymbal/.test(value)) return 'hat';
+  if (/ride|bell/.test(value)) return 'ride';
+  if (/bass|low-anchor/.test(value)) return 'bass';
+  if (/lead|melody|voice|counterline/.test(value)) return 'lead';
+  if (/harmony|comp|chord/.test(value)) return 'comp';
+  if (/texture|pad|drone/.test(value)) return 'pad';
+  if (/stab/.test(value)) return 'stab';
+  return voiceProfile(instrumentId).role;
 }
 
 function grooveTime(
@@ -332,17 +499,48 @@ function grooveTime(
   onset: RhythmOnset,
   _onsetIndex: number,
   groove: BandPlan['lanes'][string][number]['groove'],
+  hostFeel: GrooveProfile,
+  sourceFeel: GrooveProfile,
+  sourceWeight: number,
+  role: GrooveRole,
+  seed: number,
+  ensembleSeed: number,
+  ensemblePosition: number,
+  energy: number,
+  patternAccentAuthored: boolean,
+  timingLocked: boolean,
 ): number {
   const beatSec = 60 / bt.bpm;
   const beat = onset.position * bt.beatsPerBar;
-  const anticipation = (Number(onset.anticipationOffsetSteps ?? 0) + Number(groove.anticipationOffsetSteps ?? 0)) * (beatSec * bt.beatsPerBar / 16);
-  const unit = groove.swingUnit === 16 ? 0.25 : 0.5;
-  const swingPosition = beat / unit;
-  const swingDelta = Math.abs(swingPosition - Math.round(swingPosition)) < 0.001 && Math.round(swingPosition) % 2 === 1
-    ? (groove.swing - 0.5) * beatSec * unit * 2 : 0;
-  const authoredMicro = onset.microtiming ?? 0;
-  const microSec = Math.abs(authoredMicro) > 0.5 ? authoredMicro / 1000 : authoredMicro * beatSec / Math.max(1, groove.subdivision);
-  return bt.start + beat * beatSec + groove.offsetMs / 1000 + anticipation + swingDelta + microSec;
+  const rawMicrotiming = Number(onset.microtiming ?? 0);
+  const authoredMs = Math.abs(rawMicrotiming) > 0.5
+    ? rawMicrotiming
+    : rawMicrotiming * beatSec * 1000 / Math.max(1, groove.subdivision);
+  const input = {
+    beatInBar: beat,
+    beatsPerBar: bt.beatsPerBar,
+    role,
+    accent: onset.accent,
+    seed,
+    bpm: bt.bpm,
+    authoredMs,
+    // Written push/pull is the complete timing instruction for this attack.
+    // Named ensemble cues also retain their exact shared placement across roles.
+    authoredTimingOnly: timingLocked || Math.abs(rawMicrotiming) > 0,
+    anticipated: Number(onset.anticipationOffsetSteps ?? 0) !== 0,
+    intensity: energy,
+    ensembleSeed,
+    ensemblePosition,
+    patternAccentAuthored,
+  };
+  const host = applyFeel(hostFeel, input);
+  const source = sourceWeight > 0.02 ? applyFeel(sourceFeel, input) : host;
+  const weight = Math.max(0, Math.min(1, sourceWeight));
+  const offsetBeats = host.offsetBeats * (1 - weight) + source.offsetBeats * weight;
+  const offsetMs = host.offsetMs * (1 - weight) + source.offsetMs * weight;
+  const anticipation = (Number(onset.anticipationOffsetSteps ?? 0) + Number(groove.anticipationOffsetSteps ?? 0))
+    * (beatSec * bt.beatsPerBar / 16);
+  return bt.start + beat * beatSec + offsetBeats * beatSec + offsetMs / 1000 + anticipation;
 }
 
 export interface BandInteractionCues {
@@ -511,6 +709,8 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
       }
       const firstNote = notes.length, firstPhrase = phrases.length;
       const profile = getInstrumentPerformanceProfile(track.instrumentId);
+      const sourceFeelStyle = resolveStyle({ genreId: lane.lens.sourceGenre, styleId: lane.lens.sourceStyleId });
+      const sourceFeel = grooveForStyle(sourceFeelStyle);
       const grooveRole = voiceProfile(track.instrumentId).role;
       const carriesBassLine = /bass|low-anchor/.test(String(track.role ?? '')) || grooveRole === 'bass';
       const carriesChordVoicing = !/lead|melody|voice/.test(String(track.role ?? '')) && profile.capabilities.polyphony > 1;
@@ -537,7 +737,9 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
         : phraseBarsForStyle(regionStyle, lane.rhythm.pattern?.cycleLength ?? cycle);
       for (let phraseStart = region.start, phraseIndex = 0; phraseStart < region.end; phraseStart += phraseBars, phraseIndex++) {
         const phraseEnd = Math.min(region.end, phraseStart + phraseBars);
+        const grammarBundle = buildHybridGrammar(regionStyle.id, lane.lens.sourceGenre, regionStyle, lane.lens.weight, lane.lens.sourceStyleId);
         const phraseId = `${track.id}:${region.id}:${phraseIndex}`;
+        const timingLockedCue = lane.rhythm.pattern.timingLock === 'ensemble';
         const soundContext = { worldId: region.genre ?? sheet.worldId, styleId: regionStyle.id, role: track.role };
         const phrase: PerformancePhrase = {
           id: phraseId, trackId: track.id, regionId: region.id, startBar: phraseStart, endBar: phraseEnd,
@@ -560,6 +762,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
           state.previousMidi = carriedMelodyMidi;
         if (carriesChordVoicing && carriedVoicing?.length) state.previousVoicing = carriedVoicing.slice();
         const phraseNotes: PerfNote[] = [];
+        let phraseDevelopment: ReturnType<typeof shouldDevelopPhrase> | undefined;
         for (let bar = phraseStart; bar < phraseEnd; bar++) {
           const currentSoloists = soloPlan ? soloistAtBar(soloPlan, region, bar, cycle) : [];
           const soloist = currentSoloists.includes(track.id);
@@ -589,7 +792,6 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
           const phraseStage = soloGrammar?.phraseStages?.length
             ? soloGrammar.phraseStages[phraseIndex % soloGrammar.phraseStages.length]
             : undefined;
-          const grammarBundle = buildHybridGrammar(regionStyle.id, lane.lens.sourceGenre, regionStyle, lane.lens.weight, lane.lens.sourceStyleId);
           const sharedHostProfile = resolveGenreProfile(track.instrumentId, lane.lens.hostGenre);
           const sharedSourceProfile = resolveGenreProfile(track.instrumentId, lane.lens.sourceGenre);
           const sourceStyle = getStyle(lane.lens.sourceStyleId);
@@ -654,6 +856,8 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
             let gestureName = !authoredHint && dialectTechnique && profile.gestures[dialectTechnique]
               ? dialectTechnique
               : effectiveGesture(profile, ctx, onset, authoredGesture);
+            gestureName = performerArticulation(ctx, gestureName, authoredGesture, styleGroove.roughness ?? 0,
+              seedOf(track.id, region.id, phraseStart, phraseIndex, i, onset.sourceHit ?? onset.hit));
             if (!authoredGesture && soloist && phraseStage === 'rapid-run') {
               const ornaments = [...(soloGrammar?.rapidRunOrnaments ?? []), ...(regionStyle.melody?.ornamentVocabulary ?? [])]
                 .filter(name => profile.gestures[name]);
@@ -664,6 +868,7 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
             const development = authoredVariation.includes('cadence') ? 'cadence'
               : authoredVariation.includes('transition') ? 'variation'
               : shouldDevelopPhrase(ctx);
+            phraseDevelopment ??= development;
             const developmentAccentScale = phraseDevelopmentGain(development, phrasePosition, styleGroove.dynamicRange);
 
             const kitMidis = onset.percussion ? [onset.percussion.midi] : baseMidiForPattern(INSTRUMENTS_BY_ID[track.instrumentId], onset, i);
@@ -694,7 +899,12 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
             });
             const grooveLift = clamp(1 + (feelVelocity - 0.72) * 0.55, 0.82, 1.16);
             const vel = Math.max(1, Math.min(127, Math.round(velocityForEnergy(energy, onset.velocity, sharedHostProfile.density.accentContrast) * driveLift * brightnessLift * grooveLift)));
-            const time = Math.max(0, grooveTime(bt, onset, i, lane.groove));
+            const phraseBeat = (bar - phraseStart) * bt.beatsPerBar + onset.position * bt.beatsPerBar;
+            const time = Math.max(0, grooveTime(bt, onset, i, lane.groove, styleGroove, sourceFeel,
+              lane.lens.weight, grooveRoleFor(track.role, track.instrumentId), seedOf(track.id, region.id, bar, i),
+              seedOf(region.id, phraseStart), phraseBeat, energy,
+              ctx.pattern.events?.some(event => event.accent !== undefined) ?? false,
+              timingLockedCue || String(detail?.variationType ?? '').toLowerCase() === 'cadence'));
             const pv = voiceProfile(track.instrumentId);
             const nextPosition = rhythm.onsets[i + 1]?.position ?? (onset.position + onset.duration / bt.beatsPerBar);
             const localGapBeats = Math.max(0.08, (nextPosition - onset.position) * bt.beatsPerBar);
@@ -826,6 +1036,10 @@ export function interpretNotatedScore(sheet: Sheet, notation: NotatedScore): Per
         if (!carriesBassLine && /^(lead|melody|counterline|voice)$/i.test(String(track.role ?? '')))
           carriedMelodyMidi = state.previousMidi;
         if (carriesChordVoicing && state.previousVoicing?.length) carriedVoicing = state.previousVoicing.slice();
+        if (/^(lead|melody|counterline|voice)$/i.test(String(track.role ?? '')) && !timingLockedCue) {
+          phraseNotes.push(...developLeadPhrase(phraseNotes, phraseDevelopment, grammarBundle.hybrid,
+            regionStyle, track.instrumentId, track.id, phraseId, soundContext, bars));
+        }
         notes.push(...phraseNotes);
       }
       partInterpretations.set(partKey, {
