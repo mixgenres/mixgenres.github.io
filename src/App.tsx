@@ -33,6 +33,7 @@ import type { Performance } from './engine/band/performanceData';
 import { catalogIdForStyle, createCatalogSong } from './engine/sheet/songCatalog';
 import { PATTERNS_BY_ID, cleanPatternName } from './data/genres';
 import { beatsPerBarOf } from './engine/sheet/grid';
+import { capitalizeInstrumentName } from './engine/lookup/instruments';
 
 function playbackTime(seconds: number) {
   const whole = Math.max(0, Math.floor(seconds));
@@ -873,6 +874,7 @@ export default function App() {
         <div className="flex-1 flex flex-col">
           {song.tracks.map(t => {
             const v = t as Voice;
+            const instrumentName = capitalizeInstrumentName(v.name);
             const p = patternOf(t.id);
             const isSilentHere = isVoiceSilentInSection(song, t.id, region.id);
             const isSilentInAll = isVoiceSilentInAll(song, t.id);
@@ -899,7 +901,7 @@ export default function App() {
                 <div className="flex items-center justify-between gap-2">
                   {/* Left Column: Role Icon + Instrument Name + Status */}
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <RoleIcon instrumentName={v.name} role={getTrackRole(song, t.id, region.id)}
+                    <RoleIcon instrumentName={instrumentName} role={getTrackRole(song, t.id, region.id)}
                       solo={!!region.solo?.trackIds.includes(t.id)} onClick={() => { setRoleScope('section'); setRoleFor(t.id); }} />
 
                     <button
@@ -912,9 +914,9 @@ export default function App() {
                         borderRadius: 0,
                         opacity: isSilentHere ? 0.75 : 1,
                       }}
-                      title={`Change instrument (${v.name})`}
+                      title={`Change instrument (${instrumentName})`}
                     >
-                      <span className="truncate max-w-[120px] sm:max-w-[160px]">{v.name}</span>
+                      <span className="truncate max-w-[120px] sm:max-w-[160px]">{instrumentName}</span>
                       <Pencil size={10} strokeWidth={2} style={{ opacity: 0.45, flexShrink: 0 }} />
                     </button>
 
@@ -962,14 +964,14 @@ export default function App() {
                       onClick={(e) => {
                         e.stopPropagation();
                         edit(s => removeVoice(s, t.id));
-                        showToast(`Deleted ${v.name}`);
+                        showToast(`Deleted ${instrumentName}`);
                       }}
                       className="w-6 h-6 opacity-35 hover:opacity-100 hover:text-red-500 transition-all cursor-pointer flex items-center justify-center shrink-0 ml-0.5"
                       style={{
                         boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--ink) 15%, transparent)',
                       }}
-                      title={`Delete ${v.name} from song`}
-                      aria-label={`Delete ${v.name}`}
+                      title={`Delete ${instrumentName} from song`}
+                      aria-label={`Delete ${instrumentName}`}
                     >
                       <Trash2 size={13.5} />
                     </button>
@@ -1352,7 +1354,7 @@ export default function App() {
         onPick={energy => edit(s => setSectionEnergy(s, region.id, energy))} />)}
 
       <Sheet open={!!roleFor} onClose={() => setRoleFor(null)} title="Instrument role"
-        kicker={`${song.tracks.find(t => t.id === roleFor)?.name ?? 'Instrument'} · ${roleScope === 'section' ? `${partName} only` : 'whole song'}`}>
+        kicker={`${capitalizeInstrumentName(song.tracks.find(t => t.id === roleFor)?.name ?? 'Instrument')} · ${roleScope === 'section' ? `${partName} only` : 'whole song'}`}>
         {roleFor && (
           <RoleSettings
             role={getTrackRole(song, roleFor, region.id)}
@@ -1403,7 +1405,7 @@ export default function App() {
 
       {(!!instrFor) && (<InstrumentSheet
         open={!!instrFor} onClose={() => setInstrFor(null)}
-        title={song.tracks.find(t => t.id === instrFor)?.name ?? 'Instrument'}
+        title={capitalizeInstrumentName(song.tracks.find(t => t.id === instrFor)?.name ?? 'Instrument')}
         sectionKind={partName}
         current={(song.tracks.find(t => t.id === instrFor) as Voice | undefined)?.instrumentId}
         onPick={id => instrFor && edit(s => setInstrument(s, instrFor, id))}
@@ -1411,7 +1413,7 @@ export default function App() {
           if (instrFor) {
             const instrVoice = song.tracks.find(t => t.id === instrFor);
             edit(s => removeVoice(s, instrFor));
-            showToast(`Deleted ${instrVoice?.name ?? 'instrument'}`);
+            showToast(`Deleted ${capitalizeInstrumentName(instrVoice?.name ?? 'Instrument')}`);
           }
         }}
       />)}

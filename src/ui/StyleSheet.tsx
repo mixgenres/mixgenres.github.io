@@ -4,6 +4,7 @@ import { getStylesForGenre } from '../engine/style/registry';
 import type { SongStyle } from '../data/styles/schema';
 import { genreIdsForCategory } from '../data/genreCategories';
 import { plateFor } from './worlds';
+import { INSTRUMENTS_BY_ID, capitalizeInstrumentName } from '../engine/lookup/instruments';
 
 /**
  * Song style — the flavour of the current genre (Pugliese-school, Vals, Electrotango…).
@@ -42,7 +43,8 @@ export function StyleSheetModal({
     const reference = s.reference
       ? `${s.reference.credit}${s.reference.recording ? ` — ${s.reference.recording}` : ''}`
       : null;
-    const parts = (s.arrangement?.ensemble ?? []).flatMap(part => part.instrumentIds.map(id => `${part.role}: ${id}`));
+    const parts = (s.arrangement?.ensemble ?? []).flatMap(part => part.instrumentIds.map(id =>
+      `${part.role}: ${capitalizeInstrumentName(INSTRUMENTS_BY_ID[id]?.name ?? id.replaceAll('-', ' '))}`));
     const mix = s.calibration?.mix?.character;
     const mixSummary = mix ? [
       (mix.dryness ?? 0.5) >= 0.68 ? 'dry room' : (mix.dryness ?? 0.5) <= 0.4 ? 'roomy ambience' : 'moderate room',

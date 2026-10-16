@@ -13,6 +13,21 @@ import { styleCalibrationTarget } from '../src/engine/style/performance-schema';
 import { compileNotatedScore } from '../src/engine/score/notatedScore';
 import { arrangeBand, composeMusicianScore } from '../src/engine/band/arrangeBand';
 import { compileMusicianScore } from '../src/engine/score/musicianScore';
+import { INSTRUMENT_CATALOG, capitalizeInstrumentName } from '../src/data/instruments';
+
+test('instrument labels consistently capitalize the initial letter without changing IDs', () => {
+  for (const instrument of INSTRUMENT_CATALOG) {
+    assert.match(instrument.name, /^[^\p{L}]*\p{Lu}/u,
+      `${instrument.id} stores a consistently capitalized catalog name`);
+    assert.match(capitalizeInstrumentName(instrument.name), /^[^\p{L}]*\p{Lu}/u,
+      `${instrument.id} has an uppercase initial in the display label`);
+  }
+  assert.equal(capitalizeInstrumentName('synth bass'), 'Synth bass');
+  assert.equal(capitalizeInstrumentName('808 kit'), '808 Kit');
+  assert.equal(capitalizeInstrumentName('FM EP'), 'FM EP');
+  assert.equal(INSTRUMENT_CATALOG.find(instrument => instrument.id === 'synth-bass')?.id, 'synth-bass');
+  assert.equal(INSTRUMENT_CATALOG.find(instrument => instrument.id === 'synth-bass')?.name, 'Synth bass');
+});
 
 test('every full song has valid explicit metadata and retains the original reference label', () => {
   assert.equal(songCatalog.length, ALL_STYLES.length);

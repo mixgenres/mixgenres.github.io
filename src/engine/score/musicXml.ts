@@ -2,6 +2,7 @@ import { beatValue, scoreNoteSegments, validateMusicianScore, type MusicianScore
 import { notatedDrum } from './percussionNotation';
 import { INSTRUMENTS_BY_ID } from '../lookup/instruments';
 import { INSTRUMENT_NOTATION_RULES } from '../../data/notation/rules';
+import { capitalizeInstrumentName } from '../../data/instruments';
 
 const escapeXml = (value: string) => value.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[char]!);
 const decimal = (value: number) => String(Number(value.toFixed(9)));
@@ -77,9 +78,9 @@ export function exportMusicXml(score: MusicianScore, tablature = false): string 
   const parts = score.parts.map((part, index) => ({ ...part, xmlId: `P${index + 1}` }));
   const partList = parts.map(part => {
     const midis = [...new Set(score.notes.filter(n => n.trackId === part.id).map(n => n.midi))];
-    const instruments = part.percussion ? midis.map(midi => `<score-instrument id="${part.xmlId}-I${midi}"><instrument-name>${escapeXml(notatedDrum(part.instrumentId, midi).name)}</instrument-name></score-instrument>`).join('') : '';
+    const instruments = part.percussion ? midis.map(midi => `<score-instrument id="${part.xmlId}-I${midi}"><instrument-name>${escapeXml(capitalizeInstrumentName(notatedDrum(part.instrumentId, midi).name))}</instrument-name></score-instrument>`).join('') : '';
     const midiInstruments = part.percussion ? midis.map(midi => `<midi-instrument id="${part.xmlId}-I${midi}"><midi-channel>10</midi-channel><midi-unpitched>${midi + 1}</midi-unpitched></midi-instrument>`).join('') : '';
-    return `<score-part id="${part.xmlId}"><part-name>${escapeXml(part.name)}</part-name>${instruments}${midiInstruments}</score-part>`;
+    return `<score-part id="${part.xmlId}"><part-name>${escapeXml(capitalizeInstrumentName(part.name))}</part-name>${instruments}${midiInstruments}</score-part>`;
   }).join('\n');
   const body = parts.map(part => {
     const instrument = INSTRUMENTS_BY_ID[part.instrumentId];

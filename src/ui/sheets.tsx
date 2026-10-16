@@ -3,7 +3,7 @@ import React, { useMemo, useState, useEffect } from 'react';
 import { Sheet, Chip } from './Sheet';
 import { Glyph } from './Glyph';
 import { GENRE_PLATES, plateFor } from './worlds';
-import { INSTRUMENT_CATALOG, FAMILY_LABELS, FAMILY_ORDER, instrument } from '../engine/lookup/instruments';
+import { INSTRUMENT_CATALOG, FAMILY_LABELS, FAMILY_ORDER, instrument, capitalizeInstrumentName } from '../engine/lookup/instruments';
 import { ALL_PATTERNS, GENRE_WORLDS_BY_ID, cleanPatternName, FEEL_ORDER, FEEL_LABELS, feelsForPattern, PatternFeel } from '../data/genres';
 import { Voice, affinity, toBar, getGenreForm, validateChordSymbol } from '../engine/sheet/index.ts';
 import { BAR_CHOICES } from '../data/barChoices';
@@ -185,7 +185,7 @@ export function InstrumentSheet({
             <div className="flex flex-wrap gap-1.5">
               {items.map(i => (
                 <Chip key={i.id} active={i.id === current} onClick={() => handlePick(i.id)}>
-                  {i.name}
+                  {capitalizeInstrumentName(i.name)}
                 </Chip>
               ))}
             </div>
@@ -218,11 +218,11 @@ export function AddInstrumentSheet({ open, onClose, onAdd }: {
           borderBottom: '1px solid color-mix(in srgb, var(--ink) 25%, transparent)', outline: 'none' }} />
       <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-2 overflow-y-auto pr-1"
         style={{ maxHeight: 'min(72vh, 760px)' }}>
-        {filtered.map(item => <button key={item.id} type="button" title={`Add ${item.name} throughout the song`}
+        {filtered.map(item => <button key={item.id} type="button" title={`Add ${capitalizeInstrumentName(item.name)} throughout the song`}
           onClick={() => { onAdd(item.id); onClose(); }}
           className="min-w-0 text-left px-3 py-3 transition-opacity hover:opacity-75"
           style={{ border: '1px solid color-mix(in srgb, var(--ink) 17%, transparent)', background: 'transparent' }}>
-          <span className="block truncate" style={{ fontSize: 13.5, fontWeight: 550 }}>{item.name}</span>
+          <span className="block truncate" style={{ fontSize: 13.5, fontWeight: 550 }}>{capitalizeInstrumentName(item.name)}</span>
           <span className="micro block truncate">{FAMILY_LABELS[item.family] ?? item.family}</span>
         </button>)}
         {!filtered.length && <div className="micro py-2 col-span-full">No instruments match “{query.trim()}”.</div>}
@@ -1336,7 +1336,7 @@ export function DownloadSheet({
         <div className="flex flex-col gap-1 max-h-56 overflow-y-auto pr-1">
           {song?.tracks?.map(t => {
             const instDef = instrument(t.instrumentId ?? t.instrument);
-            const displayName = t.name || instDef?.name || 'Instrument';
+            const displayName = capitalizeInstrumentName(t.name || instDef?.name || 'Instrument');
             const isChecked = !!selectedTracks[t.id];
             return (
               <label

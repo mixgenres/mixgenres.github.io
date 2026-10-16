@@ -137,6 +137,13 @@ import { tantan } from './catalog/hand-drums/tantan';
 import { washboard } from './catalog/metal-and-wood/washboard';
 export type { InstrumentDef, InstrumentFamily, DrumVoice, InstrumentTechniqueProfile } from './schema/instrument-def';
 
+/** Keep the visible spelling of every instrument consistent while preserving
+ * its authored capitalization after the initial letter (for names such as FM EP). */
+export function capitalizeInstrumentName(name: string): string {
+  return name.replace(/^([^\p{L}]*)(\p{L})/u, (_match, prefix: string, letter: string) =>
+    `${prefix}${letter.toUpperCase()}`);
+}
+
 export const INSTRUMENT_CATALOG: InstrumentDef[] = [
   cuica,
   dikanza,
@@ -368,6 +375,11 @@ for (const id of ['frame-drum', 'riq']) {
 const qraqeb = INSTRUMENT_CATALOG.find(instrument => instrument.id === 'qraqeb');
 if (qraqeb?.luthierPhysics) qraqeb.luthierPhysics.category = 'body_impact';
 
+// Keep the catalog itself consistent so every consumer (including generated
+// track names and metadata) starts from the same student-facing spelling.
+for (const instrument of INSTRUMENT_CATALOG) {
+  instrument.name = capitalizeInstrumentName(instrument.name);
+}
 
 export const INSTRUMENTS_BY_ID: Record<string, InstrumentDef> = Object.fromEntries(INSTRUMENT_CATALOG.map(i => [i.id, i]));
 

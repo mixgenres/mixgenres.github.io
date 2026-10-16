@@ -4,6 +4,7 @@ import { exportMusicXml } from '../engine/score/musicXml';
 import type { Sheet } from '../engine/sheet/sheet';
 import { GESTURE_NAMES } from '../engine/band/gestures';
 import { isPercussion, meter, pitch, PPQ, programFor, scoreNotes, selectedTracks, stringTuning, timeline, xml, type ExportContext, type ScoreNote } from './model';
+import { capitalizeInstrumentName } from '../engine/lookup/instruments';
 const durations = [
   { ticks: 3840, type: 'whole' }, { ticks: 2880, type: 'half', dot: true }, { ticks: 1920, type: 'half' },
   { ticks: 1440, type: 'quarter', dot: true }, { ticks: 960, type: 'quarter' }, { ticks: 720, type: 'eighth', dot: true },
@@ -43,7 +44,7 @@ export function musicXml(ctx: ExportContext, tablature = false): string {
   if (ctx.performance.scoreVersion === 1 && sheet.measures) {
     const ids = new Set(selectedTracks(ctx).map(track => track.id));
     const score = musicianScoreFromArrangement(sheet,ctx.performance);
-    return exportMusicXml({ ...score, parts:score.parts.filter(p => ids.has(p.id)),
+    return exportMusicXml({ ...score, parts:score.parts.filter(p => ids.has(p.id)).map(part => ({ ...part, name: capitalizeInstrumentName(part.name) })),
       notes:score.notes.filter(n => ids.has(n.trackId)), rests:score.rests.filter(r => ids.has(r.trackId)) },tablature);
   }
   const tracks = selectedTracks(ctx), [beats, beatType] = meter(ctx), bars = timeline(ctx.performance);
@@ -58,11 +59,12 @@ export function musicXml(ctx: ExportContext, tablature = false): string {
   });
   const partList = tracks.map((t, i) => {
     const id = `P${i + 1}`;
+    const displayName = capitalizeInstrumentName(t.name);
     if (isPercussion(t)) {
       const pitches = [...new Set(ctx.performance.notes.filter(n => n.trackId === t.id).map(n => Math.round(n.midi)))];
-      return `<score-part id="${id}"><part-name>${xml(t.name)}</part-name>${pitches.map(p => `<score-instrument id="${id}-D${p}"><instrument-name>${xml(t.name)} ${p}</instrument-name></score-instrument>`).join('')}${pitches.map(p => `<midi-instrument id="${id}-D${p}"><midi-channel>10</midi-channel><midi-unpitched>${p + 1}</midi-unpitched></midi-instrument>`).join('')}</score-part>`;
+      return `<score-part id="${id}"><part-name>${xml(displayName)}</part-name>${pitches.map(p => `<score-instrument id="${id}-D${p}"><instrument-name>${xml(displayName)} ${p}</instrument-name></score-instrument>`).join('')}${pitches.map(p => `<midi-instrument id="${id}-D${p}"><midi-channel>10</midi-channel><midi-unpitched>${p + 1}</midi-unpitched></midi-instrument>`).join('')}</score-part>`;
     }
-    return `<score-part id="${id}"><part-name>${xml(t.name)}${prepared[i].fallback ? ' (standard notation; TAB unavailable)' : ''}</part-name><score-instrument id="${id}-I1"><instrument-name>${xml(t.name)}</instrument-name></score-instrument><midi-instrument id="${id}-I1"><midi-channel>${i % 9 + 1}</midi-channel><midi-program>${programFor(t) + 1}</midi-program></midi-instrument></score-part>`;
+    return `<score-part id="${id}"><part-name>${xml(displayName)}${prepared[i].fallback ? ' (standard notation; TAB unavailable)' : ''}</part-name><score-instrument id="${id}-I1"><instrument-name>${xml(displayName)}</instrument-name></score-instrument><midi-instrument id="${id}-I1"><midi-channel>${i % 9 + 1}</midi-channel><midi-program>${programFor(t) + 1}</midi-program></midi-instrument></score-part>`;
   }).join('');
   const parts = tracks.map((track, ti) => {
     const { notes, tuning, tab, locations } = prepared[ti];

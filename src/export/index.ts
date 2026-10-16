@@ -2,6 +2,7 @@ import { GESTURE_NAMES } from '../engine/band/gestures';
 import { renderPerformanceToMp3, renderPerformanceToAudio } from '../engine/playback/mp3Export';
 import { checkAbort, yieldToUI, encodeMp3, wavBlob } from './audioEncoding';
 import { filename, selectedTracks, type ExportContext } from './model';
+import { capitalizeInstrumentName } from '../engine/lookup/instruments';
 import { midiBytes } from './midi';
 import { musicXml } from './musicxml';
 import { gp5Bytes } from './gp5';
@@ -11,7 +12,8 @@ export { EXPORT_FORMATS, type ExportFormat } from './formats';
 const utf8 = (s: string) => new TextEncoder().encode(s);
 function performanceJson(ctx: ExportContext) {
   const tracks = selectedTracks(ctx), ids = new Set(tracks.map(t => t.id));
-  return JSON.stringify({ format: 'mixgenres-performance', version: 1, title: ctx.song.title, timeSignature: ctx.song.timeSignature, tracks, regions: ctx.song.regions, gestureEncoding: 'stable MixGenres gesture codes', gestures: Object.fromEntries([...new Set(ctx.performance.notes.filter(n => ids.has(n.trackId)).map(n => n.gestureCode))].map(code => [code, GESTURE_NAMES[code] ?? 'unknown'])), ...ctx.performance, notes: ctx.performance.notes.filter(n => ids.has(n.trackId)), ccs: ctx.performance.ccs.filter(c => ids.has(c.trackId)), trackInfo: Object.fromEntries(Object.entries(ctx.performance.trackInfo ?? {}).filter(([id]) => ids.has(id))) }, null, 2);
+  const displayTracks = tracks.map(track => ({ ...track, name: capitalizeInstrumentName(track.name) }));
+  return JSON.stringify({ format: 'mixgenres-performance', version: 1, title: ctx.song.title, timeSignature: ctx.song.timeSignature, tracks: displayTracks, regions: ctx.song.regions, gestureEncoding: 'stable MixGenres gesture codes', gestures: Object.fromEntries([...new Set(ctx.performance.notes.filter(n => ids.has(n.trackId)).map(n => n.gestureCode))].map(code => [code, GESTURE_NAMES[code] ?? 'unknown'])), ...ctx.performance, notes: ctx.performance.notes.filter(n => ids.has(n.trackId)), ccs: ctx.performance.ccs.filter(c => ids.has(c.trackId)), trackInfo: Object.fromEntries(Object.entries(ctx.performance.trackInfo ?? {}).filter(([id]) => ids.has(id))) }, null, 2);
 }
 async function audio(ctx: ExportContext, format: 'mp3' | 'wav', progress?: (fraction: number) => void, signal?: AbortSignal, rawStem = false) {
   const tracks = selectedTracks(ctx);
@@ -53,12 +55,13 @@ export async function createExport(ctx: ExportContext, format: ExportFormat, pro
     const partFiles: { id: string; name: string; stem: string; midi: string }[] = [];
     for (const [i, track] of tracks.entries()) {
       checkAbort(signal); await yieldToUI();
-      const stem = `${String(i + 1).padStart(2, '0')}-${filename(track.name)}`;
+      const displayName = capitalizeInstrumentName(track.name);
+      const stem = `${String(i + 1).padStart(2, '0')}-${filename(displayName)}`;
       const part = { ...ctx, selectedTrackIds: [track.id] };
       entries.push({ name: `export/midi/${stem}.mid`, data: midiBytes(part) });
       const wav = await audio(part, 'wav', frac => progress?.((i + frac) / tracks.length * 0.95), signal, true);
       entries.push({ name: `export/stems/${stem}.wav`, data: new Uint8Array(await wav.arrayBuffer()) });
-      partFiles.push({ id: track.id, name: track.name, stem: `stems/${stem}.wav`, midi: `midi/${stem}.mid` });
+      partFiles.push({ id: track.id, name: displayName, stem: `stems/${stem}.wav`, midi: `midi/${stem}.mid` });
     }
     const engine = format === 'logic' ? 'Logic Pro' : format === 'garageband' ? 'GarageBand' : 'Ableton Live';
     const instruction = format === 'logic' ? 'Open song.mid as a new Logic Pro project to import the tempo map and separate instrument tracks. Drag WAV stems into audio tracks at the start of the project.' : format === 'garageband' ? 'Drag song.mid into the Tracks area of a new GarageBand project, or import the individual MIDI parts. Set project tempo to the first tempo in manifest.json. For section tempo changes, add tempo automation manually; aligned WAV stems preserve the rendered timing.' : 'Drag song.mid into Arrangement View to split its type-1 tracks, or import individual MIDI parts. Set the tempo and recreate section tempo changes from manifest.json. Drag WAV stems to arrangement time zero and disable Warp to preserve timing.';

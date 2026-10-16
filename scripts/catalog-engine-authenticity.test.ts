@@ -260,7 +260,9 @@ test('reference arrangements shape section entrances and instrument phrases inst
     'the instrumental feature gives the singer room');
   assert.equal(sectionPattern(bollywoodDisco, 'chorus', 'bass'), 'Disco octave bass');
   assert.equal(sectionPattern(bollywoodDisco, 'chorus', 'drums'), 'Four-on-floor backbeat');
+  assert.equal(sectionPattern(bollywoodDisco, 'chorus', 'string-ensemble'), 'Disco string stabs');
   assert.equal(sectionPattern(bollywoodDisco, 'chorus', 'synth'), 'Disco synth answer');
+  assert.equal(sectionPattern(bollywoodDisco, 'solo', 'string-ensemble'), 'Disco string stabs');
   assert.equal(sectionPattern(bollywoodDisco, 'solo', 'synth'), 'Synthesizer variation');
 
   const club = createCatalogSong('bollywood-electronic-club_song');
@@ -272,6 +274,388 @@ test('reference arrangements shape section entrances and instrument phrases inst
   assert.equal(sectionPattern(club, 'chorus', 'synth'), 'Synthesizer variation');
   assert.equal(sectionPattern(club, 'verse', 'drums'), 'Kit');
   assert.equal(sectionPattern(club, 'chorus', 'drums'), 'Drum kit variation');
+});
+
+test('Old-Time and Appalachian samples interlock separate banjo and guitar teaching parts', () => {
+  const examples = [
+    ['folk-old-time_song', 'folk-old-time'],
+    ['folk-appalachian_song', 'folk-appalachian'],
+  ] as const;
+  const source = (styleId: string, instrumentId: string) => {
+    const pattern = PATTERNS_BY_WORLD.folk.find(candidate => candidate.styleIds?.includes(styleId)
+      && candidate.instruments?.includes(instrumentId)
+      && candidate.roles.includes('harmony')
+      && candidate.sourceLevel === 'style-authored'
+      && candidate.scopes.includes('measure')
+      && !candidate.pedagogicalStudy);
+    assert.ok(pattern, `${styleId} has its own full ${instrumentId} source cell`);
+    return pattern;
+  };
+
+  for (const [songId, styleId] of examples) {
+    const banjoSource = source(styleId, 'banjo');
+    const guitarSource = source(styleId, 'guitar');
+    assert.notDeepEqual(banjoSource.onsetGrid, guitarSource.onsetGrid,
+      `${styleId} gives banjo and guitar distinct rhythmic jobs`);
+
+    const sheet = createCatalogSong(songId);
+    const tracks = ['banjo', 'guitar'].map(instrumentId => {
+      const track = sheet.tracks.find(part => part.instrumentId === instrumentId);
+      assert.ok(track, `${songId} has ${instrumentId}`);
+      const selected = sheet.regions.map(region => {
+        const patternId = sheet.arrangement[region.id]?.[track.id];
+        const pattern = patternId ? PATTERNS_BY_ID[patternId] : undefined;
+        assert.ok(pattern, `${songId}/${region.kind} gives ${instrumentId} a pattern`);
+        assert.ok(pattern.instruments?.includes(instrumentId),
+          `${songId}/${region.kind} never assigns a different instrument's cell to ${instrumentId}`);
+        assert.ok(pattern.roles.includes(track.role),
+          `${songId}/${region.kind} keeps ${instrumentId}'s authored part role`);
+        return pattern;
+      });
+      assert.ok(new Set(selected.map(pattern => pattern.id)).size >= 3,
+        `${songId} develops ${instrumentId} through multiple section cells`);
+      return track;
+    });
+
+    const performance = compileWholeSong(sheet);
+    for (const track of tracks) {
+      assert.ok(performance.notes.some(note => note.trackId === track.id),
+        `${songId} interprets the ${track.instrumentId} part`);
+    }
+    const plan = compileSamplePlan(performance, {
+      ...songMixOptions(sheet), selectedTrackIds: sheet.tracks.map(track => track.id),
+    });
+    assert.ok(plan.events.some(event => event.type === 'on'), `${songId} reaches shared SoundFont playback`);
+  }
+
+  const oldTime = createCatalogSong('folk-old-time_song');
+  assert.equal(sectionPattern(oldTime, 'pickup', 'banjo'), 'Clawhammer bum-ditty');
+  assert.equal(sectionPattern(oldTime, 'pickup', 'guitar'), 'Guitar backbeat chop');
+  assert.equal(sectionPattern(oldTime, 'tag', 'banjo'), 'Banjo tag roll');
+  assert.equal(sectionPattern(oldTime, 'tag', 'guitar'), 'Guitar tag chop');
+
+  const appalachian = createCatalogSong('folk-appalachian_song');
+  assert.equal(sectionPattern(appalachian, 'intro', 'banjo'), 'Banjo modal roll');
+  assert.equal(sectionPattern(appalachian, 'intro', 'guitar'), 'Alternating-bass guitar');
+  assert.equal(sectionPattern(appalachian, 'solo', 'banjo'), '5-String Banjo variation');
+  assert.equal(sectionPattern(appalachian, 'solo', 'guitar'), 'Alternating-bass guitar');
+  assert.equal(sectionPattern(appalachian, 'tag', 'banjo'), 'Banjo modal close');
+  assert.equal(sectionPattern(appalachian, 'tag', 'guitar'), 'Guitar turnaround');
+});
+
+test('Bollywood strings carry style-specific movement instead of doubling the guitar cell', () => {
+  const patternFor = (styleId: string, instrumentId: string) => {
+    const pattern = PATTERNS_BY_WORLD.bollywood.find(candidate => candidate.styleIds?.includes(styleId)
+      && candidate.instruments?.includes(instrumentId)
+      && candidate.sourceLevel === 'style-authored'
+      && candidate.scopes.includes('measure')
+      && !candidate.pedagogicalStudy);
+    assert.ok(pattern, `${styleId} has an authored ${instrumentId} source cell`);
+    return pattern;
+  };
+
+  const styles = [
+    ['bollywood-modern', 'Cinematic string bed'],
+    ['bollywood-golden-age', 'String answer'],
+    ['bollywood-disco-bollywood', 'Disco string stabs'],
+    ['bollywood-romantic', 'String arpeggio'],
+    ['bollywood-folk-cinematic', 'Folk string bed'],
+  ] as const;
+  for (const [styleId, expectedName] of styles) {
+    const strings = patternFor(styleId, 'string-ensemble');
+    const guitar = patternFor(styleId, 'guitar');
+    assert.equal(strings.shortName, expectedName, `${styleId} names the string part's own musical job`);
+    assert.notDeepEqual(strings.onsetGrid, guitar.onsetGrid,
+      `${styleId} strings do not hit every guitar-comping attack`);
+  }
+
+  const modern = patternFor('bollywood-modern', 'string-ensemble');
+  assert.deepEqual(modern.onsetGrid, [0, 8], 'cinematic strings make broad half-bar chord entries');
+  assert.deepEqual(modern.durationGrid, [7, 7], 'each chord releases before the next pulse');
+
+  const goldenAge = patternFor('bollywood-golden-age', 'string-ensemble');
+  assert.deepEqual(goldenAge.events?.map(event => event.pitch?.degree), [5, 3]);
+  assert.ok(goldenAge.events?.every(event => event.pitch?.voicing === 'single'),
+    'the Golden Age string answer is a playable two-note line, not block chords doubling guitar');
+
+  const disco = patternFor('bollywood-disco-bollywood', 'string-ensemble');
+  assert.deepEqual(disco.onsetGrid, [4, 12], 'disco strings answer the guitar on beats two and four');
+  assert.deepEqual(disco.durationGrid, [1, 1], 'the string accents stay clipped');
+
+  const romantic = patternFor('bollywood-romantic', 'string-ensemble');
+  assert.deepEqual(romantic.events?.map(event => event.pitch?.degree), [1, 3, 5, 3],
+    'the romantic line outlines a connected tonic–third–fifth–third arpeggio');
+  assert.ok(romantic.events?.every(event => event.pitch?.voicing === 'single'));
+
+  const folk = patternFor('bollywood-folk-cinematic', 'string-ensemble');
+  assert.deepEqual(folk.durationGrid, [15], 'folk-cinematic strings sustain beneath the percussion cycle');
+});
+
+test('Zouk keyboard parts interlock with guitar instead of copying its attack grid', () => {
+  const patternFor = (styleId: string, instrumentId: string) => {
+    const pattern = PATTERNS_BY_WORLD.zouk.find(candidate => candidate.styleIds?.includes(styleId)
+      && candidate.instruments?.includes(instrumentId)
+      && candidate.sourceLevel === 'style-authored'
+      && candidate.scopes.includes('measure')
+      && !candidate.pedagogicalStudy);
+    assert.ok(pattern, `${styleId} has an authored ${instrumentId} source cell`);
+    return pattern;
+  };
+
+  const styles = [
+    ['zouk-zouk-love', 'Warm key bed'],
+    ['zouk-zouk-beton', 'Keyboard chops'],
+    ['zouk-orchestral-zouk-love', 'Orchestral key bed'],
+    ['zouk-cabo-zouk', 'Cabo synth pad'],
+    ['zouk-ghetto-zouk', 'Sparse synth chord'],
+    ['zouk-zouk-randb', 'Rhodes chops'],
+    ['zouk-afro-zouk', 'Afro-zouk hook'],
+    ['zouk-kompa-crossover', 'Kompa synth bed'],
+    ['zouk-zouk-fusion', 'Synth hook'],
+    ['zouk-lambazouk-oriented', 'Lambazouk chord lift'],
+  ] as const;
+  for (const [styleId, expectedName] of styles) {
+    const keyboard = patternFor(styleId, 'synth');
+    const guitar = patternFor(styleId, 'guitar');
+    assert.equal(keyboard.shortName, expectedName, `${styleId} gives the keyboard a clear student-facing role`);
+    assert.notDeepEqual(keyboard.onsetGrid, guitar.onsetGrid,
+      `${styleId} keyboard attacks occupy a distinct part of the groove`);
+  }
+
+  assert.deepEqual(patternFor('zouk-zouk-love', 'synth').durationGrid, [7, 7]);
+  assert.deepEqual(patternFor('zouk-zouk-beton', 'synth').onsetGrid, [3, 9, 15]);
+  assert.deepEqual(patternFor('zouk-orchestral-zouk-love', 'synth').durationGrid, [15]);
+  assert.deepEqual(patternFor('zouk-cabo-zouk', 'synth').durationGrid, [7, 7]);
+  assert.deepEqual(patternFor('zouk-ghetto-zouk', 'synth').onsetGrid, [6]);
+  assert.deepEqual(patternFor('zouk-zouk-randb', 'synth').onsetGrid, [6, 14]);
+  assert.deepEqual(patternFor('zouk-afro-zouk', 'synth').events?.map(event => event.pitch?.degree), [5, 3, 1]);
+  assert.deepEqual(patternFor('zouk-kompa-crossover', 'synth').durationGrid, [2, 2]);
+  assert.deepEqual(patternFor('zouk-zouk-fusion', 'synth').events?.map(event => event.pitch?.degree), [5, 3, 1]);
+  assert.deepEqual(patternFor('zouk-lambazouk-oriented', 'synth').onsetGrid, [2, 10]);
+});
+
+test('Zouk guitar cells express each style’s groove and reach its sample arrangement', () => {
+  const styles = [
+    ['zouk-love', 'Zouk love strums', 'zouk-zouk-love_song'],
+    ['zouk-beton', 'Beton guitar cuts', 'zouk-zouk-beton_song'],
+    ['orchestral-zouk-love', 'Orchestral guitar bed', 'zouk-orchestral-zouk-love_song'],
+    ['cabo-zouk', 'Cabo guitar arpeggio', 'zouk-cabo-zouk_song'],
+    ['ghetto-zouk', 'Ghetto muted chords', 'zouk-ghetto-zouk_song'],
+    ['zouk-randb', 'R&B guitar lift', 'zouk-zouk-randb_song'],
+    ['afro-zouk', 'Afro guitar interlock', 'zouk-afro-zouk_song'],
+    ['kompa-crossover', 'Kompa offbeat guitar', 'zouk-kompa-crossover_song'],
+    ['zouk-fusion', 'Fusion guitar breaks', 'zouk-zouk-fusion_song'],
+    ['lambazouk-oriented', 'Lambazouk guitar lift', 'zouk-lambazouk-oriented_song'],
+  ] as const;
+  const grids = new Set<string>();
+
+  for (const [styleId, expectedName, songId] of styles) {
+    const guitar = PATTERNS_BY_WORLD.zouk.find(candidate => candidate.styleIds?.includes(`zouk-${styleId}`)
+      && candidate.instruments?.includes('guitar')
+      && candidate.roles.includes('harmony')
+      && candidate.sourceLevel === 'style-authored'
+      && candidate.scopes.includes('measure')
+      && !candidate.pedagogicalStudy);
+    assert.ok(guitar, `${styleId} has a style-authored guitar cell`);
+    assert.equal(guitar.shortName, expectedName, `${styleId} gives guitar a clear role name`);
+    const signature = JSON.stringify(guitar.onsetGrid);
+    assert.equal(grids.has(signature), false, `${styleId} has its own guitar attack grid`);
+    grids.add(signature);
+
+    const song = createCatalogSong(songId);
+    const track = song.tracks.find(candidate => candidate.instrumentId === 'guitar');
+    assert.ok(track, `${songId} includes guitar`);
+    const selectedNames = new Set(song.regions.map(region => {
+      const patternId = song.arrangement[region.id]?.[track.id];
+      return patternId ? PATTERNS_BY_ID[patternId]?.shortName : undefined;
+    }).filter((name): name is string => !!name));
+    assert.ok(selectedNames.has(expectedName), `${songId} uses its authored guitar groove`);
+  }
+
+  const cabo = PATTERNS_BY_WORLD.zouk.find(candidate => candidate.styleIds?.includes('zouk-cabo-zouk')
+    && candidate.instruments?.includes('guitar') && candidate.roles.includes('harmony')
+    && candidate.sourceLevel === 'style-authored' && candidate.scopes.includes('measure')
+    && !candidate.pedagogicalStudy);
+  assert.ok(cabo?.events?.length);
+  assert.ok(cabo.events.every(event => event.pitch?.voicing === 'single'),
+    'Cabo-Zouk’s arpeggio teaches single picked chord tones instead of repeated chord blocks');
+});
+
+test('Salsa piano and tres have distinct style-specific parts in the sample songs', () => {
+  const styles = [
+    ['salsa-son-montuno', 'Son montuno piano', 'Tres guajeo reply', 'salsa-son-montuno_song'],
+    ['salsa-mambo', 'Mambo piano punches', 'Mambo tres answers', 'salsa-mambo_song'],
+    ['salsa-boogaloo', 'Boogaloo backbeat', 'Boogaloo tres pickup', 'salsa-boogaloo_song'],
+    ['salsa-descarga', 'Descarga piano vamp', 'Descarga tres answer', 'salsa-descarga_song'],
+    ['salsa-guaguanco-salsa', 'Guaguancó piano montuno', 'Guaguancó tres reply', 'salsa-guaguanco-salsa_song'],
+    ['salsa-salsa-romantica', 'Romántica piano lift', 'Romántica tres answer', 'salsa-salsa-romantica_song'],
+    ['salsa-puerto-rican-salsa', 'PR piano montuno', 'PR tres reply', 'salsa-puerto-rican-salsa_song'],
+    ['salsa-salsa-calena', 'Caleña piano drive', 'Caleña tres cuts', 'salsa-salsa-calena_song'],
+    ['salsa-salsa-jazz', 'Jazz chord comp', 'Jazz tres line', 'salsa-salsa-jazz_song'],
+  ] as const;
+
+  for (const [styleId, pianoName, tresName, songId] of styles) {
+    const sourcePattern = (instrumentId: string, shortName: string) => {
+      const pattern = PATTERNS_BY_WORLD.salsa.find(candidate => candidate.styleIds?.includes(styleId)
+        && candidate.instruments?.includes(instrumentId)
+        && candidate.sourceLevel === 'style-authored'
+        && candidate.scopes.includes('measure')
+        && !candidate.pedagogicalStudy);
+      assert.ok(pattern, `${styleId} has a style-authored ${instrumentId} part`);
+      assert.equal(pattern.shortName, shortName, `${styleId} gives ${instrumentId} a clear playing role`);
+      return pattern;
+    };
+    const piano = sourcePattern('piano', pianoName);
+    const tres = sourcePattern('tres', tresName);
+    assert.notDeepEqual(piano.onsetGrid, tres.onsetGrid,
+      `${styleId} piano and tres do not double the same rhythmic cell`);
+    assert.ok(tres.events?.length && tres.events.every(event => event.pitch?.voicing === 'single'),
+      `${styleId} tres plays a chord-tone answer rather than repeated block chords`);
+
+    const song = createCatalogSong(songId);
+    const selectedNames = (instrumentId: string) => {
+      const track = song.tracks.find(candidate => candidate.instrumentId === instrumentId);
+      assert.ok(track, `${songId} includes ${instrumentId}`);
+      return new Set(song.regions.map(region => {
+        const patternId = song.arrangement[region.id]?.[track.id];
+        return patternId ? PATTERNS_BY_ID[patternId]?.shortName : undefined;
+      }).filter((name): name is string => !!name));
+    };
+    assert.ok(selectedNames('piano').has(pianoName), `${songId} uses its authored piano part`);
+    assert.ok(selectedNames('tres').has(tresName), `${songId} uses its authored tres answer`);
+  }
+});
+
+test('Kizomba guitar and synth have distinct style-specific roles and phrase endings', () => {
+  const styles = [
+    ['kizomba-traditional', 'Traditional guitar chords', 'Soft synth bed', 'Guitar phrase close', 'Synth chord tail', 'kizomba-traditional_song'],
+    ['kizomba-semba-derived', 'Semba guitar dance', 'Semba key replies', 'Semba guitar tag', 'Semba key tag', 'kizomba-semba-derived_song'],
+    ['kizomba-passada', 'Passada guitar comp', 'Passada synth reply', 'Passada guitar release', 'Passada reply close', 'kizomba-passada_song'],
+    ['kizomba-tarraxinha', 'Tarraxinha guitar chops', 'Tarraxinha synth pad', 'Tarraxinha release', 'Tarraxinha pad tail', 'kizomba-tarraxinha_song'],
+    ['kizomba-urban-kiz', 'Urban guitar chops', 'Urban synth hook', 'Urban guitar cut', 'Urban hook pickup', 'kizomba-urban-kiz_song'],
+    ['kizomba-ghetto-zouk-crossover', 'Ghetto guitar chops', 'Ghetto synth answer', 'Ghetto guitar tag', 'Ghetto hook close', 'kizomba-ghetto-zouk-crossover_song'],
+    ['kizomba-fusion-kiz', 'Fusion guitar comp', 'Fusion synth reply', 'Fusion guitar tag', 'Fusion synth pickup', 'kizomba-fusion-kiz_song'],
+  ] as const;
+
+  for (const [styleId, guitarName, synthName, guitarCloseName, synthCloseName, songId] of styles) {
+    const sourcePattern = (instrumentId: string, shortName: string, phrase = false) => {
+      const pattern = PATTERNS_BY_WORLD.kizomba.find(candidate => candidate.styleIds?.includes(styleId)
+        && candidate.instruments?.includes(instrumentId)
+        && candidate.sourceLevel === 'style-authored'
+        && (phrase ? candidate.category === 'cadence' : candidate.scopes.includes('measure'))
+        && !candidate.pedagogicalStudy);
+      assert.ok(pattern, `${styleId} has a style-authored ${instrumentId} ${phrase ? 'ending' : 'part'}`);
+      assert.equal(pattern.shortName, shortName, `${styleId} names the ${instrumentId} role clearly`);
+      return pattern;
+    };
+    const guitar = sourcePattern('guitar', guitarName);
+    const synth = sourcePattern('synth', synthName);
+    const guitarClose = sourcePattern('guitar', guitarCloseName, true);
+    const synthClose = sourcePattern('synth', synthCloseName, true);
+    assert.notDeepEqual(guitar.onsetGrid, synth.onsetGrid,
+      `${styleId} guitar and synth use separate rhythmic roles`);
+    assert.notDeepEqual(guitarClose.onsetGrid, synthClose.onsetGrid,
+      `${styleId} guitar and synth do not share a generic phrase ending`);
+
+    const song = createCatalogSong(songId);
+    const selectedNames = (instrumentId: string) => {
+      const track = song.tracks.find(candidate => candidate.instrumentId === instrumentId);
+      assert.ok(track, `${songId} includes ${instrumentId}`);
+      return new Set(song.regions.map(region => {
+        const patternId = song.arrangement[region.id]?.[track.id];
+        return patternId ? PATTERNS_BY_ID[patternId]?.shortName : undefined;
+      }).filter((name): name is string => !!name));
+    };
+    assert.ok(selectedNames('guitar').has(guitarName) && selectedNames('guitar').has(guitarCloseName),
+      `${songId} uses its own guitar cell and phrase close`);
+    assert.ok(selectedNames('synth').has(synthName) && selectedNames('synth').has(synthCloseName),
+      `${songId} uses its own synth cell and phrase close`);
+  }
+});
+
+test('Swing piano and guitar have separate comping jobs across the acoustic styles', () => {
+  const styles = [
+    ['swing-west-coast-swing', 'West Coast piano', 'WCS guitar comp', 'Piano blues turn', 'Guitar stop tag', 'swing-west-coast-swing_song'],
+    ['swing-lindy-hop', 'Lindy piano accents', 'Lindy four beat', 'Piano shout hit', 'Guitar four beat', 'swing-lindy-hop_song'],
+    ['swing-balboa', 'Balboa piano taps', 'Balboa four beat', 'Balboa piano cut', 'Balboa guitar tag', 'swing-balboa_song'],
+    ['swing-charleston', 'Charleston piano bounce', 'Charleston chord cuts', 'Charleston piano tag', 'Charleston guitar cut', 'swing-charleston_song'],
+    ['swing-slow-swing', 'Slow swing chords', 'Slow swing comp', 'Slow piano release', 'Slow guitar answer', 'swing-slow-swing_song'],
+    ['swing-fusion-swing', 'Fusion swing comp', 'Fusion guitar chops', 'Fusion piano tag', 'Fusion guitar tag', 'swing-fusion-swing_song'],
+  ] as const;
+
+  for (const [styleId, pianoName, guitarName, pianoCloseName, guitarCloseName, songId] of styles) {
+    const sourcePattern = (instrumentId: string, shortName: string, phrase = false) => {
+      const pattern = PATTERNS_BY_WORLD.swing.find(candidate => candidate.styleIds?.includes(styleId)
+        && candidate.instruments?.includes(instrumentId)
+        && candidate.sourceLevel === 'style-authored'
+        && (phrase ? candidate.category === 'cadence' : candidate.scopes.includes('measure'))
+        && !candidate.pedagogicalStudy);
+      assert.ok(pattern, `${styleId} has a style-authored ${instrumentId} ${phrase ? 'ending' : 'comp'}`);
+      assert.equal(pattern.shortName, shortName, `${styleId} names the ${instrumentId} role clearly`);
+      return pattern;
+    };
+    const piano = sourcePattern('piano', pianoName);
+    const guitar = sourcePattern('guitar', guitarName);
+    const pianoClose = sourcePattern('piano', pianoCloseName, true);
+    const guitarClose = sourcePattern('guitar', guitarCloseName, true);
+    assert.notDeepEqual(piano.onsetGrid, guitar.onsetGrid,
+      `${styleId} keyboard and guitar do not double one chord rhythm`);
+    assert.notDeepEqual(pianoClose.onsetGrid, guitarClose.onsetGrid,
+      `${styleId} the two parts do not use the same phrase-end fill`);
+
+    const song = createCatalogSong(songId);
+    const selectedNames = (instrumentId: string) => {
+      const track = song.tracks.find(candidate => candidate.instrumentId === instrumentId);
+      assert.ok(track, `${songId} includes ${instrumentId}`);
+      return new Set(song.regions.map(region => {
+        const patternId = song.arrangement[region.id]?.[track.id];
+        return patternId ? PATTERNS_BY_ID[patternId]?.shortName : undefined;
+      }).filter((name): name is string => !!name));
+    };
+    assert.ok(selectedNames('piano').has(pianoName) && selectedNames('piano').has(pianoCloseName),
+      `${songId} uses its own piano comp and phrase close`);
+    assert.ok(selectedNames('guitar').has(guitarName) && selectedNames('guitar').has(guitarCloseName),
+      `${songId} uses its own guitar comp and phrase close`);
+  }
+});
+
+test('Amapiano piano and Rhodes separate the stab, pad and reply roles', () => {
+  const styles = [
+    ['amapiano-classic', 'Classic piano stabs', 'Classic Rhodes reply', 'amapiano-classic_song'],
+    ['amapiano-private-school', 'Private piano answers', 'Jazzy Rhodes chords', 'amapiano-private-school_song'],
+    ['amapiano-log-drum-heavy', 'Heavy piano stabs', 'Log-drum Rhodes bed', 'amapiano-log-drum-heavy_song'],
+    ['amapiano-bacardi', 'Bacardi piano bounce', 'Bacardi Rhodes reply', 'amapiano-bacardi_song'],
+    ['amapiano-kwaito-crossover', 'Kwaito piano offbeats', 'Kwaito Rhodes bed', 'amapiano-kwaito-crossover_song'],
+  ] as const;
+
+  for (const [styleId, pianoName, rhodesName, songId] of styles) {
+    const sourcePattern = (instrumentId: string, shortName: string) => {
+      const pattern = PATTERNS_BY_WORLD.amapiano.find(candidate => candidate.styleIds?.includes(styleId)
+        && candidate.instruments?.includes(instrumentId)
+        && candidate.sourceLevel === 'style-authored'
+        && candidate.scopes.includes('measure')
+        && !candidate.pedagogicalStudy);
+      assert.ok(pattern, `${styleId} has an authored ${instrumentId} part`);
+      assert.equal(pattern.shortName, shortName, `${styleId} names the ${instrumentId} job clearly`);
+      return pattern;
+    };
+    const piano = sourcePattern('piano', pianoName);
+    const rhodes = sourcePattern('rhodes', rhodesName);
+    assert.notDeepEqual(piano.onsetGrid, rhodes.onsetGrid,
+      `${styleId} separates piano attacks from the Rhodes part`);
+
+    const song = createCatalogSong(songId);
+    const selectedNames = (instrumentId: string) => {
+      const track = song.tracks.find(candidate => candidate.instrumentId === instrumentId);
+      assert.ok(track, `${songId} includes ${instrumentId}`);
+      return new Set(song.regions.map(region => {
+        const patternId = song.arrangement[region.id]?.[track.id];
+        return patternId ? PATTERNS_BY_ID[patternId]?.shortName : undefined;
+      }).filter((name): name is string => !!name));
+    };
+    assert.ok(selectedNames('piano').has(pianoName), `${songId} uses its style-specific piano pattern`);
+    assert.ok(selectedNames('rhodes').has(rhodesName), `${songId} uses its style-specific Rhodes pattern`);
+  }
 });
 
 test('Philly Disco strings move from their theme bed through replies into a source phrase', () => {
@@ -445,6 +829,108 @@ test('Indian Classical sample leads use their authored raga pitch collections', 
     'the eight studies retain seven pitch collections instead of sharing one major-scale fallback');
 });
 
+test('Brazilian and Pop accompaniment roles stay separate in their sample arrangements', () => {
+  const pairs = [
+    ['brazilian', 'brazilian-samba', 'guitar', 'Samba chord sync', 'cavaquinho', 'Cavaquinho offbeats'],
+    ['brazilian', 'brazilian-pagode', 'cavaquinho', 'Pagode cavaquinho', 'banjo', 'Pagode banjo answers'],
+    ['brazilian', 'brazilian-partido-alto', 'guitar', 'Partido guitar anchors', 'cavaquinho', 'Partido cavaquinho lift'],
+    ['brazilian', 'brazilian-samba-de-roda', 'guitar', 'Roda guitar anchors', 'cavaquinho', 'Roda cavaquinho lift'],
+    ['brazilian', 'brazilian-samba-reggae', 'guitar', 'Reggae guitar chops', 'cavaquinho', 'Reggae cavaquinho strums'],
+    ['brazilian', 'brazilian-samba-rock', 'guitar', 'Samba-rock backbeat', 'cavaquinho', 'Cavaquinho upstrokes'],
+    ['brazilian', 'brazilian-mpb', 'guitar', 'MPB guitar colors', 'piano', 'MPB piano colors'],
+    ['pop', 'pop-contemporary', 'guitar', 'Guitar accompaniment', 'piano', 'Pop piano backbeat'],
+    ['pop', 'pop-dance-pop', 'synth', 'Dance synth offbeats', 'piano', 'Dance piano backbeat'],
+    ['pop', 'pop-synth-pop', 'synth', 'Synth-pop sequence', 'piano', 'Synth-pop piano bed'],
+    ['pop', 'pop-city-pop', 'guitar', 'Guitar accompaniment', 'rhodes', 'City-pop Rhodes reply'],
+    ['pop', 'pop-indie-pop', 'guitar', 'Indie guitar jangle', 'piano', 'Indie piano reply'],
+    ['pop', 'pop-dream-pop', 'synth', 'Dream synth sway', 'piano', 'Dream piano echoes'],
+    ['pop', 'pop-art-pop', 'guitar', 'Art-pop guitar cycle', 'piano', 'Art-pop piano drift'],
+    ['pop', 'pop-power-pop', 'guitar', 'Power guitar drive', 'piano', 'Chorus piano offbeats'],
+    ['pop', 'pop-maximal-idol-pop', 'guitar', 'Idol guitar stabs', 'piano', 'Idol piano offbeats'],
+  ] as const;
+
+  for (const [world, styleId, firstInstrument, firstName, secondInstrument, secondName] of pairs) {
+    const source = (instrumentId: string, expectedName: string) => {
+      const pattern = PATTERNS_BY_WORLD[world].find(candidate => candidate.styleIds?.includes(styleId)
+        && candidate.instruments?.includes(instrumentId)
+        && candidate.roles.includes('harmony')
+        && candidate.sourceLevel === 'style-authored'
+        && candidate.scopes.includes('measure')
+        && !candidate.pedagogicalStudy);
+      assert.ok(pattern, `${styleId} has a style-authored ${instrumentId} accompaniment`);
+      assert.equal(pattern.shortName, expectedName, `${styleId} gives ${instrumentId} its own concise playing role`);
+      return pattern;
+    };
+    const first = source(firstInstrument, firstName);
+    const second = source(secondInstrument, secondName);
+    assert.notDeepEqual(first.onsetGrid, second.onsetGrid,
+      `${styleId} does not stack both accompaniment instruments on one rhythmic cell`);
+
+    const song = createCatalogSong(`${styleId}_song`);
+    for (const [instrumentId, expectedName] of [[firstInstrument, firstName], [secondInstrument, secondName]]) {
+      const track = song.tracks.find(candidate => candidate.instrumentId === instrumentId);
+      assert.ok(track, `${song.id} includes ${instrumentId}`);
+      const selectedNames = new Set(song.regions.map(region => {
+        const patternId = song.arrangement[region.id]?.[track.id];
+        return patternId ? PATTERNS_BY_ID[patternId]?.shortName : undefined;
+      }).filter((name): name is string => !!name));
+      assert.ok(selectedNames.has(expectedName), `${song.id} uses its authored ${instrumentId} role`);
+    }
+  }
+
+  const forroGuitar = PATTERNS_BY_WORLD.brazilian.find(pattern => pattern.styleIds?.includes('brazilian-forro')
+    && pattern.instruments?.includes('guitar') && pattern.sourceLevel === 'style-authored'
+    && pattern.scopes.includes('measure') && !pattern.pedagogicalStudy);
+  const baiaoGuitar = PATTERNS_BY_WORLD.brazilian.find(pattern => pattern.styleIds?.includes('brazilian-baiao')
+    && pattern.instruments?.includes('guitar') && pattern.sourceLevel === 'style-authored'
+    && pattern.scopes.includes('measure') && !pattern.pedagogicalStudy);
+  assert.equal(forroGuitar?.shortName, 'Forró guitar lift');
+  assert.equal(baiaoGuitar?.shortName, 'Baião guitar push');
+  assert.notDeepEqual(forroGuitar?.onsetGrid, baiaoGuitar?.onsetGrid,
+    'the optional guitar layer preserves distinct forró and baião motion');
+});
+
+test('Afrobeats and Andean chord parts use different authored cells and reach their sample songs', () => {
+  const pairs = [
+    ['afrobeats', 'afrobeats-contemporary-afrobeats', 'afrobeats-contemporary-afrobeats_song', 'guitar', 'rhodes'],
+    ['afrobeats', 'afrobeats-afropop', 'afrobeats-afropop_song', 'guitar', 'rhodes'],
+    ['afrobeats', 'afrobeats-afrofusion', 'afrobeats-afrofusion_song', 'guitar', 'rhodes'],
+    ['afrobeats', 'afrobeats-randb-afrobeats', 'afrobeats-randb-afrobeats_song', 'guitar', 'rhodes'],
+    ['andean', 'andean-huayno', 'andean-huayno_song', 'guitar', 'charango'],
+    ['andean', 'andean-sanjuanito', 'andean-sanjuanito_song', 'guitar', 'charango'],
+    ['andean', 'andean-saya', 'andean-saya_song', 'guitar', 'charango'],
+    ['andean', 'andean-tinku', 'andean-tinku_song', 'guitar', 'charango'],
+    ['andean', 'andean-carnavalito', 'andean-carnavalito_song', 'guitar', 'charango'],
+    ['andean', 'andean-nueva-cancion', 'andean-nueva-cancion_song', 'guitar', 'charango'],
+    ['andean', 'andean-andean-fusion', 'andean-andean-fusion_song', 'guitar', 'charango'],
+  ] as const;
+
+  for (const [world, styleId, songId, firstInstrument, secondInstrument] of pairs) {
+    const source = (instrumentId: string) => {
+      const pattern = PATTERNS_BY_WORLD[world].find(candidate => candidate.styleIds?.includes(styleId)
+        && candidate.instruments?.includes(instrumentId)
+        && candidate.roles.includes('harmony')
+        && candidate.sourceLevel === 'style-authored'
+        && candidate.scopes.includes('measure')
+        && !candidate.pedagogicalStudy);
+      assert.ok(pattern, `${styleId} has a style-authored ${instrumentId} accompaniment`);
+      return pattern;
+    };
+    const first = source(firstInstrument);
+    const second = source(secondInstrument);
+    assert.notDeepEqual(first.onsetGrid, second.onsetGrid,
+      `${styleId} gives its ${firstInstrument} and ${secondInstrument} different rhythmic jobs`);
+
+    const song = createCatalogSong(songId);
+    for (const [instrumentId, pattern] of [[firstInstrument, first], [secondInstrument, second]] as const) {
+      const track = song.tracks.find(candidate => candidate.instrumentId === instrumentId);
+      if (!track) continue; // Optional authored cells remain available without forcing another instrument into the ensemble.
+      const selectedIds = new Set(song.regions.map(region => song.arrangement[region.id]?.[track.id]).filter(Boolean));
+      assert.ok(selectedIds.has(pattern.id), `${songId} uses the authored ${instrumentId} groove`);
+    }
+  }
+});
+
 test('Persian Shur tuning and instrumental sample identities survive catalog resolution', () => {
   const styleIds = ['persian-dastgah', 'persian-radif', 'persian-avaz', 'persian-instrumental-ensemble', 'persian-modern-persian'];
   for (const styleId of styleIds) {
@@ -502,7 +988,7 @@ test('Persian Shur tuning and instrumental sample identities survive catalog res
   assert.equal(partPattern('prelude', 'tar'), 'Measured opening');
   assert.equal(partPattern('theme', 'tar'), 'Tar gushe phrase');
   assert.equal(partPattern('solo', 'tar'), 'Tar chaharmezrab');
-  assert.equal(partPattern('development', 'santur'), 'santur variation');
+  assert.equal(partPattern('development', 'santur'), 'Santur variation');
   assert.equal(partPattern('theme', 'santur'), 'Santur reply');
   assert.deepEqual(instrumental.regions.find(item => item.kind === 'solo')?.activeInstrumentIds, ['tar'],
     'the chaharmezrab section is a real unaccompanied tar feature');

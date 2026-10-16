@@ -30,7 +30,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "funk",
       "name": "Funk",
-      "description": "Funk: sixteenth-note scratch guitar and bass pocket. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Short guitar scratches leave gaps for separate clavinet stabs over the hard bass-and-kick anchor. Keep the phrase lean around the snare so ghosted subdivisions, not constant chord strumming, carry the funk pocket.",
       "patterns": ["sixteenth-note scratch guitar and bass pocket"],
       "techniques": ["muted-strum", "short-chord-stab", "slap", "pop", "ghost-note", "staccato", "call-response", "accent", "legato", "vibrato", "tenuto", "strum", "ghost", "open", "roll"],
       "harmony": ["Em7", "Am7", "B7"],
@@ -71,7 +71,7 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "sixteenth-note scratch guitar and bass pocket trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "sixteenth-note scratch guitar and bass pocket guitar accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "sixteenth-note scratch guitar and bass pocket guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "sixteenth-note scratch guitar and bass pocket clavinet accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["clavinet"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "sixteenth-note scratch guitar and bass pocket clavinet accompaniment", "role": "harmony", "onsets": [0.75, 2.25, 3.25], "instruments": ["clavinet"], "cycleLength": 1, "durations": [0.22, 0.22, 0.22], "articulation": "staccato"},
         {"name": "sixteenth-note scratch guitar and bass pocket clavinet cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["clavinet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "sixteenth-note scratch guitar and bass pocket low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
         {"name": "sixteenth-note scratch guitar and bass pocket bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
@@ -129,7 +129,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "james-brown-the-one",
       "name": "James Brown / The One",
-      "description": "James Brown / The One: James Brown downbeat hits and interlocking rests. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "The bass and kick own the downbeat. Guitar scratches answer on clipped offbeats, while clavinet adds only two short chord punches; the rests leave room for vocal shouts and the trumpet hit before the full-band stop.",
       "patterns": ["James Brown downbeat hits and interlocking rests"],
       "techniques": ["muted-strum", "short-chord-stab", "slap", "pop", "ghost-note", "staccato", "call-response", "accent", "legato", "vibrato", "tenuto", "strum", "ghost", "open", "roll"],
       "harmony": ["Em7", "Am7", "B7"],
@@ -168,9 +168,9 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "James Brown downbeat hits and interlocking rests voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "James Brown downbeat hits and interlocking rests trumpet statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["trumpet"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "James Brown downbeat hits and interlocking rests trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "James Brown downbeat hits and interlocking rests guitar accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "James Brown downbeat hits and interlocking rests guitar accompaniment", "role": "harmony", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.22, 0.22, 0.22, 0.22], "articulation": "staccato"},
         {"name": "James Brown downbeat hits and interlocking rests guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "James Brown downbeat hits and interlocking rests clavinet accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["clavinet"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "James Brown downbeat hits and interlocking rests clavinet accompaniment", "role": "harmony", "onsets": [0, 2.75], "instruments": ["clavinet"], "cycleLength": 1, "durations": [0.28, 0.28], "articulation": "staccato"},
         {"name": "James Brown downbeat hits and interlocking rests clavinet cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["clavinet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "James Brown downbeat hits and interlocking rests low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
         {"name": "James Brown downbeat hits and interlocking rests bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
@@ -228,7 +228,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "p-funk",
       "name": "P-Funk",
-      "description": "P-Funk: P-Funk elastic bass and synth response. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Let the filter-bass bubble and synth squelch lead. Guitar supplies a clipped syncopated vamp; Rhodes is a broad, two-hit chord answer that leaves the middle of the bar open for the elastic bass line.",
       "patterns": ["Massive downbeat \"ONE\" followed by Bootsy envelope-filter bass bubble and synth squelch", "P-Funk elastic bass and synth response"],
       "techniques": ["muted-strum", "short-chord-stab", "slap", "pop", "ghost-note", "staccato", "call-response", "absolute emphasis on \"The One\"", "Mu-Tron envelope filtered bass (Bootsy Collins)", "Bernie Worrell Minimoog squelches", "layered humorous party chants", "accent", "legato", "vibrato", "strum", "ghost", "tenuto", "open", "roll"],
       "harmony": ["Em7", "Am7", "B7"],
@@ -269,7 +269,7 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "P-Funk elastic bass and synth response synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "P-Funk elastic bass and synth response guitar accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "P-Funk elastic bass and synth response guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "P-Funk elastic bass and synth response rhodes accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["rhodes"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "P-Funk elastic bass and synth response rhodes accompaniment", "role": "harmony", "onsets": [0, 2], "instruments": ["rhodes"], "cycleLength": 1, "durations": [0.55, 0.55], "articulation": "staccato"},
         {"name": "P-Funk elastic bass and synth response rhodes cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["rhodes"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "P-Funk elastic bass and synth response low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
         {"name": "P-Funk elastic bass and synth response bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
@@ -328,7 +328,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "jazz-funk",
       "name": "Jazz-Funk",
-      "description": "Jazz-Funk: jazz funk Rhodes extensions and horn exchange. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Extended Rhodes voicings and horn exchanges sit above the bass ostinato. Keep guitar scratches on their own offbeat grid; short clavinet stabs answer selected gaps instead of doubling the guitar.",
       "patterns": ["jazz funk Rhodes extensions and horn exchange"],
       "techniques": ["muted-strum", "short-chord-stab", "slap", "pop", "ghost-note", "staccato", "call-response", "accent", "legato", "vibrato", "tenuto", "strum", "ghost", "open", "roll"],
       "harmony": ["Em7", "Am7", "B7"],
@@ -369,7 +369,7 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "jazz funk Rhodes extensions and horn exchange trumpet cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["trumpet", "synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "jazz funk Rhodes extensions and horn exchange guitar accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "jazz funk Rhodes extensions and horn exchange guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "jazz funk Rhodes extensions and horn exchange clavinet accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["clavinet"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "jazz funk Rhodes extensions and horn exchange clavinet accompaniment", "role": "harmony", "onsets": [0.75, 2.25, 3.25], "instruments": ["clavinet"], "cycleLength": 1, "durations": [0.22, 0.22, 0.22], "articulation": "staccato"},
         {"name": "jazz funk Rhodes extensions and horn exchange clavinet cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["clavinet"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "jazz funk Rhodes extensions and horn exchange low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
         {"name": "jazz funk Rhodes extensions and horn exchange bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
@@ -439,7 +439,7 @@ export const GENRE_PACK: GenrePackInput = {
       "name": "Minneapolis",
       "description": "Minneapolis Sound pairs a clipped electric-guitar attack with a rigid electronic backbeat, a lean bass pocket and bright synth hooks. The teaching score leaves gaps between these parts so their attack shapes remain distinct.",
       "patterns": ["Minneapolis drum machine and clipped synth guitar"],
-      "techniques": ["muted-strum", "short-chord-stab", "slap", "pop", "ghost-note", "staccato", "call-response", "accent", "legato", "vibrato", "strum", "ghost", "tenuto", "open", "roll"],
+      "techniques": ["short-chord-stab", "slap", "pop", "ghost-note", "staccato", "call-response", "accent", "legato", "vibrato", "ghost", "tenuto", "open", "roll"],
       "harmony": ["Em7", "Am7", "B7"],
       "meter": "4/4",
       "tempo": [110, 126],
@@ -478,7 +478,7 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "Minneapolis drum machine and clipped synth guitar synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Minneapolis drum machine and clipped synth guitar guitar accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "Minneapolis drum machine and clipped synth guitar guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Minneapolis drum machine and clipped synth guitar rhodes accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["rhodes"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "Minneapolis drum machine and clipped synth guitar rhodes accompaniment", "role": "harmony", "onsets": [1, 3], "instruments": ["rhodes"], "cycleLength": 1, "durations": [0.25, 0.25], "articulation": "staccato"},
         {"name": "Minneapolis drum machine and clipped synth guitar rhodes cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["rhodes"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Minneapolis drum machine and clipped synth guitar low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
         {"name": "Minneapolis drum machine and clipped synth guitar bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
@@ -538,7 +538,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "disco",
       "name": "Disco",
-      "description": "Disco: disco kick with octave bass and string stabs. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Four-on-the-floor kick and octave bass carry the floor. Guitar plays short even eighth-note upstrokes between beats; piano marks fewer harmonic accents, while the strings widen the refrain and retreat for the breakdown.",
       "patterns": ["Nile Rodgers 16th-note chucking guitar rhythm locked with driving octave disco bassline", "disco kick with octave bass and string stabs"],
       "techniques": ["muted-strum", "short-chord-stab", "slap", "pop", "ghost-note", "staccato", "call-response", "Nile Rodgers \"chucking\" rhythm guitar style", "Bernard Edwards driving octave slap/finger bass", "four-on-the-floor kick with open hi-hat on every upbeat", "sweeping string orchestra lines", "accent", "legato", "vibrato", "strum", "tenuto", "ghost", "open", "roll"],
       "harmony": ["Em7", "Am7", "B7"],
@@ -576,7 +576,7 @@ export const GENRE_PACK: GenrePackInput = {
       "cells": [
         {"name": "disco kick with octave bass and string stabs voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "disco kick with octave bass and string stabs voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "disco kick with octave bass and string stabs guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "disco kick with octave bass and string stabs guitar accompaniment", "role": "harmony", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.2, 0.2, 0.2, 0.2], "articulation": "staccato"},
         {"name": "disco kick with octave bass and string stabs guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "disco kick with octave bass and string stabs piano accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "disco kick with octave bass and string stabs piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
@@ -637,7 +637,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "philly-disco",
       "name": "Philly Disco",
-      "description": "Philly Disco: Philly disco lush strings over dance rhythm. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Piano supplies a few lyric-shaped chord accents while guitar keeps clipped offbeat strokes. Strings swell from the restrained verse into the wide refrain, then fall away for the instrumental break and return.",
       "patterns": ["Philly disco lush strings over dance rhythm"],
       "techniques": ["muted-strum", "short-chord-stab", "slap", "pop", "ghost-note", "staccato", "call-response", "accent", "legato", "vibrato", "strum", "tenuto", "ghost", "open", "roll"],
       "harmony": ["Em7", "Am7", "B7"],
@@ -675,7 +675,7 @@ export const GENRE_PACK: GenrePackInput = {
       "cells": [
         {"name": "Philly disco lush strings over dance rhythm voice statement", "role": "lead", "onsets": [0, 0.75, 1.5], "instruments": ["voice"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "Philly disco lush strings over dance rhythm voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Philly disco lush strings over dance rhythm guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "Philly disco lush strings over dance rhythm guitar accompaniment", "role": "harmony", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.2, 0.2, 0.2, 0.2], "articulation": "staccato"},
         {"name": "Philly disco lush strings over dance rhythm guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Philly disco lush strings over dance rhythm piano accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5], "instruments": ["piano"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "Philly disco lush strings over dance rhythm piano cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["piano"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
@@ -736,7 +736,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "boogie",
       "name": "Boogie",
-      "description": "Boogie: boogie synth bass and electric piano stabs. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "Octave synth bass and handclap/snare give boogie its bounce. Rhodes places bright short stabs on the offbeats; the guitar answers only the backbeat slots, leaving the vocal hook and bass pattern clear.",
       "patterns": ["Fat analog synth bass bounce driving under crisp handclap backbeat and bright Rhodes chords", "boogie synth bass and electric piano stabs"],
       "techniques": ["muted-strum", "short-chord-stab", "slap", "pop", "ghost-note", "staccato", "call-response", "heavy Minimoog/Pro-One synth basslines", "handclap and snare backbeats", "shimmering electric piano chords", "smooth soulful vocal hooks", "accent", "legato", "vibrato", "strum", "ghost", "tenuto", "open", "roll"],
       "harmony": ["Em7", "Am7", "B7"],
@@ -775,9 +775,9 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "boogie synth bass and electric piano stabs voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "boogie synth bass and electric piano stabs synth statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "boogie synth bass and electric piano stabs synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "boogie synth bass and electric piano stabs guitar accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "boogie synth bass and electric piano stabs guitar accompaniment", "role": "harmony", "onsets": [1, 3], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.28, 0.28], "articulation": "staccato"},
         {"name": "boogie synth bass and electric piano stabs guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "boogie synth bass and electric piano stabs rhodes accompaniment", "role": "harmony", "onsets": [0.25, 1.5, 2.75, 3.5], "instruments": ["rhodes"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4, 0.4], "articulation": "staccato"},
+        {"name": "boogie synth bass and electric piano stabs rhodes accompaniment", "role": "harmony", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["rhodes"], "cycleLength": 1, "durations": [0.24, 0.24, 0.24, 0.24], "articulation": "staccato"},
         {"name": "boogie synth bass and electric piano stabs rhodes cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["rhodes"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "boogie synth bass and electric piano stabs low anchor", "role": "bass", "onsets": [0, 0.75, 1.5, 2.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.6, 0.25]},
         {"name": "boogie synth bass and electric piano stabs bass cadence fill", "role": "bass", "onsets": [3.0, 3.5, 3.75], "instruments": ["bass"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
@@ -836,7 +836,7 @@ export const GENRE_PACK: GenrePackInput = {
     {
       "id": "hi-nrg",
       "name": "Hi-NRG",
-      "description": "Hi-NRG: Hi-NRG driving octave synth bass. The lead leaves space for instrumental replies; accompaniment and phrase endings follow the authored cells.",
+      "description": "A fast octave synth bass and relentless electronic kick define Hi-NRG. The synth hook carries the upper melody; short Rhodes chord jabs reinforce the lift without adding an unrelated guitar or acoustic-bass layer.",
       "patterns": ["Hi-NRG driving octave synth bass"],
       "techniques": ["muted-strum", "short-chord-stab", "slap", "pop", "ghost-note", "staccato", "call-response", "accent", "legato", "vibrato", "strum", "ghost", "tenuto", "open", "roll"],
       "harmony": ["Em7", "Am7", "B7"],
@@ -845,8 +845,8 @@ export const GENRE_PACK: GenrePackInput = {
       "scale": "dorian",
       "roles": {
         "lead": ["voice", "synth"],
-        "harmony": ["guitar", "rhodes"],
-        "bass": ["bass", "synth-bass"],
+        "harmony": ["rhodes"],
+        "bass": ["synth-bass"],
         "percussion": ["drums"]
       },
       "progressions": {
@@ -875,8 +875,6 @@ export const GENRE_PACK: GenrePackInput = {
         {"name": "Hi-NRG driving octave synth bass voice cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["voice"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Hi-NRG driving octave synth bass synth statement", "role": "lead", "onsets": [2, 2.75, 3.5], "instruments": ["synth"], "cycleLength": 1, "durations": [0.45, 0.45, 0.45], "articulation": "legato"},
         {"name": "Hi-NRG driving octave synth bass synth cadence fill", "role": "lead", "onsets": [3.0, 3.5, 3.75], "instruments": ["synth"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
-        {"name": "Hi-NRG driving octave synth bass guitar accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5], "instruments": ["guitar"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
-        {"name": "Hi-NRG driving octave synth bass guitar cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["guitar"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Hi-NRG driving octave synth bass rhodes accompaniment", "role": "harmony", "onsets": [0, 1.5, 2.5], "instruments": ["rhodes"], "cycleLength": 1, "durations": [0.4, 0.4, 0.4], "articulation": "staccato"},
         {"name": "Hi-NRG driving octave synth bass rhodes cadence fill", "role": "harmony", "onsets": [3.0, 3.5, 3.75], "instruments": ["rhodes"], "cycleLength": 1, "phraseEnd": true, "articulation": "ornament"},
         {"name": "Hi-NRG driving octave synth bass low anchor", "role": "bass", "onsets": [0.5, 1.5, 2.5, 3.5], "instruments": ["bass"], "cycleLength": 1, "articulation": "staccato", "durations": [0.6, 0.6, 0.6, 0.5]},
@@ -887,7 +885,6 @@ export const GENRE_PACK: GenrePackInput = {
       "instrumentTechniques": {
         "voice": ["staccato", "accent", "legato", "vibrato"],
         "synth": ["staccato", "accent", "legato", "vibrato"],
-        "guitar": ["staccato", "strum", "short-chord-stab", "muted-strum", "accent", "legato", "vibrato"],
         "rhodes": ["staccato", "ghost", "accent", "legato", "tenuto"],
         "bass": ["staccato", "ghost-note", "slap", "pop", "ghost", "accent", "legato"],
         "drums": ["ghost", "staccato", "accent", "open", "roll"]
@@ -901,11 +898,6 @@ export const GENRE_PACK: GenrePackInput = {
           "allowedTechniques": ["staccato", "accent", "legato", "vibrato"],
           "defaultTechnique": "staccato",
           "patchId": "saw-lead"
-        },
-        "guitar:harmony": {
-          "allowedTechniques": ["staccato", "strum", "short-chord-stab", "muted-strum", "accent", "legato", "vibrato"],
-          "defaultTechnique": "staccato",
-          "variantId": "solid-electric"
         },
         "rhodes:harmony": {
           "allowedTechniques": ["staccato", "ghost", "accent", "legato", "tenuto"],

@@ -2,6 +2,7 @@ export { FAMILY_LABELS, FAMILY_ORDER, WORLD_INSTRUMENT_HINTS } from '../../data/
 import { enrichInstrumentPhysics } from '../../data/instruments/enrichment/physics';
 import type { InstrumentDef, InstrumentTechniqueProfile, AcousticFormantProfile, BowedResonanceProfile } from '../../data/instruments/schema/instrument-def';
 import { INSTRUMENT_CATALOG } from '../../data/instruments';
+export { capitalizeInstrumentName } from '../../data/instruments';
 import { INSTRUMENT_PATTERN_KIND_RULES } from '../../data/instruments/patternKinds';
 import { GENRE_WORLDS } from '../../data/genres';
 export { INSTRUMENT_CATALOG } from '../../data/instruments';

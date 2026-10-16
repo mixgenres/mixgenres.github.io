@@ -1,5 +1,6 @@
 import { GESTURE_NAMES } from '../engine/band/gestures';
 import { meter, programFor, scoreNotes, selectedTracks, stringTuning, timeline, type ExportContext, type ScoreNote } from './model';
+import { capitalizeInstrumentName } from '../engine/lookup/instruments';
 /** GP5.00 binary writer. String parts only; rejects unplayable voicings instead of dropping notes. */
 class Writer {
   data: number[] = [];
@@ -63,7 +64,7 @@ export function gp5Bytes(ctx: ExportContext): Uint8Array {
   bars.forEach((_, i) => { if (i) w.byte(0); w.byte(i ? 0 : 3); if (!i) { w.byte(beats); w.byte(denominator); for (const n of [2, 2, 2, 2]) w.byte(n); } w.byte(0); w.byte(0); });
   tracks.forEach((track, i) => {
     const tuning = stringTuning(track)!;
-    w.byte(0); w.byte(0x88); w.text(track.name, 40); w.int(tuning.length);
+    w.byte(0); w.byte(0x88); w.text(capitalizeInstrumentName(track.name), 40); w.int(tuning.length);
     for (let j = 0; j < 7; j++) w.int(tuning[j] ?? 0);
     const channel = (i < 9 ? i : i + 1) + 1;
     w.int(1); w.int(channel); w.int(channel); w.int(24); w.int(0);

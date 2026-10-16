@@ -86,10 +86,16 @@ function conciseCellLabel(id: string, item: AuthoredCell): string {
   if (id === 'salgan') return 'Umpa-umpa piano';
   if (id === 'di-sarli') return 'Rolling piano';
   if (id === 'darienzo') return 'Hard marcato';
-  if (id === 'milonga' || id === 'canyengue') return 'Habanera chords';
+  if (id === 'canyengue') return 'Canyengue mugre comp';
+  if (id === 'milonga') return instrument === 'guitar' ? 'Milonga guitar habanera' : 'Milonga piano lift';
   if (id === 'vals') return 'Waltz chords';
   if (id === 'piazzolla-nuevo-tango') return '3+3+2 chords';
-  if (id === 'electrotango-gotan' || id === 'electro-rock-bajofondo') return instrument === 'synth' ? 'Synth answer' : 'Offbeat chords';
+  if (id === 'electrotango-gotan') return instrument === 'synth' ? 'Gotan synth answer' : 'Gotan offbeat chords';
+  if (id === 'electro-rock-bajofondo') return instrument === 'synth' ? 'Bajofondo synth answer' : 'Bajofondo piano backbeat';
+  if (id === 'guardia-nueva-de-caro') return 'De Caro sync';
+  if (id === 'troilo') return 'Troilo piano pocket';
+  if (id === 'modern-orquesta') return 'Orquesta block chords';
+  if (id === 'tango-cancion') return instrument === 'guitar' ? 'Tango guitar replies' : 'Tango piano anchors';
   if (id === 'chacarera-crossover') return 'Guitar hemiola';
   return 'Four-beat marcato';
 }
@@ -206,7 +212,29 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
       lines.push(bandoneonAnswer);
     }
     let accompaniment: AuthoredCell[];
-    if (beats === 2) accompaniment = [...(style.roles.harmony ?? []).map(instrument => habanera(instrument, 'harmony')), habanera('upright-bass', 'bass')];
+    if (beats === 2) {
+      accompaniment = [...(style.roles.harmony ?? []).map(instrument => habanera(instrument, 'harmony')), habanera('upright-bass', 'bass')];
+      if (id === 'canyengue') {
+        const piano = accompaniment.find(item => item.instruments?.[0] === 'piano')!;
+        piano.name = 'Canyengue uneven habanera chord comp';
+        piano.accents = [1, .46, .84, .56];
+        piano.microtiming = [2, -5, 3, -3];
+        piano.shortName = 'Canyengue mugre comp';
+        piano.description = 'Keep the clipped two-beat habanera recognizable, but let the light pickup lean early and the next chord drag slightly. Leave the closing bass arrastre exposed.';
+      } else {
+        const guitar = accompaniment.find(item => item.instruments?.[0] === 'guitar')!;
+        guitar.shortName = 'Milonga guitar habanera';
+        guitar.description = 'Keep the four-part habanera-derived strum light and even enough to carry the quick dance. The piano punctuates different slots instead of doubling this cell.';
+        const piano = accompaniment.find(item => item.instruments?.[0] === 'piano')!;
+        piano.name = 'Milonga offbeat piano lift';
+        piano.onsets = [.5, 1.25];
+        piano.durations = [.22, .22];
+        piano.accents = [.58, .74];
+        piano.microtiming = [-3, -2];
+        piano.shortName = 'Milonga piano lift';
+        piano.description = 'Add two compact chord lifts between the guitar’s habanera attacks. Keep the piano dry and light so the guitar and bass preserve the quick two-beat walk.';
+      }
+    }
     else if (id === 'vals') accompaniment = [cell('Waltz bass–chord–chord', 'harmony', 'piano', [0, 1, 2], [.65, .6, .6], 'tenuto', [pitch(1, 45), chord, chord], [1, .62, .68]), bass([0], [1.3], [1])];
     else if (id === 'pugliese') {
       const piano = marcato('piano', [1, .46, .98, .46]);
@@ -224,13 +252,55 @@ export function authorTangoArrangements(input: GenrePackInput): GenrePackInput {
       accompaniment = [cell('Umpa-umpa left-hand bass and right-hand offbeat chords', 'harmony', 'piano', [0, .5, 1, 1.5, 2, 2.5, 3, 3.5],
         [.3, .25, .3, .25, .3, .25, .3, .25], 'staccato', [pitch(1, 45), chord, pitch(5, 45), chord, pitch(1, 45), chord, pitch(5, 45), chord]), bass()];
     } else if (id === 'piazzolla-nuevo-tango') accompaniment = [cell('Nuevo 3+3+2 chord ostinato', 'harmony', 'piano', [0, 1.5, 3], [.55, .55, .55], 'marcato', [chord, chord, chord], [1, .85, .9]), bass([0, 1.5, 3], [.55, .55, .55], [1, 5, 1])];
-    else if (id === 'tango-cancion') accompaniment = [...(style.roles.harmony ?? []).map(instrument => cell('Sparse vocal-supporting chords', 'harmony', instrument, [0, 2], [1.35, 1.35], 'tenuto', [chord, chord])), bass([0, 2], [1.3, 1.3], [1, 5])];
-    else if (electronic) accompaniment = [cell('Electronic tango offbeat chords', 'harmony', 'piano', [.5, 2.5], [.35, .35], 'staccato', [chord, chord]),
-      cell('Electronic harmony answer', 'harmony', 'synth', [1.5, 3.5], [.35, .35], 'staccato', [chord, chord]),
-      { ...bass([0, 1.5, 3], [.9, .6, .7], [1, 5, 1], 'synth'), articulation: 'staccato' }, ...style.cells.filter(c => c.role === 'percussion' && !c.phraseEnd)];
+    else if (id === 'tango-cancion') {
+      const piano = cell('Sparse vocal-supporting piano anchors', 'harmony', 'piano', [0, 2], [1.35, 1.35], 'tenuto', [chord, chord]);
+      piano.shortName = 'Tango piano anchors';
+      piano.description = 'Hold two soft harmonic anchors beneath the sung line. Release into the written breath so the singer and bandoneon can own the phrase ending.';
+      const guitar = cell('Guitar replies in the vocal gaps', 'harmony', 'guitar', [.75, 2.75], [.24, .24], 'staccato', [chord, chord], [.5, .62]);
+      guitar.shortName = 'Tango guitar replies';
+      guitar.description = 'Place two quiet guitar chords in the spaces between lyric attacks. Keep the texture sparse and let the singer’s cadence open a full-bar breath.';
+      accompaniment = [piano, guitar, bass([0, 2], [1.3, 1.3], [1, 5])];
+    }
+    else if (electronic) {
+      const rock = id === 'electro-rock-bajofondo';
+      const piano = cell(rock ? 'Bajofondo piano rock backbeat' : 'Gotan electronic tango offbeat chords', 'harmony', 'piano',
+        rock ? [1, 3] : [.5, 2.5], rock ? [.24, .24] : [.35, .35], 'staccato', [chord, chord], rock ? [.72, .9] : undefined);
+      const synth = cell(rock ? 'Bajofondo synth tango answer' : 'Gotan electronic harmony answer', 'harmony', 'synth',
+        rock ? [.5, 2.5, 3.5] : [1.5, 3.5], rock ? [.2, .2, .28] : [.35, .35], 'staccato', rock ? [chord, chord, chord] : [chord, chord], rock ? [.68, .46, .76] : undefined);
+      piano.shortName = conciseCellLabel(id, piano);
+      synth.shortName = conciseCellLabel(id, synth);
+      piano.description = rock
+        ? 'Land compact piano chords with the rock backbeat; let the guitar and drum kit carry the weight while the bandoneon keeps a tango accent in the gaps.'
+        : 'Keep the two piano chops behind the stable electronic pulse. Leave the larger phrase movement and hook returns to the acoustic tango lines.';
+      synth.description = rock
+        ? 'Use three clipped synth answers as a riff around the rock backbeat. Leave low-end weight to the synth bass pulse and keep the middle register clear for bandoneon.'
+        : 'Answer the bandoneon hook on the later offbeats with two restrained synth chords; keep the pulse steady and let the acoustic line remain forward.';
+      accompaniment = [piano, synth,
+        { ...bass([0, 1.5, 3], [.9, .6, .7], [1, 5, 1], 'synth'), articulation: 'staccato' }, ...style.cells.filter(c => c.role === 'percussion' && !c.phraseEnd)];
+    }
     else if (id === 'chacarera-crossover') accompaniment = [cell('Guitar hemiola against compound bombo', 'harmony', 'guitar', [0, 1, 2], [.4, .4, .4], 'staccato', [chord, chord, chord]),
       { ...bass([0, 1.5], [.7, .7], [1, 5], 'bass'), articulation: 'staccato' }, cell('Bombo compound pulse and cross-accent', 'percussion', 'bombo-leguero', [0, .5, 1, 1.5, 2, 2.5], [.15, .15, .15, .15, .15, .15], 'accent', undefined, [1, .45, .8, 1, .8, .45])];
-    else accompaniment = [marcato('piano', id === 'darienzo' ? [1, .9, 1, .9] : id === 'golden-age' ? [1, .62, .94, .62] : undefined), bass()];
+    else if (id === 'guardia-nueva-de-caro') {
+      const piano = cell('De Caro syncopated piano marcato', 'harmony', 'piano', [0, .75, 2, 2.75], [.38, .2, .38, .2], 'marcato', [chord, chord, chord, chord], [1, .54, .9, .62]);
+      piano.shortName = 'De Caro sync';
+      piano.microtiming = [0, -3, 0, -3];
+      piano.description = 'Keep a firm first and third beat, then push short chords toward the next beats. This leaves the violin and bandoneon free to cross in independent lines.';
+      accompaniment = [piano, bass()];
+    }
+    else if (id === 'troilo') {
+      const piano = cell('Troilo steady piano under cantando', 'harmony', 'piano', [0, .75, 2, 3], [.55, .22, .5, .22], 'marcato', [chord, chord, chord, chord], [.88, .48, .78, .56]);
+      piano.shortName = 'Troilo piano pocket';
+      piano.microtiming = [0, -2, 1, -2];
+      piano.description = 'Keep a settled dance anchor under the elastic bandoneon sentence, with two light anticipations instead of matching its rubato note for note.';
+      accompaniment = [piano, bass()];
+    }
+    else if (id === 'modern-orquesta') {
+      const piano = cell('Modern orquesta broad marcato block', 'harmony', 'piano', four, [.72, .42, .72, .42], 'marcato', four.map(() => chord), [1, .56, .9, .6]);
+      piano.shortName = 'Orquesta block chords';
+      piano.description = 'Use broad, weighty attacks on the main beats, then shorten the releases to make room for the exposed replies and the later full-ensemble re-entry.';
+      accompaniment = [piano, bass()];
+    }
+    else accompaniment = [marcato('piano', id === 'darienzo' ? [1, .9, 1, .9] : id === 'golden-age' ? [1, .62, .94, .62] : id === 'canaro' ? [1, .74, .88, .72] : undefined), bass()];
     if (canyengueDrag) accompaniment.push(canyengueDrag);
     if (id === 'piazzolla-nuevo-tango') {
       const bassPickup = cell('Nuevo tango bass arrastre pickup', 'bass', 'upright-bass', [3.75], [.25],

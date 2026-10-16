@@ -170,13 +170,13 @@ test('repeated form sections keep their authored occurrence-specific teaching ce
     return PATTERNS_BY_ID[id]?.shortName;
   };
 
-  assert.equal(patternName('andean-sanjuanito_song', 'B', 1, 'siku'), 'siku variation');
-  assert.equal(patternName('andean-sanjuanito_song', 'B', 2, 'siku'), 'siku reply');
-  assert.equal(patternName('andean-saya_song', 'chorus', 1, 'siku'), 'Saya siku');
-  assert.equal(patternName('andean-saya_song', 'chorus', 2, 'siku'), 'siku variation');
+  assert.equal(patternName('andean-sanjuanito_song', 'B', 1, 'siku'), 'Siku variation');
+  assert.equal(patternName('andean-sanjuanito_song', 'B', 2, 'siku'), 'Siku reply');
+  assert.equal(patternName('andean-saya_song', 'chorus', 1, 'siku'), 'Saya Siku');
+  assert.equal(patternName('andean-saya_song', 'chorus', 2, 'siku'), 'Siku variation');
   assert.equal(patternName('andean-tinku_song', 'A', 2, 'quena'), 'Quena variation');
   assert.equal(patternName('andean-tinku_song', 'A', 3, 'quena'), 'Quena reply');
-  assert.equal(patternName('andean-carnavalito_song', 'B', 2, 'siku'), 'siku re-entry');
+  assert.equal(patternName('andean-carnavalito_song', 'B', 2, 'siku'), 'Siku re-entry');
   assert.equal(patternName('andean-nueva-cancion_song', 'chorus', 3, 'quena'), 'Quena reply');
 });
 
@@ -197,14 +197,14 @@ test('lead parts change with the song form across distinct style families', () =
   assert.equal(patternName('funk-funk_song', 'A', 'voice', 2), 'Vocal variation');
   assert.equal(patternName('funk-funk_song', 'A', 'trumpet', 3), 'Bb Trumpet reply');
   assert.equal(patternName('funk-boogie_song', 'chorus', 'synth', 2), 'Synthesizer reply');
-  assert.equal(patternName('indian-classical-dhrupad_song', 'jor', 'rudra-veena'), 'rudra veena variation');
+  assert.equal(patternName('indian-classical-dhrupad_song', 'jor', 'rudra-veena'), 'Rudra veena variation');
   assert.equal(patternName('japanese-shakuhachi_song', 'development', 'shakuhachi'), 'Shakuhachi variation');
   assert.equal(patternName('jazz-big-band_song', 'shout', 'alto-sax'), 'Alto Saxophone variation');
   assert.equal(patternName('korean-pansori_song', 'jungmori', 'voice'), 'Vocal variation');
   assert.equal(patternName('korean-samulnori_song', 'climax', 'gongs'), 'Gongs variation');
   assert.equal(patternName('mexican-banda_song', 'chorus', 'voice', 3), 'Vocal reply');
   assert.equal(patternName('persian-avaz_song', 'response', 'voice'), 'Vocal reply');
-  assert.equal(patternName('persian-modern-persian_song', 'climax', 'setar'), 'setar reply');
+  assert.equal(patternName('persian-modern-persian_song', 'climax', 'setar'), 'Setar reply');
   assert.equal(patternName('qawwali-contemporary-fusion_song', 'response', 'voice'), 'Vocal reply');
   assert.equal(patternName('salsa-son_song', 'verse', 'voice', 3), 'Vocal variation');
   assert.equal(patternName('weird-musique-concrete_song', 'recall', 'sampler'), 'Cut-and-recall montage');
@@ -262,7 +262,7 @@ test('Kargyraa keeps a low, breathing voice guide beside a bowed answer', () => 
   assert.equal(pattern('phrase','voice').shortName, 'Kargyraa low phrase');
   assert.equal(pattern('response','morin-khuur').shortName, 'Morin khuur answer');
   assert.equal(pattern('return','voice').shortName, 'Kargyraa low variation');
-  assert.equal(pattern('return','morin-khuur').shortName, 'morin khuur reply');
+  assert.equal(pattern('return','morin-khuur').shortName, 'Morin khuur reply');
   assert.equal(pattern('cadence','voice').shortName, 'Kargyraa close');
   assert.deepEqual(pattern('phrase','voice').events?.map(event => event.position), [0,2.5,4.5,6.75]);
   assert.deepEqual(pattern('return','voice').events?.map(event => event.position), [0,1.75,3.5,5.25,7]);
@@ -312,7 +312,7 @@ test('catalog samples move through their existing style-authored phrase cells', 
     get('steppe-dombra_song','B','dombra'), get('steppe-dombra_song','A','dombra',2),
     get('steppe-dombra_song','C','dombra'), get('steppe-dombra_song','A','dombra',3),
     get('steppe-dombra_song','cadence','dombra'),
-  ], ['Dombra dombra','Dombra dombra','dombra variation','Dombra dombra','dombra reply','dombra variation','Dombra dombra']);
+  ], ['Dombra Dombra','Dombra Dombra','Dombra variation','Dombra Dombra','Dombra reply','Dombra variation','Dombra Dombra']);
 
   const drone = createCatalogSong('weird-drone_song');
   assert.deepEqual(['opening','mass','resonance','feedback','release'].map(kind => get('weird-drone_song',kind,'sampler')),
@@ -410,6 +410,57 @@ test('tango variants use their actual meters and accompaniment cells', () => {
   const vals = makeSheet('tango', 'tango-vals');
   assert.equal(vals.timeSignature, '3/4');
   assert.ok(cells('piazzolla-nuevo-tango').some(p => p.name.includes('3+3+2')));
+});
+
+test('tango ensemble styles separate accompaniment jobs and shape their own pocket', () => {
+  const samplePattern = (style: string, instrumentId: string, expectedName: string) => {
+    const song = createCatalogSong(`tango-${style}_song`);
+    const track = song.tracks.find(item => item.instrumentId === instrumentId);
+    assert.ok(track, `${style} sample includes ${instrumentId}`);
+    const patterns = song.regions.map(region => {
+      const id = song.arrangement[region.id]?.[track.id];
+      return id ? PATTERNS_BY_ID[id] : undefined;
+    }).filter((pattern): pattern is NonNullable<typeof pattern> => !!pattern);
+    const pattern = patterns.find(item => item.shortName === expectedName);
+    assert.ok(pattern, `${style} arrangement uses ${expectedName}`);
+    return pattern;
+  };
+
+  const canyengue = samplePattern('canyengue', 'piano', 'Canyengue mugre comp');
+  assert.deepEqual(canyengue.events?.map(event => event.microtiming), [2, -5, 3, -3],
+    'Canyengue keeps its habanera frame while the attacks lean and drag unevenly');
+
+  const deCaro = samplePattern('guardia-nueva-de-caro', 'piano', 'De Caro sync');
+  assert.deepEqual(deCaro.onsetGrid, [0, 3, 8, 11],
+    'De Caro piano pushes short accents between the stable first and third beats');
+  const troilo = samplePattern('troilo', 'piano', 'Troilo piano pocket');
+  assert.notDeepEqual(troilo.onsetGrid, deCaro.onsetGrid,
+    'Troilo holds a steadier cantando support pocket than De Caro’s syncopation');
+  assert.ok(samplePattern('modern-orquesta', 'piano', 'Orquesta block chords').durationGrid?.[0]
+    !== samplePattern('canaro', 'piano', 'Four-beat marcato').durationGrid?.[0],
+  'modern-orquesta uses broader blocks while Canaro retains a clear dance marcato');
+
+  const cancion = createCatalogSong('tango-tango-cancion_song');
+  const cancionGuitar = samplePattern('tango-cancion', 'guitar', 'Tango guitar replies');
+  const cancionPiano = samplePattern('tango-cancion', 'piano', 'Tango piano anchors');
+  assert.notDeepEqual(cancionGuitar.onsetGrid, cancionPiano.onsetGrid,
+    'the sung style keeps long piano anchors separate from guitar replies in lyric gaps');
+  assert.ok(cancion.regions.some(region => region.kind === 'interlude'),
+    'the separated accompaniment still leaves room for an instrumental answer section');
+
+  const milongaGuitar = samplePattern('milonga', 'guitar', 'Milonga guitar habanera');
+  const milongaPiano = samplePattern('milonga', 'piano', 'Milonga piano lift');
+  assert.notDeepEqual(milongaGuitar.onsetGrid, milongaPiano.onsetGrid,
+    'Milonga guitar keeps the habanera-derived walk while piano lifts between attacks');
+
+  const gotanPiano = samplePattern('electrotango-gotan', 'piano', 'Gotan offbeat chords');
+  const bajofondoPiano = samplePattern('electro-rock-bajofondo', 'piano', 'Bajofondo piano backbeat');
+  const gotanSynth = samplePattern('electrotango-gotan', 'synth', 'Gotan synth answer');
+  const bajofondoSynth = samplePattern('electro-rock-bajofondo', 'synth', 'Bajofondo synth answer');
+  assert.notDeepEqual(gotanPiano.onsetGrid, bajofondoPiano.onsetGrid,
+    'Gotan’s restrained offbeat chops stay separate from Bajofondo’s rock backbeat');
+  assert.notDeepEqual(gotanSynth.onsetGrid, bajofondoSynth.onsetGrid,
+    'the two electronic tango styles keep different synth answer phrases');
 });
 
 test('D’Arienzo parada punctuates its named break before the ensemble returns', () => {
@@ -1235,9 +1286,13 @@ test('Milonga sample switches briefly from the habanera walk to a bandoneon tras
     return PATTERNS_BY_ID[sheet.arrangement[turn.id]?.[track.id] ?? '']?.shortName;
   };
   assert.equal(patternName('bandoneon'), 'Milonga traspié');
-  assert.equal(patternName('guitar'), 'Habanera chords');
-  assert.equal(patternName('piano'), 'Habanera chords');
+  assert.equal(patternName('guitar'), 'Milonga guitar habanera');
+  assert.equal(patternName('piano'), 'Milonga piano lift');
   assert.equal(patternName('upright-bass'), 'Habanera bass');
+  const guitarPattern = PATTERNS_BY_ID[sheet.arrangement[turn.id]?.[sheet.tracks.find(item => item.instrumentId === 'guitar')!.id] ?? ''];
+  const pianoPattern = PATTERNS_BY_ID[sheet.arrangement[turn.id]?.[sheet.tracks.find(item => item.instrumentId === 'piano')!.id] ?? ''];
+  assert.notDeepEqual(guitarPattern.onsetGrid, pianoPattern.onsetGrid,
+    'the guitar teaches the habanera walk while piano fills separate slots');
   const firstCopla = sheet.regions.find(region => region.kind === 'copla')!;
   const violin = sheet.tracks.find(item => item.instrumentId === 'violin')!;
   assert.equal(PATTERNS_BY_ID[sheet.arrangement[firstCopla.id]?.[violin.id] ?? '']?.shortName, 'Violin variation');
@@ -1400,14 +1455,14 @@ test('signature sample moments use distinct, style-authored parts and clear fore
   assert.ok(boogie.tracks.some(track => track.instrumentId === 'synth-bass'),
     'Boogie needs its named synthesizer-bass instrument, not only a generic electric bass');
   assert.equal(patternIn('funk-boogie_song', 'verse', 'synth-bass'), 'Synth-bass bounce');
-  assert.equal(patternIn('funk-boogie_song', 'breakdown', 'synth-bass'), 'synth bass variation');
-  assert.ok(phraseCellsIn('funk-boogie_song', 'breakdown', 'synth-bass').has('synth bass variation'));
+  assert.equal(patternIn('funk-boogie_song', 'breakdown', 'synth-bass'), 'Synth bass variation');
+  assert.ok(phraseCellsIn('funk-boogie_song', 'breakdown', 'synth-bass').has('Synth bass variation'));
   assert.equal(patternIn('funk-boogie_song', 'chorus', 'rhodes'), 'Rhodes stabs');
   assert.equal(patternIn('funk-boogie_song', 'chorus', 'drums'), 'Clap backbeat');
 
   assert.equal(patternIn('funk-hi-nrg_song', 'verse', 'synth-bass'), 'Octave synth bass');
-  assert.equal(patternIn('funk-hi-nrg_song', 'breakdown', 'synth-bass'), 'synth bass variation');
-  assert.ok(phraseCellsIn('funk-hi-nrg_song', 'breakdown', 'synth-bass').has('synth bass variation'));
+  assert.equal(patternIn('funk-hi-nrg_song', 'breakdown', 'synth-bass'), 'Synth bass variation');
+  assert.ok(phraseCellsIn('funk-hi-nrg_song', 'breakdown', 'synth-bass').has('Synth bass variation'));
   assert.equal(patternIn('funk-hi-nrg_song', 'chorus', 'synth'), 'Synth hook');
   assert.equal(patternIn('funk-hi-nrg_song', 'chorus', 'drums'), 'Hi-NRG drive');
 

@@ -40,6 +40,18 @@ const popForm = 'intro:4:2,verse:16:3,prechorus:8:3,chorus:8:4,verse:16:3,precho
 /** An explicitly recurring cell applies to every section unless overridden. */
 const loop = (chords: string[]) => ({ _: chords });
 
+const SALSA_FORM_PATTERN_ASSIGNMENTS: Record<string, NonNullable<RecordingArrangement['patternAssignments']>> = {
+  'salsa::puerto-rican-salsa': {
+    intro: { piano: 'PR piano montuno', tres: 'PR tres reply' },
+    verse: { piano: 'PR piano montuno', tres: 'Cuban Tres variation' },
+    chorus: { piano: 'Piano variation', tres: 'Cuban Tres variation' },
+    coro: { piano: 'PR piano montuno', tres: 'PR tres reply' },
+    mambo: { piano: 'Piano variation', tres: 'Cuban Tres variation' },
+    soneo: { piano: 'Piano variation', tres: 'Cuban Tres variation' },
+    cierre: { piano: 'PR piano close', tres: 'PR tres close' },
+  },
+};
+
 /** Recording-specific score adaptations, not claims of note-for-note transcription.
  * Every catalog recording has an explicit full form and harmonic plan.
  */
@@ -273,7 +285,13 @@ const DETAILED_RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = {
         trumpet: 'Bb Trumpet variation', trombone: 'Trombone variation',
         piano: 'Piano variation', bass: 'Bass variation', congas: 'Congas variation',
         timbales: 'Timbales variation', claves: 'Claves variation' } }, lockPatternAssignments: { bloque: ['trumpet','trombone','piano','bass','congas','timbales','claves'] } }),
-  'salsa::salsa-jazz': song(108, 'intro:16:2,A:32:3,montuno:32:4,solo:64:4,mambo:32:5,montuno:64:5,cierre:8:3', 'Extended piano feature and harmonically active instrumental development.', undefined, { solos: { solo: 'piano' } }),
+  'salsa::salsa-jazz': song(108, 'intro:16:2,A:32:3,montuno:32:4,solo:64:4,mambo:32:5,montuno:64:5,cierre:8:3', 'Extended piano feature and harmonically active instrumental development.', undefined, { solos: { solo: 'piano' }, patternAssignments: {
+    intro: { piano: 'Jazz chord comp', tres: 'Jazz tres line' },
+    A: { piano: 'Piano variation', tres: 'Cuban Tres variation' },
+    montuno: { piano: 'Jazz chord comp', tres: 'Jazz tres line' },
+    solo: { piano: 'Piano variation', tres: 'Cuban Tres variation' },
+    mambo: { piano: 'Jazz chord comp', tres: 'Jazz tres line' },
+    cierre: { piano: 'Jazz piano close', tres: 'Jazz tres close' } } }),
   'reggaeton::classic': song(96, 'intro:8:2,chorus:8:4,verse:16:3,chorus:8:4,verse:16:3,bridge:8:2,chorus:16:5,outro:8:3', 'Dembow hook entry, rap verses and repeated closing hook.'),
   'reggaeton::melodic': song(128, popForm, 'Straight disco/synth-pop pulse of this specific crossover recording; the existing melodic style patterns remain in use.'),
   'bachata::moderna': song(130, popForm, 'Requinto answers the singer; segunda and bongó carry the dance foundation.'),
@@ -543,8 +561,9 @@ export const RECORDING_ARRANGEMENTS: Record<string, RecordingArrangement> = Obje
     const [key, bpm, form, cells] = line.split('|');
     const reference = STYLE_REFERENCES[key as keyof typeof STYLE_REFERENCES];
     if (!reference || !cells || !form || !(+bpm > 0)) throw new Error(`Invalid recording score: ${key}`);
+    const patternAssignments = SALSA_FORM_PATTERN_ASSIGNMENTS[key];
     return [key, { bpm: +bpm, form, chords: parseHarmonicCells(cells),
-      note: reference.qualities.join('; ') }] as const;
+      note: reference.qualities.join('; '), ...(patternAssignments ? { patternAssignments } : {}) }] as const;
   }),
   ...Object.entries(DETAILED_RECORDING_ARRANGEMENTS).map(([key, recording]) => {
     const chords = recording.chords ?? RECORDING_HARMONIES[key];
@@ -561,6 +580,43 @@ const bachataUrbanInstrumentalParts = ['requinto','guitar','synth','bongos','gui
 const bachataInstrumentalSections = (parts: string[], ...sections: string[]) =>
   Object.fromEntries(sections.map(section => [section, parts]));
 const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangement, 'instruments' | 'lead' | 'sectionLeads' | 'patternAssignments' | 'sectionInstruments' | 'solos' | 'soloModes' | 'lockPatternAssignments' | 'sectionBpm' | 'note' | 'source'>>> = {
+  'folk::old-time': {
+    note: 'Old-Time teaching score: keep the fiddle tune and open-string drone forward, give the banjo its clawhammer bum-ditty, and let guitar chops answer the bass on beats two and four. Alternate source-based banjo and guitar variations between strains; this is a playable study, not a transcription.',
+    patternAssignments: {
+      pickup: { banjo: 'Clawhammer bum-ditty', guitar: 'Guitar backbeat chop' },
+      A: { banjo: 'Clawhammer bum-ditty', guitar: 'Guitar backbeat chop' },
+      B: { banjo: '5-String Banjo variation', guitar: 'Guitar backbeat chop' },
+      'A#2': { banjo: 'Clawhammer bum-ditty', guitar: 'Guitar variation' },
+      'B#2': { banjo: '5-String Banjo variation', guitar: 'Guitar backbeat chop' },
+      'A#3': { banjo: 'Clawhammer bum-ditty', guitar: 'Guitar variation' },
+      'B#3': { banjo: '5-String Banjo variation', guitar: 'Guitar backbeat chop' },
+      tag: { banjo: 'Banjo tag roll', guitar: 'Guitar tag chop' },
+    },
+    lockPatternAssignments: {
+      pickup: ['banjo','guitar'], A: ['banjo','guitar'], B: ['banjo','guitar'],
+      'A#2': ['banjo','guitar'], 'B#2': ['banjo','guitar'],
+      'A#3': ['banjo','guitar'], 'B#3': ['banjo','guitar'], tag: ['banjo','guitar'],
+    },
+  },
+  'folk::appalachian': {
+    note: 'Appalachian teaching score: place an even modal banjo roll beneath the fiddle, use alternating bass and chord strokes on guitar, and let the longer instrumental passages hand the foreground between them. Each part uses its own playable source cell rather than sharing a generic offbeat loop.',
+    solos: { solo: 'violin' },
+    patternAssignments: {
+      intro: { banjo: 'Banjo modal roll', guitar: 'Alternating-bass guitar' },
+      verse: { banjo: 'Banjo modal roll', guitar: 'Alternating-bass guitar' },
+      refrain: { banjo: '5-String Banjo variation', guitar: 'Alternating-bass guitar' },
+      solo: { banjo: '5-String Banjo variation', guitar: 'Alternating-bass guitar' },
+      'verse#2': { banjo: '5-String Banjo variation', guitar: 'Guitar variation' },
+      'refrain#2': { banjo: 'Banjo modal roll', guitar: 'Alternating-bass guitar' },
+      'solo#2': { banjo: '5-String Banjo reply', guitar: 'Alternating-bass guitar' },
+      tag: { banjo: 'Banjo modal close', guitar: 'Guitar turnaround' },
+    },
+    lockPatternAssignments: {
+      intro: ['banjo','guitar'], verse: ['banjo','guitar'], refrain: ['banjo','guitar'],
+      solo: ['banjo','guitar'], 'verse#2': ['banjo','guitar'],
+      'refrain#2': ['banjo','guitar'], 'solo#2': ['banjo','guitar'], tag: ['banjo','guitar'],
+    },
+  },
   'blues::piedmont': {
     note: 'Piedmont fingerstyle study: keep the alternating thumb and syncopated treble together through the A strain, shift the treble response for B, then let the guitar answer its own solo phrase before the theme returns. The score teaches a local playing pattern, not a transcription.',
     patternAssignments: {
@@ -685,8 +741,8 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
     patternAssignments: {
       intro: { guitar: 'Guitar accompaniment', bass: 'Disco octave bass', drums: 'Drum kit basics' },
       verse: { voice: 'Voice statement', guitar: 'Guitar accompaniment', bass: 'Disco octave bass', drums: 'Four-on-floor backbeat' },
-      chorus: { voice: 'Vocal variation', guitar: 'Guitar variation', 'string-ensemble': 'String-ensemble accompaniment', synth: 'Disco synth answer', bass: 'Disco octave bass', drums: 'Four-on-floor backbeat' },
-      solo: { guitar: 'Guitar variation', 'string-ensemble': 'String-ensemble accompaniment', synth: 'Synthesizer variation', bass: 'Disco octave bass', drums: 'Four-on-floor backbeat' },
+      chorus: { voice: 'Vocal variation', guitar: 'Guitar variation', 'string-ensemble': 'Disco string stabs', synth: 'Disco synth answer', bass: 'Disco octave bass', drums: 'Four-on-floor backbeat' },
+      solo: { guitar: 'Guitar variation', 'string-ensemble': 'Disco string stabs', synth: 'Synthesizer variation', bass: 'Disco octave bass', drums: 'Four-on-floor backbeat' },
       outro: { guitar: 'Guitar accompaniment', bass: 'Disco octave bass', drums: 'Drum kit basics' } } },
   'bollywood::electronic-club': {
     note: 'Electronic Bollywood arrangement study: keep the opening instrumental, give the verse a vocal line over a separated kick and bass, widen the hook with syncopated synth stabs, then leave a brief drumless synth breakdown before a clear build and full return.',
@@ -1405,7 +1461,7 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       theme: { synth: 'Synthesizer reply', piano: 'Piano accompaniment', rhodes: 'Electric Piano variation', 'log-drum': 'log drum ghost', drums: 'Drum kit basics', shaker: 'Shaker pulse' },
       verse: { piano: 'Piano reply', rhodes: 'Electric Piano ghost', 'log-drum': 'log drum ghost', drums: 'Drum kit ghost', shaker: 'Shaker basics' },
       groove: { piano: 'Piano accompaniment', rhodes: 'Electric Piano variation', 'log-drum': 'log drum reply', drums: 'Drum kit basics', shaker: 'Shaker variation' },
-      solo: { rhodes: 'Electric Piano legato', 'log-drum': 'Low anchor', shaker: 'Shaker ghost' },
+      solo: { rhodes: 'Rhodes solo line', 'log-drum': 'Low anchor', shaker: 'Shaker ghost' },
       breakdown: { piano: 'Piano tenuto', rhodes: 'Electric Piano tenuto', shaker: 'Shaker ghost' },
       drop: { synth: 'Synthesizer accent', piano: 'Piano variation', rhodes: 'Electric Piano variation', 'log-drum': 'log drum variation', drums: 'Drum kit variation', shaker: 'Shaker variation' },
       outro: { } } },
@@ -1429,7 +1485,7 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       breakdown: ['synth','rhodes','log-drum','shaker'], outro: ['synth','log-drum','shaker'] },
     patternAssignments: {
       intro: { synth: 'Synth statement', shaker: 'Shaker pulse' },
-      hook: { synth: 'Synthesizer reply', piano: 'Piano accompaniment', rhodes: 'Electric Piano reply', 'log-drum': 'Low anchor', drums: 'Drum kit basics', shaker: 'Shaker pulse' },
+      hook: { synth: 'Synthesizer reply', piano: 'Piano accompaniment', rhodes: 'Log-drum Rhodes bed', 'log-drum': 'Low anchor', drums: 'Drum kit basics', shaker: 'Shaker pulse' },
       verse: { synth: 'Synthesizer staccato', piano: 'Piano reply', 'log-drum': 'log drum ghost', drums: 'Drum kit ghost', shaker: 'Shaker basics' },
       drop: { synth: 'Synthesizer variation', piano: 'Piano accent', rhodes: 'Electric Piano ghost', 'log-drum': 'log drum roll', drums: 'Drum kit variation', shaker: 'Shaker variation' },
       breakdown: { synth: 'Synthesizer variation', rhodes: 'Electric Piano tenuto', 'log-drum': 'log drum ghost', shaker: 'Shaker ghost' },
@@ -1637,20 +1693,20 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
     solos: { arrastre: 'upright-bass' },
     sectionInstruments: { arrastre: ['upright-bass'] },
     patternAssignments: {
-      intro: { bandoneon: 'Canyengue phrase', violin: 'Clipped answer', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
-      estribillo: { bandoneon: 'Canyengue phrase', violin: 'Clipped answer', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
-      copla: { bandoneon: 'Clipped phrase', violin: 'Violin variation', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
-      trio: { bandoneon: 'Canyengue phrase', violin: 'Violin reply', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
+      intro: { bandoneon: 'Canyengue phrase', violin: 'Clipped answer', piano: 'Canyengue mugre comp', 'upright-bass': 'Habanera bass' },
+      estribillo: { bandoneon: 'Canyengue phrase', violin: 'Clipped answer', piano: 'Canyengue mugre comp', 'upright-bass': 'Habanera bass' },
+      copla: { bandoneon: 'Clipped phrase', violin: 'Violin variation', piano: 'Canyengue mugre comp', 'upright-bass': 'Habanera bass' },
+      trio: { bandoneon: 'Canyengue phrase', violin: 'Violin reply', piano: 'Canyengue mugre comp', 'upright-bass': 'Habanera bass' },
       arrastre: { 'upright-bass': 'Bass drag' },
-      cierre: { bandoneon: 'Canyengue phrase', violin: 'Violin reply', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' } },
+      cierre: { bandoneon: 'Canyengue phrase', violin: 'Violin reply', piano: 'Canyengue mugre comp', 'upright-bass': 'Habanera bass' } },
     lockPatternAssignments: { intro: ['violin'], estribillo: ['violin'], copla: ['violin'], trio: ['violin'], cierre: ['violin'] } },
   'tango::guardia-nueva-de-caro': {
     solos: { violin: 'violin' },
     patternAssignments: {
-      tema: { bandoneon: 'Bandoneon answer', violin: 'Violin counterline', piano: 'Four-beat marcato', 'upright-bass': 'Root–fifth bass' },
+      tema: { bandoneon: 'Bandoneon answer', violin: 'Violin counterline', piano: 'De Caro sync', 'upright-bass': 'Root–fifth bass' },
       violin: { violin: 'Violin variation', bandoneon: 'Bandoneon reply', piano: 'Piano reply', 'upright-bass': 'Root–fifth bass' },
       dialogo: { bandoneon: 'Bandoneon answer', violin: 'Violin counterline', piano: 'Piano reply', 'upright-bass': 'Root–fifth bass' },
-      trio: { bandoneon: 'Bandoneon reply', violin: 'Violin variation', piano: 'Four-beat marcato', 'upright-bass': 'Root–fifth bass' },
+      trio: { bandoneon: 'Bandoneon reply', violin: 'Violin variation', piano: 'De Caro sync', 'upright-bass': 'Root–fifth bass' },
       variacion: { bandoneon: 'Bandoneon variation', violin: 'Violin variation', piano: 'Piano variation', 'upright-bass': 'Upright bass variation' } } },
   'tango::d-arienzo': {
     lockPatternAssignments: { parada: ['bandoneon','violin','piano','upright-bass'] },
@@ -1683,8 +1739,8 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       coda: { bandoneon: 'Bandoneon phrase', violin: 'Violin answer', piano: 'Yumba', 'upright-bass': 'Yumba bass' } } },
   'tango::troilo': {
     patternAssignments: {
-      tema: { bandoneon: 'Singing bandoneon', violin: 'Violin answer', piano: 'Four-beat marcato', 'upright-bass': 'Root–fifth bass' },
-      bandoneon: { bandoneon: 'Bandoneon variation', violin: 'Violin answer', piano: 'Four-beat marcato', 'upright-bass': 'Root–fifth bass' },
+      tema: { bandoneon: 'Singing bandoneon', violin: 'Violin answer', piano: 'Troilo piano pocket', 'upright-bass': 'Root–fifth bass' },
+      bandoneon: { bandoneon: 'Bandoneon variation', violin: 'Violin answer', piano: 'Troilo piano pocket', 'upright-bass': 'Root–fifth bass' },
       contracanto: { violin: 'Violin answer', piano: 'Piano reply', 'upright-bass': 'Upright bass reply' },
       variacion: { bandoneon: 'Bandoneon variation', violin: 'Violin variation', piano: 'Piano variation', 'upright-bass': 'Upright bass variation' },
       coda: { bandoneon: 'Bandoneon breath', violin: 'Violin answer', piano: 'Piano reply', 'upright-bass': 'Root–fifth bass' } } },
@@ -1697,21 +1753,21 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       ensemble: { piano: 'Umpa-umpa piano', bandoneon: 'Bandoneon variation', violin: 'Violin variation', 'upright-bass': 'Upright bass variation' } } },
   'tango::tango-cancion': {
     patternAssignments: {
-      intro: { bandoneon: 'Bandoneon phrase', guitar: 'Four-beat marcato', piano: 'Four-beat marcato', 'upright-bass': 'Root–fifth bass' },
-      verse: { voice: 'Vocal phrase', bandoneon: 'Bandoneon reply', guitar: 'Four-beat marcato', piano: 'Four-beat marcato', 'upright-bass': 'Root–fifth bass' },
+      intro: { bandoneon: 'Bandoneon phrase', guitar: 'Tango guitar replies', piano: 'Tango piano anchors', 'upright-bass': 'Root–fifth bass' },
+      verse: { voice: 'Vocal phrase', bandoneon: 'Bandoneon reply', guitar: 'Tango guitar replies', piano: 'Tango piano anchors', 'upright-bass': 'Root–fifth bass' },
       interlude: { bandoneon: 'Bandoneon variation', guitar: 'Guitar reply', piano: 'Piano reply', 'upright-bass': 'Upright bass reply' },
-      refrain: { voice: 'Vocal variation', bandoneon: 'Bandoneon reply', guitar: 'Four-beat marcato', piano: 'Four-beat marcato', 'upright-bass': 'Root–fifth bass' },
+      refrain: { voice: 'Vocal variation', bandoneon: 'Bandoneon reply', guitar: 'Tango guitar replies', piano: 'Tango piano anchors', 'upright-bass': 'Root–fifth bass' },
       bandoneon: { bandoneon: 'Bandoneon variation', guitar: 'Guitar reply', piano: 'Piano reply', 'upright-bass': 'Upright bass reply' },
-      cierre: { voice: 'Vocal variation', bandoneon: 'Bandoneon phrase', guitar: 'Four-beat marcato', piano: 'Four-beat marcato', 'upright-bass': 'Root–fifth bass' } } },
+      cierre: { voice: 'Vocal variation', bandoneon: 'Bandoneon phrase', guitar: 'Tango guitar replies', piano: 'Tango piano anchors', 'upright-bass': 'Root–fifth bass' } } },
   'tango::milonga': {
     sectionInstruments: { traspie: ['bandoneon','guitar','piano','upright-bass'] },
     patternAssignments: {
-      intro: { bandoneon: 'Milonga phrase', violin: 'Milonga answer', guitar: 'Habanera chords', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
-      estribillo: { bandoneon: 'Milonga phrase', violin: 'Milonga answer', guitar: 'Habanera chords', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
-      copla: { bandoneon: 'Milonga phrase', violin: 'Violin variation', guitar: 'Habanera chords', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
-      interlude: { guitar: 'Habanera chords', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
-      traspie: { bandoneon: 'Milonga traspié', guitar: 'Habanera chords', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' },
-      cierre: { bandoneon: 'Milonga phrase', violin: 'Violin reply', guitar: 'Habanera chords', piano: 'Habanera chords', 'upright-bass': 'Habanera bass' } },
+      intro: { bandoneon: 'Milonga phrase', violin: 'Milonga answer', guitar: 'Milonga guitar habanera', piano: 'Milonga piano lift', 'upright-bass': 'Habanera bass' },
+      estribillo: { bandoneon: 'Milonga phrase', violin: 'Milonga answer', guitar: 'Milonga guitar habanera', piano: 'Milonga piano lift', 'upright-bass': 'Habanera bass' },
+      copla: { bandoneon: 'Milonga phrase', violin: 'Violin variation', guitar: 'Milonga guitar habanera', piano: 'Milonga piano lift', 'upright-bass': 'Habanera bass' },
+      interlude: { guitar: 'Milonga guitar habanera', piano: 'Milonga piano lift', 'upright-bass': 'Habanera bass' },
+      traspie: { bandoneon: 'Milonga traspié', guitar: 'Milonga guitar habanera', piano: 'Milonga piano lift', 'upright-bass': 'Habanera bass' },
+      cierre: { bandoneon: 'Milonga phrase', violin: 'Violin reply', guitar: 'Milonga guitar habanera', piano: 'Milonga piano lift', 'upright-bass': 'Habanera bass' } },
     lockPatternAssignments: { intro: ['violin'], estribillo: ['violin'], copla: ['violin'], cierre: ['violin'] } },
   'tango::vals': {
     patternAssignments: {
@@ -1728,24 +1784,24 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
   'tango::electrotango-gotan': {
     patternAssignments: {
       intro: { synth: 'Root–fifth bass', drums: 'Percussion pulse' },
-      loop: { bandoneon: 'Bandoneon hook', piano: 'Offbeat chords', synth: 'Root–fifth bass', drums: 'Percussion pulse', sampler: 'Percussion pulse' },
-      hook: { bandoneon: 'Bandoneon hook', piano: 'Offbeat chords', synth: 'Synth answer', drums: 'Percussion pulse', sampler: 'Sampler variation' },
+      loop: { bandoneon: 'Bandoneon hook', piano: 'Gotan offbeat chords', synth: 'Root–fifth bass', drums: 'Percussion pulse', sampler: 'Percussion pulse' },
+      hook: { bandoneon: 'Bandoneon hook', piano: 'Gotan offbeat chords', synth: 'Gotan synth answer', drums: 'Percussion pulse', sampler: 'Sampler variation' },
       breakdown: { synth: 'Synthesizer variation', drums: 'Drum kit variation' },
-      bandoneon: { bandoneon: 'Bandoneon variation', piano: 'Offbeat chords', synth: 'Synth answer', drums: 'Drum kit variation', sampler: 'Sampler variation' } } },
+      bandoneon: { bandoneon: 'Bandoneon variation', piano: 'Gotan offbeat chords', synth: 'Gotan synth answer', drums: 'Drum kit variation', sampler: 'Sampler variation' } } },
   'tango::electro-rock-bajofondo': {
     patternAssignments: {
-      riff: { bandoneon: 'Bandoneon hook', piano: 'Offbeat chords', synth: 'Root–fifth bass', drums: 'Percussion pulse', sampler: 'Percussion pulse' },
-      verse: { bandoneon: 'Bandoneon hook', piano: 'Offbeat chords', synth: 'Root–fifth bass', drums: 'Percussion pulse', sampler: 'Percussion pulse' },
+      riff: { bandoneon: 'Bandoneon hook', piano: 'Bajofondo piano backbeat', synth: 'Root–fifth bass', drums: 'Percussion pulse', sampler: 'Percussion pulse' },
+      verse: { bandoneon: 'Bandoneon hook', piano: 'Bajofondo piano backbeat', synth: 'Root–fifth bass', drums: 'Percussion pulse', sampler: 'Percussion pulse' },
       chorus: { bandoneon: 'Bandoneon variation', piano: 'Piano variation', synth: 'Synthesizer variation', drums: 'Drum kit variation', sampler: 'Sampler variation' },
       breakdown: { bandoneon: 'Bandoneon reply', piano: 'Piano reply', synth: 'Synthesizer reply', drums: 'Drum kit basics', sampler: 'Sampler basics' },
-      tag: { bandoneon: 'Bandoneon hook', piano: 'Offbeat chords', synth: 'Synth answer', drums: 'Percussion pulse', sampler: 'Percussion pulse' } } },
+      tag: { bandoneon: 'Bandoneon hook', piano: 'Bajofondo piano backbeat', synth: 'Bajofondo synth answer', drums: 'Percussion pulse', sampler: 'Percussion pulse' } } },
   'tango::modern-orquesta': {
     sectionInstruments: {
       corte: [],
       'tutti-hit': ['bandoneon','violin','piano','upright-bass'] },
     patternAssignments: {
-      intro: { bandoneon: 'Bandoneon phrase', violin: 'Violin answer', piano: 'Four-beat marcato', 'upright-bass': 'Root–fifth bass' },
-      A: { bandoneon: 'Bandoneon phrase', violin: 'Violin answer', piano: 'Four-beat marcato', 'upright-bass': 'Root–fifth bass' },
+      intro: { bandoneon: 'Bandoneon phrase', violin: 'Violin answer', piano: 'Orquesta block chords', 'upright-bass': 'Root–fifth bass' },
+      A: { bandoneon: 'Bandoneon phrase', violin: 'Violin answer', piano: 'Orquesta block chords', 'upright-bass': 'Root–fifth bass' },
       B: { bandoneon: 'Bandoneon reply', violin: 'Violin answer', piano: 'Piano reply', 'upright-bass': 'Upright bass reply' },
       'tutti-hit': { bandoneon: 'Tutti hit', violin: 'Tutti hit', piano: 'Tutti hit', 'upright-bass': 'Tutti hit' },
       variacion: { bandoneon: 'Bandoneon variation', violin: 'Violin variation', piano: 'Piano variation', 'upright-bass': 'Upright bass variation' },
@@ -2018,10 +2074,10 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       mambo: ['trumpet','trombone','tres','piano','bass','congas','timbales','claves','cowbell'],
       cierre: ['trumpet','tres','piano','bass','congas','bongos','timbales','claves'] },
     patternAssignments: {
-      intro: { trumpet: 'Trumpet statement', tres: 'Tres accompaniment', piano: 'Piano accompaniment', bass: 'Low anchor', congas: 'Congas pulse', bongos: 'Bongos pulse', timbales: 'Timbales pulse', claves: 'Claves pulse' },
-      verse: { voice: 'Voice statement', trumpet: 'Bb Trumpet reply', tres: 'Cuban Tres variation', piano: 'Piano montuno', bass: 'Bass variation', congas: 'Congas pulse', bongos: 'Bongos pulse', timbales: 'Timbales pulse', claves: 'Claves pulse' },
-      montuno: { voice: 'Vocal variation', trumpet: 'Bb Trumpet reply', trombone: 'Trombone reply', tres: 'Cuban Tres variation', piano: 'Piano montuno', bass: 'Bass variation', congas: 'Congas variation', timbales: 'Timbales variation', claves: 'Claves pulse', cowbell: 'Son Montuno campana' },
-      coro: { voice: 'Vocal reply', trumpet: 'Bb Trumpet variation', trombone: 'Trombone variation', tres: 'Tres accompaniment', piano: 'Piano montuno', bass: 'Bass variation', congas: 'Congas variation', timbales: 'Timbales variation', claves: 'Claves pulse', cowbell: 'Son Montuno campana' },
+      intro: { trumpet: 'Trumpet statement', tres: 'Tres guajeo reply', piano: 'Son montuno piano', bass: 'Low anchor', congas: 'Congas pulse', bongos: 'Bongos pulse', timbales: 'Timbales pulse', claves: 'Claves pulse' },
+      verse: { voice: 'Voice statement', trumpet: 'Bb Trumpet reply', tres: 'Cuban Tres variation', piano: 'Son montuno piano', bass: 'Bass variation', congas: 'Congas pulse', bongos: 'Bongos pulse', timbales: 'Timbales pulse', claves: 'Claves pulse' },
+      montuno: { voice: 'Vocal variation', trumpet: 'Bb Trumpet reply', trombone: 'Trombone reply', tres: 'Cuban Tres variation', piano: 'Son montuno piano', bass: 'Bass variation', congas: 'Congas variation', timbales: 'Timbales variation', claves: 'Claves pulse', cowbell: 'Son Montuno campana' },
+      coro: { voice: 'Vocal reply', trumpet: 'Bb Trumpet variation', trombone: 'Trombone variation', tres: 'Tres guajeo reply', piano: 'Son montuno piano', bass: 'Bass variation', congas: 'Congas variation', timbales: 'Timbales variation', claves: 'Claves pulse', cowbell: 'Son Montuno campana' },
       mambo: { trumpet: 'Bb Trumpet variation', trombone: 'Trombone variation', tres: 'Cuban Tres variation', piano: 'Piano variation', bass: 'Bass variation', congas: 'Congas variation', timbales: 'Timbales roll', claves: 'Claves pulse', cowbell: 'Son Montuno campana' },
       cierre: { claves: 'Claves pulse' } } },
   'salsa::mambo': {
@@ -2034,10 +2090,10 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       break: ['piano','bass','claves'],
       cierre: ['trumpet','trombone','tres','piano','bass','congas','bongos','timbales','claves'] },
     patternAssignments: {
-      intro: { trumpet: 'Trumpet statement', trombone: 'Trombone statement', tres: 'Tres accompaniment', piano: 'Piano accompaniment', bass: 'Low anchor', congas: 'Congas pulse', bongos: 'Bongos pulse', timbales: 'Timbales pulse', claves: 'Claves pulse' },
-      head: { trumpet: 'Bb Trumpet reply', trombone: 'Trombone reply', tres: 'Cuban Tres variation', piano: 'Piano accompaniment', bass: 'Bass variation', congas: 'Congas pulse', bongos: 'Bongos pulse', timbales: 'Timbales pulse', claves: 'Claves pulse' },
+      intro: { trumpet: 'Trumpet statement', trombone: 'Trombone statement', tres: 'Mambo tres answers', piano: 'Mambo piano punches', bass: 'Low anchor', congas: 'Congas pulse', bongos: 'Bongos pulse', timbales: 'Timbales pulse', claves: 'Claves pulse' },
+      head: { trumpet: 'Bb Trumpet reply', trombone: 'Trombone reply', tres: 'Cuban Tres variation', piano: 'Mambo piano punches', bass: 'Bass variation', congas: 'Congas pulse', bongos: 'Bongos pulse', timbales: 'Timbales pulse', claves: 'Claves pulse' },
       mambo: { trumpet: 'Bb Trumpet variation', trombone: 'Trombone variation', tres: 'Cuban Tres variation', piano: 'Piano variation', bass: 'Bass variation', congas: 'Congas variation', timbales: 'Timbales variation', claves: 'Claves pulse', cowbell: 'Mambo campana' },
-      solo: { trumpet: 'Bb Trumpet variation', tres: 'Tres accompaniment', piano: 'Piano variation', bass: 'Bass variation', congas: 'Congas variation', timbales: 'Timbales variation', claves: 'Claves pulse', cowbell: 'Mambo campana' },
+      solo: { trumpet: 'Bb Trumpet variation', tres: 'Mambo tres answers', piano: 'Piano variation', bass: 'Bass variation', congas: 'Congas variation', timbales: 'Timbales variation', claves: 'Claves pulse', cowbell: 'Mambo campana' },
       break: { piano: 'Piano reply', bass: 'Bass reply', claves: 'Claves pulse' },
       cierre: { claves: 'Claves pulse' } } },
   'salsa::cha-cha-cha': {
@@ -2092,8 +2148,8 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       solo: ['trumpet','trombone','piano','tres','bass','congas','bongos','timbales','claves','drums'],
       coda: ['trumpet','trombone','piano','tres','bass','congas','bongos','timbales','claves','drums'] },
     patternAssignments: {
-      intro: { trumpet: 'Trumpet statement', trombone: 'Trombone statement', piano: 'Piano accompaniment', tres: 'Tres accompaniment', bass: 'Low anchor', congas: 'Congas pulse', bongos: 'Bongos pulse', timbales: 'Timbales pulse', claves: 'Claves pulse', drums: 'Boogaloo backbeat' },
-      verse: { voice: 'Voice statement', piano: 'Piano accompaniment', tres: 'Tres accompaniment', bass: 'Low anchor', congas: 'Congas pulse', bongos: 'Bongos pulse', timbales: 'Timbales pulse', claves: 'Claves pulse', drums: 'Boogaloo backbeat' },
+      intro: { trumpet: 'Trumpet statement', trombone: 'Trombone statement', piano: 'Boogaloo backbeat', tres: 'Boogaloo tres pickup', bass: 'Low anchor', congas: 'Congas pulse', bongos: 'Bongos pulse', timbales: 'Timbales pulse', claves: 'Claves pulse', drums: 'Boogaloo backbeat' },
+      verse: { voice: 'Voice statement', piano: 'Boogaloo backbeat', tres: 'Boogaloo tres pickup', bass: 'Low anchor', congas: 'Congas pulse', bongos: 'Bongos pulse', timbales: 'Timbales pulse', claves: 'Claves pulse', drums: 'Boogaloo backbeat' },
       break: { piano: 'Piano reply', tres: 'Cuban Tres reply', bass: 'Bass reply', congas: 'Congas reply', bongos: 'Bongos reply', timbales: 'Timbales roll', claves: 'Claves pulse', drums: 'Boogaloo fill' },
       solo: { trumpet: 'Bb Trumpet variation', trombone: 'Trombone reply', piano: 'Piano reply', tres: 'Cuban Tres reply', bass: 'Bass variation', congas: 'Congas variation', bongos: 'Bongos variation', timbales: 'Timbales variation', claves: 'Claves pulse', drums: 'Boogaloo backbeat' },
       hook: { voice: 'Vocal reply', trumpet: 'Bb Trumpet variation', trombone: 'Trombone variation', piano: 'Piano variation', tres: 'Cuban Tres variation', bass: 'Bass variation', congas: 'Congas variation', bongos: 'Bongos variation', timbales: 'Timbales variation', claves: 'Claves pulse', drums: 'Boogaloo backbeat' },
@@ -2110,9 +2166,9 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       percussion: ['bass','congas','bongos','timbales','claves'],
       cierre: ['trumpet','trombone','piano','tres','bass','congas','bongos','timbales','claves'] },
     patternAssignments: {
-      intro: { trumpet: 'Trumpet statement', trombone: 'Trombone statement', piano: 'Piano accompaniment', tres: 'Tres accompaniment', bass: 'Low anchor', congas: 'Congas pulse', bongos: 'Bongos pulse', timbales: 'Timbales pulse', claves: 'Claves pulse' },
-      vamp: { trumpet: 'Bb Trumpet reply', trombone: 'Trombone reply', piano: 'Piano montuno', tres: 'Cuban Tres variation', bass: 'Bass variation', congas: 'Congas variation', bongos: 'Bongos variation', timbales: 'Timbales variation', claves: 'Claves pulse' },
-      'bass-solo': { trumpet: 'Bb Trumpet reply', trombone: 'Trombone reply', piano: 'Piano accompaniment', tres: 'Tres accompaniment', bass: 'Bass variation', congas: 'Congas pulse', bongos: 'Bongos pulse', timbales: 'Timbales variation', claves: 'Claves pulse' },
+      intro: { trumpet: 'Trumpet statement', trombone: 'Trombone statement', piano: 'Descarga piano vamp', tres: 'Descarga tres answer', bass: 'Low anchor', congas: 'Congas pulse', bongos: 'Bongos pulse', timbales: 'Timbales pulse', claves: 'Claves pulse' },
+      vamp: { trumpet: 'Bb Trumpet reply', trombone: 'Trombone reply', piano: 'Descarga piano vamp', tres: 'Cuban Tres variation', bass: 'Bass variation', congas: 'Congas variation', bongos: 'Bongos variation', timbales: 'Timbales variation', claves: 'Claves pulse' },
+      'bass-solo': { trumpet: 'Bb Trumpet reply', trombone: 'Trombone reply', piano: 'Descarga piano vamp', tres: 'Descarga tres answer', bass: 'Bass variation', congas: 'Congas pulse', bongos: 'Bongos pulse', timbales: 'Timbales variation', claves: 'Claves pulse' },
       'piano-solo': { piano: 'Piano variation', tres: 'Cuban Tres reply', bass: 'Bass variation', congas: 'Congas pulse', bongos: 'Bongos pulse', timbales: 'Timbales variation', claves: 'Claves pulse' },
       'horn-solo': { trumpet: 'Bb Trumpet variation', trombone: 'Trombone reply', piano: 'Piano variation', tres: 'Cuban Tres variation', bass: 'Bass variation', congas: 'Congas variation', bongos: 'Bongos variation', timbales: 'Timbales variation', claves: 'Claves pulse' },
       percussion: { bass: 'Low anchor', congas: 'Congas variation', bongos: 'Bongos variation', timbales: 'Timbales roll', claves: 'Claves pulse' },

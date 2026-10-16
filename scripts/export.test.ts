@@ -21,8 +21,8 @@ for (const format of ['midi', 'musicxml', 'mxl', 'tablature', 'json'] as const) 
   const result = await createExport(ctx, format);
   assert.ok(result.blob.size > 100, format);
 }
-const bass = { ...song.tracks[0], id: 'bass', name: 'Bass & low', instrumentId: 'electric-bass', role: 'bass' as const, muted: true };
-const guitar = { ...song.tracks[0], id: 'guitar', name: 'Flamenco guitar', instrumentId: 'flamenco-guitar', role: 'harmony' as const };
+const bass = { ...song.tracks[0], id: 'bass', name: 'bass & low', instrumentId: 'electric-bass', role: 'bass' as const, muted: true };
+const guitar = { ...song.tracks[0], id: 'guitar', name: 'flamenco guitar', instrumentId: 'flamenco-guitar', role: 'harmony' as const };
 const drums = { ...song.tracks[0], id: 'drums', name: 'Percussion', instrumentId: 'drum-kit', role: 'drums' as const };
 const bars = [{ index: 0, start: 0, end: 2, bpm: 120, beatsPerBar: 4, regionId: 'a' }, { index: 1, start: 2, end: 6, bpm: 60, beatsPerBar: 4, regionId: 'b' }];
 const note = (trackId: string, midi: number, time: number, dur: number) => ({ trackId, midi, time, dur, vel: 96, bar: 0, gestureCode: codeForGesture(trackId === 'guitar' ? 'rasgueado' : 'accent'), hitFunctionCode: 0, accent: 0.8 });
@@ -35,11 +35,15 @@ assert.equal(tickAt(fixture.performance, 3), 4800);
 const onlyBass = { ...fixture, selectedTrackIds: ['bass'] };
 const json = parseObject(await (await createExport(onlyBass, 'json')).blob.text());
 assert.deepEqual(records(json.tracks).map(t => t.id), ['bass']);
+assert.equal(records(json.tracks)[0].name, 'Bass & low');
 assert.equal(records(json.notes).length, 2);
 assert.ok(!musicXml(onlyBass).includes('<part-name>Percussion</part-name>'));
 assert.ok(musicXml(fixture).includes('<unpitched>'));
+assert.ok(musicXml(fixture).includes('<part-name>Flamenco guitar</part-name>'));
+assert.ok(new TextDecoder().decode(midiBytes(fixture)).includes('Flamenco guitar'));
 assert.ok(musicXml(onlyBass).includes('<tied type="stop"/>'));
 assert.ok(musicXml({ ...fixture, selectedTrackIds: ['guitar'] }, true).includes('<sign>TAB</sign>'));
+assert.ok(new TextDecoder().decode(gp5Bytes({ ...fixture, selectedTrackIds: ['guitar'] })).includes('Flamenco guitar'));
 assert.throws(() => gp5Bytes(fixture), /guitar and bass/);
 assert.throws(() => midiBytes({ ...fixture, selectedTrackIds: [] }), /Select/);
 const abort = new AbortController(); abort.abort();

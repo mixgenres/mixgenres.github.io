@@ -1,4 +1,5 @@
 import { meter, PPQ, programFor, selectedTracks, createTickMapper, timeline, isPercussion, type ExportContext } from './model';
+import { capitalizeInstrumentName } from '../engine/lookup/instruments';
 const textEncoder = new TextEncoder();
 function vlq(value: number): number[] {
   if (!Number.isSafeInteger(value) || value < 0 || value > 0x0fffffff) throw new Error('MIDI event is outside the supported timeline.');
@@ -43,7 +44,7 @@ export function midiBytes(ctx: ExportContext): Uint8Array {
   for (const track of tracks) {
     if (channelIndex === 9) channelIndex++;
     const channel = isPercussion(track) ? 9 : channelIndex++;
-    const events: Event[] = [{ tick: 0, priority: 0, bytes: label(3, track.name) }, { tick: 0, priority: 1, bytes: [0xc0 | channel, programFor(track)] }];
+    const events: Event[] = [{ tick: 0, priority: 0, bytes: label(3, capitalizeInstrumentName(track.name)) }, { tick: 0, priority: 1, bytes: [0xc0 | channel, programFor(track)] }];
     const cc = (tick: number, number: number, value: number, priority = 2) => events.push({ tick, priority, bytes: [0xb0 | channel, clamp(number), clamp(value)] });
     cc(0, 7, track.volume * 100); cc(0, 10, (track.pan ?? 0.5) * 127);
     // Explicit ±2 semitone pitch bend range.
