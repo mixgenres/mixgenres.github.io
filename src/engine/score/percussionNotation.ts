@@ -13,7 +13,18 @@ export function notatedDrum(instrumentId: string, midi: number): NotatedDrum {
   if (!def) throw new Error(`No instrument definition for percussion part ${instrumentId}`);
   let staff = def.notationRules?.percussion?.[id] ?? def.notationRules?.percussion?.[staffKey] ?? DRUM_STAFF[staffKey];
   if (!staff && !component && def.drum) {
-    const level = midi === def.drum.low ? 'low' : midi === def.drum.high ? 'high' : midi === def.drum.mid ? 'mid' : undefined;
+    const levels = [
+      { level: 'low' as const, midi: def.drum.low },
+      { level: 'mid' as const, midi: def.drum.mid },
+      { level: 'high' as const, midi: def.drum.high },
+    ];
+    // A borrowed percussion cell can carry source-kit MIDI values which do
+    // not match the destination instrument's three authored notes. Keep the
+    // attack and place it on the nearest playable lane instead of failing the
+    // whole score compilation. Prefer the centre stroke on ties.
+    const level = levels.find(candidate => candidate.midi === midi)?.level
+      ?? levels.sort((a, b) => Math.abs(a.midi - midi) - Math.abs(b.midi - midi)
+        || (a.level === 'mid' ? -1 : b.level === 'mid' ? 1 : 0))[0]?.level;
     const levelStaff: Record<'low' | 'mid' | 'high', { step: string; octave: number; notehead: NotatedDrum['notehead'] }> = {
       low: { step: 'F', octave: 4, notehead: 'normal' },
       mid: { step: 'C', octave: 5, notehead: 'normal' },

@@ -181,12 +181,12 @@ test('repeated form sections keep their authored occurrence-specific teaching ce
 });
 
 test('lead parts change with the song form across distinct style families', () => {
-  const patternName = (songId: string, kind: string, instrumentId: string, occurrence = 1) => {
+  const patternName = (songId: string, kind: string, instrumentId: string, occurrence = 1, role?: string) => {
     const song = createCatalogSong(songId);
     const section = song.regions.filter(region => region.kind === kind)[occurrence - 1];
     assert.ok(section, `${songId} contains ${kind} section ${occurrence}`);
-    const track = song.tracks.find(item => item.instrumentId === instrumentId);
-    assert.ok(track, `${songId} contains ${instrumentId}`);
+    const track = song.tracks.find(item => item.instrumentId === instrumentId && (!role || item.role === role));
+    assert.ok(track, `${songId} contains ${instrumentId}${role ? `:${role}` : ''}`);
     const id = song.arrangement[section.id]?.[track.id];
     assert.ok(id, `${songId}/${kind}#${occurrence} assigns ${instrumentId}`);
     return PATTERNS_BY_ID[id]?.shortName;
@@ -207,7 +207,7 @@ test('lead parts change with the song form across distinct style families', () =
   assert.equal(patternName('persian-modern-persian_song', 'climax', 'setar'), 'Setar reply');
   assert.equal(patternName('qawwali-contemporary-fusion_song', 'response', 'voice'), 'Vocal reply');
   assert.equal(patternName('salsa-son_song', 'verse', 'voice', 3), 'Vocal variation');
-  assert.equal(patternName('weird-musique-concrete_song', 'recall', 'sampler'), 'Cut-and-recall montage');
+  assert.equal(patternName('weird-musique-concrete_song', 'recall', 'sampler', 1, 'texture'), 'Cut-and-recall montage');
 });
 
 test('Khöömei response changes its overtone guide while voice stays out of drone and cadence', () => {

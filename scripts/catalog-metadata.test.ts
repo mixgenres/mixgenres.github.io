@@ -8,11 +8,13 @@ import { STYLE_REFERENCES } from '../src/data/styles/styleReferences';
 import { RECORDING_ARRANGEMENTS, parseRecordingForm } from '../src/data/songs/recordingArrangements';
 import { assembleStylePatterns } from '../src/engine/style/catalog';
 import { auditCatalogSongInstruments, catalogIdForStyle, createCatalogSong } from '../src/engine/sheet/songCatalog';
-import { addVoice, canonicalPatternSection, createSheet, isVoiceSilentInAll, makeSheet, patternAvailableInSection, randomizePatternsForSong, setInstrument, suggestPattern } from '../src/engine/sheet/sheet';
+import { addVoice, canonicalPatternSection, createSheet, isVoiceSilentInAll, makeSheet, patternAvailableInSection, randomizePatternsForSong, setInstrument, suggestPattern, switchSectionWorld } from '../src/engine/sheet/sheet';
 import { styleCalibrationTarget } from '../src/engine/style/performance-schema';
 import { compileNotatedScore } from '../src/engine/score/notatedScore';
 import { arrangeBand, composeMusicianScore } from '../src/engine/band/arrangeBand';
 import { compileMusicianScore } from '../src/engine/score/musicianScore';
+import { compileSamplePlan } from '../src/engine/playback/soundfont/plan';
+import { songMixOptions } from '../src/engine/playback/renderSongMix';
 import { INSTRUMENT_CATALOG, capitalizeInstrumentName } from '../src/data/instruments';
 
 test('instrument labels consistently capitalize the initial letter without changing IDs', () => {
@@ -27,6 +29,62 @@ test('instrument labels consistently capitalize the initial letter without chang
   assert.equal(capitalizeInstrumentName('FM EP'), 'FM EP');
   assert.equal(INSTRUMENT_CATALOG.find(instrument => instrument.id === 'synth-bass')?.id, 'synth-bass');
   assert.equal(INSTRUMENT_CATALOG.find(instrument => instrument.id === 'synth-bass')?.name, 'Synth bass');
+});
+
+test('Brazilian and Ethio-Jazz sections stay playable with added tenor sax and Kebero', () => {
+  const brazilian = makeSheet('brazilian', 'brazilian-samba');
+  const targetRegion = brazilian.regions.find(region => region.kind === 'verse')!;
+  const mixed = switchSectionWorld(brazilian, targetRegion.id, 'ethiopian');
+  assert.equal(mixed.regions.find(region => region.id === targetRegion.id)?.styleId, 'ethiopian-ethio-jazz');
+
+  for (const [instrumentId, expectedRole] of [['tenor-sax', 'lead'], ['kebero', 'percussion']] as const) {
+    const withPart = addVoice(mixed, instrumentId, targetRegion.id, 'song');
+    const track = withPart.tracks.at(-1)!;
+    assert.equal(track.role, expectedRole, `${instrumentId} is normalized into the arrangement role vocabulary`);
+    const performance = arrangeBand(withPart);
+    const plan = compileSamplePlan(performance, songMixOptions(withPart));
+    const sampleTrack = plan.tracks.find(candidate => candidate.id === track.id);
+    assert.ok(sampleTrack, `${instrumentId} has a sampled playback track`);
+    assert.ok(plan.events.some(event => event.type === 'on' && sampleTrack.channels.includes(event.channel)),
+      `${instrumentId} has playable sample events in the mixed Brazilian/Ethio-Jazz song`);
+  }
+});
+
+test('every catalog sample song builds an audible shared playback plan', () => {
+  for (const entry of songCatalog) {
+    const song = createCatalogSong(entry.id);
+    const performance = arrangeBand(song);
+    const plan = compileSamplePlan(performance, songMixOptions(song));
+    assert.ok(plan.events.some(event => event.type === 'on'), `${entry.id} must compile to audible sample events`);
+  }
+});
+
+test('Ethiopian songs accept a foreign-style section and that style’s instrument', () => {
+  const base = makeSheet('ethiopian');
+  const baseInstruments = new Set(getStyle(base.styleId!)!.arrangement!.ensemble!.flatMap(part => part.instrumentIds));
+  const region = base.regions.find(section => section.kind === 'verse') ?? base.regions[0];
+  const checkedWorlds = new Set<string>();
+
+  for (const world of GENRE_WORLDS.filter(candidate => candidate.id !== 'ethiopian')) {
+    const targetStyle = world.styleDefinitions
+      .map(definition => getStyle(definition.id)!)
+      .find(style => style.arrangement?.ensemble?.some(part => part.instrumentIds.some(id => !baseInstruments.has(id))))
+      ?? getStyle(world.styleDefinitions[0].id)!;
+    const part = targetStyle.arrangement!.ensemble!.flatMap(item => item.instrumentIds)
+      .find(id => !baseInstruments.has(id))
+      ?? targetStyle.arrangement!.ensemble!.flatMap(item => item.instrumentIds)[0];
+    assert.ok(part, `${world.id} has an instrument for the mixed-style playback check`);
+
+    const mixed = switchSectionWorld(base, region.id, world.id, targetStyle.id);
+    const withPart = addVoice(mixed, part, region.id, 'song');
+    const performance = arrangeBand(withPart);
+    const plan = compileSamplePlan(performance, songMixOptions(withPart));
+    const track = plan.tracks.find(candidate => candidate.id === withPart.tracks.at(-1)!.id);
+    assert.ok(track && plan.events.some(event => event.type === 'on' && track.channels.includes(event.channel)),
+      `Ethiopian + ${world.id}/${targetStyle.id} with ${part} must have audible playback events`);
+    checkedWorlds.add(world.id);
+  }
+  assert.equal(checkedWorlds.size, GENRE_WORLDS.length - 1, 'the fusion audit covers every non-Ethiopian genre');
 });
 
 test('every full song has valid explicit metadata and retains the original reference label', () => {

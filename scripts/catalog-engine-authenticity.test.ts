@@ -343,6 +343,34 @@ test('Old-Time and Appalachian samples interlock separate banjo and guitar teach
   assert.equal(sectionPattern(appalachian, 'tag', 'guitar'), 'Guitar turnaround');
 });
 
+test('sample-authored cells stay on their written instrument and part role', () => {
+  const samples = [
+    ['andean-huayno_song', [['charango', 'harmony']]],
+    ['country-outlaw_song', [['pedal-steel', 'lead']]],
+    ['pop-synth-pop_song', [['synth', 'bass'], ['synth', 'texture']]],
+    ['soukous-ndombolo_song', [['guitar', 'lead'], ['guitar', 'harmony']]],
+  ] as const;
+
+  for (const [songId, targets] of samples) {
+    const sheet = createCatalogSong(songId);
+    for (const [instrumentId, role] of targets) {
+      const track = sheet.tracks.find(part => part.instrumentId === instrumentId && part.role === role);
+      assert.ok(track, `${songId} has ${instrumentId}:${role}`);
+      for (const region of sheet.regions) {
+        if (!region.activeInstrumentIds?.includes(instrumentId)) continue;
+        const patternId = sheet.arrangement[region.id]?.[track.id];
+        const pattern = patternId ? PATTERNS_BY_ID[patternId] : undefined;
+        assert.ok(pattern, `${songId}/${region.kind} gives ${instrumentId}:${role} a pattern`);
+        if (pattern.sourceLevel !== 'style-authored' || pattern.canCrossRole) continue;
+        assert.ok(pattern.instruments?.includes(instrumentId),
+          `${songId}/${region.kind} keeps ${pattern.shortName} on ${instrumentId}`);
+        assert.ok(pattern.roles.includes(role),
+          `${songId}/${region.kind} keeps ${pattern.shortName} on the ${role} part`);
+      }
+    }
+  }
+});
+
 test('Bollywood strings carry style-specific movement instead of doubling the guitar cell', () => {
   const patternFor = (styleId: string, instrumentId: string) => {
     const pattern = PATTERNS_BY_WORLD.bollywood.find(candidate => candidate.styleIds?.includes(styleId)

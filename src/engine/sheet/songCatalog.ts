@@ -334,6 +334,41 @@ export function createCatalogSong(id: string): Sheet {
       }
     }
   }
+  // A general song sheet can explore role-crossing source material, but a
+  // written sample arrangement should not quietly put a lead phrase on a
+  // harmony track (or a guitar cell on a charango). Repair only mismatched
+  // style-authored opening cells here; explicit assignments already resolve
+  // against the target instrument and role above, and fusion remains free to
+  // borrow material in the interactive engine.
+  for (const region of sheet.regions) {
+    const cells = arrangement[region.id];
+    if (!cells) continue;
+    for (const track of sheet.tracks) {
+      const instrumentId = track.instrumentId;
+      if (!instrumentId || !region.activeInstrumentIds?.includes(instrumentId)) continue;
+      const currentId = cells[track.id];
+      const current = currentId ? PATTERNS_BY_ID[currentId] : undefined;
+      if (!current || current.sourceLevel !== 'style-authored' || current.canCrossRole) continue;
+      const instrumentMismatch = !!current.instruments?.length && !current.instruments.includes(instrumentId);
+      const roleMismatch = !!current.roles?.length && !current.roles.includes(track.role);
+      if (!instrumentMismatch && !roleMismatch) continue;
+      const nativeCandidates = eligibleStylePatterns.filter(pattern => pattern.sourceLevel === 'style-authored'
+        && pattern.styleIds?.includes(style.id) === true
+        && pattern.instruments?.includes(instrumentId) === true
+        && pattern.roles.includes(track.role)
+        && !pattern.pedagogicalStudy
+        && !pattern.pedagogicalSourcePatternId
+        && patternAvailableInSection(pattern, region.kind));
+      const replacement = nativeCandidates.sort((a, b) => {
+        const fit = (pattern: typeof a) => (pattern.family === current.family ? 16 : 0)
+          + (pattern.category === current.category ? 12 : 0)
+          + (pattern.sectionUsage?.some(section => section === region.kind) ? 6 : 0)
+          + (!pattern.arrangementVariation ? 4 : 0);
+        return fit(b) - fit(a) || a.id.localeCompare(b.id);
+      })[0];
+      if (replacement) cells[track.id] = replacement.id;
+    }
+  }
   // Give returning form sections a written development cell when the style
   // already teaches one for that exact instrument and role. Preserve all
   // explicitly assigned/locked recording cells; this only changes repeats

@@ -2328,7 +2328,7 @@ const SAMPLE_PATTERN_ASSIGNMENTS: Record<string, Partial<Pick<RecordingArrangeme
       cut: { sampler: 'Sampler accent' },
       'rhythm-montage': { sampler: 'Sampler variation' },
       steam: { sampler: 'Sampler reply' },
-      recall: { sampler: 'Cut-and-recall montage' } } },
+      recall: { 'sampler:texture': 'Cut-and-recall montage' } } },
   'weird::free-improvisation': {
     sectionInstruments: { silence: [], stop: [] } },
   'korean::sanjo': {

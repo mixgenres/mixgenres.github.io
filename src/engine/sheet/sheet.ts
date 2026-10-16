@@ -308,6 +308,7 @@ export function roleForInstrument(instrumentId: string): string {
   if (VOICE_INSTRUMENT_ROLE_PATTERN.test(instrumentId) || VOICE_FAMILY_ROLE_PATTERN.test(def.family ?? '')) return 'voice';
   if (def.voicing === 'single') {
     const role = voiceProfile(instrumentId).role;
+    // voiceProfile already maps single-voice melodic instruments to `lead`.
     return role === 'perc' ? 'percussion' : role;
   }
   return 'harmony';
